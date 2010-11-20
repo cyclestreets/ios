@@ -40,6 +40,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize length;
 @synthesize plan;
 @synthesize speed;	
+@synthesize icon;
 
 - (id)initWithRoute:(Route *)newRoute {
 	if (self = [super init]) {

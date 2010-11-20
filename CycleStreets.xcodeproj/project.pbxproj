@@ -12,6 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		289A1FB6129822FF00CF83A9 /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289A1FB1129822F900CF83A9 /* libMapView.a */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		E70586AA12365A7B0080917E /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = E70586A812365A7B0080917E /* donate.html */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -128,8 +129,6 @@
 		E7FD8F76127821EB002640D0 /* wisp_shadow_72x60.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F5E127821EB002640D0 /* wisp_shadow_72x60.png */; };
 		E7FD9002127835B9002640D0 /* 74-location.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FEC127835B9002640D0 /* 74-location.png */; };
 		E7FD9003127835B9002640D0 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FED127835B9002640D0 /* 86-camera.png */; };
-		E7FD9004127835B9002640D0 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FEE127835B9002640D0 /* COPYING */; };
-		E7FD9005127835B9002640D0 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FF0127835B9002640D0 /* COPYING */; };
 		E7FD9006127835B9002640D0 /* icon_arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FF1127835B9002640D0 /* icon_arrow_left.png */; };
 		E7FD9007127835B9002640D0 /* icon_arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FF2127835B9002640D0 /* icon_arrow_right.png */; };
 		E7FD9008127835B9002640D0 /* icon_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FF3127835B9002640D0 /* icon_delete.png */; };
@@ -147,25 +146,24 @@
 		E7FD9014127835B9002640D0 /* icon_window_globe.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FFF127835B9002640D0 /* icon_window_globe.png */; };
 		E7FD9015127835B9002640D0 /* icon_zoom_in.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD9000127835B9002640D0 /* icon_zoom_in.png */; };
 		E7FD9016127835B9002640D0 /* icon_zoom_out.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD9001127835B9002640D0 /* icon_zoom_out.png */; };
-		E7FF39FD11FEE7A500052A4C /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7FF39FA11FEE77400052A4C /* libMapView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E7FF39F911FEE77400052A4C /* PBXContainerItemProxy */ = {
+		289A1FB0129822F900CF83A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7FF39EA11FEE77400052A4C /* MapView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B8C974590E8A19B2007D16AD;
 			remoteInfo = MapView;
 		};
-		E7FF39FB11FEE77400052A4C /* PBXContainerItemProxy */ = {
+		289A1FB2129822F900CF83A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7FF39EA11FEE77400052A4C /* MapView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2BF3078F0F8AC5C0007014EE;
 			remoteInfo = "Unit Tests";
 		};
-		E7FF3A0311FEE86200052A4C /* PBXContainerItemProxy */ = {
+		289A1FB71298230600CF83A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7FF39EA11FEE77400052A4C /* MapView.xcodeproj */;
 			proxyType = 1;
@@ -374,7 +372,7 @@
 		E7FD8FFF127835B9002640D0 /* icon_window_globe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_window_globe.png; sourceTree = "<group>"; };
 		E7FD9000127835B9002640D0 /* icon_zoom_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_zoom_in.png; sourceTree = "<group>"; };
 		E7FD9001127835B9002640D0 /* icon_zoom_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_zoom_out.png; sourceTree = "<group>"; };
-		E7FF39EA11FEE77400052A4C /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = "../route-me-svn/MapView/MapView.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		E7FF39EA11FEE77400052A4C /* MapView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MapView.xcodeproj; path = ../../../libs/RouteMe/MapView/MapView.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,8 +388,8 @@
 				E7F435B11140194A00CBC58B /* QuartzCore.framework in Frameworks */,
 				E7BE4B1A11A2E5F400930E0C /* SystemConfiguration.framework in Frameworks */,
 				E7F8BF0011B9931E009F62BB /* Security.framework in Frameworks */,
-				E7FF39FD11FEE7A500052A4C /* libMapView.a in Frameworks */,
 				E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */,
+				289A1FB6129822FF00CF83A9 /* libMapView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +409,15 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* CycleStreets.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		289A1FAA129822F900CF83A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				289A1FB1129822F900CF83A9 /* libMapView.a */,
+				289A1FB3129822F900CF83A9 /* RM Unit Tests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -765,15 +772,6 @@
 			path = twg;
 			sourceTree = "<group>";
 		};
-		E7FF39EB11FEE77400052A4C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7FF39FA11FEE77400052A4C /* libMapView.a */,
-				E7FF39FC11FEE77400052A4C /* RM Unit Tests.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -788,7 +786,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E7FF3A0411FEE86200052A4C /* PBXTargetDependency */,
+				289A1FB81298230600CF83A9 /* PBXTargetDependency */,
 			);
 			name = CycleStreets;
 			productName = CycleStreets;
@@ -817,7 +815,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E7FF39EB11FEE77400052A4C /* Products */;
+					ProductGroup = 289A1FAA129822F900CF83A9 /* Products */;
 					ProjectRef = E7FF39EA11FEE77400052A4C /* MapView.xcodeproj */;
 				},
 			);
@@ -829,18 +827,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E7FF39FA11FEE77400052A4C /* libMapView.a */ = {
+		289A1FB1129822F900CF83A9 /* libMapView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libMapView.a;
-			remoteRef = E7FF39F911FEE77400052A4C /* PBXContainerItemProxy */;
+			remoteRef = 289A1FB0129822F900CF83A9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E7FF39FC11FEE77400052A4C /* RM Unit Tests.app */ = {
+		289A1FB3129822F900CF83A9 /* RM Unit Tests.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "RM Unit Tests.app";
-			remoteRef = E7FF39FB11FEE77400052A4C /* PBXContainerItemProxy */;
+			remoteRef = 289A1FB2129822F900CF83A9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -906,8 +904,6 @@
 				E7FD8F76127821EB002640D0 /* wisp_shadow_72x60.png in Resources */,
 				E7FD9002127835B9002640D0 /* 74-location.png in Resources */,
 				E7FD9003127835B9002640D0 /* 86-camera.png in Resources */,
-				E7FD9004127835B9002640D0 /* COPYING in Resources */,
-				E7FD9005127835B9002640D0 /* COPYING in Resources */,
 				E7FD9006127835B9002640D0 /* icon_arrow_left.png in Resources */,
 				E7FD9007127835B9002640D0 /* icon_arrow_right.png in Resources */,
 				E7FD9008127835B9002640D0 /* icon_delete.png in Resources */,
@@ -997,10 +993,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E7FF3A0411FEE86200052A4C /* PBXTargetDependency */ = {
+		289A1FB81298230600CF83A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MapView;
-			targetProxy = E7FF3A0311FEE86200052A4C /* PBXContainerItemProxy */;
+			targetProxy = 289A1FB71298230600CF83A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1015,13 +1011,15 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
-				HEADER_SEARCH_PATHS = "/Users/alan/Documents/XCodeProjects/BaseLib/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				USER_HEADER_SEARCH_PATHS = "../Three20/Build/Products/three20 ../route-me-svn/MapView/**";
+				SDKROOT = iphoneos4.2;
+				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = Debug;
 		};
@@ -1033,7 +1031,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
-				HEADER_SEARCH_PATHS = "/Users/alan/Documents/XCodeProjects/BaseLib/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1045,10 +1043,12 @@
 					"\"$(SRCROOT)/../CloudMadeApi/libs/route-me/Simulator\"",
 					"\"$(SRCROOT)/../iphone-EXIF/Release-iphoneos\"",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CycleStreets;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				USER_HEADER_SEARCH_PATHS = "../Three20/Build/Products/three20 ../route-me-svn/MapView/**";
+				SDKROOT = iphoneos4.2;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1062,16 +1062,12 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../Three20/Build/Products/three20;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lProj4",
-					"-lMapView",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
-				USER_HEADER_SEARCH_PATHS = "$(ROUTEME)/MapView/**";
+				SDKROOT = iphoneos4.2;
+				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = Debug;
 		};
@@ -1083,18 +1079,14 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../Three20/Build/Products/three20;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lProj4",
-					"-lMapView",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AD4733E4-A310-4C9F-ADED-3FB48D3A75C9";
-				SDKROOT = iphoneos4.1;
-				USER_HEADER_SEARCH_PATHS = "$(ROUTEME)/MapView/**";
+				SDKROOT = iphoneos4.2;
+				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = Release;
 		};
@@ -1107,19 +1099,15 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ../Three20/Build/Products/three20;
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lProj4",
-					"-lMapView",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "AA703724-0B4E-4CC3-B6B4-E0A481327D7D";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA703724-0B4E-4CC3-B6B4-E0A481327D7D";
-				SDKROOT = iphoneos4.1;
-				USER_HEADER_SEARCH_PATHS = "$(ROUTEME)/MapView/**";
+				SDKROOT = iphoneos4.2;
+				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = "Adhoc Distribution";
 		};
@@ -1133,7 +1121,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
-				HEADER_SEARCH_PATHS = "/Users/alan/Documents/XCodeProjects/BaseLib/**";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "";
@@ -1141,7 +1129,8 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				USER_HEADER_SEARCH_PATHS = "../Three20/Build/Products/three20 ../route-me-svn/MapView/**";
+				SDKROOT = iphoneos4.2;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Adhoc Distribution";
