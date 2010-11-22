@@ -27,35 +27,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <UIKit/UIKit.h>
 
 
-@interface Settings : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface Settings : UIViewController {
 	NSString *plan;
 	NSString *speed;
 	NSString *mapStyle;
-	NSArray *mapStyles;
 	NSString *imageSize;
 	
-	UISegmentedControl *planControl;
-	UISegmentedControl *speedControl;
-	UITableView *mapStyleTable;
-	UISegmentedControl *imageSizeControl;
-	UIButton *clearAccountButton;
+	IBOutlet UISegmentedControl *planControl;
+	IBOutlet UISegmentedControl *speedControl;
+	IBOutlet UISegmentedControl *mapStyleControl;
+	IBOutlet UISegmentedControl *imageSizeControl;
+	IBOutlet UIButton *clearAccountButton;
+	IBOutlet UIView	*controlView;
+	IBOutlet UILabel *accountNameLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UISegmentedControl *planControl;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *speedControl;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *imageSizeControl;
-@property (nonatomic, retain) IBOutlet UITableView *mapStyleTable;
-@property (nonatomic, retain) IBOutlet UIButton *clearAccountButton;
-@property (nonatomic, copy) NSString *plan;
-@property (nonatomic, copy) NSString *speed;
-@property (nonatomic, copy) NSString *mapStyle;
-@property (nonatomic, retain) NSArray *mapStyles;
-@property (nonatomic, copy) NSString *imageSize;
+@property (nonatomic, retain)			NSString *plan;
+@property (nonatomic, retain)			NSString *speed;
+@property (nonatomic, retain)			NSString *mapStyle;
+@property (nonatomic, retain)			NSString *imageSize;
+@property (nonatomic, retain)			IBOutlet UISegmentedControl *planControl;
+@property (nonatomic, retain)			IBOutlet UISegmentedControl *speedControl;
+@property (nonatomic, retain)			IBOutlet UISegmentedControl *mapStyleControl;
+@property (nonatomic, retain)			IBOutlet UISegmentedControl *imageSizeControl;
+@property (nonatomic, retain)			IBOutlet UIButton *clearAccountButton;
+@property (nonatomic, retain)			IBOutlet UIView *controlView;
+@property (nonatomic, retain)			IBOutlet UILabel *accountNameLabel;
+
 
 - (IBAction) changed;
 
 - (IBAction) didClearAccount;
 
 - (void) save;
+
+-(void)createBlueButton:(UIButton*)button withText:(NSString*)text;
 
 @end
