@@ -29,12 +29,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface Credits : UIViewController <UIWebViewDelegate> {
 	UIWebView *webView;
-	UIBarButtonItem *homeButton;
 	UIAlertView *failAlert;
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *homeButton;
 @property (nonatomic, retain) UIAlertView *failAlert;
 
 @end

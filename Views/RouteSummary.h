@@ -29,25 +29,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface RouteSummary : UIViewController {
 	Route *route;
-	UIButton *routeButton;
-	UILabel *name;
-	UILabel *time;
-	UILabel *length;
-	UILabel *plan;
-	UILabel *speed;	
-	UIImageView *icon;
+	IBOutlet		UIButton *routeButton;
+	IBOutlet		UILabel *name;
+	IBOutlet		UILabel *time;
+	IBOutlet		UILabel *length;
+	IBOutlet		UILabel *plan;
+	IBOutlet		UILabel *speed;	
+	IBOutlet		UIImageView *icon;
+	IBOutlet		UILabel *routeidLabel;
+	
+	IBOutlet		UIView			*contentView;
 }
 
 @property (nonatomic, retain) Route *route;
 @property (nonatomic, retain) IBOutlet UIButton *routeButton;
-
-//route info
 @property (nonatomic, retain) IBOutlet UILabel *name;
 @property (nonatomic, retain) IBOutlet UILabel *time;
 @property (nonatomic, retain) IBOutlet UILabel *length;
 @property (nonatomic, retain) IBOutlet UILabel *plan;
 @property (nonatomic, retain) IBOutlet UILabel *speed;
 @property (nonatomic, retain) IBOutlet UIImageView *icon;
+@property (nonatomic, retain) IBOutlet UILabel *routeidLabel;
+@property (nonatomic, retain) IBOutlet UIView *contentView;
 
 - (id)initWithRoute:(Route *)route;
 

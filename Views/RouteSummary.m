@@ -32,15 +32,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIButton+Blue.h"
 
 @implementation RouteSummary
-
+@synthesize route;
 @synthesize routeButton;
-
 @synthesize name;
 @synthesize time;
 @synthesize length;
 @synthesize plan;
-@synthesize speed;	
+@synthesize speed;
 @synthesize icon;
+@synthesize routeidLabel;
+@synthesize contentView;
+
+/***********************************************************/
+// dealloc
+/***********************************************************/
+- (void)dealloc
+{
+    [route release], route = nil;
+    [routeButton release], routeButton = nil;
+    [name release], name = nil;
+    [time release], time = nil;
+    [length release], length = nil;
+    [plan release], plan = nil;
+    [speed release], speed = nil;
+    [icon release], icon = nil;
+    [routeidLabel release], routeidLabel = nil;
+    [contentView release], contentView = nil;
+	
+    [super dealloc];
+}
+
+
 
 - (id)initWithRoute:(Route *)newRoute {
 	if (self = [super init]) {
@@ -49,31 +71,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return self;
 }
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	
     [super viewDidLoad];
 	[self.routeButton setupBlue];
 	[self.route setUIElements:self];
 	self.title = [NSString stringWithFormat:@"Route #%@", [route itinerary]];
+	
+	routeidLabel.text=[NSString stringWithFormat:@"#%@", [route itinerary]];
+	
+	[self.view addSubview:contentView];
+	[(UIScrollView*) self.view setContentSize:CGSizeMake(320, contentView.frame.size.height)];
+
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+
 
 - (void)selectRoute {
 	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
@@ -86,6 +99,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (IBAction) didRouteButton {
 	[self selectRoute];
+	
 }
 
 - (void)setRoute:(Route *)newRoute {
@@ -101,22 +115,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    
 }
 
-
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 @end
