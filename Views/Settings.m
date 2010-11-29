@@ -34,25 +34,48 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Common.h"
 
 @implementation Settings
-
-@synthesize speed;
 @synthesize plan;
+@synthesize speed;
 @synthesize mapStyle;
 @synthesize imageSize;
-@synthesize speedControl;
 @synthesize planControl;
+@synthesize speedControl;
+@synthesize mapStyleControl;
 @synthesize imageSizeControl;
-@synthesize mapStyleTable;
-@synthesize mapStyles;
 @synthesize clearAccountButton;
+@synthesize controlView;
+@synthesize accountNameLabel;
+
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [plan release], plan = nil;
+    [speed release], speed = nil;
+    [mapStyle release], mapStyle = nil;
+    [imageSize release], imageSize = nil;
+    [planControl release], planControl = nil;
+    [speedControl release], speedControl = nil;
+    [mapStyleControl release], mapStyleControl = nil;
+    [imageSizeControl release], imageSizeControl = nil;
+    [clearAccountButton release], clearAccountButton = nil;
+    [controlView release], controlView = nil;
+    [accountNameLabel release], accountNameLabel = nil;
+	
+    [super dealloc];
+}
+
+
+
+
+
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Custom initialization
-		
-		//list of known styles
-		self.mapStyles = [Map mapStyles];
 		
 		//load from saved settings
 		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
@@ -71,14 +94,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		}
 		
 		if (self.mapStyle == nil) {
-			self.mapStyle = [self.mapStyles objectAtIndex:0];
+			self.mapStyle = @"OpenStreetMap";
 		}
 		
 		if (self.imageSize == nil) {
 			self.imageSize = @"320px";
 		}
 		
-		[self.clearAccountButton setupBlue];
+		//[self.clearAccountButton setupBlue];
+		
+		
 
 		[self save];
     }
@@ -95,58 +120,71 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}	
 }
 
-- (void)selectMap {
-	NSInteger index = 0;
-	for (int i = 0; i < [mapStyles count]; i++) {
-		if ([[mapStyles objectAtIndex:i] isEqualToString:mapStyle]) {
-			index = i;
-		}
-	}
-	[self.mapStyleTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]
-									animated:NO
-							  scrollPosition:UITableViewScrollPositionTop];
-}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
+   
 	
 	// Need to copy these out, because setting the selection causes changed() to get called,
 	// which causes self.speed and self.plan to get written. So self.plan got the old value out of the control, which it then set. Yuk!
 	NSString *newSpeed = [speed copy];
 	NSString *newPlan = [plan copy];
 	NSString *newImageSize = [imageSize copy];
+	NSString *newMapStyle = [mapStyle copy];
 	
 	[self select:speedControl byString:newSpeed];
 	[self select:planControl byString:newPlan];
 	[self select:imageSizeControl byString:newImageSize];
-	[self performSelector:@selector(selectMap) withObject:nil afterDelay:1.0];
+	[self select:mapStyleControl byString:newMapStyle];
 	
-	self.mapStyleTable.delegate = self;
-	self.mapStyleTable.dataSource = self;
+	
+	self.navigationController.navigationBar.tintColor=[UIColor grayColor];
+	
+	[self.view addSubview:controlView];
+	[(UIScrollView*) self.view setContentSize:CGSizeMake(320, controlView.frame.size.height)];
+	
+	[self createBlueButton:clearAccountButton withText:@"Log out"];
+	
+	
+	 [super viewDidLoad];
+	
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+
+-(void)createBlueButton:(UIButton*)button withText:(NSString*)text{
+	
+	UIFont *font=button.titleLabel.font;
+	
+	
+	// Configure background image(s)
+	[button setBackgroundImage:[[UIImage imageNamed:@"blueButton.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
+	
+	
+	
+	// Configure title(s)
+	[button setTitle:text forState:UIControlStateNormal];
+	button.titleLabel.userInteractionEnabled=NO;
+	button.titleLabel.font=font;
+	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
+	button.titleLabel.textAlignment=UITextAlignmentCenter;
+	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+	
 }
-*/
+
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)nullify {
 	self.planControl = nil;
 	self.speedControl = nil;
 	self.imageSizeControl = nil;
-	self.mapStyleTable = nil;
+	self.mapStyleControl = nil;
 	self.clearAccountButton = nil;
+	self.controlView=nil;
+	self.accountNameLabel=nil;
 }
 
 - (void)viewDidUnload {
@@ -173,6 +211,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
 	self.speed = [[speedControl titleForSegmentAtIndex:speedControl.selectedSegmentIndex] lowercaseString];
 	self.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
+	self.mapStyle = [[mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex] lowercaseString];
 	
 	//save changed settings
 	[self save];
@@ -183,36 +222,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[cycleStreets.files resetPasswordInKeyChain];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationClearAccount" object:nil];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	self.mapStyle = [self.mapStyles objectAtIndex:indexPath.row];
-	[self save];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationMapStyleChanged" object:self.mapStyle];	
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-	if (section == 0) {
-		return [self.mapStyles count];
-	} else {
-		return 0;
-	}
-}
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"MapStyleTableCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-	}
-	
-	// Configure the cell...
-	cell.textLabel.text = [self.mapStyles objectAtIndex:indexPath.row];
-    return cell;
 }
 
 
@@ -226,17 +235,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
  */
 
-- (void)dealloc {
-	[self nullify];
-	
-	//these don't get nullified, as they don't come back on viewDidLoad.
-	self.plan = nil;
-	self.speed = nil;
-	self.imageSize = nil;
-	self.mapStyle = nil;
-	self.mapStyles = nil;
-
-    [super dealloc];
-}
 
 @end

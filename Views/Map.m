@@ -57,8 +57,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @implementation Map
 
-static NSString *MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap (with hills)";
-static NSString *MAPPING_BASE_OSM = @"OpenStreetMap map design";
+static NSString *MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
+static NSString *MAPPING_BASE_OSM = @"OpenStreetMap";
 
 static NSString *MAPPING_ATTRIBUTION_OPENCYCLEMAP = @"(c) OpenStreetMap and contributors, CC-BY-SA; Map images (c) OpenCycleMap";
 static NSString *MAPPING_ATTRIBUTION_OSM = @"(c) OpenStreetMap and contributors, CC-BY-SA";
