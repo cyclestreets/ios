@@ -57,7 +57,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	self.categoryLoader = cycleStreets.categoryLoader;
 	[self.doneButton setupBlue];
 }

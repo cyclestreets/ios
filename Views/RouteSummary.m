@@ -89,7 +89,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)selectRoute {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[self.navigationController popViewControllerAnimated:YES];
 	[cycleStreets.appDelegate selectRoute:self.route];
 	

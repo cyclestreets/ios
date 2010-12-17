@@ -78,7 +78,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
         // Custom initialization
 		
 		//load from saved settings
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		NSDictionary *dict = [cycleStreets.files settings];
 		self.speed = [dict valueForKey:@"speed"];
 		self.plan = [dict valueForKey:@"plan"];
@@ -202,7 +202,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						  self.mapStyle, @"mapStyle",
 						  self.imageSize, @"imageSize",
 						  nil];
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setSettings:dict];	
 }
 
@@ -218,7 +218,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (IBAction) didClearAccount {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files resetPasswordInKeyChain];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationClearAccount" object:nil];
@@ -229,7 +229,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  For debugging, the standard "test" query.
 - (IBAction) findRoute {
 	Query *query = [Query example];
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	CycleStreetsAppDelegate *appDelegate = cycleStreets.appDelegate;
 	[appDelegate runQuery:query];
 }

@@ -52,7 +52,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (self.routes == nil) {
 		self.routes = [[[NSMutableDictionary alloc] init] autorelease];
 	}
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSArray *oldFavourites = [cycleStreets.files favourites];
 	self.favourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count] + 1] autorelease];
 	[self.favourites addObjectsFromArray:oldFavourites];
@@ -67,7 +67,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (Route *) routeWithIdentifier:(NSInteger)identifier {
 	Route *route = [routes objectForKey:[NSNumber numberWithInt:identifier]];
 	if (!route) {
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];	
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];	
 		NSData *data = [cycleStreets.files route:identifier];
 		RouteParser *parsed = [RouteParser parse:data forElements:[Route routeXMLElementNames]];
 		route = [[[Route alloc] initWithElements:parsed.elementLists] autorelease];
@@ -201,7 +201,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)deleteRow:(int)row
 {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	
 	//load favourites, and add the new route to the favourites, as the first one.
 	//do this even if we have it already, so last-selected favourite is "top"

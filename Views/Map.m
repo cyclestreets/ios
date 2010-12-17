@@ -107,7 +107,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 + (NSString *)currentMapStyle {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSDictionary *settings = [cycleStreets.files settings];
 	NSString *mapStyle = [settings valueForKey:@"mapStyle"];
 	if (mapStyle == nil) {
@@ -310,7 +310,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[items insertObject:self.locationButton atIndex:0];
 	self.toolBar.items = items;
 	
-	cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets retain];
 	
 	//Don't do the first time alert if we've already planned a route.

@@ -59,7 +59,7 @@ static double FADE_DURATION = 3.0;
 }
 
 - (void) save:(CLLocationCoordinate2D)location {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
 	NSString *sLat = [[NSNumber numberWithDouble:location.latitude] stringValue];
 	[misc setValue:sLat forKey:@"latitude"];
@@ -86,7 +86,7 @@ static double FADE_DURATION = 3.0;
 }
 
 - (void) query {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSDictionary *misc = [cycleStreets.files misc];
 	NSString *sLat = [misc valueForKey:@"latitude"];
 	NSString *sLon = [misc valueForKey:@"longitude"];

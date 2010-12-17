@@ -46,7 +46,7 @@ static NSString *urlPrefix = @"https://www.cyclestreets.net/api/addphoto.xml";
 
 - (id) initWithUsername:(NSString *)newUsername withPassword:(NSString *)newPassword {
 	if (self = [super init]) {
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		
 		NSString *newURL = [NSString
 							stringWithFormat:format,

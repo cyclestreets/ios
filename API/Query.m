@@ -58,7 +58,7 @@ static NSString *useDom = @"1";
 	if (self = [super init]) {
 		
 		//Fill in various of the parameters from the current settings value.
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		Settings *settings = cycleStreets.appDelegate.settings;
 
 		NSString *newURL = [NSString

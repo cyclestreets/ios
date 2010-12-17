@@ -54,7 +54,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [super viewDidLoad];
 	if (self.routeId > 0) {
 		//reload the current route.
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		Favourites *favourites = cycleStreets.appDelegate.favourites;
 		Route *newRoute = [favourites routeWithIdentifier:self.routeId];
 		self.route = newRoute;
@@ -246,7 +246,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Create and push stage details view controller.
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	Stage *stage = [cycleStreets.appDelegate stage];
 	[stage setRoute:route];
 	[self presentModalViewController:stage animated:YES];

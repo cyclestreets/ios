@@ -33,7 +33,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Favourites.h"
 #import "Photos.h"
 #import "Credits.h"
-#import "Singleton.h"
 #import "Query.h"
 #import "Route.h"
 #import "Stage.h"
@@ -44,7 +43,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Reachability.h"
 #import "Common.h"
 #import "CategoryLoader.h"
-#import "Donate.h"
 
 @implementation CycleStreetsAppDelegate
 
@@ -71,7 +69,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)loadContext {
 	DLog(@">>>");
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	Files *files = cycleStreets.files;
 	NSString *saveIndex = [files miscValueForKey:@"selectedTabIndex"];
 	if (saveIndex != nil && [saveIndex length] > 0) {
@@ -82,10 +80,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)saveContext {
 	DLog(@">>>");
 	if (self.tabBarController != nil && self.tabBarController.selectedIndex != NSNotFound) {
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		Files *files = cycleStreets.files;
 		NSString *saveIndex = [[NSNumber numberWithInt:self.tabBarController.selectedIndex] stringValue];
 		[files setMiscValue:saveIndex forKey:@"selectedTabIndex"];
+		
 	}
 }
 
@@ -195,7 +194,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				  cancelButtonTitle:@"OK"
 				  otherButtonTitles:nil];
 	
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
 	
 	DLog(@"app core loaded.");
@@ -221,7 +220,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) backgroundSetup {
 	
 	//load the default categories
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.categoryLoader setupCategories];
 	
 	[self loadContext];
@@ -244,7 +243,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //It would make sense to turn this into an NSNotificationQueue based thing, so anything that wanted
 //could listen for the route changing.
 - (void) selectRoute:(Route *)route {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 
 	//load favourites, and add the new route to the favourites, as the first one.
 	//do this even if we have it already, so last-selected favourite is "top"
@@ -272,7 +271,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)warnOnFirstRoute {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
 	NSString *experienceLevel = [misc objectForKey:@"experienced"];
 	if (experienceLevel == nil) {
@@ -310,7 +309,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[errorAlert show];
 	} else {
 		//save the route data to file.
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		[cycleStreets.files setRoute:[[route itinerary] intValue] data:request.data];
 		
 		[self warnOnFirstRoute];

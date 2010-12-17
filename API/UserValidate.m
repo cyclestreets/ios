@@ -38,7 +38,7 @@ static NSString *bodyFormat = @"username=%@&password=%@";
 
 - (id) initWithUsername:(NSString *)username withPassword:(NSString *)password {
 	if (self = [super init]) {
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		
 		NSString *newURL = [NSString
 							stringWithFormat:format,

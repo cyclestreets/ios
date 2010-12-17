@@ -75,9 +75,7 @@ static NSTimeInterval FADE_DURATION = 3.0;
     [super viewDidLoad];
 	self.mapView.hidden = YES;
 	
-	cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
-	[cycleStreets retain];
-	
+		
 	//Necessary to start route-me service
 	[RMMapView class];
 	
@@ -112,7 +110,7 @@ static NSTimeInterval FADE_DURATION = 3.0;
 	[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0.0];
 	
 	[self.introButton setupBlue];
-	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
+	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
 	NSString *experienceLevel = [misc objectForKey:@"experienced"];
 	if (experienceLevel != nil) {
 		[self.introView removeFromSuperview];
@@ -173,10 +171,10 @@ static NSTimeInterval FADE_DURATION = 3.0;
 }
 
 - (void)saveLocation:(CLLocationCoordinate2D)location {
-	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
+	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
 	[misc setValue:[NSString stringWithFormat:@"%f", location.latitude] forKey:@"latitude"];
 	[misc setValue:[NSString stringWithFormat:@"%f", location.longitude] forKey:@"longitude"];
-	[cycleStreets.files setMisc:misc];	
+	[[CycleStreets sharedInstance].files setMisc:misc];	
 }
 
 - (void)fixLocationAndButtons:(CLLocationCoordinate2D)location {
@@ -399,9 +397,7 @@ static NSTimeInterval FADE_DURATION = 3.0;
 
 - (void)nullify {
 	self.locationButton = nil;
-	
-	[cycleStreets release];
-	cycleStreets = nil;
+
 	[mapView release];
 	mapView = nil;
 	

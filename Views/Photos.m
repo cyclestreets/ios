@@ -95,7 +95,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void) saveUserPass {
 	DLog(@">>>");
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
 	[misc setValue:username forKey:@"username"];
 	[misc setValue:validated forKey:@"validated"];
@@ -105,7 +105,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void) loadUserPass {
 	DLog(@">>>");
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSDictionary *misc = [cycleStreets.files misc];
 	NSString *loadedPassword = [cycleStreets.files password];
 	NSString *loadedUsername = [misc valueForKey:@"username"];
@@ -344,7 +344,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//image
 	//self.addPhoto.imageData = UIImageJPEGRepresentation( selected.image, 0.8);
 	
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSDictionary *settings = [cycleStreets.files settings];
 	NSString *imageSize = [settings valueForKey:@"imageSize"];
 	if ([imageSize isEqualToString:@"full"]) {

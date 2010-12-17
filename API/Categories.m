@@ -35,7 +35,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/photomapcategorie
 
 - (id) init {
 	if (self = [super init]) {
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		
 		NSString *newURL = [NSString
 							stringWithFormat:format,

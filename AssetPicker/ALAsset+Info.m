@@ -47,7 +47,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSDictionary *urlDictionary = [self valueForProperty:ALAssetPropertyURLs];
 	NSURL *jpeg = [urlDictionary valueForKey:@"public.jpeg"];
 	
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	Files *files = cycleStreets.files;
 	NSMutableDictionary *photoLocations = [NSMutableDictionary dictionaryWithDictionary:[files photoLocations]];
 	NSDictionary *latlon = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -61,7 +61,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (CLLocationCoordinate2D) restoreLocation:(NSURL *)assetURL {
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	Files *files = cycleStreets.files;
 	NSDictionary *photoLocations = [files photoLocations];
 	NSDictionary *latlon = [photoLocations valueForKey:[assetURL absoluteString]];

@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @interface PhotoMap : UIViewController
 <RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider> {
 	
-	CycleStreets *cycleStreets;		//application data
+	
 	RMMapView *mapView;				//map of current area
 	BlueCircleView *blueCircleView;	//overlay GPS location
 	

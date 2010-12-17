@@ -40,7 +40,7 @@ static NSString *thumbnailSize = @"300";
 
 - (id) initNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw limit:(NSInteger)limit {
 	if (self = [super init]) {
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		
 		//Fake up a centre point
 		CLLocationCoordinate2D centre;

@@ -25,12 +25,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <Foundation/Foundation.h>
-#import "Singleton.h"
+#import "SynthesizeSingleton.h"
 @class CycleStreetsAppDelegate;
 @class Files;
 @class CategoryLoader;
 
-@interface CycleStreets : Singleton {
+@interface CycleStreets : NSObject {
 	CycleStreetsAppDelegate *appDelegate;
 	Files *files;
 	CategoryLoader *categoryLoader;
@@ -41,5 +41,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain) Files *files;
 @property (nonatomic, retain) CategoryLoader *categoryLoader;
 @property (nonatomic, readonly) NSString *APIKey;
-
+SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 @end

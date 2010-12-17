@@ -27,9 +27,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreets.h"
 #import "Files.h"
 #import "CategoryLoader.h"
+#import "SynthesizeSingleton.h"
 
 @implementation CycleStreets
-
+SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 @synthesize appDelegate;
 @synthesize files;
 @synthesize categoryLoader;

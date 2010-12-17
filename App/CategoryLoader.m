@@ -74,7 +74,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	DLog(@"didSucceedFetch");
 	if ([self loadCategories:elements]) {
 		//save 'em.
-		CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		[cycleStreets.files setPhotoCategories:elements];
 		NSString *validuntil = [[[elements objectForKey:@"validuntil"] objectAtIndex:0] valueForKey:@"validuntil"];
 		[cycleStreets.files setMiscValue:validuntil forKey:@"validuntil"];
@@ -110,7 +110,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.metaCategoryLabels = [NSArray arrayWithObject:@"Any"];
 	
 	//second, load the last save from file.
-	CycleStreets *cycleStreets = (CycleStreets *)[CycleStreets sharedInstance:[CycleStreets class]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSDictionary *categoryElements = [cycleStreets.files photoCategories];
 	[self loadCategories:categoryElements];
 	
