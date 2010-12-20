@@ -407,7 +407,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			self.loginView = [[[LoginView alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];
 		}
 		[self presentModalViewController:self.loginView animated:YES];
-		self.loginView.loginDelegate = self; //we get the callback when login is requested.
 	} else {
 		[self sendPhoto];
 	}

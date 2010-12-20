@@ -28,18 +28,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <CoreLocation/CoreLocation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "BusyAlert.h"
-#import "LoginView.h"
 #import "UserValidate.h"
 #import "UserCreate.h"
 #import "AddPhoto.h"
 #import "PhotoInfo.h"
 #import "Location2.h"
+#import "LoginView.h"
 @class AssetGroupTable;
 @class PhotoAsset;
 
 @interface Photos : UIViewController
 <UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-CLLocationManagerDelegate, BusyAlertDelegate, LoginDelegate, UIAlertViewDelegate,
+CLLocationManagerDelegate, BusyAlertDelegate, UIAlertViewDelegate,
 UITextViewDelegate, UIActionSheetDelegate> {
 	UIImageView *selected;
 	UIBarButtonItem *camera;

@@ -25,49 +25,100 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-@class BusyAlert;
+#import "UserAccount.h"
+#import "LayoutBox.h"
+#import "SuperViewController.h"
 
-@protocol LoginDelegate
-- (void)didLogin:(NSString *)username withPassword:(NSString *)password;
-- (void)didRegister:(NSString *)username
-	   withPassword:(NSString *)password
-		  withEmail:(NSString *)email
-		   withName:(NSString *)visibleName;
-- (void)didCancel;
-@end
 
-@interface LoginView : UIViewController {
-	UISegmentedControl *loginOrRegister;
-	
-	UITextField *username;
-	UITextField *password;
-	
-	UIButton *loginButton;
-	
-	UITextField *email;
-	UITextField *visibleName;
+#define kSubmitButtonTag 499
+#define	kActivityTag 500
+#define	kMessageFieldTag 501
+#define kpasswordExtent 5
+#define	kUsernameExtent 7
 
-	UIButton *registerButton;
+@interface LoginView : SuperViewController <UITextFieldDelegate>{
 	
-	NSObject <LoginDelegate> *loginDelegate;
+	UIView				*activeView;
+	
+	IBOutlet			UIScrollView	*scrollView;
+	LayoutBox		*contentView;
+	
+	// not logged in
+	IBOutlet UITextField *loginUsernameField;
+	IBOutlet UITextField *loginPasswordField;
+	IBOutlet UIButton *loginButton;
+	IBOutlet	UIView		*loginView;
+	
+	
+	IBOutlet UITextField *registerUsernameField;
+	IBOutlet UITextField *registerVisibleNameField;
+	IBOutlet UITextField *registerEmailField;
+	IBOutlet UITextField *registerPsswordField;
+	IBOutlet UIButton *registerButton;
+	IBOutlet UIView		*registerView;
+	
+	// logged in
+	IBOutlet		UILabel		*loggedInasField;
+	IBOutlet		UIButton	*logoutButton;
+	IBOutlet		UISwitch	*saveLoginButton;
+	IBOutlet		UIView		*loggedInView;
+	
+	
+	//state
+	int							activeFieldIndex;
+	CGRect						activeFieldFrame;
+	NSMutableArray				*activeFieldArray;
+	UITextField					*activeField;
+	BOOL						keyboardIsShown;
+	CGPoint						viewOffset;
+	UIButton					*activeFormSubmitButton;
+	UIActivityIndicatorView		*activeActivityView;
+	UILabel						*activeFormMessageLabel;	
+	UserAccountMode				viewMode;
+	NSArray						*registerFieldArray;
+	NSArray						*loginFieldArray;
+	
 }
+@property (nonatomic, retain)			UIView *activeView;
+@property (nonatomic, retain)			IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain)			LayoutBox *contentView;
+@property (nonatomic, retain)			IBOutlet UITextField *loginUsernameField;
+@property (nonatomic, retain)			IBOutlet UITextField *loginPasswordField;
+@property (nonatomic, retain)			IBOutlet UIButton *loginButton;
+@property (nonatomic, retain)			IBOutlet UIView *loginView;
+@property (nonatomic, retain)			IBOutlet UITextField *registerUsernameField;
+@property (nonatomic, retain)			IBOutlet UITextField *registerVisibleNameField;
+@property (nonatomic, retain)			IBOutlet UITextField *registerEmailField;
+@property (nonatomic, retain)			IBOutlet UITextField *registerPsswordField;
+@property (nonatomic, retain)			IBOutlet UIButton *registerButton;
+@property (nonatomic, retain)			IBOutlet UIView *registerView;
+@property (nonatomic, retain)			IBOutlet UILabel *loggedInasField;
+@property (nonatomic, retain)			IBOutlet UIButton *logoutButton;
+@property (nonatomic, retain)			IBOutlet UISwitch *saveLoginButton;
+@property (nonatomic, retain)			IBOutlet UIView *loggedInView;
+@property (nonatomic)			int activeFieldIndex;
+@property (nonatomic)			CGRect activeFieldFrame;
+@property (nonatomic, retain)			NSMutableArray *activeFieldArray;
+@property (nonatomic, retain)			UITextField *activeField;
+@property (nonatomic)			BOOL keyboardIsShown;
+@property (nonatomic)			CGPoint viewOffset;
+@property (nonatomic, retain)			UIButton *activeFormSubmitButton;
+@property (nonatomic, retain)			UIActivityIndicatorView *activeActivityView;
+@property (nonatomic, retain)			UILabel *activeFormMessageLabel;
+@property (nonatomic)			UserAccountMode viewMode;
+@property (nonatomic, retain)			NSArray *registerFieldArray;
+@property (nonatomic, retain)			NSArray *loginFieldArray;
 
-@property (nonatomic, retain) IBOutlet UITextField *username;
-@property (nonatomic, retain) IBOutlet UITextField *password;
-@property (nonatomic, retain) IBOutlet UIButton *loginButton;
-@property (nonatomic, retain) IBOutlet UITextField *email;
-@property (nonatomic, retain) IBOutlet UITextField *visibleName;
-@property (nonatomic, retain) IBOutlet UIButton *registerButton;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *loginOrRegister;
 
-@property (nonatomic, retain) NSObject <LoginDelegate> *loginDelegate;
-
--(IBAction)didLoginButton;
--(IBAction)didRegisterButton;
 -(IBAction)didCancelButton;
 -(IBAction)textFieldReturn:(id)sender;
--(IBAction)didToggle;
-
 -(void)clearFields;
+-(void)closeKeyboard;
+-(void)saveLoginControlChanged:(id)sender;
+- (IBAction) logoutButtonSelected:(id)sender ;
+- (IBAction)registerButtonSelected:(id)sender;
+- (IBAction)loginButtonSelected:(id)sender;
+-(IBAction)closeKeyboardFromUI:(id)sender;
+
 
 @end
