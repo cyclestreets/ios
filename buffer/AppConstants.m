@@ -17,10 +17,7 @@ NSString *const DEVICETYPE=@"iPhone";
 //
 
 // racecards
-NSString *const RACECARD = @"racecard";
-NSString *const RACE = @"race";
-NSString *const RESULTS = @"results";
-NSString *const RUNNER=@"runner";
+
 //user
 NSString *const LOGIN=@"Login";
 NSString *const REGISTER=@"Register"; 
@@ -28,23 +25,7 @@ NSString *const PASSWORDRETRIEVAL=@"ForgottenPassword";
 //search
 NSString *const QUICKSEARCHDATAID=@"QuickSearch";
 NSString *const SEARCHDATAID=@"Search";
-NSString *const DETAILSHORSE=@"GetHorseDetails"; // 
-NSString *const DETAILSTRAINER=@"GetTrainerDetails"; // 
-NSString *const DETAILSJOCKEY=@"GetJockeyDetails"; // 
-// notes
-NSString *const NOTEDELETE=@"DeleteNote"; // delete note
-NSString *const NOTEADD=@"AddEditNote"; // create/update note
-NSString *const GETNOTES=@"GetNotes"; // get notes for alert
-NSString *const NOTEUPDATE=@"AddEditNote"; // update existing note
-// alerts
-NSString *const ALERTSGET=@"GetAlerts"; // get all alerts
-NSString *const ALERTADD=@"CreateAlert"; // create new alert
-NSString *const ALERTDELETE=@"DeleteAlert"; // delete alert
-NSString *const ALERTCONFIGURE=@"ConfigureAlert"; // updates status of alert
-NSString *const ALERTDISMISS=@"DismissRaceAlert";
-NSString *const ALERTRACEALERTS=@"GetTodaysRaceAlerts"; // initial call
-NSString *const ALERTNEWRACEALERTS=@"GetNewRaceAlerts"; // delta update
-NSString *const ALERTRESULTS=@"GetNewResults"; // result type alerts
+
 
 
 
@@ -73,6 +54,7 @@ NSString *const SEARCHJOCKEY=@"searchjockey";
 NSString *const DATE=@"date";
 NSString *const RESPONSE=@"response";
 NSString *const REQUEST=@"request";
+NSString *const STATE=@"state";
 NSString *const PARAMARRAY=@"parameterarray";
 NSString *const CURRENCY=@"currency";
 NSString *const DATATYPE=@"dataid";
@@ -91,6 +73,7 @@ NSString *const RESULT=@"Result";
 // viewmodes
 NSString *const UITYPE_NAV=@"UITypeNavonly";
 NSString *const UITYPE_CONTROLUI=@"UITypeControlNav";
+NSString *const UITYPE_CONTROLHEADERUI=@"UITypeControlHeaderNav";
 NSString *const UITYPE_MODALUI=@"UITypeModalNav";
 
 
@@ -117,7 +100,6 @@ NSString *const TEXTFIELDEDITFRAME=@"tuitextfieldeditframeupdate"; // generic ev
 NSString *const SEARCHDIDCOMPLETE=@"SearchDidComplete";
 NSString *const QUICKSEARCHDIDCOMPLETE=@"QuickSearchDidComplete";
 NSString *const SEARCHITEMRESPONSE=@"SearchItemResponse";
-NSString *const NOTEDELETERESPONSE=@"NoteDeleteResponse";
 NSString *const LOGINRESPONSE=@"LoginResponse";
 NSString *const REGISTERRESPONSE=@"RegisterResponse";
 NSString *const PASSWORDRETRIEVALRESPONSE=@"PasswordRetrievalResponse";
@@ -126,7 +108,12 @@ NSString *const RACEALERTSRESPONSE=@"RaceAleertsResponse";
 NSString *const RACEALERTSDELTARESPONSE=@"RaceAlertsDeltaResponse";
 NSString *const GETALERTSRESPONSE=@"GetAlertsResponse";
 NSString *const GETNOTESRESPONSE=@"GetNotesResponse";
-
+NSString *const ADDNOTESRESPONSE=@"AddNotesResponse";
+NSString *const DELETENOTESRESPONSE=@"DeleteNotesResponse";
+NSString *const UPDATENOTESRESPONSE=@"UpdateNotesResponse";
+NSString *const ADDALERTSRESPONSE=@"AddAlertResponse";
+NSString *const DELETEALERTSRESPONSE=@"DeleteAlertResponse";
+NSString *const UPDATEALERTSRESPONSE=@"UpdateAlertResponse";
 
 
 
@@ -152,7 +139,8 @@ int const SCREENWIDTH = 320;
 int const UIWIDTH = 280;
 int const FORMWIDTH = 280;
 int const SCREENHEIGHT = 460;
-int const SCREENHEIGHTWITHCONTROLUI = 276;
+int const SCREENHEIGHTWITHCONTROLUI = 323;
+int const SCREENHEIGHTWITHCONTROLANDHEADERUI = 273;
 int const SCREENHEIGHTWITHNAVIGATION = 420;
 int const SCREENHEIGHTWITHNAVANDTAB=366;
 int const CONTROLUIHEIGHT = 44;
@@ -168,7 +156,7 @@ int const SHORTCELLHEIGHT=36;
 int const NEWSCELLHEIGHT=58;
 int const NAVTABLEHEIGHT=366;
 
-
+int const TABBARMORELIMIT=4;
 
 // Alert Error Strings
 NSString *const CONNECTIONERROR=@"Connection Error";

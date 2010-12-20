@@ -71,6 +71,7 @@ extern NSString *const SEARCHJOCKEY;
 extern NSString *const DATE;
 extern NSString *const RESPONSE;
 extern NSString *const REQUEST;
+extern NSString *const STATE;
 extern NSString *const PARAMARRAY;
 extern NSString *const CURRENCY;
 extern NSString *const DATATYPE;
@@ -89,6 +90,7 @@ extern NSString *const RESULT;
 // view modes
 extern NSString *const UITYPE_NAV;
 extern NSString *const UITYPE_CONTROLUI;
+extern NSString *const UITYPE_CONTROLHEADERUI;
 extern NSString *const UITYPE_MODALUI;
 
 
@@ -112,7 +114,6 @@ extern NSString *const CLLOCATIONUPDATE;
 extern NSString *const TEXTFIELDEDITFRAME;
 extern NSString *const SEARCHDIDCOMPLETE;
 extern NSString *const QUICKSEARCHDIDCOMPLETE;
-extern NSString *const NOTEDELETERESPONSE;
 extern NSString *const LOGINRESPONSE;
 extern NSString *const REGISTERRESPONSE;
 extern NSString *const PASSWORDRETRIEVALRESPONSE;
@@ -122,7 +123,12 @@ extern NSString *const RACEALERTSDELTARESPONSE;
 extern NSString *const SEARCHITEMRESPONSE;
 extern NSString *const GETALERTSRESPONSE;
 extern NSString *const GETNOTESRESPONSE;
-
+extern NSString *const ADDNOTESRESPONSE;
+extern NSString *const DELETENOTESRESPONSE;
+extern NSString *const UPDATENOTESRESPONSE;
+extern NSString *const ADDALERTSRESPONSE;
+extern NSString *const DELETEALERTSRESPONSE;
+extern NSString *const UPDATEALERTSRESPONSE;
 
 
 
@@ -147,6 +153,7 @@ extern NSString *const STARTUPERROR_STRINGSFAILED;
 extern int const SCREENWIDTH;
 extern int const SCREENHEIGHT;
 extern int const SCREENHEIGHTWITHCONTROLUI;
+extern int const SCREENHEIGHTWITHCONTROLANDHEADERUI;
 extern int const SCREENHEIGHTWITHNAVIGATION;
 extern int const SCREENHEIGHTWITHNAVANDTAB;
 extern int const CONTROLUIHEIGHT;
@@ -164,6 +171,8 @@ extern int const NAVTABLEHEIGHT;
 extern int const NEWSCELLHEIGHT;
 extern int const STANDARDCELLHEIGHT;
 extern int const HALFCELLHEIGHT;
+
+extern int const TABBARMORELIMIT;
 
 
 // Alert Error Strings

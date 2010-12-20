@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Map.h"
 #import "UIButton+Blue.h"
 #import "Common.h"
+#import "AppConstants.h"
 
 @implementation Settings
 @synthesize plan;
@@ -42,7 +43,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize speedControl;
 @synthesize mapStyleControl;
 @synthesize imageSizeControl;
-@synthesize clearAccountButton;
 @synthesize controlView;
 @synthesize accountNameLabel;
 
@@ -60,7 +60,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [speedControl release], speedControl = nil;
     [mapStyleControl release], mapStyleControl = nil;
     [imageSizeControl release], imageSizeControl = nil;
-    [clearAccountButton release], clearAccountButton = nil;
     [controlView release], controlView = nil;
     [accountNameLabel release], accountNameLabel = nil;
 	
@@ -70,13 +69,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-
-
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-		
+        
 		//load from saved settings
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		NSDictionary *dict = [cycleStreets.files settings];
@@ -98,7 +93,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		}
 		
 		if (self.imageSize == nil) {
-			self.imageSize = @"320px";
+			self.imageSize = @"640px";
 		}
 		
 		//[self.clearAccountButton setupBlue];
@@ -141,36 +136,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.navigationController.navigationBar.tintColor=[UIColor grayColor];
 	
 	[self.view addSubview:controlView];
-	[(UIScrollView*) self.view setContentSize:CGSizeMake(320, controlView.frame.size.height)];
-	
-	[self createBlueButton:clearAccountButton withText:@"Log out"];
-	
+	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, controlView.frame.size.height)];
 	
 	 [super viewDidLoad];
 	
 }
 
-
--(void)createBlueButton:(UIButton*)button withText:(NSString*)text{
-	
-	UIFont *font=button.titleLabel.font;
-	
-	
-	// Configure background image(s)
-	[button setBackgroundImage:[[UIImage imageNamed:@"blueButton.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	
-	
-	
-	// Configure title(s)
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.userInteractionEnabled=NO;
-	button.titleLabel.font=font;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-	
-}
 
 
 - (void)didReceiveMemoryWarning {
@@ -182,7 +153,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.speedControl = nil;
 	self.imageSizeControl = nil;
 	self.mapStyleControl = nil;
-	self.clearAccountButton = nil;
 	self.controlView=nil;
 	self.accountNameLabel=nil;
 }
@@ -217,12 +187,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self save];
 }
 
-- (IBAction) didClearAccount {
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.files resetPasswordInKeyChain];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationClearAccount" object:nil];
-}
 
 
 /*

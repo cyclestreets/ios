@@ -48,6 +48,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	return self;
 }
 
+
+
+
+
+
+
 - (void)dealloc {
 	self.appDelegate = nil;
 	self.files = nil;
