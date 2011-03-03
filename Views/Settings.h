@@ -32,30 +32,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSString *speed;
 	NSString *mapStyle;
 	NSString *imageSize;
+	NSString *routeUnit;
 	
 	IBOutlet UISegmentedControl *planControl;
 	IBOutlet UISegmentedControl *speedControl;
 	IBOutlet UISegmentedControl *mapStyleControl;
 	IBOutlet UISegmentedControl *imageSizeControl;
+	IBOutlet UISegmentedControl *routeUnitControl;
 	IBOutlet UIView	*controlView;
-	IBOutlet UILabel *accountNameLabel;
 }
 
-@property (nonatomic, retain)			NSString *plan;
-@property (nonatomic, retain)			NSString *speed;
-@property (nonatomic, retain)			NSString *mapStyle;
-@property (nonatomic, retain)			NSString *imageSize;
-@property (nonatomic, retain)			IBOutlet UISegmentedControl *planControl;
-@property (nonatomic, retain)			IBOutlet UISegmentedControl *speedControl;
-@property (nonatomic, retain)			IBOutlet UISegmentedControl *mapStyleControl;
-@property (nonatomic, retain)			IBOutlet UISegmentedControl *imageSizeControl;
-@property (nonatomic, retain)			IBOutlet UIView *controlView;
-@property (nonatomic, retain)			IBOutlet UILabel *accountNameLabel;
+@property (nonatomic, retain)	NSString	*plan;
+@property (nonatomic, retain)	NSString	*speed;
+@property (nonatomic, retain)	NSString	*mapStyle;
+@property (nonatomic, retain)	NSString	*imageSize;
+@property (nonatomic, retain)	NSString	*routeUnit;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*planControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*speedControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*mapStyleControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*imageSizeControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*routeUnitControl;
+@property (nonatomic, retain)	IBOutlet UIView	*controlView;
 
 
 - (IBAction) changed;
-
-- (IBAction) didClearAccount;
 
 - (void) save;
 

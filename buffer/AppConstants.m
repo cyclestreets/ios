@@ -33,6 +33,7 @@ NSString *const SEARCHDATAID=@"Search";
 NSString *const POST=@"POST";
 NSString *const GET=@"GET";
 NSString *const URL=@"URL";
+NSString *const GETPOST=@"GETPOST";
 
 //data sources
 NSString *const LOCALDATA=@"localdata";

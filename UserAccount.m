@@ -41,11 +41,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 @synthesize user;
 @synthesize userPassword;
 @synthesize userName;
+@synthesize userEmail;
+@synthesize userVisibleName;
 @synthesize isRegistered;
 @synthesize sessionToken;
 @synthesize deviceID;
 @synthesize accountMode;
-
+@synthesize HUD;
 
 //=========================================================== 
 // dealloc
@@ -55,11 +57,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
     [user release], user = nil;
     [userPassword release], userPassword = nil;
     [userName release], userName = nil;
+    [userEmail release], userEmail = nil;
+    [userVisibleName release], userVisibleName = nil;
     [sessionToken release], sessionToken = nil;
     [deviceID release], deviceID = nil;
+    [HUD release], HUD = nil;
 	
     [super dealloc];
 }
+
 
 
 
@@ -144,12 +150,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)registerUserWithUserName:(NSString*)name andPassword:(NSString*)password visibleName:(NSString*)visiblename email:(NSString*)email{
 	
-	userName=email;
-	userPassword=password;
+	userName=[email retain];
+	userPassword=[password retain];
+	userVisibleName=[visiblename retain];
+	userEmail=[email retain];
 	
-	NSMutableDictionary *parameters=[[NSMutableDictionary alloc]initWithObjectsAndKeys:userName, @"strEmail",
-									 userPassword,@"strPassword", 
-									 deviceID,@"strDeviceID", nil];
+	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
+									 userPassword,@"password", 
+									 userEmail,@"email",
+									 userVisibleName,@"name",nil];
+	
+	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
+	NSMutableDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];
 	request.dataid=REGISTER;
@@ -221,7 +233,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)loginExistingUser{
 	if(accountMode==kUserAccountCredentialsExist){
-	//	[self loginUserWithEmail:user.email andPassword:userPassword];
+		[self loginUserWithUserName:user.email andPassword:userPassword];
 		[self showProgressHUDWithMessage:@"Logging in"];
 	}
 }
@@ -232,9 +244,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	userName=[name retain];
 	userPassword=[password retain];
 	
-	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:userName, @"strEmail",
-									 userPassword,@"strPassword", 
-									 deviceID,@"strDeviceID", nil];
+	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
+									 userPassword,@"password", nil];
+	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];
 	request.dataid=LOGIN;
@@ -247,8 +260,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[dict release];
 	[request release];
 	
-	
-	
 }
 
 -(void)loginUserResponse:(ValidationVO*)validation{
@@ -257,7 +268,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			
 		case ValidationLoginSuccess:
 		{
-			sessionToken=[validation.responseDict objectForKey:LOGIN];
 			isRegistered=YES;
 			accountMode=kUserAccountLoggedIn;
 			[self createUser];
@@ -303,8 +313,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)retrievePasswordForUser:(NSString *)email{
 	
-	
-	NSMutableDictionary *parameters=[[NSMutableDictionary alloc]initWithObjectsAndKeys:email, @"strEmail",nil];
+	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username", nil];
+	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];
 	request.dataid=PASSWORDRETRIEVAL;

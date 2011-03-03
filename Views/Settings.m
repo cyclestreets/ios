@@ -39,13 +39,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize speed;
 @synthesize mapStyle;
 @synthesize imageSize;
+@synthesize routeUnit;
 @synthesize planControl;
 @synthesize speedControl;
 @synthesize mapStyleControl;
 @synthesize imageSizeControl;
+@synthesize routeUnitControl;
 @synthesize controlView;
-@synthesize accountNameLabel;
-
 
 //=========================================================== 
 // dealloc
@@ -56,12 +56,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [speed release], speed = nil;
     [mapStyle release], mapStyle = nil;
     [imageSize release], imageSize = nil;
+    [routeUnit release], routeUnit = nil;
     [planControl release], planControl = nil;
     [speedControl release], speedControl = nil;
     [mapStyleControl release], mapStyleControl = nil;
     [imageSizeControl release], imageSizeControl = nil;
+    [routeUnitControl release], routeUnitControl = nil;
     [controlView release], controlView = nil;
-    [accountNameLabel release], accountNameLabel = nil;
 	
     [super dealloc];
 }
@@ -79,6 +80,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		self.plan = [dict valueForKey:@"plan"];
 		self.mapStyle = [dict valueForKey:@"mapStyle"];
 		self.imageSize = [dict valueForKey:@"imageSize"];
+		self.routeUnit = [dict valueForKey:@"routeUnit"];
 		
 		//default values
 		if (self.speed == nil) {
@@ -96,8 +98,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			self.imageSize = @"640px";
 		}
 		
-		//[self.clearAccountButton setupBlue];
-		
+		if (self.routeUnit == nil) {
+			self.routeUnit = @"miles";
+		}
 		
 
 		[self save];
@@ -116,21 +119,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
    
-	
+	// NE: fix this old logic
 	// Need to copy these out, because setting the selection causes changed() to get called,
 	// which causes self.speed and self.plan to get written. So self.plan got the old value out of the control, which it then set. Yuk!
 	NSString *newSpeed = [speed copy];
 	NSString *newPlan = [plan copy];
 	NSString *newImageSize = [imageSize copy];
 	NSString *newMapStyle = [mapStyle copy];
+	NSString *newRouteUnit = [routeUnit copy];
 	
 	[self select:speedControl byString:newSpeed];
 	[self select:planControl byString:newPlan];
 	[self select:imageSizeControl byString:newImageSize];
 	[self select:mapStyleControl byString:newMapStyle];
+	[self select:routeUnitControl byString:newRouteUnit];
 	
 	
 	self.navigationController.navigationBar.tintColor=[UIColor grayColor];
@@ -153,13 +157,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.speedControl = nil;
 	self.imageSizeControl = nil;
 	self.mapStyleControl = nil;
+	self.routeUnitControl=nil;
 	self.controlView=nil;
-	self.accountNameLabel=nil;
 }
 
 - (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 	[self nullify];
 	[super viewDidUnload];
 	DLog(@">>>");
@@ -171,17 +173,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						  self.plan, @"plan",
 						  self.mapStyle, @"mapStyle",
 						  self.imageSize, @"imageSize",
+						  self.routeUnit, @"routeUnit",
 						  nil];
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setSettings:dict];	
 }
 
 - (IBAction) changed {
-	//bring all visible fields in line with the values in the tabs
 	self.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
 	self.speed = [[speedControl titleForSegmentAtIndex:speedControl.selectedSegmentIndex] lowercaseString];
 	self.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
 	self.mapStyle = [[mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex] lowercaseString];
+	self.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
 	
 	//save changed settings
 	[self save];

@@ -17,7 +17,7 @@
 #define kDATAPRIORITY @"racecard"
 #define kCACHEARCHIVEKEY @"RKCachedDataArchiveKey"
 
-@protocol RKDataSourceDelegate<NSObject>
+@protocol DataSourceDelegate<NSObject>
 
 @optional
 -(void)DataSourceDidCompleteStartup;
@@ -35,7 +35,7 @@
 	
 	BOOL					startupState;
 	
-	id<RKDataSourceDelegate>  delegate;
+	id<DataSourceDelegate>  delegate;
 	
 	BOOL					cacheCreated;
 	NSMutableDictionary		*notifications;
@@ -45,7 +45,7 @@
 @property(nonatomic,retain)NSString *dataPriority;
 @property(nonatomic,retain)NSString *DATASOURCE;
 @property(nonatomic,assign)BOOL startupState;
-@property(nonatomic,assign)id<RKDataSourceDelegate> delegate;
+@property(nonatomic,assign)id<DataSourceDelegate> delegate;
 @property(nonatomic,assign)BOOL cacheCreated;
 @property(nonatomic,retain)NSMutableDictionary *notifications;
 

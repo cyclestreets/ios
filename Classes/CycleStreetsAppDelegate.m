@@ -43,29 +43,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Reachability.h"
 #import "Common.h"
 #import "CategoryLoader.h"
+#import "StartupManager.h"
+#import "UserSettingsManager.h"
 
 @implementation CycleStreetsAppDelegate
-
 @synthesize window;
 @synthesize tabBarController;
-@synthesize routeTabBarItem;
-@synthesize settings;
-@synthesize settingsNavigation;
-@synthesize routeTable;
-@synthesize map;
-@synthesize photoMap;
-@synthesize favourites;
-@synthesize favouritesNavigation;
-@synthesize photos;
-@synthesize credits;
-@synthesize donate;
-@synthesize busyAlert;
-@synthesize errorAlert;
 @synthesize firstAlert;
 @synthesize secondAlert;
 @synthesize optionsAlert;
 @synthesize networkAlert;
 @synthesize stage;
+@synthesize busyAlert;
+@synthesize errorAlert;
+@synthesize startupmanager;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [window release], window = nil;
+    [tabBarController release], tabBarController = nil;
+    [firstAlert release], firstAlert = nil;
+    [secondAlert release], secondAlert = nil;
+    [optionsAlert release], optionsAlert = nil;
+    [networkAlert release], networkAlert = nil;
+    [stage release], stage = nil;
+    [busyAlert release], busyAlert = nil;
+    [errorAlert release], errorAlert = nil;
+    [startupmanager release], startupmanager = nil;
+	
+    [super dealloc];
+}
+
+
 
 - (void)loadContext {
 	DLog(@">>>");
@@ -90,10 +102,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag {
 
-	UINavigationController *navigation = [[[UINavigationController alloc] init] autorelease];
+	UINavigationController *navigation = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
 	UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:[UIImage imageNamed:imageName] tag:tag];
 	[navigation setTabBarItem:tabBarItem];
-	[navigation pushViewController:controller animated:YES];
 	controller.navigationItem.title = title;
 	[tabBarItem release];
 	
@@ -106,11 +117,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 	// Override point for customization after application launch
 	
+	startupmanager=[[StartupManager alloc]init];
+	startupmanager.delegate=self;
+	[startupmanager doStartupSequence];
+	
+	
+	/*
 	
 	DLog(@"reachability checked.");
 	
 	// navigation controller
-	tabBarController = [[UITabBarController alloc] init];
+	
 	
 	// The map
 	map = [[Map alloc] init];
@@ -122,7 +139,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	// The photo map
 	photoMap = [[PhotoMap alloc] init];
-	// UINavigationController *photoMapNavigation = [self setupNavigationTab:photoMap withTitle:@"Photomap" imageNamed:@"icon_film.png" tag:8];
 	UITabBarItem *photoMapTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Photomap" image:[UIImage imageNamed:@"icon_film.png"] tag:8];
 	[photoMap setTabBarItem:photoMapTabBarItem];
 	[photoMapTabBarItem release];
@@ -142,24 +158,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	settings = [[Settings alloc] initWithNibName:@"Settings" bundle:nil];
 	settingsNavigation = [self setupNavigationTab:settings withTitle:@"Settings" imageNamed:@"icon_magnify_glass.png" tag:3];
 	
+	// The settings tab
+	login = [[LoginView alloc] initWithNibName:@"LoginView" bundle:nil];
+	[self setupNavigationTab:login withTitle:@"Account" imageNamed:@"UITabBar_account.png" tag:4];
+	
 	DLog(@"settings tab up.");
 	
 	// Favourites
 	favourites = [[Favourites alloc] init];
-	favouritesNavigation = [self setupNavigationTab:favourites withTitle:@"My saved routes" imageNamed:@"icon_favorities.png" tag:4];
+	favouritesNavigation = [self setupNavigationTab:favourites withTitle:@"My saved routes" imageNamed:@"icon_favorities.png" tag:5];
 	
 	DLog(@"favourites up.");
 	
 	// Photos
 	photos = [[Photos alloc] init];
-	UITabBarItem *photosTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Add photo" image:[UIImage imageNamed:@"icon_photo.png"] tag:5];
+	UITabBarItem *photosTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Add photo" image:[UIImage imageNamed:@"icon_photo.png"] tag:6];
 	[photos setTabBarItem:photosTabBarItem];
 	[photosTabBarItem release];
 	
 	DLog(@"photos up.");
 	
 	// Credits
-	credits = [self setupNavigationTab:[[Credits alloc] init] withTitle:@"Credits" imageNamed:@"icon_information.png" tag:6];
+	credits = [self setupNavigationTab:[[Credits alloc] init] withTitle:@"Credits" imageNamed:@"icon_information.png" tag:7];
 	
 	DLog(@"credits up.");
 	
@@ -172,13 +192,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[donateTabBarItem release];
 	
 	DLog(@"donate up.");
-	 */
+	
 	
 	// put the tabbed views into the controller
-	NSArray *tabbedViews = [NSArray arrayWithObjects: map, routeTable, photoMap, photos, favouritesNavigation, settingsNavigation, credits, donate, nil];
+	NSArray *tabbedViews = [NSArray arrayWithObjects: map, routeTable, photoMap, photos, favouritesNavigation, settingsNavigation, login, credits, donate, nil];
 	[tabBarController setViewControllers: tabbedViews animated:YES];
 	
 	DLog(@"tabs added to controller.");
+	
+	 */
+	
+	
+	return YES;
+}
+
+
+
+# pragma Model Delegate methods
+
+//
+/***********************************************
+ * @description			Callbacks from StartupManager when all startup sequences have completed
+ ***********************************************/
+//
+-(void)startupComplete{
+	
+	BetterLog(@"");
+	
+	startupmanager.delegate=nil;
+	[startupmanager release];
+	startupmanager=nil;
+	
+	tabBarController = [[UITabBarController alloc] init];
+	[self buildTabbarController:[UserSettingsManager sharedInstance].navigation];
+	
+	[window addSubview:tabBarController.view];
+	tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
 	
 	// Stage popover
 	stage = [[Stage alloc] initWithNibName:@"Stage" bundle:nil];
@@ -197,17 +246,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
 	
-	DLog(@"app core loaded.");
-	
-	// view magic
-	UIView *view = [self.tabBarController view];
-	[window addSubview: view];	
 	[window makeKeyAndVisible];	
 	
 	[self performSelector:@selector(backgroundSetup) withObject:nil afterDelay:0.0];
 	
-	return YES;
+	
+	//[self removeStartupView];
 }
+
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[self saveContext];
@@ -216,6 +263,48 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)applicationDidEnterBackground:(UIApplication *)application {
 	[self saveContext];
 }
+
+
+
+
+//
+/***********************************************
+ * @description			create Tabbar order based on saved user context, handles More Tabbar reording
+ ***********************************************/
+//
+- (void)buildTabbarController:(NSArray*)viewcontrollers {
+	
+	NSMutableArray	*navControllers=[[NSMutableArray alloc]init];
+	
+	
+	if ([viewcontrollers count] > 0 ) {
+		for (int i = 0; i < [viewcontrollers count]; i++){
+			NSDictionary *navitem=[viewcontrollers objectAtIndex:i];
+				UIViewController *vccontroller= (UIViewController*)[[NSClassFromString([navitem objectForKey:@"class"]) alloc] initWithNibName:[navitem objectForKey:@"nib"] bundle:nil];
+			if(vccontroller!=nil){
+				UINavigationController *nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
+				[navControllers addObject:nav];
+			}
+			
+		}
+		tabBarController.viewControllers = navControllers;
+	}
+	
+	[navControllers release];
+	
+	// only add tabbar delegate if we can save the state
+	if([[UserSettingsManager sharedInstance] userStateWritable]==YES){
+		tabBarController.delegate = self;
+	}
+	
+	//[self setBarStyle:UIBarStyleDefault andTintColor:[[StyleManager sharedInstance] colorForType:@"navigationblue"] forNavigationBar:tabBarController.moreNavigationController.navigationBar];
+	
+	
+}
+
+
+
+
 
 - (void) backgroundSetup {
 	
@@ -257,6 +346,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	[cycleStreets.files setFavourites:newFavourites];
 	
+	/*
 	//tell the favourites table it is reset.
 	[cycleStreets.appDelegate.favourites clear];
 	
@@ -268,6 +358,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	//enable the route view.
 	routeTabBarItem.enabled = YES;
+	 */
 }
 
 - (void)warnOnFirstRoute {
@@ -353,29 +444,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[busyAlert show:@"Obtaining route from CycleStreets.net"];
 	[query runWithTarget:self onSuccess:@selector(querySuccess:results:) onFailure:@selector(queryFailure:message:)];
 	
-}
-
-- (void)dealloc {
-    [window release];
-	[tabBarController release];
-	[routeTabBarItem release];
-	[settings release];
-	[routeTable release];
-	[map release];
-	[photoMap release];
-	[favourites release];
-	[favouritesNavigation release];
-	[photos release];
-	[credits release];
-	[stage release];
-	[busyAlert release];
-	[errorAlert release];
-	[firstAlert release];
-	[secondAlert release];
-	[optionsAlert release];
-	[networkAlert release];
-	
-    [super dealloc];
 }
 
 

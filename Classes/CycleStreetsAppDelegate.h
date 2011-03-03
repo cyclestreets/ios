@@ -35,24 +35,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @class Query;
 @class BusyAlert;
 @class Stage;
-@class Donate;
+@class LoginView;
+#import "StartupManager.h"
 
-@interface CycleStreetsAppDelegate : NSObject <UIApplicationDelegate> {
+@interface CycleStreetsAppDelegate : NSObject <UIApplicationDelegate,StartupManagerDelegate,UITabBarControllerDelegate> {
     UIWindow *window;
 	
 	//Tab bar, and the members of it.
 	UITabBarController *tabBarController;
-	UITabBarItem *routeTabBarItem;
-	Settings *settings;
-	UINavigationController *settingsNavigation;
-	RouteTable *routeTable;
-	Map *map;
-	PhotoMap *photoMap;
-	Favourites *favourites;
-	UINavigationController *favouritesNavigation;
-	Photos *photos;
-	UINavigationController *credits;
-	Donate *donate;
 	UIAlertView *firstAlert;
 	UIAlertView *secondAlert;
 	UIAlertView *optionsAlert;
@@ -64,32 +54,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//Utilities
 	BusyAlert *busyAlert;
 	UIAlertView *errorAlert;
+	
+	StartupManager				*startupmanager;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, readonly) Settings *settings;
-@property (nonatomic, readonly) UINavigationController *settingsNavigation;
-@property (nonatomic, readonly) RouteTable *routeTable;
-@property (nonatomic, readonly) UITabBarController *tabBarController;
-@property (nonatomic, readonly) UITabBarItem *routeTabBarItem;
-@property (nonatomic, readonly) Map *map;
-@property (nonatomic, readonly) PhotoMap *photoMap;
-@property (nonatomic, readonly) Favourites *favourites;
-@property (nonatomic, readonly) UINavigationController *favouritesNavigation;
-@property (nonatomic, readonly) Photos *photos;
-@property (nonatomic, readonly) UINavigationController *credits;
-@property (nonatomic, readonly) Donate *donate;
-@property (nonatomic, readonly) BusyAlert *busyAlert;
-@property (nonatomic, readonly) UIAlertView *errorAlert;
-@property (nonatomic, retain) UIAlertView *firstAlert;
-@property (nonatomic, retain) UIAlertView *secondAlert;
-@property (nonatomic, retain) UIAlertView *optionsAlert;
-@property (nonatomic, retain) UIAlertView *networkAlert;
-@property (nonatomic, readonly) Stage *stage;
+@property (nonatomic, retain)	IBOutlet UIWindow	*window;
+@property (nonatomic, retain)	IBOutlet UITabBarController	*tabBarController;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*firstAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*secondAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*optionsAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*networkAlert;
+@property (nonatomic, retain)	Stage	*stage;
+@property (nonatomic, retain)	BusyAlert	*busyAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*errorAlert;
+@property (nonatomic, retain)	StartupManager	*startupmanager;
+
+
 
 - (void) runQuery:(Query *)query;
 
 - (void) selectRoute:(Route *)route;
+- (void)buildTabbarController:(NSArray*)viewcontrollers;
 
 @end
 

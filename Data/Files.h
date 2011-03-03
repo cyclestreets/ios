@@ -86,7 +86,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)resetPasswordInKeyChain;
 
 // list the serial numbers of the routes which are favourites
-- (NSArray *) favourites;
+- (NSMutableArray *) favourites;
 
 // save the new favourites list
 - (void)setFavourites:(NSArray *) newFavourites;

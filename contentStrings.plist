@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>about</key>
+	<dict>
+		<key>content</key>
+		<string></string>
+	</dict>
+	<key>global</key>
+	<dict>
+		<key>error_connection</key>
+		<string>Unable to contact server,\r please check your Network Settings.</string>
+		<key>error_noresults</key>
+		<string>No results for this day. \r Please try later.</string>
+	</dict>
+	<key>ui</key>
+	<dict/>
+	<key>account</key>
+	<dict>
+		<key>error_syntax_email</key>
+		<string>This email appears to be invalid.</string>
+		<key>error_syntax_password</key>
+		<string>Passwords must be 5 characters or more.</string>
+		<key>error_response_login</key>
+		<string>This email &amp; password combination was not found, please check and try again.</string>
+		<key>error_response_register</key>
+		<string>This email &amp; password combination has already been registered.</string>
+		<key>error_response_password</key>
+		<string>The supplied email was not found on the server.</string>
+		<key>error_response_server</key>
+		<string>A server error occured, please try again.</string>
+		<key>message_response_password</key>
+		<string>Your new password was sent to your account email address.</string>
+	</dict>
+</dict>
+</plist>
