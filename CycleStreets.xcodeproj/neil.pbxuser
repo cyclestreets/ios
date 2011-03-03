@@ -915,9 +915,9 @@
 	};
 	28AD6289131FB69D008527FC /* PhotoInfo.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {950, 2016}}";
-			sepNavSelRange = "{2872, 0}";
-			sepNavVisRange = "{2038, 1303}";
+			sepNavIntBoundsRect = "{{0, 0}, {950, 2296}}";
+			sepNavSelRange = "{3617, 0}";
+			sepNavVisRange = "{2713, 915}";
 		};
 	};
 	28AD628E131FB69D008527FC /* PhotoMapViewController.h */ = {
@@ -2365,6 +2365,16 @@
 		vrLen = 1303;
 		vrLoc = 2038;
 	};
+	28F55397132048250011C1F0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28AD6289131FB69D008527FC /* PhotoInfo.m */;
+		name = "PhotoInfo.m: 146";
+		rLen = 0;
+		rLoc = 3617;
+		rType = 0;
+		vrLen = 915;
+		vrLoc = 2713;
+	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 289A1F94129822E400CF83A9 /* CycleStreets */;
@@ -2648,6 +2658,7 @@
 			28F5538A132046690011C1F0 /* PBXTextBookmark */ = 28F5538A132046690011C1F0 /* PBXTextBookmark */;
 			28F5538B132046690011C1F0 /* PBXTextBookmark */ = 28F5538B132046690011C1F0 /* PBXTextBookmark */;
 			28F55394132047110011C1F0 /* PBXTextBookmark */ = 28F55394132047110011C1F0 /* PBXTextBookmark */;
+			28F55397132048250011C1F0 /* PBXTextBookmark */ = 28F55397132048250011C1F0 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 289A1FB4129822F900CF83A9 /* Source Control */;
 		userBuildSettings = {
