@@ -184,11 +184,11 @@ static NSString *clientidFileConst = @"clientid";
 }
 
 // list the serial numbers of the routes which are favourites
-- (NSArray *) favourites {
-	NSArray *result = [NSArray arrayWithContentsOfFile:[self favouritesFile]];
+- (NSMutableArray *) favourites {
+	NSMutableArray *result = [NSMutableArray arrayWithContentsOfFile:[self favouritesFile]];
 	if (nil == result) {
 		// empty array is the default.
-		result = [NSArray array];
+		result = [NSMutableArray array];
 	}
 	return result;	
 }

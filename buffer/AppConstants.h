@@ -52,6 +52,7 @@ NSString *const ALERTRESULTS; // result type alerts
 extern NSString *const POST;
 extern NSString *const GET;
 extern NSString *const URL;
+extern NSString *const GETPOST;
 
 
 // data sources

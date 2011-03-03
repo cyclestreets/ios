@@ -133,6 +133,27 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		[urlString release];
+		
+	}else if ([servicetype isEqualToString:GETPOST]){
+		
+		NSDictionary *getParameters=[parameters objectForKey:@"getparameters"];
+		NSDictionary *postParameters=[parameters objectForKey:@"postparameters"];
+		
+		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[getParameters urlEncodedString]];
+		requesturl=[NSURL URLWithString:urlString];
+		[urlString release];
+		
+		request = [NSMutableURLRequest requestWithURL:requesturl
+										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+									  timeoutInterval:30.0 ];
+		
+		NSString *parameterString=[postParameters urlEncodedString];
+		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
+		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
+		[request setHTTPMethod:@"POST"];
+		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
+		
+		
 	}
 	
 	

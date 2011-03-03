@@ -28,8 +28,12 @@ typedef int UserAccountMode;
 
 @interface UserAccount : FrameworkObject <MBProgressHUDDelegate>{
 	UserVO				*user;
+	// values
 	NSString			*userPassword;
 	NSString			*userName;
+	NSString			*userEmail;
+	NSString			*userVisibleName;
+	
 	BOOL				isRegistered; // 
 	NSString			*sessionToken;
 	NSString			*deviceID;
@@ -38,13 +42,16 @@ typedef int UserAccountMode;
 	
 	MBProgressHUD					*HUD;
 }
-@property (nonatomic, retain)			UserVO *user;
-@property (nonatomic, retain)			NSString *userPassword;
-@property (nonatomic, retain)			NSString *userName;
-@property (nonatomic)			BOOL isRegistered;
-@property (nonatomic, retain)			NSString *sessionToken;
-@property (nonatomic, retain)			NSString *deviceID;
-@property (nonatomic)			UserAccountMode accountMode;
+@property (nonatomic, retain)	UserVO	*user;
+@property (nonatomic, retain)	NSString	*userPassword;
+@property (nonatomic, retain)	NSString	*userName;
+@property (nonatomic, retain)	NSString	*userEmail;
+@property (nonatomic, retain)	NSString	*userVisibleName;
+@property (nonatomic, assign)	BOOL	isRegistered;
+@property (nonatomic, retain)	NSString	*sessionToken;
+@property (nonatomic, retain)	NSString	*deviceID;
+@property (nonatomic, assign)	UserAccountMode	accountMode;
+@property (nonatomic, retain)	MBProgressHUD	*HUD;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 

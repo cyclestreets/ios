@@ -11,6 +11,7 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		282689B912DF9A2F007DCDE7 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 282689B812DF9A2F007DCDE7 /* UserSettingsManager.m */; };
 		2872114B129976B70027D98E /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872114A129976B70027D98E /* blueButton.png */; };
 		2878576612B0354700EE2120 /* NSData+MBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2878566512B0354700EE2120 /* NSData+MBBase64.m */; };
 		2878576712B0354700EE2120 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2878566712B0354700EE2120 /* NSDate+Helper.m */; };
@@ -108,8 +109,36 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		289A1FB6129822FF00CF83A9 /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289A1FB1129822F900CF83A9 /* libMapView.a */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		28BCC72D1313A9BC00DE7E26 /* UITabBar_account.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC72C1313A9BC00DE7E26 /* UITabBar_account.png */; };
+		28BCC7911313AF2D00DE7E26 /* UIButton_green_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC77C1313AF2D00DE7E26 /* UIButton_green_hi.png */; };
+		28BCC7921313AF2D00DE7E26 /* UIButton_green_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC77D1313AF2D00DE7E26 /* UIButton_green_lo.png */; };
+		28BCC7931313AF2D00DE7E26 /* UIButton_grey_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC77E1313AF2D00DE7E26 /* UIButton_grey_hi.png */; };
+		28BCC7941313AF2D00DE7E26 /* UIButton_grey_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC77F1313AF2D00DE7E26 /* UIButton_grey_lo.png */; };
+		28BCC7951313AF2D00DE7E26 /* UIButton_orange_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7801313AF2D00DE7E26 /* UIButton_orange_hi.png */; };
+		28BCC7961313AF2D00DE7E26 /* UIButton_orange_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7811313AF2D00DE7E26 /* UIButton_orange_lo.png */; };
+		28BCC7971313AF2D00DE7E26 /* UIButton_orangesmall_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7821313AF2D00DE7E26 /* UIButton_orangesmall_hi.png */; };
+		28BCC7981313AF2D00DE7E26 /* UIButton_orangesmall_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7831313AF2D00DE7E26 /* UIButton_orangesmall_lo.png */; };
+		28BCC7991313AF2D00DE7E26 /* UIButton_red_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7841313AF2D00DE7E26 /* UIButton_red_hi.png */; };
+		28BCC79A1313AF2D00DE7E26 /* UIButton_red_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7851313AF2D00DE7E26 /* UIButton_red_lo.png */; };
+		28BCC79B1313AF2D00DE7E26 /* UIButton_green_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7871313AF2D00DE7E26 /* UIButton_green_hi@2x.png */; };
+		28BCC79C1313AF2D00DE7E26 /* UIButton_green_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7881313AF2D00DE7E26 /* UIButton_green_lo@2x.png */; };
+		28BCC79D1313AF2D00DE7E26 /* UIButton_grey_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7891313AF2D00DE7E26 /* UIButton_grey_hi@2x.png */; };
+		28BCC79E1313AF2D00DE7E26 /* UIButton_grey_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC78A1313AF2D00DE7E26 /* UIButton_grey_lo@2x.png */; };
+		28BCC79F1313AF2D00DE7E26 /* UIButton_orange_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC78B1313AF2D00DE7E26 /* UIButton_orange_hi@2x.png */; };
+		28BCC7A01313AF2D00DE7E26 /* UIButton_orange_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC78C1313AF2D00DE7E26 /* UIButton_orange_lo@2x.png */; };
+		28BCC7A11313AF2D00DE7E26 /* UIButton_orangesmall_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC78D1313AF2D00DE7E26 /* UIButton_orangesmall_hi@2x.png */; };
+		28BCC7A21313AF2D00DE7E26 /* UIButton_orangesmall_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC78E1313AF2D00DE7E26 /* UIButton_orangesmall_lo@2x.png */; };
+		28BCC7A31313AF2D00DE7E26 /* UIButton_red_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC78F1313AF2D00DE7E26 /* UIButton_red_hi@2x.png */; };
+		28BCC7A41313AF2D00DE7E26 /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7901313AF2D00DE7E26 /* UIButton_red_lo@2x.png */; };
+		28BCC7AB1313B04C00DE7E26 /* structrue.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28BCC7AA1313B04C00DE7E26 /* structrue.plist */; };
+		28BCCAC71314384F00DE7E26 /* StartupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BCCAC61314384F00DE7E26 /* StartupManager.m */; };
+		28BCCAD913143AD700DE7E26 /* FavouritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BCCAD813143AD700DE7E26 /* FavouritesManager.m */; };
+		28BCCAF213143F2300DE7E26 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BCCAF113143F2300DE7E26 /* SettingsManager.m */; };
 		28BFD9A012C013210065995E /* FormItemVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BFD99F12C013210065995E /* FormItemVO.m */; };
 		28BFD9A312C014B00065995E /* FormData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28BFD9A212C014B00065995E /* FormData.plist */; };
+		28C2909A13093A5E008E0A51 /* services.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28C2909913093A5E008E0A51 /* services.plist */; };
+		28C290AC13093A60008E0A51 /* contentStrings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28C290AB13093A60008E0A51 /* contentStrings.plist */; };
+		28C290AE13093A64008E0A51 /* styles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28C290AD13093A64008E0A51 /* styles.plist */; };
 		28D62DD512BBF35F0049B613 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62DD412BBF35F0049B613 /* UserAccount.m */; };
 		28D62DD912BBF3930049B613 /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62DD812BBF3930049B613 /* UserVO.m */; };
 		28D62DF912BBF6380049B613 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62DF812BBF6380049B613 /* ValidationVO.m */; };
@@ -120,7 +149,6 @@
 		28D62E1012BBF6F80049B613 /* RKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E0A12BBF6F80049B613 /* RKLocationManager.m */; };
 		28D62E1B12BBF7E40049B613 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E1A12BBF7E40049B613 /* Model.m */; };
 		28D62E2212BBF8330049B613 /* TBXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E2112BBF8330049B613 /* TBXMLParser.m */; };
-		28D62E2712BBF8B90049B613 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E2612BBF8B90049B613 /* MBProgressHUD.m */; };
 		28D62E4212BBFB190049B613 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E4112BBFB190049B613 /* AppConstants.m */; };
 		28D6E97612BF4BD00073BB0F /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D6E97512BF4BD00073BB0F /* SuperViewController.m */; };
 		28D6E99012BF5AF00073BB0F /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D6E98F12BF5AF00073BB0F /* FormManager.m */; };
@@ -286,6 +314,8 @@
 		1D3623250D0F684500981E51 /* CycleStreetsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CycleStreetsAppDelegate.m; path = Classes/CycleStreetsAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		282689B712DF9A2F007DCDE7 /* UserSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettingsManager.h; sourceTree = "<group>"; };
+		282689B812DF9A2F007DCDE7 /* UserSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettingsManager.m; sourceTree = "<group>"; };
 		2872114A129976B70027D98E /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueButton.png; path = Neil/blueButton.png; sourceTree = SOURCE_ROOT; };
 		2878566412B0354700EE2120 /* NSData+MBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MBBase64.h"; sourceTree = "<group>"; };
 		2878566512B0354700EE2120 /* NSData+MBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MBBase64.m"; sourceTree = "<group>"; };
@@ -465,9 +495,40 @@
 		287857FD12B0371400EE2120 /* StyleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleManager.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28BCC72C1313A9BC00DE7E26 /* UITabBar_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBar_account.png; sourceTree = "<group>"; };
+		28BCC77C1313AF2D00DE7E26 /* UIButton_green_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_green_hi.png; sourceTree = "<group>"; };
+		28BCC77D1313AF2D00DE7E26 /* UIButton_green_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_green_lo.png; sourceTree = "<group>"; };
+		28BCC77E1313AF2D00DE7E26 /* UIButton_grey_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_grey_hi.png; sourceTree = "<group>"; };
+		28BCC77F1313AF2D00DE7E26 /* UIButton_grey_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_grey_lo.png; sourceTree = "<group>"; };
+		28BCC7801313AF2D00DE7E26 /* UIButton_orange_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_orange_hi.png; sourceTree = "<group>"; };
+		28BCC7811313AF2D00DE7E26 /* UIButton_orange_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_orange_lo.png; sourceTree = "<group>"; };
+		28BCC7821313AF2D00DE7E26 /* UIButton_orangesmall_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_orangesmall_hi.png; sourceTree = "<group>"; };
+		28BCC7831313AF2D00DE7E26 /* UIButton_orangesmall_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_orangesmall_lo.png; sourceTree = "<group>"; };
+		28BCC7841313AF2D00DE7E26 /* UIButton_red_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_red_hi.png; sourceTree = "<group>"; };
+		28BCC7851313AF2D00DE7E26 /* UIButton_red_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_red_lo.png; sourceTree = "<group>"; };
+		28BCC7871313AF2D00DE7E26 /* UIButton_green_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_green_hi@2x.png"; sourceTree = "<group>"; };
+		28BCC7881313AF2D00DE7E26 /* UIButton_green_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_green_lo@2x.png"; sourceTree = "<group>"; };
+		28BCC7891313AF2D00DE7E26 /* UIButton_grey_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_grey_hi@2x.png"; sourceTree = "<group>"; };
+		28BCC78A1313AF2D00DE7E26 /* UIButton_grey_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_grey_lo@2x.png"; sourceTree = "<group>"; };
+		28BCC78B1313AF2D00DE7E26 /* UIButton_orange_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orange_hi@2x.png"; sourceTree = "<group>"; };
+		28BCC78C1313AF2D00DE7E26 /* UIButton_orange_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orange_lo@2x.png"; sourceTree = "<group>"; };
+		28BCC78D1313AF2D00DE7E26 /* UIButton_orangesmall_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orangesmall_hi@2x.png"; sourceTree = "<group>"; };
+		28BCC78E1313AF2D00DE7E26 /* UIButton_orangesmall_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orangesmall_lo@2x.png"; sourceTree = "<group>"; };
+		28BCC78F1313AF2D00DE7E26 /* UIButton_red_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_hi@2x.png"; sourceTree = "<group>"; };
+		28BCC7901313AF2D00DE7E26 /* UIButton_red_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_lo@2x.png"; sourceTree = "<group>"; };
+		28BCC7AA1313B04C00DE7E26 /* structrue.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = structrue.plist; sourceTree = "<group>"; };
+		28BCCAC51314384F00DE7E26 /* StartupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupManager.h; sourceTree = "<group>"; };
+		28BCCAC61314384F00DE7E26 /* StartupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupManager.m; sourceTree = "<group>"; };
+		28BCCAD713143AD700DE7E26 /* FavouritesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavouritesManager.h; path = ../../FavouritesManager.h; sourceTree = "<group>"; };
+		28BCCAD813143AD700DE7E26 /* FavouritesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavouritesManager.m; path = ../../FavouritesManager.m; sourceTree = "<group>"; };
+		28BCCAF013143F2300DE7E26 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
+		28BCCAF113143F2300DE7E26 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
 		28BFD99E12C013210065995E /* FormItemVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormItemVO.h; sourceTree = "<group>"; };
 		28BFD99F12C013210065995E /* FormItemVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormItemVO.m; sourceTree = "<group>"; };
 		28BFD9A212C014B00065995E /* FormData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FormData.plist; sourceTree = "<group>"; };
+		28C2909913093A5E008E0A51 /* services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services.plist; sourceTree = "<group>"; };
+		28C290AB13093A60008E0A51 /* contentStrings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = contentStrings.plist; sourceTree = "<group>"; };
+		28C290AD13093A64008E0A51 /* styles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = styles.plist; sourceTree = "<group>"; };
 		28D62DD312BBF35F0049B613 /* UserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccount.h; sourceTree = "<group>"; };
 		28D62DD412BBF35F0049B613 /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
 		28D62DD712BBF3930049B613 /* UserVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserVO.h; sourceTree = "<group>"; };
@@ -1014,12 +1075,20 @@
 		287857F912B0371400EE2120 /* managers */ = {
 			isa = PBXGroup;
 			children = (
+				28BCCAD713143AD700DE7E26 /* FavouritesManager.h */,
+				28BCCAD813143AD700DE7E26 /* FavouritesManager.m */,
+				28BCCAC51314384F00DE7E26 /* StartupManager.h */,
+				28BCCAC61314384F00DE7E26 /* StartupManager.m */,
+				282689B712DF9A2F007DCDE7 /* UserSettingsManager.h */,
+				282689B812DF9A2F007DCDE7 /* UserSettingsManager.m */,
 				287857FA12B0371400EE2120 /* StringManager.h */,
 				287857FB12B0371400EE2120 /* StringManager.m */,
 				287857FC12B0371400EE2120 /* StyleManager.h */,
 				287857FD12B0371400EE2120 /* StyleManager.m */,
 				28D6E98E12BF5AF00073BB0F /* FormManager.h */,
 				28D6E98F12BF5AF00073BB0F /* FormManager.m */,
+				28BCCAF013143F2300DE7E26 /* SettingsManager.h */,
+				28BCCAF113143F2300DE7E26 /* SettingsManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -1033,10 +1102,57 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		28BCC77A1313AF2D00DE7E26 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				28BCC77B1313AF2D00DE7E26 /* OS3 */,
+				28BCC7861313AF2D00DE7E26 /* OS4 */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		28BCC77B1313AF2D00DE7E26 /* OS3 */ = {
+			isa = PBXGroup;
+			children = (
+				28BCC77C1313AF2D00DE7E26 /* UIButton_green_hi.png */,
+				28BCC77D1313AF2D00DE7E26 /* UIButton_green_lo.png */,
+				28BCC77E1313AF2D00DE7E26 /* UIButton_grey_hi.png */,
+				28BCC77F1313AF2D00DE7E26 /* UIButton_grey_lo.png */,
+				28BCC7801313AF2D00DE7E26 /* UIButton_orange_hi.png */,
+				28BCC7811313AF2D00DE7E26 /* UIButton_orange_lo.png */,
+				28BCC7821313AF2D00DE7E26 /* UIButton_orangesmall_hi.png */,
+				28BCC7831313AF2D00DE7E26 /* UIButton_orangesmall_lo.png */,
+				28BCC7841313AF2D00DE7E26 /* UIButton_red_hi.png */,
+				28BCC7851313AF2D00DE7E26 /* UIButton_red_lo.png */,
+			);
+			path = OS3;
+			sourceTree = "<group>";
+		};
+		28BCC7861313AF2D00DE7E26 /* OS4 */ = {
+			isa = PBXGroup;
+			children = (
+				28BCC7871313AF2D00DE7E26 /* UIButton_green_hi@2x.png */,
+				28BCC7881313AF2D00DE7E26 /* UIButton_green_lo@2x.png */,
+				28BCC7891313AF2D00DE7E26 /* UIButton_grey_hi@2x.png */,
+				28BCC78A1313AF2D00DE7E26 /* UIButton_grey_lo@2x.png */,
+				28BCC78B1313AF2D00DE7E26 /* UIButton_orange_hi@2x.png */,
+				28BCC78C1313AF2D00DE7E26 /* UIButton_orange_lo@2x.png */,
+				28BCC78D1313AF2D00DE7E26 /* UIButton_orangesmall_hi@2x.png */,
+				28BCC78E1313AF2D00DE7E26 /* UIButton_orangesmall_lo@2x.png */,
+				28BCC78F1313AF2D00DE7E26 /* UIButton_red_hi@2x.png */,
+				28BCC7901313AF2D00DE7E26 /* UIButton_red_lo@2x.png */,
+			);
+			path = OS4;
+			sourceTree = "<group>";
+		};
 		28BFD9A112C014930065995E /* plists */ = {
 			isa = PBXGroup;
 			children = (
+				28C290AD13093A64008E0A51 /* styles.plist */,
+				28C290AB13093A60008E0A51 /* contentStrings.plist */,
+				28C2909913093A5E008E0A51 /* services.plist */,
 				28BFD9A212C014B00065995E /* FormData.plist */,
+				28BCC7AA1313B04C00DE7E26 /* structrue.plist */,
 			);
 			name = plists;
 			sourceTree = "<group>";
@@ -1437,6 +1553,7 @@
 		E7FD8F77127821F7002640D0 /* ThirdPartyIcons */ = {
 			isa = PBXGroup;
 			children = (
+				28BCC77A1313AF2D00DE7E26 /* ui */,
 				E7FD8FEB127835B9002640D0 /* glyphish */,
 				E7FD8FEF127835B9002640D0 /* twg */,
 			);
@@ -1456,6 +1573,7 @@
 		E7FD8FEF127835B9002640D0 /* twg */ = {
 			isa = PBXGroup;
 			children = (
+				28BCC72C1313A9BC00DE7E26 /* UITabBar_account.png */,
 				E7FD8FF0127835B9002640D0 /* COPYING */,
 				E7FD8FF1127835B9002640D0 /* icon_arrow_left.png */,
 				E7FD8FF2127835B9002640D0 /* icon_arrow_right.png */,
@@ -1642,6 +1760,31 @@
 				287857CC12B0354700EE2120 /* OATestServer.rb in Resources */,
 				287857CF12B0354700EE2120 /* README in Resources */,
 				28BFD9A312C014B00065995E /* FormData.plist in Resources */,
+				28C2909A13093A5E008E0A51 /* services.plist in Resources */,
+				28C290AC13093A60008E0A51 /* contentStrings.plist in Resources */,
+				28C290AE13093A64008E0A51 /* styles.plist in Resources */,
+				28BCC72D1313A9BC00DE7E26 /* UITabBar_account.png in Resources */,
+				28BCC7911313AF2D00DE7E26 /* UIButton_green_hi.png in Resources */,
+				28BCC7921313AF2D00DE7E26 /* UIButton_green_lo.png in Resources */,
+				28BCC7931313AF2D00DE7E26 /* UIButton_grey_hi.png in Resources */,
+				28BCC7941313AF2D00DE7E26 /* UIButton_grey_lo.png in Resources */,
+				28BCC7951313AF2D00DE7E26 /* UIButton_orange_hi.png in Resources */,
+				28BCC7961313AF2D00DE7E26 /* UIButton_orange_lo.png in Resources */,
+				28BCC7971313AF2D00DE7E26 /* UIButton_orangesmall_hi.png in Resources */,
+				28BCC7981313AF2D00DE7E26 /* UIButton_orangesmall_lo.png in Resources */,
+				28BCC7991313AF2D00DE7E26 /* UIButton_red_hi.png in Resources */,
+				28BCC79A1313AF2D00DE7E26 /* UIButton_red_lo.png in Resources */,
+				28BCC79B1313AF2D00DE7E26 /* UIButton_green_hi@2x.png in Resources */,
+				28BCC79C1313AF2D00DE7E26 /* UIButton_green_lo@2x.png in Resources */,
+				28BCC79D1313AF2D00DE7E26 /* UIButton_grey_hi@2x.png in Resources */,
+				28BCC79E1313AF2D00DE7E26 /* UIButton_grey_lo@2x.png in Resources */,
+				28BCC79F1313AF2D00DE7E26 /* UIButton_orange_hi@2x.png in Resources */,
+				28BCC7A01313AF2D00DE7E26 /* UIButton_orange_lo@2x.png in Resources */,
+				28BCC7A11313AF2D00DE7E26 /* UIButton_orangesmall_hi@2x.png in Resources */,
+				28BCC7A21313AF2D00DE7E26 /* UIButton_orangesmall_lo@2x.png in Resources */,
+				28BCC7A31313AF2D00DE7E26 /* UIButton_red_hi@2x.png in Resources */,
+				28BCC7A41313AF2D00DE7E26 /* UIButton_red_lo@2x.png in Resources */,
+				28BCC7AB1313B04C00DE7E26 /* structrue.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1794,11 +1937,14 @@
 				28D62E1012BBF6F80049B613 /* RKLocationManager.m in Sources */,
 				28D62E1B12BBF7E40049B613 /* Model.m in Sources */,
 				28D62E2212BBF8330049B613 /* TBXMLParser.m in Sources */,
-				28D62E2712BBF8B90049B613 /* MBProgressHUD.m in Sources */,
 				28D62E4212BBFB190049B613 /* AppConstants.m in Sources */,
 				28D6E97612BF4BD00073BB0F /* SuperViewController.m in Sources */,
 				28D6E99012BF5AF00073BB0F /* FormManager.m in Sources */,
 				28BFD9A012C013210065995E /* FormItemVO.m in Sources */,
+				282689B912DF9A2F007DCDE7 /* UserSettingsManager.m in Sources */,
+				28BCCAC71314384F00DE7E26 /* StartupManager.m in Sources */,
+				28BCCAD913143AD700DE7E26 /* FavouritesManager.m in Sources */,
+				28BCCAF213143F2300DE7E26 /* SettingsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

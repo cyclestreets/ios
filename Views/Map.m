@@ -374,7 +374,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 	NSString *selectedRoute = [cycleStreets.files miscValueForKey:@"selectedroute"];
 	if (selectedRoute != nil) {
-		Route *useRoute = [cycleStreets.appDelegate.favourites routeWithIdentifier:[selectedRoute intValue]];
+		Route *useRoute = [[FavouritesManager sharedInstance].dataProvider routeWithIdentifier:[selectedRoute intValue]];
 		[cycleStreets.appDelegate selectRoute:useRoute];
 	}
 	

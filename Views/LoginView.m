@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "LayoutBox.h"
 #import "AppConstants.h"
 #import "StringManager.h"
+#import "GlobalUtilities.h"
 
 static NSString *const STRINGID=@"account";
 
@@ -49,6 +50,7 @@ static NSString *const STRINGID=@"account";
 @implementation LoginView
 @synthesize activeView;
 @synthesize scrollView;
+@synthesize pageControl;
 @synthesize contentView;
 @synthesize loginUsernameField;
 @synthesize loginPasswordField;
@@ -60,10 +62,13 @@ static NSString *const STRINGID=@"account";
 @synthesize registerPsswordField;
 @synthesize registerButton;
 @synthesize registerView;
+@synthesize retrieveEmailField;
+@synthesize retrieveView;
 @synthesize loggedInasField;
 @synthesize logoutButton;
 @synthesize saveLoginButton;
 @synthesize loggedInView;
+@synthesize activePage;
 @synthesize activeFieldIndex;
 @synthesize activeFieldFrame;
 @synthesize activeFieldArray;
@@ -74,9 +79,7 @@ static NSString *const STRINGID=@"account";
 @synthesize activeActivityView;
 @synthesize activeFormMessageLabel;
 @synthesize viewMode;
-@synthesize registerFieldArray;
-@synthesize loginFieldArray;
-
+@synthesize formFieldArray;
 
 //=========================================================== 
 // dealloc
@@ -86,6 +89,7 @@ static NSString *const STRINGID=@"account";
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [activeView release], activeView = nil;
     [scrollView release], scrollView = nil;
+    [pageControl release], pageControl = nil;
     [contentView release], contentView = nil;
     [loginUsernameField release], loginUsernameField = nil;
     [loginPasswordField release], loginPasswordField = nil;
@@ -97,6 +101,8 @@ static NSString *const STRINGID=@"account";
     [registerPsswordField release], registerPsswordField = nil;
     [registerButton release], registerButton = nil;
     [registerView release], registerView = nil;
+    [retrieveEmailField release], retrieveEmailField = nil;
+    [retrieveView release], retrieveView = nil;
     [loggedInasField release], loggedInasField = nil;
     [logoutButton release], logoutButton = nil;
     [saveLoginButton release], saveLoginButton = nil;
@@ -106,11 +112,11 @@ static NSString *const STRINGID=@"account";
     [activeFormSubmitButton release], activeFormSubmitButton = nil;
     [activeActivityView release], activeActivityView = nil;
     [activeFormMessageLabel release], activeFormMessageLabel = nil;
-    [registerFieldArray release], registerFieldArray = nil;
-    [loginFieldArray release], loginFieldArray = nil;
+    [formFieldArray release], formFieldArray = nil;
 	
     [super dealloc];
 }
+
 
 
 //
@@ -126,8 +132,8 @@ static NSString *const STRINGID=@"account";
 	
 	[self initialise];
 	
-	[notifications addObject:LOGINRESPONSE];
-	[notifications addObject:REGISTERRESPONSE];
+	[super.notifications addObject:LOGINRESPONSE];
+	[super.notifications addObject:REGISTERRESPONSE];
 	
 	[super.notifications addObject:UIKeyboardWillShowNotification];
 	[super.notifications addObject:UIKeyboardWillHideNotification];
@@ -142,11 +148,11 @@ static NSString *const STRINGID=@"account";
 	
 	NSDictionary	*dict=[notification userInfo];
 	
-	if([notification.name isEqualToString:LOGINRESPONSE]){
-		
-		[self didReceiveLoginResponse:dict];
-		
+	if([notification.name isEqualToString:LOGINRESPONSE]){		
+		[self didReceiveLoginResponse:dict];		
 	}else if ([notification.name isEqualToString:REGISTERRESPONSE]) {
+		[self didReceiveRegisterResponse:dict];
+	}else if ([notification.name isEqualToString:PASSWORDRETRIEVALRESPONSE]) {
 		[self didReceiveRegisterResponse:dict];
 	}
 	
@@ -196,8 +202,13 @@ static NSString *const STRINGID=@"account";
 	// set up scroll view with layoutbox for sub items
 	contentView=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
 	contentView.backgroundColor=[UIColor clearColor];
-	contentView.layoutMode=BUVerticalLayoutMode;
+	contentView.layoutMode=BUHorizontalLayoutMode;
 	[scrollView addSubview:contentView];
+	
+	activePage=0;
+	scrollView.pagingEnabled=YES;
+	pageControl.hidesForSinglePage=YES;
+	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
 	
 	// add ui and targets to form buttons
@@ -208,6 +219,9 @@ static NSString *const STRINGID=@"account";
 	button=(UIButton*)[registerView viewWithTag:kSubmitButtonTag];
 	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Register"];
 	[button addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	button=(UIButton*)[retrieveView viewWithTag:kSubmitButtonTag];
+	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Submit"];
+	[button addTarget:self action:@selector(retrievePasswordButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// logged in UI
 	[GlobalUtilities styleIBButton:logoutButton type:@"grey" text:@"Reset device"];
@@ -215,14 +229,24 @@ static NSString *const STRINGID=@"account";
 	[saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];
 	
 	
-	loginFieldArray=[NSArray arrayWithObjects:loginUsernameField,loginPasswordField,nil];
-	registerFieldArray=[NSArray arrayWithObjects:registerUsernameField,registerPsswordField,registerUsernameField,registerEmailField,nil];
+	
+	formFieldArray=[[NSMutableArray alloc]init];
+	NSMutableArray *rar=[[NSMutableArray alloc]initWithObjects:registerUsernameField,registerPsswordField,registerVisibleNameField,registerEmailField,nil];
+	[formFieldArray addObject:rar];
+	[rar release];	
+	NSMutableArray *lar=[[NSMutableArray alloc]initWithObjects:loginUsernameField,loginPasswordField,nil];
+	[formFieldArray addObject:lar];
+	[lar release];
+		NSMutableArray *par=[[NSMutableArray alloc]initWithObjects:retrieveEmailField,nil];
+	[formFieldArray addObject:par];
+	[par release];
 	
 }
 
 
 -(void)createNonPersistentUI{
 	
+	[activeActivityView stopAnimating];
 	[contentView removeAllSubViews];
 	
 	switch(viewMode){
@@ -231,25 +255,34 @@ static NSString *const STRINGID=@"account";
 			
 			[contentView addSubview:loggedInView];
 			
-		
+			loggedInasField.text=[UserAccount sharedInstance].user.username;
+			BOOL sl=[UserAccount sharedInstance].user.autoLogin;
+			saveLoginButton.on=sl;
+			
+			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
 		break;
 			
 		case kUserAccountNotLoggedIn:
 			
 			[contentView addSubview:registerView];
 			[contentView addSubview:loginView];
+			[contentView addSubview:retrieveView];
 			
-			loggedInasField.text=[UserAccount sharedInstance].user.username;
-			BOOL sl=[UserAccount sharedInstance].user.autoLogin;
-			saveLoginButton.on=sl;
-			
-			
+			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
 		break;
 		
 		
 	}
 	
-	[scrollView setContentSize:CGSizeMake(SCREENWIDTH, contentView.height)];
+
+	// update page support
+	pageControl.numberOfPages=[contentView.items count];
+	activePage=0;
+	pageControl.currentPage=activePage;
+	[pageControl updateCurrentPageDisplay];
+	scrollView.scrollEnabled=contentView.width>SCREENWIDTH;
+	[self updateFormPage];
+	
 	[scrollView scrollRectToVisible:CGRectMake(0, 0, SCREENWIDTH, 1) animated:YES];
 	
 }
@@ -329,6 +362,47 @@ static NSString *const STRINGID=@"account";
 	}
 }
 
+-(void)didReceivePasswordResponse:(NSDictionary*)dict{
+	
+	NSString	*state=[dict objectForKey:@"state"];
+	
+	if([state isEqualToString:SUCCESS]){
+		[self showMessageUIForView:retrieveView withMessage:[dict objectForKey:MESSAGE]];
+	}else if ([state isEqualToString:ERROR]) {
+		[self showMessageUIForView:retrieveView withMessage:[dict objectForKey:MESSAGE]];
+	}
+}
+
+
+//
+/***********************************************
+ * @description			PAGE EVENTS
+ ***********************************************/
+//
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)sc{
+	
+	CGPoint offset=scrollView.contentOffset;
+	activePage=offset.x/SCREENWIDTH;
+	pageControl.currentPage=activePage;
+	[self updateFormPage];
+}
+
+
+-(IBAction)pageControlValueChanged:(id)sender{
+	
+	UIPageControl *pc=(UIPageControl*)sender;
+	CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
+	[scrollView setContentOffset:offset animated:YES];
+}
+
+
+-(void)updateFormPage{
+	
+	if(viewMode==kUserAccountNotLoggedIn){
+		activeFieldArray=[formFieldArray objectAtIndex:activePage];
+	}
+}
 
 
 
@@ -340,7 +414,7 @@ static NSString *const STRINGID=@"account";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	
-	BetterLog(@"");
+	BetterLog(@"activeFieldIndex=%i",activeFieldIndex);
 	int newfieldIndex=activeFieldIndex+1;
 	
 	if(newfieldIndex==[activeFieldArray count]){
@@ -361,7 +435,7 @@ static NSString *const STRINGID=@"account";
 
 
 - (void)textFieldDidBeginEditing:(UITextField*)textField{
-	BetterLog(@"");
+	
 	activeField=textField;
 	activeFieldFrame=activeField.frame;
 }
@@ -369,8 +443,6 @@ static NSString *const STRINGID=@"account";
 
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 -(void)keyboardWillShow:(NSNotification*)notification{
-	
-	BetterLog(@"");
 	
     if (keyboardIsShown) {
         return;
@@ -392,7 +464,7 @@ static NSString *const STRINGID=@"account";
     CGRect viewFrame = scrollView.frame; 
 	int taboffset=0;
 	if(self.navigationController.tabBarController.hidesBottomBarWhenPushed==NO)
-		taboffset=TABBARHEIGHT;
+		taboffset=TABBARHEIGHT+22;
 	viewFrame.size.height -= (keyboardSize.height-taboffset );
 	
 	//
@@ -404,7 +476,10 @@ static NSString *const STRINGID=@"account";
 	
 	// get and map nested field rect to main view coordinate 
 	CGRect textFieldRect = activeFieldFrame;
-	textFieldRect=[activeField convertRect:textFieldRect toView:self.scrollView ];
+	CGRect newRect=[activeField convertRect:textFieldRect toView:self.scrollView ];
+	
+	textFieldRect=CGRectMake(newRect.origin.x, textFieldRect.origin.y, textFieldRect.size.width, textFieldRect.size.height);
+	
 	
 	CGFloat ypos=textFieldRect.origin.y;
 	if(ypos>0 && ypos>(viewFrame.size.height/2)){
@@ -461,7 +536,6 @@ static NSString *const STRINGID=@"account";
 //	
 
 - (IBAction)loginButtonSelected:(id)sender {
-	DLog(@"didLoginButton");
 	
 	// validate fields
 	NSString  *efieldString=loginUsernameField.text;
@@ -492,9 +566,9 @@ static NSString *const STRINGID=@"account";
 }
 
 - (IBAction)registerButtonSelected:(id)sender {
-	DLog(@">>>");
 	
-	// more complicated form field validation logic required
+	BetterLog(@"");
+	
 	BOOL presult=NO;
 	BOOL eresult=NO;
 	
@@ -513,10 +587,24 @@ static NSString *const STRINGID=@"account";
 		
 	}
 	
+}
+
+
+- (IBAction)retrievePasswordButtonSelected:(id)sender {
 	
+	// more complicated form field validation logic required
+	BOOL presult=NO;
 	
+	if(presult==YES){
+		
+	}else {
+		
+		// show appropriate error message ui
+		
+	}
 	
 }
+
 
 
 -(IBAction)logoutButtonSelected:(id)sender{
@@ -534,6 +622,12 @@ static NSString *const STRINGID=@"account";
 	UISwitch *loginswitch=(UISwitch*)sender;
 	[[UserAccount sharedInstance] updateAutoLoginPreference:loginswitch.on];
 	
+}
+
+
+
+-(IBAction)didCancelButton:(id)sender{
+	[self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
 
