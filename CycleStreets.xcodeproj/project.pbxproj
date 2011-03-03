@@ -11,6 +11,7 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		282689B912DF9A2F007DCDE7 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 282689B812DF9A2F007DCDE7 /* UserSettingsManager.m */; };
 		2872114B129976B70027D98E /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2872114A129976B70027D98E /* blueButton.png */; };
 		2878576612B0354700EE2120 /* NSData+MBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2878566512B0354700EE2120 /* NSData+MBBase64.m */; };
 		2878576712B0354700EE2120 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2878566712B0354700EE2120 /* NSDate+Helper.m */; };
@@ -120,7 +121,6 @@
 		28D62E1012BBF6F80049B613 /* RKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E0A12BBF6F80049B613 /* RKLocationManager.m */; };
 		28D62E1B12BBF7E40049B613 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E1A12BBF7E40049B613 /* Model.m */; };
 		28D62E2212BBF8330049B613 /* TBXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E2112BBF8330049B613 /* TBXMLParser.m */; };
-		28D62E2712BBF8B90049B613 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E2612BBF8B90049B613 /* MBProgressHUD.m */; };
 		28D62E4212BBFB190049B613 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D62E4112BBFB190049B613 /* AppConstants.m */; };
 		28D6E97612BF4BD00073BB0F /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D6E97512BF4BD00073BB0F /* SuperViewController.m */; };
 		28D6E99012BF5AF00073BB0F /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D6E98F12BF5AF00073BB0F /* FormManager.m */; };
@@ -286,6 +286,8 @@
 		1D3623250D0F684500981E51 /* CycleStreetsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CycleStreetsAppDelegate.m; path = Classes/CycleStreetsAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		282689B712DF9A2F007DCDE7 /* UserSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettingsManager.h; sourceTree = "<group>"; };
+		282689B812DF9A2F007DCDE7 /* UserSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettingsManager.m; sourceTree = "<group>"; };
 		2872114A129976B70027D98E /* blueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueButton.png; path = Neil/blueButton.png; sourceTree = SOURCE_ROOT; };
 		2878566412B0354700EE2120 /* NSData+MBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MBBase64.h"; sourceTree = "<group>"; };
 		2878566512B0354700EE2120 /* NSData+MBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MBBase64.m"; sourceTree = "<group>"; };
@@ -1014,6 +1016,8 @@
 		287857F912B0371400EE2120 /* managers */ = {
 			isa = PBXGroup;
 			children = (
+				282689B712DF9A2F007DCDE7 /* UserSettingsManager.h */,
+				282689B812DF9A2F007DCDE7 /* UserSettingsManager.m */,
 				287857FA12B0371400EE2120 /* StringManager.h */,
 				287857FB12B0371400EE2120 /* StringManager.m */,
 				287857FC12B0371400EE2120 /* StyleManager.h */,
@@ -1794,11 +1798,11 @@
 				28D62E1012BBF6F80049B613 /* RKLocationManager.m in Sources */,
 				28D62E1B12BBF7E40049B613 /* Model.m in Sources */,
 				28D62E2212BBF8330049B613 /* TBXMLParser.m in Sources */,
-				28D62E2712BBF8B90049B613 /* MBProgressHUD.m in Sources */,
 				28D62E4212BBFB190049B613 /* AppConstants.m in Sources */,
 				28D6E97612BF4BD00073BB0F /* SuperViewController.m in Sources */,
 				28D6E99012BF5AF00073BB0F /* FormManager.m in Sources */,
 				28BFD9A012C013210065995E /* FormItemVO.m in Sources */,
+				282689B912DF9A2F007DCDE7 /* UserSettingsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

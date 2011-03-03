@@ -57,14 +57,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(FormManager);
 
 -(void)loadFormByID:(NSString*)formid;
 -(BOOL)popuplateFormView:(UIView*)formview withID:(NSString*)formid;
--(BOOL)validateFormForId:(NSString*)formid;
+-(FormManagerError)validateFormForId:(NSString*)formid;
 -(NSMutableArray*)errorArrayForForm:(NSString*)formid;
 
-// validators
--(BOOL)validateEmail:(NSString*)str;
--(BOOL)validatURL:(NSString*)str;
--(BOOL)validateLength:(NSString*)str;
--(BOOL)validateString:(NSString*) forRegEx:(NSString*)regex;
--(BOOL)validateValueInRange:(int)value minValue:(int)min  maxValue:(int)max;
 
 @end

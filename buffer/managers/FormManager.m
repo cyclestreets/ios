@@ -11,6 +11,7 @@
 #import "StringManager.h"
 #import "GlobalUtilities.h"
 #import "RegexKitLite.h"
+#import "FormItemVO.h"
 
 
 static NSString *const FORMVALIDATEEMAIL=@"FORMVALIDATEEMAIL";
@@ -24,11 +25,11 @@ static NSString *const FORMVALIDATEREGEX=@"FORMVALIDATEREGEX";
 
 -(NSString*)formTypeToString:(FormManagerFieldType)type;
 
--(BOOL)validateValueInRange:(int)value minValue:(int)min  maxValue:(int)max
--(BOOL)validateString:(NSString*)str forRegEx:(NSString*)regex;
--(BOOL)validateLength:(NSString*)str forLength:(int)length;
--(BOOL)validatURL:(NSString *)str;
--(BOOL)validateEmail:(NSString*)str;
+-(BOOL)validateValueInRange:(int)value withParams:(NSDictionary*)parameters;
+-(BOOL)validateString:(NSString*)str withParams:(NSString*)parameters;
+-(BOOL)validateLength:(NSString*)str  withParams:(NSDictionary*)parameters;
+-(BOOL)validatURL:(NSString *)str  withParams:(id)parameters;
+-(BOOL)validateEmail:(NSString*)str withParams:(id)parameters;
 
 -(NSString*)dataPath;
 -(void)loadFormDataFile;
@@ -77,7 +78,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 					   [NSValue valueWithPointer:@selector(validateURL:)],FORMVALIDATEURL,
 					   [NSValue valueWithPointer:@selector(validateLength:forLength:)],FORMVALIDATEMIN,
 						[NSValue valueWithPointer:@selector(validateString:forRegEx:)],FORMVALIDATEREGEX,
-						 [NSValue valueWithPointer:@selector(validateValueInRange:minValue:maxValue:)],FORMVALIDATERANGE
+						 [NSValue valueWithPointer:@selector(validateValueInRange:minValue:maxValue:)],FORMVALIDATERANGE,
 					   nil];
 		
 		[self loadFormDataFile];
@@ -111,6 +112,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 	
 	// can set field params & switch/slider options from config plist
 	
+	return YES;
+	
 }
 
 
@@ -125,16 +128,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 		for(FormItemVO *formitem in activeFormFieldArray){
 			
 			// NOTE: all form methods need same signatue
-			SEL vaidatemethod=[[validateMethods objectForKey:type] pointerValue];
-			[self performSelector:validatemethod withObject:formitem.target withObject:formitem.parameters];
+			//SEL validatemethod=[[validateMethods objectForKey:formitem.validateType] pointerValue];
+			//[self performSelector:validatemethod withObject:formitem.target withObject:formitem.parameters];
 			
 			
 		}
+		return kFormManagerErrorNone;
 		
-	}else {
-		return kFormManagerErrorNotFound;
 	}
-
+	
+	return kFormManagerErrorNotFound;
 	
 }
 
@@ -143,7 +146,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 	
 	// if has error, return error array for ui highlighting
 	
-	
+	return nil;
 }
 
 
@@ -153,23 +156,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
  ***********************************************/
 //
 
--(BOOL)validateEmail:(NSString*)str withParams(id)parameters{
+-(BOOL)validateEmail:(NSString*)str withParams:(id)parameters{
 	return [GlobalUtilities validateEmail:str]; 
 }
 
--(BOOL)validatURL:(NSString *)str  withParams(id)parameters{
-	return [GlobalUtilities validateURL:str];
+-(BOOL)validatURL:(NSString *)str  withParams:(id)parameters{
+	// [GlobalUtilities validateURL:str];
+	return YES;
 }
 
 
--(BOOL)validateLength:(NSString*)str  withParams(NSDictionary*)parameters{
+-(BOOL)validateLength:(NSString*)str  withParams:(NSDictionary*)parameters{
+	int length=1;
 	return [str length]>=length;
 }
 
 -(BOOL)validateString:(NSString*)str withParams:(NSString*)parameters{
 	
-	if ([regex isRegexValid]){
-		return [str isMatchedByRegex:regex];
+	if ([parameters isRegexValid]){
+		return [str isMatchedByRegex:parameters];
 	}else {
 		return NO;
 	}
@@ -184,6 +189,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 	
 	// conforms to required input formatting
 	
+	return YES;
 }
 
 
@@ -193,7 +199,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 	// is valid date
 	
 	// is in future
-	
+	return YES;
 }
 
 // is > date (ie age restrictions)
@@ -202,12 +208,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 	// is valid date
 	
 	// date< min date
-	
+	return YES;
 }
 
 
 // value>min && value<max
--(BOOL)validateValueInRange:(NSNumber*)value withParams(NSDictionary*)parameters{
+-(BOOL)validateValueInRange:(int)value withParams:(NSDictionary*)parameters{
 	
 	return NO;
 	
@@ -221,15 +227,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 	switch(type){
 		
 		case kFormFieldTypeTextField:
-			return 
+			return @"UITextField";
 		break;
 		case kFormFieldTypeSliderType:
-			
+			return @"UISlider";
 		break;
 		case kFormFieldTypeSwitchType:
-			
+			return @"UISwitch";
 		break;
 		
+		default:
+			return nil;
+			break;
+			
 	}
 }
 
@@ -250,9 +260,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 				NSDictionary *formitem=[formviewdict objectForKey:formkey];
 				FormItemVO *formvo=[[FormItemVO alloc]init];
 				for(NSString *key in formitem){
-					[formvo setValue:[formitem objectForKey:@"key" forKey:key]];
+					[formvo setValue:[formitem objectForKey:@"key"] forKey:key];
 				}
 				[formviewdict setValue:formvo forKey:formkey];
+				[formvo release];
 			}
 		}
 		
@@ -260,7 +271,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 		
 	}else {
 		
-		[self stylesheetFailed];
+		//[self stylesheetFailed];
 	}
 	
 }
