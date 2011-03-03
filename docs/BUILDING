@@ -1,0 +1,25 @@
+Installation:
+
+1) Download the CycleStreets repo from https://github.com/cyclestreets/ios
+
+2) Checkout the route-me svn repo from google code from http://route-me.googlecode.com/svn/trunk/ route-me-read-only
+
+3) Open the CycleStreets project and open the Info window for the MapView.xcodeproj, re-link the project to the MapView.xcodeproj file in the route-me download. (ensure the path type is Relative to Project)
+
+4) Select and copy the path attribute down to the MapView directory ie. 
+for a path of ../../iPhone/libs/RouteMe/MapView/MapView.xcodeproj  copy ../../iPhone/libs/RouteMe/MapView
+
+5) Open the MapView.xcodeproj and tick the dependency check box for libMapView.a
+
+6) Double click the CycleSteets target and in the General Tab add a Direct Dependency to the MapView lib in MapView.xcodeproj
+
+7) In the Build Tab add the copied MapView directory path to the User Header Search Paths entry and tick recursive.
+
+8) Close the Target and open the Project Build Tab and add the same MapView directory path to the User Header Search Paths entry there too.
+
+All should now compile fine with no Errors or Warnings.
+
+Note:
+We have 1 Static Analyser issue flagged with Route Me, Im currently of the thinking this is spurious.
+
+Neil Edwards 20/11/2010

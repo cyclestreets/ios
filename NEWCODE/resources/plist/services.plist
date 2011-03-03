@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Register</key>
+	<dict>
+		<key>id</key>
+		<string>Register</string>
+		<key>remoteurl</key>
+		<string>https://www.cyclestreets.net/api/usercreate.xml</string>
+		<key>method</key>
+		<string>Register</string>
+		<key>type</key>
+		<string>GETPOST</string>
+		<key>cache</key>
+		<false/>
+	</dict>
+	<key>Login</key>
+	<dict>
+		<key>id</key>
+		<string>Login</string>
+		<key>remoteurl</key>
+		<string>https://www.cyclestreets.net/api/usercreate.xml</string>
+		<key>method</key>
+		<string>Login</string>
+		<key>type</key>
+		<string>GETPOST</string>
+		<key>cache</key>
+		<false/>
+	</dict>
+	<key>ForgottenPassword</key>
+	<dict>
+		<key>id</key>
+		<string>ForgottenPassword</string>
+		<key>remoteurl</key>
+		<string>https://www.cyclestreets.net/api/usercreate.xml</string>
+		<key>type</key>
+		<string>GETPOST</string>
+		<key>cache</key>
+		<false/>
+	</dict>
+</dict>
+</plist>

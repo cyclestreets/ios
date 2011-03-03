@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Register</key>
+	<dict>
+		<key>UserName</key>
+		<dict>
+			<key>itemid</key>
+			<string>username</string>
+			<key>validateType</key>
+			<string>FORMVALIDATEMIN</string>
+			<key>mandatory</key>
+			<true/>
+			<key>errorString</key>
+			<string>User names must be 6 characters or more.</string>
+			<key>itemType</key>
+			<string>UITextField</string>
+			<key>parameters</key>
+			<dict>
+				<key>min</key>
+				<integer>6</integer>
+			</dict>
+		</dict>
+		<key>Password</key>
+		<dict>
+			<key>itemid</key>
+			<string>password</string>
+			<key>validateType</key>
+			<string>FORMVALIDATEMIN</string>
+			<key>mandatory</key>
+			<true/>
+			<key>errorString</key>
+			<string>Passwords must be 6 characters or more.</string>
+			<key>itemType</key>
+			<string>UITextField</string>
+			<key>parameters</key>
+			<dict>
+				<key>min</key>
+				<integer>6</integer>
+			</dict>
+		</dict>
+		<key>VisibleName</key>
+		<dict>
+			<key>itemid</key>
+			<string>visiblename</string>
+			<key>validateType</key>
+			<string>FORMVALIDATEMIN</string>
+			<key>mandatory</key>
+			<false/>
+			<key>errorString</key>
+			<string>Visible names must be 6 characters or more.</string>
+			<key>itemType</key>
+			<string>UITextField</string>
+			<key>parameters</key>
+			<dict>
+				<key>min</key>
+				<integer>6</integer>
+			</dict>
+		</dict>
+		<key>Email</key>
+		<dict>
+			<key>itemid</key>
+			<string>email</string>
+			<key>validateType</key>
+			<string>FORMVALIDATEEMAIL</string>
+			<key>mandatory</key>
+			<true/>
+			<key>errorString</key>
+			<string>This email is invalid.</string>
+			<key>itemType</key>
+			<string>UITextField</string>
+			<key>parameters</key>
+			<dict/>
+		</dict>
+	</dict>
+	<key>Login</key>
+	<dict>
+		<key>UserName</key>
+		<dict>
+			<key>itemid</key>
+			<string>username</string>
+			<key>validateType</key>
+			<string>FORMVALIDATEMIN</string>
+			<key>mandatory</key>
+			<true/>
+			<key>errorString</key>
+			<string>User names must be 6 characters or more.</string>
+			<key>itemType</key>
+			<string>UITextField</string>
+			<key>parameters</key>
+			<dict>
+				<key>min</key>
+				<integer>6</integer>
+			</dict>
+		</dict>
+		<key>Password</key>
+		<dict>
+			<key>itemid</key>
+			<string>password</string>
+			<key>validateType</key>
+			<string>FORMVALIDATEMIN</string>
+			<key>mandatory</key>
+			<true/>
+			<key>errorString</key>
+			<string>Passwords must be 6 characters or more.</string>
+			<key>itemType</key>
+			<string>UITextField</string>
+			<key>parameters</key>
+			<dict>
+				<key>min</key>
+				<integer>6</integer>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>
