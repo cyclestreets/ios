@@ -477,6 +477,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void) runQuery:(Query *)query {
 	[busyAlert show:@"Obtaining route from CycleStreets.net"];
+	NSLog(@"[DEBUG] For Query = %@",[query description]);
 	[query runWithTarget:self onSuccess:@selector(querySuccess:results:) onFailure:@selector(queryFailure:message:)];
 	
 }

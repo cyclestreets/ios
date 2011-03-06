@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "AppConstants.h"
 #import "StringManager.h"
 #import "GlobalUtilities.h"
+#import "ViewUtilities.h"
 
 static NSString *const STRINGID=@"account";
 
@@ -214,6 +215,7 @@ static NSString *const STRINGID=@"account";
 	
 	activePage=0;
 	scrollView.pagingEnabled=YES;
+	scrollView.delegate=self;
 	pageControl.hidesForSinglePage=YES;
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
@@ -251,6 +253,13 @@ static NSString *const STRINGID=@"account";
 	
 	if(isModal==YES)
 		[self createNavigationBarUI];
+	
+	
+	if(isModal==YES){
+		CGRect pframe=pageControlView.frame;
+		pframe.origin.y=pframe.origin.y+TABBARHEIGHT;
+		pageControlView.frame=pframe;
+	}
 	
 }
 
@@ -296,16 +305,14 @@ static NSString *const STRINGID=@"account";
 	
 	[scrollView scrollRectToVisible:CGRectMake(0, 0, SCREENWIDTH, 1) animated:YES];
 	
-	if(isModal==YES){
-		CGRect pframe=pageControlView.frame;
-		pframe.origin.y=420.0f;
-		pageControlView.frame=pframe;
-	}
+	self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
 	
 }
 
 
 -(void)createNavigationBarUI{
+	
+	if(navigation==nil){
 	
 	navigation=[[CustomNavigtionBar alloc]init];
 	self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
@@ -316,8 +323,7 @@ static NSString *const STRINGID=@"account";
 	navigation.navigationItem=self.navigationItem;
 	[navigation createNavigationUI];
 	
-	
-	
+	}
 }
 
 
@@ -436,6 +442,7 @@ static NSString *const STRINGID=@"account";
 -(void)updateFormPage{
 	
 	if(viewMode==kUserAccountNotLoggedIn){
+		
 		activeFieldArray=[formFieldArray objectAtIndex:activePage];
 	}
 }
@@ -472,6 +479,7 @@ static NSString *const STRINGID=@"account";
 
 - (void)textFieldDidBeginEditing:(UITextField*)textField{
 	
+	activeFieldIndex=textField.tag;
 	activeField=textField;
 	activeFieldFrame=activeField.frame;
 }
@@ -664,6 +672,15 @@ static NSString *const STRINGID=@"account";
 
 -(IBAction)didCancelButton:(id)sender{
 	[self.navigationController dismissModalViewControllerAnimated:YES];
+}
+
+
+-(IBAction)doNavigationSelector:(NSString*)type{
+	
+	if([type isEqualToString:RIGHT]){
+		[self.navigationController dismissModalViewControllerAnimated:YES];
+	}
+	
 }
 
 
