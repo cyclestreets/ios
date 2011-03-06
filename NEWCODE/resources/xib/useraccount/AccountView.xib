@@ -12,11 +12,11 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="67"/>
-			<integer value="66"/>
-			<integer value="1"/>
-			<integer value="65"/>
 			<integer value="96"/>
+			<integer value="66"/>
+			<integer value="67"/>
+			<integer value="65"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -5471,6 +5471,14 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<int key="connectionID">115</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pageControlView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="754050158"/>
+					</object>
+					<int key="connectionID">119</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -6025,7 +6033,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">117</int>
+			<int key="maxID">119</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6117,6 +6125,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>loginView</string>
 							<string>logoutButton</string>
 							<string>pageControl</string>
+							<string>pageControlView</string>
 							<string>registerButton</string>
 							<string>registerEmailField</string>
 							<string>registerPsswordField</string>
@@ -6143,6 +6152,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UIPageControl</string>
+							<string>UIView</string>
 							<string>UIButton</string>
 							<string>UITextField</string>
 							<string>UITextField</string>
@@ -6172,6 +6182,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>loginView</string>
 							<string>logoutButton</string>
 							<string>pageControl</string>
+							<string>pageControlView</string>
 							<string>registerButton</string>
 							<string>registerEmailField</string>
 							<string>registerPsswordField</string>
@@ -6236,6 +6247,10 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<object class="IBToOneOutletInfo">
 								<string key="name">pageControl</string>
 								<string key="candidateClassName">UIPageControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">pageControlView</string>
+								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">registerButton</string>

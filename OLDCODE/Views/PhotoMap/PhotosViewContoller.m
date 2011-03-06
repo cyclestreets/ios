@@ -406,7 +406,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		if (self.loginView == nil) {
 			self.loginView = [[[AccountViewController alloc] initWithNibName:@"LoginView" bundle:nil] autorelease];
 		}
-		[self presentModalViewController:self.loginView animated:YES];
+		self.loginView.isModal=YES;
+		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
+		[self presentModalViewController:nav animated:YES];
+		[nav release];
 	} else {
 		[self sendPhoto];
 	}

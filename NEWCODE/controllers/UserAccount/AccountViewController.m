@@ -51,6 +51,7 @@ static NSString *const STRINGID=@"account";
 @synthesize activeView;
 @synthesize scrollView;
 @synthesize pageControl;
+@synthesize pageControlView;
 @synthesize contentView;
 @synthesize loginUsernameField;
 @synthesize loginPasswordField;
@@ -80,16 +81,17 @@ static NSString *const STRINGID=@"account";
 @synthesize activeFormMessageLabel;
 @synthesize viewMode;
 @synthesize formFieldArray;
+@synthesize isModal;
 
-//=========================================================== 
+/***********************************************************/
 // dealloc
-//=========================================================== 
+/***********************************************************/
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [activeView release], activeView = nil;
     [scrollView release], scrollView = nil;
     [pageControl release], pageControl = nil;
+    [pageControlView release], pageControlView = nil;
     [contentView release], contentView = nil;
     [loginUsernameField release], loginUsernameField = nil;
     [loginPasswordField release], loginPasswordField = nil;
@@ -116,6 +118,8 @@ static NSString *const STRINGID=@"account";
 	
     [super dealloc];
 }
+
+
 
 
 
@@ -177,6 +181,8 @@ static NSString *const STRINGID=@"account";
 
 - (void)viewDidLoad {
 	
+	BetterLog(@"");
+	
 	viewMode=kUserAccountLoggedIn;
 	
 	[self createPersistentUI];
@@ -212,6 +218,7 @@ static NSString *const STRINGID=@"account";
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
 	
+	
 	// add ui and targets to form buttons
 	UIButton *button=nil;
 	button=(UIButton*)[loginView viewWithTag:kSubmitButtonTag];
@@ -241,6 +248,9 @@ static NSString *const STRINGID=@"account";
 		NSMutableArray *par=[[NSMutableArray alloc]initWithObjects:retrieveEmailField,nil];
 	[formFieldArray addObject:par];
 	[par release];
+	
+	if(isModal==YES)
+		[self createNavigationBarUI];
 	
 }
 
@@ -286,7 +296,32 @@ static NSString *const STRINGID=@"account";
 	
 	[scrollView scrollRectToVisible:CGRectMake(0, 0, SCREENWIDTH, 1) animated:YES];
 	
+	if(isModal==YES){
+		CGRect pframe=pageControlView.frame;
+		pframe.origin.y=420.0f;
+		pageControlView.frame=pframe;
+	}
+	
 }
+
+
+-(void)createNavigationBarUI{
+	
+	navigation=[[CustomNavigtionBar alloc]init];
+	self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
+	navigation.delegate=self;
+	navigation.leftItemType=BUNavNoneType;
+	navigation.rightItemType=UIKitButtonType;
+	navigation.rightButtonTitle=@"Close";
+	navigation.navigationItem=self.navigationItem;
+	[navigation createNavigationUI];
+	
+	
+	
+}
+
+
+
 
 //
 /***********************************************
