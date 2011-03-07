@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<wfs:FeatureCollection xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:cs="http://www.cyclestreets.net/schema/xml/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengeospatial.net//wfs/1.0.0/WFS-basic.xsd">
+	<gml:featureMember>
+		<cs:route>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.1035,52.211433 0.103453,52.211361 0.104061,52.211365 0.104842,52.211365 0.10539,52.211349 0.105934,52.211277 0.10654,52.211174 0.106575,52.211166 0.107496,52.210983 0.109084,52.210766 0.110403,52.210529 0.11044,52.21059 0.110772,52.211056 0.111303,52.211517 0.11153,52.211624 0.112407,52.211189 0.112505,52.211269 0.112849,52.2117 0.113271,52.211475 0.113602,52.21133 0.113837,52.211266 0.11436,52.211216 0.114578,52.21106 0.115036,52.210705</gml:coordinates>
+			</gml:LineString>
+			<cs:start>Storey's Way</cs:start>
+			<cs:finish>Northampton Street, A1134</cs:finish>
+			<cs:start_longitude>0.103761</cs:start_longitude>
+			<cs:start_latitude>52.211517</cs:start_latitude>
+			<cs:startBearing>0</cs:startBearing>
+			<cs:startSpeed>0</cs:startSpeed>
+			<cs:finish_longitude>0.115091</cs:finish_longitude>
+			<cs:finish_latitude>52.210995</cs:finish_latitude>
+			<cs:crow_fly_distance>774</cs:crow_fly_distance>
+			<cs:event>depart</cs:event>
+			<cs:whence>2011-03-07 19:51:24</cs:whence>
+			<cs:speed>20</cs:speed>
+			<cs:itinerary>525581</cs:itinerary>
+			<cs:clientRouteId>0</cs:clientRouteId>
+			<cs:plan>balanced</cs:plan>
+			<cs:note/>
+			<cs:length>975</cs:length>
+			<cs:time>261</cs:time>
+			<cs:busynance>2049</cs:busynance>
+			<cs:quietness>48</cs:quietness>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>3</cs:signalledCrossings>
+			<cs:west>0.103761</cs:west>
+			<cs:south>52.210995</cs:south>
+			<cs:east>0.115091</cs:east>
+			<cs:north>52.211517</cs:north>
+			<cs:name>Storey's Way to Northampton Street, A1134</cs:name>
+			<cs:walk>0</cs:walk>
+			<cs:type>route</cs:type>
+			<cs:leaving>2011-03-07 19:51:24</cs:leaving>
+			<cs:arriving>2011-03-07 19:55:45</cs:arriving>
+		</cs:route>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.1035,52.211433 0.103453,52.211361</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Storey's Way</cs:name>
+			<cs:flow>against</cs:flow>
+			<cs:distance>9</cs:distance>
+			<cs:time>2</cs:time>
+			<cs:busynance>9</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>202</cs:startBearing>
+			<cs:turn>straight on</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>0</cs:signalledCrossings>
+			<cs:provisionName>pedestrian</cs:provisionName>
+			<cs:color>#DD0000</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.1035,52.211433 0.103453,52.211361</cs:points>
+			<cs:distances>0,9</cs:distances>
+			<cs:elevations>16,16</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.103453,52.211361 0.104061,52.211365 0.104842,52.211365 0.10539,52.211349 0.105934,52.211277 0.10654,52.211174</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Madingley Road, A1303</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>212</cs:distance>
+			<cs:time>72</cs:time>
+			<cs:busynance>518</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>89</cs:startBearing>
+			<cs:turn>sharp left</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>1</cs:signalledCrossings>
+			<cs:provisionName>bridleway</cs:provisionName>
+			<cs:color>#B06840</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.103453,52.211361 0.104061,52.211365 0.104842,52.211365 0.10539,52.211349 0.105934,52.211277 0.10654,52.211174</cs:points>
+			<cs:distances>0,41,53,37,38,43</cs:distances>
+			<cs:elevations>16,13,15,15,15,16</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.10654,52.211174 0.106575,52.211166 0.107496,52.210983 0.109084,52.210766 0.110403,52.210529</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Madingley Road</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>274</cs:distance>
+			<cs:time>68</cs:time>
+			<cs:busynance>479</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>110</cs:startBearing>
+			<cs:turn>straight on</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>1</cs:signalledCrossings>
+			<cs:provisionName>bridleway</cs:provisionName>
+			<cs:color>#B06840</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.10654,52.211174 0.106575,52.211166 0.107496,52.210983 0.109084,52.210766 0.110403,52.210529</cs:points>
+			<cs:distances>0,3,66,111,94</cs:distances>
+			<cs:elevations>16,16,16,17,17</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.110403,52.210529 0.11044,52.21059 0.110772,52.211056 0.111303,52.211517</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Lady Margaret Road, A1134</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>126</cs:distance>
+			<cs:time>24</cs:time>
+			<cs:busynance>504</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>20</cs:startBearing>
+			<cs:turn>turn left</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>0</cs:signalledCrossings>
+			<cs:provisionName>bridleway</cs:provisionName>
+			<cs:color>#B06840</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.110403,52.210529 0.11044,52.21059 0.110772,52.211056 0.111303,52.211517</cs:points>
+			<cs:distances>0,7,56,63</cs:distances>
+			<cs:elevations>17,17,17,17</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.111303,52.211517 0.11153,52.211624</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Albion Row, A1134</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>20</cs:distance>
+			<cs:time>4</cs:time>
+			<cs:busynance>80</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>52</cs:startBearing>
+			<cs:turn>bear right</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>0</cs:signalledCrossings>
+			<cs:provisionName>bridleway</cs:provisionName>
+			<cs:color>#B06840</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.111303,52.211517 0.11153,52.211624</cs:points>
+			<cs:distances>0,20</cs:distances>
+			<cs:elevations>17,17</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.11153,52.211624 0.112407,52.211189</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Haymarket Road</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>77</cs:distance>
+			<cs:time>26</cs:time>
+			<cs:busynance>181</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>129</cs:startBearing>
+			<cs:turn>turn right</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>0</cs:signalledCrossings>
+			<cs:provisionName>pedestrian</cs:provisionName>
+			<cs:color>#DD0000</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.11153,52.211624 0.112407,52.211189</cs:points>
+			<cs:distances>0,77</cs:distances>
+			<cs:elevations>17,15</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.112407,52.211189 0.112505,52.211269 0.112849,52.2117</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Pound Hill</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>64</cs:distance>
+			<cs:time>11</cs:time>
+			<cs:busynance>74</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>37</cs:startBearing>
+			<cs:turn>turn left</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>0</cs:signalledCrossings>
+			<cs:provisionName>pedestrian</cs:provisionName>
+			<cs:color>#DD0000</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.112407,52.211189 0.112505,52.211269 0.112849,52.2117</cs:points>
+			<cs:distances>0,11,53</cs:distances>
+			<cs:elevations>15,18,18</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.112849,52.2117 0.113271,52.211475 0.113602,52.21133 0.113837,52.211266 0.11436,52.211216</gml:coordinates>
+			</gml:LineString>
+			<cs:name>St Peter's Street</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>120</cs:distance>
+			<cs:time>22</cs:time>
+			<cs:busynance>142</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>131</cs:startBearing>
+			<cs:turn>turn right</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>0</cs:signalledCrossings>
+			<cs:provisionName>pedestrian</cs:provisionName>
+			<cs:color>#DD0000</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.112849,52.2117 0.113271,52.211475 0.113602,52.21133 0.113837,52.211266 0.11436,52.211216</cs:points>
+			<cs:distances>0,38,28,18,36</cs:distances>
+			<cs:elevations>18,19,19,17,13</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+	<gml:featureMember>
+		<cs:segment>
+			<gml:LineString srsName="EPSG:4326">
+				<gml:coordinates>0.11436,52.211216 0.114578,52.21106 0.115036,52.210705</gml:coordinates>
+			</gml:LineString>
+			<cs:name>Castle Street, NCN 51</cs:name>
+			<cs:flow>with</cs:flow>
+			<cs:distance>73</cs:distance>
+			<cs:time>32</cs:time>
+			<cs:busynance>62</cs:busynance>
+			<cs:walk>0</cs:walk>
+			<cs:startBearing>139</cs:startBearing>
+			<cs:turn>bear right</cs:turn>
+			<cs:signalledJunctions>0</cs:signalledJunctions>
+			<cs:signalledCrossings>1</cs:signalledCrossings>
+			<cs:provisionName>secondary</cs:provisionName>
+			<cs:color>#B06840</cs:color>
+			<cs:type>segment</cs:type>
+			<cs:points>0.11436,52.211216 0.114578,52.21106 0.115036,52.210705</cs:points>
+			<cs:distances>0,23,50</cs:distances>
+			<cs:elevations>13,13,14</cs:elevations>
+		</cs:segment>
+	</gml:featureMember>
+</wfs:FeatureCollection>

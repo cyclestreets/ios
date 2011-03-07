@@ -2133,7 +2133,7 @@
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = Debug;
@@ -2162,7 +2162,7 @@
 				PRODUCT_NAME = CycleStreets;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2185,7 +2185,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = Debug;
@@ -2204,7 +2204,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AD4733E4-A310-4C9F-ADED-3FB48D3A75C9";
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = Release;
@@ -2225,7 +2225,7 @@
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "D9304724-AFB4-4AD9-BCF1-3835AD49BEE8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA703724-0B4E-4CC3-B6B4-E0A481327D7D";
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
 			name = "Adhoc Distribution";
@@ -2251,7 +2251,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};

@@ -49,4 +49,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	
 }
 
+-(void)saveData:(NSDictionary*)dict{
+	
+	self.dataProvider=dict;
+	[self loadData];
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	[cycleStreets.files setSettings:dataProvider];	
+	
+}
+
 @end

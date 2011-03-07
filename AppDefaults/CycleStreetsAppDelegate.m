@@ -122,93 +122,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	DLog(@"application didFinishLaunchingWithOptions");
 
-	// Override point for customization after application launch
 	
 	startupmanager=[[StartupManager alloc]init];
 	startupmanager.delegate=self;
 	[startupmanager doStartupSequence];
-	
-	
-	/*
-	
-	DLog(@"reachability checked.");
-	
-	// navigation controller
-	
-	
-	// The map
-	map = [[Map alloc] init];
-	UITabBarItem *mapTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Plan route" image:[UIImage imageNamed:@"icon_window_globe.png"] tag:1];
-	[map setTabBarItem:mapTabBarItem];
-	[mapTabBarItem release];
-	
-	DLog(@"map view up.");
-	
-	// The photo map
-	photoMap = [[PhotoMap alloc] init];
-	UITabBarItem *photoMapTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Photomap" image:[UIImage imageNamed:@"icon_film.png"] tag:8];
-	[photoMap setTabBarItem:photoMapTabBarItem];
-	[photoMapTabBarItem release];
-	
-	DLog(@"photomap up.");
-	
-	// The route table
-	routeTable = [[RouteTable alloc] init];
-	UITabBarItem *resultsTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Itinerary" image:[UIImage imageNamed:@"icon_list_bullets.png"] tag:2];
-	[routeTable setTabBarItem:resultsTabBarItem];
-	routeTabBarItem = resultsTabBarItem;
-	routeTabBarItem.enabled = NO;
-	
-	DLog(@"itinerary view up.");
-	
-	// The settings tab
-	settings = [[Settings alloc] initWithNibName:@"Settings" bundle:nil];
-	settingsNavigation = [self setupNavigationTab:settings withTitle:@"Settings" imageNamed:@"icon_magnify_glass.png" tag:3];
-	
-	// The settings tab
-	login = [[LoginView alloc] initWithNibName:@"LoginView" bundle:nil];
-	[self setupNavigationTab:login withTitle:@"Account" imageNamed:@"UITabBar_account.png" tag:4];
-	
-	DLog(@"settings tab up.");
-	
-	// Favourites
-	favourites = [[Favourites alloc] init];
-	favouritesNavigation = [self setupNavigationTab:favourites withTitle:@"My saved routes" imageNamed:@"icon_favorities.png" tag:5];
-	
-	DLog(@"favourites up.");
-	
-	// Photos
-	photos = [[Photos alloc] init];
-	UITabBarItem *photosTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Add photo" image:[UIImage imageNamed:@"icon_photo.png"] tag:6];
-	[photos setTabBarItem:photosTabBarItem];
-	[photosTabBarItem release];
-	
-	DLog(@"photos up.");
-	
-	// Credits
-	credits = [self setupNavigationTab:[[Credits alloc] init] withTitle:@"Credits" imageNamed:@"icon_information.png" tag:7];
-	
-	DLog(@"credits up.");
-	
-	// Donate
-	//commented out because Apple doesn't allow in-app donations.
-	/*
-	donate = [[Donate alloc] init];
-	UITabBarItem *donateTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Donate" image:[UIImage imageNamed:@"icon_dollar.png"] tag:9];
-	[donate setTabBarItem:donateTabBarItem];
-	[donateTabBarItem release];
-	
-	DLog(@"donate up.");
-	
-	
-	// put the tabbed views into the controller
-	NSArray *tabbedViews = [NSArray arrayWithObjects: map, routeTable, photoMap, photos, favouritesNavigation, settingsNavigation, login, credits, donate, nil];
-	[tabBarController setViewControllers: tabbedViews animated:YES];
-	
-	DLog(@"tabs added to controller.");
-	
-	 */
-	
 	
 	return YES;
 }
@@ -257,8 +174,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[self performSelector:@selector(backgroundSetup) withObject:nil afterDelay:0.0];
 	
-	
-	//[self removeStartupView];
 }
 
 
@@ -296,13 +211,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			if(vccontroller!=nil){
 				
 				//OLD STYLE SUPPORT: DEPRECATE THIS SOON!
-				if ([vcClass isEqualToString:@"Favourites"]) {
+				if ([vcClass isEqualToString:@"FavouritesViewController"]) {
 					favourites=(FavouritesViewController*)vccontroller;
 				}
-				if ([vcClass isEqualToString:@"Map"]) {
+				if ([vcClass isEqualToString:@"MapViewController"]) {
 					map=(MapViewController*)vccontroller;
 				}
-				if ([vcClass isEqualToString:@"RouteTable"]) {
+				if ([vcClass isEqualToString:@"RouteTableViewController"]) {
 					routeTable=(RouteTableViewController*)vccontroller;
 				}
 				//

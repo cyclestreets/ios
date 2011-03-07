@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIButton+Blue.h"
 #import "Common.h"
 #import "AppConstants.h"
+#import "SettingsManager.h"
 
 @implementation SettingsViewController
 @synthesize plan;
@@ -74,8 +75,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         
 		//load from saved settings
-		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		NSDictionary *dict = [cycleStreets.files settings];
+		
+		[[SettingsManager sharedInstance] loadData];
+		NSDictionary *dict=[SettingsManager sharedInstance].dataProvider;
+		
 		self.speed = [dict valueForKey:@"speed"];
 		self.plan = [dict valueForKey:@"plan"];
 		self.mapStyle = [dict valueForKey:@"mapStyle"];
@@ -174,8 +177,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						  self.imageSize, @"imageSize",
 						  self.routeUnit, @"routeUnit",
 						  nil];
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.files setSettings:dict];	
+	[[SettingsManager sharedInstance] saveData:dict];
+	//CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	//[cycleStreets.files setSettings:dict];	
 }
 
 - (IBAction) changed {

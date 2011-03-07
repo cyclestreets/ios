@@ -28,4 +28,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SettingsManager);
 @property (nonatomic, retain)		NSString		* routeUnit;
 @property (nonatomic, retain)		NSDictionary		* dataProvider;
 
+-(void)loadData;
+-(void)saveData:(NSDictionary*)dict;
 @end
