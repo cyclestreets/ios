@@ -498,6 +498,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void) startMarker:(CLLocationCoordinate2D)location {
 	if (!self.start) {
 		self.start = [Markers markerStart];
+		self.start.enableDragging=YES;
 	}
 	if ([[self.mapView.markerManager markers] containsObject:self.start]) {
 		[self.mapView.markerManager moveMarker:self.start AtLatLon:location];
@@ -577,9 +578,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
+
+-(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
+	DLog(@"tapOnMarker");
+	mapView.enableDragging=NO;
+	
+}
+
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
-	DLog(@"shoulddrag");
+	
 	if (marker == start || marker == end) {
+		DLog(@"shoulddrag");
 		return YES;
 	}
 	return NO;

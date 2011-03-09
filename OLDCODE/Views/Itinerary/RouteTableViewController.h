@@ -27,14 +27,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <UIKit/UIKit.h>
 @class Route;
 
-@interface RouteTableViewController : UITableViewController {
+@interface RouteTableViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
 	Route *route;
 	NSInteger routeId;
 	UITextView *headerText;
+	
+	
+	IBOutlet	UILabel				*routeidLabel;
+	IBOutlet	MultiLabelLine		*readoutLineOne;
+	IBOutlet	MultiLabelLine		*readoutLineTwo;
+	
+	IBOutlet	UITableView			*tableView;
+	
+	
 }
+@property (nonatomic, retain)	Route	*route;
+@property (nonatomic, assign)	NSInteger	routeId;
+@property (nonatomic, retain)	IBOutlet UITextView	*headerText;
+@property (nonatomic, retain)	IBOutlet UILabel	*routeidLabel;
+@property (nonatomic, retain)	IBOutlet MultiLabelLine	*readoutLineOne;
+@property (nonatomic, retain)	IBOutlet MultiLabelLine	*readoutLineTwo;
+@property (nonatomic, retain)	IBOutlet UITableView	*tableView;
 
-@property (nonatomic, retain) Route *route;
-@property NSInteger routeId;
-@property (nonatomic, retain) UITextView *headerText;
 
 @end

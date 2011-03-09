@@ -39,6 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Markers.h"
 #import "BlueCircleView.h"
 #import "CSPoint.h"
+#import "AppConstants.h"
 
 @implementation Stage
 
@@ -55,15 +56,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize markerLocation;
 @synthesize queryPhoto;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -324,11 +317,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (IBAction) didToggleInfo {
 	if (self.info.hidden) {
-		self.info.hidden = NO;
-		self.infoButton.style = UIBarButtonItemStyleDone;
+		
+		//self.infoButton.selected=NO
+		
+		CGRect labelrect=info.frame;
+		CGRect overlaytrect=attributionLabel.frame;
+		
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+		[UIView setAnimationDuration:0.4];
+		
+		labelrect.origin.y=SCREENHEIGHT;
+		overlaytrect.origin.y=SCREENHEIGHT-overlaytrect.size.height;
+		
+		[UIView commitAnimations];
+		
 	} else {
-		self.info.hidden = YES;
-		self.infoButton.style = UIBarButtonItemStyleBordered;
+		
+		CGRect labelrect=info.frame;
+		CGRect overlaytrect=attributionLabel.frame;
+		
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+		[UIView setAnimationDuration:0.4];
+		
+		labelrect.origin.y=SCREENHEIGHT-labelrect.size.height;
+		overlaytrect.origin.y=labelrect.origin.y-overlaytrect.size.height;
+		
+		[UIView commitAnimations];
+		//self.infoButton.selected=YES;
 	}
 }
 

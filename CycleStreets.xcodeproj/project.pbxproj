@@ -480,7 +480,7 @@
 		28AD6292131FB69D008527FC /* PhotosViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosViewContoller.m; sourceTree = "<group>"; };
 		28AD6293131FB69D008527FC /* Route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Route.h; sourceTree = "<group>"; };
 		28AD6294131FB69D008527FC /* Route.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Route.m; sourceTree = "<group>"; };
-		28AD6295131FB69D008527FC /* RouteTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteTableView.xib; sourceTree = "<group>"; };
+		28AD6295131FB69D008527FC /* RouteTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RouteTableView.xib; path = ../RouteTableView.xib; sourceTree = "<group>"; };
 		28AD6296131FB69D008527FC /* RouteLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteLineView.h; sourceTree = "<group>"; };
 		28AD6297131FB69D008527FC /* RouteLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteLineView.m; sourceTree = "<group>"; };
 		28AD6298131FB69D008527FC /* Stage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stage.h; sourceTree = "<group>"; };
@@ -1144,7 +1144,6 @@
 				28AD6280131FB69D008527FC /* PhotoMap */,
 				28AD6293131FB69D008527FC /* Route.h */,
 				28AD6294131FB69D008527FC /* Route.m */,
-				28AD6295131FB69D008527FC /* RouteTableView.xib */,
 				28AD6296131FB69D008527FC /* RouteLineView.h */,
 				28AD6297131FB69D008527FC /* RouteLineView.m */,
 				28AD6298131FB69D008527FC /* Stage.h */,
@@ -1191,6 +1190,7 @@
 				28AD6273131FB69D008527FC /* RouteTableCell.xib */,
 				28AD6274131FB69D008527FC /* RouteTableHeader.xib */,
 				28AD6275131FB69D008527FC /* RouteTableViewController.h */,
+				28AD6295131FB69D008527FC /* RouteTableView.xib */,
 				28AD6276131FB69D008527FC /* RouteTableViewController.m */,
 			);
 			path = Itinerary;

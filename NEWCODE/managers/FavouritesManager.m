@@ -51,7 +51,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
 	
 	[[CycleStreets sharedInstance].files setMiscValue:[route itinerary] forKey:@"selectedroute"];
 		
-	//tell the favourites table it is reset.
+	//tell the favourites table it is reset> should be notification
 	CycleStreetsAppDelegate *appdelegate = [CycleStreets sharedInstance].appDelegate;
 	FavouritesViewController *favourites = appdelegate.favourites;
 	[favourites clear];
