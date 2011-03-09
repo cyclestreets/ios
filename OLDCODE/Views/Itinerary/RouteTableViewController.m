@@ -86,7 +86,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)setRoute:(Route *)newRoute {
 	
-	UITableView *tableView = (UITableView *)[self view];
+	//UITableView *tableView = (UITableView *)[self view];
 
 	Route *oldRoute = route;
 	route = newRoute;
@@ -125,14 +125,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"RouteTableCell";
     
-    RouteTableCell *cell = (RouteTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RouteTableCell *cell = (RouteTableCell *)[tv dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		
-		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:tableView options:nil];
+		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:tv options:nil];
 		if (nib == nil) {
 			[CSExceptions exception: [NSString stringWithFormat:@"Could not load nib %@. Does it exist ?", CellIdentifier]];
 		}

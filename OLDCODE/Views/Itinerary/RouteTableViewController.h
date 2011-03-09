@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
+#import "MultiLabelLine.h"
 @class Route;
 
 @interface RouteTableViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>{
