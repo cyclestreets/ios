@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2872DEED13283148003995BE /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DEEC13283148003995BE /* ItineraryViewController.m */; };
+		2872DF3713283586003995BE /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
+		2872DF3C132835B2003995BE /* SuperCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3B132835B2003995BE /* SuperCellView.m */; };
+		2872DF79132838BD003995BE /* ItineraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2872DF78132838BD003995BE /* ItineraryView.xib */; };
+		2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DFA413283ABD003995BE /* RoutesViewContoller.m */; };
+		2872DFB513283B6E003995BE /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2872DFB413283B6E003995BE /* RoutesView.xib */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD60BB131FB54A008527FC /* CycleStreets-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */; };
 		28AD60BC131FB54A008527FC /* CycleStreetsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B6131FB54A008527FC /* CycleStreetsAppDelegate.m */; };
@@ -322,13 +328,23 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2872DEEB13283148003995BE /* ItineraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItineraryViewController.h; path = Map/ItineraryViewController.h; sourceTree = "<group>"; };
+		2872DEEC13283148003995BE /* ItineraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItineraryViewController.m; path = Map/ItineraryViewController.m; sourceTree = "<group>"; };
+		2872DF3513283586003995BE /* ItineraryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryCellView.h; sourceTree = "<group>"; };
+		2872DF3613283586003995BE /* ItineraryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryCellView.m; sourceTree = "<group>"; };
+		2872DF3A132835B2003995BE /* SuperCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperCellView.h; sourceTree = "<group>"; };
+		2872DF3B132835B2003995BE /* SuperCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperCellView.m; sourceTree = "<group>"; };
+		2872DF78132838BD003995BE /* ItineraryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryView.xib; sourceTree = "<group>"; };
+		2872DFA313283ABD003995BE /* RoutesViewContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutesViewContoller.h; sourceTree = "<group>"; };
+		2872DFA413283ABD003995BE /* RoutesViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewContoller.m; sourceTree = "<group>"; };
+		2872DFB413283B6E003995BE /* RoutesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutesView.xib; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CycleStreets-Info.plist"; path = "../CycleStreets-Info.plist"; sourceTree = "<group>"; };
 		28AD60B4131FB54A008527FC /* CycleStreets_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CycleStreets_Prefix.pch; path = ../CycleStreets_Prefix.pch; sourceTree = "<group>"; };
 		28AD60B5131FB54A008527FC /* CycleStreetsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleStreetsAppDelegate.h; sourceTree = "<group>"; };
 		28AD60B6131FB54A008527FC /* CycleStreetsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleStreetsAppDelegate.m; sourceTree = "<group>"; };
 		28AD60B7131FB54A008527FC /* CycleStreetsWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CycleStreetsWindow.xib; sourceTree = "<group>"; };
-		28AD60B8131FB54A008527FC /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		28AD60B8131FB54A008527FC /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Entitlements.plist; path = ../Entitlements.plist; sourceTree = "<group>"; };
 		28AD60B9131FB54A008527FC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28AD60BA131FB54A008527FC /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		28AD61DE131FB69D008527FC /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -801,6 +817,65 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2872DEEA13283109003995BE /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2872DEEB13283148003995BE /* ItineraryViewController.h */,
+				2872DEEC13283148003995BE /* ItineraryViewController.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		2872DF3413283575003995BE /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				2872DF3A132835B2003995BE /* SuperCellView.h */,
+				2872DF3B132835B2003995BE /* SuperCellView.m */,
+				2872DF3513283586003995BE /* ItineraryCellView.h */,
+				2872DF3613283586003995BE /* ItineraryCellView.m */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
+		2872DF77132838BD003995BE /* map */ = {
+			isa = PBXGroup;
+			children = (
+				2872DF78132838BD003995BE /* ItineraryView.xib */,
+			);
+			path = map;
+			sourceTree = "<group>";
+		};
+		2872DF9D13283AA9003995BE /* Credits */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Credits;
+			sourceTree = "<group>";
+		};
+		2872DFA113283AA9003995BE /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				2872DFA313283ABD003995BE /* RoutesViewContoller.h */,
+				2872DFA413283ABD003995BE /* RoutesViewContoller.m */,
+			);
+			path = Routes;
+			sourceTree = "<group>";
+		};
+		2872DFB213283B63003995BE /* credits */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = credits;
+			sourceTree = "<group>";
+		};
+		2872DFB313283B63003995BE /* routes */ = {
+			isa = PBXGroup;
+			children = (
+				2872DFB413283B6E003995BE /* RoutesView.xib */,
+			);
+			path = routes;
+			sourceTree = "<group>";
+		};
 		28AD60B2131FB54A008527FC /* AppDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,6 +894,7 @@
 		28AD61DB131FB69D008527FC /* NEWCODE */ = {
 			isa = PBXGroup;
 			children = (
+				2872DF3413283575003995BE /* cells */,
 				28AD61DC131FB69D008527FC /* controllers */,
 				28AD61E5131FB69D008527FC /* managers */,
 				28AD61F4131FB69D008527FC /* model */,
@@ -833,6 +909,9 @@
 		28AD61DC131FB69D008527FC /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2872DF9D13283AA9003995BE /* Credits */,
+				2872DFA113283AA9003995BE /* Routes */,
+				2872DEEA13283109003995BE /* Map */,
 				28AD61DD131FB69D008527FC /* Settings */,
 				28AD61E0131FB69D008527FC /* SuperViewController.h */,
 				28AD61E1131FB69D008527FC /* SuperViewController.m */,
@@ -952,6 +1031,9 @@
 		28AD6212131FB69D008527FC /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				2872DFB213283B63003995BE /* credits */,
+				2872DFB313283B63003995BE /* routes */,
+				2872DF77132838BD003995BE /* map */,
 				28AD6213131FB69D008527FC /* settings */,
 				28AD6215131FB69D008527FC /* useraccount */,
 			);
@@ -1936,6 +2018,8 @@
 				28AD661F131FD4CD008527FC /* UITabbar_addphoto.png in Resources */,
 				28AD6627131FD630008527FC /* Map_Pin_Red.png in Resources */,
 				28AD6628131FD630008527FC /* Map_Pin_Green.png in Resources */,
+				2872DF79132838BD003995BE /* ItineraryView.xib in Resources */,
+				2872DFB513283B6E003995BE /* RoutesView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2098,6 +2182,10 @@
 				28AD6495131FB6C8008527FC /* TBXML.m in Sources */,
 				28AD6496131FB6C8008527FC /* UIBlockButton.m in Sources */,
 				28AD6497131FB6C8008527FC /* ViewUtilities.m in Sources */,
+				2872DEED13283148003995BE /* ItineraryViewController.m in Sources */,
+				2872DF3713283586003995BE /* ItineraryCellView.m in Sources */,
+				2872DF3C132835B2003995BE /* SuperCellView.m in Sources */,
+				2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2116,7 +2204,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2131,7 +2219,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -2142,7 +2229,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
@@ -2160,7 +2247,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CycleStreets;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AD4733E4-A310-4C9F-ADED-3FB48D3A75C9";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -2172,7 +2259,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2185,6 +2273,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3BB53CE-2811-4F5B-96E9-37E533C80696";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
@@ -2213,18 +2302,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alan Paxton";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neil Edwards";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-licucore",
+					"-lxml2",
+					"-ObjC",
+				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "D9304724-AFB4-4AD9-BCF1-3835AD49BEE8";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA703724-0B4E-4CC3-B6B4-E0A481327D7D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47434FA4-C8E2-4A8F-A9A3-6A8AFFFF240F";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
@@ -2235,24 +2327,24 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neil Edwards";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../lib\"",
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-licucore",
+					"-ObjC",
+					"-lxml2",
 				);
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47434FA4-C8E2-4A8F-A9A3-6A8AFFFF240F";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Adhoc Distribution";

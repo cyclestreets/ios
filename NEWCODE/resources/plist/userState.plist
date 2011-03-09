@@ -22,11 +22,11 @@
 			<key>title</key>
 			<string>Itinerary</string>
 			<key>id</key>
-			<string>routetable</string>
+			<string>itinerary</string>
 			<key>class</key>
-			<string>RouteTableViewController</string>
+			<string>ItineraryViewController</string>
 			<key>nib</key>
-			<string>RouteTableView</string>
+			<string>ItineraryView</string>
 			<key>tabimage</key>
 			<string>icon_list_bullets.png</string>
 		</dict>
@@ -108,6 +108,6 @@
 	<key>context</key>
 	<string>map</string>
 	<key>appVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 </dict>
 </plist>

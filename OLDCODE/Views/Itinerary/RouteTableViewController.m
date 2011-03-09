@@ -156,6 +156,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #pragma mark section header
 
+/*
 - (UITextView *) headerView {
 	
 	static NSString *CellIdentifier = @"RouteTableHeader";
@@ -192,7 +193,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self setupHeader];
 	return self.headerText.bounds.size.height;
 }
-
+*/
 
 
 #pragma mark -
