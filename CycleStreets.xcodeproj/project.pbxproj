@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
+		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
+		28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E7B13328E9D00FAD008 /* LayoutBox.m */; };
+		285F68DC132C07CD00B511C0 /* RouteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285F68DB132C07CD00B511C0 /* RouteListViewController.m */; };
+		285F68E6132C080D00B511C0 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285F68E5132C080D00B511C0 /* RouteListView.xib */; };
 		2872DEED13283148003995BE /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DEEC13283148003995BE /* ItineraryViewController.m */; };
 		2872DF3713283586003995BE /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
 		2872DF3C132835B2003995BE /* SuperCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3B132835B2003995BE /* SuperCellView.m */; };
@@ -16,6 +21,12 @@
 		2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DFA413283ABD003995BE /* RoutesViewContoller.m */; };
 		2872DFB513283B6E003995BE /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2872DFB413283B6E003995BE /* RoutesView.xib */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		28AC29BA1331FAE300669C79 /* BUSegmentedControl_center_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B41331FAE300669C79 /* BUSegmentedControl_center_hi.png */; };
+		28AC29BB1331FAE300669C79 /* BUSegmentedControl_center_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B51331FAE300669C79 /* BUSegmentedControl_center_lo.png */; };
+		28AC29BC1331FAE300669C79 /* BUSegmentedControl_left_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B61331FAE300669C79 /* BUSegmentedControl_left_hi.png */; };
+		28AC29BD1331FAE300669C79 /* BUSegmentedControl_left_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B71331FAE300669C79 /* BUSegmentedControl_left_lo.png */; };
+		28AC29BE1331FAE300669C79 /* BUSegmentedControl_right_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B81331FAE300669C79 /* BUSegmentedControl_right_hi.png */; };
+		28AC29BF1331FAE300669C79 /* BUSegmentedControl_right_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B91331FAE300669C79 /* BUSegmentedControl_right_lo.png */; };
 		28AD60BB131FB54A008527FC /* CycleStreets-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */; };
 		28AD60BC131FB54A008527FC /* CycleStreetsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B6131FB54A008527FC /* CycleStreetsAppDelegate.m */; };
 		28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B7131FB54A008527FC /* CycleStreetsWindow.xib */; };
@@ -146,7 +157,6 @@
 		28AD643D131FB6C8008527FC /* HalfRoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD634B131FB6C8008527FC /* HalfRoundedRectView.m */; };
 		28AD643E131FB6C8008527FC /* HBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD634D131FB6C8008527FC /* HBox.m */; };
 		28AD643F131FB6C8008527FC /* IncrementalStepControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD634F131FB6C8008527FC /* IncrementalStepControl.m */; };
-		28AD6440131FB6C8008527FC /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6351131FB6C8008527FC /* LayoutBox.m */; };
 		28AD6441131FB6C8008527FC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6353131FB6C8008527FC /* MBProgressHUD.m */; };
 		28AD6442131FB6C8008527FC /* MultiLabelLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6355131FB6C8008527FC /* MultiLabelLine.m */; };
 		28AD6443131FB6C8008527FC /* RadioButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6357131FB6C8008527FC /* RadioButtonGroup.m */; };
@@ -328,6 +338,15 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
+		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
+		28443E611332867D00FAD008 /* RouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteVO.h; sourceTree = "<group>"; };
+		28443E621332867D00FAD008 /* RouteVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteVO.m; sourceTree = "<group>"; };
+		28443E7A13328E9D00FAD008 /* LayoutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutBox.h; sourceTree = "<group>"; };
+		28443E7B13328E9D00FAD008 /* LayoutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutBox.m; sourceTree = "<group>"; };
+		285F68DA132C07CC00B511C0 /* RouteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteListViewController.h; sourceTree = "<group>"; };
+		285F68DB132C07CD00B511C0 /* RouteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteListViewController.m; sourceTree = "<group>"; };
+		285F68E5132C080D00B511C0 /* RouteListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteListView.xib; sourceTree = "<group>"; };
 		2872DEEB13283148003995BE /* ItineraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItineraryViewController.h; path = Map/ItineraryViewController.h; sourceTree = "<group>"; };
 		2872DEEC13283148003995BE /* ItineraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItineraryViewController.m; path = Map/ItineraryViewController.m; sourceTree = "<group>"; };
 		2872DF3513283586003995BE /* ItineraryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryCellView.h; sourceTree = "<group>"; };
@@ -339,6 +358,12 @@
 		2872DFA413283ABD003995BE /* RoutesViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewContoller.m; sourceTree = "<group>"; };
 		2872DFB413283B6E003995BE /* RoutesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutesView.xib; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28AC29B41331FAE300669C79 /* BUSegmentedControl_center_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_center_hi.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_center_hi.png; sourceTree = SOURCE_ROOT; };
+		28AC29B51331FAE300669C79 /* BUSegmentedControl_center_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_center_lo.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_center_lo.png; sourceTree = SOURCE_ROOT; };
+		28AC29B61331FAE300669C79 /* BUSegmentedControl_left_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_left_hi.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_left_hi.png; sourceTree = SOURCE_ROOT; };
+		28AC29B71331FAE300669C79 /* BUSegmentedControl_left_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_left_lo.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_left_lo.png; sourceTree = SOURCE_ROOT; };
+		28AC29B81331FAE300669C79 /* BUSegmentedControl_right_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_right_hi.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_right_hi.png; sourceTree = SOURCE_ROOT; };
+		28AC29B91331FAE300669C79 /* BUSegmentedControl_right_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_right_lo.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_right_lo.png; sourceTree = SOURCE_ROOT; };
 		28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CycleStreets-Info.plist"; path = "../CycleStreets-Info.plist"; sourceTree = "<group>"; };
 		28AD60B4131FB54A008527FC /* CycleStreets_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CycleStreets_Prefix.pch; path = ../CycleStreets_Prefix.pch; sourceTree = "<group>"; };
 		28AD60B5131FB54A008527FC /* CycleStreetsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleStreetsAppDelegate.h; sourceTree = "<group>"; };
@@ -574,8 +599,6 @@
 		28AD634D131FB6C8008527FC /* HBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBox.m; sourceTree = "<group>"; };
 		28AD634E131FB6C8008527FC /* IncrementalStepControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncrementalStepControl.h; sourceTree = "<group>"; };
 		28AD634F131FB6C8008527FC /* IncrementalStepControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncrementalStepControl.m; sourceTree = "<group>"; };
-		28AD6350131FB6C8008527FC /* LayoutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutBox.h; sourceTree = "<group>"; };
-		28AD6351131FB6C8008527FC /* LayoutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutBox.m; sourceTree = "<group>"; };
 		28AD6352131FB6C8008527FC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		28AD6353131FB6C8008527FC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		28AD6354131FB6C8008527FC /* MultiLabelLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiLabelLine.h; sourceTree = "<group>"; };
@@ -833,6 +856,8 @@
 				2872DF3B132835B2003995BE /* SuperCellView.m */,
 				2872DF3513283586003995BE /* ItineraryCellView.h */,
 				2872DF3613283586003995BE /* ItineraryCellView.m */,
+				28443E5A1332862000FAD008 /* RouteCellView.h */,
+				28443E5B1332862000FAD008 /* RouteCellView.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -857,6 +882,8 @@
 			children = (
 				2872DFA313283ABD003995BE /* RoutesViewContoller.h */,
 				2872DFA413283ABD003995BE /* RoutesViewContoller.m */,
+				285F68DA132C07CC00B511C0 /* RouteListViewController.h */,
+				285F68DB132C07CD00B511C0 /* RouteListViewController.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -872,6 +899,7 @@
 			isa = PBXGroup;
 			children = (
 				2872DFB413283B6E003995BE /* RoutesView.xib */,
+				285F68E5132C080D00B511C0 /* RouteListView.xib */,
 			);
 			path = routes;
 			sourceTree = "<group>";
@@ -984,6 +1012,8 @@
 				28AD6201131FB69D008527FC /* UserVO.m */,
 				28AD6202131FB69D008527FC /* ValidationVO.h */,
 				28AD6203131FB69D008527FC /* ValidationVO.m */,
+				28443E611332867D00FAD008 /* RouteVO.h */,
+				28443E621332867D00FAD008 /* RouteVO.m */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -1422,11 +1452,11 @@
 				28AD634A131FB6C8008527FC /* HalfRoundedRectView.h */,
 				28AD634B131FB6C8008527FC /* HalfRoundedRectView.m */,
 				28AD634C131FB6C8008527FC /* HBox.h */,
+				28443E7A13328E9D00FAD008 /* LayoutBox.h */,
+				28443E7B13328E9D00FAD008 /* LayoutBox.m */,
 				28AD634D131FB6C8008527FC /* HBox.m */,
 				28AD634E131FB6C8008527FC /* IncrementalStepControl.h */,
 				28AD634F131FB6C8008527FC /* IncrementalStepControl.m */,
-				28AD6350131FB6C8008527FC /* LayoutBox.h */,
-				28AD6351131FB6C8008527FC /* LayoutBox.m */,
 				28AD6352131FB6C8008527FC /* MBProgressHUD.h */,
 				28AD6353131FB6C8008527FC /* MBProgressHUD.m */,
 				28AD6354131FB6C8008527FC /* MultiLabelLine.h */,
@@ -1667,6 +1697,12 @@
 				28AD652F131FC239008527FC /* UIButton_orangesmall_lo.png */,
 				28AD6530131FC239008527FC /* UIButton_red_hi.png */,
 				28AD6531131FC239008527FC /* UIButton_red_lo.png */,
+				28AC29B41331FAE300669C79 /* BUSegmentedControl_center_hi.png */,
+				28AC29B51331FAE300669C79 /* BUSegmentedControl_center_lo.png */,
+				28AC29B61331FAE300669C79 /* BUSegmentedControl_left_hi.png */,
+				28AC29B71331FAE300669C79 /* BUSegmentedControl_left_lo.png */,
+				28AC29B81331FAE300669C79 /* BUSegmentedControl_right_hi.png */,
+				28AC29B91331FAE300669C79 /* BUSegmentedControl_right_lo.png */,
 			);
 			path = x1;
 			sourceTree = "<group>";
@@ -2020,6 +2056,13 @@
 				28AD6628131FD630008527FC /* Map_Pin_Green.png in Resources */,
 				2872DF79132838BD003995BE /* ItineraryView.xib in Resources */,
 				2872DFB513283B6E003995BE /* RoutesView.xib in Resources */,
+				285F68E6132C080D00B511C0 /* RouteListView.xib in Resources */,
+				28AC29BA1331FAE300669C79 /* BUSegmentedControl_center_hi.png in Resources */,
+				28AC29BB1331FAE300669C79 /* BUSegmentedControl_center_lo.png in Resources */,
+				28AC29BC1331FAE300669C79 /* BUSegmentedControl_left_hi.png in Resources */,
+				28AC29BD1331FAE300669C79 /* BUSegmentedControl_left_lo.png in Resources */,
+				28AC29BE1331FAE300669C79 /* BUSegmentedControl_right_hi.png in Resources */,
+				28AC29BF1331FAE300669C79 /* BUSegmentedControl_right_lo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2132,7 +2175,6 @@
 				28AD643D131FB6C8008527FC /* HalfRoundedRectView.m in Sources */,
 				28AD643E131FB6C8008527FC /* HBox.m in Sources */,
 				28AD643F131FB6C8008527FC /* IncrementalStepControl.m in Sources */,
-				28AD6440131FB6C8008527FC /* LayoutBox.m in Sources */,
 				28AD6441131FB6C8008527FC /* MBProgressHUD.m in Sources */,
 				28AD6442131FB6C8008527FC /* MultiLabelLine.m in Sources */,
 				28AD6443131FB6C8008527FC /* RadioButtonGroup.m in Sources */,
@@ -2186,6 +2228,10 @@
 				2872DF3713283586003995BE /* ItineraryCellView.m in Sources */,
 				2872DF3C132835B2003995BE /* SuperCellView.m in Sources */,
 				2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */,
+				285F68DC132C07CD00B511C0 /* RouteListViewController.m in Sources */,
+				28443E5C1332862000FAD008 /* RouteCellView.m in Sources */,
+				28443E631332867D00FAD008 /* RouteVO.m in Sources */,
+				28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

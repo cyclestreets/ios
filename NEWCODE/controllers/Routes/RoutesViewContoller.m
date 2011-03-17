@@ -10,6 +10,7 @@
 #import "AppConstants.h"
 #import "ViewUtilities.h"
 #import "StyleManager.h"
+#import "RouteListViewController.h"
 
 @implementation RoutesViewContoller
 @synthesize titleHeaderView;
@@ -86,15 +87,6 @@
 	
 	activeIndex=-1;
 	
-	// create arrays to store sub views & class references
-	classArray=[[NSMutableArray alloc]initWithObjects:@"RouteListViewController",@"RouteListViewController",nil];
-	nibArray=[[NSMutableArray alloc]initWithObjects:@"RouteListView",@"RouteListView",nil];
-	dataTypeArray=[[NSMutableArray alloc]initWithObjects:@"Favourites",@"All",nil];
-	subViewsArray=[[NSMutableArray alloc]init];
-	for (unsigned i = 0; i < [classArray count]; i++) {
-        [subViewsArray addObject:[NSNull null]];
-    }
-	
     [super viewDidLoad];
 	
 	[self createPersistentUI];
@@ -107,20 +99,40 @@
 	[self createNavigationBarUI];
 	
 	controlView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"controlbar"];
-	[controlView drawBorderwithColor:UIColorFromRGB(0x333333) andStroke:1 left:NO right:NO top:YES bottom:NO];
+	[controlView drawBorderwithColor:UIColorFromRGB(0x333333) andStroke:1 left:NO right:NO top:YES bottom:YES];
 	
 	NSMutableArray *sdp = [[NSMutableArray alloc] initWithObjects:@"Favourites", @"All",  nil];
 	routeTypeControl=[[BUSegmentedControl alloc]init];
 	routeTypeControl.dataProvider=sdp;
 	routeTypeControl.delegate=self;
-	routeTypeControl.itemWidth=75;
+	routeTypeControl.itemWidth=100;
 	[routeTypeControl buildInterface];
 	[controlView addSubview:routeTypeControl];
 	
 	[ViewUtilities alignView:routeTypeControl withView:controlView :BUCenterAlignMode :BUCenterAlignMode];
 	
-	contentView=[[UIView alloc]initWithFrame:CGRectMake(0, HEADERCONTROLHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+	contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NAVIGATIONHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 	[self.view addSubview:contentView];
+	
+	// create arrays to store sub views & class references
+	classArray=[[NSMutableArray alloc]initWithObjects:@"RouteListViewController",@"RouteListViewController",nil];
+	nibArray=[[NSMutableArray alloc]initWithObjects:@"RouteListView",@"RouteListView",nil];
+	dataTypeArray=[[NSMutableArray alloc]initWithObjects:@"Favourites",@"All",nil];
+	subViewsArray=[[NSMutableArray alloc]init];
+	for (int i = 0; i < [classArray count]; i++) {
+		
+		RouteListViewController *vc = (RouteListViewController*)[[NSClassFromString([classArray objectAtIndex:i]) alloc] initWithNibName:[nibArray objectAtIndex:i] bundle:nil];
+		vc.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI);
+		[contentView addSubview:vc.view];
+		vc.delegate=self;
+		[subViewsArray addObject:vc];
+		
+		if (i==1) {
+			vc.isSectioned=YES;
+		}
+		[vc viewWillAppear:NO];
+		[vc release];
+    }
 }
 
 
@@ -159,39 +171,8 @@
 //
 -(void)selectedIndexDidChange:(int)index{
 	
-	SuperViewController *vc = [subViewsArray objectAtIndex:index];
 	
-	if ((NSNull *)vc == [NSNull null]){
-		
-		if(activeIndex!=-1){
-			UIView *activeitemView=[[subViewsArray objectAtIndex:activeIndex] view];
-			activeitemView.hidden=YES;
-		}
-		
-		activeIndex=index;
-		
-		NSString *nibName=[nibArray objectAtIndex:index];
-		SuperViewController *newViewController;
-		if((NSNull*)nibName==[NSNull null]){
-			newViewController= (SuperViewController*)[[NSClassFromString([classArray objectAtIndex:index]) alloc] init];
-			newViewController.frame=CGRectMake(0, CONTROLUIHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI);
-		}else {
-			newViewController = (SuperViewController*)[[NSClassFromString([classArray objectAtIndex:index]) alloc] initWithNibName:[nibArray objectAtIndex:index] bundle:nil];
-			newViewController.frame=CGRectMake(0, CONTROLUIHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI);
-		}
-		[newViewController setValue:[dataTypeArray objectAtIndex:activeIndex] forKey:@"dataType"];
-		[contentView addSubview:newViewController.view];
-		newViewController.delegate=self;
-		[subViewsArray replaceObjectAtIndex:index withObject:newViewController];
-		[newViewController viewWillAppear:NO];
-		
-		//[[GoogleAnalyticsManager sharedGoogleAnalyticsManager] trackPageViewWithNavigation:self.navigationController.viewControllers andFragment:newViewController.GATag];
-		
-		[newViewController release];
-		
-	}else {
-		
-		if(activeIndex!=-1){
+	if(activeIndex!=-1){
 			UIView *activeitemView=[[subViewsArray objectAtIndex:activeIndex] view];
 			activeitemView.hidden=YES;
 		}
@@ -202,8 +183,6 @@
 		itemView.hidden=NO;
 		
 		//[[GoogleAnalyticsManager sharedGoogleAnalyticsManager] trackPageViewWithNavigation:self.navigationController.viewControllers andFragment:vc.GATag];
-		
-	}
 	
 	
 }

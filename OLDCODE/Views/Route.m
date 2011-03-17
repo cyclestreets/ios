@@ -130,6 +130,41 @@ static NSString *TIME = @"cs:time";
 	return [header valueForKey:PLAN];
 }
 
+
+
+
+//
+/***********************************************
+ * @description			getters
+ ***********************************************/
+//
+
+
+-(NSString*)timeString{
+	return [NSString stringWithFormat:@"%02d:%02d", [self time]/60, [self time]%60];
+}
+
+-(NSString*)lengthString{
+	
+	float totalMiles = [[self length] floatValue]/1600;
+	return [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
+	
+}
+
+-(NSString*)speedString{
+	
+	NSNumber *kmSpeed = [NSNumber numberWithInteger:[self speed]];
+	if([[SettingsManager sharedInstance].routeUnit isEqualToString:MILES]) {
+		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
+		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
+	}else {
+		return [NSString stringWithFormat:@"%2d Km", kmSpeed];
+	}
+
+	
+}
+
+
 /*
  * Used to set table view cell and potentially other views, which have been set up to share UI fields of the same name.
  */

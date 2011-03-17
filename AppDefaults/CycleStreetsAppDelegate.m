@@ -301,7 +301,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[cycleStreets.appDelegate.favourites clear];
 	
 	//and fill in the table data
-	[routeTable setRoute:route];
+	[routeTable setRoute:route];  // SHOULD BE CSROUTESELECTED
 	
 	//make this the plotted route
 	[map showRoute:route];

@@ -24,11 +24,12 @@
 @synthesize routeidLabel;
 @synthesize readoutLineOne;
 @synthesize readoutLineTwo;
+@synthesize readoutContainer;
 @synthesize tableView;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [route release], route = nil;
@@ -36,10 +37,12 @@
     [routeidLabel release], routeidLabel = nil;
     [readoutLineOne release], readoutLineOne = nil;
     [readoutLineTwo release], readoutLineTwo = nil;
+    [readoutContainer release], readoutContainer = nil;
     [tableView release], tableView = nil;
 	
     [super dealloc];
 }
+
 
 #pragma mark setters
 
@@ -70,6 +73,8 @@
 	
 	[self initialise];
 	
+	[notifications addObject:CSROUTESELECTED];
+	
 	[super listNotificationInterests];
 	
 }
@@ -90,6 +95,9 @@
 
 -(void)refreshUIFromDataProvider{
 	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	FavouritesViewController *favourites = cycleStreets.appDelegate.favourites;
+	self.route  = [favourites routeWithIdentifier:self.routeId];
 	
 	
 }
@@ -113,13 +121,31 @@
 
 -(void)createPersistentUI{
 	
-	if (self.routeId > 0) {
-		//reload the current route.
-		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-        FavouritesViewController *favourites = cycleStreets.appDelegate.favourites;
-		Route *newRoute = [favourites routeWithIdentifier:self.routeId];
-		self.route = newRoute;
-	}	
+	readoutContainer.paddingTop=10;
+	readoutContainer.itemPadding=10;
+	readoutContainer.layoutMode=BUVerticalLayoutMode;
+	readoutContainer.alignMode=BUCenterAlignMode;
+	readoutContainer.fixedWidth=YES;
+	readoutContainer.fixedHeight=YES;
+	
+	
+	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
+	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	
+	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
+	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	
+	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	readoutlabel.font=[UIFont systemFontOfSize:13];
+	readoutlabel.textColor=UIColorFromRGB(0x666666);
+	readoutlabel.shadowColor=[UIColor whiteColor];
+	readoutlabel.shadowOffset=CGSizeMake(0, 1);
+	readoutlabel.text=@"Select any section to view the map and details for this segment.";
+	
+	[readoutContainer addSubViewsFromArray:[NSArray arrayWithObjects:readoutLineOne,readoutLineTwo,readoutlabel,nil]];
+	[readoutlabel release];
 	
 	[self createNavigationBarUI];
 }
@@ -135,6 +161,25 @@
 
 -(void)createNonPersistentUI{
 	
+	if(route==nil){
+		
+		
+		// SHOW NO ROUTE INTERFACE
+		
+		
+	}else {
+		
+		routeidLabel.text=[route name];
+		
+		readoutLineOne.labels=[NSArray arrayWithObjects:@"Length:",[route length],
+							   @"Estimated time:",[route time],nil];
+		[readoutLineOne drawUI];
+		
+		readoutLineTwo.labels=[NSArray arrayWithObjects:@"Planned speed:",[route speed],
+							   @"Strategy:",[route plan],nil];
+		[readoutLineTwo drawUI];
+		
+	}
 	
 }
 

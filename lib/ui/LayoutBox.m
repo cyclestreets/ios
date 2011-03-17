@@ -8,6 +8,7 @@
 
 #import "LayoutBox.h"
 #import "ViewUtilities.h"
+#import "UIColor-Expanded.h"
 
 @interface LayoutBox(Private)
 
@@ -22,6 +23,7 @@
 
 @implementation LayoutBox
 @synthesize items;
+@synthesize framearray;
 @synthesize layoutMode;
 @synthesize alignMode;
 @synthesize itemPadding;
@@ -37,6 +39,7 @@
 @synthesize endColor;
 @synthesize distribute;
 @synthesize initialised;
+@synthesize ignoreHidden;
 
 /***********************************************************/
 // dealloc
@@ -44,6 +47,7 @@
 - (void)dealloc
 {
     [items release], items = nil;
+    [framearray release], framearray = nil;
     [startColor release], startColor = nil;
     [endColor release], endColor = nil;
 	
@@ -59,6 +63,7 @@
 	
 	fixedHeight=NO;
 	fixedWidth=NO;
+	ignoreHidden=NO;
 	
 	alignMode=BULeftAlignMode;
 	layoutMode=BUHorizontalLayoutMode;
@@ -73,6 +78,10 @@
 	
 	if(items==nil){
 		items=[[NSMutableArray alloc]init];
+	}
+	
+	if(framearray==nil){
+		framearray=[[NSMutableArray alloc]init];
 	}
 	
 	if(startColor==nil){
@@ -122,15 +131,28 @@
 	
 }
 
+-(void)addSubViewsFromArray:(NSMutableArray*)arr{
+	if(initialised){
+		for(int i=0;i<[arr count];i++){
+			UIView *view=[arr objectAtIndex:i];
+			[super addSubview:view];
+			[items addObject:view];
+		}
+		[self update];
+	}
+}
+
 
 -(void)insertSubview:(UIView *)view atIndex:(NSInteger)index{
 	
-	[self initialize];
+	if(initialised){
 	
-	if(index<=[items count]){
-		[super insertSubview:view atIndex:index];
-		[items insertObject:view atIndex:index];
-		[self update];
+		if(index<=[items count]){
+			[super insertSubview:view atIndex:index];
+			[items insertObject:view atIndex:index];
+			[self update];
+		}
+		
 	}
 	
 }
@@ -218,10 +240,12 @@
 
 -(void)layout{
 	
+	
 	CGFloat xpos=0+paddingLeft;
 	CGFloat tempheight=0+paddingTop;
 	CGFloat ypos=0+paddingTop;
 	CGFloat tempwidth=0+paddingLeft;
+	BOOL skipView=NO;
 	
 	switch(layoutMode){
 		
@@ -229,15 +253,19 @@
 			
 			for(int i=0;i<[items count];i++){
 				UIView *view=[items objectAtIndex:i];
-				CGFloat w;
 				
-				CGRect cframe=view.frame;
-				cframe.origin.x=xpos;
-				w=cframe.size.width;
-				xpos+=(w+itemPadding);
-				cframe.origin.y=paddingTop;
-				view.frame=cframe;
-				tempheight=MAX(tempheight,(cframe.size.height+paddingTop+paddingBottom));
+				if(ignoreHidden==YES)
+					skipView=view.hidden;
+				
+				if(skipView==NO){
+					CGRect cframe=view.frame;
+					cframe.origin.x=xpos;
+					CGFloat w=cframe.size.width;
+					xpos+=(w+itemPadding);
+					cframe.origin.y=paddingTop;
+					view.frame=cframe;
+					tempheight=MAX(tempheight,(cframe.size.height+paddingTop+paddingBottom));
+				}
 				
 			}
 		break;
@@ -248,14 +276,22 @@
 				UIView *view=[items objectAtIndex:i];
 				CGFloat h;
 				
-				CGRect cframe=view.frame;
-				cframe.origin.y=ypos;
-				h=cframe.size.height;
-				ypos+=(h+itemPadding);
-				cframe.origin.x=paddingLeft;
-				view.frame=cframe;
+				if(ignoreHidden==YES)
+					skipView=view.hidden;
 				
-				tempwidth=MAX(tempwidth,cframe.size.width);
+				
+					CGRect cframe=view.frame;
+					cframe.origin.y=ypos;
+					if(skipView==NO){
+						h=cframe.size.height;
+						ypos+=(h+itemPadding);
+						tempwidth=MAX(tempwidth,cframe.size.width);
+					}
+					cframe.origin.x=paddingLeft;
+					view.frame=cframe;
+					
+					
+				
 			}
 			
 		break;
@@ -275,7 +311,6 @@
 			}else {
 				width=xpos-itemPadding+paddingRight;
 			}
-			
 			
 			
 			if(fixedHeight==YES){
@@ -323,6 +358,7 @@
 
 -(void)align{
 	
+	BOOL skipView=NO;
 	
 	switch(layoutMode){
 		
@@ -331,20 +367,39 @@
 			switch(alignMode){
 				
 				case BUCenterAlignMode:
+					
+					
 					for(int i=0;i<[items count];i++){
 						UIView *view=[items objectAtIndex:i];
-						CGRect viewFrame=view.frame;
-						viewFrame.origin.y=round((height-viewFrame.size.height)/2);
-						view.frame=viewFrame;
+						
+						if(ignoreHidden==YES)
+							skipView=view.hidden;
+						
+						if(skipView==NO){
+						
+							CGRect viewFrame=view.frame;
+							viewFrame.origin.y=round((height-viewFrame.size.height)/2);
+							view.frame=viewFrame;
+						}
 					}
+					
+					
+					
+					
 				break;
 				
 				case BUTopAlignMode:
 					for(int i=0;i<[items count];i++){
 						UIView *view=[items objectAtIndex:i];
-						CGRect viewFrame=view.frame;
-						viewFrame.origin.y=paddingTop;
-						view.frame=viewFrame;
+						
+						if(ignoreHidden==YES)
+							skipView=view.hidden;
+						
+						if(skipView==NO){
+							CGRect viewFrame=view.frame;
+							viewFrame.origin.y=paddingTop;
+							view.frame=viewFrame;
+						}
 					}
 					
 				break;
@@ -352,9 +407,35 @@
 				case BUBottomAlignMode:
 					for(int i=0;i<[items count];i++){
 						UIView *view=[items objectAtIndex:i];
-						CGRect viewFrame=view.frame;
-						viewFrame.origin.y=round(height-viewFrame.size.height);
-						view.frame=viewFrame;
+						
+						if(ignoreHidden==YES)
+							skipView=view.hidden;
+						
+						if(skipView==NO){
+							CGRect viewFrame=view.frame;
+							viewFrame.origin.y=round(height-viewFrame.size.height);
+							view.frame=viewFrame;
+						}
+					}
+				break;
+				
+				case BURightAlignMode:
+					if(fixedWidth==YES){
+						int xpos=self.width-paddingRight;
+						int startindex=[items count]-1;
+						for(int i=startindex;i>-1;i--){
+							UIView *view=[items objectAtIndex:i];
+							
+							if(ignoreHidden==YES)
+								skipView=view.hidden;
+							
+							if(skipView==NO){
+								CGRect viewFrame=view.frame;
+								viewFrame.origin.x=round(xpos-view.frame.size.width);
+								view.frame=viewFrame;
+								xpos-=(view.frame.size.width+itemPadding);
+							}
+						}
 					}
 				break;
 			}
@@ -371,21 +452,34 @@
 					
 					for(int i=0;i<[items count];i++){
 						UIView *view=[items objectAtIndex:i];
-						CGRect viewFrame=view.frame;
-						viewFrame.origin.x=round((width-viewFrame.size.width)/2)+paddingLeft;
-						view.frame=viewFrame;
+						
+						if(ignoreHidden==YES)
+							skipView=view.hidden;
+						
+						if(skipView==NO){
+							CGRect viewFrame=view.frame;
+							viewFrame.origin.x=round((width-viewFrame.size.width)/2)+paddingLeft;
+							view.frame=viewFrame;
+						}
 					}
 				
 				break;
 				
 				case BULeftAlignMode:
-					
+										
 					for(int i=0;i<[items count];i++){
 						UIView *view=[items objectAtIndex:i];
-						CGRect viewFrame=view.frame;
-						viewFrame.origin.x=paddingLeft;
-						view.frame=viewFrame;
+						
+						if(ignoreHidden==YES)
+							skipView=view.hidden;
+						
+						if(skipView==NO){
+							CGRect viewFrame=view.frame;
+							viewFrame.origin.x=paddingLeft;
+							view.frame=viewFrame;
+						}
 					}
+					
 				
 				break;
 					
@@ -393,9 +487,15 @@
 					
 					for(int i=0;i<[items count];i++){
 						UIView *view=[items objectAtIndex:i];
-						CGRect viewFrame=view.frame;
-						viewFrame.origin.x=round(width-viewFrame.size.width);
-						view.frame=viewFrame;
+						
+						if(ignoreHidden==YES)
+							skipView=view.hidden;
+						
+						if(skipView==NO){
+							CGRect viewFrame=view.frame;
+							viewFrame.origin.x=round(width-viewFrame.size.width);
+							view.frame=viewFrame;
+						}
 					}
 				
 				break;	
@@ -491,6 +591,48 @@
 	}
 }
 
+
+-(void)writeFrames{
+	
+	for(int i=0;i<[items count];i++){
+		UIView *view=[items objectAtIndex:i];
+		CGRect cframe=view.frame;
+		NSLog(@"view.frame=%fx%f at %f,%f",cframe.size.width,cframe.size.height, cframe.origin.x,cframe.origin.y);
+	}
+	
+}
+
+
+#pragma mark gradiant bg support
+
+- (void)drawRect:(CGRect)rect {
+	
+	if(startColor!=nil){
+		
+		CGContextRef currentContext = UIGraphicsGetCurrentContext();
+		
+		CGGradientRef glossGradient;
+		CGColorSpaceRef rgbColorspace;
+		size_t num_locations = 2;
+		CGFloat locations[2] = { 0.0, 1.0 };
+		
+		// alpha will default to 1.0
+		CGFloat components[8] = { startColor.red,startColor.green,startColor.blue, startColor.alpha,  // Start color, ie white
+			endColor.red,endColor.green,endColor.blue, endColor.alpha }; // End color
+		
+		rgbColorspace = CGColorSpaceCreateDeviceRGB();
+		glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components, locations, num_locations);
+		
+		CGRect currentBounds = self.bounds;
+		CGPoint topCenter = CGPointMake(CGRectGetMidX(currentBounds), 0.0f);
+		CGPoint bottomCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMaxY(currentBounds));
+		CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, bottomCenter, 0);
+		
+		CGGradientRelease(glossGradient);
+		CGColorSpaceRelease(rgbColorspace); 
+		
+	}
+}
 
 
 @end

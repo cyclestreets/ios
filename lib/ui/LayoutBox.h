@@ -16,6 +16,8 @@
 	
 	NSMutableArray *items; // items
 	
+	NSMutableArray *framearray; // items
+	
 	LayoutBoxLayoutMode		layoutMode; // layout mode
 	LayoutBoxAlignMode		alignMode; // align mode
 	
@@ -42,30 +44,35 @@
 	
 	BOOL		initialised;
 	
+	BOOL		ignoreHidden;  // TBD, will ignore views with hidden=YES
+	
 	
 }
-@property (nonatomic, retain)			NSMutableArray			*items;
-@property (nonatomic)			LayoutBoxLayoutMode			layoutMode;
-@property (nonatomic)			LayoutBoxAlignMode			alignMode;
-@property (nonatomic)			int			itemPadding;
-@property (nonatomic)			int			paddingTop;
-@property (nonatomic)			int			paddingLeft;
-@property (nonatomic)			int			paddingRight;
-@property (nonatomic)			int			paddingBottom;
-@property (nonatomic)			int			height;
-@property (nonatomic)			int			width;
-@property (nonatomic)			BOOL			fixedHeight;
-@property (nonatomic)			BOOL			fixedWidth;
-@property (nonatomic, retain)			UIColor			*startColor;
-@property (nonatomic, retain)			UIColor			*endColor;
-@property (nonatomic)			BOOL			distribute;
-@property (nonatomic)			BOOL			initialised;
+@property (nonatomic, retain)		NSMutableArray		* items;
+@property (nonatomic, retain)		NSMutableArray		* framearray;
+@property (nonatomic)		LayoutBoxLayoutMode		 layoutMode;
+@property (nonatomic)		LayoutBoxAlignMode		 alignMode;
+@property (nonatomic)		int		 itemPadding;
+@property (nonatomic)		int		 paddingTop;
+@property (nonatomic)		int		 paddingLeft;
+@property (nonatomic)		int		 paddingRight;
+@property (nonatomic)		int		 paddingBottom;
+@property (nonatomic)		int		 height;
+@property (nonatomic)		int		 width;
+@property (nonatomic)		BOOL		 fixedHeight;
+@property (nonatomic)		BOOL		 fixedWidth;
+@property (nonatomic, retain)		UIColor		* startColor;
+@property (nonatomic, retain)		UIColor		* endColor;
+@property (nonatomic)		BOOL		 distribute;
+@property (nonatomic)		BOOL		 initialised;
+@property (nonatomic)		BOOL		 ignoreHidden;
 
 
 // methods
 
 // standard  UIview overrides
 -(void)addSubview:(UIView *)view;  
+-(void)addSubViewsFromArray:(NSMutableArray*)arr;
 -(void)insertSubview:(UIView *)view atIndex:(NSInteger)index;  // insert view at index if exists
 -(void)removeSubView:(UIView *)view;
 -(void)removeSubviewAtIndex:(int)index;
@@ -89,4 +96,6 @@
 -(void)swapLayoutTo:(LayoutBoxLayoutMode)mode;
 
 -(int)indexOfItem:(UIView*)view;
+
+-(void)writeFrames;
 @end
