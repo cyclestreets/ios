@@ -18,6 +18,7 @@
 #import "FavouritesViewController.h"
 #import "AppConstants.h"
 #import "ExpandedUILabel.h"
+#import "RouteManager.h"
 
 @implementation ItineraryViewController
 @synthesize route;
@@ -108,10 +109,7 @@
 	
 	BetterLog(@"");
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	FavouritesViewController *favourites = cycleStreets.appDelegate.favourites;
-	self.route  = [favourites routeWithIdentifier:self.routeId];
-	
+	self.route=[RouteManager sharedInstance].selectedRoute;
 	
 }
 
@@ -142,15 +140,18 @@
 	readoutContainer.alignMode=BUCenterAlignMode;
 	readoutContainer.fixedWidth=YES;
 	readoutContainer.fixedHeight=YES;
+	readoutContainer.backgroundColor=UIColorFromRGB(0xE5E5E5);
 	
 	
-	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
+	readoutLineOne.showShadow=YES;
 	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
 	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
-	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	readoutLineTwo=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
+	readoutLineTwo.showShadow=YES;
+	readoutLineTwo.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
+	readoutLineTwo.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
 	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	readoutlabel.font=[UIFont systemFontOfSize:13];
@@ -190,7 +191,7 @@
 		
 		[self showNoResultsView:NO];
 		
-		routeidLabel.text=[route name];
+		routeidLabel.text=[route itinerary];
 		
 		readoutLineOne.labels=[NSArray arrayWithObjects:@"Length:",route.lengthString,
 							   @"Estimated time:",route.timeString,nil];
@@ -241,7 +242,7 @@
     
     ItineraryCellView *cell = (ItineraryCellView *)[tv dequeueReusableCellWithIdentifier:[ItineraryCellView cellIdentifier]];
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ItineraryCellView" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ItineraryCell" owner:self options:nil];
 		cell = (ItineraryCellView *)[nib objectAtIndex:0];
 		[cell initialise];
 		
@@ -252,8 +253,6 @@
 	cell.dataProvider=segment;
 	[cell populate];
 	
-	[segment setUIElements:cell];
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 

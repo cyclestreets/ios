@@ -10,6 +10,10 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2805EAFF13392173002D13C5 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EAFE13392173002D13C5 /* Alert200x200.png */; };
+		2805EB56133943BE002D13C5 /* checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB53133943BE002D13C5 /* checkMark.png */; };
+		2805EB57133943BE002D13C5 /* exclaim.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB54133943BE002D13C5 /* exclaim.png */; };
+		2805EB58133943BE002D13C5 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB55133943BE002D13C5 /* lock.png */; };
+		2805EBAE13394D85002D13C5 /* ItineraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2805EBAD13394D85002D13C5 /* ItineraryCell.xib */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E7B13328E9D00FAD008 /* LayoutBox.m */; };
@@ -339,6 +343,10 @@
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2805EAFE13392173002D13C5 /* Alert200x200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alert200x200.png; sourceTree = "<group>"; };
+		2805EB53133943BE002D13C5 /* checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkMark.png; sourceTree = "<group>"; };
+		2805EB54133943BE002D13C5 /* exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exclaim.png; sourceTree = "<group>"; };
+		2805EB55133943BE002D13C5 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		2805EBAD13394D85002D13C5 /* ItineraryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryCell.xib; sourceTree = "<group>"; };
 		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
 		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
 		28443E611332867D00FAD008 /* RouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteVO.h; sourceTree = "<group>"; };
@@ -867,6 +875,7 @@
 		2872DF77132838BD003995BE /* map */ = {
 			isa = PBXGroup;
 			children = (
+				2805EBAD13394D85002D13C5 /* ItineraryCell.xib */,
 				28AD6278131FB69D008527FC /* MapView.xib */,
 				2872DF78132838BD003995BE /* ItineraryView.xib */,
 			);
@@ -1661,6 +1670,9 @@
 				28AD65CE131FC92C008527FC /* UITabbar_settings.png */,
 				28AD65C8131FC8AE008527FC /* UITabbar_account.png */,
 				28AD6526131FC239008527FC /* blueButton.png */,
+				2805EB53133943BE002D13C5 /* checkMark.png */,
+				2805EB54133943BE002D13C5 /* exclaim.png */,
+				2805EB55133943BE002D13C5 /* lock.png */,
 				28AD6527131FC239008527FC /* icon_zoom_out.png */,
 				28AD6528131FC239008527FC /* UIButton_green_hi.png */,
 				28AD6529131FC239008527FC /* UIButton_green_lo.png */,
@@ -2039,6 +2051,10 @@
 				28AC29BE1331FAE300669C79 /* BUSegmentedControl_right_hi.png in Resources */,
 				28AC29BF1331FAE300669C79 /* BUSegmentedControl_right_lo.png in Resources */,
 				2805EAFF13392173002D13C5 /* Alert200x200.png in Resources */,
+				2805EB56133943BE002D13C5 /* checkMark.png in Resources */,
+				2805EB57133943BE002D13C5 /* exclaim.png in Resources */,
+				2805EB58133943BE002D13C5 /* lock.png in Resources */,
+				2805EBAE13394D85002D13C5 /* ItineraryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
