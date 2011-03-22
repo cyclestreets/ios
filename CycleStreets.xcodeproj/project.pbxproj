@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2805EAFF13392173002D13C5 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EAFE13392173002D13C5 /* Alert200x200.png */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E7B13328E9D00FAD008 /* LayoutBox.m */; };
@@ -250,6 +251,7 @@
 		28AD661F131FD4CD008527FC /* UITabbar_addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD661E131FD4CD008527FC /* UITabbar_addphoto.png */; };
 		28AD6627131FD630008527FC /* Map_Pin_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6625131FD630008527FC /* Map_Pin_Red.png */; };
 		28AD6628131FD630008527FC /* Map_Pin_Green.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6626131FD630008527FC /* Map_Pin_Green.png */; };
+		28D246031338926E00188783 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
 		28D7E1F412BAA8450025C4A2 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F312BAA8450025C4A2 /* libz.1.2.3.dylib */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
 		E70586AA12365A7B0080917E /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = E70586A812365A7B0080917E /* donate.html */; };
@@ -338,6 +340,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2805EAFE13392173002D13C5 /* Alert200x200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alert200x200.png; sourceTree = "<group>"; };
 		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
 		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
 		28443E611332867D00FAD008 /* RouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteVO.h; sourceTree = "<group>"; };
@@ -747,6 +750,8 @@
 		28AD661E131FD4CD008527FC /* UITabbar_addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabbar_addphoto.png; sourceTree = "<group>"; };
 		28AD6625131FD630008527FC /* Map_Pin_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_Pin_Red.png; sourceTree = "<group>"; };
 		28AD6626131FD630008527FC /* Map_Pin_Green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_Pin_Green.png; sourceTree = "<group>"; };
+		28D246011338926E00188783 /* RouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteManager.h; sourceTree = "<group>"; };
+		28D246021338926E00188783 /* RouteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteManager.m; sourceTree = "<group>"; };
 		28D7E1F312BAA8450025C4A2 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		28D7E1F712BAA8710025C4A2 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		E70586A812365A7B0080917E /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = donate.html; path = html/donate.html; sourceTree = "<group>"; };
@@ -992,6 +997,8 @@
 			children = (
 				28AD61F5131FB69D008527FC /* CycleStreets.h */,
 				28AD61F6131FB69D008527FC /* CycleStreets.m */,
+				28D246011338926E00188783 /* RouteManager.h */,
+				28D246021338926E00188783 /* RouteManager.m */,
 				28AD61F7131FB69D008527FC /* Files.h */,
 				28AD61F8131FB69D008527FC /* Files.m */,
 				28AD61F9131FB69D008527FC /* Model.h */,
@@ -1358,7 +1365,6 @@
 				28AD6309131FB6C8008527FC /* AppConstants.h */,
 				28AD630A131FB6C8008527FC /* AppConstants.m */,
 				28AD630B131FB6C8008527FC /* categories */,
-				28AD632A131FB6C8008527FC /* managers */,
 				28AD632B131FB6C8008527FC /* net */,
 				28AD6337131FB6C8008527FC /* ui */,
 				28AD6374131FB6C8008527FC /* utilities */,
@@ -1401,13 +1407,6 @@
 				28AD6329131FB6C8008527FC /* UIViewAdditions.m */,
 			);
 			path = categories;
-			sourceTree = "<group>";
-		};
-		28AD632A131FB6C8008527FC /* managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = managers;
 			sourceTree = "<group>";
 		};
 		28AD632B131FB6C8008527FC /* net */ = {
@@ -1689,6 +1688,7 @@
 				28AD6527131FC239008527FC /* icon_zoom_out.png */,
 				28AD6528131FC239008527FC /* UIButton_green_hi.png */,
 				28AD6529131FC239008527FC /* UIButton_green_lo.png */,
+				2805EAFE13392173002D13C5 /* Alert200x200.png */,
 				28AD652A131FC239008527FC /* UIButton_grey_hi.png */,
 				28AD652B131FC239008527FC /* UIButton_grey_lo.png */,
 				28AD652C131FC239008527FC /* UIButton_orange_hi.png */,
@@ -2063,6 +2063,7 @@
 				28AC29BD1331FAE300669C79 /* BUSegmentedControl_left_lo.png in Resources */,
 				28AC29BE1331FAE300669C79 /* BUSegmentedControl_right_hi.png in Resources */,
 				28AC29BF1331FAE300669C79 /* BUSegmentedControl_right_lo.png in Resources */,
+				2805EAFF13392173002D13C5 /* Alert200x200.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2232,6 +2233,7 @@
 				28443E5C1332862000FAD008 /* RouteCellView.m in Sources */,
 				28443E631332867D00FAD008 /* RouteVO.m in Sources */,
 				28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */,
+				28D246031338926E00188783 /* RouteManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

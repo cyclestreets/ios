@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Stage.h"
 #import "Route.h"
 #import "UIButton+Blue.h"
+#import "RouteManager.h"
 
 @implementation RouteSummary
 @synthesize route;
@@ -89,12 +90,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)selectRoute {
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[self.navigationController popViewControllerAnimated:YES];
-	[cycleStreets.appDelegate selectRoute:self.route];
 	
-	// and flip to the route table with the selected route in it.
-	cycleStreets.appDelegate.tabBarController.selectedViewController = (UITableViewController *)cycleStreets.appDelegate.map;
+	[[RouteManager sharedInstance] selectRoute:self.route];
+	
+	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"map"];
 }	
 
 - (IBAction) didRouteButton {

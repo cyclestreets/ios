@@ -12,40 +12,22 @@
 extern NSString *const DEVICETYPE;
 
 // data ids
-// racecards
-NSString *const RACECARD ;
-NSString *const RACE ;
-NSString *const RESULTS ;
-NSString *const RUNNER;
-
 //user
-NSString *const LOGIN;
-NSString *const REGISTER; 
-NSString *const PASSWORDRETRIEVAL;
+extern NSString *const LOGIN;
+extern NSString *const REGISTER; 
+extern NSString *const PASSWORDRETRIEVAL;
 
 //search
-NSString *const QUICKSEARCHDATAID;
-NSString *const SEARCHDATAID;
-NSString *const DETAILSHORSE; // 
-NSString *const DETAILSTRAINER; // 
-NSString *const DETAILSJOCKEY; // 
+extern NSString *const QUICKSEARCHDATAID;
+extern NSString *const SEARCHDATAID;
 
-// notes
-NSString *const NOTEDELETE; // delete note
-NSString *const NOTEADD; // create/update note
-NSString *const GETNOTES; // get notes for alert
-NSString *const NOTEUPDATE; // update existing note
+extern NSString *const CSROUTESELECTED;
+
+extern NSString *const LOGINRESPONSE;
+extern NSString *const REGISTERRESPONSE;
+extern NSString *const PASSWORDRETRIEVALRESPONSE;
 
 
-// alerts
-NSString *const ALERTSGET; // get all alerts
-NSString *const ALERTADD; // create new alert
-NSString *const ALERTDELETE; // delete alert
-NSString *const ALERTCONFIGURE; // updates status of alert
-NSString *const ALERTDISMISS;
-NSString *const ALERTRACEALERTS; // initial call
-NSString *const ALERTNEWRACEALERTS; // delta update
-NSString *const ALERTRESULTS; // result type alerts
 
 
 // request types
@@ -63,10 +45,6 @@ extern NSString *const USER;
 extern NSString *const SYSTEM;
 
 
-extern NSString *const SEARCHHORSE;
-extern NSString *const SEARCHTRAINER;
-extern NSString *const SEARCHJOCKEY;
-
 
 // string constants
 extern NSString *const DATE;
@@ -83,10 +61,8 @@ extern NSString *const ERROR;
 extern NSString *const ZERO;
 extern NSString *const SUCCESS;
 extern NSString *const MESSAGE;
-extern NSString *const ALERT;
-extern NSString *const NOTE;
-extern NSString *const RACEALERT;
-extern NSString *const RESULT;
+extern NSString *const MILES;
+extern NSString *const KM;
 
 // view modes
 extern NSString *const UITYPE_NAV;
@@ -118,18 +94,6 @@ extern NSString *const QUICKSEARCHDIDCOMPLETE;
 extern NSString *const LOGINRESPONSE;
 extern NSString *const REGISTERRESPONSE;
 extern NSString *const PASSWORDRETRIEVALRESPONSE;
-extern NSString *const RACERESULTSRESPONSE;
-extern NSString *const RACEALERTSRESPONSE;
-extern NSString *const RACEALERTSDELTARESPONSE;
-extern NSString *const SEARCHITEMRESPONSE;
-extern NSString *const GETALERTSRESPONSE;
-extern NSString *const GETNOTESRESPONSE;
-extern NSString *const ADDNOTESRESPONSE;
-extern NSString *const DELETENOTESRESPONSE;
-extern NSString *const UPDATENOTESRESPONSE;
-extern NSString *const ADDALERTSRESPONSE;
-extern NSString *const DELETEALERTSRESPONSE;
-extern NSString *const UPDATEALERTSRESPONSE;
 
 
 
@@ -186,6 +150,7 @@ extern NSString *const INVALIDRESPONSE;
 extern NSString *const CONNECTIONCACHE;
 
 
+/*
 enum  {
 	kDataTypeHorse=1,
 	kDataTypeTrainer=2,
@@ -200,13 +165,15 @@ enum  {
 	RaceAlertTypeResultNone=0
 };
 typedef int RaceAlertDataType;
-
+*/
 
 @interface AppConstants : NSObject {
 
 }
 
+/*
 + (NSString*)dataTypeToStringType:(NagMeDataType)dataType;
 + (NagMeDataType)stringTypeToDataType:(NSString*)stringType;
+*/
 
 @end

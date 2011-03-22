@@ -35,17 +35,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 }
 
 
+//=========================================================== 
+// - (id)init
+//
+//=========================================================== 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.plan = @"balanced";
+        self.speed = @"12";
+        self.mapStyle = @"OpenStreetMap";
+        self.imageSize = @"640px";
+        self.routeUnit = @"miles";
+    }
+    return self;
+}
+
+
 
 
 
 -(void)loadData{
 	
 	self.dataProvider = [(Files*)[CycleStreets sharedInstance].files settings];
-	self.speed = [dataProvider valueForKey:@"speed"];
-	self.plan = [dataProvider valueForKey:@"plan"];
-	self.mapStyle = [dataProvider valueForKey:@"mapStyle"];
-	self.imageSize = [dataProvider valueForKey:@"imageSize"];
-	self.routeUnit = [dataProvider valueForKey:@"routeUnit"];
+	if([dataProvider count]>0){
+		self.speed = [dataProvider valueForKey:@"speed"];
+		self.plan = [dataProvider valueForKey:@"plan"];
+		self.mapStyle = [dataProvider valueForKey:@"mapStyle"];
+		self.imageSize = [dataProvider valueForKey:@"imageSize"];
+		self.routeUnit = [dataProvider valueForKey:@"routeUnit"];
+	}
 	
 }
 

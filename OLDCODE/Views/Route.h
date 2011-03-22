@@ -32,8 +32,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSMutableArray *segments;
 	NSDictionary *header;
 }
-@property (nonatomic, retain)	NSMutableArray	*segments;
-@property (nonatomic, retain)	NSDictionary	*header;
 
 // getters
 @property (nonatomic, readonly)	NSString	*timeString;
@@ -69,6 +67,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) setUIElements:(NSObject *)view;/*or controller*/
 
 
--
+
 
 @end

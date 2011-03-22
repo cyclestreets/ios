@@ -54,6 +54,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "FavouritesViewController.h"
 #import "InitialLocation.h"
 #import "CustomButtonView.h"
+#import "RouteManager.h"
 
 @implementation MapViewController
 
@@ -377,7 +378,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		CycleStreetsAppDelegate *appdelegate = [CycleStreets sharedInstance].appDelegate;
 		FavouritesViewController *favourites = appdelegate.favourites;
 		Route *useRoute = [favourites routeWithIdentifier:[selectedRoute intValue]];
-		[cycleStreets.appDelegate selectRoute:useRoute];
+		
+		[[RouteManager sharedInstance] selectRoute:useRoute];
 	}
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -682,7 +684,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		CLLocationCoordinate2D toLatLon = [markerManager latitudeLongitudeForMarker:end];
 		CLLocation *to = [[[CLLocation alloc] initWithLatitude:toLatLon.latitude longitude:toLatLon.longitude] autorelease];
 		Query *query = [[[Query alloc] initFrom:from to:to] autorelease];
-		[cycleStreets.appDelegate runQuery:query];
+		
+		[[RouteManager sharedInstance] runQuery:query];
+		
 	} else if (self.planningState == stateRoute) {
 		[self.clearAlert show];
 	}
@@ -865,7 +869,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			//Cancelled. Keep state the same.
 		} else {
 			//OK
-			[cycleStreets.appDelegate selectRoute:nil];
+			[[RouteManager sharedInstance] selectRoute:nil];
 		}
 
 	}

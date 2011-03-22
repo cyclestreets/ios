@@ -69,9 +69,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (!route) {
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];	
 		NSData *data = [cycleStreets.files route:identifier];
-		RouteParser *parsed = [RouteParser parse:data forElements:[Route routeXMLElementNames]];
-		route = [[[Route alloc] initWithElements:parsed.elementLists] autorelease];
-		[routes setObject:route forKey:[NSNumber numberWithInt:identifier]];
+		if(data!=nil){
+			RouteParser *parsed = [RouteParser parse:data forElements:[Route routeXMLElementNames]];
+			route = [[[Route alloc] initWithElements:parsed.elementLists] autorelease];
+			[routes setObject:route forKey:[NSNumber numberWithInt:identifier]];
+		}
 	}
 	return route;
 }

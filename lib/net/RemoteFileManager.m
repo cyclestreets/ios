@@ -248,7 +248,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	[self removeRequestFromQueue:activeRequest.dataid andResume:YES];
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:networkAvailable],@"networkStatus",response,@"response", nil];
-	//[response release];  // keep an eye out here for potential leak issue later ???
+	[response release];  // keep an eye out here for potential leak issue later ???
 	[[NSNotificationCenter defaultCenter] postNotificationName:REMOTEFILELOADED object:nil userInfo:dict];
 	[dict release]; 
 	
@@ -273,9 +273,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	BetterLog(@"RemoteFileManager.didFailWithError: %@", [error localizedDescription] );
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:networkAvailable],@"networkStatus",response,@"response", nil];
+	[response release];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REMOTEFILEFAILED object:nil userInfo:dict];
 	[dict release];
-	//[response release];
 	
 	[responseData release];
 	

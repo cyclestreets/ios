@@ -16,6 +16,8 @@
 #import "Stage.h"
 #import "Common.h"
 #import "FavouritesViewController.h"
+#import "AppConstants.h"
+#import "ExpandedUILabel.h"
 
 @implementation ItineraryViewController
 @synthesize route;
@@ -48,6 +50,8 @@
 
 - (void)setRoute:(Route *)newRoute {
 	
+	BetterLog(@"");
+	
 	Route *oldRoute = route;
 	route = newRoute;
 	[newRoute retain];
@@ -71,6 +75,7 @@
 
 -(void)listNotificationInterests{
 	
+	
 	[self initialise];
 	
 	[notifications addObject:CSROUTESELECTED];
@@ -81,8 +86,14 @@
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
+	BetterLog(@"");
+	
 	[super didReceiveNotification:notification];
 	
+	if([notification.name isEqualToString:CSROUTESELECTED]){
+		self.routeId=[notification.object integerValue];
+		[self refreshUIFromDataProvider];
+	}
 	
 }
 
@@ -94,6 +105,8 @@
 //
 
 -(void)refreshUIFromDataProvider{
+	
+	BetterLog(@"");
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	FavouritesViewController *favourites = cycleStreets.appDelegate.favourites;
@@ -113,6 +126,8 @@
 	
 	tableView.rowHeight=[ItineraryCellView rowHeight];
 	
+	[self refreshUIFromDataProvider];
+	
     [super viewDidLoad];
 	
 	[self createPersistentUI];
@@ -130,12 +145,12 @@
 	
 	
 	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
+	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
 	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
+	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
 	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	readoutlabel.font=[UIFont systemFontOfSize:13];
@@ -161,23 +176,32 @@
 
 -(void)createNonPersistentUI{
 	
+	BetterLog(@"");
+	
 	if(route==nil){
 		
 		
-		// SHOW NO ROUTE INTERFACE
+		[self showNoResultsView:YES];
+		
+		self.navigationItem.rightBarButtonItem.enabled=NO;
 		
 		
 	}else {
 		
+		[self showNoResultsView:NO];
+		
 		routeidLabel.text=[route name];
 		
-		readoutLineOne.labels=[NSArray arrayWithObjects:@"Length:",[route length],
-							   @"Estimated time:",[route time],nil];
+		readoutLineOne.labels=[NSArray arrayWithObjects:@"Length:",route.lengthString,
+							   @"Estimated time:",route.timeString,nil];
 		[readoutLineOne drawUI];
 		
-		readoutLineTwo.labels=[NSArray arrayWithObjects:@"Planned speed:",[route speed],
+		readoutLineTwo.labels=[NSArray arrayWithObjects:@"Planned speed:",route.speedString,
 							   @"Strategy:",[route plan],nil];
 		[readoutLineTwo drawUI];
+		
+		self.navigationItem.rightBarButtonItem.enabled=YES;
+		
 		
 	}
 	

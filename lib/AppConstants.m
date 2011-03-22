@@ -26,6 +26,11 @@ NSString *const PASSWORDRETRIEVAL=@"ForgottenPassword";
 NSString *const QUICKSEARCHDATAID=@"QuickSearch";
 NSString *const SEARCHDATAID=@"Search";
 
+NSString *const CSROUTESELECTED=@"CSRouteSelected";
+
+NSString *const LOGINRESPONSE=@"LOGINRESPONSE";
+NSString *const REGISTERRESPONSE=@"REGISTERRESPONSE";
+NSString *const PASSWORDRETRIEVALRESPONSE=@"PASSWORDRETRIEVALRESPONSE";
 
 
 
@@ -44,13 +49,6 @@ NSString *const SYSTEM=@"system";
 
 
 
-// search Types
-NSString *const SEARCHHORSE=@"searchhorse";
-NSString *const SEARCHTRAINER=@"searchtrainer";
-NSString *const SEARCHJOCKEY=@"searchjockey";
-
-
-
 // string constants
 NSString *const DATE=@"date";
 NSString *const RESPONSE=@"response";
@@ -60,16 +58,14 @@ NSString *const PARAMARRAY=@"parameterarray";
 NSString *const CURRENCY=@"currency";
 NSString *const DATATYPE=@"dataid";
 NSString *const OK=@"OK";
-NSString *const ABANDONED=@"Abandoned";
 NSString *const CLOSE=@"Close";
 NSString *const ERROR=@"error";
 NSString *const ZERO=@"0";
 NSString *const SUCCESS=@"Success";
 NSString *const MESSAGE=@"Message";
-NSString *const ALERT=@"Alert";
-NSString *const NOTE=@"Note";
-NSString *const RACEALERT=@"RaceAlert";
-NSString *const RESULT=@"Result";
+NSString *const MILES=@"miles";
+NSString *const KM=@"kilometers";
+
 
 // viewmodes
 NSString *const UITYPE_NAV=@"UITypeNavonly";
@@ -94,27 +90,8 @@ NSString *const REQUESTDIDCOMPLETEFROMSERVER=@"requestdidcompletewithserverdata"
 NSString *const REQUESTDIDCOMPLETE_NOUPDATE=@"requestcompletednoupdatereceived"; // the request competed with data from the server but our copy is the newest
 NSString *const REQUESTDIDCOMPLETENOENTRIES=@"requestcompletednoentries"; // the request competed with data from the server but there are no entries
 NSString *const CONNECTIONVALIDATION=@"connectionvalidation"; // generic event for ConectionValidator, note dict contains further info
-NSString *const TEXTFIELDEDITFRAME=@"tuitextfieldeditframeupdate"; // generic event for sending the textfield frame so we can adjust the scrollview for the keybaord size
+NSString *const TEXTFIELDEDITFRAME=@"tuitextfieldeditframeupdate"; // generic event for sending the textfield frame so we can adjust the scrollview for the 
 
-
-// model>view events
-NSString *const SEARCHDIDCOMPLETE=@"SearchDidComplete";
-NSString *const QUICKSEARCHDIDCOMPLETE=@"QuickSearchDidComplete";
-NSString *const SEARCHITEMRESPONSE=@"SearchItemResponse";
-NSString *const LOGINRESPONSE=@"LoginResponse";
-NSString *const REGISTERRESPONSE=@"RegisterResponse";
-NSString *const PASSWORDRETRIEVALRESPONSE=@"PasswordRetrievalResponse";
-NSString *const RACERESULTSRESPONSE=@"RaceResultsResponse";
-NSString *const RACEALERTSRESPONSE=@"RaceAleertsResponse";
-NSString *const RACEALERTSDELTARESPONSE=@"RaceAlertsDeltaResponse";
-NSString *const GETALERTSRESPONSE=@"GetAlertsResponse";
-NSString *const GETNOTESRESPONSE=@"GetNotesResponse";
-NSString *const ADDNOTESRESPONSE=@"AddNotesResponse";
-NSString *const DELETENOTESRESPONSE=@"DeleteNotesResponse";
-NSString *const UPDATENOTESRESPONSE=@"UpdateNotesResponse";
-NSString *const ADDALERTSRESPONSE=@"AddAlertResponse";
-NSString *const DELETEALERTSRESPONSE=@"DeleteAlertResponse";
-NSString *const UPDATEALERTSRESPONSE=@"UpdateAlertResponse";
 
 
 
@@ -172,6 +149,7 @@ NSString *const INVALIDRESPONSE=@"No valid data received for this request. \r Pl
 @implementation AppConstants
 
 
+/*
 + (NSString*)dataTypeToStringType:(NagMeDataType)dataType {
     NSString *result = nil;
 	
@@ -204,7 +182,7 @@ NSString *const INVALIDRESPONSE=@"No valid data received for this request. \r Pl
 	
     return kDataTypeNone;
 }
-
+*/
 
 
 

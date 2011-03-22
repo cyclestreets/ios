@@ -26,6 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "Route.h"
 #import "Segment.h"
+#import "SettingsManager.h"
+#import "AppConstants.h"
 
 static NSString *ROUTE_ELEMENT = @"cs:route";
 static NSString *SEGMENT_ELEMENT = @"cs:segment";

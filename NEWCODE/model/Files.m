@@ -204,7 +204,7 @@ static NSString *clientidFileConst = @"clientid";
 	NSData *data = [[NSData alloc] initWithContentsOfFile:routeFile];
 	if (nil == data) {
 		// is empty data the right thing to return ?
-		data = [[NSData alloc] init];
+		
 	}
 	[data autorelease];
 	return data;

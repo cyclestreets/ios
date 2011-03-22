@@ -272,7 +272,7 @@
 			ilabel.font=[UIFont systemFontOfSize:12];
 			ilabel.shadowColor=[UIColor whiteColor];
 			ilabel.shadowOffset=CGSizeMake(0, 1);
-			ilabel.text=@"There are no results for this day yet, please try again later";
+			ilabel.text=@"There are no results yet";
 			[contentContainer addSubview:ilabel];					
 			[ilabel release];
 			
