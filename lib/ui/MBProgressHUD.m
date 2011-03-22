@@ -5,6 +5,7 @@
 //
 
 #import "MBProgressHUD.h"
+#import "GlobalUtilities.h"
 
 @interface MBProgressHUD ()
 
@@ -319,11 +320,14 @@
             lWidth = dims.width;
         }
         else {
-            lWidth = frame.size.width - 4 * MARGIN;
+			lWidth = frame.size.width - 4 * MARGIN;
+			lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.labelText :self.labelFont :lWidth :UILineBreakModeWordWrap];
+			
         }
 		
         // Set label properties
         label.font = self.labelFont;
+		label.numberOfLines=0;
         label.adjustsFontSizeToFitWidth = NO;
         label.textAlignment = UITextAlignmentCenter;
         label.opaque = NO;
@@ -361,10 +365,13 @@
             }
             else {
                 lWidth = frame.size.width - 4 * MARGIN;
+				lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.detailsLabelText :self.detailsLabelFont :lWidth :UILineBreakModeWordWrap];
+				
             }
 			
             // Set label properties
             detailsLabel.font = self.detailsLabelFont;
+			detailsLabel.numberOfLines=0;
             detailsLabel.adjustsFontSizeToFitWidth = NO;
             detailsLabel.textAlignment = UITextAlignmentCenter;
             detailsLabel.opaque = NO;

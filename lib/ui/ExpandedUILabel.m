@@ -32,6 +32,7 @@
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		multiline=YES;
+		self.backgroundColor=[UIColor clearColor];
     }
     return self;
 }
@@ -40,6 +41,8 @@
 - (id)initWithCoder:(NSCoder*)decoder {
 	if (self = [super initWithCoder:decoder]) {
 		multiline=YES;
+		self.backgroundColor=[UIColor clearColor];
+
     }
     return self;
 }

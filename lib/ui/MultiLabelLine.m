@@ -59,7 +59,14 @@
 		UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0,  twidth, self.frame.size.height)];
 		label.backgroundColor=[UIColor clearColor];
 		label.font=[fonts objectAtIndex:i];
-		label.textColor=[[StyleManager sharedInstance] colorForType:[colors objectAtIndex:i]];
+		id color=[colors objectAtIndex:i];
+		if([color isKindOfClass:[UIColor class]]){
+			label.textColor=color;
+		}else {
+			label.textColor=[[StyleManager sharedInstance] colorForType:[colors objectAtIndex:i]];
+		}
+
+		
 		label.highlightedTextColor=[UIColor whiteColor];
 		if(showShadow==YES){
 			label.shadowColor=[UIColor whiteColor];
