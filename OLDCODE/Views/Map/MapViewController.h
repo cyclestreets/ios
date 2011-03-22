@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapView.h"
 #import "RouteLineView.h"
 #import "BlueCircleView.h"
+#import "MBProgressHUD.h"
 @class CycleStreets;
 @class Route;
 @class Location;
@@ -46,13 +47,13 @@ enum PlanningStateT {stateStart = 0,
 typedef enum PlanningStateT PlanningState;
 
 @interface MapViewController : UIViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider> {
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider,MBProgressHUDDelegate> {
 	//IB items
 	UIToolbar *toolBar;
 	
 	UIBarButtonItem *locationButton;
 	UIBarButtonItem *activeLocationButton;
-	CustomButtonView *activeLocationView;
+	UIActivityIndicatorView	*locatingIndicator;
 	
 	UIBarButtonItem *nameButton;
 	UIBarButtonItem *routeButton;
@@ -91,25 +92,42 @@ typedef enum PlanningStateT PlanningState;
 	UIAlertView *noLocationAlert;
 	
 	PlanningState planningState;
+	
+	MBProgressHUD		*HUD;
 }
+@property (nonatomic, retain)	IBOutlet UIToolbar	*toolBar;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem	*locationButton;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem	*activeLocationButton;
+@property (nonatomic, retain)	IBOutlet UIActivityIndicatorView	*locatingIndicator;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem	*nameButton;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem	*routeButton;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem	*deleteButton;
+@property (nonatomic, retain)	IBOutlet UILabel	*attributionLabel;
+@property (nonatomic, retain)	CycleStreets	*cycleStreets;
+@property (nonatomic, retain)	RMMapView	*mapView;
+@property (nonatomic, retain)	RouteLineView	*lineView;
+@property (nonatomic, retain)	BlueCircleView	*blueCircleView;
+@property (nonatomic, retain)	InitialLocation	*initialLocation;
+@property (nonatomic, retain)	CLLocationManager	*locationManager;
+@property (nonatomic, retain)	CLLocation	*lastLocation;
+@property (nonatomic, retain)	Namefinder2	*namefinder;
+@property (nonatomic, retain)	Route	*route;
+@property (nonatomic, retain)	RMMarker	*start;
+@property (nonatomic, retain)	RMMarker	*end;
+@property (nonatomic, retain)	NSMutableArray	*startEndPool;
+@property (nonatomic, assign)	BOOL	doingLocation;
+@property (nonatomic, assign)	BOOL	programmaticChange;
+@property (nonatomic, assign)	BOOL	firstTimeStart;
+@property (nonatomic, assign)	BOOL	firstTimeFinish;
+@property (nonatomic, assign)	BOOL	avoidAccidentalTaps;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*firstAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*clearAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*startFinishAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*noLocationAlert;
+@property (nonatomic, assign)	PlanningState	planningState;
+@property (nonatomic, retain)	MBProgressHUD	*HUD;
 
-@property (nonatomic, retain) UIBarButtonItem *locationButton;
-@property (nonatomic, retain) UIBarButtonItem *activeLocationButton;
-@property (nonatomic, retain) CustomButtonView *activeLocationView;
 
-@property (nonatomic, retain) IBOutlet UIToolbar *toolBar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *nameButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *routeButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *deleteButton;
-@property (nonatomic, retain) IBOutlet RMMapView *mapView;
-@property (nonatomic, retain) IBOutlet RouteLineView *lineView;
-@property (nonatomic, retain) IBOutlet BlueCircleView *blueCircleView;
-@property (nonatomic, retain) IBOutlet UILabel *attributionLabel;
-@property (nonatomic, retain) RMMarker *start;
-@property (nonatomic, retain) RMMarker *end;
-@property BOOL programmaticChange;
-
-@property PlanningState planningState;
 
 - (IBAction) didZoomIn;
 - (IBAction) didZoomOut;
@@ -117,13 +135,6 @@ typedef enum PlanningStateT PlanningState;
 - (IBAction) didDelete;
 - (IBAction) didRoute;
 - (IBAction) didSearch;
-
-@property (nonatomic, retain) UIAlertView *firstAlert;
-@property (nonatomic, retain) UIAlertView *clearAlert;
-@property (nonatomic, retain) UIAlertView *startFinishAlert;
-@property (nonatomic, retain) UIAlertView *noLocationAlert;
-
-
 - (void) showRoute:(Route *)route;
 - (void)stopDoingLocation;
 - (void)startDoingLocation;

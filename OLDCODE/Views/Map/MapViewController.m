@@ -56,6 +56,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CustomButtonView.h"
 #import "RouteManager.h"
 
+@interface MapViewController(Private)
+
+-(void)showProgressHUDWithMessage:(NSString*)message;
+-(void)removeHUD;
+-(void)showSuccessHUD:(NSString*)message;
+-(void)showErrorHUDWithMessage:(NSString*)error;
+-(void)showHUDWithMessage:(NSString*)message;
+-(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon;
+
+
+@end
+
+
 @implementation MapViewController
 
 static NSString *MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
@@ -83,25 +96,74 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 1.0;
 //don't allow co-location of start/finish
 static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
+@synthesize toolBar;
 @synthesize locationButton;
 @synthesize activeLocationButton;
-@synthesize activeLocationView;
-@synthesize toolBar;
+@synthesize locatingIndicator;
 @synthesize nameButton;
 @synthesize routeButton;
 @synthesize deleteButton;
 @synthesize attributionLabel;
+@synthesize cycleStreets;
 @synthesize mapView;
 @synthesize lineView;
 @synthesize blueCircleView;
+@synthesize initialLocation;
+@synthesize locationManager;
+@synthesize lastLocation;
+@synthesize namefinder;
+@synthesize route;
 @synthesize start;
 @synthesize end;
+@synthesize startEndPool;
+@synthesize doingLocation;
+@synthesize programmaticChange;
+@synthesize firstTimeStart;
+@synthesize firstTimeFinish;
+@synthesize avoidAccidentalTaps;
 @synthesize firstAlert;
 @synthesize clearAlert;
 @synthesize startFinishAlert;
 @synthesize noLocationAlert;
 @synthesize planningState;
-@synthesize programmaticChange;
+@synthesize HUD;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [toolBar release], toolBar = nil;
+    [locationButton release], locationButton = nil;
+    [activeLocationButton release], activeLocationButton = nil;
+    [locatingIndicator release], locatingIndicator = nil;
+    [nameButton release], nameButton = nil;
+    [routeButton release], routeButton = nil;
+    [deleteButton release], deleteButton = nil;
+    [attributionLabel release], attributionLabel = nil;
+    [cycleStreets release], cycleStreets = nil;
+    [mapView release], mapView = nil;
+    [lineView release], lineView = nil;
+    [blueCircleView release], blueCircleView = nil;
+    [initialLocation release], initialLocation = nil;
+    [locationManager release], locationManager = nil;
+    [lastLocation release], lastLocation = nil;
+    [namefinder release], namefinder = nil;
+    [route release], route = nil;
+    [start release], start = nil;
+    [end release], end = nil;
+    [startEndPool release], startEndPool = nil;
+    [firstAlert release], firstAlert = nil;
+    [clearAlert release], clearAlert = nil;
+    [startFinishAlert release], startFinishAlert = nil;
+    [noLocationAlert release], noLocationAlert = nil;
+    [HUD release], HUD = nil;
+	
+    [super dealloc];
+}
+
+
+
 
 + (NSArray *)mapStyles {
 	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, nil];
@@ -282,22 +344,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.mapView.hidden = YES;
 	
-	self.activeLocationView = [[[CustomButtonView alloc] initWithImage:[UIImage imageNamed:@"74-location.png"]
-																target:self
-															  selector:@selector(didActiveLocation)]
-								autorelease];
-	self.activeLocationView.animationImages = [NSArray arrayWithObjects:
-											   [UIImage imageNamed:@"white_arrow_0.png"],
-											   [UIImage imageNamed:@"white_arrow_45.png"],
-											   [UIImage imageNamed:@"white_arrow_90.png"],
-											   [UIImage imageNamed:@"white_arrow_135.png"],
-											   [UIImage imageNamed:@"white_arrow_180.png"],
-											   [UIImage imageNamed:@"white_arrow_225.png"],
-											   [UIImage imageNamed:@"white_arrow_270.png"],
-											   [UIImage imageNamed:@"white_arrow_315.png"],
-											   nil];
-	self.activeLocationView.animationDuration = 2.0;
-	self.activeLocationButton = [[[UIBarButtonItem alloc] initWithCustomView:self.activeLocationView] autorelease];
+	locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	locatingIndicator.hidesWhenStopped=YES;
+	self.activeLocationButton = [[[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ]autorelease];
 	self.activeLocationButton.style	= UIBarButtonItemStyleBordered;
 	
 	self.locationButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"74-location.png"]
@@ -323,14 +372,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}
 	}
 	
-	if (firstTimeStart || firstTimeFinish) {
-		self.firstAlert = [[[UIAlertView alloc]
-							initWithTitle:@"CycleStreets"
-							message:nil
-							delegate:self
-							cancelButtonTitle:nil
-							otherButtonTitles:nil] autorelease];	
-	}
+	
 	
 	self.clearAlert = [[[UIAlertView alloc]
 						initWithTitle:@"CycleStreets"
@@ -468,9 +510,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (void) firstAlert:(NSString *)message {
-	self.firstAlert.message = message;
-	[self.firstAlert show];
-	[self performSelector:@selector(cancelAlert:) withObject:self.firstAlert afterDelay:2.0];
+	
+	[self showHUDWithMessage:message];
 }
 
 - (void) showStartFinishAlert {
@@ -547,7 +588,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[self endMarker:location];
 		if (firstTimeFinish) {
 			//[self firstAlert:@"Finish point (F) set."];
-			[self performSelector:@selector(firstAlert:) withObject:@"Finish point (F) set." afterDelay:0.5];
+			//[self performSelector:@selector(firstAlert:) withObject:@"Finish point (F) set." afterDelay:0.5];
+			[self showHUDWithMessage:@"Finish point set." andIcon:@"MKMapPin_Red"];
 			firstTimeFinish = NO;
 		}
 		if (self.planningState == stateEnd) {
@@ -560,6 +602,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[self startMarker:location];
 		if (firstTimeStart) {
 			[self performSelector:@selector(firstAlert:) withObject:@"Start point (S) set." afterDelay:0.5];
+			[self showHUDWithMessage:@"Finish point set." andIcon:@"MKMapPin_Red"];
 			firstTimeStart = NO;
 		}
 		if (self.planningState == stateStart) {
@@ -707,7 +750,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[locationManager stopUpdatingLocation];
 		blueCircleView.hidden = YES;
 		
-		[self.activeLocationView stopAnimating];
+		[locatingIndicator stopAnimating];
 		NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
 		[items removeObjectAtIndex:0];
 		[items insertObject:self.locationButton atIndex:0];
@@ -747,10 +790,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[locationManager startUpdatingLocation];
 		blueCircleView.hidden = NO;
 		
-		[self.activeLocationView startAnimating];
+		
 		NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
 		[items removeObjectAtIndex:0];
 		[items insertObject:self.activeLocationButton atIndex:0];
+		[locatingIndicator startAnimating];
 		self.toolBar.items = items;
 		
 		if (self.planningState == stateStart) {
@@ -970,7 +1014,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void)nullify {
 	self.locationButton = nil;
 	self.activeLocationButton = nil;
-	self.activeLocationView = nil;
+	self.locatingIndicator = nil;
 		
 	self.nameButton = nil;
 	self.routeButton = nil;
@@ -1015,9 +1059,85 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
-- (void)dealloc {
-	[self nullify];
-    [super dealloc];
+//
+/***********************************************
+ * @description			HUDSUPPORT
+ ***********************************************/
+//
+
+
+-(void)showProgressHUDWithMessage:(NSString*)message{
+	
+	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
+    HUD.delegate = self;
+	HUD.animationType=MBProgressHUDAnimationZoom;
+	HUD.labelText=message;
+	[HUD show:YES];
+	
 }
+
+-(void)showHUDWithMessage:(NSString*)message{
+	
+	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+    HUD.delegate = self;
+	HUD.labelText=message;
+	[HUD show:YES];
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
+}
+-(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon{
+	
+	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+    HUD.delegate = self;
+	HUD.labelText=message;
+	[HUD show:YES];
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
+}
+
+
+//
+/***********************************************
+ * @description			NOTE: These are only to be called if the hud has already been created!
+ ***********************************************/
+//
+
+-(void)showSuccessHUD:(NSString*)message{
+	
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+	HUD.labelText = message;
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:1];
+}
+
+-(void)showErrorHUDWithMessage:(NSString*)error{
+	
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+	HUD.labelText = @"Error";
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
+}
+
+
+-(void)removeHUD{
+	
+	[HUD hide:YES];
+	
+}
+
+
+-(void)hudWasHidden{
+	
+	[HUD removeFromSuperview];
+	[HUD release];
+	HUD=nil;
+	
+}
+
 
 @end
