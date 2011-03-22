@@ -135,6 +135,7 @@ typedef enum PlanningStateT PlanningState;
 - (IBAction) didDelete;
 - (IBAction) didRoute;
 - (IBAction) didSearch;
+-(void)updateSelectedRoute;
 - (void) showRoute:(Route *)route;
 - (void)stopDoingLocation;
 - (void)startDoingLocation;

@@ -55,6 +55,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "InitialLocation.h"
 #import "CustomButtonView.h"
 #import "RouteManager.h"
+#import "GlobalUtilities.h"
+#import "AppConstants.h"
 
 @interface MapViewController(Private)
 
@@ -63,8 +65,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -(void)showSuccessHUD:(NSString*)message;
 -(void)showErrorHUDWithMessage:(NSString*)error;
 -(void)showHUDWithMessage:(NSString*)message;
--(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon;
-
+-(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon withDelay:(NSTimeInterval)delay;
 
 @end
 
@@ -236,6 +237,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (id)init {
+	BetterLog(@"");
 	if (self = [super init]) {
 		firstTimeStart = YES;
 		firstTimeFinish = YES;
@@ -342,6 +344,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [super viewDidLoad];
 	DLog(@">>>");
 	
+	firstTimeStart = YES;
+	firstTimeFinish = YES;
+	
 	self.mapView.hidden = YES;
 	
 	locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -429,6 +434,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 												 name:@"NotificationMapStyleChanged"
 											   object:nil];	
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(updateSelectedRoute)
+												 name:CSROUTESELECTED
+											   object:nil];	
 	
 	DLog(@"<<<");
 }
@@ -576,6 +585,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}
 	}
 	
+	BetterLog(@"");
+	
 	//explicit click while autolocation was happening. Turn off auto, accept click.
 	if (!self.programmaticChange) {
 		if (self.planningState == stateLocatingEnd || self.planningState == stateLocatingStart) {
@@ -583,13 +594,16 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}
 	}
 	
+	BetterLog(@"planningState=%i firstTimeFinish=%i",planningState,firstTimeFinish);
+	
+	
 	//endpoint, whether autolocated or not.
 	if (self.planningState == stateEnd || self.planningState == stateLocatingEnd) {
 		[self endMarker:location];
 		if (firstTimeFinish) {
 			//[self firstAlert:@"Finish point (F) set."];
 			//[self performSelector:@selector(firstAlert:) withObject:@"Finish point (F) set." afterDelay:0.5];
-			[self showHUDWithMessage:@"Finish point set." andIcon:@"MKMapPin_Red"];
+			[self showHUDWithMessage:@"Finish point set." andIcon:@"Map_Pin_Red.png" withDelay:1];
 			firstTimeFinish = NO;
 		}
 		if (self.planningState == stateEnd) {
@@ -597,12 +611,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}		
 	}
 	
+	BetterLog(@"planningState=%i firstTimeStart=%i",planningState,firstTimeStart);
+	
 	//startpoint, whether autolocated or not.
 	if (self.planningState == stateStart || self.planningState == stateLocatingStart) {
 		[self startMarker:location];
 		if (firstTimeStart) {
-			[self performSelector:@selector(firstAlert:) withObject:@"Start point (S) set." afterDelay:0.5];
-			[self showHUDWithMessage:@"Finish point set." andIcon:@"MKMapPin_Red"];
+			//[self performSelector:@selector(firstAlert:) withObject:@"Start point (S) set." afterDelay:0.5];
+			[self showHUDWithMessage:@"Start point set." andIcon:@"Map_Pin_Green.png" withDelay:1];
 			firstTimeStart = NO;
 		}
 		if (self.planningState == stateStart) {
@@ -836,6 +852,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 // A new route has successfully been calculated.
 // Plot it, and replace the current stuff.
+
+-(void)updateSelectedRoute{
+	[self showRoute:[RouteManager sharedInstance].selectedRoute];
+}
+
 - (void) showRoute:(Route *)newRoute {
 	[newRoute retain];
 	[route release];
@@ -1088,7 +1109,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[HUD show:YES];
 	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
 }
--(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon{
+-(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon withDelay:(NSTimeInterval)delay{
 	
 	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
     [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
@@ -1097,7 +1118,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     HUD.delegate = self;
 	HUD.labelText=message;
 	[HUD show:YES];
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delay];
 }
 
 
