@@ -65,23 +65,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements {
 	
 	//update the table.
-	Route *route = [[Route alloc] initWithElements:elements];
+	self.selectedRoute = [[Route alloc] initWithElements:elements];
 	
-	if ([route itinerary] == nil) {
+	if ([selectedRoute itinerary] == nil) {
 		[self showErrorHUDWithMessage:@"Could not plan valid route for selected endpoints."];
 	} else {
 		
-		[self showSuccessHUD:@"Found Route"];
+		[self showSuccessHUD:@"Found Route, added path to map"];
 		
 		BetterLog(@"");
 		//save the route data to file.
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		[cycleStreets.files setRoute:[[route itinerary] intValue] data:request.data];
+		[cycleStreets.files setRoute:[[selectedRoute itinerary] intValue] data:request.data];
 		
 		[self warnOnFirstRoute];
-		[self selectRoute:route];		
+		[self selectRoute:selectedRoute];		
 	}
-	[route release];
 }
 
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message {
