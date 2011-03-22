@@ -81,11 +81,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-- (void) runQuery:(Query *)query;
-
-- (void) selectRoute:(Route *)route;
 - (void)buildTabbarController:(NSArray*)viewcontrollers;
 - (void)setBarStyle:(UIBarStyle)style andTintColor:(UIColor *)color forNavigationBar:(UINavigationBar *)bar;
+-(void)showTabBarViewControllerByName:(NSString*)viewname;
 
 @end
 

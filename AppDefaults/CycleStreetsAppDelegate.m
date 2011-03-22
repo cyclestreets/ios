@@ -45,6 +45,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CategoryLoader.h"
 #import "StartupManager.h"
 #import "UserSettingsManager.h"
+#import "AppConstants.h"
 
 @implementation CycleStreetsAppDelegate
 @synthesize window;
@@ -279,92 +280,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}	
 }
 
-//It would make sense to turn this into an NSNotificationQueue based thing, so anything that wanted
-//could listen for the route changing.
-- (void) selectRoute:(Route *)route {
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-
-	//load favourites, and add the new route to the favourites, as the first one.
-	//do this even if we have it already, so last-selected favourite is "top"
-	NSArray *oldFavourites = [cycleStreets.files favourites];
-	NSMutableArray *newFavourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count]+1] autorelease];
-	[newFavourites addObjectsFromArray:oldFavourites];
-	if ([route itinerary] != nil) {
-		[newFavourites removeObject:[route itinerary]];
-		[newFavourites insertObject:[route itinerary] atIndex:0];
-		[cycleStreets.files setMiscValue:[route itinerary] forKey:@"selectedroute"];
-	}
-	[cycleStreets.files setFavourites:newFavourites];
-	
-	
-	//tell the favourites table it is reset.
-	[cycleStreets.appDelegate.favourites clear];
-	
-	//and fill in the table data
-	[routeTable setRoute:route];  // SHOULD BE CSROUTESELECTED
-	
-	//make this the plotted route
-	[map showRoute:route];
-	
-	//enable the route view.
-	//routeTabBarItem.enabled = YES;
-	 
-}
-
-- (void)warnOnFirstRoute {
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
-	NSString *experienceLevel = [misc objectForKey:@"experienced"];
-	if (experienceLevel == nil) {
-		[misc setObject:@"1" forKey:@"experienced"];
-		[cycleStreets.files setMisc:misc];
-		
-		self.firstAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
-													 message:@"Route quality cannot be guaranteed. Please proceed at your own risk. Do not use a mobile while cycling."
-													delegate:self
-										   cancelButtonTitle:@"OK"
-										   otherButtonTitles:nil];
-		[firstAlert show];				
-	} else if ([experienceLevel isEqualToString:@"1"]) {
-		[misc setObject:@"2" forKey:@"experienced"];
-		[cycleStreets.files setMisc:misc];
-		
-		self.optionsAlert = [[UIAlertView alloc] initWithTitle:@"Routing modes"
-													   message:@"You can change between fastest / quietest / balanced routing type on the Settings page under 'More', before you plan a route."
-													  delegate:self
-											 cancelButtonTitle:@"OK"
-											 otherButtonTitles:nil];
-		[optionsAlert show];						
-	}	
-}
-
-- (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements {
-	[busyAlert hide];
-	
-	//update the table.
-	Route *route = [[Route alloc] initWithElements:elements];
-	
-	if ([route itinerary] == nil) {
-		//alert no valid route.
-		errorAlert.message = @"Could not plan valid route for selected endpoints.";
-		[errorAlert show];
-	} else {
-		//save the route data to file.
-		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		[cycleStreets.files setRoute:[[route itinerary] intValue] data:request.data];
-		
-		[self warnOnFirstRoute];
-		[self selectRoute:route];		
-	}
-	[route release];
-}
-
-- (void) queryFailure:(XMLRequest *)request message:(NSString *)message {
-	[busyAlert hide];
-	
-	errorAlert.message = @"Could not fetch route for selected endpoints.";
-	[errorAlert show];
-}
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	DLog(@">>>");
@@ -390,10 +305,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 }
 
-- (void) runQuery:(Query *)query {
-	[busyAlert show:@"Obtaining route from CycleStreets.net"];
-	NSLog(@"[DEBUG] For Query = %@",[query description]);
-	[query runWithTarget:self onSuccess:@selector(querySuccess:results:) onFailure:@selector(queryFailure:message:)];
+
+-(void)showTabBarViewControllerByName:(NSString*)viewname{
+	
+	int count=[tabBarController.viewControllers count];
+	int index=-1;
+	for (int i=0;i<count;i++) {
+		UIViewController *navcontroller=[tabBarController.viewControllers objectAtIndex:i];
+		if([navcontroller.title isEqualToString:viewname]){
+			index=i;
+			break;
+		}
+	}
+	
+	if(index!=-1)
+		[tabBarController setSelectedIndex:index];
 	
 }
 
