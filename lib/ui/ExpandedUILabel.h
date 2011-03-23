@@ -11,8 +11,9 @@
 
 @interface ExpandedUILabel : UILabel {
 	BOOL			multiline;
+	BOOL			hasShadow;
 }
-@property (nonatomic)			BOOL multiline;
-
+@property (nonatomic)		BOOL		 multiline;
+@property (nonatomic)		BOOL		 hasShadow;
 
 @end

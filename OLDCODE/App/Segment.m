@@ -178,6 +178,42 @@ static NSDictionary *roadIcons;
 	}
 }
 
+-(NSDictionary*)infoStringDictionary{
+	
+	NSString *hm = [NSString stringWithFormat:@"%02d:%02d", startTime/60, startTime%60];
+	NSString *distance = [NSString stringWithFormat:@"%4dm", [self segmentDistance]];
+	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
+	NSString *total = [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
+	
+	NSArray *turnParts = [[self turn] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	NSString *capitalizedTurn = @"";
+	for (NSString *string in turnParts) {
+		if ([capitalizedTurn length] == 0) {
+			capitalizedTurn = [string capitalizedString];
+		} else {
+			capitalizedTurn = [capitalizedTurn stringByAppendingFormat:@" %@", string];
+		}
+	}
+	
+	NSString *provisionstring=[[self provisionName] stringByReplacingOccurrencesOfString:@"," withString:@", "];
+	
+	if ([turnParts count] ==0 || [capitalizedTurn isEqualToString:@"Unknown"]) {
+		
+		return [NSDictionary dictionaryWithObjectsAndKeys:[self roadName],@"roadname",
+				provisionstring,@"provisionName",
+				hm,@"hm",distance,@"distance",total,@"total",nil];
+	} else {
+		
+		return [NSDictionary dictionaryWithObjectsAndKeys:capitalizedTurn,@"capitalizedTurn",
+				[self roadName],@"roadname",
+				provisionstring,@"provisionName",
+				hm,@"hm",distance,@"distance",total,@"total",nil];
+	}
+	
+}
+
+
+
 - (void) dealloc {
 	[xmlDict release];
 	

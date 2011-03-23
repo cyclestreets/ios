@@ -29,19 +29,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapView.h"
 #import "BlueCircleView.h"
 #import "RouteLineView.h"
+#import "ExpandedUILabel.h"
+#import "GradientView.h"
+#import "CSSegmentFooterView.h"
 
 @class Location2;
 @class QueryPhoto;
 
 @interface Stage : UIViewController <CLLocationManagerDelegate, RMMapViewDelegate, LocationProvider, PointListProvider> {
-	//UI elements
-	UILabel *info;
 	
-	RMMapView *mapView;
-	BlueCircleView *blueCircleView;	//overlay GPS location
+	CSSegmentFooterView				*footerView;
+	BOOL							footerIsHidden;
+	
+	IBOutlet RMMapView *mapView;
+	IBOutlet BlueCircleView *blueCircleView;	//overlay GPS location
 	CLLocation *lastLocation;		//the last one
-	RouteLineView *lineView;		//overlay route lines on top of map
-	UILabel *attributionLabel;
+	IBOutlet RouteLineView *lineView;		//overlay route lines on top of map
+	IBOutlet UILabel *attributionLabel;
 	
 	//toolbar
 	UIBarButtonItem *locationButton;
@@ -61,23 +65,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	Location2 *locationView;
 	QueryPhoto *queryPhoto;
 }
+@property (nonatomic, retain)		CSSegmentFooterView		* footerView;
+@property (nonatomic)		BOOL		 footerIsHidden;
+@property (nonatomic, retain)		IBOutlet RMMapView		* mapView;
+@property (nonatomic, retain)		IBOutlet BlueCircleView		* blueCircleView;
+@property (nonatomic, retain)		CLLocation		* lastLocation;
+@property (nonatomic, retain)		IBOutlet RouteLineView		* lineView;
+@property (nonatomic, retain)		IBOutlet UILabel		* attributionLabel;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* locationButton;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* infoButton;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* segmentInStage;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* prev;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* next;
+@property (nonatomic, retain)		Route		* route;
+@property (nonatomic)		NSInteger		 index;
+@property (nonatomic)		NSInteger		 photosIndex;
+@property (nonatomic, retain)		RMMarker		* markerLocation;
+@property (nonatomic, retain)		CLLocationManager		* locationManager;
+@property (nonatomic)		BOOL		 doingLocation;
+@property (nonatomic, retain)		Location2		* locationView;
+@property (nonatomic, retain)		QueryPhoto		* queryPhoto;
 
-@property (nonatomic, retain) IBOutlet UILabel *info;
-
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *infoButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *segmentInStage;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *prev;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *next;
-@property (nonatomic, retain) IBOutlet UILabel *attributionLabel;
-
-@property (nonatomic, retain) IBOutlet RMMapView *mapView;
-@property (nonatomic, retain) IBOutlet BlueCircleView *blueCircleView;
-@property (nonatomic, retain) IBOutlet RouteLineView *lineView;
-
-@property (nonatomic, retain) RMMarker *markerLocation;
-
-@property (nonatomic, retain) QueryPhoto *queryPhoto;
 
 //toolbar
 - (IBAction) didRoute;
@@ -91,5 +99,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)setRoute:(Route *)newRoute;
 
 - (void)setSegmentIndex:(NSInteger)newIndex;
+
+-(void)updateFooterPositions;
 
 @end

@@ -40,21 +40,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "BlueCircleView.h"
 #import "CSPoint.h"
 #import "AppConstants.h"
+#import "GlobalUtilities.h"
 
 @implementation Stage
-
-@synthesize info;
+@synthesize footerView;
+@synthesize footerIsHidden;
 @synthesize mapView;
+@synthesize blueCircleView;
+@synthesize lastLocation;
+@synthesize lineView;
+@synthesize attributionLabel;
 @synthesize locationButton;
 @synthesize infoButton;
-@synthesize attributionLabel;
 @synthesize segmentInStage;
 @synthesize prev;
 @synthesize next;
-@synthesize blueCircleView;
-@synthesize lineView;
+@synthesize route;
+@synthesize index;
+@synthesize photosIndex;
 @synthesize markerLocation;
+@synthesize locationManager;
+@synthesize doingLocation;
+@synthesize locationView;
 @synthesize queryPhoto;
+
+/***********************************************************/
+// dealloc
+/***********************************************************/
+- (void)dealloc
+{
+    [footerView release], footerView = nil;
+    [mapView release], mapView = nil;
+    [blueCircleView release], blueCircleView = nil;
+    [lastLocation release], lastLocation = nil;
+    [lineView release], lineView = nil;
+    [attributionLabel release], attributionLabel = nil;
+    [locationButton release], locationButton = nil;
+    [infoButton release], infoButton = nil;
+    [segmentInStage release], segmentInStage = nil;
+    [prev release], prev = nil;
+    [next release], next = nil;
+    [route release], route = nil;
+    [markerLocation release], markerLocation = nil;
+    [locationManager release], locationManager = nil;
+    [locationView release], locationView = nil;
+    [queryPhoto release], queryPhoto = nil;
+	
+    [super dealloc];
+}
 
 
 
@@ -82,6 +115,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//starts as info "on"
 	self.infoButton.style = UIBarButtonItemStyleDone;
 	
+	footerIsHidden=NO;
+	footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
+	[self.view addSubview:footerView];
+	
+	
+	self.attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000,0.2);
 	self.attributionLabel.text = [MapViewController mapAttribution];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -171,7 +210,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	// fill the labels from the segment we are showing
-	self.info.text = [segment infoString];
+	footerView.dataProvider=[segment infoStringDictionary];
+	[footerView updateLayout];
+	[self updateFooterPositions];
 	// centre the view around the segment
 	CLLocationCoordinate2D start = [segment segmentStart];
 	CLLocationCoordinate2D end = [segment segmentEnd];
@@ -213,6 +254,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[lineView setNeedsDisplay];
 	[blueCircleView setNeedsDisplay];
 }
+
+
+//
+/***********************************************
+ * @description			update info footer
+ ***********************************************/
+//
+
+-(void)updateFooterPositions{
+	
+	CGRect	fframe=footerView.frame;
+	CGRect	aframe=attributionLabel.frame;
+	
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:0.3];
+	
+	fframe.origin.y=SCREENHEIGHT-fframe.size.height*2;
+	aframe.origin.y=fframe.origin.y-aframe.size.height;
+	
+	footerView.frame=fframe;
+	attributionLabel.frame=aframe;
+	
+	[UIView commitAnimations];
+	
+}
+
+
+
+
 
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
 	DLog(@"tapMarker");
@@ -316,36 +387,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (IBAction) didToggleInfo {
-	if (self.info.hidden) {
+	
+	if (footerIsHidden==NO) {
 		
-		//self.infoButton.selected=NO
-		
-		CGRect labelrect=info.frame;
-		CGRect overlaytrect=attributionLabel.frame;
+		CGRect	fframe=footerView.frame;
+		CGRect	aframe=attributionLabel.frame;
 		
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationBeginsFromCurrentState:YES];
 		[UIView setAnimationDuration:0.4];
 		
-		labelrect.origin.y=SCREENHEIGHT;
-		overlaytrect.origin.y=SCREENHEIGHT-overlaytrect.size.height;
+		fframe.origin.y=SCREENHEIGHT;
+		aframe.origin.y=SCREENHEIGHT-aframe.size.height;
+		
+		footerView.frame=fframe;
+		attributionLabel.frame=aframe;
 		
 		[UIView commitAnimations];
+		
+		footerIsHidden=YES;
 		
 	} else {
 		
-		CGRect labelrect=info.frame;
-		CGRect overlaytrect=attributionLabel.frame;
+		CGRect	fframe=footerView.frame;
+		CGRect	aframe=attributionLabel.frame;
 		
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationBeginsFromCurrentState:YES];
 		[UIView setAnimationDuration:0.4];
 		
-		labelrect.origin.y=SCREENHEIGHT-labelrect.size.height;
-		overlaytrect.origin.y=labelrect.origin.y-overlaytrect.size.height;
+		fframe.origin.y=SCREENHEIGHT-fframe.size.height;
+		aframe.origin.y=fframe.origin.y-aframe.size.height;
+		
+		footerView.frame=fframe;
+		attributionLabel.frame=aframe;
 		
 		[UIView commitAnimations];
-		//self.infoButton.selected=YES;
+		
+		footerIsHidden=NO;
 	}
 }
 
@@ -393,7 +472,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)nullify {
-	self.info = nil;
+	self.footerView=nil;
 	
 	self.mapView = nil;
 	self.blueCircleView = nil;	//overlay GPS location
@@ -424,15 +503,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[super viewDidUnload];
 	DLog(@">>>");
 }
-
-- (void)dealloc {
-	[self nullify];
-	//current route - don't remove that on unload.
-	self.route = nil;
-		
-    [super dealloc];
-}
-
 
 
 @end

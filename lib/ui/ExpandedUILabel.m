@@ -17,22 +17,25 @@
 
 @implementation ExpandedUILabel
 @synthesize multiline;
+@synthesize hasShadow;
 
-
-//=========================================================== 
+/***********************************************************/
 // dealloc
-//=========================================================== 
+/***********************************************************/
 - (void)dealloc
 {
 	
     [super dealloc];
 }
 
+
+
 // Called when creating containe by code
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		multiline=YES;
 		self.backgroundColor=[UIColor clearColor];
+		
     }
     return self;
 }
@@ -59,6 +62,11 @@
         [super setText:aText];
 		[self updateText];
     }
+	
+	if(hasShadow==YES){
+		self.shadowColor=[UIColor whiteColor];
+		self.shadowOffset=CGSizeMake(0, 1);
+	}
 }
 
 

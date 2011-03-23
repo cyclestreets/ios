@@ -34,7 +34,7 @@
 - (id)initWithCoder:(NSCoder*)decoder {
 	if (self = [super initWithCoder:decoder]) {
 		self.paddingLeft=0;
-		self.horizontalGap=5;
+		self.itemPadding=5;
     }
     return self;
 }
@@ -43,7 +43,7 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
 		self.paddingLeft=0;
-		self.horizontalGap=5;
+		self.itemPadding=5;
     }
     return self;
 }

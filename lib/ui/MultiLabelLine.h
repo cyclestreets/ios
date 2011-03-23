@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HBox.h"
+#import "LayoutBox.h"
 
-@interface MultiLabelLine : HBox {
+@interface MultiLabelLine : LayoutBox {
 	
 	NSMutableArray			*labels;
 	NSMutableArray			*fonts;

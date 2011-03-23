@@ -26,12 +26,12 @@
 		2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DFA413283ABD003995BE /* RoutesViewContoller.m */; };
 		2872DFB513283B6E003995BE /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2872DFB413283B6E003995BE /* RoutesView.xib */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		28AC29BA1331FAE300669C79 /* BUSegmentedControl_center_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B41331FAE300669C79 /* BUSegmentedControl_center_hi.png */; };
-		28AC29BB1331FAE300669C79 /* BUSegmentedControl_center_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B51331FAE300669C79 /* BUSegmentedControl_center_lo.png */; };
-		28AC29BC1331FAE300669C79 /* BUSegmentedControl_left_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B61331FAE300669C79 /* BUSegmentedControl_left_hi.png */; };
-		28AC29BD1331FAE300669C79 /* BUSegmentedControl_left_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B71331FAE300669C79 /* BUSegmentedControl_left_lo.png */; };
-		28AC29BE1331FAE300669C79 /* BUSegmentedControl_right_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B81331FAE300669C79 /* BUSegmentedControl_right_hi.png */; };
-		28AC29BF1331FAE300669C79 /* BUSegmentedControl_right_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AC29B91331FAE300669C79 /* BUSegmentedControl_right_lo.png */; };
+		28915EFC133A6CBC000C821B /* from_arrow_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915EFA133A6CBC000C821B /* from_arrow_2.png */; };
+		28915EFD133A6CBC000C821B /* to_arrow_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915EFB133A6CBC000C821B /* to_arrow_2.png */; };
+		28915F11133A74AB000C821B /* UIButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915F0F133A74AB000C821B /* UIButtonBarArrowLeft.png */; };
+		28915F12133A74AB000C821B /* UIButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915F10133A74AB000C821B /* UIButtonBarArrowRight.png */; };
+		28915F18133A7631000C821B /* UIButtonBarInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915F17133A7631000C821B /* UIButtonBarInfo.png */; };
+		28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		28AD60BB131FB54A008527FC /* CycleStreets-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */; };
 		28AD60BC131FB54A008527FC /* CycleStreetsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B6131FB54A008527FC /* CycleStreetsAppDelegate.m */; };
 		28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B7131FB54A008527FC /* CycleStreetsWindow.xib */; };
@@ -367,12 +367,13 @@
 		2872DFA413283ABD003995BE /* RoutesViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewContoller.m; sourceTree = "<group>"; };
 		2872DFB413283B6E003995BE /* RoutesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutesView.xib; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		28AC29B41331FAE300669C79 /* BUSegmentedControl_center_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_center_hi.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_center_hi.png; sourceTree = SOURCE_ROOT; };
-		28AC29B51331FAE300669C79 /* BUSegmentedControl_center_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_center_lo.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_center_lo.png; sourceTree = SOURCE_ROOT; };
-		28AC29B61331FAE300669C79 /* BUSegmentedControl_left_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_left_hi.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_left_hi.png; sourceTree = SOURCE_ROOT; };
-		28AC29B71331FAE300669C79 /* BUSegmentedControl_left_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_left_lo.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_left_lo.png; sourceTree = SOURCE_ROOT; };
-		28AC29B81331FAE300669C79 /* BUSegmentedControl_right_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_right_hi.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_right_hi.png; sourceTree = SOURCE_ROOT; };
-		28AC29B91331FAE300669C79 /* BUSegmentedControl_right_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BUSegmentedControl_right_lo.png; path = ../../NagMe/ios/graphics/generic/ui/BUSegmentedControl_right_lo.png; sourceTree = SOURCE_ROOT; };
+		28915EFA133A6CBC000C821B /* from_arrow_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = from_arrow_2.png; sourceTree = "<group>"; };
+		28915EFB133A6CBC000C821B /* to_arrow_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = to_arrow_2.png; sourceTree = "<group>"; };
+		28915F0F133A74AB000C821B /* UIButtonBarArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarArrowLeft.png; sourceTree = "<group>"; };
+		28915F10133A74AB000C821B /* UIButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarArrowRight.png; sourceTree = "<group>"; };
+		28915F17133A7631000C821B /* UIButtonBarInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarInfo.png; sourceTree = "<group>"; };
+		28916030133A9AC9000C821B /* CSSegmentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSegmentFooterView.h; sourceTree = "<group>"; };
+		28916031133A9AC9000C821B /* CSSegmentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSegmentFooterView.m; sourceTree = "<group>"; };
 		28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CycleStreets-Info.plist"; path = "../CycleStreets-Info.plist"; sourceTree = "<group>"; };
 		28AD60B4131FB54A008527FC /* CycleStreets_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CycleStreets_Prefix.pch; path = ../CycleStreets_Prefix.pch; sourceTree = "<group>"; };
 		28AD60B5131FB54A008527FC /* CycleStreetsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleStreetsAppDelegate.h; sourceTree = "<group>"; };
@@ -1110,6 +1111,8 @@
 		28AD6218131FB69D008527FC /* views */ = {
 			isa = PBXGroup;
 			children = (
+				28916030133A9AC9000C821B /* CSSegmentFooterView.h */,
+				28916031133A9AC9000C821B /* CSSegmentFooterView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1662,6 +1665,9 @@
 		28AD6525131FC239008527FC /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				28915F17133A7631000C821B /* UIButtonBarInfo.png */,
+				28915F0F133A74AB000C821B /* UIButtonBarArrowLeft.png */,
+				28915F10133A74AB000C821B /* UIButtonBarArrowRight.png */,
 				28AD6625131FD630008527FC /* Map_Pin_Red.png */,
 				28AD6626131FD630008527FC /* Map_Pin_Green.png */,
 				28AD661E131FD4CD008527FC /* UITabbar_addphoto.png */,
@@ -1685,12 +1691,6 @@
 				28AD652F131FC239008527FC /* UIButton_orangesmall_lo.png */,
 				28AD6530131FC239008527FC /* UIButton_red_hi.png */,
 				28AD6531131FC239008527FC /* UIButton_red_lo.png */,
-				28AC29B41331FAE300669C79 /* BUSegmentedControl_center_hi.png */,
-				28AC29B51331FAE300669C79 /* BUSegmentedControl_center_lo.png */,
-				28AC29B61331FAE300669C79 /* BUSegmentedControl_left_hi.png */,
-				28AC29B71331FAE300669C79 /* BUSegmentedControl_left_lo.png */,
-				28AC29B81331FAE300669C79 /* BUSegmentedControl_right_hi.png */,
-				28AC29B91331FAE300669C79 /* BUSegmentedControl_right_lo.png */,
 			);
 			path = x1;
 			sourceTree = "<group>";
@@ -1773,6 +1773,8 @@
 		E7FD8F46127821EB002640D0 /* IconsAndImages */ = {
 			isa = PBXGroup;
 			children = (
+				28915EFA133A6CBC000C821B /* from_arrow_2.png */,
+				28915EFB133A6CBC000C821B /* to_arrow_2.png */,
 				E7FD8F47127821EB002640D0 /* bg320x240.png */,
 				E7FD8F48127821EB002640D0 /* bg320x460.png */,
 				E7FD8F49127821EB002640D0 /* bike_black.png */,
@@ -2044,17 +2046,16 @@
 				2872DF79132838BD003995BE /* ItineraryView.xib in Resources */,
 				2872DFB513283B6E003995BE /* RoutesView.xib in Resources */,
 				285F68E6132C080D00B511C0 /* RouteListView.xib in Resources */,
-				28AC29BA1331FAE300669C79 /* BUSegmentedControl_center_hi.png in Resources */,
-				28AC29BB1331FAE300669C79 /* BUSegmentedControl_center_lo.png in Resources */,
-				28AC29BC1331FAE300669C79 /* BUSegmentedControl_left_hi.png in Resources */,
-				28AC29BD1331FAE300669C79 /* BUSegmentedControl_left_lo.png in Resources */,
-				28AC29BE1331FAE300669C79 /* BUSegmentedControl_right_hi.png in Resources */,
-				28AC29BF1331FAE300669C79 /* BUSegmentedControl_right_lo.png in Resources */,
 				2805EAFF13392173002D13C5 /* Alert200x200.png in Resources */,
 				2805EB56133943BE002D13C5 /* checkMark.png in Resources */,
 				2805EB57133943BE002D13C5 /* exclaim.png in Resources */,
 				2805EB58133943BE002D13C5 /* lock.png in Resources */,
 				2805EBAE13394D85002D13C5 /* ItineraryCell.xib in Resources */,
+				28915EFC133A6CBC000C821B /* from_arrow_2.png in Resources */,
+				28915EFD133A6CBC000C821B /* to_arrow_2.png in Resources */,
+				28915F11133A74AB000C821B /* UIButtonBarArrowLeft.png in Resources */,
+				28915F12133A74AB000C821B /* UIButtonBarArrowRight.png in Resources */,
+				28915F18133A7631000C821B /* UIButtonBarInfo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2224,6 +2225,7 @@
 				28443E631332867D00FAD008 /* RouteVO.m in Sources */,
 				28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */,
 				28D246031338926E00188783 /* RouteManager.m in Sources */,
+				28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
