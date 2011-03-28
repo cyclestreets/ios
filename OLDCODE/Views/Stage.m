@@ -117,7 +117,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	footerIsHidden=NO;
 	footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
-	[self.view addSubview:footerView];
+	[mapView addSubview:footerView];
 	
 	
 	self.attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000,0.2);
@@ -264,21 +264,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)updateFooterPositions{
 	
-	CGRect	fframe=footerView.frame;
-	CGRect	aframe=attributionLabel.frame;
-	
-	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-	[UIView setAnimationDuration:0.3];
-	
-	fframe.origin.y=SCREENHEIGHT-fframe.size.height*2;
-	aframe.origin.y=fframe.origin.y-aframe.size.height;
-	
-	footerView.frame=fframe;
-	attributionLabel.frame=aframe;
-	
-	[UIView commitAnimations];
-	
+	if(footerIsHidden==NO){
+		CGRect	fframe=footerView.frame;
+		CGRect	aframe=attributionLabel.frame;
+		
+		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
+		aframe.origin.y=fframe.origin.y-10-aframe.size.height;
+		
+		footerView.frame=fframe;
+		attributionLabel.frame=aframe;
+	}
 }
 
 
@@ -397,10 +392,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[UIView setAnimationBeginsFromCurrentState:YES];
 		[UIView setAnimationDuration:0.4];
 		
-		fframe.origin.y=SCREENHEIGHT;
-		aframe.origin.y=SCREENHEIGHT-aframe.size.height;
+		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION;
+		aframe.origin.y=fframe.origin.y-aframe.size.height;
 		
 		footerView.frame=fframe;
+		footerView.alpha=0;
 		attributionLabel.frame=aframe;
 		
 		[UIView commitAnimations];
@@ -416,10 +412,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[UIView setAnimationBeginsFromCurrentState:YES];
 		[UIView setAnimationDuration:0.4];
 		
-		fframe.origin.y=SCREENHEIGHT-fframe.size.height;
-		aframe.origin.y=fframe.origin.y-aframe.size.height;
+		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
+		aframe.origin.y=fframe.origin.y-10-aframe.size.height;
 		
 		footerView.frame=fframe;
+		footerView.alpha=1;
 		attributionLabel.frame=aframe;
 		
 		[UIView commitAnimations];

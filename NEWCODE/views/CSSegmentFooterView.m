@@ -63,15 +63,12 @@
 	self.paddingBottom=5;
 	self.backgroundColor=UIColorFromRGB(0xECE9E8);
 	
-	UIView	*gradiantlayer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 20)];
-	gradiantlayer.layer.shadowColor = [UIColor blackColor].CGColor;
-	gradiantlayer.layer.shadowOpacity = 0.5f;
-	gradiantlayer.layer.shadowOffset = CGSizeMake(5, -6);
-	gradiantlayer.layer.shadowRadius = 5.0f;
-	gradiantlayer.layer.masksToBounds = NO;
-	 
-	[self.layer insertSublayer:gradiantlayer.layer atIndex:0];
-	[gradiantlayer release];
+	self.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.layer.shadowOpacity = 0.4f;
+	self.layer.shadowOffset = CGSizeMake(0, -3);
+	self.layer.shadowRadius = 3.0f;
+	self.layer.masksToBounds = NO;
+	
 	
 	roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 16)];
 	roadNameLabel.textAlignment=UITextAlignmentCenter;
@@ -90,7 +87,7 @@
 	[self addSubview:roadTypeLabel];
 	
 	readoutContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	readoutContainer.itemPadding=5;
+	readoutContainer.itemPadding=7;
 	
 	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:12],[UIFont systemFontOfSize:12],nil];
 	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x542600),UIColorFromRGB(0x404040),nil];
@@ -99,16 +96,19 @@
 	
 	
 	timeLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+	timeLabel.itemPadding=2;
 	timeLabel.fonts=fonts;
 	timeLabel.colors=colors;
 	[readoutContainer addSubview:timeLabel];
 	
 	distLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+	distLabel.itemPadding=2;
 	distLabel.fonts=fonts;
 	distLabel.colors=colors;
 	[readoutContainer addSubview:distLabel];
 	
 	totalLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+	totalLabel.itemPadding=2;
 	totalLabel.fonts=fonts;
 	totalLabel.colors=colors;
 	[readoutContainer addSubview:totalLabel];
@@ -124,13 +124,13 @@
 	
 	if(hasCapitalizedTurnEntry==NO){
 		if(hasCapitalizedTurn==YES){
-			//[self removeSubviewAtIndex:0];
+			[self removeSubviewAtIndex:0];
 			capitalizedTurnLabel=nil;
 		}
 		hasCapitalizedTurn=NO;
 	}else {
 		
-		/*
+		
 		if(hasCapitalizedTurn==NO){
 			capitalizedTurnLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 16)];
 			capitalizedTurnLabel.textAlignment=UITextAlignmentCenter;
@@ -143,7 +143,7 @@
 		capitalizedTurnLabel.text=[[dataProvider objectForKey:@"capitalizedTurn"] uppercaseString];
 		
 		hasCapitalizedTurn=YES;
-		 */
+		 
 	}
 
 	roadNameLabel.text=[dataProvider objectForKey:@"roadname"];

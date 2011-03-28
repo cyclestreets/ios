@@ -181,9 +181,9 @@ static NSDictionary *roadIcons;
 -(NSDictionary*)infoStringDictionary{
 	
 	NSString *hm = [NSString stringWithFormat:@"%02d:%02d", startTime/60, startTime%60];
-	NSString *distance = [NSString stringWithFormat:@"%4dm", [self segmentDistance]];
+	NSString *distance = [NSString stringWithFormat:@"%im", [self segmentDistance]];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
-	NSString *total = [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
+	NSString *total = [NSString stringWithFormat:@"%3.1f miles", totalMiles];
 	
 	NSArray *turnParts = [[self turn] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	NSString *capitalizedTurn = @"";
