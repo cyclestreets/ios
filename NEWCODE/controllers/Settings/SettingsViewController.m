@@ -36,11 +36,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SettingsManager.h"
 
 @implementation SettingsViewController
-@synthesize plan;
-@synthesize speed;
-@synthesize mapStyle;
-@synthesize imageSize;
-@synthesize routeUnit;
+@synthesize dataProvider;
 @synthesize planControl;
 @synthesize speedControl;
 @synthesize mapStyleControl;
@@ -48,16 +44,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize routeUnitControl;
 @synthesize controlView;
 
-//=========================================================== 
+/***********************************************************/
 // dealloc
-//=========================================================== 
+/***********************************************************/
 - (void)dealloc
 {
-    [plan release], plan = nil;
-    [speed release], speed = nil;
-    [mapStyle release], mapStyle = nil;
-    [imageSize release], imageSize = nil;
-    [routeUnit release], routeUnit = nil;
+    [dataProvider release], dataProvider = nil;
     [planControl release], planControl = nil;
     [speedControl release], speedControl = nil;
     [mapStyleControl release], mapStyleControl = nil;
@@ -70,43 +62,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         
-		//load from saved settings
+		[SettingsManager sharedInstance];
+		self.dataProvider=[SettingsManager sharedInstance].dataProvider;
 		
-		[[SettingsManager sharedInstance] loadData];
-		NSDictionary *dict=[SettingsManager sharedInstance].dataProvider;
-		
-		self.speed = [dict valueForKey:@"speed"];
-		self.plan = [dict valueForKey:@"plan"];
-		self.mapStyle = [dict valueForKey:@"mapStyle"];
-		self.imageSize = [dict valueForKey:@"imageSize"];
-		self.routeUnit = [dict valueForKey:@"routeUnit"];
-		
-		//default values
-		if (self.speed == nil) {
-			self.speed = @"12";
-		}
-		if (self.plan == nil) {
-			self.plan = @"balanced";
-		}
-		
-		if (self.mapStyle == nil) {
-			self.mapStyle = @"OpenStreetMap";
-		}
-		
-		if (self.imageSize == nil) {
-			self.imageSize = @"640px";
-		}
-		
-		if (self.routeUnit == nil) {
-			self.routeUnit = @"miles";
-		}
-		
-
-		[self save];
     }
     return self;
 }
@@ -116,6 +77,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		NSString *title = [[[control titleForSegmentAtIndex:i] lowercaseString] copy];
 		if (NSOrderedSame == [title compare: selectTitle]) {
 			control.selectedSegmentIndex = i;
+			break;
 		}
 		[title release];
 	}	
@@ -123,23 +85,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)viewDidLoad {
-   
-	// NE: fix this old logic
-	// Need to copy these out, because setting the selection causes changed() to get called,
-	// which causes self.speed and self.plan to get written. So self.plan got the old value out of the control, which it then set. Yuk!
-	NSString *newSpeed = [speed copy];
-	NSString *newPlan = [plan copy];
-	NSString *newImageSize = [imageSize copy];
-	NSString *newMapStyle = [mapStyle copy];
-	NSString *newRouteUnit = [routeUnit copy];
 	
-	[self select:speedControl byString:newSpeed];
-	[self select:planControl byString:newPlan];
-	[self select:imageSizeControl byString:newImageSize];
-	[self select:mapStyleControl byString:newMapStyle];
-	[self select:routeUnitControl byString:newRouteUnit];
+	[self select:speedControl byString:dataProvider.speed];
+	[self select:planControl byString:dataProvider.plan];
+	[self select:imageSizeControl byString:dataProvider.imageSize];
+	[self select:mapStyleControl byString:dataProvider.mapStyle];
+	[self select:routeUnitControl byString:dataProvider.routeUnit];
 	
-	
+	[routeUnitControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
+	[planControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
+	[imageSizeControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
+	[mapStyleControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
+	[speedControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
 	
 	[self.view addSubview:controlView];
 	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, controlView.frame.size.height)];
@@ -170,40 +127,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void) save {
-	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-						  self.speed, @"speed",
-						  self.plan, @"plan",
-						  self.mapStyle, @"mapStyle",
-						  self.imageSize, @"imageSize",
-						  self.routeUnit, @"routeUnit",
-						  nil];
-	[[SettingsManager sharedInstance] saveData:dict];
-	//CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	//[cycleStreets.files setSettings:dict];	
+	
+	[[SettingsManager sharedInstance] saveData];
 }
 
 - (IBAction) changed {
-	self.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
-	self.speed = [[speedControl titleForSegmentAtIndex:speedControl.selectedSegmentIndex] lowercaseString];
-	self.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
-	self.mapStyle = [[mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex] lowercaseString];
-	self.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
 	
-	//save changed settings
+	dataProvider.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
+	dataProvider.speed = [[speedControl titleForSegmentAtIndex:speedControl.selectedSegmentIndex] lowercaseString];
+	dataProvider.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
+	dataProvider.mapStyle = [[mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex] lowercaseString];
+	dataProvider.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
+	
 	[self save];
 }
 
-
-
-/*
- For debugging, the standard "test" query.
-- (IBAction) findRoute {
-	Query *query = [Query example];
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	CycleStreetsAppDelegate *appDelegate = cycleStreets.appDelegate;
-	[appDelegate runQuery:query];
-}
- */
 
 
 @end

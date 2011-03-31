@@ -8,26 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
+#import "SettingsVO.h"
 
 @interface SettingsManager : NSObject {
 	
-	NSString				*plan;
-	NSString				*speed;
-	NSString				*mapStyle;
-	NSString				*imageSize;
-	NSString				*routeUnit;
-	
-	NSDictionary			*dataProvider;
+	SettingsVO				*dataProvider;
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SettingsManager);
-@property (nonatomic, retain)		NSString		* plan;
-@property (nonatomic, retain)		NSString		* speed;
-@property (nonatomic, retain)		NSString		* mapStyle;
-@property (nonatomic, retain)		NSString		* imageSize;
-@property (nonatomic, retain)		NSString		* routeUnit;
-@property (nonatomic, retain)		NSDictionary		* dataProvider;
+@property (nonatomic, retain)		SettingsVO		* dataProvider;
 
 -(void)loadData;
--(void)saveData:(NSDictionary*)dict;
+-(void)saveData;
 @end

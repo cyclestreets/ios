@@ -9,14 +9,10 @@
 #import "SettingsManager.h"
 #import "CycleStreets.h"
 #import "Files.h"
+#import "GlobalUtilities.h"
 
 @implementation SettingsManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
-@synthesize plan;
-@synthesize speed;
-@synthesize mapStyle;
-@synthesize imageSize;
-@synthesize routeUnit;
 @synthesize dataProvider;
 
 /***********************************************************/
@@ -24,11 +20,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 /***********************************************************/
 - (void)dealloc
 {
-    [plan release], plan = nil;
-    [speed release], speed = nil;
-    [mapStyle release], mapStyle = nil;
-    [imageSize release], imageSize = nil;
-    [routeUnit release], routeUnit = nil;
+    
     [dataProvider release], dataProvider = nil;
 	
     [super dealloc];
@@ -43,11 +35,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 {
     self = [super init];
     if (self) {
-        self.plan = @"balanced";
-        self.speed = @"12";
-        self.mapStyle = @"OpenStreetMap";
-        self.imageSize = @"640px";
-        self.routeUnit = @"miles";
+		[self loadData];
     }
     return self;
 }
@@ -58,24 +46,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 
 -(void)loadData{
 	
-	self.dataProvider = [(Files*)[CycleStreets sharedInstance].files settings];
-	if([dataProvider count]>0){
-		self.speed = [dataProvider valueForKey:@"speed"];
-		self.plan = [dataProvider valueForKey:@"plan"];
-		self.mapStyle = [dataProvider valueForKey:@"mapStyle"];
-		self.imageSize = [dataProvider valueForKey:@"imageSize"];
-		self.routeUnit = [dataProvider valueForKey:@"routeUnit"];
+	NSDictionary *dict = [(Files*)[CycleStreets sharedInstance].files settings];
+	
+	BetterLog(@"dict=%@",dict);
+	
+	self.dataProvider=[[SettingsVO alloc]init];
+	
+	if([dict count]>0){
+		
+		for (NSString *key in dict){
+			if([dict valueForKey:key]!=nil)
+				[dataProvider setValue:[dict valueForKey:key] forKey:key];
+		}
+			
 	}
 	
 }
 
--(void)saveData:(NSDictionary*)dict{
+-(void)saveData{
 	
-	self.dataProvider=dict;
-	[self loadData];
+	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+	
+	[dict setObject:dataProvider.imageSize forKey:@"imageSize"];
+	[dict setObject:dataProvider.mapStyle forKey:@"mapStyle"];
+	[dict setObject:dataProvider.plan forKey:@"plan"];
+	[dict setObject:dataProvider.routeUnit forKey:@"routeUnit"];
+	[dict setObject:dataProvider.speed forKey:@"speed"];
+	
+	BetterLog(@"dict=%@",dict);
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.files setSettings:dataProvider];	
+	[cycleStreets.files setSettings:dict];	
+	[dict release];
 	
 }
 

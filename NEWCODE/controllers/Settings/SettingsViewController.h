@@ -25,14 +25,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SettingsVO.h"
 
 @interface SettingsViewController : UIViewController {
-	NSString *plan;
-	NSString *speed;
-	NSString *mapStyle;
-	NSString *imageSize;
-	NSString *routeUnit;
+	
+	SettingsVO					*dataProvider;
 	
 	IBOutlet UISegmentedControl *planControl;
 	IBOutlet UISegmentedControl *speedControl;
@@ -42,18 +39,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet UIView	*controlView;
 }
 
-@property (nonatomic, retain)	NSString	*plan;
-@property (nonatomic, retain)	NSString	*speed;
-@property (nonatomic, retain)	NSString	*mapStyle;
-@property (nonatomic, retain)	NSString	*imageSize;
-@property (nonatomic, retain)	NSString	*routeUnit;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*planControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*speedControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*mapStyleControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*imageSizeControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*routeUnitControl;
-@property (nonatomic, retain)	IBOutlet UIView	*controlView;
-
+@property (nonatomic, retain)		SettingsVO		* dataProvider;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl		* planControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl		* speedControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl		* mapStyleControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl		* imageSizeControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl		* routeUnitControl;
+@property (nonatomic, retain)		IBOutlet UIView		* controlView;
 
 - (IBAction) changed;
 
