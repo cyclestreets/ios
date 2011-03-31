@@ -90,6 +90,7 @@ static NSString *clientidFileConst = @"clientid";
 // the plist of settings
 - (NSDictionary *) settings {
 	NSDictionary *result = [NSDictionary dictionaryWithContentsOfFile:[self settingsFile]];
+	NSLog(@"settings=%@",result);
 	if (result == nil) {
 		result = [NSDictionary dictionaryWithObjectsAndKeys:nil];
 	}

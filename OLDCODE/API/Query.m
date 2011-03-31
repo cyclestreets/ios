@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Files.h"
 #import "Route.h"
 #import "SettingsManager.h"
+#import "SettingsVO.h"
 
 static NSString *format = @"%@?key=%@&start_longitude=%f&start_latitude=%f&finish_longitude=%f&finish_latitude=%f&layer=%@&plan=%@&speed=%@&useDom=%@&clientid=%@";
 
@@ -60,7 +61,7 @@ static NSString *useDom = @"1";
 		
 		//Fill in various of the parameters from the current settings value.
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		SettingsManager *settings = [SettingsManager sharedInstance];
+		SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
 
 		NSString *newURL = [NSString
 							stringWithFormat:format,
@@ -71,8 +72,8 @@ static NSString *useDom = @"1";
 							[to coordinate].longitude,
 							[to coordinate].latitude,
 							layer,
-							settings.plan,
-							[self convertToKilometres: settings.speed],
+							settingsdp.plan,
+							[self convertToKilometres: settingsdp.speed],
 							useDom,
 							cycleStreets.files.clientid
 							];

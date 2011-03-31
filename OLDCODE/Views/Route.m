@@ -156,7 +156,7 @@ static NSString *TIME = @"cs:time";
 -(NSString*)speedString{
 	
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[self speed]];
-	if([[SettingsManager sharedInstance].routeUnit isEqualToString:MILES]) {
+	if([[SettingsManager sharedInstance].dataProvider.routeUnit isEqualToString:MILES]) {
 		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
 	}else {

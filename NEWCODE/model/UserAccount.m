@@ -77,7 +77,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		userPassword=@"";
 		userName=@"";
 		deviceID=[[[UIDevice currentDevice] uniqueIdentifier] retain];
-		accountMode=kUserAccountLoggedIn;
+		accountMode=kUserAccountNotLoggedIn;
 		
 		[self loadUser];
 	}

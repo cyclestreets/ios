@@ -25,6 +25,7 @@
 		2872DF79132838BD003995BE /* ItineraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2872DF78132838BD003995BE /* ItineraryView.xib */; };
 		2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DFA413283ABD003995BE /* RoutesViewContoller.m */; };
 		2872DFB513283B6E003995BE /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2872DFB413283B6E003995BE /* RoutesView.xib */; };
+		287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ECBCE1344A28900B8A6AC /* SettingsVO.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28915EFC133A6CBC000C821B /* from_arrow_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915EFA133A6CBC000C821B /* from_arrow_2.png */; };
 		28915EFD133A6CBC000C821B /* to_arrow_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915EFB133A6CBC000C821B /* to_arrow_2.png */; };
@@ -366,6 +367,8 @@
 		2872DFA313283ABD003995BE /* RoutesViewContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutesViewContoller.h; sourceTree = "<group>"; };
 		2872DFA413283ABD003995BE /* RoutesViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewContoller.m; sourceTree = "<group>"; };
 		2872DFB413283B6E003995BE /* RoutesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutesView.xib; sourceTree = "<group>"; };
+		287ECBCD1344A28900B8A6AC /* SettingsVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVO.h; sourceTree = "<group>"; };
+		287ECBCE1344A28900B8A6AC /* SettingsVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVO.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28915EFA133A6CBC000C821B /* from_arrow_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = from_arrow_2.png; sourceTree = "<group>"; };
 		28915EFB133A6CBC000C821B /* to_arrow_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = to_arrow_2.png; sourceTree = "<group>"; };
@@ -480,9 +483,9 @@
 		28AD6259131FB69D008527FC /* WBImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBImage.m; sourceTree = "<group>"; };
 		28AD625B131FB69D008527FC /* BlueCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueCircleView.h; sourceTree = "<group>"; };
 		28AD625C131FB69D008527FC /* BlueCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueCircleView.m; sourceTree = "<group>"; };
-		28AD625E131FB69D008527FC /* CreditsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditsView.xib; sourceTree = "<group>"; };
-		28AD625F131FB69D008527FC /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
-		28AD6260131FB69D008527FC /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
+		28AD625E131FB69D008527FC /* CreditsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CreditsView.xib; path = ../../../OLDCODE/Views/Credits/CreditsView.xib; sourceTree = "<group>"; };
+		28AD625F131FB69D008527FC /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreditsViewController.h; path = ../../../OLDCODE/Views/Credits/CreditsViewController.h; sourceTree = "<group>"; };
+		28AD6260131FB69D008527FC /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreditsViewController.m; path = ../../../OLDCODE/Views/Credits/CreditsViewController.m; sourceTree = "<group>"; };
 		28AD6261131FB69D008527FC /* CustomButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButtonView.h; sourceTree = "<group>"; };
 		28AD6262131FB69D008527FC /* CustomButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButtonView.m; sourceTree = "<group>"; };
 		28AD6267131FB69D008527FC /* FavouritesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesView.xib; sourceTree = "<group>"; };
@@ -761,7 +764,7 @@
 		E70586A812365A7B0080917E /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = donate.html; path = html/donate.html; sourceTree = "<group>"; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E7757BB81259C79300730726 /* APIKey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey.txt; path = docs/APIKey.txt; sourceTree = "<group>"; };
-		E77D8F10120321E4003E6B8D /* credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = credits.html; path = html/credits.html; sourceTree = "<group>"; };
+		E77D8F10120321E4003E6B8D /* credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = credits.html; path = ../../html/credits.html; sourceTree = "<group>"; };
 		E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E7F41576113D6CC900CBC58B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E7F41C331140173400CBC58B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -886,6 +889,9 @@
 		2872DF9D13283AA9003995BE /* Credits */ = {
 			isa = PBXGroup;
 			children = (
+				28AD625E131FB69D008527FC /* CreditsView.xib */,
+				28AD625F131FB69D008527FC /* CreditsViewController.h */,
+				28AD6260131FB69D008527FC /* CreditsViewController.m */,
 			);
 			path = Credits;
 			sourceTree = "<group>";
@@ -915,6 +921,14 @@
 				285F68E5132C080D00B511C0 /* RouteListView.xib */,
 			);
 			path = routes;
+			sourceTree = "<group>";
+		};
+		287ECBAD134490D800B8A6AC /* html */ = {
+			isa = PBXGroup;
+			children = (
+				E77D8F10120321E4003E6B8D /* credits.html */,
+			);
+			name = html;
 			sourceTree = "<group>";
 		};
 		28AD60B2131FB54A008527FC /* AppDefaults */ = {
@@ -1029,6 +1043,8 @@
 				28AD6203131FB69D008527FC /* ValidationVO.m */,
 				28443E611332867D00FAD008 /* RouteVO.h */,
 				28443E621332867D00FAD008 /* RouteVO.m */,
+				287ECBCD1344A28900B8A6AC /* SettingsVO.h */,
+				287ECBCE1344A28900B8A6AC /* SettingsVO.m */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -1045,6 +1061,7 @@
 		28AD6207131FB69D008527FC /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				287ECBAD134490D800B8A6AC /* html */,
 				28AD6208131FB69D008527FC /* images */,
 				28AD620C131FB69D008527FC /* plist */,
 				28AD6212131FB69D008527FC /* xib */,
@@ -1269,9 +1286,6 @@
 		28AD625D131FB69D008527FC /* Credits */ = {
 			isa = PBXGroup;
 			children = (
-				28AD625E131FB69D008527FC /* CreditsView.xib */,
-				28AD625F131FB69D008527FC /* CreditsViewController.h */,
-				28AD6260131FB69D008527FC /* CreditsViewController.m */,
 			);
 			path = Credits;
 			sourceTree = "<group>";
@@ -1735,7 +1749,6 @@
 				E7FD8F3B127821DB002640D0 /* defaults */,
 				E7757BB81259C79300730726 /* APIKey.txt */,
 				E70586A812365A7B0080917E /* donate.html */,
-				E77D8F10120321E4003E6B8D /* credits.html */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2226,6 +2239,7 @@
 				28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */,
 				28D246031338926E00188783 /* RouteManager.m in Sources */,
 				28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */,
+				287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

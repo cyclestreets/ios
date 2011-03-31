@@ -57,6 +57,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import "GlobalUtilities.h"
 #import "AppConstants.h"
+#import "SettingsManager.h"
 
 @interface MapViewController(Private)
 
@@ -171,9 +172,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 + (NSString *)currentMapStyle {
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSDictionary *settings = [cycleStreets.files settings];
-	NSString *mapStyle = [settings valueForKey:@"mapStyle"];
+	NSString *mapStyle = [SettingsManager sharedInstance].dataProvider.mapStyle;
 	if (mapStyle == nil) {
 		mapStyle = [[MapViewController mapStyles] objectAtIndex:0];
 	}
