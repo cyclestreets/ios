@@ -48,17 +48,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	
 	NSDictionary *dict = [(Files*)[CycleStreets sharedInstance].files settings];
 	
-	BetterLog(@"dict=%@",dict);
-	
 	self.dataProvider=[[SettingsVO alloc]init];
 	
-	if([dict count]>0){
-		
+	// handle dict>dataprovider initialising
+	if([dict count]>0){		
 		for (NSString *key in dict){
 			if([dict valueForKey:key]!=nil)
 				[dataProvider setValue:[dict valueForKey:key] forKey:key];
 		}
-			
 	}
 	
 }
@@ -67,13 +64,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	
 	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
 	
+	// Temp: need to sort out NSObject enumeration
 	[dict setObject:dataProvider.imageSize forKey:@"imageSize"];
 	[dict setObject:dataProvider.mapStyle forKey:@"mapStyle"];
 	[dict setObject:dataProvider.plan forKey:@"plan"];
 	[dict setObject:dataProvider.routeUnit forKey:@"routeUnit"];
 	[dict setObject:dataProvider.speed forKey:@"speed"];
-	
-	BetterLog(@"dict=%@",dict);
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setSettings:dict];	

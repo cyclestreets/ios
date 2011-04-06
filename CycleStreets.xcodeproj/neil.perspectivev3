@@ -315,6 +315,7 @@
 								<string>28AD6250131FB69D008527FC</string>
 								<string>28AD625A131FB69D008527FC</string>
 								<string>28AD625D131FB69D008527FC</string>
+								<string>28AD6266131FB69D008527FC</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
 								<string>28AD60B2131FB54A008527FC</string>
 								<string>1C37FBAC04509CD000000102</string>
@@ -323,14 +324,15 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>72</integer>
-									<integer>66</integer>
-									<integer>38</integer>
+									<integer>139</integer>
+									<integer>136</integer>
+									<integer>130</integer>
+									<integer>120</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 700}, {273, 958}}</string>
+							<string>{{0, 1989}, {273, 958}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -347,7 +349,7 @@
 							<real>273</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>102 139 1513 1017 0 0 1920 1178 </string>
+						<string>86 153 1513 1017 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -358,14 +360,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>289A1FBE1298238900CF83A9</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SettingsViewController.m</string>
+								<string>FavouritesCell.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -373,11 +373,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>289A1FBF1298238900CF83A9</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SettingsViewController.m</string>
+										<string>FavouritesCell.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>287ECCD61344B1A100B8A6AC</string>
+										<string>287ECCF11344D50700B8A6AC</string>
 										<key>history</key>
 										<array>
 											<string>289A1FC7129823C500CF83A9</string>
@@ -456,7 +456,6 @@
 											<string>28F55349132042B20011C1F0</string>
 											<string>28F5538A132046690011C1F0</string>
 											<string>28F5539C132049F40011C1F0</string>
-											<string>28CD547E13240BDC004661E8</string>
 											<string>28CD547F13240BDC004661E8</string>
 											<string>28CD548513240BDC004661E8</string>
 											<string>28CD54A113240E2E004661E8</string>
@@ -490,7 +489,6 @@
 											<string>28AC29F71332015700669C79</string>
 											<string>28AC2A341332068400669C79</string>
 											<string>28443E7D133292E000FAD008</string>
-											<string>28443E7E133292E000FAD008</string>
 											<string>28443E7F133292E000FAD008</string>
 											<string>28443E80133292E000FAD008</string>
 											<string>28443E81133292E000FAD008</string>
@@ -593,7 +591,6 @@
 											<string>287ECBD61344A55300B8A6AC</string>
 											<string>287ECBD91344A55300B8A6AC</string>
 											<string>287ECBFE1344A99800B8A6AC</string>
-											<string>287ECC001344A99800B8A6AC</string>
 											<string>287ECC011344A99800B8A6AC</string>
 											<string>287ECC021344A99800B8A6AC</string>
 											<string>287ECC031344A99800B8A6AC</string>
@@ -604,8 +601,11 @@
 											<string>287ECC8B1344AED700B8A6AC</string>
 											<string>287ECC8C1344AED700B8A6AC</string>
 											<string>287ECCA11344AFB900B8A6AC</string>
-											<string>287ECCBF1344B02300B8A6AC</string>
-											<string>287ECCD51344B19A00B8A6AC</string>
+											<string>287ECCD71344B44500B8A6AC</string>
+											<string>287ECCD81344B44500B8A6AC</string>
+											<string>287ECCD91344B44500B8A6AC</string>
+											<string>287ECCEE1344D50700B8A6AC</string>
+											<string>287ECCEF1344D50700B8A6AC</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -619,18 +619,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1218, 767}}</string>
+								<string>{{0, 0}, {1218, 594}}</string>
 								<key>RubberWindowFrame</key>
-								<string>102 139 1513 1017 0 0 1920 1178 </string>
+								<string>86 153 1513 1017 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>767pt</string>
+							<string>594pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>204pt</string>
+							<string>377pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -660,7 +660,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1218, 177}}</string>
+										<string>{{10, 27}, {1218, 350}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -698,9 +698,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1218, 177}}</string>
+										<string>{{10, 27}, {1218, 350}}</string>
 										<key>RubberWindowFrame</key>
-										<string>102 139 1513 1017 0 0 1920 1178 </string>
+										<string>86 153 1513 1017 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -906,7 +906,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>323269025.55535698</real>
+	<real>323278087.98029298</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -928,7 +928,7 @@
 		<string>/Users/neil/iPhone/Applications/CycleStreets/ios/CycleStreets.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>102 139 1513 1017 0 0 1920 1178 </string>
+	<string>86 153 1513 1017 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

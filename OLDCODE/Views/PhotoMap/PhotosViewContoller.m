@@ -35,6 +35,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "AssetGroupTable.h"
 #import "ALAsset+Info.h"
 #import "PhotoAsset.h"
+#import "SettingsManager.h"
 
 @implementation PhotosViewContoller
 
@@ -334,9 +335,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//image
 	//self.addPhoto.imageData = UIImageJPEGRepresentation( selected.image, 0.8);
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSDictionary *settings = [cycleStreets.files settings];
-	NSString *imageSize = [settings valueForKey:@"imageSize"];
+	NSString *imageSize = [SettingsManager sharedInstance].dataProvider.imageSize;
 	if ([imageSize isEqualToString:@"full"]) {
 		self.addPhoto.imageData = [self.photoAsset fullData];
 	} else {
