@@ -10,7 +10,7 @@
 #import "Route.h"
 #import "CSExceptions.h"
 #import "ItineraryCellView.h"
-#import "Segment.h"
+#import "SegmentVO.h"
 #import "CycleStreets.h"
 #import "CycleStreetsAppDelegate.h"
 #import "Stage.h"
@@ -29,10 +29,11 @@
 @synthesize readoutLineTwo;
 @synthesize readoutContainer;
 @synthesize tableView;
+@synthesize rowHeightsArray;
 
-//=========================================================== 
+/***********************************************************/
 // dealloc
-//=========================================================== 
+/***********************************************************/
 - (void)dealloc
 {
     [route release], route = nil;
@@ -42,9 +43,11 @@
     [readoutLineTwo release], readoutLineTwo = nil;
     [readoutContainer release], readoutContainer = nil;
     [tableView release], tableView = nil;
+    [rowHeightsArray release], rowHeightsArray = nil;
 	
     [super dealloc];
 }
+
 
 
 #pragma mark setters
@@ -59,6 +62,7 @@
 	[oldRoute release];
 	self.routeId = [[newRoute itinerary] integerValue];
 	
+	[self createRowHeightsArray];
 	[tableView reloadData];
 }
 
@@ -134,8 +138,8 @@
 
 -(void)createPersistentUI{
 	
-	readoutContainer.paddingTop=10;
-	readoutContainer.itemPadding=10;
+	readoutContainer.paddingTop=5;
+	readoutContainer.itemPadding=5;
 	readoutContainer.layoutMode=BUVerticalLayoutMode;
 	readoutContainer.alignMode=BUCenterAlignMode;
 	readoutContainer.fixedWidth=YES;
@@ -249,7 +253,7 @@
     }
 	
 	// Configure the cell...
-	Segment *segment = [route segmentAtIndex:indexPath.row];
+	SegmentVO *segment = [route segmentAtIndex:indexPath.row];
 	cell.dataProvider=segment;
 	[cell populate];
 	
@@ -266,6 +270,11 @@
 	[stage setRoute:route];
 	[self presentModalViewController:stage animated:YES];
 	[stage setSegmentIndex:indexPath.row];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	return [[rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
 }
 
 //
@@ -289,6 +298,22 @@
  * @description			GENERIC METHODS
  ***********************************************/
 //
+
+-(void)createRowHeightsArray{
+	
+	self.rowHeightsArray=[[NSMutableArray alloc]init];
+	
+	for (int i=0; i<[route numSegments]; i++) {
+		
+		SegmentVO *segment = [route segmentAtIndex:i];
+		
+		[rowHeightsArray addObject:[ItineraryCellView heightForCellWithDataProvider:segment]];
+		
+		
+	}
+	
+	
+}
 
 
 - (void)didReceiveMemoryWarning {

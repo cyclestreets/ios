@@ -64,11 +64,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements {
 	
+	
+	
 	//update the table.
 	self.selectedRoute = [[Route alloc] initWithElements:elements];
 	
 	if ([selectedRoute itinerary] == nil) {
 		[self showErrorHUDWithMessage:@"Could not plan valid route for selected endpoints."];
+		BetterLog(@"elements=%@",elements);
 	} else {
 		
 		[self showSuccessHUD:@"Found Route, added path to map"];

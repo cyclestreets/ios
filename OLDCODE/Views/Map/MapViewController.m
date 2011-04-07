@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreetsAppDelegate.h"
 #import "BusyAlert.h"
 #import "Route.h"
-#import "Segment.h"
+#import "SegmentVO.h"
 #import <CoreLocation/CoreLocation.h>
 #import "RMCloudMadeMapSource.h"
 #import "RMOpenStreetMapSource.h"
@@ -45,7 +45,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoEntry.h"
 #import "QueryPhoto.h"
 #import "Markers.h"
-#import "Namefinder2.h"
+#import "MapLocationSearchViewController.h"
 #import "RMMapView.h"
 #import "CSPoint.h"
 #import "RouteLineView.h"
@@ -113,7 +113,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize initialLocation;
 @synthesize locationManager;
 @synthesize lastLocation;
-@synthesize namefinder;
+@synthesize mapLocationSearchView;
 @synthesize route;
 @synthesize start;
 @synthesize end;
@@ -150,7 +150,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [initialLocation release], initialLocation = nil;
     [locationManager release], locationManager = nil;
     [lastLocation release], lastLocation = nil;
-    [namefinder release], namefinder = nil;
+    [mapLocationSearchView release], mapLocationSearchView = nil;
     [route release], route = nil;
     [start release], start = nil;
     [end release], end = nil;
@@ -704,12 +704,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (IBAction) didSearch {
 	DLog(@"search");
-	if (namefinder == nil) {
-		namefinder = [[Namefinder2 alloc] initWithNibName:@"Namefinder2" bundle:nil];
+	if (mapLocationSearchView == nil) {
+		mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
 	}
-	namefinder.locationReceiver = self;
-	namefinder.centreLocation = [[mapView contents] mapCenter];
-	[self presentModalViewController:namefinder	animated:YES];
+	mapLocationSearchView.locationReceiver = self;
+	mapLocationSearchView.centreLocation = [[mapView contents] mapCenter];
+	[self presentModalViewController:mapLocationSearchView	animated:YES];
 }
 
 //delete the last point, either start or end.
@@ -880,14 +880,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		if (i == 0)
 		{	// start of first segment
 			CSPoint *p = [[[CSPoint alloc] init] autorelease];
-			Segment *segment = [route segmentAtIndex:i];
+			SegmentVO *segment = [route segmentAtIndex:i];
 			CLLocationCoordinate2D coordinate = [segment segmentStart];
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
 			p.p = pt;
 			[points addObject:p];			
 		}
 		// remainder of all segments
-		Segment *segment = [route segmentAtIndex:i];
+		SegmentVO *segment = [route segmentAtIndex:i];
 		NSArray *allPoints = [segment allPoints];
 		for (int i = 1; i < [allPoints count]; i++) {
 			CSPoint *latlon = [allPoints objectAtIndex:i];
@@ -1055,8 +1055,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[lastLocation release];
 	lastLocation = nil;
 	
-	[namefinder release];
-	namefinder = nil;
+	[mapLocationSearchView release];
+	mapLocationSearchView = nil;
 	[route release];
 	route = nil;
 	

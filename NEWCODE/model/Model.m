@@ -19,12 +19,12 @@
 -(void)onComplete;
 -(void)onFail:(NSString*)error;
 -(void)compactRequestsForDataid:(NSString*)dataid andRequest:(NSString*)requestid;
+-(void)initiateModelCacheStoreForType:(NSString*)type;
 
 @end
 
 @implementation Model
 SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
-@synthesize datatype;
 @synthesize dataProviders;
 @synthesize cachedrequests;
 @synthesize xmlparser;
@@ -84,26 +84,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 	
 	BetterLog(@"");
 	
-	if (datatype==DATATYPE_XML) {
+	
+	switch(response.dataType){
 		
-		// if this datastore for this type is nil make it and its sub dict
-		if([dataProviders objectForKey:response.dataid]==nil){
-			[dataProviders setObject:[NSMutableDictionary dictionaryWithCapacity:maxMemoryItems] forKey:response.dataid];
-			[cachedrequests setObject:[NSMutableArray arrayWithCapacity:maxMemoryItems] forKey:response.dataid];
+		case DATATYPE_XML:
 			
-		}
+			[self initiateModelCacheStoreForType:response.dataid];
+			
+			[xmlparser parseData:response];
 		
-		[xmlparser parseData:response];
-				
-	}else {
+		break;
+			
+		case DATATYPE_JSON:
+			
+			
+			break;
 		
-		// use plist parser if supported on server
 		
 	}
-
+	
 	
 }
 
+
+-(void)initiateModelCacheStoreForType:(NSString*)type{
+	
+	if([dataProviders objectForKey:type]==nil){
+		[dataProviders setObject:[NSMutableDictionary dictionaryWithCapacity:maxMemoryItems] forKey:type];
+		[cachedrequests setObject:[NSMutableArray arrayWithCapacity:maxMemoryItems] forKey:type];
+		
+	}	
+}
 
 
 

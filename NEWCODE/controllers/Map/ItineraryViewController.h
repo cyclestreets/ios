@@ -25,15 +25,18 @@
 	IBOutlet	LayoutBox			*readoutContainer;
 	
 	IBOutlet	UITableView			*tableView;
+	NSMutableArray					*rowHeightsArray;
 
 }
-@property (nonatomic, retain)	Route	*route;
-@property (nonatomic, assign)	NSInteger	routeId;
-@property (nonatomic, retain)	IBOutlet UITextView	*headerText;
-@property (nonatomic, retain)	IBOutlet UILabel	*routeidLabel;
-@property (nonatomic, retain)	 MultiLabelLine	*readoutLineOne;
-@property (nonatomic, retain)	 MultiLabelLine	*readoutLineTwo;
-@property (nonatomic, retain)	IBOutlet LayoutBox	*readoutContainer;
-@property (nonatomic, retain)	IBOutlet UITableView	*tableView;
+@property (nonatomic, retain)		Route		* route;
+@property (nonatomic)		NSInteger		 routeId;
+@property (nonatomic, retain)		IBOutlet UITextView		* headerText;
+@property (nonatomic, retain)		IBOutlet UILabel		* routeidLabel;
+@property (nonatomic, retain)		MultiLabelLine		* readoutLineOne;
+@property (nonatomic, retain)		MultiLabelLine		* readoutLineTwo;
+@property (nonatomic, retain)		IBOutlet LayoutBox		* readoutContainer;
+@property (nonatomic, retain)		IBOutlet UITableView		* tableView;
+@property (nonatomic, retain)		NSMutableArray		* rowHeightsArray;
 
+-(void)createRowHeightsArray;
 @end

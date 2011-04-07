@@ -28,7 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Route.h"
 #import "CSExceptions.h"
 #import "RouteTableCell.h"
-#import "Segment.h"
+#import "SegmentVO.h"
 #import "CycleStreets.h"
 #import "CycleStreetsAppDelegate.h"
 #import "Stage.h"
@@ -144,7 +144,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     }
 	
 	// Configure the cell...
-	Segment *segment = [route segmentAtIndex:indexPath.row];
+	SegmentVO *segment = [route segmentAtIndex:indexPath.row];
 	[segment setUIElements:cell];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;

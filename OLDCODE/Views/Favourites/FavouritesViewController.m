@@ -36,10 +36,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteSummary.h"
 
 @implementation FavouritesViewController
-
 @synthesize favourites;
 @synthesize routes;
 @synthesize routeSummary;
+@synthesize rowHeightsArray;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [favourites release], favourites = nil;
+    [routes release], routes = nil;
+    [routeSummary release], routeSummary = nil;
+    [rowHeightsArray release], rowHeightsArray = nil;
+	
+    [super dealloc];
+}
+
+
 
 #pragma mark -
 #pragma mark init
@@ -56,6 +71,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSArray *oldFavourites = [cycleStreets.files favourites];
 	self.favourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count] + 1] autorelease];
 	[self.favourites addObjectsFromArray:oldFavourites];
+	
+	[self createRowHeightsArray];
 }
 
 - (void) clear {
@@ -85,7 +102,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.tableView.rowHeight=70;
+	self.tableView.rowHeight=[FavouritesCell rowHeight];
 
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
@@ -113,30 +130,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
-// Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"FavouritesCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		
-		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:tableView options:nil];
-		if (nib == nil) {
-			[CSExceptions exception: [NSString stringWithFormat:@"Could not load nib %@. Does it exist ?", CellIdentifier]];
-		}
-		for (id obj in nib) {
-			if ([obj isKindOfClass:[FavouritesCell class]]) {
-				cell = obj;
-			}
-		}
-    }
+	 static NSString *CellIdentifier = @"FavouritesCell";
+	 
+	 FavouritesCell *cell = (FavouritesCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	 if (cell == nil) {
+		 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FavouritesCell" owner:self options:nil];
+		 cell = (FavouritesCell *)[nib objectAtIndex:0];
+		 [cell initialise];
+	 }
 	
     
-    // Configure the cell...
-	NSInteger routeIdentifier = [[favourites objectAtIndex:indexPath.row] intValue];
+    NSInteger routeIdentifier = [[favourites objectAtIndex:indexPath.row] intValue];
 	Route *route = [self routeWithIdentifier:routeIdentifier];
-	[route setUIElements:cell];
+	cell.dataProvider=route;
+	[cell populate];
     
     return cell;
 }
@@ -181,6 +190,33 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
 }
 
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	return [[rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
+}
+
+
+-(void)createRowHeightsArray{
+
+	self.rowHeightsArray=[[NSMutableArray alloc]init];
+
+	for (int i=0; i<[favourites count]; i++) {
+		
+		NSInteger routeIdentifier = [[favourites objectAtIndex:i] intValue];
+		Route *route = [self routeWithIdentifier:routeIdentifier];
+		
+		[rowHeightsArray addObject:[FavouritesCell heightForCellWithDataProvider:route]];
+		
+		
+	}
+	
+	
+}
+
+
+
 #pragma mark -
 #pragma mark Memory management
 
@@ -198,12 +234,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self nullify];
 	[super viewDidUnload];
 	DLog(@">>>");
-}
-
-
-- (void)dealloc {
-	[self nullify];
-    [super dealloc];
 }
 
 

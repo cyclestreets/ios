@@ -11,11 +11,10 @@
 
 @implementation ItineraryCellView
 @synthesize dataProvider;
-@synthesize roadLabel;
-@synthesize timeLabel;
-@synthesize distanceLabel;
-@synthesize totalLabel;
-@synthesize imageView;
+@synthesize viewContainer;
+@synthesize nameLabel;
+@synthesize readoutLabel;
+@synthesize icon;
 
 /***********************************************************/
 // dealloc
@@ -23,20 +22,30 @@
 - (void)dealloc
 {
     [dataProvider release], dataProvider = nil;
-    [roadLabel release], roadLabel = nil;
-    [timeLabel release], timeLabel = nil;
-    [distanceLabel release], distanceLabel = nil;
-    [totalLabel release], totalLabel = nil;
-    [imageView release], imageView = nil;
+    [viewContainer release], viewContainer = nil;
+    [nameLabel release], nameLabel = nil;
+    [readoutLabel release], readoutLabel = nil;
+    [icon release], icon = nil;
 	
     [super dealloc];
 }
 
 
 
-
 -(void)initialise{
-
+	
+	viewContainer.layoutMode=BUVerticalLayoutMode;
+	viewContainer.paddingLeft=0;
+	viewContainer.paddingTop=7;
+	viewContainer.paddingBottom=7;
+	viewContainer.itemPadding=0;
+	[viewContainer initFromNIB];
+	
+	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),nil];
+	
+	readoutLabel.fonts=fonts;
+	readoutLabel.colors=colors;
 
 
 
@@ -44,18 +53,41 @@
 
 -(void)populate{
 	
-	roadLabel.text=[dataProvider roadName];
-	timeLabel.text=[NSString stringWithFormat:@"%02d:%02d", dataProvider.startTime/60, dataProvider.startTime%60];
-	distanceLabel.text=[NSString stringWithFormat:@"%4dm", [dataProvider segmentDistance]];
+	nameLabel.text=[dataProvider roadName];
+	
+	NSMutableArray *arr=[[NSMutableArray alloc] init];
+	
+	[arr addObject:[NSString stringWithFormat:@"%02d:%02d", dataProvider.startTime/60, dataProvider.startTime%60]];
+	[arr addObject:[NSString stringWithFormat:@"%4dm", [dataProvider segmentDistance]]];
 	
 	float totalMiles = ((float)([dataProvider startDistance]+[dataProvider segmentDistance]))/1600;
-	totalLabel.text=[NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
+	[arr addObject:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles]];
 	
-	NSString *imageName = [Segment provisionIcon:[dataProvider provisionName]];
-	imageView.image=[UIImage imageNamed:imageName];
+	NSString *imageName = [SegmentVO provisionIcon:[dataProvider provisionName]];
+	icon.image=[UIImage imageNamed:imageName];
 	
+	readoutLabel.labels=arr;
+	[arr release];
+	[readoutLabel drawUI];
+	
+	[viewContainer refresh];
 
 }
+
+
+
++(NSNumber*)heightForCellWithDataProvider:(SegmentVO*)segment{
+	
+	int height=7;
+	
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment roadName] :[UIFont boldSystemFontOfSize:16]   :UIWIDTH :UILineBreakModeWordWrap];
+	height+=5;
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",segment.startTime] :[UIFont systemFontOfSize:13] :UIWIDTH :UILineBreakModeClip];
+	height+=7;
+	
+	return [NSNumber numberWithInt:height];
+}
+
 
 
 
@@ -63,8 +95,5 @@
 	return STANDARDCELLHEIGHT;
 }
 
-+(NSString*)cellIdentifier{
-	return @"ItineraryCellViewIdentifer";
-}
 
 @end

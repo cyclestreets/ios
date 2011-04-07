@@ -31,6 +31,8 @@ NSString *const CSROUTESELECTED=@"CSRouteSelected";
 NSString *const LOGINRESPONSE=@"LOGINRESPONSE";
 NSString *const REGISTERRESPONSE=@"REGISTERRESPONSE";
 NSString *const PASSWORDRETRIEVALRESPONSE=@"PASSWORDRETRIEVALRESPONSE";
+NSString *const LOCATIONSEARCH=@"LOCATIONSEARCH";
+
 
 
 
@@ -39,6 +41,7 @@ NSString *const POST=@"POST";
 NSString *const GET=@"GET";
 NSString *const URL=@"URL";
 NSString *const GETPOST=@"GETPOST";
+NSString *const POSTJSON=@"POSTJSON";
 
 //data sources
 NSString *const LOCALDATA=@"localdata";
@@ -149,40 +152,32 @@ NSString *const INVALIDRESPONSE=@"No valid data received for this request. \r Pl
 @implementation AppConstants
 
 
-/*
-+ (NSString*)dataTypeToStringType:(NagMeDataType)dataType {
-    NSString *result = nil;
-	
-    switch(dataType) {
-        case kDataTypeHorse:
-            result = @"Horse";
-            break;
-        case kDataTypeTrainer:
-            result = @"Trainer";
-            break;
-        case kDataTypeJockey:
-            result = @"Jockey";
-            break;
-        default:
-            [NSException raise:NSGenericException format:@"Unexpected DataType."];
-    }
-	
-    return result;
-}
-
-+ (NagMeDataType)stringTypeToDataType:(NSString*)stringType {
++ (DataParserType)parserStringTypeToConstant:(NSString*)stringType {
     
-	if([stringType isEqualToString:@"Horse"]){
-		return kDataTypeHorse;
-	}else if ([stringType isEqualToString:@"Trainer"]){
-		return kDataTypeTrainer;
-	}else if ([stringType isEqualToString:@"Jockey"]) {
-		return kDataTypeJockey;
+	if([stringType isEqualToString:@"DATATYPE_XML"]){
+		return DATATYPE_XML;
+	}else if ([stringType isEqualToString:@"DATATYPE_PLIST"]){
+		return DATATYPE_PLIST;
+	}else if ([stringType isEqualToString:@"DATATYPE_JSON"]) {
+		return DATATYPE_JSON;
 	}
 	
-    return kDataTypeNone;
+    return DATATYPE_NONE;
 }
-*/
+
+
++ (NSString*)parserConstantToString:(DataParserType)parserType {
+    
+	if(parserType==DATATYPE_XML){
+		return @"DATATYPE_XML";
+	}else if (parserType==DATATYPE_PLIST){
+		return @"DATATYPE_PLIST";
+	}else if (parserType==DATATYPE_JSON) {
+		return @"DATATYPE_JSON";
+	}
+	
+    return @"DATATYPE_NONE";
+}
 
 
 

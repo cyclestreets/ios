@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-#import "Namefinder2.h"
+#import "MapLocationSearchViewController.h"
 #import "RMMapViewDelegate.h"
 #import "RMMapView.h"
 #import "RouteLineView.h"
@@ -70,7 +70,7 @@ typedef enum PlanningStateT PlanningState;
 	CLLocationManager *locationManager; //move out of this class into app, or app sub, if/when we generalise.
 	CLLocation *lastLocation;		//the last one
 	
-	Namefinder2 *namefinder;			//the search popup
+	MapLocationSearchViewController *mapLocationSearchView;			//the search popup
 	
 	Route *route;					//current route
 	
@@ -110,7 +110,7 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, retain)	InitialLocation	*initialLocation;
 @property (nonatomic, retain)	CLLocationManager	*locationManager;
 @property (nonatomic, retain)	CLLocation	*lastLocation;
-@property (nonatomic, retain)	Namefinder2	*namefinder;
+@property (nonatomic, retain)	MapLocationSearchViewController	*mapLocationSearchView;
 @property (nonatomic, retain)	Route	*route;
 @property (nonatomic, retain)	RMMarker	*start;
 @property (nonatomic, retain)	RMMarker	*end;

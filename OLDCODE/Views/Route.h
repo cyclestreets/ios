@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-@class Segment;
+@class SegmentVO;
 
 @interface Route : NSObject {
 	NSMutableArray *segments;
@@ -46,7 +46,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (int) numSegments;
 
-- (Segment *) segmentAtIndex:(int)index;
+- (SegmentVO *) segmentAtIndex:(int)index;
 
 - (NSString *) itinerary;
 
@@ -63,6 +63,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (NSString *) plan;
 
 - (NSInteger) time;
+
+- (NSString *) date;
 
 - (void) setUIElements:(NSObject *)view;/*or controller*/
 

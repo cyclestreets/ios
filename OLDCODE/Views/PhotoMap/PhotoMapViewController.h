@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-#import "Namefinder2.h"
+#import "MapLocationSearchViewController.h"
 #import "RMMapViewDelegate.h"
 #import "BlueCircleView.h"
 @class CycleStreets;
@@ -49,7 +49,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	InitialLocation *initialLocation;
 	UIBarButtonItem *locationButton;
 	UIBarButtonItem *showPhotosButton;
-	Namefinder2 *namefinder;			//the search popup
+	MapLocationSearchViewController *mapLocationSearchView;			//the search popup
 	
 	//Welcome
 	UITextView *introView;

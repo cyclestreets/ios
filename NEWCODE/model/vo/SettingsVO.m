@@ -7,6 +7,7 @@
 //
 
 #import "SettingsVO.h"
+#import "AppConstants.h"
 
 
 @implementation SettingsVO
@@ -50,6 +51,15 @@
 
 
 
+-(NSString*)returnKilometerSpeedValue{
+	
+	if([routeUnit isEqualToString:MILES]){
+		return [NSString stringWithFormat:@"%i",[speed intValue]*1.6];
+	}else{
+		return speed;
+	}
+	
+}
 
 
 

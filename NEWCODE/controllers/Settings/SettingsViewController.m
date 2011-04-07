@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Common.h"
 #import "AppConstants.h"
 #import "SettingsManager.h"
+#import "GlobalUtilities.h"
 
 @implementation SettingsViewController
 @synthesize dataProvider;
@@ -43,6 +44,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize imageSizeControl;
 @synthesize routeUnitControl;
 @synthesize controlView;
+@synthesize speedTitleLabel;
 
 /***********************************************************/
 // dealloc
@@ -56,6 +58,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [imageSizeControl release], imageSizeControl = nil;
     [routeUnitControl release], routeUnitControl = nil;
     [controlView release], controlView = nil;
+    [speedTitleLabel release], speedTitleLabel = nil;
 	
     [super dealloc];
 }
@@ -127,21 +130,43 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void) save {
-	
-	[[SettingsManager sharedInstance] saveData];
+
+	[[SettingsManager sharedInstance] saveData];	
 }
 
 - (IBAction) changed {
 	
+	// Note: we have to update the routeunit first then update the linked segments before getting the definitive values;
+	dataProvider.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
-	dataProvider.speed = [[speedControl titleForSegmentAtIndex:speedControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.mapStyle = [[mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex] lowercaseString];
-	dataProvider.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
 	
-	[self save];
+	[self updateRouteUnitDisplay];
+	
+	dataProvider.speed = [[speedControl titleForSegmentAtIndex:speedControl.selectedSegmentIndex] lowercaseString];
+	
+	[[SettingsManager sharedInstance] saveData];
 }
 
+-(void)updateRouteUnitDisplay{
+	
+	if([dataProvider.routeUnit isEqualToString:MILES]){
+		speedTitleLabel.text=@"Route speed (mph)";
+		
+		[speedControl setTitle:@"10" forSegmentAtIndex:0];
+		[speedControl setTitle:@"12" forSegmentAtIndex:1];
+		[speedControl setTitle:@"15" forSegmentAtIndex:2];
+		
+	}else {
+		speedTitleLabel.text=@"Route speed (kmh)";
+		
+		[speedControl setTitle:@"16" forSegmentAtIndex:0];
+		[speedControl setTitle:@"20" forSegmentAtIndex:1];
+		[speedControl setTitle:@"24" forSegmentAtIndex:2];
+	}
+	
+}
 
 
 @end

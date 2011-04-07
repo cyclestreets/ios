@@ -37,19 +37,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet UISegmentedControl *imageSizeControl;
 	IBOutlet UISegmentedControl *routeUnitControl;
 	IBOutlet UIView	*controlView;
+	
+	IBOutlet	UILabel			*speedTitleLabel;
 }
 
-@property (nonatomic, retain)		SettingsVO		* dataProvider;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl		* planControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl		* speedControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl		* mapStyleControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl		* imageSizeControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl		* routeUnitControl;
-@property (nonatomic, retain)		IBOutlet UIView		* controlView;
+@property (nonatomic, retain)	SettingsVO	*dataProvider;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*planControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*speedControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*mapStyleControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*imageSizeControl;
+@property (nonatomic, retain)	IBOutlet UISegmentedControl	*routeUnitControl;
+@property (nonatomic, retain)	IBOutlet UIView	*controlView;
+@property (nonatomic, retain)	IBOutlet UILabel	*speedTitleLabel;
 
 - (IBAction) changed;
 
 - (void) save;
 
+-(void)updateRouteUnitDisplay;
 
 @end

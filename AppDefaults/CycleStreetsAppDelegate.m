@@ -218,9 +218,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				if ([vcClass isEqualToString:@"MapViewController"]) {
 					map=(MapViewController*)vccontroller;
 				}
+				/*
 				if ([vcClass isEqualToString:@"RouteTableViewController"]) {
 					routeTable=(RouteTableViewController*)vccontroller;
 				}
+				 */
 				//
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];

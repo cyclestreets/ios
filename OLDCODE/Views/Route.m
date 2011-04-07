@@ -25,9 +25,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "Route.h"
-#import "Segment.h"
+#import "SegmentVO.h"
 #import "SettingsManager.h"
 #import "AppConstants.h"
+#import "GlobalUtilities.h"
 
 static NSString *ROUTE_ELEMENT = @"cs:route";
 static NSString *SEGMENT_ELEMENT = @"cs:segment";
@@ -41,6 +42,7 @@ static NSString *NAME = @"cs:name";
 static NSString *LENGTH = @"cs:length";
 static NSString *PLAN = @"cs:plan";
 static NSString *TIME = @"cs:time";
+static NSString *ROUTEDATE = @"cs:whence";
 
 @implementation Route
 
@@ -50,7 +52,7 @@ static NSString *TIME = @"cs:time";
 		NSInteger time = 0;
 		NSInteger distance = 0;
 		for (NSDictionary *segmentDictionary in [elements objectForKey:SEGMENT_ELEMENT]) {
-			Segment *segment = [[Segment alloc] initWithDictionary:segmentDictionary atTime:time atDistance:distance];
+			SegmentVO *segment = [[SegmentVO alloc] initWithDictionary:segmentDictionary atTime:time atDistance:distance];
 			[segments addObject:segment];
 			time += [segment segmentTime];
 			distance += [segment segmentDistance];
@@ -74,7 +76,7 @@ static NSString *TIME = @"cs:time";
 	return [segments count];
 }
 
-- (Segment *) segmentAtIndex:(int)index {
+- (SegmentVO *) segmentAtIndex:(int)index {
 	return [segments objectAtIndex:index];
 }
 
@@ -133,6 +135,10 @@ static NSString *TIME = @"cs:time";
 }
 
 
+- (NSString *) date {
+	return [header valueForKey:ROUTEDATE];
+}
+
 
 
 //
@@ -148,8 +154,13 @@ static NSString *TIME = @"cs:time";
 
 -(NSString*)lengthString{
 	
-	float totalMiles = [[self length] floatValue]/1600;
-	return [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+		float totalMiles = [[self length] floatValue]/1600;
+		return [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
+	}else {
+		return [NSString stringWithFormat:@"(%3.1f miles)", [self length]];
+	}
+
 	
 }
 
@@ -160,7 +171,7 @@ static NSString *TIME = @"cs:time";
 		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
 	}else {
-		return [NSString stringWithFormat:@"%2d Km", kmSpeed];
+		return [NSString stringWithFormat:@"%@ Km", kmSpeed];
 	}
 
 	
@@ -179,6 +190,9 @@ static NSString *TIME = @"cs:time";
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 	[view setValue:[NSString stringWithFormat:@"%2d mph", mileSpeed] forKeyPath:@"speed.text"];
 	[view setValue:[UIImage imageNamed:@"mm_15_directional_signage.png"] forKeyPath:@"icon.image"];
+	
+	
+	//[view setValue:[ forKeyPath:@"dateLabel.text"];
 }
 
 - (void) dealloc {

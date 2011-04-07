@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "AppConstants.h"
 
 @interface NetResponse : NSObject {
 	NSString				*dataid;
@@ -18,18 +18,17 @@
 	NSString				*revisionId;
 	NSString				*error;
 	BOOL					status;
-	NSDictionary			*params;
+	DataParserType			dataType;
 }
-@property (nonatomic, retain) NSString *dataid;
-@property (nonatomic, retain) NSString *requestid;
-@property (nonatomic, retain) id dataProvider;
-@property (nonatomic) BOOL updated;
-@property (nonatomic, retain) NSMutableData *responseData;
-@property (nonatomic, retain) NSString *revisionId;
-@property (nonatomic, retain) NSString *error;
-@property (nonatomic) BOOL status;
-@property (nonatomic, retain) NSDictionary *params;
-
+@property (nonatomic, retain)		NSString		* dataid;
+@property (nonatomic, retain)		NSString		* requestid;
+@property (nonatomic, retain)		id		 dataProvider;
+@property (nonatomic)		BOOL		 updated;
+@property (nonatomic, retain)		NSMutableData		* responseData;
+@property (nonatomic, retain)		NSString		* revisionId;
+@property (nonatomic, retain)		NSString		* error;
+@property (nonatomic)		BOOL		 status;
+@property (nonatomic)		DataParserType		 dataType;
 
 
 @end

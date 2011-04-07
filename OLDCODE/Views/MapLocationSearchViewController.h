@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location;
 @end
 
-@interface Namefinder2 : UITableViewController
+@interface MapLocationSearchViewController : UITableViewController
 <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate> {
 	id<LocationReceiver> locationReceiver;
 	CLLocationCoordinate2D centreLocation;

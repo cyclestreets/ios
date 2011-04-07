@@ -25,4 +25,5 @@
 @property (nonatomic, retain)		NSString		* imageSize;
 @property (nonatomic, retain)		NSString		* routeUnit;
 
+-(NSString*)returnKilometerSpeedValue;
 @end

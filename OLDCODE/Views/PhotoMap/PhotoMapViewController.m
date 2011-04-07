@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreetsAppDelegate.h"
 #import "BusyAlert.h"
 #import "Route.h"
-#import "Segment.h"
+#import "SegmentVO.h"
 #import <CoreLocation/CoreLocation.h>
 #import "RMCloudMadeMapSource.h"
 #import "RMCachedTileSource.h"
@@ -45,7 +45,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Location2.h"
 #import "InitialLocation.h"
 #import "Markers.h"
-#import "Namefinder2.h"
+#import "MapLocationSearchViewController.h"
 #import "RMMapView.h"
 #import "CSPoint.h"
 #import "RouteLineView.h"
@@ -229,12 +229,12 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (IBAction) didSearch {
 	DLog(@"search");
-	if (namefinder == nil) {
-		namefinder = [[Namefinder2 alloc] initWithNibName:@"Namefinder2" bundle:nil];
+	if (mapLocationSearchView == nil) {
+		mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
 	}	
-	namefinder.locationReceiver = self;
-	namefinder.centreLocation = [[mapView contents] mapCenter];
-	[self presentModalViewController:namefinder	animated:YES];
+	mapLocationSearchView.locationReceiver = self;
+	mapLocationSearchView.centreLocation = [[mapView contents] mapCenter];
+	[self presentModalViewController:mapLocationSearchView	animated:YES];
 }
 
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
@@ -417,8 +417,8 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[loading release];
 	loading = nil;
 	
-	[namefinder release];
-	namefinder = nil;	
+	[mapLocationSearchView release];
+	mapLocationSearchView = nil;	
 }
 
 - (void)viewDidUnload {

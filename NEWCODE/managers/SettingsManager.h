@@ -18,6 +18,9 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SettingsManager);
 @property (nonatomic, retain)		SettingsVO		* dataProvider;
 
+
+@property (nonatomic,readonly)     BOOL		routeUnitisMiles;
+
 -(void)loadData;
 -(void)saveData;
 @end

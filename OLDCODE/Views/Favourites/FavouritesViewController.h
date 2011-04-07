@@ -32,14 +32,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSMutableArray *favourites;
 	NSMutableDictionary *routes;
 	RouteSummary *routeSummary;
+	
+	
+	// rowHeights
+	NSMutableArray  *rowHeightsArray;
 }
 
-@property (nonatomic, retain) NSMutableArray *favourites;
-@property (nonatomic, retain) NSMutableDictionary *routes;
-@property (nonatomic, retain) RouteSummary *routeSummary;
+@property (nonatomic, retain)	NSMutableArray	*favourites;
+@property (nonatomic, retain)	NSMutableDictionary	*routes;
+@property (nonatomic, retain)	RouteSummary	*routeSummary;
+@property (nonatomic, retain)	NSMutableArray	*rowHeightsArray;
 
 - (Route *) routeWithIdentifier:(NSInteger)identifier;
 
 - (void) clear;
+
+-(void)createRowHeightsArray;
 
 @end

@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "Common.h"
 #import "Stage.h"
-#import "Segment.h"
+#import "SegmentVO.h"
 #import "RMMarkerManager.h"
 #import "MapViewController.h"
 #import "CycleStreetsAppDelegate.h"
@@ -203,8 +203,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)setSegmentIndex:(NSInteger)newIndex {
 	index = newIndex;
-	Segment *segment = [route segmentAtIndex:index];
-	Segment *nextSegment = nil;
+	SegmentVO *segment = [route segmentAtIndex:index];
+	SegmentVO *nextSegment = nil;
 	if (index + 1 < [route numSegments]) {
 		nextSegment = [route segmentAtIndex:index+1];
 	}

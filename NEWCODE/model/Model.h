@@ -21,14 +21,10 @@
 
 @end
 
-typedef enum{
-	DATATYPE_XML,
-	DATATYPE_PLIST
-}dataTypes;
+
 
 @interface Model : NSObject <TBXMLParserDelegate>{
 	
-	dataTypes datatype;
 	
 	NSMutableDictionary		*dataProviders;
 	NSMutableDictionary		*cachedrequests;
@@ -43,7 +39,6 @@ typedef enum{
 }
 
 
-@property(nonatomic,assign)dataTypes datatype;
 @property(nonatomic,retain)NSMutableDictionary *dataProviders;
 @property(nonatomic,retain)NSMutableDictionary *cachedrequests;
 @property(nonatomic,retain)TBXMLParser *xmlparser;

@@ -24,10 +24,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Created by Alan Paxton on 04/03/2010.
 //
 
-#import "Segment.h"
+#import "SegmentVO.h"
 #import "CSPoint.h"
 
-@implementation Segment
+@implementation SegmentVO
 
 static NSDictionary *roadIcons;
 
@@ -139,7 +139,7 @@ static NSDictionary *roadIcons;
 	[view setValue:[NSString stringWithFormat:@"%4dm", [self segmentDistance]] forKeyPath:@"distance.text"];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	[view setValue:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles] forKeyPath:@"total.text"];
-	NSString *imageName = [Segment provisionIcon:[self provisionName]];
+	NSString *imageName = [SegmentVO provisionIcon:[self provisionName]];
 	[view setValue:[UIImage imageNamed:imageName] forKeyPath:@"image.image"];
 	if ([view respondsToSelector:@selector(setBusyness:)]) {
 		[view setValue:[self provisionName] forKeyPath:@"busyness.text"];

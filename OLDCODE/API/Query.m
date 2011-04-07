@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Route.h"
 #import "SettingsManager.h"
 #import "SettingsVO.h"
+#import "GlobalUtilities.h"
 
 static NSString *format = @"%@?key=%@&start_longitude=%f&start_latitude=%f&finish_longitude=%f&finish_latitude=%f&layer=%@&plan=%@&speed=%@&useDom=%@&clientid=%@";
 
@@ -73,10 +74,12 @@ static NSString *useDom = @"1";
 							[to coordinate].latitude,
 							layer,
 							settingsdp.plan,
-							[self convertToKilometres: settingsdp.speed],
+							[settingsdp returnKilometerSpeedValue],
 							useDom,
 							cycleStreets.files.clientid
 							];
+		BetterLog(@"Route request=%@",newURL);
+		
 		[url release];
 		url = newURL;
 		[url retain];

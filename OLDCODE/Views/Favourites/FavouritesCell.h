@@ -25,24 +25,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
+#import "MultiLabelLine.h"
+#import "SuperCellView.h"
+#import "Route.h"
+#import "LayoutBox.h"
+#import "ExpandedUILabel.h"
 
-
-@interface FavouritesCell : UITableViewCell {
-	UILabel *name;
-	UILabel *time;
-	UILabel *length;
-	UILabel *plan;
-	UILabel *speed;
+@interface FavouritesCell : SuperCellView {
 	
-	UIImageView *icon;
+	Route				*dataProvider;
+	
+	IBOutlet	LayoutBox		*viewContainer;
+	IBOutlet ExpandedUILabel	*nameLabel;
+	IBOutlet MultiLabelLine		*readoutLabel;
+	
+	IBOutlet UIImageView			*icon;
 }
+@property (nonatomic, retain)	Route	*dataProvider;
+@property (nonatomic, retain)	IBOutlet LayoutBox	*viewContainer;
+@property (nonatomic, retain)	IBOutlet ExpandedUILabel	*nameLabel;
+@property (nonatomic, retain)	IBOutlet MultiLabelLine	*readoutLabel;
+@property (nonatomic, retain)	IBOutlet UIImageView	*icon;
 
-@property (nonatomic, retain) IBOutlet UILabel *name;
-@property (nonatomic, retain) IBOutlet UILabel *time;
-@property (nonatomic, retain) IBOutlet UILabel *length;
-@property (nonatomic, retain) IBOutlet UILabel *plan;
-@property (nonatomic, retain) IBOutlet UILabel *speed;
 
-@property (nonatomic, retain) IBOutlet UIImageView *icon;
++(NSNumber*)heightForCellWithDataProvider:(Route*)route;
 
 @end

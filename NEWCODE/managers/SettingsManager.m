@@ -10,6 +10,7 @@
 #import "CycleStreets.h"
 #import "Files.h"
 #import "GlobalUtilities.h"
+#import "AppConstants.h"
 
 @implementation SettingsManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
@@ -76,5 +77,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	[dict release];
 	
 }
+
+
+
+//
+/***********************************************
+ * @description			UTILITY
+ ***********************************************/
+//
+
+-(BOOL)routeUnitisMiles{
+	
+	return [dataProvider.routeUnit isEqualToString:MILES];
+	
+}
+
 
 @end

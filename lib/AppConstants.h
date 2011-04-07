@@ -26,6 +26,7 @@ extern NSString *const CSROUTESELECTED;
 extern NSString *const LOGINRESPONSE;
 extern NSString *const REGISTERRESPONSE;
 extern NSString *const PASSWORDRETRIEVALRESPONSE;
+extern NSString *const LOCATIONSEARCH;
 
 
 
@@ -35,7 +36,7 @@ extern NSString *const POST;
 extern NSString *const GET;
 extern NSString *const URL;
 extern NSString *const GETPOST;
-
+extern NSString *const POSTJSON;
 
 // data sources
 extern NSString *const LOCALDATA;
@@ -150,30 +151,19 @@ extern NSString *const INVALIDRESPONSE;
 extern NSString *const CONNECTIONCACHE;
 
 
-/*
-enum  {
-	kDataTypeHorse=1,
-	kDataTypeTrainer=2,
-	kDataTypeJockey=3,
-	kDataTypeNone=0
+enum{
+	DATATYPE_XML,
+	DATATYPE_PLIST,
+	DATATYPE_JSON,
+	DATATYPE_NONE
 };
-typedef int NagMeDataType;
+typedef int DataParserType;
 
-enum  {
-	RaceAlertTypeRace=1,
-	RaceAlertTypeResult=2,
-	RaceAlertTypeResultNone=0
-};
-typedef int RaceAlertDataType;
-*/
 
 @interface AppConstants : NSObject {
-
+	
 }
-
-/*
-+ (NSString*)dataTypeToStringType:(NagMeDataType)dataType;
-+ (NagMeDataType)stringTypeToDataType:(NSString*)stringType;
-*/
++ (DataParserType)parserStringTypeToConstant:(NSString*)stringType;
++ (NSString*)parserConstantToString:(DataParserType)parserType;
 
 @end

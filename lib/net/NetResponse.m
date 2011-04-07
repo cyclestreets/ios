@@ -18,7 +18,7 @@
 @synthesize revisionId;
 @synthesize error;
 @synthesize status;
-@synthesize params;
+@synthesize dataType;
 
 /***********************************************************/
 // dealloc
@@ -31,7 +31,6 @@
     [responseData release], responseData = nil;
     [revisionId release], revisionId = nil;
     [error release], error = nil;
-    [params release], params = nil;
 	
     [super dealloc];
 }

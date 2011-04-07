@@ -12,6 +12,7 @@
 #import "StringUtilities.h"
 #import "DataSourceManager.h"
 #import "GlobalUtilities.h"
+#import "CJSONSerializer.h"
 
 @implementation NetRequest
 @synthesize service;
@@ -23,7 +24,7 @@
 @synthesize requestid;
 @synthesize revisonId;
 @synthesize source;
-
+@synthesize dataType;
 
 /***********************************************************/
 // dealloc
@@ -40,6 +41,7 @@
 	
     [super dealloc];
 }
+
 
 
 
@@ -68,6 +70,8 @@
 	NSMutableURLRequest *request=nil;
 	NSString *servicetype=[service objectForKey:@"type"];
 	
+	self.dataType=[AppConstants parserStringTypeToConstant:[service objectForKey:@"parserType"]];
+	
 	if ([servicetype isEqualToString:URL]) {
 		
 		NSString *urlString=[StringUtilities urlFromParameterArray:[parameters objectForKey:@"parameterarray"] url:[self url]];
@@ -81,23 +85,18 @@
 		
 	}else if([servicetype isEqualToString:POST]){
 		
-		// support controller/method parameters
-		if([service objectForKey:@"controller"]!=nil)
-			[parameters setValue:[service objectForKey:@"controller"] forKey:@"c"];
-		if([service objectForKey:@"method"]!=nil)
-			[parameters setValue:[service objectForKey:@"method"] forKey:@"m"];
-		
 		requesturl=[NSURL URLWithString:[self url]];
 		
 		request = [NSMutableURLRequest requestWithURL:requesturl
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
-		/*
+		
 		NSLog(@"[DEBUG] POST SEND:");
 		for(NSString *key in parameters){
 			NSLog(@"[DEBUG] %@=%@",key,[parameters objectForKey:key]);
 		}
-		 */
+		 
+		NSLog(@"[DEBUG] POST SEND:%@",[parameters urlEncodedString]);
 		
 		NSString *parameterString=[parameters urlEncodedString];
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
@@ -110,22 +109,9 @@
 		
 	}else if ([servicetype isEqualToString:GET]) {
 		
-		
-		 NSLog(@"[DEBUG] GET SEND:");
-		 for(NSString *key in parameters){
-			 NSLog(@"[DEBUG] %@=%@",key,[parameters objectForKey:key]);
-		 }
-		 
-		
-		// support controller/method parameters
-		if([service objectForKey:@"controller"]!=nil)
-			[parameters setValue:[service objectForKey:@"controller"] forKey:@"c"];
-		if([service objectForKey:@"method"]!=nil)
-			[parameters setValue:[service objectForKey:@"method"] forKey:@"m"];
-		
 		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[parameters urlEncodedString]];
 		
-		BetterLog(@"GET urlString: %@",urlString);
+		BetterLog(@"GET url=%@",urlString);
 		
 		requesturl=[NSURL URLWithString:urlString];
 		
@@ -133,28 +119,26 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		[urlString release];
+	}else if([servicetype isEqualToString:POSTJSON]){
 		
-	}else if ([servicetype isEqualToString:GETPOST]){
-		
-		NSDictionary *getParameters=[parameters objectForKey:@"getparameters"];
-		NSDictionary *postParameters=[parameters objectForKey:@"postparameters"];
-		
-		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[getParameters urlEncodedString]];
-		requesturl=[NSURL URLWithString:urlString];
-		[urlString release];
+		requesturl=[NSURL URLWithString:[self url]];
 		
 		request = [NSMutableURLRequest requestWithURL:requesturl
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		NSString *parameterString=[postParameters urlEncodedString];
+		NSString *parameterString=[[CJSONSerializer serializer] serializeDictionary:parameters];
+		
+		NSLog(@"[DEBUG] JSONPOST SEND:%@",parameterString);
+		
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
 		
 		
-	}
+		
+	}	
 	
 	
 

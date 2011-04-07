@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSString *clientid;
 }
 
-@property (nonatomic, copy) NSString *clientid;
+@property (nonatomic, retain)	NSString	*clientid;
 
 #pragma mark file constant functions
 

@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Created by Alan Paxton on 02/08/2010.
 //
 
-#import "Namefinder2.h"
+#import "MapLocationSearchViewController.h"
 #import "Common.h"
 #import "CycleStreets.h"
 #import "Files.h"
@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 static NSString *format = @"%@?key=%@&street=%@&%@&clientid=%@";
 static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
-@implementation Namefinder2
+@implementation MapLocationSearchViewController
 
 @synthesize locationReceiver;
 @synthesize centreLocation;

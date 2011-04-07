@@ -8,24 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperCellView.h"
-#import "Segment.h"
+#import "SegmentVO.h"
+#import "LayoutBox.h"
+#import "MultiLabelLine.h"
+#import "ExpandedUILabel.h"
 
 @interface ItineraryCellView : SuperCellView {
 	
-	Segment							*dataProvider;
+	SegmentVO							*dataProvider;
 	
-	IBOutlet		UILabel			*roadLabel;
-	IBOutlet		UILabel			*timeLabel;
-	IBOutlet		UILabel			*distanceLabel;
-	IBOutlet		UILabel			*totalLabel;
-	IBOutlet		UIImageView		*imageView;
+	IBOutlet	LayoutBox				*viewContainer;
+	IBOutlet ExpandedUILabel			*nameLabel;
+	IBOutlet MultiLabelLine				*readoutLabel;
+	
+	IBOutlet UIImageView				*icon;
 
 }
-@property (nonatomic, retain)		Segment		* dataProvider;
-@property (nonatomic, retain)		IBOutlet UILabel		* roadLabel;
-@property (nonatomic, retain)		IBOutlet UILabel		* timeLabel;
-@property (nonatomic, retain)		IBOutlet UILabel		* distanceLabel;
-@property (nonatomic, retain)		IBOutlet UILabel		* totalLabel;
-@property (nonatomic, retain)		IBOutlet UIImageView		* imageView;
+@property (nonatomic, retain)		SegmentVO		* dataProvider;
+@property (nonatomic, retain)		IBOutlet LayoutBox		* viewContainer;
+@property (nonatomic, retain)		IBOutlet ExpandedUILabel		* nameLabel;
+@property (nonatomic, retain)		IBOutlet MultiLabelLine		* readoutLabel;
+@property (nonatomic, retain)		IBOutlet UIImageView		* icon;
 
++(NSNumber*)heightForCellWithDataProvider:(SegmentVO*)segment;
 @end
