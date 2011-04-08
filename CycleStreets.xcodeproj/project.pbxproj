@@ -82,6 +82,7 @@
 		2863A41F134E508800A22093 /* WebPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3D8134E508800A22093 /* WebPopup.m */; };
 		2863A420134E508800A22093 /* WebPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3D9134E508800A22093 /* WebPopup.xib */; };
 		2863A421134E508800A22093 /* RouteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3DC134E508800A22093 /* RouteParser.m */; };
+		286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
 		2872DEED13283148003995BE /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DEEC13283148003995BE /* ItineraryViewController.m */; };
 		2872DF3713283586003995BE /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
 		2872DF3C132835B2003995BE /* SuperCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3B132835B2003995BE /* SuperCellView.m */; };
@@ -470,6 +471,8 @@
 		2863A3D9134E508800A22093 /* WebPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebPopup.xib; sourceTree = "<group>"; };
 		2863A3DB134E508800A22093 /* RouteParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteParser.h; sourceTree = "<group>"; };
 		2863A3DC134E508800A22093 /* RouteParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteParser.m; sourceTree = "<group>"; };
+		286C71C9134F8F05007B57E6 /* LoginVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVO.h; sourceTree = "<group>"; };
+		286C71CA134F8F05007B57E6 /* LoginVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVO.m; sourceTree = "<group>"; };
 		2872DEEB13283148003995BE /* ItineraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItineraryViewController.h; path = Map/ItineraryViewController.h; sourceTree = "<group>"; };
 		2872DEEC13283148003995BE /* ItineraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItineraryViewController.m; path = Map/ItineraryViewController.m; sourceTree = "<group>"; };
 		2872DF3513283586003995BE /* ItineraryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryCellView.h; sourceTree = "<group>"; };
@@ -1303,6 +1306,8 @@
 				28443E621332867D00FAD008 /* RouteVO.m */,
 				287ECBCD1344A28900B8A6AC /* SettingsVO.h */,
 				287ECBCE1344A28900B8A6AC /* SettingsVO.m */,
+				286C71C9134F8F05007B57E6 /* LoginVO.h */,
+				286C71CA134F8F05007B57E6 /* LoginVO.m */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -2274,6 +2279,7 @@
 				2863A41D134E508800A22093 /* Stage.m in Sources */,
 				2863A41F134E508800A22093 /* WebPopup.m in Sources */,
 				2863A421134E508800A22093 /* RouteParser.m in Sources */,
+				286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2307,7 +2313,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};

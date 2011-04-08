@@ -66,7 +66,7 @@
 
 -(NSMutableURLRequest*)requestForType{
 	
-	NSURL *requesturl;
+	NSURL *requesturl=nil;
 	NSMutableURLRequest *request=nil;
 	NSString *servicetype=[service objectForKey:@"type"];
 	
@@ -138,6 +138,31 @@
 		
 		
 		
+	}else if([servicetype isEqualToString:GETPOST]){
+		
+		NSDictionary *getparameters=[parameters objectForKey:@"getparameters"];
+		NSDictionary *postparameters=[parameters objectForKey:@"postparameters"];
+		
+		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[getparameters urlEncodedString]];
+		requesturl=[NSURL URLWithString:urlString];
+		
+		request = [NSMutableURLRequest requestWithURL:requesturl
+										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+									  timeoutInterval:30.0 ];
+		
+		NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
+		NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
+		
+		NSString *parameterString=[postparameters urlEncodedString];
+		
+		[request setHTTPMethod:@"POST"];
+		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
+		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
+		NSString *contentType = [NSString stringWithString:@"application/x-www-form-urlencoded"];
+		[request addValue:contentType forHTTPHeaderField: @"Content-Type"];	
+		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
+		
+	
 	}	
 	
 	

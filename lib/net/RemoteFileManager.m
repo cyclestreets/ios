@@ -68,7 +68,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	if (self = [super init])
 	{
 		queueRequests=YES;
-		requestQueue=[[NSMutableArray alloc]init];
+		self.requestQueue=[[NSMutableArray alloc]init];
 		
 		// https support
 		//NSURLCredential *credentials=[NSURLCredential credentialWithUser:@"neil" password:@"password" persistence:NSURLCredentialPersistenceForSession];
@@ -152,7 +152,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	
 	if([requestQueue count]>0){
 		
-		activeRequest=[requestQueue objectAtIndex:0];
+		self.activeRequest=[requestQueue objectAtIndex:0];
 		activeRequest.status=INPROGRESS;
 		[self load:activeRequest];
 		
@@ -181,7 +181,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	[dict release];
 	
 	
-	myConnection = [[NSURLConnection alloc] initWithRequest:[request requestForType]  delegate:self];
+	self.myConnection = [[NSURLConnection alloc] initWithRequest:[request requestForType]  delegate:self];
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	

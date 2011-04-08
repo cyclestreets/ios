@@ -21,6 +21,7 @@
 #import "MBProgressHUD.h"
 #import "CycleStreets.h"
 #import "Files.h"
+#import "LoginVO.h"
 
 
 @interface UserAccount(Private)
@@ -187,6 +188,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[self createUser];
 			[self saveUser];
 			
+			
+			
 			isRegistered=YES;
 			accountMode=kUserAccountLoggedIn;
 			
@@ -268,6 +271,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			
 		case ValidationLoginSuccess:
 		{
+			
+			LoginVO *loginresponse=[validation.responseDict objectForKey:LOGIN];
+			
 			isRegistered=YES;
 			accountMode=kUserAccountLoggedIn;
 			[self createUser];

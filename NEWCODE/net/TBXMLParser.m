@@ -13,10 +13,16 @@
 #import "TBXML.h"
 #import "ValidationVO.h"
 #import "NSDate+Helper.h"
+#import "LoginVO.h"
 
 @interface TBXMLParser(Private)
 
 -(void)parseXMLForType:(NSString*)type;
+
+
+-(void)LoginXMLParser:(TBXML*)parser;
+-(void)RegisterXMLParser:(TBXML*)parser;
+-(void)RetrievePasswordXMLParser:(TBXML*)parser;
 
 
 @end
@@ -206,15 +212,36 @@
 		return;
 	}
 	
-	
 	ValidationVO *validation=[[ValidationVO alloc]init];
-	validation.returnCode=[[TBXML textForElement:[TBXML childElementNamed:@"ReturnCode" parentElement:response]]intValue];
-	validation.returnMessage=[TBXML textForElement:[TBXML childElementNamed:@"ReturnMsg" parentElement:response]];
 	
-	if([validation isReturnCodeValid]==ValdationValidSuccessCode ){
-		NSString *token=[TBXML textForElement:[TBXML childElementNamed:@"Token" parentElement:response]];
-		validation.responseDict=[NSDictionary dictionaryWithObject:token forKey:activeResponse.dataid];
+	LoginVO		*loginResponse=[[LoginVO alloc]init];
+	loginResponse.requestname=[TBXML textForElement:[TBXML childElementNamed:@"request" parentElement:response]];
+	
+	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
+	
+	if([TBXML hasChildrenForParentElement:resultelement]==YES){
+		
+		validation.returnCode=ValidationLoginSuccess;
+		
+		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"username" parentElement:resultelement]];
+		loginResponse.userid=[[TBXML textForElement:[TBXML childElementNamed:@"id" parentElement:resultelement]] intValue];
+		loginResponse.email=[TBXML textForElement:[TBXML childElementNamed:@"email" parentElement:resultelement]];
+		loginResponse.name=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
+		loginResponse.validatedDate=[TBXML textForElement:[TBXML childElementNamed:@"validated" parentElement:resultelement]];
+		loginResponse.userIP=[TBXML textForElement:[TBXML childElementNamed:@"ip" parentElement:resultelement]];
+		
+		loginResponse.validatekey=[[TBXML textForElement:[TBXML childElementNamed:@"ip" parentElement:resultelement]] boolValue];
+		loginResponse.deleted=[[TBXML textForElement:[TBXML childElementNamed:@"deleted" parentElement:resultelement]] boolValue];
+		loginResponse.lastsignin=[[TBXML textForElement:[TBXML childElementNamed:@"lastsignin" parentElement:resultelement]] intValue];
+		
+	}else {
+		
+		validation.returnCode=ValidationLoginFailed;
+		
 	}
+
+	validation.responseDict=[NSDictionary dictionaryWithObject:loginResponse forKey:activeResponse.dataid];
+	[loginResponse release];
 	
 	activeResponse.dataProvider=validation;
 	[validation release];
