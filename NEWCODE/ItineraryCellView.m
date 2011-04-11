@@ -8,6 +8,7 @@
 
 #import "ItineraryCellView.h"
 #import "AppConstants.h"
+#import "ViewUtilities.h"
 
 @implementation ItineraryCellView
 @synthesize dataProvider;
@@ -71,6 +72,8 @@
 	[readoutLabel drawUI];
 	
 	[viewContainer refresh];
+	
+	[ViewUtilities alignView:icon withView:viewContainer :BUNoneLayoutMode :BUCenterAlignMode];
 
 }
 
@@ -84,6 +87,8 @@
 	height+=5;
 	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",segment.startTime] :[UIFont systemFontOfSize:13] :UIWIDTH :UILineBreakModeClip];
 	height+=7;
+	
+	BetterLog(@"height=%i",height);
 	
 	return [NSNumber numberWithInt:height];
 }

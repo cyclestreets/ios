@@ -39,11 +39,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 + (RMMarker *)markerStart {
-	return [Markers marker:@"Map_Pin_Green.png" label:nil];
+	return [Markers marker:@"CSIcon_start_wisp.png" label:nil];
 }
 
 + (RMMarker *)markerEnd {
-	return [Markers marker:@"Map_Pin_Red.png" label:nil];
+	return [Markers marker:@"CSIcon_end_wisp.png" label:nil];
 }
 
 + (RMMarker *)markerWaypoint {
@@ -65,12 +65,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 + (RMMarker *)markerBeginArrow:(int)angle {
 	DLog(@"from %d", angle);
-	return [Markers marker:@"from_arrow_2.png" atAngle:360-angle];
+	return [Markers marker:@"CSIcon_MapArrow_start.png" atAngle:360-angle];
 }
 
 + (RMMarker *)markerEndArrow:(int)angle {
 	DLog(@"to %d", angle);
-	return [Markers marker:@"to_arrow_2.png" atAngle:360-angle];
+	return [Markers marker:@"CSIcon_MapArrow_end.png" atAngle:360-angle];
 }
 
 @end

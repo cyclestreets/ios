@@ -126,7 +126,6 @@
 
 - (void)viewDidLoad {
 	
-	tableView.rowHeight=[ItineraryCellView rowHeight];
 	
 	[self refreshUIFromDataProvider];
 	

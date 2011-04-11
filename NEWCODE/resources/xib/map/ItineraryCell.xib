@@ -63,9 +63,9 @@
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<string key="IBUIText">Road/street</string>
-										<object class="NSFont" key="IBUIFont" id="666033607">
+										<object class="NSFont" key="IBUIFont">
 											<string key="NSName">Helvetica-Bold</string>
-											<double key="NSSize">17</double>
+											<double key="NSSize">16</double>
 											<int key="NSfFlags">16</int>
 										</object>
 										<object class="NSColor" key="IBUITextColor">
@@ -103,8 +103,9 @@
 							<object class="IBUIImageView" id="1052432046">
 								<reference key="NSNextResponder" ref="680957958"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{7, 7}, {30, 30}}</string>
+								<string key="NSFrame">{{7, 7}, {32, 32}}</string>
 								<reference key="NSSuperview" ref="680957958"/>
+								<int key="IBUIContentMode">4</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -133,7 +134,11 @@
 				<int key="IBUISelectionStyle">2</int>
 				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="680957958"/>
-				<reference key="IBUIFont" ref="666033607"/>
+				<object class="NSFont" key="IBUIFont">
+					<string key="NSName">Helvetica-Bold</string>
+					<double key="NSSize">17</double>
+					<int key="NSfFlags">16</int>
+				</object>
 				<string key="IBUIReuseIdentifier">ItineraryCellViewIdentifer</string>
 			</object>
 		</object>

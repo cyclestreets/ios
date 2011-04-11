@@ -113,18 +113,21 @@ static NSDictionary *roadIcons;
 	if (nil == roadIcons) {
 		//TODO the association of symbols to types could be improved
 		roadIcons = [[NSDictionary dictionaryWithObjectsAndKeys:
-					  @"mm_15_road.png", @"Service Road", 
-					  @"mm_15_road.png", @"Busy Road", 
-					  @"mm_15_road.png", @"Road", 
-					  @"mm_15_road.png", @"Busy and fast road", 
-					  @"footprints.png", @"Footpath", 
-					  @"footprints.png", @"Steps with Channel", 
-					  @"mm_15_cycleway.png", @"Unsegregated Shared Use", 
-					  @"mm_15_cycleway.png", @"Narrow Cycle Lane", 
-					  @"mm_15_cycleway.png", @"Cycle Lane", 
-					  @"mm_15_cycleway.png", @"Cycle Track", 
-					  @"bike_black.png", @"Track", 
-					  @"bike_black.png", @"Quiet Street", 
+					  @"UIIcon_roads.png", @"Service Road", 
+					  @"UIIcon_roads.png", @"Busy Road", 
+					  @"UIIcon_roads.png", @"Road", 
+					  @"UIIcon_roads.png", @"Busy and fast road", 
+					  @"UIIcon_footpaths.png", @"Footpath", 
+					  @"UIIcon_footpaths.png", @"footway", 
+					  @"UIIcon_footpaths.png", @"pedestrian",
+					  @"UIIcon_footpaths.png", @"Steps with Channel", 
+					  @"UIIcon_cycle_lanes.png", @"Unsegregated Shared Use", 
+					  @"UIIcon_cycle_lanes.png", @"Narrow Cycle Lane", 
+					  @"UIIcon_cycle_lanes.png", @"Cycle Lane", 
+					  @"UIIcon_cycle_tracks.png", @"Cycle Track", 
+					  @"UIIcon_tracks.png", @"Track", 
+					  @"UIIcon_tracks.png", @"bridleway", 
+					  @"UIIcon_quiet_street.png", @"Quiet Street", 
 					 nil] retain];
 	}
 	return [roadIcons valueForKey:provisionName];

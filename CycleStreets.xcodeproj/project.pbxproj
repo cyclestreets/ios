@@ -97,6 +97,27 @@
 		28915F12133A74AB000C821B /* UIButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915F10133A74AB000C821B /* UIButtonBarArrowRight.png */; };
 		28915F18133A7631000C821B /* UIButtonBarInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28915F17133A7631000C821B /* UIButtonBarInfo.png */; };
 		28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
+		289A96F71353000D00E8AF90 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A96F61353000D00E8AF90 /* photo.png */; };
+		289A9B3D13536CB800E8AF90 /* CSIcon_MapArrow_end.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3113536CB800E8AF90 /* CSIcon_MapArrow_end.png */; };
+		289A9B3E13536CB800E8AF90 /* CSIcon_MapArrow_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3213536CB800E8AF90 /* CSIcon_MapArrow_start.png */; };
+		289A9B3F13536CB800E8AF90 /* UIIcon_cycle_lanes.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3413536CB800E8AF90 /* UIIcon_cycle_lanes.png */; };
+		289A9B4013536CB800E8AF90 /* UIIcon_cycle_tracks.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3513536CB800E8AF90 /* UIIcon_cycle_tracks.png */; };
+		289A9B4113536CB800E8AF90 /* UIIcon_footpaths.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3613536CB800E8AF90 /* UIIcon_footpaths.png */; };
+		289A9B4213536CB800E8AF90 /* UIIcon_quiet_street.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3713536CB800E8AF90 /* UIIcon_quiet_street.png */; };
+		289A9B4313536CB800E8AF90 /* UIIcon_roads.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3813536CB800E8AF90 /* UIIcon_roads.png */; };
+		289A9B4413536CB800E8AF90 /* UIIcon_tracks.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3913536CB800E8AF90 /* UIIcon_tracks.png */; };
+		289A9B4513536CB800E8AF90 /* CSIcon_end_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3B13536CB800E8AF90 /* CSIcon_end_wisp.png */; };
+		289A9B4613536CB800E8AF90 /* CSIcon_start_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B3C13536CB800E8AF90 /* CSIcon_start_wisp.png */; };
+		289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */; };
+		289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4913536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png */; };
+		289A9B5613536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */; };
+		289A9B5713536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4C13536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png */; };
+		289A9B5813536CCB00E8AF90 /* UIIcon_footpaths@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4D13536CCB00E8AF90 /* UIIcon_footpaths@2x.png */; };
+		289A9B5913536CCB00E8AF90 /* UIIcon_quiet_street@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4E13536CCB00E8AF90 /* UIIcon_quiet_street@2x.png */; };
+		289A9B5A13536CCB00E8AF90 /* UIIcon_roads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4F13536CCB00E8AF90 /* UIIcon_roads@2x.png */; };
+		289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
+		289A9B5C13536CCB00E8AF90 /* CSIcon_end_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_end_wisp@2x.png */; };
+		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
 		28AD60BB131FB54A008527FC /* CycleStreets-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */; };
 		28AD60BC131FB54A008527FC /* CycleStreetsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B6131FB54A008527FC /* CycleStreetsAppDelegate.m */; };
 		28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B7131FB54A008527FC /* CycleStreetsWindow.xib */; };
@@ -493,6 +514,27 @@
 		28915F17133A7631000C821B /* UIButtonBarInfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarInfo.png; sourceTree = "<group>"; };
 		28916030133A9AC9000C821B /* CSSegmentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSegmentFooterView.h; sourceTree = "<group>"; };
 		28916031133A9AC9000C821B /* CSSegmentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSegmentFooterView.m; sourceTree = "<group>"; };
+		289A96F61353000D00E8AF90 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
+		289A9B3113536CB800E8AF90 /* CSIcon_MapArrow_end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_MapArrow_end.png; sourceTree = "<group>"; };
+		289A9B3213536CB800E8AF90 /* CSIcon_MapArrow_start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_MapArrow_start.png; sourceTree = "<group>"; };
+		289A9B3413536CB800E8AF90 /* UIIcon_cycle_lanes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_cycle_lanes.png; sourceTree = "<group>"; };
+		289A9B3513536CB800E8AF90 /* UIIcon_cycle_tracks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_cycle_tracks.png; sourceTree = "<group>"; };
+		289A9B3613536CB800E8AF90 /* UIIcon_footpaths.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_footpaths.png; sourceTree = "<group>"; };
+		289A9B3713536CB800E8AF90 /* UIIcon_quiet_street.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_quiet_street.png; sourceTree = "<group>"; };
+		289A9B3813536CB800E8AF90 /* UIIcon_roads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_roads.png; sourceTree = "<group>"; };
+		289A9B3913536CB800E8AF90 /* UIIcon_tracks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_tracks.png; sourceTree = "<group>"; };
+		289A9B3B13536CB800E8AF90 /* CSIcon_end_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_end_wisp.png; sourceTree = "<group>"; };
+		289A9B3C13536CB800E8AF90 /* CSIcon_start_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_start_wisp.png; sourceTree = "<group>"; };
+		289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_MapArrow_end@2x.png"; sourceTree = "<group>"; };
+		289A9B4913536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_MapArrow_start@2x.png"; sourceTree = "<group>"; };
+		289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_cycle_lanes@2x.png"; sourceTree = "<group>"; };
+		289A9B4C13536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_cycle_tracks@2x.png"; sourceTree = "<group>"; };
+		289A9B4D13536CCB00E8AF90 /* UIIcon_footpaths@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_footpaths@2x.png"; sourceTree = "<group>"; };
+		289A9B4E13536CCB00E8AF90 /* UIIcon_quiet_street@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_quiet_street@2x.png"; sourceTree = "<group>"; };
+		289A9B4F13536CCB00E8AF90 /* UIIcon_roads@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_roads@2x.png"; sourceTree = "<group>"; };
+		289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_tracks@2x.png"; sourceTree = "<group>"; };
+		289A9B5213536CCB00E8AF90 /* CSIcon_end_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_end_wisp@2x.png"; sourceTree = "<group>"; };
+		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
 		28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CycleStreets-Info.plist"; path = "../CycleStreets-Info.plist"; sourceTree = "<group>"; };
 		28AD60B4131FB54A008527FC /* CycleStreets_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CycleStreets_Prefix.pch; path = ../CycleStreets_Prefix.pch; sourceTree = "<group>"; };
 		28AD60B5131FB54A008527FC /* CycleStreetsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleStreetsAppDelegate.h; sourceTree = "<group>"; };
@@ -1191,6 +1233,68 @@
 			name = html;
 			sourceTree = "<group>";
 		};
+		289A9B3013536CB800E8AF90 /* Arrows */ = {
+			isa = PBXGroup;
+			children = (
+				289A9B3113536CB800E8AF90 /* CSIcon_MapArrow_end.png */,
+				289A9B3213536CB800E8AF90 /* CSIcon_MapArrow_start.png */,
+			);
+			path = Arrows;
+			sourceTree = "<group>";
+		};
+		289A9B3313536CB800E8AF90 /* Cell Icons */ = {
+			isa = PBXGroup;
+			children = (
+				289A9B3413536CB800E8AF90 /* UIIcon_cycle_lanes.png */,
+				289A9B3513536CB800E8AF90 /* UIIcon_cycle_tracks.png */,
+				289A9B3613536CB800E8AF90 /* UIIcon_footpaths.png */,
+				289A9B3713536CB800E8AF90 /* UIIcon_quiet_street.png */,
+				289A9B3813536CB800E8AF90 /* UIIcon_roads.png */,
+				289A9B3913536CB800E8AF90 /* UIIcon_tracks.png */,
+			);
+			path = "Cell Icons";
+			sourceTree = "<group>";
+		};
+		289A9B3A13536CB800E8AF90 /* Wisps */ = {
+			isa = PBXGroup;
+			children = (
+				289A9B3B13536CB800E8AF90 /* CSIcon_end_wisp.png */,
+				289A9B3C13536CB800E8AF90 /* CSIcon_start_wisp.png */,
+			);
+			path = Wisps;
+			sourceTree = "<group>";
+		};
+		289A9B4713536CCB00E8AF90 /* Arrows */ = {
+			isa = PBXGroup;
+			children = (
+				289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */,
+				289A9B4913536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png */,
+			);
+			path = Arrows;
+			sourceTree = "<group>";
+		};
+		289A9B4A13536CCB00E8AF90 /* Cell Icons */ = {
+			isa = PBXGroup;
+			children = (
+				289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */,
+				289A9B4C13536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png */,
+				289A9B4D13536CCB00E8AF90 /* UIIcon_footpaths@2x.png */,
+				289A9B4E13536CCB00E8AF90 /* UIIcon_quiet_street@2x.png */,
+				289A9B4F13536CCB00E8AF90 /* UIIcon_roads@2x.png */,
+				289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */,
+			);
+			path = "Cell Icons";
+			sourceTree = "<group>";
+		};
+		289A9B5113536CCB00E8AF90 /* Wisps */ = {
+			isa = PBXGroup;
+			children = (
+				289A9B5213536CCB00E8AF90 /* CSIcon_end_wisp@2x.png */,
+				289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */,
+			);
+			path = Wisps;
+			sourceTree = "<group>";
+		};
 		28AD60B2131FB54A008527FC /* AppDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -1716,6 +1820,9 @@
 		28AD6525131FC239008527FC /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				289A9B3013536CB800E8AF90 /* Arrows */,
+				289A9B3313536CB800E8AF90 /* Cell Icons */,
+				289A9B3A13536CB800E8AF90 /* Wisps */,
 				28915F17133A7631000C821B /* UIButtonBarInfo.png */,
 				28915F0F133A74AB000C821B /* UIButtonBarArrowLeft.png */,
 				28915F10133A74AB000C821B /* UIButtonBarArrowRight.png */,
@@ -1749,6 +1856,9 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				289A9B4713536CCB00E8AF90 /* Arrows */,
+				289A9B4A13536CCB00E8AF90 /* Cell Icons */,
+				289A9B5113536CCB00E8AF90 /* Wisps */,
 				28AD6533131FC239008527FC /* UIButton_green_hi@2x.png */,
 				28AD6534131FC239008527FC /* UIButton_green_lo@2x.png */,
 				28AD6535131FC239008527FC /* UIButton_grey_hi@2x.png */,
@@ -1823,6 +1933,7 @@
 		E7FD8F46127821EB002640D0 /* IconsAndImages */ = {
 			isa = PBXGroup;
 			children = (
+				289A96F61353000D00E8AF90 /* photo.png */,
 				28915EFA133A6CBC000C821B /* from_arrow_2.png */,
 				28915EFB133A6CBC000C821B /* to_arrow_2.png */,
 				E7FD8F47127821EB002640D0 /* bg320x240.png */,
@@ -2107,6 +2218,27 @@
 				2863A41C134E508800A22093 /* RouteTableView.xib in Resources */,
 				2863A41E134E508800A22093 /* Stage.xib in Resources */,
 				2863A420134E508800A22093 /* WebPopup.xib in Resources */,
+				289A96F71353000D00E8AF90 /* photo.png in Resources */,
+				289A9B3D13536CB800E8AF90 /* CSIcon_MapArrow_end.png in Resources */,
+				289A9B3E13536CB800E8AF90 /* CSIcon_MapArrow_start.png in Resources */,
+				289A9B3F13536CB800E8AF90 /* UIIcon_cycle_lanes.png in Resources */,
+				289A9B4013536CB800E8AF90 /* UIIcon_cycle_tracks.png in Resources */,
+				289A9B4113536CB800E8AF90 /* UIIcon_footpaths.png in Resources */,
+				289A9B4213536CB800E8AF90 /* UIIcon_quiet_street.png in Resources */,
+				289A9B4313536CB800E8AF90 /* UIIcon_roads.png in Resources */,
+				289A9B4413536CB800E8AF90 /* UIIcon_tracks.png in Resources */,
+				289A9B4513536CB800E8AF90 /* CSIcon_end_wisp.png in Resources */,
+				289A9B4613536CB800E8AF90 /* CSIcon_start_wisp.png in Resources */,
+				289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */,
+				289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */,
+				289A9B5613536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png in Resources */,
+				289A9B5713536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png in Resources */,
+				289A9B5813536CCB00E8AF90 /* UIIcon_footpaths@2x.png in Resources */,
+				289A9B5913536CCB00E8AF90 /* UIIcon_quiet_street@2x.png in Resources */,
+				289A9B5A13536CCB00E8AF90 /* UIIcon_roads@2x.png in Resources */,
+				289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */,
+				289A9B5C13536CCB00E8AF90 /* CSIcon_end_wisp@2x.png in Resources */,
+				289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

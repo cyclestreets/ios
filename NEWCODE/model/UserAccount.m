@@ -244,8 +244,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password{
 	
-	userName=[name retain];
-	userPassword=[password retain];
+	self.userName=name;
+	self.userPassword=password;
 	
 	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
 									 userPassword,@"password", nil];
@@ -272,7 +272,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		case ValidationLoginSuccess:
 		{
 			
-			LoginVO *loginresponse=[validation.responseDict objectForKey:LOGIN];
+			// rD will be LoginVO
+			//LoginVO *loginresponse=[validation.responseDict objectForKey:LOGIN];
 			
 			isRegistered=YES;
 			accountMode=kUserAccountLoggedIn;
@@ -404,7 +405,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)createUser{
 	
-	user=[[UserVO alloc]init];
+	self.user=[[UserVO alloc]init];
 	user.username=userName;
 	
 }

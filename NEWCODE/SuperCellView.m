@@ -36,7 +36,6 @@
 }
 
 +(NSString*)cellIdentifier{
-	NSLog(@"[DEBUG] [ERROR] SuperCellViewIdentifer has not been overridden");
 	return @"SuperCellViewIdentifer";
 }
 
