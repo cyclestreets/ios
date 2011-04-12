@@ -61,19 +61,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 + (RMMarker *)marker:(NSString *)name atAngle:(int)angle {
 	UIImage *image = [UIImage imageNamed:name];
-	//
-//	CGRect imageRect = CGRectMake(0, 0, image.size.width,image.size.height);
-//	UIGraphicsBeginImageContext( imageRect.size ); 
-//	[image drawInRect:CGRectMake(1,1,image.size.width-2,image.size.height-2)];
-//	image = UIGraphicsGetImageFromCurrentImageContext();
-//	UIGraphicsEndImageContext();
-//	
-//	
 	
-	//CGImageRef copy = [ImageOperations CGImageRotatedByAngle:image.CGImage angle:angle];
-	//UIImage *rotated = [UIImage imageWithCGImage:copy];
-	//UIImage *rotated=[Markers scaleAndRotateImage:image byAngle:angle];
-	//UIImage *rotated=[image rotateByAngle:angle];
 	UIImage *rotated=[UIImage rotateImage:image byDegrees:angle];
 	RMMarker *marker = [[[RMMarker alloc] initWithUIImage:rotated] autorelease];
 	return marker;	
@@ -89,30 +77,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return [Markers marker:@"CSIcon_MapArrow_end.png" atAngle:angle];
 }
 
-+ (UIImage *)scaleAndRotateImage:(UIImage *)image byAngle:(int)angle { 
-	
-	CGImageRef imgRef = image.CGImage;
-	
-	CGFloat width = CGImageGetWidth(imgRef);
-	CGFloat height = CGImageGetHeight(imgRef);
-	
-	CGAffineTransform transform = CGAffineTransformIdentity;
-	
-	transform = CGAffineTransformMakeScale(-1.0, 1.0);
-	transform = CGAffineTransformRotate(transform, degreesToRadians(angle)); 
-	
-	UIGraphicsBeginImageContext(image.size);   
-	CGContextRef context = UIGraphicsGetCurrentContext();   
-	
-	//[image drawInRect:CGRectMake(1,1,image.size.width-2,image.size.height-2)];
-	
-	CGContextConcatCTM(context, transform); 
-	CGContextDrawImage(context, CGRectMake(0, 0, width, height), imgRef);
-	UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	
-	return imageCopy;   
-	
-}
 
 @end

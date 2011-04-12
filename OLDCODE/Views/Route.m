@@ -29,6 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SettingsManager.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
+#import "NSDate+Helper.h"
 
 static NSString *ROUTE_ELEMENT = @"cs:route";
 static NSString *SEGMENT_ELEMENT = @"cs:segment";
@@ -174,7 +175,12 @@ static NSString *ROUTEDATE = @"cs:whence";
 	}else {
 		return [NSString stringWithFormat:@"%@ Km", kmSpeed];
 	}
+}
 
+-(NSString*)dateString{
+	
+	NSDate *newdate=[NSDate dateFromString:[self date] withFormat:@"y-MM-dd HH:mm:ss"];		
+	return [NSDate stringFromDate:newdate withFormat:@"eeee d MMMM y HH:mm"];
 	
 }
 

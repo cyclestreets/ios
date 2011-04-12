@@ -31,6 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Route.h"
 #import "UIButton+Blue.h"
 #import "RouteManager.h"
+#import "BUDividerView.h"
 
 @implementation RouteSummary
 @synthesize route;
@@ -89,15 +90,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self.view addSubview:viewContainer];
 	
 	headerContainer.layoutMode=BUVerticalLayoutMode;
+	[headerContainer initFromNIB];
 	readoutContainer.layoutMode=BUVerticalLayoutMode;
+	[readoutContainer initFromNIB];
+	
+	
+	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	
 	
 	[GlobalUtilities styleIBButton:routeButton type:@"green" text:@"Select this route"];
 	
 	routeNameLabel.multiline=YES;
 	
-	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,readoutContainer,routeButton,nil]];
+	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,routeButton,nil]];
 	
+	[d1 release];
+	[d2 release];
 	
 }
 
@@ -114,8 +123,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -(void)createNonPersistentUI{
 	
 	self.routeNameLabel.text = [route name];
-	self.dateLabel.text=[route date];
-	self.routeidLabel=[NSString stringWithFormat:@"#%@", [route itinerary]];
+	self.dateLabel.text=route.dateString;
+	self.routeidLabel.text=[NSString stringWithFormat:@"#%@", [route itinerary]];
 	[headerContainer refresh];
 	
 	timeLabel.text=route.timeString;

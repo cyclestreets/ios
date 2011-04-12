@@ -37,6 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, readonly)	NSString	*timeString;
 @property (nonatomic, readonly)	NSString	*lengthString;
 @property (nonatomic, readonly)	NSString	*speedString;
+@property (nonatomic, readonly)	NSString	*dateString;
 
 
 

@@ -291,6 +291,7 @@
 		28D2BAC21354799000694093 /* UIIcon_photomap@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D2BABC1354799000694093 /* UIIcon_photomap@x2.png */; };
 		28D2BAE11354814E00694093 /* UKImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BAE01354814E00694093 /* UKImage.m */; };
 		28D2BB091354854900694093 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BB081354854900694093 /* UIImage+Operations.m */; };
+		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F412BAA8450025C4A2 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F312BAA8450025C4A2 /* libz.1.2.3.dylib */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
 		E70586AA12365A7B0080917E /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = E70586A812365A7B0080917E /* donate.html */; };
@@ -453,9 +454,9 @@
 		2863A3A3134E508800A22093 /* FavouritesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = FavouritesView.xib; path = ../../../OLDCODE/Views/Favourites/FavouritesView.xib; sourceTree = "<group>"; };
 		2863A3A4134E508800A22093 /* FavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavouritesViewController.h; path = ../../OLDCODE/Views/Favourites/FavouritesViewController.h; sourceTree = "<group>"; };
 		2863A3A5134E508800A22093 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavouritesViewController.m; path = ../../OLDCODE/Views/Favourites/FavouritesViewController.m; sourceTree = "<group>"; };
-		2863A3A6134E508800A22093 /* RouteSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteSummary.h; sourceTree = "<group>"; };
-		2863A3A7134E508800A22093 /* RouteSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteSummary.m; sourceTree = "<group>"; };
-		2863A3A8134E508800A22093 /* RouteSummary.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSummary.xib; sourceTree = "<group>"; };
+		2863A3A6134E508800A22093 /* RouteSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RouteSummary.h; path = ../../OLDCODE/Views/Favourites/RouteSummary.h; sourceTree = "<group>"; };
+		2863A3A7134E508800A22093 /* RouteSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RouteSummary.m; path = ../../OLDCODE/Views/Favourites/RouteSummary.m; sourceTree = "<group>"; };
+		2863A3A8134E508800A22093 /* RouteSummary.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RouteSummary.xib; path = ../../../OLDCODE/Views/Favourites/RouteSummary.xib; sourceTree = "<group>"; };
 		2863A3AA134E508800A22093 /* RouteTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteTableCell.h; sourceTree = "<group>"; };
 		2863A3AB134E508800A22093 /* RouteTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteTableCell.m; sourceTree = "<group>"; };
 		2863A3AC134E508800A22093 /* RouteTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteTableCell.xib; sourceTree = "<group>"; };
@@ -829,6 +830,8 @@
 		28D2BAE01354814E00694093 /* UKImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKImage.m; sourceTree = "<group>"; };
 		28D2BB071354854900694093 /* UIImage+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Operations.h"; path = "../utilities/UIImage+Operations.h"; sourceTree = "<group>"; };
 		28D2BB081354854900694093 /* UIImage+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Operations.m"; path = "../utilities/UIImage+Operations.m"; sourceTree = "<group>"; };
+		28D2BC5A1354C48B00694093 /* BUDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDividerView.h; sourceTree = "<group>"; };
+		28D2BC5B1354C48B00694093 /* BUDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDividerView.m; sourceTree = "<group>"; };
 		28D7E1F312BAA8450025C4A2 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		28D7E1F712BAA8710025C4A2 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		E70586A812365A7B0080917E /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = donate.html; path = html/donate.html; sourceTree = "<group>"; };
@@ -1068,9 +1071,6 @@
 		2863A39F134E508800A22093 /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
-				2863A3A6134E508800A22093 /* RouteSummary.h */,
-				2863A3A7134E508800A22093 /* RouteSummary.m */,
-				2863A3A8134E508800A22093 /* RouteSummary.xib */,
 			);
 			path = Favourites;
 			sourceTree = "<group>";
@@ -1135,6 +1135,8 @@
 		2863A5E6134E5EC500A22093 /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
+				2863A3A6134E508800A22093 /* RouteSummary.h */,
+				2863A3A7134E508800A22093 /* RouteSummary.m */,
 				2863A3A4134E508800A22093 /* FavouritesViewController.h */,
 				2863A3A5134E508800A22093 /* FavouritesViewController.m */,
 			);
@@ -1144,6 +1146,7 @@
 		2863A5E7134E5EF000A22093 /* favourites */ = {
 			isa = PBXGroup;
 			children = (
+				2863A3A8134E508800A22093 /* RouteSummary.xib */,
 				2863A3A3134E508800A22093 /* FavouritesView.xib */,
 				2863A3A2134E508800A22093 /* FavouritesCell.xib */,
 			);
@@ -1558,6 +1561,8 @@
 		28AD6337131FB6C8008527FC /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				28D2BC5A1354C48B00694093 /* BUDividerView.h */,
+				28D2BC5B1354C48B00694093 /* BUDividerView.m */,
 				28AD6338131FB6C8008527FC /* AsyncImageView.h */,
 				28AD6339131FB6C8008527FC /* AsyncImageView.m */,
 				28AD633A131FB6C8008527FC /* BorderView.h */,
@@ -2441,6 +2446,7 @@
 				286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */,
 				28D2BAE11354814E00694093 /* UKImage.m in Sources */,
 				28D2BB091354854900694093 /* UIImage+Operations.m in Sources */,
+				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -102,6 +102,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	BetterLog(@"");
 	
+	self.selectedRoute=route;
+	
 	Files *files=[CycleStreets sharedInstance].files;
 	NSArray *oldFavourites = [files favourites];
 	NSMutableArray *newFavourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count]+1] autorelease];

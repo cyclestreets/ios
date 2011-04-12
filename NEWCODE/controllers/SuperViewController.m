@@ -227,16 +227,16 @@
 #define kNoResultsViewTAG 9998
 -(void)showNoResultsView:(BOOL)show{
 	
-	BetterLog(@"");
+	//BetterLog(@"");
 	
 	//if(self.navigationController.visibleViewController==self){
 		
-		BetterLog(@"");
+		//BetterLog(@"");
 	
 		if(show==YES){
 			
 			
-			BetterLog(@"");
+			//BetterLog(@"");
 			
 			GradientView *errorView;
 			VBox *contentContainer;

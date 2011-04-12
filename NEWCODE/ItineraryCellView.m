@@ -64,6 +64,8 @@
 	float totalMiles = ((float)([dataProvider startDistance]+[dataProvider segmentDistance]))/1600;
 	[arr addObject:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles]];
 	
+	BetterLog(@"[dataProvider provisionName]=%@",[dataProvider provisionName]);
+	
 	NSString *imageName = [SegmentVO provisionIcon:[dataProvider provisionName]];
 	icon.image=[UIImage imageNamed:imageName];
 	
@@ -87,8 +89,6 @@
 	height+=5;
 	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",segment.startTime] :[UIFont systemFontOfSize:13] :UIWIDTH :UILineBreakModeClip];
 	height+=7;
-	
-	BetterLog(@"height=%i",height);
 	
 	return [NSNumber numberWithInt:height];
 }

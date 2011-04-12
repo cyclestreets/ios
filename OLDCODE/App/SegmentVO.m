@@ -127,7 +127,8 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_cycle_tracks.png", @"Cycle Track", 
 					  @"UIIcon_tracks.png", @"Track", 
 					  @"UIIcon_tracks.png", @"bridleway", 
-					  @"UIIcon_quiet_street.png", @"Quiet Street", 
+					  @"UIIcon_quiet_street.png", @"Quiet Street",
+					  @"UIIcon_quiet_street.png", @"unclassified,service", // need icon for this
 					 nil] retain];
 	}
 	return [roadIcons valueForKey:provisionName];

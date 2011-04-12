@@ -180,7 +180,7 @@
 
 -(void)createNonPersistentUI{
 	
-	BetterLog(@"");
+	//BetterLog(@"");
 	
 	if(route==nil){
 		
