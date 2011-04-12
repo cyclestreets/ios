@@ -159,7 +159,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSNumber *routeIdentifier = [NSNumber numberWithInt:[[favourites objectAtIndex:indexPath.row] intValue]];
 	Route *route = [routes objectForKey:routeIdentifier];
 	if (self.routeSummary == nil) {
-		self.routeSummary = [[[RouteSummary alloc] initWithRoute:route] autorelease];
+		self.routeSummary = [[RouteSummary alloc]init];
 	}
 	self.routeSummary.route = route;
 	[self.navigationController pushViewController:self.routeSummary animated:YES];

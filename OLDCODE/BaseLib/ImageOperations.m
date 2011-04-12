@@ -34,6 +34,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CGFloat width = CGImageGetWidth(imgRef);
 	CGFloat height = CGImageGetHeight(imgRef);
 	
+	/*
+	CGRect imageRect = CGRectMake(0, 0, width,height);
+	UIGraphicsBeginImageContext( imageRect.size ); 
+	[imgRef drawInRect:CGRectMake(1,1,imageRect.size.width-2,imageRect.size.height-2)];
+	imageRect = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	 */
+	
 	CGRect imgRect = CGRectMake(0, 0, width, height);
 	CGAffineTransform transform = CGAffineTransformMakeRotation(angleInRadians);
 	CGRect rotatedRect = CGRectApplyAffineTransform(imgRect, transform);
@@ -46,6 +54,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 												   0,
 												   colorSpace,
 												   kCGImageAlphaPremultipliedFirst);
+	
+	
+	
+	
 	CGContextSetAllowsAntialiasing(bmContext, FALSE);
 	CGContextSetInterpolationQuality(bmContext, kCGInterpolationNone);
 	CGColorSpaceRelease(colorSpace);

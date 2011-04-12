@@ -42,6 +42,7 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 
 #define LogRect(RECT) NSLog(@"%s: (%0.0f, %0.0f) %0.0f x %0.0f",RECT, RECT.origin.x, RECT.origin.y, RECT.size.width, RECT.size.height)
 
+#define degreesToRadians(x) (M_PI * x / 180.0)
 
 // global notification ids
 #define BUNavigationRequestNotification @"BUNavigationRequestNotification" // Why is this here?

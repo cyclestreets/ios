@@ -34,57 +34,97 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @implementation RouteSummary
 @synthesize route;
-@synthesize routeButton;
-@synthesize name;
-@synthesize time;
-@synthesize length;
-@synthesize plan;
-@synthesize speed;
-@synthesize icon;
+@synthesize viewContainer;
+@synthesize headerContainer;
+@synthesize routeNameLabel;
+@synthesize dateLabel;
 @synthesize routeidLabel;
-@synthesize contentView;
+@synthesize readoutContainer;
+@synthesize timeLabel;
+@synthesize lengthLabel;
+@synthesize planLabel;
+@synthesize speedLabel;
+@synthesize routeButton;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [route release], route = nil;
-    [routeButton release], routeButton = nil;
-    [name release], name = nil;
-    [time release], time = nil;
-    [length release], length = nil;
-    [plan release], plan = nil;
-    [speed release], speed = nil;
-    [icon release], icon = nil;
+    [viewContainer release], viewContainer = nil;
+    [headerContainer release], headerContainer = nil;
+    [routeNameLabel release], routeNameLabel = nil;
+    [dateLabel release], dateLabel = nil;
     [routeidLabel release], routeidLabel = nil;
-    [contentView release], contentView = nil;
+    [readoutContainer release], readoutContainer = nil;
+    [timeLabel release], timeLabel = nil;
+    [lengthLabel release], lengthLabel = nil;
+    [planLabel release], planLabel = nil;
+    [speedLabel release], speedLabel = nil;
+    [routeButton release], routeButton = nil;
 	
     [super dealloc];
 }
 
 
 
-- (id)initWithRoute:(Route *)newRoute {
-	if (self = [super init]) {
-		self.route = newRoute;
-	}
-	return self;
-}
-
-
 - (void)viewDidLoad {
 	
     [super viewDidLoad];
-	[self.routeButton setupBlue];
-	[self.route setUIElements:self];
-	self.title = [NSString stringWithFormat:@"Route #%@", [route itinerary]];
 	
-	routeidLabel.text=[NSString stringWithFormat:@"#%@", [route itinerary]];
-	
-	[self.view addSubview:contentView];
-	[(UIScrollView*) self.view setContentSize:CGSizeMake(320, contentView.frame.size.height)];
+	[self createPersistentUI];
 
+}
+
+
+-(void)createPersistentUI{
+	
+	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	viewContainer.fixedWidth=YES;
+	viewContainer.itemPadding=10;
+	viewContainer.paddingTop=10;
+	viewContainer.layoutMode=BUVerticalLayoutMode;
+	viewContainer.alignMode=BUCenterAlignMode;
+	[self.view addSubview:viewContainer];
+	
+	headerContainer.layoutMode=BUVerticalLayoutMode;
+	readoutContainer.layoutMode=BUVerticalLayoutMode;
+	
+	
+	[GlobalUtilities styleIBButton:routeButton type:@"green" text:@"Select this route"];
+	
+	routeNameLabel.multiline=YES;
+	
+	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,readoutContainer,routeButton,nil]];
+	
+	
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+	
+	[self createNonPersistentUI];
+	
+	[super viewWillAppear:animated];
+}
+
+
+
+-(void)createNonPersistentUI{
+	
+	self.routeNameLabel.text = [route name];
+	self.dateLabel.text=[route date];
+	self.routeidLabel=[NSString stringWithFormat:@"#%@", [route itinerary]];
+	[headerContainer refresh];
+	
+	timeLabel.text=route.timeString;
+	lengthLabel.text=route.lengthString;
+	planLabel.text=[route plan];
+	speedLabel.text=route.speedString;
+	
+	
+	[viewContainer refresh];
 }
 
 
@@ -102,17 +142,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
-- (void)setRoute:(Route *)newRoute {
-	[newRoute retain];
-	[route release];
-	route = newRoute;
-	[self.route setUIElements:self];
-	self.title = [NSString stringWithFormat:@"Route #%@", [self.route itinerary]];
-}
-
-- (Route *)route {
-	return route;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

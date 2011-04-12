@@ -26,33 +26,45 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <UIKit/UIKit.h>
 #import "Route.h"
+#import "LayoutBox.h"
+#import "SuperViewController.h"
+#import "ExpandedUILabel.h"
 
-@interface RouteSummary : UIViewController {
-	Route *route;
-	IBOutlet		UIButton *routeButton;
-	IBOutlet		UILabel *name;
-	IBOutlet		UILabel *time;
-	IBOutlet		UILabel *length;
-	IBOutlet		UILabel *plan;
-	IBOutlet		UILabel *speed;	
-	IBOutlet		UIImageView *icon;
-	IBOutlet		UILabel *routeidLabel;
+@interface RouteSummary : SuperViewController {
 	
-	IBOutlet		UIView			*contentView;
+	Route								*route;
+	
+	LayoutBox							*viewContainer;
+	
+	IBOutlet		LayoutBox			*headerContainer;
+	IBOutlet		ExpandedUILabel		*routeNameLabel;
+	IBOutlet		UILabel				*dateLabel;
+	IBOutlet		UILabel				*routeidLabel;
+	
+	IBOutlet		LayoutBox			*readoutContainer;
+	IBOutlet		UILabel				*timeLabel;
+	IBOutlet		UILabel				*lengthLabel;
+	IBOutlet		UILabel				*planLabel;
+	IBOutlet		UILabel				*speedLabel;	
+	
+	
+	IBOutlet		UIButton			*routeButton;
+	
 }
 
-@property (nonatomic, retain) Route *route;
-@property (nonatomic, retain) IBOutlet UIButton *routeButton;
-@property (nonatomic, retain) IBOutlet UILabel *name;
-@property (nonatomic, retain) IBOutlet UILabel *time;
-@property (nonatomic, retain) IBOutlet UILabel *length;
-@property (nonatomic, retain) IBOutlet UILabel *plan;
-@property (nonatomic, retain) IBOutlet UILabel *speed;
-@property (nonatomic, retain) IBOutlet UIImageView *icon;
-@property (nonatomic, retain) IBOutlet UILabel *routeidLabel;
-@property (nonatomic, retain) IBOutlet UIView *contentView;
+@property (nonatomic, retain)	Route	*route;
+@property (nonatomic, retain)	LayoutBox	*viewContainer;
+@property (nonatomic, retain)	IBOutlet LayoutBox	*headerContainer;
+@property (nonatomic, retain)	IBOutlet ExpandedUILabel	*routeNameLabel;
+@property (nonatomic, retain)	IBOutlet UILabel	*dateLabel;
+@property (nonatomic, retain)	IBOutlet UILabel	*routeidLabel;
+@property (nonatomic, retain)	IBOutlet LayoutBox	*readoutContainer;
+@property (nonatomic, retain)	IBOutlet UILabel	*timeLabel;
+@property (nonatomic, retain)	IBOutlet UILabel	*lengthLabel;
+@property (nonatomic, retain)	IBOutlet UILabel	*planLabel;
+@property (nonatomic, retain)	IBOutlet UILabel	*speedLabel;
+@property (nonatomic, retain)	IBOutlet UIButton	*routeButton;
 
-- (id)initWithRoute:(Route *)route;
 
 - (IBAction) didRouteButton;
 

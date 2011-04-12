@@ -156,9 +156,10 @@ static NSString *ROUTEDATE = @"cs:whence";
 	
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
 		float totalMiles = [[self length] floatValue]/1600;
-		return [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
+		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
 	}else {
-		return [NSString stringWithFormat:@"(%3.1f miles)", [self length]];
+		float	kms=[[self length] floatValue]/1000;
+		return [NSString stringWithFormat:@"%4.1f km", kms];
 	}
 
 	
@@ -167,7 +168,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 -(NSString*)speedString{
 	
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[self speed]];
-	if([[SettingsManager sharedInstance].dataProvider.routeUnit isEqualToString:MILES]) {
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
 		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
 	}else {

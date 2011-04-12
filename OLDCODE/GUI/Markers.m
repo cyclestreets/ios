@@ -28,6 +28,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMarker.h"
 #import "Common.h"
 #import "ImageOperations.h"
+#import "UKImage.h"
+#import "GlobalUtilities.h"
+#import "UIImage+Operations.h"
 
 @implementation Markers
 
@@ -46,31 +49,70 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return [Markers marker:@"CSIcon_end_wisp.png" label:nil];
 }
 
+// never referenced
 + (RMMarker *)markerWaypoint {
 	return [Markers marker:@"map-pin.png" label:nil];
 }
 
 + (RMMarker *)markerPhoto {
 	//return [Markers marker:@"map-marker.png" label:nil];
-	return [Markers marker:@"photo.png" label:nil];
+	return [Markers marker:@"UIIcon_photomap.png" label:nil];
 }
 
 + (RMMarker *)marker:(NSString *)name atAngle:(int)angle {
 	UIImage *image = [UIImage imageNamed:name];
-	CGImageRef copy = [ImageOperations CGImageRotatedByAngle:image.CGImage angle:angle];
-	UIImage *rotated = [UIImage imageWithCGImage:copy];
+	//
+//	CGRect imageRect = CGRectMake(0, 0, image.size.width,image.size.height);
+//	UIGraphicsBeginImageContext( imageRect.size ); 
+//	[image drawInRect:CGRectMake(1,1,image.size.width-2,image.size.height-2)];
+//	image = UIGraphicsGetImageFromCurrentImageContext();
+//	UIGraphicsEndImageContext();
+//	
+//	
+	
+	//CGImageRef copy = [ImageOperations CGImageRotatedByAngle:image.CGImage angle:angle];
+	//UIImage *rotated = [UIImage imageWithCGImage:copy];
+	//UIImage *rotated=[Markers scaleAndRotateImage:image byAngle:angle];
+	//UIImage *rotated=[image rotateByAngle:angle];
+	UIImage *rotated=[UIImage rotateImage:image byDegrees:angle];
 	RMMarker *marker = [[[RMMarker alloc] initWithUIImage:rotated] autorelease];
 	return marker;	
 }
 
 + (RMMarker *)markerBeginArrow:(int)angle {
 	DLog(@"from %d", angle);
-	return [Markers marker:@"CSIcon_MapArrow_start.png" atAngle:360-angle];
+	return [Markers marker:@"CSIcon_MapArrow_start.png" atAngle:angle];
 }
 
 + (RMMarker *)markerEndArrow:(int)angle {
 	DLog(@"to %d", angle);
-	return [Markers marker:@"CSIcon_MapArrow_end.png" atAngle:360-angle];
+	return [Markers marker:@"CSIcon_MapArrow_end.png" atAngle:angle];
+}
+
++ (UIImage *)scaleAndRotateImage:(UIImage *)image byAngle:(int)angle { 
+	
+	CGImageRef imgRef = image.CGImage;
+	
+	CGFloat width = CGImageGetWidth(imgRef);
+	CGFloat height = CGImageGetHeight(imgRef);
+	
+	CGAffineTransform transform = CGAffineTransformIdentity;
+	
+	transform = CGAffineTransformMakeScale(-1.0, 1.0);
+	transform = CGAffineTransformRotate(transform, degreesToRadians(angle)); 
+	
+	UIGraphicsBeginImageContext(image.size);   
+	CGContextRef context = UIGraphicsGetCurrentContext();   
+	
+	//[image drawInRect:CGRectMake(1,1,image.size.width-2,image.size.height-2)];
+	
+	CGContextConcatCTM(context, transform); 
+	CGContextDrawImage(context, CGRectMake(0, 0, width, height), imgRef);
+	UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return imageCopy;   
+	
 }
 
 @end
