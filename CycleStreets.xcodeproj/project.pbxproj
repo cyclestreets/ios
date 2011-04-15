@@ -14,6 +14,23 @@
 		2805EB57133943BE002D13C5 /* exclaim.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB54133943BE002D13C5 /* exclaim.png */; };
 		2805EB58133943BE002D13C5 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB55133943BE002D13C5 /* lock.png */; };
 		2805EBAE13394D85002D13C5 /* ItineraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2805EBAD13394D85002D13C5 /* ItineraryCell.xib */; };
+		284415D81355CD790028CCE6 /* CSTabBar_account.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D01355CD790028CCE6 /* CSTabBar_account.png */; };
+		284415D91355CD790028CCE6 /* CSTabBar_add_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D11355CD790028CCE6 /* CSTabBar_add_photo.png */; };
+		284415DA1355CD790028CCE6 /* CSTabBar_credits.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D21355CD790028CCE6 /* CSTabBar_credits.png */; };
+		284415DB1355CD790028CCE6 /* CSTabBar_fav_routes.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D31355CD790028CCE6 /* CSTabBar_fav_routes.png */; };
+		284415DC1355CD790028CCE6 /* CSTabBar_itinerary.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D41355CD790028CCE6 /* CSTabBar_itinerary.png */; };
+		284415DD1355CD790028CCE6 /* CSTabBar_photomap_tb.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D51355CD790028CCE6 /* CSTabBar_photomap_tb.png */; };
+		284415DE1355CD790028CCE6 /* CSTabBar_plan_route.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D61355CD790028CCE6 /* CSTabBar_plan_route.png */; };
+		284415DF1355CD790028CCE6 /* CSTabBar_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D71355CD790028CCE6 /* CSTabBar_settings.png */; };
+		284415E91355CDB20028CCE6 /* CSTabBar_account@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E11355CDB10028CCE6 /* CSTabBar_account@x2.png */; };
+		284415EA1355CDB20028CCE6 /* CSTabBar_add_photo@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E21355CDB10028CCE6 /* CSTabBar_add_photo@x2.png */; };
+		284415EB1355CDB20028CCE6 /* CSTabBar_credits@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E31355CDB10028CCE6 /* CSTabBar_credits@x2.png */; };
+		284415EC1355CDB20028CCE6 /* CSTabBar_fav_routes@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E41355CDB20028CCE6 /* CSTabBar_fav_routes@x2.png */; };
+		284415ED1355CDB20028CCE6 /* CSTabBar_itinerary@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E51355CDB20028CCE6 /* CSTabBar_itinerary@x2.png */; };
+		284415EE1355CDB20028CCE6 /* CSTabBar_photomap_tb@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E61355CDB20028CCE6 /* CSTabBar_photomap_tb@x2.png */; };
+		284415EF1355CDB20028CCE6 /* CSTabBar_plan_route@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E71355CDB20028CCE6 /* CSTabBar_plan_route@x2.png */; };
+		284415F01355CDB20028CCE6 /* CSTabBar_settings@x2.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415E81355CDB20028CCE6 /* CSTabBar_settings@x2.png */; };
+		28441865135645930028CCE6 /* PhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28441864135645930028CCE6 /* PhotoManager.m */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E7B13328E9D00FAD008 /* LayoutBox.m */; };
@@ -379,6 +396,24 @@
 		2805EB54133943BE002D13C5 /* exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exclaim.png; sourceTree = "<group>"; };
 		2805EB55133943BE002D13C5 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		2805EBAD13394D85002D13C5 /* ItineraryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryCell.xib; sourceTree = "<group>"; };
+		284415D01355CD790028CCE6 /* CSTabBar_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_account.png; sourceTree = "<group>"; };
+		284415D11355CD790028CCE6 /* CSTabBar_add_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_add_photo.png; sourceTree = "<group>"; };
+		284415D21355CD790028CCE6 /* CSTabBar_credits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_credits.png; sourceTree = "<group>"; };
+		284415D31355CD790028CCE6 /* CSTabBar_fav_routes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_fav_routes.png; sourceTree = "<group>"; };
+		284415D41355CD790028CCE6 /* CSTabBar_itinerary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_itinerary.png; sourceTree = "<group>"; };
+		284415D51355CD790028CCE6 /* CSTabBar_photomap_tb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_photomap_tb.png; sourceTree = "<group>"; };
+		284415D61355CD790028CCE6 /* CSTabBar_plan_route.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_plan_route.png; sourceTree = "<group>"; };
+		284415D71355CD790028CCE6 /* CSTabBar_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_settings.png; sourceTree = "<group>"; };
+		284415E11355CDB10028CCE6 /* CSTabBar_account@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_account@x2.png"; sourceTree = "<group>"; };
+		284415E21355CDB10028CCE6 /* CSTabBar_add_photo@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_add_photo@x2.png"; sourceTree = "<group>"; };
+		284415E31355CDB10028CCE6 /* CSTabBar_credits@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_credits@x2.png"; sourceTree = "<group>"; };
+		284415E41355CDB20028CCE6 /* CSTabBar_fav_routes@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_fav_routes@x2.png"; sourceTree = "<group>"; };
+		284415E51355CDB20028CCE6 /* CSTabBar_itinerary@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_itinerary@x2.png"; sourceTree = "<group>"; };
+		284415E61355CDB20028CCE6 /* CSTabBar_photomap_tb@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_photomap_tb@x2.png"; sourceTree = "<group>"; };
+		284415E71355CDB20028CCE6 /* CSTabBar_plan_route@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_plan_route@x2.png"; sourceTree = "<group>"; };
+		284415E81355CDB20028CCE6 /* CSTabBar_settings@x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_settings@x2.png"; sourceTree = "<group>"; };
+		28441863135645930028CCE6 /* PhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoManager.h; sourceTree = "<group>"; };
+		28441864135645930028CCE6 /* PhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoManager.m; sourceTree = "<group>"; };
 		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
 		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
 		28443E611332867D00FAD008 /* RouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteVO.h; sourceTree = "<group>"; };
@@ -919,6 +954,36 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		284415CF1355CD790028CCE6 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				284415D01355CD790028CCE6 /* CSTabBar_account.png */,
+				284415D11355CD790028CCE6 /* CSTabBar_add_photo.png */,
+				284415D21355CD790028CCE6 /* CSTabBar_credits.png */,
+				284415D31355CD790028CCE6 /* CSTabBar_fav_routes.png */,
+				284415D41355CD790028CCE6 /* CSTabBar_itinerary.png */,
+				284415D51355CD790028CCE6 /* CSTabBar_photomap_tb.png */,
+				284415D61355CD790028CCE6 /* CSTabBar_plan_route.png */,
+				284415D71355CD790028CCE6 /* CSTabBar_settings.png */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		284415E01355CDB10028CCE6 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				284415E11355CDB10028CCE6 /* CSTabBar_account@x2.png */,
+				284415E21355CDB10028CCE6 /* CSTabBar_add_photo@x2.png */,
+				284415E31355CDB10028CCE6 /* CSTabBar_credits@x2.png */,
+				284415E41355CDB20028CCE6 /* CSTabBar_fav_routes@x2.png */,
+				284415E51355CDB20028CCE6 /* CSTabBar_itinerary@x2.png */,
+				284415E61355CDB20028CCE6 /* CSTabBar_photomap_tb@x2.png */,
+				284415E71355CDB20028CCE6 /* CSTabBar_plan_route@x2.png */,
+				284415E81355CDB20028CCE6 /* CSTabBar_settings@x2.png */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		2863A354134E508800A22093 /* OLDCODE */ = {
 			isa = PBXGroup;
 			children = (
@@ -1369,6 +1434,8 @@
 				28AD61F1131FB69D008527FC /* StyleManager.m */,
 				28AD61F2131FB69D008527FC /* UserSettingsManager.h */,
 				28AD61F3131FB69D008527FC /* UserSettingsManager.m */,
+				28441863135645930028CCE6 /* PhotoManager.h */,
+				28441864135645930028CCE6 /* PhotoManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -1812,6 +1879,7 @@
 		28AD6525131FC239008527FC /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				284415CF1355CD790028CCE6 /* TabBar */,
 				28D2BAA71354797F00694093 /* Directional Arrows */,
 				28D2BAAD1354797F00694093 /* Photomap */,
 				289A9B3013536CB800E8AF90 /* Arrows */,
@@ -1850,6 +1918,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				284415E01355CDB10028CCE6 /* TabBar */,
 				28D2BAB51354799000694093 /* Directional Arrows */,
 				28D2BABB1354799000694093 /* Photomap */,
 				289A9B4713536CCB00E8AF90 /* Arrows */,
@@ -2271,6 +2340,22 @@
 				28D2BAC01354799000694093 /* UIIcon_turn_left@x2.png in Resources */,
 				28D2BAC11354799000694093 /* UIIcon_turn_right@x2.png in Resources */,
 				28D2BAC21354799000694093 /* UIIcon_photomap@x2.png in Resources */,
+				284415D81355CD790028CCE6 /* CSTabBar_account.png in Resources */,
+				284415D91355CD790028CCE6 /* CSTabBar_add_photo.png in Resources */,
+				284415DA1355CD790028CCE6 /* CSTabBar_credits.png in Resources */,
+				284415DB1355CD790028CCE6 /* CSTabBar_fav_routes.png in Resources */,
+				284415DC1355CD790028CCE6 /* CSTabBar_itinerary.png in Resources */,
+				284415DD1355CD790028CCE6 /* CSTabBar_photomap_tb.png in Resources */,
+				284415DE1355CD790028CCE6 /* CSTabBar_plan_route.png in Resources */,
+				284415DF1355CD790028CCE6 /* CSTabBar_settings.png in Resources */,
+				284415E91355CDB20028CCE6 /* CSTabBar_account@x2.png in Resources */,
+				284415EA1355CDB20028CCE6 /* CSTabBar_add_photo@x2.png in Resources */,
+				284415EB1355CDB20028CCE6 /* CSTabBar_credits@x2.png in Resources */,
+				284415EC1355CDB20028CCE6 /* CSTabBar_fav_routes@x2.png in Resources */,
+				284415ED1355CDB20028CCE6 /* CSTabBar_itinerary@x2.png in Resources */,
+				284415EE1355CDB20028CCE6 /* CSTabBar_photomap_tb@x2.png in Resources */,
+				284415EF1355CDB20028CCE6 /* CSTabBar_plan_route@x2.png in Resources */,
+				284415F01355CDB20028CCE6 /* CSTabBar_settings@x2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2447,6 +2532,7 @@
 				28D2BAE11354814E00694093 /* UKImage.m in Sources */,
 				28D2BB091354854900694093 /* UIImage+Operations.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
+				28441865135645930028CCE6 /* PhotoManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

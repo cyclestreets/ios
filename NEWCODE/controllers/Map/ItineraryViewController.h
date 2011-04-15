@@ -26,6 +26,8 @@
 	
 	IBOutlet	UITableView			*tableView;
 	NSMutableArray					*rowHeightsArray;
+	
+	
 
 }
 @property (nonatomic, retain)		Route		* route;

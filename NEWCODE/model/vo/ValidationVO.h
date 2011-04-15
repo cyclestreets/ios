@@ -27,11 +27,12 @@ enum  {
 	// failures
 	ValidationLoginFailed=2000, // 2000
 	ValidationEmailInvalid=2006,
-	ValidationEmailExists=2007,
+	ValidationUserNameExists=2007,
 	ValidationEmailNotRecognised=2010,
 	ValidationRequestParameterInvalid=2013,
+	ValidationRegisterFailed=2014,
 	ValidationFailureMIN=ValidationLoginFailed,
-	ValidationFailureMAX=ValidationRequestParameterInvalid,
+	ValidationFailureMAX=ValidationRegisterFailed,
 	
 	// checking
 	ValdationInvalidCode=9997,

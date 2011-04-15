@@ -34,7 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define	kActivityTag 500
 #define	kMessageFieldTag 501
 #define kpasswordExtent 5
-#define	kUsernameExtent 7
+#define	kUsernameExtent 5
 
 @interface AccountViewController : SuperViewController <UITextFieldDelegate,UIScrollViewDelegate>{
 	

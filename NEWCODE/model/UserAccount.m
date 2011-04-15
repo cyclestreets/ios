@@ -35,6 +35,13 @@
 -(void)createUser;
 -(NSString*)filepath;
 
+//HUD
+-(void)showSuccessHUD:(NSString*)message andDetailText:(NSString*)detailText;
+-(void)showErrorHUDWithMessage:(NSString*)error andDetailText:(NSString*)detailText;
+-(void)showHUDWithMessage:(NSString*)message;
+-(void)showProgressHUDWithMessage:(NSString*)message;
+-(void)removeHUD;
+
 @end
 
 @implementation UserAccount
@@ -117,7 +124,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	NSString	*dataid=response.dataid;
 	
+	BetterLog(@"response.dataid=%@",response.dataid);
+	
 	if([self isRegisteredForRequest:dataid]){
+		
 		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
 			
 			if ([response.dataid isEqualToString:REGISTER]) {
@@ -151,7 +161,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)registerUserWithUserName:(NSString*)name andPassword:(NSString*)password visibleName:(NSString*)visiblename email:(NSString*)email{
 	
-	userName=[email retain];
+	userName=[name retain];
 	userPassword=[password retain];
 	userVisibleName=[visiblename retain];
 	userEmail=[email retain];
@@ -176,10 +186,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[dict release];
 	[request release];
 	
+	[self showProgressHUDWithMessage:@"Registering New User"];
 	
 }
 
 -(void)registerUserResponse:(ValidationVO*)validation{
+	
+	BetterLog(@"");
 	
 	switch(validation.validationStatus){
 			
@@ -188,17 +201,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[self createUser];
 			[self saveUser];
 			
-			
-			
 			isRegistered=YES;
 			accountMode=kUserAccountLoggedIn;
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			[dict release];
+			
+			[self showSuccessHUD:@"Account Created" andDetailText:nil];
+			
 		}	
 			break;	
-		case ValidationEmailExists:
+		case ValidationRegisterFailed:
 		{
 			user.email=@"";
 			userPassword=@"";
@@ -206,18 +220,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_register",MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			[dict release];
+			
+			[self showSuccessHUD:@"Creation Error" andDetailText:validation.returnMessage];
+			
 		}
 			break;
-		case ValidationEmailInvalid:
-		{
-			user.email=@"";
-			userPassword=@"";
+		
+		default:
 			
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_email",MESSAGE, nil];
-			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
-			[dict release];
-		}	
-			break;
+			[self removeHUD];
+		break;
 			
 	}
 	
@@ -236,8 +248,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)loginExistingUser{
 	if(accountMode==kUserAccountCredentialsExist){
-		[self loginUserWithUserName:user.email andPassword:userPassword];
-		[self showProgressHUDWithMessage:@"Logging in"];
+		[self loginUserWithUserName:user.username andPassword:userPassword];
 	}
 }
 
@@ -263,6 +274,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[dict release];
 	[request release];
 	
+	[self showProgressHUDWithMessage:@"Logging in"];
+	
 }
 
 -(void)loginUserResponse:(ValidationVO*)validation{
@@ -283,6 +296,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			[dict release];
+			
+			[self showSuccessHUD:@"Logged In" andDetailText:nil];
+			
 		}
 			break;
 			
@@ -295,17 +311,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			[dict release];
 			
+			[self showErrorHUDWithMessage:@"Login Failed" andDetailText:nil];
+			
 		}	
 			break;
 			
 		default:
 			
-			
-			break;
+			[self removeHUD];
+		break;
 			
 	}
 	
-	[self removeHUD];
+	
 	
 }
 
@@ -336,6 +354,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[dict release];
 	[request release];
 	
+	
+	
 }
 
 -(void)retrievePasswordForUserResponse:(ValidationVO*)validation{
@@ -348,6 +368,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:PASSWORDRETRIEVALRESPONSE object:nil userInfo:dict];
 			[dict release];
+			
+			
+			
 		}
 			break;
 		case ValidationEmailNotRecognised:
@@ -425,7 +448,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		
 		NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:[self filepath]];
 		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-		user = [[unarchiver decodeObjectForKey:kUSERSTATEARCHIVEKEY] retain];
+		self.user = [[unarchiver decodeObjectForKey:kUSERSTATEARCHIVEKEY] retain];
 		[unarchiver finishDecoding];
 		[unarchiver release];
 		[data release];
@@ -434,8 +457,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		if(user!=nil){
 			
 			NSError *error=nil;
-			userPassword =[[SFHFKeychainUtils getPasswordForUsername:user.email andServiceName:[[NSBundle mainBundle] bundleIdentifier]   error:&error] retain];
-			
+			self.userPassword =[SFHFKeychainUtils getPasswordForUsername:user.username andServiceName:[[NSBundle mainBundle] bundleIdentifier]   error:&error];			
 			if(error!=nil){
 				// if password is unknown but email is ok theyll need to re login
 				BetterLog(@"[INFO] Keychain error occured: %@",[error description]);
@@ -443,23 +465,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			}else {
 				
 				if(userPassword!=nil){
-					// if has autologin enabled will attempt to login now
-					if(user.autoLogin==YES){
-						//[self loginUserWithEmail:user.email andPassword:userPassword];
-					}else {
-						accountMode=kUserAccountCredentialsExist;
-					}
-					
+					accountMode=kUserAccountCredentialsExist;
 					
 				}else {
 					
 					BetterLog(@"[INFO]  Unable to retrieve userPassword from Keychain, Simulator=%i",[DeviceUtilities detectDevice]==MODEL_IPHONE_SIMULATOR);
 					
 					if([DeviceUtilities detectDevice]==MODEL_IPHONE_SIMULATOR){
-						userPassword=@"123456";
+						self.userPassword=@"j166lypuff";
 						if(user.autoLogin==YES){
-							//[self loginUserWithEmail:user.email andPassword:userPassword];
-						}else {
 							accountMode=kUserAccountCredentialsExist;
 						}
 						
@@ -484,8 +498,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(BOOL)saveUser{
 	
+	BetterLog(@"");
+	
 	NSError *error=nil;
-	[SFHFKeychainUtils storeUsername:user.email andPassword:userPassword forServiceName:[[NSBundle mainBundle] bundleIdentifier] updateExisting:YES error:&error];
+	[SFHFKeychainUtils storeUsername:user.username andPassword:userPassword forServiceName:[[NSBundle mainBundle] bundleIdentifier] updateExisting:YES error:&error];
 	
 	
 	NSMutableData *data = [[NSMutableData alloc] init];
@@ -497,13 +513,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[data release];
 	[archiver release];
 	
+	if([DeviceUtilities detectDevice]!=MODEL_IPHONE_SIMULATOR){
 	
-	if(error!=nil){
-		BetterLog(@"[KEYCHAIN] Unable to save user details to key chain %@",[error description]);
-		user=nil;
-		userPassword=nil;
-		userName=nil;
-		return NO;
+		if(error!=nil){
+			BetterLog(@"[KEYCHAIN] Unable to save user details to key chain %@",[error description]);
+			self.user=nil;
+			self.userPassword=nil;
+			self.userName=nil;
+			return NO;
+		}
+		
 	}
 	
 	return YES;
@@ -568,6 +587,45 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	HUD.labelText=message;
 	[HUD show:YES];
 	
+}
+
+-(void)showHUDWithMessage:(NSString*)message{
+	
+	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+    HUD.delegate = self;
+	HUD.labelText=message;
+	[HUD show:YES];
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
+}
+
+
+//
+/***********************************************
+ * @description			NOTE: These are only to be called if the hud has already been created!
+ ***********************************************/
+//
+
+-(void)showSuccessHUD:(NSString*)message andDetailText:(NSString*)detailText{
+	
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+	HUD.labelText = message;
+	if(detailText!=nil)
+		HUD.detailsLabelText=detailText;
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:1];
+}
+
+-(void)showErrorHUDWithMessage:(NSString*)error andDetailText:(NSString*)detailText{
+	
+	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
+	HUD.mode = MBProgressHUDModeCustomView;
+	HUD.labelText = @"Error";
+	if(detailText!=nil)
+		HUD.detailsLabelText=detailText;
+	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
 }
 
 

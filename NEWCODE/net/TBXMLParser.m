@@ -261,13 +261,26 @@
 	
 	
 	ValidationVO *validation=[[ValidationVO alloc]init];
-	validation.returnCode=[[TBXML textForElement:[TBXML childElementNamed:@"ReturnCode" parentElement:response]]intValue];
-	validation.returnMessage=[TBXML textForElement:[TBXML childElementNamed:@"ReturnMsg" parentElement:response]];
 	
-	if([validation isReturnCodeValid]==ValdationValidSuccessCode ){
-		NSString *token=[TBXML textForElement:[TBXML childElementNamed:@"Token" parentElement:response]];
-		validation.responseDict=[NSDictionary dictionaryWithObject:token forKey:activeResponse.dataid];
+	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
+	
+	if([TBXML hasChildrenForParentElement:resultelement]==YES){
+		
+		int code=[[TBXML textForElement:[TBXML childElementNamed:@"code" parentElement:resultelement]]intValue];
+		if(code==1){
+			validation.returnCode=ValidationRegisterSuccess;
+		}else {
+			validation.returnCode=ValidationRegisterFailed;
+		}
+
+		validation.returnMessage=[TBXML textForElement:[TBXML childElementNamed:@"message" parentElement:resultelement]];
+		
+	}else {
+		
+		validation.returnCode=ValidationRegisterFailed;
+		
 	}
+
 	
 	activeResponse.dataProvider=validation;
 	[validation release];

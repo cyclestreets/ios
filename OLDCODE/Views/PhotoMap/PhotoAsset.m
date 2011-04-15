@@ -80,8 +80,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (orientation == ALAssetOrientationLeft) {
 		imageOrientation = UIImageOrientationLeft;
 	}
-	UIImage *result = [original rotate:imageOrientation];
-	return result;
+	if(orientation!=UIImageOrientationUp){
+		UIImage *result = [original rotate:imageOrientation];
+		return result;
+	}else {
+		return original;
+	}
+
 }
 
 - (NSData *)fullData {

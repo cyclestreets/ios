@@ -8,6 +8,7 @@
 
 #import "CSSegmentFooterView.h"
 #import "AppConstants.h"
+#import "SegmentVO.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSDictionary *segmentDirectionsIcons;
@@ -24,10 +25,11 @@ static NSDictionary *segmentDirectionsIcons;
 @synthesize distLabel;
 @synthesize totalLabel;
 @synthesize iconView;
+@synthesize roadTypeiconView;
 
-//=========================================================== 
+/***********************************************************/
 // dealloc
-//=========================================================== 
+/***********************************************************/
 - (void)dealloc
 {
     [dataProvider release], dataProvider = nil;
@@ -40,11 +42,10 @@ static NSDictionary *segmentDirectionsIcons;
     [distLabel release], distLabel = nil;
     [totalLabel release], totalLabel = nil;
     [iconView release], iconView = nil;
+    [roadTypeiconView release], roadTypeiconView = nil;
 	
     [super dealloc];
 }
-
-
 
 
 
@@ -78,16 +79,19 @@ static NSDictionary *segmentDirectionsIcons;
 	self.layer.shadowRadius = 3.0f;
 	self.layer.masksToBounds = NO;
 	
-	
+	UIView *iconcontainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 32, 69)];
 	iconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
-	iconView.image=[UIImage imageNamed:@"UIIcon_straight_on.png"];
-	[self addSubview:iconView];
+	[iconcontainer addSubview:iconView];
+	roadTypeiconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 37, 32, 32)];
+	[iconcontainer addSubview:roadTypeiconView];
+	[self addSubview:iconcontainer];
+	[iconcontainer release];
 	
 	// vertical lb for main text
 	contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 150, 10)];
 	contentContainer.fixedWidth=YES;
 	contentContainer.layoutMode=BUVerticalLayoutMode;
-	contentContainer.itemPadding=0;
+	contentContainer.itemPadding=2;
 	
 	
 	roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 16)];
@@ -151,7 +155,7 @@ static NSDictionary *segmentDirectionsIcons;
 		
 		if(hasCapitalizedTurn==NO){
 			capitalizedTurnLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 16)];
-			capitalizedTurnLabel.textAlignment=UITextAlignmentCenter;
+			capitalizedTurnLabel.textAlignment=UITextAlignmentLeft;
 			capitalizedTurnLabel.multiline=YES;
 			capitalizedTurnLabel.textColor=UIColorFromRGB(0x31620E);
 			capitalizedTurnLabel.font=[UIFont boldSystemFontOfSize:13];
@@ -164,10 +168,8 @@ static NSDictionary *segmentDirectionsIcons;
 		 
 	}
 	
-	//iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[dataProvider objectForKey:@"capitalizedTurn"]]];
-	
-	// if we support road type here too
-	//roadTypeiconView.image=[SegmentVO provisionIcon:[dataProvider objectForKey:@"provisionName"]];
+	iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[[dataProvider objectForKey:@"capitalizedTurn"] lowercaseString]]];
+	roadTypeiconView.image=[UIImage imageNamed:[SegmentVO provisionIcon:[dataProvider objectForKey:@"provisionName"]]];
 
 
 	roadNameLabel.text=[dataProvider objectForKey:@"roadname"];
@@ -189,8 +191,11 @@ static NSDictionary *segmentDirectionsIcons;
 					
 
 + (NSString *)segmentDirectionIcon:(NSString *)segmentDirectionType {
+	
+	BetterLog(@"segmentDirectionIcon=%@",segmentDirectionType);
+	
 	if (segmentDirectionsIcons==nil) {
-		//TODO the association of symbols to types could be improved
+		
 		segmentDirectionsIcons = [[NSDictionary dictionaryWithObjectsAndKeys:
 					  @"UIIcon_straight_on.png", @"straight on", 
 					  @"UIIcon_bear_left.png", @"bear left", 

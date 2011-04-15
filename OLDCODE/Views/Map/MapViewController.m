@@ -312,7 +312,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			break;
 		case statePlan:
 			DLog(@"statePlan");
-			self.routeButton.title = @"Plan route!";
+			self.routeButton.title = @"Plan route";
 			self.routeButton.enabled = YES;
 			self.routeButton.style = UIBarButtonItemStyleDone;
 			self.deleteButton.enabled = YES;

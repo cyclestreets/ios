@@ -176,6 +176,8 @@
 	
 	[self createNonPersistentUI];
 	
+	[super deSelectRowForTableView:tableView];
+	
 }
 
 -(void)createNonPersistentUI{

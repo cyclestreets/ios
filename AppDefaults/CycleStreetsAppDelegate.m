@@ -158,7 +158,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	stage = [[Stage alloc] initWithNibName:@"Stage" bundle:nil];
 	
 	//have a busy alert ready to use
-	busyAlert = [[BusyAlert alloc] initWithTitle:@"Obtaining route" message:nil];
+	//busyAlert = [[BusyAlert alloc] initWithTitle:@"Obtaining route" message:nil];
 	
 	// error alert too
 	errorAlert = [[UIAlertView alloc]

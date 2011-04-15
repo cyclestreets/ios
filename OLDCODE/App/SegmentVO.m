@@ -117,6 +117,7 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_roads.png", @"Busy Road", 
 					  @"UIIcon_roads.png", @"Road", 
 					  @"UIIcon_roads.png", @"Busy and fast road", 
+					  @"UIIcon_roads.png", @"secondary",
 					  @"UIIcon_footpaths.png", @"Footpath", 
 					  @"UIIcon_footpaths.png", @"footway", 
 					  @"UIIcon_footpaths.png", @"pedestrian",
@@ -128,7 +129,8 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_tracks.png", @"Track", 
 					  @"UIIcon_tracks.png", @"bridleway", 
 					  @"UIIcon_quiet_street.png", @"Quiet Street",
-					  @"UIIcon_quiet_street.png", @"unclassified,service", // need icon for this
+					  @"UIIcon_quiet_street.png", @"unclassified, service", // need icon for this
+					  @"UIIcon_quiet_street.png", @"unclassified,service",
 					 nil] retain];
 	}
 	return [roadIcons valueForKey:provisionName];

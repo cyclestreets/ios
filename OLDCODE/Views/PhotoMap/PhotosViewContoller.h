@@ -69,8 +69,7 @@ UITextViewDelegate, UIActionSheetDelegate> {
 	UIAlertView *emailAlert;
 	UIAlertView *errorAlert;
 	
-	UserValidate *userValidate;
-	UserCreate *userCreate;
+	
 	AddPhoto *addPhoto;
 	PhotoInfo *photoInfo;
 	UIActionSheet *photoAction;
@@ -82,9 +81,6 @@ UITextViewDelegate, UIActionSheetDelegate> {
 	BOOL sendInProgress;
 	BOOL pickedCategory;
 	
-	NSString *username;
-	NSString *password;
-	NSString *validated;
 	
 	NSString *bigImageURL;//uploaded.
 	

@@ -82,55 +82,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize picker;
 @synthesize jpegData;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
-#pragma mark password load/save
 
-- (void) saveUserPass {
-	DLog(@">>>");
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
-	[misc setValue:username forKey:@"username"];
-	[misc setValue:validated forKey:@"validated"];
-	[cycleStreets.files setMisc:misc];
-	[cycleStreets.files setPassword:password];
-}
-
-- (void) loadUserPass {
-	DLog(@">>>");
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSDictionary *misc = [cycleStreets.files misc];
-	NSString *loadedPassword = [cycleStreets.files password];
-	NSString *loadedUsername = [misc valueForKey:@"username"];
-	NSString *loadedValidated = [misc valueForKey:@"validated"];
-	if (loadedPassword != nil && ![loadedPassword isEqualToString:@""] && loadedUsername != nil && ![loadedUsername isEqualToString:@""]) {
-		username = [loadedUsername copy];
-		password = [loadedPassword copy];
-		validated = [loadedValidated copy];
-	} else {
-		validated = nil;
-		username = nil;
-		password = nil;
-	}
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	// set up location manager
+	self.accuracy.title = @"";
+	locationManager = [[CLLocationManager alloc] init];
+	locationManager.delegate = self;
+	[locationManager startUpdatingLocation];
+	
+	
+	// set up an alert to use
+	self.sendingAlert = [[BusyAlert alloc] initWithTitle:@"CycleStreets" message:@"Sending photomap.."];
+	
+	//
+	self.captionText.hidden = YES;
+	self.captionText.delegate = self;
+	self.captionBar.hidden = YES;
+	self.photoAsset = nil;
+	sendInProgress = NO;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(didNotificationLibraryAsset:)
+												 name:@"NotificationLibraryAsset"
+											   object:nil];
+	
+	[self enableButtons:YES];
 }
 
-- (void)didNotificationClearAccount:(NSNotification *)clearAccountNotification {
-	[username release];
-	[password release];
-	[validated release];
-	username = nil;
-	password = nil;
-	validated = nil;
-	[self.loginView clearFields];
-}
+
 
 #pragma mark alerts
 
@@ -161,38 +143,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	// set up location manager
-	self.accuracy.title = @"";
-	locationManager = [[CLLocationManager alloc] init];
-	locationManager.delegate = self;
-	[locationManager startUpdatingLocation];
-	
-	// get any stored credentials
-	[self loadUserPass];
-	
-	// set up an alert to use
-	self.sendingAlert = [[BusyAlert alloc] initWithTitle:@"CycleStreets" message:@"Sending photomap.."];
-	
-	//
-	self.captionText.hidden = YES;
-	self.captionText.delegate = self;
-	self.captionBar.hidden = YES;
-	self.photoAsset = nil;
-	sendInProgress = NO;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(didNotificationLibraryAsset:)
-												 name:@"NotificationLibraryAsset"
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(didNotificationClearAccount:)
-												 name:@"NotificationClearAccount"
-											   object:nil];
-	[self enableButtons:YES];
-}
+
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
 	return YES;
@@ -294,7 +245,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)sendPhoto {
 	self.addPhoto = nil;
-	self.addPhoto = [[AddPhoto alloc] initWithUsername:username withPassword:password];
+	self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:[UserAccount sharedInstance].user.password];
 	
 	self.addPhoto.caption = self.currentCaption;
 	
@@ -401,7 +352,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // Goes and gets a location with which to tag the image.
 - (IBAction) didSend {
-	if (username == nil || password == nil) {
+	if ([UserAccount sharedInstance].isLoggedIn==NO) {
 		if (self.loginView == nil) {
 			self.loginView = [[[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil] autorelease];
 		}
@@ -541,85 +492,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	}
 }
 
-#pragma mark user validation delegate
 
-- (void) didSucceedUserValidate:(XMLRequest *)request results:(NSDictionary *)elements {
-	DLog(@">>>");
-	[sendingAlert hide];
-	[self dismissModalViewControllerAnimated:YES];
-	NSArray *signins = [elements valueForKey:@"signin"];
-	validated = nil;
-	if (signins != nil) {
-		NSDictionary *result = [signins objectAtIndex:0];
-		validated = [[result valueForKey:@"username"] copy];
-	}
-	if (username != nil && password != nil && ![username isEqualToString:@""] && validated != nil &&![validated isEqualToString:@""]) {
-		//OK, it got validated.
-		[self saveUserPass];
-		
-		//And now we are ready to send the selected photo...
-		[self sendPhoto];
-	} else {
-		[username release];
-		[password release];
-		[validated release];
-		username = nil;
-		password = nil;
-		validated = nil;
-		
-		self.alert = [[UIAlertView alloc] initWithTitle:@"Cyclestreets"
-												message:@"Username/password could not be validated"
-											   delegate:self
-									  cancelButtonTitle:@"OK"
-									  otherButtonTitles:nil];
-		[alert show];
-	}
-}
-
-- (void) didSucceedUserCreate:(XMLRequest *)xmlRequest results:(NSDictionary *)elements {
-	DLog(@">>>");
-	[sendingAlert hide];
-	[self dismissModalViewControllerAnimated:YES];
-	
-	NSInteger code = 0;
-	NSArray *codes = [elements valueForKey:@"code"];
-	if (codes != nil && [codes isKindOfClass:[NSArray class]] && [codes count] > 0) {
-		code = [[[codes objectAtIndex:0] valueForKey:@"code"] integerValue];
-	}
-	
-	NSString *message = @"Unknown error when trying to create user account.";
-	NSArray *messages = [elements valueForKey:@"message"];
-	if (messages != nil && [messages isKindOfClass:[NSArray class]] && [messages count] > 0) {
-		message = [[messages objectAtIndex:0] valueForKey:@"message"];
-	}	
-	BOOL ok = (code == 1);
-	if (ok) {
-		//Passed all the registration checks, it is "being" validated.
-		[self saveUserPass];
-		
-		//And now we are ready to send the selected photo...
-		self.emailAlert = [[UIAlertView alloc] initWithTitle:@"Cyclestreets"
-													 message:message
-													delegate:self
-										   cancelButtonTitle:@"OK"
-										   otherButtonTitles:nil];
-		[self.emailAlert show];
-	} else {
-		[username release];
-		[password release];
-		[validated release];
-		username = nil;
-		password = nil;
-		validated = nil;
-		
-		self.alert = [[UIAlertView alloc] initWithTitle:@"Cyclestreets"
-												message:message
-											   delegate:self
-									  cancelButtonTitle:@"OK"
-									  otherButtonTitles:nil];
-		[self.alert show];
-	}
-}
 
 //first component after location e.g. http://www.cyclestreets.net/location/24361/
 - (NSString *)cycleStreetsPhotoId:(NSString *)url {
@@ -735,43 +608,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	}
 }
 
-#pragma mark loginDelegate
-
-// Login has been requested. Save the password, because we need it.
-// The username will come back in the response message, if everything is valid.
-- (void)didLogin:(NSString *)loginUsername withPassword:(NSString *)loginPassword {
-	DLog(@">>>");
-	[password release];
-	password = [loginPassword copy];
-	[username release];
-	username = [loginUsername copy];
-	[validated release];
-	validated = nil;
-	
-	[self.sendingAlert show:@"Logging in.."];
-	self.userValidate = [[[UserValidate alloc] initWithUsername:loginUsername withPassword:loginPassword] autorelease];
-	[self.userValidate runWithTarget:self
-						   onSuccess:@selector(didSucceedUserValidate:results:)
-						   onFailure:@selector(didFailUserOp:withMessage:)];
-}
-
-- (void)didRegister:(NSString *)loginUsername
-	   withPassword:(NSString *)loginPassword
-		  withEmail:(NSString *)email 
-		   withName:(NSString *)visibleName{
-	DLog(@">>>");
-	password = [loginPassword copy];
-	username = [loginUsername copy];
-	
-	[self.sendingAlert show:@"Registering user.."];
-	self.userCreate = [[[UserCreate alloc] initWithUsername:loginUsername
-											   withPassword:loginPassword
-												  withEmail:email
-												   withName:visibleName] autorelease];
-	[self.userCreate runWithTarget:self
-						 onSuccess:@selector(didSucceedUserCreate:results:)
-						 onFailure:@selector(didFailUserOp:withMessage:)];
-}
 
 - (void)didCancel {
 	DLog(@">>>");
@@ -821,7 +657,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	self.captionBar = nil;
 	self.currentCaption = nil;
 	
-	self.loginView = nil;
 	
 	[locationManager release];
 	self.location = nil;
@@ -844,18 +679,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	self.navigateLibrary = nil;
 	self.picker = nil;
 	self.photoId = nil;
-	
-	[username release];
-	[password release];
-	[validated release];	
+		
 }
 
 - (void)viewDidUnload {
 	[self nullify];
     [super viewDidUnload];
 	DLog(@">>>");
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 

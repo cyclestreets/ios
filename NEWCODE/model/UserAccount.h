@@ -53,6 +53,8 @@ typedef int UserAccountMode;
 @property (nonatomic, assign)	UserAccountMode	accountMode;
 @property (nonatomic, retain)	MBProgressHUD	*HUD;
 
+@property (nonatomic,readonly)  BOOL			isLoggedIn;
+
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 
 -(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password;

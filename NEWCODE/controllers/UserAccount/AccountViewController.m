@@ -291,7 +291,13 @@ static NSString *const STRINGID=@"account";
 			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
 		break;
 		
-		
+		case kUserAccountCredentialsExist:
+			
+			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
+			
+			[[UserAccount sharedInstance] loginExistingUser];
+			
+		break;
 	}
 	
 
@@ -596,11 +602,11 @@ static NSString *const STRINGID=@"account";
 		
 	}else {
 		if(eresult==NO){
-			[self showMessageUIForView:loginView withMessage:[[StringManager sharedInstance] stringForSection:STRINGID andType:@"error_syntax_username"]];
+			[self showMessageUIForView:loginView withMessage:@"error_syntax_username"];
 			return;
 		}
 		if(presult==NO){
-			[self showMessageUIForView:loginView withMessage:[[StringManager sharedInstance] stringForSection:STRINGID andType:@"error_syntax_password"]];
+			[self showMessageUIForView:loginView withMessage:@"error_syntax_password"];
 			return;
 		}
 	}
@@ -613,10 +619,22 @@ static NSString *const STRINGID=@"account";
 	
 	BetterLog(@"");
 	
-	BOOL presult=NO;
-	BOOL eresult=NO;
+	NSString  *efieldString=registerUsernameField.text;
+	BOOL eresult=[efieldString length]>kUsernameExtent;
 	
-	if(presult==YES && eresult==YES){
+	NSString  *pfieldString=registerPsswordField.text;
+	BOOL presult=[pfieldString length]>kpasswordExtent;
+	
+	NSString  *visfieldString=registerVisibleNameField.text;
+	BOOL visresult=[visfieldString length]>kUsernameExtent;
+	
+	NSString  *emfieldString=registerEmailField.text;
+	BOOL emresult=[GlobalUtilities validateEmail:emfieldString]; 
+	
+	
+	if(presult==YES && eresult==YES && emresult==YES && visresult==YES){
+		
+		
 		
 		[self showRequestUIForView:registerView];
 		
@@ -627,7 +645,16 @@ static NSString *const STRINGID=@"account";
 		
 	}else {
 		
-		// show appropriate error message ui
+		if (eresult==NO) {
+			[self showMessageUIForView:registerView withMessage:@"error_syntax_username"];
+		}else if(presult==NO) {
+			[self showMessageUIForView:registerView withMessage:@"error_syntax_password"];
+		}else if(visresult==NO) {
+			[self showMessageUIForView:registerView withMessage:@"error_syntax_visiblename"];
+		}else if(emresult==NO) {
+			[self showMessageUIForView:registerView withMessage:@"error_syntax_email"];
+		}
+
 		
 	}
 	

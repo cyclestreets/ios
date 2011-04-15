@@ -30,6 +30,25 @@
     [super dealloc];
 }
 
+
+
+/***********************************************************/
+// - (id)init
+//
+/***********************************************************/
+- (id)init
+{
+    if ((self = [super init])) {
+        autoLogin = YES;
+    }
+    return self;
+}
+
+
+
+
+
+
 static NSString *kcustom_USERNAME = @"username";
 static NSString *kcustom_PASSWORD = @"password";
 static NSString *kcustom_EMAIL = @"email";

@@ -14,7 +14,7 @@
 			<key>nib</key>
 			<string>MapView</string>
 			<key>tabimage</key>
-			<string>UITabbar_map.png</string>
+			<string>CSTabBar_plan_route.png</string>
 			<key>isVC</key>
 			<true/>
 		</dict>
@@ -28,7 +28,7 @@
 			<key>nib</key>
 			<string>ItineraryView</string>
 			<key>tabimage</key>
-			<string>icon_list_bullets.png</string>
+			<string>CSTabBar_itinerary.png</string>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -40,7 +40,7 @@
 			<key>nib</key>
 			<string>PhotoMapView</string>
 			<key>tabimage</key>
-			<string>Tabbar_photomap.png</string>
+			<string>CSTabBar_photomap_tb.png</string>
 			<key>isVC</key>
 			<true/>
 		</dict>
@@ -54,7 +54,7 @@
 			<key>nib</key>
 			<string>PhotosView</string>
 			<key>tabimage</key>
-			<string>UITabbar_addphoto.png</string>
+			<string>CSTabBar_add_photo.png</string>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -66,7 +66,7 @@
 			<key>nib</key>
 			<string>FavouritesView</string>
 			<key>tabimage</key>
-			<string>icon_favorities.png</string>
+			<string>CSTabBar_fav_routes.png</string>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -78,7 +78,7 @@
 			<key>nib</key>
 			<string>SettingsView</string>
 			<key>tabimage</key>
-			<string>UITabbar_settings.png</string>
+			<string>CSTabBar_settings.png</string>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -90,7 +90,7 @@
 			<key>nib</key>
 			<string>AccountView</string>
 			<key>tabimage</key>
-			<string>UITabbar_account.png</string>
+			<string>CSTabBar_account.png</string>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -102,7 +102,7 @@
 			<key>nib</key>
 			<string>CreditsView</string>
 			<key>tabimage</key>
-			<string>icon_information.png</string>
+			<string>CSTabBar_credits.png</string>
 		</dict>
 	</array>
 	<key>context</key>
