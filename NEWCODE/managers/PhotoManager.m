@@ -9,7 +9,7 @@
 #import "PhotoManager.h"
 #import "UserAccount.h"
 #import "PhotoAsset.h"
-
+#import "ValidationVO.h"
 
 @interface PhotoManager(Private)
 
@@ -33,7 +33,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 -(void)listNotificationInterests{
 	
-	[self initialise];
 	
 	[super listNotificationInterests];
 	

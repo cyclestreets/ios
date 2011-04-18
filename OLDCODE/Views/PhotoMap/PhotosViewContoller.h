@@ -154,4 +154,6 @@ UITextViewDelegate, UIActionSheetDelegate> {
 - (IBAction) didCaptionDone;
 - (IBAction) didCaptionCancel;
 
+-(void)enableButtons:(BOOL)enable;
+
 @end

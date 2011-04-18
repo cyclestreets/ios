@@ -460,6 +460,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (void) cancelAvoidAccidentalTaps {
+	BetterLog(@"");
 	avoidAccidentalTaps = NO;
 }
 
@@ -602,7 +603,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		if (firstTimeFinish) {
 			//[self firstAlert:@"Finish point (F) set."];
 			//[self performSelector:@selector(firstAlert:) withObject:@"Finish point (F) set." afterDelay:0.5];
-			[self showHUDWithMessage:@"Finish point set." andIcon:@"CSIcon_end_wisp.png" withDelay:1];
+			[self showHUDWithMessage:@"Finish point set." andIcon:@"CSIcon_finish_wisp.png" withDelay:1];
 			firstTimeFinish = NO;
 		}
 		if (self.planningState == stateEnd) {
