@@ -84,7 +84,9 @@ typedef enum PlanningStateT PlanningState;
 	
 	BOOL firstTimeStart;
 	BOOL firstTimeFinish;
-	BOOL avoidAccidentalTaps;
+	BOOL	avoidAccidentalTaps;
+	BOOL	singleTapDidOccur;
+	CGPoint	singleTapPoint;
 	
 	UIAlertView *firstAlert;
 	UIAlertView *clearAlert;
@@ -120,12 +122,15 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, assign)	BOOL	firstTimeStart;
 @property (nonatomic, assign)	BOOL	firstTimeFinish;
 @property (nonatomic, assign)	BOOL	avoidAccidentalTaps;
+@property (nonatomic, assign)	BOOL	singleTapDidOccur;
+@property (nonatomic, assign)	CGPoint	singleTapPoint;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*firstAlert;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*clearAlert;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*startFinishAlert;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*noLocationAlert;
 @property (nonatomic, assign)	PlanningState	planningState;
 @property (nonatomic, retain)	MBProgressHUD	*HUD;
+
 
 
 

@@ -68,6 +68,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -(void)showHUDWithMessage:(NSString*)message;
 -(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon withDelay:(NSTimeInterval)delay;
 
+- (void) addLocation:(CLLocationCoordinate2D)location;
+
 @end
 
 
@@ -93,7 +95,7 @@ static NSTimeInterval LOC_OFF_DELAY_BAD = 30.0;
 static NSTimeInterval LOC_OFF_DELAY_OK = 3.0;
 static NSTimeInterval LOC_OFF_DELAY_BEST = 1.0;
 
-static NSTimeInterval ACCIDENTAL_TAP_DELAY = 1.0;
+static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 //don't allow co-location of start/finish
 static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
@@ -123,6 +125,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize firstTimeStart;
 @synthesize firstTimeFinish;
 @synthesize avoidAccidentalTaps;
+@synthesize singleTapDidOccur;
+@synthesize singleTapPoint;
 @synthesize firstAlert;
 @synthesize clearAlert;
 @synthesize startFinishAlert;
@@ -412,8 +416,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	doingLocation = NO;
 	
 	self.programmaticChange = NO;
-	NSLog(@"programmatic <-- NO");
-	avoidAccidentalTaps = NO;
+	singleTapDidOccur=NO;
 	
 	self.attributionLabel.text = [MapViewController mapAttribution];
 	
@@ -441,42 +444,45 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	DLog(@"<<<");
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-/*
-- (void) beforeMapMove: (RMMapView*) map {
-}
-*/
 
 - (void) didNotificationMapStyleChanged {
 	mapView.contents.tileSource = [MapViewController tileSource];
 	self.attributionLabel.text = [MapViewController mapAttribution];
 }
 
-- (void) cancelAvoidAccidentalTaps {
-	BetterLog(@"");
-	avoidAccidentalTaps = NO;
+- (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
+	
+	if(singleTapDidOccur==NO){
+		singleTapDidOccur=YES;
+		singleTapPoint=point;
+		[self performSelector:@selector(singleTapDelayExpired) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
+		
+	}
 }
+-(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	singleTapDidOccur=NO;
+}
+
+- (void) singleTapDelayExpired {
+	if(singleTapDidOccur==YES){
+		singleTapDidOccur=NO;
+		CLLocationCoordinate2D location = [mapView pixelToLatLong:singleTapPoint];
+		[self addLocation:location];
+	}
+}
+
 
 - (void) afterMapChanged: (RMMapView*) map {
 	[lineView setNeedsDisplay];
 	[blueCircleView setNeedsDisplay];
 	
 	if (!self.programmaticChange) {
-		DLog(@"afterMapChanged, autolocating=NO, [self stopDoingLocation]");
+		//DLog(@"afterMapChanged, autolocating=NO, [self stopDoingLocation]");
 		if (self.planningState == stateLocatingStart || self.planningState == stateLocatingEnd) {
 			[self stopDoingLocation];
 		}
-		avoidAccidentalTaps = YES;
-		[self performSelector:@selector(cancelAvoidAccidentalTaps) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
 	} else {
-		DLog(@"afterMapChanged, autolocating=YES");
+		//DLog(@"afterMapChanged, autolocating=YES");
 	}
 }
 
@@ -629,15 +635,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self saveLocation:location];
 }
 
-- (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
-	DLog(@"singletap");
-	if (!avoidAccidentalTaps) {
-		CLLocationCoordinate2D location = [map pixelToLatLong:point];
-		[self addLocation:location];
-	} else {
-		DLog(@"avoided accidental tap.");
-	}
-}
+
 
 
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
@@ -655,6 +653,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	return NO;
 }
  
+//TODO: bug here with marker dragging, doesnt recieve any touch updates
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	DLog(@"dragafter");
 	NSSet *touches = [event touchesForView:map];
@@ -665,11 +664,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
-/*
-- (void) afterMapTouch: (RMMapView*) map {
-	DLog(@"after");
-}
- */
 
 #pragma mark toolbar actions
 
@@ -833,6 +827,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self gotoState:stateStart];
 }
 
+// TODO: map frame for plotted route needs to be inset from view
 - (void) newRoute {
 	[mapView zoomWithLatLngBoundsNorthEast:(CLLocationCoordinate2D)[route northEast]
 								 SouthWest:(CLLocationCoordinate2D)[route southWest]];
