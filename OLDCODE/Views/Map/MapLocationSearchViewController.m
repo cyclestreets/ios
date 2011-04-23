@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Files.h"
 #import "XMLRequest.h"
 #import "NamedPlace.h"
+#import "GlobalUtilities.h"
 
 static NSString *format = @"%@?key=%@&street=%@&%@&clientid=%@";
 static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
@@ -64,8 +65,11 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	self.view.backgroundColor=[UIColor whiteColor];
 	self.searchDisplayController.active = YES;
-	self.searchDisplayController.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Local", @"National",@"Recent",@"Contacts", nil];
+	self.searchDisplayController.searchBar.tintColor=UIColorFromRGB(0x008000);
+	self.searchDisplayController.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Local", @"National", nil];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSString *lastSearch = [cycleStreets.files miscValueForKey:@"lastSearch"];

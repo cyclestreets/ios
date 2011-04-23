@@ -14,6 +14,8 @@
 #import "NetRequest.h"
 #import "NetResponse.h"
 #import <CoreLocation/CoreLocation.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBook/ABAddressBook.h>
 
 static NSString *format = @"%@?key=%@&street=%@&%@&clientid=%@";
 static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
@@ -211,15 +213,18 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
 -(void)processUserContacts{
 	
+	//ABAddressBookRef *AB=ABAddressBookCreate()
+	
+	//ABAddressBook *AB = [ABAddressBook sharedAddressBook];
 	/*
-	ABAddressBook *AB = [ABAddressBook sharedAddressBook];
 	ABSearchElement *nameIsSmith =[ABPerson searchElementForProperty:kABLastNameProperty
                                  label:nil
                                    key:nil
                                  value:@"Smith"
                             comparison:kABEqualCaseInsensitive];
 	NSArray *peopleFound =[AB recordsMatchingSearchElement:nameIsSmith];
-	*/
+	 */
+	
 }
 
 
