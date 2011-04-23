@@ -28,13 +28,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "MapLocationSearchViewController.h"
 #import "RMMapViewDelegate.h"
 #import "BlueCircleView.h"
+#import "MBProgressHUD.h"
 @class CycleStreets;
 @class Location;
 @class PhotoMapImageLocationViewController;
 @class InitialLocation;
 
 @interface PhotoMapViewController : UIViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider> {
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider,MBProgressHUDDelegate> {
 	
 	
 	RMMapView *mapView;				//map of current area
@@ -44,7 +45,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	PhotoMapImageLocationViewController *locationView;			//the popup with the contents of a particular location (photomap etc.)
 	CLLocation *lastLocation;		//the last one
 	
-	UIActivityIndicatorView *loading;
+	MBProgressHUD			*progressHud;
+	
 	
 	InitialLocation *initialLocation;
 	UIBarButtonItem *locationButton;
@@ -66,11 +68,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *showPhotosButton;
 @property (nonatomic, retain) IBOutlet RMMapView *mapView;
 @property (nonatomic, retain) IBOutlet BlueCircleView *blueCircleView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loading;
 @property (nonatomic, retain) IBOutlet UILabel *attributionLabel;
 
 @property (nonatomic, retain) IBOutlet UIView *introView;
 @property (nonatomic, retain) IBOutlet UIButton *introButton;
+@property (nonatomic, retain)	MBProgressHUD	*progressHud;
+
 
 - (IBAction) didZoomIn;
 - (IBAction) didZoomOut;
@@ -86,6 +89,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)startDoingLocation;
 - (void)stopShowingPhotos;
 - (void)startShowingPhotos;
+
+-(void)showProgressHud:(BOOL)show;
+-(void)removeHUD;
 
 - (void) requestPhotos;
 - (void) clearPhotos;

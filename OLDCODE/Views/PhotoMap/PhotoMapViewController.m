@@ -64,11 +64,13 @@ static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize showPhotosButton;
 @synthesize mapView;
 @synthesize blueCircleView;
-@synthesize loading;
 @synthesize attributionLabel;
 
 @synthesize introView;
 @synthesize introButton;
+@synthesize progressHud;
+
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -104,7 +106,13 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(didNotificationMapStyleChanged)
 												 name:@"NotificationMapStyleChanged"
-											   object:nil];		
+											   object:nil];	
+	
+	self.progressHud=[[MBProgressHUD alloc] initWithView:mapView];
+	[mapView addSubview:progressHud];
+	progressHud.alpha=0.6;
+	progressHud.hidden=YES;
+	progressHud.delegate = self;
 	
 	showingPhotos = YES;
 	[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0.0];
@@ -140,7 +148,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	if (photomapQuerying || !showingPhotos) return;
 	
 	photomapQuerying = YES;
-	[loading startAnimating];
+	[self showProgressHud:YES];
 	CGRect bounds = mapView.contents.screenBounds;
 	CLLocationCoordinate2D nw = [mapView pixelToLatLong:bounds.origin];
 	CLLocationCoordinate2D se = [mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
@@ -346,7 +354,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[self clearPhotos];
 	if (!showingPhotos) {
 		photomapQuerying = NO;
-		[loading stopAnimating];
+		[self showProgressHud:NO];
 		return;
 	}
 	if (photoMarkers == nil) {
@@ -363,13 +371,13 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	}
 	[photoList release];
 	photomapQuerying = NO;
-	[loading stopAnimating];
+	[self showProgressHud:NO];
 }
 
 - (void) didFailPhoto:(XMLRequest *)request message:(NSString *)message {
 	[self clearPhotos];
 	photomapQuerying = NO;
-	[loading stopAnimating];
+	[self showProgressHud:NO];
 }
 
 //helper, could be shelled out as more general.
@@ -385,6 +393,36 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	DLog(@"didMoveToLocation");
 	[mapView moveToLatLong: location];
 }
+
+
+
+//
+/***********************************************
+ * @description			HUD support
+ ***********************************************/
+//
+
+-(void)showProgressHud:(BOOL)show{
+	if(show==YES){
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(removeHUD) object:nil];
+		if(progressHud.hidden==YES)
+			progressHud.hidden=NO;		
+	}else {
+		[self performSelector:@selector(removeHUD) withObject:nil afterDelay:0.3];
+		
+	}
+
+}
+
+-(void)removeHUD{
+	progressHud.hidden=YES;
+}
+
+
+-(void)hudWasHidden{
+	
+}
+
 
 #pragma mark generic class cleanup
 
@@ -414,17 +452,14 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	lastLocation = nil;
 	[initialLocation release];
 	initialLocation = nil;
-	[loading release];
-	loading = nil;
+	[progressHud release], progressHud = nil;
 	
 	[mapLocationSearchView release];
 	mapLocationSearchView = nil;	
 }
 
 - (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-	[self nullify];
+    [self nullify];
 	[super viewDidUnload];
 	DLog(@">>>");
 }

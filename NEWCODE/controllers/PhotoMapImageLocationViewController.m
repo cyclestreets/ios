@@ -89,6 +89,7 @@
 	
 	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
 	viewContainer.layoutMode=BUVerticalLayoutMode;
+	viewContainer.alignMode=BUCenterAlignMode;
 	viewContainer.fixedWidth=YES;
 	viewContainer.itemPadding=20;
 		

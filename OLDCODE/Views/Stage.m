@@ -289,7 +289,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if ([marker.data isKindOfClass: [PhotoEntry class]]) {
 		[self presentModalViewController:locationView animated:YES];
 		PhotoEntry *photoEntry = (PhotoEntry *)marker.data;
-		[locationView loadc];
+		[locationView loadContentForEntry:photoEntry];
 	}	
 }
  

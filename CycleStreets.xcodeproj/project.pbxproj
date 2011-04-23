@@ -854,8 +854,8 @@
 		28D10EBE135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_photomap_tb@2x.png"; sourceTree = "<group>"; };
 		28D10EBF135D6E54006F1D94 /* CSTabBar_plan_route@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_plan_route@2x.png"; sourceTree = "<group>"; };
 		28D10EC0135D6E54006F1D94 /* CSTabBar_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_settings@2x.png"; sourceTree = "<group>"; };
-		28D246011338926E00188783 /* RouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteManager.h; sourceTree = "<group>"; };
-		28D246021338926E00188783 /* RouteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteManager.m; sourceTree = "<group>"; };
+		28D246011338926E00188783 /* RouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RouteManager.h; path = ../model/RouteManager.h; sourceTree = "<group>"; };
+		28D246021338926E00188783 /* RouteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RouteManager.m; path = ../model/RouteManager.m; sourceTree = "<group>"; };
 		28D2BAA81354797F00694093 /* UIIcon_bear_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_bear_left.png; sourceTree = "<group>"; };
 		28D2BAA91354797F00694093 /* UIIcon_bear_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_bear_right.png; sourceTree = "<group>"; };
 		28D2BAAA1354797F00694093 /* UIIcon_straight_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_straight_on.png; sourceTree = "<group>"; };
@@ -1408,6 +1408,8 @@
 		28AD61E5131FB69D008527FC /* managers */ = {
 			isa = PBXGroup;
 			children = (
+				28D246011338926E00188783 /* RouteManager.h */,
+				28D246021338926E00188783 /* RouteManager.m */,
 				28AD61E6131FB69D008527FC /* FavouritesManager.h */,
 				28AD61E7131FB69D008527FC /* FavouritesManager.m */,
 				28AD61E8131FB69D008527FC /* FormManager.h */,
@@ -1433,8 +1435,6 @@
 			children = (
 				28AD61F5131FB69D008527FC /* CycleStreets.h */,
 				28AD61F6131FB69D008527FC /* CycleStreets.m */,
-				28D246011338926E00188783 /* RouteManager.h */,
-				28D246021338926E00188783 /* RouteManager.m */,
 				28AD61F7131FB69D008527FC /* Files.h */,
 				28AD61F8131FB69D008527FC /* Files.m */,
 				28AD61F9131FB69D008527FC /* Model.h */,
