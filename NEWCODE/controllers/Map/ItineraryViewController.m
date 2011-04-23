@@ -216,10 +216,11 @@
 
 -(void)createNavigationBarUI{
 	
+	/*
 	UIBarButtonItem *rightBarButton=[[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveItineraryButtonSelected:)];
 	[self.navigationItem setRightBarButtonItem:rightBarButton animated:NO];
 	[rightBarButton release];
-	
+	*/
 }
 
 

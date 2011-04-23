@@ -46,15 +46,6 @@ static int FOUR60 = 460;
 static int TEXT_MIN = 80;
 static int SPINNER_HEIGHT = 60;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
 - (CGRect)imageFrame {
 	CGRect rect;
@@ -138,8 +129,7 @@ static int SPINNER_HEIGHT = 60;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	UIImage *image = [UIImage imageNamed:@"bg320x460.png"];
-	self.bgImageView = [[[UIImageView alloc] initWithImage:image] autorelease];
+	
 	self.imageView = [[[UIImageView alloc] init] autorelease];
 	self.captionView = [[[UITextView alloc] init] autorelease];
 	self.captionView.font = [UIFont systemFontOfSize:17];
@@ -156,17 +146,10 @@ static int SPINNER_HEIGHT = 60;
 															   action:@selector(didBack)]
 							 autorelease];
 	UINavigationItem *navigationItem = [[[UINavigationItem alloc] initWithTitle:@"Photomap"] autorelease];
-	[navigationItem setLeftBarButtonItem:back];
+	[navigationItem setRightBarButtonItem:back];
 	[self.navigation pushNavigationItem:navigationItem animated:NO];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 #pragma mark photo loading
 
@@ -213,17 +196,12 @@ static int SPINNER_HEIGHT = 60;
 }
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)viewDidUnload {
 	DLog(@">>>");
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-	[self.bgImageView removeFromSuperview];
+    [self.bgImageView removeFromSuperview];
 	[self.imageView removeFromSuperview];
 	[self.captionView removeFromSuperview];
 	[self cleanup];

@@ -42,7 +42,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoList.h"
 #import "PhotoEntry.h"
 #import "QueryPhoto.h"
-#import "Location2.h"
+#import "PhotoMapImageLocationViewController.h"
 #import "InitialLocation.h"
 #import "Markers.h"
 #import "MapLocationSearchViewController.h"
@@ -240,12 +240,12 @@ static NSTimeInterval FADE_DURATION = 1.7;
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
 	DLog(@"tapMarker");
 	if (locationView == nil) {
-		locationView = [[Location2 alloc] init];
+		locationView = [[PhotoMapImageLocationViewController alloc] init];
 	}
 	if ([marker.data isKindOfClass: [PhotoEntry class]]) {
 		[self presentModalViewController:locationView animated:YES];
 		PhotoEntry *photoEntry = (PhotoEntry *)marker.data;
-		[locationView loadEntry:photoEntry];
+		[locationView loadContentForEntry:photoEntry];
 	}
 }
 

@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UserCreate.h"
 #import "AddPhoto.h"
 #import "PhotoInfo.h"
-#import "Location2.h"
+#import "PhotoMapImageLocationViewController.h"
 #import "AccountViewController.h"
 @class AssetGroupTable;
 @class PhotoAsset;
@@ -58,7 +58,7 @@ UITextViewDelegate, UIActionSheetDelegate> {
 	
 	AccountViewController *loginView;
 	
-	Location2 *preview;
+	PhotoMapImageLocationViewController *preview;
 	
 	CLLocationManager *locationManager;
 	CLLocation *location;
@@ -131,7 +131,7 @@ UITextViewDelegate, UIActionSheetDelegate> {
 @property (nonatomic, retain) PhotoInfo *photoInfo;
 @property (nonatomic, retain) UIActionSheet *photoAction;
 
-@property (nonatomic, retain) Location2 *preview;
+@property (nonatomic, retain) PhotoMapImageLocationViewController *preview;
 @property (nonatomic, copy) NSString *bigImageURL;
 @property (nonatomic, copy) NSString *photoId;
 

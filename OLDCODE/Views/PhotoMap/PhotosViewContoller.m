@@ -579,7 +579,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 			if (alertView.firstOtherButtonIndex == buttonIndex) {
 				//View
 				if (self.preview == nil) {
-					self.preview = [[Location2 alloc] init];
+					self.preview = [[PhotoMapImageLocationViewController alloc] init];
 				}
 				PhotoEntry *photoEntry = [[[PhotoEntry alloc] init] autorelease];
 				photoEntry.caption = self.currentCaption;

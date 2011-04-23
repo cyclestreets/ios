@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "BlueCircleView.h"
 @class CycleStreets;
 @class Location;
-@class Location2;
+@class PhotoMapImageLocationViewController;
 @class InitialLocation;
 
 @interface PhotoMapViewController : UIViewController
@@ -41,7 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BlueCircleView *blueCircleView;	//overlay GPS location
 	
 	CLLocationManager *locationManager; //move out of this class into app, or app sub, if/when we generalise.
-	Location2 *locationView;			//the popup with the contents of a particular location (photomap etc.)
+	PhotoMapImageLocationViewController *locationView;			//the popup with the contents of a particular location (photomap etc.)
 	CLLocation *lastLocation;		//the last one
 	
 	UIActivityIndicatorView *loading;

@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AsyncImageViewDelegate <NSObject>
+
+@optional
+-(void)ImageDidLoadWithImage:(UIImage*)image;
+-(void)ImageDidFail;
+
+
+@end
+
+
+
 #define kImageViewTAG 1000
 #define kAsyncActivityTAG 1001
 @interface AsyncImageView : UIView {
@@ -20,13 +31,21 @@
 	BOOL						notify;
 	UIImageView					*imageView;
 	BOOL						cacheImage;
+	
+	BOOL						resizeToFit;
+	
+	// delegate
+	id<AsyncImageViewDelegate> delegate;
+	
 }
-@property (nonatomic,retain) NSString				*filename;
-@property (nonatomic,retain) NSString				*type;
-@property (nonatomic) NSUInteger					*capacity;
-@property (nonatomic,retain) UIImageView			*imageView;
-@property (nonatomic) BOOL							notify;
-@property(nonatomic,assign)BOOL cacheImage;
+@property (nonatomic, retain)		NSString		* filename;
+@property (nonatomic, retain)		NSString		* type;
+@property (nonatomic)		NSUInteger		* capacity;
+@property (nonatomic)		BOOL		 notify;
+@property (nonatomic, retain)		IBOutlet UIImageView		* imageView;
+@property (nonatomic)		BOOL		 cacheImage;
+@property (nonatomic)		BOOL		 resizeToFit;
+@property (nonatomic, assign)		id<AsyncImageViewDelegate>		 delegate;
 
 - (void)loadImageFromURL:(NSURL*)url;
 -(void)loadImageFromString:(NSString*)url;

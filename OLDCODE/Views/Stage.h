@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "GradientView.h"
 #import "CSSegmentFooterView.h"
 
-@class Location2;
+@class PhotoMapImageLocationViewController;
 @class QueryPhoto;
 
 @interface Stage : UIViewController <CLLocationManagerDelegate, RMMapViewDelegate, LocationProvider, PointListProvider> {
@@ -62,7 +62,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	RMMarker *markerLocation;	
 	CLLocationManager *locationManager;
 	BOOL doingLocation;
-	Location2 *locationView;
+	PhotoMapImageLocationViewController *locationView;
 	QueryPhoto *queryPhoto;
 }
 @property (nonatomic, retain)		CSSegmentFooterView		* footerView;
@@ -83,7 +83,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain)		RMMarker		* markerLocation;
 @property (nonatomic, retain)		CLLocationManager		* locationManager;
 @property (nonatomic)		BOOL		 doingLocation;
-@property (nonatomic, retain)		Location2		* locationView;
+@property (nonatomic, retain)		PhotoMapImageLocationViewController		* locationView;
 @property (nonatomic, retain)		QueryPhoto		* queryPhoto;
 
 

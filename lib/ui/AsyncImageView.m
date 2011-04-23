@@ -21,6 +21,9 @@
 @synthesize notify;
 @synthesize imageView;
 @synthesize cacheImage;
+@synthesize resizeToFit;
+@synthesize delegate;
+
 
 - (void)dealloc {
 	
@@ -31,7 +34,7 @@
 	[filename release],filename=nil;
 	[type release],type=nil;
 	imageView=nil;
-	
+	delegate=nil;
 	
     [super dealloc];
 }
@@ -219,7 +222,15 @@
 	}
 	
 	imageView.image=image;
-	imageView.frame = self.bounds;
+	if(resizeToFit==YES){
+		CGRect iframe=imageView.frame;
+		iframe.size.height=image.size.height;
+		imageView.frame=iframe;
+	}else {
+		imageView.frame = self.bounds;
+	}
+
+	
 	[imageView setNeedsLayout];
 	[self setNeedsLayout];
 	

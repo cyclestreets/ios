@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "QueryPhoto.h"
 #import "PhotoList.h"
 #import "PhotoEntry.h"
-#import "Location2.h"
+#import "PhotoMapImageLocationViewController.h"
 #import "Markers.h"
 #import "BlueCircleView.h"
 #import "CSPoint.h"
@@ -283,13 +283,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
 	DLog(@"tapMarker");
 	if (locationView == nil) {
-		locationView = [[Location2 alloc] init];
+		locationView = [[PhotoMapImageLocationViewController alloc] init];
 		[locationView retain];
 	}
 	if ([marker.data isKindOfClass: [PhotoEntry class]]) {
 		[self presentModalViewController:locationView animated:YES];
 		PhotoEntry *photoEntry = (PhotoEntry *)marker.data;
-		[locationView loadEntry:photoEntry];
+		[locationView loadc];
 	}	
 }
  

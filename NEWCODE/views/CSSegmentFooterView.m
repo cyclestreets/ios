@@ -94,7 +94,7 @@ static NSDictionary *segmentDirectionsIcons;
 	contentContainer.itemPadding=2;
 	
 	
-	roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 16)];
+	roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-10, 16)];
 	roadNameLabel.textAlignment=UITextAlignmentLeft;
 	roadNameLabel.multiline=YES;
 	roadNameLabel.textColor=UIColorFromRGB(0x404040);

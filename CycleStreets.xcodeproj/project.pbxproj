@@ -73,7 +73,7 @@
 		2863A40A134E508800A22093 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3B4134E508800A22093 /* MapView.xib */; };
 		2863A40E134E508800A22093 /* NamedPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3BB134E508800A22093 /* NamedPlace.m */; };
 		2863A40F134E508800A22093 /* Location2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3BE134E508800A22093 /* Location2.m */; };
-		2863A410134E508800A22093 /* Location2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3BF134E508800A22093 /* Location2.xib */; };
+		2863A410134E508800A22093 /* PhotoMapImageLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3BF134E508800A22093 /* PhotoMapImageLocationViewController.xib */; };
 		2863A411134E508800A22093 /* PhotoAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3C1134E508800A22093 /* PhotoAsset.m */; };
 		2863A412134E508800A22093 /* PhotoEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3C3134E508800A22093 /* PhotoEntry.m */; };
 		2863A413134E508800A22093 /* PhotoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3C5134E508800A22093 /* PhotoInfo.m */; };
@@ -311,6 +311,7 @@
 		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F412BAA8450025C4A2 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F312BAA8450025C4A2 /* libz.1.2.3.dylib */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
+		28F66F0D135F636200DECFAC /* PhotoMapImageLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */; };
 		E70586AA12365A7B0080917E /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = E70586A812365A7B0080917E /* donate.html */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E7757BB91259C79300730726 /* APIKey.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7757BB81259C79300730726 /* APIKey.txt */; };
@@ -497,7 +498,7 @@
 		2863A3BB134E508800A22093 /* NamedPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NamedPlace.m; sourceTree = "<group>"; };
 		2863A3BD134E508800A22093 /* Location2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location2.h; sourceTree = "<group>"; };
 		2863A3BE134E508800A22093 /* Location2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location2.m; sourceTree = "<group>"; };
-		2863A3BF134E508800A22093 /* Location2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Location2.xib; sourceTree = "<group>"; };
+		2863A3BF134E508800A22093 /* PhotoMapImageLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PhotoMapImageLocationViewController.xib; path = ../../OLDCODE/Views/PhotoMap/PhotoMapImageLocationViewController.xib; sourceTree = "<group>"; };
 		2863A3C0134E508800A22093 /* PhotoAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAsset.h; sourceTree = "<group>"; };
 		2863A3C1134E508800A22093 /* PhotoAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAsset.m; sourceTree = "<group>"; };
 		2863A3C2134E508800A22093 /* PhotoEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEntry.h; sourceTree = "<group>"; };
@@ -869,6 +870,8 @@
 		28D2BC5B1354C48B00694093 /* BUDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDividerView.m; sourceTree = "<group>"; };
 		28D7E1F312BAA8450025C4A2 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		28D7E1F712BAA8710025C4A2 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		28F66F0B135F636200DECFAC /* PhotoMapImageLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoMapImageLocationViewController.h; sourceTree = "<group>"; };
+		28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoMapImageLocationViewController.m; sourceTree = "<group>"; };
 		E70586A812365A7B0080917E /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = donate.html; path = html/donate.html; sourceTree = "<group>"; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E7757BB81259C79300730726 /* APIKey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey.txt; path = docs/APIKey.txt; sourceTree = "<group>"; };
@@ -1153,7 +1156,6 @@
 			children = (
 				2863A3BD134E508800A22093 /* Location2.h */,
 				2863A3BE134E508800A22093 /* Location2.m */,
-				2863A3BF134E508800A22093 /* Location2.xib */,
 				2863A3C0134E508800A22093 /* PhotoAsset.h */,
 				2863A3C1134E508800A22093 /* PhotoAsset.m */,
 				2863A3C2134E508800A22093 /* PhotoEntry.h */,
@@ -1372,6 +1374,7 @@
 		28AD61DC131FB69D008527FC /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				28F66F0A135F633E00DECFAC /* PhotoMap */,
 				2863A5E6134E5EC500A22093 /* Favourites */,
 				2872DF9D13283AA9003995BE /* Credits */,
 				2872DFA113283AA9003995BE /* Routes */,
@@ -1978,6 +1981,16 @@
 			path = Photomap;
 			sourceTree = "<group>";
 		};
+		28F66F0A135F633E00DECFAC /* PhotoMap */ = {
+			isa = PBXGroup;
+			children = (
+				2863A3BF134E508800A22093 /* PhotoMapImageLocationViewController.xib */,
+				28F66F0B135F636200DECFAC /* PhotoMapImageLocationViewController.h */,
+				28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */,
+			);
+			name = PhotoMap;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -2300,7 +2313,7 @@
 				2863A405134E508800A22093 /* RouteTableCell.xib in Resources */,
 				2863A408134E508800A22093 /* MapLocationSearchView.xib in Resources */,
 				2863A40A134E508800A22093 /* MapView.xib in Resources */,
-				2863A410134E508800A22093 /* Location2.xib in Resources */,
+				2863A410134E508800A22093 /* PhotoMapImageLocationViewController.xib in Resources */,
 				2863A414134E508800A22093 /* PhotoInfo.xib in Resources */,
 				2863A416134E508800A22093 /* PhotoMapView.xib in Resources */,
 				2863A418134E508800A22093 /* PhotosView.xib in Resources */,
@@ -2533,6 +2546,7 @@
 				28D2BB091354854900694093 /* UIImage+Operations.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
 				28441865135645930028CCE6 /* PhotoManager.m in Sources */,
+				28F66F0D135F636200DECFAC /* PhotoMapImageLocationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
