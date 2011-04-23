@@ -314,14 +314,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	int index=-1;
 	for (int i=0;i<count;i++) {
 		UIViewController *navcontroller=[tabBarController.viewControllers objectAtIndex:i];
-		if([navcontroller.title isEqualToString:viewname]){
+		if([navcontroller.tabBarItem.title isEqualToString:viewname]){
 			index=i;
 			break;
 		}
 	}
 	
-	if(index!=-1)
+	if(index!=-1){
 		[tabBarController setSelectedIndex:index];
+	}else {
+		BetterLog(@"[ERROR] unable to find tabbarItem with name %@",viewname);
+	}
+
 	
 }
 
