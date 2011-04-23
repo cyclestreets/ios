@@ -41,4 +41,5 @@
 @property (nonatomic, retain)		NSMutableArray		* rowHeightsArray;
 
 -(void)createRowHeightsArray;
+-(void)showNoActiveRouteView:(BOOL)show;
 @end

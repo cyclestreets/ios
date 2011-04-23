@@ -19,6 +19,9 @@
 #import "AppConstants.h"
 #import "ExpandedUILabel.h"
 #import "RouteManager.h"
+#import "VBox.h"
+#import "ViewUtilities.h"
+#import "GradientView.h"
 
 @implementation ItineraryViewController
 @synthesize route;
@@ -187,14 +190,14 @@
 	if(route==nil){
 		
 		
-		[self showNoResultsView:YES];
+		[self showNoActiveRouteView:YES];
 		
 		self.navigationItem.rightBarButtonItem.enabled=NO;
 		
 		
 	}else {
 		
-		[self showNoResultsView:NO];
+		[self showNoActiveRouteView:NO];
 		
 		routeidLabel.text=[route itinerary];
 		
@@ -294,6 +297,65 @@
 	
 }
 
+#define kItineraryPlanView 9001
+-(void)showNoActiveRouteView:(BOOL)show{
+	
+	if(show==YES){
+		
+		GradientView *errorView;
+		VBox *contentContainer;
+		
+		contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+		errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+		
+		[errorView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
+		errorView.tag=kItineraryPlanView;
+		contentContainer.verticalGap=20;
+		contentContainer.fixedWidth=YES;
+		contentContainer.alignby=CENTER;
+		
+		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+		titlelabel.font=[UIFont boldSystemFontOfSize:14];
+		titlelabel.textAlignment=UITextAlignmentCenter;
+		titlelabel.hasShadow=YES;
+		titlelabel.textColor=[UIColor grayColor];
+		titlelabel.text=@"No Route loaded";
+		[contentContainer addSubview:titlelabel];					
+		[titlelabel release];
+		
+		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+		infolabel.font=[UIFont systemFontOfSize:13];
+		infolabel.textAlignment=UITextAlignmentCenter;
+		infolabel.hasShadow=YES;
+		infolabel.textColor=[UIColor grayColor];
+		infolabel.text=@"You can view the Itinerary for the selected route here, please plan or load a route.";
+		[contentContainer addSubview:infolabel];					
+		[infolabel release];
+		
+		UIButton *routeButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan Route"];
+		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
+		[contentContainer addSubview:routeButton];
+		
+		[errorView addSubview:contentContainer];
+		[ViewUtilities alignView:contentContainer withView:errorView :BUNoneLayoutMode :BUCenterAlignMode];
+		[self.view addSubview:errorView];
+		[contentContainer release];
+		[errorView release];
+		
+	}else {
+		UIView	*errorView = [self.view viewWithTag:kItineraryPlanView];
+		[errorView removeFromSuperview];
+		errorView=nil;
+		
+	}
+	
+	
+}
+
+-(IBAction)swapToMapView{
+	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
+}
+
 
 //
 /***********************************************
@@ -313,7 +375,6 @@
 		
 		
 	}
-	
 	
 }
 

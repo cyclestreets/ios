@@ -340,4 +340,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	bar.tintColor = color;	
 }
 
+//
+/***********************************************
+ * Slight hack to get access to the Customisation navigationBAr so we can set its color to same as the rest of the app
+ ***********************************************/
+//
+- (void)tabBarController:(UITabBarController *)controller willBeginCustomizingViewControllers:(NSArray *)viewControllers {
+	
+	//tabBarControllers=[[NSMutableArray alloc] initWithArray:viewControllers];
+	//[tabBarControllers removeObjectsInRange:NSMakeRange(TABBARMORELIMIT,[tabBarControllers count]-TABBARMORELIMIT)];
+	
+	// Warning: This is brittle, but it works on iPhone OS 3.0 (7A341)!
+    UIView *editViews = [controller.view.subviews objectAtIndex:1];
+    UINavigationBar *editModalNavBar = [editViews.subviews objectAtIndex:0]; // configure controller will be index 0
+	
+	[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:editModalNavBar];
+	
+}
+
+
 @end
