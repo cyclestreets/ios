@@ -111,6 +111,25 @@ static NSString *ROUTEDATE = @"cs:whence";
 	return location;	
 }
 
+//
+/***********************************************
+ * @description			Use these methods to return an inset location so start/end points arent too close too the view edge
+ ***********************************************/
+//
+- (CLLocationCoordinate2D) insetNorthEast {
+	CLLocationCoordinate2D location;
+	location.latitude = [[header valueForKey:NORTH] doubleValue]+0.002;
+	location.longitude = [[header valueForKey:EAST] doubleValue]+0.002;
+	return location;
+}
+
+- (CLLocationCoordinate2D) insetSouthWest {
+	CLLocationCoordinate2D location;
+	location.latitude = [[header valueForKey:SOUTH] doubleValue]-0.002;
+	location.longitude = [[header valueForKey:WEST] doubleValue]-0.002;
+	return location;	
+}
+
 - (NSString *) name {
 	return [header valueForKey:NAME];
 }

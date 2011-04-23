@@ -14,6 +14,7 @@
 		2805EB57133943BE002D13C5 /* exclaim.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB54133943BE002D13C5 /* exclaim.png */; };
 		2805EB58133943BE002D13C5 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB55133943BE002D13C5 /* lock.png */; };
 		2805EBAE13394D85002D13C5 /* ItineraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2805EBAD13394D85002D13C5 /* ItineraryCell.xib */; };
+		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		284415D81355CD790028CCE6 /* CSTabBar_account.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D01355CD790028CCE6 /* CSTabBar_account.png */; };
 		284415D91355CD790028CCE6 /* CSTabBar_add_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D11355CD790028CCE6 /* CSTabBar_add_photo.png */; };
 		284415DA1355CD790028CCE6 /* CSTabBar_credits.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D21355CD790028CCE6 /* CSTabBar_credits.png */; };
@@ -397,6 +398,7 @@
 		2805EB54133943BE002D13C5 /* exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exclaim.png; sourceTree = "<group>"; };
 		2805EB55133943BE002D13C5 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		2805EBAD13394D85002D13C5 /* ItineraryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryCell.xib; sourceTree = "<group>"; };
+		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		284415D01355CD790028CCE6 /* CSTabBar_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_account.png; sourceTree = "<group>"; };
 		284415D11355CD790028CCE6 /* CSTabBar_add_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_add_photo.png; sourceTree = "<group>"; };
 		284415D21355CD790028CCE6 /* CSTabBar_credits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_credits.png; sourceTree = "<group>"; };
@@ -943,6 +945,7 @@
 				28D7E1F412BAA8450025C4A2 /* libz.1.2.3.dylib in Frameworks */,
 				28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */,
 				28AD64C9131FB870008527FC /* libMapView.a in Frameworks */,
+				2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2032,6 +2035,7 @@
 				E7F8BEFF11B9931E009F62BB /* Security.framework */,
 				E72E65A4121C2226008DA360 /* AssetsLibrary.framework */,
 				28D7E1F712BAA8710025C4A2 /* libxml2.dylib */,
+				2831ABFC1362F7D000EBBA69 /* AddressBook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
