@@ -24,6 +24,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Created by Alan Paxton on 10/05/2010.
 //
 
+// NE: Value object for map location search results
+
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 

@@ -31,7 +31,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "MapViewController.h"
 #import "CycleStreetsAppDelegate.h"
 #import "CycleStreets.h"
-#import "RouteTableViewController.h"
 #import "QueryPhoto.h"
 #import "PhotoList.h"
 #import "PhotoEntry.h"
@@ -143,6 +142,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 - (NSArray *) pointList {
+	BetterLog(@"");
 	return [MapViewController pointList:route withView:mapView];
 }
 
@@ -297,11 +297,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (IBAction) didRoute {
 	[self dismissModalViewControllerAnimated:YES];
 	
-	
+	/*
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSIndexPath *currentIndex = [NSIndexPath indexPathForRow:index inSection:0];
-	UITableView *routeTableView = (UITableView *)cycleStreets.appDelegate.routeTable.view;
+	//UITableView *routeTableView = (UITableView *)cycleStreets.appDelegate.routeTable.view;
 	[routeTableView scrollToRowAtIndexPath:currentIndex atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	 */
 }
 
 //pop this view, then select the map

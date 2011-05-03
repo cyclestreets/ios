@@ -169,21 +169,6 @@
 							<object class="IBUIView" id="578747047">
 								<reference key="NSNextResponder" ref="1019081500"/>
 								<int key="NSvFlags">274</int>
-								<object class="NSMutableArray" key="NSSubviews">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<object class="IBUIView" id="987757070">
-										<reference key="NSNextResponder" ref="578747047"/>
-										<int key="NSvFlags">274</int>
-										<string key="NSFrameSize">{320, 417}</string>
-										<reference key="NSSuperview" ref="578747047"/>
-										<object class="NSColor" key="IBUIBackgroundColor">
-											<int key="NSColorSpace">3</int>
-											<bytes key="NSWhite">MSAwAA</bytes>
-											<reference key="NSCustomColorSpace" ref="135693430"/>
-										</object>
-										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									</object>
-								</object>
 								<string key="NSFrameSize">{320, 417}</string>
 								<reference key="NSSuperview" ref="1019081500"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -193,6 +178,18 @@
 								</object>
 								<bool key="IBUIOpaque">NO</bool>
 								<float key="IBUIAlpha">0.30281689763069153</float>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
+							<object class="IBUIView" id="987757070">
+								<reference key="NSNextResponder" ref="1019081500"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrameSize">{320, 417}</string>
+								<reference key="NSSuperview" ref="1019081500"/>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MSAwAA</bytes>
+									<reference key="NSCustomColorSpace" ref="135693430"/>
+								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
@@ -433,6 +430,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="578747047"/>
 							<reference ref="210697217"/>
+							<reference ref="987757070"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -441,18 +439,17 @@
 						<reference key="object" ref="578747047"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="987757070"/>
 						</object>
+						<reference key="parent" ref="1019081500"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">105</int>
+						<reference key="object" ref="210697217"/>
 						<reference key="parent" ref="1019081500"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">102</int>
 						<reference key="object" ref="987757070"/>
-						<reference key="parent" ref="578747047"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">105</int>
-						<reference key="object" ref="210697217"/>
 						<reference key="parent" ref="1019081500"/>
 					</object>
 				</object>
@@ -492,14 +489,12 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>Stage</string>
 					<string>UIResponder</string>
-					<string>{{839, 538}, {320, 480}}</string>
+					<string>{{839, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<boolean value="YES"/>
 					<string>RouteLineView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw8+AAA</bytes>
-					</object>
+					<object class="NSAffineTransform"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AQAAAABDdAAAA</bytes>
