@@ -17,15 +17,11 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBook/ABAddressBook.h>
 
-static NSString *format = @"%@?key=%@&street=%@&%@&clientid=%@";
-static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
-
-
 @interface LocationSearchManager(Private)
 
 
 -(void)searchForLocationWithFilterResponse:(ValidationVO*)validation;
--(void)processUserContacts;
+-(void)searchContactsForLocation:(NSString*)searchString;
 
 -(void)showProgressHUDWithMessage:(NSString*)message;
 -(void)removeHUD;
@@ -39,8 +35,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 @synthesize activeFilterType;
 @synthesize activeRequestType;
 @synthesize requestResultDict;
-
-
+@synthesize recentSelectedArray;
 
 //=========================================================== 
 // dealloc
@@ -49,9 +44,11 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 {
     [HUD release], HUD = nil;
     [requestResultDict release], requestResultDict = nil;
+    [recentSelectedArray release], recentSelectedArray = nil;
 	
     [super dealloc];
 }
+
 
 
 
@@ -64,6 +61,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
     self = [super init];
     if (self) {
 		self.requestResultDict = [[NSMutableDictionary alloc] init];
+		self.recentSelectedArray=[[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -85,6 +83,8 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	
+	[self addRequestID:LOCATIONSEARCH];
 	
 	
 	[super listNotificationInterests];
@@ -155,7 +155,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 		break;
 			
 		case LocationSearchFilterContacts:
-			[self processUserContacts];
+			[self searchContactsForLocation:searchString];
 		break;
 		
 	}
@@ -211,22 +211,38 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
 
 
--(void)processUserContacts{
+//
+/***********************************************
+ * @description			logic for AB search 
+ ***********************************************/
+//
+-(void)searchContactsForLocation:(NSString*)searchString{
 	
-	//ABAddressBookRef *AB=ABAddressBookCreate()
+	//ABAddressBookRef AB=ABAddressBookCreate();
 	
-	//ABAddressBook *AB = [ABAddressBook sharedAddressBook];
-	/*
-	ABSearchElement *nameIsSmith =[ABPerson searchElementForProperty:kABLastNameProperty
-                                 label:nil
-                                   key:nil
-                                 value:@"Smith"
-                            comparison:kABEqualCaseInsensitive];
-	NSArray *peopleFound =[AB recordsMatchingSearchElement:nameIsSmith];
-	 */
+	// get all persons in AB
+	//CFArrayRef personArray=ABAddressBookCopyArrayOfAllPeople(AB);
+	
+	// use nspredicate to find persons with name / address with searchString
+	
+	
+	// return array
 	
 }
 
+
+//
+/***********************************************
+ * @description			Recent Selected
+ ***********************************************/
+//
+
+-(void)addUserSelectionToRecents:(NSString*)selectionid{
+	
+	
+	
+	
+}
 
 
 
