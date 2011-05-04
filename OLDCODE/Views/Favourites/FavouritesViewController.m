@@ -175,8 +175,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 {
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	
-	//load favourites, and add the new route to the favourites, as the first one.
-	//do this even if we have it already, so last-selected favourite is "top"
 	NSMutableArray *favs = [NSMutableArray arrayWithArray:[cycleStreets.files favourites]];
 	[favs removeObjectAtIndex:row];
 	[cycleStreets.files setFavourites:favs];

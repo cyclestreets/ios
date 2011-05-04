@@ -827,7 +827,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self gotoState:stateStart];
 }
 
-// TODO: map frame for plotted route needs to be inset from view
 - (void) newRoute {
 	[mapView zoomWithLatLngBoundsNorthEast:(CLLocationCoordinate2D)[route insetNorthEast]
 								 SouthWest:(CLLocationCoordinate2D)[route insetSouthWest]];

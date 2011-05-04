@@ -165,17 +165,12 @@
     return cell;
 }
 
-/*
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-	
-	NSString *key=[keys objectAtIndex:section];
-	return [sectionHeaderViews objectForKey:key];
-}
-*/
+
 
 
 // NE: will we support multi cell deletion or just the standard one at a time
 - (void)tableView:(UITableView *)tbv didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	
 	if (tableEditMode==YES){
 		return;
 	}else {

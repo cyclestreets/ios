@@ -168,8 +168,6 @@
 
 #pragma mark service loading methods
 
-// TODO: shouldnt this be somewhere else??
-
 -(void)loadServices{
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];

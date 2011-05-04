@@ -78,8 +78,6 @@ static NSInteger MAX_DIST = 10;
 	return result;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	
@@ -87,25 +85,7 @@ static NSInteger MAX_DIST = 10;
 	CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:0.8 green:0.2 blue:1.0 alpha:0.8].CGColor);
 	
 	NSArray *points = [pointListProvider pointList];
-	//NSArray *points = [self interpolate:rawPoints];
-	/*
-	bool first = YES;
-	for (CSPoint *point in points) {
-		if (first) {
-			if ([point insideRect:rect]) {
-				CGContextMoveToPoint(ctx, point.p.x, point.p.y);
-				first = NO;
-			}
-		} else {
-			if ([point insideRect:rect]) {
-				CGContextAddLineToPoint(ctx, point.p.x, point.p.y);
-			} else {
-				//moved outside rect, so next point "starts" again.
-				first = YES;
-			}
-		}
-	}
-	 */
+	
 	bool first = YES;
 	for (CSPoint *point in points) {
 		if (first) {

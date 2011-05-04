@@ -350,8 +350,6 @@
 
 -(IBAction)doGenericEvent:(id)sender{
 	
-	// TODO: get tag for sender for index of right items array if using array based construction
-	
 	if([delegate respondsToSelector:@selector(doNavigationSelector:)]){
 		[delegate doNavigationSelector:RIGHT];  // for now just send default
 	}
