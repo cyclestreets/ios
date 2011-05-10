@@ -364,7 +364,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 						   autorelease];
 	self.locationButton.width = 26;
 	
+	self.deleteButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
+															style:UIBarButtonItemStyleBordered
+														   target:self
+														   action:@selector(didDelete)]
+						   autorelease];
+	self.deleteButton.width = 30;
+	
 	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
+	[items insertObject:self.deleteButton atIndex:0];
 	[items insertObject:self.locationButton atIndex:0];
 	self.toolBar.items = items;
 	

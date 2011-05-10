@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
 		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">823</string>
+		<string key="IBDocument.InterfaceBuilderVersion">851</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">132</string>
+			<string key="NS.object.0">141</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -52,12 +52,6 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIBarButtonItem" id="664980539">
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">1</int>
-								<reference key="IBUIToolbar" ref="1042433907"/>
-								<int key="IBUISystemItemIdentifier">14</int>
-							</object>
 							<object class="IBUIBarButtonItem" id="406825430">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="1042433907"/>
@@ -184,14 +178,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">didDelete</string>
-						<reference key="source" ref="664980539"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">26</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">didSearch</string>
 						<reference key="source" ref="246722993"/>
 						<reference key="destination" ref="372490531"/>
@@ -237,14 +223,6 @@
 						<reference key="destination" ref="246722993"/>
 					</object>
 					<int key="connectionID">54</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">deleteButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="664980539"/>
-					</object>
-					<int key="connectionID">55</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -328,7 +306,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="406825430"/>
-							<reference ref="664980539"/>
 							<reference ref="948203256"/>
 							<reference ref="233746530"/>
 							<reference ref="246722993"/>
@@ -338,11 +315,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
 						<reference key="object" ref="406825430"/>
-						<reference key="parent" ref="1042433907"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">23</int>
-						<reference key="object" ref="664980539"/>
 						<reference key="parent" ref="1042433907"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -371,7 +343,6 @@
 					<string>1.IBEditorWindowLastContentRect</string>
 					<string>1.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
-					<string>23.IBPluginDependency</string>
 					<string>25.IBPluginDependency</string>
 					<string>29.IBPluginDependency</string>
 					<string>32.CustomClassName</string>
@@ -389,7 +360,6 @@
 					<string>MapViewController</string>
 					<string>UIResponder</string>
 					<string>{{1029, 338}, {320, 480}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -501,24 +471,36 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>activeLocationButton</string>
 							<string>attributionLabel</string>
 							<string>blueCircleView</string>
-							<string>deleteButton</string>
+							<string>clearAlert</string>
+							<string>firstAlert</string>
 							<string>lineView</string>
+							<string>locatingIndicator</string>
+							<string>locationButton</string>
 							<string>mapView</string>
 							<string>nameButton</string>
+							<string>noLocationAlert</string>
 							<string>routeButton</string>
+							<string>startFinishAlert</string>
 							<string>toolBar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UILabel</string>
 							<string>BlueCircleView</string>
-							<string>UIBarButtonItem</string>
+							<string>UIAlertView</string>
+							<string>UIAlertView</string>
 							<string>RouteLineView</string>
+							<string>UIActivityIndicatorView</string>
+							<string>UIBarButtonItem</string>
 							<string>RMMapView</string>
 							<string>UIBarButtonItem</string>
+							<string>UIAlertView</string>
 							<string>UIBarButtonItem</string>
+							<string>UIAlertView</string>
 							<string>UIToolbar</string>
 						</object>
 					</object>
@@ -526,17 +508,27 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>activeLocationButton</string>
 							<string>attributionLabel</string>
 							<string>blueCircleView</string>
-							<string>deleteButton</string>
+							<string>clearAlert</string>
+							<string>firstAlert</string>
 							<string>lineView</string>
+							<string>locatingIndicator</string>
+							<string>locationButton</string>
 							<string>mapView</string>
 							<string>nameButton</string>
+							<string>noLocationAlert</string>
 							<string>routeButton</string>
+							<string>startFinishAlert</string>
 							<string>toolBar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">activeLocationButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">attributionLabel</string>
 								<string key="candidateClassName">UILabel</string>
@@ -546,12 +538,24 @@
 								<string key="candidateClassName">BlueCircleView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">deleteButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
+								<string key="name">clearAlert</string>
+								<string key="candidateClassName">UIAlertView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">firstAlert</string>
+								<string key="candidateClassName">UIAlertView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">lineView</string>
 								<string key="candidateClassName">RouteLineView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">locatingIndicator</string>
+								<string key="candidateClassName">UIActivityIndicatorView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">locationButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapView</string>
@@ -562,8 +566,16 @@
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">noLocationAlert</string>
+								<string key="candidateClassName">UIAlertView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">routeButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">startFinishAlert</string>
+								<string key="candidateClassName">UIAlertView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">toolBar</string>
@@ -715,6 +727,22 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">UIActivityIndicatorView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIActivityIndicatorView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIAlertView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UIAlertView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">UIBarButtonItem</string>
 					<string key="superclassName">UIBarItem</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -840,6 +868,6 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">../../../CycleStreets.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">132</string>
+		<string key="IBCocoaTouchPluginVersion">141</string>
 	</data>
 </archive>

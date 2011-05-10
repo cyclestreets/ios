@@ -2589,6 +2589,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2601,6 +2602,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
+				PROVISIONING_PROFILE = "B53DD13A-1F11-418F-B949-DE8B292D4453";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
@@ -2627,7 +2629,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Neil Edwards";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
@@ -2640,7 +2641,6 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "47434FA4-C8E2-4A8F-A9A3-6A8AFFFF240F";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};

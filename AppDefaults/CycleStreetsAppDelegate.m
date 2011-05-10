@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreetsAppDelegate.h"
 #import "CycleStreets.h"
 #import "SettingsViewController.h"
-#import "RouteTableViewController.h"
 #import "MapViewController.h"
 #import "PhotoMapViewController.h"
 #import "FavouritesViewController.h"

@@ -277,17 +277,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	//privacy
-	// TODO: What does this value mean?
-	BOOL validated=YES;
-	if (validated=YES) {
-		self.addPhoto.privacy = @"Public";
-	} else {
+	if ([UserAccount sharedInstance].isLoggedIn) {
 		self.addPhoto.privacy = @"Private";
+	} else {
+		self.addPhoto.privacy = @"Public";
 	}
 	
 	//image
-	//self.addPhoto.imageData = UIImageJPEGRepresentation( selected.image, 0.8);
-	
 	NSString *imageSize = [SettingsManager sharedInstance].dataProvider.imageSize;
 	if ([imageSize isEqualToString:@"full"]) {
 		self.addPhoto.imageData = [self.photoAsset fullData];
@@ -300,7 +296,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	date = [self.photoAsset date];
 	if (date == nil) {
 		//now
-		date = [[[NSDate alloc] init] autorelease];
+		date = [NSDate date];
 	}
 	int delta = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] intValue];
 	NSString *time = [NSString stringWithFormat:@"%i", delta];
