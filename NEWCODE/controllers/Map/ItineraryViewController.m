@@ -319,7 +319,7 @@
 		titlelabel.textAlignment=UITextAlignmentCenter;
 		titlelabel.hasShadow=YES;
 		titlelabel.textColor=[UIColor grayColor];
-		titlelabel.text=@"No route loaded";
+		titlelabel.text=@"You have no route active currently.";
 		[contentContainer addSubview:titlelabel];					
 		[titlelabel release];
 		
@@ -328,7 +328,7 @@
 		infolabel.textAlignment=UITextAlignmentCenter;
 		infolabel.hasShadow=YES;
 		infolabel.textColor=[UIColor grayColor];
-		infolabel.text=@"You can view the Itinerary for the selected route here, please plan or load a saved route.";
+		infolabel.text=@"Once you have an active route You can view the itinerary for it here, please plan or load a saved route.";
 		[contentContainer addSubview:infolabel];					
 		[infolabel release];
 		

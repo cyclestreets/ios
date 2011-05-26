@@ -92,14 +92,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self select:speedControl byString:dataProvider.speed];
 	[self select:planControl byString:dataProvider.plan];
 	[self select:imageSizeControl byString:dataProvider.imageSize];
-	[self select:mapStyleControl byString:dataProvider.mapStyle];
+	[self select:mapStyleControl byString:[dataProvider.mapStyle lowercaseString]];
 	[self select:routeUnitControl byString:dataProvider.routeUnit];
 	
-	[routeUnitControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
-	[planControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
-	[imageSizeControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
-	[mapStyleControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
-	[speedControl addTarget:self action:@selector(changed) forControlEvents:UIControlEventValueChanged];
+	[routeUnitControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[planControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[imageSizeControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[mapStyleControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[speedControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 	
 	[self.view addSubview:controlView];
 	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, controlView.frame.size.height)];
@@ -134,13 +134,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[SettingsManager sharedInstance] saveData];	
 }
 
-- (IBAction) changed {
+- (IBAction) changed:(id)sender {
 	
 	// Note: we have to update the routeunit first then update the linked segments before getting the definitive values;
 	dataProvider.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
-	dataProvider.mapStyle = [[mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex] lowercaseString];
+	dataProvider.mapStyle = [mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex];
+	
+	UISegmentedControl *control=(UISegmentedControl*)sender;
+	
+	if(control==mapStyleControl)
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationMapStyleChanged" object:nil];
 	
 	[self updateRouteUnitDisplay];
 	

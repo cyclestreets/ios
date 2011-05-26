@@ -40,6 +40,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	RMMapView *mapView;				//map of current area
 	BlueCircleView *blueCircleView;	//overlay GPS location
+	UILabel *attributionLabel;
 	
 	CLLocationManager *locationManager; //move out of this class into app, or app sub, if/when we generalise.
 	PhotoMapImageLocationViewController *locationView;			//the popup with the contents of a particular location (photomap etc.)

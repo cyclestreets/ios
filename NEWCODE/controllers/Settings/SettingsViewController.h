@@ -50,7 +50,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain)	IBOutlet UIView	*controlView;
 @property (nonatomic, retain)	IBOutlet UILabel	*speedTitleLabel;
 
-- (IBAction) changed;
+- (IBAction) changed:(id)sender;
 
 - (void) save;
 
