@@ -53,6 +53,8 @@ static NSString *const STRINGID=@"account";
 @synthesize scrollView;
 @synthesize pageControl;
 @synthesize pageControlView;
+@synthesize leftLabel;
+@synthesize rightLabel;
 @synthesize contentView;
 @synthesize loginUsernameField;
 @synthesize loginPasswordField;
@@ -89,10 +91,13 @@ static NSString *const STRINGID=@"account";
 /***********************************************************/
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [activeView release], activeView = nil;
     [scrollView release], scrollView = nil;
     [pageControl release], pageControl = nil;
     [pageControlView release], pageControlView = nil;
+    [leftLabel release], leftLabel = nil;
+    [rightLabel release], rightLabel = nil;
     [contentView release], contentView = nil;
     [loginUsernameField release], loginUsernameField = nil;
     [loginPasswordField release], loginPasswordField = nil;
@@ -119,8 +124,6 @@ static NSString *const STRINGID=@"account";
 	
     [super dealloc];
 }
-
-
 
 
 
@@ -218,7 +221,6 @@ static NSString *const STRINGID=@"account";
 	scrollView.delegate=self;
 	pageControl.hidesForSinglePage=YES;
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
-	
 	
 	
 	// add ui and targets to form buttons
@@ -431,7 +433,7 @@ static NSString *const STRINGID=@"account";
 //
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)sc{
-	
+	BetterLog(@"");
 	CGPoint offset=scrollView.contentOffset;
 	activePage=offset.x/SCREENWIDTH;
 	pageControl.currentPage=activePage;
@@ -440,10 +442,15 @@ static NSString *const STRINGID=@"account";
 
 
 -(IBAction)pageControlValueChanged:(id)sender{
-	
+	BetterLog(@"");
 	UIPageControl *pc=(UIPageControl*)sender;
 	CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
 	[scrollView setContentOffset:offset animated:YES];
+	
+}
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView*)sc{
+	BetterLog(@"");
+	[self scrollViewDidEndDecelerating:scrollView];
 }
 
 
@@ -453,6 +460,15 @@ static NSString *const STRINGID=@"account";
 		
 		activeFieldArray=[formFieldArray objectAtIndex:activePage];
 	}
+	
+	if(activePage==0){
+		leftLabel.text=@"";
+		rightLabel.text=@"Sign in";
+	}else {
+		leftLabel.text=@"Register";
+		rightLabel.text=@"";
+	}
+
 }
 
 

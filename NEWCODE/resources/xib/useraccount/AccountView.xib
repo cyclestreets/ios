@@ -12,11 +12,11 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="66"/>
-			<integer value="65"/>
-			<integer value="67"/>
 			<integer value="96"/>
-			<integer value="1"/>
+			<integer value="67"/>
+			<integer value="65"/>
+			<integer value="66"/>
+			<integer value="94"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -75,7 +75,53 @@
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<bool key="IBUIHidesForSinglePage">YES</bool>
-								<int key="IBUINumberOfPages">3</int>
+								<int key="IBUINumberOfPages">2</int>
+							</object>
+							<object class="IBUILabel" id="45118303">
+								<reference key="NSNextResponder" ref="754050158"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{182, -1}, {138, 22}}</string>
+								<reference key="NSSuperview" ref="754050158"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<float key="IBUIAlpha">0.60000002384185791</float>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<string key="IBUIText">Label</string>
+								<object class="NSFont" key="IBUIFont" id="299795484">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">12</double>
+									<int key="NSfFlags">16</int>
+								</object>
+								<object class="NSColor" key="IBUITextColor" id="379439176">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
+								</object>
+								<reference key="IBUIHighlightedColor" ref="379439176"/>
+								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+								<float key="IBUIMinimumFontSize">10</float>
+							</object>
+							<object class="IBUILabel" id="926195764">
+								<reference key="NSNextResponder" ref="754050158"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{0, -1}, {138, 22}}</string>
+								<reference key="NSSuperview" ref="754050158"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<float key="IBUIAlpha">0.60000002384185791</float>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<string key="IBUIText">Label</string>
+								<reference key="IBUIFont" ref="299795484"/>
+								<reference key="IBUITextColor" ref="379439176"/>
+								<reference key="IBUIHighlightedColor" ref="379439176"/>
+								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 							</object>
 						</object>
 						<string key="NSFrame">{{0, 346}, {320, 22}}</string>
@@ -177,10 +223,7 @@
 						</object>
 						<int key="IBUIButtonType">1</int>
 						<string key="IBUINormalTitle">Log out</string>
-						<object class="NSColor" key="IBUIHighlightedTitleColor" id="379439176">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
+						<reference key="IBUIHighlightedTitleColor" ref="379439176"/>
 						<reference key="IBUINormalTitleColor" ref="379439176"/>
 						<object class="NSColor" key="IBUINormalTitleShadowColor" id="234985594">
 							<int key="NSColorSpace">3</int>
@@ -5484,6 +5527,22 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<int key="connectionID">119</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">leftLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="926195764"/>
+					</object>
+					<int key="connectionID">122</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">rightLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="45118303"/>
+					</object>
+					<int key="connectionID">123</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -5499,8 +5558,8 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="675606940"/>
 							<reference ref="754050158"/>
+							<reference ref="675606940"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -5594,6 +5653,8 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="971014581"/>
+							<reference ref="45118303"/>
+							<reference ref="926195764"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -5761,6 +5822,16 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<reference key="object" ref="699545592"/>
 						<reference key="parent" ref="980084273"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">120</int>
+						<reference key="object" ref="45118303"/>
+						<reference key="parent" ref="754050158"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">121</int>
+						<reference key="object" ref="926195764"/>
+						<reference key="parent" ref="754050158"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -5781,6 +5852,10 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<string>116.IBViewBoundsToFrameTransform</string>
 					<string>117.IBPluginDependency</string>
 					<string>117.IBViewBoundsToFrameTransform</string>
+					<string>120.IBPluginDependency</string>
+					<string>120.IBViewBoundsToFrameTransform</string>
+					<string>121.IBPluginDependency</string>
+					<string>121.IBViewBoundsToFrameTransform</string>
 					<string>34.IBPluginDependency</string>
 					<string>34.IBViewBoundsToFrameTransform</string>
 					<string>37.IBPluginDependency</string>
@@ -5859,7 +5934,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AccountViewController</string>
 					<string>UIResponder</string>
-					<string>{{625, 64}, {320, 480}}</string>
+					<string>{{749, 359}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -5880,6 +5955,14 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABByAAAwrwAAA</bytes>
+					</object>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">AUM2AAAAAAAAA</bytes>
+					</object>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">AUM2AAAAAAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -5984,7 +6067,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw9aAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw6yAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -6038,7 +6121,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">119</int>
+			<int key="maxID">123</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6122,6 +6205,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>activeFormMessageLabel</string>
 							<string>activeFormSubmitButton</string>
 							<string>activeView</string>
+							<string>leftLabel</string>
 							<string>loggedInView</string>
 							<string>loggedInasField</string>
 							<string>loginButton</string>
@@ -6139,6 +6223,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>registerVisibleNameField</string>
 							<string>retrieveEmailField</string>
 							<string>retrieveView</string>
+							<string>rightLabel</string>
 							<string>saveLoginButton</string>
 							<string>scrollView</string>
 						</object>
@@ -6149,6 +6234,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>UILabel</string>
 							<string>UIButton</string>
 							<string>UIView</string>
+							<string>UILabel</string>
 							<string>UIView</string>
 							<string>UILabel</string>
 							<string>UIButton</string>
@@ -6166,6 +6252,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>UITextField</string>
 							<string>UITextField</string>
 							<string>UIView</string>
+							<string>UILabel</string>
 							<string>UISwitch</string>
 							<string>UIScrollView</string>
 						</object>
@@ -6179,6 +6266,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>activeFormMessageLabel</string>
 							<string>activeFormSubmitButton</string>
 							<string>activeView</string>
+							<string>leftLabel</string>
 							<string>loggedInView</string>
 							<string>loggedInasField</string>
 							<string>loginButton</string>
@@ -6196,6 +6284,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<string>registerVisibleNameField</string>
 							<string>retrieveEmailField</string>
 							<string>retrieveView</string>
+							<string>rightLabel</string>
 							<string>saveLoginButton</string>
 							<string>scrollView</string>
 						</object>
@@ -6220,6 +6309,10 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<object class="IBToOneOutletInfo">
 								<string key="name">activeView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">leftLabel</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">loggedInView</string>
@@ -6288,6 +6381,10 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<object class="IBToOneOutletInfo">
 								<string key="name">retrieveView</string>
 								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">rightLabel</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">saveLoginButton</string>

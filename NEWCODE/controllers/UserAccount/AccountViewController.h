@@ -44,6 +44,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet			UIPageControl	*pageControl;
 	IBOutlet			UIView			*pageControlView;
 	
+	IBOutlet			UILabel			*leftLabel;
+	IBOutlet			UILabel			*rightLabel;
+	
+	
 	LayoutBox		*contentView;
 	
 	// not logged in
@@ -90,40 +94,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BOOL						isModal;
 	
 }
-@property (nonatomic, retain)		IBOutlet UIView		* activeView;
-@property (nonatomic, retain)		IBOutlet UIScrollView		* scrollView;
-@property (nonatomic, retain)		IBOutlet UIPageControl		* pageControl;
-@property (nonatomic, retain)		IBOutlet UIView		* pageControlView;
-@property (nonatomic, retain)		LayoutBox		* contentView;
-@property (nonatomic, retain)		IBOutlet UITextField		* loginUsernameField;
-@property (nonatomic, retain)		IBOutlet UITextField		* loginPasswordField;
-@property (nonatomic, retain)		IBOutlet UIButton		* loginButton;
-@property (nonatomic, retain)		IBOutlet UIView		* loginView;
-@property (nonatomic, retain)		IBOutlet UITextField		* registerUsernameField;
-@property (nonatomic, retain)		IBOutlet UITextField		* registerVisibleNameField;
-@property (nonatomic, retain)		IBOutlet UITextField		* registerEmailField;
-@property (nonatomic, retain)		IBOutlet UITextField		* registerPsswordField;
-@property (nonatomic, retain)		IBOutlet UIButton		* registerButton;
-@property (nonatomic, retain)		IBOutlet UIView		* registerView;
-@property (nonatomic, retain)		IBOutlet UITextField		* retrieveEmailField;
-@property (nonatomic, retain)		IBOutlet UIView		* retrieveView;
-@property (nonatomic, retain)		IBOutlet UILabel		* loggedInasField;
-@property (nonatomic, retain)		IBOutlet UIButton		* logoutButton;
-@property (nonatomic, retain)		IBOutlet UISwitch		* saveLoginButton;
-@property (nonatomic, retain)		IBOutlet UIView		* loggedInView;
-@property (nonatomic)		int		 activePage;
-@property (nonatomic)		int		 activeFieldIndex;
-@property (nonatomic)		CGRect		 activeFieldFrame;
-@property (nonatomic, retain)		NSMutableArray		* activeFieldArray;
-@property (nonatomic, retain)		IBOutlet UITextField		* activeField;
-@property (nonatomic)		BOOL		 keyboardIsShown;
-@property (nonatomic)		CGPoint		 viewOffset;
-@property (nonatomic, retain)		IBOutlet UIButton		* activeFormSubmitButton;
-@property (nonatomic, retain)		IBOutlet UIActivityIndicatorView		* activeActivityView;
-@property (nonatomic, retain)		IBOutlet UILabel		* activeFormMessageLabel;
-@property (nonatomic)		UserAccountMode		 viewMode;
-@property (nonatomic, retain)		NSMutableArray		* formFieldArray;
-@property (nonatomic)		BOOL		 isModal;
+@property (nonatomic, retain)		IBOutlet UIView				* activeView;
+@property (nonatomic, retain)		IBOutlet UIScrollView				* scrollView;
+@property (nonatomic, retain)		IBOutlet UIPageControl				* pageControl;
+@property (nonatomic, retain)		IBOutlet UIView				* pageControlView;
+@property (nonatomic, retain)		IBOutlet UILabel				* leftLabel;
+@property (nonatomic, retain)		IBOutlet UILabel				* rightLabel;
+@property (nonatomic, retain)		LayoutBox				* contentView;
+@property (nonatomic, retain)		IBOutlet UITextField				* loginUsernameField;
+@property (nonatomic, retain)		IBOutlet UITextField				* loginPasswordField;
+@property (nonatomic, retain)		IBOutlet UIButton				* loginButton;
+@property (nonatomic, retain)		IBOutlet UIView				* loginView;
+@property (nonatomic, retain)		IBOutlet UITextField				* registerUsernameField;
+@property (nonatomic, retain)		IBOutlet UITextField				* registerVisibleNameField;
+@property (nonatomic, retain)		IBOutlet UITextField				* registerEmailField;
+@property (nonatomic, retain)		IBOutlet UITextField				* registerPsswordField;
+@property (nonatomic, retain)		IBOutlet UIButton				* registerButton;
+@property (nonatomic, retain)		IBOutlet UIView				* registerView;
+@property (nonatomic, retain)		IBOutlet UITextField				* retrieveEmailField;
+@property (nonatomic, retain)		IBOutlet UIView				* retrieveView;
+@property (nonatomic, retain)		IBOutlet UILabel				* loggedInasField;
+@property (nonatomic, retain)		IBOutlet UIButton				* logoutButton;
+@property (nonatomic, retain)		IBOutlet UISwitch				* saveLoginButton;
+@property (nonatomic, retain)		IBOutlet UIView				* loggedInView;
+@property (nonatomic)		int				 activePage;
+@property (nonatomic)		int				 activeFieldIndex;
+@property (nonatomic)		CGRect				 activeFieldFrame;
+@property (nonatomic, retain)		NSMutableArray				* activeFieldArray;
+@property (nonatomic, retain)		IBOutlet UITextField				* activeField;
+@property (nonatomic)		BOOL				 keyboardIsShown;
+@property (nonatomic)		CGPoint				 viewOffset;
+@property (nonatomic, retain)		IBOutlet UIButton				* activeFormSubmitButton;
+@property (nonatomic, retain)		IBOutlet UIActivityIndicatorView				* activeActivityView;
+@property (nonatomic, retain)		IBOutlet UILabel				* activeFormMessageLabel;
+@property (nonatomic)		UserAccountMode				 viewMode;
+@property (nonatomic, retain)		NSMutableArray				* formFieldArray;
+@property (nonatomic)		BOOL				 isModal;
 
 
 -(void)clearFields;
