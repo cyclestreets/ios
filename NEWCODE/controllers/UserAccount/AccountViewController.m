@@ -224,7 +224,7 @@ static NSString *const STRINGID=@"account";
 	// add ui and targets to form buttons
 	UIButton *button=nil;
 	button=(UIButton*)[loginView viewWithTag:kSubmitButtonTag];
-	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Login"];
+	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Sign in"];
 	[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	button=(UIButton*)[registerView viewWithTag:kSubmitButtonTag];
 	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Register"];
@@ -234,7 +234,7 @@ static NSString *const STRINGID=@"account";
 	[button addTarget:self action:@selector(retrievePasswordButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// logged in UI
-	[GlobalUtilities styleIBButton:logoutButton type:@"grey" text:@"Reset device"];
+	[GlobalUtilities styleIBButton:logoutButton type:@"grey" text:@"Clear signin details"];
 	[logoutButton addTarget:self action:@selector(logoutButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];
 	
@@ -247,9 +247,11 @@ static NSString *const STRINGID=@"account";
 	NSMutableArray *lar=[[NSMutableArray alloc]initWithObjects:loginUsernameField,loginPasswordField,nil];
 	[formFieldArray addObject:lar];
 	[lar release];
+	/*
 		NSMutableArray *par=[[NSMutableArray alloc]initWithObjects:retrieveEmailField,nil];
 	[formFieldArray addObject:par];
 	[par release];
+	*/
 	
 	if(isModal==YES)
 		[self createNavigationBarUI];
@@ -286,7 +288,7 @@ static NSString *const STRINGID=@"account";
 			
 			[contentView addSubview:registerView];
 			[contentView addSubview:loginView];
-			[contentView addSubview:retrieveView];
+			//[contentView addSubview:retrieveView];
 			
 			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
 		break;

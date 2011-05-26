@@ -27,6 +27,8 @@
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		28443E7C13328E9D00FAD008 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E7B13328E9D00FAD008 /* LayoutBox.m */; };
+		2859146C138E5CC6002B2155 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 2859146A138E5CC6002B2155 /* UIButtonBarRefresh.png */; };
+		2859146D138E5CC6002B2155 /* UIButtonBarStop.png in Resources */ = {isa = PBXBuildFile; fileRef = 2859146B138E5CC6002B2155 /* UIButtonBarStop.png */; };
 		285F68DC132C07CD00B511C0 /* RouteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285F68DB132C07CD00B511C0 /* RouteListViewController.m */; };
 		285F68E6132C080D00B511C0 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285F68E5132C080D00B511C0 /* RouteListView.xib */; };
 		2863A3DD134E508800A22093 /* AddPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A357134E508800A22093 /* AddPhoto.m */; };
@@ -412,6 +414,8 @@
 		28443E621332867D00FAD008 /* RouteVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteVO.m; sourceTree = "<group>"; };
 		28443E7A13328E9D00FAD008 /* LayoutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutBox.h; sourceTree = "<group>"; };
 		28443E7B13328E9D00FAD008 /* LayoutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutBox.m; sourceTree = "<group>"; };
+		2859146A138E5CC6002B2155 /* UIButtonBarRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarRefresh.png; sourceTree = "<group>"; };
+		2859146B138E5CC6002B2155 /* UIButtonBarStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarStop.png; sourceTree = "<group>"; };
 		285F68DA132C07CC00B511C0 /* RouteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteListViewController.h; sourceTree = "<group>"; };
 		285F68DB132C07CD00B511C0 /* RouteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteListViewController.m; sourceTree = "<group>"; };
 		285F68E5132C080D00B511C0 /* RouteListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteListView.xib; sourceTree = "<group>"; };
@@ -1850,6 +1854,8 @@
 				28915F17133A7631000C821B /* UIButtonBarInfo.png */,
 				28915F0F133A74AB000C821B /* UIButtonBarArrowLeft.png */,
 				28915F10133A74AB000C821B /* UIButtonBarArrowRight.png */,
+				2859146A138E5CC6002B2155 /* UIButtonBarRefresh.png */,
+				2859146B138E5CC6002B2155 /* UIButtonBarStop.png */,
 				28AD6625131FD630008527FC /* Map_Pin_Red.png */,
 				28AD6626131FD630008527FC /* Map_Pin_Green.png */,
 				28AD661E131FD4CD008527FC /* UITabbar_addphoto.png */,
@@ -2343,6 +2349,8 @@
 				28D10ECD135D6E54006F1D94 /* CSTabBar_plan_route@2x.png in Resources */,
 				28D10ECE135D6E54006F1D94 /* CSTabBar_settings@2x.png in Resources */,
 				289F1A8613729F7E0076086E /* CSBarButton_deletePoint_white.png in Resources */,
+				2859146C138E5CC6002B2155 /* UIButtonBarRefresh.png in Resources */,
+				2859146D138E5CC6002B2155 /* UIButtonBarStop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

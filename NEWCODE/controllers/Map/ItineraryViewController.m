@@ -319,7 +319,7 @@
 		titlelabel.textAlignment=UITextAlignmentCenter;
 		titlelabel.hasShadow=YES;
 		titlelabel.textColor=[UIColor grayColor];
-		titlelabel.text=@"No Route loaded";
+		titlelabel.text=@"No route loaded";
 		[contentContainer addSubview:titlelabel];					
 		[titlelabel release];
 		
@@ -328,13 +328,17 @@
 		infolabel.textAlignment=UITextAlignmentCenter;
 		infolabel.hasShadow=YES;
 		infolabel.textColor=[UIColor grayColor];
-		infolabel.text=@"You can view the Itinerary for the selected route here, please plan or load a route.";
+		infolabel.text=@"You can view the Itinerary for the selected route here, please plan or load a saved route.";
 		[contentContainer addSubview:infolabel];					
 		[infolabel release];
 		
 		UIButton *routeButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan Route"];
 		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:routeButton];
+		
+		UIButton *savedButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Saved Route"];
+		[savedButton addTarget:self action:@selector(swapToSavedRoutesView) forControlEvents:UIControlEventTouchUpInside];
+		[contentContainer addSubview:savedButton];
 		
 		[errorView addSubview:contentContainer];
 		[ViewUtilities alignView:contentContainer withView:errorView :BUNoneLayoutMode :BUCenterAlignMode];
@@ -354,6 +358,9 @@
 
 -(IBAction)swapToMapView{
 	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
+}
+-(IBAction)swapToSavedRoutesView{
+	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Saved routes"];
 }
 
 

@@ -28,11 +28,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "WebPopup.h"
 #import "UIButton+Blue.h"
 #import "Common.h"
+#import "GlobalUtilities.h"
 
 @implementation CreditsViewController
-
 @synthesize webView;
 @synthesize failAlert;
+@synthesize controlBar;
+@synthesize stopLoadingButton;
+@synthesize refreshButton;
+@synthesize goBackButton;
+@synthesize goForwardButton;
+@synthesize activityBarItem;
+@synthesize activityIndicator;
+@synthesize pageLoaded;
+
+/***********************************************************/
+// dealloc
+/***********************************************************/
+- (void)dealloc
+{
+    [webView release], webView = nil;
+    [failAlert release], failAlert = nil;
+    [controlBar release], controlBar = nil;
+    [stopLoadingButton release], stopLoadingButton = nil;
+    [refreshButton release], refreshButton = nil;
+    [goBackButton release], goBackButton = nil;
+    [goForwardButton release], goForwardButton = nil;
+    [activityBarItem release], activityBarItem = nil;
+    [activityIndicator release], activityIndicator = nil;
+	
+    [super dealloc];
+}
+
+
 
 
 
@@ -45,6 +73,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)viewDidLoad {
+	
+	pageLoaded=NO;
+	
+	self.hidesBottomBarWhenPushed=YES;
+	
+	self.activityIndicator=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	activityIndicator.hidesWhenStopped=YES;
+	self.activityBarItem=[[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+	
     [super viewDidLoad];
 	
 	[self home];
@@ -52,14 +89,115 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-#pragma mark web view delegate
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-	DLog(@"webViewDidStartLoad");
+-(void)initialiseToolBarButtons{
+	stopLoadingButton.enabled=NO;
+	refreshButton.enabled=NO;
+	goBackButton.enabled=NO;
+	goForwardButton.enabled=NO;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-	DLog(@"webViewDidFinishLoad");
+
+//
+/***********************************************
+ * @description			UI Button Events
+ ***********************************************/
+//
+
+
+-(IBAction)stopLoading:(id)sender{
+	[webView stopLoading];
+	[self updateUIState:@"loaded"];	
+}
+
+-(IBAction)refreshWebView:(id)sender{	
+	[webView reload];
+}
+
+
+-(IBAction)goBackButonSelected:(id)sender{
+	if(webView.canGoBack)
+		[webView goBack];
+}
+
+-(IBAction)goForwardButtonSelected:(id)sender{
+	if(webView.canGoForward)
+		[webView goForward];
+}
+
+
+//
+/***********************************************
+ * @description			UI updates
+ ***********************************************/
+//
+
+-(void)resetUI{
+	
+	BetterLog(@"");
+	[self updateUIState:@"loaded"];
+	
+}
+
+-(void)stopLoadingActivity{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	webView.delegate=nil;
+	[webView stopLoading];
+	[self showActivityIndicator:NO];
+	
+}
+
+
+-(void)showActivityIndicator:(BOOL)show{
+	
+	NSMutableArray *items=[NSMutableArray arrayWithArray:[controlBar items]];
+	
+	if (show==YES) {
+		[items replaceObjectAtIndex:5 withObject:activityBarItem];
+	}else {
+		[items replaceObjectAtIndex:5 withObject:refreshButton];
+	}
+	[controlBar setItems:[NSArray arrayWithArray:items] animated:YES];
+
+	
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:show];
+	
+	show==YES ? [activityIndicator startAnimating] : [activityIndicator stopAnimating];
+	
+}
+
+
+-(void)updateUIState:(NSString*)state{
+	
+	if([state isEqualToString:@"loading"]){
+		
+		stopLoadingButton.enabled=YES;
+		[self showActivityIndicator:YES];
+		
+	}else if ([state isEqualToString:@"loaded"]){
+		
+		stopLoadingButton.enabled=NO;
+		[self showActivityIndicator:NO];
+		
+		
+	}
+	
+	goForwardButton.enabled=webView.canGoForward;
+	goBackButton.enabled=webView.canGoBack;
+	
+}
+
+
+#pragma mark web view delegate
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+	
+	pageLoaded=NO;
+	[self updateUIState:@"loading"];	
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+	
+	pageLoaded=YES;
+	[self updateUIState:@"loaded"];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -92,10 +230,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
-- (void)dealloc {
-	[self nullify];
-    [super dealloc];
-}
+
 
 
 @end

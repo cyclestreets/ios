@@ -28,11 +28,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 @interface CreditsViewController : UIViewController <UIWebViewDelegate> {
-	UIWebView *webView;
-	UIAlertView *failAlert;
+	
+			UIWebView				*webView;
+			UIAlertView				*failAlert;
+	
+	IBOutlet	UIToolbar			*controlBar;
+	
+	IBOutlet UIBarButtonItem		*stopLoadingButton;
+	IBOutlet UIBarButtonItem		*refreshButton;
+	IBOutlet UIBarButtonItem		*goBackButton;
+	IBOutlet UIBarButtonItem		*goForwardButton;
+	UIBarButtonItem					*activityBarItem;
+	UIActivityIndicatorView			*activityIndicator;
+	
+	BOOL							pageLoaded;
 }
 
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) UIAlertView *failAlert;
+@property (nonatomic, retain)		IBOutlet UIWebView				* webView;
+@property (nonatomic, retain)		IBOutlet UIAlertView				* failAlert;
+@property (nonatomic, retain)		IBOutlet UIToolbar				* controlBar;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* stopLoadingButton;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* refreshButton;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* goBackButton;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* goForwardButton;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* activityBarItem;
+@property (nonatomic, retain)		IBOutlet UIActivityIndicatorView				* activityIndicator;
+@property (nonatomic)		BOOL				 pageLoaded;
 
+-(void)updateUIState:(NSString*)state;
+-(IBAction)stopLoading:(id)sender;
+-(IBAction)refreshWebView:(id)sender;
+-(IBAction)goForwardButtonSelected:(id)sender;
+-(IBAction)goBackButonSelected:(id)sender;
+-(void)showActivityIndicator:(BOOL)show;
 @end

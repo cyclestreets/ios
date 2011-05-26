@@ -12,11 +12,11 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
 			<integer value="66"/>
-			<integer value="96"/>
 			<integer value="65"/>
 			<integer value="67"/>
+			<integer value="96"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -4911,7 +4911,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Note: You must have a CycleStreets account to upload photos and routes.</string>
+						<string key="IBUIText">Create CycleStreets account so you can upload photos.</string>
 						<reference key="IBUIFont" ref="628183165"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
@@ -5065,7 +5065,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUIActivityIndicatorView" id="290359918">
 						<reference key="NSNextResponder" ref="860765455"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{188, 209}, {20, 20}}</string>
+						<string key="NSFrame">{{168, 209}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="860765455"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUITag">500</int>
@@ -5076,7 +5076,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUIButton" id="92866889">
 						<reference key="NSNextResponder" ref="860765455"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{216, 203}, {84, 32}}</string>
+						<string key="NSFrame">{{196, 203}, {104, 32}}</string>
 						<reference key="NSSuperview" ref="860765455"/>
 						<reference key="IBUIBackgroundColor" ref="402361540"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -5660,8 +5660,8 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<reference ref="100908342"/>
 							<reference ref="1029637906"/>
 							<reference ref="92866889"/>
-							<reference ref="290359918"/>
 							<reference ref="165537936"/>
+							<reference ref="290359918"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">register</string>
@@ -5859,7 +5859,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AccountViewController</string>
 					<string>UIResponder</string>
-					<string>{{625, 63}, {320, 480}}</string>
+					<string>{{625, 64}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -5907,7 +5907,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDJgAAw2MAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDPAAAw2MAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
