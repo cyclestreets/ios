@@ -63,16 +63,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark helpers
 
 - (void) reload {
-	self.favourites = nil;
-	if (self.routes == nil) {
-		self.routes = [[[NSMutableDictionary alloc] init] autorelease];
-	}
+	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSArray *oldFavourites = [cycleStreets.files favourites];
-	self.favourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count] + 1] autorelease];
-	[self.favourites addObjectsFromArray:oldFavourites];
+	self.favourites = [cycleStreets.files favourites];
 	
 	[self createRowHeightsArray];
+	[self.tableView reloadData];
 }
 
 - (void) clear {
@@ -111,6 +107,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	[self reload];
 }
 
 
@@ -125,7 +122,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-	[self reload];
 	return [self.favourites count];
 }
 
@@ -171,21 +167,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return UITableViewCellEditingStyleDelete;
 }
 
-- (void)deleteRow:(int)row
-{
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+- (void)deleteRow:(int)row{
 	
-	NSMutableArray *favs = [NSMutableArray arrayWithArray:[cycleStreets.files favourites]];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	NSMutableArray *favs=[cycleStreets.files favourites];
 	[favs removeObjectAtIndex:row];
 	[cycleStreets.files setFavourites:favs];
-	[self reload];
+	self.favourites = favs;
+	
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath {
-	DLog(@"commit");
+
 	[self deleteRow:indexPath.row];
 	[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+	
+	// slight hack to match reload to delete animation finished, masks variable height row reloading
+	[self performSelector:@selector(reload) withObject:nil afterDelay:0.25];
+	
 }
 
 
