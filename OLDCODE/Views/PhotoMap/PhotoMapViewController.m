@@ -130,18 +130,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	self.attributionLabel.text = [MapViewController mapAttribution];
 }
 
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
-
-/*
- - (void) beforeMapMove: (RMMapView*) map {
- }
- */
 
 - (void) requestPhotos {
 	

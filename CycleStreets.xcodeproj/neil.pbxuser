@@ -950,24 +950,6 @@
 		vrLen = 1817;
 		vrLoc = 1880;
 	};
-	2859163C138ECCD1002B2155 /* PhotoMapViewController.m:100 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 2863A3CB134E508800A22093 /* PhotoMapViewController.m */;
-		functionName = "-viewDidLoad";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 100;
-		location = CycleStreets;
-		modificationTime = 328212669.901195;
-		originalNumberOfMultipleMatches = 1;
-		state = 1;
-	};
 	2859163E138ECCD7002B2155 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 2872DEEC13283148003995BE /* ItineraryViewController.m */;
@@ -1018,24 +1000,6 @@
 		name = /Users/neil/iPhone/Applications/CycleStreets/ios/NEWCODE/resources/plist/userState.plist;
 		rLen = 0;
 		rLoc = 9223372036854775808;
-	};
-	2859167D138EDCE0002B2155 /* PhotoMapViewController.m:130 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = 2863A3CB134E508800A22093 /* PhotoMapViewController.m */;
-		functionName = "-didNotificationMapStyleChanged";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 130;
-		location = CycleStreets;
-		modificationTime = 328212669.901758;
-		originalNumberOfMultipleMatches = 1;
-		state = 1;
 	};
 	28591689138EDD98002B2155 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -1320,9 +1284,9 @@
 	};
 	2863A3CB134E508800A22093 /* PhotoMapViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1007, 6524}}";
-			sepNavSelRange = "{3847, 0}";
-			sepNavVisRange = "{3156, 1489}";
+			sepNavIntBoundsRect = "{{0, 0}, {1007, 6216}}";
+			sepNavSelRange = "{7748, 0}";
+			sepNavVisRange = "{5881, 1287}";
 		};
 	};
 	2863A3CD134E508800A22093 /* PhotosViewContoller.h */ = {
@@ -2732,7 +2696,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1116, 5068}}";
 			sepNavSelRange = "{4624, 0}";
-			sepNavVisRange = "{0, 1328}";
+			sepNavVisRange = "{0, 1360}";
 		};
 	};
 	28AD60B9131FB54A008527FC /* main.m */ = {
@@ -3583,6 +3547,66 @@
 		rType = 0;
 		vrLen = 1444;
 		vrLoc = 2552;
+	};
+	28BAC5871391596C00EB8798 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2863A3CE134E508800A22093 /* PhotosViewContoller.m */;
+		name = "PhotosViewContoller.m: 122";
+		rLen = 0;
+		rLoc = 3115;
+		rType = 0;
+		vrLen = 1444;
+		vrLoc = 2552;
+	};
+	28BAC5881391596C00EB8798 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28AD60B6131FB54A008527FC /* CycleStreetsAppDelegate.m */;
+		name = "CycleStreetsAppDelegate.m: 153";
+		rLen = 0;
+		rLoc = 4624;
+		rType = 0;
+		vrLen = 1360;
+		vrLoc = 0;
+	};
+	28BAC5891391596C00EB8798 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2863A3CB134E508800A22093 /* PhotoMapViewController.m */;
+		name = "PhotoMapViewController.m: 259";
+		rLen = 17;
+		rLoc = 7660;
+		rType = 0;
+		vrLen = 1625;
+		vrLoc = 6923;
+	};
+	28BAC58A1391596C00EB8798 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2863A3CB134E508800A22093 /* PhotoMapViewController.m */;
+		name = "PhotoMapViewController.m: 261";
+		rLen = 0;
+		rLoc = 7748;
+		rType = 0;
+		vrLen = 1214;
+		vrLoc = 8574;
+	};
+	28BAC58D1391597300EB8798 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2863A3CB134E508800A22093 /* PhotoMapViewController.m */;
+		name = "PhotoMapViewController.m: 261";
+		rLen = 0;
+		rLoc = 7748;
+		rType = 0;
+		vrLen = 1210;
+		vrLoc = 8574;
+	};
+	28BAC59713915A3F00EB8798 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2863A3CB134E508800A22093 /* PhotoMapViewController.m */;
+		name = "PhotoMapViewController.m: 261";
+		rLen = 0;
+		rLoc = 7748;
+		rType = 0;
+		vrLen = 1287;
+		vrLoc = 5881;
 	};
 	28BD6239132623440022B54B /* PBXBookmark */ = {
 		isa = PBXBookmark;
@@ -4575,7 +4599,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = 289A1F94129822E400CF83A9 /* CycleStreets */;
-		activeSDKPreference = iphoneos4.3;
+		activeSDKPreference = iphonesimulator4.3;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* CycleStreets */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* CycleStreets */,
@@ -4585,8 +4609,6 @@
 			2863A56D134E537900A22093 /* Query.m:48 */,
 			284417841356230E0028CCE6 /* TBXMLParser.m:263 */,
 			2831AC2C1362FF0D00EBBA69 /* MapViewController.m:829 */,
-			2859163C138ECCD1002B2155 /* PhotoMapViewController.m:100 */,
-			2859167D138EDCE0002B2155 /* PhotoMapViewController.m:130 */,
 		);
 		codeSenseManager = 289A1FB5129822F900CF83A9 /* Code sense */;
 		executables = (
@@ -4944,6 +4966,12 @@
 			28BAC584139155E500EB8798 /* PBXTextBookmark */ = 28BAC584139155E500EB8798 /* PBXTextBookmark */;
 			28BAC5851391560800EB8798 /* PBXTextBookmark */ = 28BAC5851391560800EB8798 /* PBXTextBookmark */;
 			28BAC5861391560C00EB8798 /* PBXTextBookmark */ = 28BAC5861391560C00EB8798 /* PBXTextBookmark */;
+			28BAC5871391596C00EB8798 /* PBXTextBookmark */ = 28BAC5871391596C00EB8798 /* PBXTextBookmark */;
+			28BAC5881391596C00EB8798 /* PBXTextBookmark */ = 28BAC5881391596C00EB8798 /* PBXTextBookmark */;
+			28BAC5891391596C00EB8798 /* PBXTextBookmark */ = 28BAC5891391596C00EB8798 /* PBXTextBookmark */;
+			28BAC58A1391596C00EB8798 /* PBXTextBookmark */ = 28BAC58A1391596C00EB8798 /* PBXTextBookmark */;
+			28BAC58D1391597300EB8798 /* PBXTextBookmark */ = 28BAC58D1391597300EB8798 /* PBXTextBookmark */;
+			28BAC59713915A3F00EB8798 /* PBXTextBookmark */ = 28BAC59713915A3F00EB8798 /* PBXTextBookmark */;
 			28BD6239132623440022B54B = 28BD6239132623440022B54B /* PBXBookmark */;
 			28BD6277132626CA0022B54B = 28BD6277132626CA0022B54B /* PBXTextBookmark */;
 			28BFD9AE12C01C2C0065995E = 28BFD9AE12C01C2C0065995E /* PBXTextBookmark */;

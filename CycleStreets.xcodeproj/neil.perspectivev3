@@ -257,6 +257,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -328,7 +330,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>176</integer>
+									<integer>171</integer>
 									<integer>159</integer>
 									<integer>147</integer>
 									<integer>139</integer>
@@ -336,7 +338,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 2316}, {342, 873}}</string>
+							<string>{{0, 2637}, {342, 873}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -353,7 +355,7 @@
 							<real>342</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>356 214 1432 932 0 0 1920 1178 </string>
+						<string>182 212 1432 932 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -364,14 +366,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>289A1FBE1298238900CF83A9</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PhotosViewContoller.m</string>
+								<string>PhotoMapViewController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -379,11 +379,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>289A1FBF1298238900CF83A9</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PhotosViewContoller.m</string>
+										<string>PhotoMapViewController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>28BAC5861391560C00EB8798</string>
+										<string>28BAC59713915A3F00EB8798</string>
 										<key>history</key>
 										<array>
 											<string>289A1FC7129823C500CF83A9</string>
@@ -679,7 +679,6 @@
 											<string>28591669138EDBA6002B2155</string>
 											<string>2859166A138EDBA6002B2155</string>
 											<string>28591689138EDD98002B2155</string>
-											<string>2859168A138EDD98002B2155</string>
 											<string>28591696138EE3DE002B2155</string>
 											<string>28591697138EE3DE002B2155</string>
 											<string>285916AF138EE58C002B2155</string>
@@ -688,7 +687,6 @@
 											<string>285916D9138EE69A002B2155</string>
 											<string>285916E3138EEC39002B2155</string>
 											<string>280CAFF213901ACA002FB13A</string>
-											<string>280CB00213901C45002FB13A</string>
 											<string>280CB04113901EEC002FB13A</string>
 											<string>280CB0981390264E002FB13A</string>
 											<string>287045BE139147C6000D60B7</string>
@@ -700,7 +698,9 @@
 											<string>2870460D139150B5000D60B7</string>
 											<string>28BAC5791391554C00EB8798</string>
 											<string>28BAC57B1391554C00EB8798</string>
-											<string>28BAC5851391560800EB8798</string>
+											<string>28BAC5871391596C00EB8798</string>
+											<string>28BAC5881391596C00EB8798</string>
+											<string>28BAC5891391596C00EB8798</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -716,7 +716,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1068, 695}}</string>
 								<key>RubberWindowFrame</key>
-								<string>356 214 1432 932 0 0 1920 1178 </string>
+								<string>182 212 1432 932 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -741,7 +741,7 @@
 										<key>Frame</key>
 										<string>{{10, 27}, {1068, 164}}</string>
 										<key>RubberWindowFrame</key>
-										<string>356 214 1432 932 0 0 1920 1178 </string>
+										<string>182 212 1432 932 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>XCDetailModule</string>
@@ -1001,7 +1001,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>328291852.53442103</real>
+	<real>328292927.83983201</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -1023,7 +1023,7 @@
 		<string>/Users/neil/iPhone/Applications/CycleStreets/ios/CycleStreets.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>356 214 1432 932 0 0 1920 1178 </string>
+	<string>182 212 1432 932 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
