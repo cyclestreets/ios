@@ -202,14 +202,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	{
 		tileSource = [[[RMOpenStreetMapSource alloc] init] autorelease];
 	}
-	/*
-	else if ([mapStyle isEqualToString:MAPPING_BASE_CLOUDMADE])
-	{
-		tileSource = [[[RMCloudMadeMapSource alloc] initWithAccessKey:CLOUDMADE_ACCESS_KEY
-														  styleNumber:CLOUDMADE_CYCLE_STYLE]
-					  autorelease];
-	}
-	 */
 	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
 	{
 		//open cycle map
@@ -286,7 +278,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			DLog(@"stateStart");
 			self.routeButton.title = @"Set start";
 			self.routeButton.style = UIBarButtonItemStylePlain;
-			self.routeButton.enabled = NO;
+			//self.routeButton.enabled = NO;
 			self.deleteButton.enabled = NO;
 			self.nameButton.enabled = YES;
 			break;
@@ -294,14 +286,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			DLog(@"stateLocatingStart");
 			self.routeButton.title = @"Locating..";
 			self.routeButton.style = UIBarButtonItemStylePlain;
-			self.routeButton.enabled = NO;
+			//self.routeButton.enabled = NO;
 			self.deleteButton.enabled = NO;
 			self.nameButton.enabled = NO;
 			break;
 		case stateEnd:
 			DLog(@"stateEnd");
 			self.routeButton.title = @"Set finish";
-			self.routeButton.enabled = NO;
+			//self.routeButton.enabled = NO;
 			self.routeButton.style = UIBarButtonItemStylePlain;
 			self.deleteButton.enabled = YES;
 			self.nameButton.enabled = YES;
@@ -309,7 +301,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		case stateLocatingEnd:
 			DLog(@"stateLocatingEnd");
 			self.routeButton.title = @"Locating..";
-			self.routeButton.enabled = NO;
+			//self.routeButton.enabled = NO;
 			self.routeButton.style = UIBarButtonItemStylePlain;
 			self.deleteButton.enabled = YES;
 			self.nameButton.enabled = NO;
@@ -342,10 +334,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	DLog(@">>>");
 	
 	firstTimeStart = YES;
 	firstTimeFinish = YES;
@@ -362,14 +352,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 														   target:self
 														   action:@selector(didLocation)]
 						   autorelease];
-	self.locationButton.width = 26;
+	self.locationButton.width = 40;
 	
 	self.deleteButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
 															style:UIBarButtonItemStyleBordered
 														   target:self
 														   action:@selector(didDelete)]
 						   autorelease];
-	self.deleteButton.width = 30;
+	self.deleteButton.width = 40;
 	
 	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
 	[items insertObject:self.deleteButton atIndex:0];

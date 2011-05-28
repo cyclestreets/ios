@@ -81,7 +81,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @synthesize picker;
 @synthesize jpegData;
-
+@synthesize locationManagerIsLocating;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -90,9 +90,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// set up location manager
 	self.accuracy.title = @"";
 	locationManager = [[CLLocationManager alloc] init];
+	locationManager.desiredAccuracy=kCLLocationAccuracyHundredMeters;
 	locationManager.delegate = self;
-	[locationManager startUpdatingLocation];
-	
+	locationManagerIsLocating=NO;
 	
 	// set up an alert to use
 	self.sendingAlert = [[BusyAlert alloc] initWithTitle:@"CycleStreets" message:@"Sending photomap.."];
@@ -112,6 +112,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self enableButtons:YES];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+	[self stopUpdatingLocation:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+	if(locationManagerIsLocating==NO){
+		locationManagerIsLocating=YES;
+		[locationManager startUpdatingLocation];		
+		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+	}
+}
 
 
 #pragma mark alerts
@@ -616,12 +627,44 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 
 - (void)locationManager:(CLLocationManager *)manager
 	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation
-{
+		   fromLocation:(CLLocation *)oldLocation{
 	DLog(@">>>");
+	
+	
 	NSInteger horizontalAccuracy = [newLocation horizontalAccuracy];
-	self.location = newLocation;
-	accuracy.title = [NSString stringWithFormat:@"%dm", horizontalAccuracy];
+    accuracy.title = [NSString stringWithFormat:@"%dm", horizontalAccuracy];
+	
+	NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
+	
+    if (locationAge > 5.0) return;
+    if (newLocation.horizontalAccuracy < 0) return;
+    // test the measurement to see if it is more accurate than the previous measurement
+    if (location == nil || location.horizontalAccuracy > newLocation.horizontalAccuracy) {
+        // store the location as the "best effort"
+        self.location = newLocation;
+		
+        if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
+            [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+			
+        }
+		
+		
+    }
+	
+}
+
+- (void)stopUpdatingLocation:(NSString *)state {
+	
+	BetterLog(@"");
+	
+	if(locationManagerIsLocating==YES){
+		locationManagerIsLocating=NO;
+		// remove the delayed timeout selector
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+	
+		[locationManager stopUpdatingLocation];
+	}
 }
 
 - (void)locationManager:(CLLocationManager *)manager

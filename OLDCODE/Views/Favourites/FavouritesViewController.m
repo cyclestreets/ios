@@ -174,7 +174,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[favs removeObjectAtIndex:row];
 	[cycleStreets.files setFavourites:favs];
 	self.favourites = favs;
-	
+	[rowHeightsArray removeObjectAtIndex:row];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -182,9 +182,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 	[self deleteRow:indexPath.row];
 	[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-	
-	// slight hack to match reload to delete animation finished, masks variable height row reloading
-	[self performSelector:@selector(reload) withObject:nil afterDelay:0.25];
 	
 }
 

@@ -60,8 +60,9 @@ UITextViewDelegate, UIActionSheetDelegate> {
 	
 	PhotoMapImageLocationViewController *preview;
 	
-	CLLocationManager *locationManager;
-	CLLocation *location;
+	CLLocationManager			*locationManager;
+	CLLocation					*location;
+	BOOL						locationManagerIsLocating;
 	
 	BusyAlert *sendingAlert;
 	UIAlertView *alert;
@@ -143,6 +144,7 @@ UITextViewDelegate, UIActionSheetDelegate> {
 
 @property (nonatomic, copy) NSString *lastUploadId;
 @property (nonatomic, retain) NSData *jpegData;
+@property (nonatomic, assign) BOOL locationManagerIsLocating;
 
 
 - (IBAction) didCamera;
@@ -155,5 +157,7 @@ UITextViewDelegate, UIActionSheetDelegate> {
 - (IBAction) didCaptionCancel;
 
 -(void)enableButtons:(BOOL)enable;
+
+- (void)stopUpdatingLocation:(NSString *)state;
 
 @end
