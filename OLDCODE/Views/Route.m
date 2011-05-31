@@ -192,7 +192,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
 	}else {
-		return [NSString stringWithFormat:@"%@ Km", kmSpeed];
+		return [NSString stringWithFormat:@"%@ km/h", kmSpeed];
 	}
 }
 

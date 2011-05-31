@@ -13,10 +13,10 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="96"/>
+			<integer value="94"/>
+			<integer value="66"/>
 			<integer value="67"/>
 			<integer value="65"/>
-			<integer value="66"/>
-			<integer value="94"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -4746,14 +4746,14 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="679338271">
 						<reference key="NSNextResponder" ref="179487860"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 6}, {125, 22}}</string>
+						<string key="NSFrame">{{20, 6}, {130, 22}}</string>
 						<reference key="NSSuperview" ref="179487860"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Existing Users:</string>
+						<string key="IBUIText">Existing users:</string>
 						<reference key="IBUIFont" ref="14276408"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">2</int>
@@ -4863,7 +4863,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="701447254">
 						<reference key="NSNextResponder" ref="179487860"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 97}, {155, 38}}</string>
+						<string key="NSFrame">{{20, 97}, {155, 44}}</string>
 						<reference key="NSSuperview" ref="179487860"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -4896,7 +4896,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Login to upload photos and routes.</string>
+						<string key="IBUIText">Signin to upload photos and routes.</string>
 						<reference key="IBUIFont" ref="628183165"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
@@ -4925,14 +4925,14 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="1029637906">
 						<reference key="NSNextResponder" ref="860765455"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 3}, {93, 21}}</string>
+						<string key="NSFrame">{{20, 3}, {93, 22}}</string>
 						<reference key="NSSuperview" ref="860765455"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">New Users:</string>
+						<string key="IBUIText">New users:</string>
 						<reference key="IBUIFont" ref="14276408"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">2</int>
@@ -4954,7 +4954,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Create CycleStreets account so you can upload photos.</string>
+						<string key="IBUIText">Create a CycleStreets account so you can upload photos.</string>
 						<reference key="IBUIFont" ref="628183165"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
@@ -5085,7 +5085,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="165537936">
 						<reference key="NSNextResponder" ref="860765455"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 199}, {155, 41}}</string>
+						<string key="NSFrame">{{20, 199}, {140, 53}}</string>
 						<reference key="NSSuperview" ref="860765455"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -5119,7 +5119,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUIButton" id="92866889">
 						<reference key="NSNextResponder" ref="860765455"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{196, 203}, {104, 32}}</string>
+						<string key="NSFrame">{{181, 203}, {119, 32}}</string>
 						<reference key="NSSuperview" ref="860765455"/>
 						<reference key="IBUIBackgroundColor" ref="402361540"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -5129,7 +5129,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="262218019"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Register</string>
+						<string key="IBUINormalTitle">Create account</string>
 						<reference key="IBUIHighlightedTitleColor" ref="379439176"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
@@ -5720,9 +5720,9 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<reference ref="38436635"/>
 							<reference ref="100908342"/>
 							<reference ref="1029637906"/>
-							<reference ref="92866889"/>
 							<reference ref="165537936"/>
 							<reference ref="290359918"/>
+							<reference ref="92866889"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">register</string>
@@ -5888,6 +5888,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<string>65.IBEditorWindowLastContentRect</string>
 					<string>65.IBPluginDependency</string>
 					<string>65.IBViewBoundsToFrameTransform</string>
+					<string>65.IBViewEditorWindowController.showingBoundsRectangles</string>
 					<string>66.CustomClassName</string>
 					<string>66.IBEditorWindowLastContentRect</string>
 					<string>66.IBPluginDependency</string>
@@ -5990,7 +5991,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDPAAAw2MAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDKAAAw2MAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -6026,8 +6027,9 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AQAAAABAoAAAA</bytes>
 					</object>
+					<boolean value="YES"/>
 					<string>UIControl</string>
-					<string>{{18, 420}, {320, 155}}</string>
+					<string>{{22, 690}, {320, 155}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwwUAAA</bytes>
@@ -6079,7 +6081,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDWQAAw2cAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDPQAAw2kAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

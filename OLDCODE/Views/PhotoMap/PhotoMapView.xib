@@ -221,26 +221,27 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="406155970"/>
 							</object>
+							<object class="IBUIBarButtonItem" id="996095365">
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="406155970"/>
+								<int key="IBUISystemItemIdentifier">12</int>
+							</object>
 							<object class="IBUIBarButtonItem" id="250918959">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="406155970"/>
-								<int key="IBUISystemItemIdentifier">5</int>
+								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
 							<object class="IBUIBarButtonItem" id="692168983">
 								<string key="IBUITitle">Photomap</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<float key="IBUIWidth">113</float>
 								<reference key="IBUIToolbar" ref="406155970"/>
 							</object>
 							<object class="IBUIBarButtonItem" id="888899059">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="406155970"/>
 								<int key="IBUISystemItemIdentifier">5</int>
-							</object>
-							<object class="IBUIBarButtonItem" id="996095365">
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">1</int>
-								<reference key="IBUIToolbar" ref="406155970"/>
-								<int key="IBUISystemItemIdentifier">12</int>
 							</object>
 						</object>
 						<object class="NSColor" key="IBUITintColor">
@@ -357,8 +358,8 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="430133543"/>
 							<reference ref="370823789"/>
-							<reference ref="406155970"/>
 							<reference ref="204032061"/>
+							<reference ref="406155970"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -396,44 +397,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="406155970"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="856482428"/>
-							<reference ref="250918959"/>
-							<reference ref="692168983"/>
-							<reference ref="888899059"/>
-							<reference ref="996095365"/>
-						</object>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">6</int>
-						<reference key="object" ref="856482428"/>
-						<reference key="parent" ref="406155970"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="996095365"/>
-						<reference key="parent" ref="406155970"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">13</int>
-						<reference key="object" ref="250918959"/>
-						<reference key="parent" ref="406155970"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">26</int>
-						<reference key="object" ref="692168983"/>
-						<reference key="parent" ref="406155970"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="888899059"/>
-						<reference key="parent" ref="406155970"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">28</int>
 						<reference key="object" ref="204032061"/>
 						<object class="NSMutableArray" key="children">
@@ -459,6 +422,44 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<reference key="object" ref="207574113"/>
 						<reference key="parent" ref="204032061"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">5</int>
+						<reference key="object" ref="406155970"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="996095365"/>
+							<reference ref="888899059"/>
+							<reference ref="692168983"/>
+							<reference ref="250918959"/>
+							<reference ref="856482428"/>
+						</object>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">7</int>
+						<reference key="object" ref="996095365"/>
+						<reference key="parent" ref="406155970"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">27</int>
+						<reference key="object" ref="888899059"/>
+						<reference key="parent" ref="406155970"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">26</int>
+						<reference key="object" ref="692168983"/>
+						<reference key="parent" ref="406155970"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">13</int>
+						<reference key="object" ref="250918959"/>
+						<reference key="parent" ref="406155970"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">6</int>
+						<reference key="object" ref="856482428"/>
+						<reference key="parent" ref="406155970"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -469,6 +470,7 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 					<string>-2.CustomClassName</string>
 					<string>1.IBEditorWindowLastContentRect</string>
 					<string>1.IBPluginDependency</string>
+					<string>1.IBUserGuides</string>
 					<string>13.IBPluginDependency</string>
 					<string>17.CustomClassName</string>
 					<string>17.IBPluginDependency</string>
@@ -495,8 +497,16 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>PhotoMapViewController</string>
 					<string>UIResponder</string>
-					<string>{{424, 220}, {320, 480}}</string>
+					<string>{{424, 224}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSMutableArray">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="IBUserGuide">
+							<reference key="view" ref="191373211"/>
+							<double key="location">160</double>
+							<int key="affinity">0</int>
+						</object>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>BlueCircleView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -521,7 +531,9 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<bytes key="NSTransformStruct">P4AAAL+AAABCgAAAw4EAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform"/>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwiQAAA</bytes>
+					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>

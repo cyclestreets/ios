@@ -152,8 +152,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSNumber *routeIdentifier = [NSNumber numberWithInt:[[favourites objectAtIndex:indexPath.row] intValue]];
-	Route *route = [routes objectForKey:routeIdentifier];
+	NSInteger routeIdentifier = [[favourites objectAtIndex:indexPath.row] intValue];
+	Route *route = [self routeWithIdentifier:routeIdentifier];
 	if (self.routeSummary == nil) {
 		self.routeSummary = [[RouteSummary alloc]init];
 	}

@@ -274,7 +274,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[dict release];
 	[request release];
 	
-	[self showProgressHUDWithMessage:@"Logging in"];
+	[self showProgressHUDWithMessage:@"Signing in"];
 	
 }
 

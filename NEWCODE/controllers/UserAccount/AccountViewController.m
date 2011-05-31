@@ -229,7 +229,7 @@ static NSString *const STRINGID=@"account";
 	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Sign in"];
 	[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	button=(UIButton*)[registerView viewWithTag:kSubmitButtonTag];
-	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Register"];
+	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Create account"];
 	[button addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	button=(UIButton*)[retrieveView viewWithTag:kSubmitButtonTag];
 	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Submit"];
@@ -390,6 +390,7 @@ static NSString *const STRINGID=@"account";
 	if([state isEqualToString:SUCCESS]){
 		
 		viewMode=[UserAccount sharedInstance].accountMode;
+		[self showMessageUIForView:loginView withMessage:@""];
 		[self createNonPersistentUI];
 		
 	}else if ([state isEqualToString:ERROR]) {
@@ -407,6 +408,7 @@ static NSString *const STRINGID=@"account";
 	if([state isEqualToString:SUCCESS]){
 		
 		viewMode=[UserAccount sharedInstance].accountMode;
+		[self showMessageUIForView:registerView withMessage:@""];
 		[self createNonPersistentUI];
 		
 	}else if ([state isEqualToString:ERROR]) {
@@ -465,7 +467,7 @@ static NSString *const STRINGID=@"account";
 		leftLabel.text=@"";
 		rightLabel.text=@"Sign in";
 	}else {
-		leftLabel.text=@"Register";
+		leftLabel.text=@"Create account";
 		rightLabel.text=@"";
 	}
 

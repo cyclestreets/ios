@@ -121,15 +121,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 - (void)warnOnFirstRoute {
-	//CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	//NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
-	//NSString *experienceLevel = [misc objectForKey:@"experienced"];
-	/*
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
+	NSString *experienceLevel = [misc objectForKey:@"experienced"];
+	
 	if (experienceLevel == nil) {
 		[misc setObject:@"1" forKey:@"experienced"];
 		[cycleStreets.files setMisc:misc];
 		
-		self.firstAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
+		UIAlertView *firstAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
 													 message:@"Route quality cannot be guaranteed. Please proceed at your own risk. Do not use a mobile while cycling."
 													delegate:self
 										   cancelButtonTitle:@"OK"
@@ -139,14 +140,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		[misc setObject:@"2" forKey:@"experienced"];
 		[cycleStreets.files setMisc:misc];
 		
-		self.optionsAlert = [[UIAlertView alloc] initWithTitle:@"Routing modes"
+		UIAlertView *optionsAlert = [[UIAlertView alloc] initWithTitle:@"Routing modes"
 													   message:@"You can change between fastest / quietest / balanced routing type on the Settings page under 'More', before you plan a route."
 													  delegate:self
 											 cancelButtonTitle:@"OK"
 											 otherButtonTitles:nil];
 		[optionsAlert show];						
 	}	
-	 */
+	 
 }
 
 

@@ -234,8 +234,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (id)init {
 	BetterLog(@"");
 	if (self = [super init]) {
-		firstTimeStart = YES;
-		firstTimeFinish = YES;
+		firstTimeStart = NO;
+		firstTimeFinish = NO;
 	}
 	return self;
 }
@@ -335,10 +335,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (void)viewDidLoad {
+	
     [super viewDidLoad];
 	
-	firstTimeStart = YES;
-	firstTimeFinish = YES;
+	self.cycleStreets = [CycleStreets sharedInstance];
+	
+	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
+	NSString *experienceLevel = [misc objectForKey:@"experienced"];
+	if (experienceLevel==nil) {
+		firstTimeStart = YES;
+		firstTimeFinish = YES;
+	}
 	
 	self.mapView.hidden = YES;
 	
@@ -362,16 +369,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.deleteButton.width = 40;
 	
 	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
-	[items insertObject:self.deleteButton atIndex:0];
 	[items insertObject:self.locationButton atIndex:0];
+	[items insertObject:self.deleteButton atIndex:2];
 	self.toolBar.items = items;
-	
-	cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets retain];
 	
 	//Don't do the first time alert if we've already planned a route.
 	if (firstTimeStart || firstTimeFinish) {
-		NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
 		if ([misc objectForKey:@"experienced"] != nil) {
 			firstTimeStart = NO;
 			firstTimeFinish = NO;

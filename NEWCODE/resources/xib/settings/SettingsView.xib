@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="95"/>
+			<integer value="92"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -528,7 +528,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Controls what speed your route's duration estimation is based upon. (Shown in units of selected route distance)</string>
+								<string key="IBUIText">Controls what speed your route's duration estimation is based upon. (Shown in units of selected route distance.)</string>
 								<reference key="IBUIFont" ref="307419791"/>
 								<reference key="IBUITextColor" ref="820179691"/>
 								<nil key="IBUIHighlightedColor"/>
@@ -641,7 +641,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Distance unit for all routes</string>
+								<string key="IBUIText">Distance unit for all routes.</string>
 								<reference key="IBUIFont" ref="307419791"/>
 								<reference key="IBUITextColor" ref="820179691"/>
 								<nil key="IBUIHighlightedColor"/>
@@ -1083,7 +1083,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>SettingsViewController</string>
 					<string>UIResponder</string>
-					<string>{{148, 121}, {319, 635}}</string>
+					<string>{{426, 393}, {319, 635}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1238,13 +1238,13 @@
 					<string key="className">SettingsViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">changed</string>
+						<string key="NS.key.0">changed:</string>
 						<string key="NS.object.0">id</string>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">changed</string>
+						<string key="NS.key.0">changed:</string>
 						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">changed</string>
+							<string key="name">changed:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>

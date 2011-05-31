@@ -164,7 +164,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[speedControl setTitle:@"15" forSegmentAtIndex:2];
 		
 	}else {
-		speedTitleLabel.text=@"Route speed (kmh)";
+		speedTitleLabel.text=@"Route speed (km/h)";
 		
 		[speedControl setTitle:@"16" forSegmentAtIndex:0];
 		[speedControl setTitle:@"20" forSegmentAtIndex:1];

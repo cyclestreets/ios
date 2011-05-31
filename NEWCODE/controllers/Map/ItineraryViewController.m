@@ -185,7 +185,7 @@
 
 -(void)createNonPersistentUI{
 	
-	//BetterLog(@"");
+	BetterLog(@"");
 	
 	if(route==nil){
 		
@@ -328,15 +328,15 @@
 		infolabel.textAlignment=UITextAlignmentCenter;
 		infolabel.hasShadow=YES;
 		infolabel.textColor=[UIColor grayColor];
-		infolabel.text=@"Once you have an active route You can view the itinerary for it here, please plan or load a saved route.";
+		infolabel.text=@"Once you have loaded a route, the itinerary will be shown here.";
 		[contentContainer addSubview:infolabel];					
 		[infolabel release];
 		
-		UIButton *routeButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan Route"];
+		UIButton *routeButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan route"];
 		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:routeButton];
 		
-		UIButton *savedButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Saved Route"];
+		UIButton *savedButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Saved routes"];
 		[savedButton addTarget:self action:@selector(swapToSavedRoutesView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:savedButton];
 		
