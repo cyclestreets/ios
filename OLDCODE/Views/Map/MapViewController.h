@@ -58,13 +58,14 @@ typedef enum PlanningStateT PlanningState;
 	UIBarButtonItem *nameButton;
 	UIBarButtonItem *routeButton;
 	UIBarButtonItem *deleteButton;
+	UILabel			*contextLabel;
 	
 	UILabel *attributionLabel;
 	
 	CycleStreets *cycleStreets;		//application data
-	RMMapView *mapView;				//map of current area
-	RouteLineView *lineView;		//overlay route lines on top of map
-	BlueCircleView *blueCircleView;	//overlay GPS location
+	IBOutlet RMMapView *mapView;				//map of current area
+	IBOutlet RouteLineView *lineView;		//overlay route lines on top of map
+	IBOutlet BlueCircleView *blueCircleView;	//overlay GPS location
 	
 	InitialLocation *initialLocation;
 	CLLocationManager *locationManager; //move out of this class into app, or app sub, if/when we generalise.
@@ -94,6 +95,7 @@ typedef enum PlanningStateT PlanningState;
 	UIAlertView *noLocationAlert;
 	
 	PlanningState planningState;
+	PlanningState oldPlanningState;
 	
 	MBProgressHUD		*HUD;
 }
@@ -103,7 +105,8 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, retain)	IBOutlet UIActivityIndicatorView	*locatingIndicator;
 @property (nonatomic, retain)	IBOutlet UIBarButtonItem	*nameButton;
 @property (nonatomic, retain)	IBOutlet UIBarButtonItem	*routeButton;
-@property (nonatomic, retain)	 UIBarButtonItem	*deleteButton;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem	*deleteButton;
+@property (nonatomic, retain)	IBOutlet UILabel	*contextLabel;
 @property (nonatomic, retain)	IBOutlet UILabel	*attributionLabel;
 @property (nonatomic, retain)	CycleStreets	*cycleStreets;
 @property (nonatomic, retain)	IBOutlet RMMapView	*mapView;
@@ -129,9 +132,8 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*startFinishAlert;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*noLocationAlert;
 @property (nonatomic, assign)	PlanningState	planningState;
+@property (nonatomic, assign)	PlanningState	oldPlanningState;
 @property (nonatomic, retain)	MBProgressHUD	*HUD;
-
-
 
 
 - (IBAction) didZoomIn;

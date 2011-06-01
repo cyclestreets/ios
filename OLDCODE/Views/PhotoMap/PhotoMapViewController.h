@@ -61,8 +61,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSMutableArray *photoMarkers;
 	
 	BOOL photomapQuerying;
-	BOOL doingLocation;
 	BOOL showingPhotos;
+	BOOL locationManagerIsLocating;
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
@@ -74,6 +74,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain) IBOutlet UIView *introView;
 @property (nonatomic, retain) IBOutlet UIButton *introButton;
 @property (nonatomic, retain)	MBProgressHUD	*progressHud;
+@property (nonatomic, retain)	CLLocation	*lastLocation;
+
 
 
 - (IBAction) didZoomIn;
@@ -86,10 +88,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw;
 
-- (void)stopDoingLocation;
-- (void)startDoingLocation;
 - (void)stopShowingPhotos;
 - (void)startShowingPhotos;
+- (void)stopUpdatingLocation:(NSString *)state;
+- (void)startlocationManagerIsLocating;
+- (void)stoplocationManagerIsLocating;
 
 -(void)showProgressHud:(BOOL)show;
 -(void)removeHUD;

@@ -12,7 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="49"/>
+			<integer value="64"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -36,6 +37,36 @@
 			<object class="IBProxyObject" id="975951072">
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+			</object>
+			<object class="IBUILabel" id="44203545">
+				<reference key="NSNextResponder"/>
+				<int key="NSvFlags">292</int>
+				<string key="NSFrameSize">{170, 22}</string>
+				<reference key="NSSuperview"/>
+				<bool key="IBUIOpaque">NO</bool>
+				<bool key="IBUIClipsSubviews">YES</bool>
+				<int key="IBUIContentMode">7</int>
+				<bool key="IBUIUserInteractionEnabled">NO</bool>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<string key="IBUIText">Label</string>
+				<object class="NSFont" key="IBUIFont">
+					<string key="NSName">Helvetica-Bold</string>
+					<double key="NSSize">18</double>
+					<int key="NSfFlags">16</int>
+				</object>
+				<object class="NSColor" key="IBUITextColor" id="561794843">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MQA</bytes>
+				</object>
+				<reference key="IBUIHighlightedColor" ref="561794843"/>
+				<object class="NSColor" key="IBUIShadowColor">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
+				</object>
+				<int key="IBUIBaselineAdjustment">1</int>
+				<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+				<float key="IBUIMinimumFontSize">10</float>
+				<int key="IBUITextAlignment">1</int>
 			</object>
 			<object class="IBUIView" id="191373211">
 				<reference key="NSNextResponder"/>
@@ -149,10 +180,7 @@
 				</object>
 				<string key="NSFrameSize">{320, 460}</string>
 				<reference key="NSSuperview"/>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MQA</bytes>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="561794843"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -186,30 +214,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">mapView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="243814751"/>
-					</object>
-					<int key="connectionID">33</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lineView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="179542912"/>
-					</object>
-					<int key="connectionID">47</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">blueCircleView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="150973032"/>
-					</object>
-					<int key="connectionID">50</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">toolBar</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="1042433907"/>
@@ -239,6 +243,38 @@
 						<reference key="destination" ref="895851880"/>
 					</object>
 					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">blueCircleView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="150973032"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">lineView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="179542912"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mapView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="243814751"/>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">contextLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="44203545"/>
+					</object>
+					<int key="connectionID">65</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -307,15 +343,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="233746530"/>
 							<reference ref="246722993"/>
-							<reference ref="948203256"/>
 							<reference ref="406825430"/>
+							<reference ref="948203256"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="948203256"/>
-						<reference key="parent" ref="1042433907"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">29</int>
@@ -331,6 +362,16 @@
 						<int key="objectID">60</int>
 						<reference key="object" ref="406825430"/>
 						<reference key="parent" ref="1042433907"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">16</int>
+						<reference key="object" ref="948203256"/>
+						<reference key="parent" ref="1042433907"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">64</int>
+						<reference key="object" ref="44203545"/>
+						<reference key="parent" ref="0"/>
 					</object>
 				</object>
 			</object>
@@ -353,6 +394,8 @@
 					<string>49.IBPluginDependency</string>
 					<string>57.IBPluginDependency</string>
 					<string>60.IBPluginDependency</string>
+					<string>64.IBEditorWindowLastContentRect</string>
+					<string>64.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 					<string>9.IBViewBoundsToFrameTransform</string>
 				</object>
@@ -360,7 +403,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MapViewController</string>
 					<string>UIResponder</string>
-					<string>{{779, 338}, {320, 480}}</string>
+					<string>{{609, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -372,6 +415,8 @@
 					<string>BlueCircleView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>{{0, 723}, {170, 22}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -395,7 +440,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">60</int>
+			<int key="maxID">65</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -479,6 +524,8 @@
 							<string>attributionLabel</string>
 							<string>blueCircleView</string>
 							<string>clearAlert</string>
+							<string>contextLabel</string>
+							<string>deleteButton</string>
 							<string>firstAlert</string>
 							<string>lineView</string>
 							<string>locatingIndicator</string>
@@ -496,6 +543,8 @@
 							<string>UILabel</string>
 							<string>BlueCircleView</string>
 							<string>UIAlertView</string>
+							<string>UILabel</string>
+							<string>UIBarButtonItem</string>
 							<string>UIAlertView</string>
 							<string>RouteLineView</string>
 							<string>UIActivityIndicatorView</string>
@@ -516,6 +565,8 @@
 							<string>attributionLabel</string>
 							<string>blueCircleView</string>
 							<string>clearAlert</string>
+							<string>contextLabel</string>
+							<string>deleteButton</string>
 							<string>firstAlert</string>
 							<string>lineView</string>
 							<string>locatingIndicator</string>
@@ -544,6 +595,14 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">clearAlert</string>
 								<string key="candidateClassName">UIAlertView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">contextLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">deleteButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">firstAlert</string>

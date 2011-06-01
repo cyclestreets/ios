@@ -48,6 +48,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @implementation CycleStreetsAppDelegate
 @synthesize window;
+@synthesize splashView;
 @synthesize tabBarController;
 @synthesize firstAlert;
 @synthesize secondAlert;
@@ -58,15 +59,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize errorAlert;
 @synthesize startupmanager;
 @synthesize favourites;
-@synthesize routeTable;
 @synthesize map;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [window release], window = nil;
+    [splashView release], splashView = nil;
     [tabBarController release], tabBarController = nil;
     [firstAlert release], firstAlert = nil;
     [secondAlert release], secondAlert = nil;
@@ -77,11 +78,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [errorAlert release], errorAlert = nil;
     [startupmanager release], startupmanager = nil;
     [favourites release], favourites = nil;
-    [routeTable release], routeTable = nil;
     [map release], map = nil;
 	
     [super dealloc];
 }
+
 
 
 
@@ -122,10 +123,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	DLog(@"application didFinishLaunchingWithOptions");
 
+	[self appendStartUpView];
 	
 	startupmanager=[[StartupManager alloc]init];
 	startupmanager.delegate=self;
 	[startupmanager doStartupSequence];
+	
+	
 	
 	return YES;
 }
@@ -156,9 +160,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// Stage popover
 	stage = [[Stage alloc] initWithNibName:@"Stage" bundle:nil];
 	
-	//have a busy alert ready to use
-	//busyAlert = [[BusyAlert alloc] initWithTitle:@"Obtaining route" message:nil];
-	
 	// error alert too
 	errorAlert = [[UIAlertView alloc]
 				  initWithTitle:@"Error"
@@ -173,6 +174,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[window makeKeyAndVisible];	
 	
 	[self performSelector:@selector(backgroundSetup) withObject:nil afterDelay:0.0];
+	[self removeStartupView];
 	
 }
 
@@ -186,7 +188,59 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self saveContext];
 }
 
+#pragma mark UI Startup overlay
 
+//
+/***********************************************
+ * @description			Add active startup view to takeover from Default image while App is completing Startup
+ ***********************************************/
+//
+-(void)appendStartUpView{
+	
+	BetterLog(@"");
+	
+	// animate defaultPNG off screen to smooth out transition to ui state
+	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
+	splashView.image = [UIImage imageNamed:@"Default.png"];
+	
+#if ISDEVELOPMENT
+	UILabel *versionLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 12)];
+	versionLabel.font=[UIFont systemFontOfSize:11];
+	versionLabel.textColor=[UIColor whiteColor];
+	versionLabel.backgroundColor=[UIColor clearColor];
+	NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
+	versionLabel.text=[NSString stringWithFormat:@"version: %@",[infoDict objectForKey:@"CFBundleVersion"]];
+	[splashView addSubview:versionLabel];
+	[versionLabel release];
+#endif
+	
+	
+	[window addSubview:splashView];
+	[window bringSubviewToFront:splashView];
+	
+}
+
+-(void)removeStartupView{
+	
+	BetterLog(@"");
+	
+	// reset to front because tab controller will be in front now
+	[window bringSubviewToFront:splashView];
+	
+	[UIView beginAnimations:nil context:nil];
+	[UIView	setAnimationDelay:1];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:window cache:YES];
+	[UIView setAnimationDelegate:self]; 
+	[UIView setAnimationDidStopSelector:@selector(startupAnimationDone:finished:context:)];
+	splashView.alpha = 0.0;
+	[UIView commitAnimations];
+}
+
+- (void)startupAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+	[splashView removeFromSuperview];
+	[splashView release];
+}
 
 
 //
@@ -217,12 +271,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				if ([vcClass isEqualToString:@"MapViewController"]) {
 					map=(MapViewController*)vccontroller;
 				}
-				/*
-				if ([vcClass isEqualToString:@"RouteTableViewController"]) {
-					routeTable=(RouteTableViewController*)vccontroller;
-				}
-				 */
-				//
+				
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
 				if (isVC==YES) {

@@ -645,8 +645,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
             [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
-			
         }
 		
 		

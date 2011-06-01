@@ -107,6 +107,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize nameButton;
 @synthesize routeButton;
 @synthesize deleteButton;
+@synthesize contextLabel;
 @synthesize attributionLabel;
 @synthesize cycleStreets;
 @synthesize mapView;
@@ -132,6 +133,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize startFinishAlert;
 @synthesize noLocationAlert;
 @synthesize planningState;
+@synthesize oldPlanningState;
 @synthesize HUD;
 
 //=========================================================== 
@@ -146,6 +148,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [nameButton release], nameButton = nil;
     [routeButton release], routeButton = nil;
     [deleteButton release], deleteButton = nil;
+    [contextLabel release], contextLabel = nil;
     [attributionLabel release], attributionLabel = nil;
     [cycleStreets release], cycleStreets = nil;
     [mapView release], mapView = nil;
@@ -267,8 +270,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	NSLog(@"gotoState... before");
 	[self logState];
-
+	
+	self.oldPlanningState=planningState;
 	self.planningState = newPlanningState;
+	
+	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
 	
 	NSLog(@"gotoState... after");
 	[self logState];
@@ -276,48 +282,52 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	switch (self.planningState) {
 		case stateStart:
 			DLog(@"stateStart");
-			self.routeButton.title = @"Set start";
-			self.routeButton.style = UIBarButtonItemStylePlain;
-			//self.routeButton.enabled = NO;
-			self.deleteButton.enabled = NO;
-			self.nameButton.enabled = YES;
+			
+			contextLabel.text=@"Set start";
+			
+			// will only execute if current i4 is not this label
+			UILabel *cilabel=(UILabel*)[[items objectAtIndex:4] customView];
+			if(cilabel==nil){
+				[items replaceObjectAtIndex:4 withObject:[[UIBarButtonItem alloc] initWithCustomView:contextLabel]];
+				[self.toolBar setItems:items];
+			}
+			
+			
 			break;
 		case stateLocatingStart:
-			DLog(@"stateLocatingStart");
-			self.routeButton.title = @"Locating..";
-			self.routeButton.style = UIBarButtonItemStylePlain;
-			//self.routeButton.enabled = NO;
-			self.deleteButton.enabled = NO;
-			self.nameButton.enabled = NO;
-			break;
+		break;
 		case stateEnd:
 			DLog(@"stateEnd");
-			self.routeButton.title = @"Set finish";
-			//self.routeButton.enabled = NO;
-			self.routeButton.style = UIBarButtonItemStylePlain;
-			self.deleteButton.enabled = YES;
-			self.nameButton.enabled = YES;
+			
+			contextLabel.text = @"Set finish";
+			
+			// will only execute if current i4 is not this label
+			UILabel *clabel=(UILabel*)[[items objectAtIndex:4] customView];
+			if(clabel==nil){
+				[items replaceObjectAtIndex:4 withObject:[[UIBarButtonItem alloc] initWithCustomView:contextLabel]];
+				[self.toolBar setItems:items ];
+			}
+			
 			break;
 		case stateLocatingEnd:
-			DLog(@"stateLocatingEnd");
-			self.routeButton.title = @"Locating..";
-			//self.routeButton.enabled = NO;
-			self.routeButton.style = UIBarButtonItemStylePlain;
-			self.deleteButton.enabled = YES;
-			self.nameButton.enabled = NO;
+			
 			break;
 		case statePlan:
 			DLog(@"statePlan");
+			
+			// replace the contextLabel
+			[items replaceObjectAtIndex:4 withObject:routeButton];
+			[self.toolBar setItems:items animated:NO];
+			
 			self.routeButton.title = @"Plan route";
-			self.routeButton.enabled = YES;
 			self.routeButton.style = UIBarButtonItemStyleDone;
 			self.deleteButton.enabled = YES;
 			self.nameButton.enabled = NO;
 			break;
 		case stateRoute:
 			DLog(@"stateRoute");
+			
 			self.routeButton.title = @"New route";
-			self.routeButton.enabled = YES;
 			self.routeButton.style = UIBarButtonItemStyleBordered;
 			self.deleteButton.enabled = NO;
 			self.nameButton.enabled = NO;
@@ -351,6 +361,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	locatingIndicator.hidesWhenStopped=YES;
+	
+	
+	
 	self.activeLocationButton = [[[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ]autorelease];
 	self.activeLocationButton.style	= UIBarButtonItemStyleBordered;
 	

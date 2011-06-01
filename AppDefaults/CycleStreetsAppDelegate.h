@@ -26,7 +26,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <UIKit/UIKit.h>
 @class SettingsViewController;
-@class RouteTableViewController;
 @class Route;
 @class MapViewController;
 @class PhotoMapViewController;
@@ -39,7 +38,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "StartupManager.h"
 
 @interface CycleStreetsAppDelegate : NSObject <UIApplicationDelegate,StartupManagerDelegate,UITabBarControllerDelegate> {
+	
     UIWindow *window;
+	
+	UIImageView			*splashView;
 	
 	//Tab bar, and the members of it.
 	UITabBarController *tabBarController;
@@ -60,30 +62,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	//TO BE DEPRECATED, these shouldnt be hard wired via the delegate, use notifications or kvo
 	FavouritesViewController		*favourites;
-	RouteTableViewController		*routeTable;
 	MapViewController				*map;
 	
 }
 
-@property (nonatomic, retain)		IBOutlet UIWindow		* window;
-@property (nonatomic, retain)		IBOutlet UITabBarController		* tabBarController;
-@property (nonatomic, retain)		IBOutlet UIAlertView		* firstAlert;
-@property (nonatomic, retain)		IBOutlet UIAlertView		* secondAlert;
-@property (nonatomic, retain)		IBOutlet UIAlertView		* optionsAlert;
-@property (nonatomic, retain)		IBOutlet UIAlertView		* networkAlert;
-@property (nonatomic, retain)		Stage		* stage;
-@property (nonatomic, retain)		BusyAlert		* busyAlert;
-@property (nonatomic, retain)		IBOutlet UIAlertView		* errorAlert;
-@property (nonatomic, retain)		StartupManager		* startupmanager;
-@property (nonatomic, retain)		FavouritesViewController		* favourites;
-@property (nonatomic, retain)		RouteTableViewController		* routeTable;
-@property (nonatomic, retain)		MapViewController		* map;
-
+@property (nonatomic, retain)	IBOutlet UIWindow	*window;
+@property (nonatomic, retain)	IBOutlet UIImageView	*splashView;
+@property (nonatomic, retain)	IBOutlet UITabBarController	*tabBarController;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*firstAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*secondAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*optionsAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*networkAlert;
+@property (nonatomic, retain)	Stage	*stage;
+@property (nonatomic, retain)	BusyAlert	*busyAlert;
+@property (nonatomic, retain)	IBOutlet UIAlertView	*errorAlert;
+@property (nonatomic, retain)	StartupManager	*startupmanager;
+@property (nonatomic, retain)	FavouritesViewController	*favourites;
+@property (nonatomic, retain)	MapViewController	*map;
 
 
 - (void)buildTabbarController:(NSArray*)viewcontrollers;
 - (void)setBarStyle:(UIBarStyle)style andTintColor:(UIColor *)color forNavigationBar:(UINavigationBar *)bar;
 -(void)showTabBarViewControllerByName:(NSString*)viewname;
+-(void)appendStartUpView;
+-(void)removeStartupView;
 
 @end
 

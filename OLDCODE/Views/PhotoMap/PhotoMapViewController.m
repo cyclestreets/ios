@@ -69,6 +69,8 @@ static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize introView;
 @synthesize introButton;
 @synthesize progressHud;
+@synthesize lastLocation;
+
 
 
 
@@ -101,7 +103,8 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	//set up the location manager.
 	locationManager = [[CLLocationManager alloc] init];
-	doingLocation = NO;
+	locationManager.desiredAccuracy=kCLLocationAccuracyHundredMeters;
+	locationManagerIsLocating = NO;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(didNotificationMapStyleChanged)
@@ -124,6 +127,23 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		[self.introView removeFromSuperview];
 	}
 }
+
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+	if(locationManagerIsLocating==YES)
+		[self stopUpdatingLocation:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+	if(locationManagerIsLocating==NO){
+		locationManagerIsLocating=YES;
+		[self startlocationManagerIsLocating];		
+		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+	}
+}
+
+
 
 - (void) didNotificationMapStyleChanged {
 	mapView.contents.tileSource = [MapViewController tileSource];
@@ -207,10 +227,10 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (IBAction) didLocation {
 	DLog(@"location");
-	if (!doingLocation) {
-		[self startDoingLocation];
+	if (!locationManagerIsLocating) {
+		[self startlocationManagerIsLocating];
 	} else {
-		[self stopDoingLocation];
+		[self stoplocationManagerIsLocating];
 	}
 }
 
@@ -255,22 +275,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 #pragma mark utility
 
-// all the things that need fixed if we have asked (or been forced) to stop doing location.
-- (void)stopDoingLocation {
-	doingLocation = NO;
-	locationButton.style = UIBarButtonItemStyleBordered;
-	[locationManager stopUpdatingLocation];
-	blueCircleView.hidden = YES;
-}
 
-// all the things that need fixed if we have asked (or been forced) to start doing location.
-- (void)startDoingLocation {
-	doingLocation = YES;
-	locationButton.style = UIBarButtonItemStyleDone;
-	locationManager.delegate = self;
-	[locationManager startUpdatingLocation];
-	blueCircleView.hidden = NO;
-}
 
 // all the things that need fixed if we have asked (or been forced) to stop doing location.
 - (void)stopShowingPhotos {
@@ -305,24 +310,70 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 #pragma mark location delegate
 
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation
-{
-	//carefully replace the location.
-	CLLocation *oldLastLocation = lastLocation;
-	[newLocation retain];
-	lastLocation = newLocation;
-	[oldLastLocation release];
-	
-	[MapViewController zoomMapView:mapView toLocation:newLocation];
-	[blueCircleView setNeedsDisplay];
+// called from toggled ui button, stops CL and removes circle view
+- (void)stoplocationManagerIsLocating {
+	locationManagerIsLocating = NO;
+	locationButton.style = UIBarButtonItemStyleBordered;
+	[locationManager stopUpdatingLocation];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+	blueCircleView.hidden = YES;
+}
+
+// called from ui button, starts CL and shows circle view
+- (void)startlocationManagerIsLocating {
+	locationManagerIsLocating = YES;
+	locationButton.style = UIBarButtonItemStyleDone;
+	locationManager.delegate = self;
+	[locationManager startUpdatingLocation];
+	[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+	blueCircleView.hidden = NO;
 }
 
 - (void)locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error
-{
-	[self stopDoingLocation];
+	didUpdateToLocation:(CLLocation *)newLocation
+		   fromLocation:(CLLocation *)oldLocation{
+	DLog(@">>>");
+	
+	
+	[MapViewController zoomMapView:mapView toLocation:newLocation];
+	[blueCircleView setNeedsDisplay];
+	
+	NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
+	
+    if (locationAge > 5.0) return;
+    if (newLocation.horizontalAccuracy < 0) return;
+    // test the measurement to see if it is more accurate than the previous measurement
+    if (lastLocation == nil || lastLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
+        // store the location as the "best effort"
+        self.lastLocation = newLocation;
+		
+        if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
+            [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
+			
+        }
+		
+		
+    }
+	
+}
+
+// called from CL when accuracy was reached or timed out. Does not remove the circle view or toggle the UI
+- (void)stopUpdatingLocation:(NSString *)state {
+	
+	BetterLog(@"");
+	
+	if(locationManagerIsLocating==YES){
+		locationManagerIsLocating=NO;
+		// remove the delayed timeout selector
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+		
+		[locationManager stopUpdatingLocation];
+	}
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+	[locationManager stopUpdatingLocation];
+	[self stoplocationManagerIsLocating];
 }
 
 #pragma mark photomap functions
@@ -441,7 +492,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[initialLocation release];
 	initialLocation = nil;
 	[progressHud release], progressHud = nil;
-	
 	[mapLocationSearchView release];
 	mapLocationSearchView = nil;	
 }
