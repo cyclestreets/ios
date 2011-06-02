@@ -12,11 +12,11 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="96"/>
-			<integer value="94"/>
-			<integer value="66"/>
 			<integer value="67"/>
+			<integer value="94"/>
 			<integer value="65"/>
+			<integer value="66"/>
+			<integer value="96"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -210,7 +210,7 @@
 					<object class="IBUIButton" id="66113997">
 						<reference key="NSNextResponder" ref="537238332"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{74, 195}, {152, 29}}</string>
+						<string key="NSFrame">{{67, 170}, {185, 29}}</string>
 						<reference key="NSSuperview" ref="537238332"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -275,7 +275,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{20, 180}, {280, 2}}</string>
+						<string key="NSFrame">{{20, 155}, {280, 2}}</string>
 						<reference key="NSSuperview" ref="537238332"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">10</int>
@@ -4675,14 +4675,14 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="412916714">
 						<reference key="NSNextResponder" ref="537238332"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 63}, {280, 49}}</string>
+						<string key="NSFrame">{{20, 55}, {280, 34}}</string>
 						<reference key="NSSuperview" ref="537238332"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">You must be signed in to upload photos and to save routes created on your phone to your account.</string>
+						<string key="IBUIText">You must be signed in to upload photos.</string>
 						<reference key="IBUIFont" ref="628183165"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
@@ -4700,7 +4700,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUISwitch" id="174861264">
 						<reference key="NSNextResponder" ref="537238332"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{206, 133}, {94, 27}}</string>
+						<string key="NSFrame">{{206, 108}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="537238332"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -4711,7 +4711,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<object class="IBUILabel" id="405323040">
 						<reference key="NSNextResponder" ref="537238332"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 133}, {143, 21}}</string>
+						<string key="NSFrame">{{20, 108}, {143, 21}}</string>
 						<reference key="NSSuperview" ref="537238332"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -4733,7 +4733,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<float key="IBUIMinimumFontSize">10</float>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 244}</string>
+				<string key="NSFrameSize">{320, 219}</string>
 				<reference key="NSSuperview"/>
 				<reference key="IBUIBackgroundColor" ref="402361540"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -5583,10 +5583,10 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 							<reference ref="57701862"/>
 							<reference ref="801927008"/>
 							<reference ref="458889280"/>
-							<reference ref="412916714"/>
 							<reference ref="405323040"/>
-							<reference ref="66113997"/>
 							<reference ref="174861264"/>
+							<reference ref="66113997"/>
+							<reference ref="412916714"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">loggedin</string>
@@ -5935,7 +5935,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AccountViewController</string>
 					<string>UIResponder</string>
-					<string>{{749, 359}, {320, 480}}</string>
+					<string>{{749, 276}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -6022,19 +6022,19 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 						<bytes key="NSTransformStruct">P4AAAL+AAABByAAAwwMAAA</bytes>
 					</object>
 					<string>UIControl</string>
-					<string>{{899, 685}, {320, 260}}</string>
+					<string>{{899, 496}, {320, 260}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AQAAAABAoAAAA</bytes>
 					</object>
 					<boolean value="YES"/>
 					<string>UIControl</string>
-					<string>{{22, 690}, {320, 155}}</string>
+					<string>{{22, 601}, {320, 155}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwwUAAA</bytes>
 					</object>
-					<string>{{646, 266}, {320, 244}}</string>
+					<string>{{629, 291}, {320, 219}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUKgAABC4AAAA</bytes>
@@ -6049,7 +6049,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABClAAAw2gAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCqAAAw14AAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -6065,7 +6065,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwxIAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwr4AAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

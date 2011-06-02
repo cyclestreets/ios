@@ -282,6 +282,8 @@ static NSString *const STRINGID=@"account";
 			loggedInasField.text=[UserAccount sharedInstance].user.username;
 			BOOL sl=[UserAccount sharedInstance].user.autoLogin;
 			saveLoginButton.on=sl;
+			rightLabel.text=@"";
+			leftLabel.text=@"";
 			
 			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
 		break;
@@ -459,8 +461,13 @@ static NSString *const STRINGID=@"account";
 -(void)updateFormPage{
 	
 	if(viewMode==kUserAccountNotLoggedIn){
-		
 		activeFieldArray=[formFieldArray objectAtIndex:activePage];
+	}
+	
+	if(viewMode==kUserAccountLoggedIn){
+		rightLabel.text=@"";
+		leftLabel.text=@"";
+		return;
 	}
 	
 	if(activePage==0){
