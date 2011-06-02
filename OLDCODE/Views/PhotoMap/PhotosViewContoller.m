@@ -256,7 +256,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)sendPhoto {
 	self.addPhoto = nil;
-	self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:[UserAccount sharedInstance].user.password];
+	self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:[UserAccount sharedInstance].userPassword];
 	
 	self.addPhoto.caption = self.currentCaption;
 	
@@ -548,6 +548,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 									  cancelButtonTitle:@"OK"
 									  otherButtonTitles:@"View", nil];				
 	} else {
+		sendInProgress=NO;
 		message = [NSString stringWithString:@"Could not upload photo"];
 		self.alert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
 												message:message
@@ -593,11 +594,16 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 				photoEntry.bigImageURL = self.bigImageURL;
 				photoEntry.csid = self.photoId;
 				[self presentModalViewController:self.preview animated:YES];
-				[self.preview performSelector:@selector(loadEntry:) withObject:(photoEntry) afterDelay:0.1];
+				[self.preview performSelector:@selector(loadContentForEntry:) withObject:(photoEntry) afterDelay:0.1];
 			}
+			
+			sendInProgress = NO;
+			[self enableButtons:YES];
+		}else {
+			// if sendInProgress==NO it means an error was recieved, we maintain the UI so the user can try again 
 		}
-		sendInProgress = NO;
-		[self enableButtons:YES];
+
+		
 	}
 	
 	if (alertView == self.deleteAlert) {
