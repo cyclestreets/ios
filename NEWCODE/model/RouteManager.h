@@ -30,6 +30,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 - (void) runQuery:(Query *)query;
 - (void) selectRoute:(Route *)route;
 
-
+-(void)loadRouteWithIdentifier:(NSString*)routeid;
+-(void)loadSavedSelectedRoute;
 
 @end

@@ -14,6 +14,7 @@
 #import "CycleStreets.h"
 #import "AppConstants.h"
 #import "Files.h"
+#import "RouteParser.h"
 
 @interface RouteManager(Private) 
 
@@ -148,6 +149,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		[optionsAlert show];						
 	}	
 	 
+}
+
+
+// loads and selects a route from disk by it's identifier
+-(void)loadRouteWithIdentifier:(NSString*)identifier{
+	
+	Route *route=nil;
+	
+	if (identifier!=nil) {
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];	
+		NSData *data = [cycleStreets.files route:[identifier intValue]];
+		if(data!=nil){
+			RouteParser *parsed = [RouteParser parse:data forElements:[Route routeXMLElementNames]];
+			route = [[[Route alloc] initWithElements:parsed.elementLists] autorelease];
+		}
+	}
+	
+	if(route!=nil){
+		[self selectRoute:route];
+	}
+}
+
+
+// loads the currently saved selectedRoute by identifier
+-(void)loadSavedSelectedRoute{
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	NSString *selectedRouteID = [cycleStreets.files miscValueForKey:@"selectedroute"];
+	if(selectedRouteID!=nil)
+		[self loadRouteWithIdentifier:selectedRouteID];
+	
+	
 }
 
 

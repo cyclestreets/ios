@@ -69,6 +69,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon withDelay:(NSTimeInterval)delay;
 
 - (void) addLocation:(CLLocationCoordinate2D)location;
+-(void)updateSelectedRoute;
 
 @end
 
@@ -327,6 +328,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		case stateRoute:
 			DLog(@"stateRoute");
 			
+			UILabel *colabel=(UILabel*)[[items objectAtIndex:4] customView];
+			if(colabel!=nil){
+				[items replaceObjectAtIndex:4 withObject:self.routeButton];
+				[self.toolBar setItems:items ];
+			}
+			
 			self.routeButton.title = @"New route";
 			self.routeButton.style = UIBarButtonItemStyleBordered;
 			self.deleteButton.enabled = NO;
@@ -436,14 +443,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[self gotoState:stateStart];
 
-	NSString *selectedRoute = [cycleStreets.files miscValueForKey:@"selectedroute"];
-	if (selectedRoute != nil) {
-		CycleStreetsAppDelegate *appdelegate = [CycleStreets sharedInstance].appDelegate;
-		FavouritesViewController *favourites = appdelegate.favourites;
-		Route *useRoute = [favourites routeWithIdentifier:[selectedRoute intValue]];
-		
-		[[RouteManager sharedInstance] selectRoute:useRoute];
-	}
+	[[RouteManager sharedInstance] loadSavedSelectedRoute];
+	[self updateSelectedRoute];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(didNotificationMapStyleChanged)
