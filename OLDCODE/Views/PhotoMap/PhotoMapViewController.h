@@ -63,19 +63,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BOOL photomapQuerying;
 	BOOL showingPhotos;
 	BOOL locationManagerIsLocating;
+	BOOL locationWasFound;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *locationButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *showPhotosButton;
-@property (nonatomic, retain) IBOutlet RMMapView *mapView;
-@property (nonatomic, retain) IBOutlet BlueCircleView *blueCircleView;
-@property (nonatomic, retain) IBOutlet UILabel *attributionLabel;
-
-@property (nonatomic, retain) IBOutlet UIView *introView;
-@property (nonatomic, retain) IBOutlet UIButton *introButton;
-@property (nonatomic, retain)	MBProgressHUD	*progressHud;
-@property (nonatomic, retain)	CLLocation	*lastLocation;
-
+@property (nonatomic, retain)		RMMapView				* mapView;
+@property (nonatomic, retain)		BlueCircleView				* blueCircleView;
+@property (nonatomic, retain)		IBOutlet UILabel				* attributionLabel;
+@property (nonatomic, retain)		CLLocationManager				* locationManager;
+@property (nonatomic, retain)		PhotoMapImageLocationViewController				* locationView;
+@property (nonatomic, retain)		CLLocation				* lastLocation;
+@property (nonatomic, retain)		MBProgressHUD				* progressHud;
+@property (nonatomic, retain)		InitialLocation				* initialLocation;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* locationButton;
+@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* showPhotosButton;
+@property (nonatomic, retain)		MapLocationSearchViewController				* mapLocationSearchView;
+@property (nonatomic, retain)		IBOutlet UITextView				* introView;
+@property (nonatomic, retain)		IBOutlet UIButton				* introButton;
+@property (nonatomic, retain)		NSMutableArray				* photoMarkers;
+@property (nonatomic)		BOOL				 photomapQuerying;
+@property (nonatomic)		BOOL				 showingPhotos;
+@property (nonatomic)		BOOL				 locationManagerIsLocating;
+@property (nonatomic)		BOOL				 locationWasFound;
 
 
 - (IBAction) didZoomIn;

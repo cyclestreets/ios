@@ -94,6 +94,7 @@ NSString *const REQUESTDIDCOMPLETE_NOUPDATE=@"requestcompletednoupdatereceived";
 NSString *const REQUESTDIDCOMPLETENOENTRIES=@"requestcompletednoentries"; // the request competed with data from the server but there are no entries
 NSString *const CONNECTIONVALIDATION=@"connectionvalidation"; // generic event for ConectionValidator, note dict contains further info
 NSString *const TEXTFIELDEDITFRAME=@"tuitextfieldeditframeupdate"; // generic event for sending the textfield frame so we can adjust the scrollview for the 
+NSString *const UPLOADPHOTO=@"UPLOADPHOTO"; // execute photo upload
 
 
 

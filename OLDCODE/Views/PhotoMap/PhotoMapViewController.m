@@ -59,17 +59,47 @@ static NSInteger MAX_ZOOM = 18;
 static NSInteger MIN_ZOOM = 1;
 
 static NSTimeInterval FADE_DURATION = 1.7;
-
-@synthesize locationButton;
-@synthesize showPhotosButton;
 @synthesize mapView;
 @synthesize blueCircleView;
 @synthesize attributionLabel;
-
+@synthesize locationManager;
+@synthesize locationView;
+@synthesize lastLocation;
+@synthesize progressHud;
+@synthesize initialLocation;
+@synthesize locationButton;
+@synthesize showPhotosButton;
+@synthesize mapLocationSearchView;
 @synthesize introView;
 @synthesize introButton;
-@synthesize progressHud;
-@synthesize lastLocation;
+@synthesize photoMarkers;
+@synthesize photomapQuerying;
+@synthesize showingPhotos;
+@synthesize locationManagerIsLocating;
+@synthesize locationWasFound;
+
+/***********************************************************/
+// dealloc
+/***********************************************************/
+- (void)dealloc
+{
+    [mapView release], mapView = nil;
+    [blueCircleView release], blueCircleView = nil;
+    [attributionLabel release], attributionLabel = nil;
+    [locationManager release], locationManager = nil;
+    [locationView release], locationView = nil;
+    [lastLocation release], lastLocation = nil;
+    [progressHud release], progressHud = nil;
+    [initialLocation release], initialLocation = nil;
+    [locationButton release], locationButton = nil;
+    [showPhotosButton release], showPhotosButton = nil;
+    [mapLocationSearchView release], mapLocationSearchView = nil;
+    [introView release], introView = nil;
+    [introButton release], introButton = nil;
+    [photoMarkers release], photoMarkers = nil;
+	
+    [super dealloc];
+}
 
 
 
@@ -105,6 +135,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	locationManager = [[CLLocationManager alloc] init];
 	locationManager.desiredAccuracy=kCLLocationAccuracyHundredMeters;
 	locationManagerIsLocating = NO;
+	locationWasFound=YES;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(didNotificationMapStyleChanged)
@@ -132,17 +163,9 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 -(void)viewWillDisappear:(BOOL)animated{
 	if(locationManagerIsLocating==YES)
-		[self stopUpdatingLocation:nil];
+		[self stoplocationManagerIsLocating];
+	
 }
-
--(void)viewWillAppear:(BOOL)animated{
-	if(locationManagerIsLocating==NO){
-		locationManagerIsLocating=YES;
-		[self startlocationManagerIsLocating];		
-		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
-	}
-}
-
 
 
 - (void) didNotificationMapStyleChanged {
@@ -322,6 +345,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 // called from ui button, starts CL and shows circle view
 - (void)startlocationManagerIsLocating {
 	locationManagerIsLocating = YES;
+	locationWasFound=NO;
 	locationButton.style = UIBarButtonItemStyleDone;
 	locationManager.delegate = self;
 	[locationManager startUpdatingLocation];
@@ -364,6 +388,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	if(locationManagerIsLocating==YES){
 		locationManagerIsLocating=NO;
+		locationWasFound=YES;
 		// remove the delayed timeout selector
 		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
 		
@@ -475,24 +500,17 @@ static NSTimeInterval FADE_DURATION = 1.7;
 - (void)nullify {
 	self.locationButton = nil;
 
-	[mapView release];
 	mapView = nil;
 	
 	self.attributionLabel = nil;
 	self.blueCircleView = nil;
 	self.introView = nil;
 	self.introButton = nil;
-	
-	[locationManager release];
 	locationManager = nil;
-	[locationView release];
 	locationView = nil;
-	[lastLocation release];
 	lastLocation = nil;
-	[initialLocation release];
 	initialLocation = nil;
-	[progressHud release], progressHud = nil;
-	[mapLocationSearchView release];
+	progressHud = nil;
 	mapLocationSearchView = nil;	
 }
 
@@ -502,11 +520,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	DLog(@">>>");
 }
 
-
-- (void)dealloc {
-	[self nullify];
-    [super dealloc];
-}
 
 
 @end

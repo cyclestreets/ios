@@ -85,6 +85,7 @@ static NSString *const STRINGID=@"account";
 @synthesize viewMode;
 @synthesize formFieldArray;
 @synthesize isModal;
+@synthesize shouldAutoClose;
 
 /***********************************************************/
 // dealloc
@@ -124,6 +125,7 @@ static NSString *const STRINGID=@"account";
 	
     [super dealloc];
 }
+
 
 
 
@@ -394,6 +396,11 @@ static NSString *const STRINGID=@"account";
 		viewMode=[UserAccount sharedInstance].accountMode;
 		[self showMessageUIForView:loginView withMessage:@""];
 		[self createNonPersistentUI];
+		
+		if(isModal==YES && shouldAutoClose==YES){
+			[self doNavigationSelector:RIGHT];
+			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADPHOTO object:nil];
+		}
 		
 	}else if ([state isEqualToString:ERROR]) {
 		[self showMessageUIForView:loginView withMessage:[dict objectForKey:MESSAGE]];

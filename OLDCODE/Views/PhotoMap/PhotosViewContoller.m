@@ -36,6 +36,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ALAsset+Info.h"
 #import "PhotoAsset.h"
 #import "SettingsManager.h"
+#import "AppConstants.h"
 
 @implementation PhotosViewContoller
 
@@ -109,6 +110,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 												 name:@"NotificationLibraryAsset"
 											   object:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(sendPhoto)
+												 name:UPLOADPHOTO
+											   object:nil];
+	
 	[self enableButtons:YES];
 }
 
@@ -150,7 +156,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.caption.enabled = enable && (self.photoAsset != nil) && !sendInProgress;
 	self.info.enabled = enable && (self.photoAsset != nil) && !sendInProgress;
 	
-	caption.title = ([captionText.text length] == 0) ? @"Add Caption" : @"Set Caption";
+	caption.title = ([captionText.text length] == 0) ? @"Add caption" : @"Set caption";
 	
 }
 
@@ -170,13 +176,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self enableButtons:YES];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+
 
 //Use the built-in picker(s)
 - (void) pickImageFromSource:(int)source {
@@ -366,6 +366,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			self.loginView = [[[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil] autorelease];
 		}
 		self.loginView.isModal=YES;
+		self.loginView.shouldAutoClose=YES;
 		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
 		[self presentModalViewController:nav animated:YES];
 		[nav release];

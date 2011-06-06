@@ -83,8 +83,6 @@ typedef enum PlanningStateT PlanningState;
 	BOOL doingLocation;
 	BOOL programmaticChange;
 	
-	BOOL firstTimeStart;
-	BOOL firstTimeFinish;
 	BOOL	avoidAccidentalTaps;
 	BOOL	singleTapDidOccur;
 	CGPoint	singleTapPoint;
@@ -122,8 +120,6 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, retain)	NSMutableArray	*startEndPool;
 @property (nonatomic, assign)	BOOL	doingLocation;
 @property (nonatomic, assign)	BOOL	programmaticChange;
-@property (nonatomic, assign)	BOOL	firstTimeStart;
-@property (nonatomic, assign)	BOOL	firstTimeFinish;
 @property (nonatomic, assign)	BOOL	avoidAccidentalTaps;
 @property (nonatomic, assign)	BOOL	singleTapDidOccur;
 @property (nonatomic, assign)	CGPoint	singleTapPoint;

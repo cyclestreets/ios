@@ -43,6 +43,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize mapStyleControl;
 @synthesize imageSizeControl;
 @synthesize routeUnitControl;
+@synthesize routePointSwitch;
 @synthesize controlView;
 @synthesize speedTitleLabel;
 
@@ -57,11 +58,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [mapStyleControl release], mapStyleControl = nil;
     [imageSizeControl release], imageSizeControl = nil;
     [routeUnitControl release], routeUnitControl = nil;
+    [routePointSwitch release], routePointSwitch = nil;
     [controlView release], controlView = nil;
     [speedTitleLabel release], speedTitleLabel = nil;
 	
     [super dealloc];
 }
+
 
 
 
@@ -94,12 +97,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self select:imageSizeControl byString:dataProvider.imageSize];
 	[self select:mapStyleControl byString:[dataProvider.mapStyle lowercaseString]];
 	[self select:routeUnitControl byString:dataProvider.routeUnit];
+	routePointSwitch.on=dataProvider.showRoutePoint;
 	
 	[routeUnitControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 	[planControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 	[imageSizeControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 	[mapStyleControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 	[speedControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[routePointSwitch addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+
 	
 	[self.view addSubview:controlView];
 	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, controlView.frame.size.height)];
@@ -134,13 +140,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[SettingsManager sharedInstance] saveData];	
 }
 
+
 - (IBAction) changed:(id)sender {
+	
+	BetterLog(@"");
 	
 	// Note: we have to update the routeunit first then update the linked segments before getting the definitive values;
 	dataProvider.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
 	dataProvider.mapStyle = [mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex];
+	dataProvider.showRoutePoint = routePointSwitch.isOn;
 	
 	UISegmentedControl *control=(UISegmentedControl*)sender;
 	

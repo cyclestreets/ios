@@ -124,8 +124,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize startEndPool;
 @synthesize doingLocation;
 @synthesize programmaticChange;
-@synthesize firstTimeStart;
-@synthesize firstTimeFinish;
 @synthesize avoidAccidentalTaps;
 @synthesize singleTapDidOccur;
 @synthesize singleTapPoint;
@@ -238,8 +236,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (id)init {
 	BetterLog(@"");
 	if (self = [super init]) {
-		firstTimeStart = NO;
-		firstTimeFinish = NO;
 	}
 	return self;
 }
@@ -357,12 +353,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.cycleStreets = [CycleStreets sharedInstance];
 	
-	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
-	NSString *experienceLevel = [misc objectForKey:@"experienced"];
-	if (experienceLevel==nil) {
-		firstTimeStart = YES;
-		firstTimeFinish = YES;
-	}
 	
 	self.mapView.hidden = YES;
 	
@@ -392,15 +382,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[items insertObject:self.locationButton atIndex:0];
 	[items insertObject:self.deleteButton atIndex:2];
 	self.toolBar.items = items;
-	
-	//Don't do the first time alert if we've already planned a route.
-	if (firstTimeStart || firstTimeFinish) {
-		if ([misc objectForKey:@"experienced"] != nil) {
-			firstTimeStart = NO;
-			firstTimeFinish = NO;
-		}
-	}
-	
 	
 	
 	self.clearAlert = [[[UIAlertView alloc]
@@ -442,9 +423,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.attributionLabel.text = [MapViewController mapAttribution];
 	
 	[self gotoState:stateStart];
-
-	[[RouteManager sharedInstance] loadSavedSelectedRoute];
-	[self updateSelectedRoute];
+	
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(didNotificationMapStyleChanged)
@@ -454,7 +433,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(updateSelectedRoute)
 												 name:CSROUTESELECTED
-											   object:nil];	
+											   object:nil];
+	
+
+	[[RouteManager sharedInstance] loadSavedSelectedRoute];
+	
 	
 	DLog(@"<<<");
 }
@@ -615,32 +598,25 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}
 	}
 	
-	BetterLog(@"planningState=%i firstTimeFinish=%i",planningState,firstTimeFinish);
 	
 	
 	//endpoint, whether autolocated or not.
 	if (self.planningState == stateEnd || self.planningState == stateLocatingEnd) {
 		[self endMarker:location];
-		if (firstTimeFinish) {
-			//[self firstAlert:@"Finish point (F) set."];
-			//[self performSelector:@selector(firstAlert:) withObject:@"Finish point (F) set." afterDelay:0.5];
+		
+		if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
 			[self showHUDWithMessage:@"Finish point set." andIcon:@"CSIcon_finish_wisp.png" withDelay:1];
-			firstTimeFinish = NO;
 		}
 		if (self.planningState == stateEnd) {
 			[self gotoState:statePlan];
 		}		
 	}
 	
-	BetterLog(@"planningState=%i firstTimeStart=%i",planningState,firstTimeStart);
-	
 	//startpoint, whether autolocated or not.
 	if (self.planningState == stateStart || self.planningState == stateLocatingStart) {
 		[self startMarker:location];
-		if (firstTimeStart) {
-			//[self performSelector:@selector(firstAlert:) withObject:@"Start point (S) set." afterDelay:0.5];
+		if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
 			[self showHUDWithMessage:@"Start point set." andIcon:@"CSIcon_start_wisp.png" withDelay:1];
-			firstTimeStart = NO;
 		}
 		if (self.planningState == stateStart) {
 			[self gotoState:stateEnd];

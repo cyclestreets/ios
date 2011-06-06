@@ -95,6 +95,7 @@ extern NSString *const QUICKSEARCHDIDCOMPLETE;
 extern NSString *const LOGINRESPONSE;
 extern NSString *const REGISTERRESPONSE;
 extern NSString *const PASSWORDRETRIEVALRESPONSE;
+extern NSString *const UPLOADPHOTO;
 
 
 

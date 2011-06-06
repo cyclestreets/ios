@@ -68,7 +68,6 @@
 		2863A403134E508800A22093 /* RouteSummary.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3A8134E508800A22093 /* RouteSummary.xib */; };
 		2863A408134E508800A22093 /* MapLocationSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3B1134E508800A22093 /* MapLocationSearchView.xib */; };
 		2863A409134E508800A22093 /* MapLocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3B3134E508800A22093 /* MapLocationSearchViewController.m */; };
-		2863A40A134E508800A22093 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3B4134E508800A22093 /* MapView.xib */; };
 		2863A40E134E508800A22093 /* NamedPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3BB134E508800A22093 /* NamedPlace.m */; };
 		2863A40F134E508800A22093 /* Location2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3BE134E508800A22093 /* Location2.m */; };
 		2863A410134E508800A22093 /* PhotoMapImageLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A3BF134E508800A22093 /* PhotoMapImageLocationViewController.xib */; };
@@ -462,7 +461,6 @@
 		2863A3B1134E508800A22093 /* MapLocationSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapLocationSearchView.xib; sourceTree = "<group>"; };
 		2863A3B2134E508800A22093 /* MapLocationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLocationSearchViewController.h; sourceTree = "<group>"; };
 		2863A3B3134E508800A22093 /* MapLocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLocationSearchViewController.m; sourceTree = "<group>"; };
-		2863A3B4134E508800A22093 /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
 		2863A3BA134E508800A22093 /* NamedPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedPlace.h; sourceTree = "<group>"; };
 		2863A3BB134E508800A22093 /* NamedPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NamedPlace.m; sourceTree = "<group>"; };
 		2863A3BD134E508800A22093 /* Location2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location2.h; sourceTree = "<group>"; };
@@ -1069,7 +1067,6 @@
 				2863A3B1134E508800A22093 /* MapLocationSearchView.xib */,
 				2863A3B2134E508800A22093 /* MapLocationSearchViewController.h */,
 				2863A3B3134E508800A22093 /* MapLocationSearchViewController.m */,
-				2863A3B4134E508800A22093 /* MapView.xib */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -2188,7 +2185,6 @@
 				2863A400134E508800A22093 /* FavouritesView.xib in Resources */,
 				2863A403134E508800A22093 /* RouteSummary.xib in Resources */,
 				2863A408134E508800A22093 /* MapLocationSearchView.xib in Resources */,
-				2863A40A134E508800A22093 /* MapView.xib in Resources */,
 				2863A410134E508800A22093 /* PhotoMapImageLocationViewController.xib in Resources */,
 				2863A414134E508800A22093 /* PhotoInfo.xib in Resources */,
 				2863A416134E508800A22093 /* PhotoMapView.xib in Resources */,

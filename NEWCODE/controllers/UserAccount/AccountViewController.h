@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define kSubmitButtonTag 499
 #define	kActivityTag 500
 #define	kMessageFieldTag 501
-#define kpasswordExtent 5
+#define kpasswordExtent 4
 #define	kUsernameExtent 5
 
 @interface AccountViewController : SuperViewController <UITextFieldDelegate,UIScrollViewDelegate>{
@@ -92,6 +92,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	BOOL						isModal;
+	BOOL						shouldAutoClose;
 	
 }
 @property (nonatomic, retain)		IBOutlet UIView				* activeView;
@@ -130,6 +131,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic)		UserAccountMode				 viewMode;
 @property (nonatomic, retain)		NSMutableArray				* formFieldArray;
 @property (nonatomic)		BOOL				 isModal;
+@property (nonatomic)		BOOL				 shouldAutoClose;
 
 
 -(void)clearFields;

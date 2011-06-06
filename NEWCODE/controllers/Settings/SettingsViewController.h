@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <UIKit/UIKit.h>
 #import "SettingsVO.h"
+#import "RCSwitchOnOff.h"
 
 @interface SettingsViewController : UIViewController {
 	
@@ -36,19 +37,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet UISegmentedControl *mapStyleControl;
 	IBOutlet UISegmentedControl *imageSizeControl;
 	IBOutlet UISegmentedControl *routeUnitControl;
+	IBOutlet RCSwitchOnOff		*routePointSwitch;
 	IBOutlet UIView	*controlView;
 	
 	IBOutlet	UILabel			*speedTitleLabel;
 }
 
-@property (nonatomic, retain)	SettingsVO	*dataProvider;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*planControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*speedControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*mapStyleControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*imageSizeControl;
-@property (nonatomic, retain)	IBOutlet UISegmentedControl	*routeUnitControl;
-@property (nonatomic, retain)	IBOutlet UIView	*controlView;
-@property (nonatomic, retain)	IBOutlet UILabel	*speedTitleLabel;
+@property (nonatomic, retain)		SettingsVO				* dataProvider;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl				* planControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl				* speedControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl				* mapStyleControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl				* imageSizeControl;
+@property (nonatomic, retain)		IBOutlet UISegmentedControl				* routeUnitControl;
+@property (nonatomic, retain)		IBOutlet RCSwitchOnOff				* routePointSwitch;
+@property (nonatomic, retain)		IBOutlet UIView				* controlView;
+@property (nonatomic, retain)		IBOutlet UILabel				* speedTitleLabel;
 
 - (IBAction) changed:(id)sender;
 

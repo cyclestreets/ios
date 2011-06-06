@@ -107,7 +107,7 @@ static double FADE_DURATION = 1.7;
 		if (self.welcomeView == nil) {
 			self.welcomeView = [self loadWelcomeView];
 		}
-		[self.mapView addSubview:self.welcomeView];
+		[self.controller.view addSubview:self.welcomeView];
 	}
 }
 
