@@ -83,10 +83,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize picker;
 @synthesize jpegData;
 @synthesize locationManagerIsLocating;
+@synthesize photoViewerWasActive;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	
+	photoViewerWasActive=NO;
+	
     [super viewDidLoad];
 	// set up location manager
 	self.accuracy.title = @"";
@@ -123,11 +127,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-	if(locationManagerIsLocating==NO){
-		locationManagerIsLocating=YES;
-		[locationManager startUpdatingLocation];		
-		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+	if(photoViewerWasActive==NO){
+		if(locationManagerIsLocating==NO){
+			locationManagerIsLocating=YES;
+			[locationManager startUpdatingLocation];		
+			[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+		}
 	}
+	photoViewerWasActive=NO;
 }
 
 
@@ -180,6 +187,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 //Use the built-in picker(s)
 - (void) pickImageFromSource:(int)source {
+	
+	photoViewerWasActive=YES;
+	
 	if (self.picker == nil) {
 		self.picker = [[[UIImagePickerController alloc] init] autorelease];
 	}
@@ -191,6 +201,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 //Use picker which accesses the Asset library
 -(void)pickImageFromLibrary {
+	
+	photoViewerWasActive=YES;
+	
 	if (self.assetGroupTable == nil) {
 		self.assetGroupTable = [[[AssetGroupTable alloc] init] autorelease];
 	}
@@ -232,6 +245,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //otherwise, straight into the appropriate source type.
 - (void) sourceAnImage {
 	//what sources are there ?
+	
+	
+	
 	if ([self canUseCamera] && [self canUsePhotoLibrary]) {
 		if (self.photoAction == nil) {
 			self.photoAction = [[[UIActionSheet alloc] initWithTitle:nil

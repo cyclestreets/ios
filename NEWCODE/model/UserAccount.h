@@ -63,7 +63,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 -(void)loginExistingUser;
 -(void)retrievePasswordForUser:(NSString*)email;
 -(BOOL)hasSessionToken;
--(void)logoutUser;
 -(void)resetUserAccount;
 -(void)updateAutoLoginPreference:(BOOL)value;
 -(void)removeHUD;

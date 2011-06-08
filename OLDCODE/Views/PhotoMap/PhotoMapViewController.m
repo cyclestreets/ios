@@ -372,7 +372,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
         self.lastLocation = newLocation;
 		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-            [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
+            [self stopUpdatingLocation:@"Acquired Location"];
 			
         }
 		
@@ -381,23 +381,22 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 }
 
-// called from CL when accuracy was reached or timed out. Does not remove the circle view or toggle the UI
+// called from CL when accuracy was reached or timed out. Removes UI
 - (void)stopUpdatingLocation:(NSString *)state {
 	
 	BetterLog(@"");
 	
 	if(locationManagerIsLocating==YES){
-		locationManagerIsLocating=NO;
-		locationWasFound=YES;
-		// remove the delayed timeout selector
-		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
 		
-		[locationManager stopUpdatingLocation];
+		if([state isEqualToString:@"Acquired Location"]){
+			// 
+		}
+		
+		[self stoplocationManagerIsLocating];
 	}
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-	[locationManager stopUpdatingLocation];
 	[self stoplocationManagerIsLocating];
 }
 

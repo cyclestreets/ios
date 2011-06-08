@@ -292,6 +292,9 @@ static NSString *const STRINGID=@"account";
 			
 		case kUserAccountNotLoggedIn:
 			
+			loginUsernameField.text=@"";
+			loginPasswordField.text=@"";
+			
 			[contentView addSubview:registerView];
 			[contentView addSubview:loginView];
 			//[contentView addSubview:retrieveView];
@@ -714,7 +717,7 @@ static NSString *const STRINGID=@"account";
 
 -(IBAction)logoutButtonSelected:(id)sender{
 	
-	[[UserAccount sharedInstance] logoutUser];
+	[[UserAccount sharedInstance] resetUserAccount];
 	viewMode=[UserAccount sharedInstance].accountMode;
 	[self createNonPersistentUI];
 	

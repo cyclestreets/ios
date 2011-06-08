@@ -288,7 +288,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 				[items replaceObjectAtIndex:4 withObject:[[UIBarButtonItem alloc] initWithCustomView:contextLabel]];
 				[self.toolBar setItems:items];
 			}
-			
+			self.deleteButton.enabled = NO;
+			self.nameButton.enabled = YES;
 			
 			break;
 		case stateLocatingStart:
@@ -304,6 +305,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 				[items replaceObjectAtIndex:4 withObject:[[UIBarButtonItem alloc] initWithCustomView:contextLabel]];
 				[self.toolBar setItems:items ];
 			}
+			
+			self.deleteButton.enabled = YES;
+			self.nameButton.enabled = YES;
 			
 			break;
 		case stateLocatingEnd:

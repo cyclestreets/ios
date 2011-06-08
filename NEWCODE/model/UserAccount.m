@@ -145,8 +145,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			
 		}
 		
+		
+		
 	}
 	
+	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
+		[self removeHUD];
+	}
 	
 	
 }
@@ -221,7 +226,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			[dict release];
 			
-			[self showSuccessHUD:@"Creation Error" andDetailText:validation.returnMessage];
+			[self showErrorHUDWithMessage:@"Creation Error" andDetailText:validation.returnMessage];
 			
 		}
 			break;
@@ -285,8 +290,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		case ValidationLoginSuccess:
 		{
 			
-			// rD will be LoginVO
-			//LoginVO *loginresponse=[validation.responseDict objectForKey:LOGIN];
 			
 			isRegistered=YES;
 			accountMode=kUserAccountLoggedIn;
@@ -386,18 +389,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 }
 
 
-//
-/***********************************************
- * @description			Logout existing user for this session. This does not reset the users stored state.
- ***********************************************/
-//
--(void)logoutUser{
-	accountMode=kUserAccountNotLoggedIn;
-	
-	// cs support
-	[[CycleStreets sharedInstance].files resetPasswordInKeyChain];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationClearAccount" object:nil];
-}
 
 -(void)updateAutoLoginPreference:(BOOL)value{
 	user.autoLogin=value;
@@ -533,6 +524,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)removeUserState{
 	
+	BetterLog(@"");
+	
 	NSError *error=nil;
 	
 	// removes user keychain entry
@@ -546,10 +539,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	// user will need to relogin
 	isRegistered=NO;
-	sessionToken=nil;
-	user=nil;
-	userName=nil;
-	userPassword=nil;
+	self.sessionToken=nil;
+	self.user=nil;
+	self.userName=nil;
+	self.userPassword=nil;
 	
 }
 
