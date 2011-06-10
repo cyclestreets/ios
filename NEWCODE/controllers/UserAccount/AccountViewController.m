@@ -45,6 +45,8 @@ static NSString *const STRINGID=@"account";
 - (void)keyboardWillHide:(NSNotification*)notification;
 -(void)keyboardWillShow:(NSNotification*)notification;
 
+-(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)message;
+
 @end
 
 
@@ -352,6 +354,17 @@ static NSString *const STRINGID=@"account";
  ***********************************************/
 //
 
+-(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)message{
+	
+	activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
+	activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
+	activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
+	
+	[activeActivityView stopAnimating];
+	activeFormMessageLabel.text=message;
+	activeFormSubmitButton.enabled=YES;
+	
+}
 
 -(void)showMessageUIForView:(UIView*)iview withMessage:(NSString*)message{
 	
@@ -406,7 +419,7 @@ static NSString *const STRINGID=@"account";
 		}
 		
 	}else if ([state isEqualToString:ERROR]) {
-		[self showMessageUIForView:loginView withMessage:[dict objectForKey:MESSAGE]];
+		[self showResponseMessageUIForView:loginView withMessage:[dict objectForKey:MESSAGE]];
 	}
 	
 }
@@ -424,7 +437,7 @@ static NSString *const STRINGID=@"account";
 		[self createNonPersistentUI];
 		
 	}else if ([state isEqualToString:ERROR]) {
-		[self showMessageUIForView:registerView withMessage:[dict objectForKey:MESSAGE]];
+		[self showResponseMessageUIForView:registerView withMessage:[dict objectForKey:MESSAGE]];
 	}
 }
 
@@ -435,7 +448,7 @@ static NSString *const STRINGID=@"account";
 	if([state isEqualToString:SUCCESS]){
 		[self showMessageUIForView:retrieveView withMessage:[dict objectForKey:MESSAGE]];
 	}else if ([state isEqualToString:ERROR]) {
-		[self showMessageUIForView:retrieveView withMessage:[dict objectForKey:MESSAGE]];
+		[self showResponseMessageUIForView:retrieveView withMessage:[dict objectForKey:MESSAGE]];
 	}
 }
 
@@ -670,8 +683,6 @@ static NSString *const STRINGID=@"account";
 	
 	
 	if(presult==YES && eresult==YES && emresult==YES && visresult==YES){
-		
-		
 		
 		[self showRequestUIForView:registerView];
 		

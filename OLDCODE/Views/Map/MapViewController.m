@@ -285,7 +285,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			// will only execute if current i4 is not this label
 			UILabel *cilabel=(UILabel*)[[items objectAtIndex:4] customView];
 			if(cilabel==nil){
-				[items replaceObjectAtIndex:4 withObject:[[UIBarButtonItem alloc] initWithCustomView:contextLabel]];
+				UIBarButtonItem *label=[[UIBarButtonItem alloc] initWithCustomView:contextLabel];
+				[items replaceObjectAtIndex:4 withObject:label];
+				[label release];
 				[self.toolBar setItems:items];
 			}
 			self.deleteButton.enabled = NO;
@@ -302,8 +304,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			// will only execute if current i4 is not this label
 			UILabel *clabel=(UILabel*)[[items objectAtIndex:4] customView];
 			if(clabel==nil){
-				[items replaceObjectAtIndex:4 withObject:[[UIBarButtonItem alloc] initWithCustomView:contextLabel]];
-				[self.toolBar setItems:items ];
+				UIBarButtonItem *label=[[UIBarButtonItem alloc] initWithCustomView:contextLabel];
+				[items replaceObjectAtIndex:4 withObject:label];
+				[label release];
+				[self.toolBar setItems:items];
 			}
 			
 			self.deleteButton.enabled = YES;

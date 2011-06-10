@@ -133,7 +133,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	//set up the location manager.
 	locationManager = [[CLLocationManager alloc] init];
-	locationManager.desiredAccuracy=kCLLocationAccuracyHundredMeters;
+	locationManager.desiredAccuracy=500;
 	locationManagerIsLocating = NO;
 	locationWasFound=YES;
 	
@@ -356,8 +356,9 @@ static NSTimeInterval FADE_DURATION = 1.7;
 - (void)locationManager:(CLLocationManager *)manager
 	didUpdateToLocation:(CLLocation *)newLocation
 		   fromLocation:(CLLocation *)oldLocation{
-	DLog(@">>>");
 	
+	BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
+	BetterLog(@"locationManager.desiredAccuracy=%f",locationManager.desiredAccuracy);
 	
 	[MapViewController zoomMapView:mapView toLocation:newLocation];
 	[blueCircleView setNeedsDisplay];

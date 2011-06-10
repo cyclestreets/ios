@@ -222,7 +222,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			user.email=@"";
 			userPassword=@"";
 			
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_register",MESSAGE, nil];
+			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,validation.returnMessage,MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			[dict release];
 			

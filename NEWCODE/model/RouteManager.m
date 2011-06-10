@@ -136,7 +136,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 													delegate:self
 										   cancelButtonTitle:@"OK"
 										   otherButtonTitles:nil];
-		[firstAlert show];				
+		[firstAlert show];		
+		[firstAlert release];
 	} else if ([experienceLevel isEqualToString:@"1"]) {
 		[misc setObject:@"2" forKey:@"experienced"];
 		[cycleStreets.files setMisc:misc];
@@ -146,7 +147,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 													  delegate:self
 											 cancelButtonTitle:@"OK"
 											 otherButtonTitles:nil];
-		[optionsAlert show];						
+		[optionsAlert show];
+		[optionsAlert release];
 	}	
 	 
 }

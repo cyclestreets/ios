@@ -151,6 +151,7 @@
 									  timeoutInterval:30.0 ];
 		
 		NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
+		[urlString release];
 		NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
 		
 		NSString *parameterString=[postparameters urlEncodedString];

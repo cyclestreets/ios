@@ -95,7 +95,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// set up location manager
 	self.accuracy.title = @"";
 	locationManager = [[CLLocationManager alloc] init];
-	locationManager.desiredAccuracy=kCLLocationAccuracyHundredMeters;
+	locationManager.desiredAccuracy=kCLLocationAccuracyKilometer;
 	locationManager.delegate = self;
 	locationManagerIsLocating=NO;
 	
