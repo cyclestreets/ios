@@ -521,6 +521,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 
+-(void)logoutUser{
+	accountMode=kUserAccountNotLoggedIn;
+}
+
 
 -(void)removeUserState{
 	

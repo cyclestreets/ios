@@ -83,13 +83,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize picker;
 @synthesize jpegData;
 @synthesize locationManagerIsLocating;
-@synthesize photoViewerWasActive;
+@synthesize subviewWasActive;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	
-	photoViewerWasActive=NO;
+	subviewWasActive=NO;
 	
     [super viewDidLoad];
 	// set up location manager
@@ -127,14 +127,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-	if(photoViewerWasActive==NO){
+	if(subviewWasActive==NO){
 		if(locationManagerIsLocating==NO){
 			locationManagerIsLocating=YES;
 			[locationManager startUpdatingLocation];		
 			[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
 		}
 	}
-	photoViewerWasActive=NO;
+	subviewWasActive=NO;
 }
 
 
@@ -188,7 +188,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //Use the built-in picker(s)
 - (void) pickImageFromSource:(int)source {
 	
-	photoViewerWasActive=YES;
+	subviewWasActive=YES;
 	
 	if (self.picker == nil) {
 		self.picker = [[[UIImagePickerController alloc] init] autorelease];
@@ -202,7 +202,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //Use picker which accesses the Asset library
 -(void)pickImageFromLibrary {
 	
-	photoViewerWasActive=YES;
+	subviewWasActive=YES;
 	
 	if (self.assetGroupTable == nil) {
 		self.assetGroupTable = [[[AssetGroupTable alloc] init] autorelease];
@@ -337,6 +337,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (IBAction) didCaption {
+	
+	subviewWasActive=YES;
+	
 	DLog(@">>>");
 	[self enableButtons:NO];
 	self.captionText.hidden = NO;
@@ -353,6 +356,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (IBAction) didCaptionDone {
 	DLog(@">>>");
+	subviewWasActive=NO;
 	[self.captionText resignFirstResponder];
 	self.currentCaption = self.captionText.text;
 	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
@@ -361,6 +365,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (IBAction) didCaptionCancel {
 	DLog(@">>>");
+	subviewWasActive=NO;
 	[self.captionText resignFirstResponder];
 	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
 	[self.navigationItem setRightBarButtonItem:nil animated:YES];
@@ -368,6 +373,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (IBAction) didInfo {
 	DLog(@">>>");
+	subviewWasActive=YES;
 	if (photoInfo == nil) {
 		self.photoInfo = [[[PhotoInfo alloc] initWithNibName:@"PhotoInfo" bundle:nil] autorelease];
 	}
@@ -543,11 +549,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	self.photoAsset = nil;
 	BOOL ok = YES;
 	NSString *url;
+	NSDictionary *result;
 	if ([elements count] != 1) {
 		ok = NO;
 	}
 	if (ok) {
-		NSDictionary *result = [[elements valueForKey:@"result"] objectAtIndex:0];
+		result = [[elements valueForKey:@"result"] objectAtIndex:0];
 		url = [result valueForKey:@"url"];
 		if (url == nil || [url isEqualToString:@""]) {
 			ok = NO;
@@ -566,9 +573,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 									  otherButtonTitles:@"View", nil];				
 	} else {
 		sendInProgress=NO;
-		message = [NSString stringWithString:@"Could not upload photo"];
+		//message = [NSString stringWithString:@"Could not upload photo"];
 		self.alert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-												message:message
+												message:[result valueForKey:@"message"]
 											   delegate:self
 									  cancelButtonTitle:@"OK"
 									  otherButtonTitles:nil];		

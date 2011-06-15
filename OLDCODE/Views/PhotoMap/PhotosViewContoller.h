@@ -81,7 +81,7 @@ UITextViewDelegate, UIActionSheetDelegate> {
 	
 	BOOL sendInProgress;
 	BOOL pickedCategory;
-	BOOL	photoViewerWasActive;
+	BOOL	subviewWasActive;
 	
 	
 	NSString *bigImageURL;//uploaded.
@@ -146,7 +146,7 @@ UITextViewDelegate, UIActionSheetDelegate> {
 @property (nonatomic, copy) NSString *lastUploadId;
 @property (nonatomic, retain) NSData *jpegData;
 @property (nonatomic, assign) BOOL locationManagerIsLocating;
-@property (nonatomic, assign) BOOL photoViewerWasActive;
+@property (nonatomic, assign) BOOL subviewWasActive;
 
 
 - (IBAction) didCamera;

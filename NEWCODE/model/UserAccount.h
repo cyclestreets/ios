@@ -59,6 +59,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 
 -(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password;
 -(void)registerUserWithUserName:(NSString*)name andPassword:(NSString*)password visibleName:(NSString*)visiblename email:(NSString*)email;
+-(void)logoutUser;
 
 -(void)loginExistingUser;
 -(void)retrievePasswordForUser:(NSString*)email;

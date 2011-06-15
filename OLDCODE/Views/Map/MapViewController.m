@@ -71,6 +71,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) addLocation:(CLLocationCoordinate2D)location;
 -(void)updateSelectedRoute;
 
+// saved map loaction loading, separate from savedRoute
+- (void)saveLocation:(CLLocationCoordinate2D)location;
+- (void)zoomUpdate;
+-(void)loadLocation;
+
 @end
 
 
@@ -446,8 +451,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 	[[RouteManager sharedInstance] loadSavedSelectedRoute];
 	
+	// TODO: load saved route but then reset map to last l/l & zoom
+	// need to update misc saving to suport int Zoom var
 	
-	DLog(@"<<<");
+	[self loadLocation];
+	
 }
 
 
@@ -503,13 +511,42 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
 	[self afterMapChanged:map];
+	[self saveLocation:map.contents.mapCenter];
 }
 
 - (void)saveLocation:(CLLocationCoordinate2D)location {
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
 	[misc setValue:[NSString stringWithFormat:@"%f", location.latitude] forKey:@"latitude"];
 	[misc setValue:[NSString stringWithFormat:@"%f", location.longitude] forKey:@"longitude"];
+	[misc setValue:[NSString stringWithFormat:@"%f", mapView.contents.zoom] forKey:@"zoom"];
 	[cycleStreets.files setMisc:misc];	
+}
+
+//
+/***********************************************
+ * @description			Loads any saved map lat/long and zoom
+ ***********************************************/
+//
+-(void)loadLocation{
+	
+	BetterLog(@"");
+	
+	NSDictionary *misc = [cycleStreets.files misc];
+	NSString *sLat = [misc valueForKey:@"latitude"];
+	NSString *sLon = [misc valueForKey:@"longitude"];
+	NSString *sZoom = [misc valueForKey:@"zoom"];
+	
+	CLLocationCoordinate2D initLocation;
+	if (sLat != nil && sLon != nil) {
+		initLocation.latitude = [sLat doubleValue];
+		initLocation.longitude = [sLon doubleValue];
+		[self.mapView moveToLatLong:initLocation];
+		
+		if ([mapView.contents zoom] < MAX_ZOOM) {
+			[mapView.contents setZoom:[sZoom floatValue]];
+		}
+		[self zoomUpdate]; 
+	}
 }
 
 - (BOOL)locationInBounds:(CLLocationCoordinate2D)location {
