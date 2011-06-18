@@ -394,7 +394,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[UIView setAnimationDuration:0.4];
 		
 		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION;
-		aframe.origin.y=fframe.origin.y-aframe.size.height;
+		aframe.origin.y=fframe.origin.y-aframe.size.height-10;
 		
 		footerView.frame=fframe;
 		footerView.alpha=0;

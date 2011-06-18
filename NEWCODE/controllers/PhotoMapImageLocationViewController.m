@@ -91,6 +91,7 @@
 	viewContainer.layoutMode=BUVerticalLayoutMode;
 	viewContainer.alignMode=BUCenterAlignMode;
 	viewContainer.fixedWidth=YES;
+	viewContainer.paddingTop=20;
 	viewContainer.itemPadding=20;
 		
 	imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
