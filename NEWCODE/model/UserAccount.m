@@ -265,7 +265,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
 									 userPassword,@"password", nil];
-	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
+	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey, @"key", nil];
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];

@@ -35,11 +35,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	Files *files;
 	CategoryLoader *categoryLoader;
 	NSString *APIKey;
+	
+	NSString	*userAgent;
 }
 
-@property (nonatomic, retain) CycleStreetsAppDelegate *appDelegate;
-@property (nonatomic, retain) Files *files;
-@property (nonatomic, retain) CategoryLoader *categoryLoader;
-@property (nonatomic, readonly) NSString *APIKey;
+@property (nonatomic, assign)		CycleStreetsAppDelegate				* appDelegate;
+@property (nonatomic, retain)		Files				* files;
+@property (nonatomic, retain)		CategoryLoader				* categoryLoader;
+@property (nonatomic, retain)		NSString				* APIKey;
+@property (nonatomic, retain)		NSString				* userAgent;
+
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 @end

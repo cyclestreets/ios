@@ -93,6 +93,7 @@ static NSString *urlPrefix = @"https://www.cyclestreets.net/api/addphoto.xml";
 	NSString *stringBoundary = [NSString stringWithString:@"0xBoundaryBoundaryBoundaryBoundary"];
 	NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",stringBoundary];
 	[r addValue:contentType forHTTPHeaderField: @"Content-Type"];
+	[r setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 	
 	[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	[body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"mediaupload\"; filename=\"from_iphone.jpeg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];

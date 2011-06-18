@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "NetworkRequest.h"
 #import "Common.h"
+#import "CycleStreets.h"
 
 @implementation NetworkRequest
 @synthesize request;
@@ -56,6 +57,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		self.failure = failureMethod;
 		NSURL *url = [NSURL URLWithString:urlString];
 		self.request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
+		
+		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
+		
 		self.connection = nil;
 		/*
 		 This is now in start.

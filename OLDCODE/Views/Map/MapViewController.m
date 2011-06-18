@@ -428,6 +428,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	//set up the location manager.
 	locationManager = [[CLLocationManager alloc] init];
+	locationManager.desiredAccuracy=500;
 	doingLocation = NO;
 	
 	self.programmaticChange = NO;
@@ -453,8 +454,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	// TODO: load saved route but then reset map to last l/l & zoom
 	// need to update misc saving to suport int Zoom var
-	
-	[self loadLocation];
+	//[self loadLocation];
+	// DEPRECATED FOR V1.5
 	
 }
 
@@ -473,9 +474,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 	}
 }
+
 -(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	
 	singleTapDidOccur=NO;
+	
+	float nextZoomFactor = [map.contents nextNativeZoomFactor];
+	if (nextZoomFactor != 0)
+		[map zoomByFactor:nextZoomFactor near:point animated:YES];
+	
 }
+ 
 
 - (void) singleTapDelayExpired {
 	if(singleTapDidOccur==YES){
@@ -1002,6 +1011,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	//so that callee can decide the context.
 	self.programmaticChange = YES;
 	DLog(@"programmaticChange <-- YES");
+	BetterLog(@"manager.da=%d",manager.desiredAccuracy);
 	
 	//turn off geolocation automatically in 10s if we're already within 100 metres, in 1s if within 20
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopDoingLocation) object:nil];

@@ -93,9 +93,11 @@ static double FADE_DURATION = 1.7;
 	
 	CLLocationCoordinate2D initLocation;
 	if (sLat != nil && sLon != nil) {
+		
 		initLocation.latitude = [sLat doubleValue];
 		initLocation.longitude = [sLon doubleValue];
 		[self.mapView moveToLatLong:initLocation];
+		 
 		self.mapView.hidden = NO;
 	} else {
 		if (self.locationManager == nil) {

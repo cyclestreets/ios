@@ -13,6 +13,7 @@
 #import "DataSourceManager.h"
 #import "GlobalUtilities.h"
 #import "CJSONSerializer.h"
+#import "CycleStreets.h"
 
 @implementation NetRequest
 @synthesize service;
@@ -104,7 +105,7 @@
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
 		
-		
+		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 		
 		
 	}else if ([servicetype isEqualToString:GET]) {
@@ -118,6 +119,9 @@
 		request = [NSMutableURLRequest requestWithURL:requesturl
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
+		
+		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
+		
 		[urlString release];
 	}else if([servicetype isEqualToString:POSTJSON]){
 		
@@ -135,7 +139,7 @@
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
-		
+		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 		
 		
 	}else if([servicetype isEqualToString:GETPOST]){
@@ -162,7 +166,7 @@
 		NSString *contentType = [NSString stringWithString:@"application/x-www-form-urlencoded"];
 		[request addValue:contentType forHTTPHeaderField: @"Content-Type"];	
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
-		
+		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 	
 	}	
 	

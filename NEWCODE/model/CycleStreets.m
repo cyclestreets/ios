@@ -35,6 +35,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 @synthesize files;
 @synthesize categoryLoader;
 @synthesize APIKey;
+@synthesize userAgent;
+
+/***********************************************************/
+// dealloc
+/***********************************************************/
+- (void)dealloc
+{
+    appDelegate = nil;
+    [files release], files = nil;
+    [categoryLoader release], categoryLoader = nil;
+    [APIKey release], APIKey = nil;
+    [userAgent release], userAgent = nil;
+	
+    [super dealloc];
+}
+
+
 
 - (id) init {
 	if (self = [super init]) {
@@ -43,25 +60,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		NSBundle *mainBundle = [NSBundle mainBundle];
 		NSString *APIFile = [mainBundle pathForResource:@"APIKey" ofType:@"txt"];
 		NSString *keyFromFile = [NSString stringWithContentsOfFile:APIFile encoding:NSUTF8StringEncoding error:NULL];
-		APIKey = [[[keyFromFile stringByReplacingOccurrencesOfString:@"\n" withString:@""] copy] retain];
+		self.APIKey = [keyFromFile stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+		
+		NSDictionary *infoDict=[mainBundle infoDictionary];
+		NSString *version=[infoDict objectForKey:@"CFBundleVersion"];
+		NSString *appName=[infoDict objectForKey:@"CFBundleName"];
+		self.userAgent=[NSString stringWithFormat:@"%@ iOS / %@",appName,version];
 	}
 	return self;
 }
 
-
-
-
-
-
-
-- (void)dealloc {
-	self.appDelegate = nil;
-	self.files = nil;
-	self.categoryLoader = nil;
-	[APIKey release];
-	APIKey = nil;
-	
-	[super dealloc];
-}
 
 @end

@@ -193,7 +193,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 - (void) afterMapMove: (RMMapView*) map {
-	DLog(@"afterMapMove");
+	//DLog(@"afterMapMove");
 	[blueCircleView setNeedsDisplay];
 	[self requestPhotos];
 }
@@ -204,7 +204,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
  */
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
-	DLog(@"afterMapZoom");
+	//DLog(@"afterMapZoom");
 	[blueCircleView setNeedsDisplay];
 	[self requestPhotos];
 }
@@ -365,14 +365,19 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
 	
+	BetterLog(@"locationAge=%i",locationAge);
+	
     if (locationAge > 5.0) return;
     if (newLocation.horizontalAccuracy < 0) return;
     // test the measurement to see if it is more accurate than the previous measurement
-    if (lastLocation == nil || lastLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
+    if (lastLocation == nil || lastLocation.horizontalAccuracy >= newLocation.horizontalAccuracy) {
         // store the location as the "best effort"
         self.lastLocation = newLocation;
 		
+		BetterLog(@"");
+		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
+			BetterLog(@"");
             [self stopUpdatingLocation:@"Acquired Location"];
 			
         }
@@ -415,6 +420,9 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 - (void) didSucceedPhoto:(XMLRequest *)request results:(NSDictionary *)elements {
+	
+	BetterLog(@"");
+	
 	[self clearPhotos];
 	if (!showingPhotos) {
 		photomapQuerying = NO;
@@ -446,6 +454,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 //helper, could be shelled out as more general.
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
+	BetterLog(@"");
 	QueryPhoto *queryPhoto = [[QueryPhoto alloc] initNorthEast:ne SouthWest:sw];
 	[queryPhoto runWithTarget:self onSuccess:@selector(didSucceedPhoto:results:) onFailure:@selector(didFailPhoto:message:)];
 	[queryPhoto release];

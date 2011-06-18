@@ -384,15 +384,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // Goes and gets a location with which to tag the image.
 - (IBAction) didSend {
 	if ([UserAccount sharedInstance].isLoggedIn==NO) {
-		if (self.loginView == nil) {
-			self.loginView = [[[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil] autorelease];
+		
+		if([UserAccount sharedInstance].accountMode==kUserAccountCredentialsExist){
+			
+			BetterLog(@"kUserAccountCredentialsExist");
+			
+			[self sendPhoto];
+			
+		}else {
+			
+			BetterLog(@"kUserAccountNotLoggedIn");
+			
+			if (self.loginView == nil) {
+				self.loginView = [[[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil] autorelease];
+			}
+			self.loginView.isModal=YES;
+			self.loginView.shouldAutoClose=YES;
+			UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
+			[self presentModalViewController:nav animated:YES];
+			[nav release];
 		}
-		self.loginView.isModal=YES;
-		self.loginView.shouldAutoClose=YES;
-		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
-		[self presentModalViewController:nav animated:YES];
-		[nav release];
+
+		
+		
 	} else {
+		
+		BetterLog(@"kUserAccountLoggedIn");
+		
 		[self sendPhoto];
 	}
 }
@@ -669,7 +687,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
     if (locationAge > 5.0) return;
     if (newLocation.horizontalAccuracy < 0) return;
     // test the measurement to see if it is more accurate than the previous measurement
-    if (location == nil || location.horizontalAccuracy > newLocation.horizontalAccuracy) {
+    if (location == nil || location.horizontalAccuracy >= newLocation.horizontalAccuracy) {
         // store the location as the "best effort"
         self.location = newLocation;
 		

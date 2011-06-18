@@ -57,7 +57,7 @@
 -(NSString*)returnKilometerSpeedValue{
 	
 	if([routeUnit isEqualToString:MILES]){
-		int milesvalue=[speed intValue]*1.70;
+		int milesvalue=ceil([speed doubleValue]*1.60);
 		return [NSString stringWithFormat:@"%i",milesvalue];
 	}else{
 		return speed;

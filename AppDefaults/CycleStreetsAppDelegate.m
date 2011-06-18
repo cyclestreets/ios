@@ -189,7 +189,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self saveContext];
 	[[UserAccount sharedInstance] logoutUser];
 }
--(void)applicationDidBecomeActive:(UIApplication *)application{
+-(void)applicationWillEnterForeground:(UIApplication *)application{
 	[[UserAccount sharedInstance] loginExistingUser];
 }
 
@@ -313,6 +313,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void) backgroundSetup {
+	
+	BetterLog(@"");
 	
 	//load the default categories
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
