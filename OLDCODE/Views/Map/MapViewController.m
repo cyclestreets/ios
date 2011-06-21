@@ -95,11 +95,13 @@ static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
 //handle when to switch off the GPS, and at what accuracy.
 static CLLocationDistance LOC_DISTANCE_FILTER = 25;
+/*
 static CLLocationAccuracy ACCURACY_OK = 100;
 static CLLocationAccuracy ACCURACY_BEST = 20;
 static NSTimeInterval LOC_OFF_DELAY_BAD = 30.0;
 static NSTimeInterval LOC_OFF_DELAY_OK = 3.0;
 static NSTimeInterval LOC_OFF_DELAY_BEST = 1.0;
+ */
 
 static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
@@ -139,6 +141,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize planningState;
 @synthesize oldPlanningState;
 @synthesize HUD;
+
 
 //=========================================================== 
 // dealloc
@@ -369,13 +372,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.mapView.hidden = YES;
 	
-	locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	locatingIndicator.hidesWhenStopped=YES;
 	
-	
-	
 	self.activeLocationButton = [[[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ]autorelease];
-	self.activeLocationButton.style	= UIBarButtonItemStyleBordered;
+	self.activeLocationButton.style	= UIBarButtonItemStyleDone;
 	
 	self.locationButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"74-location.png"]
 															style:UIBarButtonItemStyleBordered
@@ -637,8 +638,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if (self.programmaticChange && self.planningState == stateLocatingEnd) {
 		CLLocationDistance distanceFromStart = [self distanceFromStart:location];
 		if (distanceFromStart < MIN_START_FINISH_DISTANCE) {
-			[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showStartFinishAlert) object:nil];
-			[self performSelector:@selector(showStartFinishAlert) withObject:nil afterDelay:2.0];
+			[self showHUDWithMessage:@"Move the map to set a finish point further away."];
+			[self gotoState:stateEnd];
 			return;
 		}
 	}
@@ -794,14 +795,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 // all the things that need fixed if we have asked (or been forced) to stop doing location.
 - (void)stopDoingLocation {
-	DLog(@">>>");
+	BetterLog(@"doingLocation=%i",doingLocation);
 	if (!doingLocation) {
-		DLog(@"not! doing location.");
+		return;
 	}
 	if (doingLocation) {
-		DLog(@"doing location. stop.");
+		BetterLog(@"");
 		doingLocation = NO;
 		locationButton.style = UIBarButtonItemStyleBordered;
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
 		[locationManager stopUpdatingLocation];
 		blueCircleView.hidden = YES;
 		
@@ -838,26 +840,41 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // all the things that need fixed if we have asked (or been forced) to start doing location.
 - (void)startDoingLocation {
 	if (!doingLocation) {
-		doingLocation = YES;
-		locationButton.style = UIBarButtonItemStyleDone;
-		locationManager.delegate = self;
-		locationManager.distanceFilter = LOC_DISTANCE_FILTER;
-		[locationManager startUpdatingLocation];
-		blueCircleView.hidden = NO;
 		
-		
-		NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
-		[items removeObjectAtIndex:0];
-		[items insertObject:self.activeLocationButton atIndex:0];
-		[locatingIndicator startAnimating];
-		self.toolBar.items = items;
-		
-		if (self.planningState == stateStart) {
-			[self gotoState:stateLocatingStart];
+		if(locationManager.locationServicesEnabled==YES){
+			
+			doingLocation = YES;
+			locationManager.delegate = self;
+			locationManager.distanceFilter = LOC_DISTANCE_FILTER;
+			
+			[locationManager startUpdatingLocation];
+			blueCircleView.hidden = NO;
+			
+			
+			NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
+			[items removeObjectAtIndex:0];
+			[items insertObject:self.activeLocationButton atIndex:0];
+			[locatingIndicator startAnimating];
+			self.toolBar.items = items;
+			
+			if (self.planningState == stateStart) {
+				[self gotoState:stateLocatingStart];
+			}
+			if (self.planningState == stateEnd) {
+				[self gotoState:stateLocatingEnd];
+			}
+		}else {
+			
+			UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+															   message:@"Location services for CycleStreets are off, please enable in Settings > General > Location Services to use location based features."
+															  delegate:self
+													 cancelButtonTitle:@"OK"
+													 otherButtonTitles:nil];
+			[gpsAlert show];
+			[gpsAlert release];
+			
 		}
-		if (self.planningState == stateEnd) {
-			[self gotoState:stateLocatingEnd];
-		}
+
 	}
 }
 
@@ -1006,8 +1023,42 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	didUpdateToLocation:(CLLocation *)newLocation
 		   fromLocation:(CLLocation *)oldLocation
 {
-	DLog(@">>>");
-
+	
+	if(doingLocation==YES){
+		
+		self.programmaticChange = YES;
+		
+		BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
+		BetterLog(@"locationManager.desiredAccuracy=%f",locationManager.desiredAccuracy);
+		
+		[MapViewController zoomMapView:mapView toLocation:newLocation];
+		[blueCircleView setNeedsDisplay];
+		
+		NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
+		
+		if (locationAge > 5.0) return;
+		if (newLocation.horizontalAccuracy < 0) return;
+		// test the measurement to see if it is more accurate than the previous measurement
+		if (lastLocation == nil || lastLocation.horizontalAccuracy >= newLocation.horizontalAccuracy) {
+			// store the location as the "best effort"
+			self.lastLocation = newLocation;
+			
+			if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
+				
+				[self addLocation:newLocation.coordinate];
+				[self stopDoingLocation];
+				
+			}
+			
+		}
+		
+		
+		self.programmaticChange = NO;
+		
+	}
+	
+	
+	/*
 	//so that callee can decide the context.
 	self.programmaticChange = YES;
 	DLog(@"programmaticChange <-- YES");
@@ -1036,15 +1087,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[blueCircleView setNeedsDisplay];
 	
 	self.programmaticChange = NO;
+	 */
 }
+
 
 - (void)locationManager:(CLLocationManager *)manager
 	   didFailWithError:(NSError *)error
 {
 	if (self.noLocationAlert == nil) {
 		self.noLocationAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"
-														   message:@"Unable to retrieve location."
-														  delegate:self
+														   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
+														  delegate:nil
 												 cancelButtonTitle:@"OK"
 												 otherButtonTitles:nil]
 								autorelease];

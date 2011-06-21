@@ -131,7 +131,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		if(locationManagerIsLocating==NO){
 			locationManagerIsLocating=YES;
 			[locationManager startUpdatingLocation];		
-			[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+			[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:30];
 		}
 	}
 	subviewWasActive=NO;
@@ -272,7 +272,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)sendPhoto {
 	self.addPhoto = nil;
-	self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:[UserAccount sharedInstance].userPassword];
+	//self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:[UserAccount sharedInstance].userPassword];
+	
+	self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:@"incorrectpassword"];
 	
 	self.addPhoto.caption = self.currentCaption;
 	
@@ -568,6 +570,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	BOOL ok = YES;
 	NSString *url;
 	NSDictionary *result;
+	
+	BetterLog(@"didSucceedAddPhoto elements=%@",elements);
+	
 	if ([elements count] != 1) {
 		ok = NO;
 	}
@@ -591,9 +596,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 									  otherButtonTitles:@"View", nil];				
 	} else {
 		sendInProgress=NO;
-		//message = [NSString stringWithString:@"Could not upload photo"];
+		message = [NSString stringWithString:@"Could not upload photo"];
 		self.alert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-												message:[result valueForKey:@"message"]
+												message:message
 											   delegate:self
 									  cancelButtonTitle:@"OK"
 									  otherButtonTitles:nil];		

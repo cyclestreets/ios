@@ -344,13 +344,27 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 // called from ui button, starts CL and shows circle view
 - (void)startlocationManagerIsLocating {
-	locationManagerIsLocating = YES;
-	locationWasFound=NO;
-	locationButton.style = UIBarButtonItemStyleDone;
-	locationManager.delegate = self;
-	[locationManager startUpdatingLocation];
-	[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
-	blueCircleView.hidden = NO;
+	
+	if(locationManager.locationServicesEnabled==YES){
+		
+		locationManagerIsLocating = YES;
+		locationWasFound=NO;
+		locationButton.style = UIBarButtonItemStyleDone;
+		locationManager.delegate = self;
+		[locationManager startUpdatingLocation];
+		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:30];
+		blueCircleView.hidden = NO;
+		
+	}else {
+		UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+														   message:@"Location services for CycleStreets are off, please enable in Settings > General > Location Services to use location based features."
+														  delegate:nil
+												 cancelButtonTitle:@"OK"
+												 otherButtonTitles:nil];
+		[gpsAlert show];
+		[gpsAlert release];
+	}
+
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -404,6 +418,14 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
 	[self stoplocationManagerIsLocating];
+	
+	UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+													   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
+													  delegate:nil
+											 cancelButtonTitle:@"OK"
+											 otherButtonTitles:nil];
+	[gpsAlert show];
+	[gpsAlert release];
 }
 
 #pragma mark photomap functions

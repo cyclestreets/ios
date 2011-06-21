@@ -45,7 +45,7 @@ static NSString *const STRINGID=@"account";
 - (void)keyboardWillHide:(NSNotification*)notification;
 -(void)keyboardWillShow:(NSNotification*)notification;
 
--(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)message;
+-(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)messageid;
 
 @end
 
@@ -354,14 +354,14 @@ static NSString *const STRINGID=@"account";
  ***********************************************/
 //
 
--(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)message{
+-(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)messageid{
 	
 	activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
 	activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
 	activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
 	
 	[activeActivityView stopAnimating];
-	activeFormMessageLabel.text=message;
+	activeFormMessageLabel.text=[[StringManager sharedInstance] stringForSection:@"account" andType:messageid];
 	activeFormSubmitButton.enabled=YES;
 	
 }
