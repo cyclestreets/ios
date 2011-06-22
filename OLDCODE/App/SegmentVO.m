@@ -156,7 +156,7 @@ static NSDictionary *roadIcons;
 }
 
 - (NSString *) infoString {
-	NSString *hm = [NSString stringWithFormat:@"%02d:%02d", startTime/60, startTime%60];
+	NSString *hm = [self timeString];
 	NSString *distance = [NSString stringWithFormat:@"%4dm", [self segmentDistance]];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
@@ -186,7 +186,7 @@ static NSDictionary *roadIcons;
 
 -(NSDictionary*)infoStringDictionary{
 	
-	NSString *hm = [NSString stringWithFormat:@"%02d:%02d", startTime/60, startTime%60];
+	NSString *hm = [self timeString];
 	NSString *distance = [NSString stringWithFormat:@"%im", [self segmentDistance]];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"%3.1f miles", totalMiles];
@@ -218,6 +218,19 @@ static NSDictionary *roadIcons;
 	
 }
 
+
+-(NSString*)timeString{
+	
+	NSUInteger h = startTime / 3600;
+	NSUInteger m = (startTime / 60) % 60;
+	NSUInteger s = startTime % 60;
+	
+	if (startTime>3600) {
+		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
+	}else {
+		return [NSString stringWithFormat:@"%02d:%02d", m,s];
+	}
+}
 
 
 - (void) dealloc {

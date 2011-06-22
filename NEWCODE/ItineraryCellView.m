@@ -58,7 +58,7 @@
 	
 	NSMutableArray *arr=[[NSMutableArray alloc] init];
 	
-	[arr addObject:[NSString stringWithFormat:@"%02d:%02d", dataProvider.startTime/60, dataProvider.startTime%60]];
+	[arr addObject:[dataProvider timeString]];
 	[arr addObject:[NSString stringWithFormat:@"%4dm", [dataProvider segmentDistance]]];
 	
 	float totalMiles = ((float)([dataProvider startDistance]+[dataProvider segmentDistance]))/1600;
@@ -87,7 +87,7 @@
 	
 	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment roadName] :[UIFont boldSystemFontOfSize:16]   :248 :UILineBreakModeWordWrap];
 	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",segment.startTime] :[UIFont systemFontOfSize:13] :248 :UILineBreakModeClip];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment timeString] :[UIFont systemFontOfSize:13] :248 :UILineBreakModeClip];
 	height+=7;
 	
 	return [NSNumber numberWithInt:height];

@@ -76,7 +76,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	NSMutableArray *arr=[[NSMutableArray alloc] init];
 	
-	[arr addObject:[NSString stringWithFormat:@"%02d:%02d", [dataProvider time]/60, [dataProvider time]%60]];
+	[arr addObject:[dataProvider timeString]];
 	
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
 		[arr addObject:[NSString stringWithFormat:@"%3.1f miles", [[dataProvider length] floatValue]/1600]];
