@@ -141,7 +141,7 @@ static NSDictionary *roadIcons;
  */
 - (void) setUIElements:(NSObject *)view/*or controller*/ {
 	[view setValue:[self roadName] forKeyPath:@"road.text"];
-	[view setValue:[NSString stringWithFormat:@"%02d:%02d", startTime/60, startTime%60] forKeyPath:@"time.text"];
+	[view setValue:[self timeString] forKeyPath:@"time.text"];
 	[view setValue:[NSString stringWithFormat:@"%4dm", [self segmentDistance]] forKeyPath:@"distance.text"];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	[view setValue:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles] forKeyPath:@"total.text"];

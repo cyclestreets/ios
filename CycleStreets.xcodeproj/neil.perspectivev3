@@ -352,7 +352,7 @@
 							<real>287</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>62 165 1438 970 0 0 1920 1178 </string>
+						<string>47 26 1438 970 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -363,14 +363,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>289A1FBE1298238900CF83A9</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SegmentVO.m</string>
+								<string>ItineraryCellView.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -378,11 +376,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>289A1FBF1298238900CF83A9</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SegmentVO.m</string>
+										<string>ItineraryCellView.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>283AAEAC13B28B9C006380DE</string>
+										<string>283AAEB213B28EF1006380DE</string>
 										<key>history</key>
 										<array>
 											<string>287212E212997D7E0027D98E</string>
@@ -644,7 +642,6 @@
 											<string>283AAE6D13B28779006380DE</string>
 											<string>283AAE9913B28AA3006380DE</string>
 											<string>283AAE9B13B28AA3006380DE</string>
-											<string>283AAEA313B28B9C006380DE</string>
 											<string>283AAEA413B28B9C006380DE</string>
 											<string>283AAEA513B28B9C006380DE</string>
 											<string>283AAEA613B28B9C006380DE</string>
@@ -652,7 +649,8 @@
 											<string>283AAEA813B28B9C006380DE</string>
 											<string>283AAEA913B28B9C006380DE</string>
 											<string>283AAEAA13B28B9C006380DE</string>
-											<string>283AAEAB13B28B9C006380DE</string>
+											<string>283AAEAD13B28CE3006380DE</string>
+											<string>283AAEAE13B28CE3006380DE</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -666,18 +664,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1129, 809}}</string>
+								<string>{{0, 0}, {1129, 515}}</string>
 								<key>RubberWindowFrame</key>
-								<string>62 165 1438 970 0 0 1920 1178 </string>
+								<string>47 26 1438 970 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>809pt</string>
+							<string>515pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>115pt</string>
+							<string>409pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -697,6 +695,8 @@
 									<string>XCDetailModule</string>
 								</dict>
 								<dict>
+									<key>BecomeActive</key>
+									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
@@ -707,7 +707,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {874, 80}}</string>
+										<string>{{10, 27}, {1129, 382}}</string>
+										<key>RubberWindowFrame</key>
+										<string>47 26 1438 970 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -746,8 +748,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1129, 88}}</string>
-										<key>RubberWindowFrame</key>
-										<string>62 165 1438 970 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -953,7 +953,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>330468252.70355803</real>
+	<real>330469105.86590099</real>
 	<key>ToolbarConfigUserDefaultsMinorVersion</key>
 	<string>2</string>
 	<key>ToolbarDisplayMode</key>
@@ -975,7 +975,7 @@
 		<string>/Users/neil/iPhone/Applications/CycleStreets/ios/CycleStreets.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>62 165 1438 970 0 0 1920 1178 </string>
+	<string>47 26 1438 970 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
