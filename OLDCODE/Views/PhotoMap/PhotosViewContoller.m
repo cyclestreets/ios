@@ -272,9 +272,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)sendPhoto {
 	self.addPhoto = nil;
-	//self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:[UserAccount sharedInstance].userPassword];
+	self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:[UserAccount sharedInstance].userPassword];
 	
-	self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:@"incorrectpassword"];
+	//self.addPhoto = [[AddPhoto alloc] initWithUsername:[UserAccount sharedInstance].user.username withPassword:@"incorrectpassword"];
 	
 	self.addPhoto.caption = self.currentCaption;
 	

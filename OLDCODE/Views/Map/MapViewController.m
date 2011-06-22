@@ -793,7 +793,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 #pragma mark utility
 
-// all the things that need fixed if we have asked (or been forced) to stop doing location.
+
 - (void)stopDoingLocation {
 	BetterLog(@"doingLocation=%i",doingLocation);
 	if (!doingLocation) {
@@ -818,7 +818,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			return;
 		}
 		
-		//We used the location to find an endpoint, so now tidy up the state.
+		//We used the location to find an endpoint, so now increment the state.
 		if (self.planningState == stateLocatingEnd) {
 			if (self.end) {
 				[self gotoState:statePlan];
@@ -837,11 +837,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
-// all the things that need fixed if we have asked (or been forced) to start doing location.
+
 - (void)startDoingLocation {
 	if (!doingLocation) {
 		
 		if(locationManager.locationServicesEnabled==YES){
+			
+			//nil the lastLocation so that the accuracy refining occurs for this request
+			self.lastLocation=nil;
 			
 			doingLocation = YES;
 			locationManager.delegate = self;
@@ -1024,6 +1027,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		   fromLocation:(CLLocation *)oldLocation
 {
 	
+	// Note: we need to doublecheck this flag as this method appears to get called
+	// once even after we have told it to stop!
+	// if left un checked it will call addLocation too many times for a planning session
 	if(doingLocation==YES){
 		
 		self.programmaticChange = YES;
@@ -1043,6 +1049,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			// store the location as the "best effort"
 			self.lastLocation = newLocation;
 			
+			// if we reach accuracy we switch off gps and add a start||finish point
 			if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
 				
 				[self addLocation:newLocation.coordinate];
@@ -1057,37 +1064,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 	}
 	
-	
-	/*
-	//so that callee can decide the context.
-	self.programmaticChange = YES;
-	DLog(@"programmaticChange <-- YES");
-	BetterLog(@"manager.da=%d",manager.desiredAccuracy);
-	
-	//turn off geolocation automatically in 10s if we're already within 100 metres, in 1s if within 20
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopDoingLocation) object:nil];
-	NSTimeInterval delay = LOC_OFF_DELAY_BAD;
-	if (newLocation.horizontalAccuracy < ACCURACY_OK) {
-		delay = LOC_OFF_DELAY_OK;
-	}
-	if (newLocation.horizontalAccuracy < ACCURACY_BEST) {
-		delay = LOC_OFF_DELAY_BEST;
-	}
-	DLog(@"accuracy %f, delay %f", newLocation.horizontalAccuracy, delay);
-	[self performSelector:@selector(stopDoingLocation) withObject:nil afterDelay:delay];
-	
-	//carefully replace the location.
-	CLLocation *oldLastLocation = lastLocation;
-	[newLocation retain];
-	lastLocation = newLocation;
-	[oldLastLocation release];
-	
-	[MapViewController zoomMapView:mapView toLocation:newLocation];
-	[self addLocation:newLocation.coordinate];
-	[blueCircleView setNeedsDisplay];
-	
-	self.programmaticChange = NO;
-	 */
 }
 
 

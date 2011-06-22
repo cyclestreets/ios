@@ -169,6 +169,9 @@ static NSString *ROUTEDATE = @"cs:whence";
 
 
 -(NSString*)timeString{
+	if ([self time]>3600) {
+		// need to show hrs
+	}
 	return [NSString stringWithFormat:@"%02d:%02d", [self time]/60, [self time]%60];
 }
 

@@ -103,6 +103,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 }
 
+//NE:  this says 640 in settings but will return 480x320 for none retina, 960x640 for retina?
 - (NSData *)screenSizeData {
 	if (asset) {
 		ALAssetRepresentation *representation = [asset defaultRepresentation];

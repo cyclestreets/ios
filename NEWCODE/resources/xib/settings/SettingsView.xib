@@ -707,7 +707,7 @@
 							<object class="IBUIView" id="274490945">
 								<reference key="NSNextResponder" ref="905687890"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{9, 105}, {300, 1}}</string>
+								<string key="NSFrame">{{9, 74}, {300, 1}}</string>
 								<reference key="NSSuperview" ref="905687890"/>
 								<reference key="IBUIBackgroundColor" ref="232987234"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -715,7 +715,7 @@
 							<object class="IBUIView" id="290364946">
 								<reference key="NSNextResponder" ref="905687890"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{9, 108}, {300, 1}}</string>
+								<string key="NSFrame">{{9, 75}, {300, 1}}</string>
 								<reference key="NSSuperview" ref="905687890"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -757,13 +757,13 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, 604}, {320, 73}}</string>
+						<string key="NSFrame">{{0, 604}, {320, 79}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="IBUIBackgroundColor" ref="883250353"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{319, 695}</string>
+				<string key="NSFrameSize">{320, 695}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -1105,9 +1105,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="923268967"/>
 							<reference ref="274490945"/>
-							<reference ref="290364946"/>
 							<reference ref="967469514"/>
 							<reference ref="648424744"/>
+							<reference ref="290364946"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Endpoint</string>
@@ -1124,12 +1124,6 @@
 						<string key="objectName">DividerGrey</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">104</int>
-						<reference key="object" ref="290364946"/>
-						<reference key="parent" ref="905687890"/>
-						<string key="objectName">DividerWhite</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">106</int>
 						<reference key="object" ref="967469514"/>
 						<reference key="parent" ref="905687890"/>
@@ -1138,6 +1132,12 @@
 						<int key="objectID">109</int>
 						<reference key="object" ref="648424744"/>
 						<reference key="parent" ref="905687890"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">104</int>
+						<reference key="object" ref="290364946"/>
+						<reference key="parent" ref="905687890"/>
+						<string key="objectName">DividerWhite</string>
 					</object>
 				</object>
 			</object>
@@ -1150,6 +1150,7 @@
 					<string>1.IBEditorWindowLastContentRect</string>
 					<string>1.IBPluginDependency</string>
 					<string>1.IBUserGuides</string>
+					<string>1.IBViewEditorWindowController.showingBoundsRectangles</string>
 					<string>100.IBPluginDependency</string>
 					<string>100.IBViewBoundsToFrameTransform</string>
 					<string>103.IBPluginDependency</string>
@@ -1231,11 +1232,12 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>SettingsViewController</string>
 					<string>UIResponder</string>
-					<string>{{477, 64}, {319, 695}}</string>
+					<string>{{701, 61}, {320, 695}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 					</object>
+					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUEgAABD+QAAA</bytes>
