@@ -73,11 +73,13 @@ static NSDictionary *segmentDirectionsIcons;
 	self.paddingBottom=5;
 	self.backgroundColor=UIColorFromRGB(0xECE9E8);
 	
-	self.layer.shadowColor = [UIColor blackColor].CGColor;
-	self.layer.shadowOpacity = 0.4f;
-	self.layer.shadowOffset = CGSizeMake(0, -3);
-	self.layer.shadowRadius = 3.0f;
-	self.layer.masksToBounds = NO;
+	if ([self.layer respondsToSelector:@selector(setShadowColor:)]) {
+		self.layer.shadowColor = [UIColor blackColor].CGColor;
+		self.layer.shadowOpacity = 0.4f;
+		self.layer.shadowOffset = CGSizeMake(0, -3);
+		self.layer.shadowRadius = 3.0f;
+		self.layer.masksToBounds = NO;
+	}
 	
 	UIView *iconcontainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 32, 69)];
 	iconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];

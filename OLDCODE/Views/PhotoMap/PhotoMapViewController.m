@@ -192,6 +192,10 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];	
 }
 
+-(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	
+}
+
 - (void) afterMapMove: (RMMapView*) map {
 	//DLog(@"afterMapMove");
 	[blueCircleView setNeedsDisplay];

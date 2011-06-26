@@ -141,6 +141,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 */
 
+-(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	
+
+	
+}
+
 - (NSArray *) pointList {
 	BetterLog(@"");
 	return [MapViewController pointList:route withView:mapView];
@@ -323,11 +329,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // all the things that need fixed if we have asked (or been forced) to start doing location.
 - (void)startDoingLocation {
-	doingLocation = YES;
-	locationButton.style = UIBarButtonItemStyleDone;
-	locationManager.delegate = self;
-	[locationManager startUpdatingLocation];
-	blueCircleView.hidden = NO;
+	
+	if(locationManager.locationServicesEnabled==YES){
+	
+		doingLocation = YES;
+		locationButton.style = UIBarButtonItemStyleDone;
+		locationManager.delegate = self;
+		[locationManager startUpdatingLocation];
+		blueCircleView.hidden = NO;
+	}else {
+		UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+														   message:@"Location services for CycleStreets are off, please enable in Settings > General > Location Services to use location based features."
+														  delegate:self
+												 cancelButtonTitle:@"OK"
+												 otherButtonTitles:nil];
+		[gpsAlert show];
+		[gpsAlert release];
+	}
+
 }
 
 - (IBAction) didLocation {
@@ -367,6 +386,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 {
 	//TODO alert: What exactly does the location finding do in this view?
 	[self stopDoingLocation];
+	
+	UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+													   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
+													  delegate:nil
+											 cancelButtonTitle:@"OK"
+											 otherButtonTitles:nil];
+	[gpsAlert show];
+	[gpsAlert release];
 }
 
 
