@@ -239,8 +239,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 		
 	}else {
 		
-		NSLog(@"[DEBUG] response.dataid=%@",response.dataid);
-		NSLog(@"[DEBUG] response.requestid=%@",response.requestid);
 		
 		[[dataProviders objectForKey:response.dataid] setObject:response.dataProvider forKey:response.requestid];
 		

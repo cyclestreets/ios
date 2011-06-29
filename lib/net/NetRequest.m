@@ -92,12 +92,11 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		NSLog(@"[DEBUG] POST SEND:");
 		for(NSString *key in parameters){
-			NSLog(@"[DEBUG] %@=%@",key,[parameters objectForKey:key]);
+			//NSLog(@"[DEBUG] %@=%@",key,[parameters objectForKey:key]);
 		}
 		 
-		NSLog(@"[DEBUG] POST SEND:%@",[parameters urlEncodedString]);
+		//NSLog(@"[DEBUG] POST SEND:%@",[parameters urlEncodedString]);
 		
 		NSString *parameterString=[parameters urlEncodedString];
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
@@ -133,7 +132,7 @@
 		
 		NSString *parameterString=[[CJSONSerializer serializer] serializeDictionary:parameters];
 		
-		NSLog(@"[DEBUG] JSONPOST SEND:%@",parameterString);
+		//NSLog(@"[DEBUG] JSONPOST SEND:%@",parameterString);
 		
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
@@ -154,9 +153,9 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
+		//NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
 		[urlString release];
-		NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
+		//NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
 		
 		NSString *parameterString=[postparameters urlEncodedString];
 		

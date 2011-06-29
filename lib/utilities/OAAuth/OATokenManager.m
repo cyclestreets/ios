@@ -220,7 +220,7 @@
 	 settings (useful for iPhone) */
 	OAToken *token = [[[OAToken alloc] initWithUserDefaultsUsingServiceProviderName:oauthBase prefix:[@"request:" stringByAppendingString:realm]] autorelease];
 		/* iPhone specific, the manager must have got the authorized token before reaching this point */
-	NSLog(@"request token in settings %@", token);
+	//NSLog(@"request token in settings %@", token);
 	if (token && token.key && [authorizedTokenKey isEqualToString:token.key]) {
 		reqToken = [token retain];
 		[self exchangeToken];

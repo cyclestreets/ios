@@ -92,7 +92,7 @@
 }
 
 - (void)callFailed:(OAServiceTicket *)aTicket withError:(NSError *)error {
-	NSLog(@"error body: %@", aTicket.body);
+//	NSLog(@"error body: %@", aTicket.body);
 	self.ticket = aTicket;
 	[aTicket release];
 	OAProblem *problem = [OAProblem problemWithResponseBody:ticket.body];

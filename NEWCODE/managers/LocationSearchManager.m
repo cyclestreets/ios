@@ -122,6 +122,7 @@
 
 -(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType{
 	
+	/*
 	activeFilterType=filterType;
 	activeRequestType=requestType;
 	 
@@ -160,13 +161,14 @@
 		
 	}
 	
-	CLLocationCoordinate2D centreLocation;
+	//CLLocationCoordinate2D centreLocation;
 	
 	if(requiresNetWorkLookUp==YES){
 		
+		/*
 		NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[cycleStreets APIKey],@"key",
 										 searchString,@"street",
-										 [NSNumber numberWithFloat:centreLocation.longitude - range],@"w",
+										 [NSNumber numberWithFloat:(centreLocation.longitude-range)],@"w",
 										 [NSNumber numberWithFloat:centreLocation.latitude + range],@"n",
 										 [NSNumber numberWithFloat:centreLocation.longitude + range],@"e",
 										 [NSNumber numberWithFloat:centreLocation.latitude - range],@"s",
@@ -189,8 +191,9 @@
 		
 		[self showProgressHUDWithMessage:@"Searching..."];
 		
+		
 	}
-	
+	 */
 }
 
 

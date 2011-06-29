@@ -90,7 +90,7 @@ static NSString *clientidFileConst = @"clientid";
 // the plist of settings
 - (NSDictionary *) settings {
 	NSDictionary *result = [NSDictionary dictionaryWithContentsOfFile:[self settingsFile]];
-	NSLog(@"settings=%@",result);
+	//NSLog(@"settings=%@",result);
 	if (result == nil) {
 		result = [NSDictionary dictionaryWithObjectsAndKeys:nil];
 	}
@@ -245,7 +245,7 @@ static NSString *clientidFileConst = @"clientid";
 			if (isReadable && !isDirectory) {
 				int fileSize = [[fileManager attributesOfItemAtPath:path error:nil] fileSize];
 				if (fileSize > 10000) {
-					NSLog(@"%d %d %@", isReadable, isDirectory, path);
+					//NSLog(@"%d %d %@", isReadable, isDirectory, path);
 				}
 			}
 			if (isDirectory && isReadable) {
@@ -258,7 +258,7 @@ static NSString *clientidFileConst = @"clientid";
 					}
 					[Files dump:pathContents];
 				} else {
-					NSLog(@"error %@ with file %@", [error localizedDescription], path);
+					//NSLog(@"error %@ with file %@", [error localizedDescription], path);
 				}
 			}
 		}
@@ -280,12 +280,12 @@ static NSString *clientidFileConst = @"clientid";
 	}
 	 */
 	for (int i = 1; i < 17; i++) {
-		NSLog(@"directory %d", i);
+		//NSLog(@"directory %d", i);
 		NSArray *roots = NSSearchPathForDirectoriesInDomains(i, NSAllDomainsMask, YES);
 		[Files dump:roots];
 	}
 	for (int i = 99; i < 102; i++) {
-		NSLog(@"directory %d", i);
+		//NSLog(@"directory %d", i);
 		NSArray *roots = NSSearchPathForDirectoriesInDomains(i, NSAllDomainsMask, YES);
 		[Files dump:roots];
 	}

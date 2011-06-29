@@ -2461,26 +2461,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../CloudMadeApi/libs/CloudMade/Device\"",
-					"\"$(SRCROOT)/../CloudMadeApi/libs/CloudMade/Simulator\"",
-					"\"$(SRCROOT)/../CloudMadeApi/libs/Proj4/Device\"",
-					"\"$(SRCROOT)/../CloudMadeApi/libs/Proj4/Simulator\"",
-					"\"$(SRCROOT)/../CloudMadeApi/libs/route-me/Device\"",
-					"\"$(SRCROOT)/../CloudMadeApi/libs/route-me/Simulator\"",
-					"\"$(SRCROOT)/../iphone-EXIF/Release-iphoneos\"",
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-licucore",
+					"-lxml2",
+					"-ObjC",
 				);
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CycleStreets;
+				PROVISIONING_PROFILE = "C9C99A9F-C3FC-4294-9877-717420C4CF14";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -2518,7 +2515,11 @@
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-lxml2",
+					"-licucore",
+					"-ObjC",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -2553,6 +2554,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
@@ -2565,6 +2567,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
+				PROVISIONING_PROFILE = "C9C99A9F-C3FC-4294-9877-717420C4CF14";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";

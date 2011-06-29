@@ -653,12 +653,9 @@
 +(void)printDictionaryContents:(NSDictionary*)dict{
 	
 	if(dict!=nil){
-		NSLog(@"printDictionaryContents: %@",dict);
-		NSLog(@"-----------------------------------");
 		for (NSString *key in dict) {
 			NSLog(@"%@: %@",key,[dict valueForKey:key]);
 		}
-		NSLog(@"-----------------------------------");
 	}
 	
 }

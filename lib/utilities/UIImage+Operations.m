@@ -205,7 +205,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 	NSAssert(image, @"can't find average color of nil image");
 	NSInteger bpp = CGImageGetBitsPerPixel(image.CGImage);
 	if(bpp != 8){
-		NSLog(@"WARNING: average color of the image border can't be calculated for images having more than 8bpp(yours is %dbpp). Converting to grayscale first.", bpp);
+		//NSLog(@"WARNING: average color of the image border can't be calculated for images having more than 8bpp(yours is %dbpp). Converting to grayscale first.", bpp);
 		image = [UIImage convertTo8bppGrayscaleFromImage:image];
 	}
 	

@@ -251,29 +251,29 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void)logState {
 	switch (self.planningState) {
 		case stateStart:
-			NSLog(@"stateStart");
+			//DLog(@"stateStart");
 			break;
 		case stateEnd:
-			NSLog(@"stateEnd");
+			//DLog(@"stateEnd");
 			break;
 		case stateLocatingStart:
-			NSLog(@"stateLocatingStart");
+			//DLog(@"stateLocatingStart");
 			break;
 		case stateLocatingEnd:
-			NSLog(@"stateLocatingEnd");
+			//DLog(@"stateLocatingEnd");
 			break;
 		case statePlan:
-			NSLog(@"statePlan");
+			//DLog(@"statePlan");
 			break;
 		case stateRoute:
-			NSLog(@"stateRoute");
+			//NSLog(@"stateRoute");
 			break;
 	}
 }
 
 - (void)gotoState:(PlanningState)newPlanningState {
 	
-	NSLog(@"gotoState... before");
+	DLog(@"gotoState... before");
 	[self logState];
 	
 	self.oldPlanningState=planningState;
@@ -281,7 +281,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
 	
-	NSLog(@"gotoState... after");
+	DLog(@"gotoState... after");
 	[self logState];
 	
 	switch (self.planningState) {
@@ -632,7 +632,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // Use stateXXX and the existence of a marker, to decide whether we should be moving the marker,
 // or adding a new one.
 - (void) addLocation:(CLLocationCoordinate2D)location {
-	NSLog(@"addLocation");
+	DLog(@"addLocation");
 	
 	//end is too near start, and is being done by autolocation.
 	if (self.programmaticChange && self.planningState == stateLocatingEnd) {
@@ -1084,7 +1084,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 #pragma mark search response
 
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location {
-	NSLog(@"didMoveToLocation");
+	DLog(@"didMoveToLocation");
 	[mapView moveToLatLong: location];
 	[self addLocation:location];
 	[lineView setNeedsDisplay];
