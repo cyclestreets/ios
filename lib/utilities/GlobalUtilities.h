@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define ENABLEDEBUGTRACE 0
+#define ENABLEDEBUGTRACE 1
 
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
