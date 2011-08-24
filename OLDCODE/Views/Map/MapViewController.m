@@ -39,6 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMCloudMadeMapSource.h"
 #import "RMOpenStreetMapSource.h"
 #import "RMOpenCycleMapSource.h"
+#import "RMOrdnanceSurveyStreetViewMapSource.h"
 #import "RMTileSource.h"
 #import "RMCachedTileSource.h"
 #import "PhotoList.h"
@@ -83,9 +84,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 static NSString *MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
 static NSString *MAPPING_BASE_OSM = @"OpenStreetMap";
+static NSString *MAPPING_BASE_OS = @"OS";
 
 static NSString *MAPPING_ATTRIBUTION_OPENCYCLEMAP = @"(c) OpenStreetMap and contributors, CC-BY-SA; Map images (c) OpenCycleMap";
 static NSString *MAPPING_ATTRIBUTION_OSM = @"(c) OpenStreetMap and contributors, CC-BY-SA";
+static NSString *MAPPING_ATTRIBUTION_OS = @"Contains Ordnance Survey data (c) Crown copyright and database right 2010";
 
 static NSInteger MAX_ZOOM = 18;
 static NSInteger MIN_ZOOM = 1;
@@ -182,7 +185,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 + (NSArray *)mapStyles {
-	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, nil];
+	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, MAPPING_BASE_OS,nil];
 }
 
 + (NSString *)currentMapStyle {
@@ -201,6 +204,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		mapAttribution = MAPPING_ATTRIBUTION_OSM;
 	} else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]) {
 		mapAttribution = MAPPING_ATTRIBUTION_OPENCYCLEMAP;
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]) {
+		mapAttribution = MAPPING_ATTRIBUTION_OS;
 	}
 	return mapAttribution;
 }
@@ -216,6 +221,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	{
 		//open cycle map
 		tileSource = [[[RMOpenCycleMapSource alloc] init] autorelease];
+	}
+	else if ([mapStyle isEqualToString:MAPPING_BASE_OS])
+	{
+		//Ordnance Survey
+		tileSource = [[[RMOrdnanceSurveyStreetViewMapSource alloc] init] autorelease];
 	}
 	else
 	{
