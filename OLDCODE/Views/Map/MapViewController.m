@@ -370,7 +370,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.cycleStreets = [CycleStreets sharedInstance];
 	
 	
-	self.mapView.hidden = YES;
+	//self.mapView.hidden = YES;
 	
 	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	locatingIndicator.hidesWhenStopped=YES;
@@ -596,6 +596,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self performSelector:@selector(cancelAlert:) withObject:self.startFinishAlert afterDelay:2.0];
 }
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 - (CLLocationDistance) distanceFromStart:(CLLocationCoordinate2D)locationLatLon {
 	CLLocationCoordinate2D fromLatLon = [[mapView markerManager] latitudeLongitudeForMarker:start];
 	CLLocation *from = [[[CLLocation alloc] initWithLatitude:fromLatLon.latitude
@@ -683,17 +684,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 
-
+// Note: this is disbled due a bug with didDragMarker not receiving drag updates
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
-	DLog(@"tapOnMarker");
-	mapView.enableDragging=NO;
+	BetterLog(@"");
+	//mapView.enableDragging=NO;
 	
 }
 
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
 	if (marker == start || marker == end) {
-		DLog(@"shoulddrag");
+		BetterLog(@"");
 		return YES;
 	}
 	return NO;
@@ -701,9 +702,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
  
 //TODO: bug here with marker dragging, doesnt recieve any touch updates
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
-	DLog(@"dragafter");
+	
 	NSSet *touches = [event touchesForView:map];
 	for (UITouch *touch in touches) {
+		BetterLog(@"");
 		CGPoint point = [touch locationInView:map];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
 		[[map markerManager] moveMarker:marker AtLatLon:location];
@@ -837,7 +839,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
-
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 - (void)startDoingLocation {
 	if (!doingLocation) {
 		

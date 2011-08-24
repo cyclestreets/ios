@@ -49,6 +49,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize lastLocation;
 @synthesize lineView;
 @synthesize attributionLabel;
+@synthesize photoMarkers;
 @synthesize locationButton;
 @synthesize infoButton;
 @synthesize segmentInStage;
@@ -63,9 +64,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize locationView;
 @synthesize queryPhoto;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [footerView release], footerView = nil;
@@ -74,6 +75,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [lastLocation release], lastLocation = nil;
     [lineView release], lineView = nil;
     [attributionLabel release], attributionLabel = nil;
+    [photoMarkers release], photoMarkers = nil;
     [locationButton release], locationButton = nil;
     [infoButton release], infoButton = nil;
     [segmentInStage release], segmentInStage = nil;
@@ -87,6 +89,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
     [super dealloc];
 }
+
 
 
 
@@ -180,17 +183,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void) photoSuccess:(XMLRequest *)request results:(NSDictionary *)elements {
+	
+	BetterLog(@"");
+	
 	//Check we're still looking for the same page of photos
+	
 	if (index != photosIndex) return;
+	
+	
+	[self clearPhotos];
+	
+	if (photoMarkers == nil) {
+		photoMarkers = [[NSMutableArray alloc] initWithCapacity:10];
+	}
 	
 	PhotoList *photoList = [[PhotoList alloc] initWithElements:elements];
 	for (PhotoEntry *photo in [photoList photos]) {
 		RMMarker *marker = [Markers markerPhoto];
 		marker.data = photo;
+		[photoMarkers addObject:marker];
 		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
 	}
 	[photoList release];
 	self.queryPhoto = nil;
+}
+
+
+- (void) clearPhotos {
+	//Clear out the previous list.
+	if (photoMarkers != nil) {
+		NSArray *oldMarkers = [photoMarkers copy];
+		for (RMMarker *oldMarker in photoMarkers) {
+			[[mapView markerManager] removeMarker:oldMarker];
+		}
+		[oldMarkers release];
+	}
 }
 
 - (void) photoFailure:(XMLRequest *)request message:(NSString *)message {
@@ -200,6 +227,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 //helper, could be shelled out as more general.
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
+	
+	BetterLog(@"");
+	
 	photosIndex = index;//we are looking for the photos associated with this index
 	self.queryPhoto = [[[QueryPhoto alloc] initNorthEast:ne SouthWest:sw limit:4] autorelease];
 	[queryPhoto runWithTarget:self onSuccess:@selector(photoSuccess:results:) onFailure:@selector(photoFailure:message:)];
@@ -475,15 +505,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[blueCircleView setNeedsDisplay];
 }
 
-/*
- - (void) beforeMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
- }
- */
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
 	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];
+	[blueCircleView setNeedsDisplay];	
 }
+
+
+-(void)updateMapPhotoMarkers{
+	
+	CGRect bounds = mapView.contents.screenBounds;
+
+	CLLocationCoordinate2D nw = [mapView pixelToLatLong:bounds.origin];
+	CLLocationCoordinate2D se = [mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
+	CLLocationCoordinate2D ne;
+	CLLocationCoordinate2D sw;
+	ne.latitude = nw.latitude;
+	ne.longitude = se.longitude;
+	sw.latitude = se.latitude;
+	sw.longitude = nw.longitude;
+	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
+}
+
 
 #pragma mark hygiene
 
