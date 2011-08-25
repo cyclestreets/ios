@@ -183,7 +183,7 @@ static NSDictionary *segmentDirectionsIcons;
 	}
 	
 	iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[[dataProvider objectForKey:@"capitalizedTurn"] lowercaseString]]];
-	roadTypeiconView.image=[UIImage imageNamed:[SegmentVO provisionIcon:[dataProvider objectForKey:@"provisionName"]]];
+	roadTypeiconView.image=[UIImage imageNamed:[SegmentVO provisionIcon:[[dataProvider objectForKey:@"provisionName"]lowercaseString] ]];
 
 
 	roadNameLabel.text=[dataProvider objectForKey:@"roadname"];
@@ -215,7 +215,9 @@ static NSDictionary *segmentDirectionsIcons;
 					  @"UIIcon_bear_left.png", @"bear left", 
 					  @"UIIcon_bear_right.png", @"bear right", 
 					  @"UIIcon_turn_left.png", @"turn left", 
+					@"UIIcon_turn_left.png", @"sharp left", 		   
 					  @"UIIcon_turn_right.png", @"turn right",
+						@"UIIcon_turn_right.png", @"sharp right",
 					  nil] retain];
 	}
 	return [segmentDirectionsIcons valueForKey:segmentDirectionType];

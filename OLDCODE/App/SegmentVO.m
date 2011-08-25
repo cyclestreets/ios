@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "SegmentVO.h"
 #import "CSPoint.h"
+#import "GlobalUtilities.h"
 
 @implementation SegmentVO
 
@@ -110,29 +111,36 @@ static NSDictionary *roadIcons;
 }
 
 + (NSString *)provisionIcon:(NSString *)provisionName {
+	
 	if (nil == roadIcons) {
 		//TODO the association of symbols to types could be improved
 		roadIcons = [[NSDictionary dictionaryWithObjectsAndKeys:
-					  @"UIIcon_roads.png", @"Service Road", 
-					  @"UIIcon_roads.png", @"Busy Road", 
-					  @"UIIcon_roads.png", @"Road", 
-					  @"UIIcon_roads.png", @"Busy and fast road", 
+					  @"UIIcon_roads.png", @"busy road", 
+					  @"UIIcon_roads.png", @"road", 
+					  @"UIIcon_roads.png", @"busy and fast road", 
 					  @"UIIcon_roads.png", @"secondary",
-					  @"UIIcon_footpaths.png", @"Footpath", 
+					  @"UIIcon_roads.png", @"major road",
+					  @"UIIcon_roads.png", @"main road",
+					  @"UIIcon_minor_roads.png", @"minor road",
+					  @"UIIcon_minor_roads.png", @"service road",
+					  @"UIIcon_footpaths.png", @"footpath", 
 					  @"UIIcon_footpaths.png", @"footway", 
 					  @"UIIcon_footpaths.png", @"pedestrian",
-					  @"UIIcon_footpaths.png", @"Steps with Channel", 
-					  @"UIIcon_cycle_lanes.png", @"Unsegregated Shared Use", 
-					  @"UIIcon_cycle_lanes.png", @"Narrow Cycle Lane", 
-					  @"UIIcon_cycle_lanes.png", @"Cycle Lane", 
-					  @"UIIcon_cycle_tracks.png", @"Cycle Track", 
-					  @"UIIcon_tracks.png", @"Track", 
+					  @"UIIcon_footpaths.png", @"steps with channel", 
+					  @"UIIcon_cycle_lanes.png", @"unsegregated shared use", 
+					  @"UIIcon_cycle_lanes.png", @"narrow cycle lane", 
+					  @"UIIcon_cycle_lanes.png", @"cycle lane", 
+					  @"UIIcon_cycle_tracks.png", @"cycle track", 
+					   @"UIIcon_cycle_tracks.png", @"cycle path", 
+					  @"UIIcon_tracks.png", @"track", 
 					  @"UIIcon_tracks.png", @"bridleway", 
-					  @"UIIcon_quiet_street.png", @"Quiet Street",
+					  @"UIIcon_quiet_street.png", @"quiet street",
+					  @"UIIcon_quiet_street.png", @"residential street",
 					  @"UIIcon_quiet_street.png", @"unclassified, service", // need icon for this
 					  @"UIIcon_quiet_street.png", @"unclassified,service",
 					 nil] retain];
 	}
+	
 	return [roadIcons valueForKey:provisionName];
 }
 
@@ -145,7 +153,7 @@ static NSDictionary *roadIcons;
 	[view setValue:[NSString stringWithFormat:@"%4dm", [self segmentDistance]] forKeyPath:@"distance.text"];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	[view setValue:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles] forKeyPath:@"total.text"];
-	NSString *imageName = [SegmentVO provisionIcon:[self provisionName]];
+	NSString *imageName = [SegmentVO provisionIcon:[[self provisionName] lowercaseString]];
 	[view setValue:[UIImage imageNamed:imageName] forKeyPath:@"image.image"];
 	if ([view respondsToSelector:@selector(setBusyness:)]) {
 		[view setValue:[self provisionName] forKeyPath:@"busyness.text"];

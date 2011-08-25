@@ -652,8 +652,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}
 	}
 	
-	BetterLog(@"");
-	
 	//explicit click while autolocation was happening. Turn off auto, accept click.
 	if (!self.programmaticChange) {
 		if (self.planningState == stateLocatingEnd || self.planningState == stateLocatingStart) {
@@ -693,30 +691,36 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 // Note: this is disbled due a bug with didDragMarker not receiving drag updates
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
-	BetterLog(@"");
+	//BetterLog(@"");
 	//mapView.enableDragging=NO;
 	
 }
 
+// Should only return yes is marker is start/end and we have not a route drawn
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
+	/*
 	if (marker == start || marker == end) {
 		BetterLog(@"");
 		return YES;
 	}
+	 */
 	return NO;
 }
  
-//TODO: bug here with marker dragging, doesnt recieve any touch updates
+//TODO: bug here with marker dragging, doesnt recieve any touch updates: 
+//NE: fix is, should ask for correct sub view, we have several overlayed, this needs to be optimised for this to work
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
-	NSSet *touches = [event touchesForView:map];
+	/*
+	NSSet *touches = [event touchesForView:lineView];
 	for (UITouch *touch in touches) {
 		BetterLog(@"");
 		CGPoint point = [touch locationInView:map];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
 		[[map markerManager] moveMarker:marker AtLatLon:location];
 	}
+	 */
 }
 
 
