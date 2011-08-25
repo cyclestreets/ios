@@ -208,7 +208,13 @@ static NSString *ROUTEDATE = @"cs:whence";
 -(NSString*)dateString{
 	
 	NSDate *newdate=[NSDate dateFromString:[self date] withFormat:@"y-MM-dd HH:mm:ss"];		
-	return [NSDate stringFromDate:newdate withFormat:@"eeee d MMMM y HH:mm"];
+	return [NSDate stringFromDate:newdate withFormat:@"eee d MMMM y HH:mm"];
+	
+}
+
+-(NSString*)planString{
+	
+	return [[self plan] capitalizedString];
 	
 }
 

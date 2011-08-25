@@ -45,25 +45,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet		UILabel				*timeLabel;
 	IBOutlet		UILabel				*lengthLabel;
 	IBOutlet		UILabel				*planLabel;
-	IBOutlet		UILabel				*speedLabel;	
+	IBOutlet		UILabel				*speedLabel;
 	
 	
 	IBOutlet		UIButton			*routeButton;
 	
 }
 
-@property (nonatomic, retain)	Route	*route;
-@property (nonatomic, retain)	LayoutBox	*viewContainer;
-@property (nonatomic, retain)	IBOutlet LayoutBox	*headerContainer;
-@property (nonatomic, retain)	IBOutlet ExpandedUILabel	*routeNameLabel;
-@property (nonatomic, retain)	IBOutlet UILabel	*dateLabel;
-@property (nonatomic, retain)	IBOutlet UILabel	*routeidLabel;
-@property (nonatomic, retain)	IBOutlet LayoutBox	*readoutContainer;
-@property (nonatomic, retain)	IBOutlet UILabel	*timeLabel;
-@property (nonatomic, retain)	IBOutlet UILabel	*lengthLabel;
-@property (nonatomic, retain)	IBOutlet UILabel	*planLabel;
-@property (nonatomic, retain)	IBOutlet UILabel	*speedLabel;
-@property (nonatomic, retain)	IBOutlet UIButton	*routeButton;
+@property (nonatomic, retain)	Route		*route;
+@property (nonatomic, retain)	LayoutBox		*viewContainer;
+@property (nonatomic, retain)	IBOutlet LayoutBox		*headerContainer;
+@property (nonatomic, retain)	IBOutlet ExpandedUILabel		*routeNameLabel;
+@property (nonatomic, retain)	IBOutlet UILabel		*dateLabel;
+@property (nonatomic, retain)	IBOutlet UILabel		*routeidLabel;
+@property (nonatomic, retain)	IBOutlet LayoutBox		*readoutContainer;
+@property (nonatomic, retain)	IBOutlet UILabel		*timeLabel;
+@property (nonatomic, retain)	IBOutlet UILabel		*lengthLabel;
+@property (nonatomic, retain)	IBOutlet UILabel		*planLabel;
+@property (nonatomic, retain)	IBOutlet UILabel		*speedLabel;
+@property (nonatomic, retain)	IBOutlet UIButton		*routeButton;
 
 
 - (IBAction) didRouteButton;

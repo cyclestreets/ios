@@ -70,6 +70,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
+
+
 - (void)viewDidLoad {
 	
     [super viewDidLoad];
@@ -129,9 +131,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	timeLabel.text=route.timeString;
 	lengthLabel.text=route.lengthString;
-	planLabel.text=[route plan];
+	planLabel.text=route.planString;
 	speedLabel.text=route.speedString;
-	
 	
 	[viewContainer refresh];
 }
