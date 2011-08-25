@@ -29,6 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreets.h"
 #import "Files.h"
 #import "CSExceptions.h"
+#import "DeviceUtilities.h"
 
 static double FADE_DELAY = 5.0;
 static double FADE_DURATION = 1.7;
@@ -109,7 +110,8 @@ static double FADE_DURATION = 1.7;
 		if (self.welcomeView == nil) {
 			self.welcomeView = [self loadWelcomeView];
 		}
-		//[self.controller.view addSubview:self.welcomeView];
+		if([DeviceUtilities detectDevice]!=MODEL_IPHONE_SIMULATOR)
+			[self.controller.view addSubview:self.welcomeView];
 	}
 }
 

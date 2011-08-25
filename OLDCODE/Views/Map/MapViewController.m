@@ -379,9 +379,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.cycleStreets = [CycleStreets sharedInstance];
 	
-	
-	//self.mapView.hidden = YES;
-	
 	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	locatingIndicator.hidesWhenStopped=YES;
 	

@@ -51,6 +51,45 @@
 	
 }
 
++(void)alignView:(UIView*)child withView:(UIView*)view :(LayoutBoxAlignMode)horizontal :(LayoutBoxAlignMode)vertical :(int)inset{
+	
+	CGRect childFrame=child.frame;
+	CGRect parentFrame=view.frame;
+	int xpos=childFrame.origin.x;
+	int ypos=childFrame.origin.y;
+	
+	if (horizontal!=BUNoneLayoutMode) {
+		
+		if(horizontal==BUCenterAlignMode){
+			xpos=round((parentFrame.size.width-childFrame.size.width)/2);
+		}else if (horizontal==BURightAlignMode) {
+			xpos=round(parentFrame.size.width-childFrame.size.width-inset);
+		}else if (horizontal==BULeftAlignMode) {
+			xpos=inset;
+		}
+		
+	}
+	
+	
+	if (vertical!=BUNoneLayoutMode) {
+		
+		if(vertical==BUCenterAlignMode){
+			ypos=round((parentFrame.size.height-childFrame.size.height)/2);
+		}else if (vertical==BUBottomAlignMode) {
+			ypos=round(parentFrame.size.height-childFrame.size.height-inset);
+		}else if (vertical==BUTopAlignMode) {
+			ypos=inset;
+		}
+		
+	}
+	
+	
+	childFrame.origin.x=xpos;
+	childFrame.origin.y=ypos;
+	child.frame=childFrame;
+	
+}
+
 
 +(void)distributeItems:(NSArray*)items inDirection:(LayoutBoxLayoutMode)direction :(int)dimension :(int)inset{
 	

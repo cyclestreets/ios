@@ -15,6 +15,8 @@
 		2805EB58133943BE002D13C5 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 2805EB55133943BE002D13C5 /* lock.png */; };
 		2805EBAE13394D85002D13C5 /* ItineraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2805EBAD13394D85002D13C5 /* ItineraryCell.xib */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
+		283EC4B314064AEC0014A7C5 /* UIButtonBarCameraSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 283EC4B214064AEC0014A7C5 /* UIButtonBarCameraSmall.png */; };
+		283EC4B514064AFA0014A7C5 /* UIButtonBarCameraSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283EC4B414064AFA0014A7C5 /* UIButtonBarCameraSmall@2x.png */; };
 		284415D81355CD790028CCE6 /* CSTabBar_account.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D01355CD790028CCE6 /* CSTabBar_account.png */; };
 		284415D91355CD790028CCE6 /* CSTabBar_add_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D11355CD790028CCE6 /* CSTabBar_add_photo.png */; };
 		284415DA1355CD790028CCE6 /* CSTabBar_credits.png in Resources */ = {isa = PBXBuildFile; fileRef = 284415D21355CD790028CCE6 /* CSTabBar_credits.png */; };
@@ -378,6 +380,8 @@
 		2805EB55133943BE002D13C5 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		2805EBAD13394D85002D13C5 /* ItineraryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryCell.xib; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		283EC4B214064AEC0014A7C5 /* UIButtonBarCameraSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarCameraSmall.png; sourceTree = "<group>"; };
+		283EC4B414064AFA0014A7C5 /* UIButtonBarCameraSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarCameraSmall@2x.png"; sourceTree = "<group>"; };
 		284415D01355CD790028CCE6 /* CSTabBar_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_account.png; sourceTree = "<group>"; };
 		284415D11355CD790028CCE6 /* CSTabBar_add_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_add_photo.png; sourceTree = "<group>"; };
 		284415D21355CD790028CCE6 /* CSTabBar_credits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSTabBar_credits.png; sourceTree = "<group>"; };
@@ -1797,6 +1801,7 @@
 		28AD6525131FC239008527FC /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				283EC4B214064AEC0014A7C5 /* UIButtonBarCameraSmall.png */,
 				289F1A8513729F7E0076086E /* CSBarButton_deletePoint_white.png */,
 				284415CF1355CD790028CCE6 /* TabBar */,
 				28D2BAA71354797F00694093 /* Directional Arrows */,
@@ -1839,6 +1844,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				283EC4B414064AFA0014A7C5 /* UIButtonBarCameraSmall@2x.png */,
 				28D10EB0135D6E54006F1D94 /* Directional Arrows */,
 				28D10EB6135D6E54006F1D94 /* Photomap */,
 				28D10EB8135D6E54006F1D94 /* TabBar */,
@@ -2259,6 +2265,8 @@
 				289F1A8613729F7E0076086E /* CSBarButton_deletePoint_white.png in Resources */,
 				2859146C138E5CC6002B2155 /* UIButtonBarRefresh.png in Resources */,
 				2859146D138E5CC6002B2155 /* UIButtonBarStop.png in Resources */,
+				283EC4B314064AEC0014A7C5 /* UIButtonBarCameraSmall.png in Resources */,
+				283EC4B514064AFA0014A7C5 /* UIButtonBarCameraSmall@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
