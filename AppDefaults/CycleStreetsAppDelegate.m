@@ -35,12 +35,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Query.h"
 #import "Route.h"
 #import "Stage.h"
-#import "BusyAlert.h"
 #import <UIKit/UIKit.h>
 #import "XMLRequest.h"
 #import "Files.h"
 #import "Reachability.h"
-#import "Common.h"
+
 #import "CategoryLoader.h"
 #import "StartupManager.h"
 #import "UserSettingsManager.h"
@@ -55,7 +54,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize optionsAlert;
 @synthesize networkAlert;
 @synthesize stage;
-@synthesize busyAlert;
 @synthesize errorAlert;
 @synthesize startupmanager;
 @synthesize favourites;
@@ -74,7 +72,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [optionsAlert release], optionsAlert = nil;
     [networkAlert release], networkAlert = nil;
     [stage release], stage = nil;
-    [busyAlert release], busyAlert = nil;
     [errorAlert release], errorAlert = nil;
     [startupmanager release], startupmanager = nil;
     [favourites release], favourites = nil;
@@ -87,7 +84,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)loadContext {
-	DLog(@">>>");
+	BetterLog(@">>>");
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	Files *files = cycleStreets.files;
 	NSString *saveIndex = [files miscValueForKey:@"selectedTabIndex"];
@@ -97,7 +94,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)saveContext {
-	DLog(@">>>");
+	BetterLog(@">>>");
 	if (self.tabBarController != nil && self.tabBarController.selectedIndex != NSNotFound) {
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		Files *files = cycleStreets.files;
@@ -121,7 +118,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
-	DLog(@"application didFinishLaunchingWithOptions");
+	BetterLog(@"application didFinishLaunchingWithOptions");
 
 	[self appendStartUpView];
 	
@@ -339,7 +336,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	DLog(@">>>");
+	BetterLog(@">>>");
 	if (alertView == firstAlert) {
 		self.firstAlert = nil;
 		self.secondAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"

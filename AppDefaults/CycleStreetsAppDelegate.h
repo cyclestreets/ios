@@ -32,7 +32,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @class FavouritesViewController;
 @class PhotosViewContoller;
 @class Query;
-@class BusyAlert;
 @class Stage;
 @class AccountViewController;
 #import "StartupManager.h"
@@ -53,8 +52,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//Pop over
 	Stage *stage;
 	
-	//Utilities
-	BusyAlert *busyAlert;
 	UIAlertView *errorAlert;
 	
 	StartupManager				*startupmanager;
@@ -74,7 +71,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain)	IBOutlet UIAlertView	*optionsAlert;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*networkAlert;
 @property (nonatomic, retain)	Stage	*stage;
-@property (nonatomic, retain)	BusyAlert	*busyAlert;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*errorAlert;
 @property (nonatomic, retain)	StartupManager	*startupmanager;
 @property (nonatomic, retain)	FavouritesViewController	*favourites;
