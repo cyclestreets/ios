@@ -10,15 +10,10 @@
 
 
 @interface ExpandedUILabel : UILabel {
-	BOOL			multiline;		
-	BOOL			fixedWidth;
-	int				insetValue;
-	UIColor			*labelColor;
+	BOOL			multiline;
 	BOOL			hasShadow;
 }
-@property (nonatomic)	BOOL		multiline;
-@property (nonatomic)	BOOL		fixedWidth;
-@property (nonatomic)	int		insetValue;
-@property (nonatomic, retain)	UIColor		*labelColor;
-@property (nonatomic)	BOOL		hasShadow;
+@property (nonatomic)		BOOL		 multiline;
+@property (nonatomic)		BOOL		 hasShadow;
+
 @end
