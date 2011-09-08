@@ -39,5 +39,21 @@
 		<key>cache</key>
 		<false/>
 	</dict>
+	<key>RetrievePhotos</key>
+	<dict>
+		<key>id</key>
+		<string>RetrievePhotos</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/photos.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<false/>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

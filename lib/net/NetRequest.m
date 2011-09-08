@@ -169,12 +169,29 @@
 	
 	}	
 	
+    
+    
 	
 
 	return request;
 	
 }
 
+
+-(void)addRequestHeadersForService:(NSMutableURLRequest*)request{
+    
+    if(request!=nil){
+        NSDictionary *headerdict=[service objectForKey:@"headers"];
+        if (headerdict!=nil) {
+            for(NSString *key in headerdict){
+                [request setValue:key forHTTPHeaderField:[headerdict objectForKey:key]];
+            }
+        }
+    }
+    
+    return request;
+    
+}
 
 
 -(NSMutableString*)url{

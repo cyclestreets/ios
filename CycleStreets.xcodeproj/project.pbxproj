@@ -327,6 +327,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2882EC3E1417D87900CBEDF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28AD64AB131FB7EC008527FC /* MapView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 17157D87133BBC8300E28941;
+			remoteInfo = MapViewTests;
+		};
 		28AD64B9131FB7EC008527FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 28AD64AB131FB7EC008527FC /* MapView.xcodeproj */;
@@ -1755,6 +1762,7 @@
 			isa = PBXGroup;
 			children = (
 				28AD64BA131FB7EC008527FC /* libMapView.a */,
+				2882EC3F1417D87900CBEDF2 /* MapViewTests.octest */,
 				28AD64BC131FB7EC008527FC /* RM Unit Tests.app */,
 			);
 			name = Products;
@@ -2045,6 +2053,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		2882EC3F1417D87900CBEDF2 /* MapViewTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MapViewTests.octest;
+			remoteRef = 2882EC3E1417D87900CBEDF2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		28AD64BA131FB7EC008527FC /* libMapView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

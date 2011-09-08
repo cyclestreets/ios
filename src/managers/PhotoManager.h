@@ -15,4 +15,8 @@
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoManager);
 
+-(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;
+-(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit;
+
+
 @end

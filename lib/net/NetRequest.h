@@ -44,5 +44,6 @@ typedef enum{
 
 
 -(NSMutableURLRequest*)requestForType;
+-(void)addRequestHeadersForService:(NSMutableURLRequest*)request;
 -(NSMutableString*)url;
 @end

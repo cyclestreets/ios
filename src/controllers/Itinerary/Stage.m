@@ -301,21 +301,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (IBAction) didRoute {
 	[self dismissModalViewControllerAnimated:YES];
 	
-	/*
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSIndexPath *currentIndex = [NSIndexPath indexPathForRow:index inSection:0];
-	//UITableView *routeTableView = (UITableView *)cycleStreets.appDelegate.routeTable.view;
-	[routeTableView scrollToRowAtIndexPath:currentIndex atScrollPosition:UITableViewScrollPositionTop animated:YES];
-	 */
 }
 
-//pop this view, then select the map
-- (IBAction) didMap {
-	[self dismissModalViewControllerAnimated:YES];
-	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.appDelegate.tabBarController setSelectedViewController:cycleStreets.appDelegate.map];
-}
+
 
 // all the things that need fixed if we have asked (or been forced) to stop doing location.
 - (void)stopDoingLocation {
@@ -488,10 +476,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark hygiene
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)nullify {
@@ -520,8 +505,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 	[self nullify];
 	[super viewDidUnload];
 	BetterLog(@">>>");
