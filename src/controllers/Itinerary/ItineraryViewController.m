@@ -206,7 +206,7 @@
 		[readoutLineOne drawUI];
 		
 		readoutLineTwo.labels=[NSArray arrayWithObjects:@"Planned speed:",route.speedString,
-							   @"Strategy:",[route plan],nil];
+							   @"Strategy:",route.planString,nil];
 		[readoutLineTwo drawUI];
 		
 		self.navigationItem.rightBarButtonItem.enabled=YES;

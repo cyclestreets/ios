@@ -27,23 +27,25 @@
 	MultiLabelLine				*distLabel;
 	MultiLabelLine				*totalLabel;
 	
+	ExpandedUILabel				*segmentIndexLabel;
+	
 	UIImageView					*iconView;
 	UIImageView					*roadTypeiconView;
 
 }
-@property (nonatomic, retain)		NSDictionary		* dataProvider;
-@property (nonatomic)		BOOL		 hasCapitalizedTurn;
-@property (nonatomic, retain)		LayoutBox		* contentContainer;
-@property (nonatomic, retain)		ExpandedUILabel		* roadNameLabel;
-@property (nonatomic, retain)		ExpandedUILabel		* roadTypeLabel;
-@property (nonatomic, retain)		ExpandedUILabel		* capitalizedTurnLabel;
-@property (nonatomic, retain)		LayoutBox		* readoutContainer;
-@property (nonatomic, retain)		MultiLabelLine		* timeLabel;
-@property (nonatomic, retain)		MultiLabelLine		* distLabel;
-@property (nonatomic, retain)		MultiLabelLine		* totalLabel;
-@property (nonatomic, retain)		IBOutlet UIImageView		* iconView;
-@property (nonatomic, retain)		IBOutlet UIImageView		* roadTypeiconView;
-
+@property (nonatomic, retain)	NSDictionary		*dataProvider;
+@property (nonatomic)	BOOL		hasCapitalizedTurn;
+@property (nonatomic, retain)	LayoutBox		*contentContainer;
+@property (nonatomic, retain)	ExpandedUILabel		*roadNameLabel;
+@property (nonatomic, retain)	ExpandedUILabel		*roadTypeLabel;
+@property (nonatomic, retain)	ExpandedUILabel		*capitalizedTurnLabel;
+@property (nonatomic, retain)	LayoutBox		*readoutContainer;
+@property (nonatomic, retain)	MultiLabelLine		*timeLabel;
+@property (nonatomic, retain)	MultiLabelLine		*distLabel;
+@property (nonatomic, retain)	MultiLabelLine		*totalLabel;
+@property (nonatomic, retain)	ExpandedUILabel		*segmentIndexLabel;
+@property (nonatomic, retain)	IBOutlet UIImageView		*iconView;
+@property (nonatomic, retain)	IBOutlet UIImageView		*roadTypeiconView;
 
 -(void)initialise;
 -(void)updateLayout;

@@ -38,6 +38,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMCloudMadeMapSource.h"
 #import "RMOpenStreetMapSource.h"
 #import "RMOpenCycleMapSource.h"
+#import "RMOrdnanceSurveyStreetViewMapSource.h"
 #import "RMTileSource.h"
 #import "RMCachedTileSource.h"
 #import "PhotoList.h"
@@ -81,9 +82,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 static NSString *MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
 static NSString *MAPPING_BASE_OSM = @"OpenStreetMap";
+static NSString *MAPPING_BASE_OS = @"OS";
 
 static NSString *MAPPING_ATTRIBUTION_OPENCYCLEMAP = @"(c) OpenStreetMap and contributors, CC-BY-SA; Map images (c) OpenCycleMap";
 static NSString *MAPPING_ATTRIBUTION_OSM = @"(c) OpenStreetMap and contributors, CC-BY-SA";
+static NSString *MAPPING_ATTRIBUTION_OS = @"Contains Ordnance Survey data (c) Crown copyright and database right 2010";
 
 static NSInteger MAX_ZOOM = 18;
 static NSInteger MIN_ZOOM = 1;
@@ -180,7 +183,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 + (NSArray *)mapStyles {
-	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, nil];
+	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, MAPPING_BASE_OS,nil];
 }
 
 + (NSString *)currentMapStyle {
@@ -199,6 +202,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		mapAttribution = MAPPING_ATTRIBUTION_OSM;
 	} else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]) {
 		mapAttribution = MAPPING_ATTRIBUTION_OPENCYCLEMAP;
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]) {
+		mapAttribution = MAPPING_ATTRIBUTION_OS;
 	}
 	return mapAttribution;
 }
@@ -214,6 +219,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	{
 		//open cycle map
 		tileSource = [[[RMOpenCycleMapSource alloc] init] autorelease];
+	}
+	else if ([mapStyle isEqualToString:MAPPING_BASE_OS])
+	{
+		//Ordnance Survey
+		tileSource = [[[RMOrdnanceSurveyStreetViewMapSource alloc] init] autorelease];
 	}
 	else
 	{
@@ -594,6 +604,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self performSelector:@selector(cancelAlert:) withObject:self.startFinishAlert afterDelay:2.0];
 }
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 - (CLLocationDistance) distanceFromStart:(CLLocationCoordinate2D)locationLatLon {
 	CLLocationCoordinate2D fromLatLon = [[mapView markerManager] latitudeLongitudeForMarker:start];
 	CLLocation *from = [[[CLLocation alloc] initWithLatitude:fromLatLon.latitude
@@ -683,29 +694,35 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
-	BetterLog(@"tapOnMarker");
-	mapView.enableDragging=NO;
+	//BetterLog(@"");
+	//mapView.enableDragging=NO;
 	
 }
 
+// Should only return yes is marker is start/end and we have not a route drawn
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
+	/*
 	if (marker == start || marker == end) {
 		BetterLog(@"shoulddrag");
 		return YES;
 	}
+	 */
 	return NO;
 }
  
-//TODO: bug here with marker dragging, doesnt recieve any touch updates
+//TODO: bug here with marker dragging, doesnt recieve any touch updates: 
+//NE: fix is, should ask for correct sub view, we have several overlayed, this needs to be optimised for this to work
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
-	BetterLog(@"dragafter");
-	NSSet *touches = [event touchesForView:map];
+	
+	/*
+	NSSet *touches = [event touchesForView:lineView];
 	for (UITouch *touch in touches) {
 		CGPoint point = [touch locationInView:map];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
 		[[map markerManager] moveMarker:marker AtLatLon:location];
 	}
+	 */
 }
 
 
@@ -835,7 +852,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
-
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 - (void)startDoingLocation {
 	if (!doingLocation) {
 		

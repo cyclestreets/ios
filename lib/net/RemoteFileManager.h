@@ -29,4 +29,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RemoteFileManager);
 -(void)addRequestToQueue:(NetRequest*)request;
 -(void)removeRequestFromQueue:(NSString*)type andResume:(BOOL)resume;
 -(void)cancelAllRequests;
+
+- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error;
 @end

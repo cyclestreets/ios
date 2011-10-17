@@ -9,6 +9,7 @@
 #import "CSSegmentFooterView.h"
 #import "AppConstants.h"
 #import "SegmentVO.h"
+#import "ViewUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSDictionary *segmentDirectionsIcons;
@@ -24,12 +25,13 @@ static NSDictionary *segmentDirectionsIcons;
 @synthesize timeLabel;
 @synthesize distLabel;
 @synthesize totalLabel;
+@synthesize segmentIndexLabel;
 @synthesize iconView;
 @synthesize roadTypeiconView;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [dataProvider release], dataProvider = nil;
@@ -41,11 +43,13 @@ static NSDictionary *segmentDirectionsIcons;
     [timeLabel release], timeLabel = nil;
     [distLabel release], distLabel = nil;
     [totalLabel release], totalLabel = nil;
+    [segmentIndexLabel release], segmentIndexLabel = nil;
     [iconView release], iconView = nil;
     [roadTypeiconView release], roadTypeiconView = nil;
 	
     [super dealloc];
 }
+
 
 
 
@@ -90,13 +94,14 @@ static NSDictionary *segmentDirectionsIcons;
 	[iconcontainer release];
 	
 	// vertical lb for main text
-	contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 150, 10)];
+	contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 200, 10)];
 	contentContainer.fixedWidth=YES;
 	contentContainer.layoutMode=BUVerticalLayoutMode;
 	contentContainer.itemPadding=2;
 	
 	
-	roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-10, 16)];
+	roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-60, 16)];
+	roadNameLabel.fixedWidth=YES;
 	roadNameLabel.textAlignment=UITextAlignmentLeft;
 	roadNameLabel.multiline=YES;
 	roadNameLabel.textColor=UIColorFromRGB(0x404040);
@@ -140,6 +145,13 @@ static NSDictionary *segmentDirectionsIcons;
 	[contentContainer addSubview:readoutContainer];
 	[self addSubview:contentContainer];
 	
+	segmentIndexLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 16)];
+	segmentIndexLabel.textAlignment=UITextAlignmentRight;
+	segmentIndexLabel.textColor=UIColorFromRGB(0x92140B);
+	segmentIndexLabel.font=[UIFont boldSystemFontOfSize:13];
+	segmentIndexLabel.hasShadow=YES;
+	[self addSubview:segmentIndexLabel];
+	
 }
 
 -(void)updateLayout{
@@ -171,7 +183,7 @@ static NSDictionary *segmentDirectionsIcons;
 	}
 	
 	iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[[dataProvider objectForKey:@"capitalizedTurn"] lowercaseString]]];
-	roadTypeiconView.image=[UIImage imageNamed:[SegmentVO provisionIcon:[dataProvider objectForKey:@"provisionName"]]];
+	roadTypeiconView.image=[UIImage imageNamed:[SegmentVO provisionIcon:[[dataProvider objectForKey:@"provisionName"]lowercaseString] ]];
 
 
 	roadNameLabel.text=[dataProvider objectForKey:@"roadname"];
@@ -203,7 +215,9 @@ static NSDictionary *segmentDirectionsIcons;
 					  @"UIIcon_bear_left.png", @"bear left", 
 					  @"UIIcon_bear_right.png", @"bear right", 
 					  @"UIIcon_turn_left.png", @"turn left", 
+					@"UIIcon_turn_left.png", @"sharp left", 		   
 					  @"UIIcon_turn_right.png", @"turn right",
+						@"UIIcon_turn_right.png", @"sharp right",
 					  nil] retain];
 	}
 	return [segmentDirectionsIcons valueForKey:segmentDirectionType];

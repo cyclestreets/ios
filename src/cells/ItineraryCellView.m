@@ -64,9 +64,7 @@
 	float totalMiles = ((float)([dataProvider startDistance]+[dataProvider segmentDistance]))/1600;
 	[arr addObject:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles]];
 	
-	BetterLog(@"[dataProvider provisionName]=%@",[dataProvider provisionName]);
-	
-	NSString *imageName = [SegmentVO provisionIcon:[dataProvider provisionName]];
+	NSString *imageName = [SegmentVO provisionIcon:[[dataProvider provisionName] lowercaseString]];
 	icon.image=[UIImage imageNamed:imageName];
 	
 	readoutLabel.labels=arr;

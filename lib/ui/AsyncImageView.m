@@ -164,7 +164,7 @@
 	// for progress indicating
 }
 
-- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error;
+- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
 {
 	
 	[connection cancel];

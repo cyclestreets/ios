@@ -17,16 +17,21 @@
 
 @implementation ExpandedUILabel
 @synthesize multiline;
+@synthesize fixedWidth;
+@synthesize insetValue;
+@synthesize labelColor;
 @synthesize hasShadow;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
+    [labelColor release], labelColor = nil;
 	
     [super dealloc];
 }
+
 
 
 
@@ -34,8 +39,9 @@
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		multiline=YES;
+		fixedWidth=NO;
+		insetValue=0;
 		self.backgroundColor=[UIColor clearColor];
-		
     }
     return self;
 }
@@ -44,8 +50,9 @@
 - (id)initWithCoder:(NSCoder*)decoder {
 	if (self = [super initWithCoder:decoder]) {
 		multiline=YES;
+		fixedWidth=NO;
+		insetValue=0;
 		self.backgroundColor=[UIColor clearColor];
-
     }
     return self;
 }
@@ -62,8 +69,8 @@
         [super setText:aText];
 		[self updateText];
     }
-	
-	if(hasShadow==YES){
+    
+    if(hasShadow==YES){
 		self.shadowColor=[UIColor whiteColor];
 		self.shadowOffset=CGSizeMake(0, 1);
 	}
@@ -83,6 +90,16 @@
 		self.numberOfLines=1;
 		CGRect tframe=self.frame;
 		CGFloat twidth=[GlobalUtilities calculateWidthOfText:self.text :self.font];
+		if(fixedWidth==NO){
+			CGFloat theight=[GlobalUtilities calculateHeightOfTextFromWidth:self.text :self.font :twidth :UILineBreakModeWordWrap];
+			tframe.size.height=MAX(theight,tframe.size.height);			
+		}else {
+			self.lineBreakMode=UILineBreakModeTailTruncation;
+			twidth=MIN(twidth,tframe.size.width);
+		}
+		if(insetValue>0)
+			twidth=twidth+insetValue*2;
+		
 		tframe.size.width=twidth;
 		self.frame=tframe;
 	}

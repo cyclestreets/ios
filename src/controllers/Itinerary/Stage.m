@@ -44,14 +44,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @implementation Stage
 @synthesize footerView;
 @synthesize footerIsHidden;
+@synthesize photoIconsVisisble;
 @synthesize mapView;
 @synthesize blueCircleView;
 @synthesize lastLocation;
 @synthesize lineView;
 @synthesize attributionLabel;
+@synthesize photoMarkers;
 @synthesize locationButton;
 @synthesize infoButton;
-@synthesize segmentInStage;
+@synthesize photoIconButton;
 @synthesize prev;
 @synthesize next;
 @synthesize route;
@@ -63,9 +65,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize locationView;
 @synthesize queryPhoto;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [footerView release], footerView = nil;
@@ -74,9 +76,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [lastLocation release], lastLocation = nil;
     [lineView release], lineView = nil;
     [attributionLabel release], attributionLabel = nil;
+    [photoMarkers release], photoMarkers = nil;
     [locationButton release], locationButton = nil;
     [infoButton release], infoButton = nil;
-    [segmentInStage release], segmentInStage = nil;
+    [photoIconButton release], photoIconButton = nil;
     [prev release], prev = nil;
     [next release], next = nil;
     [route release], route = nil;
@@ -87,6 +90,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
     [super dealloc];
 }
+
+
 
 
 
@@ -111,8 +116,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[lineView setPointListProvider:self];
 	
-	//starts as info "on"
+	//photo & info default to ON state
 	self.infoButton.style = UIBarButtonItemStyleDone;
+	self.photoIconButton.style = UIBarButtonItemStyleDone;
+	
+	photoIconsVisisble=YES;
 	
 	footerIsHidden=NO;
 	footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
@@ -133,13 +141,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.attributionLabel.text = [MapViewController mapAttribution];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+
 
 -(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
 	BetterLog(@"");
@@ -173,24 +175,60 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (index == [route numSegments]-1) {
 		[next setEnabled:NO];
 	}
-	NSString *message = [NSString stringWithFormat:@"%d/%d", index+1, [route numSegments]];
-	segmentInStage.title = message;
+	
+	NSString *message = [NSString stringWithFormat:@"Stage: %d/%d", index+1, [route numSegments]];
+	footerView.segmentIndexLabel.text=message;
+	 
 	
 	[lineView setNeedsDisplay];
 }
 
+
+
+#pragma mark Photo Icons
+//
+/***********************************************
+ * @description			PHOTO ICON METHODS
+ ***********************************************/
+//
+
+
 - (void) photoSuccess:(XMLRequest *)request results:(NSDictionary *)elements {
-	//Check we're still looking for the same page of photos
+	
+	BetterLog(@"");
+	
+	//Check we're still looking for the same page of photos	
 	if (index != photosIndex) return;
+	
+	
+	[self clearPhotos];
+	
+	if (photoMarkers == nil) {
+		photoMarkers = [[NSMutableArray alloc] initWithCapacity:10];
+	}
 	
 	PhotoList *photoList = [[PhotoList alloc] initWithElements:elements];
 	for (PhotoEntry *photo in [photoList photos]) {
 		RMMarker *marker = [Markers markerPhoto];
 		marker.data = photo;
+		[photoMarkers addObject:marker];
+		marker.hidden=!photoIconsVisisble;
 		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
 	}
 	[photoList release];
 	self.queryPhoto = nil;
+}
+
+
+- (void) clearPhotos {
+	//Clear out the previous list.
+	if (photoMarkers != nil) {
+		NSArray *oldMarkers = [photoMarkers copy];
+		for (RMMarker *oldMarker in photoMarkers) {
+			[[mapView markerManager] removeMarker:oldMarker];
+		}
+		[oldMarkers release];
+	}
 }
 
 - (void) photoFailure:(XMLRequest *)request message:(NSString *)message {
@@ -200,10 +238,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 //helper, could be shelled out as more general.
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
+	
+	BetterLog(@"");
+	
 	photosIndex = index;//we are looking for the photos associated with this index
 	self.queryPhoto = [[[QueryPhoto alloc] initNorthEast:ne SouthWest:sw limit:4] autorelease];
 	[queryPhoto runWithTarget:self onSuccess:@selector(photoSuccess:results:) onFailure:@selector(photoFailure:message:)];
 }
+
+
+- (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
+	BetterLog(@"tapMarker");
+	if (locationView == nil) {
+		locationView = [[PhotoMapImageLocationViewController alloc] init];
+		[locationView retain];
+	}
+	if ([marker.data isKindOfClass: [PhotoEntry class]]) {
+		[self presentModalViewController:locationView animated:YES];
+		PhotoEntry *photoEntry = (PhotoEntry *)marker.data;
+		[locationView loadContentForEntry:photoEntry];
+	}	
+}
+
+//
+/***********************************************
+ * @description			END PHOTO METHODS
+ ***********************************************/
+//
+
+
+//
+/***********************************************
+ * @description			Update Map view by segment
+ ***********************************************/
+//
 
 - (void)setSegmentIndex:(NSInteger)newIndex {
 	index = newIndex;
@@ -284,26 +352,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-- (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
-	BetterLog(@"tapMarker");
-	if (locationView == nil) {
-		locationView = [[PhotoMapImageLocationViewController alloc] init];
-		[locationView retain];
-	}
-	if ([marker.data isKindOfClass: [PhotoEntry class]]) {
-		[self presentModalViewController:locationView animated:YES];
-		PhotoEntry *photoEntry = (PhotoEntry *)marker.data;
-		[locationView loadContentForEntry:photoEntry];
-	}	
-}
+
  
 //pop back to route overview
 - (IBAction) didRoute {
 	[self dismissModalViewControllerAnimated:YES];
 	
+	/*
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	NSIndexPath *currentIndex = [NSIndexPath indexPathForRow:index inSection:0];
+	//UITableView *routeTableView = (UITableView *)cycleStreets.appDelegate.routeTable.view;
+	[routeTableView scrollToRowAtIndexPath:currentIndex atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	 */
 }
 
-
+//pop this view, then select the map
+- (IBAction) didMap {
+	[self dismissModalViewControllerAnimated:YES];
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	[cycleStreets.appDelegate.tabBarController setSelectedViewController:cycleStreets.appDelegate.map];
+}
 
 // all the things that need fixed if we have asked (or been forced) to stop doing location.
 - (void)stopDoingLocation {
@@ -383,6 +452,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
+//
+/***********************************************
+ * @description			UI button events
+ ***********************************************/
+//
+
+
 - (IBAction) didPrev {
 	if (index > 0) {
 		[self setSegmentIndex:index-1];
@@ -439,6 +515,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 }
 
+
+-(IBAction)photoIconButtonSelected{
+	
+	photoIconsVisisble=!photoIconsVisisble;
+	
+	for (RMMarker *marker in photoMarkers) {
+		marker.hidden=!photoIconsVisisble;
+	}
+	
+	if(photoIconsVisisble==YES){
+		self.photoIconButton.style=UIBarButtonItemStyleDone;
+	}else {
+		self.photoIconButton.style=UIBarButtonItemStyleBordered;
+	}
+
+	
+}
+
+
 #pragma mark Location provider
 
 - (float)getX {
@@ -463,15 +558,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[blueCircleView setNeedsDisplay];
 }
 
-/*
- - (void) beforeMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
- }
- */
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
 	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];
+	[blueCircleView setNeedsDisplay];	
 }
+
+
+-(void)updateMapPhotoMarkers{
+	
+	CGRect bounds = mapView.contents.screenBounds;
+
+	CLLocationCoordinate2D nw = [mapView pixelToLatLong:bounds.origin];
+	CLLocationCoordinate2D se = [mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
+	CLLocationCoordinate2D ne;
+	CLLocationCoordinate2D sw;
+	ne.latitude = nw.latitude;
+	ne.longitude = se.longitude;
+	sw.latitude = se.latitude;
+	sw.longitude = nw.longitude;
+	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
+}
+
 
 #pragma mark hygiene
 
@@ -490,7 +598,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//toolbar
 	self.locationButton = nil;
 	self.infoButton = nil;
-	self.segmentInStage = nil;
 	self.prev = nil;
 	self.next = nil;
 	
@@ -505,6 +612,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)viewDidUnload {
+	
 	[self nullify];
 	[super viewDidUnload];
 	BetterLog(@">>>");

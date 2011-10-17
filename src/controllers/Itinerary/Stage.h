@@ -40,6 +40,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	CSSegmentFooterView				*footerView;
 	BOOL							footerIsHidden;
+	BOOL							photoIconsVisisble;
 	
 	IBOutlet RMMapView *mapView;
 	IBOutlet BlueCircleView *blueCircleView;	//overlay GPS location
@@ -47,12 +48,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet RouteLineView *lineView;		//overlay route lines on top of map
 	IBOutlet UILabel *attributionLabel;
 	
+	NSMutableArray			*photoMarkers;
+	
 	//toolbar
 	UIBarButtonItem *locationButton;
 	UIBarButtonItem *infoButton;
-	UIBarButtonItem *segmentInStage;
+	UIBarButtonItem *photoIconButton;
 	UIBarButtonItem *prev;
 	UIBarButtonItem *next;
+	
 	
 	//current route
 	Route *route;
@@ -65,34 +69,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	PhotoMapImageLocationViewController *locationView;
 	QueryPhoto *queryPhoto;
 }
-@property (nonatomic, retain)		CSSegmentFooterView		* footerView;
-@property (nonatomic)		BOOL		 footerIsHidden;
-@property (nonatomic, retain)		IBOutlet RMMapView		* mapView;
-@property (nonatomic, retain)		IBOutlet BlueCircleView		* blueCircleView;
-@property (nonatomic, retain)		CLLocation		* lastLocation;
-@property (nonatomic, retain)		IBOutlet RouteLineView		* lineView;
-@property (nonatomic, retain)		IBOutlet UILabel		* attributionLabel;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* locationButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* infoButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* segmentInStage;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* prev;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* next;
-@property (nonatomic, retain)		Route		* route;
-@property (nonatomic)		NSInteger		 index;
-@property (nonatomic)		NSInteger		 photosIndex;
-@property (nonatomic, retain)		RMMarker		* markerLocation;
-@property (nonatomic, retain)		CLLocationManager		* locationManager;
-@property (nonatomic)		BOOL		 doingLocation;
-@property (nonatomic, retain)		PhotoMapImageLocationViewController		* locationView;
-@property (nonatomic, retain)		QueryPhoto		* queryPhoto;
 
+@property (nonatomic, retain)	CSSegmentFooterView		*footerView;
+@property (nonatomic)	BOOL		footerIsHidden;
+@property (nonatomic)	BOOL		photoIconsVisisble;
+@property (nonatomic, retain)	IBOutlet RMMapView		*mapView;
+@property (nonatomic, retain)	IBOutlet BlueCircleView		*blueCircleView;
+@property (nonatomic, retain)	CLLocation		*lastLocation;
+@property (nonatomic, retain)	IBOutlet RouteLineView		*lineView;
+@property (nonatomic, retain)	IBOutlet UILabel		*attributionLabel;
+@property (nonatomic, retain)	NSMutableArray		*photoMarkers;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem		*locationButton;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem		*infoButton;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem		*photoIconButton;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem		*prev;
+@property (nonatomic, retain)	IBOutlet UIBarButtonItem		*next;
+@property (nonatomic, retain)	Route		*route;
+@property (nonatomic)	NSInteger		index;
+@property (nonatomic)	NSInteger		photosIndex;
+@property (nonatomic, retain)	RMMarker		*markerLocation;
+@property (nonatomic, retain)	CLLocationManager		*locationManager;
+@property (nonatomic)	BOOL		doingLocation;
+@property (nonatomic, retain)	PhotoMapImageLocationViewController		*locationView;
+@property (nonatomic, retain)	QueryPhoto		*queryPhoto;
 
 //toolbar
 - (IBAction) didRoute;
+- (IBAction) didMap;
 - (IBAction) didLocation;
 - (IBAction) didPrev;
 - (IBAction) didNext;
 - (IBAction) didToggleInfo;
+-(IBAction)photoIconButtonSelected;
+
 
 //standard interface
 - (void)setRoute:(Route *)newRoute;
@@ -100,5 +109,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)setSegmentIndex:(NSInteger)newIndex;
 
 -(void)updateFooterPositions;
+
+-(void)updateMapPhotoMarkers;
+- (void) clearPhotos;
 
 @end

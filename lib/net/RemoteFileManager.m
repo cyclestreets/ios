@@ -255,7 +255,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
