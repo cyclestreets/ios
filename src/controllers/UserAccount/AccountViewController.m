@@ -34,6 +34,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "StringManager.h"
 #import "GlobalUtilities.h"
 #import "ViewUtilities.h"
+#import "ButtonUtilities.h"
+#import "StringUtilities.h"
 
 static NSString *const STRINGID=@"account";
 
@@ -230,17 +232,17 @@ static NSString *const STRINGID=@"account";
 	// add ui and targets to form buttons
 	UIButton *button=nil;
 	button=(UIButton*)[loginView viewWithTag:kSubmitButtonTag];
-	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Sign in"];
+	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Sign in"];
 	[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	button=(UIButton*)[registerView viewWithTag:kSubmitButtonTag];
-	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Create account"];
+	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Create account"];
 	[button addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	button=(UIButton*)[retrieveView viewWithTag:kSubmitButtonTag];
-	[GlobalUtilities styleIBButton:button type:@"grey" text:@"Submit"];
+	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Submit"];
 	[button addTarget:self action:@selector(retrievePasswordButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// logged in UI
-	[GlobalUtilities styleIBButton:logoutButton type:@"grey" text:@"Clear signin details"];
+	[ButtonUtilities styleIBButton:logoutButton type:@"grey" text:@"Clear signin details"];
 	[logoutButton addTarget:self action:@selector(logoutButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];
 	
@@ -679,7 +681,7 @@ static NSString *const STRINGID=@"account";
 	BOOL visresult=[visfieldString length]>kUsernameExtent;
 	
 	NSString  *emfieldString=registerEmailField.text;
-	BOOL emresult=[GlobalUtilities validateEmail:emfieldString]; 
+	BOOL emresult=[StringUtilities validateEmail:emfieldString]; 
 	
 	
 	if(presult==YES && eresult==YES && emresult==YES && visresult==YES){

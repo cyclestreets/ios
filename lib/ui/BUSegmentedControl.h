@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HBox.h"
+#import "LayoutBox.h"
 
 @protocol BUSegmentedControlDelegate <NSObject> 
 
@@ -19,7 +19,7 @@
 @interface BUSegmentedControl : UIView {
 	NSMutableArray *dataProvider;
 	NSMutableArray *items;
-	HBox *container;
+	LayoutBox *container;
 	
 	int width;
 	int height;
@@ -34,7 +34,7 @@
 @property(nonatomic,assign) id <BUSegmentedControlDelegate> delegate;
 @property (nonatomic,retain) NSMutableArray *dataProvider;
 @property (nonatomic,retain) NSMutableArray *items;
-@property (nonatomic,retain) HBox *container;
+@property (nonatomic,retain) LayoutBox *container;
 @property (nonatomic) int selectedIndex;
 @property (nonatomic) int width;
 @property (nonatomic) int height;

@@ -1,6 +1,6 @@
 //
 //  StringUtilities.h
-//  RacingUK
+//
 //
 //  Created by Neil Edwards on 09/12/2009.
 //  Copyright 2009 Chroma. All rights reserved.
@@ -22,4 +22,12 @@
 + (NSString*) newEncodedString:(NSData*)data;
 + (NSString*) stringWithUUID;
 +(NSString*)pathFromURL:(NSString*)url :(NSString*)delimiter;
++(NSURL*)validateURL:(NSString*)urlstring;
++(BOOL)validateEmail:(NSString*)emailstring;
++ (NSString*)base64forData:(NSData*)theData;
++(NSString *) urlencode: (NSString *) unencodedString;
++ (NSString *)stringByDecodingXMLEntities:(NSString*)str;
++(NSDictionary*)conformDBFormatString:(NSString*)dateString;
++(NSString*)conformDateString:(NSString*)datestring toFormat:(NSString*)format;
++(BOOL)validateUnixDate:(NSString*)datestring;
 @end

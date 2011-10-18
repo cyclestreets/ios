@@ -55,7 +55,7 @@
 -(void)loadImageFromString:(NSString*)urlString{
 	
 	
-	NSURL *url=[GlobalUtilities validateURL:urlString];
+	NSURL *url=[StringUtilities validateURL:urlString];
 	if(url!=nil){
 		[self loadImageFromURL:url];
 	}else {

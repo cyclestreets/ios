@@ -11,9 +11,8 @@
 #import "GlobalUtilities.h"
 #import "ViewUtilities.h"
 #import "AppConstants.h"
-#import "VBox.h"
+#import "LayoutBox.h"
 #import "GradientView.h"
-#import "VBox.h"
 
 @implementation SuperViewController
 @synthesize navigation;
@@ -162,10 +161,11 @@
 			
 			GradientView *loadingview;
 			
-			VBox	*contentContainer=[[VBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+			LayoutBox	*contentContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+            contentContainer.layoutMode=BUVerticalLayoutMode;
 			contentContainer.fixedWidth=YES;
-			contentContainer.verticalGap=0;
-			contentContainer.alignby=CENTER;
+			contentContainer.itemPadding=0;
+			contentContainer.alignMode=BUCenterAlignMode;
 			
 			
 			if([UIType isEqualToString:UITYPE_CONTROLUI]){
@@ -239,24 +239,25 @@
 			//BetterLog(@"");
 			
 			GradientView *errorView;
-			VBox *contentContainer;
+			LayoutBox *contentContainer;
 			
 			if([UIType isEqualToString:UITYPE_CONTROLUI]){
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, CONTROLUIHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 			}else if ([UIType isEqualToString:UITYPE_CONTROLHEADERUI]) {
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
 			}else {
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 			}
 			
 			[errorView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 			errorView.tag=kNoResultsViewTAG;
-			contentContainer.verticalGap=20;
+            contentContainer.layoutMode=BUVerticalLayoutMode;
+			contentContainer.itemPadding=20;
 			contentContainer.fixedWidth=YES;
-			contentContainer.alignby=CENTER;
+			contentContainer.alignMode=BUCenterAlignMode;
 			
 			UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 180, 150)];
 			iview.image=[UIImage imageNamed:@"Alert200x200.png"];
@@ -311,25 +312,26 @@
 			
 			   
 			GradientView *errorView;
-			VBox *contentContainer;
+			LayoutBox *contentContainer;
 			
 			if([UIType isEqualToString:UITYPE_CONTROLUI]){
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, CONTROLUIHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 			}else if([UIType isEqualToString:UITYPE_MODALUI]){
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVCONTROLMODALHEIGHT)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVCONTROLMODALHEIGHT)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVCONTROLMODALHEIGHT)];
 			}else {
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 			}
 			
 			
 			[errorView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 			errorView.tag=kConnectionErrorViewTAG;
-			contentContainer.verticalGap=20;
+			contentContainer.layoutMode=BUVerticalLayoutMode;
+			contentContainer.itemPadding=20;
 			contentContainer.fixedWidth=YES;
-			contentContainer.alignby=CENTER;
+			contentContainer.alignMode=BUCenterAlignMode;
 			
 			UIImage *image=[UIImage imageNamed:@"Alert200x200.png"];
 			UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, image.size.width,image.size.height)];
@@ -387,25 +389,26 @@
 			
 			
 			GradientView *errorView;
-			VBox *contentContainer;
+			LayoutBox *contentContainer;
 			
 			if([UIType isEqualToString:UITYPE_CONTROLUI]){
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, CONTROLUIHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 			}else if([UIType isEqualToString:UITYPE_MODALUI]){
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVCONTROLMODALHEIGHT)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVCONTROLMODALHEIGHT)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVCONTROLMODALHEIGHT)];
 			}else {
-				contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+				contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 				errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 			}
 			
 			
 			[errorView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 			errorView.tag=kRestrictionErrorViewTAG;
-			contentContainer.verticalGap=20;
+			contentContainer.layoutMode=BUVerticalLayoutMode;
+			contentContainer.itemPadding=20;
 			contentContainer.fixedWidth=YES;
-			contentContainer.alignby=CENTER;
+			contentContainer.alignMode=BUCenterAlignMode;
 			
 			UIImage *image=[UIImage imageNamed:@"Alert200x200.png"];
 			UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, image.size.width,image.size.height)];

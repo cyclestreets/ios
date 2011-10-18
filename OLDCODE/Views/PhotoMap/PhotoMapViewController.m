@@ -51,6 +51,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMercatorToScreenProjection.h"
 #import "Files.h"
 #import "GlobalUtilities.h"
+#import "ButtonUtilities.h"
 
 @implementation PhotoMapViewController
 
@@ -148,7 +149,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	showingPhotos = YES;
 	[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0.0];
 	
-	[GlobalUtilities styleIBButton:introButton type:@"green" text:@"OK"];
+	[ButtonUtilities styleIBButton:introButton type:@"green" text:@"OK"];
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
 	NSString *experienceLevel = [misc objectForKey:@"experienced"];
 	if (experienceLevel != nil) {
@@ -346,7 +347,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 // called from ui button, starts CL and shows circle view
 - (void)startlocationManagerIsLocating {
 	
-	if(locationManager.locationServicesEnabled==YES){
+	if([CLLocationManager locationServicesEnabled]==YES){
 		
 		locationManagerIsLocating = YES;
 		locationWasFound=NO;

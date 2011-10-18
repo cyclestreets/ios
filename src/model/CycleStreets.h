@@ -26,9 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
-@class CycleStreetsAppDelegate;
-#import "Files.h";
-@class CategoryLoader;
+#import "Files.h"
+@class CycleStreetsAppDelegate,CategoryLoader;
 
 @interface CycleStreets : NSObject {
 	CycleStreetsAppDelegate *appDelegate;

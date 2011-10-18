@@ -6,7 +6,7 @@
 //  Copyright 2011 CycleStreets Ltd. All rights reserved.
 //
 
-#import "LocationSearchManager.h"s
+#import "LocationSearchManager.h"
 #import "ValidationVO.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
@@ -165,7 +165,7 @@
 	
 	if(requiresNetWorkLookUp==YES){
 		
-		/*
+		
 		NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[cycleStreets APIKey],@"key",
 										 searchString,@"street",
 										 [NSNumber numberWithFloat:(centreLocation.longitude-range)],@"w",

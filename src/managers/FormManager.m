@@ -12,6 +12,7 @@
 #import "GlobalUtilities.h"
 #import "RegexKitLite.h"
 #import "FormItemVO.h"
+#import "StringUtilities.h"
 
 
 static NSString *const FORMVALIDATEEMAIL=@"FORMVALIDATEEMAIL";
@@ -157,7 +158,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 //
 
 -(BOOL)validateEmail:(NSString*)str withParams:(id)parameters{
-	return [GlobalUtilities validateEmail:str]; 
+	return [StringUtilities validateEmail:str]; 
 }
 
 -(BOOL)validatURL:(NSString *)str  withParams:(id)parameters{

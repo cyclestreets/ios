@@ -8,6 +8,7 @@
 
 #import "IncrementalStepControl.h"
 #import "StyleManager.h"
+#import "ButtonUtilities.h"
 
 
 @interface IncrementalStepControl(Private)
@@ -69,13 +70,13 @@
 	switch(buttonMode){
 		
 		case ICLeftRightMode:
-			minusButton=[GlobalUtilities UIImageButtonWithWidth:@"Icon_LeftArrow" height:30 type:buttonType text:@""];
-			plusButton=[GlobalUtilities UIImageButtonWithWidth:@"Icon_RightArrow" height:30 type:buttonType text:@""];
+			minusButton=[ButtonUtilities UIImageButtonWithWidth:@"Icon_LeftArrow" height:30 type:buttonType text:@""];
+			plusButton=[ButtonUtilities UIImageButtonWithWidth:@"Icon_RightArrow" height:30 type:buttonType text:@""];
 		break;
 			
 		case ICUPDownMode:
-			minusButton=[GlobalUtilities UIImageButtonWithWidth:@"Icon_DownArrow" height:30 type:buttonType text:@""];
-			plusButton=[GlobalUtilities UIImageButtonWithWidth:@"Icon_UpArrow" height:30 type:buttonType text:@""];
+			minusButton=[ButtonUtilities UIImageButtonWithWidth:@"Icon_DownArrow" height:30 type:buttonType text:@""];
+			plusButton=[ButtonUtilities UIImageButtonWithWidth:@"Icon_UpArrow" height:30 type:buttonType text:@""];
 		break;
 		
 	}

@@ -9,28 +9,35 @@
 
 #import <Foundation/Foundation.h>
 
-#define ENABLEDEBUGTRACE 0
+#define ENABLEDEBUGTRACE 1
 
+
+// returns RGB form web hex
 #define UIColorFromRGB(rgbValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
+// as above but with alpha
 #define UIColorFromRGBAndAlpha(rgbValue,alphaValue) [UIColor \
 colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:alphaValue]
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
+// release groups
 #define RELEASE_SAFELY(__POINTER) { [__POINTER release]; __POINTER = nil; }
-#define AUTORELEASE_SAFELY(__POINTER) { [__POINTER autorelease]; __POINTER = nil; }
 #define RELEASE_TIMER(__TIMER) { [__TIMER invalidate]; __TIMER = nil; }
 
-#define LF @"\n"
+
+#define LineFeed @"\n"
+
+// rotation
+#define RADIANS(degrees) ((degrees * M_PI) / 180.0)
+#define DEGREES(radians) ((radians) * 180.0 / M_PI)
 
 
-// detailed log 
+// Configurable Log
 #if ENABLEDEBUGTRACE
 #define BetterLog(str, args...)\
 NSLog(@"\n-------------\n%s:%d\n%s\n\n[%@]\n-------------\n",\
@@ -40,17 +47,24 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 #define BetterLog(str, args...)
 #endif
 
-#define LogRect(RECT) NSLog(@"%s: (%0.0f, %0.0f) %0.0f x %0.0f",RECT, RECT.origin.x, RECT.origin.y, RECT.size.width, RECT.size.height)
 
-#define degreesToRadians(x) (M_PI * x / 180.0)
-
-// global notification ids
-#define BUNavigationRequestNotification @"BUNavigationRequestNotification" // Why is this here?
+// CGRECT Log
+#define LogRect(RECT) NSLog(@"(%0.0f, %0.0f) %0.0f x %0.0f", RECT.origin.x, RECT.origin.y, RECT.size.width, RECT.size.height)
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+
+/// iPAD
+#if UI_USER_INTERFACE_IDIOM==UIUserInterfaceIdiomPad
+	#define DEVICESCREEN_WIDTH  1024.0
+	#define DEVICESCREEN_HEIGHT  768.0
+#else
+	#define DEVICESCREEN_WIDTH  320.0
+	#define DEVICESCREEN_HEIGHT  480.0
+#endif
+
+
+
 // Time
-
 #define TIME_MINUTE 60
 #define TIME_HOUR (60*TIME_MINUTE)
 #define TIME_DAY (24*TIME_HOUR)
@@ -58,6 +72,41 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 #define TIME_MONTH (30.5*TIME_DAY)
 #define TIME_YEAR (365*TIME_DAY)
 
+
+// SELECTORS
+#define SEL(x) @selector(x)
+
+// STRINGS
+#define IS_EMPTY_STRING(str) (!(str) || ![(str) isKindOfClass:NSString.class] || [(str) length] == 0)
+#define IS_POPULATED_STRING(str) ((str) && [(str) isKindOfClass:NSString.class] && [(str) length] > 0)
+
+// SCreen orientation
+#define IS_DEVICE_ORIENTATION_PORTRAIT ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait)
+#define IS_DEVICE_ORIENTATION_LANDSCAPE ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight)
+#define IS_DEVICE_ORIENTATION_LANDSCAPE_LEFT ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft)
+#define IS_DEVICE_ORIENTATION_LANDSCAPE_RIGHT ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight)
+#define IS_DEVICE_ORIENTATION_PORTRAIT_UPSIDE_DOWN ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown)
+#define IS_DEVICE_ORIENTATION_FACE_UP ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceUp)
+#define IS_DEVICE_ORIENTATION_FACE_DOWN ([UIDevice currentDevice].orientation == UIDeviceOrientationFaceDown)
+
+#define HARDWARE_SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define HARDWARE_SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
+#define ISRETINADISPLAY (([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) ? [[UIScreen mainScreen] scale] > 1.0 : NO)
+
+
+
+// primative>Object wrapping
+#define BOX_BOOL(x) [NSNumber numberWithBool:(x)]
+#define BOX_INT(x) [NSNumber numberWithInt:(x)]
+#define BOX_FLOAT(x) [NSNumber numberWithFloat:(x)]
+#define BOX_DOUBLE(x) [NSNumber numberWithDouble:(x)]
+
+#define UNBOX_BOOL(x) [(x) boolValue]
+#define UNBOX_INT(x) [(x) intValue]
+#define UNBOX_FLOAT(x) [(x) floatValue]
+#define UNBOX_DOUBLE(x) [(x) doubleValue]
+//
 
 
 enum  {
@@ -71,8 +120,8 @@ typedef int LayoutBoxAlignMode;
 
 
 enum  {
-	BUVerticalLayoutMode,
-	BUHorizontalLayoutMode,
+	BUVerticalLayoutMode=1,
+	BUHorizontalLayoutMode=2,
 	BUNoneLayoutMode=0
 };
 typedef int LayoutBoxLayoutMode;
@@ -83,36 +132,47 @@ typedef int LayoutBoxLayoutMode;
 	
 }
 
-
+// returns height of text for given width
 +(float) calculateHeightOfTextFromWidth:(NSString*) text: (UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode;
+
+// returns height of text for given width with fixed line count
 +(float) calculateHeightOfTextFromWidthWithLineCount:(UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode :(int)linecount;
+
+// returns width of text for single line 
 +(float) calculateWidthOfText:(NSString*) text: (UIFont*)withFont;
-+(NSURL*)validateURL:(NSString*)urlstring;
+
+// creates old style view based corner rectangle with optional header
 +(void)createCornerContainer:(UIView *)viewToUse forWidth:(CGFloat)width forHeight:(CGFloat)height drawHeader:(BOOL)header;
+
+//  timeinterval form a to b
 + (NSString*)timeIntervalWithStartDate:(NSDate*)d1 withEndDate:(NSDate*)d2;
 
-// UIButton
-+ (UIButton*)shinyButtonWithWidth:(NSUInteger)width height:(NSUInteger)height color:(UIColor*)color;
-+ (UIButton*)shinyButtonWithWidth:(NSUInteger)width height:(NSUInteger)height color:(UIColor*)color text:(NSString*)text;
-+ (UIButton*)UIButtonWithWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text;
-+ (UIButton*)UIButtonWithFixedWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text minFont:(int)minFont;
-+ (UIButton*)UIImageButtonWithWidth:(NSString*)image height:(NSUInteger)height type:(NSString*)type text:(NSString*)text;
-+ (UIButton*)UIToggleButtonWithWidth:(NSUInteger)width height:(NSUInteger)height states:(NSDictionary*)stateDict;
-+ (void)UIToggleIBButton:(UIButton*)button states:(NSDictionary*)stateDict;
-+(void)styleIBButton:(UIButton*)button type:(NSString*)type text:(NSString*)text;
-+(void)styleFixedWidthIBButton:(UIButton*)button type:(NSString*)type text:(NSString*)text;
-+ (void)styleIBIconButton:(UIButton*)button iconimage:(NSString*)image type:(NSString*)type text:(NSString*)text align:(LayoutBoxAlignMode)alignment;
+// unique guid id
 +(NSString*)GUIDString;
+
+// returns tablview index array with optional search icon
 +(NSMutableArray*)newTableIndexArrayFromDictionary:(NSMutableDictionary*)dict withSearch:(BOOL)search;
+
+// returns new tableview index for key in each row item dataprovider
 +(NSMutableDictionary*)newTableViewIndexFromArray:(NSMutableArray*)dataProvider usingKey:(NSString*)key;
-+(BOOL)validateEmail:(NSString*)emailstring;
+
+// returns new dict for sectioned table views
++(NSMutableDictionary*)newKeyedDictionaryFromArray:(NSMutableArray*)dataProvider usingKey:(NSString*)key;
+
+// generic create request: DEPRECATED?
 +(NSMutableURLRequest*)createURLRequestForType:(NSString*)type with:(NSDictionary*)parameters toURL:(NSString*)url;
+
+// converts boolean to yes/no, true/false  1/0
 +(NSString*)convertBooleanToType:(NSString*)type :(BOOL)boo;
-+(void)printDictionaryContents:(NSDictionary*)dict;
-//
-/***********************************************
- * @description			returns a date array from a start for a given length in future or past direction
- ***********************************************/
-//
+
+//  Form dict support, returns validatity of a set of form items
++(BOOL)validationResultForFormDict:(NSDictionary*)dict;
+
+//returns a date array from a start for a given length in future or past direction
 +(NSMutableArray*)newDateArray:(NSDate*)start length:(int)length future:(BOOL)future;
+
+
++(id)sectionDataProviderFromIndexPath:(NSIndexPath*)indexpath dataProvider:(NSDictionary*)dataProvider withKeys:(NSArray*)keys;
+
++(void)trimArray:(NSMutableArray*)arr FromIndex:(int)index;
 @end

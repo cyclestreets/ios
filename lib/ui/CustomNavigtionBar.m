@@ -1,6 +1,6 @@
 //
 //  BULeftNavItemView.m
-//  RacingUK
+//
 //
 //  Created by Neil Edwards on 04/12/2009.
 //  Copyright 2009 Chroma. All rights reserved.
@@ -10,9 +10,8 @@
 #import "GlobalUtilities.h"
 #import "StyleManager.h"
 #import "ViewUtilities.h"
-#import "VBox.h"
-#import "HBox.h"
-
+#import "LayoutBox.h"
+#import "ButtonUtilities.h"
 
 @implementation CustomNavigtionBar
 @synthesize backButton;
@@ -25,6 +24,8 @@
 @synthesize nextItemButton;
 @synthesize prevItemButton;
 @synthesize navigationItem;
+@synthesize rightButtonStyle;
+@synthesize leftButtonStyle;
 @synthesize dataProvider;
 @synthesize rightItems;
 @synthesize titleType;
@@ -33,8 +34,9 @@
 @synthesize titleImage;
 @synthesize leftItemTitle;
 @synthesize titleString;
+@synthesize titleFontSize;
+@synthesize titleFontColor;
 @synthesize delegate;
-
 
 /***********************************************************/
 // dealloc
@@ -51,6 +53,8 @@
     [nextItemButton release], nextItemButton = nil;
     [prevItemButton release], prevItemButton = nil;
     [navigationItem release], navigationItem = nil;
+    [rightButtonStyle release], rightButtonStyle = nil;
+    [leftButtonStyle release], leftButtonStyle = nil;
     [dataProvider release], dataProvider = nil;
     [rightItems release], rightItems = nil;
     [titleType release], titleType = nil;
@@ -59,6 +63,7 @@
     [titleImage release], titleImage = nil;
     [leftItemTitle release], leftItemTitle = nil;
     [titleString release], titleString = nil;
+    [titleFontColor release], titleFontColor = nil;
     delegate = nil;
 	
     [super dealloc];
@@ -68,11 +73,15 @@
 
 
 
+
+
 - (id)init {
     if (self = [super init]) {
 		titleType=BUNavNoneType;
 		leftItemType=BUNavBackType;
-		rightItemType=BUNavRefreshType;
+		rightItemType=BUNavNoneType;
+		titleFontSize=18;
+		self.titleFontColor=[UIColor whiteColor];
     }
     return self;
 }
@@ -93,7 +102,11 @@
 	// basic arrow only back style
 	if(leftItemType==BUNavBackType){
 		
-		backButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 32)];
+		UIImage  *backimage=[[StyleManager sharedInstance] imageForType:@"UINavigationBar_back_lo"];
+		
+        UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, backimage.size.width, 30)];
+		self.backButton=button;
+        [button release];
 		[backButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavigationBar_back_lo"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
 		[backButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavigationBar_back_hi"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
 		[backButton	setImage:[[StyleManager sharedInstance] imageForType:@"uibuttonbar_backarrow"] forState:UIControlStateNormal];
@@ -107,7 +120,9 @@
 		// standard back with text label style
 	}else if (leftItemType==BUNavBackStandardType) {
 		
-		backButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 32)];
+        UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 32)];
+		self.backButton=button;
+        [button release];
 		[backButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavigationBar_back_lo"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
 		[backButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavigationBar_back_hi"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
 		
@@ -130,6 +145,21 @@
 		[barbutton release];
 		
 		
+	}else if ([leftItemType isEqualToString:BUNavUICustomType]){
+		
+		UIButton *leftButton=[ButtonUtilities UIButtonWithWidth:30 height:30 type:leftButtonStyle text:leftItemTitle];
+		
+		[leftButton addTarget:self action:@selector(doGenericLeftEvent:) forControlEvents:UIControlEventTouchUpInside];
+		
+		UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:leftButton];
+		[navigationItem setLeftBarButtonItem:barbutton animated:YES];
+		[barbutton release];
+		
+		
+	}else if ([leftItemType isEqualToString:BUNavNoneType]){
+		
+		[navigationItem setLeftBarButtonItem:nil animated:NO];
+		
 	}
 }
 
@@ -137,17 +167,19 @@
 -(void)createTitle{
 	
 	
-	
+	// 2 line type with title and info (normally race/date combo)
 	if(titleType==BUNavTitleReadoutType){
 	
-	
-		VBox *labelContainer=[[VBox alloc]init];
-		labelContainer.verticalGap=0;
-		labelContainer.alignby=CENTER;
+		LayoutBox *labelContainer=[[LayoutBox alloc]init];
+        labelContainer.layoutMode=BUVerticalLayoutMode;
+		labelContainer.itemPadding=0;
+		labelContainer.alignMode=BUCenterAlignMode;
 		CGFloat lineheight;
 		// title label
 		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"title"] :[UIFont systemFontOfSize:18] :200 :UILineBreakModeHeadTruncation];
-		titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, lineheight)];
+        UILabel *tlabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, lineheight)];
+		self.titleLabel=tlabel;
+        [tlabel release];
 		titleLabel.textAlignment=UITextAlignmentCenter;
 		titleLabel.backgroundColor=[UIColor clearColor];
 		titleLabel.font=[UIFont systemFontOfSize:18];
@@ -156,7 +188,9 @@
 		[labelContainer addSubview:titleLabel];
 		// sub label
 		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"subtitle"] :[UIFont systemFontOfSize:10] :200 :UILineBreakModeHeadTruncation];
-		subtitleLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, lineheight)];
+        UILabel *slabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, lineheight)];
+		self.subtitleLabel=slabel;
+        [slabel release];
 		subtitleLabel.textAlignment=UITextAlignmentCenter;
 		subtitleLabel.backgroundColor=[UIColor clearColor];
 		subtitleLabel.font=[UIFont systemFontOfSize:11];
@@ -167,33 +201,40 @@
 		[navigationItem setTitleView:labelContainer];
 		[labelContainer release];
 	
-	
-		
-	}else if(titleType==BUNavTitleIncrementalType){
-		
-		
-		CGFloat lineheight;
-		
-		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:titleString :[UIFont systemFontOfSize:18] :200 :UILineBreakModeHeadTruncation];
-		titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, lineheight)];
-		titleLabel.textAlignment=UITextAlignmentCenter;
-		titleLabel.backgroundColor=[UIColor clearColor];
-		titleLabel.font=[UIFont systemFontOfSize:18];
-		titleLabel.textColor=[UIColor whiteColor];
-		titleLabel.shadowColor=UIColorFromRGB(0x666666);
-		titleLabel.text=titleString;
-		
-		[navigationItem setTitleView:titleLabel];
-		
+	// logo image type
 	}else if(titleType==BUNavTitleImageType) {
-		
-		
+				
 		UIImage *image=[[StyleManager sharedInstance] imageForType:titleImage];
 		UIImageView *ititle=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
 		ititle.image=image;
 		ititle.contentMode=UIViewContentModeCenter;
 		[navigationItem setTitleView:ititle];
 		[ititle release];
+		
+	// default iOS type
+	}else if(titleType==BUNavTitleDefaultType) {
+		
+		CGFloat lineheight;
+		
+		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:titleString :[UIFont systemFontOfSize:titleFontSize] :200 :UILineBreakModeHeadTruncation];
+        UILabel *tlabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, lineheight)];
+		self.titleLabel=tlabel;
+        [tlabel release];
+		titleLabel.textAlignment=UITextAlignmentCenter;
+		titleLabel.backgroundColor=[UIColor clearColor];
+		titleLabel.font=[UIFont boldSystemFontOfSize:titleFontSize];
+		titleLabel.textColor=titleFontColor;
+		if(titleFontColor==[UIColor whiteColor]){
+			titleLabel.shadowColor=UIColorFromRGB(0x666666);
+			titleLabel.shadowOffset=CGSizeMake(0, -1);
+		}else {
+			titleLabel.shadowColor=UIColorFromRGB(0xcccccc);
+			titleLabel.shadowOffset=CGSizeMake(0, 1);
+		}
+
+		titleLabel.text=titleString;
+		
+		[navigationItem setTitleView:titleLabel];
 		
 	}
 	
@@ -218,8 +259,10 @@
 	
 	if([rightItemType isEqualToString:BUNavRefreshType]){
 	
-		refreshButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-		[refreshButton	setImage:[[StyleManager sharedInstance] imageForType:@"uibuttonbar_refresh"] forState:UIControlStateNormal];
+        UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+		self.refreshButton=button;
+        [button release];
+		[refreshButton	setImage:[[StyleManager sharedInstance] imageForType:@"uibuttonbar_refreshgray"] forState:UIControlStateNormal];
 		[refreshButton addTarget:self action:@selector(doRefreshEvent:) forControlEvents:UIControlEventTouchUpInside];
 		UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:refreshButton];
 		[navigationItem setRightBarButtonItem:barbutton animated:YES];
@@ -235,12 +278,13 @@
 		UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:activity];
 		[activity release];
 		[navigationItem setRightBarButtonItem:barbutton animated:YES];
-		// Note: do we want o support request cancelling from here?
 		[barbutton release];
 		
 	}else if ([rightItemType isEqualToString:BUNavButtonType]) {
 		
-		rightButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
+        UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 30)];
+		self.rightButton=button;
+        [button release];
 		[rightButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_lo"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
 		[rightButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_hi"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
 		[rightButton setTitle:rightButtonTitle forState:UIControlStateNormal];
@@ -252,7 +296,9 @@
 		
 	}else if ([rightItemType isEqualToString:UIKitButtonType]) {
 		
-		rightBarButton=[[UIBarButtonItem alloc] initWithTitle:rightButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(doGenericEvent:)];
+        UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithTitle:rightButtonTitle style:UIBarButtonItemStyleBordered target:self action:@selector(doGenericEvent:)];
+		self.rightBarButton=barbutton;
+        [barbutton release];
 		[navigationItem setRightBarButtonItem:rightBarButton animated:NO];
 		
 	}else if ([rightItemType isEqualToString:BUNavNoneType]){
@@ -261,9 +307,11 @@
 		
 	}else if ([rightItemType isEqualToString:BUItemStepButtonType]) {
 		
-		HBox *itemSelectView=[[HBox alloc]initWithFrame:CGRectZero];
+		LayoutBox *itemSelectView=[[LayoutBox alloc]initWithFrame:CGRectZero];
 		
-		prevItemButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        UIButton    *pbutton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+		self.prevItemButton=pbutton;
+        [pbutton release];
 		[prevItemButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavLeftSegment_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
 		[prevItemButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavLeftSegment_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
 		[prevItemButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavLeftSegment_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateDisabled];
@@ -272,8 +320,9 @@
 		[prevItemButton addTarget:self action:@selector(doPrevItemEvent:) forControlEvents:UIControlEventTouchUpInside];
 		[itemSelectView addSubview:prevItemButton];
 		
-		
-		nextItemButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+		UIButton *nbutton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+		self.nextItemButton=nbutton;
+        [nbutton release];
 		[nextItemButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavRightSegment_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
 		[nextItemButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavRightSegment_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
 		[nextItemButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavRightSegment_bg"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateDisabled];
@@ -288,12 +337,27 @@
 
 	}else if ([rightItemType isEqualToString:BUNavAddButtonType]){
 		
-		UIButton *addButton=[GlobalUtilities UIImageButtonWithWidth:@"UIButtonIcon_add" height:30 type:@"green" text:@""];
+		UIButton *addButton=[ButtonUtilities UIIconButton:@"UIButtonIcon_add" height:30 type:@"green"];
 		[addButton addTarget:self action:@selector(doGenericEvent:) forControlEvents:UIControlEventTouchUpInside];
 		UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:addButton];
 		[navigationItem setRightBarButtonItem:barbutton animated:YES];
 		[barbutton release];
 		
+		
+	}else if ([rightItemType isEqualToString:BUNavUICustomType]){
+		
+		self.rightButton=[ButtonUtilities UIButtonWithWidth:30 height:30 type:rightButtonStyle text:rightButtonTitle];
+		
+		[rightButton addTarget:self action:@selector(doGenericEvent:) forControlEvents:UIControlEventTouchUpInside];
+		
+		UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:rightButton];
+		[navigationItem setRightBarButtonItem:barbutton animated:YES];
+		[barbutton release];
+		
+		
+	}else if ([rightItemType isEqualToString:BUNavNoneType]){
+		
+		[navigationItem setRightBarButtonItem:nil animated:NO];
 		
 	}
 	
@@ -346,10 +410,18 @@
 	
 }
 
-
+-(IBAction)doGenericLeftEvent:(id)sender{
+	
+	
+	if([delegate respondsToSelector:@selector(doNavigationSelector:)]){
+		[delegate doNavigationSelector:LEFT]; 
+	}
+	
+}
 
 -(IBAction)doGenericEvent:(id)sender{
 	
+	// TODO: get tag for sender for index of right items array if using array based construction
 	if([delegate respondsToSelector:@selector(doNavigationSelector:)]){
 		[delegate doNavigationSelector:RIGHT];  // for now just send default
 	}

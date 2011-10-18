@@ -54,6 +54,5 @@
 -(void)addActivity;
 -(void)removeActivity;
 -(void)cancel;
-
-- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 @end

@@ -71,7 +71,7 @@
 	NSMutableURLRequest *request=nil;
 	NSString *servicetype=[service objectForKey:@"type"];
 	
-	self.dataType=[AppConstants parserStringTypeToConstant:[service objectForKey:@"parserType"]];
+	self.dataType=[GenericConstants parserStringTypeToConstant:[service objectForKey:@"parserType"]];
 	
 	if ([servicetype isEqualToString:URL]) {
 		
@@ -130,7 +130,8 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		NSString *parameterString=[[CJSONSerializer serializer] serializeDictionary:parameters];
+		NSString *parameterString = [[NSString alloc] initWithData:[[CJSONSerializer serializer] serializeDictionary:parameters error:nil]
+                                                          encoding:NSUTF8StringEncoding];
 		
 		//NSLog(@"[DEBUG] JSONPOST SEND:%@",parameterString);
 		
@@ -178,7 +179,7 @@
 }
 
 
--(void)addRequestHeadersForService:(NSMutableURLRequest*)request{
+-(NSMutableURLRequest*)addRequestHeadersForService:(NSMutableURLRequest*)request{
     
     if(request!=nil){
         NSDictionary *headerdict=[service objectForKey:@"headers"];
@@ -189,6 +190,7 @@
         }
     }
     
+    return request;
     
 }
 

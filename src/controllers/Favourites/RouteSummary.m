@@ -31,6 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Route.h"
 #import "RouteManager.h"
 #import "BUDividerView.h"
+#import "ButtonUtilities.h"
 
 @implementation RouteSummary
 @synthesize route;
@@ -98,7 +99,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	
 	
-	[GlobalUtilities styleIBButton:routeButton type:@"green" text:@"Select this route"];
+	[ButtonUtilities styleIBButton:routeButton type:@"green" text:@"Select this route"];
 	
 	routeNameLabel.multiline=YES;
 	

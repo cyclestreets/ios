@@ -130,7 +130,7 @@ static CGRect swapWidthAndHeight(CGRect rect)
     
     bnds = rect;
 	
-	tran = CGAffineTransformRotate(tran, degreesToRadians(angle));
+	tran = CGAffineTransformRotate(tran, RADIANS(angle));
 	
 	UIGraphicsBeginImageContext(bnds.size);
     ctxt = UIGraphicsGetCurrentContext();

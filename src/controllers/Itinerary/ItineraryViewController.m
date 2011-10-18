@@ -14,12 +14,12 @@
 #import "CycleStreets.h"
 #import "CycleStreetsAppDelegate.h"
 #import "Stage.h"
-
+#import "ButtonUtilities.h"
 #import "FavouritesViewController.h"
 #import "AppConstants.h"
 #import "ExpandedUILabel.h"
 #import "RouteManager.h"
-#import "VBox.h"
+#import "LayoutBox.h"
 #import "ViewUtilities.h"
 #import "GradientView.h"
 
@@ -303,16 +303,17 @@
 	if(show==YES){
 		
 		GradientView *errorView;
-		VBox *contentContainer;
+		LayoutBox *contentContainer;
 		
-		contentContainer=[[VBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+		contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 		errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 		
 		[errorView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 		errorView.tag=kItineraryPlanView;
-		contentContainer.verticalGap=20;
-		contentContainer.fixedWidth=YES;
-		contentContainer.alignby=CENTER;
+		contentContainer.layoutMode=BUVerticalLayoutMode;
+        contentContainer.itemPadding=20;
+        contentContainer.fixedWidth=YES;
+        contentContainer.alignMode=BUCenterAlignMode;
 		
 		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 		titlelabel.font=[UIFont boldSystemFontOfSize:14];
@@ -332,11 +333,11 @@
 		[contentContainer addSubview:infolabel];					
 		[infolabel release];
 		
-		UIButton *routeButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan route"];
+		UIButton *routeButton=[ButtonUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan route"];
 		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:routeButton];
 		
-		UIButton *savedButton=[GlobalUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Saved routes"];
+		UIButton *savedButton=[ButtonUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Saved routes"];
 		[savedButton addTarget:self action:@selector(swapToSavedRoutesView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:savedButton];
 		

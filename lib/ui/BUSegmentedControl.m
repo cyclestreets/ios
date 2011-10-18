@@ -8,7 +8,7 @@
 
 #import "BUSegmentedControl.h"
 #import "StyleManager.h"
-#import "HBox.h"
+#import "LayoutBox.h"
 #import "GlobalUtilities.h"
 
 @implementation BUSegmentedControl
@@ -33,8 +33,8 @@
 		
 		self.backgroundColor=[UIColor clearColor];
 		itemWidth=0;
-		container=[[HBox alloc]init];
-		container.horizontalGap=0;
+		container=[[LayoutBox alloc]init];
+		container.itemPadding=0;
 		selectedIndex=-1;
 		width=0;
 		height=0;
@@ -192,7 +192,7 @@
 	if(index<[items count]){
 	
 		[items removeObjectAtIndex:index];
-		[container removeSubViewatIndex:index];
+		[container removeSubviewAtIndex:index];
 	
 	}
 	

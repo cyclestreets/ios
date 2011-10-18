@@ -1,6 +1,6 @@
 //
 //  GlobalVariables.m
-//  RacingUK
+//
 //
 //  Created by Neil Edwards on 08/04/2009.
 //  Copyright 2009 buffer. All rights reserved.
@@ -20,15 +20,7 @@
 @implementation GlobalUtilities
 	
 
-- (id) init
-{
-    self = [super init];
-    if (self != nil) {
-		
-		
-    }
-    return self;
-}
+
 
 +(float) calculateHeightOfTextFromWidth:(NSString*) text: (UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode
 {
@@ -103,358 +95,57 @@
 }
 
 
-+(NSURL*)validateURL:(NSString*)urlstring{
-	
-	NSString *regexString=@"([A-Za-z][A-Za-z0-9+.-]{1,120}:[A-Za-z0-9/](([A-Za-z0-9$_.+!*,;/?:@&~=-])|%[A-Fa-f0-9]{2}){1,333}(#([a-zA-Z0-9][a-zA-Z0-9$_.+!*,;/?:@&~=%-]{0,1000}))?)";
-	
-	//NSString *regexString = @"((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-	BOOL validated = [urlstring isMatchedByRegex:regexString];
-	
-	//NSLog(@"[ERROR] Invalid URL: GlobalUtilities.validateURL returned: %i",validated);
-	
-    if(validated==YES) {
-		NSURL *testurl = [NSURL URLWithString: urlstring];
-        NSString *scheme = [testurl scheme];
-        if( scheme == nil ) {
-            urlstring = [@"http://" stringByAppendingString: urlstring];
-            testurl = [NSURL URLWithString: urlstring];
-        }
-        return testurl;
-    }
-    return nil;
-	
-}
-
-+(BOOL)validateEmail:(NSString*)emailstring{
-	
-	NSString *regexString=@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-	BOOL validated = [emailstring isMatchedByRegex:regexString];
-	
-	return validated;
-	
-}
 
 
-+ (UIButton*)shinyButtonWithWidth:(NSUInteger)width height:(NSUInteger)height color:(UIColor*)color
-{
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-	button.frame = CGRectMake(0, 0, width, height);
-	
-	// Configure background image(s)
-	[UIButton setBackgroundToGlossyButton:button forColor:color withBorder:YES forState:UIControlStateNormal];
-	[UIButton setBackgroundToGlossyButton:button forColor:[UIColor grayColor] withBorder:YES forState:UIControlStateHighlighted];
-	
-	// Configure title(s)
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.font=[UIFont boldSystemFontOfSize:12];
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-	// Add to TL view, and return
-	return button;
-}
-
-+ (UIButton*)shinyButtonWithWidth:(NSUInteger)width height:(NSUInteger)height color:(UIColor*)color text:(NSString*)text
-{
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-	UIFont *font=[UIFont boldSystemFontOfSize:12];
-	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font];
-	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
-	
-	// Configure background image(s)
-	[UIButton setBackgroundToGlossyButton:button forColor:color withBorder:YES forState:UIControlStateNormal];
-	[UIButton setBackgroundToGlossyButton:button forColor:[UIColor grayColor] withBorder:YES forState:UIControlStateHighlighted];
-	
-	// Configure title(s)
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.font=font;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-	
-	
-	return button;
-}
-
-
-+(void)styleIBButton:(UIButton*)button type:(NSString*)type text:(NSString*)text{
-	
-	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font];
-	CGRect bframe=button.frame;
-	bframe.size.width=MAX(twidth,bframe.size.width);
-	button.frame = bframe;
-	
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
-	
-	
-	// Configure title(s)
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.userInteractionEnabled=NO;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-}
-
-+(void)styleFixedWidthIBButton:(UIButton*)button type:(NSString*)type text:(NSString*)text{
-	
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
-	
-	
-	// Configure title(s)
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.userInteractionEnabled=NO;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-}
-
-
-+ (UIButton*)UIButtonWithWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text
-{
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	UIFont *font=[UIFont boldSystemFontOfSize:12];
-	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font];
-	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
-	
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	
-	
-	// Configure title(s)
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.userInteractionEnabled=NO;
-	button.titleLabel.font=font;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-	
-	
-	return button;
-}
-
-// Note: These are autoreleased, do not over release!
-+ (UIButton*)UIButtonWithFixedWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text minFont:(int)minFont
-{
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	UIFont *font=[UIFont boldSystemFontOfSize:12];
-	
-	button.frame = CGRectMake(0, 0, width, height);
-	
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	
-	
-	// Configure title(s)
-	button.titleLabel.adjustsFontSizeToFitWidth=YES;
-	[button.titleLabel setMinimumFontSize:minFont];
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.font=font;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-	
-	
-	return button;
-}
-
-
-+ (UIButton*)UIImageButtonWithWidth:(NSString*)image height:(NSUInteger)height type:(NSString*)type text:(NSString*)text
-{
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	button.titleEdgeInsets=UIEdgeInsetsMake(0, 10, 0, 5);
-	UIFont *font=[UIFont boldSystemFontOfSize:12];
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font];
-	//
-	UIImage *iconimage=[[StyleManager sharedInstance] imageForType:image];
-	[button setImage:iconimage forState:UIControlStateNormal];
-	twidth+=iconimage.size.width+20;
-	//
-	button.frame = CGRectMake(0, 0, MAX(twidth,10), height);
-	//
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	
-	
-	// Configure title(s)
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.userInteractionEnabled=NO;
-	button.titleLabel.font=font;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-	
-	
-	return button;
-}
-
-+ (UIButton*)UIToggleButtonWithWidth:(NSUInteger)width height:(NSUInteger)height states:(NSDictionary*)stateDict
-{
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	UIFont *font=[UIFont boldSystemFontOfSize:12];
-	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] :font];
-	twidth+=10;
-	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
-	
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",[[stateDict objectForKey:@"normal"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",[[stateDict objectForKey:@"highlight"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_selected",[[stateDict objectForKey:@"selected"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateSelected];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",@"grey"]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
-	
-	
-	// Configure title(s)
-	[button setTitle:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] forState:UIControlStateNormal];
-	[button setTitle:[[stateDict objectForKey:@"highlight"] objectForKey:@"text"] forState:UIControlStateHighlighted];
-	[button setTitle:[[stateDict objectForKey:@"selected"] objectForKey:@"text"] forState:UIControlStateSelected];
-	[button setTitle:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] forState:UIControlStateDisabled];
-	
-	button.titleLabel.userInteractionEnabled=NO;
-	button.titleLabel.font=font;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, 1);
-	
-	
-	return button;
-}
-
-+ (void)UIToggleIBButton:(UIButton*)button states:(NSDictionary*)stateDict
-{
-	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] :button.titleLabel.font];
-	CGRect bframe=button.frame;
-	bframe.size=CGSizeMake(MAX(twidth,bframe.size.width), bframe.size.height);
-	button.frame=bframe;
-	
-	//button.titleEdgeInsets=UIEdgeInsetsMake(0, 5, 0, 5);
-	
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",[[stateDict objectForKey:@"normal"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",[[stateDict objectForKey:@"highlight"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_selected",[[stateDict objectForKey:@"selected"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateSelected];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",@"grey"]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
-	
-	
-	// Configure title(s)
-	[button setTitle:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] forState:UIControlStateNormal];
-	[button setTitle:[[stateDict objectForKey:@"highlight"] objectForKey:@"text"] forState:UIControlStateHighlighted];
-	[button setTitle:[[stateDict objectForKey:@"selected"] objectForKey:@"text"] forState:UIControlStateSelected];
-	[button setTitle:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] forState:UIControlStateDisabled];
-	
-	button.titleLabel.userInteractionEnabled=NO;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, 1);
-	
-	
-}
-
-+ (void)styleIBIconButton:(UIButton*)button iconimage:(NSString*)image type:(NSString*)type text:(NSString*)text align:(LayoutBoxAlignMode)alignment
-{
-	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font];
-	//
-	UIImage *iconimage=[[StyleManager sharedInstance] imageForType:image];
-	[button setImage:iconimage forState:UIControlStateNormal];
-	
-	if(alignment==BURightAlignMode){
-		[button setTitleEdgeInsets:UIEdgeInsetsMake(0, -(iconimage.size.width+15), 0, 5)];
-		[button setImageEdgeInsets:UIEdgeInsetsMake(0, twidth+15, 0, 5)];
-	}else{
-		button.titleEdgeInsets=UIEdgeInsetsMake(0, 10, 0, 5);
-	}
-	
-	twidth+=iconimage.size.width+5;
-	//
-	CGRect bframe=button.frame;
-	bframe.size=CGSizeMake(MAX(twidth,bframe.size.width), bframe.size.height);
-	button.frame=bframe;
-	//
-	// Configure background image(s)
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	
-	
-	// Configure title(s)
-	[button setTitle:text forState:UIControlStateNormal];
-	button.titleLabel.userInteractionEnabled=NO;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentLeft;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-}
-
-
-
-//Constants
-#define SECOND 1
-#define MINUTE (60 * SECOND)
-#define HOUR (60 * MINUTE)
-#define DAY (24 * HOUR)
-#define MONTH (30 * DAY)
 
 + (NSString*)timeIntervalWithStartDate:(NSDate*)d1 withEndDate:(NSDate*)d2
 {
     //Calculate the delta in seconds between the two dates
     NSTimeInterval delta = [d2 timeIntervalSinceDate:d1];
 	
-    if (delta < 1 * MINUTE)
+	if(delta<0){
+		return @"Date is in future!";
+	}
+	
+    if (delta < 1 * TIME_MINUTE)
     {
         return delta == 1 ? @"one second ago" : [NSString stringWithFormat:@"%d seconds ago", (int)delta];
     }
-    if (delta < 2 * MINUTE)
+    if (delta < 2 * TIME_MINUTE)
     {
         return @"a minute ago";
     }
-    if (delta < 45 * MINUTE)
+    if (delta < 45 * TIME_MINUTE)
     {
-        int minutes = floor((double)delta/MINUTE);
+        int minutes = floor((double)delta/TIME_MINUTE);
         return [NSString stringWithFormat:@"%d minutes ago", minutes];
     }
-    if (delta < 90 * MINUTE)
+    if (delta < 90 * TIME_MINUTE)
     {
         return @"an hour ago";
     }
-    if (delta < 24 * HOUR)
+    if (delta < 24 * TIME_HOUR)
     {
-        int hours = floor((double)delta/HOUR);
+        int hours = floor((double)delta/TIME_HOUR);
         return [NSString stringWithFormat:@"%d hours ago", hours];
     }
-    if (delta < 48 * HOUR)
+    if (delta < 48 * TIME_HOUR)
     {
         return @"Yesterday";
     }
-    if (delta < 30 * DAY)
+    if (delta < 30 * TIME_DAY)
     {
-        int days = floor((double)delta/DAY);
+        int days = floor((double)delta/TIME_DAY);
         return [NSString stringWithFormat:@"%d days ago", days];
     }
-    if (delta < 12 * MONTH)
+    if (delta < 12 * TIME_MONTH)
     {
-        int months = floor((double)delta/MONTH);
+        int months = floor((double)delta/TIME_MONTH);
         return months <= 1 ? @"one month ago" : [NSString stringWithFormat:@"%d months ago", months];
     }
     else
     {
-        int years = floor((double)delta/MONTH/12.0);
+        int years = floor((double)delta/TIME_MONTH/12.0);
         return years <= 1 ? @"one year ago" : [NSString stringWithFormat:@"%d years ago", years];
     }
 }
@@ -471,8 +162,8 @@
 
 +(NSMutableDictionary*)newTableViewIndexFromArray:(NSMutableArray*)dataProvider usingKey:(NSString*)key{
 	
-	//NSSortDescriptor *nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES selector:@selector(compare:)] autorelease];
-	//	[dataProvider sortUsingDescriptors:[NSMutableArray arrayWithObjects:nameSortDescriptor, nil]];
+	NSSortDescriptor *nameSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:key ascending:YES selector:@selector(compare:)] autorelease];
+	[dataProvider sortUsingDescriptors:[NSMutableArray arrayWithObjects:nameSortDescriptor, nil]];
 	
 	NSMutableDictionary *alphaDataProvider=[[NSMutableDictionary alloc]init];
 	NSString *activekey=@"";
@@ -480,10 +171,9 @@
 	NSMutableArray *keyArray=[[NSMutableArray alloc]init];
 	BOOL firstvalue=YES;
 	
-	for( NSString *item	in dataProvider){
+	for( id item in dataProvider){
 		
-		//NSString *itemname=[[NSString alloc] initWithString:item.name];
-		itemkey = [ [item valueForKey:key] substringWithRange:NSMakeRange(0,1)];
+		itemkey = [ [item valueForKeyPath:key] substringWithRange:NSMakeRange(0,1)];
 		//
 		if(firstvalue==YES){
 			activekey=[itemkey copy];
@@ -531,6 +221,56 @@
 }
 
 
++(NSMutableDictionary*)newKeyedDictionaryFromArray:(NSMutableArray*)dataProvider usingKey:(NSString*)key{
+	
+	NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:key ascending:YES selector:@selector(compare:)] autorelease];
+	[dataProvider sortUsingDescriptors:[NSMutableArray arrayWithObjects:sortDescriptor, nil]];
+	
+	NSMutableDictionary *keyedDataProvider=[[NSMutableDictionary alloc]init];
+	NSString *activekey=@"";
+	NSString *itemkey;
+	NSMutableArray *keyArray=[[NSMutableArray alloc]init];
+	BOOL firstvalue=YES;
+	
+	for( id item	in dataProvider){
+		
+		itemkey = [item valueForKeyPath:key];
+		//
+		if(firstvalue==YES){
+			activekey=[itemkey copy];
+			firstvalue=NO;
+		}
+		if([activekey isEqualToString:itemkey]){
+			[keyArray addObject:item];
+		}else{
+			NSMutableArray *keycopy=[keyArray mutableCopy];
+			[keyedDataProvider setObject:keycopy forKey:activekey];
+			[activekey release];
+			activekey=[itemkey copy];
+			[keyArray removeAllObjects];
+			[keyArray addObject:item];
+			[keycopy release];
+		}
+		
+		
+	}
+	if([keyArray count]>0){
+		NSMutableArray *keycopy=[keyArray mutableCopy];
+		[keyedDataProvider setObject:keycopy forKey:activekey];
+		[keycopy release];
+	}
+	//
+	
+	[keyArray release];
+	
+	[activekey release];
+	
+	return keyedDataProvider;
+	
+}
+
+
+
 
 +(NSMutableArray*)newDateArray:(NSDate*)start length:(int)length future:(BOOL)future{
 	
@@ -547,7 +287,6 @@
 			[arr insertObject:newday atIndex:0];
 		}
 		
-		//[newday release];
 	}
 		
 	return arr;
@@ -642,29 +381,44 @@
 }
 
 
-
-
 //
 /***********************************************
- * @description			COLLECTION UTILITIES
+ * @description			Enumerates a form dict for failed validation results. Form dict must have BOOL valid key
  ***********************************************/
 //
-
-+(void)printDictionaryContents:(NSDictionary*)dict{
++(BOOL)validationResultForFormDict:(NSDictionary*)dict{
 	
-	if(dict!=nil){
-		for (NSString *key in dict) {
-			NSLog(@"%@: %@",key,[dict valueForKey:key]);
-		}
+	BOOL isClearOfErrors=YES;
+	for (NSString *key in dict) {
+		NSDictionary *formdict=[dict objectForKey:key];
+		isClearOfErrors=[[formdict objectForKey:@"valid"] boolValue];
+		if(isClearOfErrors==NO)
+			return isClearOfErrors;
 	}
-	
+	return isClearOfErrors;
 }
 
 
 
-- (void) dealloc{
-	
-    [super dealloc];
+
++(id)sectionDataProviderFromIndexPath:(NSIndexPath*)indexpath 
+dataProvider:(NSDictionary*)dataProvider withKeys:(NSArray*)keys{
+    
+    NSString *key=[keys objectAtIndex:[indexpath section]];
+	NSMutableArray *dp=[dataProvider objectForKey:key];
+    return [dp objectAtIndex:[indexpath row]];
+    
 }
+
+
+
++(void)trimArray:(NSMutableArray*)arr FromIndex:(int)index{
+	
+	NSMutableIndexSet *indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(index, [arr count]-index)];
+	[arr removeObjectsAtIndexes:indexes];
+	
+}
+
+
 
 @end

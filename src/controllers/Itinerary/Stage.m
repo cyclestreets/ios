@@ -385,7 +385,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // all the things that need fixed if we have asked (or been forced) to start doing location.
 - (void)startDoingLocation {
 	
-	if(locationManager.locationServicesEnabled==YES){
+	if([CLLocationManager locationServicesEnabled]==YES){
 	
 		doingLocation = YES;
 		locationButton.style = UIBarButtonItemStyleDone;
