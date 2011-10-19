@@ -334,7 +334,7 @@
 		return;
 	}
     
-    ValidationVO *validation=[[ValidationVO alloc]init];
+    //ValidationVO *validation=[[ValidationVO alloc]init];
     
     // will be <gml:featureMember>
     //then <cs:photo>

@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "RouteLineView.h"
-#import "CSPoint.h"
+#import "CSPointVO.h"
 #import <math.h>
 
 static NSInteger MAX_DIST = 10;
@@ -55,7 +55,7 @@ static NSInteger MAX_DIST = 10;
 		CGPoint p;
 		p.x = p1.x + i * (p2.x - p1.x) / num;
 		p.y = p1.y + i * (p2.y - p1.y) / num;
-		CSPoint *csPoint = [[CSPoint alloc] init];
+		CSPointVO *csPoint = [[CSPointVO alloc] init];
 		csPoint.p = p;
 		[results addObject:csPoint];
 		[csPoint release];
@@ -66,8 +66,8 @@ static NSInteger MAX_DIST = 10;
 //interpolate when points cross boundaries.
 - (NSArray *) interpolate:(NSArray *)points {
 	NSMutableArray *result = [[[NSMutableArray alloc] init] autorelease];
-	CSPoint *prev = nil;
-	for (CSPoint *point in points) {
+	CSPointVO *prev = nil;
+	for (CSPointVO *point in points) {
 		if (prev != nil) {
 			NSArray *between = [self interpolateFrom:prev.p to:point.p];
 			[result addObjectsFromArray:between];
@@ -87,7 +87,7 @@ static NSInteger MAX_DIST = 10;
 	NSArray *points = [pointListProvider pointList];
 	
 	bool first = YES;
-	for (CSPoint *point in points) {
+	for (CSPointVO *point in points) {
 		if (first) {
 			CGContextMoveToPoint(ctx, point.p.x, point.p.y);
 			first = NO;

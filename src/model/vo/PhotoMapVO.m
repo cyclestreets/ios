@@ -24,9 +24,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Created by Alan Paxton on 03/05/2010.
 //
 
-#import "PhotoEntry.h"
+#import "PhotoMapVO.h"
 
-@implementation PhotoEntry
+@implementation PhotoMapVO
 
 static int MIN_SIZE = 80;
 static int BIG_SIZE = 300;

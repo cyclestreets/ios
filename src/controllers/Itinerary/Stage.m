@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoMapImageLocationViewController.h"
 #import "Markers.h"
 #import "BlueCircleView.h"
-#import "CSPoint.h"
+#import "CSPointVO.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
 

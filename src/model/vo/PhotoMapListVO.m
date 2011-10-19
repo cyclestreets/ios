@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "PhotoMapListVO.h"
-#import "PhotoEntry.h"
+#import "PhotoMapVO.h"
 
 static NSString *PHOTO_ELEMENT = @"cs:photo";
 
@@ -37,7 +37,7 @@ static NSString *PHOTO_ELEMENT = @"cs:photo";
 	if (self = [super init]) {
 		photos = [[NSMutableArray alloc] init];
 		for (NSDictionary *photoDictionary in [elements objectForKey:PHOTO_ELEMENT]) {
-			PhotoEntry *photo = [[PhotoEntry alloc] initWithDictionary:photoDictionary];
+			PhotoMapVO *photo = [[PhotoMapVO alloc] initWithDictionary:photoDictionary];
 			[photos addObject:photo];
 			[photo release];
 		}

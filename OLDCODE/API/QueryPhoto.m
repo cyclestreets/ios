@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "QueryPhoto.h"
 #import "XMLRequest.h"
-#import "PhotoList.h"
+#import "PhotoMapListVO.h"
 #import "CycleStreets.h"
 
 static NSString *format = @"%@?key=%@&longitude=%f&latitude=%f&n=%f&e=%f&w=%f&s=%f&zoom=%@&useDom=%@&thumbnailsize=%@&limit=%d&suppressplaceholders=1&minimaldata=1";
@@ -83,7 +83,7 @@ static NSString *thumbnailSize = @"300";
 										  tag:nil
 									onSuccess:(SEL)successMethod
 									onFailure:(SEL)failureMethod];
-	request.elementsToParse = [PhotoList photoListXMLElementNames];
+	request.elementsToParse = [PhotoMapListVO photoListXMLElementNames];
 	[request.request addValue:@"gzip" forHTTPHeaderField:@"Accepts-Encoding"];
 	[request start];
 }
