@@ -166,7 +166,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 -(void)hudWasHidden{
 	activeWindowType=HUDWindowTypeNone;
 	isShowing=NO;
-    HUD=nil;
+    self.HUD=nil;
 }
 
 

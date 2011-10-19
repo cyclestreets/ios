@@ -18,7 +18,7 @@
 #import "SFHFKeychainUtils.h"
 #import "DeviceUtilities.h"
 #import "Utiltities.h"
-#import "MBProgressHUD.h"
+#import "HudManager.h"
 #import "CycleStreets.h"
 #import "Files.h"
 #import "LoginVO.h"
@@ -35,12 +35,6 @@
 -(void)createUser;
 -(NSString*)filepath;
 
-//HUD
--(void)showSuccessHUD:(NSString*)message andDetailText:(NSString*)detailText;
--(void)showErrorHUDWithMessage:(NSString*)error andDetailText:(NSString*)detailText;
--(void)showHUDWithMessage:(NSString*)message;
--(void)showProgressHUDWithMessage:(NSString*)message;
--(void)removeHUD;
 
 @end
 
@@ -55,7 +49,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 @synthesize sessionToken;
 @synthesize deviceID;
 @synthesize accountMode;
-@synthesize HUD;
 
 //=========================================================== 
 // dealloc
@@ -69,7 +62,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
     [userVisibleName release], userVisibleName = nil;
     [sessionToken release], sessionToken = nil;
     [deviceID release], deviceID = nil;
-    [HUD release], HUD = nil;
 	
     [super dealloc];
 }
@@ -150,7 +142,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	}
 	
 	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
-		[self removeHUD];
+		[[HudManager sharedInstance] removeHUD];
 	}
 	
 	
@@ -191,7 +183,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[dict release];
 	[request release];
 	
-	[self showProgressHUDWithMessage:@"Registering New User"];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Registering New User" andMessage:nil];
 	
 }
 
@@ -213,7 +205,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			[dict release];
 			
-			[self showSuccessHUD:@"Account Created" andDetailText:nil];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Account Created" andMessage:nil];
 			
 		}	
 			break;	
@@ -226,14 +218,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			[dict release];
 			
-			[self showErrorHUDWithMessage:@"Creation Error" andDetailText:validation.returnMessage];
+
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Creation Error" andMessage:validation.returnMessage];
 			
 		}
 			break;
 		
 		default:
 			
-			[self removeHUD];
+			[[HudManager sharedInstance] removeHUD];
 		break;
 			
 	}
@@ -279,7 +272,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[dict release];
 	[request release];
 	
-	[self showProgressHUDWithMessage:@"Signing in"];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Signing in" andMessage:nil];
 	
 }
 
@@ -300,7 +293,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			[dict release];
 			
-			[self showSuccessHUD:@"Logged In" andDetailText:nil];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Logged In" andMessage:nil];
 			
 		}
 			break;
@@ -314,14 +307,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			[dict release];
 			
-			[self showErrorHUDWithMessage:@"Login Failed" andDetailText:nil];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Login Failed" andMessage:nil];
 			
 		}	
 			break;
 			
 		default:
 			
-			[self removeHUD];
+			[[HudManager sharedInstance] removeHUD];
 		break;
 			
 	}
@@ -569,76 +562,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 }
 
 
-//
-/***********************************************
- * @description			HUDSUPPORT
- ***********************************************/
-//
 
-
--(void)showProgressHUDWithMessage:(NSString*)message{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-    HUD.delegate = self;
-	HUD.labelText=message;
-	[HUD show:YES];
-	
-}
-
--(void)showHUDWithMessage:(NSString*)message{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-    HUD.delegate = self;
-	HUD.labelText=message;
-	[HUD show:YES];
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
-}
-
-
-//
-/***********************************************
- * @description			NOTE: These are only to be called if the hud has already been created!
- ***********************************************/
-//
-
--(void)showSuccessHUD:(NSString*)message andDetailText:(NSString*)detailText{
-	
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = message;
-	if(detailText!=nil)
-		HUD.detailsLabelText=detailText;
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:1];
-}
-
--(void)showErrorHUDWithMessage:(NSString*)error andDetailText:(NSString*)detailText{
-	
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = @"Error";
-	if(detailText!=nil)
-		HUD.detailsLabelText=detailText;
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
-}
-
-
--(void)removeHUD{
-	
-	[HUD hide:YES];
-	
-}
-
-
--(void)hudWasHidden{
-	
-	[HUD removeFromSuperview];
-	[HUD release];
-	
-}
 
 
 

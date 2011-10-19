@@ -128,6 +128,13 @@
 		28735C00144EC95B00726A6C /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BFF144EC95B00726A6C /* PhotoMapViewController.m */; };
 		28735C04144EC97F00726A6C /* PhotoMapImageLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28735C02144EC97F00726A6C /* PhotoMapImageLocationViewController.xib */; };
 		28735C05144EC97F00726A6C /* PhotoMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28735C03144EC97F00726A6C /* PhotoMapView.xib */; };
+		28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C07144ED44B00726A6C /* LocationFeaturesManager.m */; };
+		28735C0B144ED64700726A6C /* HudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C0A144ED64700726A6C /* HudManager.m */; };
+		28735C0E144EDAC400726A6C /* icon_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C0C144EDAC400726A6C /* icon_camera.png */; };
+		28735C0F144EDAC400726A6C /* icon_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C0D144EDAC400726A6C /* icon_location.png */; };
+		28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28735C11144EDACF00726A6C /* cyclecambridge.jpg */; };
+		28735C15144EDACF00726A6C /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C12144EDACF00726A6C /* donate.png */; };
+		28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C13144EDACF00726A6C /* reesjeffreys.png */; };
 		287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */; };
 		287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */; };
 		287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */; };
@@ -254,7 +261,6 @@
 		28AD6430131FB6C8008527FC /* NetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD632F131FB6C8008527FC /* NetRequest.m */; };
 		28AD6431131FB6C8008527FC /* NetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6331131FB6C8008527FC /* NetResponse.m */; };
 		28AD6432131FB6C8008527FC /* RemoteFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6334131FB6C8008527FC /* RemoteFileManager.m */; };
-		28AD6433131FB6C8008527FC /* RKLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6336131FB6C8008527FC /* RKLocationManager.m */; };
 		28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6339131FB6C8008527FC /* AsyncImageView.m */; };
 		28AD6435131FB6C8008527FC /* BorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD633B131FB6C8008527FC /* BorderView.m */; };
 		28AD6437131FB6C8008527FC /* BUSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD633F131FB6C8008527FC /* BUSegmentedControl.m */; };
@@ -320,16 +326,6 @@
 		E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3E127821DB002640D0 /* Default@2x.png */; };
 		E7FD8F44127821DB002640D0 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3F127821DB002640D0 /* icon.png */; };
 		E7FD8F45127821DB002640D0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F40127821DB002640D0 /* icon@2x.png */; };
-		E7FD8F5F127821EB002640D0 /* bg320x240.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F47127821EB002640D0 /* bg320x240.png */; };
-		E7FD8F60127821EB002640D0 /* bg320x460.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F48127821EB002640D0 /* bg320x460.png */; };
-		E7FD8F62127821EB002640D0 /* blank120.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F4A127821EB002640D0 /* blank120.png */; };
-		E7FD8F63127821EB002640D0 /* cyclecambridge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F4B127821EB002640D0 /* cyclecambridge.jpg */; };
-		E7FD8F64127821EB002640D0 /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F4C127821EB002640D0 /* donate.png */; };
-		E7FD8F6D127821EB002640D0 /* reesjeffreys.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F55127821EB002640D0 /* reesjeffreys.png */; };
-		E7FD9002127835B9002640D0 /* 74-location.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FEC127835B9002640D0 /* 74-location.png */; };
-		E7FD9003127835B9002640D0 /* 86-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FED127835B9002640D0 /* 86-camera.png */; };
-		E7FD9006127835B9002640D0 /* icon_arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FF1127835B9002640D0 /* icon_arrow_left.png */; };
-		E7FD9007127835B9002640D0 /* icon_arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FF2127835B9002640D0 /* icon_arrow_right.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -584,6 +580,15 @@
 		28735BFF144EC95B00726A6C /* PhotoMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoMapViewController.m; path = PhotoMap/PhotoMapViewController.m; sourceTree = "<group>"; };
 		28735C02144EC97F00726A6C /* PhotoMapImageLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoMapImageLocationViewController.xib; sourceTree = "<group>"; };
 		28735C03144EC97F00726A6C /* PhotoMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoMapView.xib; sourceTree = "<group>"; };
+		28735C06144ED44B00726A6C /* LocationFeaturesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationFeaturesManager.h; sourceTree = "<group>"; };
+		28735C07144ED44B00726A6C /* LocationFeaturesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFeaturesManager.m; sourceTree = "<group>"; };
+		28735C09144ED64700726A6C /* HudManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudManager.h; sourceTree = "<group>"; };
+		28735C0A144ED64700726A6C /* HudManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudManager.m; sourceTree = "<group>"; };
+		28735C0C144EDAC400726A6C /* icon_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_camera.png; sourceTree = "<group>"; };
+		28735C0D144EDAC400726A6C /* icon_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_location.png; sourceTree = "<group>"; };
+		28735C11144EDACF00726A6C /* cyclecambridge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cyclecambridge.jpg; sourceTree = "<group>"; };
+		28735C12144EDACF00726A6C /* donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donate.png; sourceTree = "<group>"; };
+		28735C13144EDACF00726A6C /* reesjeffreys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reesjeffreys.png; sourceTree = "<group>"; };
 		287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
 		287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
 		287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarCameraSmall@2x.png"; sourceTree = "<group>"; };
@@ -754,8 +759,6 @@
 		28AD6332131FB6C8008527FC /* NetUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetUtilities.h; sourceTree = "<group>"; };
 		28AD6333131FB6C8008527FC /* RemoteFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFileManager.h; sourceTree = "<group>"; };
 		28AD6334131FB6C8008527FC /* RemoteFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFileManager.m; sourceTree = "<group>"; };
-		28AD6335131FB6C8008527FC /* RKLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKLocationManager.h; sourceTree = "<group>"; };
-		28AD6336131FB6C8008527FC /* RKLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKLocationManager.m; sourceTree = "<group>"; };
 		28AD6338131FB6C8008527FC /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
 		28AD6339131FB6C8008527FC /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
 		28AD633A131FB6C8008527FC /* BorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderView.h; sourceTree = "<group>"; };
@@ -849,18 +852,6 @@
 		E7FD8F3E127821DB002640D0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		E7FD8F3F127821DB002640D0 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		E7FD8F40127821DB002640D0 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		E7FD8F47127821EB002640D0 /* bg320x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg320x240.png; sourceTree = "<group>"; };
-		E7FD8F48127821EB002640D0 /* bg320x460.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg320x460.png; sourceTree = "<group>"; };
-		E7FD8F4A127821EB002640D0 /* blank120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank120.png; sourceTree = "<group>"; };
-		E7FD8F4B127821EB002640D0 /* cyclecambridge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cyclecambridge.jpg; sourceTree = "<group>"; };
-		E7FD8F4C127821EB002640D0 /* donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donate.png; sourceTree = "<group>"; };
-		E7FD8F55127821EB002640D0 /* reesjeffreys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reesjeffreys.png; sourceTree = "<group>"; };
-		E7FD8FEC127835B9002640D0 /* 74-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "74-location.png"; sourceTree = "<group>"; };
-		E7FD8FED127835B9002640D0 /* 86-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "86-camera.png"; sourceTree = "<group>"; };
-		E7FD8FEE127835B9002640D0 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
-		E7FD8FF0127835B9002640D0 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
-		E7FD8FF1127835B9002640D0 /* icon_arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_left.png; sourceTree = "<group>"; };
-		E7FD8FF2127835B9002640D0 /* icon_arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_right.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1177,6 +1168,8 @@
 		280E91BF14097D8600C7AC75 /* managers */ = {
 			isa = PBXGroup;
 			children = (
+				28735C09144ED64700726A6C /* HudManager.h */,
+				28735C0A144ED64700726A6C /* HudManager.m */,
 				280E91C014097D8600C7AC75 /* StringManager.h */,
 				280E91C114097D8600C7AC75 /* StringManager.m */,
 				280E91C214097D8600C7AC75 /* StyleManager.h */,
@@ -1448,6 +1441,16 @@
 			path = photomap;
 			sourceTree = "<group>";
 		};
+		28735C10144EDACF00726A6C /* html */ = {
+			isa = PBXGroup;
+			children = (
+				28735C11144EDACF00726A6C /* cyclecambridge.jpg */,
+				28735C12144EDACF00726A6C /* donate.png */,
+				28735C13144EDACF00726A6C /* reesjeffreys.png */,
+			);
+			path = html;
+			sourceTree = "<group>";
+		};
 		287ECBAD134490D800B8A6AC /* html */ = {
 			isa = PBXGroup;
 			children = (
@@ -1643,6 +1646,8 @@
 				28AD61EB131FB69D008527FC /* SettingsManager.m */,
 				28AD61EC131FB69D008527FC /* StartupManager.h */,
 				28AD61ED131FB69D008527FC /* StartupManager.m */,
+				28735C06144ED44B00726A6C /* LocationFeaturesManager.h */,
+				28735C07144ED44B00726A6C /* LocationFeaturesManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -1723,6 +1728,7 @@
 		28AD6208131FB69D008527FC /* images */ = {
 			isa = PBXGroup;
 			children = (
+				28735C10144EDACF00726A6C /* html */,
 				28AD6525131FC239008527FC /* x1 */,
 				28AD6532131FC239008527FC /* x2 */,
 			);
@@ -1827,8 +1833,6 @@
 				28AD6332131FB6C8008527FC /* NetUtilities.h */,
 				28AD6333131FB6C8008527FC /* RemoteFileManager.h */,
 				28AD6334131FB6C8008527FC /* RemoteFileManager.m */,
-				28AD6335131FB6C8008527FC /* RKLocationManager.h */,
-				28AD6336131FB6C8008527FC /* RKLocationManager.m */,
 			);
 			path = net;
 			sourceTree = "<group>";
@@ -1933,6 +1937,8 @@
 				289E6B22144C375F0079FFE5 /* Directional Arrows */,
 				289E6B28144C375F0079FFE5 /* exclaim.png */,
 				289E6B29144C375F0079FFE5 /* icon_zoom_out.png */,
+				28735C0C144EDAC400726A6C /* icon_camera.png */,
+				28735C0D144EDAC400726A6C /* icon_location.png */,
 				289E6B2A144C375F0079FFE5 /* lock.png */,
 				289E6B2B144C375F0079FFE5 /* Map_Pin_Green.png */,
 				289E6B2C144C375F0079FFE5 /* Map_Pin_Red.png */,
@@ -2056,8 +2062,6 @@
 			isa = PBXGroup;
 			children = (
 				28AD64AB131FB7EC008527FC /* MapView.xcodeproj */,
-				E7FD8F77127821F7002640D0 /* ThirdPartyIcons */,
-				E7FD8F46127821EB002640D0 /* IconsAndImages */,
 				E7FD8F3B127821DB002640D0 /* Icons */,
 				E7757BB81259C79300730726 /* APIKey.txt */,
 			);
@@ -2094,49 +2098,6 @@
 				E7FD8F40127821DB002640D0 /* icon@2x.png */,
 			);
 			path = Icons;
-			sourceTree = "<group>";
-		};
-		E7FD8F46127821EB002640D0 /* IconsAndImages */ = {
-			isa = PBXGroup;
-			children = (
-				E7FD8F47127821EB002640D0 /* bg320x240.png */,
-				E7FD8F48127821EB002640D0 /* bg320x460.png */,
-				E7FD8F4A127821EB002640D0 /* blank120.png */,
-				E7FD8F4B127821EB002640D0 /* cyclecambridge.jpg */,
-				E7FD8F4C127821EB002640D0 /* donate.png */,
-				E7FD8F55127821EB002640D0 /* reesjeffreys.png */,
-			);
-			path = IconsAndImages;
-			sourceTree = "<group>";
-		};
-		E7FD8F77127821F7002640D0 /* ThirdPartyIcons */ = {
-			isa = PBXGroup;
-			children = (
-				E7FD8FEB127835B9002640D0 /* glyphish */,
-				E7FD8FEF127835B9002640D0 /* twg */,
-			);
-			name = ThirdPartyIcons;
-			path = IconsAndImages/ThirdPartyIcons;
-			sourceTree = "<group>";
-		};
-		E7FD8FEB127835B9002640D0 /* glyphish */ = {
-			isa = PBXGroup;
-			children = (
-				E7FD8FEC127835B9002640D0 /* 74-location.png */,
-				E7FD8FED127835B9002640D0 /* 86-camera.png */,
-				E7FD8FEE127835B9002640D0 /* COPYING */,
-			);
-			path = glyphish;
-			sourceTree = "<group>";
-		};
-		E7FD8FEF127835B9002640D0 /* twg */ = {
-			isa = PBXGroup;
-			children = (
-				E7FD8FF0127835B9002640D0 /* COPYING */,
-				E7FD8FF1127835B9002640D0 /* icon_arrow_left.png */,
-				E7FD8FF2127835B9002640D0 /* icon_arrow_right.png */,
-			);
-			path = twg;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2230,16 +2191,6 @@
 				E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */,
 				E7FD8F44127821DB002640D0 /* icon.png in Resources */,
 				E7FD8F45127821DB002640D0 /* icon@2x.png in Resources */,
-				E7FD8F5F127821EB002640D0 /* bg320x240.png in Resources */,
-				E7FD8F60127821EB002640D0 /* bg320x460.png in Resources */,
-				E7FD8F62127821EB002640D0 /* blank120.png in Resources */,
-				E7FD8F63127821EB002640D0 /* cyclecambridge.jpg in Resources */,
-				E7FD8F64127821EB002640D0 /* donate.png in Resources */,
-				E7FD8F6D127821EB002640D0 /* reesjeffreys.png in Resources */,
-				E7FD9002127835B9002640D0 /* 74-location.png in Resources */,
-				E7FD9003127835B9002640D0 /* 86-camera.png in Resources */,
-				E7FD9006127835B9002640D0 /* icon_arrow_left.png in Resources */,
-				E7FD9007127835B9002640D0 /* icon_arrow_right.png in Resources */,
 				28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
@@ -2368,6 +2319,11 @@
 				287B8587144C470D006E3FCD /* UIIcon_minor_roads@2x.png in Resources */,
 				28735C04144EC97F00726A6C /* PhotoMapImageLocationViewController.xib in Resources */,
 				28735C05144EC97F00726A6C /* PhotoMapView.xib in Resources */,
+				28735C0E144EDAC400726A6C /* icon_camera.png in Resources */,
+				28735C0F144EDAC400726A6C /* icon_location.png in Resources */,
+				28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */,
+				28735C15144EDACF00726A6C /* donate.png in Resources */,
+				28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2417,7 +2373,6 @@
 				28AD6430131FB6C8008527FC /* NetRequest.m in Sources */,
 				28AD6431131FB6C8008527FC /* NetResponse.m in Sources */,
 				28AD6432131FB6C8008527FC /* RemoteFileManager.m in Sources */,
-				28AD6433131FB6C8008527FC /* RKLocationManager.m in Sources */,
 				28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */,
 				28AD6435131FB6C8008527FC /* BorderView.m in Sources */,
 				28AD6437131FB6C8008527FC /* BUSegmentedControl.m in Sources */,
@@ -2540,6 +2495,8 @@
 				28735BFA144EC85300726A6C /* CSPointVO.m in Sources */,
 				28735BFD144EC8FC00726A6C /* CategoryLoader.m in Sources */,
 				28735C00144EC95B00726A6C /* PhotoMapViewController.m in Sources */,
+				28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */,
+				28735C0B144ED64700726A6C /* HudManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -54,7 +54,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 + (RMMarker *)markerPhoto {
-	//return [Markers marker:@"map-marker.png" label:nil];
 	return [Markers marker:@"UIIcon_photomap.png" label:nil];
 }
 

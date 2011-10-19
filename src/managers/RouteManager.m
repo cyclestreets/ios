@@ -15,6 +15,7 @@
 #import "AppConstants.h"
 #import "Files.h"
 #import "RouteParser.h"
+#import "HudManager.h"
 
 @interface RouteManager(Private) 
 
@@ -22,11 +23,6 @@
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements;
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message;
 
--(void)showProgressHUDWithMessage:(NSString*)message;
--(void)removeHUD;
--(void)showSuccessHUD:(NSString*)message;
--(void)showErrorHUDWithMessage:(NSString*)error;
--(void)showHUDWithMessage:(NSString*)message;
 
 @end
 
@@ -35,7 +31,6 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 @synthesize routes;
 @synthesize selectedRoute;
-@synthesize HUD;
 
 //=========================================================== 
 // dealloc
@@ -44,7 +39,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 {
     [routes release], routes = nil;
     [selectedRoute release], selectedRoute = nil;
-    [HUD release], HUD = nil;
 	
     [super dealloc];
 }
@@ -59,7 +53,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 //
 - (void) runQuery:(Query *)query {
 	[query runWithTarget:self onSuccess:@selector(querySuccess:results:) onFailure:@selector(queryFailure:message:)];
-	[self showProgressHUDWithMessage:@"Obtaining route from CycleStreets.net"];
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
+
 }
 
 
@@ -71,11 +67,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	self.selectedRoute = [[Route alloc] initWithElements:elements];
 	
 	if ([selectedRoute itinerary] == nil) {
-		[self showErrorHUDWithMessage:@"Could not plan valid route for selected endpoints."];
-		BetterLog(@"elements=%@",elements);
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Could not plan valid route for selected endpoints." andMessage:nil];
 	} else {
 		
-		[self showSuccessHUD:@"Found Route, added path to map"];
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, added path to map" andMessage:nil];
 		
 		BetterLog(@"");
 		//save the route data to file.
@@ -88,7 +83,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message {
-	[self showErrorHUDWithMessage:@"Could not fetch route for selected endpoints."];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Could not fetch route for selected endpoints." andMessage:nil];
 }
 
 
@@ -186,73 +181,5 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-//
-/***********************************************
- * @description			HUDSUPPORT
- ***********************************************/
-//
-
-
--(void)showProgressHUDWithMessage:(NSString*)message{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-    HUD.delegate = self;
-	HUD.animationType=MBProgressHUDAnimationZoom;
-	HUD.labelText=message;
-	[HUD show:YES];
-	
-}
-
--(void)showHUDWithMessage:(NSString*)message{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-    HUD.delegate = self;
-	HUD.labelText=message;
-	[HUD show:YES];
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
-}
-
-
-//
-/***********************************************
- * @description			NOTE: These are only to be called if the hud has already been created!
- ***********************************************/
-//
-
--(void)showSuccessHUD:(NSString*)message{
-	
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = message;
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:1];
-}
-
--(void)showErrorHUDWithMessage:(NSString*)error{
-	
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = @"Error";
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
-}
-
-
--(void)removeHUD{
-	
-	[HUD hide:YES];
-	
-}
-
-
--(void)hudWasHidden{
-	
-	[HUD removeFromSuperview];
-	[HUD release];
-	HUD=nil;
-	
-}
 
 @end

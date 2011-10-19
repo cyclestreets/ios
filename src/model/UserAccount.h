@@ -11,7 +11,6 @@
 #import "SynthesizeSingleton.h"
 #import "FrameworkObject.h"
 #import "UserVO.h"
-#import "MBProgressHUD.h"
 
 #define NMUSERSTATEFILE @"NMUserState.user"
 #define kUSERSTATEARCHIVEKEY @"UserStateArchiveKey"
@@ -26,7 +25,7 @@ enum  {
 };
 typedef int UserAccountMode;
 
-@interface UserAccount : FrameworkObject <MBProgressHUDDelegate>{
+@interface UserAccount : FrameworkObject {
 	UserVO				*user;
 	// values
 	NSString			*userPassword;
@@ -40,7 +39,6 @@ typedef int UserAccountMode;
 	
 	UserAccountMode		accountMode;
 	
-	MBProgressHUD					*HUD;
 }
 @property (nonatomic, retain)	UserVO	*user;
 @property (nonatomic, retain)	NSString	*userPassword;
@@ -51,7 +49,6 @@ typedef int UserAccountMode;
 @property (nonatomic, retain)	NSString	*sessionToken;
 @property (nonatomic, retain)	NSString	*deviceID;
 @property (nonatomic, assign)	UserAccountMode	accountMode;
-@property (nonatomic, retain)	MBProgressHUD	*HUD;
 
 @property (nonatomic,readonly)  BOOL			isLoggedIn;
 
@@ -66,6 +63,4 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 -(BOOL)hasSessionToken;
 -(void)resetUserAccount;
 -(void)updateAutoLoginPreference:(BOOL)value;
--(void)removeHUD;
--(void)showProgressHUDWithMessage:(NSString*)message;
 @end

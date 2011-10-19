@@ -386,7 +386,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.activeLocationButton = [[[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ]autorelease];
 	self.activeLocationButton.style	= UIBarButtonItemStyleDone;
 	
-	self.locationButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"74-location.png"]
+	self.locationButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_location.png"]
 															style:UIBarButtonItemStyleBordered
 														   target:self
 														   action:@selector(didLocation)]

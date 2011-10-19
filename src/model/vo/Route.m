@@ -46,6 +46,23 @@ static NSString *TIME = @"cs:time";
 static NSString *ROUTEDATE = @"cs:whence";
 
 @implementation Route
+@synthesize segments;
+@synthesize header;
+@synthesize userRouteName;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [segments release], segments = nil;
+    [header release], header = nil;
+    [userRouteName release], userRouteName = nil;
+	
+    [super dealloc];
+}
+
+
 
 - (id) initWithElements:(NSDictionary *)elements {
 	if (self = [super init]) {
@@ -236,11 +253,6 @@ static NSString *ROUTEDATE = @"cs:whence";
 	//[view setValue:[ forKeyPath:@"dateLabel.text"];
 }
 
-- (void) dealloc {
-	[segments release];
-	[header release];
-	
-	[super dealloc];
-}
+
 
 @end

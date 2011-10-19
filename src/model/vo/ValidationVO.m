@@ -12,10 +12,6 @@
 @implementation ValidationVO
 @synthesize returnMessage;
 @synthesize returnCode;
-@synthesize receipt;
-@synthesize email;
-@synthesize password;
-@synthesize userID;
 @synthesize responseDict;
 
 /***********************************************************/
@@ -24,10 +20,6 @@
 - (void)dealloc
 {
     [returnMessage release], returnMessage = nil;
-    [receipt release], receipt = nil;
-    [email release], email = nil;
-    [password release], password = nil;
-    [userID release], userID = nil;
     [responseDict release], responseDict = nil;
 	
     [super dealloc];

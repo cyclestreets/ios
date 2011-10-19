@@ -31,7 +31,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @interface Route : NSObject {
 	NSMutableArray *segments;
 	NSDictionary *header;
+	
+	NSString		*userRouteName;
 }
+@property (nonatomic, retain)	NSMutableArray		*segments;
+@property (nonatomic, retain)	NSDictionary		*header;
+@property (nonatomic, retain)	NSString		*userRouteName;
+
 
 // getters
 @property (nonatomic, readonly)	NSString	*timeString;

@@ -103,17 +103,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 -(void)retrievePhotosForLocationResponse:(ValidationVO*)validation{
     
-    /*
+    
     switch (validation.validationStatus) {
             
-        case <#constant#>:
-            <#statements#>
-            break;
+        case ValidationRetrievePhotosSuccess:
             
-        default:
             break;
+          
+		case ValidationRetrievePhotosFailed:
+            
+		break;
+        default:
+			
+		break;
     }
-    */
+    
     
 }
 
@@ -150,9 +154,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	switch(validation.validationStatus){
             
-		case 0:
+		case ValidationUserPhotoUploadSuccess:
             
         break;
+			
+		case ValidationUserPhotoUploadFailed:
+            
+		break;
             
             
 	}

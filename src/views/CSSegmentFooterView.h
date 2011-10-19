@@ -6,6 +6,8 @@
 //  Copyright 2011 CycleStreets Ltd. All rights reserved.
 //
 
+// readout view for Stage Segment map view (Stage.h)
+
 #import <UIKit/UIKit.h>
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
