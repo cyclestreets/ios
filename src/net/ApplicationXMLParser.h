@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NetResponse.h"
 
-@protocol TBXMLParserDelegate<NSObject>
+@protocol ApplicationXMLParserDelegate<NSObject>
 
 -(void)XMLParserDidComplete:(NetResponse*)response;
 -(void)XMLParserDidFail:(NetResponse*)response;
@@ -18,19 +18,19 @@
 
 
 
-@interface TBXMLParser : NSObject {
+@interface ApplicationXMLParser : NSObject {
 	NSMutableDictionary			*parsers;
 	NetResponse					*activeResponse;
 	NSDictionary				*parserMethods;
 	//delegate
-	id<TBXMLParserDelegate>		delegate;
+	id<ApplicationXMLParserDelegate>		delegate;
 	
 	NSString					*parserError;
 }
 @property(nonatomic,retain)NSMutableDictionary *parsers;
 @property(nonatomic,retain)NetResponse *activeResponse;
 @property(nonatomic,retain)NSDictionary *parserMethods;
-@property(nonatomic,assign)id<TBXMLParserDelegate> delegate;
+@property(nonatomic,assign)id<ApplicationXMLParserDelegate> delegate;
 @property(nonatomic,retain)NSString *parserError;
 
 

@@ -6,7 +6,7 @@
 //  Copyright 2010 Chroma. All rights reserved.
 //
 
-#import "TBXMLParser.h"
+#import "ApplicationXMLParser.h"
 #import "GlobalUtilities.h"
 #import "AppConstants.h"
 #import "StringUtilities.h"
@@ -15,19 +15,32 @@
 #import "NSDate+Helper.h"
 #import "LoginVO.h"
 
-@interface TBXMLParser(Private)
+@interface ApplicationXMLParser(Private)
 
 -(void)parseXMLForType:(NSString*)type;
 
 
+// user account
 -(void)LoginXMLParser:(TBXML*)parser;
 -(void)RegisterXMLParser:(TBXML*)parser;
 -(void)RetrievePasswordXMLParser:(TBXML*)parser;
 
 
+// routes
+
+
+// photos
+-(void)PhotoUploadXMLParser:(TBXML*)parser;
+-(void)RetrievePhotosXMLParser:(TBXML*)parser;
+
+
+
+//
+
+
 @end
 
-@implementation TBXMLParser
+@implementation ApplicationXMLParser
 @synthesize parsers;
 @synthesize activeResponse;
 @synthesize parserMethods;
@@ -59,6 +72,8 @@
 					   [NSValue valueWithPointer:@selector(LoginXMLParser:)],LOGIN,
 					   [NSValue valueWithPointer:@selector(RegisterXMLParser:)],REGISTER,
 					   [NSValue valueWithPointer:@selector(RetrievePasswordXMLParser:)],PASSWORDRETRIEVAL,
+                       [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVELOCATIONPHOTOS,
+                       [NSValue valueWithPointer:@selector(PhotoUploadXMLParser:)],UPLOADUSERPHOTO,
 					   nil];
 		
 		parsers=[[NSMutableDictionary alloc]init];
@@ -305,6 +320,52 @@
 	
 	
 }
+
+
+#pragma mark Photos
+
+// photos
+-(void)PhotoUploadXMLParser:(TBXML*)parser{
+    
+    TBXMLElement *response = parser.rootXMLElement;
+	
+	[self validateXML:response];
+	if(activeResponse.status==NO){
+		return;
+	}
+    
+    ValidationVO *validation=[[ValidationVO alloc]init];
+    
+    // will be <gml:featureMember>
+    //then <cs:photo>
+    
+    /* use this vo
+    for (NSDictionary *photoDictionary in [elements objectForKey:PHOTO_ELEMENT]) {
+        PhotoEntry *photo = [[PhotoEntry alloc] initWithDictionary:photoDictionary];
+        [photos addObject:photo];
+        [photo release];
+    }
+     */
+    
+}
+
+
+
+
+
+-(void)RetrievePhotosXMLParser:(TBXML*)parser{
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
 
 
 
