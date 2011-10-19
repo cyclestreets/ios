@@ -38,15 +38,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <CoreLocation/CoreLocation.h>
 #import "RMCloudMadeMapSource.h"
 #import "RMCachedTileSource.h"
-#import "PhotoList.h"
-#import "PhotoEntry.h"
+#import "PhotoMapListVO.h"
+#import "PhotoMapVO.h"
 #import "QueryPhoto.h"
 #import "PhotoMapImageLocationViewController.h"
 #import "InitialLocation.h"
 #import "Markers.h"
 #import "MapLocationSearchViewController.h"
 #import "RMMapView.h"
-#import "CSPoint.h"
+#import "CSPointVO.h"
 #import "RouteLineView.h"
 #import "RMMercatorToScreenProjection.h"
 #import "Files.h"
@@ -104,7 +104,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 		
@@ -200,10 +199,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[self requestPhotos];
 }
 
-/*
- - (void) beforeMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
- }
- */
+
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
 	//BetterLog(@"afterMapZoom");
@@ -223,11 +219,11 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[self saveLocation:location];	
 }
 
-- (PhotoEntry *) randomPhoto {
+- (PhotoMapVO *) randomPhoto {
 	if (photoMarkers == nil || [photoMarkers count] == 0) return nil;
 	srand( time( NULL));
 	int i = random() % [photoMarkers count];
-	return (PhotoEntry *)((RMMarker *)[photoMarkers objectAtIndex:i]).data;
+	return (PhotoMapVO *)((RMMarker *)[photoMarkers objectAtIndex:i]).data;
 }
 
 #pragma mark toolbar actions
@@ -280,13 +276,13 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
 	BetterLog(@"tapMarker");
-	if (locationView == nil) {
-		locationView = [[PhotoMapImageLocationViewController alloc] init];
-	}
-	if ([marker.data isKindOfClass: [PhotoEntry class]]) {
-		[self presentModalViewController:locationView animated:YES];
-		PhotoEntry *photoEntry = (PhotoEntry *)marker.data;
-		[locationView loadContentForEntry:photoEntry];
+	//if (locationView == nil) {
+		PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
+	//}
+	if ([marker.data isKindOfClass: [PhotoMapVO class]]) {
+		[self presentModalViewController:lv animated:YES];
+		PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
+		[lv loadContentForEntry:photoEntry];
 	}
 }
 
@@ -458,8 +454,8 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	}
 	
 	//build the list of photos, and add them as markers.
-	PhotoList *photoList = [[PhotoList alloc] initWithElements:elements];
-	for (PhotoEntry *photo in [photoList photos]) {
+	PhotoMapListVO *photoList = [[PhotoMapListVO alloc] initWithElements:elements];
+	for (PhotoMapVO *photo in [photoList photos]) {
 		RMMarker *marker = [Markers markerPhoto];
 		marker.data = photo;
 		[photoMarkers addObject:marker];

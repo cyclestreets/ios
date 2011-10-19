@@ -28,7 +28,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapView.h"
 #import "CycleStreets.h"
 #import "Files.h"
-#import "CSExceptions.h"
 
 static double FADE_DELAY = 5.0;
 static double FADE_DURATION = 1.7;
@@ -74,9 +73,7 @@ static double FADE_DURATION = 1.7;
 	
 	UIView *view = nil;
 	NSArray *nib = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:nil options:nil];
-	if (nib == nil) {
-		[CSExceptions exception: [NSString stringWithFormat:@"Could not load nib %@. Does it exist ?", CellIdentifier]];
-	}
+	
 	for (id obj in nib) {
 		if ([obj isKindOfClass:[UIView class]]) {
 			view = obj;

@@ -10,11 +10,11 @@
 #import "ExpandedUILabel.h"
 #import "AsyncImageView.h"
 #import "LayoutBox.h"
-#import "PhotoEntry.h"
+#import "PhotoMapVO.h"
 
 @interface PhotoMapImageLocationViewController : UIViewController <AsyncImageViewDelegate>{
 	
-	PhotoEntry							*dataProvider;
+	PhotoMapVO							*dataProvider;
 	
 	UINavigationBar						*navigationBar;
 	UIScrollView						*scrollView;
@@ -25,13 +25,13 @@
 	ExpandedUILabel						*imageLabel;
 
 }
-@property (nonatomic, retain)		PhotoEntry		* dataProvider;
+@property (nonatomic, retain)		PhotoMapVO		* dataProvider;
 @property (nonatomic, retain)		IBOutlet UINavigationBar		* navigationBar;
 @property (nonatomic, retain)		IBOutlet UIScrollView		* scrollView;
 @property (nonatomic, retain)		LayoutBox		* viewContainer;
 @property (nonatomic, retain)		AsyncImageView		* imageView;
 @property (nonatomic, retain)		ExpandedUILabel		* imageLabel;
 
-- (void) loadContentForEntry:(PhotoEntry *)photoEntry;
+- (void) loadContentForEntry:(PhotoMapVO *)photoEntry;
 
 @end

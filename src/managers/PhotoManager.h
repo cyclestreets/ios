@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "FrameworkObject.h"
 #import "SynthesizeSingleton.h"
+#import "UserVO.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface PhotoManager : FrameworkObject {
 
@@ -17,6 +19,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoManager);
 
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit;
+
+
+-(void)uploadPhotoForUser:(UserVO*)user withImage:(NSData*)imageData andProperties:(NSMutableDictionary*)postparameters;
 
 
 @end

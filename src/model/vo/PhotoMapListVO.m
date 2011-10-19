@@ -18,23 +18,41 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 */
 
-//  CSExceptions.m
+//  PhotoList.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 03/03/2010.
+//  Created by Alan Paxton on 03/05/2010.
 //
 
-#import "CSExceptions.h"
+#import "PhotoMapListVO.h"
+#import "PhotoEntry.h"
 
+static NSString *PHOTO_ELEMENT = @"cs:photo";
 
-@implementation CSExceptions
+@implementation PhotoMapListVO
 
-+(void) exception:(NSString *)reason {
-	NSException* myException = [NSException
-								exceptionWithName:@"CSException"
-								reason:reason
-								userInfo:nil];
-	@throw myException;				
+@synthesize photos;
+
+- (id) initWithElements:(NSDictionary *)elements {
+	if (self = [super init]) {
+		photos = [[NSMutableArray alloc] init];
+		for (NSDictionary *photoDictionary in [elements objectForKey:PHOTO_ELEMENT]) {
+			PhotoEntry *photo = [[PhotoEntry alloc] initWithDictionary:photoDictionary];
+			[photos addObject:photo];
+			[photo release];
+		}
+	}
+	return self;
+}
+
++ (NSArray *) photoListXMLElementNames {
+	return [[[NSArray alloc] initWithObjects:PHOTO_ELEMENT, nil] autorelease];
+}
+
+- (void)dealloc {
+	[photos release];
+	
+	[super dealloc];
 }
 
 @end

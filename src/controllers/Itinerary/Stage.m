@@ -32,8 +32,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreetsAppDelegate.h"
 #import "CycleStreets.h"
 #import "QueryPhoto.h"
-#import "PhotoList.h"
-#import "PhotoEntry.h"
+#import "PhotoMapListVO.h"
+#import "PhotoMapVO.h"
 #import "PhotoMapImageLocationViewController.h"
 #import "Markers.h"
 #import "BlueCircleView.h"
@@ -207,8 +207,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		photoMarkers = [[NSMutableArray alloc] initWithCapacity:10];
 	}
 	
-	PhotoList *photoList = [[PhotoList alloc] initWithElements:elements];
-	for (PhotoEntry *photo in [photoList photos]) {
+	PhotoMapListVO *photoList = [[PhotoMapListVO alloc] initWithElements:elements];
+	for (PhotoMapVO *photo in [photoList photos]) {
 		RMMarker *marker = [Markers markerPhoto];
 		marker.data = photo;
 		[photoMarkers addObject:marker];
@@ -250,12 +250,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
 	BetterLog(@"tapMarker");
 	if (locationView == nil) {
-		locationView = [[PhotoMapImageLocationViewController alloc] init];
+		locationView = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
 		[locationView retain];
 	}
-	if ([marker.data isKindOfClass: [PhotoEntry class]]) {
+	if ([marker.data isKindOfClass: [PhotoMapVO class]]) {
 		[self presentModalViewController:locationView animated:YES];
-		PhotoEntry *photoEntry = (PhotoEntry *)marker.data;
+		PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
 		[locationView loadContentForEntry:photoEntry];
 	}	
 }

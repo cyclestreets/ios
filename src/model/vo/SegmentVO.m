@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "SegmentVO.h"
-#import "CSPoint.h"
+#import "CSPointVO.h"
 #import "GlobalUtilities.h"
 
 @implementation SegmentVO
@@ -92,7 +92,7 @@ static NSDictionary *roadIcons;
 	NSArray *XYs = [[xmlDict valueForKey:@"cs:points"] componentsSeparatedByCharactersInSet:whiteComma];
 	NSMutableArray *result = [[[NSMutableArray alloc] init] autorelease];
 	for (int X = 0; X < [XYs count]; X += 2) {
-		CSPoint *p = [[[CSPoint alloc] init] autorelease];
+		CSPointVO *p = [[[CSPointVO alloc] init] autorelease];
 		CGPoint point;
 		point.x = [[XYs objectAtIndex:X] doubleValue];
 		point.y = [[XYs objectAtIndex:X+1] doubleValue];

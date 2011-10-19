@@ -33,6 +33,7 @@ extern NSString *const GET;
 extern NSString *const URL;
 extern NSString *const POSTJSON;
 extern NSString *const GETPOST;
+extern NSString *const IMAGEPOST;
 
 
 // data sources

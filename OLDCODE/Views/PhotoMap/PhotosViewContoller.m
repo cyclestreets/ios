@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreets.h"
 #import "Files.h"
 #import "CategoryLoader.h"
-#import "PhotoEntry.h"
+#import "PhotoMapVO.h"
 #import "AssetGroupTable.h"
 #import "ALAsset+Info.h"
 #import "PhotoAsset.h"
@@ -108,7 +108,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(sendPhoto)
-												 name:UPLOADPHOTO
+												 name:UPLOADUSERPHOTO
 											   object:nil];
 	
 	[self enableButtons:YES];
@@ -629,9 +629,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 			if (alertView.firstOtherButtonIndex == buttonIndex) {
 				//View
 				if (self.preview == nil) {
-					self.preview = [[PhotoMapImageLocationViewController alloc] init];
+					self.preview = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
 				}
-				PhotoEntry *photoEntry = [[[PhotoEntry alloc] init] autorelease];
+				PhotoMapVO *photoEntry = [[[PhotoMapVO alloc] init] autorelease];
 				photoEntry.caption = self.currentCaption;
 				photoEntry.bigImageURL = self.bigImageURL;
 				photoEntry.csid = self.photoId;

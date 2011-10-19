@@ -9,7 +9,7 @@
 
 #import "Model.h"
 #import "GlobalUtilities.h"
-#import "TBXMLParser.h"
+#import "ApplicationXMLParser.h"
 #import "AppConstants.h"
 #import "NetUtilities.h"
 
@@ -54,7 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 -(id)init{
 	if (self = [super init])
 	{
-		xmlparser=[[TBXMLParser alloc]init];
+		xmlparser=[[ApplicationXMLParser alloc]init];
 		xmlparser.delegate=self;
 		dataProviders=[[NSMutableDictionary alloc]init];
 		activeRequests=[[NSMutableDictionary alloc]init];

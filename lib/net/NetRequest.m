@@ -168,7 +168,58 @@
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
 		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 	
-	}	
+	}else if([servicetype isEqualToString:IMAGEPOST]){
+		
+		NSDictionary *getparameters=[parameters objectForKey:@"getparameters"];
+		NSDictionary *postparameters=[parameters objectForKey:@"postparameters"];
+        NSData *imageData=[parameters objectForKey:@"imageData"];
+		
+        // optional get parameters
+        NSString *urlString;
+        if(getparameters!=nil){
+            urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[getparameters urlEncodedString]];
+        }else{
+            urlString=[self url];
+        }
+        requesturl=[NSURL URLWithString:urlString];
+		
+		request = [NSMutableURLRequest requestWithURL:requesturl
+										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+									  timeoutInterval:30.0 ];
+		
+		[urlString release];
+		
+		
+        NSMutableData *body = [[NSMutableData alloc] init];	
+        
+        // image data
+        [request addValue:@"gzip" forHTTPHeaderField:@"Accepts-Encoding"];
+        [request setHTTPMethod:@"POST"];
+        NSString *stringBoundary = [NSString stringWithString:@"0xBoundaryBoundaryBoundaryBoundary"];
+        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",stringBoundary];
+        [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+        [request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
+        
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"mediaupload\"; filename=\"from_iphone.jpeg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"Content-Transfer-Encoding: binary\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:imageData];
+        
+        // POST form content
+        
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSString *parameterString=[postparameters urlEncodedString];
+        [body appendData:[parameterString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //
+        
+        [request setHTTPBody: body];
+        
+	}		
 	
     
     

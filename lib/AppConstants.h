@@ -25,13 +25,9 @@ extern NSString *const LOCATIONSEARCH;
 extern NSString *const RETREIVELOCATIONPHOTOS;
 extern NSString *const UPLOADUSERPHOTO;
 
-
-
 extern NSString *const MILES;
 extern NSString *const KM;
-
-extern NSString *const PASSWORDRETRIEVALRESPONSE;
-extern NSString *const UPLOADPHOTO;
+ 
 
 @interface AppConstants : NSObject {
 	

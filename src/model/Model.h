@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TBXMLParser.h"
+#import "ApplicationXMLParser.h"
 #import "SynthesizeSingleton.h"
 
-@protocol RNDModelDeleagte <NSObject> 
+@protocol ModelDeleagte <NSObject> 
 
 
 
@@ -23,17 +23,17 @@
 
 
 
-@interface Model : NSObject <TBXMLParserDelegate>{
+@interface Model : NSObject <ApplicationXMLParserDelegate>{
 	
 	
 	NSMutableDictionary		*dataProviders;
 	NSMutableDictionary		*cachedrequests;
-	TBXMLParser				*xmlparser;
+	ApplicationXMLParser				*xmlparser;
 	
 	NSMutableDictionary		*activeRequests;
 	
 	// delegate
-	id <RNDModelDeleagte> delegate;
+	id <ModelDeleagte> delegate;
 	
 	int						maxMemoryItems;
 }
@@ -41,9 +41,9 @@
 
 @property(nonatomic,retain)NSMutableDictionary *dataProviders;
 @property(nonatomic,retain)NSMutableDictionary *cachedrequests;
-@property(nonatomic,retain)TBXMLParser *xmlparser;
+@property(nonatomic,retain)ApplicationXMLParser *xmlparser;
 @property(nonatomic,retain)NSMutableDictionary *activeRequests;
-@property(nonatomic,assign)id <RNDModelDeleagte> delegate;
+@property(nonatomic,assign)id <ModelDeleagte> delegate;
 @property(nonatomic,assign)int maxMemoryItems;
 
 

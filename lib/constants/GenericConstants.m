@@ -38,6 +38,7 @@ NSString *const GET=@"GET";
 NSString *const URL=@"URL";
 NSString *const POSTJSON=@"POSTJSON";
 NSString *const GETPOST=@"GETPOST";
+NSString *const IMAGEPOST=@"IMAGEPOST";
 
 //data sources
 NSString *const LOCALDATA=@"localdata";

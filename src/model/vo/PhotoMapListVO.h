@@ -18,17 +18,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 */
 
-//  CSExceptions.h
+//  PhotoList.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 03/03/2010.
+//  Created by Alan Paxton on 03/05/2010.
 //
 
 #import <Foundation/Foundation.h>
 
 
-@interface CSExceptions : NSObject
+@interface PhotoMapListVO : NSObject {
+	NSMutableArray *photos;
+}
 
-+(void) exception:(NSString *)reason;
+@property (readonly) NSMutableArray *photos;
+
+- (id) initWithElements:(NSDictionary *)elements;
+
++ (NSArray *) photoListXMLElementNames;
 
 @end

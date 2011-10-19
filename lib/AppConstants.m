@@ -26,15 +26,14 @@ NSString *const LOGINRESPONSE=@"LOGINRESPONSE";
 NSString *const REGISTERRESPONSE=@"REGISTERRESPONSE";
 NSString *const PASSWORDRETRIEVALRESPONSE=@"PASSWORDRETRIEVALRESPONSE";
 NSString *const LOCATIONSEARCH=@"LOCATIONSEARCH";
-NSString *const RETREIVELOCATIONPHOTOS=@"RetrieveLocationPhotos";
-NSString *const UPLOADUSERPHOTO=@"UploadUserPhoto";
+NSString *const RETREIVELOCATIONPHOTOS=@"RETREIVELOCATIONPHOTOS";
+NSString *const UPLOADUSERPHOTO=@"UPLOADUSERPHOTO";
 
 
 NSString *const MILES=@"miles";
 NSString *const KM=@"kilometers";
 
-
-NSString *const UPLOADPHOTO=@"UPLOADPHOTO"; // execute photo upload
+ 
 
 @implementation AppConstants
 

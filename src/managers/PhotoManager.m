@@ -13,6 +13,7 @@
 #import "CycleStreets.h"
 #import "NetRequest.h"
 #import "NetResponse.h"
+#import "UserVO.h"
 
 @interface PhotoManager(Private)
 
@@ -50,30 +51,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
-#pragma Photo Uploading
--(void)uploadPhotoForUser:(PhotoAsset*)image{
-	
-	
-	
-	
-	
-	
-}
-
-
--(void)uploadPhotoForUserResponse:(ValidationVO*)validation{
-	
-	
-	switch(validation.validationStatus){
-		
-		case 0:
-		
-		break;
-		
-		
-	}
-	
-}
 
 
 #pragma Photo Downloading
@@ -106,7 +83,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                      nil];
     
     NetRequest *request=[[NetRequest alloc]init];
-    request.dataid=RETREIVEPHOTOS;
+    request.dataid=RETREIVELOCATIONPHOTOS;
     request.requestid=ZERO;
     request.parameters=parameters;
     request.revisonId=0;
@@ -122,10 +99,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
+
+
 -(void)retrievePhotosForLocationResponse:(ValidationVO*)validation{
     
-    
+    /*
     switch (validation.validationStatus) {
+            
         case <#constant#>:
             <#statements#>
             break;
@@ -133,10 +113,52 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
         default:
             break;
     }
+    */
     
+}
+
+
+#pragma mark Photo Uploading
+
+-(void)uploadPhotoForUser:(UserVO*)user withImage:(NSData*)imageData andProperties:(NSMutableDictionary*)postparameters{
+    
+    
+    [postparameters setValue:user.username forKey:@"username" ];
+    [postparameters setValue:user.password forKey:@"password" ];
+    
+    NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
+	NSMutableDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",imageData,@"imageData", nil];
+	
+	NetRequest *request=[[NetRequest alloc]init];
+	request.dataid=UPLOADUSERPHOTO;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.revisonId=0;
+	request.source=USER;
+	
+	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	[dict release];
+	[request release];
     
     
 }
+
+
+-(void)uploadPhotoForUserResponse:(ValidationVO*)validation{
+	
+	
+	switch(validation.validationStatus){
+            
+		case 0:
+            
+        break;
+            
+            
+	}
+	
+}
+
 
 
 @end

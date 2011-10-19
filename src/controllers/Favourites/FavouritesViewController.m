@@ -31,7 +31,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Files.h"
 #import "RouteParser.h"
 #import "Route.h"
-#import "CSExceptions.h"
 #import "FavouritesCell.h"
 #import "RouteSummary.h"
 

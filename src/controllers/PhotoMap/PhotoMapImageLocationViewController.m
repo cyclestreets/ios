@@ -85,7 +85,7 @@
 
 -(void)createPersistentUI{
 	
-	[(GradientView*) self.view setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
+	[(GradientView*)self.view setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 	
 	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
 	viewContainer.layoutMode=BUVerticalLayoutMode;
@@ -121,9 +121,8 @@
 															 target:self
 															 action:@selector(backButtonSelected:)]
 							 autorelease];
-	UINavigationItem *navigationItem = [[[UINavigationItem alloc] initWithTitle:@"Photomap"] autorelease];
-	[navigationItem setRightBarButtonItem:back];
-	[self.navigationBar pushNavigationItem:navigationItem animated:NO];
+	
+	[self.navigationBar.topItem setRightBarButtonItem:back];
 	
 	
 }
@@ -153,7 +152,7 @@
  ***********************************************/
 //
 
-- (void) loadContentForEntry:(PhotoEntry *)photoEntry{
+- (void) loadContentForEntry:(PhotoMapVO *)photoEntry{
 	
 	
 	self.dataProvider=photoEntry;

@@ -47,7 +47,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Markers.h"
 #import "MapLocationSearchViewController.h"
 #import "RMMapView.h"
-#import "CSPoint.h"
+#import "CSPointVO.h"
 #import "RouteLineView.h"
 #import "RMMercatorToScreenProjection.h"
 #import "Files.h"
@@ -954,7 +954,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	for (int i = 0; i < [route numSegments]; i++) {
 		if (i == 0)
 		{	// start of first segment
-			CSPoint *p = [[[CSPoint alloc] init] autorelease];
+			CSPointVO *p = [[[CSPointVO alloc] init] autorelease];
 			SegmentVO *segment = [route segmentAtIndex:i];
 			CLLocationCoordinate2D coordinate = [segment segmentStart];
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
@@ -965,12 +965,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		SegmentVO *segment = [route segmentAtIndex:i];
 		NSArray *allPoints = [segment allPoints];
 		for (int i = 1; i < [allPoints count]; i++) {
-			CSPoint *latlon = [allPoints objectAtIndex:i];
+			CSPointVO *latlon = [allPoints objectAtIndex:i];
 			CLLocationCoordinate2D coordinate;
 			coordinate.latitude = latlon.p.y;
 			coordinate.longitude = latlon.p.x;
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
-			CSPoint *screen = [[[CSPoint alloc] init] autorelease];
+			CSPointVO *screen = [[[CSPointVO alloc] init] autorelease];
 			screen.p = pt;
 			[points addObject:screen];
 		}
