@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSMutableArray *segments;
 	NSDictionary *header;
 	
-	NSString		*userRouteName;
+	NSString		*userRouteName; // user editable route name, displayed if set
 }
 @property (nonatomic, retain)	NSMutableArray		*segments;
 @property (nonatomic, retain)	NSDictionary		*header;

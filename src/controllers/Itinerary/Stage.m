@@ -358,21 +358,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (IBAction) didRoute {
 	[self dismissModalViewControllerAnimated:YES];
 	
-	/*
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSIndexPath *currentIndex = [NSIndexPath indexPathForRow:index inSection:0];
-	//UITableView *routeTableView = (UITableView *)cycleStreets.appDelegate.routeTable.view;
-	[routeTableView scrollToRowAtIndexPath:currentIndex atScrollPosition:UITableViewScrollPositionTop animated:YES];
-	 */
 }
 
-//pop this view, then select the map
-- (IBAction) didMap {
-	[self dismissModalViewControllerAnimated:YES];
-	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.appDelegate.tabBarController setSelectedViewController:cycleStreets.appDelegate.map];
-}
 
 // all the things that need fixed if we have asked (or been forced) to stop doing location.
 - (void)stopDoingLocation {

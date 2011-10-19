@@ -51,7 +51,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
 	
 	[[CycleStreets sharedInstance].files setMiscValue:[route itinerary] forKey:@"selectedroute"];
 		
-	//tell the favourites table it is reset> should be notification
+	//TODO: this ref should be rmoved form app delegate and this event should be a 
+	// notification, FavouritesViewController needs conforming to SuperViewController before this can happen
 	CycleStreetsAppDelegate *appdelegate = [CycleStreets sharedInstance].appDelegate;
 	FavouritesViewController *favourites = appdelegate.favourites;
 	[favourites clear];

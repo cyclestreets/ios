@@ -135,6 +135,12 @@
 		28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28735C11144EDACF00726A6C /* cyclecambridge.jpg */; };
 		28735C15144EDACF00726A6C /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C12144EDACF00726A6C /* donate.png */; };
 		28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C13144EDACF00726A6C /* reesjeffreys.png */; };
+		28735C19144F0EF100726A6C /* AppConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C18144F0EF100726A6C /* AppConfigManager.m */; };
+		28735C1B144F0F2200726A6C /* services_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1A144F0F2200726A6C /* services_dev.plist */; };
+		28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1C144F10E300726A6C /* appconfig_dev.plist */; };
+		28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1E144F10F300726A6C /* appconfig_live.plist */; };
+		28735C25144F1C1400726A6C /* GoogleAnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C24144F1C1300726A6C /* GoogleAnalyticsManager.m */; };
+		28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C2A144F1D0400726A6C /* UIDevice+Machine.m */; };
 		287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */; };
 		287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */; };
 		287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */; };
@@ -236,7 +242,7 @@
 		28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
 		28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620D131FB69D008527FC /* contentStrings.plist */; };
 		28AD62B5131FB69D008527FC /* FormData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620E131FB69D008527FC /* FormData.plist */; };
-		28AD62B6131FB69D008527FC /* services.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620F131FB69D008527FC /* services.plist */; };
+		28AD62B6131FB69D008527FC /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620F131FB69D008527FC /* services_live.plist */; };
 		28AD62B7131FB69D008527FC /* styles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6210131FB69D008527FC /* styles.plist */; };
 		28AD62B8131FB69D008527FC /* userState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6211131FB69D008527FC /* userState.plist */; };
 		28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
@@ -589,6 +595,15 @@
 		28735C11144EDACF00726A6C /* cyclecambridge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cyclecambridge.jpg; sourceTree = "<group>"; };
 		28735C12144EDACF00726A6C /* donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donate.png; sourceTree = "<group>"; };
 		28735C13144EDACF00726A6C /* reesjeffreys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reesjeffreys.png; sourceTree = "<group>"; };
+		28735C17144F0EF100726A6C /* AppConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfigManager.h; sourceTree = "<group>"; };
+		28735C18144F0EF100726A6C /* AppConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConfigManager.m; sourceTree = "<group>"; };
+		28735C1A144F0F2200726A6C /* services_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_dev.plist; sourceTree = "<group>"; };
+		28735C1C144F10E300726A6C /* appconfig_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appconfig_dev.plist; sourceTree = "<group>"; };
+		28735C1E144F10F300726A6C /* appconfig_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appconfig_live.plist; sourceTree = "<group>"; };
+		28735C23144F1C1300726A6C /* GoogleAnalyticsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsManager.h; sourceTree = "<group>"; };
+		28735C24144F1C1300726A6C /* GoogleAnalyticsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAnalyticsManager.m; sourceTree = "<group>"; };
+		28735C29144F1D0400726A6C /* UIDevice+Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Machine.h"; sourceTree = "<group>"; };
+		28735C2A144F1D0400726A6C /* UIDevice+Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Machine.m"; sourceTree = "<group>"; };
 		287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
 		287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
 		287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarCameraSmall@2x.png"; sourceTree = "<group>"; };
@@ -711,7 +726,7 @@
 		28AD6206131FB69D008527FC /* ApplicationXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationXMLParser.m; sourceTree = "<group>"; };
 		28AD620D131FB69D008527FC /* contentStrings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = contentStrings.plist; sourceTree = "<group>"; };
 		28AD620E131FB69D008527FC /* FormData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FormData.plist; sourceTree = "<group>"; };
-		28AD620F131FB69D008527FC /* services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services.plist; sourceTree = "<group>"; };
+		28AD620F131FB69D008527FC /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
 		28AD6210131FB69D008527FC /* styles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = styles.plist; sourceTree = "<group>"; };
 		28AD6211131FB69D008527FC /* userState.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userState.plist; sourceTree = "<group>"; };
 		28AD625F131FB69D008527FC /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
@@ -1125,6 +1140,8 @@
 				280E24A1144D82E90021CDFA /* NSData+MBBase64.h */,
 				280E24A2144D82E90021CDFA /* NSData+MBBase64.m */,
 				280E24A3144D82E90021CDFA /* NSDate+Helper.h */,
+				28735C29144F1D0400726A6C /* UIDevice+Machine.h */,
+				28735C2A144F1D0400726A6C /* UIDevice+Machine.m */,
 				280E24A4144D82E90021CDFA /* NSDate+Helper.m */,
 				280E24A5144D82E90021CDFA /* NSDate+NSDateRFC1123.h */,
 				280E24A6144D82E90021CDFA /* NSDate+NSDateRFC1123.m */,
@@ -1168,6 +1185,10 @@
 		280E91BF14097D8600C7AC75 /* managers */ = {
 			isa = PBXGroup;
 			children = (
+				28735C23144F1C1300726A6C /* GoogleAnalyticsManager.h */,
+				28735C24144F1C1300726A6C /* GoogleAnalyticsManager.m */,
+				28735C17144F0EF100726A6C /* AppConfigManager.h */,
+				28735C18144F0EF100726A6C /* AppConfigManager.m */,
 				28735C09144ED64700726A6C /* HudManager.h */,
 				28735C0A144ED64700726A6C /* HudManager.m */,
 				280E91C014097D8600C7AC75 /* StringManager.h */,
@@ -1738,11 +1759,14 @@
 		28AD620C131FB69D008527FC /* plist */ = {
 			isa = PBXGroup;
 			children = (
+				28735C1A144F0F2200726A6C /* services_dev.plist */,
+				28AD620F131FB69D008527FC /* services_live.plist */,
 				28AD620D131FB69D008527FC /* contentStrings.plist */,
-				28AD620E131FB69D008527FC /* FormData.plist */,
-				28AD620F131FB69D008527FC /* services.plist */,
 				28AD6210131FB69D008527FC /* styles.plist */,
 				28AD6211131FB69D008527FC /* userState.plist */,
+				28AD620E131FB69D008527FC /* FormData.plist */,
+				28735C1C144F10E300726A6C /* appconfig_dev.plist */,
+				28735C1E144F10F300726A6C /* appconfig_live.plist */,
 			);
 			path = plist;
 			sourceTree = "<group>";
@@ -2195,7 +2219,7 @@
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
 				28AD62B5131FB69D008527FC /* FormData.plist in Resources */,
-				28AD62B6131FB69D008527FC /* services.plist in Resources */,
+				28AD62B6131FB69D008527FC /* services_live.plist in Resources */,
 				28AD62B7131FB69D008527FC /* styles.plist in Resources */,
 				28AD62B8131FB69D008527FC /* userState.plist in Resources */,
 				28AD6549131FC239008527FC /* UIButton_green_hi@2x.png in Resources */,
@@ -2324,6 +2348,9 @@
 				28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */,
 				28735C15144EDACF00726A6C /* donate.png in Resources */,
 				28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */,
+				28735C1B144F0F2200726A6C /* services_dev.plist in Resources */,
+				28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */,
+				28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2497,6 +2524,9 @@
 				28735C00144EC95B00726A6C /* PhotoMapViewController.m in Sources */,
 				28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */,
 				28735C0B144ED64700726A6C /* HudManager.m in Sources */,
+				28735C19144F0EF100726A6C /* AppConfigManager.m in Sources */,
+				28735C25144F1C1400726A6C /* GoogleAnalyticsManager.m in Sources */,
+				28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

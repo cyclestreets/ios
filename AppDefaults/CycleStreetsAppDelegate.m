@@ -24,40 +24,43 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Created by Alan Paxton on 02/03/2010.
 //
 
+#import <UIKit/UIKit.h>
 #import "CycleStreetsAppDelegate.h"
 #import "CycleStreets.h"
-#import "SettingsViewController.h"
-#import "MapViewController.h"
-#import "PhotoMapViewController.h"
 #import "FavouritesViewController.h"
-#import "PhotosViewContoller.h"
-#import "CreditsViewController.h"
-#import "Query.h"
-#import "Route.h"
-#import "Stage.h"
-#import <UIKit/UIKit.h>
-#import "XMLRequest.h"
 #import "Files.h"
 #import "Reachability.h"
-
+#import "AppConfigManager.h"
 #import "CategoryLoader.h"
 #import "StartupManager.h"
 #import "UserSettingsManager.h"
 #import "AppConstants.h"
+#import "GlobalUtilities.h"
+#import "UserAccount.h"
+#import "TestFlight.h"
+#import "GoogleAnalyticsManager.h"
+#import "UIDevice+Machine.h"
+#import "ExpandedUILabel.h"
+
+
+@interface CycleStreetsAppDelegate(Private)
+
+- (void)buildTabbarController:(NSArray*)viewcontrollers;
+-(void)appendStartUpView;
+-(void)removeStartupView;
+- (void)setBarStyle:(UIBarStyle)style andTintColor:(UIColor *)color forNavigationBar:(UINavigationBar *)bar;
+
+-(void)writeDebugStartupLabel:(BOOL)appendLocation;
+
+@end
 
 @implementation CycleStreetsAppDelegate
 @synthesize window;
 @synthesize splashView;
 @synthesize tabBarController;
-@synthesize firstAlert;
-@synthesize secondAlert;
-@synthesize optionsAlert;
-@synthesize networkAlert;
-@synthesize stage;
-@synthesize errorAlert;
 @synthesize startupmanager;
+@synthesize debugLabel;
 @synthesize favourites;
-@synthesize map;
 
 //=========================================================== 
 // dealloc
@@ -67,15 +70,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [window release], window = nil;
     [splashView release], splashView = nil;
     [tabBarController release], tabBarController = nil;
-    [firstAlert release], firstAlert = nil;
-    [secondAlert release], secondAlert = nil;
-    [optionsAlert release], optionsAlert = nil;
-    [networkAlert release], networkAlert = nil;
-    [stage release], stage = nil;
-    [errorAlert release], errorAlert = nil;
     [startupmanager release], startupmanager = nil;
+    [debugLabel release], debugLabel = nil;
     [favourites release], favourites = nil;
-    [map release], map = nil;
 	
     [super dealloc];
 }
@@ -83,49 +80,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-- (void)loadContext {
-	BetterLog(@">>>");
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	Files *files = cycleStreets.files;
-	NSString *saveIndex = [files miscValueForKey:@"selectedTabIndex"];
-	if (saveIndex != nil && [saveIndex length] > 0) {
-		self.tabBarController.selectedIndex = [saveIndex intValue];
-	}
-}
-
-- (void)saveContext {
-	BetterLog(@">>>");
-	if (self.tabBarController != nil && self.tabBarController.selectedIndex != NSNotFound) {
-		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		Files *files = cycleStreets.files;
-		NSString *saveIndex = [[NSNumber numberWithInt:self.tabBarController.selectedIndex] stringValue];
-		[files setMiscValue:saveIndex forKey:@"selectedTabIndex"];
-		
-	}
-}
-
-- (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag {
-
-	UINavigationController *navigation = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
-	navigation.navigationBar.tintColor=UIColorFromRGB(0x008000);
-	UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:[UIImage imageNamed:imageName] tag:tag];
-	[navigation setTabBarItem:tabBarItem];
-	controller.navigationItem.title = title;
-	[tabBarItem release];
-	
-	return navigation;
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
 	BetterLog(@"application didFinishLaunchingWithOptions");
+	
+	[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
 
 	[self appendStartUpView];
 	
 	startupmanager=[[StartupManager alloc]init];
 	startupmanager.delegate=self;
 	[startupmanager doStartupSequence];
-	
 	
 	
 	return YES;
@@ -149,24 +114,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	startupmanager=nil;
 	
 	tabBarController = [[UITabBarController alloc] init];
-	[self buildTabbarController:[UserSettingsManager sharedInstance].navigation];
+	[self buildTabbarController:[[AppConfigManager sharedInstance].configDict objectForKey:@"navigation"]];
 	
 	[window addSubview:tabBarController.view];
 	tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
 	
-	// Stage popover
-	stage = [[Stage alloc] initWithNibName:@"Stage" bundle:nil];
-	
-	// error alert too
-	errorAlert = [[UIAlertView alloc]
-				  initWithTitle:@"Error"
-				  message:nil
-				  delegate:self
-				  cancelButtonTitle:@"OK"
-				  otherButtonTitles:nil];
-	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
+	
+	
+	// send device os to Google
+	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+	NSString *currSysMdl = [[UIDevice currentDevice] model];
+	NSString *currSysNam = [[UIDevice currentDevice] systemName];
+	NSString *currSysMac = [[UIDevice currentDevice] machine];
+	[[GoogleAnalyticsManager sharedInstance] trackPageViewWithString:[NSString stringWithFormat:@"/%@/%@/%@/%@",currSysMdl,currSysMac,currSysNam,currSysVer]];
+	//
 	
 	[window makeKeyAndVisible];	
 	
@@ -178,12 +141,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-	[self saveContext];
+	[[UserSettingsManager sharedInstance] saveApplicationState];
 	
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-	[self saveContext];
+	[[UserSettingsManager sharedInstance] saveApplicationState];
 	[[UserAccount sharedInstance] logoutUser];
 }
 -(void)applicationWillEnterForeground:(UIApplication *)application{
@@ -205,20 +168,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
 	splashView.image = [UIImage imageNamed:@"Default.png"];
 	
-#if ISDEVELOPMENT
-	UILabel *versionLabel=[[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 12)];
-	versionLabel.font=[UIFont systemFontOfSize:11];
-	versionLabel.textColor=[UIColor whiteColor];
-	versionLabel.backgroundColor=[UIColor clearColor];
-	NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
-	versionLabel.text=[NSString stringWithFormat:@"version: %@",[infoDict objectForKey:@"CFBundleVersion"]];
-	[splashView addSubview:versionLabel];
-	[versionLabel release];
-#endif
+	#if ISDEVELOPMENT
+	[self writeDebugStartupLabel:NO];
+	#endif
 	
 	
 	[window addSubview:splashView];
 	[window bringSubviewToFront:splashView];
+	
+}
+
+
+-(void)writeDebugStartupLabel:(BOOL)appendLocation{
+	
+	BetterLog(@"");
+	
+	if(debugLabel!=nil)
+		[debugLabel removeFromSuperview];
+	
+	self.debugLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(10, 30, 280, 12)];
+	debugLabel.font=[UIFont systemFontOfSize:11];
+	debugLabel.textColor=[UIColor whiteColor];
+	debugLabel.backgroundColor=[UIColor clearColor];
+	NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
+	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+	NSString *currSysMdl = [[UIDevice currentDevice] model];
+	NSString *currSysNam = [[UIDevice currentDevice] systemName];
+	NSString *currSysMac = [[UIDevice currentDevice] machine];
+	
+	NSString  *debuglabelString;
+	
+	debuglabelString=[NSString stringWithFormat:@"Build: %@ \rDevice: %@\rLocation: %@\rBuild variant: %@\rWH Services Id: %@",
+						  [infoDict objectForKey:@"CFBundleVersion"],
+						  [NSString stringWithFormat:@"%@, %@, %@, %@",currSysMdl,currSysMac,currSysNam,currSysVer],
+						  @"No Location",[infoDict objectForKey:@"CFBundleIdentifier"],[infoDict objectForKey:@"SERVER_DOMAIN_ID"]];
+	
+	
+	debugLabel.text=debuglabelString;
+	
+	[splashView addSubview:debugLabel];
+	
+	
 	
 }
 
@@ -260,19 +250,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			NSDictionary *navitem=[viewcontrollers objectAtIndex:i];
 			NSString  *vcClass=[navitem objectForKey:@"class"];
 			NSString  *nibName=[navitem objectForKey:@"nib"];
+			NSString  *vcTitle=[navitem objectForKey:@"title"];
 			
-			BetterLog(@"vcClass=%@  nibName=%@",vcClass,nibName);
+			//BetterLog(@"vcClass=%@  nibName=%@",vcClass,nibName);
 			
 			UIViewController *vccontroller= (UIViewController*)[[NSClassFromString(vcClass) alloc] initWithNibName:nibName bundle:nil];
+			vccontroller.title=vcTitle;
 			if(vccontroller!=nil){
 				
-				//OLD STYLE SUPPORT: DEPRECATE THIS SOON!
+				
+				//TODO: OLD STYLE SUPPORT: DEPRECATE THIS SOON!
 				if ([vcClass isEqualToString:@"FavouritesViewController"]) {
 					favourites=(FavouritesViewController*)vccontroller;
 				}
-				if ([vcClass isEqualToString:@"MapViewController"]) {
-					map=(MapViewController*)vccontroller;
-				}
+				 
 				
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
@@ -302,10 +293,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:tabBarController.moreNavigationController.navigationBar];
 	
-	
+	// DEV: temp disable of edit 
+	tabBarController.customizableViewControllers=nil;
 }
 
 
+- (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag {
+	
+	UINavigationController *navigation = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
+	navigation.navigationBar.tintColor=UIColorFromRGB(0x008000);
+	UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:[UIImage imageNamed:imageName] tag:tag];
+	[navigation setTabBarItem:tabBarItem];
+	controller.navigationItem.title = title;
+	[tabBarItem release];
+	
+	return navigation;
+}
+
+- (void)tabBarController:(UITabBarController *)tbc didSelectViewController:(UIViewController *)viewController {
+	
+	[[UserSettingsManager sharedInstance] setSavedSection:tbc.selectedViewController.title];
+	
+}
 
 
 
@@ -313,11 +322,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	BetterLog(@"");
 	
+	// TODO: why is this loading stuff happenign here, it should be part of StartUpManger sequence
+	
 	//load the default categories
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.categoryLoader setupCategories];
 	
-	[self loadContext];
 	
 	// Check we have network
     Reachability *internetReach = [Reachability reachabilityForInternetConnection];
@@ -325,39 +335,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	// Warn that we can't download new maps
 	if (internetStatus == NotReachable) {
-		self.networkAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
+		UIAlertView *networkAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
 													   message:@"No network. You may be able to follow a previously planned route, if you have already viewed the maps."
-													  delegate:self
+													  delegate:nil
 											 cancelButtonTitle:@"OK"
 											 otherButtonTitles:nil];
 		[networkAlert show];				
 	}	
 }
 
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	BetterLog(@">>>");
-	if (alertView == firstAlert) {
-		self.firstAlert = nil;
-		self.secondAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"
-													   message:@"Click on 'Itinerary' to view full details. The route has also been saved to the 'More' section."
-													  delegate:self
-											 cancelButtonTitle:@"OK"
-											 otherButtonTitles:nil]
-							autorelease];
-		//[self.secondAlert show];
-		[self.secondAlert performSelector:@selector(show) withObject:nil afterDelay:0.1];
-	}
-	if (alertView == secondAlert) {
-		self.secondAlert = nil;
-	}
-	if (alertView == optionsAlert) {
-		self.optionsAlert = nil;
-	}
-	if (alertView == networkAlert) {
-		self.networkAlert = nil;
-	}
-}
 
 
 -(void)showTabBarViewControllerByName:(NSString*)viewname{

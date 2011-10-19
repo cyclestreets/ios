@@ -26,6 +26,7 @@
 @synthesize route;
 @synthesize routeId;
 @synthesize headerText;
+@synthesize stageViewcontroller;
 @synthesize routeidLabel;
 @synthesize readoutLineOne;
 @synthesize readoutLineTwo;
@@ -33,13 +34,14 @@
 @synthesize tableView;
 @synthesize rowHeightsArray;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [route release], route = nil;
     [headerText release], headerText = nil;
+    [stageViewcontroller release], stageViewcontroller = nil;
     [routeidLabel release], routeidLabel = nil;
     [readoutLineOne release], readoutLineOne = nil;
     [readoutLineTwo release], readoutLineTwo = nil;
@@ -49,6 +51,7 @@
 	
     [super dealloc];
 }
+
 
 
 
@@ -268,12 +271,15 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Create and push stage details view controller.
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	Stage *stage = [cycleStreets.appDelegate stage];
-	[stage setRoute:route];
-	[self presentModalViewController:stage animated:YES];
-	[stage setSegmentIndex:indexPath.row];
+
+	
+	if(stageViewcontroller==nil){
+		self.stageViewcontroller=[[Stage alloc] init];
+	}
+	
+	[stageViewcontroller setRoute:route];
+	[self presentModalViewController:stageViewcontroller animated:YES];
+	[stageViewcontroller setSegmentIndex:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

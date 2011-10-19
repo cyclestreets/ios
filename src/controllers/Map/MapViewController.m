@@ -788,9 +788,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if (self.planningState == statePlan) {
 		RMMarkerManager *markerManager = [mapView markerManager];
 		if (![[markerManager markers] containsObject:self.end] || ![[markerManager markers] containsObject:self.start]) {
-			BetterLog(@"not enough locations.");
-			[cycleStreets.appDelegate.errorAlert setMessage:@"Need start and end markers to calculate a route."];
-			[cycleStreets.appDelegate.errorAlert show];
+			
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Routing"
+																   message:@"Need start and end markers to calculate a route."
+																  delegate:nil
+														 cancelButtonTitle:@"OK"
+														 otherButtonTitles:nil];
+			[alert show];
+			[alert release];
+			
 		}
 		
 		CLLocationCoordinate2D fromLatLon = [markerManager latitudeLongitudeForMarker:start];
@@ -811,6 +817,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void)stopDoingLocation {
 	BetterLog(@"doingLocation=%i",doingLocation);
+	
 	if (!doingLocation) {
 		return;
 	}

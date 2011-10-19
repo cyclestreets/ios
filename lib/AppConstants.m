@@ -27,10 +27,10 @@ NSString *const REGISTERRESPONSE=@"REGISTERRESPONSE";
 NSString *const PASSWORDRETRIEVALRESPONSE=@"PASSWORDRETRIEVALRESPONSE";
 
 // OUTGOING
-NSString *const LOCATIONSEARCH=@"LOCATIONSEARCH";
-NSString *const RETREIVELOCATIONPHOTOS=@"RETREIVELOCATIONPHOTOS";
-NSString *const UPLOADUSERPHOTO=@"UPLOADUSERPHOTO";
-NSString *const LOCATIONFEATURES=@"LOCATIONFEATURES";
+NSString *const LOCATIONSEARCH=@"LocationSearch";
+NSString *const RETREIVELOCATIONPHOTOS=@"RetrieveLocationPhotos";
+NSString *const UPLOADUSERPHOTO=@"UploadUserPhotos";
+NSString *const LOCATIONFEATURES=@"LocationFeatures";
 
 //INTERNAL
 NSString *const LOCATIONSEARCHRESPONSE=@"LOCATIONSEARCHRESPONSE";
@@ -39,7 +39,11 @@ NSString *const UPLOADUSERPHOTORESPONSE=@"UPLOADUSERPHOTORESPONSE";
 NSString *const LOCATIONFEATURESRESPONSE=@"LOCATIONFEATURESRESPONSE";
 
 
-//STRING CONSTANTS
+//
+/***********************************************
+ * @description			String Constants
+ ***********************************************/
+//
 NSString *const MILES=@"miles";
 NSString *const KM=@"kilometers";
 

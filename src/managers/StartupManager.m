@@ -17,6 +17,7 @@
 #import "ImageCache.h"
 #import "StringManager.h"
 #import "UserAccount.h"
+#import "AppConfigManager.h"
 
 @interface StartupManager(Private)
 
@@ -70,7 +71,13 @@
 	[UserSettingsManager sharedInstance];
 	// no fatal startup errors for RKUserSettingsManager
 	
-	
+	AppConfigManager *ac=[AppConfigManager sharedInstance];
+    ac.delegate=self;
+	[ac initialise];
+	if(error!=nil){
+		[self startupFailed];
+		return;
+	}
 		
 	// load web services
 	[self loadServices];

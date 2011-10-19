@@ -92,11 +92,6 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		for(NSString *key in parameters){
-			//NSLog(@"[DEBUG] %@=%@",key,[parameters objectForKey:key]);
-		}
-		 
-		//NSLog(@"[DEBUG] POST SEND:%@",[parameters urlEncodedString]);
 		
 		NSString *parameterString=[parameters urlEncodedString];
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
@@ -122,6 +117,7 @@
 		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 		
 		[urlString release];
+		
 	}else if([servicetype isEqualToString:POSTJSON]){
 		
 		requesturl=[NSURL URLWithString:[self url]];

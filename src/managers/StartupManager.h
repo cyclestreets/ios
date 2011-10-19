@@ -13,6 +13,7 @@
 #import "DataSourceManager.h"
 #import "StyleManager.h"
 #import	"StringManager.h"
+#import "AppConfigManager.h"
 
 @protocol StartupManagerDelegate<NSObject>
 
@@ -26,7 +27,7 @@
 #define kSERVICEFILE @"services.plist"
 
 
-@interface StartupManager : NSObject <DataSourceDelegate,StyleManagerDelegate,StringManagerDelegate>{
+@interface StartupManager : NSObject <DataSourceDelegate,StyleManagerDelegate,StringManagerDelegate,AppConfigManagerDelegate>{
 	NSUserDefaults				*userSettings;
 	BOOL						networkAvailable;
 	NSMutableDictionary			*userState;

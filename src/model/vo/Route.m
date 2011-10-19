@@ -148,7 +148,12 @@ static NSString *ROUTEDATE = @"cs:whence";
 }
 
 - (NSString *) name {
-	return [header valueForKey:NAME];
+	
+	if(userRouteName==nil){
+		return [header valueForKey:NAME];
+	}else{
+		return userRouteName;
+	}
 }
 
 - (NSString *) itinerary {
