@@ -55,5 +55,21 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>UploadPhoto</key>
+	<dict>
+		<key>id</key>
+		<string>UploadPhoto</string>
+		<key>remoteurl</key>
+		<string>https://www.cyclestreets.net/api/addphoto.xml</string>
+		<key>type</key>
+		<string>IMAGEPOST</string>
+		<key>cache</key>
+		<false/>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 </dict>
 </plist>
