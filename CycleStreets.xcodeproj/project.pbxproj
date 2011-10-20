@@ -298,6 +298,7 @@
 		28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */; };
 		28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */; };
 		28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */; };
+		28C4ABDA1450653200A0ECD3 /* UIButton_save_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABD91450653200A0ECD3 /* UIButton_save_hi.png */; };
 		28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
 		28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */; };
 		28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */; };
@@ -826,6 +827,7 @@
 		28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orangesmall_lo@2x.png"; sourceTree = "<group>"; };
 		28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_hi@2x.png"; sourceTree = "<group>"; };
 		28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_lo@2x.png"; sourceTree = "<group>"; };
+		28C4ABD91450653200A0ECD3 /* UIButton_save_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_save_hi.png; sourceTree = "<group>"; };
 		28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_left@2x.png"; sourceTree = "<group>"; };
 		28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_right@2x.png"; sourceTree = "<group>"; };
 		28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_straight_on@2x.png"; sourceTree = "<group>"; };
@@ -1941,6 +1943,7 @@
 		28AD6525131FC239008527FC /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				28C4ABD91450653200A0ECD3 /* UIButton_save_hi.png */,
 				289E6B0D144C375F0079FFE5 /* Alert200x200.png */,
 				289E6B0E144C375F0079FFE5 /* Arrows */,
 				289E6B11144C375F0079FFE5 /* blueButton.png */,
@@ -2346,6 +2349,7 @@
 				28735C1B144F0F2200726A6C /* services_dev.plist in Resources */,
 				28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */,
 				28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */,
+				28C4ABDA1450653200A0ECD3 /* UIButton_save_hi.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

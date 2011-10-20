@@ -110,7 +110,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		[self warnOnFirstRoute];
 		[self selectRoute:selectedRoute];	
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName:ROUTEDATARESPONSE object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, this route is now selected." andMessage:nil];
 	}

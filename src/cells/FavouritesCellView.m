@@ -27,6 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "FavouritesCellView.h"
 #import "AppConstants.h"
 #import "SettingsManager.h"
+#import "ViewUtilities.h"
 
 @implementation FavouritesCellView
 @synthesize dataProvider;
@@ -34,6 +35,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize nameLabel;
 @synthesize readoutLabel;
 @synthesize icon;
+@synthesize isSelectedRoute;
+@synthesize selectedRouteIcon;
 
 //=========================================================== 
 // dealloc
@@ -45,6 +48,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [nameLabel release], nameLabel = nil;
     [readoutLabel release], readoutLabel = nil;
     [icon release], icon = nil;
+    [selectedRouteIcon release], selectedRouteIcon = nil;
 	
     [super dealloc];
 }
@@ -53,6 +57,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 -(void)initialise{
+	
+	isSelectedRoute=NO;
 	
 	viewContainer.layoutMode=BUVerticalLayoutMode;
 	viewContainer.paddingLeft=10;
@@ -100,6 +106,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[readoutLabel drawUI];
 	 
 	[viewContainer refresh];
+	
+	selectedRouteIcon.hidden=!isSelectedRoute;
+	[ViewUtilities alignView:selectedRouteIcon withView:viewContainer :BUNoneLayoutMode :BUCenterAlignMode];
 	 
 }
 

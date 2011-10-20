@@ -103,6 +103,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
+-(void)routeByIdResponse{
+	
+	[self reload];
+	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+	
+}
+
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -121,8 +129,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(reload)
-												 name:ROUTEDATARESPONSE
+											 selector:@selector(routeByIdResponse)
+												 name:NEWROUTEBYIDRESPONSE
 											   object:nil];	
 	
 }
@@ -154,6 +162,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     NSInteger routeIdentifier = [[favourites objectAtIndex:indexPath.row] intValue];
 	Route *route = [self routeWithIdentifier:routeIdentifier];
 	cell.dataProvider=route;
+	
+	
+	// This is useful but, SR is always sorted to top of Favs so no real use?
+	Route *sroute=[RouteManager sharedInstance].selectedRoute;
+	cell.isSelectedRoute=[sroute.itinerary isEqualToString:route.itinerary];
+	
 	[cell populate];
     
     return cell;

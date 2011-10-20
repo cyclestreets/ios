@@ -33,19 +33,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface FavouritesCellView : BUTableCellView {
 	
-	Route				*dataProvider;
+	Route							*dataProvider;
 	
-	IBOutlet	LayoutBox		*viewContainer;
-	IBOutlet ExpandedUILabel	*nameLabel;
-	IBOutlet MultiLabelLine		*readoutLabel;
+	IBOutlet	LayoutBox			*viewContainer;
+	IBOutlet ExpandedUILabel		*nameLabel;
+	IBOutlet MultiLabelLine			*readoutLabel;
 	
 	IBOutlet UIImageView			*icon;
+	
+	BOOL							isSelectedRoute;
+	IBOutlet UIImageView						*selectedRouteIcon;
+	
 }
-@property (nonatomic, retain)	Route	*dataProvider;
-@property (nonatomic, retain)	IBOutlet LayoutBox	*viewContainer;
-@property (nonatomic, retain)	IBOutlet ExpandedUILabel	*nameLabel;
-@property (nonatomic, retain)	IBOutlet MultiLabelLine	*readoutLabel;
-@property (nonatomic, retain)	IBOutlet UIImageView	*icon;
+@property (nonatomic, retain)	Route		*dataProvider;
+@property (nonatomic, retain)	IBOutlet LayoutBox		*viewContainer;
+@property (nonatomic, retain)	IBOutlet ExpandedUILabel		*nameLabel;
+@property (nonatomic, retain)	IBOutlet MultiLabelLine		*readoutLabel;
+@property (nonatomic, retain)	IBOutlet UIImageView		*icon;
+@property (nonatomic)	BOOL		isSelectedRoute;
+@property (nonatomic, retain)	IBOutlet UIImageView		*selectedRouteIcon;
 
 
 +(NSNumber*)heightForCellWithDataProvider:(Route*)route;
