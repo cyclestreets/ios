@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SuperCellView.h"
+#import "BUTableCellView.h"
 #import "SegmentVO.h"
 #import "LayoutBox.h"
 #import "MultiLabelLine.h"
 #import "ExpandedUILabel.h"
 
-@interface ItineraryCellView : SuperCellView {
+@interface ItineraryCellView : BUTableCellView {
 	
 	SegmentVO							*dataProvider;
 	

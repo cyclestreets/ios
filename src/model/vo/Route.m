@@ -149,7 +149,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 
 - (NSString *) name {
 	
-	if(userRouteName==nil){
+	if(userRouteName==nil || [userRouteName isEqualToString:EMPTYSTRING]){
 		return [header valueForKey:NAME];
 	}else{
 		return userRouteName;

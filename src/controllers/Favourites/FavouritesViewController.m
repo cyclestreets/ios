@@ -31,8 +31,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Files.h"
 #import "RouteParser.h"
 #import "Route.h"
-#import "FavouritesCell.h"
+#import "FavouritesCellView.h"
 #import "RouteSummary.h"
+#import "FavouritesManager.h"
 
 @implementation FavouritesViewController
 @synthesize favourites;
@@ -58,24 +59,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark -
 #pragma mark init
 
+
+
 #pragma mark -
 #pragma mark helpers
 
 - (void) reload {
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	self.favourites = [cycleStreets.files favourites];
+	self.favourites = [FavouritesManager sharedInstance].dataProvider;
+	
+	if(routes==nil)
+		self.routes=[[NSMutableDictionary alloc]init];
 	
 	[self createRowHeightsArray];
 	[self.tableView reloadData];
 }
 
 - (void) clear {
-	//empty out the favourites list, tell the view it needs reloaded.
 	self.favourites = nil;
 	[(UITableView *)self.view reloadData];
 }
 
+
+// TODO: note due to this method of loading the routes always from disk we cant persist the routename change
+// short term We need to make Routes xml writable, this restriction will be removed when we move these VOs to NScoding
 - (Route *) routeWithIdentifier:(NSInteger)identifier {
 	Route *route = [routes objectForKey:[NSNumber numberWithInt:identifier]];
 	if (!route) {
@@ -97,7 +104,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.tableView.rowHeight=[FavouritesCell rowHeight];
+	self.tableView.rowHeight=[FavouritesCellView rowHeight];
 
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	
@@ -114,28 +121,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-	return [self.favourites count];
+    return [favourites count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-	 static NSString *CellIdentifier = @"FavouritesCell";
-	 
-	 FavouritesCell *cell = (FavouritesCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	 if (cell == nil) {
-		 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"FavouritesCell" owner:self options:nil];
-		 cell = (FavouritesCell *)[nib objectAtIndex:0];
-		 [cell initialise];
-	 }
-	
+	FavouritesCellView *cell = (FavouritesCellView *)[FavouritesCellView cellForTableView:tableView fromNib:[FavouritesCellView nib]];	
     
     NSInteger routeIdentifier = [[favourites objectAtIndex:indexPath.row] intValue];
 	Route *route = [self routeWithIdentifier:routeIdentifier];
@@ -168,11 +165,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)deleteRow:(int)row{
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSMutableArray *favs=[cycleStreets.files favourites];
-	[favs removeObjectAtIndex:row];
-	[cycleStreets.files setFavourites:favs];
-	self.favourites = favs;
+	[[FavouritesManager sharedInstance] removeObjectFromDataProviderAtIndex:row];
 	[rowHeightsArray removeObjectAtIndex:row];
 }
 
@@ -193,15 +186,19 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 
 -(void)createRowHeightsArray{
-
-	self.rowHeightsArray=[[NSMutableArray alloc]init];
+	
+	if(rowHeightsArray==nil){
+		self.rowHeightsArray=[[NSMutableArray alloc]init];
+	}else{
+		[rowHeightsArray	removeAllObjects];
+	}
 
 	for (int i=0; i<[favourites count]; i++) {
 		
 		NSInteger routeIdentifier = [[favourites objectAtIndex:i] intValue];
 		Route *route = [self routeWithIdentifier:routeIdentifier];
 		
-		[rowHeightsArray addObject:[FavouritesCell heightForCellWithDataProvider:route]];
+		[rowHeightsArray addObject:[FavouritesCellView heightForCellWithDataProvider:route]];
 		
 		
 	}

@@ -251,15 +251,8 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ItineraryCellView *cell = (ItineraryCellView *)[tv dequeueReusableCellWithIdentifier:[ItineraryCellView cellIdentifier]];
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"ItineraryCell" owner:self options:nil];
-		cell = (ItineraryCellView *)[nib objectAtIndex:0];
-		[cell initialise];
-		
-    }
+    ItineraryCellView *cell = (ItineraryCellView *)[ItineraryCellView cellForTableView:tv fromNib:[ItineraryCellView nib]];
 	
-	// Configure the cell...
 	SegmentVO *segment = [route segmentAtIndex:indexPath.row];
 	cell.dataProvider=segment;
 	[cell populate];

@@ -17,6 +17,7 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
 @synthesize dataProvider;
 
+
 //=========================================================== 
 // dealloc
 //=========================================================== 
@@ -28,11 +29,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
 }
 
 
+//=========================================================== 
+// - (id)init
+//
+//=========================================================== 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.dataProvider = [(Files*)[CycleStreets sharedInstance].files favourites];
+    }
+    return self;
+}
 
 
--(void)loadData{
+
+
+-(void)removeObjectFromDataProviderAtIndex:(NSUInteger)index{
 	
-	self.dataProvider = [(Files*)[CycleStreets sharedInstance].files favourites];
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	[dataProvider removeObjectAtIndex:index];
+	[cycleStreets.files setFavourites:dataProvider];
 	
 }
 

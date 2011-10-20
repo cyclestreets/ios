@@ -132,7 +132,7 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_cycle_lanes.png", @"narrow cycle lane", 
 					  @"UIIcon_cycle_lanes.png", @"cycle lane", 
 					  @"UIIcon_cycle_tracks.png", @"cycle track", 
-					   @"UIIcon_cycle_tracks.png", @"cycle path", 
+					  @"UIIcon_cycle_tracks.png", @"cycle path", 
 					  @"UIIcon_tracks.png", @"track", 
 					  @"UIIcon_tracks.png", @"bridleway", 
 					  @"UIIcon_quiet_street.png", @"quiet street",

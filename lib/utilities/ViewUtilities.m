@@ -125,4 +125,43 @@
 	
 }
 
+
+
++(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText delegate:(id)delegate{
+    
+    UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:title 
+                                                     message:@"\n\n"
+                                                    delegate:delegate 
+                                           cancelButtonTitle:@"Cancel" 
+                                           otherButtonTitles:@"OK", nil];
+    prompt.tag=kTextEntryAlertTag;
+    UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 50, 260.0, 25.0)]; 
+    alertField.borderStyle=UITextBorderStyleRoundedRect;
+    [alertField setBackgroundColor:[UIColor whiteColor]];
+	[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
+	if(fieldText!=nil){
+		alertField.text=fieldText;
+	}else{
+		[alertField setPlaceholder:@"Route name"];
+	}
+    
+    alertField.tag=kTextEntryAlertFieldTag;
+    [prompt addSubview:alertField];
+    
+    float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if(ver<4.0){
+        CGAffineTransform moveUp = CGAffineTransformMakeTranslation(0.0, 100.0);
+        [prompt setTransform: moveUp];
+    }
+    
+    [prompt show];
+    [prompt release];
+    
+    [alertField becomeFirstResponder];
+    [alertField release];
+    
+    return prompt;
+    
+}
+
 @end

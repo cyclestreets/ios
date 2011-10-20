@@ -127,7 +127,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
 -(NSString*)serviceDataPath{
     
     NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
-	NSString *serverid=[infoDict objectForKey:@"SEVERDOMAIN_ID"];
+	NSString *serverid=[infoDict objectForKey:@"SERVER_DOMAIN_ID"];
 	
 	if([serverid isEqualToString:APPSTATE_DEVELOPMENT]){
 		return [[NSBundle mainBundle] pathForResource:SERVICE_DEV_PLISTFILENAME ofType:@"plist"];

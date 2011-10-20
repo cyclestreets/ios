@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SuperCellView.h"
+#import "BUTableCellView.h"
 #import "RouteVO.h"
 
-@interface RouteCellView : SuperCellView {
+@interface RouteCellView : BUTableCellView {
 
 	RouteVO *dataProvider;
 	

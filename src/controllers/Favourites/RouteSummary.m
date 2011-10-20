@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import "BUDividerView.h"
 #import "ButtonUtilities.h"
+#import "ViewUtilities.h"
 
 @implementation RouteSummary
 @synthesize route;
@@ -46,6 +47,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize planLabel;
 @synthesize speedLabel;
 @synthesize routeButton;
+@synthesize renameButton;
 
 //=========================================================== 
 // dealloc
@@ -64,9 +66,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [planLabel release], planLabel = nil;
     [speedLabel release], speedLabel = nil;
     [routeButton release], routeButton = nil;
+    [renameButton release], renameButton = nil;
 	
     [super dealloc];
 }
+
 
 
 
@@ -100,10 +104,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	[ButtonUtilities styleIBButton:routeButton type:@"green" text:@"Select this route"];
+	[ButtonUtilities styleIBButton:renameButton type:@"orange" text:@"Rename this route"];
 	
 	routeNameLabel.multiline=YES;
 	
-	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,routeButton,nil]];
+	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,routeButton,renameButton,nil]];
 	
 	[d1 release];
 	[d2 release];
@@ -129,7 +134,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	timeLabel.text=route.timeString;
 	lengthLabel.text=route.lengthString;
-	planLabel.text=[route plan];
+	planLabel.text=[[route plan] capitalizedString];
 	speedLabel.text=route.speedString;
 	
 	
@@ -138,6 +143,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
+//
+/***********************************************
+ * @description			User events
+ ***********************************************/
+//
+
+// route selection
 - (void)selectRoute {
 	[self.navigationController popViewControllerAnimated:YES];
 	
@@ -151,6 +163,49 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
+
+
+// route naming
+-(IBAction)renameButtonSelected:(id)sender{
+	
+	[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:route.name delegate:self];
+	
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+	
+	if(buttonIndex > 0) {
+        
+		switch(alertView.tag){
+			case kTextEntryAlertTag:
+			{
+				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+				if (alertInputField!=nil) {
+					route.userRouteName=alertInputField.text;
+					[self createNonPersistentUI];
+				}
+			}
+                break;
+                
+			default:
+				
+			break;
+                
+		}
+		
+		
+	}
+	
+}
+
+
+
+//
+/***********************************************
+ * @description			generic methods
+ ***********************************************/
+//
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

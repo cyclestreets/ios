@@ -108,7 +108,7 @@
 		2863A3EC134E508800A22093 /* AssetImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2863A375134E508800A22093 /* AssetImage.xib */; };
 		2863A3ED134E508800A22093 /* AssetTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A377134E508800A22093 /* AssetTable.m */; };
 		2863A3F5134E508800A22093 /* XMLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A38D134E508800A22093 /* XMLRequest.m */; };
-		2863A3FE134E508800A22093 /* FavouritesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCell.m */; };
+		2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
 		2863A401134E508800A22093 /* FavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A5134E508800A22093 /* FavouritesViewController.m */; };
 		2863A402134E508800A22093 /* RouteSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* RouteSummary.m */; };
 		2863A411134E508800A22093 /* PhotoAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3C1134E508800A22093 /* PhotoAsset.m */; };
@@ -550,8 +550,8 @@
 		2863A377134E508800A22093 /* AssetTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetTable.m; sourceTree = "<group>"; };
 		2863A38C134E508800A22093 /* XMLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLRequest.h; sourceTree = "<group>"; };
 		2863A38D134E508800A22093 /* XMLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRequest.m; sourceTree = "<group>"; };
-		2863A3A0134E508800A22093 /* FavouritesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCell.h; sourceTree = "<group>"; };
-		2863A3A1134E508800A22093 /* FavouritesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCell.m; sourceTree = "<group>"; };
+		2863A3A0134E508800A22093 /* FavouritesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCellView.h; sourceTree = "<group>"; };
+		2863A3A1134E508800A22093 /* FavouritesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCellView.m; sourceTree = "<group>"; };
 		2863A3A4134E508800A22093 /* FavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavouritesViewController.h; path = Favourites/FavouritesViewController.h; sourceTree = "<group>"; };
 		2863A3A5134E508800A22093 /* FavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavouritesViewController.m; path = Favourites/FavouritesViewController.m; sourceTree = "<group>"; };
 		2863A3A6134E508800A22093 /* RouteSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RouteSummary.h; path = Favourites/RouteSummary.h; sourceTree = "<group>"; };
@@ -1421,8 +1421,8 @@
 		2872DF3413283575003995BE /* cells */ = {
 			isa = PBXGroup;
 			children = (
-				2863A3A0134E508800A22093 /* FavouritesCell.h */,
-				2863A3A1134E508800A22093 /* FavouritesCell.m */,
+				2863A3A0134E508800A22093 /* FavouritesCellView.h */,
+				2863A3A1134E508800A22093 /* FavouritesCellView.m */,
 				2872DF3A132835B2003995BE /* SuperCellView.h */,
 				2872DF3B132835B2003995BE /* SuperCellView.m */,
 				2872DF3513283586003995BE /* ItineraryCellView.h */,
@@ -1702,20 +1702,20 @@
 				280E9355140985CD00C7AC75 /* NamedPlace.m */,
 				280E9356140985CD00C7AC75 /* Route.h */,
 				280E9357140985CD00C7AC75 /* Route.m */,
+				28443E611332867D00FAD008 /* RouteVO.h */,
+				28443E621332867D00FAD008 /* RouteVO.m */,
 				280E92FC14097FDB00C7AC75 /* SegmentVO.h */,
 				280E92FD14097FDB00C7AC75 /* SegmentVO.m */,
-				28AD61FE131FB69D008527FC /* FormItemVO.h */,
-				28AD61FF131FB69D008527FC /* FormItemVO.m */,
 				28AD6200131FB69D008527FC /* UserVO.h */,
 				28AD6201131FB69D008527FC /* UserVO.m */,
 				28AD6202131FB69D008527FC /* ValidationVO.h */,
 				28AD6203131FB69D008527FC /* ValidationVO.m */,
-				28443E611332867D00FAD008 /* RouteVO.h */,
-				28443E621332867D00FAD008 /* RouteVO.m */,
 				287ECBCD1344A28900B8A6AC /* SettingsVO.h */,
 				287ECBCE1344A28900B8A6AC /* SettingsVO.m */,
 				286C71C9134F8F05007B57E6 /* LoginVO.h */,
 				286C71CA134F8F05007B57E6 /* LoginVO.m */,
+				28AD61FE131FB69D008527FC /* FormItemVO.h */,
+				28AD61FF131FB69D008527FC /* FormItemVO.m */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -2440,7 +2440,7 @@
 				2863A3EB134E508800A22093 /* AssetImage.m in Sources */,
 				2863A3ED134E508800A22093 /* AssetTable.m in Sources */,
 				2863A3F5134E508800A22093 /* XMLRequest.m in Sources */,
-				2863A3FE134E508800A22093 /* FavouritesCell.m in Sources */,
+				2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */,
 				2863A401134E508800A22093 /* FavouritesViewController.m in Sources */,
 				2863A402134E508800A22093 /* RouteSummary.m in Sources */,
 				2863A411134E508800A22093 /* PhotoAsset.m in Sources */,

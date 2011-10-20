@@ -109,6 +109,12 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 //
 
 
+
+// Utility Tags
+#define kTextEntryAlertTag 999111
+#define kTextEntryAlertFieldTag 999112
+
+
 enum  {
 	BULeftAlignMode,
 	BURightAlignMode,

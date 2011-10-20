@@ -188,8 +188,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	self.debugLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(10, 30, 280, 12)];
 	debugLabel.font=[UIFont systemFontOfSize:11];
-	debugLabel.textColor=[UIColor whiteColor];
-	debugLabel.backgroundColor=[UIColor clearColor];
+	debugLabel.textColor=[UIColor redColor];
+	debugLabel.backgroundColor=[UIColor whiteColor];
 	NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
 	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
 	NSString *currSysMdl = [[UIDevice currentDevice] model];
@@ -198,7 +198,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	NSString  *debuglabelString;
 	
-	debuglabelString=[NSString stringWithFormat:@"Build: %@ \rDevice: %@\rLocation: %@\rBuild variant: %@\rWH Services Id: %@",
+	debuglabelString=[NSString stringWithFormat:@"Build: %@ \rDevice: %@\rLocation: %@\rBuild variant: %@\rServices Id: %@",
 						  [infoDict objectForKey:@"CFBundleVersion"],
 						  [NSString stringWithFormat:@"%@, %@, %@, %@",currSysMdl,currSysMac,currSysNam,currSysVer],
 						  @"No Location",[infoDict objectForKey:@"CFBundleIdentifier"],[infoDict objectForKey:@"SERVER_DOMAIN_ID"]];
@@ -220,7 +220,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[window bringSubviewToFront:splashView];
 	
 	[UIView beginAnimations:nil context:nil];
-	[UIView	setAnimationDelay:1];
+	[UIView	setAnimationDelay:3];
 	[UIView setAnimationDuration:0.5];
 	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:window cache:YES];
 	[UIView setAnimationDelegate:self]; 

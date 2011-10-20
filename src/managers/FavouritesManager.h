@@ -14,9 +14,9 @@
 	NSMutableArray				*dataProvider;
 	
 	
-	
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(FavouritesManager);
 @property (nonatomic, retain)	NSMutableArray	*dataProvider;
 
+-(void)removeObjectFromDataProviderAtIndex:(NSUInteger)index;
 @end

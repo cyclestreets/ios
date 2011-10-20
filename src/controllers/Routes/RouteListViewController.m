@@ -139,15 +139,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	
-	static NSString *CellIdentifier = @"RouteCellIdentifier";
-    
-    RouteCellView *cell = (RouteCellView *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"RouteCellView" owner:self options:nil];
-		cell = (RouteCellView *)[nib objectAtIndex:0];
-		[cell initialise];
-    }
+    RouteCellView *cell = (RouteCellView *)[RouteCellView cellForTableView:table fromNib:[RouteCellView nib]];
 	
 	if(isSectioned==YES){
 	
