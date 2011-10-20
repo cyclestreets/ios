@@ -33,6 +33,8 @@ extern NSString *const LOCATIONSEARCHRESPONSE;
 extern NSString *const RETREIVELOCATIONPHOTOSRESPONSE;
 extern NSString *const UPLOADUSERPHOTORESPONSE;
 extern NSString *const LOCATIONFEATURESRESPONSE;
+extern NSString *const ROUTEDATARESPONSE;
+
 
 extern NSString *const MILES;
 extern NSString *const KM;

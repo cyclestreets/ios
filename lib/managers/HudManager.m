@@ -7,6 +7,7 @@
 //
 
 #import "HudManager.h"
+#import "GlobalUtilities.h"
 
 
 @implementation HudManager
@@ -48,10 +49,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 
 
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message{
-	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:1  andAllowTouch:NO];
+	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:2  andAllowTouch:NO];
 }
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message andDelay:(int)delayTime andAllowTouch:(BOOL)allowTouch{
     
+	BetterLog(@"title=%@",title);
 	
 	if(isShowing==NO){
         if(HUD==nil){

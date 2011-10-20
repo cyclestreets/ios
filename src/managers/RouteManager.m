@@ -16,13 +16,14 @@
 #import "Files.h"
 #import "RouteParser.h"
 #import "HudManager.h"
+#import "FavouritesManager.h"
 
 @interface RouteManager(Private) 
 
 - (void)warnOnFirstRoute;
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements;
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message;
-
+- (void) queryRouteSuccess:(XMLRequest *)request results:(NSDictionary *)elements;
 
 @end
 
@@ -58,6 +59,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 }
 
+- (void) runRouteIdQuery:(Query *)query {
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route by id from CycleStreets.net" andMessage:nil];
+	
+	[query runWithTarget:self onSuccess:@selector(queryRouteSuccess:results:) onFailure:@selector(queryFailure:message:)];
+	
+}
+
 
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements {
 	
@@ -79,6 +88,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 		[self warnOnFirstRoute];
 		[self selectRoute:selectedRoute];		
+	}
+}
+
+
+- (void) queryRouteSuccess:(XMLRequest *)request results:(NSDictionary *)elements {
+	
+	BetterLog(@"");
+	
+	//update the table.
+	self.selectedRoute = [[Route alloc] initWithElements:elements];
+	
+	if ([selectedRoute itinerary] == nil) {
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Could not plan valid route for selected endpoints." andMessage:nil];
+	} else {
+		
+		//save the route data to file.
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+		[cycleStreets.files setRoute:[[selectedRoute itinerary] intValue] data:request.data];
+		
+		[self warnOnFirstRoute];
+		[self selectRoute:selectedRoute];	
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:ROUTEDATARESPONSE object:nil];
+		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, this route is now selected." andMessage:nil];
 	}
 }
 
@@ -110,6 +144,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		[files setMiscValue:[route itinerary] forKey:@"selectedroute"];
 	}
 	[files setFavourites:newFavourites];
+	[[FavouritesManager sharedInstance] update];	
 	
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:CSROUTESELECTED object:[route itinerary]];

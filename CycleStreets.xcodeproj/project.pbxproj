@@ -119,7 +119,6 @@
 		286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
 		28719D92136FE2AD00F69A1B /* LocationSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28719D91136FE2AD00F69A1B /* LocationSearchManager.m */; };
 		2872DF3713283586003995BE /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
-		2872DF3C132835B2003995BE /* SuperCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3B132835B2003995BE /* SuperCellView.m */; };
 		2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DFA413283ABD003995BE /* RoutesViewContoller.m */; };
 		28735BF4144EC7A000726A6C /* PhotoMapVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF3144EC7A000726A6C /* PhotoMapVO.m */; };
 		28735BF7144EC80300726A6C /* PhotoMapListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF6144EC80300726A6C /* PhotoMapListVO.m */; };
@@ -570,8 +569,6 @@
 		28719D91136FE2AD00F69A1B /* LocationSearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchManager.m; sourceTree = "<group>"; };
 		2872DF3513283586003995BE /* ItineraryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryCellView.h; sourceTree = "<group>"; };
 		2872DF3613283586003995BE /* ItineraryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryCellView.m; sourceTree = "<group>"; };
-		2872DF3A132835B2003995BE /* SuperCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperCellView.h; sourceTree = "<group>"; };
-		2872DF3B132835B2003995BE /* SuperCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperCellView.m; sourceTree = "<group>"; };
 		2872DFA313283ABD003995BE /* RoutesViewContoller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutesViewContoller.h; sourceTree = "<group>"; };
 		2872DFA413283ABD003995BE /* RoutesViewContoller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewContoller.m; sourceTree = "<group>"; };
 		28735BF2144EC7A000726A6C /* PhotoMapVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoMapVO.h; sourceTree = "<group>"; };
@@ -1423,8 +1420,6 @@
 			children = (
 				2863A3A0134E508800A22093 /* FavouritesCellView.h */,
 				2863A3A1134E508800A22093 /* FavouritesCellView.m */,
-				2872DF3A132835B2003995BE /* SuperCellView.h */,
-				2872DF3B132835B2003995BE /* SuperCellView.m */,
 				2872DF3513283586003995BE /* ItineraryCellView.h */,
 				2872DF3613283586003995BE /* ItineraryCellView.m */,
 				28443E5A1332862000FAD008 /* RouteCellView.h */,
@@ -2422,7 +2417,6 @@
 				28AD6496131FB6C8008527FC /* UIBlockButton.m in Sources */,
 				28AD6497131FB6C8008527FC /* ViewUtilities.m in Sources */,
 				2872DF3713283586003995BE /* ItineraryCellView.m in Sources */,
-				2872DF3C132835B2003995BE /* SuperCellView.m in Sources */,
 				2872DFA513283ABD003995BE /* RoutesViewContoller.m in Sources */,
 				285F68DC132C07CD00B511C0 /* RouteListViewController.m in Sources */,
 				28443E5C1332862000FAD008 /* RouteCellView.m in Sources */,

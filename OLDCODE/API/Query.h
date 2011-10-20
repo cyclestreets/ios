@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (id) initFrom:(CLLocation *)from to:(CLLocation *)to;
+- (id) initRouteID:(NSString*)routeid;
 
 + (Query *)example;
 

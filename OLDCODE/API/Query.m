@@ -37,6 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "GlobalUtilities.h"
 
 static NSString *format = @"%@?key=%@&start_longitude=%f&start_latitude=%f&finish_longitude=%f&finish_latitude=%f&layer=%@&plan=%@&speed=%@&useDom=%@&clientid=%@";
+static NSString *routeidformat = @"%@?key=%@&useDom=%@&itinerary=%@&plan=%@";
 
 static NSString *urlPrefix = @"http://www.cyclestreets.net/api/journey.xml";
 static NSString *layer = @"6";
@@ -79,6 +80,30 @@ static NSString *useDom = @"1";
 							cycleStreets.files.clientid
 							];
 		BetterLog(@"Route request=%@",newURL);
+		
+		[url release];
+		url = newURL;
+		[url retain];
+	}
+	return self;
+}
+
+- (id) initRouteID:(NSString*)routeid {
+	if (self = [super init]) {
+		
+		//Fill in various of the parameters from the current settings value.
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+		SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+		
+		NSString *newURL = [NSString
+							stringWithFormat:routeidformat,
+							urlPrefix,
+							[cycleStreets APIKey],
+							useDom,
+							routeid,
+							settingsdp.plan
+							];
+		BetterLog(@"Route id request=%@",newURL);
 		
 		[url release];
 		url = newURL;

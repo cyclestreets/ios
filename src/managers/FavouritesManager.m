@@ -43,6 +43,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
 }
 
 
+-(void)update{
+	self.dataProvider = [(Files*)[CycleStreets sharedInstance].files favourites];
+}
 
 
 -(void)removeObjectFromDataProviderAtIndex:(NSUInteger)index{

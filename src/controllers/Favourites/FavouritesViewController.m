@@ -34,6 +34,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "FavouritesCellView.h"
 #import "RouteSummary.h"
 #import "FavouritesManager.h"
+#import "ViewUtilities.h"
+#import "RouteManager.h"
 
 @implementation FavouritesViewController
 @synthesize favourites;
@@ -61,10 +63,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
+
 #pragma mark -
 #pragma mark helpers
 
 - (void) reload {
+	
+	BetterLog(@"");
 	
 	self.favourites = [FavouritesManager sharedInstance].dataProvider;
 	
@@ -106,7 +111,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	self.tableView.rowHeight=[FavouritesCellView rowHeight];
 
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	UIBarButtonItem *back = [[[UIBarButtonItem alloc] initWithTitle:@"New"
+															  style:UIBarButtonItemStyleBordered
+															 target:self
+															 action:@selector(retrieveRouteByNumberButtonSelected:)]
+							 autorelease];
+	
+	[self.navigationItem setRightBarButtonItem:back];
+	
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(reload)
+												 name:ROUTEDATARESPONSE
+											   object:nil];	
 	
 }
 
@@ -206,6 +223,46 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 }
 
+
+//
+/***********************************************
+ * @description			User events
+ ***********************************************/
+//
+
+
+-(IBAction)retrieveRouteByNumberButtonSelected:(id)sender{
+	
+	[ViewUtilities createTextEntryAlertView:@"Enter Route id" fieldText:nil delegate:self];
+	
+}
+
+
+// Note: use of didDismissWithButtonIndex, as otherwise the HUD gets removed by the screen clear up performed by Alert 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+	
+	if(buttonIndex > 0) {
+        
+		switch(alertView.tag){
+			case kTextEntryAlertTag:
+			{
+				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]) {
+					Query *routequery=[[Query alloc]initRouteID:alertInputField.text];
+					[[RouteManager sharedInstance] runRouteIdQuery:routequery];
+				}
+			}
+                break;
+                
+			default:
+				
+			break;
+                
+		}
+		
+	}
+	
+}
 
 
 #pragma mark -

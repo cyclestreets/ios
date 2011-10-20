@@ -205,7 +205,7 @@ static NSString *USER_ROUTE_NAME = @"userRouteName";
 - (void)encodeWithCoder:(NSCoder *)encoder 
 {
     [encoder encodeObject:self.segments forKey:SEGMENTS];
-    [encoder encodeObject:self.itinerary forKey:ITINERARY];
+    [encoder encodeObject:self.routeid forKey:ITINERARY];
     [encoder encodeObject:self.northEast forKey:NORTH_EAST];
     [encoder encodeObject:self.southWest forKey:SOUTH_WEST];
     [encoder encodeObject:self.name forKey:NAME];
@@ -222,7 +222,7 @@ static NSString *USER_ROUTE_NAME = @"userRouteName";
     self = [super init];
     if (self) {
         self.segments = [decoder decodeObjectForKey:SEGMENTS];
-        self.itinerary = [decoder decodeObjectForKey:ITINERARY];
+        self.routeid = [decoder decodeObjectForKey:ITINERARY];
         self.northEast = [decoder decodeObjectForKey:NORTH_EAST];
         self.southWest = [decoder decodeObjectForKey:SOUTH_WEST];
         self.name = [decoder decodeObjectForKey:NAME];

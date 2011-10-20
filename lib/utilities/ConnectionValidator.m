@@ -54,7 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConnectionValidator);
 
 -(void)isNetworkAvailable{
 	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://icard.chromaagency.com/xml_feed2/"]
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]
 														   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 													   timeoutInterval:30.0 ];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
