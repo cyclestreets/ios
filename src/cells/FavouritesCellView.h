@@ -26,12 +26,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <UIKit/UIKit.h>
 #import "MultiLabelLine.h"
-#import "SuperCellView.h"
+#import "BUTableCellView.h"
 #import "Route.h"
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
 
-@interface FavouritesCell : SuperCellView {
+@interface FavouritesCellView : BUTableCellView {
 	
 	Route				*dataProvider;
 	

@@ -24,11 +24,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Created by Alan Paxton on 17/03/2010.
 //	Revised by Neil Edwards 1/4/11
 
-#import "FavouritesCell.h"
+#import "FavouritesCellView.h"
 #import "AppConstants.h"
 #import "SettingsManager.h"
 
-@implementation FavouritesCell
+@implementation FavouritesCellView
 @synthesize dataProvider;
 @synthesize viewContainer;
 @synthesize nameLabel;
