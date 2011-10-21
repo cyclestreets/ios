@@ -9,6 +9,7 @@
 #import "PhotoMapImageLocationViewController.h"
 #import "AppConstants.h"
 #import "GradientView.h"
+#import "CopyLabel.h"
 
 @interface PhotoMapImageLocationViewController(Private) 
 
@@ -29,10 +30,11 @@
 @synthesize viewContainer;
 @synthesize imageView;
 @synthesize imageLabel;
+@synthesize titleLabel;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [dataProvider release], dataProvider = nil;
@@ -41,12 +43,10 @@
     [viewContainer release], viewContainer = nil;
     [imageView release], imageView = nil;
     [imageLabel release], imageLabel = nil;
+    [titleLabel release], titleLabel = nil;
 	
     [super dealloc];
 }
-
-
-
 
 
 
@@ -122,6 +122,15 @@
 															 action:@selector(backButtonSelected:)]
 							 autorelease];
 	
+	self.titleLabel=[[CopyLabel alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
+	titleLabel.textAlignment=UITextAlignmentCenter;
+	titleLabel.font=[UIFont boldSystemFontOfSize:20];
+	titleLabel.textColor=[UIColor whiteColor];
+	titleLabel.shadowOffset=CGSizeMake(0, -1);
+	titleLabel.shadowColor=[UIColor grayColor];
+	
+	[self.navigationBar.topItem setTitleView:titleLabel];
+	
 	[self.navigationBar.topItem setRightBarButtonItem:back];
 	
 	
@@ -157,7 +166,9 @@
 	
 	self.dataProvider=photoEntry;
 	
-	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
+	//self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
+	
+	titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
 	
 	imageLabel.text=[dataProvider caption];
 	

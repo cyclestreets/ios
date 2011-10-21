@@ -1,6 +1,6 @@
 //
 //  DeviceUtilities.h
-//  RacingUK
+//
 //
 //  Created by neil on 25/02/2010.
 //  Copyright 2010 Chroma. All rights reserved.
@@ -10,14 +10,29 @@
 
 enum {
     MODEL_IPHONE_SIMULATOR,
+    MODEL_IPAD_SIMULATOR,
     MODEL_IPOD_TOUCH,
     MODEL_IPHONE,
-    MODEL_IPHONE_3G
+    MODEL_IPHONE_3G,
+    MODEL_IPAD,
+    MODEL_IPAD_2,
+    MODEL_IPHONE_3GS,
+    MODEL_IPHONE_4,
+	MODEL_IPHONE_4S
+};
+
+enum {
+    DEVICEFAMILY_SIMULATOR,
+    DEVICEFAMILY_IPAD,
+    DEVICEFAMILY_IPOD_TOUCH,
+    DEVICEFAMILY_IPHONE
 };
 
 @interface DeviceUtilities : NSObject
 
 + (uint) detectDevice;
++ (uint) detectDeviceFamily;
 + (NSString *) returnDeviceName:(BOOL)ignoreSimulator;
++ (NSString *) uniqueIdentifier;
 
 @end

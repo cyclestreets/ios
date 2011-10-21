@@ -30,4 +30,7 @@
 +(NSDictionary*)conformDBFormatString:(NSString*)dateString;
 +(NSString*)conformDateString:(NSString*)datestring toFormat:(NSString*)format;
 +(BOOL)validateUnixDate:(NSString*)datestring;
+
++(UIImage*)imageFromString:(NSString*)str;
+
 @end

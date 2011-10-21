@@ -57,6 +57,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "GlobalUtilities.h"
 #import "AppConstants.h"
 #import "SettingsManager.h"
+#import "POIListviewController.h"
 
 @interface MapViewController(Private)
 
@@ -759,13 +760,25 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (IBAction) didSearch {
+	
+	
+	POIListviewController *lv=[[POIListviewController alloc]initWithNibName:[POIListviewController nibName] bundle:nil];
+	
+	
+	/*
 	BetterLog(@"search");
 	if (mapLocationSearchView == nil) {
 		mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
 	}
 	mapLocationSearchView.locationReceiver = self;
 	mapLocationSearchView.centreLocation = [[mapView contents] mapCenter];
-	[self presentModalViewController:mapLocationSearchView	animated:YES];
+	 */
+	UINavigationController *ncontroller=[[UINavigationController alloc]initWithRootViewController:lv];
+	ncontroller.navigationBar.tintColor=[[StyleManager sharedInstance] colorForType:@"navigationbar"];
+	[self presentModalViewController:ncontroller	animated:YES];
+	
+	[ncontroller release];
+	[lv release];
 }
 
 //delete the last point, either start or end.

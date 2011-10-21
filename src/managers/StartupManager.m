@@ -78,13 +78,7 @@
 		[self startupFailed];
 		return;
 	}
-		
-	// load web services
-	[self loadServices];
-	if(error!=nil){
-		[self startupFailed];
-		return;
-	}
+	
 	
 	// load style manager
 	StyleManager *sm=[StyleManager sharedInstance];
@@ -171,30 +165,6 @@
 	
 }
 
-
-
-#pragma mark service loading methods
-
--(void)loadServices{
-	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	BOOL servicesexist = [fileManager fileExistsAtPath:[self bundleServicePath]];
-	
-	if(servicesexist==YES){
-		[DataSourceManager sharedInstance].services=[[NSMutableDictionary alloc] initWithContentsOfFile:[self bundleServicePath]];
-	}else {
-		//BetterLog(@"[FATAL]: Service plist was not found");
-		error=STARTUPERROR_SERVICELOADFAILED;
-	}
-
-	
-}
-
-
-
-- (NSString*) bundleServicePath{
-	return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:kSERVICEFILE];
-}
 
 
 

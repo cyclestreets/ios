@@ -1,6 +1,6 @@
 //
 //  DeviceUtilities.m
-//  RacingUK
+//
 //
 //  Created by neil on 25/02/2010.
 //  Copyright 2010 Chroma. All rights reserved.
@@ -19,10 +19,13 @@
     NSString *iPodTouch = @"iPod Touch";
     NSString *iPodTouchLowerCase = @"iPod touch";
     NSString *iPodTouchShort = @"iPod";
-    
+    NSString *iPad = @"iPad";
     NSString *iPhoneSimulator = @"iPhone Simulator";
+    NSString *iPadSimulator = @"iPad Simulator";
     
     uint detected;
+    struct utsname u;
+    uname(&u);
     
     if ([model compare:iPhoneSimulator] == NSOrderedSame) {
         // iPhone simulator
@@ -36,19 +39,72 @@
     } else if ([model compare:iPodTouchShort] == NSOrderedSame) {
         // iPod Touch
         detected = MODEL_IPOD_TOUCH;
+    }else if ([model compare:iPadSimulator] == NSOrderedSame) {
+        // iPad Simulator
+        detected = MODEL_IPAD_SIMULATOR;
+    }else if ([model compare:iPad] == NSOrderedSame) {
+        // iPad
+        if (!strcmp(u.machine, "iPad1,1")) {
+            detected = MODEL_IPAD;
+        } else {
+            detected = MODEL_IPAD_2;
+        }
+        
     } else {
-        // Could be an iPhone V1 or iPhone 3G (model should be "iPhone")
-        struct utsname u;
-        
-        // u.machine could be "i386" for the simulator, "iPod1,1" on iPod Touch, "iPhone1,1" on iPhone V1 & "iPhone1,2" on iPhone3G
-        
-        uname(&u);
+        // iPhone
         
         if (!strcmp(u.machine, "iPhone1,1")) {
             detected = MODEL_IPHONE;
-        } else {
+        } else if (!strcmp(u.machine, "iPhone1,2")){
             detected = MODEL_IPHONE_3G;
-        }
+        }else if (!strcmp(u.machine, "iPhone2,1")){
+            detected = MODEL_IPHONE_3GS;
+        }else if (!strcmp(u.machine, "iPhone3,1")){ 
+            detected = MODEL_IPHONE_4;
+        }else{ // 3,2
+			detected = MODEL_IPHONE_4S;
+		}
+    }
+    return detected;
+}
+
+
++ (uint) detectDeviceFamily {
+    NSString *model= [[UIDevice currentDevice] model];
+    
+    // Some iPod Touch return "iPod Touch", others just "iPod"
+    
+    NSString *iPodTouch = @"iPod Touch";
+    NSString *iPodTouchLowerCase = @"iPod touch";
+    NSString *iPodTouchShort = @"iPod";
+    NSString *iPad = @"iPad";
+    NSString *iPhoneSimulator = @"iPhone Simulator";
+    NSString *iPadSimulator = @"iPad Simulator";
+    
+    uint detected;
+    struct utsname u;
+    uname(&u);
+    
+    if ([model compare:iPhoneSimulator] == NSOrderedSame) {
+        // iPhone simulator
+        detected = DEVICEFAMILY_SIMULATOR;
+    } else if ([model compare:iPodTouch] == NSOrderedSame) {
+        // iPod Touch
+        detected = DEVICEFAMILY_IPOD_TOUCH;
+    } else if ([model compare:iPodTouchLowerCase] == NSOrderedSame) {
+        // iPod Touch
+        detected = DEVICEFAMILY_IPOD_TOUCH;
+    } else if ([model compare:iPodTouchShort] == NSOrderedSame) {
+        // iPod Touch
+        detected = DEVICEFAMILY_IPOD_TOUCH;
+    }else if ([model compare:iPadSimulator] == NSOrderedSame) {
+        // iPad Simulator
+        detected = DEVICEFAMILY_SIMULATOR;
+    }else if ([model compare:iPad] == NSOrderedSame) {
+        detected = DEVICEFAMILY_IPAD;
+        
+    } else {
+        detected=DEVICEFAMILY_IPHONE;
     }
     return detected;
 }
@@ -74,11 +130,39 @@
         case MODEL_IPHONE_3G:
             returnValue = @"iPhone 3G";
             break;
+        case MODEL_IPHONE_3GS:
+            returnValue = @"iPhone 3GS";
+            break;
+        case MODEL_IPHONE_4:
+            returnValue = @"iPhone 4";
+            break;
+        case MODEL_IPAD:
+            returnValue = @"iPad";
+            break;
+        case MODEL_IPAD_2:
+            returnValue = @"iPad 2";
+            break;
         default:
             break;
     }
     
     return returnValue;
+}
+
+
++ (NSString *) uniqueIdentifier{
+	
+    CFUUIDRef   uuid = CFUUIDCreate(NULL);
+    CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
+    
+	NSString *convertedStr=(NSString *)uuidStr;
+	NSString *str = [NSString stringWithFormat:@"%@",convertedStr];
+	
+	CFRelease(uuidStr);
+    CFRelease(uuid);
+	
+	return str;
+	
 }
 
 @end

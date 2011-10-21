@@ -71,5 +71,21 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>PoiListing</key>
+	<dict>
+		<key>id</key>
+		<string>PoiListing</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/poitypes.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<true/>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

@@ -10,6 +10,7 @@
 #import "RegexKitLite.h"
 #import "NSDate+Helper.h"
 #import "GlobalUtilities.h"
+#import "NSDataAdditions.h"
 
 @implementation StringUtilities
 
@@ -402,6 +403,12 @@ finish:
    
    return validated;
    
+}
+
++(UIImage*)imageFromString:(NSString*)str{
+
+	UIImage* image = [UIImage imageWithData:[NSData  dataWithBase64EncodedString:str]];
+	return image;
 }
 
 @end

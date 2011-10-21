@@ -44,6 +44,23 @@ static NSString *layer = @"6";
 static NSString *useDom = @"1";
 
 @implementation Query
+@synthesize url;
+@synthesize request;
+@synthesize routeID;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [url release], url = nil;
+    [request release], request = nil;
+    [routeID release], routeID = nil;
+	
+    [super dealloc];
+}
+
+
 
 - (NSString *)convertToKilometres:(NSString *)stringMiles {
 	NSInteger miles = [stringMiles integerValue];
@@ -89,11 +106,14 @@ static NSString *useDom = @"1";
 }
 
 - (id) initRouteID:(NSString*)routeid {
+	
 	if (self = [super init]) {
 		
 		//Fill in various of the parameters from the current settings value.
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+		
+		self.routeID=routeid;
 		
 		NSString *newURL = [NSString
 							stringWithFormat:routeidformat,
@@ -134,11 +154,6 @@ static NSString *useDom = @"1";
 	return copy;
 }
 
-- (void) dealloc {
-	[url release];
-	[request release];
-	
-	[super dealloc];
-}
+
 
 @end

@@ -21,9 +21,12 @@
 @interface RouteManager(Private) 
 
 - (void)warnOnFirstRoute;
+
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements;
-- (void) queryFailure:(XMLRequest *)request message:(NSString *)message;
 - (void) queryRouteSuccess:(XMLRequest *)request results:(NSDictionary *)elements;
+
+- (void) queryFailure:(XMLRequest *)request message:(NSString *)message;
+
 
 @end
 
@@ -61,22 +64,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 - (void) runRouteIdQuery:(Query *)query {
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route by id from CycleStreets.net" andMessage:nil];
+	[query runWithTarget:self onSuccess:@selector(queryRouteSuccess:results:) onFailure:@selector(queryRouteFailure:message:)];
 	
-	[query runWithTarget:self onSuccess:@selector(queryRouteSuccess:results:) onFailure:@selector(queryFailure:message:)];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for route %@ on CycleStreets",query.routeID] andMessage:nil];
+	
 	
 }
 
 
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements {
 	
-	
-	
 	//update the table.
 	self.selectedRoute = [[Route alloc] initWithElements:elements];
 	
 	if ([selectedRoute itinerary] == nil) {
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Could not plan valid route for selected endpoints." andMessage:nil];
+		[self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
 	} else {
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, added path to map" andMessage:nil];
@@ -100,7 +102,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	self.selectedRoute = [[Route alloc] initWithElements:elements];
 	
 	if ([selectedRoute itinerary] == nil) {
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Could not plan valid route for selected endpoints." andMessage:nil];
+		[self queryFailure:nil message:@"Unable to find a route with this number."];
 	} else {
 		
 		//save the route data to file.
@@ -117,9 +119,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message {
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Could not fetch route for selected endpoints." andMessage:nil];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:message andMessage:nil];
 }
-
 
 
 //

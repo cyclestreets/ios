@@ -8,6 +8,7 @@
 
 #import "AppConfigManager.h"
 #import "DataSourceManager.h"
+#import "GlobalUtilities.h"
 
 
 @interface AppConfigManager(Private)
@@ -57,6 +58,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
 
 -(void)loadApplicationConfig{
 	
+	BetterLog(@"");
+	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	
 	NSString *appconfigpath=[self appconfigDataPath];
@@ -102,6 +105,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
 #pragma mark service loading methods
 
 -(void)loadServices{
+	
+	BetterLog(@"");
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	BOOL servicesexist = [fileManager fileExistsAtPath:[self serviceDataPath]];

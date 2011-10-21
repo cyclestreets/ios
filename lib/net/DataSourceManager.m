@@ -13,6 +13,7 @@
 #import "GlobalUtilities.h"
 #import "StringUtilities.h"
 #import "AppConstants.h"
+#import "ValidationVO.h"
 
 
 // @ private
@@ -211,6 +212,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 		
 	}else {
 		BetterLog(@"[ERROR] Invalid service/dataid : %@",request.dataid);
+		BetterLog(@"services=%@",services);
 		[self sendErrorNotification:DATAREQUESTFAILED dict:nil];
 		return;
 	}
@@ -505,7 +507,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 	
 		NSMutableData *data = [[NSMutableData alloc] init];
 		NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-		[archiver encodeObject:response.dataProvider forKey:kCACHEARCHIVEKEY];
+		// NE: this will need to be monitored!
+		ValidationVO *dp=(ValidationVO*)response.dataProvider;
+		[archiver encodeObject:[dp.responseDict objectForKey:response.dataid] forKey:kCACHEARCHIVEKEY];
 		[archiver finishEncoding];
 		[data writeToFile:[self cacheFilePathForType:response.dataid andID:response.requestid] atomically:YES];
 		

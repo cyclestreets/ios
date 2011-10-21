@@ -63,4 +63,8 @@
 -(void)showConnectionErrorView:(BOOL)show;
 -(void)showEventRestrictionView:(BOOL)show;
 -(void)deSelectRowForTableView:(UITableView*)table;
+
+
++ (NSString *)nibName;
++ (NSString *)className;
 @end

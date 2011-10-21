@@ -31,7 +31,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @interface Query : NSObject {
 	NSString *url;
 	XMLRequest *request;
+	NSString	*routeID;
 }
+@property (nonatomic, retain)	NSString		*url;
+@property (nonatomic, retain)	XMLRequest		*request;
+@property (nonatomic, retain)	NSString		*routeID;
+
 
 - (id) initFrom:(CLLocation *)from to:(CLLocation *)to;
 - (id) initRouteID:(NSString*)routeid;

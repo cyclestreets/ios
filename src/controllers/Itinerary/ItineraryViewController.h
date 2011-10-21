@@ -11,6 +11,7 @@
 #import "MultiLabelLine.h"
 #import "LayoutBox.h"
 #import "Stage.h"
+#import "CopyLabel.h"
 @class Route;
 
 @interface ItineraryViewController : SuperViewController <UITableViewDelegate,UITableViewDataSource>{
@@ -22,7 +23,7 @@
 	Stage							*stageViewcontroller;
 	
 	
-	IBOutlet	UILabel				*routeidLabel;
+	IBOutlet	CopyLabel				*routeidLabel;
 				MultiLabelLine		*readoutLineOne;
 				MultiLabelLine		*readoutLineTwo;
 	IBOutlet	LayoutBox			*readoutContainer;
@@ -37,7 +38,7 @@
 @property (nonatomic)	NSInteger		routeId;
 @property (nonatomic, retain)	UITextView		*headerText;
 @property (nonatomic, retain)	Stage		*stageViewcontroller;
-@property (nonatomic, retain)	IBOutlet UILabel		*routeidLabel;
+@property (nonatomic, retain)	IBOutlet CopyLabel		*routeidLabel;
 @property (nonatomic, retain)	MultiLabelLine		*readoutLineOne;
 @property (nonatomic, retain)	MultiLabelLine		*readoutLineTwo;
 @property (nonatomic, retain)	IBOutlet LayoutBox		*readoutContainer;

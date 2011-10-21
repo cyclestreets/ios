@@ -14,6 +14,9 @@
 #import "ValidationVO.h"
 #import "NSDate+Helper.h"
 #import "LoginVO.h"
+#import "POICategoryVO.h"
+#import "POILocationVO.h"
+#import "NSString+HTML.h"
 
 @interface ApplicationXMLParser(Private)
 
@@ -32,6 +35,11 @@
 // photos
 -(void)PhotoUploadXMLParser:(TBXML*)parser;
 -(void)RetrievePhotosXMLParser:(TBXML*)parser;
+
+
+// pois
+-(void)POIListingXMLParser:(TBXML*)parser;
+-(void)POICategoryXMLParser:(TBXML*)parser;
 
 
 
@@ -74,6 +82,8 @@
 					   [NSValue valueWithPointer:@selector(RetrievePasswordXMLParser:)],PASSWORDRETRIEVAL,
                        [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVELOCATIONPHOTOS,
                        [NSValue valueWithPointer:@selector(PhotoUploadXMLParser:)],UPLOADUSERPHOTO,
+					   [NSValue valueWithPointer:@selector(POIListingXMLParser:)],POILISTING,
+					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
 					   nil];
 		
 		parsers=[[NSMutableDictionary alloc]init];
@@ -362,6 +372,80 @@
     
     
     
+}
+
+
+#pragma mark POIs
+
+// pois
+-(void)POIListingXMLParser:(TBXML*)parser{
+	
+	BetterLog(@"");
+	
+	TBXMLElement *response = parser.rootXMLElement;
+	
+	[self validateXML:response];
+	if(activeResponse.status==NO){
+		return;
+	}
+    
+    ValidationVO *validation=[[ValidationVO alloc]init];
+	
+	
+	TBXMLElement *poitypes=[TBXML childElementNamed:@"poitypes" parentElement:response];
+	TBXMLElement *poitype=[TBXML childElementNamed:@"poitype" parentElement:poitypes];
+
+	if(poitype!=nil){
+		
+		NSMutableArray *dataProvider=[[NSMutableArray alloc]init];
+		
+		while (poitype!=nil) {
+			
+			POICategoryVO *poicategory=[[POICategoryVO alloc]init];
+			poicategory.name= [[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:poitype]] stringByDecodingHTMLEntities];
+			poicategory.key=[TBXML textForElement:[TBXML childElementNamed:@"key" parentElement:poitype]];
+			poicategory.shortname=[TBXML textForElement:[TBXML childElementNamed:@"shortname" parentElement:poitype]];
+			poicategory.total=[[TBXML textForElement:[TBXML childElementNamed:@"total" parentElement:poitype]] intValue];
+			poicategory.icon=[StringUtilities imageFromString:[TBXML textForElement:[TBXML childElementNamed:@"icon" parentElement:poitype]]];
+			
+			[dataProvider addObject:poicategory];
+			[poicategory release];
+			
+			poitype=poitype->nextSibling;
+			
+		}
+		
+		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
+		[dataProvider release];
+		
+		validation.returnCode=ValidationPOIListingSuccess;
+		
+	}else{
+		validation.returnCode=ValidationPOIListingFailure;
+	}
+	
+	activeResponse.dataProvider=validation;
+	[validation release];
+	
+}
+
+
+
+-(void)POICategoryXMLParser:(TBXML*)parser{
+	
+	BetterLog(@"");
+	
+	TBXMLElement *response = parser.rootXMLElement;
+	
+	[self validateXML:response];
+	if(activeResponse.status==NO){
+		return;
+	}
+    
+   // ValidationVO *validation=[[ValidationVO alloc]init];
+	
+	
+	
 }
 
 

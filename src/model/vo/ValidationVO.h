@@ -17,8 +17,11 @@ enum  {
 	ValidationRetrivedPasswordSuccess=1008,
 	ValidationRetrievePhotosSuccess=1009,
 	ValidationUserPhotoUploadSuccess=1010,
+	ValidationPOIListingSuccess=1011,
+	ValidationPOICategorySuccess=1012,
+	
 	ValidationSuccessMIN=ValidationLoginSuccess,
-	ValidationSuccessMAX=ValidationUserPhotoUploadSuccess,
+	ValidationSuccessMAX=ValidationPOICategorySuccess,
 	
 	// failures
 	ValidationLoginFailed=2000, // 2000
@@ -29,8 +32,10 @@ enum  {
 	ValidationUserPhotoUploadFailed=2010,
 	ValidationRequestParameterInvalid=2013,
 	ValidationRegisterFailed=2014,
+	ValidationPOIListingFailure=2015,
+	ValidationPOICategoryFailure=2016,
 	ValidationFailureMIN=ValidationLoginFailed,
-	ValidationFailureMAX=ValidationRegisterFailed,
+	ValidationFailureMAX=ValidationPOICategoryFailure,
 	
 	// checking
 	ValdationInvalidCode=9997,

@@ -247,7 +247,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 -(IBAction)retrieveRouteByNumberButtonSelected:(id)sender{
 	
-	[ViewUtilities createTextEntryAlertView:@"Enter Route id" fieldText:nil delegate:self];
+	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil delegate:self];
 	
 }
 

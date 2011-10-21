@@ -11,6 +11,7 @@
 #import "AsyncImageView.h"
 #import "LayoutBox.h"
 #import "PhotoMapVO.h"
+#import "CopyLabel.h"
 
 @interface PhotoMapImageLocationViewController : UIViewController <AsyncImageViewDelegate>{
 	
@@ -23,14 +24,17 @@
 	
 	AsyncImageView						*imageView;
 	ExpandedUILabel						*imageLabel;
+	
+	CopyLabel							*titleLabel;
 
 }
-@property (nonatomic, retain)		PhotoMapVO		* dataProvider;
-@property (nonatomic, retain)		IBOutlet UINavigationBar		* navigationBar;
-@property (nonatomic, retain)		IBOutlet UIScrollView		* scrollView;
-@property (nonatomic, retain)		LayoutBox		* viewContainer;
-@property (nonatomic, retain)		AsyncImageView		* imageView;
-@property (nonatomic, retain)		ExpandedUILabel		* imageLabel;
+@property (nonatomic, retain)	PhotoMapVO		*dataProvider;
+@property (nonatomic, retain)	UINavigationBar		*navigationBar;
+@property (nonatomic, retain)	UIScrollView		*scrollView;
+@property (nonatomic, retain)	LayoutBox		*viewContainer;
+@property (nonatomic, retain)	AsyncImageView		*imageView;
+@property (nonatomic, retain)	ExpandedUILabel		*imageLabel;
+@property (nonatomic, retain)	CopyLabel		*titleLabel;
 
 - (void) loadContentForEntry:(PhotoMapVO *)photoEntry;
 

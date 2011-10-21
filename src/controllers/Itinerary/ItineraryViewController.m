@@ -150,6 +150,8 @@
 	readoutContainer.fixedHeight=YES;
 	readoutContainer.backgroundColor=UIColorFromRGB(0xE5E5E5);
 	
+	routeidLabel.multiline=NO;
+	
 	
 	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
 	readoutLineOne.showShadow=YES;

@@ -27,6 +27,8 @@ extern NSString *const LOCATIONSEARCH;
 extern NSString *const RETREIVELOCATIONPHOTOS;
 extern NSString *const UPLOADUSERPHOTO;
 extern NSString *const LOCATIONFEATURES;
+extern NSString *const POILISTING;
+extern NSString *const POICATEGORYLOCATION;
 
 // INTERNAL
 extern NSString *const LOCATIONSEARCHRESPONSE;
@@ -34,7 +36,8 @@ extern NSString *const RETREIVELOCATIONPHOTOSRESPONSE;
 extern NSString *const UPLOADUSERPHOTORESPONSE;
 extern NSString *const LOCATIONFEATURESRESPONSE;
 extern NSString *const NEWROUTEBYIDRESPONSE;
-
+extern NSString *const POILISTINGRESPONSE;
+extern NSString *const POICATEGORYLOCATIONRESPONSE;
 
 
 extern NSString *const MILES;

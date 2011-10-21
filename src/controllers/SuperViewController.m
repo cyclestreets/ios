@@ -448,7 +448,14 @@
 
 
 
++ (NSString *)className{
+    return NSStringFromClass([self class]);
+}
 
+
++ (NSString *)nibName {
+    return [[self className] stringByReplacingOccurrencesOfString:@"Controller" withString:@""];
+}
 
 
 - (void)didReceiveMemoryWarning {
