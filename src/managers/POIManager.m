@@ -119,10 +119,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 // request list of all categories
 -(void)requestPOIListingData{
 	
-	//BOOL isRetina=ISRETINADISPLAY;
-	// CS API does not support 64 px icons for Retina dispaly
+	BOOL isRetina=ISRETINADISPLAY;
 	
-	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key",BOX_INT(32),@"icons", nil];
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key",isRetina==YES ? BOX_INT(64): BOX_INT(32),@"icons", nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];
 	request.dataid=POILISTING;
@@ -181,9 +180,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
 									 [[CycleStreets sharedInstance] APIKey], @"key", 
 									 category.key,@"type",
-									 location.longitude,@"longitude",
-									 location.latitude,@"latitude",
-									 BOX_INT(LOCATIONRADIUS),@"radius",BOX_INT(LOCATIONRESULTSLIMIT),@"limit",nil];
+									 BOX_FLOAT(location.longitude),@"longitude",
+									 BOX_FLOAT(location.latitude),@"latitude",
+									 BOX_INT(5),@"radius",BOX_INT(40),@"limit",nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];
 	request.dataid=POICATEGORYLOCATION;
@@ -212,6 +211,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			self.categoryDataProvider=[validation.responseDict objectForKey:POICATEGORYLOCATION];
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:POICATEGORYLOCATIONRESPONSE object:nil userInfo:nil];
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Retrieved" andMessage:nil];
 			
 		break;
 			

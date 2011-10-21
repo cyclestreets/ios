@@ -14,6 +14,11 @@
 	
 	POILocationVO			*dataProvider;
 	
+	IBOutlet	UILabel				*nameLabel;
+	IBOutlet	UILabel				*urlLabel;
+	
 }
 @property (nonatomic, retain)	POILocationVO		*dataProvider;
+@property (nonatomic, retain)	IBOutlet UILabel		*nameLabel;
+@property (nonatomic, retain)	IBOutlet UILabel		*urlLabel;
 @end

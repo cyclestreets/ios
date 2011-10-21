@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface POILocationVO : NSObject{
+@interface POILocationVO : NSObject<NSCoding>{
 	
 	NSString				*locationid;
 	
-	CLLocationCoordinate2D	location;
+	CLLocation				*location;
 	
 	NSString				*name;
 	NSString				*notes;
@@ -21,7 +21,7 @@
 	
 }
 @property (nonatomic, retain)	NSString		*locationid;
-@property (nonatomic)	CLLocationCoordinate2D		location;
+@property (nonatomic, retain)	CLLocation		*location;
 @property (nonatomic, retain)	NSString		*name;
 @property (nonatomic, retain)	NSString		*notes;
 @property (nonatomic, retain)	NSString		*website;

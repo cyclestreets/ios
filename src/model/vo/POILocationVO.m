@@ -21,6 +21,7 @@
 - (void)dealloc
 {
     [locationid release], locationid = nil;
+    [location release], location = nil;
     [name release], name = nil;
     [notes release], notes = nil;
     [website release], website = nil;
@@ -29,4 +30,37 @@
 }
 
 
+static NSString *LOCATIONID = @"locationid";
+static NSString *LOCATION = @"location";
+static NSString *NAME = @"name";
+static NSString *NOTES = @"notes";
+static NSString *WEBSITE = @"website";
+
+
+
+//=========================================================== 
+//  Keyed Archiving
+//
+//=========================================================== 
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [encoder encodeObject:self.locationid forKey:LOCATIONID];
+    [encoder encodeObject:self.location forKey:LOCATION];
+    [encoder encodeObject:self.name forKey:NAME];
+    [encoder encodeObject:self.notes forKey:NOTES];
+    [encoder encodeObject:self.website forKey:WEBSITE];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    self = [super init];
+    if (self) {
+        self.locationid = [decoder decodeObjectForKey:LOCATIONID];
+        self.location = [decoder decodeObjectForKey:LOCATION];
+        self.name = [decoder decodeObjectForKey:NAME];
+        self.notes = [decoder decodeObjectForKey:NOTES];
+        self.website = [decoder decodeObjectForKey:WEBSITE];
+    }
+    return self;
+}
 @end

@@ -101,6 +101,10 @@
 		281E08C714517BE10034CC63 /* POIListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E08C614517BE10034CC63 /* POIListView.xib */; };
 		281E08EE145198D10034CC63 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08EB145198D10034CC63 /* GTMNSString+HTML.m */; };
 		281E08EF145198D10034CC63 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08ED145198D10034CC63 /* NSString+HTML.m */; };
+		281E09031451C6690034CC63 /* services_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09011451C6690034CC63 /* services_dev.plist */; };
+		281E09041451C6690034CC63 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
+		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
+		281E09081451CA210034CC63 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
@@ -554,11 +558,15 @@
 		281E08BA14516A4F0034CC63 /* POICatLocationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POICatLocationCellView.h; sourceTree = "<group>"; };
 		281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POICatLocationCellView.m; sourceTree = "<group>"; };
 		281E08C3145179AC0034CC63 /* POITypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POITypeCell.xib; sourceTree = "<group>"; };
-		281E08C614517BE10034CC63 /* POIListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POIListView.xib; sourceTree = "<group>"; };
+		281E08C614517BE10034CC63 /* POIListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POIListView.xib; path = poi/POIListView.xib; sourceTree = "<group>"; };
 		281E08EA145198D10034CC63 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		281E08EB145198D10034CC63 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		281E08EC145198D10034CC63 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		281E08ED145198D10034CC63 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		281E09011451C6690034CC63 /* services_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_dev.plist; sourceTree = "<group>"; };
+		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
+		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
+		281E09071451CA210034CC63 /* POICategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POICategoryView.xib; path = poi/POICategoryView.xib; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
 		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
@@ -1296,6 +1304,7 @@
 				280E931B140984F300C7AC75 /* ItineraryCell.xib */,
 				280E931C140984F300C7AC75 /* RouteTableCell.xib */,
 				281E08C3145179AC0034CC63 /* POITypeCell.xib */,
+				281E09051451C6D20034CC63 /* POICatLocationCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -1396,6 +1405,7 @@
 			isa = PBXGroup;
 			children = (
 				281E08C614517BE10034CC63 /* POIListView.xib */,
+				281E09071451CA210034CC63 /* POICategoryView.xib */,
 			);
 			name = poi;
 			sourceTree = "<group>";
@@ -1847,6 +1857,8 @@
 		28AD620C131FB69D008527FC /* plist */ = {
 			isa = PBXGroup;
 			children = (
+				281E09011451C6690034CC63 /* services_dev.plist */,
+				281E09021451C6690034CC63 /* services_live.plist */,
 				28AD620D131FB69D008527FC /* contentStrings.plist */,
 				28AD6210131FB69D008527FC /* styles.plist */,
 				28AD6211131FB69D008527FC /* userState.plist */,
@@ -2472,6 +2484,10 @@
 				28C4ABF31450708900A0ECD3 /* btn_slider_track_pressed@2x.png in Resources */,
 				281E08C4145179AC0034CC63 /* POITypeCell.xib in Resources */,
 				281E08C714517BE10034CC63 /* POIListView.xib in Resources */,
+				281E09031451C6690034CC63 /* services_dev.plist in Resources */,
+				281E09041451C6690034CC63 /* services_live.plist in Resources */,
+				281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */,
+				281E09081451CA210034CC63 /* POICategoryView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

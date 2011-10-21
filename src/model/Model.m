@@ -239,7 +239,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 		
 	}else {
 		
-		
 		[[dataProviders objectForKey:response.dataid] setObject:response.dataProvider forKey:response.requestid];
 		
 		// this will always overwrite same named objects

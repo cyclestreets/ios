@@ -442,7 +442,49 @@
 		return;
 	}
     
-   // ValidationVO *validation=[[ValidationVO alloc]init];
+	ValidationVO *validation=[[ValidationVO alloc]init];
+	
+	
+	TBXMLElement *pois=[TBXML childElementNamed:@"pois" parentElement:response];
+	TBXMLElement *poi=[TBXML childElementNamed:@"poi" parentElement:pois];
+	
+	if(poi!=nil){
+		
+		NSMutableArray *dataProvider=[[NSMutableArray alloc]init];
+		
+		while (poi!=nil) {
+			
+			POILocationVO *poilocation=[[POILocationVO alloc]init];
+			poilocation.name= [[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:poi]] stringByDecodingHTMLEntities];
+			
+			CLLocationCoordinate2D coords;
+			coords.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"longitude" parentElement:poi]] floatValue];
+			coords.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"latitude" parentElement:poi]] floatValue];
+			CLLocation *location=[[CLLocation alloc]initWithLatitude:coords.latitude longitude:coords.longitude];
+			poilocation.location=location;
+			[location release];
+			
+			poilocation.website=[TBXML textForElement:[TBXML childElementNamed:@"website" parentElement:poi]];
+			poilocation.notes=[TBXML textForElement:[TBXML childElementNamed:@"notes" parentElement:poi]];
+						
+			[dataProvider addObject:poilocation];
+			[poilocation release];
+			
+			poi=poi->nextSibling;
+			
+		}
+		
+		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
+		[dataProvider release];
+		
+		validation.returnCode=ValidationPOICategorySuccess;
+		
+	}else{
+		validation.returnCode=ValidationPOICategoryFailure;
+	}
+	
+	activeResponse.dataProvider=validation;
+	[validation release];
 	
 	
 	

@@ -10,6 +10,10 @@
 #import "GlobalUtilities.h"
 #import "POICatLocationCellView.h"
 #import "POILocationVO.h"
+#import "POIManager.h"
+#import "NetResponse.h"
+
+static NSString *const DATAID = @"PoiCategoryLocation";
 
 @implementation POICategoryViewController
 @synthesize tableview;
@@ -43,7 +47,8 @@
 	
 	
 	[self initialise];
-	
+	[notifications addObject:POICATEGORYLOCATIONRESPONSE];
+	[notifications	addObject:REMOTEDATAREQUESTED];
 	
 	[super listNotificationInterests];
 	
@@ -55,6 +60,18 @@
 	
 	[super didReceiveNotification:notification];
 	
+	if([notification.name isEqualToString:POICATEGORYLOCATIONRESPONSE]){
+		[self refreshUIFromDataProvider];
+	}
+	
+	if([notification.name isEqualToString:REMOTEDATAREQUESTED]){
+		NSDictionary	*dict=[notification userInfo];
+		NetResponse		*response=[dict objectForKey:RESPONSE];
+		if([response.dataid isEqualToString:DATAID]){
+			//[navigation createRightNavItemWithType:BUNavActivityType];
+            //[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:YES withMessage:nil];
+		}
+	}
 	
 }
 
@@ -69,7 +86,27 @@
 	
 	BetterLog(@"");
 	
+	self.dataProvider=[POIManager sharedInstance].categoryDataProvider;
 	
+	if([dataProvider count]>0){
+		[self.tableview reloadData];
+	}else{
+		
+		
+	}
+	
+}
+
+-(void)dataProviderRequestRefresh:(NSString *)source{
+	
+	CLLocationCoordinate2D location;
+	location.longitude=0.012345;
+	location.latitude=52.12345;
+	
+	
+	[[POIManager sharedInstance] requestPOICategoryDataForCategory:requestdataProvider atLocation:location];
+	
+	// call overlay
 	
 }
 
@@ -85,10 +122,21 @@
     [super viewDidLoad];
 }
 
--(void)createPersistentUI{
+-(void)createNavigationBarUI{
 	
 	
-	[self createNavigationBarUI];
+	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
+	self.navigation=nav;
+    [nav release];
+	navigation.delegate=self;
+	navigation.leftItemType=BUNavNoneType;
+    navigation.rightItemType=UIKitButtonType;
+	navigation.rightButtonTitle=@"Done";
+	navigation.titleType=BUNavTitleDefaultType;
+	navigation.titleString=requestdataProvider.name;
+    navigation.titleFontColor=[UIColor whiteColor];
+	navigation.navigationItem=self.navigationItem;
+	[navigation createNavigationUI];
 	
 }
 
@@ -101,7 +149,7 @@
 
 -(void)createNonPersistentUI{
 	
-	
+	[self dataProviderRequestRefresh:SYSTEM];
 	
 }
 
