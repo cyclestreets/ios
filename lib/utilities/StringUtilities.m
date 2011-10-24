@@ -411,4 +411,17 @@ finish:
 	return image;
 }
 
++ (NSString *)convertToKilometres:(NSString *)stringMiles {
+	NSInteger miles = [stringMiles integerValue];
+	NSInteger kilometres = 50;//clearly stupid value.
+	if (miles == 10) {
+		kilometres = 16;
+	} else if (miles == 12) {
+		kilometres = 20;
+	} else if (miles == 15) {
+		kilometres = 24;
+	}
+	return [[NSNumber numberWithInteger:kilometres] stringValue];
+}
+
 @end

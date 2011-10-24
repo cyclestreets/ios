@@ -19,9 +19,11 @@ enum  {
 	ValidationUserPhotoUploadSuccess=1010,
 	ValidationPOIListingSuccess=1011,
 	ValidationPOICategorySuccess=1012,
+    ValidationCalculateRouteSuccess=1013,
+    ValidationRetrieveRouteByIdSuccess=1014,
 	
 	ValidationSuccessMIN=ValidationLoginSuccess,
-	ValidationSuccessMAX=ValidationPOICategorySuccess,
+	ValidationSuccessMAX=ValidationRetrieveRouteByIdSuccess,
 	
 	// failures
 	ValidationLoginFailed=2000, // 2000
@@ -34,8 +36,10 @@ enum  {
 	ValidationRegisterFailed=2014,
 	ValidationPOIListingFailure=2015,
 	ValidationPOICategoryFailure=2016,
+    ValidationCalculateRouteFailed=2017,
+    ValidationRetrieveRouteByIdFailed=2018,
 	ValidationFailureMIN=ValidationLoginFailed,
-	ValidationFailureMAX=ValidationPOICategoryFailure,
+	ValidationFailureMAX=ValidationCalculateRouteFailed,
 	
 	// checking
 	ValdationInvalidCode=9997,

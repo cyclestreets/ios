@@ -17,6 +17,7 @@
 #import "RouteParser.h"
 #import "HudManager.h"
 #import "FavouritesManager.h"
+#import "ValidationVO.h"
 
 @interface RouteManager(Private) 
 
@@ -27,8 +28,14 @@
 
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message;
 
+(void)loadRouteForEndPointsResponse:(ValidationVO*)validation;
+-(void)loadRouteForRouteIdResponse:(ValidationVO*)validation;
+
 
 @end
+
+static NSString *layer = @"6";
+static NSString *useDom = @"1";
 
 
 @implementation RouteManager
@@ -50,11 +57,176 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
-//
+/
 /***********************************************
- * @description			NETWORK EVENTS
+ * @description		NOTIFICATIONS
  ***********************************************/
 //
+
+-(void)listNotificationInterests{
+	
+	
+	[super listNotificationInterests];
+	
+}
+
+-(void)didReceiveNotification:(NSNotification*)notification{
+	
+	[super didReceiveNotification:notification];
+	
+	
+}
+
+
+
+
+//
+/***********************************************
+ * @description			NEW NETWORL METHODS
+ ***********************************************/
+//
+
+-(void)loadRouteForEndPoints:(CLLocation)from to:(CLLocation)to{
+    
+    
+    CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+    SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+    
+    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+                                     [NSNumber numberWithFloat:from.longitude],@"start_longitude",
+                                     [NSNumber numberWithFloat:from.latitude],@"start_latitude",
+                                     [NSNumber numberWithFloat:to.latitude],@"finish_longitude",
+                                     [NSNumber numberWithFloat:to.longitude],@"finish_latitude",
+                                     layer,@"layer",
+                                     @"1",@"useDom",
+                                     settingsdp.plan,,@"plan",
+                                     [settingsdp returnKilometerSpeedValue],@"speed",
+                                     cycleStreets.files.clientid,@"clientid", 
+                                     nil];
+    
+    NetRequest *request=[[NetRequest alloc]init];
+    request.dataid=CALCULATEROUTE;
+    request.requestid=ZERO;
+    request.parameters=parameters;
+    request.revisonId=0;
+    request.source=USER;
+    
+    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+    [dict release];
+    [request release];
+    
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
+    
+}
+
+
+
+-(void)loadRouteForEndPointsResponse:(ValidationVO*)validation{
+    
+    
+    switch(validation.validationStatus){
+        
+        case ValidationCalculateRouteSuccess:
+            
+            self.selectedRoute = [validation.responseDict objectForKey:CALCULATEROUTE];
+            
+            CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+            [cycleStreets.files setRoute:[[selectedRoute itinerary] intValue] data:request.data];
+                
+            [self warnOnFirstRoute];
+            [self selectRoute:selectedRoute];	
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:CALCULATEROUTERESPONSE object:nil];
+            
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, added path to map" andMessage:nil];
+        
+        break;
+            
+            
+        case ValidationCalculateRouteFailed:
+            
+            [self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
+            
+        break;
+        
+        
+    }
+    
+
+    
+}
+
+
+-(void)loadRouteForRouteId:(NSString*)routeid{
+    
+    
+    CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+    SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+    
+    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+                                     @"1",@"useDom",
+                                     settingsdp.plan,,@"plan",
+                                     routeid,@"itinerary",
+                                     nil];
+    
+    NetRequest *request=[[NetRequest alloc]init];
+    request.dataid=RETRIEVEROUTEBYID;
+    request.requestid=ZERO;
+    request.parameters=parameters;
+    request.revisonId=0;
+    request.source=USER;
+    
+    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+    [dict release];
+    [request release];
+
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for route %@ on CycleStreets",query.routeID] andMessage:nil];
+}
+
+
+-(void)loadRouteForRouteIdResponse:(ValidationVO*)validation{
+    
+    
+    switch(validation.validationStatus){
+            
+        case ValidationRetrieveRouteByIdSuccess:
+            
+            self.selectedRoute=[validation.responseDict objectForKey:RETRIEVEROUTEBYID];
+            
+            CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+            [cycleStreets.files setRoute:[[selectedRoute itinerary] intValue] data:request.data];
+            
+            [self selectRoute:selectedRoute];	
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
+            
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, this route is now selected." andMessage:nil];
+            
+            break;
+            
+            
+        case ValidationRetrieveRouteByIdFailed:
+            
+            [self queryFailure:nil message:@"Unable to find a route with this number."];
+            
+        break;
+            
+            
+    }
+    
+    
+}
+
+
+//
+/***********************************************
+ * @description			OLD NETWORK EVENTS
+ ***********************************************/
+//
+// this functionality can be entirely repalced by standard request/response logic as it is aonly called from
+// one place
 - (void) runQuery:(Query *)query {
 	[query runWithTarget:self onSuccess:@selector(querySuccess:results:) onFailure:@selector(queryFailure:message:)];
 	
@@ -66,7 +238,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	[query runWithTarget:self onSuccess:@selector(queryRouteSuccess:results:) onFailure:@selector(queryRouteFailure:message:)];
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for route %@ on CycleStreets",query.routeID] andMessage:nil];
+	
 	
 	
 }
@@ -215,6 +387,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	
 }
+
+
 
 
 

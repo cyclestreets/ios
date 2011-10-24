@@ -32,5 +32,6 @@
 +(BOOL)validateUnixDate:(NSString*)datestring;
 
 +(UIImage*)imageFromString:(NSString*)str;
++(NSString *)convertToKilometres:(NSString *)stringMiles;
 
 @end

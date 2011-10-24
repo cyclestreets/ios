@@ -23,6 +23,8 @@ extern NSString *const REGISTERRESPONSE;
 extern NSString *const PASSWORDRETRIEVALRESPONSE;
 
 // OUTGOING
+extern NSString *const CALCULATEROUTE;
+extern NSString *const RETRIEVEROUTEBYID;
 extern NSString *const LOCATIONSEARCH;
 extern NSString *const RETREIVELOCATIONPHOTOS;
 extern NSString *const UPLOADUSERPHOTO;
@@ -31,6 +33,8 @@ extern NSString *const POILISTING;
 extern NSString *const POICATEGORYLOCATION;
 
 // INTERNAL
+extern NSString *const CALCULATEROUTERESPONSE;
+extern NSString *const RETRIEVEROUTEBYIDRESPONSE;
 extern NSString *const LOCATIONSEARCHRESPONSE;
 extern NSString *const RETREIVELOCATIONPHOTOSRESPONSE;
 extern NSString *const UPLOADUSERPHOTORESPONSE;
