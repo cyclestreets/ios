@@ -25,14 +25,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-#import "Route.h"
+#import "RouteVO.h"
 #import "LayoutBox.h"
 #import "SuperViewController.h"
 #import "ExpandedUILabel.h"
 
 @interface RouteSummary : SuperViewController {
 	
-	Route								*route;
+	RouteVO								*route;
 	
 	LayoutBox							*viewContainer;
 	
@@ -53,7 +53,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
-@property (nonatomic, retain)	Route		*route;
+@property (nonatomic, retain)	RouteVO		*route;
 @property (nonatomic, retain)	LayoutBox		*viewContainer;
 @property (nonatomic, retain)	IBOutlet LayoutBox		*headerContainer;
 @property (nonatomic, retain)	IBOutlet ExpandedUILabel		*routeNameLabel;

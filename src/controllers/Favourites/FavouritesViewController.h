@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-@class Route;
+@class RouteVO;
 @class RouteSummary;
 
 @interface FavouritesViewController : UITableViewController {
@@ -43,7 +43,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain)	RouteSummary	*routeSummary;
 @property (nonatomic, retain)	NSMutableArray	*rowHeightsArray;
 
-- (Route *) routeWithIdentifier:(NSInteger)identifier;
+- (RouteVO *) routeWithIdentifier:(NSInteger)identifier;
 
 - (void) clear;
 

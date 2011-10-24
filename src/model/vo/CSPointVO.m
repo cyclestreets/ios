@@ -44,4 +44,34 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return [NSString stringWithFormat:@"(x=%f,y=%f)", p.x, p.y];
 }
 
+-(CLLocationCoordinate2D)coordinate{
+	CLLocationCoordinate2D location;
+	location.longitude=p.x;
+	location.latitude=p.y;
+	return location;
+}
+
+
+static NSString *P = @"p";
+
+
+
+//=========================================================== 
+//  Keyed Archiving
+//
+//=========================================================== 
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [encoder encodeCGPoint:self.p forKey:P];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    self = [super init];
+    if (self) {
+        self.p = [decoder decodeCGPointForKey:P];
+    }
+    return self;
+}
+
 @end

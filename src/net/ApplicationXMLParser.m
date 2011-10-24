@@ -17,6 +17,10 @@
 #import "POICategoryVO.h"
 #import "POILocationVO.h"
 #import "NSString+HTML.h"
+//
+#import "RouteVO.h"
+#import "SegmentVO.h"
+#import "CSPointVO.h"
 
 @interface ApplicationXMLParser(Private)
 
@@ -30,6 +34,8 @@
 
 
 // routes
+-(void)CalculateRouteXMLParser:(TBXML*)parser;
+-(void)RetrieveRouteByIdXMLParser:(TBXML*)parser;
 
 
 // photos
@@ -84,6 +90,8 @@
                        [NSValue valueWithPointer:@selector(PhotoUploadXMLParser:)],UPLOADUSERPHOTO,
 					   [NSValue valueWithPointer:@selector(POIListingXMLParser:)],POILISTING,
 					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
+					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
+					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
 					   nil];
 		
 		parsers=[[NSMutableDictionary alloc]init];
@@ -330,6 +338,134 @@
 	
 	
 }
+
+
+
+#pragma mark Routes
+//
+/***********************************************
+ * @description			ROUTING
+ ***********************************************/
+//
+
+// used by RETRIEVEROUTEBYID also
+-(void)CalculateRouteXMLParser:(TBXML*)parser{
+	
+	TBXMLElement *response = parser.rootXMLElement;
+	
+	[self validateXML:response];
+	if(activeResponse.status==NO){
+		return;
+	}
+	
+	 ValidationVO *validation=[[ValidationVO alloc]init];
+	
+	TBXMLElement *root=[TBXML childElementNamed:@"gml:featureMember" parentElement:response];
+	TBXMLElement *routenode=[TBXML childElementNamed:@"cs:route" parentElement:root];
+	
+	if(routenode!=nil){
+		
+		RouteVO *route=[[RouteVO alloc]init];
+		
+		route.routeid=[TBXML textForElement:[TBXML childElementNamed:@"cs:itinerary" parentElement:routenode]];
+		route.length=[NSNumber numberWithInt:[[TBXML textForElement:[TBXML childElementNamed:@"cs:length" parentElement:routenode]]intValue]];
+		route.plan=[TBXML textForElement:[TBXML childElementNamed:@"cs:plan" parentElement:routenode]];
+		route.name=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:routenode]];
+		route.date=[TBXML textForElement:[TBXML childElementNamed:@"cs:whence" parentElement:routenode]];
+		route.speed=[[TBXML textForElement:[TBXML childElementNamed:@"cs:speed" parentElement:routenode]]intValue];
+		route.time=[[TBXML textForElement:[TBXML childElementNamed:@"cs:time" parentElement:routenode]]intValue];
+		
+		CLLocationCoordinate2D nelocation;
+		nelocation.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:north" parentElement:routenode]] floatValue];
+		nelocation.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:west" parentElement:routenode]] floatValue];
+		CLLocation *ne=[[CLLocation alloc] initWithLatitude:nelocation.latitude longitude:nelocation.longitude];
+		route.northEast=ne;
+		[ne release];
+		
+		CLLocationCoordinate2D swlocation;
+		swlocation.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:south" parentElement:routenode]] floatValue];
+		swlocation.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:east" parentElement:routenode]] floatValue];
+		CLLocation *sw=[[CLLocation alloc] initWithLatitude:swlocation.latitude longitude:swlocation.longitude];
+		route.southWest=sw;
+		[sw release];
+		
+
+		
+		NSMutableArray	*segments=[[NSMutableArray alloc]init];
+		root=root->nextSibling;
+		
+		NSInteger time = 0;
+		NSInteger distance = 0;
+		
+		while (root!=nil) {
+			
+			TBXMLElement *segmentnode=[TBXML childElementNamed:@"cs:segment" parentElement:root];
+			
+			SegmentVO *segment=[[SegmentVO alloc]init];
+			segment.roadName=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:segmentnode]];
+			segment.segmentTime=[[TBXML textForElement:[TBXML childElementNamed:@"cs:time" parentElement:segmentnode]]intValue];
+			segment.segmentDistance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:distance" parentElement:segmentnode]]intValue];
+			segment.startBearing=[[TBXML textForElement:[TBXML childElementNamed:@"cs:startBearing" parentElement:segmentnode]]intValue];
+			segment.segmentBusynance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:busynance" parentElement:segmentnode]]intValue];
+			segment.provisionName=[TBXML textForElement:[TBXML childElementNamed:@"cs:provisionName" parentElement:segmentnode]];
+			segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
+			segment.startTime=time;
+			segment.startDistance=distance;
+				
+			// groups pints into lat/long array
+			NSString *points=[TBXML textForElement:[TBXML childElementNamed:@"cs:points" parentElement:segmentnode]];
+			
+			NSCharacterSet *whiteComma = [NSCharacterSet characterSetWithCharactersInString:@", "];
+			NSArray *XYs = [points componentsSeparatedByCharactersInSet:whiteComma];
+			NSMutableArray *result = [[NSMutableArray alloc] init];
+			for (int X = 0; X < [XYs count]; X += 2) {
+				CSPointVO *p = [[CSPointVO alloc] init];
+				CGPoint point;
+				point.x = [[XYs objectAtIndex:X] doubleValue];
+				point.y = [[XYs objectAtIndex:X+1] doubleValue];
+				p.p = point;
+				[result addObject:p];
+				[p release];
+			}
+			segment.pointsArray=result;
+			[result release];
+			 
+			time += [segment segmentTime];
+			distance += [segment segmentDistance];
+			
+			[segments addObject:segment];
+			[segment release];
+			
+			
+
+			root=root->nextSibling;
+			
+		}
+		
+		route.segments=segments;
+		
+		
+		validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
+		[route release];
+		
+		validation.returnCode=ValidationCalculateRouteSuccess;
+		
+	}else{
+		validation.returnCode=ValidationCalculateRouteFailed;
+	}
+	
+	
+	activeResponse.dataProvider=validation;
+	[validation release];
+	
+	
+}
+
+
+
+
+
+
 
 
 #pragma mark Photos

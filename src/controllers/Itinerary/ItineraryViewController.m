@@ -7,7 +7,7 @@
 //
 
 #import "ItineraryViewController.h"
-#import "Route.h"
+#import "RouteVO.h"
 #import "ItineraryCellView.h"
 #import "SegmentVO.h"
 #import "CycleStreets.h"
@@ -57,21 +57,21 @@
 
 #pragma mark setters
 
-- (void)setRoute:(Route *)newRoute {
+- (void)setRoute:(RouteVO *)newRoute {
 	
 	BetterLog(@"");
 	
-	Route *oldRoute = route;
+	RouteVO *oldRoute = route;
 	route = newRoute;
 	[newRoute retain];
 	[oldRoute release];
-	self.routeId = [[newRoute itinerary] integerValue];
+	self.routeId = [[newRoute routeid] integerValue];
 	
 	[self createRowHeightsArray];
 	[tableView reloadData];
 }
 
-- (Route *)route {
+- (RouteVO *)route {
 	return route;
 }
 
@@ -203,7 +203,7 @@
 		
 		[self showNoActiveRouteView:NO];
 		
-		routeidLabel.text=[route itinerary];
+		routeidLabel.text=[route routeid];
 		
 		readoutLineOne.labels=[NSArray arrayWithObjects:@"Length:",route.lengthString,
 							   @"Estimated time:",route.timeString,nil];
@@ -360,6 +360,7 @@
 -(IBAction)swapToMapView{
 	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
 }
+
 -(IBAction)swapToSavedRoutesView{
 	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Saved routes"];
 }

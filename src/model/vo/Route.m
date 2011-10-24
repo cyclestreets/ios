@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "Route.h"
-#import "SegmentVO.h"
+#import "Segment.h"
 #import "SettingsManager.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
@@ -70,7 +70,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 		NSInteger time = 0;
 		NSInteger distance = 0;
 		for (NSDictionary *segmentDictionary in [elements objectForKey:SEGMENT_ELEMENT]) {
-			SegmentVO *segment = [[SegmentVO alloc] initWithDictionary:segmentDictionary atTime:time atDistance:distance];
+			Segment *segment = [[Segment alloc] initWithDictionary:segmentDictionary atTime:time atDistance:distance];
 			[segments addObject:segment];
 			time += [segment segmentTime];
 			distance += [segment segmentDistance];
@@ -94,7 +94,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 	return [segments count];
 }
 
-- (SegmentVO *) segmentAtIndex:(int)index {
+- (Segment *) segmentAtIndex:(int)index {
 	return [segments objectAtIndex:index];
 }
 

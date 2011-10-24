@@ -200,21 +200,33 @@ static NSString *clientidFileConst = @"clientid";
 }
 
 // retrieve the XML of a route
-- (NSData *) route:(NSInteger) routeIdentifier {
+- (RouteVO *) route:(NSInteger) routeIdentifier {
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", routeIdentifier]];
-	NSData *data = [[NSData alloc] initWithContentsOfFile:routeFile];
-	if (nil == data) {
-		// is empty data the right thing to return ?
-		
-	}
-	[data autorelease];
-	return data;
+	
+	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
+	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
+	[unarchiver finishDecoding];
+	[unarchiver release];
+	[data release];
+	
+	return route;
 }
 
 // save the data of a route - route may be a new route
-- (void)setRoute:(NSInteger) routeIdentifier data:(NSData *)data {
+- (void)setRoute:(NSInteger) routeIdentifier data:(RouteVO *)route {
+	
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", routeIdentifier]];
+	
+	NSMutableData *data = [[NSMutableData alloc] init];
+	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+	[archiver encodeObject:route forKey:kROUTEARCHIVEKEY];
+	[archiver finishEncoding];
 	[data writeToFile:routeFile atomically:YES];
+	
+	[data release];
+	[archiver release];
+	
 }
 
 // remove the route file.

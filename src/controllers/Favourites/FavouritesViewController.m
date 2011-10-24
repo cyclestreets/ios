@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreetsAppDelegate.h"
 #import "Files.h"
 #import "RouteParser.h"
-#import "Route.h"
+#import "RouteVO.h"
 #import "FavouritesCellView.h"
 #import "RouteSummary.h"
 #import "FavouritesManager.h"
@@ -88,14 +88,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // TODO: note due to this method of loading the routes always from disk we cant persist the routename change
 // short term We need to make Routes xml writable, this restriction will be removed when we move these VOs to NScoding
-- (Route *) routeWithIdentifier:(NSInteger)identifier {
-	Route *route = [routes objectForKey:[NSNumber numberWithInt:identifier]];
+- (RouteVO *) routeWithIdentifier:(NSInteger)identifier {
+	RouteVO *route = [routes objectForKey:[NSNumber numberWithInt:identifier]];
 	if (!route) {
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];	
-		NSData *data = [cycleStreets.files route:identifier];
-		if(data!=nil){
-			RouteParser *parsed = [RouteParser parse:data forElements:[Route routeXMLElementNames]];
-			route = [[[Route alloc] initWithElements:parsed.elementLists] autorelease];
+		RouteVO *route = [cycleStreets.files route:identifier];
+		if(route!=nil){
 			[routes setObject:route forKey:[NSNumber numberWithInt:identifier]];
 		}
 	}
@@ -160,13 +158,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	FavouritesCellView *cell = (FavouritesCellView *)[FavouritesCellView cellForTableView:tableView fromNib:[FavouritesCellView nib]];	
     
     NSInteger routeIdentifier = [[favourites objectAtIndex:indexPath.row] intValue];
-	Route *route = [self routeWithIdentifier:routeIdentifier];
+	RouteVO *route = [self routeWithIdentifier:routeIdentifier];
 	cell.dataProvider=route;
 	
 	
 	// This is useful but, SR is always sorted to top of Favs so no real use?
-	Route *sroute=[RouteManager sharedInstance].selectedRoute;
-	cell.isSelectedRoute=[sroute.itinerary isEqualToString:route.itinerary];
+	RouteVO *sroute=[RouteManager sharedInstance].selectedRoute;
+	cell.isSelectedRoute=[sroute.routeid isEqualToString:route.routeid];
 	
 	[cell populate];
     
@@ -180,7 +178,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSInteger routeIdentifier = [[favourites objectAtIndex:indexPath.row] intValue];
-	Route *route = [self routeWithIdentifier:routeIdentifier];
+	RouteVO *route = [self routeWithIdentifier:routeIdentifier];
 	if (self.routeSummary == nil) {
 		self.routeSummary = [[RouteSummary alloc]init];
 	}
@@ -227,7 +225,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	for (int i=0; i<[favourites count]; i++) {
 		
 		NSInteger routeIdentifier = [[favourites objectAtIndex:i] intValue];
-		Route *route = [self routeWithIdentifier:routeIdentifier];
+		RouteVO *route = [self routeWithIdentifier:routeIdentifier];
 		
 		[rowHeightsArray addObject:[FavouritesCellView heightForCellWithDataProvider:route]];
 		

@@ -152,8 +152,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return [MapViewController pointList:route withView:mapView];
 }
 
-- (void)setRoute:(Route *)newRoute {
-	Route *oldRoute = route;
+- (void)setRoute:(RouteVO *)newRoute {
+	RouteVO *oldRoute = route;
 	route = newRoute;
 	[newRoute retain];
 	[oldRoute release];

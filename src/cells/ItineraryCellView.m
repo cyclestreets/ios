@@ -9,6 +9,7 @@
 #import "ItineraryCellView.h"
 #import "AppConstants.h"
 #import "ViewUtilities.h"
+#import "SegmentVO.h"
 
 @implementation ItineraryCellView
 @synthesize dataProvider;

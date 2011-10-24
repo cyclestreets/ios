@@ -33,7 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreets.h"
 #import "CycleStreetsAppDelegate.h"
 #import "Route.h"
-#import "SegmentVO.h"
+#import "Segment.h"
 #import <CoreLocation/CoreLocation.h>
 #import "RMCloudMadeMapSource.h"
 #import "RMOpenStreetMapSource.h"
@@ -75,6 +75,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)saveLocation:(CLLocationCoordinate2D)location;
 - (void)zoomUpdate;
 -(void)loadLocation;
+
+- (void) clearRoute;
+- (void) newRoute;
 
 @end
 
@@ -812,13 +815,20 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			
 		}
 		
+		
+		
+		
 		CLLocationCoordinate2D fromLatLon = [markerManager latitudeLongitudeForMarker:start];
 		CLLocation *from = [[[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude] autorelease];
 		CLLocationCoordinate2D toLatLon = [markerManager latitudeLongitudeForMarker:end];
 		CLLocation *to = [[[CLLocation alloc] initWithLatitude:toLatLon.latitude longitude:toLatLon.longitude] autorelease];
-		Query *query = [[[Query alloc] initFrom:from to:to] autorelease];
 		
-		[[RouteManager sharedInstance] runQuery:query];
+		[[RouteManager sharedInstance] loadRouteForEndPoints:from to:to];
+		
+		
+		//Query *query = [[[Query alloc] initFrom:from to:to] autorelease];
+		
+		//[[RouteManager sharedInstance] runQuery:query];
 		
 	} else if (self.planningState == stateRoute) {
 		[self.clearAlert show];
@@ -916,6 +926,29 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
+
+#pragma mark Route Loading
+//
+/***********************************************
+ * @description			Route loading
+ ***********************************************/
+//	
+
+-(void)updateSelectedRoute{
+	[self showRoute:[RouteManager sharedInstance].selectedRoute];
+}
+
+- (void) showRoute:(RouteVO *)newRoute {
+	
+	self.route = newRoute;
+	
+	if (route == nil || [route numSegments] == 0) {
+		[self clearRoute];
+	} else {
+		[self newRoute];
+	}
+}
+
 - (void) clearRoute {
 	route = nil;
 	[self clearMarkers];
@@ -944,27 +977,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self gotoState:stateRoute];
 }
 
-// A new route has successfully been calculated.
-// Plot it, and replace the current stuff.
 
--(void)updateSelectedRoute{
-	[self showRoute:[RouteManager sharedInstance].selectedRoute];
-}
-
-- (void) showRoute:(Route *)newRoute {
-	[newRoute retain];
-	[route release];
-	route = newRoute;
-	
-	if (route == nil || [route numSegments] == 0) {
-		[self clearRoute];
-	} else {
-		[self newRoute];
-	}
-}
 
 // List of points in display co-ordinates for the route highlighting.
-+ (NSArray *) pointList:(Route *)route withView:(RMMapView *)mapView {
++ (NSArray *) pointList:(RouteVO *)route withView:(RMMapView *)mapView {
 	
 	NSMutableArray *points = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
 	if (route == nil) {

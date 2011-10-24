@@ -9,26 +9,27 @@
 #import <Foundation/Foundation.h>
 #import "FrameworkObject.h"
 #import "SynthesizeSingleton.h"
-#import "Route.h"
+#import "RouteVO.h"
 #import "Query.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface RouteManager : FrameworkObject 	{
 	
 	NSMutableDictionary					*routes;
 	
-	Route								*selectedRoute;
+	RouteVO								*selectedRoute;
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 @property (nonatomic, retain)	NSMutableDictionary	*routes;
-@property (nonatomic, retain)	Route	*selectedRoute;
+@property (nonatomic, retain)	RouteVO	*selectedRoute;
 
 - (void) runQuery:(Query *)query;
 - (void) runRouteIdQuery:(Query *)query;
-- (void) selectRoute:(Route *)route;
+- (void) selectRoute:(RouteVO *)route;
 
 //new
--(void)loadRouteForEndPoints:(CLLocation)from to:(CLLocation)to;
+-(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation;
 -(void)loadRouteForRouteId:(NSString*)routeid;
 
 -(void)loadRouteWithIdentifier:(NSString*)routeid;

@@ -64,7 +64,7 @@
 		280E91C814097D8600C7AC75 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C514097D8600C7AC75 /* UserSettingsManager.m */; };
 		280E91CC14097DD300C7AC75 /* MapLocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CB14097DD300C7AC75 /* MapLocationSearchViewController.m */; };
 		280E91D214097DE000C7AC75 /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CF14097DE000C7AC75 /* ItineraryViewController.m */; };
-		280E92FE14097FDB00C7AC75 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E92FD14097FDB00C7AC75 /* SegmentVO.m */; };
+		280E92FE14097FDB00C7AC75 /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E92FD14097FDB00C7AC75 /* Segment.m */; };
 		280E93011409805800C7AC75 /* Stage.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* Stage.m */; };
 		280E9333140984F300C7AC75 /* FavouritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931A140984F300C7AC75 /* FavouritesCell.xib */; };
 		280E9334140984F300C7AC75 /* ItineraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931B140984F300C7AC75 /* ItineraryCell.xib */; };
@@ -344,6 +344,7 @@
 		28D2BB091354854900694093 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BB081354854900694093 /* UIImage+Operations.m */; };
 		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
+		28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3CB1455638D0063AA96 /* SegmentVO.m */; };
 		28F66F0D135F636200DECFAC /* PhotoMapImageLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E7757BB91259C79300730726 /* APIKey.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7757BB81259C79300730726 /* APIKey.txt */; };
@@ -506,8 +507,8 @@
 		280E91CB14097DD300C7AC75 /* MapLocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLocationSearchViewController.m; sourceTree = "<group>"; };
 		280E91CE14097DE000C7AC75 /* ItineraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryViewController.h; sourceTree = "<group>"; };
 		280E91CF14097DE000C7AC75 /* ItineraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryViewController.m; sourceTree = "<group>"; };
-		280E92FC14097FDB00C7AC75 /* SegmentVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentVO.h; sourceTree = "<group>"; };
-		280E92FD14097FDB00C7AC75 /* SegmentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentVO.m; sourceTree = "<group>"; };
+		280E92FC14097FDB00C7AC75 /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
+		280E92FD14097FDB00C7AC75 /* Segment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
 		280E92FF1409805800C7AC75 /* Stage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stage.h; sourceTree = "<group>"; };
 		280E93001409805800C7AC75 /* Stage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stage.m; sourceTree = "<group>"; };
 		280E931A140984F300C7AC75 /* FavouritesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesCell.xib; sourceTree = "<group>"; };
@@ -913,6 +914,8 @@
 		28D2BC5A1354C48B00694093 /* BUDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDividerView.h; sourceTree = "<group>"; };
 		28D2BC5B1354C48B00694093 /* BUDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDividerView.m; sourceTree = "<group>"; };
 		28D7E1F712BAA8710025C4A2 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		28E8A3CA1455638D0063AA96 /* SegmentVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentVO.h; sourceTree = "<group>"; };
+		28E8A3CB1455638D0063AA96 /* SegmentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentVO.m; sourceTree = "<group>"; };
 		28F66F0B135F636200DECFAC /* PhotoMapImageLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoMapImageLocationViewController.h; path = PhotoMap/PhotoMapImageLocationViewController.h; sourceTree = "<group>"; };
 		28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoMapImageLocationViewController.m; path = PhotoMap/PhotoMapImageLocationViewController.m; sourceTree = "<group>"; usesTabs = 1; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -1798,8 +1801,10 @@
 				280E9357140985CD00C7AC75 /* Route.m */,
 				28443E611332867D00FAD008 /* RouteVO.h */,
 				28443E621332867D00FAD008 /* RouteVO.m */,
-				280E92FC14097FDB00C7AC75 /* SegmentVO.h */,
-				280E92FD14097FDB00C7AC75 /* SegmentVO.m */,
+				280E92FC14097FDB00C7AC75 /* Segment.h */,
+				280E92FD14097FDB00C7AC75 /* Segment.m */,
+				28E8A3CA1455638D0063AA96 /* SegmentVO.h */,
+				28E8A3CB1455638D0063AA96 /* SegmentVO.m */,
 				28AD6200131FB69D008527FC /* UserVO.h */,
 				28AD6201131FB69D008527FC /* UserVO.m */,
 				28AD6202131FB69D008527FC /* ValidationVO.h */,
@@ -2593,7 +2598,7 @@
 				280E91C814097D8600C7AC75 /* UserSettingsManager.m in Sources */,
 				280E91CC14097DD300C7AC75 /* MapLocationSearchViewController.m in Sources */,
 				280E91D214097DE000C7AC75 /* ItineraryViewController.m in Sources */,
-				280E92FE14097FDB00C7AC75 /* SegmentVO.m in Sources */,
+				280E92FE14097FDB00C7AC75 /* Segment.m in Sources */,
 				280E93011409805800C7AC75 /* Stage.m in Sources */,
 				280E93461409856E00C7AC75 /* NetworkRequest.m in Sources */,
 				280E93471409856E00C7AC75 /* RouteParser.m in Sources */,
@@ -2673,6 +2678,7 @@
 				281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */,
 				281E08EE145198D10034CC63 /* GTMNSString+HTML.m in Sources */,
 				281E08EF145198D10034CC63 /* NSString+HTML.m in Sources */,
+				28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

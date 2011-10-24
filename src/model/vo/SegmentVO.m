@@ -1,113 +1,95 @@
-/*
-
-Copyright (C) 2010  CycleStreets Ltd
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-*/
-
-//  Segment.m
+//
+//  SegmentVO.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 04/03/2010.
+//  Created by Neil Edwards on 24/10/2011.
+//  Copyright (c) 2011 CycleStreets Ltd. All rights reserved.
 //
 
 #import "SegmentVO.h"
 #import "CSPointVO.h"
-#import "GlobalUtilities.h"
-
-@implementation SegmentVO
 
 static NSDictionary *roadIcons;
 
+@implementation SegmentVO
+@synthesize roadName;
+@synthesize provisionName;
+@synthesize turnType;
+@synthesize segmentTime;
+@synthesize segmentDistance;
+@synthesize startBearing;
+@synthesize segmentBusynance;
 @synthesize startTime;
 @synthesize startDistance;
+@synthesize pointsArray;
 
-- (id) initWithDictionary:(NSDictionary *)dictionary atTime:(NSInteger)time atDistance:(NSInteger)distance {
-	if (self = [super init]) {
-		xmlDict = dictionary;
-		[xmlDict retain];
-		startTime = time;
-		startDistance = distance;
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [roadName release], roadName = nil;
+    [provisionName release], provisionName = nil;
+    [turnType release], turnType = nil;
+    [pointsArray release], pointsArray = nil;
+	
+    [super dealloc];
+}
+
+
+
+
+
+
+
+
+
+//
+/***********************************************
+ * @description			getters
+ ***********************************************/
+//
+
+
+-(NSString*)timeString{
+	
+	NSUInteger h = startTime / 3600;
+	NSUInteger m = (startTime / 60) % 60;
+	NSUInteger s = startTime % 60;
+	
+	if (startTime>3600) {
+		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
+	}else {
+		return [NSString stringWithFormat:@"%02d:%02d", m,s];
 	}
-	return self;
 }
 
-- (NSString *)roadName {
-	return [xmlDict valueForKey:@"cs:name"];
-}
 
-- (NSInteger)segmentTime {
-	return [[xmlDict valueForKey:@"cs:time"] intValue];
-}
 
-- (NSInteger)segmentDistance {
-	return [[xmlDict valueForKey:@"cs:distance"] intValue];
-}
 
-- (NSInteger)startBearing {
-	return [[xmlDict valueForKey:@"cs:startBearing"] intValue];
-}
 
-- (NSInteger)segmentBusynance {
-	return [[xmlDict valueForKey:@"cs:busynance"] intValue];
-}
+//
+/***********************************************
+ * @description			Utility
+ ***********************************************/
+//
 
-- (NSString *)provisionName {
-	return [xmlDict valueForKey:@"cs:provisionName"];
-}
 
-- (NSString *)turn {
-	return [xmlDict valueForKey:@"cs:turn"];
-}
-
-- (CLLocationCoordinate2D)point:(BOOL)first {
-	CLLocationCoordinate2D location;
-	NSCharacterSet *whiteComma = [NSCharacterSet characterSetWithCharactersInString:@", "];
-	NSArray *XYs = [[xmlDict valueForKey:@"cs:points"] componentsSeparatedByCharactersInSet:whiteComma];
-	int index = 0;
-	if (!first) {
-		index = [XYs count] - 2;
-	}
-	location.longitude = [[XYs objectAtIndex:index] doubleValue];
-	location.latitude = [[XYs objectAtIndex:index+1] doubleValue];
-	return location;
-}
 
 //return array of points, in lat/lon.
 - (NSArray *)allPoints {
-	NSCharacterSet *whiteComma = [NSCharacterSet characterSetWithCharactersInString:@", "];
-	NSArray *XYs = [[xmlDict valueForKey:@"cs:points"] componentsSeparatedByCharactersInSet:whiteComma];
-	NSMutableArray *result = [[[NSMutableArray alloc] init] autorelease];
-	for (int X = 0; X < [XYs count]; X += 2) {
-		CSPointVO *p = [[[CSPointVO alloc] init] autorelease];
-		CGPoint point;
-		point.x = [[XYs objectAtIndex:X] doubleValue];
-		point.y = [[XYs objectAtIndex:X+1] doubleValue];
-		p.p = point;
-		[result addObject:p];
-	}
-	return result;
+	
+	return pointsArray;
+
 }
 
 - (CLLocationCoordinate2D)segmentStart {
-	return [self point:YES];
+	CSPointVO *point=[pointsArray objectAtIndex:0];
+	return [point  coordinate];
 }
 
 - (CLLocationCoordinate2D)segmentEnd {
-	return [self point:NO];
+	return [(CSPointVO*)[pointsArray objectAtIndex:[pointsArray count]-1] coordinate];
 }
 
 + (NSString *)provisionIcon:(NSString *)provisionName {
@@ -139,30 +121,13 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_quiet_street.png", @"residential street",
 					  @"UIIcon_quiet_street.png", @"unclassified, service", // need icon for this
 					  @"UIIcon_quiet_street.png", @"unclassified,service",
-					 nil] retain];
+					  nil] retain];
 	}
 	
 	return [roadIcons valueForKey:provisionName];
 }
 
-/*
- * Used to set table view cell and Stage view, which have been set up to share UI fields of the same name.
- */
-- (void) setUIElements:(NSObject *)view/*or controller*/ {
-	[view setValue:[self roadName] forKeyPath:@"road.text"];
-	[view setValue:[self timeString] forKeyPath:@"time.text"];
-	[view setValue:[NSString stringWithFormat:@"%4dm", [self segmentDistance]] forKeyPath:@"distance.text"];
-	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
-	[view setValue:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles] forKeyPath:@"total.text"];
-	NSString *imageName = [SegmentVO provisionIcon:[[self provisionName] lowercaseString]];
-	[view setValue:[UIImage imageNamed:imageName] forKeyPath:@"image.image"];
-	if ([view respondsToSelector:@selector(setBusyness:)]) {
-		[view setValue:[self provisionName] forKeyPath:@"busyness.text"];
-	}
-	if ([view respondsToSelector:@selector(setTurn:)]) {
-		[view setValue:[self turn] forKeyPath:@"turn.text"];
-	}
-}
+
 
 - (NSString *) infoString {
 	NSString *hm = [self timeString];
@@ -170,7 +135,7 @@ static NSDictionary *roadIcons;
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
 	
-	NSArray *turnParts = [[self turn] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	NSArray *turnParts = [[self turnType] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	NSString *capitalizedTurn = @"";
 	for (NSString *string in turnParts) {
 		if ([capitalizedTurn length] == 0) {
@@ -200,7 +165,7 @@ static NSDictionary *roadIcons;
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"%3.1f miles", totalMiles];
 	
-	NSArray *turnParts = [[self turn] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	NSArray *turnParts = [[self turnType] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	NSString *capitalizedTurn = @"";
 	for (NSString *string in turnParts) {
 		if ([capitalizedTurn length] == 0) {
@@ -228,24 +193,56 @@ static NSDictionary *roadIcons;
 }
 
 
--(NSString*)timeString{
-	
-	NSUInteger h = startTime / 3600;
-	NSUInteger m = (startTime / 60) % 60;
-	NSUInteger s = startTime % 60;
-	
-	if (startTime>3600) {
-		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
-	}else {
-		return [NSString stringWithFormat:@"%02d:%02d", m,s];
-	}
+
+static NSString *ROAD_NAME = @"roadName";
+static NSString *PROVISION_NAME = @"provisionName";
+static NSString *TURN_TYPE = @"turnType";
+static NSString *SEGMENT_TIME = @"segmentTime";
+static NSString *SEGMENT_DISTANCE = @"segmentDistance";
+static NSString *START_BEARING = @"startBearing";
+static NSString *SEGMENT_BUSYNANCE = @"segmentBusynance";
+static NSString *START_TIME = @"startTime";
+static NSString *START_DISTANCE = @"startDistance";
+static NSString *POINTS_ARRAY = @"pointsArray";
+
+
+
+//=========================================================== 
+//  Keyed Archiving
+//
+//=========================================================== 
+- (void)encodeWithCoder:(NSCoder *)encoder 
+{
+    [encoder encodeObject:self.roadName forKey:ROAD_NAME];
+    [encoder encodeObject:self.provisionName forKey:PROVISION_NAME];
+    [encoder encodeObject:self.turnType forKey:TURN_TYPE];
+    [encoder encodeInteger:self.segmentTime forKey:SEGMENT_TIME];
+    [encoder encodeInteger:self.segmentDistance forKey:SEGMENT_DISTANCE];
+    [encoder encodeInteger:self.startBearing forKey:START_BEARING];
+    [encoder encodeInteger:self.segmentBusynance forKey:SEGMENT_BUSYNANCE];
+    [encoder encodeInteger:self.startTime forKey:START_TIME];
+    [encoder encodeInteger:self.startDistance forKey:START_DISTANCE];
+    [encoder encodeObject:self.pointsArray forKey:POINTS_ARRAY];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder 
+{
+    self = [super init];
+    if (self) {
+        self.roadName = [decoder decodeObjectForKey:ROAD_NAME];
+        self.provisionName = [decoder decodeObjectForKey:PROVISION_NAME];
+        self.turnType = [decoder decodeObjectForKey:TURN_TYPE];
+        self.segmentTime = [decoder decodeIntegerForKey:SEGMENT_TIME];
+        self.segmentDistance = [decoder decodeIntegerForKey:SEGMENT_DISTANCE];
+        self.startBearing = [decoder decodeIntegerForKey:START_BEARING];
+        self.segmentBusynance = [decoder decodeIntegerForKey:SEGMENT_BUSYNANCE];
+        self.startTime = [decoder decodeIntegerForKey:START_TIME];
+        self.startDistance = [decoder decodeIntegerForKey:START_DISTANCE];
+        self.pointsArray = [decoder decodeObjectForKey:POINTS_ARRAY];
+    }
+    return self;
 }
 
 
-- (void) dealloc {
-	[xmlDict release];
-	
-	[super dealloc];
-}
 
 @end

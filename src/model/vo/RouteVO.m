@@ -13,23 +13,6 @@
 #import "GlobalUtilities.h"
 #import "NSDate+Helper.h"
 
-// deprecated
-/*
-static NSString *ROUTE_ELEMENT = @"cs:route";
-static NSString *SEGMENT_ELEMENT = @"cs:segment";
-static NSString *ITINERARY = @"cs:itinerary";
-static NSString *EAST = @"cs:east";
-static NSString *WEST = @"cs:west";
-static NSString *NORTH = @"cs:north";
-static NSString *SOUTH = @"cs:south";
-static NSString *SPEED = @"cs:speed";
-static NSString *NAME = @"cs:name";
-static NSString *LENGTH = @"cs:length";
-static NSString *PLAN = @"cs:plan";
-static NSString *TIME = @"cs:time";
-static NSString *ROUTEDATE = @"cs:whence";
- */
-
 @implementation RouteVO
 @synthesize segments;
 @synthesize routeid;
@@ -185,7 +168,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 
 
 static NSString *SEGMENTS = @"segments";
-static NSString *ITINERARY = @"itinerary";
+static NSString *ROUTEID = @"routeid";
 static NSString *NORTH_EAST = @"northEast";
 static NSString *SOUTH_WEST = @"southWest";
 static NSString *NAME = @"name";
@@ -193,7 +176,7 @@ static NSString *SPEED = @"speed";
 static NSString *LENGTH = @"length";
 static NSString *PLAN = @"plan";
 static NSString *TIME = @"time";
-static NSString *ROUTEDATE = @"routedate";
+static NSString *ROUTEDATE = @"date";
 static NSString *USER_ROUTE_NAME = @"userRouteName";
 
 
@@ -205,7 +188,7 @@ static NSString *USER_ROUTE_NAME = @"userRouteName";
 - (void)encodeWithCoder:(NSCoder *)encoder 
 {
     [encoder encodeObject:self.segments forKey:SEGMENTS];
-    [encoder encodeObject:self.routeid forKey:ITINERARY];
+    [encoder encodeObject:self.routeid forKey:ROUTEID];
     [encoder encodeObject:self.northEast forKey:NORTH_EAST];
     [encoder encodeObject:self.southWest forKey:SOUTH_WEST];
     [encoder encodeObject:self.name forKey:NAME];
@@ -222,7 +205,7 @@ static NSString *USER_ROUTE_NAME = @"userRouteName";
     self = [super init];
     if (self) {
         self.segments = [decoder decodeObjectForKey:SEGMENTS];
-        self.routeid = [decoder decodeObjectForKey:ITINERARY];
+        self.routeid = [decoder decodeObjectForKey:ROUTEID];
         self.northEast = [decoder decodeObjectForKey:NORTH_EAST];
         self.southWest = [decoder decodeObjectForKey:SOUTH_WEST];
         self.name = [decoder decodeObjectForKey:NAME];

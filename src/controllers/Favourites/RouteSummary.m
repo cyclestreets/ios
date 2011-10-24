@@ -129,7 +129,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	self.routeNameLabel.text = [route name];
 	self.dateLabel.text=route.dateString;
-	self.routeidLabel.text=[NSString stringWithFormat:@"#%@", [route itinerary]];
+	self.routeidLabel.text=[NSString stringWithFormat:@"#%@", [route routeid]];
 	[headerContainer refresh];
 	
 	timeLabel.text=route.timeString;

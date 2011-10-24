@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-#import "Route.h"
+#import "RouteVO.h"
 #import "RMMapView.h"
 #import "BlueCircleView.h"
 #import "RouteLineView.h"
@@ -59,7 +59,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	//current route
-	Route *route;
+	RouteVO *route;
 	NSInteger index;
 	NSInteger photosIndex;//check that the photos we are loading relate to the current stage
 	
@@ -84,7 +84,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain)	IBOutlet UIBarButtonItem		*photoIconButton;
 @property (nonatomic, retain)	IBOutlet UIBarButtonItem		*prev;
 @property (nonatomic, retain)	IBOutlet UIBarButtonItem		*next;
-@property (nonatomic, retain)	Route		*route;
+@property (nonatomic, retain)	RouteVO		*route;
 @property (nonatomic)	NSInteger		index;
 @property (nonatomic)	NSInteger		photosIndex;
 @property (nonatomic, retain)	RMMarker		*markerLocation;
@@ -103,7 +103,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 //standard interface
-- (void)setRoute:(Route *)newRoute;
+- (void)setRoute:(RouteVO *)newRoute;
 
 - (void)setSegmentIndex:(NSInteger)newIndex;
 

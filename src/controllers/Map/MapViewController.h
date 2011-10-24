@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "BlueCircleView.h"
 #import "MBProgressHUD.h"
 @class CycleStreets;
-@class Route;
+@class RouteVO;
 @class Location;
 @class InitialLocation;
 
@@ -72,7 +72,7 @@ typedef enum PlanningStateT PlanningState;
 	
 	MapLocationSearchViewController *mapLocationSearchView;			//the search popup
 	
-	Route *route;					//current route
+	RouteVO *route;					//current route
 	
 	RMMarker *start;
 	RMMarker *end;
@@ -113,7 +113,7 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, retain)	CLLocationManager	*locationManager;
 @property (nonatomic, retain)	CLLocation	*lastLocation;
 @property (nonatomic, retain)	MapLocationSearchViewController	*mapLocationSearchView;
-@property (nonatomic, retain)	Route	*route;
+@property (nonatomic, retain)	RouteVO	*route;
 @property (nonatomic, retain)	RMMarker	*start;
 @property (nonatomic, retain)	RMMarker	*end;
 @property (nonatomic, retain)	NSMutableArray	*startEndPool;
@@ -138,14 +138,14 @@ typedef enum PlanningStateT PlanningState;
 - (IBAction) didRoute;
 - (IBAction) didSearch;
 -(void)updateSelectedRoute;
-- (void) showRoute:(Route *)route;
+- (void) showRoute:(RouteVO *)route;
 - (void)stopDoingLocation;
 - (void)startDoingLocation;
 
 + (NSArray *)mapStyles;
 + (NSObject <RMTileSource> *)tileSource;
 + (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation;
-+ (NSArray *) pointList:(Route *)route withView:(RMMapView *)mapView;
++ (NSArray *) pointList:(RouteVO *)route withView:(RMMapView *)mapView;
 + (NSString *)currentMapStyle;
 + (NSString *)mapAttribution;
 

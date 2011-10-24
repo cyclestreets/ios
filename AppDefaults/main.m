@@ -29,10 +29,7 @@
 
 
 int main(int argc, char *argv[]) {
-	
-#ifdef DEBUG
-	NSLog(@"main >>>");
-#endif
+
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     int retVal = UIApplicationMain(argc, argv, nil, nil);

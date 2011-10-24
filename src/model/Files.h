@@ -25,6 +25,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <Foundation/Foundation.h>
+#import "RouteVO.h"
+
+#define kROUTEARCHIVEKEY @"CSRouteArchiveKey"
 
 
 @interface Files : NSObject {
@@ -92,10 +95,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)setFavourites:(NSArray *) newFavourites;
 
 // retrieve the XML of a route
-- (NSData *) route:(NSInteger) routeIdentifier;
+- (RouteVO *) route:(NSInteger) routeIdentifier;
 
 // save the data of a route - route may be a new route
-- (void)setRoute:(NSInteger) routeIdentifier data:(NSData *)xml;
+- (void)setRoute:(NSInteger) routeIdentifier data:(RouteVO *)route;
 
 // remove the route file.
 - (void)deleteRoute:(NSInteger) routeIdentifier;

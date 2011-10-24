@@ -27,13 +27,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <UIKit/UIKit.h>
 #import "MultiLabelLine.h"
 #import "BUTableCellView.h"
-#import "Route.h"
+#import "RouteVO.h"
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
 
 @interface FavouritesCellView : BUTableCellView {
 	
-	Route							*dataProvider;
+	RouteVO							*dataProvider;
 	
 	IBOutlet	LayoutBox			*viewContainer;
 	IBOutlet ExpandedUILabel		*nameLabel;
@@ -45,7 +45,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet UIImageView						*selectedRouteIcon;
 	
 }
-@property (nonatomic, retain)	Route		*dataProvider;
+@property (nonatomic, retain)	RouteVO		*dataProvider;
 @property (nonatomic, retain)	IBOutlet LayoutBox		*viewContainer;
 @property (nonatomic, retain)	IBOutlet ExpandedUILabel		*nameLabel;
 @property (nonatomic, retain)	IBOutlet MultiLabelLine		*readoutLabel;
@@ -54,6 +54,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain)	IBOutlet UIImageView		*selectedRouteIcon;
 
 
-+(NSNumber*)heightForCellWithDataProvider:(Route*)route;
++(NSNumber*)heightForCellWithDataProvider:(RouteVO*)route;
 
 @end

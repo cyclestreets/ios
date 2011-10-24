@@ -12,11 +12,11 @@
 #import "LayoutBox.h"
 #import "Stage.h"
 #import "CopyLabel.h"
-@class Route;
+@class RouteVO;
 
 @interface ItineraryViewController : SuperViewController <UITableViewDelegate,UITableViewDataSource>{
 	
-	Route *route;
+	RouteVO *route;
 	NSInteger routeId;
 	UITextView *headerText;
 	
@@ -34,7 +34,7 @@
 	
 
 }
-@property (nonatomic, retain)	Route		*route;
+@property (nonatomic, retain)	RouteVO		*route;
 @property (nonatomic)	NSInteger		routeId;
 @property (nonatomic, retain)	UITextView		*headerText;
 @property (nonatomic, retain)	Stage		*stageViewcontroller;
