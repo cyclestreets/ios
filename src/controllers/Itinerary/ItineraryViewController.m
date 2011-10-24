@@ -191,6 +191,9 @@
 	
 	BetterLog(@"");
 	
+	
+	
+	
 	if(route==nil){
 		
 		
@@ -280,6 +283,26 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
 	return [[rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
+}
+
+
+-(void)tableView:(UITableView*)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath*)indexPath withSender:(id)sender{
+	
+	BetterLog(@"");
+	
+}
+-(BOOL)tableView:(UITableView*)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath*)indexPath withSender:(id)sender{
+	return YES;
+	
+}
+-(BOOL)tableView:(UITableView*)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath*)indexPath{
+	
+	UIMenuItem* miCustom1 = [[[UIMenuItem alloc] initWithTitle: @"Custom 1" action:@selector( onCustom1: )] autorelease];
+	UIMenuItem* miCustom2 = [[[UIMenuItem alloc] initWithTitle: @"Custom 2" action:@selector( onCustom2: )] autorelease];
+	UIMenuController* mc = [UIMenuController sharedMenuController];
+	mc.menuItems = [NSArray arrayWithObjects: miCustom1, miCustom2, nil];
+	
+	return YES;
 }
 
 //

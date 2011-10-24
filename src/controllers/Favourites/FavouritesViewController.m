@@ -194,10 +194,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)deleteRow:(int)row{
 	
-	NSInteger routeIdentifier = [[favourites objectAtIndex:row] intValue];
-	RouteVO *route = [self routeWithIdentifier:routeIdentifier];
-	
-	[[FavouritesManager sharedInstance] removeRoute:route];
+	[[FavouritesManager sharedInstance] removeObjectFromDataProviderAtIndex:row];
 	[rowHeightsArray removeObjectAtIndex:row];
 }
 
@@ -237,6 +234,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	
 }
+
+
+
 
 
 //

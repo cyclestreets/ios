@@ -34,6 +34,8 @@
 -(void)loadRouteForEndPointsResponse:(ValidationVO*)validation;
 -(void)loadRouteForRouteIdResponse:(ValidationVO*)validation;
 
+- (NSString *) routesDirectory;
+
 
 @end
 

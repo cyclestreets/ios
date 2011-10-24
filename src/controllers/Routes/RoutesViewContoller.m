@@ -73,7 +73,7 @@
 -(void)refreshUIFromDataProvider{
 	
 	
-	// points to FavouritesManager
+	// points to SavedRoutesManager
 	//*favouritesdataProvider; 
 	//*recentsdataProvider;
 	
@@ -156,6 +156,17 @@
 
 -(void)createNavigationBarUI{
 	
+	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
+	self.navigation=nav;
+    [nav release];
+	navigation.delegate=self;
+	navigation.leftItemType=BUNavNoneType;
+    navigation.rightItemType=BUNavNoneType;
+	navigation.titleType=BUNavTitleDefaultType;
+	navigation.titleString=@"Saved Routes";
+    navigation.titleFontColor=[UIColor whiteColor];
+	navigation.navigationItem=self.navigationItem;
+	[navigation createNavigationUI];
 	
 }
 
