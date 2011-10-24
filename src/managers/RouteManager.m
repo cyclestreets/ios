@@ -224,15 +224,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 -(void)loadRouteForRouteIdResponse:(ValidationVO*)validation{
     
+	BetterLog(@"");
     
     switch(validation.validationStatus){
             
-        case ValidationRetrieveRouteByIdSuccess:
+        case ValidationCalculateRouteSuccess:
             
             self.selectedRoute=[validation.responseDict objectForKey:RETRIEVEROUTEBYID];
-            
-            //CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-           // [cycleStreets.files setRoute:[[selectedRoute itinerary] intValue] data:request.data];
             
             [self selectRoute:selectedRoute];	
             
@@ -243,7 +241,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             break;
             
             
-        case ValidationRetrieveRouteByIdFailed:
+        case ValidationCalculateRouteFailed:
             
             [self queryFailure:nil message:@"Unable to find a route with this number."];
             
@@ -343,6 +341,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	self.selectedRoute=route;
 	
+	// NEW
+	// set SR in favs, will promote to top its dp
+	//[[FavouritesManager sharedInstance] selectRoute:route];
+	//Files *files=[CycleStreets sharedInstance].files;
+	//[files setMiscValue:[route routeid] forKey:@"selectedroute"];
+	//
+	
+	
+	//OLD
 	Files *files=[CycleStreets sharedInstance].files;
 	NSArray *oldFavourites = [files favourites];
 	NSMutableArray *newFavourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count]+1] autorelease];
@@ -399,9 +406,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	RouteVO *route=nil;
 	
 	if (identifier!=nil) {
-		CycleStreets *cycleStreets = [CycleStreets sharedInstance];	
-		route = [cycleStreets.files route:[identifier intValue]];
-		
+		route = [self loadRouteForID:[identifier intValue]];
 	}
 	
 	if(route!=nil){
@@ -416,13 +421,70 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSString *selectedRouteID = [cycleStreets.files miscValueForKey:@"selectedroute"];
 	if(selectedRouteID!=nil)
-		[self loadRouteWithIdentifier:selectedRouteID];
+		[self loadRouteForID:[selectedRouteID intValue]];
 	
 	
 }
 
 
+//
+/***********************************************
+ * @description			File I/O
+ ***********************************************/
+//
 
+
+- (RouteVO *)loadRouteForID:(NSInteger) routeIdentifier {
+	
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
+	
+	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
+	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
+	[unarchiver finishDecoding];
+	[unarchiver release];
+	[data release];
+	
+	return route;
+}
+
+
+- (void)saveRoute:(RouteVO *)route forID:(NSInteger) routeIdentifier  {
+	
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
+	
+	NSMutableData *data = [[NSMutableData alloc] init];
+	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+	[archiver encodeObject:route forKey:kROUTEARCHIVEKEY];
+	[archiver finishEncoding];
+	[data writeToFile:routeFile atomically:YES];
+	
+	[data release];
+	[archiver release];
+	
+}
+
+
+- (void)removeRouteForID:(NSInteger) routeIdentifier{
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
+	
+	BOOL fileexists = [fileManager fileExistsAtPath:routeFile];
+	
+	if(fileexists==YES){
+		
+		NSError *error=nil;
+		[fileManager removeItemAtPath:routeFile error:&error];
+	}
+	
+}
+
+- (NSString *) routesDirectory {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [[paths objectAtIndex:0] copy];
+	return [documentsDirectory stringByAppendingPathComponent:ROUTEARCHIVEPATH];
+}
 
 
 @end

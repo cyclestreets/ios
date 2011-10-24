@@ -13,6 +13,8 @@
 #import "Query.h"
 #import <CoreLocation/CoreLocation.h>
 
+#define ROUTEARCHIVEPATH @"routes"
+
 @interface RouteManager : FrameworkObject 	{
 	
 	NSMutableDictionary					*routes;
@@ -34,5 +36,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 
 -(void)loadRouteWithIdentifier:(NSString*)routeid;
 -(void)loadSavedSelectedRoute;
+
+- (RouteVO *)loadRouteForID:(NSInteger) routeIdentifier;
+- (void)saveRoute:(RouteVO *)route forID:(NSInteger) routeIdentifier ;
+- (void)removeRouteForID:(NSInteger) routeIdentifier;
 
 @end

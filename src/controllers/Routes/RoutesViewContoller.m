@@ -73,6 +73,10 @@
 -(void)refreshUIFromDataProvider{
 	
 	
+	// points to FavouritesManager
+	//*favouritesdataProvider; 
+	//*recentsdataProvider;
+	
 	
 }
 
@@ -101,7 +105,7 @@
 	controlView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"controlbar"];
 	[controlView drawBorderwithColor:UIColorFromRGB(0x333333) andStroke:1 left:NO right:NO top:YES bottom:YES];
 	
-	NSMutableArray *sdp = [[NSMutableArray alloc] initWithObjects:@"Favourites", @"All",  nil];
+	NSMutableArray *sdp = [[NSMutableArray alloc] initWithObjects:@"Favourites", @"Recent",  nil];
 	routeTypeControl=[[BUSegmentedControl alloc]init];
 	routeTypeControl.dataProvider=sdp;
 	routeTypeControl.delegate=self;
@@ -117,7 +121,7 @@
 	// create arrays to store sub views & class references
 	classArray=[[NSMutableArray alloc]initWithObjects:@"RouteListViewController",@"RouteListViewController",nil];
 	nibArray=[[NSMutableArray alloc]initWithObjects:@"RouteListView",@"RouteListView",nil];
-	dataTypeArray=[[NSMutableArray alloc]initWithObjects:@"Favourites",@"All",nil];
+	dataTypeArray=[[NSMutableArray alloc]initWithObjects:@"Favourites",@"Recent",nil];
 	subViewsArray=[[NSMutableArray alloc]init];
 	for (int i = 0; i < [classArray count]; i++) {
 		

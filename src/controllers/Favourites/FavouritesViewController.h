@@ -29,13 +29,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @class RouteSummary;
 
 @interface FavouritesViewController : UITableViewController {
-	NSMutableArray *favourites;
-	NSMutableDictionary *routes;
+	
+	// old
+	NSMutableArray			*favourites;
+	NSMutableDictionary		*routes;
+	NSMutableArray  *rowHeightsArray;
+	
 	RouteSummary *routeSummary;
 	
 	
-	// rowHeights
-	NSMutableArray  *rowHeightsArray;
 }
 
 @property (nonatomic, retain)	NSMutableArray	*favourites;

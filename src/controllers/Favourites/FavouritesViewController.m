@@ -194,7 +194,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)deleteRow:(int)row{
 	
-	[[FavouritesManager sharedInstance] removeObjectFromDataProviderAtIndex:row];
+	NSInteger routeIdentifier = [[favourites objectAtIndex:row] intValue];
+	RouteVO *route = [self routeWithIdentifier:routeIdentifier];
+	
+	[[FavouritesManager sharedInstance] removeRoute:route];
 	[rowHeightsArray removeObjectAtIndex:row];
 }
 
@@ -260,8 +263,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 			{
 				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
 				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]) {
-					Query *routequery=[[Query alloc]initRouteID:alertInputField.text];
-					[[RouteManager sharedInstance] runRouteIdQuery:routequery];
+					//Query *routequery=[[Query alloc]initRouteID:alertInputField.text];
+					//[[RouteManager sharedInstance] runRouteIdQuery:routequery];
+					
+					[[RouteManager sharedInstance] loadRouteForRouteId:alertInputField.text];
+					
 				}
 			}
                 break;
