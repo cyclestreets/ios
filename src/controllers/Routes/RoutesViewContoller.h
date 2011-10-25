@@ -10,12 +10,14 @@
 #import "SuperViewController.h"
 #import "BUSegmentedControl.h"
 #import "BorderView.h"
+#import "RouteSummary.h"
 
 @interface RoutesViewContoller : SuperViewController <BUSegmentedControlDelegate>{
 	
 	IBOutlet		UIView				*titleHeaderView;
 	IBOutlet		BorderView			*controlView;
 	BUSegmentedControl					*routeTypeControl;
+    IBOutlet        UIButton            *selectedRouteButton;
 	
 	NSMutableArray						*subViewsArray;
 	NSMutableArray						*classArray;
@@ -23,16 +25,21 @@
 	NSMutableArray						*dataTypeArray;
 	UIView								*contentView;
 	int									activeIndex;
+    
+    RouteSummary                        *routeSummary;
+
 
 }
-@property (nonatomic, retain)		IBOutlet UIView		* titleHeaderView;
-@property (nonatomic, retain)		IBOutlet BorderView		* controlView;
-@property (nonatomic, retain)		BUSegmentedControl		* routeTypeControl;
-@property (nonatomic, retain)		NSMutableArray		* subViewsArray;
-@property (nonatomic, retain)		NSMutableArray		* classArray;
-@property (nonatomic, retain)		NSMutableArray		* nibArray;
-@property (nonatomic, retain)		NSMutableArray		* dataTypeArray;
-@property (nonatomic, retain)		IBOutlet UIView		* contentView;
-@property (nonatomic)		int		 activeIndex;
+@property (nonatomic, retain)	IBOutlet UIView			*titleHeaderView;
+@property (nonatomic, retain)	IBOutlet BorderView			*controlView;
+@property (nonatomic, retain)	BUSegmentedControl			*routeTypeControl;
+@property (nonatomic, retain)	IBOutlet UIButton			*selectedRouteButton;
+@property (nonatomic, retain)	NSMutableArray			*subViewsArray;
+@property (nonatomic, retain)	NSMutableArray			*classArray;
+@property (nonatomic, retain)	NSMutableArray			*nibArray;
+@property (nonatomic, retain)	NSMutableArray			*dataTypeArray;
+@property (nonatomic, retain)	IBOutlet UIView			*contentView;
+@property (nonatomic, assign)	int			activeIndex;
+@property (nonatomic, retain)	RouteSummary			*routeSummary;
 
 @end

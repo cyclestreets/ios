@@ -25,6 +25,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SavedRoutesManager);
 @property (nonatomic, retain)	NSMutableArray		*recentsdataProvider;
 
 -(void)removeRoute:(RouteVO*)route;
+-(void)removeRoute:(RouteVO*)route fromDataProvider:(NSString*)type;
 -(void)loadSavedRoutes;
+
+-(void)moveRouteToDataProvider:(RouteVO*)route dp:(NSString*)type;
+-(void)addRouteToDataProvider:(RouteVO*)route dp:(NSString*)type;
+
+-(NSMutableArray*)dataProviderForType:(NSString*)type;
 
 @end

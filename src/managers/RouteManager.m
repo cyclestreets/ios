@@ -21,6 +21,7 @@
 #import "NetResponse.h"
 #import "NetRequest.h"
 #import "SettingsManager.h"
+#import "SavedRoutesManager.h"
 
 @interface RouteManager(Private) 
 
@@ -169,9 +170,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             
             self.selectedRoute = [validation.responseDict objectForKey:CALCULATEROUTE];
             
-           // CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-			// this is not required as the result will always be archived by default
-           // [cycleStreets.files setRoute:[[selectedRoute itinerary] intValue] data:request.data];
+            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:selectedRoute dp:SAVEDROUTE_RECENTS];
                 
             [self warnOnFirstRoute];
             [self selectRoute:selectedRoute];	
@@ -233,6 +232,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
         case ValidationCalculateRouteSuccess:
             
             self.selectedRoute=[validation.responseDict objectForKey:RETRIEVEROUTEBYID];
+            
+            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:selectedRoute dp:SAVEDROUTE_RECENTS];
             
             [self selectRoute:selectedRoute];	
             
@@ -345,7 +346,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	// NEW
 	// set SR in favs, will promote to top its dp
-	//[[FavouritesManager sharedInstance] selectRoute:route];
+	//[[SavedRoutesManager sharedInstance] selectRoute:route];
 	//Files *files=[CycleStreets sharedInstance].files;
 	//[files setMiscValue:[route routeid] forKey:@"selectedroute"];
 	//

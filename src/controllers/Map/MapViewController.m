@@ -825,11 +825,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 		[[RouteManager sharedInstance] loadRouteForEndPoints:from to:to];
 		
-		
-		//Query *query = [[[Query alloc] initFrom:from to:to] autorelease];
-		
-		//[[RouteManager sharedInstance] runQuery:query];
-		
 	} else if (self.planningState == stateRoute) {
 		[self.clearAlert show];
 	}

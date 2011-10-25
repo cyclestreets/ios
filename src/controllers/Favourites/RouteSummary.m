@@ -33,6 +33,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "BUDividerView.h"
 #import "ButtonUtilities.h"
 #import "ViewUtilities.h"
+#import "RouteManager.h"
+
+
+@interface RouteSummary(Private)
+
+-(void)selectedRouteUpdated;
+
+@end
 
 @implementation RouteSummary
 @synthesize route;
@@ -73,6 +81,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
+//
+/***********************************************
+ * @description		NOTIFICATIONS
+ ***********************************************/
+//
+
+-(void)listNotificationInterests{
+	
+	[self initialise];
+    
+    [notifications addObject:CSROUTESELECTED];
+	
+	[super listNotificationInterests];
+	
+}
+
+-(void)didReceiveNotification:(NSNotification*)notification{
+	
+	[super didReceiveNotification:notification];
+	
+    if([notification.name isEqualToString:CSROUTESELECTED]){
+        [self selectedRouteUpdated]
+    }
+	
+}
+
+//
+/***********************************************
+ * @description			DATA>UI UPDATES
+ ***********************************************/
+//
+
+-(void)selectedRouteUpdated{
+    
+    BOOL selectedRouteExists=[RouteManager sharedInstance].selectedRoute;
+    
+    if(selectedRouteExists==YES){
+        self.route=[RouteManager sharedInstance].selectedRoute;
+        [self createNonPersistentUI];
+    }
+}
+
+
+//
+/***********************************************
+ * @description			VIEW CREATION
+ ***********************************************/
+//
 
 - (void)viewDidLoad {
 	

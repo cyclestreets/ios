@@ -11,34 +11,50 @@
 #import "ViewUtilities.h"
 #import "StyleManager.h"
 #import "RouteListViewController.h"
+#import "RouteManager.h"
+
+
+
+@interface RoutesViewController(Private)
+
+-(IBAction)selectedRouteButtonSelected:(id)sender;
+-(void)selectedRouteUpdated;
+
+@end
+
 
 @implementation RoutesViewContoller
 @synthesize titleHeaderView;
 @synthesize controlView;
 @synthesize routeTypeControl;
+@synthesize selectedRouteButton;
 @synthesize subViewsArray;
 @synthesize classArray;
 @synthesize nibArray;
 @synthesize dataTypeArray;
 @synthesize contentView;
 @synthesize activeIndex;
+@synthesize routeSummary;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [titleHeaderView release], titleHeaderView = nil;
     [controlView release], controlView = nil;
     [routeTypeControl release], routeTypeControl = nil;
+    [selectedRouteButton release], selectedRouteButton = nil;
     [subViewsArray release], subViewsArray = nil;
     [classArray release], classArray = nil;
     [nibArray release], nibArray = nil;
     [dataTypeArray release], dataTypeArray = nil;
     [contentView release], contentView = nil;
-	
+    [routeSummary release], routeSummary = nil;
+    
     [super dealloc];
 }
+
 
 
 
@@ -51,6 +67,8 @@
 -(void)listNotificationInterests{
 	
 	[self initialise];
+    
+    [notifications addObject:CSROUTESELECTED];
 	
 	[super listNotificationInterests];
 	
@@ -60,6 +78,9 @@
 	
 	[super didReceiveNotification:notification];
 	
+    if([notification.name isEqualToString:CSROUTESELECTED]){
+        [self selectedRouteUpdated]
+    }
 	
 }
 
@@ -72,12 +93,21 @@
 
 -(void)refreshUIFromDataProvider{
 	
-	
-	// points to SavedRoutesManager
-	//*favouritesdataProvider; 
-	//*recentsdataProvider;
-	
-	
+		
+}
+
+-(void)selectedRouteUpdated{
+    
+    BOOL selectedRouteExists=[RouteManager sharedInstance].selectedRoute!=nil;
+    
+    selectedRouteButton.enabled=selectedRouteExists;
+    
+    if([self.navigationController.topViewController==routeSummary]){
+        if(selectedRouteExists==NO){
+            [self.navigationController popToRootViewControllerAnimated:NO];
+        }
+    }
+    
 }
 
 
@@ -113,7 +143,9 @@
 	[routeTypeControl buildInterface];
 	[controlView addSubview:routeTypeControl];
 	
-	[ViewUtilities alignView:routeTypeControl withView:controlView :BUCenterAlignMode :BUCenterAlignMode];
+	[ViewUtilities alignView:routeTypeControl withView:controlView :BULeftAlignMode :BUCenterAlignMode];
+    
+    [selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NAVIGATIONHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 	[self.view addSubview:contentView];
@@ -129,6 +161,7 @@
 		vc.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI);
 		[contentView addSubview:vc.view];
 		vc.delegate=self;
+        vc.dataType=[dataTypeArray objectAtIndex:i];
 		[subViewsArray addObject:vc];
 		
 		if (i==1) {
@@ -161,7 +194,7 @@
     [nav release];
 	navigation.delegate=self;
 	navigation.leftItemType=BUNavNoneType;
-    navigation.rightItemType=BUNavNoneType;
+    navigation.rightItemType=BUNavNoneType; // TODO: routebyid support
 	navigation.titleType=BUNavTitleDefaultType;
 	navigation.titleString=@"Saved Routes";
     navigation.titleFontColor=[UIColor whiteColor];
@@ -172,11 +205,63 @@
 
 
 
+
 //
 /***********************************************
  * @description		UI EVENTS
  ***********************************************/
 //
+
+
+-(IBAction)selectedRouteButtonSelected:(id)sender{
+    
+    if([[RouteManager sharedInstance] selectedRoute]!=nil)
+    [self doNavigationPush:@"RouteSummary" withDataProvider:[[RouteManager sharedInstance] selectedRoute] andIndex:-1];
+    
+}
+
+
+
+-(void)doNavigationSelector:(NSString*)type{
+    
+    // do route id alert
+    
+}
+
+-(IBAction)retrieveRouteByNumberButtonSelected:(id)sender{
+	
+	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil delegate:self];
+	
+}
+
+
+// Note: use of didDismissWithButtonIndex, as otherwise the HUD gets removed by the screen clear up performed by Alert 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+	
+	if(buttonIndex > 0) {
+        
+		switch(alertView.tag){
+                
+			case kTextEntryAlertTag:
+			{
+				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]) {
+					
+					[[RouteManager sharedInstance] loadRouteForRouteId:alertInputField.text];
+					
+				}
+			}
+            break;
+                
+			default:
+				
+            break;
+                
+		}
+		
+	}
+	
+}
 
 
 //
@@ -186,21 +271,48 @@
 //
 -(void)selectedIndexDidChange:(int)index{
 	
+    if(index!=-1){
 	
-	if(activeIndex!=-1){
-			UIView *activeitemView=[[subViewsArray objectAtIndex:activeIndex] view];
-			activeitemView.hidden=YES;
-		}
-		
-		UIView *itemView=[[subViewsArray objectAtIndex:index] view];
-		[contentView bringSubviewToFront:itemView];
-		activeIndex=index;
-		itemView.hidden=NO;
-		
-		//[[GoogleAnalyticsManager sharedGoogleAnalyticsManager] trackPageViewWithNavigation:self.navigationController.viewControllers andFragment:vc.GATag];
+	RouteListViewController *vc = [subViewsArray objectAtIndex:index];
 	
+    if(activeIndex!=-1){
+        UIView *activeitemView=[[subViewsArray objectAtIndex:activeIndex] view];
+        activeitemView.hidden=YES;
+    }
+    
+    UIView *itemView=[[subViewsArray objectAtIndex:index] view];
+    [contentView bringSubviewToFront:itemView];
+    activeIndex=index;
+    itemView.hidden=NO;
+    
+    //[[GoogleAnalyticsManager sharedGoogleAnalyticsManager] trackPageViewWithNavigation:self.navigationController.viewControllers andFragment:vc.GATag];
+		
+	}
 	
 }
+
+
+
+//
+/***********************************************
+ * @description			ViewController delegate method
+ ***********************************************/
+//
+-(void)doNavigationPush:(NSString*)className withDataProvider:(id)data andIndex:(int)index{
+    
+    if([className isEqualToString:@"RouteSummary"]){
+        
+        if (self.routeSummary == nil) {
+            self.routeSummary = [[RouteSummary alloc]init];
+        }
+        self.routeSummary.route = (RouteVO*)data;
+        [self.navigationController pushViewController:self.routeSummary animated:YES];
+        
+    }
+    
+}
+
+
 
 //
 /***********************************************

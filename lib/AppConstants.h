@@ -42,10 +42,15 @@ extern NSString *const LOCATIONFEATURESRESPONSE;
 extern NSString *const NEWROUTEBYIDRESPONSE;
 extern NSString *const POILISTINGRESPONSE;
 extern NSString *const POICATEGORYLOCATIONRESPONSE;
+extern NSString *const SAVEDROUTEUPDATE;
 
 
 extern NSString *const MILES;
 extern NSString *const KM;
+
+
+extern NSString *const SAVEDROUTE_FAVS;
+extern NSString *const SAVEDROUTE_RECENTS;
  
 
 @interface AppConstants : NSObject {
