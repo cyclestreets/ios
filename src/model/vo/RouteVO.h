@@ -46,6 +46,7 @@
 @property (nonatomic, readonly)	NSString	*lengthString;
 @property (nonatomic, readonly)	NSString	*speedString;
 @property (nonatomic, readonly)	NSString	*dateString;
+@property (nonatomic, readonly)	NSString	*dateOnlyString;
 @property (nonatomic, readonly)	NSString	*planString;
 @property (nonatomic, readonly)	NSString	*nameString;
 @property (nonatomic, readonly)	int					numSegments;

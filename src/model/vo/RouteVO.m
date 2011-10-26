@@ -117,6 +117,13 @@
 	
 }
 
+-(NSString*)dateOnlyString{
+	
+	NSDate *newdate=[NSDate dateFromString:[self date] withFormat:@"y-MM-dd HH:mm:ss"];		
+	return [NSDate stringFromDate:newdate withFormat:@"y-MM-dd 00:00:00"];
+	
+}
+
 -(NSString*)planString{
 	
 	return [[self plan] capitalizedString];

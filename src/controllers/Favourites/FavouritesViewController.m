@@ -92,7 +92,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	RouteVO *route = [routes objectForKey:[NSNumber numberWithInt:identifier]];
 	if (!route) {
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];	
-		RouteVO *route = [cycleStreets.files route:identifier];
+		route = [cycleStreets.files route:identifier];
 		if(route!=nil){
 			[routes setObject:route forKey:[NSNumber numberWithInt:identifier]];
 		}

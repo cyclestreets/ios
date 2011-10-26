@@ -102,7 +102,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[super didReceiveNotification:notification];
 	
     if([notification.name isEqualToString:CSROUTESELECTED]){
-        [self selectedRouteUpdated]
+        [self selectedRouteUpdated];
     }
 	
 }
@@ -115,7 +115,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)selectedRouteUpdated{
     
-    BOOL selectedRouteExists=[RouteManager sharedInstance].selectedRoute;
+    BOOL selectedRouteExists=[RouteManager sharedInstance].selectedRoute!=nil;
     
     if(selectedRouteExists==YES){
         self.route=[RouteManager sharedInstance].selectedRoute;

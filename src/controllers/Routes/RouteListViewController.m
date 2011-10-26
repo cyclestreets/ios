@@ -9,11 +9,14 @@
 #import "RouteListViewController.h"
 #import "RouteCellView.h"
 #import "SavedRoutesManager.h"
+#import "StyleManager.h"
+#import "NSDate+Helper.h"
 
 
 @interface RouteListViewController(Private) 
 
 -(void)createRowHeightsArray;
+-(void)createSectionHeadersArray;
 
 @end
 
@@ -26,6 +29,7 @@
 @synthesize tableDataProvider;
 @synthesize rowHeightsArray;
 @synthesize rowHeightDictionary;
+@synthesize tableSectionArray;
 @synthesize dataType;
 @synthesize tableEditMode;
 @synthesize selectedCellDictionary;
@@ -43,13 +47,16 @@
     [tableDataProvider release], tableDataProvider = nil;
     [rowHeightsArray release], rowHeightsArray = nil;
     [rowHeightDictionary release], rowHeightDictionary = nil;
+    [tableSectionArray release], tableSectionArray = nil;
     [dataType release], dataType = nil;
     [selectedCellDictionary release], selectedCellDictionary = nil;
     [deleteButton release], deleteButton = nil;
     [tableView release], tableView = nil;
-    
+	
     [super dealloc];
 }
+
+
 
 
 
@@ -61,16 +68,21 @@
 
 -(void)listNotificationInterests{
 	
+	BetterLog(@"");
+	
 	[self initialise];
     
     [notifications addObject:NEWROUTEBYIDRESPONSE]; // user initiated route by id response
     [notifications addObject:SAVEDROUTEUPDATE]; // new route search, recent>fav move etc
+	[notifications addObject:CALCULATEROUTERESPONSE];
 	
 	[super listNotificationInterests];
 	
 }
 
 -(void)didReceiveNotification:(NSNotification*)notification{
+	
+	BetterLog(@"");
 	
 	[super didReceiveNotification:notification];
     
@@ -79,6 +91,10 @@
 	}
     
     if([notification.name isEqualToString:SAVEDROUTEUPDATE]){
+		[self refreshUIFromDataProvider];
+	}
+	
+	if([notification.name isEqualToString:CALCULATEROUTERESPONSE]){
 		[self refreshUIFromDataProvider];
 	}
 	
@@ -98,10 +114,11 @@
     if([dataProvider count]>0){
         
         if(isSectioned==YES){
-            self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"date"];
-            self.keys=[GlobalUtilities newTableViewIndexFromArray:dataProvider usingKey:@"date"];
+            self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString"];
+            self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO];
         }
         [self createRowHeightsArray];
+		[self createSectionHeadersArray];
         [self.tableView reloadData];
         
     }else{
@@ -121,9 +138,11 @@
 
 - (void)viewDidLoad {
 	
-    if([dataType isEqualToString:@"Recent"]{
+    if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
         isSectioned=YES;
     }
+	
+	[super viewDidLoad];
 	
 }
 
@@ -144,6 +163,9 @@
 
 -(void)createNonPersistentUI{
 	
+	if(dataProvider==nil){
+		[self refreshUIFromDataProvider];
+	}
 	
 }
 
@@ -180,6 +202,23 @@
 
 }
 
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{  
+	
+	if (isSectioned==YES) {
+		return [tableSectionArray objectAtIndex:section];
+	}
+	return nil;
+	
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+	if(isSectioned==NO){
+		return 0.0f;
+	}
+	return 24.0f;
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -229,6 +268,24 @@
 
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	if(isSectioned==NO){
+		return [[rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
+	}else{
+		NSString *key=[keys objectAtIndex:[indexPath section]];
+		NSMutableArray *arr=[rowHeightDictionary objectForKey:key];
+		return [[arr objectAtIndex:[indexPath row]] floatValue];
+	}
+}
+
+
+//
+/***********************************************
+ * @description			Table view utitlity
+ ***********************************************/
+//
+
        
 -(void)createRowHeightsArray{
     
@@ -255,22 +312,67 @@
             [rowHeightDictionary removeAllObjects];
         }
         
-        for( NSString *key in tableDataProvider){
+        for( NSString *key in keys){
             
             NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+			NSMutableArray *sectionrowheightarray=[[NSMutableArray alloc]init];
         
             for (int i=0; i<[sectionDataProvider count]; i++) {
                 
                 RouteVO *route = [sectionDataProvider objectAtIndex:i];
-                [rowHeightsArray addObject:[RouteCellView heightForCellWithDataProvider:route]];
+                [sectionrowheightarray addObject:[RouteCellView heightForCellWithDataProvider:route]];
                 
             }
+			[rowHeightDictionary setObject:sectionrowheightarray forKey:key];
+			[sectionrowheightarray release];
             
         }
         
     }
    
    
+}
+
+-(void)createSectionHeadersArray{
+	
+	if(isSectioned==YES){
+		
+		if(tableSectionArray==nil){
+            self.tableSectionArray=[[NSMutableArray alloc]init];
+        }else{
+            [tableSectionArray removeAllObjects];
+        }
+		
+		for (int i=0;i<[keys count];i++){
+			
+			UIView *headerView=[[UIView	alloc]initWithFrame:CGRectMake(0, 0, 320, 24)];
+			headerView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"darkgreen"];
+			
+			UILabel *sectionLabel=[[UILabel alloc]initWithFrame:CGRectMake(10.0, 0, 280, 24)];
+			sectionLabel.backgroundColor=[UIColor clearColor];
+			sectionLabel.textColor=UIColorFromRGB(0xFFFFFF);
+			sectionLabel.font=[UIFont boldSystemFontOfSize:11.5];
+			
+			// create ui string
+			NSString *key=[keys objectAtIndex:i];
+			NSDate *sectionDate=[NSDate dateFromString:key];
+			NSDateFormatter *displayFormatter = [[NSDateFormatter alloc] init];
+			[displayFormatter setDateFormat:@"EEEE d MMM YYYY"];
+			NSString *timeString = [displayFormatter stringFromDate:sectionDate];
+			[displayFormatter release];
+			sectionLabel.text=timeString;
+			
+			
+			[headerView addSubview:sectionLabel];
+			[sectionLabel release];
+			
+			[tableSectionArray addObject:headerView];
+			[headerView release];
+		}
+		
+	}
+	
+	
 }
 
 

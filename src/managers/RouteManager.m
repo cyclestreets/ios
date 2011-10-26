@@ -171,6 +171,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             self.selectedRoute = [validation.responseDict objectForKey:CALCULATEROUTE];
             
             [[SavedRoutesManager sharedInstance] addRouteToDataProvider:selectedRoute dp:SAVEDROUTE_RECENTS];
+			
+			// legacy support only
+			CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+			[cycleStreets.files setRoute:[[selectedRoute routeid] intValue] data:selectedRoute];
+			
                 
             [self warnOnFirstRoute];
             [self selectRoute:selectedRoute];	

@@ -13,6 +13,12 @@
 
 @implementation RouteCellView
 @synthesize dataProvider;
+@synthesize viewContainer;
+@synthesize nameLabel;
+@synthesize readoutLabel;
+@synthesize icon;
+@synthesize isSelectedRoute;
+@synthesize selectedRouteIcon;
 
 //=========================================================== 
 // dealloc
@@ -20,9 +26,16 @@
 - (void)dealloc
 {
     [dataProvider release], dataProvider = nil;
+    [viewContainer release], viewContainer = nil;
+    [nameLabel release], nameLabel = nil;
+    [readoutLabel release], readoutLabel = nil;
+    [icon release], icon = nil;
+    [selectedRouteIcon release], selectedRouteIcon = nil;
 	
     [super dealloc];
 }
+
+
 
 
 

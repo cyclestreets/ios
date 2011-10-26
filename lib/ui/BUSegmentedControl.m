@@ -82,7 +82,8 @@
 		}
 		
 		[button setTitle:[dataProvider objectAtIndex:i] forState:UIControlStateNormal];
-		button.titleLabel.font=[UIFont boldSystemFontOfSize:11];
+		button.titleLabel.font=[UIFont boldSystemFontOfSize:12];
+		button.titleLabel.shadowOffset=CGSizeMake(0, -1);
 		button.backgroundColor=[UIColor clearColor];
 		CGRect bframe=button.frame;
 		
