@@ -12,7 +12,7 @@
 #import "BorderView.h"
 #import "RouteSummary.h"
 
-@interface RoutesViewContoller : SuperViewController <BUSegmentedControlDelegate>{
+@interface RoutesViewController : SuperViewController <BUSegmentedControlDelegate>{
 	
 	IBOutlet		UIView				*titleHeaderView;
 	IBOutlet		BorderView			*controlView;

@@ -6,13 +6,13 @@
 //  Copyright 2011 CycleStreets Ltd. All rights reserved.
 //
 
-#import "RoutesViewContoller.h"
+#import "RoutesViewController.h"
 #import "AppConstants.h"
 #import "ViewUtilities.h"
 #import "StyleManager.h"
 #import "RouteListViewController.h"
 #import "RouteManager.h"
-
+#import "ButtonUtilities.h"
 
 
 @interface RoutesViewController(Private)
@@ -23,7 +23,7 @@
 @end
 
 
-@implementation RoutesViewContoller
+@implementation RoutesViewController
 @synthesize titleHeaderView;
 @synthesize controlView;
 @synthesize routeTypeControl;
@@ -79,7 +79,7 @@
 	[super didReceiveNotification:notification];
 	
     if([notification.name isEqualToString:CSROUTESELECTED]){
-        [self selectedRouteUpdated]
+        [self selectedRouteUpdated];
     }
 	
 }
@@ -102,11 +102,12 @@
     
     selectedRouteButton.enabled=selectedRouteExists;
     
-    if([self.navigationController.topViewController==routeSummary]){
+    if(self.navigationController.topViewController==routeSummary){
         if(selectedRouteExists==NO){
             [self.navigationController popToRootViewControllerAnimated:NO];
         }
     }
+	
     
 }
 
@@ -135,17 +136,27 @@
 	controlView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"controlbar"];
 	[controlView drawBorderwithColor:UIColorFromRGB(0x333333) andStroke:1 left:NO right:NO top:YES bottom:YES];
 	
+	LayoutBox *controlcontainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, CONTROLUIHEIGHT)];
+	controlcontainer.fixedWidth=YES;
+	controlcontainer.fixedHeight=YES;
+	controlcontainer.itemPadding=15;
+	controlcontainer.paddingLeft=15;
+	controlcontainer.alignMode=BUCenterAlignMode;
+	
 	NSMutableArray *sdp = [[NSMutableArray alloc] initWithObjects:@"Favourites", @"Recent",  nil];
 	routeTypeControl=[[BUSegmentedControl alloc]init];
 	routeTypeControl.dataProvider=sdp;
 	routeTypeControl.delegate=self;
-	routeTypeControl.itemWidth=100;
+	routeTypeControl.itemWidth=80;
 	[routeTypeControl buildInterface];
-	[controlView addSubview:routeTypeControl];
+	[controlcontainer addSubview:routeTypeControl];
 	
-	[ViewUtilities alignView:routeTypeControl withView:controlView :BULeftAlignMode :BUCenterAlignMode];
-    
+	self.selectedRouteButton=[ButtonUtilities UIButtonWithWidth:120 height:28 type:@"orange" text:@"Selected Route"];
     [selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
+	[controlcontainer addSubview:selectedRouteButton];
+	[controlView addSubview:controlcontainer];
+	[controlcontainer release];
 	
 	contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NAVIGATIONHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 	[self.view addSubview:contentView];
@@ -194,9 +205,10 @@
     [nav release];
 	navigation.delegate=self;
 	navigation.leftItemType=BUNavNoneType;
-    navigation.rightItemType=BUNavNoneType; // TODO: routebyid support
+    navigation.rightItemType=UIKitButtonType;
+	navigation.rightButtonTitle=@"New";
 	navigation.titleType=BUNavTitleDefaultType;
-	navigation.titleString=@"Saved Routes";
+	navigation.titleString=@"Routes";
     navigation.titleFontColor=[UIColor whiteColor];
 	navigation.navigationItem=self.navigationItem;
 	[navigation createNavigationUI];
@@ -224,14 +236,10 @@
 
 -(void)doNavigationSelector:(NSString*)type{
     
-    // do route id alert
+    if([type isEqualToString:RIGHT]){
+		[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil delegate:self];
+	}
     
-}
-
--(IBAction)retrieveRouteByNumberButtonSelected:(id)sender{
-	
-	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil delegate:self];
-	
 }
 
 
@@ -276,11 +284,11 @@
 	RouteListViewController *vc = [subViewsArray objectAtIndex:index];
 	
     if(activeIndex!=-1){
-        UIView *activeitemView=[[subViewsArray objectAtIndex:activeIndex] view];
+        UIView *activeitemView=[vc view];
         activeitemView.hidden=YES;
     }
     
-    UIView *itemView=[[subViewsArray objectAtIndex:index] view];
+    UIView *itemView=[vc view];
     [contentView bringSubviewToFront:itemView];
     activeIndex=index;
     itemView.hidden=NO;
