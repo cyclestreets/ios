@@ -28,66 +28,66 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "MapLocationSearchViewController.h"
 #import "RMMapViewDelegate.h"
 #import "BlueCircleView.h"
-#import "MBProgressHUD.h"
+#import "SuperViewController.h"
 @class CycleStreets;
 @class Location;
 @class PhotoMapImageLocationViewController;
 @class InitialLocation;
 
-@interface PhotoMapViewController : UIViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider,MBProgressHUDDelegate> {
+
+@interface PhotoMapViewController : SuperViewController
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider> {
 	
 	
-	RMMapView *mapView;				//map of current area
-	BlueCircleView *blueCircleView;	//overlay GPS location
-	UILabel *attributionLabel;
-	
-	CLLocationManager *locationManager; //move out of this class into app, or app sub, if/when we generalise.
-	PhotoMapImageLocationViewController *locationView;			//the popup with the contents of a particular location (photomap etc.)
-	CLLocation *lastLocation;		//the last one
-	
-	MBProgressHUD			*progressHud;
+	IBOutlet RMMapView								*mapView;			//map of current area
+	IBOutlet BlueCircleView							*blueCircleView;	//overlay GPS location
+	IBOutlet UILabel									*attributionLabel;	// map type label
 	
 	
-	InitialLocation *initialLocation;
-	UIBarButtonItem *locationButton;
-	UIBarButtonItem *showPhotosButton;
-	MapLocationSearchViewController *mapLocationSearchView;			//the search popup
+	IBOutlet UIBarButtonItem							*gpslocateButton;
+	IBOutlet UIBarButtonItem							*showPhotosButton;
 	
-	//Welcome
-	UIView		*introView;
-	UIButton *introButton;
 	
-	NSMutableArray *photoMarkers;
+	CLLocationManager						*locationManager;	// location
+	CLLocation								*lastLocation;		// last location
 	
-	BOOL photomapQuerying;
-	BOOL showingPhotos;
-	BOOL locationManagerIsLocating;
-	BOOL locationWasFound;
+	
+	PhotoMapImageLocationViewController		*locationView;			//the popup with the contents of a particular location (photomap etc.)
+	MapLocationSearchViewController			*mapLocationSearchView;	//the search popup
+	
+	
+	InitialLocation							*initialLocation;
+	IBOutlet UIView									*introView;
+	IBOutlet UIButton								*introButton;
+	
+	NSMutableArray							*photoMarkers;
+	
+	BOOL									photomapQuerying;
+	BOOL									showingPhotos;
+	BOOL									locationManagerIsLocating;
+	BOOL									locationWasFound;
 }
 
-@property (nonatomic, retain)		IBOutlet RMMapView				* mapView;
-@property (nonatomic, retain)		IBOutlet BlueCircleView				* blueCircleView;
-@property (nonatomic, retain)		IBOutlet UILabel				* attributionLabel;
-@property (nonatomic, retain)		CLLocationManager				* locationManager;
-@property (nonatomic, retain)		PhotoMapImageLocationViewController				* locationView;
-@property (nonatomic, retain)		CLLocation				* lastLocation;
-@property (nonatomic, retain)		MBProgressHUD				* progressHud;
-@property (nonatomic, retain)		InitialLocation				* initialLocation;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* locationButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* showPhotosButton;
-@property (nonatomic, retain)		MapLocationSearchViewController				* mapLocationSearchView;
-@property (nonatomic, retain)		IBOutlet UIView				* introView;
-@property (nonatomic, retain)		IBOutlet UIButton				* introButton;
-@property (nonatomic, retain)		NSMutableArray				* photoMarkers;
-@property (nonatomic)		BOOL				 photomapQuerying;
-@property (nonatomic)		BOOL				 showingPhotos;
-@property (nonatomic)		BOOL				 locationManagerIsLocating;
-@property (nonatomic)		BOOL				 locationWasFound;
+@property (nonatomic, retain)	RMMapView		*mapView;
+@property (nonatomic, retain)	BlueCircleView		*blueCircleView;
+@property (nonatomic, retain)	UILabel		*attributionLabel;
+@property (nonatomic, retain)	UIBarButtonItem		*gpslocateButton;
+@property (nonatomic, retain)	UIBarButtonItem		*showPhotosButton;
+@property (nonatomic, retain)	CLLocationManager		*locationManager;
+@property (nonatomic, retain)	CLLocation		*lastLocation;
+@property (nonatomic, retain)	PhotoMapImageLocationViewController		*locationView;
+@property (nonatomic, retain)	MapLocationSearchViewController		*mapLocationSearchView;
+@property (nonatomic, retain)	InitialLocation		*initialLocation;
+@property (nonatomic, retain)	UIView		*introView;
+@property (nonatomic, retain)	UIButton		*introButton;
+@property (nonatomic, retain)	NSMutableArray		*photoMarkers;
+@property (nonatomic)	BOOL		photomapQuerying;
+@property (nonatomic)	BOOL		showingPhotos;
+@property (nonatomic)	BOOL		locationManagerIsLocating;
+@property (nonatomic)	BOOL		locationWasFound;
 
 
-- (IBAction) didZoomIn;
-- (IBAction) didZoomOut;
+
 - (IBAction) didLocation;
 - (IBAction) didShowPhotos;
 - (IBAction) didSearch;
@@ -102,8 +102,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)startlocationManagerIsLocating;
 - (void)stoplocationManagerIsLocating;
 
--(void)showProgressHud:(BOOL)show;
--(void)removeHUD;
 
 - (void) requestPhotos;
 - (void) clearPhotos;

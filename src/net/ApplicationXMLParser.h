@@ -37,4 +37,6 @@
 
 -(void)parseData:(NetResponse*)response;
 
+-(NSDictionary*)parseXML:(NSData*)data forType:(NSString*)datatype;
+
 @end

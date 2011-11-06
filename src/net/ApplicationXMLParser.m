@@ -21,6 +21,8 @@
 #import "RouteVO.h"
 #import "SegmentVO.h"
 #import "CSPointVO.h"
+#import "PhotoMapVO.h"
+#import "PhotoMapListVO.h"
 
 @interface ApplicationXMLParser(Private)
 
@@ -49,7 +51,9 @@
 
 
 
-//
+//utility
+
+-(RouteVO*)newRouteForData:(TBXMLElement*)response;
 
 
 @end
@@ -229,6 +233,24 @@
 
 
 
+-(id)parseXML:(NSData*)data forType:(NSString*)datatype{
+	
+	
+	if([datatype isEqualToString:CALCULATEROUTE]){
+		
+		TBXML	*parser=[[TBXML alloc]initWithXMLData:data]; 
+		RouteVO *route=[self newRouteForData:parser.rootXMLElement];
+		return route;
+		
+	}else{
+		return nil;
+	}
+	
+	
+	
+}
+
+
 
 //
 /***********************************************
@@ -358,14 +380,41 @@
 		return;
 	}
 	
-	 ValidationVO *validation=[[ValidationVO alloc]init];
+	ValidationVO *validation=[[ValidationVO alloc]init];
+	
+	RouteVO *route=[self newRouteForData:response];
+	
+	if(route!=nil){
+		
+		validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
+		[route release];
+		
+		validation.returnCode=ValidationCalculateRouteSuccess;
+		
+	}else{
+		validation.returnCode=ValidationCalculateRouteFailed;
+	}
+	
+	
+	activeResponse.dataProvider=validation;
+	[validation release];
+	
+	
+}
+
+
+
+-(RouteVO*)newRouteForData:(TBXMLElement*)response{
+	
 	
 	TBXMLElement *root=[TBXML childElementNamed:@"gml:featureMember" parentElement:response];
 	TBXMLElement *routenode=[TBXML childElementNamed:@"cs:route" parentElement:root];
 	
+	RouteVO *route;
+	
 	if(routenode!=nil){
-		
-		RouteVO *route=[[RouteVO alloc]init];
+	
+		route=[[RouteVO alloc]init];
 		
 		route.routeid=[TBXML textForElement:[TBXML childElementNamed:@"cs:itinerary" parentElement:routenode]];
 		route.length=[NSNumber numberWithInt:[[TBXML textForElement:[TBXML childElementNamed:@"cs:length" parentElement:routenode]]intValue]];
@@ -389,7 +438,7 @@
 		route.southWest=sw;
 		[sw release];
 		
-
+		
 		
 		NSMutableArray	*segments=[[NSMutableArray alloc]init];
 		root=root->nextSibling;
@@ -411,7 +460,7 @@
 			segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
 			segment.startTime=time;
 			segment.startDistance=distance;
-				
+			
 			// groups pints into lat/long array
 			NSString *points=[TBXML textForElement:[TBXML childElementNamed:@"cs:points" parentElement:segmentnode]];
 			
@@ -429,7 +478,7 @@
 			}
 			segment.pointsArray=result;
 			[result release];
-			 
+			
 			time += [segment segmentTime];
 			distance += [segment segmentDistance];
 			
@@ -437,32 +486,20 @@
 			[segment release];
 			
 			
-
+			
 			root=root->nextSibling;
 			
 		}
 		
 		route.segments=segments;
-		
-		
-		validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
-		[route release];
-		
-		validation.returnCode=ValidationCalculateRouteSuccess;
-		
-	}else{
-		validation.returnCode=ValidationCalculateRouteFailed;
+	
+	
+	
 	}
 	
-	
-	activeResponse.dataProvider=validation;
-	[validation release];
-	
+	return route;
 	
 }
-
-
-
 
 
 
@@ -480,10 +517,7 @@
 		return;
 	}
     
-    //ValidationVO *validation=[[ValidationVO alloc]init];
     
-    // will be <gml:featureMember>
-    //then <cs:photo>
     
     /* use this vo
     for (NSDictionary *photoDictionary in [elements objectForKey:PHOTO_ELEMENT]) {
@@ -500,12 +534,71 @@
 
 
 -(void)RetrievePhotosXMLParser:(TBXML*)parser{
+	
+	BetterLog(@"");
+    
+    
+    TBXMLElement *response = parser.rootXMLElement;
+	ValidationVO *validation=[[ValidationVO alloc]init];
+	
+	[self validateXML:response];
+	if(activeResponse.status==NO){
+		validation.returnCode=ValidationRetrievePhotosFailed;
+		activeResponse.dataProvider=validation;
+		[validation release];
+		return;
+	}
     
     
     
+    TBXMLElement *root=[TBXML childElementNamed:@"gml:featureMember" parentElement:response];
+	
+	
+	if(root!=nil){
+	
+		PhotoMapListVO *photolist=[[PhotoMapListVO alloc]init];
+		NSMutableArray	*arr=[[NSMutableArray alloc]init];
+		
+		while (root!=nil) {
+			
+			TBXMLElement *photonode=[TBXML childElementNamed:@"cs:photo" parentElement:root];
+			
+			PhotoMapVO *photo=[[PhotoMapVO alloc]init];
+			
+			CLLocationCoordinate2D location;
+			location.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:longitude" parentElement:photonode]] floatValue];
+			location.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:latitude" parentElement:photonode]] floatValue];
+			photo.locationCoords=location;
+			
+			photo.csid=[TBXML textForElement:[TBXML childElementNamed:@"cs:id" parentElement:photonode]];
+			photo.caption=[TBXML textForElement:[TBXML childElementNamed:@"cs:caption" parentElement:photonode]];
+			photo.bigImageURL=[TBXML textForElement:[TBXML childElementNamed:@"cs:thumbnailUrl" parentElement:photonode]];
+			[photo generateSmallImageURL:[TBXML textForElement:[TBXML childElementNamed:@"cs:thumbnailSizes" parentElement:photonode]]];
+			
+			[arr addObject:photo];
+			[photo release];
+			
+			root=root->nextSibling;
+			
+		}
+		
+		photolist.photos=arr;
+		[arr release];
+		
+		validation.responseDict=[NSDictionary dictionaryWithObject:photolist forKey:activeResponse.dataid];
+		[photolist release];
+		
+		validation.returnCode=ValidationRetrievePhotosSuccess;
+		
+	}else{
+		
+		validation.returnCode=ValidationRetrievePhotosFailed;
+		
+	}
+	
     
-    
-    
+	activeResponse.dataProvider=validation;
+	[validation release];
     
     
 }

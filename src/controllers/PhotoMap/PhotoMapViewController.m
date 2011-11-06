@@ -52,6 +52,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Files.h"
 #import "GlobalUtilities.h"
 #import "ButtonUtilities.h"
+#import "HudManager.h"
+#import "PhotoManager.h"
+
+
+
+@interface PhotoMapViewController(Private)
+
+
+- (void) didNotificationMapStyleChanged;
+
+@end
+
+
 
 @implementation PhotoMapViewController
 
@@ -62,14 +75,13 @@ static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize mapView;
 @synthesize blueCircleView;
 @synthesize attributionLabel;
-@synthesize locationManager;
-@synthesize locationView;
-@synthesize lastLocation;
-@synthesize progressHud;
-@synthesize initialLocation;
-@synthesize locationButton;
+@synthesize gpslocateButton;
 @synthesize showPhotosButton;
+@synthesize locationManager;
+@synthesize lastLocation;
+@synthesize locationView;
 @synthesize mapLocationSearchView;
+@synthesize initialLocation;
 @synthesize introView;
 @synthesize introButton;
 @synthesize photoMarkers;
@@ -78,22 +90,21 @@ static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize locationManagerIsLocating;
 @synthesize locationWasFound;
 
-/***********************************************************/
+//=========================================================== 
 // dealloc
-/***********************************************************/
+//=========================================================== 
 - (void)dealloc
 {
     [mapView release], mapView = nil;
     [blueCircleView release], blueCircleView = nil;
     [attributionLabel release], attributionLabel = nil;
-    [locationManager release], locationManager = nil;
-    [locationView release], locationView = nil;
-    [lastLocation release], lastLocation = nil;
-    [progressHud release], progressHud = nil;
-    [initialLocation release], initialLocation = nil;
-    [locationButton release], locationButton = nil;
+    [gpslocateButton release], gpslocateButton = nil;
     [showPhotosButton release], showPhotosButton = nil;
+    [locationManager release], locationManager = nil;
+    [lastLocation release], lastLocation = nil;
+    [locationView release], locationView = nil;
     [mapLocationSearchView release], mapLocationSearchView = nil;
+    [initialLocation release], initialLocation = nil;
     [introView release], introView = nil;
     [introButton release], introButton = nil;
     [photoMarkers release], photoMarkers = nil;
@@ -103,25 +114,98 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 
 
+//
+/***********************************************
+ * @description		NOTIFICATIONS
+ ***********************************************/
+//
+
+-(void)listNotificationInterests{
+	
+	[self initialise];
+    
+    [notifications addObject:MAPSTYLECHANGED];
+	[notifications addObject:RETREIVELOCATIONPHOTOSRESPONSE];
+	
+	[super listNotificationInterests];
+	
+}
+
+-(void)didReceiveNotification:(NSNotification*)notification{
+	
+	BetterLog(@"");
+	
+	[super didReceiveNotification:notification];
+	
+    if([notification.name isEqualToString:MAPSTYLECHANGED]){
+        [self didNotificationMapStyleChanged];
+    }
+	
+	if([notification.name isEqualToString:RETREIVELOCATIONPHOTOSRESPONSE]){
+        [self refreshUIFromDataProvider];
+    }
+	
+}
+
+
+- (void) didNotificationMapStyleChanged {
+	mapView.contents.tileSource = [MapViewController tileSource];
+	self.attributionLabel.text = [MapViewController mapAttribution];
+}
+
+
+-(void)refreshUIFromDataProvider{
+	
+	PhotoMapListVO *photoList=[PhotoManager sharedInstance].locationPhotoList;
+	
+	[self clearPhotos];
+	if (showingPhotos==NO) {
+		photomapQuerying = NO;
+		[[HudManager sharedInstance] removeHUD];
+		return;
+	}
+	
+	for (PhotoMapVO *photo in [photoList photos]) {
+		RMMarker *marker = [Markers markerPhoto];
+		marker.data = photo;
+		[photoMarkers addObject:marker];
+		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
+	}
+
+	photomapQuerying = NO;
+	[[HudManager sharedInstance] removeHUD];
+	
+	
+}
+
+
+//
+/***********************************************
+ * @description			View Methods
+ ***********************************************/
+//
+
 
 - (void)viewDidLoad {
+	
     [super viewDidLoad];
 		
+	[self createPersistentUI];
+	
+	
+}
+
+
+-(void)createPersistentUI{
+	
 	//Necessary to start route-me service
 	[RMMapView class];
-	
 	[[[RMMapContents alloc] initWithView:mapView tilesource:[MapViewController tileSource]] autorelease];
-
-	
-	// Initialize
 	[mapView setDelegate:self];
-	if (initialLocation == nil) {
-		initialLocation = [[InitialLocation alloc] initWithMapView:mapView withController:self];
-	}
-	[initialLocation performSelector:@selector(query) withObject:nil afterDelay:0.0];
-	
-	//clear up from last run.
 	[[mapView markerManager] removeMarkers];
+	
+	
+	self.photoMarkers = [[[NSMutableArray alloc] init] autorelease];
 	
 	[blueCircleView setLocationProvider:self];
 	
@@ -129,31 +213,23 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	self.attributionLabel.text = [MapViewController mapAttribution];
 	
 	//set up the location manager.
-	locationManager = [[CLLocationManager alloc] init];
+	self.locationManager = [[CLLocationManager alloc] init];
 	locationManager.desiredAccuracy=500;
 	locationManagerIsLocating = NO;
 	locationWasFound=YES;
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(didNotificationMapStyleChanged)
-												 name:@"NotificationMapStyleChanged"
-											   object:nil];	
-	
-	self.progressHud=[[MBProgressHUD alloc] initWithView:mapView];
-	[mapView addSubview:progressHud];
-	progressHud.alpha=0.6;
-	progressHud.hidden=YES;
-	progressHud.delegate = self;
-	
+		
 	showingPhotos = YES;
-	[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0.0];
+	
+	//[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0.0];
 	
 	[ButtonUtilities styleIBButton:introButton type:@"green" text:@"OK"];
+	
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
 	NSString *experienceLevel = [misc objectForKey:@"experienced"];
 	if (experienceLevel != nil) {
 		[self.introView removeFromSuperview];
 	}
+	
 }
 
 
@@ -165,18 +241,25 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 
-- (void) didNotificationMapStyleChanged {
-	mapView.contents.tileSource = [MapViewController tileSource];
-	self.attributionLabel.text = [MapViewController mapAttribution];
-}
+
+
+#pragma mark Photo Markers
+//
+/***********************************************
+ * @description			Photo Marker Methods
+ ***********************************************/
+//	
 
 
 - (void) requestPhotos {
 	
-	if (photomapQuerying || !showingPhotos) return;
+	BetterLog(@"");
 	
+	if (photomapQuerying || !showingPhotos) return;
 	photomapQuerying = YES;
-	[self showProgressHud:YES];
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:nil andMessage:nil];
+	
 	CGRect bounds = mapView.contents.screenBounds;
 	CLLocationCoordinate2D nw = [mapView pixelToLatLong:bounds.origin];
 	CLLocationCoordinate2D se = [mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
@@ -186,47 +269,111 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	ne.longitude = se.longitude;
 	sw.latitude = se.latitude;
 	sw.longitude = nw.longitude;
+	
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];	
 }
 
--(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
-	
-}
-
-- (void) afterMapMove: (RMMapView*) map {
-	//BetterLog(@"afterMapMove");
-	[blueCircleView setNeedsDisplay];
-	[self requestPhotos];
-}
-
-
-
-- (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
-	//BetterLog(@"afterMapZoom");
-	[blueCircleView setNeedsDisplay];
-	[self requestPhotos];
-}
-
-- (void)saveLocation:(CLLocationCoordinate2D)location {
-	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
-	[misc setValue:[NSString stringWithFormat:@"%f", location.latitude] forKey:@"latitude"];
-	[misc setValue:[NSString stringWithFormat:@"%f", location.longitude] forKey:@"longitude"];
-	[[CycleStreets sharedInstance].files setMisc:misc];	
-}
-
-- (void)fixLocationAndButtons:(CLLocationCoordinate2D)location {
-	[mapView moveToLatLong:location];
-	[self saveLocation:location];	
-}
-
+// DEPRECATED
 - (PhotoMapVO *) randomPhoto {
+	
 	if (photoMarkers == nil || [photoMarkers count] == 0) return nil;
 	srand( time( NULL));
 	int i = random() % [photoMarkers count];
 	return (PhotoMapVO *)((RMMarker *)[photoMarkers objectAtIndex:i]).data;
 }
 
+
+// TODO: All this will be moved the Photo Model
+
+- (void) clearPhotos {
+
+	if (photoMarkers != nil) {
+		[[mapView markerManager] removeMarkers:photoMarkers];
+		[photoMarkers removeAllObjects];
+	}
+	
+}
+
+- (void) didSucceedPhoto:(XMLRequest *)request results:(NSDictionary *)elements {
+	
+	BetterLog(@"");
+	
+	[self clearPhotos];
+	if (showingPhotos==NO) {
+		photomapQuerying = NO;
+		[[HudManager sharedInstance] removeHUD];
+		return;
+	}
+	
+	
+	PhotoMapListVO *photoList = [[PhotoMapListVO alloc] initWithElements:elements];
+	for (PhotoMapVO *photo in [photoList photos]) {
+		RMMarker *marker = [Markers markerPhoto];
+		marker.data = photo;
+		[photoMarkers addObject:marker];
+		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
+	}
+	[photoList release];
+	photomapQuerying = NO;
+	[[HudManager sharedInstance] removeHUD];
+}
+
+- (void) didFailPhoto:(XMLRequest *)request message:(NSString *)message {
+	[self clearPhotos];
+	photomapQuerying = NO;
+	[[HudManager sharedInstance] removeHUD];
+}
+
+//helper, could be shelled out as more general.
+- (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
+	BetterLog(@"");
+	
+	[[PhotoManager sharedInstance] retrievePhotosForLocationBounds:ne withEdge:sw];
+	
+	/*
+	QueryPhoto *queryPhoto = [[QueryPhoto alloc] initNorthEast:ne SouthWest:sw];
+	[queryPhoto runWithTarget:self onSuccess:@selector(didSucceedPhoto:results:) onFailure:@selector(didFailPhoto:message:)];
+	[queryPhoto release];
+	 */
+}
+
+
+//
+/***********************************************
+ * @description			MapView delegate methods
+ ***********************************************/
+//
+
+
+-(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	
+}
+
+- (void) afterMapMove: (RMMapView*) map {
+	
+	BetterLog(@"");
+	
+	[blueCircleView setNeedsDisplay];
+	[self requestPhotos];
+}
+
+
+- (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
+	[blueCircleView setNeedsDisplay];
+	[self requestPhotos];
+}
+
+
+
+
+
+
 #pragma mark toolbar actions
+//
+/***********************************************
+ * @description			UI Events
+ ***********************************************/
+//
 
 - (IBAction) didZoomIn {
 	BetterLog(@"zoomin");
@@ -294,6 +441,9 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[self.introView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:FADE_DURATION];			
 }
 
+
+
+
 #pragma mark utility
 
 
@@ -329,12 +479,20 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	return (lastLocation.horizontalAccuracy / metresPerPixel);
 }
 
+
+
+
 #pragma mark location delegate
+//
+/***********************************************
+ * @description			Location Manager methods
+ ***********************************************/
+//
 
 // called from toggled ui button, stops CL and removes circle view
 - (void)stoplocationManagerIsLocating {
 	locationManagerIsLocating = NO;
-	locationButton.style = UIBarButtonItemStyleBordered;
+	gpslocateButton.style = UIBarButtonItemStyleBordered;
 	[locationManager stopUpdatingLocation];
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
 	blueCircleView.hidden = YES;
@@ -347,7 +505,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		
 		locationManagerIsLocating = YES;
 		locationWasFound=NO;
-		locationButton.style = UIBarButtonItemStyleDone;
+		gpslocateButton.style = UIBarButtonItemStyleDone;
 		locationManager.delegate = self;
 		[locationManager startUpdatingLocation];
 		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:30];
@@ -407,7 +565,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	if(locationManagerIsLocating==YES){
 		
 		if([state isEqualToString:@"Acquired Location"]){
-			// 
+			[self requestPhotos];
 		}
 		
 		[self stoplocationManagerIsLocating];
@@ -426,60 +584,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[gpsAlert release];
 }
 
-#pragma mark photomap functions
-
-- (void) clearPhotos {
-	//Clear out the previous list.
-	if (photoMarkers != nil) {
-		NSArray *oldMarkers = [photoMarkers copy];
-		for (RMMarker *oldMarker in photoMarkers) {
-			[[mapView markerManager] removeMarker:oldMarker];
-		}
-		[oldMarkers release];
-	}
-}
-
-- (void) didSucceedPhoto:(XMLRequest *)request results:(NSDictionary *)elements {
-	
-	BetterLog(@"");
-	
-	[self clearPhotos];
-	if (!showingPhotos) {
-		photomapQuerying = NO;
-		[self showProgressHud:NO];
-		return;
-	}
-	if (photoMarkers == nil) {
-		photoMarkers = [[NSMutableArray alloc] initWithCapacity:10];
-	}
-	
-	//build the list of photos, and add them as markers.
-	PhotoMapListVO *photoList = [[PhotoMapListVO alloc] initWithElements:elements];
-	for (PhotoMapVO *photo in [photoList photos]) {
-		RMMarker *marker = [Markers markerPhoto];
-		marker.data = photo;
-		[photoMarkers addObject:marker];
-		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
-	}
-	[photoList release];
-	photomapQuerying = NO;
-	[self showProgressHud:NO];
-}
-
-- (void) didFailPhoto:(XMLRequest *)request message:(NSString *)message {
-	[self clearPhotos];
-	photomapQuerying = NO;
-	[self showProgressHud:NO];
-}
-
-//helper, could be shelled out as more general.
-- (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
-	BetterLog(@"");
-	QueryPhoto *queryPhoto = [[QueryPhoto alloc] initNorthEast:ne SouthWest:sw];
-	[queryPhoto runWithTarget:self onSuccess:@selector(didSucceedPhoto:results:) onFailure:@selector(didFailPhoto:message:)];
-	[queryPhoto release];
-}
-
 #pragma mark search response
 
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location {
@@ -489,31 +593,16 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 
 
-//
-/***********************************************
- * @description			HUD support
- ***********************************************/
-//
-
--(void)showProgressHud:(BOOL)show{
-	if(show==YES){
-		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(removeHUD) object:nil];
-		if(progressHud.hidden==YES)
-			progressHud.hidden=NO;		
-	}else {
-		[self performSelector:@selector(removeHUD) withObject:nil afterDelay:0.3];
-		
-	}
-
+- (void)saveLocation:(CLLocationCoordinate2D)location {
+	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
+	[misc setValue:[NSString stringWithFormat:@"%f", location.latitude] forKey:@"latitude"];
+	[misc setValue:[NSString stringWithFormat:@"%f", location.longitude] forKey:@"longitude"];
+	[[CycleStreets sharedInstance].files setMisc:misc];	
 }
 
--(void)removeHUD{
-	progressHud.hidden=YES;
-}
-
-
--(void)hudWasHidden{
-	
+- (void)fixLocationAndButtons:(CLLocationCoordinate2D)location {
+	[mapView moveToLatLong:location];
+	[self saveLocation:location];	
 }
 
 
@@ -524,7 +613,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 - (void)nullify {
-	self.locationButton = nil;
+	self.gpslocateButton = nil;
 
 	mapView = nil;
 	
@@ -536,7 +625,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	locationView = nil;
 	lastLocation = nil;
 	initialLocation = nil;
-	progressHud = nil;
 	mapLocationSearchView = nil;	
 }
 

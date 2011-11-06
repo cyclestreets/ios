@@ -31,10 +31,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 static int MIN_SIZE = 80;
 static int BIG_SIZE = 300;
 
+@synthesize locationCoords;
 @synthesize csid;
-@synthesize smallImageURL;
-@synthesize bigImageURL;
 @synthesize caption;
+@synthesize bigImageURL;
+@synthesize smallImageURL;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [csid release], csid = nil;
+    [caption release], caption = nil;
+    [bigImageURL release], bigImageURL = nil;
+    [smallImageURL release], smallImageURL = nil;
+	
+    [super dealloc];
+}
+
+
 
 // Optimize small URL for smallest thumbnail available which is big enough.
 - (void) generateSmallImageURL:(NSString *)sizes {
@@ -79,16 +95,7 @@ static int BIG_SIZE = 300;
 	return locationCoords;
 }
 
-- (NSString *)caption {
-	return caption;
-}
 
-- (void)dealloc {
-	[caption release];
-	[csid release];
-	self.smallImageURL = nil;
-	self.bigImageURL = nil;
-	[super dealloc];
-}
+
 
 @end

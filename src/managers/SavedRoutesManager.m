@@ -262,7 +262,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr{
 	
 	for (NSString *routeid in arr){
-		[[RouteManager sharedInstance] removeRequestID:routeid];
+		[[RouteManager sharedInstance] removeRoute:routeid];
 	}
 	
 }

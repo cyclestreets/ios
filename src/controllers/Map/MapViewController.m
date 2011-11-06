@@ -470,7 +470,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	//[self loadLocation];
 	// DEPRECATED FOR V1.5
 	
+	
+	
 }
+
 
 
 - (void) didNotificationMapStyleChanged {
@@ -698,35 +701,40 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
-	//BetterLog(@"");
-	//mapView.enableDragging=NO;
+	
+	// for marker pop ups
 	
 }
 
 // Should only return yes is marker is start/end and we have not a route drawn
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
-	/*
+	BetterLog(@"");
+	
+	BOOL result=NO;
+	
 	if (marker == start || marker == end) {
-		BetterLog(@"shoulddrag");
-		return YES;
+		result=YES;
 	}
-	 */
-	return NO;
+	mapView.enableDragging=!result;
+	return result;
 }
  
 //TODO: bug here with marker dragging, doesnt recieve any touch updates: 
 //NE: fix is, should ask for correct sub view, we have several overlayed, this needs to be optimised for this to work
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
-	/*
-	NSSet *touches = [event touchesForView:lineView];
+	NSSet *touches = [event touchesForView:blueCircleView]; 
+	// note use of top View required, bcv should not be left top unless required by location?
+	
+	BetterLog(@"touches=%i",[touches count]);
+	
 	for (UITouch *touch in touches) {
-		CGPoint point = [touch locationInView:map];
+		CGPoint point = [touch locationInView:blueCircleView];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
 		[[map markerManager] moveMarker:marker AtLatLon:location];
 	}
-	 */
+	
 }
 
 

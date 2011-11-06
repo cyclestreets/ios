@@ -81,7 +81,6 @@
 						<string key="NSFrame">{{100, 380}, {210, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4yNTA5ODA0MDcgMC41MDE5NjA4MTQgMCAwLjEwMDAwMDAwMTUAA</bytes>
@@ -283,6 +282,15 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 								<reference key="IBUIToolbar" ref="406155970"/>
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
+							<object class="IBUIBarButtonItem" id="385255178">
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">UIButtonBarCameraSmall.png</string>
+								</object>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="406155970"/>
+							</object>
 						</object>
 						<object class="NSColor" key="IBUITintColor">
 							<int key="NSColorSpace">1</int>
@@ -312,19 +320,11 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">locationButton</string>
+						<string key="label">attributionLabel</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="856482428"/>
+						<reference key="destination" ref="370823789"/>
 					</object>
-					<int key="connectionID">8</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">mapView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="430133543"/>
-					</object>
-					<int key="connectionID">16</int>
+					<int key="connectionID">43</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -332,7 +332,31 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="674783147"/>
 					</object>
-					<int key="connectionID">18</int>
+					<int key="connectionID">44</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mapView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="430133543"/>
+					</object>
+					<int key="connectionID">45</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">gpslocateButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="856482428"/>
+					</object>
+					<int key="connectionID">46</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">showPhotosButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="385255178"/>
+					</object>
+					<int key="connectionID">47</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -340,7 +364,7 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="204032061"/>
 					</object>
-					<int key="connectionID">32</int>
+					<int key="connectionID">48</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -348,15 +372,7 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="207574113"/>
 					</object>
-					<int key="connectionID">36</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">attributionLabel</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="370823789"/>
-					</object>
-					<int key="connectionID">38</int>
+					<int key="connectionID">49</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -472,21 +488,17 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="996095365"/>
-							<reference ref="888899059"/>
 							<reference ref="692168983"/>
 							<reference ref="250918959"/>
 							<reference ref="856482428"/>
+							<reference ref="385255178"/>
+							<reference ref="888899059"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
 						<reference key="object" ref="996095365"/>
-						<reference key="parent" ref="406155970"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="888899059"/>
 						<reference key="parent" ref="406155970"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -502,6 +514,16 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="856482428"/>
+						<reference key="parent" ref="406155970"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">41</int>
+						<reference key="object" ref="385255178"/>
+						<reference key="parent" ref="406155970"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">42</int>
+						<reference key="object" ref="888899059"/>
 						<reference key="parent" ref="406155970"/>
 					</object>
 				</object>
@@ -520,7 +542,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 					<string>17.CustomClassName</string>
 					<string>17.IBPluginDependency</string>
 					<string>26.IBPluginDependency</string>
-					<string>27.IBPluginDependency</string>
 					<string>28.IBPluginDependency</string>
 					<string>29.IBPluginDependency</string>
 					<string>37.IBPluginDependency</string>
@@ -528,6 +549,8 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 					<string>4.CustomClassName</string>
 					<string>4.IBPluginDependency</string>
 					<string>40.IBPluginDependency</string>
+					<string>41.IBPluginDependency</string>
+					<string>42.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
@@ -555,8 +578,9 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>RMMapView</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -576,7 +600,7 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -591,7 +615,7 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PhotoMapViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">SuperViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -600,13 +624,9 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<string>didLocation</string>
 							<string>didSearch</string>
 							<string>didShowPhotos</string>
-							<string>didZoomIn</string>
-							<string>didZoomOut</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -621,8 +641,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<string>didLocation</string>
 							<string>didSearch</string>
 							<string>didShowPhotos</string>
-							<string>didZoomIn</string>
-							<string>didZoomOut</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -642,14 +660,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 								<string key="name">didShowPhotos</string>
 								<string key="candidateClassName">id</string>
 							</object>
-							<object class="IBActionInfo">
-								<string key="name">didZoomIn</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">didZoomOut</string>
-								<string key="candidateClassName">id</string>
-							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -658,9 +668,9 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>attributionLabel</string>
 							<string>blueCircleView</string>
+							<string>gpslocateButton</string>
 							<string>introButton</string>
 							<string>introView</string>
-							<string>locationButton</string>
 							<string>mapView</string>
 							<string>showPhotosButton</string>
 						</object>
@@ -668,9 +678,9 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
 							<string>BlueCircleView</string>
+							<string>UIBarButtonItem</string>
 							<string>UIButton</string>
 							<string>UIView</string>
-							<string>UIBarButtonItem</string>
 							<string>RMMapView</string>
 							<string>UIBarButtonItem</string>
 						</object>
@@ -681,9 +691,9 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>attributionLabel</string>
 							<string>blueCircleView</string>
+							<string>gpslocateButton</string>
 							<string>introButton</string>
 							<string>introView</string>
-							<string>locationButton</string>
 							<string>mapView</string>
 							<string>showPhotosButton</string>
 						</object>
@@ -698,16 +708,16 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 								<string key="candidateClassName">BlueCircleView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">gpslocateButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">introButton</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">introView</string>
 								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">locationButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapView</string>
@@ -732,14 +742,18 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<string key="minorKey">./Classes/RMMapView.h</string>
 					</object>
 				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SuperViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SuperViewController.h</string>
+					</object>
+				</object>
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1280" key="NS.object.0"/>
-		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
 			<integer value="3000" key="NS.object.0"/>
@@ -747,8 +761,17 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">icon_location.png</string>
-			<string key="NS.object.0">{20, 20}</string>
+			<bool key="EncodedWithXMLCoder">YES</bool>
+			<object class="NSArray" key="dict.sortedKeys">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>UIButtonBarCameraSmall.png</string>
+				<string>icon_location.png</string>
+			</object>
+			<object class="NSMutableArray" key="dict.values">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{20, 15}</string>
+				<string>{20, 20}</string>
+			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

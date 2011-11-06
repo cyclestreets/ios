@@ -13,18 +13,23 @@
 #import "Query.h"
 #import <CoreLocation/CoreLocation.h>
 
-#define ROUTEARCHIVEPATH @"routes"
+#define ROUTEARCHIVEPATH @"userroutes"
+#define OLDROUTEARCHIVEPATH @"routes"
 
 @interface RouteManager : FrameworkObject 	{
 	
 	NSMutableDictionary					*routes;
 	
 	RouteVO								*selectedRoute;
+	
+	NSString							*activeRouteDir;
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
-@property (nonatomic, retain)	NSMutableDictionary	*routes;
-@property (nonatomic, retain)	RouteVO	*selectedRoute;
+@property (nonatomic, retain)	NSMutableDictionary		*routes;
+@property (nonatomic, retain)	RouteVO		*selectedRoute;
+@property (nonatomic, retain)	NSString		*activeRouteDir;
+
 
 - (void) runQuery:(Query *)query;
 - (void) runRouteIdQuery:(Query *)query;
@@ -33,6 +38,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 //new
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation;
 -(void)loadRouteForRouteId:(NSString*)routeid;
+-(void)removeRoute:(NSString*)routeid;
 
 -(void)loadRouteWithIdentifier:(NSString*)routeid;
 -(void)loadSavedSelectedRoute;

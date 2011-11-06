@@ -14,11 +14,14 @@
 #import "NetRequest.h"
 #import "NetResponse.h"
 #import "UserVO.h"
+#import "GlobalUtilities.h"
+#import "HudManager.h"
 
 @interface PhotoManager(Private)
 
 
 -(void)uploadPhotoForUserResponse:(ValidationVO*)validation;
+-(void)retrievePhotosForLocationResponse:(ValidationVO*)validation;
 
 
 
@@ -28,6 +31,18 @@
 
 @implementation PhotoManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
+@synthesize locationPhotoList;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [locationPhotoList release], locationPhotoList = nil;
+	
+    [super dealloc];
+}
+
 
 
 //
@@ -38,6 +53,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 -(void)listNotificationInterests{
 	
+	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
+	[notifications addObject:DATAREQUESTFAILED];
+	[notifications addObject:REMOTEFILEFAILED];
+	
+	[self addRequestID:RETREIVELOCATIONPHOTOS];
+	[self addRequestID:UPLOADUSERPHOTO];
+	
 	
 	[super listNotificationInterests];
 	
@@ -46,6 +68,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
 	[super didReceiveNotification:notification];
+	NSDictionary	*dict=[notification userInfo];
+	NetResponse		*response=[dict objectForKey:RESPONSE];
+	
+	NSString	*dataid=response.dataid;
+	BetterLog(@"response.dataid=%@",response.dataid);
+	
+	if([self isRegisteredForRequest:dataid]){
+		
+		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
+			
+			if ([response.dataid isEqualToString:RETREIVELOCATIONPHOTOS]) {
+				
+				[self retrievePhotosForLocationResponse:response.dataProvider];
+				
+			}else if ([response.dataid isEqualToString:UPLOADUSERPHOTO]) {
+				
+				[self uploadPhotoForUserResponse:response.dataProvider];
+				
+			}
+			
+		}
+		
+	}
+	
+	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
+		[[HudManager sharedInstance] removeHUD];
+	}
 	
 	
 }
@@ -62,6 +111,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit{
+	
+	BetterLog(@"");
 
     CLLocationCoordinate2D centre;
     centre.latitude = (ne.latitude + sw.latitude)/2;
@@ -72,8 +123,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                      [NSNumber numberWithFloat:centre.latitude],@"latitude",
                                      [NSNumber numberWithFloat:ne.latitude],@"n",
                                      [NSNumber numberWithFloat:ne.longitude],@"e",
-                                     [NSNumber numberWithFloat:sw.longitude],@"s",
-                                     [NSNumber numberWithFloat:sw.latitude],@"w",
+                                     [NSNumber numberWithFloat:sw.latitude],@"s",
+                                     [NSNumber numberWithFloat:sw.longitude],@"w",
                                      [NSNumber numberWithInt:13],@"zoom",
                                      @"1",@"useDom",
                                      @"300",@"thumbnailsize",
@@ -107,8 +158,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
     switch (validation.validationStatus) {
             
         case ValidationRetrievePhotosSuccess:
+			
+			self.locationPhotoList=[validation.responseDict objectForKey:RETREIVELOCATIONPHOTOS];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:nil userInfo:nil];
             
-            break;
+		break;
           
 		case ValidationRetrievePhotosFailed:
             

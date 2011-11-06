@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSMutableArray *photos;
 }
 
-@property (readonly) NSMutableArray *photos;
+@property (nonatomic, retain)	NSMutableArray		*photos;
 
 - (id) initWithElements:(NSDictionary *)elements;
 

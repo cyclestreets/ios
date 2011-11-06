@@ -18,6 +18,9 @@
 #import "StringManager.h"
 #import "UserAccount.h"
 #import "AppConfigManager.h"
+#import "RouteManager.h"
+#import "SavedRoutesManager.h"
+#import "PhotoManager.h"
 
 @interface StartupManager(Private)
 
@@ -107,6 +110,11 @@
 	DataSourceManager *datamanager=[DataSourceManager sharedInstance];
 	datamanager.dataPriority=[UserSettingsManager sharedInstance].context;
 	// no fatal startup errors for DataSourceManager
+	
+	
+	[RouteManager sharedInstance];
+	[SavedRoutesManager sharedInstance];
+	[PhotoManager sharedInstance];
 	
 	
 	[UserAccount sharedInstance];

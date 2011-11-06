@@ -2711,6 +2711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2730,6 +2731,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
+				PROVISIONING_PROFILE = "6BC2A6A0-9E57-4627-8E0C-840E56B2A43D";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -2740,7 +2742,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
@@ -2758,7 +2760,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "C9C99A9F-C3FC-4294-9877-717420C4CF14";
+				PROVISIONING_PROFILE = "6BC2A6A0-9E57-4627-8E0C-840E56B2A43D";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -2770,7 +2772,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (UZEV79287L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -2783,7 +2785,7 @@
 					"-licucore",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "8DBA96A4-B5BA-4506-AE3C-AC6B6D8576B1";
+				PROVISIONING_PROFILE = "6BC2A6A0-9E57-4627-8E0C-840E56B2A43D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
@@ -2793,6 +2795,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2805,6 +2808,7 @@
 					"-licucore",
 					"-ObjC",
 				);
+				PROVISIONING_PROFILE = "6BC2A6A0-9E57-4627-8E0C-840E56B2A43D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
@@ -2814,7 +2818,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Neil Edwards";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2827,7 +2831,7 @@
 					"-lxml2",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "47434FA4-C8E2-4A8F-A9A3-6A8AFFFF240F";
+				PROVISIONING_PROFILE = "6BC2A6A0-9E57-4627-8E0C-840E56B2A43D";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 			};
@@ -2838,7 +2842,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
@@ -2856,7 +2860,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "C9C99A9F-C3FC-4294-9877-717420C4CF14";
+				PROVISIONING_PROFILE = "6BC2A6A0-9E57-4627-8E0C-840E56B2A43D";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";

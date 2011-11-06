@@ -22,6 +22,7 @@
 #import "NetRequest.h"
 #import "SettingsManager.h"
 #import "SavedRoutesManager.h"
+#import "Model.h"
 
 @interface RouteManager(Private) 
 
@@ -36,7 +37,10 @@
 -(void)loadRouteForRouteIdResponse:(ValidationVO*)validation;
 
 - (NSString *) routesDirectory;
+- (NSString *) oldroutesDirectory;
 
+
+-(void)evalRouteArchiveState;
 
 @end
 
@@ -48,6 +52,8 @@ static NSString *useDom = @"1";
 SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 @synthesize routes;
 @synthesize selectedRoute;
+@synthesize activeRouteDir;
+
 
 //=========================================================== 
 // dealloc
@@ -56,8 +62,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 {
     [routes release], routes = nil;
     [selectedRoute release], selectedRoute = nil;
+    [activeRouteDir release], activeRouteDir = nil;
 	
     [super dealloc];
+}
+
+
+
+//=========================================================== 
+// - (id)init
+//
+//=========================================================== 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.routes = [[NSMutableDictionary alloc]init];
+		self.activeRouteDir=OLDROUTEARCHIVEPATH;
+		[self evalRouteArchiveState];
+    }
+    return self;
 }
 
 
@@ -70,6 +94,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 //
 
 -(void)listNotificationInterests{
+	
+	BetterLog(@"");
 	
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
@@ -264,6 +290,54 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 //
 /***********************************************
+ * @description			Old Route>New Route conversion evaluation
+ ***********************************************/
+//
+
+-(void)evalRouteArchiveState{
+	
+	// this should get the saved routes array
+	// and use this
+	
+	
+	// do we have a old route folder
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	BOOL isDirectory;
+	BOOL doesDirExist=[fileManager fileExistsAtPath:[self routesDirectory] isDirectory:&isDirectory];
+					   
+	if(doesDirExist==YES && isDirectory==YES){
+		
+		NSError *error=nil;
+		
+		NSArray *oldroutes=[fileManager contentsOfDirectoryAtPath:[self routesDirectory] error:&error];
+		
+		if(error==nil && [oldroutes count]>0){
+			
+			for(NSString *filename in oldroutes){
+				
+				NSString *filepath = [[self routesDirectory] stringByAppendingPathComponent:filename];
+				NSData *routedata=[[NSData alloc ] initWithContentsOfFile:filepath];
+				
+				RouteVO *newroute=(RouteVO*)[[Model sharedInstance].xmlparser parseXML:routedata forType:CALCULATEROUTE];
+				
+				[self saveRoute:newroute forID:[newroute.routeid intValue]];
+				
+				[newroute release];
+				
+			}
+			
+		}
+		
+	}
+	
+	self.activeRouteDir=ROUTEARCHIVEPATH;
+	
+	
+}
+
+
+//
+/***********************************************
  * @description			OLD NETWORK EVENTS
  ***********************************************/
 //
@@ -408,7 +482,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-// loads and selects a route from disk by it's identifier
+
+
+
+//
+/***********************************************
+ * @description			Pre Selects route as SR
+ ***********************************************/
+//
+-(void)selectRouteWithIdentifier:(NSString*)identifier{
+	
+	if (identifier!=nil) {
+		RouteVO *route = [routes objectForKey:identifier];
+		if(route!=nil){
+			[self selectRoute:route];
+		}
+	}
+	
+}
+
+//
+/***********************************************
+ * @description			loads route from disk and stores
+ ***********************************************/
+//
 -(void)loadRouteWithIdentifier:(NSString*)identifier{
 	
 	RouteVO *route=nil;
@@ -416,11 +513,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	if (identifier!=nil) {
 		route = [self loadRouteForID:[identifier intValue]];
 	}
-	
 	if(route!=nil){
-		[self selectRoute:route];
+		[routes setObject:route forKey:identifier];
 	}
+	
 }
+
+//
 
 
 // loads the currently saved selectedRoute by identifier
@@ -431,6 +530,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	if(selectedRouteID!=nil)
 		[self loadRouteForID:[selectedRouteID intValue]];
 	
+	
+}
+
+
+
+-(void)removeRoute:(NSString*)routeid{
+	
+	[routes removeObjectForKey:routeid];
+	[self removeRouteForID:[routeid intValue]];
 	
 }
 
@@ -475,6 +583,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 - (void)removeRouteForID:(NSInteger) routeIdentifier{
 	
+	
+	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
 	
@@ -493,6 +603,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	NSString *documentsDirectory = [[paths objectAtIndex:0] copy];
 	return [documentsDirectory stringByAppendingPathComponent:ROUTEARCHIVEPATH];
 }
+
 
 
 @end
