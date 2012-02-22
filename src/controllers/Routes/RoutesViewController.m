@@ -164,12 +164,11 @@
 	// create arrays to store sub views & class references
 	classArray=[[NSMutableArray alloc]initWithObjects:@"RouteListViewController",@"RouteListViewController",nil];
 	nibArray=[[NSMutableArray alloc]initWithObjects:@"RouteListView",@"RouteListView",nil];
-	dataTypeArray=[[NSMutableArray alloc]initWithObjects:@"Favourites",@"Recent",nil];
+	dataTypeArray=[[NSMutableArray alloc]initWithObjects:SAVEDROUTE_FAVS,SAVEDROUTE_RECENTS,nil];
 	subViewsArray=[[NSMutableArray alloc]init];
 	for (int i = 0; i < [classArray count]; i++) {
 		
 		RouteListViewController *vc = (RouteListViewController*)[[NSClassFromString([classArray objectAtIndex:i]) alloc] initWithNibName:[nibArray objectAtIndex:i] bundle:nil];
-		vc.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI);
 		[contentView addSubview:vc.view];
 		vc.delegate=self;
         vc.dataType=[dataTypeArray objectAtIndex:i];

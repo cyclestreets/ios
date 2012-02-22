@@ -41,7 +41,7 @@
 @property (nonatomic, retain)	NSMutableDictionary		*selectedCellDictionary;
 @property (nonatomic)	int		selectedCount;
 @property (nonatomic, retain)	UIButton		*deleteButton;
-@property (nonatomic, retain)	UITableView		*tableView;
+@property (nonatomic, retain)	IBOutlet UITableView		*tableView;
 
 -(void)setTableEditingState:(BOOL)state;
 @end

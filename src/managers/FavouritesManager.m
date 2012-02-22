@@ -7,11 +7,8 @@
 //
 
 #import "FavouritesManager.h"
-#import "CycleStreets.h"
-#import "Route.h"
 #import "Files.h"
-#import "FavouritesViewController.h"
-#import "CycleStreetsAppDelegate.h"
+#import "CycleStreets.h"
 
 @implementation FavouritesManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
@@ -43,41 +40,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
 }
 
 
--(void)update{
-	self.dataProvider = [(Files*)[CycleStreets sharedInstance].files favourites];
+-(void)removeDataFile{
+	
+	[(Files*)[CycleStreets sharedInstance].files removeDataFileForType:@"favourites"];
 }
 
-
--(void)removeObjectFromDataProviderAtIndex:(NSUInteger)index{
-	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[dataProvider removeObjectAtIndex:index];
-	[cycleStreets.files setFavourites:dataProvider];
-	
-}
-
-
-
-
-//could listen for the route changing.
-- (void) selectRoute:(Route *)route {
-	
-	NSInteger index=-1;
-	index=[dataProvider indexOfObject:[route itinerary]];
-	
-	if(index!=-1 && index!=0){
-		[dataProvider exchangeObjectAtIndex:0 withObjectAtIndex:index];
-	}
-	
-	[[CycleStreets sharedInstance].files setMiscValue:[route itinerary] forKey:@"selectedroute"];
-		
-	//TODO: this ref should be rmoved form app delegate and this event should be a 
-	// notification, FavouritesViewController needs conforming to SuperViewController before this can happen
-	CycleStreetsAppDelegate *appdelegate = [CycleStreets sharedInstance].appDelegate;
-	FavouritesViewController *favourites = appdelegate.favourites;
-	[favourites clear];
-	
-	
-}
 
 @end

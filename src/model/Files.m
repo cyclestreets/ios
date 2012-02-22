@@ -187,10 +187,6 @@ static NSString *clientidFileConst = @"clientid";
 // list the serial numbers of the routes which are favourites
 - (NSMutableArray *) favourites {
 	NSMutableArray *result = [NSMutableArray arrayWithContentsOfFile:[self favouritesFile]];
-	if (nil == result) {
-		// empty array is the default.
-		result = [NSMutableArray array];
-	}
 	return result;	
 }
 
@@ -198,6 +194,19 @@ static NSString *clientidFileConst = @"clientid";
 - (void)setFavourites:(NSArray *) newFavourites {
 	[newFavourites writeToFile:[self favouritesFile] atomically:YES];
 }
+
+
+-(void)removeDataFileForType:(NSString*)type{
+	
+	NSError *error = [[[NSError alloc] init] autorelease];
+	
+	if([type isEqualToString:favouritesFileConst]){
+		[[NSFileManager defaultManager] removeItemAtPath:[self favouritesFile] error:&error];
+	}
+	
+	
+}
+
 
 // retrieve the XML of a route
 - (RouteVO *) route:(NSInteger) routeIdentifier {

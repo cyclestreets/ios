@@ -450,42 +450,45 @@
 			
 			TBXMLElement *segmentnode=[TBXML childElementNamed:@"cs:segment" parentElement:root];
 			
-			SegmentVO *segment=[[SegmentVO alloc]init];
-			segment.roadName=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:segmentnode]];
-			segment.segmentTime=[[TBXML textForElement:[TBXML childElementNamed:@"cs:time" parentElement:segmentnode]]intValue];
-			segment.segmentDistance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:distance" parentElement:segmentnode]]intValue];
-			segment.startBearing=[[TBXML textForElement:[TBXML childElementNamed:@"cs:startBearing" parentElement:segmentnode]]intValue];
-			segment.segmentBusynance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:busynance" parentElement:segmentnode]]intValue];
-			segment.provisionName=[TBXML textForElement:[TBXML childElementNamed:@"cs:provisionName" parentElement:segmentnode]];
-			segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
-			segment.startTime=time;
-			segment.startDistance=distance;
+			if(segmentnode!=nil){
+				
+				SegmentVO *segment=[[SegmentVO alloc]init];
+				
+				segment.roadName=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:segmentnode]];
+				segment.segmentTime=[[TBXML textForElement:[TBXML childElementNamed:@"cs:time" parentElement:segmentnode]]intValue];
+				segment.segmentDistance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:distance" parentElement:segmentnode]]intValue];
+				segment.startBearing=[[TBXML textForElement:[TBXML childElementNamed:@"cs:startBearing" parentElement:segmentnode]]intValue];
+				segment.segmentBusynance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:busynance" parentElement:segmentnode]]intValue];
+				segment.provisionName=[TBXML textForElement:[TBXML childElementNamed:@"cs:provisionName" parentElement:segmentnode]];
+				segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
+				segment.startTime=time;
+				segment.startDistance=distance;
+				
+				// groups pints into lat/long array
+				NSString *points=[TBXML textForElement:[TBXML childElementNamed:@"cs:points" parentElement:segmentnode]];
+				
+				NSCharacterSet *whiteComma = [NSCharacterSet characterSetWithCharactersInString:@", "];
+				NSArray *XYs = [points componentsSeparatedByCharactersInSet:whiteComma];
+				NSMutableArray *result = [[NSMutableArray alloc] init];
+				for (int X = 0; X < [XYs count]; X += 2) {
+					CSPointVO *p = [[CSPointVO alloc] init];
+					CGPoint point;
+					point.x = [[XYs objectAtIndex:X] doubleValue];
+					point.y = [[XYs objectAtIndex:X+1] doubleValue];
+					p.p = point;
+					[result addObject:p];
+					[p release];
+				}
+				segment.pointsArray=result;
+				[result release];
+				
+				time += [segment segmentTime];
+				distance += [segment segmentDistance];
+				
+				[segments addObject:segment];
+				[segment release];
 			
-			// groups pints into lat/long array
-			NSString *points=[TBXML textForElement:[TBXML childElementNamed:@"cs:points" parentElement:segmentnode]];
-			
-			NSCharacterSet *whiteComma = [NSCharacterSet characterSetWithCharactersInString:@", "];
-			NSArray *XYs = [points componentsSeparatedByCharactersInSet:whiteComma];
-			NSMutableArray *result = [[NSMutableArray alloc] init];
-			for (int X = 0; X < [XYs count]; X += 2) {
-				CSPointVO *p = [[CSPointVO alloc] init];
-				CGPoint point;
-				point.x = [[XYs objectAtIndex:X] doubleValue];
-				point.y = [[XYs objectAtIndex:X+1] doubleValue];
-				p.p = point;
-				[result addObject:p];
-				[p release];
 			}
-			segment.pointsArray=result;
-			[result release];
-			
-			time += [segment segmentTime];
-			distance += [segment segmentDistance];
-			
-			[segments addObject:segment];
-			[segment release];
-			
-			
 			
 			root=root->nextSibling;
 			

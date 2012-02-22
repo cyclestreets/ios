@@ -12,14 +12,22 @@
 #import "Files.h"
 #import "CycleStreetsAppDelegate.h"
 #import "RouteManager.h"
+#import "FavouritesManager.h"
+#import "GlobalUtilities.h"
 
 @interface SavedRoutesManager(Private)
 
+-(void)transferOldFavouritesToRecents;
+
+- (void) saveIndicies;
 - (NSMutableDictionary *) loadIndicies;
 - (NSString *) indiciesFile;
+
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr;
 -(void)promoteRouteToTopOfDataProvider:(RouteVO*)route;
 -(NSString*)findRoute:(RouteVO*)route;
+
++(NSString*)returnRouteTypeInvert:(NSString*)type;
 
 @end
 
@@ -55,6 +63,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
     self = [super init];
     if (self) {
         self.routeidStore = [self loadIndicies];
+		if(routeidStore==nil){
+			self.routeidStore = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSMutableArray array], SAVEDROUTE_FAVS,[NSMutableArray array],SAVEDROUTE_RECENTS,nil];
+		}
 		[self loadSavedRoutes];
     }
     return self;
@@ -95,9 +106,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	self.recentsdataProvider=recentarr;
 	[recentarr release];
 	
+	// v1>v2 transition method
+	[self transferOldFavouritesToRecents];
+	
 	[self purgeOrphanedRoutes:orphanarr];
 	
 }
+
+
+//
+/***********************************************
+ * @description			TODO:
+ ***********************************************/
+//
+-(void)transferOldFavouritesToRecents{
+	
+	NSMutableArray *favourites=[FavouritesManager sharedInstance].dataProvider;
+	
+	NSMutableArray *routeidarr=[routeidStore objectForKey:SAVEDROUTE_RECENTS];
+	
+	if(favourites!=nil){
+		
+		for(NSString *routeid in favourites){
+			
+			RouteVO *route=[[RouteManager sharedInstance] loadRouteForID:[routeid intValue]];
+			
+			
+			if(route!=nil){
+				[recentsdataProvider addObject:route];
+				[routeidarr addObject:routeid];
+			}
+			
+		}
+		
+		[[FavouritesManager sharedInstance] removeDataFile];
+		
+		[self saveIndicies];
+		
+	}
+
+	
+}
+
 
 
 
@@ -119,6 +169,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	}else{
 		[recentsdataProvider insertObject:route atIndex:0];
 	}
+	
+	NSMutableArray *arr=[routeidStore objectForKey:type];
+	[arr addObject:route.routeid];
 	
 }
 
@@ -146,6 +199,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
         }else{
             [favouritesdataProvider insertObject:route atIndex:0];
         }
+		
+		// update id arrs
+		NSMutableArray *newidarr=[routeidStore objectForKey:type];
+		NSMutableArray *idarr=[routeidStore objectForKey:[SavedRoutesManager returnRouteTypeInvert:type]];
+		[newidarr addObject:route.routeid];
+		[idarr removeObject:route.routeid];
     }
 	
 	
@@ -249,14 +308,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 //
 
 - (NSMutableDictionary *) loadIndicies {
-	NSMutableDictionary *result = [NSMutableDictionary dictionaryWithContentsOfFile:[self indiciesFile]];
-	if (nil == result) {
-		self.routeidStore = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNull null], SAVEDROUTE_FAVS,[NSNull null],SAVEDROUTE_RECENTS,nil];
-	}
+	NSMutableDictionary *result; 
+	result=[NSMutableDictionary dictionaryWithContentsOfFile:[self indiciesFile]];
+	
 	return result;	
 }
 
-
+- (void) saveIndicies {
+	
+	BOOL result=[routeidStore writeToFile:[self indiciesFile] atomically:YES];
+	BetterLog(@"did save=%i",result);
+}
 
 
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr{
@@ -265,6 +327,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		[[RouteManager sharedInstance] removeRoute:routeid];
 	}
 	
+}
+
++(NSString*)returnRouteTypeInvert:(NSString*)type{
+	if ([type isEqualToString:SAVEDROUTE_FAVS]) {
+		return SAVEDROUTE_RECENTS;
+	}
+	return SAVEDROUTE_FAVS;
 }
 
 

@@ -41,6 +41,7 @@
 
 
 -(void)evalRouteArchiveState;
+-(BOOL)createRoutesDir;
 
 @end
 
@@ -302,21 +303,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	// do we have a old route folder
 	NSFileManager* fileManager = [NSFileManager defaultManager];
+	
+	[self createRoutesDir];
+	
+	
 	BOOL isDirectory;
-	BOOL doesDirExist=[fileManager fileExistsAtPath:[self routesDirectory] isDirectory:&isDirectory];
+	BOOL doesDirExist=[fileManager fileExistsAtPath:[self oldroutesDirectory] isDirectory:&isDirectory];
+	
 					   
 	if(doesDirExist==YES && isDirectory==YES){
 		
 		NSError *error=nil;
+		NSURL *url = [[NSURL alloc] initFileURLWithPath:[self oldroutesDirectory] isDirectory:YES ];
+		NSArray *properties = [NSArray arrayWithObjects: NSURLLocalizedNameKey, nil];
 		
-		NSArray *oldroutes=[fileManager contentsOfDirectoryAtPath:[self routesDirectory] error:&error];
+		NSArray *oldroutes = [fileManager
+						  contentsOfDirectoryAtURL:url
+						  includingPropertiesForKeys:properties
+						  options:(NSDirectoryEnumerationSkipsPackageDescendants |
+								   NSDirectoryEnumerationSkipsHiddenFiles)
+						  error:&error];
+		
 		
 		if(error==nil && [oldroutes count]>0){
 			
-			for(NSString *filename in oldroutes){
+			for(NSURL *filename in oldroutes){
 				
-				NSString *filepath = [[self routesDirectory] stringByAppendingPathComponent:filename];
-				NSData *routedata=[[NSData alloc ] initWithContentsOfFile:filepath];
+				NSData *routedata=[[NSData alloc ] initWithContentsOfURL:filename];
 				
 				RouteVO *newroute=(RouteVO*)[[Model sharedInstance].xmlparser parseXML:routedata forType:CALCULATEROUTE];
 				
@@ -328,12 +341,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 			
 		}
 		
+		[fileManager removeItemAtPath:[self oldroutesDirectory] error:&error];
+		
+	}else {
+		
+		BetterLog(@"[INFO] OldRoutes dir was not there");
+		
 	}
 	
 	self.activeRouteDir=ROUTEARCHIVEPATH;
 	
 	
 }
+
+
 
 
 //
@@ -425,13 +446,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	// NEW
 	// set SR in favs, will promote to top its dp
-	//[[SavedRoutesManager sharedInstance] selectRoute:route];
-	//Files *files=[CycleStreets sharedInstance].files;
-	//[files setMiscValue:[route routeid] forKey:@"selectedroute"];
+	[[SavedRoutesManager sharedInstance] selectRoute:route];
+	Files *files=[CycleStreets sharedInstance].files;
+	[files setMiscValue:[route routeid] forKey:@"selectedroute"];
 	//
 	
 	
 	//OLD
+	/*
 	Files *files=[CycleStreets sharedInstance].files;
 	NSArray *oldFavourites = [files favourites];
 	NSMutableArray *newFavourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count]+1] autorelease];
@@ -443,7 +465,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	}
 	[files setFavourites:newFavourites];
 	[[FavouritesManager sharedInstance] update];	
-	
+	*/
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:CSROUTESELECTED object:[route routeid]];
 	
@@ -554,6 +576,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
 	
+	BetterLog(@"routeFile=%@",routeFile);
+	
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
@@ -568,6 +592,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 - (void)saveRoute:(RouteVO *)route forID:(NSInteger) routeIdentifier  {
 	
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
+	
+	
 	
 	NSMutableData *data = [[NSMutableData alloc] init];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -598,8 +624,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 }
 
-- (NSString *) routesDirectory {
+
+-(BOOL)createRoutesDir{
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+	NSString* docsdir=[paths objectAtIndex:0];
+	NSString *ipath=[docsdir stringByAppendingPathComponent:ROUTEARCHIVEPATH];
+	
+	BOOL isDir=YES;
+	
+	if([fileManager fileExistsAtPath:ipath isDirectory:&isDir]){
+		return YES;
+	}else {
+		
+		if([fileManager createDirectoryAtPath:ipath withIntermediateDirectories:NO attributes:nil error:nil ]){
+			return YES;
+		}else{
+			return NO;
+		}
+	}
+	
+	
+}
+
+- (NSString *) oldroutesDirectory {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [[paths objectAtIndex:0] copy];
+	return [documentsDirectory stringByAppendingPathComponent:OLDROUTEARCHIVEPATH];
+}
+
+- (NSString *) routesDirectory {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [[paths objectAtIndex:0] copy];
 	return [documentsDirectory stringByAppendingPathComponent:ROUTEARCHIVEPATH];
 }

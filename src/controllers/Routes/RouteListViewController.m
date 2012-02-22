@@ -157,6 +157,8 @@
 	
 	[super viewWillAppear:animated];
 	
+	LogRect(self.view.frame);
+	
 	[self createNonPersistentUI];
 	
 }
@@ -275,7 +277,8 @@
 	}else{
 		NSString *key=[keys objectAtIndex:[indexPath section]];
 		NSMutableArray *arr=[rowHeightDictionary objectForKey:key];
-		return [[arr objectAtIndex:[indexPath row]] floatValue];
+		CGFloat cellheight=[[arr objectAtIndex:[indexPath row]] floatValue];
+		return cellheight;
 	}
 }
 

@@ -103,4 +103,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // remove the route file.
 - (void)deleteRoute:(NSInteger) routeIdentifier;
 
+// removes a data file by type
+-(void)removeDataFileForType:(NSString*)type;
+
 @end

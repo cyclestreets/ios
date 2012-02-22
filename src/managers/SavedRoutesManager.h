@@ -27,6 +27,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SavedRoutesManager);
 -(void)removeRoute:(RouteVO*)route;
 -(void)removeRoute:(RouteVO*)route fromDataProvider:(NSString*)type;
 -(void)loadSavedRoutes;
+- (void) selectRoute:(RouteVO *)route;
 
 -(void)moveRouteToDataProvider:(RouteVO*)route dp:(NSString*)type;
 -(void)addRouteToDataProvider:(RouteVO*)route dp:(NSString*)type;
