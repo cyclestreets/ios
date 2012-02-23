@@ -77,6 +77,7 @@ static char MAKVONotificationHelperMagicContext;
 	{
 		// we only ever sign up for one notification per object, so if we got here
 		// then we *know* that the key path and object are what we want
+		// Note:If you see a doesnotRecogniseSelector crash here check the selector is public
 		((void (*)(id, SEL, NSString *, id, NSDictionary *, id))objc_msgSend)(_observer, _selector, keyPath, object, change, _userInfo);
 	}
 	else

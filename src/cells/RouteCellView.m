@@ -10,6 +10,9 @@
 #import "AppConstants.h"
 #import "SettingsManager.h"
 #import "ViewUtilities.h"
+#import "MAKVONotificationCenter.h"
+
+
 
 @implementation RouteCellView
 @synthesize dataProvider;
@@ -61,7 +64,21 @@
 
 -(void)populate{
 	
-	self.nameLabel.text=[dataProvider name];
+	[[MAKVONotificationCenter defaultCenter] addObserver:self 
+												  object:dataProvider 
+												 keyPath:@"userRouteName" 
+												selector:@selector(updateCellUILabels) 
+												userInfo:nil 
+												 options:NSKeyValueObservingOptionNew];
+	
+	
+	[self updateCellUILabels];
+	
+}
+
+-(void)updateCellUILabels{
+	
+	self.nameLabel.text=dataProvider.nameString;
 	
 	NSMutableArray *arr=[[NSMutableArray alloc] init];
 	
@@ -92,7 +109,6 @@
 	
 	selectedRouteIcon.hidden=!isSelectedRoute;
 	[ViewUtilities alignView:selectedRouteIcon withView:viewContainer :BUNoneLayoutMode :BUCenterAlignMode];
-	
 	
 }
 

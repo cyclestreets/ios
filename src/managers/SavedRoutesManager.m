@@ -15,6 +15,7 @@
 #import "FavouritesManager.h"
 #import "GlobalUtilities.h"
 
+
 @interface SavedRoutesManager(Private)
 
 -(void)transferOldFavouritesToRecents;
@@ -25,7 +26,8 @@
 
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr;
 -(void)promoteRouteToTopOfDataProvider:(RouteVO*)route;
--(NSString*)findRoute:(RouteVO*)route;
+-(NSString*)findRouteType:(RouteVO*)route;
+-(int)findIndexOfRouteByID:(NSString*)routeid;
 
 +(NSString*)returnRouteTypeInvert:(NSString*)type;
 
@@ -161,7 +163,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
-
+//
+/***********************************************
+ * @description			adda new route to the temp stores and update the saved index file
+ ***********************************************/
+//
 -(void)addRouteToDataProvider:(RouteVO*)route dp:(NSString*)type{
 	
 	if([type isEqualToString:SAVEDROUTE_FAVS]){
@@ -173,14 +179,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	NSMutableArray *arr=[routeidStore objectForKey:type];
 	[arr addObject:route.routeid];
 	
+	[self saveIndicies];
+	
 }
 
-
+//
+/***********************************************
+ * @description			handles Route movement from Recents <> favourites
+ ***********************************************/
+//
 -(void)moveRouteToDataProvider:(RouteVO*)route dp:(NSString*)type{
 	
-    NSString *founddp=[self findRoute:route];
+    NSString *key=[self findRouteType:route];
     
-    if([founddp isEqualToString:@"NotFound"]){
+    if([key isEqualToString:@"NotFound"]){
         // this should not occur!
     }else{
         
@@ -191,7 +203,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
             arr=recentsdataProvider;
         }
         
-        int index=[arr indexOfObjectIdenticalTo:route.routeid];
+        int index=[arr indexOfObjectIdenticalTo:route];
         [arr removeObjectAtIndex:index];
         
         if([type isEqualToString:SAVEDROUTE_FAVS]){
@@ -205,6 +217,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		NSMutableArray *idarr=[routeidStore objectForKey:[SavedRoutesManager returnRouteTypeInvert:type]];
 		[newidarr addObject:route.routeid];
 		[idarr removeObject:route.routeid];
+		
+		[self saveIndicies];
     }
 	
 	
@@ -222,6 +236,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
     
     int index=[arr indexOfObjectIdenticalTo:route.routeid];
     [arr removeObjectAtIndex:index];
+	
+	NSMutableArray *arr=[routeidStore objectForKey:type];
+	[arr removeObject:route.routeid];
+	
+	[self saveIndicies];
     
 }
 
@@ -231,7 +250,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObjectIdenticalTo:route.routeid];
+		int index=[routes indexOfObjectIdenticalTo:route];
 		
 		if(index!=-1 && index!=0){
 			[routes removeObjectAtIndex:index];
@@ -248,9 +267,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 - (void) selectRoute:(RouteVO *)route {
 	
     // TODO: this should only occur if its in the Fav array
-    // if in the Recents should be moved to selectedRoute header
-    // alternatively both dps could have selectedRoute key which appears at top of table
-    // if sr is it
+   
     // OR have separate button in UI that shows the RouteSummary with the selected route
     // always, then no need for this odd re-organising
 	[self promoteRouteToTopOfDataProvider:route];
@@ -271,9 +288,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObjectIdenticalTo:route.routeid];
+		int index=[routes indexOfObject:route.routeid];
 		
-		if(index!=-1 && index!=0){
+		if(index!=NSNotFound && index!=0){
 			[routes exchangeObjectAtIndex:0 withObjectAtIndex:index];
 		}
 		
@@ -282,7 +299,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
--(NSString*)findRoute:(RouteVO*)route{
+-(NSString*)findRouteType:(RouteVO*)route{
 	
 	for(NSString *key in routeidStore){
 		
@@ -290,7 +307,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		int index=[routes indexOfObjectIdenticalTo:route.routeid];
 		
-		if(index!=-1 && index!=0){
+		if(index!=NSNotFound){
 			return key;
 		}
 		
@@ -301,6 +318,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
+-(int)findIndexOfRouteByID:(NSString*)routeid{
+	
+	int index=NSNotFound;
+	
+	for(NSString *key in routeidStore){
+		
+		NSMutableArray *routes=[routeidStore objectForKey:key];
+		
+		int index=[routes indexOfObjectIdenticalTo:route.routeid];
+		
+		if(index!=NSNotFound){
+			break;
+		}
+		
+	}
+	
+	return index;
+}
+
+
+
 //
 /***********************************************
  * @description			File I/O
@@ -308,8 +346,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 //
 
 - (NSMutableDictionary *) loadIndicies {
-	NSMutableDictionary *result; 
-	result=[NSMutableDictionary dictionaryWithContentsOfFile:[self indiciesFile]];
+	
+	NSMutableDictionary *result=[NSMutableDictionary dictionaryWithContentsOfFile:[self indiciesFile]];
 	
 	return result;	
 }

@@ -173,6 +173,7 @@
 		vc.delegate=self;
         vc.dataType=[dataTypeArray objectAtIndex:i];
 		[subViewsArray addObject:vc];
+		[self addChildViewController:vc];
 		
 		if (i==1) {
 			vc.isSectioned=YES;

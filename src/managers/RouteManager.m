@@ -194,23 +194,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     switch(validation.validationStatus){
         
         case ValidationCalculateRouteSuccess:
+		{  
+           RouteVO *newroute = [validation.responseDict objectForKey:CALCULATEROUTE];
             
-            self.selectedRoute = [validation.responseDict objectForKey:CALCULATEROUTE];
-            
-            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:selectedRoute dp:SAVEDROUTE_RECENTS];
-			
-			// legacy support only
-			CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-			[cycleStreets.files setRoute:[[selectedRoute routeid] intValue] data:selectedRoute];
-			
+            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:newroute dp:SAVEDROUTE_RECENTS];
                 
             [self warnOnFirstRoute];
-            [self selectRoute:selectedRoute];	
+            [self selectRoute:newroute];
+			[self saveRoute:selectedRoute forID:[selectedRoute.routeid intValue]];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:CALCULATEROUTERESPONSE object:nil];
             
             [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, added path to map" andMessage:nil];
-        
+        }
         break;
             
             
@@ -262,17 +258,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     switch(validation.validationStatus){
             
         case ValidationCalculateRouteSuccess:
+        {    
+            RouteVO *newroute=[validation.responseDict objectForKey:RETRIEVEROUTEBYID];
             
-            self.selectedRoute=[validation.responseDict objectForKey:RETRIEVEROUTEBYID];
+            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:newroute dp:SAVEDROUTE_RECENTS];
             
-            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:selectedRoute dp:SAVEDROUTE_RECENTS];
-            
-            [self selectRoute:selectedRoute];	
+            [self selectRoute:newroute];
+			[self saveRoute:selectedRoute forID:[selectedRoute.routeid intValue]];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
             
             [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, this route is now selected." andMessage:nil];
-            
+		}   
             break;
             
             
@@ -421,6 +418,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		[self warnOnFirstRoute];
 		[self selectRoute:selectedRoute];	
 		
+		[self saveRoute:selectedRoute forID:[selectedRoute.routeid intValue]];
+		
 		[[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, this route is now selected." andMessage:nil];
@@ -444,28 +443,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	self.selectedRoute=route;
 	
-	// NEW
-	// set SR in favs, will promote to top its dp
 	[[SavedRoutesManager sharedInstance] selectRoute:route];
-	Files *files=[CycleStreets sharedInstance].files;
-	[files setMiscValue:[route routeid] forKey:@"selectedroute"];
-	//
-	
-	
-	//OLD
-	/*
-	Files *files=[CycleStreets sharedInstance].files;
-	NSArray *oldFavourites = [files favourites];
-	NSMutableArray *newFavourites = [[[NSMutableArray alloc] initWithCapacity:[oldFavourites count]+1] autorelease];
-	[newFavourites addObjectsFromArray:oldFavourites];
-	if ([route routeid] != nil) {
-		[newFavourites removeObject:[route routeid]];
-		[newFavourites insertObject:[route routeid] atIndex:0];
-		[files setMiscValue:[route routeid] forKey:@"selectedroute"];
-	}
-	[files setFavourites:newFavourites];
-	[[FavouritesManager sharedInstance] update];	
-	*/
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:CSROUTESELECTED object:[route routeid]];
 	

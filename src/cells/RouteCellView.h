@@ -37,5 +37,6 @@
 
 
 +(NSNumber*)heightForCellWithDataProvider:(RouteVO*)route;
+-(void)updateCellUILabels;
 
 @end

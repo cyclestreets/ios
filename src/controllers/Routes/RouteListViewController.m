@@ -125,8 +125,9 @@
         // show no data overlay
     }
     
+	/*
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
-	
+	*/
 }
 
 
@@ -138,11 +139,11 @@
 
 - (void)viewDidLoad {
 	
+	[super viewDidLoad];
+	
     if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
         isSectioned=YES;
     }
-	
-	[super viewDidLoad];
 	
 }
 
@@ -155,12 +156,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-	[super viewWillAppear:animated];
-	
-	LogRect(self.view.frame);
-	
 	[self createNonPersistentUI];
 	
+	[super viewWillAppear:animated];
 }
 
 -(void)createNonPersistentUI{
@@ -169,6 +167,7 @@
 		[self refreshUIFromDataProvider];
 	}
 	
+	[self deSelectRowForTableView:tableView];
 }
 
 

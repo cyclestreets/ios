@@ -183,7 +183,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)createNonPersistentUI{
 	
-	self.routeNameLabel.text = [route name];
+	self.routeNameLabel.text = route.nameString;
 	self.dateLabel.text=route.dateString;
 	self.routeidLabel.text=[NSString stringWithFormat:@"#%@", [route routeid]];
 	[headerContainer refresh];
