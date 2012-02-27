@@ -1,6 +1,6 @@
 //
 //  ButtonUtilities.m
-//  NagMe
+// CycleStreets
 //
 //  Created by Neil Edwards on 19/08/2011.
 //  Copyright 2011 buffer. All rights reserved.

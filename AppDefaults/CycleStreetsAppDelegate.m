@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <UIKit/UIKit.h>
 #import "CycleStreetsAppDelegate.h"
 #import "CycleStreets.h"
-#import "FavouritesViewController.h"
 #import "Files.h"
 #import "Reachability.h"
 #import "AppConfigManager.h"
@@ -60,7 +59,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize tabBarController;
 @synthesize startupmanager;
 @synthesize debugLabel;
-@synthesize favourites;
 
 //=========================================================== 
 // dealloc
@@ -72,7 +70,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [tabBarController release], tabBarController = nil;
     [startupmanager release], startupmanager = nil;
     [debugLabel release], debugLabel = nil;
-    [favourites release], favourites = nil;
 	
     [super dealloc];
 }
@@ -257,14 +254,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			UIViewController *vccontroller= (UIViewController*)[[NSClassFromString(vcClass) alloc] initWithNibName:nibName bundle:nil];
 			vccontroller.title=vcTitle;
 			if(vccontroller!=nil){
-				
-				
-				//TODO: OLD STYLE SUPPORT: DEPRECATE THIS SOON!
-				if ([vcClass isEqualToString:@"FavouritesViewController"]) {
-					favourites=(FavouritesViewController*)vccontroller;
-				}
-				 
-				
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
 				if (isVC==YES) {

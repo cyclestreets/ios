@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 04/11/2010.
-//  Copyright 2010 Chroma. All rights reserved.
+//  Copyright 2010 CycleStreets.. All rights reserved.
 //
 
 #import "FrameworkObject.h"

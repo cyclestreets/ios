@@ -1,6 +1,6 @@
 //
 //  IncrementalStepControl.h
-//  NagMe
+// CycleStreets
 //
 //  Created by Neil Edwards on 30/11/2010.
 //  Copyright 2010 buffer. All rights reserved.

@@ -1,9 +1,9 @@
 //
 //  BUDividerView.m
-//  RacingUK
+//  CycleStreets
 //
 //  Created by neil on 22/02/2011.
-//  Copyright 2011 Chroma. All rights reserved.
+//  Copyright 2011 CycleStreets.. All rights reserved.
 //
 
 #import "BUDividerView.h"

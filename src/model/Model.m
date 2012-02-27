@@ -1,9 +1,9 @@
 //
 //  Model.m
-//  NagMe
+// CycleStreets
 //
 //  Created by neil on 23/11/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 // Main App Model
 

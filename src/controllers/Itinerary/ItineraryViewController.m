@@ -21,6 +21,7 @@
 #import "LayoutBox.h"
 #import "ViewUtilities.h"
 #import "GradientView.h"
+#import "MAKVONotificationCenter.h"
 
 @implementation ItineraryViewController
 @synthesize route;
@@ -55,26 +56,6 @@
 
 
 
-#pragma mark setters
-
-- (void)setRoute:(RouteVO *)newRoute {
-	
-	BetterLog(@"");
-	
-	RouteVO *oldRoute = route;
-	route = newRoute;
-	[newRoute retain];
-	[oldRoute release];
-	self.routeId = [[newRoute routeid] integerValue];
-	
-	[self createRowHeightsArray];
-	[tableView reloadData];
-}
-
-- (RouteVO *)route {
-	return route;
-}
-
 
 
 //
@@ -84,7 +65,6 @@
 //
 
 -(void)listNotificationInterests{
-	
 	
 	[self initialise];
 	
@@ -101,7 +81,6 @@
 	[super didReceiveNotification:notification];
 	
 	if([notification.name isEqualToString:CSROUTESELECTED]){
-		self.routeId=[notification.object integerValue];
 		[self refreshUIFromDataProvider];
 	}
 	
@@ -119,6 +98,11 @@
 	BetterLog(@"");
 	
 	self.route=[RouteManager sharedInstance].selectedRoute;
+	self.routeId = [route.routeid integerValue];
+	
+	
+	[self createRowHeightsArray];
+	[tableView reloadData];
 	
 }
 
@@ -130,7 +114,6 @@
 //
 
 - (void)viewDidLoad {
-	
 	
 	[self refreshUIFromDataProvider];
 	

@@ -1,9 +1,9 @@
 //
 //  StartupManager.m
-//  RacingUK
+//  CycleStreets
 //
 //  Created by neil on 08/12/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 
 #import "StartupManager.h"

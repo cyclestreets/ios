@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 22/06/2011.
-//  Copyright 2011 Chroma. All rights reserved.
+//  Copyright 2011 CycleStreets.. All rights reserved.
 //
 
 #import "HudManager.h"

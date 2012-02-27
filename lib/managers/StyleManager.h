@@ -1,9 +1,9 @@
 //
 //  StyleManager.h
-//  RacingUK
+//  CycleStreets
 //
 //  Created by neil on 25/11/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 // manager class for UI styles, loads style plist and returns styles for consistent ui
 

@@ -1,6 +1,6 @@
 //
 //  GradiantRectView.m
-//  RacingUK
+//  CycleStreets
 //
 //  Created by Neil Edwards on 30/04/2009.
 //  Copyright 2009 buffer. All rights reserved.

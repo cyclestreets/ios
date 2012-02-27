@@ -3,7 +3,7 @@
 //
 //
 //  Created by neil on 25/02/2010.
-//  Copyright 2010 Chroma. All rights reserved.
+//  Copyright 2010 CycleStreets.. All rights reserved.
 //
 
 #import <sys/utsname.h>

@@ -1,9 +1,9 @@
 //
 //  XMLManager.h
-//  RacingUK
+//  CycleStreets
 //
 //  Created by Neil Edwards on 24/11/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 
 // Provides a generic interface to loading new xml data

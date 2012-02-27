@@ -1,13 +1,14 @@
 //
 //  SuperViewController.h
-//  RacingUK
+//  CycleStreets
 //
 //  Created by Neil Edwards on 07/12/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "CustomNavigtionBar.h"
+#import "GradientView.h"
 
 @protocol SuperViewControllerDelegate <NSObject> 
 
@@ -26,6 +27,17 @@
 
 @end
 
+enum  {
+	kViewOverlayTypeNone=0,
+	kViewOverlayTypeDataRequestFailed=1,
+	kViewOverlayTypeConnectionFailed=2,
+	kViewOverlayTypeServerDown=3,
+	kViewOverlayTypeLoginRestriction=4,
+	kViewOverlayTypeNoResults=5,
+	kViewOverlayTypeRequestIndicator=6,
+};
+typedef int ViewOverlayType;
+
 @interface SuperViewController : UIViewController <CustomNavigationBarDelegate,SuperViewControllerDelegate>{
 	
 	CustomNavigtionBar					*navigation;
@@ -36,16 +48,21 @@
 	NSString							*UIType;
 	
 	NSString							*GATag;
+	
+	ViewOverlayType						activeViewOverlayType;
+	GradientView						*viewOverlayView;
 
 }
 
-@property (nonatomic, retain) CustomNavigtionBar *navigation;
-@property (nonatomic) CGRect frame;
-@property (nonatomic, assign) id<SuperViewControllerDelegate> delegate;
-@property (nonatomic) BOOL appearWasBackEvent;
-@property (nonatomic, retain) NSMutableArray *notifications;
-@property (nonatomic, retain) NSString *UIType;
-@property (nonatomic, retain) NSString *GATag;
+@property (nonatomic, retain) CustomNavigtionBar		* navigation;
+@property (nonatomic, assign) CGRect		 frame;
+@property (nonatomic, assign) id<SuperViewControllerDelegate>		 delegate;
+@property (nonatomic, assign) BOOL		 appearWasBackEvent;
+@property (nonatomic, retain) NSMutableArray		* notifications;
+@property (nonatomic, retain) NSString		* UIType;
+@property (nonatomic, retain) NSString		* GATag;
+@property (nonatomic, assign) ViewOverlayType		 activeViewOverlayType;
+@property (nonatomic, retain) GradientView		* viewOverlayView;
 
 
 //
@@ -57,12 +74,12 @@
 -(void)didReceiveNotification:(NSNotification*)notification;
 -(void)addNotifications;
 -(void)initialise;
--(void)handleRemoteRequestIndication:(BOOL)show;
 -(void)refreshUIFromDataProvider;
--(void)showNoResultsView:(BOOL)show;
--(void)showConnectionErrorView:(BOOL)show;
--(void)showEventRestrictionView:(BOOL)show;
 -(void)deSelectRowForTableView:(UITableView*)table;
+
+-(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message;
+-(IBAction)loginButtonSelected:(id)sender;
++ (NSString*)viewTypeToStringType:(ViewOverlayType)viewType;
 
 
 + (NSString *)nibName;

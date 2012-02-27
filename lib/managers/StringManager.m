@@ -1,9 +1,9 @@
 //
 //  StringManager.m
-//  NagMe
+// CycleStreets
 //
 //  Created by Neil Edwards on 19/02/2010.
-//  Copyright 2010 Chroma. All rights reserved.
+//  Copyright 2010 CycleStreets.. All rights reserved.
 //
 
 #import "StringManager.h"

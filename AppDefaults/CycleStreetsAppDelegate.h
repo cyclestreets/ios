@@ -25,7 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-@class FavouritesViewController;
 #import "StartupManager.h"
 #import "ExpandedUILabel.h"
 
@@ -42,8 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	StartupManager				*startupmanager;
 	ExpandedUILabel					*debugLabel;
 	
-	//TO BE DEPRECATED, these shouldnt be hard wired via the delegate, use notifications or kvo
-	FavouritesViewController		*favourites;
+	
 	
 }
 
@@ -52,7 +50,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, retain)	UITabBarController		*tabBarController;
 @property (nonatomic, retain)	StartupManager		*startupmanager;
 @property (nonatomic, retain)	ExpandedUILabel		*debugLabel;
-@property (nonatomic, retain)	FavouritesViewController		*favourites;
 
 
 - (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag;

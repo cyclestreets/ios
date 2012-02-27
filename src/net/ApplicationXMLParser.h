@@ -1,9 +1,9 @@
 //
 //  TBXMLParser.h
-//  RacingUK
+//  CycleStreets
 //
 //  Created by neil on 04/03/2010.
-//  Copyright 2010 Chroma. All rights reserved.
+//  Copyright 2010 CycleStreets.. All rights reserved.
 //	// Prelim implemnetation of new TB XML parser
 
 #import <Foundation/Foundation.h>

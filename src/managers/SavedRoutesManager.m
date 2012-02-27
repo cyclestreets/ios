@@ -237,8 +237,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
     int index=[arr indexOfObjectIdenticalTo:route.routeid];
     [arr removeObjectAtIndex:index];
 	
-	NSMutableArray *arr=[routeidStore objectForKey:type];
-	[arr removeObject:route.routeid];
+	NSMutableArray *idarr=[routeidStore objectForKey:type];
+	[idarr removeObject:route.routeid];
 	
 	[self saveIndicies];
     
@@ -326,7 +326,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObjectIdenticalTo:route.routeid];
+		int index=[routes indexOfObjectIdenticalTo:routeid];
 		
 		if(index!=NSNotFound){
 			break;

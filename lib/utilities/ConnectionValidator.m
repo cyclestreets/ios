@@ -1,6 +1,6 @@
 //
 //  ConnectionValidator.m
-//  RacingUK
+//  CycleStreets
 //
 //  Created by Neil Edwards on 18/07/2009.
 //  Copyright 2009 buffer. All rights reserved.

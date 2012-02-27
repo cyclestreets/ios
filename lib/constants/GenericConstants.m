@@ -1,6 +1,6 @@
 //
 //  GenericConstants.m
-//  ChromaAppCore
+//  CycleStreets.AppCore
 //
 //  Created by Neil Edwards on 18/08/2011.
 //  Copyright 2011 buffer. All rights reserved.

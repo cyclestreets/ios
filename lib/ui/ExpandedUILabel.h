@@ -1,6 +1,6 @@
 //
 //  ExpandedUILabel.h
-//  NagMe
+// CycleStreets
 //
 //  Created by Neil Edwards on 25/11/2010.
 //  Copyright 2010 buffer. All rights reserved.

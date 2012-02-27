@@ -1,13 +1,14 @@
 //
 //  ViewUtilities.m
-//  RacingUK
+//  CycleStreets
 //
 //  Created by Neil Edwards on 03/12/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 
 #import "ViewUtilities.h"
 #import "GlobalUtilities.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ViewUtilities
 
@@ -162,6 +163,122 @@
     
     return prompt;
     
+}
+
+
+
++(void)drawUIViewEdgeShadow:(UIView*)view atPosition:(NSString*)position{
+	
+	BOOL create=YES;
+	CAGradientLayer *shadow;
+	
+	if([view.layer.sublayers count]>0){
+		id layerzero=[view.layer.sublayers objectAtIndex:0];
+		if([layerzero isKindOfClass:[CAGradientLayer class]]){
+			shadow=[view.layer.sublayers objectAtIndex:0];
+			create=NO;
+		}
+	}
+	
+	if(create==YES){
+		if([position isEqualToString:BOTTOM]){
+			shadow = [ViewUtilities shadowAsInverse:NO :view];
+		}else{
+			shadow = [ViewUtilities shadowAsInverse:YES :view];
+		}
+		[view.layer insertSublayer:shadow atIndex:0];
+	}	
+	
+	CGRect shadowFrame = shadow.frame;
+	shadowFrame.size.width = view.frame.size.width;
+	if([position isEqualToString:BOTTOM]){
+		shadowFrame.origin.y = view.frame.size.height;
+	}else {
+		shadowFrame.origin.y = -10;
+	}
+	shadow.frame = shadowFrame;
+	
+	
+}
+
++(void)drawUIViewInsetShadow:(UIView*)view{
+	
+	BOOL create=YES;
+	CAGradientLayer *topshadow;
+	CAGradientLayer *bottomshadow;
+	
+	if([view.layer.sublayers count]>0){
+		id layerzero=[view.layer.sublayers objectAtIndex:0];
+		if([layerzero isKindOfClass:[CAGradientLayer class]]){
+			topshadow=[view.layer.sublayers objectAtIndex:0];
+			create=NO;
+		}
+	}
+	
+	if(create==YES){
+		topshadow = [ViewUtilities shadowAsInverse:NO :view];
+		[view.layer insertSublayer:topshadow atIndex:0];
+		bottomshadow = [ViewUtilities shadowAsInverse:YES :view];
+		[view.layer insertSublayer:bottomshadow atIndex:1];
+	}	
+	
+	CGRect topShadowFrame = topshadow.frame;
+	topShadowFrame.size.width = view.frame.size.width;
+	topShadowFrame.origin.y = 0;
+	topshadow.frame = topShadowFrame;
+	
+	CGRect bottomshadowFrame = bottomshadow.frame;
+	bottomshadowFrame.size.width = view.frame.size.width;
+	bottomshadowFrame.origin.y = view.frame.size.height-10;
+	bottomshadow.frame = bottomshadowFrame;
+	
+}
+
++(void)drawInsertedViewShadow:(UIView*)view{
+	
+	CGRect viewframe=view.frame;
+	CGFloat viewheight=viewframe.size.height;
+	CGFloat viewwidth=viewframe.size.width;
+	CGFloat	gradiantheight=3.0f;
+	//viewheight-=4.0f; // abitrary  magic number: keep an eye on this
+	CALayer	*gradiantlayer=[[CALayer alloc]init];
+	gradiantlayer.frame=CGRectMake(0, 0, viewwidth, viewheight);
+	if ([gradiantlayer respondsToSelector:@selector(setShadowColor:)]) {
+		gradiantlayer.shadowColor = [UIColor blackColor].CGColor;
+		gradiantlayer.shadowOpacity = 0.6f;
+		gradiantlayer.shadowOffset = CGSizeMake(gradiantheight,gradiantheight);
+		gradiantlayer.shadowRadius = 4.0f;
+	}
+	gradiantlayer.masksToBounds = YES;
+	UIBezierPath *path = [UIBezierPath bezierPath];
+	
+	if ([path respondsToSelector:@selector(moveToPoint:)]  && [path respondsToSelector:@selector(addLineToPoint:)] ) {
+		[path moveToPoint:CGPointMake(-10,-10)];
+		[path addLineToPoint:CGPointMake(viewwidth+10, -10)];
+		[path addLineToPoint:CGPointMake(viewwidth+10, 0)];
+		[path addLineToPoint:CGPointMake(0, 0)];	
+		[path addLineToPoint:CGPointMake(0, viewheight)];
+		[path addLineToPoint:CGPointMake(-10, viewheight)];
+	}
+	[path closePath];
+	
+	if ([gradiantlayer respondsToSelector:@selector(setShadowPath:)]) {
+		gradiantlayer.shadowPath = path.CGPath;
+	}
+	[view.layer insertSublayer:gradiantlayer atIndex:0 ];
+	
+}
+
+
++ (CAGradientLayer *)shadowAsInverse:(BOOL)inverse :(UIView*)view
+{
+	CAGradientLayer *newShadow = [[CAGradientLayer alloc] init];
+	CGRect newShadowFrame =CGRectMake(0, 0, view.frame.size.width, inverse ? 10 : 10);
+	newShadow.frame = newShadowFrame;
+	UIColor *darkColor =UIColorFromRGBAndAlpha(0x000000,.3);
+	UIColor *lightColor =UIColorFromRGBAndAlpha(0x000000,0);
+	newShadow.colors =[NSArray arrayWithObjects:(inverse ? (id)[lightColor CGColor] : (id)[darkColor CGColor]),(id)(inverse ? (id)[darkColor CGColor] : (id)[lightColor CGColor]),nil];
+	return newShadow;
 }
 
 @end

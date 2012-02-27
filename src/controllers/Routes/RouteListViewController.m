@@ -11,12 +11,15 @@
 #import "SavedRoutesManager.h"
 #import "StyleManager.h"
 #import "NSDate+Helper.h"
+#import "RouteToolCellView.h"
 
 
 @interface RouteListViewController(Private) 
 
 -(void)createRowHeightsArray;
 -(void)createSectionHeadersArray;
+
+- (NSIndexPath *)modelIndexPathforIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -36,6 +39,12 @@
 @synthesize selectedCount;
 @synthesize deleteButton;
 @synthesize tableView;
+@synthesize toolView;
+@synthesize tappedIndexPath;
+@synthesize toolRowIndexPath;
+@synthesize indexPathToDelete;
+
+
 
 //=========================================================== 
 // dealloc
@@ -52,9 +61,16 @@
     [selectedCellDictionary release], selectedCellDictionary = nil;
     [deleteButton release], deleteButton = nil;
     [tableView release], tableView = nil;
+    [toolView release], toolView = nil;
+    [tappedIndexPath release], tappedIndexPath = nil;
+    [toolRowIndexPath release], toolRowIndexPath = nil;
+    [indexPathToDelete release], indexPathToDelete = nil;
 	
     [super dealloc];
 }
+
+
+
 
 
 
@@ -122,7 +138,7 @@
         [self.tableView reloadData];
         
     }else{
-        // show no data overlay
+        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:nil];
     }
     
 	/*
@@ -150,6 +166,8 @@
 
 -(void)createPersistentUI{
 	
+	self.toolView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+	toolView.backgroundColor=[UIColor redColor];
 	
 }
 
@@ -196,6 +214,11 @@
 	if(isSectioned==YES){
 		NSString *key=[keys objectAtIndex:section];
 		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+		if(toolRowIndexPath){
+			if(section==[tappedIndexPath section]){
+				return [sectionDataProvider count]+1;
+			}
+		}
 		return [sectionDataProvider count];
 	}else {
 		return [dataProvider count];
@@ -230,14 +253,24 @@
 	
 		NSString *key=[keys objectAtIndex:[indexPath section]];
 		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
-	
-		cell.dataProvider=[sectionDataProvider objectAtIndex:[indexPath row]];
+		
+		if([indexPath isEqual:toolRowIndexPath]){
+			
+			RouteToolCellView *cell = (RouteToolCellView *)[RouteToolCellView cellForTableView:table fromNib:[RouteToolCellView nib]];
+			return cell;
+			
+		}else {
+			cell.dataProvider=[sectionDataProvider objectAtIndex:[indexPath row]];
+			[cell populate];
+		}
+		
 		
 	}else {
 		cell.dataProvider=[dataProvider objectAtIndex:[indexPath row]];
+		[cell populate];
 	}
 
-	[cell populate];
+	
 	
     return cell;
 }
@@ -246,10 +279,54 @@
 
 - (void)tableView:(UITableView *)tbv didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	
+	
 	if (tableEditMode==YES){
 		return;
 	}else {
-        
+		
+		//if user tapped the same row twice let's start getting rid of the control cell
+		if([indexPath isEqual:tappedIndexPath]){
+			[tableView deselectRowAtIndexPath:indexPath animated:NO];
+		}
+		
+		//update the indexpath if needed... I explain this below 
+		indexPath = [self modelIndexPathforIndexPath:indexPath];
+		
+		//pointer to delete the control cell
+		self.indexPathToDelete = toolRowIndexPath;
+		
+		//if in fact I tapped the same row twice lets clear our tapping trackers 
+		if([indexPath isEqual:tappedIndexPath]){
+			self.tappedIndexPath = nil;
+			self.toolRowIndexPath = nil;
+		}
+		//otherwise let's update them appropriately 
+		else{
+			self.tappedIndexPath = indexPath; //the row the user just tapped. 
+			//Now I set the location of where I need to add the dummy cell 
+			self.toolRowIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1   inSection:indexPath.section];
+		}
+		
+		//all logic is done, lets start updating the table
+		[self.tableView beginUpdates];
+		
+		//lets delete the control cell, either the user tapped the same row twice or tapped another row
+		if(indexPathToDelete){
+			[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete] 
+								  withRowAnimation:UITableViewRowAnimationNone];
+		}
+		//lets add the new control cell in the right place 
+		if(toolRowIndexPath){
+			[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:toolRowIndexPath] 
+								  withRowAnimation:UITableViewRowAnimationNone];
+		}
+		
+		//and we are done... 
+		[self.tableView endUpdates];
+		
+		self.indexPathToDelete=nil;
+		
+        /*
         if([delegate respondsToSelector:@selector(doNavigationPush: withDataProvider: andIndex:)]){
             
             RouteVO *route;
@@ -264,6 +341,7 @@
 			
 			[delegate doNavigationPush:@"RouteSummary" withDataProvider:route andIndex:-1];
 		}
+		 */
 		
 	}
 
@@ -276,9 +354,26 @@
 	}else{
 		NSString *key=[keys objectAtIndex:[indexPath section]];
 		NSMutableArray *arr=[rowHeightDictionary objectForKey:key];
-		CGFloat cellheight=[[arr objectAtIndex:[indexPath row]] floatValue];
-		return cellheight;
+		
+		if([indexPath isEqual:toolRowIndexPath]){
+			return [RouteToolCellView rowHeight];
+		}else {
+			
+			int rowIndex=[indexPath row];
+			CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
+			return cellheight;
+			
+		}
+		
 	}
+}
+
+- (NSIndexPath *)modelIndexPathforIndexPath:(NSIndexPath *)indexPath
+{
+    int whereIsTheControlRow = toolRowIndexPath.row;
+    if(toolRowIndexPath != nil && indexPath.row > whereIsTheControlRow)
+        return [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]; 
+    return indexPath;
 }
 
 

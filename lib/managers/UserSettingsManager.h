@@ -1,9 +1,9 @@
 //
 //  RKUserSettingsManager.h
-//  RacingUK
+//  CycleStreets
 //
 //  Created by neil on 10/12/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 // Manager for Settings values & state
 

@@ -1,9 +1,9 @@
 //
 //  Request.h
-//  RacingUK
+//  CycleStreets
 //
 //  Created by Neil Edwards on 10/12/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -28,20 +28,32 @@
 	int										selectedCount;
 	UIButton								*deleteButton;
 	UITableView								*tableView;
+	
+	// testing
+	UIView									*toolView;
+	NSIndexPath								*tappedIndexPath;
+	NSIndexPath								*toolRowIndexPath;
+	NSIndexPath								*indexPathToDelete;
+	
+	
 }
-@property (nonatomic)	BOOL		isSectioned;
-@property (nonatomic, retain)	NSMutableArray		*keys;
-@property (nonatomic, retain)	NSMutableArray		*dataProvider;
-@property (nonatomic, retain)	NSMutableDictionary		*tableDataProvider;
-@property (nonatomic, retain)	NSMutableArray		*rowHeightsArray;
-@property (nonatomic, retain)	NSMutableDictionary		*rowHeightDictionary;
-@property (nonatomic, retain)	NSMutableArray		*tableSectionArray;
-@property (nonatomic, retain)	NSString		*dataType;
-@property (nonatomic)	BOOL		tableEditMode;
-@property (nonatomic, retain)	NSMutableDictionary		*selectedCellDictionary;
-@property (nonatomic)	int		selectedCount;
-@property (nonatomic, retain)	UIButton		*deleteButton;
-@property (nonatomic, retain)	IBOutlet UITableView		*tableView;
+@property (nonatomic, assign) BOOL		 isSectioned;
+@property (nonatomic, retain) NSMutableArray		* keys;
+@property (nonatomic, retain) NSMutableArray		* dataProvider;
+@property (nonatomic, retain) NSMutableDictionary		* tableDataProvider;
+@property (nonatomic, retain) NSMutableArray		* rowHeightsArray;
+@property (nonatomic, retain) NSMutableDictionary		* rowHeightDictionary;
+@property (nonatomic, retain) NSMutableArray		* tableSectionArray;
+@property (nonatomic, retain) NSString		* dataType;
+@property (nonatomic, assign) BOOL		 tableEditMode;
+@property (nonatomic, retain) NSMutableDictionary		* selectedCellDictionary;
+@property (nonatomic, assign) int		 selectedCount;
+@property (nonatomic, retain) UIButton		* deleteButton;
+@property (nonatomic, retain) UITableView		* tableView;
+@property (nonatomic, retain) UIView		* toolView;
+@property (nonatomic, retain) NSIndexPath		* tappedIndexPath;
+@property (nonatomic, retain) NSIndexPath		* toolRowIndexPath;
+@property (nonatomic, retain) NSIndexPath		* indexPathToDelete;
 
 -(void)setTableEditingState:(BOOL)state;
 @end

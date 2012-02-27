@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 23/03/2010.
-//  Copyright 2010 Chroma. All rights reserved.
+//  Copyright 2010 CycleStreets.. All rights reserved.
 //
 
 #import "BUMoreTableDataSource.h"

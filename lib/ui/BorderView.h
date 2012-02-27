@@ -1,9 +1,9 @@
 //
 //  BorderView.h
-//  RacingUK
+//  CycleStreets
 //
 //  Created by neil on 03/12/2009.
-//  Copyright 2009 Chroma. All rights reserved.
+//  Copyright 2009 CycleStreets.. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
