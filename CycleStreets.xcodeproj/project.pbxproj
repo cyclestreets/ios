@@ -237,6 +237,8 @@
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
 		289E6AFA144C35860079FFE5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E6AF8144C357C0079FFE5 /* libz.dylib */; };
+		28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */; };
+		28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
 		28A8B62F1450B074009C5647 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B62E1450B074009C5647 /* POIListviewController.m */; };
 		28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6311450B1DC009C5647 /* POITypeCellView.m */; };
 		28A8B6351450B259009C5647 /* POICategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6341450B259009C5647 /* POICategoryVO.m */; };
@@ -743,6 +745,10 @@
 		289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_finish_wisp@2x.png"; sourceTree = "<group>"; };
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		28A89CCA14FD4A610001BABA /* PhotoWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardViewController.h; path = PhotoWizard/PhotoWizardViewController.h; sourceTree = "<group>"; };
+		28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoWizardViewController.m; path = PhotoWizard/PhotoWizardViewController.m; sourceTree = "<group>"; };
+		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
+		28A89CD414FD52230001BABA /* UploadPhotoVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPhotoVO.m; sourceTree = "<group>"; };
 		28A8B62D1450B074009C5647 /* POIListviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIListviewController.h; sourceTree = "<group>"; };
 		28A8B62E1450B074009C5647 /* POIListviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIListviewController.m; sourceTree = "<group>"; };
 		28A8B6301450B1DC009C5647 /* POITypeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POITypeCellView.h; sourceTree = "<group>"; };
@@ -1738,6 +1744,15 @@
 			path = Wisps;
 			sourceTree = "<group>";
 		};
+		28A89CC914FD4A170001BABA /* PhotoWizard */ = {
+			isa = PBXGroup;
+			children = (
+				28A89CCA14FD4A610001BABA /* PhotoWizardViewController.h */,
+				28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */,
+			);
+			name = PhotoWizard;
+			sourceTree = "<group>";
+		};
 		28A8B62C1450B026009C5647 /* POIs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1781,6 +1796,7 @@
 		28AD61DC131FB69D008527FC /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				28A89CC914FD4A170001BABA /* PhotoWizard */,
 				28A8B62C1450B026009C5647 /* POIs */,
 				280E91CD14097DE000C7AC75 /* Itinerary */,
 				280E91C914097DD300C7AC75 /* Search */,
@@ -1893,6 +1909,8 @@
 				28A8B6341450B259009C5647 /* POICategoryVO.m */,
 				281E08B4145168F90034CC63 /* POILocationVO.h */,
 				281E08B5145168F90034CC63 /* POILocationVO.m */,
+				28A89CD314FD52230001BABA /* UploadPhotoVO.h */,
+				28A89CD414FD52230001BABA /* UploadPhotoVO.m */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -2717,6 +2735,8 @@
 				28E6747B14F66300001B171C /* MAKVONotificationCenter.m in Sources */,
 				288F6BA014FBF91700B64602 /* RouteToolCellView.m in Sources */,
 				28187A3314FCC7EF00A38A17 /* UserLocationManager.m in Sources */,
+				28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */,
+				28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

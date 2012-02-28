@@ -324,17 +324,12 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[[HudManager sharedInstance] removeHUD];
 }
 
-//helper, could be shelled out as more general.
+
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
 	BetterLog(@"");
 	
 	[[PhotoManager sharedInstance] retrievePhotosForLocationBounds:ne withEdge:sw];
 	
-	/*
-	QueryPhoto *queryPhoto = [[QueryPhoto alloc] initNorthEast:ne SouthWest:sw];
-	[queryPhoto runWithTarget:self onSuccess:@selector(didSucceedPhoto:results:) onFailure:@selector(didFailPhoto:message:)];
-	[queryPhoto release];
-	 */
 }
 
 
