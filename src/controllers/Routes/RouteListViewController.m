@@ -360,8 +360,12 @@
 		}else {
 			
 			int rowIndex=[indexPath row];
-			CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
-			return cellheight;
+            if(rowIndex<[arr count]){
+                CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
+                return cellheight;
+            }else{
+                return 0;
+            }
 			
 		}
 		

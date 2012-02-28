@@ -107,6 +107,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 				messageText=@"A Server error occured, please try again.";
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
+            case HUDWindowTypeIcon:
+				HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:message]] autorelease];
+                messageText=nil;
+				HUD.mode = MBProgressHUDModeCustomView;
+				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
+            break;
+                
+            case HUDWindowTypeNone:
+				HUD.mode = MBProgressHUDModeCustomView;
+				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
+            break;
 		
 		}
 		

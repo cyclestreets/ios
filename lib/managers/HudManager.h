@@ -16,6 +16,7 @@ enum  {
 	HUDWindowTypeError=2,
 	HUDWindowTypeLock=3,
 	HUDWindowTypeServer=4,
+    HUDWindowTypeIcon=5,
 	HUDWindowTypeNone
 };
 typedef int HUDWindowType;

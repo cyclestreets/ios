@@ -45,6 +45,10 @@ extern NSString *const POICATEGORYLOCATIONRESPONSE;
 extern NSString *const SAVEDROUTEUPDATE;
 extern NSString *const MAPSTYLECHANGED;
 
+extern NSString *const GPSLOCATIONUPDATE;
+extern NSString *const GPSLOCATIONFAILED;
+extern NSString *const GPSLOCATIONCOMPLETE;
+
 
 extern NSString *const MILES;
 extern NSString *const KM;

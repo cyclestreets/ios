@@ -58,15 +58,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "AppConstants.h"
 #import "SettingsManager.h"
 #import "POIListviewController.h"
+#import "HudManager.h"
 
 @interface MapViewController(Private)
-
--(void)showProgressHUDWithMessage:(NSString*)message;
--(void)removeHUD;
--(void)showSuccessHUD:(NSString*)message;
--(void)showErrorHUDWithMessage:(NSString*)error;
--(void)showHUDWithMessage:(NSString*)message;
--(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon withDelay:(NSTimeInterval)delay;
 
 - (void) addLocation:(CLLocationCoordinate2D)location;
 -(void)updateSelectedRoute;
@@ -145,7 +139,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize noLocationAlert;
 @synthesize planningState;
 @synthesize oldPlanningState;
-@synthesize HUD;
 
 
 //=========================================================== 
@@ -178,7 +171,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [clearAlert release], clearAlert = nil;
     [startFinishAlert release], startFinishAlert = nil;
     [noLocationAlert release], noLocationAlert = nil;
-    [HUD release], HUD = nil;
 	
     [super dealloc];
 }
@@ -535,6 +527,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
  */
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
+    
 	[self afterMapChanged:map];
 	[self saveLocation:map.contents.mapCenter];
 }
@@ -594,7 +587,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void) firstAlert:(NSString *)message {
 	
-	[self showHUDWithMessage:message];
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeNone withTitle:message andMessage:nil];
 }
 
 - (void) showStartFinishAlert {
@@ -654,7 +647,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if (self.programmaticChange && self.planningState == stateLocatingEnd) {
 		CLLocationDistance distanceFromStart = [self distanceFromStart:location];
 		if (distanceFromStart < MIN_START_FINISH_DISTANCE) {
-			[self showHUDWithMessage:@"Move the map to set a finish point further away."];
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Point error" andMessage:@"Move the map to set a finish point further away."];
 			[self gotoState:stateEnd];
 			return;
 		}
@@ -676,7 +669,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[self endMarker:location];
 		
 		if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
-			[self showHUDWithMessage:@"Finish point set." andIcon:@"CSIcon_finish_wisp.png" withDelay:1];
+            
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Finish point set." andMessage:@"CSIcon_finish_wisp.png"];
 		}
 		if (self.planningState == stateEnd) {
 			[self gotoState:statePlan];
@@ -687,7 +681,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if (self.planningState == stateStart || self.planningState == stateLocatingStart) {
 		[self startMarker:location];
 		if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
-			[self showHUDWithMessage:@"Start point set." andIcon:@"CSIcon_start_wisp.png" withDelay:1];
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Start point set." andMessage:@"CSIcon_start_wisp.png"];
 		}
 		if (self.planningState == stateStart) {
 			[self gotoState:stateEnd];
@@ -1203,85 +1197,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
-//
-/***********************************************
- * @description			HUDSUPPORT
- ***********************************************/
-//
 
-
--(void)showProgressHUDWithMessage:(NSString*)message{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-    HUD.delegate = self;
-	HUD.animationType=MBProgressHUDAnimationZoom;
-	HUD.labelText=message;
-	[HUD show:YES];
-	
-}
-
--(void)showHUDWithMessage:(NSString*)message{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-    HUD.delegate = self;
-	HUD.labelText=message;
-	[HUD show:YES];
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
-}
--(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon withDelay:(NSTimeInterval)delay{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-    HUD.delegate = self;
-	HUD.labelText=message;
-	[HUD show:YES];
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delay];
-}
-
-
-//
-/***********************************************
- * @description			NOTE: These are only to be called if the hud has already been created!
- ***********************************************/
-//
-
--(void)showSuccessHUD:(NSString*)message{
-	
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = message;
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:1];
-}
-
--(void)showErrorHUDWithMessage:(NSString*)error{
-	
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-	HUD.labelText = @"Error";
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:2];
-}
-
-
--(void)removeHUD{
-	
-	[HUD hide:YES];
-	
-}
-
-
--(void)hudWasHidden{
-	
-	[HUD removeFromSuperview];
-	[HUD release];
-	HUD=nil;
-	
-}
 
 
 @end

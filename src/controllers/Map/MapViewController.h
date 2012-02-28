@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapView.h"
 #import "RouteLineView.h"
 #import "BlueCircleView.h"
-#import "MBProgressHUD.h"
 @class CycleStreets;
 @class RouteVO;
 @class Location;
@@ -46,7 +45,7 @@ enum PlanningStateT {stateStart = 0,
 typedef enum PlanningStateT PlanningState;
 
 @interface MapViewController : UIViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider,MBProgressHUDDelegate> {
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider> {
 	//IB items
 	UIToolbar *toolBar;
 	
@@ -94,7 +93,6 @@ typedef enum PlanningStateT PlanningState;
 	PlanningState planningState;
 	PlanningState oldPlanningState;
 	
-	MBProgressHUD		*HUD;
 }
 @property (nonatomic, retain)	IBOutlet UIToolbar	*toolBar;
 @property (nonatomic, retain)	IBOutlet UIBarButtonItem	*locationButton;
@@ -128,7 +126,6 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, retain)	IBOutlet UIAlertView	*noLocationAlert;
 @property (nonatomic, assign)	PlanningState	planningState;
 @property (nonatomic, assign)	PlanningState	oldPlanningState;
-@property (nonatomic, retain)	MBProgressHUD	*HUD;
 
 
 - (IBAction) didZoomIn;
