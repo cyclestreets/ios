@@ -39,7 +39,7 @@
 
 - (NSData *)fullData {
 	if (image) {
-		return UIImagePNGRepresentation( image, 0.95);		
+		return UIImagePNGRepresentation( image);		
 	} else {
 		return nil;
 	}
@@ -52,6 +52,7 @@
 	}
 	return nil;
 }
+
 
 
 @end

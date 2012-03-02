@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BuildLocationStyle</key>
+	<string>UseAppPreferences</string>
+	<key>CustomBuildLocationType</key>
+	<string>RelativeToDerivedData</string>
+	<key>DerivedDataCustomLocation</key>
+	<string>/Users/neil/iPhone/Applications/CycleStreets/build</string>
+	<key>DerivedDataLocationStyle</key>
+	<string>AbsolutePath</string>
+	<key>HasAskedToTakeAutomaticSnapshotBeforeSignificantChanges</key>
+	<true/>
 	<key>IDEWorkspaceUserSettings_BuildLocationStyle</key>
 	<integer>0</integer>
 	<key>IDEWorkspaceUserSettings_BuildSubfolderNameStyle</key>
@@ -20,5 +30,13 @@
 	<false/>
 	<key>IDEWorkspaceUserSettings_SnapshotLocationStyle</key>
 	<integer>0</integer>
+	<key>IssueFilterStyle</key>
+	<string>ShowActiveSchemeOnly</string>
+	<key>LiveSourceIssuesEnabled</key>
+	<false/>
+	<key>SnapshotAutomaticallyBeforeSignificantChanges</key>
+	<false/>
+	<key>SnapshotLocationStyle</key>
+	<string>Default</string>
 </dict>
 </plist>

@@ -9,15 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface UploadPhotoVO : NSObject<NSCoding>{
+@interface UploadPhotoVO : NSObject{
     
     UIImage *image;
 	CLLocationCoordinate2D coordinate;
     
 }
-@property (nonatomic, strong)	UIImage			*image;
-@property (nonatomic, assign)	CLLocationCoordinate2D			coordinate;
-
+@property (nonatomic, retain) UIImage		* image;
+@property (nonatomic, assign) CLLocationCoordinate2D		 coordinate;
 
 - (id)initWithImage:(UIImage *)newImage;
 

@@ -225,6 +225,7 @@
 		288B10281457492500E2A96F /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
 		288F6B9D14FBF85900B64602 /* RouteToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F6B9C14FBF85900B64602 /* RouteToolCell.xib */; };
 		288F6BA014FBF91700B64602 /* RouteToolCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288F6B9F14FBF91700B64602 /* RouteToolCellView.m */; };
+		2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */; };
 		28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */; };
 		289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4913536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png */; };
@@ -732,6 +733,7 @@
 		288F6B9C14FBF85900B64602 /* RouteToolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteToolCell.xib; sourceTree = "<group>"; };
 		288F6B9E14FBF91700B64602 /* RouteToolCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteToolCellView.h; sourceTree = "<group>"; };
 		288F6B9F14FBF91700B64602 /* RouteToolCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteToolCellView.m; sourceTree = "<group>"; };
+		2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardView.xib; path = photowizard/PhotoWizardView.xib; sourceTree = "<group>"; };
 		28916030133A9AC9000C821B /* CSSegmentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSegmentFooterView.h; sourceTree = "<group>"; };
 		28916031133A9AC9000C821B /* CSSegmentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSegmentFooterView.m; sourceTree = "<group>"; };
 		289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_MapArrow_end@2x.png"; sourceTree = "<group>"; };
@@ -1342,6 +1344,7 @@
 		280E931D140984F300C7AC75 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2890F15E14FEC2CF00FF8901 /* photowizard */,
 				281E08C514517BA40034CC63 /* poi */,
 				28735C01144EC97F00726A6C /* photomap */,
 				280E931E140984F300C7AC75 /* credits */,
@@ -1710,6 +1713,14 @@
 				E77D8F10120321E4003E6B8D /* credits.html */,
 			);
 			name = html;
+			sourceTree = "<group>";
+		};
+		2890F15E14FEC2CF00FF8901 /* photowizard */ = {
+			isa = PBXGroup;
+			children = (
+				2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */,
+			);
+			name = photowizard;
 			sourceTree = "<group>";
 		};
 		289A9B4713536CCB00E8AF90 /* Arrows */ = {
@@ -2545,6 +2556,7 @@
 				28187ADC14FCFF4D00A38A17 /* UITabbar_settings.png in Resources */,
 				28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */,
 				28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */,
+				2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
