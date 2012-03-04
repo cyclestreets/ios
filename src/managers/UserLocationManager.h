@@ -29,6 +29,8 @@ typedef int ConnectLocationStates;
     BOOL                didFindDeviceLocation;
     int                 locationState;
     
+    BOOL                        isLocating;
+    
     CLLocationManager			*locationManager;
 	NSMutableArray				*locationMeasurements;
     CLLocation					*bestEffortAtLocation;
@@ -38,10 +40,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 @property (nonatomic, assign)	BOOL			doesDeviceAllowLocation;
 @property (nonatomic, assign)	BOOL			didFindDeviceLocation;
 @property (nonatomic, assign)	int			locationState;
+@property (nonatomic, assign)	BOOL			isLocating;
 @property (nonatomic, retain)	CLLocationManager			*locationManager;
 @property (nonatomic, retain)	NSMutableArray			*locationMeasurements;
 @property (nonatomic, retain)	CLLocation			*bestEffortAtLocation;
 
 
+-(void)startUpdatingLocation;
+- (void)stopUpdatingLocation:(NSString *)state;
 
 @end

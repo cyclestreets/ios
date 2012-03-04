@@ -12,11 +12,15 @@
 @interface UploadPhotoVO : NSObject{
     
     UIImage *image;
-	CLLocationCoordinate2D coordinate;
+	CLLocation *location;
     
 }
 @property (nonatomic, retain) UIImage		* image;
-@property (nonatomic, assign) CLLocationCoordinate2D		 coordinate;
+@property (nonatomic, assign) CLLocation    *location;
+
+@property (nonatomic, readonly) int		 width;
+@property (nonatomic, readonly) int		 height;
+
 
 - (id)initWithImage:(UIImage *)newImage;
 

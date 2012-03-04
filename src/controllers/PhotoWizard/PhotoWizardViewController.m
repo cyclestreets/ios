@@ -13,10 +13,14 @@
 #import "GlobalUtilities.h"
 #import "RMMarkerManager.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "UserLocationManager.h"
+#import "CycleStreets.h"
 
 static NSInteger MAX_ZOOM = 18;
 
 @interface PhotoWizardViewController(Private) 
+
+-(void)updateViewState:(PhotoWizardViewState)state;
 
 -(void)initPhotoView;
 -(void)initLocationView;
@@ -24,15 +28,17 @@ static NSInteger MAX_ZOOM = 18;
 -(void)initDescriptionView;
 -(void)initUploadView;
 
+-(void)updatePageControlExtents;
 
 -(IBAction)pageControlValueChanged:(id)sender;
 
--(void)didRecievePhotoImageUploadResponse:(NSDictionary*)dict;
-
+-(void)loadLocationFromPhoto;
 - (void)startlocationManagerIsLocating;
 - (void)stoplocationManagerIsLocating;
 
 -(void)updateSelectionLabels;
+
+-(void)didRecievePhotoImageUploadResponse:(NSDictionary*)dict;
 
 @end
 
@@ -44,7 +50,13 @@ static NSInteger MAX_ZOOM = 18;
 @synthesize pageContainer;
 @synthesize activePage;
 @synthesize maxVisitedPage;
+@synthesize viewArray;
+@synthesize pageTitleLabel;
+@synthesize pageNumberLabel;
 @synthesize uploadImage;
+@synthesize infoView;
+@synthesize continueButton;
+@synthesize cancelViewButton;
 @synthesize photoPickerView;
 @synthesize imagePreview;
 @synthesize photoSizeLabel;
@@ -76,9 +88,6 @@ static NSInteger MAX_ZOOM = 18;
 @synthesize uploadProgressView;
 @synthesize uploadLabel;
 @synthesize photoResultView;
-
-
-
 
 //
 /***********************************************
@@ -146,23 +155,30 @@ static NSInteger MAX_ZOOM = 18;
     categoryIndex=0;
     metacategoryIndex=0;
 	
+    viewState=-1;
 	activePage=0;
-	maxVisitedPage=1;
+	maxVisitedPage=-1;
 	
 	// set up scroll view with layoutbox for sub items
 	self.pageContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	pageContainer.backgroundColor=[UIColor clearColor];
+	pageContainer.backgroundColor=[UIColor redColor];
 	pageContainer.layoutMode=BUHorizontalLayoutMode;
 	pageContainer.paddingTop=10;
-	[pageScrollView addSubview:pageContainer];
+    
+    self.viewArray=[NSMutableArray arrayWithObjects:@"Information",@"Photo Picker", @"Location",@"Photo Category",@"Description",@"Upload",@"Result", nil];
+    
+    [pageContainer addSubview:infoView];    
+    [pageScrollView addSubview:pageContainer];
 	
-	activePage=0;
 	pageScrollView.pagingEnabled=YES;
 	pageScrollView.delegate=self;
 	pageControl.hidesForSinglePage=YES;
+    pageControl.defersCurrentPageDisplay=YES;
+    pageControl.numberOfPages=1;
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
-	
+	 [self updateViewState:PhotoWizardViewStateNone];
+    
 }
 
 
@@ -177,10 +193,14 @@ static NSInteger MAX_ZOOM = 18;
 
 -(void)createNonPersistentUI{
     
-    
-    
+   
     
 }
+
+// complete step
+// increment max vs
+// increment page control
+// init max visited view state
 
 
 //
@@ -195,17 +215,32 @@ static NSInteger MAX_ZOOM = 18;
     if(viewState!=state){
 		
 		viewState=state;
-    
+        activePage=viewState+1;
+        
+        if(viewState>maxVisitedPage){
+            maxVisitedPage=activePage;
+        }
+        
+        [self updatePageControlExtents];
 		
 		switch (viewState) {
+                
+            case PhotoWizardViewStateNone:
+                
+				
+            break;
 				
 			case PhotoWizardViewStatePhoto:
+                
+                [self initPhotoView];
 				
 			break;
 				
 			case PhotoWizardViewStateLocation:
+                
+                [self initLocationView];
 				
-				break;
+            break;
 				
 			case PhotoWizardViewStateCategory:
 				
@@ -228,10 +263,10 @@ static NSInteger MAX_ZOOM = 18;
 		}
 		
 	}
-		
-	// update title
-    
-    
+	
+    pageTitleLabel.text=[viewArray objectAtIndex:viewState];
+    pageNumberLabel.text=[NSString stringWithFormat:@"%i of %i",activePage, [viewArray count]];
+	    
 }
 
 
@@ -254,8 +289,13 @@ static NSInteger MAX_ZOOM = 18;
 -(IBAction)pageControlValueChanged:(id)sender{
 	BetterLog(@"");
 	UIPageControl *pc=(UIPageControl*)sender;
-	CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
-	[pageScrollView setContentOffset:offset animated:YES];
+    if(pc.currentPage<=maxVisitedPage){
+        CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
+        [pageScrollView setContentOffset:offset animated:YES];
+        [pageControl updateCurrentPageDisplay];
+    }else{
+        pc.currentPage=activePage;
+    }
 	
 }
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView*)sc{
@@ -266,12 +306,36 @@ static NSInteger MAX_ZOOM = 18;
 
 -(void)updatePageControlExtents{
 	
-	// we must stop users scrolling past their completed step
 	pageControl.numberOfPages=maxVisitedPage;
 	
 }
 
+-(void)scrollPageToIndex:(int)index{
+    if(index<=maxVisitedPage){
+       // scrol to index x screenwidth
+        // update page control
+    }
+}
 
+//
+/***********************************************
+ * @description			View info methods
+ ***********************************************/
+//
+
+-(void)initInfoView{
+    
+}
+
+-(IBAction)continueUploadbuttonSelected:(id)sender{
+    
+    [self scrollPageToIndex:2];
+    
+}
+
+-(IBAction)cancelUploadbuttonSelected:(id)sender{
+    
+}
 
 
 #pragma mark Photo View
@@ -283,7 +347,12 @@ static NSInteger MAX_ZOOM = 18;
 
 -(void)initPhotoView{
 	
-	
+	if(uploadImage!=nil){
+        imagePreview.image=uploadImage.image;
+        photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
+    }else{
+         photoSizeLabel.text=EMPTYSTRING;
+    }
 	
 	
 }
@@ -348,16 +417,18 @@ static NSInteger MAX_ZOOM = 18;
 	[library assetForURL:referenceURL resultBlock:^(ALAsset *asset){           
 		
 		CLLocation *location = (CLLocation *)[asset valueForProperty:ALAssetPropertyLocation];
-		uploadImage.coordinate=location.coordinate;
+		uploadImage.location=location;
 		
 	} failureBlock:^(NSError *error) {
 		 BetterLog(@"error retrieving image from  - %@",[error localizedDescription]);
 	 }];
 	
 	[library release];
-	
     
 	[picker dismissModalViewControllerAnimated:YES];	
+    
+    [self updateViewState:PhotoWizardViewStateLocation];
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -376,10 +447,13 @@ static NSInteger MAX_ZOOM = 18;
 
 -(void)initLocationView{
 	
-	[RMMapView class];
-	[[[RMMapContents alloc] initWithView:locationMapView tilesource:[MapViewController tileSource]] autorelease];
-	[locationMapView setDelegate:self];
-	
+    if(uploadImage.location==nil){
+        [RMMapView class];
+        [[[RMMapContents alloc] initWithView:locationMapView tilesource:[MapViewController tileSource]] autorelease];
+        [locationMapView setDelegate:self];
+	}else{
+        [self loadLocationFromPhoto];
+    }
 	
 }
 
@@ -393,12 +467,10 @@ static NSInteger MAX_ZOOM = 18;
 	return result;
 }
 
-//TODO: bug here with marker dragging, doesnt recieve any touch updates: 
-//NE: fix is, should ask for correct sub view, we have several overlayed, this needs to be optimised for this to work
+
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
 	NSSet *touches = [event touchesForView:locationMapView]; 
-	// note use of top View required, bcv should not be left top unless required by location?
 	
 	BetterLog(@"touches=%i",[touches count]);
 	
@@ -410,7 +482,7 @@ static NSInteger MAX_ZOOM = 18;
 	
 }
 
-- (IBAction) didLocation {
+- (IBAction) locationButtonSelected {
 	BetterLog(@"location");
 	if (!locationManagerIsLocating) {
 		[self startlocationManagerIsLocating];
@@ -420,16 +492,16 @@ static NSInteger MAX_ZOOM = 18;
 }
 
 - (void)startlocationManagerIsLocating{
-	
+	[[UserLocationManager sharedInstance] startUpdatingLocation];
 }
 
 - (void)stoplocationManagerIsLocating{
-	
+	[[UserLocationManager sharedInstance] stopUpdatingLocation:nil];
 }
 
 -(void)loadLocationFromPhoto{
 	
-	[locationMapView moveToLatLong:uploadImage.coordinate];
+	[locationMapView moveToLatLong:uploadImage.location.coordinate];
 		
 	if ([locationMapView.contents zoom] < MAX_ZOOM) {
 		[locationMapView.contents setZoom:1.0];

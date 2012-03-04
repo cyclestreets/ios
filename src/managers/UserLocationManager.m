@@ -26,9 +26,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 @synthesize doesDeviceAllowLocation;
 @synthesize didFindDeviceLocation;
 @synthesize locationState;
+@synthesize isLocating;
 @synthesize locationManager;
 @synthesize locationMeasurements;
 @synthesize bestEffortAtLocation;
+
 
 
 //=========================================================== 
@@ -54,6 +56,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		doesDeviceAllowLocation=YES;
 		didFindDeviceLocation=NO;
 		locationState=-1;
+        isLocating=NO;
 		
         [self initialiseCorelocation];
         
@@ -169,15 +172,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
 			locationManager.distanceFilter =kCLDistanceFilterNone;
 		}
-		locationManager.delegate = self;
-		[locationManager startUpdatingLocation];
-		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+		
         
 	}
 	
 }
 
 
+-(void)startUpdatingLocation{
+    
+    if(isLocating==NO){
+        locationManager.delegate = self;
+        [locationManager startUpdatingLocation];
+        [self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+    }else{
+        
+    }
+    
+}
 
 
 //
@@ -252,6 +264,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
 	
 	BetterLog(@" Error:=%@",error.localizedDescription);
+    
+    isLocating=NO;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONFAILED object:[NSNumber numberWithBool:didFindDeviceLocation] userInfo:nil];
 	
@@ -266,6 +280,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
  ***********************************************/
 //
 -(void)UserLocationWasUpdated{
+    
+    isLocating=NO;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
 	
@@ -294,6 +310,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	didFindDeviceLocation=YES;
 #endif
+    isLocating=NO;
 	
 	locationState=kConnectLocationStateNone;
     [locationManager stopUpdatingLocation];

@@ -335,14 +335,14 @@ static NSString *const STRINGID=@"account";
 	
 	if(navigation==nil){
 	
-	navigation=[[CustomNavigtionBar alloc]init];
-	self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
-	navigation.delegate=self;
-	navigation.leftItemType=BUNavNoneType;
-	navigation.rightItemType=UIKitButtonType;
-	navigation.rightButtonTitle=@"Close";
-	navigation.navigationItem=self.navigationItem;
-	[navigation createNavigationUI];
+        self.navigation=[[CustomNavigtionBar alloc]init];
+        self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
+        navigation.delegate=self;
+        navigation.leftItemType=BUNavNoneType;
+        navigation.rightItemType=UIKitButtonType;
+        navigation.rightButtonTitle=@"Close";
+        navigation.navigationItem=self.navigationItem;
+        [navigation createNavigationUI];
 	
 	}
 }

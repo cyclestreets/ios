@@ -10,7 +10,7 @@
 
 @implementation UploadPhotoVO
 @synthesize image;
-@synthesize coordinate;
+@synthesize location;
 
 
 //=========================================================== 
@@ -36,6 +36,32 @@
     return self;
 }
 
+
+//
+/***********************************************
+ * @description			getters
+ ***********************************************/
+//
+
+-(int)width{
+    if (image!=nil) {
+        return image.size.width;
+    }
+    return 0;
+}
+
+-(int)height{
+    if (image!=nil) {
+        return image.size.height;
+    }
+    return 0;
+}
+
+//
+/***********************************************
+ * @description			Image data
+ ***********************************************/
+//
 
 - (NSData *)fullData {
 	if (image) {
