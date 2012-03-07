@@ -15,18 +15,28 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UserLocationManager.h"
 #import "CycleStreets.h"
+#import "UIViewAdditions.h"
+#import "ButtonUtilities.h"
 
-static NSInteger MAX_ZOOM = 18;
+
 
 @interface PhotoWizardViewController(Private) 
 
--(void)updateViewState:(PhotoWizardViewState)state;
+-(void)initialiseViewState:(PhotoWizardViewState)state;
+-(void)navigateToViewState:(PhotoWizardViewState)state;
+-(void)updateGlobalViewUIForState;
 
--(void)initPhotoView;
--(void)initLocationView;
--(void)initCategoryView;
--(void)initDescriptionView;
--(void)initUploadView;
+-(void)initInfoView:(PhotoWizardViewState)state;
+-(void)initPhotoView:(PhotoWizardViewState)state;
+-(void)updatePhotoView;
+-(void)initLocationView:(PhotoWizardViewState)state;
+-(void)updateLocationView;
+-(void)initCategoryView:(PhotoWizardViewState)state;
+-(void)initDescriptionView:(PhotoWizardViewState)state;
+-(void)initUploadView:(PhotoWizardViewState)state;
+
+-(void)addViewToPageContainer:(NSMutableDictionary*)viewDict;
+
 
 -(void)updatePageControlExtents;
 
@@ -35,6 +45,7 @@ static NSInteger MAX_ZOOM = 18;
 -(void)loadLocationFromPhoto;
 - (void)startlocationManagerIsLocating;
 - (void)stoplocationManagerIsLocating;
+- (void)PanGestureCaptured:(UIPanGestureRecognizer *)gesture;
 
 -(void)updateSelectionLabels;
 
@@ -53,6 +64,8 @@ static NSInteger MAX_ZOOM = 18;
 @synthesize viewArray;
 @synthesize pageTitleLabel;
 @synthesize pageNumberLabel;
+@synthesize locationsc;
+@synthesize locpangesture;
 @synthesize uploadImage;
 @synthesize infoView;
 @synthesize continueButton;
@@ -88,6 +101,8 @@ static NSInteger MAX_ZOOM = 18;
 @synthesize uploadProgressView;
 @synthesize uploadLabel;
 @synthesize photoResultView;
+
+
 
 //
 /***********************************************
@@ -155,29 +170,36 @@ static NSInteger MAX_ZOOM = 18;
     categoryIndex=0;
     metacategoryIndex=0;
 	
-    viewState=-1;
+    viewState=PhotoWizardViewStateInfo;
 	activePage=0;
 	maxVisitedPage=-1;
 	
 	// set up scroll view with layoutbox for sub items
 	self.pageContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	pageContainer.backgroundColor=[UIColor redColor];
 	pageContainer.layoutMode=BUHorizontalLayoutMode;
-	pageContainer.paddingTop=10;
-    
-    self.viewArray=[NSMutableArray arrayWithObjects:@"Information",@"Photo Picker", @"Location",@"Photo Category",@"Description",@"Upload",@"Result", nil];
-    
-    [pageContainer addSubview:infoView];    
-    [pageScrollView addSubview:pageContainer];
 	
+    
+    self.viewArray=[NSMutableArray arrayWithObjects:
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:infoView, @"view", @"Information",@"title",BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoPickerView, @"view",@"Photo Picker",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoLocationView, @"view",@"Location",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:categoryView, @"view",@"Photo Category",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:photodescriptionView, @"view",@"Description",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoUploadView, @"view",@"Upload",@"title",BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoResultView, @"view", @"Result",@"title",BOX_BOOL(NO),@"created",nil],nil ];
+    
+	[pageScrollView addSubview:pageContainer];
+	 
 	pageScrollView.pagingEnabled=YES;
+	pageScrollView.backgroundColor=UIColorFromRGB(0xDBD8D3);
 	pageScrollView.delegate=self;
 	pageControl.hidesForSinglePage=YES;
-    pageControl.defersCurrentPageDisplay=YES;
+    //pageControl.defersCurrentPageDisplay=YES;
     pageControl.numberOfPages=1;
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
-	 [self updateViewState:PhotoWizardViewStateNone];
+	
+	[self initialiseViewState:PhotoWizardViewStateInfo];
     
 }
 
@@ -185,7 +207,7 @@ static NSInteger MAX_ZOOM = 18;
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-    [self createNonPersistentUI];
+   [self createNonPersistentUI];
 	
     [super viewWillAppear:animated];
 }
@@ -197,50 +219,43 @@ static NSInteger MAX_ZOOM = 18;
     
 }
 
-// complete step
-// increment max vs
-// increment page control
-// init max visited view state
-
-
 //
 /***********************************************
- * @description			view state updates
+ * @description			initialises and adds view state to container (one off operation)
  ***********************************************/
 //
+-(void)initialiseViewState:(PhotoWizardViewState)state{
+	
+	// if view is not initialised 
+	// create and add
+	// set max view state to this int
+	// update pagecontrol so this view can be accessed
+	
+	NSMutableDictionary *viewdict=[viewArray objectAtIndex:state];
+	if([viewdict objectForKey:@"created"]==BOX_BOOL(NO)){
+		
+		[self addViewToPageContainer:viewdict];
 
--(void)updateViewState:(PhotoWizardViewState)state{
-    
-    
-    if(viewState!=state){
 		
-		viewState=state;
-        activePage=viewState+1;
-        
-        if(viewState>maxVisitedPage){
-            maxVisitedPage=activePage;
-        }
-        
-        [self updatePageControlExtents];
-		
-		switch (viewState) {
+		switch (state) {
                 
-            case PhotoWizardViewStateNone:
+            case PhotoWizardViewStateInfo:
                 
+				[self initInfoView:state];
 				
-            break;
+				break;
 				
 			case PhotoWizardViewStatePhoto:
                 
-                [self initPhotoView];
+                [self initPhotoView:state];
 				
-			break;
+				break;
 				
 			case PhotoWizardViewStateLocation:
                 
-                [self initLocationView];
+                [self initLocationView:state];
 				
-            break;
+				break;
 				
 			case PhotoWizardViewStateCategory:
 				
@@ -261,14 +276,67 @@ static NSInteger MAX_ZOOM = 18;
 			default:
 				break;
 		}
-		
+
 	}
 	
-    pageTitleLabel.text=[viewArray objectAtIndex:viewState];
-    pageNumberLabel.text=[NSString stringWithFormat:@"%i of %i",activePage, [viewArray count]];
-	    
+	if(state>maxVisitedPage){
+		maxVisitedPage=state;
+	}
+	
+	[self updatePageControlExtents];
+	
 }
 
+
+//
+/***********************************************
+ * @description			scroll To ViewState if initialised
+ ***********************************************/
+//
+-(void)navigateToViewState:(PhotoWizardViewState)state{
+	
+	if(state<=maxVisitedPage){
+		
+
+		viewState=state;
+		pageControl.currentPage=viewState;
+		activePage=viewState;
+        
+		CGPoint offset=CGPointMake(viewState*SCREENWIDTH, 0);
+		[pageScrollView setContentOffset:offset animated:YES];
+		
+		[self updateGlobalViewUIForState];
+		
+		
+		
+    }
+	
+	
+}
+
+
+-(void)updateGlobalViewUIForState{
+	pageTitleLabel.text=[[viewArray objectAtIndex:activePage] objectForKey:@"title"];
+    pageNumberLabel.text=[NSString stringWithFormat:@"%i of %i",activePage+1, [viewArray count]];
+	
+	// should call updateView for State
+}
+
+
+
+-(void)addViewToPageContainer:(NSMutableDictionary*)viewDict{
+	
+	[viewDict setObject:@"created" forKey:BOX_BOOL(YES)];
+	UIScrollView *sc=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, pageScrollView.height)];
+	UIView *stateview=[viewDict objectForKey:@"view"];
+	
+	[sc addSubview:stateview];
+	[sc setContentSize:CGSizeMake(SCREENWIDTH, stateview.height)];
+	[pageContainer addSubview:sc];
+		
+	[pageScrollView setContentSize:CGSizeMake(pageContainer.width, pageScrollView.height)];
+	
+}
 
 
 #pragma mark Paging
@@ -283,6 +351,8 @@ static NSInteger MAX_ZOOM = 18;
 	CGPoint offset=pageScrollView.contentOffset;
 	activePage=offset.x/SCREENWIDTH;
 	pageControl.currentPage=activePage;
+	[pageControl updateCurrentPageDisplay];
+	[self updateGlobalViewUIForState];
 }
 
 
@@ -292,7 +362,8 @@ static NSInteger MAX_ZOOM = 18;
     if(pc.currentPage<=maxVisitedPage){
         CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
         [pageScrollView setContentOffset:offset animated:YES];
-        [pageControl updateCurrentPageDisplay];
+		activePage=pc.currentPage;
+		
     }else{
         pc.currentPage=activePage;
     }
@@ -301,21 +372,16 @@ static NSInteger MAX_ZOOM = 18;
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView*)sc{
 	BetterLog(@"");
 	[self scrollViewDidEndDecelerating:pageScrollView];
+	[self updatePageControlExtents];
 }
 
 
 -(void)updatePageControlExtents{
 	
-	pageControl.numberOfPages=maxVisitedPage;
+	pageControl.numberOfPages=maxVisitedPage+1;
 	
 }
 
--(void)scrollPageToIndex:(int)index{
-    if(index<=maxVisitedPage){
-       // scrol to index x screenwidth
-        // update page control
-    }
-}
 
 //
 /***********************************************
@@ -323,13 +389,19 @@ static NSInteger MAX_ZOOM = 18;
  ***********************************************/
 //
 
--(void)initInfoView{
-    
+-(void)initInfoView:(PhotoWizardViewState)state{
+	
+	[ButtonUtilities styleIBButton:continueButton type:@"green" text:@"Continue"];
+	[continueButton addTarget:self action:@selector(continueUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:cancelButton type:@"red" text:@"Cancel"];
+	[continueButton addTarget:self action:@selector(cancelUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
 }
 
 -(IBAction)continueUploadbuttonSelected:(id)sender{
     
-    [self scrollPageToIndex:2];
+	[self initialiseViewState:PhotoWizardViewStatePhoto];
+	[self navigateToViewState:PhotoWizardViewStatePhoto];
     
 }
 
@@ -345,16 +417,23 @@ static NSInteger MAX_ZOOM = 18;
  ***********************************************/
 //
 
--(void)initPhotoView{
+-(void)initPhotoView:(PhotoWizardViewState)state{
+	
+	[ButtonUtilities styleIBButton:cameraButton type:@"green" text:@"Camera"];
+	[cameraButton addTarget:self action:@selector(cameraButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:libraryButton type:@"green" text:@"Library"];
+	[libraryButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
+}
+
+-(void)updatePhotoView{
 	
 	if(uploadImage!=nil){
         imagePreview.image=uploadImage.image;
         photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
     }else{
-         photoSizeLabel.text=EMPTYSTRING;
+		photoSizeLabel.text=EMPTYSTRING;
     }
-	
-	
 }
 
 -(IBAction)cameraButtonSelected:(id)sender{
@@ -409,6 +488,8 @@ static NSInteger MAX_ZOOM = 18;
     // setttings.imageSize 
 	UIImage *image=[ImageManipulator resizeImage:[info objectForKey:UIImagePickerControllerEditedImage] destWidth:320 destHeight:240];
     self.uploadImage=[[UploadPhotoVO alloc]initWithImage:image];
+	imagePreview.image=uploadImage.image;
+	photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
 	
 	
 	NSURL *referenceURL = [info objectForKey:UIImagePickerControllerReferenceURL];
@@ -418,6 +499,8 @@ static NSInteger MAX_ZOOM = 18;
 		
 		CLLocation *location = (CLLocation *)[asset valueForProperty:ALAssetPropertyLocation];
 		uploadImage.location=location;
+		BetterLog(@"location=%f %f",location.coordinate.latitude, location.coordinate.longitude);
+		
 		
 	} failureBlock:^(NSError *error) {
 		 BetterLog(@"error retrieving image from  - %@",[error localizedDescription]);
@@ -426,8 +509,8 @@ static NSInteger MAX_ZOOM = 18;
 	[library release];
     
 	[picker dismissModalViewControllerAnimated:YES];	
-    
-    [self updateViewState:PhotoWizardViewStateLocation];
+	
+	[self initialiseViewState:PhotoWizardViewStateLocation];
     
 }
 
@@ -445,42 +528,36 @@ static NSInteger MAX_ZOOM = 18;
 
 // Uses normal map logic
 
--(void)initLocationView{
-	
-    if(uploadImage.location==nil){
-        [RMMapView class];
-        [[[RMMapContents alloc] initWithView:locationMapView tilesource:[MapViewController tileSource]] autorelease];
-        [locationMapView setDelegate:self];
-	}else{
-        [self loadLocationFromPhoto];
-    }
-	
-}
-
-// Should only return yes is marker is start/end and we have not a route drawn
-- (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+-(void)initLocationView:(PhotoWizardViewState)state{
 	
 	BetterLog(@"");
 	
-	BOOL result=YES;
-	locationMapView.enableDragging=!result;
-	return result;
+	[ButtonUtilities styleIBButton:locationUpdateButton type:@"green" text:@"Update"];
+	[locationUpdateButton addTarget:self action:@selector(cameraButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:locationResetButton type:@"red" text:@"Reset"];
+	[locationResetButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+		
 }
 
 
-- (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+-(void)updateLocationView{
 	
-	NSSet *touches = [event touchesForView:locationMapView]; 
+	CLLocationCoordinate2D imageloc=uploadImage.location.coordinate;
+	CLLocationCoordinate2D zeroloc=CLLocationCoordinate2DMake(0,0);
 	
-	BetterLog(@"touches=%i",[touches count]);
+	MKMapPoint p1 = MKMapPointForCoordinate(imageloc);
+	MKMapPoint p2 = MKMapPointForCoordinate(zeroloc);
 	
-	for (UITouch *touch in touches) {
-		CGPoint point = [touch locationInView:locationMapView];
-		CLLocationCoordinate2D location = [locationMapView pixelToLatLong:point];
-		[[locationMapView markerManager] moveMarker:marker AtLatLon:location];
-	}
+	//Calculate distance in meter
+	CLLocationDistance dist = MKMetersBetweenMapPoints(p1, p2);
 	
+    if(uploadImage.location==nil || dist==0.0){
+		locationMapView.showsUserLocation=YES;
+	}else{
+        [self loadLocationFromPhoto];
+    }
 }
+
 
 - (IBAction) locationButtonSelected {
 	BetterLog(@"location");
@@ -501,12 +578,11 @@ static NSInteger MAX_ZOOM = 18;
 
 -(void)loadLocationFromPhoto{
 	
-	[locationMapView moveToLatLong:uploadImage.location.coordinate];
-		
-	if ([locationMapView.contents zoom] < MAX_ZOOM) {
-		[locationMapView.contents setZoom:1.0];
-	}
-	[self stoplocationManagerIsLocating]; 
+	BetterLog(@"");
+	
+	MKCoordinateRegion region = MKCoordinateRegionMake(uploadImage.location.coordinate,MKCoordinateSpanMake(0.004,0.004) );
+	[locationMapView setRegion:region animated:YES];
+	
 	
 }
 
@@ -526,7 +602,9 @@ static NSInteger MAX_ZOOM = 18;
 	
 	
 }
-
+-(void)updateCategoryView{
+	
+}
 
 
 #pragma mark picker delegate and data source

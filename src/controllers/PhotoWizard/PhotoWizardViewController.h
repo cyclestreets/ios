@@ -11,15 +11,13 @@
 #import "LayoutBox.h"
 #import "CategoryLoader.h"
 #import "UploadPhotoVO.h"
-#import "RMMapView.h"
-#import "RMMarker.h"
-#import "RMMapContents.h"
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 #define MAXWIZARDVIEWS 7
 
 enum  {
-    PhotoWizardViewStateNone=0,
+    PhotoWizardViewStateInfo=0,
 	PhotoWizardViewStatePhoto=1,
 	PhotoWizardViewStateLocation=2,
 	PhotoWizardViewStateCategory=3,
@@ -30,12 +28,12 @@ enum  {
 typedef int PhotoWizardViewState;
 
 @interface PhotoWizardViewController : SuperViewController<UIPickerViewDelegate,UIPickerViewDataSource,
-UIImagePickerControllerDelegate,RMMapViewDelegate,UIScrollViewDelegate,UINavigationControllerDelegate>{
+UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>{
     
     //main ui
     PhotoWizardViewState			viewState;
-    UIScrollView                    *pageScrollView;
-    UIPageControl                   *pageControl;
+    IBOutlet UIScrollView           *pageScrollView;
+    IBOutlet UIPageControl          *pageControl;
     LayoutBox                       *pageContainer;
 	int								activePage; // page control index
 	int								maxVisitedPage; // max page user has reached
@@ -43,6 +41,9 @@ UIImagePickerControllerDelegate,RMMapViewDelegate,UIScrollViewDelegate,UINavigat
     
     IBOutlet    UILabel             *pageTitleLabel;
     IBOutlet    UILabel             *pageNumberLabel;
+	
+	UIScrollView					*locationsc;
+	UIPanGestureRecognizer			*locpangesture;
     
 	
 	UploadPhotoVO                   *uploadImage;
@@ -64,8 +65,8 @@ UIImagePickerControllerDelegate,RMMapViewDelegate,UIScrollViewDelegate,UINavigat
 	
 	// photo location
 	IBOutlet	UIView				*photoLocationView;
-	IBOutlet RMMapView				*locationMapView;	//overlay GPS location
-	RMMarker						*locationMarker;
+	IBOutlet MKMapView				*locationMapView;	//overlay GPS location
+	MKAnnotationView				*locationMarker;
 	IBOutlet UILabel				*locationLabel;
 	IBOutlet UIButton				*locationUpdateButton;
 	IBOutlet UIButton				*locationResetButton;
@@ -108,48 +109,50 @@ UIImagePickerControllerDelegate,RMMapViewDelegate,UIScrollViewDelegate,UINavigat
 	
 	
 }
-@property (nonatomic, assign)	PhotoWizardViewState			viewState;
-@property (nonatomic, retain)	UIScrollView			*pageScrollView;
-@property (nonatomic, retain)	UIPageControl			*pageControl;
-@property (nonatomic, retain)	LayoutBox			*pageContainer;
-@property (nonatomic, assign)	int			activePage;
-@property (nonatomic, assign)	int			maxVisitedPage;
-@property (nonatomic, retain)	NSMutableArray			*viewArray;
-@property (nonatomic, retain)	IBOutlet UILabel			*pageTitleLabel;
-@property (nonatomic, retain)	IBOutlet UILabel			*pageNumberLabel;
-@property (nonatomic, retain)	UploadPhotoVO			*uploadImage;
-@property (nonatomic, retain)	IBOutlet UIView			*infoView;
-@property (nonatomic, retain)	IBOutlet UIButton			*continueButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*cancelViewButton;
-@property (nonatomic, retain)	IBOutlet UIView			*photoPickerView;
-@property (nonatomic, retain)	IBOutlet UIImageView			*imagePreview;
-@property (nonatomic, retain)	IBOutlet UILabel			*photoSizeLabel;
-@property (nonatomic, retain)	IBOutlet UIButton			*cameraButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*libraryButton;
-@property (nonatomic, retain)	IBOutlet UIView			*photoLocationView;
-@property (nonatomic, retain)	IBOutlet RMMapView			*locationMapView;
-@property (nonatomic, retain)	RMMarker			*locationMarker;
-@property (nonatomic, retain)	IBOutlet UILabel			*locationLabel;
-@property (nonatomic, retain)	IBOutlet UIButton			*locationUpdateButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*locationResetButton;
-@property (nonatomic, assign)	BOOL			avoidAccidentalTaps;
-@property (nonatomic, assign)	BOOL			singleTapDidOccur;
-@property (nonatomic, assign)	CGPoint			singleTapPoint;
-@property (nonatomic, assign)	BOOL			locationManagerIsLocating;
-@property (nonatomic, retain)	IBOutlet UIView			*categoryView;
-@property (nonatomic, retain)	IBOutlet UILabel			*categoryTypeLabel;
-@property (nonatomic, retain)	IBOutlet UILabel			*categoryDescLabel;
-@property (nonatomic, retain)	IBOutlet UIPickerView			*pickerView;
-@property (nonatomic, retain)	CategoryLoader			*categoryLoader;
-@property (nonatomic, assign)	NSInteger			categoryIndex;
-@property (nonatomic, assign)	NSInteger			metacategoryIndex;
-@property (nonatomic, retain)	IBOutlet UIView			*photodescriptionView;
-@property (nonatomic, retain)	IBOutlet UIImageView			*descImagePreview;
-@property (nonatomic, retain)	IBOutlet UITextView			*photodescriptionField;
-@property (nonatomic, retain)	IBOutlet UIView			*photoUploadView;
-@property (nonatomic, retain)	IBOutlet UIButton			*uploadButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*cancelButton;
-@property (nonatomic, retain)	IBOutlet UIProgressView			*uploadProgressView;
-@property (nonatomic, retain)	IBOutlet UILabel			*uploadLabel;
-@property (nonatomic, retain)	IBOutlet UIView			*photoResultView;
+@property (nonatomic, assign) PhotoWizardViewState		 viewState;
+@property (nonatomic, retain) IBOutlet UIScrollView		* pageScrollView;
+@property (nonatomic, retain) IBOutlet UIPageControl		* pageControl;
+@property (nonatomic, retain) LayoutBox		* pageContainer;
+@property (nonatomic, assign) int		 activePage;
+@property (nonatomic, assign) int		 maxVisitedPage;
+@property (nonatomic, retain) NSMutableArray		* viewArray;
+@property (nonatomic, retain) IBOutlet UILabel		* pageTitleLabel;
+@property (nonatomic, retain) IBOutlet UILabel		* pageNumberLabel;
+@property (nonatomic, retain) UIScrollView		* locationsc;
+@property (nonatomic, retain) UIPanGestureRecognizer		* locpangesture;
+@property (nonatomic, retain) UploadPhotoVO		* uploadImage;
+@property (nonatomic, retain) IBOutlet UIView		* infoView;
+@property (nonatomic, retain) IBOutlet UIButton		* continueButton;
+@property (nonatomic, retain) IBOutlet UIButton		* cancelViewButton;
+@property (nonatomic, retain) IBOutlet UIView		* photoPickerView;
+@property (nonatomic, retain) IBOutlet UIImageView		* imagePreview;
+@property (nonatomic, retain) IBOutlet UILabel		* photoSizeLabel;
+@property (nonatomic, retain) IBOutlet UIButton		* cameraButton;
+@property (nonatomic, retain) IBOutlet UIButton		* libraryButton;
+@property (nonatomic, retain) IBOutlet UIView		* photoLocationView;
+@property (nonatomic, retain) IBOutlet MKMapView		* locationMapView;
+@property (nonatomic, retain) MKAnnotationView		* locationMarker;
+@property (nonatomic, retain) IBOutlet UILabel		* locationLabel;
+@property (nonatomic, retain) IBOutlet UIButton		* locationUpdateButton;
+@property (nonatomic, retain) IBOutlet UIButton		* locationResetButton;
+@property (nonatomic, assign) BOOL		 avoidAccidentalTaps;
+@property (nonatomic, assign) BOOL		 singleTapDidOccur;
+@property (nonatomic, assign) CGPoint		 singleTapPoint;
+@property (nonatomic, assign) BOOL		 locationManagerIsLocating;
+@property (nonatomic, retain) IBOutlet UIView		* categoryView;
+@property (nonatomic, retain) IBOutlet UILabel		* categoryTypeLabel;
+@property (nonatomic, retain) IBOutlet UILabel		* categoryDescLabel;
+@property (nonatomic, retain) IBOutlet UIPickerView		* pickerView;
+@property (nonatomic, retain) CategoryLoader		* categoryLoader;
+@property (nonatomic, assign) NSInteger		 categoryIndex;
+@property (nonatomic, assign) NSInteger		 metacategoryIndex;
+@property (nonatomic, retain) IBOutlet UIView		* photodescriptionView;
+@property (nonatomic, retain) IBOutlet UIImageView		* descImagePreview;
+@property (nonatomic, retain) IBOutlet UITextView		* photodescriptionField;
+@property (nonatomic, retain) IBOutlet UIView		* photoUploadView;
+@property (nonatomic, retain) IBOutlet UIButton		* uploadButton;
+@property (nonatomic, retain) IBOutlet UIButton		* cancelButton;
+@property (nonatomic, retain) IBOutlet UIProgressView		* uploadProgressView;
+@property (nonatomic, retain) IBOutlet UILabel		* uploadLabel;
+@property (nonatomic, retain) IBOutlet UIView		* photoResultView;
 @end
