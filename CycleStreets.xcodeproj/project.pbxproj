@@ -225,6 +225,8 @@
 		288B10281457492500E2A96F /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
 		288F6B9D14FBF85900B64602 /* RouteToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F6B9C14FBF85900B64602 /* RouteToolCell.xib */; };
 		288F6BA014FBF91700B64602 /* RouteToolCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288F6B9F14FBF91700B64602 /* RouteToolCellView.m */; };
+		288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */; };
+		288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */; };
 		2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */; };
 		28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */; };
@@ -734,6 +736,9 @@
 		288F6B9C14FBF85900B64602 /* RouteToolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteToolCell.xib; sourceTree = "<group>"; };
 		288F6B9E14FBF91700B64602 /* RouteToolCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteToolCellView.h; sourceTree = "<group>"; };
 		288F6B9F14FBF91700B64602 /* RouteToolCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteToolCellView.m; sourceTree = "<group>"; };
+		288FA2C1150BF9500068F0C1 /* PhotoWizardLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardLocationViewController.h; path = PhotoWizard/PhotoWizardLocationViewController.h; sourceTree = "<group>"; };
+		288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoWizardLocationViewController.m; path = PhotoWizard/PhotoWizardLocationViewController.m; sourceTree = "<group>"; };
+		288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardLocationView.xib; path = photowizard/PhotoWizardLocationView.xib; sourceTree = "<group>"; };
 		2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardView.xib; path = photowizard/PhotoWizardView.xib; sourceTree = "<group>"; };
 		28916030133A9AC9000C821B /* CSSegmentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSegmentFooterView.h; sourceTree = "<group>"; };
 		28916031133A9AC9000C821B /* CSSegmentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSegmentFooterView.m; sourceTree = "<group>"; };
@@ -1722,6 +1727,7 @@
 			isa = PBXGroup;
 			children = (
 				2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */,
+				288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */,
 			);
 			name = photowizard;
 			sourceTree = "<group>";
@@ -1763,6 +1769,8 @@
 			children = (
 				28A89CCA14FD4A610001BABA /* PhotoWizardViewController.h */,
 				28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */,
+				288FA2C1150BF9500068F0C1 /* PhotoWizardLocationViewController.h */,
+				288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */,
 			);
 			name = PhotoWizard;
 			sourceTree = "<group>";
@@ -2561,6 +2569,7 @@
 				28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */,
 				28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */,
 				2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */,
+				288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2753,6 +2762,7 @@
 				28187A3314FCC7EF00A38A17 /* UserLocationManager.m in Sources */,
 				28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */,
 				28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */,
+				288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2791,7 +2801,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "ABD2C641-CBEF-4454-902C-B5EF0D498A73";
+				PROVISIONING_PROFILE = "5D942C12-96EB-486A-BED7-35B3A4025625";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";

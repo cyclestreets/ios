@@ -560,21 +560,43 @@
 
 
 - (IBAction) locationButtonSelected {
-	BetterLog(@"location");
-	if (!locationManagerIsLocating) {
-		[self startlocationManagerIsLocating];
-	} else {
-		[self stoplocationManagerIsLocating];
-	}
+	
+    /*
+    POIListviewController *lv=[[POIListviewController alloc]initWithNibName:[POIListviewController nibName] bundle:nil];
+	
+	UINavigationController *ncontroller=[[UINavigationController alloc]initWithRootViewController:lv];
+	ncontroller.navigationBar.tintColor=[[StyleManager sharedInstance] colorForType:@"navigationbar"];
+	[self presentModalViewController:ncontroller	animated:YES];
+     */
+    
+    
 }
 
-- (void)startlocationManagerIsLocating{
-	[[UserLocationManager sharedInstance] startUpdatingLocation];
+//
+/***********************************************
+ * @description			Custom NavigationBar support for instantiated ViewControllers
+ ***********************************************/
+//
+
++(UINavigationController*)createCustomNavigationControllerWithView:(BUViewController*)viewController{
+	
+	UINib *nib = [UINib nibWithNibName:@"RKNavigationBar" bundle:nil];
+	UINavigationController *navController = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+	[navController setViewControllers:[NSArray arrayWithObject:viewController] animated:NO];
+	navController.navigationBar.tintColor=[[StyleManager sharedInstance] colorForType:@"navigationbar"];
+	
+	return navController;
+	
 }
 
-- (void)stoplocationManagerIsLocating{
-	[[UserLocationManager sharedInstance] stopUpdatingLocation:nil];
+-(void)UserDidUpdatePhotoLocation:(CLLocation*)location{
+    
+    
+    
 }
+
+
+
 
 -(void)loadLocationFromPhoto{
 	
@@ -603,6 +625,8 @@
 	
 }
 -(void)updateCategoryView{
+    
+    
 	
 }
 
