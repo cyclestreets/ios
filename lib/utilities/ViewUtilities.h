@@ -43,4 +43,7 @@
 + (CAGradientLayer *)shadowAsInverse:(BOOL)inverse :(UIView*)view;
 
 
+// adds page curl effect to image views
++ (void)renderPaperCurl:(UIView*)imgView;
+
 @end
