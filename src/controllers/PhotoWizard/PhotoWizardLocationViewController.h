@@ -11,6 +11,7 @@
 #import "RMMapViewDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 
+
 @interface PhotoWizardLocationViewController : SuperViewController<RMMapViewDelegate, CLLocationManagerDelegate>{
     
     IBOutlet RMMapView *mapView;				//map of current area
@@ -24,6 +25,8 @@
     BOOL	avoidAccidentalTaps;
 	BOOL	singleTapDidOccur;
 	CGPoint	singleTapPoint;
+    
+    
     
 }
 @property (nonatomic, retain)	IBOutlet RMMapView			*mapView;

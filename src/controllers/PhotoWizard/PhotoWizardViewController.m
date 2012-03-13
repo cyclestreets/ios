@@ -17,7 +17,10 @@
 #import "CycleStreets.h"
 #import "UIViewAdditions.h"
 #import "ButtonUtilities.h"
-
+#import "StyleManager.h"
+#import "PhotoMapImageLocationViewController.h"
+#import "UserAccount.h"
+#import "PhotoUploadManager.h"
 
 
 @interface PhotoWizardViewController(Private) 
@@ -100,7 +103,9 @@
 @synthesize cancelButton;
 @synthesize uploadProgressView;
 @synthesize uploadLabel;
+@synthesize loginView;
 @synthesize photoResultView;
+
 
 
 
@@ -285,6 +290,14 @@
 	
 	[self updatePageControlExtents];
 	
+}
+
+
+-(void)removeViewState:(PhotoWizardViewState)state{
+    
+    // removes enabled state from pages
+    // so page control stops showing access
+    
 }
 
 
@@ -486,7 +499,7 @@
 	// TODO: image should be sized, a) on screen & b) upload size
     // initial image should be max resolution possible for app
     // setttings.imageSize 
-	UIImage *image=[ImageManipulator resizeImage:[info objectForKey:UIImagePickerControllerEditedImage] destWidth:320 destHeight:240];
+	UIImage *image=[info objectForKey:UIImagePickerControllerEditedImage];
     self.uploadImage=[[UploadPhotoVO alloc]initWithImage:image];
 	imagePreview.image=uploadImage.image;
 	photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
@@ -532,8 +545,8 @@
 	
 	BetterLog(@"");
 	
-	[ButtonUtilities styleIBButton:locationUpdateButton type:@"green" text:@"Update"];
-	[locationUpdateButton addTarget:self action:@selector(cameraButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:locationUpdateButton type:@"green" text:@"Locate"];
+	[locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[ButtonUtilities styleIBButton:locationResetButton type:@"red" text:@"Reset"];
 	[locationResetButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 		
@@ -555,43 +568,43 @@
 		locationMapView.showsUserLocation=YES;
 	}else{
         [self loadLocationFromPhoto];
+        [self initialiseViewState:PhotoWizardViewStateCategory];
     }
 }
 
 
 - (IBAction) locationButtonSelected {
 	
-    /*
-    POIListviewController *lv=[[POIListviewController alloc]initWithNibName:[POIListviewController nibName] bundle:nil];
-	
-	UINavigationController *ncontroller=[[UINavigationController alloc]initWithRootViewController:lv];
-	ncontroller.navigationBar.tintColor=[[StyleManager sharedInstance] colorForType:@"navigationbar"];
-	[self presentModalViewController:ncontroller	animated:YES];
-     */
+    PhotoMapImageLocationViewController *lv=[[PhotoMapImageLocationViewController alloc]initWithNibName:[PhotoMapImageLocationViewController nibName] bundle:nil];
     
+    UINavigationController *navController = [SuperViewController createCustomNavigationControllerWithView:lv];
+	[self.navigationController presentModalViewController:navController animated:YES];
     
+}
+-(IBAction)resetButtonSelected:(id)sender{
+    
+    // if userlocation!=nil
+    // if location !-nil
+    // reset to location
+    // update mapui
 }
 
 //
 /***********************************************
- * @description			Custom NavigationBar support for instantiated ViewControllers
+ * @description			delegate method
  ***********************************************/
 //
-
-+(UINavigationController*)createCustomNavigationControllerWithView:(BUViewController*)viewController{
-	
-	UINib *nib = [UINib nibWithNibName:@"RKNavigationBar" bundle:nil];
-	UINavigationController *navController = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:0];
-	[navController setViewControllers:[NSArray arrayWithObject:viewController] animated:NO];
-	navController.navigationBar.tintColor=[[StyleManager sharedInstance] colorForType:@"navigationbar"];
-	
-	return navController;
-	
-}
-
 -(void)UserDidUpdatePhotoLocation:(CLLocation*)location{
     
+    if(location!=nil){
     
+        MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate,MKCoordinateSpanMake(0.004,0.004) );
+        [locationMapView setRegion:region animated:YES];
+        
+        uploadImage.userLocation=location;
+        
+        [self initialiseViewState:PhotoWizardViewStateCategory];
+    }
     
 }
 
@@ -621,12 +634,14 @@
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.categoryLoader setupCategories];
+    categoryIndex=0;
+    metacategoryIndex=0;
 	
 	
 }
 -(void)updateCategoryView{
     
-    
+    [self updateSelectionLabels];
 	
 }
 
@@ -664,9 +679,17 @@
 
 
 -(void)updateSelectionLabels{
+    
+    uploadImage.category=[self.categoryLoader.categoryLabels objectAtIndex:categoryIndex];
+    uploadImage.metaCategory=[self.categoryLoader.metaCategoryLabels objectAtIndex:metacategoryIndex];
 	
-	categoryTypeLabel.text=[self.categoryLoader.metaCategoryLabels objectAtIndex:metacategoryIndex];
-	categoryDescLabel.text=[self.categoryLoader.categoryLabels objectAtIndex:categoryIndex];
+	categoryTypeLabel.text=uploadImage.metaCategory;
+	categoryDescLabel.text=uploadImage.category;
+    
+    if(uploadImage.metaCategory!=nil && uploadImage.category!=nil){
+        [self initialiseViewState:PhotoWizardViewStateDescription]
+    }
+    
 }
 
 
@@ -680,9 +703,17 @@
 -(void)initDescriptionView{
 	
 	
-	
-	
+
 }
+-(void)updateDescriptionView{
+	
+    photodescriptionField.text=uploadImage.description;
+    
+}
+
+// textfield delegate methods
+// check for desc length>0
+// init upload view
 
 
 #pragma mark Upload View
@@ -700,14 +731,46 @@
 }
 
 
+// TODO: UserPhotoUploadRequest needs to execute if user logins correctly
 -(IBAction)uploadPhoto:(id)sender{
-	
+    
+    if ([UserAccount sharedInstance].isLoggedIn==NO) {
+		
+		if([UserAccount sharedInstance].accountMode==kUserAccountCredentialsExist){
+			
+			BetterLog(@"kUserAccountCredentialsExist");
+			
+			[[PhotoUploadManager sharedInstance] UserPhotoUploadRequest:uploadImage];
+			
+		}else {
+			
+			BetterLog(@"kUserAccountNotLoggedIn");
+			
+			if (self.loginView == nil) {
+				self.loginView = [[[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil] autorelease];
+			}
+			self.loginView.isModal=YES;
+			self.loginView.shouldAutoClose=YES;
+			UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
+			[self presentModalViewController:nav animated:YES];
+			[nav release];
+		}
+        
+		
+		
+	} else {
+		
+		BetterLog(@"kUserAccountLoggedIn");
+		
+		[[PhotoUploadManager sharedInstance] UserPhotoUploadRequest:uploadImage];
+	}
 	
 	
 }
 
 -(IBAction)cancelUploadPhoto:(id)sender{
 	
+    // is this required?
 	
 	
 }

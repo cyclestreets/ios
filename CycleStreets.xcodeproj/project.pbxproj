@@ -322,6 +322,9 @@
 		28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */; };
 		28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */; };
 		28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */; };
+		28B7813A150F3D0600503638 /* CSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B78138150F3D0600503638 /* CSNavigationBar.m */; };
+		28B7813B150F3D0600503638 /* CSNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B78139150F3D0600503638 /* CSNavigationBar.xib */; };
+		28B7813E150F424600503638 /* PhotoUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B7813D150F424600503638 /* PhotoUploadManager.m */; };
 		28B78DA21507884C00949870 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
 		28C4ABE81450708900A0ECD3 /* btn_slider_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABDC1450708900A0ECD3 /* btn_slider_off.png */; };
 		28C4ABE91450708900A0ECD3 /* btn_slider_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABDD1450708900A0ECD3 /* btn_slider_off@2x.png */; };
@@ -905,6 +908,11 @@
 		28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orangesmall_lo@2x.png"; sourceTree = "<group>"; };
 		28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_hi@2x.png"; sourceTree = "<group>"; };
 		28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_lo@2x.png"; sourceTree = "<group>"; };
+		28B78137150F3D0600503638 /* CSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNavigationBar.h; sourceTree = "<group>"; };
+		28B78138150F3D0600503638 /* CSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNavigationBar.m; sourceTree = "<group>"; };
+		28B78139150F3D0600503638 /* CSNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSNavigationBar.xib; sourceTree = "<group>"; };
+		28B7813C150F424600503638 /* PhotoUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoUploadManager.h; sourceTree = "<group>"; };
+		28B7813D150F424600503638 /* PhotoUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoUploadManager.m; sourceTree = "<group>"; };
 		28B78DA11507884C00949870 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		28C4ABDC1450708900A0ECD3 /* btn_slider_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_slider_off.png; sourceTree = "<group>"; };
 		28C4ABDD1450708900A0ECD3 /* btn_slider_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_slider_off@2x.png"; sourceTree = "<group>"; };
@@ -1878,6 +1886,8 @@
 				281E08B21451608C0034CC63 /* POIManager.m */,
 				28187A3114FCC7EF00A38A17 /* UserLocationManager.h */,
 				28187A3214FCC7EF00A38A17 /* UserLocationManager.m */,
+				28B7813C150F424600503638 /* PhotoUploadManager.h */,
+				28B7813D150F424600503638 /* PhotoUploadManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -1991,6 +2001,9 @@
 		28AD6218131FB69D008527FC /* views */ = {
 			isa = PBXGroup;
 			children = (
+				28B78137150F3D0600503638 /* CSNavigationBar.h */,
+				28B78138150F3D0600503638 /* CSNavigationBar.m */,
+				28B78139150F3D0600503638 /* CSNavigationBar.xib */,
 				280E93481409858C00C7AC75 /* BlueCircleView.h */,
 				280E93491409858C00C7AC75 /* BlueCircleView.m */,
 				280E934A1409858C00C7AC75 /* InitialLocation.h */,
@@ -2570,6 +2583,7 @@
 				28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */,
 				2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */,
 				288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */,
+				28B7813B150F3D0600503638 /* CSNavigationBar.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2763,6 +2777,8 @@
 				28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */,
 				28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */,
 				288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */,
+				28B7813A150F3D0600503638 /* CSNavigationBar.m in Sources */,
+				28B7813E150F424600503638 /* PhotoUploadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

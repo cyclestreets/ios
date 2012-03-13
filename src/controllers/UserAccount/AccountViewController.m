@@ -417,6 +417,8 @@ static NSString *const STRINGID=@"account";
 		
 		if(isModal==YES && shouldAutoClose==YES){
 			[self doNavigationSelector:RIGHT];
+            // TODO: Should this be here, too specific
+            // 
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTO object:nil];
 		}
 		

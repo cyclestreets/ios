@@ -22,7 +22,6 @@
 @synthesize singleTapPoint;
 
 
-
 //
 /***********************************************
  * @description		NOTIFICATIONS
@@ -153,7 +152,9 @@
 //
 -(void)MarkerLocationDidUpdate:(CLLocation*)location{
     
-    // call UserDidUpdatePhotoLocation
+    if([delegate respondsToSelector:@selector(UserDidUpdatePhotoLocation:)]){
+        [delegate performSelector:@selector(UserDidUpdatePhotoLocation:) withObject:location];
+    }
 }
 
 

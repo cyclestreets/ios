@@ -230,7 +230,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	
 }
 
-
+- (void)connection:(NSURLConnection *)connection   didSendBodyData:(NSInteger)bytesWritten
+ totalBytesWritten:(NSInteger)totalBytesWritten
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
+    
+    
+    
+    
+    
+}
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{

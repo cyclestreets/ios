@@ -150,6 +150,18 @@
 }
 
 
++(UINavigationController*)createCustomNavigationControllerWithView:(SuperViewController*)viewController{
+	
+	UINib *nib = [UINib nibWithNibName:@"CSNavigationBar" bundle:nil];
+	UINavigationController *navController = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+	[navController setViewControllers:[NSArray arrayWithObject:viewController] animated:NO];
+	navController.navigationBar.tintColor=[[StyleManager sharedInstance] colorForType:@"navigationbar"];
+	
+	return navController;
+	
+}
+
+
 //
 /***********************************************
  * @description			New Generic Error view

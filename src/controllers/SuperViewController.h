@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CustomNavigtionBar.h"
 #import "GradientView.h"
+#import <CoreLocation/CoreLocation.h>
 
 @protocol SuperViewControllerDelegate <NSObject> 
 
@@ -24,6 +25,8 @@
 -(void)handleRemoteRequestIndication:(BOOL)show;
 -(void)deSelectRowForTableView:(UITableView*)table;
 -(void)doCellButtonSelection:(NSString*)type withDataProvider:(id)data andIndex:(int)index;
+
+-(void)UserDidUpdatePhotoLocation:(CLLocation*)location;
 
 @end
 
@@ -80,6 +83,7 @@ typedef int ViewOverlayType;
 -(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message;
 -(IBAction)loginButtonSelected:(id)sender;
 + (NSString*)viewTypeToStringType:(ViewOverlayType)viewType;
++(UINavigationController*)createCustomNavigationControllerWithView:(SuperViewController*)viewController;
 
 
 + (NSString *)nibName;

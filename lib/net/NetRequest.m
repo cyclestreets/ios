@@ -188,7 +188,7 @@
 		
         NSMutableData *body = [[NSMutableData alloc] init];	
         
-        // image data
+        // Image Data
         [request addValue:@"gzip" forHTTPHeaderField:@"Accepts-Encoding"];
         [request setHTTPMethod:@"POST"];
         NSString *stringBoundary = [NSString stringWithString:@"0xBoundaryBoundaryBoundaryBoundary"];

@@ -7,10 +7,17 @@
 //
 
 #import "UploadPhotoVO.h"
+#import "ImageManipulator.h"
+#import "SettingsManager.h"
 
 @implementation UploadPhotoVO
 @synthesize image;
 @synthesize location;
+@synthesize userLocation;
+@synthesize category;
+@synthesize metaCategory;
+@synthesize date;
+
 
 
 //=========================================================== 
@@ -57,6 +64,25 @@
     return 0;
 }
 
+
+//
+/***********************************************
+ * @description			
+ ***********************************************/
+//
+
+-(NSString*)dateTime{
+    
+	if (date == nil) {
+		self.date = [NSDate date];
+	}
+	int delta = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] intValue];
+	NSString *time = [NSString stringWithFormat:@"%i", delta];
+	
+    return time;
+    
+}
+
 //
 /***********************************************
  * @description			Image data
@@ -71,10 +97,18 @@
 	}
 }
 
-//NE:  TODO: should return settings sized image
+
 - (NSData *)uploadData {
 	if (image) {
-		return UIImageJPEGRepresentation( image, 0.8);		
+        
+        UIImage *scaledImage;
+        NSString *imageSize = [SettingsManager sharedInstance].dataProvider.imageSize;
+        if ([imageSize isEqualToString:@"full"]) {
+            scaledImage = image;
+        } else {
+            scaledImage = ImageManipulator resizeImage:image destWidth:640 destHeight:480];
+        }
+		return UIImageJPEGRepresentation( scaledImage, 0.8);		
 	}
 	return nil;
 }
