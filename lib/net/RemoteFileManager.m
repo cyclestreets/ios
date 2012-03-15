@@ -221,7 +221,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
 	
-	
     [responseData appendData:data];
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"RemoteFileManagerLoadedBytes",@"type",responseData,@"value",nil];
@@ -230,13 +229,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	
 }
 
-- (void)connection:(NSURLConnection *)connection   didSendBodyData:(NSInteger)bytesWritten
- totalBytesWritten:(NSInteger)totalBytesWritten
-totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
+
+//
+/***********************************************
+ * @description			Delegate method to return upload progress
+ ***********************************************/
+//
+- (void)connection:(NSURLConnection *)connection   didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
     
     
-    
-    
+	if(activeRequest.trackProgress==YES){
+		
+		NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:
+		 [NSNumber numberWithInt:totalBytesWritten],@"totalBytesWritten",
+		 [NSNumber numberWithInt:bytesWritten],@"bytesWritten",
+		 [NSNumber numberWithInt:totalBytesExpectedToWrite],@"totalBytesExpectedToWrite",
+		 nil];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:FILEUPLOADPROGRESS object:nil userInfo:dict];
+	}
     
 }
 

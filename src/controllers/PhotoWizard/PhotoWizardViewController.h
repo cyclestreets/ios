@@ -107,6 +107,7 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
     
     // result view
     IBOutlet    UIView              *photoResultView;
+	IBOutlet    UIButton             *photoMapButton;
 	
 	
 	
@@ -158,4 +159,5 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
 @property (nonatomic, retain)	IBOutlet UILabel			*uploadLabel;
 @property (nonatomic, retain)	AccountViewController			*loginView;
 @property (nonatomic, retain)	IBOutlet UIView			*photoResultView;
+@property (nonatomic, retain)	IBOutlet  UIButton             *photoMapButton;
 @end

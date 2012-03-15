@@ -84,6 +84,7 @@ extern NSString *const XMLPARSERDIDCOMPLETE;
 extern NSString *const REQUESTDATAREFRESH;
 extern NSString	*const PRODUCTLISTCOMPLETE;
 extern NSString *const REMOTEFILELOADED;
+extern NSString *const FILEUPLOADPROGRESS;
 extern NSString *const REMOTEFILEFAILED;
 extern NSString *const SERVERCONNECTIONFAILED;
 extern NSString *const XMLPARSERDIDCOMPLETENOUPDATE;

@@ -85,9 +85,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoUploadManager);
 
 -(void)UserPhotoUploadRequest:(UploadPhotoVO*)photo{
     
-    
-    NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey,@"key"];
-    
+   
+    NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
+										
     NSMutableDictionary *postparameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
                                      [UserAccount sharedInstance].user.username, @"username",
                                      [UserAccount sharedInstance].userPassword,@"password",
@@ -108,6 +108,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoUploadManager);
 	request.parameters=parameters;
 	request.revisonId=0;
 	request.source=USER;
+	request.trackProgress=YES;
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];

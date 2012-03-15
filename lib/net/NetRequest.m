@@ -26,6 +26,8 @@
 @synthesize revisonId;
 @synthesize source;
 @synthesize dataType;
+@synthesize trackProgress;
+
 
 /***********************************************************/
 // dealloc
@@ -51,6 +53,7 @@
 	if (self = [super init]) {
 		
 		source=SYSTEM; 
+		trackProgress=NO;
 		
 	}
     return self;

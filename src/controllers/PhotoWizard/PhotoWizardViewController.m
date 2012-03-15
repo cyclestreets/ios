@@ -37,6 +37,7 @@
 -(void)initCategoryView:(PhotoWizardViewState)state;
 -(void)initDescriptionView:(PhotoWizardViewState)state;
 -(void)initUploadView:(PhotoWizardViewState)state;
+-(void)initCompleteView:(PhotoWizardViewState)state;
 
 -(void)addViewToPageContainer:(NSMutableDictionary*)viewDict;
 
@@ -53,6 +54,7 @@
 -(void)updateSelectionLabels;
 
 -(void)didRecievePhotoImageUploadResponse:(NSDictionary*)dict;
+-(void)didRecieveFileUploadResponse:(NSDictionary*)dict;
 
 @end
 
@@ -105,7 +107,7 @@
 @synthesize uploadLabel;
 @synthesize loginView;
 @synthesize photoResultView;
-
+@synthesize photoMapButton;
 
 
 
@@ -120,6 +122,7 @@
 	[self initialise];
     
     [notifications addObject:UPLOADUSERPHOTORESPONSE];
+	[notifications addObject:FILEUPLOADPROGRESS];
 	
 	[super listNotificationInterests];
 	
@@ -135,17 +138,48 @@
         [self didRecievePhotoImageUploadResponse:notification.userInfo];
     }
 	
-	
+	if([notification.name isEqualToString:FILEUPLOADPROGRESS]){
+        [self didRecieveFileUploadResponse:notification.userInfo];
+    }
 }
 
 
 -(void)didRecievePhotoImageUploadResponse:(NSDictionary*)dict{
     
-    
+    NSString *state=[dict objectForKey:STATE];
+	
+	if([state isEqualToString:SUCCESS]){
+		
+		[self initialiseViewState:PhotoWizardViewStateResult];
+		[self navigateToViewState:PhotoWizardViewStateResult];
+		
+		
+	}else {
+		
+		
+		// show error message
+		
+	}
     
     
 }
 
+//
+/***********************************************
+ * @description			Notification from RFM of http upload progress
+ ***********************************************/
+//
+-(void)didRecieveFileUploadResponse:(NSDictionary*)dict{
+    
+	int totalBytesWritten=[[dict objectForKey:@"totalBytesWritten"] intValue];
+	//int bytesWritten=[[dict objectForKey:@"bytesWritten"] intValue];
+	int totalBytesExpectedToWrite=[[dict objectForKey:@"totalBytesExpectedToWrite"] intValue];
+	
+	float percent=totalBytesWritten/totalBytesExpectedToWrite;
+	
+    uploadProgressView.progress=percent;
+    
+}
 
 
 -(void)refreshUIFromDataProvider{
@@ -264,19 +298,27 @@
 				
 			case PhotoWizardViewStateCategory:
 				
+				[self initCategoryView:state];
+				
 				break;
 				
 			case PhotoWizardViewStateDescription:
+				
+				[self initDescriptionView:state];
 				
 				break;
 				
 			case PhotoWizardViewStateUpload:
 				
+				[self initUploadView:state];
+				
 				break;
 				
 			case PhotoWizardViewStateResult:
 				
-				break;
+				[self initCompleteView:state];
+				
+			break;
 				
 			default:
 				break;
@@ -630,7 +672,7 @@
  ***********************************************/
 //
 
--(void)initCategoryView{
+-(void)initCategoryView:(PhotoWizardViewState)state{
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.categoryLoader setupCategories];
@@ -687,7 +729,7 @@
 	categoryDescLabel.text=uploadImage.category;
     
     if(uploadImage.metaCategory!=nil && uploadImage.category!=nil){
-        [self initialiseViewState:PhotoWizardViewStateDescription]
+        [self initialiseViewState:PhotoWizardViewStateDescription];
     }
     
 }
@@ -774,6 +816,47 @@
 	
 	
 }
+
+
+
+//
+/***********************************************
+ * @description			Complete View
+ ***********************************************/
+//
+
+-(void)initCompleteView:(PhotoWizardViewState)state{
+	
+	
+	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"Locate"];
+	[photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
+	// only called if upload completes
+	
+	// will show tick and messaging
+	
+	//pageControl.pages=0
+	
+	// also uploadanother button
+	// option to load photomap with the photos area
+	
+	// both of the above will reset the VC
+	
+	
+}
+
+-(IBAction)photoMapButtonSelected:(id)sender{
+	
+	
+	// get location from uploadimage
+	
+	// call navigate to PM
+	
+	// pass location in 
+	
+	
+}
+
 
 
 #pragma mark Generic

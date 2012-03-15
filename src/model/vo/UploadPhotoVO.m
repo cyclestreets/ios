@@ -106,7 +106,7 @@
         if ([imageSize isEqualToString:@"full"]) {
             scaledImage = image;
         } else {
-            scaledImage = ImageManipulator resizeImage:image destWidth:640 destHeight:480];
+            scaledImage = [ImageManipulator resizeImage:image destWidth:640 destHeight:480];
         }
 		return UIImageJPEGRepresentation( scaledImage, 0.8);		
 	}

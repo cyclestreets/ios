@@ -90,6 +90,7 @@ NSString *const REQUESTDATAREFRESH = @"RequestDataRefresh"; // request a program
 NSString *const REQUESTDATAREFRESHFROMUSER = @"RequestDataRefreshFromUser"; // request a user refresh of the data Provider
 NSString *const	PRODUCTLISTCOMPLETE = @"ProductlistComplete";
 NSString *const	REMOTEFILELOADED = @"RemoteFileMangerLoaded";  // the remote connection failed
+NSString *const	FILEUPLOADPROGRESS = @"FileUploadProgress";  // file upload progress
 NSString *const	XMLPARSERDIDCOMPLETENOUPDATE = @"XMLParserDidCompleteWithNoUpdate"; // the remote request returned no update, so use the cached data
 NSString *const REQUESTWASACTIVE=@"datarequestwasactive"; // the requested data/request group is the active one do not refresh ui;
 NSString *const REMOTEDATAREQUESTED=@"remotedatarequested"; // the request is contacting the server, the ui will need to indicate this.

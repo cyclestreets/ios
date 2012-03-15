@@ -12,8 +12,9 @@
 #import "LayoutBox.h"
 #import "PhotoMapVO.h"
 #import "CopyLabel.h"
+#import "SuperViewController.h"
 
-@interface PhotoMapImageLocationViewController : UIViewController <AsyncImageViewDelegate>{
+@interface PhotoMapImageLocationViewController : SuperViewController <AsyncImageViewDelegate>{
 	
 	PhotoMapVO							*dataProvider;
 	
