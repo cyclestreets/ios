@@ -20,7 +20,8 @@
 #import "StyleManager.h"
 #import "PhotoMapImageLocationViewController.h"
 #import "UserAccount.h"
-#import "PhotoUploadManager.h"
+#import "PhotoManager.h"
+#import "CycleStreetsAppDelegate.h"
 
 
 @interface PhotoWizardViewController(Private) 
@@ -753,9 +754,13 @@
     
 }
 
-// textfield delegate methods
-// check for desc length>0
-// init upload view
+- (void)textViewDidChange:(UITextView *)textView{
+    
+    if(textView.text.length>0){
+        [self initialiseViewState:PhotoWizardViewStateUpload];
+    }
+    
+}
 
 
 #pragma mark Upload View
@@ -782,7 +787,7 @@
 			
 			BetterLog(@"kUserAccountCredentialsExist");
 			
-			[[PhotoUploadManager sharedInstance] UserPhotoUploadRequest:uploadImage];
+			[[PhotoManager sharedInstance] UserPhotoUploadRequest:uploadImage];
 			
 		}else {
 			
@@ -804,7 +809,7 @@
 		
 		BetterLog(@"kUserAccountLoggedIn");
 		
-		[[PhotoUploadManager sharedInstance] UserPhotoUploadRequest:uploadImage];
+		[[PhotoManager sharedInstance] UserPhotoUploadRequest:uploadImage];
 	}
 	
 	
@@ -828,33 +833,29 @@
 -(void)initCompleteView:(PhotoWizardViewState)state{
 	
 	
-	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"Locate"];
+	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View Map"];
 	[photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-	// only called if upload completes
+    
+    // there is
+    // thumbnailUrl
+    // and url
+    photoResultURLLabel.text=[uploadImage.responseDict objectForKey:@"url"];
 	
-	// will show tick and messaging
-	
-	//pageControl.pages=0
-	
-	// also uploadanother button
-	// option to load photomap with the photos area
-	
-	// both of the above will reset the VC
-	
+	pageControl.numberOfPages=1;
+
 	
 }
 
 -(IBAction)photoMapButtonSelected:(id)sender{
 	
-	
-	// get location from uploadimage
+    [self navigateToViewState:PhotoWizardViewStateInfo];
 	
 	// call navigate to PM
-	
-	// pass location in 
-	
-	
+    [PhotoManager sharedInstance].autoLoadLocation=uploadImage.location;
+    CycleStreetsAppDelegate *appDelegate=(CycleStreetsAppDelegate*)[[UIApplication sharedApplication] delegate];
+	[appDelegate showTabBarViewControllerByName:@"PhotoMap"];
+		
 }
 
 

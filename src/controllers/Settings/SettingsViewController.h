@@ -30,15 +30,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface SettingsViewController : UIViewController {
 	
-	SettingsVO					*dataProvider;
+	SettingsVO                      *dataProvider;
 	
-	IBOutlet UISegmentedControl *planControl;
-	IBOutlet UISegmentedControl *speedControl;
-	IBOutlet UISegmentedControl *mapStyleControl;
-	IBOutlet UISegmentedControl *imageSizeControl;
-	IBOutlet UISegmentedControl *routeUnitControl;
-	IBOutlet RCSwitchOnOff		*routePointSwitch;
-	IBOutlet UIView	*controlView;
+	IBOutlet UISegmentedControl     *planControl;
+	IBOutlet UISegmentedControl     *speedControl;
+	IBOutlet UISegmentedControl     *mapStyleControl;
+	IBOutlet UISegmentedControl     *imageSizeControl;
+	IBOutlet UISegmentedControl     *routeUnitControl;
+	IBOutlet RCSwitchOnOff          *routePointSwitch;
+	IBOutlet UIView                 *controlView;
 	
 	IBOutlet	UILabel			*speedTitleLabel;
 }

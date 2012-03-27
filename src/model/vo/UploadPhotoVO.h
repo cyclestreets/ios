@@ -11,15 +11,16 @@
 
 @interface UploadPhotoVO : NSObject{
     
-    UIImage *image;
-	CLLocation *location; // location from photo
-    CLLocation *userLocation; // location from user
+    UIImage                     *image;
+	CLLocation                  *location; // location from photo
+    CLLocation                  *userLocation; // location from user
     
-    NSString    *category;
-    NSString    *metaCategory;
+    NSString                    *category;
+    NSString                    *metaCategory;
     
-    NSDate      *date;
+    NSDate                      *date;
     
+    NSMutableDictionary         *responseDict;
     
 }
 @property (nonatomic, retain)	UIImage			*image;
@@ -28,7 +29,9 @@
 @property (nonatomic, retain)	NSString			*category;
 @property (nonatomic, retain)	NSString			*metaCategory;
 @property (nonatomic, retain)	NSDate			*date;
+@property (nonatomic, retain)	NSMutableDictionary			*responseDict;
 
+// getters
 @property (nonatomic, readonly) int		 width;
 @property (nonatomic, readonly) int		 height;
 @property (nonatomic,readonly) NSString     *dateTime;

@@ -194,6 +194,7 @@
 
 -(void)createNonPersistentUI{
 	
+    selectedRouteButton.enabled=[[RouteManager sharedInstance] selectedRoute]!=nil;
 	
 }
 

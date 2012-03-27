@@ -14,7 +14,6 @@
 #import "CycleStreetsAppDelegate.h"
 #import "Stage.h"
 #import "ButtonUtilities.h"
-#import "FavouritesViewController.h"
 #import "AppConstants.h"
 #import "ExpandedUILabel.h"
 #import "RouteManager.h"

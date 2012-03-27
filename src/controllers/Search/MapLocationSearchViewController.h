@@ -34,14 +34,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface MapLocationSearchViewController : UITableViewController
 <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate> {
-	id<LocationReceiver> locationReceiver;
-	CLLocationCoordinate2D centreLocation;
-	@private NSString *currentRequestSearchString;
-	@private NSString *searchString;
-	@private XMLRequest *request;
-	@private NSMutableArray *currentPlaces;
-	@private UIActivityIndicatorView *activeLookup;
-	@private UIView *activeBackground;
+	
+	id<LocationReceiver>				locationReceiver;
+	CLLocationCoordinate2D				centreLocation;
+	@private NSString					*currentRequestSearchString;
+	@private NSString					*searchString;
+	@private XMLRequest					*request;
+	@private NSMutableArray				*currentPlaces;
+	@private UIActivityIndicatorView	*activeLookup;
+	@private UIView						*activeBackground;
 }
 
 @property (nonatomic, retain) id<LocationReceiver> locationReceiver;

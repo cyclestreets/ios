@@ -38,36 +38,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface Stage : UIViewController <CLLocationManagerDelegate, RMMapViewDelegate, LocationProvider, PointListProvider> {
 	
-	CSSegmentFooterView				*footerView;
-	BOOL							footerIsHidden;
-	BOOL							photoIconsVisisble;
+	CSSegmentFooterView                     *footerView;
+	BOOL                                    footerIsHidden;
+	BOOL                                    photoIconsVisisble;
 	
-	IBOutlet RMMapView *mapView;
-	IBOutlet BlueCircleView *blueCircleView;	//overlay GPS location
-	CLLocation *lastLocation;		//the last one
-	IBOutlet RouteLineView *lineView;		//overlay route lines on top of map
-	IBOutlet UILabel *attributionLabel;
+	IBOutlet RMMapView                      *mapView;
+	IBOutlet BlueCircleView                 *blueCircleView;	//overlay GPS location
+	CLLocation                              *lastLocation;		//the last one
+	IBOutlet RouteLineView                  *lineView;		//overlay route lines on top of map
+	IBOutlet UILabel                        *attributionLabel;
 	
-	NSMutableArray			*photoMarkers;
+	NSMutableArray                          *photoMarkers;
 	
 	//toolbar
-	UIBarButtonItem *locationButton;
-	UIBarButtonItem *infoButton;
-	UIBarButtonItem *photoIconButton;
-	UIBarButtonItem *prev;
-	UIBarButtonItem *next;
+	UIBarButtonItem                         *locationButton;
+	UIBarButtonItem                         *infoButton;
+	UIBarButtonItem                         *photoIconButton;
+	UIBarButtonItem                         *prevPointButton;
+	UIBarButtonItem                         *nextPointButton;
 	
 	
 	//current route
-	RouteVO *route;
-	NSInteger index;
-	NSInteger photosIndex;//check that the photos we are loading relate to the current stage
+	RouteVO                                 *route;
+	NSInteger                               index;
+	NSInteger                               photosIndex;//check that the photos we are loading relate to the current stage
 	
-	RMMarker *markerLocation;	
-	CLLocationManager *locationManager;
-	BOOL doingLocation;
-	PhotoMapImageLocationViewController *locationView;
-	QueryPhoto *queryPhoto;
+	RMMarker                                *markerLocation;	
+	CLLocationManager                       *locationManager;
+	BOOL                                    doingLocation;
+	PhotoMapImageLocationViewController     *locationView;
+	QueryPhoto                              *queryPhoto;
 }
 
 @property (nonatomic, retain)	CSSegmentFooterView		*footerView;

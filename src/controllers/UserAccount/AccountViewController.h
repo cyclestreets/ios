@@ -38,7 +38,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface AccountViewController : SuperViewController <UITextFieldDelegate,UIScrollViewDelegate>{
 	
-	UIView				*activeView;
+	UIView                              *activeView;
 	
 	IBOutlet			UIScrollView	*scrollView;
 	IBOutlet			UIPageControl	*pageControl;
@@ -48,51 +48,51 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet			UILabel			*rightLabel;
 	
 	
-	LayoutBox		*contentView;
+	LayoutBox                           *contentView;
 	
 	// not logged in
-	IBOutlet UITextField *loginUsernameField;
-	IBOutlet UITextField *loginPasswordField;
-	IBOutlet UIButton *loginButton;
-	IBOutlet	UIView		*loginView;
+	IBOutlet UITextField                *loginUsernameField;
+	IBOutlet UITextField                *loginPasswordField;
+	IBOutlet UIButton                   *loginButton;
+	IBOutlet	UIView                  *loginView;
 	
 	// register
-	IBOutlet UITextField *registerUsernameField;
-	IBOutlet UITextField *registerVisibleNameField;
-	IBOutlet UITextField *registerEmailField;
-	IBOutlet UITextField *registerPsswordField;
-	IBOutlet UIButton *registerButton;
-	IBOutlet UIView		*registerView;
+	IBOutlet UITextField                *registerUsernameField;
+	IBOutlet UITextField                *registerVisibleNameField;
+	IBOutlet UITextField                *registerEmailField;
+	IBOutlet UITextField                *registerPsswordField;
+	IBOutlet UIButton					*registerButton;
+	IBOutlet UIView						*registerView;
 	
 	//password
-	IBOutlet	UITextField	*retrieveEmailField;
-	IBOutlet	UIView		*retrieveView;
+	IBOutlet	UITextField				*retrieveEmailField;
+	IBOutlet	UIView					*retrieveView;
 	
 	
 	// logged in
-	IBOutlet		UILabel		*loggedInasField;
-	IBOutlet		UIButton	*logoutButton;
-	IBOutlet		UISwitch	*saveLoginButton;
-	IBOutlet		UIView		*loggedInView;
+	IBOutlet		UILabel				*loggedInasField;
+	IBOutlet		UIButton			*logoutButton;
+	IBOutlet		UISwitch			*saveLoginButton;
+	IBOutlet		UIView				*loggedInView;
 	
 	
 	//state
-	int							activePage;
-	int							activeFieldIndex;
-	CGRect						activeFieldFrame;
-	NSMutableArray				*activeFieldArray;
-	UITextField					*activeField;
-	BOOL						keyboardIsShown;
-	CGPoint						viewOffset;
-	UIButton					*activeFormSubmitButton;
-	UIActivityIndicatorView		*activeActivityView;
-	UILabel						*activeFormMessageLabel;	
-	UserAccountMode				viewMode;
-	NSMutableArray				*formFieldArray;
+	int									activePage;
+	int									activeFieldIndex;
+	CGRect								activeFieldFrame;
+	NSMutableArray						*activeFieldArray;
+	UITextField							*activeField;
+	BOOL								keyboardIsShown;
+	CGPoint								viewOffset;
+	UIButton							*activeFormSubmitButton;
+	UIActivityIndicatorView				*activeActivityView;
+	UILabel								*activeFormMessageLabel;	
+	UserAccountMode						viewMode;
+	NSMutableArray						*formFieldArray;
 	
 	
-	BOOL						isModal;
-	BOOL						shouldAutoClose;
+	BOOL								isModal;
+	BOOL								shouldAutoClose;
 	
 }
 @property (nonatomic, retain)		IBOutlet UIView				* activeView;

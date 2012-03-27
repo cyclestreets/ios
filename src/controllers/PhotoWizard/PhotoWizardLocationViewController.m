@@ -32,19 +32,8 @@
 	
 	[self initialise];
     
-    
-	
 	[super listNotificationInterests];
 	
-}
-
--(void)didReceiveNotification:(NSNotification*)notification{
-	
-	BetterLog(@"");
-	
-	[super didReceiveNotification:notification];
-	
-    	
 }
 
 

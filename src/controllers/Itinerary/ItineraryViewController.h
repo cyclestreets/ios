@@ -16,14 +16,14 @@
 
 @interface ItineraryViewController : SuperViewController <UITableViewDelegate,UITableViewDataSource>{
 	
-	RouteVO *route;
-	NSInteger routeId;
-	UITextView *headerText;
+	RouteVO                         *route;
+	NSInteger                       routeId;
+	UITextView                      *headerText;
 	
 	Stage							*stageViewcontroller;
 	
 	
-	IBOutlet	CopyLabel				*routeidLabel;
+	IBOutlet	CopyLabel			*routeidLabel;
 				MultiLabelLine		*readoutLineOne;
 				MultiLabelLine		*readoutLineTwo;
 	IBOutlet	LayoutBox			*readoutContainer;

@@ -107,7 +107,8 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
     
     // result view
     IBOutlet    UIView              *photoResultView;
-	IBOutlet    UIButton             *photoMapButton;
+    IBOutlet    UILabel             *photoResultURLLabel;
+	IBOutlet    UIButton            *photoMapButton;
 	
 	
 	

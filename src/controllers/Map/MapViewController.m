@@ -51,7 +51,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteLineView.h"
 #import "RMMercatorToScreenProjection.h"
 #import "Files.h"
-#import "FavouritesViewController.h"
 #import "InitialLocation.h"
 #import "RouteManager.h"
 #import "GlobalUtilities.h"
@@ -70,13 +69,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)zoomUpdate;
 -(void)loadLocation;
 
+
+-(IBAction)showRoutePlanMenu:(id)sender;
+
 - (void) clearRoute;
 - (void) newRoute;
 
 @end
-
-
-@implementation MapViewController
 
 static NSString *MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
 static NSString *MAPPING_BASE_OSM = @"OpenStreetMap";
@@ -92,21 +91,14 @@ static NSInteger MIN_ZOOM = 1;
 static NSInteger MAX_ZOOM_LOCATION = 16;
 static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
-//handle when to switch off the GPS, and at what accuracy.
 static CLLocationDistance LOC_DISTANCE_FILTER = 25;
-/*
-static CLLocationAccuracy ACCURACY_OK = 100;
-static CLLocationAccuracy ACCURACY_BEST = 20;
-static NSTimeInterval LOC_OFF_DELAY_BAD = 30.0;
-static NSTimeInterval LOC_OFF_DELAY_OK = 3.0;
-static NSTimeInterval LOC_OFF_DELAY_BEST = 1.0;
- */
-
 static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 //don't allow co-location of start/finish
 static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
+
+@implementation MapViewController
 @synthesize toolBar;
 @synthesize locationButton;
 @synthesize activeLocationButton;
@@ -114,7 +106,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize nameButton;
 @synthesize routeButton;
 @synthesize deleteButton;
+@synthesize planButton;
 @synthesize contextLabel;
+@synthesize routeplanMenu;
+@synthesize routeplanView;
 @synthesize attributionLabel;
 @synthesize cycleStreets;
 @synthesize mapView;
@@ -140,7 +135,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize planningState;
 @synthesize oldPlanningState;
 
-
 //=========================================================== 
 // dealloc
 //=========================================================== 
@@ -153,7 +147,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [nameButton release], nameButton = nil;
     [routeButton release], routeButton = nil;
     [deleteButton release], deleteButton = nil;
+    [planButton release], planButton = nil;
     [contextLabel release], contextLabel = nil;
+    [routeplanMenu release], routeplanMenu = nil;
+    [routeplanView release], routeplanView = nil;
     [attributionLabel release], attributionLabel = nil;
     [cycleStreets release], cycleStreets = nil;
     [mapView release], mapView = nil;
@@ -171,7 +168,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [clearAlert release], clearAlert = nil;
     [startFinishAlert release], startFinishAlert = nil;
     [noLocationAlert release], noLocationAlert = nil;
-	
+    
     [super dealloc];
 }
 
@@ -347,8 +344,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			UILabel *colabel=(UILabel*)[[items objectAtIndex:4] customView];
 			if(colabel!=nil){
 				[items replaceObjectAtIndex:4 withObject:self.routeButton];
-				[self.toolBar setItems:items ];
+                
 			}
+            
+            [items replaceObjectAtIndex:5 withObject:self.planButton];
+            [self.toolBar setItems:items animated:YES ];
 			
 			self.routeButton.title = @"New route";
 			self.routeButton.style = UIBarButtonItemStyleBordered;
@@ -395,6 +395,13 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 														   action:@selector(didDelete)]
 						   autorelease];
 	self.deleteButton.width = 40;
+    
+    self.planButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
+                                                          style:UIBarButtonItemStyleBordered
+                                                         target:self
+                                                         action:@selector(showRoutePlanMenu:)]
+                         autorelease];
+	self.planButton.width = 40;
 	
 	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
 	[items insertObject:self.locationButton atIndex:0];
@@ -473,6 +480,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.attributionLabel.text = [MapViewController mapAttribution];
 }
 
+
+
+#pragma mark RMMap delegates
+//
+/***********************************************
+ * @description			RM MAP delegate methods
+ ***********************************************/
+//
+
 - (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
 	
 	if(singleTapDidOccur==NO){
@@ -521,16 +537,61 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self afterMapChanged:map];
 }
 
-/*
-- (void) beforeMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
-}
- */
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
     
 	[self afterMapChanged:map];
 	[self saveLocation:map.contents.mapCenter];
 }
+
+
+#pragma marl RMMap marker
+
+-(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
+	
+	// for marker pop ups
+	
+}
+
+// Should only return yes is marker is start/end and we have not a route drawn
+- (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+	
+	BetterLog(@"");
+	
+	BOOL result=NO;
+	
+	if (marker == start || marker == end) {
+		result=YES;
+	}
+	mapView.enableDragging=!result;
+	return result;
+}
+
+//TODO: bug here with marker dragging, doesnt recieve any touch updates: 
+//NE: fix is, should ask for correct sub view, we have several overlayed, this needs to be optimised for this to work
+- (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+	
+	NSSet *touches = [event touchesForView:blueCircleView]; 
+	// note use of top View required, bcv should not be left top unless required by location?
+	
+	BetterLog(@"touches=%i",[touches count]);
+	
+	for (UITouch *touch in touches) {
+		CGPoint point = [touch locationInView:blueCircleView];
+		CLLocationCoordinate2D location = [map pixelToLatLong:point];
+		[[map markerManager] moveMarker:marker AtLatLon:location];
+	}
+	
+}
+
+
+
+#pragma mark map location persistence
+//
+/***********************************************
+ * @description			Saves Map location
+ ***********************************************/
+//
 
 - (void)saveLocation:(CLLocationCoordinate2D)location {
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[cycleStreets.files misc]];
@@ -694,43 +755,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 
--(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
-	
-	// for marker pop ups
-	
-}
-
-// Should only return yes is marker is start/end and we have not a route drawn
-- (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
-	
-	BetterLog(@"");
-	
-	BOOL result=NO;
-	
-	if (marker == start || marker == end) {
-		result=YES;
-	}
-	mapView.enableDragging=!result;
-	return result;
-}
- 
-//TODO: bug here with marker dragging, doesnt recieve any touch updates: 
-//NE: fix is, should ask for correct sub view, we have several overlayed, this needs to be optimised for this to work
-- (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
-	
-	NSSet *touches = [event touchesForView:blueCircleView]; 
-	// note use of top View required, bcv should not be left top unless required by location?
-	
-	BetterLog(@"touches=%i",[touches count]);
-	
-	for (UITouch *touch in touches) {
-		CGPoint point = [touch locationInView:blueCircleView];
-		CLLocationCoordinate2D location = [map pixelToLatLong:point];
-		[[map markerManager] moveMarker:marker AtLatLon:location];
-	}
-	
-}
-
 
 #pragma mark toolbar actions
 
@@ -832,8 +856,23 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
-#pragma mark utility
 
+
+-(IBAction)showRoutePlanMenu:(id)sender{
+    
+    self.routeplanView=[[RoutePlanMenuViewController alloc]initWithNibName:@"RoutePlanMenuView" bundle:nil];
+    self.routeplanMenu=[[UIPopoverController alloc]initWithContentViewController:routeplanView];
+    routeplanMenu.delegate=self;
+    
+    [routeplanMenu presentPopoverFromBarButtonItem:planButton permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+}
+
+
+
+
+
+#pragma mark CoreLocation
 
 - (void)stopDoingLocation {
 	BetterLog(@"doingLocation=%i",doingLocation);
@@ -924,7 +963,70 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
-#pragma mark Route Loading
+#pragma mark location delegate
+
+- (void)locationManager:(CLLocationManager *)manager
+	didUpdateToLocation:(CLLocation *)newLocation
+		   fromLocation:(CLLocation *)oldLocation
+{
+	
+	// Note: we need to doublecheck this flag as this method appears to get called
+	// once even after we have told it to stop!
+	// if left un checked it will call addLocation too many times for a planning session
+	if(doingLocation==YES){
+		
+		self.programmaticChange = YES;
+		
+		BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
+		BetterLog(@"locationManager.desiredAccuracy=%f",locationManager.desiredAccuracy);
+		
+		[MapViewController zoomMapView:mapView toLocation:newLocation];
+		[blueCircleView setNeedsDisplay];
+		
+		NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
+		
+		if (locationAge > 5.0) return;
+		if (newLocation.horizontalAccuracy < 0) return;
+		// test the measurement to see if it is more accurate than the previous measurement
+		if (lastLocation == nil || lastLocation.horizontalAccuracy >= newLocation.horizontalAccuracy) {
+			// store the location as the "best effort"
+			self.lastLocation = newLocation;
+			
+			// if we reach accuracy we switch off gps and add a start||finish point
+			if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
+				
+				[self addLocation:newLocation.coordinate];
+				[self stopDoingLocation];
+				
+			}
+			
+		}
+		
+		
+		self.programmaticChange = NO;
+		
+	}
+	
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager
+	   didFailWithError:(NSError *)error
+{
+	if (self.noLocationAlert == nil) {
+		self.noLocationAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"
+														   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
+														  delegate:nil
+												 cancelButtonTitle:@"OK"
+												 otherButtonTitles:nil]
+								autorelease];
+	}
+	[self.noLocationAlert show];
+}
+
+
+
+#pragma mark Route Display
 //
 /***********************************************
  * @description			Route loading
@@ -973,6 +1075,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[blueCircleView setNeedsDisplay];
 	[self gotoState:stateRoute];
 }
+
+
+
+
 
 
 
@@ -1068,66 +1174,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	return (lastLocation.horizontalAccuracy / metresPerPixel);
 }
 
-#pragma mark location delegate
 
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation
-{
-	
-	// Note: we need to doublecheck this flag as this method appears to get called
-	// once even after we have told it to stop!
-	// if left un checked it will call addLocation too many times for a planning session
-	if(doingLocation==YES){
-		
-		self.programmaticChange = YES;
-		
-		BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
-		BetterLog(@"locationManager.desiredAccuracy=%f",locationManager.desiredAccuracy);
-		
-		[MapViewController zoomMapView:mapView toLocation:newLocation];
-		[blueCircleView setNeedsDisplay];
-		
-		NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
-		
-		if (locationAge > 5.0) return;
-		if (newLocation.horizontalAccuracy < 0) return;
-		// test the measurement to see if it is more accurate than the previous measurement
-		if (lastLocation == nil || lastLocation.horizontalAccuracy >= newLocation.horizontalAccuracy) {
-			// store the location as the "best effort"
-			self.lastLocation = newLocation;
-			
-			// if we reach accuracy we switch off gps and add a start||finish point
-			if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-				
-				[self addLocation:newLocation.coordinate];
-				[self stopDoingLocation];
-				
-			}
-			
-		}
-		
-		
-		self.programmaticChange = NO;
-		
-	}
-	
-}
-
-
-- (void)locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error
-{
-	if (self.noLocationAlert == nil) {
-		self.noLocationAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"
-														   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
-														  delegate:nil
-												 cancelButtonTitle:@"OK"
-												 otherButtonTitles:nil]
-								autorelease];
-	}
-	[self.noLocationAlert show];
-}
 
 #pragma mark search response
 
@@ -1143,10 +1190,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 #pragma mark generic class cleanup
 
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
+    
     [super didReceiveMemoryWarning];
     
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void)nullify {
@@ -1191,9 +1237,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void)viewDidUnload {
 	[self nullify];
     [super viewDidUnload];
-	BetterLog(@">>>");
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 

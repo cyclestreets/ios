@@ -13,9 +13,9 @@
 	
 	IBOutlet			UITableView			*tableview;
 	
-	NSMutableArray		*dataProvider;
+	NSMutableArray							*dataProvider;
 	
-	POICategoryVO		*requestdataProvider;
+	POICategoryVO							*requestdataProvider;
 	
 }
 @property (nonatomic, retain)	IBOutlet UITableView		*tableview;

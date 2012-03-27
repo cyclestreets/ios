@@ -19,8 +19,11 @@
 
 @interface PhotoManager(Private)
 
+-(void)UserPhotoUploadResponse:(ValidationVO*)validation;
 
 -(void)uploadPhotoForUserResponse:(ValidationVO*)validation;
+
+
 -(void)retrievePhotosForLocationResponse:(ValidationVO*)validation;
 
 
@@ -31,6 +34,8 @@
 
 @implementation PhotoManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
+@synthesize uploadPhoto;
+@synthesize autoLoadLocation;
 @synthesize locationPhotoList;
 
 //=========================================================== 
@@ -38,10 +43,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 //=========================================================== 
 - (void)dealloc
 {
+    [uploadPhoto release], uploadPhoto = nil;
+    [autoLoadLocation release], autoLoadLocation = nil;
     [locationPhotoList release], locationPhotoList = nil;
-	
+    
     [super dealloc];
 }
+
+
+
 
 
 
@@ -176,7 +186,79 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
     
 }
 
+//
+/***********************************************
+ * @description			Upload methods
+ ***********************************************/
+//
 
+-(void)UserPhotoUploadRequest:(UploadPhotoVO*)photo{
+    
+    self.uploadPhoto=photo;
+    
+    NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
+    
+    NSMutableDictionary *postparameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         [UserAccount sharedInstance].user.username, @"username",
+                                         [UserAccount sharedInstance].userPassword,@"password",
+                                         BOX_FLOAT(photo.location.coordinate.latitude),@"latitude",
+                                         BOX_FLOAT(photo.location.coordinate.longitude),@"longitude",
+                                         photo.description,@"caption",
+                                         photo.metaCategory,@"metaCategory",
+                                         photo.category,@"category",
+                                         photo.dateTime,@"dateTime",
+                                         [photo uploadData],@"imageData",
+                                         nil];
+	
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters",postparameters,@"postparameters", nil];
+    
+    NetRequest *request=[[NetRequest alloc]init];
+	request.dataid=UPLOADUSERPHOTO;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.revisonId=0;
+	request.source=USER;
+	request.trackProgress=YES;
+	
+	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	[dict release];
+	[request release];
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading Photo" andMessage:nil];
+	
+    
+    
+    
+}
+
+
+-(void)UserPhotoUploadResponse:(ValidationVO*)validation{
+    
+    switch(validation.validationStatus){
+            
+		case ValidationUserPhotoUploadSuccess:
+            
+            uploadPhoto.responseDict=[validation.responseDict objectForKey:UPLOADUSERPHOTO];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:nil];
+            
+            break;
+			
+		case ValidationUserPhotoUploadFailed:
+            
+            break;
+            
+            
+	}
+
+    
+    
+    
+}
+
+
+// OLD STYLE
 #pragma mark Photo Uploading
 
 -(void)uploadPhotoForUser:(UserVO*)user withImage:(NSData*)imageData andProperties:(NSMutableDictionary*)postparameters{
@@ -210,6 +292,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	switch(validation.validationStatus){
             
 		case ValidationUserPhotoUploadSuccess:
+            
+            
             
         break;
 			

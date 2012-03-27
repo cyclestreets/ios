@@ -17,6 +17,24 @@
 @synthesize category;
 @synthesize metaCategory;
 @synthesize date;
+@synthesize responseDict;
+
+//=========================================================== 
+// dealloc
+//=========================================================== 
+- (void)dealloc
+{
+    [image release], image = nil;
+    [location release], location = nil;
+    [userLocation release], userLocation = nil;
+    [category release], category = nil;
+    [metaCategory release], metaCategory = nil;
+    [date release], date = nil;
+    [responseDict release], responseDict = nil;
+    
+    [super dealloc];
+}
+
 
 
 

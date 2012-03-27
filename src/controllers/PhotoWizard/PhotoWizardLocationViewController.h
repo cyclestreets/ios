@@ -14,17 +14,17 @@
 
 @interface PhotoWizardLocationViewController : SuperViewController<RMMapViewDelegate, CLLocationManagerDelegate>{
     
-    IBOutlet RMMapView *mapView;				//map of current area
+    IBOutlet RMMapView						*mapView;				//map of current area
 
-	CLLocationManager *locationManager; 
-	CLLocation *photolocation;		 // the exisitng photo location
-    CLLocation *userlocation;		 // the  updated location
+	CLLocationManager						*locationManager; 
+	CLLocation								*photolocation;		 // the exisitng photo location
+    CLLocation								*userlocation;		 // the  updated location
     
-    RMMarker *userMarker;
+    RMMarker								*userMarker;
     
-    BOOL	avoidAccidentalTaps;
-	BOOL	singleTapDidOccur;
-	CGPoint	singleTapPoint;
+    BOOL									avoidAccidentalTaps;
+	BOOL									singleTapDidOccur;
+	CGPoint									singleTapPoint;
     
     
     

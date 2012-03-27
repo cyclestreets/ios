@@ -39,13 +39,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 <RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider> {
 	
 	
-	IBOutlet RMMapView								*mapView;			//map of current area
-	IBOutlet BlueCircleView							*blueCircleView;	//overlay GPS location
-	IBOutlet UILabel									*attributionLabel;	// map type label
+	IBOutlet RMMapView						*mapView;			//map of current area
+	IBOutlet BlueCircleView					*blueCircleView;	//overlay GPS location
+	IBOutlet UILabel                        *attributionLabel;	// map type label
 	
 	
-	IBOutlet UIBarButtonItem							*gpslocateButton;
-	IBOutlet UIBarButtonItem							*showPhotosButton;
+	IBOutlet UIBarButtonItem				*gpslocateButton;
+	IBOutlet UIBarButtonItem				*showPhotosButton;
 	
 	
 	CLLocationManager						*locationManager;	// location
@@ -57,8 +57,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	InitialLocation							*initialLocation;
-	IBOutlet UIView									*introView;
-	IBOutlet UIButton								*introButton;
+	IBOutlet UIView							*introView;
+	IBOutlet UIButton						*introButton;
 	
 	NSMutableArray							*photoMarkers;
 	

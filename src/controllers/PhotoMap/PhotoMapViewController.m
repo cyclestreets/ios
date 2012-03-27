@@ -233,6 +233,27 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self createNonPersistentUI];
+    
+    [super viewWillAppear:animated]; 
+    
+}
+
+
+-(void)createNonPersistentUI{
+    
+    if([PhotoManager sharedInstance].autoLoadLocation!=nil){
+        
+        // navigate to location
+        [mapView moveToLatLong:[PhotoManager sharedInstance].autoLoadLocation.coordinate];
+                
+        [PhotoManager sharedInstance].autoLoadLocation=nil;
+    }
+    
+}
+
 
 -(void)viewWillDisappear:(BOOL)animated{
 	if(locationManagerIsLocating==YES)
