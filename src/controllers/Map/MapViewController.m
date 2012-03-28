@@ -61,6 +61,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface MapViewController(Private)
 
+-(void)initToolBarEntries;
+
 - (void) addLocation:(CLLocationCoordinate2D)location;
 -(void)updateSelectedRoute;
 
@@ -102,13 +104,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize toolBar;
 @synthesize locationButton;
 @synthesize activeLocationButton;
-@synthesize locatingIndicator;
 @synthesize nameButton;
 @synthesize routeButton;
 @synthesize deleteButton;
 @synthesize planButton;
-@synthesize contextLabel;
-@synthesize routeplanMenu;
+@synthesize startContextLabel;
+@synthesize finishContextLabel;
+@synthesize locatingIndicator;
+@synthesize leftFlex;
+@synthesize rightFlex;
 @synthesize routeplanView;
 @synthesize attributionLabel;
 @synthesize cycleStreets;
@@ -134,6 +138,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize noLocationAlert;
 @synthesize planningState;
 @synthesize oldPlanningState;
+@synthesize routeplanMenu;
+@synthesize popoverClass;
 
 //=========================================================== 
 // dealloc
@@ -143,13 +149,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [toolBar release], toolBar = nil;
     [locationButton release], locationButton = nil;
     [activeLocationButton release], activeLocationButton = nil;
-    [locatingIndicator release], locatingIndicator = nil;
     [nameButton release], nameButton = nil;
     [routeButton release], routeButton = nil;
     [deleteButton release], deleteButton = nil;
     [planButton release], planButton = nil;
-    [contextLabel release], contextLabel = nil;
-    [routeplanMenu release], routeplanMenu = nil;
+    [startContextLabel release], startContextLabel = nil;
+    [finishContextLabel release], finishContextLabel = nil;
+    [locatingIndicator release], locatingIndicator = nil;
+    [leftFlex release], leftFlex = nil;
+    [rightFlex release], rightFlex = nil;
     [routeplanView release], routeplanView = nil;
     [attributionLabel release], attributionLabel = nil;
     [cycleStreets release], cycleStreets = nil;
@@ -168,7 +176,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     [clearAlert release], clearAlert = nil;
     [startFinishAlert release], startFinishAlert = nil;
     [noLocationAlert release], noLocationAlert = nil;
-    
+    [routeplanMenu release], routeplanMenu = nil;
+	
     [super dealloc];
 }
 
@@ -242,65 +251,28 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[mapView.contents setZoom:wantZoom];
 }
 
-- (id)init {
-	BetterLog(@"");
-	if (self = [super init]) {
-	}
-	return self;
-}
 
-- (void)logState {
-	switch (self.planningState) {
-		case stateStart:
-			//BetterLog(@"stateStart");
-			break;
-		case stateEnd:
-			//BetterLog(@"stateEnd");
-			break;
-		case stateLocatingStart:
-			//BetterLog(@"stateLocatingStart");
-			break;
-		case stateLocatingEnd:
-			//BetterLog(@"stateLocatingEnd");
-			break;
-		case statePlan:
-			//BetterLog(@"statePlan");
-			break;
-		case stateRoute:
-			//NSLog(@"stateRoute");
-			break;
-	}
-}
 
 - (void)gotoState:(PlanningState)newPlanningState {
 	
-	BetterLog(@"gotoState... before");
-	[self logState];
+	BetterLog(@"changing state to %i",newPlanningState);
 	
 	self.oldPlanningState=planningState;
 	self.planningState = newPlanningState;
 	
-	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
-	
-	BetterLog(@"gotoState... after");
-	[self logState];
+	NSMutableArray *items;
 	
 	switch (self.planningState) {
 		case stateStart:
 			BetterLog(@"stateStart");
 			
-			contextLabel.text=@"Set start";
 			
-			// will only execute if current i4 is not this label
-			UILabel *cilabel=(UILabel*)[[items objectAtIndex:4] customView];
-			if(cilabel==nil){
-				UIBarButtonItem *label=[[UIBarButtonItem alloc] initWithCustomView:contextLabel];
-				[items replaceObjectAtIndex:4 withObject:label];
-				[label release];
-				[self.toolBar setItems:items];
-			}
+			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton, leftFlex, startContextLabel, rightFlex, nil];
+			[self.toolBar setItems:items animated:YES ];
+
 			self.deleteButton.enabled = NO;
 			self.nameButton.enabled = YES;
+			 
 			
 			break;
 		case stateLocatingStart:
@@ -308,52 +280,42 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		case stateEnd:
 			BetterLog(@"stateEnd");
 			
-			contextLabel.text = @"Set finish";
-			
-			// will only execute if current i4 is not this label
-			UILabel *clabel=(UILabel*)[[items objectAtIndex:4] customView];
-			if(clabel==nil){
-				UIBarButtonItem *label=[[UIBarButtonItem alloc] initWithCustomView:contextLabel];
-				[items replaceObjectAtIndex:4 withObject:label];
-				[label release];
-				[self.toolBar setItems:items];
-			}
 			
 			self.deleteButton.enabled = YES;
 			self.nameButton.enabled = YES;
 			
+			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton, leftFlex, finishContextLabel, rightFlex, nil];
+			[self.toolBar setItems:items animated:YES ];
+			 
+				
 			break;
 		case stateLocatingEnd:
 			
-			break;
+		break;
 		case statePlan:
 			BetterLog(@"statePlan");
-			
-			// replace the contextLabel
-			[items replaceObjectAtIndex:4 withObject:routeButton];
-			[self.toolBar setItems:items animated:NO];
 			
 			self.routeButton.title = @"Plan route";
 			self.routeButton.style = UIBarButtonItemStyleDone;
 			self.deleteButton.enabled = YES;
 			self.nameButton.enabled = NO;
+			
+			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton,leftFlex, routeButton, nil];
+            
+            [self.toolBar setItems:items animated:YES ];
+			
 			break;
 		case stateRoute:
 			BetterLog(@"stateRoute");
-			
-			UILabel *colabel=(UILabel*)[[items objectAtIndex:4] customView];
-			if(colabel!=nil){
-				[items replaceObjectAtIndex:4 withObject:self.routeButton];
-                
-			}
-            
-            [items replaceObjectAtIndex:5 withObject:self.planButton];
-            [self.toolBar setItems:items animated:YES ];
-			
+						
 			self.routeButton.title = @"New route";
 			self.routeButton.style = UIBarButtonItemStyleBordered;
 			self.deleteButton.enabled = NO;
 			self.nameButton.enabled = NO;
+			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton,leftFlex, planButton,routeButton, nil];
+            
+            [self.toolBar setItems:items animated:YES ];
+			
 			break;
 	}
 }
@@ -373,41 +335,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.cycleStreets = [CycleStreets sharedInstance];
 	
+	popoverClass = [WEPopoverController class];
 	
-	self.mapView.hidden = YES;
 	
-	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	locatingIndicator.hidesWhenStopped=YES;
-	
-	self.activeLocationButton = [[[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ]autorelease];
-	self.activeLocationButton.style	= UIBarButtonItemStyleDone;
-	
-	self.locationButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_location.png"]
-															style:UIBarButtonItemStyleBordered
-														   target:self
-														   action:@selector(didLocation)]
-						   autorelease];
-	self.locationButton.width = 40;
-	
-	self.deleteButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
-															style:UIBarButtonItemStyleBordered
-														   target:self
-														   action:@selector(didDelete)]
-						   autorelease];
-	self.deleteButton.width = 40;
-    
-    self.planButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
-                                                          style:UIBarButtonItemStyleBordered
-                                                         target:self
-                                                         action:@selector(showRoutePlanMenu:)]
-                         autorelease];
-	self.planButton.width = 40;
-	
-	NSMutableArray *items = [NSMutableArray arrayWithArray:self.toolBar.items];
-	[items insertObject:self.locationButton atIndex:0];
-	[items insertObject:self.deleteButton atIndex:2];
-	self.toolBar.items = items;
-	
+	[self initToolBarEntries];
+		
 	
 	self.clearAlert = [[[UIAlertView alloc]
 						initWithTitle:@"CycleStreets"
@@ -470,6 +402,72 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	// DEPRECATED FOR V1.5
 	
 	
+	
+}
+
+
+-(void)initToolBarEntries{
+	
+	
+	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	locatingIndicator.hidesWhenStopped=YES;
+	
+	self.activeLocationButton = [[[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ]autorelease];
+	self.activeLocationButton.style	= UIBarButtonItemStyleDone;
+	
+	self.locationButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_location.png"]
+															style:UIBarButtonItemStyleBordered
+														   target:self
+														   action:@selector(didLocation)]
+						   autorelease];
+	self.locationButton.width = 40;
+	
+	self.nameButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
+														  style:UIBarButtonItemStyleBordered
+														 target:self
+														 action:@selector(didSearch)]
+						 autorelease];
+	self.nameButton.width = 40;
+	
+	self.deleteButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
+														  style:UIBarButtonItemStyleBordered
+														 target:self
+														 action:@selector(didDelete)]
+						 autorelease];
+	self.deleteButton.width = 40;
+    
+    self.planButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
+														style:UIBarButtonItemStyleBordered
+													   target:self
+													   action:@selector(showRoutePlanMenu:)]
+					   autorelease];
+	self.planButton.width = 40;
+	
+	self.routeButton = [[[UIBarButtonItem alloc] initWithTitle:@"Plan Route" 
+														 style:UIBarButtonItemStyleBordered
+													   target:self
+													   action:@selector(didRoute)]
+					   autorelease];
+	
+	ExpandedUILabel *startLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 14)];
+	startLabel.text=@"Set Start";
+	startLabel.font=[UIFont boldSystemFontOfSize:20];
+	startLabel.shadowOffset=CGSizeMake(0, -1);
+	startLabel.shadowColor=[UIColor darkGrayColor];
+	startLabel.textColor=[UIColor whiteColor];
+	self.startContextLabel=[[UIBarButtonItem alloc] initWithCustomView:startLabel];
+	
+	ExpandedUILabel *finishLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 14)];
+	finishLabel.text=@"Set Finish";
+	finishLabel.font=[UIFont boldSystemFontOfSize:20];
+	finishLabel.shadowOffset=CGSizeMake(0, -1);
+	finishLabel.shadowColor=[UIColor darkGrayColor];
+	finishLabel.textColor=[UIColor whiteColor];
+	self.finishContextLabel=[[UIBarButtonItem alloc] initWithCustomView:finishLabel];
+	 
+	
+	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
 }
 
@@ -859,16 +857,31 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 -(IBAction)showRoutePlanMenu:(id)sender{
-    
+	
     self.routeplanView=[[RoutePlanMenuViewController alloc]initWithNibName:@"RoutePlanMenuView" bundle:nil];
-    self.routeplanMenu=[[UIPopoverController alloc]initWithContentViewController:routeplanView];
     routeplanMenu.delegate=self;
+	
+	self.routeplanMenu = [[[popoverClass alloc] initWithContentViewController:routeplanView] autorelease];
+	
+	self.routeplanMenu.delegate = self;
+		
+	[self.routeplanMenu presentPopoverFromBarButtonItem:planButton toolBar:toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
-    [routeplanMenu presentPopoverFromBarButtonItem:planButton permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
+
 }
 
+#pragma mark -
+#pragma mark WEPopoverControllerDelegate implementation
 
+- (void)popoverControllerDidDismissPopover:(WEPopoverController *)thePopoverController {
+	//Safe to release the popover here
+	self.routeplanMenu = nil;
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(WEPopoverController *)thePopoverController {
+	//The popover is automatically dismissed if you click outside it, unless you return NO here
+	return YES;
+}
 
 
 

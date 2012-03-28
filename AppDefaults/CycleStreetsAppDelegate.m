@@ -79,7 +79,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
-	BetterLog(@"application didFinishLaunchingWithOptions");
 	
 	[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
 
@@ -119,15 +118,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
 	
-	
-	// send device os to Google
-	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
-	NSString *currSysMdl = [[UIDevice currentDevice] model];
-	NSString *currSysNam = [[UIDevice currentDevice] systemName];
-	NSString *currSysMac = [[UIDevice currentDevice] machine];
-	[[GoogleAnalyticsManager sharedInstance] trackPageViewWithString:[NSString stringWithFormat:@"/%@/%@/%@/%@",currSysMdl,currSysMac,currSysNam,currSysVer]];
-	//
-	
+		
 	[window makeKeyAndVisible];	
 	
 	[self performSelector:@selector(backgroundSetup) withObject:nil afterDelay:0.0];

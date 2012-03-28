@@ -136,14 +136,14 @@
 		if (![UIType isEqualToString:UITYPE_MODALUI]) {
 			[navigation createRightNavItemWithType:BUNavRefreshType];
 		}
-		[self handleRemoteRequestIndication:NO];
+	//	[self handleRemoteRequestIndication:NO];
 		
 	}else if([notification.name isEqualToString:CONNECTIONERROR]){
 		if (![UIType isEqualToString:UITYPE_MODALUI]) {
 			[navigation createRightNavItemWithType:BUNavRefreshType];
 		}
 
-		[self handleRemoteRequestIndication:NO];
+	//	[self handleRemoteRequestIndication:NO];
 		[self showViewOverlayForType:kViewOverlayTypeConnectionFailed show:YES withMessage:nil];
 	}
 	
