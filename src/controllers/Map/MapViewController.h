@@ -50,7 +50,7 @@ typedef enum PlanningStateT PlanningState;
 @interface MapViewController : UIViewController
 <RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider,WEPopoverControllerDelegate> {
 	//IB items
-	UIToolbar *toolBar;
+	IBOutlet UIToolbar *toolBar;
 	
 	UIBarButtonItem *locationButton; // gps button
 	UIBarButtonItem *activeLocationButton;
@@ -68,12 +68,13 @@ typedef enum PlanningStateT PlanningState;
    
     RoutePlanMenuViewController *routeplanView;
 	
-	UILabel *attributionLabel;
+	IBOutlet  UILabel *attributionLabel;
 	
 	CycleStreets *cycleStreets;		//application data
 	IBOutlet RMMapView *mapView;				//map of current area
 	IBOutlet RouteLineView *lineView;		//overlay route lines on top of map
 	IBOutlet BlueCircleView *blueCircleView;	//overlay GPS location
+	RMMapContents		*mapContents;
 	
 	InitialLocation *initialLocation;
 	CLLocationManager *locationManager; //move out of this class into app, or app sub, if/when we generalise.
@@ -101,52 +102,50 @@ typedef enum PlanningStateT PlanningState;
 	UIAlertView *noLocationAlert;
 	
 	PlanningState planningState;
-	PlanningState oldPlanningState;
 	
 	// popover support
 	WEPopoverController *routeplanMenu;
 	Class popoverClass;
 	
 }
-@property (nonatomic, retain) IBOutlet UIToolbar		* toolBar;
-@property (nonatomic, retain) UIBarButtonItem		* locationButton;
-@property (nonatomic, retain) UIBarButtonItem		* activeLocationButton;
-@property (nonatomic, retain) UIBarButtonItem		* nameButton;
-@property (nonatomic, retain) UIBarButtonItem		* routeButton;
-@property (nonatomic, retain) UIBarButtonItem		* deleteButton;
-@property (nonatomic, retain) UIBarButtonItem		* planButton;
-@property (nonatomic, retain) UIBarButtonItem		* startContextLabel;
-@property (nonatomic, retain) UIBarButtonItem		* finishContextLabel;
-@property (nonatomic, retain) UIActivityIndicatorView		* locatingIndicator;
-@property (nonatomic, retain) UIBarButtonItem		* leftFlex;
-@property (nonatomic, retain) UIBarButtonItem		* rightFlex;
-@property (nonatomic, retain) RoutePlanMenuViewController		* routeplanView;
-@property (nonatomic, retain) IBOutlet UILabel		* attributionLabel;
-@property (nonatomic, retain) CycleStreets		* cycleStreets;
-@property (nonatomic, retain) IBOutlet RMMapView		* mapView;
-@property (nonatomic, retain) IBOutlet RouteLineView		* lineView;
-@property (nonatomic, retain) IBOutlet BlueCircleView		* blueCircleView;
-@property (nonatomic, retain) InitialLocation		* initialLocation;
-@property (nonatomic, retain) CLLocationManager		* locationManager;
-@property (nonatomic, retain) CLLocation		* lastLocation;
-@property (nonatomic, retain) MapLocationSearchViewController		* mapLocationSearchView;
-@property (nonatomic, retain) RouteVO		* route;
-@property (nonatomic, retain) RMMarker		* start;
-@property (nonatomic, retain) RMMarker		* end;
-@property (nonatomic, retain) NSMutableArray		* startEndPool;
-@property (nonatomic) BOOL		 doingLocation;
-@property (nonatomic) BOOL		 programmaticChange;
-@property (nonatomic) BOOL		 avoidAccidentalTaps;
-@property (nonatomic) BOOL		 singleTapDidOccur;
-@property (nonatomic) CGPoint		 singleTapPoint;
-@property (nonatomic, retain) UIAlertView		* firstAlert;
-@property (nonatomic, retain) UIAlertView		* clearAlert;
-@property (nonatomic, retain) UIAlertView		* startFinishAlert;
-@property (nonatomic, retain) UIAlertView		* noLocationAlert;
-@property (nonatomic) PlanningState		 planningState;
-@property (nonatomic) PlanningState		 oldPlanningState;
-@property (nonatomic, retain) WEPopoverController		* routeplanMenu;
-@property (nonatomic) Class		 popoverClass;
+@property (nonatomic, strong) IBOutlet UIToolbar		* toolBar;
+@property (nonatomic, strong) UIBarButtonItem		* locationButton;
+@property (nonatomic, strong) UIBarButtonItem		* activeLocationButton;
+@property (nonatomic, strong) UIBarButtonItem		* nameButton;
+@property (nonatomic, strong) UIBarButtonItem		* routeButton;
+@property (nonatomic, strong) UIBarButtonItem		* deleteButton;
+@property (nonatomic, strong) UIBarButtonItem		* planButton;
+@property (nonatomic, strong) UIBarButtonItem		* startContextLabel;
+@property (nonatomic, strong) UIBarButtonItem		* finishContextLabel;
+@property (nonatomic, strong) UIActivityIndicatorView		* locatingIndicator;
+@property (nonatomic, strong) UIBarButtonItem		* leftFlex;
+@property (nonatomic, strong) UIBarButtonItem		* rightFlex;
+@property (nonatomic, strong) RoutePlanMenuViewController		* routeplanView;
+@property (nonatomic, strong) IBOutlet UILabel		* attributionLabel;
+@property (nonatomic, strong) CycleStreets		* cycleStreets;
+@property (nonatomic, strong) IBOutlet RMMapView		* mapView;
+@property (nonatomic, strong) IBOutlet RouteLineView		* lineView;
+@property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
+@property (nonatomic, strong) RMMapContents		* mapContents;
+@property (nonatomic, strong) InitialLocation		* initialLocation;
+@property (nonatomic, strong) CLLocationManager		* locationManager;
+@property (nonatomic, strong) CLLocation		* lastLocation;
+@property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
+@property (nonatomic, strong) RouteVO		* route;
+@property (nonatomic, strong) RMMarker		* start;
+@property (nonatomic, strong) RMMarker		* end;
+@property (nonatomic, strong) NSMutableArray		* startEndPool;
+@property (nonatomic, assign) BOOL		 doingLocation;
+@property (nonatomic, assign) BOOL		 programmaticChange;
+@property (nonatomic, assign) BOOL		 avoidAccidentalTaps;
+@property (nonatomic, assign) BOOL		 singleTapDidOccur;
+@property (nonatomic, assign) CGPoint		 singleTapPoint;
+@property (nonatomic, strong) UIAlertView		* firstAlert;
+@property (nonatomic, strong) UIAlertView		* clearAlert;
+@property (nonatomic, strong) UIAlertView		* startFinishAlert;
+@property (nonatomic, strong) UIAlertView		* noLocationAlert;
+@property (nonatomic, assign) PlanningState		 planningState;
+@property (nonatomic, strong) WEPopoverController		* routeplanMenu;
 
 
 - (IBAction) didZoomIn;

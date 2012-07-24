@@ -23,6 +23,7 @@
 #import "SettingsManager.h"
 #import "SavedRoutesManager.h"
 #import "Model.h"
+#import "RouteVO.h"
 
 @interface RouteManager(Private) 
 
@@ -54,20 +55,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 @synthesize routes;
 @synthesize selectedRoute;
 @synthesize activeRouteDir;
-
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [routes release], routes = nil;
-    [selectedRoute release], selectedRoute = nil;
-    [activeRouteDir release], activeRouteDir = nil;
-	
-    [super dealloc];
-}
-
 
 
 //=========================================================== 
@@ -159,11 +146,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
     
     NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
-                                     [NSNumber numberWithFloat:fromlocation.coordinate.longitude],@"start_longitude",
-                                     [NSNumber numberWithFloat:fromlocation.coordinate.latitude],@"start_latitude",
-                                     [NSNumber numberWithFloat:tolocation.coordinate.longitude],@"finish_longitude",
-                                     [NSNumber numberWithFloat:tolocation.coordinate.latitude],@"finish_latitude",
-                                     layer,@"layer",
+									 
+									 [NSString stringWithFormat:@"%@,%@|%@,%@",BOX_FLOAT(fromlocation.coordinate.longitude),BOX_FLOAT(fromlocation.coordinate.latitude),BOX_FLOAT(tolocation.coordinate.longitude),BOX_FLOAT(tolocation.coordinate.latitude)],@"itinerarypoints",
                                      useDom,@"useDom",
                                      settingsdp.plan,@"plan",
                                      [settingsdp returnKilometerSpeedValue],@"speed",
@@ -179,8 +163,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     
     NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-    [dict release];
-    [request release];
     
     [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
     
@@ -189,6 +171,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 -(void)loadRouteForEndPointsResponse:(ValidationVO*)validation{
+	
+	BetterLog(@"");
     
     
     switch(validation.validationStatus){
@@ -197,7 +181,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		{  
            RouteVO *newroute = [validation.responseDict objectForKey:CALCULATEROUTE];
             
-            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:newroute dp:SAVEDROUTE_RECENTS];
+            [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
                 
             [self warnOnFirstRoute];
             [self selectRoute:newroute];
@@ -205,7 +189,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             
             [[NSNotificationCenter defaultCenter] postNotificationName:CALCULATEROUTERESPONSE object:nil];
             
-            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, added path to map" andMessage:nil];
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, added path to map" andMessage:nil];
         }
         break;
             
@@ -244,10 +228,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     
     NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-    [dict release];
-    [request release];
+	
+	// format routeid to decimal style ie xx,xxx,xxx
+	NSNumberFormatter *currencyformatter=[[NSNumberFormatter alloc]init];
+	[currencyformatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	NSString *result=[currencyformatter stringFromNumber:[NSNumber numberWithInt:[routeid intValue]]];
 
-    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for route %@ on CycleStreets",routeid] andMessage:nil];
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Loading route %@ on CycleStreets",result] andMessage:nil];
+}
+
+-(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan{
+    
+	
+    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+                                     useDom,@"useDom",
+                                     plan,@"plan",
+                                     routeid,@"itinerary",
+                                     nil];
+    
+    NetRequest *request=[[NetRequest alloc]init];
+    request.dataid=RETRIEVEROUTEBYID;
+    request.requestid=ZERO;
+    request.parameters=parameters;
+    request.revisonId=0;
+    request.source=USER;
+    
+    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for %@ route %@ on CycleStreets",[plan capitalizedString], routeid] andMessage:nil];
 }
 
 
@@ -261,14 +270,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
         {    
             RouteVO *newroute=[validation.responseDict objectForKey:RETRIEVEROUTEBYID];
             
-            [[SavedRoutesManager sharedInstance] addRouteToDataProvider:newroute dp:SAVEDROUTE_RECENTS];
+            [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
             
             [self selectRoute:newroute];
 			[self saveRoute:selectedRoute forID:[selectedRoute.routeid intValue]];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
             
-            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, this route is now selected." andMessage:nil];
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, this route is now selected." andMessage:nil];
 		}   
             break;
             
@@ -332,7 +341,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 				
 				[self saveRoute:newroute forID:[newroute.routeid intValue]];
 				
-				[newroute release];
 				
 			}
 			
@@ -381,7 +389,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 - (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements {
 	
 	//update the table.
-	self.selectedRoute = [[Route alloc] initWithElements:elements];
+	Route *route= [[Route alloc] initWithElements:elements];
+	self.selectedRoute=[[RouteVO alloc]init];
+	selectedRoute.segments=route.segments;
+	//
 	
 	if ([selectedRoute routeid] == nil) {
 		[self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
@@ -405,7 +416,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	BetterLog(@"");
 	
 	//update the table.
-	self.selectedRoute = [[Route alloc] initWithElements:elements];
+	Route *route= [[Route alloc] initWithElements:elements];
+	self.selectedRoute=[[RouteVO alloc]init];
+	selectedRoute.segments=route.segments;
+	//
 	
 	if ([selectedRoute routeid] == nil) {
 		[self queryFailure:nil message:@"Unable to find a route with this number."];
@@ -445,9 +459,32 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	[[SavedRoutesManager sharedInstance] selectRoute:route];
 	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	[cycleStreets.files setMiscValue:route.routeid forKey:@"selectedroute"];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:CSROUTESELECTED object:[route routeid]];
 	
 }
+
+
+- (void) clearSelectedRoute{
+	
+	if(selectedRoute!=nil){
+		
+		self.selectedRoute=nil;
+		
+		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+		[cycleStreets.files setMiscValue:ZERO forKey:@"selectedroute"];
+	}
+	
+	
+}
+
+
+-(BOOL)hasSelectedRoute{
+	return selectedRoute!=nil;
+}
+
 
 - (void)warnOnFirstRoute {
 	
@@ -465,7 +502,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 										   cancelButtonTitle:@"OK"
 										   otherButtonTitles:nil];
 		[firstAlert show];		
-		[firstAlert release];
 	} else if ([experienceLevel isEqualToString:@"1"]) {
 		[misc setObject:@"2" forKey:@"experienced"];
 		[cycleStreets.files setMisc:misc];
@@ -476,7 +512,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 											 cancelButtonTitle:@"OK"
 											 otherButtonTitles:nil];
 		[optionsAlert show];
-		[optionsAlert release];
 	}	
 	 
 }
@@ -527,8 +562,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSString *selectedRouteID = [cycleStreets.files miscValueForKey:@"selectedroute"];
-	if(selectedRouteID!=nil)
-		[self loadRouteForID:[selectedRouteID intValue]];
+	
+	
+	if(selectedRouteID!=nil){
+		RouteVO *route=[self loadRouteForID:[selectedRouteID intValue]];
+		
+		if(route!=nil){
+			[self selectRoute:route];
+		}else{
+			[[NSNotificationCenter defaultCenter] postNotificationName:CSLASTLOCATIONLOAD object:nil];
+		}
+		
+	}
 	
 	
 }
@@ -560,8 +605,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
 	[unarchiver finishDecoding];
-	[unarchiver release];
-	[data release];
 	
 	return route;
 }
@@ -571,16 +614,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
 	
-	
-	
 	NSMutableData *data = [[NSMutableData alloc] init];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
 	[archiver encodeObject:route forKey:kROUTEARCHIVEKEY];
 	[archiver finishEncoding];
 	[data writeToFile:routeFile atomically:YES];
 	
-	[data release];
-	[archiver release];
 	
 }
 

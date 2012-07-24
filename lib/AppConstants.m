@@ -21,6 +21,8 @@ NSString *const QUICKSEARCHDATAID=@"QuickSearch";
 NSString *const SEARCHDATAID=@"Search";
 
 NSString *const CSROUTESELECTED=@"CSRouteSelected";
+NSString *const CSLASTLOCATIONLOAD=@"CSLastLocationLoad";
+
 
 NSString *const LOGINRESPONSE=@"LOGINRESPONSE";
 NSString *const REGISTERRESPONSE=@"REGISTERRESPONSE";
@@ -35,6 +37,7 @@ NSString *const UPLOADUSERPHOTO=@"UploadUserPhotos";
 NSString *const LOCATIONFEATURES=@"LocationFeatures";
 NSString *const POILISTING=@"PoiListing";
 NSString *const POICATEGORYLOCATION=@"PoiCategoryLocation";
+NSString *const PHOTOCATEGORIES=@"PhotoCategories";
 
 //INTERNAL
 NSString *const CALCULATEROUTERESPONSE=@"CALCULATEROUTERESPONSE";
@@ -51,8 +54,17 @@ NSString *const MAPSTYLECHANGED=@"MAPSTYLECHANGED";
 
 NSString *const GPSLOCATIONUPDATE=@"GPSLOCATIONUPDATE";
 NSString *const GPSLOCATIONFAILED=@"GPSLOCATIONFAILED";
+NSString *const GPSLOCATIONDISABLED=@"GPSLOCATIONDISABLED";
 NSString *const GPSLOCATIONCOMPLETE=@"GPSLOCATIONCOMPLETE";
 
+NSString *const EVENTMAPROUTEPLAN=@"EVENTMAPROUTEPLAN";
+NSString *const PHOTOWIZARDCATEGORYUPDATE=@"PHOTOWIZARDCATEGORYUPDATE";
+
+NSString *const CSPLANTYPE_FASTEST=@"fastest";
+NSString *const CSPLANTYPE_SHORTEST=@"shortest";
+NSString *const CSPLANTYPE_BALANCED=@"balanced";
+NSString *const CSPLANTYPE_QUIETEST=@"quietest";
+NSString *const CSPLANTYPE_NONE=@"csplan_none";
 
 //
 /***********************************************
@@ -67,7 +79,52 @@ NSString *const SAVEDROUTE_RECENTS=@"SAVEDROUTE_RECENTS";
 
 @implementation AppConstants
 
+// returns username/passwords for requests that require authentication
++(NSString*)authenticationForRequest:(NSString*)dataid ofType:(NSString*)type{
+	
+//	if([dataid isEqualToString:NEWS] || [dataid isEqualToString:WATCHRUK] || [dataid isEqualToString:TIPSTER]){
+//		
+//		if ([type isEqualToString:AUTHENTICATION_USERNAME]) {
+//			return RACINGUKCMS_USERNAME;
+//		}
+//		
+//		if ([type isEqualToString:AUTHENTICATION_PASSWORD]) {
+//			return RACINGUKCMS_PASSWORD;
+//		}
+//		
+//	}
+	return nil;
+}
 
++ (CSRoutePlanType)planStringTypeToConstant:(NSString*)stringType{
+	
+	if([stringType isEqualToString:CSPLANTYPE_FASTEST]){
+		return CSRoutePlanTypeFastest;
+	}else if ([stringType isEqualToString:CSPLANTYPE_BALANCED]){
+		return CSRoutePlanTypeBalanced;
+	}else if ([stringType isEqualToString:CSPLANTYPE_SHORTEST]) {
+		return CSRoutePlanTypeShortest;
+	}else if ([stringType isEqualToString:CSPLANTYPE_QUIETEST]) {
+		return CSRoutePlanTypeQuietest;
+	}
+	return CSRoutePlanTypeNone;
+}
+
+
++ (NSString*)planConstantToString:(CSRoutePlanType)parserType{
+	
+	if(parserType==CSRoutePlanTypeFastest){
+		return CSPLANTYPE_FASTEST;
+	}else if (parserType==CSRoutePlanTypeBalanced){
+		return CSPLANTYPE_BALANCED;
+	}else if (parserType==CSRoutePlanTypeShortest) {
+		return CSPLANTYPE_SHORTEST;
+	}else if (parserType==CSRoutePlanTypeQuietest) {
+		return CSPLANTYPE_QUIETEST;
+	}
+	
+    return CSPLANTYPE_NONE;
+}
 
 
 @end

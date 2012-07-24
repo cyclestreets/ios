@@ -26,14 +26,16 @@
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
-@property (nonatomic, retain)	NSMutableDictionary		*routes;
-@property (nonatomic, retain)	RouteVO		*selectedRoute;
-@property (nonatomic, retain)	NSString		*activeRouteDir;
+@property (nonatomic, strong)	NSMutableDictionary		*routes;
+@property (nonatomic, strong)	RouteVO		*selectedRoute;
+@property (nonatomic, strong)	NSString		*activeRouteDir;
 
 
 - (void) runQuery:(Query *)query;
 - (void) runRouteIdQuery:(Query *)query;
 - (void) selectRoute:(RouteVO *)route;
+- (void) clearSelectedRoute;
+-(BOOL)hasSelectedRoute;
 
 //new
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation;
@@ -41,6 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 -(void)removeRoute:(NSString*)routeid;
 
 -(void)loadRouteWithIdentifier:(NSString*)routeid;
+-(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan;
 -(void)loadSavedSelectedRoute;
 
 - (RouteVO *)loadRouteForID:(NSInteger) routeIdentifier;

@@ -28,34 +28,63 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapView.h"
 #import "CycleStreets.h"
 #import "Files.h"
+#import "UserLocationManager.h"
+#import "ButtonUtilities.h"
+#import "RouteManager.h"
 
-static double FADE_DELAY = 5.0;
-static double FADE_DURATION = 1.7;
+static double FADE_DELAY = 0;
+static double FADE_DURATION = 1.0;
+static int CLOSEBUTTONTAG=7777;
+static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
+
 
 @implementation InitialLocation
 
 @synthesize mapView;
-@synthesize locationManager;
 @synthesize welcomeView;
 @synthesize controller;
-@synthesize errorAlert;
+@synthesize closeButton;
+
 
 - (id) initWithMapView:(RMMapView *)newMapView withController:(UIViewController *)newController {
 	if (self = [super init]) {
 		mapView = newMapView;
-		[mapView retain];
 		controller = newController;
-		[controller retain];
+		
+		[[NSNotificationCenter defaultCenter]
+		 addObserver:self
+		 selector:@selector(didReceiveNotification:)
+		 name:GPSLOCATIONCOMPLETE
+		 object:nil];
+		
+		[[NSNotificationCenter defaultCenter]
+		 addObserver:self
+		 selector:@selector(didReceiveNotification:)
+		 name:GPSLOCATIONFAILED
+		 object:nil];
+		
+		
+		
+		
+		
 	}
 	return self;
 }
 
-- (CLLocationCoordinate2D)defaultCoordinate {
-	CLLocationCoordinate2D coordinate;
-	coordinate.latitude = 51.40;
-	coordinate.longitude = 0.0;
-	return coordinate;
+
+-(void)didReceiveNotification:(NSNotification*)notification{
+	
+	
+	if([notification.name isEqualToString:GPSLOCATIONCOMPLETE]){
+		CLLocation *location=(CLLocation*) notification.object;
+		[self locationDidComplete:location.coordinate];
+	}
+	if([notification.name isEqualToString:GPSLOCATIONFAILED]){
+		[self locationDidFail];
+	}
+	
 }
+
 
 - (void) save:(CLLocationCoordinate2D)location {
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
@@ -69,6 +98,7 @@ static double FADE_DURATION = 1.7;
 
 - (UIView *)loadWelcomeView {
 	
+	
 	static NSString *CellIdentifier = @"InitialLocationView";
 	
 	UIView *view = nil;
@@ -77,12 +107,22 @@ static double FADE_DURATION = 1.7;
 	for (id obj in nib) {
 		if ([obj isKindOfClass:[UIView class]]) {
 			view = obj;
+			
+			self.closeButton=(UIButton*)[view viewWithTag:CLOSEBUTTONTAG];
+			
+			[ButtonUtilities styleIBButton:closeButton type:@"green" text:@"Plan a route"];
+			[closeButton addTarget:self action:@selector(closeOverlayView:) forControlEvents:UIControlEventTouchUpInside];
+			closeButton.enabled=![CLLocationManager locationServicesEnabled];
+			
 		}
 	}
 	return view;
 }
 
-- (void) query {
+- (void) initiateLocation {
+	
+	BetterLog(@"");
+	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSDictionary *misc = [cycleStreets.files misc];
 	NSString *sLat = [misc valueForKey:@"latitude"];
@@ -91,37 +131,67 @@ static double FADE_DURATION = 1.7;
 	CLLocationCoordinate2D initLocation;
 	if (sLat != nil && sLon != nil) {
 		
+		BOOL hasSelectedRoute=[[RouteManager sharedInstance] hasSelectedRoute];
+		
+		if(hasSelectedRoute==NO){
+		
 		initLocation.latitude = [sLat doubleValue];
 		initLocation.longitude = [sLon doubleValue];
 		[self.mapView moveToLatLong:initLocation];
+			
+		}
 		 
 		self.mapView.hidden = NO;
 	} else {
-		if (self.locationManager == nil) {
-			self.locationManager = [[[CLLocationManager alloc] init] autorelease];
-			self.locationManager.delegate = self;
-		}
-		[self.mapView moveToLatLong:[self defaultCoordinate]];
-		[self.locationManager startUpdatingLocation];
+		
+		if([CLLocationManager locationServicesEnabled]==YES){
+			
+			BOOL hasSelectedRoute=[[RouteManager sharedInstance] hasSelectedRoute];
+			
+			if(hasSelectedRoute==NO){
+			
+				[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+			
+				[self.mapView moveToLatLong:[UserLocationManager defaultCoordinate]];
+				
+			}
+			
+		}else {
+			[self locationDidFail];
+		}		
 		if (self.welcomeView == nil) {
 			self.welcomeView = [self loadWelcomeView];
 		}
 		[self.controller.view addSubview:self.welcomeView];
+		
 	}
 }
 
-- (void) showMap {
-	self.mapView.hidden = NO;
+
+-(IBAction)closeOverlayView:(id)sender{
+	
+	[UIView animateWithDuration:FADE_DURATION
+						  delay:FADE_DELAY 
+						options:UIViewAnimationCurveLinear 
+					 animations:^{ 
+						 self.welcomeView.alpha=0.0f;
+					 }
+					 completion:^(BOOL finished){
+						 self.mapView.hidden = NO;
+						 [self.welcomeView removeFromSuperview];
+					 }];
+	
+	
 }
 
-- (void) finish {
-	[self.locationManager stopUpdatingLocation];
-	[UIView beginAnimations:@"InitialLocationAnimation" context:nil];
-	[UIView setAnimationDuration:FADE_DURATION];
-	[self.welcomeView setAlpha:0.0];
-	[UIView commitAnimations];
-	[self.welcomeView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:FADE_DURATION];
-	[self performSelector:@selector(showMap) withObject:nil afterDelay:FADE_DURATION];
+
+- (void)locationDidComplete:(CLLocationCoordinate2D)coordinate {
+	
+	[self startAt:coordinate];
+	
+	closeButton.enabled=YES;
+	
+	
 }
 
 - (void)startAt:(CLLocationCoordinate2D)coordinate {
@@ -131,43 +201,16 @@ static double FADE_DURATION = 1.7;
 	[self save:coordinate];	
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation {
-	[self startAt:newLocation.coordinate];
-	[self performSelector:@selector(finish) withObject:nil afterDelay:FADE_DELAY];
+
+
+
+- (void)locationDidFail{
+	
+	self.mapView.contents.zoom = 12;
+	CLLocationCoordinate2D coordinate = [UserLocationManager defaultCoordinate];
+	[self locationDidComplete:coordinate];
+	
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if (alertView == self.errorAlert) {
-		self.mapView.contents.zoom = 6;
-		CLLocationCoordinate2D coordinate = [self defaultCoordinate];
-		[self startAt:coordinate];
-		[self finish];
-	}
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error {
-	self.errorAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"
-												 message:@"CycleStreets is operating without location based features."
-												delegate:self
-									   cancelButtonTitle:@"OK"
-									   otherButtonTitles:nil]
-					  autorelease];
-	[self.errorAlert show];
-}
-
-- (void) dealloc {
-	[mapView release];
-	mapView = nil;
-	[locationManager release];
-	locationManager = nil;
-	[controller release];
-	controller = nil;
-	self.welcomeView = nil;
-	self.errorAlert = nil;
-	[super dealloc];
-}
 
 @end

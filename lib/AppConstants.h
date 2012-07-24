@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+#define ENABLEDEBUGTRACE 1
+
+
+enum  {
+	
+	CSRoutePlanTypeFastest=0,
+	CSRoutePlanTypeBalanced=1,
+	CSRoutePlanTypeQuietest=2,
+	CSRoutePlanTypeShortest=3,
+	CSRoutePlanTypeNone=-1
+};
+typedef int CSRoutePlanType;
+
 
 extern NSString *const DEVICETYPE;
 
@@ -17,6 +30,8 @@ extern NSString *const DEVICETYPE;
 extern NSString *const QUICKSEARCHDATAID;
 extern NSString *const SEARCHDATAID;
 extern NSString *const CSROUTESELECTED;
+extern NSString *const CSLASTLOCATIONLOAD;
+
 
 extern NSString *const LOGINRESPONSE;
 extern NSString *const REGISTERRESPONSE;
@@ -31,6 +46,7 @@ extern NSString *const UPLOADUSERPHOTO;
 extern NSString *const LOCATIONFEATURES;
 extern NSString *const POILISTING;
 extern NSString *const POICATEGORYLOCATION;
+extern NSString *const PHOTOCATEGORIES;
 
 // INTERNAL
 extern NSString *const CALCULATEROUTERESPONSE;
@@ -48,8 +64,16 @@ extern NSString *const MAPSTYLECHANGED;
 extern NSString *const GPSLOCATIONUPDATE;
 extern NSString *const GPSLOCATIONFAILED;
 extern NSString *const GPSLOCATIONCOMPLETE;
+extern NSString *const GPSLOCATIONDISABLED;
 
+extern NSString *const EVENTMAPROUTEPLAN;
+extern NSString *const PHOTOWIZARDCATEGORYUPDATE;
 
+extern NSString *const CSPLANTYPE_FASTEST;
+extern NSString *const CSPLANTYPE_SHORTEST;
+extern NSString *const CSPLANTYPE_BALANCED;
+extern NSString *const CSPLANTYPE_QUIETEST;
+extern NSString *const CSPLANTYPE_NONE;
 
 
 extern NSString *const MILES;
@@ -64,5 +88,9 @@ extern NSString *const SAVEDROUTE_RECENTS;
 	
 }
 
++(NSString*)authenticationForRequest:(NSString*)dataid ofType:(NSString*)type;
+
++ (CSRoutePlanType)planStringTypeToConstant:(NSString*)stringType;
++ (NSString*)planConstantToString:(CSRoutePlanType)parserType;
 
 @end

@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
 #import "LayoutBox.h"
-#import "CategoryLoader.h"
+#import "PhotoCategoryManager.h"
 #import "UploadPhotoVO.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "AccountViewController.h"
+#import "RMMapView.h"
+#import "CopyLabel.h"
+#import "WEPopoverController.h"
+#import "PhotoWizardCategoryMenuViewController.h"
 
 #define MAXWIZARDVIEWS 7
 
@@ -28,8 +32,8 @@ enum  {
 };
 typedef int PhotoWizardViewState;
 
-@interface PhotoWizardViewController : SuperViewController<UIPickerViewDelegate,UIPickerViewDataSource,
-UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>{
+@interface PhotoWizardViewController : SuperViewController<UITextViewDelegate,
+UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,RMMapViewDelegate,WEPopoverControllerDelegate>{
     
     //main ui
     PhotoWizardViewState			viewState;
@@ -39,6 +43,9 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
 	int								activePage; // page control index
 	int								maxVisitedPage; // max page user has reached
     NSMutableArray                  *viewArray;
+	
+	IBOutlet    UIBarButtonItem					*nextButton;
+	IBOutlet    UIBarButtonItem					*prevButton;
     
     IBOutlet    UILabel             *pageTitleLabel;
     IBOutlet    UILabel             *pageNumberLabel;
@@ -52,13 +59,14 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
     
     IBOutlet UIView                 *infoView;
     IBOutlet UIButton				*continueButton;
-	IBOutlet UIButton				*cancelViewButton;
     
     
     // photo picker
     IBOutlet    UIView              *photoPickerView;
 	IBOutlet UIImageView			*imagePreview;
 	IBOutlet UILabel				*photoSizeLabel;
+	IBOutlet UILabel				*photolocationLabel;
+	IBOutlet UILabel				*photodateLabel;
 	IBOutlet UIButton				*cameraButton;
 	IBOutlet UIButton				*libraryButton;
 	
@@ -66,8 +74,9 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
 	
 	// photo location
 	IBOutlet	UIView				*photoLocationView;
-	IBOutlet MKMapView				*locationMapView;	//overlay GPS location
-	MKAnnotationView				*locationMarker;
+	IBOutlet RMMapView				*locationMapView;	//overlay GPS location
+	RMMapContents					*locationMapContents;
+	RMMarker						*locationMapMarker;
 	IBOutlet UILabel				*locationLabel;
 	IBOutlet UIButton				*locationUpdateButton;
 	IBOutlet UIButton				*locationResetButton;
@@ -83,14 +92,18 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
     IBOutlet	UILabel				*categoryTypeLabel;
 	IBOutlet	UILabel				*categoryDescLabel;
     IBOutlet    UIPickerView        *pickerView;
-	// category model
-    CategoryLoader                  *categoryLoader;
-    NSInteger                       categoryIndex;
-    NSInteger                       metacategoryIndex;
+	
+	IBOutlet	UIButton			*categoryButton;
+	IBOutlet	UIButton			*categoryFeaturebutton;
+	
+	
+	
+	PhotoWizardCategoryMenuViewController  *categoryMenuView;
     
     
     // photo description and review
     IBOutlet    UIView              *photodescriptionView;
+	IBOutlet	UIView				*textViewAccessoryView;
 	IBOutlet	UIImageView			*descImagePreview;
     IBOutlet    UITextView          *photodescriptionField;
     
@@ -101,64 +114,85 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
 	IBOutlet	UIButton			*uploadButton;
 	IBOutlet	UIButton			*cancelButton;
 	IBOutlet	UIProgressView		*uploadProgressView;
-	IBOutlet	UILabel				*uploadLabel;
+	IBOutlet	ExpandedUILabel				*uploadLabel;
     AccountViewController           *loginView;
     
     
     // result view
     IBOutlet    UIView              *photoResultView;
-    IBOutlet    UILabel             *photoResultURLLabel;
+    IBOutlet    CopyLabel             *photoResultURLLabel;
 	IBOutlet    UIButton            *photoMapButton;
 	
 	
+	// popover support
+	WEPopoverController *categoryMenu;
+	Class popoverClass;
 	
 }
-@property (nonatomic, assign)	PhotoWizardViewState			viewState;
-@property (nonatomic, retain)	IBOutlet UIScrollView			*pageScrollView;
-@property (nonatomic, retain)	IBOutlet UIPageControl			*pageControl;
-@property (nonatomic, retain)	LayoutBox			*pageContainer;
-@property (nonatomic, assign)	int			activePage;
-@property (nonatomic, assign)	int			maxVisitedPage;
-@property (nonatomic, retain)	NSMutableArray			*viewArray;
-@property (nonatomic, retain)	IBOutlet UILabel			*pageTitleLabel;
-@property (nonatomic, retain)	IBOutlet UILabel			*pageNumberLabel;
-@property (nonatomic, retain)	UIScrollView			*locationsc;
-@property (nonatomic, retain)	UIPanGestureRecognizer			*locpangesture;
-@property (nonatomic, retain)	UploadPhotoVO			*uploadImage;
-@property (nonatomic, retain)	IBOutlet UIView			*infoView;
-@property (nonatomic, retain)	IBOutlet UIButton			*continueButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*cancelViewButton;
-@property (nonatomic, retain)	IBOutlet UIView			*photoPickerView;
-@property (nonatomic, retain)	IBOutlet UIImageView			*imagePreview;
-@property (nonatomic, retain)	IBOutlet UILabel			*photoSizeLabel;
-@property (nonatomic, retain)	IBOutlet UIButton			*cameraButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*libraryButton;
-@property (nonatomic, retain)	IBOutlet UIView			*photoLocationView;
-@property (nonatomic, retain)	IBOutlet MKMapView			*locationMapView;
-@property (nonatomic, retain)	MKAnnotationView			*locationMarker;
-@property (nonatomic, retain)	IBOutlet UILabel			*locationLabel;
-@property (nonatomic, retain)	IBOutlet UIButton			*locationUpdateButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*locationResetButton;
-@property (nonatomic, assign)	BOOL			avoidAccidentalTaps;
-@property (nonatomic, assign)	BOOL			singleTapDidOccur;
-@property (nonatomic, assign)	CGPoint			singleTapPoint;
-@property (nonatomic, assign)	BOOL			locationManagerIsLocating;
-@property (nonatomic, retain)	IBOutlet UIView			*categoryView;
-@property (nonatomic, retain)	IBOutlet UILabel			*categoryTypeLabel;
-@property (nonatomic, retain)	IBOutlet UILabel			*categoryDescLabel;
-@property (nonatomic, retain)	IBOutlet UIPickerView			*pickerView;
-@property (nonatomic, retain)	CategoryLoader			*categoryLoader;
-@property (nonatomic, assign)	NSInteger			categoryIndex;
-@property (nonatomic, assign)	NSInteger			metacategoryIndex;
-@property (nonatomic, retain)	IBOutlet UIView			*photodescriptionView;
-@property (nonatomic, retain)	IBOutlet UIImageView			*descImagePreview;
-@property (nonatomic, retain)	IBOutlet UITextView			*photodescriptionField;
-@property (nonatomic, retain)	IBOutlet UIView			*photoUploadView;
-@property (nonatomic, retain)	IBOutlet UIButton			*uploadButton;
-@property (nonatomic, retain)	IBOutlet UIButton			*cancelButton;
-@property (nonatomic, retain)	IBOutlet UIProgressView			*uploadProgressView;
-@property (nonatomic, retain)	IBOutlet UILabel			*uploadLabel;
-@property (nonatomic, retain)	AccountViewController			*loginView;
-@property (nonatomic, retain)	IBOutlet UIView			*photoResultView;
-@property (nonatomic, retain)	IBOutlet  UIButton             *photoMapButton;
+@property (nonatomic, assign) PhotoWizardViewState		 viewState;
+@property (nonatomic, strong) IBOutlet UIScrollView		* pageScrollView;
+@property (nonatomic, strong) IBOutlet UIPageControl		* pageControl;
+@property (nonatomic, strong) LayoutBox		* pageContainer;
+@property (nonatomic, assign) int		 activePage;
+@property (nonatomic, assign) int		 maxVisitedPage;
+@property (nonatomic, strong) NSMutableArray		* viewArray;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem		* nextButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem		* prevButton;
+@property (nonatomic, strong) IBOutlet UILabel		* pageTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* pageNumberLabel;
+@property (nonatomic, strong) UIScrollView		* locationsc;
+@property (nonatomic, strong) UIPanGestureRecognizer		* locpangesture;
+@property (nonatomic, strong) UploadPhotoVO		* uploadImage;
+@property (nonatomic, strong) IBOutlet UIView		* infoView;
+@property (nonatomic, strong) IBOutlet UIButton		* continueButton;
+@property (nonatomic, strong) IBOutlet UIView		* photoPickerView;
+@property (nonatomic, strong) IBOutlet UIImageView		* imagePreview;
+@property (nonatomic, strong) IBOutlet UILabel		* photoSizeLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* photolocationLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* photodateLabel;
+@property (nonatomic, strong) IBOutlet UIButton		* cameraButton;
+@property (nonatomic, strong) IBOutlet UIButton		* libraryButton;
+@property (nonatomic, strong) IBOutlet UIView		* photoLocationView;
+@property (nonatomic, strong) IBOutlet RMMapView		* locationMapView;
+@property (nonatomic, strong) RMMapContents		* locationMapContents;
+@property (nonatomic, strong) RMMarker		* locationMapMarker;
+@property (nonatomic, strong) IBOutlet UILabel		* locationLabel;
+@property (nonatomic, strong) IBOutlet UIButton		* locationUpdateButton;
+@property (nonatomic, strong) IBOutlet UIButton		* locationResetButton;
+@property (nonatomic, assign) BOOL		 avoidAccidentalTaps;
+@property (nonatomic, assign) BOOL		 singleTapDidOccur;
+@property (nonatomic, assign) CGPoint		 singleTapPoint;
+@property (nonatomic, assign) BOOL		 locationManagerIsLocating;
+@property (nonatomic, strong) IBOutlet UIView		* categoryView;
+@property (nonatomic, strong) IBOutlet UILabel		* categoryTypeLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* categoryDescLabel;
+@property (nonatomic, strong) IBOutlet UIPickerView		* pickerView;
+@property (nonatomic, strong) IBOutlet UIButton		* categoryButton;
+@property (nonatomic, strong) IBOutlet UIButton		* categoryFeaturebutton;
+@property (nonatomic, strong) PhotoWizardCategoryMenuViewController		* categoryMenuView;
+@property (nonatomic, strong) IBOutlet UIView		* photodescriptionView;
+@property (nonatomic, strong) IBOutlet UIView		* textViewAccessoryView;
+@property (nonatomic, strong) IBOutlet UIImageView		* descImagePreview;
+@property (nonatomic, strong) IBOutlet UITextView		* photodescriptionField;
+@property (nonatomic, strong) IBOutlet UIView		* photoUploadView;
+@property (nonatomic, strong) IBOutlet UIButton		* uploadButton;
+@property (nonatomic, strong) IBOutlet UIButton		* cancelButton;
+@property (nonatomic, strong) IBOutlet UIProgressView		* uploadProgressView;
+@property (nonatomic, strong) IBOutlet ExpandedUILabel		* uploadLabel;
+@property (nonatomic, strong) AccountViewController		* loginView;
+@property (nonatomic, strong) IBOutlet UIView		* photoResultView;
+@property (nonatomic, strong) IBOutlet CopyLabel		* photoResultURLLabel;
+@property (nonatomic, strong) IBOutlet UIButton		* photoMapButton;
+@property (nonatomic, strong) WEPopoverController		* categoryMenu;
+
+
+-(IBAction)cameraButtonSelected:(id)sender;
+-(IBAction)libraryButtonSelected:(id)sender;
+-(IBAction)cancelUploadPhoto:(id)sender;
+-(IBAction)closeWindowButtonSelected:(id)sender;
+-(IBAction)textViewKeyboardShouldClear:(id)sender;
+
+-(IBAction)navigateToPreviousView:(id)sender;
+-(IBAction)navigateToNextView:(id)sender;
+
 @end

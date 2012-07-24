@@ -15,13 +15,18 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UserLocationManager.h"
 #import "CycleStreets.h"
-#import "UIViewAdditions.h"
+#import "UIView+Additions.h"
 #import "ButtonUtilities.h"
 #import "StyleManager.h"
-#import "PhotoMapImageLocationViewController.h"
+#import "PhotoWizardLocationViewController.h"
 #import "UserAccount.h"
 #import "PhotoManager.h"
-#import "CycleStreetsAppDelegate.h"
+#import "AppDelegate.h"
+#import "MapViewController.h"
+#import "Markers.h"
+
+static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
+
 
 
 @interface PhotoWizardViewController(Private) 
@@ -29,6 +34,8 @@
 -(void)initialiseViewState:(PhotoWizardViewState)state;
 -(void)navigateToViewState:(PhotoWizardViewState)state;
 -(void)updateGlobalViewUIForState;
+-(void)updateView;
+-(IBAction)navigateToNextView:(id)sender;
 
 -(void)initInfoView:(PhotoWizardViewState)state;
 -(void)initPhotoView:(PhotoWizardViewState)state;
@@ -36,18 +43,28 @@
 -(void)initLocationView:(PhotoWizardViewState)state;
 -(void)updateLocationView;
 -(void)initCategoryView:(PhotoWizardViewState)state;
+-(void)updateCategoryView;
+-(IBAction)showCategoryMenu:(id)sender;
+-(void)didSelectCategoryFromMenu:(NSNotification*)notification;
+
 -(void)initDescriptionView:(PhotoWizardViewState)state;
+-(void)updateDescriptionView;
+-(void)resetDescriptionField;
 -(void)initUploadView:(PhotoWizardViewState)state;
 -(void)initCompleteView:(PhotoWizardViewState)state;
 
 -(void)addViewToPageContainer:(NSMutableDictionary*)viewDict;
 
 
+-(IBAction)textViewKeyboardShouldHide:(id)sender;
+
 -(void)updatePageControlExtents;
 
 -(IBAction)pageControlValueChanged:(id)sender;
 
 -(void)loadLocationFromPhoto;
+-(void)displayDefaultLocation;
+-(void)updateLocationMapViewForLocation:(CLLocation*)location;
 - (void)startlocationManagerIsLocating;
 - (void)stoplocationManagerIsLocating;
 - (void)PanGestureCaptured:(UIPanGestureRecognizer *)gesture;
@@ -56,6 +73,8 @@
 
 -(void)didRecievePhotoImageUploadResponse:(NSDictionary*)dict;
 -(void)didRecieveFileUploadResponse:(NSDictionary*)dict;
+
+-(void)updateUploadUIState:(NSString*)state;
 
 @end
 
@@ -68,6 +87,8 @@
 @synthesize activePage;
 @synthesize maxVisitedPage;
 @synthesize viewArray;
+@synthesize nextButton;
+@synthesize prevButton;
 @synthesize pageTitleLabel;
 @synthesize pageNumberLabel;
 @synthesize locationsc;
@@ -75,15 +96,17 @@
 @synthesize uploadImage;
 @synthesize infoView;
 @synthesize continueButton;
-@synthesize cancelViewButton;
 @synthesize photoPickerView;
 @synthesize imagePreview;
 @synthesize photoSizeLabel;
+@synthesize photolocationLabel;
+@synthesize photodateLabel;
 @synthesize cameraButton;
 @synthesize libraryButton;
 @synthesize photoLocationView;
 @synthesize locationMapView;
-@synthesize locationMarker;
+@synthesize locationMapContents;
+@synthesize locationMapMarker;
 @synthesize locationLabel;
 @synthesize locationUpdateButton;
 @synthesize locationResetButton;
@@ -95,10 +118,11 @@
 @synthesize categoryTypeLabel;
 @synthesize categoryDescLabel;
 @synthesize pickerView;
-@synthesize categoryLoader;
-@synthesize categoryIndex;
-@synthesize metacategoryIndex;
+@synthesize categoryButton;
+@synthesize categoryFeaturebutton;
+@synthesize categoryMenuView;
 @synthesize photodescriptionView;
+@synthesize textViewAccessoryView;
 @synthesize descImagePreview;
 @synthesize photodescriptionField;
 @synthesize photoUploadView;
@@ -108,7 +132,10 @@
 @synthesize uploadLabel;
 @synthesize loginView;
 @synthesize photoResultView;
+@synthesize photoResultURLLabel;
 @synthesize photoMapButton;
+@synthesize categoryMenu;
+
 
 
 
@@ -124,6 +151,11 @@
     
     [notifications addObject:UPLOADUSERPHOTORESPONSE];
 	[notifications addObject:FILEUPLOADPROGRESS];
+	[notifications addObject:GPSLOCATIONCOMPLETE];
+	[notifications addObject:PHOTOWIZARDCATEGORYUPDATE];
+	
+	[notifications addObject:UIKeyboardWillShowNotification];
+	[notifications addObject:UIKeyboardWillHideNotification];
 	
 	[super listNotificationInterests];
 	
@@ -142,6 +174,14 @@
 	if([notification.name isEqualToString:FILEUPLOADPROGRESS]){
         [self didRecieveFileUploadResponse:notification.userInfo];
     }
+	
+	if([notification.name isEqualToString:GPSLOCATIONCOMPLETE]){
+        [self UserDidUpdatePhotoLocation:notification.object];
+    }
+	
+	if([notification.name isEqualToString:PHOTOWIZARDCATEGORYUPDATE]){
+        [self didSelectCategoryFromMenu:notification];
+    }
 }
 
 
@@ -157,8 +197,9 @@
 		
 	}else {
 		
+		BetterLog(@"[ERROR] Upload Error was %@",[dict objectForKey:MESSAGE]);
 		
-		// show error message
+		[self updateUploadUIState:@"error"];
 		
 	}
     
@@ -171,12 +212,16 @@
  ***********************************************/
 //
 -(void)didRecieveFileUploadResponse:(NSDictionary*)dict{
+	
+	BetterLog(@"uploaddict=%@",dict);
     
-	int totalBytesWritten=[[dict objectForKey:@"totalBytesWritten"] intValue];
-	//int bytesWritten=[[dict objectForKey:@"bytesWritten"] intValue];
-	int totalBytesExpectedToWrite=[[dict objectForKey:@"totalBytesExpectedToWrite"] intValue];
+	float totalBytesWritten=[[dict objectForKey:@"totalBytesWritten"] floatValue];
+	//Not used: int bytesWritten=[[dict objectForKey:@"bytesWritten"] intValue];
+	float totalBytesExpectedToWrite=[[dict objectForKey:@"totalBytesExpectedToWrite"] floatValue];
 	
 	float percent=totalBytesWritten/totalBytesExpectedToWrite;
+	
+	BetterLog(@"percent=%f",percent);
 	
     uploadProgressView.progress=percent;
     
@@ -207,8 +252,8 @@
 
 -(void)createPersistentUI{
     
-    categoryIndex=0;
-    metacategoryIndex=0;
+    
+	popoverClass = [WEPopoverController class];
 	
     viewState=PhotoWizardViewStateInfo;
 	activePage=0;
@@ -238,6 +283,7 @@
     pageControl.numberOfPages=1;
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
+
 	
 	[self initialiseViewState:PhotoWizardViewStateInfo];
     
@@ -265,6 +311,8 @@
  ***********************************************/
 //
 -(void)initialiseViewState:(PhotoWizardViewState)state{
+	
+	BetterLog(@"");
 	
 	// if view is not initialised 
 	// create and add
@@ -327,8 +375,21 @@
 
 	}
 	
+	
 	if(state>maxVisitedPage){
 		maxVisitedPage=state;
+	}
+	
+	if (maxVisitedPage==activePage) {
+		nextButton.enabled=NO;
+	}else {
+		nextButton.enabled=YES;
+	}
+	
+	if (activePage==0) {
+		prevButton.enabled=NO;
+	}else {
+		prevButton.enabled=YES;
 	}
 	
 	[self updatePageControlExtents];
@@ -338,9 +399,15 @@
 
 -(void)removeViewState:(PhotoWizardViewState)state{
     
-    // removes enabled state from pages
-    // so page control stops showing access
+    maxVisitedPage=state-1;
+	
+	if (maxVisitedPage==activePage) {
+		nextButton.enabled=NO;
+	}else {
+		nextButton.enabled=YES;
+	}
     
+	[self updatePageControlExtents];
 }
 
 
@@ -371,18 +438,93 @@
 }
 
 
+-(IBAction)navigateToNextView:(id)sender{
+	
+	if(activePage<maxVisitedPage){
+		[self navigateToViewState:activePage+1];
+	}
+
+}
+
+-(IBAction)navigateToPreviousView:(id)sender{
+	
+	if(activePage>0){
+		[self navigateToViewState:activePage-1];
+	}
+	
+}
+
+
+-(IBAction)closeWindowButtonSelected:(id)sender{
+	
+	[self dismissViewControllerAnimated:YES completion:nil];
+	
+}
+
+
 -(void)updateGlobalViewUIForState{
+	
+	BetterLog(@"");
+	
 	pageTitleLabel.text=[[viewArray objectAtIndex:activePage] objectForKey:@"title"];
     pageNumberLabel.text=[NSString stringWithFormat:@"%i of %i",activePage+1, [viewArray count]];
 	
-	// should call updateView for State
+	[self updateView];
+	
+	if (maxVisitedPage==activePage) {
+		nextButton.enabled=NO;
+	}else {
+		nextButton.enabled=YES;
+	}
+	
+	if (activePage==0) {
+		prevButton.enabled=NO;
+	}else {
+		prevButton.enabled=YES;
+	}
+}
+
+-(void)updateView{
+	
+	
+	switch (viewState) {
+			
+		case PhotoWizardViewStateInfo:
+		break;
+			
+		case PhotoWizardViewStatePhoto:
+			[self updatePhotoView];
+		break;
+			
+		case PhotoWizardViewStateLocation:			
+			[self updateLocationView];
+		break;
+			
+		case PhotoWizardViewStateCategory:
+			[self updateCategoryView];
+		break;
+			
+		case PhotoWizardViewStateDescription:
+			[self updateDescriptionView];
+		break;
+			
+		case PhotoWizardViewStateUpload:
+		break;
+			
+		case PhotoWizardViewStateResult:
+		break;
+			
+		default:
+		break;
+	}
+		
 }
 
 
 
 -(void)addViewToPageContainer:(NSMutableDictionary*)viewDict{
 	
-	[viewDict setObject:@"created" forKey:BOX_BOOL(YES)];
+	[viewDict setObject:BOX_BOOL(YES) forKey:@"created"];
 	UIScrollView *sc=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, pageScrollView.height)];
 	UIView *stateview=[viewDict objectForKey:@"view"];
 	
@@ -407,6 +549,7 @@
 	CGPoint offset=pageScrollView.contentOffset;
 	activePage=offset.x/SCREENWIDTH;
 	pageControl.currentPage=activePage;
+	viewState=activePage;
 	[pageControl updateCurrentPageDisplay];
 	[self updateGlobalViewUIForState];
 }
@@ -436,6 +579,8 @@
 	
 	pageControl.numberOfPages=maxVisitedPage+1;
 	
+	
+	
 }
 
 
@@ -449,8 +594,6 @@
 	
 	[ButtonUtilities styleIBButton:continueButton type:@"green" text:@"Continue"];
 	[continueButton addTarget:self action:@selector(continueUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	[ButtonUtilities styleIBButton:cancelButton type:@"red" text:@"Cancel"];
-	[continueButton addTarget:self action:@selector(cancelUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
 
@@ -461,9 +604,7 @@
     
 }
 
--(IBAction)cancelUploadbuttonSelected:(id)sender{
-    
-}
+
 
 
 #pragma mark Photo View
@@ -484,11 +625,15 @@
 
 -(void)updatePhotoView{
 	
+	cameraButton.enabled=[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+	
 	if(uploadImage!=nil){
         imagePreview.image=uploadImage.image;
         photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
+		photodateLabel.text=[NSString stringWithFormat:@"%@",uploadImage.dateString];
     }else{
 		photoSizeLabel.text=EMPTYSTRING;
+		photodateLabel.text=EMPTYSTRING;
     }
 }
 
@@ -501,13 +646,11 @@
 		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 		picker.allowsEditing = YES;
 		[self presentModalViewController:picker animated:YES];
-		[picker release];
 		
 	}else {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error accessing camera" message:@"Device does not have a camera" 
 													   delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
 		[alert show];
-		[alert release];
 	}
     
 	
@@ -523,13 +666,12 @@
 		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 		picker.allowsEditing = YES;
 		[self presentModalViewController:picker animated:YES];
-		[picker release];
 	}
 	else {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error accessing photo library" message:@"Device does not support a photo library" 
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error accessing photo library" 
+														message:@"Device does not support a photo library" 
 													   delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
 		[alert show];
-		[alert release];
 	}
 	
 	
@@ -542,7 +684,7 @@
 	// TODO: image should be sized, a) on screen & b) upload size
     // initial image should be max resolution possible for app
     // setttings.imageSize 
-	UIImage *image=[info objectForKey:UIImagePickerControllerEditedImage];
+	UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     self.uploadImage=[[UploadPhotoVO alloc]initWithImage:image];
 	imagePreview.image=uploadImage.image;
 	photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
@@ -555,14 +697,21 @@
 		
 		CLLocation *location = (CLLocation *)[asset valueForProperty:ALAssetPropertyLocation];
 		uploadImage.location=location;
-		BetterLog(@"location=%f %f",location.coordinate.latitude, location.coordinate.longitude);
+		
+		NSDate		*assetdate=(NSDate*)[asset valueForProperty:ALAssetPropertyDate];
+		uploadImage.date=assetdate;
+		
+		photolocationLabel.text=[[GlobalUtilities convertBooleanToType:@"string" :location!=nil] capitalizedString];
+		photodateLabel.text=[NSString stringWithFormat:@"%@",uploadImage.dateString];
+		
+		if(location!=nil)
+			BetterLog(@"location=%f %f",location.coordinate.latitude, location.coordinate.longitude);
 		
 		
 	} failureBlock:^(NSError *error) {
 		 BetterLog(@"error retrieving image from  - %@",[error localizedDescription]);
 	 }];
 	
-	[library release];
     
 	[picker dismissModalViewControllerAnimated:YES];	
 	
@@ -588,15 +737,27 @@
 	
 	BetterLog(@"");
 	
-	[ButtonUtilities styleIBButton:locationUpdateButton type:@"green" text:@"Locate"];
+	[ButtonUtilities styleIBButton:locationUpdateButton type:@"green" text:@"Edit Location"];
 	[locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	[ButtonUtilities styleIBButton:locationResetButton type:@"red" text:@"Reset"];
-	[locationResetButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
+	[RMMapView class];
+	locationMapContents=[[RMMapContents alloc] initWithView:locationMapView tilesource:[MapViewController tileSource]];
+	[locationMapView setDelegate:self];
+	locationMapView.userInteractionEnabled=NO;
+	
+	if (!self.locationMapMarker) {
+		self.locationMapMarker = [Markers markerPhoto];
+		self.locationMapMarker.enableDragging=YES;
+	}
+	
+	[self loadLocationFromPhoto];
 		
 }
 
 
 -(void)updateLocationView{
+	
+	BetterLog(@"");
 	
 	CLLocationCoordinate2D imageloc=uploadImage.location.coordinate;
 	CLLocationCoordinate2D zeroloc=CLLocationCoordinate2DMake(0,0);
@@ -604,32 +765,47 @@
 	MKMapPoint p1 = MKMapPointForCoordinate(imageloc);
 	MKMapPoint p2 = MKMapPointForCoordinate(zeroloc);
 	
-	//Calculate distance in meter
+	//Calculate distance in meters
 	CLLocationDistance dist = MKMetersBetweenMapPoints(p1, p2);
 	
     if(uploadImage.location==nil || dist==0.0){
-		locationMapView.showsUserLocation=YES;
+		
+		if([UserLocationManager sharedInstance].doesDeviceAllowLocation==NO){
+			
+			[self displayDefaultLocation];
+			
+		}else {
+			[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+		}
+		
 	}else{
-        [self loadLocationFromPhoto];
+		if(uploadImage.userLocation==nil)
+			[self loadLocationFromPhoto];
+		
         [self initialiseViewState:PhotoWizardViewStateCategory];
     }
 }
 
 
-- (IBAction) locationButtonSelected {
+- (IBAction) locationButtonSelected:(id)sender {
 	
-    PhotoMapImageLocationViewController *lv=[[PhotoMapImageLocationViewController alloc]initWithNibName:[PhotoMapImageLocationViewController nibName] bundle:nil];
-    
-    UINavigationController *navController = [SuperViewController createCustomNavigationControllerWithView:lv];
-	[self.navigationController presentModalViewController:navController animated:YES];
+    PhotoWizardLocationViewController *lv=[[PhotoWizardLocationViewController alloc]initWithNibName:[PhotoWizardLocationViewController nibName] bundle:nil];
+	lv.delegate=self;
+	lv.userlocation=uploadImage.userLocation;
+	lv.photolocation=uploadImage.location;
+	
+	[self presentModalViewController:lv animated:YES];
     
 }
 -(IBAction)resetButtonSelected:(id)sender{
     
-    // if userlocation!=nil
-    // if location !-nil
-    // reset to location
-    // update mapui
+    if(uploadImage.userLocation!=nil){
+		uploadImage.userLocation=nil;
+	}
+    
+	if(uploadImage.location!=nil){
+		[self updateLocationMapViewForLocation:uploadImage.location];
+	}
 }
 
 //
@@ -640,11 +816,10 @@
 -(void)UserDidUpdatePhotoLocation:(CLLocation*)location{
     
     if(location!=nil){
+		
+		uploadImage.userLocation=location;
     
-        MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate,MKCoordinateSpanMake(0.004,0.004) );
-        [locationMapView setRegion:region animated:YES];
-        
-        uploadImage.userLocation=location;
+		[self updateLocationMapViewForLocation:uploadImage.userLocation];
         
         [self initialiseViewState:PhotoWizardViewStateCategory];
     }
@@ -652,14 +827,41 @@
 }
 
 
-
-
 -(void)loadLocationFromPhoto{
 	
-	BetterLog(@"");
+	if(uploadImage.location!=nil){
+		
+		[self updateLocationMapViewForLocation:uploadImage.location];
+		
+	}
+}
+
+-(void)displayDefaultLocation{
 	
-	MKCoordinateRegion region = MKCoordinateRegionMake(uploadImage.location.coordinate,MKCoordinateSpanMake(0.004,0.004) );
-	[locationMapView setRegion:region animated:YES];
+	CLLocationCoordinate2D coordinate=[UserLocationManager defaultCoordinate];
+	
+	locationLabel.text=[NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
+
+	[self.locationMapView moveToLatLong:coordinate];
+	
+	[locationMapView.markerManager addMarker:locationMapMarker AtLatLong:coordinate];
+	
+	[locationMapView.contents setZoom:6];
+		
+}
+
+-(void)updateLocationMapViewForLocation:(CLLocation*)location{
+	
+	
+	locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
+	
+	[self.locationMapView moveToLatLong:location.coordinate];
+	
+	if ([locationMapView.contents zoom] < 18) {
+		[locationMapView.contents setZoom:14];
+	}
+	
+	[locationMapView.markerManager addMarker:locationMapMarker AtLatLong:location.coordinate];
 	
 	
 }
@@ -675,66 +877,92 @@
 
 -(void)initCategoryView:(PhotoWizardViewState)state{
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.categoryLoader setupCategories];
-    categoryIndex=0;
-    metacategoryIndex=0;
+	[PhotoCategoryManager sharedInstance];
+	
+	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose..."];
+	
+	[categoryButton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
+	[categoryFeaturebutton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
 	
 	
 }
+
+
 -(void)updateCategoryView{
-    
-    [self updateSelectionLabels];
 	
 }
 
 
-#pragma mark picker delegate and data source
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-	if (component == 0) {
-		return [self.categoryLoader.metaCategoryLabels objectAtIndex:row];
-	} else {
-		return [self.categoryLoader.categoryLabels objectAtIndex:row];
-	}
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-	return 2;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-	if (component == 0) {
-		return [self.categoryLoader.metaCategoryLabels count];
-	} else {
-		return [self.categoryLoader.categoryLabels count];
-	}
-}
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	if (component == 0) {
-		metacategoryIndex = row;
-	} else {
-		categoryIndex = row;
-	}
-	[self updateSelectionLabels];
-}
-
-
--(void)updateSelectionLabels{
-    
-    uploadImage.category=[self.categoryLoader.categoryLabels objectAtIndex:categoryIndex];
-    uploadImage.metaCategory=[self.categoryLoader.metaCategoryLabels objectAtIndex:metacategoryIndex];
+-(IBAction)showCategoryMenu:(id)sender{
 	
-	categoryTypeLabel.text=uploadImage.metaCategory;
-	categoryDescLabel.text=uploadImage.category;
+	UIButton *button=(UIButton*)sender;
+	PhotoCategoryType dataType=button.tag;
+	
+    self.categoryMenuView=[[PhotoWizardCategoryMenuViewController alloc]initWithNibName:@"PhotoWizardCategoryMenuView" bundle:nil];
+	categoryMenuView.dataType=dataType;
+	categoryMenuView.uploadImage=uploadImage;
+	
+	switch(dataType){
+		
+		case PhotoCategoryTypeFeature:
+			categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"feature"];
+		break;
+		
+		case PhotoCategoryTypeCategory:
+			categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"category"];
+		break;
+	}
+	
+	self.categoryMenu = [[popoverClass alloc] initWithContentViewController:categoryMenuView];
+	self.categoryMenu.delegate = self;
+	
+	[self.categoryMenu presentPopoverFromRect:button.frame inView:self.categoryView permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
     
-    if(uploadImage.metaCategory!=nil && uploadImage.category!=nil){
+	
+}
+
+
+-(void)didSelectCategoryFromMenu:(NSNotification*)notification{
+	
+	NSDictionary *userInfo=notification.userInfo;
+	
+	PhotoCategoryVO *vo=[userInfo objectForKey:@"dataProvider"];
+	PhotoCategoryType dataType=[[userInfo objectForKey:@"dataType"]intValue];
+	
+	switch(dataType){
+			
+		case PhotoCategoryTypeFeature:
+			uploadImage.feature=vo;
+			[categoryFeaturebutton setTitle:uploadImage.feature.name forState:UIControlStateNormal];
+		break;
+			
+		case PhotoCategoryTypeCategory:
+			uploadImage.category=vo;
+			[categoryButton setTitle:uploadImage.category.name forState:UIControlStateNormal];
+		break;
+	}
+	
+	[categoryMenu dismissPopoverAnimated:YES];
+	
+	if(uploadImage.feature!=nil && uploadImage.category!=nil){
         [self initialiseViewState:PhotoWizardViewStateDescription];
     }
-    
+	
 }
 
+
+#pragma mark -
+#pragma mark WEPopoverControllerDelegate implementation
+
+- (void)popoverControllerDidDismissPopover:(WEPopoverController *)thePopoverController {
+	self.categoryMenu = nil;
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(WEPopoverController *)thePopoverController {
+	return YES;
+}
 
 #pragma mark Description View
 //
@@ -743,22 +971,90 @@
  ***********************************************/
 //
 
--(void)initDescriptionView{
-	
-	
+
+-(void)initDescriptionView:(PhotoWizardViewState)state{
+
+	photodescriptionField.delegate=self;
+	[self resetDescriptionField];
 
 }
+
+
+-(void)resetDescriptionField{
+	
+	photodescriptionField.text=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
+	photodescriptionField.textColor=UIColorFromRGB(0x999999);
+	
+	[self removeViewState:PhotoWizardViewStateUpload];
+}
+
 -(void)updateDescriptionView{
 	
-    photodescriptionField.text=uploadImage.description;
+	descImagePreview.image=uploadImage.image;
+	
+	if(uploadImage.caption!=nil)
+		photodescriptionField.text=uploadImage.caption;
     
 }
 
-- (void)textViewDidChange:(UITextView *)textView{
-    
-    if(textView.text.length>0){
-        [self initialiseViewState:PhotoWizardViewStateUpload];
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
+   
+    if (photodescriptionField.inputAccessoryView == nil) {
+        [[NSBundle mainBundle] loadNibNamed:@"UITextViewAccessoryView" owner:self options:nil];
+        photodescriptionField.inputAccessoryView = textViewAccessoryView;
+        self.textViewAccessoryView = nil;
     }
+	
+	 if([photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+		 photodescriptionField.text=@"";
+		 photodescriptionField.textColor=UIColorFromRGB(0x555555);
+	 }
+	
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+	
+	if(textView.text.length==0){
+		[self resetDescriptionField];
+	}
+	
+}
+
+-(IBAction)textViewKeyboardShouldClear:(id)sender{
+	
+	[self resetDescriptionField];
+	
+}
+
+-(IBAction)textViewKeyboardShouldHide:(id)sender{
+	
+	if(![photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+        [self initialiseViewState:PhotoWizardViewStateUpload];
+		uploadImage.caption=photodescriptionField.text;
+    }
+	
+	[photodescriptionField resignFirstResponder];
+	
+}
+
+
+- (void)textViewDidChange:(UITextView *)textView{
+	
+	if([photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+		photodescriptionField.text=@"";
+		photodescriptionField.textColor=UIColorFromRGB(0x555555);
+		return;
+	}
+	
+	if(photodescriptionField.text.length==0){
+		[self resetDescriptionField];
+		return;
+	}
+	
+	photodescriptionField.textColor=UIColorFromRGB(0x555555);
+	
     
 }
 
@@ -771,16 +1067,20 @@
 //
 
 
--(void)initUploadView{
+-(void)initUploadView:(PhotoWizardViewState)state{
 	
-	uploadProgressView.progress=0.0;
+	[self updateUploadUIState:@"waiting"];
+	
+	[ButtonUtilities styleIBButton:uploadButton type:@"orange" text:@"Upload Photo"];
+	[uploadButton addTarget:self action:@selector(uploadPhoto:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
 
 
 // TODO: UserPhotoUploadRequest needs to execute if user logins correctly
 -(IBAction)uploadPhoto:(id)sender{
-    
+	
+	
     if ([UserAccount sharedInstance].isLoggedIn==NO) {
 		
 		if([UserAccount sharedInstance].accountMode==kUserAccountCredentialsExist){
@@ -789,18 +1089,19 @@
 			
 			[[PhotoManager sharedInstance] UserPhotoUploadRequest:uploadImage];
 			
+			[self updateUploadUIState:@"loading"];
+			
 		}else {
 			
 			BetterLog(@"kUserAccountNotLoggedIn");
 			
 			if (self.loginView == nil) {
-				self.loginView = [[[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil] autorelease];
+				self.loginView = [[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil];
 			}
 			self.loginView.isModal=YES;
 			self.loginView.shouldAutoClose=YES;
 			UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
 			[self presentModalViewController:nav animated:YES];
-			[nav release];
 		}
         
 		
@@ -810,10 +1111,41 @@
 		BetterLog(@"kUserAccountLoggedIn");
 		
 		[[PhotoManager sharedInstance] UserPhotoUploadRequest:uploadImage];
+		
+		[self updateUploadUIState:@"loading"];
 	}
 	
 	
 }
+
+
+-(void)updateUploadUIState:(NSString*)state{
+	
+	
+	if([state isEqualToString:@"loading"]){
+		
+		uploadLabel.textColor=[UIColor darkGrayColor];
+		uploadLabel.text=@"Uploading...";
+		uploadButton.enabled=NO;
+		
+	}else if([state isEqualToString:@"error"]){
+		
+		uploadLabel.textColor=UIColorFromRGB(0xC20000);
+		uploadLabel.text=@"An error occured while uploading your image, please try again.";
+		uploadButton.enabled=YES;
+		
+	}else {
+		
+		uploadLabel.textColor=[UIColor darkGrayColor];
+		uploadLabel.text=@"Ready to upload";
+		uploadButton.enabled=YES;
+	}
+	
+	
+	
+}
+
+
 
 -(IBAction)cancelUploadPhoto:(id)sender{
 	
@@ -836,26 +1168,19 @@
 	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View Map"];
 	[photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-    
-    // there is
-    // thumbnailUrl
-    // and url
     photoResultURLLabel.text=[uploadImage.responseDict objectForKey:@"url"];
 	
 	pageControl.numberOfPages=1;
-
+	[pageControl updateCurrentPageDisplay];
 	
 }
 
 -(IBAction)photoMapButtonSelected:(id)sender{
 	
-    [self navigateToViewState:PhotoWizardViewStateInfo];
+	[PhotoManager sharedInstance].autoLoadLocation=uploadImage.activeLocation;
 	
-	// call navigate to PM
-    [PhotoManager sharedInstance].autoLoadLocation=uploadImage.location;
-    CycleStreetsAppDelegate *appDelegate=(CycleStreetsAppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate showTabBarViewControllerByName:@"PhotoMap"];
-		
+	[self closeWindowButtonSelected:nil];
+	
 }
 
 
@@ -867,11 +1192,7 @@
  ***********************************************/
 //
 
--(void)viewDidUnload{
-    
-    
-    
-}
+
 
 - (void)didReceiveMemoryWarning
 {
