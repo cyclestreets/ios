@@ -261,7 +261,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
    
     // OR have separate button in UI that shows the RouteSummary with the selected route
     // always, then no need for this odd re-organising
-	[self promoteRouteToTopOfDataProvider:route];
+	//[self promoteRouteToTopOfDataProvider:route];
 	
 }
 
@@ -323,7 +323,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
--(int)findIndexOfRouteByID:(NSString*)routeid{
+-(int)findIndexOfRouteByID:(NSString*)routeid{ // will be route.fileid format
 	
 	int index=NSNotFound;
 	
@@ -342,6 +342,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	return index;
 }
 
+
+-(BOOL)findRouteWithId:(NSString*)routeid andPlan:(NSString*)plan{
+	
+	NSString *fileid=[NSString stringWithFormat:@"%@_%@",routeid,plan];
+	BOOL found=NO;
+	
+	for(NSString *key in routeidStore){
+		
+		NSMutableArray *routes=[routeidStore objectForKey:key];
+		
+		int index=[routes indexOfObject:fileid];
+		
+		if(index!=NSNotFound){
+			found=YES;
+			break;
+		}
+		
+	}
+	
+	return found;
+	
+}
 
 
 //

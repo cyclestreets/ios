@@ -263,10 +263,11 @@
 		[cell populate];
 	}
 	
-	//if(isSectioned==YES){
+	if([dataType isEqualToString:SAVEDROUTE_FAVS]){
+		
 		UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellMenuPress:)];
 		[cell addGestureRecognizer:recognizer];
-	//}
+	}
 	
     return cell;
 }
@@ -314,13 +315,14 @@
 				
 			}else{
 				
-				
 				[tableView setEditing:YES animated:YES];
 				
 			}
 			
 			
 		}
+	}else{
+		BetterLog(@"");
 	}
 	
 }
@@ -418,7 +420,7 @@
 //
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	return UITableViewCellEditingStyleNone;
+	return UITableViewCellEditingStyleDelete;
 }
 
 

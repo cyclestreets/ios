@@ -238,25 +238,44 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 -(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan{
+	
+	
+	BOOL found=[[SavedRoutesManager sharedInstance] findRouteWithId:routeid andPlan:plan];
+	
+	if(found==YES){
+		
+		RouteVO *route=[self loadRouteForFileID:[NSString stringWithFormat:@"%@_%@",routeid,plan]];
+		
+		[self selectRoute:route];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
+		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, this route is now selected." andMessage:nil];
+		
+	}else{
+		
+		NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+										 useDom,@"useDom",
+										 plan,@"plan",
+										 routeid,@"itinerary",
+										 nil];
+		
+		NetRequest *request=[[NetRequest alloc]init];
+		request.dataid=RETRIEVEROUTEBYID;
+		request.requestid=ZERO;
+		request.parameters=parameters;
+		request.revisonId=0;
+		request.source=USER;
+		
+		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for %@ route %@ on CycleStreets",[plan capitalizedString], routeid] andMessage:nil];
+		
+	}
     
 	
-    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
-                                     useDom,@"useDom",
-                                     plan,@"plan",
-                                     routeid,@"itinerary",
-                                     nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
-    request.dataid=RETRIEVEROUTEBYID;
-    request.requestid=ZERO;
-    request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
-    
-    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	
-    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for %@ route %@ on CycleStreets",[plan capitalizedString], routeid] andMessage:nil];
 }
 
 
@@ -458,6 +477,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setMiscValue:route.fileid forKey:@"selectedroute"];
+	
+	BetterLog(@"");
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:CSROUTESELECTED object:[route routeid]];
 	
