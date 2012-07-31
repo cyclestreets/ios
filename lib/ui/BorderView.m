@@ -1,9 +1,9 @@
 //
 //  BorderView.m
-//  CycleStreets
+//
 //
 //  Created by neil on 03/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import "BorderView.h"
@@ -18,20 +18,6 @@
 @synthesize params;
 @synthesize startColor;
 @synthesize endColor;
-
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [strokeColor release], strokeColor = nil;
-    [startColor release], startColor = nil;
-    [endColor release], endColor = nil;
-	
-    [super dealloc];
-}
-
-
 
 
 
@@ -53,18 +39,17 @@
 
 - (void)drawRect:(CGRect)rect {
 	
-	[self drawBorder:UIGraphicsGetCurrentContext()];
-	
 	if(startColor!=nil){
 		[self drawBackGroundGradient:UIGraphicsGetCurrentContext()];
 	}
 	
+	[self drawBorder:UIGraphicsGetCurrentContext()];
 }
 
 
 -(void)drawBorderwithColor:(UIColor*)color andStroke:(CGFloat)lineStroke 
 				   left:(BOOL)left right:(BOOL)right top:(BOOL)top bottom:(BOOL)bottom{
-	// nore self, ensures retention of these ivars
+	// note self, ensures retention of these ivars
 	self.strokeColor=color;
 	self.stroke=lineStroke;
 	params.top=top;
@@ -77,6 +62,7 @@
 }
 
 -(void)drawBorder:(CGContextRef)context{
+	
 
 	CGContextSetStrokeColorWithColor(context, self.strokeColor.CGColor);
 	CGContextSetLineWidth(context, self.stroke);
@@ -119,8 +105,6 @@
 
 
 - (void)drawBackGroundGradient:(CGContextRef)currentContext {
-	
-		
 	
 	CGGradientRef glossGradient;
 	CGColorSpaceRef rgbColorspace;

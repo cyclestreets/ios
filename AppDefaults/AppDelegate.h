@@ -30,7 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #define ISDEVELOPMENT 1
 
-@interface CycleStreetsAppDelegate : NSObject <UIApplicationDelegate,StartupManagerDelegate,UITabBarControllerDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate,StartupManagerDelegate,UITabBarControllerDelegate> {
 	
     UIWindow *window;
 	
@@ -45,11 +45,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
-@property (nonatomic, retain)	UIWindow		*window;
-@property (nonatomic, retain)	UIImageView		*splashView;
-@property (nonatomic, retain)	UITabBarController		*tabBarController;
-@property (nonatomic, retain)	StartupManager		*startupmanager;
-@property (nonatomic, retain)	ExpandedUILabel		*debugLabel;
+@property (nonatomic, strong)	IBOutlet UIWindow		*window;
+@property (nonatomic, strong)	UIImageView		*splashView;
+@property (nonatomic, strong)	UITabBarController		*tabBarController;
+@property (nonatomic, strong)	StartupManager		*startupmanager;
+@property (nonatomic, strong)	ExpandedUILabel		*debugLabel;
 
 
 - (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag;

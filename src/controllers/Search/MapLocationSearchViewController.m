@@ -31,45 +31,48 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "XMLRequest.h"
 #import "NamedPlace.h"
 #import "GlobalUtilities.h"
+#import "MapLocationSearchCellView.h"
+#import "HudManager.h"
 
 static NSString *format = @"%@?key=%@&street=%@&%@&clientid=%@";
 static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
 @implementation MapLocationSearchViewController
 
-@synthesize locationReceiver;
+
 @synthesize centreLocation;
-@synthesize searchString;
 @synthesize currentRequestSearchString;
+@synthesize searchString;
 @synthesize request;
 @synthesize currentPlaces;
 @synthesize activeLookup;
 @synthesize activeBackground;
+@synthesize locationReceiver;
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)activeLookupOff {
-	BetterLog(@">>>");
-	self.activeBackground.hidden = YES;
-	[self.activeLookup stopAnimating];
-	[self.activeBackground removeFromSuperview];
+	[[HudManager sharedInstance] removeHUD];
 }
 
 - (void)activeLookupOn {
-	BetterLog(@">>>");
-	self.activeBackground.hidden = NO;
-	[self.activeLookup startAnimating];
-	[self.view addSubview:self.activeBackground];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	
+	self.searchDisplayController.searchResultsTableView.rowHeight=[MapLocationSearchCellView rowHeight];
+	
 	self.view.backgroundColor=[UIColor whiteColor];
 	self.searchDisplayController.active = YES;
 	self.searchDisplayController.searchBar.tintColor=UIColorFromRGB(0x008000);
 	self.searchDisplayController.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Local", @"National", nil];
+	self.searchDisplayController.searchBar.showsScopeBar=YES;
+	self.searchDisplayController.searchBar.showsBookmarkButton=NO;
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSString *lastSearch = [cycleStreets.files miscValueForKey:@"lastSearch"];
@@ -79,18 +82,21 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 		[self lookupNames];
 	}
 	
-	
-	self.activeLookup=[[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(20, 20, 40, 40)] autorelease];
-	self.activeLookup.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhiteLarge;
-	
-	self.activeBackground = [[[UIView alloc] initWithFrame:CGRectMake(120, 120, 80, 80)] autorelease];
-	self.activeBackground.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
-	[activeBackground addSubview:self.activeLookup];
-	
 	[self activeLookupOff];
 }
 
 
+-(void)viewWillAppear:(BOOL)animated{
+	
+	[self.searchDisplayController.searchBar becomeFirstResponder];
+	
+	if (self.searchString != nil) {
+		self.searchDisplayController.searchBar.text = self.searchString;
+		[self lookupNames];
+	}
+	
+	[super viewWillAppear:animated];
+}
 
 
 
@@ -113,15 +119,10 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Namefinder2Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    
-	cell.textLabel.text = [[self.currentPlaces objectAtIndex:indexPath.row] name];
+	MapLocationSearchCellView *cell=[MapLocationSearchCellView cellForTableView:self.searchDisplayController.searchResultsTableView fromNib:[MapLocationSearchCellView nib]];
+	
+	cell.dataProvider=[self.currentPlaces objectAtIndex:indexPath.row];
+    [cell populate];
     
     return cell;
 }
@@ -166,12 +167,11 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	
 	BetterLog(@"name lookup URL %@", url);
 	
-	self.request = [[[XMLRequest alloc] initWithURL:url
+	self.request = [[XMLRequest alloc] initWithURL:url
 										   delegate:self
 												tag:nil
 										  onSuccess:@selector(didSucceedLookup:results:)
-										  onFailure:@selector(didFailLookup:withMessage:)]
-					autorelease];
+										 onFailure:@selector(didFailLookupwithMessage:)];
 	request.elementsToParse = [NSArray arrayWithObject:@"result"];
 	[request start];
 	[self activeLookupOn];
@@ -199,15 +199,24 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	BetterLog(@"didSucceedLookup");
 	self.request = nil;
 	if (self.currentPlaces == nil) {
-		self.currentPlaces = [[[NSMutableArray alloc] init] autorelease];
+		self.currentPlaces = [[NSMutableArray alloc] init];
 	}
 	[self.currentPlaces removeAllObjects];
 	for (NSDictionary *place in [elements objectForKey:@"result"])
 	{
 		NamedPlace *namedPlace = [[NamedPlace alloc] initWithDictionary:place];
 		[self.currentPlaces addObject:namedPlace];
-		[namedPlace release];
 	}
+	
+	[currentPlaces sortUsingComparator:(NSComparator)^(NamedPlace *a1, NamedPlace *a2) {
+		if ([a1.distanceInt compare:a2.distanceInt] == NSOrderedSame) {
+			return [a1.distanceInt compare:a2.distanceInt];
+		} else {
+			return [a1.distanceInt compare:a2.distanceInt];
+		}
+	}];
+
+	
 	[self.searchDisplayController.searchResultsTableView reloadData];
 	if (self.searchDisplayController.active && ![self.currentRequestSearchString isEqualToString:self.searchString]) {
 		//there has been a change, so queue a subsequent search.
@@ -216,27 +225,22 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	[self clearRequest];
 }
 
-- (void)didFailLookup:(XMLRequest *)request withMessage:(NSString *)message {
+- (void)didFailLookupwithMessage:(NSString *)message {
 	BetterLog(@"didFailLookup");
 	[self clearRequest];
 }
 
-#pragma mark view
 
-- (void)viewWillAppear:(BOOL)animated {
-	BetterLog(@">>>");
-	[self.searchDisplayController.searchBar becomeFirstResponder];
-}
 
 #pragma table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	BetterLog(@"tableView:didSelectRowAtIndexPath:");
+	
 	NamedPlace *where = [currentPlaces objectAtIndex:indexPath.row];
 	if (where != nil) {
 		[self.locationReceiver didMoveToLocation:where.locationCoords];
 	}
-	[tableView deselectRowAtIndexPath:indexPath	animated:YES];
+	[self.searchDisplayController.searchResultsTableView  deselectRowAtIndexPath:indexPath	animated:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -309,12 +313,6 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
     [self nullify];
 	[super viewDidUnload];
 	BetterLog(@">>>");
-}
-
-
-- (void)dealloc {
-	[self nullify];
-    [super dealloc];
 }
 
 

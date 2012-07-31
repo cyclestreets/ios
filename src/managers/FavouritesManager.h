@@ -16,7 +16,7 @@
 	
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(FavouritesManager);
-@property (nonatomic, retain)	NSMutableArray	*dataProvider;
+@property (nonatomic, strong)	NSMutableArray	*dataProvider;
 
 -(void)removeDataFile;
 

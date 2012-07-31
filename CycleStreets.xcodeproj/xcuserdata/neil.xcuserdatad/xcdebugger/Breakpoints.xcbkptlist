@@ -62,69 +62,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "src/controllers/Routes/RoutesViewController.m"
-         timestampString = "341316504.640947"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
-         landmarkName = "-listNotificationInterests"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "src/controllers/PhotoMap/PhotoMapViewController.m"
-         timestampString = "341866114.893239"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
-         landmarkName = "-refreshUIFromDataProvider"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "src/controllers/PhotoMap/PhotoMapViewController.m"
-         timestampString = "341959911.309306"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
-         landmarkName = "-didReceiveNotification:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "src/net/ApplicationXMLParser.m"
-         timestampString = "351607629.574734"
+         timestampString = "361804386.350395"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
-         startingLineNumber = "547"
-         endingLineNumber = "547"
+         startingLineNumber = "576"
+         endingLineNumber = "576"
          landmarkName = "-RetrievePhotosXMLParser:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "src/managers/PhotoManager.m"
-         timestampString = "341959965.338792"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
-         landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -230,7 +174,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
-         filePath = "../../../../../../src/controllers/PhotoWizard/PhotoWizardViewController.m"
+         filePath = "/../../../../../../src/controllers/PhotoWizard/PhotoWizardViewController.m"
          timestampString = "352837526.917864"
          startingColumnNumber = "2147483647"
          endingColumnNumber = "2147483647"
@@ -243,14 +187,504 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoWizard/PhotoWizardLocationViewController.m"
+         timestampString = "355743699.909545"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
+         landmarkName = "-createNonPersistentUI"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../lib/net/RemoteFileManager.m"
+         timestampString = "354817733.783776"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "269"
+         endingLineNumber = "269"
+         landmarkName = "-connection:canAuthenticateAgainstProtectionSpace:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoMap/PhotoMapViewController.m"
+         timestampString = "355743699.909545"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
+         landmarkName = "-createPersistentUI"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/RouteManager.m"
+         timestampString = "355744487.653166"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
+         landmarkName = "-loadRouteForEndPointsResponse:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/model/Model.m"
+         timestampString = "355744537.790355"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
+         landmarkName = "-parseData:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/SavedRoutesManager.m"
+         timestampString = "355952541.09222"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "183"
+         endingLineNumber = "183"
+         landmarkName = "-moveRoute:toDataProvider:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/Routes/RouteListViewController.m"
+         timestampString = "356192228.26969"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "319"
+         endingLineNumber = "319"
+         landmarkName = "-favouriteRouteMenuSelected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/Routes/RouteListViewController.m"
+         timestampString = "356192228.26969"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "300"
+         endingLineNumber = "300"
+         landmarkName = "-cellMenuPress:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/SavedRoutesManager.m"
+         timestampString = "355954140.876072"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "217"
+         endingLineNumber = "217"
+         landmarkName = "-removeRoute:fromDataProvider:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/Routes/RouteListViewController.m"
+         timestampString = "356192228.26969"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "599"
+         endingLineNumber = "599"
+         landmarkName = "-deleteRow:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoWizard/PhotoWizardLocationViewController.m"
+         timestampString = "356538428.883234"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "260"
+         endingLineNumber = "260"
+         landmarkName = "-updateButtonSelected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoWizard/PhotoWizardViewController.m"
+         timestampString = "356538428.883234"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "741"
+         endingLineNumber = "741"
+         landmarkName = "-UserDidUpdatePhotoLocation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoWizard/PhotoWizardLocationViewController.m"
+         timestampString = "356538428.883234"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "248"
+         endingLineNumber = "248"
+         landmarkName = "-resetButtonSelected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../lib/net/NetRequest.m"
+         timestampString = "359547989.09073"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
+         landmarkName = "-requestForType"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../lib/net/NetRequest.m"
+         timestampString = "359547989.09073"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
+         landmarkName = "-requestForType"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoWizard/PhotoWizardViewController.m"
+         timestampString = "356538428.883234"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "836"
+         endingLineNumber = "836"
+         landmarkName = "-updateSelectionLabels"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/PhotoCategoryManager.m"
+         timestampString = "356356484.914931"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "75"
+         endingLineNumber = "75"
+         landmarkName = "-init"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/PhotoCategoryManager.m"
+         timestampString = "356356484.914931"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "141"
+         endingLineNumber = "141"
+         landmarkName = "-convertLegacyDataProvider"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/PhotoManager.m"
+         timestampString = "356361220.888786"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
+         landmarkName = "-didReceiveNotification:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/UserLocationManager.m"
+         timestampString = "356537994.220777"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "-startUpdatingLocation"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/UserLocationManager.m"
+         timestampString = "356537994.220777"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
+         landmarkName = "-initialiseCorelocation"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/UserLocationManager.m"
+         timestampString = "356537985.164563"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-init"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoWizard/PhotoWizardViewController.m"
+         timestampString = "356538583.20786"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "715"
+         endingLineNumber = "715"
+         landmarkName = "-locationButtonSelected:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/managers/PhotoCategoryManager.m"
+         timestampString = "359402592.669852"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "189"
+         endingLineNumber = "189"
+         landmarkName = "-valueObjectForType:atIndex:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/net/ApplicationXMLParser.m"
+         timestampString = "360273388.107836"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "742"
+         endingLineNumber = "742"
+         landmarkName = "-PhotoCategoriesXMLParser:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "src/controllers/Routes/RouteListViewController.m"
+         timestampString = "361313102.317095"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "91"
+         endingLineNumber = "91"
+         landmarkName = "-didReceiveNotification:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "src/managers/PhotoManager.m"
+         timestampString = "361808517.049108"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "290"
+         endingLineNumber = "290"
+         landmarkName = "-isUserPhoto:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "src/model/vo/UploadPhotoVO.m"
+         timestampString = "361809523.326077"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "114"
+         endingLineNumber = "114"
+         landmarkName = "-uploadedPhotoId"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "src/views/PhotoWizardCategoryMenuViewController.m"
+         timestampString = "363090111.961624"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/../../../../../../src/controllers/PhotoMap/PhotoMapViewController.m"
+         timestampString = "363180443.733032"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "228"
+         endingLineNumber = "228"
+         landmarkName = "-createPersistentUI"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/src/managers/UserLocationManager.m"
+         timestampString = "363696731.720671"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
+         landmarkName = "-checkLocationStatus:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/src/managers/UserLocationManager.m"
+         timestampString = "363696642.430818"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
+         landmarkName = "-systemLocationServicesEnabled"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/src/managers/UserLocationManager.m"
+         timestampString = "363696727.403922"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
+         landmarkName = "-appLocationServicesEnabled"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "AppDefaults/AppDelegate.m"
+         timestampString = "365425163.940567"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
+         landmarkName = "-startupComplete"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "354655444.150742"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "349"
-         endingLineNumber = "349"
-         landmarkName = "-viewDidLoad"
+         timestampString = "365426373.764831"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "1081"
+         endingLineNumber = "1081"
+         landmarkName = "-newRoute"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "src/managers/SavedRoutesManager.m"
+         timestampString = "365427391.26322"
+         startingColumnNumber = "2147483647"
+         endingColumnNumber = "2147483647"
+         startingLineNumber = "177"
+         endingLineNumber = "177"
+         landmarkName = "-moveRoute:toDataProvider:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

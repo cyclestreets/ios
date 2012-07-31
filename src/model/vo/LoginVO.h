@@ -28,15 +28,15 @@
 	BOOL				deleted;
 
 }
-@property (nonatomic, retain)		NSString		* requestname;
-@property (nonatomic, retain)		NSString		* username;
+@property (nonatomic, strong)		NSString		* requestname;
+@property (nonatomic, strong)		NSString		* username;
 @property (nonatomic)		int		 userid;
-@property (nonatomic, retain)		NSString		* email;
-@property (nonatomic, retain)		NSString		* name;
+@property (nonatomic, strong)		NSString		* email;
+@property (nonatomic, strong)		NSString		* name;
 @property (nonatomic)		BOOL		 validatekey;
-@property (nonatomic, retain)		NSString		* validatedDate;
+@property (nonatomic, strong)		NSString		* validatedDate;
 @property (nonatomic)		int		 lastsignin;
-@property (nonatomic, retain)		NSString		* userIP;
+@property (nonatomic, strong)		NSString		* userIP;
 @property (nonatomic)		BOOL		 deleted;
 
 @end

@@ -10,12 +10,11 @@
     UIGestureRecognizer *touchy = [[UITapGestureRecognizer alloc]
         initWithTarget:self action:@selector(handleTap:)];
     [self addGestureRecognizer:touchy];
-    [touchy release];
 }
 
 - (id) initWithFrame: (CGRect) frame
 {
-    [super initWithFrame:frame];
+    self = [super initWithFrame:frame];
     [self attachTapHandler];
     return self;
 }

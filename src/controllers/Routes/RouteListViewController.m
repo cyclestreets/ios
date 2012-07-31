@@ -14,12 +14,24 @@
 #import "RouteToolCellView.h"
 
 
+@interface FavouriteMenuItem : UIMenuItem 
+@property (nonatomic, strong) NSIndexPath* indexPath;
+@end
+
+@implementation FavouriteMenuItem
+@synthesize indexPath;
+@end
+
+
 @interface RouteListViewController(Private) 
 
 -(void)createRowHeightsArray;
 -(void)createSectionHeadersArray;
 
 - (NSIndexPath *)modelIndexPathforIndexPath:(NSIndexPath *)indexPath;
+
+- (void)cellMenuPress:(UILongPressGestureRecognizer *)recognizer;
+-(void)favouriteRouteMenuSelected:(UIMenuController*)menuController;
 
 @end
 
@@ -46,36 +58,6 @@
 
 
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [keys release], keys = nil;
-    [dataProvider release], dataProvider = nil;
-    [tableDataProvider release], tableDataProvider = nil;
-    [rowHeightsArray release], rowHeightsArray = nil;
-    [rowHeightDictionary release], rowHeightDictionary = nil;
-    [tableSectionArray release], tableSectionArray = nil;
-    [dataType release], dataType = nil;
-    [selectedCellDictionary release], selectedCellDictionary = nil;
-    [deleteButton release], deleteButton = nil;
-    [tableView release], tableView = nil;
-    [toolView release], toolView = nil;
-    [tappedIndexPath release], tappedIndexPath = nil;
-    [toolRowIndexPath release], toolRowIndexPath = nil;
-    [indexPathToDelete release], indexPathToDelete = nil;
-	
-    [super dealloc];
-}
-
-
-
-
-
-
-
-
 //
 /***********************************************
  * @description		NOTIFICATIONS
@@ -92,13 +74,17 @@
     [notifications addObject:SAVEDROUTEUPDATE]; // new route search, recent>fav move etc
 	[notifications addObject:CALCULATEROUTERESPONSE];
 	
+	[notifications addObject:UIMenuControllerDidShowMenuNotification];
+	[notifications addObject:UIMenuControllerWillShowMenuNotification];
+	[notifications addObject:UIMenuControllerMenuFrameDidChangeNotification];
+	
 	[super listNotificationInterests];
 	
 }
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
-	BetterLog(@"");
+	BetterLog(@"notification.name=%@",notification.name);
 	
 	[super didReceiveNotification:notification];
     
@@ -131,14 +117,21 @@
         
         if(isSectioned==YES){
             self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString"];
-            self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO];
+            self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO ascending:NO];
         }
         [self createRowHeightsArray];
 		[self createSectionHeadersArray];
         [self.tableView reloadData];
+		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
         
     }else{
-        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:nil];
+		if(isSectioned==YES){
+			self.tableDataProvider=[NSMutableDictionary dictionary];
+			self.keys=[NSMutableArray array];
+		}
+		
+        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",dataType]];
     }
     
 	/*
@@ -208,7 +201,7 @@
 }
 
 
-// Customize the number of rows in the table view.
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
 	if(isSectioned==YES){
@@ -269,83 +262,120 @@
 		cell.dataProvider=[dataProvider objectAtIndex:[indexPath row]];
 		[cell populate];
 	}
-
 	
+	//if(isSectioned==YES){
+		UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellMenuPress:)];
+		[cell addGestureRecognizer:recognizer];
+	//}
 	
     return cell;
 }
 
 
 
-- (void)tableView:(UITableView *)tbv didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+/***********************************************
+ * @description			Cell Press menu support
+ ***********************************************/
+//
+
+- (BOOL)canBecomeFirstResponder {
+	return YES;
+}
+
+- (void)cellMenuPress:(UILongPressGestureRecognizer *)recognizer {	
 	
+	if(tableView.isEditing==NO){
 	
-	if (tableEditMode==YES){
-		return;
-	}else {
-		
-		//if user tapped the same row twice let's start getting rid of the control cell
-		if([indexPath isEqual:tappedIndexPath]){
-			[tableView deselectRowAtIndexPath:indexPath animated:NO];
-		}
-		
-		//update the indexpath if needed... I explain this below 
-		indexPath = [self modelIndexPathforIndexPath:indexPath];
-		
-		//pointer to delete the control cell
-		self.indexPathToDelete = toolRowIndexPath;
-		
-		//if in fact I tapped the same row twice lets clear our tapping trackers 
-		if([indexPath isEqual:tappedIndexPath]){
-			self.tappedIndexPath = nil;
-			self.toolRowIndexPath = nil;
-		}
-		//otherwise let's update them appropriately 
-		else{
-			self.tappedIndexPath = indexPath; //the row the user just tapped. 
-			//Now I set the location of where I need to add the dummy cell 
-			self.toolRowIndexPath = [NSIndexPath indexPathForRow:indexPath.row + 1   inSection:indexPath.section];
-		}
-		
-		//all logic is done, lets start updating the table
-		[self.tableView beginUpdates];
-		
-		//lets delete the control cell, either the user tapped the same row twice or tapped another row
-		if(indexPathToDelete){
-			[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathToDelete] 
-								  withRowAnimation:UITableViewRowAnimationNone];
-		}
-		//lets add the new control cell in the right place 
-		if(toolRowIndexPath){
-			[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:toolRowIndexPath] 
-								  withRowAnimation:UITableViewRowAnimationNone];
-		}
-		
-		//and we are done... 
-		[self.tableView endUpdates];
-		
-		self.indexPathToDelete=nil;
-		
-        /*
-        if([delegate respondsToSelector:@selector(doNavigationPush: withDataProvider: andIndex:)]){
-            
-            RouteVO *route;
-            
-            if(isSectioned==YES){
-                NSString *key=[keys objectAtIndex:[indexPath section]];
-                NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
-                route=[sectionDataProvider objectAtIndex:[indexPath row]];
-            }else{
-                route=[dataProvider objectAtIndex:[indexPath row]];
-            }
+		if (recognizer.state == UIGestureRecognizerStateBegan) {
 			
-			[delegate doNavigationPush:@"RouteSummary" withDataProvider:route andIndex:-1];
+			NSIndexPath *pressedIndexPath = [self.tableView indexPathForRowAtPoint:[recognizer locationInView:self.tableView]];
+			
+			
+			if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
+				
+				// sue index path to get dp fav state
+				// if no fav, if yes do not show menu
+				
+				if (pressedIndexPath && (pressedIndexPath.row != NSNotFound) && (pressedIndexPath.section != NSNotFound)) {
+					
+					[self becomeFirstResponder];
+					
+					UIMenuController *menuController = [UIMenuController sharedMenuController];
+					FavouriteMenuItem *menuItem = [[FavouriteMenuItem alloc] initWithTitle:@"Favourite" action:@selector(favouriteRouteMenuSelected:)];
+					menuItem.indexPath = pressedIndexPath;
+					menuController.menuItems = [NSArray arrayWithObject:menuItem];
+					
+					[menuController setTargetRect:[self.tableView rectForRowAtIndexPath:pressedIndexPath] inView:self.tableView];
+					[menuController setMenuVisible:YES animated:NO];
+					
+				}
+				
+				
+			}else{
+				
+				
+				[tableView setEditing:YES animated:YES];
+				
+			}
+			
+			
 		}
-		 */
+	}
+	
+}
+
+
+
+
+-(void)favouriteRouteMenuSelected:(UIMenuController*)menuController {
+	
+	
+	FavouriteMenuItem *menuItem = [[[UIMenuController sharedMenuController] menuItems] objectAtIndex:0];
+	
+    if (menuItem.indexPath) {
+		
+        [self resignFirstResponder];
+		
+		NSString *key=[keys objectAtIndex:[menuItem.indexPath section]];
+		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+		RouteVO *route=[sectionDataProvider objectAtIndex:[menuItem.indexPath row]];
+		
+		[[SavedRoutesManager sharedInstance] moveRoute:route toDataProvider:SAVEDROUTE_FAVS];
+		
+    }
+	
+	
+}
+
+
+
+- (void)tableView:(UITableView *)tbv didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+	
+	if([delegate respondsToSelector:@selector(doNavigationPush: withDataProvider: andIndex:)]){
+		
+		RouteVO *route=nil;
+		
+		if(isSectioned==YES){
+			NSString *key=[keys objectAtIndex:[indexPath section]];
+			NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+			route=[sectionDataProvider objectAtIndex:[indexPath row]];
+			
+			[delegate doNavigationPush:@"RouteSummary" withDataProvider:route andIndex:SavedRoutesDataTypeRecent];
+			
+		}else{
+			route=[dataProvider objectAtIndex:[indexPath row]];
+			
+			[delegate doNavigationPush:@"RouteSummary" withDataProvider:route andIndex:SavedRoutesDataTypeFavourite];
+		}
+		
 		
 	}
-
+	
 }
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
@@ -378,6 +408,33 @@
     if(toolRowIndexPath != nil && indexPath.row > whereIsTheControlRow)
         return [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]; 
     return indexPath;
+}
+
+
+//
+/***********************************************
+ * @description			TableView move support
+ ***********************************************/
+//
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	return UITableViewCellEditingStyleNone;
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	if([dataType isEqualToString:SAVEDROUTE_FAVS]){
+		return YES;
+	}
+	
+	return NO;
+}
+
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+	
+	
 }
 
 
@@ -425,7 +482,6 @@
                 
             }
 			[rowHeightDictionary setObject:sectionrowheightarray forKey:key];
-			[sectionrowheightarray release];
             
         }
         
@@ -460,15 +516,12 @@
 			NSDateFormatter *displayFormatter = [[NSDateFormatter alloc] init];
 			[displayFormatter setDateFormat:@"EEEE d MMM YYYY"];
 			NSString *timeString = [displayFormatter stringFromDate:sectionDate];
-			[displayFormatter release];
 			sectionLabel.text=timeString;
 			
 			
 			[headerView addSubview:sectionLabel];
-			[sectionLabel release];
 			
 			[tableSectionArray addObject:headerView];
-			[headerView release];
 		}
 		
 	}
@@ -505,9 +558,7 @@
 }
 
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return UITableViewCellEditingStyleDelete;
-}
+
 
 - (void)deleteRow:(NSIndexPath*)indexPath{
     
@@ -527,30 +578,9 @@
 
 - (void)tableView:(UITableView *)tv commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	[self deleteRow:indexPath];
-	[tv deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    [self refreshUIFromDataProvider];
+	[self refreshUIFromDataProvider];
+    
 }
-
-/* this needs further work
--(void)tableView:(UITableView*)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath*)indexPath withSender:(id)sender{
-   
-   BetterLog(@"");
-   
-}
--(BOOL)tableView:(UITableView*)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath*)indexPath withSender:(id)sender{
-   return YES;
-   
-}
--(BOOL)tableView:(UITableView*)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath*)indexPath{
-   
-   UIMenuItem* miCustom1 = [[[UIMenuItem alloc] initWithTitle: @"Custom 1" action:@selector( onCustom1: )] autorelease];
-   UIMenuItem* miCustom2 = [[[UIMenuItem alloc] initWithTitle: @"Custom 2" action:@selector( onCustom2: )] autorelease];
-   UIMenuController* mc = [UIMenuController sharedMenuController];
-   mc.menuItems = [NSArray arrayWithObjects: miCustom1, miCustom2, nil];
-   
-   return YES;
-}
- */
 
 
 - (void)updateDeleteButtonState{

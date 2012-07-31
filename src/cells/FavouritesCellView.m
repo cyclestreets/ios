@@ -38,23 +38,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize isSelectedRoute;
 @synthesize selectedRouteIcon;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [viewContainer release], viewContainer = nil;
-    [nameLabel release], nameLabel = nil;
-    [readoutLabel release], readoutLabel = nil;
-    [icon release], icon = nil;
-    [selectedRouteIcon release], selectedRouteIcon = nil;
-	
-    [super dealloc];
-}
-
-
-
 
 -(void)initialise{
 	
@@ -102,7 +85,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[arr addObject:[dataProvider planString]];
 	 
 	readoutLabel.labels=arr;
-	[arr release];
 	[readoutLabel drawUI];
 	 
 	[viewContainer refresh];

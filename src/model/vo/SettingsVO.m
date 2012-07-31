@@ -18,20 +18,6 @@
 @synthesize routeUnit;
 @synthesize showRoutePoint;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [plan release], plan = nil;
-    [speed release], speed = nil;
-    [mapStyle release], mapStyle = nil;
-    [imageSize release], imageSize = nil;
-    [routeUnit release], routeUnit = nil;
-	
-    [super dealloc];
-}
-
 
 /***********************************************************/
 // - (id)init
@@ -106,11 +92,11 @@ static NSString *SHOW_ROUTE_POINT = @"showRoutePoint";
 {
     id theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
 	
-    [theCopy setPlan:[[self.plan copy] autorelease]];
-    [theCopy setSpeed:[[self.speed copy] autorelease]];
-    [theCopy setMapStyle:[[self.mapStyle copy] autorelease]];
-    [theCopy setImageSize:[[self.imageSize copy] autorelease]];
-    [theCopy setRouteUnit:[[self.routeUnit copy] autorelease]];
+    [theCopy setPlan:[self.plan copy]];
+    [theCopy setSpeed:[self.speed copy]];
+    [theCopy setMapStyle:[self.mapStyle copy]];
+    [theCopy setImageSize:[self.imageSize copy]];
+    [theCopy setRouteUnit:[self.routeUnit copy]];
     [theCopy setShowRoutePoint:self.showRoutePoint];
 	
     return theCopy;

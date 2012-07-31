@@ -1,9 +1,9 @@
 //
 //  BUDividerView.m
-//  CycleStreets
+//
 //
 //  Created by neil on 22/02/2011.
-//  Copyright 2011 CycleStreets.. All rights reserved.
+//  Copyright 2011 Buffer. All rights reserved.
 //
 
 #import "BUDividerView.h"
@@ -17,17 +17,6 @@
 @synthesize topStrokeColor;
 @synthesize bottomStrokeColor;
 @synthesize position;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [topStrokeColor release], topStrokeColor = nil;
-    [bottomStrokeColor release], bottomStrokeColor = nil;
-	
-    [super dealloc];
-}
 
 
 
@@ -53,10 +42,9 @@
 	
 	position.top=YES;
 	position.bottom=NO;
-	stroke=kBorderStrokeWidth;
+	stroke=kDividerStrokeWidth;
 	topStrokeColor=kTopBorderStrokeColor;
 	bottomStrokeColor=kBottomBorderStrokeColor;
-	self.backgroundColor=[UIColor clearColor];
 	
 }
 
@@ -69,7 +57,7 @@
 
 -(void)drawBorderwithColor:(UIColor*)color andStroke:(CGFloat)lineStroke 
 					  left:(BOOL)left right:(BOOL)right top:(BOOL)top bottom:(BOOL)bottom{
-	// note self, ensures retention of these ivars
+	
 	self.topStrokeColor=color;
 	self.bottomStrokeColor=color;
 	self.stroke=lineStroke;
@@ -105,9 +93,8 @@
 	
 	if (position.bottom==YES) {
 		CGContextSetStrokeColorWithColor(context, self.topStrokeColor.CGColor);
-		maxy=maxy-1;
-		CGContextMoveToPoint(context, minx,maxy);
-		CGContextAddLineToPoint(context, maxx,maxy);
+		CGContextMoveToPoint(context, minx,maxy-1);
+		CGContextAddLineToPoint(context, maxx,maxy-1);
 		CGContextStrokePath(context);
 		CGContextSetStrokeColorWithColor(context, self.bottomStrokeColor.CGColor);
 		maxy+=1;

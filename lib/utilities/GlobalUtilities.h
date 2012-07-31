@@ -8,8 +8,9 @@
 // stores all global methods and constants
 
 #import <Foundation/Foundation.h>
+#import "TestFlight.h"
+#import "AppConstants.h"
 
-#define ENABLEDEBUGTRACE 1
 
 
 // returns RGB form web hex
@@ -32,6 +33,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:alphaValue]
 
 #define LineFeed @"\n"
 
+
 // rotation
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)
 #define DEGREES(radians) ((radians) * 180.0 / M_PI)
@@ -45,6 +47,14 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 [NSString stringWithFormat:str , ## args ] )
 #else
 #define BetterLog(str, args...)
+#endif
+
+// TestFlight Tracking
+#if ENABLEDTESTFLIGHTTRACKING
+#define TestFlightLog(str,args...)NSLog(@"\n----TestFlight----\n%s:%d\n%s\n[%@]\n----Checkpoint----\n",\
+strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,[NSString stringWithFormat:str , ## args ])
+#else
+#define TestFlightLog(str,args...)
 #endif
 
 
@@ -109,10 +119,8 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 //
 
 
+#define DOCUMENTS_DIR ([NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject])
 
-// Utility Tags
-#define kTextEntryAlertTag 999111
-#define kTextEntryAlertFieldTag 999112
 
 
 enum  {
@@ -120,7 +128,8 @@ enum  {
 	BURightAlignMode,
 	BUCenterAlignMode,
 	BUTopAlignMode,
-	BUBottomAlignMode
+	BUBottomAlignMode,
+	BUNoneAlignMode
 };
 typedef int LayoutBoxAlignMode;
 
@@ -161,9 +170,11 @@ typedef int LayoutBoxLayoutMode;
 
 // returns new tableview index for key in each row item dataprovider
 +(NSMutableDictionary*)newTableViewIndexFromArray:(NSMutableArray*)dataProvider usingKey:(NSString*)key;
++(NSMutableArray*)newTableIndexArrayFromDictionary:(NSMutableDictionary*)dict withSearch:(BOOL)search ascending:(BOOL)ascending;
 
 // returns new dict for sectioned table views
 +(NSMutableDictionary*)newKeyedDictionaryFromArray:(NSMutableArray*)dataProvider usingKey:(NSString*)key;
++(NSMutableDictionary*)newKeyedDictionaryFromArray:(NSMutableArray*)dataProvider usingKey:(NSString*)key sortedBy:(NSString*)sortkey;
 
 // generic create request: DEPRECATED?
 +(NSMutableURLRequest*)createURLRequestForType:(NSString*)type with:(NSDictionary*)parameters toURL:(NSString*)url;
@@ -181,4 +192,10 @@ typedef int LayoutBoxLayoutMode;
 +(id)sectionDataProviderFromIndexPath:(NSIndexPath*)indexpath dataProvider:(NSDictionary*)dataProvider withKeys:(NSArray*)keys;
 
 +(void)trimArray:(NSMutableArray*)arr FromIndex:(int)index;
+
+// return total entries count for nested arra of arrays
++(int)inflateArrayCountForArray:(NSMutableArray*)arr;
+
++ (void)dismissKeyboard:(UIView*)view;
+
 @end

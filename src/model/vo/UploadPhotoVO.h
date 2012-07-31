@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "PhotoCategoryVO.h"
 
 @interface UploadPhotoVO : NSObject{
     
@@ -15,26 +16,32 @@
 	CLLocation                  *location; // location from photo
     CLLocation                  *userLocation; // location from user
     
-    NSString                    *category;
-    NSString                    *metaCategory;
+    PhotoCategoryVO                    *category;
+    PhotoCategoryVO                    *feature;
+	
+	NSString					*caption;
     
     NSDate                      *date;
     
     NSMutableDictionary         *responseDict;
     
 }
-@property (nonatomic, retain)	UIImage			*image;
-@property (nonatomic, retain)	CLLocation			*location;
-@property (nonatomic, retain)	CLLocation			*userLocation;
-@property (nonatomic, retain)	NSString			*category;
-@property (nonatomic, retain)	NSString			*metaCategory;
-@property (nonatomic, retain)	NSDate			*date;
-@property (nonatomic, retain)	NSMutableDictionary			*responseDict;
+@property (nonatomic, strong) UIImage		* image;
+@property (nonatomic, strong) CLLocation		* location;
+@property (nonatomic, strong) CLLocation		* userLocation;
+@property (nonatomic, strong) PhotoCategoryVO		* category;
+@property (nonatomic, strong) PhotoCategoryVO		* feature;
+@property (nonatomic, strong) NSString		* caption;
+@property (nonatomic, strong) NSDate		* date;
+@property (nonatomic, strong) NSMutableDictionary		* responseDict;
 
 // getters
 @property (nonatomic, readonly) int		 width;
 @property (nonatomic, readonly) int		 height;
-@property (nonatomic,readonly) NSString     *dateTime;
+@property (nonatomic, readonly) NSString		 *dateString;
+@property (unsafe_unretained, nonatomic,readonly) NSString     *dateTime;
+@property (nonatomic, readonly) CLLocation		 *activeLocation;
+@property (nonatomic, readonly) NSString		 *uploadedPhotoId;
 
 - (id)initWithImage:(UIImage *)newImage;
 

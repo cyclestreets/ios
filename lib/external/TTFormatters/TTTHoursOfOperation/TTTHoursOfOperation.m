@@ -73,7 +73,7 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 @synthesize closingHour, closingMinute;
 
 + (id)hoursWithString:(NSString *)string {
-	TTTHoursOfOperationSegment *dailyHours = [[[TTTHoursOfOperationSegment alloc] init] autorelease];
+	TTTHoursOfOperationSegment *dailyHours = [[TTTHoursOfOperationSegment alloc] init];
 	
 	NSCharacterSet *nonDecimalCharacterSet = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
 	NSArray *components = [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsSeparatedByCharactersInSet:nonDecimalCharacterSet];
@@ -90,8 +90,8 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 }
 
 + (NSString *)descriptionForSegments:(NSSet *)segments {
-	NSSortDescriptor *hourSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"openingHour" ascending:YES] autorelease];
-	NSSortDescriptor *minuteSortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"openingMinute" ascending:YES] autorelease];
+	NSSortDescriptor *hourSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"openingHour" ascending:YES];
+	NSSortDescriptor *minuteSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"openingMinute" ascending:YES];
 	NSArray *sortedSegments = [[segments allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObjects:hourSortDescriptor, minuteSortDescriptor, nil]];
 	
 	return [[sortedSegments valueForKeyPath:@"description"] componentsJoinedByString:NSLocalizedString(@", ", @"(delimiter)")];
@@ -133,7 +133,7 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 }
 
 - (NSDateComponents *)openingDateComponents {
-	NSDateComponents *dateComponents = [[[NSDateComponents alloc] init] autorelease];
+	NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
 	[dateComponents setHour:self.openingHour];
 	[dateComponents setMinute:self.openingMinute];
 	
@@ -150,7 +150,7 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 }
 
 - (NSDateComponents *)closingDateComponents {
-	NSDateComponents *dateComponents = [[[NSDateComponents alloc] init] autorelease];
+	NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
 	[dateComponents setHour:self.closingHour];
 	[dateComponents setMinute:self.closingMinute];
 	
@@ -164,8 +164,8 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 
 @interface TTTDailyHoursOfOperation ()
 @property (nonatomic, assign) TTTWeekday weekday;
-@property (nonatomic, retain) NSSet *segments;
-@property (readonly) NSString *weekdaySymbol;
+@property (nonatomic, strong) NSSet *segments;
+@property (unsafe_unretained, readonly) NSString *weekdaySymbol;
 
 - (id)initWithWeekday:(TTTWeekday)someWeekday;
 - (BOOL)hasSameHoursAsDailyHours:(TTTDailyHoursOfOperation *)dailyHours;
@@ -187,7 +187,7 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 		return dailyHours;
 	}
 	
-	NSMutableSet *mutableSegments = [[dailyHours.segments mutableCopy] autorelease];
+	NSMutableSet *mutableSegments = [dailyHours.segments mutableCopy];
 	for (NSString *componentSubstring in [string componentsSeparatedByString:@","]) {
 		[mutableSegments addObject:[TTTHoursOfOperationSegment hoursWithString:componentSubstring]];
 	}
@@ -208,10 +208,6 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 	return self;
 }
 
-- (void)dealloc {
-	[segments release];
-	[super dealloc];
-}
 
 - (NSString *)description {
 	if (self.closed) {
@@ -240,13 +236,13 @@ TTTWeekday TTTWeekdayForNSDate(NSDate *date) {
 #pragma mark -
 
 @interface TTTWeeklyHoursOfOperation ()
-@property (nonatomic, retain) TTTDailyHoursOfOperation *sundayHours;
-@property (nonatomic, retain) TTTDailyHoursOfOperation *mondayHours;
-@property (nonatomic, retain) TTTDailyHoursOfOperation *tuesdayHours;
-@property (nonatomic, retain) TTTDailyHoursOfOperation *wednesdayHours;
-@property (nonatomic, retain) TTTDailyHoursOfOperation *thursdayHours;
-@property (nonatomic, retain) TTTDailyHoursOfOperation *fridayHours;
-@property (nonatomic, retain) TTTDailyHoursOfOperation *saturdayHours;
+@property (nonatomic, strong) TTTDailyHoursOfOperation *sundayHours;
+@property (nonatomic, strong) TTTDailyHoursOfOperation *mondayHours;
+@property (nonatomic, strong) TTTDailyHoursOfOperation *tuesdayHours;
+@property (nonatomic, strong) TTTDailyHoursOfOperation *wednesdayHours;
+@property (nonatomic, strong) TTTDailyHoursOfOperation *thursdayHours;
+@property (nonatomic, strong) TTTDailyHoursOfOperation *fridayHours;
+@property (nonatomic, strong) TTTDailyHoursOfOperation *saturdayHours;
 @end
 
 @implementation TTTWeeklyHoursOfOperation

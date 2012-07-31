@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NetResponse.h"
+#import "TBXML.h"
 
 @protocol ApplicationXMLParserDelegate<NSObject>
 
@@ -23,20 +24,24 @@
 	NetResponse					*activeResponse;
 	NSDictionary				*parserMethods;
 	//delegate
-	id<ApplicationXMLParserDelegate>		delegate;
+	id<ApplicationXMLParserDelegate>		__unsafe_unretained delegate;
 	
 	NSString					*parserError;
 }
-@property(nonatomic,retain)NSMutableDictionary *parsers;
-@property(nonatomic,retain)NetResponse *activeResponse;
-@property(nonatomic,retain)NSDictionary *parserMethods;
-@property(nonatomic,assign)id<ApplicationXMLParserDelegate> delegate;
-@property(nonatomic,retain)NSString *parserError;
+@property(nonatomic,strong)NSMutableDictionary *parsers;
+@property(nonatomic,strong)NetResponse *activeResponse;
+@property(nonatomic,strong)NSDictionary *parserMethods;
+@property(nonatomic,unsafe_unretained)id<ApplicationXMLParserDelegate> delegate;
+@property(nonatomic,strong)NSString *parserError;
 
 
 
 -(void)parseData:(NetResponse*)response;
 
 -(NSDictionary*)parseXML:(NSData*)data forType:(NSString*)datatype;
+
++(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode;
++(NSMutableDictionary*)newDictonaryFromXMLElementAttributes:(TBXMLElement*)innode;
++(NSMutableArray*)newArrayForNodesNamed:(NSString*)nodeName fromXMLElement:(TBXMLElement*)innode;
 
 @end

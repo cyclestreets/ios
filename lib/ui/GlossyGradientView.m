@@ -1,9 +1,9 @@
 //
 //  GlossyGradientView.m
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 09/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import "GlossyGradientView.h"
@@ -168,19 +168,13 @@ static void calc_glossy_color(void* info, const float* in, float* out)
 }
 
 
+
+
+
 @implementation GlossyGradientView
-@synthesize glossyColor,cornerRadius;
+@synthesize glossyColor,cornerRadius,imageView;
 
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [glossyColor release], glossyColor = nil;
-	
-    [super dealloc];
-}
 
 
 
@@ -279,6 +273,15 @@ static void calc_glossy_color(void* info, const float* in, float* out)
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+		self.cornerRadius=0;
+		self.glossyColor = kDefaultGlossyColor;
+		self.backgroundColor=[UIColor clearColor];
+    }
+    return self;
+}
+
 
 - (void)drawRect:(CGRect)rect
 {
@@ -288,9 +291,20 @@ static void calc_glossy_color(void* info, const float* in, float* out)
 	CGSize size = self.frame.size;
 	if ((size.width < MIN_SIZE) || (size.height < MIN_SIZE)) return;
 	
-	// Create and get a pointer to context
-	UIGraphicsBeginImageContext(size);
+	// additional Retina support
+	if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        if ([[UIScreen mainScreen] scale] == 2.0) {
+            UIGraphicsBeginImageContextWithOptions(size, NO, 2.0);
+        } else {
+            UIGraphicsBeginImageContext(size);
+        }
+    } else {
+        UIGraphicsBeginImageContext(size);
+    }
+	
+	
 	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextClearRect(context, self.frame);
 	
 	// Convert co-ordinate system to Cocoa's (origin in UL, not LL)
 	CGContextTranslateCTM(context, 0, size.height);
@@ -307,12 +321,15 @@ static void calc_glossy_color(void* info, const float* in, float* out)
 	// Draw background image
 	[GlossyGradientView drawGlossyRect:CGRectMake(0, 0, size.width, size.height) withColor:glossyColor inContext:context];
 	
+	// allow for setNeedsDisplay support
+	if(imageView==nil){
+		self.imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+		[self addSubview:imageView]; 
+		[self sendSubviewToBack:imageView]; // move to back incase view has nested sub views	
+	}
+	[imageView setFrame:CGRectMake(0, 0, size.width, size.height)];
+	imageView.image=UIGraphicsGetImageFromCurrentImageContext();
 	
-	UIImageView *bgimage=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-	bgimage.image=UIGraphicsGetImageFromCurrentImageContext();
-	[self addSubview:bgimage]; 
-	[self sendSubviewToBack:bgimage]; // move to back incase view has nested sub views	
-	[bgimage release];
 		
 	// Release image context
 	UIGraphicsEndImageContext();

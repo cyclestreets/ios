@@ -48,20 +48,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
 																	  style:UIBarButtonItemStyleBordered
 																	 target:self
-																	 action:@selector(didCancelSelection)]
-									 autorelease];
-	UIBarButtonItem *gap = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																	 action:@selector(didCancelSelection)];
+	UIBarButtonItem *gap = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
 																		  target:nil
-																		  action:nil]
-							autorelease];
-	UIBarButtonItem *useButton = [[[UIBarButtonItem alloc] initWithTitle:@"Use"
+																		  action:nil];
+	UIBarButtonItem *useButton = [[UIBarButtonItem alloc] initWithTitle:@"Use"
 																   style:UIBarButtonItemStyleBordered
 																  target:self
-																  action:@selector(didUseSelection)]
-								  autorelease];
+																  action:@selector(didUseSelection)];
 	useButton.width = 100;
 	[self setToolbarItems:[NSArray arrayWithObjects:cancelButton, gap, useButton, nil] animated:YES];
 	[self.navigationController setToolbarHidden:NO];	
@@ -69,8 +66,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 -(void)setAsset:(ALAsset *)newAsset {
-	[newAsset retain];
-	[asset release];
 	asset = newAsset;
 	
 	ALAssetRepresentation *representation = [asset defaultRepresentation];
@@ -111,7 +106,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)dealloc {
 	[self nullify];
-    [super dealloc];
 }
 
 

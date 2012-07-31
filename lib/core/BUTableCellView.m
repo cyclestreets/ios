@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 12/08/2011.
-//  Copyright 2011 CycleStreets.. All rights reserved.
+//  Copyright 2011 Buffer. All rights reserved.
 //
 
 #import "BUTableCellView.h"
@@ -12,11 +12,25 @@
 
 
 
+//
+/***********************************************
+ * @description			if this is called, the tableview will automatically create a new nib instance if required
+ ***********************************************/
+//
++(void)cacheCellForTableView:(UITableView*)tableView fromNib:(UINib *)nib{
+	
+	NSString *cellID = [self cellIdentifier];
+	
+	[tableView registerNib:nib forCellReuseIdentifier:cellID];
+	
+}
+
 
 + (id)cellForTableView:(UITableView *)tableView fromNib:(UINib *)nib {
     NSString *cellID = [self cellIdentifier];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+	
     if (cell == nil) {
         NSArray *nibObjects = [nib instantiateWithOwner:nil options:nil];
 		
@@ -50,6 +64,13 @@
 -(IBAction)cellButtonWasSelected:(id)sender{}
 
 
+-(void)sendCellButtonNotification:(NSDictionary*)dict{
+	
+	if(dict!=nil)
+		[[NSNotificationCenter defaultCenter] postNotificationName:BUCELLNOTIFICATION object:nil userInfo:
+		 [NSDictionary dictionaryWithObjectsAndKeys:[self className],@"type",dict,EVENTDICT,nil]];
+		
+}
 
 
 

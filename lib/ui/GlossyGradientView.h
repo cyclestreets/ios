@@ -1,9 +1,9 @@
 //
 //  GlossyGradientView.h
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 09/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,9 +14,12 @@
 	UIColor		*glossyColor;
 	int			cornerRadius;
 	
+	UIImageView	*imageView;
+	
 }
-@property(nonatomic,retain)UIColor *glossyColor;
-@property(nonatomic)int cornerRadius;
+@property (nonatomic, strong)	UIColor		*glossyColor;
+@property (nonatomic)	int		cornerRadius;
+@property (nonatomic, strong)	UIImageView		*imageView;
 + (void)setPathToRoundedRect:(CGRect)rect forInset:(NSUInteger)inset inContext:(CGContextRef)context forRadius:(int)radius;
 + (void)drawGlossyRect:(CGRect)rect withColor:(UIColor*)color inContext:(CGContextRef)context;
 //+ (void)setBackgroundToGlossyButton:(UIButton*)button forColor:(UIColor*)color withBorder:(BOOL)border forState:(UIControlState)state;

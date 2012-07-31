@@ -86,12 +86,5 @@
 	//CGContextClip(context); //NE
 }
 
-- (void)dealloc {
-    [strokeColor release];
-	strokeColor=nil;
-    [rectColor release];
-	rectColor=nil;
-    [super dealloc];
-}
 
 @end

@@ -10,7 +10,7 @@
 #import "CycleStreets.h"
 #import "RouteVO.h"
 #import "Files.h"
-#import "CycleStreetsAppDelegate.h"
+#import "AppDelegate.h"
 #import "RouteManager.h"
 #import "FavouritesManager.h"
 #import "GlobalUtilities.h"
@@ -40,20 +40,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 @synthesize routeidStore;
 @synthesize favouritesdataProvider;
 @synthesize recentsdataProvider;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [routeidStore release], routeidStore = nil;
-    [favouritesdataProvider release], favouritesdataProvider = nil;
-    [recentsdataProvider release], recentsdataProvider = nil;
-	
-    [super dealloc];
-}
-
-
 
 
 //=========================================================== 
@@ -87,7 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		for(NSString *routeid in routes){
 		
-			RouteVO *route=[[RouteManager sharedInstance] loadRouteForID:[routeid intValue]];
+			RouteVO *route=[[RouteManager sharedInstance] loadRouteForFileID:routeid];
 			
 			if(route!=nil){
 				if([key isEqualToString:SAVEDROUTE_FAVS]){
@@ -104,9 +90,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	}
 	
 	self.favouritesdataProvider=favarr;
-	[favarr release];
 	self.recentsdataProvider=recentarr;
-	[recentarr release];
 	
 	// v1>v2 transition method
 	[self transferOldFavouritesToRecents];
@@ -131,12 +115,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		for(NSString *routeid in favourites){
 			
-			RouteVO *route=[[RouteManager sharedInstance] loadRouteForID:[routeid intValue]];
+			RouteVO *route=[[RouteManager sharedInstance] legacyLoadRoute:routeid];
 			
 			
 			if(route!=nil){
 				[recentsdataProvider addObject:route];
-				[routeidarr addObject:routeid];
+				[routeidarr addObject:route.fileid];
 			}
 			
 		}
@@ -168,7 +152,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
  * @description			adda new route to the temp stores and update the saved index file
  ***********************************************/
 //
--(void)addRouteToDataProvider:(RouteVO*)route dp:(NSString*)type{
+-(void)addRoute:(RouteVO*)route toDataProvider:(NSString*)type{
 	
 	if([type isEqualToString:SAVEDROUTE_FAVS]){
 		[favouritesdataProvider insertObject:route atIndex:0];
@@ -177,7 +161,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	}
 	
 	NSMutableArray *arr=[routeidStore objectForKey:type];
-	[arr addObject:route.routeid];
+	[arr addObject:route.fileid];
 	
 	[self saveIndicies];
 	
@@ -188,37 +172,40 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
  * @description			handles Route movement from Recents <> favourites
  ***********************************************/
 //
--(void)moveRouteToDataProvider:(RouteVO*)route dp:(NSString*)type{
+-(void)moveRoute:(RouteVO*)route toDataProvider:(NSString*)type{
 	
     NSString *key=[self findRouteType:route];
     
     if([key isEqualToString:@"NotFound"]){
-        // this should not occur!
+        BetterLog(@"[ERROR] Unable to find current route in dataProvider");
     }else{
         
-        NSMutableArray *arr;
-        if([type isEqualToString:SAVEDROUTE_FAVS]){
-            arr=favouritesdataProvider;
+        NSMutableArray *fromArr;
+        if([type isEqualToString:SAVEDROUTE_RECENTS]){
+            fromArr=favouritesdataProvider;
         }else{
-            arr=recentsdataProvider;
+            fromArr=recentsdataProvider;
         }
         
-        int index=[arr indexOfObjectIdenticalTo:route];
-        [arr removeObjectAtIndex:index];
+        int index=[fromArr indexOfObjectIdenticalTo:route];
+		if(index<[fromArr count])
+			[fromArr removeObjectAtIndex:index];
         
         if([type isEqualToString:SAVEDROUTE_FAVS]){
-            [recentsdataProvider insertObject:route atIndex:0];
-        }else{
             [favouritesdataProvider insertObject:route atIndex:0];
+        }else{
+            [recentsdataProvider insertObject:route atIndex:0];
         }
 		
 		// update id arrs
 		NSMutableArray *newidarr=[routeidStore objectForKey:type];
 		NSMutableArray *idarr=[routeidStore objectForKey:[SavedRoutesManager returnRouteTypeInvert:type]];
-		[newidarr addObject:route.routeid];
-		[idarr removeObject:route.routeid];
+		[newidarr addObject:route.fileid];
+		[idarr removeObject:route.fileid];
 		
 		[self saveIndicies];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:SAVEDROUTEUPDATE object:nil];
     }
 	
 	
@@ -234,13 +221,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
         arr=recentsdataProvider;
     }
     
-    int index=[arr indexOfObjectIdenticalTo:route.routeid];
-    [arr removeObjectAtIndex:index];
+    int index=[arr indexOfObjectIdenticalTo:route];
 	
-	NSMutableArray *idarr=[routeidStore objectForKey:type];
-	[idarr removeObject:route.routeid];
+	if(index<[arr count]){
+		
+		[arr removeObjectAtIndex:index];
 	
-	[self saveIndicies];
+		NSMutableArray *idarr=[routeidStore objectForKey:type];
+		[idarr removeObject:route.fileid];
+	
+		[self saveIndicies];
+	}
     
 }
 
@@ -254,7 +245,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		if(index!=-1 && index!=0){
 			[routes removeObjectAtIndex:index];
-			[[RouteManager sharedInstance] removeRouteForID:[route.routeid intValue]];
+			[[RouteManager sharedInstance] removeRoute:route];
 		}
 		
 	}
@@ -277,6 +268,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 
 //
 /***********************************************
+ * @description			Persists a route to disk and updates the UI
+ ***********************************************/
+//
+-(void)saveRouteChangesForRoute:(RouteVO*)route{
+	
+	[[RouteManager sharedInstance] saveRoute:route];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:SAVEDROUTEUPDATE object:nil];
+	
+}
+
+
+//
+/***********************************************
  * @description			Utility
  ***********************************************/
 //
@@ -288,7 +293,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObject:route.routeid];
+		int index=[routes indexOfObject:route.fileid];
 		
 		if(index!=NSNotFound && index!=0){
 			[routes exchangeObjectAtIndex:0 withObjectAtIndex:index];
@@ -305,7 +310,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObjectIdenticalTo:route.routeid];
+		int index=[routes indexOfObject:route.fileid];
 		
 		if(index!=NSNotFound){
 			return key;
@@ -326,7 +331,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObjectIdenticalTo:routeid];
+		int index=[routes indexOfObject:routeid];
 		
 		if(index!=NSNotFound){
 			break;
@@ -354,15 +359,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 
 - (void) saveIndicies {
 	
-	BOOL result=[routeidStore writeToFile:[self indiciesFile] atomically:YES];
-	BetterLog(@"did save=%i",result);
+	[routeidStore writeToFile:[self indiciesFile] atomically:YES];
+	//BetterLog(@"did save=%i",result);
 }
 
 
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr{
 	
 	for (NSString *routeid in arr){
-		[[RouteManager sharedInstance] removeRoute:routeid];
+		[[RouteManager sharedInstance] legacyRemoveRouteFile:routeid];
 	}
 	
 }

@@ -6,7 +6,7 @@
 //  Copyright 2011 CycleStreets Ltd. All rights reserved.
 //
 
-// readout view for Stage Segment map view (Stage.h)
+// readout view for RouteSegmentViewController map view (RouteSegmentViewController.h)
 
 #import <UIKit/UIKit.h>
 #import "LayoutBox.h"
@@ -35,19 +35,19 @@
 	UIImageView					*roadTypeiconView;
 
 }
-@property (nonatomic, retain)	NSDictionary		*dataProvider;
+@property (nonatomic, strong)	NSDictionary		*dataProvider;
 @property (nonatomic)	BOOL		hasCapitalizedTurn;
-@property (nonatomic, retain)	LayoutBox		*contentContainer;
-@property (nonatomic, retain)	ExpandedUILabel		*roadNameLabel;
-@property (nonatomic, retain)	ExpandedUILabel		*roadTypeLabel;
-@property (nonatomic, retain)	ExpandedUILabel		*capitalizedTurnLabel;
-@property (nonatomic, retain)	LayoutBox		*readoutContainer;
-@property (nonatomic, retain)	MultiLabelLine		*timeLabel;
-@property (nonatomic, retain)	MultiLabelLine		*distLabel;
-@property (nonatomic, retain)	MultiLabelLine		*totalLabel;
-@property (nonatomic, retain)	ExpandedUILabel		*segmentIndexLabel;
-@property (nonatomic, retain)	IBOutlet UIImageView		*iconView;
-@property (nonatomic, retain)	IBOutlet UIImageView		*roadTypeiconView;
+@property (nonatomic, strong)	LayoutBox		*contentContainer;
+@property (nonatomic, strong)	ExpandedUILabel		*roadNameLabel;
+@property (nonatomic, strong)	ExpandedUILabel		*roadTypeLabel;
+@property (nonatomic, strong)	ExpandedUILabel		*capitalizedTurnLabel;
+@property (nonatomic, strong)	LayoutBox		*readoutContainer;
+@property (nonatomic, strong)	MultiLabelLine		*timeLabel;
+@property (nonatomic, strong)	MultiLabelLine		*distLabel;
+@property (nonatomic, strong)	MultiLabelLine		*totalLabel;
+@property (nonatomic, strong)	ExpandedUILabel		*segmentIndexLabel;
+@property (nonatomic, strong)	IBOutlet UIImageView		*iconView;
+@property (nonatomic, strong)	IBOutlet UIImageView		*roadTypeiconView;
 
 -(void)initialise;
 -(void)updateLayout;

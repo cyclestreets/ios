@@ -15,7 +15,7 @@
 #import "ExpandedUILabel.h"
 #import "StringManager.h"
 #import "ButtonUtilities.h"
-#import "CycleStreetsAppDelegate.h"
+#import "AppDelegate.h"
 
 @implementation SuperViewController
 @synthesize navigation;
@@ -27,6 +27,7 @@
 @synthesize GATag;
 @synthesize activeViewOverlayType;
 @synthesize viewOverlayView;
+@synthesize displaysConnectionErrors;
 
 
 
@@ -35,15 +36,8 @@
 //=========================================================== 
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	 [navigation release], navigation = nil;
-    [delegate release], delegate = nil;
-    [notifications release], notifications = nil;
-    [UIType release], UIType = nil;
-    [GATag release], GATag = nil;
-    [viewOverlayView release], viewOverlayView = nil;
-	
-    [super dealloc];
+	//[[NSNotificationCenter defaultCenter] removeObserver:self];
+	delegate = nil;	
 }
 
 
@@ -53,6 +47,7 @@
 
 -(void)initialise{
 	
+	displaysConnectionErrors=YES;
 	self.notifications=[[NSMutableArray alloc]init];
 	
 }
@@ -132,19 +127,24 @@
 	
 	//BetterLog(@" name=%@",notification.name);
 	
-	if([notification.name isEqualToString:DATAREQUESTFAILED]){
-		if (![UIType isEqualToString:UITYPE_MODALUI]) {
-			[navigation createRightNavItemWithType:BUNavRefreshType];
-		}
-	//	[self handleRemoteRequestIndication:NO];
-		
-	}else if([notification.name isEqualToString:CONNECTIONERROR]){
-		if (![UIType isEqualToString:UITYPE_MODALUI]) {
-			[navigation createRightNavItemWithType:BUNavRefreshType];
-		}
+	
+	if(displaysConnectionErrors==YES){
+	
+		if([notification.name isEqualToString:DATAREQUESTFAILED]){
+			if (![UIType isEqualToString:UITYPE_MODALUI]) {
+				[navigation createRightNavItemWithType:BUNavRefreshType];
+			}
+		//	[self handleRemoteRequestIndication:NO];
+			
+		}else if([notification.name isEqualToString:CONNECTIONERROR]){
+			if (![UIType isEqualToString:UITYPE_MODALUI]) {
+				[navigation createRightNavItemWithType:BUNavRefreshType];
+			}
 
-	//	[self handleRemoteRequestIndication:NO];
-		[self showViewOverlayForType:kViewOverlayTypeConnectionFailed show:YES withMessage:nil];
+		//	[self handleRemoteRequestIndication:NO];
+			[self showViewOverlayForType:kViewOverlayTypeConnectionFailed show:YES withMessage:nil];
+		}
+		
 	}
 	
 }
@@ -192,6 +192,10 @@
 		}else if ([UIType isEqualToString:UITYPE_CONTROLHEADERUI]) {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
+			
+		}else if ([UIType isEqualToString:UITYPE_MODALUI]) {
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];	
 		}else {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
@@ -325,7 +329,7 @@
  ***********************************************/
 //
 -(IBAction)loginButtonSelected:(id)sender{
-	CycleStreetsAppDelegate *appDelegate=(CycleStreetsAppDelegate*)[[UIApplication sharedApplication] delegate];
+	AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
 	[appDelegate showTabBarViewControllerByName:@"Account"];
 }
 

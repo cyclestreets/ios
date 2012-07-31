@@ -11,8 +11,8 @@
 #import "ItineraryCellView.h"
 #import "SegmentVO.h"
 #import "CycleStreets.h"
-#import "CycleStreetsAppDelegate.h"
-#import "Stage.h"
+#import "AppDelegate.h"
+#import "RouteSegmentViewController.h"
 #import "ButtonUtilities.h"
 #import "AppConstants.h"
 #import "ExpandedUILabel.h"
@@ -20,40 +20,18 @@
 #import "LayoutBox.h"
 #import "ViewUtilities.h"
 #import "GradientView.h"
-#import "MAKVONotificationCenter.h"
 
 @implementation ItineraryViewController
 @synthesize route;
 @synthesize routeId;
 @synthesize headerText;
-@synthesize stageViewcontroller;
+@synthesize routeSegmentViewcontroller;
 @synthesize routeidLabel;
 @synthesize readoutLineOne;
 @synthesize readoutLineTwo;
 @synthesize readoutContainer;
 @synthesize tableView;
 @synthesize rowHeightsArray;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [route release], route = nil;
-    [headerText release], headerText = nil;
-    [stageViewcontroller release], stageViewcontroller = nil;
-    [routeidLabel release], routeidLabel = nil;
-    [readoutLineOne release], readoutLineOne = nil;
-    [readoutLineTwo release], readoutLineTwo = nil;
-    [readoutContainer release], readoutContainer = nil;
-    [tableView release], tableView = nil;
-    [rowHeightsArray release], rowHeightsArray = nil;
-	
-    [super dealloc];
-}
-
-
-
 
 
 
@@ -153,7 +131,6 @@
 	readoutlabel.text=@"Select any section to view the map and details for this segment.";
 	
 	[readoutContainer addSubViewsFromArray:[NSArray arrayWithObjects:readoutLineOne,readoutLineTwo,readoutlabel,nil]];
-	[readoutlabel release];
 	
 	[self createNavigationBarUI];
 }
@@ -244,22 +221,59 @@
 	cell.dataProvider=segment;
 	[cell populate];
 	
+	UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+	[cell addGestureRecognizer:recognizer];
+	
     return cell;
 }
 
+- (void)longPress:(UILongPressGestureRecognizer *)recognizer {	
+	
+	BetterLog(@"");
+	
+	if (recognizer.state == UIGestureRecognizerStateBegan) {
+		
+		BetterLog(@"");
+		
+		ItineraryCellView *cell = (ItineraryCellView *)recognizer.view;
+        [cell becomeFirstResponder];
+		
+        UIMenuItem *flag = [[UIMenuItem alloc] initWithTitle:@"Flag" action:@selector(flag:)];
+        UIMenuItem *approve = [[UIMenuItem alloc] initWithTitle:@"Approve" action:@selector(approve:)];
+		UIMenuItem *deny = [[UIMenuItem alloc] initWithTitle:@"Deny" action:@selector(deny:)];
+		
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+		[menu setMenuItems:[NSArray arrayWithObjects:flag, approve, deny, nil]];
+		//[menu setTargetRect:cell.frame inView:cell.superview];
+        [menu setMenuVisible:YES animated:YES];
+	}
+}
 
+
+- (void)flag:(id)sender {
+	NSLog(@"Cell was flagged");
+}
+
+- (void)approve:(id)sender {
+	NSLog(@"Cell was approved");
+}
+
+- (void)deny:(id)sender {
+	NSLog(@"Cell was denied");
+}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+	// TODO: this should be pushed not presented
 	
-	if(stageViewcontroller==nil){
-		self.stageViewcontroller=[[Stage alloc] init];
+	if(routeSegmentViewcontroller==nil){
+		self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] init];
 	}
 	
-	[stageViewcontroller setRoute:route];
-	[self presentModalViewController:stageViewcontroller animated:YES];
-	[stageViewcontroller setSegmentIndex:indexPath.row];
+	[routeSegmentViewcontroller setRoute:route];
+	[self presentModalViewController:routeSegmentViewcontroller animated:YES];
+	[routeSegmentViewcontroller setSegmentIndex:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -310,7 +324,6 @@
 		titlelabel.textColor=[UIColor grayColor];
 		titlelabel.text=@"You have no route active currently.";
 		[contentContainer addSubview:titlelabel];					
-		[titlelabel release];
 		
 		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 		infolabel.font=[UIFont systemFontOfSize:13];
@@ -319,7 +332,6 @@
 		infolabel.textColor=[UIColor grayColor];
 		infolabel.text=@"Once you have loaded a route, the itinerary will be shown here.";
 		[contentContainer addSubview:infolabel];					
-		[infolabel release];
 		
 		UIButton *routeButton=[ButtonUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan route"];
 		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
@@ -332,8 +344,6 @@
 		[errorView addSubview:contentContainer];
 		[ViewUtilities alignView:contentContainer withView:errorView :BUNoneLayoutMode :BUCenterAlignMode];
 		[self.view addSubview:errorView];
-		[contentContainer release];
-		[errorView release];
 		
 	}else {
 		UIView	*errorView = [self.view viewWithTag:kItineraryPlanView];

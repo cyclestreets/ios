@@ -38,7 +38,6 @@ static NSDictionary *roadIcons;
 - (id) initWithDictionary:(NSDictionary *)dictionary atTime:(NSInteger)time atDistance:(NSInteger)distance {
 	if (self = [super init]) {
 		xmlDict = dictionary;
-		[xmlDict retain];
 		startTime = time;
 		startDistance = distance;
 	}
@@ -90,9 +89,9 @@ static NSDictionary *roadIcons;
 - (NSArray *)allPoints {
 	NSCharacterSet *whiteComma = [NSCharacterSet characterSetWithCharactersInString:@", "];
 	NSArray *XYs = [[xmlDict valueForKey:@"cs:points"] componentsSeparatedByCharactersInSet:whiteComma];
-	NSMutableArray *result = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *result = [[NSMutableArray alloc] init];
 	for (int X = 0; X < [XYs count]; X += 2) {
-		CSPointVO *p = [[[CSPointVO alloc] init] autorelease];
+		CSPointVO *p = [[CSPointVO alloc] init];
 		CGPoint point;
 		point.x = [[XYs objectAtIndex:X] doubleValue];
 		point.y = [[XYs objectAtIndex:X+1] doubleValue];
@@ -114,7 +113,7 @@ static NSDictionary *roadIcons;
 	
 	if (nil == roadIcons) {
 		//TODO the association of symbols to types could be improved
-		roadIcons = [[NSDictionary dictionaryWithObjectsAndKeys:
+		roadIcons = [NSDictionary dictionaryWithObjectsAndKeys:
 					  @"UIIcon_roads.png", @"busy road", 
 					  @"UIIcon_roads.png", @"road", 
 					  @"UIIcon_roads.png", @"busy and fast road", 
@@ -139,14 +138,14 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_quiet_street.png", @"residential street",
 					  @"UIIcon_quiet_street.png", @"unclassified, service", // need icon for this
 					  @"UIIcon_quiet_street.png", @"unclassified,service",
-					 nil] retain];
+					 nil];
 	}
 	
 	return [roadIcons valueForKey:provisionName];
 }
 
 /*
- * Used to set table view cell and Stage view, which have been set up to share UI fields of the same name.
+ * Used to set table view cell and RouteSegmentViewController view, which have been set up to share UI fields of the same name.
  */
 - (void) setUIElements:(NSObject *)view/*or controller*/ {
 	[view setValue:[self roadName] forKeyPath:@"road.text"];
@@ -242,10 +241,5 @@ static NSDictionary *roadIcons;
 }
 
 
-- (void) dealloc {
-	[xmlDict release];
-	
-	[super dealloc];
-}
 
 @end

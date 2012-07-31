@@ -10,6 +10,9 @@
 @synthesize rectColor;
 @synthesize strokeWidth;
 @synthesize cornerRadius;
+
+
+
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder:decoder])
@@ -83,12 +86,10 @@
     CGContextClosePath(context);
     CGContextDrawPath(context, kCGPathFillStroke);
 	//CGContextClip(context); //NE
+	
+	
 }
 
-- (void)dealloc {
-    [strokeColor release];
-    [rectColor release];
-    [super dealloc];
-}
+
 
 @end

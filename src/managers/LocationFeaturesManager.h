@@ -18,8 +18,8 @@
 	
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(LocationFeaturesManager)
-@property (nonatomic, retain)	NSMutableArray		*locationDataProvider;
-@property (nonatomic, retain)	CLLocation		*curentLocation;
+@property (nonatomic, strong)	NSMutableArray		*locationDataProvider;
+@property (nonatomic, strong)	CLLocation		*curentLocation;
 
 
 -(void)retreiveFeaturesForLocation:(CLLocation*)location;

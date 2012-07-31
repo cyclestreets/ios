@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 + (RMMarker *)marker:(NSString *)name label:(NSString *)label {
 	UIImage *image = [UIImage imageNamed:name];
-	RMMarker *marker = [[[RMMarker alloc] initWithUIImage:image] autorelease];
+	RMMarker *marker = [[RMMarker alloc] initWithUIImage:image];
 	[marker changeLabelUsingText:label];
 	return marker;
 }
@@ -50,18 +50,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // never referenced
 + (RMMarker *)markerWaypoint {
-	return [Markers marker:@"map-pin.png" label:nil];
+	return [Markers marker:@"Map_Pin_Green.png" label:nil];
 }
 
 + (RMMarker *)markerPhoto {
 	return [Markers marker:@"UIIcon_photomap.png" label:nil];
 }
 
++ (RMMarker *)markerUserPhoto {
+	return [Markers marker:@"UIIcon_userphotomap.png" label:nil];
+}
+
 + (RMMarker *)marker:(NSString *)name atAngle:(int)angle {
 	UIImage *image = [UIImage imageNamed:name];
 	
 	UIImage *rotated=[UIImage rotateImage:image byDegrees:angle];
-	RMMarker *marker = [[[RMMarker alloc] initWithUIImage:rotated] autorelease];
+	RMMarker *marker = [[RMMarker alloc] initWithUIImage:rotated];
 	return marker;	
 }
 

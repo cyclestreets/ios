@@ -29,10 +29,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "LayoutBox.h"
 #import "SuperViewController.h"
 #import "ExpandedUILabel.h"
+#import "SavedRoutesManager.h"
 
 @interface RouteSummary : SuperViewController {
 	
 	RouteVO								*route;
+	
+	SavedRoutesDataType					dataType;
+	
+	UIScrollView						*scrollView;
 	
 	LayoutBox							*viewContainer;
 	
@@ -50,24 +55,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	IBOutlet		UIButton			*routeButton;
 	IBOutlet		UIButton			*renameButton;
+	IBOutlet		UIButton			*favouriteButton;
 	
 }
 
-@property (nonatomic, retain)	RouteVO		*route;
-@property (nonatomic, retain)	LayoutBox		*viewContainer;
-@property (nonatomic, retain)	IBOutlet LayoutBox		*headerContainer;
-@property (nonatomic, retain)	IBOutlet ExpandedUILabel		*routeNameLabel;
-@property (nonatomic, retain)	IBOutlet UILabel		*dateLabel;
-@property (nonatomic, retain)	IBOutlet UILabel		*routeidLabel;
-@property (nonatomic, retain)	IBOutlet LayoutBox		*readoutContainer;
-@property (nonatomic, retain)	IBOutlet UILabel		*timeLabel;
-@property (nonatomic, retain)	IBOutlet UILabel		*lengthLabel;
-@property (nonatomic, retain)	IBOutlet UILabel		*planLabel;
-@property (nonatomic, retain)	IBOutlet UILabel		*speedLabel;
-@property (nonatomic, retain)	IBOutlet UIButton		*routeButton;
-@property (nonatomic, retain)	IBOutlet UIButton		*renameButton;
+@property (nonatomic, strong) RouteVO		* route;
+@property (nonatomic, assign) SavedRoutesDataType		 dataType;
+@property (nonatomic, strong) UIScrollView		* scrollView;
+@property (nonatomic, strong) LayoutBox		* viewContainer;
+@property (nonatomic, strong) IBOutlet LayoutBox		* headerContainer;
+@property (nonatomic, strong) IBOutlet ExpandedUILabel		* routeNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* dateLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* routeidLabel;
+@property (nonatomic, strong) IBOutlet LayoutBox		* readoutContainer;
+@property (nonatomic, strong) IBOutlet UILabel		* timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* lengthLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* planLabel;
+@property (nonatomic, strong) IBOutlet UILabel		* speedLabel;
+@property (nonatomic, strong) IBOutlet UIButton		* routeButton;
+@property (nonatomic, strong) IBOutlet UIButton		* renameButton;
+@property (nonatomic, strong) IBOutlet UIButton		* favouriteButton;
 
-- (IBAction) didRouteButton;
--(IBAction)renameButtonSelected:(id)sender;
+- (IBAction) routeButtonSelected;
+-(IBAction) renameButtonSelected:(id)sender;
+-(IBAction) favouriteButtonSelected:(id)sender;
 
 @end

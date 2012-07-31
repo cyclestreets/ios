@@ -18,23 +18,6 @@
 @synthesize mandatory;
 
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [itemid release], itemid = nil;
-    [validateType release], validateType = nil;
-    [parameters release], parameters = nil;
-    [errorString release], errorString = nil;
-    [itemType release], itemType = nil;
-	
-    [super dealloc];
-}
-
-
-
-
 - (id)init
 {
     self = [super init];

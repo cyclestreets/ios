@@ -21,20 +21,6 @@
 @synthesize userIP;
 @synthesize deleted;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [requestname release], requestname = nil;
-    [username release], username = nil;
-    [email release], email = nil;
-    [name release], name = nil;
-    [validatedDate release], validatedDate = nil;
-    [userIP release], userIP = nil;
-	
-    [super dealloc];
-}
 
 
 @end

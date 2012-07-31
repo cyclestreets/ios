@@ -18,7 +18,7 @@
 	IBOutlet	UILabel				*urlLabel;
 	
 }
-@property (nonatomic, retain)	POILocationVO		*dataProvider;
-@property (nonatomic, retain)	IBOutlet UILabel		*nameLabel;
-@property (nonatomic, retain)	IBOutlet UILabel		*urlLabel;
+@property (nonatomic, strong)	POILocationVO		*dataProvider;
+@property (nonatomic, strong)	IBOutlet UILabel		*nameLabel;
+@property (nonatomic, strong)	IBOutlet UILabel		*urlLabel;
 @end

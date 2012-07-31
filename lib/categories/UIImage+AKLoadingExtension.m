@@ -14,7 +14,6 @@
 {
     NSString *imageFile = [[NSString alloc] initWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], filename];
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:imageFile];
-    [imageFile release];
     return image;
 }
 

@@ -26,7 +26,7 @@
 	UILabel *onText;
 	UILabel *offText;	
 }
-@property (nonatomic, retain)		 UILabel		* onText;
-@property (nonatomic, retain)		 UILabel		* offText;
+@property (nonatomic, strong)		 UILabel		* onText;
+@property (nonatomic, strong)		 UILabel		* offText;
 
 @end

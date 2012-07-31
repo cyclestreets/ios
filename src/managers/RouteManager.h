@@ -34,20 +34,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 - (void) runQuery:(Query *)query;
 - (void) runRouteIdQuery:(Query *)query;
 - (void) selectRoute:(RouteVO *)route;
-- (void) clearSelectedRoute;
--(BOOL)hasSelectedRoute;
 
 //new
+-(void)loadRouteForRouteId:(NSString*)routeid; // route id remote loading
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation;
--(void)loadRouteForRouteId:(NSString*)routeid;
--(void)removeRoute:(NSString*)routeid;
 
--(void)loadRouteWithIdentifier:(NSString*)routeid;
 -(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan;
 -(void)loadSavedSelectedRoute;
 
-- (RouteVO *)loadRouteForID:(NSInteger) routeIdentifier;
-- (void)saveRoute:(RouteVO *)route forID:(NSInteger) routeIdentifier ;
-- (void)removeRouteForID:(NSInteger) routeIdentifier;
+-(RouteVO*)loadRouteForFileID:(NSString*)fileid;
+- (void)saveRoute:(RouteVO *)route;
+
+-(void)removeRoute:(RouteVO*)route;
+- (void)removeRouteFile:(RouteVO*)route;
+
+- (void) clearSelectedRoute;
+-(BOOL)hasSelectedRoute;
+
+
+// legacy
+
+- (void)legacyRemoveRouteFile:(NSString*)routeid;
+-(RouteVO*)legacyLoadRoute:(NSString*)routeid;
 
 @end

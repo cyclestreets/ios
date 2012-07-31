@@ -7,6 +7,12 @@
 
 #import <UIKit/UIKit.h>
 
+enum  {
+	BUGradiantDirectionVertical,
+	BUGradiantDirectionHorizontal
+};
+int typedef BUGradiantDirection;
+
 @interface GradientView : UIView
 {
     float startRed;
@@ -18,9 +24,12 @@
     float endBlue;
 	
     BOOL mirrored;
+	
+	BUGradiantDirection		direction;
 }
 
-@property (nonatomic) BOOL mirrored;
+@property (nonatomic)		BOOL		 mirrored;
+@property (nonatomic)		BUGradiantDirection		 direction;
 
 - (void) setColoursWithCGColors:(CGColorRef)color1:(CGColorRef)color2;
 - (void) setColours:(float) startRed:(float) startGreen:(float) startBlue:(float) endRed:(float) endGreen:(float)endBlue;

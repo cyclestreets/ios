@@ -10,6 +10,12 @@
 #import "SynthesizeSingleton.h"
 #import "RouteVO.h"
 
+enum  {
+	SavedRoutesDataTypeRecent,
+	SavedRoutesDataTypeFavourite
+};
+typedef int SavedRoutesDataType;
+
 #define SAVEDROUTESARCHIVEPATH @"savedroutes"
 
 @interface SavedRoutesManager : NSObject {
@@ -20,18 +26,20 @@
 	
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SavedRoutesManager);
-@property (nonatomic, retain)	NSMutableDictionary		*routeidStore;
-@property (nonatomic, retain)	NSMutableArray		*favouritesdataProvider;
-@property (nonatomic, retain)	NSMutableArray		*recentsdataProvider;
+@property (nonatomic, strong)	NSMutableDictionary		*routeidStore;
+@property (nonatomic, strong)	NSMutableArray		*favouritesdataProvider;
+@property (nonatomic, strong)	NSMutableArray		*recentsdataProvider;
 
 -(void)removeRoute:(RouteVO*)route;
 -(void)removeRoute:(RouteVO*)route fromDataProvider:(NSString*)type;
 -(void)loadSavedRoutes;
 - (void) selectRoute:(RouteVO *)route;
 
--(void)moveRouteToDataProvider:(RouteVO*)route dp:(NSString*)type;
--(void)addRouteToDataProvider:(RouteVO*)route dp:(NSString*)type;
+-(void)moveRoute:(RouteVO*)route toDataProvider:(NSString*)type;
+-(void)addRoute:(RouteVO*)route toDataProvider:(NSString*)type;
 
 -(NSMutableArray*)dataProviderForType:(NSString*)type;
+
+-(void)saveRouteChangesForRoute:(RouteVO*)route;
 
 @end

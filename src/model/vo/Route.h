@@ -34,17 +34,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	NSString		*userRouteName; // user editable route name, displayed if set
 }
-@property (nonatomic, retain)	NSMutableArray		*segments;
-@property (nonatomic, retain)	NSDictionary		*header;
-@property (nonatomic, retain)	NSString		*userRouteName;
+@property (nonatomic, strong)	NSMutableArray		*segments;
+@property (nonatomic, strong)	NSDictionary		*header;
+@property (nonatomic, strong)	NSString		*userRouteName;
 
 
 // getters
-@property (nonatomic, readonly)	NSString	*timeString;
-@property (nonatomic, readonly)	NSString	*lengthString;
-@property (nonatomic, readonly)	NSString	*speedString;
-@property (nonatomic, readonly)	NSString	*dateString;
-@property (nonatomic, readonly)	NSString	*planString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*lengthString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*speedString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*dateString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*planString;
 
 
 

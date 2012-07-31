@@ -1,12 +1,24 @@
 //
 //  GenericConstants.m
-//  CycleStreets.AppCore
+//  ChromaAppCore
 //
 //  Created by Neil Edwards on 18/08/2011.
 //  Copyright 2011 buffer. All rights reserved.
 //
 
 #import "GenericConstants.h"
+
+
+
+//
+/***********************************************
+ * @description			secure udid
+ ***********************************************/
+//
+
+NSString *const SECUREUDID_DOMAIN = @"com.chromaagency.ios";
+NSString *const SECUREUDID_SALT = @"2XRCVktftNnsdpMu2nFs7Ww0DfnpthT";
+
 
 
 NSString *const STARTUPERROR_SERVICELOADFAILED=@"STARTUPERROR_SERVICELOADFAILED";
@@ -39,6 +51,7 @@ NSString *const URL=@"URL";
 NSString *const POSTJSON=@"POSTJSON";
 NSString *const GETPOST=@"GETPOST";
 NSString *const IMAGEPOST=@"IMAGEPOST";
+NSString *const FILEUPLOADPROGRESS=@"FILEUPLOADPROGRESS";
 
 //data sources
 NSString *const LOCALDATA=@"localdata";
@@ -71,11 +84,22 @@ NSString *const SEARCH=@"Search";
 NSString *const EMPTYSTRING=@"";
 NSString *const EVENTDICT=@"eventdict";
 NSString *const NONE=@"none";
+NSString *const SHORTDATE=@"SHORTDATE";
+NSString *const ERRORTYPE=@"ERRORTYPE";
+NSString *const EVENTTYPE=@"EVENTTYPE";
+
+
+// nav button consts
+NSString *const RIGHT=@"RIGHT";
+NSString *const LEFT=@"LEFT";
+NSString *const NEXT=@"NEXT";
+NSString *const PREV=@"PREV";
 
 
 // viewmodes
 NSString *const UITYPE_NAV=@"UITypeNavonly";
 NSString *const UITYPE_CONTROLUI=@"UITypeControlNav";
+NSString *const UITYPE_CONTROLUI_HIGH=@"UITypeControlNavHigh";
 NSString *const UITYPE_CONTROLHEADERUI=@"UITypeControlHeaderNav";
 NSString *const UITYPE_MODALUI=@"UITypeModalNav";
 NSString *const UITYPE_SELFFRAME=@"UITypeSelfFrame";
@@ -90,7 +114,6 @@ NSString *const REQUESTDATAREFRESH = @"RequestDataRefresh"; // request a program
 NSString *const REQUESTDATAREFRESHFROMUSER = @"RequestDataRefreshFromUser"; // request a user refresh of the data Provider
 NSString *const	PRODUCTLISTCOMPLETE = @"ProductlistComplete";
 NSString *const	REMOTEFILELOADED = @"RemoteFileMangerLoaded";  // the remote connection failed
-NSString *const	FILEUPLOADPROGRESS = @"FileUploadProgress";  // file upload progress
 NSString *const	XMLPARSERDIDCOMPLETENOUPDATE = @"XMLParserDidCompleteWithNoUpdate"; // the remote request returned no update, so use the cached data
 NSString *const REQUESTWASACTIVE=@"datarequestwasactive"; // the requested data/request group is the active one do not refresh ui;
 NSString *const REMOTEDATAREQUESTED=@"remotedatarequested"; // the request is contacting the server, the ui will need to indicate this.
@@ -124,6 +147,11 @@ NSString *const	JSONPARSER_RESPONSENOENTRIES = @"JSONParser_ResponseNoEntries";
 
 
 
+// authentication
+NSString *const AUTHENTICATION_USERNAME=@"AUTHENTICATION_USERNAME";
+NSString *const AUTHENTICATION_PASSWORD=@"AUTHENTICATION_PASSWORD";
+
+
 
 NSString *const	XMLPARSER_YTFEEDMISSING = @"XMLParser_YouTubeFeedMissing";
 NSString *const	XMLPARSER_XMLSYNTAXERROR = @"XMLParser_XMLSyntaxError: ";
@@ -141,9 +169,11 @@ int const SCREENWIDTH = 320;
 int const IPADSCREENWIDTH = 1024;
 int const IPADMASTERVIEWWIDTH = 255;
 int const UIWIDTH = 280;
+int const WIDEUIWIDTH = 300;
 int const FORMWIDTH = 280;
 int const SCREENHEIGHT = 460;
 int const SCREENHEIGHTWITHCONTROLUI = 323;
+int const SCREENHEIGHTWITHMODALNAV = 416;
 int const SCREENHEIGHTWITHCONTROLANDHEADERUI = 273;
 int const SCREENHEIGHTWITHCONTROLANDHEADERUI_IPAD_LANDSCAPE = 611;
 int const SCREENHEIGHTMANAGE_IPAD_LANDSCAPE = 534;
@@ -151,7 +181,7 @@ int const NAVTABVIEWHEIGHT_IPAD_LANDSCAPE=655;
 int const IPADDETAILVIEWWIDTH=768;
 int const IPADDETAILUIVIEWWIDTH=728;
 int const SCREENHEIGHTWITHNAVIGATION = 420;
-int const SCREENHEIGHTWITHNAVANDTAB=366;
+int const SCREENHEIGHTWITHNAVANDTAB=367;
 int const CONTROLUIHEIGHT = 44;
 int const NAVIGATIONHEIGHT = 44;
 int const TABBARHEIGHT=50;
@@ -163,7 +193,7 @@ int const STANDARDCELLHEIGHT=44;
 int const HALFCELLHEIGHT=22;
 int const SHORTCELLHEIGHT=36;
 int const NEWSCELLHEIGHT=58;
-int const NAVTABLEHEIGHT=366;
+int const NAVTABLEHEIGHT=367;
 
 int const TABBARMORELIMIT=4;
 
@@ -171,6 +201,7 @@ int const TABBARMORELIMIT=4;
 NSString *const CONNECTIONERROR=@"Connection Error";
 NSString *const XMLPARSERERROR=@"Response Error";
 NSString *const SERVERDOWNERROR=@"Server Error";
+NSString *const JSONPARSERERROR=@"Server Response Error";
 
 // Error Messages
 NSString *const UNABLETOCONTACT=@"Unable to contact the server currently,\r you may need to check your Network Settings.";
@@ -179,11 +210,14 @@ NSString *const CONNECTIONCACHE=@"Unable to contact the server currently. Here i
 NSString *const INVALIDRESPONSE=@"No valid data received for this request. \r Please try again later.";
 
 
+// default user state keys
+NSString *const	kUSERSTATEKEY_NAVIGATION=@"navigation";
+NSString *const	kUSERSTATEKEY_CONTEXT=@"context";
+NSString *const	kUSERSTATEKEY_LASTOPENEDDATE=@"lastOpenedDate";
+
 
 
 @implementation GenericConstants
-
-
 
 + (DataParserType)parserStringTypeToConstant:(NSString*)stringType {
     
@@ -211,7 +245,5 @@ NSString *const INVALIDRESPONSE=@"No valid data received for this request. \r Pl
 	
     return @"DATATYPE_NONE";
 }
-
-
 
 @end

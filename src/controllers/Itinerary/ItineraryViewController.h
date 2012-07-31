@@ -10,7 +10,7 @@
 #import "SuperViewController.h"
 #import "MultiLabelLine.h"
 #import "LayoutBox.h"
-#import "Stage.h"
+#import "RouteSegmentViewController.h"
 #import "CopyLabel.h"
 @class RouteVO;
 
@@ -20,7 +20,7 @@
 	NSInteger                       routeId;
 	UITextView                      *headerText;
 	
-	Stage							*stageViewcontroller;
+	RouteSegmentViewController							*routeSegmentViewcontroller;
 	
 	
 	IBOutlet	CopyLabel			*routeidLabel;
@@ -34,16 +34,16 @@
 	
 
 }
-@property (nonatomic, retain)	RouteVO		*route;
+@property (nonatomic, strong)	RouteVO		*route;
 @property (nonatomic)	NSInteger		routeId;
-@property (nonatomic, retain)	UITextView		*headerText;
-@property (nonatomic, retain)	Stage		*stageViewcontroller;
-@property (nonatomic, retain)	IBOutlet CopyLabel		*routeidLabel;
-@property (nonatomic, retain)	MultiLabelLine		*readoutLineOne;
-@property (nonatomic, retain)	MultiLabelLine		*readoutLineTwo;
-@property (nonatomic, retain)	IBOutlet LayoutBox		*readoutContainer;
-@property (nonatomic, retain)	IBOutlet UITableView		*tableView;
-@property (nonatomic, retain)	NSMutableArray		*rowHeightsArray;
+@property (nonatomic, strong)	UITextView		*headerText;
+@property (nonatomic, strong)	RouteSegmentViewController		*routeSegmentViewcontroller;
+@property (nonatomic, strong)	IBOutlet CopyLabel		*routeidLabel;
+@property (nonatomic, strong)	MultiLabelLine		*readoutLineOne;
+@property (nonatomic, strong)	MultiLabelLine		*readoutLineTwo;
+@property (nonatomic, strong)	IBOutlet LayoutBox		*readoutContainer;
+@property (nonatomic, strong)	IBOutlet UITableView		*tableView;
+@property (nonatomic, strong)	NSMutableArray		*rowHeightsArray;
 
 -(void)createRowHeightsArray;
 -(void)showNoActiveRouteView:(BOOL)show;

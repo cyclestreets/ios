@@ -24,11 +24,11 @@
 	IBOutlet UIImageView				*icon;
 
 }
-@property (nonatomic, retain)		SegmentVO		* dataProvider;
-@property (nonatomic, retain)		IBOutlet LayoutBox		* viewContainer;
-@property (nonatomic, retain)		IBOutlet ExpandedUILabel		* nameLabel;
-@property (nonatomic, retain)		IBOutlet MultiLabelLine		* readoutLabel;
-@property (nonatomic, retain)		IBOutlet UIImageView		* icon;
+@property (nonatomic, strong)		SegmentVO		* dataProvider;
+@property (nonatomic, strong)		IBOutlet LayoutBox		* viewContainer;
+@property (nonatomic, strong)		IBOutlet ExpandedUILabel		* nameLabel;
+@property (nonatomic, strong)		IBOutlet MultiLabelLine		* readoutLabel;
+@property (nonatomic, strong)		IBOutlet UIImageView		* icon;
 
 +(NSNumber*)heightForCellWithDataProvider:(SegmentVO*)segment;
 @end

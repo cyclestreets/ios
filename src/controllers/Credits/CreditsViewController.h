@@ -44,15 +44,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BOOL							pageLoaded;
 }
 
-@property (nonatomic, retain)		IBOutlet UIWebView				* webView;
-@property (nonatomic, retain)		IBOutlet UIAlertView				* failAlert;
-@property (nonatomic, retain)		IBOutlet UIToolbar				* controlBar;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* stopLoadingButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* refreshButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* goBackButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* goForwardButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem				* activityBarItem;
-@property (nonatomic, retain)		IBOutlet UIActivityIndicatorView				* activityIndicator;
+@property (nonatomic, strong)		IBOutlet UIWebView				* webView;
+@property (nonatomic, strong)		IBOutlet UIAlertView				* failAlert;
+@property (nonatomic, strong)		IBOutlet UIToolbar				* controlBar;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* stopLoadingButton;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* refreshButton;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* goBackButton;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* goForwardButton;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* activityBarItem;
+@property (nonatomic, strong)		IBOutlet UIActivityIndicatorView				* activityIndicator;
 @property (nonatomic)		BOOL				 pageLoaded;
 
 -(void)updateUIState:(NSString*)state;

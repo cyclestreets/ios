@@ -10,7 +10,6 @@
 #import "AppConstants.h"
 #import "SettingsManager.h"
 #import "ViewUtilities.h"
-#import "MAKVONotificationCenter.h"
 
 
 
@@ -22,24 +21,6 @@
 @synthesize icon;
 @synthesize isSelectedRoute;
 @synthesize selectedRouteIcon;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [viewContainer release], viewContainer = nil;
-    [nameLabel release], nameLabel = nil;
-    [readoutLabel release], readoutLabel = nil;
-    [icon release], icon = nil;
-    [selectedRouteIcon release], selectedRouteIcon = nil;
-	
-    [super dealloc];
-}
-
-
-
 
 
 -(void)initialise{
@@ -68,45 +49,39 @@
 
 -(void)populate{
 	
-	[[MAKVONotificationCenter defaultCenter] addObserver:self 
-												  object:dataProvider 
-												 keyPath:@"userRouteName" 
-												selector:@selector(updateCellUILabels) 
-												userInfo:nil 
-												 options:NSKeyValueObservingOptionNew];
-	
 	
 	[self updateCellUILabels];
 	
 }
 
+
+
 -(void)updateCellUILabels{
 	
 	self.nameLabel.text=dataProvider.nameString;
 	
-	NSMutableArray *arr=[[NSMutableArray alloc] init];
+	NSMutableArray *labelarr=[[NSMutableArray alloc] init];
 	
-	[arr addObject:[dataProvider timeString]];
+	[labelarr addObject:[dataProvider timeString]];
 	
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[arr addObject:[NSString stringWithFormat:@"%3.1f miles", [[dataProvider length] floatValue]/1600]];
+		[labelarr addObject:[NSString stringWithFormat:@"%3.1f miles", [[dataProvider length] floatValue]/1600]];
 	}else {
-		[arr addObject:[NSString stringWithFormat:@"%3.1f km", [[dataProvider length] floatValue]/1000]];
+		[labelarr addObject:[NSString stringWithFormat:@"%3.1f km", [[dataProvider length] floatValue]/1000]];
 	}
     
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[dataProvider speed]];
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[arr addObject:[NSString stringWithFormat:@"%2d mph", mileSpeed]];
+		[labelarr addObject:[NSString stringWithFormat:@"%2d mph", mileSpeed]];
 	}else {
-		[arr addObject:[NSString stringWithFormat:@"%2d kmh", [dataProvider speed]]];
+		[labelarr addObject:[NSString stringWithFormat:@"%2d kmh", [dataProvider speed]]];
 	}
     
     
-	[arr addObject:[dataProvider planString]];
+	[labelarr addObject:[dataProvider planString]];
     
-	readoutLabel.labels=arr;
-	[arr release];
+	readoutLabel.labels=labelarr;
 	[readoutLabel drawUI];
     
 	[viewContainer refresh];
@@ -121,7 +96,7 @@
 	
 	int height=7;
 	
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route name] :[UIFont boldSystemFontOfSize:16]   :255 :UILineBreakModeWordWrap];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont boldSystemFontOfSize:16]   :255 :UILineBreakModeWordWrap];
 	height+=5;
 	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :270 :UILineBreakModeClip];
 	height+=7;

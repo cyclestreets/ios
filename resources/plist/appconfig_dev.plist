@@ -20,18 +20,6 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Routes</string>
-			<key>id</key>
-			<string>routes</string>
-			<key>class</key>
-			<string>RoutesViewController</string>
-			<key>nib</key>
-			<string>RoutesView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_itinerary.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
 			<string>Itinerary</string>
 			<key>id</key>
 			<string>itinerary</string>
@@ -44,7 +32,19 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Photo Map</string>
+			<string>Saved routes</string>
+			<key>id</key>
+			<string>routes</string>
+			<key>class</key>
+			<string>RoutesViewController</string>
+			<key>nib</key>
+			<string>RoutesView</string>
+			<key>tabimage</key>
+			<string>CSTabBar_fav_routes.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Photomap</string>
 			<key>id</key>
 			<string>photomap</string>
 			<key>class</key>
@@ -55,18 +55,6 @@
 			<string>CSTabBar_photomap_tb.png</string>
 			<key>isVC</key>
 			<true/>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Add photo</string>
-			<key>id</key>
-			<string>photos</string>
-			<key>class</key>
-			<string>PhotoWizardViewController</string>
-			<key>nib</key>
-			<string>PhotoWizardView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_add_photo.png</string>
 		</dict>
 		<dict>
 			<key>title</key>

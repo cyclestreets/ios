@@ -23,26 +23,6 @@ static NSDictionary *roadIcons;
 @synthesize startDistance;
 @synthesize pointsArray;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [roadName release], roadName = nil;
-    [provisionName release], provisionName = nil;
-    [turnType release], turnType = nil;
-    [pointsArray release], pointsArray = nil;
-	
-    [super dealloc];
-}
-
-
-
-
-
-
-
-
 
 //
 /***********************************************
@@ -96,7 +76,7 @@ static NSDictionary *roadIcons;
 	
 	if (nil == roadIcons) {
 		//TODO the association of symbols to types could be improved
-		roadIcons = [[NSDictionary dictionaryWithObjectsAndKeys:
+		roadIcons = [NSDictionary dictionaryWithObjectsAndKeys:
 					  @"UIIcon_roads.png", @"busy road", 
 					  @"UIIcon_roads.png", @"road", 
 					  @"UIIcon_roads.png", @"busy and fast road", 
@@ -121,7 +101,7 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_quiet_street.png", @"residential street",
 					  @"UIIcon_quiet_street.png", @"unclassified, service", // need icon for this
 					  @"UIIcon_quiet_street.png", @"unclassified,service",
-					  nil] retain];
+					  nil];
 	}
 	
 	return [roadIcons valueForKey:provisionName];

@@ -1,9 +1,9 @@
 //
-//  RKUserSettingsManager.h
-//  CycleStreets
+//  UserSettingsManager.h
+//
 //
 //  Created by neil on 10/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 // Manager for Settings values & state
 
@@ -15,9 +15,10 @@
 #define kSettingDataIntervalKey @"cache_interval"
 
 // define application state keys
-
-#define	kSTATENAVIGATION @"navigation"
-#define	kSTATECONTEXT	@"context"
+// containers
+#define	kSTATEUSERCONTROLLEDSETTINGSKEY	@"userControlledSettings"
+#define	kSTATESYSTEMCONTROLLEDSETTINGSKEY	@"systemControlledSettings"
+#define KUSERSTATECANSAVEUNKNOWNS 1
 
 // define file paths
 #define kSTATEFILE @"userState.plist"
@@ -31,14 +32,23 @@
 
 @interface UserSettingsManager : NSObject {
 	NSUserDefaults			*settings;
+	
+	NSMutableDictionary		*stateDict;
 	NSMutableDictionary		*userState;
+	NSMutableDictionary		*systemState;
+	
+	BOOL					hasSettingsBundle;
+	
 	BOOL					userStateWritable;
-	id<UserSettingsManagerDelegate> delegate;
+	id<UserSettingsManagerDelegate> __unsafe_unretained delegate;
 }
-@property(nonatomic,retain)NSUserDefaults *settings;
-@property(nonatomic,retain)NSMutableDictionary *userState;
-@property(nonatomic,assign)BOOL userStateWritable;
-@property(nonatomic,assign)id<UserSettingsManagerDelegate> delegate;
+@property (nonatomic, strong) NSUserDefaults		* settings;
+@property (nonatomic, strong) NSMutableDictionary		* stateDict;
+@property (nonatomic, strong) NSMutableDictionary		* userState;
+@property (nonatomic, strong) NSMutableDictionary		* systemState;
+@property (nonatomic) BOOL		 hasSettingsBundle;
+@property (nonatomic) BOOL		 userStateWritable;
+@property(nonatomic,unsafe_unretained)id<UserSettingsManagerDelegate> delegate;
 
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserSettingsManager);
@@ -46,6 +56,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserSettingsManager);
 -(void)saveApplicationState;
 -(NSArray*)navigation;
 -(NSString*)context;
+-(NSDate*)lastOpenedDate;
+-(void)saveObject:(id)object forKey:(NSString*)key;
+-(id)fetchObjectforKey:(NSString*)key;
 -(int)getSavedSection;
 -(void)setSavedSection:(NSString*)type;
 -(id)userDefaultForType:(NSString*)key;

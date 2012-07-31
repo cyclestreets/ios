@@ -31,6 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Files.h"
 
 @implementation CategoryLoader
+SYNTHESIZE_SINGLETON_FOR_CLASS(CategoryLoader);
 
 @synthesize categories;
 @synthesize categoryLabels;
@@ -40,7 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize categoriesAPIMethod;
 
 - (NSArray *)entries:(NSArray *)array named:(NSString *)name {
-	NSMutableArray *result = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *result = [[NSMutableArray alloc] init];
 	for (NSDictionary *dict in array) {
 		NSString *value = [dict objectForKey:name];
 		if (value != nil) {
@@ -86,8 +87,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void) fetchCategories {
+	
+	BetterLog(@"");
+	
 	if (self.categoriesAPIMethod == nil) {
-		self.categoriesAPIMethod = [[[Categories alloc] init] autorelease];
+		self.categoriesAPIMethod = [[Categories alloc] init];
 	}
 	[self.categoriesAPIMethod runWithTarget:self
 								  onSuccess:@selector(didSucceedFetch:results:)
@@ -103,6 +107,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)setupCategories {
+	
+	BetterLog(@"");
+	
 	//first, use the "bitter end" defaults.
 	self.categories = [NSArray arrayWithObject:[CategoryLoader defaultCategory]];
 	self.categoryLabels = [NSArray arrayWithObject:@"Other"];
@@ -121,8 +128,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		expired = YES;
 	}
 	if (!expired) {
-		NSDate *expiry = [[[NSDate alloc] initWithTimeIntervalSince1970:[validuntil doubleValue]] autorelease];
-		NSDate *now = [[[NSDate alloc] init] autorelease];
+		NSDate *expiry = [[NSDate alloc] initWithTimeIntervalSince1970:[validuntil doubleValue]];
+		NSDate *now = [[NSDate alloc] init];
 		if ([now compare:expiry] != NSOrderedAscending) {
 			expired = YES;
 		}

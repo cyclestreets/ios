@@ -36,10 +36,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 @property (nonatomic)	CLLocationCoordinate2D		locationCoords;
-@property (nonatomic, retain)	NSString		*csid;
-@property (nonatomic, retain)	NSString		*caption;
-@property (nonatomic, retain)	NSString		*bigImageURL;
-@property (nonatomic, retain)	NSString		*smallImageURL;
+@property (nonatomic, strong)	NSString		*csid;
+@property (nonatomic, strong)	NSString		*caption;
+@property (nonatomic, strong)	NSString		*bigImageURL;
+@property (nonatomic, strong)	NSString		*smallImageURL;
 
 - (id)initWithDictionary:(NSDictionary *)fields;
 

@@ -39,11 +39,11 @@ typedef int LocationSearchRequestType;
 	
 
 }
-@property (nonatomic, retain)	MBProgressHUD	*HUD;
+@property (nonatomic, strong)	MBProgressHUD	*HUD;
 @property (nonatomic, assign)	LocationSearchFilterType	activeFilterType;
 @property (nonatomic, assign)	LocationSearchRequestType	activeRequestType;
-@property (nonatomic, retain)	NSMutableDictionary	*requestResultDict;
-@property (nonatomic, retain)	NSMutableArray	*recentSelectedArray;
+@property (nonatomic, strong)	NSMutableDictionary	*requestResultDict;
+@property (nonatomic, strong)	NSMutableArray	*recentSelectedArray;
 
 
 -(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType;

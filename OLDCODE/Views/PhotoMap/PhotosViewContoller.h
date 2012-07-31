@@ -98,46 +98,46 @@ UITextViewDelegate, UIActionSheetDelegate> {
 	CGImageRef imageRef;
 }
 
-@property (nonatomic, retain) IBOutlet UIImageView *selected;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *camera;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *library;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *caption;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *info;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *send;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *accuracy;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *del;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UIToolbar *photoToolbar;
-@property (nonatomic, retain) IBOutlet UINavigationBar	*captionBar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *captionDone;
-@property (nonatomic, retain) IBOutlet UITextView *captionText;
+@property (nonatomic, strong) IBOutlet UIImageView *selected;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *camera;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *library;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *caption;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *info;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *send;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *accuracy;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *del;
+@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet UIToolbar *photoToolbar;
+@property (nonatomic, strong) IBOutlet UINavigationBar	*captionBar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *captionDone;
+@property (nonatomic, strong) IBOutlet UITextView *captionText;
 
-@property (nonatomic, retain) UIAlertView *alert;
-@property (nonatomic, retain) UIAlertView *deleteAlert;
-@property (nonatomic, retain) UIAlertView *emailAlert;
-@property (nonatomic, retain) UIAlertView *errorAlert;
+@property (nonatomic, strong) UIAlertView *alert;
+@property (nonatomic, strong) UIAlertView *deleteAlert;
+@property (nonatomic, strong) UIAlertView *emailAlert;
+@property (nonatomic, strong) UIAlertView *errorAlert;
 
 @property (nonatomic, copy) NSString *currentCaption;
 
-@property (nonatomic, retain) CLLocation *location;
+@property (nonatomic, strong) CLLocation *location;
 
-@property (nonatomic, retain) AccountViewController *loginView;
-@property (nonatomic, retain) AddPhoto *addPhoto;
-@property (nonatomic, retain) PhotoInfo *photoInfo;
-@property (nonatomic, retain) UIActionSheet *photoAction;
+@property (nonatomic, strong) AccountViewController *loginView;
+@property (nonatomic, strong) AddPhoto *addPhoto;
+@property (nonatomic, strong) PhotoInfo *photoInfo;
+@property (nonatomic, strong) UIActionSheet *photoAction;
 
-@property (nonatomic, retain) PhotoMapImageLocationViewController *preview;
+@property (nonatomic, strong) PhotoMapImageLocationViewController *preview;
 @property (nonatomic, copy) NSString *bigImageURL;
 @property (nonatomic, copy) NSString *photoId;
 
-@property (nonatomic, retain) UINavigationController *navigateLibrary;
-@property (nonatomic, retain) AssetGroupTable *assetGroupTable;
-@property (nonatomic, retain) PhotoAsset* photoAsset;
+@property (nonatomic, strong) UINavigationController *navigateLibrary;
+@property (nonatomic, strong) AssetGroupTable *assetGroupTable;
+@property (nonatomic, strong) PhotoAsset* photoAsset;
 
-@property (nonatomic, retain) UIImagePickerController *picker;
+@property (nonatomic, strong) UIImagePickerController *picker;
 
 @property (nonatomic, copy) NSString *lastUploadId;
-@property (nonatomic, retain) NSData *jpegData;
+@property (nonatomic, strong) NSData *jpegData;
 @property (nonatomic, assign) BOOL locationManagerIsLocating;
 @property (nonatomic, assign) BOOL subviewWasActive;
 

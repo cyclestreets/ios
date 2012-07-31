@@ -1,6 +1,6 @@
 //
 //  GradiantRectView.h
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 30/04/2009.
 //  Copyright 2009 buffer. All rights reserved.
@@ -21,10 +21,10 @@
     CGFloat     strokeWidth;
     CGFloat     cornerRadius;
 }
-@property(nonatomic,retain)UIColor *strokeColor;
-@property(nonatomic,retain)UIColor *rectColor;
-@property(nonatomic,retain)UIColor *startColor;
-@property(nonatomic,retain)UIColor *endColor;
+@property(nonatomic,strong)UIColor *strokeColor;
+@property(nonatomic,strong)UIColor *rectColor;
+@property(nonatomic,strong)UIColor *startColor;
+@property(nonatomic,strong)UIColor *endColor;
 @property(nonatomic,assign)CGFloat strokeWidth;
 @property(nonatomic,assign)CGFloat cornerRadius;
 

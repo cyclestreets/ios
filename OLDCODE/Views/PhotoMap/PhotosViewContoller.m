@@ -134,7 +134,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 //release the simple alert we got here.
 - (void)alertViewCancel:(UIAlertView *)alertView {
-	[alertView release];
 }
 
 //cancel one of our own busy alerts.
@@ -183,7 +182,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	subviewWasActive=YES;
 	
 	if (self.picker == nil) {
-		self.picker = [[[UIImagePickerController alloc] init] autorelease];
+		self.picker = [[UIImagePickerController alloc] init];
 	}
 	self.picker.delegate = self;
 	self.picker.allowsEditing = NO;
@@ -197,10 +196,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	subviewWasActive=YES;
 	
 	if (self.assetGroupTable == nil) {
-		self.assetGroupTable = [[[AssetGroupTable alloc] init] autorelease];
+		self.assetGroupTable = [[AssetGroupTable alloc] init];
 	}
 	if (self.navigateLibrary == nil) {
-		self.navigateLibrary = [[[UINavigationController alloc] init] autorelease];
+		self.navigateLibrary = [[UINavigationController alloc] init];
 		[self.navigateLibrary pushViewController:assetGroupTable animated:NO];
 	}
 	[self presentModalViewController:self.navigateLibrary animated:YES];
@@ -242,12 +241,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	if ([self canUseCamera] && [self canUsePhotoLibrary]) {
 		if (self.photoAction == nil) {
-			self.photoAction = [[[UIActionSheet alloc] initWithTitle:nil
+			self.photoAction = [[UIActionSheet alloc] initWithTitle:nil
 															delegate:self
 												   cancelButtonTitle:@"Cancel"
 											  destructiveButtonTitle:nil
-												   otherButtonTitles:@"Take Photo", @"Choose Existing", nil]
-								autorelease];
+												   otherButtonTitles:@"Take Photo", @"Choose Existing", nil];
 		}
 		[self.photoAction showFromToolbar:self.toolbar];
 		//cancel is not detected (iOS bug ?) [self.photoAction showInView:self.view];
@@ -343,8 +341,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self.navigationItem setLeftBarButtonItem:cancelButton animated:YES];
 	UIBarButtonItem *doneButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didCaptionDone)]; 
 	[self.navigationItem setRightBarButtonItem:doneButton animated:YES];
-	[doneButton release];
-	[cancelButton release];
 	self.captionText.text = self.currentCaption;
 	[self.captionText becomeFirstResponder];
 }
@@ -370,7 +366,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@">>>");
 	subviewWasActive=YES;
 	if (photoInfo == nil) {
-		self.photoInfo = [[[PhotoInfo alloc] initWithNibName:@"PhotoInfo" bundle:nil] autorelease];
+		self.photoInfo = [[PhotoInfo alloc] initWithNibName:@"PhotoInfo" bundle:nil];
 	}
 	[self enableButtons:YES];
 	[self presentModalViewController:photoInfo animated:YES];
@@ -391,13 +387,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			BetterLog(@"kUserAccountNotLoggedIn");
 			
 			if (self.loginView == nil) {
-				self.loginView = [[[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil] autorelease];
+				self.loginView = [[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil];
 			}
 			self.loginView.isModal=YES;
 			self.loginView.shouldAutoClose=YES;
 			UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
 			[self presentModalViewController:nav animated:YES];
-			[nav release];
 		}
 
 		
@@ -444,7 +439,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		BetterLog(@"asset cleared");
 	} else if ([object isKindOfClass:[ALAsset class]]) {
 		//new asset in use.
-		self.photoAsset = [[[PhotoAsset alloc] initWithAsset:[libraryAssetNotification object]] autorelease];
+		self.photoAsset = [[PhotoAsset alloc] initWithAsset:[libraryAssetNotification object]];
 		BetterLog(@"asset selected %@", self.photoAsset);
 	}
 	
@@ -474,7 +469,7 @@ void releaseJpegDataProvider(void *info,
 
 //Save the image to the asset library, and then save the asset and its location.
 - (void)saveCapturedImage:(UIImage *)image {
-	ALAssetsLibrary *assetsLibrary = [[[ALAssetsLibrary alloc] init] autorelease];
+	ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
 	if (assetsLibrary == nil) {
 		//sub 4.0, no assets library. Do the cleanup now.
 		self.photoAsset = [[PhotoAsset alloc] initWithImage:image withCoordinate:self.location.coordinate];
@@ -484,7 +479,7 @@ void releaseJpegDataProvider(void *info,
 	//Extract the data.
 	//CGImageRef imageRef = [image CGImage]; - just yields a screen-size image.
 	self.jpegData = UIImageJPEGRepresentation(image, 0.95);
-	jpegDataProvider = CGDataProviderCreateWithData( self,
+	jpegDataProvider = CGDataProviderCreateWithData( (__bridge void *)(self),
 													[self.jpegData bytes],
 													[self.jpegData length],
 													&releaseJpegDataProvider);
@@ -506,7 +501,7 @@ void releaseJpegDataProvider(void *info,
 									if (error == nil) {
 										[assetsLibrary assetForURL:assetURL
 													   resultBlock:^(ALAsset *asset) {
-														   self.photoAsset = [[[PhotoAsset alloc] initWithAsset:asset] autorelease];
+														   self.photoAsset = [[PhotoAsset alloc] initWithAsset:asset];
 														   [asset saveLocation:self.location.coordinate];
 														   [self.picker dismissModalViewControllerAnimated:YES];	
 														   [self enableButtons:YES];
@@ -546,7 +541,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	BOOL use = NO;
 	for (NSString *part in parts) {
 		if (use) {
-			result = [[part copy] autorelease];
+			result = [part copy];
 		}
 		use = NO;
 		if ([part isEqualToString:@"location"]) {
@@ -607,12 +602,11 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	//[sendingAlert hide];
 	sendInProgress = NO;
 	if (self.errorAlert == nil) {
-		self.errorAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"
+		self.errorAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
 													 message:@"Could not obtain a response from CycleStreets.net. Please try again later."
 													delegate:self
 										   cancelButtonTitle:@"OK"
-										   otherButtonTitles:nil]
-						   autorelease];
+										   otherButtonTitles:nil];
 		[self.errorAlert show];
 	}
 }
@@ -631,7 +625,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 				if (self.preview == nil) {
 					self.preview = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
 				}
-				PhotoMapVO *photoEntry = [[[PhotoMapVO alloc] init] autorelease];
+				PhotoMapVO *photoEntry = [[PhotoMapVO alloc] init];
 				photoEntry.caption = self.currentCaption;
 				photoEntry.bigImageURL = self.bigImageURL;
 				photoEntry.csid = self.photoId;
@@ -745,7 +739,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 	self.currentCaption = nil;
 	
 	
-	[locationManager release];
 	self.location = nil;
 	
 	self.alert = nil;
@@ -774,7 +767,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)pickingInfo {
 
 - (void)dealloc {
 	[self nullify];
-    [super dealloc];
 }
 
 

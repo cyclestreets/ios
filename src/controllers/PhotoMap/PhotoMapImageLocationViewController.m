@@ -32,23 +32,6 @@
 @synthesize imageLabel;
 @synthesize titleLabel;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [navigationBar release], navigationBar = nil;
-    [scrollView release], scrollView = nil;
-    [viewContainer release], viewContainer = nil;
-    [imageView release], imageView = nil;
-    [imageLabel release], imageLabel = nil;
-    [titleLabel release], titleLabel = nil;
-	
-    [super dealloc];
-}
-
-
 
 //
 /***********************************************
@@ -116,11 +99,10 @@
 
 -(void)createNavigationBarUI{
 	
-	UIBarButtonItem *back = [[[UIBarButtonItem alloc] initWithTitle:@"Done"
+	UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Done"
 															  style:UIBarButtonItemStyleBordered
 															 target:self
-															 action:@selector(backButtonSelected:)]
-							 autorelease];
+															 action:@selector(backButtonSelected:)];
 	
 	self.titleLabel=[[CopyLabel alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
 	titleLabel.textAlignment=UITextAlignmentCenter;

@@ -18,21 +18,6 @@
 @synthesize readoutLabel;
 @synthesize icon;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [viewContainer release], viewContainer = nil;
-    [nameLabel release], nameLabel = nil;
-    [readoutLabel release], readoutLabel = nil;
-    [icon release], icon = nil;
-	
-    [super dealloc];
-}
-
-
 
 -(void)initialise{
 	
@@ -69,7 +54,6 @@
 	icon.image=[UIImage imageNamed:imageName];
 	
 	readoutLabel.labels=arr;
-	[arr release];
 	[readoutLabel drawUI];
 	
 	[viewContainer refresh];

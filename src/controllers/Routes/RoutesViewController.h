@@ -30,16 +30,16 @@
 
 
 }
-@property (nonatomic, retain)	IBOutlet UIView			*titleHeaderView;
-@property (nonatomic, retain)	IBOutlet BorderView			*controlView;
-@property (nonatomic, retain)	BUSegmentedControl			*routeTypeControl;
-@property (nonatomic, retain)	IBOutlet UIButton			*selectedRouteButton;
-@property (nonatomic, retain)	NSMutableArray			*subViewsArray;
-@property (nonatomic, retain)	NSMutableArray			*classArray;
-@property (nonatomic, retain)	NSMutableArray			*nibArray;
-@property (nonatomic, retain)	NSMutableArray			*dataTypeArray;
-@property (nonatomic, retain)	IBOutlet UIView			*contentView;
+@property (nonatomic, strong)	IBOutlet UIView			*titleHeaderView;
+@property (nonatomic, strong)	IBOutlet BorderView			*controlView;
+@property (nonatomic, strong)	BUSegmentedControl			*routeTypeControl;
+@property (nonatomic, strong)	IBOutlet UIButton			*selectedRouteButton;
+@property (nonatomic, strong)	NSMutableArray			*subViewsArray;
+@property (nonatomic, strong)	NSMutableArray			*classArray;
+@property (nonatomic, strong)	NSMutableArray			*nibArray;
+@property (nonatomic, strong)	NSMutableArray			*dataTypeArray;
+@property (nonatomic, strong)	IBOutlet UIView			*contentView;
 @property (nonatomic, assign)	int			activeIndex;
-@property (nonatomic, retain)	RouteSummary			*routeSummary;
+@property (nonatomic, strong)	RouteSummary			*routeSummary;
 
 @end

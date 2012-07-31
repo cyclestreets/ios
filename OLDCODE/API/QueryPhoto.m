@@ -61,9 +61,7 @@ static NSString *thumbnailSize = @"300";
 							useDom,
 							thumbnailSize,
 							limit];
-		[url release];
 		url = newURL;
-		[url retain];
 	}
 	return self;
 }
@@ -77,7 +75,6 @@ static NSString *thumbnailSize = @"300";
 }
 
 - (void) runWithTarget:(NSObject *)resultTarget onSuccess:(SEL)successMethod onFailure:(SEL)failureMethod {
-	[request release];
 	request = [[XMLRequest alloc] initWithURL:url
 									 delegate:(NSObject *)resultTarget
 										  tag:nil
@@ -90,16 +87,12 @@ static NSString *thumbnailSize = @"300";
 
 - (NSString *)description {
 	NSString *copy = [url copy];
-	[copy release];
 	return copy;
 }
 
 - (void) dealloc {
-	[url release];
 	url = nil;
-	[request release];
 	request = nil;
-	[super dealloc];
 }
 
 @end

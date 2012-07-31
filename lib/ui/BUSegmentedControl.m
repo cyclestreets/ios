@@ -1,9 +1,9 @@
 //
-//  RKCustomSegmentedControl.m
-//  CycleStreets
+//  CustomSegmentedControl.m
+//
 //
 //  Created by Neil Edwards on 27/11/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //	custom segmented control to support image swapping for more flexible selected styles
 
 #import "BUSegmentedControl.h"
@@ -12,17 +12,17 @@
 #import "GlobalUtilities.h"
 
 @implementation BUSegmentedControl
-@synthesize dataProvider,items,container,selectedIndex;
-@synthesize delegate,width,height,itemWidth;
+@synthesize dataProvider;
+@synthesize items;
+@synthesize container;
+@synthesize width;
+@synthesize height;
+@synthesize invertHighlightTextcolor;
+@synthesize invertNormalTextcolor;
+@synthesize selectedIndex;
+@synthesize itemWidth;
+@synthesize delegate;
 
-- (void)dealloc {
-	
-	[container release];
-	[dataProvider release];
-	[items release];
-	
-    [super dealloc];
-}
 
 
 - (id)init {
@@ -33,10 +33,13 @@
 		
 		self.backgroundColor=[UIColor clearColor];
 		itemWidth=0;
-		container=[[LayoutBox alloc]init];
+        LayoutBox *lb=[[LayoutBox alloc]init];
+		self.container=lb;
 		container.itemPadding=0;
 		selectedIndex=-1;
 		width=0;
+		invertHighlightTextcolor=NO;
+		invertNormalTextcolor=NO;
 		height=0;
 		[self addSubview:container];    
 	
@@ -53,7 +56,8 @@
 	
 	UIButton *button=nil;
 	
-	items=[[NSMutableArray alloc]init];
+    NSMutableArray *arr=[[NSMutableArray alloc]init];
+	self.items=arr;
 	
 	for (int i=0; i<[dataProvider count]; i++) {
 		
@@ -82,9 +86,36 @@
 		}
 		
 		[button setTitle:[dataProvider objectAtIndex:i] forState:UIControlStateNormal];
-		button.titleLabel.font=[UIFont boldSystemFontOfSize:12];
-		button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+		button.titleLabel.font=[UIFont boldSystemFontOfSize:11];
 		button.backgroundColor=[UIColor clearColor];
+		
+		if(invertHighlightTextcolor==YES){
+			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+			[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateSelected];
+			[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateSelected];
+			button.reversesTitleShadowWhenHighlighted=YES;
+		}
+		
+		if(invertNormalTextcolor==YES){
+			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+			[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+			[button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+			[button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateSelected];
+			button.titleLabel.shadowOffset=CGSizeMake(0, 1);
+			button.reversesTitleShadowWhenHighlighted=YES;
+		}else{
+			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+			[button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
+			button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+		}
+		
+		
+	
+		
+		
 		CGRect bframe=button.frame;
 		
 		if(itemWidth==0){
@@ -124,9 +155,6 @@
 
 -(void)setSelectedSegmentIndex:(int)index{
 	
-	//BetterLog(@"index=%i dpcount=%i",index,[dataProvider count]);
-	
-	
 	if(index<[dataProvider count]){
 		
 		[self selectItemAtIndex:index];
@@ -135,12 +163,8 @@
 	
 }
 
-// Note: there can be an issie where the down executes while the item is selected, this causes a highlight flash
+// Note: there can be an issie where the down executes while the item is selected, this causes a highlight flash (mainly this only occurs in the sim)
 -(void)selectItemAtIndex:(int)index{
-	
-	//NSLog(@"[DEBUG] selectedIndex=%i",selectedIndex);
-	//NSLog(@"[DEBUG] index=%i",index);
-
 	
 	if(selectedIndex!=index){
 		
@@ -150,12 +174,14 @@
 			outgoingbutton.highlighted=NO;
 			outgoingbutton.selected=NO;
 			outgoingbutton.userInteractionEnabled=YES;
+		
 		}
 		
 		selectedIndex=index;
 		
 		UIButton *incomingbutton=[items objectAtIndex:selectedIndex];
 		incomingbutton.highlighted=YES;
+		
 	}
 	
 }

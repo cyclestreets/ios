@@ -45,9 +45,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark View lifecycle
 
 - (void)loadGroups {
-	self.assetGroups = [[[NSMutableArray alloc] init] autorelease];
+	self.assetGroups = [[NSMutableArray alloc] init];
 	if (self.assetLibrary == nil) {
-		self.assetLibrary = [[[ALAssetsLibrary alloc] init] autorelease];
+		self.assetLibrary = [[ALAssetsLibrary alloc] init];
 	}
 	[self.assetLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos | ALAssetsGroupLibrary
 									 usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -78,11 +78,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 	((UITableView *)self.view).rowHeight = 80;
 	
-	UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
 																	  style:UIBarButtonItemStyleBordered
 																	 target:self
-																	 action:@selector(didCancelSelection)]
-									 autorelease];
+																	 action:@selector(didCancelSelection)];
 	self.navigationController.toolbar.tintColor=UIColorFromRGB(0x008000);
 	self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
 	self.toolbarItems = [NSArray arrayWithObject:cancelButton];
@@ -124,7 +123,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -146,7 +145,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	if (self.currentGroup == nil) {
-		self.currentGroup = [[[AssetTable alloc] init] autorelease];
+		self.currentGroup = [[AssetTable alloc] init];
 	}
 	self.currentGroup.assetsGroup = [assetGroups objectAtIndex:indexPath.row];
 	[self.navigationController pushViewController:self.currentGroup animated:YES];
@@ -175,7 +174,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)dealloc {
 	[self nullify];
-    [super dealloc];
 }
 
 

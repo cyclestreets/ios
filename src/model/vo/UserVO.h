@@ -16,10 +16,10 @@
 	NSString			*visiblename;
 	BOOL				autoLogin;
 }
-@property (nonatomic, retain)			NSString *username;
-@property (nonatomic, retain)			NSString *password;
-@property (nonatomic, retain)			NSString *email;
-@property (nonatomic, retain)			NSString *visiblename;
+@property (nonatomic, strong)			NSString *username;
+@property (nonatomic, strong)			NSString *password;
+@property (nonatomic, strong)			NSString *email;
+@property (nonatomic, strong)			NSString *visiblename;
 @property (nonatomic)			BOOL autoLogin;
 
 @end

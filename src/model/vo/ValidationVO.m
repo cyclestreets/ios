@@ -14,20 +14,6 @@
 @synthesize returnCode;
 @synthesize responseDict;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [returnMessage release], returnMessage = nil;
-    [responseDict release], responseDict = nil;
-	
-    [super dealloc];
-}
-
-
-
-
 
 -(ValidationStatusCode)validationStatus{
 	

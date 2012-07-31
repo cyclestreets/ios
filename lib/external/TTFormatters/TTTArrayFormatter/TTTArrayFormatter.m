@@ -57,13 +57,6 @@
     return self;
 }
 
-- (void)dealloc {
-    [_delimiter release];
-    [_separator release];
-    [_conjunction release];
-    [_abbreviatedConjunction release];
-    [super dealloc];
-}
 
 - (NSString *)stringFromArray:(NSArray *)anArray {
     return [self stringFromArray:anArray rangesOfComponents:nil];
@@ -113,7 +106,7 @@
 }
 
 + (NSString *)localizedStringFromArray:(NSArray *)anArray arrayStyle:(TTTArrayFormatterStyle)style {
-    TTTArrayFormatter *formatter = [[[TTTArrayFormatter alloc] init] autorelease];
+    TTTArrayFormatter *formatter = [[TTTArrayFormatter alloc] init];
     [formatter setArrayStyle:style];
     
     return [formatter stringFromArray:anArray];
@@ -134,8 +127,8 @@
     NSMutableArray *components = nil;
     
     if (string) {
-        components = [[[string componentsSeparatedByString:self.delimiter] mutableCopy] autorelease];
-        NSMutableString *lastComponent = [[(NSString *)[components lastObject] mutableCopy] autorelease];
+        components = [[string componentsSeparatedByString:self.delimiter] mutableCopy];
+        NSMutableString *lastComponent = [(NSString *)[components lastObject] mutableCopy];
         NSRange lastComponentConjunctionRange = [lastComponent rangeOfString:self.conjunction];
         if (lastComponentConjunctionRange.location != NSNotFound) {
             [lastComponent replaceCharactersInRange:lastComponentConjunctionRange withString:self.delimiter];

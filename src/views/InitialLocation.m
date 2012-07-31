@@ -99,6 +99,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 - (UIView *)loadWelcomeView {
 	
 	
+
+	
 	static NSString *CellIdentifier = @"InitialLocationView";
 	
 	UIView *view = nil;
@@ -112,7 +114,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			
 			[ButtonUtilities styleIBButton:closeButton type:@"green" text:@"Plan a route"];
 			[closeButton addTarget:self action:@selector(closeOverlayView:) forControlEvents:UIControlEventTouchUpInside];
-			closeButton.enabled=![CLLocationManager locationServicesEnabled];
+			//closeButton.enabled=![CLLocationManager locationServicesEnabled];
 			
 		}
 	}
@@ -120,8 +122,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 }
 
 - (void) initiateLocation {
-	
-	BetterLog(@"");
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSDictionary *misc = [cycleStreets.files misc];
@@ -134,13 +134,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		BOOL hasSelectedRoute=[[RouteManager sharedInstance] hasSelectedRoute];
 		
 		if(hasSelectedRoute==NO){
-		
-		initLocation.latitude = [sLat doubleValue];
-		initLocation.longitude = [sLon doubleValue];
-		[self.mapView moveToLatLong:initLocation];
+			
+			initLocation.latitude = [sLat doubleValue];
+			initLocation.longitude = [sLon doubleValue];
+			[self.mapView moveToLatLong:initLocation];
 			
 		}
-		 
+		
 		self.mapView.hidden = NO;
 	} else {
 		
@@ -149,9 +149,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			BOOL hasSelectedRoute=[[RouteManager sharedInstance] hasSelectedRoute];
 			
 			if(hasSelectedRoute==NO){
-			
+				
 				[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-			
+				
 				[self.mapView moveToLatLong:[UserLocationManager defaultCoordinate]];
 				
 			}

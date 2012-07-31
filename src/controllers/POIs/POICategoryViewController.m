@@ -20,19 +20,6 @@ static NSString *const DATAID = @"PoiCategoryLocation";
 @synthesize dataProvider;
 @synthesize requestdataProvider;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [tableview release], tableview = nil;
-    [dataProvider release], dataProvider = nil;
-    [requestdataProvider release], requestdataProvider = nil;
-	
-    [super dealloc];
-}
-
-
 
 
 
@@ -68,8 +55,7 @@ static NSString *const DATAID = @"PoiCategoryLocation";
 		NSDictionary	*dict=[notification userInfo];
 		NetResponse		*response=[dict objectForKey:RESPONSE];
 		if([response.dataid isEqualToString:DATAID]){
-			//[navigation createRightNavItemWithType:BUNavActivityType];
-            //[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:YES withMessage:nil];
+			[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:YES withMessage:nil];
 		}
 	}
 	
@@ -90,9 +76,10 @@ static NSString *const DATAID = @"PoiCategoryLocation";
 	
 	if([dataProvider count]>0){
 		[self.tableview reloadData];
+		[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:NO withMessage:nil];
 	}else{
 		
-		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:nil];
 	}
 	
 }
@@ -100,13 +87,11 @@ static NSString *const DATAID = @"PoiCategoryLocation";
 -(void)dataProviderRequestRefresh:(NSString *)source{
 	
 	CLLocationCoordinate2D location;
-	location.longitude=0.012345;
-	location.latitude=52.12345;
-	
+	location.longitude=-0.13370000;
+	location.latitude=51.50998000;
 	
 	[[POIManager sharedInstance] requestPOICategoryDataForCategory:requestdataProvider atLocation:location];
 	
-	// call overlay
 	
 }
 
@@ -118,6 +103,9 @@ static NSString *const DATAID = @"PoiCategoryLocation";
 //
 
 - (void)viewDidLoad{
+	
+	UIType=UITYPE_MODALUI;
+	
 	[self createPersistentUI];
     [super viewDidLoad];
 }
@@ -127,7 +115,6 @@ static NSString *const DATAID = @"PoiCategoryLocation";
 	
 	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
 	self.navigation=nav;
-    [nav release];
 	navigation.delegate=self;
 	navigation.leftItemType=BUNavNoneType;
     navigation.rightItemType=UIKitButtonType;

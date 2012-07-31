@@ -17,11 +17,11 @@
 	NSString			*itemType; // ui component type
 	BOOL				mandatory;
 }
-@property (nonatomic, retain)			NSString *itemid;
-@property (nonatomic, retain)			NSString *validateType;
-@property (nonatomic, retain)			NSMutableDictionary *parameters;
-@property (nonatomic, retain)			NSString *errorString;
-@property (nonatomic, retain)			NSString *itemType;
+@property (nonatomic, strong)			NSString *itemid;
+@property (nonatomic, strong)			NSString *validateType;
+@property (nonatomic, strong)			NSMutableDictionary *parameters;
+@property (nonatomic, strong)			NSString *errorString;
+@property (nonatomic, strong)			NSString *itemType;
 @property (nonatomic)			BOOL mandatory;
 
 @end

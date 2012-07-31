@@ -33,11 +33,11 @@
 
     NSDictionary                *configDict;
     
-    id<AppConfigManagerDelegate> delegate;
+    id<AppConfigManagerDelegate> __unsafe_unretained delegate;
 
 }
-@property (nonatomic, retain)	NSDictionary		*configDict;
-@property (nonatomic, assign)	id<AppConfigManagerDelegate>		delegate;
+@property (nonatomic, strong)	NSDictionary		*configDict;
+@property (nonatomic, unsafe_unretained)	id<AppConfigManagerDelegate>		delegate;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(AppConfigManager)
 

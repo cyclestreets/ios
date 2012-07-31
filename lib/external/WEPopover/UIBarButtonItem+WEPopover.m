@@ -19,7 +19,6 @@
 	if (!hasCustomView) {
 		UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
 		self.customView = tempView;
-		[tempView release];	
 	}
 	
 	UIView *parentView = self.customView.superview;
@@ -39,7 +38,6 @@
 	if (!hasCustomView) {
 		UIView *tempView = [[UIView alloc] initWithFrame:CGRectZero];
 		self.customView = tempView;
-		[tempView release];	
 	}
 	
 	UIView *parentView = self.customView.superview;

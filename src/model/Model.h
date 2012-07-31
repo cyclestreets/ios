@@ -33,17 +33,17 @@
 	NSMutableDictionary		*activeRequests;
 	
 	// delegate
-	id <ModelDeleagte> delegate;
+	id <ModelDeleagte> __unsafe_unretained delegate;
 	
 	int						maxMemoryItems;
 }
 
 
-@property(nonatomic,retain)NSMutableDictionary *dataProviders;
-@property(nonatomic,retain)NSMutableDictionary *cachedrequests;
-@property(nonatomic,retain)ApplicationXMLParser *xmlparser;
-@property(nonatomic,retain)NSMutableDictionary *activeRequests;
-@property(nonatomic,assign)id <ModelDeleagte> delegate;
+@property(nonatomic,strong)NSMutableDictionary *dataProviders;
+@property(nonatomic,strong)NSMutableDictionary *cachedrequests;
+@property(nonatomic,strong)ApplicationXMLParser *xmlparser;
+@property(nonatomic,strong)NSMutableDictionary *activeRequests;
+@property(nonatomic,unsafe_unretained)id <ModelDeleagte> delegate;
 @property(nonatomic,assign)int maxMemoryItems;
 
 

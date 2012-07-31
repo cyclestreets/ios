@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SettingsViewController.h"
 #import "CycleStreets.h"
 #import "Query.h"
-#import "CycleStreetsAppDelegate.h"
+#import "AppDelegate.h"
 #import "Files.h"
 #import "MapViewController.h"
 
@@ -46,25 +46,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize controlView;
 @synthesize speedTitleLabel;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [planControl release], planControl = nil;
-    [speedControl release], speedControl = nil;
-    [mapStyleControl release], mapStyleControl = nil;
-    [imageSizeControl release], imageSizeControl = nil;
-    [routeUnitControl release], routeUnitControl = nil;
-    [routePointSwitch release], routePointSwitch = nil;
-    [controlView release], controlView = nil;
-    [speedTitleLabel release], speedTitleLabel = nil;
-	
-    [super dealloc];
-}
-
-
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -79,12 +60,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void) select:(UISegmentedControl *)control byString:(NSString *)selectTitle {
 	for (NSInteger i = 0; i < [control numberOfSegments]; i++) {
-		NSString *title = [[[control titleForSegmentAtIndex:i] lowercaseString] copy];
+		NSString *title = [[control titleForSegmentAtIndex:i] lowercaseString];
 		if (NSOrderedSame == [title compare: selectTitle]) {
 			control.selectedSegmentIndex = i;
 			break;
 		}
-		[title release];
 	}	
 }
 
@@ -113,26 +93,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)nullify {
-	self.planControl = nil;
-	self.speedControl = nil;
-	self.imageSizeControl = nil;
-	self.mapStyleControl = nil;
-	self.routeUnitControl=nil;
-	self.controlView=nil;
-}
-
-- (void)viewDidUnload {
-	[self nullify];
-	[super viewDidUnload];
-	BetterLog(@">>>");
-}
 
 - (void) save {
 
@@ -180,6 +140,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[speedControl setTitle:@"24" forSegmentAtIndex:2];
 	}
 	
+}
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)nullify {
+	self.planControl = nil;
+	self.speedControl = nil;
+	self.imageSizeControl = nil;
+	self.mapStyleControl = nil;
+	self.routeUnitControl=nil;
+	self.controlView=nil;
+}
+
+- (void)viewDidUnload {
+	[self nullify];
+	[super viewDidUnload];
+	BetterLog(@">>>");
 }
 
 

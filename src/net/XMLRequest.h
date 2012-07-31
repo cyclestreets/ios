@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSArray *elementCategories;
 }
 
-@property (nonatomic, retain) NSArray *elementsToParse;
-@property (nonatomic, retain) NSArray *elementCategories;
+@property (nonatomic, strong) NSArray *elementsToParse;
+@property (nonatomic, strong) NSArray *elementCategories;
 
 @end

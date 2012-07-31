@@ -17,9 +17,9 @@
 	UIImage				*icon;
 	
 }
-@property (nonatomic, retain)	NSString		*key;
-@property (nonatomic, retain)	NSString		*name;
-@property (nonatomic, retain)	NSString		*shortname;
+@property (nonatomic, strong)	NSString		*key;
+@property (nonatomic, strong)	NSString		*name;
+@property (nonatomic, strong)	NSString		*shortname;
 @property (nonatomic)	int				total;
-@property (nonatomic, retain)	UIImage			*icon;
+@property (nonatomic, strong)	UIImage			*icon;
 @end

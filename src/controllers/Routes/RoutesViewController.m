@@ -36,27 +36,6 @@
 @synthesize activeIndex;
 @synthesize routeSummary;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [titleHeaderView release], titleHeaderView = nil;
-    [controlView release], controlView = nil;
-    [routeTypeControl release], routeTypeControl = nil;
-    [selectedRouteButton release], selectedRouteButton = nil;
-    [subViewsArray release], subViewsArray = nil;
-    [classArray release], classArray = nil;
-    [nibArray release], nibArray = nil;
-    [dataTypeArray release], dataTypeArray = nil;
-    [contentView release], contentView = nil;
-    [routeSummary release], routeSummary = nil;
-    
-    [super dealloc];
-}
-
-
-
 
 //
 /***********************************************
@@ -156,7 +135,6 @@
 	
 	[controlcontainer addSubview:selectedRouteButton];
 	[controlView addSubview:controlcontainer];
-	[controlcontainer release];
 	
 	contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NAVIGATIONHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
 	[self.view addSubview:contentView];
@@ -179,7 +157,6 @@
 			vc.isSectioned=YES;
 		}
 		[vc viewWillAppear:NO];
-		[vc release];
     }
 }
 
@@ -203,11 +180,10 @@
 	
 	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
 	self.navigation=nav;
-    [nav release];
 	navigation.delegate=self;
 	navigation.leftItemType=BUNavNoneType;
     navigation.rightItemType=UIKitButtonType;
-	navigation.rightButtonTitle=@"New";
+	navigation.rightButtonTitle=@"Fetch Route";
 	navigation.titleType=BUNavTitleDefaultType;
 	navigation.titleString=@"Routes";
     navigation.titleFontColor=[UIColor whiteColor];
@@ -238,7 +214,7 @@
 -(void)doNavigationSelector:(NSString*)type{
     
     if([type isEqualToString:RIGHT]){
-		[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil delegate:self];
+		[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
 	}
     
 }
@@ -315,6 +291,7 @@
             self.routeSummary = [[RouteSummary alloc]init];
         }
         self.routeSummary.route = (RouteVO*)data;
+		routeSummary.dataType=index;
         [self.navigationController pushViewController:self.routeSummary animated:YES];
         
     }

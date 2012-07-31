@@ -41,26 +41,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize activityIndicator;
 @synthesize pageLoaded;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [webView release], webView = nil;
-    [failAlert release], failAlert = nil;
-    [controlBar release], controlBar = nil;
-    [stopLoadingButton release], stopLoadingButton = nil;
-    [refreshButton release], refreshButton = nil;
-    [goBackButton release], goBackButton = nil;
-    [goForwardButton release], goForwardButton = nil;
-    [activityBarItem release], activityBarItem = nil;
-    [activityIndicator release], activityIndicator = nil;
-	
-    [super dealloc];
-}
-
-
-
 
 
 - (void)home {
@@ -202,12 +182,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	BetterLog(@"webView:didFailLoadWithError");
 	if (self.failAlert == nil) {
-		self.failAlert = [[[UIAlertView alloc] initWithTitle:@"CycleStreets"
+		self.failAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
 													 message:@"Unable to load web page."
 													delegate:nil
 										   cancelButtonTitle:@"OK"
-										   otherButtonTitles:nil]
-						  autorelease];
+										   otherButtonTitles:nil];
 	}
 	[self.failAlert show];
 }

@@ -38,22 +38,24 @@
 	
 }
 @property (nonatomic, assign) BOOL		 isSectioned;
-@property (nonatomic, retain) NSMutableArray		* keys;
-@property (nonatomic, retain) NSMutableArray		* dataProvider;
-@property (nonatomic, retain) NSMutableDictionary		* tableDataProvider;
-@property (nonatomic, retain) NSMutableArray		* rowHeightsArray;
-@property (nonatomic, retain) NSMutableDictionary		* rowHeightDictionary;
-@property (nonatomic, retain) NSMutableArray		* tableSectionArray;
-@property (nonatomic, retain) NSString		* dataType;
+@property (nonatomic, strong) NSMutableArray		* keys;
+@property (nonatomic, strong) NSMutableArray		* dataProvider;
+@property (nonatomic, strong) NSMutableDictionary		* tableDataProvider;
+@property (nonatomic, strong) NSMutableArray		* rowHeightsArray;
+@property (nonatomic, strong) NSMutableDictionary		* rowHeightDictionary;
+@property (nonatomic, strong) NSMutableArray		* tableSectionArray;
+@property (nonatomic, strong) NSString		* dataType;
 @property (nonatomic, assign) BOOL		 tableEditMode;
-@property (nonatomic, retain) NSMutableDictionary		* selectedCellDictionary;
+@property (nonatomic, strong) NSMutableDictionary		* selectedCellDictionary;
 @property (nonatomic, assign) int		 selectedCount;
-@property (nonatomic, retain) UIButton		* deleteButton;
-@property (nonatomic, retain) UITableView		* tableView;
-@property (nonatomic, retain) UIView		* toolView;
-@property (nonatomic, retain) NSIndexPath		* tappedIndexPath;
-@property (nonatomic, retain) NSIndexPath		* toolRowIndexPath;
-@property (nonatomic, retain) NSIndexPath		* indexPathToDelete;
+@property (nonatomic, strong) UIButton		* deleteButton;
+@property (nonatomic, strong) UITableView		* tableView;
+@property (nonatomic, strong) UIView		* toolView;
+@property (nonatomic, strong) NSIndexPath		* tappedIndexPath;
+@property (nonatomic, strong) NSIndexPath		* toolRowIndexPath;
+@property (nonatomic, strong) NSIndexPath		* indexPathToDelete;
 
 -(void)setTableEditingState:(BOOL)state;
+
+
 @end

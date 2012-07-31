@@ -18,16 +18,15 @@
 	NetRequest				*activeRequest;
 	BOOL					queueRequests;
 }
-@property (nonatomic,retain)	NSMutableData			*responseData;
-@property (nonatomic,retain)	NSURLConnection			*myConnection;
+@property (nonatomic,strong)	NSMutableData			*responseData;
+@property (nonatomic,strong)	NSURLConnection			*myConnection;
 @property (nonatomic)			BOOL					networkAvailable;
-@property(nonatomic,retain)		NSMutableArray			*requestQueue;
-@property(nonatomic,retain)		NetRequest					*activeRequest;
+@property(nonatomic,strong)		NSMutableArray			*requestQueue;
+@property(nonatomic,strong)		NetRequest					*activeRequest;
 @property (nonatomic)			BOOL						queueRequests;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RemoteFileManager);
 -(void)addRequestToQueue:(NetRequest*)request;
 -(void)removeRequestFromQueue:(NSString*)type andResume:(BOOL)resume;
 -(void)cancelAllRequests;
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 @end

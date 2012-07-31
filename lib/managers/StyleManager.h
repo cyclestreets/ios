@@ -1,9 +1,9 @@
 //
 //  StyleManager.h
-//  CycleStreets
+//
 //
 //  Created by neil on 25/11/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 // manager class for UI styles, loads style plist and returns styles for consistent ui
 
@@ -27,16 +27,17 @@
 	NSDictionary *styleDict;
 	NSDictionary *colors;
 	NSDictionary *fonts;
-	NSDictionary *uiimages;
+	NSMutableDictionary *uiimages;
+    NSDictionary *test;
 	
-	id<StyleManagerDelegate> delegate;
+	id<StyleManagerDelegate> __unsafe_unretained delegate;
 	
 }
-@property(nonatomic,retain)NSDictionary *styleDict;
-@property(nonatomic,retain)NSDictionary *colors;
-@property(nonatomic,retain)NSDictionary *fonts;
-@property(nonatomic,retain)NSDictionary *uiimages;
-@property(nonatomic,retain)id<StyleManagerDelegate> delegate;
+@property (nonatomic, strong) NSDictionary *styleDict;
+@property (nonatomic, strong) NSDictionary *colors;
+@property (nonatomic, strong) NSDictionary *fonts;
+@property (nonatomic, strong) NSMutableDictionary *uiimages;
+@property (nonatomic, unsafe_unretained) id<StyleManagerDelegate> delegate;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(StyleManager);
 //

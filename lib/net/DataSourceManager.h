@@ -1,9 +1,9 @@
 //
 //  XMLManager.h
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 24/11/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 // Provides a generic interface to loading new xml data
@@ -14,10 +14,10 @@
 #import "SynthesizeSingleton.h"
 
 #define kCACHEDIRECTORY @"datacache"
-#define kDATAPRIORITY @"racecard"
-#define kCACHEARCHIVEKEY @"RKCachedDataArchiveKey"
+#define kDATAPRIORITY @"none"
+#define kCACHEARCHIVEKEY @"AppDataSourceCacheKey"
 
-@protocol DataSourceDelegate<NSObject>
+@protocol DataSourceManagerDelegate<NSObject>
 
 @optional
 -(void)DataSourceDidCompleteStartup;
@@ -28,32 +28,31 @@
 
 
 @interface DataSourceManager : NSObject {
-	NSDictionary			*services;
-	NSMutableString			*requestURL;
-	NSString				*dataPriority;
-	NSString				*DATASOURCE;
+    
+	NSMutableDictionary			*services;
+	NSMutableString				*requestURL;
+	NSString					*DATASOURCE;
+	NSString					*diskCachePath;
 	
 	BOOL					startupState;
 	
-	id<DataSourceDelegate>  delegate;
-	
 	BOOL					cacheCreated;
 	NSMutableDictionary		*notifications;
+	
+	id<DataSourceManagerDelegate>  __unsafe_unretained delegate;
 }
-@property(nonatomic,retain)NSDictionary *services;
-@property(nonatomic,retain)NSMutableString *requestURL;
-@property(nonatomic,retain)NSString *dataPriority;
-@property(nonatomic,retain)NSString *DATASOURCE;
-@property(nonatomic,assign)BOOL startupState;
-@property(nonatomic,assign)id<DataSourceDelegate> delegate;
-@property(nonatomic,assign)BOOL cacheCreated;
-@property(nonatomic,retain)NSMutableDictionary *notifications;
+@property (nonatomic, strong) NSMutableDictionary		* services;
+@property (nonatomic, strong) NSMutableString		* requestURL;
+@property (nonatomic, strong) NSString		* DATASOURCE;
+@property (nonatomic, strong) NSString		* diskCachePath;
+@property (nonatomic, assign) BOOL		 startupState;
+@property (nonatomic, assign) BOOL		 cacheCreated;
+@property (nonatomic, strong) NSMutableDictionary		* notifications;
+@property(nonatomic,unsafe_unretained)id<DataSourceManagerDelegate> delegate;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DataSourceManager);
 
 -(void)doStartUpSequence;
-//-(void)requestDataForType:(NSString*)type parameters:(id)firstObject, ...;
-//-(void)requestDataForType:(NSString*)type withId:(NSString*)requestid parameters:(id)params, ...;
 -(void)requestDataForType:(NSNotification*)notification;
 -(NSDictionary*)getServiceForType:(NSString*)type;
 @end

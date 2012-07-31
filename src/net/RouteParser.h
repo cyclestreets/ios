@@ -33,12 +33,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSDictionary *categorisedElementLists;
 	NSMutableArray *elementStack;
 	NSMutableArray *currentNames;
-	NSError *error;
+	NSError *__unsafe_unretained error;
 }
 
 @property (nonatomic, readonly) NSDictionary *elementLists;
 @property (nonatomic, readonly) NSDictionary *categorisedElementLists;
-@property (nonatomic, readonly) NSError *error;
+@property (unsafe_unretained, nonatomic, readonly) NSError *error;
 
 - (id) initWithData:(NSData *)data forElements:(NSArray *)elements withCategories:(NSArray *)categories;
 

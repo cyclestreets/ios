@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <Foundation/Foundation.h>
+#import "SynthesizeSingleton.h"
 @class Categories;
 
 @interface CategoryLoader : NSObject {
@@ -33,12 +34,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	@private NSArray *metaCategories;
 	@private NSArray *metaCategoryLabels;	
 }
-
-@property (nonatomic, retain) NSArray *categories;
-@property (nonatomic, retain) NSArray *categoryLabels;
-@property (nonatomic, retain) NSArray *metaCategories;
-@property (nonatomic, retain) NSArray *metaCategoryLabels;
-@property (nonatomic, retain) Categories *categoriesAPIMethod;
+SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CategoryLoader);
+@property (nonatomic, strong) NSArray *categories;
+@property (nonatomic, strong) NSArray *categoryLabels;
+@property (nonatomic, strong) NSArray *metaCategories;
+@property (nonatomic, strong) NSArray *metaCategoryLabels;
+@property (nonatomic, strong) Categories *categoriesAPIMethod;
 
 - (void) setupCategories;
 

@@ -39,12 +39,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	SEL failure;
 }
 
-@property (nonatomic, retain) NSMutableURLRequest *request;
-@property (nonatomic, retain) NSURLConnection *connection;
-@property (nonatomic, retain) NSMutableData *data;
-@property (nonatomic, retain) NSURLResponse *response;
-@property (nonatomic, retain) NSObject *target;
-@property (nonatomic, retain) NSObject *tag;
+@property (nonatomic, strong) NSMutableURLRequest *request;
+@property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, strong) NSMutableData *data;
+@property (nonatomic, strong) NSURLResponse *response;
+@property (nonatomic, strong) NSObject *target;
+@property (nonatomic, strong) NSObject *tag;
 @property SEL success;
 @property SEL failure;
 

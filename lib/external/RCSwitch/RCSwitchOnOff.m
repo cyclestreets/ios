@@ -32,10 +32,9 @@
 //=========================================================== 
 - (void)dealloc
 {
-    [onText release], onText = nil;
-    [offText release], offText = nil;
+    onText = nil;
+    offText = nil;
     
-    [super dealloc];
 }
 
 

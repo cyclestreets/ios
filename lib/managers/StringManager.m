@@ -1,14 +1,13 @@
 //
 //  StringManager.m
-// CycleStreets
+//
 //
 //  Created by Neil Edwards on 19/02/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import "StringManager.h"
 #import "SynthesizeSingleton.h"
-#import "AppConstants.h"
 #import "GlobalUtilities.h"
 
 @interface StringManager(Private)
@@ -32,10 +31,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StringManager);
 /***********************************************************/
 - (void)dealloc
 {
-    [stringsDict release], stringsDict = nil;
     delegate = nil;
 	
-    [super dealloc];
 }
 
 
@@ -43,7 +40,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StringManager);
 
 -(id)init{
 	if (self = [super init]){
-		
+		[self initialise];
 	}
 	return self;
 }
@@ -60,8 +57,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StringManager);
 	
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[self dataPath]]){
 		
-		stringsDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self dataPath]];
-		
+        NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:[self dataPath]];
+		self.stringsDict = dict;
+		self.delegate=nil;
 	}else {
 		
 		[self fileFailed];
@@ -75,7 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StringManager);
 	if([delegate respondsToSelector:@selector(startupFailedWithError:)]){
 		[delegate startupFailedWithError:STARTUPERROR_STRINGSFAILED];
 	}
-	
+	self.delegate=nil;
 }
 
 

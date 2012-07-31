@@ -43,7 +43,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
 }
 
 @interface TTTTimeIntervalFormatter ()
-@property (readwrite, nonatomic, retain) NSLocale *locale;
+@property (readwrite, nonatomic, strong) NSLocale *locale;
 @property (readwrite, nonatomic, copy) NSString *pastDeicticExpression;
 @property (readwrite, nonatomic, copy) NSString *presentDeicticExpression;
 @property (readwrite, nonatomic, copy) NSString *futureDeicticExpression;
@@ -91,16 +91,6 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
     return self;
 }
 
-- (void)dealloc {
-    [_locale release];
-    [_pastDeicticExpression release];
-    [_presentDeicticExpression release];
-    [_futureDeicticExpression release];
-    [_deicticExpressionFormat release];
-    [_approximateQualifierFormat release];
-    [_approximateQualifierFormat release];
-    [super dealloc];
-}
 
 - (NSString *)stringForTimeInterval:(NSTimeInterval)seconds {
     return [self stringForTimeIntervalFromDate:[NSDate date] toDate:[NSDate dateWithTimeIntervalSinceNow:seconds]];

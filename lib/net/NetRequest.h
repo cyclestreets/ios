@@ -33,15 +33,15 @@ typedef enum{
 	BOOL					trackProgress;
 	
 }
-@property (nonatomic, retain) NSDictionary		* service;
-@property (nonatomic, retain) NSString		* dataid;
-@property (nonatomic, retain) NSMutableString		* url;
+@property (nonatomic, strong) NSDictionary		* service;
+@property (nonatomic, strong) NSString		* dataid;
+@property (nonatomic, strong) NSMutableString		* url;
 @property (nonatomic, assign) requestStatus		 status;
-@property (nonatomic, retain) NSDictionary		* parameters;
-@property (nonatomic, retain) NSString		* requestType;
-@property (nonatomic, retain) NSString		* requestid;
+@property (nonatomic, strong) NSDictionary		* parameters;
+@property (nonatomic, strong) NSString		* requestType;
+@property (nonatomic, strong) NSString		* requestid;
 @property (nonatomic, assign) int		 revisonId;
-@property (nonatomic, retain) NSString		* source;
+@property (nonatomic, strong) NSString		* source;
 @property (nonatomic, assign) DataParserType		 dataType;
 @property (nonatomic, assign) BOOL		 trackProgress;
 
@@ -49,4 +49,7 @@ typedef enum{
 -(NSMutableURLRequest*)requestForType;
 -(NSMutableURLRequest*)addRequestHeadersForService:(NSMutableURLRequest*)request;
 -(NSMutableString*)url;
+
+- (void)appendFormValues:(NSDictionary*)parameters toPostData:(NSMutableData*)data;
+
 @end

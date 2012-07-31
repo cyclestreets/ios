@@ -879,8 +879,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[PhotoCategoryManager sharedInstance];
 	
-	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose..."];
-	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose Category..."];
+	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose Type...."];
 	
 	[categoryButton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
 	[categoryFeaturebutton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];

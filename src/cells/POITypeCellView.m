@@ -13,21 +13,6 @@
 @synthesize label;
 @synthesize totallabel;
 @synthesize dataProvider;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [imageView release], imageView = nil;
-    [label release], label = nil;
-    [totallabel release], totallabel = nil;
-    [dataProvider release], dataProvider = nil;
-	
-    [super dealloc];
-}
-
-
 	
 	
 -(void)initialise{

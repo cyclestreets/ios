@@ -9,32 +9,18 @@
 #import "UploadPhotoVO.h"
 #import "ImageManipulator.h"
 #import "SettingsManager.h"
+#import "NSDate+Helper.h"
+#import "StringUtilities.h"
 
 @implementation UploadPhotoVO
 @synthesize image;
 @synthesize location;
 @synthesize userLocation;
 @synthesize category;
-@synthesize metaCategory;
+@synthesize feature;
+@synthesize caption;
 @synthesize date;
 @synthesize responseDict;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [image release], image = nil;
-    [location release], location = nil;
-    [userLocation release], userLocation = nil;
-    [category release], category = nil;
-    [metaCategory release], metaCategory = nil;
-    [date release], date = nil;
-    [responseDict release], responseDict = nil;
-    
-    [super dealloc];
-}
-
 
 
 
@@ -55,7 +41,7 @@
 
 - (id)initWithImage:(UIImage *)newImage{
     
-    [self init];
+    self = [self init];
     self.image=newImage;
     
     return self;
@@ -82,6 +68,16 @@
     return 0;
 }
 
+-(NSString*)dateString{
+	
+	if (date == nil) {
+		self.date = [NSDate date];
+	}
+	
+	return [NSDate stringFromDate:date withFormat:[NSDate shortFormatString]]; 
+	
+}
+
 
 //
 /***********************************************
@@ -99,6 +95,26 @@
 	
     return time;
     
+}
+
+
+-(CLLocation*)activeLocation{
+	
+	if(userLocation!=nil){
+		return userLocation;
+	}
+	return location;
+}
+
+
+-(NSString*)uploadedPhotoId{
+	
+	if(responseDict!=nil){
+		
+		NSString *idstring=[StringUtilities pathStringFromURL:[responseDict objectForKey:@"url"] :@"/"];
+		return idstring;
+	}
+	return nil;
 }
 
 //

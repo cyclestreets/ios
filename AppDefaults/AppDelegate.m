@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-#import "CycleStreetsAppDelegate.h"
+#import "AppDelegate.h"
 #import "CycleStreets.h"
 #import "Files.h"
 #import "Reachability.h"
@@ -42,7 +42,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ExpandedUILabel.h"
 
 
-@interface CycleStreetsAppDelegate(Private)
+@interface AppDelegate(Private)
 
 - (void)buildTabbarController:(NSArray*)viewcontrollers;
 -(void)appendStartUpView;
@@ -53,26 +53,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @end
 
-@implementation CycleStreetsAppDelegate
+@implementation AppDelegate
 @synthesize window;
 @synthesize splashView;
 @synthesize tabBarController;
 @synthesize startupmanager;
 @synthesize debugLabel;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [window release], window = nil;
-    [splashView release], splashView = nil;
-    [tabBarController release], tabBarController = nil;
-    [startupmanager release], startupmanager = nil;
-    [debugLabel release], debugLabel = nil;
-	
-    [super dealloc];
-}
 
 
 
@@ -106,11 +92,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"");
 	
 	startupmanager.delegate=nil;
-	[startupmanager release];
 	startupmanager=nil;
 	
 	tabBarController = [[UITabBarController alloc] init];
 	[self buildTabbarController:[[AppConfigManager sharedInstance].configDict objectForKey:@"navigation"]];
+	
 	
 	[window addSubview:tabBarController.view];
 	tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
@@ -123,6 +109,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[self performSelector:@selector(backgroundSetup) withObject:nil afterDelay:0.0];
 	[self removeStartupView];
+	
 	
 }
 
@@ -219,7 +206,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)startupAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
 	[splashView removeFromSuperview];
-	[splashView release];
 }
 
 
@@ -250,21 +236,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				if (isVC==YES) {
 					UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[navitem objectForKey:@"title"] image:[UIImage imageNamed:[navitem objectForKey:@"tabimage"]] tag:i];
 					[vccontroller setTabBarItem:tabBarItem];
-					[tabBarItem release];
 					[navControllers addObject:vccontroller];
 				}else {
 					UINavigationController *nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
 					[navControllers addObject:nav];
 				}
 
-				[vccontroller release];
 			}
 			
 		}
 		tabBarController.viewControllers = navControllers;
 	}
 	
-	[navControllers release];
 	
 	// only add tabbar delegate if we can save the state
 	if([[UserSettingsManager sharedInstance] userStateWritable]==YES){
@@ -280,12 +263,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag {
 	
-	UINavigationController *navigation = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
+	UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:controller];
 	navigation.navigationBar.tintColor=UIColorFromRGB(0x008000);
 	UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:[UIImage imageNamed:imageName] tag:tag];
 	[navigation setTabBarItem:tabBarItem];
 	controller.navigationItem.title = title;
-	[tabBarItem release];
 	
 	return navigation;
 }
@@ -303,10 +285,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"");
 	
 	// TODO: why is this loading stuff happenign here, it should be part of StartUpManger sequence
-	
-	//load the default categories
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.categoryLoader setupCategories];
 	
 	
 	// Check we have network

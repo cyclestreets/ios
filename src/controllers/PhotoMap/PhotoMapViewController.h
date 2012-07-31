@@ -29,6 +29,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapViewDelegate.h"
 #import "BlueCircleView.h"
 #import "SuperViewController.h"
+#import "PhotoWizardViewController.h"
+
+@class RMMapContents;
 @class CycleStreets;
 @class Location;
 @class PhotoMapImageLocationViewController;
@@ -42,18 +45,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet RMMapView						*mapView;			//map of current area
 	IBOutlet BlueCircleView					*blueCircleView;	//overlay GPS location
 	IBOutlet UILabel                        *attributionLabel;	// map type label
+	RMMapContents							*mapContents;
 	
 	
 	IBOutlet UIBarButtonItem				*gpslocateButton;
-	IBOutlet UIBarButtonItem				*showPhotosButton;
+	IBOutlet UIBarButtonItem				*photoWizardButton;
+	
 	
 	
 	CLLocationManager						*locationManager;	// location
 	CLLocation								*lastLocation;		// last location
 	
+	CLLocation								*currentLocation;
+	
 	
 	PhotoMapImageLocationViewController		*locationView;			//the popup with the contents of a particular location (photomap etc.)
 	MapLocationSearchViewController			*mapLocationSearchView;	//the search popup
+	
+	PhotoWizardViewController				*photoWizardView;
 	
 	
 	InitialLocation							*initialLocation;
@@ -68,35 +77,38 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BOOL									locationWasFound;
 }
 
-@property (nonatomic, retain)	RMMapView		*mapView;
-@property (nonatomic, retain)	BlueCircleView		*blueCircleView;
-@property (nonatomic, retain)	UILabel		*attributionLabel;
-@property (nonatomic, retain)	UIBarButtonItem		*gpslocateButton;
-@property (nonatomic, retain)	UIBarButtonItem		*showPhotosButton;
-@property (nonatomic, retain)	CLLocationManager		*locationManager;
-@property (nonatomic, retain)	CLLocation		*lastLocation;
-@property (nonatomic, retain)	PhotoMapImageLocationViewController		*locationView;
-@property (nonatomic, retain)	MapLocationSearchViewController		*mapLocationSearchView;
-@property (nonatomic, retain)	InitialLocation		*initialLocation;
-@property (nonatomic, retain)	UIView		*introView;
-@property (nonatomic, retain)	UIButton		*introButton;
-@property (nonatomic, retain)	NSMutableArray		*photoMarkers;
-@property (nonatomic)	BOOL		photomapQuerying;
-@property (nonatomic)	BOOL		showingPhotos;
-@property (nonatomic)	BOOL		locationManagerIsLocating;
-@property (nonatomic)	BOOL		locationWasFound;
+@property (nonatomic, strong)	IBOutlet RMMapView			*mapView;
+@property (nonatomic, strong)	IBOutlet BlueCircleView			*blueCircleView;
+@property (nonatomic, strong)	IBOutlet UILabel			*attributionLabel;
+@property (nonatomic, strong)	RMMapContents			*mapContents;
+@property (nonatomic, strong)	IBOutlet UIBarButtonItem			*gpslocateButton;
+@property (nonatomic, strong)	IBOutlet UIBarButtonItem			*photoWizardButton;
+@property (nonatomic, strong)	CLLocationManager			*locationManager;
+@property (nonatomic, strong)	CLLocation			*lastLocation;
+@property (nonatomic, strong)	CLLocation			*currentLocation;
+@property (nonatomic, strong)	PhotoMapImageLocationViewController			*locationView;
+@property (nonatomic, strong)	MapLocationSearchViewController			*mapLocationSearchView;
+@property (nonatomic, strong)	PhotoWizardViewController			*photoWizardView;
+@property (nonatomic, strong)	InitialLocation			*initialLocation;
+@property (nonatomic, strong)	IBOutlet UIView			*introView;
+@property (nonatomic, strong)	IBOutlet UIButton			*introButton;
+@property (nonatomic, strong)	NSMutableArray			*photoMarkers;
+@property (nonatomic, assign)	BOOL			photomapQuerying;
+@property (nonatomic, assign)	BOOL			showingPhotos;
+@property (nonatomic, assign)	BOOL			locationManagerIsLocating;
+@property (nonatomic, assign)	BOOL			locationWasFound;
 
 
 
-- (IBAction) didLocation;
-- (IBAction) didShowPhotos;
+- (IBAction) locationButtonSelected:(id)sender;
+-(IBAction)  showPhotoWizard:(id)sender;
 - (IBAction) didSearch;
 
 - (IBAction) didIntroButton;
 
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw;
 
-- (void)stopShowingPhotos;
+
 - (void)startShowingPhotos;
 - (void)stopUpdatingLocation:(NSString *)state;
 - (void)startlocationManagerIsLocating;

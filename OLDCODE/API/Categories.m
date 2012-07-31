@@ -41,9 +41,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/photomapcategorie
 							stringWithFormat:format,
 							urlPrefix,
 							[cycleStreets APIKey]];
-		[url release];
 		url = newURL;
-		[url retain];
 	}
 	return self;	
 }
@@ -53,7 +51,6 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/photomapcategorie
 }
 
 - (void) runWithTarget:(NSObject *)resultTarget onSuccess:(SEL)successMethod onFailure:(SEL)failureMethod {
-	[request release];
 	request = [[XMLRequest alloc] initWithURL:url delegate:(NSObject *)resultTarget tag:nil onSuccess:(SEL)successMethod onFailure:(SEL)failureMethod];
 	//request.elementsToParse = [NSArray arrayWithObjects:@"tag", @"name", nil];
 	//request.elementCategories = [NSArray arrayWithObjects:@"categories", @"metacategories", nil];
@@ -62,11 +59,5 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/photomapcategorie
 	[request start];
 }
 
-- (void) dealloc {
-	[url release];
-	[request release];
-	
-	[super dealloc];
-}
 
 @end

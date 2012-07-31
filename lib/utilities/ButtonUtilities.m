@@ -1,6 +1,6 @@
 //
 //  ButtonUtilities.m
-// CycleStreets
+//  NagMe
 //
 //  Created by Neil Edwards on 19/08/2011.
 //  Copyright 2011 buffer. All rights reserved.
@@ -11,6 +11,7 @@
 #import "StyleManager.h"
 #import "GenericConstants.h"
 #import "GlobalUtilities.h"
+#import "UIView+Additions.h"
 
 @implementation ButtonUtilities
 
@@ -74,10 +75,21 @@
 	CGRect bframe=button.frame;
 	if(hasLabel==YES){
 		CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font];
-		bframe.size.width=MAX(twidth,bframe.size.width);
+		if(twidth>bframe.size.width){
+			twidth+=10;
+		}else{
+			twidth=bframe.size.width;
+		}
+		bframe.size.width=twidth;
 	}else {
-		UIImage *image=[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]];
-		bframe.size=image.size;
+		if([button.titleLabel.text length]==0){
+			UIImage *image=[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]];
+			bframe.size=image.size;
+		}else{
+			CGFloat twidth=[GlobalUtilities calculateWidthOfText:button.titleLabel.text :button.titleLabel.font];
+			bframe.size.width=MAX(twidth,bframe.size.width);
+			capWidth=9;
+		}
 	}
 	button.frame = bframe;
 	
@@ -93,7 +105,7 @@
 		[button setTitle:text forState:UIControlStateNormal];
 		button.titleLabel.userInteractionEnabled=NO;
 		[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
+		[button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
 		button.titleLabel.textAlignment=UITextAlignmentCenter;
 		button.titleLabel.shadowOffset=CGSizeMake(0, -1);
 	}
@@ -120,8 +132,31 @@
 + (void)styleIBButton:(UIButton*)button  withWidth:(NSUInteger)width type:(NSString*)type text:(NSString*)text
 {
 	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font]+10;
-	button.frame = CGRectMake(0, 0, MAX(twidth,width), button.frame.size.height);
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font]+20;
+	CGSize bsize=CGSizeMake(MAX(twidth,width), button.height);
+	CGRect bframe=button.frame;
+	bframe.size=bsize;
+	button.frame=bframe;
+	
+	// Configure background image(s)
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
+	
+	
+	// Configure title(s)
+	[button setTitle:text forState:UIControlStateNormal];
+	
+}
+
++ (void)styleIBButtonWithExistingWidth:(UIButton*)button type:(NSString*)type text:(NSString*)text
+{
+	
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font]+20;
+	CGSize bsize=CGSizeMake(MAX(twidth,button.width), button.height);
+	CGRect bframe=button.frame;
+	bframe.size=bsize;
+	button.frame=bframe;
 	
 	// Configure background image(s)
 	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
@@ -136,10 +171,10 @@
 
 + (UIButton*)UIButtonWithWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text
 {
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
 	UIFont *font=[UIFont boldSystemFontOfSize:12];
 	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font]+10;
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font]+20;
 	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
 	
 	// Configure background image(s)
@@ -165,14 +200,15 @@
 // Note: These are autoreleased, do not over release!
 + (UIButton*)UIButtonWithFixedWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text minFont:(int)minFont
 {
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	UIFont *font=[UIFont boldSystemFontOfSize:12];
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+	UIFont *font=[UIFont boldSystemFontOfSize:minFont];
 	
 	button.frame = CGRectMake(0, 0, width, height);
 	
 	// Configure background image(s)
 	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
 	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
+	
 	
 	
 	// Configure title(s)
@@ -238,19 +274,17 @@
 	
 }
 
-+ (UIButton*)UIIconButton:(NSString*)image height:(NSUInteger)height type:(NSString*)type
++ (UIButton*)UIIconButton:(NSString*)type  iconImage:(NSString*)iconimagename height:(NSUInteger)height width:(NSUInteger)width
 {
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+	button.frame = CGRectMake(0, 0, width,height);
 	
-	UIImage *iconimage=[[StyleManager sharedInstance] imageForType:image];
-	[button setImage:iconimage forState:UIControlStateNormal];
-	
-	
-	int buttonheight=MAX(height,iconimage.size.height);
-	int inset=(height-iconimage.size.width)/2;
-	int buttonwidth=iconimage.size.width+(inset*2);
-	
-	button.frame = CGRectMake(0, 0, buttonwidth,buttonheight );
+	if(iconimagename!=nil){
+		UIImage *iconimage=[[StyleManager sharedInstance] imageForType:iconimagename];
+		[button setImage:iconimage forState:UIControlStateNormal];
+	}
+	 
+	int inset=(height-width)/2;
 	button.contentEdgeInsets=UIEdgeInsetsMake(0, inset, 0, inset);
 	
 	//
@@ -263,9 +297,40 @@
 	return button;
 }
 
++ (UIButton*)UIIconButton:(NSString*)type  iconImage:(NSString*)iconimagename height:(NSUInteger)height width:(NSUInteger)width midLeftCap:(BOOL)midLeft midTopCap:(BOOL)midTop
+{
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+	button.frame = CGRectMake(0, 0, width,height);
+	
+	
+	if(iconimagename!=nil){
+		UIImage *iconimage=[[StyleManager sharedInstance] imageForType:iconimagename];
+		[button setImage:iconimage forState:UIControlStateNormal];
+	}
+	
+	
+	int leftCap=9;
+	int topCap=0;
+	UIImage *bimage=[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]];
+	if(midLeft==YES){
+		leftCap=(bimage.size.width-2)/2;
+	}
+	if(midTop==YES){
+		topCap=(bimage.size.height-2)/2;
+	}
+	
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:leftCap topCapHeight:topCap ] forState:UIControlStateNormal];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:leftCap topCapHeight:topCap ] forState:UIControlStateHighlighted];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",type]] stretchableImageWithLeftCapWidth:leftCap topCapHeight:topCap ] forState:UIControlStateDisabled];
+	
+	
+	return button;
+}
+
 + (UIButton*)UIToggleButtonWithWidth:(NSUInteger)width height:(NSUInteger)height states:(NSDictionary*)stateDict
 {
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+	button.backgroundColor=[UIColor clearColor];
 	UIFont *font=[UIFont boldSystemFontOfSize:12];
 	
 	CGFloat twidth=[GlobalUtilities calculateWidthOfText:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] :font];
@@ -287,13 +352,52 @@
 	
 	button.titleLabel.userInteractionEnabled=NO;
 	button.titleLabel.font=font;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	NSString *defColor=[[stateDict objectForKey:@"normal"] objectForKey:@"textColor"];
+	if(defColor==nil){
+		[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	}else{
+		[button setTitleColor:[[StyleManager sharedInstance] colorForType: [[stateDict objectForKey:@"normal"] objectForKey:@"textColor"]] forState:UIControlStateNormal];
+		[button setTitleColor:[[StyleManager sharedInstance] colorForType:[[stateDict objectForKey:@"highlight"] objectForKey:@"textColor"] ]forState:UIControlStateHighlighted];
+		[button setTitleColor:[[StyleManager sharedInstance] colorForType:[[stateDict objectForKey:@"selected"] objectForKey:@"textColor"] ]forState:UIControlStateSelected];
+		[button setTitleColor:[[StyleManager sharedInstance] colorForType:[[stateDict objectForKey:@"normal"] objectForKey:@"textColor"] ]forState:UIControlStateDisabled];
+	}
 	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, 1);
+	//button.titleLabel.shadowOffset=CGSizeMake(0, 1);
 	
 	
 	return button;
 }
+
+
++ (UIButton*)UIIconButton:(NSString*)image height:(NSUInteger)height type:(NSString*)type
+{
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+	
+	UIImage *iconimage=[[StyleManager sharedInstance] imageForType:image];
+	[button setImage:iconimage forState:UIControlStateNormal];
+	
+	
+	int buttonheight=MAX(height,iconimage.size.height);
+	int inset=(height-iconimage.size.width)/2;
+	int buttonwidth=iconimage.size.width+(inset*2);
+	
+	button.frame = CGRectMake(0, 0, buttonwidth,buttonheight );
+	button.contentEdgeInsets=UIEdgeInsetsMake(0, inset, 0, inset);
+	
+	//
+	if(type!=nil){
+		[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
+		[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
+		[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
+	}
+	
+	
+	return button;
+}
+
+
+
+
 
 + (void)UIToggleIBButton:(UIButton*)button states:(NSDictionary*)stateDict
 {
@@ -359,6 +463,34 @@
 	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
 	button.titleLabel.textAlignment=UITextAlignmentLeft;
 	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+}
+
++ (void)styleIBIconButtonFixedStyle:(UIButton*)button iconimage:(NSString*)image type:(NSString*)type text:(NSString*)text align:(LayoutBoxAlignMode)alignment
+{
+	
+	
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font];
+	//
+	UIImage *iconimage=[[StyleManager sharedInstance] imageForType:image];
+	[button setImage:iconimage forState:UIControlStateNormal];
+	// Configure title(s)
+	[button setTitle:text forState:UIControlStateNormal];
+	
+	twidth+=iconimage.size.width+15;
+	//
+	CGRect bframe=button.frame;
+	bframe.size=CGSizeMake(twidth, bframe.size.height);
+	button.frame=bframe;
+	
+	
+	if(alignment==BURightAlignMode){
+		[button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
+		[button setImageEdgeInsets:UIEdgeInsetsMake(2, twidth+5, 0, 5)];
+	}else{
+		button.titleEdgeInsets=UIEdgeInsetsMake(0, 10, 0, 5);
+	}
+	
+	
 }
 
 + (void)styleIBIconButton:(UIButton*)button iconimage:(NSString*)image type:(NSString*)type
@@ -464,6 +596,94 @@
 		}
 		button.titleLabel.textAlignment=UITextAlignmentCenter;
 	}
+}
+
+
+
+//
+/***********************************************
+ * @description			V2.0  prelim
+ ***********************************************/
+//
+
++ (void)UIDefinableStyleButton:(UIButton*)button states:(NSDictionary*)stateDict buttonStyle:(UIButtonStyle)buttonStyle{
+	
+	NSString *keytext=[[stateDict objectForKey:@"normal"] objectForKey:@"text"];
+	
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:keytext :button.titleLabel.font]+20;
+	CGRect bframe=button.frame;
+	bframe.size=CGSizeMake(MAX(twidth,bframe.size.width), bframe.size.height);
+	button.frame=bframe;
+	
+	
+	// Configure background image(s)
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",[[stateDict objectForKey:@"normal"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",[[stateDict objectForKey:@"highlight"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_selected",[[stateDict objectForKey:@"selected"] objectForKey:@"type"]]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateSelected];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",@"grey"]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
+	
+	button.adjustsImageWhenHighlighted=NO;
+	
+	// Configure title(s)
+	[button setTitle:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] forState:UIControlStateNormal];
+	[button setTitle:[[stateDict objectForKey:@"highlight"] objectForKey:@"text"] forState:UIControlStateHighlighted];
+	[button setTitle:[[stateDict objectForKey:@"selected"] objectForKey:@"text"] forState:UIControlStateSelected];
+	[button setTitle:[[stateDict objectForKey:@"normal"] objectForKey:@"text"] forState:UIControlStateDisabled];
+	
+	button.titleLabel.userInteractionEnabled=NO;
+	button.titleLabel.textAlignment=UITextAlignmentCenter;
+	
+	[self updateUIButton:button withStyle:buttonStyle];
+	 
+	 
+}
+	 
+	
+
+//
+/***********************************************
+ * @description			CONSTRUCTION METHODS
+ ***********************************************/
+//
++(void)updateUIButton:(UIButton*)button withStyle:(UIButtonStyle)style{
+	
+	switch (style) {
+			
+		case UIButtonStyleDark:
+		{
+			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+			[button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+			button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+		}
+		break;
+			
+		case UIButtonStyleLight:
+		{
+			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+			[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+			button.titleLabel.shadowOffset=CGSizeMake(0, 1);
+		}
+		break;
+			
+		default:
+		break;
+	}
+	
+}
+
+
+
+
+
+
++(void)setButtonImage:(UIButton*)button  forType:(NSString*)type{
+	
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_hi",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_selected",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateSelected];
+	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_disabled",type]] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateDisabled];
+	
 }
 
 

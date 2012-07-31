@@ -13,13 +13,13 @@
 	BOOL			multiline;		
 	BOOL			fixedWidth;
 	int				insetValue;
-	UIColor			*labelColor;
+	UIColor			*__unsafe_unretained labelColor;
     BOOL			hasShadow;
 }
 @property (nonatomic, assign)	BOOL	multiline;
 @property (nonatomic, assign)	BOOL	fixedWidth;
 @property (nonatomic, assign)	int	insetValue;
-@property (nonatomic, assign)	UIColor	*labelColor;
+@property (nonatomic, unsafe_unretained)	UIColor	*labelColor;
 @property (nonatomic)		BOOL		 hasShadow;
 
 @end

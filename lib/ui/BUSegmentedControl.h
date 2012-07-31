@@ -1,9 +1,9 @@
 //
-//  RKCustomSegmentedControl.h
-//  CycleStreets
+//  CustomSegmentedControl.h
+//
 //
 //  Created by Neil Edwards on 27/11/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -24,21 +24,26 @@
 	int width;
 	int height;
 	
+	BOOL			invertHighlightTextcolor;
+	BOOL			invertNormalTextcolor;
+	
 	@private
 	int selectedIndex;
 	
 	int itemWidth;
 	
-	id <BUSegmentedControlDelegate> delegate;
+	id <BUSegmentedControlDelegate> __unsafe_unretained delegate;
 }
-@property(nonatomic,assign) id <BUSegmentedControlDelegate> delegate;
-@property (nonatomic,retain) NSMutableArray *dataProvider;
-@property (nonatomic,retain) NSMutableArray *items;
-@property (nonatomic,retain) LayoutBox *container;
-@property (nonatomic) int selectedIndex;
-@property (nonatomic) int width;
-@property (nonatomic) int height;
-@property (nonatomic) int itemWidth;
+@property(nonatomic,unsafe_unretained) id <BUSegmentedControlDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray		* dataProvider;
+@property (nonatomic, strong) NSMutableArray		* items;
+@property (nonatomic, strong) LayoutBox		* container;
+@property (nonatomic, assign) int		 width;
+@property (nonatomic, assign) int		 height;
+@property (nonatomic, assign) BOOL		 invertHighlightTextcolor;
+@property (nonatomic, assign) BOOL		 invertNormalTextcolor;
+@property (nonatomic, assign) int		 selectedIndex;
+@property (nonatomic, assign) int		 itemWidth;
 
 -(void)setSelectedSegmentIndex:(int)index;
 -(IBAction)itemWasSelected:(id)sender;

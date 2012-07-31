@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 27/10/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Chroma. All rights reserved.
 //
 
 #import "GoogleAnalyticsManager.h"
@@ -30,11 +30,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GoogleAnalyticsManager);
 //=========================================================== 
 // dealloc
 //=========================================================== 
-- (void)dealloc
-{
-    
-    [super dealloc];
-}
 
 
 
@@ -82,7 +77,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GoogleAnalyticsManager);
             if([pathArray count]>0){
                 [self sendTrackArray:pathArray];
             }
-            [pathArray release];
             
         }
 	}
@@ -113,7 +107,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GoogleAnalyticsManager);
             if([pathArray count]>0){
                 [self sendTrackArray:pathArray];
             }
-            [pathArray release];
         }
 	}
 }
@@ -139,13 +132,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GoogleAnalyticsManager);
 }
 
 
+-(void)trackPageViewWithString:(NSString*)string{
+	NSMutableArray	*pathArray=[[NSMutableArray alloc]init];
+	[pathArray addObject:string];
+	[self sendTrackArray:pathArray];
+}
+
 
 -(void)trackEvent:(NSString*)event action:(NSString*)action{
 	if(GAEnabled==YES){
         NSError *error=nil;
         if (![[GANTracker sharedTracker] trackEvent:event
                                              action:action
-                                              label:@"CycleStreets"
+                                              label:@"RUK"
                                               value:-1
                                           withError:&error]) {
             // Handle error here
@@ -154,18 +153,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GoogleAnalyticsManager);
 }
 					  
 
-//
-/***********************************************
- * @description			adds whatever string you want 
- ***********************************************/
-//
-
--(void)trackPageViewWithString:(NSString*)string{
-	NSMutableArray	*pathArray=[[NSMutableArray alloc]init];
-	[pathArray addObject:string];
-	[self sendTrackArray:pathArray];
-	[pathArray release];
-}
 
 
 @end

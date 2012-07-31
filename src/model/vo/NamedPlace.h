@@ -31,10 +31,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface NamedPlace : NSObject {
 	CLLocationCoordinate2D locationCoords;
-	NSString *name;
+	NSString	*name;
+	NSString	*near;
+	NSString	*distance;
+	
 }
 
-@property CLLocationCoordinate2D locationCoords;
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, assign) CLLocationCoordinate2D		 locationCoords;
+@property (nonatomic, strong) NSString		* name;
+@property (nonatomic, strong) NSString		* near;
+@property (nonatomic, strong) NSString		*distance;
+
+
+// getters
+@property (nonatomic, readonly) NSString		 *distanceString;
+@property (nonatomic, readonly) NSNumber		 *distanceInt;
+
+- (id)initWithDictionary:(NSDictionary *)fields;
 
 @end

@@ -1,9 +1,9 @@
 //
 //  StyleManager.m
-//  CycleStreets
+//
 //
 //  Created by neil on 25/11/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import "StyleManager.h"
@@ -35,21 +35,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StyleManager);
 @synthesize delegate;
 
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [styleDict release], styleDict = nil;
-    [colors release], colors = nil;
-    [fonts release], fonts = nil;
-    [uiimages release], uiimages = nil;
-    [delegate release], delegate = nil;
-	
-    [super dealloc];
-}
-
-
 
 
 -(id)init{
@@ -73,11 +58,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StyleManager);
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[self dataPath]]){
 		
 		styleDict = [[NSMutableDictionary alloc] initWithContentsOfFile:[self dataPath]];
-		
 		[self styleSheetLoaded];
 		
 	}else {
-		
 		[self stylesheetFailed];
 	}
 
@@ -90,19 +73,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StyleManager);
 	colors=[styleDict objectForKey:@"colors"];
 	fonts=[styleDict objectForKey:@"fonts"];
 	uiimages=[styleDict objectForKey:@"uiimages"];
-	
+	self.delegate=nil;
 }
 
 
 // @private
 -(void)stylesheetFailed{
 	
-	//BetterLog(@"[FATAL] StyleManager: style plist failed to load");
-	
 	if([delegate respondsToSelector:@selector(startupFailedWithError:)]){
 		[delegate startupFailedWithError:STARTUPERROR_STYLESFAILED];
 	}
-	
+	self.delegate=nil;
 }
 
 

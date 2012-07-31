@@ -37,6 +37,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSObject <LocationProvider> *locationProvider;
 }
 
-@property (nonatomic, retain) NSObject <LocationProvider> *locationProvider;
+@property (nonatomic, strong) NSObject <LocationProvider> *locationProvider;
 
 @end

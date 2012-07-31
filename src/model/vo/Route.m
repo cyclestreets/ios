@@ -50,19 +50,6 @@ static NSString *ROUTEDATE = @"cs:whence";
 @synthesize header;
 @synthesize userRouteName;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [segments release], segments = nil;
-    [header release], header = nil;
-    [userRouteName release], userRouteName = nil;
-	
-    [super dealloc];
-}
-
-
 
 - (id) initWithElements:(NSDictionary *)elements {
 	if (self = [super init]) {
@@ -74,20 +61,19 @@ static NSString *ROUTEDATE = @"cs:whence";
 			[segments addObject:segment];
 			time += [segment segmentTime];
 			distance += [segment segmentDistance];
-			[segment release];
 		}
 		NSArray *routeElements = [elements objectForKey:ROUTE_ELEMENT];
-		NSDictionary *value = [[[NSDictionary alloc] init] autorelease];
+		NSDictionary *value = [[NSDictionary alloc] init];
 		if ([routeElements count] > 0) {
 			value = [[elements objectForKey:ROUTE_ELEMENT] objectAtIndex:0];
 		}
-		header = [[NSDictionary dictionaryWithDictionary:value] retain];																				 
+		header = [NSDictionary dictionaryWithDictionary:value];																				 
 	}
 	return self;
 }
 
 + (NSArray *) routeXMLElementNames {
-	return [[[NSArray alloc] initWithObjects:ROUTE_ELEMENT, SEGMENT_ELEMENT, nil] autorelease];
+	return [[NSArray alloc] initWithObjects:ROUTE_ELEMENT, SEGMENT_ELEMENT, nil];
 }
 
 - (int) numSegments {

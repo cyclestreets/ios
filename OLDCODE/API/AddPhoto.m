@@ -52,9 +52,7 @@ static NSString *urlPrefix = @"https://www.cyclestreets.net/api/addphoto.xml";
 							stringWithFormat:format,
 							urlPrefix,
 							[cycleStreets APIKey]];
-		[url release];
 		url = newURL;
-		[url retain];
 			
 		username = [newUsername copy];
 		password = [newPassword copy];
@@ -83,7 +81,6 @@ static NSString *urlPrefix = @"https://www.cyclestreets.net/api/addphoto.xml";
 	
 	body = [[NSMutableData alloc] init];	
 	
-	[request release];
 	request = [[XMLRequest alloc] initWithURL:url delegate:(NSObject *)resultTarget tag:nil onSuccess:(SEL)successMethod onFailure:(SEL)failureMethod];
 	request.elementsToParse = [NSArray arrayWithObject:@"result"]; //we'll check for the URL.	
 	NSMutableURLRequest *r = request.request;
@@ -132,28 +129,8 @@ static NSString *urlPrefix = @"https://www.cyclestreets.net/api/addphoto.xml";
 
 - (NSString *)description {
 	NSString *copy = [url copy];
-	[copy release];
 	return copy;
 }
 
-- (void) dealloc {
-	[url release];
-	[body release];
-	[request release];
-	
-	[username release];
-	[password release];
-	
-	self.longitude = nil;
-	self.latitude = nil;
-	self.privacy = nil;
-	self.time = nil;
-	self.imageData = nil;
-	self.caption = nil;
-	self.category = nil;
-	self.metaCategory = nil;
-	
-	[super dealloc];
-}
 
 @end

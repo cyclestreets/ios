@@ -38,13 +38,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 //=========================================================== 
 - (void)dealloc
 {
-    [dataProviders release], dataProviders = nil;
-    [cachedrequests release], cachedrequests = nil;
-    [xmlparser release], xmlparser = nil;
-    [activeRequests release], activeRequests = nil;
     delegate = nil;
 	
-    [super dealloc];
 }
 
 
@@ -144,7 +139,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 	
 	
 	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:response,@"response", nil];
-	[response release];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDIDCOMPLETEFROMMODEL object:nil userInfo:dict];
 	
 	
@@ -180,7 +174,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 	response.dataProvider=data;
 	
 	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:response,RESPONSE,nil];
-	[response release];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDIDCOMPLETEFROMCACHE object:nil userInfo:dict];
 	
 	
@@ -205,7 +198,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 		
 		
 		NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:response,RESPONSE, nil];
-		[response release];
 		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTWASACTIVE object:nil userInfo:dict];
 		
 	}
@@ -235,7 +227,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 		
 		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:response,RESPONSE, nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:XMLPARSERDIDCOMPLETENOUPDATE object:nil userInfo:dict];
-		[dict release];
 		
 	}else {
 		
@@ -261,7 +252,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Model);
 	BetterLog(@"");
 	
 	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:response,RESPONSE, nil];
-	[response release]; 
 	[[NSNotificationCenter defaultCenter] postNotificationName:XMLPARSERDIDFAILPARSING object:nil userInfo:dict];
 	
 	

@@ -40,15 +40,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	@private NSInteger metacategoryIndex;
 }
 
-@property (nonatomic, retain)		IBOutlet UIPickerView		* categoryPicker;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* doneButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* cancelButton;
-@property (nonatomic, retain)		IBOutlet UILabel		* typeLabel;
-@property (nonatomic, retain)		IBOutlet UILabel		* descLabel;
-@property (nonatomic, retain) CategoryLoader *categoryLoader;
+@property (nonatomic, strong)		IBOutlet UIPickerView		* categoryPicker;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem		* doneButton;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem		* cancelButton;
+@property (nonatomic, strong)		IBOutlet UILabel		* typeLabel;
+@property (nonatomic, strong)		IBOutlet UILabel		* descLabel;
+@property (nonatomic, strong) CategoryLoader *categoryLoader;
 
-@property (readonly) NSString *category;
-@property (readonly) NSString *metaCategory;
+@property (unsafe_unretained, readonly) NSString *category;
+@property (unsafe_unretained, readonly) NSString *metaCategory;
 
 -(IBAction)didDone;
 -(IBAction)didCancel;

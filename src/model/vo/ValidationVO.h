@@ -21,9 +21,10 @@ enum  {
 	ValidationPOICategorySuccess=1012,
     ValidationCalculateRouteSuccess=1013,
     ValidationRetrieveRouteByIdSuccess=1014,
+	ValidationCategoriesSuccess=1015,
 	
 	ValidationSuccessMIN=ValidationLoginSuccess,
-	ValidationSuccessMAX=ValidationRetrieveRouteByIdSuccess,
+	ValidationSuccessMAX=ValidationCategoriesSuccess,
 	
 	// failures
 	ValidationLoginFailed=2000, // 2000
@@ -38,8 +39,9 @@ enum  {
 	ValidationPOICategoryFailure=2016,
     ValidationCalculateRouteFailed=2017,
     ValidationRetrieveRouteByIdFailed=2018,
+	ValidationCategoriesFailed=2019,
 	ValidationFailureMIN=ValidationLoginFailed,
-	ValidationFailureMAX=ValidationCalculateRouteFailed,
+	ValidationFailureMAX=ValidationCategoriesFailed,
 	
 	// checking
 	ValdationInvalidCode=9997,
@@ -56,9 +58,9 @@ typedef int ValidationStatusCode;
 	
 }
 
-@property (nonatomic, retain)		NSString		*returnMessage;
+@property (nonatomic, strong)		NSString		*returnMessage;
 @property (nonatomic)		int		returnCode;
-@property (nonatomic, retain)		NSMutableDictionary		*responseDict;
+@property (nonatomic, strong)		NSMutableDictionary		*responseDict;
 
 
 @property (nonatomic,readonly) int validationStatus;

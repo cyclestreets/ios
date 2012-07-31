@@ -8,7 +8,7 @@
 
 // ================================================================================================
 //  Created by Tom Bradley on 21/10/2009.
-//  Version 1.3
+//  Version 1.4
 //  
 //  Copyright (c) 2009 Tom Bradley
 //  
@@ -73,7 +73,7 @@ static char encodingTable[64] = {
 
 + (NSData *) dataWithBase64EncodedString:(NSString *) string {
     NSData *result = [[NSData alloc] initWithBase64EncodedString:string];
-    return [result autorelease];
+    return result;
 }
 
 - (id) initWithBase64EncodedString:(NSString *) string {
@@ -84,6 +84,7 @@ static char encodingTable[64] = {
         unsigned long lentext = 0;
         unsigned char ch = 0;
         unsigned char inbuf[4], outbuf[3];
+		memset(inbuf, 0, 4*sizeof(unsigned char));
         short i = 0, ixinbuf = 0;
         BOOL flignore = NO;
         BOOL flendtext = NO;

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RoutePlanMenuViewController : UIViewController
-
+@interface RoutePlanMenuViewController : UIViewController{
+	
+	
+	NSString		*plan;
+	
+	IBOutlet		UISegmentedControl			*routePlanControl;
+	
+	
+}
+@property (nonatomic, strong) NSString		* plan;
+@property (nonatomic, strong) IBOutlet UISegmentedControl		* routePlanControl;
 @end

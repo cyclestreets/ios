@@ -49,8 +49,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	AssetTable *currentGroup;
 }
 
-@property (nonatomic, retain) ALAssetsLibrary *assetLibrary;
-@property (nonatomic, retain) NSMutableArray *assetGroups;
-@property (nonatomic, retain) AssetTable *currentGroup;
+@property (nonatomic, strong) ALAssetsLibrary *assetLibrary;
+@property (nonatomic, strong) NSMutableArray *assetGroups;
+@property (nonatomic, strong) AssetTable *currentGroup;
 
 @end

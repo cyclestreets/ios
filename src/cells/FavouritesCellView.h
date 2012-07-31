@@ -45,13 +45,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet UIImageView						*selectedRouteIcon;
 	
 }
-@property (nonatomic, retain)	RouteVO		*dataProvider;
-@property (nonatomic, retain)	IBOutlet LayoutBox		*viewContainer;
-@property (nonatomic, retain)	IBOutlet ExpandedUILabel		*nameLabel;
-@property (nonatomic, retain)	IBOutlet MultiLabelLine		*readoutLabel;
-@property (nonatomic, retain)	IBOutlet UIImageView		*icon;
+@property (nonatomic, strong)	RouteVO		*dataProvider;
+@property (nonatomic, strong)	IBOutlet LayoutBox		*viewContainer;
+@property (nonatomic, strong)	IBOutlet ExpandedUILabel		*nameLabel;
+@property (nonatomic, strong)	IBOutlet MultiLabelLine		*readoutLabel;
+@property (nonatomic, strong)	IBOutlet UIImageView		*icon;
 @property (nonatomic)	BOOL		isSelectedRoute;
-@property (nonatomic, retain)	IBOutlet UIImageView		*selectedRouteIcon;
+@property (nonatomic, strong)	IBOutlet UIImageView		*selectedRouteIcon;
 
 
 +(NSNumber*)heightForCellWithDataProvider:(RouteVO*)route;

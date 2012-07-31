@@ -56,7 +56,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		self.success = successMethod;
 		self.failure = failureMethod;
 		NSURL *url = [NSURL URLWithString:urlString];
-		self.request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
+		self.request = [[NSMutableURLRequest alloc] initWithURL:url];
 		
 		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 		
@@ -80,7 +80,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:request];
 	if (cachedResponse == nil) {
 		self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-		[self.connection release];
 		[self.connection start];
 	} else {
 		[self returnData:cachedResponse.data];
@@ -104,7 +103,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//cache the result
 	NSCachedURLResponse *cachedResponse = [[NSCachedURLResponse alloc] initWithResponse:response data:data];
 	[[NSURLCache sharedURLCache] storeCachedResponse:cachedResponse forRequest:request];
-	[cachedResponse release];
 	
 	[self returnData:resultData];
 }
@@ -124,21 +122,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (NSString *) description {
-	NSString *dataDesc = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+	NSString *dataDesc = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	NSString *desc = [NSString stringWithFormat:@"%@\n%@",
 					  [request description],
 					  dataDesc];
 	return desc;
 }
 
-- (void)dealloc {
-	self.request = nil;
-	self.response = nil;
-	self.connection = nil;
-	self.data = nil;
-	self.target = nil;
-	self.tag = nil;
-	[super dealloc];
-}
 
 @end

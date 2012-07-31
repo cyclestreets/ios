@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	ALAsset *asset;
 }
 
-@property (nonatomic, retain) IBOutlet UIImageView *image;
-@property (nonatomic, retain) ALAsset *asset;
+@property (nonatomic, strong) IBOutlet UIImageView *image;
+@property (nonatomic, strong) ALAsset *asset;
 
 @end

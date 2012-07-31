@@ -16,8 +16,8 @@
     CGFloat     strokeWidth;
     CGFloat     cornerRadius;
 }
-@property (nonatomic, retain) UIColor *strokeColor;
-@property (nonatomic, retain) UIColor *rectColor;
+@property (nonatomic, strong) UIColor *strokeColor;
+@property (nonatomic, strong) UIColor *rectColor;
 @property CGFloat strokeWidth;
 @property CGFloat cornerRadius;
 @end

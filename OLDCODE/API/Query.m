@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "XMLRequest.h"
 #import "CycleStreets.h"
 #import "SettingsViewController.h"
-#import "CycleStreetsAppDelegate.h"
+#import "AppDelegate.h"
 #import "Files.h"
 #import "Route.h"
 #import "SettingsManager.h"
@@ -53,11 +53,10 @@ static NSString *useDom = @"1";
 //=========================================================== 
 - (void)dealloc
 {
-    [url release], url = nil;
-    [request release], request = nil;
-    [routeID release], routeID = nil;
+    url = nil;
+    request = nil;
+    routeID = nil;
 	
-    [super dealloc];
 }
 
 
@@ -98,9 +97,7 @@ static NSString *useDom = @"1";
 							];
 		BetterLog(@"Route request=%@",newURL);
 		
-		[url release];
 		url = newURL;
-		[url retain];
 	}
 	return self;
 }
@@ -125,9 +122,7 @@ static NSString *useDom = @"1";
 							];
 		BetterLog(@"Route id request=%@",newURL);
 		
-		[url release];
 		url = newURL;
-		[url retain];
 	}
 	return self;
 }
@@ -135,14 +130,11 @@ static NSString *useDom = @"1";
 + (Query *)example {
 	CLLocation *from = [[CLLocation alloc] initWithLatitude: 51.53523137707124 longitude: -0.16968727111816406];
 	CLLocation *to = [[CLLocation alloc] initWithLatitude: 51.521935438813486 longitude: -0.1153564453125];
-	Query *query = [[[Query alloc] initFrom:from to:to] autorelease];
-	[to release];
-	[from release];
+	Query *query = [[Query alloc] initFrom:from to:to];
 	return query;
 }
 
 - (void) runWithTarget:(NSObject *)resultTarget onSuccess:(SEL)successMethod onFailure:(SEL)failureMethod {
-	[request release];
 	request = [[XMLRequest alloc] initWithURL:url delegate:(NSObject *)resultTarget tag:nil onSuccess:(SEL)successMethod onFailure:(SEL)failureMethod];
 	request.elementsToParse = [Route routeXMLElementNames];
 	[request start];
@@ -150,7 +142,6 @@ static NSString *useDom = @"1";
 
 - (NSString *)description {
 	NSString *copy = [url copy];
-	[copy release];
 	return copy;
 }
 

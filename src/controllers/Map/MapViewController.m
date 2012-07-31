@@ -1,22 +1,22 @@
 /*
-
-Copyright (C) 2010  CycleStreets Ltd
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-*/
+ 
+ Copyright (C) 2010  CycleStreets Ltd
+ 
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ 
+ */
 
 //  Map.m
 //  CycleStreets
@@ -162,7 +162,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if (mapStyle == nil) {
 		mapStyle = [[MapViewController mapStyles] objectAtIndex:0];
 	}
-
+	
 	return mapStyle;
 }
 
@@ -240,11 +240,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	
 	self.clearAlert = [[UIAlertView alloc]
-						initWithTitle:@"CycleStreets"
-						message:@"Clear current route?"
-						delegate:self
-						cancelButtonTitle:@"Cancel"
-						otherButtonTitles:@"OK", nil];
+					   initWithTitle:@"CycleStreets"
+					   message:@"Clear current route?"
+					   delegate:self
+					   cancelButtonTitle:@"Cancel"
+					   otherButtonTitles:@"OK", nil];
 	
 	//Necessary to start route-me service
 	[RMMapView class];
@@ -319,33 +319,33 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.activeLocationButton.style	= UIBarButtonItemStyleDone;
 	
 	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location_white.png"]
-															style:UIBarButtonItemStyleBordered
-														   target:self
-														   action:@selector(didLocation)];
+														   style:UIBarButtonItemStyleBordered
+														  target:self
+														  action:@selector(didLocation)];
 	self.locationButton.width = 40;
 	
 	self.nameButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search_white.png"]
-														style:UIBarButtonItemStyleBordered
-													   target:self
-													   action:@selector(didSearch)];
+													   style:UIBarButtonItemStyleBordered
+													  target:self
+													  action:@selector(didSearch)];
 	self.nameButton.width = 40;
 	
 	self.deleteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
-														  style:UIBarButtonItemStyleBordered
-														 target:self
-														 action:@selector(didDelete)];
+														 style:UIBarButtonItemStyleBordered
+														target:self
+														action:@selector(didDelete)];
 	self.deleteButton.width = 40;
     
     self.planButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_routePlan_white.png"]
-														style:UIBarButtonItemStyleBordered
-													   target:self
-													   action:@selector(showRoutePlanMenu:)];
+													   style:UIBarButtonItemStyleBordered
+													  target:self
+													  action:@selector(showRoutePlanMenu:)];
 	self.planButton.width = 40;
 	
 	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan Route" 
-														 style:UIBarButtonItemStyleBordered
-														target:self
-														action:@selector(didRoute)];
+														style:UIBarButtonItemStyleBordered
+													   target:self
+													   action:@selector(didRoute)];
 	
 	ExpandedUILabel *startLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 14)];
 	startLabel.text=@"Set Start";
@@ -391,14 +391,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			
 			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton, leftFlex, startContextLabel, rightFlex, nil];
 			[self.toolBar setItems:items animated:YES ];
-
+			
 			self.deleteButton.enabled = NO;
 			self.nameButton.enabled = YES;
-			 
+			
 			
 			break;
 		case stateLocatingStart:
-		break;
+			break;
 		case stateEnd:
 			BetterLog(@"stateEnd");
 			
@@ -408,12 +408,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			
 			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton, leftFlex, finishContextLabel, rightFlex, nil];
 			[self.toolBar setItems:items animated:YES ];
-			 
-				
+			
+			
 			break;
 		case stateLocatingEnd:
 			
-		break;
+			break;
 		case statePlan:
 			BetterLog(@"statePlan");
 			
@@ -429,7 +429,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			break;
 		case stateRoute:
 			BetterLog(@"stateRoute");
-						
+			
 			self.routeButton.title = @"New route";
 			self.routeButton.style = UIBarButtonItemStyleBordered;
 			self.deleteButton.enabled = NO;
@@ -481,7 +481,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[map zoomByFactor:nextZoomFactor near:point animated:YES];
 	
 }
- 
+
 
 - (void) singleTapDelayExpired {
 	if(singleTapDidOccur==YES){
@@ -534,13 +534,13 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	BOOL result=NO;
 	
 	if(self.planningState!=stateRoute){
-	
+		
 		if (marker == start || marker == end) {
 			result=YES;
 		}
 		
 	}
-		
+	
 	mapView.enableDragging=!result;
 	return result;
 }
@@ -632,10 +632,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void) showStartFinishAlert {
 	if (self.startFinishAlert == nil) {
 		self.startFinishAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-															message:@"Move the map to set a finish point further away."
-														   delegate:self
-												  cancelButtonTitle:nil
-												  otherButtonTitles:nil];
+														   message:@"Move the map to set a finish point further away."
+														  delegate:self
+												 cancelButtonTitle:nil
+												 otherButtonTitles:nil];
 	}
 	[self stopDoingLocation];
 	[self.startFinishAlert show];
@@ -646,9 +646,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (CLLocationDistance) distanceFromStart:(CLLocationCoordinate2D)locationLatLon {
 	CLLocationCoordinate2D fromLatLon = [[mapView markerManager] latitudeLongitudeForMarker:start];
 	CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude
-												   longitude:fromLatLon.longitude];
+												  longitude:fromLatLon.longitude];
 	CLLocation *to = [[CLLocation alloc] initWithLatitude:locationLatLon.latitude
-												 longitude:locationLatLon.longitude];
+												longitude:locationLatLon.longitude];
 	CLLocationDistance distance = [from getDistanceFrom:to];
 	return distance;
 }
@@ -784,7 +784,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (IBAction) didDelete {
 	
 	RMMarkerManager *markerManager = [mapView markerManager];
-
+	
 	if ([[markerManager markers] containsObject:self.end]) {
 		[markerManager removeMarker:self.end];
 		[self gotoState:stateEnd];
@@ -802,10 +802,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		if (![[markerManager markers] containsObject:self.end] || ![[markerManager markers] containsObject:self.start]) {
 			
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Routing"
-																   message:@"Need start and end markers to calculate a route."
-																  delegate:nil
-														 cancelButtonTitle:@"OK"
-														 otherButtonTitles:nil];
+															message:@"Need start and end markers to calculate a route."
+														   delegate:nil
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil];
 			[alert show];
 			
 		}
@@ -840,10 +840,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     
 	self.routeplanMenu = [[popoverClass alloc] initWithContentViewController:routeplanView];
 	self.routeplanMenu.delegate = self;
-		
+	
 	[self.routeplanMenu presentPopoverFromBarButtonItem:planButton toolBar:toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
-
+	
 }
 
 
@@ -896,7 +896,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 							 blueCircleView.alpha=0;
 						 }
 						 completion:^(BOOL finished){
-							 blueCircleView.hidden=YES;
 						 }];
 		
 		[locatingIndicator stopAnimating];
@@ -943,7 +942,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			locationManager.distanceFilter = LOC_DISTANCE_FILTER;
 			
 			[locationManager startUpdatingLocation];
-			blueCircleView.hidden = NO;
 			blueCircleView.alpha=0.5;
 			
 			
@@ -969,7 +967,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			[gpsAlert show];
 			
 		}
-
+		
 	}
 }
 
@@ -982,7 +980,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 {
 	
 	
-		
+	
 	
 	// Note: we need to doublecheck this flag as this method appears to get called
 	// once even after we have told it to stop!
@@ -1029,10 +1027,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 {
 	if (self.noLocationAlert == nil) {
 		self.noLocationAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-														   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
-														  delegate:nil
-												 cancelButtonTitle:@"OK"
-												 otherButtonTitles:nil];
+														  message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
+														 delegate:nil
+												cancelButtonTitle:@"OK"
+												otherButtonTitles:nil];
 	}
 	[self.noLocationAlert show];
 }
@@ -1047,10 +1045,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 //	
 
 -(void)updateSelectedRoute{
+	
+	BetterLog(@"");
 	[self showRoute:[RouteManager sharedInstance].selectedRoute];
 }
 
 - (void) showRoute:(RouteVO *)newRoute {
+	
+	BetterLog(@"route=%@",newRoute);
 	
 	self.route = newRoute;
 	
@@ -1075,8 +1077,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (void) newRoute {
-	[mapView zoomWithLatLngBoundsNorthEast:(CLLocationCoordinate2D)[route insetNorthEast]
-								 SouthWest:(CLLocationCoordinate2D)[route insetSouthWest]];
+	
+	BetterLog(@"");
+	CLLocationCoordinate2D ne=[route insetNorthEast];
+	CLLocationCoordinate2D sw=[route insetSouthWest];
+	[mapView zoomWithLatLngBoundsNorthEast:ne SouthWest:sw];
 	
 	[self clearMarkers];
 	[self stopDoingLocation];
@@ -1130,22 +1135,22 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}
 	}	
 	/*
-	for (int i = 0; i < [route numSegments]; i++) {
-		if (i == 0)
-		{	// start of first segment
-			CSPoint *p = [[[CSPoint alloc] init] autorelease];
-			Segment *segment = [route segmentAtIndex:i];
-			CGPoint pt = [mapView.contents latLongToPixel:[segment segmentStart]];
-			p.p = pt;
-			[points addObject:p];			
-		}
-		// end of all segments
-		CSPoint *p = [[[CSPoint alloc] init] autorelease];
-		Segment *segment = [route segmentAtIndex:i];
-		CGPoint pt = [mapView.contents latLongToPixel:[segment segmentEnd]];
-		p.p = pt;
-		[points addObject:p];
-	}
+	 for (int i = 0; i < [route numSegments]; i++) {
+	 if (i == 0)
+	 {	// start of first segment
+	 CSPoint *p = [[[CSPoint alloc] init] autorelease];
+	 Segment *segment = [route segmentAtIndex:i];
+	 CGPoint pt = [mapView.contents latLongToPixel:[segment segmentStart]];
+	 p.p = pt;
+	 [points addObject:p];			
+	 }
+	 // end of all segments
+	 CSPoint *p = [[[CSPoint alloc] init] autorelease];
+	 Segment *segment = [route segmentAtIndex:i];
+	 CGPoint pt = [mapView.contents latLongToPixel:[segment segmentEnd]];
+	 p.p = pt;
+	 [points addObject:p];
+	 }
 	 */
 	return points;
 }
@@ -1164,7 +1169,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			//OK
 			[[RouteManager sharedInstance] selectRoute:nil];
 		}
-
+		
 	}
 	
 	if (alertView == self.noLocationAlert) {

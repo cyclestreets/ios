@@ -1,6 +1,6 @@
 //
 //  AsyncImageView.h
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 10/08/2009.
 //  Copyright 2009 buffer. All rights reserved.
@@ -8,19 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#define kImageViewTAG 1000
+#define kAsyncActivityTAG 1001
+
 @protocol AsyncImageViewDelegate <NSObject>
 
 @optional
--(void)ImageDidLoadWithImage:(UIImage*)image;
--(void)ImageDidFail;
 
+-(void)asyncImageDidLoad;
 
 @end
 
-
-
-#define kImageViewTAG 1000
-#define kAsyncActivityTAG 1001
 @interface AsyncImageView : UIView {
 	
 	NSURLConnection				*connection; //keep a reference to the connection so we can cancel download in dealloc
@@ -31,21 +29,25 @@
 	BOOL						notify;
 	UIImageView					*imageView;
 	BOOL						cacheImage;
+	BOOL						tmpCacheOnly;
 	
-	BOOL						resizeToFit;
 	
-	// delegate
-	id<AsyncImageViewDelegate> delegate;
+	//testing only
+	BOOL						useKitty;
+	
+	id<AsyncImageViewDelegate>		__unsafe_unretained delegate;
 	
 }
-@property (nonatomic, retain)		NSString		* filename;
-@property (nonatomic, retain)		NSString		* type;
-@property (nonatomic)		NSUInteger		* capacity;
-@property (nonatomic)		BOOL		 notify;
-@property (nonatomic, retain)		IBOutlet UIImageView		* imageView;
-@property (nonatomic)		BOOL		 cacheImage;
-@property (nonatomic)		BOOL		 resizeToFit;
-@property (nonatomic, assign)		id<AsyncImageViewDelegate>		 delegate;
+@property (nonatomic,strong) NSString				*filename;
+@property (nonatomic,strong) NSString				*type;
+@property (nonatomic) NSUInteger					*capacity;
+@property (nonatomic,strong) UIImageView			*imageView;
+@property (nonatomic) BOOL							notify;
+@property(nonatomic,assign)BOOL cacheImage;
+@property(nonatomic,assign)BOOL tmpCacheOnly;
+@property (nonatomic) BOOL							useKitty;
+
+@property (nonatomic, unsafe_unretained) id<AsyncImageViewDelegate> delegate;
 
 - (void)loadImageFromURL:(NSURL*)url;
 -(void)loadImageFromString:(NSString*)url;
@@ -54,5 +56,9 @@
 -(void)addActivity;
 -(void)removeActivity;
 -(void)cancel;
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+
+- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error;
+
+
+-(void)loadPlaceHolderImage;
 @end

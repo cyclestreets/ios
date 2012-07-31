@@ -16,10 +16,13 @@
 	int					maxItems;
 	NSMutableArray		*cachedItems;
 	
+	NSString			*cachePath;
+	
 }
-@property(nonatomic,retain)NSMutableDictionary *imageCacheDict;
-@property(nonatomic,assign)int maxItems;
-@property(nonatomic,retain)NSMutableArray *cachedItems;
+@property (nonatomic, strong) NSMutableDictionary		* imageCacheDict;
+@property (nonatomic, assign) int		 maxItems;
+@property (nonatomic, strong) NSMutableArray		* cachedItems;
+@property (nonatomic, strong) NSString		* cachePath;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(ImageCache);
 

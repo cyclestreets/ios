@@ -3,7 +3,7 @@
 //
 //
 //  Created by neil on 25/02/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import <sys/utsname.h>
@@ -16,6 +16,7 @@ enum {
     MODEL_IPHONE_3G,
     MODEL_IPAD,
     MODEL_IPAD_2,
+	MODEL_IPAD_3,
     MODEL_IPHONE_3GS,
     MODEL_IPHONE_4,
 	MODEL_IPHONE_4S

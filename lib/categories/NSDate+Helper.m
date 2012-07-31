@@ -28,7 +28,6 @@
 	NSDateFormatter *mdf = [[NSDateFormatter alloc] init];
 	[mdf setDateFormat:@"yyyy-MM-dd"];
 	NSDate *midnight = [mdf dateFromString:[mdf stringFromDate:self]];
-	[mdf release];
 	
 	return (int)[midnight timeIntervalSinceNow] / (60*60*24) *-1;
 }
@@ -62,6 +61,9 @@
 + (NSString *)dbFormatString {
 	return @"yyyy-MM-dd HH:mm:ss";
 }
++ (NSString *)shortdbFormatString {
+	return @"yyyy-MM-dd HH:mm";
+}
 
 + (NSString *)dayFormatString {
 	return @"yyyy-MM-dd";
@@ -75,9 +77,23 @@
 	return @"EEEE, MMMM d";
 }
 
-+ (NSString *)fullDateFormatString {
-	return @"EEEE, MMMM dd, YYYY";
++ (NSString *)usefulhumanFormatString {
+	return @"EE, MMM d yyyy";
 }
+
++ (NSString *)shortHumanFormatString {
+	return @"dd MMM YY";
+}
+
++ (NSString *)shortHumanFormatStringWithTime {
+	return @"dd MMM yyyy HH:mm";
+}
+
++ (NSString *)fullDateFormatString {
+	return @"EEEE, MMMM dd, yyyy";
+}
+
+
 
 + (NSDate *)dateFromString:(NSString *)string {
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
@@ -86,7 +102,6 @@
 	[inputFormatter setLocale:[NSLocale systemLocale]]; 
 	//
 	NSDate *date = [inputFormatter dateFromString:string];
-	[inputFormatter release];
 	return date;
 }
 
@@ -95,7 +110,6 @@
 	[inputFormatter setDateFormat:[NSDate dayFormatString]];
 	[inputFormatter setLocale:[NSLocale systemLocale]]; 
 	NSDate *date = [inputFormatter dateFromString:string];
-	[inputFormatter release];
 	return date;
 }
 
@@ -111,9 +125,16 @@
 + (NSDate *)dateFromString:(NSString *)string withFormat:(NSString*)format {
 	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
 	[inputFormatter setDateFormat:format];
-	[inputFormatter setLocale:[NSLocale systemLocale]]; 
 	NSDate *date = [inputFormatter dateFromString:string];
-	[inputFormatter release];
+	return date;
+}
+
++ (NSDate *)dateFromUKString:(NSString *)string withFormat:(NSString*)format {
+	NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+	[inputFormatter setDateFormat:format];
+	[inputFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Europe/London"]];
+	
+	NSDate *date = [inputFormatter dateFromString:string];
 	return date;
 }
 
@@ -151,7 +172,6 @@
 		NSDateComponents *componentsToSubtract = [[NSDateComponents alloc] init];
 		[componentsToSubtract setDay:-7];
 		NSDate *lastweek = [calendar dateByAddingComponents:componentsToSubtract toDate:today options:0];
-		[componentsToSubtract release];
 		if ([date compare:lastweek] == NSOrderedDescending) {
 			[displayFormatter setDateFormat:@"EEEE"]; // Tuesday
 		} else {
@@ -164,7 +184,7 @@
 			if (thatYear >= thisYear) {
 				[displayFormatter setDateFormat:@"MMM d"];
 			} else {
-				[displayFormatter setDateFormat:@"MMM d, YYYY"];
+				[displayFormatter setDateFormat:@"MMM d, yyyy"];
 			}
 		}
 		if (prefixed) {
@@ -176,7 +196,6 @@
 	
 	// use display formatter to return formatted date string
 	displayString = [displayFormatter stringFromDate:date];
-	[displayFormatter release];
 	return displayString;
 }
 
@@ -199,7 +218,6 @@
 	NSDateComponents *componentsToSubtract = [[NSDateComponents alloc] init];
 	[componentsToSubtract setDay: 0 - ([weekdayComponents weekday] - 1)];
 	NSDate *beginningOfWeek = [calendar dateByAddingComponents:componentsToSubtract toDate:self options:0];
-	[componentsToSubtract release];
 	
 	//normalize to midnight, extract the year, month, and day components and create a new date from those components.
 	NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit)
@@ -232,7 +250,6 @@
 	[dateFormatter setTimeZone:timeZone];
 	[dateFormatter setLocale:[NSLocale systemLocale]]; 
 	NSString* time = [dateFormatter stringFromDate:date];
-	[dateFormatter release];
 	
 	if (time.length > 5) {
 		NSRange range;
@@ -269,7 +286,6 @@
 		[dateFormatter setDateFormat:@"HH:mm"];
 		result = [dateFormatter dateFromString:[NSString stringWithFormat:@"%02d:%02d", hour, minute]];
 	}
-	[dateFormatter release];
 	
 	return result;
 }
@@ -280,7 +296,6 @@
 	NSDateFormatter *testFormatter = [[NSDateFormatter alloc] init];
 	[testFormatter setTimeStyle:NSDateFormatterShortStyle];
 	NSString *testTime = [testFormatter stringFromDate:[NSDate date]];
-	[testFormatter release];
 	return [testTime hasSuffix:@"M"] || [testTime hasSuffix:@"m"];
 }
 
@@ -292,11 +307,73 @@
 	int minute = [[time24String substringFromIndex:3] intValue];
 	
 	NSString *result = [NSString stringWithFormat:@"%02d:%02d %@", hour % 12, minute, hour > 12 ? [testFormatter PMSymbol] : [testFormatter AMSymbol]];
-	[testFormatter release];
 	return result;
 }
 
 
++(NSPredicate *)dateMatcher:(NSDate *)date forAttribute:(NSString *)attributeName{   
+    
+	//First set the unit flags you want automatically put into your date from an NSDate object   
+	unsigned startUnitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;   
+	//now create an NSCalendar object   
+	NSCalendar *startCal = [NSCalendar currentCalendar];   
+	//Use the NSCalendar object to create an NSDateComponents object from the date you are interested in rounding   
+	//In this case we are just using the time now by calling [NSDate date]   
+	NSDateComponents *minDateComps = [startCal components:startUnitFlags fromDate:[NSDate date]];   
+	//Now we use the NSCalendar object again to generate a date from the date components object   
+	NSDate *startDate = [startCal dateFromComponents:minDateComps];   
+    
+    
+	//First set the unit flags you want automatically put into your date from an NSDate object   
+	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;   
+	//now create an NSCalendar object   
+	NSCalendar *cal = [NSCalendar currentCalendar];   
+	//Use the NSCalendar object to create an NSDateComponents object from the date you are interested in rounding   
+	//In this case we are just using the time now by calling [NSDate date]   
+	NSDateComponents *maxDateComps = [cal components:unitFlags fromDate:[NSDate date]];   
+	//now set the hours, minutes and seconds to the end of the day   
+	maxDateComps.hour = 23;   
+	maxDateComps.minute = 59;   
+	maxDateComps.second = 59;   
+	//Now we use the NSCalendar object again to generate a date from the date components object   
+	NSDate *endDate = [cal dateFromComponents:maxDateComps];   
+    
+    
+	// Finally create the predicate with the correct format   
+	return [NSPredicate predicateWithFormat:@"(%K >= %@) AND (%K <= %@)",attributeName, startDate, attributeName, endDate];   
+}   
+
+
++(NSDate*)convertEpochMSTimeToDate:(NSString*)time{
+	
+	long long plong;  
+	NSRange range;  
+	range.length = time.length;  
+	range.location = 0;  
+	
+	[[NSScanner scannerWithString:[time substringWithRange:range]] 
+	 scanLongLong:&plong];
+	
+	plong=plong/1000;
+	
+	return [NSDate dateWithTimeIntervalSince1970:plong];
+	
+}
+
+
++(NSDate*)newDateTimeIgnoringDate:(NSDate*)date{
+	
+	unsigned int flags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+	NSCalendar* calendar = [NSCalendar currentCalendar];
+	
+	NSDateComponents* components = [calendar components:flags fromDate:date];
+	[components setSecond:0];
+	
+	NSDate* timeOnlyDate = [calendar dateFromComponents:components];
+	
+	return timeOnlyDate;
+	
+}
 
 
 @end

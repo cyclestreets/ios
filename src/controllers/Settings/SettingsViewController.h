@@ -43,15 +43,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet	UILabel			*speedTitleLabel;
 }
 
-@property (nonatomic, retain)		SettingsVO				* dataProvider;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl				* planControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl				* speedControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl				* mapStyleControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl				* imageSizeControl;
-@property (nonatomic, retain)		IBOutlet UISegmentedControl				* routeUnitControl;
-@property (nonatomic, retain)		IBOutlet RCSwitchOnOff				* routePointSwitch;
-@property (nonatomic, retain)		IBOutlet UIView				* controlView;
-@property (nonatomic, retain)		IBOutlet UILabel				* speedTitleLabel;
+@property (nonatomic, strong)		SettingsVO				* dataProvider;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* planControl;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* speedControl;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* mapStyleControl;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* imageSizeControl;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* routeUnitControl;
+@property (nonatomic, strong)		IBOutlet RCSwitchOnOff				* routePointSwitch;
+@property (nonatomic, strong)		IBOutlet UIView				* controlView;
+@property (nonatomic, strong)		IBOutlet UILabel				* speedTitleLabel;
 
 - (IBAction) changed:(id)sender;
 

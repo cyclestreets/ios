@@ -10,8 +10,10 @@
 #import "GradientView.h"
 
 @implementation GradientView
-
 @synthesize mirrored;
+@synthesize direction;
+
+
 
 - (void)drawRect:(CGRect)rect
 {
@@ -33,20 +35,58 @@
     CGPoint midCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMaxY(currentBounds)/2.0);
     CGPoint bottomCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMaxY(currentBounds));
 	
-    if (!mirrored)
-    {
-        // draw a gradient from top to bottom centred.
-        CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, bottomCenter, 0);
-    }
-    else
-    {
-        // draw a gradient from top to middle, then reverse the colours and draw from middle to bottom.
-        CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
-        CGFloat components2[8] = { endRed, endGreen, endBlue, 1.0, startRed, startGreen, startBlue, 1.0 };
-        CGGradientRelease(glossGradient);
-        glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components2, locations, numLocations);
-        CGContextDrawLinearGradient(currentContext, glossGradient, midCenter, bottomCenter, 0);
-    }
+	CGPoint leftCenter = CGPointMake( 0.0f, CGRectGetMidY(currentBounds));
+    CGPoint rightCenter = CGPointMake(CGRectGetMaxX(currentBounds), CGRectGetMidY(currentBounds));
+	
+	
+	switch(direction){
+		
+		case BUGradiantDirectionHorizontal:
+			
+			
+			if (!mirrored)
+			{
+				// draw a gradient from top to bottom centred.
+				CGContextDrawLinearGradient(currentContext, glossGradient, leftCenter, rightCenter, 0);
+			}
+			else
+			{
+				// draw a gradient from top to middle, then reverse the colours and draw from middle to bottom.
+				CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
+				CGFloat components2[8] = { endRed, endGreen, endBlue, 1.0, startRed, startGreen, startBlue, 1.0 };
+				CGGradientRelease(glossGradient);
+				glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components2, locations, numLocations);
+				CGContextDrawLinearGradient(currentContext, glossGradient, midCenter, bottomCenter, 0);
+			}
+			
+			
+		
+		break;
+			
+		default:
+			
+			if (!mirrored)
+			{
+				// draw a gradient from top to bottom centred.
+				CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, bottomCenter, 0);
+			}
+			else
+			{
+				// draw a gradient from top to middle, then reverse the colours and draw from middle to bottom.
+				CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
+				CGFloat components2[8] = { endRed, endGreen, endBlue, 1.0, startRed, startGreen, startBlue, 1.0 };
+				CGGradientRelease(glossGradient);
+				glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components2, locations, numLocations);
+				CGContextDrawLinearGradient(currentContext, glossGradient, midCenter, bottomCenter, 0);
+			}
+			
+			
+		break;
+		
+		
+	}
+	
+   
 	
     // Release our CG objects.
     CGGradientRelease(glossGradient);
@@ -74,9 +114,6 @@
 	[self setColours:startComponents[0]:startComponents[1]:startComponents[2]:endComponents[0]:endComponents[1]:endComponents[2]];
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
+
 
 @end

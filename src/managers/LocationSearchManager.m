@@ -37,19 +37,6 @@
 @synthesize requestResultDict;
 @synthesize recentSelectedArray;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [HUD release], HUD = nil;
-    [requestResultDict release], requestResultDict = nil;
-    [recentSelectedArray release], recentSelectedArray = nil;
-	
-    [super dealloc];
-}
-
-
 
 
 //=========================================================== 
@@ -277,7 +264,6 @@
 -(void)hudWasHidden{
 	
 	[HUD removeFromSuperview];
-	[HUD release];
 	
 }
 

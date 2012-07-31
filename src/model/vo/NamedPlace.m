@@ -25,26 +25,47 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "NamedPlace.h"
+#import "SettingsManager.h"
 
 
 @implementation NamedPlace
 
 @synthesize locationCoords;
 @synthesize name;
+@synthesize near;
+@synthesize distance;
+
 
 - (id)initWithDictionary:(NSDictionary *)fields {
 	if (self = [super init]) {
 		locationCoords.latitude = [[fields objectForKey:@"latitude"] doubleValue];
 		locationCoords.longitude = [[fields objectForKey:@"longitude"] doubleValue];
-		self.name = [NSString stringWithFormat:@"%@, %@", [fields objectForKey:@"name"], [fields objectForKey:@"near"]];
+		self.name = [fields objectForKey:@"name"];
+		self.near=[fields objectForKey:@"near"];
+		distance=[fields objectForKey:@"distance"];
 	}
 	return self;
 }
 
-- (void)dealloc {
-	[name release];
+
+-(NSString*)distanceString{
 	
-	[super dealloc];
+	if(distance>0){
+	
+		if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+			return [NSString stringWithFormat:@"%3.1f miles", [distance floatValue]/1600];
+		}else {
+			return [NSString stringWithFormat:@"%3.1f km", [distance floatValue]/1000];
+		}
+		
+	}else {
+		return EMPTYSTRING;
+	}
+	
+}
+
+-(NSNumber*)distanceInt{
+	return [NSNumber numberWithInt:[distance intValue]];
 }
 
 @end

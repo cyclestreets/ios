@@ -25,11 +25,14 @@ typedef int ConnectLocationStates;
 
 @interface UserLocationManager : FrameworkObject<CLLocationManagerDelegate>{
     
-    BOOL                doesDeviceAllowLocation;
-    BOOL                didFindDeviceLocation;
-    int                 locationState;
+
+    BOOL						didFindDeviceLocation;
+    ConnectLocationStates       locationState;
     
     BOOL                        isLocating;
+	
+	
+	NSMutableArray				*locationSubscribers; // array of objects using manager
     
     CLLocationManager			*locationManager;
 	NSMutableArray				*locationMeasurements;
@@ -37,16 +40,29 @@ typedef int ConnectLocationStates;
     
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
-@property (nonatomic, assign)	BOOL			doesDeviceAllowLocation;
+
 @property (nonatomic, assign)	BOOL			didFindDeviceLocation;
-@property (nonatomic, assign)	int			locationState;
+@property (nonatomic, assign)	ConnectLocationStates			locationState;
 @property (nonatomic, assign)	BOOL			isLocating;
-@property (nonatomic, retain)	CLLocationManager			*locationManager;
-@property (nonatomic, retain)	NSMutableArray			*locationMeasurements;
-@property (nonatomic, retain)	CLLocation			*bestEffortAtLocation;
+@property (nonatomic, strong)	NSMutableArray			*locationSubscribers;
+@property (nonatomic, strong)	CLLocationManager			*locationManager;
+@property (nonatomic, strong)	NSMutableArray			*locationMeasurements;
+@property (nonatomic, strong)	CLLocation			*bestEffortAtLocation;
+
+@property ( nonatomic, readonly)	BOOL doesDeviceAllowLocation;
+@property ( nonatomic, readonly)	BOOL systemLocationServicesEnabled;
+@property ( nonatomic, readonly)	BOOL appLocationServicesEnabled;
 
 
--(void)startUpdatingLocation;
-- (void)stopUpdatingLocation:(NSString *)state;
+
+
+-(void)startUpdatingLocationForSubscriber:(NSString*)subscriberId;
+- (void)stopUpdatingLocatioForSubscriber:(NSString *)subscriberId;
+
+-(BOOL)checkLocationStatus:(BOOL)showAlert;
+
+
++ (CLLocationCoordinate2D)defaultCoordinate;
++ (CLLocation*)defaultLocation;
 
 @end

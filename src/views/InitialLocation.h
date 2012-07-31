@@ -25,26 +25,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <Foundation/Foundation.h>
-@class RMMapView;
 #import <CoreLocation/CoreLocation.h>
+@class RMMapView;
 @class InitialLocationController;
 
-@interface InitialLocation : NSObject <CLLocationManagerDelegate, UIAlertViewDelegate> {
-	RMMapView *mapView;
-	UIViewController *controller;
-	CLLocationManager *locationManager;
+
+@interface InitialLocation : NSObject  {
+	RMMapView *__unsafe_unretained mapView;
+	UIViewController *__unsafe_unretained controller;
 	UIView *welcomeView;
-	UIAlertView *errorAlert;
+	
+	UIButton		*closeButton;
 }
 
-@property (nonatomic, readonly) RMMapView *mapView;
-@property (nonatomic, readonly) UIViewController *controller;
-@property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, retain) UIView *welcomeView;
-@property (nonatomic, retain) UIAlertView *errorAlert;
+@property (unsafe_unretained, nonatomic, readonly) RMMapView *mapView;
+@property (unsafe_unretained, nonatomic, readonly) UIViewController *controller;
+@property (nonatomic, strong) UIView *welcomeView;
+@property (nonatomic, strong) UIButton		* closeButton;
 
 - (id) initWithMapView:(RMMapView *)mapView withController:(UIViewController *)controller;
 
-- (void) finish;
+- (void)locationDidFail;
+- (void)locationDidComplete:(CLLocationCoordinate2D)coordinate;
+
+- (void)startAt:(CLLocationCoordinate2D)coordinate;
 
 @end

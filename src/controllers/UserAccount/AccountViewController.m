@@ -91,47 +91,6 @@ static NSString *const STRINGID=@"account";
 @synthesize isModal;
 @synthesize shouldAutoClose;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [activeView release], activeView = nil;
-    [scrollView release], scrollView = nil;
-    [pageControl release], pageControl = nil;
-    [pageControlView release], pageControlView = nil;
-    [leftLabel release], leftLabel = nil;
-    [rightLabel release], rightLabel = nil;
-    [contentView release], contentView = nil;
-    [loginUsernameField release], loginUsernameField = nil;
-    [loginPasswordField release], loginPasswordField = nil;
-    [loginButton release], loginButton = nil;
-    [loginView release], loginView = nil;
-    [registerUsernameField release], registerUsernameField = nil;
-    [registerVisibleNameField release], registerVisibleNameField = nil;
-    [registerEmailField release], registerEmailField = nil;
-    [registerPsswordField release], registerPsswordField = nil;
-    [registerButton release], registerButton = nil;
-    [registerView release], registerView = nil;
-    [retrieveEmailField release], retrieveEmailField = nil;
-    [retrieveView release], retrieveView = nil;
-    [loggedInasField release], loggedInasField = nil;
-    [logoutButton release], logoutButton = nil;
-    [saveLoginButton release], saveLoginButton = nil;
-    [loggedInView release], loggedInView = nil;
-    [activeFieldArray release], activeFieldArray = nil;
-    [activeField release], activeField = nil;
-    [activeFormSubmitButton release], activeFormSubmitButton = nil;
-    [activeActivityView release], activeActivityView = nil;
-    [activeFormMessageLabel release], activeFormMessageLabel = nil;
-    [formFieldArray release], formFieldArray = nil;
-	
-    [super dealloc];
-}
-
-
-
 
 //
 /***********************************************
@@ -251,10 +210,8 @@ static NSString *const STRINGID=@"account";
 	formFieldArray=[[NSMutableArray alloc]init];
 	NSMutableArray *rar=[[NSMutableArray alloc]initWithObjects:registerUsernameField,registerPsswordField,registerVisibleNameField,registerEmailField,nil];
 	[formFieldArray addObject:rar];
-	[rar release];	
 	NSMutableArray *lar=[[NSMutableArray alloc]initWithObjects:loginUsernameField,loginPasswordField,nil];
 	[formFieldArray addObject:lar];
-	[lar release];
 	/*
 		NSMutableArray *par=[[NSMutableArray alloc]initWithObjects:retrieveEmailField,nil];
 	[formFieldArray addObject:par];

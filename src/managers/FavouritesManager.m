@@ -15,16 +15,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FavouritesManager);
 @synthesize dataProvider;
 
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-	
-    [super dealloc];
-}
-
 
 //=========================================================== 
 // - (id)init

@@ -35,7 +35,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (self = [super init]) {
 		image = nil;
 		asset = newAsset;
-		[asset retain];
 	}
 	return self;
 }
@@ -44,7 +43,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (self = [super init]) {
 		asset = nil;
 		image = newImage;
-		[image retain];
 		coordinate = newCoordinate;
 	}
 	return self;	
@@ -133,7 +131,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (asset) {
 		return [asset date];
 	} else {
-		return [[[NSDate alloc] init] autorelease];
+		return [[NSDate alloc] init];
 	}
 }
 
@@ -146,11 +144,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)dealloc {
-	[asset release];
 	asset = nil;
-	[image release];
 	image = nil;
-	[super dealloc];
 }
 
 @end

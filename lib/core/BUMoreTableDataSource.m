@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 23/03/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import "BUMoreTableDataSource.h"
@@ -16,20 +16,17 @@
 /***********************************************************/
 // dealloc
 /***********************************************************/
-- (void)dealloc
-{
-    [originalDataSource release], originalDataSource = nil;
-	
-    [super dealloc];
-}
 
 
 
 
 -(BUMoreTableDataSource *) initWithDataSource:(id<UITableViewDataSource>) dataSource
 {
-    originalDataSource = dataSource;
-    [super init];
+	
+	if (self = [super init]) {
+	
+		self.originalDataSource = dataSource;
+	}
 	
     return self;
 }

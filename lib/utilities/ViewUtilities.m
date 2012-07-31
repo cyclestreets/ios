@@ -1,14 +1,16 @@
 //
 //  ViewUtilities.m
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 03/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import "ViewUtilities.h"
 #import "GlobalUtilities.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GenericConstants.h"
+#import "AppDelegate.h"
 
 @implementation ViewUtilities
 
@@ -52,6 +54,45 @@
 	
 }
 
++(void)alignView:(UIView*)child withView:(UIView*)view :(LayoutBoxAlignMode)horizontal :(LayoutBoxAlignMode)vertical :(int)inset{
+	
+	CGRect childFrame=child.frame;
+	CGRect parentFrame=view.frame;
+	int xpos=childFrame.origin.x;
+	int ypos=childFrame.origin.y;
+	
+	if (horizontal!=BUNoneAlignMode) {
+		
+		if(horizontal==BUCenterAlignMode){
+			xpos=round((parentFrame.size.width-childFrame.size.width)/2);
+		}else if (horizontal==BURightAlignMode) {
+			xpos=round(parentFrame.size.width-childFrame.size.width-inset);
+		}else if (horizontal==BULeftAlignMode) {
+			xpos=inset;
+		}
+		
+	}
+	
+	
+	if (vertical!=BUNoneAlignMode) {
+		
+		if(vertical==BUCenterAlignMode){
+			ypos=round((parentFrame.size.height-childFrame.size.height)/2);
+		}else if (vertical==BUBottomAlignMode) {
+			ypos=round(parentFrame.size.height-childFrame.size.height-inset);
+		}else if (vertical==BUTopAlignMode) {
+			ypos=inset;
+		}
+		
+	}
+	
+	
+	childFrame.origin.x=xpos;
+	childFrame.origin.y=ypos;
+	child.frame=childFrame;
+	
+}
+
 
 +(void)distributeItems:(NSArray*)items inDirection:(LayoutBoxLayoutMode)direction :(int)dimension :(int)inset{
 	
@@ -63,8 +104,9 @@
 			item=[items objectAtIndex:i];
 			itemdimension+=item.frame.size.width;				
 		}
-		int deltah;
-		deltah=floor(((dimension-(inset*2))-itemdimension)/([items count]-1));
+		int deltah=0;
+		if([items count]>1)
+			deltah=floor(((dimension-(inset*2))-itemdimension)/([items count]-1));
 		
 		if(deltah<0){
 			//BetterLog(@"[ERROR] item widths exceed parent dimensions");
@@ -88,8 +130,9 @@
 			UIView *item=[items objectAtIndex:i];
 			itemdimension+=item.frame.size.height;				
 		}
-		int deltav;
-		deltav=floor(((dimension-(inset*2))-itemdimension)/([items count]-1));
+		int deltav=0;
+		if([items count]>1)
+			deltav=floor(((dimension-(inset*2))-itemdimension)/([items count]-1));
 		
 		if(deltav<0){
 			//BetterLog(@"[ERROR] item heights exceed parent dimensions");
@@ -109,8 +152,6 @@
 	}
 	
 	
-	
-	
 }
 
 
@@ -127,27 +168,93 @@
 }
 
 
++ (void)setTransformForCurrentOrientation:(UIView*)view {
+	
+	UIInterfaceOrientation orientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
+	NSInteger degrees = 0;
+	
+	BetterLog(@"orientation=%i",orientation);
+	
+	if (UIInterfaceOrientationIsLandscape(orientation)) {
+		if (orientation == UIInterfaceOrientationLandscapeLeft) { degrees = -90; } 
+		else { degrees = 90; }
+	} else {
+		if (orientation == UIInterfaceOrientationPortraitUpsideDown) { degrees = 180; } 
+		else { degrees = 0; }
+	}
+	
+	view.transform = CGAffineTransformMakeRotation(RADIANS(degrees));
+	
+}
 
-+(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText delegate:(id)delegate{
++ (id) loadInstanceOfView:(Class)className fromNibNamed:(NSString *)name {
+	id obj = nil;
+	NSArray *arr = [[NSBundle mainBundle] loadNibNamed:name owner:nil options:nil];
+	for (id currentObject in arr) {
+		if ([currentObject isKindOfClass:className]) {
+			obj = currentObject;
+			break;
+		}
+	}
+	return obj;
+}
+
++ (id) loadInstanceOfView:(Class)className fromNibNamed:(NSString *)name forOwner:(id)owner {
+	id obj = nil;
+	NSArray *arr = [[NSBundle mainBundle] loadNibNamed:name owner:owner options:nil];
+	for (id currentObject in arr) {
+		if ([currentObject isKindOfClass:className]) {
+			obj = currentObject;
+			break;
+		}
+	}
+	return obj;
+}
+
+
++ (UIInterfaceOrientation)stringtoUIInterfaceOrientation:(NSString*)stringType {
     
-    UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:title 
+	if([stringType isEqualToString:@"UIInterfaceOrientationPortrait"]){
+		return UIInterfaceOrientationPortrait;
+	}else if ([stringType isEqualToString:@"UIInterfaceOrientationPortraitUpsideDown"]){
+		return UIInterfaceOrientationPortraitUpsideDown;
+	}else if ([stringType isEqualToString:@"UIInterfaceOrientationLandscapeLeft"]) {
+		return UIInterfaceOrientationLandscapeLeft;
+	}else if ([stringType isEqualToString:@"UIInterfaceOrientationLandscapeRight"]) {
+		return UIInterfaceOrientationLandscapeRight;
+	}
+    return UIInterfaceOrientationPortrait;
+}
+
++(BOOL)interfaceOrientationIsSupportedInOrientationStrings:(NSArray*)orientationArray withOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    
+    for(NSString *orientation in orientationArray){
+        UIInterfaceOrientation io=[ViewUtilities stringtoUIInterfaceOrientation:orientation];
+        if(io==interfaceOrientation){
+            return YES;
+        }
+    }
+    return NO;
+    
+}
+
+#define kPasswordAlertTag 999111
+#define kPasswordAlertFieldTag 999112
++(UIAlertView*)createPasswordPromptView:(id)delegate{
+    
+    UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:@"Enter your password" 
                                                      message:@"\n\n"
                                                     delegate:delegate 
                                            cancelButtonTitle:@"Cancel" 
-                                           otherButtonTitles:@"OK", nil];
-    prompt.tag=kTextEntryAlertTag;
-    UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 50, 260.0, 25.0)]; 
-    alertField.borderStyle=UITextBorderStyleRoundedRect;
-    [alertField setBackgroundColor:[UIColor whiteColor]];
-	[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
-	if(fieldText!=nil){
-		alertField.text=fieldText;
-	}else{
-		[alertField setPlaceholder:@"Route name"];
-	}
-    
-    alertField.tag=kTextEntryAlertFieldTag;
-    [prompt addSubview:alertField];
+                                           otherButtonTitles:@"Enter", nil];
+    prompt.tag=kPasswordAlertTag;
+    UITextField *alertPasswordField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 50, 260.0, 25.0)]; 
+    alertPasswordField.borderStyle=UITextBorderStyleRoundedRect;
+    [alertPasswordField setBackgroundColor:[UIColor whiteColor]];
+    [alertPasswordField setPlaceholder:@"Password"];
+    [alertPasswordField setSecureTextEntry:YES];
+    alertPasswordField.tag=kPasswordAlertFieldTag;
+    [prompt addSubview:alertPasswordField];
     
     float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
     if(ver<4.0){
@@ -156,18 +263,43 @@
     }
     
     [prompt show];
-    [prompt release];
     
-    [alertField becomeFirstResponder];
-    [alertField release];
+    [alertPasswordField becomeFirstResponder];
     
     return prompt;
     
 }
 
++(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename
+{
+    // Creates a mutable data object for updating with binary data, like a byte array
+    NSMutableData *pdfData = [NSMutableData data];
+	
+    // Points the pdf converter to the mutable data object and to the UIView to be converted
+    UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, nil);
+    UIGraphicsBeginPDFPage();
+    CGContextRef pdfContext = UIGraphicsGetCurrentContext();
+	
+	
+    // draws rect to the view and thus this is captured by UIGraphicsBeginPDFContextToData
+	
+    [aView.layer renderInContext:pdfContext];
+	
+    // remove PDF rendering context
+    UIGraphicsEndPDFContext();
+	
+    // Retrieves the document directories from the iOS device
+    NSArray* documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES);
+	
+    NSString* documentDirectory = [documentDirectories objectAtIndex:0];
+    NSString* documentDirectoryFilename = [documentDirectory stringByAppendingPathComponent:aFilename];
+	
+    // instructs the mutable data object to write its context to a file on disk
+    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
+    NSLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
+}
 
-
-+(void)drawUIViewEdgeShadow:(UIView*)view atPosition:(NSString*)position{
++(void)drawUIViewEdgeShadow:(UIView*)view{
 	
 	BOOL create=YES;
 	CAGradientLayer *shadow;
@@ -181,21 +313,13 @@
 	}
 	
 	if(create==YES){
-		if([position isEqualToString:BOTTOM]){
-			shadow = [ViewUtilities shadowAsInverse:NO :view];
-		}else{
-			shadow = [ViewUtilities shadowAsInverse:YES :view];
-		}
+		shadow = [ViewUtilities shadowAsInverse:NO :view];
 		[view.layer insertSublayer:shadow atIndex:0];
 	}	
 	
 	CGRect shadowFrame = shadow.frame;
 	shadowFrame.size.width = view.frame.size.width;
-	if([position isEqualToString:BOTTOM]){
-		shadowFrame.origin.y = view.frame.size.height;
-	}else {
-		shadowFrame.origin.y = -10;
-	}
+	shadowFrame.origin.y = view.frame.size.height;
 	shadow.frame = shadowFrame;
 	
 	
@@ -205,7 +329,6 @@
 	
 	BOOL create=YES;
 	CAGradientLayer *topshadow;
-	CAGradientLayer *bottomshadow;
 	
 	if([view.layer.sublayers count]>0){
 		id layerzero=[view.layer.sublayers objectAtIndex:0];
@@ -218,19 +341,12 @@
 	if(create==YES){
 		topshadow = [ViewUtilities shadowAsInverse:NO :view];
 		[view.layer insertSublayer:topshadow atIndex:0];
-		bottomshadow = [ViewUtilities shadowAsInverse:YES :view];
-		[view.layer insertSublayer:bottomshadow atIndex:1];
 	}	
 	
 	CGRect topShadowFrame = topshadow.frame;
 	topShadowFrame.size.width = view.frame.size.width;
 	topShadowFrame.origin.y = 0;
 	topshadow.frame = topShadowFrame;
-	
-	CGRect bottomshadowFrame = bottomshadow.frame;
-	bottomshadowFrame.size.width = view.frame.size.width;
-	bottomshadowFrame.origin.y = view.frame.size.height-10;
-	bottomshadow.frame = bottomshadowFrame;
 	
 }
 
@@ -282,27 +398,215 @@
 }
 
 
-+ (void)renderPaperCurl:(UIView*)imgView {
+
+
+
++(UIWindow*)findKeyboardWindowInApplication{
 	
-	imgView.layer.shadowColor = [UIColor blackColor].CGColor;
-	imgView.layer.shadowOpacity = 0.5f;
-	imgView.layer.shadowOffset = CGSizeMake(2.0f, 10.0f);
-	imgView.layer.shadowRadius = 2.0f;
-	imgView.layer.masksToBounds = NO;
 	
-	CGSize size = imgView.bounds.size;
-	CGFloat curlFactor = 12.0f;
-	CGFloat shadowDepth = 3.0f;
+	UIView *foundKeyboard = nil;
+	UIWindow *keyboardWindow=nil;
 	
-	UIBezierPath *path = [UIBezierPath bezierPath];
-	[path moveToPoint:CGPointMake(0.0f, 0.0f)];
-	[path addLineToPoint:CGPointMake(size.width, 0.0f)];
-	[path addLineToPoint:CGPointMake(size.width, size.height + shadowDepth)];
-	[path addCurveToPoint:CGPointMake(0.0f, size.height + shadowDepth)
-			controlPoint1:CGPointMake(size.width - curlFactor, size.height + shadowDepth - curlFactor)
-			controlPoint2:CGPointMake(curlFactor, size.height + shadowDepth - curlFactor)];
+	//Check each window in our application
+	NSArray *windows=[[UIApplication sharedApplication] windows];
+	for (UIWindow *tempWindow in windows) {
+		
+		for (__strong UIView *possibleKeyboard in [tempWindow subviews]) {
+			
+			// iOS 4 sticks the UIKeyboard inside a UIPeripheralHostView.
+			if ([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"]) {
+				possibleKeyboard = [[possibleKeyboard subviews] objectAtIndex:0];
+			}                                                                                
+			
+			if ([[possibleKeyboard description] hasPrefix:@"<UIKeyboard"]) {
+				foundKeyboard = possibleKeyboard;
+				break;
+			}
+		}
+		
+		if(foundKeyboard!=nil){
+			keyboardWindow=tempWindow;
+			break;
+		}
+	}
 	
-	imgView.layer.shadowPath=path.CGPath;
+	return keyboardWindow;
+	
+}
+
++(UIView*)findKeyboardViewInApplication{
+	
+	
+	UIView *foundKeyboard = nil;
+	
+	//Check each window in our application
+	for (UIWindow *tempWindow in [[UIApplication sharedApplication] windows]) {
+		
+		
+		for (__strong UIView *possibleKeyboard in [tempWindow subviews]) {
+			
+			// iOS 4 sticks the UIKeyboard inside a UIPeripheralHostView.
+			if ([[possibleKeyboard description] hasPrefix:@"<UIPeripheralHostView"]) {
+				possibleKeyboard = [[possibleKeyboard subviews] objectAtIndex:0];
+			}                                                                                
+			
+			if ([[possibleKeyboard description] hasPrefix:@"<UIKeyboard"]) {
+				foundKeyboard = possibleKeyboard;
+				break;
+			}
+		}
+		
+		if(foundKeyboard!=nil)
+			break;
+	}
+	
+	return foundKeyboard;
+	
+}
+
+
++(void)drawViewBorder:(UIView*)view context:(CGContextRef)context borderParams:(BorderParams)params strokeColor:(UIColor*)strokeColor    {
+	
+	
+	CGContextSetStrokeColorWithColor(context, strokeColor.CGColor);
+	
+	
+	CGRect rrect=view.frame;
+	CGFloat minx = 0.0;
+	CGFloat maxx = rrect.size.width;
+    CGFloat miny = 0.0;
+	CGFloat maxy =rrect.size.height;
+	
+	
+	
+	if (params.top>0) {
+		CGContextSetLineWidth(context, params.top);
+		CGContextMoveToPoint(context, minx,miny);
+		CGContextAddLineToPoint(context, maxx,miny);
+		CGContextStrokePath(context);
+	}
+	
+	if (params.right>0) {
+		CGContextSetLineWidth(context, params.right);
+		CGContextMoveToPoint(context, maxx,miny);
+		CGContextAddLineToPoint(context, maxx,maxy);
+		CGContextStrokePath(context);
+	}
+	
+	if (params.bottom>0) {
+		CGContextSetLineWidth(context, params.bottom);
+		CGContextMoveToPoint(context, minx,maxy);
+		CGContextAddLineToPoint(context, maxx,maxy);
+		CGContextStrokePath(context);
+	}
+	
+	if (params.left>0) {
+		CGContextSetLineWidth(context, params.left);
+		CGContextMoveToPoint(context, minx,miny);
+		CGContextAddLineToPoint(context, minx,maxy);
+		CGContextStrokePath(context);
+	}
+	
+}
+
++(BorderParams)BorderParamsMake:(CGFloat)left :(CGFloat)right :(CGFloat)top :(CGFloat)bottom
+{
+	BorderParams params; params.left = left; params.right = right; params.top = top; params.bottom = bottom; return params;
+}
+
+
++(int)findTabIndexOfNavigationController:(UINavigationController*)controller{
+	AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+	int tabIndex=[appdelegate.tabBarController.viewControllers indexOfObject:controller];
+	return tabIndex;
+}
+
+
++(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText delegate:(id)delegate{
+    
+    UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:title 
+                                                     message:@"\n\n"
+                                                    delegate:delegate 
+                                           cancelButtonTitle:@"Cancel" 
+                                           otherButtonTitles:@"OK", nil];
+    prompt.tag=kTextEntryAlertTag;
+    UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 50, 260.0, 25.0)]; 
+    alertField.borderStyle=UITextBorderStyleRoundedRect;
+    [alertField setBackgroundColor:[UIColor whiteColor]];
+	[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
+	if(fieldText!=nil){
+		alertField.text=fieldText;
+	}else{
+		[alertField setPlaceholder:@"Route name"];
+	}
+    
+    alertField.tag=kTextEntryAlertFieldTag;
+    [prompt addSubview:alertField];
+    
+    float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if(ver<4.0){
+        CGAffineTransform moveUp = CGAffineTransformMakeTranslation(0.0, 100.0);
+        [prompt setTransform: moveUp];
+    }
+    
+    [prompt show];
+    
+    [alertField becomeFirstResponder];
+    
+    return prompt;
+    
+}
+
+
+//
+/***********************************************
+ * @description			creates new Alert with message and offset input field
+ ***********************************************/
+//
++(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText withMessage:(NSString*)message delegate:(id)delegate{
+	
+	NSString *fullmessage=nil;
+	
+	int fieldoffset=15;
+	fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:title :[UIFont boldSystemFontOfSize:13] :260 :UILineBreakModeWordWrap];
+	if(message!=nil){
+		fullmessage=[NSString stringWithFormat:@"%@\n\n",message];
+		fieldoffset+=15;
+		fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:fullmessage :[UIFont systemFontOfSize:13] :260 :UILineBreakModeWordWrap];
+	}
+	fieldoffset+=13;
+    
+    UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:title 
+                                                     message:fullmessage
+                                                    delegate:delegate 
+                                           cancelButtonTitle:@"Cancel" 
+                                           otherButtonTitles:@"OK", nil];
+    prompt.tag=kTextEntryAlertTag;
+    UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, fieldoffset, 260.0, 25.0)]; 
+    alertField.borderStyle=UITextBorderStyleRoundedRect;
+    [alertField setBackgroundColor:[UIColor whiteColor]];
+	[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
+	if(fieldText!=nil){
+		alertField.text=fieldText;
+	}else{
+		[alertField setPlaceholder:@"Route number"];
+	}
+    
+    alertField.tag=kTextEntryAlertFieldTag;
+    [prompt addSubview:alertField];
+    
+    float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if(ver<4.0){
+        CGAffineTransform moveUp = CGAffineTransformMakeTranslation(0.0, 100.0);
+        [prompt setTransform: moveUp];
+    }
+    
+    [prompt show];
+    
+    [alertField becomeFirstResponder];
+    
+    return prompt;
+    
 }
 
 @end

@@ -4,7 +4,7 @@
 //
 // ================================================================================================
 //  Created by Tom Bradley on 21/10/2009.
-//  Version 1.3
+//  Version 1.4
 //  
 //  Copyright (c) 2009 Tom Bradley
 //  
@@ -49,23 +49,23 @@
 @synthesize rootXMLElement;
 
 + (id)tbxmlWithURL:(NSURL*)aURL {
-	return [[[TBXML alloc] initWithURL:aURL] autorelease];
+	return [[TBXML alloc] initWithURL:aURL];
 }
 
 + (id)tbxmlWithXMLString:(NSString*)aXMLString {
-	return [[[TBXML alloc] initWithXMLString:aXMLString] autorelease];
+	return [[TBXML alloc] initWithXMLString:aXMLString];
 }
 
 + (id)tbxmlWithXMLData:(NSData*)aData {
-	return [[[TBXML alloc] initWithXMLData:aData] autorelease];
+	return [[TBXML alloc] initWithXMLData:aData];
 }
 
 + (id)tbxmlWithXMLFile:(NSString*)aXMLFile {
-	return [[[TBXML alloc] initWithXMLFile:aXMLFile] autorelease];
+	return [[TBXML alloc] initWithXMLFile:aXMLFile];
 }
 
 + (id)tbxmlWithXMLFile:(NSString*)aXMLFile fileExtension:(NSString*)aFileExtension {
-	return [[[TBXML alloc] initWithXMLFile:aXMLFile fileExtension:aFileExtension] autorelease];
+	return [[TBXML alloc] initWithXMLFile:aXMLFile fileExtension:aFileExtension];
 }
 
 - (id)init {
@@ -175,10 +175,24 @@
 }
 
 + (NSString*) textForElement:(TBXMLElement*)aXMLElement {
-	if(nil==aXMLElement) return @"";
 	if (nil == aXMLElement->text) return @"";
 	return [NSString stringWithCString:&aXMLElement->text[0] encoding:NSUTF8StringEncoding];
 }
+
+// NE: wraps most commonly used methods into one
++ (NSString*) textOfChild:(NSString*)childName parentElement:(TBXMLElement*)parent {
+	
+	if(parent==nil) return nil;
+	
+	TBXMLElement *childElement=[TBXML childElementNamed:childName parentElement:parent];
+	
+	if(nil==childElement) return @"";
+	if (nil == childElement->text) return @"";
+	return [NSString stringWithCString:&childElement->text[0] encoding:NSUTF8StringEncoding];
+	
+}
+
+
 
 + (NSString*) valueOfAttributeNamed:(NSString *)aName forElement:(TBXMLElement*)aXMLElement {
 	const char * name = [aName cStringUsingEncoding:NSUTF8StringEncoding];
@@ -218,6 +232,7 @@
 	return nil;
 }
 
+
 + (BOOL)hasChildrenForParentElement:(TBXMLElement*)aParentXMLElement{
 	TBXMLElement * xmlElement = aParentXMLElement->firstChild;
 	if(xmlElement!=nil){
@@ -245,6 +260,7 @@
 	}
 }
 
+// WIP: DONOTUSE
 +(NSMutableArray*)childArrayForElement:(NSString*)elementName parentElement:(TBXMLElement*)aParentXMLElement{
 	
 	BOOL hasChildren=[TBXML hasChildrenForParentElement:aParentXMLElement];
@@ -255,7 +271,7 @@
 		TBXMLElement *node=[TBXML childElementNamed:elementName parentElement:aParentXMLElement];
 		
 		if(node!=nil){
-			NSMutableArray *arr=[[NSMutableArray alloc]init];
+			//NSMutableArray *arr=[[NSMutableArray alloc]init];
 			
 			while (node!=nil){
 				
@@ -266,12 +282,12 @@
 				
 				node=[TBXML nextSiblingNamed:elementName searchFromElement:node];
 			}
-			return arr;
+			return nil;
 			
 		}else {
 			return nil;
 		}
-
+		
 	}
 }
 
@@ -292,6 +308,7 @@
 	
 	return dict;
 }
+
 
 
 @end
@@ -629,7 +646,6 @@
 		}
 	}
 	
-	[super dealloc];
 }
 
 - (TBXMLElement*) nextAvailableElement {
@@ -640,7 +656,7 @@
 		currentElementBuffer->elements = (TBXMLElement*)calloc(1,sizeof(TBXMLElement)*MAX_ELEMENTS);
 		currentElement = 0;
 		rootXMLElement = &currentElementBuffer->elements[currentElement];
-	} else if (currentElement > MAX_ELEMENTS) {
+	} else if (currentElement >= MAX_ELEMENTS) {
 		currentElementBuffer->next = calloc(1, sizeof(TBXMLElementBuffer));
 		currentElementBuffer->next->previous = currentElementBuffer;
 		currentElementBuffer = currentElementBuffer->next;
@@ -658,7 +674,7 @@
 		currentAttributeBuffer = calloc(1, sizeof(TBXMLAttributeBuffer));
 		currentAttributeBuffer->attributes = (TBXMLAttribute*)calloc(MAX_ATTRIBUTES,sizeof(TBXMLAttribute));
 		currentAttribute = 0;
-	} else if (currentAttribute > MAX_ATTRIBUTES) {
+	} else if (currentAttribute >= MAX_ATTRIBUTES) {
 		currentAttributeBuffer->next = calloc(1, sizeof(TBXMLAttributeBuffer));
 		currentAttributeBuffer->next->previous = currentAttributeBuffer;
 		currentAttributeBuffer = currentAttributeBuffer->next;

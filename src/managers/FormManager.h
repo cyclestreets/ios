@@ -44,13 +44,13 @@ typedef int FormManagerFieldType;
 	BOOL					formLoaded;
 	
 }
-@property (nonatomic, retain)			NSString *activeFormId;
-@property (nonatomic, retain)			NSDictionary *formDataProvider;
-@property (nonatomic, retain)			NSMutableArray *activeFormFieldArray;
+@property (nonatomic, strong)			NSString *activeFormId;
+@property (nonatomic, strong)			NSDictionary *formDataProvider;
+@property (nonatomic, strong)			NSMutableArray *activeFormFieldArray;
 @property (nonatomic)			FormManagerFieldType fieldType;
-@property (nonatomic, retain)			NSMutableArray *errorArray;
-@property (nonatomic, retain)			NSDictionary *validateMethods;
-@property (nonatomic, retain)			UIView *activeFormView;
+@property (nonatomic, strong)			NSMutableArray *errorArray;
+@property (nonatomic, strong)			NSDictionary *validateMethods;
+@property (nonatomic, strong)			UIView *activeFormView;
 @property (nonatomic)			BOOL formLoaded;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(FormManager);

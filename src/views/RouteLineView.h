@@ -35,6 +35,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSObject <PointListProvider> *pointListProvider;
 }
 
-@property (nonatomic, retain) NSObject <PointListProvider> *pointListProvider;
+@property (nonatomic, strong) NSObject <PointListProvider> *pointListProvider;
 
 @end

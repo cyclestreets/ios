@@ -36,8 +36,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 //The group of assets we are interested in, and the assets we have enumerated in that group.
-@property (nonatomic, retain) NSMutableArray *assets;
-@property (nonatomic, retain) ALAssetsGroup *assetsGroup;
-@property (nonatomic, retain) AssetImage *assetImage;
+@property (nonatomic, strong) NSMutableArray *assets;
+@property (nonatomic, strong) ALAssetsGroup *assetsGroup;
+@property (nonatomic, strong) AssetImage *assetImage;
 
 @end

@@ -59,7 +59,7 @@ typedef enum {
     NSNumberFormatter *_numberFormatter;
 }
 
-@property (readonly, nonatomic, retain) NSNumberFormatter *numberFormatter;
+@property (readonly, nonatomic, strong) NSNumberFormatter *numberFormatter;
 
 - (NSString *)stringFromCoordinate:(CLLocationCoordinate2D)coordinate;
 - (NSString *)stringFromLocation:(CLLocation *)location;

@@ -15,20 +15,6 @@
 @synthesize notes;
 @synthesize website;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [locationid release], locationid = nil;
-    [location release], location = nil;
-    [name release], name = nil;
-    [notes release], notes = nil;
-    [website release], website = nil;
-	
-    [super dealloc];
-}
-
 
 static NSString *LOCATIONID = @"locationid";
 static NSString *LOCATION = @"location";

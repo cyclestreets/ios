@@ -50,7 +50,7 @@ static NSInteger MAX_DIST = 10;
 - (NSArray *) interpolateFrom:(CGPoint)p1 to:(CGPoint)p2 {
 	NSInteger dist = [self dist:p1 to:p2];
 	NSInteger num =  dist / MAX_DIST;
-	NSMutableArray *results = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *results = [[NSMutableArray alloc] init];
 	for (int i = 0; i < num; i++) {
 		CGPoint p;
 		p.x = p1.x + i * (p2.x - p1.x) / num;
@@ -58,14 +58,13 @@ static NSInteger MAX_DIST = 10;
 		CSPointVO *csPoint = [[CSPointVO alloc] init];
 		csPoint.p = p;
 		[results addObject:csPoint];
-		[csPoint release];
 	}
 	return results;
 }
 
 //interpolate when points cross boundaries.
 - (NSArray *) interpolate:(NSArray *)points {
-	NSMutableArray *result = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *result = [[NSMutableArray alloc] init];
 	CSPointVO *prev = nil;
 	for (CSPointVO *point in points) {
 		if (prev != nil) {
@@ -109,11 +108,6 @@ static NSInteger MAX_DIST = 10;
 	[self.nextResponder touchesMoved:touches withEvent:event];
 }
 
-- (void)dealloc {
-	self.pointListProvider = nil;
-	
-    [super dealloc];
-}
 
 
 @end

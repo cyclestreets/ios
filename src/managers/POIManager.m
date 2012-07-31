@@ -30,18 +30,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 @synthesize dataProvider;
 @synthesize categoryDataProvider;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [categoryDataProvider release], categoryDataProvider = nil;
-	
-    [super dealloc];
-}
-
-
 
 -(id)init{
 	
@@ -132,8 +120,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	[dict release];
-	[request release];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Retrieving List" andMessage:nil];
 	
@@ -193,8 +179,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	[dict release];
-	[request release];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Retrieving %@s in area",category.name] andMessage:nil];
 	

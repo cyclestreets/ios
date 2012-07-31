@@ -44,13 +44,8 @@
 /***********************************************************/
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [userSettings release], userSettings = nil;
-    [userState release], userState = nil;
-    delegate = nil;
-    [error release], error = nil;
+	delegate = nil;
 	
-    [super dealloc];
 }
 
 
@@ -107,8 +102,7 @@
 
 	
 	// load ds manager
-	DataSourceManager *datamanager=[DataSourceManager sharedInstance];
-	datamanager.dataPriority=[UserSettingsManager sharedInstance].context;
+	[DataSourceManager sharedInstance];
 	// no fatal startup errors for DataSourceManager
 	
 	

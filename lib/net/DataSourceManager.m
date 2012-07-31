@@ -1,9 +1,9 @@
 //
 //  XMLManager.m
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 24/11/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import "DataSourceManager.h"
@@ -12,7 +12,6 @@
 #import "UserSettingsManager.h"
 #import "GlobalUtilities.h"
 #import "StringUtilities.h"
-#import "AppConstants.h"
 #import "ValidationVO.h"
 
 
@@ -52,12 +51,12 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 @synthesize services;
 @synthesize requestURL;
-@synthesize dataPriority;
 @synthesize DATASOURCE;
+@synthesize diskCachePath;
 @synthesize startupState;
-@synthesize delegate;
 @synthesize cacheCreated;
 @synthesize notifications;
+@synthesize delegate;
 
 
 /***********************************************************/
@@ -65,35 +64,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 /***********************************************************/
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	delegate = nil;
 	
-    [services release], services = nil;
-    [requestURL release], requestURL = nil;
-    [dataPriority release], dataPriority = nil;
-    [DATASOURCE release], DATASOURCE = nil;
-    delegate = nil;
-    [notifications release], notifications = nil;
-	
-    [super dealloc];
 }
-
-
-
-/***********************************************************/
-//  dataPriority 
-/***********************************************************/
-- (NSString *)dataPriority
-{
-    return [[dataPriority retain] autorelease]; 
-}
-- (void)setDataPriority:(NSString *)aDataPriority
-{
-    if (dataPriority != aDataPriority) {
-        [dataPriority release];
-        dataPriority = [aDataPriority copy];
-    }
-}
-
 
 
 //
@@ -106,9 +79,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 	
 	if (self = [super init])
 	{
-		if(dataPriority==nil){
-			dataPriority=kDATAPRIORITY;
-		}
+		
 		
 		DATASOURCE=REMOTEDATA;
 				
@@ -128,12 +99,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
-	notifications=[[NSMutableDictionary alloc] initWithObjectsAndKeys:
+    
+    self.notifications=[[NSMutableDictionary alloc] initWithObjectsAndKeys:
 				   [NSValue valueWithPointer:@selector(dataDidLoad:)],REMOTEFILELOADED,
 				   [NSValue valueWithPointer:@selector(modelDidParseData:)],REQUESTDIDCOMPLETEFROMSERVER,
 				   [NSValue valueWithPointer:@selector(requestDataForType:)],REQUESTDATAREFRESH,
 				   [NSValue valueWithPointer:@selector(requestDidFail:)],REMOTEFILEFAILED,
-				   [NSValue valueWithPointer:@selector(requestDidFail:)],XMLPARSERDIDFAILPARSING,nil];
+				   [NSValue valueWithPointer:@selector(requestDidFail:)],XMLPARSERDIDFAILPARSING,
+				   [NSValue valueWithPointer:@selector(requestDidFail:)],JSONPARSERDIDFAILPARSING,nil];
+    
 	
 	for( NSString* notification in notifications){
 		
@@ -212,7 +186,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 		
 	}else {
 		BetterLog(@"[ERROR] Invalid service/dataid : %@",request.dataid);
-		BetterLog(@"services=%@",services);
 		[self sendErrorNotification:DATAREQUESTFAILED dict:nil];
 		return;
 	}
@@ -328,12 +301,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 		NSDictionary *userInfo=[notification userInfo];
 		NetResponse *response=[userInfo objectForKey:@"response"];
 		
-		if([self connectionCacheFallback:response]==NO){
+		if([response.error isEqualToString:REMOTEFILEFAILED]){
 			
-			[self displayRequestFailedError:CONNECTIONERROR :UNABLETOCONTACT :OK];
-		
-			[self sendErrorNotification:CONNECTIONERROR dict:[notification userInfo]];
+			if([self connectionCacheFallback:response]==NO){
+				
+				[self displayRequestFailedError:CONNECTIONERROR :UNABLETOCONTACT :OK];
+			
+				[self sendErrorNotification:CONNECTIONERROR dict:userInfo];
+			}
+			
+		}else if ([response.error isEqualToString:SERVERCONNECTIONFAILED]) {
+			
+			if([self connectionCacheFallback:response]==NO){
+				
+				[self displayRequestFailedError:SERVERDOWNERROR :SERVERDOWN :OK];
+				
+				[self sendErrorNotification:SERVERDOWNERROR dict:userInfo];
+			}
+			
 		}
+
 		
 	}else if ([name isEqualToString:XMLPARSERDIDFAILPARSING]) {
 		
@@ -350,6 +337,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 			[self displayRequestFailedError:XMLPARSERERROR :INVALIDRESPONSE :OK];
 			[self sendErrorNotification:DATAREQUESTFAILED dict:userInfo];
 		}
+		
+	}else if ([name isEqualToString:JSONPARSERDIDFAILPARSING]) {
+		
+		NSDictionary *userInfo=[notification userInfo];
+		
+		[self displayRequestFailedError:JSONPARSERERROR :INVALIDRESPONSE :OK];
+		[self sendErrorNotification:DATAREQUESTFAILED dict:userInfo];
+		
 		
 	}
 	
@@ -411,7 +406,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	//NSError *error=nil;
-	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString* docsdir=[paths objectAtIndex:0];
 	NSString *cachepath=[docsdir stringByAppendingPathComponent:kCACHEDIRECTORY];
 	
@@ -507,14 +502,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 	
 		NSMutableData *data = [[NSMutableData alloc] init];
 		NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-		// NE: this will need to be monitored!
-		ValidationVO *dp=(ValidationVO*)response.dataProvider;
-		[archiver encodeObject:[dp.responseDict objectForKey:response.dataid] forKey:kCACHEARCHIVEKEY];
+		
+		// handles responses that are pure data or ones that are ValdationVO wrapped
+		if([response.dataProvider isKindOfClass:[ValidationVO class]]){
+			ValidationVO *dp=(ValidationVO*)response.dataProvider;
+			[archiver encodeObject:[dp.responseDict objectForKey:response.dataid] forKey:kCACHEARCHIVEKEY];
+		}else {
+			[archiver encodeObject:response.dataProvider forKey:kCACHEARCHIVEKEY];
+		};
+		
+		
 		[archiver finishEncoding];
 		[data writeToFile:[self cacheFilePathForType:response.dataid andID:response.requestid] atomically:YES];
 		
-		[data release];
-		[archiver release];
 		
 	}
 
@@ -536,8 +536,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 		dataProvider = [unarchiver decodeObjectForKey:kCACHEARCHIVEKEY];
 		[unarchiver finishDecoding];
-		[unarchiver release];
-		[data release];
 		
 	}
 	
@@ -598,16 +596,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 
 -(NSString*)cacheFilePathForType:(NSString*)type andID:(NSString*)requestid{
 	
-	return [[self cachePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%@_cache.plist",type,requestid]]; // should be file name type rather than plain type
+	return [[self cachePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%@_cache.plist",type,requestid]]; 
+	// should be file name type rather than plain type
 	
 }
 
 
 -(NSString*)cachePath{
 	
-	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString* docsdir=[paths objectAtIndex:0];
-	return [docsdir stringByAppendingPathComponent:kCACHEDIRECTORY];	
+	if(diskCachePath==nil){
+		NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+		NSString* docsdir=[paths objectAtIndex:0];
+		self.diskCachePath=[docsdir stringByAppendingPathComponent:kCACHEDIRECTORY];
+	}
+	
+	return 	diskCachePath;
 	
 }
 
@@ -619,7 +622,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 												   delegate:self
 										  cancelButtonTitle:buttonLabel otherButtonTitles:nil, nil];
 	[alert show];
-	[alert release];
 	
 }
 

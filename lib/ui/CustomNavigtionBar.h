@@ -3,7 +3,7 @@
 //  Generic
 //
 //  Created by Neil Edwards on 04/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -22,6 +22,7 @@
 #define	BUItemStepButtonType @"BUItemStepButtonType"
 #define	BUNavAddButtonType @"BUNavAddButtonType"
 #define	BUNavUICustomType @"BUNavUICustomType"
+#define	BUNavNullType @"BUNavNullType"
 
 
 @protocol CustomNavigationBarDelegate <NSObject>
@@ -29,7 +30,7 @@
 -(void)didRequestPopController;
 @optional
 -(void)didRequestRefresh;
--(void)doNavigationSelector:(NSString*)type;
+-(IBAction)doNavigationSelector:(NSString*)type;
 -(void)doNavigationItemSelector:(NSString*)type;
 
 
@@ -66,38 +67,41 @@
 	NSString				*leftItemTitle;
 	NSString				*titleString;
 	
+	UIActivityIndicatorViewStyle	activityStyle;
+	
 	// used in conjunction with BUNavTitleDefaultType
 	int						titleFontSize;
 	UIColor					*titleFontColor;
 	
 	// delegate
-	id<CustomNavigationBarDelegate> delegate;
+	id<CustomNavigationBarDelegate> __unsafe_unretained delegate;
 	
 	
 }
-@property (nonatomic, retain)		IBOutlet UIButton		* backButton;
-@property (nonatomic, retain)		IBOutlet UIButton		* refreshButton;
-@property (nonatomic, retain)		IBOutlet UILabel		* titleLabel;
-@property (nonatomic, retain)		IBOutlet UILabel		* subtitleLabel;
-@property (nonatomic, retain)		IBOutlet UIButton		* rightButton;
-@property (nonatomic, retain)		IBOutlet UIBarButtonItem		* rightBarButton;
-@property (nonatomic, retain)		NSString		* rightButtonTitle;
-@property (nonatomic, retain)		IBOutlet UIButton		* nextItemButton;
-@property (nonatomic, retain)		IBOutlet UIButton		* prevItemButton;
-@property (nonatomic, retain)		UINavigationItem		* navigationItem;
-@property (nonatomic, retain)		NSString		* rightButtonStyle;
-@property (nonatomic, retain)		NSString		* leftButtonStyle;
-@property (nonatomic, retain)		NSMutableDictionary		* dataProvider;
-@property (nonatomic, retain)		NSMutableArray		* rightItems;
-@property (nonatomic, retain)		NSString		* titleType;
-@property (nonatomic, retain)		NSString		* rightItemType;
-@property (nonatomic, retain)		NSString		* leftItemType;
-@property (nonatomic, retain)		NSString		* titleImage;
-@property (nonatomic, retain)		NSString		* leftItemTitle;
-@property (nonatomic, retain)		NSString		* titleString;
-@property (nonatomic)		int		 titleFontSize;
-@property (nonatomic, retain)		UIColor		 *titleFontColor;
-@property (nonatomic, assign)		id<CustomNavigationBarDelegate>		 delegate;
+@property (nonatomic, strong)	UIButton		*backButton;
+@property (nonatomic, strong)	UIButton		*refreshButton;
+@property (nonatomic, strong)	UILabel		*titleLabel;
+@property (nonatomic, strong)	UILabel		*subtitleLabel;
+@property (nonatomic, strong)	UIButton		*rightButton;
+@property (nonatomic, strong)	UIBarButtonItem		*rightBarButton;
+@property (nonatomic, strong)	NSString		*rightButtonTitle;
+@property (nonatomic, strong)	UIButton		*nextItemButton;
+@property (nonatomic, strong)	UIButton		*prevItemButton;
+@property (nonatomic, strong)	UINavigationItem		*navigationItem;
+@property (nonatomic, strong)	NSString		*rightButtonStyle;
+@property (nonatomic, strong)	NSString		*leftButtonStyle;
+@property (nonatomic, strong)	NSMutableDictionary		*dataProvider;
+@property (nonatomic, strong)	NSMutableArray		*rightItems;
+@property (nonatomic, strong)	NSString		*titleType;
+@property (nonatomic, strong)	NSString		*rightItemType;
+@property (nonatomic, strong)	NSString		*leftItemType;
+@property (nonatomic, strong)	NSString		*titleImage;
+@property (nonatomic, strong)	NSString		*leftItemTitle;
+@property (nonatomic, strong)	NSString		*titleString;
+@property (nonatomic)	UIActivityIndicatorViewStyle		activityStyle;
+@property (nonatomic)	int		titleFontSize;
+@property (nonatomic, strong)	UIColor		*titleFontColor;
+@property (nonatomic, unsafe_unretained)		id<CustomNavigationBarDelegate>		 delegate;
 
 
 -(void)createNavigationUI;

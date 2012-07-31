@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "BlueCircleView.h"
+#import "GlobalUtilities.h"
 
 
 @implementation BlueCircleView
@@ -45,7 +46,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	
 	double radius = [locationProvider getRadius];
-	CGContextSetLineWidth( ctx, radius);
+	CGContextSetLineWidth( ctx, MAX(radius, 10.0f));
+	
 	CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:0.2 green:0.2 blue:1.0 alpha:0.75].CGColor);
 	CGContextAddArc( ctx,
 					[locationProvider getX],
@@ -67,10 +69,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self.nextResponder touchesMoved:touches withEvent:event];
 }
 
-- (void)dealloc {
-	self.locationProvider = nil;
-	
-    [super dealloc];
-}
 
 @end

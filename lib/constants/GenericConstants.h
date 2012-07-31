@@ -1,12 +1,17 @@
 //
 //  GenericConstants.h
-//  CycleStreets.AppCore
+//  ChromaAppCore
 //
 //  Created by Neil Edwards on 18/08/2011.
 //  Copyright 2011 buffer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
+
+
+extern NSString *const SECUREUDID_DOMAIN;
+extern NSString *const SECUREUDID_SALT;
 
 
 extern NSString *const STARTUPERROR_SERVICELOADFAILED;
@@ -34,6 +39,7 @@ extern NSString *const URL;
 extern NSString *const POSTJSON;
 extern NSString *const GETPOST;
 extern NSString *const IMAGEPOST;
+extern NSString *const FILEUPLOADPROGRESS;
 
 
 // data sources
@@ -67,11 +73,24 @@ extern NSString *const SEARCH;
 extern NSString *const EMPTYSTRING;
 extern NSString *const EVENTDICT;
 extern NSString *const NONE;
+extern NSString *const SHORTDATE;
+extern NSString *const ERRORTYPE;
+extern NSString *const EVENTTYPE;
+
+
+// nav button consts
+extern NSString *const RIGHT;
+extern NSString *const LEFT;
+extern NSString *const NEXT;
+extern NSString *const PREV;
+
+
 
 
 // view modes
 extern NSString *const UITYPE_NAV;
 extern NSString *const UITYPE_CONTROLUI;
+extern NSString *const UITYPE_CONTROLUI_HIGH;
 extern NSString *const UITYPE_CONTROLHEADERUI;
 extern NSString *const UITYPE_MODALUI;
 extern NSString *const UITYPE_SELFFRAME;
@@ -84,7 +103,6 @@ extern NSString *const XMLPARSERDIDCOMPLETE;
 extern NSString *const REQUESTDATAREFRESH;
 extern NSString	*const PRODUCTLISTCOMPLETE;
 extern NSString *const REMOTEFILELOADED;
-extern NSString *const FILEUPLOADPROGRESS;
 extern NSString *const REMOTEFILEFAILED;
 extern NSString *const SERVERCONNECTIONFAILED;
 extern NSString *const XMLPARSERDIDCOMPLETENOUPDATE;
@@ -105,6 +123,11 @@ extern NSString *const PUSHNOTIFICATIONTOKENAVAILABLE;
 
 
 
+// authentication
+extern NSString *const AUTHENTICATION_USERNAME;
+extern NSString *const AUTHENTICATION_PASSWORD;
+
+
 
 
 
@@ -118,7 +141,7 @@ extern NSString *const	XMLPARSER_XMLSYNTAXERROR;
 extern NSString *const	DATAREQUESTFAILED;
 
 
-extern NSString *const JSONPARSERDIDCOMPLETE;
+extern NSString *const	JSONPARSERDIDCOMPLETE;
 extern NSString *const	JSONPARSERDIDFAILPARSING ;
 extern NSString *const	JSONPARSER_RESPONSENODEMISSING ;
 extern NSString *const	JSONPARSER_RESPONSEDATAMISSING ;
@@ -143,6 +166,7 @@ extern int const IPADSCREENWIDTH;
 extern int const IPADMASTERVIEWWIDTH;
 extern int const SCREENHEIGHT;
 extern int const SCREENHEIGHTWITHCONTROLUI;
+extern int const SCREENHEIGHTWITHMODALNAV;
 extern int const SCREENHEIGHTWITHCONTROLANDHEADERUI;
 extern int const SCREENHEIGHTWITHCONTROLANDHEADERUI_IPAD_LANDSCAPE;
 extern int const SCREENHEIGHTMANAGE_IPAD_LANDSCAPE;
@@ -151,6 +175,7 @@ extern int const SCREENHEIGHTWITHNAVIGATION;
 extern int const SCREENHEIGHTWITHNAVANDTAB;
 extern int const CONTROLUIHEIGHT;
 extern int const UIWIDTH;
+extern int const WIDEUIWIDTH;
 extern int const FORMWIDTH;
 extern int const NAVIGATIONHEIGHT;
 extern int const TABBARHEIGHT;
@@ -174,12 +199,24 @@ extern int const TABBARMORELIMIT;
 extern NSString *const CONNECTIONERROR;
 extern NSString *const XMLPARSERERROR;
 extern NSString *const SERVERDOWNERROR;
+extern NSString *const JSONPARSERERROR;
 
 // Error Messages
 extern NSString *const UNABLETOCONTACT;
 extern NSString *const INVALIDRESPONSE;
 extern NSString *const CONNECTIONCACHE;
 extern NSString *const SERVERDOWN;
+
+
+extern NSString *const	kUSERSTATEKEY_NAVIGATION;
+extern NSString *const	kUSERSTATEKEY_CONTEXT;
+extern NSString *const	kUSERSTATEKEY_LASTOPENEDDATE;
+
+
+// Utility Tags
+#define kTextEntryAlertTag 999111
+#define kTextEntryAlertFieldTag 999112
+
 
 enum{
 	DATATYPE_XML,
@@ -189,8 +226,9 @@ enum{
 };
 typedef int DataParserType;
 
-@interface GenericConstants : NSObject{}
-
+@interface GenericConstants : NSObject{
+	
+}
 + (DataParserType)parserStringTypeToConstant:(NSString*)stringType;
 + (NSString*)parserConstantToString:(DataParserType)parserType;
 

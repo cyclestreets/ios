@@ -30,20 +30,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationFeaturesManager);
 @synthesize locationDataProvider;
 @synthesize curentLocation;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [locationDataProvider release], locationDataProvider = nil;
-    [curentLocation release], curentLocation = nil;
-	
-    [super dealloc];
-}
-
-
-
-
 
 //
 /***********************************************
@@ -111,8 +97,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationFeaturesManager);
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	[dict release];
-	[request release];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Retrieving" andMessage:nil];
 	

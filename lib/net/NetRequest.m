@@ -34,15 +34,14 @@
 /***********************************************************/
 - (void)dealloc
 {
-    [service release], service = nil;
-    [dataid release], dataid = nil;
-    [url release], url = nil;
-    [parameters release], parameters = nil;
-    [requestType release], requestType = nil;
-    [requestid release], requestid = nil;
-    [source release], source = nil;
+    service = nil;
+    dataid = nil;
+    url = nil;
+    parameters = nil;
+    requestType = nil;
+    requestid = nil;
+    source = nil;
 	
-    [super dealloc];
 }
 
 
@@ -109,7 +108,9 @@
 		
 		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[parameters urlEncodedString]];
 		
+		BetterLog(@"parameters=%@",parameters);
 		BetterLog(@"GET url=%@",urlString);
+		
 		
 		requesturl=[NSURL URLWithString:urlString];
 		
@@ -119,7 +120,6 @@
 		
 		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
 		
-		[urlString release];
 		
 	}else if([servicetype isEqualToString:POSTJSON]){
 		
@@ -132,7 +132,7 @@
 		NSString *parameterString = [[NSString alloc] initWithData:[[CJSONSerializer serializer] serializeDictionary:parameters error:nil]
                                                           encoding:NSUTF8StringEncoding];
 		
-		//NSLog(@"[DEBUG] JSONPOST SEND:%@",parameterString);
+		BetterLog(@"parameters=%@",parameters);
 		
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
@@ -154,7 +154,6 @@
 									  timeoutInterval:30.0 ];
 		
 		//NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
-		[urlString release];
 		//NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
 		
 		NSString *parameterString=[postparameters urlEncodedString];
@@ -162,7 +161,7 @@
 		[request setHTTPMethod:@"POST"];
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
-		NSString *contentType = [NSString stringWithString:@"application/x-www-form-urlencoded"];
+		NSString *contentType = @"application/x-www-form-urlencoded";
 		[request addValue:contentType forHTTPHeaderField: @"Content-Type"];	
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
 		[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
@@ -171,7 +170,8 @@
 		
 		NSDictionary *getparameters=[parameters objectForKey:@"getparameters"];
 		NSDictionary *postparameters=[parameters objectForKey:@"postparameters"];
-        NSData *imageData=[parameters objectForKey:@"imageData"];
+        NSData *imageData=[postparameters objectForKey:@"imageData"];
+		[postparameters        setValue:nil forKey:@"imageData"];
 		
         // optional get parameters
         NSString *urlString;
@@ -180,13 +180,15 @@
         }else{
             urlString=[self url];
         }
+		
+		BetterLog(@"IMAGEPOST url=%@",urlString);
+		
         requesturl=[NSURL URLWithString:urlString];
 		
 		request = [NSMutableURLRequest requestWithURL:requesturl
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		[urlString release];
 		
 		
         NSMutableData *body = [[NSMutableData alloc] init];	
@@ -194,23 +196,22 @@
         // Image Data
         [request addValue:@"gzip" forHTTPHeaderField:@"Accepts-Encoding"];
         [request setHTTPMethod:@"POST"];
-        NSString *stringBoundary = [NSString stringWithString:@"0xBoundaryBoundaryBoundaryBoundary"];
+        NSString *stringBoundary = @"0xBoundaryBoundaryBoundaryBoundary";
         NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",stringBoundary];
         [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
         [request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
         
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"mediaupload\"; filename=\"from_iphone.jpeg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithString:@"Content-Type: image/jpeg\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithString:@"Content-Transfer-Encoding: binary\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Disposition: form-data; name=\"mediaupload\"; filename=\"from_iphone.jpeg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:imageData];
         
         // POST form content
         
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSString *parameterString=[postparameters urlEncodedString];
-        [body appendData:[parameterString dataUsingEncoding:NSUTF8StringEncoding]];
+		
+		[self appendFormValues:postparameters toPostData:body];
         
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
         
@@ -220,12 +221,24 @@
         
 	}		
 	
-    
-    
-	
-
 	return request;
 	
+}
+
+
+- (void)appendFormValues:(NSDictionary*)postparameters toPostData:(NSMutableData*)data {
+	
+	NSString *stringBoundary = @"0xBoundaryBoundaryBoundaryBoundary";
+	
+	for(NSString *key in postparameters){
+	
+		[data appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+		NSString *line = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key];
+		[data appendData:[line dataUsingEncoding:NSUTF8StringEncoding]];
+		[data appendData:[[postparameters objectForKey:key] dataUsingEncoding:NSUTF8StringEncoding]];
+		
+	}
+
 }
 
 

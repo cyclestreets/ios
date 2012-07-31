@@ -185,7 +185,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
                 
             [self warnOnFirstRoute];
             [self selectRoute:newroute];
-			[self saveRoute:selectedRoute forID:[selectedRoute.routeid intValue]];
+			[self saveRoute:selectedRoute];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:CALCULATEROUTERESPONSE object:nil];
             
@@ -273,7 +273,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
             
             [self selectRoute:newroute];
-			[self saveRoute:selectedRoute forID:[selectedRoute.routeid intValue]];
+			[self saveRoute:selectedRoute ];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
             
@@ -302,9 +302,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 //
 
 -(void)evalRouteArchiveState{
-	
-	// this should get the saved routes array
-	// and use this
 	
 	
 	// do we have a old route folder
@@ -339,7 +336,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 				
 				RouteVO *newroute=(RouteVO*)[[Model sharedInstance].xmlparser parseXML:routedata forType:CALCULATEROUTE];
 				
-				[self saveRoute:newroute forID:[newroute.routeid intValue]];
+				[self saveRoute:newroute];
 				
 				
 			}
@@ -432,7 +429,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		[self warnOnFirstRoute];
 		[self selectRoute:selectedRoute];	
 		
-		[self saveRoute:selectedRoute forID:[selectedRoute.routeid intValue]];
+		[self saveRoute:selectedRoute];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
 		
@@ -460,7 +457,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	[[SavedRoutesManager sharedInstance] selectRoute:route];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.files setMiscValue:route.routeid forKey:@"selectedroute"];
+	[cycleStreets.files setMiscValue:route.fileid forKey:@"selectedroute"];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:CSROUTESELECTED object:[route routeid]];
 	
@@ -474,7 +471,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		self.selectedRoute=nil;
 		
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		[cycleStreets.files setMiscValue:ZERO forKey:@"selectedroute"];
+		[cycleStreets.files setMiscValue:EMPTYSTRING forKey:@"selectedroute"];
 	}
 	
 	
@@ -484,6 +481,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 -(BOOL)hasSelectedRoute{
 	return selectedRoute!=nil;
 }
+
 
 
 - (void)warnOnFirstRoute {
@@ -546,7 +544,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	RouteVO *route=nil;
 	
 	if (identifier!=nil) {
-		route = [self loadRouteForID:[identifier intValue]];
+		route = [self loadRouteForFileID:identifier];
 	}
 	if(route!=nil){
 		[routes setObject:route forKey:identifier];
@@ -560,12 +558,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 // loads the currently saved selectedRoute by identifier
 -(void)loadSavedSelectedRoute{
 	
+	BetterLog(@"");
+	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSString *selectedRouteID = [cycleStreets.files miscValueForKey:@"selectedroute"];
+	NSString *selectedroutefileid = [cycleStreets.files miscValueForKey:@"selectedroute"];
 	
 	
-	if(selectedRouteID!=nil){
-		RouteVO *route=[self loadRouteForID:[selectedRouteID intValue]];
+	if(selectedroutefileid!=nil){
+		RouteVO *route=[self loadRouteForFileID:selectedroutefileid];
 		
 		if(route!=nil){
 			[self selectRoute:route];
@@ -580,10 +580,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
--(void)removeRoute:(NSString*)routeid{
+-(void)removeRoute:(RouteVO*)route{
 	
-	[routes removeObjectForKey:routeid];
-	[self removeRouteForID:[routeid intValue]];
+	[routes removeObjectForKey:route.fileid];
+	[self removeRouteFile:route];
 	
 }
 
@@ -595,9 +595,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 //
 
 
-- (RouteVO *)loadRouteForID:(NSInteger) routeIdentifier {
+-(RouteVO*)loadRouteForFileID:(NSString*)fileid{
 	
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", fileid]];
 	
 	BetterLog(@"routeFile=%@",routeFile);
 	
@@ -607,12 +607,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	[unarchiver finishDecoding];
 	
 	return route;
+	
+	
 }
 
 
-- (void)saveRoute:(RouteVO *)route forID:(NSInteger) routeIdentifier  {
+- (void)saveRoute:(RouteVO *)route   {
 	
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", route.fileid]];
+	
+	BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] init];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -624,12 +628,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-- (void)removeRouteForID:(NSInteger) routeIdentifier{
-	
+- (void)removeRouteFile:(RouteVO*)route{
 	
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%d", routeIdentifier]];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", route.fileid]];
 	
 	BOOL fileexists = [fileManager fileExistsAtPath:routeFile];
 	
@@ -664,6 +667,55 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	
 }
+
+
+//
+/***********************************************
+ * @description			LEGACY ROUTE ID METHODS
+ ***********************************************/
+//
+
+// legacy conversion call only
+-(RouteVO*)legacyLoadRoute:(NSString*)routeid{
+	
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", routeid]];
+	
+	BetterLog(@"routeFile=%@",routeFile);
+	
+	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
+	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
+	[unarchiver finishDecoding];
+	
+	return route;
+	
+	
+}
+
+- (void)legacyRemoveRouteFile:(NSString*)routeid{
+	
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", routeid]];
+	
+	BOOL fileexists = [fileManager fileExistsAtPath:routeFile];
+	
+	if(fileexists==YES){
+		
+		NSError *error=nil;
+		[fileManager removeItemAtPath:routeFile error:&error];
+	}
+	
+}
+
+
+
+//
+/***********************************************
+END
+ ***********************************************/
+//
+
 
 - (NSString *) oldroutesDirectory {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

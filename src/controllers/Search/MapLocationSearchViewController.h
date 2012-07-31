@@ -35,25 +35,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @interface MapLocationSearchViewController : UITableViewController
 <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate> {
 	
-	id<LocationReceiver>				locationReceiver;
 	CLLocationCoordinate2D				centreLocation;
-	@private NSString					*currentRequestSearchString;
-	@private NSString					*searchString;
-	@private XMLRequest					*request;
-	@private NSMutableArray				*currentPlaces;
-	@private UIActivityIndicatorView	*activeLookup;
-	@private UIView						*activeBackground;
+	NSString					*currentRequestSearchString;
+	NSString					*searchString;
+	XMLRequest					*request;
+	NSMutableArray				*currentPlaces;
+	UIActivityIndicatorView	*activeLookup;
+	UIView						*activeBackground;
+	
+	id<LocationReceiver>				locationReceiver;
 }
 
-@property (nonatomic, retain) id<LocationReceiver> locationReceiver;
-@property CLLocationCoordinate2D centreLocation;
-@property (nonatomic, copy) NSString *searchString;
-@property (nonatomic, copy) NSString *currentRequestSearchString;
-@property (nonatomic, retain) XMLRequest *request;
-@property (nonatomic, retain) NSMutableArray *currentPlaces;
-@property (nonatomic, retain) UIActivityIndicatorView *activeLookup;
-@property (nonatomic, retain) UIView *activeBackground;
+@property (nonatomic, assign) CLLocationCoordinate2D		 centreLocation;
+@property (nonatomic, strong) NSString		* currentRequestSearchString;
+@property (nonatomic, strong) NSString		* searchString;
+@property (nonatomic, strong) XMLRequest		* request;
+@property (nonatomic, strong) NSMutableArray		* currentPlaces;
+@property (nonatomic, strong) UIActivityIndicatorView		* activeLookup;
+@property (nonatomic, strong) UIView		* activeBackground;
+@property (nonatomic, strong) id<LocationReceiver>		 locationReceiver;
 
 - (void) lookupNames;
+
+- (void)didFailLookupwithMessage:(NSString *)message;
 
 @end

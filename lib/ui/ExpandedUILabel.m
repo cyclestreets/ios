@@ -27,9 +27,8 @@
 //=========================================================== 
 - (void)dealloc
 {
-    [labelColor release], labelColor = nil;
+    labelColor = nil;
 	
-    [super dealloc];
 }
 
 

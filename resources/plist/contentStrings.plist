@@ -15,7 +15,12 @@
 		<string>No results for this day. \r Please try later.</string>
 	</dict>
 	<key>ui</key>
-	<dict/>
+	<dict>
+		<key>noresults_SAVEDROUTE_RECENTS</key>
+		<string>You have no recent routes, Use the Map view to plan a route.</string>
+		<key>noresults_SAVEDROUTE_FAVS</key>
+		<string>You have not favourited any routes, press and hold on any planned route to favourite it.</string>
+	</dict>
 	<key>account</key>
 	<dict>
 		<key>error_syntax_email</key>
@@ -36,6 +41,11 @@
 		<string>User names must be greater than 5 characters</string>
 		<key>error_syntax_visiblename</key>
 		<string>Visible names must be greater than 5 characters</string>
+	</dict>
+	<key>photowizard</key>
+	<dict>
+		<key>descriptionprompt</key>
+		<string>Please enter a description...</string>
 	</dict>
 </dict>
 </plist>

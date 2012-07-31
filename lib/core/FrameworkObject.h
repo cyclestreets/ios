@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 04/11/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,8 +13,8 @@
 	NSMutableArray						*notifications;
 	NSMutableDictionary					*requestIDs;
 }
-@property (nonatomic, retain) NSMutableArray *notifications;
-@property (nonatomic, retain) NSMutableDictionary *requestIDs;
+@property (nonatomic, strong) NSMutableArray *notifications;
+@property (nonatomic, strong) NSMutableDictionary *requestIDs;
 
 -(void)listNotificationInterests;
 -(void)didReceiveNotification:(NSNotification*)notification;

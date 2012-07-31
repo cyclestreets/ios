@@ -33,9 +33,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	XMLRequest *request;
 	NSString	*routeID;
 }
-@property (nonatomic, retain)	NSString		*url;
-@property (nonatomic, retain)	XMLRequest		*request;
-@property (nonatomic, retain)	NSString		*routeID;
+@property (nonatomic, strong)	NSString		*url;
+@property (nonatomic, strong)	XMLRequest		*request;
+@property (nonatomic, strong)	NSString		*routeID;
 
 
 - (id) initFrom:(CLLocation *)from to:(CLLocation *)to;

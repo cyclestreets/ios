@@ -14,6 +14,8 @@
 		<string>GETPOST</string>
 		<key>cache</key>
 		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 	</dict>
 	<key>Login</key>
 	<dict>
@@ -27,6 +29,8 @@
 		<string>GETPOST</string>
 		<key>cache</key>
 		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 	</dict>
 	<key>ForgottenPassword</key>
 	<dict>
@@ -38,6 +42,8 @@
 		<string>GETPOST</string>
 		<key>cache</key>
 		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 	</dict>
 	<key>RetrieveLocationPhotos</key>
 	<dict>
@@ -49,22 +55,26 @@
 		<string>GET</string>
 		<key>cache</key>
 		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
-	<key>UploadPhoto</key>
+	<key>UploadUserPhotos</key>
 	<dict>
 		<key>id</key>
-		<string>UploadPhoto</string>
+		<string>UploadUserPhotos</string>
 		<key>remoteurl</key>
-		<string>https://www.cyclestreets.net/api/addphoto.xml</string>
+		<string>http://www.cyclestreets.net/api/addphoto.xml</string>
 		<key>type</key>
 		<string>IMAGEPOST</string>
 		<key>cache</key>
 		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
@@ -81,6 +91,8 @@
 		<string>GET</string>
 		<key>cache</key>
 		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
@@ -97,6 +109,8 @@
 		<string>GET</string>
 		<key>cache</key>
 		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
@@ -113,6 +127,8 @@
 		<string>GET</string>
 		<key>cache</key>
 		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
@@ -129,6 +145,26 @@
 		<string>GET</string>
 		<key>cache</key>
 		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
+	<key>PhotoCategories</key>
+	<dict>
+		<key>id</key>
+		<string>PhotoCategories</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/photomapcategories.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>

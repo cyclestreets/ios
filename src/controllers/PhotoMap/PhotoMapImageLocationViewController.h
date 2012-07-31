@@ -21,6 +21,7 @@
 	UINavigationBar						*navigationBar;
 	UIScrollView						*scrollView;
 	
+	
 	LayoutBox							*viewContainer;
 	
 	AsyncImageView						*imageView;
@@ -29,13 +30,13 @@
 	CopyLabel							*titleLabel;
 
 }
-@property (nonatomic, retain)	PhotoMapVO		*dataProvider;
-@property (nonatomic, retain)	UINavigationBar		*navigationBar;
-@property (nonatomic, retain)	UIScrollView		*scrollView;
-@property (nonatomic, retain)	LayoutBox		*viewContainer;
-@property (nonatomic, retain)	AsyncImageView		*imageView;
-@property (nonatomic, retain)	ExpandedUILabel		*imageLabel;
-@property (nonatomic, retain)	CopyLabel		*titleLabel;
+@property (nonatomic, strong)	PhotoMapVO		*dataProvider;
+@property (nonatomic, strong)	UINavigationBar		*navigationBar;
+@property (nonatomic, strong)	UIScrollView		*scrollView;
+@property (nonatomic, strong)	LayoutBox		*viewContainer;
+@property (nonatomic, strong)	AsyncImageView		*imageView;
+@property (nonatomic, strong)	ExpandedUILabel		*imageLabel;
+@property (nonatomic, strong)	CopyLabel		*titleLabel;
 
 - (void) loadContentForEntry:(PhotoMapVO *)photoEntry;
 

@@ -27,20 +27,20 @@
 #define kSERVICEFILE @"services.plist"
 
 
-@interface StartupManager : NSObject <DataSourceDelegate,StyleManagerDelegate,StringManagerDelegate,AppConfigManagerDelegate>{
+@interface StartupManager : NSObject <DataSourceManagerDelegate,StyleManagerDelegate,StringManagerDelegate,AppConfigManagerDelegate>{
 	NSUserDefaults				*userSettings;
 	BOOL						networkAvailable;
 	NSMutableDictionary			*userState;
 	// delegate
-	id<StartupManagerDelegate> delegate;
+	id<StartupManagerDelegate> __unsafe_unretained delegate;
 	
 	NSString					*error;
 }
-@property(nonatomic,retain)NSUserDefaults *userSettings;
+@property(nonatomic,strong)NSUserDefaults *userSettings;
 @property(nonatomic,assign)BOOL networkAvailable;
-@property(nonatomic,retain)NSMutableDictionary *userState;
-@property(nonatomic,assign)id<StartupManagerDelegate> delegate;
-@property(nonatomic,retain)NSString *error;
+@property(nonatomic,strong)NSMutableDictionary *userState;
+@property(nonatomic,unsafe_unretained)id<StartupManagerDelegate> delegate;
+@property(nonatomic,strong)NSString *error;
 
 
 -(void)doStartupSequence;

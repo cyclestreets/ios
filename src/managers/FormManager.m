@@ -51,21 +51,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 @synthesize formLoaded;
 
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [activeFormId release], activeFormId = nil;
-    [formDataProvider release], formDataProvider = nil;
-    [activeFormFieldArray release], activeFormFieldArray = nil;
-    [errorArray release], errorArray = nil;
-    [validateMethods release], validateMethods = nil;
-    [activeFormView release], activeFormView = nil;
-	
-    [super dealloc];
-}
 
 
 
@@ -264,7 +249,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FormManager);
 					[formvo setValue:[formitem objectForKey:@"key"] forKey:key];
 				}
 				[formviewdict setValue:formvo forKey:formkey];
-				[formvo release];
 			}
 		}
 		

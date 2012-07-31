@@ -21,7 +21,6 @@
 		NSArray *oneArray = [self valueForKey:key];
 		NSMutableArray *arrayCopy = [[NSMutableArray alloc] initWithArray:oneArray];
 		[ret setValue:arrayCopy forKey:key];
-		[arrayCopy release];
 	}
 	return ret;
 }
@@ -43,7 +42,6 @@
 		if (oneCopy == nil)
 			oneCopy = [oneValue copy];
 		[ret setValue:oneCopy forKey:key];
-		[oneCopy release];
 	}
 	return ret;
 }

@@ -18,33 +18,41 @@
 - (void)stopUpdatingLocation:(NSString *)state;
 -(void)UserLocationWasUpdated;
 
+-(BOOL)addSubscriber:(NSString*)subscriberId;
+-(BOOL)removeSubscriber:(NSString*)subscriberId;
+-(int)findSubscriber:(NSString*)subscriberId;
+-(void)removeAllSubscribers;
+
 
 @end
 
 @implementation UserLocationManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
-@synthesize doesDeviceAllowLocation;
+
 @synthesize didFindDeviceLocation;
 @synthesize locationState;
 @synthesize isLocating;
+@synthesize locationSubscribers;
 @synthesize locationManager;
 @synthesize locationMeasurements;
 @synthesize bestEffortAtLocation;
 
 
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [locationManager release], locationManager = nil;
-    [locationMeasurements release], locationMeasurements = nil;
-    [bestEffortAtLocation release], bestEffortAtLocation = nil;
-    
-    [super dealloc];
-}
 
++ (CLLocationCoordinate2D)defaultCoordinate {
+	CLLocationCoordinate2D coordinate;
+	coordinate.latitude = 52.00;
+	coordinate.longitude = 0.0;
+	return coordinate;
+}
++ (CLLocation*)defaultLocation {
+	
+	CLLocationCoordinate2D coordinate=[UserLocationManager defaultCoordinate];
+	CLLocation *location=[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+						  
+	return location;
+}
 
 
 -(id)init{
@@ -53,18 +61,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	{
         BetterLog(@"");
 		
-		doesDeviceAllowLocation=YES;
 		didFindDeviceLocation=NO;
-		locationState=-1;
         isLocating=NO;
+		
+		self.locationSubscribers=[NSMutableArray array];
+		
+		locationState=kConnectLocationStateSingle;
 		
         [self initialiseCorelocation];
         
-        if(doesDeviceAllowLocation==YES){
-            [self assessUserLocation];
-        }else {
-            [self UserLocationWasUpdated];
-        }
 		
 	}
 	return self;
@@ -92,6 +97,55 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+
+-(BOOL)systemLocationServicesEnabled{
+	
+	BOOL result=[CLLocationManager locationServicesEnabled];
+	
+	return result;
+	
+}
+
+-(BOOL)appLocationServicesEnabled{
+	
+	CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
+	
+	BOOL result=status==kCLAuthorizationStatusAuthorized;
+	
+	return result;
+	
+}
+
+-(BOOL)doesDeviceAllowLocation{
+	
+	return [self systemLocationServicesEnabled] && [self appLocationServicesEnabled];
+	
+}
+
+
+-(BOOL)checkLocationStatus:(BOOL)showAlert{
+	
+	
+	if([self doesDeviceAllowLocation]==NO){
+	
+		if(showAlert==YES){
+			
+			UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled" 
+																			message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features." 
+																		   delegate:nil 
+																  cancelButtonTitle:@"OK" 
+																  otherButtonTitles:nil];
+			[servicesDisabledAlert show];
+		}
+		
+	}
+	
+	
+	return [self doesDeviceAllowLocation];
+	
+}
+
+
 #pragma mark CoreLocation updating
 
 //
@@ -101,31 +155,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 -(void)initialiseCorelocation{
 	
-#if LocationServicesTesting
-	
-	self.doesDeviceAllowLocation=YES;
-	
-#else
-    
-	if([DeviceUtilities detectDevice]==MODEL_IPHONE_SIMULATOR){
-        self.doesDeviceAllowLocation=YES;
+	if ([self doesDeviceAllowLocation] == NO) {
+		
+		
+		
 	}else {
 		
-        self.doesDeviceAllowLocation=[CLLocationManager locationServicesEnabled];
-        
-        if (doesDeviceAllowLocation == NO) {
-            UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled" 
-																			message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features." 
-																		   delegate:nil 
-                                                                  cancelButtonTitle:@"OK" 
-                                                                  otherButtonTitles:nil];
-            [servicesDisabledAlert show];
-            
-        }
-    }
-	
-#endif
-    
+		if(locationManager==nil){
+			self.locationManager = [[CLLocationManager alloc] init];
+			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+			locationManager.distanceFilter =kCLDistanceFilterNone;
+		}
+		
+	}
+   
     
 	
 }
@@ -142,9 +185,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 -(void)resetLocationAndReAssess{
 	
 	self.bestEffortAtLocation=nil;
-	didFindDeviceLocation=NO;
 	
-	[self assessUserLocation];
+	[self startUpdatingLocationForSubscriber:nil];
 	
 }
 
@@ -152,40 +194,79 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 //
 /***********************************************
- * @description		init CL location tracking	
+ * @description			Location subscribers
  ***********************************************/
 //
--(void)assessUserLocation{
-    
-    if([DeviceUtilities detectDevice]==MODEL_IPHONE_SIMULATOR){
-        
-		locationState=kConnectLocationStateNone;
-		self.bestEffortAtLocation=[[CLLocation alloc] initWithLatitude:52.25096932352704 longitude:0.02471057283893221];
-		didFindDeviceLocation=YES;
-        
-	}else {
-        
-		locationState=kConnectLocationStateSingle;
-        
-		if(locationManager==nil){
-			self.locationManager = [[CLLocationManager alloc] init];
-			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-			locationManager.distanceFilter =kCLDistanceFilterNone;
-		}
+-(BOOL)addSubscriber:(NSString*)subscriberId{
+	
+	int index=[self findSubscriber:subscriberId];
+	
+	if(index==NSNotFound){
 		
-        
+		[locationSubscribers addObject:subscriberId];
+		return YES;
+		
 	}
+	return NO;
+	
+}
+
+-(BOOL)removeSubscriber:(NSString*)subscriberId{
+	
+	int index=[self findSubscriber:subscriberId];
+	
+	if(index!=NSNotFound){
+		
+		[locationSubscribers removeObjectAtIndex:index];
+		return YES;
+		
+	}
+	return NO;
+}
+
+-(void)removeAllSubscribers{
+	
+	[locationSubscribers removeAllObjects];
 	
 }
 
 
--(void)startUpdatingLocation{
+-(int)findSubscriber:(NSString*)subscriberId{
+	
+	int index=[locationSubscribers indexOfObject:subscriberId];
+	
+	return index;
+}
+
+
+
+// both start and stop need to maintain a list of subscribers
+// so only 1 can affect it, ie if we recieve a stop command it will only take affect if there is only 1 subscriber
+
+-(void)startUpdatingLocationForSubscriber:(NSString*)subscriberId{
+	
+	BetterLog(@"");
     
     if(isLocating==NO){
-        locationManager.delegate = self;
-        [locationManager startUpdatingLocation];
-        [self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+		
+		if([self doesDeviceAllowLocation]==YES){
+			
+			BOOL result=[self addSubscriber:subscriberId];
+			
+			if(result==YES){
+				locationManager.delegate = self;
+				[locationManager startUpdatingLocation];
+				[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+			}
+			
+		}else {
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONDISABLED object:nil userInfo:nil];
+			
+		}
     }else{
+		
+		[self addSubscriber:subscriberId];
         
     }
     
@@ -207,27 +288,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
     if (newLocation.horizontalAccuracy < 0) return;
     // test the measurement to see if it is more accurate than the previous measurement
     if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
-        // store the location as the "best effort"
         self.bestEffortAtLocation = newLocation;
-        // test the measurement to see if it meets the desired accuracy
-        //
-        // IMPORTANT!!! kCLLocationAccuracyBest should not be used for comparison with location coordinate or altitidue 
-        // accuracy because it is a negative value. Instead, compare against some predetermined "real" measure of 
-        // acceptable accuracy, or depend on the timeout to stop updating. This sample depends on the timeout.
-        //
-        
-        // TODO: send current location 
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONUPDATE object:bestEffortAtLocation userInfo:nil];
-        
-		
+       
 		BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
 		BetterLog(@"locationManager.desiredAccuracy=%f",locationManager.desiredAccuracy);
 		
+		[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONUPDATE object:bestEffortAtLocation userInfo:nil];
+		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-            [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
-            // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+			
+			BetterLog(@"Location found!");
+           
+			self.bestEffortAtLocation = newLocation;
+			didFindDeviceLocation=YES;
 			
         }
     }
@@ -237,22 +310,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			
 		case kConnectLocationStateSingle:
 			
-			if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
-				self.bestEffortAtLocation = newLocation;
-				
-				if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-					[self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
-					[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
+			if (didFindDeviceLocation==YES){
                     
-                    [self UserLocationWasUpdated];
-				}
+				[self UserLocationWasUpdated];
+				[self stopUpdatingLocatioForSubscriber:SYSTEM];
+				
 			}
 			break;
 		case kConnectLocationStateTracking:
 			
-			// for real time tracking via a map
+			// GPSLOCATIONUPDATE is now sent in main loop
 			
-            break;
+		break;
 			
 	}
     
@@ -267,6 +336,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
     
     isLocating=NO;
 	
+	[self removeAllSubscribers];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONFAILED object:[NSNumber numberWithBool:didFindDeviceLocation] userInfo:nil];
 	
 	
@@ -280,8 +351,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
  ***********************************************/
 //
 -(void)UserLocationWasUpdated{
-    
-    isLocating=NO;
+	
+	BetterLog(@"");
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
 	
@@ -290,30 +361,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 //
 /***********************************************
- * @description		Stop Location tacking, can be called via an valid response or on a timeout error	
+ * @description		Stop Location tracking, can be called via an valid response or on a timeout error	
  ***********************************************/
 //
-- (void)stopUpdatingLocation:(NSString *)state {
+- (void)stopUpdatingLocatioForSubscriber:(NSString *)subscriberId {
 	
 	BetterLog(@"");
 	
-	// remove the delayed timeout selector
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
 	
+	if(subscriberId==SYSTEM){
+		
+		[self removeAllSubscribers];
+		
+	}else{
+		
+		[self removeSubscriber:subscriberId];
+		
+	}
 	
-#if LocationFoundTesting
-	didFindDeviceLocation=NO;
+	if([locationSubscribers count]==0){
 	
-	[self UserLocationWasUpdated];
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
 	
-#else
+		isLocating=NO;
 	
-	didFindDeviceLocation=YES;
-#endif
-    isLocating=NO;
-	
-	locationState=kConnectLocationStateNone;
-    [locationManager stopUpdatingLocation];
+		[locationManager stopUpdatingLocation];
+		
+	}
 	
 }
 

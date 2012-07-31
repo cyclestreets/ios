@@ -1,6 +1,6 @@
 //
 //  RadioButtonGroup.m
-// CycleStreets
+//
 //
 //  Created by Neil Edwards on 24/11/2010.
 //  Copyright 2010 buffer. All rights reserved.
@@ -12,17 +12,15 @@
 @implementation RadioButtonGroup
 @dynamic selectedIndex;
 @synthesize selectedItem;
-@synthesize delegate;
+@dynamic	delegate;
 
 /***********************************************************/
 // dealloc
 /***********************************************************/
 - (void)dealloc
 {
-    [selectedItem release], selectedItem = nil;
     delegate = nil;
 	
-    [super dealloc];
 }
 
 
@@ -69,6 +67,11 @@
 		selectedItem.selected=YES;
 		selectedItem.userInteractionEnabled=NO;
 		
+		
+		if([self.delegate respondsToSelector:@selector(RadioButtonGroupValueDidChange:)]){
+			[self.delegate RadioButtonGroupValueDidChange:selectedIndex];
+		}
+		
 	}
 	
 }
@@ -80,6 +83,7 @@
 	UIButton *button=(UIButton*)sender;
 	
 	[self setSelectedIndex:[self indexOfItem:button]];
+	
 	
 	
 }

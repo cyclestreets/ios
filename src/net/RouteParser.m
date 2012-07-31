@@ -35,11 +35,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (NSMutableArray *)listPerElement:(NSArray *)elements {
 	//build an empty dictionary for each element of interest. Collect them in a list.
-	NSMutableArray *objects = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *objects = [[NSMutableArray alloc] init];
 	for (NSObject *element in elements) {
 		NSMutableArray *list = [[NSMutableArray alloc] init];
 		[objects addObject:list];
-		[list release];
 	}
 	return objects;
 }
@@ -67,19 +66,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (id) initWithData:(NSData *)data forElements:(NSArray *)elements {
-	return [self initWithData:data forElements:elements withCategories:[[[NSArray alloc] init] autorelease]];
+	return [self initWithData:data forElements:elements withCategories:[[NSArray alloc] init]];
 }
 
 // Parser convenience function.
 + (RouteParser *) parse:(NSData *)data forElements:(NSArray *)elements withCategories:(NSArray *)categories {
 	RouteParser *parser = [[RouteParser alloc] initWithData: data forElements:elements withCategories:categories];
-	[parser autorelease];
+	
 	[parser parse];
 	return parser;
 }
 
 + (RouteParser *) parse:(NSData *)data forElements:(NSArray *)elements {
-	return [self parse:data forElements:elements withCategories:[[[NSArray alloc] init] autorelease]];
+	return [self parse:data forElements:elements withCategories:[[NSArray alloc] init]];
 }
 
 - (void) parse {
@@ -99,7 +98,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		//this is an element gathered individually. Push a new dictionary for it.
 		NSMutableDictionary *elementDict = [[NSMutableDictionary alloc] init];
 		[list addObject:elementDict];
-		[elementDict release]; //since it is retained by the dictionary.
+		 //since it is retained by the dictionary.
 		[elementStack addObject:elementDict]; //it is now the element we are filling.
 		[elementDict addEntriesFromDictionary:attributeDict];
 		
@@ -136,33 +135,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-	[elementLists release];
 	elementLists = nil;
 	error = parseError;
-	[error retain];
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	//nothing to do.
 }
 
-#pragma mark
-
-- (void) dealloc {
-	[XMLParser release];
-	XMLParser = nil;
-	[elementLists release];
-	elementLists = nil;
-	[categorisedElementLists release];
-	categorisedElementLists = nil;
-	[elementStack release];
-	elementStack = nil;
-	[currentNames release];
-	currentNames = nil;
-	[error release];
-	error = nil;
-
-	[super dealloc];
-}
 
 @end

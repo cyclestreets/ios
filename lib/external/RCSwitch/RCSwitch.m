@@ -35,8 +35,8 @@
 	self.contentMode = UIViewContentModeRedraw;
 	[self setKnobWidth:44];
 	[self regenerateImages];
-	sliderOff = [[[UIImage imageNamed:@"btn_slider_off.png"] stretchableImageWithLeftCapWidth:12.0
-																				 topCapHeight:0.0] retain];
+	sliderOff = [[UIImage imageNamed:@"btn_slider_off.png"] stretchableImageWithLeftCapWidth:12.0
+																				 topCapHeight:0.0];
 	if([[UIScreen mainScreen] respondsToSelector:@selector(scale)])
 		scale = [[UIScreen mainScreen] scale];
 	else
@@ -61,14 +61,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[knobImage release];
-	[knobImagePressed release];
-	[sliderOn release];
-	[sliderOff release];
-	[super dealloc];
-}
 
 - (void)setKnobWidth:(float)aFloat
 {
@@ -76,7 +68,7 @@
 	endcapWidth = roundf(knobWidth - 8);
 	
 	{
-		UIImage *knobTmpImage = [[[UIImage imageNamed:@"btn_slider_thumb.png"] retain] autorelease];
+		UIImage *knobTmpImage = [UIImage imageNamed:@"btn_slider_thumb.png"];
 		UIImage *knobImageStretch = [knobTmpImage stretchableImageWithLeftCapWidth:12.0
 																	  topCapHeight:0.0];
 		CGRect knobRect = CGRectMake(0, 0, knobWidth, [knobImageStretch size].height);
@@ -87,13 +79,12 @@
 			UIGraphicsBeginImageContext(knobRect.size);
 
 		[knobImageStretch drawInRect:knobRect];
-		[knobImage release];
-		knobImage = [UIGraphicsGetImageFromCurrentImageContext() retain];
+		knobImage = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();	
 	}
 	
 	{
-		UIImage *knobTmpImage = [[[UIImage imageNamed:@"btn_slider_thumb_pressed.png"] retain] autorelease];
+		UIImage *knobTmpImage = [UIImage imageNamed:@"btn_slider_thumb_pressed.png"];
 		UIImage *knobImageStretch = [knobTmpImage stretchableImageWithLeftCapWidth:12.0
 																	  topCapHeight:0.0];
 		CGRect knobRect = CGRectMake(0, 0, knobWidth, [knobImageStretch size].height);
@@ -102,8 +93,7 @@
 		else
 			UIGraphicsBeginImageContext(knobRect.size);
 		[knobImageStretch drawInRect:knobRect];
-		[knobImagePressed release];
-		knobImagePressed = [UIGraphicsGetImageFromCurrentImageContext() retain];
+		knobImagePressed = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();	
 	}
 }
@@ -125,8 +115,7 @@
 	else
 		UIGraphicsBeginImageContext(sliderOnRect.size);
 	[sliderOnBase drawInRect:sliderOnRect];
-	[sliderOn release];
-	sliderOn = [UIGraphicsGetImageFromCurrentImageContext() retain];
+	sliderOn = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
 #if 0
@@ -157,8 +146,7 @@
 			UIGraphicsBeginImageContext(testSize);
 		}
 		[buttonEndTrackBase drawInRect:sliderOnRect];
-		[buttonEndTrack release];
-		buttonEndTrack = [UIGraphicsGetImageFromCurrentImageContext() retain];
+		buttonEndTrack = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();		
 	}
 	
@@ -172,8 +160,7 @@
 		else
 			UIGraphicsBeginImageContext(sliderOnRect.size);		
 		[buttonEndTrackBase drawInRect:sliderOnRect];
-		[buttonEndTrackPressed release];
-		buttonEndTrackPressed = [UIGraphicsGetImageFromCurrentImageContext() retain];
+		buttonEndTrackPressed = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();		
 	}
 }
@@ -202,7 +189,6 @@
 	if(endDate){
 		NSTimeInterval interval = [endDate timeIntervalSinceNow];
 		if(interval < 0.0){
-			[endDate release];
 			endDate = nil;
 		} else {
 			if(percent == 1.0)
@@ -312,7 +298,6 @@
 {
 	self.highlighted = YES;
 	oldPercent = percent;
-	[endDate release];
 	endDate = nil;
 	mustFlip = YES;
 	[self setNeedsDisplay];
@@ -338,7 +323,6 @@
 - (void)finishEvent
 {
 	self.highlighted = NO;
-	[endDate release];
 	endDate = nil;
 	float toPercent = roundf(1.0 - oldPercent);
 	if(!mustFlip){
@@ -413,8 +397,7 @@
 
 - (void)performSwitchToPercent:(float)toPercent
 {
-	[endDate release];
-	endDate = [[NSDate dateWithTimeIntervalSinceNow:fabsf(percent - toPercent) * ANIMATION_LENGTH] retain];
+	endDate = [NSDate dateWithTimeIntervalSinceNow:fabsf(percent - toPercent) * ANIMATION_LENGTH];
 	percent = toPercent;
 	[self setNeedsDisplay];
 	[self sendActionsForControlEvents:UIControlEventValueChanged];

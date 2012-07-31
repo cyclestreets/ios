@@ -1,6 +1,6 @@
 //
 //  AsyncImageView.m
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 10/08/2009.
 //  Copyright 2009 buffer. All rights reserved.
@@ -21,22 +21,15 @@
 @synthesize notify;
 @synthesize imageView;
 @synthesize cacheImage;
-@synthesize resizeToFit;
+@synthesize	tmpCacheOnly;
+@synthesize	useKitty;
 @synthesize delegate;
-
 
 - (void)dealloc {
 	
+delegate=nil;
 	[self removeActivity];
-	[connection cancel];
-	[connection release], connection=nil;
-	[data release],data=nil; 
-	[filename release],filename=nil;
-	[type release],type=nil;
-	imageView=nil;
-	delegate=nil;
 	
-    [super dealloc];
 }
 
 - (id)initWithFrame:(CGRect)frame 
@@ -44,6 +37,7 @@
     if (self = [super initWithFrame:frame]) 
     {
         notify=NO;  
+		useKitty=NO;
 		cacheImage=YES;
 		type=@"image";
     }
@@ -59,7 +53,12 @@
 	if(url!=nil){
 		[self loadImageFromURL:url];
 	}else {
-		[self cancel];
+		if(useKitty==NO){
+			[self cancel];
+		}else{
+			[self loadPlaceHolderImage];
+		}
+		
 	}
 
 	
@@ -74,7 +73,6 @@
 	imageView.image=nil;
 	
 	if (data!=nil) { 
-		[data release]; 
 		data=nil;
 	}
 	
@@ -116,7 +114,6 @@
 	activity.tag=kAsyncActivityTAG;
 	[activity startAnimating];
 	[self addSubview:activity];
-	[activity release];
 }
 
 -(void)removeActivity{
@@ -168,12 +165,12 @@
 {
 	
 	[connection cancel];
-	[connection release]; 
 	connection=nil;
 	[self removeActivity];
 	
-	// should we add error icon
-	
+	if(useKitty==YES){
+		[self loadPlaceHolderImage];
+	}
 }
 
 
@@ -181,21 +178,25 @@
 	
 	//BetterLog(@" cacheImage=%i for filename=%@",cacheImage,filename);
 	
-	[connection release];
 	connection=nil;
 	
 	UIImage *image=[UIImage imageWithData:data];
 	
 	if(cacheImage==YES){
 		//NSLog(@"[DEBUG] cacheing loaded image for %@",filename);
-		[[ImageCache sharedInstance] saveImageToDisk:image withName:filename ofType:type];
+		if(tmpCacheOnly==YES){
+			[[ImageCache sharedInstance] saveTmpImageToDisk:image withName:filename ofType:type];
+		}else {
+			[[ImageCache sharedInstance] saveImageToDisk:image withName:filename ofType:type];
+		}
+		
+		
 	}
 	
 	if(notify==YES){
 		
 		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:image,@"image",nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"AsyncImageLoaded" object: nil userInfo:dict ];
-		[dict release];
 		
 	}else{
 		[self addImageView:image];
@@ -203,10 +204,19 @@
 	
 	[self removeActivity];
 	
-	[data release]; 
 	data=nil;
 	
 	
+}
+
+
+-(void)loadPlaceHolderImage{
+	
+	self.filename=[StringUtilities stringWithUUID];
+	self.type=@"placeholder";
+	
+	NSString *errorURL=[NSString stringWithFormat:@"http://placekitten.com/%i/%i",(int)self.frame.size.width,(int)self.frame.size.height];
+	[self loadImageFromString:errorURL];
 }
 
 
@@ -218,19 +228,10 @@
 		imageView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight );
 		imageView.tag=kImageViewTAG;
 		[self addSubview:imageView];
-		[imageView release];
 	}
 	
 	imageView.image=image;
-	if(resizeToFit==YES){
-		CGRect iframe=imageView.frame;
-		iframe.size.height=image.size.height;
-		imageView.frame=iframe;
-	}else {
-		imageView.frame = self.bounds;
-	}
-
-	
+	imageView.frame = self.bounds;
 	[imageView setNeedsLayout];
 	[self setNeedsLayout];
 	

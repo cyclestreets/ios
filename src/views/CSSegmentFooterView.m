@@ -29,28 +29,6 @@ static NSDictionary *segmentDirectionsIcons;
 @synthesize iconView;
 @synthesize roadTypeiconView;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [contentContainer release], contentContainer = nil;
-    [roadNameLabel release], roadNameLabel = nil;
-    [roadTypeLabel release], roadTypeLabel = nil;
-    [capitalizedTurnLabel release], capitalizedTurnLabel = nil;
-    [readoutContainer release], readoutContainer = nil;
-    [timeLabel release], timeLabel = nil;
-    [distLabel release], distLabel = nil;
-    [totalLabel release], totalLabel = nil;
-    [segmentIndexLabel release], segmentIndexLabel = nil;
-    [iconView release], iconView = nil;
-    [roadTypeiconView release], roadTypeiconView = nil;
-	
-    [super dealloc];
-}
-
-
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -91,7 +69,6 @@ static NSDictionary *segmentDirectionsIcons;
 	roadTypeiconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 37, 32, 32)];
 	[iconcontainer addSubview:roadTypeiconView];
 	[self addSubview:iconcontainer];
-	[iconcontainer release];
 	
 	// vertical lb for main text
 	contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 200, 10)];
@@ -210,7 +187,7 @@ static NSDictionary *segmentDirectionsIcons;
 	
 	if (segmentDirectionsIcons==nil) {
 		
-		segmentDirectionsIcons = [[NSDictionary dictionaryWithObjectsAndKeys:
+		segmentDirectionsIcons = [NSDictionary dictionaryWithObjectsAndKeys:
 					  @"UIIcon_straight_on.png", @"straight on", 
 					  @"UIIcon_bear_left.png", @"bear left", 
 					  @"UIIcon_bear_right.png", @"bear right", 
@@ -218,7 +195,7 @@ static NSDictionary *segmentDirectionsIcons;
 					@"UIIcon_turn_left.png", @"sharp left", 		   
 					  @"UIIcon_turn_right.png", @"turn right",
 						@"UIIcon_turn_right.png", @"sharp right",
-					  nil] retain];
+					  nil];
 	}
 	return [segmentDirectionsIcons valueForKey:segmentDirectionType];
 }

@@ -28,19 +28,19 @@
 	
 	
 }
-@property (nonatomic, retain)	NSString		*roadName;
-@property (nonatomic, retain)	NSString		*provisionName;
-@property (nonatomic, retain)	NSString		*turnType;
+@property (nonatomic, strong)	NSString		*roadName;
+@property (nonatomic, strong)	NSString		*provisionName;
+@property (nonatomic, strong)	NSString		*turnType;
 @property (nonatomic)	NSInteger		segmentTime;
 @property (nonatomic)	NSInteger		segmentDistance;
 @property (nonatomic)	NSInteger		startBearing;
 @property (nonatomic)	NSInteger		segmentBusynance;
 @property (nonatomic)	NSInteger		startTime;
 @property (nonatomic)	NSInteger		startDistance;
-@property (nonatomic, retain)	NSArray		*pointsArray;
+@property (nonatomic, strong)	NSArray		*pointsArray;
 
 
-@property (nonatomic, readonly)	NSString	*timeString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
 @property (nonatomic, readonly)	CLLocationCoordinate2D	segmentStart;
 @property (nonatomic, readonly)	CLLocationCoordinate2D	segmentEnd;
 

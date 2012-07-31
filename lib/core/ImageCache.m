@@ -22,23 +22,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageCache);
 @synthesize imageCacheDict;
 @synthesize maxItems;
 @synthesize cachedItems;
-
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [imageCacheDict release], imageCacheDict = nil;
-    [cachedItems release], cachedItems = nil;
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
-}
-
-
-
-
-
+@synthesize cachePath;
 
 
 
@@ -51,11 +35,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageCache);
 		
         NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
 		self.imageCacheDict=dict;
-        [dict release];
         
         NSMutableArray *arr=[[NSMutableArray alloc]init];
 		self.cachedItems=arr;
-        [arr release];
 		
 		[self createCacheDirectory];
 		
@@ -188,13 +170,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageCache);
 
 
 -(NSString*)userImagePath{
-	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	NSString* docsdir=[paths objectAtIndex:0];
-	return [docsdir stringByAppendingPathComponent:kIMAGECACHEIRECTORY];
+	
+	if(cachePath==nil){
+		NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+		NSString* docsdir=[paths objectAtIndex:0];
+		self.cachePath=[docsdir stringByAppendingPathComponent:kIMAGECACHEIRECTORY];
+	}
+	
+	return cachePath;
+	
 }
 
 -(NSString*)serverImagePath{
-	return [NSString stringWithString:@""];
+	return @"";
 }
 
 -(BOOL)imageIsInCache:(NSString*)filename ofType:(NSString*)type{
@@ -212,9 +200,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageCache);
 -(BOOL)createCacheDirectory{
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
-	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	NSString* docsdir=[paths objectAtIndex:0];
-	NSString *ipath=[docsdir stringByAppendingPathComponent:kIMAGECACHEIRECTORY];
+	NSString *ipath=[self userImagePath];
 	
 	BOOL isDir=YES;
 	

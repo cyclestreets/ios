@@ -42,31 +42,31 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 	
 	if( nil != img)
 	{
-		NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-		int w = img.size.width;
-		int h = img.size.height;
+		@autoreleasepool {
+			int w = img.size.width;
+			int h = img.size.height;
     
-		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		CGContextRef context = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpace, kCGImageAlphaPremultipliedFirst);
+			CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+			CGContextRef context = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpace, kCGImageAlphaPremultipliedFirst);
     
-		CGContextBeginPath(context);
-		CGRect rect = CGRectMake(0, 0, img.size.width, img.size.height);
-		addRoundedRectToPath(context, rect, cornerWidth, cornerHeight);
-		CGContextClosePath(context);
-		CGContextClip(context);
+			CGContextBeginPath(context);
+			CGRect rect = CGRectMake(0, 0, img.size.width, img.size.height);
+			addRoundedRectToPath(context, rect, cornerWidth, cornerHeight);
+			CGContextClosePath(context);
+			CGContextClip(context);
     
-		CGContextDrawImage(context, CGRectMake(0, 0, w, h), img.CGImage);
+			CGContextDrawImage(context, CGRectMake(0, 0, w, h), img.CGImage);
     
-		CGImageRef imageMasked = CGBitmapContextCreateImage(context);
-		CGContextRelease(context);
-		CGColorSpaceRelease(colorSpace);
-		//[img release];
-		
+			CGImageRef imageMasked = CGBitmapContextCreateImage(context);
+			CGContextRelease(context);
+			CGColorSpaceRelease(colorSpace);
+			//[img release];
+			
 	
-		newImage = [[UIImage imageWithCGImage:imageMasked] retain];
-		CGImageRelease(imageMasked);
+			newImage = [UIImage imageWithCGImage:imageMasked];
+			CGImageRelease(imageMasked);
 		
-		[pool release];
+		}
 	}
 	
     return newImage;

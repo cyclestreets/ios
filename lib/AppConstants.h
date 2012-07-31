@@ -32,7 +32,6 @@ extern NSString *const SEARCHDATAID;
 extern NSString *const CSROUTESELECTED;
 extern NSString *const CSLASTLOCATIONLOAD;
 
-
 extern NSString *const LOGINRESPONSE;
 extern NSString *const REGISTERRESPONSE;
 extern NSString *const PASSWORDRETRIEVALRESPONSE;

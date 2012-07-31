@@ -3,13 +3,14 @@
 //
 //
 //  Created by Neil Edwards on 09/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import "StringUtilities.h"
 #import "RegexKitLite.h"
 #import "NSDate+Helper.h"
 #import "GlobalUtilities.h"
+#import "NSString-Utilities.h"
 #import "NSDataAdditions.h"
 
 @implementation StringUtilities
@@ -19,6 +20,10 @@
 +(NSString*)ordinalFromIndex:(int)position{
 	
 	NSString *ordinal;
+	
+	if(position==INT16_MAX){
+		return @"";
+	}
 	
 	switch (position % 100)
 	{
@@ -54,14 +59,21 @@
 
 +(NSString*)returnPlaceNumberString:(int)position{
 	
-	return [NSString stringWithFormat:@"%i%@",position,[StringUtilities ordinalFromIndex:position]];
-	
+	if(position<0){
+		return @"N/A";
+	}else{
+		return [NSString stringWithFormat:@"%i%@",position,[StringUtilities ordinalFromIndex:position]];
+	}
 }
 
 
 +(NSString*)fileNameFromURL:(NSString*)url :(NSString*)delimiter{
 	NSArray *path=[url componentsSeparatedByString:delimiter];
 	return [path objectAtIndex:[path count]-1];
+}
++(NSString*)pathStringFromURL:(NSString*)url :(NSString*)delimiter{
+	NSArray *path=[url componentsSeparatedByString:delimiter];
+	return [path objectAtIndex:[path count]-2];
 }
 
 +(NSString*)pathFromURL:(NSString*)url :(NSString*)delimiter{
@@ -99,7 +111,6 @@
 	[currencyformatter setCurrencySymbol:@"£"];
 	[currencyformatter setMaximumFractionDigits:2];
 	str=[currencyformatter stringFromNumber:[NSNumber numberWithFloat:[str floatValue]] ];
-	[currencyformatter release];
 	return str;
 	
 }
@@ -114,7 +125,6 @@
 	[currencyformatter setCurrencySymbol:@"£"];
 	[currencyformatter setMaximumFractionDigits:0];
 	result=[currencyformatter stringFromNumber:[NSNumber numberWithFloat:[result floatValue]] ];
-	[currencyformatter release];
 	
 	return result;
 }
@@ -152,10 +162,13 @@
 
 + (NSString*) stringWithUUID {
 	CFUUIDRef	uuidObj = CFUUIDCreate(nil);//create a new UUID
-	//get the string representation of the UUID
-	NSString	*uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
-	CFRelease(uuidObj);
-	return [uuidString autorelease];
+	NSString	*uuidString=nil;
+	
+	if(uuidObj){
+		uuidString = (__bridge_transfer NSString*)CFUUIDCreateString(nil, uuidObj);
+		CFRelease(uuidObj);
+	}
+	return uuidString;
 }
 
 
@@ -189,6 +202,34 @@
 }
 
 
+//
+/***********************************************
+ * @description			Removes occurances of <tag></tag>, this isnt 100% ok
+ ***********************************************/
+//
++(NSString*)removeHTMLTag:(NSString*)tagname fromHTMLString:(NSString*)html{
+	
+	NSString *regexString=[NSString stringWithFormat:@"</?(?i:%@)(.|\n)*?>",tagname];
+	
+	// if we want to support an arr, the reg ex is this
+	//NSString *regexString=@"</?(?i:object|param)(.|\n)*?>";
+	
+	NSArray *testarr=[html componentsMatchedByRegex:regexString];
+	
+	if([testarr count]>0){
+		
+		NSString *newhtml = [html stringByReplacingOccurrencesOfRegex:regexString withString:EMPTYSTRING];
+		
+		if(newhtml!=nil){
+			return newhtml;
+		}else{
+			return html;
+		}
+	}
+	return html;
+}
+
+
 // From: http://www.cocoadev.com/index.pl?BaseSixtyFour
 + (NSString*)base64forData:(NSData*)theData {
     const uint8_t* input = (const uint8_t*)[theData bytes];
@@ -218,18 +259,103 @@
         output[theIndex + 3] = (i + 2) < length ? table[(value >> 0)  & 0x3F] : '=';
     }
     
-    return [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 }
+
++(NSString *)Base64Encode:(NSData *)data{
+	//Point to start of the data and set buffer sizes
+	int inLength = [data length];
+	int outLength = ((((inLength * 4)/3)/4)*4) + (((inLength * 4)/3)%4 ? 4 : 0);
+	const char *inputBuffer = [data bytes];
+	char *outputBuffer = malloc(outLength);
+	outputBuffer[outLength] = 0;
+	
+	//64 digit code
+	static char Encode[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+	
+	//start the count
+	int cycle = 0;
+	int inpos = 0;
+	int outpos = 0;
+	char temp;
+	
+	//Pad the last to bytes, the outbuffer must always be a multiple of 4
+	outputBuffer[outLength-1] = '=';
+	outputBuffer[outLength-2] = '=';
+	
+	/* http://en.wikipedia.org/wiki/Base64
+	 Text content   M           a           n
+	 ASCII          77          97          110
+	 8 Bit pattern  01001101    01100001    01101110
+	 
+	 6 Bit pattern  010011  010110  000101  101110
+	 Index          19      22      5       46
+	 Base64-encoded T       W       F       u
+	 */
+	
+	
+	while (inpos < inLength){
+		switch (cycle) {
+			case 0:
+				outputBuffer[outpos++] = Encode[(inputBuffer[inpos]&0xFC)>>2];
+				cycle = 1;
+				break;
+			case 1:
+				temp = (inputBuffer[inpos++]&0x03)<<4;
+				outputBuffer[outpos] = Encode[temp];
+				cycle = 2;
+				break;
+			case 2:
+				outputBuffer[outpos++] = Encode[temp|(inputBuffer[inpos]&0xF0)>> 4];
+				temp = (inputBuffer[inpos++]&0x0F)<<2;
+				outputBuffer[outpos] = Encode[temp];
+				cycle = 3;                  
+				break;
+			case 3:
+				outputBuffer[outpos++] = Encode[temp|(inputBuffer[inpos]&0xC0)>>6];
+				cycle = 4;
+				break;
+			case 4:
+				outputBuffer[outpos++] = Encode[inputBuffer[inpos++]&0x3f];
+				cycle = 0;
+				break;                          
+			default:
+				cycle = 0;
+				break;
+		}
+	}
+	NSString *pictemp = [NSString stringWithUTF8String:outputBuffer];
+	free(outputBuffer); 
+	return pictemp;
+	
+}
+
+/*
++(NSString *) HTTPbase64Encode: (NSString *) stringToBase64Encode{
+
+CFHTTPMessageRef dummyRequest = CFHTTPMessageCreateEmpty(kCFAllocatorDefault,YES);
+
+CFHTTPMessageAddAuthentication(dummyRequest,nil,(CFStringRef)@"12",(CFStringRef)stringToBase64Encode,kCFHTTPAuthenticationSchemeBasic,FALSE);
+
+NSString *base64String =[(NSString *)CFHTTPMessageCopyHeaderFieldValue(dummyRequest,CFSTR("Authorization")) substringFromIndex:4];
+	
+CFRelease(dummyRequest);
+
+return base64String;
+
+}
+*/
+
 
 +(NSString *) urlencode: (NSString *) unencodedString
 {
-    NSString * encodedString = (NSString *)CFURLCreateStringByAddingPercentEscapes(
+    NSString * encodedString = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
 																				   NULL,
-																				   (CFStringRef)unencodedString,
+																				   (__bridge CFStringRef)unencodedString,
 																				   NULL,
 																				   (CFStringRef)@"!*'();:@&=+$,/?%#[]",
 																				   kCFStringEncodingUTF8 );
-	return [encodedString autorelease];
+	return encodedString;
 }
 
 + (NSString *)stringByDecodingXMLEntities:(NSString*)str {
@@ -270,6 +396,8 @@
             [result appendString:@"<"];
         else if ([scanner scanString:@"&gt;" intoString:NULL])
             [result appendString:@">"];
+		else if ([scanner scanString:@"&pound;" intoString:NULL])
+            [result appendString:@"£"];
         else if ([scanner scanString:@"&#" intoString:NULL]) {
             BOOL gotNumber;
             unsigned charCode;
@@ -284,7 +412,7 @@
             }
 			
             if (gotNumber) {
-                [result appendFormat:@"%C", charCode];
+                [result appendFormat:@"%u", charCode];
 				
 				[scanner scanString:@";" intoString:NULL];
             }
@@ -405,8 +533,225 @@ finish:
    
 }
 
-+(UIImage*)imageFromString:(NSString*)str{
++(NSString*)extractDayStringFromDate:(NSString*)dateString{
+	
+	NSDate *date=[NSDate dateFromString:dateString withFormat:[NSDate dbFormatString]];
+	
+	NSString *dayString=nil;
+	
+	if(date!=nil){
+		NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+		[dateFormat setDateFormat:[NSDate dayFormatString]];
+		dayString = [dateFormat stringFromDate:date];
+	}
+	
+	return dayString;
+}
 
+
++(NSString*)urlFromGETURL:(NSString*)url{
+	
+	NSArray *urlarr=[url componentsSeparatedByString:@"?"];
+	NSString *actualurl=nil;
+	if([urlarr count]>0){
+		actualurl=[urlarr objectAtIndex:0];
+	}
+	return actualurl;
+	
+}
+
+
+//
+/***********************************************
+ * 
+ ***********************************************/
+//
+
+
+
+// return formatted string, this is convoluted
++(NSString*)createCurrencyStringForValue:(NSString*)strvalue useSystemCurrency:(BOOL)useSystem usingSymbol:(NSString*)symbol useCurrencyScale:(int)currencyScale useGrouping:(BOOL)useGrouping{
+	
+	// get current user currency properties
+	NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
+	[currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+	NSString *currencySymbol=nil;
+	if(useSystem==YES){
+		currencySymbol=[currencyFormatter currencySymbol];
+	}else {
+		if(symbol!=nil){
+			currencySymbol=symbol;
+		}
+	}
+	
+	if(currencyScale==-1){
+		currencyScale = [currencyFormatter maximumFractionDigits];
+	}
+	
+	// set value & scaling as decimals
+	
+	NSNumber *value=[[NSNumber alloc] initWithInt:[strvalue intValue]];
+	NSDecimalNumber *scale=[[NSDecimalNumber alloc]initWithInt:100];
+	NSString *svalue;
+	// set up formatter
+	NSNumberFormatter *nformatter = [[NSNumberFormatter alloc] init];
+	[nformatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[nformatter setUsesGroupingSeparator:useGrouping];
+	[nformatter setMinimumFractionDigits:currencyScale];
+	[nformatter setMaximumFractionDigits:currencyScale];
+	
+	// create currency specific scaling
+	NSDecimalNumber *newprice=[[NSDecimalNumber alloc]initWithInt:[value intValue]];
+	if(currencyScale==2){
+		NSDecimalNumber *dividedNumber=[newprice decimalNumberByDividingBy:scale];
+		svalue=[nformatter stringFromNumber:dividedNumber];
+	}else{
+		svalue=[nformatter stringFromNumber:newprice];
+	}
+	
+	// if value is 0 override calculated value
+	if(newprice==0){
+		if(currencyScale==2){
+			svalue=@"0.00";
+		}else{
+			svalue=@"0";
+		}
+	}
+	
+	
+	if (symbol==nil) {
+		return [NSString stringWithFormat:@"%@",svalue];
+	}else {
+		return [NSString stringWithFormat:@"%@%@",currencySymbol,svalue];
+	}
+	
+	
+}
+
+
++(NSString*)scaledCurrencyValue:(double)value{
+	
+	NSNumberFormatter *formatter=[[NSNumberFormatter alloc]init];
+	[formatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+	int cscale=[formatter maximumFractionDigits];
+	int scaledvalue=value;
+	
+	if(cscale>0)
+		scaledvalue=value*pow(10.0, cscale);
+	
+	return [NSString stringWithFormat:@"%i",scaledvalue];
+	
+}
+
+
+// very basic ID to symbol conversion, not very robust!
++(NSString*)convertCurrencyIdentifierToSymbol:(NSString*)identifier{
+	
+	NSDictionary *idDict=[NSDictionary dictionaryWithObjectsAndKeys:@"£",@"GBP",@"$",@"USD",@"€",@"EUR",@"¥",@"YEN",@"¥",@"JPY",@"kr",@"SEK",@"kr",@"DKK",nil];
+	if ([idDict objectForKey:identifier] != nil){
+		return [idDict objectForKey:identifier];
+	} else {
+		return identifier;
+	}
+	
+	
+}
+
+#define CREDITCARDNUMBERLENGTH 16
+#define CREDITCARDRANGELENGTH 4
++(NSString*)formattedCreditCardNumber:(NSString*)cardnumber{
+	
+	
+	if([cardnumber length]==CREDITCARDNUMBERLENGTH){
+		NSMutableArray *chunkarr=[[NSMutableArray alloc]init];
+		for (int i=0; i<4; i++) {
+			[chunkarr addObject:[cardnumber substringWithRange:NSMakeRange(i*CREDITCARDRANGELENGTH,CREDITCARDRANGELENGTH)]];
+		}
+		return [chunkarr componentsJoinedByString:@"-"];
+	}
+	
+	return @"Invalid Card Number format";
+	
+}
+
+
+//
+/***********************************************
+ * @description			converts a day int to the equivalent human readable form
+ ***********************************************/
+//
++(NSString*)convertDayDurationToDateString:(int)duration{
+	
+	switch (duration) {
+			
+		case 1:
+			return @"1 day";
+		break;
+		
+		case 7:
+			return @"1 week";
+		break;
+			
+		case 28:
+		case 29:
+		case 30:
+		case 31:
+			return @"1 month";
+		break;
+			
+		case 365:
+		case 366:
+			return @"1 year";
+		default:
+			return @"no known duration";
+		break;
+	}
+	
+}
+
+//
+/***********************************************
+ * @description			converts x1 image filenames to their x2 equivalent
+ ***********************************************/
+//
++(NSString*)convertImageFilenameToRetina:(NSString*)filename{
+	
+	if([filename containsString:@"@2x"]==NO){
+		
+		NSString *convertedstr=[filename stringByReplacingOccurrencesOfString:@".png" withString:@"@2x.png"];
+		
+		return convertedstr;
+		
+	}else{
+		return filename;
+	}
+	
+}
+
+
+//
+/***********************************************
+ * @description			creates a presistent id for an app
+ ***********************************************/
+//
++(NSString*)createAppUUID{
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *uuid=[defaults objectForKey:UUID_USER_DEFAULTS_KEY];
+	
+    if (uuid == nil) {
+		uuid=[StringUtilities stringWithUUID];
+        [defaults setObject:uuid forKey:UUID_USER_DEFAULTS_KEY];
+        [defaults synchronize];
+		
+    }
+	
+	return uuid;
+	
+}
+
++(UIImage*)imageFromString:(NSString*)str{
+	
 	UIImage* image = [UIImage imageWithData:[NSData  dataWithBase64EncodedString:str]];
 	return image;
 }

@@ -54,11 +54,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 -(void)setAssetsGroup:(ALAssetsGroup *)newAssetsGroup {
-	[newAssetsGroup retain];
-	[assetsGroup release];
 	assetsGroup = newAssetsGroup;
 	self.title = [self.assetsGroup valueForProperty:ALAssetsGroupPropertyName];
-	self.assets = [[[NSMutableArray alloc] init] autorelease];
+	self.assets = [[NSMutableArray alloc] init];
 	
 	[newAssetsGroup enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
 		if (result != nil) {
@@ -112,11 +110,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	((UITableView *)self.view).rowHeight = 80;
 	
-	UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
 																	  style:UIBarButtonItemStyleBordered
 																	 target:self
-																	 action:@selector(didCancelSelection)]
-									 autorelease];
+																	 action:@selector(didCancelSelection)];
 	self.toolbarItems = [NSArray arrayWithObject:cancelButton];
 	[self.navigationController setToolbarHidden:NO];	
 }
@@ -175,14 +172,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
 	ALAsset *asset = [self.assets objectAtIndex:indexPath.row];
 	cell.imageView.image = [UIImage imageWithCGImage:[asset thumbnail]];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	NSDateFormatter *fmt = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
 	[fmt setDateStyle:NSDateFormatterMediumStyle];
 	cell.textLabel.text = [fmt stringFromDate:[asset date]];
 	
@@ -240,7 +237,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
 	if (self.assetImage == nil) {
-		self.assetImage = [[[AssetImage alloc] initWithNibName:@"AssetImage" bundle:nil] autorelease];
+		self.assetImage = [[AssetImage alloc] initWithNibName:@"AssetImage" bundle:nil];
 	}
 	[self.navigationController pushViewController:self.assetImage animated:YES];
 	self.assetImage.asset = [assets objectAtIndex:indexPath.row];
@@ -259,7 +256,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)nullify {
 	self.assets = nil;
-	[assetsGroup release];
 	assetsGroup = nil;
 	self.assetImage = nil;	
 }
@@ -275,7 +271,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)dealloc {
 	[self nullify];
-    [super dealloc];
 }
 
 

@@ -1,17 +1,17 @@
 //
 //  NetResponse.h
-//  CycleStreets
+//  Buffer
 //
 //  Created by Neil Edwards on 14/01/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "AppConstants.h"
 
 @interface NetResponse : NSObject {
 	NSString				*dataid;
-	NSString				*requestid;
+	NSString				*requestid;  // unique request id
+	NSString				*requestType;  // sub request id
 	id						dataProvider; // could be ma or vo
 	BOOL					updated;
 	NSMutableData			*responseData;
@@ -20,15 +20,16 @@
 	BOOL					status;
 	DataParserType			dataType;
 }
-@property (nonatomic, retain)		NSString		* dataid;
-@property (nonatomic, retain)		NSString		* requestid;
-@property (nonatomic, retain)		id		 dataProvider;
-@property (nonatomic)		BOOL		 updated;
-@property (nonatomic, retain)		NSMutableData		* responseData;
-@property (nonatomic, retain)		NSString		* revisionId;
-@property (nonatomic, retain)		NSString		* error;
-@property (nonatomic)		BOOL		 status;
-@property (nonatomic)		DataParserType		 dataType;
+@property (nonatomic, strong)	NSString		*dataid;
+@property (nonatomic, strong)	NSString		*requestid;
+@property (nonatomic, strong)	NSString		*requestType;
+@property (nonatomic, strong)	id		dataProvider;
+@property (nonatomic)	BOOL		updated;
+@property (nonatomic, strong)	NSMutableData		*responseData;
+@property (nonatomic, strong)	NSString		*revisionId;
+@property (nonatomic, strong)	NSString		*error;
+@property (nonatomic)	BOOL		status;
+@property (nonatomic)	DataParserType		dataType;
 
 
 @end

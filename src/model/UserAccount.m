@@ -22,9 +22,12 @@
 #import "CycleStreets.h"
 #import "Files.h"
 #import "LoginVO.h"
+#import "ValidationVO.h"
 
 
 @interface UserAccount(Private)
+
+
 
 -(void)registerUserResponse:(ValidationVO*)validation;
 -(void)retrievePasswordForUserResponse:(ValidationVO*)validation;
@@ -50,22 +53,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 @synthesize deviceID;
 @synthesize accountMode;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [user release], user = nil;
-    [userPassword release], userPassword = nil;
-    [userName release], userName = nil;
-    [userEmail release], userEmail = nil;
-    [userVisibleName release], userVisibleName = nil;
-    [sessionToken release], sessionToken = nil;
-    [deviceID release], deviceID = nil;
-	
-    [super dealloc];
-}
-
 
 
 
@@ -76,7 +63,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		isRegistered=YES;
 		userPassword=@"";
 		userName=@"";
-		deviceID=[[[UIDevice currentDevice] uniqueIdentifier] retain];
+		deviceID=[[UIDevice currentDevice] uniqueIdentifier];
 		accountMode=kUserAccountNotLoggedIn;
 		
 		[self loadUser];
@@ -158,10 +145,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)registerUserWithUserName:(NSString*)name andPassword:(NSString*)password visibleName:(NSString*)visiblename email:(NSString*)email{
 	
-	userName=[name retain];
-	userPassword=[password retain];
-	userVisibleName=[visiblename retain];
-	userEmail=[email retain];
+	self.userName=[name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+	self.userPassword=password;
+	self.userVisibleName=visiblename;
+	self.userEmail=email;
+	
 	
 	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
 									 userPassword,@"password", 
@@ -180,8 +168,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	[dict release];
-	[request release];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Registering New User" andMessage:nil];
 	
@@ -203,7 +189,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
-			[dict release];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Account Created" andMessage:nil];
 			
@@ -216,7 +201,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,validation.returnMessage,MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
-			[dict release];
 			
 
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Creation Error" andMessage:validation.returnMessage];
@@ -253,7 +237,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password{
 	
-	self.userName=name;
+	self.userName=[name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	self.userPassword=password;
 	
 	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
@@ -269,8 +253,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	[dict release];
-	[request release];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Signing in" andMessage:nil];
 	
@@ -291,7 +273,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
-			[dict release];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Logged In" andMessage:nil];
 			
@@ -305,7 +286,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_login",MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
-			[dict release];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Login Failed" andMessage:nil];
 			
@@ -347,8 +327,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	[dict release];
-	[request release];
 	
 	
 	
@@ -363,7 +341,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		{
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:PASSWORDRETRIEVALRESPONSE object:nil userInfo:dict];
-			[dict release];
 			
 			
 			
@@ -373,7 +350,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		{
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_password",MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:PASSWORDRETRIEVALRESPONSE object:nil userInfo:dict];
-			[dict release];
 		}
 			break;	
 			
@@ -432,10 +408,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		
 		NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:[self filepath]];
 		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-		self.user = [[unarchiver decodeObjectForKey:kUSERSTATEARCHIVEKEY] retain];
+		self.user = [unarchiver decodeObjectForKey:kUSERSTATEARCHIVEKEY];
 		[unarchiver finishDecoding];
-		[unarchiver release];
-		[data release];
 		
 		
 		if(user!=nil){
@@ -494,8 +468,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[archiver finishEncoding];
 	[data writeToFile:[self filepath] atomically:YES];
 	
-	[data release];
-	[archiver release];
 	
 	if([DeviceUtilities detectDevice]!=MODEL_IPHONE_SIMULATOR){
 	

@@ -16,17 +16,6 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 @synthesize dataProvider;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    
-    [dataProvider release], dataProvider = nil;
-	
-    [super dealloc];
-}
-
 
 //=========================================================== 
 // - (id)init
@@ -82,7 +71,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setSettings:dict];	
-	[dict release];
 	
 }
 

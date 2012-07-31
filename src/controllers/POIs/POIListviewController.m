@@ -20,18 +20,6 @@ static NSString *const DATAID = @"PoiListing";
 @synthesize dataProvider;
 @synthesize categoryViewController;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [tableview release], tableview = nil;
-    [dataProvider release], dataProvider = nil;
-    [categoryViewController release], categoryViewController = nil;
-	
-    [super dealloc];
-}
-
 
 
 //
@@ -67,8 +55,7 @@ static NSString *const DATAID = @"PoiListing";
 		NSDictionary	*dict=[notification userInfo];
 		NetResponse		*response=[dict objectForKey:RESPONSE];
 		if([response.dataid isEqualToString:DATAID]){
-			//[navigation createRightNavItemWithType:BUNavActivityType];
-            //[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:YES withMessage:nil];
+            [self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:YES withMessage:nil];
 		}
 	}
 }
@@ -88,9 +75,9 @@ static NSString *const DATAID = @"PoiListing";
 	
 	if([dataProvider count]>0){
 		[self.tableview reloadData];
+		[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:NO withMessage:nil];
 	}else{
-		
-		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:nil];
 	}
 	
 }
@@ -111,6 +98,9 @@ static NSString *const DATAID = @"PoiListing";
 //
 
 - (void)viewDidLoad{
+	
+	UIType=UITYPE_MODALUI;
+	
 	[self createPersistentUI];
     [super viewDidLoad];
 }
@@ -127,7 +117,6 @@ static NSString *const DATAID = @"PoiListing";
 	
 	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
 	self.navigation=nav;
-    [nav release];
 	navigation.delegate=self;
 	navigation.leftItemType=BUNavNoneType;
     navigation.rightItemType=UIKitButtonType;
@@ -149,7 +138,8 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)createNonPersistentUI{
 	
-	[self dataProviderRequestRefresh:SYSTEM];
+	if(dataProvider==nil)
+		[self dataProviderRequestRefresh:SYSTEM];
 	
 }
 

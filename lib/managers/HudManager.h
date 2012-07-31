@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 22/06/2011.
-//  Copyright 2011 CycleStreets.. All rights reserved.
+//  Copyright 2011 Buffer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +16,7 @@ enum  {
 	HUDWindowTypeError=2,
 	HUDWindowTypeLock=3,
 	HUDWindowTypeServer=4,
-    HUDWindowTypeIcon=5,
+	HUDWindowTypeIcon=5,
 	HUDWindowTypeNone
 };
 typedef int HUDWindowType;
@@ -33,7 +33,7 @@ typedef int HUDWindowType;
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(HudManager);
-@property (nonatomic, retain)		MBProgressHUD				* HUD;
+@property (nonatomic, strong)		MBProgressHUD				* HUD;
 @property (nonatomic, assign)		BOOL				 isShowing;
 @property (nonatomic, assign)		HUDWindowType				 activeWindowType;
 - (id)init;
@@ -42,5 +42,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(HudManager);
 -(void)updateHUDMessage:(NSString*)message;
 -(void)updateHUDTitle:(NSString*)title;
 -(void)removeHUD;
+-(void)removeHUD:(BOOL)animated;
 
 @end

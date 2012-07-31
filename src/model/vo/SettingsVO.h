@@ -20,11 +20,11 @@
 	
 
 }
-@property (nonatomic, retain)		NSString				* plan;
-@property (nonatomic, retain)		NSString				* speed;
-@property (nonatomic, retain)		NSString				* mapStyle;
-@property (nonatomic, retain)		NSString				* imageSize;
-@property (nonatomic, retain)		NSString				* routeUnit;
+@property (nonatomic, strong)		NSString				* plan;
+@property (nonatomic, strong)		NSString				* speed;
+@property (nonatomic, strong)		NSString				* mapStyle;
+@property (nonatomic, strong)		NSString				* imageSize;
+@property (nonatomic, strong)		NSString				* routeUnit;
 @property (nonatomic)		BOOL				 showRoutePoint;
 
 -(NSString*)returnKilometerSpeedValue;

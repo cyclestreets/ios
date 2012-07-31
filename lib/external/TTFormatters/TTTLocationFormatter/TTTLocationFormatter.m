@@ -117,7 +117,7 @@ static inline double CLLocationSpeedToMilesPerHour(CLLocationSpeed speed) {
 @property (readwrite, nonatomic, assign) TTTLocationFormatterCoordinateOrder coordinateOrder;
 @property (readwrite, nonatomic, assign) TTTLocationFormatterBearingStyle bearingStyle;
 @property (readwrite, nonatomic, assign) TTTLocationUnitSystem unitSystem;
-@property (readwrite, nonatomic, retain) NSNumberFormatter *numberFormatter;
+@property (readwrite, nonatomic, strong) NSNumberFormatter *numberFormatter;
 @end
 
 @implementation TTTLocationFormatter
@@ -136,7 +136,7 @@ static inline double CLLocationSpeedToMilesPerHour(CLLocationSpeed speed) {
     self.bearingStyle = TTTBearingWordStyle;
     self.unitSystem = TTTMetricSystem;
     
-    self.numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+    self.numberFormatter = [[NSNumberFormatter alloc] init];
     [self.numberFormatter setLocale:[NSLocale currentLocale]];
     [self.numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [self.numberFormatter setMaximumSignificantDigits:2];

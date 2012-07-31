@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteVO.h"
 
 #define kROUTEARCHIVEKEY @"CSRouteArchiveKey"
+#define kCATEGORYARCHIVEKEY @"CSCategoryArchiveKey"
 
 
 @interface Files : NSObject {
@@ -35,7 +36,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSString *clientid;
 }
 
-@property (nonatomic, retain)	NSString	*clientid;
+@property (nonatomic, strong)	NSString	*clientid;
 
 #pragma mark file constant functions
 
@@ -61,9 +62,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)setSettings:(NSDictionary *) newSettings;
 
-- (NSDictionary *) photoCategories;
+- (NSMutableDictionary *) photoCategories;
 
-- (void)setPhotoCategories:(NSDictionary *) newCategories;
+- (void)setPhotoCategories:(NSMutableDictionary *) newCategories;
 
 - (NSDictionary *) photoLocations;
 

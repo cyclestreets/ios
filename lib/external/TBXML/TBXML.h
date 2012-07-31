@@ -4,7 +4,7 @@
 //
 // ================================================================================================
 //  Created by Tom Bradley on 21/10/2009.
-//  Version 1.3
+//  Version 1.4
 //  
 //  Copyright (c) 2009 Tom Bradley
 //  
@@ -111,6 +111,8 @@ typedef struct _TBXMLAttributeBuffer {
 
 @end
 
+
+
 // ================================================================================================
 //  TBXML Static Functions Interface
 // ================================================================================================
@@ -119,6 +121,7 @@ typedef struct _TBXMLAttributeBuffer {
 
 + (NSString*) elementName:(TBXMLElement*)aXMLElement;
 + (NSString*) textForElement:(TBXMLElement*)aXMLElement;
++ (NSString*) textOfChild:(NSString*)childName parentElement:(TBXMLElement*)parent; // NE method wrapper
 + (NSString*) valueOfAttributeNamed:(NSString *)aName forElement:(TBXMLElement*)aXMLElement;
 
 + (NSString*) attributeName:(TBXMLAttribute*)aXMLAttribute;
@@ -127,10 +130,9 @@ typedef struct _TBXMLAttributeBuffer {
 + (TBXMLElement*) nextSiblingNamed:(NSString*)aName searchFromElement:(TBXMLElement*)aXMLElement;
 + (TBXMLElement*) childElementNamed:(NSString*)aName parentElement:(TBXMLElement*)aParentXMLElement;
 
-// NE added
 + (BOOL)hasChildrenForParentElement:(TBXMLElement*)aParentXMLElement;
 +(int)childrenCountForElementNamed:(NSString*)element parentElement:(TBXMLElement*)aParentXMLElement;
-+(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode;
 +(NSMutableArray*)childArrayForElement:(NSString*)elementName parentElement:(TBXMLElement*)aParentXMLElement;
++(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode;
 
 @end

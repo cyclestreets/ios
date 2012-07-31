@@ -17,21 +17,6 @@
 @synthesize autoLogin;
 
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [username release], username = nil;
-    [password release], password = nil;
-    [email release], email = nil;
-    [visiblename release], visiblename = nil;
-	
-    [super dealloc];
-}
-
-
-
 /***********************************************************/
 // - (id)init
 //

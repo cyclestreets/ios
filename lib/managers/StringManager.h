@@ -1,9 +1,9 @@
 //
 //  StringManager.h
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 19/02/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,14 +20,14 @@
 
 @interface StringManager : NSObject {
 	
-	NSDictionary *stringsDict;
+	NSMutableDictionary *stringsDict;
 	
-	id<StringManagerDelegate> delegate;
+	id<StringManagerDelegate> __unsafe_unretained delegate;
 	
 
 }
-@property(nonatomic,retain)NSDictionary *stringsDict;
-@property(nonatomic,assign)id<StringManagerDelegate> delegate;
+@property(nonatomic,strong)NSMutableDictionary *stringsDict;
+@property(nonatomic,unsafe_unretained)id<StringManagerDelegate> delegate;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(StringManager);
 

@@ -13,18 +13,6 @@
 @synthesize nameLabel;
 @synthesize urlLabel;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [dataProvider release], dataProvider = nil;
-    [nameLabel release], nameLabel = nil;
-    [urlLabel release], urlLabel = nil;
-	
-    [super dealloc];
-}
-
 
 -(void)initialise{
 	

@@ -26,6 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "Files.h"
 #import "KeyChainItemWrapper.h"
+#import "GlobalUtilities.h"
 
 static NSString *settingsFileConst = @"settings";
 static NSString *miscFileConst = @"misc";
@@ -52,7 +53,7 @@ static NSString *clientidFileConst = @"clientid";
 			NSString *escaped = [unescaped stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			[escaped writeToFile:[self clientidFile] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 		}
-		clientid = [[NSString stringWithContentsOfFile:[self clientidFile] encoding:NSUTF8StringEncoding error:nil] retain];
+		clientid = [NSString stringWithContentsOfFile:[self clientidFile] encoding:NSUTF8StringEncoding error:nil];
 	}
 	return self;
 }
@@ -107,12 +108,27 @@ static NSString *clientidFileConst = @"clientid";
 }
 
 // the plist of photos
-- (NSDictionary *) photoCategories {
-	NSDictionary *result = [NSDictionary dictionaryWithContentsOfFile:[self categoriesFile]];
-	if (result == nil) {
-		result = [NSDictionary dictionaryWithObjectsAndKeys:nil];
+- (NSMutableDictionary *) photoCategories {
+	
+	NSMutableDictionary *result = [NSMutableDictionary dictionaryWithContentsOfFile:[self categoriesFile]];
+	
+	// lookup archive key
+	if([result objectForKey:@"$archiver"]==nil){
+		
+		// return nil for empty result so we trigger default dp creation in the PM
+		return result;
+		
+	}else {
+		// new archive format
+		NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:[self categoriesFile]];
+		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		NSMutableDictionary *dict = [unarchiver decodeObjectForKey:kCATEGORYARCHIVEKEY];
+		[unarchiver finishDecoding];
+		
+		return dict;
 	}
-	return result;
+	
+	
 }
 
 // the plist of locations
@@ -130,8 +146,15 @@ static NSString *clientidFileConst = @"clientid";
 }
 
 // set the plist of categories.
-- (void)setPhotoCategories:(NSDictionary *) newCategories {
-	[newCategories writeToFile:[self categoriesFile] atomically:YES];
+- (void)setPhotoCategories:(NSMutableDictionary *) newCategories {
+	BetterLog(@"%@",[self categoriesFile]);
+	
+	NSMutableData *data = [[NSMutableData alloc] init];
+	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+	[archiver encodeObject:newCategories forKey:kCATEGORYARCHIVEKEY];
+	[archiver finishEncoding];
+	[data writeToFile:[self categoriesFile] atomically:YES];
+	
 }
 
 // set the plist of locations.
@@ -167,21 +190,18 @@ static NSString *clientidFileConst = @"clientid";
 - (void)setPassword:(NSString *)password {
 	
 	KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"net.cyclestreets.password" accessGroup:nil];
-	[wrapper setObject:password forKey:(id)kSecValueData];
-	[wrapper release];
+	[wrapper setObject:password forKey:(__bridge id)kSecValueData];
 }
 
 - (NSString *)password {
 	KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"net.cyclestreets.password" accessGroup:nil];
-	NSString *value = [wrapper objectForKey:(id)kSecValueData];
-	[wrapper release];
+	NSString *value = [wrapper objectForKey:(__bridge id)kSecValueData];
 	return value;
 }
 
 - (void)resetPasswordInKeyChain {
 	KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"net.cyclestreets.password" accessGroup:nil];
 	[wrapper resetKeychainItem];
-	[wrapper release];
 }
 
 // list the serial numbers of the routes which are favourites
@@ -198,7 +218,7 @@ static NSString *clientidFileConst = @"clientid";
 
 -(void)removeDataFileForType:(NSString*)type{
 	
-	NSError *error = [[[NSError alloc] init] autorelease];
+	NSError *error = [[NSError alloc] init];
 	
 	if([type isEqualToString:favouritesFileConst]){
 		[[NSFileManager defaultManager] removeItemAtPath:[self favouritesFile] error:&error];
@@ -216,8 +236,6 @@ static NSString *clientidFileConst = @"clientid";
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
 	[unarchiver finishDecoding];
-	[unarchiver release];
-	[data release];
 	
 	return route;
 }
@@ -233,15 +251,13 @@ static NSString *clientidFileConst = @"clientid";
 	[archiver finishEncoding];
 	[data writeToFile:routeFile atomically:YES];
 	
-	[data release];
-	[archiver release];
 	
 }
 
 // remove the route file.
 - (void)deleteRoute:(NSInteger) routeIdentifier {
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", routeIdentifier]];
-	NSError *error = [[[NSError alloc] init] autorelease];
+	NSError *error = [[NSError alloc] init];
 	[[NSFileManager defaultManager] removeItemAtPath:routeFile error:&error];
 }
 
@@ -250,11 +266,6 @@ static NSString *clientidFileConst = @"clientid";
 	return [documentsDirectory stringByAppendingPathComponent:clientidFileConst];
 }
 
-- (void) dealloc {
-	self.clientid = nil;
-	[documentsDirectory release];
-	[super dealloc];
-}
 
 + (void) dump:(NSArray *)paths {
 	NSFileManager *fileManager = [NSFileManager defaultManager];

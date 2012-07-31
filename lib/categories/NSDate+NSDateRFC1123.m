@@ -19,7 +19,7 @@
     if(rfc1123 == nil)
     {
         rfc1123 = [[NSDateFormatter alloc] init];
-        rfc1123.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
+        rfc1123.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
         rfc1123.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
         rfc1123.dateFormat = @"EEE',' dd MMM yyyy HH':'mm':'ss z";
     }
@@ -56,7 +56,7 @@
     if(df == nil)
     {
         df = [[NSDateFormatter alloc] init];
-        df.locale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
+        df.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
         df.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
         df.dateFormat = @"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
     }

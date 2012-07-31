@@ -10,16 +10,43 @@
 #import "GlobalUtilities.h"
 #import "MapViewController.h"
 #import "RMMarkerManager.h"
+#import "Markers.h"
+#import "UserLocationManager.h"
+
+
+static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
+//static NSInteger MAX_ZOOM = 18;
+//static NSInteger MIN_ZOOM = 1;
+
+@interface PhotoWizardLocationViewController(Private)
+
+
+- (void) singleTapDelayExpired;
+- (void) addLocation:(CLLocationCoordinate2D)location;
+
+-(void)showLocationOnMap:(CLLocation*)location;
+
+-(void)markerLocationDidUpdate:(CLLocationCoordinate2D)coordinate;
+
+@end
+
+
 
 @implementation PhotoWizardLocationViewController
 @synthesize mapView;
+@synthesize mapContents;
 @synthesize locationManager;
 @synthesize photolocation;
 @synthesize userlocation;
+@synthesize locationLabel;
+@synthesize closeButton;
+@synthesize resetButton;
+@synthesize updateButton;
 @synthesize userMarker;
 @synthesize avoidAccidentalTaps;
 @synthesize singleTapDidOccur;
 @synthesize singleTapPoint;
+
 
 
 //
@@ -51,7 +78,6 @@
     
 	[self createPersistentUI];
 	
-	
 }
 
 
@@ -59,10 +85,15 @@
     
     //Necessary to start route-me service
 	[RMMapView class];
-	[[[RMMapContents alloc] initWithView:mapView tilesource:[MapViewController tileSource]] autorelease];
+	mapContents=[[RMMapContents alloc] initWithView:mapView tilesource:[MapViewController tileSource]];
 	[mapView setDelegate:self];
-    
-    
+	
+	if (!self.userMarker) {
+		self.userMarker = [Markers markerPhoto];
+		self.userMarker.enableDragging=YES;
+	}
+	
+	
 }
 
 
@@ -77,10 +108,50 @@
 
 -(void)createNonPersistentUI{
     
+	if (userlocation!=nil) {
+		
+		
+		[self.mapView.markerManager addMarker:userMarker AtLatLong:userlocation.coordinate];
+		
+		[self showLocationOnMap:userlocation];
+		
+	}else {
+		
+		if(photolocation!=nil){
+			
+			[self.mapView.markerManager addMarker:userMarker AtLatLong:photolocation.coordinate];
+			
+			[self showLocationOnMap:photolocation];
+		}else {
+			
+			[self.mapView.markerManager addMarker:userMarker AtLatLong:[UserLocationManager defaultCoordinate]];
+			
+			[self showLocationOnMap:[UserLocationManager defaultLocation]];
+			
+			[mapView.contents setZoom:6];
+		}
+		
+	}
+	
     
-    [self.mapView.markerManager addMarker:userMarker AtLatLong:photolocation.coordinate];
+	resetButton.enabled=photolocation!=nil;
     
 }
+
+
+
+-(void)showLocationOnMap:(CLLocation*)location{
+	
+	locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
+	
+	[self.mapView moveToLatLong:location.coordinate];
+	
+	if ([mapView.contents zoom] < 18) {
+		[mapView.contents setZoom:17];
+	}
+	
+}
+
 
 //
 /***********************************************
@@ -91,11 +162,7 @@
 	
 	if (userlocation!=nil) {
 		
-		[self.mapView moveToLatLong:userlocation.coordinate];
-		
-		if ([mapView.contents zoom] < 18) {
-			[mapView.contents setZoom:4];
-		}
+		[self showLocationOnMap:userlocation];
 		 
 	}
 }
@@ -129,7 +196,80 @@
 		CGPoint point = [touch locationInView:map];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
 		[[map markerManager] moveMarker:marker AtLatLon:location];
+		[self markerLocationDidUpdate:location];
 	}
+	
+}
+
+- (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
+	
+	if(singleTapDidOccur==NO){
+		singleTapDidOccur=YES;
+		singleTapPoint=point;
+		[self performSelector:@selector(singleTapDelayExpired) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
+		
+	}
+}
+
+-(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	
+	singleTapDidOccur=NO;
+	
+	float nextZoomFactor = [map.contents nextNativeZoomFactor];
+	if (nextZoomFactor != 0)
+		[map zoomByFactor:nextZoomFactor near:point animated:YES];
+	
+}
+
+
+- (void) singleTapDelayExpired {
+	if(singleTapDidOccur==YES){
+		singleTapDidOccur=NO;
+		CLLocationCoordinate2D location = [mapView pixelToLatLong:singleTapPoint];
+		[self addLocation:location];
+	}
+}
+
+- (void) addLocation:(CLLocationCoordinate2D)location{
+	
+	[self.mapView.markerManager addMarker:userMarker AtLatLong:location];
+	[self markerLocationDidUpdate:location];
+}
+
+
+
+//
+/***********************************************
+ * @description			UI events
+ ***********************************************/
+//
+
+
+-(IBAction)closeButtonSelected:(id)sender{
+	
+	[self dismissModalViewControllerAnimated:YES];
+	
+}
+
+-(IBAction)resetButtonSelected:(id)sender{
+	
+	if(photolocation!=nil){
+		[self.mapView.markerManager addMarker:userMarker AtLatLong:photolocation.coordinate];
+		self.userlocation=nil;
+		
+		[self showLocationOnMap:photolocation];
+		
+	}
+	
+}
+
+-(IBAction)updateButtonSelected:(id)sender{
+	
+	if([delegate respondsToSelector:@selector(UserDidUpdatePhotoLocation:)]){
+        [delegate performSelector:@selector(UserDidUpdatePhotoLocation:) withObject:userlocation];
+    }
+	
+	[self dismissModalViewControllerAnimated:YES];
 	
 }
 
@@ -139,11 +279,14 @@
  * @description			View delegate method
  ***********************************************/
 //
--(void)MarkerLocationDidUpdate:(CLLocation*)location{
+-(void)markerLocationDidUpdate:(CLLocationCoordinate2D)coordinate{
+	
+	self.userlocation=[[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+	
+	locationLabel.text=[NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
+	
     
-    if([delegate respondsToSelector:@selector(UserDidUpdatePhotoLocation:)]){
-        [delegate performSelector:@selector(UserDidUpdatePhotoLocation:) withObject:location];
-    }
+   
 }
 
 

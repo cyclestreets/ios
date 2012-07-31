@@ -8,7 +8,6 @@
 
 #import "AppConfigManager.h"
 #import "DataSourceManager.h"
-#import "GlobalUtilities.h"
 
 
 @interface AppConfigManager(Private)
@@ -23,7 +22,7 @@
 
 
 @implementation AppConfigManager
-SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
+SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
 @synthesize configDict;
 @synthesize delegate;
 
@@ -32,10 +31,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
 //=========================================================== 
 - (void)dealloc
 {
-    [configDict release], configDict = nil;
+	
     delegate = nil;
     
-    [super dealloc];
 }
 
 
@@ -58,8 +56,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
 
 -(void)loadApplicationConfig{
 	
-	BetterLog(@"");
-	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	
 	NSString *appconfigpath=[self appconfigDataPath];
@@ -69,7 +65,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
         
         NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:[self appconfigDataPath]];
 		self.configDict=dict;
-        [dict release];
 		
 		[self loadServices];
 		
@@ -106,15 +101,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
 
 -(void)loadServices{
 	
-	BetterLog(@"");
-	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	BOOL servicesexist = [fileManager fileExistsAtPath:[self serviceDataPath]];
 	
 	if(servicesexist==YES){
         NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:[self serviceDataPath]];
 		[DataSourceManager sharedInstance].services=dict;
-        [dict release];
 	}else {
         
         if([delegate respondsToSelector:@selector(startupFailedWithError:)]){
@@ -130,9 +122,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager)
 #pragma mark Data path methods
 // @private
 -(NSString*)serviceDataPath{
-    
+	
+
     NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
-	NSString *serverid=[infoDict objectForKey:@"SERVER_DOMAIN_ID"];
+	NSString *serverid=[infoDict objectForKey:@"SERVERDOMAIN_ID"];
 	
 	if([serverid isEqualToString:APPSTATE_DEVELOPMENT]){
 		return [[NSBundle mainBundle] pathForResource:SERVICE_DEV_PLISTFILENAME ofType:@"plist"];

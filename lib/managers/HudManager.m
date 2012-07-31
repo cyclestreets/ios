@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 22/06/2011.
-//  Copyright 2011 CycleStreets.. All rights reserved.
+//  Copyright 2011 Buffer. All rights reserved.
 //
 
 #import "HudManager.h"
@@ -15,17 +15,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 @synthesize HUD;
 @synthesize isShowing;
 @synthesize activeWindowType;
-
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    [HUD release], HUD = nil;
-	
-    [super dealloc];
-}
-
 
 
 
@@ -49,24 +38,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 
 
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message{
-	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:2  andAllowTouch:NO];
+	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:1  andAllowTouch:NO];
 }
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message andDelay:(int)delayTime andAllowTouch:(BOOL)allowTouch{
     
-	BetterLog(@"title=%@",title);
+	BetterLog(@"isShowing=%i",isShowing);
 	
 	if(isShowing==NO){
         if(HUD==nil){
             MBProgressHUD *hud=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
             hud.removeFromSuperViewOnHide=YES;
             self.HUD=hud;
-            [hud release];
             [[[UIApplication sharedApplication] keyWindow] addSubview:self.HUD];
             HUD.delegate = self;
         }else{
-            
+           
         }
 	}else {
+		
 		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(removeHUD) object:nil];
 	}
 	
@@ -83,41 +72,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 			break;
 			
 			case HUDWindowTypeError:
-				HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]];
 				HUD.mode = MBProgressHUDModeCustomView;
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
 				
 			case HUDWindowTypeSuccess:
-				HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]] autorelease];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]];
 				HUD.mode = MBProgressHUDModeCustomView;
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
 				
 			case HUDWindowTypeLock:
-				HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock.png"]] autorelease];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock.png"]];
+				HUD.mode = MBProgressHUDModeCustomView;
+				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
+			break;
+				
+			case HUDWindowTypeIcon:
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:message]];
+                messageText=nil;
 				HUD.mode = MBProgressHUDModeCustomView;
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
 				
 			case HUDWindowTypeServer:
-				HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]] autorelease];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]];
 				HUD.mode = MBProgressHUDModeCustomView;
 				titleText=@"Server Error";
 				messageText=@"A Server error occured, please try again.";
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
-            case HUDWindowTypeIcon:
-				HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:message]] autorelease];
-                messageText=nil;
-				HUD.mode = MBProgressHUDModeCustomView;
-				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
-            break;
-                
-            case HUDWindowTypeNone:
-				HUD.mode = MBProgressHUDModeCustomView;
-				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
-            break;
 		
 		}
 		
@@ -146,19 +131,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 }
 
 
-/*
--(void)showHUDWithMessage:(NSString*)message andIcon:(NSString*)icon withDelay:(NSTimeInterval)delay{
-	
-	HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-	HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]] autorelease];
-	HUD.mode = MBProgressHUDModeCustomView;
-    HUD.delegate = self;
-	HUD.labelText=message;
-	[HUD show:YES];
-	[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delay];
-}
- */
 
 
 -(void)updateHUDMessage:(NSString*)message{
@@ -175,11 +147,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 	[HUD hide:YES];	
 }
 
+-(void)removeHUD:(BOOL)animated{
+	[HUD hide:animated];	
+}
+
 
 -(void)hudWasHidden{
 	activeWindowType=HUDWindowTypeNone;
 	isShowing=NO;
-    self.HUD=nil;
+    HUD=nil;
 }
 
 

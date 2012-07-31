@@ -7,7 +7,6 @@
 //
 
 #import "POICategoryVO.h"
-#import "UIImage-NSCoding.h"
 
 @implementation POICategoryVO
 @synthesize key;
@@ -16,18 +15,6 @@
 @synthesize total;
 @synthesize icon;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [key release], key = nil;
-    [name release], name = nil;
-    [shortname release], shortname = nil;
-    [icon release], icon = nil;
-	
-    [super dealloc];
-}
 
 
 static NSString *KEY = @"key";

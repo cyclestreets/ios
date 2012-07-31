@@ -20,9 +20,9 @@
 	NSString				*website;
 	
 }
-@property (nonatomic, retain)	NSString		*locationid;
-@property (nonatomic, retain)	CLLocation		*location;
-@property (nonatomic, retain)	NSString		*name;
-@property (nonatomic, retain)	NSString		*notes;
-@property (nonatomic, retain)	NSString		*website;
+@property (nonatomic, strong)	NSString		*locationid;
+@property (nonatomic, strong)	CLLocation		*location;
+@property (nonatomic, strong)	NSString		*name;
+@property (nonatomic, strong)	NSString		*notes;
+@property (nonatomic, strong)	NSString		*website;
 @end

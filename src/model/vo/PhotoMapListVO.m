@@ -39,20 +39,14 @@ static NSString *PHOTO_ELEMENT = @"cs:photo";
 		for (NSDictionary *photoDictionary in [elements objectForKey:PHOTO_ELEMENT]) {
 			PhotoMapVO *photo = [[PhotoMapVO alloc] initWithDictionary:photoDictionary];
 			[photos addObject:photo];
-			[photo release];
 		}
 	}
 	return self;
 }
 
 + (NSArray *) photoListXMLElementNames {
-	return [[[NSArray alloc] initWithObjects:PHOTO_ELEMENT, nil] autorelease];
+	return [[NSArray alloc] initWithObjects:PHOTO_ELEMENT, nil];
 }
 
-- (void)dealloc {
-	[photos release];
-	
-	[super dealloc];
-}
 
 @end

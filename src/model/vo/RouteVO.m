@@ -26,25 +26,13 @@
 @synthesize date;
 @synthesize userRouteName;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [segments release], segments = nil;
-    [routeid release], routeid = nil;
-    [northEast release], northEast = nil;
-    [southWest release], southWest = nil;
-    [name release], name = nil;
-    [length release], length = nil;
-    [plan release], plan = nil;
-    [date release], date = nil;
-    [userRouteName release], userRouteName = nil;
-	
-    [super dealloc];
+
+- (id)init {
+    if (self = [super init]) {
+		
+    }
+    return self;
 }
-
-
 
 
 
@@ -124,6 +112,12 @@
 	
 }
 
+-(NSDate*)dateObject{
+	
+	return [NSDate dateFromString:[self date] withFormat:@"y-MM-dd HH:mm:ss"];	
+	
+}
+
 -(NSString*)planString{
 	
 	return [[self plan] capitalizedString];
@@ -165,6 +159,58 @@
 	return location;	
 }
 
+
+//
+/***********************************************
+ * @description			Mthods to create ne/sw bounding locations for 2 points
+ ***********************************************/
+//
+-(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation{
+	
+	CLLocationCoordinate2D location;
+	
+	CLLocation *routelocation=self.northEast;
+	
+	// compare n>n, max is lower
+	double selflatitude=routelocation.coordinate.latitude;
+	double comparelatitude=comparelocation.coordinate.latitude;
+	location.latitude=MAX(selflatitude, comparelatitude)+0.002;
+	
+	
+	// compare e>e, max is higher
+	double selflongtitude=routelocation.coordinate.longitude;
+	double comparelongtitude=comparelocation.coordinate.longitude;
+	location.longitude=MAX(selflongtitude, comparelongtitude)+0.002;
+	
+	return location;
+}
+
+
+-(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation{
+	
+	CLLocationCoordinate2D location;
+	
+	CLLocation *routelocation=self.southWest;
+	
+	// compare s>s, max is lower
+	double selflatitude=routelocation.coordinate.latitude;
+	double comparelatitude=comparelocation.coordinate.latitude;
+	location.latitude=MIN(selflatitude, comparelatitude)-0.006;
+	
+	
+	// compare w>w, max is higher
+	double selflongtitude=routelocation.coordinate.longitude;
+	double comparelongtitude=comparelocation.coordinate.longitude;
+	location.longitude=MIN(selflongtitude, comparelongtitude)-0.002;
+	
+	return location;
+}
+
+
+
+-(NSString*)fileid{
+	return [NSString stringWithFormat:@"%@_%@",routeid,plan];
+}
 
 
 //

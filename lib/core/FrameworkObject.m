@@ -3,7 +3,7 @@
 //
 //
 //  Created by Neil Edwards on 04/11/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import "FrameworkObject.h"
@@ -13,17 +13,7 @@
 @synthesize notifications;
 @synthesize requestIDs;
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [notifications release], notifications = nil;
-    [requestIDs release], requestIDs = nil;
-	
-    [super dealloc];
-}
+
 
 
 
@@ -36,12 +26,8 @@
 {
     self = [super init];
     if (self) {
-        NSMutableArray *arr=[[NSMutableArray alloc]init];
-        self.notifications=arr;
-        [arr release];
-        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-		self.requestIDs=dict;
-        [dict release];
+        self.notifications=[[NSMutableArray alloc]init];
+		self.requestIDs=[[NSMutableDictionary alloc]init];
 		[self listNotificationInterests];
     }
     return self;

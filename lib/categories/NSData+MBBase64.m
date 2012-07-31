@@ -1,9 +1,9 @@
 //
 //  NSData+MBBase64.m
-//  CycleStreets
+//
 //
 //  Created by Neil Edwards on 16/02/2010.
-//  Copyright 2010 CycleStreets.. All rights reserved.
+//  Copyright 2010 Buffer. All rights reserved.
 //
 
 #import "NSData+MBBase64.h"
@@ -109,7 +109,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
 		else characters[length++] = '=';	
 	}
 	
-	return [[[NSString alloc] initWithBytesNoCopy:characters length:length encoding:NSASCIIStringEncoding freeWhenDone:YES] autorelease];
+	return [[NSString alloc] initWithBytesNoCopy:characters length:length encoding:NSASCIIStringEncoding freeWhenDone:YES];
 }
 
 @end

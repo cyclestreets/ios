@@ -1,9 +1,9 @@
 //
 //  UIView+Border.h
-//  CycleStreets
+//
 //
 //  Created by neil on 03/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

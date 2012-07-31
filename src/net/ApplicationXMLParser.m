@@ -23,6 +23,7 @@
 #import "CSPointVO.h"
 #import "PhotoMapVO.h"
 #import "PhotoMapListVO.h"
+#import "PhotoCategoryVO.h"
 
 @interface ApplicationXMLParser(Private)
 
@@ -50,6 +51,10 @@
 -(void)POICategoryXMLParser:(TBXML*)parser;
 
 
+// categories
+-(void)PhotoCategoriesXMLParser:(TBXML*)parser;
+
+
 
 //utility
 
@@ -71,13 +76,8 @@
 /***********************************************************/
 - (void)dealloc
 {
-    [parsers release], parsers = nil;
-    [activeResponse release], activeResponse = nil;
-    [parserMethods release], parserMethods = nil;
     delegate = nil;
-    [parserError release], parserError = nil;
 	
-    [super dealloc];
 }
 
 
@@ -96,6 +96,7 @@
 					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
+					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
 					   nil];
 		
 		parsers=[[NSMutableDictionary alloc]init];
@@ -116,7 +117,6 @@
 	
 	[self parseXMLForType:activeResponse.dataid];
 	
-	[parser release];
 }
 
 
@@ -151,12 +151,11 @@
 		
 		TBXML	*parser=[[TBXML alloc]initWithXMLData:activeResponse.responseData];
 		[self performSelector:parserMethod withObject:parser];
-		[parser release];
 		
 		if(activeResponse.status==YES){
 			
 			BetterLog(@"[DEBUG] activeResponse.dataid=%@",activeResponse.dataid);
-			BetterLog(@"[DEBUG] activeResponse.requestid=%i",activeResponse.requestid);
+			BetterLog(@"[DEBUG] activeResponse.requestid=%@",activeResponse.requestid);
 			
 			if([delegate respondsToSelector:@selector(XMLParserDidComplete:)]){
 				[delegate XMLParserDidComplete:activeResponse];
@@ -296,10 +295,8 @@
 	}
 
 	validation.responseDict=[NSDictionary dictionaryWithObject:loginResponse forKey:activeResponse.dataid];
-	[loginResponse release];
 	
 	activeResponse.dataProvider=validation;
-	[validation release];
 	
 }
 
@@ -338,7 +335,6 @@
 
 	
 	activeResponse.dataProvider=validation;
-	[validation release];
 	
 }
 
@@ -356,7 +352,6 @@
 	validation.returnCode=[[TBXML textForElement:[TBXML childElementNamed:@"ReturnCode" parentElement:response]]intValue];
 	validation.returnMessage=[TBXML textForElement:[TBXML childElementNamed:@"ReturnMsg" parentElement:response]];
 	activeResponse.dataProvider=validation;
-	[validation release];
 	
 	
 }
@@ -373,6 +368,8 @@
 // used by RETRIEVEROUTEBYID also
 -(void)CalculateRouteXMLParser:(TBXML*)parser{
 	
+	BetterLog(@"");
+	
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
@@ -387,7 +384,6 @@
 	if(route!=nil){
 		
 		validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
-		[route release];
 		
 		validation.returnCode=ValidationCalculateRouteSuccess;
 		
@@ -397,7 +393,6 @@
 	
 	
 	activeResponse.dataProvider=validation;
-	[validation release];
 	
 	
 }
@@ -426,17 +421,15 @@
 		
 		CLLocationCoordinate2D nelocation;
 		nelocation.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:north" parentElement:routenode]] floatValue];
-		nelocation.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:west" parentElement:routenode]] floatValue];
+		nelocation.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:east" parentElement:routenode]] floatValue];
 		CLLocation *ne=[[CLLocation alloc] initWithLatitude:nelocation.latitude longitude:nelocation.longitude];
 		route.northEast=ne;
-		[ne release];
 		
 		CLLocationCoordinate2D swlocation;
 		swlocation.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:south" parentElement:routenode]] floatValue];
-		swlocation.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:east" parentElement:routenode]] floatValue];
+		swlocation.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:west" parentElement:routenode]] floatValue];
 		CLLocation *sw=[[CLLocation alloc] initWithLatitude:swlocation.latitude longitude:swlocation.longitude];
 		route.southWest=sw;
-		[sw release];
 		
 		
 		
@@ -477,16 +470,13 @@
 					point.y = [[XYs objectAtIndex:X+1] doubleValue];
 					p.p = point;
 					[result addObject:p];
-					[p release];
 				}
 				segment.pointsArray=result;
-				[result release];
 				
 				time += [segment segmentTime];
 				distance += [segment segmentDistance];
 				
 				[segments addObject:segment];
-				[segment release];
 			
 			}
 			
@@ -510,8 +500,11 @@
 
 #pragma mark Photos
 
-// photos
+
+
 -(void)PhotoUploadXMLParser:(TBXML*)parser{
+	
+	BetterLog(@"");
     
     TBXMLElement *response = parser.rootXMLElement;
 	
@@ -520,15 +513,32 @@
 		return;
 	}
     
+	ValidationVO *validation=[[ValidationVO alloc]init];
+	validation.returnCode=ValidationUserPhotoUploadFailed;
+	
+	//Hmm, responses return unrequired nodes
+	
+	TBXMLElement *errornode=[TBXML childElementNamed:@"error" parentElement:response];
+	TBXMLElement *codenode=[TBXML childElementNamed:@"code" parentElement:errornode];
+	
+	if(codenode==nil){
+		
+		TBXMLElement *resultnode=[TBXML childElementNamed:@"result" parentElement:response];
+		
+		if(resultnode!=nil){
+			NSMutableDictionary *responseDict=[ApplicationXMLParser newDictonaryFromXMLElement:resultnode];
+			validation.responseDict=responseDict;
+			validation.returnCode=ValidationUserPhotoUploadSuccess;
+		}
+		
+		
+	}else {
+		
+		validation.returnMessage=[TBXML textForElement:codenode];
+		
+	}
     
-    
-    /* use this vo
-    for (NSDictionary *photoDictionary in [elements objectForKey:PHOTO_ELEMENT]) {
-        PhotoEntry *photo = [[PhotoEntry alloc] initWithDictionary:photoDictionary];
-        [photos addObject:photo];
-        [photo release];
-    }
-     */
+	activeResponse.dataProvider=validation;
     
 }
 
@@ -548,7 +558,7 @@
 	if(activeResponse.status==NO){
 		validation.returnCode=ValidationRetrievePhotosFailed;
 		activeResponse.dataProvider=validation;
-		[validation release];
+		activeResponse.status=YES;
 		return;
 	}
     
@@ -579,17 +589,14 @@
 			[photo generateSmallImageURL:[TBXML textForElement:[TBXML childElementNamed:@"cs:thumbnailSizes" parentElement:photonode]]];
 			
 			[arr addObject:photo];
-			[photo release];
 			
 			root=root->nextSibling;
 			
 		}
 		
 		photolist.photos=arr;
-		[arr release];
 		
 		validation.responseDict=[NSDictionary dictionaryWithObject:photolist forKey:activeResponse.dataid];
-		[photolist release];
 		
 		validation.returnCode=ValidationRetrievePhotosSuccess;
 		
@@ -601,7 +608,6 @@
 	
     
 	activeResponse.dataProvider=validation;
-	[validation release];
     
     
 }
@@ -641,14 +647,12 @@
 			poicategory.icon=[StringUtilities imageFromString:[TBXML textForElement:[TBXML childElementNamed:@"icon" parentElement:poitype]]];
 			
 			[dataProvider addObject:poicategory];
-			[poicategory release];
 			
 			poitype=poitype->nextSibling;
 			
 		}
 		
 		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
-		[dataProvider release];
 		
 		validation.returnCode=ValidationPOIListingSuccess;
 		
@@ -657,7 +661,6 @@
 	}
 	
 	activeResponse.dataProvider=validation;
-	[validation release];
 	
 }
 
@@ -694,20 +697,17 @@
 			coords.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"latitude" parentElement:poi]] floatValue];
 			CLLocation *location=[[CLLocation alloc]initWithLatitude:coords.latitude longitude:coords.longitude];
 			poilocation.location=location;
-			[location release];
 			
 			poilocation.website=[TBXML textForElement:[TBXML childElementNamed:@"website" parentElement:poi]];
 			poilocation.notes=[TBXML textForElement:[TBXML childElementNamed:@"notes" parentElement:poi]];
 						
 			[dataProvider addObject:poilocation];
-			[poilocation release];
 			
 			poi=poi->nextSibling;
 			
 		}
 		
 		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
-		[dataProvider release];
 		
 		validation.returnCode=ValidationPOICategorySuccess;
 		
@@ -716,15 +716,187 @@
 	}
 	
 	activeResponse.dataProvider=validation;
-	[validation release];
 	
 	
 	
 }
 
 
+//
+/***********************************************
+ * @description			XML parser for Photo Wizard category selector
+ ***********************************************/
+//
+
+-(void)PhotoCategoriesXMLParser:(TBXML*)parser{
+	
+	
+	BetterLog(@"");
+	
+	TBXMLElement *response = parser.rootXMLElement;
+	
+	[self validateXML:response];
+	if(activeResponse.status==NO){
+		return;
+	}
+    
+	ValidationVO *validation=[[ValidationVO alloc]init];
+	validation.returnCode=ValidationCategoriesSuccess;
+	
+	NSMutableDictionary *dataProvider=[NSMutableDictionary dictionary];
+	
+	NSString *time=[TBXML textOfChild:@"validuntil" parentElement:response];
+	[dataProvider setObject:time forKey:@"validUntilTimeStamp"];
+	
+	
+	TBXMLElement *categoriesnode=[TBXML childElementNamed:@"categories" parentElement:response];
+	TBXMLElement *categorynode=[TBXML childElementNamed:@"category" parentElement:categoriesnode];
+	
+	if(categorynode!=nil){
+		
+		NSMutableArray *carr=[NSMutableArray array];
+	
+		while (categorynode!=nil) {
+			
+			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
+			
+			category.name=[TBXML textOfChild:@"name" parentElement:categorynode];
+			category.tag=[TBXML textOfChild:@"tag" parentElement:categorynode];
+			
+			[carr addObject:category];
+			
+			categorynode=categorynode->nextSibling;
+			
+		}
+		
+		[dataProvider setObject:carr forKey:@"feature"];
+		
+	}else {
+		validation.returnCode=ValidationCategoriesFailed;
+	}
+	
+	TBXMLElement *metacategoriesnode=[TBXML childElementNamed:@"metacategories" parentElement:response];
+	TBXMLElement *metacategorynode=[TBXML childElementNamed:@"metacategory" parentElement:metacategoriesnode];
+	
+	if(metacategorynode!=nil){
+		
+		NSMutableArray *mcarr=[NSMutableArray array];
+		
+		while (metacategorynode!=nil) {
+			
+			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
+			
+			category.name=[TBXML textOfChild:@"name" parentElement:metacategorynode];
+			category.tag=[TBXML textOfChild:@"tag" parentElement:metacategorynode];
+			
+			[mcarr addObject:category];
+			
+			metacategorynode=metacategorynode->nextSibling;
+			
+		}
+		
+		[dataProvider setObject:mcarr forKey:@"category"];
+		
+	}else {
+		validation.returnCode=ValidationCategoriesFailed;
+	}
+	
+	validation.responseDict=dataProvider;
+	
+	activeResponse.dataProvider=validation;
+	
+	
+}
+
+									
+	
+//
+/***********************************************
+ * @description			Class methods
+ ***********************************************/
+//
 
 
+//
+/***********************************************
+ * @description			Utility
+ ***********************************************/
+//
+
+//
+/***********************************************
+ * @description			returns a dictionary from a node's child nodes
+ ***********************************************/
+//
+
++(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode{
+	
+	if(innode==nil)
+		return nil;
+	
+	NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+	
+	TBXMLElement *node=innode->firstChild;
+	while (node!=nil) {
+		
+		[dict setObject:[TBXML textForElement:node] forKey:[TBXML elementName:node]];
+		
+		node=node->nextSibling;
+	}
+	
+	return dict;
+}
+
+//
+/***********************************************
+ * @description			returns a dictionary from a node's attributes
+ ***********************************************/
+//
++(NSMutableDictionary*)newDictonaryFromXMLElementAttributes:(TBXMLElement*)innode{
+	
+	if(innode==nil)
+		return nil;
+	
+	NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+	
+	TBXMLAttribute *attribute=innode->firstAttribute;
+	while (attribute!=nil) {
+		
+		[dict setObject:[TBXML attributeValue:attribute] forKey:[TBXML attributeName:attribute]];
+		
+		attribute=attribute->next;
+	}
+	
+	
+	return dict;
+}
+
+
+//
+/***********************************************
+ * @description			Return an array of nodes with specific name
+ ***********************************************/
+//
++(NSMutableArray*)newArrayForNodesNamed:(NSString*)nodeName fromXMLElement:(TBXMLElement*)innode{
+	
+	if(innode==nil)
+		return nil;
+	
+	NSMutableArray *arr=[[NSMutableArray alloc]init];
+	TBXMLElement *foundNode=[TBXML childElementNamed:nodeName parentElement:innode];
+	
+	if(foundNode!=nil){
+		
+		while (foundNode!=nil) {
+			
+			[arr addObject:[TBXML textForElement:foundNode]];
+			
+			foundNode=[TBXML nextSiblingNamed:nodeName searchFromElement:foundNode];
+		}
+		
+	}
+	return arr;
+}
 
 
 @end

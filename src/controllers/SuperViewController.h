@@ -45,27 +45,30 @@ typedef int ViewOverlayType;
 	
 	CustomNavigtionBar					*navigation;
 	CGRect								frame;
-	id<SuperViewControllerDelegate>		delegate;
+	id<SuperViewControllerDelegate>		__unsafe_unretained delegate;
 	BOOL								appearWasBackEvent;
 	NSMutableArray						*notifications;
 	NSString							*UIType;
 	
 	NSString							*GATag;
 	
+	BOOL								displaysConnectionErrors;
+	
 	ViewOverlayType						activeViewOverlayType;
 	GradientView						*viewOverlayView;
 
 }
 
-@property (nonatomic, retain) CustomNavigtionBar		* navigation;
+@property (nonatomic, strong) CustomNavigtionBar		* navigation;
 @property (nonatomic, assign) CGRect		 frame;
-@property (nonatomic, assign) id<SuperViewControllerDelegate>		 delegate;
+@property (nonatomic, unsafe_unretained) id<SuperViewControllerDelegate>		 delegate;
 @property (nonatomic, assign) BOOL		 appearWasBackEvent;
-@property (nonatomic, retain) NSMutableArray		* notifications;
-@property (nonatomic, retain) NSString		* UIType;
-@property (nonatomic, retain) NSString		* GATag;
+@property (nonatomic, assign) BOOL		 displaysConnectionErrors;
+@property (nonatomic, strong) NSMutableArray		* notifications;
+@property (nonatomic, strong) NSString		* UIType;
+@property (nonatomic, strong) NSString		* GATag;
 @property (nonatomic, assign) ViewOverlayType		 activeViewOverlayType;
-@property (nonatomic, retain) GradientView		* viewOverlayView;
+@property (nonatomic, strong) GradientView		* viewOverlayView;
 
 
 //

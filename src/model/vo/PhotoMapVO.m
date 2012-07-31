@@ -37,20 +37,6 @@ static int BIG_SIZE = 300;
 @synthesize bigImageURL;
 @synthesize smallImageURL;
 
-//=========================================================== 
-// dealloc
-//=========================================================== 
-- (void)dealloc
-{
-    [csid release], csid = nil;
-    [caption release], caption = nil;
-    [bigImageURL release], bigImageURL = nil;
-    [smallImageURL release], smallImageURL = nil;
-	
-    [super dealloc];
-}
-
-
 
 // Optimize small URL for smallest thumbnail available which is big enough.
 - (void) generateSmallImageURL:(NSString *)sizes {

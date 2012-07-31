@@ -13,23 +13,19 @@
 #import	"NetRequest.h"
 #import "NetResponse.h"
 #import "AppConstants.h"
+#import "RequestQueueVO.h"
 
 #define NSHTTPPropertyStatusCodeKey @"DB404Error"
 
 
-typedef struct{
-	NetRequest *request;
-	int index;
-	BOOL status;
-}LookupResult;
-
 
 @interface RemoteFileManager(Private) 
 
--(LookupResult)findRequestByType:(NSString*)type;
+-(RequestQueueVO*)findRequestByType:(NSString*)type;
 -(void)loadItemFromQueue;
 -(void)load:(NetRequest*)request;
 -(void)stopConnection;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 
 @end
 
@@ -51,15 +47,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 /***********************************************************/
 // dealloc
 /***********************************************************/
-- (void)dealloc
-{
-    [responseData release], responseData = nil;
-    [myConnection release], myConnection = nil;
-    [requestQueue release], requestQueue = nil;
-    [activeRequest release], activeRequest = nil;
-	
-    [super dealloc];
-}
 
 
 
@@ -68,13 +55,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	if (self = [super init])
 	{
 		queueRequests=YES;
-		self.requestQueue=[[NSMutableArray alloc]init];
-		
-		// https support
-		//NSURLCredential *credentials=[NSURLCredential credentialWithUser:@"neil" password:@"password" persistence:NSURLCredentialPersistenceForSession];
-//		NSURLProtectionSpace *protectionspace=[[NSURLProtectionSpace  alloc]initWithHost:@"ssss.com" port:34 protocol:https realm:@"https" authenticationMethod:NSURLAuthenticationMethodDefault];
-//		[[NSURLCredentialStorage sharedCredentialStorage] setCredential:credentials forProtectionSpace:protectionspace];
-//		[protectionspace release];
+        NSMutableArray *arr=[[NSMutableArray alloc]init];
+		self.requestQueue=arr;
 		
 	}
 	return self;
@@ -92,7 +74,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	
 	if(queueRequests==YES){
 
-		LookupResult result=[self findRequestByType:request.dataid];
+		RequestQueueVO *result=[self findRequestByType:request.dataid];
 
 		if(result.status==NO){
 			
@@ -120,7 +102,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 			
 			if(activeRequest.status==INPROGRESS){
 				[myConnection cancel];
-				RELEASE_SAFELY(myConnection);
+				myConnection=nil;
 			}
 			[requestQueue removeObjectAtIndex:0];
 		}
@@ -152,7 +134,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	
 	if([requestQueue count]>0){
 		
-		self.activeRequest=[requestQueue objectAtIndex:0];
+		activeRequest=[requestQueue objectAtIndex:0];
 		activeRequest.status=INPROGRESS;
 		[self load:activeRequest];
 		
@@ -166,27 +148,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 
 -(void)load:(NetRequest*)request{
 	
-	BetterLog(@"RemoteFileManager:load with %@",request.url);
 		
 	if(myConnection!=nil){
 		[myConnection cancel];
-		RELEASE_SAFELY(myConnection);
 	}
 	
 	NetResponse *response=[[NetResponse alloc]init];
 	response.dataid=activeRequest.dataid;	
+	response.requestid=activeRequest.requestid;
+	response.requestType=activeRequest.requestType;
+	response.dataType=activeRequest.dataType;
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:response,RESPONSE, nil];
-	[response release];  // Keep and eye out here for potential leak issue
+	  // Keep and eye out here for potential leak issue
 	[[NSNotificationCenter defaultCenter] postNotificationName:REMOTEDATAREQUESTED object:nil userInfo:dict];
-	[dict release];
 	
 	
-	self.myConnection = [[NSURLConnection alloc] initWithRequest:[request requestForType]  delegate:self];
+	myConnection = [[NSURLConnection alloc] initWithRequest:[request requestForType]  delegate:self];
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	
 	if(myConnection){
-		responseData=[[NSMutableData data] retain];
+		responseData=[NSMutableData data];
 		[responseData setLength:0];
 	}
 }
@@ -221,14 +203,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
 	
+	
     [responseData appendData:data];
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:@"RemoteFileManagerLoadedBytes",@"type",responseData,@"value",nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"RemoteFileManagerLoadedBytes" object:nil userInfo:dict];
-	RELEASE_SAFELY(dict);
 	
 }
-
 
 //
 /***********************************************
@@ -241,15 +222,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	if(activeRequest.trackProgress==YES){
 		
 		NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:
-		 [NSNumber numberWithInt:totalBytesWritten],@"totalBytesWritten",
-		 [NSNumber numberWithInt:bytesWritten],@"bytesWritten",
-		 [NSNumber numberWithInt:totalBytesExpectedToWrite],@"totalBytesExpectedToWrite",
-		 nil];
+							[NSNumber numberWithInt:totalBytesWritten],@"totalBytesWritten",
+							[NSNumber numberWithInt:bytesWritten],@"bytesWritten",
+							[NSNumber numberWithInt:totalBytesExpectedToWrite],@"totalBytesExpectedToWrite",
+							nil];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:FILEUPLOADPROGRESS object:nil userInfo:dict];
 	}
     
 }
+
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
@@ -259,81 +241,130 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	networkAvailable=YES;
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	
+	
 	NetResponse *response=[[NetResponse alloc]init];
 	response.dataid=activeRequest.dataid;
 	response.requestid=activeRequest.requestid;
+	response.requestType=activeRequest.requestType;
 	response.responseData=responseData;
+	response.dataType=activeRequest.dataType;
 	
 	[self removeRequestFromQueue:activeRequest.dataid andResume:YES];
 	
-	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:networkAvailable],@"networkStatus",response,@"response", nil];
-	
-	//NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:];
-	//[response release];  // keep an eye out here for potential leak issue later ???
+	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:networkAvailable],@"networkStatus",response,@"response", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REMOTEFILELOADED object:nil userInfo:dict];
-	//[dict release]; 
-	
-	
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
 	
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	BetterLog(@"RemoteFileManager.didFailWithError for dataid: %@ %@",activeRequest.dataid, [error localizedDescription] );
 	
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+		
 	networkAvailable=NO;
 	
 	NetResponse *response=[[NetResponse alloc]init];
 	response.dataid=activeRequest.dataid;
 	response.requestid=activeRequest.requestid;
+	response.requestType=activeRequest.requestType;
+	response.dataType=activeRequest.dataType;
 	response.responseData=nil;
-	response.error=REMOTEFILEFAILED;
+	if(error.code>=400 || error.code==-1001){
+		response.error=SERVERCONNECTIONFAILED;
+	}else {
+		response.error=REMOTEFILEFAILED;
+	}
+
 	
 	[self removeRequestFromQueue:activeRequest.dataid andResume:YES];
 	
-	BetterLog(@"RemoteFileManager.didFailWithError: %@", [error localizedDescription] );
-	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:networkAvailable],@"networkStatus",response,@"response", nil];
-	[response release];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REMOTEFILEFAILED object:nil userInfo:dict];
-	[dict release];
 	
-	[responseData release];
+}
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+	//  NSLog(@"We are checking protection Space!");
+    if([protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+    {
+        BetterLog(@"NSURLAuthenticationMethodServerTrust");
+        return YES;
+    }
+    else if([protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic])
+    {
+		BetterLog(@"NSURLAuthenticationMethodHTTPBasic");
+        return YES;
+    }
+    BetterLog(@"Cannot Auth!");
+    return NO;
 	
 	
+}
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge: (NSURLAuthenticationChallenge *)challenge {
 	
+	if([challenge previousFailureCount]==0){
+		
+		if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+		{
+			BetterLog(@"NSURLAuthenticationMethodServerTrust requested");
+			[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+			[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+			
+		}
+		else if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodHTTPBasic])
+		{
+			BetterLog(@"NSURLAuthenticationMethodHTTPBasic requested");
+			
+			NSString *username=[AppConstants authenticationForRequest:activeRequest.dataid ofType:AUTHENTICATION_USERNAME];
+			NSString *password=[AppConstants authenticationForRequest:activeRequest.dataid ofType:AUTHENTICATION_PASSWORD];
+			
+			BetterLog(@"sending usename=%@ password=%@",username,password);
+			
+			NSURLCredential *newCredential=[NSURLCredential credentialWithUser:username
+													 password:password
+												  persistence:NSURLCredentialPersistencePermanent];
+			[[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
+		}
+		
+	}else{
+		BetterLog(@"cancelAuthenticationChallenge");
+		[challenge.sender cancelAuthenticationChallenge:challenge];
+	}
 	
 }
 
 
-//
-/***********************************************
- * @description			Called for https connections if no stored credentials were found in the NSURLCredentialStorage singleton
- ***********************************************/
-//
--(void)connection:(NSURLConnection *)connectiondidReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+
+/*
+-(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
 	
 	BetterLog(@"");
 	
     if ([challenge previousFailureCount] == 0) {
         NSURLCredential *newCredential;
-        newCredential=[NSURLCredential credentialWithUser:@"name"
-                                                 password:@"password"
-                                              persistence:NSURLCredentialPersistenceNone];
+		
+        newCredential=[NSURLCredential credentialWithUser:[AppConstants authenticationForRequest:activeRequest.dataid ofType:AUTHENTICATION_USERNAME]
+                                                 password:[AppConstants authenticationForRequest:activeRequest.dataid ofType:AUTHENTICATION_PASSWORD]
+                                              persistence:NSURLCredentialPersistencePermanent];
         [[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
     } else {
         [[challenge sender] cancelAuthenticationChallenge:challenge];
-        // inform the user that the user name and password
-        // in the preferences are incorrect
-       // [self showPreferencesCredentialsAreIncorrectPanel:self];
+        
     }
 }
-								
+*/
+
+- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection;
+{
+	return NO;
+}
+
 								
 	
--(LookupResult)findRequestByType:(NSString*)type{
+-(RequestQueueVO*)findRequestByType:(NSString*)type{
 	
-	LookupResult result={nil,-1,NO};
+	RequestQueueVO *result=[[RequestQueueVO alloc]init];
 	
 	for(int i=0;i<[requestQueue count];i++){
 		NetRequest *request=[requestQueue objectAtIndex:i];
@@ -381,7 +412,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 //
 -(void)removeRequestFromQueue:(NSString*)type andResume:(BOOL)resume{
 	
-	LookupResult result=[self findRequestByType:type];
+	RequestQueueVO *result=[self findRequestByType:type];
 	
 	if(result.status==YES){
 		
@@ -408,7 +439,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RemoteFileManager);
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	
 	[myConnection cancel];
-	RELEASE_SAFELY(myConnection);
+	myConnection=nil;
 	
 }
 

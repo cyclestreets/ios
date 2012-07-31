@@ -18,7 +18,7 @@
 	POICategoryVO							*requestdataProvider;
 	
 }
-@property (nonatomic, retain)	IBOutlet UITableView		*tableview;
-@property (nonatomic, retain)	NSMutableArray		*dataProvider;
-@property (nonatomic, retain)	POICategoryVO		*requestdataProvider;
+@property (nonatomic, strong)	IBOutlet UITableView		*tableview;
+@property (nonatomic, strong)	NSMutableArray		*dataProvider;
+@property (nonatomic, strong)	POICategoryVO		*requestdataProvider;
 @end

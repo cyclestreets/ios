@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<photomapcategories>
+	<validuntil>1335799040</validuntil>
+	<categories>
+		<category tag="cycleparking">
+			<tag>cycleparking</tag>
+			<name>Cycle parking</name>
+			<plural>Cycle parking</plural>
+			<nameShowing>cycle parking</nameShowing>
+			<description>Photos of parked cycles, on racks, railings, in shelters. Or photos of cycle racks themselves.</description>
+			<invitation>Know somewhere where some cycle parking is needed or could be improved?</invitation>
+			<icon>sheffield_stands</icon>
+			<ordering>1</ordering>
+		</category>
+		<category tag="obstructions">
+			<tag>obstructions</tag>
+			<name>Obstruction</name>
+			<plural>Obstructions</plural>
+			<nameShowing>an obstruction</nameShowing>
+			<description>A narrow place, difficult for cycles to pass.</description>
+			<invitation>Is there a physical obstruction on your route which causes a problem?</invitation>
+			<icon>obstruction</icon>
+			<ordering>2</ordering>
+		</category>
+		<category tag="cycleways">
+			<tag>cycleways</tag>
+			<name>Cycleway</name>
+			<plural>Cycleways</plural>
+			<nameShowing>a cycleway</nameShowing>
+			<description>Cycleway</description>
+			<invitation>Got an idea for a new route or a link between existing routes?</invitation>
+			<icon>cycleway</icon>
+			<ordering>3</ordering>
+		</category>
+		<category tag="road">
+			<tag>road</tag>
+			<name>Road environment</name>
+			<plural>Road environments</plural>
+			<nameShowing>the road environment</nameShowing>
+			<description>General road environment</description>
+			<invitation/>
+			<icon>road</icon>
+			<ordering>3</ordering>
+		</category>
+		<category tag="carparking">
+			<tag>carparking</tag>
+			<name>Car parking</name>
+			<plural>Car parking</plural>
+			<nameShowing>car parking</nameShowing>
+			<description>Something related to car parking</description>
+			<invitation/>
+			<icon>car_parking</icon>
+			<ordering>4</ordering>
+		</category>
+		<category tag="enforcement">
+			<tag>enforcement</tag>
+			<name>Enforcement</name>
+			<plural>Enforcement</plural>
+			<nameShowing>something enforcement-related</nameShowing>
+			<description>Enforcement-related</description>
+			<invitation/>
+			<icon>enforcement</icon>
+			<ordering>4</ordering>
+		</category>
+		<category tag="routesigns">
+			<tag>routesigns</tag>
+			<name>Route sign</name>
+			<plural>Route signs</plural>
+			<nameShowing>route signage</nameShowing>
+			<description>A sign, usually on the cycleway network, indicating a route for cycling.</description>
+			<invitation/>
+			<icon>directional_signage</icon>
+			<ordering>5</ordering>
+		</category>
+		<category tag="signs">
+			<tag>signs</tag>
+			<name>General sign/notice</name>
+			<plural>General sign/notices</plural>
+			<nameShowing>signage</nameShowing>
+			<description>Any old sign</description>
+			<invitation/>
+			<icon>general_sign</icon>
+			<ordering>5</ordering>
+		</category>
+		<category tag="destinations">
+			<tag>destinations</tag>
+			<name>Destination</name>
+			<plural>Destinations</plural>
+			<nameShowing>a destination</nameShowing>
+			<description>A place where you might want to visit.</description>
+			<invitation/>
+			<icon>destination</icon>
+			<ordering>5</ordering>
+		</category>
+		<category tag="potholes">
+			<tag>potholes</tag>
+			<name>Pothole</name>
+			<plural>Potholes</plural>
+			<nameShowing>a pothole</nameShowing>
+			<description>A hole in the ground to avoid.</description>
+			<invitation/>
+			<icon>black</icon>
+			<ordering>5</ordering>
+		</category>
+		<category tag="bikeshops">
+			<tag>bikeshops</tag>
+			<name>Bike shop</name>
+			<plural>Bike shops</plural>
+			<nameShowing>a bikeshop</nameShowing>
+			<description>A place where you can buy bikes or get them fixed.</description>
+			<invitation/>
+			<icon>spanner</icon>
+			<ordering>5</ordering>
+		</category>
+		<category tag="roadworks">
+			<tag>roadworks</tag>
+			<name>Roadworks</name>
+			<plural>Roadworks</plural>
+			<nameShowing>roadworks</nameShowing>
+			<description>A place where cyclists will be delayed or need to take extra care, but they can still pass.</description>
+			<invitation/>
+			<icon>roadworks</icon>
+			<ordering>5</ordering>
+		</category>
+		<category tag="closure">
+			<tag>closure</tag>
+			<name>Temporary closure</name>
+			<plural>Temporary closures</plural>
+			<nameShowing>a closure</nameShowing>
+			<description>A route temporarily barred to cycle access.</description>
+			<invitation/>
+			<icon>cone</icon>
+			<ordering>5</ordering>
+		</category>
+		<category tag="bicycles">
+			<tag>bicycles</tag>
+			<name>Bicycle</name>
+			<plural>Bicycles</plural>
+			<nameShowing>a bicycle</nameShowing>
+			<description>A photo of a bicycle. Usually some interesting bike, eg. recumbent, basket or trailer, or even rider.</description>
+			<invitation/>
+			<icon>bike</icon>
+			<ordering>8</ordering>
+		</category>
+		<category tag="congestion">
+			<tag>congestion</tag>
+			<name>Congestion</name>
+			<plural>Congestion</plural>
+			<nameShowing>congestion</nameShowing>
+			<description>A place where cyclists will be delayed or need to take extra care, but they can still pass.</description>
+			<invitation/>
+			<icon>congestion</icon>
+			<ordering>8</ordering>
+		</category>
+		<category tag="general">
+			<tag>general</tag>
+			<name>Other</name>
+			<plural>Other</plural>
+			<nameShowing>something general</nameShowing>
+			<description>A general photo.</description>
+			<invitation/>
+			<icon>white_wisp</icon>
+			<ordering>9</ordering>
+		</category>
+	</categories>
+	<metacategories>
+		<metacategory>
+			<tag>bad</tag>
+			<name>Problem</name>
+			<description>A problem that needs to be fixed</description>
+			<ordering>1</ordering>
+		</metacategory>
+		<metacategory>
+			<tag>good</tag>
+			<name>Good practice</name>
+			<description>An example of good practice</description>
+			<ordering>2</ordering>
+		</metacategory>
+		<metacategory>
+			<tag>other</tag>
+			<name>Infrastructure</name>
+			<description>Other (infrastructure-related)</description>
+			<ordering>3</ordering>
+		</metacategory>
+		<metacategory>
+			<tag>any</tag>
+			<name>Misc</name>
+			<description>Non-specific</description>
+			<ordering>4</ordering>
+		</metacategory>
+		<metacategory>
+			<tag>event</tag>
+			<name>Event</name>
+			<description>Event or temporary issue</description>
+			<ordering>5</ordering>
+		</metacategory>
+	</metacategories>
+</photomapcategories>

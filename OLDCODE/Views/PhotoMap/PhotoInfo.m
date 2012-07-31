@@ -50,13 +50,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 /***********************************************************/
 - (void)dealloc
 {
-    [categoryPicker release], categoryPicker = nil;
-    [doneButton release], doneButton = nil;
-    [cancelButton release], cancelButton = nil;
-    [typeLabel release], typeLabel = nil;
-    [descLabel release], descLabel = nil;
+    categoryPicker = nil;
+    doneButton = nil;
+    cancelButton = nil;
+    typeLabel = nil;
+    descLabel = nil;
 	
-    [super dealloc];
 }
 
 

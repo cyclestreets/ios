@@ -55,7 +55,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, copy) NSString *category;
 @property (nonatomic, copy) NSString *metaCategory;
 
-@property (nonatomic, retain) NSData *imageData;
+@property (nonatomic, strong) NSData *imageData;
 
 - (id) initWithUsername:(NSString *)username withPassword:(NSString *)password;
 

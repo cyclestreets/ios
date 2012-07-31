@@ -1,16 +1,16 @@
 //
-//  RKUserSettingsManager.m
-//  CycleStreets
+//  UserSettingsManager.m
+//
 //
 //  Created by neil on 10/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Copyright 2009 Buffer. All rights reserved.
 //
 
 #import "UserSettingsManager.h"
 #import "SynthesizeSingleton.h"
 #import "GlobalUtilities.h"
 
-static NSString *const ID = @"StyleManager";
+static NSString *const ID = @"UserSettingsManager";
 
 
 @interface UserSettingsManager(Private)
@@ -29,8 +29,11 @@ static NSString *const ID = @"StyleManager";
 SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 @synthesize settings;
 @synthesize userState;
+@synthesize systemState;
 @synthesize userStateWritable;
 @synthesize delegate;
+@synthesize stateDict;
+@synthesize hasSettingsBundle;
 
 
 /***********************************************************/
@@ -38,11 +41,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 /***********************************************************/
 - (void)dealloc
 {
-    [settings release], settings = nil;
-    [userState release], userState = nil;
     delegate = nil;
 	
-    [super dealloc];
 }
 
 
@@ -65,6 +65,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 // install. opens root.plist and sets the user prefs to the default set
 - (void) loadUserSettings:(NSString *)aKey{
 	
+	
 	settings = [NSUserDefaults standardUserDefaults]; // does not need releasing as this static method
 	
 	// if settings doesnt contain a known key then this must be 1st run
@@ -76,6 +77,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 							stringByAppendingPathComponent:@"Settings.bundle/Root.plist"];
 		NSDictionary *plist = [[NSDictionary dictionaryWithContentsOfFile:bundle]
 							   objectForKey:@"PreferenceSpecifiers"];
+		
+		// if plist is empty, we have no Settings bundle, exit
+		if(plist==nil)
+			return;
+		
 		NSMutableDictionary *defaults = [[NSMutableDictionary alloc]init];
 		
 		// Loop through the bundle settings preferences and pull out the key/default pairs
@@ -91,7 +97,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 		[settings setPersistentDomain:defaults forName:[[NSBundle mainBundle] bundleIdentifier]];
 		settings = [NSUserDefaults standardUserDefaults];
 		
-		[defaults release];
 	}
 	
 }
@@ -114,7 +119,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
  ***********************************************/
 //
 -(NSArray*)navigation{
-	return [userState objectForKey:kSTATENAVIGATION];
+	return [userState objectForKey:kUSERSTATEKEY_NAVIGATION];
 }
 
 
@@ -125,9 +130,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 //
 -(int)getSavedSection{
 	
+	BetterLog(@"");
+	
 	int index=0;
 	
-	NSArray *navigation=[userState objectForKey:kSTATENAVIGATION];
+	NSArray *navigation=[userState objectForKey:kUSERSTATEKEY_NAVIGATION];
 	for(int i=0;i<[navigation count]; i++){
 		NSDictionary *navitem=[navigation objectAtIndex:i];
 		if([[navitem objectForKey:@"id"] isEqualToString:[userState objectForKey:@"context"]]){
@@ -146,7 +153,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 //
 -(void)setSavedSection:(NSString*)type{	
 	
-	NSArray *navigation=[userState objectForKey:kSTATENAVIGATION];
+	BetterLog(@"");
+	
+	NSArray *navigation=[userState objectForKey:kUSERSTATEKEY_NAVIGATION];
+	
+	
 	for(int i=0;i<[navigation count]; i++){
 		NSDictionary *navitem=[navigation objectAtIndex:i];
 		if([[navitem objectForKey:@"title"] isEqualToString:type]){
@@ -164,9 +175,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
  ***********************************************/
 //
 -(NSString*)context{
-	return [userState objectForKey:kSTATECONTEXT];
+	return [userState objectForKey:kUSERSTATEKEY_CONTEXT];
 }
 
+-(NSDate*)lastOpenedDate{
+	return [userState objectForKey:kUSERSTATEKEY_LASTOPENEDDATE];
+}
 
 -(id)userDefaultForType:(NSString*)key{
 	return [settings objectForKey:key];
@@ -196,13 +210,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 - (void)loadApplicationState{
 	
 	userStateWritable=[self copyApplicationState];
-		
+	
 	if (userStateWritable==YES) {
-		userState=[[NSMutableDictionary alloc] initWithContentsOfFile:[self userStatePath]];
+		self.stateDict=[[NSMutableDictionary alloc] initWithContentsOfFile:[self userStatePath]];
 	}else {
-		userState=[[NSMutableDictionary alloc] initWithContentsOfFile:[self bundleStatePath]];
+		self.stateDict=[[NSMutableDictionary alloc] initWithContentsOfFile:[self bundleStatePath]];
 	}
-
+	
+	self.userState=[stateDict objectForKey:kSTATEUSERCONTROLLEDSETTINGSKEY];
+	self.systemState=[stateDict objectForKey:kSTATESYSTEMCONTROLLEDSETTINGSKEY];
 }
 
 //
@@ -214,7 +230,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 	
 	NSMutableArray *newcontrollers=[[NSMutableArray alloc]init];
 	
-	NSArray *navigation=[userState objectForKey:kSTATENAVIGATION];
+	NSArray *navigation=[userState objectForKey:kUSERSTATEKEY_NAVIGATION];
 	
 	for (int i=0; i<[controllers count];i++) {
 		
@@ -231,10 +247,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 		
 	}
 	
-	[userState setObject:newcontrollers forKey:kSTATENAVIGATION];
-	[newcontrollers release];
+	[userState setObject:newcontrollers forKey:kUSERSTATEKEY_NAVIGATION];
 	
 }
+
+
+//
+/***********************************************
+ * @description			generic methods
+ ***********************************************/
+//
+-(void)saveObject:(id)object forKey:(NSString*)key{
+	
+	if(object!=nil){
+		
+		id foundobject=[userState objectForKey:key];
+		if(foundobject==nil){
+			BetterLog(@"[WARINING] Saving unkown userState key: %@ with object %@",key,object);
+		}
+		if(KUSERSTATECANSAVEUNKNOWNS==1){
+			[userState setObject:object forKey:key];
+			[self saveApplicationState];
+		}
+	}
+}
+
+
+-(id)fetchObjectforKey:(NSString*)key{
+	
+	if(key!=nil){
+		
+		id foundobject=[userState objectForKey:key];
+		if(foundobject==nil){
+			BetterLog(@"[WARINING] Couldnt find userState key: %@",key);
+			return nil;
+		}else{
+			return foundobject;
+		}
+	}
+	return nil;
+}
+
+
 
 //
 /***********************************************
@@ -242,8 +296,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
  ***********************************************/
 //
 -(void)saveApplicationState{
+	
+	BetterLog(@"");
+	
 	if(userStateWritable==YES){
-		[userState writeToFile:[self userStatePath] atomically:YES];
+		[stateDict writeToFile:[self userStatePath] atomically:YES];
 	}
 }
 
@@ -291,8 +348,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 			appstateexists=[self copyUserStateToUser];
 		}
 		
-		[bstate release];
-		[ustate release];
 
 		
 	}
@@ -328,7 +383,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
  ***********************************************/
 //
 - (NSString*) userStatePath{	
-	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString* docsdir=[paths objectAtIndex:0];
 	return [docsdir stringByAppendingPathComponent:kSTATEFILE];
 }
