@@ -58,6 +58,22 @@
 		</dict>
 		<dict>
 			<key>title</key>
+			<string>Add Photo</string>
+			<key>id</key>
+			<string>addphoto</string>
+			<key>class</key>
+			<string>PhotoWizardViewController</string>
+			<key>nib</key>
+			<string>PhotoWizardView</string>
+			<key>tabimage</key>
+			<string>CSTabBar_add_photo.png</string>
+			<key>isVC</key>
+			<true/>
+			<key>hidesBottomBarWhenPushed</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>title</key>
 			<string>Settings</string>
 			<key>id</key>
 			<string>settings</string>

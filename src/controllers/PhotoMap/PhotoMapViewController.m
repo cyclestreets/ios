@@ -602,6 +602,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 -(IBAction)showPhotoWizard:(id)sender{
 	
 	PhotoWizardViewController *photoWizard=[[PhotoWizardViewController alloc]initWithNibName:[PhotoWizardViewController nibName] bundle:nil];
+	photoWizard.isModal=YES;
 	
 	[self presentViewController:photoWizard animated:YES completion:nil];
 	

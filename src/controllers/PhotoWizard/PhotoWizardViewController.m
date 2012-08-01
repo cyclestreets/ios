@@ -83,10 +83,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @synthesize viewState;
 @synthesize pageScrollView;
 @synthesize pageControl;
+@synthesize headerView;
+@synthesize footerView;
 @synthesize pageContainer;
 @synthesize activePage;
 @synthesize maxVisitedPage;
 @synthesize viewArray;
+@synthesize isModal;
 @synthesize nextButton;
 @synthesize prevButton;
 @synthesize pageTitleLabel;
@@ -135,7 +138,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @synthesize photoResultURLLabel;
 @synthesize photoMapButton;
 @synthesize categoryMenu;
-
 
 
 
@@ -240,7 +242,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 //
 
 
+
 - (void)viewDidLoad {
+	
 	
     [super viewDidLoad];
     
@@ -283,12 +287,35 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
     pageControl.numberOfPages=1;
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
+	
+	[self createNavigationBarUI];
 
 	
 	[self initialiseViewState:PhotoWizardViewStateInfo];
     
 }
 
+
+-(void)createNavigationBarUI{
+	
+	if(isModal!=YES){
+		
+		self.navigationItem.backBarButtonItem.tintColor=UIColorFromRGB(0xA71D1D);
+		
+		self.prevButton = [[UIBarButtonItem alloc] initWithTitle:@"Previous" style:UIBarButtonItemStyleBordered target:self action:@selector(navigateToPreviousView:)];
+		self.nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(navigateToNextView:)];
+		
+		self.navigationItem.title=@"";
+		self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:nextButton,prevButton, nil];
+		
+		pageScrollView.y=20;
+		headerView.y=0;
+		footerView.y=387;
+		pageControl.y=0;
+		
+	}
+	
+}
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -879,8 +906,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[PhotoCategoryManager sharedInstance];
 	
-	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose Category..."];
-	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose Type...."];
+	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose..."];
 	
 	[categoryButton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
 	[categoryFeaturebutton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -1165,7 +1192,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)initCompleteView:(PhotoWizardViewState)state{
 	
 	
-	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View Map"];
+	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View map"];
 	[photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
     photoResultURLLabel.text=[uploadImage.responseDict objectForKey:@"url"];

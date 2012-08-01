@@ -225,6 +225,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			NSString  *vcClass=[navitem objectForKey:@"class"];
 			NSString  *nibName=[navitem objectForKey:@"nib"];
 			NSString  *vcTitle=[navitem objectForKey:@"title"];
+			BOOL  hidesBottomBarWhenPushed=[[navitem objectForKey:@"hidesBottomBarWhenPushed"]boolValue];
 			
 			//BetterLog(@"vcClass=%@  nibName=%@",vcClass,nibName);
 			
@@ -235,6 +236,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
 				if (isVC==YES) {
 					UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[navitem objectForKey:@"title"] image:[UIImage imageNamed:[navitem objectForKey:@"tabimage"]] tag:i];
+					vccontroller.hidesBottomBarWhenPushed=hidesBottomBarWhenPushed;
 					[vccontroller setTabBarItem:tabBarItem];
 					[navControllers addObject:vccontroller];
 				}else {
