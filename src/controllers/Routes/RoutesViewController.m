@@ -234,6 +234,8 @@
 					
 					[[RouteManager sharedInstance] loadRouteForRouteId:alertInputField.text];
 					
+					[routeTypeControl setSelectedSegmentIndex:1];
+					[self selectedIndexDidChange:1];
 				}
 			}
             break;

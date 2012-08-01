@@ -263,7 +263,7 @@
 		[cell populate];
 	}
 	
-	if([dataType isEqualToString:SAVEDROUTE_FAVS]){
+	if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
 		
 		UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellMenuPress:)];
 		[cell addGestureRecognizer:recognizer];
@@ -284,7 +284,9 @@
 	return YES;
 }
 
-- (void)cellMenuPress:(UILongPressGestureRecognizer *)recognizer {	
+- (void)cellMenuPress:(UILongPressGestureRecognizer *)recognizer {
+	
+	
 	
 	if(tableView.isEditing==NO){
 	
