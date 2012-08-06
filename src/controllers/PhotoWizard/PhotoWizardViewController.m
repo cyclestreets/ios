@@ -36,6 +36,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)updateGlobalViewUIForState;
 -(void)updateView;
 -(IBAction)navigateToNextView:(id)sender;
+-(void)resetToViewState:(PhotoWizardViewState)state;
 
 -(void)initInfoView:(PhotoWizardViewState)state;
 -(void)initPhotoView:(PhotoWizardViewState)state;
@@ -44,12 +45,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)updateLocationView;
 -(void)initCategoryView:(PhotoWizardViewState)state;
 -(void)updateCategoryView;
+-(void)resetCategoryView;
 -(IBAction)showCategoryMenu:(id)sender;
 -(void)didSelectCategoryFromMenu:(NSNotification*)notification;
 
 -(void)initDescriptionView:(PhotoWizardViewState)state;
 -(void)updateDescriptionView;
 -(void)resetDescriptionField;
+-(void)resetDescriptionView;
 -(void)initUploadView:(PhotoWizardViewState)state;
 -(void)initCompleteView:(PhotoWizardViewState)state;
 
@@ -437,6 +440,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[self updatePageControlExtents];
 }
 
+-(void)resetToViewState:(PhotoWizardViewState)state{
+    
+    maxVisitedPage=state-1;
+	activePage=state;
+	viewState=state;
+	pageControl.currentPage=viewState;
+	
+	if (maxVisitedPage==activePage) {
+		nextButton.enabled=NO;
+	}else {
+		nextButton.enabled=YES;
+	}
+	
+	CGPoint offset=CGPointMake(viewState*SCREENWIDTH, 0);
+	[pageScrollView setContentOffset:offset animated:YES];
+	
+    
+	[self updatePageControlExtents];
+}
+
 
 //
 /***********************************************
@@ -648,6 +671,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[ButtonUtilities styleIBButton:libraryButton type:@"green" text:@"Library"];
 	[libraryButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
+	
+	
 }
 
 -(void)updatePhotoView{
@@ -691,7 +716,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		picker.navigationBar.backgroundColor=UIColorFromRGBAndAlpha(0xFFFFFF,0);
 		picker.delegate = self;
 		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-		picker.allowsEditing = YES;
+		picker.allowsEditing = NO;
 		[self presentModalViewController:picker animated:YES];
 	}
 	else {
@@ -742,7 +767,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
     
 	[picker dismissModalViewControllerAnimated:YES];	
 	
+	// ensure further screens are reset
 	[self initialiseViewState:PhotoWizardViewStateLocation];
+	
+	 
+	 NSMutableDictionary *viewdict=[viewArray objectAtIndex:PhotoWizardViewStateCategory];
+	 if([viewdict objectForKey:@"created"]==BOX_BOOL(YES)){
+		 
+		 maxVisitedPage=PhotoWizardViewStateLocation;
+	
+		 [self resetCategoryView];
+		 [self resetDescriptionView];
+		 
+		 [self updateGlobalViewUIForState];
+		 
+		 [self updatePageControlExtents];
+	 
+	 }
     
 }
 
@@ -809,8 +850,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		if(uploadImage.userLocation==nil)
 			[self loadLocationFromPhoto];
 		
-        [self initialiseViewState:PhotoWizardViewStateCategory];
+		[self initialiseViewState:PhotoWizardViewStateCategory];
+		
     }
+	
+	
 }
 
 
@@ -920,6 +964,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 }
 
+-(void)resetCategoryView{
+	
+	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose..."];
+	
+	uploadImage.category=nil;
+	uploadImage.feature=nil;
+	
+}
+
 
 
 -(IBAction)showCategoryMenu:(id)sender{
@@ -1006,11 +1060,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 }
 
-
--(void)resetDescriptionField{
+-(void)resetDescriptionView{
 	
 	photodescriptionField.text=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
 	photodescriptionField.textColor=UIColorFromRGB(0x999999);
+	
+}
+
+
+-(void)resetDescriptionField{
+	
+	[self resetDescriptionView];
 	
 	[self removeViewState:PhotoWizardViewStateUpload];
 }
@@ -1206,7 +1266,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[PhotoManager sharedInstance].autoLoadLocation=uploadImage.activeLocation;
 	
-	[self closeWindowButtonSelected:nil];
+	if(isModal==YES){
+	
+		[self closeWindowButtonSelected:nil];
+		
+	}else{
+		
+		[self resetToViewState:PhotoWizardViewStateInfo];
+		
+		AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+		[appDelegate showTabBarViewControllerByName:@"Photomap"];
+		
+	}
 	
 }
 

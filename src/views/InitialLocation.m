@@ -142,11 +142,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		}
 		
 		self.mapView.hidden = NO;
+		
+		
 	} else {
 		
+		BOOL hasSelectedRoute=[[RouteManager sharedInstance] hasSelectedRoute];
+		
 		if([CLLocationManager locationServicesEnabled]==YES){
-			
-			BOOL hasSelectedRoute=[[RouteManager sharedInstance] hasSelectedRoute];
 			
 			if(hasSelectedRoute==NO){
 				
@@ -158,11 +160,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			
 		}else {
 			[self locationDidFail];
-		}		
-		if (self.welcomeView == nil) {
-			self.welcomeView = [self loadWelcomeView];
 		}
-		[self.controller.view addSubview:self.welcomeView];
+		
+		if(hasSelectedRoute==NO){
+		
+			if (self.welcomeView == nil) {
+				self.welcomeView = [self loadWelcomeView];
+			}
+			[self.controller.view addSubview:self.welcomeView];
+			
+		}
 		
 	}
 }
