@@ -29,7 +29,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
-@interface PhotoWizardViewController(Private) 
+@interface PhotoWizardViewController(Private)
+
+-(void)resetPhotoWizard;
 
 -(void)initialiseViewState:(PhotoWizardViewState)state;
 -(void)navigateToViewState:(PhotoWizardViewState)state;
@@ -55,6 +57,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)resetDescriptionView;
 -(void)initUploadView:(PhotoWizardViewState)state;
 -(void)initCompleteView:(PhotoWizardViewState)state;
+-(void)updateCompleteView;
 
 -(void)addViewToPageContainer:(NSMutableDictionary*)viewDict;
 
@@ -329,11 +332,51 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 
+// intercept back event to reset pw if we are on Complete state
+-(void) viewWillDisappear:(BOOL)animated {
+	
+	if(viewState==PhotoWizardViewStateResult){
+	
+		if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+			[self resetPhotoWizard];
+		}
+		
+	}
+		
+    [super viewWillDisappear:animated];
+}
+
+
 -(void)createNonPersistentUI{
     
    
     
 }
+
+
+
+
+-(void)resetPhotoWizard{
+	
+	viewState=PhotoWizardViewStateInfo;
+	activePage=0;
+	maxVisitedPage=-1;
+	
+	[pageContainer removeAllSubViews];
+	
+	for(NSMutableDictionary *viewDict in viewArray){
+		
+		[viewDict setObject:BOX_BOOL(NO) forKey:@"created"];
+		
+	}
+	
+	self.uploadImage=nil;
+	
+	[self initialiseViewState:PhotoWizardViewStateInfo];
+	
+}
+
+
 
 //
 /***********************************************
@@ -428,6 +471,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 -(void)removeViewState:(PhotoWizardViewState)state{
+	
+	BetterLog(@"");
     
     maxVisitedPage=state-1;
 	
@@ -441,6 +486,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 -(void)resetToViewState:(PhotoWizardViewState)state{
+	
+	BetterLog(@"");
     
     maxVisitedPage=state-1;
 	activePage=state;
@@ -467,6 +514,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
  ***********************************************/
 //
 -(void)navigateToViewState:(PhotoWizardViewState)state{
+	
+	BetterLog(@"");
 	
 	if(state<=maxVisitedPage){
 		
@@ -532,6 +581,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	}else {
 		prevButton.enabled=YES;
 	}
+	
+	if (activePage==PhotoWizardViewStateResult) {
+		prevButton.enabled=NO;
+		nextButton.enabled=NO;
+	}
+	
 }
 
 -(void)updateView{
@@ -562,6 +617,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		break;
 			
 		case PhotoWizardViewStateResult:
+			[self updateCompleteView];
 		break;
 			
 		default:
@@ -627,6 +683,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)updatePageControlExtents{
 	
+	BetterLog(@"");
+	
 	pageControl.numberOfPages=maxVisitedPage+1;
 	
 	
@@ -666,6 +724,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)initPhotoView:(PhotoWizardViewState)state{
 	
+	imagePreview.image=nil;
+	
 	[ButtonUtilities styleIBButton:cameraButton type:@"green" text:@"Camera"];
 	[cameraButton addTarget:self action:@selector(cameraButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[ButtonUtilities styleIBButton:libraryButton type:@"green" text:@"Library"];
@@ -685,6 +745,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		photodateLabel.text=[NSString stringWithFormat:@"%@",uploadImage.dateString];
     }else{
 		photoSizeLabel.text=EMPTYSTRING;
+		photolocationLabel.text=EMPTYSTRING;
 		photodateLabel.text=EMPTYSTRING;
     }
 }
@@ -1251,14 +1312,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)initCompleteView:(PhotoWizardViewState)state{
 	
+	BetterLog(@"");
+	
 	
 	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View map"];
 	[photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
     photoResultURLLabel.text=[uploadImage.responseDict objectForKey:@"url"];
 	
+	
+}
+
+-(void)updateCompleteView{
+	
+	BetterLog(@"");
+	
 	pageControl.numberOfPages=1;
 	[pageControl updateCurrentPageDisplay];
+	maxVisitedPage=0;
+	pageScrollView.scrollEnabled=NO;
+	
 	
 }
 
@@ -1272,10 +1345,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 	}else{
 		
-		[self resetToViewState:PhotoWizardViewStateInfo];
 		
 		AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
 		[appDelegate showTabBarViewControllerByName:@"Photomap"];
+		
+		[self resetPhotoWizard];
 		
 	}
 	

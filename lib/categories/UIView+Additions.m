@@ -97,6 +97,15 @@
 
 
 
+- (BOOL)visible {
+	return !self.hidden;
+}
+
+- (void)setVisible:(BOOL)visible {
+	self.hidden=!visible;
+}
+
+
 
 
 - (CGSize)size {
