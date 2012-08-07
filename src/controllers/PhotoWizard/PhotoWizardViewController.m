@@ -289,7 +289,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	pageScrollView.backgroundColor=UIColorFromRGB(0xDBD8D3);
 	pageScrollView.delegate=self;
 	pageControl.hidesForSinglePage=YES;
-    //pageControl.defersCurrentPageDisplay=YES;
     pageControl.numberOfPages=1;
 	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
@@ -1353,7 +1352,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 -(IBAction)photoMapButtonSelected:(id)sender{
-	
 	
 	
 	[PhotoManager sharedInstance].autoLoadLocation=uploadImage.activeLocation;

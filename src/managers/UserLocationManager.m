@@ -46,6 +46,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	coordinate.longitude = 0.0;
 	return coordinate;
 }
+
 + (CLLocation*)defaultLocation {
 	
 	CLLocationCoordinate2D coordinate=[UserLocationManager defaultCoordinate];
