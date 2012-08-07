@@ -737,7 +737,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)updatePhotoView{
 	
-	cameraButton.enabled=[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+
+	[cameraButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]];
+	[libraryButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]];
 	
 	if(uploadImage!=nil){
         imagePreview.image=uploadImage.image;
@@ -1347,7 +1349,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 }
 
+
+
+
 -(IBAction)photoMapButtonSelected:(id)sender{
+	
+	
 	
 	[PhotoManager sharedInstance].autoLoadLocation=uploadImage.activeLocation;
 	
@@ -1364,6 +1371,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		[self resetPhotoWizard];
 		
 	}
+	
 	
 }
 

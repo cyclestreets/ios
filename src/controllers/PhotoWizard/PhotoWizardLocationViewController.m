@@ -147,7 +147,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	[self.mapView moveToLatLong:location.coordinate];
 	
 	if ([mapView.contents zoom] < 18) {
-		[mapView.contents setZoom:17];
+		[mapView.contents setZoom:15];
 	}
 	
 }
