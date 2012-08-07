@@ -899,13 +899,25 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
     if(uploadImage.location==nil || dist==0.0){
 		
-		if([UserLocationManager sharedInstance].doesDeviceAllowLocation==NO){
+		
+		if(uploadImage.userLocation!=nil){
 			
-			[self displayDefaultLocation];
 			
-		}else {
-			[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+			[self updateLocationMapViewForLocation:uploadImage.userLocation];
+			
+		}else{
+			
+			if([UserLocationManager sharedInstance].doesDeviceAllowLocation==NO){
+				
+				[self displayDefaultLocation];
+				
+			}else {
+				[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+			}
+			
 		}
+		
+		
 		
 	}else{
 		if(uploadImage.userLocation==nil)

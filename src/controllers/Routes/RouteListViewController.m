@@ -69,6 +69,8 @@
 	BetterLog(@"");
 	
 	[self initialise];
+	
+	displaysConnectionErrors=NO;
     
     [notifications addObject:NEWROUTEBYIDRESPONSE]; // user initiated route by id response
     [notifications addObject:SAVEDROUTEUPDATE]; // new route search, recent>fav move etc

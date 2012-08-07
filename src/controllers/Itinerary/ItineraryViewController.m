@@ -151,8 +151,6 @@
 	BetterLog(@"");
 	
 	
-	
-	
 	if(route==nil){
 		
 		
@@ -185,11 +183,6 @@
 
 -(void)createNavigationBarUI{
 	
-	/*
-	UIBarButtonItem *rightBarButton=[[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveItineraryButtonSelected:)];
-	[self.navigationItem setRightBarButtonItem:rightBarButton animated:NO];
-	[rightBarButton release];
-	*/
 }
 
 
@@ -221,52 +214,13 @@
 	cell.dataProvider=segment;
 	[cell populate];
 	
-	UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-	[cell addGestureRecognizer:recognizer];
-	
     return cell;
 }
 
-- (void)longPress:(UILongPressGestureRecognizer *)recognizer {	
-	
-	BetterLog(@"");
-	
-	if (recognizer.state == UIGestureRecognizerStateBegan) {
-		
-		BetterLog(@"");
-		
-		ItineraryCellView *cell = (ItineraryCellView *)recognizer.view;
-        [cell becomeFirstResponder];
-		
-        UIMenuItem *flag = [[UIMenuItem alloc] initWithTitle:@"Flag" action:@selector(flag:)];
-        UIMenuItem *approve = [[UIMenuItem alloc] initWithTitle:@"Approve" action:@selector(approve:)];
-		UIMenuItem *deny = [[UIMenuItem alloc] initWithTitle:@"Deny" action:@selector(deny:)];
-		
-        UIMenuController *menu = [UIMenuController sharedMenuController];
-		[menu setMenuItems:[NSArray arrayWithObjects:flag, approve, deny, nil]];
-		//[menu setTargetRect:cell.frame inView:cell.superview];
-        [menu setMenuVisible:YES animated:YES];
-	}
-}
-
-
-- (void)flag:(id)sender {
-	NSLog(@"Cell was flagged");
-}
-
-- (void)approve:(id)sender {
-	NSLog(@"Cell was approved");
-}
-
-- (void)deny:(id)sender {
-	NSLog(@"Cell was denied");
-}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-	// TODO: this should be pushed not presented
-	
 	if(routeSegmentViewcontroller==nil){
 		self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] init];
 	}

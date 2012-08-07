@@ -210,7 +210,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 }
 
-- (void) photoFailure:(XMLRequest *)request message:(NSString *)message {
+- (void) photoFailureMessage:(NSString *)message {
 	//is it even worth bothering to alert ?
 	self.queryPhoto = nil;
 }
@@ -222,7 +222,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	photosIndex = index;//we are looking for the photos associated with this index
 	self.queryPhoto = [[QueryPhoto alloc] initNorthEast:ne SouthWest:sw limit:4];
-	[queryPhoto runWithTarget:self onSuccess:@selector(photoSuccess:results:) onFailure:@selector(photoFailure:message:)];
+	[queryPhoto runWithTarget:self onSuccess:@selector(photoSuccess:results:) onFailure:@selector(photoFailureMessage:)];
 }
 
 

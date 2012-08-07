@@ -96,8 +96,10 @@
 
 -(void)listNotificationInterests{
 	
-	[notifications addObject:DATAREQUESTFAILED];
-	[notifications addObject:CONNECTIONERROR];
+	if(displaysConnectionErrors==YES){
+		[notifications addObject:DATAREQUESTFAILED];
+		[notifications addObject:CONNECTIONERROR];
+	}
 }
 
 

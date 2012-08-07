@@ -46,6 +46,8 @@
 -(void)listNotificationInterests{
 	
 	[self initialise];
+	
+	displaysConnectionErrors=NO;
     
     [notifications addObject:CSROUTESELECTED];
 	
