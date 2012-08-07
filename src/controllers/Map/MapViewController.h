@@ -86,6 +86,7 @@ typedef enum PlanningStateT PlanningState;
 	
 	RMMarker *start;
 	RMMarker *end;
+	RMMarker *activeMarker;
 	NSMutableArray *startEndPool;//work around release/retain problem on Markers, only visible on 3.1.3.
 	
 	//lots of state flags. Needs a refactor. Turn everything into planningState ?
@@ -134,6 +135,7 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, strong) RouteVO		* route;
 @property (nonatomic, strong) RMMarker		* start;
 @property (nonatomic, strong) RMMarker		* end;
+@property (nonatomic, strong) RMMarker		* activeMarker;
 @property (nonatomic, strong) NSMutableArray		* startEndPool;
 @property (nonatomic, assign) BOOL		 doingLocation;
 @property (nonatomic, assign) BOOL		 programmaticChange;

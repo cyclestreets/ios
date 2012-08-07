@@ -142,7 +142,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize noLocationAlert;
 @synthesize planningState;
 @synthesize routeplanMenu;
-
+@synthesize activeMarker;
 
 
 
@@ -506,8 +506,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 }
 
+
 - (void) afterMapMove: (RMMapView*) map {
 	[self afterMapChanged:map];
+}
+
+-(void)afterMapTouch:(RMMapView *)map{
+	
+	map.enableDragging=YES;
+	
 }
 
 
@@ -529,14 +536,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // Should only return yes is marker is start/end and we have not a route drawn
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
-	BetterLog(@"");
+	BetterLog(@"self.planningState=%i ",self.planningState);
 	
 	BOOL result=NO;
 	
 	if(self.planningState!=stateRoute){
 		
 		if (marker == start || marker == end) {
+			activeMarker=marker;
 			result=YES;
+		}else{
+			activeMarker=nil;
 		}
 		
 	}
@@ -545,19 +555,27 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	return result;
 }
 
-//TODO: bug here with marker dragging, doesnt recieve any touch updates: 
-//NE: fix is, should ask for correct sub view, we have several overlayed, this needs to be optimised for this to work
+
+// we know we have touch began on marker markerdrag=yes;
+// we know whne touch ended is not on marker
+// if markerdrag==yes > re enable map drag
+// we also know if markerdrag is yes and we start getting RMLayerCollection objects we should still be sending markerdrag data via didDragMarker
+
+
+// NE: bug here where it's posible to lose the touch on the market by moving quickly
+// will execute touchEnded
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
 	NSSet *touches = [event touchesForView:blueCircleView]; 
 	// note use of top View required, bcv should not be left top unless required by location?
 	
 	BetterLog(@"touches=%i",[touches count]);
+	BetterLog(@"activeMarker=%@",activeMarker);
 	
 	for (UITouch *touch in touches) {
 		CGPoint point = [touch locationInView:blueCircleView];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
-		[[map markerManager] moveMarker:marker AtLatLon:location];
+		[[map markerManager] moveMarker:activeMarker AtLatLon:location];
 	}
 	
 }
