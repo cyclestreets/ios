@@ -118,7 +118,7 @@
     if([dataProvider count]>0){
         
         if(isSectioned==YES){
-            self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString"];
+            self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString" sortedBy:@"dateString"];
             self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO ascending:NO];
         }
         [self createRowHeightsArray];

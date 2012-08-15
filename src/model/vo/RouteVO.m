@@ -243,54 +243,60 @@
 //
 
 
-static NSString *SEGMENTS = @"segments";
-static NSString *ROUTEID = @"routeid";
-static NSString *NORTH_EAST = @"northEast";
-static NSString *SOUTH_WEST = @"southWest";
-static NSString *NAME = @"name";
-static NSString *SPEED = @"speed";
-static NSString *LENGTH = @"length";
-static NSString *PLAN = @"plan";
-static NSString *TIME = @"time";
-static NSString *ROUTEDATE = @"date";
-static NSString *USER_ROUTE_NAME = @"userRouteName";
+static NSString *kSEGMENTS_KEY = @"segments";
+static NSString *kROUTEID_KEY = @"routeid";
+static NSString *kNORTH_EAST_KEY = @"northEast";
+static NSString *kSOUTH_WEST_KEY = @"southWest";
+static NSString *kNAME_KEY = @"name";
+static NSString *kSPEED_KEY = @"speed";
+static NSString *kLENGTH_KEY = @"length";
+static NSString *kPLAN_KEY = @"plan";
+static NSString *kTIME_KEY = @"time";
+static NSString *kDATE_KEY = @"date";
+static NSString *kUSER_ROUTE_NAME_KEY = @"userRouteName";
+static NSString *kCALORIE_KEY = @"calorie";
+static NSString *kCOSAVED_KEY = @"cosaved";
 
 
 
-//=========================================================== 
+//===========================================================
 //  Keyed Archiving
 //
-//=========================================================== 
-- (void)encodeWithCoder:(NSCoder *)encoder 
+//===========================================================
+- (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:self.segments forKey:SEGMENTS];
-    [encoder encodeObject:self.routeid forKey:ROUTEID];
-    [encoder encodeObject:self.northEast forKey:NORTH_EAST];
-    [encoder encodeObject:self.southWest forKey:SOUTH_WEST];
-    [encoder encodeObject:self.name forKey:NAME];
-    [encoder encodeInteger:self.speed forKey:SPEED];
-    [encoder encodeObject:self.length forKey:LENGTH];
-    [encoder encodeObject:self.plan forKey:PLAN];
-    [encoder encodeInteger:self.time forKey:TIME];
-    [encoder encodeObject:self.date forKey:ROUTEDATE];
-    [encoder encodeObject:self.userRouteName forKey:USER_ROUTE_NAME];
+    [encoder encodeObject:self.segments forKey:kSEGMENTS_KEY];
+    [encoder encodeObject:self.routeid forKey:kROUTEID_KEY];
+    [encoder encodeObject:self.northEast forKey:kNORTH_EAST_KEY];
+    [encoder encodeObject:self.southWest forKey:kSOUTH_WEST_KEY];
+    [encoder encodeObject:self.name forKey:kNAME_KEY];
+    [encoder encodeInteger:self.speed forKey:kSPEED_KEY];
+    [encoder encodeObject:self.length forKey:kLENGTH_KEY];
+    [encoder encodeObject:self.plan forKey:kPLAN_KEY];
+    [encoder encodeInteger:self.time forKey:kTIME_KEY];
+    [encoder encodeObject:self.date forKey:kDATE_KEY];
+    [encoder encodeObject:self.userRouteName forKey:kUSER_ROUTE_NAME_KEY];
+    [encoder encodeObject:self.calorie forKey:kCALORIE_KEY];
+    [encoder encodeObject:self.cosaved forKey:kCOSAVED_KEY];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder 
+- (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     if (self) {
-        self.segments = [decoder decodeObjectForKey:SEGMENTS];
-        self.routeid = [decoder decodeObjectForKey:ROUTEID];
-        self.northEast = [decoder decodeObjectForKey:NORTH_EAST];
-        self.southWest = [decoder decodeObjectForKey:SOUTH_WEST];
-        self.name = [decoder decodeObjectForKey:NAME];
-        self.speed = [decoder decodeIntegerForKey:SPEED];
-        self.length = [decoder decodeObjectForKey:LENGTH];
-        self.plan = [decoder decodeObjectForKey:PLAN];
-        self.time = [decoder decodeIntegerForKey:TIME];
-        self.date = [decoder decodeObjectForKey:ROUTEDATE];
-        self.userRouteName = [decoder decodeObjectForKey:USER_ROUTE_NAME];
+        self.segments = [decoder decodeObjectForKey:kSEGMENTS_KEY];
+        self.routeid = [decoder decodeObjectForKey:kROUTEID_KEY];
+        self.northEast = [decoder decodeObjectForKey:kNORTH_EAST_KEY];
+        self.southWest = [decoder decodeObjectForKey:kSOUTH_WEST_KEY];
+        self.name = [decoder decodeObjectForKey:kNAME_KEY];
+        self.speed = [decoder decodeIntegerForKey:kSPEED_KEY];
+        self.length = [decoder decodeObjectForKey:kLENGTH_KEY];
+        self.plan = [decoder decodeObjectForKey:kPLAN_KEY];
+        self.time = [decoder decodeIntegerForKey:kTIME_KEY];
+        self.date = [decoder decodeObjectForKey:kDATE_KEY];
+        self.userRouteName = [decoder decodeObjectForKey:kUSER_ROUTE_NAME_KEY];
+        self.calorie = [decoder decodeObjectForKey:kCALORIE_KEY];
+        self.cosaved = [decoder decodeObjectForKey:kCOSAVED_KEY];
     }
     return self;
 }

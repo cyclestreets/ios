@@ -29,10 +29,10 @@
 @synthesize routeidLabel;
 @synthesize readoutLineOne;
 @synthesize readoutLineTwo;
+@synthesize readoutLineThree;
 @synthesize readoutContainer;
 @synthesize tableView;
 @synthesize rowHeightsArray;
-
 
 
 //
@@ -103,7 +103,7 @@
 -(void)createPersistentUI{
 	
 	readoutContainer.paddingTop=5;
-	readoutContainer.itemPadding=5;
+	readoutContainer.itemPadding=4;
 	readoutContainer.layoutMode=BUVerticalLayoutMode;
 	readoutContainer.alignMode=BUCenterAlignMode;
 	readoutContainer.fixedWidth=YES;
@@ -123,14 +123,21 @@
 	readoutLineTwo.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
 	readoutLineTwo.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
+	readoutLineThree=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
+	readoutLineThree.showShadow=YES;
+	readoutLineThree.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
+	readoutLineThree.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	
+	
 	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutlabel.font=[UIFont systemFontOfSize:13];
+	readoutlabel.font=[UIFont systemFontOfSize:12];
 	readoutlabel.textColor=UIColorFromRGB(0x666666);
 	readoutlabel.shadowColor=[UIColor whiteColor];
 	readoutlabel.shadowOffset=CGSizeMake(0, 1);
-	readoutlabel.text=@"Select any section to view the map and details for this segment.";
+	readoutlabel.text=@"Select any segment to view the map & details for it.";
+	 
 	
-	[readoutContainer addSubViewsFromArray:[NSArray arrayWithObjects:readoutLineOne,readoutLineTwo,readoutlabel,nil]];
+	[readoutContainer addSubViewsFromArray:[NSArray arrayWithObjects:readoutLineOne,readoutLineTwo,readoutLineThree,readoutlabel, nil]];
 	
 	[self createNavigationBarUI];
 }
@@ -172,6 +179,10 @@
 		readoutLineTwo.labels=[NSArray arrayWithObjects:@"Planned speed:",route.speedString,
 							   @"Strategy:",route.planString,nil];
 		[readoutLineTwo drawUI];
+		
+		readoutLineThree.labels=[NSArray arrayWithObjects:@"Calories:",route.calorieString,
+							   @"CO2 saved:",route.coString,nil];
+		[readoutLineThree drawUI];
 		
 		self.navigationItem.rightBarButtonItem.enabled=YES;
 		
