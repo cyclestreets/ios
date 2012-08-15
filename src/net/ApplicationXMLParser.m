@@ -418,6 +418,8 @@
 		route.date=[TBXML textForElement:[TBXML childElementNamed:@"cs:whence" parentElement:routenode]]; // ie date-time
 		route.speed=[[TBXML textForElement:[TBXML childElementNamed:@"cs:speed" parentElement:routenode]]intValue];
 		route.time=[[TBXML textForElement:[TBXML childElementNamed:@"cs:time" parentElement:routenode]]intValue];
+		route.calorie=[TBXML textForElement:[TBXML childElementNamed:@"cs:calories" parentElement:routenode]];
+		route.cosaved=[TBXML textForElement:[TBXML childElementNamed:@"cs:grammesCO2saved" parentElement:routenode]];
 		
 		CLLocationCoordinate2D nelocation;
 		nelocation.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:north" parentElement:routenode]] floatValue];

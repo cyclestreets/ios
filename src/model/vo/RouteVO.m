@@ -25,6 +25,9 @@
 @synthesize time;
 @synthesize date;
 @synthesize userRouteName;
+@synthesize calorie;
+@synthesize cosaved;
+
 
 
 - (id)init {
@@ -121,6 +124,26 @@
 -(NSString*)planString{
 	
 	return [[self plan] capitalizedString];
+	
+}
+
+-(NSString*)calorieString{
+	
+	if(calorie!=nil){
+		return [NSString stringWithFormat:@"%@ kcal",calorie];
+	}else{
+		return @"N/A";
+	}
+	
+	
+}
+-(NSString*)coString{
+	
+	if(cosaved!=nil){
+		return [NSString stringWithFormat:@"%@ gms",cosaved];
+	}else{
+		return @"N/A";
+	}
 	
 }
 

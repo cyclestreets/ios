@@ -28,18 +28,23 @@
 	NSString				*date;
 	NSString				*userRouteName; // user editable route name, displayed if set
 	
+	NSString				*calorie;
+	NSString				*cosaved;
+	
 }
-@property (nonatomic, strong)	NSMutableArray		*segments;
-@property (nonatomic, strong)	NSString		*routeid;
-@property (nonatomic, strong)	CLLocation		*northEast;
-@property (nonatomic, strong)	CLLocation		*southWest;
-@property (nonatomic, strong)	NSString		*name;
-@property (nonatomic)	NSInteger		speed;
-@property (nonatomic, strong)	NSNumber		*length;
-@property (nonatomic, strong)	NSString		*plan;
-@property (nonatomic)	NSInteger		time;
-@property (nonatomic, strong)	NSString		*date;
-@property (nonatomic, strong)	NSString		*userRouteName;
+@property (nonatomic, strong) NSMutableArray		* segments;
+@property (nonatomic, strong) NSString		* routeid;
+@property (nonatomic, strong) CLLocation		* northEast;
+@property (nonatomic, strong) CLLocation		* southWest;
+@property (nonatomic, strong) NSString		* name;
+@property (nonatomic, assign) NSInteger		 speed;
+@property (nonatomic, strong) NSNumber		* length;
+@property (nonatomic, strong) NSString		* plan;
+@property (nonatomic, assign) NSInteger		 time;
+@property (nonatomic, strong) NSString		* date;
+@property (nonatomic, strong) NSString		* userRouteName;
+@property (nonatomic, strong) NSString		* calorie;
+@property (nonatomic, strong) NSString		* cosaved;
 
 // getters
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
@@ -49,6 +54,9 @@
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*dateOnlyString;
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*planString;
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*nameString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*calorieString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString	*coString;
+
 @property (nonatomic, readonly)	int					numSegments;
 @property (nonatomic, readonly)	CLLocationCoordinate2D					basicNorthEast;
 @property (nonatomic, readonly)	CLLocationCoordinate2D					basicSouthWest;

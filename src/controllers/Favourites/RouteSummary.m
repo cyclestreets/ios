@@ -57,10 +57,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize lengthLabel;
 @synthesize planLabel;
 @synthesize speedLabel;
+@synthesize calorieLabel;
+@synthesize coLabel;
 @synthesize routeButton;
 @synthesize renameButton;
 @synthesize favouriteButton;
-
 
 
 
@@ -131,7 +132,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
 	viewContainer.fixedWidth=YES;
-	viewContainer.itemPadding=10;
+	viewContainer.itemPadding=7;
 	viewContainer.paddingTop=10;
 	viewContainer.paddingBottom=20;
 	viewContainer.layoutMode=BUVerticalLayoutMode;
@@ -182,6 +183,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	lengthLabel.text=route.lengthString;
 	planLabel.text=[[route plan] capitalizedString];
 	speedLabel.text=route.speedString;
+	calorieLabel.text=route.calorieString;
+	coLabel.text=route.coString;
 	
 	favouriteButton.hidden=dataType==SavedRoutesDataTypeFavourite;
 	
