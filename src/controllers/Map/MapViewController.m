@@ -533,7 +533,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 }
 
-// Should only return yes is marker is start/end and we have not a route drawn
+// Should only return yes if marker is start/end and we have not a route drawn
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
 	BetterLog(@"self.planningState=%i ",self.planningState);

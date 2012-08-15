@@ -730,15 +730,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[ButtonUtilities styleIBButton:libraryButton type:@"green" text:@"Library"];
 	[libraryButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-	
+	[cameraButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]];
+	[libraryButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]];
 	
 }
 
 -(void)updatePhotoView{
-	
-
-	[cameraButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]];
-	[libraryButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]];
 	
 	if(uploadImage!=nil){
         imagePreview.image=uploadImage.image;
