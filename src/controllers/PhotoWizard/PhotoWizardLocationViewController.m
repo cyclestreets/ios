@@ -183,6 +183,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	}
 	mapView.enableDragging=!result;
 	return result;
+	
 }
 
 
@@ -195,9 +196,11 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	for (UITouch *touch in touches) {
 		CGPoint point = [touch locationInView:map];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
-		[[map markerManager] moveMarker:marker AtLatLon:location];
+		[[map markerManager] moveMarker:userMarker AtLatLon:location];
 		[self markerLocationDidUpdate:location];
 	}
+	
+	
 	
 }
 
