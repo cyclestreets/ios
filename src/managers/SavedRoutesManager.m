@@ -172,12 +172,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
  * @description			handles Route movement from Recents <> favourites
  ***********************************************/
 //
--(void)moveRoute:(RouteVO*)route toDataProvider:(NSString*)type{
+-(BOOL)moveRoute:(RouteVO*)route toDataProvider:(NSString*)type{
 	
     NSString *key=[self findRouteType:route];
     
     if([key isEqualToString:@"NotFound"]){
         BetterLog(@"[ERROR] Unable to find current route in dataProvider");
+		return NO;
     }else{
         
         NSMutableArray *fromArr;
@@ -206,6 +207,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		[self saveIndicies];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:SAVEDROUTEUPDATE object:nil];
+		
+		return YES;
     }
 	
 	
