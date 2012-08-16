@@ -124,6 +124,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		[self saveIndicies];
 		
+		[[RouteManager sharedInstance] legacyRouteCleanup];
+		
 	}
 
 	
