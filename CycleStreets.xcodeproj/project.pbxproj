@@ -151,6 +151,7 @@
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		283435C615DD17B000B00FD5 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
 		283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
+		283435FC15DD54EF00B00FD5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283435FB15DD54EF00B00FD5 /* Crashlytics.framework */; };
 		283C02A3156D966900E677A6 /* CSBarButton_routePlan_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C02A2156D966900E677A6 /* CSBarButton_routePlan_white.png */; };
 		283C02A5156D971D00E677A6 /* CSBarButton_search_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C02A4156D971D00E677A6 /* CSBarButton_search_white.png */; };
 		283C02A7156D977900E677A6 /* CSBarButton_location_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C02A6156D977900E677A6 /* CSBarButton_location_white.png */; };
@@ -614,6 +615,7 @@
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
 		283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_norecentroutes.png; sourceTree = "<group>"; };
+		283435FB15DD54EF00B00FD5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		283C02A2156D966900E677A6 /* CSBarButton_routePlan_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_routePlan_white.png; sourceTree = "<group>"; };
 		283C02A4156D971D00E677A6 /* CSBarButton_search_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_search_white.png; sourceTree = "<group>"; };
 		283C02A6156D977900E677A6 /* CSBarButton_location_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_location_white.png; sourceTree = "<group>"; };
@@ -990,6 +992,7 @@
 				28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */,
 				28AD64C9131FB870008527FC /* libMapView.a in Frameworks */,
 				2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */,
+				283435FC15DD54EF00B00FD5 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2227,6 +2230,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				283435FB15DD54EF00B00FD5 /* Crashlytics.framework */,
 				28B78DA11507884C00949870 /* MapKit.framework */,
 				280E24D6144D89230021CDFA /* CFNetwork.framework */,
 				289E6AF8144C357C0079FFE5 /* libz.dylib */,
@@ -2268,6 +2272,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				283435FA15DD54B300B00FD5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2537,6 +2542,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		283435FA15DD54B300B00FD5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2728,10 +2749,15 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Lucas-Smith (H68FMP5WHB)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
@@ -2765,8 +2791,13 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
@@ -2874,8 +2905,13 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
