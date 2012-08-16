@@ -216,7 +216,8 @@
 				
 			case kViewOverlayTypeNoResults:
 				
-				break;
+			
+			break;
 			case kViewOverlayTypeLoginRestriction:		
 			case kViewOverlayTypeConnectionFailed:
 			case kViewOverlayTypeServerDown:
@@ -278,6 +279,174 @@
 		}
 		
 		[contentContainer addSubview:ilabel];					
+		
+		
+		
+		switch(type){
+				
+			case kViewOverlayTypeRequestIndicator:
+				viewOverlayView.alpha=0;
+				
+				[UIView beginAnimations:nil context:NULL];
+				[UIView setAnimationDelegate:self];
+				[UIView setAnimationDuration:0.1];
+				viewOverlayView.alpha=1;
+				[UIView commitAnimations];
+				break;
+				
+			case kViewOverlayTypeLoginRestriction:
+			{
+				UIButton *button=[ButtonUtilities UIButtonWithWidth:100 height:30 type:@"racinggreen" text:@"Login"];
+				[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+				[contentContainer addSubview:button];
+				
+			}
+				
+			default:
+				
+				break;
+				
+		}
+		
+		[viewOverlayView addSubview:contentContainer];
+		[ViewUtilities alignView:contentContainer withView:viewOverlayView :BUNoneLayoutMode :BUCenterAlignMode];
+		[self.view addSubview:viewOverlayView];
+		
+		
+	}else {
+		if(viewOverlayView!=nil){
+			[viewOverlayView removeFromSuperview];
+			self.viewOverlayView=nil;
+		}
+		activeViewOverlayType=kViewOverlayTypeNone;
+		
+	}
+	
+	
+}
+
+
+//
+/***********************************************
+ * @description			New Generic Error view
+ ***********************************************/
+//
+#define kSuperViewOverlayViewTag 8000
+-(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message withIcon:(NSString*)icon{
+	
+	
+	if(show==YES){
+		
+		
+		if(viewOverlayView!=nil){
+			if (activeViewOverlayType==type) {
+				return;
+			}else {
+				[viewOverlayView removeFromSuperview];
+				self.viewOverlayView=nil;
+			}
+		}
+		
+		activeViewOverlayType=type;
+		LayoutBox *contentContainer;
+		
+		if([UIType isEqualToString:UITYPE_CONTROLUI]){
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+		}else if ([UIType isEqualToString:UITYPE_CONTROLHEADERUI]) {
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
+			
+		}else if ([UIType isEqualToString:UITYPE_MODALUI]) {
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
+		}else {
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+		}
+        
+		
+		[viewOverlayView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
+		viewOverlayView.tag=kSuperViewOverlayViewTag;
+        contentContainer.layoutMode=BUVerticalLayoutMode;
+		contentContainer.itemPadding=10;
+		contentContainer.fixedWidth=YES;
+		contentContainer.alignMode=BUCenterAlignMode;
+		
+		
+		switch(type){
+				
+			case kViewOverlayTypeNoResults:
+				
+				if(icon!=nil){
+					UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+					iview.image=[[StyleManager sharedInstance] imageForType:icon];
+					iview.alpha=.3;
+					[contentContainer addSubview:iview];
+				}
+				
+			break;
+			case kViewOverlayTypeLoginRestriction:
+			case kViewOverlayTypeConnectionFailed:
+			case kViewOverlayTypeServerDown:
+			{
+				UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+				iview.image=[UIImage imageNamed:@"alertLarge.png"];
+				iview.alpha=.3;
+				[contentContainer addSubview:iview];
+			}
+				break;
+				
+			case kViewOverlayTypeRequestIndicator:
+			{
+				UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+				CGRect aframe=CGRectMake(0, 0, 20, 20);
+				activity.frame=aframe;
+				[activity startAnimating];
+				[contentContainer addSubview:activity];
+			}
+				break;
+				
+		}
+		
+		
+		
+		ExpandedUILabel *ilabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+		ilabel.backgroundColor=[UIColor clearColor];
+		
+		switch(type){
+				
+			case kViewOverlayTypeRequestIndicator:
+				ilabel.textColor=[[StyleManager sharedInstance] colorForType:@"maincolor"];
+				ilabel.font=[UIFont boldSystemFontOfSize:12];
+				break;
+			default:
+				ilabel.textColor=[UIColor grayColor];
+				ilabel.font=[UIFont systemFontOfSize:13];
+				break;
+				
+		}
+		
+		ilabel.numberOfLines=0;
+		ilabel.textAlignment=UITextAlignmentCenter;
+		ilabel.shadowColor=[UIColor whiteColor];
+		ilabel.shadowOffset=CGSizeMake(0, 1);
+		
+		if(message==nil){
+			NSString *viewTypeString=[SuperViewController viewTypeToStringType:type];
+			BetterLog(@"viewTypeString=%@",viewTypeString);
+			if (viewTypeString!=nil) {
+				ilabel.text=[[StringManager sharedInstance] stringForSection:@"ui" andType:[NSString stringWithFormat:@"viewoverlaycontent_%@",viewTypeString]];
+			}else {
+				ilabel.text=@"An Error occured";
+			}
+			
+			
+		}else {
+			ilabel.text=[[StringManager sharedInstance] stringForSection:@"ui" andType:message];
+		}
+		
+		[contentContainer addSubview:ilabel];
 		
 		
 		

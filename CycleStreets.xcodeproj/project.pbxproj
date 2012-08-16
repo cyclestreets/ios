@@ -149,6 +149,8 @@
 		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
 		281E09081451CA210034CC63 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
+		283435C615DD17B000B00FD5 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
+		283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
 		283C02A3156D966900E677A6 /* CSBarButton_routePlan_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C02A2156D966900E677A6 /* CSBarButton_routePlan_white.png */; };
 		283C02A5156D971D00E677A6 /* CSBarButton_search_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C02A4156D971D00E677A6 /* CSBarButton_search_white.png */; };
 		283C02A7156D977900E677A6 /* CSBarButton_location_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 283C02A6156D977900E677A6 /* CSBarButton_location_white.png */; };
@@ -610,6 +612,8 @@
 		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
 		281E09071451CA210034CC63 /* POICategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POICategoryView.xib; path = poi/POICategoryView.xib; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
+		283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_norecentroutes.png; sourceTree = "<group>"; };
 		283C02A2156D966900E677A6 /* CSBarButton_routePlan_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_routePlan_white.png; sourceTree = "<group>"; };
 		283C02A4156D971D00E677A6 /* CSBarButton_search_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_search_white.png; sourceTree = "<group>"; };
 		283C02A6156D977900E677A6 /* CSBarButton_location_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_location_white.png; sourceTree = "<group>"; };
@@ -1324,6 +1328,8 @@
 		28187A5614FCFF4C00A38A17 /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */,
+				283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */,
 				28C3CF591577594300A49D5C /* RouteCell_currentindicator.png */,
 				28187A9B14FCFF4C00A38A17 /* Wisps */,
 				28187A7B14FCFF4C00A38A17 /* TabBar */,
@@ -2524,6 +2530,8 @@
 				28A0441D159216C000201CF3 /* Icon@2x.png in Resources */,
 				28C8342015A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */,
+				283435C615DD17B000B00FD5 /* Icon_nofavroutes.png in Resources */,
+				283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -333,9 +333,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	BOOL isDirectory;
 	BOOL doesDirExist=[fileManager fileExistsAtPath:[self oldroutesDirectory] isDirectory:&isDirectory];
 	
-	self.legacyRoutes=[NSMutableArray array];
 					   
 	if(doesDirExist==YES && isDirectory==YES){
+		
+		self.legacyRoutes=[NSMutableArray array];
 		
 		NSError *error=nil;
 		NSURL *url = [[NSURL alloc] initFileURLWithPath:[self oldroutesDirectory] isDirectory:YES ];
@@ -365,8 +366,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 			}
 			
 		}
-		
-		//[fileManager removeItemAtPath:[self oldroutesDirectory] error:&error];
 		
 	}else {
 		

@@ -133,7 +133,7 @@
 			self.keys=[NSMutableArray array];
 		}
 		
-        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",dataType]];
+        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",dataType] withIcon:dataType];
     }
     
 	/*
@@ -151,6 +151,8 @@
 - (void)viewDidLoad {
 	
 	[super viewDidLoad];
+	
+	UIType=UITYPE_CONTROLUI;
 	
     if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
         isSectioned=YES;
