@@ -45,11 +45,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		self.files = [[Files alloc] init];
 		
 		NSBundle *mainBundle = [NSBundle mainBundle];
-		NSString *APIFile = [mainBundle pathForResource:@"APIKey" ofType:@"txt"];
+		NSDictionary *infoDict=[mainBundle infoDictionary];
+		NSString *appconfigid=[infoDict objectForKey:@"APPCONFIG_ID"];
+		NSString *APIFile=nil;
+		
+		if([appconfigid isEqualToString:APPSTATE_LIVE]){
+			APIFile=[mainBundle pathForResource:@"APIKey_live" ofType:@"txt"];
+		}else{
+			APIFile=[mainBundle pathForResource:@"APIKey_dev" ofType:@"txt"];
+		}
+		
+		
 		NSString *keyFromFile = [NSString stringWithContentsOfFile:APIFile encoding:NSUTF8StringEncoding error:NULL];
 		self.APIKey = [keyFromFile stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 		
-		NSDictionary *infoDict=[mainBundle infoDictionary];
+		
 		NSString *version=[infoDict objectForKey:@"CFBundleVersion"];
 		NSString *appName=[infoDict objectForKey:@"CFBundleName"];
 		self.userAgent=[NSString stringWithFormat:@"%@ iOS / %@",appName,version];
