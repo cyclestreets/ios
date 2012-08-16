@@ -53,6 +53,7 @@ static NSString *useDom = @"1";
 @implementation RouteManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 @synthesize routes;
+@synthesize legacyRoutes;
 @synthesize selectedRoute;
 @synthesize activeRouteDir;
 
@@ -332,6 +333,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	BOOL isDirectory;
 	BOOL doesDirExist=[fileManager fileExistsAtPath:[self oldroutesDirectory] isDirectory:&isDirectory];
 	
+	self.legacyRoutes=[NSMutableArray array];
 					   
 	if(doesDirExist==YES && isDirectory==YES){
 		
@@ -355,6 +357,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 				
 				RouteVO *newroute=(RouteVO*)[[Model sharedInstance].xmlparser parseXML:routedata forType:CALCULATEROUTE];
 				
+				[legacyRoutes addObject:newroute];
+				
 				[self saveRoute:newroute];
 				
 				
@@ -362,7 +366,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 			
 		}
 		
-		[fileManager removeItemAtPath:[self oldroutesDirectory] error:&error];
+		//[fileManager removeItemAtPath:[self oldroutesDirectory] error:&error];
 		
 	}else {
 		
@@ -375,6 +379,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 }
 
+
+
+-(void)legacyRouteCleanup{
+	
+	self.legacyRoutes=nil;
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSError *error=nil;
+	
+	[fileManager removeItemAtPath:[self oldroutesDirectory] error:&error];
+	
+}
 
 
 
@@ -699,7 +715,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 // legacy conversion call only
 -(RouteVO*)legacyLoadRoute:(NSString*)routeid{
 	
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", routeid]];
+	NSString *routeFile = [[self oldroutesDirectory] stringByAppendingPathComponent:routeid];
 	
 	BetterLog(@"routeFile=%@",routeFile);
 	

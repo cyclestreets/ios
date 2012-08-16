@@ -107,21 +107,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 //
 -(void)transferOldFavouritesToRecents{
 	
-	NSMutableArray *favourites=[FavouritesManager sharedInstance].dataProvider;
+	NSMutableArray *legacyRoutes=[RouteManager sharedInstance].legacyRoutes;
 	
 	NSMutableArray *routeidarr=[routeidStore objectForKey:SAVEDROUTE_RECENTS];
 	
-	if(favourites!=nil){
+	if(legacyRoutes!=nil){
 		
-		for(NSString *routeid in favourites){
+		for(RouteVO *route in legacyRoutes){
 			
-			RouteVO *route=[[RouteManager sharedInstance] legacyLoadRoute:routeid];
-			
-			
-			if(route!=nil){
-				[recentsdataProvider addObject:route];
-				[routeidarr addObject:route.fileid];
-			}
+			[recentsdataProvider addObject:route];
+			[routeidarr addObject:route.fileid];
 			
 		}
 		

@@ -19,6 +19,7 @@
 @interface RouteManager : FrameworkObject 	{
 	
 	NSMutableDictionary					*routes;
+	NSMutableArray						*legacyRoutes;
 	
 	RouteVO								*selectedRoute;
 	
@@ -26,10 +27,10 @@
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
-@property (nonatomic, strong)	NSMutableDictionary		*routes;
-@property (nonatomic, strong)	RouteVO		*selectedRoute;
-@property (nonatomic, strong)	NSString		*activeRouteDir;
-
+@property (nonatomic, strong) NSMutableDictionary		* routes;
+@property (nonatomic, strong) NSMutableArray		* legacyRoutes;
+@property (nonatomic, strong) RouteVO		* selectedRoute;
+@property (nonatomic, strong) NSString		* activeRouteDir;
 
 - (void) runQuery:(Query *)query;
 - (void) runRouteIdQuery:(Query *)query;
@@ -53,7 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 
 
 // legacy
-
+-(void)legacyRouteCleanup;
 - (void)legacyRemoveRouteFile:(NSString*)routeid;
 -(RouteVO*)legacyLoadRoute:(NSString*)routeid;
 
