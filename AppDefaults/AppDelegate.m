@@ -69,7 +69,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	#if defined (CONFIGURATION_Debug)
 		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
-		[Crashlytics sharedInstance].debugMode = YES;
+		//[Crashlytics sharedInstance].debugMode = YES;
 		[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	#endif
 	
