@@ -143,7 +143,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @synthesize planningState;
 @synthesize routeplanMenu;
 @synthesize activeMarker;
-
+@synthesize markerTouchView;
 
 
 //
@@ -560,14 +560,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
-	NSSet *touches = [event touchesForView:blueCircleView]; 
+	NSSet *touches = [event touchesForView:markerTouchView];
 	// note use of top View required, bcv should not be left top unless required by location?
 	
 	BetterLog(@"touches=%i",[touches count]);
 	BetterLog(@"activeMarker=%@",activeMarker);
 	
 	for (UITouch *touch in touches) {
-		CGPoint point = [touch locationInView:blueCircleView];
+		CGPoint point = [touch locationInView:markerTouchView];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
 		[[map markerManager] moveMarker:activeMarker AtLatLon:location];
 	}
@@ -905,9 +905,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 							  delay:.5 
 							options:UIViewAnimationCurveEaseOut 
 						 animations:^{ 
-							 blueCircleView.alpha=0;
+							 blueCircleView.alpha=0.0;
 						 }
 						 completion:^(BOOL finished){
+							 
 						 }];
 		
 		[locatingIndicator stopAnimating];

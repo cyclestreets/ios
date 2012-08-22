@@ -166,7 +166,6 @@
 	NSString *convertedStr=(__bridge_transfer NSString *)uuidStr;
 	NSString *str = [NSString stringWithFormat:@"%@",convertedStr];
 	
-	CFRelease(uuidStr);
     CFRelease(uuid);
 	
 	return str;

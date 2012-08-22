@@ -33,6 +33,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RoutePlanMenuViewController.h"
 #import "WEPopoverController.h"
 #import "ExpandedUILabel.h"
+#import "MapMarkerTouchView.h"
+
 @class CycleStreets;
 @class RouteVO;
 @class Location;
@@ -48,7 +50,7 @@ enum PlanningStateT {stateStart = 0,
 typedef enum PlanningStateT PlanningState;
 
 @interface MapViewController : UIViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider,WEPopoverControllerDelegate> {
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate> {
 	//IB items
 	IBOutlet UIToolbar *toolBar;
 	
@@ -74,6 +76,7 @@ typedef enum PlanningStateT PlanningState;
 	IBOutlet RMMapView *mapView;				//map of current area
 	IBOutlet RouteLineView *lineView;		//overlay route lines on top of map
 	IBOutlet BlueCircleView *blueCircleView;	//overlay GPS location
+	IBOutlet MapMarkerTouchView *markerTouchView;	//overlay for market touches
 	RMMapContents		*mapContents;
 	
 	InitialLocation *initialLocation;
@@ -127,6 +130,7 @@ typedef enum PlanningStateT PlanningState;
 @property (nonatomic, strong) IBOutlet RMMapView		* mapView;
 @property (nonatomic, strong) IBOutlet RouteLineView		* lineView;
 @property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
+@property (nonatomic, strong) IBOutlet MapMarkerTouchView		* markerTouchView;
 @property (nonatomic, strong) RMMapContents		* mapContents;
 @property (nonatomic, strong) InitialLocation		* initialLocation;
 @property (nonatomic, strong) CLLocationManager		* locationManager;
