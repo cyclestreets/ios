@@ -63,6 +63,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @interface PhotoMapViewController(Private)
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
+-(void)displayPhotosOnMap;
 - (void) didNotificationMapStyleChanged;
 
 -(void)displayLocationForMap:(CLLocationCoordinate2D)location;
@@ -168,35 +169,53 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	if([status isEqualToString:SUCCESS]){
 	
-		PhotoMapListVO *photoList=[PhotoManager sharedInstance].locationPhotoList;
-		
-		[self clearPhotos];
-		if (showingPhotos==NO) {
-			photomapQuerying = NO;
-			return;
-		}
-		
-		for (PhotoMapVO *photo in [photoList photos]) {
-			
-			RMMarker *marker=nil;
-			
-			if([[PhotoManager sharedInstance] isUserPhoto:photo]){
-				marker = [Markers markerUserPhoto];
-			}else{
-				marker = [Markers markerPhoto];
-			}
-			
-			marker.data = photo;
-			[photoMarkers addObject:marker];
-			[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
-		}
+		[self displayPhotosOnMap];
 
 		photomapQuerying = NO;
 		
 		
+		// BUG fix: Map will not display markers on first load post initial location
+		// data is fine but it requires another call to the server to get this to kick in?
+		if(firstRun==YES){
+			[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0];
+			firstRun=NO;
+		}
+		
 	}else{
 		photomapQuerying=NO;
 	}
+	
+	
+}
+
+
+-(void)displayPhotosOnMap{
+	
+	BetterLog(@"");
+	
+	PhotoMapListVO *photoList=[PhotoManager sharedInstance].locationPhotoList;
+	
+	[self clearPhotos];
+	if (showingPhotos==NO) {
+		photomapQuerying = NO;
+		return;
+	}
+	
+	for (PhotoMapVO *photo in [photoList photos]) {
+		
+		RMMarker *marker=nil;
+		
+		if([[PhotoManager sharedInstance] isUserPhoto:photo]){
+			marker = [Markers markerUserPhoto];
+		}else{
+			marker = [Markers markerPhoto];
+		}
+		
+		marker.data = photo;
+		[photoMarkers addObject:marker];
+		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
+	}
+	
 	
 	
 }
@@ -222,6 +241,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 -(void)createPersistentUI{
 	
 	displaysConnectionErrors=NO;
+	firstRun=YES;
 	
 	//Necessary to start route-me service
 	[RMMapView class];
@@ -361,7 +381,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 
-// TODO: All this will be moved the Photo Model
 
 - (void) clearPhotos {
 
@@ -370,42 +389,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		[photoMarkers removeAllObjects];
 	}
 	
-}
-
-- (void) didSucceedPhoto:(XMLRequest *)request results:(NSDictionary *)elements {
-	
-	BetterLog(@"");
-	
-	[self clearPhotos];
-	if (showingPhotos==NO) {
-		photomapQuerying = NO;
-		return;
-	}
-	
-	
-	PhotoMapListVO *photoList = [[PhotoMapListVO alloc] initWithElements:elements];
-	for (PhotoMapVO *photo in [photoList photos]) {
-		
-		RMMarker *marker=nil;
-		
-		if([[PhotoManager sharedInstance] isUserPhoto:photo]){
-				marker = [Markers markerUserPhoto];
-		}else{
-			marker = [Markers markerPhoto];
-		}
-		
-
-		marker.data = photo;
-		[photoMarkers addObject:marker];
-		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
-	}
-	photomapQuerying = NO;
-}
-
-- (void) didFailPhoto:(XMLRequest *)request message:(NSString *)message {
-	[self clearPhotos];
-	photomapQuerying = NO;
-	[[HudManager sharedInstance] removeHUD];
 }
 
 

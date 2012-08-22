@@ -75,28 +75,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BOOL									showingPhotos;
 	BOOL									locationManagerIsLocating;
 	BOOL									locationWasFound;
+	
+	BOOL									firstRun;
 }
 
-@property (nonatomic, strong)	IBOutlet RMMapView			*mapView;
-@property (nonatomic, strong)	IBOutlet BlueCircleView			*blueCircleView;
-@property (nonatomic, strong)	IBOutlet UILabel			*attributionLabel;
-@property (nonatomic, strong)	RMMapContents			*mapContents;
-@property (nonatomic, strong)	IBOutlet UIBarButtonItem			*gpslocateButton;
-@property (nonatomic, strong)	IBOutlet UIBarButtonItem			*photoWizardButton;
-@property (nonatomic, strong)	CLLocationManager			*locationManager;
-@property (nonatomic, strong)	CLLocation			*lastLocation;
-@property (nonatomic, strong)	CLLocation			*currentLocation;
-@property (nonatomic, strong)	PhotoMapImageLocationViewController			*locationView;
-@property (nonatomic, strong)	MapLocationSearchViewController			*mapLocationSearchView;
-@property (nonatomic, strong)	PhotoWizardViewController			*photoWizardView;
-@property (nonatomic, strong)	InitialLocation			*initialLocation;
-@property (nonatomic, strong)	IBOutlet UIView			*introView;
-@property (nonatomic, strong)	IBOutlet UIButton			*introButton;
-@property (nonatomic, strong)	NSMutableArray			*photoMarkers;
-@property (nonatomic, assign)	BOOL			photomapQuerying;
-@property (nonatomic, assign)	BOOL			showingPhotos;
-@property (nonatomic, assign)	BOOL			locationManagerIsLocating;
-@property (nonatomic, assign)	BOOL			locationWasFound;
+@property (nonatomic, strong) IBOutlet RMMapView		* mapView;
+@property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
+@property (nonatomic, strong) IBOutlet UILabel		* attributionLabel;
+@property (nonatomic, strong) RMMapContents		* mapContents;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem		* gpslocateButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem		* photoWizardButton;
+@property (nonatomic, strong) CLLocationManager		* locationManager;
+@property (nonatomic, strong) CLLocation		* lastLocation;
+@property (nonatomic, strong) CLLocation		* currentLocation;
+@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
+@property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
+@property (nonatomic, strong) PhotoWizardViewController		* photoWizardView;
+@property (nonatomic, strong) InitialLocation		* initialLocation;
+@property (nonatomic, strong) IBOutlet UIView		* introView;
+@property (nonatomic, strong) IBOutlet UIButton		* introButton;
+@property (nonatomic, strong) NSMutableArray		* photoMarkers;
+@property (nonatomic, assign) BOOL		 photomapQuerying;
+@property (nonatomic, assign) BOOL		 showingPhotos;
+@property (nonatomic, assign) BOOL		 locationManagerIsLocating;
+@property (nonatomic, assign) BOOL		 locationWasFound;
+@property (nonatomic, assign) BOOL		 firstRun;
 
 
 
