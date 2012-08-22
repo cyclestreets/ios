@@ -637,11 +637,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "366049588.749404"
+         timestampString = "367144954.449852"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1099"
-         endingLineNumber = "1099"
+         startingLineNumber = "1094"
+         endingLineNumber = "1094"
          landmarkName = "-newRoute"
          landmarkType = "5">
       </FileBreakpoint>
@@ -685,16 +685,29 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/controllers/PhotoMap/PhotoMapViewController.m"
+         timestampString = "367321392.744633"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "270"
+         endingLineNumber = "270"
+         landmarkName = "-createNonPersistentUI"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "src/model/CycleStreets.m"
-         timestampString = "366894119.158547"
+         filePath = "src/managers/UserLocationManager.m"
+         timestampString = "367321589.024967"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "-init"
+         startingLineNumber = "134"
+         endingLineNumber = "134"
+         landmarkName = "-checkLocationStatus:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -277,7 +277,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		if([UserLocationManager sharedInstance].doesDeviceAllowLocation==YES){
 			
 			if(currentLocation==nil)
-				[self startlocationManagerIsLocating];
+				[self locationButtonSelected:nil];
 			
 		}else{
 			
@@ -304,8 +304,8 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 
 -(void)viewWillDisappear:(BOOL)animated{
-	if(locationManagerIsLocating==YES)
-		[self stoplocationManagerIsLocating];
+	if([UserLocationManager sharedInstance].isLocating==YES)
+		[[UserLocationManager sharedInstance] stopUpdatingLocatioForSubscriber:LOCATIONSUBSCRIBERID];
 	
 }
 
@@ -637,115 +637,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 
 
-// TODO: All this need to use userlocationmanager
 
-
-#pragma mark location delegate
-//
-/***********************************************
- * @description			Location Manager methods
- ***********************************************/
-//
-
-// called from toggled ui button, stops CL and removes circle view
-- (void)stoplocationManagerIsLocating {
-	locationManagerIsLocating = NO;
-	gpslocateButton.style = UIBarButtonItemStyleBordered;
-	[locationManager stopUpdatingLocation];
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
-	blueCircleView.hidden = YES;
-	
-	[blueCircleView setNeedsDisplay];
-	[UIView animateWithDuration:1.2f 
-						  delay:.5 
-						options:UIViewAnimationCurveEaseOut 
-					 animations:^{ 
-						 blueCircleView.alpha=0;
-					 }
-					 completion:^(BOOL finished){
-						 blueCircleView.hidden=YES;
-					 }];
-}
-
-// called from ui button, starts CL and shows circle view
-- (void)startlocationManagerIsLocating {
-	
-	BOOL enabled=[[UserLocationManager sharedInstance] checkLocationStatus:YES];
-	
-	if(enabled==YES){
-		
-		locationManagerIsLocating = YES;
-		locationWasFound=NO;
-		gpslocateButton.style = UIBarButtonItemStyleDone;
-		locationManager.delegate = self;
-		[locationManager startUpdatingLocation];
-		[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:30];
-		blueCircleView.hidden = NO;
-		blueCircleView.alpha=0.5f;
-		
-	}
-
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation{
-	
-	BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
-	BetterLog(@"locationManager.desiredAccuracy=%f",locationManager.desiredAccuracy);
-	
-	[MapViewController zoomMapView:mapView toLocation:newLocation];
-	[blueCircleView setNeedsDisplay];
-	
-	NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
-	
-	BetterLog(@"locationAge=%f",locationAge);
-	
-    if (locationAge > 5.0) return;
-    if (newLocation.horizontalAccuracy < 0) return;
-    // test the measurement to see if it is more accurate than the previous measurement
-    if (lastLocation == nil || lastLocation.horizontalAccuracy >= newLocation.horizontalAccuracy) {
-        // store the location as the "best effort"
-        self.lastLocation = newLocation;
-		
-		BetterLog(@"");
-		
-        if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-			BetterLog(@"");
-            [self stopUpdatingLocation:@"Acquired Location"];
-			
-        }
-		
-		
-    }
-	
-}
-
-// called from CL when accuracy was reached or timed out. Removes UI
-- (void)stopUpdatingLocation:(NSString *)state {
-	
-	BetterLog(@"");
-	
-	if(locationManagerIsLocating==YES){
-		
-		if([state isEqualToString:@"Acquired Location"]){
-			[self requestPhotos];
-		}
-		
-		[self stoplocationManagerIsLocating];
-	}
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-	[self stoplocationManagerIsLocating];
-	
-	UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-													   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
-													  delegate:nil
-											 cancelButtonTitle:@"OK"
-											 otherButtonTitles:nil];
-	[gpsAlert show];
-}
 
 #pragma mark search response
 

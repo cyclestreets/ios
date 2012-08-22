@@ -318,25 +318,25 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.activeLocationButton = [[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ];
 	self.activeLocationButton.style	= UIBarButtonItemStyleDone;
 	
-	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location_white.png"]
+	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
 														   style:UIBarButtonItemStyleBordered
 														  target:self
 														  action:@selector(didLocation)];
 	self.locationButton.width = 40;
 	
-	self.nameButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search_white.png"]
+	self.nameButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
 													   style:UIBarButtonItemStyleBordered
 													  target:self
 													  action:@selector(didSearch)];
 	self.nameButton.width = 40;
 	
-	self.deleteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint_white.png"]
+	self.deleteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_deletePoint.png"]
 														 style:UIBarButtonItemStyleBordered
 														target:self
 														action:@selector(didDelete)];
 	self.deleteButton.width = 40;
     
-    self.planButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_routePlan_white.png"]
+    self.planButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_routePlan.png"]
 													   style:UIBarButtonItemStyleBordered
 													  target:self
 													  action:@selector(showRoutePlanMenu:)];
@@ -556,14 +556,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
-// we know we have touch began on marker markerdrag=yes;
-// we know whne touch ended is not on marker
-// if markerdrag==yes > re enable map drag
-// we also know if markerdrag is yes and we start getting RMLayerCollection objects we should still be sending markerdrag data via didDragMarker
 
 
-// NE: bug here where it's posible to lose the touch on the market by moving quickly
-// will execute touchEnded
 - (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
 	
 	NSSet *touches = [event touchesForView:blueCircleView]; 

@@ -110,9 +110,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)startShowingPhotos;
-- (void)stopUpdatingLocation:(NSString *)state;
-- (void)startlocationManagerIsLocating;
-- (void)stoplocationManagerIsLocating;
 
 
 - (void) requestPhotos;
