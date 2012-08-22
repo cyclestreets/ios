@@ -42,6 +42,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(HudManager);
 -(void)updateHUDMessage:(NSString*)message;
 -(void)updateHUDTitle:(NSString*)title;
 -(void)removeHUD;
+
 -(void)removeHUD:(BOOL)animated;
 
 @end

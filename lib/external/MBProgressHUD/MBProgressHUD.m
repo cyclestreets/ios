@@ -315,6 +315,10 @@
     return self;
 }
 
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+}
 
 #pragma mark -
 #pragma mark Layout

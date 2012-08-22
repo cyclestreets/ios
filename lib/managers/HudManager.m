@@ -7,7 +7,6 @@
 //
 
 #import "HudManager.h"
-#import "GlobalUtilities.h"
 
 
 @implementation HudManager
@@ -42,7 +41,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 }
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message andDelay:(int)delayTime andAllowTouch:(BOOL)allowTouch{
     
-	BetterLog(@"isShowing=%i",isShowing);
 	
 	if(isShowing==NO){
         if(HUD==nil){
@@ -52,10 +50,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
             [[[UIApplication sharedApplication] keyWindow] addSubview:self.HUD];
             HUD.delegate = self;
         }else{
-           
+            
         }
 	}else {
-		
 		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(removeHUD) object:nil];
 	}
 	
@@ -72,32 +69,32 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 			break;
 			
 			case HUDWindowTypeError:
-				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD_icon_exclaim.png"]];
 				HUD.mode = MBProgressHUDModeCustomView;
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
 				
 			case HUDWindowTypeSuccess:
-				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkMark.png"]];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD_icon_checkMark.png"]];
 				HUD.mode = MBProgressHUDModeCustomView;
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
 				
 			case HUDWindowTypeLock:
-				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock.png"]];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD_icon_lock.png"]];
 				HUD.mode = MBProgressHUDModeCustomView;
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
 			break;
 				
 			case HUDWindowTypeIcon:
 				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:message]];
-                messageText=nil;
+				messageText=nil;
 				HUD.mode = MBProgressHUDModeCustomView;
 				[self performSelector:@selector(removeHUD) withObject:nil afterDelay:delayTime];
-			break;
+				break;
 				
 			case HUDWindowTypeServer:
-				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exclaim.png"]];
+				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD_icon_exclaim.png"]];
 				HUD.mode = MBProgressHUDModeCustomView;
 				titleText=@"Server Error";
 				messageText=@"A Server error occured, please try again.";
@@ -147,9 +144,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 	[HUD hide:YES];	
 }
 
+
 -(void)removeHUD:(BOOL)animated{
-	[HUD hide:animated];	
+	[HUD hide:animated];
 }
+
+
 
 
 -(void)hudWasHidden{
