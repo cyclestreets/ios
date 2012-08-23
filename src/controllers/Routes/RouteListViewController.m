@@ -12,6 +12,7 @@
 #import "StyleManager.h"
 #import "NSDate+Helper.h"
 #import "RouteToolCellView.h"
+#import "RouteManager.h"
 
 
 @interface FavouriteMenuItem : UIMenuItem 
@@ -75,6 +76,7 @@
     [notifications addObject:NEWROUTEBYIDRESPONSE]; // user initiated route by id response
     [notifications addObject:SAVEDROUTEUPDATE]; // new route search, recent>fav move etc
 	[notifications addObject:CALCULATEROUTERESPONSE];
+	[notifications addObject:CSROUTESELECTED];
 	
 	[notifications addObject:UIMenuControllerDidShowMenuNotification];
 	[notifications addObject:UIMenuControllerWillShowMenuNotification];
@@ -100,6 +102,10 @@
 	
 	if([notification.name isEqualToString:CALCULATEROUTERESPONSE]){
 		[self refreshUIFromDataProvider];
+	}
+	
+	if([notification.name isEqualToString:CSROUTESELECTED]){
+		[self.tableView reloadData];
 	}
 	
 }
@@ -257,13 +263,22 @@
 			return cell;
 			
 		}else {
-			cell.dataProvider=[sectionDataProvider objectAtIndex:[indexPath row]];
+			
+			RouteVO *route=[sectionDataProvider objectAtIndex:[indexPath row]];
+			cell.dataProvider=route;
+			cell.isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:route];
+			
 			[cell populate];
 		}
 		
 		
 	}else {
-		cell.dataProvider=[dataProvider objectAtIndex:[indexPath row]];
+		
+		RouteVO *route=[dataProvider objectAtIndex:[indexPath row]];
+		
+		cell.dataProvider=route;
+		cell.isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:route];
+		
 		[cell populate];
 	}
 	

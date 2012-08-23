@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define ENABLEDEBUGTRACE 1
+#define ENABLEDEBUGTRACE 0
 
 
 enum  {

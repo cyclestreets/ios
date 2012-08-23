@@ -383,9 +383,18 @@
 	
 	if(route!=nil){
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
+		if([route numSegments]==0){
+			
+			validation.returnCode=ValidationCalculateRouteFailed;
+			
+		}else{
+			
+			validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
+			
+			validation.returnCode=ValidationCalculateRouteSuccess;
+			
+		}
 		
-		validation.returnCode=ValidationCalculateRouteSuccess;
 		
 	}else{
 		validation.returnCode=ValidationCalculateRouteFailed;

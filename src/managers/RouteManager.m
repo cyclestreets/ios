@@ -519,6 +519,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
+-(BOOL)routeIsSelectedRoute:(RouteVO*)route{
+	
+	if(selectedRoute!=nil){
+	
+		return [route.fileid isEqualToString:selectedRoute.fileid];
+		
+	}else{
+		return NO;
+	}
+	
+}
+
+
 
 - (void)warnOnFirstRoute {
 	
@@ -541,7 +554,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		[cycleStreets.files setMisc:misc];
 		
 		UIAlertView *optionsAlert = [[UIAlertView alloc] initWithTitle:@"Routing modes"
-													   message:@"You can change between fastest / quietest / balanced routing type on the Settings page under 'More', before you plan a route."
+													   message:@"You can change between fastest / quietest / balanced routing type using the route type button above."
 													  delegate:self
 											 cancelButtonTitle:@"OK"
 											 otherButtonTitles:nil];

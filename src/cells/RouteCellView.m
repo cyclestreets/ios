@@ -27,9 +27,12 @@
 	
     isSelectedRoute=NO;
 	
+	
 	UIView *sview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 44)];
 	sview.backgroundColor=UIColorFromRGB(0xcccccc);
 	self.selectedBackgroundView=sview;
+	
+	
 	
 	viewContainer.layoutMode=BUVerticalLayoutMode;
 	viewContainer.paddingLeft=10;
@@ -49,8 +52,8 @@
 
 -(void)populate{
 	
-	
 	[self updateCellUILabels];
+	
 	
 }
 
@@ -87,7 +90,6 @@
 	[viewContainer refresh];
 	
 	selectedRouteIcon.hidden=!isSelectedRoute;
-	[ViewUtilities alignView:selectedRouteIcon withView:viewContainer :BUNoneLayoutMode :BUCenterAlignMode];
 	
 }
 

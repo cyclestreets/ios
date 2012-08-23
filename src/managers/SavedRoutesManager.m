@@ -151,16 +151,32 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 //
 -(void)addRoute:(RouteVO*)route toDataProvider:(NSString*)type{
 	
-	if([type isEqualToString:SAVEDROUTE_FAVS]){
-		[favouritesdataProvider insertObject:route atIndex:0];
+	NSMutableArray *arr=[routeidStore objectForKey:type];
+	
+	if([arr indexOfObject:route.fileid]==NSNotFound){
+		
+		if([type isEqualToString:SAVEDROUTE_FAVS]){
+			[favouritesdataProvider insertObject:route atIndex:0];
+		}else{
+			[recentsdataProvider insertObject:route atIndex:0];
+		}
+		
+		
+		[arr addObject:route.fileid];
+		
+		[self saveIndicies];
+		
+		
 	}else{
-		[recentsdataProvider insertObject:route atIndex:0];
+		
+		
+		BetterLog(@"[ERROR] This route filed is already in the idStore: %@",route.fileid);
+		
+		
 	}
 	
-	NSMutableArray *arr=[routeidStore objectForKey:type];
-	[arr addObject:route.fileid];
 	
-	[self saveIndicies];
+	
 	
 }
 
