@@ -86,7 +86,7 @@ extern "C" {
  * It is recommended that you only use this method during testing. We also recommended that you wrap this method with a pre-processor
  * directive that is only active for non-app store builds. 
  * #ifndef RELEASE 
- * [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+
  * #endif
  *
  * @param deviceIdentifier The current devices device identifier

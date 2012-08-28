@@ -34,6 +34,6 @@ enum {
 + (uint) detectDevice;
 + (uint) detectDeviceFamily;
 + (NSString *) returnDeviceName:(BOOL)ignoreSimulator;
-+ (NSString *) uniqueIdentifier;
++ (NSString *) uniqueDeviceIdentifier;
 
 @end

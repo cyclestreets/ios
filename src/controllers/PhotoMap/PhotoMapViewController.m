@@ -36,7 +36,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Route.h"
 #import "SegmentVO.h"
 #import <CoreLocation/CoreLocation.h>
-#import "RMCloudMadeMapSource.h"
 #import "RMCachedTileSource.h"
 #import "PhotoMapListVO.h"
 #import "PhotoMapVO.h"

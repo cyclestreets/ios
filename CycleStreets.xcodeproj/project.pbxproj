@@ -23,7 +23,6 @@
 		280E248A144D82850021CDFA /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E243D144D82850021CDFA /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		280E248B144D82850021CDFA /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2440144D82850021CDFA /* NSDataAdditions.m */; };
 		280E248C144D82850021CDFA /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2442144D82850021CDFA /* TBXML.m */; };
-		280E248D144D82850021CDFA /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E2444144D82850021CDFA /* libTestFlight.a */; };
 		280E2490144D82850021CDFA /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E244A144D82850021CDFA /* CDataScanner.m */; };
 		280E2491144D82850021CDFA /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E244D144D82850021CDFA /* CDataScanner_Extensions.m */; };
 		280E2492144D82850021CDFA /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E244F144D82850021CDFA /* NSCharacterSet_Extensions.m */; };
@@ -35,7 +34,6 @@
 		280E249F144D82850021CDFA /* ImageManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2472144D82850021CDFA /* ImageManipulator.m */; };
 		280E24BF144D82E90021CDFA /* NSData+MBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E24A2144D82E90021CDFA /* NSData+MBBase64.m */; };
 		280E24D4144D84F70021CDFA /* ButtonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E24D3144D84F70021CDFA /* ButtonUtilities.m */; };
-		280E24D5144D88830021CDFA /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E2416144D82850021CDFA /* libGoogleAnalytics.a */; };
 		280E24D8144D892F0021CDFA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E24D6144D89230021CDFA /* CFNetwork.framework */; };
 		280E24DB144D8D990021CDFA /* PhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E24DA144D8D990021CDFA /* PhotoManager.m */; };
 		280E91C614097D8600C7AC75 /* StringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C114097D8600C7AC75 /* StringManager.m */; };
@@ -439,7 +437,6 @@
 		2834373C15DD5DC300B00FD5 /* LocationFeaturesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C07144ED44B00726A6C /* LocationFeaturesManager.m */; };
 		2834373D15DD5DC300B00FD5 /* HudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C0A144ED64700726A6C /* HudManager.m */; };
 		2834373E15DD5DC300B00FD5 /* AppConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C18144F0EF100726A6C /* AppConfigManager.m */; };
-		2834373F15DD5DC300B00FD5 /* GoogleAnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C24144F1C1300726A6C /* GoogleAnalyticsManager.m */; };
 		2834374015DD5DC300B00FD5 /* UIDevice+Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C2A144F1D0400726A6C /* UIDevice+Machine.m */; };
 		2834374115DD5DC300B00FD5 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B62E1450B074009C5647 /* POIListviewController.m */; };
 		2834374215DD5DC300B00FD5 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6311450B1DC009C5647 /* POITypeCellView.m */; };
@@ -481,9 +478,7 @@
 		2834376615DD5DC300B00FD5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
 		2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */; };
 		2834376915DD5DC300B00FD5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
-		2834376A15DD5DC300B00FD5 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E2444144D82850021CDFA /* libTestFlight.a */; };
 		2834376B15DD5DC300B00FD5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E24D6144D89230021CDFA /* CFNetwork.framework */; };
-		2834376C15DD5DC300B00FD5 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E2416144D82850021CDFA /* libGoogleAnalytics.a */; };
 		2834376D15DD5DC300B00FD5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		2834376E15DD5DC300B00FD5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2834376F15DD5DC300B00FD5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
@@ -540,7 +535,6 @@
 		28735C19144F0EF100726A6C /* AppConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C18144F0EF100726A6C /* AppConfigManager.m */; };
 		28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1C144F10E300726A6C /* appconfig_dev.plist */; };
 		28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1E144F10F300726A6C /* appconfig_live.plist */; };
-		28735C25144F1C1400726A6C /* GoogleAnalyticsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C24144F1C1300726A6C /* GoogleAnalyticsManager.m */; };
 		28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C2A144F1D0400726A6C /* UIDevice+Machine.m */; };
 		287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */; };
 		287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */; };
@@ -809,8 +803,6 @@
 		280E240C144D825D0021CDFA /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		280E240D144D825D0021CDFA /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		280E240E144D825D0021CDFA /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		280E2415144D82850021CDFA /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
-		280E2416144D82850021CDFA /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		280E2419144D82850021CDFA /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		280E241A144D82850021CDFA /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		280E2420144D82850021CDFA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -827,8 +819,6 @@
 		280E2440144D82850021CDFA /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		280E2441144D82850021CDFA /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		280E2442144D82850021CDFA /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
-		280E2444144D82850021CDFA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		280E2447144D82850021CDFA /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		280E2449144D82850021CDFA /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		280E244A144D82850021CDFA /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		280E244C144D82850021CDFA /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
@@ -1051,8 +1041,6 @@
 		28735C18144F0EF100726A6C /* AppConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppConfigManager.m; sourceTree = "<group>"; };
 		28735C1C144F10E300726A6C /* appconfig_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appconfig_dev.plist; sourceTree = "<group>"; };
 		28735C1E144F10F300726A6C /* appconfig_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appconfig_live.plist; sourceTree = "<group>"; };
-		28735C23144F1C1300726A6C /* GoogleAnalyticsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GoogleAnalyticsManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		28735C24144F1C1300726A6C /* GoogleAnalyticsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GoogleAnalyticsManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28735C29144F1D0400726A6C /* UIDevice+Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Machine.h"; sourceTree = "<group>"; };
 		28735C2A144F1D0400726A6C /* UIDevice+Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Machine.m"; sourceTree = "<group>"; };
 		287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
@@ -1366,9 +1354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28B78DA21507884C00949870 /* MapKit.framework in Frameworks */,
-				280E248D144D82850021CDFA /* libTestFlight.a in Frameworks */,
 				280E24D8144D892F0021CDFA /* CFNetwork.framework in Frameworks */,
-				280E24D5144D88830021CDFA /* libGoogleAnalytics.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -1391,9 +1377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2834376915DD5DC300B00FD5 /* MapKit.framework in Frameworks */,
-				2834376A15DD5DC300B00FD5 /* libTestFlight.a in Frameworks */,
 				2834376B15DD5DC300B00FD5 /* CFNetwork.framework in Frameworks */,
-				2834376C15DD5DC300B00FD5 /* libGoogleAnalytics.a in Frameworks */,
 				2834376D15DD5DC300B00FD5 /* Foundation.framework in Frameworks */,
 				2834376E15DD5DC300B00FD5 /* UIKit.framework in Frameworks */,
 				2834376F15DD5DC300B00FD5 /* CoreGraphics.framework in Frameworks */,
@@ -1444,27 +1428,16 @@
 			children = (
 				28C3CF5B15775A7800A49D5C /* SFObservers */,
 				28B484DE15261FAC00E406E1 /* WEPopover */,
-				280E2414144D82850021CDFA /* GoogleAnalytics */,
 				280E2417144D82850021CDFA /* JSONKit */,
 				280E241F144D82850021CDFA /* MBProgressHUD */,
 				280E2422144D82850021CDFA /* RCSwitch */,
 				280E2438144D82850021CDFA /* Regex */,
 				280E243B144D82850021CDFA /* SFUtils */,
 				280E243E144D82850021CDFA /* TBXML */,
-				280E2443144D82850021CDFA /* TestFlight */,
 				280E2448144D82850021CDFA /* TouchJSON */,
 				280E2470144D82850021CDFA /* UIImage */,
 			);
 			path = external;
-			sourceTree = "<group>";
-		};
-		280E2414144D82850021CDFA /* GoogleAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				280E2415144D82850021CDFA /* GANTracker.h */,
-				280E2416144D82850021CDFA /* libGoogleAnalytics.a */,
-			);
-			path = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 		280E2417144D82850021CDFA /* JSONKit */ = {
@@ -1532,15 +1505,6 @@
 			path = TBXML;
 			sourceTree = "<group>";
 		};
-		280E2443144D82850021CDFA /* TestFlight */ = {
-			isa = PBXGroup;
-			children = (
-				280E2444144D82850021CDFA /* libTestFlight.a */,
-				280E2447144D82850021CDFA /* TestFlight.h */,
-			);
-			path = TestFlight;
-			sourceTree = "<group>";
-		};
 		280E2448144D82850021CDFA /* TouchJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -1593,8 +1557,6 @@
 		280E91BF14097D8600C7AC75 /* managers */ = {
 			isa = PBXGroup;
 			children = (
-				28735C23144F1C1300726A6C /* GoogleAnalyticsManager.h */,
-				28735C24144F1C1300726A6C /* GoogleAnalyticsManager.m */,
 				28735C17144F0EF100726A6C /* AppConfigManager.h */,
 				28735C18144F0EF100726A6C /* AppConfigManager.m */,
 				28735C09144ED64700726A6C /* HudManager.h */,
@@ -3340,7 +3302,6 @@
 				28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */,
 				28735C0B144ED64700726A6C /* HudManager.m in Sources */,
 				28735C19144F0EF100726A6C /* AppConfigManager.m in Sources */,
-				28735C25144F1C1400726A6C /* GoogleAnalyticsManager.m in Sources */,
 				28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */,
 				28A8B62F1450B074009C5647 /* POIListviewController.m in Sources */,
 				28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */,
@@ -3511,7 +3472,6 @@
 				2834373C15DD5DC300B00FD5 /* LocationFeaturesManager.m in Sources */,
 				2834373D15DD5DC300B00FD5 /* HudManager.m in Sources */,
 				2834373E15DD5DC300B00FD5 /* AppConfigManager.m in Sources */,
-				2834373F15DD5DC300B00FD5 /* GoogleAnalyticsManager.m in Sources */,
 				2834374015DD5DC300B00FD5 /* UIDevice+Machine.m in Sources */,
 				2834374115DD5DC300B00FD5 /* POIListviewController.m in Sources */,
 				2834374215DD5DC300B00FD5 /* POITypeCellView.m in Sources */,
@@ -3704,6 +3664,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -8,7 +8,7 @@
 // stores all global methods and constants
 
 #import <Foundation/Foundation.h>
-#import "TestFlight.h"
+//#import "TestFlight.h"
 #import "AppConstants.h"
 
 

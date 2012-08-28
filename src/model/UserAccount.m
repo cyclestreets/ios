@@ -23,6 +23,7 @@
 #import "Files.h"
 #import "LoginVO.h"
 #import "ValidationVO.h"
+#import "StringUtilities.h"
 
 
 @interface UserAccount(Private)
@@ -63,7 +64,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		isRegistered=YES;
 		userPassword=@"";
 		userName=@"";
-		deviceID=[[UIDevice currentDevice] uniqueIdentifier];
+		deviceID=[StringUtilities createAppUUID];
 		accountMode=kUserAccountNotLoggedIn;
 		
 		[self loadUser];

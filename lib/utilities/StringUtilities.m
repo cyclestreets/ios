@@ -162,13 +162,13 @@
 
 + (NSString*) stringWithUUID {
 	CFUUIDRef	uuidObj = CFUUIDCreate(nil);//create a new UUID
-	NSString	*uuidString=nil;
+	NSString	*str=nil;
 	
 	if(uuidObj){
-		uuidString = (__bridge_transfer NSString*)CFUUIDCreateString(nil, uuidObj);
+		str = (__bridge_transfer NSString*)CFUUIDCreateString(nil, uuidObj);
 		CFRelease(uuidObj);
 	}
-	return uuidString;
+	return str;
 }
 
 

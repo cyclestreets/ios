@@ -35,7 +35,6 @@
 #import "Route.h"
 #import "Segment.h"
 #import <CoreLocation/CoreLocation.h>
-#import "RMCloudMadeMapSource.h"
 #import "RMOpenStreetMapSource.h"
 #import "RMOpenCycleMapSource.h"
 #import "RMOrdnanceSurveyStreetViewMapSource.h"

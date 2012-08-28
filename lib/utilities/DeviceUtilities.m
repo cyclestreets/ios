@@ -158,7 +158,7 @@
 }
 
 
-+ (NSString *) uniqueIdentifier{
++ (NSString *) uniqueDeviceIdentifier{
 	
     CFUUIDRef   uuid = CFUUIDCreate(NULL);
     CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
