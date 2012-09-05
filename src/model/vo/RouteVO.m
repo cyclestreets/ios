@@ -129,7 +129,7 @@
 
 -(NSString*)calorieString{
 	
-	if(calorie!=nil){
+	if(calorie!=nil && ![calorie isEqualToString: EMPTYSTRING]){
 		return [NSString stringWithFormat:@"%@ kcal",calorie];
 	}else{
 		return @"N/A";
@@ -139,7 +139,7 @@
 }
 -(NSString*)coString{
 	
-	if(cosaved!=nil){
+	if(cosaved!=nil && ![cosaved isEqualToString:EMPTYSTRING]){
 		return [NSString stringWithFormat:@"%@ gms",cosaved];
 	}else{
 		return @"N/A";
