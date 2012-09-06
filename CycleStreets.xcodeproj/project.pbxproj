@@ -559,6 +559,8 @@
 		289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
+		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
+		289CAF8E15F89AD10036DE98 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 283435FE15DD5D9100B00FD5 /* APIKey_live.txt */; };
 		289E6AFA144C35860079FFE5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E6AF8144C357C0079FFE5 /* libz.dylib */; };
 		289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
@@ -1070,6 +1072,8 @@
 		289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_tracks@2x.png"; sourceTree = "<group>"; };
 		289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_finish_wisp@2x.png"; sourceTree = "<group>"; };
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
+		289CAF8715F89A460036DE98 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		28A04418159216A400201CF3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		28A0441C159216C000201CF3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -1367,6 +1371,7 @@
 				28AD64C9131FB870008527FC /* libMapView.a in Frameworks */,
 				2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */,
 				283435FC15DD54EF00B00FD5 /* Crashlytics.framework in Frameworks */,
+				289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1424,6 +1429,7 @@
 		280E2413144D82850021CDFA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				289CAF8615F89A460036DE98 /* TestFlight */,
 				28C3CF5B15775A7800A49D5C /* SFObservers */,
 				28B484DE15261FAC00E406E1 /* WEPopover */,
 				280E2417144D82850021CDFA /* JSONKit */,
@@ -1996,6 +2002,15 @@
 				289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */,
 			);
 			path = Wisps;
+			sourceTree = "<group>";
+		};
+		289CAF8615F89A460036DE98 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				289CAF8715F89A460036DE98 /* libTestFlight.a */,
+				289CAF8A15F89A460036DE98 /* TestFlight.h */,
+			);
+			path = TestFlight;
 			sourceTree = "<group>";
 		};
 		28A89CC914FD4A170001BABA /* PhotoWizard */ = {
@@ -2940,6 +2955,7 @@
 				28535DC915E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
 				28535DFA15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
 				2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
+				289CAF8E15F89AD10036DE98 /* APIKey_live.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

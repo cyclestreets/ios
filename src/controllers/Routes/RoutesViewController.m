@@ -13,7 +13,7 @@
 #import "RouteListViewController.h"
 #import "RouteManager.h"
 #import "ButtonUtilities.h"
-
+#import <Crashlytics/Crashlytics.h>
 
 @interface RoutesViewController(Private)
 
@@ -214,7 +214,8 @@
 
 
 -(void)doNavigationSelector:(NSString*)type{
-    
+	
+	
     if([type isEqualToString:RIGHT]){
 		[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
 	}
