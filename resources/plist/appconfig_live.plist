@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>GAEnabled</key>
-	<false/>
-	<key>GATrackingCode</key>
-	<string>UA-17571411-7</string>
 	<key>navigation</key>
 	<array>
 		<dict>
@@ -36,7 +32,7 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Saved Routes</string>
+			<string>Saved routes</string>
 			<key>id</key>
 			<string>routes</string>
 			<key>class</key>
@@ -62,15 +58,19 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Add photo</string>
+			<string>Add Photo</string>
 			<key>id</key>
-			<string>photos</string>
+			<string>addphoto</string>
 			<key>class</key>
 			<string>PhotoWizardViewController</string>
 			<key>nib</key>
 			<string>PhotoWizardView</string>
 			<key>tabimage</key>
 			<string>CSTabBar_add_photo.png</string>
+			<key>isVC</key>
+			<true/>
+			<key>hidesBottomBarWhenPushed</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>title</key>

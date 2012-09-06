@@ -36,12 +36,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
 #import "UserAccount.h"
-//#import "GoogleAnalyticsManager.h"
 #import "UIDevice+Machine.h"
 #import "ExpandedUILabel.h"
-
 #import <Crashlytics/Crashlytics.h>
-//#import "TestFlight.h"
+
+#if defined (CONFIGURATION_Debug)
+#import "TestFlight.h"
+#endif
+
+#if defined (CONFIGURATION_AdHoc)
+#import "TestFlight.h"
+#endif
 
 @interface AppDelegate(Private)
 
@@ -66,23 +71,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
-	/*
+	
 	#if defined (CONFIGURATION_Debug)
 		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
-		//[Crashlytics sharedInstance].debugMode = YES;
-		[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
+		[Crashlytics sharedInstance].debugMode = YES;
 	#endif
 	
 	#if defined (CONFIGURATION_AdHoc)
 		[TestFlight takeOff:@"80efc3fefcfe9d49ed8073f8d1e69288_MjEwMA"];
-		[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	#endif
-	 */
 	
-	#if defined (CONFIGURATION_Distribution)
-		[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
-	#endif
-	 
+	
+	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
+	
 
 	[self appendStartUpView];
 	

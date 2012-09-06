@@ -214,16 +214,7 @@
 			return NO;
 		}
 		
-		
-		// check for revision status, will be boolean node if sent revision is same as current server one
-		// wil return NO but status is kept to YES as its not an error but will trigger the  XMLPARSERDIDCOMPLETENOUPDATE notification
-		//XMLTreeNode *revisionstatus=[response findChild:@"Status"];
-		//		if(revisionstatus!=nil){
-		//			activeResponse.updated=NO;
-		//			return NO;
-		//		}
-		
-	
+			
 	
 	return result;
 	
