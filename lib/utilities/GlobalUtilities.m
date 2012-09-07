@@ -303,6 +303,11 @@
 	for( id item	in dataProvider){
 		
 		itemkey = [item valueForKeyPath:key];
+		
+		if(itemkey==nil){
+			itemkey=EMPTYSTRING;
+		}
+		
 		//
 		if(firstvalue==YES){
 			activekey=[itemkey copy];
