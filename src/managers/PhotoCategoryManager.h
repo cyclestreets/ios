@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableDictionary		* dataProvider;
 @property (nonatomic, strong) NSString		* validUntilTimeStamp;
 
+
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoCategoryManager);
 
 

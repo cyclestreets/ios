@@ -16,7 +16,9 @@
 #import "GlobalUtilities.h"
 
 
-@interface PhotoCategoryManager(Private)
+@interface PhotoCategoryManager()
+
+@property (nonatomic,assign)  BOOL legacyConversionRequired;
 
 -(void)convertLegacyDataProvider;
 
@@ -32,7 +34,7 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 @synthesize dataProvider;
 @synthesize validUntilTimeStamp;
-
+@synthesize legacyConversionRequired;
 
 
 -(id)init{
@@ -45,7 +47,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		self.dataProvider = [cycleStreets.files photoCategories];
 		
-		BOOL legacyConversionRequired=YES;
+		legacyConversionRequired=YES;
 		
 		// check validaty of cache, note shite legacy dict storage!
 		NSString *validuntil = [[[dataProvider objectForKey:@"validuntil"] objectAtIndex:0] valueForKey:@"validuntil"];
@@ -70,6 +72,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 		}
 		
 		if (expired) {
+			legacyConversionRequired=NO;
 			[self requestRemoteCategories];
 		}else {
 			
@@ -127,7 +130,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 				if(dataProvider==nil){ 
 					[self createDefaultCategoryDataProvider];
 				}else{
-					[self convertLegacyDataProvider];
+					if(legacyConversionRequired==YES)
+						[self convertLegacyDataProvider];
 				}
 			}
 			
