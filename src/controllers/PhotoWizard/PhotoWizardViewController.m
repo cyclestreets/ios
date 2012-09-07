@@ -31,6 +31,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 @interface PhotoWizardViewController(Private)
 
+-(RMMarker*)retrieveLocationMapMarker;
+
 -(void)resetPhotoWizard;
 
 -(void)initialiseViewState:(PhotoWizardViewState)state;
@@ -872,13 +874,21 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[locationMapView setDelegate:self];
 	locationMapView.userInteractionEnabled=NO;
 	
-	if (!self.locationMapMarker) {
+	[self retrieveLocationMapMarker];
+	
+	[self loadLocationFromPhoto];
+		
+}
+
+
+-(RMMarker*)retrieveLocationMapMarker{
+	
+	if (self.locationMapMarker==nil) {
 		self.locationMapMarker = [Markers markerPhoto];
 		self.locationMapMarker.enableDragging=YES;
 	}
 	
-	[self loadLocationFromPhoto];
-		
+	return self.locationMapMarker;
 }
 
 
@@ -986,7 +996,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 	[self.locationMapView moveToLatLong:coordinate];
 	
-	[locationMapView.markerManager addMarker:locationMapMarker AtLatLong:coordinate];
+	[locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:coordinate];
 	
 	[locationMapView.contents setZoom:6];
 		
@@ -1003,7 +1013,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		[locationMapView.contents setZoom:14];
 	}
 	
-	[locationMapView.markerManager addMarker:locationMapMarker AtLatLong:location.coordinate];
+
+	
+	[locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:location.coordinate];
 	
 	
 }
