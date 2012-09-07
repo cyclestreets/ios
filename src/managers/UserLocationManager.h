@@ -57,7 +57,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 
 
 -(void)startUpdatingLocationForSubscriber:(NSString*)subscriberId;
-- (void)stopUpdatingLocatioForSubscriber:(NSString *)subscriberId;
+- (void)stopUpdatingLocationForSubscriber:(NSString *)subscriberId;
 
 -(BOOL)checkLocationStatus:(BOOL)showAlert;
 

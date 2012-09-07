@@ -15,7 +15,7 @@
 -(void)initialiseCorelocation;
 -(void)resetLocationAndReAssess;
 -(void)assessUserLocation;
-- (void)stopUpdatingLocation:(NSString *)state;
+- (void)stopUpdatingLocation:(NSString *)subscriberId;
 -(void)UserLocationWasUpdated;
 
 -(BOOL)addSubscriber:(NSString*)subscriberId;
@@ -257,7 +257,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			if(result==YES){
 				locationManager.delegate = self;
 				[locationManager startUpdatingLocation];
-				[self performSelector:@selector(stopUpdatingLocation:) withObject:@"Timed Out" afterDelay:3000];
+				[self performSelector:@selector(stopUpdatingLocation:) withObject:subscriberId afterDelay:3000];
 			}
 			
 		}else {
@@ -314,7 +314,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			if (didFindDeviceLocation==YES){
                     
 				[self UserLocationWasUpdated];
-				[self stopUpdatingLocatioForSubscriber:SYSTEM];
+				[self stopUpdatingLocationForSubscriber:SYSTEM];
 				
 			}
 			break;
@@ -365,7 +365,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
  * @description		Stop Location tracking, can be called via an valid response or on a timeout error	
  ***********************************************/
 //
-- (void)stopUpdatingLocatioForSubscriber:(NSString *)subscriberId {
+- (void)stopUpdatingLocationForSubscriber:(NSString *)subscriberId {
 	
 	BetterLog(@"");
 	
@@ -390,6 +390,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		
 	}
 	
+}
+
+-(void)stopUpdatingLocation:(NSString *)subscriberId{
+	
+	[self stopUpdatingLocationForSubscriber:subscriberId];
 }
 
 @end

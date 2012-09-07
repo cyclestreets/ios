@@ -324,7 +324,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 -(void)viewWillDisappear:(BOOL)animated{
 	if([UserLocationManager sharedInstance].isLocating==YES)
-		[[UserLocationManager sharedInstance] stopUpdatingLocatioForSubscriber:LOCATIONSUBSCRIBERID];
+		[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 }
 
@@ -486,7 +486,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		[self removeLocationIndicator];
 		
 		
-		[[UserLocationManager sharedInstance] stopUpdatingLocatioForSubscriber:LOCATIONSUBSCRIBERID];
+		[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 		
 		[self requestPhotos];
 	}
