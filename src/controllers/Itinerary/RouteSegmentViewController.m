@@ -228,13 +228,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
 	BetterLog(@"tapMarker");
-	if (locationView == nil) {
-		locationView = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
-	}
+	PhotoMapImageLocationViewController *lv=[[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
+
 	if ([marker.data isKindOfClass: [PhotoMapVO class]]) {
-		[self presentModalViewController:locationView animated:YES];
+		[self presentModalViewController:lv animated:YES];
 		PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
-		[locationView loadContentForEntry:photoEntry];
+		[lv loadContentForEntry:photoEntry];
 	}	
 }
 
