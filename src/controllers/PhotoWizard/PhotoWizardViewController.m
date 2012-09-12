@@ -313,7 +313,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		self.nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(navigateToNextView:)];
 		
 		self.navigationItem.title=@"";
-		self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:nextButton,prevButton, nil];
+		
+		if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")){
+			self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:nextButton,prevButton, nil];
+		}else{
+			
+			LayoutBox *containerView=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 10, 32)]];
+			containerView.itemPadding=5;
+			[containerView addSubViewsFromArray:[NSArray arrayWithObjects:nextButton,prevButton, nil]];
+			
+			self.navigationItem.rightBarButton=[[UIBarButtonItem alloc] initWithCustomView:containerView];
+			
+		}
 		
 		pageScrollView.y=20;
 		headerView.y=0;
