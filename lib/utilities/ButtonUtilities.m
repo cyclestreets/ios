@@ -189,9 +189,9 @@
 	button.titleLabel.font=font;
 	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 	[button setTitleColor:UIColorFromRGB(0xcccccc) forState:UIControlStateDisabled];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:1] forState:UIControlStateNormal];
+	[button setTitleShadowColor:[UIColor colorWithWhite:0.498 alpha:1.000] forState:UIControlStateNormal];
 	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+	button.titleLabel.shadowOffset=CGSizeMake(0, -0.5);
 	
 	
 	return button;
