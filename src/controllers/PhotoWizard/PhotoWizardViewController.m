@@ -309,22 +309,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		self.navigationItem.backBarButtonItem.tintColor=UIColorFromRGB(0xA71D1D);
 		
-		self.prevButton = [[UIBarButtonItem alloc] initWithTitle:@"Previous" style:UIBarButtonItemStyleBordered target:self action:@selector(navigateToPreviousView:)];
-		self.nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(navigateToNextView:)];
+		
+		self.prevButton=[ButtonUtilities UIButtonWithWidth:10 height:32 type:@"barbuttongreen" text:@"Previous"];
+		[prevButton addTarget:self action:@selector(navigateToPreviousView:) forControlEvents:UIControlEventTouchUpInside];
+		self.nextButton=[ButtonUtilities UIButtonWithWidth:10 height:32 type:@"barbuttongreen" text:@"Next"];
+		[nextButton addTarget:self action:@selector(navigateToNextView:) forControlEvents:UIControlEventTouchUpInside];
+		
 		
 		self.navigationItem.title=@"";
 		
-		if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"5.0")){
-			self.navigationItem.rightBarButtonItems=[NSArray arrayWithObjects:nextButton,prevButton, nil];
-		}else{
+		LayoutBox *containerView=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 10, 32)];
+		containerView.itemPadding=5;
+		[containerView addSubview:prevButton];
+		[containerView addSubview:nextButton];
 			
-			LayoutBox *containerView=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 10, 32)]];
-			containerView.itemPadding=5;
-			[containerView addSubViewsFromArray:[NSArray arrayWithObjects:nextButton,prevButton, nil]];
+		self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:containerView];
 			
-			self.navigationItem.rightBarButton=[[UIBarButtonItem alloc] initWithCustomView:containerView];
-			
-		}
+		
 		
 		pageScrollView.y=20;
 		headerView.y=0;

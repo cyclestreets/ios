@@ -559,6 +559,10 @@
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
 		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
+		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
+		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
+		289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
+		289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
 		289E6AFA144C35860079FFE5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E6AF8144C357C0079FFE5 /* libz.dylib */; };
 		289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
@@ -1071,6 +1075,8 @@
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
 		289CAF8715F89A460036DE98 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
+		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		28A04418159216A400201CF3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		28A0441C159216C000201CF3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -1716,6 +1722,7 @@
 		28187A5614FCFF4C00A38A17 /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */,
 				28535DF915E6313E0092FC16 /* Icon_currentroutecell.png */,
 				283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */,
 				283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */,
@@ -2436,6 +2443,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */,
 				2801301315E636070092D509 /* Icon_currentroutecell@2x.png */,
 				28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */,
 				28B76F2D15E4D7E9006B01D0 /* CSBarButton_location@2x.png */,
@@ -2951,6 +2959,8 @@
 				28535DC915E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
 				28535DFA15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
 				2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
+				289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
+				289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3147,6 +3157,8 @@
 				28535DCA15E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
 				28535DFB15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
 				2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
+				289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
+				289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
