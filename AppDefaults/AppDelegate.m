@@ -39,6 +39,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIDevice+Machine.h"
 #import "ExpandedUILabel.h"
 #import <Crashlytics/Crashlytics.h>
+#import "RouteManager.h"
+#import <MapKit/MapKit.h>
 
 #if defined (CONFIGURATION_Debug)
 #import "TestFlight.h"
@@ -93,6 +95,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	return YES;
+}
+
+
+- (BOOL)application:(UIApplication *)application
+			openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+		 annotation:(id)annotation {
+	
+	if ([MKDirectionsRequest isDirectionsRequestURL:url]) {
+		MKDirectionsRequest* directionsInfo = [[MKDirectionsRequest alloc] initWithContentsOfURL:url];
+		
+		[[RouteManager sharedInstance] loadRouteForRouting:directionsInfo];
+		// TO DO: Plot and display the route using the
+		//   source and destination properties of directionsInfo.
+		return YES;
+	}
+	else {
+		// Handle other URL types...
+	}
+    return NO;
 }
 
 
