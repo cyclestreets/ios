@@ -201,24 +201,28 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	if (self.currentPlaces == nil) {
 		self.currentPlaces = [[NSMutableArray alloc] init];
 	}
-	[self.currentPlaces removeAllObjects];
 	
-	
-	
-	for (NSDictionary *place in [elements objectForKey:@"result"])
-	{
-		NamedPlace *namedPlace = [[NamedPlace alloc] initWithDictionary:place];
-		[self.currentPlaces addObject:namedPlace];
+	//# CR error 2.0.2 #25: XMLRequest can return underlying NSData object rather than NSDict
+	if([elements isKindOfClass:[NSDictionary class]]){
+		
+		[self.currentPlaces removeAllObjects];
+		
+		for (NSDictionary *place in [elements objectForKey:@"result"])
+		{
+			NamedPlace *namedPlace = [[NamedPlace alloc] initWithDictionary:place];
+			[self.currentPlaces addObject:namedPlace];
+		}
+		
+		[currentPlaces sortUsingComparator:(NSComparator)^(NamedPlace *a1, NamedPlace *a2) {
+			if ([a1.distanceInt compare:a2.distanceInt] == NSOrderedSame) {
+				return [a1.distanceInt compare:a2.distanceInt];
+			} else {
+				return [a1.distanceInt compare:a2.distanceInt];
+			}
+		}];
+		
 	}
 	
-	[currentPlaces sortUsingComparator:(NSComparator)^(NamedPlace *a1, NamedPlace *a2) {
-		if ([a1.distanceInt compare:a2.distanceInt] == NSOrderedSame) {
-			return [a1.distanceInt compare:a2.distanceInt];
-		} else {
-			return [a1.distanceInt compare:a2.distanceInt];
-		}
-	}];
-
 	
 	[self.searchDisplayController.searchResultsTableView reloadData];
 	if (self.searchDisplayController.active && ![self.currentRequestSearchString isEqualToString:self.searchString]) {

@@ -97,7 +97,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		MKDirectionsRequest* directionsInfo = [[MKDirectionsRequest alloc] initWithContentsOfURL:url];
 		
 		[[RouteManager sharedInstance] loadRouteForRouting:directionsInfo];
-		.
+		
 		return YES;
 	}
 	else {
