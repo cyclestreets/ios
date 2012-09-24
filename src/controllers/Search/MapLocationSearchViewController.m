@@ -202,6 +202,9 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 		self.currentPlaces = [[NSMutableArray alloc] init];
 	}
 	[self.currentPlaces removeAllObjects];
+	
+	
+	
 	for (NSDictionary *place in [elements objectForKey:@"result"])
 	{
 		NamedPlace *namedPlace = [[NamedPlace alloc] initWithDictionary:place];

@@ -1231,13 +1231,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (void)nullify {
-	self.locationButton = nil;
-	self.activeLocationButton = nil;
-	self.locatingIndicator = nil;
-	self.nameButton = nil;
-	self.routeButton = nil;
-	self.deleteButton = nil;
-	self.attributionLabel = nil;
 	
 	cycleStreets = nil;
 	mapView = nil;

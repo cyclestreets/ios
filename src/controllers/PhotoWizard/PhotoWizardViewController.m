@@ -569,7 +569,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)closeWindowButtonSelected:(id)sender{
 	
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self dismissModalViewControllerAnimated:YES];
 	
 }
 
