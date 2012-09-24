@@ -41,14 +41,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <Crashlytics/Crashlytics.h>
 #import "RouteManager.h"
 #import <MapKit/MapKit.h>
-
-#if defined (CONFIGURATION_Debug)
 #import "TestFlight.h"
-#endif
 
-#if defined (CONFIGURATION_AdHoc)
-#import "TestFlight.h"
-#endif
 
 @interface AppDelegate(Private)
 
@@ -75,15 +69,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	#if defined (CONFIGURATION_Debug)
-		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
 		[Crashlytics sharedInstance].debugMode = YES;
 	#endif
 	
-	#if defined (CONFIGURATION_AdHoc)
-		[TestFlight takeOff:@"80efc3fefcfe9d49ed8073f8d1e69288_MjEwMA"];
-	#endif
 	
-	
+	[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
 
@@ -107,8 +97,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		MKDirectionsRequest* directionsInfo = [[MKDirectionsRequest alloc] initWithContentsOfURL:url];
 		
 		[[RouteManager sharedInstance] loadRouteForRouting:directionsInfo];
-		// TO DO: Plot and display the route using the
-		//   source and destination properties of directionsInfo.
+		.
 		return YES;
 	}
 	else {

@@ -735,7 +735,6 @@
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
 		28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */; };
-		28E603071610B406006A4B4C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E603061610B406006A4B4C /* Default-568h@2x.png */; };
 		28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 28E603091610B683006A4B4C /* cyclestreets.geojson */; };
 		28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3CB1455638D0063AA96 /* SegmentVO.m */; };
 		28E8A3E61455B6D10063AA96 /* SavedRoutesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */; };
@@ -1335,7 +1334,6 @@
 		28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWizardCategoryCell.xib; sourceTree = "<group>"; };
 		28DFE8D615A428DD005FDCA0 /* PhotoWizardCategoryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryCellView.h; sourceTree = "<group>"; };
 		28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryCellView.m; sourceTree = "<group>"; };
-		28E603061610B406006A4B4C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		28E603091610B683006A4B4C /* cyclestreets.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cyclestreets.geojson; path = resources/cyclestreets.geojson; sourceTree = "<group>"; };
 		28E8A3CA1455638D0063AA96 /* SegmentVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentVO.h; sourceTree = "<group>"; };
 		28E8A3CB1455638D0063AA96 /* SegmentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentVO.m; sourceTree = "<group>"; };
@@ -2615,7 +2613,6 @@
 			isa = PBXGroup;
 			children = (
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
-				28E603061610B406006A4B4C /* Default-568h@2x.png */,
 				28AD6308131FB6C8008527FC /* lib */,
 				28AD61DB131FB69D008527FC /* src */,
 				28AD6207131FB69D008527FC /* resources */,
@@ -2972,7 +2969,6 @@
 				289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 				284706821600903200D5E58B /* APIKey_live.txt in Resources */,
-				28E603071610B406006A4B4C /* Default-568h@2x.png in Resources */,
 				28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
