@@ -24,6 +24,7 @@
 #import "SavedRoutesManager.h"
 #import "Model.h"
 #import "RouteVO.h"
+#import <MapKit/MapKit.h>
 
 @interface RouteManager(Private) 
 
@@ -36,6 +37,7 @@
 
 -(void)loadRouteForEndPointsResponse:(ValidationVO*)validation;
 -(void)loadRouteForRouteIdResponse:(ValidationVO*)validation;
+-(void)loadRouteForRoutingResponse:(ValidationVO*)validation;
 
 - (NSString *) routesDirectory;
 - (NSString *) oldroutesDirectory;
@@ -313,6 +315,83 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     
     
 }
+
+
+//
+/***********************************************
+ * @description			OS6 Routing request support
+ ***********************************************/
+//
+
+-(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest{
+	
+	MKMapItem *source=routingrequest.source;
+	MKMapItem *destination=routingrequest.destination;
+	
+	CLLocationCoordinate2D fromlocation=source.placemark.coordinate;
+	CLLocationCoordinate2D tolocation=destination.placemark.coordinate;
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+    SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+    
+    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+									 
+									 [NSString stringWithFormat:@"%@,%@|%@,%@",BOX_FLOAT(fromlocation.longitude),BOX_FLOAT(fromlocation.latitude),BOX_FLOAT(tolocation.longitude),BOX_FLOAT(tolocation.latitude)],@"itinerarypoints",
+                                     useDom,@"useDom",
+                                     settingsdp.plan,@"plan",
+                                     [settingsdp returnKilometerSpeedValue],@"speed",
+                                     cycleStreets.files.clientid,@"clientid",
+                                     nil];
+    
+    NetRequest *request=[[NetRequest alloc]init];
+    request.dataid=CALCULATEROUTE;
+    request.requestid=ZERO;
+    request.parameters=parameters;
+    request.revisonId=0;
+    request.source=USER;
+    
+    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+    
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
+    
+	
+}
+
+-(void)loadRouteForRoutingResponse:(ValidationVO*)validation{
+	
+	BetterLog(@"");
+    
+    switch(validation.validationStatus){
+			
+        case ValidationCalculateRouteSuccess:
+		{
+			RouteVO *newroute = [validation.responseDict objectForKey:CALCULATEROUTE];
+            
+            [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
+			
+            [self warnOnFirstRoute];
+            [self selectRoute:newroute];
+			[self saveRoute:selectedRoute];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:CALCULATEROUTERESPONSE object:nil];
+            
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, added path to map" andMessage:nil];
+        }
+			break;
+            
+            
+        case ValidationCalculateRouteFailed:
+            
+            [self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
+            
+			break;
+			
+			
+    }
+	
+}
+
 
 
 //

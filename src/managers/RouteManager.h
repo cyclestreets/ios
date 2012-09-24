@@ -12,6 +12,7 @@
 #import "RouteVO.h"
 #import "Query.h"
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 #define ROUTEARCHIVEPATH @"userroutes"
 #define OLDROUTEARCHIVEPATH @"routes"
@@ -39,8 +40,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 //new
 -(void)loadRouteForRouteId:(NSString*)routeid; // route id remote loading
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation;
-
 -(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan;
+
+-(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest;
+
 -(void)loadSavedSelectedRoute;
 
 -(RouteVO*)loadRouteForFileID:(NSString*)fileid;
