@@ -202,6 +202,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             [self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
             
         break;
+			
+		
+		case ValidationCalculateRouteFailedOffNetwork:
+            
+            [self queryFailure:nil message:@"Routing error, one endpoint is not on known cycle routes."];
+            
+		break;
         
         
     }
@@ -384,6 +391,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
         case ValidationCalculateRouteFailed:
             
             [self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
+            
+			break;
+			
+		case ValidationCalculateRouteFailedOffNetwork:
+            
+            [self queryFailure:nil message:@"Routing error, one endpoint is not on cycle routes"];
             
 			break;
 			

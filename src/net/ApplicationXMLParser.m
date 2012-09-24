@@ -388,7 +388,24 @@
 		
 		
 	}else{
+		
 		validation.returnCode=ValidationCalculateRouteFailed;
+		
+		
+		TBXMLElement *root=[TBXML childElementNamed:@"gml:featureMember" parentElement:response];
+		TBXMLElement *issuenode=[TBXML childElementNamed:@"cs:notedIssue" parentElement:root];
+		
+		if(issuenode!=nil){
+			
+			int code=[[TBXML textOfChild:@"cs:code" parentElement:issuenode]intValue];
+			if(code==ValidationCalculateRouteFailedOffNetwork){
+				validation.returnCode=ValidationCalculateRouteFailedOffNetwork;
+			}
+			
+		}
+		
+		
+		
 	}
 	
 	

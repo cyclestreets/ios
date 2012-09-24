@@ -40,8 +40,11 @@ enum  {
     ValidationCalculateRouteFailed=2017,
     ValidationRetrieveRouteByIdFailed=2018,
 	ValidationCategoriesFailed=2019,
+	
+	ValidationCalculateRouteFailedOffNetwork=122711,
+	
 	ValidationFailureMIN=ValidationLoginFailed,
-	ValidationFailureMAX=ValidationCategoriesFailed,
+	ValidationFailureMAX=ValidationCalculateRouteFailedOffNetwork,
 	
 	// checking
 	ValdationInvalidCode=9997,

@@ -56,18 +56,37 @@
 	<array>
 		<string>MKDirectionsModeBike</string>
 	</array>
+	<key>MKDirectionsRequest</key>
+	<string>com.apple.maps.directionsrequest</string>
 	<key>NSMainNibFile</key>
 	<string>CycleStreetsWindow</string>
 	<key>SERVERDOMAIN_ID</key>
 	<string>APPSTATE_LIVE</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>UIStatusBarTintParameters</key>
+	<dict>
+		<key>UINavigationBar</key>
+		<dict>
+			<key>Style</key>
+			<string>UIBarStyleDefault</string>
+			<key>TintColor</key>
+			<dict>
+				<key>Blue</key>
+				<real>0.20561199999999999</real>
+				<key>Green</key>
+				<real>0.57280699999999996</real>
+				<key>Red</key>
+				<real>0.0975187</real>
+			</dict>
+			<key>Translucent</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-	<key>MKDirectionsRequest</key>
-	<string>com.apple.maps.directionsrequest</string>
 </dict>
 </plist>

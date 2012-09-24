@@ -103,7 +103,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize showingPhotos;
 @synthesize locationManagerIsLocating;
 @synthesize locationWasFound;
-
+@synthesize firstRun;
 
 
 
