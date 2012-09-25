@@ -25,6 +25,8 @@
 	RouteVO								*selectedRoute;
 	
 	NSString							*activeRouteDir;
+	
+	MKDirectionsRequest					*mapRoutingRequest; // temp storage for MapKit bug where Routing currentLocation is 0,0
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
@@ -32,6 +34,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 @property (nonatomic, strong) NSMutableArray		* legacyRoutes;
 @property (nonatomic, strong) RouteVO		* selectedRoute;
 @property (nonatomic, strong) NSString		* activeRouteDir;
+@property (nonatomic, strong) MKDirectionsRequest		*mapRoutingRequest;
 
 - (void) runQuery:(Query *)query;
 - (void) runRouteIdQuery:(Query *)query;
@@ -40,6 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 //new
 -(void)loadRouteForRouteId:(NSString*)routeid; // route id remote loading
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation;
+-(void)loadRouteForCoordinates:(CLLocationCoordinate2D)fromcoordinate to:(CLLocationCoordinate2D)tocoordinate;
 -(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan;
 
 -(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest;

@@ -25,6 +25,10 @@
 #import "Model.h"
 #import "RouteVO.h"
 #import <MapKit/MapKit.h>
+#import "UserLocationManager.h"
+
+static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
+
 
 @interface RouteManager(Private) 
 
@@ -40,6 +44,9 @@
 
 - (NSString *) routesDirectory;
 - (NSString *) oldroutesDirectory;
+
+-(void)locationDidFail:(NSNotification*)notification;
+-(void)locationDidComplete:(NSNotification*)notification;
 
 
 -(void)evalRouteArchiveState;
@@ -57,6 +64,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 @synthesize legacyRoutes;
 @synthesize selectedRoute;
 @synthesize activeRouteDir;
+@synthesize mapRoutingRequest;
 
 
 //=========================================================== 
@@ -90,6 +98,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	
+	[notifications addObject:GPSLOCATIONCOMPLETE];
+	[notifications addObject:GPSLOCATIONUPDATE];
+	[notifications addObject:GPSLOCATIONFAILED];
 	
 	[self addRequestID:CALCULATEROUTE];
 	[self addRequestID:RETRIEVEROUTEBYID];
@@ -125,9 +137,61 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 	}
 	
+	if([notification.name isEqualToString:GPSLOCATIONCOMPLETE]){
+        [self locationDidComplete:notification];
+    }
+	
+	if([notification.name isEqualToString:GPSLOCATIONFAILED]){
+        [self locationDidFail:notification];
+    }
+	
 	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
 		[[HudManager sharedInstance] removeHUD];
 	}
+	
+	
+}
+
+
+//
+/***********************************************
+ * @description			LOCATION SUPPORT
+ ***********************************************/
+//
+
+-(void)locationDidFail:(NSNotification*)notification{
+	
+	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+	
+	[self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
+	
+}
+
+-(void)locationDidComplete:(NSNotification*)notification{
+	
+	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+	
+	CLLocation *location=(CLLocation*)[notification object];
+	
+	MKMapItem *source=mapRoutingRequest.source;
+	MKMapItem *destination=mapRoutingRequest.destination;
+	
+	CLLocationCoordinate2D fromcoordinate=source.placemark.coordinate;
+	CLLocationCoordinate2D tocoordinate=destination.placemark.coordinate;
+	
+	if(fromcoordinate.latitude==0.0 && fromcoordinate.longitude==0.0){
+		
+		[self loadRouteForCoordinates:location.coordinate to:tocoordinate];
+		
+	}else if(tocoordinate.latitude==0.0 && tocoordinate.longitude==0.0){
+		
+		[self loadRouteForCoordinates:fromcoordinate to:location.coordinate];
+		
+	}else{
+		[self loadRouteForCoordinates:fromcoordinate to:tocoordinate];
+	}
+		
+		
 	
 	
 }
@@ -141,19 +205,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
  ***********************************************/
 //
 
--(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation{
-    
-    
-    CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+
+-(void)loadRouteForCoordinates:(CLLocationCoordinate2D)fromcoordinate to:(CLLocationCoordinate2D)tocoordinate{
+	
+	
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
     SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
     
     NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
 									 
-									 [NSString stringWithFormat:@"%@,%@|%@,%@",BOX_FLOAT(fromlocation.coordinate.longitude),BOX_FLOAT(fromlocation.coordinate.latitude),BOX_FLOAT(tolocation.coordinate.longitude),BOX_FLOAT(tolocation.coordinate.latitude)],@"itinerarypoints",
+									 [NSString stringWithFormat:@"%@,%@|%@,%@",BOX_FLOAT(fromcoordinate.longitude),BOX_FLOAT(fromcoordinate.latitude),BOX_FLOAT(tocoordinate.longitude),BOX_FLOAT(tocoordinate.latitude)],@"itinerarypoints",
                                      useDom,@"useDom",
                                      settingsdp.plan,@"plan",
                                      [settingsdp returnKilometerSpeedValue],@"speed",
-                                     cycleStreets.files.clientid,@"clientid", 
+                                     cycleStreets.files.clientid,@"clientid",
                                      nil];
     
     NetRequest *request=[[NetRequest alloc]init];
@@ -167,6 +233,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
     
     [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
+	
+	
+	
+}
+
+-(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation{
+    
+	[self loadRouteForCoordinates:fromlocation.coordinate to:tolocation.coordinate];
     
 }
 
@@ -337,30 +411,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	CLLocationCoordinate2D fromlocation=source.placemark.coordinate;
 	CLLocationCoordinate2D tolocation=destination.placemark.coordinate;
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-    SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
-    
-    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
-									 
-									 [NSString stringWithFormat:@"%@,%@|%@,%@",BOX_FLOAT(fromlocation.longitude),BOX_FLOAT(fromlocation.latitude),BOX_FLOAT(tolocation.longitude),BOX_FLOAT(tolocation.latitude)],@"itinerarypoints",
-                                     useDom,@"useDom",
-                                     settingsdp.plan,@"plan",
-                                     [settingsdp returnKilometerSpeedValue],@"speed",
-                                     cycleStreets.files.clientid,@"clientid",
-                                     nil];
-    
-    NetRequest *request=[[NetRequest alloc]init];
-    request.dataid=CALCULATEROUTE;
-    request.requestid=ZERO;
-    request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
-    
-    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-    
-    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
-    
+	if(fromlocation.latitude==0.0 || tolocation.latitude==0.0){ // must be wonky currentLocation pin
+		
+		self.mapRoutingRequest=routingrequest;
+		
+		[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+		
+		
+	}else{
+		
+		[self loadRouteForCoordinates:fromlocation to:tolocation];
+		
+	}
+	
 	
 }
 
