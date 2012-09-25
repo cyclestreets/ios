@@ -1334,7 +1334,7 @@
 		28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWizardCategoryCell.xib; sourceTree = "<group>"; };
 		28DFE8D615A428DD005FDCA0 /* PhotoWizardCategoryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryCellView.h; sourceTree = "<group>"; };
 		28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryCellView.m; sourceTree = "<group>"; };
-		28E603091610B683006A4B4C /* cyclestreets.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cyclestreets.geojson; path = resources/cyclestreets.geojson; sourceTree = "<group>"; };
+		28E603091610B683006A4B4C /* cyclestreets.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cyclestreets.geojson; sourceTree = "<group>"; };
 		28E8A3CA1455638D0063AA96 /* SegmentVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentVO.h; sourceTree = "<group>"; };
 		28E8A3CB1455638D0063AA96 /* SegmentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentVO.m; sourceTree = "<group>"; };
 		28E8A3E41455B6D00063AA96 /* SavedRoutesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedRoutesManager.h; sourceTree = "<group>"; };
@@ -2217,6 +2217,7 @@
 		28AD6207131FB69D008527FC /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				28E603091610B683006A4B4C /* cyclestreets.geojson */,
 				284706801600902200D5E58B /* APIKey_live.txt */,
 				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
 				280E9318140984F300C7AC75 /* xib */,
@@ -2612,7 +2613,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				28E603091610B683006A4B4C /* cyclestreets.geojson */,
 				28AD6308131FB6C8008527FC /* lib */,
 				28AD61DB131FB69D008527FC /* src */,
 				28AD6207131FB69D008527FC /* resources */,

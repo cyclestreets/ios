@@ -37,7 +37,6 @@
 
 -(void)loadRouteForEndPointsResponse:(ValidationVO*)validation;
 -(void)loadRouteForRouteIdResponse:(ValidationVO*)validation;
--(void)loadRouteForRoutingResponse:(ValidationVO*)validation;
 
 - (NSString *) routesDirectory;
 - (NSString *) oldroutesDirectory;
@@ -206,7 +205,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 		case ValidationCalculateRouteFailedOffNetwork:
             
-            [self queryFailure:nil message:@"Routing error, one endpoint is not on known cycle routes."];
+            [self queryFailure:nil message:validation.returnMessage];
             
 		break;
         
@@ -362,46 +361,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     
     [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
     
-	
-}
-
--(void)loadRouteForRoutingResponse:(ValidationVO*)validation{
-	
-	BetterLog(@"");
-    
-    switch(validation.validationStatus){
-			
-        case ValidationCalculateRouteSuccess:
-		{
-			RouteVO *newroute = [validation.responseDict objectForKey:CALCULATEROUTE];
-            
-            [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
-			
-            [self warnOnFirstRoute];
-            [self selectRoute:newroute];
-			[self saveRoute:selectedRoute];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:CALCULATEROUTERESPONSE object:nil];
-            
-            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, added path to map" andMessage:nil];
-        }
-			break;
-            
-            
-        case ValidationCalculateRouteFailed:
-            
-            [self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
-            
-			break;
-			
-		case ValidationCalculateRouteFailedOffNetwork:
-            
-            [self queryFailure:nil message:@"Routing error, one endpoint is not on cycle routes"];
-            
-			break;
-			
-			
-    }
 	
 }
 

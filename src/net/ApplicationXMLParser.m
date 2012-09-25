@@ -402,6 +402,8 @@
 				validation.returnCode=ValidationCalculateRouteFailedOffNetwork;
 			}
 			
+			validation.returnMessage=[TBXML textOfChild:@"cs:text" parentElement:issuenode];
+			
 		}
 		
 		
