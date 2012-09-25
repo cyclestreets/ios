@@ -214,11 +214,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 		}
 		
 		[currentPlaces sortUsingComparator:(NSComparator)^(NamedPlace *a1, NamedPlace *a2) {
-			if ([a1.distanceInt compare:a2.distanceInt] == NSOrderedSame) {
-				return [a1.distanceInt compare:a2.distanceInt];
-			} else {
-				return [a1.distanceInt compare:a2.distanceInt];
-			}
+			return [a1.distanceInt compare:a2.distanceInt];
 		}];
 		
 	}
