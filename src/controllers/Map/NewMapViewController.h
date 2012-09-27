@@ -7,7 +7,39 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SuperViewController.h"
+#import "RMMapViewDelegate.h"
+#import "RouteVO.h"
+#import "RouteLineView.h"
+#import "BlueCircleView.h"
+#import "WEPopoverController.h"
+#import "MapLocationSearchViewController.h"
+#import "UserLocationManager.h"
 
-@interface NewMapViewController : BUViewController
+@class CycleStreets;
+@class RouteVO;
+@class Location;
+@class InitialLocation;
+
+
+enum  {
+	MapPlanningStateNoRoute,
+	MapPlanningStateLocating,
+	MapPlanningStateWaypoint,
+	MapPlanningStatePlanning,
+	MapPlanningStateRoute,
+};
+typedef int MapPlanningState;
+
+
+
+@interface NewMapViewController : SuperViewController
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate,UserLocationManagerDelegate>{
+	
+	
+	
+	
+	
+}
 
 @end
