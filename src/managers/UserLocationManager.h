@@ -23,6 +23,17 @@ enum  {
 };
 typedef int ConnectLocationStates;
 
+
+@protocol UserLocationManagerDelegate <NSObject>
+
+@optional
+-(void)locationDidFail:(NSNotification*)notification;
+-(void)locationDidUpdate:(NSNotification*)notification;
+-(void)locationDidComplete:(NSNotification*)notification;
+
+@end
+
+
 @interface UserLocationManager : FrameworkObject<CLLocationManagerDelegate>{
     
 
@@ -37,6 +48,9 @@ typedef int ConnectLocationStates;
     CLLocationManager			*locationManager;
 	NSMutableArray				*locationMeasurements;
     CLLocation					*bestEffortAtLocation;
+	
+	id<UserLocationManagerDelegate>		__unsafe_unretained delegate;
+
     
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
@@ -49,11 +63,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 @property (nonatomic, strong)	NSMutableArray			*locationMeasurements;
 @property (nonatomic, strong)	CLLocation			*bestEffortAtLocation;
 
+@property (nonatomic, unsafe_unretained) id<UserLocationManagerDelegate>		 delegate;
+
 @property ( nonatomic, readonly)	BOOL doesDeviceAllowLocation;
 @property ( nonatomic, readonly)	BOOL systemLocationServicesEnabled;
 @property ( nonatomic, readonly)	BOOL appLocationServicesEnabled;
 
 
+- (BOOL)hasSubscriber:(NSString*)subscriber;
 
 
 -(void)startUpdatingLocationForSubscriber:(NSString*)subscriberId;

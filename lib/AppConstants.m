@@ -10,6 +10,18 @@
 
 NSString *const DEVICETYPE=@"iPhone";
 
+
+// map const
+
+NSString *const MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
+NSString *const MAPPING_BASE_OSM = @"OpenStreetMap";
+NSString *const MAPPING_BASE_OS = @"OS";
+
+NSString *const MAPPING_ATTRIBUTION_OPENCYCLEMAP = @"(c) OpenStreetMap and contributors, CC-BY-SA; Map images (c) OpenCycleMap";
+NSString *const MAPPING_ATTRIBUTION_OSM = @"(c) OpenStreetMap and contributors, CC-BY-SA";
+NSString *const MAPPING_ATTRIBUTION_OS = @"Contains Ordnance Survey data (c) Crown copyright and database right 2010";
+
+
 //
 /***********************************************
  * @description			DATA REQUEST IDS
@@ -19,6 +31,8 @@ NSString *const DEVICETYPE=@"iPhone";
 //search
 NSString *const QUICKSEARCHDATAID=@"QuickSearch";
 NSString *const SEARCHDATAID=@"Search";
+
+NSString *const CSMAPSTYLECHANGED=@"NotificationMapStyleChanged";
 
 NSString *const CSROUTESELECTED=@"CSRouteSelected";
 NSString *const CSLASTLOCATIONLOAD=@"CSLastLocationLoad";

@@ -81,13 +81,6 @@
 
 @end
 
-static NSString *MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
-static NSString *MAPPING_BASE_OSM = @"OpenStreetMap";
-static NSString *MAPPING_BASE_OS = @"OS";
-
-static NSString *MAPPING_ATTRIBUTION_OPENCYCLEMAP = @"(c) OpenStreetMap and contributors, CC-BY-SA; Map images (c) OpenCycleMap";
-static NSString *MAPPING_ATTRIBUTION_OSM = @"(c) OpenStreetMap and contributors, CC-BY-SA";
-static NSString *MAPPING_ATTRIBUTION_OS = @"Contains Ordnance Survey data (c) Crown copyright and database right 2010";
 
 static NSInteger MAX_ZOOM = 18;
 static NSInteger MIN_ZOOM = 1;

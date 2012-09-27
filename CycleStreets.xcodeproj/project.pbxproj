@@ -713,6 +713,8 @@
 		28C4ABF31450708900A0ECD3 /* btn_slider_track_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABE71450708900A0ECD3 /* btn_slider_track_pressed@2x.png */; };
 		28C8342015A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */; };
 		28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
+		28CBEDAD1612DCF5002CDE5A /* NewMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */; };
+		28CBEDAE1612DCF5002CDE5A /* NewMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */; };
 		28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
 		28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
@@ -1308,6 +1310,8 @@
 		28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardCategoryMenuView.xib; path = photowizard/PhotoWizardCategoryMenuView.xib; sourceTree = "<group>"; };
 		28C8342115A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryMenuViewController.h; sourceTree = "<group>"; };
 		28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryMenuViewController.m; sourceTree = "<group>"; };
+		28CBEDAB1612DCF5002CDE5A /* NewMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewMapViewController.h; path = Map/NewMapViewController.h; sourceTree = "<group>"; };
+		28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewMapViewController.m; path = Map/NewMapViewController.m; sourceTree = "<group>"; };
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
 		28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_userphotomap@2x.png"; sourceTree = "<group>"; };
 		28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_left@2x.png"; sourceTree = "<group>"; };
@@ -1896,6 +1900,8 @@
 			children = (
 				28AD6279131FB69D008527FC /* MapViewController.h */,
 				28AD627A131FB69D008527FC /* MapViewController.m */,
+				28CBEDAB1612DCF5002CDE5A /* NewMapViewController.h */,
+				28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -3371,6 +3377,7 @@
 				28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */,
 				28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */,
+				28CBEDAD1612DCF5002CDE5A /* NewMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3541,6 +3548,7 @@
 				2834376615DD5DC300B00FD5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */,
 				28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */,
+				28CBEDAE1612DCF5002CDE5A /* NewMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

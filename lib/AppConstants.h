@@ -24,6 +24,19 @@ typedef int CSRoutePlanType;
 
 extern NSString *const DEVICETYPE;
 
+// mapping
+
+extern NSString *const MAPPING_BASE_OPENCYCLEMAP;
+extern NSString *const MAPPING_BASE_OSM;
+extern NSString *const MAPPING_BASE_OS;
+
+extern NSString *const MAPPING_ATTRIBUTION_OPENCYCLEMAP;
+extern NSString *const MAPPING_ATTRIBUTION_OSM;
+extern NSString *const MAPPING_ATTRIBUTION_OS;
+
+
+
+
 // data ids
 
 //search
@@ -31,6 +44,8 @@ extern NSString *const QUICKSEARCHDATAID;
 extern NSString *const SEARCHDATAID;
 extern NSString *const CSROUTESELECTED;
 extern NSString *const CSLASTLOCATIONLOAD;
+
+extern NSString *const CSMAPSTYLECHANGED;
 
 extern NSString *const LOGINRESPONSE;
 extern NSString *const REGISTERRESPONSE;

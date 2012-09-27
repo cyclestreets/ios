@@ -98,6 +98,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+- (BOOL)hasSubscriber:(NSString*)subscriber{
+	
+	int result=[self findSubscriber:subscriber];
+	
+	return index!=NSNotFound;
+
+}
+
 
 -(BOOL)systemLocationServicesEnabled{
 	

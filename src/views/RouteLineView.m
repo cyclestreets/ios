@@ -77,6 +77,7 @@ static NSInteger MAX_DIST = 10;
 	return result;
 }
 
+// should be able to do multi plan drawing in layers
 - (void)drawRect:(CGRect)rect {
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	

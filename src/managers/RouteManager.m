@@ -137,13 +137,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 	}
 	
-	if([notification.name isEqualToString:GPSLOCATIONCOMPLETE]){
-        [self locationDidComplete:notification];
-    }
+	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID ]){
+		
+		if([notification.name isEqualToString:GPSLOCATIONCOMPLETE]){
+			[self locationDidComplete:notification];
+		}
+		
+		if([notification.name isEqualToString:GPSLOCATIONFAILED]){
+			[self locationDidFail:notification];
+		}
+		
+	}
 	
-	if([notification.name isEqualToString:GPSLOCATIONFAILED]){
-        [self locationDidFail:notification];
-    }
+	
 	
 	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
 		[[HudManager sharedInstance] removeHUD];
