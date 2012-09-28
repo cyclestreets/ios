@@ -64,6 +64,9 @@
             isEnabled = "YES">
          </AdditionalOption>
       </AdditionalOptions>
+      <RoutingCoverageFileReference
+         identifier = "../../resources/cyclestreets.geojson">
+      </RoutingCoverageFileReference>
    </LaunchAction>
    <ProfileAction
       shouldUseLaunchSchemeArgsEnv = "YES"

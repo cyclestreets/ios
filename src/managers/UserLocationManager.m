@@ -36,7 +36,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 @synthesize locationManager;
 @synthesize locationMeasurements;
 @synthesize bestEffortAtLocation;
-
+@synthesize delegate;
 
 
 
@@ -64,6 +64,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		
 		didFindDeviceLocation=NO;
         isLocating=NO;
+		
 		
 		self.locationSubscribers=[NSMutableArray array];
 		
@@ -100,7 +101,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 - (BOOL)hasSubscriber:(NSString*)subscriber{
 	
-	int result=[self findSubscriber:subscriber];
+	int index=[self findSubscriber:subscriber];
 	
 	return index!=NSNotFound;
 

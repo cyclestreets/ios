@@ -41,6 +41,7 @@
 #import "SettingsManager.h"
 #import "POIListviewController.h"
 #import "HudManager.h"
+#import "UserLocationManager.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -59,7 +60,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
-@interface NewMapViewController(Private)
+
+@interface NewMapViewController()
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar		* toolBar;
@@ -110,6 +112,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, assign) MapPlanningState	mapPlanningState;
 
 
+// ui
+-(void)initToolBarEntries;
+- (void)gotoState:(MapPlanningState)newPlanningState;
+
+// waypoints
+-(void)resetWayPoints;
+-(void)addWayPoint:(RMMarker*)marker;
+-(void)removeWayPointAtIndex:(int)index;
 
 @end
 
@@ -140,9 +150,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[super didReceiveNotification:notification];
 	
 	NSDictionary	*dict=[notification userInfo];
+	NSString		*name=notification.name;
 	
-	
-	// if ULM has this subscriber do gps methods
+	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
+		
+		
+		
+	}
+
+	if([name isEqualToString:CSMAPSTYLECHANGED]){
+		[self didNotificationMapStyleChanged];
+	}
 	
 }
 
@@ -151,7 +169,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (void) didNotificationMapStyleChanged {
 	self.mapView.contents.tileSource = [NewMapViewController tileSource];
-	self.attributionLabel.text = [NewMapViewController mapAttribution];
+	_attributionLabel.text = [NewMapViewController mapAttribution];
 }
 
 
@@ -188,30 +206,30 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[RMMapView class];
 	
 	//get the configured map source.
-	self.mapContents=[[RMMapContents alloc] initWithView:mapView tilesource:[NewMapViewController tileSource]];
+	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[NewMapViewController tileSource]];
 	
 	
 	// Initialize
-	[mapView setDelegate:self];
+	[_mapView setDelegate:self];
 	
-	if (initialLocation == nil) {
-		self.initialLocation = [[InitialLocation alloc] initWithMapView:mapView withController:self];
+	if (self.initialLocation == nil) {
+		self.initialLocation = [[InitialLocation alloc] initWithMapView:self.mapView withController:self];
 	}
-	[initialLocation performSelector:@selector(initiateLocation) withObject:nil afterDelay:0.0];
+	[_initialLocation performSelector:@selector(initiateLocation) withObject:nil afterDelay:0.0];
 	
 	//clear up from last run.
-	[self clearMarkers];
+	[self resetWayPoints];
 	
 	//provide the points the line overlay needs, when it needs them, in screen co-ordinates
-	[lineView setPointListProvider:self];
+	[_lineView setPointListProvider:self];
 	
-	[blueCircleView setLocationProvider:self];
+	[_blueCircleView setLocationProvider:self];
 	
 	
 	self.programmaticChange = NO;
-	singleTapDidOccur=NO;
+	self.singleTapDidOccur=NO;
 	
-	self.attributionLabel.text = [NewMapViewController mapAttribution];
+	_attributionLabel.text = [NewMapViewController mapAttribution];
 	
 	[self gotoState:MapPlanningStateNoRoute];
 	
@@ -233,6 +251,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+-(void)initToolBarEntries{
+	
+	
+	
+	
+}
+
 
 
 //
@@ -241,7 +266,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
  ***********************************************/
 //
 
-- (void)gotoState:(PlanningState)newPlanningState{
+- (void)gotoState:(MapPlanningState)newPlanningState{
 	
 	
 	
@@ -267,7 +292,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)stopLocating{
 	
-	// tel ULM to remove this subscriber
+	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 }
 
@@ -302,11 +327,32 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 //
 
 
-// add waypoint
+-(void)resetWayPoints{
+	
+	
+	
+	
+}
 
-// remove waypoint at index
 
-// reset waypoints
+
+
+-(void)addWayPoint:(RMMarker*)marker{
+	
+	
+	
+	
+	
+}
+
+
+
+-(void)removeWayPointAtIndex:(int)index{
+	
+	
+	
+	
+}
 
 
 
@@ -338,19 +384,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (IBAction) searchButtonSelected {
 	
 	
-	if (mapLocationSearchView == nil) {
+	if (self.mapLocationSearchView == nil) {
 		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
 	}
-	mapLocationSearchView.locationReceiver = self;
-	mapLocationSearchView.centreLocation = [[mapView contents] mapCenter];
+	_mapLocationSearchView.locationReceiver = self;
+	_mapLocationSearchView.centreLocation = [[_mapView contents] mapCenter];
 	
-	[self presentModalViewController:mapLocationSearchView	animated:YES];
+	[self presentModalViewController:_mapLocationSearchView	animated:YES];
 	
 }
 
 // likey deprecated due to waypoints
 - (IBAction) didDelete {
 	
+	/*
 	RMMarkerManager *markerManager = [mapView markerManager];
 	
 	if ([[markerManager markers] containsObject:self.end]) {
@@ -360,13 +407,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		[markerManager removeMarker:self.start];
 		[self gotoState:stateStart];
 	}
+	 */
 }
 
 - (IBAction) routeButtonSelected {
 	BetterLog(@"route");
 	
-	if (self.planningState == statePlan) {
-		RMMarkerManager *markerManager = [mapView markerManager];
+	if (self.mapPlanningState == MapPlanningStateNoRoute) {
+		/*
+		RMMarkerManager *markerManager = [_mapView markerManager];
+		
+		
+		
 		if (![[markerManager markers] containsObject:self.end] || ![[markerManager markers] containsObject:self.start]) {
 			
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Routing"
@@ -387,9 +439,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		CLLocation *to = [[CLLocation alloc] initWithLatitude:toLatLon.latitude longitude:toLatLon.longitude];
 		
 		[[RouteManager sharedInstance] loadRouteForEndPoints:from to:to];
+		 
+		 */
 		
-	} else if (self.planningState == stateRoute) {
-		[self.clearAlert show];
+	} else if (self.mapPlanningState == MapPlanningStateRoute) {
+		//[self.clearAlert show];
 	}
 }
 
@@ -410,12 +464,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(IBAction)showRoutePlanMenu:(id)sender{
 	
     self.routeplanView=[[RoutePlanMenuViewController alloc]initWithNibName:@"RoutePlanMenuView" bundle:nil];
-	routeplanView.plan=route.plan;
+	_routeplanView.plan=_route.plan;
     
-	self.routeplanMenu = [[popoverClass alloc] initWithContentViewController:routeplanView];
-	self.routeplanMenu.delegate = self;
+	self.routeplanMenu = [[popoverClass alloc] initWithContentViewController:_routeplanView];
+	_routeplanMenu.delegate = self;
 	
-	[self.routeplanMenu presentPopoverFromBarButtonItem:planButton toolBar:toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	[_routeplanMenu presentPopoverFromBarButtonItem:_planButton toolBar:_toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
 	
 }
@@ -425,9 +479,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	NSDictionary *userInfo=notification.userInfo;
 	
-	[[RouteManager sharedInstance] loadRouteForRouteId:route.routeid withPlan:[userInfo objectForKey:@"planType"]];
+	[[RouteManager sharedInstance] loadRouteForRouteId:_route.routeid withPlan:[userInfo objectForKey:@"planType"]];
 	
-	[routeplanMenu dismissPopoverAnimated:YES];
+	[_routeplanMenu dismissPopoverAnimated:YES];
 	
 }
 

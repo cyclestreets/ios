@@ -37,9 +37,11 @@ typedef int MapPlanningState;
 <RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate,UserLocationManagerDelegate>{
 	
 	
-	
+	Class popoverClass;
 	
 	
 }
+
+
 
 @end

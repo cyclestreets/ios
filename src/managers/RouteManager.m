@@ -169,7 +169,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
-	[self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
+	[self queryFailure:nil message:@"Could not plan valid route for selected waypoints."];
 	
 }
 
@@ -278,14 +278,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             
         case ValidationCalculateRouteFailed:
             
-            [self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
+            [self queryFailure:nil message:@"Routing error: Could not plan valid route for selected waypoints."];
             
         break;
 			
 		
 		case ValidationCalculateRouteFailedOffNetwork:
             
-            [self queryFailure:nil message:validation.returnMessage];
+            [self queryFailure:nil message:@"Routing error: not all waypoints are on known cycle routes."];
             
 		break;
         
@@ -417,7 +417,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	CLLocationCoordinate2D fromlocation=source.placemark.coordinate;
 	CLLocationCoordinate2D tolocation=destination.placemark.coordinate;
 	
-	if(fromlocation.latitude==0.0 || tolocation.latitude==0.0){ // must be wonky currentLocation pin
+	// if a user has currentLocation as one of their pins
+	// MKDirectionsRequest will return 0,0 for it
+	// so we have to do another lookup in app to correct this!
+	if(fromlocation.latitude==0.0 || tolocation.latitude==0.0){ 
 		
 		self.mapRoutingRequest=routingrequest;
 		
@@ -546,7 +549,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	//
 	
 	if ([selectedRoute routeid] == nil) {
-		[self queryFailure:nil message:@"Could not plan valid route for selected endpoints."];
+		[self queryFailure:nil message:@"Could not plan valid route for selected waypoints."];
 	} else {
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, added path to map" andMessage:nil];
