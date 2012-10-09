@@ -304,6 +304,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 -(void)initToolBarEntries{
 	
 	
+	
 	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	locatingIndicator.hidesWhenStopped=YES;
 	

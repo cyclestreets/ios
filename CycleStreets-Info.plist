@@ -49,7 +49,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>207</string>
+	<string>208</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
@@ -66,21 +66,14 @@
 	<true/>
 	<key>UIStatusBarHidden</key>
 	<false/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
 		<dict>
 			<key>Style</key>
-			<string>UIBarStyleDefault</string>
-			<key>TintColor</key>
-			<dict>
-				<key>Blue</key>
-				<real>0.1255333870649338</real>
-				<key>Green</key>
-				<real>0.5955927968025208</real>
-				<key>Red</key>
-				<real>0.31743323802948</real>
-			</dict>
+			<string>UIBarStyleBlack</string>
 			<key>Translucent</key>
 			<false/>
 		</dict>

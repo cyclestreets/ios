@@ -70,10 +70,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	#if defined (CONFIGURATION_Debug)
 		[Crashlytics sharedInstance].debugMode = YES;
+		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
 	#endif
 	
 	
-	[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
+	#if defined (CONFIGURATION_AdHoc)
+		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
+	#endif
+	
+	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
 	
@@ -264,6 +269,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			//BetterLog(@"vcClass=%@  nibName=%@",vcClass,nibName);
 			
 			UIViewController *vccontroller= (UIViewController*)[[NSClassFromString(vcClass) alloc] initWithNibName:nibName bundle:nil];
+			
 			vccontroller.title=vcTitle;
 			if(vccontroller!=nil){
 				
