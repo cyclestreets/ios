@@ -31,6 +31,11 @@ enum  {
 };
 typedef int MapPlanningState;
 
+enum  {
+	MapAlertTypeClearRoute,
+	MapAlertTypeProximity
+};
+typedef int MapAlertType;
 
 
 @interface NewMapViewController : SuperViewController

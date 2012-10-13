@@ -92,6 +92,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) IBOutlet RouteLineView		* lineView;
 @property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
 @property (nonatomic, strong) IBOutlet MapMarkerTouchView		* markerTouchView;
+@property (nonatomic, assign) MapAlertType		alertType;
 
 // waypoint ui
 // will need ui for editing waypoints
@@ -182,14 +183,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)viewDidLoad{
 	
+	[super viewDidLoad];
 	
+	[self createPersistentUI];
 	
 }
 
 
 -(void)viewDidAppear:(BOOL)animated{
 	
+	[self createNonPersistentUI];
 	
+	[super viewWillAppear:animated];
 	
 }
 
@@ -205,7 +210,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	//Necessary to start route-me service
 	[RMMapView class];
 	
-	//get the configured map source.
+	//
 	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[NewMapViewController tileSource]];
 	
 	
@@ -213,16 +218,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[_mapView setDelegate:self];
 	
 	if (self.initialLocation == nil) {
-		self.initialLocation = [[InitialLocation alloc] initWithMapView:self.mapView withController:self];
+		self.initialLocation = [[InitialLocation alloc] initWithMapView:_mapView withController:self];
 	}
 	[_initialLocation performSelector:@selector(initiateLocation) withObject:nil afterDelay:0.0];
 	
-	//clear up from last run.
+	
 	[self resetWayPoints];
 	
-	//provide the points the line overlay needs, when it needs them, in screen co-ordinates
 	[_lineView setPointListProvider:self];
-	
 	[_blueCircleView setLocationProvider:self];
 	
 	
@@ -236,8 +239,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[[RouteManager sharedInstance] loadSavedSelectedRoute];
 
-	
-	
 	
 }
 
@@ -284,6 +285,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)startLocating{
 	
 	// check with location manager
+	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 	// update ui state
 	
@@ -329,18 +331,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)resetWayPoints{
 	
+	[self.routeMarkerArray removeAllObjects];
 	
-	
-	
+	[[_mapView markerManager] removeMarkers];
 }
 
 
 
 
--(void)addWayPoint:(RMMarker*)marker{
+-(void)addWayPoint:(RMMarker*)marker atLocation:(CLLocationCoordinate2D)coords{
+	
+	[[_mapView markerManager ] addMarker:marker AtLatLong:coords];
+	
+	[self.routeMarkerArray addObject:marker];
 	
 	
+}
+
+-(void)moveWayPointAtIndex:(int)startindex toIndex:(int)endindex{
 	
+	[self.routeMarkerArray exchangeObjectAtIndex:startindex withObjectAtIndex:endindex];
 	
 	
 }
@@ -349,8 +359,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)removeWayPointAtIndex:(int)index{
 	
+	RMMarker *marker=[self.routeMarkerArray objectAtIndex:index];
 	
+	[[_mapView markerManager ] removeMarker:marker];
 	
+	[self.routeMarkerArray removeObject:marker];
 	
 }
 
@@ -364,6 +377,51 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 // create alert with Type
 
+-(void)createAlertForType:(MapAlertType)type{
+	
+	UIAlertView		*alert= [[UIAlertView alloc]
+							 initWithTitle:@"CycleStreets"
+							 message:nil
+							 delegate:self
+							 cancelButtonTitle:@"Cancel"
+							 otherButtonTitles:@"OK", nil];
+	self.alertType=type;
+	
+	switch (type) {
+		case MapAlertTypeClearRoute:
+			
+			alert.message=@"Clear current route?";
+			
+			break;
+		 default:
+			
+			break;
+	}
+	
+	[alert show];
+	
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	
+	
+	switch (_alertType) {
+			
+		case MapAlertTypeClearRoute:
+			
+			if (buttonIndex != alertView.cancelButtonIndex) {
+				[[RouteManager sharedInstance] selectRoute:nil];
+			}
+			
+		break;
+			
+		default:
+			break;
+	}
+	
+
+}
+
 
 //
 /***********************************************
@@ -376,6 +434,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 - (void) locationButtonSelected {
+	
+	if(_mapPlanningState==MapPlanningStateLocating){
+		[self stopLocating];
+	}else{
+		[self startLocating];
+	}
 	
 }
 
@@ -394,44 +458,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 }
 
-// likey deprecated due to waypoints
-- (IBAction) didDelete {
-	
-	/*
-	RMMarkerManager *markerManager = [mapView markerManager];
-	
-	if ([[markerManager markers] containsObject:self.end]) {
-		[markerManager removeMarker:self.end];
-		[self gotoState:stateEnd];
-	} else {
-		[markerManager removeMarker:self.start];
-		[self gotoState:stateStart];
-	}
-	 */
-}
+
 
 - (IBAction) routeButtonSelected {
 	BetterLog(@"route");
 	
 	if (self.mapPlanningState == MapPlanningStateNoRoute) {
-		/*
-		RMMarkerManager *markerManager = [_mapView markerManager];
-		
-		
-		
-		if (![[markerManager markers] containsObject:self.end] || ![[markerManager markers] containsObject:self.start]) {
-			
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Routing"
-															message:@"Need start and end markers to calculate a route."
-														   delegate:nil
-												  cancelButtonTitle:@"OK"
-												  otherButtonTitles:nil];
-			[alert show];
-			
-		}
-		
-		
-		
 		
 		CLLocationCoordinate2D fromLatLon = [markerManager latitudeLongitudeForMarker:start];
 		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude];
@@ -440,10 +472,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 		[[RouteManager sharedInstance] loadRouteForEndPoints:from to:to];
 		 
-		 */
 		
 	} else if (self.mapPlanningState == MapPlanningStateRoute) {
-		//[self.clearAlert show];
+		
+		[self createAlertForType:MapAlertTypeClearRoute];
+		
 	}
 }
 
@@ -495,6 +528,70 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
  ***********************************************/
 //
 
+- (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
+	
+	if(_singleTapDidOccur==NO){
+		singleTapDidOccur=YES;
+		singleTapPoint=point;
+		[self performSelector:@selector(singleTapDelayExpired) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
+		
+	}
+}
+
+-(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	
+	_singleTapDidOccur=NO;
+	
+	float nextZoomFactor = [map.contents nextNativeZoomFactor];
+	if (nextZoomFactor != 0)
+		[map zoomByFactor:nextZoomFactor near:point animated:YES];
+	
+}
+
+
+- (void) singleTapDelayExpired {
+	if(_singleTapDidOccur==YES){
+		_singleTapDidOccur=NO;
+		CLLocationCoordinate2D location = [mapView pixelToLatLong:singleTapPoint];
+		[self addLocation:location];
+	}
+}
+
+
+- (void) afterMapChanged: (RMMapView*) map {
+	
+	[lineView setNeedsDisplay];
+	[blueCircleView setNeedsDisplay];
+	
+	if (!self.programmaticChange) {
+		
+		
+		
+		if (self.planningState == stateLocatingStart || self.planningState == stateLocatingEnd) {
+			[self stopDoingLocation];
+		}
+	} else {
+		
+	}
+}
+
+
+- (void) afterMapMove: (RMMapView*) map {
+	[self afterMapChanged:map];
+}
+
+-(void)afterMapTouch:(RMMapView *)map{
+	
+	map.enableDragging=YES;
+	
+}
+
+
+- (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
+    
+	[self afterMapChanged:map];
+	[self saveLocation:map.contents.mapCenter];
+}
 
 
 
