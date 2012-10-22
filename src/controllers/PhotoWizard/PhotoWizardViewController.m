@@ -146,6 +146,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @synthesize photoResultURLLabel;
 @synthesize photoMapButton;
 @synthesize categoryMenu;
+@synthesize cancelViewButton;
 
 
 
@@ -1347,6 +1348,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)initCompleteView:(PhotoWizardViewState)state{
 	
 	BetterLog(@"");
+	
+	self.cancelButton.titleLabel.text=@"Done";
 	
 	
 	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View map"];

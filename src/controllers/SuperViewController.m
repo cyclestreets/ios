@@ -36,7 +36,7 @@
 //=========================================================== 
 - (void)dealloc
 {
-	//[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	delegate = nil;	
 }
 
@@ -491,6 +491,16 @@
 	}
 	
 	
+}
+
+
+-(void)showUniqueViewController:(SuperViewController*)vc{
+    
+    if([self.navigationController.viewControllers containsObject:vc]==YES){
+        [self.navigationController popToViewController:vc animated:NO];
+    }else{
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 

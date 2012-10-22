@@ -32,7 +32,6 @@
 	// testing
 	UIView									*toolView;
 	NSIndexPath								*tappedIndexPath;
-	NSIndexPath								*toolRowIndexPath;
 	NSIndexPath								*indexPathToDelete;
 	
 	
@@ -52,7 +51,6 @@
 @property (nonatomic, strong) UITableView		* tableView;
 @property (nonatomic, strong) UIView		* toolView;
 @property (nonatomic, strong) NSIndexPath		* tappedIndexPath;
-@property (nonatomic, strong) NSIndexPath		* toolRowIndexPath;
 @property (nonatomic, strong) NSIndexPath		* indexPathToDelete;
 
 -(void)setTableEditingState:(BOOL)state;

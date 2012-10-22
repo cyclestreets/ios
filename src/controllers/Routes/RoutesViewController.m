@@ -297,7 +297,7 @@
         }
         self.routeSummary.route = (RouteVO*)data;
 		routeSummary.dataType=index;
-        [self.navigationController pushViewController:self.routeSummary animated:YES];
+        [self showUniqueViewController:routeSummary];
         
     }
     

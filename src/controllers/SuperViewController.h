@@ -82,6 +82,7 @@ typedef int ViewOverlayType;
 -(void)initialise;
 -(void)refreshUIFromDataProvider;
 -(void)deSelectRowForTableView:(UITableView*)table;
+-(void)showUniqueViewController:(SuperViewController*)vc;
 
 -(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message;
 -(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message withIcon:(NSString*)icon;

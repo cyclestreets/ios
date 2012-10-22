@@ -48,6 +48,7 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
 	
 	BOOL							isModal;
 	
+	IBOutlet    UIBarButtonItem					*cancelViewButton;
 	IBOutlet    UIButton					*nextButton;
 	IBOutlet    UIButton					*prevButton;
     
@@ -143,6 +144,7 @@ UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDeleg
 @property (nonatomic, assign) int maxVisitedPage;
 @property (nonatomic, strong) NSMutableArray *viewArray;
 @property (nonatomic, assign, getter=isModal) BOOL isModal;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelViewButton;
 @property (nonatomic, strong) IBOutlet UIButton *nextButton;
 @property (nonatomic, strong) IBOutlet UIButton *prevButton;
 @property (nonatomic, strong) IBOutlet UILabel *pageTitleLabel;

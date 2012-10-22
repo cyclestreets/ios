@@ -232,13 +232,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-	if(routeSegmentViewcontroller==nil){
-		self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] init];
-	}
+	RouteSegmentViewController *RSvc=[[RouteSegmentViewController alloc] init];
 	
-	[routeSegmentViewcontroller setRoute:route];
-	[self presentModalViewController:routeSegmentViewcontroller animated:YES];
-	[routeSegmentViewcontroller setSegmentIndex:indexPath.row];
+	[RSvc setRoute:route];
+	[self presentModalViewController:RSvc animated:YES];
+	[RSvc setSegmentIndex:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

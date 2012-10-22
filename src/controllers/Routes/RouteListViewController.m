@@ -11,7 +11,6 @@
 #import "SavedRoutesManager.h"
 #import "StyleManager.h"
 #import "NSDate+Helper.h"
-#import "RouteToolCellView.h"
 #import "RouteManager.h"
 
 
@@ -54,7 +53,6 @@
 @synthesize tableView;
 @synthesize toolView;
 @synthesize tappedIndexPath;
-@synthesize toolRowIndexPath;
 @synthesize indexPathToDelete;
 
 
@@ -127,11 +125,14 @@
             self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString" sortedBy:@"dateString"];
             self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO ascending:NO];
         }
-        [self createRowHeightsArray];
-		[self createSectionHeadersArray];
-        [self.tableView reloadData];
 		
-		[self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
+		if([keys count]>0){
+			[self createRowHeightsArray];
+			[self createSectionHeadersArray];
+			[self.tableView reloadData];
+		
+			[self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
+		}
         
     }else{
 		if(isSectioned==YES){
@@ -217,11 +218,6 @@
 	if(isSectioned==YES){
 		NSString *key=[keys objectAtIndex:section];
 		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
-		if(toolRowIndexPath){
-			if(section==[tappedIndexPath section]){
-				return [sectionDataProvider count]+1;
-			}
-		}
 		return [sectionDataProvider count];
 	}else {
 		return [dataProvider count];
@@ -257,19 +253,11 @@
 		NSString *key=[keys objectAtIndex:[indexPath section]];
 		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
 		
-		if([indexPath isEqual:toolRowIndexPath]){
+		RouteVO *route=[sectionDataProvider objectAtIndex:[indexPath row]];
+		cell.dataProvider=route;
+		cell.isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:route];
 			
-			RouteToolCellView *cell = (RouteToolCellView *)[RouteToolCellView cellForTableView:table fromNib:[RouteToolCellView nib]];
-			return cell;
-			
-		}else {
-			
-			RouteVO *route=[sectionDataProvider objectAtIndex:[indexPath row]];
-			cell.dataProvider=route;
-			cell.isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:route];
-			
-			[cell populate];
-		}
+		[cell populate];
 		
 		
 	}else {
@@ -408,30 +396,17 @@
 		NSString *key=[keys objectAtIndex:[indexPath section]];
 		NSMutableArray *arr=[rowHeightDictionary objectForKey:key];
 		
-		if([indexPath isEqual:toolRowIndexPath]){
-			return [RouteToolCellView rowHeight];
-		}else {
-			
-			int rowIndex=[indexPath row];
-            if(rowIndex<[arr count]){
-                CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
-                return cellheight;
-            }else{
-                return 0;
-            }
-			
+		int rowIndex=[indexPath row];
+		if(rowIndex<[arr count]){
+			CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
+			return cellheight;
+		}else{
+			return 0;
 		}
 		
 	}
 }
 
-- (NSIndexPath *)modelIndexPathforIndexPath:(NSIndexPath *)indexPath
-{
-    int whereIsTheControlRow = toolRowIndexPath.row;
-    if(toolRowIndexPath != nil && indexPath.row > whereIsTheControlRow)
-        return [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section]; 
-    return indexPath;
-}
 
 
 //

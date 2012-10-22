@@ -230,7 +230,6 @@
 		2834365D15DD5DC300B00FD5 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
 		2834365E15DD5DC300B00FD5 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
 		2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
-		2834366015DD5DC300B00FD5 /* RouteToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F6B9C14FBF85900B64602 /* RouteToolCell.xib */; };
 		2834366115DD5DC300B00FD5 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5714FCFF4C00A38A17 /* Alert200x200.png */; };
 		2834366215DD5DC300B00FD5 /* CSIcon_MapArrow_end.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5914FCFF4C00A38A17 /* CSIcon_MapArrow_end.png */; };
 		2834366315DD5DC300B00FD5 /* CSIcon_MapArrow_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5A14FCFF4C00A38A17 /* CSIcon_MapArrow_start.png */; };
@@ -447,7 +446,6 @@
 		2834374A15DD5DC300B00FD5 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3CB1455638D0063AA96 /* SegmentVO.m */; };
 		2834374B15DD5DC300B00FD5 /* SavedRoutesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */; };
 		2834374C15DD5DC300B00FD5 /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
-		2834374D15DD5DC300B00FD5 /* RouteToolCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288F6B9F14FBF91700B64602 /* RouteToolCellView.m */; };
 		2834374E15DD5DC300B00FD5 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28187A3214FCC7EF00A38A17 /* UserLocationManager.m */; };
 		2834374F15DD5DC300B00FD5 /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */; };
 		2834375015DD5DC300B00FD5 /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
@@ -468,9 +466,6 @@
 		2834375F15DD5DC300B00FD5 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
 		2834376015DD5DC300B00FD5 /* PhotoCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185A153D74C500023FAF /* PhotoCategoryManager.m */; };
 		2834376115DD5DC300B00FD5 /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185D153D7BF100023FAF /* PhotoCategoryVO.m */; };
-		2834376215DD5DC300B00FD5 /* NSNotificationCenter+SFObservers.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C3CF5D15775A7800A49D5C /* NSNotificationCenter+SFObservers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		2834376315DD5DC300B00FD5 /* NSObject+SFObservers.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C3CF5F15775A7800A49D5C /* NSObject+SFObservers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		2834376415DD5DC300B00FD5 /* NSObject+SFExecuteOnDealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C3CF6215775A7800A49D5C /* NSObject+SFExecuteOnDealloc.m */; };
 		2834376515DD5DC300B00FD5 /* MapLocationSearchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2858F2B3158617290047283D /* MapLocationSearchCellView.m */; };
 		2834376615DD5DC300B00FD5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
 		2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */; };
@@ -544,8 +539,6 @@
 		288663941521F7C60076BE5C /* RoutePlanMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288663931521F7C60076BE5C /* RoutePlanMenuView.xib */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		288B10281457492500E2A96F /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
-		288F6B9D14FBF85900B64602 /* RouteToolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288F6B9C14FBF85900B64602 /* RouteToolCell.xib */; };
-		288F6BA014FBF91700B64602 /* RouteToolCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288F6B9F14FBF91700B64602 /* RouteToolCellView.m */; };
 		288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */; };
 		288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */; };
 		2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */; };
@@ -696,9 +689,6 @@
 		28B78DA21507884C00949870 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
 		28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185A153D74C500023FAF /* PhotoCategoryManager.m */; };
 		28C0185E153D7BF100023FAF /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185D153D7BF100023FAF /* PhotoCategoryVO.m */; };
-		28C3CF6415775A7800A49D5C /* NSNotificationCenter+SFObservers.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C3CF5D15775A7800A49D5C /* NSNotificationCenter+SFObservers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		28C3CF6515775A7800A49D5C /* NSObject+SFObservers.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C3CF5F15775A7800A49D5C /* NSObject+SFObservers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		28C3CF6615775A7800A49D5C /* NSObject+SFExecuteOnDealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C3CF6215775A7800A49D5C /* NSObject+SFExecuteOnDealloc.m */; };
 		28C4ABE81450708900A0ECD3 /* btn_slider_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABDC1450708900A0ECD3 /* btn_slider_off.png */; };
 		28C4ABE91450708900A0ECD3 /* btn_slider_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABDD1450708900A0ECD3 /* btn_slider_off@2x.png */; };
 		28C4ABEA1450708900A0ECD3 /* btn_slider_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABDE1450708900A0ECD3 /* btn_slider_on.png */; };
@@ -1058,9 +1048,6 @@
 		288663931521F7C60076BE5C /* RoutePlanMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoutePlanMenuView.xib; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		288B10271457492500E2A96F /* RoutesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewController.m; sourceTree = "<group>"; };
-		288F6B9C14FBF85900B64602 /* RouteToolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteToolCell.xib; sourceTree = "<group>"; };
-		288F6B9E14FBF91700B64602 /* RouteToolCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteToolCellView.h; sourceTree = "<group>"; };
-		288F6B9F14FBF91700B64602 /* RouteToolCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteToolCellView.m; sourceTree = "<group>"; };
 		288FA2C1150BF9500068F0C1 /* PhotoWizardLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardLocationViewController.h; path = PhotoWizard/PhotoWizardLocationViewController.h; sourceTree = "<group>"; };
 		288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoWizardLocationViewController.m; path = PhotoWizard/PhotoWizardLocationViewController.m; sourceTree = "<group>"; };
 		288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardLocationView.xib; path = photowizard/PhotoWizardLocationView.xib; sourceTree = "<group>"; };
@@ -1286,13 +1273,6 @@
 		28C0185A153D74C500023FAF /* PhotoCategoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryManager.m; sourceTree = "<group>"; };
 		28C0185C153D7BF100023FAF /* PhotoCategoryVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCategoryVO.h; sourceTree = "<group>"; };
 		28C0185D153D7BF100023FAF /* PhotoCategoryVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryVO.m; sourceTree = "<group>"; };
-		28C3CF5C15775A7800A49D5C /* NSNotificationCenter+SFObservers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+SFObservers.h"; sourceTree = "<group>"; };
-		28C3CF5D15775A7800A49D5C /* NSNotificationCenter+SFObservers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+SFObservers.m"; sourceTree = "<group>"; };
-		28C3CF5E15775A7800A49D5C /* NSObject+SFObservers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFObservers.h"; sourceTree = "<group>"; };
-		28C3CF5F15775A7800A49D5C /* NSObject+SFObservers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFObservers.m"; sourceTree = "<group>"; };
-		28C3CF6115775A7800A49D5C /* NSObject+SFExecuteOnDealloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SFExecuteOnDealloc.h"; sourceTree = "<group>"; };
-		28C3CF6215775A7800A49D5C /* NSObject+SFExecuteOnDealloc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SFExecuteOnDealloc.m"; sourceTree = "<group>"; };
-		28C3CF6315775A7800A49D5C /* SFObservers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFObservers.h; sourceTree = "<group>"; };
 		28C4ABDC1450708900A0ECD3 /* btn_slider_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_slider_off.png; sourceTree = "<group>"; };
 		28C4ABDD1450708900A0ECD3 /* btn_slider_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_slider_off@2x.png"; sourceTree = "<group>"; };
 		28C4ABDE1450708900A0ECD3 /* btn_slider_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_slider_on.png; sourceTree = "<group>"; };
@@ -1440,7 +1420,6 @@
 			isa = PBXGroup;
 			children = (
 				289CAF8615F89A460036DE98 /* TestFlight */,
-				28C3CF5B15775A7800A49D5C /* SFObservers */,
 				28B484DE15261FAC00E406E1 /* WEPopover */,
 				280E2417144D82850021CDFA /* JSONKit */,
 				280E241F144D82850021CDFA /* MBProgressHUD */,
@@ -1624,7 +1603,6 @@
 				280E931C140984F300C7AC75 /* RouteTableCell.xib */,
 				281E08C3145179AC0034CC63 /* POITypeCell.xib */,
 				281E09051451C6D20034CC63 /* POICatLocationCell.xib */,
-				288F6B9C14FBF85900B64602 /* RouteToolCell.xib */,
 				2858F2B01586161B0047283D /* MapLocationSearchCell.xib */,
 				28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */,
 			);
@@ -1917,8 +1895,6 @@
 				28A8B6311450B1DC009C5647 /* POITypeCellView.m */,
 				281E08BA14516A4F0034CC63 /* POICatLocationCellView.h */,
 				281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */,
-				288F6B9E14FBF91700B64602 /* RouteToolCellView.h */,
-				288F6B9F14FBF91700B64602 /* RouteToolCellView.m */,
 				2858F2B2158617290047283D /* MapLocationSearchCellView.h */,
 				2858F2B3158617290047283D /* MapLocationSearchCellView.m */,
 				28DFE8D615A428DD005FDCA0 /* PhotoWizardCategoryCellView.h */,
@@ -2526,28 +2502,6 @@
 			path = constants;
 			sourceTree = "<group>";
 		};
-		28C3CF5B15775A7800A49D5C /* SFObservers */ = {
-			isa = PBXGroup;
-			children = (
-				28C3CF5C15775A7800A49D5C /* NSNotificationCenter+SFObservers.h */,
-				28C3CF5D15775A7800A49D5C /* NSNotificationCenter+SFObservers.m */,
-				28C3CF5E15775A7800A49D5C /* NSObject+SFObservers.h */,
-				28C3CF5F15775A7800A49D5C /* NSObject+SFObservers.m */,
-				28C3CF6015775A7800A49D5C /* SFExecuteOnDealloc */,
-				28C3CF6315775A7800A49D5C /* SFObservers.h */,
-			);
-			path = SFObservers;
-			sourceTree = "<group>";
-		};
-		28C3CF6015775A7800A49D5C /* SFExecuteOnDealloc */ = {
-			isa = PBXGroup;
-			children = (
-				28C3CF6115775A7800A49D5C /* NSObject+SFExecuteOnDealloc.h */,
-				28C3CF6215775A7800A49D5C /* NSObject+SFExecuteOnDealloc.m */,
-			);
-			path = SFExecuteOnDealloc;
-			sourceTree = "<group>";
-		};
 		28C4ABDB1450708900A0ECD3 /* defaultimages */ = {
 			isa = PBXGroup;
 			children = (
@@ -2869,7 +2823,6 @@
 				281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */,
 				281E09081451CA210034CC63 /* POICategoryView.xib in Resources */,
 				2818C7A01458069E0077F529 /* RouteCell.xib in Resources */,
-				288F6B9D14FBF85900B64602 /* RouteToolCell.xib in Resources */,
 				28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */,
 				28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */,
 				28187AA014FCFF4C00A38A17 /* CSIcon_MapArrow_start.png in Resources */,
@@ -3070,7 +3023,6 @@
 				2834365D15DD5DC300B00FD5 /* POICatLocationCell.xib in Resources */,
 				2834365E15DD5DC300B00FD5 /* POICategoryView.xib in Resources */,
 				2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */,
-				2834366015DD5DC300B00FD5 /* RouteToolCell.xib in Resources */,
 				2834366115DD5DC300B00FD5 /* Alert200x200.png in Resources */,
 				2834366215DD5DC300B00FD5 /* CSIcon_MapArrow_end.png in Resources */,
 				2834366315DD5DC300B00FD5 /* CSIcon_MapArrow_start.png in Resources */,
@@ -3347,7 +3299,6 @@
 				28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */,
 				28E8A3E61455B6D10063AA96 /* SavedRoutesManager.m in Sources */,
 				288B10281457492500E2A96F /* RoutesViewController.m in Sources */,
-				288F6BA014FBF91700B64602 /* RouteToolCellView.m in Sources */,
 				28187A3314FCC7EF00A38A17 /* UserLocationManager.m in Sources */,
 				28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */,
 				28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */,
@@ -3368,9 +3319,6 @@
 				289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */,
 				28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */,
 				28C0185E153D7BF100023FAF /* PhotoCategoryVO.m in Sources */,
-				28C3CF6415775A7800A49D5C /* NSNotificationCenter+SFObservers.m in Sources */,
-				28C3CF6515775A7800A49D5C /* NSObject+SFObservers.m in Sources */,
-				28C3CF6615775A7800A49D5C /* NSObject+SFExecuteOnDealloc.m in Sources */,
 				2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */,
 				28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */,
@@ -3517,7 +3465,6 @@
 				2834374A15DD5DC300B00FD5 /* SegmentVO.m in Sources */,
 				2834374B15DD5DC300B00FD5 /* SavedRoutesManager.m in Sources */,
 				2834374C15DD5DC300B00FD5 /* RoutesViewController.m in Sources */,
-				2834374D15DD5DC300B00FD5 /* RouteToolCellView.m in Sources */,
 				2834374E15DD5DC300B00FD5 /* UserLocationManager.m in Sources */,
 				2834374F15DD5DC300B00FD5 /* PhotoWizardViewController.m in Sources */,
 				2834375015DD5DC300B00FD5 /* UploadPhotoVO.m in Sources */,
@@ -3538,9 +3485,6 @@
 				2834375F15DD5DC300B00FD5 /* NSString-Utilities.m in Sources */,
 				2834376015DD5DC300B00FD5 /* PhotoCategoryManager.m in Sources */,
 				2834376115DD5DC300B00FD5 /* PhotoCategoryVO.m in Sources */,
-				2834376215DD5DC300B00FD5 /* NSNotificationCenter+SFObservers.m in Sources */,
-				2834376315DD5DC300B00FD5 /* NSObject+SFObservers.m in Sources */,
-				2834376415DD5DC300B00FD5 /* NSObject+SFExecuteOnDealloc.m in Sources */,
 				2834376515DD5DC300B00FD5 /* MapLocationSearchCellView.m in Sources */,
 				2834376615DD5DC300B00FD5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */,

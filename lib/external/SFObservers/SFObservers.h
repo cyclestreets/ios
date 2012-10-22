@@ -77,7 +77,7 @@
 #endif
 #endif
 
-#define SF_OBSERVERS_LOG_ORIGINAL_METHODS 0
+#define SF_OBSERVERS_LOG_ORIGINAL_METHODS 1
 
 #import "NSObject+SFExecuteOnDealloc.h"
 #import "NSNotificationCenter+SFObservers.h"

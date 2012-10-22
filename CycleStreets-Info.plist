@@ -11,6 +11,8 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
 			<key>CFBundleTypeName</key>
 			<string>MKDirectionsRequest</string>
 			<key>LSItemContentTypes</key>
@@ -45,19 +47,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.1</string>
+	<string>2.1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>208</string>
+	<string>211</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
 	<array>
 		<string>MKDirectionsModeBike</string>
 	</array>
-	<key>MKDirectionsRequest</key>
-	<string>com.apple.maps.directionsrequest</string>
 	<key>NSMainNibFile</key>
 	<string>CycleStreetsWindow</string>
 	<key>SERVERDOMAIN_ID</key>
