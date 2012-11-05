@@ -622,26 +622,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "AppDefaults/AppDelegate.m"
-         timestampString = "370521647.835215"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "131"
-         endingLineNumber = "131"
-         landmarkName = "-startupComplete"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "371462939.138296"
+         timestampString = "373405653.879225"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1095"
-         endingLineNumber = "1095"
+         startingLineNumber = "1119"
+         endingLineNumber = "1119"
          landmarkName = "-newRoute"
          landmarkType = "5">
       </FileBreakpoint>
@@ -728,11 +714,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "371462939.138296"
+         timestampString = "373405653.879225"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1072"
-         endingLineNumber = "1072"
+         startingLineNumber = "1096"
+         endingLineNumber = "1096"
          landmarkName = "-clearRoute"
          landmarkType = "5">
       </FileBreakpoint>
@@ -741,11 +727,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "371462939.138296"
+         timestampString = "373405653.879225"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "864"
-         endingLineNumber = "864"
+         startingLineNumber = "888"
+         endingLineNumber = "888"
          landmarkName = "@implementation MapViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -812,6 +798,19 @@
          startingLineNumber = "423"
          endingLineNumber = "423"
          landmarkName = "-loadRouteForRouting:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/controllers/Map/MapViewController.m"
+         timestampString = "373405632.100175"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "576"
+         endingLineNumber = "576"
+         landmarkName = "-createWayPointViewController"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

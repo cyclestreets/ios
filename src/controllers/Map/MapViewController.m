@@ -57,6 +57,7 @@
 #import "SettingsManager.h"
 #import "POIListviewController.h"
 #import "HudManager.h"
+#import "WayPointViewController.h"
 
 @interface MapViewController(Private)
 
@@ -296,6 +297,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	
 	[[RouteManager sharedInstance] loadSavedSelectedRoute];
+	
+	[self createWayPointViewController];
 	
 	
 }
@@ -567,6 +570,27 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 }
 
+
+-(void)createWayPointViewController{
+	/*
+	ECSlidingViewController *sv=[self slidingViewController];
+	
+	WayPointViewController *topcontroller=[[WayPointViewController alloc] initWithStyle:UITableViewStylePlain];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:topcontroller];
+	
+	if (![self.slidingViewController.underLeftViewController isKindOfClass:[WayPointViewController class]]) {
+		self.slidingViewController.underLeftViewController  = navController;
+	}
+	
+	self.view.layer.shadowOpacity = 0.75f;
+	self.view.layer.shadowRadius = 10.0f;
+	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+	
+	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
+	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
+	
+	*/
+}
 
 
 #pragma mark map location persistence

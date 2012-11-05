@@ -34,6 +34,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "WEPopoverController.h"
 #import "ExpandedUILabel.h"
 #import "MapMarkerTouchView.h"
+#import "ECSlidingViewController.h"
 
 @class CycleStreets;
 @class RouteVO;

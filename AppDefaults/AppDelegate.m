@@ -42,6 +42,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import <MapKit/MapKit.h>
 #import "TestFlight.h"
+#import "ECSlidingViewController.h"
 
 
 @interface AppDelegate(Private)
@@ -81,6 +82,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
+	self.tabBarController = [[UITabBarController alloc] init];
+	self.window.rootViewController=tabBarController;
+	//ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
+	//slidingViewController.topViewController = tabBarController;
 	
 
 	[self appendStartUpView];
@@ -133,7 +138,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	startupmanager.delegate=nil;
 	startupmanager=nil;
 	
-	tabBarController = [[UITabBarController alloc] init];
+	
 	[self buildTabbarController:[[AppConfigManager sharedInstance].configDict objectForKey:@"navigation"]];
 	
 	
@@ -142,6 +147,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
+	
+	
 	
 		
 	[window makeKeyAndVisible];	

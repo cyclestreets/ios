@@ -121,6 +121,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)resetWayPoints;
 -(void)addWayPoint:(RMMarker*)marker;
 -(void)removeWayPointAtIndex:(int)index;
+-(void)addWayPointAtLocation:(CLLocationCoordinate2D)coords;
 
 @end
 
@@ -339,7 +340,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
--(void)addWayPoint:(RMMarker*)marker atLocation:(CLLocationCoordinate2D)coords{
+-(void)addWayPointAtLocation:(CLLocationCoordinate2D)coords{
+	
+	RMMarker *marker=nil;
+	if([self.mapView.markerManager markers].count==0){
+		marker=[Markers markerStart];
+	}else if([self.mapView.markerManager markers].count==1){
+		marker=[Markers markerEnd];
+	}else{
+		marker=[Markers markerWaypoint];
+	}
 	
 	[[_mapView markerManager ] addMarker:marker AtLatLong:coords];
 	
