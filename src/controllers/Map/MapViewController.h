@@ -50,7 +50,7 @@ enum PlanningStateT {stateStart = 0,
 };
 typedef enum PlanningStateT PlanningState;
 
-@interface MapViewController : UIViewController
+@interface MapViewController : ECSlidingViewController
 <RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate> {
 	//IB items
 	IBOutlet UIToolbar *toolBar;

@@ -237,6 +237,9 @@
 	[RSvc setRoute:route];
 	[self presentModalViewController:RSvc animated:YES];
 	[RSvc setSegmentIndex:indexPath.row];
+	
+//	[self.navigationController pushViewController:RSvc animated:YES];
+//	self.navigationController.navigationBarHidden=YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

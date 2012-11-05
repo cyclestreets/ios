@@ -43,6 +43,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <MapKit/MapKit.h>
 #import "TestFlight.h"
 #import "ECSlidingViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIView+Additions.h"
 
 
 @interface AppDelegate(Private)
@@ -82,10 +84,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
+	
+	
+	// Sliding view support
 	self.tabBarController = [[UITabBarController alloc] init];
-	self.window.rootViewController=tabBarController;
-	//ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
-	//slidingViewController.topViewController = tabBarController;
+	ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
+	slidingViewController.topViewController = tabBarController;
+	
+	tabBarController.view.layer.shadowOpacity = 0.75f;
+	tabBarController.view.layer.shadowRadius = 10.0f;
+	tabBarController.view.layer.shadowColor = [UIColor blackColor].CGColor;
+	
+	// corrects bug with EC view and Tabbars
+	tabBarController.view.y=20;
 	
 
 	[self appendStartUpView];
@@ -281,6 +292,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			if(vccontroller!=nil){
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
+				BOOL hidesNav=[[navitem objectForKey:@"hidesNavBar"] boolValue];
 				if (isVC==YES) {
 					UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[navitem objectForKey:@"title"] image:[UIImage imageNamed:[navitem objectForKey:@"tabimage"]] tag:i];
 					vccontroller.hidesBottomBarWhenPushed=hidesBottomBarWhenPushed;
@@ -288,6 +300,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 					[navControllers addObject:vccontroller];
 				}else {
 					UINavigationController *nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
+					
+					if(hidesNav==YES){
+						nav.navigationBarHidden=YES;
+					}
+					
 					[navControllers addObject:nav];
 				}
 

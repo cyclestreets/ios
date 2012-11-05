@@ -572,24 +572,24 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 -(void)createWayPointViewController{
-	/*
-	ECSlidingViewController *sv=[self slidingViewController];
 	
-	WayPointViewController *topcontroller=[[WayPointViewController alloc] initWithStyle:UITableViewStylePlain];
+	
+	WayPointViewController *topcontroller=[[WayPointViewController alloc] initWithNibName:[WayPointViewController nibName] bundle:nil];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:topcontroller];
+	navController.navigationBarHidden=YES;
 	
 	if (![self.slidingViewController.underLeftViewController isKindOfClass:[WayPointViewController class]]) {
 		self.slidingViewController.underLeftViewController  = navController;
 	}
 	
-	self.view.layer.shadowOpacity = 0.75f;
-	self.view.layer.shadowRadius = 10.0f;
-	self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.navigationController.view.layer.shadowOpacity = 0.75f;
+	self.navigationController.view.layer.shadowRadius = 10.0f;
+	self.navigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
 	
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
 	
-	*/
+	
 }
 
 

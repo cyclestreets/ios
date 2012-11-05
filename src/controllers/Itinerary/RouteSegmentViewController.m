@@ -124,7 +124,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(didNotificationMapStyleChanged)
 												 name:@"NotificationMapStyleChanged"
-											   object:nil];		
+											   object:nil];
+	
+	UISwipeGestureRecognizer *oneFingerSwipeUp =
+	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
+	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
+	[footerView addGestureRecognizer:oneFingerSwipeUp];
+}
+
+- (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer
+{
+	CGPoint point = [recognizer locationInView:[self view]];
+	NSLog(@"Swipe down - start location: %f,%f", point.x, point.y);
+	
+	[self didToggleInfo];
 }
 
 - (void) didNotificationMapStyleChanged {

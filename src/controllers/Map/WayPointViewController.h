@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SuperViewController.h"
 
-@interface WayPointViewController : UITableViewController
+@interface WayPointViewController : SuperViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
