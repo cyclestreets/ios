@@ -14,8 +14,9 @@
 #import "RouteManager.h"
 #import "ButtonUtilities.h"
 #import <Crashlytics/Crashlytics.h>
+#import "FavouritesManager.h"
 
-@interface RoutesViewController(Private)
+@interface RoutesViewController()
 
 -(IBAction)selectedRouteButtonSelected:(id)sender;
 -(void)selectedRouteUpdated;
@@ -106,7 +107,15 @@
     [super viewDidLoad];
 	
 	[self createPersistentUI];
-	[self selectedIndexDidChange:0];
+	
+	// sets the initial sub view
+	int startIndex=1;
+	if([SavedRoutesManager sharedInstance].favouritesdataProvider.count>0 )
+		startIndex=0;
+	
+	[routeTypeControl setSelectedSegmentIndex:startIndex];
+	[self selectedIndexDidChange:startIndex];
+	
 }
 
 
@@ -160,6 +169,9 @@
 		}
 		[vc viewWillAppear:NO];
     }
+	
+	
+	
 }
 
 

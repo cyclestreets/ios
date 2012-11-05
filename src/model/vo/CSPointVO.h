@@ -30,9 +30,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface CSPointVO : NSObject <NSCoding>{
 	CGPoint p;
+
 }
 
 @property CGPoint p;
+@property (nonatomic,assign) BOOL isWalking;
 
 - (BOOL) insideRect:(CGRect)rect;
 

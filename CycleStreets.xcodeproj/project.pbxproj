@@ -553,6 +553,10 @@
 		289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
+		289C01FB1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289C01FA1647DB85001A4621 /* UIIcon_walking@2x.png */; };
+		289C01FC1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289C01FA1647DB85001A4621 /* UIIcon_walking@2x.png */; };
+		289C01FE1647DB8E001A4621 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 289C01FD1647DB8E001A4621 /* UIIcon_walking.png */; };
+		289C01FF1647DB8E001A4621 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 289C01FD1647DB8E001A4621 /* UIIcon_walking.png */; };
 		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
 		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
@@ -1064,6 +1068,8 @@
 		289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_tracks@2x.png"; sourceTree = "<group>"; };
 		289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_finish_wisp@2x.png"; sourceTree = "<group>"; };
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
+		289C01FA1647DB85001A4621 /* UIIcon_walking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIIcon_walking@2x.png"; path = "Cell Icons/UIIcon_walking@2x.png"; sourceTree = "<group>"; };
+		289C01FD1647DB8E001A4621 /* UIIcon_walking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIIcon_walking.png; path = "Cell Icons/UIIcon_walking.png"; sourceTree = "<group>"; };
 		289CAF8715F89A460036DE98 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
@@ -1707,6 +1713,7 @@
 		28187A5614FCFF4C00A38A17 /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				289C01FD1647DB8E001A4621 /* UIIcon_walking.png */,
 				289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */,
 				28535DF915E6313E0092FC16 /* Icon_currentroutecell.png */,
 				283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */,
@@ -2430,6 +2437,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				289C01FA1647DB85001A4621 /* UIIcon_walking@2x.png */,
 				289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */,
 				2801301315E636070092D509 /* Icon_currentroutecell@2x.png */,
 				28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */,
@@ -2927,6 +2935,8 @@
 				289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 				284706821600903200D5E58B /* APIKey_live.txt in Resources */,
 				28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */,
+				289C01FB1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */,
+				289C01FE1647DB8E001A4621 /* UIIcon_walking.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3125,6 +3135,8 @@
 				289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 				284706811600902200D5E58B /* APIKey_live.txt in Resources */,
+				289C01FC1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */,
+				289C01FF1647DB8E001A4621 /* UIIcon_walking.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

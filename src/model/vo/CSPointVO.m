@@ -27,9 +27,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPointVO.h"
 
 
+//TODO: needs to support provisionName so we can draw different line types for provisions
+
 @implementation CSPointVO
 
-@synthesize p;
+@synthesize p,isWalking;
 
 - (BOOL) insideRect:(CGRect)rect {
 	if (p.x < rect.origin.x) return NO;

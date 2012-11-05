@@ -259,7 +259,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	// fill the labels from the segment we are showing
-	footerView.dataProvider=[segment infoStringDictionary];
+	footerView.dataProvider=segment;
 	[footerView updateLayout];
 	[self updateFooterPositions];
 	// centre the view around the segment

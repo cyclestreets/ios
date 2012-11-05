@@ -148,6 +148,17 @@
 }
 
 
+-(BOOL)containsWalkingSections{
+	
+	for (SegmentVO *segment in segments) {
+		
+		if(segment.isWalkingSection==YES)
+			return YES;
+	}
+	return NO;
+}
+
+
 //
 /***********************************************
  * @description			CL getters: note use of CLLocation so NSCoding is optimised.

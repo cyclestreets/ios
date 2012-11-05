@@ -15,6 +15,8 @@
 	NSString			*provisionName;
 	NSString			*turnType;
 	
+	NSInteger			walkValue;
+	
 	NSInteger			segmentTime;
 	NSInteger			segmentDistance;
 	NSInteger			startBearing;
@@ -31,6 +33,7 @@
 @property (nonatomic, strong)	NSString		*roadName;
 @property (nonatomic, strong)	NSString		*provisionName;
 @property (nonatomic, strong)	NSString		*turnType;
+@property (nonatomic)	NSInteger		walkValue;
 @property (nonatomic)	NSInteger		segmentTime;
 @property (nonatomic)	NSInteger		segmentDistance;
 @property (nonatomic)	NSInteger		startBearing;
@@ -44,18 +47,21 @@
 @property (nonatomic, readonly)	CLLocationCoordinate2D	segmentStart;
 @property (nonatomic, readonly)	CLLocationCoordinate2D	segmentEnd;
 
+@property (nonatomic, readonly)	NSString	*provisionIcon;
+@property (nonatomic, readonly)	NSDictionary	*infoStringDictionary;
+
+
+@property (nonatomic, readonly)	BOOL	isWalkingSection;
+
 
 // return array of allpoints for this segment
 - (NSArray *)allPoints;
 
 
 - (NSString *) infoString;
--(NSDictionary*)infoStringDictionary;
 
-
-
-+ (NSString *)provisionIcon:(NSString *)provisionName;
-
++(NSString*)provisionIconForType:(NSString*)type isWalking:(int)walking;// legacy support for walking
++(NSString*)iconForType:(NSString*)type;
 
 @end
 

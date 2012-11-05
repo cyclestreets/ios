@@ -57,8 +57,13 @@
 #import "SettingsManager.h"
 #import "POIListviewController.h"
 #import "HudManager.h"
+#import "UIView+Additions.h"
 
-@interface MapViewController(Private)
+@interface MapViewController()
+
+@property(nonatomic,strong) IBOutlet  UIView			*walkingRouteOverlayView;
+@property(nonatomic,assign)  BOOL						walkingOverlayisVisible;
+
 
 -(void)initToolBarEntries;
 
@@ -270,6 +275,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	singleTapDidOccur=NO;
 	
 	self.attributionLabel.text = [MapViewController mapAttribution];
+	
+	
+	BetterLog(@"self.view.height=%f",self.view.height);
+	
+	_walkingRouteOverlayView.y=SCREENHEIGHT;
+	[self.view addSubview:_walkingRouteOverlayView];
+	
+	
 	
 	[self gotoState:stateStart];
 	
@@ -1100,9 +1113,53 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[lineView setNeedsDisplay];
 	[blueCircleView setNeedsDisplay];
 	[self gotoState:stateRoute];
+	
+	
+	[self showWalkingOverlay];
+	
 }
 
 
+-(void)showWalkingOverlay{
+	
+	
+	
+	if (route.containsWalkingSections==YES) {
+		
+		if(_walkingOverlayisVisible==NO){
+			
+			_walkingRouteOverlayView.y=SCREENHEIGHT;
+			_walkingOverlayisVisible=YES;
+			
+			[UIView animateWithDuration:0.7 animations:^{
+				
+				_walkingRouteOverlayView.y=SCREENHEIGHTWITHMODALNAV-_walkingRouteOverlayView.height;
+				
+			} completion:^(BOOL finished) {
+				
+				[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+					_walkingRouteOverlayView.y=SCREENHEIGHT;
+				} completion:^(BOOL finished) {
+					_walkingOverlayisVisible=NO;
+				}];
+				
+			}];
+			
+			
+		}else{
+			[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+				_walkingRouteOverlayView.y=SCREENHEIGHT;
+			} completion:^(BOOL finished) {
+				_walkingOverlayisVisible=NO;
+			}];
+
+		}
+		
+	}
+	
+	
+	
+}
 
 
 
@@ -1124,6 +1181,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			CLLocationCoordinate2D coordinate = [segment segmentStart];
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
 			p.p = pt;
+			p.isWalking=segment.isWalkingSection;;
 			[points addObject:p];			
 		}
 		// remainder of all segments
@@ -1137,6 +1195,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
 			CSPointVO *screen = [[CSPointVO alloc] init];
 			screen.p = pt;
+			screen.isWalking=segment.isWalkingSection;
 			[points addObject:screen];
 		}
 	}	
