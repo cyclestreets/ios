@@ -231,15 +231,17 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	if(routeSegmentViewcontroller==nil){
+		self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] initWithNibName:@"RouteSegmentView" bundle:nil];
+		routeSegmentViewcontroller.hidesBottomBarWhenPushed=YES;
+	}
+	
+	[routeSegmentViewcontroller setRoute:route];
+	routeSegmentViewcontroller.index=[indexPath row];
+	
+	[self.navigationController pushViewController:routeSegmentViewcontroller animated:YES];
 
-	RouteSegmentViewController *RSvc=[[RouteSegmentViewController alloc] init];
-	
-	[RSvc setRoute:route];
-	[self presentModalViewController:RSvc animated:YES];
-	[RSvc setSegmentIndex:indexPath.row];
-	
-//	[self.navigationController pushViewController:RSvc animated:YES];
-//	self.navigationController.navigationBarHidden=YES;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

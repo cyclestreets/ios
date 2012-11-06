@@ -501,6 +501,10 @@
 		284608231649226300CBF96A /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2846081F1649226300CBF96A /* IIViewDeckController.m */; };
 		284608241649226300CBF96A /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608211649226300CBF96A /* WrapController.m */; };
 		284608251649226300CBF96A /* WrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608211649226300CBF96A /* WrapController.m */; };
+		284608281649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
+		284608291649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
+		2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
+		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		284706811600902200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
 		284706821600903200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
@@ -1007,6 +1011,9 @@
 		2846081F1649226300CBF96A /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		284608201649226300CBF96A /* WrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WrapController.h; sourceTree = "<group>"; };
 		284608211649226300CBF96A /* WrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WrapController.m; sourceTree = "<group>"; };
+		284608261649388900CBF96A /* ImageUtilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtilties.h; sourceTree = "<group>"; };
+		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
+		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
 		284706801600902200D5E58B /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_live.txt; path = ../docs/APIKey_live.txt; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
 		28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HUD_icon_checkMark@2x.png"; sourceTree = "<group>"; };
@@ -1739,6 +1746,7 @@
 		28187A5614FCFF4C00A38A17 /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				2846082A16493ABF00CBF96A /* UIBarButton_Back.png */,
 				289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */,
 				28535DF915E6313E0092FC16 /* Icon_currentroutecell.png */,
 				283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */,
@@ -2463,6 +2471,8 @@
 				28AD6408131FB6C8008527FC /* ViewUtilities.m */,
 				28D2BADF1354814E00694093 /* UKImage.h */,
 				28D2BAE01354814E00694093 /* UKImage.m */,
+				284608261649388900CBF96A /* ImageUtilties.h */,
+				284608271649388900CBF96A /* ImageUtilties.m */,
 			);
 			path = utilities;
 			sourceTree = "<group>";
@@ -2980,6 +2990,7 @@
 				28373E1F164814A900F5E356 /* WayPointView.xib in Resources */,
 				28373E2216481A0C00F5E356 /* WayPointCell.xib in Resources */,
 				2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
+				2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3181,6 +3192,7 @@
 				28373E20164814A900F5E356 /* WayPointView.xib in Resources */,
 				28373E2316481A0C00F5E356 /* WayPointCell.xib in Resources */,
 				2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
+				2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3384,6 +3396,7 @@
 				28373E2A16481BF800F5E356 /* WayPointVO.m in Sources */,
 				284608221649226300CBF96A /* IIViewDeckController.m in Sources */,
 				284608241649226300CBF96A /* WrapController.m in Sources */,
+				284608281649388900CBF96A /* ImageUtilties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3555,6 +3568,7 @@
 				28373E2B16481BF800F5E356 /* WayPointVO.m in Sources */,
 				284608231649226300CBF96A /* IIViewDeckController.m in Sources */,
 				284608251649226300CBF96A /* WrapController.m in Sources */,
+				284608291649388900CBF96A /* ImageUtilties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

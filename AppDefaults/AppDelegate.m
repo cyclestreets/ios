@@ -295,6 +295,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
 				BOOL usesSlidingView=[[navitem objectForKey:@"usesSlidingView"] boolValue];
+				BOOL hidesNavBar=[[navitem objectForKey:@"hidesNavBar"] boolValue];
 				
 				if (isVC==YES) {
 					UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[navitem objectForKey:@"title"] image:[UIImage imageNamed:[navitem objectForKey:@"tabimage"]] tag:i];
@@ -320,6 +321,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				}else{
 					
 					nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
+					
+					if(hidesNavBar==YES){
+						nav.navigationBarHidden=YES;
+					}
 					
 				}
 					
