@@ -42,9 +42,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import <MapKit/MapKit.h>
 #import "TestFlight.h"
-#import "ECSlidingViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"
+#import "IIViewDeckController.h"
 
 
 @interface AppDelegate(Private)
@@ -88,15 +88,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	// Sliding view support
 	self.tabBarController = [[UITabBarController alloc] init];
-	ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
-	slidingViewController.topViewController = tabBarController;
-	
-	tabBarController.view.layer.shadowOpacity = 0.75f;
-	tabBarController.view.layer.shadowRadius = 10.0f;
-	tabBarController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-	
-	// corrects bug with EC view and Tabbars
-	tabBarController.view.y=20;
+	self.window.rootViewController = self.tabBarController;
+//	ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
+//	slidingViewController.topViewController = tabBarController;
+//	
+//	tabBarController.view.layer.shadowOpacity = 0.75f;
+//	tabBarController.view.layer.shadowRadius = 10.0f;
+//	tabBarController.view.layer.shadowColor = [UIColor blackColor].CGColor;
+//	
+//	// corrects bug with EC view and Tabbars
+//	tabBarController.view.y=20;
 	
 
 	[self appendStartUpView];
@@ -287,25 +288,42 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			//BetterLog(@"vcClass=%@  nibName=%@",vcClass,nibName);
 			
 			UIViewController *vccontroller= (UIViewController*)[[NSClassFromString(vcClass) alloc] initWithNibName:nibName bundle:nil];
+			UINavigationController *nav=nil;
 			
 			vccontroller.title=vcTitle;
 			if(vccontroller!=nil){
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
-				BOOL hidesNav=[[navitem objectForKey:@"hidesNavBar"] boolValue];
+				BOOL usesSlidingView=[[navitem objectForKey:@"usesSlidingView"] boolValue];
+				
 				if (isVC==YES) {
 					UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[navitem objectForKey:@"title"] image:[UIImage imageNamed:[navitem objectForKey:@"tabimage"]] tag:i];
 					vccontroller.hidesBottomBarWhenPushed=hidesBottomBarWhenPushed;
 					[vccontroller setTabBarItem:tabBarItem];
 					[navControllers addObject:vccontroller];
 				}else {
-					UINavigationController *nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
 					
-					if(hidesNav==YES){
+					
+					if(usesSlidingView==YES){
+						
+						UIViewController *childController= (UIViewController*)[[NSClassFromString([navitem objectForKey:@"childVC"]) alloc] initWithNibName:@"WayPointView" bundle:nil];
+						UINavigationController *childNavController = [[UINavigationController alloc] initWithRootViewController:childController];
+						childNavController.navigationBarHidden=YES;
+						
+						IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:vccontroller leftViewController:childNavController];
+						deckController.navigationControllerBehavior = IIViewDeckNavigationControllerIntegrated;
+						vccontroller = deckController;
+						
+						nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
 						nav.navigationBarHidden=YES;
-					}
+						
+				}else{
 					
-					[navControllers addObject:nav];
+					nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
+					
+				}
+					
+				[navControllers addObject:nav];
 				}
 
 			}

@@ -7,7 +7,6 @@
 //
 
 #import "WayPointViewController.h"
-#import "ECSlidingViewController.h"
 #import "WayPointCellView.h"
 
 @interface WayPointViewController ()
@@ -160,7 +159,7 @@
 -(IBAction)closeButtonSelected:(id)sender{
 	
 	
-	[self.slidingViewController resetTopView];
+	//[self.slidingViewController resetTopView];
 	
 	
 }

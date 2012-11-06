@@ -573,6 +573,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 -(void)createWayPointViewController{
 	
+	/*
 	
 	WayPointViewController *topcontroller=[[WayPointViewController alloc] initWithNibName:[WayPointViewController nibName] bundle:nil];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:topcontroller];
@@ -588,6 +589,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
 	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
+	 
+	 */
 	
 	
 }
