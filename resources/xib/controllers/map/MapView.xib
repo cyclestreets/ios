@@ -72,7 +72,7 @@
 				<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 			</object>
 			<object class="IBUIView" id="191373211">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIToolbar" id="1042433907">
@@ -145,7 +145,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{100, 380}, {210, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwLjUwMTk2MDgxNCAwIDAuMTAwMDAwMDAxNQA</bytes>
@@ -181,7 +180,6 @@
 					</object>
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="1042433907"/>
 				<reference key="IBUIBackgroundColor" ref="561794843"/>
 				<array key="IBUIGestureRecognizers" id="0"/>

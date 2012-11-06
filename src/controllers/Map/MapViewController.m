@@ -58,6 +58,7 @@
 #import "POIListviewController.h"
 #import "HudManager.h"
 #import "UIView+Additions.h"
+#import "ViewUtilities.h"
 
 @interface MapViewController()
 
@@ -280,6 +281,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	BetterLog(@"self.view.height=%f",self.view.height);
 	
 	_walkingRouteOverlayView.y=SCREENHEIGHT;
+	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
 	[self.view addSubview:_walkingRouteOverlayView];
 	
 	
