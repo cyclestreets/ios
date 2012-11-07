@@ -62,23 +62,28 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
+@interface MarkerMenuItem : UIMenuItem
+@property (nonatomic, strong) WayPointVO* waypoint;
+@end
+
 
 
 @interface NewMapViewController()
 
 // tool bar
-@property (nonatomic, strong) IBOutlet UIToolbar		* toolBar;
-@property (nonatomic, strong) UIBarButtonItem		* locationButton;
-@property (nonatomic, strong) UIBarButtonItem		* activeLocationButton;
-@property (nonatomic, strong) UIBarButtonItem		* nameButton;
-@property (nonatomic, strong) UIBarButtonItem		* routeButton;
-@property (nonatomic, strong) UIBarButtonItem		* deleteButton;
-@property (nonatomic, strong) UIBarButtonItem		* planButton;
-@property (nonatomic, strong) UIBarButtonItem		* startContextLabel;
-@property (nonatomic, strong) UIBarButtonItem		* finishContextLabel;
-@property (nonatomic, strong) UIActivityIndicatorView		* locatingIndicator;
-@property (nonatomic, strong) UIBarButtonItem		* leftFlex;
-@property (nonatomic, strong) UIBarButtonItem		* rightFlex;
+@property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
+@property (nonatomic, strong) UIBarButtonItem						* locationButton;
+@property (nonatomic, strong) UIBarButtonItem						* activeLocationButton;
+@property (nonatomic, strong) UIBarButtonItem						* searchButton;
+@property (nonatomic, strong) UIBarButtonItem						* routeButton;
+@property (nonatomic, strong) UIBarButtonItem						* changePlanButton;
+@property (nonatomic, strong) UIActivityIndicatorView				* locatingIndicator;
+@property (nonatomic, strong) UIBarButtonItem						* leftFlex;
+@property (nonatomic, strong) UIBarButtonItem						* rightFlex;
+@property(nonatomic,strong)  UIBarButtonItem						* waypointButton;
+
+
+
 
 //rmmap
 @property (nonatomic, strong) IBOutlet RMMapView		* mapView;
@@ -99,6 +104,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 // waypoint ui
 // will need ui for editing waypoints
+@property(nonatomic,assign)  BOOL						markerMenuOpen;
+
 
 @property (nonatomic, strong) InitialLocation		* initialLocation; // deprecate
 
@@ -108,23 +115,28 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) RMMarker				* activeMarker;
 
 // state
-@property (nonatomic, assign) BOOL		 doingLocation;
-@property (nonatomic, assign) BOOL		 programmaticChange;
-@property (nonatomic, assign) BOOL		 avoidAccidentalTaps;
-@property (nonatomic, assign) BOOL		 singleTapDidOccur;
-@property (nonatomic, assign) CGPoint		 singleTapPoint;
-@property (nonatomic, assign) MapPlanningState	mapPlanningState;
+@property (nonatomic, assign) BOOL					doingLocation;
+@property (nonatomic, assign) BOOL					programmaticChange;
+@property (nonatomic, assign) BOOL					avoidAccidentalTaps;
+@property (nonatomic, assign) BOOL					singleTapDidOccur;
+@property (nonatomic, assign) CGPoint				singleTapPoint;
+@property (nonatomic, assign) MapPlanningState		uiState;
+@property (nonatomic, assign) MapPlanningState		previousUIState;
 
 
 // ui
--(void)initToolBarEntries;
-- (void)gotoState:(MapPlanningState)newPlanningState;
+- (void)initToolBarEntries;
+- (void)updateUItoState:(MapPlanningState)state;
+
 
 // waypoints
 -(void)resetWayPoints;
 -(void)addWayPoint:(RMMarker*)marker;
 -(void)removeWayPointAtIndex:(int)index;
 -(void)addWayPointAtLocation:(CLLocationCoordinate2D)coords;
+
+// waypoint menu
+-(void)removeMarkerAtIndexViaMenu:(UIMenuController*)menuController;
 
 @end
 
@@ -154,7 +166,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[super didReceiveNotification:notification];
 	
-	NSDictionary	*dict=[notification userInfo];
+	//NSDictionary	*dict=[notification userInfo];
 	NSString		*name=notification.name;
 	
 	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
@@ -238,7 +250,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	_attributionLabel.text = [NewMapViewController mapAttribution];
 	
-	[self gotoState:MapPlanningStateNoRoute];
+	[self updateUItoState:MapPlanningStateNoRoute];
 	
 	
 	[[RouteManager sharedInstance] loadSavedSelectedRoute];
@@ -258,7 +270,45 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)initToolBarEntries{
 	
+	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	_locatingIndicator.hidesWhenStopped=YES;
 	
+	self.activeLocationButton = [[UIBarButtonItem alloc] initWithCustomView:_locatingIndicator ];
+	_activeLocationButton.style	= UIBarButtonItemStyleDone;
+	
+	self.waypointButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_waypoint.png"]
+														   style:UIBarButtonItemStyleBordered
+														  target:self
+														  action:@selector(showWayPointView)];
+	_waypointButton.width = 40;
+	
+	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
+														   style:UIBarButtonItemStyleBordered
+														  target:self
+														  action:@selector(didLocation)];
+	_locationButton.width = 40;
+	
+	self.searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
+													   style:UIBarButtonItemStyleBordered
+													  target:self
+													  action:@selector(didSearch)];
+	_searchButton.width = 40;
+	
+	self.changePlanButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_routePlan.png"]
+													   style:UIBarButtonItemStyleBordered
+													  target:self
+													  action:@selector(showRoutePlanMenu:)];
+	
+	
+	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan Route"
+														style:UIBarButtonItemStyleBordered
+													   target:self
+													   action:@selector(didRoute)];
+	
+	
+	
+	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
 	
 }
@@ -271,9 +321,86 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
  ***********************************************/
 //
 
-- (void)gotoState:(MapPlanningState)newPlanningState{
+-(void)updateUIState{
+	[self updateUItoState:_uiState];
+}
+
+- (void)updateUItoState:(MapPlanningState)state{
 	
+	self.previousUIState=_uiState;
+	self.uiState = state;
 	
+	NSArray *items=nil;
+	
+	switch (_uiState) {
+			
+		case MapPlanningStateNoRoute:
+		{
+			BetterLog(@"MapPlanningStateNoRoute");
+			
+			_searchButton.enabled = YES;
+			
+			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
+			[self.toolBar setItems:items animated:YES ];
+			
+		}
+		break;
+		
+		case MapPlanningStateLocating:
+		{
+			BetterLog(@"MapPlanningStateLocating");
+			
+			_searchButton.enabled = YES;
+			
+			items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
+			[self.toolBar setItems:items animated:YES ];
+			
+			
+			
+		}
+		break;
+		
+		case MapPlanningStateStartPlanning:
+		{
+			BetterLog(@"MapPlanningStateStartPlanning");
+			
+			_routeButton.title = @"Plan route";
+			_routeButton.style = UIBarButtonItemStyleDone;
+			_searchButton.enabled = NO;
+			
+			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
+            
+            [self.toolBar setItems:items animated:YES ];
+		}
+		break;
+		
+		case MapPlanningStatePlanning:
+		{
+			BetterLog(@"MapPlanningStatePlanning");
+			
+			_routeButton.title = @"Plan route";
+			_routeButton.style = UIBarButtonItemStyleDone;
+			_searchButton.enabled = NO;
+			
+			items=@[_waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton];
+            [self.toolBar setItems:items animated:YES ];
+		}
+		break;
+			
+		case MapPlanningStateRoute:
+		{
+			BetterLog(@"MapPlanningStateRoute");
+			
+			_routeButton.title = @"New route";
+			_routeButton.style = UIBarButtonItemStyleBordered;
+			
+			_searchButton.enabled = NO;
+			
+			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+            [self.toolBar setItems:items animated:NO ];
+		}
+		break;
+	}
 	
 }
 
@@ -288,11 +415,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)startLocating{
 	
-	// check with location manager
 	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
-	// update ui state
-	
+	[self updateUItoState:MapPlanningStateLocating];
 	
 }
 
@@ -300,12 +425,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
+	[self updateUItoState:_previousUIState];
+	
 }
 
 
 -(void)locationDidComplete:(NSNotification *)notification{
 	
 	// update ui state
+	[self updateUItoState:_previousUIState];
 	
 	// update map
 	
@@ -321,6 +449,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)locationDidFail:(NSNotification *)notification{
 	
 	// update ui state
+	[self updateUItoState:_previousUIState];
 	
 }
 
@@ -341,6 +470,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+-(void)addWayPoint:(RMMarker*)marker{
+	
+}
 
 
 -(void)addWayPointAtLocation:(CLLocationCoordinate2D)coords{
@@ -355,7 +487,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		marker=[Markers markerEnd];
 		waypoint.waypointType=WayPointTypeFinish;
 	}else{
-		marker=[Markers markerWaypoint];
+		marker=[Markers markerIntermediate:@"3"];
 		waypoint.waypointType=WayPointTypeIntermediate;
 	}
 	
@@ -384,6 +516,56 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[[_mapView markerManager ] removeMarker:waypoint.marker];
 	
 	[self.routeMarkerArray removeObject:waypoint];
+	
+}
+
+#pragma marl RMMap marker
+
+- (BOOL)canBecomeFirstResponder {
+	return YES;
+}
+
+
+-(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
+	
+	if(_markerMenuOpen==YES)
+		return;
+	
+	UIMenuController *menuController = [UIMenuController sharedMenuController];
+	
+	if(menuController.isMenuVisible==NO){
+		
+		[self becomeFirstResponder];
+		
+		MarkerMenuItem *menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeMarkerAtIndexViaMenu:)];
+		//menuItem.waypoint= // find marker in marker manager markers array,> indexofObject
+		menuController.menuItems = [NSArray arrayWithObject:menuItem];
+		
+	}
+	
+	CGRect markerRect=CGRectMake(marker.frame.origin.x-12, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
+	[menuController setTargetRect:markerRect inView:self.mapView];
+	
+	if(menuController.isMenuVisible==NO)
+		[menuController setMenuVisible:YES animated:YES];
+	
+	_markerMenuOpen=YES;
+	
+}
+
+
+-(void)removeMarkerAtIndexViaMenu:(UIMenuController*)menuController {
+	
+	MarkerMenuItem *menuItem = [[[UIMenuController sharedMenuController] menuItems] objectAtIndex:0];
+	
+	if(menuItem.waypoint){
+		
+		// call remove marker workflow
+		
+		
+	}
+	
+	_markerMenuOpen=NO;
 	
 }
 
@@ -455,7 +637,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (void) locationButtonSelected {
 	
-	if(_mapPlanningState==MapPlanningStateLocating){
+	if(_uiState==MapPlanningStateLocating){
 		[self stopLocating];
 	}else{
 		[self startLocating];
@@ -483,17 +665,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (IBAction) routeButtonSelected {
 	BetterLog(@"route");
 	
-	if (self.mapPlanningState == MapPlanningStateNoRoute) {
+	if (_uiState == MapPlanningStateNoRoute) {
 		
-		CLLocationCoordinate2D fromLatLon = [markerManager latitudeLongitudeForMarker:start];
-		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude];
-		CLLocationCoordinate2D toLatLon = [markerManager latitudeLongitudeForMarker:end];
-		CLLocation *to = [[CLLocation alloc] initWithLatitude:toLatLon.latitude longitude:toLatLon.longitude];
-		
-		[[RouteManager sharedInstance] loadRouteForEndPoints:from to:to];
+//		CLLocationCoordinate2D fromLatLon = [_mapView.markerManager latitudeLongitudeForMarker:start];
+//		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude];
+//		CLLocationCoordinate2D toLatLon = [_mapView.markerManager latitudeLongitudeForMarker:end];
+//		CLLocation *to = [[CLLocation alloc] initWithLatitude:toLatLon.latitude longitude:toLatLon.longitude];
+//		
+//		[[RouteManager sharedInstance] loadRouteForEndPoints:from to:to];
 		 
 		
-	} else if (self.mapPlanningState == MapPlanningStateRoute) {
+	} else if (_uiState == MapPlanningStateRoute) {
 		
 		[self createAlertForType:MapAlertTypeClearRoute];
 		
@@ -525,7 +707,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	self.routeplanMenu = [[popoverClass alloc] initWithContentViewController:_routeplanView];
 	_routeplanMenu.delegate = self;
 	
-	[_routeplanMenu presentPopoverFromBarButtonItem:_planButton toolBar:_toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+	[_routeplanMenu presentPopoverFromBarButtonItem:_changePlanButton toolBar:_toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
 	
 }
@@ -554,8 +736,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
 	
 	if(_singleTapDidOccur==NO){
-		singleTapDidOccur=YES;
-		singleTapPoint=point;
+		_singleTapDidOccur=YES;
+		_singleTapPoint=point;
 		[self performSelector:@selector(singleTapDelayExpired) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
 		
 	}
@@ -575,24 +757,24 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) singleTapDelayExpired {
 	if(_singleTapDidOccur==YES){
 		_singleTapDidOccur=NO;
-		CLLocationCoordinate2D location = [mapView pixelToLatLong:singleTapPoint];
-		[self addLocation:location];
+		//CLLocationCoordinate2D location = [_mapView pixelToLatLong:_singleTapPoint];
+		//[self addLocation:location];
 	}
 }
 
 
 - (void) afterMapChanged: (RMMapView*) map {
 	
-	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 	
 	if (!self.programmaticChange) {
 		
-		
-		
+		/*
 		if (self.planningState == stateLocatingStart || self.planningState == stateLocatingEnd) {
 			[self stopDoingLocation];
 		}
+		 */
 	} else {
 		
 	}
@@ -613,7 +795,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
     
 	[self afterMapChanged:map];
-	[self saveLocation:map.contents.mapCenter];
+	//[self saveLocation:map.contents.mapCenter];
 }
 
 

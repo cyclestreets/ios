@@ -10,4 +10,13 @@
 
 @implementation WayPointVO
 
+
+
+
+-(NSString*)coordinateString{
+	
+	return [NSString stringWithFormat:@"%f, %f",_coordinate.latitude,_coordinate.longitude];
+	
+}
+
 @end

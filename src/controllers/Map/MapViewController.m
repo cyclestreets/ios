@@ -415,7 +415,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			BetterLog(@"stateStart");
 			
 			
-			items=[NSMutableArray arrayWithObjects:_waypointButton, locationButton,nameButton,deleteButton, leftFlex, startContextLabel, rightFlex, nil];
+			items=[NSMutableArray arrayWithObjects: locationButton,nameButton,deleteButton, leftFlex, startContextLabel, rightFlex, nil];
 			[self.toolBar setItems:items animated:YES ];
 			
 			self.deleteButton.enabled = NO;
@@ -448,7 +448,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			self.deleteButton.enabled = YES;
 			self.nameButton.enabled = NO;
 			
-			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton,leftFlex, routeButton, nil];
+			items=[NSMutableArray arrayWithObjects:_waypointButton,locationButton,nameButton,deleteButton,leftFlex, routeButton, nil];
             
             [self.toolBar setItems:items animated:YES ];
 			
@@ -730,7 +730,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void) startMarker:(CLLocationCoordinate2D)location {
 	if (!self.start) {
-		self.start = [Markers markerStart];
+		self.start = [Markers markerIntermediate:@"2"];
 		self.start.enableDragging=YES;
 	}
 	if ([[self.mapView.markerManager markers] containsObject:self.start]) {

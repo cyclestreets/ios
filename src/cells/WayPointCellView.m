@@ -41,20 +41,33 @@
 	
 	self.contentView.visible=YES;
 	
-	_nameLabel.text=@"Start";//_dataProvider.name;
+	;//_dataProvider.name;
 	
-	// location string
+	
+	_locationLabel.text=_dataProvider.coordinateString;
 	
 	// icon based on waypointIndex
 	
-	if(_waypointIndex==0){
-		_iconImageView.image=[UIImage imageNamed:@"CSIcon_start_wisp.png"];
-	}else{
-		if(_waypointIndex%2==0){
-			_iconImageView.image=[UIImage imageNamed:@"CSIcon_finish_wisp.png"];
-		}else{
-			_iconImageView.image=[UIImage imageNamed:@"CSIcon_intermediate_wisp.png"];
+	switch (_dataProvider.waypointType) {
+		case WayPointTypeStart:
+		{
+			_nameLabel.text=@"Start";
+			_iconImageView.image=[UIImage imageNamed:@"CSIcon_start_wisp.png"];
 		}
+		break;
+		case WayPointTypeFinish:
+		{
+			_nameLabel.text=@"Finish";
+			_iconImageView.image=[UIImage imageNamed:@"CSIcon_finish_wisp.png"];
+		}
+		break;
+		case WayPointTypeIntermediate:
+		{
+			_nameLabel.text=[NSString stringWithFormat:@"Waypoint %i",_waypointIndex];
+			_iconImageView.image=[UIImage imageNamed:@"CSIcon_intermediate_wisp.png"];
+			
+		}
+		break;
 	}
 	
 }

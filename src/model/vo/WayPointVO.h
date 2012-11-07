@@ -23,8 +23,11 @@ typedef int WayPointType;
 
 @property(nonatomic,strong)  NSString						*name;
 @property(nonatomic,assign)  CLLocationCoordinate2D			coordinate;
-@property(nonatomic,assign)  WayPointType					*waypointType;
+@property(nonatomic,assign)  WayPointType					waypointType;
 @property(nonatomic,strong)  RMMarker						*marker;
 
+
+// getters
+@property(nonatomic,readonly)  NSString						*coordinateString;
 
 @end

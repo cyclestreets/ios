@@ -23,11 +23,11 @@
 
 
 enum  {
-	MapPlanningStateNoRoute,
-	MapPlanningStateLocating,
-	MapPlanningStateWaypoint,
-	MapPlanningStatePlanning,
-	MapPlanningStateRoute,
+	MapPlanningStateNoRoute, // no route loaded, no waypoints added
+	MapPlanningStateLocating, // gps is on
+	MapPlanningStateStartPlanning, // a waypoint has been added
+	MapPlanningStatePlanning, // waypoints>1 have been added but no route requested
+	MapPlanningStateRoute, // a route is loaded
 };
 typedef int MapPlanningState;
 

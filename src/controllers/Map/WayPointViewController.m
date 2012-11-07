@@ -80,7 +80,7 @@
 
 -(void)createPersistentUI{
 	
-	self.dataProvider=[@[@"1",@"2",@"3",@"4",@"5",@"6"]mutableCopy];
+	self.dataProvider=[@[@"1",@"2",@"3",@"4"]mutableCopy];
     
 }
 
