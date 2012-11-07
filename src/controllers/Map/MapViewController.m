@@ -58,8 +58,22 @@
 #import "POIListviewController.h"
 #import "HudManager.h"
 #import "WayPointViewController.h"
+#import "IIViewDeckController.h"
 
-@interface MapViewController(Private)
+
+@interface MarkerMenuItem : UIMenuItem
+@property (nonatomic, strong) NSIndexPath* indexPath;
+@end
+
+@implementation MarkerMenuItem
+@synthesize indexPath;
+@end
+
+@interface MapViewController()
+
+@property(nonatomic,strong)  UIBarButtonItem			*waypointButton;
+@property(nonatomic,assign)  BOOL						markerMenuOpen;
+
 
 -(void)initToolBarEntries;
 
@@ -71,6 +85,8 @@
 - (void)saveLocation:(CLLocationCoordinate2D)location;
 - (void)zoomUpdate;
 -(void)loadLocation;
+
+-(void)favouriteRouteMenuSelected:(UIMenuController*)menuController;
 
 
 -(IBAction)showRoutePlanMenu:(id)sender;
@@ -298,7 +314,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[[RouteManager sharedInstance] loadSavedSelectedRoute];
 	
-	[self createWayPointViewController];
 	
 	
 }
@@ -313,6 +328,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.activeLocationButton = [[UIBarButtonItem alloc] initWithCustomView:locatingIndicator ];
 	self.activeLocationButton.style	= UIBarButtonItemStyleDone;
+	
+	self.waypointButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_waypoint.png"]
+														   style:UIBarButtonItemStyleBordered
+														  target:self
+														  action:@selector(showWayPointView)];
+	_waypointButton.width = 40;
 	
 	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
 														   style:UIBarButtonItemStyleBordered
@@ -363,9 +384,18 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
+	
 }
 
 
+-(void)showWayPointView{
+	
+	WayPointViewController *waypointController=(WayPointViewController*)self.viewDeckController.leftController;
+	//waypointController.dataProvider=_routeMarkerArray;
+		
+	[self.viewDeckController openLeftViewAnimated:YES];
+		
+}
 
 - (void) didNotificationMapStyleChanged {
 	mapView.contents.tileSource = [MapViewController tileSource];
@@ -385,7 +415,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			BetterLog(@"stateStart");
 			
 			
-			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton, leftFlex, startContextLabel, rightFlex, nil];
+			items=[NSMutableArray arrayWithObjects:_waypointButton, locationButton,nameButton,deleteButton, leftFlex, startContextLabel, rightFlex, nil];
 			[self.toolBar setItems:items animated:YES ];
 			
 			self.deleteButton.enabled = NO;
@@ -402,7 +432,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			self.deleteButton.enabled = YES;
 			self.nameButton.enabled = YES;
 			
-			items=[NSMutableArray arrayWithObjects:locationButton,nameButton,deleteButton, leftFlex, finishContextLabel, rightFlex, nil];
+			items=[NSMutableArray arrayWithObjects:_waypointButton,locationButton,nameButton,deleteButton, leftFlex, finishContextLabel, rightFlex, nil];
 			[self.toolBar setItems:items animated:YES ];
 			
 			
@@ -508,7 +538,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 -(void)afterMapTouch:(RMMapView *)map{
-	
+	_markerMenuOpen=NO;
 	map.enableDragging=YES;
 	
 }
@@ -523,14 +553,51 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 #pragma marl RMMap marker
 
+- (BOOL)canBecomeFirstResponder {
+	return YES;
+}
+
+
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
 	
-	// for marker pop ups
+	if(_markerMenuOpen==YES)
+		return;
+	
+	UIMenuController *menuController = [UIMenuController sharedMenuController];
+	
+	if(menuController.isMenuVisible==NO){
+	
+		[self becomeFirstResponder];
+		
+		MarkerMenuItem *menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeMarkerAtIndex:)];
+		menuItem.indexPath=0; // TODO:
+		menuController.menuItems = [NSArray arrayWithObject:menuItem];
+		
+	}
+		
+	CGRect markerRect=CGRectMake(marker.frame.origin.x-12, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
+	[menuController setTargetRect:markerRect inView:self.mapView];
+	
+	if(menuController.isMenuVisible==NO)
+		[menuController setMenuVisible:YES animated:YES];
+	
+	_markerMenuOpen=YES;
 	
 }
 
+
+-(void)removeMarkerAtIndex:(UIMenuController*)menuController {
+	
+	_markerMenuOpen=NO;
+	
+	
+}
+
+
 // Should only return yes if marker is start/end and we have not a route drawn
 - (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+	
+	_markerMenuOpen=NO;
 	
 	BetterLog(@"self.planningState=%i ",self.planningState);
 	
@@ -570,30 +637,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 }
 
-
--(void)createWayPointViewController{
-	
-	/*
-	
-	WayPointViewController *topcontroller=[[WayPointViewController alloc] initWithNibName:[WayPointViewController nibName] bundle:nil];
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:topcontroller];
-	navController.navigationBarHidden=YES;
-	
-	if (![self.slidingViewController.underLeftViewController isKindOfClass:[WayPointViewController class]]) {
-		self.slidingViewController.underLeftViewController  = navController;
-	}
-	
-	self.navigationController.view.layer.shadowOpacity = 0.75f;
-	self.navigationController.view.layer.shadowRadius = 10.0f;
-	self.navigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-	
-	[self.view addGestureRecognizer:self.slidingViewController.panGesture];
-	[self.slidingViewController setAnchorRightRevealAmount:280.0f];
-	 
-	 */
-	
-	
-}
 
 
 #pragma mark map location persistence
@@ -695,6 +738,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	} else {
 		[self.mapView.markerManager addMarker:self.start AtLatLong:location];
 	}
+	
+	
 }
 
 - (void) endMarker:(CLLocationCoordinate2D)location {

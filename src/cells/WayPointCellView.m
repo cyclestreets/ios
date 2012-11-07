@@ -24,11 +24,14 @@
 @implementation WayPointCellView
 
 
+- (void)prepareForMove{
+	self.contentView.visible=NO;
+}
+
 
 -(void)initialise{
 	
 	self.contentView.backgroundColor=UIColorFromRGB(0xe2e0dc);
-	
 	
 }
 
@@ -36,8 +39,9 @@
 
 -(void)populate{
 	
+	self.contentView.visible=YES;
 	
-	_nameLabel.text=_dataProvider.name;
+	_nameLabel.text=@"Start";//_dataProvider.name;
 	
 	// location string
 	

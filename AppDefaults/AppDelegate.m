@@ -45,6 +45,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"
 #import "IIViewDeckController.h"
+#import "WrapController.h"
 
 
 @interface AppDelegate(Private)
@@ -72,7 +73,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	#if defined (CONFIGURATION_Debug)
-		[Crashlytics sharedInstance].debugMode = YES;
+		//[Crashlytics sharedInstance].debugMode = YES;
 		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
 	#endif
 	
@@ -86,18 +87,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	
-	// Sliding view support
 	self.tabBarController = [[UITabBarController alloc] init];
 	self.window.rootViewController = self.tabBarController;
-//	ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
-//	slidingViewController.topViewController = tabBarController;
-//	
-//	tabBarController.view.layer.shadowOpacity = 0.75f;
-//	tabBarController.view.layer.shadowRadius = 10.0f;
-//	tabBarController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-//	
-//	// corrects bug with EC view and Tabbars
-//	tabBarController.view.y=20;
 	
 
 	[self appendStartUpView];
@@ -312,15 +303,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						childNavController.navigationBarHidden=YES;
 						
 						IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:vccontroller leftViewController:childNavController];
+						deckController.panningMode=IIViewDeckNoPanning;
+						deckController.centerhiddenInteractivity=IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
 						deckController.navigationControllerBehavior = IIViewDeckNavigationControllerIntegrated;
 						vccontroller = deckController;
 						
 						nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
 						nav.navigationBarHidden=YES;
 						
+						vccontroller = [[WrapController alloc] initWithViewController:nav];
+						
 				}else{
 					
 					nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
+					
+					
 					
 					if(hidesNavBar==YES){
 						nav.navigationBarHidden=YES;

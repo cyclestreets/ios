@@ -557,6 +557,10 @@
 		288663941521F7C60076BE5C /* RoutePlanMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288663931521F7C60076BE5C /* RoutePlanMenuView.xib */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		288B10281457492500E2A96F /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
+		288C0F3E1649A5C4000880FF /* FMMoveTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C0F3B1649A5C4000880FF /* FMMoveTableView.m */; };
+		288C0F3F1649A5C4000880FF /* FMMoveTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C0F3B1649A5C4000880FF /* FMMoveTableView.m */; };
+		288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
+		288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
 		288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */; };
 		288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */; };
 		2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */; };
@@ -1082,6 +1086,9 @@
 		288663931521F7C60076BE5C /* RoutePlanMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoutePlanMenuView.xib; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		288B10271457492500E2A96F /* RoutesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewController.m; sourceTree = "<group>"; };
+		288C0F3A1649A5C4000880FF /* FMMoveTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMMoveTableView.h; sourceTree = "<group>"; };
+		288C0F3B1649A5C4000880FF /* FMMoveTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMMoveTableView.m; sourceTree = "<group>"; };
+		288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_waypoint.png; sourceTree = "<group>"; };
 		288FA2C1150BF9500068F0C1 /* PhotoWizardLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardLocationViewController.h; path = PhotoWizard/PhotoWizardLocationViewController.h; sourceTree = "<group>"; };
 		288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoWizardLocationViewController.m; path = PhotoWizard/PhotoWizardLocationViewController.m; sourceTree = "<group>"; };
 		288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardLocationView.xib; path = photowizard/PhotoWizardLocationView.xib; sourceTree = "<group>"; };
@@ -1455,6 +1462,7 @@
 		280E2413144D82850021CDFA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				288C0F391649A5C4000880FF /* FMFramework */,
 				2846081D1649226300CBF96A /* ViewDeck */,
 				289CAF8615F89A460036DE98 /* TestFlight */,
 				28B484DE15261FAC00E406E1 /* WEPopover */,
@@ -1769,6 +1777,7 @@
 				28B76F3A15E4DA02006B01D0 /* CSBarButton_location.png */,
 				28B76F3B15E4DA02006B01D0 /* CSBarButton_search.png */,
 				28B76F3615E4D95D006B01D0 /* CSBarButton_routePlan.png */,
+				288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */,
 				28187A7314FCFF4C00A38A17 /* icon_camera.png */,
 				28187A7414FCFF4C00A38A17 /* icon_location.png */,
 				28187A8614FCFF4C00A38A17 /* UIButton_green_hi.png */,
@@ -2005,6 +2014,15 @@
 				E77D8F10120321E4003E6B8D /* credits.html */,
 			);
 			name = html;
+			sourceTree = "<group>";
+		};
+		288C0F391649A5C4000880FF /* FMFramework */ = {
+			isa = PBXGroup;
+			children = (
+				288C0F3A1649A5C4000880FF /* FMMoveTableView.h */,
+				288C0F3B1649A5C4000880FF /* FMMoveTableView.m */,
+			);
+			path = FMFramework;
 			sourceTree = "<group>";
 		};
 		2890F15E14FEC2CF00FF8901 /* photowizard */ = {
@@ -2991,6 +3009,7 @@
 				28373E2216481A0C00F5E356 /* WayPointCell.xib in Resources */,
 				2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
+				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3193,6 +3212,7 @@
 				28373E2316481A0C00F5E356 /* WayPointCell.xib in Resources */,
 				2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
+				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3397,6 +3417,7 @@
 				284608221649226300CBF96A /* IIViewDeckController.m in Sources */,
 				284608241649226300CBF96A /* WrapController.m in Sources */,
 				284608281649388900CBF96A /* ImageUtilties.m in Sources */,
+				288C0F3E1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3569,6 +3590,7 @@
 				284608231649226300CBF96A /* IIViewDeckController.m in Sources */,
 				284608251649226300CBF96A /* WrapController.m in Sources */,
 				284608291649388900CBF96A /* ImageUtilties.m in Sources */,
+				288C0F3F1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
+#import "IIViewDeckController.h"
 
-@interface WayPointViewController : SuperViewController<UITableViewDataSource,UITableViewDelegate>
+@interface WayPointViewController : SuperViewController<UITableViewDataSource,UITableViewDelegate,IIViewDeckControllerDelegate>
+
+@property(nonatomic,strong)  NSMutableArray         *dataProvider;
+
 
 @end

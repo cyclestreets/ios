@@ -135,7 +135,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItem];
-	NSMutableArray *toolbaritems=_toolBar.items;
+	backButton.action=@selector(backButtonSelected);
+	backButton.target=self;
+	NSMutableArray *toolbaritems=[_toolBar.items mutableCopy];
 	[toolbaritems insertObject:backButton atIndex:0];
 	_toolBar.items=toolbaritems;
 	

@@ -15,4 +15,7 @@
 @property(nonatomic,assign)  int					waypointIndex;
 
 
+// FMMoveTable supportß
+- (void)prepareForMove;
+
 @end

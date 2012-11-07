@@ -42,6 +42,9 @@
 #import "POIListviewController.h"
 #import "HudManager.h"
 #import "UserLocationManager.h"
+#import	"WayPointVO.h"
+#import "IIViewDeckController.h"
+#import "WayPointViewController.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -342,18 +345,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)addWayPointAtLocation:(CLLocationCoordinate2D)coords{
 	
+	WayPointVO *waypoint=[WayPointVO new];
+	
 	RMMarker *marker=nil;
 	if([self.mapView.markerManager markers].count==0){
 		marker=[Markers markerStart];
+		waypoint.waypointType=WayPointTypeStart;
 	}else if([self.mapView.markerManager markers].count==1){
 		marker=[Markers markerEnd];
+		waypoint.waypointType=WayPointTypeFinish;
 	}else{
 		marker=[Markers markerWaypoint];
+		waypoint.waypointType=WayPointTypeIntermediate;
 	}
 	
 	[[_mapView markerManager ] addMarker:marker AtLatLong:coords];
 	
-	[self.routeMarkerArray addObject:marker];
+	waypoint.marker=marker;
+	waypoint.coordinate=coords;
+	
+	[self.routeMarkerArray addObject:waypoint];
 	
 	
 }
@@ -362,18 +373,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self.routeMarkerArray exchangeObjectAtIndex:startindex withObjectAtIndex:endindex];
 	
-	
 }
 
 
 
 -(void)removeWayPointAtIndex:(int)index{
 	
-	RMMarker *marker=[self.routeMarkerArray objectAtIndex:index];
+	WayPointVO *waypoint=[self.routeMarkerArray objectAtIndex:index];
 	
-	[[_mapView markerManager ] removeMarker:marker];
+	[[_mapView markerManager ] removeMarker:waypoint.marker];
 	
-	[self.routeMarkerArray removeObject:marker];
+	[self.routeMarkerArray removeObject:waypoint];
 	
 }
 
@@ -493,7 +503,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)waypointButtonSelected{
 	
+	WayPointViewController *waypointController=(WayPointViewController*)self.viewDeckController.leftController;
+	waypointController.dataProvider=_routeMarkerArray;
 	
+	[self.viewDeckController openLeftViewAnimated:YES];
 	
 }
 
