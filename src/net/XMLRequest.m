@@ -35,6 +35,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize elementsToParse;
 @synthesize elementCategories;
 
+// override super class method for cached responses
+- (void)returnData:(NSData *)resultData {
+	
+	
+	RouteParser *route = [RouteParser parse:resultData forElements:elementsToParse withCategories:elementCategories];
+	if (!route.error) {
+		NSDictionary *result = route.categorisedElementLists;
+		if ([result count] == 0) {
+			result = route.elementLists;
+		}
+		[self.target performSelector:self.success withObject:self withObject:result];
+	} else {
+		[self.target performSelector:self.failure withObject:self withObject:[route.error localizedDescription]];
+	}
+	
+	
+	//tidy up
+	self.data = nil;
+	self.connection = nil;
+	
+}
+
 // The override to return JSONified contents, rather than raw data.
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	
