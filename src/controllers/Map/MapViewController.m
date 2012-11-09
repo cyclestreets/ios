@@ -390,7 +390,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 -(void)showWayPointView{
 	
-	WayPointViewController *waypointController=(WayPointViewController*)self.viewDeckController.leftController;
+	//WayPointViewController *waypointController=(WayPointViewController*)self.viewDeckController.leftController;
 	//waypointController.dataProvider=_routeMarkerArray;
 		
 	[self.viewDeckController openLeftViewAnimated:YES];

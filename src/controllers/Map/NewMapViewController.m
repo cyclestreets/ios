@@ -48,12 +48,10 @@
 
 
 static NSInteger MAX_ZOOM = 18;
-static NSInteger MIN_ZOOM = 1;
 
 static NSInteger MAX_ZOOM_LOCATION = 16;
 static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
-static CLLocationDistance LOC_DISTANCE_FILTER = 25;
 static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 //don't allow co-location of start/finish
@@ -111,7 +109,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 // data
 @property (nonatomic, strong) RouteVO				* route;
-@property (nonatomic, strong) NSMutableArray		* routeMarkerArray;
+@property (nonatomic, strong) NSMutableArray		* waypointArray;
 @property (nonatomic, strong) RMMarker				* activeMarker;
 
 // state
@@ -131,9 +129,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 // waypoints
 -(void)resetWayPoints;
--(void)addWayPoint:(RMMarker*)marker;
 -(void)removeWayPointAtIndex:(int)index;
--(void)addWayPointAtLocation:(CLLocationCoordinate2D)coords;
+-(void)assessWayPointAddition:(CLLocationCoordinate2D)cooordinate;
+-(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords;
 
 // waypoint menu
 -(void)removeMarkerAtIndexViaMenu:(UIMenuController*)menuController;
@@ -191,6 +189,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
+//------------------------------------------------------------------------------------
+#pragma mark - View methods
+//------------------------------------------------------------------------------------
 //
 /***********************************************
  * @description			View Methods
@@ -314,7 +315,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
-
+//------------------------------------------------------------------------------------
+#pragma mark - UI State
+//------------------------------------------------------------------------------------
 //
 /***********************************************
  * @description			State Update
@@ -406,7 +409,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
-
+//------------------------------------------------------------------------------------
+#pragma mark - Core Location
+//------------------------------------------------------------------------------------
 //
 /***********************************************
  * @description			Location Manager methods
@@ -454,7 +459,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
-
+//------------------------------------------------------------------------------------
+#pragma mark - Waypoints
+//------------------------------------------------------------------------------------
 //
 /***********************************************
  * @description			Waypoints
@@ -464,26 +471,60 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)resetWayPoints{
 	
-	[self.routeMarkerArray removeAllObjects];
+	[_waypointArray removeAllObjects];
 	
 	[[_mapView markerManager] removeMarkers];
 }
 
 
--(void)addWayPoint:(RMMarker*)marker{
+-(void)assessWayPointAddition:(CLLocationCoordinate2D)cooordinate{
 	
+	
+	BOOL acceptWaypoint=YES;
+	
+	// location is too near any other locations> reject
+	if (_programmaticChange && _uiState==MapPlanningStatePlanning) {
+		
+		acceptWaypoint=[self assesWaypointLocationDistance:cooordinate];
+		
+		if(acceptWaypoint==NO){
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Point error" andMessage:@"Move the map to set a this point further away."];
+			[self updateUItoState:_previousUIState];
+		}
+	}
+	
+	
+	//explicit click while autolocation was happening. Turn off auto, accept click.
+	if (!_programmaticChange) {
+		if (_uiState==MapPlanningStateLocating) {
+			[self stopLocating];
+		}
+	}
+	
+	
+	// call addWayPointAtCoordinate
+	[self addWayPointAtCoordinate:cooordinate];
+	
+	// update uistate based on number of coords
+	if(_waypointArray.count>1){
+		[self updateUItoState:MapPlanningStatePlanning];
+	}else if(_waypointArray.count==1){
+		[self updateUItoState:MapPlanningStateStartPlanning];
+	}
+	
+	[self saveLocation:cooordinate];
 }
 
 
--(void)addWayPointAtLocation:(CLLocationCoordinate2D)coords{
+-(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords{
 	
 	WayPointVO *waypoint=[WayPointVO new];
 	
 	RMMarker *marker=nil;
-	if([self.mapView.markerManager markers].count==0){
+	if([_mapView.markerManager markers].count==0){
 		marker=[Markers markerStart];
 		waypoint.waypointType=WayPointTypeStart;
-	}else if([self.mapView.markerManager markers].count==1){
+	}else if([_mapView.markerManager markers].count==1){
 		marker=[Markers markerEnd];
 		waypoint.waypointType=WayPointTypeFinish;
 	}else{
@@ -496,14 +537,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	waypoint.marker=marker;
 	waypoint.coordinate=coords;
 	
-	[self.routeMarkerArray addObject:waypoint];
+	[_waypointArray addObject:waypoint];
 	
 	
 }
 
 -(void)moveWayPointAtIndex:(int)startindex toIndex:(int)endindex{
 	
-	[self.routeMarkerArray exchangeObjectAtIndex:startindex withObjectAtIndex:endindex];
+	[_waypointArray exchangeObjectAtIndex:startindex withObjectAtIndex:endindex];
 	
 }
 
@@ -511,11 +552,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)removeWayPointAtIndex:(int)index{
 	
-	WayPointVO *waypoint=[self.routeMarkerArray objectAtIndex:index];
+	WayPointVO *waypoint=[_waypointArray objectAtIndex:index];
 	
 	[[_mapView markerManager ] removeMarker:waypoint.marker];
 	
-	[self.routeMarkerArray removeObject:waypoint];
+	[_waypointArray removeObject:waypoint];
+	
+	// update uistate
 	
 }
 
@@ -570,7 +613,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
-
+//------------------------------------------------------------------------------------
+#pragma mark - UI Alerts
+//------------------------------------------------------------------------------------
 //
 /***********************************************
  * @description			UIAlerts
@@ -625,17 +670,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+//------------------------------------------------------------------------------------
+#pragma mark - UIEvents
+//------------------------------------------------------------------------------------
 //
 /***********************************************
  * @description			UIEvents
  ***********************************************/
 //
 
-#pragma mark toolbar actions
-
-
 
 - (void) locationButtonSelected {
+	
+	BetterLog(@"");
 	
 	if(_uiState==MapPlanningStateLocating){
 		[self stopLocating];
@@ -649,6 +696,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (IBAction) searchButtonSelected {
 	
+	BetterLog(@"");
 	
 	if (self.mapLocationSearchView == nil) {
 		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
@@ -663,17 +711,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 - (IBAction) routeButtonSelected {
-	BetterLog(@"route");
 	
-	if (_uiState == MapPlanningStateNoRoute) {
+	BetterLog(@"");
+	
+	if (_uiState == MapPlanningStatePlanning) {
 		
-//		CLLocationCoordinate2D fromLatLon = [_mapView.markerManager latitudeLongitudeForMarker:start];
-//		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude];
-//		CLLocationCoordinate2D toLatLon = [_mapView.markerManager latitudeLongitudeForMarker:end];
-//		CLLocation *to = [[CLLocation alloc] initWithLatitude:toLatLon.latitude longitude:toLatLon.longitude];
-//		
-//		[[RouteManager sharedInstance] loadRouteForEndPoints:from to:to];
-		 
+		[[RouteManager sharedInstance] loadRouteForWaypoints:_waypointArray];
 		
 	} else if (_uiState == MapPlanningStateRoute) {
 		
@@ -685,8 +728,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)waypointButtonSelected{
 	
+	BetterLog(@"");
+	
 	WayPointViewController *waypointController=(WayPointViewController*)self.viewDeckController.leftController;
-	waypointController.dataProvider=_routeMarkerArray;
+	waypointController.dataProvider=_waypointArray;
 	
 	[self.viewDeckController openLeftViewAnimated:YES];
 	
@@ -757,8 +802,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) singleTapDelayExpired {
 	if(_singleTapDidOccur==YES){
 		_singleTapDidOccur=NO;
-		//CLLocationCoordinate2D location = [_mapView pixelToLatLong:_singleTapPoint];
-		//[self addLocation:location];
+		CLLocationCoordinate2D location = [_mapView pixelToLatLong:_singleTapPoint];
+		[self addWayPointAtCoordinate:location];
 	}
 }
 
@@ -770,11 +815,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	if (!self.programmaticChange) {
 		
-		/*
-		if (self.planningState == stateLocatingStart || self.planningState == stateLocatingEnd) {
-			[self stopDoingLocation];
-		}
-		 */
+		if(_uiState==MapPlanningStateLocating)
+			[self stopLocating];
+		
 	} else {
 		
 	}
@@ -795,13 +838,92 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
     
 	[self afterMapChanged:map];
-	//[self saveLocation:map.contents.mapCenter];
+	[self saveLocation:map.contents.mapCenter];
 }
 
 
+#pragma mark map location persistence
+//
+/***********************************************
+ * @description			Saves Map location
+ ***********************************************/
+//
 
-#pragma marks Class Methods
+- (void)saveLocation:(CLLocationCoordinate2D)location {
+	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
+	[misc setValue:[NSString stringWithFormat:@"%f", location.latitude] forKey:@"latitude"];
+	[misc setValue:[NSString stringWithFormat:@"%f", location.longitude] forKey:@"longitude"];
+	[misc setValue:[NSString stringWithFormat:@"%f", _mapView.contents.zoom] forKey:@"zoom"];
+	[[CycleStreets sharedInstance].files setMisc:misc];
+}
 
+//
+/***********************************************
+ * @description			Loads any saved map lat/long and zoom
+ ***********************************************/
+//
+-(void)loadLocation{
+	
+	BetterLog(@"");
+	
+	NSDictionary *misc = [[CycleStreets sharedInstance].files misc];
+	NSString *sLat = [misc valueForKey:@"latitude"];
+	NSString *sLon = [misc valueForKey:@"longitude"];
+	NSString *sZoom = [misc valueForKey:@"zoom"];
+	
+	CLLocationCoordinate2D initLocation;
+	if (sLat != nil && sLon != nil) {
+		initLocation.latitude = [sLat doubleValue];
+		initLocation.longitude = [sLon doubleValue];
+		[_mapView moveToLatLong:initLocation];
+		
+		if ([_mapView.contents zoom] < MAX_ZOOM) {
+			[_mapView.contents setZoom:[sZoom floatValue]];
+		}
+		[_lineView setNeedsDisplay];
+		[_blueCircleView setNeedsDisplay];
+		[self stopLocating];
+	}
+}
+
+- (BOOL)locationInBounds:(CLLocationCoordinate2D)location {
+	CGRect bounds = _mapView.contents.screenBounds;
+	CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
+	CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
+	
+	if (nw.latitude < location.latitude) return NO;
+	if (nw.longitude > location.longitude) return NO;
+	if (se.latitude > location.latitude) return NO;
+	if (se.longitude < location.longitude) return NO;
+	
+	return YES;
+}
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+- (BOOL) assesWaypointLocationDistance:(CLLocationCoordinate2D)locationLatLon {
+	
+	for (WayPointVO *waypoint in _waypointArray) {
+		
+		CLLocationCoordinate2D fromLatLon = waypoint.coordinate;
+		
+		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude
+													  longitude:fromLatLon.longitude];
+		CLLocation *to = [[CLLocation alloc] initWithLatitude:locationLatLon.latitude
+													longitude:locationLatLon.longitude];
+		CLLocationDistance distance = [from getDistanceFrom:to];
+		
+		if(distance<MIN_START_FINISH_DISTANCE){
+			return NO;
+		}
+		
+	}
+	return YES;
+}
+
+
+//------------------------------------------------------------------------------------
+#pragma mark - Class methods
+//------------------------------------------------------------------------------------
 //
 /***********************************************
  * @description			CLASS METHODS
@@ -871,14 +993,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		wantZoom--;
 		wantAccuracy = wantAccuracy * 2;
 	}
-	BetterLog(@"accuracy %f zoom %d", accuracy, wantZoom);
+	
 	[mapView moveToLatLong: newLocation.coordinate];
 	[mapView.contents setZoom:wantZoom];
 }
 
 
 
-#pragma mark delegates
 //
 /***********************************************
  * @description			DELEGATE METHODS
@@ -886,22 +1007,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 //
 
 
-#pragma mark Mapsearch delegateß
+#pragma mark Mapsearch delegate
 
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location {
 	BetterLog(@"didMoveToLocation");
+	
 	[self.mapView moveToLatLong: location];
-	/*
-	[self addLocation:location];
-	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];
-	[self stopDoingLocation];
-	 */
+	
+	[self addWayPointAtCoordinate:location];
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
+	[self stopLocating];
+	 
 }
 
 
-#pragma mark -
-#pragma mark WEPopoverControllerDelegate implementation
+
+#pragma mark WEPopoverControllerDelegate 
 
 - (void)popoverControllerDidDismissPopover:(WEPopoverController *)thePopoverController {
 	//Safe to release the popover here
