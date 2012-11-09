@@ -623,13 +623,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "373984603.149486"
+         timestampString = "374176535.708315"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1173"
-         endingLineNumber = "1173"
-         landmarkName = "-newRoute"
-         landmarkType = "5">
+         startingLineNumber = "1308"
+         endingLineNumber = "1308">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -714,25 +712,23 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "373984603.149486"
+         timestampString = "374176535.708315"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1150"
-         endingLineNumber = "1150"
-         landmarkName = "-clearRoute"
-         landmarkType = "5">
+         startingLineNumber = "1285"
+         endingLineNumber = "1285">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "373984603.149486"
+         timestampString = "374176535.708315"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "942"
-         endingLineNumber = "942"
-         landmarkName = "-popoverControllerDidDismissPopover:"
+         startingLineNumber = "1077"
+         endingLineNumber = "1077"
+         landmarkName = "+currentMapStyle"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -798,6 +794,58 @@
          startingLineNumber = "423"
          endingLineNumber = "423"
          landmarkName = "-loadRouteForRouting:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/cells/WayPointCellView.m"
+         timestampString = "374171106.708405"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "43"
+         endingLineNumber = "43"
+         landmarkName = "-populate"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/controllers/Map/NewMapViewController.m"
+         timestampString = "374174928.180991"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "659"
+         endingLineNumber = "659"
+         landmarkName = "-tapOnMarker:onMap:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/controllers/Map/MapViewController.m"
+         timestampString = "374176317.196736"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "619"
+         endingLineNumber = "619"
+         landmarkName = "-removeWayPoint:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/controllers/Map/MapViewController.m"
+         timestampString = "374176535.708315"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "645"
+         endingLineNumber = "645"
+         landmarkName = "-removeWayPointAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

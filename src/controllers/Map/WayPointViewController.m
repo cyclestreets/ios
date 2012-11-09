@@ -80,7 +80,7 @@
 
 -(void)createPersistentUI{
 	
-	self.dataProvider=[@[@"1",@"2",@"3",@"4"]mutableCopy];
+	
     
 }
 
@@ -137,6 +137,7 @@
 		}
 		
 		cell.waypointIndex=[indexPath row];
+		cell.dataProvider=[_dataProvider objectAtIndex:[indexPath row]];
 		[cell populate];
 		
 		[cell setShouldIndentWhileEditing:NO];
@@ -166,14 +167,16 @@
 	[_dataProvider removeObjectAtIndex:fromRow];
 	[_dataProvider insertObject:object atIndex:toRow];
 	
+	
+	[delegate performSelector:@selector(wayPointArraywasReordered)];
+	[self.tableView reloadData];
+	
+	
+	
 }
 
 - (NSIndexPath *)moveTableView:(FMMoveTableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
 {
-	//	Uncomment these lines to enable moving a row just within it's current section
-	//	if ([sourceIndexPath section] != [proposedDestinationIndexPath section]) {
-	//		proposedDestinationIndexPath = sourceIndexPath;
-	//	}
 	
 	return proposedDestinationIndexPath;
 }

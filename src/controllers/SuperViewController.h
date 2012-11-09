@@ -25,6 +25,7 @@
 -(void)handleRemoteRequestIndication:(BOOL)show;
 -(void)deSelectRowForTableView:(UITableView*)table;
 -(void)doCellButtonSelection:(NSString*)type withDataProvider:(id)data andIndex:(int)index;
+-(void)wayPointArraywasReordered;
 
 -(void)UserDidUpdatePhotoLocation:(CLLocation*)location;
 

@@ -70,6 +70,7 @@
 		280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93701409861300C7AC75 /* KeyChainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		280E937D1409861300C7AC75 /* WBImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93721409861300C7AC75 /* WBImage.m */; };
 		280E93AF140989E400C7AC75 /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = 280E93AE140989E400C7AC75 /* donate.html */; };
+		2815EA04164D77B0003C356A /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBEDAC1612DCF5002CDE5A /* MapViewController.m */; };
 		28187A3314FCC7EF00A38A17 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28187A3214FCC7EF00A38A17 /* UserLocationManager.m */; };
 		28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5714FCFF4C00A38A17 /* Alert200x200.png */; };
 		28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5914FCFF4C00A38A17 /* CSIcon_MapArrow_end.png */; };
@@ -331,7 +332,6 @@
 		283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
 		283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
 		283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
-		283436D715DD5DC300B00FD5 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD627A131FB69D008527FC /* MapViewController.m */; };
 		283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
 		283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630F131FB6C8008527FC /* NSDate+Helper.m */; };
 		283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */; };
@@ -561,7 +561,7 @@
 		288C0F3F1649A5C4000880FF /* FMMoveTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C0F3B1649A5C4000880FF /* FMMoveTableView.m */; };
 		288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
 		288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
-		288C0F65164AA0B1000880FF /* NewMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */; };
+		288C0F65164AA0B1000880FF /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBEDAC1612DCF5002CDE5A /* MapViewController.m */; };
 		288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FA2C2150BF9500068F0C1 /* PhotoWizardLocationViewController.m */; };
 		288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */; };
 		2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */; };
@@ -616,7 +616,6 @@
 		28AD62B7131FB69D008527FC /* styles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6210131FB69D008527FC /* styles.plist */; };
 		28AD62B8131FB69D008527FC /* userState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6211131FB69D008527FC /* userState.plist */; };
 		28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
-		28AD62E8131FB69D008527FC /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD627A131FB69D008527FC /* MapViewController.m */; };
 		28AD641F131FB6C8008527FC /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
 		28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630F131FB6C8008527FC /* NSDate+Helper.m */; };
 		28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */; };
@@ -1167,8 +1166,6 @@
 		28AD6211131FB69D008527FC /* userState.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userState.plist; sourceTree = "<group>"; };
 		28AD625F131FB69D008527FC /* CreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsViewController.h; sourceTree = "<group>"; };
 		28AD6260131FB69D008527FC /* CreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsViewController.m; sourceTree = "<group>"; };
-		28AD6279131FB69D008527FC /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = MapViewController.h; path = Map/MapViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		28AD627A131FB69D008527FC /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Map/MapViewController.m; sourceTree = "<group>"; };
 		28AD6309131FB6C8008527FC /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppConstants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28AD630A131FB6C8008527FC /* AppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppConstants.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28AD630E131FB6C8008527FC /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
@@ -1332,8 +1329,8 @@
 		28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryMenuViewController.m; sourceTree = "<group>"; };
 		28CBBC9B1641B498005E7056 /* WayPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WayPointViewController.h; path = Map/WayPointViewController.h; sourceTree = "<group>"; };
 		28CBBC9C1641B498005E7056 /* WayPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WayPointViewController.m; path = Map/WayPointViewController.m; sourceTree = "<group>"; };
-		28CBEDAB1612DCF5002CDE5A /* NewMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewMapViewController.h; path = Map/NewMapViewController.h; sourceTree = "<group>"; };
-		28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewMapViewController.m; path = Map/NewMapViewController.m; sourceTree = "<group>"; };
+		28CBEDAB1612DCF5002CDE5A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Map/MapViewController.h; sourceTree = "<group>"; };
+		28CBEDAC1612DCF5002CDE5A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Map/MapViewController.m; sourceTree = "<group>"; };
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
 		28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_userphotomap@2x.png"; sourceTree = "<group>"; };
 		28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_left@2x.png"; sourceTree = "<group>"; };
@@ -1936,10 +1933,8 @@
 		2872DEEA13283109003995BE /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				28AD6279131FB69D008527FC /* MapViewController.h */,
-				28AD627A131FB69D008527FC /* MapViewController.m */,
-				28CBEDAB1612DCF5002CDE5A /* NewMapViewController.h */,
-				28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */,
+				28CBEDAB1612DCF5002CDE5A /* MapViewController.h */,
+				28CBEDAC1612DCF5002CDE5A /* MapViewController.m */,
 				28CBBC9B1641B498005E7056 /* WayPointViewController.h */,
 				28CBBC9C1641B498005E7056 /* WayPointViewController.m */,
 			);
@@ -3271,7 +3266,6 @@
 				28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
 				28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */,
-				28AD62E8131FB69D008527FC /* MapViewController.m in Sources */,
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
@@ -3419,7 +3413,7 @@
 				284608241649226300CBF96A /* WrapController.m in Sources */,
 				284608281649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3E1649A5C4000880FF /* FMMoveTableView.m in Sources */,
-				288C0F65164AA0B1000880FF /* NewMapViewController.m in Sources */,
+				288C0F65164AA0B1000880FF /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3445,7 +3439,6 @@
 				283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */,
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
 				283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */,
-				283436D715DD5DC300B00FD5 /* MapViewController.m in Sources */,
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
@@ -3593,6 +3586,7 @@
 				284608251649226300CBF96A /* WrapController.m in Sources */,
 				284608291649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3F1649A5C4000880FF /* FMMoveTableView.m in Sources */,
+				2815EA04164D77B0003C356A /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

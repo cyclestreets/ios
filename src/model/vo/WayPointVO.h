@@ -30,4 +30,6 @@ typedef int WayPointType;
 // getters
 @property(nonatomic,readonly)  NSString						*coordinateString;
 
+-(void)updateWaypointTypeForIndex:(int)index;
+
 @end

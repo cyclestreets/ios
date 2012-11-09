@@ -12,6 +12,12 @@
 
 
 
+-(void)updateWaypointTypeForIndex:(int)index{
+	
+	
+	
+}
+
 
 -(NSString*)coordinateString{
 	
