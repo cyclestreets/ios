@@ -249,6 +249,9 @@
     RouteCellView *cell = (RouteCellView *)[RouteCellView cellForTableView:table fromNib:[RouteCellView nib]];
 	
 	if(isSectioned==YES){
+		
+		if(keys.count==0)
+			return cell;
 	
 		NSString *key=[keys objectAtIndex:[indexPath section]];
 		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
