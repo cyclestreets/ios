@@ -623,11 +623,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "374176535.708315"
+         timestampString = "374243217.454111"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1308"
-         endingLineNumber = "1308">
+         startingLineNumber = "1385"
+         endingLineNumber = "1385">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -712,23 +712,23 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "374176535.708315"
+         timestampString = "374243217.454111"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1285"
-         endingLineNumber = "1285">
+         startingLineNumber = "1362"
+         endingLineNumber = "1362">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "374176535.708315"
+         timestampString = "374243217.454111"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1077"
-         endingLineNumber = "1077"
-         landmarkName = "+currentMapStyle"
+         startingLineNumber = "1154"
+         endingLineNumber = "1154"
+         landmarkName = "+mapAttribution"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -741,7 +741,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "293"
          endingLineNumber = "293"
-         landmarkName = "-loadRouteForEndPointsResponse:"
+         landmarkName = "-convertWaypointArrayforRequest:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -784,7 +784,7 @@
          landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/managers/RouteManager.m"
@@ -793,7 +793,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "423"
          endingLineNumber = "423"
-         landmarkName = "-loadRouteForRouting:"
+         landmarkName = "-loadRouteForRouteId:withPlan:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -827,12 +827,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "374176317.196736"
+         timestampString = "374243077.75161"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "619"
-         endingLineNumber = "619"
-         landmarkName = "-removeWayPoint:"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
+         landmarkName = "-newRoute"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -840,12 +840,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "374176535.708315"
+         timestampString = "374178357.342155"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "645"
-         endingLineNumber = "645"
-         landmarkName = "-removeWayPointAtIndex:"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
+         landmarkName = "-didReceiveNotification:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/controllers/Map/MapViewController.m"
+         timestampString = "374178357.342155"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "182"
+         endingLineNumber = "182"
+         landmarkName = "-didReceiveNotification:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

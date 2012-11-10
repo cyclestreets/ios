@@ -147,6 +147,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)listNotificationInterests{
 	
+	[self initialise];
 	
 	[notifications addObject:CSMAPSTYLECHANGED];
 	[notifications addObject:CSROUTESELECTED];
@@ -171,8 +172,22 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
 		
+		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
+			[self locationDidComplete:notification];
+		}
 		
-		
+	}
+	
+	if([name isEqualToString:CSROUTESELECTED]){
+		[self updateSelectedRoute];
+	}
+	
+	if([name isEqualToString:CSLASTLOCATIONLOAD]){
+		[self loadLocation];
+	}
+	
+	if([name isEqualToString:EVENTMAPROUTEPLAN]){
+		[self didSelectNewRoutePlan:notification];
 	}
 
 	if([name isEqualToString:CSMAPSTYLECHANGED]){
@@ -288,13 +303,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
 														   style:UIBarButtonItemStyleBordered
 														  target:self
-														  action:@selector(didLocation)];
+														  action:@selector(locationButtonSelected)];
 	_locationButton.width = 40;
 	
 	self.searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
 													   style:UIBarButtonItemStyleBordered
 													  target:self
-													  action:@selector(didSearch)];
+													  action:@selector(searchButtonSelected)];
 	_searchButton.width = 40;
 	
 	self.changePlanButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_routePlan.png"]
@@ -306,7 +321,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan Route"
 														style:UIBarButtonItemStyleBordered
 													   target:self
-													   action:@selector(didRoute)];
+													   action:@selector(routeButtonSelected)];
 	
 	
 	
@@ -369,8 +384,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		{
 			BetterLog(@"MapPlanningStateStartPlanning");
 			
-			_routeButton.title = @"Plan route";
-			_routeButton.style = UIBarButtonItemStyleDone;
 			_searchButton.enabled = NO;
 			
 			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
@@ -461,6 +474,69 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+#pragma mark Route Display
+//
+/***********************************************
+ * @description			Route loading
+ ***********************************************/
+//
+
+-(void)updateSelectedRoute{
+	
+	BetterLog(@"");
+	[self showRoute:[RouteManager sharedInstance].selectedRoute];
+}
+
+- (void) showRoute:(RouteVO *)newRoute {
+	
+	BetterLog(@"route=%@",newRoute);
+	
+	self.route = newRoute;
+	
+	if (_route == nil || [_route numSegments] == 0) {
+		[self clearRoute];
+	} else {
+		[self newRoute];
+	}
+}
+
+- (void) clearRoute {
+	
+	self.route = nil;
+	[_mapView.markerManager removeMarkers];
+	[_waypointArray removeAllObjects];
+	[self stopLocating];
+	
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
+	
+	[self updateUItoState:MapPlanningStateNoRoute];
+	
+	[[RouteManager sharedInstance] clearSelectedRoute];
+}
+
+- (void) newRoute {
+	
+	BetterLog(@"");
+	CLLocationCoordinate2D ne=[_route insetNorthEast];
+	CLLocationCoordinate2D sw=[_route insetSouthWest];
+	[_mapView zoomWithLatLngBoundsNorthEast:ne SouthWest:sw];
+	
+	[_mapView.markerManager removeMarkers];
+	[_waypointArray removeAllObjects];
+	[self stopLocating];
+	
+	CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
+	[self addWayPointAtCoordinate:startLocation];
+	CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
+	[self addWayPointAtCoordinate:endLocation];
+	
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
+	[self updateUItoState:MapPlanningStateRoute];
+}
+
+
 //------------------------------------------------------------------------------------
 #pragma mark - Waypoints
 //------------------------------------------------------------------------------------
@@ -491,6 +567,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 -(void)assessWayPointAddition:(CLLocationCoordinate2D)cooordinate{
+	
+	if(_uiState==MapPlanningStateRoute)
+		return;
 	
 	
 	BOOL acceptWaypoint=YES;
@@ -934,23 +1013,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	_markerMenuOpen=NO;
 	
-	BetterLog(@"self.planningState=%i ",self.uiState);
-	
 	BOOL result=NO;
 	
-	if(_uiState!=MapPlanningStateRoute){
+	if(_uiState!=MapPlanningStateRoute || _uiState!=MapPlanningStateNoRoute){
 		
-		_activeMarker=marker;
-		
-		/*
-		if (marker == start || marker == end) {
+		if([_mapView.markerManager.markers containsObject:marker]){
 			_activeMarker=marker;
 			result=YES;
 		}else{
 			_activeMarker=nil;
 		}
-		 */
-		
 	}
 	
 	_mapView.enableDragging=!result;
