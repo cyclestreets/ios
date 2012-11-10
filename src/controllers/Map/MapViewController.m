@@ -1044,6 +1044,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		CGPoint point = [touch locationInView:_markerTouchView];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
 		[[map markerManager] moveMarker:_activeMarker AtLatLon:location];
+		WayPointVO *waypoint=[self findWayPointForMarker:_activeMarker];
+		waypoint.coordinate=location;
 	}
 	
 }
