@@ -347,6 +347,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (void)updateUItoState:(MapPlanningState)state{
 	
+	
 	self.previousUIState=_uiState;
 	self.uiState = state;
 	
@@ -384,7 +385,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		{
 			BetterLog(@"MapPlanningStateStartPlanning");
 			
-			_searchButton.enabled = NO;
+			_searchButton.enabled = YES;
 			
 			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
             
@@ -398,7 +399,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 			_routeButton.title = @"Plan route";
 			_routeButton.style = UIBarButtonItemStyleDone;
-			_searchButton.enabled = NO;
+			_searchButton.enabled = YES;
 			
 			items=@[_waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton];
             [self.toolBar setItems:items animated:YES ];
@@ -412,7 +413,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			_routeButton.title = @"New route";
 			_routeButton.style = UIBarButtonItemStyleBordered;
 			
-			_searchButton.enabled = NO;
+			_searchButton.enabled = YES;
 			
 			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
             [self.toolBar setItems:items animated:NO ];
@@ -575,13 +576,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	BOOL acceptWaypoint=YES;
 	
 	// location is too near any other locations> reject
-	if (_programmaticChange && _uiState==MapPlanningStatePlanning) {
+	if (_uiState==MapPlanningStatePlanning || _uiState==MapPlanningStateStartPlanning) {
 		
 		acceptWaypoint=[self assesWaypointLocationDistance:cooordinate];
 		
 		if(acceptWaypoint==NO){
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Point error" andMessage:@"Move the map to set a this point further away."];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Point error" andMessage:@"Touch somewhere else or select a different Search location to set this point further away." andDelay:3 andAllowTouch:NO];
 			[self updateUItoState:_previousUIState];
+			return;
 		}
 	}
 	
@@ -1226,8 +1228,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[self assessWayPointAddition:location];
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
-	[self stopLocating];
-	 
+	
+	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 }
 
 
