@@ -182,9 +182,18 @@
 }
 
 
-
-
-
+//
+/***********************************************
+ * @description			TableView move support
+ ***********************************************/
+//
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	return UITableViewCellEditingStyleDelete;
+}
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
 //
 /***********************************************

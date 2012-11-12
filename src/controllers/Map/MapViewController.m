@@ -534,6 +534,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
+	
+	// close left vc if open
+	
 	[self updateUItoState:MapPlanningStateRoute];
 }
 
@@ -582,7 +585,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 		if(acceptWaypoint==NO){
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Point error" andMessage:@"Touch somewhere else or select a different Search location to set this point further away." andDelay:3 andAllowTouch:NO];
-			[self updateUItoState:_previousUIState];
 			return;
 		}
 	}

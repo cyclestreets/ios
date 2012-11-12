@@ -303,6 +303,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						childNavController.navigationBarHidden=YES;
 						
 						IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:vccontroller leftViewController:childNavController];
+						
 						deckController.panningMode=IIViewDeckNoPanning;
 						deckController.centerhiddenInteractivity=IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
 						deckController.navigationControllerBehavior = IIViewDeckNavigationControllerIntegrated;
