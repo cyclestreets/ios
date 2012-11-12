@@ -13,7 +13,6 @@
 #import "RouteListViewController.h"
 #import "RouteManager.h"
 #import "ButtonUtilities.h"
-#import <Crashlytics/Crashlytics.h>
 #import "FavouritesManager.h"
 
 @interface RoutesViewController()
