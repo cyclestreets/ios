@@ -707,6 +707,8 @@
 		28C4ABF31450708900A0ECD3 /* btn_slider_track_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABE71450708900A0ECD3 /* btn_slider_track_pressed@2x.png */; };
 		28C8342015A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */; };
 		28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
+		28CA8DE816525CFF000436ED /* UIButtonBarStop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CA8DE716525CFF000436ED /* UIButtonBarStop@2x.png */; };
+		28CA8DE916525CFF000436ED /* UIButtonBarStop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CA8DE716525CFF000436ED /* UIButtonBarStop@2x.png */; };
 		28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
 		28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
@@ -1294,6 +1296,7 @@
 		28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardCategoryMenuView.xib; path = photowizard/PhotoWizardCategoryMenuView.xib; sourceTree = "<group>"; };
 		28C8342115A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryMenuViewController.h; sourceTree = "<group>"; };
 		28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryMenuViewController.m; sourceTree = "<group>"; };
+		28CA8DE716525CFF000436ED /* UIButtonBarStop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarStop@2x.png"; sourceTree = "<group>"; };
 		28CBEDAB1612DCF5002CDE5A /* NewMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewMapViewController.h; path = Map/NewMapViewController.h; sourceTree = "<group>"; };
 		28CBEDAC1612DCF5002CDE5A /* NewMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewMapViewController.m; path = Map/NewMapViewController.m; sourceTree = "<group>"; };
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
@@ -2438,6 +2441,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				28CA8DE716525CFF000436ED /* UIButtonBarStop@2x.png */,
 				289C01FA1647DB85001A4621 /* UIIcon_walking@2x.png */,
 				289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */,
 				2801301315E636070092D509 /* Icon_currentroutecell@2x.png */,
@@ -2946,6 +2950,7 @@
 				28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */,
 				289C01FB1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */,
 				289C01FE1647DB8E001A4621 /* UIIcon_walking.png in Resources */,
+				28CA8DE816525CFF000436ED /* UIButtonBarStop@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3146,6 +3151,7 @@
 				284706811600902200D5E58B /* APIKey_live.txt in Resources */,
 				289C01FC1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */,
 				289C01FF1647DB8E001A4621 /* UIIcon_walking.png in Resources */,
+				28CA8DE916525CFF000436ED /* UIButtonBarStop@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
