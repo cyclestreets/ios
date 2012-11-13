@@ -3632,7 +3632,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/lib/external/Crashlytics\"",
 					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3677,7 +3676,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/lib/external/Crashlytics\"",
 					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3721,7 +3719,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/lib/external/Crashlytics\"",
 					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
