@@ -191,6 +191,17 @@
 	
 	return UITableViewCellEditingStyleDelete;
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	if(editingStyle==UITableViewCellEditingStyleDelete){
+		[_dataProvider removeObjectAtIndex:indexPath.row];
+		[delegate performSelector:@selector(wayPointwasDeleted)];
+		[self.tableView reloadData];
+	}
+	
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }

@@ -121,12 +121,7 @@
 	UILongPressGestureRecognizer *movingGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
 	[movingGestureRecognizer setDelegate:self];
 	[self addGestureRecognizer:movingGestureRecognizer];
-	
-	UISwipeGestureRecognizer *swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleCellSwipe:)];
-	swipeGestureRecognizer.direction=UISwipeGestureRecognizerDirectionLeft;
-	[swipeGestureRecognizer setDelegate:self];
-	[self addGestureRecognizer:swipeGestureRecognizer];
-	
+		
 	[self setMovingGestureRecognizer:movingGestureRecognizer];
 }
 
@@ -237,39 +232,6 @@
 	return shouldBegin;
 }
 
-- (void)handleCellSwipe:(UISwipeGestureRecognizer *)gestureRecognizer{
-	
-	BetterLog(@"");
-	
-	switch ([gestureRecognizer state]){
-	
-	case UIGestureRecognizerStateEnded:
-	{
-		CGPoint touchPoint = [gestureRecognizer locationInView:self];
-		
-		// Grap the touched index path
-		NSIndexPath *touchedIndexPath = [self indexPathForRowAtPoint:touchPoint];
-		
-		// Check for a valid index path, otherwise cancel the touch
-		if (!touchedIndexPath || [touchedIndexPath section] == NSNotFound || [touchedIndexPath row] == NSNotFound) {
-			[gestureRecognizer cancelTouch];
-			break;
-		}
-		
-		// Get the touched cell and reset it's selection state
-		FMMoveTableViewCell *touchedCell = (FMMoveTableViewCell *)[self cellForRowAtIndexPath:touchedIndexPath];
-		[touchedCell setSelected:NO];
-		[touchedCell setHighlighted:NO];
-		
-		touchedCell.editing=YES;
-		
-	}
-			
-	break;
-			
-	}
-	
-}
 
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer

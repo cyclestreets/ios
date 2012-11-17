@@ -598,7 +598,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 	
 	
-	// call addWayPointAtCoordinate
 	[self addWayPointAtCoordinate:cooordinate];
 	
 	[self assessUIState];
@@ -658,6 +657,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)wayPointArraywasReordered{
 	[self updateWaypointStatuses];
+}
+-(void)wayPointwasDeleted{
+	[self updateWaypointStatuses];
+	
+	if(_waypointArray.count<=1){
+		[self assessUIState];
+		[self.viewDeckController closeLeftViewAnimated:YES];
+	}
 }
 
 
