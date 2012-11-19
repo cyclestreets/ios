@@ -485,6 +485,8 @@
 		2834377715DD5DC300B00FD5 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
 		2834377815DD5DC300B00FD5 /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AD64BA131FB7EC008527FC /* libMapView.a */; };
 		2834377915DD5DC300B00FD5 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
+		28363419165A73AB0039246E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28363418165A73AB0039246E /* Crashlytics.framework */; };
+		2836341A165A73AB0039246E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28363418165A73AB0039246E /* Crashlytics.framework */; };
 		28373E1F164814A900F5E356 /* WayPointView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28373E1E164814A900F5E356 /* WayPointView.xib */; };
 		28373E20164814A900F5E356 /* WayPointView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28373E1E164814A900F5E356 /* WayPointView.xib */; };
 		28373E2216481A0C00F5E356 /* WayPointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28373E2116481A0C00F5E356 /* WayPointCell.xib */; };
@@ -723,8 +725,6 @@
 		28C4ABF31450708900A0ECD3 /* btn_slider_track_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABE71450708900A0ECD3 /* btn_slider_track_pressed@2x.png */; };
 		28C8342015A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */; };
 		28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
-		28CA8E211652A7C2000436ED /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CA8E1E1652A7AC000436ED /* Crashlytics.framework */; };
-		28CA8E221652A7C6000436ED /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CA8E1E1652A7AC000436ED /* Crashlytics.framework */; };
 		28CBBC9F1641B57E005E7056 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
 		28CBBCA01641B57F005E7056 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
 		28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
@@ -1000,6 +1000,7 @@
 		283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_norecentroutes.png; sourceTree = "<group>"; };
 		283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_dev.txt; path = docs/APIKey_dev.txt; sourceTree = SOURCE_ROOT; };
 		2834378015DD5DC300B00FD5 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28363418165A73AB0039246E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../../../../../AppCore/external/Crashlytics/Crashlytics.framework; sourceTree = "<group>"; };
 		28373E1E164814A900F5E356 /* WayPointView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WayPointView.xib; sourceTree = "<group>"; };
 		28373E2116481A0C00F5E356 /* WayPointCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WayPointCell.xib; sourceTree = "<group>"; };
 		28373E2416481AFB00F5E356 /* WayPointCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayPointCellView.h; sourceTree = "<group>"; };
@@ -1326,7 +1327,6 @@
 		28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardCategoryMenuView.xib; path = photowizard/PhotoWizardCategoryMenuView.xib; sourceTree = "<group>"; };
 		28C8342115A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryMenuViewController.h; sourceTree = "<group>"; };
 		28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryMenuViewController.m; sourceTree = "<group>"; };
-		28CA8E1E1652A7AC000436ED /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		28CBBC9B1641B498005E7056 /* WayPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WayPointViewController.h; path = Map/WayPointViewController.h; sourceTree = "<group>"; };
 		28CBBC9C1641B498005E7056 /* WayPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WayPointViewController.m; path = Map/WayPointViewController.m; sourceTree = "<group>"; };
 		28CBEDAB1612DCF5002CDE5A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Map/MapViewController.h; sourceTree = "<group>"; };
@@ -1402,7 +1402,7 @@
 				28AD64C9131FB870008527FC /* libMapView.a in Frameworks */,
 				2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */,
 				289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */,
-				28CA8E211652A7C2000436ED /* Crashlytics.framework in Frameworks */,
+				28363419165A73AB0039246E /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1425,7 +1425,7 @@
 				2834377715DD5DC300B00FD5 /* libxml2.dylib in Frameworks */,
 				2834377815DD5DC300B00FD5 /* libMapView.a in Frameworks */,
 				2834377915DD5DC300B00FD5 /* AddressBook.framework in Frameworks */,
-				28CA8E221652A7C6000436ED /* Crashlytics.framework in Frameworks */,
+				2836341A165A73AB0039246E /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2599,7 +2599,7 @@
 		28CA8E1D1652A7AC000436ED /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
-				28CA8E1E1652A7AC000436ED /* Crashlytics.framework */,
+				28363418165A73AB0039246E /* Crashlytics.framework */,
 			);
 			path = Crashlytics;
 			sourceTree = "<group>";
@@ -3247,7 +3247,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "x../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
+			shellScript = "../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3627,6 +3627,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib/external/Crashlytics\"",
+					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3670,6 +3671,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib/external/Crashlytics\"",
+					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
@@ -3712,6 +3714,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib/external/Crashlytics\"",
+					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3756,6 +3759,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib/external/Crashlytics\"",
+					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
@@ -3799,6 +3803,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib/external/Crashlytics\"",
+					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
@@ -3914,6 +3919,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/lib/external/Crashlytics\"",
+					"\"$(SRCROOT)/../../AppCore/external/Crashlytics\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CycleStreets_Prefix.pch;
