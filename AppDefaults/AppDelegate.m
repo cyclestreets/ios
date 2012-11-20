@@ -371,9 +371,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	BetterLog(@"");
 	
-	// TODO: why is this loading stuff happenign here, it should be part of StartUpManger sequence
-	
-	
 	// Check we have network
     Reachability *internetReach = [Reachability reachabilityForInternetConnection];
 	NetworkStatus internetStatus = [internetReach currentReachabilityStatus];	
