@@ -487,6 +487,7 @@
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		284706811600902200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
 		284706821600903200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
+		284EDF72165B9F4D00D28A80 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C3C457165156EB00D4DB3B /* Crashlytics.framework */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -557,7 +558,6 @@
 		289C01FF1647DB8E001A4621 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 289C01FD1647DB8E001A4621 /* UIIcon_walking.png */; };
 		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
 		289DAF3D165168A2002B1C3A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C3C457165156EB00D4DB3B /* Crashlytics.framework */; };
-		289DAF3E165168A6002B1C3A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C3C457165156EB00D4DB3B /* Crashlytics.framework */; };
 		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
@@ -1393,7 +1393,7 @@
 				2834377715DD5DC300B00FD5 /* libxml2.dylib in Frameworks */,
 				2834377815DD5DC300B00FD5 /* libMapView.a in Frameworks */,
 				2834377915DD5DC300B00FD5 /* AddressBook.framework in Frameworks */,
-				289DAF3E165168A6002B1C3A /* Crashlytics.framework in Frameworks */,
+				284EDF72165B9F4D00D28A80 /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

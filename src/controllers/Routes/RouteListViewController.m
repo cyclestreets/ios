@@ -124,15 +124,17 @@
         if(isSectioned==YES){
             self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString" sortedBy:@"dateString"];
             self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO ascending:NO];
+			
+			
         }
 		
-		if([keys count]>0){
-			[self createRowHeightsArray];
-			[self createSectionHeadersArray];
-			[self.tableView reloadData];
+		[self createRowHeightsArray];
 		
-			[self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
-		}
+		if([keys count]>0 && isSectioned==YES)
+			[self createSectionHeadersArray];
+		
+		[self.tableView reloadData];
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
         
     }else{
 		if(isSectioned==YES){
