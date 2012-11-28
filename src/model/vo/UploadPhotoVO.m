@@ -11,6 +11,7 @@
 #import "SettingsManager.h"
 #import "NSDate+Helper.h"
 #import "StringUtilities.h"
+#import "Reachability.h"
 
 @implementation UploadPhotoVO
 @synthesize image;
@@ -134,14 +135,27 @@
 
 - (NSData *)uploadData {
 	if (image) {
+		
+		UIImage *scaledImage;
+		
+		Reachability *reachability=[Reachability reachabilityForLocalWiFi];
+		NetworkStatus status=[reachability currentReachabilityStatus];
+		
+		if(status==ReachableViaWiFi){
+			
+			scaledImage=image;git
+			
+		}else{
+			
+			 NSString *imageSize = [SettingsManager sharedInstance].dataProvider.imageSize;
+			if ([imageSize isEqualToString:@"full"]) {
+				scaledImage = image;
+			} else {
+				scaledImage = [ImageManipulator resizeImage:image destWidth:640 destHeight:480];
+			}
+			
+		}
         
-        UIImage *scaledImage;
-        NSString *imageSize = [SettingsManager sharedInstance].dataProvider.imageSize;
-        if ([imageSize isEqualToString:@"full"]) {
-            scaledImage = image;
-        } else {
-            scaledImage = [ImageManipulator resizeImage:image destWidth:640 destHeight:480];
-        }
 		return UIImageJPEGRepresentation( scaledImage, 0.8);		
 	}
 	return nil;
