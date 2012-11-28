@@ -21,7 +21,7 @@
 @synthesize caption;
 @synthesize date;
 @synthesize responseDict;
-
+@synthesize bearing;
 
 
 //=========================================================== 
