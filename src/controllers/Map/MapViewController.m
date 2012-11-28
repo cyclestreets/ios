@@ -640,13 +640,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		marker=[Markers markerIntermediate:[NSString stringWithFormat:@"%i",waypointindex]];
 		waypoint.waypointType=WayPointTypeIntermediate;
 		
-		[_waypointArray insertObject:waypoint atIndex:waypointindex];
+		[_waypointArray addObject:waypoint];
 	}
 	
 	[[_mapView markerManager ] addMarker:marker AtLatLong:coords];
 	
 	waypoint.marker=marker;
 	waypoint.coordinate=coords;
+	
+	[self updateWaypointStatuses];
 	
 }
 
