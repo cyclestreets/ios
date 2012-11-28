@@ -773,6 +773,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		[menuController setMenuVisible:YES animated:YES];
 	
 	_markerMenuOpen=YES;
+	_markerTouchView.proxyTouchEvent=NO;
 	
 }
 
@@ -787,6 +788,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 	
 	_markerMenuOpen=NO;
+	_markerTouchView.proxyTouchEvent=NO;
 	
 }
 
@@ -958,6 +960,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
 	
+	BetterLog(@"");
+	
+	if(_markerMenuOpen==YES){
+		_markerMenuOpen=NO;
+		_markerTouchView.proxyTouchEvent=NO;
+		return;
+	}
+	
 	if(_singleTapDidOccur==NO){
 		_singleTapDidOccur=YES;
 		_singleTapPoint=point;
@@ -978,6 +988,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 - (void) singleTapDelayExpired {
+	
+	BetterLog(@"");
+	
 	if(_singleTapDidOccur==YES){
 		_singleTapDidOccur=NO;
 		CLLocationCoordinate2D location = [_mapView pixelToLatLong:_singleTapPoint];
