@@ -134,9 +134,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 											   object:nil];
 	
 	
-	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItem];
-	backButton.action=@selector(backButtonSelected);
-	backButton.target=self;
+	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItemwithSelector:@selector(backButtonSelected) target:self];
 	NSMutableArray *toolbaritems=[_toolBar.items mutableCopy];
 	[toolbaritems insertObject:backButton atIndex:0];
 	_toolBar.items=toolbaritems;
@@ -145,6 +143,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	UISwipeGestureRecognizer *oneFingerSwipeUp =
 	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
+	oneFingerSwipeUp.numberOfTouchesRequired=3;
 	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
 	[_footerView addGestureRecognizer:oneFingerSwipeUp];
 }
@@ -194,7 +193,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)setPrevNext {
 	//set the prev/next/of
 	[_prevPointButton setEnabled:YES];
-	if (index == 0) {
+	if (_index == 0) {
 		[_prevPointButton setEnabled:NO];
 	}
 	[_nextPointButton setEnabled:YES];

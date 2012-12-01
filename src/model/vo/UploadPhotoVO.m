@@ -143,7 +143,7 @@
 		
 		if(status==ReachableViaWiFi){
 			
-			scaledImage=image;git
+			scaledImage=image;
 			
 		}else{
 			

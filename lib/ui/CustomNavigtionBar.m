@@ -406,7 +406,7 @@
 #pragma mark - Class methods
 //------------------------------------------------------------------------------------
 
-+(UIBarButtonItem*)createBackButtonItem{
++(UIBarButtonItem*)createBackButtonItemwithSelector:(SEL)selector target:(id)target{
 	
 	UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
 	button.frame=CGRectMake(0, 0, 52, 30);
@@ -423,6 +423,8 @@
 	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:.7] forState:UIControlStateNormal];
 	button.titleLabel.textAlignment=UITextAlignmentCenter;
 	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+	
+	[button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
 	
 	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
 	
