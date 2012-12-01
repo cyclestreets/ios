@@ -15,10 +15,18 @@
 
 static NSString *const DATAID = @"PoiListing";
 
+
+@interface POIListviewController()
+
+@property (nonatomic, strong)	IBOutlet UITableView		*tableview;
+@property (nonatomic, strong)	NSMutableArray								*dataProvider;
+
+
+
+@end
+
 @implementation POIListviewController
-@synthesize tableview;
-@synthesize dataProvider;
-@synthesize categoryViewController;
+
 
 
 
@@ -73,7 +81,7 @@ static NSString *const DATAID = @"PoiListing";
 	
 	self.dataProvider=[POIManager sharedInstance].dataProvider;
 	
-	if([dataProvider count]>0){
+	if([_dataProvider count]>0){
 		[self.tableview reloadData];
 		[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:NO withMessage:nil];
 	}else{
@@ -107,6 +115,7 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)createPersistentUI{
 	
+	[[POIManager sharedInstance] requestPOIListingData];
 	
 	[self createNavigationBarUI];
 	
@@ -138,7 +147,7 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)createNonPersistentUI{
 	
-	if(dataProvider==nil)
+	if(_dataProvider==nil)
 		[self dataProviderRequestRefresh:SYSTEM];
 	
 }
@@ -156,7 +165,7 @@ static NSString *const DATAID = @"PoiListing";
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [dataProvider count];
+	return [_dataProvider count];
 }
 
 
@@ -165,7 +174,7 @@ static NSString *const DATAID = @"PoiListing";
     
     POITypeCellView *cell = (POITypeCellView *)[POITypeCellView cellForTableView:tv fromNib:[POITypeCellView nib]];
 	
-	POICategoryVO *poitype = [dataProvider objectAtIndex:[indexPath row]];
+	POICategoryVO *poitype = [_dataProvider objectAtIndex:[indexPath row]];
 	cell.dataProvider=poitype;
 	[cell populate];
 	
@@ -177,12 +186,13 @@ static NSString *const DATAID = @"PoiListing";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	if(categoryViewController==nil){
-		self.categoryViewController=[[POICategoryViewController alloc] initWithNibName:[categoryViewController nibName] bundle:nil];
-	}
+	int rowIndex=[indexPath row];
 	
-	categoryViewController.requestdataProvider=[dataProvider objectAtIndex:[indexPath row]];
-	[self.navigationController pushViewController:categoryViewController animated:YES];
+	POICategoryVO *vo=_dataProvider[rowIndex];
+	
+	[[POIManager sharedInstance] requestPOICategoryMapPointsForCategory:vo withNWBounds:_nwCoordinate andSEBounds:_seCoordinate];
+	
+	// map view will get the response as well as this list	
 	
 }
 

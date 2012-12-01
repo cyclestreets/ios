@@ -22,9 +22,10 @@ enum  {
     ValidationCalculateRouteSuccess=1013,
     ValidationRetrieveRouteByIdSuccess=1014,
 	ValidationCategoriesSuccess=1015,
+	ValidationPOIMapCategorySuccess=1016,
 	
 	ValidationSuccessMIN=ValidationLoginSuccess,
-	ValidationSuccessMAX=ValidationCategoriesSuccess,
+	ValidationSuccessMAX=ValidationPOIMapCategorySuccess,
 	
 	// failures
 	ValidationLoginFailed=2000, // 2000
@@ -40,6 +41,7 @@ enum  {
     ValidationCalculateRouteFailed=2017,
     ValidationRetrieveRouteByIdFailed=2018,
 	ValidationCategoriesFailed=2019,
+	ValidationPOIMapCategoryFailed=2020,
 	
 	ValidationCalculateRouteFailedOffNetwork=122711,
 	

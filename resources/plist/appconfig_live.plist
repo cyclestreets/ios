@@ -17,8 +17,10 @@
 			<string>CSTabBar_plan_route.png</string>
 			<key>usesSlidingView</key>
 			<true/>
-			<key>childVC</key>
+			<key>leftchildVC</key>
 			<string>WayPointViewController</string>
+			<key>rightchildVC</key>
+			<string>POIListviewController</string>
 			<key>hidesNavBar</key>
 			<true/>
 		</dict>

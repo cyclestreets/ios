@@ -8,19 +8,15 @@
 
 #import "SuperViewController.h"
 #import "POICategoryViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface POIListviewController : SuperViewController<UITableViewDelegate,UITableViewDataSource>{
 	
-	
-	IBOutlet			UITableView				*tableview;
-	
-	NSMutableArray								*dataProvider;
-	
-	POICategoryViewController					*categoryViewController;
-	
-	
 }
-@property (nonatomic, strong)	IBOutlet UITableView		*tableview;
-@property (nonatomic, strong)	NSMutableArray		*dataProvider;
-@property (nonatomic, strong)	POICategoryViewController		*categoryViewController;
+
+
+@property (nonatomic, assign)	CLLocationCoordinate2D						nwCoordinate;
+@property (nonatomic, assign)	CLLocationCoordinate2D						seCoordinate;
+
+
 @end

@@ -119,7 +119,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.photoIconButton.style = UIBarButtonItemStyleDone;
 	
 	_photoIconsVisisble=YES;
-	
+
 	_footerIsHidden=NO;
 	self.footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
 	[_mapView addSubview:_footerView];
@@ -133,13 +133,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 												 name:@"NotificationMapStyleChanged"
 											   object:nil];
 	
-	
+	/*
 	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItem];
 	backButton.action=@selector(backButtonSelected);
 	backButton.target=self;
 	NSMutableArray *toolbaritems=[_toolBar.items mutableCopy];
 	[toolbaritems insertObject:backButton atIndex:0];
 	_toolBar.items=toolbaritems;
+	 */
 	
 	
 	
@@ -194,7 +195,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)setPrevNext {
 	//set the prev/next/of
 	[_prevPointButton setEnabled:YES];
-	if (index == 0) {
+	if (_index == 0) {
 		[_prevPointButton setEnabled:NO];
 	}
 	[_nextPointButton setEnabled:YES];
@@ -335,7 +336,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	for (RMMarker *marker in toRemove) {
 		if (marker != self.markerLocation) {
-			//Not clear why this gets a 0 refcount in 3.1.3, but it does, so just leak it, it's small.
 			[markerManager removeMarker:marker];
 		}
 	}
@@ -521,6 +521,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		_footerIsHidden=NO;
 	}
+	
+	if(_footerIsHidden==NO){
+		self.infoButton.style=UIBarButtonItemStyleDone;
+	}else {
+		self.infoButton.style=UIBarButtonItemStyleBordered;
+	}
+
 }
 
 

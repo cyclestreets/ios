@@ -60,6 +60,7 @@ extern NSString *const UPLOADUSERPHOTO;
 extern NSString *const LOCATIONFEATURES;
 extern NSString *const POILISTING;
 extern NSString *const POICATEGORYLOCATION;
+extern NSString *const POIMAPLOCATION;
 extern NSString *const PHOTOCATEGORIES;
 
 // INTERNAL
@@ -72,6 +73,7 @@ extern NSString *const LOCATIONFEATURESRESPONSE;
 extern NSString *const NEWROUTEBYIDRESPONSE;
 extern NSString *const POILISTINGRESPONSE;
 extern NSString *const POICATEGORYLOCATIONRESPONSE;
+extern NSString *const POIMAPLOCATIONRESPONSE;
 extern NSString *const SAVEDROUTEUPDATE;
 extern NSString *const MAPSTYLECHANGED;
 

@@ -45,6 +45,7 @@
 #import	"WayPointVO.h"
 #import "IIViewDeckController.h"
 #import "WayPointViewController.h"
+#import "POIListviewController.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -86,42 +87,42 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 //rmmap
-@property (nonatomic, strong) IBOutlet RMMapView		* mapView;
-@property (nonatomic, strong) RMMapContents		* mapContents;
-@property (nonatomic, strong) CLLocation		* lastLocation;
+@property (nonatomic, strong) IBOutlet RMMapView					* mapView;
+@property (nonatomic, strong) RMMapContents							* mapContents;
+@property (nonatomic, strong) CLLocation							* lastLocation;
 
 // sub views
-@property (nonatomic, strong) RoutePlanMenuViewController		* routeplanView;
-@property (nonatomic, strong) WEPopoverController		* routeplanMenu;
+@property (nonatomic, strong) RoutePlanMenuViewController			* routeplanView;
+@property (nonatomic, strong) WEPopoverController					* routeplanMenu;
 @property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
 
 // ui
-@property (nonatomic, strong) IBOutlet UILabel		* attributionLabel;
-@property (nonatomic, strong) IBOutlet RouteLineView		* lineView;
-@property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
-@property (nonatomic, strong) IBOutlet MapMarkerTouchView		* markerTouchView;
-@property (nonatomic, assign) MapAlertType		alertType;
+@property (nonatomic, strong) IBOutlet UILabel						* attributionLabel;
+@property (nonatomic, strong) IBOutlet RouteLineView				* lineView;
+@property (nonatomic, strong) IBOutlet BlueCircleView				* blueCircleView;
+@property (nonatomic, strong) IBOutlet MapMarkerTouchView			* markerTouchView;
+@property (nonatomic, assign) MapAlertType							alertType;
 
 // waypoint ui
 // will need ui for editing waypoints
-@property(nonatomic,assign)  BOOL						markerMenuOpen;
+@property(nonatomic,assign)  BOOL									markerMenuOpen;
 
 
-@property (nonatomic, strong) InitialLocation		* initialLocation; // deprecate
+@property (nonatomic, strong) InitialLocation						* initialLocation; // deprecate
 
 // data
-@property (nonatomic, strong) RouteVO				* route;
-@property (nonatomic, strong) NSMutableArray		* waypointArray;
-@property (nonatomic, strong) RMMarker				* activeMarker;
+@property (nonatomic, strong) RouteVO								* route;
+@property (nonatomic, strong) NSMutableArray						* waypointArray;
+@property (nonatomic, strong) RMMarker								* activeMarker;
 
 // state
-@property (nonatomic, assign) BOOL					doingLocation;
-@property (nonatomic, assign) BOOL					programmaticChange;
-@property (nonatomic, assign) BOOL					avoidAccidentalTaps;
-@property (nonatomic, assign) BOOL					singleTapDidOccur;
-@property (nonatomic, assign) CGPoint				singleTapPoint;
-@property (nonatomic, assign) MapPlanningState		uiState;
-@property (nonatomic, assign) MapPlanningState		previousUIState;
+@property (nonatomic, assign) BOOL									doingLocation;
+@property (nonatomic, assign) BOOL									programmaticChange;
+@property (nonatomic, assign) BOOL									avoidAccidentalTaps;
+@property (nonatomic, assign) BOOL									singleTapDidOccur;
+@property (nonatomic, assign) CGPoint								singleTapPoint;
+@property (nonatomic, assign) MapPlanningState						uiState;
+@property (nonatomic, assign) MapPlanningState						previousUIState;
 
 
 // ui
@@ -908,14 +909,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
--(void)waypointButtonSelected{
+
+-(void)poiButtonSelected{
 	
-	BetterLog(@"");
+	UINavigationController *nav=(UINavigationController*)self.viewDeckController.rightController;
+	POIListviewController *poiviewcontroller=(POIListviewController*)nav.topViewController;
+	poiviewcontroller.delegate=self;
 	
-	WayPointViewController *waypointController=(WayPointViewController*)self.viewDeckController.leftController;
-	waypointController.dataProvider=_waypointArray;
+	CGRect bounds = _mapView.contents.screenBounds;
+	CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
+	CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
 	
-	[self.viewDeckController openLeftViewAnimated:YES];
+	poiviewcontroller.nwCoordinate=nw;
+	poiviewcontroller.seCoordinate=se;
+	
+	
+	[self.viewDeckController openRightViewAnimated:YES];
+	
 	
 }
 

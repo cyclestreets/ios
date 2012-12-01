@@ -158,8 +158,79 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 }
 
 
+//
+/***********************************************
+ * @description			POI MAP BOUNDS REQUEST
+ ***********************************************/
+//
 
-// request 
+-(void)requestPOICategoryMapPointsForCategory:(POICategoryVO*)category withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
+	
+	
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+									 [[CycleStreets sharedInstance] APIKey], @"key",
+									 category.key,@"type",
+									 BOX_FLOAT(nw.longitude),@"n",
+									 BOX_FLOAT(nw.latitude),@"w",
+									 BOX_FLOAT(se.longitude),@"s",
+									 BOX_FLOAT(se.latitude),@"e",
+									 BOX_INT(40),@"limit",nil];
+	
+	NetRequest *request=[[NetRequest alloc]init];
+	request.dataid=POIMAPLOCATION;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.revisonId=0;
+	request.source=USER;
+	
+	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Retrieving %@s in area",category.name] andMessage:nil];
+	
+}
+
+
+-(void)POICategoryMapPointsResponse:(ValidationVO*)validation{
+	
+	
+	switch (validation.validationStatus) {
+			
+		case ValidationPOIMapCategorySuccess:
+			
+			self.categoryDataProvider=[validation.responseDict objectForKey:POIMAPLOCATION];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Retrieved" andMessage:nil];
+			
+			break;
+			
+		case ValidationPOIMapCategoryFailed:
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to retrieve data" andMessage:nil];
+			
+			break;
+		default:
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeServer withTitle:@"Unable to retrieve data" andMessage:nil];
+			
+			break;
+	}
+	
+	
+}
+
+
+
+//
+/***********************************************
+ * @description			POI list for location
+ ***********************************************/
+//
+
+
+// request
 -(void)requestPOICategoryDataForCategory:(POICategoryVO*)category atLocation:(CLLocationCoordinate2D)location{
 	
 	

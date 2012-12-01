@@ -409,7 +409,7 @@
 +(UIBarButtonItem*)createBackButtonItem{
 	
 	UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-	button.frame=CGRectMake(0, 0, 52, 30);
+	button.frame=CGRectMake(0, 5, 52, 30);
 
 	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_Back"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
 	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_Back"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
@@ -423,6 +423,7 @@
 	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:.7] forState:UIControlStateNormal];
 	button.titleLabel.textAlignment=UITextAlignmentCenter;
 	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
+	
 	
 	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
 	

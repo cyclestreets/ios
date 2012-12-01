@@ -7,6 +7,7 @@
 //
 
 #import "POITypeCellView.h"
+#import "GlobalUtilities.h"
 
 @implementation POITypeCellView
 @synthesize imageView;
@@ -17,7 +18,7 @@
 	
 -(void)initialise{
 	
-	
+	self.contentView.backgroundColor=UIColorFromRGB(0xe2e0dc);
 	
 	
 }

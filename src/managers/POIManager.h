@@ -26,6 +26,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(POIManager)
 @property (nonatomic, strong)	NSMutableArray		*categoryDataProvider;
 
 -(void)requestPOIListingData;
+-(void)requestPOICategoryMapPointsForCategory:(POICategoryVO*)category withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se;
 -(void)requestPOICategoryDataForCategory:(POICategoryVO*)category atLocation:(CLLocationCoordinate2D)location;
 
 @end

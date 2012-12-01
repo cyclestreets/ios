@@ -298,11 +298,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 					
 					if(usesSlidingView==YES){
 						
-						UIViewController *childController= (UIViewController*)[[NSClassFromString([navitem objectForKey:@"childVC"]) alloc] initWithNibName:@"WayPointView" bundle:nil];
-						UINavigationController *childNavController = [[UINavigationController alloc] initWithRootViewController:childController];
-						childNavController.navigationBarHidden=YES;
+						UIViewController *leftchildController= (UIViewController*)[[NSClassFromString([navitem objectForKey:@"leftchildVC"]) alloc] initWithNibName:@"WayPointView" bundle:nil];
+						UINavigationController *leftchildNavController = [[UINavigationController alloc] initWithRootViewController:leftchildController];
+						leftchildNavController.navigationBarHidden=YES;
 						
-						IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:vccontroller leftViewController:childNavController];
+						UIViewController *rightchildController= (UIViewController*)[[NSClassFromString([navitem objectForKey:@"rightchildVC"]) alloc] initWithNibName:@"POIListView" bundle:nil];
+						UINavigationController *rightchildNavController = [[UINavigationController alloc] initWithRootViewController:rightchildController];
+						rightchildNavController.navigationBarHidden=YES;
+						
+						IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:vccontroller leftViewController:leftchildNavController rightViewController:rightchildNavController];
 						
 						deckController.panningMode=IIViewDeckNoPanning;
 						deckController.centerhiddenInteractivity=IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
