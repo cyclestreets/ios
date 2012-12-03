@@ -2659,7 +2659,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				2807FCB81666934E0028D7DB /* ImageIO.framework */,
 				28AD6308131FB6C8008527FC /* lib */,
 				28AD61DB131FB69D008527FC /* src */,
 				28AD6207131FB69D008527FC /* resources */,
@@ -2684,6 +2683,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2807FCB81666934E0028D7DB /* ImageIO.framework */,
 				28B78DA11507884C00949870 /* MapKit.framework */,
 				280E24D6144D89230021CDFA /* CFNetwork.framework */,
 				289E6AF8144C357C0079FFE5 /* libz.dylib */,

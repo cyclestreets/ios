@@ -827,7 +827,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		NSDictionary *gpsDict = [metadata objectForKey:(NSString *)kCGImagePropertyGPSDictionary];
         
 		if(gpsDict!=nil){
-			uploadImage.bearing=[gpsDict objectForKey:@"ImgDirection"];
+			uploadImage.bearing=[[gpsDict objectForKey:@"ImgDirection"] intValue];
 		}
 		
 		CLLocation *location = (CLLocation *)[asset valueForProperty:ALAssetPropertyLocation];
