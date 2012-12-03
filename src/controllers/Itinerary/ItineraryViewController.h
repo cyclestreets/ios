@@ -12,9 +12,11 @@
 #import "LayoutBox.h"
 #import "RouteSegmentViewController.h"
 #import "CopyLabel.h"
+#import "BUIconActionSheet.h"
+#import <MessageUI/MessageUI.h>
 @class RouteVO;
 
-@interface ItineraryViewController : SuperViewController <UITableViewDelegate,UITableViewDataSource>{
+@interface ItineraryViewController : SuperViewController <UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>{
 	
 	RouteVO                         *route;
 	NSInteger                       routeId;

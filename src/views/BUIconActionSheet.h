@@ -8,23 +8,35 @@
 
 #import <UIKit/UIKit.h>
 
+
+enum  {
+	BUIconActionSheetIconTypeTwitter	= 999,
+    BUIconActionSheetIconTypeFacebook	= 998,
+    BUIconActionSheetIconTypeMail		= 997,
+	BUIconActionSheetIconTypeSMS		= 996,
+	BUIconActionSheetIconTypeCopy		= 995,
+
+};
+typedef int BUIconActionSheetIconType;
+
+
 @protocol BUIconActionSheetDelegate <NSObject>
 
 @optional
 - (void)actionSheetClickedButtonAtIndex:(NSInteger)buttonIndex;
-- (void)actionSheetClickedButtonWithSelector:(SEL)selector;
+- (void)actionSheetClickedButtonWithType:(BUIconActionSheetIconType)type;
 
 
 @end
 
 @interface BUIconActionSheet : UIView
 
-@property(nonatomic,assign) id<BUIconActionSheetDelegate> delegate;    // weak reference
-@property(nonatomic,assign)  BOOL         isVisible;
+@property(nonatomic,assign) id<BUIconActionSheetDelegate>	delegate;    
+@property(nonatomic,assign)  BOOL							isVisible;
 
 
-- (id)initWithButtons:(NSMutableArray*)buttons;
+- (id)initWithButtons:(NSArray*)buttons andTitle:(NSString*)str;
 
--(void)show:(BOOL)show;
+-(void)show:(BOOL)animated;
 
 @end

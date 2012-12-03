@@ -1,9 +1,8 @@
 //
 //  BUIconButton.h
-//  RacingUK
 //
 //  Created by Neil Edwards on 17/11/2011.
-//  Copyright (c) 2011 Chroma. All rights reserved.
+//  Copyright (c) 2011 buffer. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -20,6 +20,8 @@
 #import "LayoutBox.h"
 #import "ViewUtilities.h"
 #import "GradientView.h"
+#import <Twitter/Twitter.h>
+
 
 @implementation ItineraryViewController
 @synthesize route;
@@ -260,13 +262,125 @@
 
 -(IBAction)shareButtonSelected:(id)sender{
 	
-	// create share view if not already
+	NSArray *activitites;
 	
-	// show
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+		
+		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:[NSString stringWithFormat:@"cyclestreets://route/%@",route.routeid]]] applicationActivities:nil];
+		activity.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll, UIActivityTypePrint, UIActivityTypePostToWeibo];
+		
+		[self presentViewController:activity animated:YES completion:nil];
+		[activity setCompletionHandler:^(NSString *activityType, BOOL completed){
+			
+			if(completed==YES){
+				
+				
+				
+			}
+			
+		}];
+		 
+		 
+		 
+	}else{
+		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS)];
+		
+		BUIconActionSheet *iconSheet=[[BUIconActionSheet alloc] initWithButtons:activitites andTitle:@"Share your CycleStreets route"];
+		iconSheet.delegate=self;
+		
+		[iconSheet show:YES];
+	}
+
 	
 	
 }
 
+// BUIconActionSheet delegate callback
+-(void)actionSheetClickedButtonWithType:(BUIconActionSheetIconType)type{
+	
+	
+	
+	switch (type) {
+		case BUIconActionSheetIconTypeTwitter:
+			
+			if ([TWTweetComposeViewController canSendTweet]) {   
+					
+				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+				[tweetViewController setInitialText:@"My CycleStreet route"];
+					
+				[tweetViewController addURL:[NSURL URLWithString:[NSString stringWithFormat:@"cyclestreets://route/%@",route.routeid]]]; 
+					
+				[self presentViewController:tweetViewController animated:YES completion:nil];
+				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
+					
+					if(result==TWTweetComposeViewControllerResultDone){
+						
+						
+						
+					}
+					
+				}];
+					
+				} else {
+					
+					UIAlertView *alertView = [[UIAlertView alloc]
+											  initWithTitle:@"Sorry"
+											  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+											  delegate:self
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles:nil];
+					[alertView show];
+					
+					
+					
+					
+			}
+				
+			
+		break;
+		
+		case BUIconActionSheetIconTypeMail:
+		{
+			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+			picker.mailComposeDelegate = self;
+			[picker setSubject:[NSString stringWithFormat:@"CycleStreets route %@",route.routeid]];
+			
+			UINavigationBar		*pickerNavBar=[[[picker viewControllers] lastObject] navigationBar];
+			
+			
+			if(picker!=nil)
+				[self presentModalViewController:picker animated:YES];
+		}
+		break;
+			
+		case BUIconActionSheetIconTypeSMS:
+		{
+			
+			MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+			picker.messageComposeDelegate = self;
+			picker.body=[NSString stringWithFormat:@"CycleStreets route %@",route.routeid];
+			
+			if(picker!=nil)
+				[self presentModalViewController:picker animated:YES];
+			
+		}
+			
+		break;
+	}
+	
+}
+
+
+// The mail compose view controller delegate method
+- (void)mailComposeController:(MFMailComposeViewController *)controller  didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+	
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+	
+	[self dismissModalViewControllerAnimated:YES];
+}
 
 
 #define kItineraryPlanView 9001

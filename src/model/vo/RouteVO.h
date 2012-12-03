@@ -63,7 +63,9 @@
 @property (nonatomic, readonly)	CLLocationCoordinate2D					insetNorthEast;
 @property (nonatomic, readonly)	CLLocationCoordinate2D					insetSouthWest;
 
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*fileid;
+@property (unsafe_unretained, nonatomic, readonly)	NSString			*fileid;
+
+@property (unsafe_unretained, nonatomic, readonly)	NSString			*csrouteurl;
 
 @property (nonatomic, readonly)	NSDate							*dateObject;
 

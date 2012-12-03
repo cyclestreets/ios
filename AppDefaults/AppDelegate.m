@@ -85,7 +85,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
-	
+	[[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x008000)];
 	
 	self.tabBarController = [[UITabBarController alloc] init];
 	self.window.rootViewController = self.tabBarController;

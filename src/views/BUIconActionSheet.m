@@ -12,30 +12,36 @@
 #import "StyleManager.h"
 #import "ButtonUtilities.h"
 #import "UIView+Additions.h"
+#import "BUIconButton.h"
+#import "ExpandedUILabel.h"
+#import "AppDelegate.h"
+#import "GradientView.h"
 
 #define COLUMNCOUNT 3
 
 @interface BUIconActionSheet()
 
 @property(nonatomic,strong)  LayoutBox				*viewContainer;
+@property(nonatomic,strong)  NSArray				*buttonArray;
+@property(nonatomic,strong)  NSString				*title;
 
 
-@property(nonatomic,strong)  NSMutableArray         *buttonArray;
-
+-(void)hide:(BOOL)animated;
 
 @end
 
 @implementation BUIconActionSheet
 
-- (id)initWithButtons:(NSMutableArray*)buttons
+- (id)initWithButtons:(NSArray*)buttons andTitle:(NSString*)str
 {
     self = [super init];
     if (self) {
 		
 		self.buttonArray=buttons;
 		_isVisible=NO;
+		_title=str;
 		
-		[self generateUI]
+		[self generateUI];
        
     }
     return self;
@@ -44,14 +50,35 @@
 
 -(void)generateUI{
 	
+	self.frame=CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, FULLSCREENHEIGHT);
 	self.backgroundColor=UIColorFromRGBAndAlpha(0x000000, 0.5);
 	
 	self.viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	_viewContainer.backgroundColor=UIColorFromRGBAndAlpha(0x000000, 0.7);
 	_viewContainer.fixedWidth=YES;
 	_viewContainer.alignMode=BUCenterAlignMode;
 	_viewContainer.layoutMode=BUVerticalLayoutMode;
 	_viewContainer.itemPadding=20;
 	[self addSubview:_viewContainer];
+	
+	GradientView *highlight=[[GradientView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	highlight.backgroundColor=[UIColor clearColor];
+	[highlight setColoursWithCGColors:UIColorFromRGBAndAlpha(0xFFFFFF, 0.5).CGColor :UIColorFromRGBAndAlpha(0xFFFFFF, 0.0).CGColor];
+	[_viewContainer addSubview:highlight];
+	
+	
+	if(_title!=nil){
+		
+		ExpandedUILabel *title=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+		title.fixedWidth=YES;
+		title.font=[UIFont boldSystemFontOfSize:15];
+		title.textColor=[UIColor whiteColor];
+		title.textAlignment=UITextAlignmentCenter;
+		title.text=_title;
+		
+		[_viewContainer addSubview:title];
+		
+	}
 	
 	
 	// grid
@@ -62,7 +89,9 @@
 	
 	BOOL newRow=YES;
 	LayoutBox *colContainer=nil;
-	for (NSString *key in _buttonArray) {
+	for (NSNumber *key in _buttonArray) {
+		
+		BUIconActionSheetIconType type=UNBOX_INT(key);
 		
 		if(newRow==YES){
 			colContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, TABBARHEIGHT)];
@@ -70,8 +99,14 @@
 			newRow=NO;
 		}
 		
-		UIButton *iconButton=[ButtonUtilities UISimpleImageButton:key];
-		[iconButton addTarget:self action:@selector(iconButtonSelectedAtIndex) forControlEvents:UIControlEventTouchUpInside];
+		BUIconButton *iconButton=[[BUIconButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
+		iconButton.buttonBackgroundImage=@"BUActionSheetIcon";
+		iconButton.buttonIconImage=[BUIconActionSheet iconForType:type];
+		iconButton.text=[BUIconActionSheet titleForType:type];
+		[iconButton drawUI];
+		
+		iconButton.button.tag=type;
+		[iconButton.button addTarget:self action:@selector(iconButtonSelectedAtIndex:) forControlEvents:UIControlEventTouchUpInside];
 		[colContainer addSubview:iconButton];
 		
 		if(colContainer.items.count==COLUMNCOUNT){
@@ -81,47 +116,72 @@
 		
 	}
 	
+	[_viewContainer addSubview:rowContainer];
 	
-	UIButton *closeButton=[ButtonUtilities UIButtonWithWidth:200 height:TABBARHEIGHT type:@"grey" text:@"Cancel"];
+	
+	UIButton *closeButton=[ButtonUtilities UIButtonWithWidth:200 height:32 type:@"red" text:@"Cancel"];
 	[closeButton addTarget:self action:@selector(closeButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[_viewContainer addSubview:closeButton];
 	
-	[ViewUtilities alignView:_viewContainer withView:self :BUNoneAlignMode :BUBottomAlignMode];
+	[ViewUtilities alignView:_viewContainer withView:self :BUNoneAlignMode :BUBottomAlignMode :20];
+	
 
 }
 
--(void)show:(BOOL)show{
+-(void)show:(BOOL)animated{
 	
-	if(show==_isVisible)
+	if(_isVisible==YES)
 		return;
 	
 	_isVisible=!_isVisible;
 	
-	if(_isVisible==YES){
+	AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+	UITabBar *tabBar=appdelegate.tabBarController.tabBar;
+	[[[UIApplication sharedApplication] keyWindow] addSubview:self];
+	
+	if(animated==YES){
 		
-		[UIView animateWithDuration:0.4 animations:^{
-			self.y=0;			
+		[UIView animateWithDuration:0.3 animations:^{
+			self.y=0;
+			tabBar.alpha=0;
 		} completion:^(BOOL finished) {
 			
 		}];
 		
 	}else{
-		[UIView animateWithDuration:0.4 animations:^{
-			self.y=SCREENHEIGHT;
-		} completion:^(BOOL finished) {
-			
-		}];
+		self.y=0;
+		tabBar.alpha=0;
 	}
-	
 	
 	
 }
 
 
+-(void)hide:(BOOL)animated{
+	
+	AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+	UITabBar *tabBar=appdelegate.tabBarController.tabBar;
+	
+	if(animated==YES){
+		
+		[UIView animateWithDuration:0.3 animations:^{
+			self.y=FULLSCREENHEIGHT;
+			tabBar.alpha=1;
+		} completion:^(BOOL finished) {
+			[self removeFromSuperview];
+		}];
+		
+	}else{
+		self.y=FULLSCREENHEIGHT;
+		tabBar.alpha=1;
+		[self removeFromSuperview];
+	}
+}
+
 
 -(IBAction)closeButtonSelected:(id)sender{
 	
-	[self show:NO];
+	[self hide:YES];
 	
 }
 
@@ -130,10 +190,55 @@
 	UIButton *button=(UIButton*)sender;
 	int index=button.tag;
 	
-	if([_delegate respondsToSelector:@selector(actionSheetClickedButtonAtIndex:)]){
-		[_delegate actionSheetClickedButtonAtIndex:index];
+	if([_delegate respondsToSelector:@selector(actionSheetClickedButtonWithType:)]){
+		[_delegate actionSheetClickedButtonWithType:index];
 	}
 	
+	[self hide:YES];
+	
+}
+
+
+// const conversions
+
++(NSString*)iconForType:(BUIconActionSheetIconType)type{
+	
+	switch (type) {
+		case BUIconActionSheetIconTypeTwitter:
+			return @"BUIcon_Twitter";
+		break;
+		case BUIconActionSheetIconTypeFacebook:
+			return @"BUIcon_Facebook";
+			break;
+		case BUIconActionSheetIconTypeMail:
+			return @"BUIcon_Mail";
+			break;
+		case BUIconActionSheetIconTypeSMS:
+			return @"BUIcon_SMS";
+		break;
+	}
+	
+	return nil;
+}
+
++(NSString*)titleForType:(BUIconActionSheetIconType)type{
+	
+	switch (type) {
+		case BUIconActionSheetIconTypeTwitter:
+			return @"Twitter";
+			break;
+		case BUIconActionSheetIconTypeFacebook:
+			return @"Facebook";
+			break;
+		case BUIconActionSheetIconTypeMail:
+			return @"Mail";
+			break;
+		case BUIconActionSheetIconTypeSMS:
+			return @"Message";
+		break;
+	}
+	
+	return nil;
 }
 
 
