@@ -258,14 +258,16 @@
  ***********************************************/
 //
 
--(IBAction)saveItineraryButtonSelected:(id)sender{
+-(IBAction)shareButtonSelected:(id)sender{
 	
+	// create share view if not already
 	
-	// save this route to the favourites
+	// show
 	
-	// show name route alert first
 	
 }
+
+
 
 #define kItineraryPlanView 9001
 -(void)showNoActiveRouteView:(BOOL)show{
