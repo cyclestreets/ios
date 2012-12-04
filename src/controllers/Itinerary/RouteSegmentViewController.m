@@ -139,13 +139,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[toolbaritems insertObject:backButton atIndex:0];
 	_toolBar.items=toolbaritems;
 	
-	
-	
-	UISwipeGestureRecognizer *oneFingerSwipeUp =
-	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
-	oneFingerSwipeUp.numberOfTouchesRequired=3;
-	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
-	[_footerView addGestureRecognizer:oneFingerSwipeUp];
+//	
+//	TBD:
+//	UISwipeGestureRecognizer *oneFingerSwipeUp =
+//	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
+//	oneFingerSwipeUp.numberOfTouchesRequired=3;
+//	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
+//	[_footerView addGestureRecognizer:oneFingerSwipeUp];
 }
 
 - (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer

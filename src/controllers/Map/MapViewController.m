@@ -45,6 +45,7 @@
 #import	"WayPointVO.h"
 #import "IIViewDeckController.h"
 #import "WayPointViewController.h"
+#import "UIView+Additions.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -360,6 +361,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateNoRoute");
 			
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			
 			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
 			[self.toolBar setItems:items animated:YES ];
@@ -372,8 +374,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateLocating");
 			
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleDone;
 			
-			items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
+			if([self shouldShowWayPointUI]==YES){
+				items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
+			}else{
+				items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
+			}
+			
 			[self.toolBar setItems:items animated:YES ];
 			
 			
@@ -386,6 +394,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateStartPlanning");
 			
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			
 			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
             
@@ -400,6 +409,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			_routeButton.title = @"Plan route";
 			_routeButton.style = UIBarButtonItemStyleDone;
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			
 			items=@[_waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton];
             [self.toolBar setItems:items animated:YES ];
@@ -412,7 +422,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 			_routeButton.title = @"New route";
 			_routeButton.style = UIBarButtonItemStyleBordered;
-			
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			_searchButton.enabled = YES;
 			
 			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
@@ -440,6 +450,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self updateUItoState:MapPlanningStateLocating];
 	
+	[self resetLocationOverlay];
+	
+	
 }
 
 -(void)stopLocating{
@@ -448,23 +461,32 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self updateUItoState:_previousUIState];
 	
+	[self resetLocationOverlay];
+	
 }
 
 
 -(void)locationDidComplete:(NSNotification *)notification{
 	
+	_blueCircleView.visible=YES;
+	
 	// update ui state
 	[self updateUItoState:_previousUIState];
 	
-	// update map
+	self.lastLocation=notification.object;
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 	
+	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:3];
 }
 
 -(void)locationDidUpdate:(NSNotification *)notification{
 	
-	// update map
+	_blueCircleView.visible=YES;
 	
-	
+	self.lastLocation=notification.object;
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 }
 
 -(void)locationDidFail:(NSNotification *)notification{
@@ -472,6 +494,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	// update ui state
 	[self updateUItoState:_previousUIState];
 	
+}
+
+
+-(void)resetLocationOverlay{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideLocationOverlay) object:nil];
+	_blueCircleView.visible=NO;
 }
 
 
@@ -618,6 +646,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 }
 
+-(BOOL)shouldShowWayPointUI{
+	
+	return _waypointArray.count>1;
+	
+}
+
 
 -(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords{
 	
@@ -754,6 +788,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
 	
 	if(_markerMenuOpen==YES)
+		return;
+	
+	if(_uiState==MapPlanningStateRoute)
 		return;
 	
 	UIMenuController *menuController = [UIMenuController sharedMenuController];
@@ -1041,7 +1078,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	BOOL result=NO;
 	
-	if(_uiState!=MapPlanningStateRoute || _uiState!=MapPlanningStateNoRoute){
+	if(_uiState!=MapPlanningStateRoute && _uiState!=MapPlanningStateNoRoute){
 		
 		if([_mapView.markerManager.markers containsObject:marker]){
 			_activeMarker=marker;
