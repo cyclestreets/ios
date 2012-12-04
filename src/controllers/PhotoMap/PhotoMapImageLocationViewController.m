@@ -10,8 +10,12 @@
 #import "AppConstants.h"
 #import "GradientView.h"
 #import "CopyLabel.h"
+#import "PhotoMapImageInfoViewController.h"
 
-@interface PhotoMapImageLocationViewController(Private) 
+@interface PhotoMapImageLocationViewController()
+
+@property(nonatomic,strong)  UIView							*infoView;
+
 
 -(void)updateContentSize;
 -(void)updateImageSize;
@@ -172,6 +176,16 @@
 	
 }
 
+-(IBAction)flipButtonSelected:(id)sender{
+	
+	PhotoMapImageInfoViewController *infoView=[[PhotoMapImageInfoViewController alloc] initWithNibName:[PhotoMapImageInfoViewController nibName] bundle:nil];
+	
+	
+	[UIView transitionFromView:self.view toView:infoView.view duration:0.7 options:UIViewAnimationOptionTransitionFlipFromLeft completion:^(BOOL finished) {
+		
+	}];
+	
+}
 
 //
 /***********************************************

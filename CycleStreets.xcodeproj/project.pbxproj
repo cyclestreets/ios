@@ -511,6 +511,10 @@
 		2863A3F5134E508800A22093 /* XMLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A38D134E508800A22093 /* XMLRequest.m */; };
 		2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
 		2863A402134E508800A22093 /* RouteSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* RouteSummary.m */; };
+		28641C0E166E554200ED04DF /* PhotoMapImageInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28641C0D166E554200ED04DF /* PhotoMapImageInfoView.xib */; };
+		28641C0F166E554200ED04DF /* PhotoMapImageInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28641C0D166E554200ED04DF /* PhotoMapImageInfoView.xib */; };
+		28641C12166E559000ED04DF /* PhotoMapImageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28641C11166E559000ED04DF /* PhotoMapImageInfoViewController.m */; };
+		28641C13166E559000ED04DF /* PhotoMapImageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28641C11166E559000ED04DF /* PhotoMapImageInfoViewController.m */; };
 		286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
 		28719D92136FE2AD00F69A1B /* LocationSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28719D91136FE2AD00F69A1B /* LocationSearchManager.m */; };
 		2872DF3713283586003995BE /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
@@ -1011,6 +1015,9 @@
 		2863A3A1134E508800A22093 /* FavouritesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCellView.m; sourceTree = "<group>"; };
 		2863A3A6134E508800A22093 /* RouteSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RouteSummary.h; path = Favourites/RouteSummary.h; sourceTree = "<group>"; };
 		2863A3A7134E508800A22093 /* RouteSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RouteSummary.m; path = Favourites/RouteSummary.m; sourceTree = "<group>"; };
+		28641C0D166E554200ED04DF /* PhotoMapImageInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoMapImageInfoView.xib; sourceTree = "<group>"; };
+		28641C10166E559000ED04DF /* PhotoMapImageInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoMapImageInfoViewController.h; path = PhotoMap/PhotoMapImageInfoViewController.h; sourceTree = "<group>"; };
+		28641C11166E559000ED04DF /* PhotoMapImageInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoMapImageInfoViewController.m; path = PhotoMap/PhotoMapImageInfoViewController.m; sourceTree = "<group>"; };
 		286C71C9134F8F05007B57E6 /* LoginVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LoginVO.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		286C71CA134F8F05007B57E6 /* LoginVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVO.m; sourceTree = "<group>"; };
 		28719D90136FE2AD00F69A1B /* LocationSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LocationSearchManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1939,6 +1946,7 @@
 			children = (
 				28735C02144EC97F00726A6C /* PhotoMapImageLocationView.xib */,
 				28735C03144EC97F00726A6C /* PhotoMapView.xib */,
+				28641C0D166E554200ED04DF /* PhotoMapImageInfoView.xib */,
 			);
 			path = photomap;
 			sourceTree = "<group>";
@@ -2586,6 +2594,8 @@
 				28735BFF144EC95B00726A6C /* PhotoMapViewController.m */,
 				28F66F0B135F636200DECFAC /* PhotoMapImageLocationViewController.h */,
 				28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */,
+				28641C10166E559000ED04DF /* PhotoMapImageInfoViewController.h */,
+				28641C11166E559000ED04DF /* PhotoMapImageInfoViewController.m */,
 			);
 			name = PhotoMap;
 			sourceTree = "<group>";
@@ -2951,6 +2961,7 @@
 				289C01FB1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */,
 				289C01FE1647DB8E001A4621 /* UIIcon_walking.png in Resources */,
 				28CA8DE816525CFF000436ED /* UIButtonBarStop@2x.png in Resources */,
+				28641C0E166E554200ED04DF /* PhotoMapImageInfoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3152,6 +3163,7 @@
 				289C01FC1647DB85001A4621 /* UIIcon_walking@2x.png in Resources */,
 				289C01FF1647DB8E001A4621 /* UIIcon_walking.png in Resources */,
 				28CA8DE916525CFF000436ED /* UIButtonBarStop@2x.png in Resources */,
+				28641C0F166E554200ED04DF /* PhotoMapImageInfoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3350,6 +3362,7 @@
 				28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */,
 				28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */,
+				28641C12166E559000ED04DF /* PhotoMapImageInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3516,6 +3529,7 @@
 				2834376615DD5DC300B00FD5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */,
 				28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */,
+				28641C13166E559000ED04DF /* PhotoMapImageInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
