@@ -83,9 +83,9 @@
 	
 	// grid
 	LayoutBox *rowContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, TABBARHEIGHT)];
-	rowContainer.alignMode=BUCenterAlignMode;
+	rowContainer.paddingLeft=30;
 	rowContainer.layoutMode=BUVerticalLayoutMode;
-	rowContainer.itemPadding=10;
+	rowContainer.itemPadding=15;
 	
 	BOOL newRow=YES;
 	LayoutBox *colContainer=nil;
@@ -96,6 +96,7 @@
 		if(newRow==YES){
 			colContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, TABBARHEIGHT)];
 			colContainer.itemPadding=30;
+			[rowContainer addSubview:colContainer];
 			newRow=NO;
 		}
 		
@@ -110,16 +111,16 @@
 		[colContainer addSubview:iconButton];
 		
 		if(colContainer.items.count==COLUMNCOUNT){
-			[rowContainer addSubview:colContainer];
 			newRow=YES;
 		}
 		
 	}
+	[rowContainer refresh];
 	
 	[_viewContainer addSubview:rowContainer];
 	
 	
-	UIButton *closeButton=[ButtonUtilities UIButtonWithWidth:200 height:32 type:@"red" text:@"Cancel"];
+	UIButton *closeButton=[ButtonUtilities UIButtonWithFixedWidth:200 height:40 type:@"red" text:@"Cancel" minFont:15];
 	[closeButton addTarget:self action:@selector(closeButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[_viewContainer addSubview:closeButton];
 	
@@ -216,6 +217,9 @@
 		case BUIconActionSheetIconTypeSMS:
 			return @"BUIcon_SMS";
 		break;
+		case BUIconActionSheetIconTypeCopy:
+			return @"BUIcon_Copy";
+		break;
 	}
 	
 	return nil;
@@ -235,6 +239,9 @@
 			break;
 		case BUIconActionSheetIconTypeSMS:
 			return @"Message";
+		break;
+		case BUIconActionSheetIconTypeCopy:
+			return @"Copy";
 		break;
 	}
 	

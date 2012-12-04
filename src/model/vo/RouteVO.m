@@ -147,7 +147,14 @@
 	
 }
 
+-(NSURL*)csrouteurl{
+	return [NSURL URLWithString:self.csrouteurlString];
+}
 
+
+-(NSString*)csrouteurlString{
+	return [NSString stringWithFormat:@"cyclestreets://route/%@",self.routeid];
+}
 //
 /***********************************************
  * @description			CL getters: note use of CLLocation so NSCoding is optimised.

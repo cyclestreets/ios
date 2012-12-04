@@ -283,7 +283,7 @@
 		 
 		 
 	}else{
-		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS)];
+		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS),@(BUIconActionSheetIconTypeCopy)];
 		
 		BUIconActionSheet *iconSheet=[[BUIconActionSheet alloc] initWithButtons:activitites andTitle:@"Share your CycleStreets route"];
 		iconSheet.delegate=self;
@@ -299,7 +299,6 @@
 -(void)actionSheetClickedButtonWithType:(BUIconActionSheetIconType)type{
 	
 	
-	
 	switch (type) {
 		case BUIconActionSheetIconTypeTwitter:
 			
@@ -308,7 +307,7 @@
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 				[tweetViewController setInitialText:@"My CycleStreet route"];
 					
-				[tweetViewController addURL:[NSURL URLWithString:[NSString stringWithFormat:@"cyclestreets://route/%@",route.routeid]]]; 
+				[tweetViewController addURL:route.csrouteurl];
 					
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -344,9 +343,7 @@
 			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 			picker.mailComposeDelegate = self;
 			[picker setSubject:[NSString stringWithFormat:@"CycleStreets route %@",route.routeid]];
-			
-			UINavigationBar		*pickerNavBar=[[[picker viewControllers] lastObject] navigationBar];
-			
+			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets route %@</a>",route.csrouteurlString,route.routeid] isHTML:YES];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
@@ -363,6 +360,13 @@
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
 			
+		}
+			
+		break;
+			
+		case BUIconActionSheetIconTypeCopy:
+		{
+			[[UIPasteboard generalPasteboard] setString:route.routeid];
 		}
 			
 		break;

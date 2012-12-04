@@ -46,6 +46,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIView+Additions.h"
 #import "IIViewDeckController.h"
 #import "WrapController.h"
+#import "NSString-Utilities.h"
 
 
 @interface AppDelegate(Private)
@@ -107,10 +108,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  * @description			Called if user selects this app as a routing app
  ***********************************************/
 //
-- (BOOL)application:(UIApplication *)application
-			openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-		 annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 	
 	if ([MKDirectionsRequest isDirectionsRequestURL:url]) {
 		MKDirectionsRequest* directionsInfo = [[MKDirectionsRequest alloc] initWithContentsOfURL:url];
@@ -118,9 +116,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[[RouteManager sharedInstance] loadRouteForRouting:directionsInfo];
 		
 		return YES;
-	}
-	else {
-		// Handle other URL types...
+		
+	}else {
+		
+		NSString *str=url.absoluteString;
+		if([str containsString:@"cyclestreets://"]){
+			
+			// navigate to map view and load route by id, format: cyclestreets://route/4632393
+			
+			return YES;
+		}else{
+			return NO;
+		}
 	}
     return NO;
 }
@@ -177,6 +184,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[UserAccount sharedInstance] loginExistingUser];
 }
 
+
+
+
+
 #pragma mark UI Startup overlay
 
 //
@@ -189,7 +200,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"");
 	
 	// animate defaultPNG off screen to smooth out transition to ui state
-	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, 320, 480)];
+	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, SCREENWIDTH, FULLSCREENHEIGHT)];
 	splashView.image = [UIImage imageNamed:@"Default.png"];
 	
 	#if ISDEVELOPMENT
@@ -243,19 +254,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// reset to front because tab controller will be in front now
 	[window bringSubviewToFront:splashView];
 	
-	[UIView beginAnimations:nil context:nil];
-	[UIView	setAnimationDelay:3];
-	[UIView setAnimationDuration:0.5];
-	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:window cache:YES];
-	[UIView setAnimationDelegate:self]; 
-	[UIView setAnimationDidStopSelector:@selector(startupAnimationDone:finished:context:)];
-	splashView.alpha = 0.0;
-	[UIView commitAnimations];
+	[UIView animateWithDuration:0.5 delay:3 options:UIViewAnimationOptionTransitionNone animations:^{
+		splashView.alpha = 0.0;
+	} completion:^(BOOL finished) {
+		[splashView removeFromSuperview];
+	}];
+	
 }
 
-- (void)startupAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-	[splashView removeFromSuperview];
-}
 
 
 //

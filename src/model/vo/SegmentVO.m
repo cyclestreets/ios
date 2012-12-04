@@ -89,7 +89,8 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_footpaths.png", @"footpath", 
 					  @"UIIcon_footpaths.png", @"footway", 
 					  @"UIIcon_footpaths.png", @"pedestrian",
-					  @"UIIcon_footpaths.png", @"steps with channel", 
+					  @"UIIcon_footpaths.png", @"steps with channel",
+					  @"UIIcon_footpaths.png", @"pedestrianized area", // note US spellling!
 					  @"UIIcon_cycle_lanes.png", @"unsegregated shared use", 
 					  @"UIIcon_cycle_lanes.png", @"narrow cycle lane", 
 					  @"UIIcon_cycle_lanes.png", @"cycle lane", 
