@@ -14,6 +14,8 @@
 	CAGradientLayer *originShadow;
 	CAGradientLayer *topShadow;
 	CAGradientLayer *bottomShadow;
+	
+	BOOL			usesBottomShadow;
 }
-
+@property (nonatomic) BOOL		 usesBottomShadow;
 @end

@@ -10,4 +10,9 @@
 
 
 @interface MapMarkerTouchView : UIView
+
+
+@property(nonatomic,assign)  BOOL         proxyTouchEvent;
+
+
 @end
