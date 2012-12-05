@@ -42,6 +42,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import <MapKit/MapKit.h>
 #import "TestFlight.h"
+#import <QuartzCore/QuartzCore.h>
+#import "UIView+Additions.h"
+#import "IIViewDeckController.h"
+#import "WrapController.h"
 
 
 @interface AppDelegate(Private)
@@ -69,7 +73,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	#if defined (CONFIGURATION_Debug)
-		[Crashlytics sharedInstance].debugMode = YES;
+		//[Crashlytics sharedInstance].debugMode = YES;
 		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
 	#endif
 	
@@ -81,6 +85,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
+	
+	
+	self.tabBarController = [[UITabBarController alloc] init];
+	self.window.rootViewController = self.tabBarController;
 	
 
 	[self appendStartUpView];
@@ -133,7 +141,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	startupmanager.delegate=nil;
 	startupmanager=nil;
 	
-	tabBarController = [[UITabBarController alloc] init];
+	
 	[self buildTabbarController:[[AppConfigManager sharedInstance].configDict objectForKey:@"navigation"]];
 	
 	
@@ -142,6 +150,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
+	
+	
 	
 		
 	[window makeKeyAndVisible];	
@@ -269,19 +279,54 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			//BetterLog(@"vcClass=%@  nibName=%@",vcClass,nibName);
 			
 			UIViewController *vccontroller= (UIViewController*)[[NSClassFromString(vcClass) alloc] initWithNibName:nibName bundle:nil];
+			UINavigationController *nav=nil;
 			
 			vccontroller.title=vcTitle;
 			if(vccontroller!=nil){
 				
 				BOOL isVC=[[navitem objectForKey:@"isVC"] boolValue];
+				BOOL usesSlidingView=[[navitem objectForKey:@"usesSlidingView"] boolValue];
+				BOOL hidesNavBar=[[navitem objectForKey:@"hidesNavBar"] boolValue];
+				
 				if (isVC==YES) {
 					UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[navitem objectForKey:@"title"] image:[UIImage imageNamed:[navitem objectForKey:@"tabimage"]] tag:i];
 					vccontroller.hidesBottomBarWhenPushed=hidesBottomBarWhenPushed;
 					[vccontroller setTabBarItem:tabBarItem];
 					[navControllers addObject:vccontroller];
 				}else {
-					UINavigationController *nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
-					[navControllers addObject:nav];
+					
+					
+					if(usesSlidingView==YES){
+						
+						UIViewController *childController= (UIViewController*)[[NSClassFromString([navitem objectForKey:@"childVC"]) alloc] initWithNibName:@"WayPointView" bundle:nil];
+						UINavigationController *childNavController = [[UINavigationController alloc] initWithRootViewController:childController];
+						childNavController.navigationBarHidden=YES;
+						
+						IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:vccontroller leftViewController:childNavController];
+						
+						deckController.panningMode=IIViewDeckNoPanning;
+						deckController.centerhiddenInteractivity=IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
+						deckController.navigationControllerBehavior = IIViewDeckNavigationControllerIntegrated;
+						vccontroller = deckController;
+						
+						nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
+						nav.navigationBarHidden=YES;
+						
+						vccontroller = [[WrapController alloc] initWithViewController:nav];
+						
+				}else{
+					
+					nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
+					
+					
+					
+					if(hidesNavBar==YES){
+						nav.navigationBarHidden=YES;
+					}
+					
+				}
+					
+				[navControllers addObject:nav];
 				}
 
 			}
@@ -325,9 +370,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) backgroundSetup {
 	
 	BetterLog(@"");
-	
-	// TODO: why is this loading stuff happenign here, it should be part of StartUpManger sequence
-	
 	
 	// Check we have network
     Reachability *internetReach = [Reachability reachabilityForInternetConnection];

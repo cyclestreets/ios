@@ -15,7 +15,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        _proxyTouchEvent=YES;
     }
     return self;
 }
@@ -23,7 +23,8 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self setNeedsDisplay];
-	[self.nextResponder touchesEnded:touches withEvent:event];
+	if(_proxyTouchEvent==YES)
+		[self.nextResponder touchesEnded:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {

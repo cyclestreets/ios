@@ -124,18 +124,17 @@
         if(isSectioned==YES){
             self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString" sortedBy:@"dateString"];
             self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO ascending:NO];
-			
-			
         }
 		
 		[self createRowHeightsArray];
 		
-		if([keys count]>0 && isSectioned==YES)
+		if([keys count]>0 && isSectioned==YES){
 			[self createSectionHeadersArray];
+		}
 		
 		[self.tableView reloadData];
-		[self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
-        
+		
+        [self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
     }else{
 		if(isSectioned==YES){
 			self.tableDataProvider=[NSMutableDictionary dictionary];
@@ -252,7 +251,7 @@
 	
 	if(isSectioned==YES){
 		
-		if(keys.count==0)
+		if(keys.count==0 || keys==nil)
 			return cell;
 	
 		NSString *key=[keys objectAtIndex:[indexPath section]];
@@ -435,10 +434,7 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
-	
-	
-}
+
 
 
 //

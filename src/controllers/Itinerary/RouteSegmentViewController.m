@@ -40,82 +40,89 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPointVO.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
+#import "ExpandedUILabel.h"
+#import "GradientView.h"
+#import "CSSegmentFooterView.h"
+
+@interface RouteSegmentViewController()
+
+@property (nonatomic, strong) CSSegmentFooterView						* footerView;
+@property (nonatomic) BOOL												footerIsHidden;
+@property (nonatomic) BOOL												photoIconsVisisble;
+@property (nonatomic, strong) IBOutlet RMMapView						* mapView;
+@property (nonatomic, strong) IBOutlet BlueCircleView					* blueCircleView;
+@property (nonatomic, strong) CLLocation								* lastLocation;
+@property (nonatomic, strong) IBOutlet RouteLineView					* lineView;
+@property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;
+@property (nonatomic, strong) RMMapContents								* mapContents;
+@property (nonatomic, strong) NSMutableArray							* photoMarkers;
+@property (nonatomic, strong) IBOutlet UIToolbar						* toolBar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem					* locationButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem					* infoButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoIconButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem					* prevPointButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem					* nextPointButton;
+@property (nonatomic) NSInteger											photosIndex;
+@property (nonatomic, strong) RMMarker									* markerLocation;
+@property (nonatomic, strong) CLLocationManager							* locationManager;
+@property (nonatomic) BOOL												doingLocation;
+@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
+@property (nonatomic, strong) QueryPhoto								* queryPhoto;
+
+
+//toolbar
+- (IBAction) backButtonSelected;
+- (IBAction) didLocation;
+- (IBAction) didPrev;
+- (IBAction) didNext;
+- (IBAction) didToggleInfo;
+-(IBAction)photoIconButtonSelected;
+
+- (void)setSegmentIndex:(NSInteger)newIndex;
+-(void)updateFooterPositions;
+-(void)updateMapPhotoMarkers;
+- (void) clearPhotos;
+
+@end
+
+
+
 
 @implementation RouteSegmentViewController
-@synthesize footerView;
-@synthesize footerIsHidden;
-@synthesize photoIconsVisisble;
-@synthesize mapView;
-@synthesize blueCircleView;
-@synthesize lastLocation;
-@synthesize lineView;
-@synthesize attributionLabel;
-@synthesize mapContents;
-@synthesize photoMarkers;
-@synthesize locationButton;
-@synthesize infoButton;
-@synthesize photoIconButton;
-@synthesize prevPointButton;
-@synthesize nextPointButton;
-@synthesize index;
-@synthesize photosIndex;
-@synthesize markerLocation;
-@synthesize locationManager;
-@synthesize doingLocation;
-@synthesize locationView;
-@synthesize queryPhoto;
 
-
-@dynamic route;
-//=========================================================== 
-//  route 
-//=========================================================== 
-- (RouteVO *)route
-{
-    return route;
-}
-- (void)setRoute:(RouteVO *)aRoute
-{
-    if (route != aRoute) {
-        route = aRoute;
-		
-		index = 0;
-		
-		[lineView setNeedsDisplay];
-    }
-}
 
 
 - (void)viewDidLoad {
+	
     [super viewDidLoad];
 	
 	//handle taps etc.
-	[mapView setDelegate:self];
+	[_mapView setDelegate:self];
 	
 	//Necessary to start route-me service
 	[RMMapView class];
 	
 	//get the configured map source.
-	mapContents=[[RMMapContents alloc] initWithView:mapView tilesource:[MapViewController tileSource]];
+	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
 	
 	// set up location manager
-	locationManager = [[CLLocationManager alloc] init];
-	doingLocation = NO;
+	self.locationManager = [[CLLocationManager alloc] init];
+	_doingLocation = NO;
 	
-	[blueCircleView setLocationProvider:self];
-	blueCircleView.hidden = YES;
+	[_blueCircleView setLocationProvider:self];
+	_blueCircleView.hidden = YES;
 	
-	[lineView setPointListProvider:self];
+	[_lineView setPointListProvider:self];
 	
 	//photo & info default to ON state
 	self.infoButton.style = UIBarButtonItemStyleDone;
 	self.photoIconButton.style = UIBarButtonItemStyleDone;
 	
-	photoIconsVisisble=YES;
+	_photoIconsVisisble=YES;
 	
-	footerIsHidden=NO;
-	footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
-	[mapView addSubview:footerView];
+	_footerIsHidden=NO;
+	self.footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
+	[_mapView addSubview:_footerView];
 	
 	
 	self.attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000,0.2);
@@ -124,11 +131,48 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(didNotificationMapStyleChanged)
 												 name:@"NotificationMapStyleChanged"
-											   object:nil];		
+											   object:nil];
+	
+	
+	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItemwithSelector:@selector(backButtonSelected) target:self];
+	NSMutableArray *toolbaritems=[_toolBar.items mutableCopy];
+	[toolbaritems insertObject:backButton atIndex:0];
+	_toolBar.items=toolbaritems;
+	
+//	
+//	TBD:
+//	UISwipeGestureRecognizer *oneFingerSwipeUp =
+//	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
+//	oneFingerSwipeUp.numberOfTouchesRequired=3;
+//	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
+//	[_footerView addGestureRecognizer:oneFingerSwipeUp];
 }
 
+- (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer
+{
+	CGPoint point = [recognizer locationInView:[self view]];
+	NSLog(@"Swipe down - start location: %f,%f", point.x, point.y);
+	
+	[self didToggleInfo];
+}
+
+
+
+
+-(void)viewWillAppear:(BOOL)animated{
+	
+	[self setSegmentIndex:_index];
+	
+	[super viewWillAppear:animated];
+}
+
+
+
+
+
+
 - (void) didNotificationMapStyleChanged {
-	mapView.contents.tileSource = [MapViewController tileSource];
+	_mapView.contents.tileSource = [MapViewController tileSource];
 	self.attributionLabel.text = [MapViewController mapAttribution];
 }
 
@@ -140,7 +184,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (NSArray *) pointList {
 	BetterLog(@"");
-	return [MapViewController pointList:route withView:mapView];
+	return [MapViewController pointList:self.route withView:_mapView];
 }
 
 
@@ -148,20 +192,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //helper method for setSegmentIndex
 - (void)setPrevNext {
 	//set the prev/next/of
-	[prevPointButton setEnabled:YES];
-	if (index == 0) {
-		[prevPointButton setEnabled:NO];
+	[_prevPointButton setEnabled:YES];
+	if (_index == 0) {
+		[_prevPointButton setEnabled:NO];
 	}
-	[nextPointButton setEnabled:YES];
-	if (index == [route numSegments]-1) {
-		[nextPointButton setEnabled:NO];
+	[_nextPointButton setEnabled:YES];
+	if (_index == [self.route numSegments]-1) {
+		[_nextPointButton setEnabled:NO];
 	}
 	
-	NSString *message = [NSString stringWithFormat:@"Stage: %d/%d", index+1, [route numSegments]];
-	footerView.segmentIndexLabel.text=message;
+	NSString *message = [NSString stringWithFormat:@"Stage: %d/%d", _index+1, [self.route numSegments]];
+	_footerView.segmentIndexLabel.text=message;
 	 
 	
-	[lineView setNeedsDisplay];
+	[_lineView setNeedsDisplay];
 }
 
 
@@ -179,22 +223,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"");
 	
 	//Check we're still looking for the same page of photos	
-	if (index != photosIndex) return;
+	if (_index != _photosIndex) return;
 	
 	
 	[self clearPhotos];
 	
-	if (photoMarkers == nil) {
-		photoMarkers = [[NSMutableArray alloc] initWithCapacity:10];
+	if (_photoMarkers == nil) {
+		self.photoMarkers = [[NSMutableArray alloc] initWithCapacity:10];
 	}
 	
 	PhotoMapListVO *photoList = [[PhotoMapListVO alloc] initWithElements:elements];
 	for (PhotoMapVO *photo in [photoList photos]) {
 		RMMarker *marker = [Markers markerPhoto];
 		marker.data = photo;
-		[photoMarkers addObject:marker];
-		marker.hidden=!photoIconsVisisble;
-		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
+		[_photoMarkers addObject:marker];
+		marker.hidden=!_photoIconsVisisble;
+		[[_mapView markerManager] addMarker:marker AtLatLong:[photo location]];
 	}
 	self.queryPhoto = nil;
 }
@@ -202,10 +246,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void) clearPhotos {
 	//Clear out the previous list.
-	if (photoMarkers != nil) {
+	if (_photoMarkers != nil) {
 		//NSArray *oldMarkers = [photoMarkers copy];
-		for (RMMarker *oldMarker in photoMarkers) {
-			[[mapView markerManager] removeMarker:oldMarker];
+		for (RMMarker *oldMarker in _photoMarkers) {
+			[[_mapView markerManager] removeMarker:oldMarker];
 		}
 	}
 }
@@ -220,9 +264,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	BetterLog(@"");
 	
-	photosIndex = index;//we are looking for the photos associated with this index
+	self.photosIndex = _index;//we are looking for the photos associated with this index
 	self.queryPhoto = [[QueryPhoto alloc] initNorthEast:ne SouthWest:sw limit:4];
-	[queryPhoto runWithTarget:self onSuccess:@selector(photoSuccess:results:) onFailure:@selector(photoFailureMessage:)];
+	[_queryPhoto runWithTarget:self onSuccess:@selector(photoSuccess:results:) onFailure:@selector(photoFailureMessage:)];
 }
 
 
@@ -251,16 +295,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 - (void)setSegmentIndex:(NSInteger)newIndex {
-	index = newIndex;
-	SegmentVO *segment = [route segmentAtIndex:index];
+	self.index = newIndex;
+	SegmentVO *segment = [self.route segmentAtIndex:_index];
 	SegmentVO *nextSegment = nil;
-	if (index + 1 < [route numSegments]) {
-		nextSegment = [route segmentAtIndex:index+1];
+	if (_index + 1 < [self.route numSegments]) {
+		nextSegment = [self.route segmentAtIndex:_index+1];
 	}
 	
 	// fill the labels from the segment we are showing
-	footerView.dataProvider=segment;
-	[footerView updateLayout];
+	_footerView.dataProvider=[segment infoStringDictionary];
+	[_footerView updateLayout];
 	[self updateFooterPositions];
 	// centre the view around the segment
 	CLLocationCoordinate2D start = [segment segmentStart];
@@ -281,8 +325,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		sw.longitude = end.longitude;
 		ne.longitude = start.longitude;
 	}
-	[mapView zoomWithLatLngBoundsNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw];
-	RMMarkerManager *markerManager = [mapView markerManager];
+	[_mapView zoomWithLatLngBoundsNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw];
+	RMMarkerManager *markerManager = [_mapView markerManager];
 	NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:0];
 	//
 	for (RMMarker *marker in [markerManager markers]) {
@@ -300,8 +344,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self setPrevNext];
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
 	
-	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 }
 
 
@@ -313,15 +357,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)updateFooterPositions{
 	
-	if(footerIsHidden==NO){
-		CGRect	fframe=footerView.frame;
-		CGRect	aframe=attributionLabel.frame;
+	if(_footerIsHidden==NO){
+		CGRect	fframe=_footerView.frame;
+		CGRect	aframe=_attributionLabel.frame;
 		
 		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
 		aframe.origin.y=fframe.origin.y-10-aframe.size.height;
 		
-		footerView.frame=fframe;
-		attributionLabel.frame=aframe;
+		_footerView.frame=fframe;
+		_attributionLabel.frame=aframe;
 	}
 }
 
@@ -332,20 +376,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
  
 //pop back to route overview
-- (IBAction) didRoute {
-	[self dismissModalViewControllerAnimated:YES];
-	
+- (IBAction) backButtonSelected {
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 
 // all the things that need fixed if we have asked (or been forced) to stop doing location.
 - (void)stopDoingLocation {
-	doingLocation = NO;
-	locationButton.style = UIBarButtonItemStyleBordered;
-	[locationManager stopUpdatingLocation];
-	[[mapView markerManager] removeMarker:self.markerLocation];
+	_doingLocation = NO;
+	_locationButton.style = UIBarButtonItemStyleBordered;
+	[_locationManager stopUpdatingLocation];
+	[[_mapView markerManager] removeMarker:self.markerLocation];
 	self.markerLocation=nil;
-	blueCircleView.hidden = YES;
+	_blueCircleView.hidden = YES;
 }
 
 // all the things that need fixed if we have asked (or been forced) to start doing location.
@@ -353,11 +396,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	if([CLLocationManager locationServicesEnabled]==YES){
 	
-		doingLocation = YES;
-		locationButton.style = UIBarButtonItemStyleDone;
-		locationManager.delegate = self;
-		[locationManager startUpdatingLocation];
-		blueCircleView.hidden = NO;
+		_doingLocation = YES;
+		_locationButton.style = UIBarButtonItemStyleDone;
+		_locationManager.delegate = self;
+		[_locationManager startUpdatingLocation];
+		_blueCircleView.hidden = NO;
 	}else {
 		UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
 														   message:@"Location services for CycleStreets are off, please enable in Settings > General > Location Services to use location based features."
@@ -372,8 +415,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (IBAction) didLocation {
 	//turn on/off use of location to automatically move from one map position to the next...
 	BetterLog(@"location");
-	locationManager.delegate = self;
-	if (!doingLocation) {
+	_locationManager.delegate = self;
+	if (!_doingLocation) {
 		[self startDoingLocation];
 	} else {
 		[self stopDoingLocation];
@@ -387,18 +430,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if (!self.markerLocation) {
 		//first location, construct the marker
 		self.markerLocation = [Markers markerWaypoint];
-		[[mapView markerManager] addMarker:self.markerLocation AtLatLong: newLocation.coordinate];
+		[[_mapView markerManager] addMarker:self.markerLocation AtLatLong: newLocation.coordinate];
 	}
-	[[mapView markerManager] moveMarker:self.markerLocation AtLatLon: newLocation.coordinate];
+	[[_mapView markerManager] moveMarker:self.markerLocation AtLatLon: newLocation.coordinate];
 	
 	self.lastLocation = newLocation;
 	
 	// zooms map to show bounding box for location & segment point
-	[mapView zoomWithLatLngBoundsNorthEast:[route maxNorthEastForLocation:lastLocation] SouthWest:[route maxSouthWestForLocation:lastLocation]];
+	[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];
 	
-	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];
-	blueCircleView.hidden=NO;
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
+	_blueCircleView.hidden=NO;
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -425,22 +468,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (IBAction) didPrev {
 	if (index > 0) {
-		[self setSegmentIndex:index-1];
+		[self setSegmentIndex:_index-1];
 	}
 }
 
 - (IBAction) didNext {
-	if (index < [route numSegments]-1) {
-		[self setSegmentIndex:index+1];
+	if (_index < [self.route numSegments]-1) {
+		[self setSegmentIndex:_index+1];
 	}
 }
 
 - (IBAction) didToggleInfo {
 	
-	if (footerIsHidden==NO) {
+	if (_footerIsHidden==NO) {
 		
-		CGRect	fframe=footerView.frame;
-		CGRect	aframe=attributionLabel.frame;
+		CGRect	fframe=_footerView.frame;
+		CGRect	aframe=_attributionLabel.frame;
 		
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationBeginsFromCurrentState:YES];
@@ -449,18 +492,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION;
 		aframe.origin.y=fframe.origin.y-aframe.size.height-10;
 		
-		footerView.frame=fframe;
-		footerView.alpha=0;
-		attributionLabel.frame=aframe;
+		_footerView.frame=fframe;
+		_footerView.alpha=0;
+		_attributionLabel.frame=aframe;
 		
 		[UIView commitAnimations];
 		
-		footerIsHidden=YES;
+		_footerIsHidden=YES;
 		
 	} else {
 		
-		CGRect	fframe=footerView.frame;
-		CGRect	aframe=attributionLabel.frame;
+		CGRect	fframe=_footerView.frame;
+		CGRect	aframe=_attributionLabel.frame;
 		
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationBeginsFromCurrentState:YES];
@@ -469,32 +512,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
 		aframe.origin.y=fframe.origin.y-10-aframe.size.height;
 		
-		footerView.frame=fframe;
-		footerView.alpha=1;
-		attributionLabel.frame=aframe;
+		_footerView.frame=fframe;
+		_footerView.alpha=1;
+		_attributionLabel.frame=aframe;
 		
 		[UIView commitAnimations];
 		
-		footerIsHidden=NO;
-	}
-	
-	if(footerIsHidden==NO){
-		self.infoButton.style=UIBarButtonItemStyleDone;
-	}else {
-		self.infoButton.style=UIBarButtonItemStyleBordered;
+		_footerIsHidden=NO;
 	}
 }
 
 
 -(IBAction)photoIconButtonSelected{
 	
-	photoIconsVisisble=!photoIconsVisisble;
+	_photoIconsVisisble=!_photoIconsVisisble;
 	
-	for (RMMarker *marker in photoMarkers) {
-		marker.hidden=!photoIconsVisisble;
+	for (RMMarker *marker in _photoMarkers) {
+		marker.hidden=!_photoIconsVisisble;
 	}
 	
-	if(photoIconsVisisble==YES){
+	if(_photoIconsVisisble==YES){
 		self.photoIconButton.style=UIBarButtonItemStyleDone;
 	}else {
 		self.photoIconButton.style=UIBarButtonItemStyleBordered;
@@ -507,19 +544,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark Location provider
 
 - (float)getX {
-	CGPoint p = [mapView.contents latLongToPixel:lastLocation.coordinate];
+	CGPoint p = [_mapView.contents latLongToPixel:_lastLocation.coordinate];
 	return p.x;
 }
 
 - (float)getY {
-	CGPoint p = [mapView.contents latLongToPixel:lastLocation.coordinate];
+	CGPoint p = [_mapView.contents latLongToPixel:_lastLocation.coordinate];
 	return p.y;
 }
 
 - (float)getRadius {
 	
-	double metresPerPixel = [mapView.contents metersPerPixel];
-	float locationRadius=(lastLocation.horizontalAccuracy / metresPerPixel);
+	double metresPerPixel = [_mapView.contents metersPerPixel];
+	float locationRadius=(_lastLocation.horizontalAccuracy / metresPerPixel);
 	
 	return MAX(locationRadius, 40.0f);
 }
@@ -527,23 +564,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #pragma mark mapView delegate
 
 - (void) afterMapMove: (RMMapView*) map {
-	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 }
 
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
-	[lineView setNeedsDisplay];
-	[blueCircleView setNeedsDisplay];	
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 }
 
 
 -(void)updateMapPhotoMarkers{
 	
-	CGRect bounds = mapView.contents.screenBounds;
+	CGRect bounds = _mapView.contents.screenBounds;
 
-	CLLocationCoordinate2D nw = [mapView pixelToLatLong:bounds.origin];
-	CLLocationCoordinate2D se = [mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
+	CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
+	CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
 	CLLocationCoordinate2D ne;
 	CLLocationCoordinate2D sw;
 	ne.latitude = nw.latitude;
@@ -574,9 +611,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.prevPointButton = nil;
 	self.nextPointButton = nil;
 	
-	markerLocation = nil;
-	locationManager = nil;
-	locationView = nil;
+	_markerLocation = nil;
+	_locationManager = nil;
+	_locationView = nil;
 	
 	self.queryPhoto = nil;
 }
