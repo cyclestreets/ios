@@ -223,7 +223,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                          photo.feature.tag,@"category", // note: conversion to serverside types
                                          photo.category.tag,@"metacategory", //
                                          photo.dateTime,@"datetime",
-										 BOX_INT(photo.bearing),@"bearing",
                                          [photo uploadData],@"imageData",
 										 nil];
 	

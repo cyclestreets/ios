@@ -364,8 +364,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	BetterLog(@"");
 	
-	if(bestEffortAtLocation!=nil)
-		[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
 	
 }
 

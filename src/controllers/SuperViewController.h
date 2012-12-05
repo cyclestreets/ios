@@ -26,9 +26,6 @@
 -(void)deSelectRowForTableView:(UITableView*)table;
 -(void)doCellButtonSelection:(NSString*)type withDataProvider:(id)data andIndex:(int)index;
 
--(void)wayPointArraywasReordered;
--(void)wayPointwasDeleted;
-
 -(void)UserDidUpdatePhotoLocation:(CLLocation*)location;
 
 @end

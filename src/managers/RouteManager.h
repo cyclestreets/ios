@@ -45,7 +45,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation;
 -(void)loadRouteForCoordinates:(CLLocationCoordinate2D)fromcoordinate to:(CLLocationCoordinate2D)tocoordinate;
 -(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan;
--(void)loadRouteForWaypoints:(NSMutableArray*)waypoints;
 
 -(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest;
 

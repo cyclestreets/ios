@@ -202,7 +202,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 		self.currentPlaces = [[NSMutableArray alloc] init];
 	}
 	
-	//# CR error 2.0.2 #25: Fixed.
+	//# CR error 2.0.2 #25: XMLRequest can return underlying NSData object rather than NSDict
 	if([elements isKindOfClass:[NSDictionary class]]){
 		
 		[self.currentPlaces removeAllObjects];

@@ -401,35 +401,4 @@
 	}
 }
 
-
-//------------------------------------------------------------------------------------
-#pragma mark - Class methods
-//------------------------------------------------------------------------------------
-
-+(UIBarButtonItem*)createBackButtonItemwithSelector:(SEL)selector target:(id)target{
-	
-	UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
-	button.frame=CGRectMake(0, 0, 52, 30);
-
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_Back"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_Back"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
-	
-	
-	[button setTitle:@"Back" forState:UIControlStateNormal];
-	button.titleEdgeInsets=UIEdgeInsetsMake(0, 7, 0, 0);
-	button.titleLabel.userInteractionEnabled=NO;
-	button.titleLabel.font=[UIFont boldSystemFontOfSize:12];;
-	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	[button setTitleShadowColor:[UIColor colorWithRed:.25 green:.25 blue:.25 alpha:.7] forState:UIControlStateNormal];
-	button.titleLabel.textAlignment=UITextAlignmentCenter;
-	button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-	
-	[button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
-	
-	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
-	
-	return barbutton;
-	
-}
-
 @end

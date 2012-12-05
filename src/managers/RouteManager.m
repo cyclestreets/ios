@@ -26,7 +26,6 @@
 #import "RouteVO.h"
 #import <MapKit/MapKit.h>
 #import "UserLocationManager.h"
-#import "WayPointVO.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
@@ -212,12 +211,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
  ***********************************************/
 //
 
--(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation{
-    
-	[self loadRouteForCoordinates:fromlocation.coordinate to:tolocation.coordinate];
-    
-}
-
 
 -(void)loadRouteForCoordinates:(CLLocationCoordinate2D)fromcoordinate to:(CLLocationCoordinate2D)tocoordinate{
 	
@@ -251,61 +244,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 }
 
--(void)loadRouteForWaypoints:(NSMutableArray*)waypoints{
-	
-	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-    SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+-(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation{
     
-    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
-									 
-									 [self convertWaypointArrayforRequest:waypoints],@"itinerarypoints",
-                                     useDom,@"useDom",
-                                     settingsdp.plan,@"plan",
-                                     [settingsdp returnKilometerSpeedValue],@"speed",
-                                     cycleStreets.files.clientid,@"clientid",
-                                     nil];
+	[self loadRouteForCoordinates:fromlocation.coordinate to:tolocation.coordinate];
     
-    NetRequest *request=[[NetRequest alloc]init];
-    request.dataid=CALCULATEROUTE;
-    request.requestid=ZERO;
-    request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
-    
-    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-    
-    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
-	
-	
-	
 }
-
-//
-/***********************************************
- * @description			converts array to lat,long|lat,long... formatted string
- ***********************************************/
-//
--(NSString*)convertWaypointArrayforRequest:(NSMutableArray*)waypoints{
-	
-	NSMutableArray *cooordarray=[NSMutableArray array];
-	
-	for(int i=0;i<waypoints.count;i++){
-		
-		WayPointVO *waypoint=waypoints[i];
-		
-		[cooordarray addObject:waypoint.coordinateString];
-		
-	}
-	
-	return [cooordarray componentsJoinedByString:@"|"];
-	
-}
-
-
-
-
 
 
 
@@ -845,7 +788,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", route.fileid]];
 	
-	//BetterLog(@"routeFile=%@",routeFile);
+	BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] init];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -909,7 +852,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	NSString *routeFile = [[self oldroutesDirectory] stringByAppendingPathComponent:routeid];
 	
-	//BetterLog(@"routeFile=%@",routeFile);
+	BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];

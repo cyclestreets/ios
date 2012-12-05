@@ -13,7 +13,6 @@
 #define SHADOW_RATIO (SHADOW_INVERSE_HEIGHT / SHADOW_HEIGHT)
 
 @implementation ShadowedTableView
-@synthesize usesBottomShadow;
 
 //
 // shadowAsInverse:
@@ -122,36 +121,32 @@
 		topShadow = nil;
 	}
 	
-	if(usesBottomShadow==YES){
-	
-		NSIndexPath *lastRow = [indexPathsForVisibleRows lastObject];
-		if ([lastRow section] == [self numberOfSections] - 1 &&
-			[lastRow row] == [self numberOfRowsInSection:[lastRow section]] - 1)
+	NSIndexPath *lastRow = [indexPathsForVisibleRows lastObject];
+	if ([lastRow section] == [self numberOfSections] - 1 &&
+		[lastRow row] == [self numberOfRowsInSection:[lastRow section]] - 1)
+	{
+		UIView *cell =
+		[self cellForRowAtIndexPath:lastRow];
+		if (!bottomShadow)
 		{
-			UIView *cell =
-			[self cellForRowAtIndexPath:lastRow];
-			if (!bottomShadow)
-			{
-				bottomShadow = [[self shadowAsInverse:NO] retain];
-				[cell.layer insertSublayer:bottomShadow atIndex:0];
-			}
-			else if ([cell.layer.sublayers indexOfObjectIdenticalTo:bottomShadow] != 0)
-			{
-				[cell.layer insertSublayer:bottomShadow atIndex:0];
-			}
-			
-			CGRect shadowFrame = bottomShadow.frame;
-			shadowFrame.size.width = cell.frame.size.width;
-			shadowFrame.origin.y = cell.frame.size.height;
-			bottomShadow.frame = shadowFrame;
+			bottomShadow = [[self shadowAsInverse:NO] retain];
+			//[cell.layer insertSublayer:bottomShadow atIndex:0];
 		}
-		else
+		else if ([cell.layer.sublayers indexOfObjectIdenticalTo:bottomShadow] != 0)
 		{
-			[bottomShadow removeFromSuperlayer];
-			[bottomShadow release];
-			bottomShadow = nil;
+			//[cell.layer insertSublayer:bottomShadow atIndex:0];
 		}
 		
+		CGRect shadowFrame = bottomShadow.frame;
+		shadowFrame.size.width = cell.frame.size.width;
+		shadowFrame.origin.y = cell.frame.size.height;
+		bottomShadow.frame = shadowFrame;
+	}
+	else
+	{
+		[bottomShadow removeFromSuperlayer];
+		[bottomShadow release];
+		bottomShadow = nil;
 	}
 }
 

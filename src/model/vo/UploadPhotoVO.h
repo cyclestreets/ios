@@ -10,16 +10,28 @@
 #import <CoreLocation/CoreLocation.h>
 #import "PhotoCategoryVO.h"
 
-@interface UploadPhotoVO : NSObject
+@interface UploadPhotoVO : NSObject{
     
-
+    UIImage                     *image;
+	CLLocation                  *location; // location from photo
+    CLLocation                  *userLocation; // location from user
+    
+    PhotoCategoryVO                    *category;
+    PhotoCategoryVO                    *feature;
+	
+	NSString					*caption;
+    
+    NSDate                      *date;
+    
+    NSMutableDictionary         *responseDict;
+    
+}
 @property (nonatomic, strong) UIImage		* image;
 @property (nonatomic, strong) CLLocation		* location;
 @property (nonatomic, strong) CLLocation		* userLocation;
 @property (nonatomic, strong) PhotoCategoryVO		* category;
 @property (nonatomic, strong) PhotoCategoryVO		* feature;
 @property (nonatomic, strong) NSString		* caption;
-@property (nonatomic, assign) int			bearing;
 @property (nonatomic, strong) NSDate		* date;
 @property (nonatomic, strong) NSMutableDictionary		* responseDict;
 

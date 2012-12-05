@@ -24,7 +24,6 @@
 #import "AppDelegate.h"
 #import "MapViewController.h"
 #import "Markers.h"
-#import <ImageIO/ImageIO.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -820,15 +819,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	NSURL *referenceURL = [info objectForKey:UIImagePickerControllerReferenceURL];
 	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 	
-	[library assetForURL:referenceURL resultBlock:^(ALAsset *asset){
-		
-		ALAssetRepresentation *rep = [asset defaultRepresentation];
-        NSDictionary *metadata = rep.metadata;
-		NSDictionary *gpsDict = [metadata objectForKey:(NSString *)kCGImagePropertyGPSDictionary];
-        
-		if(gpsDict!=nil){
-			uploadImage.bearing=[[gpsDict objectForKey:@"ImgDirection"] intValue];
-		}
+	[library assetForURL:referenceURL resultBlock:^(ALAsset *asset){           
 		
 		CLLocation *location = (CLLocation *)[asset valueForProperty:ALAssetPropertyLocation];
 		uploadImage.location=location;
