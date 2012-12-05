@@ -303,7 +303,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	// fill the labels from the segment we are showing
-	_footerView.dataProvider=[segment infoStringDictionary];
+	_footerView.dataProvider=segment;
 	[_footerView updateLayout];
 	[self updateFooterPositions];
 	// centre the view around the segment
@@ -500,6 +500,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		_footerIsHidden=YES;
 		
+		self.infoButton.style = UIBarButtonItemStyleBordered;
+		
 	} else {
 		
 		CGRect	fframe=_footerView.frame;
@@ -519,6 +521,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[UIView commitAnimations];
 		
 		_footerIsHidden=NO;
+		
+		self.infoButton.style = UIBarButtonItemStyleDone;
 	}
 }
 
