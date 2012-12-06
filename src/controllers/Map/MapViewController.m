@@ -46,6 +46,11 @@
 #import "IIViewDeckController.h"
 #import "WayPointViewController.h"
 #import "POIListviewController.h"
+#import "POIManager.h"
+#import "POILocationVO.h"
+#import "UIView+Additions.h"
+#import "CSOverlayMapSource.h"
+#import "CSMapTouchProxy.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -82,6 +87,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
 @property(nonatomic,strong)  UIBarButtonItem						* waypointButton;
+@property(nonatomic,strong)  UIBarButtonItem						* poiButton;
 
 
 
@@ -90,6 +96,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) IBOutlet RMMapView					* mapView;
 @property (nonatomic, strong) RMMapContents							* mapContents;
 @property (nonatomic, strong) CLLocation							* lastLocation;
+
+//poi
+@property (nonatomic, strong) IBOutlet CSMapTouchProxy					* poimapView;
+@property (nonatomic, strong) RMMapContents							* poiMapContents;
+@property (nonatomic, strong) NSMutableArray						* poiMarkerDataProvider;
+
 
 // sub views
 @property (nonatomic, strong) RoutePlanMenuViewController			* routeplanView;
@@ -159,6 +171,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[notifications addObject:GPSLOCATIONUPDATE];
 	[notifications addObject:GPSLOCATIONFAILED];
 	
+	[notifications addObject:POIMAPLOCATIONRESPONSE];
 	
 	[super listNotificationInterests];
 	
@@ -195,6 +208,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		[self didNotificationMapStyleChanged];
 	}
 	
+	if([name isEqualToString:POIMAPLOCATIONRESPONSE]){
+		[self poiDataForMapLocationDidUpdate];
+	}
 }
 
 #pragma mark notification response methods
@@ -205,6 +221,27 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	_attributionLabel.text = [MapViewController mapAttribution];
 }
 
+
+-(void)poiDataForMapLocationDidUpdate{
+	
+	[[_poiMapContents markerManager] removeMarkers];
+	
+	self.poiMarkerDataProvider=[POIManager sharedInstance].categoryDataProvider;
+	
+	POICategoryVO *category=[POIManager sharedInstance].selectedCategory;
+	
+	
+	
+	for (POILocationVO *poi in _poiMarkerDataProvider) {
+		
+		RMMarker *marker=[Markers markerPOIWithImage:category.icon];
+		
+		[[_poiMapContents markerManager] addMarker:marker AtLatLong:poi.location.coordinate];
+	}
+
+
+
+}
 
 
 //------------------------------------------------------------------------------------
@@ -245,8 +282,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	//Necessary to start route-me service
 	[RMMapView class];
 	
-	//
+	self.poiMapContents=[[RMMapContents alloc] initWithView:_poimapView tilesource:[[CSOverlayMapSource alloc] init]];
 	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
+	[_poimapView addProxy:_mapView];
 	
 	
 	// Initialize
@@ -318,6 +356,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 													  target:self
 													  action:@selector(showRoutePlanMenu:)];
 	
+	self.poiButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIButtonBarPOI.png"]
+															 style:UIBarButtonItemStyleBordered
+															target:self
+															action:@selector(poiButtonSelected)];
+	
 	
 	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan Route"
 														style:UIBarButtonItemStyleBordered
@@ -362,7 +405,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 			_searchButton.enabled = YES;
 			
-			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
+			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex,_poiButton];
 			[self.toolBar setItems:items animated:YES ];
 			
 		}
@@ -441,6 +484,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self updateUItoState:MapPlanningStateLocating];
 	
+	[self resetLocationOverlay];
+	
+	
 }
 
 -(void)stopLocating{
@@ -449,23 +495,32 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self updateUItoState:_previousUIState];
 	
+	[self resetLocationOverlay];
+	
 }
 
 
 -(void)locationDidComplete:(NSNotification *)notification{
 	
+	_blueCircleView.visible=YES;
+	
 	// update ui state
 	[self updateUItoState:_previousUIState];
 	
-	// update map
+	self.lastLocation=notification.object;
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 	
+	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:3];
 }
 
 -(void)locationDidUpdate:(NSNotification *)notification{
 	
-	// update map
+	_blueCircleView.visible=YES;
 	
-	
+	self.lastLocation=notification.object;
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 }
 
 -(void)locationDidFail:(NSNotification *)notification{
@@ -473,6 +528,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	// update ui state
 	[self updateUItoState:_previousUIState];
 	
+}
+
+
+-(void)resetLocationOverlay{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideLocationOverlay) object:nil];
+	_blueCircleView.visible=NO;
 }
 
 
@@ -523,6 +584,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	CLLocationCoordinate2D ne=[_route insetNorthEast];
 	CLLocationCoordinate2D sw=[_route insetSouthWest];
 	[_mapView zoomWithLatLngBoundsNorthEast:ne SouthWest:sw];
+	[_poimapView zoomWithLatLngBoundsNorthEast:ne SouthWest:sw];
 	
 	[_mapView.markerManager removeMarkers];
 	[_waypointArray removeAllObjects];
@@ -1029,6 +1091,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (void) afterMapMove: (RMMapView*) map {
 	[self afterMapChanged:map];
+	
+	
 }
 
 -(void)afterMapTouch:(RMMapView *)map{
@@ -1042,6 +1106,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
     
 	[self afterMapChanged:map];
 	[self saveLocation:map.contents.mapCenter];
+	
+	
 }
 
 // Should only return yes if marker is start/end and we have not a route drawn
@@ -1121,9 +1187,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		initLocation.latitude = [sLat doubleValue];
 		initLocation.longitude = [sLon doubleValue];
 		[_mapView moveToLatLong:initLocation];
+		[_poimapView moveToLatLong:initLocation];
 		
 		if ([_mapView.contents zoom] < MAX_ZOOM) {
 			[_mapView.contents setZoom:[sZoom floatValue]];
+			[_poimapView.contents setZoom:[sZoom floatValue]];
 		}
 		[_lineView setNeedsDisplay];
 		[_blueCircleView setNeedsDisplay];
@@ -1241,6 +1309,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[mapView moveToLatLong: newLocation.coordinate];
 	[mapView.contents setZoom:wantZoom];
+	
+	
 }
 
 

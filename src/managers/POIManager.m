@@ -15,7 +15,9 @@
 #import "GlobalUtilities.h"
 #import "DeviceUtilities.h"
 
-@interface POIManager(Private)
+@interface POIManager()
+
+
 
 -(void)POIListingDataResponse:(ValidationVO*)validation;
 -(void)POICategoryDataResponse:(ValidationVO*)validation;
@@ -55,6 +57,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	[self addRequestID:POILISTING];
 	[self addRequestID:POICATEGORYLOCATION];
+	[self addRequestID:POIMAPLOCATION];
 	
 	[super listNotificationInterests];
 	
@@ -81,6 +84,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			}else if ([response.dataid isEqualToString:POICATEGORYLOCATION]) {
 				
 				[self POICategoryDataResponse:response.dataProvider];
+				
+			}else if ([response.dataid isEqualToString:POIMAPLOCATION]) {
+				
+				[self POICategoryMapPointsResponse:response.dataProvider];
 				
 			}
 			
@@ -166,14 +173,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 
 -(void)requestPOICategoryMapPointsForCategory:(POICategoryVO*)category withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
 	
+	self.selectedCategory=category;
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
 									 [[CycleStreets sharedInstance] APIKey], @"key",
 									 category.key,@"type",
-									 BOX_FLOAT(nw.longitude),@"n",
-									 BOX_FLOAT(nw.latitude),@"w",
-									 BOX_FLOAT(se.longitude),@"s",
-									 BOX_FLOAT(se.latitude),@"e",
+									 BOX_FLOAT(nw.latitude),@"n",
+									 BOX_FLOAT(nw.longitude),@"w",
+									 BOX_FLOAT(se.latitude),@"s",
+									 BOX_FLOAT(se.longitude),@"e",
 									 BOX_INT(40),@"limit",nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];

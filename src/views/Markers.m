@@ -65,6 +65,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return [Markers marker:@"UIIcon_userphotomap.png" label:nil];
 }
 
+
++ (RMMarker *)markerPOIWithImage:(UIImage*)image {
+	
+	RMMarker *marker = [[RMMarker alloc] initWithUIImage:image];
+	[marker changeLabelUsingText:nil];
+	return marker;
+}
+
+
 + (RMMarker *)marker:(NSString *)name atAngle:(int)angle {
 	UIImage *image = [UIImage imageNamed:name];
 	

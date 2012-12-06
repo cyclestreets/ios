@@ -41,5 +41,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 + (RMMarker *)marker:(NSString *)name atAngle:(int)degrees;
 + (RMMarker *)markerBeginArrow:(int)degrees;
 + (RMMarker *)markerEndArrow:(int)degrees;
++ (RMMarker *)markerPOIWithImage:(UIImage*)image;
 
 @end

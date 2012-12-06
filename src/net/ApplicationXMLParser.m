@@ -94,6 +94,7 @@
                        [NSValue valueWithPointer:@selector(PhotoUploadXMLParser:)],UPLOADUSERPHOTO,
 					   [NSValue valueWithPointer:@selector(POIListingXMLParser:)],POILISTING,
 					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
+					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POIMAPLOCATION,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
 					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
@@ -711,7 +712,7 @@
 		while (poi!=nil) {
 			
 			POILocationVO *poilocation=[[POILocationVO alloc]init];
-			poilocation.name= [[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:poi]] stringByDecodingHTMLEntities];
+			poilocation.name= [TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:poi]];
 			
 			CLLocationCoordinate2D coords;
 			coords.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"longitude" parentElement:poi]] floatValue];
@@ -730,10 +731,10 @@
 		
 		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
 		
-		validation.returnCode=ValidationPOICategorySuccess;
+		validation.returnCode=ValidationPOIMapCategorySuccess;
 		
 	}else{
-		validation.returnCode=ValidationPOICategoryFailure;
+		validation.returnCode=ValidationPOIMapCategoryFailed;
 	}
 	
 	activeResponse.dataProvider=validation;

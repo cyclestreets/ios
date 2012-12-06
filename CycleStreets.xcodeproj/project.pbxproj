@@ -127,6 +127,8 @@
 		28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */; };
 		28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */; };
 		2818C7A01458069E0077F529 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
+		2819B2621670EB30007B4ED4 /* CSMapTouchProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2611670EB30007B4ED4 /* CSMapTouchProxy.m */; };
+		2819B2631670EB30007B4ED4 /* CSMapTouchProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2611670EB30007B4ED4 /* CSMapTouchProxy.m */; };
 		281E08B31451608C0034CC63 /* POIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B21451608C0034CC63 /* POIManager.m */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
 		281E08B91451698A0034CC63 /* POICategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B81451698A0034CC63 /* POICategoryViewController.m */; };
@@ -139,6 +141,8 @@
 		281E09041451C6690034CC63 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
 		281E09081451CA210034CC63 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
+		2828B9D11670E38900017086 /* CSOverlayMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2828B9D01670E38900017086 /* CSOverlayMapSource.m */; };
+		2828B9D21670E38900017086 /* CSOverlayMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2828B9D01670E38900017086 /* CSOverlayMapSource.m */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
 		2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
@@ -981,6 +985,8 @@
 		28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_finish_wisp.png; sourceTree = "<group>"; };
 		28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_start_wisp.png; sourceTree = "<group>"; };
 		2818C79F1458069D0077F529 /* RouteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteCell.xib; sourceTree = "<group>"; };
+		2819B2601670EB30007B4ED4 /* CSMapTouchProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSMapTouchProxy.h; path = Map/CSMapTouchProxy.h; sourceTree = "<group>"; };
+		2819B2611670EB30007B4ED4 /* CSMapTouchProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSMapTouchProxy.m; path = Map/CSMapTouchProxy.m; sourceTree = "<group>"; };
 		281E08B11451608C0034CC63 /* POIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIManager.h; sourceTree = "<group>"; };
 		281E08B21451608C0034CC63 /* POIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIManager.m; sourceTree = "<group>"; };
 		281E08B4145168F90034CC63 /* POILocationVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POILocationVO.h; sourceTree = "<group>"; };
@@ -999,6 +1005,8 @@
 		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
 		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
 		281E09071451CA210034CC63 /* POICategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POICategoryView.xib; path = poi/POICategoryView.xib; sourceTree = "<group>"; };
+		2828B9CF1670E38900017086 /* CSOverlayMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSOverlayMapSource.h; path = Map/CSOverlayMapSource.h; sourceTree = "<group>"; };
+		2828B9D01670E38900017086 /* CSOverlayMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSOverlayMapSource.m; path = Map/CSOverlayMapSource.m; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
 		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
@@ -1949,6 +1957,10 @@
 				28CBBC9C1641B498005E7056 /* WayPointViewController.m */,
 				28A8B62D1450B074009C5647 /* POIListviewController.h */,
 				28A8B62E1450B074009C5647 /* POIListviewController.m */,
+				2828B9CF1670E38900017086 /* CSOverlayMapSource.h */,
+				2828B9D01670E38900017086 /* CSOverlayMapSource.m */,
+				2819B2601670EB30007B4ED4 /* CSMapTouchProxy.h */,
+				2819B2611670EB30007B4ED4 /* CSMapTouchProxy.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -3434,6 +3446,8 @@
 				284608281649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3E1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 				288C0F65164AA0B1000880FF /* MapViewController.m in Sources */,
+				2828B9D11670E38900017086 /* CSOverlayMapSource.m in Sources */,
+				2819B2621670EB30007B4ED4 /* CSMapTouchProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3607,6 +3621,8 @@
 				284608291649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3F1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 				2815EA04164D77B0003C356A /* MapViewController.m in Sources */,
+				2828B9D21670E38900017086 /* CSOverlayMapSource.m in Sources */,
+				2819B2631670EB30007B4ED4 /* CSMapTouchProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
