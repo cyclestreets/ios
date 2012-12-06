@@ -374,7 +374,6 @@
 
 -(IBAction)doGenericLeftEvent:(id)sender{
 	
-	
 	if([delegate respondsToSelector:@selector(doNavigationSelector:)]){
 		[delegate doNavigationSelector:LEFT]; 
 	}
@@ -410,9 +409,8 @@
 	
 	UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
 	button.frame=CGRectMake(0, 0, 52, 30);
-
+	
 	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_Back"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
-	[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UIBarButton_Back"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
 	
 	
 	[button setTitle:@"Back" forState:UIControlStateNormal];
@@ -427,6 +425,7 @@
 	[button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
 	
 	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
+
 	
 	return barbutton;
 	

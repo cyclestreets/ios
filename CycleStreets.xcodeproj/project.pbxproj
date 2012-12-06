@@ -3797,7 +3797,7 @@
 			};
 			name = Release;
 		};
-		2834377F15DD5DC300B00FD5 /* Adhoc Distribution */ = {
+		2834377F15DD5DC300B00FD5 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3838,7 +3838,7 @@
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Adhoc Distribution";
+			name = Adhoc;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3888,7 +3888,7 @@
 			};
 			name = Release;
 		};
-		E791ADC911518A0900A9B38F /* Adhoc Distribution */ = {
+		E791ADC911518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = armv7;
@@ -3910,9 +3910,9 @@
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
-			name = "Adhoc Distribution";
+			name = Adhoc;
 		};
-		E791ADCA11518A0900A9B38F /* Adhoc Distribution */ = {
+		E791ADCA11518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3953,7 +3953,7 @@
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Adhoc Distribution";
+			name = Adhoc;
 		};
 /* End XCBuildConfiguration section */
 
@@ -3963,7 +3963,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
-				E791ADCA11518A0900A9B38F /* Adhoc Distribution */,
+				E791ADCA11518A0900A9B38F /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3973,7 +3973,7 @@
 			buildConfigurations = (
 				2834377D15DD5DC300B00FD5 /* Debug */,
 				2834377E15DD5DC300B00FD5 /* Release */,
-				2834377F15DD5DC300B00FD5 /* Adhoc Distribution */,
+				2834377F15DD5DC300B00FD5 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3983,7 +3983,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
-				E791ADC911518A0900A9B38F /* Adhoc Distribution */,
+				E791ADC911518A0900A9B38F /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

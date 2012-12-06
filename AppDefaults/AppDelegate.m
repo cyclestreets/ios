@@ -74,12 +74,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	#if defined (CONFIGURATION_Debug)
 		//[Crashlytics sharedInstance].debugMode = YES;
-		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
+		[TestFlight takeOff:@"f3126dfe-baf0-4e0e-8c80-dc7ebc7ed29a"];
 	#endif
 	
 	
-	#if defined (CONFIGURATION_AdHoc)
-		[TestFlight takeOff:@"8abc4e71d1301ccd90b6465bb0af3716_NDQyMQ"];
+	#if defined (CONFIGURATION_Adhoc)
+		[TestFlight takeOff:@"f3126dfe-baf0-4e0e-8c80-dc7ebc7ed29a"];
 	#endif
 	
 	
