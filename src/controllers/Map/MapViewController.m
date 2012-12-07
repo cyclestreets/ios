@@ -234,7 +234,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	for (POILocationVO *poi in _poiMarkerDataProvider) {
 		
-		RMMarker *marker=[Markers markerPOIWithImage:category.icon];
+		RMMarker *marker=[Markers markerPOIWithImage:category.mapImage];
 		
 		[[_poiMapContents markerManager] addMarker:marker AtLatLong:poi.location.coordinate];
 	}

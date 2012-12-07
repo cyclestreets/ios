@@ -22,4 +22,8 @@
 @property (nonatomic, strong)	NSString		*shortname;
 @property (nonatomic)	int				total;
 @property (nonatomic, strong)	UIImage			*icon;
+
+
+@property(nonatomic,readonly)  UIImage         *mapImage;
+
 @end

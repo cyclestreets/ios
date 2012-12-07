@@ -7,6 +7,7 @@
 //
 
 #import "POICategoryVO.h"
+#import "WBImage.h"
 
 @implementation POICategoryVO
 @synthesize key;
@@ -23,6 +24,12 @@ static NSString *SHORTNAME = @"shortname";
 static NSString *TOTAL = @"total";
 static NSString *ICON = @"icon";
 
+
+-(UIImage*)mapImage{
+	
+	return [self.icon scaleWithMaxSize:24];
+	
+}
 
 
 //=========================================================== 
