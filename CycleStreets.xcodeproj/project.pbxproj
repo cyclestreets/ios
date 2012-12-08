@@ -127,6 +127,14 @@
 		28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */; };
 		28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */; };
 		2818C7A01458069E0077F529 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
+		2819B2C21671FB9C007B4ED4 /* ItinerarayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2C11671FB9C007B4ED4 /* ItinerarayHeaderView.m */; };
+		2819B2C31671FB9C007B4ED4 /* ItinerarayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2C11671FB9C007B4ED4 /* ItinerarayHeaderView.m */; };
+		2819B2C61671FC33007B4ED4 /* ItineraryInfoContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2C51671FC33007B4ED4 /* ItineraryInfoContainer.m */; };
+		2819B2C71671FC33007B4ED4 /* ItineraryInfoContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2C51671FC33007B4ED4 /* ItineraryInfoContainer.m */; };
+		2819B2CA1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2C91671FEC9007B4ED4 /* ItineraryElevationContainer.m */; };
+		2819B2CB1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2C91671FEC9007B4ED4 /* ItineraryElevationContainer.m */; };
+		2819B2D316720136007B4ED4 /* CSElevationGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2D216720136007B4ED4 /* CSElevationGraphView.m */; };
+		2819B2D416720136007B4ED4 /* CSElevationGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819B2D216720136007B4ED4 /* CSElevationGraphView.m */; };
 		281E08B31451608C0034CC63 /* POIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B21451608C0034CC63 /* POIManager.m */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
 		281E08B91451698A0034CC63 /* POICategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B81451698A0034CC63 /* POICategoryViewController.m */; };
@@ -981,6 +989,14 @@
 		28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_finish_wisp.png; sourceTree = "<group>"; };
 		28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_start_wisp.png; sourceTree = "<group>"; };
 		2818C79F1458069D0077F529 /* RouteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteCell.xib; sourceTree = "<group>"; };
+		2819B2C01671FB9C007B4ED4 /* ItinerarayHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItinerarayHeaderView.h; sourceTree = "<group>"; };
+		2819B2C11671FB9C007B4ED4 /* ItinerarayHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItinerarayHeaderView.m; sourceTree = "<group>"; };
+		2819B2C41671FC33007B4ED4 /* ItineraryInfoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryInfoContainer.h; sourceTree = "<group>"; };
+		2819B2C51671FC33007B4ED4 /* ItineraryInfoContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryInfoContainer.m; sourceTree = "<group>"; };
+		2819B2C81671FEC9007B4ED4 /* ItineraryElevationContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryElevationContainer.h; sourceTree = "<group>"; };
+		2819B2C91671FEC9007B4ED4 /* ItineraryElevationContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryElevationContainer.m; sourceTree = "<group>"; };
+		2819B2D116720136007B4ED4 /* CSElevationGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSElevationGraphView.h; sourceTree = "<group>"; };
+		2819B2D216720136007B4ED4 /* CSElevationGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSElevationGraphView.m; sourceTree = "<group>"; };
 		281E08B11451608C0034CC63 /* POIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIManager.h; sourceTree = "<group>"; };
 		281E08B21451608C0034CC63 /* POIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIManager.m; sourceTree = "<group>"; };
 		281E08B4145168F90034CC63 /* POILocationVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POILocationVO.h; sourceTree = "<group>"; };
@@ -2337,6 +2353,14 @@
 				28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */,
 				28AE590315E503270034268C /* MapMarkerTouchView.h */,
 				28AE590415E503270034268C /* MapMarkerTouchView.m */,
+				2819B2C01671FB9C007B4ED4 /* ItinerarayHeaderView.h */,
+				2819B2C11671FB9C007B4ED4 /* ItinerarayHeaderView.m */,
+				2819B2C41671FC33007B4ED4 /* ItineraryInfoContainer.h */,
+				2819B2C51671FC33007B4ED4 /* ItineraryInfoContainer.m */,
+				2819B2C81671FEC9007B4ED4 /* ItineraryElevationContainer.h */,
+				2819B2C91671FEC9007B4ED4 /* ItineraryElevationContainer.m */,
+				2819B2D116720136007B4ED4 /* CSElevationGraphView.h */,
+				2819B2D216720136007B4ED4 /* CSElevationGraphView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3434,6 +3458,10 @@
 				284608281649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3E1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 				288C0F65164AA0B1000880FF /* MapViewController.m in Sources */,
+				2819B2C21671FB9C007B4ED4 /* ItinerarayHeaderView.m in Sources */,
+				2819B2C61671FC33007B4ED4 /* ItineraryInfoContainer.m in Sources */,
+				2819B2CA1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */,
+				2819B2D316720136007B4ED4 /* CSElevationGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3607,6 +3635,10 @@
 				284608291649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3F1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 				2815EA04164D77B0003C356A /* MapViewController.m in Sources */,
+				2819B2C31671FB9C007B4ED4 /* ItinerarayHeaderView.m in Sources */,
+				2819B2C71671FC33007B4ED4 /* ItineraryInfoContainer.m in Sources */,
+				2819B2CB1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */,
+				2819B2D416720136007B4ED4 /* CSElevationGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

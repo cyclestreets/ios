@@ -47,7 +47,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 163}, {320, 248}}</string>
 						<reference key="NSSuperview" ref="41238324"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="291184019">
 							<int key="NSColorSpace">3</int>
@@ -76,7 +75,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 10}, {60, 17}}</string>
 								<reference key="NSSuperview" ref="99221383"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="797152964"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -113,7 +111,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 10}, {219, 18}}</string>
 								<reference key="NSSuperview" ref="99221383"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="73825809"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -139,7 +136,6 @@
 						</object>
 						<string key="NSFrame">{{0, 44}, {320, 37}}</string>
 						<reference key="NSSuperview" ref="41238324"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="73037521"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -152,7 +148,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 80}, {320, 83}}</string>
 						<reference key="NSSuperview" ref="41238324"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="873029372"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -165,7 +160,6 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="41238324"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="99221383"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -186,7 +180,6 @@
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="942620526"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -389,7 +382,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">31</int>
+			<int key="maxID">33</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
