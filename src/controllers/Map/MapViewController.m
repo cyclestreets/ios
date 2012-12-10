@@ -407,7 +407,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStatePlanning");
 			
 			_routeButton.title = @"Plan route";
-			_routeButton.style = UIBarButtonItemStyleDone;
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleBordered;
 			
@@ -421,7 +420,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateRoute");
 			
 			_routeButton.title = @"New route";
-			_routeButton.style = UIBarButtonItemStyleBordered;
 			_locationButton.style=UIBarButtonItemStyleBordered;
 			_searchButton.enabled = YES;
 			
