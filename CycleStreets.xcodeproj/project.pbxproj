@@ -3770,7 +3770,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "B492183B-C003-40E2-9F5C-DB7CA87EC84A";
+				PROVISIONING_PROFILE = "804ED0D4-5E1E-4122-89B4-2FE2063864E4";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3952,7 +3952,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = armv7;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (UZEV79287L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -3965,7 +3965,7 @@
 					"-licucore",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "ABD2C641-CBEF-4454-902C-B5EF0D498A73";
+				PROVISIONING_PROFILE = "6481B1C5-02DD-4E77-B6CC-67D50BC3BF57";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
