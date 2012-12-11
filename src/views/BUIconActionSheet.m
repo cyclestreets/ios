@@ -83,7 +83,7 @@
 	
 	// grid
 	LayoutBox *rowContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, TABBARHEIGHT)];
-	rowContainer.paddingLeft=30;
+	rowContainer.paddingLeft=0;
 	rowContainer.layoutMode=BUVerticalLayoutMode;
 	rowContainer.itemPadding=15;
 	
