@@ -37,7 +37,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SavedRoutesManager.h"
 #import "HudManager.h"
 
-@interface RouteSummary(Private)
+@interface RouteSummary()
+
+@property (nonatomic, strong) UIScrollView		* scrollView;
+@property (nonatomic, strong) LayoutBox		* viewContainer;
+@property (nonatomic, weak) IBOutlet LayoutBox		* headerContainer;
+@property (nonatomic, weak) IBOutlet ExpandedUILabel		* routeNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* dateLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* routeidLabel;
+@property (nonatomic, weak) IBOutlet LayoutBox		* readoutContainer;
+@property (nonatomic, weak) IBOutlet UILabel		* timeLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* lengthLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* planLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* speedLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* calorieLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* coLabel;
+@property (nonatomic, weak) IBOutlet UIButton		* routeButton;
+@property (nonatomic, weak) IBOutlet UIButton		* renameButton;
+@property (nonatomic, weak) IBOutlet UIButton		* favouriteButton;
 
 -(void)selectedRouteUpdated;
 
@@ -282,13 +299,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+	
+	self.route=nil;
+	self.scrollView=nil;
+	self.viewContainer=nil;
     
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    
-}
 
 
 

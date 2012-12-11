@@ -11,10 +11,18 @@
 #import "GradientView.h"
 #import "CopyLabel.h"
 
-@interface PhotoMapImageLocationViewController(Private) 
+@interface PhotoMapImageLocationViewController()
+
+
+@property (nonatomic, strong)	PhotoMapVO		*dataProvider;
+@property (nonatomic, strong)	UINavigationBar		*navigationBar;
+@property (nonatomic, strong)	UIScrollView		*scrollView;
+@property (nonatomic, strong)	LayoutBox		*viewContainer;
+@property (nonatomic, strong)	AsyncImageView		*imageView;
+@property (nonatomic, strong)	ExpandedUILabel		*imageLabel;
+@property (nonatomic, strong)	CopyLabel		*titleLabel;
 
 -(void)updateContentSize;
--(void)updateImageSize;
 -(void)createPersistentUI;
 -(void)createNavigationBarUI;
 -(void)createNonPersistentUI;
@@ -24,13 +32,6 @@
 
 
 @implementation PhotoMapImageLocationViewController
-@synthesize dataProvider;
-@synthesize navigationBar;
-@synthesize scrollView;
-@synthesize viewContainer;
-@synthesize imageView;
-@synthesize imageLabel;
-@synthesize titleLabel;
 
 
 //
@@ -46,7 +47,7 @@
 
 -(void)ImageDidLoadWithImage:(UIImage*)image{
 	
-	[viewContainer refresh];
+	[_viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -70,26 +71,26 @@
 	
 	[(GradientView*)self.view setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 	
-	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	viewContainer.layoutMode=BUVerticalLayoutMode;
-	viewContainer.alignMode=BUCenterAlignMode;
-	viewContainer.fixedWidth=YES;
-	viewContainer.paddingTop=20;
-	viewContainer.itemPadding=20;
+	self.viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	_viewContainer.layoutMode=BUVerticalLayoutMode;
+	_viewContainer.alignMode=BUCenterAlignMode;
+	_viewContainer.fixedWidth=YES;
+	_viewContainer.paddingTop=20;
+	_viewContainer.itemPadding=20;
 		
-	imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
-	imageView.delegate=self;
-	imageView.cacheImage=NO;
-	[viewContainer addSubview:imageView];
+	self.imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
+	_imageView.delegate=self;
+	_imageView.cacheImage=NO;
+	[_viewContainer addSubview:_imageView];
 	
-	imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	imageLabel.font=[UIFont systemFontOfSize:13];
-	imageLabel.textColor=UIColorFromRGB(0x666666);
-	imageLabel.hasShadow=YES;
-	imageLabel.multiline=YES;
-	[viewContainer addSubview:imageLabel];
+	self.imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	_imageLabel.font=[UIFont systemFontOfSize:13];
+	_imageLabel.textColor=UIColorFromRGB(0x666666);
+	_imageLabel.hasShadow=YES;
+	_imageLabel.multiline=YES;
+	[_viewContainer addSubview:_imageLabel];
 	
-	[scrollView addSubview:viewContainer];
+	[_scrollView addSubview:_viewContainer];
 	
 	[self updateContentSize];
 	
@@ -105,13 +106,13 @@
 															 action:@selector(backButtonSelected:)];
 	
 	self.titleLabel=[[CopyLabel alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
-	titleLabel.textAlignment=UITextAlignmentCenter;
-	titleLabel.font=[UIFont boldSystemFontOfSize:20];
-	titleLabel.textColor=[UIColor whiteColor];
-	titleLabel.shadowOffset=CGSizeMake(0, -1);
-	titleLabel.shadowColor=[UIColor grayColor];
+	_titleLabel.textAlignment=UITextAlignmentCenter;
+	_titleLabel.font=[UIFont boldSystemFontOfSize:20];
+	_titleLabel.textColor=[UIColor whiteColor];
+	_titleLabel.shadowOffset=CGSizeMake(0, -1);
+	_titleLabel.shadowColor=[UIColor grayColor];
 	
-	[self.navigationBar.topItem setTitleView:titleLabel];
+	[self.navigationBar.topItem setTitleView:_titleLabel];
 	
 	[self.navigationBar.topItem setRightBarButtonItem:back];
 	
@@ -129,8 +130,8 @@
 
 -(void)createNonPersistentUI{
 	
-	imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
-	[viewContainer refresh];
+	_imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
+	[_viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -150,11 +151,11 @@
 	
 	//self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
 	
-	titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
+	_titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csid]];
 	
-	imageLabel.text=[dataProvider caption];
+	_imageLabel.text=[_dataProvider caption];
 	
-	[imageView loadImageFromString:[dataProvider bigImageURL]];
+	[_imageView loadImageFromString:[_dataProvider bigImageURL]];
 	
 }
 
@@ -167,7 +168,7 @@
 
 -(IBAction)backButtonSelected:(id)sender{
 	
-	[imageView cancel];
+	[_imageView cancel];
 	[self dismissModalViewControllerAnimated:YES];
 	
 }
@@ -182,17 +183,26 @@
 
 -(void)updateContentSize{
 	
-	[scrollView setContentSize:CGSizeMake(SCREENWIDTH, viewContainer.height)];
+	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.height)];
 	
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+	
+	self.dataProvider=nil;
+	self.navigationBar=nil;
+	self.scrollView=nil;
+	self.viewContainer=nil;
+	self.imageView=nil;
+	self.imageLabel=nil;
+	self.titleLabel=nil;
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
 
 @end

@@ -72,7 +72,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @interface MapViewController()
 
 // tool bar
-@property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
+@property (nonatomic, weak) IBOutlet UIToolbar					* toolBar;
 @property (nonatomic, strong) UIBarButtonItem						* locationButton;
 @property (nonatomic, strong) UIBarButtonItem						* activeLocationButton;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
@@ -81,13 +81,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) UIActivityIndicatorView				* locatingIndicator;
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
-@property(nonatomic,strong)  UIBarButtonItem						* waypointButton;
+@property (nonatomic,strong)  UIBarButtonItem						* waypointButton;
 
 
 
 
 //rmmap
-@property (nonatomic, strong) IBOutlet RMMapView		* mapView;
+@property (nonatomic, weak) IBOutlet RMMapView		* mapView;
 @property (nonatomic, strong) RMMapContents		* mapContents;
 @property (nonatomic, strong) CLLocation		* lastLocation;
 
@@ -97,10 +97,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
 
 // ui
-@property (nonatomic, strong) IBOutlet UILabel		* attributionLabel;
-@property (nonatomic, strong) IBOutlet RouteLineView		* lineView;
-@property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
-@property (nonatomic, strong) IBOutlet MapMarkerTouchView		* markerTouchView;
+@property (nonatomic, weak) IBOutlet UILabel		* attributionLabel;
+@property (nonatomic, weak) IBOutlet RouteLineView		* lineView;
+@property (nonatomic, weak) IBOutlet BlueCircleView		* blueCircleView;
+@property (nonatomic, weak) IBOutlet MapMarkerTouchView		* markerTouchView;
 @property (nonatomic, assign) MapAlertType		alertType;
 
 // waypoint ui
@@ -1368,5 +1368,46 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	return MAX(locationRadius, 40.0f);
 }
 
+
+//
+/***********************************************
+ * @description			MEMORY
+ ***********************************************/
+//
+
+-(void)didReceiveMemoryWarning{
+	[super didReceiveMemoryWarning];
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+	
+	self.locationButton=nil;
+	self.activeLocationButton=nil;
+	self.searchButton=nil;
+	self.routeButton=nil;
+	self.changePlanButton=nil;
+	self.locatingIndicator=nil;
+	self.leftFlex=nil;
+	self.rightFlex=nil;
+	self.waypointButton=nil;
+	
+	
+	self.mapContents=nil;
+	self.lastLocation=nil;
+	
+	// sub views
+	self.routeplanView=nil;
+	self.routeplanMenu=nil;
+	self.mapLocationSearchView=nil;
+	self.initialLocation=nil;
+	
+	// data
+	self.route=nil;
+	self.waypointArray=nil;
+	self.activeMarker=nil;
+	
+		
+}
 
 @end
