@@ -125,6 +125,7 @@
 								<string key="NSFrame">{{300, 0}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="52074061"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -133,7 +134,7 @@
 								</object>
 							</object>
 						</object>
-						<string key="NSFrameSize">{287, 69}</string>
+						<string key="NSFrameSize">{320, 69}</string>
 						<reference key="NSSuperview" ref="513315093"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="560313395"/>
@@ -158,7 +159,6 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">2</int>
-				<int key="IBUIAccessoryType">2</int>
 				<reference key="IBUIContentView" ref="52074061"/>
 				<string key="IBUIReuseIdentifier">RouteCellIdentiier</string>
 			</object>
