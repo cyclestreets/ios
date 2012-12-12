@@ -36,8 +36,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import "SavedRoutesManager.h"
 #import "HudManager.h"
+#import "CSElevationGraphView.h"
 
-@interface RouteSummary(Private)
+@interface RouteSummary()
+
+@property(nonatomic,strong)  CSElevationGraphView         *elevationView;
+
 
 -(void)selectedRouteUpdated;
 
@@ -127,7 +131,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)createPersistentUI{
 	
-	// TODO: SHOULD BE SCROLL VIEW 
 	
 	self.scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHNAVANDTAB)];
 	[self.view addSubview:scrollView];
@@ -147,19 +150,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[readoutContainer initFromNIB];
 	
 	
+	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 100)];
+	_elevationView.backgroundColor=[UIColor clearColor];
+	
+	
 	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	d1.backgroundColor=[UIColor clearColor];
 	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	d2.backgroundColor=[UIColor clearColor];
 	
 	
-	[ButtonUtilities styleIBButton:routeButton type:@"orange" text:@"Select this route"];
-	[ButtonUtilities styleIBButton:renameButton type:@"green" text:@"Rename this route"];
-	[ButtonUtilities styleIBButton:favouriteButton type:@"red" text:@"Add to favourites"];
-	
 	routeNameLabel.multiline=YES;
 	
-	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,routeButton,renameButton,favouriteButton,nil]];
+	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,_elevationView, nil]];
 	
 	
 }
@@ -178,7 +181,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	self.routeNameLabel.text = route.nameString;
 	self.dateLabel.text=route.dateString;
-	self.routeidLabel.text=[NSString stringWithFormat:@"#%@", [route routeid]];
 	[headerContainer refresh];
 	
 	timeLabel.text=route.timeString;
@@ -188,7 +190,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	calorieLabel.text=route.calorieString;
 	coLabel.text=route.coString;
 	
-	favouriteButton.hidden=dataType==SavedRoutesDataTypeFavourite;
+	[_elevationView update];
+	
 	
 	[viewContainer refresh];
 	
@@ -232,7 +235,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		}
 		
 		if(dataType!=SavedRoutesDataTypeFavourite){
-			[actionbuttons addObject:@{@"type":@"red",@"text":@"Add to favourites",@"index":@(FavouriteIndex)}];
+			[actionbuttons addObject:@{@"type":@"blue",@"text":@"Add to favourites",@"index":@(FavouriteIndex)}];
 		}
 		
 		BUActionSheet *actionSheet=[[BUActionSheet alloc] initWithButtons:actionbuttons andTitle:@"Route actions"];
@@ -260,19 +263,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
 }	
 
-- (IBAction) routeButtonSelected {
-	[self selectRoute];
-	
-}
 
-
-
-// route naming
--(IBAction)renameButtonSelected:(id)sender{
-	
-	[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:route.nameString delegate:self];
-	
-}
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -305,10 +296,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 // favouriting
-
--(IBAction)favouriteButtonSelected:(id)sender{
-	[self favouriteRoute];
-}
 
 -(void)favouriteRoute{
 	
@@ -358,11 +345,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
+	
+	
     
 }
 

@@ -15,4 +15,6 @@
 @property(nonatomic,strong)  UIColor							*fillColor;
 
 
+-(void)update;
+
 @end

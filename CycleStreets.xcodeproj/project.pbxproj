@@ -366,7 +366,6 @@
 		283436EE15DD5DC300B00FD5 /* ExpandedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6343131FB6C8008527FC /* ExpandedUILabel.m */; };
 		283436EF15DD5DC300B00FD5 /* GlossyGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6345131FB6C8008527FC /* GlossyGradientView.m */; };
 		283436F015DD5DC300B00FD5 /* GradiantRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6347131FB6C8008527FC /* GradiantRectView.m */; };
-		283436F115DD5DC300B00FD5 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6349131FB6C8008527FC /* GradientView.m */; };
 		283436F215DD5DC300B00FD5 /* HalfRoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD634B131FB6C8008527FC /* HalfRoundedRectView.m */; };
 		283436F315DD5DC300B00FD5 /* IncrementalStepControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD634F131FB6C8008527FC /* IncrementalStepControl.m */; };
 		283436F415DD5DC300B00FD5 /* MultiLabelLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6355131FB6C8008527FC /* MultiLabelLine.m */; };
@@ -517,6 +516,16 @@
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		284706811600902200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
 		284706821600903200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
+		285352861678B0AB007BC5CB /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352851678B0AB007BC5CB /* GradientView.m */; };
+		285352871678B0AB007BC5CB /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352851678B0AB007BC5CB /* GradientView.m */; };
+		285352B81678B4B8007BC5CB /* UIButton_blue_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352B61678B4B8007BC5CB /* UIButton_blue_hi.png */; };
+		285352B91678B4B8007BC5CB /* UIButton_blue_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352B61678B4B8007BC5CB /* UIButton_blue_hi.png */; };
+		285352BA1678B4B8007BC5CB /* UIButton_blue_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352B71678B4B8007BC5CB /* UIButton_blue_lo.png */; };
+		285352BB1678B4B8007BC5CB /* UIButton_blue_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352B71678B4B8007BC5CB /* UIButton_blue_lo.png */; };
+		285352BE1678B4CA007BC5CB /* UIButton_blue_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352BC1678B4CA007BC5CB /* UIButton_blue_hi@2x.png */; };
+		285352BF1678B4CA007BC5CB /* UIButton_blue_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352BC1678B4CA007BC5CB /* UIButton_blue_hi@2x.png */; };
+		285352C01678B4CA007BC5CB /* UIButton_blue_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352BD1678B4CA007BC5CB /* UIButton_blue_lo@2x.png */; };
+		285352C11678B4CA007BC5CB /* UIButton_blue_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352BD1678B4CA007BC5CB /* UIButton_blue_lo@2x.png */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -653,7 +662,6 @@
 		28AD6439131FB6C8008527FC /* ExpandedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6343131FB6C8008527FC /* ExpandedUILabel.m */; };
 		28AD643A131FB6C8008527FC /* GlossyGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6345131FB6C8008527FC /* GlossyGradientView.m */; };
 		28AD643B131FB6C8008527FC /* GradiantRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6347131FB6C8008527FC /* GradiantRectView.m */; };
-		28AD643C131FB6C8008527FC /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6349131FB6C8008527FC /* GradientView.m */; };
 		28AD643D131FB6C8008527FC /* HalfRoundedRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD634B131FB6C8008527FC /* HalfRoundedRectView.m */; };
 		28AD643F131FB6C8008527FC /* IncrementalStepControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD634F131FB6C8008527FC /* IncrementalStepControl.m */; };
 		28AD6442131FB6C8008527FC /* MultiLabelLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6355131FB6C8008527FC /* MultiLabelLine.m */; };
@@ -1042,6 +1050,12 @@
 		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
 		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
 		284706801600902200D5E58B /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_live.txt; path = ../docs/APIKey_live.txt; sourceTree = "<group>"; };
+		285352841678B0AB007BC5CB /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		285352851678B0AB007BC5CB /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		285352B61678B4B8007BC5CB /* UIButton_blue_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_blue_hi.png; sourceTree = "<group>"; };
+		285352B71678B4B8007BC5CB /* UIButton_blue_lo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_blue_lo.png; sourceTree = "<group>"; };
+		285352BC1678B4CA007BC5CB /* UIButton_blue_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_blue_hi@2x.png"; sourceTree = "<group>"; };
+		285352BD1678B4CA007BC5CB /* UIButton_blue_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_blue_lo@2x.png"; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
 		28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HUD_icon_checkMark@2x.png"; sourceTree = "<group>"; };
 		28535DBB15E50FCD0092FC16 /* HUD_icon_exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_exclaim.png; sourceTree = "<group>"; };
@@ -1241,8 +1255,6 @@
 		28AD6345131FB6C8008527FC /* GlossyGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GlossyGradientView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28AD6346131FB6C8008527FC /* GradiantRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradiantRectView.h; sourceTree = "<group>"; };
 		28AD6347131FB6C8008527FC /* GradiantRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradiantRectView.m; sourceTree = "<group>"; };
-		28AD6348131FB6C8008527FC /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
-		28AD6349131FB6C8008527FC /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		28AD634A131FB6C8008527FC /* HalfRoundedRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HalfRoundedRectView.h; sourceTree = "<group>"; };
 		28AD634B131FB6C8008527FC /* HalfRoundedRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HalfRoundedRectView.m; sourceTree = "<group>"; };
 		28AD634E131FB6C8008527FC /* IncrementalStepControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncrementalStepControl.h; sourceTree = "<group>"; };
@@ -1807,6 +1819,8 @@
 				288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */,
 				28187A7314FCFF4C00A38A17 /* icon_camera.png */,
 				28187A7414FCFF4C00A38A17 /* icon_location.png */,
+				285352B61678B4B8007BC5CB /* UIButton_blue_hi.png */,
+				285352B71678B4B8007BC5CB /* UIButton_blue_lo.png */,
 				28187A8614FCFF4C00A38A17 /* UIButton_green_hi.png */,
 				28187A8714FCFF4C00A38A17 /* UIButton_green_lo.png */,
 				28187A8814FCFF4C00A38A17 /* UIButton_grey_hi.png */,
@@ -2462,6 +2476,8 @@
 		28AD6337131FB6C8008527FC /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				285352841678B0AB007BC5CB /* GradientView.h */,
+				285352851678B0AB007BC5CB /* GradientView.m */,
 				28D9B0861678A0E40088AFC2 /* BUActionSheet.h */,
 				28D9B0871678A0E40088AFC2 /* BUActionSheet.m */,
 				28B485241526225700E406E1 /* LayoutBox.h */,
@@ -2484,8 +2500,6 @@
 				28AD6345131FB6C8008527FC /* GlossyGradientView.m */,
 				28AD6346131FB6C8008527FC /* GradiantRectView.h */,
 				28AD6347131FB6C8008527FC /* GradiantRectView.m */,
-				28AD6348131FB6C8008527FC /* GradientView.h */,
-				28AD6349131FB6C8008527FC /* GradientView.m */,
 				28AD634A131FB6C8008527FC /* HalfRoundedRectView.h */,
 				28AD634B131FB6C8008527FC /* HalfRoundedRectView.m */,
 				28AD634E131FB6C8008527FC /* IncrementalStepControl.h */,
@@ -2559,6 +2573,8 @@
 				289A9B4A13536CCB00E8AF90 /* Cell Icons */,
 				289A9B5113536CCB00E8AF90 /* Wisps */,
 				28AD6533131FC239008527FC /* UIButton_green_hi@2x.png */,
+				285352BC1678B4CA007BC5CB /* UIButton_blue_hi@2x.png */,
+				285352BD1678B4CA007BC5CB /* UIButton_blue_lo@2x.png */,
 				28AD6534131FC239008527FC /* UIButton_green_lo@2x.png */,
 				28AD6535131FC239008527FC /* UIButton_grey_hi@2x.png */,
 				28AD6536131FC239008527FC /* UIButton_grey_lo@2x.png */,
@@ -3055,6 +3071,10 @@
 				2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				28A29D8A166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png in Resources */,
+				285352B81678B4B8007BC5CB /* UIButton_blue_hi.png in Resources */,
+				285352BA1678B4B8007BC5CB /* UIButton_blue_lo.png in Resources */,
+				285352BE1678B4CA007BC5CB /* UIButton_blue_hi@2x.png in Resources */,
+				285352C01678B4CA007BC5CB /* UIButton_blue_lo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3259,6 +3279,10 @@
 				2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				28A29D8B166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png in Resources */,
+				285352B91678B4B8007BC5CB /* UIButton_blue_hi.png in Resources */,
+				285352BB1678B4B8007BC5CB /* UIButton_blue_lo.png in Resources */,
+				285352BF1678B4CA007BC5CB /* UIButton_blue_hi@2x.png in Resources */,
+				285352C11678B4CA007BC5CB /* UIButton_blue_lo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3341,7 +3365,6 @@
 				28AD6439131FB6C8008527FC /* ExpandedUILabel.m in Sources */,
 				28AD643A131FB6C8008527FC /* GlossyGradientView.m in Sources */,
 				28AD643B131FB6C8008527FC /* GradiantRectView.m in Sources */,
-				28AD643C131FB6C8008527FC /* GradientView.m in Sources */,
 				28AD643D131FB6C8008527FC /* HalfRoundedRectView.m in Sources */,
 				28AD643F131FB6C8008527FC /* IncrementalStepControl.m in Sources */,
 				28AD6442131FB6C8008527FC /* MultiLabelLine.m in Sources */,
@@ -3469,6 +3492,7 @@
 				2819B2CA1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */,
 				2819B2D316720136007B4ED4 /* CSElevationGraphView.m in Sources */,
 				28D9B0881678A0E40088AFC2 /* BUActionSheet.m in Sources */,
+				285352861678B0AB007BC5CB /* GradientView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3519,7 +3543,6 @@
 				283436EE15DD5DC300B00FD5 /* ExpandedUILabel.m in Sources */,
 				283436EF15DD5DC300B00FD5 /* GlossyGradientView.m in Sources */,
 				283436F015DD5DC300B00FD5 /* GradiantRectView.m in Sources */,
-				283436F115DD5DC300B00FD5 /* GradientView.m in Sources */,
 				283436F215DD5DC300B00FD5 /* HalfRoundedRectView.m in Sources */,
 				283436F315DD5DC300B00FD5 /* IncrementalStepControl.m in Sources */,
 				283436F415DD5DC300B00FD5 /* MultiLabelLine.m in Sources */,
@@ -3647,6 +3670,7 @@
 				2819B2CB1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */,
 				2819B2D416720136007B4ED4 /* CSElevationGraphView.m in Sources */,
 				28D9B0891678A0E40088AFC2 /* BUActionSheet.m in Sources */,
+				285352871678B0AB007BC5CB /* GradientView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
