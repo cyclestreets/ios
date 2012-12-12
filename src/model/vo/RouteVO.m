@@ -163,19 +163,12 @@
 	int value=0;
 	
 	for(SegmentVO *segment in segments){
-		value=MAX(value, segment.maxElevation);
+		value=MAX(value, segment.segmentElevation);
 	}
 	return value;
 }
 
--(int)elevationsCount{
-	
-	int value=0;
-	for(SegmentVO *segment in segments){
-		value+=segment.segmentElevations.count;
-	}
-	return value;
-}
+
 
 
 //

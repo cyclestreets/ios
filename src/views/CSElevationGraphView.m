@@ -22,6 +22,8 @@
 @property(nonatomic,strong)  CAShapeLayer			*graphMaskLayer;
 @property(nonatomic,strong)  UIBezierPath			*graphPath;
 
+@property(nonatomic,strong)  UIView					*calloutView;
+
 
 @end
 
@@ -73,9 +75,36 @@
 	[_graphView addGestureRecognizer:singleFingerTap];
 	
 	
+	// this should be separate uiview
 	
-	// draw callout base
+	self.calloutView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+	_calloutView.backgroundColor=UIColorFromRGB(0xFF0000);
+	UIBezierPath *cpath=[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 80, 20) cornerRadius:6];
+	UIBezierPath *tpath=[UIBezierPath bezierPath];
+	[tpath moveToPoint:CGPointMake(35, 20)];
+	[tpath addLineToPoint:CGPointMake(45, 20)];
+	[tpath addLineToPoint:CGPointMake(40, 30)];
 	
+	[cpath appendPath:tpath];
+	
+	CAShapeLayer *sl= [CAShapeLayer layer];
+	[sl setFrame:CGRectMake(0, 0, _calloutView.width, _calloutView.height)];
+	_calloutView.layer.mask = sl;
+	[sl setPath:cpath.CGPath];
+	[self addSubview:_calloutView];
+	
+	//
+	UIView *gradiantlayer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+	gradiantlayer.layer.shadowColor = [UIColor blackColor].CGColor;
+	gradiantlayer.layer.shadowOpacity = 0.5f;
+	gradiantlayer.layer.shadowOffset = CGSizeMake(5, 6.0f);
+	gradiantlayer.layer.shadowRadius = 5.0f;
+	gradiantlayer.layer.shadowPath = cpath.CGPath;
+	gradiantlayer.layer.masksToBounds = NO;
+	[_calloutView.layer insertSublayer:gradiantlayer.layer atIndex:0];
+	
+
+
 }
 
 
@@ -108,7 +137,7 @@
 	
 	[path moveToPoint:CGPointMake(0, _graphView.height)];
 	
-	int elevationcount=_dataProvider.elevationsCount; // will be count of elevation points for route
+	int elevationcount=_dataProvider.segments.count; // will be count of elevation points for route
 	int minelevation=0;
 	int maxelevation=[_dataProvider maxElevation]; // max elevation for all segemnts
 	
@@ -124,29 +153,21 @@
 	int index=0;
 	for (SegmentVO *segment in _dataProvider.segments) {
 		
-		for(NSString *strvalue in segment.segmentElevations){
-			
-			int value=[strvalue intValue];
-			
-			float percent=(float)value/(float)maxelevation;
-			value=graphHeight*percent;
-			
-			[path addLineToPoint:CGPointMake(index*xincrement, value)];
-			
-			index++;
-		}
+		int value=segment.segmentElevation;
 		
+		float percent=(float)value/(float)maxelevation;
+		value=graphHeight*percent;
+			
+		int xpos=ceil(index*xincrement);
+		if (index==_dataProvider.segments.count-1) {
+			xpos=UIWIDTH;
+		}
+		[path addLineToPoint:CGPointMake(xpos, value)];
+			
+		index++;
 				
 	}
 	[path addLineToPoint:CGPointMake(UIWIDTH, _graphView.height)];
-	
-	/*
-	[path addLineToPoint:CGPointMake(80, 40)];
-	[path addLineToPoint:CGPointMake(170, 65)];
-	[path addLineToPoint:CGPointMake(200, 40)];
-	[path addLineToPoint:CGPointMake(240, 30)];
-	[path addLineToPoint:CGPointMake(UIWIDTH, 60)];
-	*/
 	
 	self.graphPath=path;
 	

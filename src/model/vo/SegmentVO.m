@@ -225,19 +225,21 @@ static NSDictionary *roadIcons;
 }
 
 
--(int)maxElevation{
-	
-	return [[self.segmentElevations valueForKeyPath:@"@max.intValue"] intValue];
-	
-}
 
 
--(NSMutableArray*)segmentElevations{
+
+-(int)segmentElevation{
 	
 	NSMutableArray *earray=[[elevations componentsSeparatedByString:@","] mutableCopy];
 	[earray removeLastObject];
+	for(int i=0;i<earray.count;i++){
+		NSString *str=earray[i];
+		int value=[str intValue];
+		[earray replaceObjectAtIndex:i withObject:@(value)];
+	}
 	
-	return earray;
+	return [[earray valueForKeyPath:@"@avg.self"] intValue];
+	
 	
 }
 

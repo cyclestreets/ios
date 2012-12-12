@@ -50,7 +50,7 @@
 @property (nonatomic, readonly)	CLLocationCoordinate2D					segmentEnd;
 @property (nonatomic, readonly)	NSString								*provisionIcon;
 @property (nonatomic, readonly)	NSDictionary							*infoStringDictionary;
-@property (nonatomic, readonly)	NSMutableArray							*segmentElevations;
+@property (nonatomic, readonly)	int										segmentElevation;
 @property (nonatomic, readonly)	BOOL									isWalkingSection;
 @property (nonatomic, readonly)	int										maxElevation;
 
