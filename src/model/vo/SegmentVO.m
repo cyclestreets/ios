@@ -30,6 +30,7 @@ static NSDictionary *roadIcons;
 @synthesize startDistance;
 @synthesize pointsArray;
 @synthesize walkValue;
+@synthesize elevations;
 
 //
 /***********************************************
@@ -224,59 +225,64 @@ static NSDictionary *roadIcons;
 }
 
 
-
-static NSString *ROAD_NAME = @"roadName";
-static NSString *PROVISION_NAME = @"provisionName";
-static NSString *TURN_TYPE = @"turnType";
-static NSString *SEGMENT_TIME = @"segmentTime";
-static NSString *SEGMENT_DISTANCE = @"segmentDistance";
-static NSString *START_BEARING = @"startBearing";
-static NSString *SEGMENT_BUSYNANCE = @"segmentBusynance";
-static NSString *START_TIME = @"startTime";
-static NSString *START_DISTANCE = @"startDistance";
-static NSString *POINTS_ARRAY = @"pointsArray";
-static NSString *WALK_VALUE = @"walkValue";
-
-
-
-//=========================================================== 
-//  Keyed Archiving
-//
-//=========================================================== 
-- (void)encodeWithCoder:(NSCoder *)encoder 
-{
-    [encoder encodeObject:self.roadName forKey:ROAD_NAME];
-    [encoder encodeObject:self.provisionName forKey:PROVISION_NAME];
-    [encoder encodeObject:self.turnType forKey:TURN_TYPE];
-    [encoder encodeInteger:self.segmentTime forKey:SEGMENT_TIME];
-    [encoder encodeInteger:self.segmentDistance forKey:SEGMENT_DISTANCE];
-    [encoder encodeInteger:self.startBearing forKey:START_BEARING];
-    [encoder encodeInteger:self.segmentBusynance forKey:SEGMENT_BUSYNANCE];
-    [encoder encodeInteger:self.startTime forKey:START_TIME];
-    [encoder encodeInteger:self.startDistance forKey:START_DISTANCE];
-	[encoder encodeInteger:self.walkValue forKey:WALK_VALUE];
-    [encoder encodeObject:self.pointsArray forKey:POINTS_ARRAY];
+-(int)maxElevation{
+	
+	return [[self.segmentElevations valueForKeyPath:@"@max.intValue"] intValue];
+	
 }
 
-- (id)initWithCoder:(NSCoder *)decoder 
+
+-(NSMutableArray*)segmentElevations{
+	
+	NSMutableArray *earray=[[elevations componentsSeparatedByString:@","] mutableCopy];
+	[earray removeLastObject];
+	
+	return earray;
+	
+}
+
+
+
+
+//===========================================================
+//  Keyed Archiving
+//
+//===========================================================
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.roadName forKey:@"roadName"];
+    [encoder encodeObject:self.provisionName forKey:@"provisionName"];
+    [encoder encodeObject:self.turnType forKey:@"turnType"];
+    [encoder encodeInteger:self.walkValue forKey:@"walkValue"];
+    [encoder encodeInteger:self.segmentTime forKey:@"segmentTime"];
+    [encoder encodeInteger:self.segmentDistance forKey:@"segmentDistance"];
+    [encoder encodeInteger:self.startBearing forKey:@"startBearing"];
+    [encoder encodeInteger:self.segmentBusynance forKey:@"segmentBusynance"];
+    [encoder encodeObject:self.elevations forKey:@"elevations"];
+    [encoder encodeInteger:self.startTime forKey:@"startTime"];
+    [encoder encodeInteger:self.startDistance forKey:@"startDistance"];
+    [encoder encodeObject:self.pointsArray forKey:@"pointsArray"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     if (self) {
-        self.roadName = [decoder decodeObjectForKey:ROAD_NAME];
-        self.provisionName = [decoder decodeObjectForKey:PROVISION_NAME];
-        self.turnType = [decoder decodeObjectForKey:TURN_TYPE];
-        self.segmentTime = [decoder decodeIntegerForKey:SEGMENT_TIME];
-        self.segmentDistance = [decoder decodeIntegerForKey:SEGMENT_DISTANCE];
-        self.startBearing = [decoder decodeIntegerForKey:START_BEARING];
-        self.segmentBusynance = [decoder decodeIntegerForKey:SEGMENT_BUSYNANCE];
-        self.startTime = [decoder decodeIntegerForKey:START_TIME];
-        self.startDistance = [decoder decodeIntegerForKey:START_DISTANCE];
-		self.walkValue = [decoder decodeIntegerForKey:WALK_VALUE];
-        self.pointsArray = [decoder decodeObjectForKey:POINTS_ARRAY];
+        self.roadName = [decoder decodeObjectForKey:@"roadName"];
+        self.provisionName = [decoder decodeObjectForKey:@"provisionName"];
+        self.turnType = [decoder decodeObjectForKey:@"turnType"];
+        self.walkValue = [decoder decodeIntegerForKey:@"walkValue"];
+        self.segmentTime = [decoder decodeIntegerForKey:@"segmentTime"];
+        self.segmentDistance = [decoder decodeIntegerForKey:@"segmentDistance"];
+        self.startBearing = [decoder decodeIntegerForKey:@"startBearing"];
+        self.segmentBusynance = [decoder decodeIntegerForKey:@"segmentBusynance"];
+        self.elevations = [decoder decodeObjectForKey:@"elevations"];
+        self.startTime = [decoder decodeIntegerForKey:@"startTime"];
+        self.startDistance = [decoder decodeIntegerForKey:@"startDistance"];
+        self.pointsArray = [decoder decodeObjectForKey:@"pointsArray"];
     }
     return self;
 }
-
 
 
 @end

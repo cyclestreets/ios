@@ -514,8 +514,6 @@
 		284608291649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
 		2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
-		284706811600902200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
-		284706821600903200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
 		285352861678B0AB007BC5CB /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352851678B0AB007BC5CB /* GradientView.m */; };
 		285352871678B0AB007BC5CB /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352851678B0AB007BC5CB /* GradientView.m */; };
 		285352B81678B4B8007BC5CB /* UIButton_blue_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 285352B61678B4B8007BC5CB /* UIButton_blue_hi.png */; };
@@ -1049,7 +1047,6 @@
 		284608261649388900CBF96A /* ImageUtilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtilties.h; sourceTree = "<group>"; };
 		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
 		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
-		284706801600902200D5E58B /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_live.txt; path = ../docs/APIKey_live.txt; sourceTree = "<group>"; };
 		285352841678B0AB007BC5CB /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
 		285352851678B0AB007BC5CB /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		285352B61678B4B8007BC5CB /* UIButton_blue_hi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_blue_hi.png; sourceTree = "<group>"; };
@@ -2314,7 +2311,6 @@
 			isa = PBXGroup;
 			children = (
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
-				284706801600902200D5E58B /* APIKey_live.txt */,
 				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
 				280E9318140984F300C7AC75 /* xib */,
 				287ECBAD134490D800B8A6AC /* html */,
@@ -3063,7 +3059,6 @@
 				2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
 				289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
-				284706821600903200D5E58B /* APIKey_live.txt in Resources */,
 				28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */,
 				28373E1F164814A900F5E356 /* WayPointView.xib in Resources */,
 				28373E2216481A0C00F5E356 /* WayPointCell.xib in Resources */,
@@ -3272,7 +3267,6 @@
 				2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
 				289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
-				284706811600902200D5E58B /* APIKey_live.txt in Resources */,
 				28373E20164814A900F5E356 /* WayPointView.xib in Resources */,
 				28373E2316481A0C00F5E356 /* WayPointCell.xib in Resources */,
 				2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,

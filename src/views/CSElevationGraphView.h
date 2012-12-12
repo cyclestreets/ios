@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RouteVO.h"
 
 @interface CSElevationGraphView : UIView
 
-@property(nonatomic,strong)  NSMutableArray						*dataProvider;
+@property(nonatomic,strong)  RouteVO							*dataProvider;
 @property(nonatomic,strong)  UIColor							*lineColor;
 @property(nonatomic,strong)  UIColor							*fillColor;
 

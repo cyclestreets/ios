@@ -37,11 +37,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SavedRoutesManager.h"
 #import "HudManager.h"
 #import "CSElevationGraphView.h"
+#import "UIView+Additions.h"
 
 @interface RouteSummary()
 
-@property(nonatomic,strong)  CSElevationGraphView         *elevationView;
-
+@property (nonatomic,strong)  CSElevationGraphView			*elevationView;
+@property (nonatomic, weak)	IBOutlet UIImageView			*selectedRouteIcon;
 
 -(void)selectedRouteUpdated;
 
@@ -63,9 +64,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @synthesize speedLabel;
 @synthesize calorieLabel;
 @synthesize coLabel;
-@synthesize routeButton;
-@synthesize renameButton;
-@synthesize favouriteButton;
 
 
 
@@ -147,16 +145,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	headerContainer.layoutMode=BUVerticalLayoutMode;
 	[headerContainer initFromNIB];
 	readoutContainer.layoutMode=BUVerticalLayoutMode;
+	readoutContainer.paddingLeft=20;
 	[readoutContainer initFromNIB];
 	
 	
-	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 100)];
+	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 120)];
 	_elevationView.backgroundColor=[UIColor clearColor];
 	
 	
-	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 2)];
 	d1.backgroundColor=[UIColor clearColor];
-	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 2)];
 	d2.backgroundColor=[UIColor clearColor];
 	
 	
@@ -190,7 +189,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	calorieLabel.text=route.calorieString;
 	coLabel.text=route.coString;
 	
+	_elevationView.dataProvider=route;
 	[_elevationView update];
+	
+	_selectedRouteIcon.visible=[[RouteManager sharedInstance] routeIsSelectedRoute:route];
 	
 	
 	[viewContainer refresh];
@@ -230,7 +232,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		// if for route state
 		NSMutableArray *actionbuttons=[@[@{@"type":@"green",@"text":@"Rename route",@"index":@(RenameIndex)}] mutableCopy];
 		
-		if ([[RouteManager sharedInstance] routeIsSelectedRoute:route]) {
+		if ([[RouteManager sharedInstance] routeIsSelectedRoute:route]==NO) {
 			[actionbuttons insertObject:@{@"type":@"orange",@"text":@"Select route",@"index":@(SelectIndex)} atIndex:0];
 		}
 		
@@ -305,7 +307,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Added to favourites" andMessage:nil];
 		
-		favouriteButton.hidden=YES;
 		
 	}else{
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to add to favourites" andMessage:nil];

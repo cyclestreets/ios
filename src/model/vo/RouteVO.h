@@ -65,6 +65,8 @@
 
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*fileid;
 @property (nonatomic, readonly)	BOOL									containsWalkingSections;
+@property (nonatomic, readonly)	int										maxElevation;
+@property (nonatomic, readonly)	int										elevationsCount;
 
 
 

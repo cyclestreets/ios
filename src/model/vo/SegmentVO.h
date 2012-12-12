@@ -22,6 +22,7 @@
 	NSInteger			startBearing;
 	NSInteger			segmentBusynance;
 	
+	NSString			*elevations;
 	
 	NSInteger			startTime;
 	NSInteger			startDistance;
@@ -33,25 +34,26 @@
 @property (nonatomic, strong)	NSString		*roadName;
 @property (nonatomic, strong)	NSString		*provisionName;
 @property (nonatomic, strong)	NSString		*turnType;
-@property (nonatomic)	NSInteger		walkValue;
-@property (nonatomic)	NSInteger		segmentTime;
-@property (nonatomic)	NSInteger		segmentDistance;
-@property (nonatomic)	NSInteger		startBearing;
-@property (nonatomic)	NSInteger		segmentBusynance;
-@property (nonatomic)	NSInteger		startTime;
-@property (nonatomic)	NSInteger		startDistance;
-@property (nonatomic, strong)	NSArray		*pointsArray;
+@property (nonatomic, strong)	NSString		*elevations;
+@property (nonatomic)	NSInteger				walkValue;
+@property (nonatomic)	NSInteger				segmentTime;
+@property (nonatomic)	NSInteger				segmentDistance;
+@property (nonatomic)	NSInteger				startBearing;
+@property (nonatomic)	NSInteger				segmentBusynance;
+@property (nonatomic)	NSInteger				startTime;
+@property (nonatomic)	NSInteger				startDistance;
+@property (nonatomic, strong)	NSArray			*pointsArray;
 
 
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
-@property (nonatomic, readonly)	CLLocationCoordinate2D	segmentStart;
-@property (nonatomic, readonly)	CLLocationCoordinate2D	segmentEnd;
+@property (unsafe_unretained, nonatomic, readonly)	NSString			*timeString;
+@property (nonatomic, readonly)	CLLocationCoordinate2D					segmentStart;
+@property (nonatomic, readonly)	CLLocationCoordinate2D					segmentEnd;
+@property (nonatomic, readonly)	NSString								*provisionIcon;
+@property (nonatomic, readonly)	NSDictionary							*infoStringDictionary;
+@property (nonatomic, readonly)	NSMutableArray							*segmentElevations;
+@property (nonatomic, readonly)	BOOL									isWalkingSection;
+@property (nonatomic, readonly)	int										maxElevation;
 
-@property (nonatomic, readonly)	NSString	*provisionIcon;
-@property (nonatomic, readonly)	NSDictionary	*infoStringDictionary;
-
-
-@property (nonatomic, readonly)	BOOL	isWalkingSection;
 
 
 // return array of allpoints for this segment

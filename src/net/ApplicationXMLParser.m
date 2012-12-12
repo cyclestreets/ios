@@ -477,6 +477,8 @@
 				segment.startBearing=[[TBXML textForElement:[TBXML childElementNamed:@"cs:startBearing" parentElement:segmentnode]]intValue];
 				segment.segmentBusynance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:busynance" parentElement:segmentnode]]intValue];
 				
+				segment.elevations=[TBXML textForElement:[TBXML childElementNamed:@"cs:elevations" parentElement:segmentnode]];
+				
 				segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
 				segment.startTime=time;
 				segment.startDistance=distance;

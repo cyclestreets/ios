@@ -56,9 +56,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet		UILabel				*coLabel;
 	
 	
-	IBOutlet		UIButton			*routeButton;
-	IBOutlet		UIButton			*renameButton;
-	IBOutlet		UIButton			*favouriteButton;
 	
 }
 
@@ -77,12 +74,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong) IBOutlet UILabel		* speedLabel;
 @property (nonatomic, strong) IBOutlet UILabel		* calorieLabel;
 @property (nonatomic, strong) IBOutlet UILabel		* coLabel;
-@property (nonatomic, strong) IBOutlet UIButton		* routeButton;
-@property (nonatomic, strong) IBOutlet UIButton		* renameButton;
-@property (nonatomic, strong) IBOutlet UIButton		* favouriteButton;
 
-- (IBAction) routeButtonSelected;
--(IBAction) renameButtonSelected:(id)sender;
--(IBAction) favouriteButtonSelected:(id)sender;
+
 
 @end

@@ -158,6 +158,25 @@
 	return NO;
 }
 
+-(int)maxElevation{
+	
+	int value=0;
+	
+	for(SegmentVO *segment in segments){
+		value=MAX(value, segment.maxElevation);
+	}
+	return value;
+}
+
+-(int)elevationsCount{
+	
+	int value=0;
+	for(SegmentVO *segment in segments){
+		value+=segment.segmentElevations.count;
+	}
+	return value;
+}
+
 
 //
 /***********************************************
