@@ -115,8 +115,9 @@
 -(IBAction)doGenericLeftEvent:(id)sender;
 -(IBAction)doNextItemEvent:(id)sender;
 -(IBAction)doPrevItemEvent:(id)sender;
--(void)updateLeftItemTitle:(NSString*)str;
 
+-(void)updateLeftItemTitle:(NSString*)str;
+-(void)updateTitleString:(NSString*)str;
 
 
 +(UIBarButtonItem*)createBackButtonItemwithSelector:(SEL)selector target:(id)target;

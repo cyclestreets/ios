@@ -7,6 +7,7 @@
 //
 
 #import "CSElevationGraphView.h"
+#import "CSPointVO.h"
 
 @interface CSElevationGraphView()
 
@@ -53,12 +54,12 @@
 	CGContextSetStrokeColorWithColor(ctx, _lineColor.CGColor);
 	CGContextSetFillColorWithColor(ctx, _fillColor.CGColor);
     
-	NSArray *points = [pointListProvider pointList];
+	NSArray *points = @[];
 	
     for (int i=0;i<_dataProvider.count;i++) {
         
         CSPointVO *point=_dataProvider[i];
-        CGContextAddLineToPoint(ctx, point.x, point.y);
+        CGContextAddLineToPoint(ctx, point.p.x, point.p.y);
          
         
     }

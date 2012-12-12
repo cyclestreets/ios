@@ -30,8 +30,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SuperViewController.h"
 #import "ExpandedUILabel.h"
 #import "SavedRoutesManager.h"
+#import "BUActionSheet.h"
 
-@interface RouteSummary : SuperViewController {
+@interface RouteSummary : SuperViewController <BUActionSheetDelegate>{
 	
 	RouteVO								*route;
 	

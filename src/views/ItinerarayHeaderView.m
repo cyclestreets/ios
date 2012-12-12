@@ -14,7 +14,6 @@
 
 
 @property(nonatomic,strong)  ItineraryInfoContainer					*infoContainer;
-@property(nonatomic,strong)  ItineraryInfoContainer					*infoContainer;
 
 
 @end

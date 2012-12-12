@@ -143,6 +143,8 @@
 }
 
 
+
+
 -(void)createTitle{
 	
 	
@@ -214,7 +216,10 @@
 	
 }
 
-
+-(void)updateTitleString:(NSString*)str{
+	self.titleString=str;
+	self.titleLabel.text=self.titleString;
+}
 
 
 -(void)createRightNavItemWithType:(NSString*)type{

@@ -759,6 +759,8 @@
 		28D2BAE11354814E00694093 /* UKImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BAE01354814E00694093 /* UKImage.m */; };
 		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
+		28D9B0881678A0E40088AFC2 /* BUActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D9B0871678A0E40088AFC2 /* BUActionSheet.m */; };
+		28D9B0891678A0E40088AFC2 /* BUActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D9B0871678A0E40088AFC2 /* BUActionSheet.m */; };
 		28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */; };
 		28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 28E603091610B683006A4B4C /* cyclestreets.geojson */; };
@@ -1376,6 +1378,8 @@
 		28D2BC5A1354C48B00694093 /* BUDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUDividerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28D2BC5B1354C48B00694093 /* BUDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUDividerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28D7E1F712BAA8710025C4A2 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		28D9B0861678A0E40088AFC2 /* BUActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUActionSheet.h; sourceTree = "<group>"; };
+		28D9B0871678A0E40088AFC2 /* BUActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUActionSheet.m; sourceTree = "<group>"; };
 		28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWizardCategoryCell.xib; sourceTree = "<group>"; };
 		28DFE8D615A428DD005FDCA0 /* PhotoWizardCategoryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryCellView.h; sourceTree = "<group>"; };
 		28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryCellView.m; sourceTree = "<group>"; };
@@ -2458,6 +2462,8 @@
 		28AD6337131FB6C8008527FC /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				28D9B0861678A0E40088AFC2 /* BUActionSheet.h */,
+				28D9B0871678A0E40088AFC2 /* BUActionSheet.m */,
 				28B485241526225700E406E1 /* LayoutBox.h */,
 				28B485251526225700E406E1 /* LayoutBox.m */,
 				28B484DC15261F3B00E406E1 /* CopyLabel.h */,
@@ -3462,6 +3468,7 @@
 				2819B2C61671FC33007B4ED4 /* ItineraryInfoContainer.m in Sources */,
 				2819B2CA1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */,
 				2819B2D316720136007B4ED4 /* CSElevationGraphView.m in Sources */,
+				28D9B0881678A0E40088AFC2 /* BUActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3639,6 +3646,7 @@
 				2819B2C71671FC33007B4ED4 /* ItineraryInfoContainer.m in Sources */,
 				2819B2CB1671FECA007B4ED4 /* ItineraryElevationContainer.m in Sources */,
 				2819B2D416720136007B4ED4 /* CSElevationGraphView.m in Sources */,
+				28D9B0891678A0E40088AFC2 /* BUActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

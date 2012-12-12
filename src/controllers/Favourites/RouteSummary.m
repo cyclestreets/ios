@@ -119,6 +119,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [super viewDidLoad];
 	
 	[self createPersistentUI];
+	
+	[self createNavigationBarUI];
 
 }
 
@@ -191,8 +193,56 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[viewContainer refresh];
 	
 	[scrollView setContentSize:CGSizeMake(SCREENWIDTH, viewContainer.height)];
+	
+	[navigation updateTitleString:[NSString stringWithFormat:@"Route #%@", [route routeid]]];
 }
 
+
+
+-(void)createNavigationBarUI{
+	
+	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
+	self.navigation=nav;
+	navigation.delegate=self;
+	navigation.leftItemType=BUNavBackStandardType;
+    navigation.rightItemType=UIKitButtonType;
+	navigation.rightButtonTitle=@"Action";
+	navigation.titleType=BUNavTitleDefaultType;
+	navigation.titleString=@"Route";
+    navigation.titleFontColor=[UIColor whiteColor];
+	navigation.navigationItem=self.navigationItem;
+	[navigation createNavigationUI];
+	
+}
+
+
+#define RenameIndex 999
+#define SelectIndex 998
+#define FavouriteIndex 997
+
+-(void)doNavigationSelector:(NSString *)type{
+	
+	if ([type isEqualToString:RIGHT]) {
+		
+		// if for route state
+		NSMutableArray *actionbuttons=[@[@{@"type":@"green",@"text":@"Rename route",@"index":@(RenameIndex)}] mutableCopy];
+		
+		if ([[RouteManager sharedInstance] routeIsSelectedRoute:route]) {
+			[actionbuttons insertObject:@{@"type":@"orange",@"text":@"Select route",@"index":@(SelectIndex)} atIndex:0];
+		}
+		
+		if(dataType!=SavedRoutesDataTypeFavourite){
+			[actionbuttons addObject:@{@"type":@"red",@"text":@"Add to favourites",@"index":@(FavouriteIndex)}];
+		}
+		
+		BUActionSheet *actionSheet=[[BUActionSheet alloc] initWithButtons:actionbuttons andTitle:@"Route actions"];
+		actionSheet.showsCancelButton=YES;
+		actionSheet.delegate=self;
+		[actionSheet show:YES];
+		
+	}
+	
+}
 
 
 //
@@ -257,19 +307,45 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // favouriting
 
 -(IBAction)favouriteButtonSelected:(id)sender{
+	[self favouriteRoute];
+}
+
+-(void)favouriteRoute{
 	
 	BOOL result=[[SavedRoutesManager sharedInstance] moveRoute:route toDataProvider:SAVEDROUTE_FAVS];
 	
 	if(result==YES){
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Added to favourites" andMessage:nil];
-	
+		
 		favouriteButton.hidden=YES;
 		
 	}else{
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to add to favourites" andMessage:nil];
 	}
+}
 
+
+//
+/***********************************************
+ * @description			BUActionSheet delegate
+ ***********************************************/
+//
+
+-(void)actionSheetClickedButtonAtIndex:(NSInteger)buttonIndex{
+	
+	switch (buttonIndex) {
+		case RenameIndex:
+			[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:route.nameString delegate:self];
+		break;
+		case SelectIndex:
+			[self selectRoute];
+		break;
+		case FavouriteIndex:
+			[self favouriteRoute];
+		break;
+	}
+	
 }
 
 
