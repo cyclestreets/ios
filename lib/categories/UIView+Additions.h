@@ -9,7 +9,7 @@
 
 - (id) initWithParent:(UIView *)parent;
 + (id) viewWithParent:(UIView *)parent;
-
+-(void)removeAllSubViews;
 
 
 // Position of the top-left corner in superview's coordinates

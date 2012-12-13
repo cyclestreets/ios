@@ -147,6 +147,10 @@
 		281E09041451C6690034CC63 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
 		281E09081451CA210034CC63 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
+		282B8A721679E4C8009897CB /* BUCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282B8A711679E4C8009897CB /* BUCalloutView.m */; };
+		282B8A731679E4C8009897CB /* BUCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282B8A711679E4C8009897CB /* BUCalloutView.m */; };
+		282B8A761679E98A009897CB /* BUCalloutBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282B8A751679E98A009897CB /* BUCalloutBackgroundView.m */; };
+		282B8A771679E98A009897CB /* BUCalloutBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282B8A751679E98A009897CB /* BUCalloutBackgroundView.m */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
 		2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
@@ -1023,6 +1027,10 @@
 		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
 		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
 		281E09071451CA210034CC63 /* POICategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POICategoryView.xib; path = poi/POICategoryView.xib; sourceTree = "<group>"; };
+		282B8A701679E4C8009897CB /* BUCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCalloutView.h; sourceTree = "<group>"; };
+		282B8A711679E4C8009897CB /* BUCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCalloutView.m; sourceTree = "<group>"; };
+		282B8A741679E98A009897CB /* BUCalloutBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCalloutBackgroundView.h; sourceTree = "<group>"; };
+		282B8A751679E98A009897CB /* BUCalloutBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCalloutBackgroundView.m; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
 		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
@@ -2375,6 +2383,10 @@
 				2819B2C91671FEC9007B4ED4 /* ItineraryElevationContainer.m */,
 				2819B2D116720136007B4ED4 /* CSElevationGraphView.h */,
 				2819B2D216720136007B4ED4 /* CSElevationGraphView.m */,
+				282B8A701679E4C8009897CB /* BUCalloutView.h */,
+				282B8A711679E4C8009897CB /* BUCalloutView.m */,
+				282B8A741679E98A009897CB /* BUCalloutBackgroundView.h */,
+				282B8A751679E98A009897CB /* BUCalloutBackgroundView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3487,6 +3499,8 @@
 				2819B2D316720136007B4ED4 /* CSElevationGraphView.m in Sources */,
 				28D9B0881678A0E40088AFC2 /* BUActionSheet.m in Sources */,
 				285352861678B0AB007BC5CB /* GradientView.m in Sources */,
+				282B8A721679E4C8009897CB /* BUCalloutView.m in Sources */,
+				282B8A761679E98A009897CB /* BUCalloutBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3665,6 +3679,8 @@
 				2819B2D416720136007B4ED4 /* CSElevationGraphView.m in Sources */,
 				28D9B0891678A0E40088AFC2 /* BUActionSheet.m in Sources */,
 				285352871678B0AB007BC5CB /* GradientView.m in Sources */,
+				282B8A731679E4C8009897CB /* BUCalloutView.m in Sources */,
+				282B8A771679E98A009897CB /* BUCalloutBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

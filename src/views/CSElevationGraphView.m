@@ -14,6 +14,7 @@
 #import "ViewUtilities.h"
 #import "ExpandedUILabel.h"
 #import "SegmentVO.h"
+#import "BUCalloutView.h"
 
 #define graphHeight 80
 @interface CSElevationGraphView()
@@ -22,7 +23,7 @@
 @property(nonatomic,strong)  CAShapeLayer			*graphMaskLayer;
 @property(nonatomic,strong)  UIBezierPath			*graphPath;
 
-@property(nonatomic,strong)  UIView					*calloutView;
+@property(nonatomic,strong)  BUCalloutView			*calloutView;
 
 
 @end
@@ -75,33 +76,12 @@
 	[_graphView addGestureRecognizer:singleFingerTap];
 	
 	
-	// this should be separate uiview
-	
-	self.calloutView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
-	_calloutView.backgroundColor=UIColorFromRGB(0xFF0000);
-	UIBezierPath *cpath=[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 80, 20) cornerRadius:6];
-	UIBezierPath *tpath=[UIBezierPath bezierPath];
-	[tpath moveToPoint:CGPointMake(35, 20)];
-	[tpath addLineToPoint:CGPointMake(45, 20)];
-	[tpath addLineToPoint:CGPointMake(40, 30)];
-	
-	[cpath appendPath:tpath];
-	
-	CAShapeLayer *sl= [CAShapeLayer layer];
-	[sl setFrame:CGRectMake(0, 0, _calloutView.width, _calloutView.height)];
-	_calloutView.layer.mask = sl;
-	[sl setPath:cpath.CGPath];
+	self.calloutView=[[BUCalloutView alloc]initWithFrame:CGRectMake(200, 0, 80, 30)];
+	_calloutView.fillColor=UIColorFromRGB(0x006EA6);
+	_calloutView.cornerRadius=6;
+	[_calloutView updateTitleLabel:@"25 miles"];
 	[self addSubview:_calloutView];
 	
-	//
-	UIView *gradiantlayer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
-	gradiantlayer.layer.shadowColor = [UIColor blackColor].CGColor;
-	gradiantlayer.layer.shadowOpacity = 0.5f;
-	gradiantlayer.layer.shadowOffset = CGSizeMake(5, 6.0f);
-	gradiantlayer.layer.shadowRadius = 5.0f;
-	gradiantlayer.layer.shadowPath = cpath.CGPath;
-	gradiantlayer.layer.masksToBounds = NO;
-	[_calloutView.layer insertSublayer:gradiantlayer.layer atIndex:0];
 	
 
 
@@ -128,49 +108,64 @@
 -(void)update{
 	
 	
-	// update labels for distance properties
-	
-	// calculate points based on segments
-	// will be percent of high/low point for graphHeight
+	[_graphView removeAllSubViews];
 	
 	UIBezierPath *path = [UIBezierPath bezierPath];
-	
 	[path moveToPoint:CGPointMake(0, _graphView.height)];
 	
-	int elevationcount=_dataProvider.segments.count; // will be count of elevation points for route
-	int minelevation=0;
+	// temp
 	int maxelevation=[_dataProvider maxElevation]; // max elevation for all segemnts
-	
-	
-	// TODO: cant exceed uiwidth value for number of points
-	// TODO: should be max value from each segment maybe
-	// this can be wrong if count>280, graph will extend beyond extents at a min of 1px
-	int xincrement=MAX(UIWIDTH,elevationcount)/elevationcount;
-	
-	
-	
-	[path addLineToPoint:CGPointMake(0, minelevation)];
 	int index=0;
+	int xpos=0;
+	float currentDistance=0;
+	
+	// startpoint
+	SegmentVO *segment=_dataProvider.segments[0];
+	float startpercent=(float)segment.segmentElevation/(float)maxelevation;
+	startpercent=1-startpercent;
+	int startypos=graphHeight*startpercent;
+	[path addLineToPoint:CGPointMake(0, startypos)];
+	//
+	
+	
 	for (SegmentVO *segment in _dataProvider.segments) {
 		
+		// y value
 		int value=segment.segmentElevation;
+		float ypercent=(float)value/(float)maxelevation;
+		ypercent=1-ypercent;
+		int ypos=graphHeight*ypercent;
 		
-		float percent=(float)value/(float)maxelevation;
-		value=graphHeight*percent;
-			
-		int xpos=ceil(index*xincrement);
+		// x value
+		currentDistance+=[segment segmentDistance];
+		float xpercent=currentDistance/[_dataProvider.length floatValue];
+		xpos=UIWIDTH*xpercent;
+		
+		// ensures last point is max x, handles rounding errors
 		if (index==_dataProvider.segments.count-1) {
 			xpos=UIWIDTH;
 		}
-		[path addLineToPoint:CGPointMake(xpos, value)];
+		
+		BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,value,xpos,[segment segmentDistance],xpercent);
+		
+		// debug only
+		ExpandedUILabel *label=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(xpos-1, ypos-1, 14,14)];
+		label.backgroundColor=[UIColor clearColor];
+		label.font=[UIFont systemFontOfSize:11];
+		label.text=[NSString stringWithFormat:@"%i",index];
+		[_graphView addSubview:label];
+		//
+
+		[path addLineToPoint:CGPointMake(xpos, ypos)];
 			
 		index++;
 				
 	}
+	
 	[path addLineToPoint:CGPointMake(UIWIDTH, _graphView.height)];
-	
+	 
+	 
 	self.graphPath=path;
-	
 	[_graphMaskLayer setPath:path.CGPath];
 	
 }
