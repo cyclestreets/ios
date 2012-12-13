@@ -11,6 +11,7 @@
 #import "GradientView.h"
 #import "CopyLabel.h"
 
+
 @interface PhotoMapImageLocationViewController(Private) 
 
 -(void)updateContentSize;
@@ -19,6 +20,7 @@
 -(void)createNavigationBarUI;
 -(void)createNonPersistentUI;
 -(IBAction)backButtonSelected:(id)sender;
+-(IBAction)shareButtonSelected:(id)sender;
 
 @end
 
@@ -99,10 +101,7 @@
 
 -(void)createNavigationBarUI{
 	
-	UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-															  style:UIBarButtonItemStyleBordered
-															 target:self
-															 action:@selector(backButtonSelected:)];
+
 	
 	self.titleLabel=[[CopyLabel alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
 	titleLabel.textAlignment=UITextAlignmentCenter;
@@ -112,8 +111,6 @@
 	titleLabel.shadowColor=[UIColor grayColor];
 	
 	[self.navigationBar.topItem setTitleView:titleLabel];
-	
-	[self.navigationBar.topItem setRightBarButtonItem:back];
 	
 	
 }
@@ -170,6 +167,138 @@
 	[imageView cancel];
 	[self dismissModalViewControllerAnimated:YES];
 	
+}
+
+
+
+-(IBAction)shareButtonSelected:(id)sender{
+	
+	NSArray *activitites;
+	
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+		
+		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid]]] applicationActivities:nil];
+		activity.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll, UIActivityTypePrint, UIActivityTypePostToWeibo];
+		
+		[self presentViewController:activity animated:YES completion:nil];
+		[activity setCompletionHandler:^(NSString *activityType, BOOL completed){
+			
+			if(completed==YES){
+				
+				
+				
+			}
+			
+		}];
+		
+		
+		
+	}else{
+		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS),@(BUIconActionSheetIconTypeCopy)];
+		
+		BUIconActionSheet *iconSheet=[[BUIconActionSheet alloc] initWithButtons:activitites andTitle:@"Share this CycleStreets photo"];
+		iconSheet.delegate=self;
+		
+		[iconSheet show:YES];
+	}
+	
+	
+	
+}
+
+// BUIconActionSheet delegate callback
+-(void)actionSheetClickedButtonWithType:(BUIconActionSheetIconType)type{
+	
+	
+	switch (type) {
+		case BUIconActionSheetIconTypeTwitter:
+			
+			if ([TWTweetComposeViewController canSendTweet]) {
+				
+				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+				[tweetViewController setInitialText:@"A CycleStreets photo:"];
+				
+				[tweetViewController addURL:[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid]];
+				
+				[self presentViewController:tweetViewController animated:YES completion:nil];
+				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
+					
+					if(result==TWTweetComposeViewControllerResultDone){
+						
+						
+						
+					}
+					
+				}];
+				
+			} else {
+				
+				UIAlertView *alertView = [[UIAlertView alloc]
+										  initWithTitle:@"Sorry"
+										  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+										  delegate:self
+										  cancelButtonTitle:@"OK"
+										  otherButtonTitles:nil];
+				[alertView show];
+				
+				
+				
+				
+			}
+			
+			
+			break;
+			
+		case BUIconActionSheetIconTypeMail:
+		{
+			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+			picker.mailComposeDelegate = self;
+			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",dataProvider.csid]];
+			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid],dataProvider.csid] isHTML:YES];
+			
+			if(picker!=nil)
+				[self presentModalViewController:picker animated:YES];
+		}
+			break;
+			
+		case BUIconActionSheetIconTypeSMS:
+		{
+			
+			UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+			pasteboard.persistent = YES;
+			pasteboard.image = imageView.image;
+			
+			
+			NSString *phoneToCall = @"sms:";
+			NSString *phoneToCallEncoded = [phoneToCall stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+			NSURL *url = [[NSURL alloc] initWithString:phoneToCallEncoded];
+			[[UIApplication sharedApplication] openURL:url];
+			
+			
+		}
+			
+			break;
+			
+		case BUIconActionSheetIconTypeCopy:
+		{
+			[[UIPasteboard generalPasteboard] setString:dataProvider.csid];
+		}
+			
+			break;
+	}
+	
+}
+
+
+// The mail compose view controller delegate method
+- (void)mailComposeController:(MFMailComposeViewController *)controller  didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+	
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+	
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 

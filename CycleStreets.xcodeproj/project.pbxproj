@@ -527,6 +527,8 @@
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		284706811600902200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
 		284706821600903200D5E58B /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 284706801600902200D5E58B /* APIKey_live.txt */; };
+		285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
+		285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -543,8 +545,6 @@
 		28535DFB15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DF915E6313E0092FC16 /* Icon_currentroutecell.png */; };
 		2858F2B11586161B0047283D /* MapLocationSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2858F2B01586161B0047283D /* MapLocationSearchCell.xib */; };
 		2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2858F2B3158617290047283D /* MapLocationSearchCellView.m */; };
-		285B2A5F166A91C200495E98 /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285B2A5E166A91C200495E98 /* BUIconActionSheet.m */; };
-		285B2A60166A91C200495E98 /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285B2A5E166A91C200495E98 /* BUIconActionSheet.m */; };
 		285F68DC132C07CD00B511C0 /* RouteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285F68DB132C07CD00B511C0 /* RouteListViewController.m */; };
 		2863A3DF134E508800A22093 /* Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A35B134E508800A22093 /* Query.m */; };
 		2863A3E0134E508800A22093 /* QueryPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A35D134E508800A22093 /* QueryPhoto.m */; };
@@ -1066,6 +1066,8 @@
 		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
 		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
 		284706801600902200D5E58B /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_live.txt; path = ../docs/APIKey_live.txt; sourceTree = "<group>"; };
+		285352651678AF17007BC5CB /* BUIconActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUIconActionSheet.h; sourceTree = "<group>"; };
+		285352661678AF17007BC5CB /* BUIconActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUIconActionSheet.m; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
 		28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HUD_icon_checkMark@2x.png"; sourceTree = "<group>"; };
 		28535DBB15E50FCD0092FC16 /* HUD_icon_exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_exclaim.png; sourceTree = "<group>"; };
@@ -1076,8 +1078,6 @@
 		2858F2B01586161B0047283D /* MapLocationSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapLocationSearchCell.xib; sourceTree = "<group>"; };
 		2858F2B2158617290047283D /* MapLocationSearchCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLocationSearchCellView.h; sourceTree = "<group>"; };
 		2858F2B3158617290047283D /* MapLocationSearchCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLocationSearchCellView.m; sourceTree = "<group>"; };
-		285B2A5D166A91C200495E98 /* BUIconActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUIconActionSheet.h; sourceTree = "<group>"; };
-		285B2A5E166A91C200495E98 /* BUIconActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUIconActionSheet.m; sourceTree = "<group>"; };
 		285F68DA132C07CC00B511C0 /* RouteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteListViewController.h; sourceTree = "<group>"; };
 		285F68DB132C07CD00B511C0 /* RouteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteListViewController.m; sourceTree = "<group>"; };
 		2863A358134E508800A22093 /* Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Categories.h; sourceTree = "<group>"; };
@@ -2072,8 +2072,8 @@
 		28735C01144EC97F00726A6C /* photomap */ = {
 			isa = PBXGroup;
 			children = (
-				28735C02144EC97F00726A6C /* PhotoMapImageLocationView.xib */,
 				28735C03144EC97F00726A6C /* PhotoMapView.xib */,
+				28735C02144EC97F00726A6C /* PhotoMapImageLocationView.xib */,
 			);
 			path = photomap;
 			sourceTree = "<group>";
@@ -2412,8 +2412,6 @@
 				28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */,
 				28AE590315E503270034268C /* MapMarkerTouchView.h */,
 				28AE590415E503270034268C /* MapMarkerTouchView.m */,
-				285B2A5D166A91C200495E98 /* BUIconActionSheet.h */,
-				285B2A5E166A91C200495E98 /* BUIconActionSheet.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2511,6 +2509,8 @@
 		28AD6337131FB6C8008527FC /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				285352651678AF17007BC5CB /* BUIconActionSheet.h */,
+				285352661678AF17007BC5CB /* BUIconActionSheet.m */,
 				28B485241526225700E406E1 /* LayoutBox.h */,
 				28B485251526225700E406E1 /* LayoutBox.m */,
 				28B484DC15261F3B00E406E1 /* CopyLabel.h */,
@@ -3538,8 +3538,8 @@
 				284608281649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3E1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 				288C0F65164AA0B1000880FF /* MapViewController.m in Sources */,
-				285B2A5F166A91C200495E98 /* BUIconActionSheet.m in Sources */,
 				2811C4A9166CD4AC00592560 /* BUIconButton.m in Sources */,
+				285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3713,8 +3713,8 @@
 				284608291649388900CBF96A /* ImageUtilties.m in Sources */,
 				288C0F3F1649A5C4000880FF /* FMMoveTableView.m in Sources */,
 				2815EA04164D77B0003C356A /* MapViewController.m in Sources */,
-				285B2A60166A91C200495E98 /* BUIconActionSheet.m in Sources */,
 				2811C4AA166CD4AC00592560 /* BUIconButton.m in Sources */,
+				285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
