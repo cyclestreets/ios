@@ -16,10 +16,11 @@
 #import "SegmentVO.h"
 #import "BUCalloutView.h"
 
+
 #define graphHeight 80
 @interface CSElevationGraphView()
 
-@property(nonatomic,strong)  UIView					*graphView;
+@property(nonatomic,strong)  CSGraphView			*graphView;
 @property(nonatomic,strong)  CAShapeLayer			*graphMaskLayer;
 @property(nonatomic,strong)  UIBezierPath			*graphPath;
 
@@ -62,7 +63,8 @@
 	[ViewUtilities alignView:xlabel withView:self :BURightAlignMode :BUBottomAlignMode];
 	
 	
-	self.graphView=[[UIView alloc] initWithFrame:CGRectMake(0, 20, UIWIDTH, graphHeight)];
+	self.graphView=[[CSGraphView alloc] initWithFrame:CGRectMake(0, 20, UIWIDTH, graphHeight)];
+	_graphView.delegate=self;
 	_graphView.backgroundColor=UIColorFromRGB(0x509720);
 	
 	self.graphMaskLayer = [CAShapeLayer layer];
@@ -71,12 +73,8 @@
 	
 	[self addSubview:_graphView];
 	
-	UITapGestureRecognizer *singleFingerTap =
-	[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-	[_graphView addGestureRecognizer:singleFingerTap];
 	
-	
-	self.calloutView=[[BUCalloutView alloc]initWithFrame:CGRectMake(200, 0, 80, 30)];
+	self.calloutView=[[BUCalloutView alloc]initWithFrame:CGRectMake(20, 0, 80, 30)];
 	_calloutView.fillColor=UIColorFromRGB(0x006EA6);
 	_calloutView.cornerRadius=6;
 	[_calloutView updateTitleLabel:@"25 miles"];
@@ -88,17 +86,73 @@
 }
 
 
+-(void)handleTouchInGraph:(CGPoint)point{
+	
+	if ([_graphPath containsPoint:point]) {
+		
+		if(_calloutView.isHidden==YES){
+			
+			_calloutView.visible=YES;
+			_calloutView.alpha=0;
+			
+			[UIView animateWithDuration:0.3 animations:^{
+				_calloutView.alpha=1;
+			} completion:^(BOOL finished) {
+				
+			}];
+		}
+		
+		float xpos=point.x;
+		
+		// TODO: callout bg should adjust arrow position, end, center, end
+		
+		float calloutxpos=(_graphView.x+xpos)-(_calloutView.width/2);
+		calloutxpos=MAX(0, MIN((280-_calloutView.width), calloutxpos));
+		_calloutView.x=calloutxpos;
+		
+		
+	}
+	
+}
+
+-(void)cancelTouchInGraph{
+	
+	if(_calloutView.isHidden==NO){
+		
+		[UIView animateWithDuration:0.3 animations:^{
+			_calloutView.alpha=0;
+		} completion:^(BOOL finished) {
+			_calloutView.visible=NO;
+		}];
+	}
+	
+	
+	
+}
+
+
 //The event handling method
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
 	
 	CGPoint location = [recognizer locationInView:recognizer.view];
 	
 	if ([_graphPath containsPoint:location]) {
-		NSLog(@"hit");
 		
-		// update callout values
+		float xpos=location.x;
 		
-		// posiiton callout
+		BetterLog(@"xpos=%f",xpos);
+		
+		// TODO: restrict x to min/max so cant go off screen
+		// TODO: callout bg should adjust arrow position, end, center, end
+		
+		float calloutxpos=(_graphView.x+xpos);
+		
+		calloutxpos=MAX(0, calloutxpos);
+		
+		_calloutView.x=calloutxpos;
+		
+		
+		
 		
 	}
 	
@@ -127,6 +181,9 @@
 	[path addLineToPoint:CGPointMake(0, startypos)];
 	//
 	
+	
+	// ideal form is method to reduce >280 data sets to 280 across all segments
+	// less than 280 can be used as is with per segment distance increment
 	
 	for (SegmentVO *segment in _dataProvider.segments) {
 		

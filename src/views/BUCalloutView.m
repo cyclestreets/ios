@@ -59,7 +59,13 @@
 	[_backgroundView setFrame:CGRectMake(0, 0, _titleLabel.width, _titleLabel.height+12)];
 	[_backgroundView setNeedsDisplay];
 	
+	self.width=_titleLabel.width;
+	
 }
+
+
+
+
 
 
 @end

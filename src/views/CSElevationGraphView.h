@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RouteVO.h"
+#import "CSGraphView.h"
 
-@interface CSElevationGraphView : UIView
+@interface CSElevationGraphView : UIView<CSGraphViewDelegate>
 
 @property(nonatomic,strong)  RouteVO							*dataProvider;
 @property(nonatomic,strong)  UIColor							*lineColor;
