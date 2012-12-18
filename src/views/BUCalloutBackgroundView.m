@@ -20,6 +20,7 @@
         self.fillColor = kDefaultRectColor;
         self.strokeWidth = kDefaultStrokeWidth;
         self.cornerRadius = kDefaultCornerRadius;
+		self.arrowPoint=frame.size.width/2;
     }
     return self;
 }
@@ -29,6 +30,9 @@
 {
     // Ignore any attempt to set background color - backgroundColor must stay set to clearColor
 }
+
+
+// TODO: support point value for arrow rather than always center
 
 - (void)drawRect:(CGRect)rect
 {
@@ -62,10 +66,13 @@
 	CGContextMoveToPoint(context, minx, maxy);
 	CGContextAddArcToPoint(context, minx, miny, midx, miny, radius);
     CGContextAddArcToPoint(context, maxx, miny, maxx, maxy-10, radius);
+	
+	// arrow
 	CGContextAddArcToPoint(context, maxx, maxy-10, midx+5, maxy-10, radius);
 	CGContextAddLineToPoint(context, midx+5, maxy-10);
 	CGContextAddLineToPoint(context, midx, maxy);
 	CGContextAddLineToPoint(context, midx-5, maxy-10);
+	//
 	
 	CGContextAddArcToPoint(context, minx, maxy-10, minx, midy, radius);
 	

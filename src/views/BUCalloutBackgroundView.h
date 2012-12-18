@@ -20,4 +20,6 @@
 @property (nonatomic, assign) CGFloat strokeWidth;
 @property (nonatomic, assign) CGFloat cornerRadius;
 
+@property (nonatomic, assign) float	arrowPoint;
+
 @end
