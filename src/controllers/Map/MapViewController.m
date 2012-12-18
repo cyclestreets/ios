@@ -575,10 +575,24 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[_waypointArray removeAllObjects];
 	[self stopLocating];
 	
-	CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
-	[self addWayPointAtCoordinate:startLocation];
-	CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
-	[self addWayPointAtCoordinate:endLocation];
+	if (_route.hasWaypoints==YES) {
+		
+		for(CSPointVO *point in [_route createCorrectedWaypointArray]){
+			CLLocationCoordinate2D location = point.coordinate;
+			[self addWayPointAtCoordinate:location];
+		}
+		
+	}else{
+		
+		// old legacy s/f routes
+		CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
+		[self addWayPointAtCoordinate:startLocation];
+		CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
+		[self addWayPointAtCoordinate:endLocation];
+		
+	}
+	
+	
 	
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];

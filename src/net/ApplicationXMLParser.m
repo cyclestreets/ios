@@ -455,6 +455,7 @@
 		
 		
 		NSMutableArray	*segments=[[NSMutableArray alloc]init];
+		NSMutableArray	*waypoints=[[NSMutableArray alloc]init];
 		root=root->nextSibling;
 		
 		NSInteger time = 0;
@@ -505,12 +506,28 @@
 			
 			}
 			
+			
+			TBXMLElement *waypointnode=[TBXML childElementNamed:@"cs:waypoint" parentElement:root];
+			
+			if(waypointnode!=nil){
+				
+				CSPointVO *waypoint=[[CSPointVO alloc]init];
+				CGPoint point;
+				point.x=[[TBXML textOfChild:@"cs:longitude" parentElement:waypointnode] doubleValue];
+				point.y=[[TBXML textOfChild:@"cs:latitude" parentElement:waypointnode] doubleValue];
+				waypoint.p=point;
+				
+				[waypoints addObject:waypoint];
+				
+			}
+			
+			
 			root=root->nextSibling;
 			
 		}
 		
 		route.segments=segments;
-	
+		route.waypoints=waypoints;
 	
 	
 	}
