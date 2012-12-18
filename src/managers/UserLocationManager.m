@@ -1,16 +1,18 @@
 //
 //  UserLocationManager.m
-//  CycleStreets
+//  BerkeleyHomes
 //
-//  Created by neil on 28/02/2012.
-//  Copyright (c) 2012 CycleStreets Ltd. All rights reserved.
-//  Wrapper for GPS lookups
+//  Created by Neil Edwards on 28/09/2012.
+//  Copyright (c) 2012 Jellyfish. All rights reserved.
+//
+
+// Handles gobal lgps lookups
 
 #import "UserLocationManager.h"
 #import "DeviceUtilities.h"
 #import "GlobalUtilities.h"
 
-@interface UserLocationManager(Private) 
+@interface UserLocationManager(Private)
 
 -(void)initialiseCorelocation;
 -(void)resetLocationAndReAssess;
@@ -37,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 @synthesize locationMeasurements;
 @synthesize bestEffortAtLocation;
 @synthesize delegate;
-
+@synthesize authorisationSubscriber;
 
 
 + (CLLocationCoordinate2D)defaultCoordinate {
@@ -51,7 +53,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	CLLocationCoordinate2D coordinate=[UserLocationManager defaultCoordinate];
 	CLLocation *location=[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-						  
+    
 	return location;
 }
 
@@ -85,7 +87,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 
 -(void)listNotificationInterests{
-
+    
 	
 	
 	[super listNotificationInterests];
@@ -104,7 +106,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	int index=[self findSubscriber:subscriber];
 	
 	return index!=NSNotFound;
-
+    
 }
 
 
@@ -137,13 +139,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	
 	if([self doesDeviceAllowLocation]==NO){
-	
+        
 		if(showAlert==YES){
 			
-			UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled" 
-																			message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features." 
-																		   delegate:nil 
-																  cancelButtonTitle:@"OK" 
+			UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
+																			message:@"Unable to retrieve location. Location services for the App may be off, please enable in Settings > General > Location Services to use location based features."
+																		   delegate:nil
+																  cancelButtonTitle:@"OK"
 																  otherButtonTitles:nil];
 			[servicesDisabledAlert show];
 		}
@@ -156,6 +158,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    
+    if(status==kCLAuthorizationStatusAuthorized){
+        
+        if(authorisationSubscriber!=nil){
+            [self startUpdatingLocationForSubscriber:authorisationSubscriber];
+            authorisationSubscriber=nil;
+        }
+        
+        
+    }
+    
+}
+
+
 #pragma mark CoreLocation updating
 
 //
@@ -165,22 +183,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 -(void)initialiseCorelocation{
 	
-	if ([self doesDeviceAllowLocation] == NO) {
-		
-		
-		
-	}else {
-		
-		if(locationManager==nil){
+	if(locationManager==nil){
 			self.locationManager = [[CLLocationManager alloc] init];
 			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
 			locationManager.distanceFilter =kCLDistanceFilterNone;
-		}
+            locationManager.delegate=self;
+    }
 		
-	}
-   
-    
-	
 }
 
 
@@ -264,16 +273,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			BOOL result=[self addSubscriber:subscriberId];
 			
 			if(result==YES){
-				locationManager.delegate = self;
+                
+                BetterLog(@"[MESSAGE]: Starting location...");
+                
 				[locationManager startUpdatingLocation];
 				[self performSelector:@selector(stopUpdatingLocation:) withObject:subscriberId afterDelay:3000];
-			}
+			}else{
+                
+                BetterLog(@"[WARNING]: unable to add subscriber");
+                
+            }
 			
 		}else {
+            
+            BetterLog(@"[WARNING]: GPSLOCATIONDISABLED");
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONDISABLED object:nil userInfo:nil];
-			
+            
+            CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
+            
+            if(status==kCLAuthorizationStatusNotDetermined){
+                
+                authorisationSubscriber=subscriberId;
+            
+                [locationManager startUpdatingLocation];
+                [self performSelector:@selector(stopUpdatingLocation:) withObject:SYSTEM afterDelay:0.1];
+                
+            }else{
+                
+                BetterLog(@"[WARNING]: GPS AUTHORISATION IS: kCLAuthorizationStatusDenied");
+            }
 		}
+            
     }else{
 		
 		[self addSubscriber:subscriberId];
@@ -299,7 +330,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
     // test the measurement to see if it is more accurate than the previous measurement
     if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
         self.bestEffortAtLocation = newLocation;
-       
+        
 		BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
 		BetterLog(@"locationManager.desiredAccuracy=%f",locationManager.desiredAccuracy);
 		
@@ -308,7 +339,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
 			
 			BetterLog(@"Location found!");
-           
+            
 			self.bestEffortAtLocation = newLocation;
 			didFindDeviceLocation=YES;
 			
@@ -321,7 +352,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		case kConnectLocationStateSingle:
 			
 			if (didFindDeviceLocation==YES){
-                    
+                
 				[self UserLocationWasUpdated];
 				[self stopUpdatingLocationForSubscriber:SYSTEM];
 				
@@ -331,7 +362,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			
 			// GPSLOCATIONUPDATE is now sent in main loop
 			
-		break;
+            break;
 			
 	}
     
@@ -347,6 +378,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
     isLocating=NO;
 	
 	[self removeAllSubscribers];
+    
+    [self stopUpdatingLocation:SYSTEM];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONFAILED object:[NSNumber numberWithBool:didFindDeviceLocation] userInfo:nil];
 	
@@ -357,22 +390,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 //
 /***********************************************
- * @description		notify UI that the location has been determined	
+ * @description		notify UI that the location has been determined
  ***********************************************/
 //
 -(void)UserLocationWasUpdated{
 	
 	BetterLog(@"");
 	
-	if(bestEffortAtLocation!=nil)
-		[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
 	
 }
 
 
 //
 /***********************************************
- * @description		Stop Location tracking, can be called via an valid response or on a timeout error	
+ * @description		Stop Location tracking, can be called via an valid response or on a timeout error
  ***********************************************/
 //
 - (void)stopUpdatingLocationForSubscriber:(NSString *)subscriberId {
@@ -391,11 +423,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	}
 	
 	if([locationSubscribers count]==0){
-	
+        
 		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
-	
+        
 		isLocating=NO;
-	
+        
 		[locationManager stopUpdatingLocation];
 		
 	}
@@ -407,4 +439,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	[self stopUpdatingLocationForSubscriber:subscriberId];
 }
 
+
+//------------------------------------------------------------------------------------
+#pragma mark - GeoCoding
+//------------------------------------------------------------------------------------
+
++(void)reverseGeoCodeLocation:(CLLocation*)location{
+    
+    CLGeocoder *geocoder=[[CLGeocoder alloc] init];
+    
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if([placemarks count]>0){
+            [[NSNotificationCenter defaultCenter] postNotificationName:REVERSEGEOLOCATIONCOMPLETE object:[placemarks objectAtIndex:0] userInfo:nil];
+        }else{
+            // what is the error?
+        }
+        
+    } ];
+    
+}
+
 @end
+
