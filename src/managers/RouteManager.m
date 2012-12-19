@@ -831,12 +831,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
-	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
-	[unarchiver finishDecoding];
 	
-	return route;
+	if(data!=nil){
+		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
+		[unarchiver finishDecoding];
+		return route;
+	}
 	
+	return nil;
 	
 }
 
