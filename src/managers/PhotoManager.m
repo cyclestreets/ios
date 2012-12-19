@@ -211,6 +211,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
     
     self.uploadPhoto=photo;
 	CLLocation *location=photo.activeLocation;
+	
+	;
     
     NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
     
@@ -223,7 +225,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                          photo.feature.tag,@"category", // note: conversion to serverside types
                                          photo.category.tag,@"metacategory", //
                                          photo.dateTime,@"datetime",
-										 BOX_INT(photo.bearing),@"bearing",
+										 [NSString stringWithFormat:@"%i",photo.bearing],@"bearing",
                                          [photo uploadData],@"imageData",
 										 nil];
 	

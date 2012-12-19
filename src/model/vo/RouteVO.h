@@ -46,6 +46,9 @@
 @property (nonatomic, strong) NSString		* calorie;
 @property (nonatomic, strong) NSString		* cosaved;
 
+@property (nonatomic, strong) NSMutableArray		* waypoints;
+
+
 // getters
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*lengthString;
@@ -66,12 +69,16 @@
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*fileid;
 @property (nonatomic, readonly)	BOOL									containsWalkingSections;
 
+@property (nonatomic, readonly)	BOOL									hasWaypoints;
+
+
 
 
 @property (nonatomic, readonly)	NSDate							*dateObject;
 
 
 - (SegmentVO *) segmentAtIndex:(int)index;
+-(NSMutableArray*)createCorrectedWaypointArray;
 
 // returns max bounding locations for self compared to location
 -(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation;

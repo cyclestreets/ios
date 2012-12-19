@@ -206,7 +206,13 @@ static NSDictionary *segmentDirectionsIcons;
 						@"UIIcon_turn_right.png", @"sharp right",
 					  nil];
 	}
-	return [segmentDirectionsIcons valueForKey:segmentDirectionType];
+	
+	NSString *iconType=[segmentDirectionsIcons valueForKey:segmentDirectionType];
+	
+	if(iconType==nil)
+		iconType=@"UIIcon_straight_on.png";
+	
+	return iconType;
 }
 
 

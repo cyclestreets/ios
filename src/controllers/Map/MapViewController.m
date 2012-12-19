@@ -177,6 +177,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			[self locationDidComplete:notification];
 		}
 		
+		if([name isEqualToString:GPSLOCATIONUPDATE]){
+			[self locationDidUpdate:notification];
+		}
+		
 	}
 	
 	if([name isEqualToString:CSROUTESELECTED]){
@@ -444,6 +448,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)startLocating{
 	
+	BetterLog(@"");
+	
 	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 	[self updateUItoState:MapPlanningStateLocating];
@@ -454,6 +460,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 -(void)stopLocating{
+	
+	BetterLog(@"");
 	
 	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
@@ -466,9 +474,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)locationDidComplete:(NSNotification *)notification{
 	
+	BetterLog(@"");
+	
 	_blueCircleView.visible=YES;
 	
-	// update ui state
 	[self updateUItoState:_previousUIState];
 	
 	self.lastLocation=notification.object;
@@ -476,9 +485,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[_blueCircleView setNeedsDisplay];
 	
 	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:3];
+	
+	[self assessLocationEffect];
 }
 
 -(void)locationDidUpdate:(NSNotification *)notification{
+	
+	BetterLog(@"");
 	
 	_blueCircleView.visible=YES;
 	
@@ -489,7 +502,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)locationDidFail:(NSNotification *)notification{
 	
-	// update ui state
 	[self updateUItoState:_previousUIState];
 	
 }
@@ -498,6 +510,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)resetLocationOverlay{
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideLocationOverlay) object:nil];
 	_blueCircleView.visible=NO;
+}
+
+-(void)assessLocationEffect{
+	
+	if(_uiState!=MapPlanningStateRoute){
+	
+		[self addWayPointAtCoordinate:_lastLocation.coordinate];
+	
+	}
+	
 }
 
 
@@ -553,10 +575,24 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[_waypointArray removeAllObjects];
 	[self stopLocating];
 	
-	CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
-	[self addWayPointAtCoordinate:startLocation];
-	CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
-	[self addWayPointAtCoordinate:endLocation];
+	if (_route.hasWaypoints==YES) {
+		
+		for(CSPointVO *point in [_route createCorrectedWaypointArray]){
+			CLLocationCoordinate2D location = point.coordinate;
+			[self addWayPointAtCoordinate:location];
+		}
+		
+	}else{
+		
+		// old legacy s/f routes
+		CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
+		[self addWayPointAtCoordinate:startLocation];
+		CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
+		[self addWayPointAtCoordinate:endLocation];
+		
+	}
+	
+	
 	
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
@@ -695,7 +731,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)wayPointwasDeleted{
 	[self updateWaypointStatuses];
 	
-	if(_waypointArray.count<=1){
+	if(_waypointArray.count==0){
 		[self assessUIState];
 		[self.viewDeckController closeLeftViewAnimated:YES];
 	}

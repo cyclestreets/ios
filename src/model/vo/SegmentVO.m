@@ -115,6 +115,7 @@ static NSDictionary *roadIcons;
 					 @"UIIcon_roads.png", @"secondary",
 					 @"UIIcon_roads.png", @"major road",
 					 @"UIIcon_roads.png", @"main road",
+					 @"UIIcon_roads.png", @"trunk road",
 					 @"UIIcon_roads.png", @"unclassified road",
 					 @"UIIcon_minor_roads.png", @"minor road",
 					 @"UIIcon_minor_roads.png", @"service road",
