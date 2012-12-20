@@ -1,9 +1,9 @@
 //
 //  UserLocationManager.h
-//  BerkeleyHomes
+//  CycleStreets
 //
 //  Created by Neil Edwards on 28/09/2012.
-//  Copyright (c) 2012 Jellyfish. All rights reserved.
+//  Copyright (c) 2012 CycleStreets. All rights reserved.
 //
 
 

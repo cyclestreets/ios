@@ -120,6 +120,7 @@ static NSInteger MAX_DIST = 10;
             
             prevpoint=points[i-1];
             
+			BetterLog(@"point.isWalking=%i",point.isWalking);
             
             if(point.isWalking==YES){
                 CGContextSetStrokeColorWithColor(ctx, _dashedlineColor.CGColor);

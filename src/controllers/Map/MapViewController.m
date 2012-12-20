@@ -46,6 +46,7 @@
 #import "IIViewDeckController.h"
 #import "WayPointViewController.h"
 #import "UIView+Additions.h"
+#import "ViewUtilities.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -84,6 +85,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic,strong)  UIBarButtonItem						* waypointButton;
 
 
+@property(nonatomic,strong) IBOutlet  UIView						*walkingRouteOverlayView;
+@property(nonatomic,assign)  BOOL									walkingOverlayisVisible;
 
 
 //rmmap
@@ -266,6 +269,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[_lineView setPointListProvider:self];
 	[_blueCircleView setLocationProvider:self];
+	
+	
+	_walkingRouteOverlayView.y=SCREENHEIGHT;
+	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
+	[self.view addSubview:_walkingRouteOverlayView];
 	
 	
 	self.programmaticChange = NO;
@@ -592,7 +600,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 	}
 	
-	
+	[self showWalkingOverlay];
 	
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
@@ -601,6 +609,49 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self updateUItoState:MapPlanningStateRoute];
 }
+
+
+-(void)showWalkingOverlay{
+	
+	
+	
+	if (_route.containsWalkingSections==YES) {
+		
+		if(_walkingOverlayisVisible==NO){
+			
+			_walkingRouteOverlayView.y=SCREENHEIGHT;
+			_walkingOverlayisVisible=YES;
+			
+			[UIView animateWithDuration:0.7 animations:^{
+				
+				_walkingRouteOverlayView.y=SCREENHEIGHTWITHMODALNAV-_walkingRouteOverlayView.height;
+				
+			} completion:^(BOOL finished) {
+				
+				[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+					_walkingRouteOverlayView.y=SCREENHEIGHT;
+				} completion:^(BOOL finished) {
+					_walkingOverlayisVisible=NO;
+				}];
+				
+			}];
+			
+			
+		}else{
+			[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+				_walkingRouteOverlayView.y=SCREENHEIGHT;
+			} completion:^(BOOL finished) {
+				_walkingOverlayisVisible=NO;
+			}];
+			
+		}
+		
+	}
+	
+	
+	
+}
+
 
 
 //------------------------------------------------------------------------------------
@@ -1359,6 +1410,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			CLLocationCoordinate2D coordinate = [segment segmentStart];
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
 			p.p = pt;
+			p.isWalking=segment.isWalkingSection;
 			[points addObject:p];
 		}
 		// remainder of all segments
@@ -1372,6 +1424,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
 			CSPointVO *screen = [[CSPointVO alloc] init];
 			screen.p = pt;
+			screen.isWalking=segment.isWalkingSection;
 			[points addObject:screen];
 		}
 	}
