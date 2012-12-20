@@ -307,7 +307,7 @@
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 				[tweetViewController setInitialText:@"My CycleStreet route"];
 					
-				[tweetViewController addURL:route.csrouteurl];
+				[tweetViewController addURL:[NSURL URLWithString:route.csiOSRouteurlString]];
 					
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -343,7 +343,10 @@
 			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 			picker.mailComposeDelegate = self;
 			[picker setSubject:[NSString stringWithFormat:@"CycleStreets route %@",route.routeid]];
-			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets route %@</a>",route.csrouteurlString,route.routeid] isHTML:YES];
+			
+			NSString *body=[NSString stringWithFormat:@"%@ <br><br>%@",[NSString stringWithFormat:@"<a href=%@>For iOS devices: %@</a>",route.csiOSRouteurlString,route.routeid],[NSString stringWithFormat:@"<a href=%@>For Browsers: %@</a>",route.csBrowserRouteurlString,route.routeid]];
+			
+			[picker setMessageBody:body isHTML:YES];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];

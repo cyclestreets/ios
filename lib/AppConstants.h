@@ -96,6 +96,9 @@ extern NSString *const KM;
 
 extern NSString *const SAVEDROUTE_FAVS;
 extern NSString *const SAVEDROUTE_RECENTS;
+
+extern NSString *const CYCLESTREETSURLSCHEME;
+
  
 
 @interface AppConstants : NSObject {

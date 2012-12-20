@@ -148,13 +148,17 @@
 }
 
 -(NSURL*)csrouteurl{
-	return [NSURL URLWithString:self.csrouteurlString];
+	return [NSURL URLWithString:self.csiOSRouteurlString];
 }
 
 
--(NSString*)csrouteurlString{
-	return [NSString stringWithFormat:@"cyclestreets://route/%@",self.routeid];
+-(NSString*)csiOSRouteurlString{
+	return [NSString stringWithFormat:@"cyclestreets/route/%@",self.routeid];
 }
+-(NSString*)csBrowserRouteurlString{
+	return [NSString stringWithFormat:@"cycle.st/j%@",self.routeid];
+}
+
 //
 /***********************************************
  * @description			CL getters: note use of CLLocation so NSCoding is optimised.

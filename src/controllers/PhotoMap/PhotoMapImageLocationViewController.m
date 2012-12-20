@@ -219,6 +219,7 @@
 				[tweetViewController setInitialText:@"A CycleStreets photo:"];
 				
 				[tweetViewController addURL:[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid]];
+				[tweetViewController addImage:imageView.image];
 				
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -255,6 +256,7 @@
 			picker.mailComposeDelegate = self;
 			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",dataProvider.csid]];
 			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid],dataProvider.csid] isHTML:YES];
+			[picker addAttachmentData:UIImageJPEGRepresentation(imageView.image, 1) mimeType:@"image/jpeg" fileName:@"MyFile.jpeg"];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
@@ -281,7 +283,7 @@
 			
 		case BUIconActionSheetIconTypeCopy:
 		{
-			[[UIPasteboard generalPasteboard] setString:dataProvider.csid];
+			[[UIPasteboard generalPasteboard] setImage:imageView.image];
 		}
 			
 			break;

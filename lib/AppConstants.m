@@ -91,6 +91,11 @@ NSString *const KM=@"kilometers";
 NSString *const SAVEDROUTE_FAVS=@"SAVEDROUTE_FAVS";
 NSString *const SAVEDROUTE_RECENTS=@"SAVEDROUTE_RECENTS";
 
+
+NSString *const CYCLESTREETSURLSCHEME=@"cyclestreets";
+
+
+
 @implementation AppConstants
 
 // returns username/passwords for requests that require authentication

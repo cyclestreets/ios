@@ -119,10 +119,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 	}else {
 		
-		NSString *str=url.absoluteString;
-		if([str containsString:@"cyclestreets://"]){
+		NSString *str=url.scheme;
+		if([str containsString:CYCLESTREETSURLSCHEME]){
 			
-			// navigate to map view and load route by id, format: cyclestreets://route/4632393
+			NSString *routeid=[[url.resourceSpecifier componentsSeparatedByString:@"/"] lastObject];
+			
+			[[RouteManager sharedInstance] loadRouteForRouteId:routeid];
+			
 			
 			return YES;
 		}else{

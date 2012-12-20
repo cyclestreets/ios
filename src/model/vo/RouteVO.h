@@ -66,7 +66,8 @@
 @property (unsafe_unretained, nonatomic, readonly)	NSString			*fileid;
 
 @property (unsafe_unretained, nonatomic, readonly)	NSURL				*csrouteurl;
-@property (unsafe_unretained, nonatomic, readonly)	NSString			*csrouteurlString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString			*csBrowserRouteurlString;
+@property (unsafe_unretained, nonatomic, readonly)	NSString			*csiOSRouteurlString;
 
 
 @property (nonatomic, readonly)	NSDate							*dateObject;
