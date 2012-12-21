@@ -17,7 +17,7 @@
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
 
-@interface PhotoMapImageLocationViewController : SuperViewController <AsyncImageViewDelegate,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate>{
+@interface PhotoMapImageLocationViewController : SuperViewController <AsyncImageViewDelegate,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>{
 	
 	PhotoMapVO							*dataProvider;
 	

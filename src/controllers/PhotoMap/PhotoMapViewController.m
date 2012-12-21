@@ -252,6 +252,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	self.photoMarkers = [[NSMutableArray alloc] init];
 	
 	[blueCircleView setLocationProvider:self];
+	blueCircleView.userInteractionEnabled=NO;
 	
 	//get the map attribution correct.
 	self.attributionLabel.text = [MapViewController mapAttribution];

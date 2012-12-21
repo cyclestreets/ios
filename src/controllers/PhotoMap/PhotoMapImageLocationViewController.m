@@ -12,6 +12,7 @@
 #import "CopyLabel.h"
 
 
+
 @interface PhotoMapImageLocationViewController(Private) 
 
 -(void)updateContentSize;
@@ -145,8 +146,6 @@
 	
 	self.dataProvider=photoEntry;
 	
-	//self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
-	
 	titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
 	
 	imageLabel.text=[dataProvider caption];
@@ -175,9 +174,12 @@
 	
 	NSArray *activitites;
 	
+	
+	#if ENABLEOS6ACTIVITYMODE
+	
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
 		
-		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid]]] applicationActivities:nil];
+		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:dataProvider.csImageUrlString],imageView.image] applicationActivities:nil];
 		activity.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll, UIActivityTypePrint, UIActivityTypePostToWeibo];
 		
 		[self presentViewController:activity animated:YES completion:nil];
@@ -194,14 +196,20 @@
 		
 		
 	}else{
+	
+	#endif
+		
 		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS),@(BUIconActionSheetIconTypeCopy)];
 		
 		BUIconActionSheet *iconSheet=[[BUIconActionSheet alloc] initWithButtons:activitites andTitle:@"Share this CycleStreets photo"];
 		iconSheet.delegate=self;
 		
 		[iconSheet show:YES];
-	}
 	
+	
+	#if ENABLEOS6MODE	
+	}
+	#endif
 	
 	
 }
@@ -216,10 +224,10 @@
 			if ([TWTweetComposeViewController canSendTweet]) {
 				
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:@"A CycleStreets photo:"];
+				[tweetViewController setInitialText:@"A CycleStreets photo: #cyclestreets"];
 				
-				[tweetViewController addURL:[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid]];
 				[tweetViewController addImage:imageView.image];
+				[tweetViewController addURL:[NSURL URLWithString:dataProvider.csImageUrlString]];
 				
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -236,7 +244,7 @@
 				
 				UIAlertView *alertView = [[UIAlertView alloc]
 										  initWithTitle:@"Sorry"
-										  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+										  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account set up"
 										  delegate:self
 										  cancelButtonTitle:@"OK"
 										  otherButtonTitles:nil];
@@ -256,7 +264,7 @@
 			picker.mailComposeDelegate = self;
 			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",dataProvider.csid]];
 			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid],dataProvider.csid] isHTML:YES];
-			[picker addAttachmentData:UIImageJPEGRepresentation(imageView.image, 1) mimeType:@"image/jpeg" fileName:@"MyFile.jpeg"];
+			[picker addAttachmentData:UIImageJPEGRepresentation(imageView.image, 1) mimeType:@"image/jpeg" fileName:@"CSPhoto.jpeg"];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
@@ -266,15 +274,12 @@
 		case BUIconActionSheetIconTypeSMS:
 		{
 			
-			UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-			pasteboard.persistent = YES;
-			pasteboard.image = imageView.image;
+			MFMessageComposeViewController *picker=[[MFMessageComposeViewController alloc]init];
+			picker.messageComposeDelegate=self;
+			[picker setBody:dataProvider.csImageUrlString];
 			
-			
-			NSString *phoneToCall = @"sms:";
-			NSString *phoneToCallEncoded = [phoneToCall stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-			NSURL *url = [[NSURL alloc] initWithString:phoneToCallEncoded];
-			[[UIApplication sharedApplication] openURL:url];
+			if(picker!=nil)
+				[self presentModalViewController:picker animated:YES];
 			
 			
 		}

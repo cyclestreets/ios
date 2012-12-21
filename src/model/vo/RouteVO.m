@@ -156,7 +156,7 @@
 	return [NSString stringWithFormat:@"cyclestreets/route/%@",self.routeid];
 }
 -(NSString*)csBrowserRouteurlString{
-	return [NSString stringWithFormat:@"cycle.st/j%@",self.routeid];
+	return [NSString stringWithFormat:@"http://cycle.st/j%@",self.routeid];
 }
 
 //

@@ -264,6 +264,8 @@
 	
 	NSArray *activitites;
 	
+	#if ENABLEOS6ACTIVITYMODE 
+	
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
 		
 		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:[NSString stringWithFormat:@"cyclestreets://route/%@",route.routeid]]] applicationActivities:nil];
@@ -283,14 +285,18 @@
 		 
 		 
 	}else{
+	#endif
+		
 		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS),@(BUIconActionSheetIconTypeCopy)];
 		
 		BUIconActionSheet *iconSheet=[[BUIconActionSheet alloc] initWithButtons:activitites andTitle:@"Share your CycleStreets route"];
 		iconSheet.delegate=self;
 		
 		[iconSheet show:YES];
+		
+	#if ENABLEOS6ACTIVITYMODE
 	}
-
+	#endif
 	
 	
 }
@@ -305,7 +311,7 @@
 			if ([TWTweetComposeViewController canSendTweet]) {   
 					
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:@"My CycleStreet route"];
+				[tweetViewController setInitialText:@"My CycleStreet route  #cyclestreets"];
 					
 				[tweetViewController addURL:[NSURL URLWithString:route.csiOSRouteurlString]];
 					
@@ -358,7 +364,7 @@
 			
 			MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
 			picker.messageComposeDelegate = self;
-			picker.body=[NSString stringWithFormat:@"CycleStreets route %@",route.routeid];
+			picker.body=[NSString stringWithFormat:@"CycleStreets route %@",route.csBrowserRouteurlString];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
