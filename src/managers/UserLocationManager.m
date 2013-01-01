@@ -275,6 +275,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			if(result==YES){
                 
                 BetterLog(@"[MESSAGE]: Starting location...");
+				
+				didFindDeviceLocation=NO;
                 
 				[locationManager startUpdatingLocation];
 				[self performSelector:@selector(stopUpdatingLocation:) withObject:subscriberId afterDelay:3000];
@@ -295,6 +297,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
             if(status==kCLAuthorizationStatusNotDetermined){
                 
                 authorisationSubscriber=subscriberId;
+				didFindDeviceLocation=NO;
             
                 [locationManager startUpdatingLocation];
                 [self performSelector:@selector(stopUpdatingLocation:) withObject:SYSTEM afterDelay:0.1];

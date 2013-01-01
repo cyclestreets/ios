@@ -408,7 +408,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleBordered;
 			
-			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
+			items=@[_locationButton,_searchButton,_leftFlex];
             
             [self.toolBar setItems:items animated:YES ];
 		}
