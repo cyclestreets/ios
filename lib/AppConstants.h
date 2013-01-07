@@ -74,6 +74,7 @@ extern NSString *const POILISTINGRESPONSE;
 extern NSString *const POICATEGORYLOCATIONRESPONSE;
 extern NSString *const SAVEDROUTEUPDATE;
 extern NSString *const MAPSTYLECHANGED;
+extern NSString *const USERACCOUNTLOGINSUCCESS;
 
 extern NSString *const GPSLOCATIONUPDATE;
 extern NSString *const GPSLOCATIONFAILED;

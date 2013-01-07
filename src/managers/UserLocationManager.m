@@ -275,9 +275,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			if(result==YES){
                 
                 BetterLog(@"[MESSAGE]: Starting location...");
-				
-				didFindDeviceLocation=NO;
-                
+                didFindDeviceLocation=NO;
 				[locationManager startUpdatingLocation];
 				[self performSelector:@selector(stopUpdatingLocation:) withObject:subscriberId afterDelay:3000];
 			}else{
@@ -298,7 +296,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
                 
                 authorisationSubscriber=subscriberId;
 				didFindDeviceLocation=NO;
-            
                 [locationManager startUpdatingLocation];
                 [self performSelector:@selector(stopUpdatingLocation:) withObject:SYSTEM afterDelay:0.1];
                 
@@ -400,7 +397,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	BetterLog(@"");
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
+	if(bestEffortAtLocation!=nil)
+		[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
 	
 }
 
