@@ -59,6 +59,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)resetDescriptionField;
 -(void)resetDescriptionView;
 -(void)initUploadView:(PhotoWizardViewState)state;
+-(void)updateUploadView;
 -(void)initCompleteView:(PhotoWizardViewState)state;
 -(void)updateCompleteView;
 
@@ -165,6 +166,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[notifications addObject:FILEUPLOADPROGRESS];
 	[notifications addObject:GPSLOCATIONCOMPLETE];
 	[notifications addObject:PHOTOWIZARDCATEGORYUPDATE];
+	[notifications addObject:USERACCOUNTLOGINSUCCESS];
 	
 	[notifications addObject:UIKeyboardWillShowNotification];
 	[notifications addObject:UIKeyboardWillHideNotification];
@@ -193,6 +195,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	if([notification.name isEqualToString:PHOTOWIZARDCATEGORYUPDATE]){
         [self didSelectCategoryFromMenu:notification];
+    }
+	
+	if([notification.name isEqualToString:USERACCOUNTLOGINSUCCESS]){
+        [self autoUploadUserPhoto];
     }
 }
 
@@ -237,6 +243,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
     uploadProgressView.progress=percent;
     
+}
+
+-(void)autoUploadUserPhoto{
+	[self uploadPhoto:nil];
 }
 
 
@@ -629,6 +639,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		break;
 			
 		case PhotoWizardViewStateUpload:
+			[self updateUploadView];
 		break;
 			
 		case PhotoWizardViewStateResult:
@@ -1263,13 +1274,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[self updateUploadUIState:@"waiting"];
 	
+	
+	
 	[ButtonUtilities styleIBButton:uploadButton type:@"orange" text:@"Upload Photo"];
 	[uploadButton addTarget:self action:@selector(uploadPhoto:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
 
+-(void)updateUploadView{
+	uploadProgressView.progress=0;
+}
 
-// TODO: UserPhotoUploadRequest needs to execute if user logins correctly
+
 -(IBAction)uploadPhoto:(id)sender{
 	
 	
@@ -1341,8 +1357,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)cancelUploadPhoto:(id)sender{
 	
-    // is this required?
-	
+    uploadProgressView.progress=0;
 	
 }
 
