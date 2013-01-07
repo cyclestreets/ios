@@ -674,6 +674,7 @@
 		28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28B038741521A17B00EE23CF /* RoutePlanMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B038731521A17B00EE23CF /* RoutePlanMenuViewController.m */; };
+		28B131471683199A00261480 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
 		28B484F715261FAC00E406E1 /* popoverArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B484DF15261FAC00E406E1 /* popoverArrowDown.png */; };
 		28B484F815261FAC00E406E1 /* popoverArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B484E015261FAC00E406E1 /* popoverArrowDown@2x.png */; };
 		28B484F915261FAC00E406E1 /* popoverArrowDownSimple.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B484E115261FAC00E406E1 /* popoverArrowDownSimple.png */; };
@@ -1437,6 +1438,7 @@
 				2834377515DD5DC300B00FD5 /* AssetsLibrary.framework in Frameworks */,
 				2834377615DD5DC300B00FD5 /* libz.dylib in Frameworks */,
 				2834377715DD5DC300B00FD5 /* libxml2.dylib in Frameworks */,
+				28B131471683199A00261480 /* libTestFlight.a in Frameworks */,
 				2834377815DD5DC300B00FD5 /* libMapView.a in Frameworks */,
 				2834377915DD5DC300B00FD5 /* AddressBook.framework in Frameworks */,
 				28363433165A9A090039246E /* Crashlytics.framework in Frameworks */,
