@@ -12,10 +12,11 @@
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
 #import "MultiLabelLine.h"
+#import "SegmentVO.h"
 
 @interface CSSegmentFooterView : LayoutBox {
 	
-	NSDictionary				*dataProvider;
+	SegmentVO					*dataProvider;
 	
 	BOOL						hasCapitalizedTurn;
 	
@@ -35,7 +36,7 @@
 	UIImageView					*roadTypeiconView;
 
 }
-@property (nonatomic, strong)	NSDictionary		*dataProvider;
+@property (nonatomic, strong)	SegmentVO		*dataProvider;
 @property (nonatomic)	BOOL		hasCapitalizedTurn;
 @property (nonatomic, strong)	LayoutBox		*contentContainer;
 @property (nonatomic, strong)	ExpandedUILabel		*roadNameLabel;

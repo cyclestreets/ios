@@ -50,8 +50,7 @@
 	float totalMiles = ((float)([dataProvider startDistance]+[dataProvider segmentDistance]))/1600;
 	[arr addObject:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles]];
 	
-	NSString *imageName = [SegmentVO provisionIcon:[[dataProvider provisionName] lowercaseString]];
-	icon.image=[UIImage imageNamed:imageName];
+	icon.image=[UIImage imageNamed:dataProvider.provisionIcon];
 	
 	readoutLabel.labels=arr;
 	[readoutLabel drawUI];

@@ -45,6 +45,8 @@
 #import	"WayPointVO.h"
 #import "IIViewDeckController.h"
 #import "WayPointViewController.h"
+#import "UIView+Additions.h"
+#import "ViewUtilities.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -71,7 +73,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @interface MapViewController()
 
 // tool bar
-@property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
+@property (nonatomic, weak) IBOutlet UIToolbar					* toolBar;
 @property (nonatomic, strong) UIBarButtonItem						* locationButton;
 @property (nonatomic, strong) UIBarButtonItem						* activeLocationButton;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
@@ -80,13 +82,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) UIActivityIndicatorView				* locatingIndicator;
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
-@property(nonatomic,strong)  UIBarButtonItem						* waypointButton;
+@property (nonatomic,strong)  UIBarButtonItem						* waypointButton;
 
 
+@property(nonatomic,strong) IBOutlet  UIView						*walkingRouteOverlayView;
+@property(nonatomic,assign)  BOOL									walkingOverlayisVisible;
 
 
 //rmmap
-@property (nonatomic, strong) IBOutlet RMMapView		* mapView;
+@property (nonatomic, weak) IBOutlet RMMapView		* mapView;
 @property (nonatomic, strong) RMMapContents		* mapContents;
 @property (nonatomic, strong) CLLocation		* lastLocation;
 
@@ -96,10 +100,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
 
 // ui
-@property (nonatomic, strong) IBOutlet UILabel		* attributionLabel;
-@property (nonatomic, strong) IBOutlet RouteLineView		* lineView;
-@property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
-@property (nonatomic, strong) IBOutlet MapMarkerTouchView		* markerTouchView;
+@property (nonatomic, weak) IBOutlet UILabel		* attributionLabel;
+@property (nonatomic, weak) IBOutlet RouteLineView		* lineView;
+@property (nonatomic, weak) IBOutlet BlueCircleView		* blueCircleView;
+@property (nonatomic, weak) IBOutlet MapMarkerTouchView		* markerTouchView;
 @property (nonatomic, assign) MapAlertType		alertType;
 
 // waypoint ui
@@ -174,6 +178,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
 			[self locationDidComplete:notification];
+		}
+		
+		if([name isEqualToString:GPSLOCATIONUPDATE]){
+			[self locationDidUpdate:notification];
 		}
 		
 	}
@@ -261,6 +269,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[_lineView setPointListProvider:self];
 	[_blueCircleView setLocationProvider:self];
+	
+	
+	_walkingRouteOverlayView.y=SCREENHEIGHT;
+	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
+	[self.view addSubview:_walkingRouteOverlayView];
 	
 	
 	self.programmaticChange = NO;
@@ -360,6 +373,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateNoRoute");
 			
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			
 			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
 			[self.toolBar setItems:items animated:YES ];
@@ -372,8 +386,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateLocating");
 			
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleDone;
 			
-			items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
+			if([self shouldShowWayPointUI]==YES){
+				items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
+			}else{
+				items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
+			}
+			
 			[self.toolBar setItems:items animated:YES ];
 			
 			
@@ -386,8 +406,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateStartPlanning");
 			
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			
-			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
+			items=@[_locationButton,_searchButton,_leftFlex];
             
             [self.toolBar setItems:items animated:YES ];
 		}
@@ -398,8 +419,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStatePlanning");
 			
 			_routeButton.title = @"Plan route";
-			_routeButton.style = UIBarButtonItemStyleDone;
 			_searchButton.enabled = YES;
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			
 			items=@[_waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton];
             [self.toolBar setItems:items animated:YES ];
@@ -411,8 +432,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			BetterLog(@"MapPlanningStateRoute");
 			
 			_routeButton.title = @"New route";
-			_routeButton.style = UIBarButtonItemStyleBordered;
-			
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			_searchButton.enabled = YES;
 			
 			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
@@ -436,41 +456,77 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)startLocating{
 	
+	BetterLog(@"");
+	
 	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 	[self updateUItoState:MapPlanningStateLocating];
+	
+	[self resetLocationOverlay];
+	
 	
 }
 
 -(void)stopLocating{
 	
+	BetterLog(@"");
+	
 	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 	[self updateUItoState:_previousUIState];
+	
+	[self resetLocationOverlay];
 	
 }
 
 
 -(void)locationDidComplete:(NSNotification *)notification{
 	
-	// update ui state
+	BetterLog(@"");
+	
+	_blueCircleView.visible=YES;
+	
 	[self updateUItoState:_previousUIState];
 	
-	// update map
+	self.lastLocation=notification.object;
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 	
+	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:3];
+	
+	[self assessLocationEffect];
 }
 
 -(void)locationDidUpdate:(NSNotification *)notification{
 	
-	// update map
+	BetterLog(@"");
 	
+	_blueCircleView.visible=YES;
 	
+	self.lastLocation=notification.object;
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 }
 
 -(void)locationDidFail:(NSNotification *)notification{
 	
-	// update ui state
 	[self updateUItoState:_previousUIState];
+	
+}
+
+
+-(void)resetLocationOverlay{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideLocationOverlay) object:nil];
+	_blueCircleView.visible=NO;
+}
+
+-(void)assessLocationEffect{
+	
+	if(_uiState!=MapPlanningStateRoute){
+	
+		[self addWayPointAtCoordinate:_lastLocation.coordinate];
+	
+	}
 	
 }
 
@@ -527,10 +583,24 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[_waypointArray removeAllObjects];
 	[self stopLocating];
 	
-	CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
-	[self addWayPointAtCoordinate:startLocation];
-	CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
-	[self addWayPointAtCoordinate:endLocation];
+	if (_route.hasWaypoints==YES) {
+		
+		for(CSPointVO *point in [_route createCorrectedWaypointArray]){
+			CLLocationCoordinate2D location = point.coordinate;
+			[self addWayPointAtCoordinate:location];
+		}
+		
+	}else{
+		
+		// old legacy s/f routes
+		CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
+		[self addWayPointAtCoordinate:startLocation];
+		CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
+		[self addWayPointAtCoordinate:endLocation];
+		
+	}
+	
+	[self showWalkingOverlay];
 	
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
@@ -539,6 +609,49 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self updateUItoState:MapPlanningStateRoute];
 }
+
+
+-(void)showWalkingOverlay{
+	
+	
+	
+	if (_route.containsWalkingSections==YES) {
+		
+		if(_walkingOverlayisVisible==NO){
+			
+			_walkingRouteOverlayView.y=SCREENHEIGHT;
+			_walkingOverlayisVisible=YES;
+			
+			[UIView animateWithDuration:0.7 animations:^{
+				
+				_walkingRouteOverlayView.y=SCREENHEIGHTWITHMODALNAV-_walkingRouteOverlayView.height;
+				
+			} completion:^(BOOL finished) {
+				
+				[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+					_walkingRouteOverlayView.y=SCREENHEIGHT;
+				} completion:^(BOOL finished) {
+					_walkingOverlayisVisible=NO;
+				}];
+				
+			}];
+			
+			
+		}else{
+			[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+				_walkingRouteOverlayView.y=SCREENHEIGHT;
+			} completion:^(BOOL finished) {
+				_walkingOverlayisVisible=NO;
+			}];
+			
+		}
+		
+	}
+	
+	
+	
+}
+
 
 
 //------------------------------------------------------------------------------------
@@ -618,6 +731,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 }
 
+-(BOOL)shouldShowWayPointUI{
+	
+	return _waypointArray.count>1;
+	
+}
+
 
 -(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords{
 	
@@ -663,7 +782,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)wayPointwasDeleted{
 	[self updateWaypointStatuses];
 	
-	if(_waypointArray.count<=1){
+	if(_waypointArray.count==0){
 		[self assessUIState];
 		[self.viewDeckController closeLeftViewAnimated:YES];
 	}
@@ -754,6 +873,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
 	
 	if(_markerMenuOpen==YES)
+		return;
+	
+	if(_uiState==MapPlanningStateRoute)
 		return;
 	
 	UIMenuController *menuController = [UIMenuController sharedMenuController];
@@ -1041,7 +1163,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	BOOL result=NO;
 	
-	if(_uiState!=MapPlanningStateRoute || _uiState!=MapPlanningStateNoRoute){
+	if(_uiState!=MapPlanningStateRoute && _uiState!=MapPlanningStateNoRoute){
 		
 		if([_mapView.markerManager.markers containsObject:marker]){
 			_activeMarker=marker;
@@ -1288,6 +1410,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			CLLocationCoordinate2D coordinate = [segment segmentStart];
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
 			p.p = pt;
+			p.isWalking=segment.isWalkingSection;
 			[points addObject:p];
 		}
 		// remainder of all segments
@@ -1301,6 +1424,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			CGPoint pt = [mapView.contents latLongToPixel:coordinate];
 			CSPointVO *screen = [[CSPointVO alloc] init];
 			screen.p = pt;
+			screen.isWalking=segment.isWalkingSection;
 			[points addObject:screen];
 		}
 	}
@@ -1333,5 +1457,46 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	return MAX(locationRadius, 40.0f);
 }
 
+
+//
+/***********************************************
+ * @description			MEMORY
+ ***********************************************/
+//
+
+-(void)didReceiveMemoryWarning{
+	[super didReceiveMemoryWarning];
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+	
+	self.locationButton=nil;
+	self.activeLocationButton=nil;
+	self.searchButton=nil;
+	self.routeButton=nil;
+	self.changePlanButton=nil;
+	self.locatingIndicator=nil;
+	self.leftFlex=nil;
+	self.rightFlex=nil;
+	self.waypointButton=nil;
+	
+	
+	self.mapContents=nil;
+	self.lastLocation=nil;
+	
+	// sub views
+	self.routeplanView=nil;
+	self.routeplanMenu=nil;
+	self.mapLocationSearchView=nil;
+	self.initialLocation=nil;
+	
+	// data
+	self.route=nil;
+	self.waypointArray=nil;
+	self.activeMarker=nil;
+	
+		
+}
 
 @end

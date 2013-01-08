@@ -455,6 +455,7 @@
 		
 		
 		NSMutableArray	*segments=[[NSMutableArray alloc]init];
+		NSMutableArray	*waypoints=[[NSMutableArray alloc]init];
 		root=root->nextSibling;
 		
 		NSInteger time = 0;
@@ -468,12 +469,15 @@
 				
 				SegmentVO *segment=[[SegmentVO alloc]init];
 				
+				segment.provisionName=[TBXML textForElement:[TBXML childElementNamed:@"cs:provisionName" parentElement:segmentnode]];
+				
 				segment.roadName=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:segmentnode]];
 				segment.segmentTime=[[TBXML textForElement:[TBXML childElementNamed:@"cs:time" parentElement:segmentnode]]intValue];
 				segment.segmentDistance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:distance" parentElement:segmentnode]]intValue];
+				segment.walkValue=[[TBXML textForElement:[TBXML childElementNamed:@"cs:walk" parentElement:segmentnode]]intValue];
 				segment.startBearing=[[TBXML textForElement:[TBXML childElementNamed:@"cs:startBearing" parentElement:segmentnode]]intValue];
 				segment.segmentBusynance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:busynance" parentElement:segmentnode]]intValue];
-				segment.provisionName=[TBXML textForElement:[TBXML childElementNamed:@"cs:provisionName" parentElement:segmentnode]];
+				
 				segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
 				segment.startTime=time;
 				segment.startDistance=distance;
@@ -490,6 +494,7 @@
 					point.x = [[XYs objectAtIndex:X] doubleValue];
 					point.y = [[XYs objectAtIndex:X+1] doubleValue];
 					p.p = point;
+					p.isWalking=segment.isWalkingSection;
 					[result addObject:p];
 				}
 				segment.pointsArray=result;
@@ -501,12 +506,28 @@
 			
 			}
 			
+			
+			TBXMLElement *waypointnode=[TBXML childElementNamed:@"cs:waypoint" parentElement:root];
+			
+			if(waypointnode!=nil){
+				
+				CSPointVO *waypoint=[[CSPointVO alloc]init];
+				CGPoint point;
+				point.x=[[TBXML textOfChild:@"cs:longitude" parentElement:waypointnode] doubleValue];
+				point.y=[[TBXML textOfChild:@"cs:latitude" parentElement:waypointnode] doubleValue];
+				waypoint.p=point;
+				
+				[waypoints addObject:waypoint];
+				
+			}
+			
+			
 			root=root->nextSibling;
 			
 		}
 		
 		route.segments=segments;
-	
+		route.waypoints=waypoints;
 	
 	
 	}

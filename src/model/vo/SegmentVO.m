@@ -11,6 +11,13 @@
 
 static NSDictionary *roadIcons;
 
+@interface SegmentVO()
+
+@property(nonatomic,strong)  NSDictionary         *stringDictionary;
+
+
+@end
+
 @implementation SegmentVO
 @synthesize roadName;
 @synthesize provisionName;
@@ -22,7 +29,7 @@ static NSDictionary *roadIcons;
 @synthesize startTime;
 @synthesize startDistance;
 @synthesize pointsArray;
-
+@synthesize walkValue;
 
 //
 /***********************************************
@@ -72,7 +79,32 @@ static NSDictionary *roadIcons;
 	return [(CSPointVO*)[pointsArray objectAtIndex:[pointsArray count]-1] coordinate];
 }
 
+
++(NSString*)provisionIconForType:(NSString*)type isWalking:(int)walking{
+	
+	if(walking==1){
+		
+		return @"UIIcon_walking.png";
+		
+	}else{
+		return [SegmentVO iconForType:[type lowercaseString]];
+	}
+	
+}
+
 + (NSString *)provisionIcon:(NSString *)provisionName {
+	
+	if([self isWalkingSection]==YES){
+		
+		return @"UIIcon_walking.png";
+		
+	}else{
+		return [SegmentVO iconForType:[self.provisionName lowercaseString]];
+	}
+	
+}
+
++(NSString*)iconForType:(NSString*)type{
 	
 	if (nil == roadIcons) {
 		//TODO the association of symbols to types could be improved
@@ -83,29 +115,32 @@ static NSDictionary *roadIcons;
 					  @"UIIcon_roads.png", @"secondary",
 					  @"UIIcon_roads.png", @"major road",
 					  @"UIIcon_roads.png", @"main road",
-					  @"UIIcon_roads.png", @"unclassified road",
-					  @"UIIcon_minor_roads.png", @"minor road",
-					  @"UIIcon_minor_roads.png", @"service road",
-					  @"UIIcon_footpaths.png", @"footpath", 
-					  @"UIIcon_footpaths.png", @"footway", 
-					  @"UIIcon_footpaths.png", @"pedestrian",
-					  @"UIIcon_footpaths.png", @"steps with channel",
-					  @"UIIcon_footpaths.png", @"pedestrianized area", // note US spellling!
-					  @"UIIcon_cycle_lanes.png", @"unsegregated shared use", 
-					  @"UIIcon_cycle_lanes.png", @"narrow cycle lane", 
-					  @"UIIcon_cycle_lanes.png", @"cycle lane", 
-					  @"UIIcon_cycle_tracks.png", @"cycle track", 
-					  @"UIIcon_cycle_tracks.png", @"cycle path", 
-					  @"UIIcon_tracks.png", @"track", 
-					  @"UIIcon_tracks.png", @"bridleway", 
-					  @"UIIcon_quiet_street.png", @"quiet street",
-					  @"UIIcon_quiet_street.png", @"residential street",
-					  @"UIIcon_quiet_street.png", @"unclassified, service", // need icon for this
-					  @"UIIcon_quiet_street.png", @"unclassified,service",
-					  nil];
+					 @"UIIcon_roads.png", @"trunk road",
+					 @"UIIcon_roads.png", @"unclassified road",
+					 @"UIIcon_minor_roads.png", @"minor road",
+					 @"UIIcon_minor_roads.png", @"service road",
+					 @"UIIcon_footpaths.png", @"footpath",
+					 @"UIIcon_footpaths.png", @"footway",
+					 @"UIIcon_footpaths.png", @"pedestrian",
+					 @"UIIcon_footpaths.png", @"pedestrianized area",
+					 @"UIIcon_footpaths.png", @"steps with channel",
+					 @"UIIcon_cycle_lanes.png", @"unsegregated shared use",
+					 @"UIIcon_cycle_lanes.png", @"narrow cycle lane",
+					 @"UIIcon_cycle_lanes.png", @"cycle lane",
+					 @"UIIcon_cycle_tracks.png", @"cycle track",
+					 @"UIIcon_cycle_tracks.png", @"cycle path",
+					 @"UIIcon_tracks.png", @"track",
+					 @"UIIcon_tracks.png", @"bridleway",
+					 @"UIIcon_quiet_street.png", @"quiet street",
+					 @"UIIcon_quiet_street.png", @"residential street",
+					 @"UIIcon_quiet_street.png", @"unclassified, service", // need icon for this
+					 @"UIIcon_quiet_street.png", @"unclassified,service",
+					 nil];
 	}
 	
-	return [roadIcons valueForKey:provisionName];
+	return [roadIcons valueForKey:type];
+	
+	
 }
 
 
@@ -139,6 +174,7 @@ static NSDictionary *roadIcons;
 	}
 }
 
+
 -(NSDictionary*)infoStringDictionary{
 	
 	NSString *hm = [self timeString];
@@ -171,6 +207,22 @@ static NSDictionary *roadIcons;
 				hm,@"hm",distance,@"distance",total,@"total",nil];
 	}
 	
+	
+}
+
+-(NSDictionary*)infoStringDictionary{
+	
+	if(_stringDictionary==nil)
+		[self populateStringDictionary];
+	
+	return _stringDictionary;
+	
+}
+
+
+
+-(BOOL)isWalkingSection{
+	return walkValue==1;
 }
 
 
@@ -185,6 +237,7 @@ static NSString *SEGMENT_BUSYNANCE = @"segmentBusynance";
 static NSString *START_TIME = @"startTime";
 static NSString *START_DISTANCE = @"startDistance";
 static NSString *POINTS_ARRAY = @"pointsArray";
+static NSString *WALK_VALUE = @"walkValue";
 
 
 
@@ -203,6 +256,7 @@ static NSString *POINTS_ARRAY = @"pointsArray";
     [encoder encodeInteger:self.segmentBusynance forKey:SEGMENT_BUSYNANCE];
     [encoder encodeInteger:self.startTime forKey:START_TIME];
     [encoder encodeInteger:self.startDistance forKey:START_DISTANCE];
+	[encoder encodeInteger:self.walkValue forKey:WALK_VALUE];
     [encoder encodeObject:self.pointsArray forKey:POINTS_ARRAY];
 }
 
@@ -219,6 +273,7 @@ static NSString *POINTS_ARRAY = @"pointsArray";
         self.segmentBusynance = [decoder decodeIntegerForKey:SEGMENT_BUSYNANCE];
         self.startTime = [decoder decodeIntegerForKey:START_TIME];
         self.startDistance = [decoder decodeIntegerForKey:START_DISTANCE];
+		self.walkValue = [decoder decodeIntegerForKey:WALK_VALUE];
         self.pointsArray = [decoder decodeObjectForKey:POINTS_ARRAY];
     }
     return self;

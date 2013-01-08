@@ -27,9 +27,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPointVO.h"
 
 
+//TODO: needs to support provisionName so we can draw different line types for provisions
+
 @implementation CSPointVO
 
-@synthesize p;
+@synthesize p,isWalking;
 
 - (BOOL) insideRect:(CGRect)rect {
 	if (p.x < rect.origin.x) return NO;
@@ -52,24 +54,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
-static NSString *P = @"p";
+static NSString *kP_KEY = @"p";
+static NSString *kIS_WALKING_KEY = @"isWalking";
 
 
 
-//=========================================================== 
+//===========================================================
 //  Keyed Archiving
 //
-//=========================================================== 
-- (void)encodeWithCoder:(NSCoder *)encoder 
+//===========================================================
+- (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeCGPoint:self.p forKey:P];
+    [encoder encodeCGPoint:self.p forKey:kP_KEY];
+    [encoder encodeBool:self.isWalking forKey:kIS_WALKING_KEY];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder 
+- (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     if (self) {
-        self.p = [decoder decodeCGPointForKey:P];
+        self.p = [decoder decodeCGPointForKey:kP_KEY];
+        self.isWalking = [decoder decodeBoolForKey:kIS_WALKING_KEY];
     }
     return self;
 }

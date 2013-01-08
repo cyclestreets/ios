@@ -133,7 +133,7 @@ static NSDictionary *segmentDirectionsIcons;
 
 -(void)updateLayout{
 	
-	BOOL hasCapitalizedTurnEntry=[dataProvider objectForKey:@"capitalizedTurn"]!=nil;
+	BOOL hasCapitalizedTurnEntry=[dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"]!=nil;
 	
 	if(hasCapitalizedTurnEntry==NO){
 		if(hasCapitalizedTurn==YES){
@@ -153,25 +153,34 @@ static NSDictionary *segmentDirectionsIcons;
 			capitalizedTurnLabel.hasShadow=YES;
 			[contentContainer insertSubview:capitalizedTurnLabel atIndex:0];
 		}
-		capitalizedTurnLabel.text=[[dataProvider objectForKey:@"capitalizedTurn"] uppercaseString];
+		capitalizedTurnLabel.text=[[dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"] uppercaseString];
 		
 		hasCapitalizedTurn=YES;
 		 
 	}
 	
-	iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[[dataProvider objectForKey:@"capitalizedTurn"] lowercaseString]]];
-	roadTypeiconView.image=[UIImage imageNamed:[SegmentVO provisionIcon:[[dataProvider objectForKey:@"provisionName"]lowercaseString] ]];
+	iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[[dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"] lowercaseString]]];
+	roadTypeiconView.image=[UIImage imageNamed:dataProvider.provisionIcon];
 
 
-	roadNameLabel.text=[dataProvider objectForKey:@"roadname"];
-	roadTypeLabel.text=[dataProvider objectForKey:@"provisionName"];
+	roadNameLabel.text=[dataProvider.infoStringDictionary objectForKey:@"roadname"];
+	
+	if(dataProvider.isWalkingSection==YES){
+		roadTypeLabel.text=@"Walking section";
+		roadTypeLabel.textColor=UIColorFromRGB(0xc20000);
+	}else{
+		roadTypeLabel.text=[dataProvider.infoStringDictionary objectForKey:@"provisionName"];
+		roadTypeLabel.textColor=UIColorFromRGB(0x7F7F7F);
+	}
 	
 	
-	timeLabel.labels=[NSMutableArray arrayWithObjects:@"Time:",[dataProvider objectForKey:@"hm"],nil];
+	
+	
+	timeLabel.labels=[NSMutableArray arrayWithObjects:@"Time:",[dataProvider.infoStringDictionary objectForKey:@"hm"],nil];
 	[timeLabel drawUI];
-	distLabel.labels=[NSMutableArray arrayWithObjects:@"Dist:",[dataProvider objectForKey:@"distance"],nil];
+	distLabel.labels=[NSMutableArray arrayWithObjects:@"Dist:",[dataProvider.infoStringDictionary objectForKey:@"distance"],nil];
 	[distLabel drawUI];
-	totalLabel.labels=[NSMutableArray arrayWithObjects:@"Total:",[dataProvider objectForKey:@"total"],nil];
+	totalLabel.labels=[NSMutableArray arrayWithObjects:@"Total:",[dataProvider.infoStringDictionary objectForKey:@"total"],nil];
 	[totalLabel drawUI];
 	[readoutContainer refresh];
 	
@@ -197,7 +206,13 @@ static NSDictionary *segmentDirectionsIcons;
 						@"UIIcon_turn_right.png", @"sharp right",
 					  nil];
 	}
-	return [segmentDirectionsIcons valueForKey:segmentDirectionType];
+	
+	NSString *iconType=[segmentDirectionsIcons valueForKey:segmentDirectionType];
+	
+	if(iconType==nil)
+		iconType=@"UIIcon_straight_on.png";
+	
+	return iconType;
 }
 
 

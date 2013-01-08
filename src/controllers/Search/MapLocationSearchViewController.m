@@ -121,8 +121,10 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
     
 	MapLocationSearchCellView *cell=[MapLocationSearchCellView cellForTableView:self.searchDisplayController.searchResultsTableView fromNib:[MapLocationSearchCellView nib]];
 	
-	cell.dataProvider=[self.currentPlaces objectAtIndex:indexPath.row];
-    [cell populate];
+	if(indexPath.row<self.currentPlaces.count){
+		cell.dataProvider=[self.currentPlaces objectAtIndex:indexPath.row];
+		[cell populate];
+	}
     
     return cell;
 }

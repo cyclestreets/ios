@@ -26,9 +26,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "RouteLineView.h"
 #import "CSPointVO.h"
+#import "GlobalUtilities.h"
 #import <math.h>
 
 static NSInteger MAX_DIST = 10;
+
+@interface RouteLineView()
+
+@property (nonatomic,strong)  UIColor           *lineColor;
+@property (nonatomic,strong)  UIColor           *dashedlineColor;
+
+-(void)initialise;
+
+@end
 
 @implementation RouteLineView
 
@@ -36,9 +46,22 @@ static NSInteger MAX_DIST = 10;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        // Initialization code
+        [self initialise];
     }
     return self;
+}
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
+		[self initialise];
+    }
+    return self;
+}
+
+-(void)initialise{
+	
+	self.lineColor=UIColorFromRGBAndAlpha(0xFF00FF, 0.8);
+	self.dashedlineColor=UIColorFromRGB(0xFF00FF);
+	
 }
 
 //estimate on x,y only. sum these. Close enough for our "when to split" purposes.
@@ -82,6 +105,46 @@ static NSInteger MAX_DIST = 10;
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	
 	CGContextSetLineWidth( ctx, 4.0);
+	
+	float dashes[] = { 4, 4 };
+    float normal[]={1};
+    
+	NSArray *points = [pointListProvider pointList];
+	
+    for (int i=0;i<points.count;i++) {
+        
+        CSPointVO *point=points[i];
+        CSPointVO *prevpoint;
+        
+        if (i>0) {
+            
+            prevpoint=points[i-1];
+            
+			BetterLog(@"point.isWalking=%i",point.isWalking);
+            
+            if(point.isWalking==YES){
+                CGContextSetStrokeColorWithColor(ctx, _dashedlineColor.CGColor);
+                CGContextSetLineDash(ctx, 0, dashes, 1);
+            }else{
+                CGContextSetStrokeColorWithColor(ctx, _lineColor.CGColor);
+                CGContextSetLineDash(ctx,0,normal,0);
+            }
+            
+            
+            
+            CGContextMoveToPoint(ctx, prevpoint.p.x, prevpoint.p.y);
+            CGContextAddLineToPoint(ctx, point.p.x, point.p.y);
+            
+            CGContextStrokePath(ctx);
+            
+            
+        }
+        
+        
+    }
+	
+	/*
+	
 	CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:0.8 green:0.2 blue:1.0 alpha:0.8].CGColor);
 	
 	NSArray *points = [pointListProvider pointList];
@@ -97,6 +160,8 @@ static NSInteger MAX_DIST = 10;
 	}
 	
 	CGContextStrokePath(ctx);
+	 
+	 */
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

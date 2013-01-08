@@ -14,7 +14,7 @@
 
 @interface WayPointViewController ()
 
-@property(nonatomic,strong) IBOutlet  FMMoveTableView         *tableView;
+@property(nonatomic,weak) IBOutlet  FMMoveTableView         *tableView;
 
 
 -(IBAction)closeButtonSelected:(id)sender;
@@ -224,10 +224,14 @@
  * @description			MEMORY
  ***********************************************/
 //
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
+	
     [super didReceiveMemoryWarning];
-    
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+    self.tableView=nil;
 }
 
 

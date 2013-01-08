@@ -19,7 +19,7 @@
 @property (nonatomic, strong) PhotoCategoryVO		* category;
 @property (nonatomic, strong) PhotoCategoryVO		* feature;
 @property (nonatomic, strong) NSString		* caption;
-@property (nonatomic, strong) NSString		* bearing;
+@property (nonatomic, assign) int			bearing;
 @property (nonatomic, strong) NSDate		* date;
 @property (nonatomic, strong) NSMutableDictionary		* responseDict;
 

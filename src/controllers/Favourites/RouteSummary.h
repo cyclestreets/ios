@@ -33,52 +33,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface RouteSummary : SuperViewController {
 	
-	RouteVO								*route;
-	
-	SavedRoutesDataType					dataType;
-	
-	UIScrollView						*scrollView;
-	
-	LayoutBox							*viewContainer;
-	
-	IBOutlet		LayoutBox			*headerContainer;
-	IBOutlet		ExpandedUILabel		*routeNameLabel;
-	IBOutlet		UILabel				*dateLabel;
-	IBOutlet		UILabel				*routeidLabel;
-	
-	IBOutlet		LayoutBox			*readoutContainer;
-	IBOutlet		UILabel				*timeLabel;
-	IBOutlet		UILabel				*lengthLabel;
-	IBOutlet		UILabel				*planLabel;
-	IBOutlet		UILabel				*speedLabel;
-	IBOutlet		UILabel				*calorieLabel;
-	IBOutlet		UILabel				*coLabel;
-	
-	
-	IBOutlet		UIButton			*routeButton;
-	IBOutlet		UIButton			*renameButton;
-	IBOutlet		UIButton			*favouriteButton;
 	
 }
-
 @property (nonatomic, strong) RouteVO		* route;
 @property (nonatomic, assign) SavedRoutesDataType		 dataType;
-@property (nonatomic, strong) UIScrollView		* scrollView;
-@property (nonatomic, strong) LayoutBox		* viewContainer;
-@property (nonatomic, strong) IBOutlet LayoutBox		* headerContainer;
-@property (nonatomic, strong) IBOutlet ExpandedUILabel		* routeNameLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* dateLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* routeidLabel;
-@property (nonatomic, strong) IBOutlet LayoutBox		* readoutContainer;
-@property (nonatomic, strong) IBOutlet UILabel		* timeLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* lengthLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* planLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* speedLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* calorieLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* coLabel;
-@property (nonatomic, strong) IBOutlet UIButton		* routeButton;
-@property (nonatomic, strong) IBOutlet UIButton		* renameButton;
-@property (nonatomic, strong) IBOutlet UIButton		* favouriteButton;
 
 - (IBAction) routeButtonSelected;
 -(IBAction) renameButtonSelected:(id)sender;

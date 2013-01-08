@@ -299,7 +299,7 @@
     NSLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
 }
 
-+(void)drawUIViewEdgeShadow:(UIView*)view{
++(void)drawUIViewEdgeShadow:(UIView*)view atTop:(BOOL)top{
 	
 	BOOL create=YES;
 	CAGradientLayer *shadow;
@@ -313,13 +313,18 @@
 	}
 	
 	if(create==YES){
-		shadow = [ViewUtilities shadowAsInverse:NO :view];
+		shadow = [ViewUtilities shadowAsInverse:top :view];
 		[view.layer insertSublayer:shadow atIndex:0];
 	}	
 	
 	CGRect shadowFrame = shadow.frame;
 	shadowFrame.size.width = view.frame.size.width;
-	shadowFrame.origin.y = view.frame.size.height;
+	if(top==YES){
+		shadowFrame.origin.y = 0-shadow.frame.size.height;
+	}else{
+		shadowFrame.origin.y = view.frame.size.height;
+	}
+	
 	shadow.frame = shadowFrame;
 	
 	
