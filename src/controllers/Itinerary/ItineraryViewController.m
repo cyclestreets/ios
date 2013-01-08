@@ -313,7 +313,7 @@
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 				[tweetViewController setInitialText:@"My CycleStreet route  #cyclestreets"];
 					
-				[tweetViewController addURL:[NSURL URLWithString:route.csiOSRouteurlString]];
+				[tweetViewController addURL:[NSURL URLWithString:route.csBrowserRouteurlString]];
 					
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -375,7 +375,7 @@
 			
 		case BUIconActionSheetIconTypeCopy:
 		{
-			[[UIPasteboard generalPasteboard] setString:route.routeid];
+			[[UIPasteboard generalPasteboard] setString:route.csBrowserRouteurlString];
 		}
 			
 		break;

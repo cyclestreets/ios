@@ -59,6 +59,7 @@
 	_viewContainer.alignMode=BUCenterAlignMode;
 	_viewContainer.layoutMode=BUVerticalLayoutMode;
 	_viewContainer.itemPadding=20;
+	_viewContainer.paddingBottom=20;
 	[self addSubview:_viewContainer];
 	
 	GradientView *highlight=[[GradientView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
@@ -124,7 +125,7 @@
 	[closeButton addTarget:self action:@selector(closeButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[_viewContainer addSubview:closeButton];
 	
-	[ViewUtilities alignView:_viewContainer withView:self :BUNoneAlignMode :BUBottomAlignMode :20];
+	[ViewUtilities alignView:_viewContainer withView:self :BUNoneAlignMode :BUBottomAlignMode :0];
 	
 
 }

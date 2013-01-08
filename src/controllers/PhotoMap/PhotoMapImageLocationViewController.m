@@ -263,7 +263,7 @@
 			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 			picker.mailComposeDelegate = self;
 			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",dataProvider.csid]];
-			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",[NSString stringWithFormat:@"cycle.st/p%@",dataProvider.csid],dataProvider.csid] isHTML:YES];
+			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",dataProvider.csImageUrlString] isHTML:YES];
 			[picker addAttachmentData:UIImageJPEGRepresentation(imageView.image, 1) mimeType:@"image/jpeg" fileName:@"CSPhoto.jpeg"];
 			
 			if(picker!=nil)
@@ -288,7 +288,7 @@
 			
 		case BUIconActionSheetIconTypeCopy:
 		{
-			[[UIPasteboard generalPasteboard] setImage:imageView.image];
+			[[UIPasteboard generalPasteboard] setString:dataProvider.csImageUrlString];
 		}
 			
 			break;
