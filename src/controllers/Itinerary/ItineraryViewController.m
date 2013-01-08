@@ -318,18 +318,14 @@
 			if ([TWTweetComposeViewController canSendTweet]) {   
 					
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:@"My CycleStreet route  #cyclestreets"];
+				[tweetViewController setInitialText:[NSString stringWithFormat:@"I've just planned this cycle journey on CycleStreets: %@  @cyclestreets",_route.csBrowserRouteurlString]];
 					
-				[tweetViewController addURL:[NSURL URLWithString:_route.csBrowserRouteurlString]];
+				//[tweetViewController addURL:[NSURL URLWithString:_route.csBrowserRouteurlString]];
 					
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
 					
-					if(result==TWTweetComposeViewControllerResultDone){
-						
-						
-						
-					}
+					[self dismissModalViewControllerAnimated:YES];
 					
 				}];
 					

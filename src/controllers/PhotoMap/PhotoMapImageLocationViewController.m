@@ -224,19 +224,15 @@
 			if ([TWTweetComposeViewController canSendTweet]) {
 				
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:@"A CycleStreets photo: #cyclestreets"];
+				[tweetViewController setInitialText:[NSString stringWithFormat:@"Great cycling photo on the CycleStreets Photomap: %@  @cyclestreets",dataProvider.csImageUrlString]];
 				
 				[tweetViewController addImage:imageView.image];
-				[tweetViewController addURL:[NSURL URLWithString:dataProvider.csImageUrlString]];
+				
 				
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
 					
-					if(result==TWTweetComposeViewControllerResultDone){
-						
-						
-						
-					}
+					[self dismissModalViewControllerAnimated:YES];
 					
 				}];
 				
