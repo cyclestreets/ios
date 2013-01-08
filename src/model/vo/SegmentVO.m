@@ -92,7 +92,7 @@ static NSDictionary *roadIcons;
 	
 }
 
-+ (NSString *)provisionIcon:(NSString *)provisionName {
+- (NSString *)provisionIcon {
 	
 	if([self isWalkingSection]==YES){
 		
@@ -109,12 +109,12 @@ static NSDictionary *roadIcons;
 	if (nil == roadIcons) {
 		//TODO the association of symbols to types could be improved
 		roadIcons = [NSDictionary dictionaryWithObjectsAndKeys:
-					  @"UIIcon_roads.png", @"busy road", 
-					  @"UIIcon_roads.png", @"road", 
-					  @"UIIcon_roads.png", @"busy and fast road", 
-					  @"UIIcon_roads.png", @"secondary",
-					  @"UIIcon_roads.png", @"major road",
-					  @"UIIcon_roads.png", @"main road",
+					 @"UIIcon_roads.png", @"busy road",
+					 @"UIIcon_roads.png", @"road",
+					 @"UIIcon_roads.png", @"busy and fast road",
+					 @"UIIcon_roads.png", @"secondary",
+					 @"UIIcon_roads.png", @"major road",
+					 @"UIIcon_roads.png", @"main road",
 					 @"UIIcon_roads.png", @"trunk road",
 					 @"UIIcon_roads.png", @"unclassified road",
 					 @"UIIcon_minor_roads.png", @"minor road",
@@ -142,7 +142,6 @@ static NSDictionary *roadIcons;
 	
 	
 }
-
 
 
 - (NSString *) infoString {
@@ -175,7 +174,7 @@ static NSDictionary *roadIcons;
 }
 
 
--(NSDictionary*)infoStringDictionary{
+-(void)populateStringDictionary{
 	
 	NSString *hm = [self timeString];
 	NSString *distance = [NSString stringWithFormat:@"%im", [self segmentDistance]];
@@ -196,12 +195,12 @@ static NSDictionary *roadIcons;
 	
 	if ([turnParts count] ==0 || [capitalizedTurn isEqualToString:@"Unknown"]) {
 		
-		return [NSDictionary dictionaryWithObjectsAndKeys:[self roadName],@"roadname",
+		_stringDictionary=[NSDictionary dictionaryWithObjectsAndKeys:[self roadName],@"roadname",
 				provisionstring,@"provisionName",
 				hm,@"hm",distance,@"distance",total,@"total",nil];
 	} else {
 		
-		return [NSDictionary dictionaryWithObjectsAndKeys:capitalizedTurn,@"capitalizedTurn",
+		_stringDictionary=[NSDictionary dictionaryWithObjectsAndKeys:capitalizedTurn,@"capitalizedTurn",
 				[self roadName],@"roadname",
 				provisionstring,@"provisionName",
 				hm,@"hm",distance,@"distance",total,@"total",nil];

@@ -42,7 +42,80 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 <RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider> {
 	
 	
+	IBOutlet RMMapView						*mapView;			//map of current area
+	IBOutlet BlueCircleView					*blueCircleView;	//overlay GPS location
+	IBOutlet UILabel                        *attributionLabel;	// map type label
+	RMMapContents							*mapContents;
+	
+	
+	IBOutlet UIBarButtonItem				*gpslocateButton;
+	IBOutlet UIBarButtonItem				*photoWizardButton;
+	
+	
+	
+	CLLocationManager						*locationManager;	// location
+	CLLocation								*lastLocation;		// last location
+	
+	CLLocation								*currentLocation;
+	
+	
+	PhotoMapImageLocationViewController		*locationView;			//the popup with the contents of a particular location (photomap etc.)
+	MapLocationSearchViewController			*mapLocationSearchView;	//the search popup
+	
+	PhotoWizardViewController				*photoWizardView;
+	
+	
+	InitialLocation							*initialLocation;
+	IBOutlet UIView							*introView;
+	IBOutlet UIButton						*introButton;
+	
+	NSMutableArray							*photoMarkers;
+	
+	BOOL									photomapQuerying;
+	BOOL									showingPhotos;
+	BOOL									locationManagerIsLocating;
+	BOOL									locationWasFound;
+	
+	BOOL									firstRun;
 }
 
+@property (nonatomic, strong) IBOutlet RMMapView		* mapView;
+@property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
+@property (nonatomic, strong) IBOutlet UILabel		* attributionLabel;
+@property (nonatomic, strong) RMMapContents		* mapContents;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem		* gpslocateButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem		* photoWizardButton;
+@property (nonatomic, strong) CLLocationManager		* locationManager;
+@property (nonatomic, strong) CLLocation		* lastLocation;
+@property (nonatomic, strong) CLLocation		* currentLocation;
+@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
+@property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
+@property (nonatomic, strong) PhotoWizardViewController		* photoWizardView;
+@property (nonatomic, strong) InitialLocation		* initialLocation;
+@property (nonatomic, strong) IBOutlet UIView		* introView;
+@property (nonatomic, strong) IBOutlet UIButton		* introButton;
+@property (nonatomic, strong) NSMutableArray		* photoMarkers;
+@property (nonatomic, assign) BOOL		 photomapQuerying;
+@property (nonatomic, assign) BOOL		 showingPhotos;
+@property (nonatomic, assign) BOOL		 locationManagerIsLocating;
+@property (nonatomic, assign) BOOL		 locationWasFound;
+@property (nonatomic, assign) BOOL		 firstRun;
+
+
+
+- (IBAction) locationButtonSelected:(id)sender;
+-(IBAction)  showPhotoWizard:(id)sender;
+- (IBAction) didSearch;
+
+- (IBAction) didIntroButton;
+
+- (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw;
+
+
+- (void)startShowingPhotos;
+
+
+- (void) requestPhotos;
+- (void) clearPhotos;
 
 @end

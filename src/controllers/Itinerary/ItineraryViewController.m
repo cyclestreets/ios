@@ -320,7 +320,7 @@
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
 				[tweetViewController setInitialText:@"My CycleStreet route  #cyclestreets"];
 					
-				[tweetViewController addURL:[NSURL URLWithString:route.csBrowserRouteurlString]];
+				[tweetViewController addURL:[NSURL URLWithString:_route.csBrowserRouteurlString]];
 					
 				[self presentViewController:tweetViewController animated:YES completion:nil];
 				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
@@ -355,9 +355,9 @@
 		{
 			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 			picker.mailComposeDelegate = self;
-			[picker setSubject:[NSString stringWithFormat:@"CycleStreets route %@",route.routeid]];
+			[picker setSubject:[NSString stringWithFormat:@"CycleStreets route %@",_route.routeid]];
 			
-			NSString *body=[NSString stringWithFormat:@"%@ <br><br>%@",[NSString stringWithFormat:@"<a href=%@>For iOS devices: %@</a>",route.csiOSRouteurlString,route.routeid],[NSString stringWithFormat:@"<a href=%@>For Browsers: %@</a>",route.csBrowserRouteurlString,route.routeid]];
+			NSString *body=[NSString stringWithFormat:@"%@ <br><br>%@",[NSString stringWithFormat:@"<a href=%@>For iOS devices: %@</a>",_route.csiOSRouteurlString,_route.routeid],[NSString stringWithFormat:@"<a href=%@>For Browsers: %@</a>",_route.csBrowserRouteurlString,_route.routeid]];
 			
 			[picker setMessageBody:body isHTML:YES];
 			
@@ -371,7 +371,7 @@
 			
 			MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
 			picker.messageComposeDelegate = self;
-			picker.body=[NSString stringWithFormat:@"CycleStreets route %@",route.csBrowserRouteurlString];
+			picker.body=[NSString stringWithFormat:@"CycleStreets route %@",_route.csBrowserRouteurlString];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
@@ -382,7 +382,7 @@
 			
 		case BUIconActionSheetIconTypeCopy:
 		{
-			[[UIPasteboard generalPasteboard] setString:route.csBrowserRouteurlString];
+			[[UIPasteboard generalPasteboard] setString:_route.csBrowserRouteurlString];
 		}
 			
 		break;

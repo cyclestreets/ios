@@ -617,18 +617,12 @@
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
 		289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
-		289E3D361681E61F0013DD8C /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E3D351681E61F0013DD8C /* UIIcon_walking.png */; };
-		289E3D371681E61F0013DD8C /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E3D351681E61F0013DD8C /* UIIcon_walking.png */; };
-		289E3D391681E6370013DD8C /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E3D381681E6370013DD8C /* UIIcon_walking@2x.png */; };
-		289E3D3A1681E6370013DD8C /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E3D381681E6370013DD8C /* UIIcon_walking@2x.png */; };
 		289E6AFA144C35860079FFE5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E6AF8144C357C0079FFE5 /* libz.dylib */; };
 		289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
 		28A0441A159216A400201CF3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A04418159216A400201CF3 /* Icon.png */; };
 		28A0441D159216C000201CF3 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A0441C159216C000201CF3 /* Icon@2x.png */; };
-		28A29D8A166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A29D89166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png */; };
-		28A29D8B166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A29D89166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png */; };
 		28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */; };
 		28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
 		28A8B62F1450B074009C5647 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B62E1450B074009C5647 /* POIListviewController.m */; };
@@ -1171,12 +1165,9 @@
 		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
 		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
-		289E3D351681E61F0013DD8C /* UIIcon_walking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIIcon_walking.png; path = "../../../../../../../../Desktop/masterios/resources/images/x1/Cell Icons/UIIcon_walking.png"; sourceTree = "<group>"; };
-		289E3D381681E6370013DD8C /* UIIcon_walking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIIcon_walking@2x.png"; path = "../../../../../../../../Desktop/masterios/resources/images/x2/Cell Icons/UIIcon_walking@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		28A04418159216A400201CF3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		28A0441C159216C000201CF3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		28A29D89166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_intermediate_wisp@2X.png"; sourceTree = "<group>"; };
 		28A89CCA14FD4A610001BABA /* PhotoWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardViewController.h; path = PhotoWizard/PhotoWizardViewController.h; sourceTree = "<group>"; };
 		28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoWizardViewController.m; path = PhotoWizard/PhotoWizardViewController.m; sourceTree = "<group>"; };
 		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
@@ -1905,7 +1896,6 @@
 		28187A6214FCFF4C00A38A17 /* Cell Icons */ = {
 			isa = PBXGroup;
 			children = (
-				289E3D351681E61F0013DD8C /* UIIcon_walking.png */,
 				28187A6314FCFF4C00A38A17 /* UIIcon_cycle_lanes.png */,
 				28187A6414FCFF4C00A38A17 /* UIIcon_cycle_tracks.png */,
 				28187A6514FCFF4C00A38A17 /* UIIcon_footpaths.png */,
@@ -2138,7 +2128,6 @@
 		289A9B4A13536CCB00E8AF90 /* Cell Icons */ = {
 			isa = PBXGroup;
 			children = (
-				289E3D381681E6370013DD8C /* UIIcon_walking@2x.png */,
 				289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */,
 				289A9B4C13536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png */,
 				289A9B4D13536CCB00E8AF90 /* UIIcon_footpaths@2x.png */,
@@ -2153,7 +2142,6 @@
 		289A9B5113536CCB00E8AF90 /* Wisps */ = {
 			isa = PBXGroup;
 			children = (
-				28A29D89166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png */,
 				289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */,
 				289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */,
 			);
@@ -2778,12 +2766,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				2811C4C7166CFFD600592560 /* MessageUI.framework */,
 				2811C4AF166CDBC600592560 /* Social.framework */,
 				2811C4AB166CDB9600592560 /* Twitter.framework */,
-=======
->>>>>>> origin/develop
 				2807FCB81666934E0028D7DB /* ImageIO.framework */,
 				28B78DA11507884C00949870 /* MapKit.framework */,
 				280E24D6144D89230021CDFA /* CFNetwork.framework */,
@@ -3121,7 +3106,6 @@
 				2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
-<<<<<<< HEAD
 				2811C49D166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C49F166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A1166CCD5F00592560 /* UIActivityMail.png in Resources */,
@@ -3134,11 +3118,6 @@
 				2868D242166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
-=======
-				28A29D8A166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png in Resources */,
-				289E3D361681E61F0013DD8C /* UIIcon_walking.png in Resources */,
-				289E3D391681E6370013DD8C /* UIIcon_walking@2x.png in Resources */,
->>>>>>> origin/develop
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3342,7 +3321,6 @@
 				2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
-<<<<<<< HEAD
 				2811C49E166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C4A0166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A2166CCD5F00592560 /* UIActivityMail.png in Resources */,
@@ -3355,11 +3333,6 @@
 				2868D243166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D245166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
-=======
-				28A29D8B166FA167004CBA31 /* CSIcon_intermediate_wisp@2X.png in Resources */,
-				289E3D371681E61F0013DD8C /* UIIcon_walking.png in Resources */,
-				289E3D3A1681E6370013DD8C /* UIIcon_walking@2x.png in Resources */,
->>>>>>> origin/develop
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3932,7 +3905,7 @@
 			};
 			name = Release;
 		};
-		2834377F15DD5DC300B00FD5 /* Adhoc */ = {
+		2834377F15DD5DC300B00FD5 /* Adhoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3973,7 +3946,7 @@
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Adhoc;
+			name = "Adhoc Distribution";
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -4023,7 +3996,7 @@
 			};
 			name = Release;
 		};
-		E791ADC911518A0900A9B38F /* Adhoc */ = {
+		E791ADC911518A0900A9B38F /* Adhoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = armv7;
@@ -4045,9 +4018,9 @@
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
-			name = Adhoc;
+			name = "Adhoc Distribution";
 		};
-		E791ADCA11518A0900A9B38F /* Adhoc */ = {
+		E791ADCA11518A0900A9B38F /* Adhoc Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -4082,13 +4055,13 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "DE5F58CC-40F9-43F2-A30C-AE41EA255579";
+				PROVISIONING_PROFILE = "49A6FC34-2315-4A5C-8ACA-5BEA0470DCC0";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Adhoc;
+			name = "Adhoc Distribution";
 		};
 /* End XCBuildConfiguration section */
 
@@ -4098,7 +4071,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
-				E791ADCA11518A0900A9B38F /* Adhoc */,
+				E791ADCA11518A0900A9B38F /* Adhoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4108,7 +4081,7 @@
 			buildConfigurations = (
 				2834377D15DD5DC300B00FD5 /* Debug */,
 				2834377E15DD5DC300B00FD5 /* Release */,
-				2834377F15DD5DC300B00FD5 /* Adhoc */,
+				2834377F15DD5DC300B00FD5 /* Adhoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4118,7 +4091,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
-				E791ADC911518A0900A9B38F /* Adhoc */,
+				E791ADC911518A0900A9B38F /* Adhoc Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

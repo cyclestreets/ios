@@ -11,16 +11,9 @@
 #import "GradientView.h"
 #import "CopyLabel.h"
 
-@interface PhotoMapImageLocationViewController()
 
 
-@property (nonatomic, strong)	PhotoMapVO		*dataProvider;
-@property (nonatomic, strong)	UINavigationBar		*navigationBar;
-@property (nonatomic, strong)	UIScrollView		*scrollView;
-@property (nonatomic, strong)	LayoutBox		*viewContainer;
-@property (nonatomic, strong)	AsyncImageView		*imageView;
-@property (nonatomic, strong)	ExpandedUILabel		*imageLabel;
-@property (nonatomic, strong)	CopyLabel		*titleLabel;
+@interface PhotoMapImageLocationViewController(Private) 
 
 -(void)updateContentSize;
 -(void)updateImageSize;
@@ -34,6 +27,13 @@
 
 
 @implementation PhotoMapImageLocationViewController
+@synthesize dataProvider;
+@synthesize navigationBar;
+@synthesize scrollView;
+@synthesize viewContainer;
+@synthesize imageView;
+@synthesize imageLabel;
+@synthesize titleLabel;
 
 
 //
@@ -49,7 +49,7 @@
 
 -(void)ImageDidLoadWithImage:(UIImage*)image{
 	
-	[_viewContainer refresh];
+	[viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -73,26 +73,26 @@
 	
 	[(GradientView*)self.view setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 	
-	self.viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	_viewContainer.layoutMode=BUVerticalLayoutMode;
-	_viewContainer.alignMode=BUCenterAlignMode;
-	_viewContainer.fixedWidth=YES;
-	_viewContainer.paddingTop=20;
-	_viewContainer.itemPadding=20;
+	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	viewContainer.layoutMode=BUVerticalLayoutMode;
+	viewContainer.alignMode=BUCenterAlignMode;
+	viewContainer.fixedWidth=YES;
+	viewContainer.paddingTop=20;
+	viewContainer.itemPadding=20;
 		
-	self.imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
-	_imageView.delegate=self;
-	_imageView.cacheImage=NO;
-	[_viewContainer addSubview:_imageView];
+	imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
+	imageView.delegate=self;
+	imageView.cacheImage=NO;
+	[viewContainer addSubview:imageView];
 	
-	self.imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	_imageLabel.font=[UIFont systemFontOfSize:13];
-	_imageLabel.textColor=UIColorFromRGB(0x666666);
-	_imageLabel.hasShadow=YES;
-	_imageLabel.multiline=YES;
-	[_viewContainer addSubview:_imageLabel];
+	imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	imageLabel.font=[UIFont systemFontOfSize:13];
+	imageLabel.textColor=UIColorFromRGB(0x666666);
+	imageLabel.hasShadow=YES;
+	imageLabel.multiline=YES;
+	[viewContainer addSubview:imageLabel];
 	
-	[_scrollView addSubview:_viewContainer];
+	[scrollView addSubview:viewContainer];
 	
 	[self updateContentSize];
 	
@@ -102,21 +102,16 @@
 
 -(void)createNavigationBarUI{
 	
-	UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-															  style:UIBarButtonItemStyleBordered
-															 target:self
-															 action:@selector(backButtonSelected:)];
+
 	
 	self.titleLabel=[[CopyLabel alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
-	_titleLabel.textAlignment=UITextAlignmentCenter;
-	_titleLabel.font=[UIFont boldSystemFontOfSize:20];
-	_titleLabel.textColor=[UIColor whiteColor];
-	_titleLabel.shadowOffset=CGSizeMake(0, -1);
-	_titleLabel.shadowColor=[UIColor grayColor];
+	titleLabel.textAlignment=UITextAlignmentCenter;
+	titleLabel.font=[UIFont boldSystemFontOfSize:20];
+	titleLabel.textColor=[UIColor whiteColor];
+	titleLabel.shadowOffset=CGSizeMake(0, -1);
+	titleLabel.shadowColor=[UIColor grayColor];
 	
-	[self.navigationBar.topItem setTitleView:_titleLabel];
-	
-	[self.navigationBar.topItem setRightBarButtonItem:back];
+	[self.navigationBar.topItem setTitleView:titleLabel];
 	
 	
 }
@@ -132,8 +127,8 @@
 
 -(void)createNonPersistentUI{
 	
-	_imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
-	[_viewContainer refresh];
+	imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
+	[viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -151,13 +146,11 @@
 	
 	self.dataProvider=photoEntry;
 	
-	//self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
+	titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
 	
-	_titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csid]];
+	imageLabel.text=[dataProvider caption];
 	
-	_imageLabel.text=[_dataProvider caption];
-	
-	[_imageView loadImageFromString:[_dataProvider bigImageURL]];
+	[imageView loadImageFromString:[dataProvider bigImageURL]];
 	
 }
 
@@ -170,7 +163,143 @@
 
 -(IBAction)backButtonSelected:(id)sender{
 	
-	[_imageView cancel];
+	[imageView cancel];
+	[self dismissModalViewControllerAnimated:YES];
+	
+}
+
+
+
+-(IBAction)shareButtonSelected:(id)sender{
+	
+	NSArray *activitites;
+	
+	
+	#if ENABLEOS6ACTIVITYMODE
+	
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+		
+		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:dataProvider.csImageUrlString],imageView.image] applicationActivities:nil];
+		activity.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll, UIActivityTypePrint, UIActivityTypePostToWeibo];
+		
+		[self presentViewController:activity animated:YES completion:nil];
+		[activity setCompletionHandler:^(NSString *activityType, BOOL completed){
+			
+			if(completed==YES){
+				
+				
+				
+			}
+			
+		}];
+		
+		
+		
+	}else{
+	
+	#endif
+		
+		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS),@(BUIconActionSheetIconTypeCopy)];
+		
+		BUIconActionSheet *iconSheet=[[BUIconActionSheet alloc] initWithButtons:activitites andTitle:@"Share this CycleStreets photo"];
+		iconSheet.delegate=self;
+		
+		[iconSheet show:YES];
+	
+	
+	#if ENABLEOS6MODE	
+	}
+	#endif
+	
+	
+}
+
+// BUIconActionSheet delegate callback
+-(void)actionSheetClickedButtonWithType:(BUIconActionSheetIconType)type{
+	
+	
+	switch (type) {
+		case BUIconActionSheetIconTypeTwitter:
+			
+			if ([TWTweetComposeViewController canSendTweet]) {
+				
+				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+				[tweetViewController setInitialText:@"A CycleStreets photo: #cyclestreets"];
+				
+				[tweetViewController addImage:imageView.image];
+				[tweetViewController addURL:[NSURL URLWithString:dataProvider.csImageUrlString]];
+				
+				[self presentViewController:tweetViewController animated:YES completion:nil];
+				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
+					
+					if(result==TWTweetComposeViewControllerResultDone){
+						
+						
+						
+					}
+					
+				}];
+				
+			} else {
+				
+				UIAlertView *alertView = [[UIAlertView alloc]
+										  initWithTitle:@"Sorry"
+										  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account set up"
+										  delegate:self
+										  cancelButtonTitle:@"OK"
+										  otherButtonTitles:nil];
+				[alertView show];
+				
+				
+				
+				
+			}
+			
+			
+			break;
+			
+		case BUIconActionSheetIconTypeMail:
+		{
+			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+			picker.mailComposeDelegate = self;
+			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",dataProvider.csid]];
+			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",dataProvider.csImageUrlString,dataProvider.csid] isHTML:YES];
+			[picker addAttachmentData:UIImageJPEGRepresentation(imageView.image, 1) mimeType:@"image/jpeg" fileName:@"CSPhoto.jpeg"];
+			
+			if(picker!=nil)
+				[self presentModalViewController:picker animated:YES];
+		}
+			break;
+			
+		case BUIconActionSheetIconTypeSMS:
+		{
+			
+			MFMessageComposeViewController *picker=[[MFMessageComposeViewController alloc]init];
+			picker.messageComposeDelegate=self;
+			[picker setBody:dataProvider.csImageUrlString];
+			
+			if(picker!=nil)
+				[self presentModalViewController:picker animated:YES];
+			
+			
+		}
+			
+			break;
+			
+		case BUIconActionSheetIconTypeCopy:
+		{
+			[[UIPasteboard generalPasteboard] setString:dataProvider.csImageUrlString];
+		}
+			
+			break;
+	}
+	
+}
+
+
+// The mail compose view controller delegate method
+- (void)mailComposeController:(MFMailComposeViewController *)controller  didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+	
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -189,26 +318,17 @@
 
 -(void)updateContentSize{
 	
-	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.height)];
+	[scrollView setContentSize:CGSizeMake(SCREENWIDTH, viewContainer.height)];
 	
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-	
-	if (self.isViewLoaded && !self.view.window) {
-        self.view = nil;
-    }
-	
-	self.dataProvider=nil;
-	self.navigationBar=nil;
-	self.scrollView=nil;
-	self.viewContainer=nil;
-	self.imageView=nil;
-	self.imageLabel=nil;
-	self.titleLabel=nil;
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
 
 @end
