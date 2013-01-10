@@ -224,7 +224,7 @@
 			if ([TWTweetComposeViewController canSendTweet]) {
 				
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:[NSString stringWithFormat:@"Great cycling photo on the CycleStreets Photomap: %@  @cyclestreets",dataProvider.csImageUrlString]];
+				[tweetViewController setInitialText:[NSString stringWithFormat:@"Great cycling photo on the @CycleStreets Photomap: %@",dataProvider.csImageUrlString]];
 				
 				[tweetViewController addImage:imageView.image];
 				

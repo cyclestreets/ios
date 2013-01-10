@@ -318,7 +318,7 @@
 			if ([TWTweetComposeViewController canSendTweet]) {   
 					
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:[NSString stringWithFormat:@"I've just planned this cycle journey on CycleStreets: %@  @cyclestreets",_route.csBrowserRouteurlString]];
+				[tweetViewController setInitialText:[NSString stringWithFormat:@"Just planned this cycle journey on @CycleStreets: %@",_route.csBrowserRouteurlString]];
 					
 				//[tweetViewController addURL:[NSURL URLWithString:_route.csBrowserRouteurlString]];
 					
