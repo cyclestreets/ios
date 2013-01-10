@@ -47,6 +47,8 @@
 #import "WayPointViewController.h"
 #import "UIView+Additions.h"
 #import "ViewUtilities.h"
+#import "POILocationVO.h"
+#import "POIManager.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -117,6 +119,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) RouteVO				* route;
 @property (nonatomic, strong) NSMutableArray		* waypointArray;
 @property (nonatomic, strong) RMMarker				* activeMarker;
+@property (nonatomic, strong) NSMutableArray		* markerArray;
+@property (nonatomic, strong) NSMutableArray		* poiArray;
+
+
 
 // state
 @property (nonatomic, assign) BOOL					doingLocation;
@@ -162,6 +168,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[notifications addObject:GPSLOCATIONUPDATE];
 	[notifications addObject:GPSLOCATIONFAILED];
 	
+	[notifications addObject:POIMAPLOCATIONRESPONSE];
 	
 	[super listNotificationInterests];
 	
@@ -200,6 +207,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 	if([name isEqualToString:CSMAPSTYLECHANGED]){
 		[self didNotificationMapStyleChanged];
+	}
+	
+	if([name isEqualToString:POIMAPLOCATIONRESPONSE]){
+		[self updatePOIMapMarkers];
 	}
 	
 }
@@ -322,7 +333,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	self.searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
 													   style:UIBarButtonItemStyleBordered
 													  target:self
-													  action:@selector(searchButtonSelected)];
+													  action:@selector(showPOIView)];
 	_searchButton.width = 40;
 	
 	self.changePlanButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_routePlan.png"]
@@ -675,9 +686,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)resetWayPoints{
 	
+	for (WayPointVO *waypoint in _waypointArray) {
+		
+		[[_mapView markerManager] removeMarker:waypoint.marker];
+	}
+	
 	[_waypointArray removeAllObjects];
 	
-	[[_mapView markerManager] removeMarkers];
 }
 
 
@@ -861,7 +876,81 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 }
 
-#pragma marl RMMap marker
+
+//------------------------------------------------------------------------------------
+#pragma mark - POI Methods
+//------------------------------------------------------------------------------------
+
+//
+/***********************************************
+ * @description			POI METHODS
+ ***********************************************/
+//
+
+// logic //
+
+// map markers are made up of waypoint & pois
+// adding waypoint updates mapmarkers
+// enabling poin for type adds these to map markers
+
+// remove/add waypoint needs > full marker refresh needs to take pois into account
+// updateWaypointStatuses should call removeMarkers:arr not remove all
+// similarly removePOIMarkers should only remove poi markers from markermanager
+
+
+-(void)showPOIView{
+	
+	UINavigationController *nav=(UINavigationController*)self.viewDeckController.rightController;
+	POIListviewController *poiviewcontroller=(POIListviewController*)nav.topViewController;
+	
+	CGRect bounds = _mapView.contents.screenBounds;
+	CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
+	CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
+	
+	poiviewcontroller.nwCoordinate=nw;
+	poiviewcontroller.seCoordinate=se;
+	
+	[self.viewDeckController openRightViewAnimated:YES];
+	
+	
+}
+
+
+-(void)updatePOIMapMarkers{
+	
+	[self removePOIMarkers];
+	
+	for (POILocationVO *poi in _poiArray) {
+		
+		RMMarker *marker=[Markers markerPOIWithImage:[POIManager sharedInstance].selectedCategory.icon];
+		
+		poi.marker=marker;
+		
+		[[_mapView markerManager ] addMarker:marker AtLatLong:poi.location.coordinate];
+		
+	}
+
+}
+
+
+
+-(void)removePOIMarkers{
+	
+	for (POILocationVO *poi in _poiArray) {
+		
+		if(poi.marker!=nil)
+			[_mapView.markerManager removeMarker:poi.marker];
+		
+	}
+	
+	[_poiArray removeAllObjects];
+	
+}
+
+
+
+
+#pragma mark RMMap marker
 
 - (BOOL)canBecomeFirstResponder {
 	return YES;

@@ -8,9 +8,10 @@
 
 #import "SuperViewController.h"
 #import "POICategoryViewController.h"
+#import "IIViewDeckController.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface POIListviewController : SuperViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface POIListviewController : SuperViewController<UITableViewDelegate,UITableViewDataSource,IIViewDeckControllerDelegate>{
 	
 }
 

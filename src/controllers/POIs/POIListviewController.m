@@ -159,6 +159,8 @@ static NSString *const DATAID = @"PoiListing";
  ***********************************************/
 //
 
+//TBD: needs none cell added to dp
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
 }
@@ -178,11 +180,26 @@ static NSString *const DATAID = @"PoiListing";
 	cell.dataProvider=poitype;
 	[cell populate];
 	
+	if(indexPath==[_tableview indexPathForSelectedRow]){
+		cell.accessoryType=UITableViewCellAccessoryCheckmark;
+	}else{
+		cell.accessoryType=UITableViewCellAccessoryNone;
+	}
+	
     return cell;
 }
 
 
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	if([_tableview indexPathForSelectedRow]!=nil){
+		POITypeCellView *selectedCell=(POITypeCellView*)[_tableview cellForRowAtIndexPath:[_tableview indexPathForSelectedRow]];
+		selectedCell.accessoryType=UITableViewCellAccessoryNone;
+	}
+	
+	return indexPath;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
@@ -192,7 +209,11 @@ static NSString *const DATAID = @"PoiListing";
 	
 	[[POIManager sharedInstance] requestPOICategoryMapPointsForCategory:vo withNWBounds:_nwCoordinate andSEBounds:_seCoordinate];
 	
-	// map view will get the response as well as this list	
+	// map view will get the response as well as this list
+	
+	POITypeCellView *selectedCell=(POITypeCellView*)[_tableview cellForRowAtIndexPath:[_tableview indexPathForSelectedRow]];
+	selectedCell.accessoryType=UITableViewCellAccessoryCheckmark;
+	
 	
 }
 
@@ -206,7 +227,7 @@ static NSString *const DATAID = @"PoiListing";
 	
 	if([type isEqualToString:RIGHT]){
 		
-		[self dismissModalViewControllerAnimated:YES];
+		[self.viewDeckController closeRightViewAnimated:YES];
 		
 	}
 	

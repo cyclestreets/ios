@@ -14,6 +14,8 @@
 @synthesize name;
 @synthesize notes;
 @synthesize website;
+@synthesize iconType;
+@synthesize marker;
 
 
 static NSString *LOCATIONID = @"locationid";
@@ -21,6 +23,7 @@ static NSString *LOCATION = @"location";
 static NSString *NAME = @"name";
 static NSString *NOTES = @"notes";
 static NSString *WEBSITE = @"website";
+static NSString *ICONTYPE = @"iconType";
 
 
 
@@ -34,7 +37,7 @@ static NSString *WEBSITE = @"website";
     [encoder encodeObject:self.location forKey:LOCATION];
     [encoder encodeObject:self.name forKey:NAME];
     [encoder encodeObject:self.notes forKey:NOTES];
-    [encoder encodeObject:self.website forKey:WEBSITE];
+    [encoder encodeObject:self.iconType forKey:ICONTYPE];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
@@ -46,6 +49,7 @@ static NSString *WEBSITE = @"website";
         self.name = [decoder decodeObjectForKey:NAME];
         self.notes = [decoder decodeObjectForKey:NOTES];
         self.website = [decoder decodeObjectForKey:WEBSITE];
+		self.iconType = [decoder decodeObjectForKey:ICONTYPE];
     }
     return self;
 }

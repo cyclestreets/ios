@@ -142,6 +142,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			
 			self.dataProvider=[validation.responseDict objectForKey:POILISTING];
 			
+			[self.dataProvider insertObject:[POIManager createNoneCategory] atIndex:0];
+			
 			[[NSNotificationCenter defaultCenter] postNotificationName:POILISTINGRESPONSE object:nil userInfo:nil];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Retrieved" andMessage:nil];
@@ -300,5 +302,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
  * @description			UTILITIES
  ***********************************************/
 //
+
++(POICategoryVO*)createNoneCategory{
+	
+	POICategoryVO *category=[POICategoryVO new];
+	category.name=@"None";
+	category.key=@"none";
+	category.shortname=@"None";
+	category.total=0;
+	category.icon=nil;
+	
+	return category;
+}
 
 @end

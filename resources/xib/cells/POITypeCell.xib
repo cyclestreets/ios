@@ -93,7 +93,6 @@
 								<string key="NSFrame">{{53, 21}, {247, 21}}</string>
 								<reference key="NSSuperview" ref="954339270"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -146,7 +145,7 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">2</int>
-				<int key="IBUIAccessoryType">1</int>
+				<int key="IBUIAccessoryType">3</int>
 				<reference key="IBUIContentView" ref="954339270"/>
 				<string key="IBUIReuseIdentifier">POITypeCellIdentifier</string>
 			</object>
