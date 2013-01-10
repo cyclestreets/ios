@@ -831,12 +831,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
-	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
-	[unarchiver finishDecoding];
 	
-	return route;
+	if(data!=nil){
+		NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+		RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
+		[unarchiver finishDecoding];
+		return route;
+	}
 	
+	return nil;
 	
 }
 
@@ -845,7 +848,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", route.fileid]];
 	
-	BetterLog(@"routeFile=%@",routeFile);
+	//BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] init];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -909,7 +912,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	NSString *routeFile = [[self oldroutesDirectory] stringByAppendingPathComponent:routeid];
 	
-	BetterLog(@"routeFile=%@",routeFile);
+	//BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];

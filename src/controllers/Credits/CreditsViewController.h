@@ -29,31 +29,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface CreditsViewController : UIViewController <UIWebViewDelegate> {
 	
-			UIWebView				*webView;
-			UIAlertView				*failAlert;
 	
-	IBOutlet	UIToolbar			*controlBar;
-	
-	IBOutlet UIBarButtonItem		*stopLoadingButton;
-	IBOutlet UIBarButtonItem		*refreshButton;
-	IBOutlet UIBarButtonItem		*goBackButton;
-	IBOutlet UIBarButtonItem		*goForwardButton;
-	UIBarButtonItem					*activityBarItem;
-	UIActivityIndicatorView			*activityIndicator;
-	
-	BOOL							pageLoaded;
 }
 
-@property (nonatomic, strong)		IBOutlet UIWebView				* webView;
-@property (nonatomic, strong)		IBOutlet UIAlertView				* failAlert;
-@property (nonatomic, strong)		IBOutlet UIToolbar				* controlBar;
-@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* stopLoadingButton;
-@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* refreshButton;
-@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* goBackButton;
-@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* goForwardButton;
-@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* activityBarItem;
-@property (nonatomic, strong)		IBOutlet UIActivityIndicatorView				* activityIndicator;
-@property (nonatomic)		BOOL				 pageLoaded;
+
 
 -(void)updateUIState:(NSString*)state;
 -(IBAction)stopLoading:(id)sender;

@@ -6,7 +6,7 @@
 //  Copyright 2011 TestFlight. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#define TESTFLIGHT_SDK_VERSION @"1.1"
+#define TESTFLIGHT_SDK_VERSION @"1.2"
 #undef TFLog
 
 #if __cplusplus
@@ -35,12 +35,16 @@ extern "C" {
  */
 + (void)addCustomEnvironmentInformation:(NSString *)information forKey:(NSString*)key;
 
+
 /**
- * Starts a TestFlight session
+ * Starts a TestFlight session using the Application Token for this Application
  *
- * @param teamToken Will be your team token obtained from https://testflightapp.com/dashboard/team/edit/ 
+ * @param applicationToken Will be the application token for the current application.
+ *                         The token for this application can be retrieved by going to https://testflightapp.com/dashboard/applications/
+ *                         selecting this application from the list then selecting SDK.
  */
-+ (void)takeOff:(NSString *)teamToken;
+
++ (void)takeOff:(NSString *)applicationToken;
 
 /**
  * Sets custom options
@@ -84,7 +88,7 @@ extern "C" {
 + (void)submitFeedback:(NSString*)feedback;
 
 /**
- * Sets the Device Identifier. 
+ * Sets the Device Identifier. (* Must be called before takeOff: *)
  * The SDK no longer obtains the device unique identifier. This method should only be used during testing so that you can 
  * identify a testers test data with them. If you do not provide the identifier you will still see all session data, with checkpoints 
  * and logs, but the data will be anonymized.

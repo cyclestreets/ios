@@ -18,35 +18,33 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 //static NSInteger MAX_ZOOM = 18;
 //static NSInteger MIN_ZOOM = 1;
 
-@interface PhotoWizardLocationViewController(Private)
+@interface PhotoWizardLocationViewController()
+
+
+@property (nonatomic, weak) IBOutlet RMMapView						* mapView;
+@property (nonatomic, strong) RMMapContents							* mapContents;
+@property (nonatomic, strong) CLLocationManager						* locationManager;
+@property (nonatomic, strong) UILabel								* locationLabel;
+@property (nonatomic, strong) UIBarButtonItem						* closeButton;
+@property (nonatomic, strong) UIBarButtonItem						* resetButton;
+@property (nonatomic, strong) UIBarButtonItem						* updateButton;
+@property (nonatomic) BOOL											avoidAccidentalTaps;
+@property (nonatomic) BOOL											singleTapDidOccur;
+@property (nonatomic) CGPoint										singleTapPoint;
+
 
 
 - (void) singleTapDelayExpired;
 - (void) addLocation:(CLLocationCoordinate2D)location;
-
 -(void)showLocationOnMap:(CLLocation*)location;
-
 -(void)markerLocationDidUpdate:(CLLocationCoordinate2D)coordinate;
+
 
 @end
 
 
 
 @implementation PhotoWizardLocationViewController
-@synthesize mapView;
-@synthesize mapContents;
-@synthesize locationManager;
-@synthesize photolocation;
-@synthesize userlocation;
-@synthesize locationLabel;
-@synthesize closeButton;
-@synthesize resetButton;
-@synthesize updateButton;
-@synthesize userMarker;
-@synthesize avoidAccidentalTaps;
-@synthesize singleTapDidOccur;
-@synthesize singleTapPoint;
-
 
 
 //
@@ -85,8 +83,8 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
     
     //Necessary to start route-me service
 	[RMMapView class];
-	mapContents=[[RMMapContents alloc] initWithView:mapView tilesource:[MapViewController tileSource]];
-	[mapView setDelegate:self];
+	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
+	[_mapView setDelegate:self];
 	
 	if (!self.userMarker) {
 		self.userMarker = [Markers markerPhoto];
@@ -108,33 +106,33 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 -(void)createNonPersistentUI{
     
-	if (userlocation!=nil) {
+	if (_userlocation!=nil) {
 		
 		
-		[self.mapView.markerManager addMarker:userMarker AtLatLong:userlocation.coordinate];
+		[_mapView.markerManager addMarker:_userMarker AtLatLong:_userlocation.coordinate];
 		
-		[self showLocationOnMap:userlocation];
+		[self showLocationOnMap:_userlocation];
 		
 	}else {
 		
-		if(photolocation!=nil){
+		if(_photolocation!=nil){
 			
-			[self.mapView.markerManager addMarker:userMarker AtLatLong:photolocation.coordinate];
+			[_mapView.markerManager addMarker:_userMarker AtLatLong:_photolocation.coordinate];
 			
-			[self showLocationOnMap:photolocation];
+			[self showLocationOnMap:_photolocation];
 		}else {
 			
-			[self.mapView.markerManager addMarker:userMarker AtLatLong:[UserLocationManager defaultCoordinate]];
+			[_mapView.markerManager addMarker:_userMarker AtLatLong:[UserLocationManager defaultCoordinate]];
 			
 			[self showLocationOnMap:[UserLocationManager defaultLocation]];
 			
-			[mapView.contents setZoom:6];
+			[_mapView.contents setZoom:6];
 		}
 		
 	}
 	
     
-	resetButton.enabled=photolocation!=nil;
+	_resetButton.enabled=_photolocation!=nil;
     
 }
 
@@ -142,12 +140,12 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 -(void)showLocationOnMap:(CLLocation*)location{
 	
-	locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
+	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
 	
-	[self.mapView moveToLatLong:location.coordinate];
+	[_mapView moveToLatLong:location.coordinate];
 	
-	if ([mapView.contents zoom] < 18) {
-		[mapView.contents setZoom:15];
+	if ([_mapView.contents zoom] < 18) {
+		[_mapView.contents setZoom:15];
 	}
 	
 }
@@ -160,9 +158,9 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 //
 -(void)loadLocation{
 	
-	if (userlocation!=nil) {
+	if (_userlocation!=nil) {
 		
-		[self showLocationOnMap:userlocation];
+		[self showLocationOnMap:_userlocation];
 		 
 	}
 }
@@ -178,10 +176,10 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	BetterLog(@"");
 	
 	BOOL result=NO;
-	if (marker==userMarker) {
+	if (marker==_userMarker) {
 		result=YES;
 	}
-	mapView.enableDragging=!result;
+	_mapView.enableDragging=!result;
 	return result;
 	
 }
@@ -196,7 +194,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	for (UITouch *touch in touches) {
 		CGPoint point = [touch locationInView:map];
 		CLLocationCoordinate2D location = [map pixelToLatLong:point];
-		[[map markerManager] moveMarker:userMarker AtLatLon:location];
+		[[map markerManager] moveMarker:_userMarker AtLatLon:location];
 		[self markerLocationDidUpdate:location];
 	}
 	
@@ -206,9 +204,9 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 - (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
 	
-	if(singleTapDidOccur==NO){
-		singleTapDidOccur=YES;
-		singleTapPoint=point;
+	if(_singleTapDidOccur==NO){
+		_singleTapDidOccur=YES;
+		_singleTapPoint=point;
 		[self performSelector:@selector(singleTapDelayExpired) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
 		
 	}
@@ -216,7 +214,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 -(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
 	
-	singleTapDidOccur=NO;
+	_singleTapDidOccur=NO;
 	
 	float nextZoomFactor = [map.contents nextNativeZoomFactor];
 	if (nextZoomFactor != 0)
@@ -226,16 +224,16 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 
 - (void) singleTapDelayExpired {
-	if(singleTapDidOccur==YES){
-		singleTapDidOccur=NO;
-		CLLocationCoordinate2D location = [mapView pixelToLatLong:singleTapPoint];
+	if(_singleTapDidOccur==YES){
+		_singleTapDidOccur=NO;
+		CLLocationCoordinate2D location = [_mapView pixelToLatLong:_singleTapPoint];
 		[self addLocation:location];
 	}
 }
 
 - (void) addLocation:(CLLocationCoordinate2D)location{
 	
-	[self.mapView.markerManager addMarker:userMarker AtLatLong:location];
+	[_mapView.markerManager addMarker:_userMarker AtLatLong:location];
 	[self markerLocationDidUpdate:location];
 }
 
@@ -256,11 +254,11 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 -(IBAction)resetButtonSelected:(id)sender{
 	
-	if(photolocation!=nil){
-		[self.mapView.markerManager addMarker:userMarker AtLatLong:photolocation.coordinate];
+	if(_photolocation!=nil){
+		[_mapView.markerManager addMarker:_userMarker AtLatLong:_photolocation.coordinate];
 		self.userlocation=nil;
 		
-		[self showLocationOnMap:photolocation];
+		[self showLocationOnMap:_photolocation];
 		
 	}
 	
@@ -269,7 +267,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 -(IBAction)updateButtonSelected:(id)sender{
 	
 	if([delegate respondsToSelector:@selector(UserDidUpdatePhotoLocation:)]){
-        [delegate performSelector:@selector(UserDidUpdatePhotoLocation:) withObject:userlocation];
+        [delegate performSelector:@selector(UserDidUpdatePhotoLocation:) withObject:_userlocation];
     }
 	
 	[self dismissModalViewControllerAnimated:YES];
@@ -286,7 +284,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	
 	self.userlocation=[[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
 	
-	locationLabel.text=[NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
+	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
 	
     
    
@@ -300,13 +298,27 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
  ***********************************************/
 //
 
--(void)viewDidUnload{
-    
-}
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
+	
     [super didReceiveMemoryWarning];
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+	
+	
+	self.mapContents=nil;
+	self.locationManager=nil;
+	self.photolocation=nil;
+	self.userlocation=nil;
+	self.locationLabel=nil;
+	self.closeButton=nil;
+	self.resetButton=nil;
+	self.updateButton=nil;
+	self.userMarker=nil;
+	
+
 }
 
 @end

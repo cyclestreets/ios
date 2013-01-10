@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define ENABLEDEBUGTRACE 1
+#define ENABLEDEBUGTRACE 0
 
 
 enum  {
@@ -76,11 +76,13 @@ extern NSString *const POICATEGORYLOCATIONRESPONSE;
 extern NSString *const POIMAPLOCATIONRESPONSE;
 extern NSString *const SAVEDROUTEUPDATE;
 extern NSString *const MAPSTYLECHANGED;
+extern NSString *const USERACCOUNTLOGINSUCCESS;
 
 extern NSString *const GPSLOCATIONUPDATE;
 extern NSString *const GPSLOCATIONFAILED;
 extern NSString *const GPSLOCATIONCOMPLETE;
 extern NSString *const GPSLOCATIONDISABLED;
+extern NSString *const REVERSEGEOLOCATIONCOMPLETE;
 
 extern NSString *const EVENTMAPROUTEPLAN;
 extern NSString *const PHOTOWIZARDCATEGORYUPDATE;

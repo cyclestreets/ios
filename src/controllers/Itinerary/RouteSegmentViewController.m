@@ -46,22 +46,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface RouteSegmentViewController()
 
-@property (nonatomic, strong) CSSegmentFooterView						* footerView;
+@property (nonatomic, strong) CSSegmentFooterView							* footerView;
 @property (nonatomic) BOOL												footerIsHidden;
 @property (nonatomic) BOOL												photoIconsVisisble;
-@property (nonatomic, strong) IBOutlet RMMapView						* mapView;
-@property (nonatomic, strong) IBOutlet BlueCircleView					* blueCircleView;
+@property (nonatomic, weak) IBOutlet RMMapView							* mapView;
+@property (nonatomic, weak) IBOutlet BlueCircleView						* blueCircleView;
 @property (nonatomic, strong) CLLocation								* lastLocation;
-@property (nonatomic, strong) IBOutlet RouteLineView					* lineView;
-@property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;
+@property (nonatomic, weak) IBOutlet RouteLineView						* lineView;
+@property (nonatomic, weak) IBOutlet UILabel							* attributionLabel;
 @property (nonatomic, strong) RMMapContents								* mapContents;
 @property (nonatomic, strong) NSMutableArray							* photoMarkers;
-@property (nonatomic, strong) IBOutlet UIToolbar						* toolBar;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem					* locationButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem					* infoButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoIconButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem					* prevPointButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem					* nextPointButton;
+@property (nonatomic, weak) IBOutlet UIToolbar							* toolBar;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem					* locationButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem					* infoButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem					* photoIconButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem					* prevPointButton;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem					* nextPointButton;
 @property (nonatomic) NSInteger											photosIndex;
 @property (nonatomic, strong) RMMarker									* markerLocation;
 @property (nonatomic, strong) CLLocationManager							* locationManager;
@@ -119,7 +119,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.photoIconButton.style = UIBarButtonItemStyleDone;
 	
 	_photoIconsVisisble=YES;
-
+	
 	_footerIsHidden=NO;
 	self.footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
 	[_mapView addSubview:_footerView];
@@ -133,21 +133,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 												 name:@"NotificationMapStyleChanged"
 											   object:nil];
 	
-	/*
-	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItem];
-	backButton.action=@selector(backButtonSelected);
-	backButton.target=self;
+	
+	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItemwithSelector:@selector(backButtonSelected) target:self];
 	NSMutableArray *toolbaritems=[_toolBar.items mutableCopy];
 	[toolbaritems insertObject:backButton atIndex:0];
 	_toolBar.items=toolbaritems;
-	 */
 	
-	
-	
-	UISwipeGestureRecognizer *oneFingerSwipeUp =
-	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
-	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
-	[_footerView addGestureRecognizer:oneFingerSwipeUp];
+//	
+//	TBD:
+//	UISwipeGestureRecognizer *oneFingerSwipeUp =
+//	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
+//	oneFingerSwipeUp.numberOfTouchesRequired=3;
+//	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
+//	[_footerView addGestureRecognizer:oneFingerSwipeUp];
 }
 
 - (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer
@@ -305,7 +303,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	// fill the labels from the segment we are showing
-	_footerView.dataProvider=[segment infoStringDictionary];
+	_footerView.dataProvider=segment;
 	[_footerView updateLayout];
 	[self updateFooterPositions];
 	// centre the view around the segment
@@ -367,6 +365,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		_footerView.frame=fframe;
 		_attributionLabel.frame=aframe;
+		
 	}
 }
 
@@ -501,6 +500,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		_footerIsHidden=YES;
 		
+		self.infoButton.style = UIBarButtonItemStyleBordered;
+		
 	} else {
 		
 		CGRect	fframe=_footerView.frame;
@@ -520,6 +521,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[UIView commitAnimations];
 		
 		_footerIsHidden=NO;
+		
+		self.infoButton.style = UIBarButtonItemStyleDone;
 	}
 	
 	if(_footerIsHidden==NO){
@@ -603,35 +606,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+	[self nullify];
 }
 
 - (void)nullify {
 	self.footerView=nil;
-	
-	self.mapView = nil;
-	self.blueCircleView = nil;	//overlay GPS location
-	self.lineView = nil;
-	self.attributionLabel = nil;
-	
-	//toolbar
-	self.locationButton = nil;
-	self.infoButton = nil;
-	self.prevPointButton = nil;
-	self.nextPointButton = nil;
-	
-	_markerLocation = nil;
-	_locationManager = nil;
-	_locationView = nil;
-	
+	self.markerLocation = nil;
+	self.locationManager = nil;
+	self.locationView = nil;
 	self.queryPhoto = nil;
 }
 
-- (void)viewDidUnload {
-	
-	[self nullify];
-	[super viewDidUnload];
-	BetterLog(@">>>");
-}
 
 
 @end

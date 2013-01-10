@@ -43,8 +43,8 @@ typedef struct
 
 +(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename;
 
-// draws bottom outside edge shadow
-+(void)drawUIViewEdgeShadow:(UIView*)view;
+// draws bottom or top outside edge shadow
++(void)drawUIViewEdgeShadow:(UIView*)view atTop:(BOOL)top;
 
 // draws side and top inset shadow
 +(void)drawInsertedViewShadow:(UIView*)view;

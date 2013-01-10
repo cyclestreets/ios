@@ -25,21 +25,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "CreditsViewController.h"
-
-
 #import "GlobalUtilities.h"
 
+
+@interface CreditsViewController()
+
+@property (nonatomic, weak)		IBOutlet UIWebView				* webView;
+@property (nonatomic, weak)		IBOutlet UIAlertView				* failAlert;
+@property (nonatomic, weak)		IBOutlet UIToolbar				* controlBar;
+@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* stopLoadingButton;
+@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* refreshButton;
+@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* goBackButton;
+@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* goForwardButton;
+@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* activityBarItem;
+@property (nonatomic, weak)		IBOutlet UIActivityIndicatorView				* activityIndicator;
+@property (nonatomic)		BOOL				 pageLoaded;
+
+@end
+
+
+
 @implementation CreditsViewController
-@synthesize webView;
-@synthesize failAlert;
-@synthesize controlBar;
-@synthesize stopLoadingButton;
-@synthesize refreshButton;
-@synthesize goBackButton;
-@synthesize goForwardButton;
-@synthesize activityBarItem;
-@synthesize activityIndicator;
-@synthesize pageLoaded;
 
 
 
@@ -53,13 +59,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)viewDidLoad {
 	
-	pageLoaded=NO;
+	_pageLoaded=NO;
 	
 	self.hidesBottomBarWhenPushed=YES;
 	
 	self.activityIndicator=[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	activityIndicator.hidesWhenStopped=YES;
-	self.activityBarItem=[[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+	_activityIndicator.hidesWhenStopped=YES;
+	self.activityBarItem=[[UIBarButtonItem alloc] initWithCustomView:_activityIndicator];
 	
     [super viewDidLoad];
 	
@@ -69,10 +75,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 -(void)initialiseToolBarButtons{
-	stopLoadingButton.enabled=NO;
-	refreshButton.enabled=NO;
-	goBackButton.enabled=NO;
-	goForwardButton.enabled=NO;
+	_stopLoadingButton.enabled=NO;
+	_refreshButton.enabled=NO;
+	_goBackButton.enabled=NO;
+	_goForwardButton.enabled=NO;
 }
 
 
@@ -84,23 +90,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 -(IBAction)stopLoading:(id)sender{
-	[webView stopLoading];
+	[_webView stopLoading];
 	[self updateUIState:@"loaded"];	
 }
 
 -(IBAction)refreshWebView:(id)sender{	
-	[webView reload];
+	[_webView reload];
 }
 
 
 -(IBAction)goBackButonSelected:(id)sender{
-	if(webView.canGoBack)
-		[webView goBack];
+	if(_webView.canGoBack)
+		[_webView goBack];
 }
 
 -(IBAction)goForwardButtonSelected:(id)sender{
-	if(webView.canGoForward)
-		[webView goForward];
+	if(_webView.canGoForward)
+		[_webView goForward];
 }
 
 
@@ -119,8 +125,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)stopLoadingActivity{
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	webView.delegate=nil;
-	[webView stopLoading];
+	_webView.delegate=nil;
+	[_webView stopLoading];
 	[self showActivityIndicator:NO];
 	
 }
@@ -128,19 +134,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)showActivityIndicator:(BOOL)show{
 	
-	NSMutableArray *items=[NSMutableArray arrayWithArray:[controlBar items]];
+	NSMutableArray *items=[NSMutableArray arrayWithArray:[_controlBar items]];
 	
 	if (show==YES) {
-		[items replaceObjectAtIndex:5 withObject:activityBarItem];
+		[items replaceObjectAtIndex:5 withObject:_activityBarItem];
 	}else {
-		[items replaceObjectAtIndex:5 withObject:refreshButton];
+		[items replaceObjectAtIndex:5 withObject:_refreshButton];
 	}
-	[controlBar setItems:[NSArray arrayWithArray:items] animated:YES];
+	[_controlBar setItems:[NSArray arrayWithArray:items] animated:YES];
 
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:show];
 	
-	show==YES ? [activityIndicator startAnimating] : [activityIndicator stopAnimating];
+	show==YES ? [_activityIndicator startAnimating] : [_activityIndicator stopAnimating];
 	
 }
 
@@ -149,19 +155,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	if([state isEqualToString:@"loading"]){
 		
-		stopLoadingButton.enabled=YES;
+		_stopLoadingButton.enabled=YES;
 		[self showActivityIndicator:YES];
 		
 	}else if ([state isEqualToString:@"loaded"]){
 		
-		stopLoadingButton.enabled=NO;
+		_stopLoadingButton.enabled=NO;
 		[self showActivityIndicator:NO];
 		
 		
 	}
 	
-	goForwardButton.enabled=webView.canGoForward;
-	goBackButton.enabled=webView.canGoBack;
+	_goForwardButton.enabled=_webView.canGoForward;
+	_goBackButton.enabled=_webView.canGoBack;
 	
 }
 
@@ -170,12 +176,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
 	
-	pageLoaded=NO;
+	_pageLoaded=NO;
 	[self updateUIState:@"loading"];	
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
 	
-	pageLoaded=YES;
+	_pageLoaded=YES;
 	[self updateUIState:@"loaded"];
 }
 
@@ -192,23 +198,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
-}
-
-- (void)nullify {
+	
+	if (self.isViewLoaded && !self.view.window) {
+        self.view = nil;
+    }
+	
 	self.webView = nil;
 	self.failAlert = nil;
+    
 }
-
-- (void)viewDidUnload {
-	[self nullify];
-    [super viewDidUnload];
-}
-
-
-
 
 
 @end

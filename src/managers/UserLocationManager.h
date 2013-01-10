@@ -2,9 +2,10 @@
 //  UserLocationManager.h
 //  CycleStreets
 //
-//  Created by neil on 28/02/2012.
-//  Copyright (c) 2012 CycleStreets Ltd. All rights reserved.
+//  Created by Neil Edwards on 28/09/2012.
+//  Copyright (c) 2012 CycleStreets. All rights reserved.
 //
+
 
 #import <Foundation/Foundation.h>
 #import "FrameworkObject.h"
@@ -36,7 +37,7 @@ typedef int ConnectLocationStates;
 
 @interface UserLocationManager : FrameworkObject<CLLocationManagerDelegate>{
     
-
+    
     BOOL						didFindDeviceLocation;
     ConnectLocationStates       locationState;
     
@@ -45,12 +46,14 @@ typedef int ConnectLocationStates;
 	
 	NSMutableArray				*locationSubscribers; // array of objects using manager
     
+    NSString                    *authorisationSubscriber;
+    
     CLLocationManager			*locationManager;
 	NSMutableArray				*locationMeasurements;
     CLLocation					*bestEffortAtLocation;
 	
 	id<UserLocationManagerDelegate>		__unsafe_unretained delegate;
-
+    
     
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
@@ -60,6 +63,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 @property (nonatomic, assign)	BOOL			isLocating;
 @property (nonatomic, strong)	NSMutableArray			*locationSubscribers;
 @property (nonatomic, strong)	CLLocationManager			*locationManager;
+@property (nonatomic, strong)	NSString			*authorisationSubscriber;
+
 @property (nonatomic, strong)	NSMutableArray			*locationMeasurements;
 @property (nonatomic, strong)	CLLocation			*bestEffortAtLocation;
 
@@ -81,5 +86,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 
 + (CLLocationCoordinate2D)defaultCoordinate;
 + (CLLocation*)defaultLocation;
+
+
++(void)reverseGeoCodeLocation:(CLLocation*)location;
 
 @end

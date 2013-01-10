@@ -148,6 +148,36 @@
 }
 
 
+-(BOOL)containsWalkingSections{
+	
+	for (SegmentVO *segment in segments) {
+		
+		if(segment.isWalkingSection==YES)
+			return YES;
+	}
+	return NO;
+}
+
+
+
+//
+-(BOOL)hasWaypoints{
+	return _waypoints!=nil;
+}
+
+-(NSMutableArray*)createCorrectedWaypointArray{
+	
+	NSMutableArray *arr=[_waypoints mutableCopy];
+	
+	if(arr.count>2){
+		[arr exchangeObjectAtIndex:arr.count-1 withObjectAtIndex:1];
+	}
+	
+	return _waypoints;
+	
+}
+
+
 //
 /***********************************************
  * @description			CL getters: note use of CLLocation so NSCoding is optimised.
@@ -256,6 +286,7 @@ static NSString *kDATE_KEY = @"date";
 static NSString *kUSER_ROUTE_NAME_KEY = @"userRouteName";
 static NSString *kCALORIE_KEY = @"calorie";
 static NSString *kCOSAVED_KEY = @"cosaved";
+static NSString *kWAYPOINTS_KEY = @"waypoints";
 
 
 
@@ -278,6 +309,7 @@ static NSString *kCOSAVED_KEY = @"cosaved";
     [encoder encodeObject:self.userRouteName forKey:kUSER_ROUTE_NAME_KEY];
     [encoder encodeObject:self.calorie forKey:kCALORIE_KEY];
     [encoder encodeObject:self.cosaved forKey:kCOSAVED_KEY];
+	[encoder encodeObject:self.waypoints forKey:kWAYPOINTS_KEY];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -297,6 +329,7 @@ static NSString *kCOSAVED_KEY = @"cosaved";
         self.userRouteName = [decoder decodeObjectForKey:kUSER_ROUTE_NAME_KEY];
         self.calorie = [decoder decodeObjectForKey:kCALORIE_KEY];
         self.cosaved = [decoder decodeObjectForKey:kCOSAVED_KEY];
+		self.waypoints=[decoder decodeObjectForKey:kWAYPOINTS_KEY];
     }
     return self;
 }
