@@ -41,15 +41,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 + (RMMarker *)markerStart {
-	return [Markers marker:@"CSIcon_start_wisp.png" label:nil];
+	
+	RMMarker *marker=[Markers marker:@"CSIcon_start_wisp.png" label:nil];
+	marker.dataType=RMMarkerDataTypeWaypoint;
+	return marker;
 }
 
 + (RMMarker *)markerIntermediate:(NSString*)index {
-	return [Markers marker:@"CSIcon_intermediate_wisp.png" label:index];
+	RMMarker *marker=[Markers marker:@"CSIcon_intermediate_wisp.png" label:index];
+	marker.dataType=RMMarkerDataTypeWaypoint;
+	return marker;
 }
 
 + (RMMarker *)markerEnd {
-	return [Markers marker:@"CSIcon_finish_wisp.png" label:nil];
+	RMMarker *marker=[Markers marker:@"CSIcon_finish_wisp.png" label:nil];
+	marker.dataType=RMMarkerDataTypeWaypoint;
+	return marker;
 }
 
 // never referenced
@@ -69,6 +76,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 + (RMMarker *)markerPOIWithImage:(UIImage*)image {
 	
 	RMMarker *marker = [[RMMarker alloc] initWithUIImage:image];
+	marker.dataType=RMMarkerDataTypePOI;
 	[marker changeLabelUsingText:nil];
 	return marker;
 }

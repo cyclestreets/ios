@@ -65,10 +65,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 @interface MarkerMenuItem : UIMenuItem
-@property (nonatomic, strong) WayPointVO* waypoint; 
+@property (nonatomic, strong) WayPointVO* waypoint;
+@property (nonatomic, assign) RMMarkerDataType dataType;
 @end
 @implementation MarkerMenuItem
 @synthesize waypoint;
+@synthesize dataType;
 @end
 
 
@@ -121,7 +123,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) RMMarker				* activeMarker;
 @property (nonatomic, strong) NSMutableArray		* markerArray;
 @property (nonatomic, strong) NSMutableArray		* poiArray;
-
+@property (nonatomic, strong) NSMutableArray		* poiMarkerArray;
 
 
 // state
@@ -686,13 +688,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)resetWayPoints{
 	
+	[self removeWaypointMarkers];
+	
+	[_waypointArray removeAllObjects];
+	
+}
+
+-(void)removeWaypointMarkers{
+	
 	for (WayPointVO *waypoint in _waypointArray) {
 		
 		[[_mapView markerManager] removeMarker:waypoint.marker];
 	}
-	
-	[_waypointArray removeAllObjects];
-	
 }
 
 
@@ -804,7 +811,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)updateWaypointStatuses{
 	
-	[_mapView.markerManager removeMarkers];
+	[self removeWaypointMarkers];
 	RMMarker *marker=nil;
 	
 	for(int i=0;i<_waypointArray.count;i++){
@@ -920,15 +927,22 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self removePOIMarkers];
 	
+	self.poiArray=[POIManager sharedInstance].categoryDataProvider;
+	
 	for (POILocationVO *poi in _poiArray) {
 		
 		RMMarker *marker=[Markers markerPOIWithImage:[POIManager sharedInstance].selectedCategory.icon];
 		
+		marker.data=poi;
+		
 		poi.marker=marker;
+		[_poiMarkerArray addObject:marker];
 		
 		[[_mapView markerManager ] addMarker:marker AtLatLong:poi.location.coordinate];
 		
 	}
+	
+	
 
 }
 
@@ -936,14 +950,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)removePOIMarkers{
 	
-	for (POILocationVO *poi in _poiArray) {
+	if (_poiMarkerArray==nil) {
+		self.poiMarkerArray=[NSMutableArray new];
+		return;
+	}
+	
+	for (RMMarker *marker in _poiMarkerArray) {
 		
-		if(poi.marker!=nil)
-			[_mapView.markerManager removeMarker:poi.marker];
+		[_mapView.markerManager removeMarker:marker];
 		
 	}
 	
-	[_poiArray removeAllObjects];
+	[_poiMarkerArray removeAllObjects];
 	
 }
 
@@ -956,28 +974,61 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	return YES;
 }
 
-
+// TBD: different tap logic for each markers data type
+// also, for poi types, do we show different menu when uistate!=MapPlanningStateRoute
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
 	
 	if(_markerMenuOpen==YES)
 		return;
 	
-	if(_uiState==MapPlanningStateRoute)
-		return;
+	RMMarkerDataType dataType=marker.dataType;
+	
+	if(dataType==RMMarkerDataTypeWaypoint){
+		if(_uiState==MapPlanningStateRoute)
+			return;
+	}
 	
 	UIMenuController *menuController = [UIMenuController sharedMenuController];
+	CGRect markerRect;
 	
 	if(menuController.isMenuVisible==NO){
 		
 		[self becomeFirstResponder];
 		
-		MarkerMenuItem *menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeMarkerAtIndexViaMenu:)];
-		menuItem.waypoint=[self findWayPointForMarker:marker];
-		menuController.menuItems = [NSArray arrayWithObject:menuItem];
+		MarkerMenuItem *menuItem=nil;
+	
+		switch (dataType) {
+				
+			case RMMarkerDataTypeWaypoint:
+			{
+				
+				menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeMarkerAtIndexViaMenu:)];
+				menuItem.waypoint=[self findWayPointForMarker:marker];
+				
+				markerRect=CGRectMake(marker.frame.origin.x-12, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
+				
+			}
+			break;
+				
+			case RMMarkerDataTypePOI:
+				
+			{
+				menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Use As Waypoint" action:@selector(removeMarkerAtIndexViaMenu:)];
+				
+			
+				markerRect=CGRectMake(marker.frame.origin.x-6, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
+				
+			}
+				
+			break;
+		}
 		
+		
+		menuController.menuItems = [NSArray arrayWithObject:menuItem];
+	
+	
 	}
 	
-	CGRect markerRect=CGRectMake(marker.frame.origin.x-12, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
 	[menuController setTargetRect:markerRect inView:self.mapView];
 	
 	if(menuController.isMenuVisible==NO)
@@ -987,6 +1038,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	_markerTouchView.proxyTouchEvent=NO;
 	
 }
+
+
+-(void)markerMenuSelectedForMenu:(UIMenuController*)menuController{
+	
+	
+	
+}
+
 
 
 -(void)removeMarkerAtIndexViaMenu:(UIMenuController*)menuController {

@@ -175,28 +175,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 
 -(void)requestPOICategoryMapPointsForCategory:(POICategoryVO*)category withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
 	
-	self.selectedCategory=category;
+	if(![category.key isEqualToString:NONE]){
 	
-	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-									 [[CycleStreets sharedInstance] APIKey], @"key",
-									 category.key,@"type",
-									 BOX_FLOAT(nw.latitude),@"n",
-									 BOX_FLOAT(nw.longitude),@"w",
-									 BOX_FLOAT(se.latitude),@"s",
-									 BOX_FLOAT(se.longitude),@"e",
-									 BOX_INT(40),@"limit",nil];
-	
-	NetRequest *request=[[NetRequest alloc]init];
-	request.dataid=POIMAPLOCATION;
-	request.requestid=ZERO;
-	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
-	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Retrieving %@s in area",category.name] andMessage:nil];
+		self.selectedCategory=category;
+		
+		NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+										 [[CycleStreets sharedInstance] APIKey], @"key",
+										 category.key,@"type",
+										 BOX_FLOAT(nw.latitude),@"n",
+										 BOX_FLOAT(nw.longitude),@"w",
+										 BOX_FLOAT(se.latitude),@"s",
+										 BOX_FLOAT(se.longitude),@"e",
+										 BOX_INT(40),@"limit",nil];
+		
+		NetRequest *request=[[NetRequest alloc]init];
+		request.dataid=POIMAPLOCATION;
+		request.requestid=ZERO;
+		request.parameters=parameters;
+		request.revisonId=0;
+		request.source=USER;
+		
+		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Retrieving %@s in area",category.name] andMessage:nil];
+		
+	}else{
+			
+			[self.categoryDataProvider removeAllObjects];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
+			
+	}
 	
 }
 
@@ -244,24 +254,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 -(void)requestPOICategoryDataForCategory:(POICategoryVO*)category atLocation:(CLLocationCoordinate2D)location{
 	
 	
-	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-									 [[CycleStreets sharedInstance] APIKey], @"key", 
-									 category.key,@"type",
-									 BOX_FLOAT(location.longitude),@"longitude",
-									 BOX_FLOAT(location.latitude),@"latitude",
-									 BOX_INT(5),@"radius",BOX_INT(40),@"limit",nil];
+	if(![category.key isEqualToString:NONE]){
+		
 	
-	NetRequest *request=[[NetRequest alloc]init];
-	request.dataid=POICATEGORYLOCATION;
-	request.requestid=ZERO;
-	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
-	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Retrieving %@s in area",category.name] andMessage:nil];
+		NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+										 [[CycleStreets sharedInstance] APIKey], @"key", 
+										 category.key,@"type",
+										 BOX_FLOAT(location.longitude),@"longitude",
+										 BOX_FLOAT(location.latitude),@"latitude",
+										 BOX_INT(5),@"radius",BOX_INT(40),@"limit",nil];
+		
+		NetRequest *request=[[NetRequest alloc]init];
+		request.dataid=POICATEGORYLOCATION;
+		request.requestid=ZERO;
+		request.parameters=parameters;
+		request.revisonId=0;
+		request.source=USER;
+		
+		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Retrieving %@s in area",category.name] andMessage:nil];
+		
+	}else{
+		
+		[self.categoryDataProvider removeAllObjects];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:POICATEGORYLOCATIONRESPONSE object:nil userInfo:nil];
+		
+	}
 	
 }
 
@@ -307,7 +328,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	POICategoryVO *category=[POICategoryVO new];
 	category.name=@"None";
-	category.key=@"none";
+	category.key=NONE;
 	category.shortname=@"None";
 	category.total=0;
 	category.icon=nil;

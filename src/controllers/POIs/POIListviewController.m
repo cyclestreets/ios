@@ -117,7 +117,7 @@ static NSString *const DATAID = @"PoiListing";
 	
 	[[POIManager sharedInstance] requestPOIListingData];
 	
-	[self createNavigationBarUI];
+	//[self createNavigationBarUI];
 	
 }
 
@@ -223,14 +223,9 @@ static NSString *const DATAID = @"PoiListing";
  ***********************************************/
 //
 
--(void)doNavigationSelector:(NSString *)type{
+-(IBAction)closeViewController:(id)sender{
 	
-	if([type isEqualToString:RIGHT]){
-		
-		[self.viewDeckController closeRightViewAnimated:YES];
-		
-	}
-	
+	[self.viewDeckController closeRightViewAnimated:YES];
 	
 }
 
