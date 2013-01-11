@@ -16,6 +16,7 @@
 #import "SegmentVO.h"
 #import "SettingsManager.h"
 
+
 #import "RMMapLayer.h"
 #import "RMMarker.h"
 #import "RMMarkerManager.h"
@@ -66,10 +67,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 @interface MarkerMenuItem : UIMenuItem
 @property (nonatomic, strong) WayPointVO* waypoint;
+@property (nonatomic, strong) POILocationVO* poilocation;
 @property (nonatomic, assign) RMMarkerDataType dataType;
 @end
 @implementation MarkerMenuItem
 @synthesize waypoint;
+@synthesize poilocation;
 @synthesize dataType;
 @end
 
@@ -109,6 +112,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, weak) IBOutlet BlueCircleView		* blueCircleView;
 @property (nonatomic, weak) IBOutlet MapMarkerTouchView		* markerTouchView;
 @property (nonatomic, assign) MapAlertType		alertType;
+@property(nonatomic,strong) SMCalloutView		*poiCalloutView;
 
 // waypoint ui
 // will need ui for editing waypoints
@@ -124,6 +128,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) NSMutableArray		* markerArray;
 @property (nonatomic, strong) NSMutableArray		* poiArray;
 @property (nonatomic, strong) NSMutableArray		* poiMarkerArray;
+
 
 
 // state
@@ -923,6 +928,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+// TBD: poi markers should always display behind any waypoint markers
+// we should create a insert at bottom method in mapMarkerManager
 -(void)updatePOIMapMarkers{
 	
 	[self removePOIMarkers];
@@ -938,7 +945,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		poi.marker=marker;
 		[_poiMarkerArray addObject:marker];
 		
-		[[_mapView markerManager ] addMarker:marker AtLatLong:poi.location.coordinate];
+		[[_mapView markerManager ] addMarkerAtBottom:marker AtLatLong:poi.location.coordinate];
 		
 	}
 	
@@ -974,8 +981,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	return YES;
 }
 
-// TBD: different tap logic for each markers data type
-// also, for poi types, do we show different menu when uistate!=MapPlanningStateRoute
+
 -(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
 	
 	if(_markerMenuOpen==YES)
@@ -989,20 +995,21 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 	
 	UIMenuController *menuController = [UIMenuController sharedMenuController];
+	MarkerMenuItem *menuItem=nil;
 	CGRect markerRect;
 	
 	if(menuController.isMenuVisible==NO){
 		
 		[self becomeFirstResponder];
 		
-		MarkerMenuItem *menuItem=nil;
+		
 	
 		switch (dataType) {
 				
 			case RMMarkerDataTypeWaypoint:
 			{
 				
-				menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeMarkerAtIndexViaMenu:)];
+				menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(markerMenuSelectedForMenu:)];
 				menuItem.waypoint=[self findWayPointForMarker:marker];
 				
 				markerRect=CGRectMake(marker.frame.origin.x-12, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
@@ -1013,21 +1020,58 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			case RMMarkerDataTypePOI:
 				
 			{
-				menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Use As Waypoint" action:@selector(removeMarkerAtIndexViaMenu:)];
 				
-			
-				markerRect=CGRectMake(marker.frame.origin.x-6, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
+				POILocationVO *location=(POILocationVO*)marker.data;
+				
+				
+				if(_uiState==MapPlanningStateRoute){
+					
+					// TBD: this should be smcalloutview with location info, not menu item
+					
+					if(_poiCalloutView==nil){
+						self.poiCalloutView = [SMCalloutView new];
+						_poiCalloutView.delegate = self;
+						
+						UIButton *topDisclosure = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+						[topDisclosure addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disclosureTapped)]];
+						_poiCalloutView.rightAccessoryView = topDisclosure;
+						
+					}
+					_poiCalloutView.title = location.name;
+					
+					[_poiCalloutView presentCalloutFromRect:marker.frame
+												 inView:_mapView
+									  constrainedToView:_mapView
+							   permittedArrowDirections:SMCalloutArrowDirectionDown
+											   animated:YES];
+					
+					
+				}else{
+					menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Use As Waypoint" action:@selector(markerMenuSelectedForMenu:)];
+				}
+				
+				menuItem.poilocation=location;
+				markerRect=CGRectMake(marker.frame.origin.x, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
 				
 			}
 				
 			break;
 		}
 		
+		// hack!!
+		if(menuItem!=nil){
+			
+			menuItem.dataType=marker.dataType;
 		
-		menuController.menuItems = [NSArray arrayWithObject:menuItem];
+			menuController.menuItems = [NSArray arrayWithObject:menuItem];
+			
+		}
+		
 	
 	
 	}
+	
+	if(menuItem!=nil){
 	
 	[menuController setTargetRect:markerRect inView:self.mapView];
 	
@@ -1036,12 +1080,45 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	_markerMenuOpen=YES;
 	_markerTouchView.proxyTouchEvent=NO;
+		
+	}
 	
 }
 
 
 -(void)markerMenuSelectedForMenu:(UIMenuController*)menuController{
 	
+	MarkerMenuItem *menuItem = [[[UIMenuController sharedMenuController] menuItems] objectAtIndex:0];
+	
+	RMMarkerDataType dataType=menuItem.dataType;
+	
+	switch (dataType) {
+			
+		case RMMarkerDataTypePOI:
+			
+			if(_uiState==MapPlanningStateRoute){
+				
+				// do nothing?
+				
+			}else{
+				
+				// use this location as waypoint
+				[self assessWayPointAddition:menuItem.poilocation.location.coordinate];
+			}
+			
+		break;
+			
+		case RMMarkerDataTypeWaypoint:
+		{
+			[self removeWayPoint:menuItem.waypoint];
+			
+		}
+			
+		break;
+	}
+	
+	_markerMenuOpen=NO;
+	_markerTouchView.proxyTouchEvent=NO;
 	
 	
 }
@@ -1061,6 +1138,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	_markerTouchView.proxyTouchEvent=NO;
 	
 }
+
+
+#pragma mark SMCallout
+//
+/***********************************************
+ * @description			SMCallout delegate methods
+ ***********************************************/
+//
+
+
 
 
 //------------------------------------------------------------------------------------

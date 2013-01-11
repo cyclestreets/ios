@@ -228,7 +228,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			
 		case ValidationPOIMapCategoryFailed:
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to retrieve data" andMessage:nil];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"No Points found for this type in the current map" andMessage:nil];
 			
 			break;
 		default:

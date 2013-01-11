@@ -597,12 +597,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "379534707.872487"
+         timestampString = "379599727.692158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1485"
-         endingLineNumber = "1485"
-         landmarkName = "+zoomMapView:toLocation:"
+         startingLineNumber = "1572"
+         endingLineNumber = "1572"
+         landmarkName = "+tileSource"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -628,7 +628,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "163"
          endingLineNumber = "163"
-         landmarkName = "-viewWillAppear:"
+         landmarkName = "-createNonPersistentUI"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -688,25 +688,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "379534707.872487"
+         timestampString = "379599727.692158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1462"
-         endingLineNumber = "1462"
-         landmarkName = "+tileSource"
-         landmarkType = "5">
+         startingLineNumber = "1549"
+         endingLineNumber = "1549"
+         landmarkName = "@implementation MapViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "379534707.872487"
+         timestampString = "379599727.692158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1254"
-         endingLineNumber = "1254"
-         landmarkName = "-singleTapDelayExpired"
+         startingLineNumber = "1341"
+         endingLineNumber = "1341"
+         landmarkName = "-doubleTapOnMap:At:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -805,11 +805,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "374178357.342155"
+         timestampString = "379599727.692158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
+         startingLineNumber = "173"
+         endingLineNumber = "173"
          landmarkName = "-listNotificationInterests"
          landmarkType = "5">
       </FileBreakpoint>
@@ -818,11 +818,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "374178357.342155"
+         timestampString = "379599727.692158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
+         startingLineNumber = "187"
+         endingLineNumber = "187"
          landmarkName = "-didReceiveNotification:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -892,16 +892,16 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "lib/ui/CustomNavigtionBar.m"
-         timestampString = "379529529.907133"
+         filePath = "src/controllers/Map/MapViewController.m"
+         timestampString = "379599727.692158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "234"
-         endingLineNumber = "234"
-         landmarkName = "-createRightNavItem"
+         startingLineNumber = "1091"
+         endingLineNumber = "1091"
+         landmarkName = "-markerMenuSelectedForMenu:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
