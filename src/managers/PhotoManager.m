@@ -87,12 +87,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 		
 	}
 	
-	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
+	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED]){
 		[[HudManager sharedInstance] removeHUD];
 		
 		if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
+			
+		}else if([dataid isEqualToString:UPLOADUSERPHOTO]){
+			
+			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,EMPTYSTRING,MESSAGE, nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
 		}
 	}
 	

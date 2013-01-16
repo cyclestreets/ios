@@ -1341,6 +1341,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		uploadLabel.textColor=UIColorFromRGB(0xC20000);
 		uploadLabel.text=@"An error occured while uploading your image, please try again.";
 		uploadButton.enabled=YES;
+		uploadProgressView.progress=0;
 		
 	}else {
 		
@@ -1374,6 +1375,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	BetterLog(@"");
 	
 	self.cancelButton.titleLabel.text=@"Done";
+	self.cancelViewButton.title=@"Close";
 	
 	
 	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View map"];

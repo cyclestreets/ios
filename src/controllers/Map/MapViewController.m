@@ -48,6 +48,8 @@
 #import "UIView+Additions.h"
 #import "ViewUtilities.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 
 static NSInteger MAX_ZOOM = 18;
 
@@ -170,6 +172,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
 	[super didReceiveNotification:notification];
+	
+	
 	
 	//NSDictionary	*dict=[notification userInfo];
 	NSString		*name=notification.name;
@@ -375,6 +379,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleBordered;
 			
+			CLS_LOG(@"MapPlanningStateNoRoute toolbar items %@,%@,%@,%@", _locationButton,_searchButton, _leftFlex, _rightFlex);
+			
 			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
 			[self.toolBar setItems:items animated:YES ];
 			
@@ -385,12 +391,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		{
 			BetterLog(@"MapPlanningStateLocating");
 			
+			
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleDone;
 			
 			if([self shouldShowWayPointUI]==YES){
 				items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
 			}else{
+				
+				CLS_LOG(@"MapPlanningStateLocating shouldShowWayPointUI=YES toolbar items %@,%@,%@,%@", _locationButton,_searchButton, _leftFlex, _rightFlex);
+				
 				items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
 			}
 			
@@ -408,6 +418,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleBordered;
 			
+			CLS_LOG(@"MapPlanningStateStartPlanning toolbar items %@,%@,%@", _locationButton,_searchButton, _leftFlex);
+			
 			items=@[_locationButton,_searchButton,_leftFlex];
             
             [self.toolBar setItems:items animated:YES ];
@@ -422,6 +434,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleBordered;
 			
+			CLS_LOG(@"MapPlanningStatePlanning toolbar items %@,%@,%@,%@,%@", _waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton);
+			
 			items=@[_waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton];
             [self.toolBar setItems:items animated:YES ];
 		}
@@ -434,6 +448,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			_routeButton.title = @"New route";
 			_locationButton.style=UIBarButtonItemStyleBordered;
 			_searchButton.enabled = YES;
+			
+			CLS_LOG(@"MapPlanningStateRoute toolbar items %@,%@,%@,%@,%@", _locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton);
 			
 			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
             [self.toolBar setItems:items animated:NO ];
@@ -1470,16 +1486,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	if (self.isViewLoaded && !self.view.window) {
         self.view = nil;
     }
-	
-	self.locationButton=nil;
-	self.activeLocationButton=nil;
-	self.searchButton=nil;
-	self.routeButton=nil;
-	self.changePlanButton=nil;
-	self.locatingIndicator=nil;
-	self.leftFlex=nil;
-	self.rightFlex=nil;
-	self.waypointButton=nil;
 	
 	
 	self.mapContents=nil;
