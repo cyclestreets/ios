@@ -142,7 +142,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                      @"300",@"thumbnailsize",
                                      [NSNumber numberWithInt:limit],@"limit",
                                       @"1",@"suppressplaceholders",
-                                     @"1",@"minimaldata", 
+                                     @"1",@"minimaldata",
+									 [self uploadPhotoId],@"selectedid",
                                      nil];
     
     NetRequest *request=[[NetRequest alloc]init];
@@ -293,6 +294,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 }
 
+
+
+//
+/***********************************************
+ * @description			UTILITY
+ ***********************************************/
+//
+
+
+-(NSString*)uploadPhotoId{
+	
+	if(uploadPhoto==nil)
+		return ZERO;
+	
+	return uploadPhoto.uploadedPhotoId;
+}
 
 
 -(BOOL)isUserPhoto:(PhotoMapVO*)photo{
