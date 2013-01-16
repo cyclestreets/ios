@@ -79,6 +79,7 @@
 -(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation;
 -(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation;
 
+-(NSString*)lengthPercentStringForPercent:(float)percent;
 
 @end
 

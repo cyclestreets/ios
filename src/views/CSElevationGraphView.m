@@ -104,6 +104,9 @@
 		
 		float xpos=point.x;
 		
+		float percent=(float)xpos/(float)_calloutView.width;
+		[_calloutView updateTitleLabel:[_dataProvider lengthPercentStringForPercent:percent]];
+		
 		// TODO: callout bg should adjust arrow position, end, center, end
 		
 		float calloutxpos=(_graphView.x+xpos)-(_calloutView.width/2);
@@ -123,6 +126,7 @@
 			_calloutView.alpha=0;
 		} completion:^(BOOL finished) {
 			_calloutView.visible=NO;
+			
 		}];
 	}
 	
@@ -150,9 +154,6 @@
 		calloutxpos=MAX(0, calloutxpos);
 		
 		_calloutView.x=calloutxpos;
-		
-		
-		
 		
 	}
 	
@@ -203,7 +204,7 @@
 			xpos=UIWIDTH;
 		}
 		
-		BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,value,xpos,[segment segmentDistance],xpercent);
+		BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,ypos,xpos,[segment segmentDistance],xpercent);
 		
 		// debug only
 		ExpandedUILabel *label=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(xpos-1, ypos-1, 14,14)];

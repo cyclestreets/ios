@@ -90,6 +90,24 @@
 	
 }
 
+
+-(NSString*)lengthPercentStringForPercent:(float)percent{
+	
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+		
+		float milepercent=percent*[[self length] floatValue];
+		float totalMiles = milepercent/1600;
+		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
+	}else {
+		float	kms=[[self length] floatValue]/1000;
+		float kmdistance=percent*kms;
+		return [NSString stringWithFormat:@"%4.1f km", kmdistance];
+	}
+	
+	
+}
+
+
 -(NSString*)speedString{
 	
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[self speed]];
