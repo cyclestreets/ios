@@ -12,7 +12,6 @@
 @implementation POITypeCellView
 @synthesize imageView;
 @synthesize label;
-@synthesize totallabel;
 @synthesize dataProvider;
 	
 	
@@ -27,7 +26,6 @@
 	
 	imageView.image=dataProvider.icon;
 	label.text=dataProvider.name;
-	totallabel.text=[NSString stringWithFormat:@"%i entries",dataProvider.total];
 	
 }
 

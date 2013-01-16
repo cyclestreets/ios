@@ -139,6 +139,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, assign) CGPoint				singleTapPoint;
 @property (nonatomic, assign) MapPlanningState		uiState;
 @property (nonatomic, assign) MapPlanningState		previousUIState;
+@property (nonatomic, assign) BOOL					mapMoving;
 
 
 // ui
@@ -1372,9 +1373,58 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
-- (void) afterMapMove: (RMMapView*) map {
-	[self afterMapChanged:map];
+-(void)beforeMapMove:(RMMapView *)map{
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mapMoveDidComplete) object:nil];
+		
+	if(_mapMoving==NO){
+		
+		
+		//if(poi refreshing>stop it
+		
+		_mapMoving=YES;
+		BetterLog(@"");
+	}
+		
 }
+
+
+- (void) afterMapMove: (RMMapView*) map {
+	
+	BetterLog(@"");
+	
+	[self afterMapChanged:map];
+	
+	if(_mapMoving==YES){
+		
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mapMoveDidComplete) object:nil];
+		
+		[self performSelector:@selector(mapMoveDidComplete) withObject:nil afterDelay:1.0];
+		
+		
+	}
+}
+
+
+// timeout method for map move
+-(void)mapMoveDidComplete{
+	
+	if(_mapMoving==YES){
+		_mapMoving=NO;
+		
+		CGRect bounds = _mapView.contents.screenBounds;
+		CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
+		CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
+		
+		[[POIManager sharedInstance] requestPOICategoryMapPointsForCategory:[POIManager sharedInstance].selectedCategory withNWBounds:nw andSEBounds:se];
+		
+	}
+	
+	
+}
+
+
+
 
 -(void)afterMapTouch:(RMMapView *)map{
 	

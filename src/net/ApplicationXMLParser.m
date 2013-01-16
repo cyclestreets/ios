@@ -724,38 +724,47 @@
 	
 	
 	TBXMLElement *pois=[TBXML childElementNamed:@"pois" parentElement:response];
-	TBXMLElement *poi=[TBXML childElementNamed:@"poi" parentElement:pois];
 	
-	if(poi!=nil){
+	if(pois==nil){
 		
-		NSMutableArray *dataProvider=[[NSMutableArray alloc]init];
+		validation.returnCode=ValidationPOIMapCategoryFailed;
+	
+	}else{
+
+		TBXMLElement *poi=[TBXML childElementNamed:@"poi" parentElement:pois];
 		
-		while (poi!=nil) {
+		if(poi!=nil){
 			
-			POILocationVO *poilocation=[[POILocationVO alloc]init];
-			poilocation.name= [TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:poi]];
+			NSMutableArray *dataProvider=[[NSMutableArray alloc]init];
 			
-			CLLocationCoordinate2D coords;
-			coords.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"longitude" parentElement:poi]] floatValue];
-			coords.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"latitude" parentElement:poi]] floatValue];
-			CLLocation *location=[[CLLocation alloc]initWithLatitude:coords.latitude longitude:coords.longitude];
-			poilocation.location=location;
+			while (poi!=nil) {
+				
+				POILocationVO *poilocation=[[POILocationVO alloc]init];
+				poilocation.name= [TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:poi]];
+				
+				CLLocationCoordinate2D coords;
+				coords.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"longitude" parentElement:poi]] floatValue];
+				coords.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"latitude" parentElement:poi]] floatValue];
+				CLLocation *location=[[CLLocation alloc]initWithLatitude:coords.latitude longitude:coords.longitude];
+				poilocation.location=location;
+				
+				poilocation.website=[TBXML textForElement:[TBXML childElementNamed:@"website" parentElement:poi]];
+				poilocation.notes=[TBXML textForElement:[TBXML childElementNamed:@"notes" parentElement:poi]];
+							
+				[dataProvider addObject:poilocation];
+				
+				poi=poi->nextSibling;
+				
+			}
 			
-			poilocation.website=[TBXML textForElement:[TBXML childElementNamed:@"website" parentElement:poi]];
-			poilocation.notes=[TBXML textForElement:[TBXML childElementNamed:@"notes" parentElement:poi]];
-						
-			[dataProvider addObject:poilocation];
+			validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
 			
-			poi=poi->nextSibling;
+			validation.returnCode=ValidationPOIMapCategorySuccess;
 			
+		}else{
+			validation.returnCode=ValidationPOIMapCategorySuccessNoEntries;
 		}
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
-		
-		validation.returnCode=ValidationPOIMapCategorySuccess;
-		
-	}else{
-		validation.returnCode=ValidationPOIMapCategoryFailed;
 	}
 	
 	activeResponse.dataProvider=validation;

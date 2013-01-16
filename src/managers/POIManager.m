@@ -52,6 +52,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 -(void)listNotificationInterests{
 	
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
+	[notifications addObject:REQUESTDIDCOMPLETEFROMMODEL];
+	[notifications addObject:REQUESTDIDCOMPLETEFROMCACHE];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
 	
@@ -93,6 +95,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			
 		}
 		
+		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMMODEL] || [notification.name isEqualToString:REQUESTDIDCOMPLETEFROMCACHE]){
+			
+			if ([response.dataid isEqualToString:POILISTING]) {
+				
+				[self updatePOIListingDataProvider:response.dataProvider];
+				
+			}
+		}
 		
 		
 	}
@@ -123,7 +133,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	request.requestid=ZERO;
 	request.parameters=parameters;
 	request.revisonId=0;
-	request.source=USER;
+	request.source=SYSTEM;
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
@@ -140,11 +150,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			
 		case ValidationPOIListingSuccess:
 			
-			self.dataProvider=[validation.responseDict objectForKey:POILISTING];
-			
-			[self.dataProvider insertObject:[POIManager createNoneCategory] atIndex:0];
-			
-			[[NSNotificationCenter defaultCenter] postNotificationName:POILISTINGRESPONSE object:nil userInfo:nil];
+			[self updatePOIListingDataProvider:[validation.responseDict objectForKey:POILISTING]];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Retrieved" andMessage:nil];
 			
@@ -163,6 +169,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	}
 	
 	
+}
+
+-(void)updatePOIListingDataProvider:(NSMutableArray*)arr{
+	
+	self.dataProvider=arr;
+	[self.dataProvider insertObject:[POIManager createNoneCategory] atIndex:0];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:POILISTINGRESPONSE object:nil userInfo:nil];
 	
 }
 
@@ -213,6 +227,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 
 -(void)POICategoryMapPointsResponse:(ValidationVO*)validation{
 	
+	[[HudManager sharedInstance] removeHUD];
+	
 	
 	switch (validation.validationStatus) {
 			
@@ -222,20 +238,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Retrieved" andMessage:nil];
+		break;
 			
-			break;
+		case ValidationPOIMapCategorySuccessNoEntries:
+			
+			[self.categoryDataProvider removeAllObjects];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
+			
+			
+		break;
 			
 		case ValidationPOIMapCategoryFailed:
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"No Points found for this type in the current map" andMessage:nil];
-			
-			break;
-		default:
-			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeServer withTitle:@"Unable to retrieve data" andMessage:nil];
 			
-			break;
+		break;
 	}
 	
 	

@@ -476,6 +476,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 			return YES;
 		}else {
 			
+			int cacheSettingOverride=[[request.service objectForKey:@"cacheInterval"] intValue];
+			if(cacheSettingOverride!=0)
+				cacheinterval=cacheSettingOverride*60; // convert to mins			}
+			
+			
 			if (fileage<cacheinterval) {
 				return YES;
 			}else {

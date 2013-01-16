@@ -23,9 +23,10 @@ enum  {
     ValidationRetrieveRouteByIdSuccess=1014,
 	ValidationCategoriesSuccess=1015,
 	ValidationPOIMapCategorySuccess=1016,
+	ValidationPOIMapCategorySuccessNoEntries=1017,
 	
 	ValidationSuccessMIN=ValidationLoginSuccess,
-	ValidationSuccessMAX=ValidationPOIMapCategorySuccess,
+	ValidationSuccessMAX=ValidationPOIMapCategorySuccessNoEntries,
 	
 	// failures
 	ValidationLoginFailed=2000, // 2000

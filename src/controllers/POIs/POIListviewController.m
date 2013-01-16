@@ -115,7 +115,7 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)createPersistentUI{
 	
-	[[POIManager sharedInstance] requestPOIListingData];
+	//[[POIManager sharedInstance] requestPOIListingData];
 	
 	//[self createNavigationBarUI];
 	
