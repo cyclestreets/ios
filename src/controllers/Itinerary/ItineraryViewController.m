@@ -353,7 +353,9 @@
 			picker.mailComposeDelegate = self;
 			[picker setSubject:[NSString stringWithFormat:@"CycleStreets route %@",_route.routeid]];
 			
-			NSString *body=[NSString stringWithFormat:@"%@ <br><br>%@",[NSString stringWithFormat:@"<a href=%@>For iOS devices: %@</a>",_route.csiOSRouteurlString,_route.routeid],[NSString stringWithFormat:@"<a href=%@>For Browsers: %@</a>",_route.csBrowserRouteurlString,_route.routeid]];
+			NSString *body=[NSString stringWithFormat:@"%@ <br><br>%@",
+							[NSString stringWithFormat:@" I've planned the cycle route on CycleStreets:<br><a href=%@>%@</a>",_route.csBrowserRouteurlString,_route.csBrowserRouteurlString],
+							[NSString stringWithFormat:@"If you have an iOS device, you can open it in the CycleStreets app: <a href=%@>%@</a>",_route.csiOSRouteurlString,_route.csiOSRouteurlString]];
 			
 			[picker setMessageBody:body isHTML:YES];
 			

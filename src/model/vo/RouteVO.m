@@ -153,10 +153,10 @@
 
 
 -(NSString*)csiOSRouteurlString{
-	return [NSString stringWithFormat:@"cyclestreets/route/%@",self.routeid];
+	return [NSString stringWithFormat:@"cyclestreets://route/%@",self.routeid];
 }
 -(NSString*)csBrowserRouteurlString{
-	return [NSString stringWithFormat:@"http://cycle.st/j%@",self.routeid];
+	return [NSString stringWithFormat:@"http://www.cyclestreets.net/journey/%@",self.routeid];
 }
 
 -(BOOL)containsWalkingSections{
