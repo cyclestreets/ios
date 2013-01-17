@@ -231,16 +231,20 @@ static NSDictionary *roadIcons;
 -(int)segmentElevation{
 	
 	NSMutableArray *earray=[[elevations componentsSeparatedByString:@","] mutableCopy];
-	[earray removeLastObject];
-	for(int i=0;i<earray.count;i++){
-		NSString *str=earray[i];
-		int value=[str intValue];
-		[earray replaceObjectAtIndex:i withObject:@(value)];
+	
+	if(earray.count>1){
+		
+		[earray removeLastObject];
+		for(int i=0;i<earray.count;i++){
+			NSString *str=earray[i];
+			int value=[str intValue];
+			[earray replaceObjectAtIndex:i withObject:@(value)];
+		}
+		
+		return [[earray valueForKeyPath:@"@avg.self"] intValue];
+	}else{
+		return [earray[0] intValue];
 	}
-	
-	return [[earray valueForKeyPath:@"@avg.self"] intValue];
-	
-	
 }
 
 

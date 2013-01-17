@@ -20,11 +20,17 @@
 #define graphHeight 80
 @interface CSElevationGraphView()
 
-@property(nonatomic,strong)  CSGraphView			*graphView;
-@property(nonatomic,strong)  CAShapeLayer			*graphMaskLayer;
-@property(nonatomic,strong)  UIBezierPath			*graphPath;
+@property(nonatomic,strong)  CSGraphView				*graphView;
+@property(nonatomic,strong)  CAShapeLayer				*graphMaskLayer;
+@property(nonatomic,strong)  UIBezierPath				*graphPath;
 
-@property(nonatomic,strong)  BUCalloutView			*calloutView;
+@property(nonatomic,strong)  ExpandedUILabel			*yAxisLabel;
+@property(nonatomic,strong)  ExpandedUILabel			*xAxisLabel;
+
+
+@property(nonatomic,strong)  BUCalloutView				*calloutView;
+
+@property(nonatomic,strong)  NSMutableArray				*elevationArray;
 
 
 @end
@@ -42,25 +48,29 @@
 
 -(void)initialise{
 	
-	ExpandedUILabel *ylabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 15)];
-	ylabel.textColor=[UIColor whiteColor];
-	ylabel.font=[UIFont systemFontOfSize:13];
-	ylabel.textAlignment=UITextAlignmentCenter;
-	ylabel.layer.cornerRadius=4;
-	ylabel.backgroundColor=UIColorFromRGB(0xF76117);
-	ylabel.text=@"m";
-	[self addSubview:ylabel];
+	self.yAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 15)];
+	_yAxisLabel.textColor=[UIColor whiteColor];
+	_yAxisLabel.font=[UIFont systemFontOfSize:13];
+	_yAxisLabel.textAlignment=UITextAlignmentCenter;
+	_yAxisLabel.layer.cornerRadius=4;
+	_yAxisLabel.multiline=NO;
+	_yAxisLabel.insetValue=3;
+	_yAxisLabel.backgroundColor=UIColorFromRGB(0xF76117);
+	_yAxisLabel.text=@"m";
+	[self addSubview:_yAxisLabel];
 	
-	ExpandedUILabel *xlabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(20, self.height, 25, 15)];
-	xlabel.textColor=[UIColor whiteColor];
-	xlabel.font=[UIFont systemFontOfSize:13];
-	xlabel.textAlignment=UITextAlignmentCenter;
-	xlabel.layer.cornerRadius=4;
-	xlabel.backgroundColor=UIColorFromRGB(0xF76117);
-	xlabel.text=@"km";
-	[self addSubview:xlabel];
+	self.xAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(20, self.height, 25, 15)];
+	_xAxisLabel.textColor=[UIColor whiteColor];
+	_xAxisLabel.multiline=NO;
+	_xAxisLabel.insetValue=3;
+	_xAxisLabel.font=[UIFont systemFontOfSize:13];
+	_xAxisLabel.textAlignment=UITextAlignmentCenter;
+	_xAxisLabel.layer.cornerRadius=4;
+	_xAxisLabel.backgroundColor=UIColorFromRGB(0xF76117);
+	_xAxisLabel.text=@"km";
+	[self addSubview:_xAxisLabel];
 	
-	[ViewUtilities alignView:xlabel withView:self :BURightAlignMode :BUBottomAlignMode];
+	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUBottomAlignMode];
 	
 	
 	self.graphView=[[CSGraphView alloc] initWithFrame:CGRectMake(0, 20, UIWIDTH, graphHeight)];
@@ -104,8 +114,14 @@
 		
 		float xpos=point.x;
 		
-		float percent=(float)xpos/(float)_calloutView.width;
-		[_calloutView updateTitleLabel:[_dataProvider lengthPercentStringForPercent:percent]];
+		
+		float xpercent=MAX(MIN((float)xpos/(float)_graphView.width,1),0);
+		int segmentindex=floor(xpercent*(_elevationArray.count-1));
+		
+		BetterLog(@"xpercent=%f",xpercent);
+		BetterLog(@"segmentindex=%i",segmentindex);
+		
+		[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%@m %@",_elevationArray[segmentindex],[_dataProvider lengthPercentStringForPercent:xpercent]]];
 		
 		// TODO: callout bg should adjust arrow position, end, center, end
 		
@@ -143,12 +159,6 @@
 	if ([_graphPath containsPoint:location]) {
 		
 		float xpos=location.x;
-		
-		BetterLog(@"xpos=%f",xpos);
-		
-		// TODO: restrict x to min/max so cant go off screen
-		// TODO: callout bg should adjust arrow position, end, center, end
-		
 		float calloutxpos=(_graphView.x+xpos);
 		
 		calloutxpos=MAX(0, calloutxpos);
@@ -162,6 +172,10 @@
 
 -(void)update{
 	
+	if(_elevationArray==nil)
+		self.elevationArray=[NSMutableArray array];
+	[_elevationArray removeAllObjects];
+	
 	
 	[_graphView removeAllSubViews];
 	
@@ -173,6 +187,11 @@
 	int index=0;
 	int xpos=0;
 	float currentDistance=0;
+	
+	
+	_yAxisLabel.text=[NSString stringWithFormat:@"%i m",maxelevation];
+	_xAxisLabel.text=_dataProvider.lengthString;
+	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUBottomAlignMode];
 	
 	// startpoint
 	SegmentVO *segment=_dataProvider.segments[0];
@@ -194,6 +213,8 @@
 		ypercent=1-ypercent;
 		int ypos=graphHeight*ypercent;
 		
+		[_elevationArray addObject:BOX_INT(value)];
+		
 		// x value
 		currentDistance+=[segment segmentDistance];
 		float xpercent=currentDistance/[_dataProvider.length floatValue];
@@ -207,11 +228,13 @@
 		BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,ypos,xpos,[segment segmentDistance],xpercent);
 		
 		// debug only
+		/*
 		ExpandedUILabel *label=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(xpos-1, ypos-1, 14,14)];
 		label.backgroundColor=[UIColor clearColor];
 		label.font=[UIFont systemFontOfSize:11];
 		label.text=[NSString stringWithFormat:@"%i",index];
 		[_graphView addSubview:label];
+		 */
 		//
 
 		[path addLineToPoint:CGPointMake(xpos, ypos)];
@@ -221,7 +244,7 @@
 	}
 	
 	[path addLineToPoint:CGPointMake(UIWIDTH, _graphView.height)];
-	 
+
 	 
 	self.graphPath=path;
 	[_graphMaskLayer setPath:path.CGPath];

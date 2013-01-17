@@ -28,18 +28,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "StartupManager.h"
 #import "ExpandedUILabel.h"
 
-#define ISDEVELOPMENT 0
+#define ISDEVELOPMENT 1
 
 @interface AppDelegate : NSObject <UIApplicationDelegate,StartupManagerDelegate,UITabBarControllerDelegate> {
 	
-    UIWindow *window;
+    UIWindow										*window;
 	
-	UIImageView			*splashView;
+	UIImageView										*splashView;
 	
-	UITabBarController *tabBarController;
+	UITabBarController								*tabBarController;
 	
-	StartupManager				*startupmanager;
-	ExpandedUILabel					*debugLabel;
+	StartupManager									*startupmanager;
+	ExpandedUILabel									*debugLabel;
 	
 	
 	
