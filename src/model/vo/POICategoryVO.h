@@ -24,6 +24,7 @@
 @property (nonatomic, strong)	UIImage			*icon;
 
 
+// returns scaled image for use with Map markers
 @property(nonatomic,readonly)  UIImage         *mapImage;
 
 @end

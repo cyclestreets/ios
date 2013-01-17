@@ -138,7 +138,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Retrieving List" andMessage:nil];
 	
 	
 }
@@ -152,7 +151,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			
 			[self updatePOIListingDataProvider:[validation.responseDict objectForKey:POILISTING]];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Retrieved" andMessage:nil];
 			
 		break;
 		

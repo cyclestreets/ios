@@ -16,6 +16,12 @@
 -(UIImage*)scaleWithMaxSize:(CGFloat)maxSize
 					quality:(CGInterpolationQuality)quality;
 
+
+- (UIImage *)resizedImage:(CGSize)newSize
+                transform:(CGAffineTransform)transform
+           drawTransposed:(BOOL)transpose
+     interpolationQuality:(CGInterpolationQuality)quality;
+
 @end
 
 #endif  // WBIMAGE_H

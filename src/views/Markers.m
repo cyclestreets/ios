@@ -75,6 +75,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 + (RMMarker *)markerPOIWithImage:(UIImage*)image {
 	
+	
 	RMMarker *marker = [[RMMarker alloc] initWithUIImage:image];
 	marker.dataType=RMMarkerDataTypePOI;
 	[marker changeLabelUsingText:nil];

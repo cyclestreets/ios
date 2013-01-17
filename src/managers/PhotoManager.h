@@ -15,6 +15,7 @@
 #import "UploadPhotoVO.h"
 #import "PhotoMapVO.h"
 
+
 @interface PhotoManager : FrameworkObject {
     
     UploadPhotoVO               *uploadPhoto;
