@@ -1375,39 +1375,38 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
-/*
+
 -(void)beforeMapMove:(RMMapView *)map{
 	
 	
 	
-//	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mapMoveDidComplete) object:nil];
-//		
-//	if(_mapMoving==NO){
-//		
-//		
-//		//if(poi refreshing>stop it
-//		
-//		_mapMoving=YES;
-//		BetterLog(@"");
-//	}
+[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mapMoveDidComplete) object:nil];
+		
+	if(_mapMoving==NO){
+		
+		
+		//if(poi refreshing>stop it
+		
+		_mapMoving=YES;
+		BetterLog(@"");
+	}
 		
 }
-*/ 
+ 
 
 - (void) afterMapMove: (RMMapView*) map {
 	
 	BetterLog(@"");
 	
 	[self afterMapChanged:map];
-//	
-//	if(_mapMoving==YES){
-//		
-//		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mapMoveDidComplete) object:nil];
-//		
-//		[self performSelector:@selector(mapMoveDidComplete) withObject:nil afterDelay:1.0];
-//		
-//		
-//	}
+	
+	if(_mapMoving==YES){
+		
+		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mapMoveDidComplete) object:nil];
+		
+		[self performSelector:@selector(mapMoveDidComplete) withObject:nil afterDelay:1.0];
+		
+	}
 }
 
 
