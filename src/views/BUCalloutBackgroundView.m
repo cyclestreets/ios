@@ -7,6 +7,7 @@
 //
 
 #import "BUCalloutBackgroundView.h"
+#import "GlobalUtilities.h"
 
 @implementation BUCalloutBackgroundView
 
@@ -64,15 +65,30 @@
     CGFloat maxy = CGRectGetMaxY(rrect);
 	
 	CGContextMoveToPoint(context, minx, maxy);
-	CGContextAddArcToPoint(context, minx, miny, _arrowPoint, miny, radius);
+	CGContextAddArcToPoint(context, minx, miny, midx, miny, radius);
     CGContextAddArcToPoint(context, maxx, miny, maxx, maxy-10, radius);
 	
-	// arrow
+	
+	// handle point>radius
+	if(_arrowPoint>self.frame.size.width-10 && _arrowPoint<self.frame.size.width-5){
+		radius=(self.frame.size.width-_arrowPoint)-5;
+	}else{
+		radius=kDefaultCornerRadius;
+	}
+	
 	CGContextAddArcToPoint(context, maxx, maxy-10, _arrowPoint+5, maxy-10, radius);
 	CGContextAddLineToPoint(context, _arrowPoint+5, maxy-10);
 	CGContextAddLineToPoint(context, _arrowPoint, maxy);
-	CGContextAddLineToPoint(context, _arrowPoint-5, maxy-10);
+	CGContextAddLineToPoint(context, MAX(0,_arrowPoint-5), maxy-10);
 	//
+	
+	
+	// handle point<radius
+	if(_arrowPoint<10 && _arrowPoint>5){
+		radius=_arrowPoint-5;
+	}else{
+		radius=kDefaultCornerRadius;
+	}
 	
 	CGContextAddArcToPoint(context, minx, maxy-10, minx, midy, radius);
 	

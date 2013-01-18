@@ -68,10 +68,10 @@
 -(void)updatePosition:(CGPoint)point{
 	
 	int xpos=point.x-(self.width/2);
-	xpos=MAX(0, MIN((280-self.width), xpos));
+	xpos=MAX(_minX, MIN((_maxX-self.width), xpos));
 	self.x=xpos;
 	
-	int arrowx=0;
+	int arrowx=_minX;
 	
 	if(point.x<(_minX+(self.width/2))){
 		arrowx=point.x;
