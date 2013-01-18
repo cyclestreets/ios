@@ -59,7 +59,7 @@
 	_yAxisLabel.text=@"m";
 	[self addSubview:_yAxisLabel];
 	
-	self.xAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(20, self.height, 25, 15)];
+	self.xAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(20, graphHeight+25, 25, 15)];
 	_xAxisLabel.textColor=[UIColor whiteColor];
 	_xAxisLabel.multiline=NO;
 	_xAxisLabel.insetValue=3;
@@ -70,7 +70,8 @@
 	_xAxisLabel.text=@"km";
 	[self addSubview:_xAxisLabel];
 	
-	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUBottomAlignMode];
+	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUNoneAlignMode];
+	
 	
 	
 	self.graphView=[[CSGraphView alloc] initWithFrame:CGRectMake(0, 20, UIWIDTH, graphHeight)];
@@ -89,49 +90,54 @@
 	_calloutView.cornerRadius=6;
 	_calloutView.minX=0;
 	_calloutView.maxX=_graphView.width;
-	[_calloutView updateTitleLabel:@"25 miles"];
+	_calloutView.visible=NO;
+	[_calloutView updateTitleLabel:@"0"];
 	[self addSubview:_calloutView];
 	
 	
-
+	ExpandedUILabel *infoLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, self.height, UIWIDTH, 15)];
+	infoLabel.fixedWidth=YES;
+	infoLabel.textColor=[UIColor darkGrayColor];
+	infoLabel.multiline=YES;
+	infoLabel.font=[UIFont systemFontOfSize:12];
+	infoLabel.text=@"CycleStreets routes automatically avoid going up hills or inclines where a reasonable alternative exists.";
+	[self addSubview:infoLabel];
+	
+	[ViewUtilities alignView:infoLabel withView:self :BUNoneAlignMode :BUBottomAlignMode];
 
 }
 
 
 -(void)handleTouchInGraph:(CGPoint)point{
 	
-	//if ([_graphPath containsPoint:point]) {
 		
-		if(_calloutView.isHidden==YES){
+	if(_calloutView.isHidden==YES){
+		
+		_calloutView.visible=YES;
+		_calloutView.alpha=0;
+		
+		[self.delegate touchInGraph:YES];
+		
+		[UIView animateWithDuration:0.3 animations:^{
+			_calloutView.alpha=1;
+		} completion:^(BOOL finished) {
 			
-			_calloutView.visible=YES;
-			_calloutView.alpha=0;
-			
-			[self.delegate touchInGraph:YES];
-			
-			[UIView animateWithDuration:0.3 animations:^{
-				_calloutView.alpha=1;
-			} completion:^(BOOL finished) {
-				
-			}];
-		}
+		}];
+	}
+	
+	float xpos=point.x;
+	
+	
+	float xpercent=MAX(MIN((float)xpos/(float)_graphView.width,1),0);
+	int segmentindex=floor(xpercent*(_elevationArray.count-1));
+	
+	[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%@m %@",_elevationArray[segmentindex],[_dataProvider lengthPercentStringForPercent:xpercent]]];
+	
+	float calloutxpos=(_graphView.x+xpos);
+	
+	[_calloutView updatePosition:CGPointMake(calloutxpos, _calloutView.y)];
 		
-		float xpos=point.x;
-		
-		
-		float xpercent=MAX(MIN((float)xpos/(float)_graphView.width,1),0);
-		int segmentindex=floor(xpercent*(_elevationArray.count-1));
-		
-		//BetterLog(@"xpercent=%f",xpercent);
-		//BetterLog(@"segmentindex=%i",segmentindex);
-		
-		[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%@m %@",_elevationArray[segmentindex],[_dataProvider lengthPercentStringForPercent:xpercent]]];
-		
-		float calloutxpos=(_graphView.x+xpos);
-		
-		[_calloutView updatePosition:CGPointMake(calloutxpos, _calloutView.y)];
-		
-	//}
+	
 
 	
 }
@@ -177,7 +183,7 @@
 	
 	_yAxisLabel.text=[NSString stringWithFormat:@"%i m",maxelevation];
 	_xAxisLabel.text=_dataProvider.lengthString;
-	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUBottomAlignMode];
+	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUNoneAlignMode];
 	
 	// startpoint
 	SegmentVO *segment=_dataProvider.segments[0];
