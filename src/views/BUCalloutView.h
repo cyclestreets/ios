@@ -10,6 +10,9 @@
 
 @interface BUCalloutView : UIView
 
+@property(nonatomic,assign) int			maxX;
+@property(nonatomic,assign) int			minX;
+
 
 @property (nonatomic, strong) UIColor *strokeColor;
 @property (nonatomic, strong) UIColor *fillColor;
@@ -17,5 +20,7 @@
 @property CGFloat cornerRadius;
 
 -(void)updateTitleLabel:(NSString*)str;
+
+-(void)updatePosition:(CGPoint)point;
 
 @end

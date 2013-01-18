@@ -87,6 +87,8 @@
 	self.calloutView=[[BUCalloutView alloc]initWithFrame:CGRectMake(20, 0, 80, 30)];
 	_calloutView.fillColor=UIColorFromRGB(0x006EA6);
 	_calloutView.cornerRadius=6;
+	_calloutView.minX=0;
+	_calloutView.maxX=_graphView.width;
 	[_calloutView updateTitleLabel:@"25 miles"];
 	[self addSubview:_calloutView];
 	
@@ -125,12 +127,9 @@
 		
 		[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%@m %@",_elevationArray[segmentindex],[_dataProvider lengthPercentStringForPercent:xpercent]]];
 		
-		// TODO: callout bg should adjust arrow position, end, center, end
+		float calloutxpos=(_graphView.x+xpos);
 		
-		float calloutxpos=(_graphView.x+xpos)-(_calloutView.width/2);
-		calloutxpos=MAX(0, MIN((280-_calloutView.width), calloutxpos));
-		_calloutView.x=calloutxpos;
-		
+		[_calloutView updatePosition:CGPointMake(calloutxpos, _calloutView.y)];
 		
 	}
 

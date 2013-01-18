@@ -65,6 +65,26 @@
 
 
 
+-(void)updatePosition:(CGPoint)point{
+	
+	int xpos=point.x-(self.width/2);
+	xpos=MAX(0, MIN((280-self.width), xpos));
+	self.x=xpos;
+	
+	int arrowx=0;
+	
+	if(point.x<(_minX+(self.width/2))){
+		arrowx=point.x;
+	}else if(point.x>(_maxX-(self.width/2))){
+		arrowx=self.width+(point.x-_maxX);
+	}else{
+		arrowx=self.width/2;
+	}
+	
+	_backgroundView.arrowPoint=arrowx;
+	
+}
+
 
 
 

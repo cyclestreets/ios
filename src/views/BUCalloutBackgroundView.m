@@ -64,14 +64,14 @@
     CGFloat maxy = CGRectGetMaxY(rrect);
 	
 	CGContextMoveToPoint(context, minx, maxy);
-	CGContextAddArcToPoint(context, minx, miny, midx, miny, radius);
+	CGContextAddArcToPoint(context, minx, miny, _arrowPoint, miny, radius);
     CGContextAddArcToPoint(context, maxx, miny, maxx, maxy-10, radius);
 	
 	// arrow
-	CGContextAddArcToPoint(context, maxx, maxy-10, midx+5, maxy-10, radius);
-	CGContextAddLineToPoint(context, midx+5, maxy-10);
-	CGContextAddLineToPoint(context, midx, maxy);
-	CGContextAddLineToPoint(context, midx-5, maxy-10);
+	CGContextAddArcToPoint(context, maxx, maxy-10, _arrowPoint+5, maxy-10, radius);
+	CGContextAddLineToPoint(context, _arrowPoint+5, maxy-10);
+	CGContextAddLineToPoint(context, _arrowPoint, maxy);
+	CGContextAddLineToPoint(context, _arrowPoint-5, maxy-10);
 	//
 	
 	CGContextAddArcToPoint(context, minx, maxy-10, minx, midy, radius);
