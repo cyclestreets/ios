@@ -100,7 +100,7 @@
 
 -(void)handleTouchInGraph:(CGPoint)point{
 	
-	if ([_graphPath containsPoint:point]) {
+	//if ([_graphPath containsPoint:point]) {
 		
 		if(_calloutView.isHidden==YES){
 			
@@ -131,7 +131,7 @@
 		
 		[_calloutView updatePosition:CGPointMake(calloutxpos, _calloutView.y)];
 		
-	}
+	//}
 
 	
 }

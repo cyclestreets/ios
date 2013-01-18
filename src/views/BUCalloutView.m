@@ -10,6 +10,7 @@
 #import "ExpandedUILabel.h"
 #import "BUCalloutBackgroundView.h"
 #import "UIView+Additions.h"
+#import "GlobalUtilities.h"
 
 @interface BUCalloutView()
 
@@ -81,6 +82,8 @@
 		arrowx=self.width/2;
 	}
 	
+	arrowx=MAX(_minX,MIN(self.width,arrowx));
+		
 	_backgroundView.arrowPoint=arrowx;
 	
 }
