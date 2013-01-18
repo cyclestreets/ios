@@ -105,6 +105,8 @@
 			_calloutView.visible=YES;
 			_calloutView.alpha=0;
 			
+			[self.delegate touchInGraph:YES];
+			
 			[UIView animateWithDuration:0.3 animations:^{
 				_calloutView.alpha=1;
 			} completion:^(BOOL finished) {
@@ -118,8 +120,8 @@
 		float xpercent=MAX(MIN((float)xpos/(float)_graphView.width,1),0);
 		int segmentindex=floor(xpercent*(_elevationArray.count-1));
 		
-		BetterLog(@"xpercent=%f",xpercent);
-		BetterLog(@"segmentindex=%i",segmentindex);
+		//BetterLog(@"xpercent=%f",xpercent);
+		//BetterLog(@"segmentindex=%i",segmentindex);
 		
 		[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%@m %@",_elevationArray[segmentindex],[_dataProvider lengthPercentStringForPercent:xpercent]]];
 		
@@ -131,6 +133,7 @@
 		
 		
 	}
+
 	
 }
 
@@ -144,30 +147,14 @@
 			_calloutView.visible=NO;
 			
 		}];
-	}
-	
-	
-	
-}
-
-
-//The event handling method
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-	
-	CGPoint location = [recognizer locationInView:recognizer.view];
-	
-	if ([_graphPath containsPoint:location]) {
 		
-		float xpos=location.x;
-		float calloutxpos=(_graphView.x+xpos);
-		
-		calloutxpos=MAX(0, calloutxpos);
-		
-		_calloutView.x=calloutxpos;
 		
 	}
 	
+	[self.delegate touchInGraph:NO];
+	
 }
+
 
 
 -(void)update{

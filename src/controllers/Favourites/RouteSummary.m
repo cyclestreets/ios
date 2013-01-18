@@ -36,34 +36,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import "SavedRoutesManager.h"
 #import "HudManager.h"
-#import "CSElevationGraphView.h"
 #import "UIView+Additions.h"
 
 @interface RouteSummary()
 
-@property (nonatomic,strong)  CSElevationGraphView			*elevationView;
-@property (nonatomic, weak)	IBOutlet UIImageView			*selectedRouteIcon;
+
+@property (nonatomic, strong) UIScrollView							* scrollView;
+@property (nonatomic, strong) LayoutBox								* viewContainer;
+@property (nonatomic, strong) IBOutlet LayoutBox					* headerContainer;
+@property (nonatomic, strong) IBOutlet ExpandedUILabel				* routeNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel						* dateLabel;
+@property (nonatomic, strong) IBOutlet UILabel						* routeidLabel;
+@property (nonatomic, strong) IBOutlet LayoutBox					* readoutContainer;
+@property (nonatomic, strong) IBOutlet UILabel						* timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel						* lengthLabel;
+@property (nonatomic, strong) IBOutlet UILabel						* planLabel;
+@property (nonatomic, strong) IBOutlet UILabel						* speedLabel;
+@property (nonatomic, strong) IBOutlet UILabel						* calorieLabel;
+@property (nonatomic, strong) IBOutlet UILabel						* coLabel;
+
+@property (nonatomic,strong)  CSElevationGraphView					*elevationView;
+
+@property (nonatomic, weak)	IBOutlet UIImageView					*selectedRouteIcon;
+
 
 -(void)selectedRouteUpdated;
 
 @end
 
 @implementation RouteSummary
-@synthesize route;
-@synthesize dataType;
-@synthesize scrollView;
-@synthesize viewContainer;
-@synthesize headerContainer;
-@synthesize routeNameLabel;
-@synthesize dateLabel;
-@synthesize routeidLabel;
-@synthesize readoutContainer;
-@synthesize timeLabel;
-@synthesize lengthLabel;
-@synthesize planLabel;
-@synthesize speedLabel;
-@synthesize calorieLabel;
-@synthesize coLabel;
 
 
 
@@ -131,25 +132,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	self.scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHNAVANDTAB)];
-	[self.view addSubview:scrollView];
+	[self.view addSubview:_scrollView];
 	
-	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	viewContainer.fixedWidth=YES;
-	viewContainer.itemPadding=7;
-	viewContainer.paddingTop=10;
-	viewContainer.paddingBottom=20;
-	viewContainer.layoutMode=BUVerticalLayoutMode;
-	viewContainer.alignMode=BUCenterAlignMode;
-	[scrollView addSubview:viewContainer];
+	self.viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	_viewContainer.fixedWidth=YES;
+	_viewContainer.itemPadding=7;
+	_viewContainer.paddingTop=10;
+	_viewContainer.paddingBottom=20;
+	_viewContainer.layoutMode=BUVerticalLayoutMode;
+	_viewContainer.alignMode=BUCenterAlignMode;
+	[_scrollView addSubview:_viewContainer];
 	
-	headerContainer.layoutMode=BUVerticalLayoutMode;
-	[headerContainer initFromNIB];
-	readoutContainer.layoutMode=BUVerticalLayoutMode;
-	readoutContainer.paddingLeft=20;
-	[readoutContainer initFromNIB];
+	_headerContainer.layoutMode=BUVerticalLayoutMode;
+	[_headerContainer initFromNIB];
+	_readoutContainer.layoutMode=BUVerticalLayoutMode;
+	_readoutContainer.paddingLeft=20;
+	[_readoutContainer initFromNIB];
 	
 	
 	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 120)];
+	_elevationView.delegate=self;
 	_elevationView.backgroundColor=[UIColor clearColor];
 	
 	
@@ -159,9 +161,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	d2.backgroundColor=[UIColor clearColor];
 	
 	
-	routeNameLabel.multiline=YES;
+	_routeNameLabel.multiline=YES;
 	
-	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,_elevationView, nil]];
+	[_viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_elevationView, nil]];
 	
 	
 }
@@ -178,28 +180,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)createNonPersistentUI{
 	
-	self.routeNameLabel.text = route.nameString;
-	self.dateLabel.text=route.dateString;
-	[headerContainer refresh];
+	self.routeNameLabel.text = _route.nameString;
+	self.dateLabel.text=_route.dateString;
+	[_headerContainer refresh];
 	
-	timeLabel.text=route.timeString;
-	lengthLabel.text=route.lengthString;
-	planLabel.text=[[route plan] capitalizedString];
-	speedLabel.text=route.speedString;
-	calorieLabel.text=route.calorieString;
-	coLabel.text=route.coString;
+	_timeLabel.text=_route.timeString;
+	_lengthLabel.text=_route.lengthString;
+	_planLabel.text=[[_route plan] capitalizedString];
+	_speedLabel.text=_route.speedString;
+	_calorieLabel.text=_route.calorieString;
+	_coLabel.text=_route.coString;
 	
-	_elevationView.dataProvider=route;
+	_elevationView.dataProvider=_route;
 	[_elevationView update];
 	
-	_selectedRouteIcon.visible=[[RouteManager sharedInstance] routeIsSelectedRoute:route];
+	_selectedRouteIcon.visible=[[RouteManager sharedInstance] routeIsSelectedRoute:_route];
 	
 	
-	[viewContainer refresh];
+	[_viewContainer refresh];
 	
-	[scrollView setContentSize:CGSizeMake(SCREENWIDTH, viewContainer.height)];
+	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.height)];
 	
-	[navigation updateTitleString:[NSString stringWithFormat:@"Route #%@", [route routeid]]];
+	[navigation updateTitleString:[NSString stringWithFormat:@"Route #%@", [_route routeid]]];
 }
 
 
@@ -232,11 +234,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		// if for route state
 		NSMutableArray *actionbuttons=[@[@{@"type":@"green",@"text":@"Rename route",@"index":@(RenameIndex)}] mutableCopy];
 		
-		if ([[RouteManager sharedInstance] routeIsSelectedRoute:route]==NO) {
+		if ([[RouteManager sharedInstance] routeIsSelectedRoute:_route]==NO) {
 			[actionbuttons insertObject:@{@"type":@"orange",@"text":@"Select route",@"index":@(SelectIndex)} atIndex:0];
 		}
 		
-		if(dataType!=SavedRoutesDataTypeFavourite){
+		if(_dataType!=SavedRoutesDataTypeFavourite){
 			[actionbuttons addObject:@{@"type":@"blue",@"text":@"Add to favourites",@"index":@(FavouriteIndex)}];
 		}
 		
@@ -277,8 +279,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			{
 				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
 				if (alertInputField!=nil) {
-					route.userRouteName=alertInputField.text;
-					[[SavedRoutesManager sharedInstance] saveRouteChangesForRoute:route];
+					_route.userRouteName=alertInputField.text;
+					[[SavedRoutesManager sharedInstance] saveRouteChangesForRoute:_route];
 					[self createNonPersistentUI];
 				}
 			}
@@ -297,11 +299,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-// favouriting
 
 -(void)favouriteRoute{
 	
-	BOOL result=[[SavedRoutesManager sharedInstance] moveRoute:route toDataProvider:SAVEDROUTE_FAVS];
+	BOOL result=[[SavedRoutesManager sharedInstance] moveRoute:_route toDataProvider:SAVEDROUTE_FAVS];
 	
 	if(result==YES){
 		
@@ -324,7 +325,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	switch (buttonIndex) {
 		case RenameIndex:
-			[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:route.nameString delegate:self];
+			[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:_route.nameString delegate:self];
 		break;
 		case SelectIndex:
 			[self selectRoute];
@@ -336,6 +337,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
+//
+/***********************************************
+ * @description			CSElevationGraphViewDelegate
+ ***********************************************/
+//
+
+-(void)touchInGraph:(BOOL)touched{
+	
+	BetterLog(@"touchInGraph=%i",touched);
+	
+	_scrollView.scrollEnabled=!touched;
+	
+}
 
 
 //

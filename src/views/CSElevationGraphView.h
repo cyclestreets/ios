@@ -10,11 +10,22 @@
 #import "RouteVO.h"
 #import "CSGraphView.h"
 
+
+@protocol CSElevationGraphViewDelegate <NSObject>
+
+@optional
+-(void)touchInGraph:(BOOL)touched;
+
+@end
+
+
 @interface CSElevationGraphView : UIView<CSGraphViewDelegate>
 
 @property(nonatomic,strong)  RouteVO							*dataProvider;
 @property(nonatomic,strong)  UIColor							*lineColor;
 @property(nonatomic,strong)  UIColor							*fillColor;
+
+@property (nonatomic, unsafe_unretained) id<CSElevationGraphViewDelegate>		 delegate;
 
 
 -(void)update;
