@@ -595,11 +595,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "380026003.364876"
+         timestampString = "380455778.785113"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1430"
-         endingLineNumber = "1430"
+         startingLineNumber = "1432"
+         endingLineNumber = "1432"
          landmarkName = "+pointList:withView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -686,11 +686,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "380026003.364876"
+         timestampString = "380455778.785113"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1407"
-         endingLineNumber = "1407"
+         startingLineNumber = "1409"
+         endingLineNumber = "1409"
          landmarkName = "-popoverControllerShouldDismissPopover:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -699,11 +699,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "380026003.364876"
+         timestampString = "380455778.785113"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1199"
-         endingLineNumber = "1199"
+         startingLineNumber = "1201"
+         endingLineNumber = "1201"
          landmarkName = "-mapView:didDragMarker:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -815,19 +815,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "380026003.364876"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "186"
-         endingLineNumber = "186"
-         landmarkName = "-didReceiveNotification:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "src/controllers/Routes/RouteListViewController.m"
          timestampString = "375102588.437494"
          startingColumnNumber = "9223372036854775807"
@@ -842,11 +829,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/controllers/Map/MapViewController.m"
-         timestampString = "380026003.364876"
+         timestampString = "380455778.785113"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "775"
-         endingLineNumber = "775"
+         startingLineNumber = "777"
+         endingLineNumber = "777"
          landmarkName = "-addWayPointAtCoordinate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -952,6 +939,19 @@
          startingLineNumber = "70"
          endingLineNumber = "70"
          landmarkName = "-didReceiveNotification:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "src/managers/UserLocationManager.m"
+         timestampString = "380456087.2063"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "328"
+         endingLineNumber = "328"
+         landmarkName = "-locationManager:didUpdateToLocation:fromLocation:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

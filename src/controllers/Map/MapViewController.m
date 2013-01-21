@@ -541,6 +541,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	if(_uiState!=MapPlanningStateRoute){
 	
 		[self addWayPointAtCoordinate:_lastLocation.coordinate];
+		
+		[self assessUIState];
 	
 	}
 	
