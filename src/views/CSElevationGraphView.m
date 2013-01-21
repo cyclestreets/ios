@@ -129,6 +129,9 @@
 	
 	
 	float xpercent=MAX(MIN((float)xpos/(float)_graphView.width,1),0);
+	
+	BetterLog(@"xpercent=%f",xpercent);
+	
 	int segmentindex=floor(xpercent*(_elevationArray.count-1));
 	
 	[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%@m %@",_elevationArray[segmentindex],[_dataProvider lengthPercentStringForPercent:xpercent]]];
