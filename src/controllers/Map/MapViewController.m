@@ -476,7 +476,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
-	[self updateUItoState:MapPlanningStateLocating];
+	if(_uiState!=MapPlanningStateRoute)
+		[self updateUItoState:MapPlanningStateLocating];
 	
 	[self resetLocationOverlay];
 	
@@ -489,7 +490,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
-	[self updateUItoState:_previousUIState];
+	if(_uiState!=MapPlanningStateRoute)
+		[self updateUItoState:_previousUIState];
 	
 	[self resetLocationOverlay];
 	
@@ -502,11 +504,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	_blueCircleView.visible=YES;
 	
-	[self updateUItoState:_previousUIState];
-	
 	self.lastLocation=notification.object;
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
+	
+	if(_uiState!=MapPlanningStateRoute){
+		[self updateUItoState:_previousUIState];
+		
+	}else{
+		
+		// 
+		[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];
+		
+	}
+	
 	
 	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:3];
 	

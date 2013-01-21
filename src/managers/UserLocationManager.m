@@ -344,7 +344,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			didFindDeviceLocation=YES;
 			
         }
-    }
+    }else{
+		
+		if (bestEffortAtLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
+			
+			didFindDeviceLocation=YES;
+			
+        }
+		
+		
+	}
 	
 	
 	switch(locationState){
