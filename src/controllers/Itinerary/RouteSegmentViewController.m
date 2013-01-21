@@ -452,6 +452,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	self.lastLocation = newLocation;
 	
+	BetterLog(@"ll=%@",_lastLocation);
+	
 	// zooms map to show bounding box for location & segment point
 	[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];
 	

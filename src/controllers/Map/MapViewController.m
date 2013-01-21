@@ -505,19 +505,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	_blueCircleView.visible=YES;
 	
 	self.lastLocation=notification.object;
-	[_lineView setNeedsDisplay];
-	[_blueCircleView setNeedsDisplay];
+	
 	
 	if(_uiState!=MapPlanningStateRoute){
 		[self updateUItoState:_previousUIState];
-		
 	}else{
-		
-		// 
-		[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];
-		
+		// TODO: currently this does not produce simialr result as RouteSegment view
+		//[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];
 	}
 	
+	[_lineView setNeedsDisplay];
+	[_blueCircleView setNeedsDisplay];
 	
 	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:3];
 	
