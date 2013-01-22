@@ -126,24 +126,56 @@
 	}
 	
 	float xpos=point.x;
-	
-	
 	float xpercent=MAX(MIN((float)xpos/(float)_graphView.width,1),0);
+	int yvalue=[self findyValueForxPercent:(xpercent*100)];
 	
-	BetterLog(@"xpercent=%f",xpercent);
-	
-	int segmentindex=floor(xpercent*(_elevationArray.count-1));
-	
-	[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%@m %@",_elevationArray[segmentindex],[_dataProvider lengthPercentStringForPercent:xpercent]]];
+	[_calloutView updateTitleLabel:[NSString stringWithFormat:@"%im %@",yvalue,[_dataProvider lengthPercentStringForPercent:xpercent]]];
 	
 	float calloutxpos=(_graphView.x+xpos);
-	
 	[_calloutView updatePosition:CGPointMake(calloutxpos, _calloutView.y)];
-		
-	
-
 	
 }
+
+
+
+-(int)findyValueForxPercent:(float)xpercent{
+	
+	for( int i=0;i<_elevationArray.count;i++ ){
+		
+		NSDictionary *dict=_elevationArray[i];
+		
+		float xvalue=[dict[@"xpercent"] floatValue];
+		
+		if(xpercent>xvalue){
+			
+			int index=i+1;
+			
+			if(index==_elevationArray.count){
+				
+				NSDictionary *ydict=_elevationArray[index-1];
+				return [ydict[@"yvalue"] intValue];
+			}
+			
+			NSDictionary *nextdict=_elevationArray[index];
+			float nextxvalue=[nextdict[@"xpercent"] floatValue];
+			
+			if(nextxvalue>xpercent){
+				return [dict[@"yvalue"] intValue];
+			}
+			
+		}else{
+			
+			NSDictionary *ydict=_elevationArray[0];
+			return [ydict[@"yvalue"] intValue];
+			
+			
+		}
+		
+	}
+	
+	return 0;
+}
+
 
 -(void)cancelTouchInGraph{
 	
@@ -155,7 +187,6 @@
 			_calloutView.visible=NO;
 			
 		}];
-		
 		
 	}
 	
@@ -208,12 +239,14 @@
 		ypercent=1-ypercent;
 		int ypos=graphHeight*ypercent;
 		
-		[_elevationArray addObject:BOX_INT(value)];
-		
 		// x value
 		currentDistance+=[segment segmentDistance];
 		float xpercent=currentDistance/[_dataProvider.length floatValue];
 		xpos=UIWIDTH*xpercent;
+		
+		// callout values
+		float insetindex=xpercent*100.0f;
+		[_elevationArray addObject:@{@"xpercent" : BOX_FLOAT(insetindex), @"yvalue" : BOX_INT(value)}];
 		
 		// ensures last point is max x, handles rounding errors
 		if (index==_dataProvider.segments.count-1) {
@@ -223,6 +256,7 @@
 		BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,ypos,xpos,[segment segmentDistance],xpercent);
 		
 		// debug only
+		
 		/*
 		ExpandedUILabel *label=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(xpos-1, ypos-1, 14,14)];
 		label.backgroundColor=[UIColor clearColor];
@@ -230,6 +264,7 @@
 		label.text=[NSString stringWithFormat:@"%i",index];
 		[_graphView addSubview:label];
 		 */
+		 
 		//
 
 		[path addLineToPoint:CGPointMake(xpos, ypos)];
@@ -239,6 +274,8 @@
 	}
 	
 	[path addLineToPoint:CGPointMake(UIWIDTH, _graphView.height)];
+	
+	BetterLog(@"%@",_elevationArray);
 
 	 
 	self.graphPath=path;
