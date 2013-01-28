@@ -96,6 +96,7 @@
 					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
+					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
 					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
 					   nil];
 		

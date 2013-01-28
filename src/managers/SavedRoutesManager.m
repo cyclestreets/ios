@@ -269,6 +269,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 }
 
+-(RouteVO*)updateRouteWithRoute:(RouteVO*)route{
+	
+	NSString *type=[self findRouteType:route];
+	int index=[self findIndexOfRouteByID:route.fileid];
+	
+	if(index!=NSNotFound){
+		if([type isEqualToString:SAVEDROUTE_FAVS]){
+			[favouritesdataProvider replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:index] withObjects:@[route]];
+			return [favouritesdataProvider objectAtIndex:index];
+		}else{
+			[recentsdataProvider replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:index] withObjects:@[route]];
+			return [recentsdataProvider objectAtIndex:index];
+		}
+	}else{
+		BetterLog(@"[ERROR] Unable to find route to update");
+	}
+	return nil;
+}
+
 
 // called as result of RouteManager select Route
 - (void) selectRoute:(RouteVO *)route {
@@ -347,7 +366,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObject:routeid];
+		index=[routes indexOfObject:routeid];
 		
 		if(index!=NSNotFound){
 			break;
@@ -357,6 +376,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	return index;
 }
+
 
 
 -(BOOL)findRouteWithId:(NSString*)routeid andPlan:(NSString*)plan{
@@ -380,6 +400,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	return found;
 	
 }
+
+
 
 
 //

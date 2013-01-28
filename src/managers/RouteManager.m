@@ -106,6 +106,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	[self addRequestID:CALCULATEROUTE];
 	[self addRequestID:RETRIEVEROUTEBYID];
+	[self addRequestID:UPDATEROUTE];
 	
 	[super listNotificationInterests];
 	
@@ -131,6 +132,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 			}else if ([response.dataid isEqualToString:RETRIEVEROUTEBYID]) {
 				
 				[self loadRouteForRouteIdResponse:response.dataProvider];
+				
+			}else if ([response.dataid isEqualToString:UPDATEROUTE]) {
+				
+				[self updateRouteResponse:response.dataProvider];
 				
 			}
 			
@@ -459,6 +464,76 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     
 }
 
+
+#pragma mark Route Updating
+//
+/***********************************************
+ * @description			ROUTE UPDATING FOR LEGACY ROUTES
+ ***********************************************/
+//
+
+-(void)updateRoute:(RouteVO*)route{
+    
+    
+    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+                                     useDom,@"useDom",
+                                     route.plan,@"plan",
+                                     route.routeid,@"itinerary",
+                                     nil];
+    
+    NetRequest *request=[[NetRequest alloc]init];
+    request.dataid=UPDATEROUTE;
+    request.requestid=ZERO;
+    request.parameters=parameters;
+    request.revisonId=0;
+    request.source=USER;
+    
+    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	
+	// format routeid to decimal style ie xx,xxx,xxx
+	NSNumberFormatter *currencyformatter=[[NSNumberFormatter alloc]init];
+	[currencyformatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	NSString *result=[currencyformatter stringFromNumber:[NSNumber numberWithInt:[route.routeid intValue]]];
+	
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Updating route %@",result] andMessage:nil];
+}
+
+
+-(void)updateRouteResponse:(ValidationVO*)validation{
+    
+	BetterLog(@"");
+    
+    switch(validation.validationStatus){
+            
+        case ValidationCalculateRouteSuccess:
+        {
+            RouteVO *newroute=[validation.responseDict objectForKey:UPDATEROUTE];
+            
+			RouteVO *updatedRoute=[[SavedRoutesManager sharedInstance] updateRouteWithRoute:newroute];
+			[self saveRoute:updatedRoute ];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATEROUTERESPONSE object:updatedRoute];
+            
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:nil andMessage:nil];
+		}
+            break;
+            
+            
+        case ValidationCalculateRouteFailed:
+            
+            [self queryFailure:nil message:@"Unable to find a route with this number."];
+            
+			break;
+            
+            
+    }
+    
+    
+}
+
+
+#pragma mark O6 Routing
 
 //
 /***********************************************

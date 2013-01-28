@@ -187,6 +187,13 @@
 }
 
 
+-(BOOL)hasElevationData{
+	
+	SegmentVO *segment=segments[0];
+	return segment.elevations!=nil;
+	
+}
+
 
 
 //

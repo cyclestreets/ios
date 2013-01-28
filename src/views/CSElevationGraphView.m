@@ -15,10 +15,24 @@
 #import "ExpandedUILabel.h"
 #import "SegmentVO.h"
 #import "BUCalloutView.h"
+#import "ButtonUtilities.h"
+#import "LayoutBox.h"
+#import "RouteManager.h"
+
+enum  {
+	CSElevationUIStateActive, 
+	CSElevationUIStateInActive
+};
+typedef int CSElevationUIState;
 
 
 #define graphHeight 80
 @interface CSElevationGraphView()
+
+@property(nonatomic,strong)  LayoutBox					*inactiveView;
+@property(nonatomic,strong)  UIView						*activeView;
+@property(nonatomic,assign)  CSElevationUIState			uiState;
+
 
 @property(nonatomic,strong)  CSGraphView				*graphView;
 @property(nonatomic,strong)  CAShapeLayer				*graphMaskLayer;
@@ -48,6 +62,13 @@
 
 -(void)initialise{
 	
+	
+	
+	// active UI
+	
+	self.activeView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.height)];
+	[self addSubview:_activeView];
+	
 	self.yAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 15)];
 	_yAxisLabel.textColor=[UIColor whiteColor];
 	_yAxisLabel.font=[UIFont systemFontOfSize:13];
@@ -57,7 +78,7 @@
 	_yAxisLabel.insetValue=3;
 	_yAxisLabel.backgroundColor=UIColorFromRGB(0xF76117);
 	_yAxisLabel.text=@"m";
-	[self addSubview:_yAxisLabel];
+	[_activeView addSubview:_yAxisLabel];
 	
 	self.xAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(20, graphHeight+25, 25, 15)];
 	_xAxisLabel.textColor=[UIColor whiteColor];
@@ -68,10 +89,9 @@
 	_xAxisLabel.layer.cornerRadius=4;
 	_xAxisLabel.backgroundColor=UIColorFromRGB(0xF76117);
 	_xAxisLabel.text=@"km";
-	[self addSubview:_xAxisLabel];
+	[_activeView addSubview:_xAxisLabel];
 	
 	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUNoneAlignMode];
-	
 	
 	
 	self.graphView=[[CSGraphView alloc] initWithFrame:CGRectMake(0, 20, UIWIDTH, graphHeight)];
@@ -82,7 +102,7 @@
 	[_graphMaskLayer setFrame:CGRectMake(0, 0, UIWIDTH, graphHeight)];
 	_graphView.layer.mask = _graphMaskLayer;
 	
-	[self addSubview:_graphView];
+	[_activeView addSubview:_graphView];
 	
 	
 	self.calloutView=[[BUCalloutView alloc]initWithFrame:CGRectMake(20, 0, 80, 30)];
@@ -92,7 +112,7 @@
 	_calloutView.maxX=_graphView.width;
 	_calloutView.visible=NO;
 	[_calloutView updateTitleLabel:@"0"];
-	[self addSubview:_calloutView];
+	[_activeView addSubview:_calloutView];
 	
 	
 	ExpandedUILabel *infoLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, self.height, UIWIDTH, 15)];
@@ -101,9 +121,30 @@
 	infoLabel.multiline=YES;
 	infoLabel.font=[UIFont systemFontOfSize:12];
 	infoLabel.text=@"CycleStreets routes automatically avoid going up hills or inclines where a reasonable alternative exists.";
-	[self addSubview:infoLabel];
+	[_activeView addSubview:infoLabel];
 	
 	[ViewUtilities alignView:infoLabel withView:self :BUNoneAlignMode :BUBottomAlignMode];
+	
+	
+	
+	
+	// inactive UI 
+	
+	self.inactiveView=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
+	_inactiveView.layoutMode=BUVerticalLayoutMode;
+	_inactiveView.itemPadding=10;
+	ExpandedUILabel *inactiveLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
+	inactiveLabel.fixedWidth=YES;
+	inactiveLabel.textColor=[UIColor darkGrayColor];
+	inactiveLabel.multiline=YES;
+	inactiveLabel.font=[UIFont systemFontOfSize:14];
+	inactiveLabel.text=@"There is no elevation data currently in this route, please press Update to get this data from the server.";
+	[_inactiveView addSubview:inactiveLabel];
+	[self addSubview:_inactiveView];
+	
+	UIButton *button=[ButtonUtilities UIButtonWithFixedWidth:200 height:30 type:@"orange" text:@"Update" minFont:15];
+	[button addTarget:self action:@selector(updateRoute:) forControlEvents:UIControlEventTouchUpInside];
+	[_inactiveView addSubview:button];
 
 }
 
@@ -195,8 +236,38 @@
 }
 
 
+// toggle active/inactive view
+// inactive view contains ui for updating route data to include elevation
+-(void)updateUIState:(CSElevationUIState)state{
+	
+	self.uiState=state;
+		
+	switch (_uiState) {
+		case CSElevationUIStateActive:
+			_inactiveView.visible=NO;
+			_activeView.visible=YES;
+		break;
+		case CSElevationUIStateInActive:
+			_inactiveView.visible=YES;
+			_activeView.visible=NO;
+		break;
+	}
+	
+	
+}
+
 
 -(void)update{
+	
+	
+	if(_dataProvider.hasElevationData==NO){
+		[self updateUIState:CSElevationUIStateInActive];
+		return;
+	}else{
+		[self updateUIState:CSElevationUIStateActive];
+	}
+	
+	
 	
 	if(_elevationArray==nil)
 		self.elevationArray=[NSMutableArray array];
@@ -284,6 +355,14 @@
 }
 
 
+
+-(IBAction)updateRoute:(id)sender{
+	
+	BetterLog(@"");
+	
+	[[RouteManager sharedInstance] updateRoute:_dataProvider];
+	
+}
 
 
 @end

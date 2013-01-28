@@ -79,6 +79,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self initialise];
     
     [notifications addObject:CSROUTESELECTED];
+	[notifications addObject:UPDATEROUTERESPONSE];
 	
 	[super listNotificationInterests];
 	
@@ -90,6 +91,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
     if([notification.name isEqualToString:CSROUTESELECTED]){
         [self selectedRouteUpdated];
+    }
+	
+	if([notification.name isEqualToString:UPDATEROUTERESPONSE]){
+        [self routeUpdatedWithRoute:notification.object];
     }
 	
 }
@@ -110,6 +115,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     }
 }
 
+-(void)routeUpdatedWithRoute:(RouteVO*)newroute{
+    
+    if([newroute.fileid isEqualToString:self.route.fileid]==YES){
+        self.route=newroute;
+        [self createNonPersistentUI];
+    }
+}
 
 //
 /***********************************************
@@ -146,9 +158,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_headerContainer.layoutMode=BUVerticalLayoutMode;
 	[_headerContainer initFromNIB];
 	_readoutContainer.layoutMode=BUVerticalLayoutMode;
-	_readoutContainer.paddingLeft=20;
 	[_readoutContainer initFromNIB];
-	
 	
 	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 170)];
 	_elevationView.delegate=self;
