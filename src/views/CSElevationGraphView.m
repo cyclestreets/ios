@@ -273,22 +273,23 @@ typedef int CSElevationUIState;
 		self.elevationArray=[NSMutableArray array];
 	[_elevationArray removeAllObjects];
 	
-	
 	[_graphView removeAllSubViews];
 	
 	UIBezierPath *path = [UIBezierPath bezierPath];
 	[path moveToPoint:CGPointMake(0, _graphView.height)];
 	
-	// temp
-	int maxelevation=[_dataProvider maxElevation]; // max elevation for all segemnts
+	// 
+	int maxelevation=[_dataProvider maxElevation]; 
 	int index=0;
 	int xpos=0;
 	float currentDistance=0;
+	//
 	
 	
 	_yAxisLabel.text=[NSString stringWithFormat:@"%i m",maxelevation];
 	_xAxisLabel.text=_dataProvider.lengthString;
 	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUNoneAlignMode];
+	
 	
 	// startpoint
 	SegmentVO *segment=_dataProvider.segments[0];
