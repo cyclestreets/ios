@@ -197,7 +197,7 @@
 	if(editingStyle==UITableViewCellEditingStyleDelete){
 		[_dataProvider removeObjectAtIndex:indexPath.row];
 		[delegate performSelector:@selector(wayPointwasDeleted)];
-		[self.tableView reloadData];
+		[_tableView reloadData];
 	}
 	
 }

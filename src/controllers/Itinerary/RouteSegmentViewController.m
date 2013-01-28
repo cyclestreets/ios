@@ -167,6 +167,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
+-(void)viewWillDisappear:(BOOL)animated{
+	
+	if (_doingLocation) {
+		[self stopDoingLocation];
+	}
+	
+	[super viewWillDisappear:animated];
+}
 
 
 
@@ -384,6 +392,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // all the things that need fixed if we have asked (or been forced) to stop doing location.
 - (void)stopDoingLocation {
+	
+	BetterLog(@"");
+	
 	_doingLocation = NO;
 	_locationButton.style = UIBarButtonItemStyleBordered;
 	[_locationManager stopUpdatingLocation];
@@ -428,6 +439,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	didUpdateToLocation:(CLLocation *)newLocation
 		   fromLocation:(CLLocation *)oldLocation
 {
+	
+	BetterLog(@"");
+	
+	
 	if (!self.markerLocation) {
 		//first location, construct the marker
 		self.markerLocation = [Markers markerWaypoint];
@@ -436,6 +451,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[_mapView markerManager] moveMarker:self.markerLocation AtLatLon: newLocation.coordinate];
 	
 	self.lastLocation = newLocation;
+	
+	BetterLog(@"ll=%@",_lastLocation);
 	
 	// zooms map to show bounding box for location & segment point
 	[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];

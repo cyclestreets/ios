@@ -25,7 +25,7 @@
     CGFloat locations[2] = { 0.0, 1.0 };
 	
     //Two colour components, the start and end colour both set to opaque.
-    CGFloat components[8] = { startRed, startGreen, startBlue, 1.0, endRed, endGreen, endBlue, 1.0 };
+    CGFloat components[8] = { startRed, startGreen, startBlue, startAlpha, endRed, endGreen, endBlue, endAlpha };
 	
     rgbColorspace = CGColorSpaceCreateDeviceRGB();
     glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components, locations, numLocations);
@@ -53,7 +53,7 @@
 			{
 				// draw a gradient from top to middle, then reverse the colours and draw from middle to bottom.
 				CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
-				CGFloat components2[8] = { endRed, endGreen, endBlue, 1.0, startRed, startGreen, startBlue, 1.0 };
+				CGFloat components2[8] = { endRed, endGreen, endBlue, endAlpha, startRed, startGreen, startBlue, startAlpha };
 				CGGradientRelease(glossGradient);
 				glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components2, locations, numLocations);
 				CGContextDrawLinearGradient(currentContext, glossGradient, midCenter, bottomCenter, 0);
@@ -74,7 +74,7 @@
 			{
 				// draw a gradient from top to middle, then reverse the colours and draw from middle to bottom.
 				CGContextDrawLinearGradient(currentContext, glossGradient, topCenter, midCenter, 0);
-				CGFloat components2[8] = { endRed, endGreen, endBlue, 1.0, startRed, startGreen, startBlue, 1.0 };
+				CGFloat components2[8] = { endRed, endGreen, endBlue, endAlpha, startRed, startGreen, startBlue, startAlpha };
 				CGGradientRelease(glossGradient);
 				glossGradient = CGGradientCreateWithColorComponents(rgbColorspace, components2, locations, numLocations);
 				CGContextDrawLinearGradient(currentContext, glossGradient, midCenter, bottomCenter, 0);
@@ -106,8 +106,12 @@
 }
 
 // Set colours as CGColorRefs.
-- (void) setColoursWithCGColors:(CGColorRef)color1:(CGColorRef)color2
-{
+- (void) setColoursWithCGColors:(CGColorRef)color1:(CGColorRef)color2{
+	
+	startAlpha=CGColorGetAlpha(color1);
+	endAlpha=CGColorGetAlpha(color2);
+	
+	
 	const CGFloat *startComponents = CGColorGetComponents(color1);
 	const CGFloat *endComponents = CGColorGetComponents(color2);
 	

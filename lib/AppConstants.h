@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define ENABLEDEBUGTRACE 0
-
+#define ENABLEOS6ACTIVITYMODE 0
 
 enum  {
 	
@@ -74,6 +74,7 @@ extern NSString *const POILISTINGRESPONSE;
 extern NSString *const POICATEGORYLOCATIONRESPONSE;
 extern NSString *const SAVEDROUTEUPDATE;
 extern NSString *const MAPSTYLECHANGED;
+extern NSString *const USERACCOUNTLOGINSUCCESS;
 
 extern NSString *const GPSLOCATIONUPDATE;
 extern NSString *const GPSLOCATIONFAILED;
@@ -97,6 +98,9 @@ extern NSString *const KM;
 
 extern NSString *const SAVEDROUTE_FAVS;
 extern NSString *const SAVEDROUTE_RECENTS;
+
+extern NSString *const CYCLESTREETSURLSCHEME;
+
  
 
 @interface AppConstants : NSObject {

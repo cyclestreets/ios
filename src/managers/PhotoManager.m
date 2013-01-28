@@ -87,12 +87,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 		
 	}
 	
-	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
+	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED]){
 		[[HudManager sharedInstance] removeHUD];
 		
 		if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
+			
+		}else if([dataid isEqualToString:UPLOADUSERPHOTO]){
+			
+			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,EMPTYSTRING,MESSAGE, nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
 		}
 	}
 	
@@ -135,7 +142,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                      @"300",@"thumbnailsize",
                                      [NSNumber numberWithInt:limit],@"limit",
                                       @"1",@"suppressplaceholders",
-                                     @"1",@"minimaldata", 
+                                     @"1",@"minimaldata",
+									 [self uploadPhotoId],@"selectedid",
                                      nil];
     
     NetRequest *request=[[NetRequest alloc]init];
@@ -286,6 +294,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 }
 
+
+
+//
+/***********************************************
+ * @description			UTILITY
+ ***********************************************/
+//
+
+
+-(NSString*)uploadPhotoId{
+	
+	if(uploadPhoto==nil)
+		return ZERO;
+	
+	return uploadPhoto.uploadedPhotoId;
+}
 
 
 -(BOOL)isUserPhoto:(PhotoMapVO*)photo{

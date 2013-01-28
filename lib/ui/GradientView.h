@@ -23,6 +23,11 @@ int typedef BUGradiantDirection;
     float endGreen;
     float endBlue;
 	
+	float startAlpha;
+	float endAlpha;
+	CGColorRef start;
+	CGColorRef end;
+	
     BOOL mirrored;
 	
 	BUGradiantDirection		direction;

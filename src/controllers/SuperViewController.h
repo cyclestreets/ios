@@ -14,6 +14,7 @@
 @protocol SuperViewControllerDelegate <NSObject> 
 
 @optional
+
 -(void)doNavigationPush:(NSString*)className;
 -(void)doNavigationPush:(NSString*)className withDataProvider:(id)data;
 -(void)doNavigationPush:(NSString*)className withDataProvider:(id)data andIndex:(int)index;

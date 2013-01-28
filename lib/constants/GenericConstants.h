@@ -165,6 +165,7 @@ extern int const SCREENWIDTH;
 extern int const IPADSCREENWIDTH;
 extern int const IPADMASTERVIEWWIDTH;
 extern int const SCREENHEIGHT;
+extern int const FULLSCREENHEIGHT;
 extern int const SCREENHEIGHTWITHCONTROLUI;
 extern int const SCREENHEIGHTWITHMODALNAV;
 extern int const SCREENHEIGHTWITHCONTROLANDHEADERUI;

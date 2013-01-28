@@ -82,6 +82,9 @@ static int BIG_SIZE = 300;
 }
 
 
+-(NSString*)csImageUrlString{
+	return [NSString stringWithFormat:@"http://cycle.st/p%@",self.csid];
+}
 
 
 @end

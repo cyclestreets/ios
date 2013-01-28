@@ -1,9 +1,8 @@
 //
 //  BUIconButton.m
-//  RacingUK
 //
 //  Created by Neil Edwards on 17/11/2011.
-//  Copyright (c) 2011 Chroma. All rights reserved.
+//  Copyright (c) 2011 buffer. All rights reserved.
 //
 
 #import "BUIconButton.h"
@@ -70,7 +69,7 @@
 		label.font=[UIFont boldSystemFontOfSize:12];
 	}
 	
-	if(textColor!=nil){
+	if(textColor==nil){
 		label.textColor=[UIColor whiteColor];
 	}else{
 		label.textColor=[[StyleManager sharedInstance] colorForType:textColor];
