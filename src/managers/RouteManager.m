@@ -867,6 +867,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 }
 
+- (void)removeRouteByFileID:(NSString*)fileid{
+	
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", fileid]];
+	
+	BOOL fileexists = [fileManager fileExistsAtPath:routeFile];
+	
+	if(fileexists==YES){
+		
+		NSError *error=nil;
+		[fileManager removeItemAtPath:routeFile error:&error];
+	}
+	
+}
+
 
 -(BOOL)createRoutesDir{
 	

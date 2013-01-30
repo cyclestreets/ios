@@ -28,6 +28,8 @@
 -(void)promoteRouteToTopOfDataProvider:(RouteVO*)route;
 -(NSString*)findRouteType:(RouteVO*)route;
 -(int)findIndexOfRouteByID:(NSString*)routeid;
+-(void)removeRouteByFileID:(NSString*)fileid;
+-(int)findIndexOfRoute:(RouteVO*)findroute;
 
 +(NSString*)returnRouteTypeInvert:(NSString*)type;
 
@@ -266,13 +268,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 	}
 	
+}
+
+
+-(void)removeRouteByFileID:(NSString*)fileid{
+	
+	for(NSString *key in routeidStore){
+		
+		NSMutableArray *routes=[routeidStore objectForKey:key];
+		
+		int index=[routes indexOfObjectIdenticalTo:fileid];
+		
+		if(index!=NSNotFound){
+			[routes removeObjectAtIndex:index];
+		}
+		
+	}
+	
+	[self saveIndicies];
 	
 }
+
+
 
 -(void)updateRouteWithRoute:(RouteVO*)route{
 	
 	NSString *type=[self findRouteType:route];
-	int index=[self findIndexOfRouteByID:route.fileid];
+	int index=[self findIndexOfRoute:route];
 	
 	if(index!=NSNotFound){
 		if([type isEqualToString:SAVEDROUTE_FAVS]){
@@ -376,6 +398,44 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	return index;
 }
 
+-(int)findIndexOfRoute:(RouteVO*)findroute{
+	
+	int index=NSNotFound;
+	
+	index=[recentsdataProvider indexOfObjectPassingTest:
+			^(RouteVO *obj, NSUInteger idx, BOOL *stop) {
+				BOOL res;
+				
+				if ([findroute.fileid isEqualToString:obj.fileid]) {
+					res = YES;
+					*stop = YES;
+				} else {
+					res = NO;
+				}
+				return res;
+			}];
+	
+	if(index==NSNotFound){
+		
+		index=[favouritesdataProvider indexOfObjectPassingTest:
+			   ^(RouteVO *obj, NSUInteger idx, BOOL *stop) {
+				   BOOL res;
+				   
+				   if ([findroute.fileid isEqualToString:obj.fileid]) {
+					   res = YES;
+					   *stop = YES;
+				   } else {
+					   res = NO;
+				   }
+				   return res;
+			   }];
+
+	}
+	
+	
+	return index;
+}
+
 
 
 -(BOOL)findRouteWithId:(NSString*)routeid andPlan:(NSString*)plan{
@@ -427,6 +487,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	for (NSString *routeid in arr){
 		[[RouteManager sharedInstance] legacyRemoveRouteFile:routeid];
+		[self removeRouteByFileID:routeid];
 	}
 	
 }
