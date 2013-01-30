@@ -269,7 +269,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 }
 
--(RouteVO*)updateRouteWithRoute:(RouteVO*)route{
+-(void)updateRouteWithRoute:(RouteVO*)route{
 	
 	NSString *type=[self findRouteType:route];
 	int index=[self findIndexOfRouteByID:route.fileid];
@@ -277,15 +277,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	if(index!=NSNotFound){
 		if([type isEqualToString:SAVEDROUTE_FAVS]){
 			[favouritesdataProvider replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:index] withObjects:@[route]];
-			return [favouritesdataProvider objectAtIndex:index];
 		}else{
 			[recentsdataProvider replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:index] withObjects:@[route]];
-			return [recentsdataProvider objectAtIndex:index];
 		}
+		[self saveRouteChangesForRoute:route];
 	}else{
 		BetterLog(@"[ERROR] Unable to find route to update");
 	}
-	return nil;
+	
 }
 
 
@@ -310,7 +309,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	[[RouteManager sharedInstance] saveRoute:route];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:SAVEDROUTEUPDATE object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:SAVEDROUTEUPDATE object:route];
 	
 }
 

@@ -79,7 +79,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self initialise];
     
     [notifications addObject:CSROUTESELECTED];
-	[notifications addObject:UPDATEROUTERESPONSE];
+	[notifications addObject:SAVEDROUTEUPDATE];
 	
 	[super listNotificationInterests];
 	
@@ -93,7 +93,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
         [self selectedRouteUpdated];
     }
 	
-	if([notification.name isEqualToString:UPDATEROUTERESPONSE]){
+	if([notification.name isEqualToString:SAVEDROUTEUPDATE]){
         [self routeUpdatedWithRoute:notification.object];
     }
 	

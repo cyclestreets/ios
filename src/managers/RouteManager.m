@@ -55,7 +55,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
 @end
 
-static NSString *layer = @"6";
+
 static NSString *useDom = @"1";
 
 
@@ -510,10 +510,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
         {
             RouteVO *newroute=[validation.responseDict objectForKey:UPDATEROUTE];
             
-			RouteVO *updatedRoute=[[SavedRoutesManager sharedInstance] updateRouteWithRoute:newroute];
-			[self saveRoute:updatedRoute ];
+			[[SavedRoutesManager sharedInstance] updateRouteWithRoute:newroute];
+			//[self saveRoute:updatedRoute ];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:UPDATEROUTERESPONSE object:updatedRoute];
+            //[[NSNotificationCenter defaultCenter] postNotificationName:UPDATEROUTERESPONSE object:updatedRoute];
             
             [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:nil andMessage:nil];
 		}

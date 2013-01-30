@@ -22,7 +22,7 @@
 
 
 
-+(float) calculateHeightOfTextFromWidth:(NSString*) text: (UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode
++(float) calculateHeightOfTextFromWidth:(NSString*)text :(UIFont*)withFont :(float)width :(UILineBreakMode)lineBreakMode
 {
 	CGSize suggestedSize = [text sizeWithFont:withFont constrainedToSize:CGSizeMake(width, FLT_MAX) lineBreakMode:lineBreakMode];
 	
@@ -30,7 +30,7 @@
 	return suggestedSize.height;
 }
 
-+(float) calculateHeightOfTextFromWidthWithLineCount:(UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode :(int)linecount
++(float) calculateHeightOfTextFromWidthWithLineCount:(UIFont*)withFont :(float)width :(UILineBreakMode)lineBreakMode :(int)linecount
 {
 	
 	NSMutableArray *strarr=[[NSMutableArray alloc]init];

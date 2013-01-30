@@ -10,7 +10,7 @@
 #import "FrameworkObject.h"
 #import "SynthesizeSingleton.h"
 #import "RouteVO.h"
-#import "Query.h"
+//#import "Query.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
@@ -36,8 +36,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 @property (nonatomic, strong) NSString		* activeRouteDir;
 @property (nonatomic, strong) MKDirectionsRequest		*mapRoutingRequest;
 
-- (void) runQuery:(Query *)query;
-- (void) runRouteIdQuery:(Query *)query;
+//- (void) runQuery:(Query *)query;
+//- (void) runRouteIdQuery:(Query *)query;
 - (void) selectRoute:(RouteVO *)route;
 
 //new
