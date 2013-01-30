@@ -290,7 +290,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
-
+//
+/***********************************************
+ * @description			Finds and replaces a route with same fileid
+ ***********************************************/
+//
 -(void)updateRouteWithRoute:(RouteVO*)route{
 	
 	NSString *type=[self findRouteType:route];
@@ -379,7 +383,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
--(int)findIndexOfRouteByID:(NSString*)routeid{ // will be route.fileid format
+-(int)findIndexOfRouteByID:(NSString*)fileid{ // will be route.fileid format
 	
 	int index=NSNotFound;
 	
@@ -387,7 +391,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[routeidStore objectForKey:key];
 		
-		index=[routes indexOfObject:routeid];
+		index=[routes indexOfObject:fileid];
 		
 		if(index!=NSNotFound){
 			break;
@@ -398,6 +402,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	return index;
 }
 
+
+//
+/***********************************************
+ * @description			Find the index of an exisitng route with the same fileid
+ ***********************************************/
+//
 -(int)findIndexOfRoute:(RouteVO*)findroute{
 	
 	int index=NSNotFound;
@@ -482,6 +492,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	//BetterLog(@"did save=%i",result);
 }
 
+-(NSMutableArray*)compactRouteIDStore{
+	
+	NSMutableArray *arr=[NSMutableArray array];
+	for(NSString *key in routeidStore){
+		[arr addObjectsFromArray:routeidStore[key]];
+	}
+	
+	return arr;
+}
+
 
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr{
 	
@@ -489,6 +509,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		[[RouteManager sharedInstance] legacyRemoveRouteFile:routeid];
 		[self removeRouteByFileID:routeid];
 	}
+	NSMutableArray *compactidstore=[self compactRouteIDStore];
+	for (int i=0;i<compactidstore.count;i++) {
+		[compactidstore replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"route_%@",compactidstore[i]]];
+	}
+	[[RouteManager sharedInstance] removeOrphanedRoutes:compactidstore];
 	
 }
 

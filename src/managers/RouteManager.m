@@ -853,25 +853,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 - (void)removeRouteFile:(RouteVO*)route{
 	
-	
-	NSFileManager* fileManager = [NSFileManager defaultManager];
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", route.fileid]];
-	
-	BOOL fileexists = [fileManager fileExistsAtPath:routeFile];
-	
-	if(fileexists==YES){
-		
-		NSError *error=nil;
-		[fileManager removeItemAtPath:routeFile error:&error];
-	}
+	[self removeRouteByFileName:[NSString stringWithFormat:@"route_%@",route.fileid]];
 	
 }
 
 - (void)removeRouteByFileID:(NSString*)fileid{
 	
+	[self removeRouteByFileName:[NSString stringWithFormat:@"route_%@",fileid]];
+	
+}
+
+- (void)removeRouteByFileName:(NSString*)filename{
+	
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", fileid]];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:filename];
 	
 	BOOL fileexists = [fileManager fileExistsAtPath:routeFile];
 	
@@ -904,8 +900,54 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		}
 	}
 	
+}
+
+-(void)removeOrphanedRoutes:(NSMutableArray*)savedRoutes{ // saved routes is full filename format
+	
+	if(savedRoutes.count==0)
+		return;
+	
+		 
+	// TODO: strip routeListing dwown to file name
+	// then walk savedroutes  find index of corresponding file and remove from routelisting master
+	// then remove files
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSError *error=nil;
+	NSURL *url = [[NSURL alloc] initFileURLWithPath:[self routesDirectory] isDirectory:YES ];
+	NSArray *properties = [NSArray arrayWithObjects: NSURLLocalizedNameKey, nil];
+	
+	NSMutableArray *routeListing = [[fileManager
+						  contentsOfDirectoryAtURL:url
+						  includingPropertiesForKeys:properties
+						  options:(NSDirectoryEnumerationSkipsPackageDescendants |
+								   NSDirectoryEnumerationSkipsHiddenFiles)
+						  error:&error] mutableCopy];
+	
+	if(error==nil && [routeListing count]>0){
+		
+		// convert nsurls to filenames
+		NSMutableArray *routefileNames=[NSMutableArray array];
+		for(int i=0;i<routeListing.count;i++){
+			[routefileNames addObject:[routeListing[i] lastPathComponent]];
+		}
+		
+		for(NSString *filename in savedRoutes){
+			int index=[routefileNames indexOfObject:filename];
+			if(index!=NSNotFound){
+				[routeListing removeObjectAtIndex:index];
+				[routefileNames removeObjectAtIndex:index];
+			}
+		}
+		
+		for (NSURL *fileurl in routeListing) {
+			[fileManager removeItemAtURL:fileurl error:nil];
+		}
+	}
 	
 }
+
+// 
 
 
 //

@@ -572,6 +572,7 @@
     }
 	
 	[[SavedRoutesManager sharedInstance] removeRoute:route fromDataProvider:dataType];
+	[[RouteManager sharedInstance]removeRoute:route];
 	
 }
 
