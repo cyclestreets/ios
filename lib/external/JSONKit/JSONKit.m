@@ -629,7 +629,10 @@ static JKArray *_JKArrayCreate(id *objects, NSUInteger count, BOOL mutableCollec
   NSCParameterAssert((objects != NULL) && (_JKArrayClass != NULL) && (_JKArrayInstanceSize > 0UL));
   JKArray *array = NULL;
   if(JK_EXPECT_T((array = (JKArray *)calloc(1UL, _JKArrayInstanceSize)) != NULL)) { // Directly allocate the JKArray instance via calloc.
-    array->isa      = (mutableCollection == NO) ? _JKArrayClass : _JKMutableArrayClass;
+	  
+	(mutableCollection == NO) ? object_setClass(array, _JKArrayClass) : object_setClass(array, _JKMutableArrayClass);
+	  
+    //array->isa      = (mutableCollection == NO) ? _JKArrayClass : _JKMutableArrayClass;
     if((array = [array init]) == NULL) { return(NULL); }
     array->capacity = count;
     array->count    = count;
@@ -939,7 +942,8 @@ static JKDictionary *_JKDictionaryCreate(id *keys, NSUInteger *keyHashes, id *ob
   NSCParameterAssert((keys != NULL) && (keyHashes != NULL) && (objects != NULL) && (_JKDictionaryClass != NULL) && (_JKDictionaryInstanceSize > 0UL));
   JKDictionary *dictionary = NULL;
   if(JK_EXPECT_T((dictionary = (JKDictionary *)calloc(1UL, _JKDictionaryInstanceSize)) != NULL)) { // Directly allocate the JKArray instance via calloc.
-    dictionary->isa      = (mutableCollection == NO) ? _JKDictionaryClass : _JKMutableDictionaryClass;
+	
+    (mutableCollection == NO) ? object_setClass(dictionary, _JKDictionaryClass) : object_setClass(dictionary, _JKMutableDictionaryClass);
     if((dictionary = [dictionary init]) == NULL) { return(NULL); }
     dictionary->capacity = _JKDictionaryCapacityForCount(count);
     dictionary->count    = 0UL;

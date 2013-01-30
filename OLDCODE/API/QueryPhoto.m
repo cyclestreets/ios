@@ -78,8 +78,8 @@ static NSString *thumbnailSize = @"300";
 	request = [[XMLRequest alloc] initWithURL:url
 									 delegate:(NSObject *)resultTarget
 										  tag:nil
-									onSuccess:(SEL)successMethod
-									onFailure:(SEL)failureMethod];
+									onSuccess:successMethod
+									onFailure:failureMethod];
 	request.elementsToParse = [PhotoMapListVO photoListXMLElementNames];
 	[request.request addValue:@"gzip" forHTTPHeaderField:@"Accepts-Encoding"];
 	[request start];
