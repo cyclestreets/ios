@@ -336,7 +336,7 @@ typedef int CSElevationUIState;
 			xpos=UIWIDTH;
 		}
 		
-		BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,ypos,xpos,[segment segmentDistance],xpercent);
+		//BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,ypos,xpos,[segment segmentDistance],xpercent);
 		
 		// debug only
 		
@@ -358,7 +358,7 @@ typedef int CSElevationUIState;
 	
 	[path addLineToPoint:CGPointMake(UIWIDTH, _graphView.height)];
 	
-	BetterLog(@"%@",_elevationArray);
+	//BetterLog(@"%@",_elevationArray);
 
 	 
 	self.graphPath=path;

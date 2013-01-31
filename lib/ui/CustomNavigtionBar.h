@@ -13,6 +13,7 @@
 #define	BUNavTitleReadoutType @"NavReadoutType"
 #define BUNavTitleIncrementalType @"BUNavTitleIncrementalType"
 #define	BUNavBackType @"NavbackType"
+#define	BUNavBackExistingType @"BUNavBackExistingType"
 #define BUNavBackStandardType @"BUNavBackStandardType"
 #define	BUNavRefreshType @"NavrefreshType"
 #define	BUNavActivityType @"NavactivityType"
@@ -23,7 +24,7 @@
 #define	BUNavAddButtonType @"BUNavAddButtonType"
 #define	BUNavUICustomType @"BUNavUICustomType"
 #define	BUNavNullType @"BUNavNullType"
-
+#define	BUNavUIKitIconType @"BUNavUIKitIconType"
 
 @protocol CustomNavigationBarDelegate <NSObject>
 

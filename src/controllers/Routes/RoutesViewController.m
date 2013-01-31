@@ -120,6 +120,7 @@
 
 -(void)createPersistentUI{
 	
+	
 	[self createNavigationBarUI];
 	
 	controlView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"controlbar"];

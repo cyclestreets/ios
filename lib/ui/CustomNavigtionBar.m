@@ -95,10 +95,12 @@
 	}else if ([leftItemType isEqualToString:BUNavBackStandardType]) {
 		
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+		button.adjustsImageWhenHighlighted=YES;
 		button.frame=CGRectMake(0, 0, 52, 30);
 		self.backButton=button;
 		[backButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavigationBar_backblank_lo"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateNormal];
-		[backButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavigationBar_backblank_hi"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
+		if([[StyleManager sharedInstance] imageForType:@"UINavigationBar_backblank_hi"] !=nil)
+			[backButton setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"UINavigationBar_backblank_hi"] stretchableImageWithLeftCapWidth:16 topCapHeight:0 ] forState:UIControlStateHighlighted];
 		
 		
 		[backButton setTitle:leftItemTitle forState:UIControlStateNormal];
@@ -138,6 +140,14 @@
 		leftButton.hidden=YES;
 		UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:leftButton];
 		[navigationItem setLeftBarButtonItem:barbutton animated:YES];
+		
+	}else if ([leftItemType isEqualToString:BUNavBackExistingType]){
+		
+		if(self.leftItemTitle!=nil){
+			
+			[navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:self.leftItemTitle style:UIBarButtonItemStylePlain target:nil action:nil]];
+			
+		}
 		
 	}
 }
@@ -325,6 +335,13 @@
 	}else if ([rightItemType isEqualToString:BUNavNoneType]){
 		
 		[navigationItem setRightBarButtonItem:nil animated:NO];
+		
+	}else if([rightItemType isEqualToString:BUNavUIKitIconType]){
+		
+		UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithImage:[[StyleManager sharedInstance] imageForType:rightButtonStyle]  style:UIBarButtonItemStyleBordered target:self action:@selector(doGenericEvent:)];
+		self.rightBarButton=barbutton;
+		[navigationItem setRightBarButtonItem:rightBarButton animated:NO];
+		
 		
 	}
 	

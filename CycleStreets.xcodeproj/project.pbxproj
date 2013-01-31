@@ -588,6 +588,10 @@
 		289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
+		289B126816BA756D00D25326 /* UIButtonBarAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126716BA756D00D25326 /* UIButtonBarAction.png */; };
+		289B126916BA756D00D25326 /* UIButtonBarAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126716BA756D00D25326 /* UIButtonBarAction.png */; };
+		289B126F16BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */; };
+		289B127016BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */; };
 		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
 		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
@@ -1133,6 +1137,8 @@
 		289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_tracks@2x.png"; sourceTree = "<group>"; };
 		289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_finish_wisp@2x.png"; sourceTree = "<group>"; };
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
+		289B126716BA756D00D25326 /* UIButtonBarAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButtonBarAction.png; path = ../../../../../../../Desktop/UIButtonBarAction.png; sourceTree = "<group>"; };
+		289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButtonBarAction@2x.png"; path = "../../../../../../../Desktop/UIButtonBarAction@2x.png"; sourceTree = "<group>"; };
 		289CAF8715F89A460036DE98 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
@@ -1824,6 +1830,7 @@
 				28187A8E14FCFF4C00A38A17 /* UIButton_red_hi.png */,
 				28187A8F14FCFF4C00A38A17 /* UIButton_red_lo.png */,
 				28187A9014FCFF4C00A38A17 /* UIButton_save_hi.png */,
+				289B126716BA756D00D25326 /* UIButtonBarAction.png */,
 				28187A9114FCFF4C00A38A17 /* UIButtonBarArrowLeft.png */,
 				28187A9214FCFF4C00A38A17 /* UIButtonBarArrowRight.png */,
 				28187A9314FCFF4C00A38A17 /* UIButtonBarCameraSmall.png */,
@@ -2584,6 +2591,7 @@
 				28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */,
 				28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */,
 				28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */,
+				289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */,
 				287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */,
 				287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */,
 				287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */,
@@ -3070,6 +3078,8 @@
 				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				28281FC616B6E12E006303C0 /* .gitignore in Resources */,
 				28F6DF9516B854A7006E5556 /* CSIcon_intermediate_wisp@2X.png in Resources */,
+				289B126816BA756D00D25326 /* UIButtonBarAction.png in Resources */,
+				289B126F16BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3273,6 +3283,8 @@
 				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				28281FC716B6E12E006303C0 /* .gitignore in Resources */,
 				28F6DF9616B854A7006E5556 /* CSIcon_intermediate_wisp@2X.png in Resources */,
+				289B126916BA756D00D25326 /* UIButtonBarAction.png in Resources */,
+				289B127016BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

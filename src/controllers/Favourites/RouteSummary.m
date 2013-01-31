@@ -225,17 +225,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)createNavigationBarUI{
 	
+	
 	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
 	self.navigation=nav;
 	navigation.delegate=self;
 	navigation.leftItemType=BUNavBackStandardType;
-    navigation.rightItemType=UIKitButtonType;
-	navigation.rightButtonTitle=@"Action";
+	navigation.leftItemTitle=@"Back";
+    navigation.rightItemType=BUNavUIKitIconType;
+	navigation.rightButtonStyle=@"UIButtonIcon_action";
 	navigation.titleType=BUNavTitleDefaultType;
 	navigation.titleString=@"Route";
     navigation.titleFontColor=[UIColor whiteColor];
 	navigation.navigationItem=self.navigationItem;
 	[navigation createNavigationUI];
+	
 	
 }
 
