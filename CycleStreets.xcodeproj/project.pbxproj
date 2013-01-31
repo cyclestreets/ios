@@ -592,6 +592,8 @@
 		289B126916BA756D00D25326 /* UIButtonBarAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126716BA756D00D25326 /* UIButtonBarAction.png */; };
 		289B126F16BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */; };
 		289B127016BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */; };
+		289B127416BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B127316BA85DB00D25326 /* UIBarButton_Back@2x.png */; };
+		289B127516BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B127316BA85DB00D25326 /* UIBarButton_Back@2x.png */; };
 		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
 		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
@@ -1139,6 +1141,7 @@
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
 		289B126716BA756D00D25326 /* UIButtonBarAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButtonBarAction.png; path = ../../../../../../../Desktop/UIButtonBarAction.png; sourceTree = "<group>"; };
 		289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButtonBarAction@2x.png"; path = "../../../../../../../Desktop/UIButtonBarAction@2x.png"; sourceTree = "<group>"; };
+		289B127316BA85DB00D25326 /* UIBarButton_Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButton_Back@2x.png"; sourceTree = "<group>"; };
 		289CAF8715F89A460036DE98 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
@@ -2567,6 +2570,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				289B127316BA85DB00D25326 /* UIBarButton_Back@2x.png */,
 				289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */,
 				2801301315E636070092D509 /* Icon_currentroutecell@2x.png */,
 				28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */,
@@ -3080,6 +3084,7 @@
 				28F6DF9516B854A7006E5556 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				289B126816BA756D00D25326 /* UIButtonBarAction.png in Resources */,
 				289B126F16BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */,
+				289B127416BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3285,6 +3290,7 @@
 				28F6DF9616B854A7006E5556 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				289B126916BA756D00D25326 /* UIButtonBarAction.png in Resources */,
 				289B127016BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */,
+				289B127516BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
