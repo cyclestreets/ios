@@ -26,7 +26,11 @@ enum  {
 typedef int CSElevationUIState;
 
 
+
+
 #define graphHeight 80
+
+
 @interface CSElevationGraphView()
 
 @property(nonatomic,strong)  LayoutBox					*inactiveView;
@@ -45,6 +49,9 @@ typedef int CSElevationUIState;
 @property(nonatomic,strong)  BUCalloutView				*calloutView;
 
 @property(nonatomic,strong)  NSMutableArray				*elevationArray;
+
+
+
 
 
 @end
@@ -157,7 +164,9 @@ typedef int CSElevationUIState;
 		_calloutView.visible=YES;
 		_calloutView.alpha=0;
 		
-		[self.delegate touchInGraph:YES];
+		self.touchedBlock(YES);
+		
+		//[self.delegate touchInGraph:YES];
 		
 		[UIView animateWithDuration:0.3 animations:^{
 			_calloutView.alpha=1;
@@ -231,7 +240,9 @@ typedef int CSElevationUIState;
 		
 	}
 	
-	[self.delegate touchInGraph:NO];
+	self.touchedBlock(NO);
+	
+	//[self.delegate touchInGraph:NO];
 	
 }
 

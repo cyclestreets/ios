@@ -13,14 +13,7 @@
 
 
 
-
-@protocol CSElevationGraphViewDelegate <NSObject>
-
-@optional
--(void)touchInGraph:(BOOL)touched;
-
-@end
-
+typedef void (^didTouchBlock)(BOOL touched);
 
 @interface CSElevationGraphView : UIView<CSGraphViewDelegate>
 
@@ -28,7 +21,7 @@
 @property(nonatomic,strong)  UIColor							*lineColor;
 @property(nonatomic,strong)  UIColor							*fillColor;
 
-@property (nonatomic, unsafe_unretained) id<CSElevationGraphViewDelegate>		 delegate;
+@property(nonatomic,copy)	didTouchBlock						touchedBlock;
 
 
 -(void)update;
