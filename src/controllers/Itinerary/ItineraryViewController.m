@@ -20,6 +20,8 @@
 #import "LayoutBox.h"
 #import "ViewUtilities.h"
 #import "GradientView.h"
+#import "RouteDetailCellView.h"
+#import "RouteSummary.h"
 
 @implementation ItineraryViewController
 @synthesize route;
@@ -33,7 +35,7 @@
 @synthesize readoutContainer;
 @synthesize tableView;
 @synthesize rowHeightsArray;
-
+@synthesize routeSummaryViewcontroller;
 
 //
 /***********************************************
@@ -102,6 +104,8 @@
 
 -(void)createPersistentUI{
 	
+	/*
+	
 	readoutContainer.paddingTop=5;
 	readoutContainer.itemPadding=4;
 	readoutContainer.layoutMode=BUVerticalLayoutMode;
@@ -138,6 +142,8 @@
 	 
 	
 	[readoutContainer addSubViewsFromArray:[NSArray arrayWithObjects:readoutLineOne,readoutLineTwo,readoutLineThree,readoutlabel, nil]];
+	 
+	 */
 	
 	[self createNavigationBarUI];
 }
@@ -212,35 +218,74 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   return [route numSegments];
+   return [route numSegments]+1;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+	int rowindex=[indexPath row];
+	
+	if(rowindex==0){
+		
+		RouteDetailCellView *cell = (RouteDetailCellView *)[RouteDetailCellView cellForTableView:tv fromNib:[RouteDetailCellView nib]];
+		cell.routeLabel.text=[route routeid];
+		[cell populate];
+		return cell;
+		
+		
+	}else{
+		
+		rowindex--;
     
-    ItineraryCellView *cell = (ItineraryCellView *)[ItineraryCellView cellForTableView:tv fromNib:[ItineraryCellView nib]];
-	
-	SegmentVO *segment = [route segmentAtIndex:indexPath.row];
-	cell.dataProvider=segment;
-	[cell populate];
-	
-    return cell;
+		ItineraryCellView *cell = (ItineraryCellView *)[ItineraryCellView cellForTableView:tv fromNib:[ItineraryCellView nib]];
+		
+		SegmentVO *segment = [route segmentAtIndex:rowindex];
+		cell.dataProvider=segment;
+		[cell populate];
+		
+		return cell;
+		
+	}
 }
 
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	if(routeSegmentViewcontroller==nil){
-		self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] initWithNibName:@"RouteSegmentView" bundle:nil];
-		routeSegmentViewcontroller.hidesBottomBarWhenPushed=YES;
+	int rowindex=[indexPath row];
+	
+	
+	if(rowindex==0) {
+		
+		if (routeSummaryViewcontroller == nil) {
+            self.routeSummaryViewcontroller = [[RouteSummary alloc]init];
+        }
+        routeSummaryViewcontroller.route = route;
+		routeSummaryViewcontroller.dataType=0;
+        [self showUniqueViewController:routeSummaryViewcontroller];
+		
+		
+		
+	}else{
+		
+		rowindex--;
+		
+		if(routeSegmentViewcontroller==nil){
+			self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] initWithNibName:@"RouteSegmentView" bundle:nil];
+			routeSegmentViewcontroller.hidesBottomBarWhenPushed=YES;
+		}
+		
+		[routeSegmentViewcontroller setRoute:route];
+		routeSegmentViewcontroller.index=rowindex;
+		
+		[self.navigationController pushViewController:routeSegmentViewcontroller animated:YES];
+		
+		
 	}
 	
-	[routeSegmentViewcontroller setRoute:route];
-	routeSegmentViewcontroller.index=[indexPath row];
 	
-	[self.navigationController pushViewController:routeSegmentViewcontroller animated:YES];
 
 }
 
@@ -348,9 +393,9 @@
 		
 		[rowHeightsArray addObject:[ItineraryCellView heightForCellWithDataProvider:segment]];
 		
-		
 	}
 	
+	[rowHeightsArray insertObject:@([RouteDetailCellView rowHeight]) atIndex:0];
 }
 
 

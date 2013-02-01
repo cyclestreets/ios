@@ -12,6 +12,7 @@
 #import "LayoutBox.h"
 #import "RouteSegmentViewController.h"
 #import "CopyLabel.h"
+#import "RouteSummary.h"
 @class RouteVO;
 
 @interface ItineraryViewController : SuperViewController <UITableViewDelegate,UITableViewDataSource>{
@@ -21,6 +22,7 @@
 	UITextView                      *headerText;
 	
 	RouteSegmentViewController							*routeSegmentViewcontroller;
+	RouteSummary										*routeSummaryViewcontroller;
 	
 	
 	IBOutlet	CopyLabel			*routeidLabel;
@@ -39,6 +41,8 @@
 @property (nonatomic, assign) NSInteger		 routeId;
 @property (nonatomic, strong) UITextView		* headerText;
 @property (nonatomic, strong) RouteSegmentViewController		* routeSegmentViewcontroller;
+@property (nonatomic, strong) RouteSummary						* routeSummaryViewcontroller;
+
 @property (nonatomic, strong) IBOutlet CopyLabel		* routeidLabel;
 @property (nonatomic, strong) MultiLabelLine		* readoutLineOne;
 @property (nonatomic, strong) MultiLabelLine		* readoutLineTwo;

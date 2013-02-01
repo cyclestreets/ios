@@ -588,12 +588,16 @@
 		289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
-		289B126816BA756D00D25326 /* UIButtonBarAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126716BA756D00D25326 /* UIButtonBarAction.png */; };
-		289B126916BA756D00D25326 /* UIButtonBarAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126716BA756D00D25326 /* UIButtonBarAction.png */; };
-		289B126F16BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */; };
-		289B127016BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */; };
 		289B127416BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B127316BA85DB00D25326 /* UIBarButton_Back@2x.png */; };
 		289B127516BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B127316BA85DB00D25326 /* UIBarButton_Back@2x.png */; };
+		289B127D16BBDF9700D25326 /* RouteDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289B127C16BBDF9700D25326 /* RouteDetailCell.xib */; };
+		289B127E16BBDF9700D25326 /* RouteDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289B127C16BBDF9700D25326 /* RouteDetailCell.xib */; };
+		289B128516BBE13E00D25326 /* RouteDetailCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289B128416BBE13E00D25326 /* RouteDetailCellView.m */; };
+		289B128616BBE13E00D25326 /* RouteDetailCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289B128416BBE13E00D25326 /* RouteDetailCellView.m */; };
+		289B128816BBE53000D25326 /* UIButtonBarAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B128716BBE53000D25326 /* UIButtonBarAction.png */; };
+		289B128916BBE53000D25326 /* UIButtonBarAction.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B128716BBE53000D25326 /* UIButtonBarAction.png */; };
+		289B128B16BBE53A00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B128A16BBE53A00D25326 /* UIButtonBarAction@2x.png */; };
+		289B128C16BBE53A00D25326 /* UIButtonBarAction@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B128A16BBE53A00D25326 /* UIButtonBarAction@2x.png */; };
 		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
 		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
@@ -1139,9 +1143,12 @@
 		289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_tracks@2x.png"; sourceTree = "<group>"; };
 		289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_finish_wisp@2x.png"; sourceTree = "<group>"; };
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
-		289B126716BA756D00D25326 /* UIButtonBarAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButtonBarAction.png; path = ../../../../../../../Desktop/UIButtonBarAction.png; sourceTree = "<group>"; };
-		289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UIButtonBarAction@2x.png"; path = "../../../../../../../Desktop/UIButtonBarAction@2x.png"; sourceTree = "<group>"; };
 		289B127316BA85DB00D25326 /* UIBarButton_Back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButton_Back@2x.png"; sourceTree = "<group>"; };
+		289B127C16BBDF9700D25326 /* RouteDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteDetailCell.xib; sourceTree = "<group>"; };
+		289B128316BBE13E00D25326 /* RouteDetailCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteDetailCellView.h; sourceTree = "<group>"; };
+		289B128416BBE13E00D25326 /* RouteDetailCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteDetailCellView.m; sourceTree = "<group>"; };
+		289B128716BBE53000D25326 /* UIButtonBarAction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarAction.png; sourceTree = "<group>"; };
+		289B128A16BBE53A00D25326 /* UIButtonBarAction@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarAction@2x.png"; sourceTree = "<group>"; };
 		289CAF8715F89A460036DE98 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
@@ -1693,6 +1700,7 @@
 				2858F2B01586161B0047283D /* MapLocationSearchCell.xib */,
 				28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */,
 				28373E2116481A0C00F5E356 /* WayPointCell.xib */,
+				289B127C16BBDF9700D25326 /* RouteDetailCell.xib */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -1832,8 +1840,8 @@
 				28187A8D14FCFF4C00A38A17 /* UIButton_orangesmall_lo.png */,
 				28187A8E14FCFF4C00A38A17 /* UIButton_red_hi.png */,
 				28187A8F14FCFF4C00A38A17 /* UIButton_red_lo.png */,
+				289B128716BBE53000D25326 /* UIButtonBarAction.png */,
 				28187A9014FCFF4C00A38A17 /* UIButton_save_hi.png */,
-				289B126716BA756D00D25326 /* UIButtonBarAction.png */,
 				28187A9114FCFF4C00A38A17 /* UIButtonBarArrowLeft.png */,
 				28187A9214FCFF4C00A38A17 /* UIButtonBarArrowRight.png */,
 				28187A9314FCFF4C00A38A17 /* UIButtonBarCameraSmall.png */,
@@ -2014,6 +2022,8 @@
 				28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */,
 				28373E2416481AFB00F5E356 /* WayPointCellView.h */,
 				28373E2516481AFB00F5E356 /* WayPointCellView.m */,
+				289B128316BBE13E00D25326 /* RouteDetailCellView.h */,
+				289B128416BBE13E00D25326 /* RouteDetailCellView.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -2595,7 +2605,7 @@
 				28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */,
 				28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */,
 				28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */,
-				289B126E16BA75EE00D25326 /* UIButtonBarAction@2x.png */,
+				289B128A16BBE53A00D25326 /* UIButtonBarAction@2x.png */,
 				287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */,
 				287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */,
 				287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */,
@@ -3082,9 +3092,10 @@
 				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				28281FC616B6E12E006303C0 /* .gitignore in Resources */,
 				28F6DF9516B854A7006E5556 /* CSIcon_intermediate_wisp@2X.png in Resources */,
-				289B126816BA756D00D25326 /* UIButtonBarAction.png in Resources */,
-				289B126F16BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */,
 				289B127416BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */,
+				289B127D16BBDF9700D25326 /* RouteDetailCell.xib in Resources */,
+				289B128816BBE53000D25326 /* UIButtonBarAction.png in Resources */,
+				289B128B16BBE53A00D25326 /* UIButtonBarAction@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3288,9 +3299,10 @@
 				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				28281FC716B6E12E006303C0 /* .gitignore in Resources */,
 				28F6DF9616B854A7006E5556 /* CSIcon_intermediate_wisp@2X.png in Resources */,
-				289B126916BA756D00D25326 /* UIButtonBarAction.png in Resources */,
-				289B127016BA75EE00D25326 /* UIButtonBarAction@2x.png in Resources */,
 				289B127516BA85DB00D25326 /* UIBarButton_Back@2x.png in Resources */,
+				289B127E16BBDF9700D25326 /* RouteDetailCell.xib in Resources */,
+				289B128916BBE53000D25326 /* UIButtonBarAction.png in Resources */,
+				289B128C16BBE53A00D25326 /* UIButtonBarAction@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3503,6 +3515,7 @@
 				28281FD016B6E1A6006303C0 /* BUCalloutView.m in Sources */,
 				28281FD416B6E1E2006303C0 /* BUIconButton.m in Sources */,
 				28E886DF16B92AAA0060B9DE /* QueryPhoto.m in Sources */,
+				289B128516BBE13E00D25326 /* RouteDetailCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3683,6 +3696,7 @@
 				28281FD116B6E1A6006303C0 /* BUCalloutView.m in Sources */,
 				28281FD516B6E1E2006303C0 /* BUIconButton.m in Sources */,
 				28E886E016B92AAA0060B9DE /* QueryPhoto.m in Sources */,
+				289B128616BBE13E00D25326 /* RouteDetailCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3873,7 +3887,7 @@
 			};
 			name = Release;
 		};
-		2834377F15DD5DC300B00FD5 /* Adhoc Distribution */ = {
+		2834377F15DD5DC300B00FD5 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3914,7 +3928,7 @@
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Adhoc Distribution";
+			name = Adhoc;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3927,7 +3941,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-licucore",
@@ -3950,7 +3964,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -3964,7 +3978,7 @@
 			};
 			name = Release;
 		};
-		E791ADC911518A0900A9B38F /* Adhoc Distribution */ = {
+		E791ADC911518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = armv7;
@@ -3974,7 +3988,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-licucore",
@@ -3986,9 +4000,9 @@
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
-			name = "Adhoc Distribution";
+			name = Adhoc;
 		};
-		E791ADCA11518A0900A9B38F /* Adhoc Distribution */ = {
+		E791ADCA11518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -4023,13 +4037,13 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "49A6FC34-2315-4A5C-8ACA-5BEA0470DCC0";
+				PROVISIONING_PROFILE = "DE5F58CC-40F9-43F2-A30C-AE41EA255579";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Adhoc Distribution";
+			name = Adhoc;
 		};
 /* End XCBuildConfiguration section */
 
@@ -4039,7 +4053,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
-				E791ADCA11518A0900A9B38F /* Adhoc Distribution */,
+				E791ADCA11518A0900A9B38F /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4049,7 +4063,7 @@
 			buildConfigurations = (
 				2834377D15DD5DC300B00FD5 /* Debug */,
 				2834377E15DD5DC300B00FD5 /* Release */,
-				2834377F15DD5DC300B00FD5 /* Adhoc Distribution */,
+				2834377F15DD5DC300B00FD5 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4059,7 +4073,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
-				E791ADC911518A0900A9B38F /* Adhoc Distribution */,
+				E791ADC911518A0900A9B38F /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

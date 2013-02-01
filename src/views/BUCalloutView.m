@@ -72,14 +72,12 @@
 	xpos=MAX(_minX, MIN((_maxX-self.width), xpos));
 	self.x=xpos;
 	
-	int arrowx=_minX;
+	int arrowx=self.width/2;
 	
 	if(point.x<(_minX+(self.width/2))){
 		arrowx=point.x;
 	}else if(point.x>(_maxX-(self.width/2))){
 		arrowx=self.width+(point.x-_maxX);
-	}else{
-		arrowx=self.width/2;
 	}
 	
 	arrowx=MAX(_minX,MIN(self.width,arrowx));

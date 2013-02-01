@@ -9,6 +9,7 @@
 #import "UserLocationManager.h"
 #import "DeviceUtilities.h"
 #import "GlobalUtilities.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface UserLocationManager(Private) 
 
@@ -64,7 +65,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		
 		didFindDeviceLocation=NO;
         isLocating=NO;
-		
 		
 		self.locationSubscribers=[NSMutableArray array];
 		
@@ -362,7 +362,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 -(void)UserLocationWasUpdated{
 	
-	BetterLog(@"");
+	CLSLog(@"bestEffortAtLocation=%@",bestEffortAtLocation);
 	
 	if(bestEffortAtLocation!=nil)
 		[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
@@ -378,7 +378,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 - (void)stopUpdatingLocationForSubscriber:(NSString *)subscriberId {
 	
 	BetterLog(@"");
-	
 	
 	if(subscriberId==SYSTEM){
 		
@@ -401,6 +400,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	}
 	
 }
+
+
+
 
 -(void)stopUpdatingLocation:(NSString *)subscriberId{
 	
