@@ -521,6 +521,8 @@
 		284608291649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
 		2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
+		284D303416D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 284D303316D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m */; };
+		284D303516D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 284D303316D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -1061,6 +1063,8 @@
 		284608261649388900CBF96A /* ImageUtilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtilties.h; sourceTree = "<group>"; };
 		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
 		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
+		284D303216D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+TRVSNavigationControllerTransition.h"; sourceTree = "<group>"; };
+		284D303316D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+TRVSNavigationControllerTransition.m"; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
 		28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HUD_icon_checkMark@2x.png"; sourceTree = "<group>"; };
 		28535DBB15E50FCD0092FC16 /* HUD_icon_exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_exclaim.png; sourceTree = "<group>"; };
@@ -2422,6 +2426,8 @@
 			isa = PBXGroup;
 			children = (
 				28ECCBDD1526316600284926 /* NSData+Base64.h */,
+				284D303216D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.h */,
+				284D303316D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m */,
 				28ECCBDE1526316600284926 /* NSData+Base64.m */,
 				28B4855C15262D6000E406E1 /* NSString-Utilities.h */,
 				28B4855D15262D6000E406E1 /* NSString-Utilities.m */,
@@ -3516,6 +3522,7 @@
 				28281FD416B6E1E2006303C0 /* BUIconButton.m in Sources */,
 				28E886DF16B92AAA0060B9DE /* QueryPhoto.m in Sources */,
 				289B128516BBE13E00D25326 /* RouteDetailCellView.m in Sources */,
+				284D303416D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3697,6 +3704,7 @@
 				28281FD516B6E1E2006303C0 /* BUIconButton.m in Sources */,
 				28E886E016B92AAA0060B9DE /* QueryPhoto.m in Sources */,
 				289B128616BBE13E00D25326 /* RouteDetailCellView.m in Sources */,
+				284D303516D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

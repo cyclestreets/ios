@@ -22,6 +22,7 @@
 #import "GradientView.h"
 #import "RouteDetailCellView.h"
 #import "RouteSummary.h"
+#import "UINavigationController+TRVSNavigationControllerTransition.h"
 
 @implementation ItineraryViewController
 @synthesize route;
@@ -96,6 +97,8 @@
 	
 	[self refreshUIFromDataProvider];
 	
+	self.navigationController.navigationBarHidden=YES;
+	
     [super viewDidLoad];
 	
 	[self createPersistentUI];
@@ -152,6 +155,8 @@
 -(void)viewWillAppear:(BOOL)animated{
 	
 	[super viewWillAppear:animated];
+	
+	self.navigationController.navigationBarHidden=YES;
 	
 	[self createNonPersistentUI];
 	
@@ -231,6 +236,7 @@
 		
 		RouteDetailCellView *cell = (RouteDetailCellView *)[RouteDetailCellView cellForTableView:tv fromNib:[RouteDetailCellView nib]];
 		cell.routeLabel.text=[route routeid];
+		cell.lengthLabel.text=route.lengthString;
 		[cell populate];
 		return cell;
 		
@@ -279,6 +285,7 @@
 		
 		[routeSegmentViewcontroller setRoute:route];
 		routeSegmentViewcontroller.index=rowindex;
+		
 		
 		[self.navigationController pushViewController:routeSegmentViewcontroller animated:YES];
 		
