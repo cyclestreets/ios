@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
-#import "MultiLabelLine.h"
-#import "LayoutBox.h"
 #import "RouteSegmentViewController.h"
-#import "CopyLabel.h"
 #import "RouteSummary.h"
 @class RouteVO;
 
@@ -25,11 +22,6 @@
 	RouteSummary										*routeSummaryViewcontroller;
 	
 	
-	IBOutlet	CopyLabel			*routeidLabel;
-				MultiLabelLine		*readoutLineOne;
-				MultiLabelLine		*readoutLineTwo;
-	MultiLabelLine		*readoutLineThree;
-	IBOutlet	LayoutBox			*readoutContainer;
 	
 	IBOutlet	UITableView			*tableView;
 	NSMutableArray					*rowHeightsArray;
@@ -43,11 +35,7 @@
 @property (nonatomic, strong) RouteSegmentViewController		* routeSegmentViewcontroller;
 @property (nonatomic, strong) RouteSummary						* routeSummaryViewcontroller;
 
-@property (nonatomic, strong) IBOutlet CopyLabel		* routeidLabel;
-@property (nonatomic, strong) MultiLabelLine		* readoutLineOne;
-@property (nonatomic, strong) MultiLabelLine		* readoutLineTwo;
-@property (nonatomic, strong) MultiLabelLine		* readoutLineThree;
-@property (nonatomic, strong) IBOutlet LayoutBox		* readoutContainer;
+
 @property (nonatomic, strong) IBOutlet UITableView		* tableView;
 @property (nonatomic, strong) NSMutableArray		* rowHeightsArray;
 

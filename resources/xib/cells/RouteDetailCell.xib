@@ -45,7 +45,7 @@
 								<string key="NSFrame">{{20, 12}, {73, 17}}</string>
 								<reference key="NSSuperview" ref="515318092"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="344395012"/>
+								<reference key="NSNextKeyView" ref="356956612"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -141,6 +141,7 @@
 								<string key="NSFrame">{{77, 28}, {142, 18}}</string>
 								<reference key="NSSuperview" ref="515318092"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="344395012"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -318,7 +319,6 @@
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.CustomClassName">RouteDetailCellView</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="54.CustomClassName">CopyLabel</string>
 				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -348,22 +348,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/BUTableCellView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">CopyLabel</string>
-					<string key="superclassName">ExpandedUILabel</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CopyLabel.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ExpandedUILabel</string>
-					<string key="superclassName">UILabel</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ExpandedUILabel.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
