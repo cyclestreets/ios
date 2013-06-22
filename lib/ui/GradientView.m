@@ -94,7 +94,7 @@
 }
 
 // Set colours as component RGB.
-- (void) setColours:(float) _startRed:(float) _startGreen:(float) _startBlue:(float) _endRed:(float) _endGreen:(float)_endBlue
+- (void) setColours:(float)_startRed :(float)_startGreen :(float)_startBlue :(float)_endRed :(float)_endGreen :(float)_endBlue
 {
 	startRed = _startRed;
 	startGreen = _startGreen;
@@ -106,7 +106,7 @@
 }
 
 // Set colours as CGColorRefs.
-- (void) setColoursWithCGColors:(CGColorRef)color1:(CGColorRef)color2{
+- (void) setColoursWithCGColors:(CGColorRef)color1 :(CGColorRef)color2{
 	
 	startAlpha=CGColorGetAlpha(color1);
 	endAlpha=CGColorGetAlpha(color2);

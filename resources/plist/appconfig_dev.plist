@@ -15,7 +15,11 @@
 			<string>MapView</string>
 			<key>tabimage</key>
 			<string>CSTabBar_plan_route.png</string>
-			<key>isVC</key>
+			<key>childVC</key>
+			<string>WayPointViewController</string>
+			<key>hidesNavBar</key>
+			<true/>
+			<key>usesSlidingView</key>
 			<true/>
 		</dict>
 		<dict>

@@ -63,14 +63,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		 name:GPSLOCATIONFAILED
 		 object:nil];
 		
-		
-		
-		
-		
 	}
 	return self;
 }
 
+
+-(void)removeNotifications{
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:GPSLOCATIONCOMPLETE object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:GPSLOCATIONFAILED object:nil];
+	
+}
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
@@ -98,9 +101,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 
 - (UIView *)loadWelcomeView {
 	
-	
-
-	
 	static NSString *CellIdentifier = @"InitialLocationView";
 	
 	UIView *view = nil;
@@ -113,9 +113,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			self.closeButton=(UIButton*)[view viewWithTag:CLOSEBUTTONTAG];
 			
 			[ButtonUtilities styleIBButton:closeButton type:@"green" text:@"Plan a route"];
-			[closeButton addTarget:self action:@selector(closeOverlayView:) forControlEvents:UIControlEventTouchUpInside];
-			//closeButton.enabled=![CLLocationManager locationServicesEnabled];
-			
+			[closeButton addTarget:self action:@selector(closeOverlayView:) forControlEvents:UIControlEventTouchUpInside];			
 		}
 	}
 	return view;
@@ -142,7 +140,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		}
 		
 		self.mapView.hidden = NO;
-		
+		[self removeNotifications];
 		
 	} else {
 		
@@ -171,6 +169,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			
 		}
 		
+		if (hasSelectedRoute==YES) {
+			self.mapView.hidden = NO;
+			[self removeNotifications];
+		}
+		
 	}
 }
 
@@ -179,12 +182,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 	
 	[UIView animateWithDuration:FADE_DURATION
 						  delay:FADE_DELAY 
-						options:UIViewAnimationCurveLinear 
+						options:UIViewAnimationOptionCurveLinear 
 					 animations:^{ 
 						 self.welcomeView.alpha=0.0f;
 					 }
 					 completion:^(BOOL finished){
 						 self.mapView.hidden = NO;
+						 [self removeNotifications];
 						 [self.welcomeView removeFromSuperview];
 					 }];
 	
@@ -205,7 +209,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 	[self.mapView moveToLatLong:coordinate];
 	self.mapView.hidden = NO;
 	[self.welcomeView setNeedsDisplay];
-	[self save:coordinate];	
+	[self save:coordinate];
+	[self removeNotifications];
 }
 
 
@@ -216,6 +221,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 	self.mapView.contents.zoom = 12;
 	CLLocationCoordinate2D coordinate = [UserLocationManager defaultCoordinate];
 	[self locationDidComplete:coordinate];
+	
+	
 	
 }
 

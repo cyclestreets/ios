@@ -82,7 +82,7 @@
 -(void)createLeftNavItem{
 	
 	// basic arrow only back style
-	if(leftItemType==BUNavBackType){
+	if([leftItemType isEqualToString:BUNavBackType]){
 		
 		self.backButton=[ButtonUtilities UISimpleImageButton:@"navbarback"];
 		
@@ -92,7 +92,7 @@
 		[navigationItem setLeftBarButtonItem:barbutton animated:YES];
 	
 	// standard back with text label style
-	}else if (leftItemType==BUNavBackStandardType) {
+	}else if ([leftItemType  isEqualToString:BUNavBackStandardType]) {
 		
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
 		button.frame=CGRectMake(0, 0, 52, 30);
@@ -147,7 +147,7 @@
 	
 	
 	// 2 line type with title and info (normally race/date combo)
-	if(titleType==BUNavTitleReadoutType){
+	if([titleType  isEqualToString:BUNavTitleReadoutType]){
 	
 		LayoutBox *labelContainer=[[LayoutBox alloc]init];
         labelContainer.layoutMode=BUVerticalLayoutMode;
@@ -181,7 +181,7 @@
 		[navigationItem setTitleView:labelContainer];
 	
 	// logo image type
-	}else if(titleType==BUNavTitleImageType) {
+	}else if([titleType  isEqualToString:BUNavTitleImageType]) {
 				
 		UIImage *image=[[StyleManager sharedInstance] imageForType:titleImage];
 		UIImageView *ititle=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
@@ -190,7 +190,7 @@
 		[navigationItem setTitleView:ititle];
 		
 	// default iOS type
-	}else if(titleType==BUNavTitleDefaultType) {
+	}else if([titleType  isEqualToString:BUNavTitleDefaultType]) {
 		
         UILabel *tlabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, NAVIGATIONHEIGHT)];
 		self.titleLabel=tlabel;
@@ -331,7 +331,7 @@
 
 -(void)updateLeftItemTitle:(NSString*)str{
 	
-	if(leftItemType==BUNavBackStandardType){
+	if([leftItemType  isEqualToString:BUNavBackStandardType]){
 		leftItemTitle=str;
 		
 		[backButton setTitle:leftItemTitle forState:UIControlStateNormal];

@@ -498,7 +498,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	[blueCircleView setNeedsDisplay];
 	[UIView animateWithDuration:1.2f 
 						  delay:.5 
-						options:UIViewAnimationCurveEaseOut 
+						options:UIViewAnimationOptionCurveEaseOut 
 					 animations:^{ 
 						 blueCircleView.alpha=0;
 					 }
