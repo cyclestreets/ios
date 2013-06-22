@@ -28,6 +28,9 @@
 - (NSString*) bundleServicePath;
 -(void)startupComplete;
 -(void)startupFailed;
+
+-(void)didReceiveNotification:(NSNotification*)notification;
+
 @end
 
 
