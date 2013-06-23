@@ -73,7 +73,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
 	
-	[TestFlight takeOff:@"f3126dfe-baf0-4e0e-8c80-dc7ebc7ed29a"];
+	[TestFlight takeOff:@"66d1beaa-3747-4893-8146-93c7003bc24f"];
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
