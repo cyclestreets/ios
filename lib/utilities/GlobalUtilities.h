@@ -104,6 +104,14 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,[NSString stringWithFormat
 
 #define ISRETINADISPLAY (([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) ? [[UIScreen mainScreen] scale] > 1.0 : NO)
 
+#define SUPPORTS_UIAPPEARANCE ([[[UIDevice currentDevice] systemVersion] floatValue]>=5.0)
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_5 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0f)
+#define IS_IPHONE_4 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0f)
+
+
 
 /*
  *  System Versioning Preprocessor Macros

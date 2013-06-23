@@ -793,6 +793,10 @@
 		28ECCBDC1526305800284926 /* RequestQueueVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDB1526304E00284926 /* RequestQueueVO.m */; };
 		28F66F0D135F636200DECFAC /* PhotoMapImageLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */; };
 		28FA62BE153C1C7200AF6267 /* UITextViewAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */; };
+		28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB4231777464F002D0912 /* UIIcon_walking.png */; };
+		28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB4231777464F002D0912 /* UIIcon_walking.png */; };
+		28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
+		28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E77D8F11120321E4003E6B8D /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		E7BE4B1A11A2E5F400930E0C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */; };
@@ -1424,6 +1428,8 @@
 		28F66F0B135F636200DECFAC /* PhotoMapImageLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoMapImageLocationViewController.h; path = PhotoMap/PhotoMapImageLocationViewController.h; sourceTree = "<group>"; };
 		28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoMapImageLocationViewController.m; path = PhotoMap/PhotoMapImageLocationViewController.m; sourceTree = "<group>"; usesTabs = 1; };
 		28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITextViewAccessoryView.xib; sourceTree = "<group>"; };
+		28FAB4231777464F002D0912 /* UIIcon_walking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_walking.png; sourceTree = "<group>"; };
+		28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_walking@2x.png"; sourceTree = "<group>"; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E77D8F10120321E4003E6B8D /* credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = credits.html; path = html/credits.html; sourceTree = "<group>"; };
 		E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1895,6 +1901,7 @@
 		28187A6214FCFF4C00A38A17 /* Cell Icons */ = {
 			isa = PBXGroup;
 			children = (
+				28FAB4231777464F002D0912 /* UIIcon_walking.png */,
 				28187A6314FCFF4C00A38A17 /* UIIcon_cycle_lanes.png */,
 				28187A6414FCFF4C00A38A17 /* UIIcon_cycle_tracks.png */,
 				28187A6514FCFF4C00A38A17 /* UIIcon_footpaths.png */,
@@ -2127,6 +2134,7 @@
 		289A9B4A13536CCB00E8AF90 /* Cell Icons */ = {
 			isa = PBXGroup;
 			children = (
+				28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */,
 				289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */,
 				289A9B4C13536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png */,
 				289A9B4D13536CCB00E8AF90 /* UIIcon_footpaths@2x.png */,
@@ -3117,6 +3125,8 @@
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28CBE0361775E6CB0088D4BE /* Default-568h@2x.png in Resources */,
+				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
+				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3331,6 +3341,8 @@
 				2868D243166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D245166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
+				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
+				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -89,7 +89,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize mapContents;
 @synthesize gpslocateButton;
 @synthesize photoWizardButton;
-@synthesize locationManager;
 @synthesize lastLocation;
 @synthesize currentLocation;
 @synthesize locationView;
@@ -257,11 +256,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	//get the map attribution correct.
 	self.attributionLabel.text = [MapViewController mapAttribution];
 	
-	//set up the location manager.
-	self.locationManager = [[CLLocationManager alloc] init];
-	locationManager.desiredAccuracy=500;
-	locationManagerIsLocating = NO;
-	locationWasFound=YES;
 		
 	showingPhotos = YES;
 	
@@ -659,7 +653,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	self.blueCircleView = nil;
 	self.introView = nil;
 	self.introButton = nil;
-	locationManager = nil;
 	locationView = nil;
 	lastLocation = nil;
 	initialLocation = nil;

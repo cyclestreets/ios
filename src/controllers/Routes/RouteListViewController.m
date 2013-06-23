@@ -12,7 +12,7 @@
 #import "StyleManager.h"
 #import "NSDate+Helper.h"
 #import "RouteManager.h"
-
+#import "UIView+Additions.h"
 
 @interface FavouriteMenuItem : UIMenuItem 
 @property (nonatomic, strong) NSIndexPath* indexPath;

@@ -55,7 +55,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
 @end
 
-static NSString *layer = @"6";
 static NSString *useDom = @"1";
 
 

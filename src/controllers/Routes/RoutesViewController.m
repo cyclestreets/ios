@@ -14,6 +14,7 @@
 #import "RouteManager.h"
 #import "ButtonUtilities.h"
 #import "FavouritesManager.h"
+#import "UIView+Additions.h"
 
 @interface RoutesViewController()
 
@@ -157,6 +158,7 @@
 	for (int i = 0; i < [classArray count]; i++) {
 		
 		RouteListViewController *vc = (RouteListViewController*)[[NSClassFromString([classArray objectAtIndex:i]) alloc] initWithNibName:[nibArray objectAtIndex:i] bundle:nil];
+		vc.view.height=contentView.height;
 		[contentView addSubview:vc.view];
 		vc.delegate=self;
         vc.dataType=[dataTypeArray objectAtIndex:i];

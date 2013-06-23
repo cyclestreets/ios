@@ -149,6 +149,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @synthesize photoMapButton;
 @synthesize categoryMenu;
 @synthesize cancelViewButton;
+@synthesize modalToolBar;
 
 
 
@@ -341,10 +342,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		pageScrollView.y=20;
 		headerView.y=0;
-		footerView.y=387;
 		pageControl.y=0;
 		
 	}
+	
+	modalToolBar.visible=isModal;
 	
 }
 

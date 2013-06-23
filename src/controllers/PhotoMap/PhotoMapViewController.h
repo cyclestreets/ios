@@ -39,7 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 @interface PhotoMapViewController : SuperViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, LocationProvider> {
+<RMMapViewDelegate, LocationReceiver, LocationProvider> {
 	
 	
 	IBOutlet RMMapView						*mapView;			//map of current area
@@ -53,9 +53,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	
-	CLLocationManager						*locationManager;	// location
 	CLLocation								*lastLocation;		// last location
-	
 	CLLocation								*currentLocation;
 	
 	

@@ -275,9 +275,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[_blueCircleView setLocationProvider:self];
 	
 	
-	_walkingRouteOverlayView.y=SCREENHEIGHT;
+	
 	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
 	[self.view addSubview:_walkingRouteOverlayView];
+	_walkingRouteOverlayView.y=SCREENHEIGHTWITHNAVIGATION-_walkingRouteOverlayView.height;;
 	
 	
 	self.programmaticChange = NO;
@@ -651,7 +652,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 			[UIView animateWithDuration:0.7 animations:^{
 				
-				_walkingRouteOverlayView.y=SCREENHEIGHTWITHMODALNAV-_walkingRouteOverlayView.height;
+				_walkingRouteOverlayView.y=SCREENHEIGHTWITHNAVIGATION-_walkingRouteOverlayView.height;
 				
 			} completion:^(BOOL finished) {
 				
@@ -665,7 +666,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 			
 		}else{
-			[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+			[UIView animateWithDuration:0.3 delay:5 options:UIViewAnimationOptionCurveLinear animations:^{
 				_walkingRouteOverlayView.y=SCREENHEIGHT;
 			} completion:^(BOOL finished) {
 				_walkingOverlayisVisible=NO;

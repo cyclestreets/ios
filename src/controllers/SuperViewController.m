@@ -16,6 +16,7 @@
 #import "StringManager.h"
 #import "ButtonUtilities.h"
 #import "AppDelegate.h"
+#import "GenericConstants.h"
 
 @implementation SuperViewController
 @synthesize navigation;

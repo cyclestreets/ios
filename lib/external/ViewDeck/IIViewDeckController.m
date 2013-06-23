@@ -568,7 +568,7 @@ __typeof__(h) __h = (h);                                    \
     [super viewWillAppear:animated];
     
     BOOL wasntAppeared = !_viewAppeared;
-    [self.view addObserver:self forKeyPath:@"bounds" options:NSKeyValueChangeSetting context:nil];
+    [self.view addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew context:nil];
 
     void(^applyViews)(void) = ^{        
         [self.centerController.view removeFromSuperview];
