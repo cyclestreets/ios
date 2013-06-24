@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "GlobalUtilities.h"
 #import "MapLocationSearchCellView.h"
 #import "HudManager.h"
+#import "NSArray-Additions.h"
 
 static NSString *format = @"%@?key=%@&street=%@&%@&clientid=%@";
 static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
@@ -239,7 +240,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	NamedPlace *where = [currentPlaces objectAtIndex:indexPath.row];
+	NamedPlace *where = [currentPlaces safeObjectAtIndex:[indexPath row]];
 	if (where != nil) {
 		[self.locationReceiver didMoveToLocation:where.locationCoords];
 	}

@@ -47,6 +47,8 @@
 #import "WayPointViewController.h"
 #import "UIView+Additions.h"
 
+#import "TestPopController.h"
+
 
 static NSInteger MAX_ZOOM = 18;
 
@@ -348,6 +350,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (void)updateUItoState:(MapPlanningState)state{
 	
+	
+	if(state==_uiState)
+		return;
 	
 	self.previousUIState=_uiState;
 	self.uiState = state;
@@ -965,10 +970,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(IBAction)showRoutePlanMenu:(id)sender{
 	
+	
+	
     self.routeplanView=[[RoutePlanMenuViewController alloc]initWithNibName:@"RoutePlanMenuView" bundle:nil];
+	self.routeplanView.title=@"Test";
 	_routeplanView.plan=_route.plan;
-    
-	self.routeplanMenu = [[popoverClass alloc] initWithContentViewController:_routeplanView];
+	    
+	self.routeplanMenu = [[popoverClass alloc] initWithContentViewController:self.routeplanView];
 	_routeplanMenu.delegate = self;
 	
 	[_routeplanMenu presentPopoverFromBarButtonItem:_changePlanButton toolBar:_toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];

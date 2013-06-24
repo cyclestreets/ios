@@ -87,6 +87,7 @@ NSString *const NONE=@"none";
 NSString *const SHORTDATE=@"SHORTDATE";
 NSString *const ERRORTYPE=@"ERRORTYPE";
 NSString *const EVENTTYPE=@"EVENTTYPE";
+NSString *const NOTAVAILABLE=@"N/A";
 
 
 // nav button consts
