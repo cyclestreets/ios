@@ -22,17 +22,13 @@
 #import "GradientView.h"
 #import "RouteDetailCellView.h"
 #import "RouteSummary.h"
+#import "UINavigationController+TRVSNavigationControllerTransition.h"
 
 @implementation ItineraryViewController
 @synthesize route;
 @synthesize routeId;
 @synthesize headerText;
 @synthesize routeSegmentViewcontroller;
-@synthesize routeidLabel;
-@synthesize readoutLineOne;
-@synthesize readoutLineTwo;
-@synthesize readoutLineThree;
-@synthesize readoutContainer;
 @synthesize tableView;
 @synthesize rowHeightsArray;
 @synthesize routeSummaryViewcontroller;
@@ -103,48 +99,7 @@
 
 
 -(void)createPersistentUI{
-	
-	/*
-	
-	readoutContainer.paddingTop=5;
-	readoutContainer.itemPadding=4;
-	readoutContainer.layoutMode=BUVerticalLayoutMode;
-	readoutContainer.alignMode=BUCenterAlignMode;
-	readoutContainer.fixedWidth=YES;
-	readoutContainer.fixedHeight=YES;
-	readoutContainer.backgroundColor=UIColorFromRGB(0xE5E5E5);
-	
-	routeidLabel.multiline=NO;
-	
-	
-	readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	readoutLineOne.showShadow=YES;
-	readoutLineOne.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	readoutLineOne.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	
-	readoutLineTwo=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	readoutLineTwo.showShadow=YES;
-	readoutLineTwo.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	readoutLineTwo.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	
-	readoutLineThree=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	readoutLineThree.showShadow=YES;
-	readoutLineThree.colors=[NSArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	readoutLineThree.fonts=[NSArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	
-	
-	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutlabel.font=[UIFont systemFontOfSize:12];
-	readoutlabel.textColor=UIColorFromRGB(0x666666);
-	readoutlabel.shadowColor=[UIColor whiteColor];
-	readoutlabel.shadowOffset=CGSizeMake(0, 1);
-	readoutlabel.text=@"Select any segment to view the map & details for it.";
-	 
-	
-	[readoutContainer addSubViewsFromArray:[NSArray arrayWithObjects:readoutLineOne,readoutLineTwo,readoutLineThree,readoutlabel, nil]];
-	 
-	 */
-	
+		
 	[self createNavigationBarUI];
 }
 
@@ -153,9 +108,12 @@
 	
 	[super viewWillAppear:animated];
 	
+	self.navigationController.navigationBarHidden=NO;
+	
 	[self createNonPersistentUI];
 	
-	[super deSelectRowForTableView:tableView];
+	[self performSelector:@selector(deSelectRowForTableView:) withObject:tableView afterDelay:0.1];
+	
 	
 }
 
@@ -175,20 +133,6 @@
 	}else {
 		
 		[self showNoActiveRouteView:NO];
-		
-		routeidLabel.text=[route routeid];
-		
-		readoutLineOne.labels=[NSArray arrayWithObjects:@"Length:",route.lengthString,
-							   @"Estimated time:",route.timeString,nil];
-		[readoutLineOne drawUI];
-		
-		readoutLineTwo.labels=[NSArray arrayWithObjects:@"Planned speed:",route.speedString,
-							   @"Strategy:",route.planString,nil];
-		[readoutLineTwo drawUI];
-		
-		readoutLineThree.labels=[NSArray arrayWithObjects:@"Calories:",route.calorieString,
-							   @"CO2 saved:",route.coString,nil];
-		[readoutLineThree drawUI];
 		
 		self.navigationItem.rightBarButtonItem.enabled=YES;
 		
@@ -231,6 +175,7 @@
 		
 		RouteDetailCellView *cell = (RouteDetailCellView *)[RouteDetailCellView cellForTableView:tv fromNib:[RouteDetailCellView nib]];
 		cell.routeLabel.text=[route routeid];
+		cell.lengthLabel.text=route.lengthString;
 		[cell populate];
 		return cell;
 		
@@ -275,12 +220,14 @@
 		if(routeSegmentViewcontroller==nil){
 			self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] initWithNibName:@"RouteSegmentView" bundle:nil];
 			routeSegmentViewcontroller.hidesBottomBarWhenPushed=YES;
+			
 		}
 		
 		[routeSegmentViewcontroller setRoute:route];
 		routeSegmentViewcontroller.index=rowindex;
 		
-		[self.navigationController pushViewController:routeSegmentViewcontroller animated:YES];
+		
+		[self.navigationController pushViewControllerWithNavigationControllerTransition:routeSegmentViewcontroller];
 		
 		
 	}

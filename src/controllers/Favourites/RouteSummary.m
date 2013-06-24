@@ -37,6 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SavedRoutesManager.h"
 #import "HudManager.h"
 #import "UIView+Additions.h"
+#import "UINavigationController+TRVSNavigationControllerTransition.h"
 
 @interface RouteSummary()
 
@@ -132,6 +133,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)viewDidLoad {
 	
     [super viewDidLoad];
+
 	
 	[self createPersistentUI];
 	
@@ -189,6 +191,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -(void)viewWillAppear:(BOOL)animated{
 	
 	[self createNonPersistentUI];
+	
+	self.navigationController.navigationBarHidden=NO;
 	
 	[super viewWillAppear:animated];
 }
@@ -268,6 +272,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[actionSheet show:YES];
 		
 	}
+	
+}
+
+
+-(void)didRequestPopController{
+	
+	// TODO: needs mode to use default pop if not called by Itinearay
+	
+	[self.navigationController popViewControllerWithNavigationControllerTransition];
 	
 }
 

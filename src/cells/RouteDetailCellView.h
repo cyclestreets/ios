@@ -12,6 +12,7 @@
 
 
 @property(nonatomic,weak) IBOutlet UILabel         *routeLabel;
+@property(nonatomic,weak) IBOutlet UILabel         *lengthLabel;
 
 
 @end

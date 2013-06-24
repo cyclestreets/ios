@@ -43,6 +43,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ExpandedUILabel.h"
 #import "GradientView.h"
 #import "CSSegmentFooterView.h"
+#import "UINavigationController+TRVSNavigationControllerTransition.h"
 
 @interface RouteSegmentViewController()
 
@@ -95,6 +96,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)viewDidLoad {
 	
     [super viewDidLoad];
+	
+	
 	
 	//handle taps etc.
 	[_mapView setDelegate:self];
@@ -163,7 +166,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[self setSegmentIndex:_index];
 	
+	self.navigationController.navigationBarHidden=YES;
+	
 	[super viewWillAppear:animated];
+	
+	
 }
 
 
@@ -377,7 +384,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  
 //pop back to route overview
 - (IBAction) backButtonSelected {
-	[self.navigationController popViewControllerAnimated:YES];
+	
+	[self.navigationController popViewControllerWithNavigationControllerTransition];
 }
 
 

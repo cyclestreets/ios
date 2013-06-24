@@ -15,7 +15,11 @@
 
 
 -(void)initialise{
-	self.contentView.backgroundColor=UIColorFromRGB(0xe2e0dc);
+	
+	
+	UIView *bgview=[[UIView alloc]initWithFrame:self.frame];
+	bgview.backgroundColor=UIColorFromRGB(0xe2e0dc);
+	self.backgroundView=bgview;
 }
 
 
@@ -27,7 +31,7 @@
 
 
 +(int)rowHeight{
-	return 62;
+	return 70;
 }
 
 
