@@ -152,8 +152,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
 	
-	
-	
 		
 	[window makeKeyAndVisible];	
 	
@@ -194,8 +192,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"");
 	
 	// animate defaultPNG off screen to smooth out transition to ui state
+	BOOL ip=IS_IPHONE_5;
 	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, SCREENWIDTH, FULLSCREENHEIGHT)];
-	splashView.image = [UIImage imageNamed:@"Default.png"];
+	splashView.image = [UIImage imageNamed: ip ? @"Default-568h@2x.png"  : @"Default.png" ];
 	
 	#if ISDEVELOPMENT
 	[self writeDebugStartupLabel:NO];
@@ -248,7 +247,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// reset to front because tab controller will be in front now
 	[window bringSubviewToFront:splashView];
 	
-	[UIView animateWithDuration:0.5 delay:3 options:UIViewAnimationOptionTransitionNone animations:^{
+	[UIView animateWithDuration:0.5 delay:1 options:UIViewAnimationOptionTransitionNone animations:^{
 		splashView.alpha = 0.0;
 	} completion:^(BOOL finished) {
 		[splashView removeFromSuperview];

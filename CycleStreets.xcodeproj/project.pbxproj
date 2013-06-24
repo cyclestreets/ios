@@ -157,6 +157,8 @@
 		281E09041451C6690034CC63 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
 		281E09081451CA210034CC63 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
+		2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
+		2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
 		2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
@@ -761,7 +763,6 @@
 		28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
 		28CBBC9F1641B57E005E7056 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
 		28CBBCA01641B57F005E7056 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
-		28CBE0361775E6CB0088D4BE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBE0351775E6CB0088D4BE /* Default-568h@2x.png */; };
 		28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
 		28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
@@ -1044,6 +1045,7 @@
 		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
 		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
 		281E09071451CA210034CC63 /* POICategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POICategoryView.xib; path = poi/POICategoryView.xib; sourceTree = "<group>"; };
+		2825871E17785867001E3DA1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
 		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
@@ -1387,7 +1389,6 @@
 		28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryMenuViewController.m; sourceTree = "<group>"; };
 		28CBBC9B1641B498005E7056 /* WayPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WayPointViewController.h; path = Map/WayPointViewController.h; sourceTree = "<group>"; };
 		28CBBC9C1641B498005E7056 /* WayPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WayPointViewController.m; path = Map/WayPointViewController.m; sourceTree = "<group>"; };
-		28CBE0351775E6CB0088D4BE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		28CBEDAB1612DCF5002CDE5A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Map/MapViewController.h; sourceTree = "<group>"; };
 		28CBEDAC1612DCF5002CDE5A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Map/MapViewController.m; sourceTree = "<group>"; };
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
@@ -2748,7 +2749,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				28CBE0351775E6CB0088D4BE /* Default-568h@2x.png */,
 				28AD6308131FB6C8008527FC /* lib */,
 				28AD61DB131FB69D008527FC /* src */,
 				28AD6207131FB69D008527FC /* resources */,
@@ -2798,6 +2798,7 @@
 		E7FD8F3B127821DB002640D0 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2825871E17785867001E3DA1 /* Default-568h@2x.png */,
 				28A0441C159216C000201CF3 /* Icon@2x.png */,
 				E7FD8F3C127821DB002640D0 /* appstore-icon-512.png */,
 				28A04418159216A400201CF3 /* Icon.png */,
@@ -3124,9 +3125,9 @@
 				2868D242166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
-				28CBE0361775E6CB0088D4BE /* Default-568h@2x.png in Resources */,
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
+				2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3343,6 +3344,7 @@
 				2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
+				2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3780,7 +3782,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "579E3460-0561-4B76-A34E-A0AE10F3A96B";
+				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3821,7 +3823,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "579E3460-0561-4B76-A34E-A0AE10F3A96B";
+				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3836,7 +3838,7 @@
 				ARCHS = armv7;
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Martin Lucas-Smith (H68FMP5WHB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3865,7 +3867,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "B492183B-C003-40E2-9F5C-DB7CA87EC84A";
+				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3950,7 +3952,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "BF5CF7FD-7536-4781-BCF1-8162B40AE131";
+				PROVISIONING_PROFILE = "DE5F58CC-40F9-43F2-A30C-AE41EA255579";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -4080,7 +4082,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "579E3460-0561-4B76-A34E-A0AE10F3A96B";
+				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
