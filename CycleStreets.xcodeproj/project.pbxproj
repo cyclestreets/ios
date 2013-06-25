@@ -13,6 +13,8 @@
 		2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		2807FCBA166693580028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
+		2808CA5416E631A60063F981 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808CA5316E631A60063F981 /* SVPulsingAnnotationView.m */; };
+		2808CA5516E631A60063F981 /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808CA5316E631A60063F981 /* SVPulsingAnnotationView.m */; };
 		280E240F144D825D0021CDFA /* BUMoreTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */; };
 		280E2410144D825D0021CDFA /* BUTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2409144D825D0021CDFA /* BUTableCellView.m */; };
 		280E2411144D825D0021CDFA /* FrameworkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E240B144D825D0021CDFA /* FrameworkObject.m */; };
@@ -771,6 +773,7 @@
 		28D2BAE11354814E00694093 /* UKImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BAE01354814E00694093 /* UKImage.m */; };
 		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
+		28DB91AA1720411A003E57E8 /* HUDdesign.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DB91A91720411A003E57E8 /* HUDdesign.xib */; };
 		28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */; };
 		28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 28E603091610B683006A4B4C /* cyclestreets.geojson */; };
@@ -842,6 +845,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2801301315E636070092D509 /* Icon_currentroutecell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_currentroutecell@2x.png"; sourceTree = "<group>"; };
 		2807FCB81666934E0028D7DB /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		2808CA5216E631A60063F981 /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
+		2808CA5316E631A60063F981 /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		280E2406144D825D0021CDFA /* BUMoreTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUMoreTableDataSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUMoreTableDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		280E2408144D825D0021CDFA /* BUTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUTableCellView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1402,6 +1407,7 @@
 		28D2BC5A1354C48B00694093 /* BUDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUDividerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28D2BC5B1354C48B00694093 /* BUDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUDividerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28D7E1F712BAA8710025C4A2 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		28DB91A91720411A003E57E8 /* HUDdesign.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HUDdesign.xib; path = /Users/neil/iPhone/Applications/CycleStreets/ios/resources/xib/cells/HUDdesign.xib; sourceTree = "<absolute>"; };
 		28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWizardCategoryCell.xib; sourceTree = "<group>"; };
 		28DFE8D615A428DD005FDCA0 /* PhotoWizardCategoryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryCellView.h; sourceTree = "<group>"; };
 		28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryCellView.m; sourceTree = "<group>"; };
@@ -1494,6 +1500,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2808CA5116E631A60063F981 /* SVPulsingAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				2808CA5216E631A60063F981 /* SVPulsingAnnotationView.h */,
+				2808CA5316E631A60063F981 /* SVPulsingAnnotationView.m */,
+			);
+			path = SVPulsingAnnotationView;
+			sourceTree = "<group>";
+		};
 		280E2405144D825D0021CDFA /* core */ = {
 			isa = PBXGroup;
 			children = (
@@ -1513,6 +1528,7 @@
 		280E2413144D82850021CDFA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				2808CA5116E631A60063F981 /* SVPulsingAnnotationView */,
 				28281FC216B6E12E006303C0 /* SMCalloutView */,
 				28CA8E1D1652A7AC000436ED /* Crashlytics */,
 				288C0F391649A5C4000880FF /* FMFramework */,
@@ -1695,6 +1711,7 @@
 		280E9319140984F300C7AC75 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				28DB91A91720411A003E57E8 /* HUDdesign.xib */,
 				2818C79F1458069D0077F529 /* RouteCell.xib */,
 				280E931A140984F300C7AC75 /* FavouritesCell.xib */,
 				280E931B140984F300C7AC75 /* ItineraryCell.xib */,
@@ -3102,6 +3119,7 @@
 				289B127D16BBDF9700D25326 /* RouteDetailCell.xib in Resources */,
 				289B128816BBE53000D25326 /* UIButtonBarAction.png in Resources */,
 				289B128B16BBE53A00D25326 /* UIButtonBarAction@2x.png in Resources */,
+				28DB91AA1720411A003E57E8 /* HUDdesign.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3523,6 +3541,7 @@
 				28E886DF16B92AAA0060B9DE /* QueryPhoto.m in Sources */,
 				289B128516BBE13E00D25326 /* RouteDetailCellView.m in Sources */,
 				284D303416D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m in Sources */,
+				2808CA5416E631A60063F981 /* SVPulsingAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3705,6 +3724,7 @@
 				28E886E016B92AAA0060B9DE /* QueryPhoto.m in Sources */,
 				289B128616BBE13E00D25326 /* RouteDetailCellView.m in Sources */,
 				284D303516D3C4B7009B605C /* UINavigationController+TRVSNavigationControllerTransition.m in Sources */,
+				2808CA5516E631A60063F981 /* SVPulsingAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import "BUTableCellView.h"
 
 @implementation BUTableCellView
-
+@synthesize shouldRemainSelected;
 
 
 //

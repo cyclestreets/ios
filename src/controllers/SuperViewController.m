@@ -16,6 +16,7 @@
 #import "StringManager.h"
 #import "ButtonUtilities.h"
 #import "AppDelegate.h"
+#import "BUTableCellView.h"
 
 @implementation SuperViewController
 @synthesize navigation;
@@ -69,8 +70,12 @@
 	
 	if(table!=nil){
 		NSIndexPath*	selection = [table indexPathForSelectedRow];
-		
+
 		if (selection){
+			
+			BUTableCellView *cell=(BUTableCellView*)[table cellForRowAtIndexPath:selection];
+			cell.shouldRemainSelected=NO;
+			
 			[table deselectRowAtIndexPath:selection animated:YES];
 		}
 	}

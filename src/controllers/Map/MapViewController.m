@@ -47,6 +47,8 @@
 #import "WayPointViewController.h"
 #import "UIView+Additions.h"
 
+#import "SVPulsingAnnotationView.h"
+
 
 static NSInteger MAX_ZOOM = 18;
 
@@ -102,6 +104,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
 @property (nonatomic, strong) IBOutlet MapMarkerTouchView		* markerTouchView;
 @property (nonatomic, assign) MapAlertType		alertType;
+
+@property (nonatomic, strong) SVPulsingAnnotationView		* annotationView;
 
 // waypoint ui
 // will need ui for editing waypoints
@@ -262,6 +266,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[_lineView setPointListProvider:self];
 	[_blueCircleView setLocationProvider:self];
+	
+	self.annotationView=[[SVPulsingAnnotationView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+	_annotationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
+	_annotationView.visible=NO;
+	[_annotationView setLocationProvider:self];
+	[self.mapView addSubview:_annotationView];
 	
 	
 	self.programmaticChange = NO;
@@ -461,14 +471,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self updateUItoState:_previousUIState];
 	
-	[self resetLocationOverlay];
+	//[self resetLocationOverlay];
 	
 }
 
 
 -(void)locationDidComplete:(NSNotification *)notification{
 	
-	_blueCircleView.visible=YES;
+	_annotationView.visible=YES;
 	
 	// update ui state
 	[self updateUItoState:_previousUIState];
@@ -476,17 +486,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	self.lastLocation=notification.object;
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
+	[_annotationView updateToLocation];
 	
 	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:3];
 }
 
 -(void)locationDidUpdate:(NSNotification *)notification{
 	
-	_blueCircleView.visible=YES;
+	_annotationView.visible=YES;
 	
 	self.lastLocation=notification.object;
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
+	[_annotationView updateToLocation];
 }
 
 -(void)locationDidFail:(NSNotification *)notification{
@@ -499,7 +511,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)resetLocationOverlay{
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideLocationOverlay) object:nil];
-	_blueCircleView.visible=NO;
+	_annotationView.visible=NO;
 }
 
 
@@ -965,6 +977,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(IBAction)showRoutePlanMenu:(id)sender{
 	
+	
+	
     self.routeplanView=[[RoutePlanMenuViewController alloc]initWithNibName:@"RoutePlanMenuView" bundle:nil];
 	_routeplanView.plan=_route.plan;
     
@@ -1042,6 +1056,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
+	[_annotationView updateToLocation];
 	
 	if (!self.programmaticChange) {
 		

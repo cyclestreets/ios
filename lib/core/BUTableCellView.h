@@ -10,6 +10,8 @@
 
 @interface BUTableCellView : UITableViewCell
 
+@property (nonatomic)	BOOL		shouldRemainSelected;
+
 
 // cell dequeue initialiser
 -(void)initialise;

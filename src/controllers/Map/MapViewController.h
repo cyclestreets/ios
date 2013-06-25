@@ -17,6 +17,7 @@
 #import "UserLocationManager.h"
 #import "WayPointViewController.h"
 #import "RMTileSource.h"
+#import "SVPulsingAnnotationView.h"
 
 @class CycleStreets;
 @class RouteVO;
@@ -41,7 +42,7 @@ typedef int MapAlertType;
 
 
 @interface MapViewController : SuperViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate,UserLocationManagerDelegate>{
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, GPSLocationProvider, WEPopoverControllerDelegate,UserLocationManagerDelegate>{
 	
 	
 	Class popoverClass;

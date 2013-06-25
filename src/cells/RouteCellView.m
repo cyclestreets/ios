@@ -106,6 +106,24 @@
 	return [NSNumber numberWithInt:height];
 }
 
+
+
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    
+    [super setSelected:highlighted animated:animated];
+}
+
+
+-(void)setSelected:(BOOL)selected animated:(BOOL)animated{
+    
+    if(self.shouldRemainSelected==YES && selected==NO)
+        return;
+    
+    [super setSelected:selected animated:animated];
+}
+
+
+
 +(int)rowHeight{
 	return STANDARDCELLHEIGHT;
 }

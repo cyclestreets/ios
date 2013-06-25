@@ -290,7 +290,7 @@ typedef int CSElevationUIState;
 	[path moveToPoint:CGPointMake(0, _graphView.height)];
 	
 	// 
-	int maxelevation=[_dataProvider maxElevation]; 
+	int maxelevation=[_dataProvider elevationRange];
 	int index=0;
 	int xpos=0;
 	float currentDistance=0;

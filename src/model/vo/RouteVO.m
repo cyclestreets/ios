@@ -13,6 +13,17 @@
 #import "GlobalUtilities.h"
 #import "NSDate+Helper.h"
 
+
+@interface RouteVO()
+
+
+
+@property(nonatomic,strong)  NSArray				*elevationRanges;
+
+
+@end
+
+
 @implementation RouteVO
 @synthesize segments;
 @synthesize routeid;
@@ -27,12 +38,13 @@
 @synthesize userRouteName;
 @synthesize calorie;
 @synthesize cosaved;
+@synthesize elevationRanges;
 
 
 
 - (id)init {
     if (self = [super init]) {
-		
+		self.elevationRanges=@[@100,@500,@1000,@2500,@5000,@7500,@10000];
     }
     return self;
 }
@@ -182,6 +194,19 @@
 	
 	for(SegmentVO *segment in segments){
 		value=MAX(value, segment.segmentElevation);
+	}
+	return value;
+}
+
+-(int)elevationRange{
+	
+	int value=0;
+	
+	int maxvalue=self.maxElevation;
+	for(NSNumber *limit in elevationRanges){
+		int value=[limit intValue];
+		if(value>maxvalue)
+			return value;
 	}
 	return value;
 }

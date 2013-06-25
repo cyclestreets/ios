@@ -372,6 +372,9 @@
 		
 		RouteVO *route=nil;
 		
+		RouteCellView *cell=(RouteCellView*)[self.tableView cellForRowAtIndexPath:indexPath];
+		cell.shouldRemainSelected=YES;
+		
 		if(isSectioned==YES){
 			NSString *key=[keys objectAtIndex:[indexPath section]];
 			NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];

@@ -63,6 +63,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 @property (nonatomic, strong)	NSMutableArray			*locationMeasurements;
 @property (nonatomic, strong)	CLLocation			*bestEffortAtLocation;
 
+@property (nonatomic, strong)	NSString			*authorisationSubscriber;
+
+
 @property (nonatomic, unsafe_unretained) id<UserLocationManagerDelegate>		 delegate;
 
 @property ( nonatomic, readonly)	BOOL doesDeviceAllowLocation;

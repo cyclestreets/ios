@@ -13,7 +13,7 @@ static NSDictionary *roadIcons;
 
 @interface SegmentVO()
 
-@property(nonatomic,strong)  NSDictionary         *stringDictionary;
+@property(nonatomic,strong)  NSDictionary			*stringDictionary;
 
 
 @end
@@ -31,6 +31,18 @@ static NSDictionary *roadIcons;
 @synthesize pointsArray;
 @synthesize walkValue;
 @synthesize elevations;
+
+
+
+
+- (id)init {
+    if (self = [super init]) {
+		
+    }
+    return self;
+}
+
+
 
 //
 /***********************************************

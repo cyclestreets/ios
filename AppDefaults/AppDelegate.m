@@ -88,7 +88,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	self.tabBarController = [[UITabBarController alloc] init];
-	tabBarController.tabBar.backgroundColor=[UIColor blackColor];
+	//tabBarController.tabBar.backgroundColor=[UIColor blackColor];
 	self.window.rootViewController = self.tabBarController;
 	
 

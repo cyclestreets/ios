@@ -14,6 +14,7 @@
 @interface UserLocationManager(Private) 
 
 -(void)initialiseCorelocation;
+-(void)createLocationManager;
 -(void)resetLocationAndReAssess;
 -(void)assessUserLocation;
 - (void)stopUpdatingLocation:(NSString *)subscriberId;
@@ -38,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 @synthesize locationMeasurements;
 @synthesize bestEffortAtLocation;
 @synthesize delegate;
-
+@synthesize authorisationSubscriber;
 
 
 + (CLLocationCoordinate2D)defaultCoordinate {
@@ -156,6 +157,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    
+    if(status==kCLAuthorizationStatusAuthorized){
+        
+        if(authorisationSubscriber!=nil){
+            [self startUpdatingLocationForSubscriber:authorisationSubscriber];
+            authorisationSubscriber=nil;
+        }
+        
+        
+    }
+    
+}
+
+
 #pragma mark CoreLocation updating
 
 //
@@ -167,22 +183,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	if ([self doesDeviceAllowLocation] == NO) {
 		
-		
-		
 	}else {
-		
-		if(locationManager==nil){
-			self.locationManager = [[CLLocationManager alloc] init];
-			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-			locationManager.distanceFilter =kCLDistanceFilterNone;
-		}
-		
+		[self createLocationManager];
 	}
    
     
 	
 }
 
+-(void)createLocationManager{
+	
+	if(locationManager==nil){
+		self.locationManager = [[CLLocationManager alloc] init];
+		locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+		locationManager.distanceFilter =kCLDistanceFilterNone;
+		locationManager.delegate=self;
+	}
+	
+}
 
 
 //
@@ -264,16 +282,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			BOOL result=[self addSubscriber:subscriberId];
 			
 			if(result==YES){
-				locationManager.delegate = self;
+                
+                BetterLog(@"[MESSAGE]: Starting location...");
+                didFindDeviceLocation=NO;
 				[locationManager startUpdatingLocation];
 				[self performSelector:@selector(stopUpdatingLocation:) withObject:subscriberId afterDelay:3000];
-			}
+			}else{
+                
+                BetterLog(@"[WARNING]: unable to add subscriber");
+                
+            }
 			
 		}else {
+            
+            BetterLog(@"[WARNING]: GPSLOCATIONDISABLED");
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONDISABLED object:nil userInfo:nil];
-			
+            
+            CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
+            
+            if(status==kCLAuthorizationStatusNotDetermined){
+                
+                authorisationSubscriber=subscriberId;
+				didFindDeviceLocation=NO;
+				[self createLocationManager];
+                [locationManager startUpdatingLocation];
+                [self performSelector:@selector(stopUpdatingLocation:) withObject:SYSTEM afterDelay:0.1];
+                
+            }else{
+                
+                BetterLog(@"[WARNING]: GPS AUTHORISATION IS: kCLAuthorizationStatusDenied");
+            }
 		}
+		
     }else{
 		
 		[self addSubscriber:subscriberId];
@@ -294,7 +335,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
 	
-    if (locationAge > 5.0) return;
+    if (locationAge > 5.0){
+		[self UserLocationWasUpdated];
+		[self stopUpdatingLocationForSubscriber:SYSTEM];
+		return;
+	};
     if (newLocation.horizontalAccuracy < 0) return;
     // test the measurement to see if it is more accurate than the previous measurement
     if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
