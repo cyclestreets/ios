@@ -44,7 +44,7 @@
 
 - (id)init {
     if (self = [super init]) {
-		self.elevationRanges=@[@100,@500,@1000,@2500,@5000,@7500,@10000];
+		self.elevationRanges=@[@50,@100,@500,@1000,@2500,@5000,@7500,@10000];
     }
     return self;
 }

@@ -827,6 +827,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
 	RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
+	[route init];
 	[unarchiver finishDecoding];
 	
 	return route;
