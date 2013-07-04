@@ -47,25 +47,11 @@
 						<int key="NSvFlags">274</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIView" id="674783147">
-								<reference key="NSNextResponder" ref="430133543"/>
-								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{320, 418}</string>
-								<reference key="NSSuperview" ref="430133543"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="370823789"/>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MSAwAA</bytes>
-								</object>
-								<float key="IBUIAlpha">0.30000001192092896</float>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							</object>
 						</object>
 						<string key="NSFrame">{{0, 43}, {320, 418}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="674783147"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -331,14 +317,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">blueCircleView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="674783147"/>
-					</object>
-					<int key="connectionID">44</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mapView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="430133543"/>
@@ -450,17 +428,8 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<reference key="object" ref="430133543"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="674783147"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">17</int>
-						<reference key="object" ref="674783147"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
-						<reference key="parent" ref="430133543"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
@@ -550,8 +519,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 					<string>1.IBPluginDependency</string>
 					<string>1.IBUserGuides</string>
 					<string>13.IBPluginDependency</string>
-					<string>17.CustomClassName</string>
-					<string>17.IBPluginDependency</string>
 					<string>26.IBPluginDependency</string>
 					<string>28.IBPluginDependency</string>
 					<string>29.IBPluginDependency</string>
@@ -581,8 +548,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<int key="affinity">0</int>
 						</object>
 					</object>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>BlueCircleView</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -616,14 +581,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">BlueCircleView</string>
-					<string key="superclassName">UIView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/BlueCircleView.h</string>
-					</object>
-				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">PhotoMapViewController</string>
 					<string key="superclassName">SuperViewController</string>
@@ -678,7 +635,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>attributionLabel</string>
-							<string>blueCircleView</string>
 							<string>gpslocateButton</string>
 							<string>introButton</string>
 							<string>introView</string>
@@ -688,7 +644,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
-							<string>BlueCircleView</string>
 							<string>UIBarButtonItem</string>
 							<string>UIButton</string>
 							<string>UIView</string>
@@ -701,7 +656,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>attributionLabel</string>
-							<string>blueCircleView</string>
 							<string>gpslocateButton</string>
 							<string>introButton</string>
 							<string>introView</string>
@@ -713,10 +667,6 @@ ZGRlZCB0byBDeWNsZVN0cmVldHMuA</string>
 							<object class="IBToOneOutletInfo">
 								<string key="name">attributionLabel</string>
 								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">blueCircleView</string>
-								<string key="candidateClassName">BlueCircleView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">gpslocateButton</string>

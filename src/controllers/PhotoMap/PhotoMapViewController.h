@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "BlueCircleView.h"
 #import "SuperViewController.h"
 #import "PhotoWizardViewController.h"
+#import "SVPulsingAnnotationView.h"
 
 @class RMMapContents;
 @class CycleStreets;
@@ -39,11 +40,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 @interface PhotoMapViewController : SuperViewController
-<RMMapViewDelegate, LocationReceiver, LocationProvider> {
+<RMMapViewDelegate, LocationReceiver, LocationProvider,GPSLocationProvider> {
 	
 	
 	IBOutlet RMMapView						*mapView;			//map of current area
-	IBOutlet BlueCircleView					*blueCircleView;	//overlay GPS location
 	IBOutlet UILabel                        *attributionLabel;	// map type label
 	RMMapContents							*mapContents;
 	
@@ -78,7 +78,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 @property (nonatomic, strong) IBOutlet RMMapView		* mapView;
-@property (nonatomic, strong) IBOutlet BlueCircleView		* blueCircleView;
 @property (nonatomic, strong) IBOutlet UILabel		* attributionLabel;
 @property (nonatomic, strong) RMMapContents		* mapContents;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem		* gpslocateButton;

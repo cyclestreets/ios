@@ -321,14 +321,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	
-	BetterLog(@"");
 	
+	// option #1 last request was recent and we already have a location use this
 	NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
 	
-    if (locationAge > 5.0) return;
+	BetterLog(@"locationAge=%f bestEffortAtLocation=%@ didFindDeviceLocation=%i",locationAge,bestEffortAtLocation,didFindDeviceLocation);
+	
+    if (locationAge < 5.0){
+		
+		if(bestEffortAtLocation!=nil){
+			
+			didFindDeviceLocation=YES;
+			[self UserLocationWasUpdated];
+			[self stopUpdatingLocationForSubscriber:SYSTEM];
+			return;
+		}
+		
+	}
+	
+	// option #2  accuracy is poor
     if (newLocation.horizontalAccuracy < 0) return;
-    // test the measurement to see if it is more accurate than the previous measurement
+	
+    // option #3 test for new locations accuracy compared to the last one
     if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
+		
         self.bestEffortAtLocation = newLocation;
         
 		BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
@@ -338,21 +354,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
 			
-			BetterLog(@"Location found!");
+			
             
 			self.bestEffortAtLocation = newLocation;
 			didFindDeviceLocation=YES;
 			
         }
+	
+	// option #4 we have a location with desired accuracy
     }else{
 		
-		if (bestEffortAtLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-			
-			didFindDeviceLocation=YES;
-			
-        }
-		
-		
+		didFindDeviceLocation=YES;
 	}
 	
 	
@@ -404,7 +416,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 -(void)UserLocationWasUpdated{
 	
-	BetterLog(@"");
+	BetterLog(@"bestEffortAtLocation=%@",bestEffortAtLocation);
 	
 	if(bestEffortAtLocation!=nil)
 		[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];

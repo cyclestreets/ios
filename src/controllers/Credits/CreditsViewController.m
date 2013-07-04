@@ -30,16 +30,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface CreditsViewController()
 
-@property (nonatomic, weak)		IBOutlet UIWebView				* webView;
-@property (nonatomic, strong)		 UIAlertView				* failAlert;
-@property (nonatomic, weak)		IBOutlet UIToolbar				* controlBar;
+@property (nonatomic, weak)		IBOutlet UIWebView						* webView;
+@property (nonatomic, strong)		 UIAlertView						* failAlert;
+@property (nonatomic, weak)		IBOutlet UIToolbar						* controlBar;
 @property (nonatomic, weak)		IBOutlet UIBarButtonItem				* stopLoadingButton;
-@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* refreshButton;
+@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* refreshButton;
 @property (nonatomic, weak)		IBOutlet UIBarButtonItem				* goBackButton;
 @property (nonatomic, weak)		IBOutlet UIBarButtonItem				* goForwardButton;
-@property (nonatomic, strong)		 UIBarButtonItem				* activityBarItem;
-@property (nonatomic, strong)		 UIActivityIndicatorView				* activityIndicator;
-@property (nonatomic)		BOOL				 pageLoaded;
+@property (nonatomic, strong)		 UIBarButtonItem					* activityBarItem;
+@property (nonatomic, strong)		 UIActivityIndicatorView			* activityIndicator;
+@property (nonatomic)		BOOL										pageLoaded;
 
 @end
 

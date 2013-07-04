@@ -54,12 +54,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "HudManager.h"
 #import "PhotoManager.h"
 #import "UserLocationManager.h"
+#import "UIView+Additions.h"
+
 
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
-@interface PhotoMapViewController(Private)
+@interface PhotoMapViewController()
+
+
+
+@property (nonatomic, strong) SVPulsingAnnotationView				* gpsLocationView;
+
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
 -(void)displayPhotosOnMap;
@@ -71,7 +78,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(void)locationDidUpdate:(NSNotification*)notification;
 -(void)locationDidComplete:(NSNotification*)notification;
 
--(void)removeLocationIndicator;
 
 @end
 
@@ -79,12 +85,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 @implementation PhotoMapViewController
 
-static NSInteger MAX_ZOOM = 18;
-static NSInteger MIN_ZOOM = 1;
 
 static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize mapView;
-@synthesize blueCircleView;
 @synthesize attributionLabel;
 @synthesize mapContents;
 @synthesize gpslocateButton;
@@ -103,7 +106,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 @synthesize locationManagerIsLocating;
 @synthesize locationWasFound;
 @synthesize firstRun;
-
+@synthesize gpsLocationView;
 
 
 
@@ -134,23 +137,35 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	[super didReceiveNotification:notification];
 	
-    if([notification.name isEqualToString:MAPSTYLECHANGED]){
+	NSString		*name=notification.name;
+	
+    if([name isEqualToString:MAPSTYLECHANGED]){
         [self didNotificationMapStyleChanged];
     }
 	
-	if([notification.name isEqualToString:RETREIVELOCATIONPHOTOSRESPONSE]){
+	if([name isEqualToString:RETREIVELOCATIONPHOTOSRESPONSE]){
         [self didRecievePhotoResponse:notification.object];
     }
 	
-	if([notification.name isEqualToString:GPSLOCATIONCOMPLETE]){
-        [self locationDidComplete:notification];
-    }
-	if([notification.name isEqualToString:GPSLOCATIONUPDATE]){
-        [self locationDidUpdate:notification];
-    }
-	if([notification.name isEqualToString:GPSLOCATIONFAILED]){
-        [self locationDidFail:notification];
-    }
+	
+	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
+		
+		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
+			[self locationDidComplete:notification];
+		}
+		
+		if([name isEqualToString:GPSLOCATIONUPDATE]){
+			[self locationDidUpdate:notification];
+		}
+		
+		if([name isEqualToString:GPSLOCATIONFAILED]){
+			[self locationDidFail:notification];
+		}
+		
+	}
+
+	
+	
 	
 }
 
@@ -250,10 +265,14 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	self.photoMarkers = [[NSMutableArray alloc] init];
 	
-	[blueCircleView setLocationProvider:self];
-	blueCircleView.userInteractionEnabled=NO;
+	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,self.view.height)];
+	gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
+	gpsLocationView.visible=NO;
+	gpsLocationView.alpha=0;
+	[gpsLocationView setLocationProvider:self];
+	[self.mapView addSubview:gpsLocationView];
 	
-	//get the map attribution correct.
+	//get the map attribution 
 	self.attributionLabel.text = [MapViewController mapAttribution];
 	
 		
@@ -406,48 +425,27 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 - (void) afterMapMove: (RMMapView*) map {
-	
-	BetterLog(@"");
-	
-	[blueCircleView setNeedsDisplay];
-	[self requestPhotos];
+	[self afterMapChanged:map];
 }
 
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
-	[blueCircleView setNeedsDisplay];
+	[self afterMapChanged:map];
+}
+
+- (void) afterMapChanged: (RMMapView*) map {
+	
+	[self displayLocationIndicator:YES];
+	[self removeLocationIndicatorAfterDelay];
+	
 	[self requestPhotos];
+	
 }
 
 
 
 
 
-
-#pragma mark toolbar actions
-//
-/***********************************************
- * @description			UI Events
- ***********************************************/
-//
-
-- (IBAction) didZoomIn {
-	BetterLog(@"zoomin");
-	if ([mapView.contents zoom] < MAX_ZOOM) {
-		[mapView.contents setZoom:[mapView.contents zoom] + 1];
-		[blueCircleView setNeedsDisplay];
-	}
-	[self requestPhotos];
-}
-
-- (IBAction) didZoomOut {
-	BetterLog(@"zoomout");
-	if ([mapView.contents zoom] > MIN_ZOOM) {
-		[mapView.contents setZoom:[mapView.contents zoom] - 1];
-		[blueCircleView setNeedsDisplay];
-	}
-	[self requestPhotos];
-}
 
 
 #pragma mark Location
@@ -468,8 +466,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		if(enabled==YES){
 			
 			gpslocateButton.style = UIBarButtonItemStyleDone;
-			blueCircleView.hidden = NO;
-			blueCircleView.alpha=0.5f;
 			
 		}
 		
@@ -478,29 +474,16 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		
 		gpslocateButton.style = UIBarButtonItemStyleBordered;
 		
-		[self removeLocationIndicator];
+		[self resetLocationOverlay];
 		
 		
 		[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 		
 		[self requestPhotos];
 	}
+	
 }
 
--(void)removeLocationIndicator{
-	
-	[blueCircleView setNeedsDisplay];
-	[UIView animateWithDuration:1.2f 
-						  delay:.5 
-						options:UIViewAnimationOptionCurveEaseOut 
-					 animations:^{ 
-						 blueCircleView.alpha=0;
-					 }
-					 completion:^(BOOL finished){
-						 blueCircleView.hidden=YES;
-					 }];
-	
-}
 
 
 -(void)locationDidComplete:(NSNotification*)notification{
@@ -509,11 +492,15 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	CLLocation *location=(CLLocation*)[notification object];
 	
+	self.lastLocation=location;
+	
 	[MapViewController zoomMapView:mapView toLocation:location];
-	[blueCircleView setNeedsDisplay];
 	
 	gpslocateButton.style = UIBarButtonItemStyleBordered;
-	[self removeLocationIndicator];
+	
+	[self displayLocationIndicator:YES];
+	
+	[self removeLocationIndicatorAfterDelay];
 	
 	[self requestPhotos];
 	
@@ -524,14 +511,63 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	CLLocation *location=(CLLocation*)[notification object];
 	
 	[MapViewController zoomMapView:mapView toLocation:location];
-	[blueCircleView setNeedsDisplay];
+	
+	[self displayLocationIndicator:YES];
 	
 }
 
 -(void)locationDidFail:(NSNotification*)notification{
 	
 	gpslocateButton.style = UIBarButtonItemStyleBordered;
-	blueCircleView.hidden = YES;
+	
+	[self resetLocationOverlay];
+	
+}
+
+
+-(void)removeLocationIndicatorAfterDelay{
+	
+	BetterLog(@"");
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
+	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:6];
+	
+}
+
+
+-(void)resetLocationOverlay{
+	
+	BetterLog(@"");
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
+	[self displayLocationIndicator:NO];
+}
+
+-(void)displayLocationIndicator:(BOOL)display{
+	
+	
+	int alpha=display==YES ? 1 :0;
+	
+	[gpsLocationView updateToLocation];
+	
+	if(display==YES && gpsLocationView.alpha==1)
+		return;
+	
+	if(display==NO && gpsLocationView.alpha==0)
+		return;
+	
+	if(display==YES){
+		gpsLocationView.visible=display;
+		gpsLocationView.alpha=0;
+	}
+	
+	
+	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+		gpsLocationView.alpha=alpha;
+	} completion:^(BOOL finished) {
+		gpsLocationView.visible=display;
+	}];
+	
 	
 }
 
@@ -595,19 +631,19 @@ static NSTimeInterval FADE_DURATION = 1.7;
 #pragma mark location provider
 
 - (float)getX {
-	CGPoint p = [mapView.contents latLongToPixel:lastLocation.coordinate];
+	CGPoint p = [self.mapView.contents latLongToPixel:self.lastLocation.coordinate];
 	return p.x;
 }
 
 - (float)getY {
-	CGPoint p = [mapView.contents latLongToPixel:lastLocation.coordinate];
+	CGPoint p = [self.mapView.contents latLongToPixel:self.lastLocation.coordinate];
 	return p.y;
 }
 
 - (float)getRadius {
 	
 	double metresPerPixel = [mapView.contents metersPerPixel];
-	float locationRadius=(lastLocation.horizontalAccuracy / metresPerPixel);
+	float locationRadius=(self.lastLocation.horizontalAccuracy / metresPerPixel);
 	
 	return MAX(locationRadius, 40.0f);
 }
@@ -650,7 +686,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	mapView = nil;
 	
 	self.attributionLabel = nil;
-	self.blueCircleView = nil;
 	self.introView = nil;
 	self.introButton = nil;
 	locationView = nil;

@@ -80,7 +80,7 @@
 							<object class="IBUIBarButtonItem" id="843800299">
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">icon_location.png</string>
+									<string key="NSResourceName">CSBarButton_location.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<float key="IBUIWidth">30</float>
@@ -738,19 +738,19 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>CSBarButton_location.png</string>
 				<string>UIButtonBarArrowLeft.png</string>
 				<string>UIButtonBarArrowRight.png</string>
 				<string>UIButtonBarCameraSmall.png</string>
 				<string>UIButtonBarInfo.png</string>
-				<string>icon_location.png</string>
 			</object>
 			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{20, 20}</string>
 				<string>{15, 18}</string>
 				<string>{15, 18}</string>
 				<string>{20, 15}</string>
 				<string>{18, 21}</string>
-				<string>{20, 20}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

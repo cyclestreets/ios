@@ -565,6 +565,12 @@
 		2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */; };
 		2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */; };
 		286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
+		28718BA9178570D000781A6B /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28718BA8178570D000781A6B /* SVPulsingAnnotationView.m */; };
+		28718BAA178570D000781A6B /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28718BA8178570D000781A6B /* SVPulsingAnnotationView.m */; };
+		28718BB417858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28718BB017858BE600781A6B /* UIButtonBarRefresh@2x.png */; };
+		28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28718BB017858BE600781A6B /* UIButtonBarRefresh@2x.png */; };
+		28718BB617858BE600781A6B /* UIButtonBarStop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28718BB117858BE600781A6B /* UIButtonBarStop@2x.png */; };
+		28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28718BB117858BE600781A6B /* UIButtonBarStop@2x.png */; };
 		28719D92136FE2AD00F69A1B /* LocationSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28719D91136FE2AD00F69A1B /* LocationSearchManager.m */; };
 		2872DF3713283586003995BE /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
 		28735BF4144EC7A000726A6C /* PhotoMapVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF3144EC7A000726A6C /* PhotoMapVO.m */; };
@@ -1105,6 +1111,10 @@
 		2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityTwitter@2x.png"; sourceTree = "<group>"; };
 		286C71C9134F8F05007B57E6 /* LoginVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LoginVO.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		286C71CA134F8F05007B57E6 /* LoginVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVO.m; sourceTree = "<group>"; };
+		28718BA7178570D000781A6B /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
+		28718BA8178570D000781A6B /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
+		28718BB017858BE600781A6B /* UIButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
+		28718BB117858BE600781A6B /* UIButtonBarStop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarStop@2x.png"; sourceTree = "<group>"; };
 		28719D90136FE2AD00F69A1B /* LocationSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LocationSearchManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28719D91136FE2AD00F69A1B /* LocationSearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchManager.m; sourceTree = "<group>"; };
 		2872DF3513283586003995BE /* ItineraryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItineraryCellView.h; sourceTree = "<group>"; };
@@ -1530,6 +1540,7 @@
 		280E2413144D82850021CDFA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				28718BA6178570D000781A6B /* SVPulsingAnnotationView */,
 				28CA8E1D1652A7AC000436ED /* Crashlytics */,
 				288C0F391649A5C4000880FF /* FMFramework */,
 				2846081D1649226300CBF96A /* ViewDeck */,
@@ -2020,6 +2031,15 @@
 				2863A3A7134E508800A22093 /* RouteSummary.m */,
 			);
 			name = RouteSummary;
+			sourceTree = "<group>";
+		};
+		28718BA6178570D000781A6B /* SVPulsingAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				28718BA7178570D000781A6B /* SVPulsingAnnotationView.h */,
+				28718BA8178570D000781A6B /* SVPulsingAnnotationView.m */,
+			);
+			path = SVPulsingAnnotationView;
 			sourceTree = "<group>";
 		};
 		2872DEEA13283109003995BE /* Map */ = {
@@ -2628,6 +2648,8 @@
 				287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */,
 				287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */,
 				287B8581144C4701006E3FCD /* UIButtonBarInfo@2x.png */,
+				28718BB017858BE600781A6B /* UIButtonBarRefresh@2x.png */,
+				28718BB117858BE600781A6B /* UIButtonBarStop@2x.png */,
 			);
 			path = x2;
 			sourceTree = "<group>";
@@ -3128,6 +3150,8 @@
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 				2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */,
+				28718BB417858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
+				28718BB617858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3345,6 +3369,8 @@
 				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 				2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */,
+				28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
+				28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3552,6 +3578,7 @@
 				288C0F65164AA0B1000880FF /* MapViewController.m in Sources */,
 				2811C4A9166CD4AC00592560 /* BUIconButton.m in Sources */,
 				285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
+				28718BA9178570D000781A6B /* SVPulsingAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3727,6 +3754,7 @@
 				2815EA04164D77B0003C356A /* MapViewController.m in Sources */,
 				2811C4AA166CD4AC00592560 /* BUIconButton.m in Sources */,
 				285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
+				28718BAA178570D000781A6B /* SVPulsingAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
