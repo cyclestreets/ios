@@ -1228,8 +1228,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) afterMapChanged: (RMMapView*) map {
 	
 	[_lineView setNeedsDisplay];
-	[self displayLocationIndicator:YES];
-	[self removeLocationIndicatorAfterDelay];
+	[self displayLocationIndicator:NO];
 	
 	if (!self.programmaticChange) {
 		
