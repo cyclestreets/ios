@@ -527,6 +527,8 @@
 		284608291649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
 		2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
+		2851A0EA178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2851A0E9178BF2DE00F85DB6 /* CSLocationIndicatorView.m */; };
+		2851A0EB178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2851A0E9178BF2DE00F85DB6 /* CSLocationIndicatorView.m */; };
 		285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
 		285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
@@ -1076,6 +1078,8 @@
 		284608261649388900CBF96A /* ImageUtilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtilties.h; sourceTree = "<group>"; };
 		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
 		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
+		2851A0E8178BF2DE00F85DB6 /* CSLocationIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLocationIndicatorView.h; sourceTree = "<group>"; };
+		2851A0E9178BF2DE00F85DB6 /* CSLocationIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSLocationIndicatorView.m; sourceTree = "<group>"; };
 		285352651678AF17007BC5CB /* BUIconActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUIconActionSheet.h; sourceTree = "<group>"; };
 		285352661678AF17007BC5CB /* BUIconActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUIconActionSheet.m; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
@@ -2439,6 +2443,8 @@
 				28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */,
 				28AE590315E503270034268C /* MapMarkerTouchView.h */,
 				28AE590415E503270034268C /* MapMarkerTouchView.m */,
+				2851A0E8178BF2DE00F85DB6 /* CSLocationIndicatorView.h */,
+				2851A0E9178BF2DE00F85DB6 /* CSLocationIndicatorView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3579,6 +3585,7 @@
 				2811C4A9166CD4AC00592560 /* BUIconButton.m in Sources */,
 				285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
 				28718BA9178570D000781A6B /* SVPulsingAnnotationView.m in Sources */,
+				2851A0EA178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3755,6 +3762,7 @@
 				2811C4AA166CD4AC00592560 /* BUIconButton.m in Sources */,
 				285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
 				28718BAA178570D000781A6B /* SVPulsingAnnotationView.m in Sources */,
+				2851A0EB178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
