@@ -120,11 +120,11 @@
 
 -(void)createPersistentUI{
 	
-	
 	[self createNavigationBarUI];
 	
 	controlView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"controlbar"];
 	[controlView drawBorderwithColor:UIColorFromRGB(0x333333) andStroke:1 left:NO right:NO top:YES bottom:YES];
+	controlView.autoresizingMask=UIViewAutoresizingFlexibleHeight;
 	
 	LayoutBox *controlcontainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, CONTROLUIHEIGHT)];
 	controlcontainer.fixedWidth=YES;

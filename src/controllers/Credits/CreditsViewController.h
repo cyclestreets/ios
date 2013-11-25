@@ -51,8 +51,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong)		IBOutlet UIBarButtonItem				* refreshButton;
 @property (nonatomic, strong)		IBOutlet UIBarButtonItem				* goBackButton;
 @property (nonatomic, strong)		IBOutlet UIBarButtonItem				* goForwardButton;
-@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* activityBarItem;
-@property (nonatomic, strong)		IBOutlet UIActivityIndicatorView				* activityIndicator;
+@property (nonatomic, strong)		 UIBarButtonItem				* activityBarItem;
+@property (nonatomic, strong)		 UIActivityIndicatorView				* activityIndicator;
 @property (nonatomic)		BOOL				 pageLoaded;
 
 -(void)updateUIState:(NSString*)state;

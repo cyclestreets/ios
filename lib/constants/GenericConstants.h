@@ -76,7 +76,7 @@ extern NSString *const NONE;
 extern NSString *const SHORTDATE;
 extern NSString *const ERRORTYPE;
 extern NSString *const EVENTTYPE;
-
+extern NSString *const NOTAVAILABLE;
 
 // nav button consts
 extern NSString *const RIGHT;

@@ -8,6 +8,7 @@
 
 #import "SegmentVO.h"
 #import "CSPointVO.h"
+#import "GenericConstants.h"
 
 static NSDictionary *roadIcons;
 
@@ -52,6 +53,9 @@ static NSDictionary *roadIcons;
 
 
 -(NSString*)timeString{
+	
+	if(startTime<=0)
+		return NOTAVAILABLE;
 	
 	NSUInteger h = startTime / 3600;
 	NSUInteger m = (startTime / 60) % 60;
