@@ -101,9 +101,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	int height=7;
 	
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route name] :[UIFont boldSystemFontOfSize:16]   :UIWIDTH :UILineBreakModeWordWrap];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route name] :[UIFont boldSystemFontOfSize:16]   :UIWIDTH :NSLineBreakByWordWrapping];
 	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :UIWIDTH :UILineBreakModeClip];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :UIWIDTH :NSLineBreakByClipping];
 	height+=7;
 	
 	return [NSNumber numberWithInt:height];

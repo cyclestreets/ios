@@ -86,7 +86,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationFeaturesManager);
 	// api for this?
 	
 	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
-	NSMutableDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters", nil];
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters", nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];
 	request.dataid=LOCATIONFEATURES;

@@ -67,9 +67,9 @@
 	
 	int height=7;
 	
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment roadName] :[UIFont boldSystemFontOfSize:16]   :248 :UILineBreakModeWordWrap];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment roadName] :[UIFont boldSystemFontOfSize:16]   :248 :NSLineBreakByWordWrapping];
 	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment timeString] :[UIFont systemFontOfSize:13] :248 :UILineBreakModeClip];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment timeString] :[UIFont systemFontOfSize:13] :248 :NSLineBreakByClipping];
 	height+=7;
 	
 	return [NSNumber numberWithInt:height];

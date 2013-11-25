@@ -156,7 +156,7 @@
 		
 		CGFloat lineheight;
 		// title label
-		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"title"] :[UIFont systemFontOfSize:18] :320 :UILineBreakModeHeadTruncation];
+		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"title"] :[UIFont systemFontOfSize:18] :320 :NSLineBreakByTruncatingHead];
 		ExpandedUILabel *tlabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 50, lineheight)];
 		tlabel.multiline=NO;
 		self.titleLabel=tlabel;
@@ -167,7 +167,7 @@
 		titleLabel.text=[dataProvider objectForKey:@"title"];
 		[labelContainer addSubview:titleLabel];
 		// sub label
-		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"subtitle"] :[UIFont systemFontOfSize:10] :200 :UILineBreakModeHeadTruncation];
+		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"subtitle"] :[UIFont systemFontOfSize:10] :200 :NSLineBreakByTruncatingHead];
         ExpandedUILabel *slabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 50, lineheight)];
 		slabel.multiline=NO;
 		self.subtitleLabel=slabel;

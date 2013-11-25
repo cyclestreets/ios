@@ -158,7 +158,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 									 userVisibleName,@"name",nil];
 	
 	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
-	NSMutableDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
 	NetRequest *request=[[NetRequest alloc]init];
 	request.dataid=REGISTER;

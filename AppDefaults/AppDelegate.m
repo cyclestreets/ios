@@ -41,12 +41,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <Crashlytics/Crashlytics.h>
 #import "RouteManager.h"
 #import <MapKit/MapKit.h>
-#import "TestFlight.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"
 #import "IIViewDeckController.h"
 #import "WrapController.h"
 #import "NSString-Utilities.h"
+
+#if defined (CONFIGURATION_Adhoc)
+#import "TestFlight.h"
+#endif
 
 
 @interface AppDelegate(Private)
@@ -73,7 +76,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
 	
-	[TestFlight takeOff:@"66d1beaa-3747-4893-8146-93c7003bc24f"];
+	#if defined (CONFIGURATION_Adhoc)
+	[TestFlight takeOff:@"66d1beaa-3747-4893-8146-93c7003bc24f"]; //66d1beaa-3747-4893-8146-93c7003bc24f
+	#endif
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	

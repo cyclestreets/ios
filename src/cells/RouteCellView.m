@@ -98,9 +98,9 @@
 	
 	int height=7;
 	
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont boldSystemFontOfSize:16]   :255 :UILineBreakModeWordWrap];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont boldSystemFontOfSize:16]   :255 :NSLineBreakByWordWrapping];
 	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :270 :UILineBreakModeClip];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :270 :NSLineBreakByClipping];
 	height+=7;
 	
 	return [NSNumber numberWithInt:height];

@@ -167,10 +167,10 @@ typedef int LayoutBoxLayoutMode;
 }
 
 // returns height of text for given width
-+(float) calculateHeightOfTextFromWidth:(NSString*)text :(UIFont*)withFont :(float)width :(UILineBreakMode)lineBreakMode;
++(float) calculateHeightOfTextFromWidth:(NSString*)text :(UIFont*)withFont :(float)width :(NSLineBreakMode)lineBreakMode;
 
 // returns height of text for given width with fixed line count
-+(float) calculateHeightOfTextFromWidthWithLineCount: (UIFont*)withFont :(float)width :(UILineBreakMode)lineBreakMode :(int)linecount;
++(float) calculateHeightOfTextFromWidthWithLineCount: (UIFont*)withFont :(float)width :(NSLineBreakMode)lineBreakMode :(int)linecount;
 
 // returns width of text for single line 
 +(float) calculateWidthOfText:(NSString*)text :(UIFont*)withFont;

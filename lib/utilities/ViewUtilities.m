@@ -573,11 +573,11 @@
 	NSString *fullmessage=nil;
 	
 	int fieldoffset=15;
-	fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:title :[UIFont boldSystemFontOfSize:13] :260 :UILineBreakModeWordWrap];
+	fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:title :[UIFont boldSystemFontOfSize:13] :260 :NSLineBreakByWordWrapping];
 	if(message!=nil){
 		fullmessage=[NSString stringWithFormat:@"%@\n\n",message];
 		fieldoffset+=15;
-		fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:fullmessage :[UIFont systemFontOfSize:13] :260 :UILineBreakModeWordWrap];
+		fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:fullmessage :[UIFont systemFontOfSize:13] :260 :NSLineBreakByWordWrapping];
 	}
 	fieldoffset+=13;
     

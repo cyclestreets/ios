@@ -82,7 +82,7 @@
 	if(multiline==YES){
 		self.numberOfLines=0;
 		CGRect tframe=self.frame;
-		CGFloat theight=[GlobalUtilities calculateHeightOfTextFromWidth:self.text :self.font :tframe.size.width :UILineBreakModeWordWrap];
+		CGFloat theight=[GlobalUtilities calculateHeightOfTextFromWidth:self.text :self.font :tframe.size.width :NSLineBreakByWordWrapping];
 		tframe.size.height=theight;
 		self.frame=tframe;
 	}else {
@@ -90,7 +90,7 @@
 		CGRect tframe=self.frame;
 		CGFloat twidth=[GlobalUtilities calculateWidthOfText:self.text :self.font];
 		if(fixedWidth==NO){
-			CGFloat theight=[GlobalUtilities calculateHeightOfTextFromWidth:self.text :self.font :twidth :UILineBreakModeWordWrap];
+			CGFloat theight=[GlobalUtilities calculateHeightOfTextFromWidth:self.text :self.font :twidth :NSLineBreakByWordWrapping];
 			tframe.size.height=MAX(theight,tframe.size.height);			
 		}else {
 			self.lineBreakMode=UILineBreakModeTailTruncation;

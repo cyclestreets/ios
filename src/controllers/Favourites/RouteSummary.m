@@ -174,7 +174,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	routeNameLabel.multiline=YES;
 	
-	[viewContainer addSubViewsFromArray:[NSArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,routeButton,renameButton,favouriteButton,nil]];
+	[viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:headerContainer,d1,readoutContainer,d2,routeButton,renameButton,favouriteButton,nil]];
 	
 	
 }

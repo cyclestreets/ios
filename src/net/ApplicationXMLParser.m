@@ -285,7 +285,7 @@
 		
 	}
 
-	validation.responseDict=[NSDictionary dictionaryWithObject:loginResponse forKey:activeResponse.dataid];
+	validation.responseDict=[NSMutableDictionary dictionaryWithObject:loginResponse forKey:activeResponse.dataid];
 	
 	activeResponse.dataProvider=validation;
 	
@@ -380,7 +380,7 @@
 			
 		}else{
 			
-			validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
+			validation.responseDict=[NSMutableDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
 			
 			validation.returnCode=ValidationCalculateRouteSuccess;
 			
@@ -638,7 +638,7 @@
 		
 		photolist.photos=arr;
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:photolist forKey:activeResponse.dataid];
+		validation.responseDict=[NSMutableDictionary dictionaryWithObject:photolist forKey:activeResponse.dataid];
 		
 		validation.returnCode=ValidationRetrievePhotosSuccess;
 		
@@ -694,7 +694,7 @@
 			
 		}
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
+		validation.responseDict=[NSMutableDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
 		
 		validation.returnCode=ValidationPOIListingSuccess;
 		
@@ -749,7 +749,7 @@
 			
 		}
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
+		validation.responseDict=[NSMutableDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
 		
 		validation.returnCode=ValidationPOICategorySuccess;
 		

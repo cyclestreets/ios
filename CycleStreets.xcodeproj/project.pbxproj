@@ -527,8 +527,6 @@
 		284608291649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
 		2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
-		2851A0EA178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2851A0E9178BF2DE00F85DB6 /* CSLocationIndicatorView.m */; };
-		2851A0EB178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2851A0E9178BF2DE00F85DB6 /* CSLocationIndicatorView.m */; };
 		285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
 		285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
@@ -620,7 +618,6 @@
 		289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
-		289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289CAF8715F89A460036DE98 /* libTestFlight.a */; };
 		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
@@ -806,6 +803,7 @@
 		28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB4231777464F002D0912 /* UIIcon_walking.png */; };
 		28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
 		28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
+		28FB9C4B17BCD428009B5E32 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FB9C4917BCD428009B5E32 /* libTestFlight.a */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E77D8F11120321E4003E6B8D /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		E7BE4B1A11A2E5F400930E0C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */; };
@@ -1179,8 +1177,6 @@
 		289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_tracks@2x.png"; sourceTree = "<group>"; };
 		289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_finish_wisp@2x.png"; sourceTree = "<group>"; };
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
-		289CAF8715F89A460036DE98 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		289CAF8A15F89A460036DE98 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
 		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -1445,6 +1441,8 @@
 		28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITextViewAccessoryView.xib; sourceTree = "<group>"; };
 		28FAB4231777464F002D0912 /* UIIcon_walking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_walking.png; sourceTree = "<group>"; };
 		28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_walking@2x.png"; sourceTree = "<group>"; };
+		28FB9C4917BCD428009B5E32 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		28FB9C4A17BCD428009B5E32 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E77D8F10120321E4003E6B8D /* credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = credits.html; path = html/credits.html; sourceTree = "<group>"; };
 		E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1481,8 +1479,8 @@
 				28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */,
 				28AD64C9131FB870008527FC /* libMapView.a in Frameworks */,
 				2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */,
-				289CAF8B15F89A460036DE98 /* libTestFlight.a in Frameworks */,
 				28363432165A9A050039246E /* Crashlytics.framework in Frameworks */,
+				28FB9C4B17BCD428009B5E32 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1544,11 +1542,11 @@
 		280E2413144D82850021CDFA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				28FB9C4817BCD428009B5E32 /* TestFlight */,
 				28718BA6178570D000781A6B /* SVPulsingAnnotationView */,
 				28CA8E1D1652A7AC000436ED /* Crashlytics */,
 				288C0F391649A5C4000880FF /* FMFramework */,
 				2846081D1649226300CBF96A /* ViewDeck */,
-				289CAF8615F89A460036DE98 /* TestFlight */,
 				28B484DE15261FAC00E406E1 /* WEPopover */,
 				280E2417144D82850021CDFA /* JSONKit */,
 				280E241F144D82850021CDFA /* MBProgressHUD */,
@@ -2180,15 +2178,6 @@
 			path = Wisps;
 			sourceTree = "<group>";
 		};
-		289CAF8615F89A460036DE98 /* TestFlight */ = {
-			isa = PBXGroup;
-			children = (
-				289CAF8715F89A460036DE98 /* libTestFlight.a */,
-				289CAF8A15F89A460036DE98 /* TestFlight.h */,
-			);
-			path = TestFlight;
-			sourceTree = "<group>";
-		};
 		28A89CC914FD4A170001BABA /* PhotoWizard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2772,6 +2761,15 @@
 				28F66F0C135F636200DECFAC /* PhotoMapImageLocationViewController.m */,
 			);
 			name = PhotoMap;
+			sourceTree = "<group>";
+		};
+		28FB9C4817BCD428009B5E32 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				28FB9C4917BCD428009B5E32 /* libTestFlight.a */,
+				28FB9C4A17BCD428009B5E32 /* TestFlight.h */,
+			);
+			path = TestFlight;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -3585,7 +3583,6 @@
 				2811C4A9166CD4AC00592560 /* BUIconButton.m in Sources */,
 				285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
 				28718BA9178570D000781A6B /* SVPulsingAnnotationView.m in Sources */,
-				2851A0EA178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3762,7 +3759,6 @@
 				2811C4AA166CD4AC00592560 /* BUIconButton.m in Sources */,
 				285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */,
 				28718BAA178570D000781A6B /* SVPulsingAnnotationView.m in Sources */,
-				2851A0EB178BF2DE00F85DB6 /* CSLocationIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3786,7 +3782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
@@ -3818,7 +3814,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
+				PROVISIONING_PROFILE = "643E7EF4-9FCB-469B-8D40-CE5AB69FD9F1";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3829,10 +3825,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3859,7 +3855,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
+				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3871,10 +3867,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (4YM8CCJL5J)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3903,7 +3899,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
+				PROVISIONING_PROFILE = "643E7EF4-9FCB-469B-8D40-CE5AB69FD9F1";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3914,11 +3910,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3945,7 +3941,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "4461D2BD-C9BE-42AC-8B72-AB01D2BD8F0E";
+				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3957,11 +3953,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_ID = "mobile-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3988,7 +3984,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "DE5F58CC-40F9-43F2-A30C-AE41EA255579";
+				PROVISIONING_PROFILE = "B69ADFE1-B824-4A5F-867E-B78CC80FC985";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
@@ -3999,12 +3995,12 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Paul Wood (KTNE3F879L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (4YM8CCJL5J)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -4018,7 +4014,7 @@
 					"-licucore",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "6481B1C5-02DD-4E77-B6CC-67D50BC3BF57";
+				PROVISIONING_PROFILE = "643E7EF4-9FCB-469B-8D40-CE5AB69FD9F1";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
@@ -4028,12 +4024,12 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -4047,7 +4043,7 @@
 					"-licucore",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "C9C99A9F-C3FC-4294-9877-717420C4CF14";
+				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
@@ -4057,12 +4053,12 @@
 		E791ADC911518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -4076,7 +4072,7 @@
 					"-lxml2",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "ED6BA8EB-FDE6-4DC3-80A5-873C41950976";
+				PROVISIONING_PROFILE = "B69ADFE1-B824-4A5F-867E-B78CC80FC985";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
@@ -4087,11 +4083,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				BUNDLE_ID = "mobile-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4118,7 +4114,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "9D44DF06-5E8E-4BF2-8BF9-2F11231D6CB6";
+				PROVISIONING_PROFILE = "B69ADFE1-B824-4A5F-867E-B78CC80FC985";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
