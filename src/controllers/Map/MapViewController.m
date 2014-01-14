@@ -614,7 +614,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 	
 	
-	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+	[UIView animateWithDuration:0.7 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		_gpsLocationView.alpha=alpha;
 	} completion:^(BOOL finished) {
 		_gpsLocationView.visible=display;

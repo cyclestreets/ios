@@ -43,6 +43,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ExpandedUILabel.h"
 #import "GradientView.h"
 #import "CSSegmentFooterView.h"
+#import "SVPulsingAnnotationView.h"
+#import "UserLocationManager.h"
+#import "UIView+Additions.h"
+
+
+static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
+
+
 
 @interface RouteSegmentViewController()
 
@@ -69,6 +77,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
 @property (nonatomic, strong) QueryPhoto								* queryPhoto;
 @property (nonatomic,strong)  SegmentVO									* currentSegment;
+@property (nonatomic, strong) SVPulsingAnnotationView					* gpsLocationView;
 
 
 //toolbar
@@ -92,6 +101,61 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @implementation RouteSegmentViewController
 
 
+-(void)listNotificationInterests{
+	
+	[self initialise];
+	
+	[notifications addObject:CSMAPSTYLECHANGED];
+	
+	[notifications addObject:GPSLOCATIONCOMPLETE];
+	[notifications addObject:GPSLOCATIONUPDATE];
+	[notifications addObject:GPSLOCATIONFAILED];
+	
+	
+	[super listNotificationInterests];
+	
+}
+
+-(void)didReceiveNotification:(NSNotification*)notification{
+	
+	[super didReceiveNotification:notification];
+	
+
+	//NSDictionary	*dict=[notification userInfo];
+	NSString		*name=notification.name;
+	
+	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
+		
+		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
+			[self locationDidComplete:notification];
+		}
+		
+		if([name isEqualToString:GPSLOCATIONUPDATE]){
+			[self locationDidUpdate:notification];
+		}
+		
+		if([name isEqualToString:GPSLOCATIONFAILED]){
+			[self locationDidFail:notification];
+		}
+		
+	}
+	
+	
+	if([name isEqualToString:CSMAPSTYLECHANGED]){
+		[self didNotificationMapStyleChanged];
+	}
+	
+}
+
+#pragma mark notification response methods
+
+
+- (void) didNotificationMapStyleChanged {
+	self.mapView.contents.tileSource = [MapViewController tileSource];
+	_attributionLabel.text = [MapViewController mapAttribution];
+}
+
+
 
 - (void)viewDidLoad {
 	
@@ -106,12 +170,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//get the configured map source.
 	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
 	
-	// set up location manager
-	self.locationManager = [[CLLocationManager alloc] init];
-	_doingLocation = NO;
 	
-	[_blueCircleView setLocationProvider:self];
-	_blueCircleView.hidden = YES;
 	
 	[_lineView setPointListProvider:self];
 	
@@ -139,6 +198,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSMutableArray *toolbaritems=[_toolBar.items mutableCopy];
 	[toolbaritems insertObject:backButton atIndex:0];
 	_toolBar.items=toolbaritems;
+	
+	
+	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,self.view.height)];
+	_gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
+	_gpsLocationView.visible=NO;
+	_gpsLocationView.alpha=0;
+	[_gpsLocationView setLocationProvider:self];
 	
 //	
 //	TBD:
@@ -178,12 +244,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
-
-
-- (void) didNotificationMapStyleChanged {
-	_mapView.contents.tileSource = [MapViewController tileSource];
-	self.attributionLabel.text = [MapViewController mapAttribution];
-}
 
 
 
@@ -390,37 +450,172 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
-// all the things that need fixed if we have asked (or been forced) to stop doing location.
-- (void)stopDoingLocation {
+
+#pragma mark - UserLocation notification methods
+
+
+-(void)locationDidComplete:(NSNotification *)notification{
 	
 	BetterLog(@"");
 	
-	_doingLocation = NO;
-	_locationButton.style = UIBarButtonItemStyleBordered;
-	[_locationManager stopUpdatingLocation];
-	[[_mapView markerManager] removeMarker:self.markerLocation];
-	self.markerLocation=nil;
-	_blueCircleView.hidden = YES;
+	self.lastLocation=notification.object;
+	
+	if (!self.markerLocation) {
+		//first location, construct the marker
+		self.markerLocation = [Markers markerWaypoint];
+		[[_mapView markerManager] addMarker:self.markerLocation AtLatLong: _lastLocation.coordinate];
+	}
+	[[_mapView markerManager] moveMarker:self.markerLocation AtLatLon: _lastLocation.coordinate];
+	
+	
+	BetterLog(@"ll=%@",_lastLocation);
+	
+	// zooms map to show bounding box for location & segment point
+	//TODO: this should now compare current segment start loaction and gps location not overall route
+	[_mapView zoomWithLatLngBoundsNorthEast:[_currentSegment maxNorthEastForLocation:_lastLocation] SouthWest:[_currentSegment maxSouthWestForLocation:_lastLocation]];
+	
+	[_lineView setNeedsDisplay];
+	
+	[self displayLocationIndicator:YES];
+	
+	[self removeLocationIndicatorAfterDelay];
+	
+}
+
+-(void)locationDidUpdate:(NSNotification *)notification{
+	
+	BetterLog(@"");
+	
+	self.lastLocation=notification.object;
+	[_lineView setNeedsDisplay];
+	
+	[self displayLocationIndicator:YES];
+}
+
+-(void)locationDidFail:(NSNotification *)notification{
+	
+	[self resetLocationOverlay];
+	
+}
+
+
+-(void)removeLocationIndicatorAfterDelay{
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
+	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:6];
+	
+}
+
+
+-(void)resetLocationOverlay{
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
+	[self displayLocationIndicator:NO];
+}
+
+-(void)displayLocationIndicator:(BOOL)display{
+	
+	if(_gpsLocationView.superview==nil && display==YES)
+		[self.mapView addSubview:_gpsLocationView];
+	
+	
+	int alpha=display==YES ? 1 :0;
+	
+	if(_gpsLocationView.superview!=nil)
+		[_gpsLocationView updateToLocation];
+	
+	if(display==YES && _gpsLocationView.alpha==1)
+		return;
+	
+	if(display==NO && _gpsLocationView.alpha==0)
+		return;
+	
+	if(display==YES){
+		_gpsLocationView.visible=display;
+		_gpsLocationView.alpha=0;
+	}
+	
+	
+	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+		_gpsLocationView.alpha=alpha;
+	} completion:^(BOOL finished) {
+		_gpsLocationView.visible=display;
+		[_gpsLocationView removeFromSuperview];
+	}];
+	
+	
+}
+
+
+//------------------------------------------------------------------------------------
+#pragma mark - Core Location
+//------------------------------------------------------------------------------------
+//
+/***********************************************
+ * @description			Location Manager methods
+ ***********************************************/
+//
+
+-(void)startLocating{
+	
+	BetterLog(@"");
+	
+	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+	
+	
+	[self resetLocationOverlay];
+	
+	
+}
+
+-(void)stopLocating{
+	
+	BetterLog(@"");
+	
+	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+	
+	
+	[self removeLocationIndicatorAfterDelay];
+	
+}
+
+
+
+
+// all the things that need fixed if we have asked (or been forced) to stop doing location.
+- (void)stopDoingLocation {
+	
+	[self stopLocating];
+	
+//	BetterLog(@"");
+//	
+//	_doingLocation = NO;
+//	_locationButton.style = UIBarButtonItemStyleBordered;
+//	[_locationManager stopUpdatingLocation];
+//	[[_mapView markerManager] removeMarker:self.markerLocation];
+//	self.markerLocation=nil;
+//	_blueCircleView.hidden = YES;
 }
 
 // all the things that need fixed if we have asked (or been forced) to start doing location.
 - (void)startDoingLocation {
 	
-	if([CLLocationManager locationServicesEnabled]==YES){
+	[self startLocating];
 	
-		_doingLocation = YES;
-		_locationButton.style = UIBarButtonItemStyleDone;
-		_locationManager.delegate = self;
-		[_locationManager startUpdatingLocation];
-		_blueCircleView.hidden = NO;
-	}else {
-		UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-														   message:@"Location services for CycleStreets are off, please enable in Settings > General > Location Services to use location based features."
-														  delegate:self
-												 cancelButtonTitle:@"OK"
-												 otherButtonTitles:nil];
-		[gpsAlert show];
-	}
+//	if([CLLocationManager locationServicesEnabled]==YES){
+//	
+//		_doingLocation = YES;
+//		_locationButton.style = UIBarButtonItemStyleDone;
+//		_locationManager.delegate = self;
+//		[_locationManager startUpdatingLocation];
+//		_blueCircleView.hidden = NO;
+//	}else {
+//		UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+//														   message:@"Location services for CycleStreets are off, please enable in Settings > General > Location Services to use location based features."
+//														  delegate:self
+//												 cancelButtonTitle:@"OK"
+//												 otherButtonTitles:nil];
+//		[gpsAlert show];
+//	}
 
 }
 
