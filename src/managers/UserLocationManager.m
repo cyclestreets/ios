@@ -342,7 +342,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	// option #2  accuracy is poor
     if (newLocation.horizontalAccuracy < 0) return;
 	
-    // option #3 test for new locations accuracy compared to the last one
+    // option #3 test for new location's accuracy compared to the last one
     if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
 		
         self.bestEffortAtLocation = newLocation;

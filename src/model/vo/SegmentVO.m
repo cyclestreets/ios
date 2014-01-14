@@ -226,6 +226,97 @@ static NSDictionary *roadIcons;
 
 
 
+-(CLLocationCoordinate2D)northEast{
+	
+	CLLocationCoordinate2D start = [self segmentStart];
+	CLLocationCoordinate2D end = [self segmentEnd];
+	CLLocationCoordinate2D ne;
+	if (start.latitude < end.latitude) {
+		ne.latitude = end.latitude;
+	} else {
+		ne.latitude = start.latitude;
+	}
+	if (start.longitude < end.longitude) {
+		ne.longitude = end.longitude;
+	} else {
+		ne.longitude = start.longitude;
+	}
+	
+	return ne;
+	
+}
+
+
+-(CLLocationCoordinate2D)southWest{
+	
+	CLLocationCoordinate2D start = [self segmentStart];
+	CLLocationCoordinate2D end = [self segmentEnd];
+	CLLocationCoordinate2D sw;
+	if (start.latitude < end.latitude) {
+		sw.latitude = start.latitude;
+	} else {
+		sw.latitude = end.latitude;
+	}
+	if (start.longitude < end.longitude) {
+		sw.longitude = start.longitude;
+	} else {
+		sw.longitude = end.longitude;
+	}
+	
+	return sw;
+}
+
+
+
+//
+/***********************************************
+ * @description			Mthods to create ne/sw bounding locations for 2 points
+ ***********************************************/
+//
+-(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation{
+	
+	CLLocationCoordinate2D location;
+	
+	CLLocationCoordinate2D ne=self.northEast;
+	
+	// compare n>n, max is lower
+	double selflatitude=ne.latitude;
+	double comparelatitude=comparelocation.coordinate.latitude;
+	location.latitude=MAX(selflatitude, comparelatitude)+0.002;
+	
+	
+	// compare e>e, max is higher
+	double selflongtitude=ne.longitude;
+	double comparelongtitude=comparelocation.coordinate.longitude;
+	location.longitude=MAX(selflongtitude, comparelongtitude)+0.002;
+	
+	return location;
+}
+
+
+-(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation{
+	
+	CLLocationCoordinate2D location;
+	
+	CLLocationCoordinate2D sw=self.southWest;
+	
+	// compare s>s, max is lower
+	double selflatitude=sw.latitude;
+	double comparelatitude=comparelocation.coordinate.latitude;
+	location.latitude=MIN(selflatitude, comparelatitude)-0.006;
+	
+	
+	// compare w>w, max is higher
+	double selflongtitude=sw.longitude;
+	double comparelongtitude=comparelocation.coordinate.longitude;
+	location.longitude=MIN(selflongtitude, comparelongtitude)-0.002;
+	
+	return location;
+}
+
+
+
+
 static NSString *ROAD_NAME = @"roadName";
 static NSString *PROVISION_NAME = @"provisionName";
 static NSString *TURN_TYPE = @"turnType";

@@ -63,5 +63,8 @@
 +(NSString*)provisionIconForType:(NSString*)type isWalking:(int)walking;// legacy support for walking
 +(NSString*)iconForType:(NSString*)type;
 
+-(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation;
+-(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation;
+
 @end
 

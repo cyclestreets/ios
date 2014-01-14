@@ -68,6 +68,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic) BOOL												doingLocation;
 @property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
 @property (nonatomic, strong) QueryPhoto								* queryPhoto;
+@property (nonatomic,strong)  SegmentVO									* currentSegment;
 
 
 //toolbar
@@ -304,19 +305,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)setSegmentIndex:(NSInteger)newIndex {
 	self.index = newIndex;
-	SegmentVO *segment = [self.route segmentAtIndex:_index];
+	self.currentSegment = [self.route segmentAtIndex:_index];
 	SegmentVO *nextSegment = nil;
 	if (_index + 1 < [self.route numSegments]) {
 		nextSegment = [self.route segmentAtIndex:_index+1];
 	}
 	
 	// fill the labels from the segment we are showing
-	_footerView.dataProvider=segment;
+	_footerView.dataProvider=_currentSegment;
 	[_footerView updateLayout];
 	[self updateFooterPositions];
 	// centre the view around the segment
-	CLLocationCoordinate2D start = [segment segmentStart];
-	CLLocationCoordinate2D end = [segment segmentEnd];
+	CLLocationCoordinate2D start = [_currentSegment segmentStart];
+	CLLocationCoordinate2D end = [_currentSegment segmentEnd];
 	CLLocationCoordinate2D ne;
 	CLLocationCoordinate2D sw;
 	if (start.latitude < end.latitude) {
@@ -342,11 +343,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	for (RMMarker *marker in toRemove) {
 		if (marker != self.markerLocation) {
-			//Not clear why this gets a 0 refcount in 3.1.3, but it does, so just leak it, it's small.
 			[markerManager removeMarker:marker];
 		}
 	}
-	[markerManager addMarker:[Markers markerBeginArrow:[segment startBearing]] AtLatLong:start];
+	[markerManager addMarker:[Markers markerBeginArrow:[_currentSegment startBearing]] AtLatLong:start];
 	[markerManager addMarker:[Markers markerEndArrow:[nextSegment startBearing]] AtLatLong:end];
 	
 	[self setPrevNext];
@@ -455,7 +455,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"ll=%@",_lastLocation);
 	
 	// zooms map to show bounding box for location & segment point
-	[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];
+	//TODO: this should now compare current segment start loaction and gps location not overall route
+	[_mapView zoomWithLatLngBoundsNorthEast:[_currentSegment maxNorthEastForLocation:_lastLocation] SouthWest:[_currentSegment maxSouthWestForLocation:_lastLocation]];
 	
 	[_lineView setNeedsDisplay];
 	[_blueCircleView setNeedsDisplay];
