@@ -31,6 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UserLocationManager.h"
 #import "ButtonUtilities.h"
 #import "RouteManager.h"
+#import "UIView+Additions.h"
 
 static double FADE_DELAY = 0;
 static double FADE_DURATION = 1.0;
@@ -113,7 +114,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			self.closeButton=(UIButton*)[view viewWithTag:CLOSEBUTTONTAG];
 			
 			[ButtonUtilities styleIBButton:closeButton type:@"green" text:@"Plan a route"];
-			[closeButton addTarget:self action:@selector(closeOverlayView:) forControlEvents:UIControlEventTouchUpInside];			
+			[closeButton addTarget:self action:@selector(closeOverlayView:) forControlEvents:UIControlEventTouchUpInside];
+			
+			
 		}
 	}
 	return view;
@@ -164,6 +167,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		
 			if (self.welcomeView == nil) {
 				self.welcomeView = [self loadWelcomeView];
+				self.welcomeView.height=self.controller.view.height;
 			}
 			[self.controller.view addSubview:self.welcomeView];
 			

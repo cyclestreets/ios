@@ -290,7 +290,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	_gpsLocationView.visible=NO;
 	_gpsLocationView.alpha=0;
 	[_gpsLocationView setLocationProvider:self];
-	[self.mapView addSubview:_gpsLocationView];
+	
 	
 	
 	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
@@ -593,10 +593,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)displayLocationIndicator:(BOOL)display{
 	
+	if(_gpsLocationView.superview==nil && display==YES)
+		[self.mapView addSubview:_gpsLocationView];
+	
 	
 	int alpha=display==YES ? 1 :0;
 	
-	[_gpsLocationView updateToLocation];
+	if(_gpsLocationView.superview!=nil)
+		[_gpsLocationView updateToLocation];
 	
 	if(display==YES && _gpsLocationView.alpha==1)
 		return;
@@ -614,6 +618,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		_gpsLocationView.alpha=alpha;
 	} completion:^(BOOL finished) {
 		_gpsLocationView.visible=display;
+		[_gpsLocationView removeFromSuperview];
 	}];
 
 	
