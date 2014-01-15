@@ -102,6 +102,8 @@ static NSInteger MAX_DIST = 10;
 
 // should be able to do multi plan drawing in layers
 - (void)drawRect:(CGRect)rect {
+	
+	/*
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	
 	CGContextSetLineWidth( ctx, 4.0);
@@ -110,8 +112,8 @@ static NSInteger MAX_DIST = 10;
     float normal[]={1};
     
 	NSArray *points = [pointListProvider pointList];
-	
-    for (int i=0;i<points.count;i++) {
+	int pointCount=points.count;
+    for (int i=0;i<pointCount;i++) {
         
         CSPointVO *point=points[i];
         CSPointVO *prevpoint;
@@ -119,8 +121,6 @@ static NSInteger MAX_DIST = 10;
         if (i>0) {
             
             prevpoint=points[i-1];
-            
-			BetterLog(@"point.isWalking=%i",point.isWalking);
             
             if(point.isWalking==YES){
                 CGContextSetStrokeColorWithColor(ctx, _dashedlineColor.CGColor);
@@ -143,25 +143,30 @@ static NSInteger MAX_DIST = 10;
         
     }
 	
-	/*
-	
-	CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:0.8 green:0.2 blue:1.0 alpha:0.8].CGColor);
-	
-	NSArray *points = [pointListProvider pointList];
-	
-	bool first = YES;
-	for (CSPointVO *point in points) {
-		if (first) {
-			CGContextMoveToPoint(ctx, point.p.x, point.p.y);
-			first = NO;
-		} else {
-			CGContextAddLineToPoint(ctx, point.p.x, point.p.y);
-		}
-	}
-	
-	CGContextStrokePath(ctx);
-	 
 	 */
+	
+	
+	
+	 CGContextRef ctx = UIGraphicsGetCurrentContext();
+	 
+	 CGContextSetLineWidth( ctx, 4.0);
+	 CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithRed:0.8 green:0.2 blue:1.0 alpha:0.8].CGColor);
+	 
+	 NSArray *points = [pointListProvider pointList];
+	 
+	 bool first = YES;
+	 for (CSPointVO *point in points) {
+	 if (first) {
+	 CGContextMoveToPoint(ctx, point.p.x, point.p.y);
+	 first = NO;
+	 } else {
+	 CGContextAddLineToPoint(ctx, point.p.x, point.p.y);
+	 }
+	 }
+	 
+	 CGContextStrokePath(ctx);
+	 
+	
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

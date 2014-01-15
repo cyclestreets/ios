@@ -538,8 +538,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
 		_gpsLocationView.alpha=alpha;
 	} completion:^(BOOL finished) {
-		_gpsLocationView.visible=display;
-		[_gpsLocationView removeFromSuperview];
+		if(_gpsLocationView.alpha==0){
+			_gpsLocationView.visible=display;
+			[_gpsLocationView removeFromSuperview];
+		}
+		
 	}];
 	
 	

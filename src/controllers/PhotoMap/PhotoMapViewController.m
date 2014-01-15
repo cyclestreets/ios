@@ -57,15 +57,34 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIView+Additions.h"
 
 
-
+static NSTimeInterval FADE_DURATION = 1.7;
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 @interface PhotoMapViewController()
 
+@property (nonatomic, strong) IBOutlet RMMapView						* mapView;//map of current area
+@property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;// map type label
 
-
-@property (nonatomic, strong) SVPulsingAnnotationView				* gpsLocationView;
+@property (nonatomic, strong) RMMapContents								* mapContents;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem					* gpslocateButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoWizardButton;
+@property (nonatomic, strong) CLLocationManager							* locationManager;
+@property (nonatomic, strong) CLLocation								* lastLocation;// last location
+@property (nonatomic, strong) CLLocation								* currentLocation;
+@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;//the popup with the contents of a particular location (photomap etc.)
+@property (nonatomic, strong) MapLocationSearchViewController			* mapLocationSearchView;//the search popup
+@property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
+@property (nonatomic, strong) InitialLocation							* initialLocation;
+@property (nonatomic, strong) IBOutlet UIView							* introView;
+@property (nonatomic, strong) IBOutlet UIButton							* introButton;
+@property (nonatomic, strong) NSMutableArray							* photoMarkers;
+@property (nonatomic, assign) BOOL										photomapQuerying;
+@property (nonatomic, assign) BOOL										showingPhotos;
+@property (nonatomic, assign) BOOL										locationManagerIsLocating;
+@property (nonatomic, assign) BOOL										locationWasFound;
+@property (nonatomic, assign) BOOL										firstRun;
+@property (nonatomic, strong) SVPulsingAnnotationView					* gpsLocationView;
 
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
@@ -85,28 +104,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 @implementation PhotoMapViewController
 
-
-static NSTimeInterval FADE_DURATION = 1.7;
-@synthesize mapView;
-@synthesize attributionLabel;
-@synthesize mapContents;
-@synthesize gpslocateButton;
-@synthesize photoWizardButton;
-@synthesize lastLocation;
-@synthesize currentLocation;
-@synthesize locationView;
-@synthesize mapLocationSearchView;
-@synthesize photoWizardView;
-@synthesize initialLocation;
-@synthesize introView;
-@synthesize introButton;
-@synthesize photoMarkers;
-@synthesize photomapQuerying;
-@synthesize showingPhotos;
-@synthesize locationManagerIsLocating;
-@synthesize locationWasFound;
-@synthesize firstRun;
-@synthesize gpsLocationView;
 
 
 
@@ -171,7 +168,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 
 - (void) didNotificationMapStyleChanged {
-	mapView.contents.tileSource = [MapViewController tileSource];
+	_mapView.contents.tileSource = [MapViewController tileSource];
 	self.attributionLabel.text = [MapViewController mapAttribution];
 }
 
@@ -184,18 +181,18 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 		[self displayPhotosOnMap];
 
-		photomapQuerying = NO;
+		_photomapQuerying = NO;
 		
 		
 		// BUG fix: Map will not display markers on first load post initial location
 		// data is fine but it requires another call to the server to get this to kick in?
-		if(firstRun==YES){
+		if(_firstRun==YES){
 			[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0];
-			firstRun=NO;
+			_firstRun=NO;
 		}
 		
 	}else{
-		photomapQuerying=NO;
+		_photomapQuerying=NO;
 	}
 	
 	
@@ -209,8 +206,8 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	PhotoMapListVO *photoList=[PhotoManager sharedInstance].locationPhotoList;
 	
 	[self clearPhotos];
-	if (showingPhotos==NO) {
-		photomapQuerying = NO;
+	if (_showingPhotos==NO) {
+		_photomapQuerying = NO;
 		return;
 	}
 	
@@ -225,8 +222,8 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		}
 		
 		marker.data = photo;
-		[photoMarkers addObject:marker];
-		[[mapView markerManager] addMarker:marker AtLatLong:[photo location]];
+		[_photoMarkers addObject:marker];
+		[[_mapView markerManager] addMarker:marker AtLatLong:[photo location]];
 	}
 	
 	
@@ -254,31 +251,30 @@ static NSTimeInterval FADE_DURATION = 1.7;
 -(void)createPersistentUI{
 	
 	displaysConnectionErrors=NO;
-	firstRun=YES;
+	_firstRun=YES;
 	
 	//Necessary to start route-me service
 	[RMMapView class];
-	self.mapContents=[[RMMapContents alloc] initWithView:mapView tilesource:[MapViewController tileSource]];
-	[mapView setDelegate:self];
-	[[mapView markerManager] removeMarkers];
+	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
+	[_mapView setDelegate:self];
+	[[_mapView markerManager] removeMarkers];
 	
 	
 	self.photoMarkers = [[NSMutableArray alloc] init];
 	
 	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,self.view.height)];
-	gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
-	gpsLocationView.visible=NO;
-	gpsLocationView.alpha=0;
-	[gpsLocationView setLocationProvider:self];
-	[self.mapView addSubview:gpsLocationView];
+	_gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
+	_gpsLocationView.visible=NO;
+	_gpsLocationView.alpha=0;
+	[_gpsLocationView setLocationProvider:self];
 	
 	//get the map attribution 
 	self.attributionLabel.text = [MapViewController mapAttribution];
 	
 		
-	showingPhotos = YES;
+	_showingPhotos = YES;
 	
-	[ButtonUtilities styleIBButton:introButton type:@"green" text:@"OK"];
+	[ButtonUtilities styleIBButton:_introButton type:@"green" text:@"OK"];
 	
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
 	NSString *experienceLevel = [misc objectForKey:@"experienced"];
@@ -309,12 +305,12 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		
 		if([UserLocationManager sharedInstance].doesDeviceAllowLocation==YES){
 			
-			if(currentLocation==nil)
+			if(_currentLocation==nil)
 				[self locationButtonSelected:nil];
 			
 		}else{
 			
-			if(currentLocation==nil)
+			if(_currentLocation==nil)
 				[self displayLocationForMap:[UserLocationManager defaultCoordinate]];
 		}
 		
@@ -325,9 +321,9 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 -(void)displayLocationForMap:(CLLocationCoordinate2D)location{
 	
-	[mapView moveToLatLong:location];
+	[_mapView moveToLatLong:location];
 	
-	if(showingPhotos)
+	if(_showingPhotos)
 		[self startShowingPhotos];
 	
 	
@@ -364,14 +360,14 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	BetterLog(@"");
 	
-	if (photomapQuerying || !showingPhotos) return;
-	photomapQuerying = YES;
+	if (_photomapQuerying || !_showingPhotos) return;
+	_photomapQuerying = YES;
 	
 	
 	
-	CGRect bounds = mapView.contents.screenBounds;
-	CLLocationCoordinate2D nw = [mapView pixelToLatLong:bounds.origin];
-	CLLocationCoordinate2D se = [mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
+	CGRect bounds = _mapView.contents.screenBounds;
+	CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
+	CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
 	CLLocationCoordinate2D ne;
 	CLLocationCoordinate2D sw;
 	ne.latitude = nw.latitude;
@@ -387,19 +383,19 @@ static NSTimeInterval FADE_DURATION = 1.7;
 // DEPRECATED
 - (PhotoMapVO *) randomPhoto {
 	
-	if (photoMarkers == nil || [photoMarkers count] == 0) return nil;
+	if (_photoMarkers == nil || [_photoMarkers count] == 0) return nil;
 	srand( time( NULL));
-	int i = random() % [photoMarkers count];
-	return (PhotoMapVO *)((RMMarker *)[photoMarkers objectAtIndex:i]).data;
+	int i = random() % [_photoMarkers count];
+	return (PhotoMapVO *)((RMMarker *)[_photoMarkers objectAtIndex:i]).data;
 }
 
 
 
 - (void) clearPhotos {
 
-	if (photoMarkers != nil) {
-		[[mapView markerManager] removeMarkers:photoMarkers];
-		[photoMarkers removeAllObjects];
+	if (_photoMarkers != nil) {
+		[[_mapView markerManager] removeMarkers:_photoMarkers];
+		[_photoMarkers removeAllObjects];
 	}
 	
 }
@@ -435,8 +431,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (void) afterMapChanged: (RMMapView*) map {
 	
-	[self displayLocationIndicator:YES];
-	[self removeLocationIndicatorAfterDelay];
+	[self displayLocationIndicator:NO];
 	
 	[self requestPhotos];
 	
@@ -465,14 +460,14 @@ static NSTimeInterval FADE_DURATION = 1.7;
 		
 		if(enabled==YES){
 			
-			gpslocateButton.style = UIBarButtonItemStyleDone;
+			_gpslocateButton.style = UIBarButtonItemStyleDone;
 			
 		}
 		
 		[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	} else {
 		
-		gpslocateButton.style = UIBarButtonItemStyleBordered;
+		_gpslocateButton.style = UIBarButtonItemStyleBordered;
 		
 		[self resetLocationOverlay];
 		
@@ -494,9 +489,9 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	self.lastLocation=location;
 	
-	[MapViewController zoomMapView:mapView toLocation:location];
+	[MapViewController zoomMapView:_mapView toLocation:location];
 	
-	gpslocateButton.style = UIBarButtonItemStyleBordered;
+	_gpslocateButton.style = UIBarButtonItemStyleBordered;
 	
 	[self displayLocationIndicator:YES];
 	
@@ -510,7 +505,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 	
 	CLLocation *location=(CLLocation*)[notification object];
 	
-	[MapViewController zoomMapView:mapView toLocation:location];
+	[MapViewController zoomMapView:_mapView toLocation:location];
 	
 	[self displayLocationIndicator:YES];
 	
@@ -518,7 +513,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 -(void)locationDidFail:(NSNotification*)notification{
 	
-	gpslocateButton.style = UIBarButtonItemStyleBordered;
+	_gpslocateButton.style = UIBarButtonItemStyleBordered;
 	
 	[self resetLocationOverlay];
 	
@@ -545,29 +540,36 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 -(void)displayLocationIndicator:(BOOL)display{
 	
+	if(_gpsLocationView.superview==nil && display==YES)
+		[self.mapView addSubview:_gpsLocationView];
+	
 	
 	int alpha=display==YES ? 1 :0;
 	
-	[gpsLocationView updateToLocation];
+	if(_gpsLocationView.superview!=nil)
+		[_gpsLocationView updateToLocation];
 	
-	if(display==YES && gpsLocationView.alpha==1)
+	if(display==YES && _gpsLocationView.alpha==1)
 		return;
 	
-	if(display==NO && gpsLocationView.alpha==0)
+	if(display==NO && _gpsLocationView.alpha==0)
 		return;
 	
 	if(display==YES){
-		gpsLocationView.visible=display;
-		gpsLocationView.alpha=0;
+		_gpsLocationView.visible=display;
+		_gpsLocationView.alpha=0;
 	}
 	
 	
 	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		gpsLocationView.alpha=alpha;
+		_gpsLocationView.alpha=alpha;
 	} completion:^(BOOL finished) {
-		gpsLocationView.visible=display;
+		if(_gpsLocationView.alpha==0){
+			_gpsLocationView.visible=display;
+			[_gpsLocationView removeFromSuperview];
+		}
+		
 	}];
-	
 	
 }
 
@@ -577,12 +579,12 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (IBAction) didSearch {
 	BetterLog(@"search");
-	if (mapLocationSearchView == nil) {
+	if (_mapLocationSearchView == nil) {
 		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
 	}	
-	mapLocationSearchView.locationReceiver = self;
-	mapLocationSearchView.centreLocation = [[mapView contents] mapCenter];
-	[self presentModalViewController:mapLocationSearchView	animated:YES];
+	_mapLocationSearchView.locationReceiver = self;
+	_mapLocationSearchView.centreLocation = [[_mapView contents] mapCenter];
+	[self presentModalViewController:_mapLocationSearchView	animated:YES];
 }
 
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
@@ -624,7 +626,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 
 - (void)startShowingPhotos {
-	showingPhotos = YES;
+	_showingPhotos = YES;
 	[self requestPhotos];
 }
 
@@ -642,7 +644,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (float)getRadius {
 	
-	double metresPerPixel = [mapView.contents metersPerPixel];
+	double metresPerPixel = [_mapView.contents metersPerPixel];
 	float locationRadius=(self.lastLocation.horizontalAccuracy / metresPerPixel);
 	
 	return MAX(locationRadius, 40.0f);
@@ -656,7 +658,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location {
 	BetterLog(@"didMoveToLocation");
-	[mapView moveToLatLong: location];
+	[_mapView moveToLatLong: location];
 }
 
 
@@ -669,7 +671,7 @@ static NSTimeInterval FADE_DURATION = 1.7;
 }
 
 - (void)fixLocationAndButtons:(CLLocationCoordinate2D)location {
-	[mapView moveToLatLong:location];
+	[_mapView moveToLatLong:location];
 	[self saveLocation:location];	
 }
 
@@ -680,25 +682,6 @@ static NSTimeInterval FADE_DURATION = 1.7;
     [super didReceiveMemoryWarning];
 }
 
-- (void)nullify {
-	self.gpslocateButton = nil;
-
-	mapView = nil;
-	
-	self.attributionLabel = nil;
-	self.introView = nil;
-	self.introButton = nil;
-	locationView = nil;
-	lastLocation = nil;
-	initialLocation = nil;
-	mapLocationSearchView = nil;	
-}
-
-- (void)viewDidUnload {
-    [self nullify];
-	[super viewDidUnload];
-	BetterLog(@">>>");
-}
 
 
 

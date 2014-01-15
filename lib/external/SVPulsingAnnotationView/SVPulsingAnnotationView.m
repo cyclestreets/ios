@@ -57,7 +57,6 @@
 	_radius = MAX(60.f,[locationProvider getRadius]);
 	[self rebuildLayers];
 	
-	BetterLog(@"self=%@",[self debugDescription]);
 	
 }
 
