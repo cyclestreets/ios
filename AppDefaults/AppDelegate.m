@@ -82,7 +82,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
-	[[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x008000)];
+	[[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xFFFFFF)];
+	[[UINavigationBar appearance] setBarTintColor: UIColorFromRGB(0x326513)];
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	
 	self.tabBarController = [[UITabBarController alloc] init];
 	self.window.rootViewController = self.tabBarController;
@@ -283,6 +285,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			//BetterLog(@"vcClass=%@  nibName=%@",vcClass,nibName);
 			
 			UIViewController *vccontroller= (UIViewController*)[[NSClassFromString(vcClass) alloc] initWithNibName:nibName bundle:nil];
+			vccontroller.extendedLayoutIncludesOpaqueBars=NO;
+			vccontroller.edgesForExtendedLayout = UIRectEdgeNone;
+			
+
 			UINavigationController *nav=nil;
 			
 			vccontroller.title=vcTitle;
@@ -355,7 +361,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag {
 	
 	UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:controller];
-	navigation.navigationBar.tintColor=UIColorFromRGB(0x008000);
+	navigation.navigationBar.translucent=NO;
+	
 	UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title image:[UIImage imageNamed:imageName] tag:tag];
 	[navigation setTabBarItem:tabBarItem];
 	controller.navigationItem.title = title;
@@ -382,7 +389,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// Warn that we can't download new maps
 	if (internetStatus == NotReachable) {
 		UIAlertView *networkAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
-													   message:@"No network. You may be able to follow a previously planned route, if you have already viewed the maps."
+													   message:@"No network. "
 													  delegate:nil
 											 cancelButtonTitle:@"OK"
 											 otherButtonTitles:nil];

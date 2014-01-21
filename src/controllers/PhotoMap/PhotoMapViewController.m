@@ -432,7 +432,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void) afterMapChanged: (RMMapView*) map {
 	
-	[self displayLocationIndicator:NO];
+	//[self displayLocationIndicator:NO];
 	
 	[self requestPhotos];
 	
