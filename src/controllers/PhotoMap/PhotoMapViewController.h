@@ -25,7 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import <UIKit/UIKit.h>
-#import "MapLocationSearchViewController.h"
 #import "RMMapViewDelegate.h"
 #import "BlueCircleView.h"
 #import "SuperViewController.h"
@@ -40,7 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 @interface PhotoMapViewController : SuperViewController
-<RMMapViewDelegate, LocationReceiver, LocationProvider,GPSLocationProvider> {
+<RMMapViewDelegate, LocationProvider,GPSLocationProvider> {
 	
 }
 

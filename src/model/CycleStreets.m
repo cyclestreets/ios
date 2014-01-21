@@ -29,6 +29,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoCategoryManager.h"
 #import "SynthesizeSingleton.h"
 
+#import "RMOpenStreetMapSource.h"
+#import "RMOpenCycleMapSource.h"
+#import "RMOrdnanceSurveyStreetViewMapSource.h"
+
+
+static NSInteger MAX_ZOOM = 18;
+
+static NSInteger MAX_ZOOM_LOCATION = 16;
+static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
+
+
 @implementation CycleStreets
 SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 @synthesize appDelegate;
@@ -67,6 +78,79 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		[PhotoCategoryManager sharedInstance];
 	}
 	return self;
+}
+
+
+
+#pragma mark - Class methods
+
++ ( NSObject <RMTileSource> *)tileSource {
+	NSString *mapStyle = [[self class] currentMapStyle];
+	NSObject <RMTileSource> *tileSource;
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM])
+	{
+		tileSource = [[RMOpenStreetMapSource alloc] init];
+	}
+	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
+	{
+		//open cycle map
+		tileSource = [[RMOpenCycleMapSource alloc] init];
+	}
+	else if ([mapStyle isEqualToString:MAPPING_BASE_OS])
+	{
+		//Ordnance Survey
+		tileSource = [[RMOrdnanceSurveyStreetViewMapSource alloc] init];
+	}
+	else
+	{
+		//default to MAPPING_BASE_OSM.
+		tileSource = [[RMOpenStreetMapSource alloc] init];
+	}
+	return tileSource;
+}
+
+
++ (NSArray *)mapStyles {
+	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, MAPPING_BASE_OS,nil];
+}
+
++ (NSString *)currentMapStyle {
+	NSString *mapStyle = MAPPING_BASE_OSM;
+	if (mapStyle == nil) {
+		mapStyle = [[[self class] mapStyles] objectAtIndex:0];
+	}
+	
+	return mapStyle;
+}
+
++ (NSString *)mapAttribution {
+	NSString *mapStyle = [[self class] currentMapStyle];
+	NSString *mapAttribution = nil;
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]) {
+		mapAttribution = MAPPING_ATTRIBUTION_OSM;
+	} else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]) {
+		mapAttribution = MAPPING_ATTRIBUTION_OPENCYCLEMAP;
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]) {
+		mapAttribution = MAPPING_ATTRIBUTION_OS;
+	}
+	return mapAttribution;
+	
+}
+
++ (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation {
+	CLLocationAccuracy accuracy = newLocation.horizontalAccuracy;
+	if (accuracy < 0) {
+		accuracy = 2000;
+	}
+	int wantZoom = MAX_ZOOM_LOCATION;
+	CLLocationAccuracy wantAccuracy = MAX_ZOOM_LOCATION_ACCURACY;
+	while (wantAccuracy < accuracy) {
+		wantZoom--;
+		wantAccuracy = wantAccuracy * 2;
+	}
+	
+	[mapView moveToLatLong: newLocation.coordinate];
+	[mapView.contents setZoom:wantZoom];
 }
 
 

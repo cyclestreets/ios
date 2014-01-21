@@ -27,14 +27,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
 #import "Files.h"
+#import "RMTileSource.h"
+#import "RMMapView.h"
+#import <CoreLocation/CoreLocation.h>
 @class AppDelegate;
 
 @interface CycleStreets : NSObject {
-	AppDelegate *__unsafe_unretained appDelegate;
-	Files *files;
-	NSString *APIKey;
-	
-	NSString	*userAgent;
 }
 
 @property (nonatomic, unsafe_unretained)		AppDelegate				* appDelegate;
@@ -43,4 +41,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong)		NSString				* userAgent;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
+
+
++ ( NSObject <RMTileSource> *)tileSource;
++ (NSArray *)mapStyles;
++ (NSString *)currentMapStyle;
++ (NSString *)mapAttribution;
++ (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation;
+
 @end

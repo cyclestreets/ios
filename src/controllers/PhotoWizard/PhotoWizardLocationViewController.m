@@ -8,7 +8,6 @@
 
 #import "PhotoWizardLocationViewController.h"
 #import "GlobalUtilities.h"
-#import "MapViewController.h"
 #import "RMMarkerManager.h"
 #import "Markers.h"
 #import "UserLocationManager.h"
@@ -83,7 +82,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
     
     //Necessary to start route-me service
 	[RMMapView class];
-	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
+	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[[self class] tileSource]];
 	[_mapView setDelegate:self];
 	
 	if (!self.userMarker) {

@@ -7,7 +7,6 @@
 //
 
 #import "PhotoWizardViewController.h"
-#import "MapViewController.h"
 #import "ImageManipulator.h"
 #import "UploadPhotoVO.h"
 #import "GlobalUtilities.h"
@@ -22,7 +21,6 @@
 #import "UserAccount.h"
 #import "PhotoManager.h"
 #import "AppDelegate.h"
-#import "MapViewController.h"
 #import "Markers.h"
 #import <ImageIO/ImageIO.h>
 
@@ -30,7 +28,72 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
-@interface PhotoWizardViewController(Private)
+@interface PhotoWizardViewController()
+
+
+
+
+@property (nonatomic, assign) PhotoWizardViewState viewState;
+@property (nonatomic, strong) IBOutlet UIScrollView *pageScrollView;
+@property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
+@property (nonatomic, strong) LayoutBox *pageContainer;
+@property (nonatomic, assign) int activePage;
+@property (nonatomic, assign) int maxVisitedPage;
+@property (nonatomic, strong) NSMutableArray *viewArray;
+@property (nonatomic, strong) IBOutlet UIToolbar *modalToolBar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelViewButton;
+@property (nonatomic, strong) IBOutlet UIButton *nextButton;
+@property (nonatomic, strong) IBOutlet UIButton *prevButton;
+@property (nonatomic, strong) IBOutlet UILabel *pageTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *pageNumberLabel;
+@property (nonatomic, strong) IBOutlet UIScrollView *locationsc;
+@property (nonatomic, strong) UIPanGestureRecognizer *locpangesture;
+@property (nonatomic, strong) UploadPhotoVO *uploadImage;
+@property (nonatomic, strong) IBOutlet UIView *infoView;
+@property (nonatomic, strong) IBOutlet UIButton *continueButton;
+@property (nonatomic, strong) IBOutlet UIView *photoPickerView;
+@property (nonatomic, strong) IBOutlet UIImageView *imagePreview;
+@property (nonatomic, strong) IBOutlet UILabel *photoSizeLabel;
+@property (nonatomic, strong) IBOutlet UILabel *photolocationLabel;
+@property (nonatomic, strong) IBOutlet UILabel *photodateLabel;
+@property (nonatomic, strong) IBOutlet UIButton *cameraButton;
+@property (nonatomic, strong) IBOutlet UIButton *libraryButton;
+@property (nonatomic, strong) IBOutlet UIView *photoLocationView;
+@property (nonatomic, strong) IBOutlet RMMapView *locationMapView;
+@property (nonatomic, strong) RMMapContents *locationMapContents;
+@property (nonatomic, strong) RMMarker *locationMapMarker;
+@property (nonatomic, strong) IBOutlet UILabel *locationLabel;
+@property (nonatomic, strong) IBOutlet UIButton *locationUpdateButton;
+@property (nonatomic, strong) IBOutlet UIButton *locationResetButton;
+@property (nonatomic, assign, getter=isAvoidAccidentalTaps) BOOL avoidAccidentalTaps;
+@property (nonatomic, assign, getter=isSingleTapDidOccur) BOOL singleTapDidOccur;
+@property (nonatomic, assign) CGPoint singleTapPoint;
+@property (nonatomic, assign, getter=isLocationManagerIsLocating) BOOL locationManagerIsLocating;
+@property (nonatomic, strong) IBOutlet UIView *categoryView;
+@property (nonatomic, strong) IBOutlet UILabel *categoryTypeLabel;
+@property (nonatomic, strong) IBOutlet UILabel *categoryDescLabel;
+@property (nonatomic, strong) IBOutlet UIPickerView *pickerView;
+@property (nonatomic, strong) IBOutlet UIButton *categoryButton;
+@property (nonatomic, strong) IBOutlet UIButton *categoryFeaturebutton;
+@property (nonatomic, strong) PhotoWizardCategoryMenuViewController *categoryMenuView;
+@property (nonatomic, strong) IBOutlet UIView *photodescriptionView;
+@property (nonatomic, strong) IBOutlet UIView *textViewAccessoryView;
+@property (nonatomic, strong) IBOutlet UIImageView *descImagePreview;
+@property (nonatomic, strong) IBOutlet UITextView *photodescriptionField;
+@property (nonatomic, strong) IBOutlet UIView *photoUploadView;
+@property (nonatomic, strong) IBOutlet UIButton *uploadButton;
+@property (nonatomic, strong) IBOutlet UIButton *cancelButton;
+@property (nonatomic, strong) IBOutlet UIProgressView *uploadProgressView;
+@property (nonatomic, strong) IBOutlet ExpandedUILabel *uploadLabel;
+//@property (nonatomic, strong) AccountViewController *loginView;
+@property (nonatomic, strong) IBOutlet UIView *photoResultView;
+@property (nonatomic, strong) IBOutlet CopyLabel *photoResultURLLabel;
+@property (nonatomic, strong) IBOutlet UIButton *photoMapButton;
+@property (nonatomic, strong) WEPopoverController *categoryMenu;
+
+
 
 -(RMMarker*)retrieveLocationMapMarker;
 
@@ -90,66 +153,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 @implementation PhotoWizardViewController
-@synthesize viewState;
-@synthesize pageScrollView;
-@synthesize pageControl;
-@synthesize headerView;
-@synthesize footerView;
-@synthesize pageContainer;
-@synthesize activePage;
-@synthesize maxVisitedPage;
-@synthesize viewArray;
-@synthesize isModal;
-@synthesize nextButton;
-@synthesize prevButton;
-@synthesize pageTitleLabel;
-@synthesize pageNumberLabel;
-@synthesize locationsc;
-@synthesize locpangesture;
-@synthesize uploadImage;
-@synthesize infoView;
-@synthesize continueButton;
-@synthesize photoPickerView;
-@synthesize imagePreview;
-@synthesize photoSizeLabel;
-@synthesize photolocationLabel;
-@synthesize photodateLabel;
-@synthesize cameraButton;
-@synthesize libraryButton;
-@synthesize photoLocationView;
-@synthesize locationMapView;
-@synthesize locationMapContents;
-@synthesize locationMapMarker;
-@synthesize locationLabel;
-@synthesize locationUpdateButton;
-@synthesize locationResetButton;
-@synthesize avoidAccidentalTaps;
-@synthesize singleTapDidOccur;
-@synthesize singleTapPoint;
-@synthesize locationManagerIsLocating;
-@synthesize categoryView;
-@synthesize categoryTypeLabel;
-@synthesize categoryDescLabel;
-@synthesize pickerView;
-@synthesize categoryButton;
-@synthesize categoryFeaturebutton;
-@synthesize categoryMenuView;
-@synthesize photodescriptionView;
-@synthesize textViewAccessoryView;
-@synthesize descImagePreview;
-@synthesize photodescriptionField;
-@synthesize photoUploadView;
-@synthesize uploadButton;
-@synthesize cancelButton;
-@synthesize uploadProgressView;
-@synthesize uploadLabel;
-@synthesize loginView;
-@synthesize photoResultView;
-@synthesize photoResultURLLabel;
-@synthesize photoMapButton;
-@synthesize categoryMenu;
-@synthesize cancelViewButton;
-@synthesize modalToolBar;
 
 
 
@@ -242,7 +245,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"percent=%f",percent);
 	
-    uploadProgressView.progress=percent;
+    _uploadProgressView.progress=percent;
     
 }
 
@@ -280,32 +283,32 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
     
 	popoverClass = [WEPopoverController class];
 	
-    viewState=PhotoWizardViewStateInfo;
-	activePage=0;
-	maxVisitedPage=-1;
+    _viewState=PhotoWizardViewStateInfo;
+	_activePage=0;
+	_maxVisitedPage=-1;
 	
 	// set up scroll view with layoutbox for sub items
 	self.pageContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	pageContainer.layoutMode=BUHorizontalLayoutMode;
+	_pageContainer.layoutMode=BUHorizontalLayoutMode;
 	
     
     self.viewArray=[NSMutableArray arrayWithObjects:
-					[NSMutableDictionary dictionaryWithObjectsAndKeys:infoView, @"view", @"Information",@"title",BOX_BOOL(NO),@"created",nil],
-					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoPickerView, @"view",@"Photo Picker",@"title" ,BOX_BOOL(NO),@"created",nil],
-					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoLocationView, @"view",@"Location",@"title" ,BOX_BOOL(NO),@"created",nil],
-					[NSMutableDictionary dictionaryWithObjectsAndKeys:categoryView, @"view",@"Photo Category",@"title" ,BOX_BOOL(NO),@"created",nil],
-					[NSMutableDictionary dictionaryWithObjectsAndKeys:photodescriptionView, @"view",@"Description",@"title" ,BOX_BOOL(NO),@"created",nil],
-					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoUploadView, @"view",@"Upload",@"title",BOX_BOOL(NO),@"created",nil],
-					[NSMutableDictionary dictionaryWithObjectsAndKeys:photoResultView, @"view", @"Result",@"title",BOX_BOOL(NO),@"created",nil],nil ];
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:_infoView, @"view", @"Information",@"title",BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:_photoPickerView, @"view",@"Photo Picker",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:_photoLocationView, @"view",@"Location",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:_categoryView, @"view",@"Photo Category",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:_photodescriptionView, @"view",@"Description",@"title" ,BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:_photoUploadView, @"view",@"Upload",@"title",BOX_BOOL(NO),@"created",nil],
+					[NSMutableDictionary dictionaryWithObjectsAndKeys:_photoResultView, @"view", @"Result",@"title",BOX_BOOL(NO),@"created",nil],nil ];
     
-	[pageScrollView addSubview:pageContainer];
+	[_pageScrollView addSubview:_pageContainer];
 	 
-	pageScrollView.pagingEnabled=YES;
-	pageScrollView.backgroundColor=UIColorFromRGB(0xDBD8D3);
-	pageScrollView.delegate=self;
-	pageControl.hidesForSinglePage=YES;
-    pageControl.numberOfPages=1;
-	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+	_pageScrollView.pagingEnabled=YES;
+	_pageScrollView.backgroundColor=UIColorFromRGB(0xDBD8D3);
+	_pageScrollView.delegate=self;
+	_pageControl.hidesForSinglePage=YES;
+    _pageControl.numberOfPages=1;
+	[_pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
 	
 	[self createNavigationBarUI];
@@ -318,35 +321,35 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)createNavigationBarUI{
 	
-	if(isModal!=YES){
+	if(_isModal!=YES){
 		
 		self.navigationItem.backBarButtonItem.tintColor=UIColorFromRGB(0xA71D1D);
 		
 		
 		self.prevButton=[ButtonUtilities UIButtonWithWidth:10 height:32 type:@"barbuttongreen" text:@"Previous"];
-		[prevButton addTarget:self action:@selector(navigateToPreviousView:) forControlEvents:UIControlEventTouchUpInside];
+		[_prevButton addTarget:self action:@selector(navigateToPreviousView:) forControlEvents:UIControlEventTouchUpInside];
 		self.nextButton=[ButtonUtilities UIButtonWithWidth:10 height:32 type:@"barbuttongreen" text:@"Next"];
-		[nextButton addTarget:self action:@selector(navigateToNextView:) forControlEvents:UIControlEventTouchUpInside];
+		[_nextButton addTarget:self action:@selector(navigateToNextView:) forControlEvents:UIControlEventTouchUpInside];
 		
 		
 		self.navigationItem.title=@"";
 		
 		LayoutBox *containerView=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 10, 32)];
 		containerView.itemPadding=5;
-		[containerView addSubview:prevButton];
-		[containerView addSubview:nextButton];
+		[containerView addSubview:_prevButton];
+		[containerView addSubview:_nextButton];
 			
 		self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:containerView];
 			
 		
 		
-		pageScrollView.y=20;
-		headerView.y=0;
-		pageControl.y=0;
+		_pageScrollView.y=20;
+		_headerView.y=0;
+		_pageControl.y=0;
 		
 	}
 	
-	modalToolBar.visible=isModal;
+	_modalToolBar.visible=_isModal;
 	
 }
 
@@ -362,7 +365,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 // intercept back event to reset pw if we are on Complete state
 -(void) viewWillDisappear:(BOOL)animated {
 	
-	if(viewState==PhotoWizardViewStateResult){
+	if(_viewState==PhotoWizardViewStateResult){
 	
 		if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
 			[self resetPhotoWizard];
@@ -385,13 +388,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)resetPhotoWizard{
 	
-	viewState=PhotoWizardViewStateInfo;
-	activePage=0;
-	maxVisitedPage=-1;
+	_viewState=PhotoWizardViewStateInfo;
+	_activePage=0;
+	_maxVisitedPage=-1;
 	
-	[pageContainer removeAllSubViews];
+	[_pageContainer removeAllSubViews];
 	
-	for(NSMutableDictionary *viewDict in viewArray){
+	for(NSMutableDictionary *viewDict in _viewArray){
 		
 		[viewDict setObject:BOX_BOOL(NO) forKey:@"created"];
 		
@@ -419,7 +422,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	// set max view state to this int
 	// update pagecontrol so this view can be accessed
 	
-	NSMutableDictionary *viewdict=[viewArray objectAtIndex:state];
+	NSMutableDictionary *viewdict=[_viewArray objectAtIndex:state];
 	if([viewdict objectForKey:@"created"]==BOX_BOOL(NO)){
 		
 		[self addViewToPageContainer:viewdict];
@@ -476,20 +479,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	}
 	
 	
-	if(state>maxVisitedPage){
-		maxVisitedPage=state;
+	if(state>_maxVisitedPage){
+		_maxVisitedPage=state;
 	}
 	
-	if (maxVisitedPage==activePage) {
-		nextButton.enabled=NO;
+	if (_maxVisitedPage==_activePage) {
+		_nextButton.enabled=NO;
 	}else {
-		nextButton.enabled=YES;
+		_nextButton.enabled=YES;
 	}
 	
-	if (activePage==0) {
-		prevButton.enabled=NO;
+	if (_activePage==0) {
+		_prevButton.enabled=NO;
 	}else {
-		prevButton.enabled=YES;
+		_prevButton.enabled=YES;
 	}
 	
 	[self updatePageControlExtents];
@@ -501,12 +504,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
     
-    maxVisitedPage=state-1;
+    _maxVisitedPage=state-1;
 	
-	if (maxVisitedPage==activePage) {
-		nextButton.enabled=NO;
+	if (_maxVisitedPage==_activePage) {
+		_nextButton.enabled=NO;
 	}else {
-		nextButton.enabled=YES;
+		_nextButton.enabled=YES;
 	}
     
 	[self updatePageControlExtents];
@@ -516,19 +519,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
     
-    maxVisitedPage=state-1;
-	activePage=state;
-	viewState=state;
-	pageControl.currentPage=viewState;
+    _maxVisitedPage=state-1;
+	_activePage=state;
+	_viewState=state;
+	_pageControl.currentPage=_viewState;
 	
-	if (maxVisitedPage==activePage) {
-		nextButton.enabled=NO;
+	if (_maxVisitedPage==_activePage) {
+		_nextButton.enabled=NO;
 	}else {
-		nextButton.enabled=YES;
+		_nextButton.enabled=YES;
 	}
 	
-	CGPoint offset=CGPointMake(viewState*SCREENWIDTH, 0);
-	[pageScrollView setContentOffset:offset animated:YES];
+	CGPoint offset=CGPointMake(_viewState*SCREENWIDTH, 0);
+	[_pageScrollView setContentOffset:offset animated:YES];
 	
     
 	[self updatePageControlExtents];
@@ -544,15 +547,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	if(state<=maxVisitedPage){
+	if(state<=_maxVisitedPage){
 		
 
-		viewState=state;
-		pageControl.currentPage=viewState;
-		activePage=viewState;
+		_viewState=state;
+		_pageControl.currentPage=_viewState;
+		_activePage=_viewState;
         
-		CGPoint offset=CGPointMake(viewState*SCREENWIDTH, 0);
-		[pageScrollView setContentOffset:offset animated:YES];
+		CGPoint offset=CGPointMake(_viewState*SCREENWIDTH, 0);
+		[_pageScrollView setContentOffset:offset animated:YES];
 		
 		[self updateGlobalViewUIForState];
 		
@@ -566,16 +569,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)navigateToNextView:(id)sender{
 	
-	if(activePage<maxVisitedPage){
-		[self navigateToViewState:activePage+1];
+	if(_activePage<_maxVisitedPage){
+		[self navigateToViewState:_activePage+1];
 	}
 
 }
 
 -(IBAction)navigateToPreviousView:(id)sender{
 	
-	if(activePage>0){
-		[self navigateToViewState:activePage-1];
+	if(_activePage>0){
+		[self navigateToViewState:_activePage-1];
 	}
 	
 }
@@ -592,26 +595,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	pageTitleLabel.text=[[viewArray objectAtIndex:activePage] objectForKey:@"title"];
-    pageNumberLabel.text=[NSString stringWithFormat:@"%i of %i",activePage+1, [viewArray count]];
+	_pageTitleLabel.text=[[_viewArray objectAtIndex:_activePage] objectForKey:@"title"];
+    _pageNumberLabel.text=[NSString stringWithFormat:@"%i of %i",_activePage+1, [_viewArray count]];
 	
 	[self updateView];
 	
-	if (maxVisitedPage==activePage) {
-		nextButton.enabled=NO;
+	if (_maxVisitedPage==_activePage) {
+		_nextButton.enabled=NO;
 	}else {
-		nextButton.enabled=YES;
+		_nextButton.enabled=YES;
 	}
 	
-	if (activePage==0) {
-		prevButton.enabled=NO;
+	if (_activePage==0) {
+		_prevButton.enabled=NO;
 	}else {
-		prevButton.enabled=YES;
+		_prevButton.enabled=YES;
 	}
 	
-	if (activePage==PhotoWizardViewStateResult) {
-		prevButton.enabled=NO;
-		nextButton.enabled=NO;
+	if (_activePage==PhotoWizardViewStateResult) {
+		_prevButton.enabled=NO;
+		_nextButton.enabled=NO;
 	}
 	
 }
@@ -619,7 +622,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)updateView{
 	
 	
-	switch (viewState) {
+	switch (_viewState) {
 			
 		case PhotoWizardViewStateInfo:
 		break;
@@ -659,14 +662,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)addViewToPageContainer:(NSMutableDictionary*)viewDict{
 	
 	[viewDict setObject:BOX_BOOL(YES) forKey:@"created"];
-	UIScrollView *sc=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, pageScrollView.height)];
+	UIScrollView *sc=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, _pageScrollView.height)];
 	UIView *stateview=[viewDict objectForKey:@"view"];
 	
 	[sc addSubview:stateview];
 	[sc setContentSize:CGSizeMake(SCREENWIDTH, stateview.height)];
-	[pageContainer addSubview:sc];
+	[_pageContainer addSubview:sc];
 		
-	[pageScrollView setContentSize:CGSizeMake(pageContainer.width, pageScrollView.height)];
+	[_pageScrollView setContentSize:CGSizeMake(_pageContainer.width, _pageScrollView.height)];
 	
 }
 
@@ -680,11 +683,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)sc{
 	BetterLog(@"");
-	CGPoint offset=pageScrollView.contentOffset;
-	activePage=offset.x/SCREENWIDTH;
-	pageControl.currentPage=activePage;
-	viewState=activePage;
-	[pageControl updateCurrentPageDisplay];
+	CGPoint offset=_pageScrollView.contentOffset;
+	_activePage=offset.x/SCREENWIDTH;
+	_pageControl.currentPage=_activePage;
+	_viewState=_activePage;
+	[_pageControl updateCurrentPageDisplay];
 	[self updateGlobalViewUIForState];
 }
 
@@ -692,19 +695,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(IBAction)pageControlValueChanged:(id)sender{
 	BetterLog(@"");
 	UIPageControl *pc=(UIPageControl*)sender;
-    if(pc.currentPage<=maxVisitedPage){
+    if(pc.currentPage<=_maxVisitedPage){
         CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
-        [pageScrollView setContentOffset:offset animated:YES];
-		activePage=pc.currentPage;
+        [_pageScrollView setContentOffset:offset animated:YES];
+		_activePage=pc.currentPage;
 		
     }else{
-        pc.currentPage=activePage;
+        pc.currentPage=_activePage;
     }
 	
 }
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView*)sc{
 	BetterLog(@"");
-	[self scrollViewDidEndDecelerating:pageScrollView];
+	[self scrollViewDidEndDecelerating:_pageScrollView];
 	[self updatePageControlExtents];
 }
 
@@ -713,7 +716,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	pageControl.numberOfPages=maxVisitedPage+1;
+	_pageControl.numberOfPages=_maxVisitedPage+1;
 	
 	
 	
@@ -728,8 +731,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)initInfoView:(PhotoWizardViewState)state{
 	
-	[ButtonUtilities styleIBButton:continueButton type:@"green" text:@"Continue"];
-	[continueButton addTarget:self action:@selector(continueUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:_continueButton type:@"green" text:@"Continue"];
+	[_continueButton addTarget:self action:@selector(continueUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
 
@@ -752,28 +755,28 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)initPhotoView:(PhotoWizardViewState)state{
 	
-	imagePreview.image=nil;
+	_imagePreview.image=nil;
 	
-	[ButtonUtilities styleIBButton:cameraButton type:@"green" text:@"Camera"];
-	[cameraButton addTarget:self action:@selector(cameraButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	[ButtonUtilities styleIBButton:libraryButton type:@"green" text:@"Library"];
-	[libraryButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:_cameraButton type:@"green" text:@"Camera"];
+	[_cameraButton addTarget:self action:@selector(cameraButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:_libraryButton type:@"green" text:@"Library"];
+	[_libraryButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-	[cameraButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]];
-	[libraryButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]];
+	[_cameraButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]];
+	[_libraryButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]];
 	
 }
 
 -(void)updatePhotoView{
 	
-	if(uploadImage!=nil){
-        imagePreview.image=uploadImage.image;
-        photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
-		photodateLabel.text=[NSString stringWithFormat:@"%@",uploadImage.dateString];
+	if(_uploadImage!=nil){
+        _imagePreview.image=_uploadImage.image;
+        _photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",_uploadImage.width, _uploadImage.height];
+		_photodateLabel.text=[NSString stringWithFormat:@"%@",_uploadImage.dateString];
     }else{
-		photoSizeLabel.text=EMPTYSTRING;
-		photolocationLabel.text=EMPTYSTRING;
-		photodateLabel.text=EMPTYSTRING;
+		_photoSizeLabel.text=EMPTYSTRING;
+		_photolocationLabel.text=EMPTYSTRING;
+		_photodateLabel.text=EMPTYSTRING;
     }
 }
 
@@ -826,8 +829,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
     // setttings.imageSize 
 	UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     self.uploadImage=[[UploadPhotoVO alloc]initWithImage:image];
-	imagePreview.image=uploadImage.image;
-	photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",uploadImage.width, uploadImage.height];
+	_imagePreview.image=_uploadImage.image;
+	_photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",_uploadImage.width, _uploadImage.height];
 	
 	
 	NSURL *referenceURL = [info objectForKey:UIImagePickerControllerReferenceURL];
@@ -840,17 +843,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		NSDictionary *gpsDict = [metadata objectForKey:(NSString *)kCGImagePropertyGPSDictionary];
         
 		if(gpsDict!=nil){
-			uploadImage.bearing=[[gpsDict objectForKey:@"ImgDirection"] intValue];
+			_uploadImage.bearing=[[gpsDict objectForKey:@"ImgDirection"] intValue];
 		}
 		
 		CLLocation *location = (CLLocation *)[asset valueForProperty:ALAssetPropertyLocation];
-		uploadImage.location=location;
+		_uploadImage.location=location;
 		
 		NSDate		*assetdate=(NSDate*)[asset valueForProperty:ALAssetPropertyDate];
-		uploadImage.date=assetdate;
+		_uploadImage.date=assetdate;
 		
-		photolocationLabel.text=[[GlobalUtilities convertBooleanToType:@"string" :location!=nil] capitalizedString];
-		photodateLabel.text=[NSString stringWithFormat:@"%@",uploadImage.dateString];
+		_photolocationLabel.text=[[GlobalUtilities convertBooleanToType:@"string" :location!=nil] capitalizedString];
+		_photodateLabel.text=[NSString stringWithFormat:@"%@",_uploadImage.dateString];
 		
 		if(location!=nil)
 			BetterLog(@"location=%f %f",location.coordinate.latitude, location.coordinate.longitude);
@@ -867,10 +870,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[self initialiseViewState:PhotoWizardViewStateLocation];
 	
 	 
-	 NSMutableDictionary *viewdict=[viewArray objectAtIndex:PhotoWizardViewStateCategory];
+	 NSMutableDictionary *viewdict=[_viewArray objectAtIndex:PhotoWizardViewStateCategory];
 	 if([viewdict objectForKey:@"created"]==BOX_BOOL(YES)){
 		 
-		 maxVisitedPage=PhotoWizardViewStateLocation;
+		 _maxVisitedPage=PhotoWizardViewStateLocation;
 	
 		 [self resetCategoryView];
 		 [self resetDescriptionView];
@@ -901,13 +904,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	[ButtonUtilities styleIBButton:locationUpdateButton type:@"green" text:@"Edit Location"];
-	[locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:_locationUpdateButton type:@"green" text:@"Edit Location"];
+	[_locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[RMMapView class];
-	locationMapContents=[[RMMapContents alloc] initWithView:locationMapView tilesource:[MapViewController tileSource]];
-	[locationMapView setDelegate:self];
-	locationMapView.userInteractionEnabled=NO;
+	_locationMapContents=[[RMMapContents alloc] initWithView:_locationMapView tilesource:[[self class] tileSource]];
+	[_locationMapView setDelegate:self];
+	_locationMapView.userInteractionEnabled=NO;
 	
 	[self retrieveLocationMapMarker];
 	
@@ -931,7 +934,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	CLLocationCoordinate2D imageloc=uploadImage.location.coordinate;
+	CLLocationCoordinate2D imageloc=_uploadImage.location.coordinate;
 	CLLocationCoordinate2D zeroloc=CLLocationCoordinate2DMake(0,0);
 	
 	MKMapPoint p1 = MKMapPointForCoordinate(imageloc);
@@ -940,13 +943,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	//Calculate distance in meters
 	CLLocationDistance dist = MKMetersBetweenMapPoints(p1, p2);
 	
-    if(uploadImage.location==nil || dist==0.0){
+    if(_uploadImage.location==nil || dist==0.0){
 		
 		
-		if(uploadImage.userLocation!=nil){
+		if(_uploadImage.userLocation!=nil){
 			
 			
-			[self updateLocationMapViewForLocation:uploadImage.userLocation];
+			[self updateLocationMapViewForLocation:_uploadImage.userLocation];
 			
 		}else{
 			
@@ -963,7 +966,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		
 	}else{
-		if(uploadImage.userLocation==nil)
+		if(_uploadImage.userLocation==nil)
 			[self loadLocationFromPhoto];
 		
 		[self initialiseViewState:PhotoWizardViewStateCategory];
@@ -978,20 +981,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
     PhotoWizardLocationViewController *lv=[[PhotoWizardLocationViewController alloc]initWithNibName:[PhotoWizardLocationViewController nibName] bundle:nil];
 	lv.delegate=self;
-	lv.userlocation=uploadImage.userLocation;
-	lv.photolocation=uploadImage.location;
+	lv.userlocation=_uploadImage.userLocation;
+	lv.photolocation=_uploadImage.location;
 	
 	[self presentModalViewController:lv animated:YES];
     
 }
 -(IBAction)resetButtonSelected:(id)sender{
     
-    if(uploadImage.userLocation!=nil){
-		uploadImage.userLocation=nil;
+    if(_uploadImage.userLocation!=nil){
+		_uploadImage.userLocation=nil;
 	}
     
-	if(uploadImage.location!=nil){
-		[self updateLocationMapViewForLocation:uploadImage.location];
+	if(_uploadImage.location!=nil){
+		[self updateLocationMapViewForLocation:_uploadImage.location];
 	}
 }
 
@@ -1004,9 +1007,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
     
     if(location!=nil){
 		
-		uploadImage.userLocation=location;
+		_uploadImage.userLocation=location;
     
-		[self updateLocationMapViewForLocation:uploadImage.userLocation];
+		[self updateLocationMapViewForLocation:_uploadImage.userLocation];
         
         [self initialiseViewState:PhotoWizardViewStateCategory];
     }
@@ -1016,9 +1019,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)loadLocationFromPhoto{
 	
-	if(uploadImage.location!=nil){
+	if(_uploadImage.location!=nil){
 		
-		[self updateLocationMapViewForLocation:uploadImage.location];
+		[self updateLocationMapViewForLocation:_uploadImage.location];
 		
 	}
 }
@@ -1027,30 +1030,30 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	CLLocationCoordinate2D coordinate=[UserLocationManager defaultCoordinate];
 	
-	locationLabel.text=[NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
+	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
 
 	[self.locationMapView moveToLatLong:coordinate];
 	
-	[locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:coordinate];
+	[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:coordinate];
 	
-	[locationMapView.contents setZoom:6];
+	[_locationMapView.contents setZoom:6];
 		
 }
 
 -(void)updateLocationMapViewForLocation:(CLLocation*)location{
 	
 	
-	locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
+	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
 	
 	[self.locationMapView moveToLatLong:location.coordinate];
 	
-	if ([locationMapView.contents zoom] < 18) {
-		[locationMapView.contents setZoom:14];
+	if ([_locationMapView.contents zoom] < 18) {
+		[_locationMapView.contents setZoom:14];
 	}
 	
 
 	
-	[locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:location.coordinate];
+	[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:location.coordinate];
 	
 	
 }
@@ -1068,11 +1071,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[PhotoCategoryManager sharedInstance];
 	
-	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose..."];
-	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
 	
-	[categoryButton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
-	[categoryFeaturebutton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
+	[_categoryButton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
+	[_categoryFeaturebutton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
 	
 	
 }
@@ -1084,11 +1087,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)resetCategoryView{
 	
-	[ButtonUtilities styleIBButton:categoryButton type:@"orange" text:@"Choose..."];
-	[ButtonUtilities styleIBButton:categoryFeaturebutton type:@"green" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
+	[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
 	
-	uploadImage.category=nil;
-	uploadImage.feature=nil;
+	_uploadImage.category=nil;
+	_uploadImage.feature=nil;
 	
 }
 
@@ -1100,21 +1103,21 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	PhotoCategoryType dataType=button.tag;
 	
     self.categoryMenuView=[[PhotoWizardCategoryMenuViewController alloc]initWithNibName:@"PhotoWizardCategoryMenuView" bundle:nil];
-	categoryMenuView.dataType=dataType;
-	categoryMenuView.uploadImage=uploadImage;
+	_categoryMenuView.dataType=dataType;
+	_categoryMenuView.uploadImage=_uploadImage;
 	
 	switch(dataType){
 		
 		case PhotoCategoryTypeFeature:
-			categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"feature"];
+			_categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"feature"];
 		break;
 		
 		case PhotoCategoryTypeCategory:
-			categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"category"];
+			_categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"category"];
 		break;
 	}
 	
-	self.categoryMenu = [[popoverClass alloc] initWithContentViewController:categoryMenuView];
+	self.categoryMenu = [[popoverClass alloc] initWithContentViewController:_categoryMenuView];
 	self.categoryMenu.delegate = self;
 	
 	[self.categoryMenu presentPopoverFromRect:button.frame inView:self.categoryView permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
@@ -1133,19 +1136,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	switch(dataType){
 			
 		case PhotoCategoryTypeFeature:
-			uploadImage.feature=vo;
-			[categoryFeaturebutton setTitle:uploadImage.feature.name forState:UIControlStateNormal];
+			_uploadImage.feature=vo;
+			[_categoryFeaturebutton setTitle:_uploadImage.feature.name forState:UIControlStateNormal];
 		break;
 			
 		case PhotoCategoryTypeCategory:
-			uploadImage.category=vo;
-			[categoryButton setTitle:uploadImage.category.name forState:UIControlStateNormal];
+			_uploadImage.category=vo;
+			[_categoryButton setTitle:_uploadImage.category.name forState:UIControlStateNormal];
 		break;
 	}
 	
-	[categoryMenu dismissPopoverAnimated:YES];
+	[_categoryMenu dismissPopoverAnimated:YES];
 	
-	if(uploadImage.feature!=nil && uploadImage.category!=nil){
+	if(_uploadImage.feature!=nil && _uploadImage.category!=nil){
         [self initialiseViewState:PhotoWizardViewStateDescription];
     }
 	
@@ -1173,15 +1176,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)initDescriptionView:(PhotoWizardViewState)state{
 
-	photodescriptionField.delegate=self;
+	_photodescriptionField.delegate=self;
 	[self resetDescriptionField];
 
 }
 
 -(void)resetDescriptionView{
 	
-	photodescriptionField.text=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
-	photodescriptionField.textColor=UIColorFromRGB(0x999999);
+	_photodescriptionField.text=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
+	_photodescriptionField.textColor=UIColorFromRGB(0x999999);
 	
 }
 
@@ -1195,25 +1198,25 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)updateDescriptionView{
 	
-	descImagePreview.image=uploadImage.image;
+	_descImagePreview.image=_uploadImage.image;
 	
-	if(uploadImage.caption!=nil)
-		photodescriptionField.text=uploadImage.caption;
+	if(_uploadImage.caption!=nil)
+		_photodescriptionField.text=_uploadImage.caption;
     
 }
 
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
    
-    if (photodescriptionField.inputAccessoryView == nil) {
+    if (_photodescriptionField.inputAccessoryView == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"UITextViewAccessoryView" owner:self options:nil];
-        photodescriptionField.inputAccessoryView = textViewAccessoryView;
+        _photodescriptionField.inputAccessoryView = _textViewAccessoryView;
         self.textViewAccessoryView = nil;
     }
 	
-	 if([photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
-		 photodescriptionField.text=@"";
-		 photodescriptionField.textColor=UIColorFromRGB(0x555555);
+	 if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+		 _photodescriptionField.text=@"";
+		 _photodescriptionField.textColor=UIColorFromRGB(0x555555);
 	 }
 	
     return YES;
@@ -1235,30 +1238,30 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)textViewKeyboardShouldHide:(id)sender{
 	
-	if(![photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+	if(![_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
         [self initialiseViewState:PhotoWizardViewStateUpload];
-		uploadImage.caption=photodescriptionField.text;
+		_uploadImage.caption=_photodescriptionField.text;
     }
 	
-	[photodescriptionField resignFirstResponder];
+	[_photodescriptionField resignFirstResponder];
 	
 }
 
 
 - (void)textViewDidChange:(UITextView *)textView{
 	
-	if([photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
-		photodescriptionField.text=@"";
-		photodescriptionField.textColor=UIColorFromRGB(0x555555);
+	if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+		_photodescriptionField.text=@"";
+		_photodescriptionField.textColor=UIColorFromRGB(0x555555);
 		return;
 	}
 	
-	if(photodescriptionField.text.length==0){
+	if(_photodescriptionField.text.length==0){
 		[self resetDescriptionField];
 		return;
 	}
 	
-	photodescriptionField.textColor=UIColorFromRGB(0x555555);
+	_photodescriptionField.textColor=UIColorFromRGB(0x555555);
 	
     
 }
@@ -1278,26 +1281,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	
 	
-	[ButtonUtilities styleIBButton:uploadButton type:@"orange" text:@"Upload Photo"];
-	[uploadButton addTarget:self action:@selector(uploadPhoto:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:_uploadButton type:@"orange" text:@"Upload Photo"];
+	[_uploadButton addTarget:self action:@selector(uploadPhoto:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
 
 -(void)updateUploadView{
-	uploadProgressView.progress=0;
+	_uploadProgressView.progress=0;
 }
 
 
 -(IBAction)uploadPhoto:(id)sender{
 	
-	
+	/*
     if ([UserAccount sharedInstance].isLoggedIn==NO) {
 		
 		if([UserAccount sharedInstance].accountMode==kUserAccountCredentialsExist){
 			
 			BetterLog(@"kUserAccountCredentialsExist");
 			
-			[[PhotoManager sharedInstance] UserPhotoUploadRequest:uploadImage];
+			[[PhotoManager sharedInstance] UserPhotoUploadRequest:_uploadImage];
 			
 			[self updateUploadUIState:@"loading"];
 			
@@ -1306,7 +1309,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 			BetterLog(@"kUserAccountNotLoggedIn");
 			
 			if (self.loginView == nil) {
-				self.loginView = [[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil];
+				self.loginView = [[UISplitViewController alloc] initWithNibName:@"AccountView" bundle:nil];
 			}
 			self.loginView.isModal=YES;
 			self.loginView.shouldAutoClose=YES;
@@ -1320,11 +1323,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		BetterLog(@"kUserAccountLoggedIn");
 		
-		[[PhotoManager sharedInstance] UserPhotoUploadRequest:uploadImage];
+		[[PhotoManager sharedInstance] UserPhotoUploadRequest:_uploadImage];
 		
 		[self updateUploadUIState:@"loading"];
 	}
 	
+	 */
 	
 }
 
@@ -1334,22 +1338,22 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	if([state isEqualToString:@"loading"]){
 		
-		uploadLabel.textColor=[UIColor darkGrayColor];
-		uploadLabel.text=@"Uploading...";
-		uploadButton.enabled=NO;
+		_uploadLabel.textColor=[UIColor darkGrayColor];
+		_uploadLabel.text=@"Uploading...";
+		_uploadButton.enabled=NO;
 		
 	}else if([state isEqualToString:@"error"]){
 		
-		uploadLabel.textColor=UIColorFromRGB(0xC20000);
-		uploadLabel.text=@"An error occured while uploading your image, please try again.";
-		uploadButton.enabled=YES;
-		uploadProgressView.progress=0;
+		_uploadLabel.textColor=UIColorFromRGB(0xC20000);
+		_uploadLabel.text=@"An error occured while uploading your image, please try again.";
+		_uploadButton.enabled=YES;
+		_uploadProgressView.progress=0;
 		
 	}else {
 		
-		uploadLabel.textColor=[UIColor darkGrayColor];
-		uploadLabel.text=@"Ready to upload";
-		uploadButton.enabled=YES;
+		_uploadLabel.textColor=[UIColor darkGrayColor];
+		_uploadLabel.text=@"Ready to upload";
+		_uploadButton.enabled=YES;
 	}
 	
 	
@@ -1360,7 +1364,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)cancelUploadPhoto:(id)sender{
 	
-    uploadProgressView.progress=0;
+    _uploadProgressView.progress=0;
 	
 }
 
@@ -1380,10 +1384,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	self.cancelViewButton.title=@"Close";
 	
 	
-	[ButtonUtilities styleIBButton:photoMapButton type:@"orange" text:@"View map"];
-	[photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[ButtonUtilities styleIBButton:_photoMapButton type:@"orange" text:@"View map"];
+	[_photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-    photoResultURLLabel.text=[uploadImage.responseDict objectForKey:@"url"];
+    _photoResultURLLabel.text=[_uploadImage.responseDict objectForKey:@"url"];
 	
 	
 }
@@ -1392,10 +1396,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	pageControl.numberOfPages=1;
-	[pageControl updateCurrentPageDisplay];
-	maxVisitedPage=0;
-	pageScrollView.scrollEnabled=NO;
+	_pageControl.numberOfPages=1;
+	[_pageControl updateCurrentPageDisplay];
+	_maxVisitedPage=0;
+	_pageScrollView.scrollEnabled=NO;
 	
 	
 }
@@ -1406,9 +1410,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(IBAction)photoMapButtonSelected:(id)sender{
 	
 	
-	[PhotoManager sharedInstance].autoLoadLocation=uploadImage.activeLocation;
+	[PhotoManager sharedInstance].autoLoadLocation=_uploadImage.activeLocation;
 	
-	if(isModal==YES){
+	if(_isModal==YES){
 	
 		[self closeWindowButtonSelected:nil];
 		

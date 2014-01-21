@@ -8,7 +8,7 @@
 
 #import "AppConfigManager.h"
 #import "DataSourceManager.h"
-
+#import "GlobalUtilities.h"
 
 @interface AppConfigManager(Private)
 
@@ -83,6 +83,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
 #pragma mark Data path methods
 // @private
 -(NSString*)appconfigDataPath{
+	
+	
+	BetterLog(@"%@",[NSBundle mainBundle]);
     
     NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
 	NSString *appconfigid=[infoDict objectForKey:@"APPCONFIG_ID"];

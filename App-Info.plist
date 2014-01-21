@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>APPCONFIG_ID</key>
-	<string>APPSTATE_DEV</string>
+	<string>APPSTATE_DEVELOPMENT</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Hackney</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -39,7 +39,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>net.cyclestreets.${BUNDLE_ID}</string>
+	<string>net.hackney.${BUNDLE_ID}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -47,7 +47,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.5.3</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -66,7 +66,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>256</string>
+	<string>100</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
@@ -77,6 +77,10 @@
 	<string>CycleStreetsWindow</string>
 	<key>SERVERDOMAIN_ID</key>
 	<string>APPSTATE_LIVE</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

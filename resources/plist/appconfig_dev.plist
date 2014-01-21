@@ -6,47 +6,33 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>Plan route</string>
+			<string>Route</string>
 			<key>id</key>
-			<string>map</string>
+			<string>track</string>
 			<key>class</key>
-			<string>MapViewController</string>
+			<string>HCSTrackConfigViewController</string>
 			<key>nib</key>
-			<string>MapView</string>
+			<string>HCSTrackConfigView</string>
 			<key>tabimage</key>
 			<string>CSTabBar_plan_route.png</string>
-			<key>childVC</key>
-			<string>WayPointViewController</string>
 			<key>hidesNavBar</key>
-			<true/>
+			<false/>
 			<key>usesSlidingView</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Itinerary</string>
-			<key>id</key>
-			<string>itinerary</string>
-			<key>class</key>
-			<string>ItineraryViewController</string>
-			<key>nib</key>
-			<string>ItineraryView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_itinerary.png</string>
-			<key>hidesNavBar</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Saved routes</string>
+			<string>Saved Routes</string>
 			<key>id</key>
 			<string>routes</string>
 			<key>class</key>
-			<string>RoutesViewController</string>
+			<string>HCSRouteListViewController</string>
 			<key>nib</key>
-			<string>RoutesView</string>
+			<string>HCSRouteListView</string>
 			<key>tabimage</key>
-			<string>CSTabBar_fav_routes.png</string>
+			<string>CSTabBar_itinerary.png</string>
+			<key>hidesNavBar</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -64,22 +50,6 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Add Photo</string>
-			<key>id</key>
-			<string>addphoto</string>
-			<key>class</key>
-			<string>PhotoWizardViewController</string>
-			<key>nib</key>
-			<string>PhotoWizardView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_add_photo.png</string>
-			<key>isVC</key>
-			<true/>
-			<key>hidesBottomBarWhenPushed</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>title</key>
 			<string>Settings</string>
 			<key>id</key>
 			<string>settings</string>
@@ -89,30 +59,6 @@
 			<string>SettingsView</string>
 			<key>tabimage</key>
 			<string>CSTabBar_settings.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Account</string>
-			<key>id</key>
-			<string>account</string>
-			<key>class</key>
-			<string>AccountViewController</string>
-			<key>nib</key>
-			<string>AccountView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_account.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Credits</string>
-			<key>id</key>
-			<string>credits</string>
-			<key>class</key>
-			<string>CreditsViewController</string>
-			<key>nib</key>
-			<string>CreditsView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_credits.png</string>
 		</dict>
 	</array>
 	<key>GATrackingCode</key>

@@ -26,7 +26,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #import "PhotoMapViewController.h"
-#import "MapViewController.h"
 #import "RMMapLayer.h"
 #import "RMMarker.h"
 #import "RMMarkerManager.h"
@@ -43,7 +42,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoMapImageLocationViewController.h"
 #import "InitialLocation.h"
 #import "Markers.h"
-#import "MapLocationSearchViewController.h"
 #import "RMMapView.h"
 #import "CSPointVO.h"
 #import "RouteLineView.h"
@@ -73,7 +71,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, strong) CLLocation								* lastLocation;// last location
 @property (nonatomic, strong) CLLocation								* currentLocation;
 @property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;//the popup with the contents of a particular location (photomap etc.)
-@property (nonatomic, strong) MapLocationSearchViewController			* mapLocationSearchView;//the search popup
+//@property (nonatomic, strong) MapLocationSearchViewController			* mapLocationSearchView;//the search popup
 @property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
 @property (nonatomic, strong) InitialLocation							* initialLocation;
 @property (nonatomic, strong) IBOutlet UIView							* introView;
@@ -168,8 +166,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 - (void) didNotificationMapStyleChanged {
-	_mapView.contents.tileSource = [MapViewController tileSource];
-	self.attributionLabel.text = [MapViewController mapAttribution];
+	_mapView.contents.tileSource = [CycleStreets tileSource];
+	self.attributionLabel.text = [CycleStreets mapAttribution];
 }
 
 
@@ -255,7 +253,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	//Necessary to start route-me service
 	[RMMapView class];
-	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
+	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[CycleStreets tileSource]];
 	[_mapView setDelegate:self];
 	[[_mapView markerManager] removeMarkers];
 	
@@ -269,7 +267,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	[_gpsLocationView setLocationProvider:self];
 	
 	//get the map attribution 
-	self.attributionLabel.text = [MapViewController mapAttribution];
+	self.attributionLabel.text = [CycleStreets mapAttribution];
 	
 		
 	_showingPhotos = YES;
@@ -409,6 +407,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 
+
+#pragma mark - MapView delegate
+
 //
 /***********************************************
  * @description			MapView delegate methods
@@ -436,6 +437,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	[self requestPhotos];
 	
 }
+
+
 
 
 
@@ -489,7 +492,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	self.lastLocation=location;
 	
-	[MapViewController zoomMapView:_mapView toLocation:location];
+	[CycleStreets zoomMapView:_mapView toLocation:location];
 	
 	_gpslocateButton.style = UIBarButtonItemStyleBordered;
 	
@@ -505,7 +508,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	CLLocation *location=(CLLocation*)[notification object];
 	
-	[MapViewController zoomMapView:_mapView toLocation:location];
+	[CycleStreets zoomMapView:_mapView toLocation:location];
 	
 	[self displayLocationIndicator:YES];
 	
@@ -578,13 +581,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 #pragma mark Search
 
 - (IBAction) didSearch {
-	BetterLog(@"search");
-	if (_mapLocationSearchView == nil) {
-		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
-	}	
-	_mapLocationSearchView.locationReceiver = self;
-	_mapLocationSearchView.centreLocation = [[_mapView contents] mapCenter];
-	[self presentModalViewController:_mapLocationSearchView	animated:YES];
+//	BetterLog(@"search");
+//	if (_mapLocationSearchView == nil) {
+//		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
+//	}	
+//	_mapLocationSearchView.locationReceiver = self;
+//	_mapLocationSearchView.centreLocation = [[_mapView contents] mapCenter];
+//	[self presentModalViewController:_mapLocationSearchView	animated:YES];
 }
 
 - (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
