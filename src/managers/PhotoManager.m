@@ -166,12 +166,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 -(void)retrievePhotosForLocationResponse:(ValidationVO*)validation{
 	
 	if(showingHUD==YES){
-		if(retreiveTimer!=nil){
-			[retreiveTimer invalidate];
-			retreiveTimer=nil;
-		}
 		
-		self.retreiveTimer=[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(assesRetrievedComplete) userInfo:nil repeats:NO];
+		[[HudManager sharedInstance]removeHUD:NO];
+		showingHUD=NO;
+//		if(retreiveTimer!=nil){
+//			[retreiveTimer invalidate];
+//			retreiveTimer=nil;
+//		}
+//		
+//		self.retreiveTimer=[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(assesRetrievedComplete) userInfo:nil repeats:NO];
 	}
 	
 	    

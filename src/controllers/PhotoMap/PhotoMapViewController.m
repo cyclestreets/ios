@@ -208,6 +208,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		return;
 	}
 	
+	[_mapView removeAllAnnotations];
+	
 	for (PhotoMapVO *photo in [photoList photos]) {
 		
 		
@@ -224,9 +226,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		
 		[_mapView addAnnotation:annotation];
 		
-		
 	}
-	
 	
 	
 }
@@ -432,12 +432,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 }
 
-- (void) afterMapMove: (RMMapView*) map {
+- (void) afterMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction {
 	[self afterMapChanged:map];
 }
 
 
-- (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
+- (void) afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction{
 	[self afterMapChanged:map];
 }
 
@@ -501,9 +501,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	CLLocation *location=(CLLocation*)[notification object];
 	
-	self.lastLocation=location;
+	self.currentLocation=location;
 	
-	[CycleStreets zoomMapView:_mapView toLocation:location];
+	[CycleStreets zoomMapView:_mapView toLocation:_currentLocation];
 	
 	_gpslocateButton.style = UIBarButtonItemStyleBordered;
 	
@@ -512,6 +512,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	[self removeLocationIndicatorAfterDelay];
 	
 	[self requestPhotos];
+	
+	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 }
 
