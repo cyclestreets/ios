@@ -14,24 +14,23 @@
 #import "SVPulsingAnnotationView.h"
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
-#import "RMMapContents.h"
 
 #import <CoreLocation/CoreLocation.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
-@interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate>
+@interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate,UIActionSheetDelegate>
 
 
 @property (nonatomic, strong) IBOutlet RMMapView						* mapView;//map of current area
 @property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;// map type label
-@property (nonatomic, strong) RMMapContents								* mapContents;
 
 
 @property(nonatomic,weak) IBOutlet UILabel								*trackDurationLabel;
 @property(nonatomic,weak) IBOutlet UILabel								*trackSpeedLabel;
 @property(nonatomic,weak) IBOutlet UILabel								*trackDistanceLabel;
 
+@property(nonatomic,weak) IBOutlet UIButton								*actionButton;
 
 
 @property (nonatomic, strong) CLLocation								* lastLocation;// last location
@@ -49,6 +48,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @property (nonatomic,assign)  BOOL										isRecordingTrack;
 @property (nonatomic,assign)  BOOL										shouldUpdateDuration;
 @property (nonatomic,assign)  BOOL										didUpdateUserLocation;
+
+
+-(void)updateUI;
 
 
 @end
@@ -152,11 +154,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	{
 		// add to CoreData store
 		//CLLocationDistance distance = [tripManager addCoord:newLocation];
-		_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
+		//_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
 	}
 	
 	// 	double mph = ( [trip.distance doubleValue] / 1609.344 ) / ( [trip.duration doubleValue] / 3600. );
-	if ( _lastLocation.speed >= 0. )
+	if ( _currentLocation.speed >= 0 )
 		_trackSpeedLabel.text = [NSString stringWithFormat:@"%.1f mph", _currentLocation.speed * 3600 / 1609.344];
 	else
 		_trackSpeedLabel.text = @"0.0 mph";
@@ -234,7 +236,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	
 	[RMMapView class];
-	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[CycleStreets tileSource]];
 	[_mapView setDelegate:self];
 	
 	
@@ -246,6 +247,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	
 	//TODO: UI styling
+	
+	[_actionButton addTarget:self action:@selector(didSelectActionButton:) forControlEvents:UIControlEventTouchUpInside];
 	
 	
 }
@@ -262,7 +265,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 -(void)updateUI{
 	
-	if ( shouldUpdateDuration )
+	if ( _shouldUpdateDuration )
 	{
 		NSDate *startDate = [[_trackTimer userInfo] objectForKey:@"StartDate"];
 		NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:startDate];
@@ -282,6 +285,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 }
 
+
+- (void)resetDurationDisplay
+{
+	_trackDurationLabel.text = @"00:00:00";
+	
+	_trackDistanceLabel.text = @"0 mi";
+}
 
 
 
@@ -314,44 +324,45 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 #pragma mark - UI events
 
 
--(IBAction)didSelectStartButton:(id)sender{
+-(IBAction)didSelectActionButton:(id)sender{
 	
-	if(isRecordingTrack == NO)
+	if(_isRecordingTrack == NO)
     {
         BetterLog(@"start");
         
         // start the timer if needed
         if ( _trackTimer == nil )
         {
-			[self resetCounter];
-			self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:kCounterTimeInterval
-													 target:self selector:@selector(updateUI:)
+			[self resetDurationDisplay];
+			self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f
+													 target:self selector:@selector(updateUI)
 												   userInfo:[self newTripTimerUserInfo] repeats:YES];
         }
         
        // set start button to "Save"
+		[_actionButton setTitle:@"Save" forState:UIControlStateNormal];
 		
         // set recording flag so future location updates will be added as coords
-        appDelegate = [[UIApplication sharedApplication] delegate];
-        appDelegate.isRecording = YES;
-        recording = YES;
-        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey: @"recording"];
+        //appDelegate = [[UIApplication sharedApplication] delegate];
+        //appDelegate.isRecording = YES;
+        _isRecordingTrack = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:_isRecordingTrack forKey:@"isRecordingTrack"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         // set flag to update counter
-        shouldUpdateCounter = YES;
+        _shouldUpdateDuration = YES;
     }
     // do the saving
     else
     {
         NSLog(@"User Press Save Button");
-        saveActionSheet = [[UIActionSheet alloc]
+        UIActionSheet *saveActionSheet = [[UIActionSheet alloc]
                            initWithTitle:@""
                            delegate:self
                            cancelButtonTitle:@"Continue"
                            destructiveButtonTitle:@"Discard"
                            otherButtonTitles:@"Save",nil];
-        //[saveActionSheet showInView:self.view];
+        
         [saveActionSheet showInView:[UIApplication sharedApplication].keyWindow];
     }
 	
@@ -360,6 +371,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
+- (NSDictionary *)newTripTimerUserInfo
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], @"StartDate",
+			[NSNull null], @"TripManager", nil ];
+}
 
 
 
@@ -369,18 +385,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 - (float)getX {
-	CGPoint p = [self.mapView.contents latLongToPixel:self.currentLocation.coordinate];
+	CGPoint p = [self.mapView coordinateToPixel:self.currentLocation.coordinate];
 	return p.x;
 }
 
 - (float)getY {
-	CGPoint p = [self.mapView.contents latLongToPixel:self.currentLocation.coordinate];
+	CGPoint p = [self.mapView coordinateToPixel:self.currentLocation.coordinate];
 	return p.y;
 }
 
 - (float)getRadius {
 	
-	double metresPerPixel = [_mapView.contents metersPerPixel];
+	double metresPerPixel = [_mapView metersPerPixel];
 	float locationRadius=(self.currentLocation.horizontalAccuracy / metresPerPixel);
 	
 	return MAX(locationRadius, 40.0f);

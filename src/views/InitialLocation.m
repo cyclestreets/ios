@@ -138,7 +138,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			
 			initLocation.latitude = [sLat doubleValue];
 			initLocation.longitude = [sLon doubleValue];
-			[self.mapView moveToLatLong:initLocation];
+			[self.mapView setCenterCoordinate:initLocation];
 			
 		}
 		
@@ -155,7 +155,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 				
 				[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 				
-				[self.mapView moveToLatLong:[UserLocationManager defaultCoordinate]];
+				[self.mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
 				
 			}
 			
@@ -210,7 +210,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 }
 
 - (void)startAt:(CLLocationCoordinate2D)coordinate {
-	[self.mapView moveToLatLong:coordinate];
+	[self.mapView setCenterCoordinate:coordinate];
 	self.mapView.hidden = NO;
 	[self.welcomeView setNeedsDisplay];
 	[self save:coordinate];
@@ -222,7 +222,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 
 - (void)locationDidFail{
 	
-	self.mapView.contents.zoom = 12;
+	self.mapView.zoom = 12;
 	CLLocationCoordinate2D coordinate = [UserLocationManager defaultCoordinate];
 	[self locationDidComplete:coordinate];
 	

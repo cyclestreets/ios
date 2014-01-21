@@ -31,7 +31,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "RMOpenStreetMapSource.h"
 #import "RMOpenCycleMapSource.h"
-#import "RMOrdnanceSurveyStreetViewMapSource.h"
 
 
 static NSInteger MAX_ZOOM = 18;
@@ -96,12 +95,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		//open cycle map
 		tileSource = [[RMOpenCycleMapSource alloc] init];
 	}
-	else if ([mapStyle isEqualToString:MAPPING_BASE_OS])
-	{
-		//Ordnance Survey
-		tileSource = [[RMOrdnanceSurveyStreetViewMapSource alloc] init];
-	}
-	else
+		else
 	{
 		//default to MAPPING_BASE_OSM.
 		tileSource = [[RMOpenStreetMapSource alloc] init];
@@ -149,8 +143,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		wantAccuracy = wantAccuracy * 2;
 	}
 	
-	[mapView moveToLatLong: newLocation.coordinate];
-	[mapView.contents setZoom:wantZoom];
+	[mapView setCenterCoordinate:newLocation.coordinate];
+	[mapView setZoom:wantZoom];
 }
 
 

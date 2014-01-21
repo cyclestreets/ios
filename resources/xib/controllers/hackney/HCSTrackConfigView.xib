@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HCSTrackConfigViewController">
             <connections>
+                <outlet property="actionButton" destination="eIO-wO-CYP" id="hx2-1X-5LD"/>
                 <outlet property="mapView" destination="AaK-ue-LWh" id="XZY-u0-YCp"/>
                 <outlet property="trackDistanceLabel" destination="xTc-bb-KGq" id="1uC-eV-Znq"/>
                 <outlet property="trackDurationLabel" destination="mVx-XJ-EL8" id="ap6-jO-mQe"/>

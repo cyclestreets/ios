@@ -10,7 +10,6 @@
 #import "ImageManipulator.h"
 #import "UploadPhotoVO.h"
 #import "GlobalUtilities.h"
-#import "RMMarkerManager.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UserLocationManager.h"
 #import "CycleStreets.h"
@@ -62,7 +61,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIButton *libraryButton;
 @property (nonatomic, strong) IBOutlet UIView *photoLocationView;
 @property (nonatomic, strong) IBOutlet RMMapView *locationMapView;
-@property (nonatomic, strong) RMMapContents *locationMapContents;
 @property (nonatomic, strong) RMMarker *locationMapMarker;
 @property (nonatomic, strong) IBOutlet UILabel *locationLabel;
 @property (nonatomic, strong) IBOutlet UIButton *locationUpdateButton;
@@ -908,7 +906,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[_locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[RMMapView class];
-	_locationMapContents=[[RMMapContents alloc] initWithView:_locationMapView tilesource:[[self class] tileSource]];
 	[_locationMapView setDelegate:self];
 	_locationMapView.userInteractionEnabled=NO;
 	
@@ -923,7 +920,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	if (self.locationMapMarker==nil) {
 		self.locationMapMarker = [Markers markerPhoto];
-		self.locationMapMarker.enableDragging=YES;
+		//self.locationMapMarker.enableDragging=YES;
 	}
 	
 	return self.locationMapMarker;
@@ -1032,11 +1029,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
 
-	[self.locationMapView moveToLatLong:coordinate];
+	[self.locationMapView setCenterCoordinate:coordinate];
 	
-	[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:coordinate];
+	//[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:coordinate];
 	
-	[_locationMapView.contents setZoom:6];
+	[_locationMapView setZoom:6];
 		
 }
 
@@ -1045,15 +1042,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
 	
-	[self.locationMapView moveToLatLong:location.coordinate];
+	[self.locationMapView setCenterCoordinate:location.coordinate];
 	
-	if ([_locationMapView.contents zoom] < 18) {
-		[_locationMapView.contents setZoom:14];
+	if ([_locationMapView zoom] < 18) {
+		[_locationMapView setZoom:14];
 	}
 	
 
 	
-	[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:location.coordinate];
+	//[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:location.coordinate];
 	
 	
 }

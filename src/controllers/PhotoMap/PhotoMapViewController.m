@@ -28,14 +28,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoMapViewController.h"
 #import "RMMapLayer.h"
 #import "RMMarker.h"
-#import "RMMarkerManager.h"
+#import "RMAnnotation.h"
 #import "Query.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
 #import "Route.h"
 #import "SegmentVO.h"
 #import <CoreLocation/CoreLocation.h>
-#import "RMCachedTileSource.h"
+
 #import "PhotoMapListVO.h"
 #import "PhotoMapVO.h"
 #import "QueryPhoto.h"
@@ -45,7 +45,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapView.h"
 #import "CSPointVO.h"
 #import "RouteLineView.h"
-#import "RMMercatorToScreenProjection.h"
 #import "Files.h"
 #import "GlobalUtilities.h"
 #import "ButtonUtilities.h"
@@ -166,7 +165,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 - (void) didNotificationMapStyleChanged {
-	_mapView.contents.tileSource = [CycleStreets tileSource];
+	_mapView.tileSource = [CycleStreets tileSource];
 	self.attributionLabel.text = [CycleStreets mapAttribution];
 }
 
@@ -211,23 +210,35 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	for (PhotoMapVO *photo in [photoList photos]) {
 		
-		RMMarker *marker=nil;
+		
+		RMAnnotation *annotation = [RMAnnotation annotationWithMapView:_mapView coordinate:photo.locationCoords andTitle:nil];
 		
 		if([[PhotoManager sharedInstance] isUserPhoto:photo]){
-			marker = [Markers markerUserPhoto];
+			annotation.annotationIcon = [UIImage imageNamed:@"UIIcon_userphotomap.png"];
+			annotation.anchorPoint = CGPointMake(0.5, 1.0);
 		}else{
-			marker = [Markers markerPhoto];
+			annotation.annotationIcon = [UIImage imageNamed:@"UIIcon_photomap.png"];
+			annotation.anchorPoint = CGPointMake(0.5, 1.0);
 		}
 		
-		marker.data = photo;
-		[_photoMarkers addObject:marker];
-		[[_mapView markerManager] addMarker:marker AtLatLong:[photo location]];
+		
+		[_mapView addAnnotation:annotation];
+		
+		
 	}
 	
 	
 	
 }
 
+
+- (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
+{
+  
+	RMMapLayer *marker = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
+    
+    return marker;
+}
 
 //
 /***********************************************
@@ -253,9 +264,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	//Necessary to start route-me service
 	[RMMapView class];
-	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[CycleStreets tileSource]];
 	[_mapView setDelegate:self];
-	[[_mapView markerManager] removeMarkers];
+	//[[_mapView markerManager] removeMarkers];
 	
 	
 	self.photoMarkers = [[NSMutableArray alloc] init];
@@ -319,7 +329,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 -(void)displayLocationForMap:(CLLocationCoordinate2D)location{
 	
-	[_mapView moveToLatLong:location];
+	[_mapView setCenterCoordinate:location];
 	
 	if(_showingPhotos)
 		[self startShowingPhotos];
@@ -363,9 +373,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	
 	
-	CGRect bounds = _mapView.contents.screenBounds;
-	CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
-	CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];	
+	CGRect bounds = _mapView.bounds;
+	CLLocationCoordinate2D nw = [_mapView pixelToCoordinate:bounds.origin];
+	CLLocationCoordinate2D se = [_mapView pixelToCoordinate:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
 	CLLocationCoordinate2D ne;
 	CLLocationCoordinate2D sw;
 	ne.latitude = nw.latitude;
@@ -384,7 +394,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	if (_photoMarkers == nil || [_photoMarkers count] == 0) return nil;
 	srand( time( NULL));
 	int i = random() % [_photoMarkers count];
-	return (PhotoMapVO *)((RMMarker *)[_photoMarkers objectAtIndex:i]).data;
+	// return (PhotoMapVO *)((RMMarker *)[_photoMarkers objectAtIndex:i]).data;
+	return nil;
 }
 
 
@@ -392,7 +403,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 - (void) clearPhotos {
 
 	if (_photoMarkers != nil) {
-		[[_mapView markerManager] removeMarkers:_photoMarkers];
+		//[[_mapView markerManager] removeMarkers:_photoMarkers];
 		[_photoMarkers removeAllObjects];
 	}
 	
@@ -596,11 +607,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
 
-	if ([marker.data isKindOfClass: [PhotoMapVO class]]) {
-		[self presentModalViewController:lv animated:YES];
-		PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
-		[lv loadContentForEntry:photoEntry];
-	}
+//	if ([marker.data isKindOfClass: [PhotoMapVO class]]) {
+//		[self presentModalViewController:lv animated:YES];
+//		PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
+//		[lv loadContentForEntry:photoEntry];
+//	}
 }
 
 - (IBAction) didIntroButton {
@@ -636,18 +647,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 #pragma mark location provider
 
 - (float)getX {
-	CGPoint p = [self.mapView.contents latLongToPixel:self.lastLocation.coordinate];
+	CGPoint p = [self.mapView coordinateToPixel:self.lastLocation.coordinate];
 	return p.x;
 }
 
 - (float)getY {
-	CGPoint p = [self.mapView.contents latLongToPixel:self.lastLocation.coordinate];
+	CGPoint p = [self.mapView coordinateToPixel:self.lastLocation.coordinate];
 	return p.y;
 }
 
 - (float)getRadius {
 	
-	double metresPerPixel = [_mapView.contents metersPerPixel];
+	double metresPerPixel = [_mapView metersPerPixel];
 	float locationRadius=(self.lastLocation.horizontalAccuracy / metresPerPixel);
 	
 	return MAX(locationRadius, 40.0f);
@@ -661,7 +672,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location {
 	BetterLog(@"didMoveToLocation");
-	[_mapView moveToLatLong: location];
+	[_mapView setCenterCoordinate: location];
 }
 
 
@@ -674,7 +685,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 - (void)fixLocationAndButtons:(CLLocationCoordinate2D)location {
-	[_mapView moveToLatLong:location];
+	[_mapView setCenterCoordinate:location];
 	[self saveLocation:location];	
 }
 

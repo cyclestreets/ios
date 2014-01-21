@@ -21,9 +21,7 @@
 
 #import "RMOpenStreetMapSource.h"
 #import "RMOpenCycleMapSource.h"
-#import "RMOrdnanceSurveyStreetViewMapSource.h"
 #import "RMTileSource.h"
-#import "RMCachedTileSource.h"
 
 #define MAXWIZARDVIEWS 7
 
