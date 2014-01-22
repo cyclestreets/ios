@@ -51,7 +51,9 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="fixedSpace" id="13"/>
-                        <barButtonItem title="Photomap" width="135" style="plain" id="26"/>
+                        <barButtonItem title="Photomap" width="135" style="plain" id="26">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="42"/>
                         <barButtonItem image="UIButtonBarCameraSmall.png" id="41">
                             <connections>
@@ -60,6 +62,7 @@
                         </barButtonItem>
                     </items>
                     <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="barTintColor" red="0.19607843137254902" green="0.396078431372549" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                 </toolbar>
                 <view contentMode="scaleToFill" id="28">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
@@ -102,7 +105,7 @@ browse cycling-related photos that users have added to CycleStreets.</string>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

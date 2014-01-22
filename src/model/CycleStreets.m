@@ -105,7 +105,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 
 
 + (NSArray *)mapStyles {
-	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, MAPPING_BASE_OS,nil];
+	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,nil];
 }
 
 + (NSString *)currentMapStyle {

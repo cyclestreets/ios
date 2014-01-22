@@ -136,11 +136,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)loadLocationFromPhoto;
 -(void)displayDefaultLocation;
 -(void)updateLocationMapViewForLocation:(CLLocation*)location;
-- (void)startlocationManagerIsLocating;
-- (void)stoplocationManagerIsLocating;
-- (void)PanGestureCaptured:(UIPanGestureRecognizer *)gesture;
 
--(void)updateSelectionLabels;
 
 -(void)didRecievePhotoImageUploadResponse:(NSDictionary*)dict;
 -(void)didRecieveFileUploadResponse:(NSDictionary*)dict;

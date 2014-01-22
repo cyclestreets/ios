@@ -633,9 +633,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(IBAction)showPhotoWizard:(id)sender{
 	
 	PhotoWizardViewController *photoWizard=[[PhotoWizardViewController alloc]initWithNibName:[PhotoWizardViewController nibName] bundle:nil];
+	photoWizard.extendedLayoutIncludesOpaqueBars=NO;
+	photoWizard.edgesForExtendedLayout = UIRectEdgeNone;
 	photoWizard.isModal=YES;
 	
-	[self presentModalViewController:photoWizard animated:YES];
+	[self presentViewController:photoWizard animated:YES completion:^{
+		
+	}];
 	
 }
 
