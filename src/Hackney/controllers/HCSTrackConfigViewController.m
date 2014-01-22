@@ -15,11 +15,20 @@
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
 
+#import "TripManager.h"
+#import "Trip.h"
+#import "User.h"
+
 #import <CoreLocation/CoreLocation.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 @interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate,UIActionSheetDelegate>
+
+
+// hackney
+@property (nonatomic, strong) TripManager							*tripManager;
+
 
 
 @property (nonatomic, strong) IBOutlet RMMapView						* mapView;//map of current area
@@ -293,6 +302,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	_trackDistanceLabel.text = @"0 mi";
 }
 
+-(void)resetTimer{
+	
+	if(_trackTimer!=nil)
+		[_trackTimer invalidate];
+}
 
 
 
@@ -379,6 +393,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
+- (void)resetRecordingInProgress
+{
+	// reset button states
+    appDelegate = [[UIApplication sharedApplication] delegate];
+    appDelegate.isRecording = NO;
+	recording = NO;
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"recording"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+	_actionButton.enabled = YES;
+	[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
+	
+	// reset trip, reminder managers
+	NSManagedObjectContext *context = _tripManager.managedObjectContext;
+	[self initTripManager:[[TripManager alloc] initWithManagedObjectContext:context]];
+	_tripManager.dirty = YES;
+	
+	[self resetDurationDisplay];
+	[self resetTimer];
+}
+
 
 
 #pragma mark - Location Provider
@@ -402,6 +436,24 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	return MAX(locationRadius, 40.0f);
 }
 
+
+
+
+#pragma mark Manager methods
+
+- (void)initTripManager:(TripManager*)manager
+{
+	manager.dirty			= YES;
+	self.tripManager		= manager;
+    manager.parent          = self;
+}
+
+
+//- (void)initNoteManager:(NoteManager*)manager
+//{
+//	self.noteManager = manager;
+//    manager.parent = self;
+//}
 
 
 //

@@ -92,6 +92,7 @@ UITextViewDelegate>
 
 @property (nonatomic, retain) NSMutableData *receivedData;
 
+@property (nonatomic, assign) BOOL isRecording;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (id)initWithTrip:(Trip*)trip;
@@ -116,6 +117,9 @@ UITextViewDelegate>
 - (BOOL)loadMostRecetUnSavedTrip;
 - (int)recalculateTripDistances;
 - (CLLocationDistance)calculateTripDistance:(Trip*)_trip;
+
+
+-(void)resetTrip;
 
 @end
 

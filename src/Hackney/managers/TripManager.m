@@ -66,7 +66,7 @@
 
 @synthesize saving, tripNotes, tripNotesText;
 @synthesize coords, dirty, trip, managedObjectContext, receivedData;
-@synthesize uploadingView, parent;
+@synthesize uploadingView, parent,isRecording;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context
 {
@@ -78,8 +78,20 @@
 		self.managedObjectContext	= context;
 		self.trip					= nil;
 		purposeIndex				= -1;
+		isRecording					= NO;
     }
     return self;
+}
+
+
+
+-(void)resetTrip{
+	
+	_isRecording = NO;
+    [[NSUserDefaults standardUserDefaults] setBool:_isRecording forKey: @"recording"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+	
+	
 }
 
 
