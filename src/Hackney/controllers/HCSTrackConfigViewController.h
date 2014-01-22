@@ -10,4 +10,9 @@
 
 @interface HCSTrackConfigViewController : SuperViewController
 
+
+
+- (void)displayUploadedTripMap;
+- (void)displayUploadedNote;
+
 @end

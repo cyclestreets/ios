@@ -56,9 +56,6 @@ UITextViewDelegate>
 	UIAlertView *saving;
 	UIAlertView *tripNotes;
 	UITextView	*tripNotesText;
-//    id <ActivityIndicatorDelegate> activityDelegate;
-//    id <UIAlertViewDelegate> alertDelegate;
-//    UIActivityIndicatorView *activityIndicator;
 
 	BOOL dirty;
 	Trip *trip;
@@ -111,7 +108,6 @@ UITextViewDelegate>
 
 - (NSInteger)getPurposeIndex;
 
-- (void)promptForTripNotes;
 
 - (int)countUnSavedTrips;
 - (int)countUnSyncedTrips;
