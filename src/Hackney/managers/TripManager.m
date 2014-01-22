@@ -47,6 +47,8 @@
 #import "LoadingView.h"
 #import "HCSTrackConfigViewController.h"
 
+#import "CoreDataStore.h"
+
 // use this epsilon for both real-time and post-processing distance calculations
 #define kEpsilonAccuracy		100.0
 
@@ -64,31 +66,45 @@
 
 @implementation TripManager
 
+SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
+
 @synthesize saving, tripNotes, tripNotesText;
 @synthesize coords, dirty, trip, managedObjectContext, receivedData;
 @synthesize uploadingView, parent,isRecording;
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context
+
+- (instancetype)init
 {
-    if ( self = [super init] )
-	{
+	
+    if (self = [super init]){
 		self.activityDelegate		= self;
 		self.coords					= [[NSMutableArray alloc] initWithCapacity:1000];
 		distance					= 0.0;
-		self.managedObjectContext	= context;
+		self.managedObjectContext	= [[CoreDataStore mainStore]context];
 		self.trip					= nil;
 		purposeIndex				= -1;
 		isRecording					= NO;
-    }
-    return self;
+	}
+	return self;
+	
+   
 }
 
 
 
 -(void)resetTrip{
 	
-	_isRecording = NO;
-    [[NSUserDefaults standardUserDefaults] setBool:_isRecording forKey: @"recording"];
+	isRecording = NO;
+    [[NSUserDefaults standardUserDefaults] setBool:isRecording forKey: @"recording"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+	
+	
+}
+
+-(void)startTrip{
+	
+	isRecording = YES;
+    [[NSUserDefaults standardUserDefaults] setBool:isRecording forKey: @"recording"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	
@@ -678,15 +694,10 @@
 	NSLog(@"createTrip");
 	
 	// Create and configure a new instance of the Trip entity
-	self.trip = (Trip *)[NSEntityDescription insertNewObjectForEntityForName:@"Trip"
-													  inManagedObjectContext:managedObjectContext];
+	self.trip=(Trip*)[[CoreDataStore mainStore] createNewEntityByName:@"Trip"];
 	[trip setStart:[NSDate date]];
 	
-	NSError *error;
-	if (![managedObjectContext save:&error]) {
-		// Handle the error.
-		NSLog(@"createTrip error %@, %@", error, [error localizedDescription]);
-	}
+	[[CoreDataStore mainStore] save];
 }
 
 
@@ -696,18 +707,13 @@
 	NSString *purpose = [self getPurposeString:index];
 	NSLog(@"createTrip: %@", purpose);
 	
-	// Create and configure a new instance of the Trip entity
-	self.trip = (Trip *)[NSEntityDescription insertNewObjectForEntityForName:@"Trip"
-													  inManagedObjectContext:managedObjectContext];
 	
+	self.trip=(Trip*)[[CoreDataStore mainStore] createNewEntityByName:@"Trip"];
 	[trip setPurpose:purpose];
 	[trip setStart:[NSDate date]];
 	
-	NSError *error;
-	if (![managedObjectContext save:&error]) {
-		// Handle the error.
-		NSLog(@"createTrip error %@, %@", error, [error localizedDescription]);
-	}
+	[[CoreDataStore mainStore] save];
+	
 }
 
 

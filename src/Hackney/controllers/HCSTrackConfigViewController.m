@@ -14,10 +14,17 @@
 #import "SVPulsingAnnotationView.h"
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
+#import "UIActionSheet+BlocksKit.h"
+#import "HCSMapViewController.h"
+#import "PickerViewController.h"
 
 #import "TripManager.h"
 #import "Trip.h"
 #import "User.h"
+
+
+
+#import "CoreDataStore.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -57,6 +64,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @property (nonatomic,assign)  BOOL										isRecordingTrack;
 @property (nonatomic,assign)  BOOL										shouldUpdateDuration;
 @property (nonatomic,assign)  BOOL										didUpdateUserLocation;
+@property (nonatomic,assign)  BOOL										userInfoSaved;
 
 
 -(void)updateUI;
@@ -156,14 +164,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	else if ( deltaDistance > 1.0 )
 	{
 		//NSLog(@"center map to current user location");
-		//[mapView setCenterCoordinate:newLocation.coordinate animated:YES];
+		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
 	}
 	
 	if ( _isRecordingTrack )
 	{
 		// add to CoreData store
-		//CLLocationDistance distance = [tripManager addCoord:newLocation];
-		//_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
+		CLLocationDistance distance = [_tripManager addCoord:_currentLocation];
+		_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
 	}
 	
 	// 	double mph = ( [trip.distance doubleValue] / 1609.344 ) / ( [trip.duration doubleValue] / 3600. );
@@ -228,6 +236,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.tripManager=[TripManager sharedInstance];
+	_tripManager.parent          = self;
+	
+	[self hasUserInfoBeenSaved];
 	
     [self createPersistentUI];
 }
@@ -356,12 +369,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
        // set start button to "Save"
 		[_actionButton setTitle:@"Save" forState:UIControlStateNormal];
 		
-        // set recording flag so future location updates will be added as coords
-        //appDelegate = [[UIApplication sharedApplication] delegate];
-        //appDelegate.isRecording = YES;
         _isRecordingTrack = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:_isRecordingTrack forKey:@"isRecordingTrack"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+		[[TripManager sharedInstance] startTrip];
         
         // set flag to update counter
         _shouldUpdateDuration = YES;
@@ -369,19 +378,162 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
     // do the saving
     else
     {
-        NSLog(@"User Press Save Button");
-        UIActionSheet *saveActionSheet = [[UIActionSheet alloc]
-                           initWithTitle:@""
-                           delegate:self
-                           cancelButtonTitle:@"Continue"
-                           destructiveButtonTitle:@"Discard"
-                           otherButtonTitles:@"Save",nil];
-        
-        [saveActionSheet showInView:[UIApplication sharedApplication].keyWindow];
+		__weak __block HCSTrackConfigViewController *weakSelf=self;
+		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@""];
+		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
+			_shouldUpdateDuration=YES;
+		}];
+		[actionSheet setDestructiveButtonWithTitle:@"Discard"	handler:^{
+			[weakSelf resetRecordingInProgress];
+		}];
+		[actionSheet addButtonWithTitle:@"Save" handler:^{
+			[weakSelf save];
+		}];
+		
+		[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
+		
     }
 	
+}
+
+
+- (void)save
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+	// go directly to TripPurpose, user can cancel from there
+	if ( YES )
+	{
+		// Trip Purpose
+		NSLog(@"INIT + PUSH");
+		PickerViewController *tripPurposePickerView = [[PickerViewController alloc]
+													   //initWithPurpose:[tripManager getPurposeIndex]];
+													   initWithNibName:@"TripPurposePicker" bundle:nil];
+		[tripPurposePickerView setDelegate:self];
+		//[[self navigationController] pushViewController:pickerViewController animated:YES];
+		[self.navigationController presentModalViewController:tripPurposePickerView animated:YES];
+		
+	}
+	
+	// prompt to confirm first
+	else
+	{
+		// pause updating the counter
+		_shouldUpdateDuration = NO;
+		
+		// construct purpose confirmation string
+		NSString *purpose = nil;
+		if ( _tripManager != nil )
+			purpose = [self getPurposeString:[_tripManager getPurposeIndex]];
+		
+		NSString *confirm = [NSString stringWithFormat:@"Stop recording & save this trip?"];
+		
+		// present action sheet
+		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:confirm
+																 delegate:self
+														cancelButtonTitle:@"Cancel"
+												   destructiveButtonTitle:nil
+														otherButtonTitles:@"Save", nil];
+		
+		actionSheet.actionSheetStyle		= UIActionSheetStyleBlackTranslucent;
+		UIViewController *pvc = self.parentViewController;
+		UITabBarController *tbc = (UITabBarController *)pvc.parentViewController;
+		
+		[actionSheet showFromTabBar:tbc.tabBar];
+		
+	}
+    
+}
+
+
+- (void)didEnterTripDetails:(NSString *)details{
+    [_tripManager saveNotes:details];
+    NSLog(@"Trip Added details: %@",details);
+}
+
+- (void)saveTrip{
+    [_tripManager saveTrip];
+    NSLog(@"Save trip");
+}
+
+- (void)displayUploadedTripMap
+{
+    Trip *trip = _tripManager.trip;
+    [self resetRecordingInProgress];
+    
+    // load map view of saved trip
+    HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:trip];
+    [[self navigationController] pushViewController:mvc animated:YES];
+    NSLog(@"displayUploadedTripMap");
+    
+}
+
+
+- (void)displayUploadedNote
+{
+//    Note *note = noteManager.note;
+//    
+//    // load map view of note
+//    NoteViewController *mvc = [[NoteViewController alloc] initWithNote:note];
+//    [[self navigationController] pushViewController:mvc animated:YES];
+//    NSLog(@"displayUploadedNote");
+    
+}
+
+
+
+#pragma mark - Trip methods
+
+- (BOOL)hasUserInfoBeenSaved
+{
+	BOOL					response = NO;
+	
+	NSError *error;
+	NSArray *fetchResults=[[CoreDataStore mainStore] allForEntity:@"User" error:&error];
 	
 	
+//	NSManagedObjectContext	*context = tripManager.managedObjectContext;
+//	NSFetchRequest			*request = [[NSFetchRequest alloc] init];
+//	NSEntityDescription		*entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
+//	[request setEntity:entity];
+//	
+//	NSError *error;
+//	NSInteger count = [context countForFetchRequest:request error:&error];
+	//NSLog(@"saved user count  = %d", count);
+	if ( fetchResults.count>0 )
+	{
+		//NSArray *fetchResults = [context executeFetchRequest:request error:&error];
+		if ( fetchResults != nil )
+		{
+			User *user = (User*)[fetchResults objectAtIndex:0];
+			if (user			!= nil &&
+				(user.age		!= nil ||
+				 user.gender	!= nil ||
+				 user.email		!= nil ||
+				 user.homeZIP	!= nil ||
+				 user.workZIP	!= nil ||
+				 user.schoolZIP	!= nil ||
+				 ([user.cyclingFreq intValue] < 4 )))
+			{
+				NSLog(@"found saved user info");
+				self.userInfoSaved = YES;
+				response = YES;
+			}
+			else
+				NSLog(@"no saved user info");
+		}
+		else
+		{
+			// Handle the error.
+			NSLog(@"no saved user");
+			if ( error != nil )
+				NSLog(@"PersonalInfo viewDidLoad fetch error %@, %@", error, [error localizedDescription]);
+		}
+	}
+	else
+		NSLog(@"no saved user");
+	
+	return response;
 }
 
 
@@ -395,18 +547,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 - (void)resetRecordingInProgress
 {
-	// reset button states
-    appDelegate = [[UIApplication sharedApplication] delegate];
-    appDelegate.isRecording = NO;
-	recording = NO;
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"recording"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+	[[TripManager sharedInstance] resetTrip];
 	_actionButton.enabled = YES;
 	[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
 	
-	// reset trip, reminder managers
-	NSManagedObjectContext *context = _tripManager.managedObjectContext;
-	[self initTripManager:[[TripManager alloc] initWithManagedObjectContext:context]];
 	_tripManager.dirty = YES;
 	
 	[self resetDurationDisplay];
@@ -436,6 +580,68 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	return MAX(locationRadius, 40.0f);
 }
 
+
+
+#pragma mark TripPurposeDelegate methods
+
+
+- (NSString *)setPurpose:(unsigned int)index
+{
+	NSString *purpose = [_tripManager setPurpose:index];
+	return [self updatePurposeWithString:purpose];
+}
+
+
+- (NSString *)getPurposeString:(unsigned int)index
+{
+	return [_tripManager getPurposeString:index];
+}
+
+- (NSString *)updatePurposeWithString:(NSString *)purpose
+{
+	// only enable start button if we don't already have a pending trip
+	if ( _trackTimer == nil )
+		_actionButton.enabled = YES;
+	
+	_actionButton.hidden = NO;
+	
+	return purpose;
+}
+
+
+- (NSString *)updatePurposeWithIndex:(unsigned int)index
+{
+	return [self updatePurposeWithString:[_tripManager getPurposeString:index]];
+}
+
+
+- (void)didCancelPurpose
+{
+	[self.navigationController dismissModalViewControllerAnimated:YES];
+    [[TripManager sharedInstance] startTrip];
+	_isRecordingTrack = YES;
+	_shouldUpdateDuration = YES;
+}
+
+
+- (void)didCancelNote
+{
+	[self.navigationController dismissModalViewControllerAnimated:YES];
+    
+}
+
+
+- (void)didPickPurpose:(unsigned int)index
+{
+	_isRecordingTrack = NO;
+    [[TripManager sharedInstance]resetTrip];
+	_actionButton.enabled = YES;
+	[self resetTimer];
+	
+	[_tripManager setPurpose:index];
+	//[tripManager promptForTripNotes];
+    //do something here: may change to be the save as a separate view. Not prompt.
+}
 
 
 

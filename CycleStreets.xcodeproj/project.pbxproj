@@ -11,6 +11,12 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
 		2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
+		280565E51890384400359211 /* CoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 280565E21890384400359211 /* CoreDataStore.m */; };
+		280565E61890384400359211 /* CoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 280565E21890384400359211 /* CoreDataStore.m */; };
+		280565E71890384400359211 /* NSManagedObject+Boost.m in Sources */ = {isa = PBXBuildFile; fileRef = 280565E41890384400359211 /* NSManagedObject+Boost.m */; };
+		280565E81890384400359211 /* NSManagedObject+Boost.m in Sources */ = {isa = PBXBuildFile; fileRef = 280565E41890384400359211 /* NSManagedObject+Boost.m */; };
+		280565EE18903C8900359211 /* CDAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */; };
+		280565EF18903C8900359211 /* CDAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		2807FCBA166693580028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		280E240F144D825D0021CDFA /* BUMoreTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */; };
@@ -131,6 +137,36 @@
 		28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */; };
 		28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */; };
 		2818C7A01458069E0077F529 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
+		2818E095189042390031AD43 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E094189042390031AD43 /* PickerViewController.m */; };
+		2818E096189042390031AD43 /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E094189042390031AD43 /* PickerViewController.m */; };
+		2818E09B189042600031AD43 /* CustomPickerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09A189042600031AD43 /* CustomPickerDataSource.m */; };
+		2818E09C189042600031AD43 /* CustomPickerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09A189042600031AD43 /* CustomPickerDataSource.m */; };
+		2818E09F189043570031AD43 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09E189043570031AD43 /* CustomView.m */; };
+		2818E0A0189043570031AD43 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09E189043570031AD43 /* CustomView.m */; };
+		2818E0A3189043A40031AD43 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A2189043A40031AD43 /* DetailViewController.m */; };
+		2818E0A4189043A40031AD43 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A2189043A40031AD43 /* DetailViewController.m */; };
+		2818E0A7189043B50031AD43 /* NoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A6189043B50031AD43 /* NoteManager.m */; };
+		2818E0A8189043B50031AD43 /* NoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A6189043B50031AD43 /* NoteManager.m */; };
+		2818E0AB189043E30031AD43 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AA189043E30031AD43 /* ImageResize.m */; };
+		2818E0AC189043E30031AD43 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AA189043E30031AD43 /* ImageResize.m */; };
+		2818E0AF189045080031AD43 /* TripDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AE189045080031AD43 /* TripDetailViewController.m */; };
+		2818E0B0189045080031AD43 /* TripDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AE189045080031AD43 /* TripDetailViewController.m */; };
+		2818E0B5189046380031AD43 /* UIActionSheet+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0B4189046380031AD43 /* UIActionSheet+BlocksKit.m */; };
+		2818E0B6189046380031AD43 /* UIActionSheet+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0B4189046380031AD43 /* UIActionSheet+BlocksKit.m */; };
+		2818E0B9189048720031AD43 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0B8189048720031AD43 /* NSObject+AssociatedObjects.m */; };
+		2818E0BA189048720031AD43 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0B8189048720031AD43 /* NSObject+AssociatedObjects.m */; };
+		2818E0BC189048D40031AD43 /* TripPurposePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0BB189048D40031AD43 /* TripPurposePicker.xib */; };
+		2818E0BD189048D40031AD43 /* TripPurposePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0BB189048D40031AD43 /* TripPurposePicker.xib */; };
+		2818E0BF189048D90031AD43 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0BE189048D90031AD43 /* NoteViewController.xib */; };
+		2818E0C0189048D90031AD43 /* NoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0BE189048D90031AD43 /* NoteViewController.xib */; };
+		2818E0C2189048E10031AD43 /* TripDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C1189048E10031AD43 /* TripDetailViewController.xib */; };
+		2818E0C3189048E10031AD43 /* TripDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C1189048E10031AD43 /* TripDetailViewController.xib */; };
+		2818E0C6189050570031AD43 /* HCSMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C5189050570031AD43 /* HCSMapViewController.xib */; };
+		2818E0C7189050570031AD43 /* HCSMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C5189050570031AD43 /* HCSMapViewController.xib */; };
+		2818E0CA189050930031AD43 /* HCSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0C9189050930031AD43 /* HCSMapViewController.m */; };
+		2818E0CB189050930031AD43 /* HCSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0C9189050930031AD43 /* HCSMapViewController.m */; };
+		2818E0CE189050FD0031AD43 /* MapCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0CD189050FD0031AD43 /* MapCoord.m */; };
+		2818E0CF189050FD0031AD43 /* MapCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0CD189050FD0031AD43 /* MapCoord.m */; };
 		281E08B31451608C0034CC63 /* POIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B21451608C0034CC63 /* POIManager.m */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
 		281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */; };
@@ -528,8 +564,6 @@
 		287050CE188FC407004CD922 /* HCSTrackConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050BA188FC407004CD922 /* HCSTrackConfigViewController.m */; };
 		287050CF188FC407004CD922 /* Coord.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050BD188FC407004CD922 /* Coord.m */; };
 		287050D0188FC407004CD922 /* Coord.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050BD188FC407004CD922 /* Coord.m */; };
-		287050D1188FC407004CD922 /* CycleAtlanta 2.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 287050BE188FC407004CD922 /* CycleAtlanta 2.xcdatamodel */; };
-		287050D2188FC407004CD922 /* CycleAtlanta 2.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 287050BE188FC407004CD922 /* CycleAtlanta 2.xcdatamodel */; };
 		287050D3188FC407004CD922 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050C0188FC407004CD922 /* Note.m */; };
 		287050D4188FC407004CD922 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050C0188FC407004CD922 /* Note.m */; };
 		287050D5188FC407004CD922 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050C2188FC407004CD922 /* Trip.m */; };
@@ -848,6 +882,11 @@
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2801301315E636070092D509 /* Icon_currentroutecell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_currentroutecell@2x.png"; sourceTree = "<group>"; };
+		280565E11890384400359211 /* CoreDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStore.h; sourceTree = "<group>"; };
+		280565E21890384400359211 /* CoreDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStore.m; sourceTree = "<group>"; };
+		280565E31890384400359211 /* NSManagedObject+Boost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Boost.h"; sourceTree = "<group>"; };
+		280565E41890384400359211 /* NSManagedObject+Boost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Boost.m"; sourceTree = "<group>"; };
+		280565ED18903C8900359211 /* CDAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CDAppModel.xcdatamodel; sourceTree = "<group>"; };
 		2807FCB81666934E0028D7DB /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		280E2406144D825D0021CDFA /* BUMoreTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUMoreTableDataSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUMoreTableDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1006,6 +1045,33 @@
 		28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_finish_wisp.png; sourceTree = "<group>"; };
 		28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_start_wisp.png; sourceTree = "<group>"; };
 		2818C79F1458069D0077F529 /* RouteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteCell.xib; sourceTree = "<group>"; };
+		2818E093189042390031AD43 /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
+		2818E094189042390031AD43 /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
+		2818E099189042600031AD43 /* CustomPickerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPickerDataSource.h; sourceTree = "<group>"; };
+		2818E09A189042600031AD43 /* CustomPickerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPickerDataSource.m; sourceTree = "<group>"; };
+		2818E09D189043570031AD43 /* CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
+		2818E09E189043570031AD43 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
+		2818E0A1189043A40031AD43 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		2818E0A2189043A40031AD43 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		2818E0A5189043B50031AD43 /* NoteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteManager.h; sourceTree = "<group>"; };
+		2818E0A6189043B50031AD43 /* NoteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteManager.m; sourceTree = "<group>"; };
+		2818E0A9189043E30031AD43 /* ImageResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResize.h; sourceTree = "<group>"; };
+		2818E0AA189043E30031AD43 /* ImageResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResize.m; sourceTree = "<group>"; };
+		2818E0AD189045080031AD43 /* TripDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripDetailViewController.h; sourceTree = "<group>"; };
+		2818E0AE189045080031AD43 /* TripDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripDetailViewController.m; sourceTree = "<group>"; };
+		2818E0B2189046370031AD43 /* BKGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKGlobals.h; sourceTree = "<group>"; };
+		2818E0B3189046370031AD43 /* UIActionSheet+BlocksKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+BlocksKit.h"; sourceTree = "<group>"; };
+		2818E0B4189046380031AD43 /* UIActionSheet+BlocksKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+BlocksKit.m"; sourceTree = "<group>"; };
+		2818E0B7189048720031AD43 /* NSObject+AssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AssociatedObjects.h"; sourceTree = "<group>"; };
+		2818E0B8189048720031AD43 /* NSObject+AssociatedObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AssociatedObjects.m"; sourceTree = "<group>"; };
+		2818E0BB189048D40031AD43 /* TripPurposePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripPurposePicker.xib; sourceTree = "<group>"; };
+		2818E0BE189048D90031AD43 /* NoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoteViewController.xib; sourceTree = "<group>"; };
+		2818E0C1189048E10031AD43 /* TripDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripDetailViewController.xib; sourceTree = "<group>"; };
+		2818E0C5189050570031AD43 /* HCSMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSMapViewController.xib; path = hackney/HCSMapViewController.xib; sourceTree = "<group>"; };
+		2818E0C8189050930031AD43 /* HCSMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSMapViewController.h; sourceTree = "<group>"; };
+		2818E0C9189050930031AD43 /* HCSMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSMapViewController.m; sourceTree = "<group>"; };
+		2818E0CC189050FD0031AD43 /* MapCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCoord.h; sourceTree = "<group>"; };
+		2818E0CD189050FD0031AD43 /* MapCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCoord.m; sourceTree = "<group>"; };
 		281E08B11451608C0034CC63 /* POIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIManager.h; sourceTree = "<group>"; };
 		281E08B21451608C0034CC63 /* POIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIManager.m; sourceTree = "<group>"; };
 		281E08B4145168F90034CC63 /* POILocationVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POILocationVO.h; sourceTree = "<group>"; };
@@ -1090,7 +1156,6 @@
 		287050BA188FC407004CD922 /* HCSTrackConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSTrackConfigViewController.m; sourceTree = "<group>"; };
 		287050BC188FC407004CD922 /* Coord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coord.h; sourceTree = "<group>"; };
 		287050BD188FC407004CD922 /* Coord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coord.m; sourceTree = "<group>"; };
-		287050BE188FC407004CD922 /* CycleAtlanta 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CycleAtlanta 2.xcdatamodel"; sourceTree = "<group>"; };
 		287050BF188FC407004CD922 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		287050C0188FC407004CD922 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		287050C1188FC407004CD922 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
@@ -1521,9 +1586,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		280565E01890384400359211 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				280565E11890384400359211 /* CoreDataStore.h */,
+				280565E21890384400359211 /* CoreDataStore.m */,
+				280565E31890384400359211 /* NSManagedObject+Boost.h */,
+				280565E41890384400359211 /* NSManagedObject+Boost.m */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		280E2405144D825D0021CDFA /* core */ = {
 			isa = PBXGroup;
 			children = (
+				280565E01890384400359211 /* CoreData */,
 				280E2406144D825D0021CDFA /* BUMoreTableDataSource.h */,
 				280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */,
 				280E2408144D825D0021CDFA /* BUTableCellView.h */,
@@ -1540,6 +1617,7 @@
 		280E2413144D82850021CDFA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				2818E0B1189046370031AD43 /* BlocksKit */,
 				28FB9C4817BCD428009B5E32 /* TestFlight */,
 				28718BA6178570D000781A6B /* SVPulsingAnnotationView */,
 				28CA8E1D1652A7AC000436ED /* Crashlytics */,
@@ -1883,6 +1961,18 @@
 			path = Wisps;
 			sourceTree = "<group>";
 		};
+		2818E0B1189046370031AD43 /* BlocksKit */ = {
+			isa = PBXGroup;
+			children = (
+				2818E0B7189048720031AD43 /* NSObject+AssociatedObjects.h */,
+				2818E0B8189048720031AD43 /* NSObject+AssociatedObjects.m */,
+				2818E0B2189046370031AD43 /* BKGlobals.h */,
+				2818E0B3189046370031AD43 /* UIActionSheet+BlocksKit.h */,
+				2818E0B4189046380031AD43 /* UIActionSheet+BlocksKit.m */,
+			);
+			path = BlocksKit;
+			sourceTree = "<group>";
+		};
 		2846081D1649226300CBF96A /* ViewDeck */ = {
 			isa = PBXGroup;
 			children = (
@@ -1945,6 +2035,8 @@
 		287050B0188FC407004CD922 /* const */ = {
 			isa = PBXGroup;
 			children = (
+				2818E099189042600031AD43 /* CustomPickerDataSource.h */,
+				2818E09A189042600031AD43 /* CustomPickerDataSource.m */,
 				287050E4188FC463004CD922 /* TripPurposeDelegate.h */,
 				287050E3188FC450004CD922 /* ActivityIndicatorDelegate.h */,
 				287050B1188FC407004CD922 /* constants.h */,
@@ -1955,6 +2047,14 @@
 		287050B2188FC407004CD922 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2818E0C8189050930031AD43 /* HCSMapViewController.h */,
+				2818E0C9189050930031AD43 /* HCSMapViewController.m */,
+				2818E0AD189045080031AD43 /* TripDetailViewController.h */,
+				2818E0AE189045080031AD43 /* TripDetailViewController.m */,
+				2818E0A1189043A40031AD43 /* DetailViewController.h */,
+				2818E0A2189043A40031AD43 /* DetailViewController.m */,
+				2818E093189042390031AD43 /* PickerViewController.h */,
+				2818E094189042390031AD43 /* PickerViewController.m */,
 				287050B3188FC407004CD922 /* HCSRouteDetailViewController.h */,
 				287050B4188FC407004CD922 /* HCSRouteDetailViewController.m */,
 				287050B5188FC407004CD922 /* HCSRouteListViewController.h */,
@@ -1970,9 +2070,11 @@
 		287050BB188FC407004CD922 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				2818E0CC189050FD0031AD43 /* MapCoord.h */,
+				2818E0CD189050FD0031AD43 /* MapCoord.m */,
 				287050BC188FC407004CD922 /* Coord.h */,
 				287050BD188FC407004CD922 /* Coord.m */,
-				287050BE188FC407004CD922 /* CycleAtlanta 2.xcdatamodel */,
+				280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */,
 				287050BF188FC407004CD922 /* Note.h */,
 				287050C0188FC407004CD922 /* Note.m */,
 				287050C1188FC407004CD922 /* Trip.h */,
@@ -1995,6 +2097,8 @@
 		287050C6188FC407004CD922 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				2818E09D189043570031AD43 /* CustomView.h */,
+				2818E09E189043570031AD43 /* CustomView.m */,
 				287050E5188FC46F004CD922 /* LoadingView.h */,
 				287050E6188FC46F004CD922 /* LoadingView.m */,
 			);
@@ -2011,6 +2115,8 @@
 		287050DA188FC432004CD922 /* managers */ = {
 			isa = PBXGroup;
 			children = (
+				2818E0A5189043B50031AD43 /* NoteManager.h */,
+				2818E0A6189043B50031AD43 /* NoteManager.m */,
 				287050DB188FC432004CD922 /* TripManager.h */,
 				287050DC188FC432004CD922 /* TripManager.m */,
 			);
@@ -2020,6 +2126,8 @@
 		287050E9188FC700004CD922 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				2818E0A9189043E30031AD43 /* ImageResize.h */,
+				2818E0AA189043E30031AD43 /* ImageResize.m */,
 				287050EA188FC700004CD922 /* ZipUtil.h */,
 				287050EB188FC700004CD922 /* ZipUtil.m */,
 			);
@@ -2089,9 +2197,13 @@
 		2880BE50188E81DB006FF7E2 /* hackney */ = {
 			isa = PBXGroup;
 			children = (
+				2818E0C1189048E10031AD43 /* TripDetailViewController.xib */,
+				2818E0BE189048D90031AD43 /* NoteViewController.xib */,
+				2818E0BB189048D40031AD43 /* TripPurposePicker.xib */,
 				2880BE51188E8207006FF7E2 /* HCSTrackConfigView.xib */,
 				2880BE54188E821A006FF7E2 /* HCSRouteListView.xib */,
 				2880BE57188E822C006FF7E2 /* HCSSurveyView.xib */,
+				2818E0C5189050570031AD43 /* HCSMapViewController.xib */,
 			);
 			name = hackney;
 			sourceTree = "<group>";
@@ -3016,6 +3128,7 @@
 				28187ABF14FCFF4C00A38A17 /* CSTabBar_add_photo.png in Resources */,
 				28187AC014FCFF4C00A38A17 /* CSTabBar_credits.png in Resources */,
 				28187AC114FCFF4C00A38A17 /* CSTabBar_fav_routes.png in Resources */,
+				2818E0BC189048D40031AD43 /* TripPurposePicker.xib in Resources */,
 				28187AC214FCFF4C00A38A17 /* CSTabBar_itinerary.png in Resources */,
 				28187AC314FCFF4C00A38A17 /* CSTabBar_photomap_tb.png in Resources */,
 				28187AC414FCFF4C00A38A17 /* CSTabBar_plan_route.png in Resources */,
@@ -3028,6 +3141,7 @@
 				28187ACC14FCFF4C00A38A17 /* UIButton_orange_hi.png in Resources */,
 				28187ACD14FCFF4C00A38A17 /* UIButton_orange_lo.png in Resources */,
 				28187ACE14FCFF4C00A38A17 /* UIButton_orangesmall_hi.png in Resources */,
+				2818E0C2189048E10031AD43 /* TripDetailViewController.xib in Resources */,
 				28187ACF14FCFF4C00A38A17 /* UIButton_orangesmall_lo.png in Resources */,
 				28187AD014FCFF4C00A38A17 /* UIButton_red_hi.png in Resources */,
 				28187AD114FCFF4C00A38A17 /* UIButton_red_lo.png in Resources */,
@@ -3054,6 +3168,7 @@
 				28B484FF15261FAC00E406E1 /* popoverArrowRightSimple.png in Resources */,
 				28B4850015261FAC00E406E1 /* popoverArrowUp.png in Resources */,
 				28B4850115261FAC00E406E1 /* popoverArrowUp@2x.png in Resources */,
+				2818E0BF189048D90031AD43 /* NoteViewController.xib in Resources */,
 				28B4850215261FAC00E406E1 /* popoverArrowUpSimple.png in Resources */,
 				2880BE52188E8207006FF7E2 /* HCSTrackConfigView.xib in Resources */,
 				28B4850315261FAC00E406E1 /* popoverBg.png in Resources */,
@@ -3079,6 +3194,7 @@
 				28B76F3415E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
 				28B76F3715E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
+				2818E0C6189050570031AD43 /* HCSMapViewController.xib in Resources */,
 				28B76F3E15E4DA02006B01D0 /* CSBarButton_location.png in Resources */,
 				28B76F4015E4DA02006B01D0 /* CSBarButton_search.png in Resources */,
 				28B76F4315E4DB3B006B01D0 /* CSBarButton_search@2x.png in Resources */,
@@ -3250,6 +3366,8 @@
 				2834368615DD5DC300B00FD5 /* CSTabBar_photomap_tb.png in Resources */,
 				2834368715DD5DC300B00FD5 /* CSTabBar_plan_route.png in Resources */,
 				2834368815DD5DC300B00FD5 /* CSTabBar_settings.png in Resources */,
+				2818E0C3189048E10031AD43 /* TripDetailViewController.xib in Resources */,
+				2818E0C7189050570031AD43 /* HCSMapViewController.xib in Resources */,
 				2834368A15DD5DC300B00FD5 /* UIButton_green_hi.png in Resources */,
 				2834368B15DD5DC300B00FD5 /* UIButton_green_lo.png in Resources */,
 				2834368C15DD5DC300B00FD5 /* UIButton_grey_hi.png in Resources */,
@@ -3268,6 +3386,7 @@
 				2834369815DD5DC300B00FD5 /* UIButtonBarInfo.png in Resources */,
 				2834369915DD5DC300B00FD5 /* UIButtonBarRefresh.png in Resources */,
 				2834369A15DD5DC300B00FD5 /* UIButtonBarStop.png in Resources */,
+				2818E0BD189048D40031AD43 /* TripPurposePicker.xib in Resources */,
 				2834369F15DD5DC300B00FD5 /* CSIcon_finish_wisp.png in Resources */,
 				283436A015DD5DC300B00FD5 /* CSIcon_start_wisp.png in Resources */,
 				289AA2BB188EEB170097AA5A /* marker-blue.png in Resources */,
@@ -3315,6 +3434,7 @@
 				289AA2C1188EEB170097AA5A /* TrackingDot.png in Resources */,
 				28B76F4A15E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */,
 				28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */,
+				2818E0C0189048D90031AD43 /* NoteViewController.xib in Resources */,
 				28535DC215E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */,
 				28535DC415E50FCD0092FC16 /* HUD_icon_exclaim.png in Resources */,
 				28535DC615E50FCD0092FC16 /* HUD_icon_exclaim@2x.png in Resources */,
@@ -3400,6 +3520,7 @@
 				287050C9188FC407004CD922 /* HCSRouteListViewController.m in Sources */,
 				28AD62AF131FB69D008527FC /* FormItemVO.m in Sources */,
 				287050E7188FC46F004CD922 /* LoadingView.m in Sources */,
+				2818E09B189042600031AD43 /* CustomPickerDataSource.m in Sources */,
 				28AD62B0131FB69D008527FC /* UserVO.m in Sources */,
 				28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
@@ -3407,7 +3528,10 @@
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
 				28AD6423131FB6C8008527FC /* NSDate-Misc.m in Sources */,
+				2818E0A3189043A40031AD43 /* DetailViewController.m in Sources */,
 				28AD6424131FB6C8008527FC /* NSDictionary+Helpers.m in Sources */,
+				2818E0CE189050FD0031AD43 /* MapCoord.m in Sources */,
+				2818E09F189043570031AD43 /* CustomView.m in Sources */,
 				28AD6425131FB6C8008527FC /* NSDictionary+UrlEncoding.m in Sources */,
 				287050C7188FC407004CD922 /* HCSRouteDetailViewController.m in Sources */,
 				28AD6426131FB6C8008527FC /* NSDictionary-MutableDictionaryCopy.m in Sources */,
@@ -3421,6 +3545,7 @@
 				28AD642E131FB6C8008527FC /* UIView+Additions.m in Sources */,
 				28AD642F131FB6C8008527FC /* DataSourceManager.m in Sources */,
 				28AD6430131FB6C8008527FC /* NetRequest.m in Sources */,
+				280565EE18903C8900359211 /* CDAppModel.xcdatamodeld in Sources */,
 				28AD6431131FB6C8008527FC /* NetResponse.m in Sources */,
 				28AD6432131FB6C8008527FC /* RemoteFileManager.m in Sources */,
 				28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */,
@@ -3446,8 +3571,10 @@
 				28443E5C1332862000FAD008 /* RouteCellView.m in Sources */,
 				28443E631332867D00FAD008 /* RouteVO.m in Sources */,
 				287050DD188FC432004CD922 /* TripManager.m in Sources */,
+				280565E71890384400359211 /* NSManagedObject+Boost.m in Sources */,
 				28D246031338926E00188783 /* RouteManager.m in Sources */,
 				28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */,
+				2818E0B5189046380031AD43 /* UIActionSheet+BlocksKit.m in Sources */,
 				287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */,
 				2863A3E0134E508800A22093 /* QueryPhoto.m in Sources */,
 				2863A3E9134E508800A22093 /* ALAsset+Info.m in Sources */,
@@ -3457,6 +3584,7 @@
 				287050CD188FC407004CD922 /* HCSTrackConfigViewController.m in Sources */,
 				28D2BAE11354814E00694093 /* UKImage.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
+				2818E0AB189043E30031AD43 /* ImageResize.m in Sources */,
 				28F66F0D135F636200DECFAC /* PhotoMapImageLocationViewController.m in Sources */,
 				28719D92136FE2AD00F69A1B /* LocationSearchManager.m in Sources */,
 				280E91C614097D8600C7AC75 /* StringManager.m in Sources */,
@@ -3469,6 +3597,7 @@
 				280E93511409858D00C7AC75 /* InitialLocation.m in Sources */,
 				280E93521409858D00C7AC75 /* Markers.m in Sources */,
 				280E93531409858D00C7AC75 /* RouteLineView.m in Sources */,
+				2818E0A7189043B50031AD43 /* NoteManager.m in Sources */,
 				280E9358140985CD00C7AC75 /* NamedPlace.m in Sources */,
 				280E9359140985CD00C7AC75 /* Route.m in Sources */,
 				280E937B1409861300C7AC75 /* ImageOperations.m in Sources */,
@@ -3494,7 +3623,6 @@
 				280E2493144D82850021CDFA /* NSDictionary_JSONExtensions.m in Sources */,
 				280E2494144D82850021CDFA /* NSScanner_Extensions.m in Sources */,
 				280E2495144D82850021CDFA /* CJSONDeserializer.m in Sources */,
-				287050D1188FC407004CD922 /* CycleAtlanta 2.xcdatamodel in Sources */,
 				280E2496144D82850021CDFA /* CJSONScanner.m in Sources */,
 				280E2497144D82850021CDFA /* CJSONSerializer.m in Sources */,
 				280E249F144D82850021CDFA /* ImageManipulator.m in Sources */,
@@ -3508,6 +3636,7 @@
 				28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */,
 				28735C0B144ED64700726A6C /* HudManager.m in Sources */,
 				28735C19144F0EF100726A6C /* AppConfigManager.m in Sources */,
+				280565E51890384400359211 /* CoreDataStore.m in Sources */,
 				28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */,
 				287050D5188FC407004CD922 /* Trip.m in Sources */,
 				28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */,
@@ -3515,6 +3644,7 @@
 				281E08B31451608C0034CC63 /* POIManager.m in Sources */,
 				281E08B6145168F90034CC63 /* POILocationVO.m in Sources */,
 				281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */,
+				2818E0AF189045080031AD43 /* TripDetailViewController.m in Sources */,
 				281E08EE145198D10034CC63 /* GTMNSString+HTML.m in Sources */,
 				281E08EF145198D10034CC63 /* NSString+HTML.m in Sources */,
 				28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */,
@@ -3523,6 +3653,7 @@
 				28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */,
 				28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */,
 				288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */,
+				2818E0CA189050930031AD43 /* HCSMapViewController.m in Sources */,
 				28B7813A150F3D0600503638 /* CSNavigationBar.m in Sources */,
 				28B038741521A17B00EE23CF /* RoutePlanMenuViewController.m in Sources */,
 				28B4850615261FAC00E406E1 /* UIBarButtonItem+WEPopover.m in Sources */,
@@ -3531,6 +3662,7 @@
 				28B4850915261FAC00E406E1 /* WETouchableView.m in Sources */,
 				28B4855B15262BE000E406E1 /* GenericConstants.m in Sources */,
 				28ECCBD715262FFA00284926 /* LayoutBox.m in Sources */,
+				2818E0B9189048720031AD43 /* NSObject+AssociatedObjects.m in Sources */,
 				28ECCBD81526300400284926 /* Reachability.m in Sources */,
 				28ECCBD91526302600284926 /* CopyLabel.m in Sources */,
 				28ECCBDC1526305800284926 /* RequestQueueVO.m in Sources */,
@@ -3540,6 +3672,7 @@
 				28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */,
 				28C0185E153D7BF100023FAF /* PhotoCategoryVO.m in Sources */,
 				2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */,
+				2818E095189042390031AD43 /* PickerViewController.m in Sources */,
 				28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */,
 				28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */,
@@ -3575,6 +3708,7 @@
 				287050CA188FC407004CD922 /* HCSRouteListViewController.m in Sources */,
 				283436D215DD5DC300B00FD5 /* FormItemVO.m in Sources */,
 				287050E8188FC46F004CD922 /* LoadingView.m in Sources */,
+				2818E09C189042600031AD43 /* CustomPickerDataSource.m in Sources */,
 				283436D315DD5DC300B00FD5 /* UserVO.m in Sources */,
 				283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */,
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
@@ -3582,7 +3716,10 @@
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
 				283436DB15DD5DC300B00FD5 /* NSDate-Misc.m in Sources */,
+				2818E0A4189043A40031AD43 /* DetailViewController.m in Sources */,
 				283436DC15DD5DC300B00FD5 /* NSDictionary+Helpers.m in Sources */,
+				2818E0CF189050FD0031AD43 /* MapCoord.m in Sources */,
+				2818E0A0189043570031AD43 /* CustomView.m in Sources */,
 				283436DD15DD5DC300B00FD5 /* NSDictionary+UrlEncoding.m in Sources */,
 				287050C8188FC407004CD922 /* HCSRouteDetailViewController.m in Sources */,
 				283436DE15DD5DC300B00FD5 /* NSDictionary-MutableDictionaryCopy.m in Sources */,
@@ -3596,6 +3733,7 @@
 				283436E515DD5DC300B00FD5 /* UIView+Additions.m in Sources */,
 				283436E615DD5DC300B00FD5 /* DataSourceManager.m in Sources */,
 				283436E715DD5DC300B00FD5 /* NetRequest.m in Sources */,
+				280565EF18903C8900359211 /* CDAppModel.xcdatamodeld in Sources */,
 				283436E815DD5DC300B00FD5 /* NetResponse.m in Sources */,
 				283436E915DD5DC300B00FD5 /* RemoteFileManager.m in Sources */,
 				283436EA15DD5DC300B00FD5 /* AsyncImageView.m in Sources */,
@@ -3621,8 +3759,10 @@
 				283436FE15DD5DC300B00FD5 /* RouteCellView.m in Sources */,
 				283436FF15DD5DC300B00FD5 /* RouteVO.m in Sources */,
 				287050DE188FC432004CD922 /* TripManager.m in Sources */,
+				280565E81890384400359211 /* NSManagedObject+Boost.m in Sources */,
 				2834370015DD5DC300B00FD5 /* RouteManager.m in Sources */,
 				2834370115DD5DC300B00FD5 /* CSSegmentFooterView.m in Sources */,
+				2818E0B6189046380031AD43 /* UIActionSheet+BlocksKit.m in Sources */,
 				2834370215DD5DC300B00FD5 /* SettingsVO.m in Sources */,
 				2834370415DD5DC300B00FD5 /* QueryPhoto.m in Sources */,
 				2834370515DD5DC300B00FD5 /* ALAsset+Info.m in Sources */,
@@ -3632,6 +3772,7 @@
 				287050CE188FC407004CD922 /* HCSTrackConfigViewController.m in Sources */,
 				2834370A15DD5DC300B00FD5 /* UKImage.m in Sources */,
 				2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */,
+				2818E0AC189043E30031AD43 /* ImageResize.m in Sources */,
 				2834370C15DD5DC300B00FD5 /* PhotoMapImageLocationViewController.m in Sources */,
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
@@ -3644,6 +3785,7 @@
 				2834371815DD5DC300B00FD5 /* InitialLocation.m in Sources */,
 				2834371915DD5DC300B00FD5 /* Markers.m in Sources */,
 				2834371A15DD5DC300B00FD5 /* RouteLineView.m in Sources */,
+				2818E0A8189043B50031AD43 /* NoteManager.m in Sources */,
 				2834371B15DD5DC300B00FD5 /* NamedPlace.m in Sources */,
 				2834371C15DD5DC300B00FD5 /* Route.m in Sources */,
 				2834371D15DD5DC300B00FD5 /* ImageOperations.m in Sources */,
@@ -3669,7 +3811,6 @@
 				2834372F15DD5DC300B00FD5 /* NSDictionary_JSONExtensions.m in Sources */,
 				2834373015DD5DC300B00FD5 /* NSScanner_Extensions.m in Sources */,
 				2834373115DD5DC300B00FD5 /* CJSONDeserializer.m in Sources */,
-				287050D2188FC407004CD922 /* CycleAtlanta 2.xcdatamodel in Sources */,
 				2834373215DD5DC300B00FD5 /* CJSONScanner.m in Sources */,
 				2834373315DD5DC300B00FD5 /* CJSONSerializer.m in Sources */,
 				2834373415DD5DC300B00FD5 /* ImageManipulator.m in Sources */,
@@ -3683,6 +3824,7 @@
 				2834373C15DD5DC300B00FD5 /* LocationFeaturesManager.m in Sources */,
 				2834373D15DD5DC300B00FD5 /* HudManager.m in Sources */,
 				2834373E15DD5DC300B00FD5 /* AppConfigManager.m in Sources */,
+				280565E61890384400359211 /* CoreDataStore.m in Sources */,
 				2834374015DD5DC300B00FD5 /* UIDevice+Machine.m in Sources */,
 				287050D6188FC407004CD922 /* Trip.m in Sources */,
 				2834374215DD5DC300B00FD5 /* POITypeCellView.m in Sources */,
@@ -3690,6 +3832,7 @@
 				2834374415DD5DC300B00FD5 /* POIManager.m in Sources */,
 				2834374515DD5DC300B00FD5 /* POILocationVO.m in Sources */,
 				2834374715DD5DC300B00FD5 /* POICatLocationCellView.m in Sources */,
+				2818E0B0189045080031AD43 /* TripDetailViewController.m in Sources */,
 				2834374815DD5DC300B00FD5 /* GTMNSString+HTML.m in Sources */,
 				2834374915DD5DC300B00FD5 /* NSString+HTML.m in Sources */,
 				2834374A15DD5DC300B00FD5 /* SegmentVO.m in Sources */,
@@ -3698,6 +3841,7 @@
 				2834374F15DD5DC300B00FD5 /* PhotoWizardViewController.m in Sources */,
 				2834375015DD5DC300B00FD5 /* UploadPhotoVO.m in Sources */,
 				2834375115DD5DC300B00FD5 /* PhotoWizardLocationViewController.m in Sources */,
+				2818E0CB189050930031AD43 /* HCSMapViewController.m in Sources */,
 				2834375215DD5DC300B00FD5 /* CSNavigationBar.m in Sources */,
 				2834375315DD5DC300B00FD5 /* RoutePlanMenuViewController.m in Sources */,
 				2834375415DD5DC300B00FD5 /* UIBarButtonItem+WEPopover.m in Sources */,
@@ -3706,6 +3850,7 @@
 				2834375715DD5DC300B00FD5 /* WETouchableView.m in Sources */,
 				2834375815DD5DC300B00FD5 /* GenericConstants.m in Sources */,
 				2834375915DD5DC300B00FD5 /* LayoutBox.m in Sources */,
+				2818E0BA189048720031AD43 /* NSObject+AssociatedObjects.m in Sources */,
 				2834375A15DD5DC300B00FD5 /* Reachability.m in Sources */,
 				2834375B15DD5DC300B00FD5 /* CopyLabel.m in Sources */,
 				2834375C15DD5DC300B00FD5 /* RequestQueueVO.m in Sources */,
@@ -3715,6 +3860,7 @@
 				2834376015DD5DC300B00FD5 /* PhotoCategoryManager.m in Sources */,
 				2834376115DD5DC300B00FD5 /* PhotoCategoryVO.m in Sources */,
 				2834376515DD5DC300B00FD5 /* MapLocationSearchCellView.m in Sources */,
+				2818E096189042390031AD43 /* PickerViewController.m in Sources */,
 				2834376615DD5DC300B00FD5 /* PhotoWizardCategoryMenuViewController.m in Sources */,
 				2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */,
 				28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */,
@@ -4112,6 +4258,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				280565ED18903C8900359211 /* CDAppModel.xcdatamodel */,
+			);
+			currentVersion = 280565ED18903C8900359211 /* CDAppModel.xcdatamodel */;
+			path = CDAppModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

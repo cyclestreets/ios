@@ -34,105 +34,61 @@
 //
 //  Copyright 2009-2010 SFCTA. All rights reserved.
 //  Written by Matt Paul <mattpaul@mopimp.com> on 9/22/09.
-//	For more information on the project, 
+//	For more information on the project,
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
 
 #import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
 #import "ActivityIndicatorDelegate.h"
-#import "TripPurposeDelegate.h"
 #import "LoadingView.h"
+#import "Note.h"
 
-#import "SynthesizeSingleton.h"
-
-@class Trip;
+@class Note;
 
 
-@interface TripManager : NSObject
-<ActivityIndicatorDelegate, 
-TripPurposeDelegate, 
-UIAlertViewDelegate, 
-UITextViewDelegate>
+@interface NoteManager : NSObject <ActivityIndicatorDelegate, UIAlertViewDelegate, UITextViewDelegate>
 {
-	UIAlertView *saving;
-	UIAlertView *tripNotes;
-	UITextView	*tripNotesText;
+	Note *note;
 
-	BOOL dirty;
-	Trip *trip;
-	CLLocationDistance distance;
-	NSInteger purposeIndex;
-	
-	NSMutableArray *coords;
     NSManagedObjectContext *managedObjectContext;
-
-	NSMutableData *receivedData;
+    
+	NSMutableData *receivedDataNoted;
 	
-	NSMutableArray *unSavedTrips;
-	NSMutableArray *unSyncedTrips;
-	NSMutableArray *zeroDistanceTrips;
+	//NSMutableArray *unSavedNote;
+	//NSMutableArray *unSyncedNote;
+    NSString *deviceUniqueIdHash1;
 }
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
-
+@property (nonatomic, retain) NSString *deviceUniqueIdHash1;
 @property (nonatomic, retain) id <ActivityIndicatorDelegate> activityDelegate;
 @property (nonatomic, retain) id <UIAlertViewDelegate> alertDelegate;
 
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+
 @property (nonatomic, retain) LoadingView *uploadingView;
 
 @property (nonatomic, retain) UIViewController *parent; 
 
-@property (nonatomic, retain) UIAlertView *saving;
-@property (nonatomic, retain) UIAlertView *tripNotes;
-@property (nonatomic, retain) UITextView *tripNotesText;
-
 @property (assign) BOOL dirty;
-@property (nonatomic, retain) Trip *trip;
+@property (nonatomic, retain) Note *note;
 
-@property (nonatomic, retain) NSMutableArray *coords;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
-@property (nonatomic, retain) NSMutableData *receivedData;
+@property (nonatomic, retain) NSMutableData *receivedDataNoted;
 
-@property (nonatomic, assign) BOOL isRecording;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
-- (id)initWithTrip:(Trip*)trip;
-- (BOOL)loadTrip:(Trip*)trip;
 
-- (void)createTrip;
-- (void)createTrip:(unsigned int)index;
+- (void)saveNote;
+- (void)saveNote:(Note*)note;
 
-- (CLLocationDistance)addCoord:(CLLocation*)location;
-- (void)saveNotes:(NSString*)notes;
-- (void)saveTrip;
+- (void)createNote;
 
-- (CLLocationDistance)getDistanceEstimate;
+- (void)addLocation:(CLLocation*)locationNow;
 
-- (NSInteger)getPurposeIndex;
-
-
-- (int)countUnSavedTrips;
-- (int)countUnSyncedTrips;
-- (int)countZeroDistanceTrips;
-
-- (BOOL)loadMostRecetUnSavedTrip;
-- (int)recalculateTripDistances;
-- (CLLocationDistance)calculateTripDistance:(Trip*)_trip;
-
-
--(void)resetTrip;
--(void)startTrip;
-
-@end
-
-
-@interface TripPurpose : NSObject { }
-
-+ (unsigned int)getPurposeIndex:(NSString*)string;
-+ (NSString *)getPurposeString:(unsigned int)index;
+- (id)initWithNote:(Note*)note;
+- (BOOL)loadNote:(Note *)note;
 
 @end
 

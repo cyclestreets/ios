@@ -22,6 +22,8 @@
 #import "SavedRoutesManager.h"
 #import "PhotoManager.h"
 
+#import "TripManager.h"
+
 @interface StartupManager(Private)
 
 -(void)loadServices;
@@ -112,6 +114,8 @@
 	[RouteManager sharedInstance];
 	[SavedRoutesManager sharedInstance];
 	[PhotoManager sharedInstance];
+	
+	[TripManager sharedInstance];
 	
 	
 	[UserAccount sharedInstance];
