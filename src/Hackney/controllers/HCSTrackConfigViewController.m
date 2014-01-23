@@ -380,15 +380,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
     {
 		__weak __block HCSTrackConfigViewController *weakSelf=self;
 		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@""];
-		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
-			_shouldUpdateDuration=YES;
-		}];
 		[actionSheet setDestructiveButtonWithTitle:@"Discard"	handler:^{
 			[weakSelf resetRecordingInProgress];
 		}];
 		[actionSheet addButtonWithTitle:@"Save" handler:^{
 			[weakSelf save];
 		}];
+		
+		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
+			_shouldUpdateDuration=YES;
+		}];
+		
+		
 		
 		[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
 		
@@ -426,20 +429,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		if ( _tripManager != nil )
 			purpose = [self getPurposeString:[_tripManager getPurposeIndex]];
 		
-		NSString *confirm = [NSString stringWithFormat:@"Stop recording & save this trip?"];
 		
-		// present action sheet
-		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:confirm
-																 delegate:self
-														cancelButtonTitle:@"Cancel"
-												   destructiveButtonTitle:nil
-														otherButtonTitles:@"Save", nil];
+		__weak __block HCSTrackConfigViewController *weakSelf=self;
+		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@"Stop recording & save this trip?"];
 		
-		actionSheet.actionSheetStyle		= UIActionSheetStyleBlackTranslucent;
-		UIViewController *pvc = self.parentViewController;
-		UITabBarController *tbc = (UITabBarController *)pvc.parentViewController;
+		[actionSheet addButtonWithTitle:@"Save" handler:^{
+			[weakSelf save];
+		}];
 		
-		[actionSheet showFromTabBar:tbc.tabBar];
+		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
+			_shouldUpdateDuration=YES;
+		}];
+		
+		[actionSheet showFromTabBar:self.navigationController.tabBarController.tabBar];
+
 		
 	}
     
@@ -486,52 +489,30 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 - (BOOL)hasUserInfoBeenSaved
 {
-	BOOL					response = NO;
+	BOOL response = NO;
 	
 	NSError *error;
 	NSArray *fetchResults=[[CoreDataStore mainStore] allForEntity:@"User" error:&error];
 	
-	
-//	NSManagedObjectContext	*context = tripManager.managedObjectContext;
-//	NSFetchRequest			*request = [[NSFetchRequest alloc] init];
-//	NSEntityDescription		*entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
-//	[request setEntity:entity];
-//	
-//	NSError *error;
-//	NSInteger count = [context countForFetchRequest:request error:&error];
-	//NSLog(@"saved user count  = %d", count);
-	if ( fetchResults.count>0 )
-	{
-		//NSArray *fetchResults = [context executeFetchRequest:request error:&error];
-		if ( fetchResults != nil )
-		{
+	if ( fetchResults.count>0 ){
+		
+		if ( fetchResults != nil ){
+			
 			User *user = (User*)[fetchResults objectAtIndex:0];
-			if (user			!= nil &&
-				(user.age		!= nil ||
-				 user.gender	!= nil ||
-				 user.email		!= nil ||
-				 user.homeZIP	!= nil ||
-				 user.workZIP	!= nil ||
-				 user.schoolZIP	!= nil ||
-				 ([user.cyclingFreq intValue] < 4 )))
-			{
-				NSLog(@"found saved user info");
-				self.userInfoSaved = YES;
-				response = YES;
-			}
-			else
-				NSLog(@"no saved user info");
-		}
-		else
-		{
+			
+			self.userInfoSaved = [user userInfoSaved];
+			response = _userInfoSaved;
+			
+		}else{
 			// Handle the error.
 			NSLog(@"no saved user");
 			if ( error != nil )
 				NSLog(@"PersonalInfo viewDidLoad fetch error %@, %@", error, [error localizedDescription]);
 		}
-	}
-	else
+	}else{
 		NSLog(@"no saved user");
+	}
+		
 	
 	return response;
 }

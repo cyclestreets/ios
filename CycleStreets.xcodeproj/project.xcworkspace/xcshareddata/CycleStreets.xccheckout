@@ -5,11 +5,17 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>23FB8C89-3390-401D-8C34-B231C770B8EE</string>
+	<string>F85D1E76-D0A8-4386-8DD1-FE0DD8C93F0A</string>
 	<key>IDESourceControlProjectName</key>
 	<string>CycleStreets</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>2ECFD596-C9BE-48BD-8D84-3D758E6D02B1</key>
+		<string>git://github.com/Alpstein/route-me.git</string>
+		<key>3585125F-6BA4-4FEA-9E1D-1BBB2F88A902</key>
+		<string>https://github.com/ccgus/fmdb.git</string>
+		<key>49B9C1FB-B19A-4AE2-A8E3-DDE93EFBAF6F</key>
+		<string>https://github.com/nfarina/calloutview.git</string>
 		<key>9286988E-69F8-4906-9037-A63CB386197B</key>
 		<string>https://github.com/neilkachu/route-me.git</string>
 		<key>BF7809A7-57CB-4DCE-BAFC-FFB0BECF47A4</key>
@@ -21,6 +27,12 @@
 	<string>CycleStreets.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>2ECFD596-C9BE-48BD-8D84-3D758E6D02B1</key>
+		<string>../../../../../libs/Alpstein</string>
+		<key>3585125F-6BA4-4FEA-9E1D-1BBB2F88A902</key>
+		<string>../../../../../libs/Alpstein/MapView/Map/FMDB</string>
+		<key>49B9C1FB-B19A-4AE2-A8E3-DDE93EFBAF6F</key>
+		<string>../../../../../libs/Alpstein/MapView/Map/SMCalloutView</string>
 		<key>9286988E-69F8-4906-9037-A63CB386197B</key>
 		<string>../../../../../libs/RouteMe</string>
 		<key>BF7809A7-57CB-4DCE-BAFC-FFB0BECF47A4</key>
@@ -43,11 +55,27 @@
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2ECFD596-C9BE-48BD-8D84-3D758E6D02B1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Alpstein</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.subversion</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>F69BCD6D-1FCD-4906-B1C2-C64453A6A5DF</string>
 			<key>IDESourceControlWCCName</key>
 			<string>AppCore</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3585125F-6BA4-4FEA-9E1D-1BBB2F88A902</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FMDB</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
@@ -64,6 +92,14 @@
 			<string>9286988E-69F8-4906-9037-A63CB386197B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>RouteMe</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>49B9C1FB-B19A-4AE2-A8E3-DDE93EFBAF6F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SMCalloutView</string>
 		</dict>
 	</array>
 </dict>

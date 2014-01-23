@@ -27,4 +27,23 @@
 @dynamic notes;
 @dynamic trips;
 
+
+
+-(BOOL)userInfoSaved{
+	
+	if(self.age		!= nil ||
+		 self.gender	!= nil ||
+		 self.email		!= nil ||
+		 self.homeZIP	!= nil ||
+		 self.workZIP	!= nil ||
+		 self.schoolZIP	!= nil ||
+	   ([self.cyclingFreq intValue] < 4 )){
+		return NO;
+	}
+	
+	return YES;
+
+	
+}
+
 @end

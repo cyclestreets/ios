@@ -42,25 +42,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TripManager.h"
 #import "TripPurposeDelegate.h"
+#import "RouteLineView.h"
 @class RMMapView;
 
-@interface HCSMapViewController : UIViewController 
+@interface HCSMapViewController : UIViewController <PointListProvider>
 {
-    id <TripPurposeDelegate> delegate;
-	IBOutlet RMMapView *mapView;
-	Trip *trip;
-	
-	UIBarButtonItem *doneButton;
-	UIBarButtonItem *flipButton;
-	UIView *infoView;
 }
 
-@property (nonatomic, retain) id <TripPurposeDelegate> delegate;
-@property (nonatomic, retain) Trip *trip;
-@property (nonatomic, retain) UIBarButtonItem *doneButton;
-@property (nonatomic, retain) UIBarButtonItem *flipButton;
-@property (nonatomic, retain) UIView *infoView;
-@property (nonatomic, retain) MKPolyline* routeLine;
+@property (nonatomic, assign) id <TripPurposeDelegate> delegate;
+
 
 - (id)initWithTrip:(Trip *)trip;
 

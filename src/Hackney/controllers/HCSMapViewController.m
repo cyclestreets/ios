@@ -47,6 +47,12 @@
 #import "RMMapView.h"
 #import "RMAnnotation.h"
 #import "RMMarker.h"
+#import "UserLocationManager.h"
+
+// cs compatability classes
+#import "CSPointVO.h"
+#import "RouteVO.h"
+#import "SegmentVO.h"
 
 #define kFudgeFactor	1.5
 #define kInfoViewAlpha	0.8
@@ -55,32 +61,33 @@
 
 @interface HCSMapViewController()<RMMapViewDelegate>
 
+
+@property (nonatomic, strong) Trip									*trip;
+@property (nonatomic, strong) UIBarButtonItem						*doneButton;
+@property (nonatomic, strong) UIBarButtonItem						*flipButton;
+@property (nonatomic, strong) UIView								*infoView;
+
+@property (nonatomic,weak) IBOutlet RMMapView						*mapView;
+
+
+@property (nonatomic,weak) IBOutlet RouteLineView					*routeLineView;
+
+@property (nonatomic,strong) RouteVO								*currentRoute;
+
+
 @end
 
 
 @implementation HCSMapViewController
 
-@synthesize doneButton, flipButton, infoView, trip, routeLine;
-@synthesize delegate;
 
-
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
- - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
- if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
- // Custom initialization
- }
- return self;
- }
- */
-
-- (id)initWithTrip:(Trip *)_trip
+- (id)initWithTrip:(Trip *)trip
 {
     //if (self = [super init]) {
 	if (self = [super initWithNibName:@"HCSMapViewController" bundle:nil]) {
 		NSLog(@"MapViewController initWithTrip");
-		self.trip = _trip;
-		mapView.delegate = self;
+		self.trip = trip;
+		_mapView.delegate = self;
     }
     return self;
 }
@@ -101,30 +108,30 @@
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:0.75];
 	
-	[UIView setAnimationTransition:([infoView superview] ?
+	[UIView setAnimationTransition:([_infoView superview] ?
 									UIViewAnimationTransitionFlipFromLeft : UIViewAnimationTransitionFlipFromRight)
 						   forView:self.view cache:YES];
 	
-	if ([infoView superview])
-		[infoView removeFromSuperview];
+	if ([_infoView superview])
+		[_infoView removeFromSuperview];
 	else
-		[self.view addSubview:infoView];
+		[self.view addSubview:_infoView];
 	
 	[UIView commitAnimations];
 	
 	// adjust our done/info buttons accordingly
-	if ([infoView superview] == self.view)
-		self.navigationItem.rightBarButtonItem = doneButton;
+	if ([_infoView superview] == self.view)
+		self.navigationItem.rightBarButtonItem = _doneButton;
 	else
-		self.navigationItem.rightBarButtonItem = flipButton;
+		self.navigationItem.rightBarButtonItem = _flipButton;
 }
 
 
 - (void)initInfoView
 {
-	infoView					= [[UIView alloc] initWithFrame:CGRectMake(0,0,320,560)];
-	infoView.alpha				= kInfoViewAlpha;
-	infoView.backgroundColor	= [UIColor blackColor];
+	_infoView					= [[UIView alloc] initWithFrame:CGRectMake(0,0,320,560)];
+	_infoView.alpha				= kInfoViewAlpha;
+	_infoView.backgroundColor	= [UIColor blackColor];
 	
 	UILabel *notesHeader		= [[UILabel alloc] initWithFrame:CGRectMake(9,85,160,25)];
 	notesHeader.backgroundColor = [UIColor clearColor];
@@ -132,15 +139,15 @@
 	notesHeader.opaque			= NO;
 	notesHeader.text			= @"Trip Notes";
 	notesHeader.textColor		= [UIColor whiteColor];
-	[infoView addSubview:notesHeader];
+	[_infoView addSubview:notesHeader];
 	
 	UITextView *notesText		= [[UITextView alloc] initWithFrame:CGRectMake(0,110,320,200)];
 	notesText.backgroundColor	= [UIColor clearColor];
 	notesText.editable			= NO;
 	notesText.font				= [UIFont systemFontOfSize:16.0];
-	notesText.text				= trip.notes;
+	notesText.text				= _trip.notes;
 	notesText.textColor			= [UIColor whiteColor];
-	[infoView addSubview:notesText];
+	[_infoView addSubview:notesText];
     
 }
 
@@ -152,7 +159,7 @@
 	self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationController.navigationBarHidden = NO;
     
-	if ( trip )
+	if (_trip )
 	{
 		// format date as a string
 		static NSDateFormatter *dateFormatter = nil;
@@ -170,30 +177,30 @@
 		[inputFormatter setDateFormat:@"HH:mm:ss"];
 		NSDate *fauxDate = [inputFormatter dateFromString:@"00:00:00"];
 		[inputFormatter setDateFormat:@"HH:mm:ss"];
-		NSDate *outputDate = [[NSDate alloc] initWithTimeInterval:(NSTimeInterval)[trip.duration doubleValue] sinceDate:fauxDate];
+		NSDate *outputDate = [[NSDate alloc] initWithTimeInterval:(NSTimeInterval)[_trip.duration doubleValue] sinceDate:fauxDate];
         
-		double mph = ( [trip.distance doubleValue] / 1609.344 ) / ( [trip.duration doubleValue] / 3600. );
+		double mph = ( [_trip.distance doubleValue] / 1609.344 ) / ( [_trip.duration doubleValue] / 3600. );
 		
 		self.navigationItem.prompt = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
  									  [inputFormatter stringFromDate:outputDate],
-									  [dateFormatter stringFromDate:[trip start]]];
+									  [dateFormatter stringFromDate:[_trip start]]];
         
 		self.title = [NSString stringWithFormat:@"%.1f mi ~ %.1f mph",
-					  [trip.distance doubleValue] / 1609.344,
+					  [_trip.distance doubleValue] / 1609.344,
 					  mph ];
 		
 		//self.title = trip.purpose;
 		
 		// only add info view for trips with non-null notes
-		if ( ![trip.notes isEqualToString: @""] && trip.notes != NULL)
+		if ( ![_trip.notes isEqualToString: @""] && _trip.notes != NULL)
 		{
-			doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(infoAction:)];
+			_doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(infoAction:)];
 			
 			UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 			infoButton.showsTouchWhenHighlighted = YES;
 			[infoButton addTarget:self action:@selector(infoAction:) forControlEvents:UIControlEventTouchUpInside];
-			flipButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-			self.navigationItem.rightBarButtonItem = flipButton;
+			_flipButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+			self.navigationItem.rightBarButtonItem = _flipButton;
 			
 			[self initInfoView];
 		}
@@ -208,7 +215,7 @@
 		
 		// filter coords by hAccuracy
 		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 100.0"];
-		NSArray		*filteredCoords		= [[trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
+		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
 		NSLog(@"count of filtered coords = %d", [filteredCoords count]);
 		
 		// sort filtered coords by recorded date
@@ -229,85 +236,76 @@
 		NSNumber *maxLon = [NSNumber numberWithDouble:0.0];
         
         NSMutableArray *routeCoords = [[NSMutableArray alloc]init];
+		
+		self.currentRoute=[[RouteVO alloc]init];
         
-		for ( Coord *coord in sortedCoords )
-		{
+		for ( Coord *coord in sortedCoords ){
+			
+			
 			// only plot unique coordinates to our map for performance reasons
 			if ( !last ||
 				(![coord.latitude  isEqualToNumber:last.latitude] &&
-				 ![coord.longitude isEqualToNumber:last.longitude] ) )
-			{
-                CLLocationCoordinate2D coordinate;
-				coordinate.latitude  = [coord.latitude doubleValue];
-				coordinate.longitude = [coord.longitude doubleValue];
-                
-                CLLocation *routePoint = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-				[routeCoords addObject:routePoint];
-                
-				//pin = [[MapCoord alloc] init];
-				//pin.coordinate = coordinate;
-				
-				if ( first )
-				{
-					// add start point as a pin annotation
-					first = NO;
-					//pin.first = YES;
-					//pin.title = @"Start";
-					//pin.subtitle = [dateFormatter stringFromDate:coord.recorded];
+				 ![coord.longitude isEqualToNumber:last.longitude] ) ){
 					
-					// initialize min/max values to the first coord
-					minLat = coord.latitude;
-					maxLat = coord.latitude;
-					minLon = coord.longitude;
-					maxLon = coord.longitude;
-				}
-				else
-				{
-					// update min/max values
-					if ( [minLat compare:coord.latitude] == NSOrderedDescending )
+				
+					// this is a bit convoluted but meets comaptibility for routeline drawing
+					SegmentVO *segment=[[SegmentVO alloc]init];
+					CSPointVO *point=[[CSPointVO alloc]init];
+					point.p=CGPointMake([coord.latitude doubleValue], [coord.longitude doubleValue]);
+					segment.pointsArray=@[point];
+					
+					[routeCoords addObject:segment];
+                
+					if ( first ){
+						
+						// add start point as a pin annotation
+						first = NO;
+						
 						minLat = coord.latitude;
-					
-					if ( [maxLat compare:coord.latitude] == NSOrderedAscending )
 						maxLat = coord.latitude;
-					
-					if ( [minLon compare:coord.longitude] == NSOrderedDescending )
 						minLon = coord.longitude;
-					
-					if ( [maxLon compare:coord.longitude] == NSOrderedAscending )
 						maxLon = coord.longitude;
-				}
-				
-				//[mapView addAnnotation:pin];
-				count++;
+					}else{
+						
+						// update min/max values
+						if ( [minLat compare:coord.latitude] == NSOrderedDescending )
+							minLat = coord.latitude;
+						
+						if ( [maxLat compare:coord.latitude] == NSOrderedAscending )
+							maxLat = coord.latitude;
+						
+						if ( [minLon compare:coord.longitude] == NSOrderedDescending )
+							minLon = coord.longitude;
+						
+						if ( [maxLon compare:coord.longitude] == NSOrderedAscending )
+							maxLon = coord.longitude;
+					}
+					
+					//[mapView addAnnotation:pin];
+					count++;
 			}
 			
 			// update last coord pointer so we can cull redundant coords above
 			last = coord;
 		}
-        NSLog(@"routeCoords array is this long: %d@", [routeCoords count]);
+		
+		_currentRoute.segments=routeCoords;
         
-        NSUInteger numPoints = [routeCoords count];
-        CLLocationCoordinate2D *routePath = malloc(numPoints * sizeof(CLLocationCoordinate2D));
-        for (NSUInteger index=0; index < numPoints; index ++){
-            routePath[index] = [[routeCoords objectAtIndex:index] coordinate];
-        }
-        
-		//TODO: re configure so works like CS map view route drawing?
-        //self.routeLine = [MKPolyline polylineWithCoordinates:routePath count:count];
-        //[mapView addOverlay:self.routeLine];
-        //[mapView setNeedsDisplay];
+		[_routeLineView setNeedsDisplay];
         
         //add start/end pins
         RMAnnotation *startPoint = [[RMAnnotation alloc] init];
-        startPoint.coordinate = routePath[0];
+		SegmentVO *firstsegment=(SegmentVO*)[_currentRoute.segments firstObject];
+        startPoint.coordinate = firstsegment.segmentStart;
         startPoint.title = @"Start";
 		startPoint.annotationIcon=[UIImage imageNamed:@"tripStart.png"];
-        [mapView addAnnotation:startPoint];
+        [_mapView addAnnotation:startPoint];
         RMAnnotation *endPoint = [[RMAnnotation alloc] init];
-        endPoint.coordinate = routePath[numPoints-1];
+		SegmentVO *lastsegment=(SegmentVO*)[_currentRoute.segments lastObject];
+        endPoint.coordinate = lastsegment.segmentStart;
         endPoint.title = @"End";
 		endPoint.annotationIcon=[UIImage imageNamed:@"tripEnd.png"];
-        [mapView addAnnotation:endPoint];
+        [_mapView addAnnotation:endPoint];
         
         
         //free(routePath);
@@ -323,16 +321,8 @@
 		}
 		
 		// if we had at least 1 coord
-		if ( count )
-		{
-			// calculate region from coords min/max lat/lon
-			/*
-             NSLog(@"minLat = %f", [minLat doubleValue]);
-             NSLog(@"maxLat = %f", [maxLat doubleValue]);
-             NSLog(@"minLon = %f", [minLon doubleValue]);
-             NSLog(@"maxLon = %f", [maxLon doubleValue]);
-             */
-			
+		if ( count ){
+						
 			// add a small fudge factor to ensure
 			// North-most pins are visible
 			double latDelta = kFudgeFactor * ( [maxLat doubleValue] - [minLat doubleValue] );
@@ -343,38 +333,77 @@
 			if ( lonDelta < kMinLonDelta )
 				lonDelta = kMinLonDelta;
 			
-            //			MKCoordinateRegion region = { { [minLat doubleValue] + latDelta / 2,
-            //											[minLon doubleValue] + lonDelta / 2 },
-            //										  { latDelta,
-            //											lonDelta } };
-            MKCoordinateRegion region = { { (routePath[0].latitude + routePath[numPoints-1].latitude) / 2,
+			SegmentVO *firstSegment=[_currentRoute.segments firstObject];
+			SegmentVO *lastSegment=[_currentRoute.segments lastObject];
+			
+			//TODO: this should be standard ne/sw region calculation used in itinerary etc.
+			
+            MKCoordinateRegion region = { { (firstsegment.segmentStart.latitude + lastSegment.segmentStart.latitude) / 2,
                 (routePath[0].longitude + routePath[numPoints-1].longitude) / 2 },
                 { latDelta,
                     lonDelta } };
 			//TODO: should be center coord and zoom combo;
 			//[mapView setRegion:region animated:NO];
+		}else{
+			[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
 		}
-		else
-		{
-			// init map region to Atlanta
-			//TODO: should be center coord and zoom combo;
-			MKCoordinateRegion region = { { 33.749038, -84.388068 }, { 0.10825, 0.10825 } };
-			//[mapView setRegion:region animated:NO];
-		}
-        free(routePath);
-	}
-	else
-	{
-		// error: init map region to Atlanta
-		//TODO: should be center coord and zoom combo;
-		MKCoordinateRegion region = { { 33.749038, -84.388068 }, { 0.10825, 0.10825 } };
-		//[mapView setRegion:region animated:NO];
+        
+	}else{
+		[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
 	}
     
     LoadingView *loading = (LoadingView*)[self.parentViewController.view viewWithTag:909];
 	//NSLog(@"loading: %@", loading);
 	[loading performSelector:@selector(removeView) withObject:nil afterDelay:0.5];
 }
+
+
+
+#pragma mark point list provider
+// PointListProvider
++ (NSArray *) pointList:(RouteVO *)route withView:(RMMapView *)mapView {
+	
+	NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:10];
+	if (route == nil) {
+		return points;
+	}
+	
+	for (int i = 0; i < [route numSegments]; i++) {
+		if (i == 0)
+		{	// start of first segment
+			CSPointVO *p = [[CSPointVO alloc] init];
+			SegmentVO *segment = [route segmentAtIndex:i];
+			CLLocationCoordinate2D coordinate = [segment segmentStart];
+			CGPoint pt = [mapView coordinateToPixel:coordinate];
+			p.p = pt;
+			p.isWalking=segment.isWalkingSection;
+			[points addObject:p];
+		}
+		// remainder of all segments
+		SegmentVO *segment = [route segmentAtIndex:i];
+		NSArray *allPoints = [segment allPoints];
+		for (int i = 1; i < [allPoints count]; i++) {
+			CSPointVO *latlon = [allPoints objectAtIndex:i];
+			CLLocationCoordinate2D coordinate;
+			coordinate.latitude = latlon.p.y;
+			coordinate.longitude = latlon.p.x;
+			CGPoint pt = [mapView coordinateToPixel:coordinate];
+			CSPointVO *screen = [[CSPointVO alloc] init];
+			screen.p = pt;
+			screen.isWalking=segment.isWalkingSection;
+			[points addObject:screen];
+		}
+	}
+	
+	return points;
+}
+
+- (NSArray *) pointList {
+	return [HCSMapViewController pointList:_currentRoute withView:_mapView];
+}
+
+
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     UIImage *thumbnailOriginal;
@@ -396,7 +425,7 @@
     NSLog(@"Size of Thumbnail Image(bytes):%d",[thumbnailData length]);
     NSLog(@"Size: %f, %f", thumbnail.size.height, thumbnail.size.width);
     
-    [delegate getTripThumbnail:thumbnailData];
+    [_delegate getTripThumbnail:thumbnailData];
 }
 
 

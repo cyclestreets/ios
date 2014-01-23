@@ -40,4 +40,8 @@
 - (void)addTrips:(NSSet *)values;
 - (void)removeTrips:(NSSet *)values;
 
+
+-(BOOL)userInfoSaved;
+
+
 @end
