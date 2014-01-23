@@ -133,7 +133,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[CycleStreets zoomMapView:_mapView toLocation:location];
 	
 	
-	[self displayLocationIndicator:YES];
+	//[self displayLocationIndicator:YES];
 	
 	
 }
@@ -148,7 +148,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	[CycleStreets zoomMapView:_mapView toLocation:_currentLocation];
 	
-	[self displayLocationIndicator:YES];
+	RMUserLocation *userLocation=_mapView.userLocation;
+	
+	//[self displayLocationIndicator:YES];
 	
     
 	if ( !_didUpdateUserLocation )
@@ -259,6 +261,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	[RMMapView class];
 	[_mapView setDelegate:self];
+	_mapView.showsUserLocation=YES;
+	_mapView.userTrackingMode=RMUserTrackingModeFollow;
 	
 	
 	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:_mapView.frame];

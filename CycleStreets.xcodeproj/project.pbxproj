@@ -796,6 +796,106 @@
 		28B7813A150F3D0600503638 /* CSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B78138150F3D0600503638 /* CSNavigationBar.m */; };
 		28B7813B150F3D0600503638 /* CSNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B78139150F3D0600503638 /* CSNavigationBar.xib */; };
 		28B78DA21507884C00949870 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
+		28BC443318915A5800711A1A /* commute.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC43FF18915A5800711A1A /* commute.tif */; };
+		28BC443418915A5800711A1A /* commute.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC43FF18915A5800711A1A /* commute.tif */; };
+		28BC443518915A5800711A1A /* commuter2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440018915A5800711A1A /* commuter2.png */; };
+		28BC443618915A5800711A1A /* commuter2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440018915A5800711A1A /* commuter2.png */; };
+		28BC443718915A5800711A1A /* errands.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440118915A5800711A1A /* errands.tif */; };
+		28BC443818915A5800711A1A /* errands.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440118915A5800711A1A /* errands.tif */; };
+		28BC443918915A5800711A1A /* exercise.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440218915A5800711A1A /* exercise.tif */; };
+		28BC443A18915A5800711A1A /* exercise.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440218915A5800711A1A /* exercise.tif */; };
+		28BC443B18915A5800711A1A /* other.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440318915A5800711A1A /* other.tif */; };
+		28BC443C18915A5800711A1A /* other.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440318915A5800711A1A /* other.tif */; };
+		28BC443D18915A5800711A1A /* school.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440418915A5800711A1A /* school.tif */; };
+		28BC443E18915A5800711A1A /* school.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440418915A5800711A1A /* school.tif */; };
+		28BC443F18915A5800711A1A /* shopping.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440518915A5800711A1A /* shopping.tif */; };
+		28BC444018915A5800711A1A /* shopping.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440518915A5800711A1A /* shopping.tif */; };
+		28BC444118915A5800711A1A /* social.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440618915A5800711A1A /* social.tif */; };
+		28BC444218915A5800711A1A /* social.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440618915A5800711A1A /* social.tif */; };
+		28BC444318915A5800711A1A /* work-related.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440718915A5800711A1A /* work-related.tif */; };
+		28BC444418915A5800711A1A /* work-related.tif in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440718915A5800711A1A /* work-related.tif */; };
+		28BC444518915A5800711A1A /* commute.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440918915A5800711A1A /* commute.png */; };
+		28BC444618915A5800711A1A /* commute.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440918915A5800711A1A /* commute.png */; };
+		28BC444718915A5800711A1A /* commute@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440A18915A5800711A1A /* commute@2x.png */; };
+		28BC444818915A5800711A1A /* commute@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440A18915A5800711A1A /* commute@2x.png */; };
+		28BC444918915A5800711A1A /* errands.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440B18915A5800711A1A /* errands.png */; };
+		28BC444A18915A5800711A1A /* errands.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440B18915A5800711A1A /* errands.png */; };
+		28BC444B18915A5800711A1A /* errands@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440C18915A5800711A1A /* errands@2x.png */; };
+		28BC444C18915A5800711A1A /* errands@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440C18915A5800711A1A /* errands@2x.png */; };
+		28BC444D18915A5800711A1A /* exercise.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440D18915A5800711A1A /* exercise.png */; };
+		28BC444E18915A5800711A1A /* exercise.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440D18915A5800711A1A /* exercise.png */; };
+		28BC444F18915A5800711A1A /* exercise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440E18915A5800711A1A /* exercise@2x.png */; };
+		28BC445018915A5800711A1A /* exercise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440E18915A5800711A1A /* exercise@2x.png */; };
+		28BC445118915A5800711A1A /* failedUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440F18915A5800711A1A /* failedUpload.png */; };
+		28BC445218915A5800711A1A /* failedUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440F18915A5800711A1A /* failedUpload.png */; };
+		28BC445318915A5800711A1A /* failedUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441018915A5800711A1A /* failedUpload@2x.png */; };
+		28BC445418915A5800711A1A /* failedUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441018915A5800711A1A /* failedUpload@2x.png */; };
+		28BC445518915A5800711A1A /* noteAssetMapGlyph.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441118915A5800711A1A /* noteAssetMapGlyph.png */; };
+		28BC445618915A5800711A1A /* noteAssetMapGlyph.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441118915A5800711A1A /* noteAssetMapGlyph.png */; };
+		28BC445718915A5800711A1A /* noteAssetMapGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441218915A5800711A1A /* noteAssetMapGlyph@2x.png */; };
+		28BC445818915A5800711A1A /* noteAssetMapGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441218915A5800711A1A /* noteAssetMapGlyph@2x.png */; };
+		28BC445918915A5800711A1A /* noteAssetPicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441318915A5800711A1A /* noteAssetPicker.png */; };
+		28BC445A18915A5800711A1A /* noteAssetPicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441318915A5800711A1A /* noteAssetPicker.png */; };
+		28BC445B18915A5800711A1A /* noteAssetPicker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441418915A5800711A1A /* noteAssetPicker@2x.png */; };
+		28BC445C18915A5800711A1A /* noteAssetPicker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441418915A5800711A1A /* noteAssetPicker@2x.png */; };
+		28BC445D18915A5800711A1A /* noteBlankPicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441518915A5800711A1A /* noteBlankPicker.png */; };
+		28BC445E18915A5800711A1A /* noteBlankPicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441518915A5800711A1A /* noteBlankPicker.png */; };
+		28BC445F18915A5800711A1A /* noteBlankPicker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441618915A5800711A1A /* noteBlankPicker@2x.png */; };
+		28BC446018915A5800711A1A /* noteBlankPicker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441618915A5800711A1A /* noteBlankPicker@2x.png */; };
+		28BC446118915A5800711A1A /* noteIssueMapGlyph.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441718915A5800711A1A /* noteIssueMapGlyph.png */; };
+		28BC446218915A5800711A1A /* noteIssueMapGlyph.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441718915A5800711A1A /* noteIssueMapGlyph.png */; };
+		28BC446318915A5800711A1A /* noteIssueMapGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441818915A5800711A1A /* noteIssueMapGlyph@2x.png */; };
+		28BC446418915A5800711A1A /* noteIssueMapGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441818915A5800711A1A /* noteIssueMapGlyph@2x.png */; };
+		28BC446518915A5800711A1A /* noteIssuePicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441918915A5800711A1A /* noteIssuePicker.png */; };
+		28BC446618915A5800711A1A /* noteIssuePicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441918915A5800711A1A /* noteIssuePicker.png */; };
+		28BC446718915A5800711A1A /* noteIssuePicker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441A18915A5800711A1A /* noteIssuePicker@2x.png */; };
+		28BC446818915A5800711A1A /* noteIssuePicker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441A18915A5800711A1A /* noteIssuePicker@2x.png */; };
+		28BC446918915A5800711A1A /* other.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441B18915A5800711A1A /* other.png */; };
+		28BC446A18915A5800711A1A /* other.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441B18915A5800711A1A /* other.png */; };
+		28BC446B18915A5800711A1A /* other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441C18915A5800711A1A /* other@2x.png */; };
+		28BC446C18915A5800711A1A /* other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441C18915A5800711A1A /* other@2x.png */; };
+		28BC446D18915A5800711A1A /* school.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441D18915A5800711A1A /* school.png */; };
+		28BC446E18915A5800711A1A /* school.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441D18915A5800711A1A /* school.png */; };
+		28BC446F18915A5800711A1A /* school@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441E18915A5800711A1A /* school@2x.png */; };
+		28BC447018915A5800711A1A /* school@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441E18915A5800711A1A /* school@2x.png */; };
+		28BC447118915A5800711A1A /* shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441F18915A5800711A1A /* shopping.png */; };
+		28BC447218915A5800711A1A /* shopping.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441F18915A5800711A1A /* shopping.png */; };
+		28BC447318915A5800711A1A /* shopping@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442018915A5800711A1A /* shopping@2x.png */; };
+		28BC447418915A5800711A1A /* shopping@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442018915A5800711A1A /* shopping@2x.png */; };
+		28BC447518915A5800711A1A /* social.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442118915A5800711A1A /* social.png */; };
+		28BC447618915A5800711A1A /* social.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442118915A5800711A1A /* social.png */; };
+		28BC447718915A5800711A1A /* social@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442218915A5800711A1A /* social@2x.png */; };
+		28BC447818915A5800711A1A /* social@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442218915A5800711A1A /* social@2x.png */; };
+		28BC447918915A5800711A1A /* tripEnd.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442318915A5800711A1A /* tripEnd.png */; };
+		28BC447A18915A5800711A1A /* tripEnd.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442318915A5800711A1A /* tripEnd.png */; };
+		28BC447B18915A5800711A1A /* tripEnd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442418915A5800711A1A /* tripEnd@2x.png */; };
+		28BC447C18915A5800711A1A /* tripEnd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442418915A5800711A1A /* tripEnd@2x.png */; };
+		28BC447D18915A5800711A1A /* tripStart.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442518915A5800711A1A /* tripStart.png */; };
+		28BC447E18915A5800711A1A /* tripStart.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442518915A5800711A1A /* tripStart.png */; };
+		28BC447F18915A5800711A1A /* tripStart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442618915A5800711A1A /* tripStart@2x.png */; };
+		28BC448018915A5800711A1A /* tripStart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442618915A5800711A1A /* tripStart@2x.png */; };
+		28BC448118915A5800711A1A /* workRelated.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442718915A5800711A1A /* workRelated.png */; };
+		28BC448218915A5800711A1A /* workRelated.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442718915A5800711A1A /* workRelated.png */; };
+		28BC448318915A5800711A1A /* workRelated@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442818915A5800711A1A /* workRelated@2x.png */; };
+		28BC448418915A5800711A1A /* workRelated@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442818915A5800711A1A /* workRelated@2x.png */; };
+		28BC448518915A5800711A1A /* LCD-screen-288x126.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442A18915A5800711A1A /* LCD-screen-288x126.png */; };
+		28BC448618915A5800711A1A /* LCD-screen-288x126.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442A18915A5800711A1A /* LCD-screen-288x126.png */; };
+		28BC448718915A5800711A1A /* lcd-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442B18915A5800711A1A /* lcd-screen.png */; };
+		28BC448818915A5800711A1A /* lcd-screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442B18915A5800711A1A /* lcd-screen.png */; };
+		28BC448918915A5800711A1A /* lcd-screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442C18915A5800711A1A /* lcd-screen@2x.png */; };
+		28BC448A18915A5800711A1A /* lcd-screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442C18915A5800711A1A /* lcd-screen@2x.png */; };
+		28BC448B18915A5800711A1A /* lcdScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442D18915A5800711A1A /* lcdScreen.png */; };
+		28BC448C18915A5800711A1A /* lcdScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442D18915A5800711A1A /* lcdScreen.png */; };
+		28BC448D18915A5800711A1A /* lcdScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442E18915A5800711A1A /* lcdScreen@2x.png */; };
+		28BC448E18915A5800711A1A /* lcdScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442E18915A5800711A1A /* lcdScreen@2x.png */; };
+		28BC448F18915A5800711A1A /* MapCoord.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442F18915A5800711A1A /* MapCoord.png */; };
+		28BC449018915A5800711A1A /* MapCoord.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442F18915A5800711A1A /* MapCoord.png */; };
+		28BC449118915A5800711A1A /* photoFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC443018915A5800711A1A /* photoFrame.png */; };
+		28BC449218915A5800711A1A /* photoFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC443018915A5800711A1A /* photoFrame.png */; };
+		28BC449318915A5800711A1A /* photoFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC443118915A5800711A1A /* photoFrame@2x.png */; };
+		28BC449418915A5800711A1A /* photoFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC443118915A5800711A1A /* photoFrame@2x.png */; };
+		28BC449518915A5800711A1A /* record-map-frame-288x141.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC443218915A5800711A1A /* record-map-frame-288x141.png */; };
+		28BC449618915A5800711A1A /* record-map-frame-288x141.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC443218915A5800711A1A /* record-map-frame-288x141.png */; };
 		28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185A153D74C500023FAF /* PhotoCategoryManager.m */; };
 		28C0185E153D7BF100023FAF /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185D153D7BF100023FAF /* PhotoCategoryVO.m */; };
 		28C4ABE81450708900A0ECD3 /* btn_slider_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 28C4ABDC1450708900A0ECD3 /* btn_slider_off.png */; };
@@ -1445,6 +1545,56 @@
 		28B78138150F3D0600503638 /* CSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNavigationBar.m; sourceTree = "<group>"; };
 		28B78139150F3D0600503638 /* CSNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSNavigationBar.xib; sourceTree = "<group>"; };
 		28B78DA11507884C00949870 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		28BC43FF18915A5800711A1A /* commute.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = commute.tif; sourceTree = "<group>"; };
+		28BC440018915A5800711A1A /* commuter2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commuter2.png; sourceTree = "<group>"; };
+		28BC440118915A5800711A1A /* errands.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = errands.tif; sourceTree = "<group>"; };
+		28BC440218915A5800711A1A /* exercise.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = exercise.tif; sourceTree = "<group>"; };
+		28BC440318915A5800711A1A /* other.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = other.tif; sourceTree = "<group>"; };
+		28BC440418915A5800711A1A /* school.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = school.tif; sourceTree = "<group>"; };
+		28BC440518915A5800711A1A /* shopping.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = shopping.tif; sourceTree = "<group>"; };
+		28BC440618915A5800711A1A /* social.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = social.tif; sourceTree = "<group>"; };
+		28BC440718915A5800711A1A /* work-related.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "work-related.tif"; sourceTree = "<group>"; };
+		28BC440918915A5800711A1A /* commute.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commute.png; sourceTree = "<group>"; };
+		28BC440A18915A5800711A1A /* commute@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commute@2x.png"; sourceTree = "<group>"; };
+		28BC440B18915A5800711A1A /* errands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errands.png; sourceTree = "<group>"; };
+		28BC440C18915A5800711A1A /* errands@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errands@2x.png"; sourceTree = "<group>"; };
+		28BC440D18915A5800711A1A /* exercise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exercise.png; sourceTree = "<group>"; };
+		28BC440E18915A5800711A1A /* exercise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exercise@2x.png"; sourceTree = "<group>"; };
+		28BC440F18915A5800711A1A /* failedUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = failedUpload.png; sourceTree = "<group>"; };
+		28BC441018915A5800711A1A /* failedUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "failedUpload@2x.png"; sourceTree = "<group>"; };
+		28BC441118915A5800711A1A /* noteAssetMapGlyph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noteAssetMapGlyph.png; sourceTree = "<group>"; };
+		28BC441218915A5800711A1A /* noteAssetMapGlyph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noteAssetMapGlyph@2x.png"; sourceTree = "<group>"; };
+		28BC441318915A5800711A1A /* noteAssetPicker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noteAssetPicker.png; sourceTree = "<group>"; };
+		28BC441418915A5800711A1A /* noteAssetPicker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noteAssetPicker@2x.png"; sourceTree = "<group>"; };
+		28BC441518915A5800711A1A /* noteBlankPicker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noteBlankPicker.png; sourceTree = "<group>"; };
+		28BC441618915A5800711A1A /* noteBlankPicker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noteBlankPicker@2x.png"; sourceTree = "<group>"; };
+		28BC441718915A5800711A1A /* noteIssueMapGlyph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noteIssueMapGlyph.png; sourceTree = "<group>"; };
+		28BC441818915A5800711A1A /* noteIssueMapGlyph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noteIssueMapGlyph@2x.png"; sourceTree = "<group>"; };
+		28BC441918915A5800711A1A /* noteIssuePicker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noteIssuePicker.png; sourceTree = "<group>"; };
+		28BC441A18915A5800711A1A /* noteIssuePicker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noteIssuePicker@2x.png"; sourceTree = "<group>"; };
+		28BC441B18915A5800711A1A /* other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other.png; sourceTree = "<group>"; };
+		28BC441C18915A5800711A1A /* other@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "other@2x.png"; sourceTree = "<group>"; };
+		28BC441D18915A5800711A1A /* school.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = school.png; sourceTree = "<group>"; };
+		28BC441E18915A5800711A1A /* school@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "school@2x.png"; sourceTree = "<group>"; };
+		28BC441F18915A5800711A1A /* shopping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopping.png; sourceTree = "<group>"; };
+		28BC442018915A5800711A1A /* shopping@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopping@2x.png"; sourceTree = "<group>"; };
+		28BC442118915A5800711A1A /* social.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = social.png; sourceTree = "<group>"; };
+		28BC442218915A5800711A1A /* social@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social@2x.png"; sourceTree = "<group>"; };
+		28BC442318915A5800711A1A /* tripEnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tripEnd.png; sourceTree = "<group>"; };
+		28BC442418915A5800711A1A /* tripEnd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tripEnd@2x.png"; sourceTree = "<group>"; };
+		28BC442518915A5800711A1A /* tripStart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tripStart.png; sourceTree = "<group>"; };
+		28BC442618915A5800711A1A /* tripStart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tripStart@2x.png"; sourceTree = "<group>"; };
+		28BC442718915A5800711A1A /* workRelated.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = workRelated.png; sourceTree = "<group>"; };
+		28BC442818915A5800711A1A /* workRelated@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "workRelated@2x.png"; sourceTree = "<group>"; };
+		28BC442A18915A5800711A1A /* LCD-screen-288x126.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-screen-288x126.png"; sourceTree = "<group>"; };
+		28BC442B18915A5800711A1A /* lcd-screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd-screen.png"; sourceTree = "<group>"; };
+		28BC442C18915A5800711A1A /* lcd-screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd-screen@2x.png"; sourceTree = "<group>"; };
+		28BC442D18915A5800711A1A /* lcdScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lcdScreen.png; sourceTree = "<group>"; };
+		28BC442E18915A5800711A1A /* lcdScreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcdScreen@2x.png"; sourceTree = "<group>"; };
+		28BC442F18915A5800711A1A /* MapCoord.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MapCoord.png; sourceTree = "<group>"; };
+		28BC443018915A5800711A1A /* photoFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoFrame.png; sourceTree = "<group>"; };
+		28BC443118915A5800711A1A /* photoFrame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoFrame@2x.png"; sourceTree = "<group>"; };
+		28BC443218915A5800711A1A /* record-map-frame-288x141.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record-map-frame-288x141.png"; sourceTree = "<group>"; };
 		28C01859153D74C500023FAF /* PhotoCategoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCategoryManager.h; sourceTree = "<group>"; };
 		28C0185A153D74C500023FAF /* PhotoCategoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryManager.m; sourceTree = "<group>"; };
 		28C0185C153D7BF100023FAF /* PhotoCategoryVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCategoryVO.h; sourceTree = "<group>"; };
@@ -2261,7 +2411,7 @@
 			path = Wisps;
 			sourceTree = "<group>";
 		};
-		289AA29F188EEB170097AA5A /* Resources */ = {
+		289AA29F188EEB170097AA5A /* RMResources */ = {
 			isa = PBXGroup;
 			children = (
 				289AA2A0188EEB170097AA5A /* HeadingAngleSmall.png */,
@@ -2281,7 +2431,7 @@
 				289AA2AE188EEB170097AA5A /* TrackingLocation.png */,
 				289AA2AF188EEB170097AA5A /* TrackingLocation@2x.png */,
 			);
-			name = Resources;
+			name = RMResources;
 			path = ../../../../../libs/Alpstein/MapView/Map/Resources;
 			sourceTree = "<group>";
 		};
@@ -2467,7 +2617,8 @@
 		28AD6208131FB69D008527FC /* images */ = {
 			isa = PBXGroup;
 			children = (
-				289AA29F188EEB170097AA5A /* Resources */,
+				28BC43FD18915A4C00711A1A /* hackney */,
+				289AA29F188EEB170097AA5A /* RMResources */,
 				28187A5614FCFF4C00A38A17 /* x1 */,
 				28735C10144EDACF00726A6C /* html */,
 				28AD6532131FC239008527FC /* x2 */,
@@ -2759,6 +2910,87 @@
 			path = constants;
 			sourceTree = "<group>";
 		};
+		28BC43FD18915A4C00711A1A /* hackney */ = {
+			isa = PBXGroup;
+			children = (
+				28BC43FE18915A5800711A1A /* TripPurposePickerIcons v2 */,
+				28BC440818915A5800711A1A /* TripPurposePickerIcons V3 */,
+				28BC442918915A5800711A1A /* UI Elements */,
+			);
+			name = hackney;
+			sourceTree = "<group>";
+		};
+		28BC43FE18915A5800711A1A /* TripPurposePickerIcons v2 */ = {
+			isa = PBXGroup;
+			children = (
+				28BC43FF18915A5800711A1A /* commute.tif */,
+				28BC440018915A5800711A1A /* commuter2.png */,
+				28BC440118915A5800711A1A /* errands.tif */,
+				28BC440218915A5800711A1A /* exercise.tif */,
+				28BC440318915A5800711A1A /* other.tif */,
+				28BC440418915A5800711A1A /* school.tif */,
+				28BC440518915A5800711A1A /* shopping.tif */,
+				28BC440618915A5800711A1A /* social.tif */,
+				28BC440718915A5800711A1A /* work-related.tif */,
+			);
+			path = "TripPurposePickerIcons v2";
+			sourceTree = "<group>";
+		};
+		28BC440818915A5800711A1A /* TripPurposePickerIcons V3 */ = {
+			isa = PBXGroup;
+			children = (
+				28BC440918915A5800711A1A /* commute.png */,
+				28BC440A18915A5800711A1A /* commute@2x.png */,
+				28BC440B18915A5800711A1A /* errands.png */,
+				28BC440C18915A5800711A1A /* errands@2x.png */,
+				28BC440D18915A5800711A1A /* exercise.png */,
+				28BC440E18915A5800711A1A /* exercise@2x.png */,
+				28BC440F18915A5800711A1A /* failedUpload.png */,
+				28BC441018915A5800711A1A /* failedUpload@2x.png */,
+				28BC441118915A5800711A1A /* noteAssetMapGlyph.png */,
+				28BC441218915A5800711A1A /* noteAssetMapGlyph@2x.png */,
+				28BC441318915A5800711A1A /* noteAssetPicker.png */,
+				28BC441418915A5800711A1A /* noteAssetPicker@2x.png */,
+				28BC441518915A5800711A1A /* noteBlankPicker.png */,
+				28BC441618915A5800711A1A /* noteBlankPicker@2x.png */,
+				28BC441718915A5800711A1A /* noteIssueMapGlyph.png */,
+				28BC441818915A5800711A1A /* noteIssueMapGlyph@2x.png */,
+				28BC441918915A5800711A1A /* noteIssuePicker.png */,
+				28BC441A18915A5800711A1A /* noteIssuePicker@2x.png */,
+				28BC441B18915A5800711A1A /* other.png */,
+				28BC441C18915A5800711A1A /* other@2x.png */,
+				28BC441D18915A5800711A1A /* school.png */,
+				28BC441E18915A5800711A1A /* school@2x.png */,
+				28BC441F18915A5800711A1A /* shopping.png */,
+				28BC442018915A5800711A1A /* shopping@2x.png */,
+				28BC442118915A5800711A1A /* social.png */,
+				28BC442218915A5800711A1A /* social@2x.png */,
+				28BC442318915A5800711A1A /* tripEnd.png */,
+				28BC442418915A5800711A1A /* tripEnd@2x.png */,
+				28BC442518915A5800711A1A /* tripStart.png */,
+				28BC442618915A5800711A1A /* tripStart@2x.png */,
+				28BC442718915A5800711A1A /* workRelated.png */,
+				28BC442818915A5800711A1A /* workRelated@2x.png */,
+			);
+			path = "TripPurposePickerIcons V3";
+			sourceTree = "<group>";
+		};
+		28BC442918915A5800711A1A /* UI Elements */ = {
+			isa = PBXGroup;
+			children = (
+				28BC442A18915A5800711A1A /* LCD-screen-288x126.png */,
+				28BC442B18915A5800711A1A /* lcd-screen.png */,
+				28BC442C18915A5800711A1A /* lcd-screen@2x.png */,
+				28BC442D18915A5800711A1A /* lcdScreen.png */,
+				28BC442E18915A5800711A1A /* lcdScreen@2x.png */,
+				28BC442F18915A5800711A1A /* MapCoord.png */,
+				28BC443018915A5800711A1A /* photoFrame.png */,
+				28BC443118915A5800711A1A /* photoFrame@2x.png */,
+				28BC443218915A5800711A1A /* record-map-frame-288x141.png */,
+			);
+			path = "UI Elements";
+			sourceTree = "<group>";
+		};
 		28C4ABDB1450708900A0ECD3 /* defaultimages */ = {
 			isa = PBXGroup;
 			children = (
@@ -3016,21 +3248,29 @@
 				E7FD8F42127821DB002640D0 /* Default.png in Resources */,
 				E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */,
 				28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */,
+				28BC446D18915A5800711A1A /* school.png in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
+				28BC444B18915A5800711A1A /* errands@2x.png in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
+				28BC448518915A5800711A1A /* LCD-screen-288x126.png in Resources */,
 				28AD62B5131FB69D008527FC /* FormData.plist in Resources */,
 				28AD62B7131FB69D008527FC /* styles.plist in Resources */,
 				28AD62B8131FB69D008527FC /* userState.plist in Resources */,
 				28AD6549131FC239008527FC /* UIButton_green_hi@2x.png in Resources */,
+				28BC443D18915A5800711A1A /* school.tif in Resources */,
+				28BC445718915A5800711A1A /* noteAssetMapGlyph@2x.png in Resources */,
 				28AD654A131FC239008527FC /* UIButton_green_lo@2x.png in Resources */,
+				28BC447518915A5800711A1A /* social.png in Resources */,
 				28AD654B131FC239008527FC /* UIButton_grey_hi@2x.png in Resources */,
 				28AD654C131FC239008527FC /* UIButton_grey_lo@2x.png in Resources */,
 				28AD654D131FC239008527FC /* UIButton_orange_hi@2x.png in Resources */,
 				28AD654E131FC239008527FC /* UIButton_orange_lo@2x.png in Resources */,
 				28AD654F131FC239008527FC /* UIButton_orangesmall_hi@2x.png in Resources */,
 				28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */,
+				28BC445518915A5800711A1A /* noteAssetMapGlyph.png in Resources */,
 				28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */,
 				2880BE55188E821A006FF7E2 /* HCSRouteListView.xib in Resources */,
+				28BC445918915A5800711A1A /* noteAssetPicker.png in Resources */,
 				28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */,
 				289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */,
@@ -3043,21 +3283,26 @@
 				289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */,
 				289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */,
 				28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */,
+				28BC445F18915A5800711A1A /* noteBlankPicker@2x.png in Resources */,
 				28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */,
 				28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */,
 				28D10EC4135D6E54006F1D94 /* UIIcon_turn_left@2x.png in Resources */,
 				28D10EC5135D6E54006F1D94 /* UIIcon_turn_right@2x.png in Resources */,
 				28D10EC6135D6E54006F1D94 /* UIIcon_photomap@2x.png in Resources */,
+				28BC443718915A5800711A1A /* errands.tif in Resources */,
 				28D10EC7135D6E54006F1D94 /* CSTabBar_account@2x.png in Resources */,
 				28D10EC8135D6E54006F1D94 /* CSTabBar_add_photo@2x.png in Resources */,
 				287868F81886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				28D10EC9135D6E54006F1D94 /* CSTabBar_credits@2x.png in Resources */,
 				28D10ECA135D6E54006F1D94 /* CSTabBar_fav_routes@2x.png in Resources */,
+				28BC443318915A5800711A1A /* commute.tif in Resources */,
 				28D10ECB135D6E54006F1D94 /* CSTabBar_itinerary@2x.png in Resources */,
 				28D10ECC135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png in Resources */,
 				28D10ECD135D6E54006F1D94 /* CSTabBar_plan_route@2x.png in Resources */,
+				28BC445318915A5800711A1A /* failedUpload@2x.png in Resources */,
 				28D10ECE135D6E54006F1D94 /* CSTabBar_settings@2x.png in Resources */,
 				280E9333140984F300C7AC75 /* FavouritesCell.xib in Resources */,
+				28BC445118915A5800711A1A /* failedUpload.png in Resources */,
 				280E9334140984F300C7AC75 /* ItineraryCell.xib in Resources */,
 				280E9335140984F300C7AC75 /* RouteTableCell.xib in Resources */,
 				289AA2C4188EEB170097AA5A /* TrackingDotHalo.png in Resources */,
@@ -3065,6 +3310,7 @@
 				280E9341140984F300C7AC75 /* InitialLocationView.xib in Resources */,
 				289AA2B8188EEB170097AA5A /* marker-blue-withletter.png in Resources */,
 				280E93AF140989E400C7AC75 /* donate.html in Resources */,
+				28BC445B18915A5800711A1A /* noteAssetPicker@2x.png in Resources */,
 				287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */,
 				287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */,
 				287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */,
@@ -3075,37 +3321,50 @@
 				28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */,
 				28735C15144EDACF00726A6C /* donate.png in Resources */,
 				28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */,
+				28BC448718915A5800711A1A /* lcd-screen.png in Resources */,
+				28BC446118915A5800711A1A /* noteIssueMapGlyph.png in Resources */,
 				28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */,
 				28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */,
 				28C4ABE81450708900A0ECD3 /* btn_slider_off.png in Resources */,
+				28BC446318915A5800711A1A /* noteIssueMapGlyph@2x.png in Resources */,
 				28C4ABE91450708900A0ECD3 /* btn_slider_off@2x.png in Resources */,
 				28C4ABEA1450708900A0ECD3 /* btn_slider_on.png in Resources */,
+				28BC444118915A5800711A1A /* social.tif in Resources */,
+				28BC443918915A5800711A1A /* exercise.tif in Resources */,
 				28C4ABEB1450708900A0ECD3 /* btn_slider_on@2x.png in Resources */,
 				28C4ABEC1450708900A0ECD3 /* btn_slider_thumb.png in Resources */,
 				28C4ABED1450708900A0ECD3 /* btn_slider_thumb@2x.png in Resources */,
 				28C4ABEE1450708900A0ECD3 /* btn_slider_thumb_pressed.png in Resources */,
 				28C4ABEF1450708900A0ECD3 /* btn_slider_thumb_pressed@2x.png in Resources */,
 				28C4ABF01450708900A0ECD3 /* btn_slider_track.png in Resources */,
+				28BC446F18915A5800711A1A /* school@2x.png in Resources */,
 				28C4ABF11450708900A0ECD3 /* btn_slider_track@2x.png in Resources */,
+				28BC447718915A5800711A1A /* social@2x.png in Resources */,
 				28C4ABF21450708900A0ECD3 /* btn_slider_track_pressed.png in Resources */,
 				289AA2B0188EEB170097AA5A /* HeadingAngleSmall.png in Resources */,
+				28BC447118915A5800711A1A /* shopping.png in Resources */,
 				289AA2BA188EEB170097AA5A /* marker-blue.png in Resources */,
 				28C4ABF31450708900A0ECD3 /* btn_slider_track_pressed@2x.png in Resources */,
 				281E08C4145179AC0034CC63 /* POITypeCell.xib in Resources */,
+				28BC447D18915A5800711A1A /* tripStart.png in Resources */,
 				281E09031451C6690034CC63 /* services_dev.plist in Resources */,
 				289AA2CA188EEB170097AA5A /* TrackingHeading@2x.png in Resources */,
+				28BC449318915A5800711A1A /* photoFrame@2x.png in Resources */,
 				281E09041451C6690034CC63 /* services_live.plist in Resources */,
 				281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */,
 				2818C7A01458069E0077F529 /* RouteCell.xib in Resources */,
 				28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */,
 				28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */,
+				28BC443B18915A5800711A1A /* other.tif in Resources */,
 				28187AA014FCFF4C00A38A17 /* CSIcon_MapArrow_start.png in Resources */,
 				28187AA114FCFF4C00A38A17 /* blueButton.png in Resources */,
 				28187AA214FCFF4C00A38A17 /* BUSegmentedControl_center_hi.png in Resources */,
 				28187AA314FCFF4C00A38A17 /* BUSegmentedControl_center_lo.png in Resources */,
 				28187AA414FCFF4C00A38A17 /* BUSegmentedControl_left_hi.png in Resources */,
 				28187AA514FCFF4C00A38A17 /* BUSegmentedControl_left_lo.png in Resources */,
+				28BC448318915A5800711A1A /* workRelated@2x.png in Resources */,
 				28187AA614FCFF4C00A38A17 /* BUSegmentedControl_right_hi.png in Resources */,
+				28BC446518915A5800711A1A /* noteIssuePicker.png in Resources */,
 				28187AA714FCFF4C00A38A17 /* BUSegmentedControl_right_lo.png in Resources */,
 				289AA2CE188EEB170097AA5A /* TrackingLocation@2x.png in Resources */,
 				28187AA814FCFF4C00A38A17 /* UIIcon_cycle_lanes.png in Resources */,
@@ -3115,6 +3374,7 @@
 				28187AAC14FCFF4C00A38A17 /* UIIcon_quiet_street.png in Resources */,
 				28187AAD14FCFF4C00A38A17 /* UIIcon_roads.png in Resources */,
 				28187AAE14FCFF4C00A38A17 /* UIIcon_tracks.png in Resources */,
+				28BC446B18915A5800711A1A /* other@2x.png in Resources */,
 				28187AB114FCFF4C00A38A17 /* UIIcon_bear_left.png in Resources */,
 				28187AB214FCFF4C00A38A17 /* UIIcon_bear_right.png in Resources */,
 				28187AB314FCFF4C00A38A17 /* UIIcon_straight_on.png in Resources */,
@@ -3128,6 +3388,7 @@
 				28187ABF14FCFF4C00A38A17 /* CSTabBar_add_photo.png in Resources */,
 				28187AC014FCFF4C00A38A17 /* CSTabBar_credits.png in Resources */,
 				28187AC114FCFF4C00A38A17 /* CSTabBar_fav_routes.png in Resources */,
+				28BC448D18915A5800711A1A /* lcdScreen@2x.png in Resources */,
 				2818E0BC189048D40031AD43 /* TripPurposePicker.xib in Resources */,
 				28187AC214FCFF4C00A38A17 /* CSTabBar_itinerary.png in Resources */,
 				28187AC314FCFF4C00A38A17 /* CSTabBar_photomap_tb.png in Resources */,
@@ -3135,6 +3396,7 @@
 				28187AC514FCFF4C00A38A17 /* CSTabBar_settings.png in Resources */,
 				28187AC814FCFF4C00A38A17 /* UIButton_green_hi.png in Resources */,
 				28187AC914FCFF4C00A38A17 /* UIButton_green_lo.png in Resources */,
+				28BC448118915A5800711A1A /* workRelated.png in Resources */,
 				289AA2B2188EEB170097AA5A /* HeadingAngleSmall@2x.png in Resources */,
 				28187ACA14FCFF4C00A38A17 /* UIButton_grey_hi.png in Resources */,
 				28187ACB14FCFF4C00A38A17 /* UIButton_grey_lo.png in Resources */,
@@ -3147,6 +3409,7 @@
 				28187AD114FCFF4C00A38A17 /* UIButton_red_lo.png in Resources */,
 				28187AD214FCFF4C00A38A17 /* UIButton_save_hi.png in Resources */,
 				28187AD314FCFF4C00A38A17 /* UIButtonBarArrowLeft.png in Resources */,
+				28BC448F18915A5800711A1A /* MapCoord.png in Resources */,
 				28187AD414FCFF4D00A38A17 /* UIButtonBarArrowRight.png in Resources */,
 				28187AD514FCFF4D00A38A17 /* UIButtonBarCameraSmall.png in Resources */,
 				28187AD614FCFF4D00A38A17 /* UIButtonBarInfo.png in Resources */,
@@ -3154,8 +3417,11 @@
 				28187AD814FCFF4D00A38A17 /* UIButtonBarStop.png in Resources */,
 				28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */,
 				28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */,
+				28BC449518915A5800711A1A /* record-map-frame-288x141.png in Resources */,
+				28BC446718915A5800711A1A /* noteIssuePicker@2x.png in Resources */,
 				2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */,
 				288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */,
+				28BC449118915A5800711A1A /* photoFrame.png in Resources */,
 				28B7813B150F3D0600503638 /* CSNavigationBar.xib in Resources */,
 				28B484F715261FAC00E406E1 /* popoverArrowDown.png in Resources */,
 				28B484F815261FAC00E406E1 /* popoverArrowDown@2x.png in Resources */,
@@ -3163,16 +3429,20 @@
 				28B484FA15261FAC00E406E1 /* popoverArrowLeft.png in Resources */,
 				28B484FB15261FAC00E406E1 /* popoverArrowLeft@2x.png in Resources */,
 				28B484FC15261FAC00E406E1 /* popoverArrowLeftSimple.png in Resources */,
+				28BC447918915A5800711A1A /* tripEnd.png in Resources */,
 				28B484FD15261FAC00E406E1 /* popoverArrowRight.png in Resources */,
 				28B484FE15261FAC00E406E1 /* popoverArrowRight@2x.png in Resources */,
 				28B484FF15261FAC00E406E1 /* popoverArrowRightSimple.png in Resources */,
 				28B4850015261FAC00E406E1 /* popoverArrowUp.png in Resources */,
 				28B4850115261FAC00E406E1 /* popoverArrowUp@2x.png in Resources */,
+				28BC445D18915A5800711A1A /* noteBlankPicker.png in Resources */,
 				2818E0BF189048D90031AD43 /* NoteViewController.xib in Resources */,
 				28B4850215261FAC00E406E1 /* popoverArrowUpSimple.png in Resources */,
 				2880BE52188E8207006FF7E2 /* HCSTrackConfigView.xib in Resources */,
+				28BC444F18915A5800711A1A /* exercise@2x.png in Resources */,
 				28B4850315261FAC00E406E1 /* popoverBg.png in Resources */,
 				28B4850415261FAC00E406E1 /* popoverBg@2x.png in Resources */,
+				28BC446918915A5800711A1A /* other.png in Resources */,
 				28B4850515261FAC00E406E1 /* popoverBgSimple.png in Resources */,
 				28FA62BE153C1C7200AF6267 /* UITextViewAccessoryView.xib in Resources */,
 				2858F2B11586161B0047283D /* MapLocationSearchCell.xib in Resources */,
@@ -3194,14 +3464,19 @@
 				28B76F3415E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
 				28B76F3715E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
+				28BC444918915A5800711A1A /* errands.png in Resources */,
 				2818E0C6189050570031AD43 /* HCSMapViewController.xib in Resources */,
 				28B76F3E15E4DA02006B01D0 /* CSBarButton_location.png in Resources */,
 				28B76F4015E4DA02006B01D0 /* CSBarButton_search.png in Resources */,
+				28BC448918915A5800711A1A /* lcd-screen@2x.png in Resources */,
 				28B76F4315E4DB3B006B01D0 /* CSBarButton_search@2x.png in Resources */,
 				28B76F4615E4DB48006B01D0 /* CSBarButton_routePlan@2x.png in Resources */,
 				28B76F4915E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */,
+				28BC447B18915A5800711A1A /* tripEnd@2x.png in Resources */,
 				28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */,
+				28BC444718915A5800711A1A /* commute@2x.png in Resources */,
 				28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */,
+				28BC447F18915A5800711A1A /* tripStart@2x.png in Resources */,
 				289AA2B6188EEB170097AA5A /* LoadingTileZoom.png in Resources */,
 				28535DC315E50FCD0092FC16 /* HUD_icon_exclaim.png in Resources */,
 				28535DC515E50FCD0092FC16 /* HUD_icon_exclaim@2x.png in Resources */,
@@ -3214,13 +3489,17 @@
 				289AA2BE188EEB170097AA5A /* marker-red.png in Resources */,
 				289AA2C2188EEB170097AA5A /* TrackingDot@2x.png in Resources */,
 				28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */,
+				28BC448B18915A5800711A1A /* lcdScreen.png in Resources */,
 				28373E2216481A0C00F5E356 /* WayPointCell.xib in Resources */,
 				2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				2811C49D166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C49F166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
+				28BC443518915A5800711A1A /* commuter2.png in Resources */,
 				2811C4A1166CCD5F00592560 /* UIActivityMail.png in Resources */,
+				28BC443F18915A5800711A1A /* shopping.tif in Resources */,
+				28BC447318915A5800711A1A /* shopping@2x.png in Resources */,
 				289AA2C8188EEB170097AA5A /* TrackingHeading.png in Resources */,
 				2811C4A5166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C1166CE68F00592560 /* UIActivitySMS.png in Resources */,
@@ -3231,9 +3510,12 @@
 				2868D242166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				289AA2C6188EEB170097AA5A /* TrackingDotHalo@2x.png in Resources */,
+				28BC444D18915A5800711A1A /* exercise.png in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
+				28BC444318915A5800711A1A /* work-related.tif in Resources */,
+				28BC444518915A5800711A1A /* commute.png in Resources */,
 				2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */,
 				28718BB417858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB617858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
@@ -3244,12 +3526,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BC445618915A5800711A1A /* noteAssetMapGlyph.png in Resources */,
 				2834360515DD5DC300B00FD5 /* credits.html in Resources */,
 				2834360615DD5DC300B00FD5 /* appstore-icon-512.png in Resources */,
 				2834360715DD5DC300B00FD5 /* Default.png in Resources */,
 				2834360815DD5DC300B00FD5 /* Default@2x.png in Resources */,
 				2834360915DD5DC300B00FD5 /* CycleStreetsWindow.xib in Resources */,
 				2834360A15DD5DC300B00FD5 /* Entitlements.plist in Resources */,
+				28BC447818915A5800711A1A /* social@2x.png in Resources */,
 				2834360B15DD5DC300B00FD5 /* contentStrings.plist in Resources */,
 				2834360C15DD5DC300B00FD5 /* FormData.plist in Resources */,
 				2834360D15DD5DC300B00FD5 /* styles.plist in Resources */,
@@ -3257,6 +3541,7 @@
 				2834360F15DD5DC300B00FD5 /* UIButton_green_hi@2x.png in Resources */,
 				2834361015DD5DC300B00FD5 /* UIButton_green_lo@2x.png in Resources */,
 				2834361115DD5DC300B00FD5 /* UIButton_grey_hi@2x.png in Resources */,
+				28BC446A18915A5800711A1A /* other.png in Resources */,
 				289AA2C7188EEB170097AA5A /* TrackingDotHalo@2x.png in Resources */,
 				2834361215DD5DC300B00FD5 /* UIButton_grey_lo@2x.png in Resources */,
 				2834361315DD5DC300B00FD5 /* UIButton_orange_hi@2x.png in Resources */,
@@ -3274,6 +3559,8 @@
 				2834361D15DD5DC300B00FD5 /* UIIcon_footpaths@2x.png in Resources */,
 				2834361E15DD5DC300B00FD5 /* UIIcon_quiet_street@2x.png in Resources */,
 				2834361F15DD5DC300B00FD5 /* UIIcon_roads@2x.png in Resources */,
+				28BC443618915A5800711A1A /* commuter2.png in Resources */,
+				28BC448018915A5800711A1A /* tripStart@2x.png in Resources */,
 				2834362015DD5DC300B00FD5 /* UIIcon_tracks@2x.png in Resources */,
 				2834362115DD5DC300B00FD5 /* CSIcon_finish_wisp@2x.png in Resources */,
 				2834362215DD5DC300B00FD5 /* CSIcon_start_wisp@2x.png in Resources */,
@@ -3285,6 +3572,7 @@
 				2834362815DD5DC300B00FD5 /* UIIcon_photomap@2x.png in Resources */,
 				2834362915DD5DC300B00FD5 /* CSTabBar_account@2x.png in Resources */,
 				2834362A15DD5DC300B00FD5 /* CSTabBar_add_photo@2x.png in Resources */,
+				28BC449618915A5800711A1A /* record-map-frame-288x141.png in Resources */,
 				2834362B15DD5DC300B00FD5 /* CSTabBar_credits@2x.png in Resources */,
 				2834362C15DD5DC300B00FD5 /* CSTabBar_fav_routes@2x.png in Resources */,
 				2834362D15DD5DC300B00FD5 /* CSTabBar_itinerary@2x.png in Resources */,
@@ -3301,16 +3589,21 @@
 				2834364115DD5DC300B00FD5 /* UIButtonBarArrowLeft@2x.png in Resources */,
 				2834364215DD5DC300B00FD5 /* UIButtonBarArrowRight@2x.png in Resources */,
 				289AA2CF188EEB170097AA5A /* TrackingLocation@2x.png in Resources */,
+				28BC447418915A5800711A1A /* shopping@2x.png in Resources */,
 				2834364315DD5DC300B00FD5 /* UIButtonBarCameraSmall@2x.png in Resources */,
 				2834364415DD5DC300B00FD5 /* UIButtonBarInfo@2x.png in Resources */,
 				2834364515DD5DC300B00FD5 /* UIIcon_minor_roads@2x.png in Resources */,
+				28BC445218915A5800711A1A /* failedUpload.png in Resources */,
 				2834364615DD5DC300B00FD5 /* PhotoMapImageLocationView.xib in Resources */,
 				2834364715DD5DC300B00FD5 /* PhotoMapView.xib in Resources */,
 				2834364815DD5DC300B00FD5 /* cyclecambridge.jpg in Resources */,
 				289AA2CD188EEB170097AA5A /* TrackingLocation.png in Resources */,
 				2834364915DD5DC300B00FD5 /* donate.png in Resources */,
 				2834364A15DD5DC300B00FD5 /* reesjeffreys.png in Resources */,
+				28BC445018915A5800711A1A /* exercise@2x.png in Resources */,
+				28BC445E18915A5800711A1A /* noteBlankPicker.png in Resources */,
 				2834364C15DD5DC300B00FD5 /* appconfig_live.plist in Resources */,
+				28BC448218915A5800711A1A /* workRelated.png in Resources */,
 				2834364D15DD5DC300B00FD5 /* btn_slider_off.png in Resources */,
 				289AA2C5188EEB170097AA5A /* TrackingDotHalo.png in Resources */,
 				2834364E15DD5DC300B00FD5 /* btn_slider_off@2x.png in Resources */,
@@ -3318,38 +3611,51 @@
 				2834365015DD5DC300B00FD5 /* btn_slider_on@2x.png in Resources */,
 				2834365115DD5DC300B00FD5 /* btn_slider_thumb.png in Resources */,
 				2834365215DD5DC300B00FD5 /* btn_slider_thumb@2x.png in Resources */,
+				28BC446C18915A5800711A1A /* other@2x.png in Resources */,
 				2834365315DD5DC300B00FD5 /* btn_slider_thumb_pressed.png in Resources */,
 				2834365415DD5DC300B00FD5 /* btn_slider_thumb_pressed@2x.png in Resources */,
 				2834365515DD5DC300B00FD5 /* btn_slider_track.png in Resources */,
 				2834365615DD5DC300B00FD5 /* btn_slider_track@2x.png in Resources */,
+				28BC444E18915A5800711A1A /* exercise.png in Resources */,
 				2834365715DD5DC300B00FD5 /* btn_slider_track_pressed.png in Resources */,
 				289AA2C9188EEB170097AA5A /* TrackingHeading.png in Resources */,
+				28BC444A18915A5800711A1A /* errands.png in Resources */,
 				2834365815DD5DC300B00FD5 /* btn_slider_track_pressed@2x.png in Resources */,
 				2834365915DD5DC300B00FD5 /* POITypeCell.xib in Resources */,
 				2834365C15DD5DC300B00FD5 /* services_live.plist in Resources */,
+				28BC444418915A5800711A1A /* work-related.tif in Resources */,
+				28BC448618915A5800711A1A /* LCD-screen-288x126.png in Resources */,
 				2834365D15DD5DC300B00FD5 /* POICatLocationCell.xib in Resources */,
+				28BC446418915A5800711A1A /* noteIssueMapGlyph@2x.png in Resources */,
 				2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */,
 				2834366115DD5DC300B00FD5 /* Alert200x200.png in Resources */,
 				2880BE59188E822C006FF7E2 /* HCSSurveyView.xib in Resources */,
 				2834366215DD5DC300B00FD5 /* CSIcon_MapArrow_end.png in Resources */,
 				289AA2B9188EEB170097AA5A /* marker-blue-withletter.png in Resources */,
 				2834366315DD5DC300B00FD5 /* CSIcon_MapArrow_start.png in Resources */,
+				28BC446618915A5800711A1A /* noteIssuePicker.png in Resources */,
 				2834366415DD5DC300B00FD5 /* blueButton.png in Resources */,
+				28BC447E18915A5800711A1A /* tripStart.png in Resources */,
+				28BC447018915A5800711A1A /* school@2x.png in Resources */,
 				2834366515DD5DC300B00FD5 /* BUSegmentedControl_center_hi.png in Resources */,
 				2834366615DD5DC300B00FD5 /* BUSegmentedControl_center_lo.png in Resources */,
 				2834366715DD5DC300B00FD5 /* BUSegmentedControl_left_hi.png in Resources */,
 				2834366815DD5DC300B00FD5 /* BUSegmentedControl_left_lo.png in Resources */,
 				2834366915DD5DC300B00FD5 /* BUSegmentedControl_right_hi.png in Resources */,
+				28BC446818915A5800711A1A /* noteIssuePicker@2x.png in Resources */,
 				2834366A15DD5DC300B00FD5 /* BUSegmentedControl_right_lo.png in Resources */,
 				289AA2B3188EEB170097AA5A /* HeadingAngleSmall@2x.png in Resources */,
 				2834366B15DD5DC300B00FD5 /* UIIcon_cycle_lanes.png in Resources */,
 				2834366C15DD5DC300B00FD5 /* UIIcon_cycle_tracks.png in Resources */,
+				28BC446E18915A5800711A1A /* school.png in Resources */,
 				2834366D15DD5DC300B00FD5 /* UIIcon_footpaths.png in Resources */,
 				2834366E15DD5DC300B00FD5 /* UIIcon_minor_roads.png in Resources */,
 				2834366F15DD5DC300B00FD5 /* UIIcon_quiet_street.png in Resources */,
 				2834367015DD5DC300B00FD5 /* UIIcon_roads.png in Resources */,
 				2834367115DD5DC300B00FD5 /* UIIcon_tracks.png in Resources */,
+				28BC449018915A5800711A1A /* MapCoord.png in Resources */,
 				2834367415DD5DC300B00FD5 /* UIIcon_bear_left.png in Resources */,
+				28BC443418915A5800711A1A /* commute.tif in Resources */,
 				287868F91886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				2834367515DD5DC300B00FD5 /* UIIcon_bear_right.png in Resources */,
 				2834367615DD5DC300B00FD5 /* UIIcon_straight_on.png in Resources */,
@@ -3365,23 +3671,34 @@
 				2834368515DD5DC300B00FD5 /* CSTabBar_itinerary.png in Resources */,
 				2834368615DD5DC300B00FD5 /* CSTabBar_photomap_tb.png in Resources */,
 				2834368715DD5DC300B00FD5 /* CSTabBar_plan_route.png in Resources */,
+				28BC443E18915A5800711A1A /* school.tif in Resources */,
 				2834368815DD5DC300B00FD5 /* CSTabBar_settings.png in Resources */,
 				2818E0C3189048E10031AD43 /* TripDetailViewController.xib in Resources */,
+				28BC444218915A5800711A1A /* social.tif in Resources */,
 				2818E0C7189050570031AD43 /* HCSMapViewController.xib in Resources */,
+				28BC445A18915A5800711A1A /* noteAssetPicker.png in Resources */,
 				2834368A15DD5DC300B00FD5 /* UIButton_green_hi.png in Resources */,
 				2834368B15DD5DC300B00FD5 /* UIButton_green_lo.png in Resources */,
 				2834368C15DD5DC300B00FD5 /* UIButton_grey_hi.png in Resources */,
+				28BC448E18915A5800711A1A /* lcdScreen@2x.png in Resources */,
+				28BC447A18915A5800711A1A /* tripEnd.png in Resources */,
 				2834368D15DD5DC300B00FD5 /* UIButton_grey_lo.png in Resources */,
 				2880BE53188E8207006FF7E2 /* HCSTrackConfigView.xib in Resources */,
 				2834368E15DD5DC300B00FD5 /* UIButton_orange_hi.png in Resources */,
+				28BC445818915A5800711A1A /* noteAssetMapGlyph@2x.png in Resources */,
+				28BC444C18915A5800711A1A /* errands@2x.png in Resources */,
+				28BC448418915A5800711A1A /* workRelated@2x.png in Resources */,
 				2834368F15DD5DC300B00FD5 /* UIButton_orange_lo.png in Resources */,
+				28BC444618915A5800711A1A /* commute.png in Resources */,
 				2834369015DD5DC300B00FD5 /* UIButton_orangesmall_hi.png in Resources */,
 				2834369115DD5DC300B00FD5 /* UIButton_orangesmall_lo.png in Resources */,
 				2834369215DD5DC300B00FD5 /* UIButton_red_hi.png in Resources */,
 				2834369315DD5DC300B00FD5 /* UIButton_red_lo.png in Resources */,
+				28BC444018915A5800711A1A /* shopping.tif in Resources */,
 				2834369415DD5DC300B00FD5 /* UIButton_save_hi.png in Resources */,
 				2834369515DD5DC300B00FD5 /* UIButtonBarArrowLeft.png in Resources */,
 				2834369615DD5DC300B00FD5 /* UIButtonBarArrowRight.png in Resources */,
+				28BC447C18915A5800711A1A /* tripEnd@2x.png in Resources */,
 				2834369715DD5DC300B00FD5 /* UIButtonBarCameraSmall.png in Resources */,
 				2834369815DD5DC300B00FD5 /* UIButtonBarInfo.png in Resources */,
 				2834369915DD5DC300B00FD5 /* UIButtonBarRefresh.png in Resources */,
@@ -3396,23 +3713,29 @@
 				283436A515DD5DC300B00FD5 /* popoverArrowDown.png in Resources */,
 				283436A615DD5DC300B00FD5 /* popoverArrowDown@2x.png in Resources */,
 				283436A715DD5DC300B00FD5 /* popoverArrowDownSimple.png in Resources */,
+				28BC448A18915A5800711A1A /* lcd-screen@2x.png in Resources */,
 				283436A815DD5DC300B00FD5 /* popoverArrowLeft.png in Resources */,
 				283436A915DD5DC300B00FD5 /* popoverArrowLeft@2x.png in Resources */,
 				283436AA15DD5DC300B00FD5 /* popoverArrowLeftSimple.png in Resources */,
+				28BC449418915A5800711A1A /* photoFrame@2x.png in Resources */,
+				28BC444818915A5800711A1A /* commute@2x.png in Resources */,
 				289AA2CB188EEB170097AA5A /* TrackingHeading@2x.png in Resources */,
 				283436AB15DD5DC300B00FD5 /* popoverArrowRight.png in Resources */,
 				283436AC15DD5DC300B00FD5 /* popoverArrowRight@2x.png in Resources */,
 				283436AD15DD5DC300B00FD5 /* popoverArrowRightSimple.png in Resources */,
 				283436AE15DD5DC300B00FD5 /* popoverArrowUp.png in Resources */,
 				283436AF15DD5DC300B00FD5 /* popoverArrowUp@2x.png in Resources */,
+				28BC447218915A5800711A1A /* shopping.png in Resources */,
 				283436B015DD5DC300B00FD5 /* popoverArrowUpSimple.png in Resources */,
 				283436B115DD5DC300B00FD5 /* popoverBg.png in Resources */,
+				28BC443818915A5800711A1A /* errands.tif in Resources */,
 				283436B215DD5DC300B00FD5 /* popoverBg@2x.png in Resources */,
 				283436B315DD5DC300B00FD5 /* popoverBgSimple.png in Resources */,
 				283436B415DD5DC300B00FD5 /* UITextViewAccessoryView.xib in Resources */,
 				283436B915DD5DC300B00FD5 /* MapLocationSearchCell.xib in Resources */,
 				283436BA15DD5DC300B00FD5 /* UIIcon_userphotomap.png in Resources */,
 				283436BB15DD5DC300B00FD5 /* UIIcon_userphotomap@2x.png in Resources */,
+				28BC446218915A5800711A1A /* noteIssueMapGlyph.png in Resources */,
 				283436BC15DD5DC300B00FD5 /* Icon.png in Resources */,
 				283436BD15DD5DC300B00FD5 /* Icon@2x.png in Resources */,
 				283436BE15DD5DC300B00FD5 /* PhotoWizardCategoryMenuView.xib in Resources */,
@@ -3426,6 +3749,8 @@
 				28B76F3815E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
 				28B76F3D15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
 				28B76F3F15E4DA02006B01D0 /* CSBarButton_location.png in Resources */,
+				28BC448818915A5800711A1A /* lcd-screen.png in Resources */,
+				28BC445C18915A5800711A1A /* noteAssetPicker@2x.png in Resources */,
 				28B76F4115E4DA02006B01D0 /* CSBarButton_search.png in Resources */,
 				28B76F4415E4DB3B006B01D0 /* CSBarButton_search@2x.png in Resources */,
 				289AA2BD188EEB170097AA5A /* marker-red-withletter.png in Resources */,
@@ -3433,18 +3758,23 @@
 				289AA2C3188EEB170097AA5A /* TrackingDot@2x.png in Resources */,
 				289AA2C1188EEB170097AA5A /* TrackingDot.png in Resources */,
 				28B76F4A15E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */,
+				28BC448C18915A5800711A1A /* lcdScreen.png in Resources */,
 				28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */,
 				2818E0C0189048D90031AD43 /* NoteViewController.xib in Resources */,
 				28535DC215E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */,
 				28535DC415E50FCD0092FC16 /* HUD_icon_exclaim.png in Resources */,
+				28BC446018915A5800711A1A /* noteBlankPicker@2x.png in Resources */,
 				28535DC615E50FCD0092FC16 /* HUD_icon_exclaim@2x.png in Resources */,
 				28535DC815E50FCD0092FC16 /* HUD_icon_lock.png in Resources */,
 				28535DCA15E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
 				28535DFB15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
+				28BC443C18915A5800711A1A /* other.tif in Resources */,
 				2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
 				289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
+				28BC445418915A5800711A1A /* failedUpload@2x.png in Resources */,
 				28373E2316481A0C00F5E356 /* WayPointCell.xib in Resources */,
+				28BC449218915A5800711A1A /* photoFrame.png in Resources */,
 				2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
@@ -3460,12 +3790,14 @@
 				2868D243166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D245166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
+				28BC447618915A5800711A1A /* social.png in Resources */,
 				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 				2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */,
 				28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
 				289AA2BF188EEB170097AA5A /* marker-red.png in Resources */,
+				28BC443A18915A5800711A1A /* exercise.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
