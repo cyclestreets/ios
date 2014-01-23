@@ -61,6 +61,7 @@
 /* Returns ALL objects for an entity ordered by a field. */
 - (NSArray *)allForEntity:(NSString *)entityName orderBy:(NSString *)key ascending:(BOOL)ascending error:(NSError **)error;
 
+
 // TODO: Changes these to -EntityName and make new ones for -EntityClass
 
 

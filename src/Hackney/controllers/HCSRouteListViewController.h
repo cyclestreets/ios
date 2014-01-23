@@ -8,6 +8,6 @@
 
 #import "SuperViewController.h"
 
-@interface HCSRouteListViewController : SuperViewController
+@interface HCSRouteListViewController : SuperViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

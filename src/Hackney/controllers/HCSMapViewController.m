@@ -69,9 +69,10 @@
 @property (nonatomic, strong) UIBarButtonItem						*flipButton;
 @property (nonatomic, strong) UIView								*infoView;
 
+@property (nonatomic,weak) IBOutlet UILabel							*routeInfoLabel;
+
+
 @property (nonatomic,weak) IBOutlet RMMapView						*mapView;
-
-
 @property (nonatomic,weak) IBOutlet RouteLineView					*routeLineView;
 
 @property (nonatomic,strong) RouteVO								*currentRoute;
@@ -183,17 +184,15 @@
         
 		double mph = ( [_trip.distance doubleValue] / 1609.344 ) / ( [_trip.duration doubleValue] / 3600. );
 		
-		self.navigationItem.prompt = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
+		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
  									  [inputFormatter stringFromDate:outputDate],
 									  [dateFormatter stringFromDate:[_trip start]]];
         
-		self.title = [NSString stringWithFormat:@"%.1f mi ~ %.1f mph",
-					  [_trip.distance doubleValue] / 1609.344,
-					  mph ];
+		self.title = [NSString stringWithFormat:@"%.1f mi ~ %.1f mph", [_trip.distance doubleValue] / 1609.344, mph ];
 		
 		
 		// only add info view for trips with non-null notes
-		if ( ![_trip.notes isEqualToString: @""] && _trip.notes != NULL)
+		if ( ![_trip.notes isEqualToString:EMPTYSTRING] && _trip.notes != nil)
 		{
 			_doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(infoAction:)];
 			

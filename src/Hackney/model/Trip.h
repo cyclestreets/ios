@@ -32,4 +32,12 @@
 - (void)addCoords:(NSSet *)values;
 - (void)removeCoords:(NSSet *)values;
 
+
+// utility
+
+-(NSString*)durationString;
+-(NSString*)caloriesUsedString;
+-(NSString*)co2SavedString;
+-(NSString*)longdateString;
+
 @end

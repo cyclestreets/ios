@@ -178,6 +178,10 @@
 		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
 		2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
+		282EAB8C1891911B001A736D /* HCSSavedTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282EAB8B1891911B001A736D /* HCSSavedTrackCell.xib */; };
+		282EAB8D1891911B001A736D /* HCSSavedTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282EAB8B1891911B001A736D /* HCSSavedTrackCell.xib */; };
+		282EAB9018919144001A736D /* HCSSavedTrackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282EAB8F18919144001A736D /* HCSSavedTrackCellView.m */; };
+		282EAB9118919144001A736D /* HCSSavedTrackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282EAB8F18919144001A736D /* HCSSavedTrackCellView.m */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
 		2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
@@ -1187,6 +1191,9 @@
 		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
 		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
 		2825871E17785867001E3DA1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		282EAB8B1891911B001A736D /* HCSSavedTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSSavedTrackCell.xib; path = hackney/HCSSavedTrackCell.xib; sourceTree = "<group>"; };
+		282EAB8E18919144001A736D /* HCSSavedTrackCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSSavedTrackCellView.h; sourceTree = "<group>"; };
+		282EAB8F18919144001A736D /* HCSSavedTrackCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSSavedTrackCellView.m; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
 		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
@@ -1930,6 +1937,7 @@
 		280E9319140984F300C7AC75 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				282EAB88189190F6001A736D /* hackney */,
 				2818C79F1458069D0077F529 /* RouteCell.xib */,
 				280E931A140984F300C7AC75 /* FavouritesCell.xib */,
 				280E931B140984F300C7AC75 /* ItineraryCell.xib */,
@@ -2123,6 +2131,14 @@
 			path = BlocksKit;
 			sourceTree = "<group>";
 		};
+		282EAB88189190F6001A736D /* hackney */ = {
+			isa = PBXGroup;
+			children = (
+				282EAB8B1891911B001A736D /* HCSSavedTrackCell.xib */,
+			);
+			name = hackney;
+			sourceTree = "<group>";
+		};
 		2846081D1649226300CBF96A /* ViewDeck */ = {
 			isa = PBXGroup;
 			children = (
@@ -2258,6 +2274,8 @@
 		287050D9188FC432004CD922 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				282EAB8E18919144001A736D /* HCSSavedTrackCellView.h */,
+				282EAB8F18919144001A736D /* HCSSavedTrackCellView.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -3398,6 +3416,7 @@
 				28187AC914FCFF4C00A38A17 /* UIButton_green_lo.png in Resources */,
 				28BC448118915A5800711A1A /* workRelated.png in Resources */,
 				289AA2B2188EEB170097AA5A /* HeadingAngleSmall@2x.png in Resources */,
+				282EAB8C1891911B001A736D /* HCSSavedTrackCell.xib in Resources */,
 				28187ACA14FCFF4C00A38A17 /* UIButton_grey_hi.png in Resources */,
 				28187ACB14FCFF4C00A38A17 /* UIButton_grey_lo.png in Resources */,
 				28187ACC14FCFF4C00A38A17 /* UIButton_orange_hi.png in Resources */,
@@ -3627,6 +3646,7 @@
 				28BC448618915A5800711A1A /* LCD-screen-288x126.png in Resources */,
 				2834365D15DD5DC300B00FD5 /* POICatLocationCell.xib in Resources */,
 				28BC446418915A5800711A1A /* noteIssueMapGlyph@2x.png in Resources */,
+				282EAB8D1891911B001A736D /* HCSSavedTrackCell.xib in Resources */,
 				2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */,
 				2834366115DD5DC300B00FD5 /* Alert200x200.png in Resources */,
 				2880BE59188E822C006FF7E2 /* HCSSurveyView.xib in Resources */,
@@ -3888,6 +3908,7 @@
 				28AD643A131FB6C8008527FC /* GlossyGradientView.m in Sources */,
 				28AD643B131FB6C8008527FC /* GradiantRectView.m in Sources */,
 				28AD643C131FB6C8008527FC /* GradientView.m in Sources */,
+				282EAB9018919144001A736D /* HCSSavedTrackCellView.m in Sources */,
 				28AD643D131FB6C8008527FC /* HalfRoundedRectView.m in Sources */,
 				28AD643F131FB6C8008527FC /* IncrementalStepControl.m in Sources */,
 				28AD6442131FB6C8008527FC /* MultiLabelLine.m in Sources */,
@@ -4076,6 +4097,7 @@
 				283436EF15DD5DC300B00FD5 /* GlossyGradientView.m in Sources */,
 				283436F015DD5DC300B00FD5 /* GradiantRectView.m in Sources */,
 				283436F115DD5DC300B00FD5 /* GradientView.m in Sources */,
+				282EAB9118919144001A736D /* HCSSavedTrackCellView.m in Sources */,
 				283436F215DD5DC300B00FD5 /* HalfRoundedRectView.m in Sources */,
 				283436F315DD5DC300B00FD5 /* IncrementalStepControl.m in Sources */,
 				283436F415DD5DC300B00FD5 /* MultiLabelLine.m in Sources */,
