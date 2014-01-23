@@ -185,7 +185,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	if(locationManager==nil){
 			self.locationManager = [[CLLocationManager alloc] init];
-			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+			locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 			locationManager.distanceFilter =kCLDistanceFilterNone;
             locationManager.delegate=self;
     }
@@ -333,7 +333,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			
 			didFindDeviceLocation=YES;
 			[self UserLocationWasUpdated];
-			[self stopUpdatingLocationForSubscriber:SYSTEM];
+			if (locationState==kConnectLocationStateSingle)
+				[self stopUpdatingLocationForSubscriber:SYSTEM];
 			return;
 		}
 		
@@ -354,8 +355,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
 			
-			
-            
 			self.bestEffortAtLocation = newLocation;
 			didFindDeviceLocation=YES;
 			

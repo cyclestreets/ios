@@ -146,18 +146,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	self.lastLocation=_currentLocation;
 	self.currentLocation=location;
 	
-	[CycleStreets zoomMapView:_mapView toLocation:_currentLocation];
 	
 	RMUserLocation *userLocation=_mapView.userLocation;
-	
-	//[self displayLocationIndicator:YES];
 	
     
 	if ( !_didUpdateUserLocation )
 	{
-		NSLog(@"zooming to current user location");
-		//MKCoordinateRegion region = { newLocation.coordinate, { 0.0078, 0.0068 } };
-		//[mapView setRegion:region animated:YES];
+		
+		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
 		
 		_didUpdateUserLocation = YES;
 	}
@@ -282,6 +278,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 -(void)createNonPersistentUI{
     
 	
+	[UserLocationManager sharedInstance].locationState=kConnectLocationStateTracking;
 	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
     
     
