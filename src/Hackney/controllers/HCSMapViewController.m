@@ -54,6 +54,8 @@
 #import "RouteVO.h"
 #import "SegmentVO.h"
 
+#import "HudManager.h"
+
 #define kFudgeFactor	1.5
 #define kInfoViewAlpha	0.8
 #define kMinLatDelta	0.0039
@@ -152,11 +154,11 @@
 }
 
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	
     self.navigationController.navigationBarHidden = NO;
     
 	if (_trip )
@@ -189,7 +191,6 @@
 					  [_trip.distance doubleValue] / 1609.344,
 					  mph ];
 		
-		//self.title = trip.purpose;
 		
 		// only add info view for trips with non-null notes
 		if ( ![_trip.notes isEqualToString: @""] && _trip.notes != NULL)
@@ -205,14 +206,7 @@
 			[self initInfoView];
 		}
         
-		// sort coords by recorded date
-		/*
-         NSSortDescriptor *dateDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"recorded"
-         ascending:YES] autorelease];
-         NSArray *sortDescriptors = [NSArray arrayWithObjects:dateDescriptor, nil];
-         NSArray *sortedCoords = [[trip.coords allObjects] sortedArrayUsingDescriptors:sortDescriptors];
-         */
-		
+				
 		// filter coords by hAccuracy
 		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 100.0"];
 		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
@@ -322,28 +316,11 @@
 		
 		// if we had at least 1 coord
 		if ( count ){
-						
-			// add a small fudge factor to ensure
-			// North-most pins are visible
-			double latDelta = kFudgeFactor * ( [maxLat doubleValue] - [minLat doubleValue] );
-			if ( latDelta < kMinLatDelta )
-				latDelta = kMinLatDelta;
 			
-			double lonDelta = [maxLon doubleValue] - [minLon doubleValue];
-			if ( lonDelta < kMinLonDelta )
-				lonDelta = kMinLonDelta;
+			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
+			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
+			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:YES];
 			
-			SegmentVO *firstSegment=[_currentRoute.segments firstObject];
-			SegmentVO *lastSegment=[_currentRoute.segments lastObject];
-			
-			//TODO: this should be standard ne/sw region calculation used in itinerary etc.
-			
-            MKCoordinateRegion region = { { (firstsegment.segmentStart.latitude + lastSegment.segmentStart.latitude) / 2,
-                (routePath[0].longitude + routePath[numPoints-1].longitude) / 2 },
-                { latDelta,
-                    lonDelta } };
-			//TODO: should be center coord and zoom combo;
-			//[mapView setRegion:region animated:NO];
 		}else{
 			[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
 		}
@@ -352,9 +329,8 @@
 		[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
 	}
     
-    LoadingView *loading = (LoadingView*)[self.parentViewController.view viewWithTag:909];
-	//NSLog(@"loading: %@", loading);
-	[loading performSelector:@selector(removeView) withObject:nil afterDelay:0.5];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
+	
 }
 
 
@@ -432,9 +408,24 @@
 UIImage *shrinkImage(UIImage *original, CGSize size) {
     CGFloat scale = [UIScreen mainScreen].scale;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+	
+	CGImageRef imageRef = CGImageCreateCopy([original CGImage]);
+	CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+	
+	if (CGColorSpaceGetNumberOfComponents(colorSpace) == 3) {
+        int alpha = (bitmapInfo & kCGBitmapAlphaInfoMask);
+        if (alpha == kCGImageAlphaNone) {
+            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
+            bitmapInfo |= kCGImageAlphaNoneSkipFirst;
+        } else if (!(alpha == kCGImageAlphaNoneSkipFirst || alpha == kCGImageAlphaNoneSkipLast)) {
+            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
+            bitmapInfo |= kCGImageAlphaPremultipliedFirst;
+        }
+    }
+	
     
     CGContextRef context = CGBitmapContextCreate(NULL, size.width * scale,
-                                                 size.height * scale, 8, 0, colorSpace, kCGImageAlphaPremultipliedFirst);
+                                                 size.height * scale, 8, 0, colorSpace, bitmapInfo);
     CGContextDrawImage(context,
                        CGRectMake(0, 0, size.width * scale, size.height * scale),
                        original.CGImage);
@@ -551,20 +542,16 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
 		
 		if ( [(MapCoord*)annotation first] ){
 		
-			RMMapLayer *pinView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-						
-			annotationView = pinView;
+			annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
 			
 		} else if ( [(MapCoord*)annotation last] ){
 			
-			RMMapLayer *pinView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
+			annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
 			
-			annotationView = pinView;
 		}else{
 			
-			RMMapLayer *pinView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
+			annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
 			
-			annotationView = pinView;
 			
 		}
 		
@@ -572,39 +559,16 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
     } else {
         //handle 'normal' pins
         
-        if([annotation.title isEqual:@"Start"]){
-            MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"tripPin"];
-            annView.image = [UIImage imageNamed:@"tripStart.png"];
-            annView.centerOffset = CGPointMake(-(annView.image.size.width/4),(annView.image.size.height/3));
-            return annView;
-        }else if ([annotation.title isEqual:@"End"]){
-            MKPinAnnotationView *annView=[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"tripPin"];
-            annView.image = [UIImage imageNamed:@"tripEnd.png"];
-            annView.centerOffset = CGPointMake(-(annView.image.size.width/4),(annView.image.size.height/3));
-            return annView;
-        }
+        RMMapLayer *annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
+		
+		return annotationView;
     }
 	
     return nil;
 }
 
-- (MKOverlayView*)mapView:(MKMapView*)theMapView viewForOverlay:(id <MKOverlay>)overlay
-{
-    MKPolylineView* lineView = [[MKPolylineView alloc] initWithPolyline:self.routeLine];
-    lineView.strokeColor = [UIColor blueColor];
-    lineView.lineWidth = 5;
-    return lineView;
-}
 
-- (void)dealloc {
-    self.trip = nil;
-    self.doneButton = nil;
-    self.flipButton = nil;
-    self.infoView = nil;
-    self.routeLine = nil;
-    self.delegate = nil;
-    
-}
+
 
 
 @end
