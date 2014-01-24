@@ -10,6 +10,7 @@
 #import "Coord.h"
 #import "User.h"
 
+#import <CoreLocation/CoreLocation.h>
 
 @implementation Trip
 
@@ -79,9 +80,11 @@
 	
 	
 	return [NSString stringWithFormat:@"%@ at %@", [dateFormatter stringFromDate:self.start], [timeFormatter stringFromDate:self.start]];
-	
-	
-	
+
 }
+
+
+
+
 
 @end

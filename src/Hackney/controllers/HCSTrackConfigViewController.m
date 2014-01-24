@@ -34,8 +34,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 // hackney
-@property (nonatomic, strong) TripManager							*tripManager;
-
+@property (nonatomic, strong) TripManager								*tripManager;
+@property (nonatomic,strong)  Trip										*currentTrip;
 
 
 @property (nonatomic, strong) IBOutlet RMMapView						* mapView;//map of current area
@@ -168,6 +168,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	if ( _isRecordingTrack )
 	{
 		// add to CoreData store
+		self.currentTrip=[TripManager sharedInstance].currentRecordingTrip;
 		CLLocationDistance distance = [_tripManager addCoord:_currentLocation];
 		_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
 	}
@@ -237,6 +238,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	self.tripManager=[TripManager sharedInstance];
 	_tripManager.parent          = self;
+	
+	self.currentTrip=[[TripManager sharedInstance] createTrip];
 	
 	[self hasUserInfoBeenSaved];
 	
@@ -460,15 +463,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
     NSLog(@"Save trip");
 }
 
-- (void)displayUploadedTripMap
-{
-    Trip *trip = _tripManager.trip;
+- (void)displayUploadedTripMap{
+	
     [self resetRecordingInProgress];
     
     // load map view of saved trip
-    HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:trip];
+    HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:_currentTrip];
     [[self navigationController] pushViewController:mvc animated:YES];
-    NSLog(@"displayUploadedTripMap");
+   
     
 }
 
@@ -627,14 +629,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
-#pragma mark Manager methods
 
-- (void)initTripManager:(TripManager*)manager
-{
-	manager.dirty			= YES;
-	self.tripManager		= manager;
-    manager.parent          = self;
-}
 
 
 //- (void)initNoteManager:(NoteManager*)manager

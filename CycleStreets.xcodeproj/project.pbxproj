@@ -756,6 +756,8 @@
 		28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */; };
 		28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
+		28B016161891B44C00C2414C /* UIAlertView+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B016151891B44C00C2414C /* UIAlertView+BlocksKit.m */; };
+		28B016171891B44C00C2414C /* UIAlertView+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B016151891B44C00C2414C /* UIAlertView+BlocksKit.m */; };
 		28B038741521A17B00EE23CF /* RoutePlanMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B038731521A17B00EE23CF /* RoutePlanMenuViewController.m */; };
 		28B484F715261FAC00E406E1 /* popoverArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B484DF15261FAC00E406E1 /* popoverArrowDown.png */; };
 		28B484F815261FAC00E406E1 /* popoverArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B484E015261FAC00E406E1 /* popoverArrowDown@2x.png */; };
@@ -1497,6 +1499,8 @@
 		28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_lo@2x.png"; sourceTree = "<group>"; };
 		28AE590315E503270034268C /* MapMarkerTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMarkerTouchView.h; sourceTree = "<group>"; };
 		28AE590415E503270034268C /* MapMarkerTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMarkerTouchView.m; sourceTree = "<group>"; };
+		28B016141891B44C00C2414C /* UIAlertView+BlocksKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+BlocksKit.h"; sourceTree = "<group>"; };
+		28B016151891B44C00C2414C /* UIAlertView+BlocksKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+BlocksKit.m"; sourceTree = "<group>"; };
 		28B038721521A17B00EE23CF /* RoutePlanMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutePlanMenuViewController.h; sourceTree = "<group>"; };
 		28B038731521A17B00EE23CF /* RoutePlanMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutePlanMenuViewController.m; sourceTree = "<group>"; };
 		28B484D615261EC800E406E1 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -2122,6 +2126,8 @@
 		2818E0B1189046370031AD43 /* BlocksKit */ = {
 			isa = PBXGroup;
 			children = (
+				28B016141891B44C00C2414C /* UIAlertView+BlocksKit.h */,
+				28B016151891B44C00C2414C /* UIAlertView+BlocksKit.m */,
 				2818E0B7189048720031AD43 /* NSObject+AssociatedObjects.h */,
 				2818E0B8189048720031AD43 /* NSObject+AssociatedObjects.m */,
 				2818E0B2189046370031AD43 /* BKGlobals.h */,
@@ -3912,6 +3918,7 @@
 				28AD643D131FB6C8008527FC /* HalfRoundedRectView.m in Sources */,
 				28AD643F131FB6C8008527FC /* IncrementalStepControl.m in Sources */,
 				28AD6442131FB6C8008527FC /* MultiLabelLine.m in Sources */,
+				28B016161891B44C00C2414C /* UIAlertView+BlocksKit.m in Sources */,
 				28AD6443131FB6C8008527FC /* RadioButtonGroup.m in Sources */,
 				28AD6454131FB6C8008527FC /* RoundedRectView.m in Sources */,
 				28AD6455131FB6C8008527FC /* ShadowedTableView.m in Sources */,
@@ -4101,6 +4108,7 @@
 				283436F215DD5DC300B00FD5 /* HalfRoundedRectView.m in Sources */,
 				283436F315DD5DC300B00FD5 /* IncrementalStepControl.m in Sources */,
 				283436F415DD5DC300B00FD5 /* MultiLabelLine.m in Sources */,
+				28B016171891B44C00C2414C /* UIAlertView+BlocksKit.m in Sources */,
 				283436F515DD5DC300B00FD5 /* RadioButtonGroup.m in Sources */,
 				283436F615DD5DC300B00FD5 /* RoundedRectView.m in Sources */,
 				283436F715DD5DC300B00FD5 /* ShadowedTableView.m in Sources */,

@@ -50,59 +50,45 @@
 
 
 @interface TripManager : NSObject
-<ActivityIndicatorDelegate, 
-TripPurposeDelegate, 
-UIAlertViewDelegate, 
-UITextViewDelegate>
+<ActivityIndicatorDelegate, TripPurposeDelegate,UIAlertViewDelegate,UITextViewDelegate>
 {
-	UIAlertView *saving;
-	UIAlertView *tripNotes;
-	UITextView	*tripNotesText;
-
-	BOOL dirty;
-	Trip *trip;
-	CLLocationDistance distance;
-	NSInteger purposeIndex;
 	
-	NSMutableArray *coords;
-    NSManagedObjectContext *managedObjectContext;
-
-	NSMutableData *receivedData;
-	
-	NSMutableArray *unSavedTrips;
-	NSMutableArray *unSyncedTrips;
-	NSMutableArray *zeroDistanceTrips;
 }
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 
-@property (nonatomic, retain) id <ActivityIndicatorDelegate> activityDelegate;
-@property (nonatomic, retain) id <UIAlertViewDelegate> alertDelegate;
+@property (nonatomic,strong)  Trip								*currentRecordingTrip;
+@property (nonatomic,strong)  Trip								*selectedTrip;
 
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+// deprecate
+@property (nonatomic, retain) id <ActivityIndicatorDelegate>	activityDelegate;
+// deprecate
+@property (nonatomic, retain) id <UIAlertViewDelegate>			alertDelegate;
+// deprecate
+@property (nonatomic, retain) UIActivityIndicatorView			*activityIndicator;
+// deprecate
 @property (nonatomic, retain) LoadingView *uploadingView;
-
+// deprecate
 @property (nonatomic, retain) UIViewController *parent; 
 
-@property (nonatomic, retain) UIAlertView *saving;
-@property (nonatomic, retain) UIAlertView *tripNotes;
-@property (nonatomic, retain) UITextView *tripNotesText;
+// deprecate
+@property (nonatomic, retain) UIAlertView						*saving;
+// deprecate
+@property (nonatomic, retain) UIAlertView						*tripNotes;
+// deprecate
+@property (nonatomic, retain) UITextView						*tripNotesText;
 
 @property (assign) BOOL dirty;
-@property (nonatomic, retain) Trip *trip;
 
-@property (nonatomic, retain) NSMutableArray *coords;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
+// deprecate
 @property (nonatomic, retain) NSMutableData *receivedData;
 
 @property (nonatomic, assign) BOOL isRecording;
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
-- (id)initWithTrip:(Trip*)trip;
+
 - (BOOL)loadTrip:(Trip*)trip;
 
-- (void)createTrip;
+- (Trip*)createTrip;
 - (void)createTrip:(unsigned int)index;
 
 - (CLLocationDistance)addCoord:(CLLocation*)location;
@@ -118,7 +104,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 - (int)countUnSyncedTrips;
 - (int)countZeroDistanceTrips;
 
-- (BOOL)loadMostRecetUnSavedTrip;
+- (void)loadMostRecetUnSavedTrip;
 - (int)recalculateTripDistances;
 - (CLLocationDistance)calculateTripDistance:(Trip*)_trip;
 

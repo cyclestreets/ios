@@ -12,8 +12,11 @@
 #import "UIView+Additions.h"
 #import "AppConstants.h"
 #import "GenericConstants.h"
+#import "UIAlertView+BlocksKit.h"
+#import "HCSMapViewController.h"
 
 #import "constants.h"
+#import "Trip.h"
 
 static float const kAccessoryViewX=282.0;
 static float const kAccessoryViewY=24.0;
@@ -29,8 +32,15 @@ static int const kTagImage=	3;
 
 @interface HCSRouteListViewController ()
 
+// data
 @property (nonatomic,strong) NSMutableArray					*dataProvider;
+@property (nonatomic,strong)  Trip							*selectedTrip;
+
+// ui
 @property (nonatomic,weak) IBOutlet UITableView				*tableView;
+
+
+// state
 
 
 @end
@@ -104,38 +114,36 @@ static int const kTagImage=	3;
 -(void)createPersistentUI{
 	
 	
-	
-	if ( [[TripManager sharedInstance] countZeroDistanceTrips] )
-	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:kZeroDistanceTitle
-														message:kZeroDistanceMessage
-													   delegate:self
-											  cancelButtonTitle:@"Cancel"
-											  otherButtonTitles:@"Recalculate", nil];
-		alert.tag = 202;
+	if ( [[TripManager sharedInstance] countZeroDistanceTrips] ){
+		
+		UIAlertView *alert=[UIAlertView alertWithTitle:kZeroDistanceTitle message:kZeroDistanceMessage];
+		[alert setCancelButtonWithTitle:@"Cancel"	handler:nil];
+		[alert addButtonWithTitle:@"Recalculate" handler:^{
+			//TODO: we will not have thsi stupid thing, tripmamanger need a new method that takes a trip [tripManager recalculateTripDistances];
+		}];
 		[alert show];
-	}
-	
-	// check for countUnSyncedTrips
-	else if ( [[TripManager sharedInstance] countUnSyncedTrips] )
-	{
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:kUnsyncedTitle
-														message:kUnsyncedMessage
-													   delegate:nil
-											  cancelButtonTitle:nil
-											  otherButtonTitles:@"OK", nil];
-		alert.tag = 303;
+		
+		
+	}else if ( [[TripManager sharedInstance] countUnSyncedTrips] ){
+		
+		UIAlertView *alert=[UIAlertView alertWithTitle:kUnsyncedTitle message:kUnsyncedMessage];
+		[alert addButtonWithTitle:@"OK" handler:^{
+			[self displaySelectedTripMap];
+		}];
 		[alert show];
 	}
 	else
 		NSLog(@"no zero distance or unsynced trips found");
 	
 	// no trip selection by default
-	selectedTrip = nil;
+	self.selectedTrip = nil;
     
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+	#pragma message  ("What does this do?")
+    /*
+	 pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+	 */
     
 }
 
@@ -176,44 +184,41 @@ static int const kTagImage=	3;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-	/*
-    // Navigation logic may go here. Create and push another view controller.
-	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+
 	
-	// identify trip by row
-	//NSLog(@"didSelectRow: %d", indexPath.row);
-	selectedTrip = (Trip *)[trips objectAtIndex:indexPath.row];
-	//NSLog(@"%@", selectedTrip);
+	self.selectedTrip = (Trip *)[_dataProvider objectAtIndex:indexPath.row];
 	
 	// check for recordingInProgress
-	Trip *recordingInProgress = [delegate getRecordingInProgress];
+	Trip *currentRecordingTrip = [TripManager sharedInstance].currentRecordingTrip;
 	
 	// if trip not yet uploaded => prompt to re-upload
-	if ( recordingInProgress != selectedTrip )
-	{
-		if ( !selectedTrip.uploaded )
-		{
-			// init new TripManager instance with selected trip
-			// release previously set tripManager
-			if ( tripManager )
-				[tripManager release];
+	if ( currentRecordingTrip != _selectedTrip ){
+		
+		if ( !_selectedTrip.uploaded ){
 			
-			tripManager = [[TripManager alloc] initWithTrip:selectedTrip];
-			//tripManager.activityDelegate = self;
-			tripManager.alertDelegate = self;
-			tripManager.parent = self;
-			// prompt to upload
-			[self promptToConfirmPurpose];
+			[TripManager sharedInstance].selectedTrip=_selectedTrip;
+			//[self promptToConfirmPurpose];
+		}else{
+			[self displaySelectedTripMap];
 		}
 		
-		// else => goto map view
-		else
-			[self displaySelectedTripMap];
+			
 	}
 
-    */
 }
 
+
+
+
+- (void)displaySelectedTripMap
+{
+	
+	if ( _selectedTrip ){
+		HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:_selectedTrip];
+		[[self navigationController] pushViewController:mvc animated:YES];
+	}
+	
+}
 
 
 //

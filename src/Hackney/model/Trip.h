@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "NSManagedObject+Boost.h"
 
 @class Coord, User;
 
@@ -39,5 +40,6 @@
 -(NSString*)caloriesUsedString;
 -(NSString*)co2SavedString;
 -(NSString*)longdateString;
+
 
 @end
