@@ -103,13 +103,16 @@ static NSInteger MAX_DIST = 10;
 // should be able to do multi plan drawing in layers
 - (void)drawRect:(CGRect)rect {
 	
-	/*
+	
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	
 	CGContextSetLineWidth( ctx, 4.0);
 	
 	float dashes[] = { 4, 4 };
     float normal[]={1};
+	
+	CGColorRef dashColor=_dashedlineColor.CGColor;
+	CGColorRef solidColor=_lineColor.CGColor;
     
 	NSArray *points = [pointListProvider pointList];
 	int pointCount=points.count;
@@ -123,10 +126,10 @@ static NSInteger MAX_DIST = 10;
             prevpoint=points[i-1];
             
             if(point.isWalking==YES){
-                CGContextSetStrokeColorWithColor(ctx, _dashedlineColor.CGColor);
+                CGContextSetStrokeColorWithColor(ctx, dashColor);
                 CGContextSetLineDash(ctx, 0, dashes, 1);
             }else{
-                CGContextSetStrokeColorWithColor(ctx, _lineColor.CGColor);
+                CGContextSetStrokeColorWithColor(ctx, solidColor);
                 CGContextSetLineDash(ctx,0,normal,0);
             }
             
@@ -143,10 +146,9 @@ static NSInteger MAX_DIST = 10;
         
     }
 	
-	 */
 	
 	
-	
+	/*
 	 CGContextRef ctx = UIGraphicsGetCurrentContext();
 	 
 	 CGContextSetLineWidth( ctx, 4.0);
@@ -165,7 +167,7 @@ static NSInteger MAX_DIST = 10;
 	 }
 	 
 	 CGContextStrokePath(ctx);
-	 
+	 */
 	
 }
 
