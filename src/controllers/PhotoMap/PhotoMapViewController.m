@@ -271,12 +271,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	self.photoMarkers = [[NSMutableArray alloc] init];
 	
-	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,self.view.height)];
-	_gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
-	_gpsLocationView.visible=NO;
-	_gpsLocationView.alpha=0;
-	[_gpsLocationView setLocationProvider:self];
-	
 	//get the map attribution 
 	self.attributionLabel.text = [CycleStreets mapAttribution];
 	
@@ -285,6 +279,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	[ButtonUtilities styleIBButton:_introButton type:@"green" text:@"OK"];
 	
+	[self.introView removeFromSuperview];
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
 	NSString *experienceLevel = [misc objectForKey:@"experienced"];
 	if (experienceLevel != nil) {
@@ -430,7 +425,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	//[self displayLocationIndicator:NO];
 	
-	[self requestPhotos];
+	//[self requestPhotos];
 	
 }
 
@@ -449,7 +444,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
  ***********************************************/
 //
 
-// location found or we stopped it
+// called when showsUserLocation is set to NO
 - (void)mapViewDidStopLocatingUser:(RMMapView *)mapView{
 	
 	
@@ -461,7 +456,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	
 	
-	[self requestPhotos];
+	//[self requestPhotos];
 	
 }
 
@@ -481,9 +476,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	if(_mapView.userLocationVisible==NO){
 		
-		_mapView.showsUserLocation=!_mapView.showsUserLocation;
-	
 		if(_mapView.showsUserLocation==YES){
+			
+			_mapView.showsUserLocation=NO;
+			_mapView.showsUserLocation=YES;
+			
 			_gpslocateButton.style = UIBarButtonItemStyleDone;
 		}else{
 			_gpslocateButton.style = UIBarButtonItemStylePlain;

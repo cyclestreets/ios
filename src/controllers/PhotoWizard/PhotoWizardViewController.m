@@ -298,7 +298,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[_pageScrollView addSubview:_pageContainer];
 	 
 	_pageScrollView.pagingEnabled=YES;
-	_pageScrollView.backgroundColor=UIColorFromRGB(0xDBD8D3);
+	_pageScrollView.backgroundColor=UIColorFromRGB(0xECE9E8);
 	_pageScrollView.delegate=self;
 	_pageControl.hidesForSinglePage=YES;
     _pageControl.numberOfPages=1;
