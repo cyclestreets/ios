@@ -14,6 +14,7 @@
 #import "GenericConstants.h"
 #import "UIAlertView+BlocksKit.h"
 #import "HCSMapViewController.h"
+#import "HCSSavedTrackCellView.h"
 
 #import "constants.h"
 #import "Trip.h"
@@ -30,7 +31,7 @@ static int const kTagTitle=	1;
 static int const kTagDetail=	2;
 static int const kTagImage=	3;
 
-@interface HCSRouteListViewController ()
+@interface HCSRouteListViewController ()<UIActionSheetDelegate>
 
 // data
 @property (nonatomic,strong) NSMutableArray					*dataProvider;
@@ -113,6 +114,8 @@ static int const kTagImage=	3;
 
 -(void)createPersistentUI{
 	
+	[_tableView registerNib:[HCSSavedTrackCellView nib] forCellReuseIdentifier:[HCSSavedTrackCellView cellIdentifier]];
+	
 	
 	if ( [[TripManager sharedInstance] countZeroDistanceTrips] ){
 		
@@ -164,7 +167,7 @@ static int const kTagImage=	3;
 //
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return [_dataProvider count];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -175,16 +178,20 @@ static int const kTagImage=	3;
     
 	Trip *trip = (Trip *)[_dataProvider objectAtIndex:indexPath.row];
 	
-	//Trip *currentTripinProgress = [[TripManager sharedInstance] getRecordingInProgress];
-
+	//Trip *currentTripinProgress = [[TripManager sharedInstance] currentRecordingTrip];
 	
-    
-    return nil;
+	// if cell is current recording one dont allow selection, should have different icon too
+	
+	HCSSavedTrackCellView *cell=[_tableView dequeueReusableCellWithIdentifier:[HCSSavedTrackCellView cellIdentifier]];
+	
+	cell.dataProvider=trip;
+	[cell populate];
+	
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-
 	
 	self.selectedTrip = (Trip *)[_dataProvider objectAtIndex:indexPath.row];
 	
@@ -194,15 +201,16 @@ static int const kTagImage=	3;
 	// if trip not yet uploaded => prompt to re-upload
 	if ( currentRecordingTrip != _selectedTrip ){
 		
-		if ( !_selectedTrip.uploaded ){
-			
-			[TripManager sharedInstance].selectedTrip=_selectedTrip;
-			//[self promptToConfirmPurpose];
+		// if not uploaded
+		if ( _selectedTrip.uploaded==nil ){
+			[self promptToConfirmPurpose];
 		}else{
+			[[TripManager sharedInstance] loadSelectedTrip:_selectedTrip];
 			[self displaySelectedTripMap];
 		}
-		
 			
+	}else{
+		// display error, ideally this cell should be indicated as the current one
 	}
 
 }
@@ -227,6 +235,42 @@ static int const kTagImage=	3;
  ***********************************************/
 //
 
+
+- (void)promptToConfirmPurpose
+{
+	NSString *confirm = [NSString stringWithFormat:@"This trip has not yet been uploaded. Try now?"];
+	
+	// present action sheet
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:confirm
+															 delegate:self
+													cancelButtonTitle:@"Cancel"
+											   destructiveButtonTitle:nil
+													otherButtonTitles:@"Upload", nil];
+	
+	actionSheet.actionSheetStyle	= UIActionSheetStyleBlackTranslucent;
+	[actionSheet showInView:self.tabBarController.view];
+}
+
+
+#pragma mark UIActionSheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	NSLog(@"actionSheet clickedButtonAtIndex %d", buttonIndex);
+	switch ( buttonIndex )
+	{
+		case 0:
+			NSLog(@"Upload => push Trip Purpose picker");
+			
+            //[[TripManager sharedInstance] saveTrip];
+			break;
+		case 1:
+		default:
+			NSLog(@"Cancel");
+			[self displaySelectedTripMap];
+		break;
+	}
+}
 
 
 

@@ -380,9 +380,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			break;
 		case kConnectLocationStateTracking:
 			
-			// GPSLOCATIONUPDATE is now sent in main loop
+			[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONUPDATE object:bestEffortAtLocation userInfo:nil];
 			
-            break;
+		break;
 			
 	}
     

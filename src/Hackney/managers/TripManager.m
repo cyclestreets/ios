@@ -9,6 +9,7 @@
 #import "LoadingView.h"
 #import "HCSTrackConfigViewController.h"
 
+#import "AppConstants.h"
 #import "GlobalUtilities.h"
 
 #import "CoreDataStore.h"
@@ -29,6 +30,7 @@
 
 @interface TripManager()
 
+@property (nonatomic,strong,readwrite)  Trip									*selectedTrip;
 
 @property (nonatomic,strong)  NSMutableArray									*recordingTripCoords;
 
@@ -92,7 +94,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 
 
--(void)setSelectedTrip:(Trip*)trip{
+-(void)loadSelectedTrip:(Trip*)trip{
 	
 	self.selectedTrip=trip;
 	
@@ -375,6 +377,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	//TODO: Send this dict to network controller
 	
 	//TODO:  send notification to display Map VC for current recording trip ie displayUploadedTripMap
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:HCSDISPLAYTRIPMAP object:nil];
 }
 
 
@@ -760,14 +764,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 - (int)recalculateTripDistances{
 	
-	NSError *error;
-	NSArray *trips=[[CoreDataStore mainStore] allForEntity:@"Trip" predicate:[NSPredicate predicateWithFormat:@"saved != nil AND distance < 0.1"] orderBy:@"start"	ascending:NO error:&error];
+	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved != nil AND distance < 0.1"] orderBy:@"start" ascending:NO];
 	
 	if (trips == nil) {
 		// Handle the error.
 		NSLog(@"no trips with zero distance found");
-		if ( error != nil )
-			NSLog(@"Unresolved error2 %@, %@", error, [error userInfo]);
 	}
 	
 	int count = [trips count];

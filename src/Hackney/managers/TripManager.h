@@ -46,6 +46,7 @@
 
 #import "SynthesizeSingleton.h"
 
+
 @class Trip;
 
 
@@ -58,7 +59,7 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 
 @property (nonatomic,strong)  Trip								*currentRecordingTrip;
-@property (nonatomic,strong)  Trip								*selectedTrip;
+@property (nonatomic,strong,readonly)  Trip								*selectedTrip;
 
 // deprecate
 @property (nonatomic, retain) id <ActivityIndicatorDelegate>	activityDelegate;
@@ -111,6 +112,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 
 -(void)resetTrip;
 -(void)startTrip;
+
+-(void)loadSelectedTrip:(Trip*)trip;
 
 @end
 

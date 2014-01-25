@@ -86,11 +86,10 @@
 
 - (id)initWithTrip:(Trip *)trip
 {
-    //if (self = [super init]) {
+
 	if (self = [super initWithNibName:@"HCSMapViewController" bundle:nil]) {
 		NSLog(@"MapViewController initWithTrip");
 		self.trip = trip;
-		_mapView.delegate = self;
     }
     return self;
 }
@@ -159,6 +158,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	[RMMapView class];
+	 [_mapView setDelegate:self];
+	 
 	
     self.navigationController.navigationBarHidden = NO;
     
@@ -487,44 +490,12 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
 
 
 
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
+
 
 
 #pragma mark MKMapViewDelegate methods
 
-
-- (void)mapViewWillStartLoadingMap:(MKMapView *)mapView
-{
-	//NSLog(@"mapViewWillStartLoadingMap");
-}
-
-
-- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error
-{
-	NSLog(@"mapViewDidFailLoadingMap:withError: %@", [error localizedDescription]);
-}
-
-
-- (void)mapViewDidFinishLoadingMap:(MKMapView *)_mapView{
-	
-	//NSLog(@"mapViewDidFinishLoadingMap");
-	LoadingView *loading = (LoadingView*)[self.parentViewController.view viewWithTag:909];
-	//NSLog(@"loading: %@", loading);
-	[loading removeView];
-}
 
 
 - (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation {
@@ -567,6 +538,11 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
 }
 
 
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
 
 

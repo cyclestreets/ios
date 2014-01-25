@@ -101,6 +101,13 @@ extern NSString *const SAVEDROUTE_RECENTS;
 
 extern NSString *const CYCLESTREETSURLSCHEME;
 
+
+
+// Hackney
+
+extern NSString *const HCSDISPLAYTRIPMAP;
+
+
  
 
 @interface AppConstants : NSObject {

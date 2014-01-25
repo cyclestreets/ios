@@ -96,6 +96,13 @@ NSString *const SAVEDROUTE_RECENTS=@"SAVEDROUTE_RECENTS";
 NSString *const CYCLESTREETSURLSCHEME=@"cyclestreets";
 
 
+// Hackney
+
+NSString *const HCSDISPLAYTRIPMAP=@"HCSDISPLAYTRIPMAP";
+
+
+
+
 
 @implementation AppConstants
 

@@ -21,7 +21,7 @@
 #import "TripManager.h"
 #import "Trip.h"
 #import "User.h"
-
+#import "RMUserLocation.h"
 
 
 #import "CoreDataStore.h"
@@ -30,7 +30,7 @@
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
-@interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate,UIActionSheetDelegate>
+@interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate>
 
 
 // hackney
@@ -90,6 +90,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[notifications addObject:GPSLOCATIONUPDATE];
 	[notifications addObject:GPSLOCATIONFAILED];
 	
+	[notifications addObject:HCSDISPLAYTRIPMAP];
+	
 	[super listNotificationInterests];
 	
 }
@@ -100,20 +102,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	NSString		*name=notification.name;
 	
-	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
-		
-		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
-			[self locationDidComplete:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONUPDATE]){
-			[self locationDidUpdate:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONFAILED]){
-			[self locationDidFail:notification];
-		}
-		
+	
+	
+	if([name isEqualToString:HCSDISPLAYTRIPMAP]){
+		[self displayUploadedTripMap];
 	}
 	
 }
@@ -122,32 +114,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 #pragma mark - Location updates
 
--(void)locationDidComplete:(NSNotification*)notification{
-	
-	BetterLog(@"");
-	
-	CLLocation *location=(CLLocation*)[notification object];
-	
-	self.lastLocation=location;
-	
-	[CycleStreets zoomMapView:_mapView toLocation:location];
-	
-	
-	//[self displayLocationIndicator:YES];
-	
-	
-}
 
--(void)locationDidUpdate:(NSNotification*)notification{
+- (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation{
 	
-	CLLocation *location=(CLLocation*)[notification object];
+	CLLocation *location=userLocation.location;
 	CLLocationDistance deltaDistance = [location distanceFromLocation:_lastLocation];
 	
 	self.lastLocation=_currentLocation;
 	self.currentLocation=location;
-	
-	
-	RMUserLocation *userLocation=_mapView.userLocation;
 	
     
 	if ( !_didUpdateUserLocation )
@@ -181,50 +155,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 }
 
--(void)locationDidFail:(NSNotification*)notification{
-	
-	
-	//[self resetLocationOverlay];
-	
-}
-
-
-
--(void)displayLocationIndicator:(BOOL)display{
-	
-	if(_gpsLocationView.superview==nil && display==YES)
-		[self.mapView addSubview:_gpsLocationView];
-	
-	
-	int alpha=display==YES ? 1 :0;
-	
-	if(_gpsLocationView.superview!=nil)
-		[_gpsLocationView updateToLocation];
-	
-	if(display==YES && _gpsLocationView.alpha==1)
-		return;
-	
-	if(display==NO && _gpsLocationView.alpha==0)
-		return;
-	
-	if(display==YES){
-		_gpsLocationView.visible=display;
-		_gpsLocationView.alpha=0;
-	}
-	
-	
-	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		_gpsLocationView.alpha=alpha;
-	} completion:^(BOOL finished) {
-		if(_gpsLocationView.alpha==0){
-			_gpsLocationView.visible=display;
-			[_gpsLocationView removeFromSuperview];
-		}
-		
-	}];
-	
-}
-
 
 //
 /***********************************************
@@ -237,10 +167,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
     [super viewDidLoad];
 	
 	self.tripManager=[TripManager sharedInstance];
-	_tripManager.parent          = self;
-	
-	self.currentTrip=[[TripManager sharedInstance] createTrip];
-	
+
 	[self hasUserInfoBeenSaved];
 	
     [self createPersistentUI];
@@ -281,10 +208,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 -(void)createNonPersistentUI{
     
 	
-	[UserLocationManager sharedInstance].locationState=kConnectLocationStateTracking;
-	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-    
-    
 }
 
 
@@ -374,6 +297,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		[_actionButton setTitle:@"Save" forState:UIControlStateNormal];
 		
         _isRecordingTrack = YES;
+		self.currentTrip=[[TripManager sharedInstance] createTrip];
 		[[TripManager sharedInstance] startTrip];
         
         // set flag to update counter
@@ -568,7 +492,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 #pragma mark TripPurposeDelegate methods
 
-
 - (NSString *)setPurpose:(unsigned int)index
 {
 	NSString *purpose = [_tripManager setPurpose:index];
@@ -591,7 +514,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	return purpose;
 }
-
 
 - (NSString *)updatePurposeWithIndex:(unsigned int)index
 {
@@ -627,6 +549,41 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
     //do something here: may change to be the save as a separate view. Not prompt.
 }
 
+
+#pragma mark - Note Entry View delegate methods
+
+//- (void)didPickNoteType:(NSNumber *)index
+//{
+//	[noteManager.note setNote_type:index];
+//    NSLog(@"Added note type: %d", [noteManager.note.note_type intValue]);
+//    //do something here: may change to be the save as a separate view. Not prompt.
+//}
+//
+//- (void)didEnterNoteDetails:(NSString *)details{
+//    [noteManager.note setDetails:details];
+//    NSLog(@"Note Added details: %@", noteManager.note.details);
+//}
+//
+//- (void)didSaveImage:(NSData *)imgData{
+//    [noteManager.note setImage_data:imgData];
+//    NSLog(@"Added image, Size of Image(bytes):%d", [imgData length]);
+//    [imgData release];
+//}
+//
+//- (void)getTripThumbnail:(NSData *)imgData{
+//    [tripManager.trip setThumbnail:imgData];
+//    NSLog(@"Trip Thumbnail, Size of Image(bytes):%d", [imgData length]);
+//}
+//
+//- (void)getNoteThumbnail:(NSData *)imgData{
+//    [noteManager.note setThumbnail:imgData];
+//    NSLog(@"Note Thumbnail, Size of Image(bytes):%d", [imgData length]);
+//}
+//
+//- (void)saveNote{
+//    [noteManager saveNote];
+//    NSLog(@"Save note");
+//}
 
 
 
