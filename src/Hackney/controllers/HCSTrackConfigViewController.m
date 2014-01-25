@@ -156,6 +156,24 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
+
+// assess wether user has been in the same place too long
+-(void)determineUserLocationStopped{
+	
+	
+	// compare last lcoation and new location
+	
+	// if same within certain accurcy > start auto stop timer
+	
+	// next location does not compare clear timer
+	
+	// if timer expires auto stop Trip and save
+	
+	
+	
+}
+
+
 //
 /***********************************************
  * @description			VIEW METHODS

@@ -84,6 +84,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xFFFFFF)];
 	[[UINavigationBar appearance] setBarTintColor: UIColorFromRGB(0x326513)];
+	[[UITabBar appearance] setTintColor:UIColorFromRGB(0x509720 )];
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	
 	[[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:UIColorFromRGB(0xFFFFFF),UITextAttributeFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]}];
@@ -352,6 +353,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if([[UserSettingsManager sharedInstance] userStateWritable]==YES){
 		tabBarController.delegate = self;
 	}
+	
+	tabBarController.tabBar.translucent=NO;
 	
 	[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:tabBarController.moreNavigationController.navigationBar];
 	
