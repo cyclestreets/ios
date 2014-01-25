@@ -185,7 +185,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	if(locationManager==nil){
 			self.locationManager = [[CLLocationManager alloc] init];
-			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+			locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
 			locationManager.distanceFilter =kCLDistanceFilterNone;
             locationManager.delegate=self;
     }

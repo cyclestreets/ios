@@ -471,8 +471,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 	BetterLog(@"ll=%@",_lastLocation);
 	
 	// zooms map to show bounding box for location & segment point
-	//TODO: this should now compare current segment start loaction and gps location not overall route
 	[_mapView zoomWithLatLngBoundsNorthEast:[_currentSegment maxNorthEastForLocation:_lastLocation] SouthWest:[_currentSegment maxSouthWestForLocation:_lastLocation]];
+	
+	if(!_footerIsHidden)
+		[self didToggleInfo];
 	
 	[_lineView setNeedsDisplay];
 	
@@ -515,7 +517,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 -(void)displayLocationIndicator:(BOOL)display{
 	
 	if(_gpsLocationView.superview==nil && display==YES)
-		[self.mapView addSubview:_gpsLocationView];
+		[self.mapView insertSubview:_gpsLocationView belowSubview:_footerView];
 	
 	
 	int alpha=display==YES ? 1 :0;
