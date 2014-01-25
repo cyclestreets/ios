@@ -246,6 +246,8 @@
 - (void)viewDidLoad
 {
 	
+	self.modalPresentationCapturesStatusBarAppearance=NO;
+	
 	[self createCustomPicker];
 	pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
 	if (pickerCategory == 0) {

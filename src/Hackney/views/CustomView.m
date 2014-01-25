@@ -78,7 +78,7 @@ const CGFloat kViewHeight = 44;
 	point = CGPointMake(10.0 + self.image.size.width + 10.0, yCoord);
 	[self.title drawAtPoint:point
 					forWidth:self.bounds.size.width
-					withFont:[UIFont systemFontOfSize:MAIN_FONT_SIZE]
+					withFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]
 					minFontSize:MIN_MAIN_FONT_SIZE
 					actualFontSize:NULL
 					lineBreakMode:NSLineBreakByTruncatingTail
