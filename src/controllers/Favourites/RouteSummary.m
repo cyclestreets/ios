@@ -249,7 +249,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		switch(alertView.tag){
 			case kTextEntryAlertTag:
 			{
-				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+				UITextField *alertInputField=nil;
+				// os7 cant get view tag for field
+				if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+					alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+				}else{
+					alertInputField=(UITextField*)[alertView textFieldAtIndex:0];
+				}
 				if (alertInputField!=nil) {
 					route.userRouteName=alertInputField.text;
 					[[SavedRoutesManager sharedInstance] saveRouteChangesForRoute:route];
