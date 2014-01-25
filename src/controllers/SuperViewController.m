@@ -89,7 +89,7 @@
 
 #pragma mark RKCustomNavigationBarDelegate method
 
--(void)didRequestPopController{
+-(IBAction)didRequestPopController{
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

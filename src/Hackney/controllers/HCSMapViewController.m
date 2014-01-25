@@ -49,11 +49,13 @@
 #import "RMMarker.h"
 #import "UserLocationManager.h"
 
+#import "GlobalUtilities.h"
+#import "LayoutBox.h"
 // cs compatability classes
 #import "CSPointVO.h"
 #import "RouteVO.h"
 #import "SegmentVO.h"
-
+#import "ExpandedUILabel.h"
 #import "HudManager.h"
 
 #define kFudgeFactor	1.5
@@ -64,10 +66,12 @@
 @interface HCSMapViewController()<RMMapViewDelegate>
 
 
+@property(nonatomic,weak) IBOutlet UINavigationItem					*myNavigationItem;
+
 @property (nonatomic, strong) Trip									*trip;
 @property (nonatomic, strong) UIBarButtonItem						*doneButton;
 @property (nonatomic, strong) UIBarButtonItem						*flipButton;
-@property (nonatomic, strong) UIView								*infoView;
+@property (nonatomic, strong) LayoutBox								*infoView;
 
 @property (nonatomic,weak) IBOutlet UILabel							*routeInfoLabel;
 
@@ -117,32 +121,35 @@
 	
 	// adjust our done/info buttons accordingly
 	if ([_infoView superview] == self.view)
-		self.navigationItem.rightBarButtonItem = _doneButton;
+		_myNavigationItem.rightBarButtonItem = _doneButton;
 	else
-		self.navigationItem.rightBarButtonItem = _flipButton;
+		_myNavigationItem.rightBarButtonItem = _flipButton;
 }
 
 
 - (void)initInfoView
 {
-	_infoView					= [[UIView alloc] initWithFrame:CGRectMake(0,0,320,560)];
-	_infoView.alpha				= kInfoViewAlpha;
-	_infoView.backgroundColor	= [UIColor blackColor];
 	
-	UILabel *notesHeader		= [[UILabel alloc] initWithFrame:CGRectMake(9,85,160,25)];
-	notesHeader.backgroundColor = [UIColor clearColor];
-	notesHeader.font			= [UIFont boldSystemFontOfSize:18.0];
-	notesHeader.opaque			= NO;
-	notesHeader.text			= @"Trip Notes";
-	notesHeader.textColor		= [UIColor whiteColor];
+	_infoView=[[LayoutBox alloc]initWithFrame:CGRectMake(0,64,320,560)];
+	_infoView.fixedWidth=YES;
+	_infoView.fixedHeight=YES;
+	_infoView.paddingLeft=10;
+	_infoView.itemPadding=20;
+	_infoView.backgroundColor=UIColorFromRGBAndAlpha(0x000000, kInfoViewAlpha);
+	
+	
+	ExpandedUILabel *notesHeader=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, _infoView.width, 10)];
+	notesHeader.fixedWidth=YES;
+	notesHeader.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+	notesHeader.textColor=UIColorFromRGB(0xFFFFFF);
+	notesHeader.text = @"Trip Notes";
 	[_infoView addSubview:notesHeader];
 	
-	UITextView *notesText		= [[UITextView alloc] initWithFrame:CGRectMake(0,110,320,200)];
-	notesText.backgroundColor	= [UIColor clearColor];
-	notesText.editable			= NO;
-	notesText.font				= [UIFont systemFontOfSize:16.0];
-	notesText.text				= _trip.notes;
-	notesText.textColor			= [UIColor whiteColor];
+	ExpandedUILabel *notesText=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, _infoView.width, 10)];
+	notesText.fixedWidth=YES;
+	notesHeader.font=[UIFont fontWithName:@"HelveticaNeue-Regular" size:16];
+	notesHeader.textColor=UIColorFromRGB(0xFFFFFF);
+	notesHeader.text = _trip.notes;
 	[_infoView addSubview:notesText];
     
 }
@@ -157,7 +164,7 @@
 	[_mapView setDelegate:self];
 	_mapView.enableDragging=YES;
 	
-    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBarHidden = YES;
 	
     
 	if (_trip )
@@ -186,22 +193,23 @@
  									  [inputFormatter stringFromDate:outputDate],
 									  [dateFormatter stringFromDate:[_trip start]]];
         
-		self.title = [NSString stringWithFormat:@"%.1f mi ~ %.1f mph", [_trip.distance doubleValue] / 1609.344, mph ];
+		_myNavigationItem.title = [NSString stringWithFormat:@"%.1f mi ~ %.1f mph", [_trip.distance doubleValue] / 1609.344, mph ];
 		
 		
 		// only add info view for trips with non-null notes
 		if ( ![_trip.notes isEqualToString:EMPTYSTRING] && _trip.notes != nil)
 		{
-			_doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(infoAction:)];
+			_doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(infoAction:)];
 			
 			UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
 			infoButton.showsTouchWhenHighlighted = YES;
 			[infoButton addTarget:self action:@selector(infoAction:) forControlEvents:UIControlEventTouchUpInside];
 			_flipButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-			self.navigationItem.rightBarButtonItem = _flipButton;
+			_myNavigationItem.rightBarButtonItem = _flipButton;
 			
 			[self initInfoView];
 		}
+		
         
 				
 		// filter coords by hAccuracy
@@ -333,7 +341,7 @@
 
 
 
-#pragma mark point list provider
+#pragma mark - Route line point list provider
 // PointListProvider
 + (NSArray *) pointList:(RouteVO *)route withView:(RMMapView *)mapView {
 	
@@ -378,6 +386,7 @@
 
 
 
+#pragma mark - Screen shot support
 
 - (void)viewWillDisappear:(BOOL)animated{
     UIImage *thumbnailOriginal;
@@ -399,7 +408,7 @@
     NSLog(@"Size of Thumbnail Image(bytes):%d",[thumbnailData length]);
     NSLog(@"Size: %f, %f", thumbnail.size.height, thumbnail.size.width);
     
-    [_delegate getTripThumbnail:thumbnailData];
+    [self.delegate getTripThumbnail:thumbnailData];
 }
 
 
@@ -484,6 +493,9 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
     return screenImage;
 }
 
+
+
+#pragma mark User events
 
 
 

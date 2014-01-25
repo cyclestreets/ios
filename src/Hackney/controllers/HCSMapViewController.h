@@ -43,9 +43,10 @@
 #import "TripManager.h"
 #import "TripPurposeDelegate.h"
 #import "RouteLineView.h"
+#import "SuperViewController.h"
 @class RMMapView;
 
-@interface HCSMapViewController : UIViewController <PointListProvider>
+@interface HCSMapViewController : SuperViewController <PointListProvider,SuperViewControllerDelegate>
 {
 }
 
@@ -53,6 +54,7 @@
 
 
 - (id)initWithTrip:(Trip *)trip;
+
 
 
 @end

@@ -27,7 +27,7 @@
 
 @protocol CustomNavigationBarDelegate <NSObject>
 
--(void)didRequestPopController;
+-(IBAction)didRequestPopController;
 @optional
 -(void)didRequestRefresh;
 -(IBAction)doNavigationSelector:(NSString*)type;

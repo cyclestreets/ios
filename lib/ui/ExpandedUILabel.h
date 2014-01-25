@@ -22,4 +22,8 @@
 @property (nonatomic, unsafe_unretained)	UIColor	*labelColor;
 @property (nonatomic)		BOOL		 hasShadow;
 
++(CGRect)defaultFrame;
+
+-(void)updateSizing;
+
 @end

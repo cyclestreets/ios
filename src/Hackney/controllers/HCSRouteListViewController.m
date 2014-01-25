@@ -26,6 +26,8 @@ static NSString *const  kCellReuseIdentifierCheck=@"CheckMark";
 static NSString *const kCellReuseIdentifierExclamation=@"Exclamataion";
 static NSString *const kCellReuseIdentifierInProgress=@"InProgress";
 
+static NSString *const VIEWTITLE=@"Saved Routes";
+
 static int const kRowHeight=	75;
 static int const kTagTitle=	1;
 static int const kTagDetail=	2;
@@ -105,6 +107,8 @@ static int const kTagImage=	3;
 
 
 -(void)viewWillAppear:(BOOL)animated{
+	
+	 self.navigationController.navigationBarHidden = NO;
     
     [self createNonPersistentUI];
     

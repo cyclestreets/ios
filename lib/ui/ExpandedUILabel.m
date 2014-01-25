@@ -76,6 +76,9 @@
 }
 
 
+-(void)updateSizing{
+    [self updateText];
+}
 
 
 -(void)updateText{
@@ -103,6 +106,10 @@
 		self.frame=tframe;
 	}
 
+}
+
++(CGRect)defaultFrame{
+    return CGRectMake(0, 0, 10, 10);
 }
 
 
