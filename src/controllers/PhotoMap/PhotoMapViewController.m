@@ -52,6 +52,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoManager.h"
 #import "UserLocationManager.h"
 #import "UIView+Additions.h"
+#import "RMUserLocation.h"
 
 
 static NSTimeInterval FADE_DURATION = 1.7;
@@ -79,7 +80,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, assign) BOOL										photomapQuerying;
 @property (nonatomic, assign) BOOL										showingPhotos;
 @property (nonatomic, assign) BOOL										locationManagerIsLocating;
-@property (nonatomic, assign) BOOL										locationWasFound;
 @property (nonatomic, assign) BOOL										firstRun;
 @property (nonatomic, strong) SVPulsingAnnotationView					* gpsLocationView;
 
@@ -265,7 +265,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	//Necessary to start route-me service
 	[RMMapView class];
 	[_mapView setDelegate:self];
-	//[[_mapView markerManager] removeMarkers];
+	_mapView.showsUserLocation=YES;
+	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	
 	
 	self.photoMarkers = [[NSMutableArray alloc] init];
@@ -304,27 +305,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 -(void)createNonPersistentUI{
     
-    if([PhotoManager sharedInstance].autoLoadLocation!=nil){
-		
-		[self displayLocationForMap:[PhotoManager sharedInstance].autoLoadLocation.coordinate];
-		
-        [PhotoManager sharedInstance].autoLoadLocation=nil;
-    }else{
-		
-		if([UserLocationManager sharedInstance].doesDeviceAllowLocation==YES){
-			
-			if(_currentLocation==nil)
-				[self locationButtonSelected:nil];
-			
-		}else{
-			
-			if(_currentLocation==nil)
-				[self displayLocationForMap:[UserLocationManager defaultCoordinate]];
-		}
-		
-	}
+   
     
 }
+
+
 
 
 -(void)displayLocationForMap:(CLLocationCoordinate2D)location{
@@ -341,8 +326,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 -(void)viewWillDisappear:(BOOL)animated{
-	if([UserLocationManager sharedInstance].isLocating==YES)
-		[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+//	if([UserLocationManager sharedInstance].isLocating==YES)
+//		[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
 }
 
@@ -457,135 +442,59 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 
-#pragma mark Location
+#pragma mark - Location
 //
 /***********************************************
  * @description			Location Methods
  ***********************************************/
 //
 
-- (IBAction) locationButtonSelected:(id)sender {
+// location found or we stopped it
+- (void)mapViewDidStopLocatingUser:(RMMapView *)mapView{
+	
 	
 	BetterLog(@"");
 	
-	if ([UserLocationManager sharedInstance].isLocating==NO) {
-		
-		BOOL enabled=[[UserLocationManager sharedInstance] checkLocationStatus:YES];
-		
-		if(enabled==YES){
-			
-			_gpslocateButton.style = UIBarButtonItemStyleDone;
-			
-		}
-		
-		[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-	} else {
-		
-		_gpslocateButton.style = UIBarButtonItemStyleBordered;
-		
-		[self resetLocationOverlay];
-		
-		
-		[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-		
-		[self requestPhotos];
-	}
+	self.currentLocation=_mapView.userLocation.location;
 	
-}
-
-
-
--(void)locationDidComplete:(NSNotification*)notification{
+	_gpslocateButton.style = UIBarButtonItemStylePlain;
 	
-	BetterLog(@"");
 	
-	CLLocation *location=(CLLocation*)[notification object];
-	
-	self.currentLocation=location;
-	
-	[CycleStreets zoomMapView:_mapView toLocation:_currentLocation];
-	
-	_gpslocateButton.style = UIBarButtonItemStyleBordered;
-	
-	[self displayLocationIndicator:YES];
-	
-	[self removeLocationIndicatorAfterDelay];
 	
 	[self requestPhotos];
 	
-	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-	
 }
 
--(void)locationDidUpdate:(NSNotification*)notification{
-	
-	CLLocation *location=(CLLocation*)[notification object];
-	
-	[CycleStreets zoomMapView:_mapView toLocation:location];
-	
-	[self displayLocationIndicator:YES];
-	
-}
-
--(void)locationDidFail:(NSNotification*)notification{
-	
-	_gpslocateButton.style = UIBarButtonItemStyleBordered;
-	
-	[self resetLocationOverlay];
-	
-}
-
-
--(void)removeLocationIndicatorAfterDelay{
+- (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation{
 	
 	BetterLog(@"");
 	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
-	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:6];
+	CLLocation *location=userLocation.location;
+	self.currentLocation=location;
+	
+	[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
 	
 }
 
 
--(void)resetLocationOverlay{
+- (IBAction) locationButtonSelected:(id)sender {
 	
-	BetterLog(@"");
+	if(_mapView.userLocationVisible==NO){
+		
+		_mapView.showsUserLocation=!_mapView.showsUserLocation;
 	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
-	[self displayLocationIndicator:NO];
-}
-
--(void)displayLocationIndicator:(BOOL)display{
-	
-	if(_gpsLocationView.superview==nil && display==YES)
-		[self.mapView addSubview:_gpsLocationView];
-	
-	
-	int alpha=display==YES ? 1 :0;
-	
-	if(_gpsLocationView.superview!=nil)
-		[_gpsLocationView updateToLocation];
-	
-	if(display==YES && _gpsLocationView.alpha==1)
-		return;
-	
-	if(display==NO && _gpsLocationView.alpha==0)
-		return;
-	
-	if(display==YES){
-		_gpsLocationView.visible=display;
-		_gpsLocationView.alpha=0;
+		if(_mapView.showsUserLocation==YES){
+			_gpslocateButton.style = UIBarButtonItemStyleDone;
+		}else{
+			_gpslocateButton.style = UIBarButtonItemStylePlain;
+		}
 	}
 	
+}
+
+- (void)mapView:(RMMapView *)mapView didFailToLocateUserWithError:(NSError *)error{
 	
-	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		_gpsLocationView.alpha=alpha;
-	} completion:^(BOOL finished) {
-		if(_gpsLocationView.alpha==0){
-			_gpsLocationView.visible=display;
-			[_gpsLocationView removeFromSuperview];
-		}
-		
-	}];
+	_gpslocateButton.style = UIBarButtonItemStylePlain;
 	
 }
 
