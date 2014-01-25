@@ -81,7 +81,7 @@ const CGFloat kViewHeight = 44;
 					withFont:[UIFont systemFontOfSize:MAIN_FONT_SIZE]
 					minFontSize:MIN_MAIN_FONT_SIZE
 					actualFontSize:NULL
-					lineBreakMode:UILineBreakModeTailTruncation
+					lineBreakMode:NSLineBreakByTruncatingTail
 					baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
 }
 

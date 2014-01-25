@@ -330,8 +330,24 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row
 		  forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-	return [customPickerArray objectAtIndex:row];
+	UIView * myView=[customPickerArray objectAtIndex:row];
+	
+	UIGraphicsBeginImageContextWithOptions(myView.bounds.size, NO, 0);
+	
+    [myView.layer renderInContext:UIGraphicsGetCurrentContext()];
+	
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+	
+    UIGraphicsEndImageContext();
+	
+    // then convert back to a UIImageView and return it
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+	
+    return imageView;
 }
+
+
+
 
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
