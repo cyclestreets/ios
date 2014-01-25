@@ -86,6 +86,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[UINavigationBar appearance] setBarTintColor: UIColorFromRGB(0x326513)];
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	
+	[[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:UIColorFromRGB(0xFFFFFF),UITextAttributeFont:[UIFont fontWithName:@"Helvetica Neue" size:16]}];
+	
 	self.tabBarController = [[UITabBarController alloc] init];
 	self.window.rootViewController = self.tabBarController;
 	

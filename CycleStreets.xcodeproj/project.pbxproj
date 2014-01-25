@@ -2219,6 +2219,10 @@
 		287050B2188FC407004CD922 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				287050B9188FC407004CD922 /* HCSTrackConfigViewController.h */,
+				287050BA188FC407004CD922 /* HCSTrackConfigViewController.m */,
+				287050B5188FC407004CD922 /* HCSRouteListViewController.h */,
+				287050B6188FC407004CD922 /* HCSRouteListViewController.m */,
 				2818E0C8189050930031AD43 /* HCSMapViewController.h */,
 				2818E0C9189050930031AD43 /* HCSMapViewController.m */,
 				2818E0AD189045080031AD43 /* TripDetailViewController.h */,
@@ -2229,12 +2233,8 @@
 				2818E094189042390031AD43 /* PickerViewController.m */,
 				287050B3188FC407004CD922 /* HCSRouteDetailViewController.h */,
 				287050B4188FC407004CD922 /* HCSRouteDetailViewController.m */,
-				287050B5188FC407004CD922 /* HCSRouteListViewController.h */,
-				287050B6188FC407004CD922 /* HCSRouteListViewController.m */,
 				287050B7188FC407004CD922 /* HCSSurveyViewController.h */,
 				287050B8188FC407004CD922 /* HCSSurveyViewController.m */,
-				287050B9188FC407004CD922 /* HCSTrackConfigViewController.h */,
-				287050BA188FC407004CD922 /* HCSTrackConfigViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";

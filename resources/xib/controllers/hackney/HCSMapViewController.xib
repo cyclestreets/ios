@@ -18,13 +18,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="T3f-zY-JH7" customClass="RMMapView">
-                    <rect key="frame" x="0.0" y="45" width="320" height="459"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="460"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
-                        <view contentMode="scaleToFill" id="Udb-FD-wK3" customClass="RouteLineView">
-                            <rect key="frame" x="0.0" y="-1" width="320" height="460"/>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="Udb-FD-wK3" customClass="RouteLineView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -34,7 +34,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XfT-2N-Ixw">
-                            <rect key="frame" x="20" y="11" width="280" height="21"/>
+                            <rect key="frame" x="20" y="12" width="280" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

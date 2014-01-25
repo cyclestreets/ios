@@ -95,12 +95,6 @@
 }
 
 
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView {
- }
- */
-
 
 - (void)infoAction:(UIButton*)sender
 {
@@ -160,10 +154,11 @@
     [super viewDidLoad];
 	
 	[RMMapView class];
-	 [_mapView setDelegate:self];
-	 
+	[_mapView setDelegate:self];
+	_mapView.enableDragging=YES;
 	
     self.navigationController.navigationBarHidden = NO;
+	
     
 	if (_trip )
 	{
@@ -333,6 +328,7 @@
     
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
 	
+	
 }
 
 
@@ -494,8 +490,25 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
 
 
 
-#pragma mark MKMapViewDelegate methods
+#pragma mark RMMapView delegate methods
 
+
+-(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+	
+}
+
+- (void) afterMapMove: (RMMapView*) map {
+	[self afterMapChanged:map];
+}
+
+
+- (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
+	[self afterMapChanged:map];
+}
+
+- (void) afterMapChanged: (RMMapView*) map {
+	
+}
 
 
 - (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation {
