@@ -88,6 +88,8 @@
 -(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation;
 
 
+-(void)calculateNorthSouthValues;
+
 @end
 
 

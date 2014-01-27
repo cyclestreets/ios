@@ -277,6 +277,32 @@
 }
 
 
+
+-(void)calculateNorthSouthValues{
+	
+	CLLocationCoordinate2D topLeftCoord;
+    topLeftCoord.latitude = -90;
+    topLeftCoord.longitude = 180;
+	
+    CLLocationCoordinate2D bottomRightCoord;
+    bottomRightCoord.latitude = 90;
+    bottomRightCoord.longitude = -180;
+	
+    for(SegmentVO* segment in segments)
+    {
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, segment.segmentStart.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, segment.segmentStart.latitude);
+		
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, segment.segmentStart.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, segment.segmentStart.latitude);
+    }
+	
+	self.northEast=[[CLLocation alloc]initWithLatitude:topLeftCoord.latitude longitude:topLeftCoord.longitude];
+	self.southWest=[[CLLocation alloc]initWithLatitude:bottomRightCoord.latitude longitude:bottomRightCoord.longitude];
+	
+}
+
+
 //
 /***********************************************
  * @description			NSCODING

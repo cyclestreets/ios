@@ -164,6 +164,8 @@
 	[_mapView setDelegate:self];
 	_mapView.enableDragging=YES;
 	
+	_routeLineView.pointListProvider=self;
+	
     self.navigationController.navigationBarHidden = YES;
 	
     
@@ -213,7 +215,7 @@
         
 				
 		// filter coords by hAccuracy
-		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 100.0"];
+		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 6.0"];
 		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
 		NSLog(@"count of filtered coords = %d", [filteredCoords count]);
 		
@@ -236,10 +238,21 @@
         
         NSMutableArray *routeCoords = [[NSMutableArray alloc]init];
 		
+		
+		NSNumberFormatter *doubleValueWithMaxTwoDecimalPlaces = [[NSNumberFormatter alloc] init];
+		[doubleValueWithMaxTwoDecimalPlaces setNumberStyle:NSNumberFormatterDecimalStyle];
+		[doubleValueWithMaxTwoDecimalPlaces setMaximumFractionDigits:4];
+		
 		self.currentRoute=[[RouteVO alloc]init];
         
 		for ( Coord *coord in sortedCoords ){
 			
+			
+			NSNumber *newlat=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.latitude] doubleValue]];
+			NSNumber *newlongt=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.longitude] doubleValue]];
+			
+			coord.latitude=newlat;
+			coord.longitude=newlongt;
 			
 			// only plot unique coordinates to our map for performance reasons
 			if ( !last ||
@@ -250,7 +263,7 @@
 					// this is a bit convoluted but meets comaptibility for routeline drawing
 					SegmentVO *segment=[[SegmentVO alloc]init];
 					CSPointVO *point=[[CSPointVO alloc]init];
-					point.p=CGPointMake([coord.latitude doubleValue], [coord.longitude doubleValue]);
+					point.p=CGPointMake([coord.longitude doubleValue],[coord.latitude doubleValue]);
 					segment.pointsArray=@[point];
 					
 					[routeCoords addObject:segment];
@@ -306,8 +319,7 @@
 		endPoint.annotationIcon=[UIImage imageNamed:@"tripEnd.png"];
         [_mapView addAnnotation:endPoint];
         
-        
-        //free(routePath);
+				
 		
 		NSLog(@"added %d unique GPS coordinates of %d to map", count, [sortedCoords count]);
 		
@@ -321,6 +333,8 @@
 		
 		// if we had at least 1 coord
 		if ( count ){
+			
+			[_currentRoute calculateNorthSouthValues];
 			
 			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
 			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
@@ -351,8 +365,6 @@
 	}
 	
 	for (int i = 0; i < [route numSegments]; i++) {
-		if (i == 0)
-		{	// start of first segment
 			CSPointVO *p = [[CSPointVO alloc] init];
 			SegmentVO *segment = [route segmentAtIndex:i];
 			CLLocationCoordinate2D coordinate = [segment segmentStart];
@@ -360,21 +372,21 @@
 			p.p = pt;
 			p.isWalking=segment.isWalkingSection;
 			[points addObject:p];
-		}
-		// remainder of all segments
-		SegmentVO *segment = [route segmentAtIndex:i];
-		NSArray *allPoints = [segment allPoints];
-		for (int i = 1; i < [allPoints count]; i++) {
-			CSPointVO *latlon = [allPoints objectAtIndex:i];
-			CLLocationCoordinate2D coordinate;
-			coordinate.latitude = latlon.p.y;
-			coordinate.longitude = latlon.p.x;
-			CGPoint pt = [mapView coordinateToPixel:coordinate];
-			CSPointVO *screen = [[CSPointVO alloc] init];
-			screen.p = pt;
-			screen.isWalking=segment.isWalkingSection;
-			[points addObject:screen];
-		}
+//		}
+//		// remainder of all segments
+//		SegmentVO *segment = [route segmentAtIndex:i];
+//		NSArray *allPoints = [segment allPoints];
+//		for (int i = 0; i < [allPoints count]; i++) {
+//			CSPointVO *latlon = [allPoints objectAtIndex:i];
+//			CLLocationCoordinate2D coordinate;
+//			coordinate.latitude = latlon.p.y;
+//			coordinate.longitude = latlon.p.x;
+//			CGPoint pt = [mapView coordinateToPixel:coordinate];
+//			CSPointVO *screen = [[CSPointVO alloc] init];
+//			screen.p = pt;
+//			screen.isWalking=segment.isWalkingSection;
+//			[points addObject:screen];
+//		}
 	}
 	
 	return points;
@@ -509,17 +521,21 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
 	
 }
 
-- (void) afterMapMove: (RMMapView*) map {
-	[self afterMapChanged:map];
+-(void) beforeMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction{
+	//[_routeLineView setNeedsDisplay];
 }
-
 
 - (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
-	[self afterMapChanged:map];
+	[_routeLineView setNeedsDisplay];
 }
 
-- (void) afterMapChanged: (RMMapView*) map {
+- (void) afterMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction{
 	
+	[_routeLineView setNeedsDisplay];
+}
+
+-(void)mapViewRegionDidChange:(RMMapView *)mapView{
+	[_routeLineView setNeedsDisplay];
 }
 
 
