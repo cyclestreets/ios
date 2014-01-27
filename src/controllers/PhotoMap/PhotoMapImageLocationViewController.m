@@ -93,7 +93,7 @@
 	
 	[self updateContentSize];
 	
-	[self createNavigationBarUI];
+	
 }
 
 
@@ -142,7 +142,7 @@
 	
 	self.dataProvider=photoEntry;
 	
-	_titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csid]];
+	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csid]];
 	
 	_imageLabel.text=[_dataProvider caption];
 	
@@ -172,7 +172,7 @@
 	
 	
 	
-	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
 		
 		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:_dataProvider.csImageUrlString],_imageView.image] applicationActivities:nil];
 		activity.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll, UIActivityTypePrint, UIActivityTypePostToWeibo];

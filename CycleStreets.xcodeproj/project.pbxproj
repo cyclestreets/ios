@@ -766,6 +766,8 @@
 		28AE47C01896DCCD00203C20 /* HCSUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */; };
 		28AE47C31896E95000203C20 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47C21896E95000203C20 /* UserManager.m */; };
 		28AE47C41896E95000203C20 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47C21896E95000203C20 /* UserManager.m */; };
+		28AE47C618970B9C00203C20 /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AE47C518970B9C00203C20 /* UIPickerAccessoryView.xib */; };
+		28AE47C718970B9C00203C20 /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AE47C518970B9C00203C20 /* UIPickerAccessoryView.xib */; };
 		28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28B016161891B44C00C2414C /* UIAlertView+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B016151891B44C00C2414C /* UIAlertView+BlocksKit.m */; };
@@ -1520,6 +1522,7 @@
 		28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSUserDetailsViewController.m; sourceTree = "<group>"; };
 		28AE47C11896E95000203C20 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		28AE47C21896E95000203C20 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
+		28AE47C518970B9C00203C20 /* UIPickerAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIPickerAccessoryView.xib; sourceTree = "<group>"; };
 		28AE590315E503270034268C /* MapMarkerTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMarkerTouchView.h; sourceTree = "<group>"; };
 		28AE590415E503270034268C /* MapMarkerTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMarkerTouchView.m; sourceTree = "<group>"; };
 		28B016141891B44C00C2414C /* UIAlertView+BlocksKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+BlocksKit.h"; sourceTree = "<group>"; };
@@ -2005,6 +2008,7 @@
 			children = (
 				280E9332140984F300C7AC75 /* InitialLocationView.xib */,
 				28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */,
+				28AE47C518970B9C00203C20 /* UIPickerAccessoryView.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3361,6 +3365,7 @@
 				28D10EC9135D6E54006F1D94 /* CSTabBar_credits@2x.png in Resources */,
 				28D10ECA135D6E54006F1D94 /* CSTabBar_fav_routes@2x.png in Resources */,
 				28BC443318915A5800711A1A /* commute.tif in Resources */,
+				28AE47C618970B9C00203C20 /* UIPickerAccessoryView.xib in Resources */,
 				28D10ECB135D6E54006F1D94 /* CSTabBar_itinerary@2x.png in Resources */,
 				28D10ECC135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png in Resources */,
 				28D10ECD135D6E54006F1D94 /* CSTabBar_plan_route@2x.png in Resources */,
@@ -3791,6 +3796,7 @@
 				289AA2CB188EEB170097AA5A /* TrackingHeading@2x.png in Resources */,
 				283436AB15DD5DC300B00FD5 /* popoverArrowRight.png in Resources */,
 				283436AC15DD5DC300B00FD5 /* popoverArrowRight@2x.png in Resources */,
+				28AE47C718970B9C00203C20 /* UIPickerAccessoryView.xib in Resources */,
 				283436AD15DD5DC300B00FD5 /* popoverArrowRightSimple.png in Resources */,
 				283436AE15DD5DC300B00FD5 /* popoverArrowUp.png in Resources */,
 				283436AF15DD5DC300B00FD5 /* popoverArrowUp@2x.png in Resources */,

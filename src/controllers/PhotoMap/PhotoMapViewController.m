@@ -214,6 +214,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		
 		RMAnnotation *annotation = [RMAnnotation annotationWithMapView:_mapView coordinate:photo.locationCoords andTitle:nil];
 		
+		annotation.userInfo=photo;
+		
 		if([[PhotoManager sharedInstance] isUserPhoto:photo]){
 			annotation.annotationIcon = [UIImage imageNamed:@"UIIcon_userphotomap.png"];
 			annotation.anchorPoint = CGPointMake(0.5, 1.0);
@@ -247,8 +249,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
 	
 	[self presentModalViewController:lv animated:YES];
-	//PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
-	//[lv loadContentForEntry:photoEntry];
+	PhotoMapVO *photoEntry = (PhotoMapVO *)annotation.userInfo;
+	[lv loadContentForEntry:photoEntry];
 	
 }
 
