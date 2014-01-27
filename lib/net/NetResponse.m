@@ -7,35 +7,37 @@
 //
 
 #import "NetResponse.h"
-
+#import "GenericConstants.h"
 
 @implementation NetResponse
-@synthesize dataid;
-@synthesize requestid;
-@synthesize requestType;
-@synthesize dataProvider;
-@synthesize updated;
-@synthesize responseData;
-@synthesize revisionId;
-@synthesize error;
-@synthesize status;
-@synthesize dataType;
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
 
 
 
--(id)init{
+-(instancetype)init{
 	
 	if (self = [super init]){
-		status=YES;
-		updated=YES;
+		_status=YES;
+		_updated=YES;
 	}
 	return self;
 }
 
+
+
++ (NSString*)errorTypeToString:(NetResponseError)errorType {
+    
+	if(errorType==NetResponseErrorInvalidResponse){
+		return @"InvalidResponse";
+	}else if (errorType==NetResponseErrorNotConnected){
+		return @"ConnectionFailed";
+	}else if (errorType==NetResponseErrorParserFailed) {
+		return @"ParserFailed";
+	}else if (errorType==NetResponseErrorNoResults) {
+		return @"NoResults";
+	}
+	
+    return NONE;
+}
 
 
 @end

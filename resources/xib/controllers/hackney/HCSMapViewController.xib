@@ -6,10 +6,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HCSMapViewController">
             <connections>
+                <outlet property="backButton" destination="c3M-9y-7YZ" id="iTZ-k5-WPI"/>
+                <outlet property="infoButton" destination="k3H-6l-85d" id="472-VQ-eva"/>
                 <outlet property="mapView" destination="T3f-zY-JH7" id="Uyo-Q8-lOX"/>
                 <outlet property="myNavigationItem" destination="nnO-Lk-YYz" id="YTN-5y-Ovg"/>
                 <outlet property="routeInfoLabel" destination="XfT-2N-Ixw" id="mbM-VV-d3f"/>
                 <outlet property="routeLineView" destination="Udb-FD-wK3" id="FEC-9m-HD6"/>
+                <outlet property="uploadButton" destination="sFj-xh-mjc" id="I9a-Hh-JYk"/>
                 <outlet property="view" destination="1" id="Buz-O5-YXf"/>
             </connections>
         </placeholder>
@@ -35,12 +38,24 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XfT-2N-Ixw">
-                            <rect key="frame" x="10" y="12" width="300" height="21"/>
+                            <rect key="frame" x="10" y="12" width="276" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="k3H-6l-85d">
+                            <rect key="frame" x="291" y="11" width="22" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="infoAction:" destination="-1" eventType="touchUpInside" id="L1N-cG-2ch"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.066666670139999995" green="0.68235296010000002" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                 </view>
@@ -54,11 +69,14 @@
                     </textAttributes>
                     <items>
                         <navigationItem title="Title" id="nnO-Lk-YYz">
-                            <barButtonItem key="leftBarButtonItem" title="Back" id="zRC-1v-RdN">
+                            <barButtonItem key="leftBarButtonItem" title="Done" style="plain" id="c3M-9y-7YZ">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="didSelectBackButton" destination="-1" id="eJO-ko-ljr"/>
+                                    <action selector="didSelectBackButton" destination="-1" id="SvF-My-ktD"/>
                                 </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="sFj-xh-mjc">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </barButtonItem>
                         </navigationItem>
                     </items>

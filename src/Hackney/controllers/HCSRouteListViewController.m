@@ -197,23 +197,16 @@ static int const kTagImage=	3;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-	
 	self.selectedTrip = (Trip *)[_dataProvider objectAtIndex:indexPath.row];
 	
-	if ( _selectedTrip.uploaded==nil ){
-		[self promptToConfirmPurpose];
-	}else{
-		[[TripManager sharedInstance] loadSelectedTrip:_selectedTrip];
-		[self displaySelectedTripMap];
-	}
+	[self displaySelectedTripMap];
 
 }
 
 
 
 
-- (void)displaySelectedTripMap
-{
+- (void)displaySelectedTripMap{
 	
 	if ( _selectedTrip ){
 		HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:_selectedTrip];

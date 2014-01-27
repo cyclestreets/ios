@@ -289,6 +289,29 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 }
 
 
+-(id)fetchObjectforKey:(NSString*)key forType:(NSString*)type{
+	
+	if(type!=nil){
+		
+		NSMutableDictionary *dict=[stateDict objectForKey:type];
+		
+		if(dict!=nil){
+			
+			id foundobject=[dict objectForKey:key];
+			if(foundobject==nil){
+				BetterLog(@"[WARINING] Couldnt find State key: %@ for type: %@ ",key,type);
+				return nil;
+			}else{
+				return foundobject;
+			}
+		}
+		
+		
+	}
+	return nil;
+}
+
+
 
 //
 /***********************************************

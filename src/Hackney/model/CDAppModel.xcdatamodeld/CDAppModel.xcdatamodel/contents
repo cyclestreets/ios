@@ -8,7 +8,7 @@
         <attribute name="recorded" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="speed" optional="YES" attributeType="Double" syncable="YES"/>
         <attribute name="vAccuracy" optional="YES" attributeType="Double" syncable="YES"/>
-        <relationship name="trip" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="Trip" inverseName="coords" inverseEntity="Trip" indexed="YES" syncable="YES"/>
+        <relationship name="trip" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="coords" inverseEntity="Trip" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
         <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
@@ -24,7 +24,7 @@
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="uploaded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="vAccuracy" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
-        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="User" inverseName="notes" inverseEntity="User" indexed="YES" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="notes" inverseEntity="User" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES">
         <attribute name="distance" optional="YES" attributeType="Double" syncable="YES"/>
@@ -35,8 +35,8 @@
         <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="uploaded" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="coords" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Coord" inverseName="trip" inverseEntity="Coord" indexed="YES" syncable="YES"/>
-        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="User" inverseName="trips" inverseEntity="User" indexed="YES" syncable="YES"/>
+        <relationship name="coords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Coord" inverseName="trip" inverseEntity="Coord" indexed="YES" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="trips" inverseEntity="User" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -50,8 +50,8 @@
         <attribute name="rider_type" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="schoolZIP" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="workZIP" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="notes" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Note" inverseName="user" inverseEntity="Note" indexed="YES" syncable="YES"/>
-        <relationship name="trips" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Trip" inverseName="user" inverseEntity="Trip" indexed="YES" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="user" inverseEntity="Note" indexed="YES" syncable="YES"/>
+        <relationship name="trips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Trip" inverseName="user" inverseEntity="Trip" indexed="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="Coord" positionX="0" positionY="0" width="0" height="0"/>

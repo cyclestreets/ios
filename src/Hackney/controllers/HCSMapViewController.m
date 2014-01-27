@@ -58,6 +58,7 @@
 #import "ExpandedUILabel.h"
 #import "HudManager.h"
 #import "TripManager.h"
+#import "UIView+Additions.h"
 
 #define kFudgeFactor	1.5
 #define kInfoViewAlpha	0.8
@@ -71,8 +72,10 @@
 
 @property (nonatomic, strong) Trip									*trip;
 @property (nonatomic, strong) UIBarButtonItem						*doneButton;
-@property (nonatomic, strong) UIBarButtonItem						*flipButton;
+@property (nonatomic, weak) IBOutlet UIButton						*infoButton;
 @property (nonatomic, strong) LayoutBox								*infoView;
+@property(nonatomic,weak) IBOutlet UIBarButtonItem					*backButton;
+@property(nonatomic,strong) IBOutlet UIBarButtonItem				*uploadButton;
 
 @property (nonatomic,weak) IBOutlet UILabel							*routeInfoLabel;
 
@@ -101,7 +104,7 @@
 
 
 
-- (void)infoAction:(UIButton*)sender
+- (IBAction)infoAction:(UIButton*)sender
 {
 	NSLog(@"infoAction");
 	[UIView setAnimationDelegate:self];
@@ -121,10 +124,12 @@
 	[UIView commitAnimations];
 	
 	// adjust our done/info buttons accordingly
-	if ([_infoView superview] == self.view)
+	if ([_infoView superview] == self.view){
 		_myNavigationItem.rightBarButtonItem = _doneButton;
-	else
-		_myNavigationItem.rightBarButtonItem = _flipButton;
+	}else{
+		_myNavigationItem.rightBarButtonItem = _uploadButton;
+	}
+		
 }
 
 
@@ -177,7 +182,7 @@
 		if (dateFormatter == nil) {
 			dateFormatter = [[NSDateFormatter alloc] init];
 			[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-			[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+			[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 		}
 		
 		// display duration, distance as navbar prompt
@@ -203,17 +208,30 @@
 		if ( ![_trip.notes isEqualToString:EMPTYSTRING] && _trip.notes != nil)
 		{
 			_doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(infoAction:)];
-			
-			UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-			infoButton.showsTouchWhenHighlighted = YES;
-			[infoButton addTarget:self action:@selector(infoAction:) forControlEvents:UIControlEventTouchUpInside];
-			_flipButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-			_myNavigationItem.rightBarButtonItem = _flipButton;
-			
+			_infoButton.visible=YES;
 			[self initInfoView];
+		}else{
+			_infoButton.visible=NO;
 		}
 		
         
+		
+		switch (_viewMode) {
+			case HCSMapViewModeSave:
+			{
+				[_myNavigationItem.leftBarButtonItem setTitle:@"Done"];
+			}
+			break;
+			case HCSMapViewModeShow:
+			{
+				[_myNavigationItem.leftBarButtonItem setTitle:@"Back"];
+			}
+			break;
+		}
+		
+		_uploadButton.enabled=_trip.uploaded==nil;
+		
+		
 				
 		// filter coords by hAccuracy
 		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 6.0"];
@@ -308,13 +326,13 @@
         
         //add start/end pins
         RMAnnotation *startPoint = [[RMAnnotation alloc] init];
-		SegmentVO *firstsegment=(SegmentVO*)[_currentRoute.segments firstObject];
+		SegmentVO *firstsegment=(SegmentVO*)[routeCoords firstObject];
         startPoint.coordinate = firstsegment.segmentStart;
         startPoint.title = @"Start";
 		startPoint.annotationIcon=[UIImage imageNamed:@"tripStart.png"];
         [_mapView addAnnotation:startPoint];
         RMAnnotation *endPoint = [[RMAnnotation alloc] init];
-		SegmentVO *lastsegment=(SegmentVO*)[_currentRoute.segments lastObject];
+		SegmentVO *lastsegment=(SegmentVO*)[routeCoords lastObject];
         endPoint.coordinate = lastsegment.segmentStart;
         endPoint.title = @"End";
 		endPoint.annotationIcon=[UIImage imageNamed:@"tripEnd.png"];
@@ -410,6 +428,12 @@
 }
 
 
+-(IBAction)didSelectUploadButton:(id)sender{
+	
+	[[TripManager sharedInstance] uploadSelectedTrip:_trip];
+	
+}
+
 
 
 #pragma mark RMMapView delegate methods
@@ -440,9 +464,6 @@
 - (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation {
 	//NSLog(@"viewForAnnotation");
 	
-    // If it's the user location, just return nil.
-    if ([annotation isKindOfClass:[MKUserLocation class]])
-        return nil;
 	
     // Handle any custom annotations.
     if ([annotation isKindOfClass:[MapCoord class]]){

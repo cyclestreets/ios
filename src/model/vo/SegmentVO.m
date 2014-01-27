@@ -75,6 +75,10 @@ static NSDictionary *roadIcons;
 	return [point  coordinate];
 }
 
+- (CLLocationCoordinate2D)segmentStartInverted {
+	CSPointVO *point=[pointsArray objectAtIndex:0];
+	return [point  coordinateInverted];
+}
 - (CLLocationCoordinate2D)segmentEnd {
 	return [(CSPointVO*)[pointsArray objectAtIndex:[pointsArray count]-1] coordinate];
 }

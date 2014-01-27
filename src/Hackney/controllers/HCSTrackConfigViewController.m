@@ -124,30 +124,27 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	self.currentLocation=location;
 	
     
-	if ( !_didUpdateUserLocation )
-	{
+	if ( !_didUpdateUserLocation ){
 		
 		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
 		
 		_didUpdateUserLocation = YES;
-	}
-	
-	// only update map if deltaDistance is at least some epsilon
-	else if ( deltaDistance > 1.0 )
-	{
-		//NSLog(@"center map to current user location");
+		
+	}else if ( deltaDistance > 1.0 ){
+		
 		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
 	}
 	
-	if ( _isRecordingTrack )
-	{
-		// add to CoreData store
+	if ( _isRecordingTrack ){
+		
+		
 		self.currentTrip=[TripManager sharedInstance].currentRecordingTrip;
+		
 		CLLocationDistance distance = [_tripManager addCoord:_currentLocation];
 		_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
 	}
 	
-	// 	double mph = ( [trip.distance doubleValue] / 1609.344 ) / ( [trip.duration doubleValue] / 3600. );
+	
 	if ( _currentLocation.speed >= 0 )
 		_trackSpeedLabel.text = [NSString stringWithFormat:@"%.1f mph", _currentLocation.speed * 3600 / 1609.344];
 	else
@@ -206,7 +203,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[RMMapView class];
 	[_mapView setDelegate:self];
 	_mapView.showsUserLocation=YES;
-	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	
 	
 	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:_mapView.frame];

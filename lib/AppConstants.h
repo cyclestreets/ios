@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class NetResponse;
+
 #define ENABLEDEBUGTRACE 1
 #define ENABLEOS6ACTIVITYMODE 0
+
+typedef void(^BUSimpleBlock)(void);
+typedef void (^ParserCompletionBlock)(NetResponse *result);
+typedef void (^ParserErrorBlock)(NetResponse *result, NSError *error);
+
 
 enum  {
 	

@@ -47,6 +47,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "WrapController.h"
 #import "NSString-Utilities.h"
 
+#import "TripManager.h"
+#import "HCSHelpViewController.h"
+
 #if defined (CONFIGURATION_Adhoc)
 #import "TestFlight.h"
 #endif
@@ -168,6 +171,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self performSelector:@selector(backgroundSetup) withObject:nil afterDelay:0.0];
 	[self removeStartupView];
 	
+	[self displayHelpViewController];
+	
 	
 }
 
@@ -180,10 +185,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
 	[[UserSettingsManager sharedInstance] saveApplicationState];
-	[[UserAccount sharedInstance] logoutUser];
+	
+	if([TripManager sharedInstance].isRecording){
+        NSLog(@"BACKGROUNDED and recording"); //set location service to startUpdatingLocation
+        //[appDelegate.locationManager startUpdatingLocation];
+    } else {
+        NSLog(@"BACKGROUNDED and sitting idle"); //set location service to startMonitoringSignificantLocationChanges
+        //[appDelegate.locationManager stopUpdatingLocation];
+        //[appDelegate.locationManager startMonitoringSignificantLocationChanges];
+    }
+	
 }
 -(void)applicationWillEnterForeground:(UIApplication *)application{
-	[[UserAccount sharedInstance] loginExistingUser];
+	
 }
 
 
@@ -267,6 +281,34 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
+#pragma mark - Help View setup
+
+-(void)displayHelpViewController{
+	
+	BOOL shouldDisplayhelpView=![[[UserSettingsManager sharedInstance] fetchObjectforKey:@"helpViewDisplayed" forType:kSTATESYSTEMCONTROLLEDSETTINGSKEY ] boolValue];
+	
+	if(shouldDisplayhelpView){
+		
+		HCSHelpViewController *helpController=[[HCSHelpViewController alloc]initWithNibName:[HCSHelpViewController nibName] bundle:nil];
+		
+		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:helpController];
+		
+		
+		[self.tabBarController presentViewController:nav animated:YES completion:^{
+			
+		}];
+		
+		
+		
+	}
+	
+}
+
+
+
+
+
+#pragma mark - TabBar setup
 //
 /***********************************************
  * @description			create Tabbar order based on saved user context, handles More Tabbar reording
@@ -356,7 +398,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	tabBarController.tabBar.translucent=NO;
 	
-	[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:tabBarController.moreNavigationController.navigationBar];
+	//[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:tabBarController.moreNavigationController.navigationBar];
 	
 	// DEV: temp disable of edit 
 	tabBarController.customizableViewControllers=nil;
@@ -426,15 +468,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
-//
-/***********************************************
- * Utility method to set the navigationBar colors
- ***********************************************/
-//
-- (void)setBarStyle:(UIBarStyle)style andTintColor:(UIColor *)color forNavigationBar:(UINavigationBar *)bar {
-    bar.barStyle = style;
-	bar.tintColor = color;	
-}
+
 
 //
 /***********************************************

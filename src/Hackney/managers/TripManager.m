@@ -11,8 +11,9 @@
 
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
-
+#import <AFNetworking.h>
 #import "CoreDataStore.h"
+#import "ApplicationJSONParser.h"
 
 // use this epsilon for both real-time and post-processing distance calculations
 #define kEpsilonAccuracy		100.0
@@ -316,16 +317,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	[[CoreDataStore mainStore]save];
 	
+	
+	
+	
+	//TODO: Send this dict to network controller
+	
+	//TODO:  send notification to display Map VC for current recording trip ie displayUploadedTripMap
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:HCSDISPLAYTRIPMAP object:nil];
+}
+
+
+
+#pragma mar - Trip uploading
+
+-(void)uploadSelectedTrip:(Trip*)trip{
+	
+	
 	// get array of coords
-	NSMutableDictionary *tripDict = [NSMutableDictionary dictionaryWithCapacity:[_recordingTripCoords count]];
-	NSEnumerator *enumerator = [_recordingTripCoords objectEnumerator];
+	NSMutableDictionary *tripDict = [NSMutableDictionary dictionaryWithCapacity:[trip.coords count]];
+	NSEnumerator *enumerator = [trip.coords objectEnumerator];
 	Coord *coord;
 	
 	// format date as a string
 	NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
 	[outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-
-    NSLog(@"saving using protocol version 3");
 	
 	// create a tripDict entry for each coord
 	while (coord = [enumerator nextObject])
@@ -346,20 +362,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	// get trip purpose
 	NSString *purpose;
-	if ( _currentRecordingTrip.purpose )
-		purpose = _currentRecordingTrip.purpose;
+	if ( trip.purpose )
+		purpose = trip.purpose;
 	else
 		purpose = @"unknown";
 	
 	// get trip notes
 	NSString *notes = @"";
-	if ( _currentRecordingTrip.notes )
-		notes = _currentRecordingTrip.notes;
+	if ( trip.notes )
+		notes = trip.notes;
 	
 	// get start date
-	NSString *start = [outputFormatter stringFromDate:_currentRecordingTrip.start];
+	NSString *start = [outputFormatter stringFromDate:trip.start];
 	NSLog(@"start: %@", start);
-
+	
 	// encode user data
 	NSDictionary *userDict = [self encodeUserData];
     
@@ -374,8 +390,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     NSData *tripJsonData = [NSJSONSerialization dataWithJSONObject:tripDict options:0 error:&writeError];
     NSString *tripJson = [[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding];
     //NSLog(@"trip data %@", tripJson);
-
-        
+	
+	
 	// NOTE: device hash added by SaveRequest initWithPostVars
 	NSDictionary *postVars = [NSDictionary dictionaryWithObjectsAndKeys:
 							  tripJson, @"coords",
@@ -383,131 +399,43 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 							  notes, @"notes",
 							  start, @"start",
 							  userJson, @"user",
-                              
+							  [[[UIDevice currentDevice] identifierForVendor] UUIDString],@"device",
 							  [NSString stringWithFormat:@"%d", kSaveProtocolVersion], @"version",
 							  nil];
 	
 	
-	//TODO: Send this dict to network controller
 	
-	//TODO:  send notification to display Map VC for current recording trip ie displayUploadedTripMap
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:HCSDISPLAYTRIPMAP object:nil];
-}
-
-
-#pragma mark NSURLConnection delegate methods
-
-
-- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten 
- totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
-{
-	NSLog(@"%d bytesWritten, %d totalBytesWritten, %d totalBytesExpectedToWrite",
-		  bytesWritten, totalBytesWritten, totalBytesExpectedToWrite );
-}
-
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-	
-	/*
-	// this method is called when the server has determined that it
-    // has enough information to create the NSURLResponse
-	NSLog(@"didReceiveResponse: %@", response);
-	
-	NSHTTPURLResponse *httpResponse = nil;
-	if ( [response isKindOfClass:[NSHTTPURLResponse class]] &&
-		( httpResponse = (NSHTTPURLResponse*)response ) )
-	{
-		BOOL success = NO;
-		NSString *title   = nil;
-		NSString *message = nil;
-		switch ( [httpResponse statusCode] )
-		{
-			case 200:
-			case 201:
-				success = YES;
-				title	= kSuccessTitle;
-				message = kSaveSuccess;
-				break;
-			case 202:
-				success = YES;
-				title	= kSuccessTitle;
-				message = kSaveAccepted;
-				break;
-			case 500:
-			default:
-				title = @"Internal Server Error";
-				//message = [NSString stringWithFormat:@"%d", [httpResponse statusCode]];
-				message = kServerError;
-		}
-		
-		NSLog(@"%@: %@", title, message);
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager POST:@"http://alrtsystems.com/api/userLogin" parameters:postVars success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        //
-        // DEBUG
-        NSLog(@"+++++++DEBUG didReceiveResponse %@: %@", [response URL],[(NSHTTPURLResponse*)response allHeaderFields]);
-        //
-        //
-		
-		// update trip.uploaded 
-		if ( success )
-		{
-			[trip setUploaded:[NSDate date]];
-			
-			NSError *error;
-			if (![managedObjectContext save:&error]) {
-				// Handle the error.
-				NSLog(@"TripManager setUploaded error %@, %@", error, [error localizedDescription]);
-			}
+        [[ApplicationJSONParser sharedInstance] parseDataForResponseData:(NSMutableData *)responseObject forRequestType:@"" success:^(NetResponse *result) {
             
-            [uploadingView loadingComplete:kSuccessTitle delayInterval:.7];
-		} else {
-
-            [uploadingView loadingComplete:kServerError delayInterval:1.5];
-        }
+           
+			// set uploaded to trip> save trip > ui may require updating
+			
+            
+           //[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_USERLOGINKNOWNUSER object:nil];
+            
+        } failure:^(NetResponse *result, NSError *error) {
+            
+           // [[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_USERLOGINKNOWNUSER object:result];
+            
+        }];
         
-	}
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+       
+        
+        
+    }];
 	
-    // it can be called multiple times, for example in the case of a
-	// redirect, so each time we reset the data.
 	
-    // receivedData is declared as a method instance elsewhere
-    [receivedData setLength:0];
-	 
-	 */
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{	
-//    // append the new data to the receivedData	
-//    // receivedData is declared as a method instance elsewhere
-//	[receivedData appendData:data];	
-////	[activityDelegate startAnimating];
-}
-
-- (void)connection:(NSURLConnection *)connection
-  didFailWithError:(NSError *)error
-{
-    
-//    // TODO: is this really adequate...?
-//    [uploadingView loadingComplete:kConnectionError delayInterval:1.5];
-//    
-//    // inform the user
-//    NSLog(@"Connection failed! Error - %@ %@",
-//          [error localizedDescription],
-//          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-	// do something with the data
-//    NSLog(@"+++++++DEBUG: Received %d bytes of data", [receivedData length]);
-//	NSLog(@"%@", [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding] );
+	
 	
 }
+
 
 
 - (NSInteger)getPurposeIndex

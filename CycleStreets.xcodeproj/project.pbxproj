@@ -376,7 +376,6 @@
 		283436E515DD5DC300B00FD5 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6329131FB6C8008527FC /* UIView+Additions.m */; };
 		283436E615DD5DC300B00FD5 /* DataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD632D131FB6C8008527FC /* DataSourceManager.m */; };
 		283436E715DD5DC300B00FD5 /* NetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD632F131FB6C8008527FC /* NetRequest.m */; };
-		283436E815DD5DC300B00FD5 /* NetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6331131FB6C8008527FC /* NetResponse.m */; };
 		283436E915DD5DC300B00FD5 /* RemoteFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6334131FB6C8008527FC /* RemoteFileManager.m */; };
 		283436EA15DD5DC300B00FD5 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6339131FB6C8008527FC /* AsyncImageView.m */; };
 		283436EB15DD5DC300B00FD5 /* BorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD633B131FB6C8008527FC /* BorderView.m */; };
@@ -724,7 +723,6 @@
 		28AD642E131FB6C8008527FC /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6329131FB6C8008527FC /* UIView+Additions.m */; };
 		28AD642F131FB6C8008527FC /* DataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD632D131FB6C8008527FC /* DataSourceManager.m */; };
 		28AD6430131FB6C8008527FC /* NetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD632F131FB6C8008527FC /* NetRequest.m */; };
-		28AD6431131FB6C8008527FC /* NetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6331131FB6C8008527FC /* NetResponse.m */; };
 		28AD6432131FB6C8008527FC /* RemoteFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6334131FB6C8008527FC /* RemoteFileManager.m */; };
 		28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6339131FB6C8008527FC /* AsyncImageView.m */; };
 		28AD6435131FB6C8008527FC /* BorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD633B131FB6C8008527FC /* BorderView.m */; };
@@ -754,6 +752,14 @@
 		28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */; };
 		28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */; };
 		28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */; };
+		28AE47AD1896932C00203C20 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */; };
+		28AE47AE1896932C00203C20 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */; };
+		28AE47B1189693D300203C20 /* NetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B0189693D300203C20 /* NetResponse.m */; };
+		28AE47B2189693D300203C20 /* NetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B0189693D300203C20 /* NetResponse.m */; };
+		28AE47B41896C55100203C20 /* HCSHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AE47B31896C55100203C20 /* HCSHelpView.xib */; };
+		28AE47B51896C55100203C20 /* HCSHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AE47B31896C55100203C20 /* HCSHelpView.xib */; };
+		28AE47B81896C5A000203C20 /* HCSHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B71896C5A000203C20 /* HCSHelpViewController.m */; };
+		28AE47B91896C5A000203C20 /* HCSHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B71896C5A000203C20 /* HCSHelpViewController.m */; };
 		28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28B016161891B44C00C2414C /* UIAlertView+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B016151891B44C00C2414C /* UIAlertView+BlocksKit.m */; };
@@ -954,6 +960,7 @@
 		28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
 		28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
 		28FB9C4B17BCD428009B5E32 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FB9C4917BCD428009B5E32 /* libTestFlight.a */; };
+		432733BC9FE44228ADB078A6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B7A6969BE34DB58CECF303 /* libPods.a */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E77D8F11120321E4003E6B8D /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		E7BE4B1A11A2E5F400930E0C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */; };
@@ -1445,8 +1452,6 @@
 		28AD632D131FB6C8008527FC /* DataSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DataSourceManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28AD632E131FB6C8008527FC /* NetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NetRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28AD632F131FB6C8008527FC /* NetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NetRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		28AD6330131FB6C8008527FC /* NetResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = NetResponse.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		28AD6331131FB6C8008527FC /* NetResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NetResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28AD6332131FB6C8008527FC /* NetUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetUtilities.h; sourceTree = "<group>"; };
 		28AD6333131FB6C8008527FC /* RemoteFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFileManager.h; sourceTree = "<group>"; };
 		28AD6334131FB6C8008527FC /* RemoteFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFileManager.m; sourceTree = "<group>"; };
@@ -1497,6 +1502,13 @@
 		28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orangesmall_lo@2x.png"; sourceTree = "<group>"; };
 		28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_hi@2x.png"; sourceTree = "<group>"; };
 		28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_lo@2x.png"; sourceTree = "<group>"; };
+		28AE47AB1896932C00203C20 /* ApplicationJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationJSONParser.h; sourceTree = "<group>"; };
+		28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationJSONParser.m; sourceTree = "<group>"; };
+		28AE47AF189693D300203C20 /* NetResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetResponse.h; sourceTree = "<group>"; };
+		28AE47B0189693D300203C20 /* NetResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetResponse.m; sourceTree = "<group>"; };
+		28AE47B31896C55100203C20 /* HCSHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSHelpView.xib; path = hackney/HCSHelpView.xib; sourceTree = "<group>"; };
+		28AE47B61896C5A000203C20 /* HCSHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSHelpViewController.h; sourceTree = "<group>"; };
+		28AE47B71896C5A000203C20 /* HCSHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSHelpViewController.m; sourceTree = "<group>"; };
 		28AE590315E503270034268C /* MapMarkerTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMarkerTouchView.h; sourceTree = "<group>"; };
 		28AE590415E503270034268C /* MapMarkerTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMarkerTouchView.m; sourceTree = "<group>"; };
 		28B016141891B44C00C2414C /* UIAlertView+BlocksKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+BlocksKit.h"; sourceTree = "<group>"; };
@@ -1667,6 +1679,7 @@
 		28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_walking@2x.png"; sourceTree = "<group>"; };
 		28FB9C4917BCD428009B5E32 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		28FB9C4A17BCD428009B5E32 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		B5B7A6969BE34DB58CECF303 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E77D8F10120321E4003E6B8D /* credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = credits.html; path = html/credits.html; sourceTree = "<group>"; };
 		E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1677,6 +1690,7 @@
 		E7FD8F3C127821DB002640D0 /* appstore-icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appstore-icon-512.png"; sourceTree = "<group>"; };
 		E7FD8F3D127821DB002640D0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		E7FD8F3E127821DB002640D0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		EF4E7F108AB64444B9F67D6A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1684,6 +1698,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				432733BC9FE44228ADB078A6 /* libPods.a in Frameworks */,
 				289AA2EC188EF5D10097AA5A /* libMapView.a in Frameworks */,
 				28452757188E9168005A7DF1 /* CoreData.framework in Frameworks */,
 				2811C4CA166CFFE600592560 /* MessageUI.framework in Frameworks */,
@@ -2235,6 +2250,8 @@
 				287050B4188FC407004CD922 /* HCSRouteDetailViewController.m */,
 				287050B7188FC407004CD922 /* HCSSurveyViewController.h */,
 				287050B8188FC407004CD922 /* HCSSurveyViewController.m */,
+				28AE47B61896C5A000203C20 /* HCSHelpViewController.h */,
+				28AE47B71896C5A000203C20 /* HCSHelpViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -2378,6 +2395,7 @@
 				2880BE54188E821A006FF7E2 /* HCSRouteListView.xib */,
 				2880BE57188E822C006FF7E2 /* HCSSurveyView.xib */,
 				2818E0C5189050570031AD43 /* HCSMapViewController.xib */,
+				28AE47B31896C55100203C20 /* HCSHelpView.xib */,
 			);
 			name = hackney;
 			sourceTree = "<group>";
@@ -2619,6 +2637,8 @@
 				280E93451409856E00C7AC75 /* RouteParser.m */,
 				2863A38C134E508800A22093 /* XMLRequest.h */,
 				2863A38D134E508800A22093 /* XMLRequest.m */,
+				28AE47AB1896932C00203C20 /* ApplicationJSONParser.h */,
+				28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */,
 				28AD6205131FB69D008527FC /* ApplicationXMLParser.h */,
 				28AD6206131FB69D008527FC /* ApplicationXMLParser.m */,
 			);
@@ -2774,8 +2794,8 @@
 				28AD632D131FB6C8008527FC /* DataSourceManager.m */,
 				28AD632E131FB6C8008527FC /* NetRequest.h */,
 				28AD632F131FB6C8008527FC /* NetRequest.m */,
-				28AD6330131FB6C8008527FC /* NetResponse.h */,
-				28AD6331131FB6C8008527FC /* NetResponse.m */,
+				28AE47AF189693D300203C20 /* NetResponse.h */,
+				28AE47B0189693D300203C20 /* NetResponse.m */,
 				28AD6332131FB6C8008527FC /* NetUtilities.h */,
 				28AD6333131FB6C8008527FC /* RemoteFileManager.h */,
 				28AD6334131FB6C8008527FC /* RemoteFileManager.m */,
@@ -3109,6 +3129,7 @@
 				29B97317FDCFA39411CA2CEA /* Linked */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				EF4E7F108AB64444B9F67D6A /* Pods.xcconfig */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -3144,6 +3165,7 @@
 				E72E65A4121C2226008DA360 /* AssetsLibrary.framework */,
 				28D7E1F712BAA8710025C4A2 /* libxml2.dylib */,
 				2831ABFC1362F7D000EBBA69 /* AddressBook.framework */,
+				B5B7A6969BE34DB58CECF303 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3169,10 +3191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Hackney" */;
 			buildPhases = (
+				451595FC56B14219BD1464E4 /* Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				283435FA15DD54B300B00FD5 /* ShellScript */,
+				436382D1C66E4279887E0D38 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3211,6 +3235,7 @@
 				ORGANIZATIONNAME = "CycleStreets Ltd";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = Q3YCNU3X72;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3437,6 +3462,7 @@
 				28BC448F18915A5800711A1A /* MapCoord.png in Resources */,
 				28187AD414FCFF4D00A38A17 /* UIButtonBarArrowRight.png in Resources */,
 				28187AD514FCFF4D00A38A17 /* UIButtonBarCameraSmall.png in Resources */,
+				28AE47B41896C55100203C20 /* HCSHelpView.xib in Resources */,
 				28187AD614FCFF4D00A38A17 /* UIButtonBarInfo.png in Resources */,
 				28187AD714FCFF4D00A38A17 /* UIButtonBarRefresh.png in Resources */,
 				28187AD814FCFF4D00A38A17 /* UIButtonBarStop.png in Resources */,
@@ -3795,6 +3821,7 @@
 				28535DCA15E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
 				28535DFB15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
 				28BC443C18915A5800711A1A /* other.tif in Resources */,
+				28AE47B51896C55100203C20 /* HCSHelpView.xib in Resources */,
 				2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
 				289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
@@ -3856,6 +3883,36 @@
 			shellPath = /bin/sh;
 			shellScript = "../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
 		};
+		436382D1C66E4279887E0D38 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		451595FC56B14219BD1464E4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3868,11 +3925,13 @@
 				28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */,
 				28AD62A4131FB69D008527FC /* FavouritesManager.m in Sources */,
 				287050E1188FC43C004CD922 /* SaveRequest.m in Sources */,
+				28AE47AD1896932C00203C20 /* ApplicationJSONParser.m in Sources */,
 				28AD62A5131FB69D008527FC /* FormManager.m in Sources */,
 				28AD62A6131FB69D008527FC /* SettingsManager.m in Sources */,
 				28AD62A7131FB69D008527FC /* StartupManager.m in Sources */,
 				28AD62AB131FB69D008527FC /* CycleStreets.m in Sources */,
 				28AD62AC131FB69D008527FC /* Files.m in Sources */,
+				28AE47B1189693D300203C20 /* NetResponse.m in Sources */,
 				28AD62AD131FB69D008527FC /* Model.m in Sources */,
 				28AD62AE131FB69D008527FC /* UserAccount.m in Sources */,
 				287050C9188FC407004CD922 /* HCSRouteListViewController.m in Sources */,
@@ -3904,7 +3963,6 @@
 				28AD642F131FB6C8008527FC /* DataSourceManager.m in Sources */,
 				28AD6430131FB6C8008527FC /* NetRequest.m in Sources */,
 				280565EE18903C8900359211 /* CDAppModel.xcdatamodeld in Sources */,
-				28AD6431131FB6C8008527FC /* NetResponse.m in Sources */,
 				28AD6432131FB6C8008527FC /* RemoteFileManager.m in Sources */,
 				28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */,
 				28AD6435131FB6C8008527FC /* BorderView.m in Sources */,
@@ -4012,6 +4070,7 @@
 				28187A3314FCC7EF00A38A17 /* UserLocationManager.m in Sources */,
 				28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */,
 				28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */,
+				28AE47B81896C5A000203C20 /* HCSHelpViewController.m in Sources */,
 				288FA2C3150BF9500068F0C1 /* PhotoWizardLocationViewController.m in Sources */,
 				2818E0CA189050930031AD43 /* HCSMapViewController.m in Sources */,
 				28B7813A150F3D0600503638 /* CSNavigationBar.m in Sources */,
@@ -4058,11 +4117,13 @@
 				283436C815DD5DC300B00FD5 /* SuperViewController.m in Sources */,
 				283436CA15DD5DC300B00FD5 /* FavouritesManager.m in Sources */,
 				287050E2188FC43C004CD922 /* SaveRequest.m in Sources */,
+				28AE47AE1896932C00203C20 /* ApplicationJSONParser.m in Sources */,
 				283436CB15DD5DC300B00FD5 /* FormManager.m in Sources */,
 				283436CC15DD5DC300B00FD5 /* SettingsManager.m in Sources */,
 				283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */,
 				283436CE15DD5DC300B00FD5 /* CycleStreets.m in Sources */,
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
+				28AE47B2189693D300203C20 /* NetResponse.m in Sources */,
 				283436D015DD5DC300B00FD5 /* Model.m in Sources */,
 				283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */,
 				287050CA188FC407004CD922 /* HCSRouteListViewController.m in Sources */,
@@ -4094,7 +4155,6 @@
 				283436E615DD5DC300B00FD5 /* DataSourceManager.m in Sources */,
 				283436E715DD5DC300B00FD5 /* NetRequest.m in Sources */,
 				280565EF18903C8900359211 /* CDAppModel.xcdatamodeld in Sources */,
-				283436E815DD5DC300B00FD5 /* NetResponse.m in Sources */,
 				283436E915DD5DC300B00FD5 /* RemoteFileManager.m in Sources */,
 				283436EA15DD5DC300B00FD5 /* AsyncImageView.m in Sources */,
 				283436EB15DD5DC300B00FD5 /* BorderView.m in Sources */,
@@ -4202,6 +4262,7 @@
 				2834374E15DD5DC300B00FD5 /* UserLocationManager.m in Sources */,
 				2834374F15DD5DC300B00FD5 /* PhotoWizardViewController.m in Sources */,
 				2834375015DD5DC300B00FD5 /* UploadPhotoVO.m in Sources */,
+				28AE47B91896C5A000203C20 /* HCSHelpViewController.m in Sources */,
 				2834375115DD5DC300B00FD5 /* PhotoWizardLocationViewController.m in Sources */,
 				2818E0CB189050930031AD43 /* HCSMapViewController.m in Sources */,
 				2834375215DD5DC300B00FD5 /* CSNavigationBar.m in Sources */,
@@ -4244,12 +4305,13 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF4E7F108AB64444B9F67D6A /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				BUNDLE_ID = hackney;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4263,7 +4325,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = ../../../libs/Alpstein/MapView;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../../../libs/Alpstein/MapView,
+				);
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -4272,13 +4337,15 @@
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
 					"\"$(SRCROOT)/lib/external/GoogleAnalytics\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-licucore",
 					"-ObjC",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "D8783615-2EDA-448C-A251-87502697983E";
+				PROVISIONING_PROFILE = "7CFF10DA-1D8B-4966-ADBC-C79C1F13EF2D";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
@@ -4287,12 +4354,13 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF4E7F108AB64444B9F67D6A /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				BUNDLE_ID = hackney;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4304,7 +4372,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = ../../../libs/Alpstein/MapView;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../../../libs/Alpstein/MapView,
+				);
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -4313,10 +4384,12 @@
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
 					"\"$(SRCROOT)/lib/external/GoogleAnalytics\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-lxml2",
 					"-ObjC",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
@@ -4350,7 +4423,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
-				INFOPLIST_FILE = "CycleStreets-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4361,6 +4434,7 @@
 					"-lxml2",
 					"-licucore",
 					"-ObjC",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "63C1E7AD-A062-40B1-826E-34E728B30570";
@@ -4392,7 +4466,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
-				INFOPLIST_FILE = "CycleStreets-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4403,6 +4477,7 @@
 					"-licucore",
 					"-lxml2",
 					"-ObjC",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
@@ -4435,7 +4510,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
-				INFOPLIST_FILE = "CycleStreets-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4446,6 +4521,7 @@
 					"-licucore",
 					"-ObjC",
 					"-lxml2",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "B69ADFE1-B824-4A5F-867E-B78CC80FC985";
@@ -4545,13 +4621,14 @@
 		};
 		E791ADCA11518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF4E7F108AB64444B9F67D6A /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				BUNDLE_ID = "hackney-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4563,7 +4640,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = ../../../libs/Alpstein/MapView;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					../../../libs/Alpstein/MapView,
+				);
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -4572,10 +4652,12 @@
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
 					"\"$(SRCROOT)/lib/external/GoogleAnalytics\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-ObjC",
 					"-lxml2",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "4D0FE45A-299D-4E32-9852-F1E5A85EDF08";

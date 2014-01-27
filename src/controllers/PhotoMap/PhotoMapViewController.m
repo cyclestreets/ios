@@ -425,7 +425,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	//[self displayLocationIndicator:NO];
 	
-	//[self requestPhotos];
+	[self requestPhotos];
 	
 }
 

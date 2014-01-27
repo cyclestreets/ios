@@ -47,6 +47,8 @@
 @property (nonatomic, readonly)	CLLocationCoordinate2D	segmentStart;
 @property (nonatomic, readonly)	CLLocationCoordinate2D	segmentEnd;
 
+@property (nonatomic, readonly)	CLLocationCoordinate2D	segmentStartInverted;
+
 @property (nonatomic, readonly)	NSString	*provisionIcon;
 @property (nonatomic, readonly)	NSDictionary	*infoStringDictionary;
 

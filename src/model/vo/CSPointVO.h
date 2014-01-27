@@ -39,6 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (BOOL) insideRect:(CGRect)rect;
 
 @property (nonatomic, readonly)	CLLocationCoordinate2D	coordinate;
+@property (nonatomic, readonly)	CLLocationCoordinate2D coordinateInverted;
 
 
 @end

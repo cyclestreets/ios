@@ -59,7 +59,7 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 
 @property (nonatomic,strong)  Trip								*currentRecordingTrip;
-@property (nonatomic,strong,readonly)  Trip								*selectedTrip;
+@property (nonatomic,strong,readonly)  Trip						*selectedTrip;
 
 // deprecate
 @property (nonatomic, retain) id <ActivityIndicatorDelegate>	activityDelegate;
@@ -116,6 +116,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 -(void)loadSelectedTrip:(Trip*)trip;
 
 -(void)removeCurrentRecordingTrip;
+
+-(void)uploadSelectedTrip:(Trip*)trip;
 
 @end
 
