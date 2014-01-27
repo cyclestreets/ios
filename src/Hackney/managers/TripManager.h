@@ -87,6 +87,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 @property (nonatomic, assign) BOOL isRecording;
 
 
+
 - (BOOL)loadTrip:(Trip*)trip;
 
 - (Trip*)createTrip;

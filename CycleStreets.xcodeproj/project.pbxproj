@@ -760,6 +760,12 @@
 		28AE47B51896C55100203C20 /* HCSHelpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AE47B31896C55100203C20 /* HCSHelpView.xib */; };
 		28AE47B81896C5A000203C20 /* HCSHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B71896C5A000203C20 /* HCSHelpViewController.m */; };
 		28AE47B91896C5A000203C20 /* HCSHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B71896C5A000203C20 /* HCSHelpViewController.m */; };
+		28AE47BB1896DA7700203C20 /* HCSUserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AE47BA1896DA7700203C20 /* HCSUserDetailsView.xib */; };
+		28AE47BC1896DA7700203C20 /* HCSUserDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AE47BA1896DA7700203C20 /* HCSUserDetailsView.xib */; };
+		28AE47BF1896DCCD00203C20 /* HCSUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */; };
+		28AE47C01896DCCD00203C20 /* HCSUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */; };
+		28AE47C31896E95000203C20 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47C21896E95000203C20 /* UserManager.m */; };
+		28AE47C41896E95000203C20 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47C21896E95000203C20 /* UserManager.m */; };
 		28AE590515E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28AE590615E503270034268C /* MapMarkerTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE590415E503270034268C /* MapMarkerTouchView.m */; };
 		28B016161891B44C00C2414C /* UIAlertView+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B016151891B44C00C2414C /* UIAlertView+BlocksKit.m */; };
@@ -1509,6 +1515,11 @@
 		28AE47B31896C55100203C20 /* HCSHelpView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSHelpView.xib; path = hackney/HCSHelpView.xib; sourceTree = "<group>"; };
 		28AE47B61896C5A000203C20 /* HCSHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSHelpViewController.h; sourceTree = "<group>"; };
 		28AE47B71896C5A000203C20 /* HCSHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSHelpViewController.m; sourceTree = "<group>"; };
+		28AE47BA1896DA7700203C20 /* HCSUserDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSUserDetailsView.xib; path = hackney/HCSUserDetailsView.xib; sourceTree = "<group>"; };
+		28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSUserDetailsViewController.h; sourceTree = "<group>"; };
+		28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSUserDetailsViewController.m; sourceTree = "<group>"; };
+		28AE47C11896E95000203C20 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		28AE47C21896E95000203C20 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		28AE590315E503270034268C /* MapMarkerTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMarkerTouchView.h; sourceTree = "<group>"; };
 		28AE590415E503270034268C /* MapMarkerTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMarkerTouchView.m; sourceTree = "<group>"; };
 		28B016141891B44C00C2414C /* UIAlertView+BlocksKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+BlocksKit.h"; sourceTree = "<group>"; };
@@ -2252,6 +2263,8 @@
 				287050B8188FC407004CD922 /* HCSSurveyViewController.m */,
 				28AE47B61896C5A000203C20 /* HCSHelpViewController.h */,
 				28AE47B71896C5A000203C20 /* HCSHelpViewController.m */,
+				28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */,
+				28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -2310,6 +2323,8 @@
 				2818E0A6189043B50031AD43 /* NoteManager.m */,
 				287050DB188FC432004CD922 /* TripManager.h */,
 				287050DC188FC432004CD922 /* TripManager.m */,
+				28AE47C11896E95000203C20 /* UserManager.h */,
+				28AE47C21896E95000203C20 /* UserManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -2396,6 +2411,7 @@
 				2880BE57188E822C006FF7E2 /* HCSSurveyView.xib */,
 				2818E0C5189050570031AD43 /* HCSMapViewController.xib */,
 				28AE47B31896C55100203C20 /* HCSHelpView.xib */,
+				28AE47BA1896DA7700203C20 /* HCSUserDetailsView.xib */,
 			);
 			name = hackney;
 			sourceTree = "<group>";
@@ -3468,6 +3484,7 @@
 				28187AD814FCFF4D00A38A17 /* UIButtonBarStop.png in Resources */,
 				28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */,
 				28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */,
+				28AE47BB1896DA7700203C20 /* HCSUserDetailsView.xib in Resources */,
 				28BC449518915A5800711A1A /* record-map-frame-288x141.png in Resources */,
 				28BC446718915A5800711A1A /* noteIssuePicker@2x.png in Resources */,
 				2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */,
@@ -3831,6 +3848,7 @@
 				2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
+				28AE47BC1896DA7700203C20 /* HCSUserDetailsView.xib in Resources */,
 				2811C49E166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C4A0166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A2166CCD5F00592560 /* UIActivityMail.png in Resources */,
@@ -3957,6 +3975,7 @@
 				28AD6429131FB6C8008527FC /* UIButton+Glossy.m in Sources */,
 				287050EC188FC700004CD922 /* ZipUtil.m in Sources */,
 				28AD642A131FB6C8008527FC /* UIColor-Expanded.m in Sources */,
+				28AE47BF1896DCCD00203C20 /* HCSUserDetailsViewController.m in Sources */,
 				28AD642B131FB6C8008527FC /* UIImage+AKLoadingExtension.m in Sources */,
 				28AD642D131FB6C8008527FC /* UIView+Border.m in Sources */,
 				28AD642E131FB6C8008527FC /* UIView+Additions.m in Sources */,
@@ -4055,6 +4074,7 @@
 				28735C0B144ED64700726A6C /* HudManager.m in Sources */,
 				28735C19144F0EF100726A6C /* AppConfigManager.m in Sources */,
 				280565E51890384400359211 /* CoreDataStore.m in Sources */,
+				28AE47C31896E95000203C20 /* UserManager.m in Sources */,
 				28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */,
 				287050D5188FC407004CD922 /* Trip.m in Sources */,
 				28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */,
@@ -4149,6 +4169,7 @@
 				283436E115DD5DC300B00FD5 /* UIButton+Glossy.m in Sources */,
 				287050ED188FC700004CD922 /* ZipUtil.m in Sources */,
 				283436E215DD5DC300B00FD5 /* UIColor-Expanded.m in Sources */,
+				28AE47C01896DCCD00203C20 /* HCSUserDetailsViewController.m in Sources */,
 				283436E315DD5DC300B00FD5 /* UIImage+AKLoadingExtension.m in Sources */,
 				283436E415DD5DC300B00FD5 /* UIView+Border.m in Sources */,
 				283436E515DD5DC300B00FD5 /* UIView+Additions.m in Sources */,
@@ -4247,6 +4268,7 @@
 				2834373D15DD5DC300B00FD5 /* HudManager.m in Sources */,
 				2834373E15DD5DC300B00FD5 /* AppConfigManager.m in Sources */,
 				280565E61890384400359211 /* CoreDataStore.m in Sources */,
+				28AE47C41896E95000203C20 /* UserManager.m in Sources */,
 				2834374015DD5DC300B00FD5 /* UIDevice+Machine.m in Sources */,
 				287050D6188FC407004CD922 /* Trip.m in Sources */,
 				2834374215DD5DC300B00FD5 /* POITypeCellView.m in Sources */,

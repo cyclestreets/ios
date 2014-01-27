@@ -15,14 +15,16 @@
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
 #import "UIActionSheet+BlocksKit.h"
+
 #import "HCSMapViewController.h"
 #import "PickerViewController.h"
+#import "HCSUserDetailsViewController.h"
 
 #import "TripManager.h"
 #import "Trip.h"
 #import "User.h"
 #import "RMUserLocation.h"
-
+#import "UserManager.h"
 
 #import "CoreDataStore.h"
 
@@ -345,28 +347,35 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
-- (void)save
-{
+- (void)save{
+	
 	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-	// go directly to TripPurpose, user can cancel from there
-	if ( YES )
-	{
-		// Trip Purpose
-		NSLog(@"INIT + PUSH");
-		PickerViewController *tripPurposePickerView = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
-		[tripPurposePickerView setDelegate:self];
+	
+	
+	if ( YES ){
 		
-		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:tripPurposePickerView];
+		UINavigationController *nav=nil;
+		
+		if([[UserManager sharedInstance] hasUser]){
+			
+			PickerViewController *tripPurposePickerView = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
+			[tripPurposePickerView setDelegate:self];
+			
+			nav=[[UINavigationController alloc]initWithRootViewController:tripPurposePickerView];
+			
+		}else{
+			
+			HCSUserDetailsViewController *userController=[[HCSUserDetailsViewController alloc]initWithNibName:[HCSUserDetailsViewController nibName] bundle:nil];
+			nav=[[UINavigationController alloc]initWithRootViewController:userController];
+			
+		}
+		
 		[self.navigationController presentViewController:nav animated:YES	completion:^{
 			
 		}];
 		
-	}
-	
-	// prompt to confirm first
-	else
-	{
+	} else {
 		// pause updating the counter
 		_shouldUpdateDuration = NO;
 		
@@ -572,37 +581,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 //    [noteManager.note setDetails:details];
 //    NSLog(@"Note Added details: %@", noteManager.note.details);
 //}
-//
-//- (void)didSaveImage:(NSData *)imgData{
-//    [noteManager.note setImage_data:imgData];
-//    NSLog(@"Added image, Size of Image(bytes):%d", [imgData length]);
-//    [imgData release];
-//}
-//
-//- (void)getTripThumbnail:(NSData *)imgData{
-//    [tripManager.trip setThumbnail:imgData];
-//    NSLog(@"Trip Thumbnail, Size of Image(bytes):%d", [imgData length]);
-//}
-//
-//- (void)getNoteThumbnail:(NSData *)imgData{
-//    [noteManager.note setThumbnail:imgData];
-//    NSLog(@"Note Thumbnail, Size of Image(bytes):%d", [imgData length]);
-//}
+
 //
 //- (void)saveNote{
 //    [noteManager saveNote];
 //    NSLog(@"Save note");
 //}
 
-
-
-
-
-//- (void)initNoteManager:(NoteManager*)manager
-//{
-//	self.noteManager = manager;
-//    manager.parent = self;
-//}
 
 
 //

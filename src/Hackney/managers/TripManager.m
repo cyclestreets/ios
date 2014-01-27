@@ -595,7 +595,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 //}
 
 
-#pragma mark ActivityIndicatorDelegate methods
+
+
+#pragma mark - ActivityIndicatorDelegate methods
 
 
 - (void)dismissSaving
