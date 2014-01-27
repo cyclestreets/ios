@@ -8,15 +8,20 @@
 
 #import "PhotoMapImageLocationViewController.h"
 #import "AppConstants.h"
-#import "GradientView.h"
 #import "CopyLabel.h"
 
 
 
-@interface PhotoMapImageLocationViewController(Private) 
+@interface PhotoMapImageLocationViewController()
+
+@property (nonatomic, strong)	UINavigationBar				*navigationBar;
+@property (nonatomic, strong)	UIScrollView				*scrollView;
+@property (nonatomic, strong)	LayoutBox					*viewContainer;
+@property (nonatomic, strong)	AsyncImageView				*imageView;
+@property (nonatomic, strong)	ExpandedUILabel				*imageLabel;
+@property (nonatomic, strong)	CopyLabel					*titleLabel;
 
 -(void)updateContentSize;
--(void)updateImageSize;
 -(void)createPersistentUI;
 -(void)createNavigationBarUI;
 -(void)createNonPersistentUI;
@@ -27,13 +32,6 @@
 
 
 @implementation PhotoMapImageLocationViewController
-@synthesize dataProvider;
-@synthesize navigationBar;
-@synthesize scrollView;
-@synthesize viewContainer;
-@synthesize imageView;
-@synthesize imageLabel;
-@synthesize titleLabel;
 
 
 //
@@ -49,7 +47,7 @@
 
 -(void)ImageDidLoadWithImage:(UIImage*)image{
 	
-	[viewContainer refresh];
+	[_viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -71,28 +69,27 @@
 
 -(void)createPersistentUI{
 	
-	[(GradientView*)self.view setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 	
-	viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	viewContainer.layoutMode=BUVerticalLayoutMode;
-	viewContainer.alignMode=BUCenterAlignMode;
-	viewContainer.fixedWidth=YES;
-	viewContainer.paddingTop=20;
-	viewContainer.itemPadding=20;
+	_viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	_viewContainer.layoutMode=BUVerticalLayoutMode;
+	_viewContainer.alignMode=BUCenterAlignMode;
+	_viewContainer.fixedWidth=YES;
+	_viewContainer.paddingTop=20;
+	_viewContainer.itemPadding=20;
 		
-	imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
-	imageView.delegate=self;
-	imageView.cacheImage=NO;
-	[viewContainer addSubview:imageView];
+	_imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
+	_imageView.delegate=self;
+	_imageView.cacheImage=NO;
+	[_viewContainer addSubview:_imageView];
 	
-	imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	imageLabel.font=[UIFont systemFontOfSize:13];
-	imageLabel.textColor=UIColorFromRGB(0x666666);
-	imageLabel.hasShadow=YES;
-	imageLabel.multiline=YES;
-	[viewContainer addSubview:imageLabel];
+	_imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	_imageLabel.font=[UIFont systemFontOfSize:13];
+	_imageLabel.textColor=UIColorFromRGB(0x666666);
+	_imageLabel.hasShadow=YES;
+	_imageLabel.multiline=YES;
+	[_viewContainer addSubview:_imageLabel];
 	
-	[scrollView addSubview:viewContainer];
+	[_scrollView addSubview:_viewContainer];
 	
 	[self updateContentSize];
 	
@@ -102,16 +99,15 @@
 
 -(void)createNavigationBarUI{
 	
-
 	
 	self.titleLabel=[[CopyLabel alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];
-	titleLabel.textAlignment=UITextAlignmentCenter;
-	titleLabel.font=[UIFont boldSystemFontOfSize:20];
-	titleLabel.textColor=[UIColor whiteColor];
-	titleLabel.shadowOffset=CGSizeMake(0, -1);
-	titleLabel.shadowColor=[UIColor grayColor];
+	_titleLabel.textAlignment=UITextAlignmentCenter;
+	_titleLabel.font=[UIFont boldSystemFontOfSize:20];
+	_titleLabel.textColor=[UIColor whiteColor];
+	_titleLabel.shadowOffset=CGSizeMake(0, -1);
+	_titleLabel.shadowColor=[UIColor grayColor];
 	
-	[self.navigationBar.topItem setTitleView:titleLabel];
+	[self.navigationBar.topItem setTitleView:_titleLabel];
 	
 	
 }
@@ -127,8 +123,8 @@
 
 -(void)createNonPersistentUI{
 	
-	imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
-	[viewContainer refresh];
+	_imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
+	[_viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -146,11 +142,11 @@
 	
 	self.dataProvider=photoEntry;
 	
-	titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [dataProvider csid]];
+	_titleLabel.text = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csid]];
 	
-	imageLabel.text=[dataProvider caption];
+	_imageLabel.text=[_dataProvider caption];
 	
-	[imageView loadImageFromString:[dataProvider bigImageURL]];
+	[_imageView loadImageFromString:[_dataProvider bigImageURL]];
 	
 }
 
@@ -163,7 +159,7 @@
 
 -(IBAction)backButtonSelected:(id)sender{
 	
-	[imageView cancel];
+	[_imageView cancel];
 	[self dismissModalViewControllerAnimated:YES];
 	
 }
@@ -175,11 +171,10 @@
 	NSArray *activitites;
 	
 	
-	#if ENABLEOS6ACTIVITYMODE
 	
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
 		
-		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:dataProvider.csImageUrlString],imageView.image] applicationActivities:nil];
+		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:_dataProvider.csImageUrlString],_imageView.image] applicationActivities:nil];
 		activity.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll, UIActivityTypePrint, UIActivityTypePostToWeibo];
 		
 		[self presentViewController:activity animated:YES completion:nil];
@@ -197,7 +192,6 @@
 		
 	}else{
 	
-	#endif
 		
 		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS),@(BUIconActionSheetIconTypeCopy)];
 		
@@ -206,10 +200,8 @@
 		
 		[iconSheet show:YES];
 	
-	
-	#if ENABLEOS6MODE	
+		
 	}
-	#endif
 	
 	
 }
@@ -224,9 +216,9 @@
 			if ([TWTweetComposeViewController canSendTweet]) {
 				
 				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:[NSString stringWithFormat:@"Great cycling photo on the @CycleStreets Photomap: %@",dataProvider.csImageUrlString]];
+				[tweetViewController setInitialText:[NSString stringWithFormat:@"Great cycling photo on the @CycleStreets Photomap: %@",_dataProvider.csImageUrlString]];
 				
-				[tweetViewController addImage:imageView.image];
+				[tweetViewController addImage:_imageView.image];
 				
 				
 				[self presentViewController:tweetViewController animated:YES completion:nil];
@@ -258,9 +250,9 @@
 		{
 			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 			picker.mailComposeDelegate = self;
-			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",dataProvider.csid]];
-			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",dataProvider.csImageUrlString,dataProvider.csid] isHTML:YES];
-			[picker addAttachmentData:UIImageJPEGRepresentation(imageView.image, 1) mimeType:@"image/jpeg" fileName:@"CSPhoto.jpeg"];
+			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",_dataProvider.csid]];
+			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",_dataProvider.csImageUrlString,_dataProvider.csid] isHTML:YES];
+			[picker addAttachmentData:UIImageJPEGRepresentation(_imageView.image, 1) mimeType:@"image/jpeg" fileName:@"CSPhoto.jpeg"];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
@@ -272,7 +264,7 @@
 			
 			MFMessageComposeViewController *picker=[[MFMessageComposeViewController alloc]init];
 			picker.messageComposeDelegate=self;
-			[picker setBody:dataProvider.csImageUrlString];
+			[picker setBody:_dataProvider.csImageUrlString];
 			
 			if(picker!=nil)
 				[self presentModalViewController:picker animated:YES];
@@ -284,7 +276,7 @@
 			
 		case BUIconActionSheetIconTypeCopy:
 		{
-			[[UIPasteboard generalPasteboard] setString:dataProvider.csImageUrlString];
+			[[UIPasteboard generalPasteboard] setString:_dataProvider.csImageUrlString];
 		}
 			
 			break;
@@ -314,7 +306,7 @@
 
 -(void)updateContentSize{
 	
-	[scrollView setContentSize:CGSizeMake(SCREENWIDTH, viewContainer.height)];
+	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.height)];
 	
 }
 

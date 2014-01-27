@@ -160,7 +160,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 	
 	
-	
 }
 
 
@@ -232,6 +231,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 
+#pragma mar - Annotation methods
+
 - (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
 {
   
@@ -239,6 +240,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
     
     return marker;
 }
+
+
+- (void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map{
+	
+	PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
+	
+	[self presentModalViewController:lv animated:YES];
+	//PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
+	//[lv loadContentForEntry:photoEntry];
+	
+}
+
 
 //
 /***********************************************
@@ -307,27 +320,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 
--(void)displayLocationForMap:(CLLocationCoordinate2D)location{
-	
-	[_mapView setCenterCoordinate:location];
-	
-	if(_showingPhotos)
-		[self startShowingPhotos];
-	
-	
-}
-
-
-
-
--(void)viewWillDisappear:(BOOL)animated{
-//	if([UserLocationManager sharedInstance].isLocating==YES)
-//		[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-	
-}
-
-
-
 
 #pragma mark Photo Markers
 //
@@ -368,15 +360,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];	
 }
 
-// DEPRECATED
-- (PhotoMapVO *) randomPhoto {
-	
-	if (_photoMarkers == nil || [_photoMarkers count] == 0) return nil;
-	srand( time( NULL));
-	int i = random() % [_photoMarkers count];
-	// return (PhotoMapVO *)((RMMarker *)[_photoMarkers objectAtIndex:i]).data;
-	return nil;
-}
 
 
 
@@ -422,8 +405,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 - (void) afterMapChanged: (RMMapView*) map {
-	
-	//[self displayLocationIndicator:NO];
 	
 	[self requestPhotos];
 	
@@ -507,27 +488,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 //	_mapLocationSearchView.locationReceiver = self;
 //	_mapLocationSearchView.centreLocation = [[_mapView contents] mapCenter];
 //	[self presentModalViewController:_mapLocationSearchView	animated:YES];
-}
-
-- (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
-	
-	BetterLog(@"");
-	
-	PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
-
-//	if ([marker.data isKindOfClass: [PhotoMapVO class]]) {
-//		[self presentModalViewController:lv animated:YES];
-//		PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
-//		[lv loadContentForEntry:photoEntry];
-//	}
-}
-
-- (IBAction) didIntroButton {
-	[UIView beginAnimations:@"InitialPhotomapAnimation" context:nil];
-	[UIView setAnimationDuration:FADE_DURATION];
-	[self.introView setAlpha:0.0];
-	[UIView commitAnimations];
-	[self.introView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:FADE_DURATION];			
 }
 
 

@@ -360,13 +360,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		if([[UserManager sharedInstance] hasUser]){
 			
 			PickerViewController *tripPurposePickerView = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
-			[tripPurposePickerView setDelegate:self];
+			tripPurposePickerView.delegate=self;
 			
 			nav=[[UINavigationController alloc]initWithRootViewController:tripPurposePickerView];
 			
 		}else{
 			
 			HCSUserDetailsViewController *userController=[[HCSUserDetailsViewController alloc]initWithNibName:[HCSUserDetailsViewController nibName] bundle:nil];
+			userController.tripDelegate=self;
+			userController.viewMode=HCSUserDetailsViewModeSave;
 			nav=[[UINavigationController alloc]initWithRootViewController:userController];
 			
 		}

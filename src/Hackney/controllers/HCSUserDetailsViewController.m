@@ -7,7 +7,7 @@
 //
 
 #import "HCSUserDetailsViewController.h"
-
+#import "PickerViewController.h"
 #import <JVFloatLabeledTextField.h>
 
 #import "User.h"
@@ -22,6 +22,8 @@
 
 @property (nonatomic,strong)  NSArray										*activePickerDataSource;
 @property (nonatomic,strong)  UIPickerView									*fieldPicker;
+
+@property(nonatomic,weak) IBOutlet UINavigationItem							*myNavigationItem;
 
 @property (weak, nonatomic) IBOutlet JVFloatLabeledTextField				*nameField;
 @property (weak, nonatomic) IBOutlet UITextField							*ageField;
@@ -62,8 +64,19 @@
  ***********************************************/
 //
 
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewDidLoad
 {
+	
+	self.navigationController.navigationBarHidden=YES;
+	self.modalPresentationCapturesStatusBarAppearance=NO;
+	self.navigationController.view.backgroundColor=[UINavigationBar appearance].barTintColor;
+	
+
+	
     [super viewDidLoad];
 	
     [self createPersistentUI];
@@ -79,6 +92,27 @@
 
 
 -(void)createPersistentUI{
+	
+	
+	switch (_viewMode) {
+		case HCSUserDetailsViewModeSave:
+		{
+			_myNavigationItem.leftBarButtonItem.title=@"Cancel";
+			_myNavigationItem.rightBarButtonItem.title=@"Next";
+		}
+		break;
+		case HCSUserDetailsViewModeShow:
+		{
+			
+			// if we get another contoller > have we been pushed
+			_myNavigationItem.leftBarButtonItem=nil;
+			
+			
+		}
+		break;
+	}
+	
+	
 	
 	self.user=[[UserManager sharedInstance] fetchUser];
 	
@@ -148,14 +182,46 @@
  ***********************************************/
 //
 
--(IBAction)didSelectSaveButton:(id)sender{
+-(IBAction)didSelectActionButton:(id)sender{
 	
 	
+	_user.email=_nameField.text;
+	_user.age=@([_ageArray indexOfObject:_ageField.text]);
+	_user.gender=@([_genderArray indexOfObject:_genderField.text]);
 	
+	[[CoreDataStore mainStore] save];
 	
+	switch (_viewMode) {
+		case HCSUserDetailsViewModeSave:
+		{
+			PickerViewController *pickerController = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
+			pickerController.delegate = self.tripDelegate;
+			
+			[self.navigationController pushViewController:pickerController animated:YES];
+		}
+		break;
+		case HCSUserDetailsViewModeShow:
+			[self didRequestPopController];
+		break;
+		
+	}
 	
 }
 
+
+-(IBAction)didSelectCancel:(id)sender{
+	
+	switch (_viewMode) {
+		case HCSUserDetailsViewModeSave:
+			 [_tripDelegate didCancelSaveJourneyController];
+		break;
+		case HCSUserDetailsViewModeShow:
+			[self didRequestPopController];
+		break;
+	}
+   
+	
+}
 
 
 //

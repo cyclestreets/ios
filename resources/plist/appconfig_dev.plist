@@ -36,7 +36,7 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Photomap</string>
+			<string>Report</string>
 			<key>id</key>
 			<string>photomap</string>
 			<key>class</key>
@@ -47,6 +47,18 @@
 			<string>CSTabBar_photomap_tb.png</string>
 			<key>isVC</key>
 			<true/>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>User</string>
+			<key>id</key>
+			<string>user</string>
+			<key>class</key>
+			<string>HCSUserDetailsViewController</string>
+			<key>nib</key>
+			<string>HCSUserDetailsView</string>
+			<key>tabimage</key>
+			<string>CSTabBar_account.png</string>
 		</dict>
 		<dict>
 			<key>title</key>

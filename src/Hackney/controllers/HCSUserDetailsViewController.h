@@ -7,7 +7,20 @@
 //
 
 #import "SuperViewController.h"
+#import "TripPurposeDelegate.h"
+
+enum  {
+	HCSUserDetailsViewModeShow,
+	HCSUserDetailsViewModeSave
+	
+};
+typedef int HCSUserDetailsViewMode;
 
 @interface HCSUserDetailsViewController : SuperViewController
+
+
+@property (nonatomic, assign) id <TripPurposeDelegate>				tripDelegate;
+
+@property (nonatomic,assign)  HCSUserDetailsViewMode				viewMode;
 
 @end
