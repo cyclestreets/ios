@@ -57,7 +57,7 @@
                             <barButtonItem key="leftBarButtonItem" title="Back" id="zRC-1v-RdN">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="didRequestPopController" destination="-1" id="umI-EK-loG"/>
+                                    <action selector="didSelectBackButton" destination="-1" id="eJO-ko-ljr"/>
                                 </connections>
                             </barButtonItem>
                         </navigationItem>

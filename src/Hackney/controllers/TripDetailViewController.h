@@ -32,10 +32,5 @@
 
 @property (nonatomic, retain) id <TripPurposeDelegate> delegate;
 
-@property (nonatomic, retain) IBOutlet UITextView *detailTextView;
-
-
--(IBAction)skip:(id)sender;
--(IBAction)saveDetail:(id)sender;
 
 @end

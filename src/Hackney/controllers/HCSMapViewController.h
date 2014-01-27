@@ -46,12 +46,21 @@
 #import "SuperViewController.h"
 @class RMMapView;
 
-@interface HCSMapViewController : SuperViewController <PointListProvider,SuperViewControllerDelegate>
+
+enum  {
+	HCSMapViewModeSave=0,
+	HCSMapViewModeShow=1
+};
+typedef int HCSMapViewMode;
+
+
+@interface HCSMapViewController : SuperViewController <PointListProvider>
 {
 }
 
-@property (nonatomic, assign) id <TripPurposeDelegate> delegate;
+@property (nonatomic, assign) id <TripPurposeDelegate> tripDelegate;
 
+@property (nonatomic,assign)  HCSMapViewMode	viewMode;
 
 - (id)initWithTrip:(Trip *)trip;
 

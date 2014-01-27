@@ -19,8 +19,16 @@
  */
 
 #import "TripDetailViewController.h"
+#import "GlobalUtilities.h"
+#import "TripManager.h"
+#import "HCSMapViewController.h"
 
 @interface TripDetailViewController ()
+
+
+@property (nonatomic, strong) IBOutlet UITextView *detailTextView;
+
+
 
 @end
 
@@ -41,51 +49,47 @@
 {
     [self.detailTextView becomeFirstResponder];
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    detailTextView.layer.borderWidth = 1.0;
-    detailTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+	
+	
 }
 
--(IBAction)skip:(id)sender{
-    NSLog(@"Skip");
+-(IBAction)didSelectCancel:(id)sender{
+   
+	BetterLog(@"");
+	
     [delegate didCancelNote];
     
     pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    details = @"";
-    
-    [delegate didEnterTripDetails:details];
-    [delegate saveTrip];
 }
 
 -(IBAction)saveDetail:(id)sender{
-    NSLog(@"Save Detail");
+    
+	BetterLog(@"");
+	
     [detailTextView resignFirstResponder];
-    [delegate didCancelNote];
     
     pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    details = detailTextView.text;
-    
-    [delegate didEnterTripDetails:details];
-    [delegate saveTrip];
+    [[TripManager sharedInstance] saveNotes:detailTextView.text];
+    [[TripManager sharedInstance] saveTrip];
+	
+	HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:[TripManager sharedInstance].currentRecordingTrip];
+	mvc.tripDelegate=delegate;
+	mvc.viewMode=HCSMapViewModeSave;
+    [self.navigationController pushViewController:mvc animated:YES];
 }
 
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    self.delegate = nil;
-    self.detailTextView = nil;
-    
-}
+
 
 @end

@@ -34,6 +34,8 @@
 
 @property (nonatomic,strong)  NSMutableArray									*recordingTripCoords;
 
+@property (nonatomic,strong)  NSNumberFormatter									*coordDecimalPlaceFormatter;
+
 
 @end
 
@@ -52,6 +54,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		self.activityDelegate		= self;
 		_isRecording					= NO;
 		self.recordingTripCoords=[NSMutableArray array];
+		
+		
+		self.coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
+		[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+		[_coordDecimalPlaceFormatter setMaximumFractionDigits:5];
 	}
 	return self;
 
@@ -92,6 +99,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 }
 
+
+-(void)removeCurrentRecordingTrip{
+	
+	[self resetTrip];
+	self.currentRecordingTrip=nil;
+	
+}
 
 
 -(void)loadSelectedTrip:(Trip*)trip{
@@ -713,11 +727,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	BetterLog(@"");
 	
+	
+	// reduce the fp of these numbers so route drawing can be filtered
+	NSNumber *latNumber=[NSNumber numberWithDouble:location.coordinate.latitude];
+	NSNumber *longNumber=[NSNumber numberWithDouble:location.coordinate.longitude];
+	
+	NSNumber *newlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:latNumber] doubleValue]];
+	NSNumber *newlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:longNumber] doubleValue]];
+	//
+	
 	Coord *coord=[Coord create];
 	
 	[coord setAltitude:[NSNumber numberWithDouble:location.altitude]];
-	[coord setLatitude:[NSNumber numberWithDouble:location.coordinate.latitude]];
-	[coord setLongitude:[NSNumber numberWithDouble:location.coordinate.longitude]];
+	[coord setLatitude:newlat];
+	[coord setLongitude:newlongt];
 	
 	// NOTE: location.timestamp is a constant value on Simulator
 	[coord setRecorded:location.timestamp];

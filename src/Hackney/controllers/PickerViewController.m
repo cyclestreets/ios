@@ -125,7 +125,7 @@
         TripDetailViewController *tripDetailViewController = [[TripDetailViewController alloc] initWithNibName:@"TripDetailViewController" bundle:nil];
         tripDetailViewController.delegate = self.delegate;
         
-        [self presentModalViewController:tripDetailViewController animated:YES];
+        [self.navigationController pushViewController:tripDetailViewController animated:YES];
         
         [delegate didPickPurpose:row];
     }
@@ -226,6 +226,8 @@
 	{
 		//NSLog(@"PickerViewController initWithPurpose: %d", index);
 		
+		self.navigationController.hidesBottomBarWhenPushed=YES;
+		
 		// update the picker
 		[customPickerView selectRow:index inComponent:0 animated:YES];
 		
@@ -245,7 +247,7 @@
 
 - (void)viewDidLoad
 {
-	
+	self.navigationController.navigationBarHidden=YES;
 	self.modalPresentationCapturesStatusBarAppearance=NO;
 	
 	[self createCustomPicker];

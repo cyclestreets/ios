@@ -57,6 +57,7 @@
 #import "SegmentVO.h"
 #import "ExpandedUILabel.h"
 #import "HudManager.h"
+#import "TripManager.h"
 
 #define kFudgeFactor	1.5
 #define kInfoViewAlpha	0.8
@@ -372,21 +373,6 @@
 			p.p = pt;
 			p.isWalking=segment.isWalkingSection;
 			[points addObject:p];
-//		}
-//		// remainder of all segments
-//		SegmentVO *segment = [route segmentAtIndex:i];
-//		NSArray *allPoints = [segment allPoints];
-//		for (int i = 0; i < [allPoints count]; i++) {
-//			CSPointVO *latlon = [allPoints objectAtIndex:i];
-//			CLLocationCoordinate2D coordinate;
-//			coordinate.latitude = latlon.p.y;
-//			coordinate.longitude = latlon.p.x;
-//			CGPoint pt = [mapView coordinateToPixel:coordinate];
-//			CSPointVO *screen = [[CSPointVO alloc] init];
-//			screen.p = pt;
-//			screen.isWalking=segment.isWalkingSection;
-//			[points addObject:screen];
-//		}
 	}
 	
 	return points;
@@ -398,118 +384,30 @@
 
 
 
-#pragma mark - Screen shot support
-
-- (void)viewWillDisappear:(BOOL)animated{
-    UIImage *thumbnailOriginal;
-    thumbnailOriginal = [self screenshot];
-    
-    CGRect clippedRect  = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+160, self.view.frame.size.width, self.view.frame.size.height);
-    CGImageRef imageRef = CGImageCreateWithImageInRect([thumbnailOriginal CGImage], clippedRect);
-    UIImage *newImage   = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    
-    CGSize size;
-    size.height = 72;
-    size.width = 72;
-    
-    UIImage *thumbnail;
-    thumbnail = shrinkImage(newImage, size);
-    
-    NSData *thumbnailData = [[NSData alloc] initWithData:UIImageJPEGRepresentation(thumbnail, 0)];
-    NSLog(@"Size of Thumbnail Image(bytes):%d",[thumbnailData length]);
-    NSLog(@"Size: %f, %f", thumbnail.size.height, thumbnail.size.width);
-    
-    [self.delegate getTripThumbnail:thumbnailData];
-}
-
-
-UIImage *shrinkImage(UIImage *original, CGSize size) {
-    CGFloat scale = [UIScreen mainScreen].scale;
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-	
-	CGImageRef imageRef = CGImageCreateCopy([original CGImage]);
-	CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-	
-	if (CGColorSpaceGetNumberOfComponents(colorSpace) == 3) {
-        int alpha = (bitmapInfo & kCGBitmapAlphaInfoMask);
-        if (alpha == kCGImageAlphaNone) {
-            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
-            bitmapInfo |= kCGImageAlphaNoneSkipFirst;
-        } else if (!(alpha == kCGImageAlphaNoneSkipFirst || alpha == kCGImageAlphaNoneSkipLast)) {
-            bitmapInfo &= ~kCGBitmapAlphaInfoMask;
-            bitmapInfo |= kCGImageAlphaPremultipliedFirst;
-        }
-    }
-	
-    
-    CGContextRef context = CGBitmapContextCreate(NULL, size.width * scale,
-                                                 size.height * scale, 8, 0, colorSpace, bitmapInfo);
-    CGContextDrawImage(context,
-                       CGRectMake(0, 0, size.width * scale, size.height * scale),
-                       original.CGImage);
-    CGImageRef shrunken = CGBitmapContextCreateImage(context);
-    UIImage *final = [UIImage imageWithCGImage:shrunken];
-    
-    CGContextRelease(context);
-    CGImageRelease(shrunken);
-    CGColorSpaceRelease(colorSpace);
-    return final;
-}
-
-
-- (UIImage*)screenshot
-{
-    NSLog(@"Screen Shoot");
-    // Create a graphics context with the target size
-    // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
-    // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
-    CGSize imageSize = [[UIScreen mainScreen] bounds].size;
-    if (NULL != UIGraphicsBeginImageContextWithOptions)
-        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-    else
-        UIGraphicsBeginImageContext(imageSize);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Iterate over every window from back to front
-    for (UIWindow *window in [[UIApplication sharedApplication] windows])
-    {
-        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
-        {
-            // -renderInContext: renders in the coordinate space of the layer,
-            // so we must first apply the layer's geometry to the graphics context
-            CGContextSaveGState(context);
-            // Center the context around the window's anchor point
-            CGContextTranslateCTM(context, [window center].x, [window center].y);
-            // Apply the window's transform about the anchor point
-            CGContextConcatCTM(context, [window transform]);
-            // Offset by the portion of the bounds left of and above the anchor point
-            CGContextTranslateCTM(context,
-                                  -[window bounds].size.width * [[window layer] anchorPoint].x,
-                                  -[window bounds].size.height * [[window layer] anchorPoint].y+50);
-            
-            // Render the layer hierarchy to the current context
-            [[window layer] renderInContext:context];
-            
-            // Restore the context
-            CGContextRestoreGState(context);
-        }
-    }
-    
-    // Retrieve the screenshot image
-    UIImage *screenImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return screenImage;
-}
 
 
 
 #pragma mark User events
 
 
+-(IBAction)didSelectBackButton{
+	
+	switch (_viewMode) {
+		case HCSMapViewModeSave:
+		{
+			[[TripManager sharedInstance] removeCurrentRecordingTrip];
+			[_tripDelegate dismissTripSaveController];
+		}
+			
+		break;
+		case HCSMapViewModeShow:
+			[self.navigationController popViewControllerAnimated:YES];
+		break;
+	}
+	
+	
+	
+}
 
 
 

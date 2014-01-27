@@ -7,8 +7,9 @@
 //
 
 #import "SuperViewController.h"
+#import "TripPurposeDelegate.h"
 
-@interface HCSTrackConfigViewController : SuperViewController
+@interface HCSTrackConfigViewController : SuperViewController<TripPurposeDelegate>
 
 
 

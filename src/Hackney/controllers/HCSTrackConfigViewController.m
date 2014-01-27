@@ -206,7 +206,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[RMMapView class];
 	[_mapView setDelegate:self];
 	_mapView.showsUserLocation=YES;
-	_mapView.userTrackingMode=RMUserTrackingModeFollow;
+	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	
 	
 	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:_mapView.frame];
@@ -317,6 +317,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
         _isRecordingTrack = YES;
 		self.currentTrip=[[TripManager sharedInstance] createTrip];
 		[[TripManager sharedInstance] startTrip];
+		
+		_mapView.userTrackingMode=RMUserTrackingModeFollow;
         
         // set flag to update counter
         _shouldUpdateDuration = YES;
@@ -328,6 +330,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@""];
 		[actionSheet setDestructiveButtonWithTitle:@"Discard"	handler:^{
 			[weakSelf resetRecordingInProgress];
+			[[TripManager sharedInstance] removeCurrentRecordingTrip];
 		}];
 		[actionSheet addButtonWithTitle:@"Save" handler:^{
 			[weakSelf save];
@@ -355,12 +358,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	{
 		// Trip Purpose
 		NSLog(@"INIT + PUSH");
-		PickerViewController *tripPurposePickerView = [[PickerViewController alloc]
-													   //initWithPurpose:[tripManager getPurposeIndex]];
-													   initWithNibName:@"TripPurposePicker" bundle:nil];
+		PickerViewController *tripPurposePickerView = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
 		[tripPurposePickerView setDelegate:self];
-		//[[self navigationController] pushViewController:pickerViewController animated:YES];
-		[self.navigationController presentModalViewController:tripPurposePickerView animated:YES];
+		
+		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:tripPurposePickerView];
+		[self.navigationController presentViewController:nav animated:YES	completion:^{
+			
+		}];
 		
 	}
 	
@@ -395,24 +399,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
-- (void)didEnterTripDetails:(NSString *)details{
-    [_tripManager saveNotes:details];
-    NSLog(@"Trip Added details: %@",details);
+
+-(void)dismissTripSaveController{
+	
+	[self.navigationController dismissModalViewControllerAnimated:YES];
+	
 }
 
-- (void)saveTrip{
-    [_tripManager saveTrip];
-    NSLog(@"Save trip");
-}
+
 
 - (void)displayUploadedTripMap{
 	
     [self resetRecordingInProgress];
-    
-    // load map view of saved trip
-    HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:_currentTrip];
-    [[self navigationController] pushViewController:mvc animated:YES];
-   
     
 }
 
@@ -478,6 +476,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
 	
 	_tripManager.dirty = YES;
+	
+	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	
 	[self resetDurationDisplay];
 	[self resetTimer];

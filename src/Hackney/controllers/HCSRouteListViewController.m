@@ -77,7 +77,8 @@ static int const kTagImage=	3;
 -(void)refreshUIFromDataProvider{
 	
 	NSError *error;
-	NSMutableArray *tripArray=[[[CoreDataStore mainStore] allForEntity:@"Trip" orderBy:@"start" ascending:NO error:&error] mutableCopy];
+	
+	NSMutableArray *tripArray=[[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved != nil"] orderBy:@"start" ascending:NO] mutableCopy];
 	
 	if (tripArray == nil) {
 		// Handle the error.
@@ -195,26 +196,15 @@ static int const kTagImage=	3;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
 	
 	self.selectedTrip = (Trip *)[_dataProvider objectAtIndex:indexPath.row];
 	
-	// check for recordingInProgress
-	Trip *currentRecordingTrip = [TripManager sharedInstance].currentRecordingTrip;
-	
-	// if trip not yet uploaded => prompt to re-upload
-	if ( currentRecordingTrip != _selectedTrip ){
-		
-		// if not uploaded
-		if ( _selectedTrip.uploaded==nil ){
-			[self promptToConfirmPurpose];
-		}else{
-			[[TripManager sharedInstance] loadSelectedTrip:_selectedTrip];
-			[self displaySelectedTripMap];
-		}
-			
+	if ( _selectedTrip.uploaded==nil ){
+		[self promptToConfirmPurpose];
 	}else{
-		// display error, ideally this cell should be indicated as the current one
+		[[TripManager sharedInstance] loadSelectedTrip:_selectedTrip];
+		[self displaySelectedTripMap];
 	}
 
 }
@@ -227,6 +217,7 @@ static int const kTagImage=	3;
 	
 	if ( _selectedTrip ){
 		HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:_selectedTrip];
+		mvc.viewMode=HCSMapViewModeShow;
 		[[self navigationController] pushViewController:mvc animated:YES];
 	}
 	

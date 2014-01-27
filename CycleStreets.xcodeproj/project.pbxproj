@@ -2225,12 +2225,12 @@
 				287050B6188FC407004CD922 /* HCSRouteListViewController.m */,
 				2818E0C8189050930031AD43 /* HCSMapViewController.h */,
 				2818E0C9189050930031AD43 /* HCSMapViewController.m */,
+				2818E093189042390031AD43 /* PickerViewController.h */,
+				2818E094189042390031AD43 /* PickerViewController.m */,
 				2818E0AD189045080031AD43 /* TripDetailViewController.h */,
 				2818E0AE189045080031AD43 /* TripDetailViewController.m */,
 				2818E0A1189043A40031AD43 /* DetailViewController.h */,
 				2818E0A2189043A40031AD43 /* DetailViewController.m */,
-				2818E093189042390031AD43 /* PickerViewController.h */,
-				2818E094189042390031AD43 /* PickerViewController.m */,
 				287050B3188FC407004CD922 /* HCSRouteDetailViewController.h */,
 				287050B4188FC407004CD922 /* HCSRouteDetailViewController.m */,
 				287050B7188FC407004CD922 /* HCSSurveyViewController.h */,
@@ -2371,10 +2371,10 @@
 		2880BE50188E81DB006FF7E2 /* hackney */ = {
 			isa = PBXGroup;
 			children = (
+				2880BE51188E8207006FF7E2 /* HCSTrackConfigView.xib */,
+				2818E0BB189048D40031AD43 /* TripPurposePicker.xib */,
 				2818E0C1189048E10031AD43 /* TripDetailViewController.xib */,
 				2818E0BE189048D90031AD43 /* NoteViewController.xib */,
-				2818E0BB189048D40031AD43 /* TripPurposePicker.xib */,
-				2880BE51188E8207006FF7E2 /* HCSTrackConfigView.xib */,
 				2880BE54188E821A006FF7E2 /* HCSRouteListView.xib */,
 				2880BE57188E822C006FF7E2 /* HCSSurveyView.xib */,
 				2818E0C5189050570031AD43 /* HCSMapViewController.xib */,

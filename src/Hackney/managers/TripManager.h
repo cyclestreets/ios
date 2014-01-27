@@ -115,6 +115,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 
 -(void)loadSelectedTrip:(Trip*)trip;
 
+-(void)removeCurrentRecordingTrip;
+
 @end
 
 
