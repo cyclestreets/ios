@@ -89,6 +89,9 @@
 - (void)getTripThumbnail:(NSData *)imgData;
 - (void)saveNote;
 - (void)saveTrip;
+
+
 - (void)dismissTripSaveController;
+-(void)didCancelSaveJourneyController;
 
 @end

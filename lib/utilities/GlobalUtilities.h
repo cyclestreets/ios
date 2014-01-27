@@ -34,6 +34,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:alphaValue]
 #define LineFeed @"\n"
 
 
+
 // rotation
 #define RADIANS(degrees) ((degrees * M_PI) / 180.0)
 #define DEGREES(radians) ((radians) * 180.0 / M_PI)

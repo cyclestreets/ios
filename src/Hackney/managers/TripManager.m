@@ -109,6 +109,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 }
 
 
+-(void)deleteTrip:(Trip*)trip{
+	
+	[[CoreDataStore mainStore] removeEntity:trip];
+	
+}
+
+
 -(void)loadSelectedTrip:(Trip*)trip{
 	
 	self.selectedTrip=trip;
@@ -331,6 +338,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 #pragma mar - Trip uploading
 
+
+-(void)uploadAllUnsyncedTrips{
+	
+	NSArray *unsyncedTrips=[self arrayofAllUnsyncedTrips];
+	
+	if(unsyncedTrips.count>0) {
+		
+		
+		// we can call uploadSelectedTrip here as this uses an operation queue
+		
+		// what do we do for a lot of items if takes a long while
+		
+		// although this will occur in the background, it can block any newly attempted items
+		
+	}
+	
+}
+
 -(void)uploadSelectedTrip:(Trip*)trip{
 	
 	
@@ -491,6 +516,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 }
 
 
+
+
+
 //- (void)promptForTripNotes
 //{
 //	tripNotes = [[UIAlertView alloc] initWithTitle:kTripNotesTitle
@@ -601,8 +629,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 }
 
 
-#pragma mark methods to allow continuing a previously interrupted recording
 
+#pragma mark - Trip predicate methods
 
 // count trips that have not yet been saved
 - (int)countUnSavedTrips{
@@ -646,6 +674,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 }
 
+- (NSArray*)arrayofAllUnsyncedTrips{
+	
+	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved != nil AND uploaded = nil"] orderBy:@"start" ascending:NO];
+	
+	return trips;
+}
 
 
 #pragma mark Trip helper methods

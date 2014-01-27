@@ -535,19 +535,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
-- (void)didCancelPurpose
-{
-	[self.navigationController dismissModalViewControllerAnimated:YES];
-    [[TripManager sharedInstance] startTrip];
-	_isRecordingTrack = YES;
-	_shouldUpdateDuration = YES;
-}
 
-
-- (void)didCancelNote
+- (void)didCancelSaveJourneyController
 {
 	[self.navigationController dismissModalViewControllerAnimated:YES];
     
+	[[TripManager sharedInstance] startTrip];
+	_isRecordingTrack = YES;
+	_shouldUpdateDuration = YES;
 }
 
 

@@ -15,9 +15,10 @@
 #import "UIAlertView+BlocksKit.h"
 #import "HCSMapViewController.h"
 #import "HCSSavedTrackCellView.h"
-
+#import "UIActionSheet+BlocksKit.h"
 #import "constants.h"
 #import "Trip.h"
+#import "GlobalUtilities.h"
 
 static float const kAccessoryViewX=282.0;
 static float const kAccessoryViewY=24.0;
@@ -122,6 +123,10 @@ static int const kTagImage=	3;
 	[_tableView registerNib:[HCSSavedTrackCellView nib] forCellReuseIdentifier:[HCSSavedTrackCellView cellIdentifier]];
 	
 	
+	self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectActionButton)];
+	
+	
+	
 	if ( [[TripManager sharedInstance] countZeroDistanceTrips] ){
 		
 		UIAlertView *alert=[UIAlertView alertWithTitle:kZeroDistanceTitle message:kZeroDistanceMessage];
@@ -132,17 +137,26 @@ static int const kTagImage=	3;
 		[alert show];
 		
 		
-	}else if ( [[TripManager sharedInstance] countUnSyncedTrips] ){
+	}else{
 		
-		UIAlertView *alert=[UIAlertView alertWithTitle:kUnsyncedTitle message:kUnsyncedMessage];
-		[alert addButtonWithTitle:@"OK" handler:^{
-			[self displaySelectedTripMap];
-		}];
-		[alert show];
+		int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
+		
+		if(unsyncedCount>0){
+			
+			
+			UIAlertView *alert=[UIAlertView alertWithTitle:[NSString stringWithFormat:@"Found Unsynced Trip%@",unsyncedCount>1 ? @"s" : EMPTYSTRING] message:
+								[NSString stringWithFormat:@"You have %i saved trip%@ that %@ not yet been uploaded.",unsyncedCount,unsyncedCount>1 ? @"s" : EMPTYSTRING, unsyncedCount>1 ? @"have" : @"has"]];
+			[alert addButtonWithTitle:@"OK" handler:^{
+				
+			}];
+			[alert show];
+			
+		}
+			
+		self.navigationItem.rightBarButtonItem.enabled=unsyncedCount>0;
+		
 	}
-	else
-		NSLog(@"no zero distance or unsynced trips found");
-	
+		
 	// no trip selection by default
 	self.selectedTrip = nil;
     
@@ -205,6 +219,33 @@ static int const kTagImage=	3;
 
 
 
+#pragma mark - Table View Editing
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete){
+		
+		NSLog(@"Delete");
+		
+        // Delete the managed object at the given index path.
+        Trip *tripToDelete = [_dataProvider objectAtIndex:indexPath.row];
+        [[TripManager sharedInstance] deleteTrip:tripToDelete];
+		
+        // Update the array and table view.
+        [_dataProvider removeObjectAtIndex:indexPath.row];
+        [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+		
+    }
+	
+}
+
+
+
+
+
+#pragma mark - Map ViewController display
+
 
 - (void)displaySelectedTripMap{
 	
@@ -224,55 +265,27 @@ static int const kTagImage=	3;
 //
 
 
-- (void)promptToConfirmPurpose
-{
-	NSString *confirm = [NSString stringWithFormat:@"This trip has not yet been uploaded. Try now?"];
+- (void)didSelectActionButton{
 	
-	// present action sheet
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:confirm
-															 delegate:self
-													cancelButtonTitle:@"Cancel"
-											   destructiveButtonTitle:nil
-													otherButtonTitles:@"Upload", nil];
+	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
 	
-	actionSheet.actionSheetStyle	= UIActionSheetStyleBlackTranslucent;
-	[actionSheet showInView:self.tabBarController.view];
-}
-
-
-#pragma mark UIActionSheet delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-	NSLog(@"actionSheet clickedButtonAtIndex %d", buttonIndex);
-	switch ( buttonIndex )
-	{
-		case 0:
-			NSLog(@"Upload => push Trip Purpose picker");
-			
-            //[[TripManager sharedInstance] saveTrip];
-			break;
-		case 1:
-		default:
-			NSLog(@"Cancel");
-			[self displaySelectedTripMap];
-		break;
-	}
+	UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:[NSString stringWithFormat:@"You have %i un-synced trips, do you wish to upload them all now. This may take some time.",unsyncedCount]];
+	
+	[actionSheet addButtonWithTitle:@"Upload All" handler:^{
+		[[TripManager sharedInstance] uploadAllUnsyncedTrips];
+	}];
+	
+	[actionSheet setCancelButtonWithTitle:@"Cancel" handler:^{
+		
+	}];
+	
+	[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
+	
 }
 
 
 
-//
-/***********************************************
- * @description			SEGUE METHODS
- ***********************************************/
-//
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
-    
-    
-}
 
 
 //

@@ -57,7 +57,7 @@
    
 	BetterLog(@"");
 	
-    [delegate didCancelNote];
+    [delegate didCancelSaveJourneyController];
     
     pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];

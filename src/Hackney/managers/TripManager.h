@@ -92,6 +92,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 - (Trip*)createTrip;
 - (void)createTrip:(unsigned int)index;
 
+-(void)deleteTrip:(Trip*)trip;
+
 - (CLLocationDistance)addCoord:(CLLocation*)location;
 - (void)saveNotes:(NSString*)notes;
 - (void)saveTrip;
@@ -118,6 +120,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 -(void)removeCurrentRecordingTrip;
 
 -(void)uploadSelectedTrip:(Trip*)trip;
+-(void)uploadAllUnsyncedTrips;
 
 @end
 

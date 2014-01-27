@@ -110,7 +110,7 @@
     pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-	[delegate didCancelNote];
+	[delegate didCancelSaveJourneyController];
 }
 
 
