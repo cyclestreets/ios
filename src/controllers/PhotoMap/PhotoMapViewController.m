@@ -116,9 +116,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
     
     [notifications addObject:MAPSTYLECHANGED];
 	[notifications addObject:RETREIVELOCATIONPHOTOSRESPONSE];
-	[notifications addObject:GPSLOCATIONCOMPLETE];
-	[notifications addObject:GPSLOCATIONUPDATE];
-	[notifications addObject:GPSLOCATIONFAILED];
 	
 	
 	[super listNotificationInterests];
@@ -141,23 +138,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
         [self didRecievePhotoResponse:notification.object];
     }
 	
-	
-	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
-		
-		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
-			[self locationDidComplete:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONUPDATE]){
-			[self locationDidUpdate:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONFAILED]){
-			[self locationDidFail:notification];
-		}
-		
-	}
-
 	
 	
 }

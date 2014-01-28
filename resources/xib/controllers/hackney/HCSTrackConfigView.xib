@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HCSTrackConfigViewController">
             <connections>
                 <outlet property="actionButton" destination="eIO-wO-CYP" id="hx2-1X-5LD"/>
+                <outlet property="actionView" destination="Dt1-dw-gKY" id="Eri-EX-rj9"/>
                 <outlet property="mapView" destination="AaK-ue-LWh" id="XZY-u0-YCp"/>
                 <outlet property="trackDistanceLabel" destination="xTc-bb-KGq" id="1uC-eV-Znq"/>
                 <outlet property="trackDurationLabel" destination="mVx-XJ-EL8" id="ap6-jO-mQe"/>
@@ -20,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="AaK-ue-LWh" customClass="RMMapView">
-                    <rect key="frame" x="0.0" y="82" width="320" height="317"/>
+                    <rect key="frame" x="0.0" y="82" width="320" height="325"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
@@ -75,11 +76,11 @@
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="-64" maxX="0.0" maxY="64"/>
                 </view>
                 <view contentMode="scaleToFill" id="Dt1-dw-gKY">
-                    <rect key="frame" x="0.0" y="398" width="320" height="57"/>
+                    <rect key="frame" x="0.0" y="407" width="320" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eIO-wO-CYP">
-                            <rect key="frame" x="113" y="14" width="95" height="30"/>
+                            <rect key="frame" x="113" y="9" width="95" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Start">
@@ -88,7 +89,7 @@
                             </state>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.31372549019607843" green="0.59215686274509804" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

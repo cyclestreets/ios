@@ -45,6 +45,10 @@
 
 - (void)viewDidLoad
 {
+	
+	self.extendedLayoutIncludesOpaqueBars=NO;
+	self.edgesForExtendedLayout = UIRectEdgeNone;
+	
     [super viewDidLoad];
 	
     [self createPersistentUI];

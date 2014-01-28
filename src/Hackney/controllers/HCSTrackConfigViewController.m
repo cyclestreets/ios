@@ -19,7 +19,7 @@
 #import "HCSMapViewController.h"
 #import "PickerViewController.h"
 #import "HCSUserDetailsViewController.h"
-
+#import "PhotoWizardViewController.h"
 #import "TripManager.h"
 #import "Trip.h"
 #import "User.h"
@@ -49,6 +49,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @property(nonatomic,weak) IBOutlet UILabel								*trackDistanceLabel;
 
 @property(nonatomic,weak) IBOutlet UIButton								*actionButton;
+@property (weak, nonatomic) IBOutlet UIView								*actionView;
 
 
 @property (nonatomic, strong) CLLocation								* lastLocation;// last location
@@ -207,15 +208,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	_mapView.showsUserLocation=YES;
 	
 	
-	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:_mapView.frame];
-	_gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
-	_gpsLocationView.visible=NO;
-	_gpsLocationView.alpha=0;
-	[_gpsLocationView setLocationProvider:self];
+	
+	UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 33, 33)];
+	[button setImage:[UIImage imageNamed:@"UIButtonBarCameraSmall.png"] forState:UIControlStateNormal];
+	[button addTarget:self action:@selector(didSelectPhotoWizardButton:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
+	[self.navigationItem setRightBarButtonItem:barbutton animated:NO];
+	
 	
 	
 	//TODO: UI styling
-	
 	[_actionButton addTarget:self action:@selector(didSelectActionButton:) forControlEvents:UIControlEventTouchUpInside];
 	
 	
@@ -296,8 +298,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 -(IBAction)didSelectActionButton:(id)sender{
 	
-	if(_isRecordingTrack == NO)
-    {
+	if(_isRecordingTrack == NO){
+		
         BetterLog(@"start");
         
         // start the timer if needed
@@ -310,20 +312,21 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
         }
         
        // set start button to "Save"
-		[_actionButton setTitle:@"Save" forState:UIControlStateNormal];
+		
 		
         _isRecordingTrack = YES;
 		self.currentTrip=[[TripManager sharedInstance] createTrip];
 		[[TripManager sharedInstance] startTrip];
 		
 		_mapView.userTrackingMode=RMUserTrackingModeFollow;
+		
+		[self updateActionStateForTrip];
         
         // set flag to update counter
         _shouldUpdateDuration = YES;
-    }
-    // do the saving
-    else
-    {
+		
+    }else {
+		
 		__weak __block HCSTrackConfigViewController *weakSelf=self;
 		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@""];
 		[actionSheet setDestructiveButtonWithTitle:@"Discard"	handler:^{
@@ -331,7 +334,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 			[[TripManager sharedInstance] removeCurrentRecordingTrip];
 		}];
 		[actionSheet addButtonWithTitle:@"Save" handler:^{
-			[weakSelf save];
+			[weakSelf initiateSaveTrip];
 		}];
 		
 		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
@@ -347,13 +350,37 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
-- (void)save{
+
+-(void)updateActionStateForTrip{
+	
+	if(_isRecordingTrack){
+		
+		[_actionButton setTitle:@"Save" forState:UIControlStateNormal];
+		
+		[UIView animateWithDuration:0.4 animations:^{
+			_actionView.backgroundColor=UIColorFromRGB(0xCB0000);
+		}];
+		
+	}else{
+		
+		[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
+		
+		[UIView animateWithDuration:0.4 animations:^{
+			_actionView.backgroundColor=UIColorFromRGB(0x509720);
+		}];
+		
+	}
+	
+}
+
+
+- (void)initiateSaveTrip{
 	
 	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 	
 	
-	if ( YES ){
+	if ( _isRecordingTrack ){
 		
 		UINavigationController *nav=nil;
 		
@@ -377,30 +404,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 			
 		}];
 		
-	} else {
-		// pause updating the counter
-		_shouldUpdateDuration = NO;
-		
-		// construct purpose confirmation string
-		NSString *purpose = nil;
-		if ( _tripManager != nil )
-			purpose = [self getPurposeString:[_tripManager getPurposeIndex]];
-		
-		
-		__weak __block HCSTrackConfigViewController *weakSelf=self;
-		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@"Stop recording & save this trip?"];
-		
-		[actionSheet addButtonWithTitle:@"Save" handler:^{
-			[weakSelf save];
-		}];
-		
-		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
-			_shouldUpdateDuration=YES;
-		}];
-		
-		[actionSheet showFromTabBar:self.navigationController.tabBarController.tabBar];
-
-		
 	}
     
 }
@@ -413,8 +416,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 }
 
-
-
 - (void)displayUploadedTripMap{
 	
     [self resetRecordingInProgress];
@@ -422,15 +423,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
-- (void)displayUploadedNote
-{
-//    Note *note = noteManager.note;
-//    
-//    // load map view of note
-//    NoteViewController *mvc = [[NoteViewController alloc] initWithNote:note];
-//    [[self navigationController] pushViewController:mvc animated:YES];
-//    NSLog(@"displayUploadedNote");
-    
+#pragma mark - UI Events
+
+-(IBAction)didSelectPhotoWizardButton:(id)sender{
+	
+	PhotoWizardViewController *photoWizard=[[PhotoWizardViewController alloc]initWithNibName:[PhotoWizardViewController nibName] bundle:nil];
+	photoWizard.extendedLayoutIncludesOpaqueBars=NO;
+	photoWizard.edgesForExtendedLayout = UIRectEdgeNone;
+	photoWizard.isModal=YES;
+	
+	[self presentViewController:photoWizard animated:YES completion:^{
+		
+	}];
+	
 }
 
 
@@ -479,10 +484,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 - (void)resetRecordingInProgress
 {
 	[[TripManager sharedInstance] resetTrip];
-	_actionButton.enabled = YES;
-	[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
+	_isRecordingTrack=NO;
 	
-	_tripManager.dirty = YES;
+	[self updateActionStateForTrip];
 	
 	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	
@@ -565,31 +569,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[self resetTimer];
 	
 	[_tripManager setPurpose:index];
-	//[tripManager promptForTripNotes];
-    //do something here: may change to be the save as a separate view. Not prompt.
 }
-
-
-#pragma mark - Note Entry View delegate methods
-
-//- (void)didPickNoteType:(NSNumber *)index
-//{
-//	[noteManager.note setNote_type:index];
-//    NSLog(@"Added note type: %d", [noteManager.note.note_type intValue]);
-//    //do something here: may change to be the save as a separate view. Not prompt.
-//}
-//
-//- (void)didEnterNoteDetails:(NSString *)details{
-//    [noteManager.note setDetails:details];
-//    NSLog(@"Note Added details: %@", noteManager.note.details);
-//}
-
-//
-//- (void)saveNote{
-//    [noteManager saveNote];
-//    NSLog(@"Save note");
-//}
-
 
 
 //

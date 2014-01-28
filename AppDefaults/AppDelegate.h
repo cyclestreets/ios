@@ -26,31 +26,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <UIKit/UIKit.h>
 #import "StartupManager.h"
-#import "ExpandedUILabel.h"
 
-#define ISDEVELOPMENT 0
+#define ISDEVELOPMENT 1
 
 @interface AppDelegate : NSObject <UIApplicationDelegate,StartupManagerDelegate,UITabBarControllerDelegate> {
 	
-    UIWindow *window;
-	
-	UIImageView			*splashView;
-	
-	UITabBarController *tabBarController;
-	
-	StartupManager				*startupmanager;
-	ExpandedUILabel					*debugLabel;
 	
 	
 	
 }
 
-@property (nonatomic, strong)	IBOutlet UIWindow		*window;
-@property (nonatomic, strong)	UIImageView		*splashView;
-@property (nonatomic, strong)	UITabBarController		*tabBarController;
-@property (nonatomic, strong)	StartupManager		*startupmanager;
-@property (nonatomic, strong)	ExpandedUILabel		*debugLabel;
-
+@property (nonatomic, strong)	IBOutlet UIWindow				*window;
+@property (nonatomic, strong)	UITabBarController				*tabBarController;
 
 - (UINavigationController *)setupNavigationTab:(UIViewController *)controller withTitle:(NSString *)title imageNamed:(NSString *)imageName tag:(int)tag;
 -(void)showTabBarViewControllerByName:(NSString*)viewname;

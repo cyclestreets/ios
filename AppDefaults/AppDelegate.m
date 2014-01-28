@@ -47,6 +47,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "WrapController.h"
 #import "NSString-Utilities.h"
 
+#import "StartupManager.h"
+#import "ExpandedUILabel.h"
 #import "TripManager.h"
 #import "HCSHelpViewController.h"
 
@@ -55,23 +57,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #endif
 
 
-@interface AppDelegate(Private)
+@interface AppDelegate()
+
+@property (nonatomic, strong)	UIImageView						*splashView;
+@property (nonatomic, strong)	StartupManager					*startupmanager;
+@property (nonatomic, strong)	ExpandedUILabel					*debugLabel;
 
 - (void)buildTabbarController:(NSArray*)viewcontrollers;
 -(void)appendStartUpView;
 -(void)removeStartupView;
-- (void)setBarStyle:(UIBarStyle)style andTintColor:(UIColor *)color forNavigationBar:(UINavigationBar *)bar;
 
 -(void)writeDebugStartupLabel:(BOOL)appendLocation;
 
 @end
 
 @implementation AppDelegate
-@synthesize window;
-@synthesize splashView;
-@synthesize tabBarController;
-@synthesize startupmanager;
-@synthesize debugLabel;
 
 
 
@@ -98,46 +98,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 	[self appendStartUpView];
 	
-	startupmanager=[[StartupManager alloc]init];
-	startupmanager.delegate=self;
-	[startupmanager doStartupSequence];
+	_startupmanager=[[StartupManager alloc]init];
+	_startupmanager.delegate=self;
+	[_startupmanager doStartupSequence];
 	
 	
 	return YES;
 }
 
 
-//
-/***********************************************
- * @description			Called if user selects this app as a routing app
- ***********************************************/
-//
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-	
-	if ([MKDirectionsRequest isDirectionsRequestURL:url]) {
-		MKDirectionsRequest* directionsInfo = [[MKDirectionsRequest alloc] initWithContentsOfURL:url];
-		
-		[[RouteManager sharedInstance] loadRouteForRouting:directionsInfo];
-		
-		return YES;
-		
-	}else {
-		
-		NSString *str=url.scheme;
-		if([str containsString:CYCLESTREETSURLSCHEME]){
-			
-			NSString *routeid=[[url.resourceSpecifier componentsSeparatedByString:@"/"] lastObject];
-			
-			[[RouteManager sharedInstance] loadRouteForRouteId:routeid];
-			
-			
-			return YES;
-		}else{
-			return NO;
-		}
-	}
-    return NO;
-}
+
 
 
 
@@ -152,23 +122,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	BetterLog(@"");
 	
-	startupmanager.delegate=nil;
-	startupmanager=nil;
+	_startupmanager.delegate=nil;
+	_startupmanager=nil;
 	
 	
 	[self buildTabbarController:[[AppConfigManager sharedInstance].configDict objectForKey:@"navigation"]];
 	
 	
-	[window addSubview:tabBarController.view];
-	tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
+	[_window addSubview:_tabBarController.view];
+	_tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	cycleStreets.appDelegate = self;
 	
 		
-	[window makeKeyAndVisible];	
+	[_window makeKeyAndVisible];	
 	
-	[self performSelector:@selector(backgroundSetup) withObject:nil afterDelay:0.0];
 	[self removeStartupView];
 	
 	[self displayHelpViewController];
@@ -218,15 +187,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// animate defaultPNG off screen to smooth out transition to ui state
 	BOOL ip=IS_IPHONE_5;
 	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, SCREENWIDTH, FULLSCREENHEIGHT)];
-	splashView.image = [UIImage imageNamed: ip ? @"Default-568h@2x.png"  : @"Default.png" ];
+	_splashView.image = [UIImage imageNamed: ip ? @"Default-568h@2x.png"  : @"Default.png" ];
 	
 	#if ISDEVELOPMENT
 	[self writeDebugStartupLabel:NO];
 	#endif
 	
 	
-	[window addSubview:splashView];
-	[window bringSubviewToFront:splashView];
+	[_window addSubview:_splashView];
+	[_window bringSubviewToFront:_splashView];
 	
 }
 
@@ -235,13 +204,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	BetterLog(@"");
 	
-	if(debugLabel!=nil)
-		[debugLabel removeFromSuperview];
+	if(_debugLabel!=nil)
+		[_debugLabel removeFromSuperview];
 	
 	self.debugLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(10, 30, 280, 12)];
-	debugLabel.font=[UIFont systemFontOfSize:11];
-	debugLabel.textColor=[UIColor redColor];
-	debugLabel.backgroundColor=[UIColor whiteColor];
+	_debugLabel.font=[UIFont systemFontOfSize:11];
+	_debugLabel.textColor=[UIColor redColor];
+	_debugLabel.backgroundColor=[UIColor whiteColor];
 	NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
 	NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
 	NSString *currSysMdl = [[UIDevice currentDevice] model];
@@ -256,9 +225,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						  @"No Location",[infoDict objectForKey:@"CFBundleIdentifier"],[infoDict objectForKey:@"SERVER_DOMAIN_ID"]];
 	
 	
-	debugLabel.text=debuglabelString;
+	_debugLabel.text=debuglabelString;
 	
-	[splashView addSubview:debugLabel];
+	[_splashView addSubview:_debugLabel];
 	
 	
 	
@@ -269,12 +238,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"");
 	
 	// reset to front because tab controller will be in front now
-	[window bringSubviewToFront:splashView];
+	[_window bringSubviewToFront:_splashView];
 	
 	[UIView animateWithDuration:0.5 delay:1 options:UIViewAnimationOptionTransitionNone animations:^{
-		splashView.alpha = 0.0;
+		_splashView.alpha = 0.0;
 	} completion:^(BOOL finished) {
-		[splashView removeFromSuperview];
+		[_splashView removeFromSuperview];
 	}];
 	
 }
@@ -298,7 +267,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			
 		}];
 		
-		
+#pragma message ("THIS SHOULD BE ENABLED FOR LIVE")
+		//[[UserSettingsManager sharedInstance] saveObject:@(YES) forType:kSTATESYSTEMCONTROLLEDSETTINGSKEY forKey:@"helpViewDisplayed"];
 		
 	}
 	
@@ -387,21 +357,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			}
 			
 		}
-		tabBarController.viewControllers = navControllers;
+		_tabBarController.viewControllers = navControllers;
 	}
 	
 	
 	// only add tabbar delegate if we can save the state
 	if([[UserSettingsManager sharedInstance] userStateWritable]==YES){
-		tabBarController.delegate = self;
+		_tabBarController.delegate = self;
 	}
 	
-	tabBarController.tabBar.translucent=NO;
+	_tabBarController.tabBar.translucent=NO;
 	
 	//[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:tabBarController.moreNavigationController.navigationBar];
 	
 	// DEV: temp disable of edit 
-	tabBarController.customizableViewControllers=nil;
+	_tabBarController.customizableViewControllers=nil;
 }
 
 
@@ -425,33 +395,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-- (void) backgroundSetup {
-	
-	BetterLog(@"");
-	
-	// Check we have network
-    Reachability *internetReach = [Reachability reachabilityForInternetConnection];
-	NetworkStatus internetStatus = [internetReach currentReachabilityStatus];	
-	
-	// Warn that we can't download new maps
-	if (internetStatus == NotReachable) {
-		UIAlertView *networkAlert = [[UIAlertView alloc] initWithTitle:@"Warning"
-													   message:@"No network. "
-													  delegate:nil
-											 cancelButtonTitle:@"OK"
-											 otherButtonTitles:nil];
-		[networkAlert show];				
-	}	
-}
-
 
 
 -(void)showTabBarViewControllerByName:(NSString*)viewname{
 	
-	int count=[tabBarController.viewControllers count];
+	int count=[_tabBarController.viewControllers count];
 	int index=-1;
 	for (int i=0;i<count;i++) {
-		UIViewController *navcontroller=[tabBarController.viewControllers objectAtIndex:i];
+		UIViewController *navcontroller=[_tabBarController.viewControllers objectAtIndex:i];
 		if([navcontroller.tabBarItem.title isEqualToString:viewname]){
 			index=i;
 			break;
@@ -459,7 +410,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	if(index!=-1){
-		[tabBarController setSelectedIndex:index];
+		[_tabBarController setSelectedIndex:index];
 	}else {
 		BetterLog(@"[ERROR] unable to find tabbarItem with name %@",viewname);
 	}
@@ -481,10 +432,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//[tabBarControllers removeObjectsInRange:NSMakeRange(TABBARMORELIMIT,[tabBarControllers count]-TABBARMORELIMIT)];
 	
 	// Warning: This is brittle, but it works on iPhone OS 3.0 (7A341)!
-    UIView *editViews = [controller.view.subviews objectAtIndex:1];
-    UINavigationBar *editModalNavBar = [editViews.subviews objectAtIndex:0]; // configure controller will be index 0
+   // UIView *editViews = [controller.view.subviews objectAtIndex:1];
+    //UINavigationBar *editModalNavBar = [editViews.subviews objectAtIndex:0]; // configure controller will be index 0
 	
-	[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:editModalNavBar];
+	//[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:editModalNavBar];
 	
 }
 

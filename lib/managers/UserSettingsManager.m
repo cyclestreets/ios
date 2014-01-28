@@ -272,6 +272,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 	}
 }
 
+-(void)saveObject:(id)object forType:(NSString*)type forKey:(NSString*)key{
+	
+	if(object!=nil){
+		
+		NSMutableDictionary *dict=[stateDict objectForKey:type];
+		
+		
+		id foundobject=[dict objectForKey:key];
+		if(foundobject==nil){
+			BetterLog(@"[WARNING] Saving unknown userState key: %@ with object %@",key,object);
+		}
+		if(KUSERSTATECANSAVEUNKNOWNS==1){
+			[dict setObject:object forKey:key];
+			[self saveApplicationState];
+		}
+	}
+}
+
 
 -(id)fetchObjectforKey:(NSString*)key{
 	
