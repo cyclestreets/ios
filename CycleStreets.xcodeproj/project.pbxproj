@@ -544,6 +544,8 @@
 		2863A3E9134E508800A22093 /* ALAsset+Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A370134E508800A22093 /* ALAsset+Info.m */; };
 		2863A3F5134E508800A22093 /* XMLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A38D134E508800A22093 /* XMLRequest.m */; };
 		2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
+		28640E8018981F4F009A4030 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28640E7F18981F4F009A4030 /* default.css */; };
+		28640E8118981F4F009A4030 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28640E7F18981F4F009A4030 /* default.css */; };
 		2868D23C166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23D166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */; };
@@ -1261,6 +1263,7 @@
 		2863A38D134E508800A22093 /* XMLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRequest.m; sourceTree = "<group>"; };
 		2863A3A0134E508800A22093 /* FavouritesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCellView.h; sourceTree = "<group>"; };
 		2863A3A1134E508800A22093 /* FavouritesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCellView.m; sourceTree = "<group>"; };
+		28640E7F18981F4F009A4030 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = default.css; path = styling/default.css; sourceTree = "<group>"; };
 		2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityBlank@2x.png"; sourceTree = "<group>"; };
 		2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityCopy@2x.png"; sourceTree = "<group>"; };
 		2868D238166E1C0600C0C153 /* UIActivityFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityFacebook@2x.png"; sourceTree = "<group>"; };
@@ -2219,6 +2222,14 @@
 			path = AssetPicker;
 			sourceTree = "<group>";
 		};
+		28640E7C18981F38009A4030 /* styling */ = {
+			isa = PBXGroup;
+			children = (
+				28640E7F18981F4F009A4030 /* default.css */,
+			);
+			name = styling;
+			sourceTree = "<group>";
+		};
 		287050AE188FC38A004CD922 /* Hackney */ = {
 			isa = PBXGroup;
 			children = (
@@ -2668,6 +2679,7 @@
 		28AD6207131FB69D008527FC /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				28640E7C18981F38009A4030 /* styling */,
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
 				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
 				280E9318140984F300C7AC75 /* xib */,
@@ -3365,6 +3377,7 @@
 				28D10EC9135D6E54006F1D94 /* CSTabBar_credits@2x.png in Resources */,
 				28D10ECA135D6E54006F1D94 /* CSTabBar_fav_routes@2x.png in Resources */,
 				28BC443318915A5800711A1A /* commute.tif in Resources */,
+				28640E8018981F4F009A4030 /* default.css in Resources */,
 				28AE47C618970B9C00203C20 /* UIPickerAccessoryView.xib in Resources */,
 				28D10ECB135D6E54006F1D94 /* CSTabBar_itinerary@2x.png in Resources */,
 				28D10ECC135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png in Resources */,
@@ -3801,6 +3814,7 @@
 				283436AE15DD5DC300B00FD5 /* popoverArrowUp.png in Resources */,
 				283436AF15DD5DC300B00FD5 /* popoverArrowUp@2x.png in Resources */,
 				28BC447218915A5800711A1A /* shopping.png in Resources */,
+				28640E8118981F4F009A4030 /* default.css in Resources */,
 				283436B015DD5DC300B00FD5 /* popoverArrowUpSimple.png in Resources */,
 				283436B115DD5DC300B00FD5 /* popoverBg.png in Resources */,
 				28BC443818915A5800711A1A /* errands.tif in Resources */,

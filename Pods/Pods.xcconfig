@@ -1,5 +1,6 @@
+FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/Pixate/Framework/iOS"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/JVFloatLabeledTextField"
-OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/AFNetworking" "-isystem${PODS_ROOT}/Headers/JVFloatLabeledTextField"
-OTHER_LDFLAGS = -ObjC -framework CoreGraphics -framework Foundation -framework MobileCoreServices -framework Security -framework SystemConfiguration -framework UIKit
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/JVFloatLabeledTextField" "${PODS_ROOT}/Headers/Pixate"
+OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/AFNetworking" "-isystem${PODS_ROOT}/Headers/JVFloatLabeledTextField" "-isystem${PODS_ROOT}/Headers/Pixate"
+OTHER_LDFLAGS = -ObjC -lObjC -framework CoreGraphics -framework CoreText -framework Foundation -framework MobileCoreServices -framework Pixate -framework QuartzCore -framework Security -framework SystemConfiguration -framework UIKit
 PODS_ROOT = ${SRCROOT}/Pods

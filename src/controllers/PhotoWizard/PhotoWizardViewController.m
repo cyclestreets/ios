@@ -1120,8 +1120,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 -(IBAction)didDismissPickerFromToolBar:(id)sender{
-	PhotoCategoryVO *vo=_activePickerDataSource[[_categoryPickerView selectedRowInComponent:0]];
-	_currentCategoryField.text = vo.name;
+	
+	[self didSelectCategoryFromMenu:[_categoryPickerView selectedRowInComponent:0]];
+	
     [_currentCategoryField resignFirstResponder];
 }
 

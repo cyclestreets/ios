@@ -54,3 +54,9 @@
 #define COCOAPODS_VERSION_MINOR_JVFloatLabeledTextField 0
 #define COCOAPODS_VERSION_PATCH_JVFloatLabeledTextField 5
 
+// Pixate
+#define COCOAPODS_POD_AVAILABLE_Pixate
+#define COCOAPODS_VERSION_MAJOR_Pixate 2
+#define COCOAPODS_VERSION_MINOR_Pixate 0
+#define COCOAPODS_VERSION_PATCH_Pixate 1
+

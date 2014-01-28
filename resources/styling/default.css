@@ -1,0 +1,70 @@
+/*config*/
+pixate-config {
+    parse-error-destination: console;
+    cache-styles: auto;
+    image-cache-count: 100;
+}
+
+
+/* UIKit Classes */
+
+button {
+    
+    font-family     : HelveticaNeue;
+    font-weight     : light;
+}
+
+
+
+
+
+/* Trip View */
+
+#tripActionButton{
+
+	font-family     : HelveticaNeue;
+    font-weight     : light;
+	font-size       : 20px;
+
+}
+
+
+
+
+
+/* Routes view */
+
+
+
+
+/* Photomap view */
+
+
+
+
+
+/* Photowizard view */
+
+
+#photoWizardActionButon{
+	font-family     : HelveticaNeue;
+    font-weight     : light;
+	background-color: #509720;
+    border-width    : 0px;
+    border-radius   : 6px;
+    color :#FFFFFF;
+}
+
+
+
+/* User view */
+
+
+
+
+/* Info view */
+
+
+
+
+
