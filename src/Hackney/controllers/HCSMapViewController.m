@@ -59,6 +59,55 @@
 
 @implementation HCSMapViewController
 
+//
+/***********************************************
+ * @description		NOTIFICATIONS
+ ***********************************************/
+//
+
+-(void)listNotificationInterests{
+	
+	[self initialise];
+	
+	[notifications addObject:RESPONSE_GPSUPLOAD];
+	
+	[super listNotificationInterests];
+	
+}
+
+-(void)didReceiveNotification:(NSNotification*)notification{
+	
+	[super didReceiveNotification:notification];
+	
+	NSString *name=notification.name;
+	
+	if([name isEqualToString:RESPONSE_GPSUPLOAD]){
+		
+		[self refreshUIFromDataProvider:notification.object];
+		
+	}
+	
+	
+}
+
+
+
+
+-(void)refreshUIFromDataProvider:(NSDictionary*)stateDict{
+	
+	NSString *state=stateDict[STATE];
+	
+	if([state isEqualToString:SUCCESS]){
+		
+		_uploadButton.enabled=!_trip.isUploaded;
+		
+	}
+	
+	
+}
+
+
+
 
 - (id)initWithTrip:(Trip *)trip
 {

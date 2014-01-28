@@ -8,7 +8,7 @@
 #import "User.h"
 #import "LoadingView.h"
 #import "HCSTrackConfigViewController.h"
-
+#import "CycleStreets.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
 #import <AFNetworking.h>
@@ -23,10 +23,8 @@
 #define kEpsilonSpeed			30.0	// meters per sec = 67 mph
 
 #define kSaveProtocolVersion_1	1
-#define kSaveProtocolVersion_2	2
-#define kSaveProtocolVersion_3	3
 
-#define kSaveProtocolVersion	kSaveProtocolVersion_3
+#define kSaveProtocolVersion	kSaveProtocolVersion_1
 
 
 @interface TripManager()
@@ -260,7 +258,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		
 		User *user = [users firstObject];
 		
-		      
         NSString *appVersion = [NSString stringWithFormat:@"%@ (%@) on iOS %@",
                                 [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
                                 [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"],
@@ -271,8 +268,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			
 			// initialize text fields to saved personal info
 			[userDict setValue:user.age             forKey:@"age"];
-			[userDict setValue:user.email           forKey:@"email"];
 			[userDict setValue:user.gender          forKey:@"gender"];
+			
+			[userDict setValue:appVersion           forKey:@"app_version"];
+			
+			/*
+			[userDict setValue:user.email           forKey:@"email"];
 			[userDict setValue:user.homeZIP         forKey:@"homeZIP"];
 			[userDict setValue:user.workZIP         forKey:@"workZIP"];
 			[userDict setValue:user.schoolZIP       forKey:@"schoolZIP"];
@@ -281,7 +282,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
             [userDict setValue:user.income          forKey:@"income"];
             [userDict setValue:user.rider_type      forKey:@"rider_type"];
             [userDict setValue:user.rider_history	forKey:@"rider_history"];
-            [userDict setValue:appVersion           forKey:@"app_version"];
+            */
+			 
 		}else{
 			NSLog(@"TripManager fetch user FAIL");
 		}
@@ -324,13 +326,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	[[CoreDataStore mainStore]save];
 	
-	
-	
-	
-	//TODO: Send this dict to network controller
+	[self uploadSelectedTrip:_currentRecordingTrip];
 	
 	//TODO:  send notification to display Map VC for current recording trip ie displayUploadedTripMap
-	
 	[[NSNotificationCenter defaultCenter] postNotificationName:HCSDISPLAYTRIPMAP object:nil];
 }
 
@@ -399,7 +397,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	// get start date
 	NSString *start = [outputFormatter stringFromDate:trip.start];
-	NSLog(@"start: %@", start);
+	
 	
 	// encode user data
 	NSDictionary *userDict = [self encodeUserData];
@@ -409,42 +407,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     // JSON encode user data
     NSData *userJsonData = [NSJSONSerialization dataWithJSONObject:userDict options:0 error:&writeError];
     NSString *userJson = [[NSString alloc] initWithData:userJsonData encoding:NSUTF8StringEncoding];
-    NSLog(@"user data %@", userJson);
+   
     
     // JSON encode the trip data
     NSData *tripJsonData = [NSJSONSerialization dataWithJSONObject:tripDict options:0 error:&writeError];
     NSString *tripJson = [[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding];
-    //NSLog(@"trip data %@", tripJson);
-	
+    
 	
 	// NOTE: device hash added by SaveRequest initWithPostVars
-	NSDictionary *postVars = [NSDictionary dictionaryWithObjectsAndKeys:
-							  tripJson, @"coords",
-							  purpose, @"purpose",
-							  notes, @"notes",
-							  start, @"start",
-							  userJson, @"user",
-							  [[[UIDevice currentDevice] identifierForVendor] UUIDString],@"device",
-							  [NSString stringWithFormat:@"%d", kSaveProtocolVersion], @"version",
-							  nil];
+	NSDictionary *postVars = @{@"coords":tripJson,
+							  @"purpose":purpose,
+							  @"notes":notes,
+							  @"start":start,
+							  @"user":userJson,
+							  @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString],
+							  @"version":[NSString stringWithFormat:@"%d", kSaveProtocolVersion]};
 	
 	
 	
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    [manager POST:@"http://alrtsystems.com/api/userLogin" parameters:postVars success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	NSString *fullURL=[NSString stringWithFormat:@"https://api.cyclestreets.net/v2/gpstrack.add?key=%@",[[CycleStreets sharedInstance] APIKey]];
+	
+    [manager POST:fullURL parameters:postVars success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		
         
-        [[ApplicationJSONParser sharedInstance] parseDataForResponseData:(NSMutableData *)responseObject forRequestType:@"" success:^(NetResponse *result) {
+        [[ApplicationJSONParser sharedInstance] parseDataForResponseData:(NSMutableData *)responseObject forRequestType:GPSUPLOAD success:^(NetResponse *result) {
             
+			
+			
            
-			// set uploaded to trip> save trip > ui may require updating
+			trip.uploaded=[NSDate date];
+			
+			[[CoreDataStore mainStore]save];
 			
             
-           //[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_USERLOGINKNOWNUSER object:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: SUCCESS}];
             
         } failure:^(NetResponse *result, NSError *error) {
+			
+			BetterLog(@"%@",error.description);
             
-           // [[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_USERLOGINKNOWNUSER object:result];
+           [[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
             
         }];
         
@@ -452,7 +456,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
        
-        
+        BetterLog(@"%@",error.debugDescription);
         
     }];
 	

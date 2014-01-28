@@ -68,6 +68,10 @@ extern NSString *const POILISTING;
 extern NSString *const POICATEGORYLOCATION;
 extern NSString *const PHOTOCATEGORIES;
 
+extern NSString *const GPSUPLOAD;
+extern NSString *const RESPONSE_GPSUPLOAD;
+
+
 // INTERNAL
 extern NSString *const CALCULATEROUTERESPONSE;
 extern NSString *const RETRIEVEROUTEBYIDRESPONSE;

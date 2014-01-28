@@ -36,6 +36,8 @@
 
 // utility
 
+@property(nonatomic,readonly)  BOOL         isUploaded;
+
 -(NSString*)durationString;
 -(NSString*)caloriesUsedString;
 -(NSString*)co2SavedString;

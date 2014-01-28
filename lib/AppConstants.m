@@ -53,6 +53,9 @@ NSString *const POILISTING=@"PoiListing";
 NSString *const POICATEGORYLOCATION=@"PoiCategoryLocation";
 NSString *const PHOTOCATEGORIES=@"PhotoCategories";
 
+NSString *const GPSUPLOAD=@"GPSUpload";
+NSString *const RESPONSE_GPSUPLOAD=@"GpsuploadResponse";
+
 //INTERNAL
 NSString *const CALCULATEROUTERESPONSE=@"CALCULATEROUTERESPONSE";
 NSString *const RETRIEVEROUTEBYIDRESPONSE=@"RETRIEVEROUTEBYIDRESPONSE";

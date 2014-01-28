@@ -77,6 +77,9 @@
                             </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="sFj-xh-mjc">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="didSelectUploadButton:" destination="-1" id="GM9-UE-Fc8"/>
+                                </connections>
                             </barButtonItem>
                         </navigationItem>
                     </items>

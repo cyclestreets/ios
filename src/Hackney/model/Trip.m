@@ -27,6 +27,11 @@
 
 
 
+-(BOOL)isUploaded{
+	return self.uploaded!=nil;
+}
+
+
 
 -(NSString*)durationString{
 	

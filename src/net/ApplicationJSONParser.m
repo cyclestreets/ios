@@ -10,7 +10,7 @@
 #import "GlobalUtilities.h"
 #import "CJSONDeserializer.h"
 #import "GenericConstants.h"
-
+#import "AppConstants.h"
 
 @interface ApplicationJSONParser()
 
@@ -33,12 +33,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	if (self = [super init])
 	{
         
-//		self.parserMethods=@{[AppConstants dataTypeToStringType:SEARequestDataTypeLogin]:[NSValue valueWithPointer:@selector(UserAccountLoginParser)],
-//                             [AppConstants dataTypeToStringType:SEARequestDataTypeDeviceInviteSharerEmail]:[NSValue valueWithPointer:@selector(InviteSharerParser)],
-//                             [AppConstants dataTypeToStringType:SEARequestDataTypeDeviceInviteSharerSMS]:[NSValue valueWithPointer:@selector(InviteSharerParser)],
-//                             [AppConstants dataTypeToStringType:SEARequestDataTypeAppUrl]:[NSValue valueWithPointer:@selector(AppUrlParser)],
-//                             [AppConstants dataTypeToStringType:SEARequestDataTypeDeviceStatus]:[NSValue valueWithPointer:@selector(DeviceStatusParser)],
-//                             [AppConstants dataTypeToStringType:SEARequestDataTypeUserDevices]:[NSValue valueWithPointer:@selector(UserDevicesParser)]};
+		self.parserMethods=@{GPSUPLOAD:[NSValue valueWithPointer:@selector(GpsUploadParser)]};
 	}
 	return self;
 }
@@ -136,6 +131,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
  ***********************************************/
 //
 #pragma mark PARSERS
+
+
+-(void)GpsUploadParser{
+	
+	[self validateJSON];
+	if(_activeResponse.status==NO){
+		return;
+	}
+    
+    _activeResponse.dataProvider=_responseDict;
+	
+}
 
 
 
