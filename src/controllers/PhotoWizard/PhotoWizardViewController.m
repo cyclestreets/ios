@@ -274,6 +274,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 -(void)createPersistentUI{
+	
+	self.uploadImage=[[UploadPhotoVO alloc]init];
     
     
 	popoverClass = [WEPopoverController class];
@@ -374,7 +376,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)createNonPersistentUI{
     
-	self.uploadImage=[[UploadPhotoVO alloc]init];
+	
    
     
 }
