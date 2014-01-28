@@ -10,6 +10,8 @@
 #import "GlobalUtilities.h"
 #import "Markers.h"
 #import "UserLocationManager.h"
+#import "RMMarker.h"
+#import "RMAnnotation.h"
 
 
 static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
@@ -28,6 +30,8 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 @property (nonatomic) BOOL											avoidAccidentalTaps;
 @property (nonatomic) BOOL											singleTapDidOccur;
 @property (nonatomic) CGPoint										singleTapPoint;
+
+@property (nonatomic,strong)  RMAnnotation							*userAnnotation;
 
 
 
@@ -82,11 +86,9 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	[RMMapView class];
 	[_mapView setDelegate:self];
 	
-	if (!self.userMarker) {
-		self.userMarker = [Markers markerPhoto];
-	}
+	_mapView.enableDragging=YES;
 	
-	
+		
 }
 
 
@@ -103,8 +105,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
     
 	if (_userlocation!=nil) {
 		
-		
-		//[_mapView.markerManager addMarker:_userMarker AtLatLong:_userlocation.coordinate];
+		[self addAnnotationToMapAtCoorddinate:_userlocation.coordinate];
 		
 		[self showLocationOnMap:_userlocation];
 		
@@ -112,12 +113,12 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 		
 		if(_photolocation!=nil){
 			
-			//[_mapView.markerManager addMarker:_userMarker AtLatLong:_photolocation.coordinate];
+			[self addAnnotationToMapAtCoorddinate:_photolocation.coordinate];
 			
 			[self showLocationOnMap:_photolocation];
 		}else {
 			
-			//[_mapView.markerManager addMarker:_userMarker AtLatLong:[UserLocationManager defaultCoordinate]];
+			[self addAnnotationToMapAtCoorddinate:[UserLocationManager defaultCoordinate]];
 			
 			[self showLocationOnMap:[UserLocationManager defaultLocation]];
 			
@@ -129,6 +130,21 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
     
 	_resetButton.enabled=_photolocation!=nil;
     
+}
+
+
+-(void)addAnnotationToMapAtCoorddinate:(CLLocationCoordinate2D)coordinate{
+	
+	
+	self.userAnnotation = [RMAnnotation annotationWithMapView:_mapView coordinate:coordinate andTitle:nil];
+	_userAnnotation.enabled=YES;
+	_userAnnotation.title=@"Here is a title";
+	_userAnnotation.annotationIcon = [UIImage imageNamed:@"UIIcon_userphotomap.png"];
+	_userAnnotation.anchorPoint = CGPointMake(0.5, 1.0);
+		
+	[_mapView addAnnotation:_userAnnotation];
+	
+	
 }
 
 
@@ -160,75 +176,78 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	}
 }
 
-//
-/***********************************************
- * @description			RM  methods
- ***********************************************/
-//
-// Should only return yes is marker is start/end and we have not a route drawn
-- (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+
+
+#pragma mark - RM Map delegate methods
+
+
+- (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
+{
+	
+	RMMapLayer *marker = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
+    
+    return marker;
+}
+
+
+
+
+- (void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map{
 	
 	BetterLog(@"");
 	
-	BOOL result=NO;
-	if (marker==_userMarker) {
-		result=YES;
-	}
-	_mapView.enableDragging=!result;
-	return result;
+	[self markerLocationDidUpdate:annotation.coordinate];
 	
 }
 
 
-- (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+- (BOOL)mapView:(RMMapView *)map shouldDragAnnotation:(RMAnnotation *)annotation {
 	
-	NSSet *touches = [event touchesForView:map]; 
+	BetterLog(@"");
 	
-	BetterLog(@"touches=%i",[touches count]);
-	
-	for (UITouch *touch in touches) {
-		CGPoint point = [touch locationInView:map];
-		CLLocationCoordinate2D location = [map pixelToCoordinate:point];
-		//[[map markerManager] moveMarker:_userMarker AtLatLon:location];
-		[self markerLocationDidUpdate:location];
-	}
-	
-	
-	
-}
-
-- (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
-	
-	if(_singleTapDidOccur==NO){
-		_singleTapDidOccur=YES;
-		_singleTapPoint=point;
-		[self performSelector:@selector(singleTapDelayExpired) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
-		
-	}
-}
-
--(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
-	
-	_singleTapDidOccur=NO;
-	
-	float nextZoomFactor = [map nextNativeZoomFactor];
-	if (nextZoomFactor != 0)
-		[map zoomByFactor:nextZoomFactor near:point animated:YES];
+	return YES;
 	
 }
 
 
-- (void) singleTapDelayExpired {
-	if(_singleTapDidOccur==YES){
-		_singleTapDidOccur=NO;
-		CLLocationCoordinate2D location = [_mapView pixelToCoordinate:_singleTapPoint];
-		[self addLocation:location];
-	}
+- (void)mapView:(RMMapView *)map didDragAnnotation:(RMAnnotation *)annotation withDelta:(CGPoint)delta{
+	
+	BetterLog(@" %f %f",annotation.coordinate.latitude,annotation.coordinate.longitude);
+	
+	CGPoint screenPosition = CGPointMake(annotation.position.x - delta.x, annotation.position.y - delta.y);
+	
+    annotation.coordinate = [_mapView pixelToCoordinate:screenPosition];
+    annotation.position = screenPosition;
+	
+	[self markerLocationDidUpdate:annotation.coordinate];
+	
 }
+
+
+- (void)mapView:(RMMapView *)map didEndDragAnnotation:(RMAnnotation *)annotation{
+	
+//	RMProjectedPoint projectedPoint = annotation.projectedLocation;
+//    CGPoint screenPoint = annotation.position;
+
+	
+	[self markerLocationDidUpdate:annotation.coordinate];
+	
+}
+
+
+
+- (void)singleTapOnMap:(RMMapView *)map at:(CGPoint)point {
+	
+	[self markerLocationDidUpdate:[_mapView pixelToCoordinate:point]];
+	
+}
+
+
+
 
 - (void) addLocation:(CLLocationCoordinate2D)location{
 	
-	//[_mapView.markerManager addMarker:_userMarker AtLatLong:location];
+	
 	[self markerLocationDidUpdate:location];
 }
 
@@ -250,7 +269,7 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 -(IBAction)resetButtonSelected:(id)sender{
 	
 	if(_photolocation!=nil){
-		//[_mapView.markerManager addMarker:_userMarker AtLatLong:_photolocation.coordinate];
+		[_userAnnotation setCoordinate:_photolocation.coordinate];
 		self.userlocation=nil;
 		
 		[self showLocationOnMap:_photolocation];
