@@ -546,6 +546,8 @@
 		2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
 		28640E8018981F4F009A4030 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28640E7F18981F4F009A4030 /* default.css */; };
 		28640E8118981F4F009A4030 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28640E7F18981F4F009A4030 /* default.css */; };
+		28640E8318985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28640E8218985DAA009A4030 /* UIActivityTwitter@2x.png */; };
+		28640E8418985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28640E8218985DAA009A4030 /* UIActivityTwitter@2x.png */; };
 		2868D23C166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23D166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */; };
@@ -1264,6 +1266,7 @@
 		2863A3A0134E508800A22093 /* FavouritesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCellView.h; sourceTree = "<group>"; };
 		2863A3A1134E508800A22093 /* FavouritesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCellView.m; sourceTree = "<group>"; };
 		28640E7F18981F4F009A4030 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = default.css; path = styling/default.css; sourceTree = "<group>"; };
+		28640E8218985DAA009A4030 /* UIActivityTwitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityTwitter@2x.png"; sourceTree = "<group>"; };
 		2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityBlank@2x.png"; sourceTree = "<group>"; };
 		2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityCopy@2x.png"; sourceTree = "<group>"; };
 		2868D238166E1C0600C0C153 /* UIActivityFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityFacebook@2x.png"; sourceTree = "<group>"; };
@@ -2031,6 +2034,7 @@
 				2811C499166CCD5F00592560 /* UIActivityFacebook.png */,
 				2811C49A166CCD5F00592560 /* UIActivityMail.png */,
 				2811C49C166CCD5F00592560 /* UIActivityTwitter.png */,
+				28640E8218985DAA009A4030 /* UIActivityTwitter@2x.png */,
 			);
 			path = ShareView;
 			sourceTree = "<group>";
@@ -3599,6 +3603,7 @@
 				28BC444D18915A5800711A1A /* exercise.png in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
+				28640E8318985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 				28BC444318915A5800711A1A /* work-related.tif in Resources */,
 				28BC444518915A5800711A1A /* commute.png in Resources */,
@@ -3823,6 +3828,7 @@
 				283436B415DD5DC300B00FD5 /* UITextViewAccessoryView.xib in Resources */,
 				283436B915DD5DC300B00FD5 /* MapLocationSearchCell.xib in Resources */,
 				283436BA15DD5DC300B00FD5 /* UIIcon_userphotomap.png in Resources */,
+				28640E8418985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */,
 				283436BB15DD5DC300B00FD5 /* UIIcon_userphotomap@2x.png in Resources */,
 				28BC446218915A5800711A1A /* noteIssueMapGlyph.png in Resources */,
 				283436BC15DD5DC300B00FD5 /* Icon.png in Resources */,

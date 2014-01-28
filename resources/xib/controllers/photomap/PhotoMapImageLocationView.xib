@@ -19,6 +19,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="9">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                 </scrollView>
                 <navigationBar contentMode="scaleToFill" id="4">
                     <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -47,7 +48,7 @@
                     </items>
                 </navigationBar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.1960784314" green="0.39607843139999999" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

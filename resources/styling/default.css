@@ -11,6 +11,24 @@ pixate-config {
 
 
 
+/* BU Classes */
+
+#BUIconActionSheetClosebutton{
+	font-family     : HelveticaNeue;
+    font-weight     : light;
+	background-color: #AC0000;
+    border-width    : 0px;
+    border-radius   : 6px;
+    color :#FFFFFF;
+}
+
+#BUIconActionSheetIconbutton{
+	border-radius   : 22px;
+	border-width: 2px;
+	border-style	:none;
+}
+
+
 
 
 /* Trip View */

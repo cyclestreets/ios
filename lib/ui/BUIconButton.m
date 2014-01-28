@@ -40,6 +40,9 @@
 
 -(void)drawUI{
 	
+	BetterLog(@"buttonBackgroundImage=%@",buttonBackgroundImage);
+	
+	
 	if(buttonSize.width==0){
 		UIImage *buttonimage=[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",buttonBackgroundImage]];
 		buttonSize=buttonimage.size;
