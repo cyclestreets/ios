@@ -24,6 +24,9 @@
 #import <ImageIO/ImageIO.h>
 #import "UserManager.h"
 
+#import "RMMarker.h"
+#import "RMAnnotation.h"
+
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
@@ -92,6 +95,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIButton *photoMapButton;
 @property (nonatomic, strong) WEPopoverController *categoryMenu;
 
+@property (nonatomic,strong)  RMAnnotation									*userLocationAnnotation;
 
 
 -(RMMarker*)retrieveLocationMapMarker;
@@ -913,22 +917,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[_locationMapView setDelegate:self];
 	_locationMapView.userInteractionEnabled=NO;
 	
-	[self retrieveLocationMapMarker];
+	self.userLocationAnnotation = [RMAnnotation annotationWithMapView:_locationMapView coordinate:CLLocationCoordinate2DMake(0,0) andTitle:nil];
+	_userLocationAnnotation.enabled=YES;
+	_userLocationAnnotation.annotationIcon = [UIImage imageNamed:@"UIIcon_userphotomap.png"];
+	_userLocationAnnotation.anchorPoint = CGPointMake(0.5, 1.0);
+	[_locationMapView addAnnotation:_userLocationAnnotation];
+	
 	
 	[self loadLocationFromPhoto];
 		
 }
 
 
--(RMMarker*)retrieveLocationMapMarker{
-	
-	if (self.locationMapMarker==nil) {
-		self.locationMapMarker = [Markers markerPhoto];
-		//self.locationMapMarker.enableDragging=YES;
-	}
-	
-	return self.locationMapMarker;
-}
 
 
 -(void)updateLocationView{
@@ -1035,7 +1035,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 	[self.locationMapView setCenterCoordinate:coordinate];
 	
-	//[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:coordinate];
+	_userLocationAnnotation.coordinate=coordinate;
 	
 	[_locationMapView setZoom:6];
 		
@@ -1052,11 +1052,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		[_locationMapView setZoom:14];
 	}
 	
+	_userLocationAnnotation.coordinate=location.coordinate;
+	
+}
 
+
+- (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
+{
 	
-	//[_locationMapView.markerManager addMarker:[self retrieveLocationMapMarker] AtLatLong:location.coordinate];
-	
-	
+	RMMapLayer *marker = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
+    
+    return marker;
 }
 
 
