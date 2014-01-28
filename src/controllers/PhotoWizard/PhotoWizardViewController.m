@@ -31,7 +31,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
-@interface PhotoWizardViewController()
+@interface PhotoWizardViewController()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 
 
 
@@ -56,6 +56,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) UploadPhotoVO *uploadImage;
 @property (nonatomic, strong) IBOutlet UIView *infoView;
 @property (nonatomic, strong) IBOutlet UIButton *continueButton;
+
+
 @property (nonatomic, strong) IBOutlet UIView *photoPickerView;
 @property (nonatomic, strong) IBOutlet UIImageView *imagePreview;
 @property (nonatomic, strong) IBOutlet UILabel *photoSizeLabel;
@@ -64,6 +66,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIButton *cameraButton;
 @property (nonatomic, strong) IBOutlet UIButton *libraryButton;
 @property (nonatomic, strong) IBOutlet UIView *photoLocationView;
+
+
 @property (nonatomic, strong) IBOutlet RMMapView *locationMapView;
 @property (nonatomic, strong) RMMarker *locationMapMarker;
 @property (nonatomic, strong) IBOutlet UILabel *locationLabel;
@@ -73,23 +77,33 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, assign, getter=isSingleTapDidOccur) BOOL singleTapDidOccur;
 @property (nonatomic, assign) CGPoint singleTapPoint;
 @property (nonatomic, assign, getter=isLocationManagerIsLocating) BOOL locationManagerIsLocating;
+
+
 @property (nonatomic, strong) IBOutlet UIView *categoryView;
 @property (nonatomic, strong) IBOutlet UILabel *categoryTypeLabel;
 @property (nonatomic, strong) IBOutlet UILabel *categoryDescLabel;
 @property (nonatomic, strong) IBOutlet UIPickerView *pickerView;
-@property (nonatomic, strong) IBOutlet UIButton *categoryButton;
-@property (nonatomic, strong) IBOutlet UIButton *categoryFeaturebutton;
-@property (nonatomic, strong) PhotoWizardCategoryMenuViewController *categoryMenuView;
+@property (nonatomic, strong) IBOutlet UITextField *categoryField;
+@property (nonatomic, strong) IBOutlet UITextField *categoryFeatureField;
+@property (nonatomic, strong) UIPickerView			*categoryPickerView;
+@property (nonatomic, strong) UITextField			*currentCategoryField;
+@property (nonatomic, strong) NSArray				*activePickerDataSource;
+@property (nonatomic, strong) IBOutlet UIView		*pickerAccessoryView;
+
+
 @property (nonatomic, strong) IBOutlet UIView *photodescriptionView;
 @property (nonatomic, strong) IBOutlet UIView *textViewAccessoryView;
 @property (nonatomic, strong) IBOutlet UIImageView *descImagePreview;
 @property (nonatomic, strong) IBOutlet UITextView *photodescriptionField;
+
+
 @property (nonatomic, strong) IBOutlet UIView *photoUploadView;
 @property (nonatomic, strong) IBOutlet UIButton *uploadButton;
 @property (nonatomic, strong) IBOutlet UIButton *cancelButton;
 @property (nonatomic, strong) IBOutlet UIProgressView *uploadProgressView;
 @property (nonatomic, strong) IBOutlet ExpandedUILabel *uploadLabel;
-//@property (nonatomic, strong) AccountViewController *loginView;
+
+
 @property (nonatomic, strong) IBOutlet UIView *photoResultView;
 @property (nonatomic, strong) IBOutlet CopyLabel *photoResultURLLabel;
 @property (nonatomic, strong) IBOutlet UIButton *photoMapButton;
@@ -118,7 +132,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)updateCategoryView;
 -(void)resetCategoryView;
 -(IBAction)showCategoryMenu:(id)sender;
--(void)didSelectCategoryFromMenu:(NSNotification*)notification;
+-(void)didSelectCategoryFromMenu:(int)index;
 
 -(void)initDescriptionView:(PhotoWizardViewState)state;
 -(void)updateDescriptionView;
@@ -411,6 +425,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 
+#pragma mark - Navigation
+
 
 //
 /***********************************************
@@ -678,7 +694,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 
-#pragma mark Paging
+#pragma mark - Paging
 //
 /***********************************************
  * @description			PAGE EVENTS
@@ -750,7 +766,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
-#pragma mark Photo View
+#pragma mark - Photo View
 //
 /***********************************************
  * @description			PhotoPicker methods
@@ -897,7 +913,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 
-#pragma mark Location View
+#pragma mark - Location View
 //
 /***********************************************
  * @description			LOCATION METHODS
@@ -1067,7 +1083,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
-#pragma mark Category View
+#pragma mark - Category View
 //
 /***********************************************
  * @description			Category Methods
@@ -1078,11 +1094,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[PhotoCategoryManager sharedInstance];
 	
-	//[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
-	//[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
+	if(_categoryPickerView==nil)
+		self.categoryPickerView=[[UIPickerView alloc]init];
 	
-	[_categoryButton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
-	[_categoryFeaturebutton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
+	_categoryPickerView.backgroundColor=[UIColor whiteColor];
+	
+	_categoryPickerView.dataSource = self;
+    _categoryPickerView.delegate = self;
+    _categoryField.inputView = _categoryPickerView;
+	_categoryFeatureField.inputView= _categoryPickerView;
 	
 	
 }
@@ -1094,66 +1114,76 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)resetCategoryView{
 	
-	//[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
-	//[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
-	
 	_uploadImage.category=nil;
 	_uploadImage.feature=nil;
 	
 }
 
-
-
--(IBAction)showCategoryMenu:(id)sender{
-	
-	UIButton *button=(UIButton*)sender;
-	PhotoCategoryType dataType=button.tag;
-	
-    self.categoryMenuView=[[PhotoWizardCategoryMenuViewController alloc]initWithNibName:@"PhotoWizardCategoryMenuView" bundle:nil];
-	_categoryMenuView.dataType=dataType;
-	_categoryMenuView.uploadImage=_uploadImage;
-	
-	switch(dataType){
-		
-		case PhotoCategoryTypeFeature:
-			_categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"feature"];
-		break;
-		
-		case PhotoCategoryTypeCategory:
-			_categoryMenuView.dataProvider=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"category"];
-		break;
-	}
-	
-	self.categoryMenu = [[popoverClass alloc] initWithContentViewController:_categoryMenuView];
-	self.categoryMenu.delegate = self;
-	
-	[self.categoryMenu presentPopoverFromRect:button.frame inView:self.categoryView permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
-    
-	
+-(IBAction)didDismissPickerFromToolBar:(id)sender{
+	PhotoCategoryVO *vo=_activePickerDataSource[[_categoryPickerView selectedRowInComponent:0]];
+	_currentCategoryField.text = vo.name;
+    [_currentCategoryField resignFirstResponder];
 }
 
 
--(void)didSelectCategoryFromMenu:(NSNotification*)notification{
+#pragma mark - UIPicker methods
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return _activePickerDataSource.count;
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return  1;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
 	
-	NSDictionary *userInfo=notification.userInfo;
+	PhotoCategoryVO *vo=_activePickerDataSource[row];
 	
-	PhotoCategoryVO *vo=[userInfo objectForKey:@"dataProvider"];
-	PhotoCategoryType dataType=[[userInfo objectForKey:@"dataType"]intValue];
+    return vo.name;
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 	
+	[self didSelectCategoryFromMenu:row];
+	
+    [_currentCategoryField resignFirstResponder];
+}
+
+
+-(void)selectCategoryDataForDataType:(PhotoCategoryType)dataType{
+
 	switch(dataType){
+		
+		case PhotoCategoryTypeFeature:
+			self.activePickerDataSource=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"feature"];
+		break;
+		
+		case PhotoCategoryTypeCategory:
+			self.activePickerDataSource=[[PhotoCategoryManager sharedInstance].dataProvider objectForKey:@"category"];
+		break;
+	}
+
+}
+
+
+-(void)didSelectCategoryFromMenu:(int)index{
+	
+	PhotoCategoryVO *vo=_activePickerDataSource[index];
+	
+	switch(vo.categoryType){
 			
 		case PhotoCategoryTypeFeature:
 			_uploadImage.feature=vo;
-			[_categoryFeaturebutton setTitle:_uploadImage.feature.name forState:UIControlStateNormal];
+			_currentCategoryField.text=vo.name;
 		break;
 			
 		case PhotoCategoryTypeCategory:
 			_uploadImage.category=vo;
-			[_categoryButton setTitle:_uploadImage.category.name forState:UIControlStateNormal];
+			_currentCategoryField.text=vo.name;
 		break;
 	}
 	
-	[_categoryMenu dismissPopoverAnimated:YES];
 	
 	if(_uploadImage.feature!=nil && _uploadImage.category!=nil){
         [self initialiseViewState:PhotoWizardViewStateDescription];
@@ -1173,7 +1203,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	return YES;
 }
 
-#pragma mark Description View
+#pragma mark - Description View
 //
 /***********************************************
  * @description			Description Methods
@@ -1215,19 +1245,90 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 
+#pragma mark - UITextField/View delegates
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+	
+	
+	switch (_viewState) {
+					
+		case PhotoWizardViewStateCategory:
+		{
+			
+			if(textField.inputView!=nil){
+				
+				if (textField.inputAccessoryView == nil) {
+					[[NSBundle mainBundle] loadNibNamed:@"UIPickerAccessoryView" owner:self options:nil];
+					textField.inputAccessoryView = _pickerAccessoryView;
+					self.pickerAccessoryView = nil;
+				}
+				
+			}
+			
+		}
+		break;
+			
+			
+		default:
+		break;
+	}
+	
+    
+    return YES;
+	
+}
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+	
+	self.currentCategoryField=textField;
+	
+	if(_currentCategoryField ==_categoryField){
+		[self selectCategoryDataForDataType:PhotoCategoryTypeCategory];
+	}else if (_currentCategoryField==_categoryFeatureField){
+		[self selectCategoryDataForDataType:PhotoCategoryTypeFeature];
+	}
+	
+	[_categoryPickerView reloadAllComponents];
+	
+}
+
+
+
+
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
+	
+	switch (_viewState) {
+		case PhotoWizardViewStateDescription:
+		{
+			if (_photodescriptionField.inputAccessoryView == nil) {
+				[[NSBundle mainBundle] loadNibNamed:@"UITextViewAccessoryView" owner:self options:nil];
+				_photodescriptionField.inputAccessoryView = _textViewAccessoryView;
+				self.textViewAccessoryView = nil;
+			}
+			
+			if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+				_photodescriptionField.text=@"";
+				_photodescriptionField.textColor=UIColorFromRGB(0x555555);
+			}
+			
+			
+		}
+		break;
+			
+		case PhotoWizardViewStateCategory:
+			
+			
+			
+			
+		break;
+		
+			
+		default:
+			break;
+	}
    
-    if (_photodescriptionField.inputAccessoryView == nil) {
-        [[NSBundle mainBundle] loadNibNamed:@"UITextViewAccessoryView" owner:self options:nil];
-        _photodescriptionField.inputAccessoryView = _textViewAccessoryView;
-        self.textViewAccessoryView = nil;
-    }
-	
-	 if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
-		 _photodescriptionField.text=@"";
-		 _photodescriptionField.textColor=UIColorFromRGB(0x555555);
-	 }
-	
+    
     return YES;
 }
 
@@ -1259,24 +1360,36 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 - (void)textViewDidChange:(UITextView *)textView{
 	
-	if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
-		_photodescriptionField.text=@"";
-		_photodescriptionField.textColor=UIColorFromRGB(0x555555);
-		return;
+	switch (_viewState) {
+		case PhotoWizardViewStateDescription:
+		{
+			if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
+			_photodescriptionField.text=@"";
+			_photodescriptionField.textColor=UIColorFromRGB(0x555555);
+			return;
+			}
+			
+			if(_photodescriptionField.text.length==0){
+				[self resetDescriptionField];
+				return;
+			}
+			
+			_photodescriptionField.textColor=UIColorFromRGB(0x555555);
+			
+		}
+		break;
+			
+		default:
+			
+			break;
+			
 	}
-	
-	if(_photodescriptionField.text.length==0){
-		[self resetDescriptionField];
-		return;
-	}
-	
-	_photodescriptionField.textColor=UIColorFromRGB(0x555555);
 	
     
 }
 
 
-#pragma mark Upload View
+#pragma mark - Upload View
 //
 /***********************************************
  * @description			Upload Methods

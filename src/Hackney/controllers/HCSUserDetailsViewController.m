@@ -8,7 +8,6 @@
 
 #import "HCSUserDetailsViewController.h"
 #import "PickerViewController.h"
-#import <JVFloatLabeledTextField.h>
 
 #import "User.h"
 #import "UserManager.h"
@@ -25,7 +24,6 @@
 
 @property(nonatomic,weak) IBOutlet UINavigationItem							*myNavigationItem;
 
-@property (weak, nonatomic) IBOutlet JVFloatLabeledTextField				*nameField;
 @property (weak, nonatomic) IBOutlet UITextField							*ageField;
 @property (weak, nonatomic) IBOutlet UITextField							*genderField;
 @property (nonatomic, strong) IBOutlet UIView								*pickerAccessoryView;
@@ -131,10 +129,6 @@
 
 -(void)createNonPersistentUI{
     
-	
-	if(_user.email!=nil){
-		_nameField.text=_user.email;
-	}
     if(_user.gender!=nil){
 		_genderField.text=_user.gender;
 	}
@@ -218,7 +212,6 @@
 -(IBAction)didSelectActionButton:(id)sender{
 	
 	
-	_user.email=_nameField.text;
 	_user.age=_ageField.text;
 	_user.gender=_genderField.text;
 	

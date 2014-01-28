@@ -22,6 +22,8 @@ typedef int PhotoCategoryType;
 	
 	
 }
-@property (nonatomic, strong) NSString		* name;
-@property (nonatomic, strong) NSString		* tag;
+@property (nonatomic, strong) NSString				* name;
+@property (nonatomic, strong) NSString				* tag;
+@property (nonatomic,assign)  PhotoCategoryType		categoryType;
+
 @end

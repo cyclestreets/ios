@@ -9,7 +9,6 @@
                 <outlet property="ageField" destination="dYB-By-QxN" id="BYg-FJ-uOH"/>
                 <outlet property="genderField" destination="4gi-hr-VVl" id="ffp-lZ-laG"/>
                 <outlet property="myNavigationItem" destination="Rae-LR-Ak6" id="GOn-5P-qwt"/>
-                <outlet property="nameField" destination="512-8i-XPA" id="lGj-KF-yDg"/>
                 <outlet property="view" destination="1" id="aR5-MG-I2R"/>
             </connections>
         </placeholder>
@@ -54,15 +53,6 @@
                             <color key="textColor" white="0.25451806189999998" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" id="512-8i-XPA" customClass="JVFloatLabeledTextField">
-                            <rect key="frame" x="20" y="76" width="280" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                            <connections>
-                                <outlet property="delegate" destination="-1" id="Ll5-1m-rIU"/>
-                            </connections>
-                        </textField>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UIX-PQ-GCH">
                             <rect key="frame" x="20" y="10" width="280" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,7 +61,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Gender" minimumFontSize="17" id="4gi-hr-VVl">
-                            <rect key="frame" x="20" y="202" width="280" height="30"/>
+                            <rect key="frame" x="20" y="177" width="280" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -80,7 +70,7 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" minimumFontSize="17" id="dYB-By-QxN">
-                            <rect key="frame" x="20" y="140" width="280" height="30"/>
+                            <rect key="frame" x="20" y="115" width="280" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
@@ -89,14 +79,14 @@
                             </connections>
                         </textField>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JcK-Yn-CZq">
-                            <rect key="frame" x="20" y="122" width="42" height="21"/>
+                            <rect key="frame" x="20" y="97" width="42" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yLT-GA-L1N">
-                            <rect key="frame" x="20" y="184" width="46" height="21"/>
+                            <rect key="frame" x="20" y="159" width="46" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>

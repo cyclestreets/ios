@@ -311,9 +311,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 												   userInfo:[self newTripTimerUserInfo] repeats:YES];
         }
         
-       // set start button to "Save"
-		
-		
+       
         _isRecordingTrack = YES;
 		self.currentTrip=[[TripManager sharedInstance] createTrip];
 		[[TripManager sharedInstance] startTrip];
@@ -329,13 +327,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		
 		__weak __block HCSTrackConfigViewController *weakSelf=self;
 		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@""];
-		[actionSheet setDestructiveButtonWithTitle:@"Discard"	handler:^{
+		
+		[actionSheet addButtonWithTitle:@"Finish" handler:^{
+			[weakSelf initiateSaveTrip];
+		}];
+		[actionSheet setDestructiveButtonWithTitle:@"Reset" handler:^{
 			[weakSelf resetRecordingInProgress];
 			[[TripManager sharedInstance] removeCurrentRecordingTrip];
 		}];
-		[actionSheet addButtonWithTitle:@"Save" handler:^{
-			[weakSelf initiateSaveTrip];
-		}];
+		
 		
 		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
 			_shouldUpdateDuration=YES;
@@ -355,7 +355,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	if(_isRecordingTrack){
 		
-		[_actionButton setTitle:@"Save" forState:UIControlStateNormal];
+		[_actionButton setTitle:@"Finish" forState:UIControlStateNormal];
 		
 		[UIView animateWithDuration:0.4 animations:^{
 			_actionView.backgroundColor=UIColorFromRGB(0xCB0000);

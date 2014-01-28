@@ -801,7 +801,7 @@
 		while (categorynode!=nil) {
 			
 			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			
+			category.categoryType=PhotoCategoryTypeFeature;
 			category.name=[TBXML textOfChild:@"name" parentElement:categorynode];
 			category.tag=[TBXML textOfChild:@"tag" parentElement:categorynode];
 			
@@ -827,7 +827,7 @@
 		while (metacategorynode!=nil) {
 			
 			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			
+			category.categoryType=PhotoCategoryTypeCategory;
 			category.name=[TBXML textOfChild:@"name" parentElement:metacategorynode];
 			category.tag=[TBXML textOfChild:@"tag" parentElement:metacategorynode];
 			
