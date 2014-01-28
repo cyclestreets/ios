@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet JVFloatLabeledTextField				*nameField;
 @property (weak, nonatomic) IBOutlet UITextField							*ageField;
 @property (weak, nonatomic) IBOutlet UITextField							*genderField;
+@property (nonatomic, strong) IBOutlet UIView								*pickerAccessoryView;
 
 @property (nonatomic,strong)  UITextField									*currentTextField;
 
@@ -104,7 +105,6 @@
 		case HCSUserDetailsViewModeShow:
 		{
 			
-			// if we get another contoller > have we been pushed
 			_myNavigationItem.leftBarButtonItem=nil;
 			
 			
@@ -116,8 +116,8 @@
 	
 	self.user=[[UserManager sharedInstance] fetchUser];
 	
-	self.genderArray = @[@"Female",@"Male"];
-    self.ageArray = @[@"Less than 18", @"18-24", @"25-34", @"35-44", @"45-54", @"55-64", @"65+"];
+	self.genderArray = @[@"Female",@"Male",@"Other / prefer not to say"];
+    self.ageArray = @[@"0-10", @"11-16", @"17-24", @"25-44", @"45-64", @"65-74", @"75-84",@"85+"];
 	
 	self.fieldPicker = [[UIPickerView alloc] init];
     _fieldPicker.dataSource = self;
@@ -125,18 +125,46 @@
     _ageField.inputView = _fieldPicker;
 	_genderField.inputView= _fieldPicker;
 	
-	// inputaCcessoryView
+	
     
 }
 
 -(void)createNonPersistentUI{
     
-    
+	
+	if(_user.email!=nil){
+		_nameField.text=_user.email;
+	}
+    if(_user.gender!=nil){
+		_genderField.text=_user.gender;
+	}
+	if(_user.age!=nil){
+		_ageField.text=_user.age;
+	}
     
 }
 
 
 #pragma mark - UITextField delegate methods
+
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+	
+	if(textField.inputView!=nil){
+		
+		if (textField.inputAccessoryView == nil) {
+			[[NSBundle mainBundle] loadNibNamed:@"UIPickerAccessoryView" owner:self options:nil];
+			textField.inputAccessoryView = _pickerAccessoryView;
+			self.pickerAccessoryView = nil;
+		}
+		
+	}
+	
+	
+	return YES;
+	
+}
+
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
 	
@@ -150,6 +178,11 @@
 	
 	[_fieldPicker reloadAllComponents];
 	
+}
+
+-(IBAction)didDismissPickerFromToolBar:(id)sender{
+	_currentTextField.text = _activePickerDataSource[[_fieldPicker selectedRowInComponent:0]];
+    [_currentTextField resignFirstResponder];
 }
 
 
@@ -186,8 +219,8 @@
 	
 	
 	_user.email=_nameField.text;
-	_user.age=@([_ageArray indexOfObject:_ageField.text]);
-	_user.gender=@([_genderArray indexOfObject:_genderField.text]);
+	_user.age=_ageField.text;
+	_user.gender=_genderField.text;
 	
 	[[CoreDataStore mainStore] save];
 	

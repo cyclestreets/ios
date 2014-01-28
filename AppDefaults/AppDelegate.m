@@ -263,7 +263,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:helpController];
 		
 		
-		[self.tabBarController presentViewController:nav animated:YES completion:^{
+		[self.tabBarController presentViewController:nav animated:NO completion:^{
 			
 		}];
 		

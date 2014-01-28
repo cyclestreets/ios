@@ -134,8 +134,9 @@
                     <rect key="frame" x="20" y="178" width="114" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Take a new photo"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Camera">
+                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -162,8 +163,9 @@
                     <rect key="frame" x="191" y="178" width="114" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Pick photo from library"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Library">
+                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -249,22 +251,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="324"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Upload" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="34">
-                    <rect key="frame" x="20" y="20" width="280" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report Upload" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="34">
+                    <rect key="frame" x="20" y="20" width="280" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="1"/>
+                    <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="35">
-                    <rect key="frame" x="20" y="41" width="280" height="145"/>
+                    <rect key="frame" x="20" y="51" width="280" height="98"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">Press Upload to add this photo to CycleStreets. 
-If you are not logged into your CycleStreets account you will be presented with your Account view prior to uploading.
+                    <string key="text">Press Upload to add this report to CycleStreets. 
 
-Once uploaded this photo will appear on the Photomap for the chosen location.
+Once uploaded this data will appear on the Photomap for the chosen location.
 </string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
@@ -272,20 +273,22 @@ Once uploaded this photo will appear on the Photomap for the chosen location.
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="36">
-                    <rect key="frame" x="94" y="226" width="133" height="37"/>
+                    <rect key="frame" x="94" y="188" width="133" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Upload your photo"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Upload Photo">
+                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" id="39">
-                    <rect key="frame" x="46" y="202" width="229" height="4"/>
+                    <rect key="frame" x="46" y="177" width="229" height="4"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="trackTintColor" red="0.29019609089999998" green="0.5411764979" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
                 </progressView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ready to upload" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="65" customClass="ExpandedUILabel">
-                    <rect key="frame" x="20" y="274" width="280" height="20"/>
+                    <rect key="frame" x="20" y="233" width="280" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
@@ -322,8 +325,9 @@ Once uploaded this photo will appear on the Photomap for the chosen location.
                     <rect key="frame" x="105" y="306" width="109" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Change photo location"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Edit Location">
+                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -385,7 +389,9 @@ Once uploaded they'll appear on the Photomap.</string>
                     <rect key="frame" x="94" y="226" width="133" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Continue"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                     <state key="normal" title="Continue">
+                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -473,7 +479,7 @@ Once uploaded they'll appear on the Photomap.</string>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This photo represents..." lineBreakMode="tailTruncation" minimumFontSize="10" id="190">
-                    <rect key="frame" x="20" y="87" width="249" height="22"/>
+                    <rect key="frame" x="20" y="97" width="249" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -481,15 +487,16 @@ Once uploaded they'll appear on the Photomap.</string>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="192">
-                    <rect key="frame" x="20" y="109" width="280" height="37"/>
+                    <rect key="frame" x="20" y="119" width="280" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Choose...">
+                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category..." lineBreakMode="tailTruncation" minimumFontSize="10" id="193">
-                    <rect key="frame" x="20" y="159" width="249" height="22"/>
+                    <rect key="frame" x="20" y="169" width="249" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -497,15 +504,16 @@ Once uploaded they'll appear on the Photomap.</string>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="194">
-                    <rect key="frame" x="20" y="181" width="280" height="37"/>
+                    <rect key="frame" x="20" y="191" width="280" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Choose...">
+                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Choose what this photo represents and the category it should be in." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="bED-NZ-lQ3">
-                    <rect key="frame" x="20" y="36" width="280" height="43"/>
+                    <rect key="frame" x="20" y="46" width="280" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>

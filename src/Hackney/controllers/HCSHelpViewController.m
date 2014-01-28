@@ -66,7 +66,9 @@
 -(void)createPersistentUI{
 	
 	
-	self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didSelectDismissbutton)];
+	if (self.presentingViewController) {
+		self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didSelectDismissbutton)];
+	}
 	
     
 }

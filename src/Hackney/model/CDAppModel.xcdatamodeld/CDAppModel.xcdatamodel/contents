@@ -39,11 +39,11 @@
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="trips" inverseEntity="User" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
-        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cyclingFreq" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" minValueString="0" maxValueString="64" syncable="YES"/>
         <attribute name="ethnicity" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="8" syncable="YES"/>
-        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="homeZIP" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="income" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="rider_history" optional="YES" attributeType="Integer 16" syncable="YES"/>

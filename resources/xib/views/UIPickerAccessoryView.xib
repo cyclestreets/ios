@@ -4,18 +4,27 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HCSUserDetailsViewController">
+            <connections>
+                <outlet property="pickerAccessoryView" destination="YmD-I2-4IV" id="Lf4-cp-AsK"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="YmD-I2-4IV">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jX-Lb-zcC">
-                    <rect key="frame" x="0.0" y="-4" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Pfr-7Y-8gE"/>
-                        <barButtonItem systemItem="done" id="ewt-JF-Fmk"/>
+                        <barButtonItem systemItem="done" id="ewt-JF-Fmk">
+                            <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="didDismissPickerFromToolBar:" destination="-1" id="8WA-Uc-Qfa"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </subviews>

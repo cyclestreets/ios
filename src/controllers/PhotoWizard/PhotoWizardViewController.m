@@ -22,6 +22,7 @@
 #import "AppDelegate.h"
 #import "Markers.h"
 #import <ImageIO/ImageIO.h>
+#import "UserManager.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -373,6 +374,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)createNonPersistentUI{
     
+	self.uploadImage=[[UploadPhotoVO alloc]init];
    
     
 }
@@ -395,6 +397,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	}
 	
 	self.uploadImage=nil;
+	
+	
 	
 	[self initialiseViewState:PhotoWizardViewStateInfo];
 	
@@ -725,7 +729,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)initInfoView:(PhotoWizardViewState)state{
 	
-	[ButtonUtilities styleIBButton:_continueButton type:@"green" text:@"Continue"];
+	//[ButtonUtilities styleIBButton:_continueButton type:@"green" text:@"Continue"];
 	[_continueButton addTarget:self action:@selector(continueUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
@@ -751,13 +755,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	_imagePreview.image=nil;
 	
-	[ButtonUtilities styleIBButton:_cameraButton type:@"green" text:@"Camera"];
+	//[ButtonUtilities styleIBButton:_cameraButton type:@"green" text:@"Camera"];
 	[_cameraButton addTarget:self action:@selector(cameraButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	[ButtonUtilities styleIBButton:_libraryButton type:@"green" text:@"Library"];
+	//[ButtonUtilities styleIBButton:_libraryButton type:@"green" text:@"Library"];
 	[_libraryButton addTarget:self action:@selector(libraryButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[_cameraButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]];
 	[_libraryButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]];
+	
+	[self initialiseViewState:PhotoWizardViewStateLocation];
 	
 }
 
@@ -898,7 +904,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	[ButtonUtilities styleIBButton:_locationUpdateButton type:@"green" text:@"Edit Location"];
+	//[ButtonUtilities styleIBButton:_locationUpdateButton type:@"green" text:@"Edit Location"];
 	[_locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[RMMapView class];
@@ -1064,8 +1070,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[PhotoCategoryManager sharedInstance];
 	
-	[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
-	[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
+	//[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
+	//[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
 	
 	[_categoryButton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
 	[_categoryFeaturebutton addTarget:self action:@selector(showCategoryMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -1080,8 +1086,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)resetCategoryView{
 	
-	[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
-	[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
+	//[ButtonUtilities styleIBButton:_categoryButton type:@"orange" text:@"Choose..."];
+	//[ButtonUtilities styleIBButton:_categoryFeaturebutton type:@"green" text:@"Choose..."];
 	
 	_uploadImage.category=nil;
 	_uploadImage.feature=nil;
@@ -1171,6 +1177,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 	_photodescriptionField.delegate=self;
 	[self resetDescriptionField];
+	
+	[self initialiseViewState:PhotoWizardViewStateUpload];
 
 }
 
@@ -1186,7 +1194,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[self resetDescriptionView];
 	
-	[self removeViewState:PhotoWizardViewStateUpload];
+	//[self removeViewState:PhotoWizardViewStateUpload];
 }
 
 -(void)updateDescriptionView{
@@ -1274,7 +1282,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	
 	
-	[ButtonUtilities styleIBButton:_uploadButton type:@"orange" text:@"Upload Photo"];
+	//[ButtonUtilities styleIBButton:_uploadButton type:@"orange" text:@"Upload Photo"];
 	[_uploadButton addTarget:self action:@selector(uploadPhoto:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
@@ -1377,7 +1385,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	self.cancelViewButton.title=@"Close";
 	
 	
-	[ButtonUtilities styleIBButton:_photoMapButton type:@"orange" text:@"View map"];
+	//[ButtonUtilities styleIBButton:_photoMapButton type:@"orange" text:@"View map"];
 	[_photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
     _photoResultURLLabel.text=[_uploadImage.responseDict objectForKey:@"url"];

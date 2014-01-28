@@ -14,7 +14,7 @@
 
 @interface User : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * age;
+@property (nonatomic, retain) NSString * age;
 @property (nonatomic, retain) NSNumber * cyclingFreq;
 @property (nonatomic, retain) NSNumber * rider_history;
 @property (nonatomic, retain) NSNumber * rider_type;
@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSString * homeZIP;
 @property (nonatomic, retain) NSString * schoolZIP;
 @property (nonatomic, retain) NSString * workZIP;
-@property (nonatomic, retain) NSNumber * gender;
+@property (nonatomic, retain) NSString * gender;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSSet *notes;
 @property (nonatomic, retain) NSSet *trips;

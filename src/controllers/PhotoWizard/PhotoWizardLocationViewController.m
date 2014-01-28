@@ -84,7 +84,6 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 	
 	if (!self.userMarker) {
 		self.userMarker = [Markers markerPhoto];
-		//self.userMarker.enableDragging=YES;
 	}
 	
 	
