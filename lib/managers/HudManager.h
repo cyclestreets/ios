@@ -17,6 +17,7 @@ enum  {
 	HUDWindowTypeLock=3,
 	HUDWindowTypeServer=4,
 	HUDWindowTypeIcon=5,
+	HUDWindowTypeDeterminateProgress,
 	HUDWindowTypeNone
 };
 typedef int HUDWindowType;
@@ -42,6 +43,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(HudManager);
 -(void)updateHUDMessage:(NSString*)message;
 -(void)updateHUDTitle:(NSString*)title;
 -(void)removeHUD;
+
+-(void)updateDeterminateHUD:(float)value;
 
 -(void)removeHUD:(BOOL)animated;
 

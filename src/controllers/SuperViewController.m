@@ -382,7 +382,7 @@
 				if(icon!=nil){
 					UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
 					iview.image=[[StyleManager sharedInstance] imageForType:icon];
-					iview.alpha=.3;
+					iview.alpha=.1;
 					[contentContainer addSubview:iview];
 				}
 				
@@ -423,15 +423,13 @@
 				break;
 			default:
 				ilabel.textColor=[UIColor grayColor];
-				ilabel.font=[UIFont systemFontOfSize:13];
+				ilabel.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:16];
 				break;
 				
 		}
 		
 		ilabel.numberOfLines=0;
 		ilabel.textAlignment=UITextAlignmentCenter;
-		ilabel.shadowColor=[UIColor whiteColor];
-		ilabel.shadowOffset=CGSizeMake(0, 1);
 		
 		if(message==nil){
 			NSString *viewTypeString=[SuperViewController viewTypeToStringType:type];

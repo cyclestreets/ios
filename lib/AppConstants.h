@@ -15,7 +15,7 @@
 typedef void(^BUSimpleBlock)(void);
 typedef void (^ParserCompletionBlock)(NetResponse *result);
 typedef void (^ParserErrorBlock)(NetResponse *result, NSError *error);
-
+typedef void (^CompletionBlock)(BOOL result);
 
 enum  {
 	
@@ -70,6 +70,7 @@ extern NSString *const PHOTOCATEGORIES;
 
 extern NSString *const GPSUPLOAD;
 extern NSString *const RESPONSE_GPSUPLOAD;
+extern NSString *const RESPONSE_GPSUPLOADMULTI;
 
 
 // INTERNAL

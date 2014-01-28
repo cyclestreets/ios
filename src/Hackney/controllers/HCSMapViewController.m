@@ -384,7 +384,8 @@
 		[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
 	}
     
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
+	if(_viewMode==HCSMapViewModeShow)
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
 	
 	
 }

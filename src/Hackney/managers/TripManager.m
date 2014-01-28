@@ -14,6 +14,7 @@
 #import <AFNetworking.h>
 #import "CoreDataStore.h"
 #import "ApplicationJSONParser.h"
+#import "HudManager.h"
 
 // use this epsilon for both real-time and post-processing distance calculations
 #define kEpsilonAccuracy		100.0
@@ -114,132 +115,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 }
 
 
--(void)loadSelectedTrip:(Trip*)trip{
-	
-	self.selectedTrip=trip;
-	
-	
-	// need sorted array of coords for this trip
-	
-	// set duration of trip
-	
-	// save trip
-	
-	// purpose index?
-	
-}
-
-/*
-- (BOOL)loadTrip:(Trip*)_trip
-{
-    if ( _trip )
-	{
-		self.trip					= _trip;
-		distance					= [_trip.distance doubleValue];
-		self.managedObjectContext	= [_trip managedObjectContext];
-		
-		// NOTE: loading coords can be expensive for a large trip
-		NSLog(@"loading %fm trip started at %@...", distance, _trip.start);
-
-		// sort coords by recorded date DESCENDING so that the coord at index=0 is the most recent
-		NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"recorded"
-																	   ascending:NO];
-		NSArray *sortDescriptors	= [NSArray arrayWithObjects:dateDescriptor, nil];
-		self.coords					= [[[_trip.coords allObjects] sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
-		
-		//NSLog(@"loading %d coords completed.", [self.coords count]);
-
-		// recalculate duration
-		if ( coords && [Coord count] > 1 )
-		{
-			Coord *last		= [Coord objectAtIndex:0];
-			Coord *first	= [Coord lastObject];
-			NSTimeInterval duration = [last.recorded timeIntervalSinceDate:first.recorded];
-			NSLog(@"duration = %.0fs", duration);
-			[trip setDuration:[NSNumber numberWithDouble:duration]];
-		}
-		
-		// save updated duration to CoreData
-		NSError *error;
-		if (![self.managedObjectContext save:&error]) {
-			// Handle the error.
-			NSLog(@"loadTrip error %@, %@", error, [error localizedDescription]);
-            
-		}
-        
-	
-		// recalculate trip distance
-		//CLLocationDistance newDist	= [self calculateTripDistance:_trip];
-		
-		//NSLog(@"newDist: %f", newDist);
-		//NSLog(@"oldDist: %f", distance);
-	
-		
-		// TODO: initialize purposeIndex from trip.purpose
-		purposeIndex				= -1;
-    }
-    return YES;
-}
-*/
-
-
-- (void)createTripNotesText
-{
-	_tripNotesText = [[UITextView alloc] initWithFrame:CGRectMake( 12.0, 50.0, 260.0, 65.0 )];
-	_tripNotesText.delegate = self;
-	_tripNotesText.enablesReturnKeyAutomatically = NO;
-	_tripNotesText.font = [UIFont fontWithName:@"Arial" size:16];
-	_tripNotesText.keyboardAppearance = UIKeyboardAppearanceAlert;
-	_tripNotesText.keyboardType = UIKeyboardTypeDefault;
-	_tripNotesText.returnKeyType = UIReturnKeyDone;
-	_tripNotesText.text = kTripNotesPlaceholder;
-	_tripNotesText.textColor = [UIColor grayColor];
-}
-
-
-#pragma mark UITextViewDelegate
-
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-	NSLog(@"textViewDidBeginEditing");
-	
-	if ( [textView.text compare:kTripNotesPlaceholder] == NSOrderedSame )
-	{
-		textView.text = @"";
-		textView.textColor = [UIColor blackColor];
-	}
-}
-
-
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView
-{
-	NSLog(@"textViewShouldEndEditing: \"%@\"", textView.text);
-	
-	if ( [textView.text compare:@""] == NSOrderedSame )
-	{
-		textView.text = kTripNotesPlaceholder;
-		textView.textColor = [UIColor grayColor];
-	}
-	
-	return YES;
-}
-
-
-// this code makes the keyboard dismiss upon typing done / enter / return
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-	if ([text isEqualToString:@"\n"])
-	{
-		[textView resignFirstResponder];
-		return NO;
-	}
-	
-	return YES;
-}
-
-
-
 
 - (CLLocationDistance)getDistanceEstimate
 {
@@ -304,7 +179,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		[_currentRecordingTrip setNotes:notes];
 }
 
-// save Trip to CoreDate then posts to server: should changed into a AF call
+
+// Saves current Recording Trip to CD
 - (void)saveTrip
 {
 	NSLog(@"about to save trip with %d coords...", [_recordingTripCoords count]);
@@ -344,17 +220,36 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	if(unsyncedTrips.count>0) {
 		
 		
-		// we can call uploadSelectedTrip here as this uses an operation queue
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeDeterminateProgress withTitle:@"Uploading" andMessage:nil];
 		
-		// what do we do for a lot of items if takes a long while
-		
-		// although this will occur in the background, it can block any newly attempted items
+		int __block unsyncedCount=unsyncedTrips.count;
+		int __block completeCount=0;
+		for(Trip *trip in unsyncedTrips){
+			
+			[self uploadSelectedTrip:trip completion:^(BOOL result) {
+				
+				if(result==YES){
+					completeCount--;
+					
+					[[HudManager sharedInstance] updateDeterminateHUD:completeCount/unsyncedCount];
+				}
+				
+				if(completeCount==unsyncedCount){
+					[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Complete" andMessage:nil];
+					
+					[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOADMULTI object:@{STATE: SUCCESS}];
+				}
+				
+			}];
+			
+		}
 		
 	}
 	
 }
 
--(void)uploadSelectedTrip:(Trip*)trip{
+
+-(void)uploadSelectedTrip:(Trip*)trip completion:(CompletionBlock)success{
 	
 	
 	// get array of coords
@@ -407,7 +302,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     // JSON encode user data
     NSData *userJsonData = [NSJSONSerialization dataWithJSONObject:userDict options:0 error:&writeError];
     NSString *userJson = [[NSString alloc] initWithData:userJsonData encoding:NSUTF8StringEncoding];
-   
+	
     
     // JSON encode the trip data
     NSData *tripJsonData = [NSJSONSerialization dataWithJSONObject:tripDict options:0 error:&writeError];
@@ -416,13 +311,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	// NOTE: device hash added by SaveRequest initWithPostVars
 	NSDictionary *postVars = @{@"coords":tripJson,
-							  @"purpose":purpose,
-							  @"notes":notes,
-							  @"start":start,
-							  @"user":userJson,
-							  @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString],
-							  @"version":[NSString stringWithFormat:@"%d", kSaveProtocolVersion]};
+							   @"purpose":purpose,
+							   @"notes":notes,
+							   @"start":start,
+							   @"user":userJson,
+							   @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString],
+							   @"version":[NSString stringWithFormat:@"%d", kSaveProtocolVersion]};
 	
+	BetterLog(@"%@",postVars);
 	
 	
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -435,33 +331,45 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
         [[ApplicationJSONParser sharedInstance] parseDataForResponseData:(NSMutableData *)responseObject forRequestType:GPSUPLOAD success:^(NetResponse *result) {
             
 			
+			//TODO: parse response dict
 			
-           
 			trip.uploaded=[NSDate date];
 			
 			[[CoreDataStore mainStore]save];
 			
             
 			[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: SUCCESS}];
+			
+			success(YES);
             
         } failure:^(NetResponse *result, NSError *error) {
 			
 			BetterLog(@"%@",error.description);
             
-           [[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
+			[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
             
         }];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-       
+		
         BetterLog(@"%@",error.debugDescription);
         
     }];
 	
 	
 	
+}
+
+
+-(void)uploadSelectedTrip:(Trip*)trip{
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading" andMessage:nil];
+	
+	[self uploadSelectedTrip:trip completion:^(BOOL result) {
+		[[HudManager sharedInstance]showHudWithType:HUDWindowTypeSuccess withTitle:@"Uploaded" andMessage:nil];
+	}];
 	
 }
 

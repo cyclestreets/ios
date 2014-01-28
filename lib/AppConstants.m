@@ -55,6 +55,8 @@ NSString *const PHOTOCATEGORIES=@"PhotoCategories";
 
 NSString *const GPSUPLOAD=@"GPSUpload";
 NSString *const RESPONSE_GPSUPLOAD=@"GpsuploadResponse";
+NSString *const RESPONSE_GPSUPLOADMULTI=@"GpsuploadMultiResponse";
+
 
 //INTERNAL
 NSString *const CALCULATEROUTERESPONSE=@"CALCULATEROUTERESPONSE";

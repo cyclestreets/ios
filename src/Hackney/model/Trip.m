@@ -53,7 +53,7 @@
 
 -(NSString*)co2SavedString{
 	
-	return [NSString stringWithFormat:@"CO2 Saved: %.1f lbs", 0.93 * [self.distance doubleValue] / 1609.344];
+	return [NSString stringWithFormat:@"CO2 saved: %.1f lbs", 0.93 * [self.distance doubleValue] / 1609.344];
 	
 }
 
@@ -61,9 +61,9 @@
 	
 	double calory = 49 * [self.distance doubleValue] / 1609.344 - 1.69;
     if (calory <= 0) {
-        return [NSString stringWithFormat:@"Calories Burned: 0 kcal"];
+        return [NSString stringWithFormat:@"Calories used: 0 kcal"];
     }else{
-		return [NSString stringWithFormat:@"Calories Burned: %.1f kcal", calory];
+		return [NSString stringWithFormat:@"Calories used: %.1f kcal", calory];
 	}
 	
 }

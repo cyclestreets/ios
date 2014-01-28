@@ -67,6 +67,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 				HUD.mode = MBProgressHUDModeIndeterminate;
 				
 			break;
+				
+			case HUDWindowTypeDeterminateProgress:
+				HUD.mode = MBProgressHUDModeDeterminate;
+				
+			break;
 			
 			case HUDWindowTypeError:
 				HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"HUD_icon_exclaim.png"]];
@@ -128,7 +133,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 }
 
 
-
+-(void)updateDeterminateHUD:(float)value{
+	
+	self.HUD.progress=value;
+	
+}
 
 -(void)updateHUDMessage:(NSString*)message{
 	if(isShowing==YES)

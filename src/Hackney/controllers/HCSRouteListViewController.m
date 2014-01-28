@@ -51,6 +51,7 @@ static int const kTagImage=	3;
 
 @implementation HCSRouteListViewController
 
+
 //
 /***********************************************
  * @description		NOTIFICATIONS
@@ -58,8 +59,10 @@ static int const kTagImage=	3;
 //
 
 -(void)listNotificationInterests{
-    
 	
+	[self initialise];
+	
+	[notifications addObject:RESPONSE_GPSUPLOADMULTI];
 	
 	[super listNotificationInterests];
 	
@@ -67,7 +70,15 @@ static int const kTagImage=	3;
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
+	[super didReceiveNotification:notification];
 	
+	NSString *name=notification.name;
+	
+	if([name isEqualToString:RESPONSE_GPSUPLOADMULTI]){
+		
+		[self refreshUIFromDataProvider];
+		
+	}
 	
 }
 
@@ -77,16 +88,18 @@ static int const kTagImage=	3;
 
 -(void)refreshUIFromDataProvider{
 	
-	NSError *error;
-	
 	NSMutableArray *tripArray=[[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved != nil"] orderBy:@"start" ascending:NO] mutableCopy];
 	
-	if (tripArray == nil) {
-		// Handle the error.
-		NSLog(@"no saved trips");
-		if ( error != nil )
-			NSLog(@"Unresolved error2 %@, %@", error, [error userInfo]);
+	if (tripArray.count==0) {
+		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:@"noresults_SAVEDTRIPS" withIcon:@"SAVED_TRIPS"];
+		
+	}else{
+		[self showViewOverlayForType:kViewOverlayTypeNone show:NO withMessage:@"" withIcon:@""];
 	}
+	
+	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
+	self.navigationItem.rightBarButtonItem.enabled=unsyncedCount>0;
 	
 	self.dataProvider=tripArray;
 	[self.tableView reloadData];

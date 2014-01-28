@@ -15,6 +15,16 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(UserManager);
 
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self fetchUser];
+    }
+    return self;
+}
+
+
 -(User*)fetchUser{
 	
 	NSArray *users=[User all];
@@ -30,7 +40,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserManager);
 		self.user=users[0];
 		
 	}
-	
 	
 	return _user;
 	
