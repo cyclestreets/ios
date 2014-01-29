@@ -748,14 +748,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)initInfoView:(PhotoWizardViewState)state{
 	
-	//[ButtonUtilities styleIBButton:_continueButton type:@"green" text:@"Continue"];
 	[_continueButton addTarget:self action:@selector(continueUploadbuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
+	[self initialiseViewState:PhotoWizardViewStatePhoto];
 	
 }
 
 -(IBAction)continueUploadbuttonSelected:(id)sender{
     
-	[self initialiseViewState:PhotoWizardViewStatePhoto];
 	[self navigateToViewState:PhotoWizardViewStatePhoto];
     
 }

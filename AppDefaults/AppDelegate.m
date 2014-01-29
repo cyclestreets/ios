@@ -260,8 +260,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			
 		}];
 		
-#pragma message ("THIS SHOULD BE ENABLED FOR LIVE")
-		//[[UserSettingsManager sharedInstance] saveObject:@(YES) forType:kSTATESYSTEMCONTROLLEDSETTINGSKEY forKey:@"helpViewDisplayed"];
+		[[UserSettingsManager sharedInstance] saveObject:@(YES) forType:kSTATESYSTEMCONTROLLEDSETTINGSKEY forKey:@"helpViewDisplayed"];
 		
 	}
 	

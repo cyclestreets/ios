@@ -33,8 +33,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMOpenCycleMapSource.h"
 
 
-static NSInteger MAX_ZOOM = 18;
-
 static NSInteger MAX_ZOOM_LOCATION = 16;
 static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 

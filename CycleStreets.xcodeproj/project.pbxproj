@@ -143,10 +143,6 @@
 		2818E09C189042600031AD43 /* CustomPickerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09A189042600031AD43 /* CustomPickerDataSource.m */; };
 		2818E09F189043570031AD43 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09E189043570031AD43 /* CustomView.m */; };
 		2818E0A0189043570031AD43 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09E189043570031AD43 /* CustomView.m */; };
-		2818E0A3189043A40031AD43 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A2189043A40031AD43 /* DetailViewController.m */; };
-		2818E0A4189043A40031AD43 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A2189043A40031AD43 /* DetailViewController.m */; };
-		2818E0AB189043E30031AD43 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AA189043E30031AD43 /* ImageResize.m */; };
-		2818E0AC189043E30031AD43 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AA189043E30031AD43 /* ImageResize.m */; };
 		2818E0AF189045080031AD43 /* TripDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AE189045080031AD43 /* TripDetailViewController.m */; };
 		2818E0B0189045080031AD43 /* TripDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AE189045080031AD43 /* TripDetailViewController.m */; };
 		2818E0B5189046380031AD43 /* UIActionSheet+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0B4189046380031AD43 /* UIActionSheet+BlocksKit.m */; };
@@ -554,8 +550,6 @@
 		2868D243166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D239166E1C0600C0C153 /* UIActivityMail@2x.png */; };
 		2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23A166E1C0600C0C153 /* UIActivitySMS@2x.png */; };
 		2868D245166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23A166E1C0600C0C153 /* UIActivitySMS@2x.png */; };
-		2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */; };
-		2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */; };
 		286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
 		287050C7188FC407004CD922 /* HCSRouteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050B4188FC407004CD922 /* HCSRouteDetailViewController.m */; };
 		287050C8188FC407004CD922 /* HCSRouteDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050B4188FC407004CD922 /* HCSRouteDetailViewController.m */; };
@@ -1172,10 +1166,6 @@
 		2818E09A189042600031AD43 /* CustomPickerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPickerDataSource.m; sourceTree = "<group>"; };
 		2818E09D189043570031AD43 /* CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
 		2818E09E189043570031AD43 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
-		2818E0A1189043A40031AD43 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		2818E0A2189043A40031AD43 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		2818E0A9189043E30031AD43 /* ImageResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResize.h; sourceTree = "<group>"; };
-		2818E0AA189043E30031AD43 /* ImageResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResize.m; sourceTree = "<group>"; };
 		2818E0AD189045080031AD43 /* TripDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripDetailViewController.h; sourceTree = "<group>"; };
 		2818E0AE189045080031AD43 /* TripDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripDetailViewController.m; sourceTree = "<group>"; };
 		2818E0B2189046370031AD43 /* BKGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKGlobals.h; sourceTree = "<group>"; };
@@ -1264,7 +1254,6 @@
 		2868D238166E1C0600C0C153 /* UIActivityFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityFacebook@2x.png"; sourceTree = "<group>"; };
 		2868D239166E1C0600C0C153 /* UIActivityMail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityMail@2x.png"; sourceTree = "<group>"; };
 		2868D23A166E1C0600C0C153 /* UIActivitySMS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivitySMS@2x.png"; sourceTree = "<group>"; };
-		2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityTwitter@2x.png"; sourceTree = "<group>"; };
 		286C71C9134F8F05007B57E6 /* LoginVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LoginVO.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		286C71CA134F8F05007B57E6 /* LoginVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVO.m; sourceTree = "<group>"; };
 		287050B1188FC407004CD922 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
@@ -2019,7 +2008,6 @@
 				2868D238166E1C0600C0C153 /* UIActivityFacebook@2x.png */,
 				2868D239166E1C0600C0C153 /* UIActivityMail@2x.png */,
 				2868D23A166E1C0600C0C153 /* UIActivitySMS@2x.png */,
-				2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */,
 				28851504166E0E20003536CA /* UIActivityCopy.png */,
 				2811C4C0166CE68F00592560 /* UIActivitySMS.png */,
 				2811C498166CCD5F00592560 /* UIActivityBlank.png */,
@@ -2266,8 +2254,6 @@
 				2818E094189042390031AD43 /* PickerViewController.m */,
 				2818E0AD189045080031AD43 /* TripDetailViewController.h */,
 				2818E0AE189045080031AD43 /* TripDetailViewController.m */,
-				2818E0A1189043A40031AD43 /* DetailViewController.h */,
-				2818E0A2189043A40031AD43 /* DetailViewController.m */,
 				287050B3188FC407004CD922 /* HCSRouteDetailViewController.h */,
 				287050B4188FC407004CD922 /* HCSRouteDetailViewController.m */,
 				287050B7188FC407004CD922 /* HCSSurveyViewController.h */,
@@ -2339,8 +2325,6 @@
 		287050E9188FC700004CD922 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				2818E0A9189043E30031AD43 /* ImageResize.h */,
-				2818E0AA189043E30031AD43 /* ImageResize.m */,
 				287050EA188FC700004CD922 /* ZipUtil.h */,
 				287050EB188FC700004CD922 /* ZipUtil.m */,
 			);
@@ -3589,7 +3573,6 @@
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				289AA2C6188EEB170097AA5A /* TrackingDotHalo@2x.png in Resources */,
 				28BC444D18915A5800711A1A /* exercise.png in Resources */,
-				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28640E8318985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
@@ -3874,7 +3857,6 @@
 				2868D241166E1C0600C0C153 /* UIActivityFacebook@2x.png in Resources */,
 				2868D243166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D245166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
-				2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28BC447618915A5800711A1A /* social.png in Resources */,
 				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
@@ -3977,7 +3959,6 @@
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
 				28AD6423131FB6C8008527FC /* NSDate-Misc.m in Sources */,
-				2818E0A3189043A40031AD43 /* DetailViewController.m in Sources */,
 				28AD6424131FB6C8008527FC /* NSDictionary+Helpers.m in Sources */,
 				2818E09F189043570031AD43 /* CustomView.m in Sources */,
 				28AD6425131FB6C8008527FC /* NSDictionary+UrlEncoding.m in Sources */,
@@ -4034,7 +4015,6 @@
 				287050CD188FC407004CD922 /* HCSTrackConfigViewController.m in Sources */,
 				28D2BAE11354814E00694093 /* UKImage.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
-				2818E0AB189043E30031AD43 /* ImageResize.m in Sources */,
 				28F66F0D135F636200DECFAC /* PhotoMapImageLocationViewController.m in Sources */,
 				28719D92136FE2AD00F69A1B /* LocationSearchManager.m in Sources */,
 				280E91C614097D8600C7AC75 /* StringManager.m in Sources */,
@@ -4169,7 +4149,6 @@
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
 				283436DB15DD5DC300B00FD5 /* NSDate-Misc.m in Sources */,
-				2818E0A4189043A40031AD43 /* DetailViewController.m in Sources */,
 				283436DC15DD5DC300B00FD5 /* NSDictionary+Helpers.m in Sources */,
 				2818E0A0189043570031AD43 /* CustomView.m in Sources */,
 				283436DD15DD5DC300B00FD5 /* NSDictionary+UrlEncoding.m in Sources */,
@@ -4226,7 +4205,6 @@
 				287050CE188FC407004CD922 /* HCSTrackConfigViewController.m in Sources */,
 				2834370A15DD5DC300B00FD5 /* UKImage.m in Sources */,
 				2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */,
-				2818E0AC189043E30031AD43 /* ImageResize.m in Sources */,
 				2834370C15DD5DC300B00FD5 /* PhotoMapImageLocationViewController.m in Sources */,
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,

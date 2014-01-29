@@ -85,7 +85,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
 -(void)displayPhotosOnMap;
 - (void) didNotificationMapStyleChanged;
-
+- (IBAction) locationButtonSelected:(id)sender;
+-(IBAction)  showPhotoWizard:(id)sender;
+- (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw;
+- (void) requestPhotos;
+- (void) clearPhotos;
 
 @end
 
