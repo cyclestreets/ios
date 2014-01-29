@@ -112,7 +112,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic,strong)  RMAnnotation									*userLocationAnnotation;
 
 
--(RMMarker*)retrieveLocationMapMarker;
 
 -(void)resetPhotoWizard;
 
@@ -131,7 +130,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)initCategoryView:(PhotoWizardViewState)state;
 -(void)updateCategoryView;
 -(void)resetCategoryView;
--(IBAction)showCategoryMenu:(id)sender;
 -(void)didSelectCategoryFromMenu:(int)index;
 
 -(void)initDescriptionView:(PhotoWizardViewState)state;
@@ -210,9 +208,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
         [self UserDidUpdatePhotoLocation:notification.object];
     }
 	
-	if([notification.name isEqualToString:PHOTOWIZARDCATEGORYUPDATE]){
-        [self didSelectCategoryFromMenu:notification];
-    }
 	
 	if([notification.name isEqualToString:USERACCOUNTLOGINSUCCESS]){
         [self autoUploadUserPhoto];
@@ -294,6 +289,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)createPersistentUI{
 	
 	self.uploadImage=[[UploadPhotoVO alloc]init];
+	
+	_modalToolBar.clipsToBounds=YES;
     
     
 	popoverClass = [WEPopoverController class];

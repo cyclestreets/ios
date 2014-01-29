@@ -14,15 +14,11 @@
 #import "RMAnnotation.h"
 
 
-static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
-//static NSInteger MAX_ZOOM = 18;
-//static NSInteger MIN_ZOOM = 1;
 
 @interface PhotoWizardLocationViewController()
 
 
 @property (nonatomic, weak) IBOutlet RMMapView						* mapView;
-@property (nonatomic, strong) CLLocationManager						* locationManager;
 @property (nonatomic, strong) UILabel								* locationLabel;
 @property (nonatomic, strong) UIBarButtonItem						* closeButton;
 @property (nonatomic, strong) UIBarButtonItem						* resetButton;
@@ -34,8 +30,6 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 @property (nonatomic,strong)  RMAnnotation							*userAnnotation;
 
 
-
-- (void) singleTapDelayExpired;
 - (void) addLocation:(CLLocationCoordinate2D)location;
 -(void)showLocationOnMap:(CLLocation*)location;
 -(void)markerLocationDidUpdate:(CLLocationCoordinate2D)coordinate;
@@ -321,7 +315,6 @@ static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
         self.view = nil;
     }
 	
-	self.locationManager=nil;
 	self.photolocation=nil;
 	self.userlocation=nil;
 	self.locationLabel=nil;

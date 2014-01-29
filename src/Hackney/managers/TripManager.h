@@ -40,7 +40,6 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
-#import "ActivityIndicatorDelegate.h"
 #import "TripPurposeDelegate.h"
 #import "LoadingView.h"
 
@@ -51,7 +50,7 @@
 
 
 @interface TripManager : NSObject
-<ActivityIndicatorDelegate, TripPurposeDelegate,UIAlertViewDelegate,UITextViewDelegate>
+< TripPurposeDelegate,UIAlertViewDelegate,UITextViewDelegate>
 {
 	
 }
@@ -61,34 +60,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 @property (nonatomic,strong)  Trip								*currentRecordingTrip;
 @property (nonatomic,strong,readonly)  Trip						*selectedTrip;
 
-// deprecate
-@property (nonatomic, retain) id <ActivityIndicatorDelegate>	activityDelegate;
-// deprecate
-@property (nonatomic, retain) id <UIAlertViewDelegate>			alertDelegate;
-// deprecate
-@property (nonatomic, retain) UIActivityIndicatorView			*activityIndicator;
-// deprecate
-@property (nonatomic, retain) LoadingView *uploadingView;
-// deprecate
-@property (nonatomic, retain) UIViewController *parent; 
 
-// deprecate
-@property (nonatomic, retain) UIAlertView						*saving;
-// deprecate
-@property (nonatomic, retain) UIAlertView						*tripNotes;
-// deprecate
-@property (nonatomic, retain) UITextView						*tripNotesText;
-
-@property (assign) BOOL dirty;
-
-// deprecate
-@property (nonatomic, retain) NSMutableData *receivedData;
-
-@property (nonatomic, assign) BOOL isRecording;
+@property (nonatomic, assign) BOOL								isRecording;
 
 
-
-- (BOOL)loadTrip:(Trip*)trip;
 
 - (Trip*)createTrip;
 - (void)createTrip:(unsigned int)index;
@@ -116,7 +91,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 -(void)resetTrip;
 -(void)startTrip;
 
--(void)loadSelectedTrip:(Trip*)trip;
 
 -(void)removeCurrentRecordingTrip;
 

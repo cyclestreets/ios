@@ -173,12 +173,6 @@ static int const kTagImage=	3;
 	// no trip selection by default
 	self.selectedTrip = nil;
     
-	#pragma message  ("What does this do?")
-    /*
-	 pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-	 */
     
 }
 

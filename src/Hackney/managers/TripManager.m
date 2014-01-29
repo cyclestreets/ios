@@ -51,7 +51,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 {
 	
     if (self = [super init]){
-		self.activityDelegate		= self;
+		
 		_isRecording					= NO;
 		self.recordingTripCoords=[NSMutableArray array];
 		
@@ -509,38 +509,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 
 
-#pragma mark - ActivityIndicatorDelegate methods
 
-
-- (void)dismissSaving
-{
-	if ( _saving )
-		[_saving dismissWithClickedButtonIndex:0 animated:YES];
-}
-
-
-- (void)startAnimating {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-}
-
-- (void)stopAnimating {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-}
-
-
-- (void)updateBytesWritten:(NSInteger)totalBytesWritten
- totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
-{
-	if ( _saving )
-		_saving.message = [NSString stringWithFormat:@"Sent %d of %d bytes", totalBytesWritten, totalBytesExpectedToWrite];
-}
-
-
-- (void)updateSavingMessage:(NSString *)message
-{
-	if ( _saving )
-		_saving.message = message;
-}
 
 
 

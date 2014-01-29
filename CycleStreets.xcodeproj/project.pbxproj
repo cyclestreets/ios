@@ -145,8 +145,6 @@
 		2818E0A0189043570031AD43 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E09E189043570031AD43 /* CustomView.m */; };
 		2818E0A3189043A40031AD43 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A2189043A40031AD43 /* DetailViewController.m */; };
 		2818E0A4189043A40031AD43 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A2189043A40031AD43 /* DetailViewController.m */; };
-		2818E0A7189043B50031AD43 /* NoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A6189043B50031AD43 /* NoteManager.m */; };
-		2818E0A8189043B50031AD43 /* NoteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0A6189043B50031AD43 /* NoteManager.m */; };
 		2818E0AB189043E30031AD43 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AA189043E30031AD43 /* ImageResize.m */; };
 		2818E0AC189043E30031AD43 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AA189043E30031AD43 /* ImageResize.m */; };
 		2818E0AF189045080031AD43 /* TripDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0AE189045080031AD43 /* TripDetailViewController.m */; };
@@ -165,8 +163,6 @@
 		2818E0C7189050570031AD43 /* HCSMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C5189050570031AD43 /* HCSMapViewController.xib */; };
 		2818E0CA189050930031AD43 /* HCSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0C9189050930031AD43 /* HCSMapViewController.m */; };
 		2818E0CB189050930031AD43 /* HCSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0C9189050930031AD43 /* HCSMapViewController.m */; };
-		2818E0CE189050FD0031AD43 /* MapCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0CD189050FD0031AD43 /* MapCoord.m */; };
-		2818E0CF189050FD0031AD43 /* MapCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0CD189050FD0031AD43 /* MapCoord.m */; };
 		281E08B31451608C0034CC63 /* POIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B21451608C0034CC63 /* POIManager.m */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
 		281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */; };
@@ -1178,8 +1174,6 @@
 		2818E09E189043570031AD43 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
 		2818E0A1189043A40031AD43 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		2818E0A2189043A40031AD43 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		2818E0A5189043B50031AD43 /* NoteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteManager.h; sourceTree = "<group>"; };
-		2818E0A6189043B50031AD43 /* NoteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteManager.m; sourceTree = "<group>"; };
 		2818E0A9189043E30031AD43 /* ImageResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResize.h; sourceTree = "<group>"; };
 		2818E0AA189043E30031AD43 /* ImageResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResize.m; sourceTree = "<group>"; };
 		2818E0AD189045080031AD43 /* TripDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripDetailViewController.h; sourceTree = "<group>"; };
@@ -1195,8 +1189,6 @@
 		2818E0C5189050570031AD43 /* HCSMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSMapViewController.xib; path = hackney/HCSMapViewController.xib; sourceTree = "<group>"; };
 		2818E0C8189050930031AD43 /* HCSMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSMapViewController.h; sourceTree = "<group>"; };
 		2818E0C9189050930031AD43 /* HCSMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSMapViewController.m; sourceTree = "<group>"; };
-		2818E0CC189050FD0031AD43 /* MapCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCoord.h; sourceTree = "<group>"; };
-		2818E0CD189050FD0031AD43 /* MapCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCoord.m; sourceTree = "<group>"; };
 		281E08B11451608C0034CC63 /* POIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIManager.h; sourceTree = "<group>"; };
 		281E08B21451608C0034CC63 /* POIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIManager.m; sourceTree = "<group>"; };
 		281E08B4145168F90034CC63 /* POILocationVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POILocationVO.h; sourceTree = "<group>"; };
@@ -2291,8 +2283,6 @@
 		287050BB188FC407004CD922 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				2818E0CC189050FD0031AD43 /* MapCoord.h */,
-				2818E0CD189050FD0031AD43 /* MapCoord.m */,
 				287050BC188FC407004CD922 /* Coord.h */,
 				287050BD188FC407004CD922 /* Coord.m */,
 				280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */,
@@ -2338,8 +2328,6 @@
 		287050DA188FC432004CD922 /* managers */ = {
 			isa = PBXGroup;
 			children = (
-				2818E0A5189043B50031AD43 /* NoteManager.h */,
-				2818E0A6189043B50031AD43 /* NoteManager.m */,
 				287050DB188FC432004CD922 /* TripManager.h */,
 				287050DC188FC432004CD922 /* TripManager.m */,
 				28AE47C11896E95000203C20 /* UserManager.h */,
@@ -3991,7 +3979,6 @@
 				28AD6423131FB6C8008527FC /* NSDate-Misc.m in Sources */,
 				2818E0A3189043A40031AD43 /* DetailViewController.m in Sources */,
 				28AD6424131FB6C8008527FC /* NSDictionary+Helpers.m in Sources */,
-				2818E0CE189050FD0031AD43 /* MapCoord.m in Sources */,
 				2818E09F189043570031AD43 /* CustomView.m in Sources */,
 				28AD6425131FB6C8008527FC /* NSDictionary+UrlEncoding.m in Sources */,
 				287050C7188FC407004CD922 /* HCSRouteDetailViewController.m in Sources */,
@@ -4060,7 +4047,6 @@
 				280E93511409858D00C7AC75 /* InitialLocation.m in Sources */,
 				280E93521409858D00C7AC75 /* Markers.m in Sources */,
 				280E93531409858D00C7AC75 /* RouteLineView.m in Sources */,
-				2818E0A7189043B50031AD43 /* NoteManager.m in Sources */,
 				280E9358140985CD00C7AC75 /* NamedPlace.m in Sources */,
 				280E9359140985CD00C7AC75 /* Route.m in Sources */,
 				280E937B1409861300C7AC75 /* ImageOperations.m in Sources */,
@@ -4185,7 +4171,6 @@
 				283436DB15DD5DC300B00FD5 /* NSDate-Misc.m in Sources */,
 				2818E0A4189043A40031AD43 /* DetailViewController.m in Sources */,
 				283436DC15DD5DC300B00FD5 /* NSDictionary+Helpers.m in Sources */,
-				2818E0CF189050FD0031AD43 /* MapCoord.m in Sources */,
 				2818E0A0189043570031AD43 /* CustomView.m in Sources */,
 				283436DD15DD5DC300B00FD5 /* NSDictionary+UrlEncoding.m in Sources */,
 				287050C8188FC407004CD922 /* HCSRouteDetailViewController.m in Sources */,
@@ -4254,7 +4239,6 @@
 				2834371815DD5DC300B00FD5 /* InitialLocation.m in Sources */,
 				2834371915DD5DC300B00FD5 /* Markers.m in Sources */,
 				2834371A15DD5DC300B00FD5 /* RouteLineView.m in Sources */,
-				2818E0A8189043B50031AD43 /* NoteManager.m in Sources */,
 				2834371B15DD5DC300B00FD5 /* NamedPlace.m in Sources */,
 				2834371C15DD5DC300B00FD5 /* Route.m in Sources */,
 				2834371D15DD5DC300B00FD5 /* ImageOperations.m in Sources */,

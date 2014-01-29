@@ -67,7 +67,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, strong) RMMapContents								* mapContents;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* gpslocateButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoWizardButton;
-@property (nonatomic, strong) CLLocationManager							* locationManager;
 @property (nonatomic, strong) CLLocation								* lastLocation;// last location
 @property (nonatomic, strong) CLLocation								* currentLocation;
 @property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;//the popup with the contents of a particular location (photomap etc.)
@@ -87,12 +86,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
 -(void)displayPhotosOnMap;
 - (void) didNotificationMapStyleChanged;
-
--(void)displayLocationForMap:(CLLocationCoordinate2D)location;
-
--(void)locationDidFail:(NSNotification*)notification;
--(void)locationDidUpdate:(NSNotification*)notification;
--(void)locationDidComplete:(NSNotification*)notification;
 
 
 @end

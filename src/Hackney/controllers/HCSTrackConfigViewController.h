@@ -14,6 +14,5 @@
 
 
 - (void)displayUploadedTripMap;
-- (void)displayUploadedNote;
 
 @end

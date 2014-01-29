@@ -58,7 +58,7 @@
         
         // Nab the unique device id hash from our delegate.
 		
-		self.deviceUniqueIdHash = [[UIDevice currentDevice] identifierForVendor];
+		self.deviceUniqueIdHash = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         
         self.postVars = [NSMutableDictionary dictionaryWithDictionary:inPostVars];
         [postVars setObject:deviceUniqueIdHash forKey:@"device"];

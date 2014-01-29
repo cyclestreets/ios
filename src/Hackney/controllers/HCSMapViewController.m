@@ -8,7 +8,6 @@
 
 #import "Coord.h"
 #import "LoadingView.h"
-#import "MapCoord.h"
 #import "HCSMapViewController.h"
 #import "Trip.h"
 #import <MobileCoreServices/UTCoreTypes.h>
@@ -263,7 +262,6 @@
 		// add coords as annotations to map
 		BOOL first = YES;
 		Coord *last = nil;
-		MapCoord *pin = nil;
 		int count = 0;
 		
 		// calculate min/max values for lat, lon
@@ -359,13 +357,6 @@
 		
 		NSLog(@"added %d unique GPS coordinates of %d to map", count, [sortedCoords count]);
 		
-		// add end point as a pin annotation
-		if ( last == [sortedCoords lastObject] )
-		{
-			pin.last = YES;
-			pin.title = @"End";
-			pin.subtitle = [dateFormatter stringFromDate:last.recorded];
-		}
 		
 		// if we had at least 1 coord
 		if ( count ){
@@ -482,39 +473,12 @@
 #pragma mark - Annotation methods
 
 - (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation {
-	//NSLog(@"viewForAnnotation");
 	
 	
-    // Handle any custom annotations.
-    if ([annotation isKindOfClass:[MapCoord class]]){
+	RMMapLayer *annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
 		
-		RMMapLayer* annotationView = nil;
-		
-		if ( [(MapCoord*)annotation first] ){
-		
-			annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-			
-		} else if ( [(MapCoord*)annotation last] ){
-			
-			annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-			
-		}else{
-			
-			annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-			
-			
-		}
-		
-        return annotationView;
-    } else {
-        //handle 'normal' pins
-        
-        RMMapLayer *annotationView = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-		
-		return annotationView;
-    }
-	
-    return nil;
+	return annotationView;
+   
 }
 
 
