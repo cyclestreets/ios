@@ -273,20 +273,20 @@
         NSMutableArray *routeCoords = [[NSMutableArray alloc]init];
 		
 		
-		NSNumberFormatter *doubleValueWithMaxTwoDecimalPlaces = [[NSNumberFormatter alloc] init];
-		[doubleValueWithMaxTwoDecimalPlaces setNumberStyle:NSNumberFormatterDecimalStyle];
-		[doubleValueWithMaxTwoDecimalPlaces setMaximumFractionDigits:4];
+//		NSNumberFormatter *doubleValueWithMaxTwoDecimalPlaces = [[NSNumberFormatter alloc] init];
+//		[doubleValueWithMaxTwoDecimalPlaces setNumberStyle:NSNumberFormatterDecimalStyle];
+//		[doubleValueWithMaxTwoDecimalPlaces setMaximumFractionDigits:4];
 		
 		self.currentRoute=[[RouteVO alloc]init];
         
 		for ( Coord *coord in sortedCoords ){
 			
 			
-			NSNumber *newlat=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.latitude] doubleValue]];
-			NSNumber *newlongt=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.longitude] doubleValue]];
+//			NSNumber *newlat=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.latitude] doubleValue]];
+//			NSNumber *newlongt=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.longitude] doubleValue]];
 			
-			coord.latitude=newlat;
-			coord.longitude=newlongt;
+//			coord.latitude=newlat;
+//			coord.longitude=newlongt;
 			
 			// only plot unique coordinates to our map for performance reasons
 			if ( !last ||
@@ -299,6 +299,8 @@
 					CSPointVO *point=[[CSPointVO alloc]init];
 					point.p=CGPointMake([coord.longitude doubleValue],[coord.latitude doubleValue]);
 					segment.pointsArray=@[point];
+					
+					BetterLog(@"%@",[coord longDescription]);
 					
 					[routeCoords addObject:segment];
                 

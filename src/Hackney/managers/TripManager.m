@@ -347,6 +347,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			BetterLog(@"%@",error.description);
             
 			[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
+			
+			success(NO);
             
         }];
         
@@ -355,6 +357,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
         
 		
         BetterLog(@"%@",error.debugDescription);
+		
+		success(NO);
         
     }];
 	
@@ -368,7 +372,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading" andMessage:nil];
 	
 	[self uploadSelectedTrip:trip completion:^(BOOL result) {
-		[[HudManager sharedInstance]showHudWithType:HUDWindowTypeSuccess withTitle:@"Uploaded" andMessage:nil];
+		
+		if(result==YES){
+			[[HudManager sharedInstance]showHudWithType:HUDWindowTypeSuccess withTitle:@"Uploaded" andMessage:nil];
+		}else{
+			[[HudManager sharedInstance]showHudWithType:HUDWindowTypeError withTitle:@"Failed Upload" andMessage:@"Try later"];
+		}
+		
 	}];
 	
 }

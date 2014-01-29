@@ -69,8 +69,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoWizardButton;
 @property (nonatomic, strong) CLLocation								* lastLocation;// last location
 @property (nonatomic, strong) CLLocation								* currentLocation;
-@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;//the popup with the contents of a particular location (photomap etc.)
-//@property (nonatomic, strong) MapLocationSearchViewController			* mapLocationSearchView;//the search popup
+@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;//the modal
 @property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
 @property (nonatomic, strong) InitialLocation							* initialLocation;
 @property (nonatomic, strong) IBOutlet UIView							* introView;
@@ -143,6 +142,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict{
+	
+	BetterLog(@"");
 	
 	NSString *status=[dict objectForKey:@"status"];
 	
@@ -349,6 +350,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
+	
 	BetterLog(@"");
 	
 	[[PhotoManager sharedInstance] retrievePhotosForLocationBounds:ne withEdge:sw];
@@ -381,7 +383,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void) afterMapChanged: (RMMapView*) map {
 	
-	[self requestPhotos];
+	
+	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
+	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
+		[self requestPhotos];
 	
 }
 
@@ -411,9 +416,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	_gpslocateButton.style = UIBarButtonItemStylePlain;
 	
 	
-	
-	//[self requestPhotos];
-	
 }
 
 - (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation{
@@ -421,11 +423,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	BetterLog(@"");
 	
 	CLLocation *location=userLocation.location;
-	self.currentLocation=location;
 	
-	[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
+	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
+	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:5]){
+		
+		self.currentLocation=location;
+		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
+		
+	}
 	
 }
+
 
 
 - (IBAction) locationButtonSelected:(id)sender {
@@ -453,20 +461,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 
-#pragma mark Search
-
-- (IBAction) didSearch {
-//	BetterLog(@"search");
-//	if (_mapLocationSearchView == nil) {
-//		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
-//	}	
-//	_mapLocationSearchView.locationReceiver = self;
-//	_mapLocationSearchView.centreLocation = [[_mapView contents] mapCenter];
-//	[self presentModalViewController:_mapLocationSearchView	animated:YES];
-}
-
-
-
 
 #pragma mark PhotoWizard support
 
@@ -486,10 +480,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 
-- (void)startShowingPhotos {
-	_showingPhotos = YES;
-	[self requestPhotos];
-}
 
 #pragma mark location provider
 

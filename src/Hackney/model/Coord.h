@@ -23,4 +23,8 @@
 @property (nonatomic, retain) NSNumber * altitude;
 @property (nonatomic, retain) Trip *trip;
 
+
+
+-(NSString*)longDescription;
+
 @end

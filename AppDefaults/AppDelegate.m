@@ -156,18 +156,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[[UserSettingsManager sharedInstance] saveApplicationState];
 	
-	if([TripManager sharedInstance].isRecording){
-		
-		
-		
-        NSLog(@"BACKGROUNDED and recording"); //set location service to startUpdatingLocation
-        //[appDelegate.locationManager startUpdatingLocation];
-    } else {
-        NSLog(@"BACKGROUNDED and sitting idle"); //set location service to startMonitoringSignificantLocationChanges
-        //[appDelegate.locationManager stopUpdatingLocation];
-        //[appDelegate.locationManager startMonitoringSignificantLocationChanges];
-    }
-	
 }
 -(void)applicationWillEnterForeground:(UIApplication *)application{
 	

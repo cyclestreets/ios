@@ -43,7 +43,6 @@
 #import "DetailViewController.h"
 #import "TripDetailViewController.h"
 #import "TripManager.h"
-#import "NoteManager.h"
 #import "HCSTrackConfigViewController.h"
 
 

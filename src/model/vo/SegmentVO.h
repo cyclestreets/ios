@@ -68,5 +68,8 @@
 -(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation;
 -(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation;
 
+
+-(NSString*)longDescription;
+
 @end
 

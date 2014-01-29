@@ -20,7 +20,6 @@
 
 #import "DetailViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
-#import "NoteManager.h"
 #import "ImageResize.h"
 
 @interface DetailViewController ()

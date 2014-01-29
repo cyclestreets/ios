@@ -87,6 +87,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 + (CLLocationCoordinate2D)defaultCoordinate;
 + (CLLocation*)defaultLocation;
 
++(BOOL)isSignificantLocationChange:(CLLocationCoordinate2D)oldCordinate newLocation:(CLLocationCoordinate2D)newCoordinate accuracy:(int)accuracy;
 
 +(void)reverseGeoCodeLocation:(CLLocation*)location;
 

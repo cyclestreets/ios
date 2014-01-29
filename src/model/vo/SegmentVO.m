@@ -320,6 +320,15 @@ static NSDictionary *roadIcons;
 
 
 
+-(NSString*)longDescription{
+	
+	
+	return [NSString stringWithFormat:@" Date: %i, latitude: %f longtitude: %f",startTime, self.segmentStart.latitude,self.segmentStart.longitude];
+	
+	
+}
+
+
 
 static NSString *ROAD_NAME = @"roadName";
 static NSString *PROVISION_NAME = @"provisionName";
