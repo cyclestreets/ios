@@ -30,7 +30,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "Files.h"
 #import "Reachability.h"
 #import "AppConfigManager.h"
-#import "CategoryLoader.h"
 #import "StartupManager.h"
 #import "UserSettingsManager.h"
 #import "AppConstants.h"
@@ -39,7 +38,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIDevice+Machine.h"
 #import "ExpandedUILabel.h"
 #import <Crashlytics/Crashlytics.h>
-#import "RouteManager.h"
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"

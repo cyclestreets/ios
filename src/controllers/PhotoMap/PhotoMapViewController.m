@@ -29,7 +29,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapLayer.h"
 #import "RMMarker.h"
 #import "RMAnnotation.h"
-#import "Query.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
 #import "Route.h"
@@ -38,9 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "PhotoMapListVO.h"
 #import "PhotoMapVO.h"
-#import "QueryPhoto.h"
 #import "PhotoMapImageLocationViewController.h"
-#import "InitialLocation.h"
 #import "Markers.h"
 #import "RMMapView.h"
 #import "CSPointVO.h"
@@ -258,6 +255,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	//Necessary to start route-me service
 	[RMMapView class];
 	[_mapView setDelegate:self];
+	[self didNotificationMapStyleChanged];
 	_mapView.showsUserLocation=YES;
 	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	

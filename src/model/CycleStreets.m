@@ -21,14 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  CycleStreets.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import "CycleStreets.h"
 #import "Files.h"
 #import "PhotoCategoryManager.h"
 #import "SynthesizeSingleton.h"
-
+#import "SettingsManager.h"
 #import "RMOpenStreetMapSource.h"
 #import "RMOpenCycleMapSource.h"
 
@@ -106,8 +105,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,nil];
 }
 
+
 + (NSString *)currentMapStyle {
-	NSString *mapStyle = MAPPING_BASE_OSM;
+	NSString *mapStyle = [SettingsManager sharedInstance].dataProvider.mapStyle;
 	if (mapStyle == nil) {
 		mapStyle = [[[self class] mapStyles] objectAtIndex:0];
 	}

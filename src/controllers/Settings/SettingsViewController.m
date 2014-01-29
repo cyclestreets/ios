@@ -21,30 +21,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Settings.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import "SettingsViewController.h"
-#import "CycleStreets.h"
-#import "Query.h"
-#import "AppDelegate.h"
-#import "Files.h"
-#import "MapViewController.h"
-
 #import "AppConstants.h"
 #import "SettingsManager.h"
 #import "GlobalUtilities.h"
 
+
+@interface SettingsViewController()
+
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* mapStyleControl;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* routeUnitControl;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* imageSizeControl;
+@property (nonatomic, strong)		IBOutlet UISwitch						* autoEndSwitch;
+
+@property(nonatomic,weak) IBOutlet UIView									*viewContainer;
+
+@end
+
+
 @implementation SettingsViewController
-@synthesize dataProvider;
-@synthesize planControl;
-@synthesize speedControl;
-@synthesize mapStyleControl;
-@synthesize imageSizeControl;
-@synthesize routeUnitControl;
-@synthesize routePointSwitch;
-@synthesize controlView;
-@synthesize speedTitleLabel;
+
 
 
 
@@ -71,23 +69,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)viewDidLoad {
 	
-	[self select:speedControl byString:dataProvider.speed];
-	[self select:planControl byString:dataProvider.plan];
-	[self select:imageSizeControl byString:dataProvider.imageSize];
-	[self select:mapStyleControl byString:[dataProvider.mapStyle lowercaseString]];
-	[self select:routeUnitControl byString:dataProvider.routeUnit];
-	routePointSwitch.on=dataProvider.showRoutePoint;
 	
-	[routeUnitControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
-	[planControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
-	[imageSizeControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
-	[mapStyleControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
-	[speedControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
-	[routePointSwitch addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[self select:_mapStyleControl byString:[_dataProvider.mapStyle lowercaseString]];
+	[self select:_routeUnitControl byString:_dataProvider.routeUnit];
+	[self select:_imageSizeControl byString:_dataProvider.imageSize];
+	_autoEndSwitch.on=_dataProvider.autoEndRoute;
+	
+	[_routeUnitControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[_mapStyleControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[_imageSizeControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[_autoEndSwitch addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 
 	
-	[self.view addSubview:controlView];
-	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, controlView.frame.size.height)];
+	[self.view addSubview:_viewContainer];
+	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.frame.size.height)];
 	
 	 [super viewDidLoad];
 	
@@ -105,41 +100,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	BetterLog(@"");
 	
 	// Note: we have to update the routeunit first then update the linked segments before getting the definitive values;
-	dataProvider.routeUnit = [[routeUnitControl titleForSegmentAtIndex:routeUnitControl.selectedSegmentIndex] lowercaseString];
-	dataProvider.plan = [[planControl titleForSegmentAtIndex:planControl.selectedSegmentIndex] lowercaseString];
-	dataProvider.imageSize = [[imageSizeControl titleForSegmentAtIndex:imageSizeControl.selectedSegmentIndex] lowercaseString];
-	dataProvider.mapStyle = [mapStyleControl titleForSegmentAtIndex:mapStyleControl.selectedSegmentIndex];
-	dataProvider.showRoutePoint = routePointSwitch.isOn;
+	_dataProvider.routeUnit = [[_routeUnitControl titleForSegmentAtIndex:_routeUnitControl.selectedSegmentIndex] lowercaseString];
+	_dataProvider.mapStyle = [_mapStyleControl titleForSegmentAtIndex:_mapStyleControl.selectedSegmentIndex];
+	_dataProvider.imageSize = [[_imageSizeControl titleForSegmentAtIndex:_imageSizeControl.selectedSegmentIndex] lowercaseString];
+	
+	_dataProvider.autoEndRoute = _autoEndSwitch.isOn;
 	
 	UISegmentedControl *control=(UISegmentedControl*)sender;
 	
-	if(control==mapStyleControl)
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationMapStyleChanged" object:nil];
+	if(control==_mapStyleControl)
+		[[NSNotificationCenter defaultCenter] postNotificationName:MAPSTYLECHANGED object:nil];
 	
-	[self updateRouteUnitDisplay];
-	
-	dataProvider.speed = [[speedControl titleForSegmentAtIndex:speedControl.selectedSegmentIndex] lowercaseString];
 	
 	[[SettingsManager sharedInstance] saveData];
-}
-
--(void)updateRouteUnitDisplay{
-	
-	if([dataProvider.routeUnit isEqualToString:MILES]){
-		speedTitleLabel.text=@"Route speed (mph)";
-		
-		[speedControl setTitle:@"10" forSegmentAtIndex:0];
-		[speedControl setTitle:@"12" forSegmentAtIndex:1];
-		[speedControl setTitle:@"15" forSegmentAtIndex:2];
-		
-	}else {
-		speedTitleLabel.text=@"Route speed (km/h)";
-		
-		[speedControl setTitle:@"16" forSegmentAtIndex:0];
-		[speedControl setTitle:@"20" forSegmentAtIndex:1];
-		[speedControl setTitle:@"24" forSegmentAtIndex:2];
-	}
-	
 }
 
 
@@ -148,20 +121,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
     [super didReceiveMemoryWarning];
 }
 
-- (void)nullify {
-	self.planControl = nil;
-	self.speedControl = nil;
-	self.imageSizeControl = nil;
-	self.mapStyleControl = nil;
-	self.routeUnitControl=nil;
-	self.controlView=nil;
-}
 
-- (void)viewDidUnload {
-	[self nullify];
-	[super viewDidUnload];
-	BetterLog(@">>>");
-}
 
 
 @end

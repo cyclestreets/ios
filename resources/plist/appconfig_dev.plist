@@ -72,6 +72,18 @@
 			<key>tabimage</key>
 			<string>CSTabBar_credits.png</string>
 		</dict>
+		<dict>
+			<key>title</key>
+			<string>Settings</string>
+			<key>id</key>
+			<string>settings</string>
+			<key>class</key>
+			<string>SettingsViewController</string>
+			<key>nib</key>
+			<string>SettingsView</string>
+			<key>tabimage</key>
+			<string>CSTabBar_settings.png</string>
+		</dict>
 	</array>
 	<key>GATrackingCode</key>
 	<string>UA-17571411-2</string>

@@ -15,7 +15,7 @@
 #import "RMAnnotation.h"
 #import "RMMarker.h"
 #import "UserLocationManager.h"
-
+#import "CycleStreets.h"
 #import "GlobalUtilities.h"
 #import "LayoutBox.h"
 // cs compatability classes
@@ -69,6 +69,7 @@
 	[self initialise];
 	
 	[notifications addObject:RESPONSE_GPSUPLOAD];
+	[notifications addObject:MAPSTYLECHANGED];
 	
 	[super listNotificationInterests];
 	
@@ -85,10 +86,18 @@
 		[self refreshUIFromDataProvider:notification.object];
 		
 	}
-	
+	if([name isEqualToString:MAPSTYLECHANGED]){
+		[self didNotificationMapStyleChanged];
+	}
 	
 }
 
+
+
+- (void) didNotificationMapStyleChanged {
+	self.mapView.tileSource = [CycleStreets tileSource];
+	//_attributionLabel.text = [MapViewController mapAttribution];
+}
 
 
 
@@ -184,6 +193,7 @@
 	
 	[RMMapView class];
 	[_mapView setDelegate:self];
+	_mapView.tileSource = [CycleStreets tileSource];
 	_mapView.enableDragging=YES;
 	
 	_routeLineView.pointListProvider=self;
@@ -201,23 +211,14 @@
 			[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 		}
 		
-		// display duration, distance as navbar prompt
-		static NSDateFormatter *inputFormatter = nil;
-		if ( inputFormatter == nil )
-			inputFormatter = [[NSDateFormatter alloc] init];
-		
-		[inputFormatter setDateFormat:@"HH:mm:ss"];
-		NSDate *fauxDate = [inputFormatter dateFromString:@"00:00:00"];
-		[inputFormatter setDateFormat:@"HH:mm:ss"];
-		NSDate *outputDate = [[NSDate alloc] initWithTimeInterval:(NSTimeInterval)[_trip.duration doubleValue] sinceDate:fauxDate];
-        
+			
 		double mph = ( [_trip.distance doubleValue] / 1609.344 ) / ( [_trip.duration doubleValue] / 3600. );
 		
 		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
- 									  [inputFormatter stringFromDate:outputDate],
+ 									  _trip.timeString,
 									  [dateFormatter stringFromDate:[_trip start]]];
         
-		_myNavigationItem.title = [NSString stringWithFormat:@"%.1f mi ~ %.1f mph", [_trip.distance doubleValue] / 1609.344, mph ];
+		_myNavigationItem.title = [NSString stringWithFormat:@"%@ ~ %@", [_trip lengthString], [_trip speedString] ];
 		
 		
 		// only add info view for trips with non-null notes

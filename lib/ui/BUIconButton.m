@@ -8,6 +8,7 @@
 #import "BUIconButton.h"
 #import "ButtonUtilities.h"
 #import "StyleManager.h"
+#import "ImageManipulator.h"
 
 @implementation BUIconButton
 @synthesize index;
@@ -45,6 +46,7 @@
 	
 	if(buttonSize.width==0){
 		UIImage *buttonimage=[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",buttonBackgroundImage]];
+		
 		buttonSize=buttonimage.size;
 	}
 	

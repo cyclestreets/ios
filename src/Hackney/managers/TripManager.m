@@ -185,10 +185,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 {
 	NSLog(@"about to save trip with %d coords...", [_recordingTripCoords count]);
 
-	if ( _currentRecordingTrip && [_recordingTripCoords count] )
-	{
-		CLLocationDistance newDist = [self calculateTripDistance:_currentRecordingTrip];
+	if ( _currentRecordingTrip && [_recordingTripCoords count]>0 ){
 		
+		CLLocationDistance newDist = [self calculateTripDistance:_currentRecordingTrip];
 		[_currentRecordingTrip setDistance:[NSNumber numberWithDouble:newDist]];
 		
 		Coord *last		= [_recordingTripCoords objectAtIndex:0];
@@ -196,6 +195,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		NSTimeInterval duration = [last.recorded timeIntervalSinceDate:first.recorded];
 		NSLog(@"duration = %.0fs", duration);
 		[_currentRecordingTrip setDuration:[NSNumber numberWithDouble:duration]];
+		
+	}else{
+		[_currentRecordingTrip setDuration:[NSNumber numberWithInt:0]];
+		[_currentRecordingTrip setDistance:[NSNumber numberWithInt:0]];
+
 	}
 	
 	[_currentRecordingTrip setSaved:[NSDate date]];
@@ -432,6 +436,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	self.currentRecordingTrip=(Trip*)[[CoreDataStore mainStore] createNewEntityByName:@"Trip"];
 	[_currentRecordingTrip setPurpose:purpose];
 	[_currentRecordingTrip setStart:[NSDate date]];
+	_currentRecordingTrip.duration=0;
+	_currentRecordingTrip.distance=0;
 	
 	[[CoreDataStore mainStore] save];
 	

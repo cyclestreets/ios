@@ -12,6 +12,7 @@
 #import "GenericConstants.h"
 #import "GlobalUtilities.h"
 #import "UIView+Additions.h"
+#import "ImageManipulator.h"
 
 @implementation ButtonUtilities
 
@@ -301,10 +302,11 @@
 {
 	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
 	button.frame = CGRectMake(0, 0, width,height);
-	
+	button.showsTouchWhenHighlighted=YES;
 	
 	if(iconimagename!=nil){
 		UIImage *iconimage=[[StyleManager sharedInstance] imageForType:iconimagename];
+		iconimage=[ImageManipulator newRoundCornerImage:iconimage :20 :20];
 		[button setImage:iconimage forState:UIControlStateNormal];
 	}
 	

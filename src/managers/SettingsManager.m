@@ -45,8 +45,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 		for (NSString *key in dict){
 			if([dict valueForKey:key]!=nil){
 				
-				if([key isEqualToString:@"showRoutePoint"]){
-					dataProvider.showRoutePoint=[[dict valueForKey:key] boolValue];
+				if([key isEqualToString:@"autoEndRoute"]){
+					dataProvider.autoEndRoute=[[dict valueForKey:key] boolValue];
 				}else {
 					[dataProvider setValue:[dict valueForKey:key] forKey:key];
 				}
@@ -64,10 +64,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	// Temp: need to sort out NSObject enumeration
 	[dict setObject:dataProvider.imageSize forKey:@"imageSize"];
 	[dict setObject:dataProvider.mapStyle forKey:@"mapStyle"];
-	[dict setObject:dataProvider.plan forKey:@"plan"];
 	[dict setObject:dataProvider.routeUnit forKey:@"routeUnit"];
-	[dict setObject:dataProvider.speed forKey:@"speed"];
-	[dict setObject:[NSNumber numberWithBool:dataProvider.showRoutePoint] forKey:@"showRoutePoint"];
+	[dict setObject:[NSNumber numberWithBool:dataProvider.autoEndRoute] forKey:@"autoEndRoute"];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setSettings:dict];	

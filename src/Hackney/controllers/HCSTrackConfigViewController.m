@@ -25,7 +25,7 @@
 #import "User.h"
 #import "RMUserLocation.h"
 #import "UserManager.h"
-
+#import "SettingsManager.h"
 #import "CoreDataStore.h"
 
 #import <CoreLocation/CoreLocation.h>
@@ -92,7 +92,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[notifications addObject:GPSLOCATIONCOMPLETE];
 	[notifications addObject:GPSLOCATIONUPDATE];
 	[notifications addObject:GPSLOCATIONFAILED];
-	
+	[notifications addObject:MAPSTYLECHANGED];
 	[notifications addObject:HCSDISPLAYTRIPMAP];
 	
 	[super listNotificationInterests];
@@ -111,8 +111,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		[self displayUploadedTripMap];
 	}
 	
+	if([name isEqualToString:MAPSTYLECHANGED]){
+		[self didNotificationMapStyleChanged];
+	}
+	
 }
 
+
+
+- (void) didNotificationMapStyleChanged {
+	self.mapView.tileSource = [CycleStreets tileSource];
+	//_attributionLabel.text = [MapViewController mapAttribution];
+}
 
 
 #pragma mark - Location updates
@@ -144,14 +154,36 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		self.currentTrip=[TripManager sharedInstance].currentRecordingTrip;
 		
 		CLLocationDistance distance = [_tripManager addCoord:_currentLocation];
-		_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
+		
+		if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+			float totalMiles = distance/1600;
+			_trackDistanceLabel.text=[NSString stringWithFormat:@"%3.1f miles", totalMiles];
+		}else {
+			float	kms=distance/1000;
+			_trackDistanceLabel.text=[NSString stringWithFormat:@"%4.1f km", kms];
+		}
+		
+		//_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
+	}else{
+		_trackDistanceLabel.text = [NSString stringWithFormat:@" 0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"miles" : @"km"];
 	}
 	
 	
-	if ( _currentLocation.speed >= 0 )
-		_trackSpeedLabel.text = [NSString stringWithFormat:@"%.1f mph", _currentLocation.speed * 3600 / 1609.344];
-	else
-		_trackSpeedLabel.text = @"0.0 mph";
+	if ( _currentLocation.speed >= 0 ){
+		
+		
+		if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
+			NSInteger mileSpeed = [[NSNumber numberWithDouble:( _currentLocation.speed / 1.6)] integerValue];
+			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2d mph", mileSpeed];
+		}else {
+			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2f km/h", _currentLocation.speed];
+		}
+		//_trackSpeedLabel.text = [NSString stringWithFormat:@"%.1f mph", _currentLocation.speed * 3600 / 1609.344];
+	
+	}else{
+		_trackSpeedLabel.text = [NSString stringWithFormat:@" 0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"mph" : @"kmh"];
+	}
+
 	
 }
 
@@ -206,6 +238,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[RMMapView class];
 	[_mapView setDelegate:self];
 	_mapView.showsUserLocation=YES;
+	_mapView.tileSource=[CycleStreets tileSource];
 	
 	
 	

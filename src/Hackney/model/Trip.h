@@ -43,5 +43,10 @@
 -(NSString*)co2SavedString;
 -(NSString*)longdateString;
 
+-(NSString*)lengthString;
+-(NSString*)speedString;
+
+-(NSString*)timeString;
+
 
 @end

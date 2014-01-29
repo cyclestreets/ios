@@ -21,42 +21,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Settings.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import <UIKit/UIKit.h>
 #import "SettingsVO.h"
-#import "RCSwitchOnOff.h"
 
 @interface SettingsViewController : UIViewController {
-	
-	SettingsVO                      *dataProvider;
-	
-	IBOutlet UISegmentedControl     *planControl;
-	IBOutlet UISegmentedControl     *speedControl;
-	IBOutlet UISegmentedControl     *mapStyleControl;
-	IBOutlet UISegmentedControl     *imageSizeControl;
-	IBOutlet UISegmentedControl     *routeUnitControl;
-	IBOutlet RCSwitchOnOff          *routePointSwitch;
-	IBOutlet UIView                 *controlView;
-	
-	IBOutlet	UILabel			*speedTitleLabel;
 }
 
-@property (nonatomic, strong)		SettingsVO				* dataProvider;
-@property (nonatomic, strong)		IBOutlet UISegmentedControl				* planControl;
-@property (nonatomic, strong)		IBOutlet UISegmentedControl				* speedControl;
-@property (nonatomic, strong)		IBOutlet UISegmentedControl				* mapStyleControl;
-@property (nonatomic, strong)		IBOutlet UISegmentedControl				* imageSizeControl;
-@property (nonatomic, strong)		IBOutlet UISegmentedControl				* routeUnitControl;
-@property (nonatomic, strong)		IBOutlet RCSwitchOnOff				* routePointSwitch;
-@property (nonatomic, strong)		IBOutlet UIView				* controlView;
-@property (nonatomic, strong)		IBOutlet UILabel				* speedTitleLabel;
+@property (nonatomic, strong)		SettingsVO								* dataProvider;
 
 - (IBAction) changed:(id)sender;
-
 - (void) save;
-
--(void)updateRouteUnitDisplay;
 
 @end

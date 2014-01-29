@@ -10,7 +10,10 @@
 #import "Coord.h"
 #import "User.h"
 
+#import "SettingsManager.h"
+
 #import <CoreLocation/CoreLocation.h>
+#import <objc/runtime.h>
 
 @implementation Trip
 
@@ -25,6 +28,16 @@
 @dynamic thumbnail;
 @dynamic user;
 
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.distance=0;
+		self.duration=0;
+    }
+    return self;
+}
 
 
 -(BOOL)isUploaded{
@@ -48,6 +61,50 @@
 	
 	return [NSString stringWithFormat:@"%@",[inputFormatter stringFromDate:outputDate]];
 	
+}
+
+
+-(NSString*)lengthString{
+	
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+		float totalMiles = [[self distance] floatValue]/1600;
+		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
+	}else {
+		float	kms=[[self distance] floatValue]/1000;
+		return [NSString stringWithFormat:@"%4.1f km", kms];
+	}
+}
+
+-(NSString*)speedString{
+	
+	NSNumber *kmSpeed=[NSNumber numberWithInt:0];
+	
+	if([self.duration intValue]==0 || [self.distance intValue]==0){
+		// nothing
+	}else{
+		kmSpeed = [NSNumber numberWithFloat:([self.distance floatValue]/[self.duration floatValue])];
+	}
+	
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
+		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
+		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
+	}else {
+		return [NSString stringWithFormat:@"%@ km/h", kmSpeed];
+	}
+}
+
+
+-(NSString*)timeString{
+	
+	NSUInteger h = [[self duration]intValue] / 3600;
+	NSUInteger m = ([[self duration]intValue] / 60) % 60;
+	NSUInteger s = [[self duration]intValue] % 60;
+	
+	if ([[self duration]intValue]>3600) {
+		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
+	}else {
+		return [NSString stringWithFormat:@"%02d:%02d", m,s];
+	}
 }
 
 
@@ -88,6 +145,53 @@
 
 }
 
+
+
+- (NSArray *)describablePropertyNames
+{
+	// Loop through our superclasses until we hit NSObject
+	NSMutableArray *array = [NSMutableArray array];
+	Class subclass = [self class];
+	while (subclass != [NSObject class])
+	{
+		unsigned int propertyCount;
+		objc_property_t *properties = class_copyPropertyList(subclass,&propertyCount);
+		for (int i = 0; i < propertyCount; i++)
+		{
+			// Add property name to array
+			objc_property_t property = properties[i];
+			const char *propertyName = property_getName(property);
+			[array addObject:@(propertyName)];
+		}
+		free(properties);
+		subclass = [subclass superclass];
+	}
+	
+	// Return array of property names
+	return array;
+}
+
+
+
+-(NSString*)longDescription{
+	
+	
+	NSMutableString *propertyDescriptions = [NSMutableString string];
+	for (NSString *key in [self describablePropertyNames])
+	{
+		if(![key isEqualToString:@"coords"]){
+			
+			id value = [self valueForKey:key];
+			[propertyDescriptions appendFormat:@"; %@ = %@", key, value];
+			
+		}
+		
+	}
+	return [NSString stringWithFormat:@"<%@: 0x%x%@>", [self class],
+			(NSUInteger)self, propertyDescriptions];
+	
+	
+}
 
 
 

@@ -7,7 +7,6 @@
 //
 
 #import "StartupManager.h"
-#import "ConnectionValidator.h"
 #import "UserSettingsManager.h"
 #import "DataSourceManager.h"
 #import "GlobalUtilities.h"
@@ -18,8 +17,6 @@
 #import "StringManager.h"
 #import "UserAccount.h"
 #import "AppConfigManager.h"
-#import "RouteManager.h"
-#import "SavedRoutesManager.h"
 #import "PhotoManager.h"
 
 #import "TripManager.h"
@@ -110,9 +107,6 @@
 	[DataSourceManager sharedInstance];
 	// no fatal startup errors for DataSourceManager
 	
-	
-	[RouteManager sharedInstance];
-	[SavedRoutesManager sharedInstance];
 	[PhotoManager sharedInstance];
 	
 	[TripManager sharedInstance];

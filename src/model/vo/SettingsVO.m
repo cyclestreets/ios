@@ -11,12 +11,7 @@
 
 
 @implementation SettingsVO
-@synthesize plan;
-@synthesize speed;
-@synthesize mapStyle;
-@synthesize imageSize;
-@synthesize routeUnit;
-@synthesize showRoutePoint;
+
 
 
 /***********************************************************/
@@ -27,12 +22,10 @@
 {
     self = [super init];
     if (self) {
-        self.plan = @"balanced";
-        speed = @"12";
-        mapStyle = @"OpenStreetMap";
-        imageSize = @"full";
-        routeUnit = @"miles";
-		showRoutePoint=YES;
+        _imageSize=@"full";
+        _mapStyle = @"OpenStreetMap";
+        _routeUnit = @"miles";
+		_autoEndRoute=YES;
     }
     return self;
 }
@@ -40,24 +33,13 @@
 
 
 
--(NSString*)returnKilometerSpeedValue{
-	
-	if([routeUnit isEqualToString:MILES]){
-		int milesvalue=ceil([speed doubleValue]*1.60);
-		return [NSString stringWithFormat:@"%i",milesvalue];
-	}else{
-		return speed;
-	}
-	
-}
-
 
 static NSString *PLAN = @"plan";
 static NSString *SPEED = @"speed";
 static NSString *MAP_STYLE = @"mapStyle";
 static NSString *IMAGE_SIZE = @"imageSize";
 static NSString *ROUTE_UNIT = @"routeUnit";
-static NSString *SHOW_ROUTE_POINT = @"showRoutePoint";
+static NSString *SHOW_ROUTE_POINT = @"autoEndRoute";
 
 
 
@@ -67,37 +49,32 @@ static NSString *SHOW_ROUTE_POINT = @"showRoutePoint";
 /***********************************************************/
 - (void)encodeWithCoder:(NSCoder *)encoder 
 {
-    [encoder encodeObject:self.plan forKey:PLAN];
-    [encoder encodeObject:self.speed forKey:SPEED];
-    [encoder encodeObject:self.mapStyle forKey:MAP_STYLE];
+    
     [encoder encodeObject:self.imageSize forKey:IMAGE_SIZE];
+    [encoder encodeObject:self.mapStyle forKey:MAP_STYLE];
     [encoder encodeObject:self.routeUnit forKey:ROUTE_UNIT];
-    [encoder encodeBool:self.showRoutePoint forKey:SHOW_ROUTE_POINT];
+    [encoder encodeBool:self.autoEndRoute forKey:SHOW_ROUTE_POINT];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
 {
     if ((self = [super init])) {
-        self.plan = [decoder decodeObjectForKey:PLAN];
-        self.speed = [decoder decodeObjectForKey:SPEED];
         self.mapStyle = [decoder decodeObjectForKey:MAP_STYLE];
-        self.imageSize = [decoder decodeObjectForKey:IMAGE_SIZE];
         self.routeUnit = [decoder decodeObjectForKey:ROUTE_UNIT];
-        self.showRoutePoint = [decoder decodeBoolForKey:SHOW_ROUTE_POINT];
+        self.autoEndRoute = [decoder decodeBoolForKey:SHOW_ROUTE_POINT];
+		self.imageSize=[decoder decodeObjectForKey:IMAGE_SIZE];
     }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    id theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
+    id theCopy = [[[self class] allocWithZone:zone] init];
 	
-    [theCopy setPlan:[self.plan copy]];
-    [(SettingsVO*)theCopy setSpeed:[self.speed copy]];
     [theCopy setMapStyle:[self.mapStyle copy]];
-    [theCopy setImageSize:[self.imageSize copy]];
     [theCopy setRouteUnit:[self.routeUnit copy]];
-    [theCopy setShowRoutePoint:self.showRoutePoint];
+    [theCopy setAutoEndRoute:self.autoEndRoute];
+	[theCopy setImageSize:self.imageSize];
 	
     return theCopy;
 }
