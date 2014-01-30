@@ -111,6 +111,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if(control==_mapStyleControl)
 		[[NSNotificationCenter defaultCenter] postNotificationName:MAPSTYLECHANGED object:nil];
 	
+	if(control==_routeUnitControl)
+		[[NSNotificationCenter defaultCenter] postNotificationName:MAPUNITCHANGED object:nil];
+	
 	
 	[[SettingsManager sharedInstance] saveData];
 }

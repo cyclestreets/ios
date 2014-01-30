@@ -52,6 +52,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @property (weak, nonatomic) IBOutlet UIView								*actionView;
 
 
+@property (nonatomic,assign)  CLLocationDistance						currentDistance;
+
 @property (nonatomic, strong) CLLocation								* lastLocation;// last location
 @property (nonatomic, strong) CLLocation								* currentLocation;
 
@@ -94,6 +96,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[notifications addObject:GPSLOCATIONFAILED];
 	[notifications addObject:MAPSTYLECHANGED];
 	[notifications addObject:HCSDISPLAYTRIPMAP];
+	[notifications addObject:MAPUNITCHANGED];
 	
 	[super listNotificationInterests];
 	
@@ -115,6 +118,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		[self didNotificationMapStyleChanged];
 	}
 	
+	if([name isEqualToString:MAPUNITCHANGED]){
+		[self didNotificationMapUnitChanged];
+	}
+	
 }
 
 
@@ -122,6 +129,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 - (void) didNotificationMapStyleChanged {
 	self.mapView.tileSource = [CycleStreets tileSource];
 	//_attributionLabel.text = [MapViewController mapAttribution];
+}
+
+
+- (void) didNotificationMapUnitChanged {
+	
+	[self updateUIForDistance];
+	
+	[self updateUIForSpeed];
+	
 }
 
 
@@ -150,42 +166,57 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	if ( _isRecordingTrack ){
 		
+		self.currentDistance = [_tripManager addCoord:_currentLocation];
 		
-		self.currentTrip=[TripManager sharedInstance].currentRecordingTrip;
+		[self updateUIForDistance];
 		
-		CLLocationDistance distance = [_tripManager addCoord:_currentLocation];
+		[self updateUIForSpeed];
+		
+	}
+	
+}
+
+
+
+-(void)updateUIForDistance{
+	
+	
+	if ( _isRecordingTrack ){
 		
 		if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-			float totalMiles = distance/1600;
+			float totalMiles = _currentDistance/1600;
 			_trackDistanceLabel.text=[NSString stringWithFormat:@"%3.1f miles", totalMiles];
 		}else {
-			float	kms=distance/1000;
+			float	kms=_currentDistance/1000;
 			_trackDistanceLabel.text=[NSString stringWithFormat:@"%4.1f km", kms];
 		}
-		
-		//_trackDistanceLabel.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
+	
 	}else{
-		_trackDistanceLabel.text = [NSString stringWithFormat:@" 0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"miles" : @"km"];
+		_trackDistanceLabel.text = [NSString stringWithFormat:@"0.0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"miles" : @"km"];
 	}
 	
 	
-	if ( _currentLocation.speed >= 0 ){
-		
-		
+}
+
+
+-(void)updateUIForSpeed{
+	
+	if ( _isRecordingTrack && _currentLocation.speed >= 0 ){
+	
 		if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
 			NSInteger mileSpeed = [[NSNumber numberWithDouble:( _currentLocation.speed / 1.6)] integerValue];
 			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2d mph", mileSpeed];
 		}else {
 			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2f km/h", _currentLocation.speed];
 		}
-		//_trackSpeedLabel.text = [NSString stringWithFormat:@"%.1f mph", _currentLocation.speed * 3600 / 1609.344];
-	
 	}else{
-		_trackSpeedLabel.text = [NSString stringWithFormat:@" 0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"mph" : @"kmh"];
+		_trackSpeedLabel.text = [NSString stringWithFormat:@"0.0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"mph" : @"kmh"];
 	}
-
 	
 }
+
+
+
 
 
 
@@ -250,6 +281,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[self.navigationItem setRightBarButtonItem:barbutton animated:NO];
 	
 	
+	[self updateUIForSpeed];
+	[self updateUIForDistance];
 	
 	//TODO: UI styling
 	[_actionButton addTarget:self action:@selector(didSelectActionButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -289,9 +322,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 - (void)resetDurationDisplay
 {
-	_trackDurationLabel.text = @"00:00:00";
-	
-	_trackDistanceLabel.text = @"0 mi";
+	[self updateUIForDistance];
+	[self updateUIForSpeed];
 }
 
 -(void)resetTimer{
@@ -304,12 +336,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 #pragma mark - RMMap delegate
 
-
--(void)singleTapOnMap:(RMMapView *)map at:(CGPoint)point{
-	
-	CLLocationCoordinate2D coordinate=[_mapView pixelToCoordinate:point];
-	
-}
 
 
 -(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
