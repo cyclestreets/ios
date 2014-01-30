@@ -257,9 +257,10 @@ static int const kTagImage=	3;
 - (void)displaySelectedTripMap{
 	
 	if ( _selectedTrip ){
-		HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:_selectedTrip];
-		mvc.viewMode=HCSMapViewModeShow;
-		[[self navigationController] pushViewController:mvc animated:YES];
+		HCSMapViewController *controller = [[HCSMapViewController alloc] initWithNibName:[HCSMapViewController nibName] bundle:nil];
+		controller.trip=_selectedTrip;
+		controller.viewMode=HCSMapViewModeShow;
+		[[self navigationController] pushViewController:controller animated:YES];
 	}
 	
 }

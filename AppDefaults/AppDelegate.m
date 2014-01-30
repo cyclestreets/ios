@@ -250,7 +250,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if(shouldDisplayhelpView){
 		
 		HCSHelpViewController *helpController=[[HCSHelpViewController alloc]initWithNibName:[HCSHelpViewController nibName] bundle:nil];
-		helpController.title=@"Help";
+		helpController.title=@"Info";
 		UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:helpController];
 		
 		

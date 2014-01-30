@@ -36,14 +36,7 @@
 @synthesize delegate;
 @synthesize detailTextView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (void)viewDidLoad
 {
@@ -78,10 +71,11 @@
     [[TripManager sharedInstance] saveNotes:detailTextView.text];
     [[TripManager sharedInstance] saveTrip];
 	
-	HCSMapViewController *mvc = [[HCSMapViewController alloc] initWithTrip:[TripManager sharedInstance].currentRecordingTrip];
-	mvc.tripDelegate=delegate;
-	mvc.viewMode=HCSMapViewModeSave;
-    [self.navigationController pushViewController:mvc animated:YES];
+	HCSMapViewController *controller = [[HCSMapViewController alloc] initWithNibName:[HCSMapViewController nibName] bundle:nil];
+	controller.trip=[TripManager sharedInstance].currentRecordingTrip;
+	controller.tripDelegate=delegate;
+	controller.viewMode=HCSMapViewModeSave;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

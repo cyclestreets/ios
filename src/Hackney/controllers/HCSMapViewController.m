@@ -32,12 +32,12 @@
 #define kMinLatDelta	0.0039
 #define kMinLonDelta	0.0034
 
-@interface HCSMapViewController()<RMMapViewDelegate>
+@interface HCSMapViewController()<RMMapViewDelegate,UIGestureRecognizerDelegate>
 
 
 @property(nonatomic,weak) IBOutlet UINavigationItem					*myNavigationItem;
 
-@property (nonatomic, strong) Trip									*trip;
+
 @property (nonatomic, strong) UIBarButtonItem						*doneButton;
 @property (nonatomic, weak) IBOutlet UIButton						*infoButton;
 @property (nonatomic, strong) LayoutBox								*infoView;
@@ -117,20 +117,213 @@
 
 
 
-- (id)initWithTrip:(Trip *)trip
-{
 
-	if (self = [super initWithNibName:@"HCSMapViewController" bundle:nil]) {
-		NSLog(@"MapViewController initWithTrip");
-		self.trip = trip;
-    }
-    return self;
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	
+	[RMMapView class];
+	[_mapView setDelegate:self];
+	_mapView.tileSource = [CycleStreets tileSource];
+	_mapView.enableDragging=YES;
+	
+	_routeLineView.pointListProvider=self;
+	
+    self.navigationController.navigationBarHidden = YES;
+	self.navigationController.interactivePopGestureRecognizer.delegate = self;
+	
+    
+	if (_trip )
+	{
+		// format date as a string
+		static NSDateFormatter *dateFormatter = nil;
+		if (dateFormatter == nil) {
+			dateFormatter = [[NSDateFormatter alloc] init];
+			[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+			[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+		}
+		
+		
+		double mph = ( [_trip.distance doubleValue] / 1609.344 ) / ( [_trip.duration doubleValue] / 3600. );
+		
+		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
+									_trip.timeString,
+									[dateFormatter stringFromDate:[_trip start]]];
+        
+		_myNavigationItem.title = [NSString stringWithFormat:@"%@ ~ %@", [_trip lengthString], [_trip speedString] ];
+		
+		
+		// only add info view for trips with non-null notes
+		if ( ![_trip.notes isEqualToString:EMPTYSTRING] && _trip.notes != nil)
+		{
+			_doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(infoAction:)];
+			_infoButton.visible=YES;
+			[self initInfoView];
+		}else{
+			_infoButton.visible=NO;
+		}
+		
+        
+		
+		switch (_viewMode) {
+			case HCSMapViewModeSave:
+			{
+				self.myNavigationItem.leftBarButtonItem=[self backButtonWithTitle:@"Done"];
+			}
+				break;
+			case HCSMapViewModeShow:
+			{
+				self.myNavigationItem.leftBarButtonItem=[self backButtonWithTitle:@"Back"];
+			}
+				break;
+		}
+		
+		_uploadButton.enabled=_trip.uploaded==nil;
+		
+		
+		
+		// filter coords by hAccuracy
+		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 6.0"];
+		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
+		NSLog(@"count of filtered coords = %d", [filteredCoords count]);
+		
+		// sort filtered coords by recorded date
+		NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
+		NSArray		*sortDescriptors	= [NSArray arrayWithObjects:sortByDate, nil];
+		NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
+		
+		// add coords as annotations to map
+		BOOL first = YES;
+		Coord *last = nil;
+		int count = 0;
+		
+		// calculate min/max values for lat, lon
+		NSNumber *minLat = [NSNumber numberWithDouble:0.0];
+		NSNumber *maxLat = [NSNumber numberWithDouble:0.0];
+		NSNumber *minLon = [NSNumber numberWithDouble:0.0];
+		NSNumber *maxLon = [NSNumber numberWithDouble:0.0];
+        
+        NSMutableArray *routeCoords = [[NSMutableArray alloc]init];
+		
+		
+		//		NSNumberFormatter *doubleValueWithMaxTwoDecimalPlaces = [[NSNumberFormatter alloc] init];
+		//		[doubleValueWithMaxTwoDecimalPlaces setNumberStyle:NSNumberFormatterDecimalStyle];
+		//		[doubleValueWithMaxTwoDecimalPlaces setMaximumFractionDigits:4];
+		
+		self.currentRoute=[[RouteVO alloc]init];
+        
+		for ( Coord *coord in sortedCoords ){
+			
+			
+			//			NSNumber *newlat=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.latitude] doubleValue]];
+			//			NSNumber *newlongt=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.longitude] doubleValue]];
+			
+			//			coord.latitude=newlat;
+			//			coord.longitude=newlongt;
+			
+			// only plot unique coordinates to our map for performance reasons
+			if ( !last ||
+				(![coord.latitude  isEqualToNumber:last.latitude] &&
+				 ![coord.longitude isEqualToNumber:last.longitude] ) ){
+					
+					
+					// this is a bit convoluted but meets comaptibility for routeline drawing
+					SegmentVO *segment=[[SegmentVO alloc]init];
+					CSPointVO *point=[[CSPointVO alloc]init];
+					point.p=CGPointMake([coord.longitude doubleValue],[coord.latitude doubleValue]);
+					segment.pointsArray=@[point];
+					
+					BetterLog(@"%@",[coord longDescription]);
+					
+					[routeCoords addObject:segment];
+					
+					if ( first ){
+						
+						// add start point as a pin annotation
+						first = NO;
+						
+						minLat = coord.latitude;
+						maxLat = coord.latitude;
+						minLon = coord.longitude;
+						maxLon = coord.longitude;
+					}else{
+						
+						// update min/max values
+						if ( [minLat compare:coord.latitude] == NSOrderedDescending )
+							minLat = coord.latitude;
+						
+						if ( [maxLat compare:coord.latitude] == NSOrderedAscending )
+							maxLat = coord.latitude;
+						
+						if ( [minLon compare:coord.longitude] == NSOrderedDescending )
+							minLon = coord.longitude;
+						
+						if ( [maxLon compare:coord.longitude] == NSOrderedAscending )
+							maxLon = coord.longitude;
+					}
+					
+					//[mapView addAnnotation:pin];
+					count++;
+				}
+			
+			// update last coord pointer so we can cull redundant coords above
+			last = coord;
+		}
+		
+		_currentRoute.segments=routeCoords;
+        
+		[_routeLineView setNeedsDisplay];
+        
+        //add start/end pins
+        RMAnnotation *startPoint = [[RMAnnotation alloc] init];
+		SegmentVO *firstsegment=(SegmentVO*)[routeCoords firstObject];
+        startPoint.coordinate = firstsegment.segmentStart;
+        startPoint.title = @"Start";
+		startPoint.annotationIcon=[UIImage imageNamed:@"tripStart.png"];
+        [_mapView addAnnotation:startPoint];
+        RMAnnotation *endPoint = [[RMAnnotation alloc] init];
+		SegmentVO *lastsegment=(SegmentVO*)[routeCoords lastObject];
+        endPoint.coordinate = lastsegment.segmentStart;
+        endPoint.title = @"End";
+		endPoint.annotationIcon=[UIImage imageNamed:@"tripEnd.png"];
+        [_mapView addAnnotation:endPoint];
+        
+		
+		
+		NSLog(@"added %d unique GPS coordinates of %d to map", count, [sortedCoords count]);
+		
+		
+		// if we had at least 1 coord
+		if ( count ){
+			
+			[_currentRoute calculateNorthSouthValues];
+			
+			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
+			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
+			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:YES];
+			
+		}else{
+			[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
+		}
+        
+	}else{
+		[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
+	}
+    
+	if(_viewMode==HCSMapViewModeShow)
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
+	
+	
 }
+
 
 
 
 - (IBAction)infoAction:(UIButton*)sender
 {
+	
+	
+	
 	NSLog(@"infoAction");
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationDidStop:animationIDfinished:finished:context:)];
@@ -165,224 +358,51 @@
 	_infoView.fixedWidth=YES;
 	_infoView.fixedHeight=YES;
 	_infoView.paddingLeft=10;
+	_infoView.paddingTop=10;
 	_infoView.itemPadding=20;
+	_infoView.layoutMode=BUVerticalLayoutMode;
 	_infoView.backgroundColor=UIColorFromRGBAndAlpha(0x000000, kInfoViewAlpha);
 	
 	
-	ExpandedUILabel *notesHeader=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, _infoView.width, 10)];
+	ExpandedUILabel *notesHeader=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 10)];
 	notesHeader.fixedWidth=YES;
 	notesHeader.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:18];
 	notesHeader.textColor=UIColorFromRGB(0xFFFFFF);
 	notesHeader.text = @"Trip Notes";
 	[_infoView addSubview:notesHeader];
 	
-	ExpandedUILabel *notesText=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, _infoView.width, 10)];
+	ExpandedUILabel *notesText=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 10)];
 	notesText.fixedWidth=YES;
-	notesHeader.font=[UIFont fontWithName:@"HelveticaNeue-Regular" size:16];
-	notesHeader.textColor=UIColorFromRGB(0xFFFFFF);
-	notesHeader.text = _trip.notes;
+	notesText.font=[UIFont fontWithName:@"HelveticaNeue-Regular" size:16];
+	notesText.textColor=UIColorFromRGB(0xFFFFFF);
+	notesText.text = _trip.notes;
 	[_infoView addSubview:notesText];
+	
+	[_infoView refresh];
     
 }
 
 
-
-- (void)viewDidLoad
+- (UIBarButtonItem *)backButtonWithTitle:(NSString*)title
 {
-    [super viewDidLoad];
-	
-	[RMMapView class];
-	[_mapView setDelegate:self];
-	_mapView.tileSource = [CycleStreets tileSource];
-	_mapView.enableDragging=YES;
-	
-	_routeLineView.pointListProvider=self;
-	
-    self.navigationController.navigationBarHidden = YES;
-	
-    
-	if (_trip )
-	{
-		// format date as a string
-		static NSDateFormatter *dateFormatter = nil;
-		if (dateFormatter == nil) {
-			dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-			[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-		}
-		
-			
-		double mph = ( [_trip.distance doubleValue] / 1609.344 ) / ( [_trip.duration doubleValue] / 3600. );
-		
-		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
- 									  _trip.timeString,
-									  [dateFormatter stringFromDate:[_trip start]]];
-        
-		_myNavigationItem.title = [NSString stringWithFormat:@"%@ ~ %@", [_trip lengthString], [_trip speedString] ];
-		
-		
-		// only add info view for trips with non-null notes
-		if ( ![_trip.notes isEqualToString:EMPTYSTRING] && _trip.notes != nil)
-		{
-			_doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(infoAction:)];
-			_infoButton.visible=YES;
-			[self initInfoView];
-		}else{
-			_infoButton.visible=NO;
-		}
-		
-        
-		
-		switch (_viewMode) {
-			case HCSMapViewModeSave:
-			{
-				[_myNavigationItem.leftBarButtonItem setTitle:@"Done"];
-			}
-			break;
-			case HCSMapViewModeShow:
-			{
-				[_myNavigationItem.leftBarButtonItem setTitle:@"Back"];
-			}
-			break;
-		}
-		
-		_uploadButton.enabled=_trip.uploaded==nil;
-		
-		
-				
-		// filter coords by hAccuracy
-		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 6.0"];
-		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
-		NSLog(@"count of filtered coords = %d", [filteredCoords count]);
-		
-		// sort filtered coords by recorded date
-		NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
-		NSArray		*sortDescriptors	= [NSArray arrayWithObjects:sortByDate, nil];
-		NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
-		
-		// add coords as annotations to map
-		BOOL first = YES;
-		Coord *last = nil;
-		int count = 0;
-		
-		// calculate min/max values for lat, lon
-		NSNumber *minLat = [NSNumber numberWithDouble:0.0];
-		NSNumber *maxLat = [NSNumber numberWithDouble:0.0];
-		NSNumber *minLon = [NSNumber numberWithDouble:0.0];
-		NSNumber *maxLon = [NSNumber numberWithDouble:0.0];
-        
-        NSMutableArray *routeCoords = [[NSMutableArray alloc]init];
-		
-		
-//		NSNumberFormatter *doubleValueWithMaxTwoDecimalPlaces = [[NSNumberFormatter alloc] init];
-//		[doubleValueWithMaxTwoDecimalPlaces setNumberStyle:NSNumberFormatterDecimalStyle];
-//		[doubleValueWithMaxTwoDecimalPlaces setMaximumFractionDigits:4];
-		
-		self.currentRoute=[[RouteVO alloc]init];
-        
-		for ( Coord *coord in sortedCoords ){
-			
-			
-//			NSNumber *newlat=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.latitude] doubleValue]];
-//			NSNumber *newlongt=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.longitude] doubleValue]];
-			
-//			coord.latitude=newlat;
-//			coord.longitude=newlongt;
-			
-			// only plot unique coordinates to our map for performance reasons
-			if ( !last ||
-				(![coord.latitude  isEqualToNumber:last.latitude] &&
-				 ![coord.longitude isEqualToNumber:last.longitude] ) ){
-					
-				
-					// this is a bit convoluted but meets comaptibility for routeline drawing
-					SegmentVO *segment=[[SegmentVO alloc]init];
-					CSPointVO *point=[[CSPointVO alloc]init];
-					point.p=CGPointMake([coord.longitude doubleValue],[coord.latitude doubleValue]);
-					segment.pointsArray=@[point];
-					
-					BetterLog(@"%@",[coord longDescription]);
-					
-					[routeCoords addObject:segment];
-                
-					if ( first ){
-						
-						// add start point as a pin annotation
-						first = NO;
-						
-						minLat = coord.latitude;
-						maxLat = coord.latitude;
-						minLon = coord.longitude;
-						maxLon = coord.longitude;
-					}else{
-						
-						// update min/max values
-						if ( [minLat compare:coord.latitude] == NSOrderedDescending )
-							minLat = coord.latitude;
-						
-						if ( [maxLat compare:coord.latitude] == NSOrderedAscending )
-							maxLat = coord.latitude;
-						
-						if ( [minLon compare:coord.longitude] == NSOrderedDescending )
-							minLon = coord.longitude;
-						
-						if ( [maxLon compare:coord.longitude] == NSOrderedAscending )
-							maxLon = coord.longitude;
-					}
-					
-					//[mapView addAnnotation:pin];
-					count++;
-			}
-			
-			// update last coord pointer so we can cull redundant coords above
-			last = coord;
-		}
-		
-		_currentRoute.segments=routeCoords;
-        
-		[_routeLineView setNeedsDisplay];
-        
-        //add start/end pins
-        RMAnnotation *startPoint = [[RMAnnotation alloc] init];
-		SegmentVO *firstsegment=(SegmentVO*)[routeCoords firstObject];
-        startPoint.coordinate = firstsegment.segmentStart;
-        startPoint.title = @"Start";
-		startPoint.annotationIcon=[UIImage imageNamed:@"tripStart.png"];
-        [_mapView addAnnotation:startPoint];
-        RMAnnotation *endPoint = [[RMAnnotation alloc] init];
-		SegmentVO *lastsegment=(SegmentVO*)[routeCoords lastObject];
-        endPoint.coordinate = lastsegment.segmentStart;
-        endPoint.title = @"End";
-		endPoint.annotationIcon=[UIImage imageNamed:@"tripEnd.png"];
-        [_mapView addAnnotation:endPoint];
-        
-				
-		
-		NSLog(@"added %d unique GPS coordinates of %d to map", count, [sortedCoords count]);
-		
-		
-		// if we had at least 1 coord
-		if ( count ){
-			
-			[_currentRoute calculateNorthSouthValues];
-			
-			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
-			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
-			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:YES];
-			
-		}else{
-			[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
-		}
-        
-	}else{
-		[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
-	}
-    
-	if(_viewMode==HCSMapViewModeShow)
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
+	UIImage *image = [UIImage imageNamed:@"UINavigationBarBackIndicatorDefault.png"];
+	CGRect buttonFrame = CGRectMake(0, 0, 70,30);
 	
 	
+	UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
+	button.tintColor=[UIColor whiteColor];
+	[button addTarget:self action:@selector(didSelectBackButton) forControlEvents:UIControlEventTouchUpInside];
+	[button setTitle:title forState:UIControlStateNormal];
+	[button setImage:image forState:UIControlStateNormal];
+	[button setImageEdgeInsets:UIEdgeInsetsMake(0, -7, 0, 0)];
+	[button setTitleEdgeInsets:UIEdgeInsetsMake(0, 3, 0, 0)];
+	
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+	
+	return item;
 }
+
+
 
 
 

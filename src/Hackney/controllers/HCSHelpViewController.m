@@ -7,8 +7,12 @@
 //
 
 #import "HCSHelpViewController.h"
+#import "UIView+Additions.h"
 
 @interface HCSHelpViewController ()
+
+@property(nonatomic,weak) IBOutlet UIView				*contentView;
+@property(nonatomic,weak) IBOutlet UIScrollView         *scrollView;
 
 @end
 
@@ -65,11 +69,13 @@
 
 -(void)createPersistentUI{
 	
-	
 	if (self.presentingViewController) {
 		self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didSelectDismissbutton)];
 	}
 	
+	
+	[_scrollView addSubview:_contentView];
+	[_scrollView setContentSize:_contentView.size];
     
 }
 

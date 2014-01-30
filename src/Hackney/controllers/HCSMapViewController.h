@@ -13,7 +13,7 @@
 #import "TripPurposeDelegate.h"
 #import "RouteLineView.h"
 #import "SuperViewController.h"
-@class RMMapView;
+@class RMMapView,Trip;
 
 
 enum  {
@@ -27,12 +27,11 @@ typedef int HCSMapViewMode;
 {
 }
 
-@property (nonatomic, assign) id <TripPurposeDelegate> tripDelegate;
+@property (nonatomic, assign) id <TripPurposeDelegate>				tripDelegate;
 
-@property (nonatomic,assign)  HCSMapViewMode	viewMode;
+@property (nonatomic,assign)  HCSMapViewMode						viewMode;
 
-- (id)initWithTrip:(Trip *)trip;
-
+@property (nonatomic, strong) Trip									*trip;
 
 
 @end

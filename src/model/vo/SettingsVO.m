@@ -23,7 +23,7 @@
     self = [super init];
     if (self) {
         _imageSize=@"full";
-        _mapStyle = @"OpenStreetMap";
+        _mapStyle = @"OpenCycleMap";
         _routeUnit = @"miles";
 		_autoEndRoute=YES;
     }

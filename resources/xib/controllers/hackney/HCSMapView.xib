@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HCSMapViewController">
             <connections>
-                <outlet property="backButton" destination="c3M-9y-7YZ" id="iTZ-k5-WPI"/>
                 <outlet property="infoButton" destination="k3H-6l-85d" id="472-VQ-eva"/>
                 <outlet property="mapView" destination="T3f-zY-JH7" id="Uyo-Q8-lOX"/>
                 <outlet property="myNavigationItem" destination="nnO-Lk-YYz" id="YTN-5y-Ovg"/>
@@ -69,12 +68,6 @@
                     </textAttributes>
                     <items>
                         <navigationItem title="Title" id="nnO-Lk-YYz">
-                            <barButtonItem key="leftBarButtonItem" title="Done" style="plain" id="c3M-9y-7YZ">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="didSelectBackButton" destination="-1" id="SvF-My-ktD"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="sFj-xh-mjc">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
