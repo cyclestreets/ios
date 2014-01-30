@@ -222,10 +222,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 - (void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map{
 	
 	PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
-	
-	[self presentModalViewController:lv animated:YES];
 	PhotoMapVO *photoEntry = (PhotoMapVO *)annotation.userInfo;
-	[lv loadContentForEntry:photoEntry];
+	lv.dataProvider=photoEntry;
+	[self presentModalViewController:lv animated:YES];
+	
+	
 	
 }
 

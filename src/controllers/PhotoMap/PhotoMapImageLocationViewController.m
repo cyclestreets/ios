@@ -75,6 +75,7 @@
 	_viewContainer.alignMode=BUCenterAlignMode;
 	_viewContainer.fixedWidth=YES;
 	_viewContainer.paddingTop=20;
+	_viewContainer.paddingBottom=20;
 	_viewContainer.itemPadding=20;
 		
 	_imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
@@ -124,6 +125,9 @@
 -(void)createNonPersistentUI{
 	
 	_imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
+	
+	[self loadContentForEntry:_dataProvider];
+	
 	[_viewContainer refresh];
 	[self updateContentSize];
 	
@@ -306,7 +310,7 @@
 
 -(void)updateContentSize{
 	
-	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.height)];
+	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.viewHeight)];
 	
 }
 
