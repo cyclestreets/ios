@@ -508,6 +508,10 @@
 		284DB5BB189A5354002C5413 /* UINavigationBarBackIndicatorDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284DB5B9189A5354002C5413 /* UINavigationBarBackIndicatorDefault@2x.png */; };
 		284DB5BF189A57AC002C5413 /* UINavigationBarBackIndicatorDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 284DB5BE189A57AC002C5413 /* UINavigationBarBackIndicatorDefault.png */; };
 		284DB5C0189A57AC002C5413 /* UINavigationBarBackIndicatorDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 284DB5BE189A57AC002C5413 /* UINavigationBarBackIndicatorDefault.png */; };
+		284DB5C2189A718E002C5413 /* UIButtonBarCompose.png in Resources */ = {isa = PBXBuildFile; fileRef = 284DB5C1189A718E002C5413 /* UIButtonBarCompose.png */; };
+		284DB5C3189A718E002C5413 /* UIButtonBarCompose.png in Resources */ = {isa = PBXBuildFile; fileRef = 284DB5C1189A718E002C5413 /* UIButtonBarCompose.png */; };
+		284DB5C5189A71BB002C5413 /* UIButtonBarCompose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284DB5C4189A71BB002C5413 /* UIButtonBarCompose@2x.png */; };
+		284DB5C6189A71BB002C5413 /* UIButtonBarCompose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 284DB5C4189A71BB002C5413 /* UIButtonBarCompose@2x.png */; };
 		285352671678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
 		285352681678AF17007BC5CB /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 285352661678AF17007BC5CB /* BUIconActionSheet.m */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
@@ -1145,6 +1149,8 @@
 		284DB5B5189A4D84002C5413 /* cycle-counter.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "cycle-counter.jpg"; sourceTree = "<group>"; };
 		284DB5B9189A5354002C5413 /* UINavigationBarBackIndicatorDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UINavigationBarBackIndicatorDefault@2x.png"; sourceTree = "<group>"; };
 		284DB5BE189A57AC002C5413 /* UINavigationBarBackIndicatorDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UINavigationBarBackIndicatorDefault.png; sourceTree = "<group>"; };
+		284DB5C1189A718E002C5413 /* UIButtonBarCompose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarCompose.png; sourceTree = "<group>"; };
+		284DB5C4189A71BB002C5413 /* UIButtonBarCompose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarCompose@2x.png"; sourceTree = "<group>"; };
 		2851A0E8178BF2DE00F85DB6 /* CSLocationIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLocationIndicatorView.h; sourceTree = "<group>"; };
 		2851A0E9178BF2DE00F85DB6 /* CSLocationIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSLocationIndicatorView.m; sourceTree = "<group>"; };
 		285352651678AF17007BC5CB /* BUIconActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUIconActionSheet.h; sourceTree = "<group>"; };
@@ -2724,6 +2730,8 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				284DB5C4189A71BB002C5413 /* UIButtonBarCompose@2x.png */,
+				284DB5C1189A718E002C5413 /* UIButtonBarCompose.png */,
 				284DB5BE189A57AC002C5413 /* UINavigationBarBackIndicatorDefault.png */,
 				284DB5B9189A5354002C5413 /* UINavigationBarBackIndicatorDefault@2x.png */,
 				289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */,
@@ -3263,6 +3271,7 @@
 				2890F16014FEC30500FF8901 /* PhotoWizardView.xib in Resources */,
 				288FA2CC150C06F00068F0C1 /* PhotoWizardLocationView.xib in Resources */,
 				28B7813B150F3D0600503638 /* CSNavigationBar.xib in Resources */,
+				284DB5C5189A71BB002C5413 /* UIButtonBarCompose@2x.png in Resources */,
 				28B484F715261FAC00E406E1 /* popoverArrowDown.png in Resources */,
 				28B484F815261FAC00E406E1 /* popoverArrowDown@2x.png in Resources */,
 				28B484F915261FAC00E406E1 /* popoverArrowDownSimple.png in Resources */,
@@ -3336,6 +3345,7 @@
 				2811C4A5166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C1166CE68F00592560 /* UIActivitySMS.png in Resources */,
 				28851505166E0E20003536CA /* UIActivityCopy.png in Resources */,
+				284DB5C2189A718E002C5413 /* UIButtonBarCompose.png in Resources */,
 				2868D23C166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */,
 				2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */,
 				2868D240166E1C0600C0C153 /* UIActivityFacebook@2x.png in Resources */,
@@ -3410,6 +3420,7 @@
 				2834363215DD5DC300B00FD5 /* ItineraryCell.xib in Resources */,
 				2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */,
 				2834363D15DD5DC300B00FD5 /* SettingsView.xib in Resources */,
+				284DB5C3189A718E002C5413 /* UIButtonBarCompose.png in Resources */,
 				289AA2B5188EEB170097AA5A /* LoadingTile.png in Resources */,
 				2834364015DD5DC300B00FD5 /* donate.html in Resources */,
 				2834364115DD5DC300B00FD5 /* UIButtonBarArrowLeft@2x.png in Resources */,
@@ -3586,6 +3597,7 @@
 				2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				28AE47BC1896DA7700203C20 /* HCSUserDetailsView.xib in Resources */,
+				284DB5C6189A71BB002C5413 /* UIButtonBarCompose@2x.png in Resources */,
 				2811C49E166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C4A0166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A2166CCD5F00592560 /* UIActivityMail.png in Resources */,

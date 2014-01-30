@@ -253,7 +253,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 }
 
 
--(void)uploadSelectedTrip:(Trip*)trip completion:(CompletionBlock)success{
+-(void)uploadSelectedTrip:(Trip*)trip completion:(CompletionBlock)completionBlock{
 	
 	
 	// get array of coords
@@ -335,16 +335,32 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
         [[ApplicationJSONParser sharedInstance] parseDataForResponseData:(NSMutableData *)responseObject forRequestType:GPSUPLOAD success:^(NetResponse *result) {
             
 			
-			//TODO: parse response dict
+			NSDictionary *responseDict=result.dataProvider;
 			
-			trip.uploaded=[NSDate date];
+			BOOL responseState=YES;
 			
-			[[CoreDataStore mainStore]save];
+			switch (responseState) {
+				case YES:
+				{
+					trip.uploaded=[NSDate date];
+					
+					[[CoreDataStore mainStore]save];
+					
+					[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: SUCCESS}];
+				}
+					break;
+					
+				default:
+				{
+					
+					[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
+					
+				}
+					
+				break;
+			}
 			
-            
-			[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: SUCCESS}];
-			
-			success(YES);
+			completionBlock(responseState);
             
         } failure:^(NetResponse *result, NSError *error) {
 			
@@ -352,7 +368,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
             
 			[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
 			
-			success(NO);
+			completionBlock(NO);
             
         }];
         
@@ -362,7 +378,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		
         BetterLog(@"%@",error.debugDescription);
 		
-		success(NO);
+		completionBlock(NO);
         
     }];
 	
@@ -383,6 +399,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			[[HudManager sharedInstance]showHudWithType:HUDWindowTypeError withTitle:@"Failed Upload" andMessage:@"Try later"];
 		}
 		
+	}];
+	
+}
+
+-(void)uploadCurrentReording:(Trip*)trip{
+	
+	[self uploadSelectedTrip:trip completion:^(BOOL result) {
+		
+		BetterLog(@"Background trip upload result: %i",result);
+			
 	}];
 	
 }

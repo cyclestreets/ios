@@ -185,7 +185,7 @@
 		// filter coords by hAccuracy
 		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 6.0"];
 		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
-		NSLog(@"count of filtered coords = %d", [filteredCoords count]);
+		BetterLog(@"count of filtered coords = %d", [filteredCoords count]);
 		
 		// sort filtered coords by recorded date
 		NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
@@ -206,20 +206,9 @@
         NSMutableArray *routeCoords = [[NSMutableArray alloc]init];
 		
 		
-		//		NSNumberFormatter *doubleValueWithMaxTwoDecimalPlaces = [[NSNumberFormatter alloc] init];
-		//		[doubleValueWithMaxTwoDecimalPlaces setNumberStyle:NSNumberFormatterDecimalStyle];
-		//		[doubleValueWithMaxTwoDecimalPlaces setMaximumFractionDigits:4];
-		
 		self.currentRoute=[[RouteVO alloc]init];
         
 		for ( Coord *coord in sortedCoords ){
-			
-			
-			//			NSNumber *newlat=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.latitude] doubleValue]];
-			//			NSNumber *newlongt=[NSNumber numberWithDouble:[[doubleValueWithMaxTwoDecimalPlaces stringFromNumber:coord.longitude] doubleValue]];
-			
-			//			coord.latitude=newlat;
-			//			coord.longitude=newlongt;
 			
 			// only plot unique coordinates to our map for performance reasons
 			if ( !last ||
@@ -262,7 +251,6 @@
 							maxLon = coord.longitude;
 					}
 					
-					//[mapView addAnnotation:pin];
 					count++;
 				}
 			
@@ -274,23 +262,8 @@
         
 		[_routeLineView setNeedsDisplay];
         
-        //add start/end pins
-        RMAnnotation *startPoint = [[RMAnnotation alloc] init];
-		SegmentVO *firstsegment=(SegmentVO*)[routeCoords firstObject];
-        startPoint.coordinate = firstsegment.segmentStart;
-        startPoint.title = @"Start";
-		startPoint.annotationIcon=[UIImage imageNamed:@"tripStart.png"];
-        [_mapView addAnnotation:startPoint];
-        RMAnnotation *endPoint = [[RMAnnotation alloc] init];
-		SegmentVO *lastsegment=(SegmentVO*)[routeCoords lastObject];
-        endPoint.coordinate = lastsegment.segmentStart;
-        endPoint.title = @"End";
-		endPoint.annotationIcon=[UIImage imageNamed:@"tripEnd.png"];
-        [_mapView addAnnotation:endPoint];
         
-		
-		
-		NSLog(@"added %d unique GPS coordinates of %d to map", count, [sortedCoords count]);
+		BetterLog(@"added %d unique GPS coordinates of %d to map", count, [sortedCoords count]);
 		
 		
 		// if we had at least 1 coord
@@ -301,6 +274,21 @@
 			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
 			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
 			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:YES];
+			
+			
+			//add start/end pins
+			SegmentVO *firstsegment=(SegmentVO*)[routeCoords firstObject];
+			RMAnnotation *startPoint = [[RMAnnotation alloc] initWithMapView:_mapView coordinate:firstsegment.segmentStart andTitle:@"Start"];
+			startPoint.annotationIcon=[UIImage imageNamed:@"tripStart.png"];
+			startPoint.anchorPoint=CGPointMake(0.5,0.5);
+			[_mapView addAnnotation:startPoint];
+			
+			SegmentVO *lastsegment=(SegmentVO*)[routeCoords lastObject];
+			RMAnnotation *endPoint = [[RMAnnotation alloc] initWithMapView:_mapView coordinate:lastsegment.segmentStart andTitle:@"End"];
+			endPoint.annotationIcon=[UIImage imageNamed:@"tripEnd.png"];
+			endPoint.anchorPoint=CGPointMake(0.5,0.5);
+			[_mapView addAnnotation:endPoint];
+			
 			
 		}else{
 			[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
@@ -314,6 +302,10 @@
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
 	
 	
+	
+	
+	
+	
 }
 
 
@@ -322,9 +314,6 @@
 - (IBAction)infoAction:(UIButton*)sender
 {
 	
-	
-	
-	NSLog(@"infoAction");
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationDidStop:animationIDfinished:finished:context:)];
 	[UIView beginAnimations:nil context:nil];
@@ -421,7 +410,6 @@
 			CLLocationCoordinate2D coordinate = [segment segmentStart];
 			CGPoint pt = [mapView coordinateToPixel:coordinate];
 			p.p = pt;
-			p.isWalking=segment.isWalkingSection;
 			[points addObject:p];
 	}
 	
@@ -469,6 +457,7 @@
 
 
 #pragma mark RMMapView delegate methods
+
 
 
 -(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{

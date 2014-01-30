@@ -95,6 +95,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 -(void)removeCurrentRecordingTrip;
 
 -(void)uploadSelectedTrip:(Trip*)trip;
+-(void)uploadCurrentReording:(Trip*)trip;
 -(void)uploadAllUnsyncedTrips;
 
 @end

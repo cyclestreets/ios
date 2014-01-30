@@ -117,13 +117,16 @@ static int const kTagImage=	3;
 {
     [super viewDidLoad];
 	
+	self.selectedTrip = nil;
+	self.navigationController.navigationBarHidden = NO;
+	
     [self createPersistentUI];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-	 self.navigationController.navigationBarHidden = NO;
+	
     
     [self createNonPersistentUI];
     
@@ -139,47 +142,26 @@ static int const kTagImage=	3;
 	self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectActionButton)];
 	
 	
+	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
+	self.navigationItem.rightBarButtonItem.enabled=unsyncedCount>0;
 	
-	if ( [[TripManager sharedInstance] countZeroDistanceTrips] ){
+	if(unsyncedCount>1){
 		
-		UIAlertView *alert=[UIAlertView alertWithTitle:kZeroDistanceTitle message:kZeroDistanceMessage];
-		[alert setCancelButtonWithTitle:@"Cancel"	handler:nil];
-		[alert addButtonWithTitle:@"Recalculate" handler:^{
-			//TODO: we will not have thsi stupid thing, tripmamanger need a new method that takes a trip [tripManager recalculateTripDistances];
+		
+		UIAlertView *alert=[UIAlertView alertWithTitle:[NSString stringWithFormat:@"Found Unsynced Trip%@",unsyncedCount>1 ? @"s" : EMPTYSTRING] message:
+							[NSString stringWithFormat:@"You have %i saved trip%@ that %@ not yet been uploaded.",unsyncedCount,unsyncedCount>1 ? @"s" : EMPTYSTRING, unsyncedCount>1 ? @"have" : @"has"]];
+		[alert addButtonWithTitle:@"OK" handler:^{
+			
 		}];
 		[alert show];
 		
-		
-	}else{
-		
-		int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
-		
-		if(unsyncedCount>0){
-			
-			
-			UIAlertView *alert=[UIAlertView alertWithTitle:[NSString stringWithFormat:@"Found Unsynced Trip%@",unsyncedCount>1 ? @"s" : EMPTYSTRING] message:
-								[NSString stringWithFormat:@"You have %i saved trip%@ that %@ not yet been uploaded.",unsyncedCount,unsyncedCount>1 ? @"s" : EMPTYSTRING, unsyncedCount>1 ? @"have" : @"has"]];
-			[alert addButtonWithTitle:@"OK" handler:^{
-				
-			}];
-			[alert show];
-			
-		}
-			
-		self.navigationItem.rightBarButtonItem.enabled=unsyncedCount>0;
-		
 	}
-		
-	// no trip selection by default
-	self.selectedTrip = nil;
-    
-    
+	
 }
 
 -(void)createNonPersistentUI{
     
 	[self refreshUIFromDataProvider];
-    
     
 }
 
@@ -277,9 +259,11 @@ static int const kTagImage=	3;
 	
 	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
 	
-	UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:[NSString stringWithFormat:@"You have %i un-synced trips, do you wish to upload them all now. This may take some time.",unsyncedCount]];
+	UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:[NSString stringWithFormat:@"You have %i un-synced trip%@, do you wish to upload %@ now. This may take a little time.",
+					unsyncedCount,unsyncedCount>1 ? @"s" : EMPTYSTRING,
+					unsyncedCount>1 ? @"them all":@"this"]];
 	
-	[actionSheet addButtonWithTitle:@"Upload All" handler:^{
+	[actionSheet addButtonWithTitle:[NSString stringWithFormat:@"Upload%@",unsyncedCount>1 ? @" All":EMPTYSTRING] handler:^{
 		[[TripManager sharedInstance] uploadAllUnsyncedTrips];
 	}];
 	

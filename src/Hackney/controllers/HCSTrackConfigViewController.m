@@ -243,7 +243,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	
 	UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 33, 33)];
-	[button setImage:[UIImage imageNamed:@"UIButtonBarCameraSmall.png"] forState:UIControlStateNormal];
+	[button setImage:[UIImage imageNamed:@"UIButtonBarCompose.png"] forState:UIControlStateNormal];
+	//[button setTitle:@"Report" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(didSelectPhotoWizardButton:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
 	[self.navigationItem setRightBarButtonItem:barbutton animated:NO];
@@ -302,6 +303,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 #pragma mark - RMMap delegate
+
+
+-(void)singleTapOnMap:(RMMapView *)map at:(CGPoint)point{
+	
+	CLLocationCoordinate2D coordinate=[_mapView pixelToCoordinate:point];
+	
+}
 
 
 -(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{

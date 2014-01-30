@@ -83,12 +83,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
-	[[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xFFFFFF)];
-	[[UINavigationBar appearance] setBarTintColor: UIColorFromRGB(0x326513)];
-	[[UITabBar appearance] setTintColor:UIColorFromRGB(0x509720 )];
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	
-	[[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeTextColor:UIColorFromRGB(0xFFFFFF),UITextAttributeFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]}];
 	
 	self.tabBarController = [[UITabBarController alloc] init];
 	self.window.rootViewController = self.tabBarController;

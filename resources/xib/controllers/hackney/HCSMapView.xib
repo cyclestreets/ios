@@ -76,6 +76,9 @@
                             </barButtonItem>
                         </navigationItem>
                     </items>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="mapNavigationBarTitle"/>
+                    </userDefinedRuntimeAttributes>
                 </navigationBar>
             </subviews>
             <color key="backgroundColor" red="0.1960784314" green="0.39607843139999999" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>

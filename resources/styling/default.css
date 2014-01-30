@@ -8,7 +8,25 @@ pixate-config {
 
 /* UIKit Classes */
 
+navigation-bar{
 
+    -ios-tint-color:#FFFFFF;
+    background-color: #326513;
+}
+
+navigation-bar title{
+
+    font-family     : Helvetica Neue;
+    font-weight     : thin;
+    color           :#FFFFFF;
+    font-size       : 22px;
+
+}
+
+tab-bar{
+    -ios-tint-color:#509720;
+
+}
 
 
 /* BU Classes */
@@ -46,6 +64,18 @@ pixate-config {
 
 
 /* Routes view */
+
+
+
+
+/* map view */
+
+#mapNavigationBarTitle{
+    font-family     : Helvetica Neue;
+    font-weight     : thin;
+    color           :#FFFFFF;
+    font-size       : 16px;
+}
 
 
 
