@@ -18,7 +18,7 @@
 #import "UserAccount.h"
 #import "AppConfigManager.h"
 #import "PhotoManager.h"
-
+#import "HCBackgroundLocationManager.h"
 #import "TripManager.h"
 
 @interface StartupManager(Private)
@@ -108,6 +108,8 @@
 	// no fatal startup errors for DataSourceManager
 	
 	[PhotoManager sharedInstance];
+	
+	[HCBackgroundLocationManager sharedInstance];
 	
 	[TripManager sharedInstance];
 	

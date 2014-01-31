@@ -10,6 +10,12 @@
 
 #import "User.h"
 
+#import <CoreLocation/CoreLocation.h>
+
+@interface UserManager()<CLLocationManagerDelegate>
+
+
+@end
 
 @implementation UserManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(UserManager);
@@ -48,5 +54,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserManager);
 -(BOOL)hasUser{
 	return _user!=nil;
 }
+
+
+
 
 @end

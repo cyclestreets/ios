@@ -126,7 +126,7 @@ static int const kTagImage=	3;
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-	
+	self.navigationController.navigationBarHidden = NO;
     
     [self createNonPersistentUI];
     

@@ -856,6 +856,8 @@
 		28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
 		28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
+		28CF9DEB189C06CE005F28EE /* HCBackgroundLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CF9DEA189C06CE005F28EE /* HCBackgroundLocationManager.m */; };
+		28CF9DEC189C06CE005F28EE /* HCBackgroundLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CF9DEA189C06CE005F28EE /* HCBackgroundLocationManager.m */; };
 		28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
 		28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */; };
 		28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */; };
@@ -1518,6 +1520,8 @@
 		28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryMenuViewController.m; sourceTree = "<group>"; };
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
 		28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_userphotomap@2x.png"; sourceTree = "<group>"; };
+		28CF9DE9189C06CE005F28EE /* HCBackgroundLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCBackgroundLocationManager.h; sourceTree = "<group>"; };
+		28CF9DEA189C06CE005F28EE /* HCBackgroundLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCBackgroundLocationManager.m; sourceTree = "<group>"; };
 		28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_left@2x.png"; sourceTree = "<group>"; };
 		28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_right@2x.png"; sourceTree = "<group>"; };
 		28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_straight_on@2x.png"; sourceTree = "<group>"; };
@@ -2169,6 +2173,8 @@
 				287050DC188FC432004CD922 /* TripManager.m */,
 				28AE47C11896E95000203C20 /* UserManager.h */,
 				28AE47C21896E95000203C20 /* UserManager.m */,
+				28CF9DE9189C06CE005F28EE /* HCBackgroundLocationManager.h */,
+				28CF9DEA189C06CE005F28EE /* HCBackgroundLocationManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -3788,6 +3794,7 @@
 				280E2489144D82850021CDFA /* RegexKitLite.m in Sources */,
 				280E248A144D82850021CDFA /* SFHFKeychainUtils.m in Sources */,
 				280E248B144D82850021CDFA /* NSDataAdditions.m in Sources */,
+				28CF9DEB189C06CE005F28EE /* HCBackgroundLocationManager.m in Sources */,
 				280E248C144D82850021CDFA /* TBXML.m in Sources */,
 				280E2490144D82850021CDFA /* CDataScanner.m in Sources */,
 				280E2491144D82850021CDFA /* CDataScanner_Extensions.m in Sources */,
@@ -3969,6 +3976,7 @@
 				2834372815DD5DC300B00FD5 /* RegexKitLite.m in Sources */,
 				2834372915DD5DC300B00FD5 /* SFHFKeychainUtils.m in Sources */,
 				2834372A15DD5DC300B00FD5 /* NSDataAdditions.m in Sources */,
+				28CF9DEC189C06CE005F28EE /* HCBackgroundLocationManager.m in Sources */,
 				2834372B15DD5DC300B00FD5 /* TBXML.m in Sources */,
 				2834372C15DD5DC300B00FD5 /* CDataScanner.m in Sources */,
 				2834372D15DD5DC300B00FD5 /* CDataScanner_Extensions.m in Sources */,

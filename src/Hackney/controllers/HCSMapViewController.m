@@ -70,6 +70,7 @@
 	
 	[notifications addObject:RESPONSE_GPSUPLOAD];
 	[notifications addObject:MAPSTYLECHANGED];
+	[notifications addObject:MAPUNITCHANGED];
 	
 	[super listNotificationInterests];
 	
@@ -82,21 +83,32 @@
 	NSString *name=notification.name;
 	
 	if([name isEqualToString:RESPONSE_GPSUPLOAD]){
-		
 		[self refreshUIFromDataProvider:notification.object];
-		
 	}
+	
 	if([name isEqualToString:MAPSTYLECHANGED]){
 		[self didNotificationMapStyleChanged];
+	}
+	
+	if([name isEqualToString:MAPUNITCHANGED]){
+		[self didNotificationMapUnitChanged];
 	}
 	
 }
 
 
+#pragma mark - Notification methods
 
 - (void) didNotificationMapStyleChanged {
 	self.mapView.tileSource = [CycleStreets tileSource];
 	//_attributionLabel.text = [MapViewController mapAttribution];
+}
+
+
+- (void) didNotificationMapUnitChanged {
+	
+	_myNavigationItem.title = [NSString stringWithFormat:@"%@ ~ %@", [_trip lengthString], [_trip speedString] ];
+	
 }
 
 
@@ -115,7 +127,7 @@
 }
 
 
-
+#pragma mark - View
 
 
 - (void)viewDidLoad
@@ -130,7 +142,7 @@
 	_routeLineView.pointListProvider=self;
 	
     self.navigationController.navigationBarHidden = YES;
-	self.navigationController.interactivePopGestureRecognizer.delegate = self;
+	
 	
     
 	if (_trip )
@@ -143,8 +155,6 @@
 			[dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 		}
 		
-		
-		double mph = ( [_trip.distance doubleValue] / 1609.344 ) / ( [_trip.duration doubleValue] / 3600. );
 		
 		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
 									_trip.timeString,
@@ -183,7 +193,7 @@
 		
 		
 		// filter coords by hAccuracy
-		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 6.0"];
+		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 100.0"];
 		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
 		BetterLog(@"count of filtered coords = %d", [filteredCoords count]);
 		

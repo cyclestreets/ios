@@ -15,7 +15,7 @@
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
 #import "UIActionSheet+BlocksKit.h"
-
+#import "HCBackgroundLocationManager.h"
 #import "HCSMapViewController.h"
 #import "PickerViewController.h"
 #import "HCSUserDetailsViewController.h"
@@ -32,7 +32,7 @@
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
-@interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate>
+@interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,HCBackgroundLocationManagerDelegate>
 
 
 // hackney
@@ -166,7 +166,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	if ( _isRecordingTrack ){
 		
-		self.currentDistance = [_tripManager addCoord:_currentLocation];
+		[self didReceiveUpdatedLocation:_currentLocation];
 		
 		[self updateUIForDistance];
 		
@@ -176,6 +176,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 }
 
+
+#pragma mark - HCBackgroundLocationManagerDelegate method
+
+
+-(void)didReceiveUpdatedLocation:(CLLocation*)location{
+	
+	BetterLog(@"%@",location);
+	
+	[_tripManager addCoord:location];
+	
+}
 
 
 -(void)updateUIForDistance{
@@ -248,6 +259,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
     [super viewDidLoad];
 	
 	self.tripManager=[TripManager sharedInstance];
+	
+	[HCBackgroundLocationManager sharedInstance].delegate=self;
 
 	[self hasUserInfoBeenSaved];
 	
@@ -269,6 +282,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[RMMapView class];
 	[_mapView setDelegate:self];
 	_mapView.showsUserLocation=YES;
+	_mapView.zoom=15;
 	_mapView.tileSource=[CycleStreets tileSource];
 	
 	

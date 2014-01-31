@@ -89,7 +89,7 @@
 		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
 	}else {
-		return [NSString stringWithFormat:@"%@ km/h", kmSpeed];
+		return [NSString stringWithFormat:@"%.2f km/h", [kmSpeed  floatValue]];
 	}
 }
 

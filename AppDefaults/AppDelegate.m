@@ -96,6 +96,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_startupmanager.delegate=self;
 	[_startupmanager doStartupSequence];
 	
+	/*
+	if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
+		[self.locationManager startMonitoringSignificantLocationChanges];
+	}
+	*/
 	
 	return YES;
 }
