@@ -175,11 +175,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 // One cavaet is that during dev, we can tweak map filtering as the points will have been culled.
 -(void)optimiseTrip:(Trip*)trip{
 	
-	
+	// remove inaccurate coords
 	NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 10"];
 	NSArray		*filteredCoords		= [[trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
 	
-	// TODO: why would these not be sorted by timestamp??
+	// ensure correct order
 	NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
 	NSArray		*sortDescriptors	= [NSArray arrayWithObjects:sortByDate, nil];
 	NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
@@ -187,6 +187,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	Coord *last = nil;
 	NSMutableArray *optimisedCoords = [[NSMutableArray alloc]init];
 	
+	// de-dupe coordinates
 	for ( Coord *coord in sortedCoords ){
 		
 		if ( !last ||
