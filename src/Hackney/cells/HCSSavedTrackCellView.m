@@ -60,8 +60,6 @@
 	
 	UIImage	*image;
 	
-	//TODO: Support current recording trip state
-	
 	if(_dataProvider.uploaded){
 		
 		int index = [TripPurpose getPurposeIndex:_dataProvider.purpose];

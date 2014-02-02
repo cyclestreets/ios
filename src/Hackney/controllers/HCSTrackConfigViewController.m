@@ -212,12 +212,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 -(void)updateUIForSpeed{
 	
 	if ( _isRecordingTrack && _currentLocation.speed >= 0 ){
+		
+		double kmh=(_currentLocation.speed*TIME_HOUR)/1000;
 	
 		if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
-			NSInteger mileSpeed = [[NSNumber numberWithDouble:( _currentLocation.speed / 1.6)] integerValue];
-			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2d mph", mileSpeed];
+			double mileSpeed = kmh/1.609;
+			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2.0f mph", mileSpeed];
 		}else {
-			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2f km/h", _currentLocation.speed];
+			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2.1f km/h", kmh];
 		}
 	}else{
 		_trackSpeedLabel.text = [NSString stringWithFormat:@"0.0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"mph" : @"kmh"];

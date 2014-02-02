@@ -9,7 +9,7 @@
 #import "Trip.h"
 #import "Coord.h"
 #import "User.h"
-
+#import "GlobalUtilities.h"
 #import "SettingsManager.h"
 
 #import <CoreLocation/CoreLocation.h>
@@ -87,21 +87,21 @@
 	}
 	
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
-		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
-		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
+		double mileSpeed=[kmSpeed doubleValue]/1.609;
+		return [NSString stringWithFormat:@"%2.0f mph", mileSpeed];
 	}else {
-		return [NSString stringWithFormat:@"%.2f km/h", [kmSpeed  floatValue]];
+		return [NSString stringWithFormat:@"%2.1f km/h", [kmSpeed  floatValue]];
 	}
 }
 
 
 -(NSString*)timeString{
 	
-	NSUInteger h = [[self duration]intValue] / 3600;
+	NSUInteger h = [[self duration]intValue] / TIME_HOUR;
 	NSUInteger m = ([[self duration]intValue] / 60) % 60;
 	NSUInteger s = [[self duration]intValue] % 60;
 	
-	if ([[self duration]intValue]>3600) {
+	if ([[self duration]intValue]>TIME_HOUR) {
 		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
 	}else {
 		return [NSString stringWithFormat:@"%02d:%02d", m,s];

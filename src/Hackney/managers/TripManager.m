@@ -33,6 +33,8 @@
 @property (nonatomic,strong,readwrite)  Trip									*selectedTrip;
 
 @property (nonatomic,strong)  NSMutableArray									*recordingTripCoords;
+@property (nonatomic,assign) CLLocationDistance									recordedDistance;
+
 
 @property (nonatomic,strong)  NSNumberFormatter									*coordDecimalPlaceFormatter;
 
@@ -76,6 +78,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		// Create and configure a new instance of the Trip entity
 		self.currentRecordingTrip=[Trip create];
 		[_currentRecordingTrip setStart:[NSDate date]];
+		
+		self.recordedDistance=0.0;
 		
 		[[CoreDataStore mainStore] save];
 		
@@ -162,6 +166,44 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:HCSDISPLAYTRIPMAP object:nil];
+}
+
+
+// optimises the trip data, removes duplicates within range and removes low accuracy coords, as on the mapview
+// by doin gthis here we ensure uplodaed and saved data match
+// also it means when drawing the map, we don tneed to preprocess the points.
+// One cavaet is that during dev, we can tweak map filtering as the points will have been culled.
+-(void)optimiseTrip:(Trip*)trip{
+	
+	
+	NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 10"];
+	NSArray		*filteredCoords		= [[trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
+	
+	// TODO: why would these not be sorted by timestamp??
+	NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
+	NSArray		*sortDescriptors	= [NSArray arrayWithObjects:sortByDate, nil];
+	NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
+	
+	Coord *last = nil;
+	NSMutableArray *optimisedCoords = [[NSMutableArray alloc]init];
+	
+	for ( Coord *coord in sortedCoords ){
+		
+		if ( !last ||
+			(![coord.latitude  isEqualToNumber:last.latitude] &&
+			 ![coord.longitude isEqualToNumber:last.longitude] ) ){
+				
+				[optimisedCoords addObject:coord];
+	
+			}
+	}
+	
+	NSSet *newSet=[NSSet setWithArray:optimisedCoords];
+	
+	trip.coords=newSet;
+	
+	[[CoreDataStore mainStore] save];
+	
 }
 
 
@@ -279,14 +321,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-	NSString *fullURL=[NSString stringWithFormat:@"https://api.cyclestreets.net/v2/gpstrack.add?key=%@",[[CycleStreets sharedInstance] APIKey]];
+	NSString *fullURL=[NSString stringWithFormat:@"https://api.cyclestreets.net/v2/gpstracks.add?key=%@",[[CycleStreets sharedInstance] APIKey]];
 	
     [manager POST:fullURL parameters:postVars success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		
         
         [[ApplicationJSONParser sharedInstance] parseDataForResponseData:(NSMutableData *)responseObject forRequestType:GPSUPLOAD success:^(NetResponse *result) {
             
-			
+			//TODO: awaiting fix server side
 			NSDictionary *responseDict=result.dataProvider;
 			
 			BOOL responseState=YES;
@@ -508,8 +550,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	[_currentRecordingTrip addCoordsObject:coord];
 	
-	CLLocationDistance distance = 0.0;
-	
 	// check to see if the coords array is empty
 	if ( [_recordingTripCoords count] == 0 )
 	{
@@ -521,8 +561,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	{
 		// update distance estimate by tabulating deltaDist with a low tolerance for noise
 		Coord *prev  = [_recordingTripCoords objectAtIndex:0];
-		distance	+= [self distanceFrom:prev to:coord realTime:YES];
-		[_currentRecordingTrip setDistance:[NSNumber numberWithDouble:distance]];
+		_recordedDistance	+= [self distanceFrom:prev to:coord realTime:YES];
+		[_currentRecordingTrip setDistance:[NSNumber numberWithDouble:_recordedDistance]];
 		
 		// update duration
 		Coord *first	= [_recordingTripCoords lastObject];
@@ -536,7 +576,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	[[CoreDataStore mainStore]save];
 	
-	return distance;
+	return _recordedDistance;
 }
 
 
