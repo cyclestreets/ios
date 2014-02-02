@@ -98,12 +98,20 @@ static int const kTagImage=	3;
 		[self showViewOverlayForType:kViewOverlayTypeNone show:NO withMessage:@"" withIcon:@""];
 	}
 	
-	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
-	self.navigationItem.rightBarButtonItem.enabled=unsyncedCount>0;
+	[self updateUploaddUI];
 	
 	self.dataProvider=tripArray;
 	[self.tableView reloadData];
 	
+}
+
+
+-(int)updateUploaddUI{
+	
+	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
+	self.navigationItem.rightBarButtonItem.enabled=unsyncedCount>0;
+	
+	return unsyncedCount;
 }
 
 
@@ -142,8 +150,7 @@ static int const kTagImage=	3;
 	self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectActionButton)];
 	
 	
-	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
-	self.navigationItem.rightBarButtonItem.enabled=unsyncedCount>0;
+	int unsyncedCount=[self updateUploaddUI];
 	
 	if(unsyncedCount>1){
 		
@@ -224,6 +231,8 @@ static int const kTagImage=	3;
         // Update the array and table view.
         [_dataProvider removeObjectAtIndex:indexPath.row];
         [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+		
+		[self updateUploaddUI];
 		
     }
 	

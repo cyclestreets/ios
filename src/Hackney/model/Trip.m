@@ -77,12 +77,13 @@
 
 -(NSString*)speedString{
 	
+	
 	NSNumber *kmSpeed=[NSNumber numberWithInt:0];
 	
 	if([self.duration intValue]==0 || [self.distance intValue]==0){
 		// nothing
 	}else{
-		kmSpeed = [NSNumber numberWithFloat:([self.distance floatValue]/[self.duration floatValue])];
+		kmSpeed = [NSNumber numberWithFloat:(([self.distance floatValue]/1000)/([self.duration floatValue]/ 3600))];
 	}
 	
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES) {

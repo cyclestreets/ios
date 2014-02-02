@@ -64,6 +64,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 }
 
+
+#pragma maek - Trip creation and deletetion
+
 - (Trip*)createTrip
 {
 	NSLog(@"createTrip");
@@ -116,69 +119,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 
 
-- (CLLocationDistance)getDistanceEstimate
-{
-	return [self calculateTripDistance:_currentRecordingTrip];
-}
 
 
-// converts UserVo to dictionary priot to sending to server as JSON
-- (NSDictionary*)encodeUserData
-{
-	
-	NSArray *users=[User allInStore:[CoreDataStore mainStore]];
-	NSMutableDictionary *userDict=[NSMutableDictionary dictionary];
-	
-	if ( users.count>0 ){
-		
-		User *user = [users firstObject];
-		
-        NSString *appVersion = [NSString stringWithFormat:@"%@ (%@) on iOS %@",
-                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
-                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"],
-                                [[UIDevice currentDevice] systemVersion]];
-        
-		
-		if ( user != nil ){
-			
-			// initialize text fields to saved personal info
-			[userDict setValue:user.age             forKey:@"age"];
-			[userDict setValue:user.gender          forKey:@"gender"];
-			
-			[userDict setValue:appVersion           forKey:@"app_version"];
-			
-			/*
-			[userDict setValue:user.email           forKey:@"email"];
-			[userDict setValue:user.homeZIP         forKey:@"homeZIP"];
-			[userDict setValue:user.workZIP         forKey:@"workZIP"];
-			[userDict setValue:user.schoolZIP       forKey:@"schoolZIP"];
-			[userDict setValue:user.cyclingFreq     forKey:@"cyclingFreq"];
-            [userDict setValue:user.ethnicity       forKey:@"ethnicity"];
-            [userDict setValue:user.income          forKey:@"income"];
-            [userDict setValue:user.rider_type      forKey:@"rider_type"];
-            [userDict setValue:user.rider_history	forKey:@"rider_history"];
-            */
-			 
-		}else{
-			NSLog(@"TripManager fetch user FAIL");
-		}
-			
-		
-	}else{
-		NSLog(@"TripManager WARNING no saved user data to encode");
-	}
-		
-	
-    return userDict;
-}
 
-
+#pragma maek - Trip note saving
 // called if user adds note and press save in survey views
 - (void)saveNotes:(NSString*)notes{
 	if ( _currentRecordingTrip && notes )
 		[_currentRecordingTrip setNotes:notes];
 }
 
+
+#pragma mark - Trip saving
 
 // Saves current Recording Trip to CD
 - (void)saveTrip
@@ -208,7 +160,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	[self uploadSelectedTrip:_currentRecordingTrip];
 	
-	//TODO:  send notification to display Map VC for current recording trip ie displayUploadedTripMap
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:HCSDISPLAYTRIPMAP object:nil];
 }
 
@@ -383,7 +335,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     }];
 	
 	
-	
 }
 
 
@@ -415,14 +366,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 
 
-- (NSInteger)getPurposeIndex
+// converts UserVo to dictionary priot to sending to server as JSON
+- (NSDictionary*)encodeUserData
 {
-	//NSLog(@"%d", purposeIndex);
-	return 0;
+	
+	NSArray *users=[User allInStore:[CoreDataStore mainStore]];
+	NSMutableDictionary *userDict=[NSMutableDictionary dictionary];
+	
+	if ( users.count>0 ){
+		
+		User *user = [users firstObject];
+		
+        NSString *appVersion = [NSString stringWithFormat:@"%@ (%@) on iOS %@",
+                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
+                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"],
+                                [[UIDevice currentDevice] systemVersion]];
+        
+		
+		if ( user != nil ){
+			
+			// initialize text fields to saved personal info
+			[userDict setValue:user.age             forKey:@"age"];
+			[userDict setValue:user.gender          forKey:@"gender"];
+			
+			[userDict setValue:appVersion           forKey:@"app_version"];
+			
+		}else{
+			NSLog(@"TripManager fetch user FAIL");
+		}
+		
+		
+	}else{
+		NSLog(@"TripManager WARNING no saved user data to encode");
+	}
+	
+	
+    return userDict;
 }
 
 
-#pragma mark TripPurposeDelegate methods
+
+
+#pragma mark - TripPurposeDelegate methods
 
 
 - (NSString *)getPurposeString:(unsigned int)index
@@ -436,117 +421,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	NSString *purpose = [self getPurposeString:index];
 	NSLog(@"setPurpose: %@", purpose);
 	
-	if ( _currentRecordingTrip )
-	{
+	if ( _currentRecordingTrip ){
+		
 		[_currentRecordingTrip setPurpose:purpose];
 		
 		[[CoreDataStore mainStore]save];
 	}
-	else
-		[self createTrip:index];
+	
 
 	return purpose;
 }
 
-
-
-
-
-// DEPRECATED?
-- (void)createTrip:(unsigned int)index
-{
-	NSString *purpose = [self getPurposeString:index];
-	NSLog(@"createTrip: %@", purpose);
-	
-	
-	self.currentRecordingTrip=(Trip*)[[CoreDataStore mainStore] createNewEntityByName:@"Trip"];
-	[_currentRecordingTrip setPurpose:purpose];
-	[_currentRecordingTrip setStart:[NSDate date]];
-	_currentRecordingTrip.duration=0;
-	_currentRecordingTrip.distance=0;
-	
-	[[CoreDataStore mainStore] save];
-	
-}
-
-
-
-
-
-//- (void)promptForTripNotes
-//{
-//	tripNotes = [[UIAlertView alloc] initWithTitle:kTripNotesTitle
-//										   message:@"\n\n\n"
-//										  delegate:self
-//								 cancelButtonTitle:@"Skip"
-//								 otherButtonTitles:@"OK", nil];
-//
-//	[self createTripNotesText];
-//	[tripNotes addSubview:tripNotesText];
-//	[tripNotes show];
-//    [self.tripNotesText becomeFirstResponder];
-//	[tripNotes release];
-//    NSLog(@"prompt for notes");
-//}
-//
-//
-//#pragma mark UIAlertViewDelegate methods
-//
-//
-//- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-//{
-//	// determine if we're processing tripNotes or saving alert
-//	if ( alertView == tripNotes )
-//	{
-//		NSLog(@"tripNotes didDismissWithButtonIndex: %d", buttonIndex);
-//		
-//		// save trip notes
-//		if ( buttonIndex == 1 )
-//		{
-//			if ( [tripNotesText.text compare:kTripNotesPlaceholder] != NSOrderedSame )
-//			{
-//				NSLog(@"saving trip notes: %@", tripNotesText.text);
-//				[self saveNotes:tripNotesText.text];
-//			}
-//		}
-//		
-//		// save / upload trip
-//        [self saveTrip];
-//
-//	}
-//	
-//	/*
-//	else // alertView == saving
-//	{
-//		NSLog(@"saving didDismissWithButtonIndex: %d", buttonIndex);
-//		
-//		// reset button states
-//		startButton.enabled = NO;
-//		saveButton.enabled = NO;
-//		lockButton.hidden = YES;
-//		
-//		// reset trip, reminder managers
-//		NSManagedObjectContext *context = tripManager.managedObjectContext;
-//		Trip *trip = tripManager.trip;
-//		[self initTripManager:[[TripManager alloc] initWithManagedObjectContext:context]];
-//		tripManager.dirty = YES;
-//		
-//		if ( reminderManager )
-//		{
-//			[reminderManager release];
-//			reminderManager = nil;
-//		}
-//		
-//		[self resetCounter];
-//		[self resetPurpose];
-//		
-//		// load map view of saved trip
-//		MapViewController *mvc = [[MapViewController alloc] initWithTrip:trip];
-//		[[self navigationController] pushViewController:mvc animated:YES];
-//		[mvc release];
-//	}
-//	 */
-//}
 
 
 
@@ -581,24 +466,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	return trips.count;
 }
 
-- (void)loadMostRecetUnSavedTrip
-{
-	
-	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved = nil"] orderBy:@"start" ascending:NO];
-	
-	if(trips.count==0){
-		
-		NSLog(@"no UNSAVED trips");
-		
-	}else{
-		
-		// weird shit with loading a trip my self
-		// [self loadTrip:[mutableFetchResults objectAtIndex:0]]
-		
-	}
-	
-}
-
+// array of un uploaded trips
 - (NSArray*)arrayofAllUnsyncedTrips{
 	
 	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved != nil AND uploaded = nil"] orderBy:@"start" ascending:NO];
@@ -607,7 +475,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 }
 
 
-#pragma mark Trip helper methods
+
+
+#pragma mark - Trip recording methods
 
 // Create and configure a new instance of the Coord entity
 - (CLLocationDistance)addCoord:(CLLocation *)location {
@@ -774,6 +644,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 
 @end
+
+
+#pragma mark - TripPurpose
 
 
 @implementation TripPurpose

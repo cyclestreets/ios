@@ -49,8 +49,7 @@
 @class Trip;
 
 
-@interface TripManager : NSObject
-< TripPurposeDelegate,UIAlertViewDelegate,UITextViewDelegate>
+@interface TripManager : NSObject < TripPurposeDelegate,UIAlertViewDelegate,UITextViewDelegate>
 {
 	
 }
@@ -83,7 +82,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 - (int)countUnSyncedTrips;
 - (int)countZeroDistanceTrips;
 
-- (void)loadMostRecetUnSavedTrip;
+
 - (int)recalculateTripDistances;
 - (CLLocationDistance)calculateTripDistance:(Trip*)_trip;
 

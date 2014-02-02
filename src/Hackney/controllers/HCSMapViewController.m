@@ -193,7 +193,7 @@
 		
 		
 		// filter coords by hAccuracy
-		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 100.0"];
+		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 10"];
 		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
 		BetterLog(@"count of filtered coords = %d", [filteredCoords count]);
 		

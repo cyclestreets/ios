@@ -11,7 +11,6 @@
 #import "UserLocationManager.h"
 #import "RMMapView.h"
 #import "CycleStreets.h"
-#import "SVPulsingAnnotationView.h"
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
 #import "UIActionSheet+BlocksKit.h"
@@ -32,7 +31,7 @@
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
-@interface HCSTrackConfigViewController ()<GPSLocationProvider,RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,HCBackgroundLocationManagerDelegate>
+@interface HCSTrackConfigViewController ()<RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,HCBackgroundLocationManagerDelegate>
 
 
 // hackney
@@ -57,7 +56,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @property (nonatomic, strong) CLLocation								* lastLocation;// last location
 @property (nonatomic, strong) CLLocation								* currentLocation;
 
-@property (nonatomic, strong) SVPulsingAnnotationView					* gpsLocationView;
 
 
 // opration
@@ -209,6 +207,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 }
 
+//TODO: for map & here, speed is m/s this conversion seems wrong
 
 -(void)updateUIForSpeed{
 	
@@ -366,10 +365,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 - (void) afterMapChanged: (RMMapView*) map {
-	
-	if(_gpsLocationView.superview!=nil)
-		[_gpsLocationView updateToLocation];
-	
+		
 }
 
 
@@ -577,26 +573,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
-#pragma mark - Location Provider
 
-
-- (float)getX {
-	CGPoint p = [self.mapView coordinateToPixel:self.currentLocation.coordinate];
-	return p.x;
-}
-
-- (float)getY {
-	CGPoint p = [self.mapView coordinateToPixel:self.currentLocation.coordinate];
-	return p.y;
-}
-
-- (float)getRadius {
-	
-	double metresPerPixel = [_mapView metersPerPixel];
-	float locationRadius=(self.currentLocation.horizontalAccuracy / metresPerPixel);
-	
-	return MAX(locationRadius, 40.0f);
-}
 
 
 

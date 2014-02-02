@@ -89,6 +89,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
 			self.locationManager.distanceFilter = 5; // specified in meters
 			self.locationManager.activityType=CLActivityTypeFitness;
 			self.locationManager.pausesLocationUpdatesAutomatically = NO;
+			
+			[self.locationManager startUpdatingLocation];
 		}
 		
 		self.locationHistory = [NSMutableArray arrayWithCapacity:kNumLocationHistoriesToKeep];
