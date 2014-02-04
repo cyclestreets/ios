@@ -23,10 +23,13 @@
 #import "TripManager.h"
 #import "HCSMapViewController.h"
 
+#define MAXCHARALLOWED 255
+
 @interface TripDetailViewController ()
 
 
-@property (nonatomic, strong) IBOutlet UITextView *detailTextView;
+@property (nonatomic, strong) IBOutlet UITextView		*detailTextView;
+@property (nonatomic, strong) IBOutlet UILabel			*textViewReadoutLabel;
 
 
 
@@ -43,7 +46,7 @@
     [self.detailTextView becomeFirstResponder];
     [super viewDidLoad];
 	
-	
+	[self updateTextViewReadout];
 }
 
 -(IBAction)didSelectCancel:(id)sender{
@@ -77,6 +80,34 @@
 	controller.viewMode=HCSMapViewModeSave;
     [self.navigationController pushViewController:controller animated:YES];
 }
+
+
+-(void)updateTextViewReadout{
+	
+	_textViewReadoutLabel.text=[NSString stringWithFormat:@"%i characters remaining",MAXCHARALLOWED-detailTextView.text.length];
+	
+}
+
+
+#pragma mark - UITextView delegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+	
+	if(range.length==1)
+		return YES;
+	
+	int charsleft=MAXCHARALLOWED-detailTextView.text.length;
+	
+	return charsleft>0;
+	
+}
+
+-(void)textViewDidChange:(UITextView *)textView{
+	
+	[self updateTextViewReadout];
+	
+}
+
 
 
 - (void)didReceiveMemoryWarning

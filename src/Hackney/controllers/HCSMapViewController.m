@@ -17,8 +17,8 @@
 #import "UserLocationManager.h"
 #import "CycleStreets.h"
 #import "GlobalUtilities.h"
+#import "GenericConstants.h"
 #import "LayoutBox.h"
-// cs compatability classes
 #import "CSPointVO.h"
 #import "RouteVO.h"
 #import "SegmentVO.h"
@@ -141,7 +141,7 @@
 	
 	_routeLineView.pointListProvider=self;
 	
-    self.navigationController.navigationBarHidden = YES;
+	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	
 	
     
@@ -188,84 +188,26 @@
 				break;
 		}
 		
-		_uploadButton.enabled=_trip.uploaded==nil;
+		//_uploadButton.enabled=_trip.uploaded==nil;
 		
 		
-		
-		// filter coords by hAccuracy
-		NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 10"];
-		NSArray		*filteredCoords		= [[_trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
-		BetterLog(@"count of filtered coords = %d", [filteredCoords count]);
-		
-		// sort filtered coords by recorded date
-		NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
-		NSArray		*sortDescriptors	= [NSArray arrayWithObjects:sortByDate, nil];
-		NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
 		
 		// add coords as annotations to map
-		BOOL first = YES;
-		Coord *last = nil;
-		int count = 0;
-		
-		// calculate min/max values for lat, lon
-		NSNumber *minLat = [NSNumber numberWithDouble:0.0];
-		NSNumber *maxLat = [NSNumber numberWithDouble:0.0];
-		NSNumber *minLon = [NSNumber numberWithDouble:0.0];
-		NSNumber *maxLon = [NSNumber numberWithDouble:0.0];
-        
         NSMutableArray *routeCoords = [[NSMutableArray alloc]init];
-		
-		
 		self.currentRoute=[[RouteVO alloc]init];
         
-		for ( Coord *coord in sortedCoords ){
+		for ( Coord *coord in _trip.coords ){
 			
-			// only plot unique coordinates to our map for performance reasons
-			if ( !last ||
-				(![coord.latitude  isEqualToNumber:last.latitude] &&
-				 ![coord.longitude isEqualToNumber:last.longitude] ) ){
-					
-					
-					// this is a bit convoluted but meets comaptibility for routeline drawing
-					SegmentVO *segment=[[SegmentVO alloc]init];
-					CSPointVO *point=[[CSPointVO alloc]init];
-					point.p=CGPointMake([coord.longitude doubleValue],[coord.latitude doubleValue]);
-					segment.pointsArray=@[point];
-					
-					BetterLog(@"%@",[coord longDescription]);
-					
-					[routeCoords addObject:segment];
-					
-					if ( first ){
-						
-						// add start point as a pin annotation
-						first = NO;
-						
-						minLat = coord.latitude;
-						maxLat = coord.latitude;
-						minLon = coord.longitude;
-						maxLon = coord.longitude;
-					}else{
-						
-						// update min/max values
-						if ( [minLat compare:coord.latitude] == NSOrderedDescending )
-							minLat = coord.latitude;
-						
-						if ( [maxLat compare:coord.latitude] == NSOrderedAscending )
-							maxLat = coord.latitude;
-						
-						if ( [minLon compare:coord.longitude] == NSOrderedDescending )
-							minLon = coord.longitude;
-						
-						if ( [maxLon compare:coord.longitude] == NSOrderedAscending )
-							maxLon = coord.longitude;
-					}
-					
-					count++;
-				}
+			// this is a bit convoluted but meets comaptibility for routeline drawing
+			SegmentVO *segment=[[SegmentVO alloc]init];
+			CSPointVO *point=[[CSPointVO alloc]init];
+			point.p=CGPointMake([coord.longitude doubleValue],[coord.latitude doubleValue]);
+			segment.pointsArray=@[point];
+				
+			BetterLog(@"%@",[coord longDescription]);
+				
+			[routeCoords addObject:segment];
 			
-			// update last coord pointer so we can cull redundant coords above
-			last = coord;
 		}
 		
 		_currentRoute.segments=routeCoords;
@@ -273,11 +215,11 @@
 		[_routeLineView setNeedsDisplay];
         
         
-		BetterLog(@"added %d unique GPS coordinates of %d to map", count, [sortedCoords count]);
+		BetterLog(@"added %d GPS coordinates to map", routeCoords.count);
 		
 		
 		// if we had at least 1 coord
-		if ( count ){
+		if ( routeCoords.count>0 ){
 			
 			[_currentRoute calculateNorthSouthValues];
 			
@@ -310,10 +252,6 @@
     
 	if(_viewMode==HCSMapViewModeShow)
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Route loaded" andMessage:nil andDelay:1 andAllowTouch:NO];
-	
-	
-	
-	
 	
 	
 }

@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  PhotoMap.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 06/06/2010.
 //
 
 
@@ -51,8 +50,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIView+Additions.h"
 #import "RMUserLocation.h"
 
+#import "PhotoWizardViewController.h"
 
-static NSTimeInterval FADE_DURATION = 1.7;
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
@@ -68,15 +67,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, strong) CLLocation								* currentLocation;
 @property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;//the modal
 @property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
-@property (nonatomic, strong) InitialLocation							* initialLocation;
-@property (nonatomic, strong) IBOutlet UIView							* introView;
-@property (nonatomic, strong) IBOutlet UIButton							* introButton;
 @property (nonatomic, strong) NSMutableArray							* photoMarkers;
 @property (nonatomic, assign) BOOL										photomapQuerying;
 @property (nonatomic, assign) BOOL										showingPhotos;
-@property (nonatomic, assign) BOOL										locationManagerIsLocating;
-@property (nonatomic, assign) BOOL										firstRun;
-@property (nonatomic, strong) SVPulsingAnnotationView					* gpsLocationView;
 
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
@@ -153,14 +146,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		[self displayPhotosOnMap];
 
 		_photomapQuerying = NO;
-		
-		
-		// BUG fix: Map will not display markers on first load post initial location
-		// data is fine but it requires another call to the server to get this to kick in?
-		if(_firstRun==YES){
-			[self performSelector:@selector(requestPhotos) withObject:nil afterDelay:0];
-			_firstRun=NO;
-		}
 		
 	}else{
 		_photomapQuerying=NO;
@@ -251,13 +236,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(void)createPersistentUI{
 	
 	displaysConnectionErrors=NO;
-	_firstRun=YES;
 	
 	//Necessary to start route-me service
 	[RMMapView class];
 	[_mapView setDelegate:self];
 	[self didNotificationMapStyleChanged];
 	_mapView.showsUserLocation=YES;
+	_mapView.zoom=15;
 	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	
 	
@@ -266,17 +251,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	//get the map attribution 
 	self.attributionLabel.text = [CycleStreets mapAttribution];
 	
-		
 	_showingPhotos = YES;
-	
-	[ButtonUtilities styleIBButton:_introButton type:@"green" text:@"OK"];
-	
-	[self.introView removeFromSuperview];
-	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
-	NSString *experienceLevel = [misc objectForKey:@"experienced"];
-	if (experienceLevel != nil) {
-		[self.introView removeFromSuperview];
-	}
+
 	
 }
 

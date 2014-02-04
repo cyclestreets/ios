@@ -8,7 +8,7 @@
         <attribute name="recorded" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="speed" optional="YES" attributeType="Double" syncable="YES"/>
         <attribute name="vAccuracy" optional="YES" attributeType="Double" syncable="YES"/>
-        <relationship name="trip" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="coords" inverseEntity="Trip" indexed="YES" syncable="YES"/>
+        <relationship name="trip" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="coords" inverseEntity="Trip" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
         <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
@@ -35,7 +35,7 @@
         <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="uploaded" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="coords" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Coord" inverseName="trip" inverseEntity="Coord" indexed="YES" syncable="YES"/>
+        <relationship name="coords" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Coord" inverseName="trip" inverseEntity="Coord" indexed="YES" syncable="YES"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="trips" inverseEntity="User" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">

@@ -412,7 +412,7 @@
 		
 		
 		
-		ExpandedUILabel *ilabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+		ExpandedUILabel *ilabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 240, 40)];
 		ilabel.backgroundColor=[UIColor clearColor];
 		
 		switch(type){

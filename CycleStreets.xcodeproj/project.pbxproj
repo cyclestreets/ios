@@ -81,6 +81,16 @@
 		2811C4C2166CE68F00592560 /* UIActivitySMS.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811C4C0166CE68F00592560 /* UIActivitySMS.png */; };
 		2811C4C9166CFFE300592560 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4C7166CFFD600592560 /* MessageUI.framework */; };
 		2811C4CA166CFFE600592560 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4C7166CFFD600592560 /* MessageUI.framework */; };
+		2811F92218A0258D00C8EF0F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811F92118A0258D00C8EF0F /* libPods.a */; };
+		2811F92318A0259200C8EF0F /* libMapView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289AA2D7188EEB7B0097AA5A /* libMapView.a */; };
+		2811F93A18A0F9DE00C8EF0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2811F93918A0F9DE00C8EF0F /* Images.xcassets */; };
+		2811F93D18A0F9F900C8EF0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2811F93918A0F9DE00C8EF0F /* Images.xcassets */; };
+		2811F94018A0FB7700C8EF0F /* DefaultiP5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811F93E18A0FB7700C8EF0F /* DefaultiP5.png */; };
+		2811F94118A0FB7700C8EF0F /* DefaultiP5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811F93E18A0FB7700C8EF0F /* DefaultiP5.png */; };
+		2811F94218A0FB7700C8EF0F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811F93F18A0FB7700C8EF0F /* Default.png */; };
+		2811F94318A0FB7700C8EF0F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811F93F18A0FB7700C8EF0F /* Default.png */; };
+		2811F94B18A16ED400C8EF0F /* NSOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811F94A18A16ED400C8EF0F /* NSOrderedDictionary.m */; };
+		2811F94C18A16ED400C8EF0F /* NSOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811F94A18A16ED400C8EF0F /* NSOrderedDictionary.m */; };
 		28187A3314FCC7EF00A38A17 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28187A3214FCC7EF00A38A17 /* UserLocationManager.m */; };
 		28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5714FCFF4C00A38A17 /* Alert200x200.png */; };
 		28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5914FCFF4C00A38A17 /* CSIcon_MapArrow_end.png */; };
@@ -165,8 +175,6 @@
 		281E09031451C6690034CC63 /* services_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09011451C6690034CC63 /* services_dev.plist */; };
 		281E09041451C6690034CC63 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
-		2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
-		2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		282EAB8C1891911B001A736D /* HCSSavedTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282EAB8B1891911B001A736D /* HCSSavedTrackCell.xib */; };
 		282EAB8D1891911B001A736D /* HCSSavedTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282EAB8B1891911B001A736D /* HCSSavedTrackCell.xib */; };
 		282EAB9018919144001A736D /* HCSSavedTrackCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282EAB8F18919144001A736D /* HCSSavedTrackCellView.m */; };
@@ -178,25 +186,12 @@
 		283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
 		283435FF15DD5D9100B00FD5 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */; };
 		2834360515DD5DC300B00FD5 /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
-		2834360615DD5DC300B00FD5 /* appstore-icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3C127821DB002640D0 /* appstore-icon-512.png */; };
-		2834360715DD5DC300B00FD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3D127821DB002640D0 /* Default.png */; };
-		2834360815DD5DC300B00FD5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3E127821DB002640D0 /* Default@2x.png */; };
 		2834360915DD5DC300B00FD5 /* CycleStreetsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B7131FB54A008527FC /* CycleStreetsWindow.xib */; };
 		2834360A15DD5DC300B00FD5 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B8131FB54A008527FC /* Entitlements.plist */; };
 		2834360B15DD5DC300B00FD5 /* contentStrings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620D131FB69D008527FC /* contentStrings.plist */; };
 		2834360C15DD5DC300B00FD5 /* FormData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620E131FB69D008527FC /* FormData.plist */; };
 		2834360D15DD5DC300B00FD5 /* styles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6210131FB69D008527FC /* styles.plist */; };
 		2834360E15DD5DC300B00FD5 /* userState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6211131FB69D008527FC /* userState.plist */; };
-		2834360F15DD5DC300B00FD5 /* UIButton_green_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6533131FC239008527FC /* UIButton_green_hi@2x.png */; };
-		2834361015DD5DC300B00FD5 /* UIButton_green_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6534131FC239008527FC /* UIButton_green_lo@2x.png */; };
-		2834361115DD5DC300B00FD5 /* UIButton_grey_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6535131FC239008527FC /* UIButton_grey_hi@2x.png */; };
-		2834361215DD5DC300B00FD5 /* UIButton_grey_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6536131FC239008527FC /* UIButton_grey_lo@2x.png */; };
-		2834361315DD5DC300B00FD5 /* UIButton_orange_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6537131FC239008527FC /* UIButton_orange_hi@2x.png */; };
-		2834361415DD5DC300B00FD5 /* UIButton_orange_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6538131FC239008527FC /* UIButton_orange_lo@2x.png */; };
-		2834361515DD5DC300B00FD5 /* UIButton_orangesmall_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6539131FC239008527FC /* UIButton_orangesmall_hi@2x.png */; };
-		2834361615DD5DC300B00FD5 /* UIButton_orangesmall_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */; };
-		2834361715DD5DC300B00FD5 /* UIButton_red_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */; };
-		2834361815DD5DC300B00FD5 /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */; };
 		2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */; };
 		2834361A15DD5DC300B00FD5 /* CSIcon_MapArrow_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4913536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png */; };
 		2834361B15DD5DC300B00FD5 /* UIIcon_cycle_lanes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */; };
@@ -327,8 +322,6 @@
 		283436B915DD5DC300B00FD5 /* MapLocationSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2858F2B01586161B0047283D /* MapLocationSearchCell.xib */; };
 		283436BA15DD5DC300B00FD5 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		283436BB15DD5DC300B00FD5 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
-		283436BC15DD5DC300B00FD5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A04418159216A400201CF3 /* Icon.png */; };
-		283436BD15DD5DC300B00FD5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A0441C159216C000201CF3 /* Icon@2x.png */; };
 		283436BE15DD5DC300B00FD5 /* PhotoWizardCategoryMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */; };
 		283436BF15DD5DC300B00FD5 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		283436C015DD5DC300B00FD5 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
@@ -670,8 +663,6 @@
 		289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
-		28A0441A159216A400201CF3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A04418159216A400201CF3 /* Icon.png */; };
-		28A0441D159216C000201CF3 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A0441C159216C000201CF3 /* Icon@2x.png */; };
 		28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */; };
 		28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
 		28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6311450B1DC009C5647 /* POITypeCellView.m */; };
@@ -729,16 +720,6 @@
 		28AD6462131FB6C8008527FC /* GlobalUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6390131FB6C8008527FC /* GlobalUtilities.m */; };
 		28AD6493131FB6C8008527FC /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD63FD131FB6C8008527FC /* StringUtilities.m */; };
 		28AD6497131FB6C8008527FC /* ViewUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6408131FB6C8008527FC /* ViewUtilities.m */; };
-		28AD6549131FC239008527FC /* UIButton_green_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6533131FC239008527FC /* UIButton_green_hi@2x.png */; };
-		28AD654A131FC239008527FC /* UIButton_green_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6534131FC239008527FC /* UIButton_green_lo@2x.png */; };
-		28AD654B131FC239008527FC /* UIButton_grey_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6535131FC239008527FC /* UIButton_grey_hi@2x.png */; };
-		28AD654C131FC239008527FC /* UIButton_grey_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6536131FC239008527FC /* UIButton_grey_lo@2x.png */; };
-		28AD654D131FC239008527FC /* UIButton_orange_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6537131FC239008527FC /* UIButton_orange_hi@2x.png */; };
-		28AD654E131FC239008527FC /* UIButton_orange_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6538131FC239008527FC /* UIButton_orange_lo@2x.png */; };
-		28AD654F131FC239008527FC /* UIButton_orangesmall_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6539131FC239008527FC /* UIButton_orangesmall_hi@2x.png */; };
-		28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */; };
-		28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */; };
-		28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */; };
 		28AE47AD1896932C00203C20 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */; };
 		28AE47AE1896932C00203C20 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */; };
 		28AE47B1189693D300203C20 /* NetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B0189693D300203C20 /* NetResponse.m */; };
@@ -898,9 +879,6 @@
 		E7F41C341140173400CBC58B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F41C331140173400CBC58B /* libsqlite3.dylib */; };
 		E7F435B11140194A00CBC58B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F435B01140194A00CBC58B /* QuartzCore.framework */; };
 		E7F8BF0011B9931E009F62BB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F8BEFF11B9931E009F62BB /* Security.framework */; };
-		E7FD8F41127821DB002640D0 /* appstore-icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3C127821DB002640D0 /* appstore-icon-512.png */; };
-		E7FD8F42127821DB002640D0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3D127821DB002640D0 /* Default.png */; };
-		E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3E127821DB002640D0 /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1029,6 +1007,12 @@
 		2811C4AF166CDBC600592560 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2811C4C0166CE68F00592560 /* UIActivitySMS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivitySMS.png; sourceTree = "<group>"; };
 		2811C4C7166CFFD600592560 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		2811F92118A0258D00C8EF0F /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		2811F93918A0F9DE00C8EF0F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Hackney/Images.xcassets; sourceTree = "<group>"; };
+		2811F93E18A0FB7700C8EF0F /* DefaultiP5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultiP5.png; sourceTree = "<group>"; };
+		2811F93F18A0FB7700C8EF0F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		2811F94918A16ED400C8EF0F /* NSOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSOrderedDictionary.h; sourceTree = "<group>"; };
+		2811F94A18A16ED400C8EF0F /* NSOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSOrderedDictionary.m; sourceTree = "<group>"; };
 		28187A3114FCC7EF00A38A17 /* UserLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationManager.h; sourceTree = "<group>"; };
 		28187A3214FCC7EF00A38A17 /* UserLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationManager.m; sourceTree = "<group>"; };
 		28187A5714FCFF4C00A38A17 /* Alert200x200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alert200x200.png; sourceTree = "<group>"; };
@@ -1115,7 +1099,6 @@
 		281E09011451C6690034CC63 /* services_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_dev.plist; sourceTree = "<group>"; };
 		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
 		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
-		2825871E17785867001E3DA1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		282EAB8B1891911B001A736D /* HCSSavedTrackCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSSavedTrackCell.xib; path = hackney/HCSSavedTrackCell.xib; sourceTree = "<group>"; };
 		282EAB8E18919144001A736D /* HCSSavedTrackCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSSavedTrackCellView.h; sourceTree = "<group>"; };
 		282EAB8F18919144001A736D /* HCSSavedTrackCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSSavedTrackCellView.m; sourceTree = "<group>"; };
@@ -1288,8 +1271,6 @@
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
 		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		28A04418159216A400201CF3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		28A0441C159216C000201CF3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		28A89CCA14FD4A610001BABA /* PhotoWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardViewController.h; path = PhotoWizard/PhotoWizardViewController.h; sourceTree = "<group>"; };
 		28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoWizardViewController.m; path = PhotoWizard/PhotoWizardViewController.m; sourceTree = "<group>"; };
 		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
@@ -1401,16 +1382,6 @@
 		28AD6406131FB6C8008527FC /* Utiltities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utiltities.h; sourceTree = "<group>"; };
 		28AD6407131FB6C8008527FC /* ViewUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViewUtilities.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28AD6408131FB6C8008527FC /* ViewUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtilities.m; sourceTree = "<group>"; };
-		28AD6533131FC239008527FC /* UIButton_green_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_green_hi@2x.png"; sourceTree = "<group>"; };
-		28AD6534131FC239008527FC /* UIButton_green_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_green_lo@2x.png"; sourceTree = "<group>"; };
-		28AD6535131FC239008527FC /* UIButton_grey_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_grey_hi@2x.png"; sourceTree = "<group>"; };
-		28AD6536131FC239008527FC /* UIButton_grey_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_grey_lo@2x.png"; sourceTree = "<group>"; };
-		28AD6537131FC239008527FC /* UIButton_orange_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orange_hi@2x.png"; sourceTree = "<group>"; };
-		28AD6538131FC239008527FC /* UIButton_orange_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orange_lo@2x.png"; sourceTree = "<group>"; };
-		28AD6539131FC239008527FC /* UIButton_orangesmall_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orangesmall_hi@2x.png"; sourceTree = "<group>"; };
-		28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_orangesmall_lo@2x.png"; sourceTree = "<group>"; };
-		28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_hi@2x.png"; sourceTree = "<group>"; };
-		28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_red_lo@2x.png"; sourceTree = "<group>"; };
 		28AE47AB1896932C00203C20 /* ApplicationJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationJSONParser.h; sourceTree = "<group>"; };
 		28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationJSONParser.m; sourceTree = "<group>"; };
 		28AE47AF189693D300203C20 /* NetResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetResponse.h; sourceTree = "<group>"; };
@@ -1419,7 +1390,7 @@
 		28AE47B61896C5A000203C20 /* HCSHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSHelpViewController.h; sourceTree = "<group>"; };
 		28AE47B71896C5A000203C20 /* HCSHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSHelpViewController.m; sourceTree = "<group>"; };
 		28AE47BA1896DA7700203C20 /* HCSUserDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSUserDetailsView.xib; path = hackney/HCSUserDetailsView.xib; sourceTree = "<group>"; };
-		28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSUserDetailsViewController.h; sourceTree = "<group>"; };
+		28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCSUserDetailsViewController.h; path = ../controllers/HCSUserDetailsViewController.h; sourceTree = "<group>"; };
 		28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSUserDetailsViewController.m; sourceTree = "<group>"; };
 		28AE47C11896E95000203C20 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		28AE47C21896E95000203C20 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
@@ -1566,9 +1537,6 @@
 		E7F41C331140173400CBC58B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E7F435B01140194A00CBC58B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E7F8BEFF11B9931E009F62BB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		E7FD8F3C127821DB002640D0 /* appstore-icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appstore-icon-512.png"; sourceTree = "<group>"; };
-		E7FD8F3D127821DB002640D0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		E7FD8F3E127821DB002640D0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EF4E7F108AB64444B9F67D6A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1607,6 +1575,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2811F92318A0259200C8EF0F /* libMapView.a in Frameworks */,
+				2811F92218A0258D00C8EF0F /* libPods.a in Frameworks */,
 				2811C4C9166CFFE300592560 /* MessageUI.framework in Frameworks */,
 				2811C4B0166CDBC600592560 /* Social.framework in Frameworks */,
 				2811C4AE166CDBA100592560 /* Twitter.framework in Frameworks */,
@@ -2115,7 +2085,6 @@
 				287050B8188FC407004CD922 /* HCSSurveyViewController.m */,
 				28AE47B61896C5A000203C20 /* HCSHelpViewController.h */,
 				28AE47B71896C5A000203C20 /* HCSHelpViewController.m */,
-				28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */,
 				28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */,
 			);
 			path = controllers;
@@ -2127,6 +2096,7 @@
 				287050BC188FC407004CD922 /* Coord.h */,
 				287050BD188FC407004CD922 /* Coord.m */,
 				280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */,
+				28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */,
 				287050BF188FC407004CD922 /* Note.h */,
 				287050C0188FC407004CD922 /* Note.m */,
 				287050C1188FC407004CD922 /* Trip.h */,
@@ -2707,6 +2677,8 @@
 		28AD6374131FB6C8008527FC /* utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2811F94918A16ED400C8EF0F /* NSOrderedDictionary.h */,
+				2811F94A18A16ED400C8EF0F /* NSOrderedDictionary.m */,
 				28B4852E1526227C00E406E1 /* NetUtilities.h */,
 				280E24D2144D84F70021CDFA /* ButtonUtilities.h */,
 				280E24D3144D84F70021CDFA /* ButtonUtilities.m */,
@@ -2754,16 +2726,6 @@
 				289A9B4713536CCB00E8AF90 /* Arrows */,
 				289A9B4A13536CCB00E8AF90 /* Cell Icons */,
 				289A9B5113536CCB00E8AF90 /* Wisps */,
-				28AD6533131FC239008527FC /* UIButton_green_hi@2x.png */,
-				28AD6534131FC239008527FC /* UIButton_green_lo@2x.png */,
-				28AD6535131FC239008527FC /* UIButton_grey_hi@2x.png */,
-				28AD6536131FC239008527FC /* UIButton_grey_lo@2x.png */,
-				28AD6537131FC239008527FC /* UIButton_orange_hi@2x.png */,
-				28AD6538131FC239008527FC /* UIButton_orange_lo@2x.png */,
-				28AD6539131FC239008527FC /* UIButton_orangesmall_hi@2x.png */,
-				28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */,
-				28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */,
-				28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */,
 				287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */,
 				287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */,
 				287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */,
@@ -2942,6 +2904,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				2811F93918A0F9DE00C8EF0F /* Images.xcassets */,
 				28AD6308131FB6C8008527FC /* lib */,
 				28AD61DB131FB69D008527FC /* src */,
 				28AD6207131FB69D008527FC /* resources */,
@@ -2966,6 +2929,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2811F92118A0258D00C8EF0F /* libPods.a */,
 				28452756188E9168005A7DF1 /* CoreData.framework */,
 				2811C4C7166CFFD600592560 /* MessageUI.framework */,
 				2811C4AF166CDBC600592560 /* Social.framework */,
@@ -2993,12 +2957,8 @@
 		E7FD8F3B127821DB002640D0 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				2825871E17785867001E3DA1 /* Default-568h@2x.png */,
-				28A0441C159216C000201CF3 /* Icon@2x.png */,
-				E7FD8F3C127821DB002640D0 /* appstore-icon-512.png */,
-				28A04418159216A400201CF3 /* Icon.png */,
-				E7FD8F3D127821DB002640D0 /* Default.png */,
-				E7FD8F3E127821DB002640D0 /* Default@2x.png */,
+				2811F93E18A0FB7700C8EF0F /* DefaultiP5.png */,
+				2811F93F18A0FB7700C8EF0F /* Default.png */,
 			);
 			name = Icons;
 			path = ../Icons;
@@ -3113,29 +3073,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				E77D8F11120321E4003E6B8D /* credits.html in Resources */,
-				E7FD8F41127821DB002640D0 /* appstore-icon-512.png in Resources */,
-				E7FD8F42127821DB002640D0 /* Default.png in Resources */,
-				E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */,
 				28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */,
+				2811F93A18A0F9DE00C8EF0F /* Images.xcassets in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
 				28BC444B18915A5800711A1A /* errands@2x.png in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
 				28AD62B5131FB69D008527FC /* FormData.plist in Resources */,
 				28AD62B7131FB69D008527FC /* styles.plist in Resources */,
 				28AD62B8131FB69D008527FC /* userState.plist in Resources */,
-				28AD6549131FC239008527FC /* UIButton_green_hi@2x.png in Resources */,
 				28BC445718915A5800711A1A /* noteAssetMapGlyph@2x.png in Resources */,
-				28AD654A131FC239008527FC /* UIButton_green_lo@2x.png in Resources */,
-				28AD654B131FC239008527FC /* UIButton_grey_hi@2x.png in Resources */,
-				28AD654C131FC239008527FC /* UIButton_grey_lo@2x.png in Resources */,
-				28AD654D131FC239008527FC /* UIButton_orange_hi@2x.png in Resources */,
-				28AD654E131FC239008527FC /* UIButton_orange_lo@2x.png in Resources */,
-				28AD654F131FC239008527FC /* UIButton_orangesmall_hi@2x.png in Resources */,
-				28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */,
 				28BC445518915A5800711A1A /* noteAssetMapGlyph.png in Resources */,
-				28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */,
 				2880BE55188E821A006FF7E2 /* HCSRouteListView.xib in Resources */,
-				28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */,
 				289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				289A9B5613536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png in Resources */,
@@ -3301,8 +3249,6 @@
 				28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */,
 				289AA2C0188EEB170097AA5A /* TrackingDot.png in Resources */,
 				28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */,
-				28A0441A159216A400201CF3 /* Icon.png in Resources */,
-				28A0441D159216C000201CF3 /* Icon@2x.png in Resources */,
 				28C8342015A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				289AA2B4188EEB170097AA5A /* LoadingTile.png in Resources */,
 				28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */,
@@ -3329,6 +3275,7 @@
 				28BC447F18915A5800711A1A /* tripStart@2x.png in Resources */,
 				289AA2B6188EEB170097AA5A /* LoadingTileZoom.png in Resources */,
 				28535DC315E50FCD0092FC16 /* HUD_icon_exclaim.png in Resources */,
+				2811F94018A0FB7700C8EF0F /* DefaultiP5.png in Resources */,
 				28535DC515E50FCD0092FC16 /* HUD_icon_exclaim@2x.png in Resources */,
 				28535DC715E50FCD0092FC16 /* HUD_icon_lock.png in Resources */,
 				28535DC915E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
@@ -3348,6 +3295,7 @@
 				2811C4A1166CCD5F00592560 /* UIActivityMail.png in Resources */,
 				28BC447318915A5800711A1A /* shopping@2x.png in Resources */,
 				289AA2C8188EEB170097AA5A /* TrackingHeading.png in Resources */,
+				2811F94218A0FB7700C8EF0F /* Default.png in Resources */,
 				2811C4A5166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C1166CE68F00592560 /* UIActivitySMS.png in Resources */,
 				28851505166E0E20003536CA /* UIActivityCopy.png in Resources */,
@@ -3361,7 +3309,6 @@
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28640E8318985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
-				2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */,
 				28718BB417858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB617858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
 				284DB5BA189A5354002C5413 /* UINavigationBarBackIndicatorDefault@2x.png in Resources */,
@@ -3374,9 +3321,6 @@
 			files = (
 				28BC445618915A5800711A1A /* noteAssetMapGlyph.png in Resources */,
 				2834360515DD5DC300B00FD5 /* credits.html in Resources */,
-				2834360615DD5DC300B00FD5 /* appstore-icon-512.png in Resources */,
-				2834360715DD5DC300B00FD5 /* Default.png in Resources */,
-				2834360815DD5DC300B00FD5 /* Default@2x.png in Resources */,
 				2834360915DD5DC300B00FD5 /* CycleStreetsWindow.xib in Resources */,
 				2834360A15DD5DC300B00FD5 /* Entitlements.plist in Resources */,
 				28BC447818915A5800711A1A /* social@2x.png in Resources */,
@@ -3384,19 +3328,9 @@
 				2834360C15DD5DC300B00FD5 /* FormData.plist in Resources */,
 				2834360D15DD5DC300B00FD5 /* styles.plist in Resources */,
 				2834360E15DD5DC300B00FD5 /* userState.plist in Resources */,
-				2834360F15DD5DC300B00FD5 /* UIButton_green_hi@2x.png in Resources */,
-				2834361015DD5DC300B00FD5 /* UIButton_green_lo@2x.png in Resources */,
-				2834361115DD5DC300B00FD5 /* UIButton_grey_hi@2x.png in Resources */,
 				289AA2C7188EEB170097AA5A /* TrackingDotHalo@2x.png in Resources */,
-				2834361215DD5DC300B00FD5 /* UIButton_grey_lo@2x.png in Resources */,
-				2834361315DD5DC300B00FD5 /* UIButton_orange_hi@2x.png in Resources */,
-				2834361415DD5DC300B00FD5 /* UIButton_orange_lo@2x.png in Resources */,
-				2834361515DD5DC300B00FD5 /* UIButton_orangesmall_hi@2x.png in Resources */,
 				289AA2B7188EEB170097AA5A /* LoadingTileZoom.png in Resources */,
 				2880BE56188E821A006FF7E2 /* HCSRouteListView.xib in Resources */,
-				2834361615DD5DC300B00FD5 /* UIButton_orangesmall_lo@2x.png in Resources */,
-				2834361715DD5DC300B00FD5 /* UIButton_red_hi@2x.png in Resources */,
-				2834361815DD5DC300B00FD5 /* UIButton_red_lo@2x.png in Resources */,
 				2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				2834361A15DD5DC300B00FD5 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				2834361B15DD5DC300B00FD5 /* UIIcon_cycle_lanes@2x.png in Resources */,
@@ -3423,6 +3357,7 @@
 				2834362F15DD5DC300B00FD5 /* CSTabBar_plan_route@2x.png in Resources */,
 				2834363015DD5DC300B00FD5 /* CSTabBar_settings@2x.png in Resources */,
 				2834363115DD5DC300B00FD5 /* FavouritesCell.xib in Resources */,
+				2811F93D18A0F9F900C8EF0F /* Images.xcassets in Resources */,
 				2834363215DD5DC300B00FD5 /* ItineraryCell.xib in Resources */,
 				2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */,
 				2834363D15DD5DC300B00FD5 /* SettingsView.xib in Resources */,
@@ -3448,6 +3383,7 @@
 				284DB5B7189A4D84002C5413 /* cycle-counter.jpg in Resources */,
 				2834364D15DD5DC300B00FD5 /* btn_slider_off.png in Resources */,
 				289AA2C5188EEB170097AA5A /* TrackingDotHalo.png in Resources */,
+				2811F94318A0FB7700C8EF0F /* Default.png in Resources */,
 				2834364E15DD5DC300B00FD5 /* btn_slider_off@2x.png in Resources */,
 				2834364F15DD5DC300B00FD5 /* btn_slider_on.png in Resources */,
 				2834365015DD5DC300B00FD5 /* btn_slider_on@2x.png in Resources */,
@@ -3457,6 +3393,7 @@
 				2834365315DD5DC300B00FD5 /* btn_slider_thumb_pressed.png in Resources */,
 				2834365415DD5DC300B00FD5 /* btn_slider_thumb_pressed@2x.png in Resources */,
 				2834365515DD5DC300B00FD5 /* btn_slider_track.png in Resources */,
+				2811F94118A0FB7700C8EF0F /* DefaultiP5.png in Resources */,
 				2834365615DD5DC300B00FD5 /* btn_slider_track@2x.png in Resources */,
 				2834365715DD5DC300B00FD5 /* btn_slider_track_pressed.png in Resources */,
 				289AA2C9188EEB170097AA5A /* TrackingHeading.png in Resources */,
@@ -3563,8 +3500,6 @@
 				283436BA15DD5DC300B00FD5 /* UIIcon_userphotomap.png in Resources */,
 				28640E8418985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */,
 				283436BB15DD5DC300B00FD5 /* UIIcon_userphotomap@2x.png in Resources */,
-				283436BC15DD5DC300B00FD5 /* Icon.png in Resources */,
-				283436BD15DD5DC300B00FD5 /* Icon@2x.png in Resources */,
 				283436BE15DD5DC300B00FD5 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				283436BF15DD5DC300B00FD5 /* PhotoWizardCategoryCell.xib in Resources */,
 				283436C015DD5DC300B00FD5 /* Icon_nofavroutes.png in Resources */,
@@ -3617,7 +3552,6 @@
 				2868D245166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
-				2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */,
 				28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
 				289AA2BF188EEB170097AA5A /* marker-red.png in Resources */,
@@ -3766,6 +3700,7 @@
 				287050CD188FC407004CD922 /* HCSTrackConfigViewController.m in Sources */,
 				28D2BAE11354814E00694093 /* UKImage.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
+				2811F94B18A16ED400C8EF0F /* NSOrderedDictionary.m in Sources */,
 				28F66F0D135F636200DECFAC /* PhotoMapImageLocationViewController.m in Sources */,
 				280E91C614097D8600C7AC75 /* StringManager.m in Sources */,
 				280E91C714097D8600C7AC75 /* StyleManager.m in Sources */,
@@ -3948,6 +3883,7 @@
 				287050CE188FC407004CD922 /* HCSTrackConfigViewController.m in Sources */,
 				2834370A15DD5DC300B00FD5 /* UKImage.m in Sources */,
 				2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */,
+				2811F94C18A16ED400C8EF0F /* NSOrderedDictionary.m in Sources */,
 				2834370C15DD5DC300B00FD5 /* PhotoMapImageLocationViewController.m in Sources */,
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
 				2834370F15DD5DC300B00FD5 /* StyleManager.m in Sources */,
@@ -4059,6 +3995,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = hackney;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -4108,6 +4046,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = hackney;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -4155,6 +4095,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = hackney;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (4YM8CCJL5J)";
@@ -4174,7 +4116,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
@@ -4199,6 +4141,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = hackney;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
@@ -4217,7 +4161,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
@@ -4243,6 +4187,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = "hackney-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
@@ -4261,7 +4207,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
@@ -4375,10 +4321,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = "hackney-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4410,7 +4358,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "4D0FE45A-299D-4E32-9852-F1E5A85EDF08";
+				PROVISIONING_PROFILE = "5D027662-3156-42FA-95F8-DD6C26ADDAE8";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";

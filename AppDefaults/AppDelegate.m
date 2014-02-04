@@ -96,11 +96,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_startupmanager.delegate=self;
 	[_startupmanager doStartupSequence];
 	
-	/*
-	if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-		[self.locationManager startMonitoringSignificantLocationChanges];
-	}
-	*/
 	
 	return YES;
 }
@@ -131,9 +126,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[_window addSubview:_tabBarController.view];
 	_tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	cycleStreets.appDelegate = self;
-	
 		
 	[_window makeKeyAndVisible];	
 	
@@ -141,21 +133,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[self displayHelpViewController];
 	
-	
 }
 
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
+-(void)applicationWillTerminate:(UIApplication *)application {
+	
 	[[UserSettingsManager sharedInstance] saveApplicationState];
 	
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
+
+-(void)applicationDidEnterBackground:(UIApplication *)application {
 	
 	[[UserSettingsManager sharedInstance] saveApplicationState];
 	
 }
+
 -(void)applicationWillEnterForeground:(UIApplication *)application{
 	
 }
@@ -179,7 +173,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// animate defaultPNG off screen to smooth out transition to ui state
 	BOOL ip=IS_IPHONE_5;
 	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, SCREENWIDTH, FULLSCREENHEIGHT)];
-	_splashView.image = [UIImage imageNamed: ip ? @"Default-568h@2x.png"  : @"Default.png" ];
+	UIImage *image=[UIImage imageNamed: ip ? @"DefaultiP5.png"  : @"Default.png" ];
+	_splashView.image = image;
 	
 	#if ISDEVELOPMENT
 	[self writeDebugStartupLabel:NO];
@@ -222,8 +217,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[_splashView addSubview:_debugLabel];
 	
 	
-	
 }
+
 
 -(void)removeStartupView{
 	
@@ -305,11 +300,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 				BOOL hidesNavBar=[[navitem objectForKey:@"hidesNavBar"] boolValue];
 				
 				if (isVC==YES) {
+					
 					UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[navitem objectForKey:@"title"] image:[UIImage imageNamed:[navitem objectForKey:@"tabimage"]] tag:i];
 					vccontroller.hidesBottomBarWhenPushed=hidesBottomBarWhenPushed;
 					[vccontroller setTabBarItem:tabBarItem];
 					[navControllers addObject:vccontroller];
-				}else {
+					
+				}else{
 					
 					
 					if(usesSlidingView==YES){
@@ -359,7 +356,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	_tabBarController.tabBar.translucent=NO;
 	
-	//[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:tabBarController.moreNavigationController.navigationBar];
+	_tabBarController.moreNavigationController.navigationBar.translucent=NO;
 	
 	// DEV: temp disable of edit 
 	_tabBarController.customizableViewControllers=nil;
@@ -378,13 +375,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return navigation;
 }
 
+
 - (void)tabBarController:(UITabBarController *)tbc didSelectViewController:(UIViewController *)viewController {
 	
 	[[UserSettingsManager sharedInstance] setSavedSection:tbc.selectedViewController.title];
 	
 }
-
-
 
 
 
@@ -409,26 +405,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
-
-
-
-//
-/***********************************************
- * Slight hack to get access to the Customisation navigationBAr so we can set its color to same as the rest of the app
- ***********************************************/
-//
-- (void)tabBarController:(UITabBarController *)controller willBeginCustomizingViewControllers:(NSArray *)viewControllers {
-	
-	//tabBarControllers=[[NSMutableArray alloc] initWithArray:viewControllers];
-	//[tabBarControllers removeObjectsInRange:NSMakeRange(TABBARMORELIMIT,[tabBarControllers count]-TABBARMORELIMIT)];
-	
-	// Warning: This is brittle, but it works on iPhone OS 3.0 (7A341)!
-   // UIView *editViews = [controller.view.subviews objectAtIndex:1];
-    //UINavigationBar *editModalNavBar = [editViews.subviews objectAtIndex:0]; // configure controller will be index 0
-	
-	//[self setBarStyle:UIBarStyleDefault andTintColor:UIColorFromRGB(0x008000) forNavigationBar:editModalNavBar];
-	
-}
 
 
 @end

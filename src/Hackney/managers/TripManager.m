@@ -126,7 +126,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 
 
-#pragma maek - Trip note saving
+#pragma mark - Trip note saving
+
 // called if user adds note and press save in survey views
 - (void)saveNotes:(NSString*)notes{
 	if ( _currentRecordingTrip && notes )
@@ -140,6 +141,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 - (void)saveTrip
 {
 	NSLog(@"about to save trip with %d coords...", [_recordingTripCoords count]);
+	
+	[self optimiseTrip:_currentRecordingTrip];
 
 	if ( _currentRecordingTrip && [_recordingTripCoords count]>0 ){
 		
@@ -177,31 +180,52 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	// remove inaccurate coords
 	NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 10"];
-	NSArray		*filteredCoords		= [[trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
+	NSOrderedSet *filteredCoords		= [trip.coords filteredOrderedSetUsingPredicate:filterByAccuracy];
 	
-	// ensure correct order
-	NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
-	NSArray		*sortDescriptors	= [NSArray arrayWithObjects:sortByDate, nil];
-	NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
-	
-	Coord *last = nil;
+	Coord *previousCoord = nil;
 	NSMutableArray *optimisedCoords = [[NSMutableArray alloc]init];
 	
 	// de-dupe coordinates
-	for ( Coord *coord in sortedCoords ){
+	// if there are only 2 use as is
+	
+	if(filteredCoords.count==2){
 		
-		if ( !last ||
-			(![coord.latitude  isEqualToNumber:last.latitude] &&
-			 ![coord.longitude isEqualToNumber:last.longitude] ) ){
+		for ( Coord *coord in filteredCoords )
+				[optimisedCoords addObject:coord];
+		
+	}else{
+		
+		for ( Coord *coord in filteredCoords ){
+		
+			BOOL canPlotCoord=NO;
+			if (previousCoord==nil){
+				canPlotCoord=YES;
+			}else{
+				
+				if(![coord.latitude  isEqualToNumber:previousCoord.latitude] && ![coord.longitude isEqualToNumber:previousCoord.longitude]){
+					
+					canPlotCoord=YES;
+					
+				}
+				
+			}
+			
+			if(canPlotCoord==YES){
 				
 				[optimisedCoords addObject:coord];
-	
+				
 			}
+			
+		}
+		
 	}
 	
-	NSSet *newSet=[NSSet setWithArray:optimisedCoords];
 	
-	trip.coords=newSet;
+	
+	
+	NSOrderedSet *newSet=[NSOrderedSet orderedSetWithArray:optimisedCoords];
+	
+	[trip addCoords:newSet];
 	
 	[[CoreDataStore mainStore] save];
 	
@@ -271,7 +295,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		[coordsDict setValue:coord.hAccuracy forKey:@"h"];  //haccuracy
 		[coordsDict setValue:coord.vAccuracy forKey:@"v"];  //vaccuracy
 		
-		NSString *newDateString = [outputFormatter stringFromDate:coord.recorded];
+		//NSString *newDateString = [outputFormatter stringFromDate:coord.recorded];
+		NSString *newDateString=[NSString stringWithFormat:@"%ld", (long)[coord.recorded timeIntervalSince1970]];
 		[coordsDict setValue:newDateString forKey:@"r"];    //recorded timestamp
 		[tripDict setValue:coordsDict forKey:newDateString];
 	}
@@ -308,12 +333,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     NSString *tripJson = [[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding];
     
 	
+	//@"userAge":user.age,
+	//@"userGender":user.gender,
+	
 	// NOTE: device hash added by SaveRequest initWithPostVars
 	NSDictionary *postVars = @{@"coords":tripJson,
 							   @"purpose":purpose,
 							   @"notes":notes,
 							   @"start":start,
 							   @"user":userJson,
+							   @"username":EMPTYSTRING,
+							   @"password":EMPTYSTRING,
 							   @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString],
 							   @"version":[NSString stringWithFormat:@"%d", kSaveProtocolVersion]};
 	
@@ -613,28 +643,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	CLLocationDistance newDist = 0.;
 	
-	// filter coords by hAccuracy
-	NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 100.0"];
-	NSArray		*filteredCoords		= [[trip.coords allObjects] filteredArrayUsingPredicate:filterByAccuracy];
-	NSLog(@"count of filtered coords = %d", [filteredCoords count]);
 	
-	if ( [filteredCoords count] )
-	{
-		// sort filtered coords by recorded date
-		NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
-		NSArray		*sortDescriptors	= [NSArray arrayWithObjects:sortByDate, nil];
-		NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
+	for (int i=1; i < [trip.coords count]; i++){
 		
-		// step through each pair of neighboring coors and tally running distance estimate
+		Coord *prev	 = [trip.coords objectAtIndex:(i - 1)];
+		Coord *next	 = [trip.coords objectAtIndex:i];
+		newDist	+= [self distanceFrom:prev to:next realTime:NO];
 		
-		// NOTE: assumes ascending sort order by coord.recorded
-		// NOTE: rewrite to work with DESC order to avoid re-sorting to recalc
-		for (int i=1; i < [sortedCoords count]; i++)
-		{
-			Coord *prev	 = [sortedCoords objectAtIndex:(i - 1)];
-			Coord *next	 = [sortedCoords objectAtIndex:i];
-			newDist	+= [self distanceFrom:prev to:next realTime:NO];
-		}
 	}
 	
 	return newDist;

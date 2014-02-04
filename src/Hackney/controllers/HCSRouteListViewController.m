@@ -126,7 +126,6 @@ static int const kTagImage=	3;
     [super viewDidLoad];
 	
 	self.selectedTrip = nil;
-	self.navigationController.navigationBarHidden = NO;
 	
     [self createPersistentUI];
 }
@@ -134,7 +133,7 @@ static int const kTagImage=	3;
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-	self.navigationController.navigationBarHidden = NO;
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [self createNonPersistentUI];
     

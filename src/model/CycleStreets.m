@@ -38,7 +38,7 @@ static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
 @implementation CycleStreets
 SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
-@synthesize appDelegate;
+
 @synthesize files;
 @synthesize APIKey;
 @synthesize userAgent;

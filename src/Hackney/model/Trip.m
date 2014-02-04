@@ -40,9 +40,53 @@
 }
 
 
+
+//
+/***********************************************
+ * @description			overrides for faulty Apple CoreDataGeneratedAccessors
+ ***********************************************/
+//
+- (void)addCoordsObject:(Coord *)value {
+	
+	NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.coords];
+	
+	[tempSet addObject:value];
+	
+	self.coords = tempSet;
+	
+}
+
+- (void)removeCoordsObject:(Coord *)value{
+	
+	NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.coords];
+	
+	[tempSet removeObject:value];
+	
+	self.coords = tempSet;
+	
+}
+
+- (void)addCoords:(NSOrderedSet *)values{
+	
+	NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.coords];
+	
+	[tempSet intersectOrderedSet:values];
+	
+	self.coords=tempSet;
+	
+}
+
+
+
+
+
 -(BOOL)isUploaded{
 	return self.uploaded!=nil;
 }
+
+
+
+
 
 
 

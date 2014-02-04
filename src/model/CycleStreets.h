@@ -29,15 +29,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMTileSource.h"
 #import "RMMapView.h"
 #import <CoreLocation/CoreLocation.h>
-@class AppDelegate;
+
 
 @interface CycleStreets : NSObject {
 }
 
-@property (nonatomic, unsafe_unretained)		AppDelegate				* appDelegate;
-@property (nonatomic, strong)		Files				* files;
-@property (nonatomic, strong)		NSString				* APIKey;
-@property (nonatomic, strong)		NSString				* userAgent;
+@property (nonatomic, strong)		Files								* files;
+@property (nonatomic, strong)		NSString							* APIKey;
+@property (nonatomic, strong)		NSString							* userAgent;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 

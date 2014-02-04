@@ -70,7 +70,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @property (nonatomic,assign)  BOOL										userInfoSaved;
 
 
--(void)updateUI;
 
 
 @end
@@ -312,10 +311,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
--(void)updateUI{
+-(void)updateUIForDuration{
 	
-	if ( _shouldUpdateDuration )
-	{
+	if ( _shouldUpdateDuration ){
+		
 		NSDate *startDate = [[_trackTimer userInfo] objectForKey:@"StartDate"];
 		NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:startDate];
 		
@@ -329,22 +328,31 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		NSDate *outputDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:fauxDate];
 		
 		self.trackDurationLabel.text = [inputFormatter stringFromDate:outputDate];
+		
+	}else{
+		
+		if(_isRecordingTrack==NO)
+			self.trackDurationLabel.text=@"00:00:00";
 	}
 	
 	
 }
 
 
-- (void)resetDurationDisplay
-{
+- (void)resetDurationDisplays{
+	
 	[self updateUIForDistance];
 	[self updateUIForSpeed];
+	[self updateUIForDuration];
 }
 
 -(void)resetTimer{
 	
-	if(_trackTimer!=nil)
+	if(_trackTimer!=nil){
 		[_trackTimer invalidate];
+		self.trackTimer=nil;
+	}
+	
 }
 
 
@@ -382,11 +390,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
         BetterLog(@"start");
         
         // start the timer if needed
-        if ( _trackTimer == nil )
-        {
-			[self resetDurationDisplay];
+        if ( _trackTimer == nil ){
+			
+			[self updateUIForDuration];
 			self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f
-													 target:self selector:@selector(updateUI)
+													 target:self selector:@selector(updateUIForDuration)
 												   userInfo:[self newTripTimerUserInfo] repeats:YES];
         }
         
@@ -402,12 +410,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
         // set flag to update counter
         _shouldUpdateDuration = YES;
 		
+		if(_currentLocation)
+			[self didReceiveUpdatedLocation:_currentLocation];
+		
+		
     }else {
 		
-		__weak __block HCSTrackConfigViewController *weakSelf=self;
+		__weak __typeof(&*self)weakSelf = self;
 		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@""];
 		
 		[actionSheet addButtonWithTitle:@"Finish" handler:^{
+			[weakSelf didReceiveUpdatedLocation:_currentLocation];
 			[weakSelf initiateSaveTrip];
 		}];
 		[actionSheet setDestructiveButtonWithTitle:@"Reset" handler:^{
@@ -417,7 +430,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		
 		
 		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
-			_shouldUpdateDuration=YES;
 		}];
 		
 		
@@ -521,8 +533,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 #pragma mark - Trip methods
 
-- (BOOL)hasUserInfoBeenSaved
-{
+- (BOOL)hasUserInfoBeenSaved{
+	
 	BOOL response = NO;
 	
 	NSError *error;
@@ -552,24 +564,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
-- (NSDictionary *)newTripTimerUserInfo
-{
+- (NSDictionary *)newTripTimerUserInfo{
+	
     return [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], @"StartDate",
 			[NSNull null], @"TripManager", nil ];
 }
 
 
 
-- (void)resetRecordingInProgress
-{
+- (void)resetRecordingInProgress{
+	
 	[[TripManager sharedInstance] resetTrip];
 	_isRecordingTrack=NO;
+	_shouldUpdateDuration=NO;
 	
 	[self updateActionStateForTrip];
 	
 	_mapView.userTrackingMode=RMUserTrackingModeNone;
 	
-	[self resetDurationDisplay];
+	[self resetDurationDisplays];
+	
 	[self resetTimer];
 }
 
@@ -581,20 +595,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 #pragma mark TripPurposeDelegate methods
 
-- (NSString *)setPurpose:(unsigned int)index
-{
+- (NSString *)setPurpose:(unsigned int)index{
+	
 	NSString *purpose = [_tripManager setPurpose:index];
 	return [self updatePurposeWithString:purpose];
 }
 
 
-- (NSString *)getPurposeString:(unsigned int)index
-{
+- (NSString *)getPurposeString:(unsigned int)index{
+	
 	return [_tripManager getPurposeString:index];
 }
 
-- (NSString *)updatePurposeWithString:(NSString *)purpose
-{
+- (NSString *)updatePurposeWithString:(NSString *)purpose{
+	
 	// only enable start button if we don't already have a pending trip
 	if ( _trackTimer == nil )
 		_actionButton.enabled = YES;
@@ -604,25 +618,27 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	return purpose;
 }
 
-- (NSString *)updatePurposeWithIndex:(unsigned int)index
-{
+- (NSString *)updatePurposeWithIndex:(unsigned int)index{
+	
 	return [self updatePurposeWithString:[_tripManager getPurposeString:index]];
+	
 }
 
 
 
-- (void)didCancelSaveJourneyController
-{
+- (void)didCancelSaveJourneyController{
+	
 	[self.navigationController dismissModalViewControllerAnimated:YES];
     
 	[[TripManager sharedInstance] startTrip];
 	_isRecordingTrack = YES;
 	_shouldUpdateDuration = YES;
+	
 }
 
 
-- (void)didPickPurpose:(unsigned int)index
-{
+- (void)didPickPurpose:(unsigned int)index{
+	
 	_isRecordingTrack = NO;
     [[TripManager sharedInstance]resetTrip];
 	_actionButton.enabled = YES;
@@ -637,8 +653,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
  * @description			MEMORY
  ***********************************************/
 //
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
+	
     [super didReceiveMemoryWarning];
     
 }

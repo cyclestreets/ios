@@ -88,7 +88,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
 			self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
 			self.locationManager.distanceFilter = 5; // specified in meters
 			self.locationManager.activityType=CLActivityTypeFitness;
-			self.locationManager.pausesLocationUpdatesAutomatically = NO;
+			self.locationManager.pausesLocationUpdatesAutomatically = YES;
 			
 			[self.locationManager startUpdatingLocation];
 		}
@@ -105,8 +105,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
 
 
 /**
- *  Called by UIApplicationWillEnterForegroundNotification, will stopp all updating and destroy this location manager
- At thsi point RM's location manager should start and take over delivering delegate calls to the app
+ *  Called by UIApplicationWillEnterForegroundNotification, will stop all updating and destroy this location manager
+ At this point RM's location manager should start and take over delivering delegate calls to the app
  */
 -(void)stopBackgroundLocating{
 	

@@ -76,8 +76,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 - (void)saveNotes:(NSString*)notes;
 - (void)saveTrip;
 
-- (CLLocationDistance)getDistanceEstimate;
-
 
 
 - (int)countUnSavedTrips;

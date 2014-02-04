@@ -21,25 +21,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  PhotoMap.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 06/06/2010.
 //
 
 #import <UIKit/UIKit.h>
 #import "RMMapViewDelegate.h"
-#import "BlueCircleView.h"
 #import "SuperViewController.h"
-#import "PhotoWizardViewController.h"
-#import "SVPulsingAnnotationView.h"
 
 @class RMMapContents;
-@class CycleStreets;
-@class Location;
-@class PhotoMapImageLocationViewController;
-@class InitialLocation;
 
 
-@interface PhotoMapViewController : SuperViewController
-<RMMapViewDelegate, LocationProvider,GPSLocationProvider> {
+@interface PhotoMapViewController : SuperViewController <RMMapViewDelegate> {
 	
 }
 
