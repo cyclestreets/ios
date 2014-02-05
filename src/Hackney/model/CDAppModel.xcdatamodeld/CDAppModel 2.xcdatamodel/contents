@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="1.0" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="2.0" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Coord" representedClassName="Coord" syncable="YES">
         <attribute name="altitude" optional="YES" attributeType="Double" syncable="YES"/>
         <attribute name="hAccuracy" optional="YES" attributeType="Double" syncable="YES"/>
@@ -8,7 +8,7 @@
         <attribute name="recorded" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
         <attribute name="speed" optional="YES" attributeType="Double" syncable="YES"/>
         <attribute name="vAccuracy" optional="YES" attributeType="Double" syncable="YES"/>
-        <relationship name="trip" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="coords" inverseEntity="Trip" indexed="YES" syncable="YES"/>
+        <relationship name="trip" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="coords" inverseEntity="Trip" indexed="YES" syncable="YES"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
         <attribute name="altitude" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>

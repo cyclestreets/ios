@@ -27,6 +27,8 @@
 #import "SettingsManager.h"
 #import "CoreDataStore.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 #import <CoreLocation/CoreLocation.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
@@ -386,6 +388,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 -(IBAction)didSelectActionButton:(id)sender{
 	
 	if(_isRecordingTrack == NO){
+		
 		
         BetterLog(@"start");
         

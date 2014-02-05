@@ -81,7 +81,7 @@ static CoreDataStore *gMainStoreInstance;
 						   isConfiguration:configuration
 						   compatibleWithStoreMetadata:sourceMetadata];
 	
-	pscCompatibile=YES;
+	//pscCompatibile=YES;
 	//
 	// if migration is required
 	if (pscCompatibile==YES) {

@@ -188,7 +188,7 @@
 				break;
 		}
 		
-		//_uploadButton.enabled=_trip.uploaded==nil;
+		_uploadButton.enabled=_trip.uploaded==nil;
 		
 		
 		

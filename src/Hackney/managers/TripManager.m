@@ -15,6 +15,7 @@
 #import "CoreDataStore.h"
 #import "ApplicationJSONParser.h"
 #import "HudManager.h"
+#import "CJSONOrderedSerializer.h"
 
 // use this epsilon for both real-time and post-processing distance calculations
 #define kEpsilonAccuracy		100.0
@@ -329,7 +330,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
     
     // JSON encode the trip data
-    NSData *tripJsonData = [NSJSONSerialization dataWithJSONObject:tripDict options:0 error:&writeError];
+    NSData *tripJsonData = [[CJSONOrderedSerializer serializer] serializeObject:tripDict error:&writeError];
     NSString *tripJson = [[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding];
     
 	

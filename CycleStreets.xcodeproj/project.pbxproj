@@ -480,6 +480,8 @@
 		28373E2716481AFB00F5E356 /* WayPointCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2516481AFB00F5E356 /* WayPointCellView.m */; };
 		28373E2A16481BF800F5E356 /* WayPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2916481BF800F5E356 /* WayPointVO.m */; };
 		28373E2B16481BF800F5E356 /* WayPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2916481BF800F5E356 /* WayPointVO.m */; };
+		2842A00418A239A200402FA7 /* CJSONOrderedSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2842A00318A239A200402FA7 /* CJSONOrderedSerializer.m */; };
+		2842A00518A239A200402FA7 /* CJSONOrderedSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2842A00318A239A200402FA7 /* CJSONOrderedSerializer.m */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		28452757188E9168005A7DF1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28452756188E9168005A7DF1 /* CoreData.framework */; };
@@ -1114,6 +1116,9 @@
 		28373E2516481AFB00F5E356 /* WayPointCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayPointCellView.m; sourceTree = "<group>"; };
 		28373E2816481BF800F5E356 /* WayPointVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayPointVO.h; sourceTree = "<group>"; };
 		28373E2916481BF800F5E356 /* WayPointVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayPointVO.m; sourceTree = "<group>"; };
+		2842A00218A239A200402FA7 /* CJSONOrderedSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONOrderedSerializer.h; sourceTree = "<group>"; };
+		2842A00318A239A200402FA7 /* CJSONOrderedSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONOrderedSerializer.m; sourceTree = "<group>"; };
+		2842A00618A23ED400402FA7 /* CDAppModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CDAppModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
 		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
 		28443E611332867D00FAD008 /* RouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteVO.h; sourceTree = "<group>"; };
@@ -2701,6 +2706,8 @@
 				28D2BAE01354814E00694093 /* UKImage.m */,
 				284608261649388900CBF96A /* ImageUtilties.h */,
 				284608271649388900CBF96A /* ImageUtilties.m */,
+				2842A00218A239A200402FA7 /* CJSONOrderedSerializer.h */,
+				2842A00318A239A200402FA7 /* CJSONOrderedSerializer.m */,
 			);
 			path = utilities;
 			sourceTree = "<group>";
@@ -3733,6 +3740,7 @@
 				280E248C144D82850021CDFA /* TBXML.m in Sources */,
 				280E2490144D82850021CDFA /* CDataScanner.m in Sources */,
 				280E2491144D82850021CDFA /* CDataScanner_Extensions.m in Sources */,
+				2842A00418A239A200402FA7 /* CJSONOrderedSerializer.m in Sources */,
 				280E2492144D82850021CDFA /* NSCharacterSet_Extensions.m in Sources */,
 				280E2493144D82850021CDFA /* NSDictionary_JSONExtensions.m in Sources */,
 				280E2494144D82850021CDFA /* NSScanner_Extensions.m in Sources */,
@@ -3916,6 +3924,7 @@
 				2834372B15DD5DC300B00FD5 /* TBXML.m in Sources */,
 				2834372C15DD5DC300B00FD5 /* CDataScanner.m in Sources */,
 				2834372D15DD5DC300B00FD5 /* CDataScanner_Extensions.m in Sources */,
+				2842A00518A239A200402FA7 /* CJSONOrderedSerializer.m in Sources */,
 				2834372E15DD5DC300B00FD5 /* NSCharacterSet_Extensions.m in Sources */,
 				2834372F15DD5DC300B00FD5 /* NSDictionary_JSONExtensions.m in Sources */,
 				2834373015DD5DC300B00FD5 /* NSScanner_Extensions.m in Sources */,
@@ -4405,9 +4414,10 @@
 		280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2842A00618A23ED400402FA7 /* CDAppModel 2.xcdatamodel */,
 				280565ED18903C8900359211 /* CDAppModel.xcdatamodel */,
 			);
-			currentVersion = 280565ED18903C8900359211 /* CDAppModel.xcdatamodel */;
+			currentVersion = 2842A00618A23ED400402FA7 /* CDAppModel 2.xcdatamodel */;
 			path = CDAppModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
