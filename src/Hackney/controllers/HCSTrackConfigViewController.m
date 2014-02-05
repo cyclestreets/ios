@@ -426,7 +426,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 			[weakSelf didReceiveUpdatedLocation:_currentLocation];
 			[weakSelf initiateSaveTrip];
 		}];
-		[actionSheet bk_setDestructiveButtonWithTitle:@"Reset" handler:^{
+		[actionSheet bk_setDestructiveButtonWithTitle:@"Delete" handler:^{
 			[weakSelf resetRecordingInProgress];
 			[[TripManager sharedInstance] removeCurrentRecordingTrip];
 		}];
@@ -478,7 +478,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		
 		UINavigationController *nav=nil;
 		
-		if([[UserManager sharedInstance] hasUser]){
+		if([[UserManager sharedInstance] hasUserData]){
 			
 			PickerViewController *tripPurposePickerView = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
 			tripPurposePickerView.delegate=self;

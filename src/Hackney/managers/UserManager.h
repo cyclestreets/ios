@@ -18,6 +18,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserManager);
 @property (nonatomic,strong)  User        *user;
 
 @property(nonatomic,readonly)  BOOL       hasUser;
+@property(nonatomic,readonly)  BOOL       hasUserData;
 
 -(User*)fetchUser;
 
