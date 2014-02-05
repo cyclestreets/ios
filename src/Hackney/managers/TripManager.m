@@ -180,7 +180,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 -(void)optimiseTrip:(Trip*)trip{
 	
 	// remove inaccurate coords
-	NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 10"];
+	NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 50"];
 	NSOrderedSet *filteredCoords		= [trip.coords filteredOrderedSetUsingPredicate:filterByAccuracy];
 	
 	Coord *previousCoord = nil;

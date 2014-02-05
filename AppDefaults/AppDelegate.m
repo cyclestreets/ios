@@ -83,9 +83,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	Crashlytics *crashlytics=[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	
-	//#if defined (CONFIGURATION_Debug)
+	#if defined (CONFIGURATION_Debug)
 	crashlytics.debugMode=YES;
-	//#endif
+	#endif
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	
