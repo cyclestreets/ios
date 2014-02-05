@@ -25,7 +25,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserManager);
 {
     self = [super init];
     if (self) {
-        [self fetchUser];
+		
     }
     return self;
 }
