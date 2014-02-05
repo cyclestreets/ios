@@ -420,19 +420,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
     }else {
 		
 		__weak __typeof(&*self)weakSelf = self;
-		UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:@""];
+		UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@""];
 		
-		[actionSheet addButtonWithTitle:@"Finish" handler:^{
+		[actionSheet bk_addButtonWithTitle:@"Finish" handler:^{
 			[weakSelf didReceiveUpdatedLocation:_currentLocation];
 			[weakSelf initiateSaveTrip];
 		}];
-		[actionSheet setDestructiveButtonWithTitle:@"Reset" handler:^{
+		[actionSheet bk_setDestructiveButtonWithTitle:@"Reset" handler:^{
 			[weakSelf resetRecordingInProgress];
 			[[TripManager sharedInstance] removeCurrentRecordingTrip];
 		}];
 		
 		
-		[actionSheet setCancelButtonWithTitle:@"Continue" handler:^{
+		[actionSheet bk_setCancelButtonWithTitle:@"Continue" handler:^{
 		}];
 		
 		

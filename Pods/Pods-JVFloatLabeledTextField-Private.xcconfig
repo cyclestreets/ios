@@ -1,5 +1,5 @@
 #include "Pods-JVFloatLabeledTextField.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/JVFloatLabeledTextField" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/JVFloatLabeledTextField" "${PODS_ROOT}/Headers/Pixate"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/JVFloatLabeledTextField" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/BlocksKit" "${PODS_ROOT}/Headers/JVFloatLabeledTextField" "${PODS_ROOT}/Headers/Pixate" "${PODS_ROOT}/Headers/RegexKitLite" "${PODS_ROOT}/Headers/SFHFKeychainUtils"
 OTHER_LDFLAGS = -ObjC ${PODS_JVFLOATLABELEDTEXTFIELD_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}

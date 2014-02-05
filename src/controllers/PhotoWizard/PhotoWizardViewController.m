@@ -107,7 +107,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIView *photoResultView;
 @property (nonatomic, strong) IBOutlet CopyLabel *photoResultURLLabel;
 @property (nonatomic, strong) IBOutlet UIButton *photoMapButton;
-@property (nonatomic, strong) WEPopoverController *categoryMenu;
 
 @property (nonatomic,strong)  RMAnnotation									*userLocationAnnotation;
 
@@ -292,8 +291,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	_modalToolBar.clipsToBounds=YES;
     
-    
-	popoverClass = [WEPopoverController class];
 	
     _viewState=PhotoWizardViewStateInfo;
 	_activePage=0;
@@ -1189,17 +1186,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 }
 
-
-#pragma mark -
-#pragma mark WEPopoverControllerDelegate implementation
-
-- (void)popoverControllerDidDismissPopover:(WEPopoverController *)thePopoverController {
-	self.categoryMenu = nil;
-}
-
-- (BOOL)popoverControllerShouldDismissPopover:(WEPopoverController *)thePopoverController {
-	return YES;
-}
 
 #pragma mark - Description View
 //

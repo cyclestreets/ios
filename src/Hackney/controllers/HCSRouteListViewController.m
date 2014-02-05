@@ -154,9 +154,9 @@ static int const kTagImage=	3;
 	if(unsyncedCount>1){
 		
 		
-		UIAlertView *alert=[UIAlertView alertWithTitle:[NSString stringWithFormat:@"Found Unsynced Trip%@",unsyncedCount>1 ? @"s" : EMPTYSTRING] message:
+		UIAlertView *alert=[UIAlertView  bk_alertViewWithTitle:[NSString stringWithFormat:@"Found Unsynced Trip%@",unsyncedCount>1 ? @"s" : EMPTYSTRING] message:
 							[NSString stringWithFormat:@"You have %i saved trip%@ that %@ not yet been uploaded.",unsyncedCount,unsyncedCount>1 ? @"s" : EMPTYSTRING, unsyncedCount>1 ? @"have" : @"has"]];
-		[alert addButtonWithTitle:@"OK" handler:^{
+		[alert bk_addButtonWithTitle:@"OK" handler:^{
 			
 		}];
 		[alert show];
@@ -267,15 +267,15 @@ static int const kTagImage=	3;
 	
 	int unsyncedCount= [[TripManager sharedInstance] countUnSyncedTrips];
 	
-	UIActionSheet *actionSheet=[UIActionSheet sheetWithTitle:[NSString stringWithFormat:@"You have %i un-synced trip%@, do you wish to upload %@ now. This may take a little time.",
+	UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:[NSString stringWithFormat:@"You have %i un-synced trip%@, do you wish to upload %@ now. This may take a little time.",
 					unsyncedCount,unsyncedCount>1 ? @"s" : EMPTYSTRING,
 					unsyncedCount>1 ? @"them all":@"this"]];
 	
-	[actionSheet addButtonWithTitle:[NSString stringWithFormat:@"Upload%@",unsyncedCount>1 ? @" All":EMPTYSTRING] handler:^{
+	[actionSheet bk_addButtonWithTitle:[NSString stringWithFormat:@"Upload%@",unsyncedCount>1 ? @" All":EMPTYSTRING] handler:^{
 		[[TripManager sharedInstance] uploadAllUnsyncedTrips];
 	}];
 	
-	[actionSheet setCancelButtonWithTitle:@"Cancel" handler:^{
+	[actionSheet bk_setCancelButtonWithTitle:@"Cancel" handler:^{
 		
 	}];
 	

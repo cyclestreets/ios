@@ -48,6 +48,48 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 1
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 0
 
+// BlocksKit
+#define COCOAPODS_POD_AVAILABLE_BlocksKit
+#define COCOAPODS_VERSION_MAJOR_BlocksKit 2
+#define COCOAPODS_VERSION_MINOR_BlocksKit 1
+#define COCOAPODS_VERSION_PATCH_BlocksKit 0
+
+// BlocksKit/All
+#define COCOAPODS_POD_AVAILABLE_BlocksKit_All
+#define COCOAPODS_VERSION_MAJOR_BlocksKit_All 2
+#define COCOAPODS_VERSION_MINOR_BlocksKit_All 1
+#define COCOAPODS_VERSION_PATCH_BlocksKit_All 0
+
+// BlocksKit/Core
+#define COCOAPODS_POD_AVAILABLE_BlocksKit_Core
+#define COCOAPODS_VERSION_MAJOR_BlocksKit_Core 2
+#define COCOAPODS_VERSION_MINOR_BlocksKit_Core 1
+#define COCOAPODS_VERSION_PATCH_BlocksKit_Core 0
+
+// BlocksKit/DynamicDelegate
+#define COCOAPODS_POD_AVAILABLE_BlocksKit_DynamicDelegate
+#define COCOAPODS_VERSION_MAJOR_BlocksKit_DynamicDelegate 2
+#define COCOAPODS_VERSION_MINOR_BlocksKit_DynamicDelegate 1
+#define COCOAPODS_VERSION_PATCH_BlocksKit_DynamicDelegate 0
+
+// BlocksKit/MessageUI
+#define COCOAPODS_POD_AVAILABLE_BlocksKit_MessageUI
+#define COCOAPODS_VERSION_MAJOR_BlocksKit_MessageUI 2
+#define COCOAPODS_VERSION_MINOR_BlocksKit_MessageUI 1
+#define COCOAPODS_VERSION_PATCH_BlocksKit_MessageUI 0
+
+// BlocksKit/MiniFFI
+#define COCOAPODS_POD_AVAILABLE_BlocksKit_MiniFFI
+#define COCOAPODS_VERSION_MAJOR_BlocksKit_MiniFFI 2
+#define COCOAPODS_VERSION_MINOR_BlocksKit_MiniFFI 1
+#define COCOAPODS_VERSION_PATCH_BlocksKit_MiniFFI 0
+
+// BlocksKit/UIKit
+#define COCOAPODS_POD_AVAILABLE_BlocksKit_UIKit
+#define COCOAPODS_VERSION_MAJOR_BlocksKit_UIKit 2
+#define COCOAPODS_VERSION_MINOR_BlocksKit_UIKit 1
+#define COCOAPODS_VERSION_PATCH_BlocksKit_UIKit 0
+
 // JVFloatLabeledTextField
 #define COCOAPODS_POD_AVAILABLE_JVFloatLabeledTextField
 #define COCOAPODS_VERSION_MAJOR_JVFloatLabeledTextField 0
@@ -59,4 +101,16 @@
 #define COCOAPODS_VERSION_MAJOR_Pixate 2
 #define COCOAPODS_VERSION_MINOR_Pixate 0
 #define COCOAPODS_VERSION_PATCH_Pixate 1
+
+// RegexKitLite
+#define COCOAPODS_POD_AVAILABLE_RegexKitLite
+#define COCOAPODS_VERSION_MAJOR_RegexKitLite 4
+#define COCOAPODS_VERSION_MINOR_RegexKitLite 0
+#define COCOAPODS_VERSION_PATCH_RegexKitLite 0
+
+// SFHFKeychainUtils
+#define COCOAPODS_POD_AVAILABLE_SFHFKeychainUtils
+#define COCOAPODS_VERSION_MAJOR_SFHFKeychainUtils 0
+#define COCOAPODS_VERSION_MINOR_SFHFKeychainUtils 0
+#define COCOAPODS_VERSION_PATCH_SFHFKeychainUtils 1
 

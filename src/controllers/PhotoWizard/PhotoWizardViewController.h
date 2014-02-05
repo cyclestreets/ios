@@ -16,7 +16,6 @@
 //#import "AccountViewController.h"
 #import "RMMapView.h"
 #import "CopyLabel.h"
-#import "WEPopoverController.h"
 #import "PhotoWizardCategoryMenuViewController.h"
 
 #import "RMOpenStreetMapSource.h"
@@ -37,7 +36,7 @@ enum  {
 typedef int PhotoWizardViewState;
 
 @interface PhotoWizardViewController : SuperViewController<UITextViewDelegate,
-UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,RMMapViewDelegate,WEPopoverControllerDelegate>{
+UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,RMMapViewDelegate>{
 	Class popoverClass;
 }
 
