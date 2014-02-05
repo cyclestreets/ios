@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  CycleStreetsAppDelegate.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import <UIKit/UIKit.h>
@@ -42,7 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"
 #import "IIViewDeckController.h"
-#import "WrapController.h"
+#import <ViewDeck/IIWrapController.h>
 #import "NSString-Utilities.h"
 
 #import "StartupManager.h"
@@ -331,7 +330,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
 						nav.navigationBarHidden=YES;
 						
-						vccontroller = [[WrapController alloc] initWithViewController:nav];
+						vccontroller = [[IIWrapController alloc] initWithViewController:nav];
 						
 				}else{
 					

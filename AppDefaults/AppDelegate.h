@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  CycleStreetsAppDelegate.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import <UIKit/UIKit.h>

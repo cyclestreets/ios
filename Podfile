@@ -4,6 +4,7 @@ pod 'Pixate'
 pod 'SFHFKeychainUtils'
 pod 'RegexKitLite'
 pod 'BlocksKit', :git => 'https://github.com/pandamonia/BlocksKit.git', :branch => 'next'
+pod 'ViewDeck'
 
 
 
