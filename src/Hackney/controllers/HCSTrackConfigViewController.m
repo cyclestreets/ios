@@ -308,7 +308,7 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 		[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
 		
 		[UIView animateWithDuration:0.4 animations:^{
-			_actionView.backgroundColor=UIColorFromRGB(0x509720);
+			_actionView.backgroundColor=UIColorFromRGB(0x1B953E);
 		}];
 		
 	}
@@ -384,6 +384,7 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 -(void)viewWillAppear:(BOOL)animated{
     
     [self createNonPersistentUI];
+	
     
     [super viewWillAppear:animated];
 }
@@ -505,8 +506,6 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 		[actionSheet bk_setCancelButtonWithTitle:@"Continue" handler:^{
 		}];
 		
-		
-		
 		[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
 		
     }
@@ -550,7 +549,7 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 			
 		}
 		
-		[self.navigationController presentViewController:nav animated:YES	completion:^{
+		[self.navigationController presentViewController:nav animated:YES completion:^{
 			
 		}];
 		

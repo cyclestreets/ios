@@ -45,7 +45,7 @@
                     <rect key="frame" x="22" y="303" width="105" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
@@ -73,11 +73,11 @@
                         </barButtonItem>
                     </items>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="barTintColor" red="0.1960784314" green="0.39607843139999999" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="barTintColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
                 </toolbar>
             </subviews>
             <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
         </view>
     </objects>
 </document>

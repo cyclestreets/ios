@@ -284,7 +284,6 @@
 		283436B915DD5DC300B00FD5 /* MapLocationSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2858F2B01586161B0047283D /* MapLocationSearchCell.xib */; };
 		283436BA15DD5DC300B00FD5 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		283436BB15DD5DC300B00FD5 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
-		283436BE15DD5DC300B00FD5 /* PhotoWizardCategoryMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */; };
 		283436BF15DD5DC300B00FD5 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		283436C015DD5DC300B00FD5 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
 		283436C115DD5DC300B00FD5 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
@@ -745,7 +744,6 @@
 		28BC449018915A5800711A1A /* MapCoord.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC442F18915A5800711A1A /* MapCoord.png */; };
 		28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185A153D74C500023FAF /* PhotoCategoryManager.m */; };
 		28C0185E153D7BF100023FAF /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185D153D7BF100023FAF /* PhotoCategoryVO.m */; };
-		28C8342015A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */; };
 		28C8342315A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */; };
 		28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
@@ -1336,7 +1334,6 @@
 		28C0185A153D74C500023FAF /* PhotoCategoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryManager.m; sourceTree = "<group>"; };
 		28C0185C153D7BF100023FAF /* PhotoCategoryVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCategoryVO.h; sourceTree = "<group>"; };
 		28C0185D153D7BF100023FAF /* PhotoCategoryVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryVO.m; sourceTree = "<group>"; };
-		28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoWizardCategoryMenuView.xib; path = photowizard/PhotoWizardCategoryMenuView.xib; sourceTree = "<group>"; };
 		28C8342115A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWizardCategoryMenuViewController.h; sourceTree = "<group>"; };
 		28C8342215A3604D00EE58B5 /* PhotoWizardCategoryMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWizardCategoryMenuViewController.m; sourceTree = "<group>"; };
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
@@ -2026,7 +2023,6 @@
 			children = (
 				2890F15F14FEC30500FF8901 /* PhotoWizardView.xib */,
 				288FA2CB150C06F00068F0C1 /* PhotoWizardLocationView.xib */,
-				28C8341F15A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib */,
 			);
 			name = photowizard;
 			sourceTree = "<group>";
@@ -2937,7 +2933,6 @@
 				28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */,
 				289AA2C0188EEB170097AA5A /* TrackingDot.png in Resources */,
 				28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */,
-				28C8342015A35FCF00EE58B5 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				289AA2B4188EEB170097AA5A /* LoadingTile.png in Resources */,
 				28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */,
 				283435C615DD17B000B00FD5 /* Icon_nofavroutes.png in Resources */,
@@ -3161,7 +3156,6 @@
 				283436BA15DD5DC300B00FD5 /* UIIcon_userphotomap.png in Resources */,
 				28640E8418985DAA009A4030 /* UIActivityTwitter@2x.png in Resources */,
 				283436BB15DD5DC300B00FD5 /* UIIcon_userphotomap@2x.png in Resources */,
-				283436BE15DD5DC300B00FD5 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				283436BF15DD5DC300B00FD5 /* PhotoWizardCategoryCell.xib in Resources */,
 				283436C015DD5DC300B00FD5 /* Icon_nofavroutes.png in Resources */,
 				283436C115DD5DC300B00FD5 /* Icon_norecentroutes.png in Resources */,

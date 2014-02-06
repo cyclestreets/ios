@@ -273,6 +273,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 //
 
 
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 
 - (void)viewDidLoad {
 	
@@ -365,7 +369,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-   [self createNonPersistentUI];
+	[self createNonPersistentUI];
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 	
     [super viewWillAppear:animated];
 }
@@ -381,6 +387,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		}
 		
 	}
+	
 		
     [super viewWillDisappear:animated];
 }
@@ -801,10 +808,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
 		UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+		
 		picker.delegate = self;
 		picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 		picker.allowsEditing = YES;
-		[self presentModalViewController:picker animated:YES];
+		[self presentViewController:picker animated:YES	completion:^{}];
 		
 	}else {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error accessing camera" message:@"Device does not have a camera" 
@@ -824,7 +832,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		picker.delegate = self;
 		picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 		picker.allowsEditing = NO;
-		[self presentModalViewController:picker animated:YES];
+		[self presentViewController:picker animated:YES	completion:^{}];
 	}
 	else {
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error accessing photo library" 
@@ -879,9 +887,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		 BetterLog(@"error retrieving image from  - %@",[error localizedDescription]);
 	 }];
 	
-    
-	[picker dismissModalViewControllerAnimated:YES];	
 	
+	[self dismissViewControllerAnimated:YES completion:^{}];
+	
+    
 	// ensure further screens are reset
 	[self initialiseViewState:PhotoWizardViewStateLocation];
 	
@@ -903,7 +912,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-	[picker dismissModalViewControllerAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 

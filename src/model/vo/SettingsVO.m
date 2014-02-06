@@ -22,10 +22,11 @@
 {
     self = [super init];
     if (self) {
+		// set defaults
         _imageSize=@"full";
         _mapStyle = @"OpenCycleMap";
         _routeUnit = @"miles";
-		_autoEndRoute=YES;
+		_autoEndRoute=NO;
     }
     return self;
 }

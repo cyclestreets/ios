@@ -65,7 +65,7 @@
 // alert titles
 #define kBatteryTitle		@"Battery Low"
 #define kRetryTitle			@"Retry Upload?"
-#define	kSavingTitle		@"Uploading your trip"
+#define	kSavingTitle		@"Uploading your route"
 #define kSavingNoteTitle    @"Uploading your note"
 #define kSuccessTitle		@"Upload complete"
 #define kTripNotesTitle		@"Enter Comments Below"
