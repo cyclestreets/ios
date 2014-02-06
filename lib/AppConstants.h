@@ -117,7 +117,7 @@ extern NSString *const CYCLESTREETSURLSCHEME;
 
 // Hackney
 
-extern NSString *const HCSDISPLAYTRIPMAP;
+extern NSString *const HCS_TRIPCOMPLETE;
 
 
  

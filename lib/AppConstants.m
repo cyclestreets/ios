@@ -104,7 +104,7 @@ NSString *const CYCLESTREETSURLSCHEME=@"cyclestreets";
 
 // Hackney
 
-NSString *const HCSDISPLAYTRIPMAP=@"HCSDISPLAYTRIPMAP";
+NSString *const HCS_TRIPCOMPLETE=@"HCS_TRIPCOMPLETE";
 
 
 

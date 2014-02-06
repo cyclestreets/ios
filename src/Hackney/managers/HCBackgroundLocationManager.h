@@ -14,7 +14,7 @@
 @protocol HCBackgroundLocationManagerDelegate <NSObject>
 
 
--(void)didReceiveUpdatedLocation:(CLLocation*)location;
+-(void)didReceiveUpdatedLocations:(NSArray*)locations;
 
 @end
 

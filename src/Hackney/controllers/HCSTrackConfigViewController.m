@@ -27,11 +27,12 @@
 #import "SettingsManager.h"
 #import "CoreDataStore.h"
 
-#import <Crashlytics/Crashlytics.h>
 
 #import <CoreLocation/CoreLocation.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
+static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
+
 
 @interface HCSTrackConfigViewController ()<RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,HCBackgroundLocationManagerDelegate>
 
@@ -69,7 +70,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @property (nonatomic,assign)  BOOL										isRecordingTrack;
 @property (nonatomic,assign)  BOOL										shouldUpdateDuration;
 @property (nonatomic,assign)  BOOL										didUpdateUserLocation;
-@property (nonatomic,assign)  BOOL										userInfoSaved;
 
 
 
@@ -79,6 +79,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 @implementation HCSTrackConfigViewController
 
 
+
+#pragma mark - NSNotification
 
 //
 /***********************************************
@@ -94,7 +96,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[notifications addObject:GPSLOCATIONUPDATE];
 	[notifications addObject:GPSLOCATIONFAILED];
 	[notifications addObject:MAPSTYLECHANGED];
-	[notifications addObject:HCSDISPLAYTRIPMAP];
+	[notifications addObject:HCS_TRIPCOMPLETE];
 	[notifications addObject:MAPUNITCHANGED];
 	
 	[super listNotificationInterests];
@@ -109,8 +111,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	
 	
-	if([name isEqualToString:HCSDISPLAYTRIPMAP]){
-		[self displayUploadedTripMap];
+	if([name isEqualToString:HCS_TRIPCOMPLETE]){
+		[self resetRecordingInProgress];
 	}
 	
 	if([name isEqualToString:MAPSTYLECHANGED]){
@@ -127,7 +129,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 - (void) didNotificationMapStyleChanged {
 	self.mapView.tileSource = [CycleStreets tileSource];
-	//_attributionLabel.text = [MapViewController mapAttribution];
 }
 
 
@@ -140,7 +141,24 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
-#pragma mark - Location updates
+
+- (void)resetRecordingInProgress{
+	
+	_isRecordingTrack=NO;
+	_shouldUpdateDuration=NO;
+	
+	[self updateActionStateForTrip];
+	
+	_mapView.userTrackingMode=RMUserTrackingModeNone;
+	
+	[self resetDurationDisplays];
+	
+	[self resetTimer];
+}
+
+
+
+#pragma mark - RMMap & background Location updates
 
 
 - (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation{
@@ -165,7 +183,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	if ( _isRecordingTrack ){
 		
-		[self didReceiveUpdatedLocation:_currentLocation];
+		[self didReceiveUpdatedLocations:@[_currentLocation]];
+		
+		[self determineUserLocationStopped];
 		
 		[self updateUIForDistance];
 		
@@ -176,141 +196,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 
+
+
+
+
 #pragma mark - HCBackgroundLocationManagerDelegate method
 
 
--(void)didReceiveUpdatedLocation:(CLLocation*)location{
+-(void)didReceiveUpdatedLocations:(NSArray*)locations{
 	
-	BetterLog(@"%@",location);
-	
-	[_tripManager addCoord:location];
-	
-}
-
-
--(void)updateUIForDistance{
-	
-	
-	if ( _isRecordingTrack ){
-		
-		if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-			float totalMiles = _currentDistance/1600;
-			_trackDistanceLabel.text=[NSString stringWithFormat:@"%3.1f miles", totalMiles];
-		}else {
-			float	kms=_currentDistance/1000;
-			_trackDistanceLabel.text=[NSString stringWithFormat:@"%4.1f km", kms];
-		}
-	
-	}else{
-		_trackDistanceLabel.text = [NSString stringWithFormat:@"0.0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"miles" : @"km"];
-	}
-	
-	
-}
-
-//TODO: for map & here, speed is m/s this conversion seems wrong
-
--(void)updateUIForSpeed{
-	
-	if ( _isRecordingTrack && _currentLocation.speed >= 0 ){
-		
-		double kmh=(_currentLocation.speed*TIME_HOUR)/1000;
-	
-		if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
-			double mileSpeed = kmh/1.609;
-			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2.0f mph", mileSpeed];
-		}else {
-			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2.1f km/h", kmh];
-		}
-	}else{
-		_trackSpeedLabel.text = [NSString stringWithFormat:@"0.0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"mph" : @"kmh"];
-	}
+	BetterLog(@"%@",locations);
+	for(CLLocation *location in locations)
+		[_tripManager addCoord:location];
 	
 }
 
 
-
-
-
-
-// assess wether user has been in the same place too long
--(void)determineUserLocationStopped{
-	
-	
-	// compare last lcoation and new location
-	
-	// if same within certain accurcy > start auto stop timer
-	
-	// next location does not compare clear timer
-	
-	// if timer expires auto stop Trip and save
-	
-	
-	
-}
-
-
-//
-/***********************************************
- * @description			VIEW METHODS
- ***********************************************/
-//
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	
-	self.tripManager=[TripManager sharedInstance];
-	
-	[HCBackgroundLocationManager sharedInstance].delegate=self;
-
-	[self hasUserInfoBeenSaved];
-	
-    [self createPersistentUI];
-}
-
-
--(void)viewWillAppear:(BOOL)animated{
-    
-    [self createNonPersistentUI];
-    
-    [super viewWillAppear:animated];
-}
-
-
--(void)createPersistentUI{
-	
-	
-	[RMMapView class];
-	[_mapView setDelegate:self];
-	_mapView.showsUserLocation=YES;
-	_mapView.zoom=15;
-	_mapView.tileSource=[CycleStreets tileSource];
-	
-	
-	
-	UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 33, 33)];
-	[button setImage:[UIImage imageNamed:@"UIButtonBarCompose.png"] forState:UIControlStateNormal];
-	//[button setTitle:@"Report" forState:UIControlStateNormal];
-	[button addTarget:self action:@selector(didSelectPhotoWizardButton:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
-	[self.navigationItem setRightBarButtonItem:barbutton animated:NO];
-	
-	
-	[self updateUIForSpeed];
-	[self updateUIForDistance];
-	
-	//TODO: UI styling
-	[_actionButton addTarget:self action:@selector(didSelectActionButton:) forControlEvents:UIControlEventTouchUpInside];
-	
-	
-}
-
--(void)createNonPersistentUI{
-    
-	
-}
-
+#pragma mark -  UI updates
 
 
 -(void)updateUIForDuration{
@@ -348,6 +250,74 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[self updateUIForDuration];
 }
 
+
+-(void)updateUIForDistance{
+	
+	
+	if ( _isRecordingTrack ){
+		
+		if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+			float totalMiles = _currentDistance/1600;
+			_trackDistanceLabel.text=[NSString stringWithFormat:@"%3.1f miles", totalMiles];
+		}else {
+			float	kms=_currentDistance/1000;
+			_trackDistanceLabel.text=[NSString stringWithFormat:@"%4.1f km", kms];
+		}
+	
+	}else{
+		_trackDistanceLabel.text = [NSString stringWithFormat:@"0.0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"miles" : @"km"];
+	}
+	
+	
+}
+
+
+
+-(void)updateUIForSpeed{
+	
+	if ( _isRecordingTrack && _currentLocation.speed >= 0 ){
+		
+		double kmh=(_currentLocation.speed*TIME_HOUR)/1000;
+	
+		if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
+			double mileSpeed = kmh/1.609;
+			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2.0f mph", mileSpeed];
+		}else {
+			_trackSpeedLabel.text= [NSString stringWithFormat:@"%2.1f km/h", kmh];
+		}
+	}else{
+		_trackSpeedLabel.text = [NSString stringWithFormat:@"0.0 %@",[SettingsManager sharedInstance].routeUnitisMiles ? @"mph" : @"kmh"];
+	}
+	
+}
+
+
+
+-(void)updateActionStateForTrip{
+	
+	if(_isRecordingTrack){
+		
+		[_actionButton setTitle:@"Finish" forState:UIControlStateNormal];
+		
+		[UIView animateWithDuration:0.4 animations:^{
+			_actionView.backgroundColor=UIColorFromRGB(0xCB0000);
+		}];
+		
+	}else{
+		
+		[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
+		
+		[UIView animateWithDuration:0.4 animations:^{
+			_actionView.backgroundColor=UIColorFromRGB(0x509720);
+		}];
+		
+	}
+	
+}
+
+
+
+
 -(void)resetTimer{
 	
 	if(_trackTimer!=nil){
@@ -356,6 +326,106 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	}
 	
 }
+
+
+
+
+#pragma mark - Auto Complete Trip
+
+
+// assess wether user has been in the same place too long
+-(void)determineUserLocationStopped{
+	
+	BOOL autoCompleteActive = [SettingsManager sharedInstance].dataProvider.autoEndRoute;
+	
+	if(autoCompleteActive==YES){
+		
+		BOOL isSignificantLocationChange=[UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:_lastLocation.coordinate accuracy:10];
+		
+		if(isSignificantLocationChange==NO){
+			
+			NSTimeInterval timeDelta=[_currentLocation.timestamp timeIntervalSinceDate:_lastLocation.timestamp];
+			
+			if(timeDelta>AUTOCOMPLETROUTEINTERVAL){
+				
+				[[TripManager sharedInstance] completeTripAutomatically];
+				
+			}
+			
+			
+		}
+		
+	}
+	
+}
+
+
+
+#pragma mark - UIView methods
+
+//
+/***********************************************
+ * @description			VIEW METHODS
+ ***********************************************/
+//
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	
+	self.tripManager=[TripManager sharedInstance];
+	
+	[HCBackgroundLocationManager sharedInstance].delegate=self;
+	
+    [self createPersistentUI];
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self createNonPersistentUI];
+    
+    [super viewWillAppear:animated];
+}
+
+
+-(void)createPersistentUI{
+	
+	
+	[RMMapView class];
+	[_mapView setDelegate:self];
+	_mapView.showsUserLocation=YES;
+	_mapView.zoom=15;
+	_mapView.tileSource=[CycleStreets tileSource];
+	
+	
+	
+	UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 33, 33)];
+	[button setImage:[UIImage imageNamed:@"UIButtonBarCompose.png"] forState:UIControlStateNormal];
+	//[button setTitle:@"Report" forState:UIControlStateNormal];
+	[button addTarget:self action:@selector(didSelectPhotoWizardButton:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
+	[self.navigationItem setRightBarButtonItem:barbutton animated:NO];
+	
+	
+	[self updateUIForSpeed];
+	[self updateUIForDistance];
+	
+	[_actionButton addTarget:self action:@selector(didSelectActionButton:) forControlEvents:UIControlEventTouchUpInside];
+	
+	
+}
+
+
+-(void)createNonPersistentUI{
+    
+	
+}
+
+
+
+
+
 
 
 
@@ -414,7 +484,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
         _shouldUpdateDuration = YES;
 		
 		if(_currentLocation)
-			[self didReceiveUpdatedLocation:_currentLocation];
+			[self didReceiveUpdatedLocations:@[_currentLocation]];
 		
 		
     }else {
@@ -423,7 +493,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@""];
 		
 		[actionSheet bk_addButtonWithTitle:@"Finish" handler:^{
-			[weakSelf didReceiveUpdatedLocation:_currentLocation];
+			[weakSelf didReceiveUpdatedLocations:@[_currentLocation]];
 			[weakSelf initiateSaveTrip];
 		}];
 		[actionSheet bk_setDestructiveButtonWithTitle:@"Delete" handler:^{
@@ -445,27 +515,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
--(void)updateActionStateForTrip{
+- (NSDictionary *)newTripTimerUserInfo{
 	
-	if(_isRecordingTrack){
-		
-		[_actionButton setTitle:@"Finish" forState:UIControlStateNormal];
-		
-		[UIView animateWithDuration:0.4 animations:^{
-			_actionView.backgroundColor=UIColorFromRGB(0xCB0000);
-		}];
-		
-	}else{
-		
-		[_actionButton setTitle:@"Start" forState:UIControlStateNormal];
-		
-		[UIView animateWithDuration:0.4 animations:^{
-			_actionView.backgroundColor=UIColorFromRGB(0x509720);
-		}];
-		
-	}
-	
+    return [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], @"StartDate",
+			[NSNull null], @"TripManager", nil ];
 }
+
+
 
 
 - (void)initiateSaveTrip{
@@ -510,14 +566,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 }
 
-- (void)displayUploadedTripMap{
-	
-    [self resetRecordingInProgress];
-    
-}
 
 
-#pragma mark - UI Events
 
 -(IBAction)didSelectPhotoWizardButton:(id)sender{
 	
@@ -534,69 +584,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
-#pragma mark - Trip methods
-
-- (BOOL)hasUserInfoBeenSaved{
-	
-	BOOL response = NO;
-	
-	NSError *error;
-	NSArray *fetchResults=[[CoreDataStore mainStore] allForEntity:@"User" error:&error];
-	
-	if ( fetchResults.count>0 ){
-		
-		if ( fetchResults != nil ){
-			
-			User *user = (User*)[fetchResults objectAtIndex:0];
-			
-			self.userInfoSaved = [user userInfoSaved];
-			response = _userInfoSaved;
-			
-		}else{
-			// Handle the error.
-			NSLog(@"no saved user");
-			if ( error != nil )
-				NSLog(@"PersonalInfo viewDidLoad fetch error %@, %@", error, [error localizedDescription]);
-		}
-	}else{
-		NSLog(@"no saved user");
-	}
-		
-	
-	return response;
-}
 
 
-- (NSDictionary *)newTripTimerUserInfo{
-	
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], @"StartDate",
-			[NSNull null], @"TripManager", nil ];
-}
-
-
-
-- (void)resetRecordingInProgress{
-	
-	[[TripManager sharedInstance] resetTrip];
-	_isRecordingTrack=NO;
-	_shouldUpdateDuration=NO;
-	
-	[self updateActionStateForTrip];
-	
-	_mapView.userTrackingMode=RMUserTrackingModeNone;
-	
-	[self resetDurationDisplays];
-	
-	[self resetTimer];
-}
-
-
-
-
-
-
-
-#pragma mark TripPurposeDelegate methods
+#pragma mark - TripPurposeDelegate methods
 
 - (NSString *)setPurpose:(unsigned int)index{
 	
@@ -650,6 +640,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[_tripManager setPurpose:index];
 }
 
+
+
+#pragma mark - generic
 
 //
 /***********************************************

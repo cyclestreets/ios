@@ -29,6 +29,8 @@
 @property (nonatomic,assign)  int												lastDistanceCalculation;
 @property (nonatomic,strong)  CLLocation										*lastRecordedLocation;
 
+@property (nonatomic,assign)  BOOL												deferringUpdates;
+
 @end
 
 
@@ -136,17 +138,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
 	BetterLog(@"");
 	
     if (oldLocation == nil) return;
+	
     BOOL isStaleLocation = [oldLocation.timestamp compare:self.startTimestamp] == NSOrderedAscending;
 	
-	
+	// if within required accuracy
     if (!isStaleLocation && newLocation.horizontalAccuracy >= 0.0f && newLocation.horizontalAccuracy < kRequiredHorizontalAccuracy) {
 		
+		// persist this location
         [self.locationHistory addObject:newLocation];
         if ([self.locationHistory count] > kNumLocationHistoriesToKeep) {
             [self.locationHistory removeObjectAtIndex:0];
         }
 		
-		
+		// if it's ben more than interval since we last calculated the distacne travelled
         if ([NSDate timeIntervalSinceReferenceDate] - self.lastDistanceCalculation > kDistanceCalculationInterval) {
             self.lastDistanceCalculation = [NSDate timeIntervalSinceReferenceDate];
 			
@@ -168,7 +172,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
             self.lastRecordedLocation = bestLocation;
 			
 			if(_delegate!=nil)
-				[_delegate didReceiveUpdatedLocation:_lastRecordedLocation];
+				[_delegate didReceiveUpdatedLocations:@[_lastRecordedLocation]];
 			
         }
     }
@@ -176,6 +180,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
 
 
 
+
+
+// Deferred location delegate
+
+/*
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+	
+	if(_delegate!=nil)
+		[_delegate didReceiveUpdatedLocations:locations];
+	
+	// Defer updates until a certain amount of time has passed.
+	if (!self.deferringUpdates) {
+		[_locationManager allowDeferredLocationUpdatesUntilTraveled:CLLocationDistanceMax timeout:5.0];
+		self.deferringUpdates = YES;
+	}
+}
+*/
 
 
 

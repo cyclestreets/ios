@@ -156,6 +156,12 @@
 		}
 		
 		
+		Coord *last		= [_trip.coords lastObject];
+		Coord *first	= [_trip.coords firstObject];
+		NSTimeInterval duration = [last.recorded timeIntervalSinceDate:first.recorded];
+		NSLog(@"duration = %.0fs", duration);
+		//[_currentRecordingTrip setDuration:[NSNumber numberWithDouble:duration]];
+		
 		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
 									_trip.timeString,
 									[dateFormatter stringFromDate:[_trip start]]];

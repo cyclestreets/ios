@@ -37,6 +37,8 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
+// refactored CycleStreets Neil Edwards 21014
+
 
 #import <CoreLocation/CoreLocation.h>
 #import <Foundation/Foundation.h>
@@ -71,10 +73,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 
 -(void)removeCurrentRecordingTrip;
 
+-(void)completeTripAutomatically;
+
 
 - (CLLocationDistance)addCoord:(CLLocation*)location;
 - (void)saveNotes:(NSString*)notes;
-- (void)saveTrip;
+- (void)saveTrip:(BOOL)isBackgroundEvent;
 
 
 

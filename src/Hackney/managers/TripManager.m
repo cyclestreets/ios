@@ -33,9 +33,7 @@
 
 @property (nonatomic,strong,readwrite)  Trip									*selectedTrip;
 
-@property (nonatomic,strong)  NSMutableArray									*recordingTripCoords;
 @property (nonatomic,assign) CLLocationDistance									recordedDistance;
-
 
 @property (nonatomic,strong)  NSNumberFormatter									*coordDecimalPlaceFormatter;
 
@@ -56,7 +54,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     if (self = [super init]){
 		
 		_isRecording					= NO;
-		self.recordingTripCoords=[NSMutableArray array];
 		
 		
 		self.coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
@@ -94,7 +91,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	_isRecording = NO;
     [[NSUserDefaults standardUserDefaults] setBool:_isRecording forKey: @"recording"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-	
 	
 }
 
@@ -138,20 +134,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 #pragma mark - Trip saving
 
+
+-(void)completeTripAutomatically{
+	
+	[self saveTrip:YES];
+	
+}
+
+
+
+
+
+
 // Saves current Recording Trip to CD
-- (void)saveTrip
-{
-	NSLog(@"about to save trip with %d coords...", [_recordingTripCoords count]);
+- (void)saveTrip:(BOOL)isBackgroundEvent{
+	
 	
 	[self optimiseTrip:_currentRecordingTrip];
-
-	if ( _currentRecordingTrip && [_recordingTripCoords count]>0 ){
+	
+	if ( _currentRecordingTrip && [_currentRecordingTrip.coords count]>0 ){
 		
 		CLLocationDistance newDist = [self calculateTripDistance:_currentRecordingTrip];
 		[_currentRecordingTrip setDistance:[NSNumber numberWithDouble:newDist]];
 		
-		Coord *last		= [_recordingTripCoords objectAtIndex:0];
-		Coord *first	= [_recordingTripCoords lastObject];
+		Coord *last		= [_currentRecordingTrip.coords lastObject];
+		Coord *first	= [_currentRecordingTrip.coords firstObject];
 		NSTimeInterval duration = [last.recorded timeIntervalSinceDate:first.recorded];
 		NSLog(@"duration = %.0fs", duration);
 		[_currentRecordingTrip setDuration:[NSNumber numberWithDouble:duration]];
@@ -166,10 +173,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	[[CoreDataStore mainStore]save];
 	
-	[self uploadSelectedTrip:_currentRecordingTrip];
+	if(isBackgroundEvent==NO){
+		
+		[self uploadSelectedTrip:_currentRecordingTrip];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:HCS_TRIPCOMPLETE object:nil];
+		
+	}else{
+		
+		[self removeCurrentRecordingTrip];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:HCS_TRIPCOMPLETE object:nil];
+		
+	}
 	
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:HCSDISPLAYTRIPMAP object:nil];
 }
 
 
@@ -179,9 +196,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 // One cavaet is that during dev, we can tweak map filtering as the points will have been culled.
 -(void)optimiseTrip:(Trip*)trip{
 	
+	BetterLog(@"Pre optimisation %d coords...", [trip.coords count]);
+	
 	// remove inaccurate coords
 	NSPredicate *filterByAccuracy	= [NSPredicate predicateWithFormat:@"hAccuracy < 50"];
 	NSOrderedSet *filteredCoords		= [trip.coords filteredOrderedSetUsingPredicate:filterByAccuracy];
+	
+	BetterLog(@"filteredCoords %d coords...", [filteredCoords count]);
 	
 	Coord *previousCoord = nil;
 	NSMutableArray *optimisedCoords = [[NSMutableArray alloc]init];
@@ -221,7 +242,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		
 	}
 	
-	
+	BetterLog(@"fully optimised %d coords...", [optimisedCoords count]);
 	
 	
 	NSOrderedSet *newSet=[NSOrderedSet orderedSetWithArray:optimisedCoords];
@@ -582,29 +603,29 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	[_currentRecordingTrip addCoordsObject:coord];
 	
-	// check to see if the coords array is empty
-	if ( [_recordingTripCoords count] == 0 )
-	{
+	NSOrderedSet *recordingTripCoords=_currentRecordingTrip.coords;
+	
+	if ( [recordingTripCoords count] == 0 ){
+		
 		BetterLog(@"updated trip start time");
 		// this is the first coord of a new trip => update start
 		[_currentRecordingTrip setStart:[coord recorded]];
-	}
-	else
-	{
-		// update distance estimate by tabulating deltaDist with a low tolerance for noise
-		Coord *prev  = [_recordingTripCoords objectAtIndex:0];
+		
+	}else{
+		
+		
+		Coord *prev  = [recordingTripCoords objectAtIndex:[recordingTripCoords count]-1];
 		_recordedDistance	+= [self distanceFrom:prev to:coord realTime:YES];
 		[_currentRecordingTrip setDistance:[NSNumber numberWithDouble:_recordedDistance]];
 		
 		// update duration
-		Coord *first	= [_recordingTripCoords lastObject];
+		Coord *first	= [recordingTripCoords firstObject];
 		NSTimeInterval duration = [coord.recorded timeIntervalSinceDate:first.recorded];
 		
 		[_currentRecordingTrip setDuration:[NSNumber numberWithDouble:duration]];
 			
 	}
 	
-	[_recordingTripCoords insertObject:coord atIndex:0];
 	
 	[[CoreDataStore mainStore]save];
 	
@@ -626,8 +647,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	int count = [trips count];
 	NSLog(@"found %d trip(s) in need of distance recalcuation", count);
 
-	for (Trip *trip in trips)
-	{
+	for (Trip *trip in trips){
+		
 		CLLocationDistance newDist = [self calculateTripDistance:trip];
 		[trip setDistance:[NSNumber numberWithDouble:newDist]];
 
@@ -669,32 +690,36 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	CLLocationDistance	newDist		= 0.;
 	
 	// sanity check accuracy
-	if ( [prev.hAccuracy doubleValue] < kEpsilonAccuracy &&
-		[next.hAccuracy doubleValue] < kEpsilonAccuracy )
-	{
+	if ( [prev.hAccuracy doubleValue] < kEpsilonAccuracy && [next.hAccuracy doubleValue] < kEpsilonAccuracy ){
+		
 		// sanity check time interval
-		if ( !realTime || deltaTime < kEpsilonTimeInterval )
-		{
+		if ( !realTime || deltaTime < kEpsilonTimeInterval ){
+			
 			// sanity check speed
-			if ( !realTime || (deltaDist / deltaTime < kEpsilonSpeed) )
-			{
+			if ( !realTime || (deltaDist / deltaTime < kEpsilonSpeed) ){
 				// consider distance delta as valid
 				newDist += deltaDist;
 				
+			}else{
+				
+				NSLog(@"WARNING speed exceeds limit: %f => throw out deltaDist: %f, deltaTime: %f",  deltaDist / deltaTime, deltaDist, deltaTime);
+				
 			}
-			else
-				NSLog(@"WARNING speed exceeds epsilon: %f => throw out deltaDist: %f, deltaTime: %f",
-					  deltaDist / deltaTime, deltaDist, deltaTime);
+			
+		}else{
+			
+			NSLog(@"WARNING deltaTime exceeds limit: %f => throw out deltaDist: %f", deltaTime, deltaDist);
 		}
-		else
-			NSLog(@"WARNING deltaTime exceeds epsilon: %f => throw out deltaDist: %f", deltaTime, deltaDist);
+		
+	}else{
+		
+		NSLog(@"WARNING accuracy exceeds limit: %f => throw out deltaDist: %f", MAX([prev.hAccuracy doubleValue], [next.hAccuracy doubleValue]) , deltaDist);
+		
 	}
-	else
-		NSLog(@"WARNING accuracy exceeds epsilon: %f => throw out deltaDist: %f",
-			  MAX([prev.hAccuracy doubleValue], [next.hAccuracy doubleValue]) , deltaDist);
 	
 	return newDist;
 }
+
 
 
 
