@@ -72,7 +72,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[TripManager sharedInstance] saveNotes:detailTextView.text];
-    [[TripManager sharedInstance] saveTrip];
+    [[TripManager sharedInstance] saveTrip:NO];
 	
 	HCSMapViewController *controller = [[HCSMapViewController alloc] initWithNibName:[HCSMapViewController nibName] bundle:nil];
 	controller.trip=[TripManager sharedInstance].currentRecordingTrip;

@@ -1499,7 +1499,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	self.cancelViewButton.title=@"Close";
 	
 	
-	//[ButtonUtilities styleIBButton:_photoMapButton type:@"orange" text:@"View map"];
 	[_photoMapButton addTarget:self action:@selector(photoMapButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
     _photoResultURLLabel.text=[_uploadImage.responseDict objectForKey:@"url"];
@@ -1535,7 +1534,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		
 		AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
-		[appDelegate showTabBarViewControllerByName:@"Photomap"];
+		[appDelegate showTabBarViewControllerByName:@"Report"];
 		
 		[self resetPhotoWizard];
 		

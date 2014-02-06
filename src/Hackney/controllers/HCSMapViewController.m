@@ -130,8 +130,8 @@
 #pragma mark - View
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
+	
     [super viewDidLoad];
 	
 	[RMMapView class];
@@ -145,8 +145,8 @@
 	
 	
     
-	if (_trip )
-	{
+	if (_trip ){
+		
 		// format date as a string
 		static NSDateFormatter *dateFormatter = nil;
 		if (dateFormatter == nil) {
@@ -156,27 +156,22 @@
 		}
 		
 		
-		Coord *last		= [_trip.coords lastObject];
-		Coord *first	= [_trip.coords firstObject];
-		NSTimeInterval duration = [last.recorded timeIntervalSinceDate:first.recorded];
-		NSLog(@"duration = %.0fs", duration);
-		//[_currentRecordingTrip setDuration:[NSNumber numberWithDouble:duration]];
-		
-		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@",
-									_trip.timeString,
-									[dateFormatter stringFromDate:[_trip start]]];
+		self.routeInfoLabel.text = [NSString stringWithFormat:@"elapsed: %@ ~ %@", _trip.timeString, [dateFormatter stringFromDate:[_trip start]]];
         
 		_myNavigationItem.title = [NSString stringWithFormat:@"%@ ~ %@", [_trip lengthString], [_trip speedString] ];
 		
 		
 		// only add info view for trips with non-null notes
-		if ( ![_trip.notes isEqualToString:EMPTYSTRING] && _trip.notes != nil)
-		{
+		if ( ![_trip.notes isEqualToString:EMPTYSTRING] && _trip.notes != nil){
+			
 			_doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(infoAction:)];
 			_infoButton.visible=YES;
 			[self initInfoView];
+			
 		}else{
+			
 			_infoButton.visible=NO;
+			
 		}
 		
         

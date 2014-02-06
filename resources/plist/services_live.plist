@@ -2,49 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Register</key>
-	<dict>
-		<key>id</key>
-		<string>Register</string>
-		<key>remoteurl</key>
-		<string>https://www.cyclestreets.net/api/usercreate.xml</string>
-		<key>method</key>
-		<string>Register</string>
-		<key>type</key>
-		<string>GETPOST</string>
-		<key>cache</key>
-		<false/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-	</dict>
-	<key>Login</key>
-	<dict>
-		<key>id</key>
-		<string>Login</string>
-		<key>remoteurl</key>
-		<string>https://www.cyclestreets.net/api/uservalidate.xml</string>
-		<key>method</key>
-		<string>Login</string>
-		<key>type</key>
-		<string>GETPOST</string>
-		<key>cache</key>
-		<false/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-	</dict>
-	<key>ForgottenPassword</key>
-	<dict>
-		<key>id</key>
-		<string>ForgottenPassword</string>
-		<key>remoteurl</key>
-		<string>https://www.cyclestreets.net/api/usercreate.xml</string>
-		<key>type</key>
-		<string>GETPOST</string>
-		<key>cache</key>
-		<false/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-	</dict>
 	<key>RetrieveLocationPhotos</key>
 	<dict>
 		<key>id</key>
@@ -73,78 +30,6 @@
 		<string>IMAGEPOST</string>
 		<key>cache</key>
 		<false/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
-	<key>PoiListing</key>
-	<dict>
-		<key>id</key>
-		<string>PoiListing</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/poitypes.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
-	<key>PoiCategoryLocation</key>
-	<dict>
-		<key>id</key>
-		<string>PoiCategoryLocation</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/pois.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
-	<key>CalculateRoute</key>
-	<dict>
-		<key>id</key>
-		<string>CalculateRoute</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/journey.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
-	<key>RetrieveRouteById</key>
-	<dict>
-		<key>id</key>
-		<string>RetrieveRouteById</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/journey.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
 		<key>parserType</key>
 		<string>DATATYPE_XML</string>
 		<key>headers</key>

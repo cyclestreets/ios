@@ -74,7 +74,7 @@
     
     if (pickerCategory == 0) {
         navBarItself.topItem.title = @"Trip Purpose";
-        self.descriptionText.text = @"Please select your trip purpose & tap Save";
+        self.descriptionText.text = @"Please select your trip purpose & tap Next";
     }
     
 	[super viewDidLoad];

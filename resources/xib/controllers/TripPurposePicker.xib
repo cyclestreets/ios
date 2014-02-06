@@ -29,12 +29,11 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <color key="barTintColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
                     <textAttributes key="titleTextAttributes">
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </textAttributes>
                     <items>
-                        <navigationItem id="5">
-                            <barButtonItem key="backBarButtonItem" title="Cancel" id="12"/>
+                        <navigationItem title="Purpose" id="5">
                             <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="13">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -53,7 +52,7 @@
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Please select your trip purpose &amp; tap Next" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="12" id="19">
                     <rect key="frame" x="0.0" y="63" width="320" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.090196080509999998" green="0.63921570780000003" blue="0.30980393290000002" alpha="1" colorSpace="deviceRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
