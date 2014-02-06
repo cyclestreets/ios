@@ -16,6 +16,7 @@
 #import "ApplicationJSONParser.h"
 #import "HudManager.h"
 #import "CJSONOrderedSerializer.h"
+#import "DataSourceManager.h"
 
 // use this epsilon for both real-time and post-processing distance calculations
 #define kEpsilonAccuracy		100.0
@@ -366,15 +367,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 							   @"user":userJson,
 							   @"username":EMPTYSTRING,
 							   @"password":EMPTYSTRING,
-							   @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString],
-							   @"version":[NSString stringWithFormat:@"%d", kSaveProtocolVersion]};
+							   @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString]};
 	
 	BetterLog(@"%@",postVars);
 	
 	
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-	NSString *fullURL=[NSString stringWithFormat:@"https://api.cyclestreets.net/v2/gpstracks.add?key=%@",[[CycleStreets sharedInstance] APIKey]];
+	NSDictionary *serviceDict=[[DataSourceManager sharedInstance] getServiceForType:HACKNEYTRIPUPLOAD];
+	NSString *fullURL=[NSString stringWithFormat:@"%@?key=%@",serviceDict[REMOTEURL],[[CycleStreets sharedInstance] APIKey]];
 	
     [manager POST:fullURL parameters:postVars success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		
@@ -383,8 +384,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
             
 			//TODO: awaiting fix server side
 			NSDictionary *responseDict=result.dataProvider;
+			BOOL responseState=NO;
+			NSString *errorMessage=nil;
 			
-			BOOL responseState=YES;
+			if(responseDict[[RESULT lowercaseString]]!=nil){
+				responseState=[responseDict[[RESULT lowercaseString]] boolValue];
+			}else if(responseDict[ERROR]!=nil){
+				errorMessage=responseDict[ERROR];
+			}
+			
 			
 			switch (responseState) {
 				case YES:
@@ -400,7 +408,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 				default:
 				{
 					
-					[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
+					[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR,MESSAGE:errorMessage}];
 					
 				}
 					

@@ -16,9 +16,6 @@
  ***********************************************/
 //
 
-NSString *const SECUREUDID_DOMAIN = @"com.chromaagency.ios";
-NSString *const SECUREUDID_SALT = @"2XRCVktftNnsdpMu2nFs7Ww0DfnpthT";
-
 
 
 NSString *const STARTUPERROR_SERVICELOADFAILED=@"STARTUPERROR_SERVICELOADFAILED";

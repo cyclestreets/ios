@@ -58,6 +58,8 @@ NSString *const RESPONSE_GPSUPLOAD=@"GpsuploadResponse";
 NSString *const RESPONSE_GPSUPLOADMULTI=@"GpsuploadMultiResponse";
 
 
+
+
 //INTERNAL
 NSString *const CALCULATEROUTERESPONSE=@"CALCULATEROUTERESPONSE";
 NSString *const RETRIEVEROUTEBYIDRESPONSE=@"RETRIEVEROUTEBYIDRESPONSE";
@@ -105,7 +107,7 @@ NSString *const CYCLESTREETSURLSCHEME=@"cyclestreets";
 // Hackney
 
 NSString *const HCS_TRIPCOMPLETE=@"HCS_TRIPCOMPLETE";
-
+NSString *const HACKNEYTRIPUPLOAD=@"HackneyTripUpload";
 
 
 

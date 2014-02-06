@@ -56,5 +56,18 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>HackneyTripUpload</key>
+	<dict>
+		<key>id</key>
+		<string>HackneyTripUpload</string>
+		<key>remoteurl</key>
+		<string>https://api.cyclestreets.net/v2/gpstracks.add</string>
+		<key>type</key>
+		<string>POST</string>
+		<key>cache</key>
+		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_JSON</string>
+	</dict>
 </dict>
 </plist>

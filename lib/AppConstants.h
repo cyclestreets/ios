@@ -122,7 +122,7 @@ extern NSString *const CYCLESTREETSURLSCHEME;
 // Hackney
 
 extern NSString *const HCS_TRIPCOMPLETE;
-
+extern NSString *const HACKNEYTRIPUPLOAD;
 
  
 
