@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <UIKit/UIKit.h>
 #import "StartupManager.h"
 
-#define ISDEVELOPMENT 1
+#define ISDEVELOPMENT 0
 
 @interface AppDelegate : NSObject <UIApplicationDelegate,StartupManagerDelegate,UITabBarControllerDelegate> {
 	

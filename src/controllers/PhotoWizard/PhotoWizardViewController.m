@@ -580,6 +580,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		[self updateGlobalViewUIForState];
 		
+		if(_currentCategoryField.isFirstResponder)
+			[_currentCategoryField resignFirstResponder];
+		
+		if (_photodescriptionField.isFirstResponder)
+			[_photodescriptionField resignFirstResponder];
 		
 		
     }

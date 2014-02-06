@@ -6,11 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoWizardLocationViewController">
             <connections>
-                <outlet property="closeButton" destination="17" id="18"/>
-                <outlet property="locationLabel" destination="10" id="19"/>
+                <outlet property="closeButton" destination="17" id="ZdS-d8-bWG"/>
+                <outlet property="locationLabel" destination="10" id="Mdp-cr-2JB"/>
                 <outlet property="mapView" destination="3" id="4"/>
-                <outlet property="resetButton" destination="13" id="20"/>
-                <outlet property="updateButton" destination="14" id="21"/>
+                <outlet property="modalToolBar" destination="12" id="gzR-rD-Yg1"/>
+                <outlet property="resetButton" destination="13" id="dpO-rW-Lpc"/>
+                <outlet property="updateButton" destination="14" id="xd0-14-rEl"/>
                 <outlet property="view" destination="1" id="5"/>
             </connections>
         </placeholder>
@@ -19,6 +20,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" id="bXI-Ue-vuH">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
+                </view>
                 <view contentMode="scaleToFill" id="3" customClass="RMMapView">
                     <rect key="frame" x="0.0" y="44" width="320" height="250"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -32,10 +38,12 @@
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="11">
-                    <rect key="frame" x="22" y="322" width="278" height="87"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="11">
+                    <rect key="frame" x="22" y="322" width="278" height="101"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                    <string key="text">If you want to change the chosen photo's location drag the marker or click on the map to set the new location and press Update. You can return it to the original location by pressing Reset.</string>
+                    <string key="text">If you want to change the chosen photo's location drag the marker or touch on the map to set the new location and press Update. 
+
+For photos with locations you can return it to the original location by pressing Reset.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                     <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,10 +57,10 @@
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="12">
+                <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="12">
                     <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.1960784314" green="0.39607843139999999" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
                     <items>
                         <barButtonItem title="Cancel" id="17">
                             <color key="tintColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>

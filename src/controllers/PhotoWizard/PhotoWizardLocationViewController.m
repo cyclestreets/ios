@@ -19,13 +19,15 @@
 
 
 @property (nonatomic, weak) IBOutlet RMMapView						* mapView;
-@property (nonatomic, strong) UILabel								* locationLabel;
-@property (nonatomic, strong) UIBarButtonItem						* closeButton;
-@property (nonatomic, strong) UIBarButtonItem						* resetButton;
-@property (nonatomic, strong) UIBarButtonItem						* updateButton;
+@property (nonatomic, strong) IBOutlet UILabel						* locationLabel;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem				* closeButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem				* resetButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem				* updateButton;
 @property (nonatomic) BOOL											avoidAccidentalTaps;
 @property (nonatomic) BOOL											singleTapDidOccur;
 @property (nonatomic) CGPoint										singleTapPoint;
+
+@property (nonatomic, strong) IBOutlet UIToolbar					*modalToolBar;
 
 @property (nonatomic,strong)  RMAnnotation							*userAnnotation;
 
@@ -82,6 +84,7 @@
 	
 	_mapView.enableDragging=YES;
 	
+	_modalToolBar.clipsToBounds=YES;
 		
 }
 
@@ -190,6 +193,7 @@
 	
 	BetterLog(@"");
 	
+	
 	[self markerLocationDidUpdate:annotation.coordinate];
 	
 }
@@ -220,10 +224,6 @@
 
 - (void)mapView:(RMMapView *)map didEndDragAnnotation:(RMAnnotation *)annotation{
 	
-//	RMProjectedPoint projectedPoint = annotation.projectedLocation;
-//    CGPoint screenPoint = annotation.position;
-
-	
 	[self markerLocationDidUpdate:annotation.coordinate];
 	
 }
@@ -231,6 +231,9 @@
 
 
 - (void)singleTapOnMap:(RMMapView *)map at:(CGPoint)point {
+	
+	_userAnnotation.coordinate=[_mapView pixelToCoordinate:point];
+	_userAnnotation.position=point;
 	
 	[self markerLocationDidUpdate:[_mapView pixelToCoordinate:point]];
 	
