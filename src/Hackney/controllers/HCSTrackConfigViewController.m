@@ -401,9 +401,8 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 	
 	
 	
-	UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 33, 33)];
+	UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 28,18)];
 	[button setImage:[UIImage imageNamed:@"UIButtonBarCompose.png"] forState:UIControlStateNormal];
-	//[button setTitle:@"Report" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(didSelectPhotoWizardButton:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *barbutton=[[UIBarButtonItem alloc] initWithCustomView:button];
 	[self.navigationItem setRightBarButtonItem:barbutton animated:NO];

@@ -6,53 +6,39 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>Plan route</string>
+			<string>Route</string>
 			<key>id</key>
-			<string>map</string>
+			<string>route</string>
 			<key>class</key>
-			<string>MapViewController</string>
+			<string>HCSTrackConfigViewController</string>
 			<key>nib</key>
-			<string>MapView</string>
+			<string>HCSTrackConfigView</string>
 			<key>tabimage</key>
 			<string>CSTabBar_plan_route.png</string>
+			<key>hidesNavBar</key>
+			<false/>
 			<key>usesSlidingView</key>
-			<true/>
-			<key>childVC</key>
-			<string>WayPointViewController</string>
-			<key>hidesNavBar</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Itinerary</string>
-			<key>id</key>
-			<string>itinerary</string>
-			<key>class</key>
-			<string>ItineraryViewController</string>
-			<key>nib</key>
-			<string>ItineraryView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_itinerary.png</string>
-			<key>hidesNavBar</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Saved routes</string>
+			<string>Saved Routes</string>
 			<key>id</key>
 			<string>routes</string>
 			<key>class</key>
-			<string>RoutesViewController</string>
+			<string>HCSRouteListViewController</string>
 			<key>nib</key>
-			<string>RoutesView</string>
+			<string>HCSRouteListView</string>
 			<key>tabimage</key>
-			<string>CSTabBar_fav_routes.png</string>
+			<string>CSTabBar_itinerary.png</string>
+			<key>hidesNavBar</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Photomap</string>
+			<string>Report</string>
 			<key>id</key>
-			<string>photomap</string>
+			<string>report</string>
 			<key>class</key>
 			<string>PhotoMapViewController</string>
 			<key>nib</key>
@@ -64,19 +50,27 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Add Photo</string>
+			<string>User</string>
 			<key>id</key>
-			<string>addphoto</string>
+			<string>user</string>
 			<key>class</key>
-			<string>PhotoWizardViewController</string>
+			<string>HCSUserDetailsViewController</string>
 			<key>nib</key>
-			<string>PhotoWizardView</string>
+			<string>HCSUserDetailsView</string>
 			<key>tabimage</key>
-			<string>CSTabBar_add_photo.png</string>
-			<key>isVC</key>
-			<true/>
-			<key>hidesBottomBarWhenPushed</key>
-			<true/>
+			<string>CSTabBar_account.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Info</string>
+			<key>id</key>
+			<string>info</string>
+			<key>class</key>
+			<string>HCSHelpViewController</string>
+			<key>nib</key>
+			<string>HCSHelpView</string>
+			<key>tabimage</key>
+			<string>CSTabBar_credits.png</string>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -89,30 +83,6 @@
 			<string>SettingsView</string>
 			<key>tabimage</key>
 			<string>CSTabBar_settings.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Account</string>
-			<key>id</key>
-			<string>account</string>
-			<key>class</key>
-			<string>AccountViewController</string>
-			<key>nib</key>
-			<string>AccountView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_account.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Credits</string>
-			<key>id</key>
-			<string>credits</string>
-			<key>class</key>
-			<string>CreditsViewController</string>
-			<key>nib</key>
-			<string>CreditsView</string>
-			<key>tabimage</key>
-			<string>CSTabBar_credits.png</string>
 		</dict>
 	</array>
 </dict>

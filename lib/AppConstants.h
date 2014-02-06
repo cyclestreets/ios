@@ -10,7 +10,11 @@
 
 @class NetResponse;
 
-#define ENABLEDEBUGTRACE 1
+#if defined (CONFIGURATION_Debug)
+	#define ENABLEDEBUGTRACE 1
+#else
+	#define ENABLEDEBUGTRACE 0
+#endif
 
 typedef void(^BUSimpleBlock)(void);
 typedef void (^ParserCompletionBlock)(NetResponse *result);

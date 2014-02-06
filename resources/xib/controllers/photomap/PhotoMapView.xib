@@ -43,14 +43,14 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </textAttributes>
                     <items>
-                        <navigationItem title="Photomap" id="pdb-oa-FsR">
+                        <navigationItem title="Report" id="pdb-oa-FsR">
                             <barButtonItem key="leftBarButtonItem" image="CSBarButton_location.png" width="24" id="6">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="locationButtonSelected:" destination="-1" id="54"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" image="UIButtonBarCameraSmall.png" width="33" id="41">
+                            <barButtonItem key="rightBarButtonItem" image="UIButtonBarCompose.png" width="33" id="41">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="showPhotoWizard:" destination="-1" id="53"/>
@@ -68,6 +68,6 @@
     </objects>
     <resources>
         <image name="CSBarButton_location.png" width="20" height="20"/>
-        <image name="UIButtonBarCameraSmall.png" width="20" height="15"/>
+        <image name="UIButtonBarCompose.png" width="22" height="18"/>
     </resources>
 </document>

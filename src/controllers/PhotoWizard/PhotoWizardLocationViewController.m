@@ -213,9 +213,10 @@
 	BetterLog(@" %f %f",annotation.coordinate.latitude,annotation.coordinate.longitude);
 	
 	CGPoint screenPosition = CGPointMake(annotation.position.x - delta.x, annotation.position.y - delta.y);
+	CGPoint screenPositionOffset = CGPointMake(annotation.position.x - delta.x, annotation.position.y - delta.y);
 	
     annotation.coordinate = [_mapView pixelToCoordinate:screenPosition];
-    annotation.position = screenPosition;
+    annotation.position = screenPositionOffset;
 	
 	[self markerLocationDidUpdate:annotation.coordinate];
 	
