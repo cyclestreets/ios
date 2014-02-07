@@ -275,7 +275,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			[self uploadSelectedTrip:trip completion:^(BOOL result) {
 				
 				if(result==YES){
-					completeCount--;
+					completeCount++;
 					
 					[[HudManager sharedInstance] updateDeterminateHUD:completeCount/unsyncedCount];
 				}
@@ -356,10 +356,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
     NSString *tripJson = [[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding];
     
 	
-	//@"userAge":user.age,
-	//@"userGender":user.gender,
 	
-	// NOTE: device hash added by SaveRequest initWithPostVars
 	NSDictionary *postVars = @{@"coords":tripJson,
 							   @"purpose":purpose,
 							   @"notes":notes,
