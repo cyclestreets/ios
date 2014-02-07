@@ -338,7 +338,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		notes = trip.notes;
 	
 	// get start date
-	NSString *start = [outputFormatter stringFromDate:trip.start];
+	NSString *start = [NSString stringWithFormat:@"%ld", (long)[trip.start timeIntervalSince1970]];
 	
 	
 	// encode user data
@@ -367,6 +367,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 							   @"user":userJson,
 							   @"username":EMPTYSTRING,
 							   @"password":EMPTYSTRING,
+							   @"format":@"atlanta",
 							   @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString]};
 	
 	BetterLog(@"%@",postVars);
@@ -480,10 +481,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		
 		User *user = [users firstObject];
 		
-        NSString *appVersion = [NSString stringWithFormat:@"%@ (%@) on iOS %@",
-                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
-                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"],
-                                [[UIDevice currentDevice] systemVersion]];
+//        NSString *appVersion = [NSString stringWithFormat:@"%@ (%@) on iOS %@",
+//                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
+//                                [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"],
+//                                [[UIDevice currentDevice] systemVersion]];
         
 		
 		if ( user != nil ){
@@ -492,7 +493,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			[userDict setValue:user.age             forKey:@"age"];
 			[userDict setValue:user.gender          forKey:@"gender"];
 			
-			[userDict setValue:appVersion           forKey:@"app_version"];
+			//[userDict setValue:appVersion           forKey:@"app_version"];
 			
 		}else{
 			NSLog(@"TripManager fetch user FAIL");
