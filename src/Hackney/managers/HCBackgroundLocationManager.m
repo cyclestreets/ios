@@ -10,6 +10,8 @@
 #import "SynthesizeSingleton.h"
 #import "GlobalUtilities.h"
 #import "TripManager.h"
+#import "UserLocationManager.h"
+#import "SettingsManager.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -20,6 +22,9 @@
 #define kMinLocationsNeededToUpdateDistance 3 // the number of locations needed in history before we will even update the current distance
 #define kRequiredHorizontalAccuracy 50.0f // the required accuracy in meters for a location.  anything above this number will be discarded
 
+static int const AUTOCOMPLETROUTEINTERVAL = 1*TIME_MINUTE;
+
+
 
 @interface HCBackgroundLocationManager() <CLLocationManagerDelegate>
 
@@ -27,9 +32,16 @@
 @property (nonatomic,strong)  NSMutableArray									*locationHistory;
 @property (nonatomic,strong)  NSDate											*startTimestamp;
 @property (nonatomic,assign)  int												lastDistanceCalculation;
+
+@property (nonatomic,strong)  CLLocation										*currentRecordedLocation;
 @property (nonatomic,strong)  CLLocation										*lastRecordedLocation;
 
 @property (nonatomic,assign)  BOOL												deferringUpdates;
+
+// background auto complete
+@property (nonatomic,assign)  UIBackgroundTaskIdentifier						autoCompleteTask;
+@property (nonatomic,strong)  NSTimer											*autoCompleteTimer;
+
 
 @end
 
@@ -118,11 +130,87 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
 		
 		[self.locationManager stopUpdatingLocation];
 		
+		[self stopBackgroundAutoCompletion];
+		
 		self.locationManager=nil;
 		
 	}
 	
 }
+
+
+// assess wether user has been in the same place too long
+-(void)determineUserLocationStopped{
+	
+	BOOL autoCompleteActive = [SettingsManager sharedInstance].dataProvider.autoEndRoute;
+	
+	if(autoCompleteActive==YES){
+		
+		BOOL isSignificantLocationChange=[UserLocationManager isSignificantLocationChange:_currentRecordedLocation.coordinate newLocation:_lastRecordedLocation.coordinate accuracy:4];
+		
+		// if we are detemrined to be statci, start background timer task
+		if(isSignificantLocationChange==NO){
+			
+			if(_autoCompleteTimer!=nil)
+				[_autoCompleteTimer invalidate];
+			
+			__weak __typeof(&*self)weakSelf = self;
+			
+			// set up background task
+			UIApplication*    app = [UIApplication sharedApplication];
+			self.autoCompleteTask = [app beginBackgroundTaskWithExpirationHandler:^{
+				[app endBackgroundTask:_autoCompleteTask];
+				_autoCompleteTask = UIBackgroundTaskInvalid;
+			}];
+			
+			// dispatch timer as task
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+				
+				self.autoCompleteTimer = [NSTimer timerWithTimeInterval:AUTOCOMPLETROUTEINTERVAL
+																 target:weakSelf
+															   selector:@selector(timerDidFinishForAutoComplete:)
+															   userInfo:nil
+																repeats:NO];
+				
+				[[NSRunLoop mainRunLoop] addTimer:_autoCompleteTimer  forMode:NSDefaultRunLoopMode];
+			});
+			
+		
+			// if we have moved stop the background timer and task
+		}else{
+			
+			[self stopBackgroundAutoCompletion];
+		}
+		
+	}
+	
+}
+
+// Stop background task adn invalidate timer
+-(void)stopBackgroundAutoCompletion{
+	
+	UIApplication*    app = [UIApplication sharedApplication];
+	[app endBackgroundTask:_autoCompleteTask];
+	_autoCompleteTask = UIBackgroundTaskInvalid;
+	
+	if(_autoCompleteTimer!=nil)
+		[_autoCompleteTimer invalidate];
+	
+}
+
+
+// timer completion selector, call auto complete on Trip manager then stops further background task execution
+-(void)timerDidFinishForAutoComplete:(NSTimer*)timer{
+	
+	[[TripManager sharedInstance] completeTripAutomatically];
+	
+	[self stopBackgroundAutoCompletion];
+	
+}
+
+
+
+
 
 
 
@@ -154,7 +242,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
         if ([NSDate timeIntervalSinceReferenceDate] - self.lastDistanceCalculation > kDistanceCalculationInterval) {
             self.lastDistanceCalculation = [NSDate timeIntervalSinceReferenceDate];
 			
-            CLLocation *lastLocation = (self.lastRecordedLocation != nil) ? self.lastRecordedLocation : oldLocation;
+            CLLocation *lastLocation = (self.currentRecordedLocation != nil) ? self.currentRecordedLocation : oldLocation;
 			
             CLLocation *bestLocation = nil;
             CGFloat bestAccuracy = kRequiredHorizontalAccuracy;
@@ -169,10 +257,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HCBackgroundLocationManager);
             if (bestLocation == nil)
 				bestLocation = newLocation;
 			
-            self.lastRecordedLocation = bestLocation;
+			self.lastRecordedLocation=_currentRecordedLocation;
+            self.currentRecordedLocation = bestLocation;
 			
 			if(_delegate!=nil)
-				[_delegate didReceiveUpdatedLocations:@[_lastRecordedLocation]];
+				[_delegate didReceiveUpdatedLocations:@[_currentRecordedLocation]];
+			
+			// if auto complete is on this will assess wether we should stop the current trip
+			[self determineUserLocationStopped];
 			
         }
     }

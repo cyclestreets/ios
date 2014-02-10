@@ -31,7 +31,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
-static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 
 
 @interface HCSTrackConfigViewController ()<RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,HCBackgroundLocationManagerDelegate>
@@ -70,7 +69,6 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 @property (nonatomic,assign)  BOOL										isRecordingTrack;
 @property (nonatomic,assign)  BOOL										shouldUpdateDuration;
 @property (nonatomic,assign)  BOOL										didUpdateUserLocation;
-
 
 
 
@@ -166,32 +164,21 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 	CLLocation *location=userLocation.location;
 	CLLocationDistance deltaDistance = [location distanceFromLocation:_lastLocation];
 	
-	self.lastLocation=_currentLocation;
-	self.currentLocation=location;
+	
+	[self didReceiveUpdatedLocations:@[location]];
 	
     
 	if ( !_didUpdateUserLocation ){
 		
-		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
+		[_mapView setCenterCoordinate:location.coordinate animated:YES];
 		
 		_didUpdateUserLocation = YES;
 		
 	}else if ( deltaDistance > 1.0 ){
 		
-		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
+		[_mapView setCenterCoordinate:location.coordinate animated:YES];
 	}
 	
-	if ( _isRecordingTrack ){
-		
-		[self didReceiveUpdatedLocations:@[_currentLocation]];
-		
-		[self determineUserLocationStopped];
-		
-		[self updateUIForDistance];
-		
-		[self updateUIForSpeed];
-		
-	}
 	
 }
 
@@ -202,12 +189,24 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 
 #pragma mark - HCBackgroundLocationManagerDelegate method
 
-
+// this could be adjusted in the future to correctly support deferred background locations
 -(void)didReceiveUpdatedLocations:(NSArray*)locations{
 	
-	BetterLog(@"%@",locations);
-	for(CLLocation *location in locations)
-		[_tripManager addCoord:location];
+	// we are not using deferred locations so we can do this.
+	CLLocation *location=locations[0];
+	
+	self.lastLocation=_currentLocation;
+	self.currentLocation=location;
+	
+	if ( _isRecordingTrack ){
+		
+		[_tripManager addCoord:_currentLocation];
+		
+		[self updateUIForDistance];
+		
+		[self updateUIForSpeed];
+		
+	}
 	
 }
 
@@ -323,38 +322,6 @@ static int const AUTOCOMPLETROUTEINTERVAL = 10*TIME_MINUTE;
 	if(_trackTimer!=nil){
 		[_trackTimer invalidate];
 		self.trackTimer=nil;
-	}
-	
-}
-
-
-
-
-#pragma mark - Auto Complete Trip
-
-
-// assess wether user has been in the same place too long
--(void)determineUserLocationStopped{
-	
-	BOOL autoCompleteActive = [SettingsManager sharedInstance].dataProvider.autoEndRoute;
-	
-	if(autoCompleteActive==YES){
-		
-		BOOL isSignificantLocationChange=[UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:_lastLocation.coordinate accuracy:10];
-		
-		if(isSignificantLocationChange==NO){
-			
-			NSTimeInterval timeDelta=[_currentLocation.timestamp timeIntervalSinceDate:_lastLocation.timestamp];
-			
-			if(timeDelta>AUTOCOMPLETROUTEINTERVAL){
-				
-				[[TripManager sharedInstance] completeTripAutomatically];
-				
-			}
-			
-			
-		}
-		
 	}
 	
 }

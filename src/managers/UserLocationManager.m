@@ -83,6 +83,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 }
 
++(NSString*)optimisedCoordString:(CLLocationCoordinate2D)coordinate{
+	
+	static NSNumberFormatter *_coordDecimalPlaceFormatter = nil;
+	if ( _coordDecimalPlaceFormatter == nil )
+		_coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
+	[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[_coordDecimalPlaceFormatter setMaximumFractionDigits:4];
+	
+	NSNumber *newlatNumber=[NSNumber numberWithDouble:coordinate.latitude];
+	NSNumber *newlongNumber=[NSNumber numberWithDouble:coordinate.longitude];
+	NSNumber *newlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlatNumber] doubleValue]];
+	NSNumber *newlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlongNumber] doubleValue]];
+	
+	return [NSString stringWithFormat:@"%@,%@",newlat,newlongt];
+	
+}
+
 
 -(id)init{
 	
