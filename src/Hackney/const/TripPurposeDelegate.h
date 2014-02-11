@@ -74,10 +74,11 @@
 @protocol TripPurposeDelegate <NSObject>
 
 @required
-- (NSString *)getPurposeString:(unsigned int)index;
-- (NSString *)setPurpose:(unsigned int)index;
+
 
 @optional
+- (NSString *)getPurposeString:(unsigned int)index;
+- (NSString *)setPurpose:(unsigned int)index;
 - (void)didCancelPurpose;
 - (void)didCancelNote;
 - (void)didPickPurpose:(unsigned int)index;

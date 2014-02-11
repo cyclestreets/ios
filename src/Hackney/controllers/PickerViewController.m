@@ -44,91 +44,78 @@
 #import "TripDetailViewController.h"
 #import "TripManager.h"
 #import "HCSTrackConfigViewController.h"
+#import "CustomPickerDataSource.h"
+#import "UserSettingsManager.h"
+
+
+@interface PickerViewController()<UIPickerViewDelegate>
+
+
+@property (nonatomic, retain) IBOutlet UIPickerView							*customPickerView;
+@property (nonatomic, retain) CustomPickerDataSource						*customPickerDataSource;
+
+@property (nonatomic, retain) IBOutlet UITextView							*descriptionText;
+
+@property (nonatomic,assign)  NSInteger										pickerCategory;
+
+
+@end
 
 
 @implementation PickerViewController
 
-@synthesize customPickerView, customPickerDataSource, delegate, description;
-@synthesize descriptionText;
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
+	
+	[super viewDidLoad];
+	
 	self.navigationController.navigationBarHidden=YES;
 	self.modalPresentationCapturesStatusBarAppearance=NO;
 	self.navigationController.view.backgroundColor=[UINavigationBar appearance].barTintColor;
 	
 	[self createCustomPicker];
-	pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-	if (pickerCategory == 0) {
-		// picker defaults to top-most item => update the description
-		[self pickerView:customPickerView didSelectRow:0 inComponent:0];
-	}
-	else if (pickerCategory == 3){
-		// picker defaults to top-most item => update the description
-		[self pickerView:customPickerView didSelectRow:6 inComponent:0];
-	}
 	
-	
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+	_pickerCategory=[[[UserSettingsManager sharedInstance] fetchObjectforKey:@"pickerCategory" forType:kSTATEUSERCONTROLLEDSETTINGSKEY] integerValue];
+	[self pickerView:_customPickerView didSelectRow:_pickerCategory inComponent:0];
+	[_customPickerView selectRow:_pickerCategory inComponent:0 animated:NO];
     
-    if (pickerCategory == 0) {
-        navBarItself.topItem.title = @"Trip Purpose";
-        self.descriptionText.text = @"Please select your trip purpose & tap Next";
-    }
     
-	[super viewDidLoad];
-    
-	
 }
 
 
 
-// return the picker frame based on its size
-- (CGRect)pickerFrameWithSize:(CGSize)size
-{
-	CGRect pickerRect = CGRectMake(	0.0, 78.0, size.width, size.height );	
-	return pickerRect;
-}
 
-
-- (void)createCustomPicker
-{
+- (void)createCustomPicker{
+	
 	self.customPickerDataSource = [[CustomPickerDataSource alloc] init];
-	customPickerDataSource.parent = self;
-	customPickerView.dataSource = customPickerDataSource;
-	customPickerView.delegate = customPickerDataSource;
+	_customPickerDataSource.parent = self;
+	_customPickerView.dataSource = _customPickerDataSource;
+	_customPickerView.delegate = _customPickerDataSource;
 
-	customPickerView.showsSelectionIndicator = YES;
+	_customPickerView.showsSelectionIndicator = YES;
 	
 }
 
 
 - (IBAction)cancel:(id)sender{
 	
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-	[delegate didCancelSaveJourneyController];
+	[_delegate didCancelSaveJourneyController];
 }
 
 
-- (IBAction)save:(id)sender
-{
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+- (IBAction)save:(id)sender{
+	
+    [[UserSettingsManager sharedInstance] saveObject:@(_pickerCategory) forType:kSTATEUSERCONTROLLEDSETTINGSKEY forKey:@"pickerCategory"];
     
-    if (pickerCategory == 0) {
-        NSLog(@"Purpose Save button pressed");
-        NSInteger row = [customPickerView selectedRowInComponent:0];
-        
-        TripDetailViewController *tripDetailViewController = [[TripDetailViewController alloc] initWithNibName:@"TripDetailViewController" bundle:nil];
-        tripDetailViewController.delegate = self.delegate;
-        
-        [self.navigationController pushViewController:tripDetailViewController animated:YES];
-        
-        [delegate didPickPurpose:row];
+	TripDetailViewController *tripDetailViewController = [[TripDetailViewController alloc] initWithNibName:@"TripDetailViewController" bundle:nil];
+	tripDetailViewController.delegate = self.delegate;
+	
+	[[TripManager sharedInstance] setPurpose:_pickerCategory];
+	
+	[self.navigationController pushViewController:tripDetailViewController animated:YES];
 		
-    }
+    
 }
 
 
@@ -140,47 +127,37 @@
 #pragma mark UIPickerViewDelegate
 
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    if (pickerCategory == 3){
-        if ([self.customPickerView selectedRowInComponent:0] == 6) {
-            navBarItself.topItem.rightBarButtonItem.enabled = NO;
-        }
-        else{
-            navBarItself.topItem.rightBarButtonItem.enabled = YES;
-        }
-    }
-	
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
-    if (pickerCategory == 0) {
-        switch (row) {
-            case 0:
-                description.text = kDescCommute;
-                break;
-            case 1:
-                description.text = kDescSchool;
-                break;
-            case 2:
-                description.text = kDescWork;
-                break;
-            case 3:
-                description.text = kDescExercise;
-                break;
-            case 4:
-                description.text = kDescSocial;
-                break;
-            case 5:
-                description.text = kDescShopping;
-                break;
-            case 6:
-                description.text = kDescErrand;
-                break;
-            default:
-                description.text = kDescOther;
-                break;
-        }
-    }
+	
+    _pickerCategory = row;
+    
+	switch (row) {
+		case 0:
+			_descriptionText.text = kDescCommute;
+			break;
+		case 1:
+			_descriptionText.text = kDescSchool;
+			break;
+		case 2:
+			_descriptionText.text = kDescWork;
+			break;
+		case 3:
+			_descriptionText.text = kDescExercise;
+			break;
+		case 4:
+			_descriptionText.text = kDescSocial;
+			break;
+		case 5:
+			_descriptionText.text = kDescShopping;
+			break;
+		case 6:
+			_descriptionText.text = kDescErrand;
+			break;
+		default:
+			_descriptionText.text = kDescOther;
+			break;
+	}
 
 }
 

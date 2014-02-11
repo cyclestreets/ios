@@ -607,6 +607,10 @@
 		289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
+		28A896E018AA27B40086B065 /* WOPushNotification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28A896DF18AA27B40086B065 /* WOPushNotification.caf */; };
+		28A896E118AA27B40086B065 /* WOPushNotification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28A896DF18AA27B40086B065 /* WOPushNotification.caf */; };
+		28A896E618AA35F30086B065 /* NSTimer+BUPausable.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A896E518AA35F30086B065 /* NSTimer+BUPausable.m */; };
+		28A896E718AA35F30086B065 /* NSTimer+BUPausable.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A896E518AA35F30086B065 /* NSTimer+BUPausable.m */; };
 		28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */; };
 		28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
 		28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6311450B1DC009C5647 /* POITypeCellView.m */; };
@@ -1157,6 +1161,9 @@
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
 		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		28A896DF18AA27B40086B065 /* WOPushNotification.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WOPushNotification.caf; sourceTree = "<group>"; };
+		28A896E418AA35F30086B065 /* NSTimer+BUPausable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+BUPausable.h"; sourceTree = "<group>"; };
+		28A896E518AA35F30086B065 /* NSTimer+BUPausable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BUPausable.m"; sourceTree = "<group>"; };
 		28A89CCA14FD4A610001BABA /* PhotoWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardViewController.h; path = PhotoWizard/PhotoWizardViewController.h; sourceTree = "<group>"; };
 		28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoWizardViewController.m; path = PhotoWizard/PhotoWizardViewController.m; sourceTree = "<group>"; };
 		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
@@ -2094,6 +2101,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		28A896DE18AA27B40086B065 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				28A896DF18AA27B40086B065 /* WOPushNotification.caf */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
 		28A89CC914FD4A170001BABA /* PhotoWizard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2236,6 +2251,7 @@
 		28AD6207131FB69D008527FC /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				28A896DE18AA27B40086B065 /* audio */,
 				28640E7C18981F38009A4030 /* styling */,
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
 				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
@@ -2362,6 +2378,8 @@
 				28AD6327131FB6C8008527FC /* UIView+Border.m */,
 				28AD6328131FB6C8008527FC /* UIView+Additions.h */,
 				28AD6329131FB6C8008527FC /* UIView+Additions.m */,
+				28A896E418AA35F30086B065 /* NSTimer+BUPausable.h */,
+				28A896E518AA35F30086B065 /* NSTimer+BUPausable.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -2786,6 +2804,7 @@
 				E77D8F11120321E4003E6B8D /* credits.html in Resources */,
 				28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */,
 				2811F93A18A0F9DE00C8EF0F /* Images.xcassets in Resources */,
+				28A896E018AA27B40086B065 /* WOPushNotification.caf in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
 				28BC444B18915A5800711A1A /* errands@2x.png in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
@@ -3148,6 +3167,7 @@
 				283436A215DD5DC300B00FD5 /* PhotoWizardLocationView.xib in Resources */,
 				283436A315DD5DC300B00FD5 /* CSNavigationBar.xib in Resources */,
 				28BC444818915A5800711A1A /* commute@2x.png in Resources */,
+				28A896E118AA27B40086B065 /* WOPushNotification.caf in Resources */,
 				289AA2CB188EEB170097AA5A /* TrackingHeading@2x.png in Resources */,
 				28AE47C718970B9C00203C20 /* UIPickerAccessoryView.xib in Resources */,
 				28640E8118981F4F009A4030 /* default.css in Resources */,
@@ -3343,6 +3363,7 @@
 				2872DF3713283586003995BE /* ItineraryCellView.m in Sources */,
 				28443E5C1332862000FAD008 /* RouteCellView.m in Sources */,
 				28443E631332867D00FAD008 /* RouteVO.m in Sources */,
+				28A896E618AA35F30086B065 /* NSTimer+BUPausable.m in Sources */,
 				287050DD188FC432004CD922 /* TripManager.m in Sources */,
 				280565E71890384400359211 /* NSManagedObject+Boost.m in Sources */,
 				28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */,
@@ -3509,6 +3530,7 @@
 				283436FC15DD5DC300B00FD5 /* ItineraryCellView.m in Sources */,
 				283436FE15DD5DC300B00FD5 /* RouteCellView.m in Sources */,
 				283436FF15DD5DC300B00FD5 /* RouteVO.m in Sources */,
+				28A896E718AA35F30086B065 /* NSTimer+BUPausable.m in Sources */,
 				287050DE188FC432004CD922 /* TripManager.m in Sources */,
 				280565E81890384400359211 /* NSManagedObject+Boost.m in Sources */,
 				2834370115DD5DC300B00FD5 /* CSSegmentFooterView.m in Sources */,

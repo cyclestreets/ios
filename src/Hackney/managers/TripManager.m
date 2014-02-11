@@ -138,12 +138,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 -(void)completeTripAutomatically{
 	
+	
+	_currentRecordingTrip.notes=@"Auto completed Trip";
+	
 	[self saveTrip:YES];
 	
 	UILocalNotification	*notification=[[UILocalNotification alloc]init];
 	notification.timeZone=[NSTimeZone defaultTimeZone];
 	notification.fireDate=nil;
-	notification.alertBody=@"Auto completed your trip due to inactivity";
+	notification.soundName=@"WOPushNotification.caf";
+	notification.alertBody=@"Auto completed your current trip due to inactivity";
 	
 	[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 	

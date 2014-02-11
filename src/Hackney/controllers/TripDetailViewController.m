@@ -41,36 +41,29 @@
 
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
+	
+	[super viewDidLoad];
+	
     [self.detailTextView becomeFirstResponder];
-    [super viewDidLoad];
 	
 	[self updateTextViewReadout];
 }
 
+
 -(IBAction)didSelectCancel:(id)sender{
    
-	BetterLog(@"");
-	
     [delegate didCancelSaveJourneyController];
     
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 
 -(IBAction)saveDetail:(id)sender{
     
-	BetterLog(@"");
 	
     [detailTextView resignFirstResponder];
     
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+       
     [[TripManager sharedInstance] saveNotes:detailTextView.text];
     [[TripManager sharedInstance] saveTrip:NO];
 	

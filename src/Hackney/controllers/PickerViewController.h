@@ -38,37 +38,14 @@
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
 #import <UIKit/UIKit.h>
-#import "CustomPickerDataSource.h"
 #import "TripPurposeDelegate.h"
-#import "Note.h"
-#import "HCSTrackConfigViewController.h"
 
 
-@interface PickerViewController : UIViewController <UIPickerViewDelegate>
+@interface PickerViewController : UIViewController 
 {
-	id <TripPurposeDelegate> delegate;
-	UIPickerView			*customPickerView;
-	CustomPickerDataSource	*customPickerDataSource;
 	
-	UITextView				*description;
-    NSInteger pickerCategory;
-    NSInteger pickedNotedType;
-    IBOutlet UINavigationBar *navBarItself;
-    UILabel *descriptionText;
-    
 }
 
-
-@property (nonatomic, retain) id <TripPurposeDelegate> delegate;
-@property (nonatomic, retain) IBOutlet UIPickerView *customPickerView;
-@property (nonatomic, retain) CustomPickerDataSource *customPickerDataSource;
-
-@property (nonatomic, retain) IBOutlet UITextView *description;
-
-@property (nonatomic, retain) IBOutlet UILabel *descriptionText;
-
-
-- (IBAction)cancel:(id)sender;
-- (IBAction)save:(id)sender;
+@property (nonatomic, retain) id <TripPurposeDelegate>						delegate;
 
 @end

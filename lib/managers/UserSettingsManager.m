@@ -284,6 +284,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 			BetterLog(@"[WARNING] Saving unknown userState key: %@ with object %@",key,object);
 		}
 		if(KUSERSTATECANSAVEUNKNOWNS==1){
+			if(dict==nil){
+				dict=[NSMutableDictionary dictionary];
+				[stateDict setObject:dict forKey:type];
+			}
 			[dict setObject:object forKey:key];
 			[self saveApplicationState];
 		}

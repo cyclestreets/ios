@@ -26,6 +26,7 @@
 #import "UserManager.h"
 #import "SettingsManager.h"
 #import "CoreDataStore.h"
+#import "NSTimer+BUPausable.h"
 
 
 #import <CoreLocation/CoreLocation.h>
@@ -214,11 +215,27 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 #pragma mark -  UI updates
 
 
+-(void)pauseTrip:(BOOL)pause{
+	
+	if(pause==YES){
+		[[TripManager sharedInstance] resetTrip];
+	}else{
+		[[TripManager sharedInstance] startTrip];
+	}
+	
+	[_trackTimer pauseOrResume];
+	
+	_isRecordingTrack = !pause;
+	_shouldUpdateDuration = !pause;
+	
+}
+
+
 -(void)updateUIForDuration{
 	
 	if ( _shouldUpdateDuration ){
 		
-		NSDate *startDate = [[_trackTimer userInfo] objectForKey:@"StartDate"];
+		NSDate *startDate = _trackTimer.startDate;
 		NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:startDate];
 		
 		static NSDateFormatter *inputFormatter = nil;
@@ -435,7 +452,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 			[self updateUIForDuration];
 			self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:0.5f
 													 target:self selector:@selector(updateUIForDuration)
-												   userInfo:[self newTripTimerUserInfo] repeats:YES];
+												   userInfo:nil repeats:YES];
+			_trackTimer.startDate=[NSDate date];
         }
         
        
@@ -480,22 +498,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
-- (NSDictionary *)newTripTimerUserInfo{
-	
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], @"StartDate",
-			[NSNull null], @"TripManager", nil ];
-}
-
-
 
 
 - (void)initiateSaveTrip{
 	
-	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-	
 	
 	if ( _isRecordingTrack ){
+		
+		[self pauseTrip:YES];
 		
 		UINavigationController *nav=nil;
 		
@@ -551,59 +561,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
-#pragma mark - TripPurposeDelegate methods
-
-- (NSString *)setPurpose:(unsigned int)index{
-	
-	NSString *purpose = [_tripManager setPurpose:index];
-	return [self updatePurposeWithString:purpose];
-}
-
-
-- (NSString *)getPurposeString:(unsigned int)index{
-	
-	return [_tripManager getPurposeString:index];
-}
-
-- (NSString *)updatePurposeWithString:(NSString *)purpose{
-	
-	// only enable start button if we don't already have a pending trip
-	if ( _trackTimer == nil )
-		_actionButton.enabled = YES;
-	
-	_actionButton.hidden = NO;
-	
-	return purpose;
-}
-
-- (NSString *)updatePurposeWithIndex:(unsigned int)index{
-	
-	return [self updatePurposeWithString:[_tripManager getPurposeString:index]];
-	
-}
-
-
 
 - (void)didCancelSaveJourneyController{
 	
 	[self.navigationController dismissModalViewControllerAnimated:YES];
     
-	[[TripManager sharedInstance] startTrip];
-	_isRecordingTrack = YES;
-	_shouldUpdateDuration = YES;
+	[self pauseTrip:NO];
 	
 }
 
 
-- (void)didPickPurpose:(unsigned int)index{
-	
-	_isRecordingTrack = NO;
-    [[TripManager sharedInstance]resetTrip];
-	_actionButton.enabled = YES;
-	[self resetTimer];
-	
-	[_tripManager setPurpose:index];
-}
 
 
 
