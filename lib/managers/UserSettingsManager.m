@@ -10,6 +10,8 @@
 #import "SynthesizeSingleton.h"
 #import "GlobalUtilities.h"
 
+#import "AppConfigManager.h"
+
 static NSString *const ID = @"UserSettingsManager";
 
 
@@ -134,10 +136,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 	
 	int index=0;
 	
-	NSArray *navigation=[userState objectForKey:kUSERSTATEKEY_NAVIGATION];
+	NSArray *navigation=[[AppConfigManager sharedInstance].configDict objectForKey:kUSERSTATEKEY_NAVIGATION];
+	
 	for(int i=0;i<[navigation count]; i++){
 		NSDictionary *navitem=[navigation objectAtIndex:i];
-		if([[navitem objectForKey:@"id"] isEqualToString:[userState objectForKey:@"context"]]){
+		if([[navitem objectForKey:@"id"] isEqualToString:[stateDict objectForKey:@"context"]]){
 			index=i;
 			break;
 		}
@@ -155,13 +158,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 	
 	BetterLog(@"");
 	
-	NSArray *navigation=[userState objectForKey:kUSERSTATEKEY_NAVIGATION];
+	NSArray *navigation=[[AppConfigManager sharedInstance].configDict objectForKey:kUSERSTATEKEY_NAVIGATION];
 	
 	
 	for(int i=0;i<[navigation count]; i++){
 		NSDictionary *navitem=[navigation objectAtIndex:i];
 		if([[navitem objectForKey:@"title"] isEqualToString:type]){
-			[userState setObject:[navitem objectForKey:@"id"] forKey:@"context"];
+			[stateDict setObject:[navitem objectForKey:@"id"] forKey:@"context"];
 			[self saveApplicationState];
 			break;
 		}
@@ -175,7 +178,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
  ***********************************************/
 //
 -(NSString*)context{
-	return [userState objectForKey:kUSERSTATEKEY_CONTEXT];
+	return [stateDict objectForKey:kUSERSTATEKEY_CONTEXT];
 }
 
 -(NSDate*)lastOpenedDate{

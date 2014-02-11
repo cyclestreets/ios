@@ -60,16 +60,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, strong) IBOutlet RMMapView						* mapView;//map of current area
 @property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;// map type label
 
-@property (nonatomic, strong) RMMapContents								* mapContents;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* gpslocateButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoWizardButton;
-@property (nonatomic, strong) CLLocation								* lastLocation;// last location
+
 @property (nonatomic, strong) CLLocation								* currentLocation;
-@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;//the modal
+@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
 @property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
-@property (nonatomic, strong) NSMutableArray							* photoMarkers;
+
 @property (nonatomic, assign) BOOL										photomapQuerying;
-@property (nonatomic, assign) BOOL										showingPhotos;
 
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
@@ -79,7 +77,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(IBAction)  showPhotoWizard:(id)sender;
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw;
 - (void) requestPhotos;
-- (void) clearPhotos;
 
 @end
 
@@ -160,13 +157,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	BetterLog(@"");
 	
 	PhotoMapListVO *photoList=[PhotoManager sharedInstance].locationPhotoList;
-	
-	[self clearPhotos];
-	if (_showingPhotos==NO) {
-		_photomapQuerying = NO;
-		return;
-	}
-	
+		
 	[_mapView removeAllAnnotations];
 	
 	for (PhotoMapVO *photo in [photoList photos]) {
@@ -211,8 +202,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	lv.dataProvider=photoEntry;
 	[self presentModalViewController:lv animated:YES];
 	
-	
-	
 }
 
 
@@ -237,22 +226,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	displaysConnectionErrors=NO;
 	
-	//Necessary to start route-me service
 	[RMMapView class];
 	[_mapView setDelegate:self];
 	[self didNotificationMapStyleChanged];
 	_mapView.showsUserLocation=YES;
 	_mapView.zoom=15;
 	_mapView.userTrackingMode=RMUserTrackingModeNone;
-	
-	
-	self.photoMarkers = [[NSMutableArray alloc] init];
-	
-	//get the map attribution 
-	self.attributionLabel.text = [CycleStreets mapAttribution];
-	
-	_showingPhotos = YES;
-
 	
 }
 
@@ -283,19 +262,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
  ***********************************************/
 //
 
-// view call photomapQuerying=YES
-// manager call - show hud
-// manager call completes > start remove delay
-// view response = photomapQuerying=NO
-// view call photomapQuerying=YES
-
-
-
 - (void) requestPhotos {
 	
 	BetterLog(@"");
 	
-	if (_photomapQuerying || !_showingPhotos) return;
+	if (_photomapQuerying) return;
 	_photomapQuerying = YES;
 	
 	
@@ -318,19 +289,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 
-- (void) clearPhotos {
-
-	if (_photoMarkers != nil) {
-		//[[_mapView markerManager] removeMarkers:_photoMarkers];
-		[_photoMarkers removeAllObjects];
-	}
-	
-}
-
-
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
 	
-	BetterLog(@"");
 	
 	[[PhotoManager sharedInstance] retrievePhotosForLocationBounds:ne withEdge:sw];
 	
@@ -361,7 +321,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 - (void) afterMapChanged: (RMMapView*) map {
-	
 	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
 	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
@@ -455,29 +414,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		
 	}];
 	
-}
-
-
-
-
-#pragma mark location provider
-
-- (float)getX {
-	CGPoint p = [self.mapView coordinateToPixel:self.lastLocation.coordinate];
-	return p.x;
-}
-
-- (float)getY {
-	CGPoint p = [self.mapView coordinateToPixel:self.lastLocation.coordinate];
-	return p.y;
-}
-
-- (float)getRadius {
-	
-	double metresPerPixel = [_mapView metersPerPixel];
-	float locationRadius=(self.lastLocation.horizontalAccuracy / metresPerPixel);
-	
-	return MAX(locationRadius, 40.0f);
 }
 
 
