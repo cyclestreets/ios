@@ -44,7 +44,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <QuartzCore/QuartzCore.h>
 #import "UIView+Additions.h"
 #import "IIViewDeckController.h"
-#import "WrapController.h"
+//#import "WrapController.h"
 #import "NSString-Utilities.h"
 
 #if defined (CONFIGURATION_Adhoc)
@@ -316,7 +316,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 						nav = [self setupNavigationTab:vccontroller withTitle:[navitem objectForKey:@"title"] imageNamed:[navitem objectForKey:@"tabimage"] tag:i];
 						nav.navigationBarHidden=YES;
 						
-						vccontroller = [[WrapController alloc] initWithViewController:nav];
+						//vccontroller = [[WrapController alloc] initWithViewController:nav];
 						
 				}else{
 					

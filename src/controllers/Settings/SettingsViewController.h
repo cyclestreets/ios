@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <UIKit/UIKit.h>
 #import "SettingsVO.h"
-#import "RCSwitchOnOff.h"
+//#import "RCSwitchOnOff.h"
 
 @interface SettingsViewController : UIViewController {
 	
@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	IBOutlet UISegmentedControl     *mapStyleControl;
 	IBOutlet UISegmentedControl     *imageSizeControl;
 	IBOutlet UISegmentedControl     *routeUnitControl;
-	IBOutlet RCSwitchOnOff          *routePointSwitch;
+	//IBOutlet RCSwitchOnOff          *routePointSwitch;
 	IBOutlet UIView                 *controlView;
 	
 	IBOutlet	UILabel			*speedTitleLabel;
@@ -49,7 +49,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong)		IBOutlet UISegmentedControl				* mapStyleControl;
 @property (nonatomic, strong)		IBOutlet UISegmentedControl				* imageSizeControl;
 @property (nonatomic, strong)		IBOutlet UISegmentedControl				* routeUnitControl;
-@property (nonatomic, strong)		IBOutlet RCSwitchOnOff				* routePointSwitch;
+//@property (nonatomic, strong)		IBOutlet RCSwitchOnOff				* routePointSwitch;
 @property (nonatomic, strong)		IBOutlet UIView				* controlView;
 @property (nonatomic, strong)		IBOutlet UILabel				* speedTitleLabel;
 

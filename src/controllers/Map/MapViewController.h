@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
-#import "RMMapViewDelegate.h"
+#import 
 #import "RouteVO.h"
 #import "RouteLineView.h"
 #import "BlueCircleView.h"
@@ -16,8 +16,8 @@
 #import "MapLocationSearchViewController.h"
 #import "UserLocationManager.h"
 #import "WayPointViewController.h"
-#import "RMTileSource.h"
-#import "SVPulsingAnnotationView.h"
+//#import "RMTileSource.h"
+//#import "SVPulsingAnnotationView.h"
 
 @class CycleStreets;
 @class RouteVO;
@@ -42,7 +42,7 @@ typedef int MapAlertType;
 
 
 @interface MapViewController : SuperViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate,UserLocationManagerDelegate,GPSLocationProvider>{
+<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate,UserLocationManagerDelegate>{
 	
 	
 	Class popoverClass;
