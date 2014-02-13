@@ -54,7 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 	if (self = [super init])
 	{
 		userStateWritable=NO;
-		[self loadUserSettings:kSettingDataIntervalKey];
+		[self loadUserSettings:kSettingAppVersionKey];
 		[self loadApplicationState];
 	}
 	return self;
@@ -75,10 +75,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 		
 		// The settings haven't been initialized, so manually init them based
 		// the contents of the the settings bundle
-		NSString *bundle = [[[NSBundle mainBundle] bundlePath]
-							stringByAppendingPathComponent:@"Settings.bundle/Root.plist"];
-		NSDictionary *plist = [[NSDictionary dictionaryWithContentsOfFile:bundle]
-							   objectForKey:@"PreferenceSpecifiers"];
+		NSString *bundle = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Settings.bundle/Root.plist"];
+		NSDictionary *plist = [[NSDictionary dictionaryWithContentsOfFile:bundle] objectForKey:@"PreferenceSpecifiers"];
 		
 		// if plist is empty, we have no Settings bundle, exit
 		if(plist==nil)

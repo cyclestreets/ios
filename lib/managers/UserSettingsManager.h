@@ -13,6 +13,7 @@
 // define user default keys
 #define kSettingDataReset @"cache_reset"
 #define kSettingDataIntervalKey @"cache_interval"
+#define kSettingAppVersionKey @"app_version"
 
 // define application state keys
 // containers
