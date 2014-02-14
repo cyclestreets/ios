@@ -49,6 +49,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UserLocationManager.h"
 #import "UIView+Additions.h"
 #import "RMUserLocation.h"
+#import "UserSettingsManager.h"
+#import "UIAlertView+BlocksKit.h"
 
 #import "PhotoWizardViewController.h"
 
@@ -239,9 +241,25 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(void)viewWillAppear:(BOOL)animated{
     
     [self createNonPersistentUI];
-    
+	
+	
     [super viewWillAppear:animated]; 
     
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+	
+	_mapView.showsUserLocation=NO;
+	
+	[super viewDidDisappear:animated];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+	
+	[self displayFirstUserAlert];
+	
+	[super viewDidAppear:animated];
+	
 }
 
 
@@ -252,6 +270,25 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 
+
+-(void)displayFirstUserAlert{
+	
+	BOOL reportFirstRunAlert=[[[UserSettingsManager sharedInstance] fetchUserDefaultforKey:@"reportFirstRunAlert"] boolValue];
+	
+	if(reportFirstRunAlert==NO){
+		
+		[[UserSettingsManager sharedInstance] saveUserDefault:@(YES) forKey:@"reportFirstRunAlert"];
+		
+		UIAlertView *alert=[UIAlertView  bk_alertViewWithTitle:self.title message:[[StringManager sharedInstance] stringForSection:self.title andType:@"reportFirstRunAlert"]];
+		[alert bk_addButtonWithTitle:@"OK" handler:^{
+			
+		}];
+		[alert show];
+		
+		
+	}
+	
+}
 
 
 
@@ -264,12 +301,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void) requestPhotos {
 	
-	BetterLog(@"");
 	
 	if (_photomapQuerying) return;
 	_photomapQuerying = YES;
 	
-	
+	BetterLog(@"");
 	
 	CGRect bounds = _mapView.bounds;
 	CLLocationCoordinate2D nw = [_mapView pixelToCoordinate:bounds.origin];
@@ -313,11 +349,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void) afterMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction {
 	[self afterMapChanged:map];
+	
+	if(wasUserAction==YES)
+		_mapView.showsUserLocation=NO;
 }
 
 
 - (void) afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction{
 	[self afterMapChanged:map];
+	
+	if(wasUserAction==YES)
+		_mapView.showsUserLocation=NO;
 }
 
 - (void) afterMapChanged: (RMMapView*) map {
@@ -368,6 +410,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		self.currentLocation=location;
 		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
 		
+		if(_mapView.showsUserLocation==YES)
+			[_mapView performSelector:@selector(setShowsUserLocation:) withObject:@(NO) afterDelay:0.1];
+		
 	}
 	
 }
@@ -385,7 +430,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 			
 			_gpslocateButton.style = UIBarButtonItemStyleDone;
 		}else{
-			_gpslocateButton.style = UIBarButtonItemStylePlain;
+			_mapView.showsUserLocation=YES;
+			_gpslocateButton.style = UIBarButtonItemStyleDone;
 		}
 	}
 	

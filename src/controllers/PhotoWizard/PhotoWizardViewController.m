@@ -1413,42 +1413,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)uploadPhoto:(id)sender{
 	
-	/*
-    if ([UserAccount sharedInstance].isLoggedIn==NO) {
+	[[PhotoManager sharedInstance] UserPhotoUploadRequest:_uploadImage];
 		
-		if([UserAccount sharedInstance].accountMode==kUserAccountCredentialsExist){
-			
-			BetterLog(@"kUserAccountCredentialsExist");
-			
-			[[PhotoManager sharedInstance] UserPhotoUploadRequest:_uploadImage];
-			
-			[self updateUploadUIState:@"loading"];
-			
-		}else {
-			
-			BetterLog(@"kUserAccountNotLoggedIn");
-			
-			if (self.loginView == nil) {
-				self.loginView = [[UISplitViewController alloc] initWithNibName:@"AccountView" bundle:nil];
-			}
-			self.loginView.isModal=YES;
-			self.loginView.shouldAutoClose=YES;
-			UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
-			[self presentModalViewController:nav animated:YES];
-		}
-        
-		
-		
-	} else {
-		
-		BetterLog(@"kUserAccountLoggedIn");
-		
-		[[PhotoManager sharedInstance] UserPhotoUploadRequest:_uploadImage];
-		
-		[self updateUploadUIState:@"loading"];
-	}
-	
-	 */
+	[self updateUploadUIState:@"loading"];
 	
 }
 
@@ -1465,7 +1432,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	}else if([state isEqualToString:@"error"]){
 		
 		_uploadLabel.textColor=UIColorFromRGB(0xC20000);
-		_uploadLabel.text=@"An error occured while uploading your image, please try again.";
+		_uploadLabel.text=@"An error occured while uploading your report, please try again.";
 		_uploadButton.enabled=YES;
 		_uploadProgressView.progress=0;
 		

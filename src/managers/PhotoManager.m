@@ -141,7 +141,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                      @"1",@"useDom",
                                      @"300",@"thumbnailsize",
                                      [NSNumber numberWithInt:limit],@"limit",
-                                      @"1",@"suppressplaceholders",
                                      @"1",@"minimaldata",
 									 [self uploadPhotoId],@"selectedid",
                                      nil];
@@ -253,7 +252,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading Photo" andMessage:nil];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading Report" andMessage:nil];
 	
     
     
@@ -274,7 +273,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Photo uploaded" andMessage:nil];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Report uploaded" andMessage:nil];
          
 		}
 		break;
@@ -284,7 +283,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,validation.returnMessage,MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Report upload failed" andMessage:nil];
 		}   
 		break;
 			

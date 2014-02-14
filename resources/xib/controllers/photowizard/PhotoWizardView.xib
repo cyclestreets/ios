@@ -283,7 +283,7 @@ Once uploaded this data will appear in the Report section for the chosen locatio
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <accessibility key="accessibilityConfiguration" label="Upload your photo"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="Upload Photo">
+                    <state key="normal" title="Upload Report">
                         <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -346,7 +346,7 @@ Once uploaded this data will appear in the Report section for the chosen locatio
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="63">
                     <rect key="frame" x="20" y="243" width="279" height="66"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">If the location shown is not accurate for this photo or if it doesnt have an embedded location press Edit Location to adjust it.</string>
+                    <string key="text">If the location shown is not accurate for this report or if it doesnt have an embedded location press Edit Location to adjust it.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -421,8 +421,8 @@ Once uploaded they'll appear in the Report section.</string>
             <rect key="frame" x="0.0" y="0.0" width="320" height="375"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Uploaded" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="146">
-                    <rect key="frame" x="20" y="15" width="275" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report Uploaded" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="146">
+                    <rect key="frame" x="20" y="15" width="275" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
@@ -430,7 +430,7 @@ Once uploaded they'll appear in the Report section.</string>
                     <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your photo was uploaded to CycleHackney" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="145">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your report was uploaded to CycleHackney" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="145">
                     <rect key="frame" x="20" y="150" width="275" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -458,7 +458,7 @@ Once uploaded they'll appear in the Report section.</string>
                     <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="If you wish to see your photo in situ please use the View map button below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="153">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="If you wish to see your report in situ please use the View map button below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="153">
                     <rect key="frame" x="20" y="219" width="275" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -481,15 +481,15 @@ Once uploaded they'll appear in the Report section.</string>
             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Category" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="186">
-                    <rect key="frame" x="20" y="15" width="280" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report Category" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="186">
+                    <rect key="frame" x="20" y="15" width="280" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                     <color key="textColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This photo represents..." lineBreakMode="tailTruncation" minimumFontSize="10" id="190">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This report represents..." lineBreakMode="tailTruncation" minimumFontSize="10" id="190">
                     <rect key="frame" x="20" y="97" width="249" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
@@ -505,7 +505,7 @@ Once uploaded they'll appear in the Report section.</string>
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Choose what this photo represents and the category it should be in." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="bED-NZ-lQ3">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Choose what this report represents and the category it should be in." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="bED-NZ-lQ3">
                     <rect key="frame" x="20" y="46" width="280" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>

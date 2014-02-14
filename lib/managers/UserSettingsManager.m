@@ -335,6 +335,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 }
 
 
+#pragma mark - UserDefaults
+
+
+-(void)saveUserDefault:(id)object forKey:(NSString*)key{
+	
+	
+	[[NSUserDefaults standardUserDefaults] setObject:object forKey:key];
+	
+	
+}
+
+-(id)fetchUserDefaultforKey:(NSString*)key{
+	
+	return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+
+}
+
 
 //
 /***********************************************

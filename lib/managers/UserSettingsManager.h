@@ -72,5 +72,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserSettingsManager);
 
 -(void)resetCacheReset;
 
+-(void)saveUserDefault:(id)object forKey:(NSString*)key;
+-(id)fetchUserDefaultforKey:(NSString*)key;
+
 -(void)updateNavigationControllerState:(NSArray*)controllers;
 @end
