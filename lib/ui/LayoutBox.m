@@ -857,6 +857,17 @@
 }
 
 
+-(int)viewHeight{
+    
+    return height;
+}
+
+-(int)viewWidth{
+    
+    return width;
+}
+
+
 #pragma mark gradiant bg support
 
 - (void)drawRect:(CGRect)rect {

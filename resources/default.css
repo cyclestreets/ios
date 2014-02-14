@@ -1,0 +1,117 @@
+
+/* CycleStreets Pixate css */
+
+/*config*/
+pixate-config {
+    parse-error-destination: console;
+    cache-styles: auto;
+    image-cache-count: 100;
+}
+
+
+/* UIKit Classes */
+
+navigation-bar{
+
+    -ios-tint-color:#FFFFFF;
+    background-color: #509720;
+    opacity: 1;
+}
+
+navigation-bar title{
+
+    font-family     : Helvetica Neue;
+    font-weight     : thin;
+    color           :#FFFFFF;
+    font-size       : 22px;
+
+}
+
+tab-bar{
+    -ios-tint-color:#1B953E;
+
+}
+
+
+/* BU Classes */
+
+#BUIconActionSheetClosebutton{
+	font-family     : HelveticaNeue;
+    font-weight     : light;
+	background-color: #AC0000;
+    border-width    : 0px;
+    border-radius   : 6px;
+    color :#FFFFFF;
+}
+
+#BUIconActionSheetIconbutton{
+	border-radius   : 22px;
+	border-width: 2px;
+	border-style	:none;
+}
+
+
+
+
+/* Trip View */
+
+#tripActionButton{
+
+	font-family     : HelveticaNeue;
+    font-weight     : light;
+	font-size       : 20px;
+
+}
+
+
+
+
+
+/* Routes view */
+
+
+
+
+/* map view */
+
+#mapNavigationBarTitle{
+    font-family     : Helvetica Neue;
+    font-weight     : thin;
+    color           :#FFFFFF;
+    font-size       : 16px;
+}
+
+
+
+
+/* Photomap view */
+
+
+
+
+
+/* Photowizard view */
+
+
+#photoWizardActionButon{
+	font-family     : HelveticaNeue;
+    font-weight     : light;
+	background-color: #509720;
+    border-width    : 0px;
+    border-radius   : 6px;
+    color :#FFFFFF;
+}
+
+
+
+/* User view */
+
+
+
+
+/* Info view */
+
+
+
+
+

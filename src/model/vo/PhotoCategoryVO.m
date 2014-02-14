@@ -9,12 +9,12 @@
 #import "PhotoCategoryVO.h"
 
 @implementation PhotoCategoryVO
-@synthesize name;
-@synthesize tag;
+
 
 
 static NSString *kNAME = @"name";
 static NSString *kTAG = @"tag";
+static NSString *KCATEGORYTAG = @"categoryType";
 
 
 
@@ -24,8 +24,9 @@ static NSString *kTAG = @"tag";
 //=========================================================== 
 - (void)encodeWithCoder:(NSCoder *)encoder 
 {
-    [encoder encodeObject:self.name forKey:kNAME];
-    [encoder encodeObject:self.tag forKey:kTAG];
+    [encoder encodeObject:_name forKey:kNAME];
+    [encoder encodeObject:_tag forKey:kTAG];
+	[encoder encodeInt:_categoryType forKey:KCATEGORYTAG];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
@@ -34,6 +35,7 @@ static NSString *kTAG = @"tag";
     if (self) {
         self.name = [decoder decodeObjectForKey:kNAME];
         self.tag = [decoder decodeObjectForKey:kTAG];
+		self.categoryType = [decoder decodeIntForKey:KCATEGORYTAG];
     }
     return self;
 }

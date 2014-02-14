@@ -12,7 +12,7 @@
 #import "SegmentVO.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
-#import "RouteSegmentViewController.h"
+//#import "RouteSegmentViewController.h"
 #import "ButtonUtilities.h"
 #import "AppConstants.h"
 #import "ExpandedUILabel.h"
@@ -28,7 +28,7 @@
 @property (nonatomic, strong) RouteVO		* route;
 @property (nonatomic, assign) NSInteger		 routeId;
 @property (nonatomic, strong) UITextView		* headerText;
-@property (nonatomic, strong) RouteSegmentViewController		* routeSegmentViewcontroller;
+//@property (nonatomic, strong) RouteSegmentViewController		* routeSegmentViewcontroller;
 @property (nonatomic, weak) IBOutlet CopyLabel		* routeidLabel;
 @property (nonatomic, strong) MultiLabelLine		* readoutLineOne;
 @property (nonatomic, strong) MultiLabelLine		* readoutLineTwo;
@@ -240,7 +240,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	
+	/*
 	if(_routeSegmentViewcontroller==nil){
 		self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] initWithNibName:@"RouteSegmentView" bundle:nil];
 		_routeSegmentViewcontroller.hidesBottomBarWhenPushed=YES;
@@ -250,7 +250,7 @@
 	_routeSegmentViewcontroller.index=[indexPath row];
 	
 	[self.navigationController pushViewController:_routeSegmentViewcontroller animated:YES];
-
+	 */
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -463,11 +463,11 @@
 }
 
 -(IBAction)swapToMapView{
-	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
+	//[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
 }
 
 -(IBAction)swapToSavedRoutesView{
-	[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Saved routes"];
+	//[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Saved routes"];
 }
 
 
@@ -502,7 +502,7 @@
 	
 	self.route=nil;
 	self.headerText=nil;
-	self.routeSegmentViewcontroller=nil;
+	//self.routeSegmentViewcontroller=nil;
 	self.readoutLineOne=nil;
 	self.readoutLineTwo=nil;
 	self.readoutLineThree=nil;

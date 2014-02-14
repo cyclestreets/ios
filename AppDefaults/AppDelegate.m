@@ -84,8 +84,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x008000)];
 	
-	self.tabBarController = [[UITabBarController alloc] init];
-	self.window.rootViewController = self.tabBarController;
+	//self.tabBarController = [[UITabBarController alloc] init];
+	//self.window.rootViewController = self.tabBarController;
 	
 
 	[self appendStartUpView];
@@ -148,14 +148,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	startupmanager=nil;
 	
 	
-	[self buildTabbarController:[[AppConfigManager sharedInstance].configDict objectForKey:@"navigation"]];
+	//[self buildTabbarController:[[AppConfigManager sharedInstance].configDict objectForKey:@"navigation"]];
 	
 	
-	[window addSubview:tabBarController.view];
+	//[window addSubview:tabBarController.view];
 	tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
-	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	cycleStreets.appDelegate = self;
 	
 		
 	[window makeKeyAndVisible];	

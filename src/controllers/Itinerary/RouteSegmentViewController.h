@@ -31,9 +31,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteLineView.h"
 #import "SuperViewController.h"
 
-#import "SVPulsingAnnotationView.h"
+//#import "SVPulsingAnnotationView.h"
 
-@interface RouteSegmentViewController : SuperViewController <CLLocationManagerDelegate, RMMapViewDelegate, LocationProvider, PointListProvider,GPSLocationProvider> {
+@interface RouteSegmentViewController : SuperViewController <CLLocationManagerDelegate, RMMapViewDelegate, LocationProvider, PointListProvider> {
 	
 }
 @property (nonatomic, strong) RouteVO		* route;

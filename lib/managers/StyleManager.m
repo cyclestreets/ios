@@ -12,7 +12,6 @@
 #import "UIColor-Expanded.h"
 #import "AppConstants.h"
 
-static NSString *const ID = @"StyleManager";
 
 
 @interface StyleManager(Private) 

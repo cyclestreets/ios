@@ -18,7 +18,10 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     self = [super initWithCenterViewController:[storyboard instantiateViewControllerWithIdentifier:@"MapViewController"]
-                            leftViewController:[storyboard instantiateViewControllerWithIdentifier:@"WayPointViewController"]];
+                            leftViewController:[storyboard instantiateViewControllerWithIdentifier:@"WayPointNavController"]];
+	
+	// fix for "Presenting view controllers on detached view controllers is discouraged" warning
+	[self addChildViewController:self.centerController];
     if (self) {
         self.panningMode=IIViewDeckNoPanning;
 		self.centerhiddenInteractivity=IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;

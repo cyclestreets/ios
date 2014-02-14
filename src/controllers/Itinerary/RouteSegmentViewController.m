@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "RouteSegmentViewController.h"
 #import "SegmentVO.h"
-#import "RMMarkerManager.h"
+//#import "RMMarkerManager.h"
 #import "MapViewController.h"
 #import "AppDelegate.h"
 #import "CycleStreets.h"
@@ -43,7 +43,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ExpandedUILabel.h"
 #import "GradientView.h"
 #import "CSSegmentFooterView.h"
-#import "SVPulsingAnnotationView.h"
+//#import "SVPulsingAnnotationView.h"
 #import "UserLocationManager.h"
 #import "UIView+Additions.h"
 

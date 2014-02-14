@@ -21,26 +21,30 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  CycleStreets.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
 #import "Files.h"
-@class AppDelegate;
+#import "RMTileSource.h"
+#import "RMMapView.h"
+#import <CoreLocation/CoreLocation.h>
+
 
 @interface CycleStreets : NSObject {
-	AppDelegate *__unsafe_unretained appDelegate;
-	Files *files;
-	NSString *APIKey;
-	
-	NSString	*userAgent;
 }
 
-@property (nonatomic, unsafe_unretained)		AppDelegate				* appDelegate;
-@property (nonatomic, strong)		Files				* files;
-@property (nonatomic, strong)		NSString				* APIKey;
-@property (nonatomic, strong)		NSString				* userAgent;
+@property (nonatomic, strong)		Files								* files;
+@property (nonatomic, strong)		NSString							* APIKey;
+@property (nonatomic, strong)		NSString							* userAgent;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
+
+
++ ( NSObject <RMTileSource> *)tileSource;
++ (NSArray *)mapStyles;
++ (NSString *)currentMapStyle;
++ (NSString *)mapAttribution;
++ (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation;
+
 @end

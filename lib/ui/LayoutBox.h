@@ -104,6 +104,9 @@
 @property (nonatomic)	BOOL		ignoreHidden;
 @property (nonatomic, unsafe_unretained)		id<LayoutBoxDelegate>		 delegate;
 
+@property (nonatomic,readonly) int                          viewHeight;
+@property (nonatomic,readonly) int                          viewWidth;
+
 
 // methods
 

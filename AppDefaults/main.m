@@ -27,12 +27,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import <Pixate/Pixate.h>
+#import "AppDelegate.h"
 
 int main(int argc, char *argv[]) {
 
     
     @autoreleasepool {
-        int retVal = UIApplicationMain(argc, argv, nil, nil);
-        return retVal;
+		
+		[Pixate licenseKey:@"3S66R-9MDKI-RUKOO-IKNQF-9FGEM-G8PH2-EGSEI-F0Q6P-OTAF0-U9ENU-GRNUU-U28DT-GHTRL-JKE2M-F90U6-04" forUser:@"neil.edwards@buffer.uk.com"];
+		
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }
