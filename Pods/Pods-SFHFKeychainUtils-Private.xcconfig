@@ -1,0 +1,5 @@
+#include "Pods-SFHFKeychainUtils.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/SFHFKeychainUtils" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/A2StoryboardSegueContext" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/BlocksKit" "${PODS_ROOT}/Headers/FMMoveTableView" "${PODS_ROOT}/Headers/JVFloatLabeledTextField" "${PODS_ROOT}/Headers/Pixate" "${PODS_ROOT}/Headers/RegexKitLite" "${PODS_ROOT}/Headers/SFHFKeychainUtils" "${PODS_ROOT}/Headers/TouchJSON" "${PODS_ROOT}/Headers/ViewDeck"
+OTHER_LDFLAGS = -ObjC ${PODS_SFHFKEYCHAINUTILS_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}

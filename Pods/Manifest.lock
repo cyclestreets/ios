@@ -1,0 +1,73 @@
+PODS:
+  - A2StoryboardSegueContext (1.0.1)
+  - AFNetworking (2.1.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.1.0):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.1.0)
+  - AFNetworking/Security (2.1.0)
+  - AFNetworking/Serialization (2.1.0)
+  - AFNetworking/UIKit (2.1.0):
+    - AFNetworking/NSURLConnection
+  - BlocksKit (2.1.0):
+    - BlocksKit/All
+  - BlocksKit/All (2.1.0):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.1.0)
+  - BlocksKit/DynamicDelegate (2.1.0):
+    - BlocksKit/MiniFFI
+  - BlocksKit/MessageUI (2.1.0):
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/MiniFFI (2.1.0)
+  - BlocksKit/UIKit (2.1.0):
+    - BlocksKit/DynamicDelegate
+  - FMMoveTableView (1.1.2)
+  - JVFloatLabeledTextField (0.0.5)
+  - Pixate (2.0.1)
+  - RegexKitLite (4.0)
+  - SFHFKeychainUtils (0.0.1)
+  - TouchJSON (1.1)
+  - ViewDeck (2.3.1)
+
+DEPENDENCIES:
+  - A2StoryboardSegueContext
+  - AFNetworking (~> 2.0)
+  - BlocksKit (from `https://github.com/pandamonia/BlocksKit.git`, branch `next`)
+  - FMMoveTableView
+  - JVFloatLabeledTextField
+  - Pixate
+  - RegexKitLite
+  - SFHFKeychainUtils
+  - TouchJSON
+  - ViewDeck
+
+EXTERNAL SOURCES:
+  BlocksKit:
+    :branch: next
+    :git: https://github.com/pandamonia/BlocksKit.git
+
+SPEC CHECKSUMS:
+  A2StoryboardSegueContext: c5ee4ebdfcc29ac4e544cbe832f6489cade23213
+  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  BlocksKit: 20086a023551c742d2278771e47c36e05f17b662
+  FMMoveTableView: c4b3590f5af9cac715a53be42d68f60dc0c4b1ca
+  JVFloatLabeledTextField: 7daac42f450476dc9cfa5b23645e8661b868994b
+  Pixate: ced6ade02e1f202223abdab5494e25c28b562667
+  RegexKitLite: f7af7b4d2b675cd2ec9a4abab6aad6ae1f6499c0
+  SFHFKeychainUtils: e828dbd9eaa509486acf95d8de2ebd414c4b7451
+  TouchJSON: 9e53f4df141b7f972766292b00b46bccf29f179a
+  ViewDeck: 2cdc67c4b41a10cafc7556b982f028409e33604d
+
+COCOAPODS: 0.29.0
