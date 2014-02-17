@@ -504,8 +504,6 @@
 		287050D8188FC407004CD922 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050C4188FC407004CD922 /* User.m */; };
 		287050DD188FC432004CD922 /* TripManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050DC188FC432004CD922 /* TripManager.m */; };
 		287050DE188FC432004CD922 /* TripManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050DC188FC432004CD922 /* TripManager.m */; };
-		287050E1188FC43C004CD922 /* SaveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050E0188FC43C004CD922 /* SaveRequest.m */; };
-		287050E2188FC43C004CD922 /* SaveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050E0188FC43C004CD922 /* SaveRequest.m */; };
 		287050E7188FC46F004CD922 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050E6188FC46F004CD922 /* LoadingView.m */; };
 		287050E8188FC46F004CD922 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050E6188FC46F004CD922 /* LoadingView.m */; };
 		287050EC188FC700004CD922 /* ZipUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 287050EB188FC700004CD922 /* ZipUtil.m */; };
@@ -1074,8 +1072,6 @@
 		287050C4188FC407004CD922 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		287050DB188FC432004CD922 /* TripManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripManager.h; sourceTree = "<group>"; };
 		287050DC188FC432004CD922 /* TripManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripManager.m; sourceTree = "<group>"; };
-		287050DF188FC43C004CD922 /* SaveRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveRequest.h; sourceTree = "<group>"; };
-		287050E0188FC43C004CD922 /* SaveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveRequest.m; sourceTree = "<group>"; };
 		287050E3188FC450004CD922 /* ActivityIndicatorDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityIndicatorDelegate.h; sourceTree = "<group>"; };
 		287050E4188FC463004CD922 /* TripPurposeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripPurposeDelegate.h; sourceTree = "<group>"; };
 		287050E5188FC46F004CD922 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
@@ -1830,7 +1826,6 @@
 				287050B0188FC407004CD922 /* const */,
 				287050B2188FC407004CD922 /* controllers */,
 				287050BB188FC407004CD922 /* model */,
-				287050C5188FC407004CD922 /* net */,
 				287050C6188FC407004CD922 /* views */,
 			);
 			path = Hackney;
@@ -1887,15 +1882,6 @@
 				287050C4188FC407004CD922 /* User.m */,
 			);
 			path = model;
-			sourceTree = "<group>";
-		};
-		287050C5188FC407004CD922 /* net */ = {
-			isa = PBXGroup;
-			children = (
-				287050DF188FC43C004CD922 /* SaveRequest.h */,
-				287050E0188FC43C004CD922 /* SaveRequest.m */,
-			);
-			path = net;
 			sourceTree = "<group>";
 		};
 		287050C6188FC407004CD922 /* views */ = {
@@ -3302,7 +3288,6 @@
 				28AD60BC131FB54A008527FC /* AppDelegate.m in Sources */,
 				28AD60BF131FB54A008527FC /* main.m in Sources */,
 				28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */,
-				287050E1188FC43C004CD922 /* SaveRequest.m in Sources */,
 				28AE47AD1896932C00203C20 /* ApplicationJSONParser.m in Sources */,
 				28AD62A6131FB69D008527FC /* SettingsManager.m in Sources */,
 				28AD62A7131FB69D008527FC /* StartupManager.m in Sources */,
@@ -3469,7 +3454,6 @@
 				283436C515DD5DC300B00FD5 /* AppDelegate.m in Sources */,
 				283436C615DD5DC300B00FD5 /* main.m in Sources */,
 				283436C815DD5DC300B00FD5 /* SuperViewController.m in Sources */,
-				287050E2188FC43C004CD922 /* SaveRequest.m in Sources */,
 				28AE47AE1896932C00203C20 /* ApplicationJSONParser.m in Sources */,
 				283436CC15DD5DC300B00FD5 /* SettingsManager.m in Sources */,
 				283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */,

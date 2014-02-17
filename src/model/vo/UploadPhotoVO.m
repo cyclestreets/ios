@@ -163,4 +163,18 @@
 
 
 
+
+#pragma mark - POST getters
+
+-(NSString*)captionString{
+	
+	if(caption==nil)
+		return EMPTYSTRING;
+	
+	return caption;
+	
+}
+
+
+
 @end

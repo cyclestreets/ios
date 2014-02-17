@@ -69,9 +69,17 @@
 
 -(NSMutableURLRequest*)requestForType{
 	
-	NSURL *requesturl=nil;
-	NSMutableURLRequest *request=nil;
 	NSString *servicetype=[service objectForKey:@"type"];
+	
+	return [self createRequestForServiceType:servicetype];
+	
+}
+
+
+-(NSMutableURLRequest*)createRequestForServiceType:(NSString*)servicetype{
+	
+	NSMutableURLRequest *request=nil;
+	NSURL *requesturl=nil;
 	
 	self.dataType=[GenericConstants parserStringTypeToConstant:[service objectForKey:@"parserType"]];
 	
@@ -153,8 +161,8 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		//NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
-		//NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
+		NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
+		NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
 		
 		NSString *parameterString=[postparameters urlEncodedString];
 		
@@ -171,53 +179,64 @@
 		NSDictionary *getparameters=[parameters objectForKey:@"getparameters"];
 		NSDictionary *postparameters=[parameters objectForKey:@"postparameters"];
         NSData *imageData=[postparameters objectForKey:@"imageData"];
-		[postparameters        setValue:nil forKey:@"imageData"];
 		
-        // optional get parameters
-        NSString *urlString;
-        if(getparameters!=nil){
-            urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[getparameters urlEncodedString]];
-        }else{
-            urlString=[self url];
-        }
+		if(imageData!=nil){
+			
+			[postparameters        setValue:nil forKey:@"imageData"];
+			
+			// optional get parameters
+			NSString *urlString;
+			if(getparameters!=nil){
+				urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[getparameters urlEncodedString]];
+			}else{
+				urlString=[self url];
+			}
+			
+			BetterLog(@"IMAGEPOST url=%@",urlString);
+			
+			requesturl=[NSURL URLWithString:urlString];
+			
+			request = [NSMutableURLRequest requestWithURL:requesturl
+											  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+										  timeoutInterval:30.0 ];
+			
+			
+			
+			NSMutableData *body = [[NSMutableData alloc] init];	
+			
+			// Image Data
+			[request addValue:@"gzip" forHTTPHeaderField:@"Accepts-Encoding"];
+			[request setHTTPMethod:@"POST"];
+			NSString *stringBoundary = @"0xBoundaryBoundaryBoundaryBoundary";
+			NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",stringBoundary];
+			[request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+			[request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
+			
+			[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+			[body appendData:[@"Content-Disposition: form-data; name=\"mediaupload\"; filename=\"from_iphone.jpeg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[body appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[body appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+			[body appendData:imageData];
+			
+			// POST form content
+			
+			[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			[self appendFormValues:postparameters toPostData:body];
+			
+			[body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+			
+			//
+			
+			[request setHTTPBody: body];
+			
+		}else{
+			
+			request=[self createRequestForServiceType:GETPOST];
+			
+		}
+			
 		
-		BetterLog(@"IMAGEPOST url=%@",urlString);
-		
-        requesturl=[NSURL URLWithString:urlString];
-		
-		request = [NSMutableURLRequest requestWithURL:requesturl
-										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-									  timeoutInterval:30.0 ];
-		
-		
-		
-        NSMutableData *body = [[NSMutableData alloc] init];	
-        
-        // Image Data
-        [request addValue:@"gzip" forHTTPHeaderField:@"Accepts-Encoding"];
-        [request setHTTPMethod:@"POST"];
-        NSString *stringBoundary = @"0xBoundaryBoundaryBoundaryBoundary";
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",stringBoundary];
-        [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-        [request setValue:[CycleStreets sharedInstance].userAgent forHTTPHeaderField:@"User-Agent"];
-        
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Disposition: form-data; name=\"mediaupload\"; filename=\"from_iphone.jpeg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Type: image/jpeg\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Transfer-Encoding: binary\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:imageData];
-        
-        // POST form content
-        
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-		
-		[self appendFormValues:postparameters toPostData:body];
-        
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        
-        //
-        
-        [request setHTTPBody: body];
         
 	}		
 	

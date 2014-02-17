@@ -227,11 +227,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
     NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
     
     NSMutableDictionary *postparameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         [UserAccount sharedInstance].user.username, @"username",
-                                         [UserAccount sharedInstance].userPassword,@"password",
+                                         EMPTYSTRING, @"username",
+                                         EMPTYSTRING,@"password",
 										 [NSString stringWithFormat:@"%@", BOX_FLOAT(location.coordinate.latitude)],@"latitude",
                                          [NSString stringWithFormat:@"%@",BOX_FLOAT(location.coordinate.longitude)],@"longitude",
-                                         photo.caption,@"caption",
+                                         photo.captionString,@"caption",
                                          photo.feature.tag,@"category", // note: conversion to serverside types
                                          photo.category.tag,@"metacategory", //
                                          photo.dateTime,@"datetime",

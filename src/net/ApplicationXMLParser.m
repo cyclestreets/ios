@@ -576,7 +576,7 @@
 		
 	}else {
 		
-		validation.returnMessage=[TBXML textForElement:codenode];
+		validation.returnMessage=[TBXML textOfChild:@"message" parentElement:errornode];
 		
 	}
     
