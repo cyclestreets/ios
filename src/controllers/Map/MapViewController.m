@@ -8,31 +8,19 @@
 
 #import "MapViewController.h"
 #import "GlobalUtilities.h"
-#import "RMMapView.h"
 #import "RoutePlanMenuViewController.h"
 #import "ExpandedUILabel.h"
 #import "MapMarkerTouchView.h"
 #import "CSPointVO.h"
 #import "SegmentVO.h"
 #import "SettingsManager.h"
-
-#import "RMMapLayer.h"
-//#import "RMMarker.h"
-//#import "RMMarkerManager.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
-//#import "RMOpenStreetMapSource.h"
-//#import "RMOpenCycleMapSource.h"
-//#import "RMOrdnanceSurveyStreetViewMapSource.h"
 #import "RMTileSource.h"
-//#import "RMCachedTileSource.h"
 #import "PhotoMapListVO.h"
 #import "PhotoMapVO.h"
-//#import "Markers.h"
 #import "MapLocationSearchViewController.h"
-#import "RMMapView.h"
 #import "CSPointVO.h"
-//#import "RMMercatorToScreenProjection.h"
 #import "Files.h"
 #import "InitialLocation.h"
 #import "RouteManager.h"
@@ -47,14 +35,14 @@
 #import "WayPointViewController.h"
 #import "UIView+Additions.h"
 #import "ViewUtilities.h"
-
-//#import "SVPulsingAnnotationView.h"
+#import "MKMapView+Additions.h"
+#import "CSWaypointAnnotation.h"
+#import "CSWaypointAnnotationView.h"
 
 #import <Crashlytics/Crashlytics.h>
 
 
-static NSInteger MAX_ZOOM = 18;
-
+static NSInteger DEFAULT_ZOOM = 15;
 static NSInteger MAX_ZOOM_LOCATION = 16;
 static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
@@ -74,7 +62,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @end
 
 
-@interface MapViewController()
+@interface MapViewController()<MKMapViewDelegate>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
@@ -94,8 +82,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 //rmmap
-@property (nonatomic, strong) IBOutlet RMMapView						* mapView;
-//@property (nonatomic, strong) RMMapContents							* mapContents;
+@property (nonatomic, strong) IBOutlet MKMapView					* mapView;
+@property (nonatomic,strong)  NSString									*name;
 @property (nonatomic, strong) CLLocation							* lastLocation;
 
 // sub views
@@ -105,9 +93,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 // ui
 @property (nonatomic, strong) IBOutlet UILabel						* attributionLabel;
-@property (nonatomic, strong) IBOutlet RouteLineView					* lineView;
-@property (nonatomic, strong) IBOutlet MapMarkerTouchView				* markerTouchView;
-//@property (nonatomic, strong) SVPulsingAnnotationView				* gpsLocationView;
+@property (nonatomic, strong) IBOutlet RouteLineView				* lineView;
+@property (nonatomic, strong) IBOutlet MapMarkerTouchView			* markerTouchView;
 
 @property (nonatomic, assign) MapAlertType							alertType;
 
@@ -133,6 +120,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property (nonatomic, assign) MapPlanningState						uiState;
 @property (nonatomic, assign) MapPlanningState						previousUIState;
 
+
+@property (nonatomic,strong)  UITapGestureRecognizer				*mapTapRecognizer;
 
 // ui
 - (void)initToolBarEntries;
@@ -222,8 +211,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 - (void) didNotificationMapStyleChanged {
-	//self.mapView.contents.tileSource = [MapViewController tileSource];
-	_attributionLabel.text = [MapViewController mapAttribution];
+	
+	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
+	for(id <MKOverlay> overlay in overlays){
+		if([overlay isKindOfClass:[MKTileOverlay class]] ){
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+			newoverlay.canReplaceMapContent = YES;
+			[_mapView exchangeOverlay:overlay withOverlay:newoverlay];
+			break;
+		}
+	}
+	
+	
+	_attributionLabel.text = [CycleStreets mapAttribution];
 }
 
 
@@ -258,59 +258,41 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)createPersistentUI{
 	
 	
-	//popoverClass = [WEPopoverController class];
-	
+	_mapView.rotateEnabled=YES;
+    _mapView.pitchEnabled=YES;
+    
+    MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+	newoverlay.canReplaceMapContent = YES;
+	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
+	[_mapView setDelegate:self];
+	_mapView.showsUserLocation=YES;
+		
 	
 	[self initToolBarEntries];
-	
-	[self updateUItoState:MapPlanningStatePlanning];
-	
-	//Necessary to start route-me service
-	//[RMMapView class];
-	/*
-	//
-	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
-	
-	
-	// Initialize
-	[_mapView setDelegate:self];
-	
-	if (self.initialLocation == nil) {
-		self.initialLocation = [[InitialLocation alloc] initWithMapView:_mapView withController:self];
-	}
-	[_initialLocation performSelector:@selector(initiateLocation) withObject:nil afterDelay:0.0];
-	
 	
 	[self resetWayPoints];
 	
 	[_lineView setPointListProvider:self];
 	
-	
-	
-	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,self.view.height)];
-	_gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
-	_gpsLocationView.visible=NO;
-	_gpsLocationView.alpha=0;
-	[_gpsLocationView setLocationProvider:self];
-	
-	
-	
+		
 	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
 	[self.view addSubview:_walkingRouteOverlayView];
-	_walkingRouteOverlayView.y=SCREENHEIGHTWITHNAVIGATION+_walkingRouteOverlayView.height;
+	_walkingRouteOverlayView.y=self.view.height+_walkingRouteOverlayView.height;
 	
 	
 	self.programmaticChange = NO;
 	self.singleTapDidOccur=NO;
 	
-	_attributionLabel.text = [MapViewController mapAttribution];
+	_attributionLabel.text = [CycleStreets mapAttribution];
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
 	
+	self.mapTapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnMap:)];
+	_mapTapRecognizer.enabled=YES;
+	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
 	[[RouteManager sharedInstance] loadSavedSelectedRoute];
 
-	*/
 }
 
 
@@ -499,7 +481,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	if(_uiState!=MapPlanningStateRoute)
 		[self updateUItoState:MapPlanningStateLocating];
 	
-	[self resetLocationOverlay];
+	//[self resetLocationOverlay];
 	
 	
 }
@@ -513,7 +495,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	if(_uiState!=MapPlanningStateRoute)
 		[self updateUItoState:_previousUIState];
 	
-	[self removeLocationIndicatorAfterDelay];
 	
 }
 
@@ -545,17 +526,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	if(_uiState!=MapPlanningStateRoute){
 		[self updateUItoState:_previousUIState];
-		[MapViewController zoomMapView:_mapView toLocation:_lastLocation];
+		[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 	}else{
-		// TODO: currently this does not produce simialr result as RouteSegment view
-		//[_mapView zoomWithLatLngBoundsNorthEast:[self.route maxNorthEastForLocation:_lastLocation] SouthWest:[self.route maxSouthWestForLocation:_lastLocation]];
+		
+		MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
+		[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+		
 	}
 	
 	[_lineView setNeedsDisplay];
-	
-	[self displayLocationIndicator:YES];
-	
-	[self removeLocationIndicatorAfterDelay];
 	
 	[self assessLocationEffect];
 }
@@ -568,66 +547,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	self.lastLocation=notification.object;
 	[_lineView setNeedsDisplay];
 	
-	[self displayLocationIndicator:YES];
 }
 
 -(void)locationDidFail:(NSNotification *)notification{
 	
 	[self updateUItoState:_previousUIState];
 	
-	[self resetLocationOverlay];
 	
 }
 
 
--(void)removeLocationIndicatorAfterDelay{
-	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
-	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:6];
-	
-}
-
-
--(void)resetLocationOverlay{
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
-	[self displayLocationIndicator:NO];
-}
-
--(void)displayLocationIndicator:(BOOL)display{
-	/*
-	if(_gpsLocationView.superview==nil && display==YES)
-		[self.mapView addSubview:_gpsLocationView];
-	
-	
-	int alpha=display==YES ? 1 :0;
-	
-	if(_gpsLocationView.superview!=nil)
-		[_gpsLocationView updateToLocation];
-	
-	if(display==YES && _gpsLocationView.alpha==1)
-		return;
-		
-	if(display==NO && _gpsLocationView.alpha==0)
-		return;
-	
-	if(display==YES){
-		_gpsLocationView.visible=display;
-		_gpsLocationView.alpha=0;
-	}
-	
-	
-	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		_gpsLocationView.alpha=alpha;
-	} completion:^(BOOL finished) {
-		if(_gpsLocationView.alpha==0){
-			_gpsLocationView.visible=display;
-			[_gpsLocationView removeFromSuperview];
-		}
-		
-	}];
-*/
-	
-}
 
 -(void)assessLocationEffect{
 		
@@ -672,7 +601,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) clearRoute {
 	
 	self.route = nil;
-	//[_mapView.markerManager removeMarkers];
+	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
 	[self stopLocating];
 	
@@ -684,14 +613,30 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[[RouteManager sharedInstance] clearSelectedRoute];
 }
 
+
+- (MKMapRect) mapRectThatFitsBoundsSW:(CLLocationCoordinate2D)sw NE:(CLLocationCoordinate2D)ne{
+    MKMapPoint pSW = MKMapPointForCoordinate(sw);
+    MKMapPoint pNE = MKMapPointForCoordinate(ne);
+	
+    double antimeridianOveflow =
+	(ne.longitude > sw.longitude) ? 0 : MKMapSizeWorld.width;
+	
+    return MKMapRectMake(pSW.x, pNE.y,
+						 (pNE.x - pSW.x) + antimeridianOveflow,
+						 (pSW.y - pNE.y));
+}
+
 - (void) newRoute {
 	
 	BetterLog(@"");
 	CLLocationCoordinate2D ne=[_route insetNorthEast];
 	CLLocationCoordinate2D sw=[_route insetSouthWest];
-	//[_mapView zoomWithLatLngBoundsNorthEast:ne SouthWest:sw];
 	
-	//[_mapView.markerManager removeMarkers];
+	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
+	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+	
+	
+	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
 	[self stopLocating];
 	
@@ -726,22 +671,21 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)showWalkingOverlay{
 	
 	
-	
 	if (_route.containsWalkingSections==YES) {
 		
 		if(_walkingOverlayisVisible==NO){
 			
-			_walkingRouteOverlayView.y=SCREENHEIGHT;
+			_walkingRouteOverlayView.y=self.view.height;
 			_walkingOverlayisVisible=YES;
 			
 			[UIView animateWithDuration:0.7 animations:^{
 				
-				_walkingRouteOverlayView.y=SCREENHEIGHTWITHNAVIGATION-_walkingRouteOverlayView.height;
+				_walkingRouteOverlayView.y=self.view.height-_walkingRouteOverlayView.height;
 				
 			} completion:^(BOOL finished) {
 				
 				[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
-					_walkingRouteOverlayView.y=SCREENHEIGHT;
+					_walkingRouteOverlayView.y=self.view.height;
 				} completion:^(BOOL finished) {
 					_walkingOverlayisVisible=NO;
 				}];
@@ -751,7 +695,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 		}else{
 			[UIView animateWithDuration:0.3 delay:5 options:UIViewAnimationOptionCurveLinear animations:^{
-				_walkingRouteOverlayView.y=SCREENHEIGHT;
+				_walkingRouteOverlayView.y=self.view.height;
 			} completion:^(BOOL finished) {
 				_walkingOverlayisVisible=NO;
 			}];
@@ -850,38 +794,31 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+// initial Waypoint creation
 -(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords{
 	
-	/*
 	WayPointVO *waypoint=[WayPointVO new];
 	
 	if(_waypointArray==nil)
 		self.waypointArray=[NSMutableArray array];
 	
-	RMMarker *marker=nil;
-	if([_mapView.markerManager markers].count==0){
-		marker=[Markers markerStart];
+	NSArray *annotationArray=[_mapView annotationsWithoutUserLocation];
+	if(annotationArray.count==0){
 		waypoint.waypointType=WayPointTypeStart;
 		[_waypointArray addObject:waypoint];
-	}else if([_mapView.markerManager markers].count==1){
-		marker=[Markers markerEnd];
+	}else if(annotationArray.count==1){
 		waypoint.waypointType=WayPointTypeFinish;
 		[_waypointArray addObject:waypoint];
 	}else{
-		int waypointindex=[_mapView.markerManager markers].count-1;
-		marker=[Markers markerIntermediate:[NSString stringWithFormat:@"%i",waypointindex]];
 		waypoint.waypointType=WayPointTypeIntermediate;
-		
 		[_waypointArray addObject:waypoint];
 	}
 	
-	[[_mapView markerManager ] addMarker:marker AtLatLong:coords];
 	
-	waypoint.marker=marker;
 	waypoint.coordinate=coords;
 	
 	[self updateWaypointStatuses];
-	*/
+	
 }
 
 
@@ -902,32 +839,41 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+// update Waypoint types from creation, as can change if waypoints are removed post creation ie intermediate can become end etc
 -(void)updateWaypointStatuses{
 	
-	//[_mapView.markerManager removeMarkers];
-	RMMarker *marker=nil;
+	[_mapView removeAnnotations:_mapView.annotationsWithoutUserLocation];
 	
 	for(int i=0;i<_waypointArray.count;i++){
 		
 		WayPointVO *waypoint=_waypointArray[i];
+		WayPointType type;
 		
 		if(i==0){
-			waypoint.waypointType=WayPointTypeStart;
-			//marker=[Markers markerStart];
+			type=WayPointTypeStart;
 		}else if(i==_waypointArray.count-1){
-			waypoint.waypointType=WayPointTypeFinish;
-			//marker=[Markers markerEnd];
+			type=WayPointTypeFinish;
 		}else{
-			//marker=[Markers markerIntermediate:[NSString stringWithFormat:@"%i",i]];
-			waypoint.waypointType=WayPointTypeIntermediate;
+			type=WayPointTypeIntermediate;
 		}
 		
-		waypoint.marker=marker;
+		waypoint.waypointType=type;
 		
-		//[[_mapView markerManager ] addMarker:marker AtLatLong:waypoint.coordinate];
+		[_mapView addAnnotation:[self annotationForWaypoint:waypoint atCoordinate:waypoint.coordinate atIndex:i]];
 		
 	}
 	
+}
+
+
+-(CSWaypointAnnotation*)annotationForWaypoint:(WayPointVO*)waypoint atCoordinate:(CLLocationCoordinate2D)coordinate atIndex:(int)index{
+	
+	CSWaypointAnnotation *annotation=[[CSWaypointAnnotation alloc]init];
+	annotation.coordinate=coordinate;
+	annotation.index=index;
+	annotation.dataProvider=waypoint;
+	
+	return annotation;
 }
 
 
@@ -976,14 +922,37 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 }
 
-#pragma marl RMMap marker
 
 - (BOOL)canBecomeFirstResponder {
 	return YES;
 }
 
 
--(void)tapOnMarker:(RMMarker *)marker onMap:(RMMapView *)map{
+#pragma mark - MKMap Annotations
+
+
+ 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+	
+	 if ([annotation isKindOfClass:[MKUserLocation class]])
+	 return nil;
+	 
+	 static NSString *reuseId = @"CSWaypointAnnotationView";
+	 CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+	
+	 if (annotationView == nil){
+		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+		 annotationView.draggable = YES;
+		 annotationView.canShowCallout = YES;
+	 } else {
+		 annotationView.annotation = annotation;
+	 }
+	 
+	 return annotationView;
+}
+ 
+ 
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(CSWaypointAnnotationView *)view{
 	
 	if(_markerMenuOpen==YES)
 		return;
@@ -998,12 +967,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		[self becomeFirstResponder];
 		
 		MarkerMenuItem *menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeMarkerAtIndexViaMenu:)];
-		menuItem.waypoint=[self findWayPointForMarker:marker];
+		CSWaypointAnnotation *annotation=(CSWaypointAnnotation*)view.annotation;
+		menuItem.waypoint=annotation.dataProvider;
 		menuController.menuItems = [NSArray arrayWithObject:menuItem];
 		
 	}
 	
-	CGRect markerRect=CGRectMake(marker.frame.origin.x-12, marker.frame.origin.y+5, marker.frame.size.width, marker.frame.size.height);
+	CGRect markerRect=CGRectMake(view.left-12, view.top+5, view.width, view.height);
 	[menuController setTargetRect:markerRect inView:self.mapView];
 	
 	if(menuController.isMenuVisible==NO)
@@ -1119,7 +1089,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
 	}
 	_mapLocationSearchView.locationReceiver = self;
-	//_mapLocationSearchView.centreLocation = [[_mapView contents] mapCenter];
+	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
 	
 	[self presentModalViewController:_mapLocationSearchView	animated:YES];
 	
@@ -1188,14 +1158,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
-#pragma mark RMMap delegate methods
+#pragma mark - MKMap delegate
 //
 /***********************************************
  * @description			RMMap Touch delegates
  ***********************************************/
 //
 
-- (void) singleTapOnMap: (RMMapView*) map At: (CGPoint) point {
+- (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
 	
 	BetterLog(@"");
 	
@@ -1205,38 +1175,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		return;
 	}
 	
-	if(_singleTapDidOccur==NO){
-		_singleTapDidOccur=YES;
-		_singleTapPoint=point;
-		[self performSelector:@selector(singleTapDelayExpired) withObject:nil afterDelay:ACCIDENTAL_TAP_DELAY];
-		
-	}
-}
-
--(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
 	
-	_singleTapDidOccur=NO;
-	
-	//float nextZoomFactor = [map.contents nextNativeZoomFactor];
-	//if (nextZoomFactor != 0)
-	//	[map zoomByFactor:nextZoomFactor near:point animated:YES];
+	CGPoint touchPoint = [recogniser locationInView:self.mapView];
+    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+	[self addWayPointAtCoordinate:touchMapCoordinate];
 	
 }
 
 
-- (void) singleTapDelayExpired {
-	
-	BetterLog(@"");
-	
-	if(_singleTapDidOccur==YES){
-		_singleTapDidOccur=NO;
-		//CLLocationCoordinate2D location = [_mapView pixelToLatLong:_singleTapPoint];
-		//[self assessWayPointAddition:location];
-	}
-}
 
-
-- (void) afterMapChanged: (RMMapView*) map {
+// should not be needed
+- (void) afterMapChanged: (MKMapView*) map {
 	
 	[_lineView setNeedsDisplay];
 	[self displayLocationIndicator:NO];
@@ -1251,67 +1200,35 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 }
 
-
-- (void) afterMapMove: (RMMapView*) map {
-	[self afterMapChanged:map];
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState
+   fromOldState:(MKAnnotationViewDragState)oldState{
+	
+	//CLLocationCoordinate2D location = view.annotation.coordinate;
+	//WayPointVO *waypoint=[self findWayPointForMarker:_activeMarker];
+	//waypoint.coordinate=location;
+	
+	
 }
 
--(void)afterMapTouch:(RMMapView *)map{
-	
-	map.enableDragging=YES;
-	
-}
 
-
-- (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
     
-	[self afterMapChanged:map];
-	//[self saveLocation:map.contents.mapCenter];
-}
-
-// Should only return yes if marker is start/end and we have not a route drawn
-- (BOOL) mapView:(RMMapView *)map shouldDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
-	
-	
-	_markerMenuOpen=NO;
-	
-	BOOL result=NO;
-	/*
-	if(_uiState!=MapPlanningStateRoute && _uiState!=MapPlanningStateNoRoute){
-		
-		if([_mapView.markerManager.markers containsObject:marker]){
-			_activeMarker=marker;
-			result=YES;
-		}else{
-			_activeMarker=nil;
-		}
-	}
-	
-	_mapView.enableDragging=!result;
-	 */
-	return result;
+    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+        
+    }
+	// add routeline overlay here
+    
+    return nil;
 }
 
 
-
-
-- (void) mapView:(RMMapView *)map didDragMarker:(RMMarker *)marker withEvent:(UIEvent *)event {
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
-	NSSet *touches = [event touchesForView:_markerTouchView];
-	// note use of top View required, bcv should not be left top unless required by location?
-	
-	BetterLog(@"touches=%i",[touches count]);
-	BetterLog(@"activeMarker=%@",_activeMarker);
-	
-	for (UITouch *touch in touches) {
-		CGPoint point = [touch locationInView:_markerTouchView];
-		//CLLocationCoordinate2D location = [map pixelToLatLong:point];
-	//	[[map markerManager] moveMarker:_activeMarker AtLatLon:location];
-		WayPointVO *waypoint=[self findWayPointForMarker:_activeMarker];
-		//waypoint.coordinate=location;
-	}
+	[_mapView setCenterCoordinate:userLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 	
 }
+
 
 
 #pragma mark map location persistence
@@ -1339,21 +1256,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	BetterLog(@"");
 	
 	NSDictionary *misc = [[CycleStreets sharedInstance].files misc];
-	NSString *sLat = [misc valueForKey:@"latitude"];
-	NSString *sLon = [misc valueForKey:@"longitude"];
-	NSString *sZoom = [misc valueForKey:@"zoom"];
+	NSString *latitude = [misc valueForKey:@"latitude"];
+	NSString *longitude = [misc valueForKey:@"longitude"];
+	int zoom = [[misc valueForKey:@"zoom"] intValue];
 	
 	CLLocationCoordinate2D initLocation;
-	if (sLat != nil && sLon != nil) {
-		initLocation.latitude = [sLat doubleValue];
-		initLocation.longitude = [sLon doubleValue];
-		//[_mapView moveToLatLong:initLocation];
-		
-		//if ([_mapView.contents zoom] < MAX_ZOOM) {
-		//	[_mapView.contents setZoom:[sZoom floatValue]];
-	//	}
+	if (latitude != nil && longitude != nil) {
+		initLocation.latitude = [latitude doubleValue];
+		initLocation.longitude = [longitude doubleValue];
+		[_mapView setCenterCoordinate:initLocation zoomLevel:zoom animated:YES];
 		[_lineView setNeedsDisplay];
-		[self displayLocationIndicator:YES];
 		[self stopLocating];
 	}
 }
@@ -1393,84 +1305,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
-//------------------------------------------------------------------------------------
-#pragma mark - Class methods
-//------------------------------------------------------------------------------------
-//
-/***********************************************
- * @description			CLASS METHODS
- ***********************************************/
-//
-
-
-+ (NSArray *)mapStyles {
-	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP, MAPPING_BASE_OS,nil];
-}
-
-+ (NSString *)currentMapStyle {
-	NSString *mapStyle = [SettingsManager sharedInstance].dataProvider.mapStyle;
-	if (mapStyle == nil) {
-		mapStyle = [[MapViewController mapStyles] objectAtIndex:0];
-	}
-	
-	return mapStyle;
-}
-
-+ (NSString *)mapAttribution {
-	NSString *mapStyle = [MapViewController currentMapStyle];
-	NSString *mapAttribution = nil;
-	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]) {
-		mapAttribution = MAPPING_ATTRIBUTION_OSM;
-	} else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]) {
-		mapAttribution = MAPPING_ATTRIBUTION_OPENCYCLEMAP;
-	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]) {
-		mapAttribution = MAPPING_ATTRIBUTION_OS;
-	}
-	return mapAttribution;
-}
-
-+ ( NSObject <RMTileSource> *)tileSource {
-	NSString *mapStyle = [MapViewController currentMapStyle];
-	NSObject <RMTileSource> *tileSource;
-	if ([mapStyle isEqualToString:MAPPING_BASE_OSM])
-	{
-		//tileSource = [[RMOpenStreetMapSource alloc] init];
-	}
-	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
-	{
-		//open cycle map
-		//tileSource = [[RMOpenCycleMapSource alloc] init];
-	}
-	else if ([mapStyle isEqualToString:MAPPING_BASE_OS])
-	{
-		//Ordnance Survey
-		//tileSource = [[RMOrdnanceSurveyStreetViewMapSource alloc] init];
-	}
-	else
-	{
-		//default to MAPPING_BASE_OSM.
-		//tileSource = [[RMOpenStreetMapSource alloc] init];
-	}
-	return tileSource;
-}
-
-+ (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation {
-	CLLocationAccuracy accuracy = newLocation.horizontalAccuracy;
-	if (accuracy < 0) {
-		accuracy = 2000;
-	}
-	int wantZoom = MAX_ZOOM_LOCATION;
-	CLLocationAccuracy wantAccuracy = MAX_ZOOM_LOCATION_ACCURACY;
-	while (wantAccuracy < accuracy) {
-		wantZoom--;
-		wantAccuracy = wantAccuracy * 2;
-	}
-	
-	//[mapView moveToLatLong: newLocation.coordinate];
-	//[mapView.contents setZoom:wantZoom];
-}
-
-
 
 //
 /***********************************************
@@ -1484,7 +1318,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location {
 	BetterLog(@"didMoveToLocation");
 	
-	//[self.mapView moveToLatLong: location];
+	[_mapView setCenterCoordinate:location zoomLevel:DEFAULT_ZOOM animated:YES];
 	
 	[self assessWayPointAddition:location];
 	[_lineView setNeedsDisplay];
@@ -1510,7 +1344,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 #pragma mark point list provider 
 // PointListProvider
-+ (NSArray *) pointList:(RouteVO *)route withView:(RMMapView *)mapView {
++ (NSArray *) pointList:(RouteVO *)route withView:(MKMapView *)mapView {
 	
 	NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:10];
 	if (route == nil) {
@@ -1581,26 +1415,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)didReceiveMemoryWarning{
 	[super didReceiveMemoryWarning];
-	
-	if (self.isViewLoaded && !self.view.window) {
-        self.view = nil;
-    }
-	
-	
-	//self.mapContents=nil;
-	self.lastLocation=nil;
-	
-	// sub views
-	self.routeplanView=nil;
-	self.routeplanMenu=nil;
-	self.mapLocationSearchView=nil;
-	self.initialLocation=nil;
-	
-	// data
-	self.route=nil;
-	self.waypointArray=nil;
-	self.activeMarker=nil;
-	
 		
 }
 

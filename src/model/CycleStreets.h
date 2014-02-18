@@ -41,10 +41,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 
 
-+ ( NSObject <RMTileSource> *)tileSource;
+//+ ( NSObject <RMTileSource> *)tileSource;
 + (NSArray *)mapStyles;
 + (NSString *)currentMapStyle;
 + (NSString *)mapAttribution;
++(NSString*)tileTemplate;
 + (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation;
 
 @end

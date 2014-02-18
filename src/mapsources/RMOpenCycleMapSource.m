@@ -49,6 +49,12 @@
 	return [NSURL URLWithString:[NSString stringWithFormat:@"http://tile.cyclestreets.net/opencyclemap/%d/%d/%d.png", tile.zoom, tile.x, tile.y]];
 }
 
+-(NSString*)MKMapURLTemplate{
+	
+	return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+	
+}
+
 - (NSString *)uniqueTilecacheKey
 {
 	return @"OpenCycleMap";

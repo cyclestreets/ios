@@ -29,4 +29,8 @@
 
 @interface RMOpenStreetMapSource : RMAbstractWebMapSource
 
+
+-(NSString*)MKMapURLTemplate;
+
+
 @end

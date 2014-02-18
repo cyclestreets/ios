@@ -28,9 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoCategoryManager.h"
 #import "SynthesizeSingleton.h"
 #import "SettingsManager.h"
-#import "RMOpenStreetMapSource.h"
-#import "RMOpenCycleMapSource.h"
-
+#import "AppConstants.h"
+#import "GenericConstants.h"
 
 static NSInteger MAX_ZOOM_LOCATION = 16;
 static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
@@ -80,25 +79,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 
 #pragma mark - Class methods
 
-+ ( NSObject <RMTileSource> *)tileSource {
-	NSString *mapStyle = [[self class] currentMapStyle];
-	NSObject <RMTileSource> *tileSource;
-	if ([mapStyle isEqualToString:MAPPING_BASE_OSM])
-	{
-		tileSource = [[RMOpenStreetMapSource alloc] init];
-	}
-	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
-	{
-		//open cycle map
-		tileSource = [[RMOpenCycleMapSource alloc] init];
-	}
-		else
-	{
-		//default to MAPPING_BASE_OSM.
-		tileSource = [[RMOpenStreetMapSource alloc] init];
-	}
-	return tileSource;
-}
+//+ ( NSObject <RMTileSource> *)tileSource {
+//	NSString *mapStyle = [[self class] currentMapStyle];
+//	NSObject <RMTileSource> *tileSource;
+//	if ([mapStyle isEqualToString:MAPPING_BASE_OSM])
+//	{
+//		tileSource = [[RMOpenStreetMapSource alloc] init];
+//	}
+//	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
+//	{
+//		//open cycle map
+//		tileSource = [[RMOpenCycleMapSource alloc] init];
+//	}
+//		else
+//	{
+//		//default to MAPPING_BASE_OSM.
+//		tileSource = [[RMOpenStreetMapSource alloc] init];
+//	}
+//	return tileSource;
+//}
 
 
 + (NSArray *)mapStyles {
@@ -128,6 +127,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	return mapAttribution;
 	
 }
+
+
++(NSString*)tileTemplate{
+	
+	NSString *mapStyle = [CycleStreets currentMapStyle];
+	
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM])
+	{
+		return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
+	}
+	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
+	{
+		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+	}
+	
+	return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
+	
+}
+
 
 + (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation {
 	CLLocationAccuracy accuracy = newLocation.horizontalAccuracy;

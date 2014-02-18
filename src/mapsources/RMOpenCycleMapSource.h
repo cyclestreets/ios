@@ -29,4 +29,6 @@
 
 @interface RMOpenCycleMapSource : RMAbstractWebMapSource
 
+-(NSString*)MKMapURLTemplate;
+
 @end

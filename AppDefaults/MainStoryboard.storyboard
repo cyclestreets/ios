@@ -108,6 +108,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="attributionLabel" destination="gMu-jU-Xl7" id="DEt-MS-Ard"/>
+                        <outlet property="mapView" destination="rA7-CW-iZg" id="Jwa-5P-voQ"/>
                         <outlet property="toolBar" destination="Y3q-ji-xW0" id="HwE-4d-aH0"/>
                     </connections>
                 </viewController>
