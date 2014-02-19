@@ -58,6 +58,49 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+
++(BOOL)isSignificantLocationChange:(CLLocationCoordinate2D)oldCordinate newLocation:(CLLocationCoordinate2D)newCoordinate accuracy:(int)accuracy{
+	
+	static NSNumberFormatter *_coordDecimalPlaceFormatter = nil;
+	if ( _coordDecimalPlaceFormatter == nil )
+		_coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
+	[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[_coordDecimalPlaceFormatter setMaximumFractionDigits:accuracy];
+	
+	// reduce decimal places
+	NSNumber *newlatNumber=[NSNumber numberWithDouble:oldCordinate.latitude];
+	NSNumber *newlongNumber=[NSNumber numberWithDouble:oldCordinate.longitude];
+	NSNumber *newlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlatNumber] doubleValue]];
+	NSNumber *newlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlongNumber] doubleValue]];
+	
+	
+	NSNumber *oldlatNumber=[NSNumber numberWithDouble:newCoordinate.latitude];
+	NSNumber *oldlongNumber=[NSNumber numberWithDouble:newCoordinate.longitude];
+	NSNumber *oldlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:oldlatNumber] doubleValue]];
+	NSNumber *oldlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:oldlongNumber] doubleValue]];
+
+	return (![newlat  isEqualToNumber:oldlat] && ![newlongt isEqualToNumber:oldlongt] );
+	
+}
+
++(NSString*)optimisedCoordString:(CLLocationCoordinate2D)coordinate{
+	
+	static NSNumberFormatter *_coordDecimalPlaceFormatter = nil;
+	if ( _coordDecimalPlaceFormatter == nil )
+		_coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
+	[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[_coordDecimalPlaceFormatter setMaximumFractionDigits:4];
+	
+	NSNumber *newlatNumber=[NSNumber numberWithDouble:coordinate.latitude];
+	NSNumber *newlongNumber=[NSNumber numberWithDouble:coordinate.longitude];
+	NSNumber *newlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlatNumber] doubleValue]];
+	NSNumber *newlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlongNumber] doubleValue]];
+	
+	return [NSString stringWithFormat:@"%@,%@",newlat,newlongt];
+	
+}
+
+
 -(id)init{
 	
 	if (self = [super init])
@@ -185,7 +228,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	if(locationManager==nil){
 			self.locationManager = [[CLLocationManager alloc] init];
-			locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+			locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 			locationManager.distanceFilter =kCLDistanceFilterNone;
             locationManager.delegate=self;
     }
@@ -333,7 +376,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			
 			didFindDeviceLocation=YES;
 			[self UserLocationWasUpdated];
-			[self stopUpdatingLocationForSubscriber:SYSTEM];
+			if (locationState==kConnectLocationStateSingle)
+				[self stopUpdatingLocationForSubscriber:SYSTEM];
 			return;
 		}
 		
@@ -354,8 +398,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
 			
-			
-            
 			self.bestEffortAtLocation = newLocation;
 			didFindDeviceLocation=YES;
 			
@@ -381,9 +423,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			break;
 		case kConnectLocationStateTracking:
 			
-			// GPSLOCATIONUPDATE is now sent in main loop
+			[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONUPDATE object:bestEffortAtLocation userInfo:nil];
 			
-            break;
+		break;
 			
 	}
     

@@ -9,7 +9,7 @@
 #import "PhotoMapImageLocationViewController.h"
 #import "AppConstants.h"
 #import "CopyLabel.h"
-
+#import "GenericConstants.h"
 
 
 @interface PhotoMapImageLocationViewController()

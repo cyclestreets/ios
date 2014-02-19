@@ -111,7 +111,7 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,[NSString stringWithFormat
 #define IS_IPHONE_5 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0f)
 #define IS_IPHONE_4 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0f)
 
-
+#define SCREENPIXELWIDTH (ISRETINADISPLAY ? 640 : 320)
 
 /*
  *  System Versioning Preprocessor Macros

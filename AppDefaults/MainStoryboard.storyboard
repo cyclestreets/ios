@@ -301,43 +301,26 @@
             </objects>
             <point key="canvasLocation" x="-2037" y="158"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Nu0-Pj-1Id">
+        <!--Photo Map View Controller-->
+        <scene sceneID="qEb-im-VRX">
             <objects>
-                <viewController id="uPX-na-cr6" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="KF9-s1-YjT"/>
-                        <viewControllerLayoutGuide type="bottom" id="bX1-co-fyg"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="VD2-Fo-g2N">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="B9t-TY-aqh"/>
+                <viewController id="ekw-cq-hKN" customClass="PhotoMapViewController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="9xj-Zs-Op3"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XKb-sj-DH1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pi6-xH-AO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1390" y="220"/>
+            <point key="canvasLocation" x="-1454" y="164"/>
         </scene>
-        <!--View Controller-->
+        <!--Photo Wizard View Controller-->
         <scene sceneID="oM5-Rp-Zaf">
             <objects>
-                <viewController id="vwU-Uf-hpU" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hmz-2j-6Qu"/>
-                        <viewControllerLayoutGuide type="bottom" id="9eF-sc-0Of"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WXn-Qe-csj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
+                <viewController storyboardIdentifier="PhotoWizardViewController" id="vwU-Uf-hpU" customClass="PhotoWizardViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="6I9-qK-6HB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMM-Mf-8b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-742" y="264"/>
+            <point key="canvasLocation" x="-922" y="152"/>
         </scene>
         <!--Navigation Controller - Credits-->
         <scene sceneID="p7H-CI-yzA">
@@ -358,7 +341,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Wb-5W-MjW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707" y="-606"/>
+            <point key="canvasLocation" x="679" y="-538"/>
         </scene>
         <!--Navigation Controller - Settings-->
         <scene sceneID="Aih-a0-z6r">
@@ -366,7 +349,7 @@
                 <navigationController definesPresentationContext="YES" id="15m-Qd-X6m" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="CSTabBar_settings.png" id="Lfd-ao-2yz"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="skw-5D-0sN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="skw-5D-0sN">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -378,90 +361,54 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ESO-6j-suU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280" y="-606"/>
+            <point key="canvasLocation" x="144" y="-538"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="Uzu-vb-VKq">
             <objects>
-                <viewController id="sgu-Au-DE5" customClass="SettingsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="sgu-Au-DE5" customClass="SettingsViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="PFA-ZD-lRN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="naE-aq-XSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280" y="264"/>
+            <point key="canvasLocation" x="144" y="152"/>
         </scene>
         <!--Credits View Controller-->
         <scene sceneID="cJE-SS-bNv">
             <objects>
                 <viewController storyboardIdentifier="CreditsViewController" hidesBottomBarWhenPushed="YES" id="rtl-uZ-lp0" customClass="CreditsViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Bgx-Nj-mbY"/>
-                        <viewControllerLayoutGuide type="bottom" id="tiB-9N-kGt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BqH-fr-rRY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kvr-f8-LLd">
-                                <rect key="frame" x="0.0" y="62" width="320" height="412"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <dataDetectorType key="dataDetectorTypes"/>
-                            </webView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spb-xs-JcR">
-                                <rect key="frame" x="0.0" y="474" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem image="UIButtonBarStop.png" style="plain" id="yCc-zo-WvH"/>
-                                    <barButtonItem width="101" style="plain" systemItem="fixedSpace" id="T9B-qb-jV7"/>
-                                    <barButtonItem image="UIButtonBarArrowLeft.png" style="plain" id="nmb-mw-6m3"/>
-                                    <barButtonItem image="UIButtonBarArrowRight.png" style="plain" id="37m-Wp-FNI"/>
-                                    <barButtonItem width="104" style="plain" systemItem="fixedSpace" id="QwB-iw-L5S"/>
-                                    <barButtonItem image="UIButtonBarRefresh.png" style="plain" id="7mQ-Kz-L1n"/>
-                                </items>
-                                <color key="tintColor" red="0.0" green="0.50196078430000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </toolbar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="kvr-f8-LLd" firstAttribute="leading" secondItem="BqH-fr-rRY" secondAttribute="leading" id="8C2-w5-QkZ"/>
-                            <constraint firstItem="kvr-f8-LLd" firstAttribute="leading" secondItem="spb-xs-JcR" secondAttribute="leading" id="Z9Z-Lx-nxU"/>
-                            <constraint firstAttribute="trailing" secondItem="kvr-f8-LLd" secondAttribute="trailing" id="ZPi-pn-SPe"/>
-                            <constraint firstItem="kvr-f8-LLd" firstAttribute="trailing" secondItem="spb-xs-JcR" secondAttribute="trailing" id="cfi-qG-lYp"/>
-                            <constraint firstItem="kvr-f8-LLd" firstAttribute="top" secondItem="BqH-fr-rRY" secondAttribute="top" constant="62" id="ij0-ix-nxw"/>
-                            <constraint firstItem="spb-xs-JcR" firstAttribute="top" secondItem="kvr-f8-LLd" secondAttribute="bottom" id="s7z-kA-3QW"/>
-                            <constraint firstItem="tiB-9N-kGt" firstAttribute="top" secondItem="spb-xs-JcR" secondAttribute="bottom" constant="1" id="wtb-A7-tpH"/>
-                        </constraints>
-                    </view>
                     <navigationItem key="navigationItem" id="cMd-c0-wQo"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIa-CF-4ck" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="727" y="151"/>
+            <point key="canvasLocation" x="679" y="152"/>
         </scene>
         <!--Navigation Controller - Report-->
         <scene sceneID="dSl-gL-Xxc">
             <objects>
-                <navigationController title="Report" definesPresentationContext="YES" id="0ny-e6-BF2" sceneMemberID="viewController">
+                <navigationController title="Report" definesPresentationContext="YES" navigationBarHidden="YES" id="0ny-e6-BF2" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Report" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z42-mk-NG8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z42-mk-NG8">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="uPX-na-cr6" kind="relationship" relationship="rootViewController" id="NGY-VW-CZE"/>
+                        <segue destination="ekw-cq-hKN" kind="relationship" relationship="rootViewController" id="2Ax-ZV-IZ4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9S-v8-UrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1386" y="-554"/>
+            <point key="canvasLocation" x="-1458" y="-538"/>
         </scene>
         <!--Navigation Controller - Wizard-->
         <scene sceneID="zfO-JS-21r">
             <objects>
                 <navigationController title="Wizard" definesPresentationContext="YES" id="6Ji-IA-QuF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Wizard" image="CSTabBar_add_photo.png" id="bk4-8A-zQb"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uAN-1O-GEG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uAN-1O-GEG">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="vwU-Uf-hpU" kind="relationship" relationship="rootViewController" id="3Pj-xj-aH0"/>
@@ -469,7 +416,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3j-pi-PcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-754" y="-548"/>
+            <point key="canvasLocation" x="-922" y="-538"/>
         </scene>
         <!--Navigation Controller - Account-->
         <scene sceneID="mT1-Ka-I7e">
@@ -477,7 +424,7 @@
                 <navigationController title="Account" definesPresentationContext="YES" id="HdQ-jD-vPj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Account" image="CSTabBar_account.png" id="HO5-AF-iuE"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6M3-e8-0yZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6M3-e8-0yZ">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
@@ -487,7 +434,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFj-l8-RbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-175" y="-554"/>
+            <point key="canvasLocation" x="-387" y="-538"/>
         </scene>
         <!--Account View Controller-->
         <scene sceneID="OKK-jB-ux6">
@@ -498,7 +445,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anw-nq-rBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-175" y="272"/>
+            <point key="canvasLocation" x="-387" y="142"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Pbe-BX-WQZ">
@@ -526,7 +473,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zzn-iN-92h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1905" y="-1361"/>
+            <point key="canvasLocation" x="-1281" y="-1909"/>
         </scene>
         <!--Route List View Controller-->
         <scene sceneID="Ey8-N6-aBR">
@@ -572,11 +519,7 @@
         <image name="CSTabBar_photomap_tb.png" width="30" height="30"/>
         <image name="CSTabBar_plan_route.png" width="30" height="30"/>
         <image name="CSTabBar_settings.png" width="30" height="30"/>
-        <image name="UIButtonBarArrowLeft.png" width="15" height="18"/>
-        <image name="UIButtonBarArrowRight.png" width="15" height="18"/>
         <image name="UIButtonBarDownload" width="19" height="26"/>
-        <image name="UIButtonBarRefresh.png" width="18" height="22"/>
-        <image name="UIButtonBarStop.png" width="17" height="17"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -25,22 +25,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #import "PhotoMapViewController.h"
-#import "RMMapLayer.h"
-#import "RMMarker.h"
-#import "RMAnnotation.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
 #import "Route.h"
 #import "SegmentVO.h"
 #import <CoreLocation/CoreLocation.h>
-
+#import "GenericConstants.h"
 #import "PhotoMapListVO.h"
 #import "PhotoMapVO.h"
 #import "PhotoMapImageLocationViewController.h"
-#import "Markers.h"
-#import "RMMapView.h"
 #import "CSPointVO.h"
-#import "RouteLineView.h"
 #import "Files.h"
 #import "GlobalUtilities.h"
 #import "ButtonUtilities.h"
@@ -48,16 +42,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoManager.h"
 #import "UserLocationManager.h"
 #import "UIView+Additions.h"
-#import "RMUserLocation.h"
+#import "MKMapView+Additions.h"
+#import "CSPhotomapAnnotation.h"
+#import "CSPhotomapAnnotationView.h"
+#import <MapKit/MapKit.h>
 
-#import "PhotoWizardViewController.h"
+//#import "PhotoWizardViewController.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
-@interface PhotoMapViewController()
+@interface PhotoMapViewController()<MKMapViewDelegate>
 
-@property (nonatomic, strong) IBOutlet RMMapView						* mapView;//map of current area
+@property (nonatomic, strong) IBOutlet MKMapView						* mapView;//map of current area
 @property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;// map type label
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* gpslocateButton;
@@ -65,7 +62,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 @property (nonatomic, strong) CLLocation								* currentLocation;
 @property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
-@property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
+//@property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
 
 @property (nonatomic, assign) BOOL										photomapQuerying;
 
@@ -127,9 +124,21 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 - (void) didNotificationMapStyleChanged {
-	_mapView.tileSource = [CycleStreets tileSource];
-	self.attributionLabel.text = [CycleStreets mapAttribution];
+	
+	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
+	for(id <MKOverlay> overlay in overlays){
+		if([overlay isKindOfClass:[MKTileOverlay class]] ){
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+			newoverlay.canReplaceMapContent = YES;
+			[_mapView exchangeOverlay:overlay withOverlay:newoverlay];
+			break;
+		}
+	}
+	
+	
+	_attributionLabel.text = [CycleStreets mapAttribution];
 }
+
 
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict{
@@ -158,24 +167,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	PhotoMapListVO *photoList=[PhotoManager sharedInstance].locationPhotoList;
 		
-	[_mapView removeAllAnnotations];
+	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	
 	for (PhotoMapVO *photo in [photoList photos]) {
 		
-		
-		RMAnnotation *annotation = [RMAnnotation annotationWithMapView:_mapView coordinate:photo.locationCoords andTitle:nil];
-		
-		annotation.userInfo=photo;
-		
-		if([[PhotoManager sharedInstance] isUserPhoto:photo]){
-			annotation.annotationIcon = [UIImage imageNamed:@"UIIcon_userphotomap.png"];
-			annotation.anchorPoint = CGPointMake(0.5, 1.0);
-		}else{
-			annotation.annotationIcon = [UIImage imageNamed:@"UIIcon_photomap.png"];
-			annotation.anchorPoint = CGPointMake(0.5, 1.0);
-		}
-		
-		
+		CSPhotomapAnnotation *annotation=[[CSPhotomapAnnotation alloc]init];
+		annotation.coordinate=photo.locationCoords;
+		annotation.dataProvider=photo;
+		annotation.isUserPhoto=[[PhotoManager sharedInstance] isUserPhoto:photo];
+				
 		[_mapView addAnnotation:annotation];
 		
 	}
@@ -184,25 +184,47 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 
-#pragma mar - Annotation methods
+#pragma mark - Annotation methods
 
-- (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
-{
-  
-	RMMapLayer *marker = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-    
-    return marker;
+#pragma mark - MKMap Annotations
+
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+	
+	if ([annotation isKindOfClass:[MKUserLocation class]])
+		return nil;
+	
+	
+	static NSString *reuseId = @"CSPhotomapAnnotation";
+	CSPhotomapAnnotationView *annotationView = (CSPhotomapAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+	
+	if (annotationView == nil){
+		annotationView = [[CSPhotomapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+		annotationView.enabled=YES;
+				
+	} else {
+		annotationView.annotation = annotation;
+	}
+	
+	return annotationView;
 }
 
 
-- (void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map{
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+	
+	BetterLog(@"Fired");
+	
+	CSPhotomapAnnotation *annotation=(CSPhotomapAnnotation*)view.annotation;
 	
 	PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
-	PhotoMapVO *photoEntry = (PhotoMapVO *)annotation.userInfo;
+	PhotoMapVO *photoEntry = (PhotoMapVO *)annotation.dataProvider;
 	lv.dataProvider=photoEntry;
 	[self presentModalViewController:lv animated:YES];
 	
 }
+
+
 
 
 //
@@ -226,12 +248,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	displaysConnectionErrors=NO;
 	
-	[RMMapView class];
+	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+	newoverlay.canReplaceMapContent = YES;
+	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
-	[self didNotificationMapStyleChanged];
+	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	_mapView.showsUserLocation=YES;
-	_mapView.zoom=15;
-	_mapView.userTrackingMode=RMUserTrackingModeNone;
+	
+	_attributionLabel.text = [CycleStreets mapAttribution];
 	
 }
 
@@ -269,11 +293,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	if (_photomapQuerying) return;
 	_photomapQuerying = YES;
 	
-	
-	
 	CGRect bounds = _mapView.bounds;
-	CLLocationCoordinate2D nw = [_mapView pixelToCoordinate:bounds.origin];
-	CLLocationCoordinate2D se = [_mapView pixelToCoordinate:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
+	CLLocationCoordinate2D nw = [_mapView convertPoint:bounds.origin toCoordinateFromView:_mapView];
+	CLLocationCoordinate2D se = [_mapView convertPoint:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height) toCoordinateFromView:_mapView ];
 	CLLocationCoordinate2D ne;
 	CLLocationCoordinate2D sw;
 	ne.latitude = nw.latitude;
@@ -284,6 +306,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	self.currentLocation=[[CLLocation alloc]initWithLatitude:nw.latitude longitude:nw.longitude];
 	
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];	
+	
 }
 
 
@@ -300,51 +323,22 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 #pragma mark - MapView delegate
 
-//
-/***********************************************
- * @description			MapView delegate methods
- ***********************************************/
-//
 
-
--(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
-}
-
-- (void) afterMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction {
-	[self afterMapChanged:map];
-}
-
-
-- (void) afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction{
-	[self afterMapChanged:map];
-}
-
-- (void) afterMapChanged: (RMMapView*) map {
+	CLLocation *location=userLocation.location;
 	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
-	//if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
-	//	[self requestPhotos];
+	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:5]){
+		
+		self.currentLocation=location;
+		[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:YES];
+		
+	}
 	
 }
 
-
-
-
-
-
-
-
-
-#pragma mark - Location
-//
-/***********************************************
- * @description			Location Methods
- ***********************************************/
-//
-
-// called when showsUserLocation is set to NO
-- (void)mapViewDidStopLocatingUser:(RMMapView *)mapView{
+- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView{
 	
 	
 	BetterLog(@"");
@@ -356,22 +350,41 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 }
 
-- (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation{
+- (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error{
 	
-	BetterLog(@"");
-	
-	CLLocation *location=userLocation.location;
-	
-//	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
-//	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:5]){
-//		
-//		self.currentLocation=location;
-//		[_mapView setCenterCoordinate:_currentLocation.coordinate animated:YES];
-//		
-//	}
+	_gpslocateButton.style = UIBarButtonItemStylePlain;
 	
 }
 
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+	
+	
+	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
+	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
+		[self requestPhotos];
+	
+	
+}
+
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+    
+    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+        
+    }
+	// add routeline overlay here
+    
+    return nil;
+}
+
+
+
+
+
+
+#pragma mark - Location
 
 
 - (IBAction) locationButtonSelected:(id)sender {
@@ -391,11 +404,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 }
 
-- (void)mapView:(RMMapView *)mapView didFailToLocateUserWithError:(NSError *)error{
-	
-	_gpslocateButton.style = UIBarButtonItemStylePlain;
-	
-}
+
 
 
 
@@ -405,6 +414,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 -(IBAction)showPhotoWizard:(id)sender{
 	
+	/*
 	PhotoWizardViewController *photoWizard=[[PhotoWizardViewController alloc]initWithNibName:[PhotoWizardViewController nibName] bundle:nil];
 	photoWizard.extendedLayoutIncludesOpaqueBars=NO;
 	photoWizard.edgesForExtendedLayout = UIRectEdgeNone;
@@ -413,7 +423,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	[self presentViewController:photoWizard animated:YES completion:^{
 		
 	}];
-	
+	*/
 }
 
 
