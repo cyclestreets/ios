@@ -46,6 +46,7 @@
 	topStrokeColor=kTopBorderStrokeColor;
 	bottomStrokeColor=kBottomBorderStrokeColor;
 	
+	self.backgroundColor=[UIColor clearColor];
 }
 
 

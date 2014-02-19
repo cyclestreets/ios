@@ -21,17 +21,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Settings.h
 //  CycleStreets
 //
+//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import <UIKit/UIKit.h>
 #import "SettingsVO.h"
 
 @interface SettingsViewController : UIViewController {
+	
 }
 
-@property (nonatomic, strong)		SettingsVO								* dataProvider;
-
-- (IBAction) changed:(id)sender;
-- (void) save;
 
 @end

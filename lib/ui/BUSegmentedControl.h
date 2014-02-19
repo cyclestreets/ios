@@ -47,7 +47,6 @@
 
 -(void)setSelectedSegmentIndex:(int)index;
 -(IBAction)itemWasSelected:(id)sender;
--(IBAction)itemWasReleased:(id)sender;
 -(void)removeSegmentAt:(int)index;
 -(void)addSegmentAt:(int)index;
 -(void)selectItemAtIndex:(int)index;

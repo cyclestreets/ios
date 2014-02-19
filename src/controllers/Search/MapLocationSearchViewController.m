@@ -67,12 +67,12 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	
 	self.searchDisplayController.searchResultsTableView.rowHeight=[MapLocationSearchCellView rowHeight];
 	
-	self.view.backgroundColor=[UIColor whiteColor];
-	self.searchDisplayController.active = YES;
-	self.searchDisplayController.searchBar.tintColor=UIColorFromRGB(0x008000);
-	self.searchDisplayController.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Local", @"National", nil];
-	self.searchDisplayController.searchBar.showsScopeBar=YES;
-	self.searchDisplayController.searchBar.showsBookmarkButton=NO;
+    self.view.backgroundColor                                  = [UIColor whiteColor];
+    self.searchDisplayController.active                        = YES;
+    self.searchDisplayController.searchBar.tintColor           = UIColorFromRGB(0x008000);
+    self.searchDisplayController.searchBar.scopeButtonTitles   = [NSArray arrayWithObjects:@"Local", @"National", nil];
+    self.searchDisplayController.searchBar.showsScopeBar       = YES;
+    self.searchDisplayController.searchBar.showsBookmarkButton = NO;
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSString *lastSearch = [cycleStreets.files miscValueForKey:@"lastSearch"];

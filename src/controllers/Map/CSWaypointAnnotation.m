@@ -22,7 +22,7 @@
 }
 
 - (NSString *)title{
-    return @"title";
+    return @"Remove";
 }
 
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coord {
@@ -37,6 +37,7 @@
 
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
     coordinate = newCoordinate;
+	_dataProvider.coordinate=coordinate;
 }
 
 @end

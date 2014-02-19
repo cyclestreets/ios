@@ -90,6 +90,8 @@
 	
 	initialised=YES;
 	
+	self.clipsToBounds=YES;
+	
 }
 
 // Called when creating containe by code

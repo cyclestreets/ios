@@ -16,6 +16,7 @@
 
 @property (nonatomic,assign)  int							index;
 @property (nonatomic,strong)  WayPointVO					*dataProvider;
+@property (nonatomic,assign)  BOOL							menuEnabled;
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coord;
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate;

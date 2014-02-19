@@ -21,28 +21,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Settings.m
 //  CycleStreets
 //
+//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import "SettingsViewController.h"
+#import "CycleStreets.h"
+#import "Query.h"
+#import "AppDelegate.h"
+#import "Files.h"
+#import "MapViewController.h"
+#import "GenericConstants.h"
 #import "AppConstants.h"
 #import "SettingsManager.h"
 #import "GlobalUtilities.h"
 
-
 @interface SettingsViewController()
 
+@property (nonatomic, strong)		SettingsVO								* dataProvider;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* planControl;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* speedControl;
 @property (nonatomic, strong)		IBOutlet UISegmentedControl				* mapStyleControl;
-@property (nonatomic, strong)		IBOutlet UISegmentedControl				* routeUnitControl;
 @property (nonatomic, strong)		IBOutlet UISegmentedControl				* imageSizeControl;
-@property (nonatomic, strong)		IBOutlet UISwitch						* autoEndSwitch;
+@property (nonatomic, strong)		IBOutlet UISegmentedControl				* routeUnitControl;
+@property (nonatomic, strong)		IBOutlet UISwitch						* routePointSwitch;
+@property (nonatomic, strong)		IBOutlet UIView							* controlView;
+@property (nonatomic, strong)		IBOutlet UILabel						* speedTitleLabel;
 
-@property(nonatomic,weak) IBOutlet UIView									*viewContainer;
 
 @end
 
-
 @implementation SettingsViewController
-
 
 
 
@@ -69,20 +77,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)viewDidLoad {
 	
-	
+	[self select:_speedControl byString:_dataProvider.speed];
+	[self select:_planControl byString:_dataProvider.plan];
+	[self select:_imageSizeControl byString:_dataProvider.imageSize];
 	[self select:_mapStyleControl byString:[_dataProvider.mapStyle lowercaseString]];
 	[self select:_routeUnitControl byString:_dataProvider.routeUnit];
-	[self select:_imageSizeControl byString:_dataProvider.imageSize];
-	//_autoEndSwitch.on=_dataProvider.autoEndRoute;
+	_routePointSwitch.on=_dataProvider.showRoutePoint;
 	
 	[_routeUnitControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
-	[_mapStyleControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[_planControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 	[_imageSizeControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
-	[_autoEndSwitch addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[_mapStyleControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[_speedControl addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
+	[_routePointSwitch addTarget:self action:@selector(changed:) forControlEvents:UIControlEventValueChanged];
 
 	
-	[self.view addSubview:_viewContainer];
-	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.frame.size.height)];
+	[self.view addSubview:_controlView];
+	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, _controlView.frame.size.height)];
 	
 	 [super viewDidLoad];
 	
@@ -101,21 +112,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	// Note: we have to update the routeunit first then update the linked segments before getting the definitive values;
 	_dataProvider.routeUnit = [[_routeUnitControl titleForSegmentAtIndex:_routeUnitControl.selectedSegmentIndex] lowercaseString];
-	_dataProvider.mapStyle = [_mapStyleControl titleForSegmentAtIndex:_mapStyleControl.selectedSegmentIndex];
+	_dataProvider.plan = [[_planControl titleForSegmentAtIndex:_planControl.selectedSegmentIndex] lowercaseString];
 	_dataProvider.imageSize = [[_imageSizeControl titleForSegmentAtIndex:_imageSizeControl.selectedSegmentIndex] lowercaseString];
-	
-	//_dataProvider.autoEndRoute = _autoEndSwitch.isOn;
+	_dataProvider.mapStyle = [_mapStyleControl titleForSegmentAtIndex:_mapStyleControl.selectedSegmentIndex];
+	_dataProvider.showRoutePoint = _routePointSwitch.isOn;
 	
 	UISegmentedControl *control=(UISegmentedControl*)sender;
 	
 	if(control==_mapStyleControl)
-		[[NSNotificationCenter defaultCenter] postNotificationName:MAPSTYLECHANGED object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationMapStyleChanged" object:nil];
 	
-	//if(control==_routeUnitControl)
-	//	[[NSNotificationCenter defaultCenter] postNotificationName:MAPUNITCHANGED object:nil];
+	[self updateRouteUnitDisplay];
 	
+	_dataProvider.speed = [[_speedControl titleForSegmentAtIndex:_speedControl.selectedSegmentIndex] lowercaseString];
 	
 	[[SettingsManager sharedInstance] saveData];
+}
+
+-(void)updateRouteUnitDisplay{
+	
+	if([_dataProvider.routeUnit isEqualToString:MILES]){
+		_speedTitleLabel.text=@"Route speed (mph)";
+		
+		[_speedControl setTitle:@"10" forSegmentAtIndex:0];
+		[_speedControl setTitle:@"12" forSegmentAtIndex:1];
+		[_speedControl setTitle:@"15" forSegmentAtIndex:2];
+		
+	}else {
+		_speedTitleLabel.text=@"Route speed (km/h)";
+		
+		[_speedControl setTitle:@"16" forSegmentAtIndex:0];
+		[_speedControl setTitle:@"20" forSegmentAtIndex:1];
+		[_speedControl setTitle:@"24" forSegmentAtIndex:2];
+	}
+	
 }
 
 
@@ -123,7 +153,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
 
 
 

@@ -36,6 +36,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ViewUtilities.h"
 #import "ButtonUtilities.h"
 #import "StringUtilities.h"
+#import "GenericConstants.h"
+#import <Pixate.h>
 
 static NSString *const STRINGID=@"account";
 
@@ -191,17 +193,23 @@ static NSString *const STRINGID=@"account";
 	// add ui and targets to form buttons
 	UIButton *button=nil;
 	button=(UIButton*)[loginView viewWithTag:kSubmitButtonTag];
-	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Sign in"];
+	button.styleId=@"DarkGreyButton";
+	[button setTitle:@"Login" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
 	button=(UIButton*)[registerView viewWithTag:kSubmitButtonTag];
-	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Create account"];
+	button.styleId=@"DarkGreyButton";
+	[button setTitle:@"Create account" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	
 	button=(UIButton*)[retrieveView viewWithTag:kSubmitButtonTag];
-	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Submit"];
+	button.styleId=@"DarkGreyButton";
+	[button setTitle:@"Submit" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(retrievePasswordButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// logged in UI
-	[ButtonUtilities styleIBButton:logoutButton type:@"grey" text:@"Clear signin details"];
+	logoutButton.styleId=@"DarkGreyButton";
+	[logoutButton setTitle:@"Clear signin details" forState:UIControlStateNormal];
 	[logoutButton addTarget:self action:@selector(logoutButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];
 	
@@ -217,9 +225,6 @@ static NSString *const STRINGID=@"account";
 	[formFieldArray addObject:par];
 	[par release];
 	*/
-	
-	if(isModal==YES)
-		[self createNavigationBarUI];
 	
 	
 	if(isModal==YES){
@@ -287,22 +292,6 @@ static NSString *const STRINGID=@"account";
 	
 }
 
-
--(void)createNavigationBarUI{
-	
-	if(navigation==nil){
-	
-        self.navigation=[[CustomNavigtionBar alloc]init];
-        self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
-        navigation.delegate=self;
-        navigation.leftItemType=BUNavNoneType;
-        navigation.rightItemType=UIKitButtonType;
-        navigation.rightButtonTitle=@"Close";
-        navigation.navigationItem=self.navigationItem;
-        [navigation createNavigationUI];
-	
-	}
-}
 
 
 

@@ -21,6 +21,7 @@
 #import "ViewUtilities.h"
 #import "GradientView.h"
 #import <Twitter/Twitter.h>
+#import "GenericConstants.h"
 
 
 @interface ItineraryViewController()
@@ -123,17 +124,14 @@
 	
 	
 	self.readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	_readoutLineOne.showShadow=YES;
 	_readoutLineOne.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
 	_readoutLineOne.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
 	self.readoutLineTwo=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	_readoutLineTwo.showShadow=YES;
 	_readoutLineTwo.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
 	_readoutLineTwo.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
 	self.readoutLineThree=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	_readoutLineThree.showShadow=YES;
 	_readoutLineThree.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
 	_readoutLineThree.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	
@@ -141,8 +139,6 @@
 	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	readoutlabel.font=[UIFont systemFontOfSize:12];
 	readoutlabel.textColor=UIColorFromRGB(0x666666);
-	readoutlabel.shadowColor=[UIColor whiteColor];
-	readoutlabel.shadowOffset=CGSizeMake(0, 1);
 	readoutlabel.text=@"Select any segment to view the map & details for it.";
 	 
 	
@@ -427,7 +423,6 @@
 		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 		titlelabel.font=[UIFont boldSystemFontOfSize:14];
 		titlelabel.textAlignment=UITextAlignmentCenter;
-		titlelabel.hasShadow=YES;
 		titlelabel.textColor=[UIColor grayColor];
 		titlelabel.text=@"You have no route active currently.";
 		[contentContainer addSubview:titlelabel];					
@@ -435,7 +430,6 @@
 		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 		infolabel.font=[UIFont systemFontOfSize:13];
 		infolabel.textAlignment=UITextAlignmentCenter;
-		infolabel.hasShadow=YES;
 		infolabel.textColor=[UIColor grayColor];
 		infolabel.text=@"Once you have loaded a route, the itinerary will be shown here.";
 		[contentContainer addSubview:infolabel];					

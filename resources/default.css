@@ -27,16 +27,49 @@ navigation-bar title{
 
 }
 
+button {
+    color           : white;
+}
+
+#OrangeButton,#GreenButton,#RedButton,#DarkGreyButton {
+    color           : #FFFFFF;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
+    font-size       : 16px;
+    border-width    : 2px;
+    border-radius   : 3px;
+    border-style    : none;
+}
+
 tab-bar{
-    -ios-tint-color:#1B953E;
+    -ios-tint-color:#509720;
 
 }
 
 
+/* UI buttons */
+
+
+#OrangeButton{
+    background-color: #F9721C;
+}
+
+#GreenButton{
+    background-color: #509720;
+}
+
+#RedButton{
+    background-color: #B20003;
+}
+
+#DarkGreyButton{
+    background-color: #5F5F5F;
+}
+
 /* BU Classes */
 
 #BUIconActionSheetClosebutton{
-	font-family     : HelveticaNeue;
+	font-family     : Helvetica Neue;
     font-weight     : light;
 	background-color: #AC0000;
     border-width    : 0px;
@@ -57,7 +90,7 @@ tab-bar{
 
 #tripActionButton{
 
-	font-family     : HelveticaNeue;
+	font-family     : Helvetica Neue;
     font-weight     : light;
 	font-size       : 20px;
 
@@ -70,6 +103,13 @@ tab-bar{
 /* Routes view */
 
 
+#BUSegmentedControlButton{
+    background-color: #5F5F5F;
+}
+#BUSegmentedControlButton:disabled{
+    background-color: #509720;
+    color:#FFFFFF;
+}
 
 
 /* map view */

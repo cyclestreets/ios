@@ -103,8 +103,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @property(nonatomic,assign)  BOOL									markerMenuOpen;
 
 
-@property (nonatomic, strong) InitialLocation						* initialLocation; // deprecate
-
 // data
 @property (nonatomic, strong) RouteVO								* route;
 @property (nonatomic, strong) NSMutableArray						* waypointArray;
@@ -126,7 +124,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 - (void)initToolBarEntries;
 - (void)updateUItoState:(MapPlanningState)state;
 
--(void)displayLocationIndicator:(BOOL)display;
 
 
 // waypoints
@@ -237,6 +234,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)createPersistentUI{
 	
+	_toolBar.clipsToBounds=YES;
 	
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
@@ -357,7 +355,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 		case MapPlanningStateNoRoute:
 		{
-			BetterLog(@"MapPlanningStateNoRoute");
+			//BetterLog(@"MapPlanningStateNoRoute");
 			
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleBordered;
@@ -372,7 +370,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 		case MapPlanningStateLocating:
 		{
-			BetterLog(@"MapPlanningStateLocating");
+			//BetterLog(@"MapPlanningStateLocating");
 			
 			
 			_searchButton.enabled = YES;
@@ -396,7 +394,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 		case MapPlanningStateStartPlanning:
 		{
-			BetterLog(@"MapPlanningStateStartPlanning");
+			//BetterLog(@"MapPlanningStateStartPlanning");
 			
 			_searchButton.enabled = YES;
 			_locationButton.style=UIBarButtonItemStyleBordered;
@@ -411,7 +409,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 		case MapPlanningStatePlanning:
 		{
-			BetterLog(@"MapPlanningStatePlanning");
+			//BetterLog(@"MapPlanningStatePlanning");
 			
 			_routeButton.title = @"Plan route";
 			_searchButton.enabled = YES;
@@ -426,7 +424,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			
 		case MapPlanningStateRoute:
 		{
-			BetterLog(@"MapPlanningStateRoute");
+			//BetterLog(@"MapPlanningStateRoute");
 			
 			_routeButton.title = @"New route";
 			_locationButton.style=UIBarButtonItemStyleBordered;
@@ -465,6 +463,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	
 }
+
+//- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
+//- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
 
 
 -(void)locationDidComplete:(MKUserLocation *)userLocation{
@@ -553,7 +554,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[_waypointArray removeAllObjects];
 	
 	[_lineView setNeedsDisplay];
-	[self displayLocationIndicator:NO];
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
 	
@@ -606,7 +606,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[self showWalkingOverlay];
 	
 	[_lineView setNeedsDisplay];
-	[self displayLocationIndicator:NO];
 	
 	// close left vc if open
 	
@@ -812,6 +811,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	annotation.coordinate=coordinate;
 	annotation.index=index;
 	annotation.dataProvider=waypoint;
+	annotation.menuEnabled=NO;
 	
 	return annotation;
 }
@@ -867,6 +867,80 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	return YES;
 }
 
+#pragma mark - MKMap delegate
+//
+/***********************************************
+ * @description			RMMap Touch delegates
+ ***********************************************/
+//
+
+- (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
+	
+	BetterLog(@"");
+	
+	// if the menu is open, close it, dont add a waypoint
+	if(_markerMenuOpen==YES){
+		_markerMenuOpen=NO;
+		[[UIMenuController sharedMenuController] setMenuVisible:NO];
+		return;
+	}
+	
+	
+	CGPoint touchPoint = [recogniser locationInView:self.mapView];
+    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+	[self addWayPointAtCoordinate:touchMapCoordinate];
+	
+}
+
+
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState{
+	
+	BetterLog(@"From %i to %i",oldState, newState);
+	
+	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
+	CSWaypointAnnotation* annotation=view.annotation;
+	
+	if(_markerMenuOpen==YES){
+		if(newState!=MKAnnotationViewDragStateNone)
+			[annotationView setDragState:MKAnnotationViewDragStateNone];
+		return;
+	}
+	
+	
+	if (newState == MKAnnotationViewDragStateEnding) {
+		
+		annotation.menuEnabled=NO;
+		
+		[annotationView setDragState:MKAnnotationViewDragStateNone]; //NOTE: doesnt seem to fire this for custom annotations
+		
+    }else if (newState==MKAnnotationViewDragStateCanceling) {
+		
+		[annotationView setDragState:MKAnnotationViewDragStateNone]; //NOTE: doesnt seem to fire this for custom annotations
+    }
+	
+	
+}
+
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+    
+    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+        
+    }
+	// add routeline overlay here
+    
+    return nil;
+}
+
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+	
+	[self locationDidComplete:userLocation];
+	
+}
+
 
 #pragma mark - MKMap Annotations
 
@@ -881,10 +955,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	 CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
 	
 	 if (annotationView == nil){
-		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
 		 annotationView.draggable = YES;
 		 annotationView.enabled=YES;
-		 //annotationView.canShowCallout = YES;
+		 
 	 } else {
 		 annotationView.annotation = annotation;
 	 }
@@ -895,6 +969,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
  
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
 	
+	BetterLog(@"Fired");
+	
+	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
+	CSWaypointAnnotation* annotation=view.annotation;
+	
+	BetterLog(@"dragState=%i",annotationView.dragState);
+	
+	if(annotation.menuEnabled==NO){
+		annotation.menuEnabled=YES;
+		return;
+	}
+	
 	if(_markerMenuOpen==YES)
 		return;
 	
@@ -903,6 +989,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	if([view.annotation isKindOfClass:[MKUserLocation class]])
 		return;
+	
+	BetterLog(@"Passed all exceptions");
 	
 	UIMenuController *menuController = [UIMenuController sharedMenuController];
 	
@@ -924,7 +1012,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		[menuController setMenuVisible:YES animated:YES];
 	
 	_markerMenuOpen=YES;
-	_markerTouchView.proxyTouchEvent=NO;
+	
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+	
+	
 	
 }
 
@@ -939,7 +1032,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 	
 	_markerMenuOpen=NO;
-	_markerTouchView.proxyTouchEvent=NO;
 	
 }
 
@@ -1098,61 +1190,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
-#pragma mark - MKMap delegate
-//
-/***********************************************
- * @description			RMMap Touch delegates
- ***********************************************/
-//
 
-- (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
-	
-	BetterLog(@"");
-	
-	if(_markerMenuOpen==YES){
-		_markerMenuOpen=NO;
-		_markerTouchView.proxyTouchEvent=NO;
-		return;
-	}
-	
-	
-	CGPoint touchPoint = [recogniser locationInView:self.mapView];
-    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-	[self addWayPointAtCoordinate:touchMapCoordinate];
-	
-}
-
-
-
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState{
-	
-	BetterLog(@"%i",newState);
-	
-	if (newState == MKAnnotationViewDragStateEnding) {
-		
-		[view setDragState:MKAnnotationViewDragStateNone]; //NOTE: doesnt seem to fire this for custom annotations
-    }
-	
-}
-
-
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
-    
-    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
-        
-    }
-	// add routeline overlay here
-    
-    return nil;
-}
-
-
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-	
-	[self locationDidComplete:userLocation];
-	
-}
 
 
 
@@ -1246,7 +1284,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[self assessWayPointAddition:location];
 	[_lineView setNeedsDisplay];
-	[self displayLocationIndicator:YES];
 	
 	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 }

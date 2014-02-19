@@ -16,6 +16,7 @@
 #import "FavouritesManager.h"
 #import "UIView+Additions.h"
 #import "GenericConstants.h"
+#import <Pixate.h>
 
 @interface RoutesViewController()
 
@@ -142,7 +143,10 @@
 	[_routeTypeControl buildInterface];
 	[controlcontainer addSubview:_routeTypeControl];
 	
-	self.selectedRouteButton=[ButtonUtilities UIButtonWithWidth:120 height:28 type:@"orange" text:@"Current Route"];
+	self.selectedRouteButton=[UIButton buttonWithType:UIButtonTypeSystem];
+	[_selectedRouteButton setTitle:@"Current Route" forState:UIControlStateNormal];
+	_selectedRouteButton.size=CGSizeMake(120, 28);
+	_selectedRouteButton.styleId=@"OrangeButton";
     [_selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[controlcontainer addSubview:_selectedRouteButton];
@@ -178,28 +182,20 @@
 
 
 
-//
-/***********************************************
- * @description		UI EVENTS
- ***********************************************/
-//
-
+#pragma mark - UIEvents
 
 -(IBAction)selectedRouteButtonSelected:(id)sender{
     
     if([[RouteManager sharedInstance] selectedRoute]!=nil)
-    [self doNavigationPush:@"RouteSummary" withDataProvider:[[RouteManager sharedInstance] selectedRoute] andIndex:-1];
+		[self doNavigationPush:@"RouteSummary" withDataProvider:[[RouteManager sharedInstance] selectedRoute] andIndex:-1];
     
 }
 
 
 
--(void)doNavigationSelector:(NSString*)type{
+-(IBAction)didSelectFetchRouteButton:(NSString*)type{
 	
-	
-    if([type isEqualToString:RIGHT]){
-		[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
-	}
+	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
     
 }
 
@@ -235,11 +231,9 @@
 }
 
 
-//
-/***********************************************
- * @description		RKCustomSegmentedControl  delegate method	
- ***********************************************/
-//
+
+#pragma mark - Segment control
+
 -(void)selectedIndexDidChange:(int)index{
 	
     if(index!=-1){
@@ -253,7 +247,7 @@
 
 
 
-#pragma mark Child controllers
+#pragma mark - Child controllers
 
 -(void)createViewControllerForType:(NSString*)type{
     
@@ -277,7 +271,7 @@
     self.activeState=controllerName;
     
     self.activeController=[self.childViewControllers objectAtIndex:0];
-    
+    _activeController.delegate=self;
 }
 
 

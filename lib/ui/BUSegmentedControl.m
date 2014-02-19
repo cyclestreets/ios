@@ -10,6 +10,7 @@
 #import "StyleManager.h"
 #import "LayoutBox.h"
 #import "GlobalUtilities.h"
+#import <Pixate.h>
 
 @implementation BUSegmentedControl
 @synthesize dataProvider;
@@ -29,12 +30,11 @@
 	
 	if (self = [super init]) {
 		
-		//BetterLog(@"Setting init for segmented Control");
-		
 		self.backgroundColor=[UIColor clearColor];
 		itemWidth=0;
         LayoutBox *lb=[[LayoutBox alloc]init];
 		self.container=lb;
+		container.cornerRadius=3;
 		container.itemPadding=0;
 		selectedIndex=-1;
 		width=0;
@@ -61,59 +61,10 @@
 	
 	for (int i=0; i<[dataProvider count]; i++) {
 		
-		button=[UIButton buttonWithType:UIButtonTypeCustom];
-		
-		if(i==0){
-			
-			
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_left_lo"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_left_hi"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_left_hi"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateSelected];
-			
-		}else if (i==[dataProvider count]-1) {
-			
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_right_lo"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateNormal];
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_right_hi"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateHighlighted];
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_right_hi"] stretchableImageWithLeftCapWidth:9 topCapHeight:0 ] forState:UIControlStateSelected];
-			
-			
-		}else {
-			
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_center_lo"] stretchableImageWithLeftCapWidth:4 topCapHeight:0 ] forState:UIControlStateNormal];
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_center_hi"] stretchableImageWithLeftCapWidth:4 topCapHeight:0 ] forState:UIControlStateHighlighted];
-			[button setBackgroundImage:[[[StyleManager sharedInstance] imageForType:@"BUSegmentedControl_center_hi"] stretchableImageWithLeftCapWidth:4 topCapHeight:0 ] forState:UIControlStateSelected];
-			
-		}
-		
+		button=[UIButton buttonWithType:UIButtonTypeSystem];
+		button.showsTouchWhenHighlighted=NO;
+		button.styleId=@"BUSegmentedControlButton";
 		[button setTitle:[dataProvider objectAtIndex:i] forState:UIControlStateNormal];
-		button.titleLabel.font=[UIFont boldSystemFontOfSize:11];
-		button.backgroundColor=[UIColor clearColor];
-		
-		if(invertHighlightTextcolor==YES){
-			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-			[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateSelected];
-			[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateSelected];
-			button.reversesTitleShadowWhenHighlighted=YES;
-		}
-		
-		if(invertNormalTextcolor==YES){
-			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-			[button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-			[button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-			[button setTitleShadowColor:[UIColor darkGrayColor] forState:UIControlStateSelected];
-			button.titleLabel.shadowOffset=CGSizeMake(0, 1);
-			button.reversesTitleShadowWhenHighlighted=YES;
-		}else{
-			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-			[button setTitleShadowColor:[UIColor grayColor] forState:UIControlStateNormal];
-			button.titleLabel.shadowOffset=CGSizeMake(0, -1);
-		}
-		
-		
-	
 		
 		
 		CGRect bframe=button.frame;
@@ -127,7 +78,6 @@
 		bframe.size.height=29.0f;
 		button.frame=bframe;
 		[button addTarget:self action:@selector(itemWasSelected:) forControlEvents:UIControlEventTouchDown];
-		[button addTarget:self action:@selector(itemWasReleased:) forControlEvents:UIControlEventTouchUpInside];
 		
 		//
 		width+=bframe.size.width;
@@ -163,39 +113,21 @@
 	
 }
 
-// Note: there can be an issie where the down executes while the item is selected, this causes a highlight flash (mainly this only occurs in the sim)
 -(void)selectItemAtIndex:(int)index{
 	
 	if(selectedIndex!=index){
 		
-				
 		if(selectedIndex!=-1){
 			UIButton *outgoingbutton=[items objectAtIndex:selectedIndex];
-			outgoingbutton.highlighted=NO;
-			outgoingbutton.selected=NO;
-			outgoingbutton.userInteractionEnabled=YES;
+			outgoingbutton.enabled=YES;
 		
 		}
 		
 		selectedIndex=index;
 		
 		UIButton *incomingbutton=[items objectAtIndex:selectedIndex];
-		incomingbutton.highlighted=YES;
-		
+		incomingbutton.enabled=NO;
 	}
-	
-}
-
--(IBAction)itemWasReleased:(id)sender{
-	
-	int index=[items indexOfObject:sender];
-	
-	UIButton *sbutton=[items objectAtIndex:index];
-	if(sbutton.selected==NO){
-		sbutton.selected=YES;
-	}
-	sbutton.userInteractionEnabled=NO;
-	selectedIndex=index;
 	
 }
 

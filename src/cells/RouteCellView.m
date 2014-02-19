@@ -10,7 +10,7 @@
 #import "AppConstants.h"
 #import "SettingsManager.h"
 #import "ViewUtilities.h"
-
+#import "GenericConstants.h"
 
 
 @implementation RouteCellView
@@ -41,7 +41,7 @@
 	viewContainer.itemPadding=0;
 	[viewContainer initFromNIB];
 	
-	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),UIColorFromRGB(0x804000),nil];
 	
 	readoutLabel.fonts=fonts;
@@ -98,7 +98,7 @@
 	
 	int height=7;
 	
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont boldSystemFontOfSize:16]   :255 :NSLineBreakByWordWrapping];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont systemFontOfSize:16]   :255 :NSLineBreakByWordWrapping];
 	height+=5;
 	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :270 :NSLineBreakByClipping];
 	height+=7;

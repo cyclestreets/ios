@@ -36,25 +36,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RouteManager.h"
 #import "SavedRoutesManager.h"
 #import "HudManager.h"
+#import "GenericConstants.h"
 
 @interface RouteSummary()
 
-@property (nonatomic, strong) UIScrollView		* scrollView;
-@property (nonatomic, strong) LayoutBox		* viewContainer;
-@property (nonatomic, weak) IBOutlet LayoutBox		* headerContainer;
-@property (nonatomic, weak) IBOutlet ExpandedUILabel		* routeNameLabel;
-@property (nonatomic, weak) IBOutlet UILabel		* dateLabel;
-@property (nonatomic, weak) IBOutlet UILabel		* routeidLabel;
-@property (nonatomic, weak) IBOutlet LayoutBox		* readoutContainer;
-@property (nonatomic, weak) IBOutlet UILabel		* timeLabel;
-@property (nonatomic, weak) IBOutlet UILabel		* lengthLabel;
-@property (nonatomic, weak) IBOutlet UILabel		* planLabel;
-@property (nonatomic, weak) IBOutlet UILabel		* speedLabel;
-@property (nonatomic, weak) IBOutlet UILabel		* calorieLabel;
-@property (nonatomic, weak) IBOutlet UILabel		* coLabel;
-@property (nonatomic, weak) IBOutlet UIButton		* routeButton;
-@property (nonatomic, weak) IBOutlet UIButton		* renameButton;
-@property (nonatomic, weak) IBOutlet UIButton		* favouriteButton;
+@property (nonatomic, strong) UIScrollView           * scrollView;
+@property (nonatomic, strong) LayoutBox              * viewContainer;
+@property (nonatomic, weak) IBOutlet LayoutBox       * headerContainer;
+@property (nonatomic, weak) IBOutlet ExpandedUILabel * routeNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel         * dateLabel;
+@property (nonatomic, weak) IBOutlet UILabel         * routeidLabel;
+@property (nonatomic, weak) IBOutlet LayoutBox       * readoutContainer;
+@property (nonatomic, weak) IBOutlet UILabel         * timeLabel;
+@property (nonatomic, weak) IBOutlet UILabel         * lengthLabel;
+@property (nonatomic, weak) IBOutlet UILabel         * planLabel;
+@property (nonatomic, weak) IBOutlet UILabel         * speedLabel;
+@property (nonatomic, weak) IBOutlet UILabel         * calorieLabel;
+@property (nonatomic, weak) IBOutlet UILabel         * coLabel;
+@property (nonatomic, weak) IBOutlet UIButton        * routeButton;
+@property (nonatomic, weak) IBOutlet UIButton        * renameButton;
+@property (nonatomic, weak) IBOutlet UIButton        * favouriteButton;
 
 -(void)selectedRouteUpdated;
 
@@ -163,14 +164,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	d1.backgroundColor=[UIColor clearColor];
+	d1.topStrokeColor=[UIColor lightGrayColor];
+	d1.bottomStrokeColor=[UIColor clearColor];
 	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	d2.backgroundColor=[UIColor clearColor];
+	d2.topStrokeColor=[UIColor lightGrayColor];
+	d2.bottomStrokeColor=[UIColor clearColor];
 	
-	
-	[ButtonUtilities styleIBButton:routeButton type:@"orange" text:@"Select this route"];
-	[ButtonUtilities styleIBButton:renameButton type:@"green" text:@"Rename this route"];
-	[ButtonUtilities styleIBButton:favouriteButton type:@"red" text:@"Add to favourites"];
+	[routeButton setTitle:@"Select this route" forState:UIControlStateNormal];
+	[renameButton setTitle:@"Rename this route" forState:UIControlStateNormal];
+	[favouriteButton setTitle:@"Add to favourites" forState:UIControlStateNormal];
 	
 	routeNameLabel.multiline=YES;
 	

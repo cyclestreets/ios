@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController">
             <connections>
-                <outlet property="autoEndSwitch" destination="KHh-x5-ehr" id="xpA-sR-6c5"/>
-                <outlet property="imageSizeControl" destination="TzR-sK-vUV" id="c3U-3I-PCI"/>
+                <outlet property="controlView" destination="1" id="83"/>
+                <outlet property="imageSizeControl" destination="41" id="43"/>
                 <outlet property="mapStyleControl" destination="66" id="77"/>
+                <outlet property="planControl" destination="7" id="27"/>
                 <outlet property="routeUnitControl" destination="86" id="96"/>
+                <outlet property="speedControl" destination="5" id="28"/>
+                <outlet property="speedTitleLabel" destination="52" id="97"/>
                 <outlet property="view" destination="81" id="82"/>
-                <outlet property="viewContainer" destination="1" id="6UA-ar-UhH"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,31 +24,119 @@
             <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
         </scrollView>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="541"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="775"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" id="91" userLabel="Type">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Default route type" lineBreakMode="tailTruncation" minimumFontSize="10" id="6">
+                            <rect key="frame" x="10" y="10" width="111" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="7">
+                            <rect key="frame" x="10" y="39" width="300" height="30"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <segments>
+                                <segment title="Fastest"/>
+                                <segment title="Balanced"/>
+                                <segment title="Quietest"/>
+                                <segment title="Shortest"/>
+                            </segments>
+                            <color key="tintColor" red="0.76725488900000005" green="0.3317388798" blue="0.263475978" alpha="1" colorSpace="calibratedRGB"/>
+                        </segmentedControl>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your route preference may influence the length and difficulty of the route you are returned." lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="53">
+                            <rect key="frame" x="10" y="74" width="284" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="55" userLabel="DividerGrey">
+                            <rect key="frame" x="10" y="118" width="300" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="93" userLabel="Photo">
+                    <rect key="frame" x="0.0" y="315" width="319" height="125"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo upload size" lineBreakMode="tailTruncation" minimumFontSize="10" id="42">
+                            <rect key="frame" x="9" y="0.0" width="142" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" white="0.95078740159999997" alpha="1" colorSpace="calibratedWhite"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="41">
+                            <rect key="frame" x="9" y="29" width="170" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="640px" width="80"/>
+                                <segment title="full" width="80"/>
+                            </segments>
+                            <color key="tintColor" red="0.085784755190000006" green="0.63301565810000004" blue="0.76824034330000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </segmentedControl>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="61">
+                            <rect key="frame" x="9" y="66" width="284" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <string key="text">Larger images will take longer to upload.
+(This only affects mobile uploads)</string>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="60" userLabel="DividerGrey">
+                            <rect key="frame" x="9" y="115" width="300" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <view contentMode="scaleToFill" id="94" userLabel="MapStyle">
-                    <rect key="frame" x="0.0" y="11" width="320" height="178"/>
+                    <rect key="frame" x="0.0" y="129" width="320" height="184"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route map style" lineBreakMode="tailTruncation" minimumFontSize="10" id="65">
-                            <rect key="frame" x="9" y="0.0" width="129" height="21"/>
+                            <rect key="frame" x="9" y="0.0" width="102" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <color key="shadowColor" white="0.95078740159999997" alpha="1" colorSpace="calibratedWhite"/>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="66">
-                            <rect key="frame" x="9" y="29" width="300" height="29"/>
+                            <rect key="frame" x="9" y="29" width="300" height="30"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <segments>
                                 <segment title="OpenStreetMap"/>
                                 <segment title="OpenCycleMap"/>
+                                <segment title="OS"/>
                             </segments>
                             <color key="tintColor" red="0.54649364639999998" green="0.3029867879" blue="0.64406776430000001" alpha="1" colorSpace="calibratedRGB"/>
                         </segmentedControl>
+                        <view contentMode="scaleToFill" id="63" userLabel="DividerGrey">
+                            <rect key="frame" x="9" y="176" width="300" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OpenStreetMap:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="111">
                             <rect key="frame" x="36" y="66" width="102" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -56,7 +147,7 @@
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Detailed map with cycle features and hills" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="112">
-                            <rect key="frame" x="146" y="95" width="125" height="31"/>
+                            <rect key="frame" x="146" y="94" width="125" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,8 +155,26 @@
                             <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OS:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="113">
+                            <rect key="frame" x="99" y="127" width="39" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" red="0.42416685050000003" green="0.23457582569999999" blue="0.50148437499999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="General map style" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="114">
-                            <rect key="frame" x="146" y="67" width="102" height="21"/>
+                            <rect key="frame" x="146" y="66" width="102" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ordnance Survey open data Street View" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="116">
+                            <rect key="frame" x="146" y="129" width="154" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -82,8 +191,43 @@
                             <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
-                        <view contentMode="scaleToFill" id="63" userLabel="DividerGrey">
-                            <rect key="frame" x="9" y="144" width="300" height="1"/>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="92" userLabel="Speed">
+                    <rect key="frame" x="0.0" y="439" width="320" height="129"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route speed (mph)" lineBreakMode="tailTruncation" minimumFontSize="10" id="52">
+                            <rect key="frame" x="9" y="1" width="137" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="5">
+                            <rect key="frame" x="9" y="30" width="156" height="30"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <segments>
+                                <segment title="10"/>
+                                <segment title="12"/>
+                                <segment title="15"/>
+                            </segments>
+                            <color key="tintColor" red="1" green="0.55793245199999997" blue="0.3494115693" alpha="1" colorSpace="calibratedRGB"/>
+                        </segmentedControl>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Controls what speed your route's duration estimation is based upon. (Shown in units of selected route distance.)" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="56">
+                            <rect key="frame" x="9" y="67" width="284" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <view contentMode="scaleToFill" id="57" userLabel="DividerGrey">
+                            <rect key="frame" x="9" y="127" width="300" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -91,11 +235,11 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="95" userLabel="Distance">
-                    <rect key="frame" x="0.0" y="175" width="320" height="98"/>
+                    <rect key="frame" x="0.0" y="575" width="320" height="99"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route distance units" lineBreakMode="tailTruncation" minimumFontSize="10" id="85">
-                            <rect key="frame" x="10" y="-3" width="300" height="21"/>
+                            <rect key="frame" x="9" y="0.0" width="142" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,16 +248,16 @@
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="86">
-                            <rect key="frame" x="10" y="26" width="170" height="30"/>
+                            <rect key="frame" x="9" y="29" width="170" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Miles" width="80"/>
                                 <segment title="Kilometers" width="80"/>
                             </segments>
-                            <color key="tintColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.76710371200000005" green="0.78676470590000003" blue="0.2337118413" alpha="1" colorSpace="calibratedRGB"/>
                         </segmentedControl>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Distance unit for all routes." lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="87">
-                            <rect key="frame" x="10" y="63" width="284" height="21"/>
+                            <rect key="frame" x="9" y="66" width="284" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -129,83 +273,42 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="MwS-Zr-L4N" userLabel="Photo">
-                    <rect key="frame" x="1" y="288" width="319" height="138"/>
+                <view contentMode="scaleToFill" id="99" userLabel="Endpoint">
+                    <rect key="frame" x="0.0" y="676" width="320" height="79"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo upload size" lineBreakMode="tailTruncation" minimumFontSize="10" id="gMM-r5-iYm">
-                            <rect key="frame" x="9" y="0.0" width="229" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route end point confirmation" lineBreakMode="tailTruncation" minimumFontSize="10" id="100">
+                            <rect key="frame" x="9" y="6" width="184" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <color key="shadowColor" white="0.95078740159999997" alpha="1" colorSpace="calibratedWhite"/>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="TzR-sK-vUV">
-                            <rect key="frame" x="9" y="31" width="170" height="30"/>
+                        <view contentMode="scaleToFill" id="103" userLabel="DividerGrey">
+                            <rect key="frame" x="9" y="74" width="300" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="640px" width="80"/>
-                                <segment title="full" width="80"/>
-                            </segments>
-                            <color key="tintColor" red="0.085784755190000006" green="0.63301565810000004" blue="0.76824034330000002" alpha="1" colorSpace="calibratedRGB"/>
-                        </segmentedControl>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="Ukk-WT-ly9">
-                            <rect key="frame" x="9" y="68" width="284" height="33"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Toggles showing the end point confirmation overlays." lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="106">
+                            <rect key="frame" x="9" y="26" width="198" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <string key="text">Larger images will take longer to upload.
-(This only affects mobile uploads)</string>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
-                        <view contentMode="scaleToFill" id="Cre-qs-sMH" userLabel="DividerGrey">
-                            <rect key="frame" x="9" y="115" width="300" height="1"/>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Q8h-7Q-1nF">
+                            <rect key="frame" x="251" y="24" width="51" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
+                        </switch>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="em5-z3-GkM">
-                    <rect key="frame" x="0.0" y="411" width="320" height="110"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Auto-end Route" lineBreakMode="tailTruncation" minimumFontSize="10" id="Aic-cp-oYs">
-                            <rect key="frame" x="10" y="12" width="300" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                            <color key="shadowColor" white="0.95078740159999997" alpha="1" colorSpace="calibratedWhite"/>
-                            <size key="shadowOffset" width="0.0" height="0.0"/>
-                        </label>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="KHh-x5-ehr">
-                            <rect key="frame" x="261" y="37" width="51" height="31"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="onTintColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
-                        </switch>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="When ON the app will attempt to complete a route if stopped for too long." lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="CDA-gB-yK1">
-                            <rect key="frame" x="10" y="39" width="236" height="46"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <size key="shadowOffset" width="0.0" height="0.0"/>
-                        </label>
-                        <view contentMode="scaleToFill" id="mgm-zT-q5o" userLabel="DividerGrey">
-                            <rect key="frame" x="10" y="104" width="300" height="1"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
-                </view>
             </subviews>
-            <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
         </view>
     </objects>
 </document>
