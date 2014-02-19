@@ -22,7 +22,7 @@
 #define kMinLocationsNeededToUpdateDistance 3 // the number of locations needed in history before we will even update the current distance
 #define kRequiredHorizontalAccuracy 50.0f // the required accuracy in meters for a location.  anything above this number will be discarded
 
-static int const AUTOCOMPLETROUTEINTERVAL = 1*TIME_MINUTE;
+static int const AUTOCOMPLETROUTEINTERVAL = 7*TIME_MINUTE;
 
 
 

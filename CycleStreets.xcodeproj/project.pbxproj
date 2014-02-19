@@ -605,8 +605,6 @@
 		289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
-		28A896E018AA27B40086B065 /* WOPushNotification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28A896DF18AA27B40086B065 /* WOPushNotification.caf */; };
-		28A896E118AA27B40086B065 /* WOPushNotification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28A896DF18AA27B40086B065 /* WOPushNotification.caf */; };
 		28A896E618AA35F30086B065 /* NSTimer+BUPausable.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A896E518AA35F30086B065 /* NSTimer+BUPausable.m */; };
 		28A896E718AA35F30086B065 /* NSTimer+BUPausable.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A896E518AA35F30086B065 /* NSTimer+BUPausable.m */; };
 		28A89CCC14FD4A610001BABA /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CCB14FD4A610001BABA /* PhotoWizardViewController.m */; };
@@ -666,6 +664,8 @@
 		28AD6462131FB6C8008527FC /* GlobalUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6390131FB6C8008527FC /* GlobalUtilities.m */; };
 		28AD6493131FB6C8008527FC /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD63FD131FB6C8008527FC /* StringUtilities.m */; };
 		28AD6497131FB6C8008527FC /* ViewUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6408131FB6C8008527FC /* ViewUtilities.m */; };
+		28ADD34318B4BC2800BBE207 /* HCS_notification_bell.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 28ADD34218B4BC2800BBE207 /* HCS_notification_bell.m4a */; };
+		28ADD34418B4BC2800BBE207 /* HCS_notification_bell.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 28ADD34218B4BC2800BBE207 /* HCS_notification_bell.m4a */; };
 		28AE47AD1896932C00203C20 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */; };
 		28AE47AE1896932C00203C20 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */; };
 		28AE47B1189693D300203C20 /* NetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE47B0189693D300203C20 /* NetResponse.m */; };
@@ -1157,7 +1157,6 @@
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
 		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		28A896DF18AA27B40086B065 /* WOPushNotification.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WOPushNotification.caf; sourceTree = "<group>"; };
 		28A896E418AA35F30086B065 /* NSTimer+BUPausable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+BUPausable.h"; sourceTree = "<group>"; };
 		28A896E518AA35F30086B065 /* NSTimer+BUPausable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BUPausable.m"; sourceTree = "<group>"; };
 		28A89CCA14FD4A610001BABA /* PhotoWizardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoWizardViewController.h; path = PhotoWizard/PhotoWizardViewController.h; sourceTree = "<group>"; };
@@ -1271,6 +1270,7 @@
 		28AD6406131FB6C8008527FC /* Utiltities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utiltities.h; sourceTree = "<group>"; };
 		28AD6407131FB6C8008527FC /* ViewUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViewUtilities.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28AD6408131FB6C8008527FC /* ViewUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtilities.m; sourceTree = "<group>"; };
+		28ADD34218B4BC2800BBE207 /* HCS_notification_bell.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = HCS_notification_bell.m4a; sourceTree = "<group>"; };
 		28AE47AB1896932C00203C20 /* ApplicationJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationJSONParser.h; sourceTree = "<group>"; };
 		28AE47AC1896932C00203C20 /* ApplicationJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationJSONParser.m; sourceTree = "<group>"; };
 		28AE47AF189693D300203C20 /* NetResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetResponse.h; sourceTree = "<group>"; };
@@ -2090,7 +2090,7 @@
 		28A896DE18AA27B40086B065 /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				28A896DF18AA27B40086B065 /* WOPushNotification.caf */,
+				28ADD34218B4BC2800BBE207 /* HCS_notification_bell.m4a */,
 			);
 			path = audio;
 			sourceTree = "<group>";
@@ -2790,7 +2790,6 @@
 				E77D8F11120321E4003E6B8D /* credits.html in Resources */,
 				28AD60BD131FB54A008527FC /* CycleStreetsWindow.xib in Resources */,
 				2811F93A18A0F9DE00C8EF0F /* Images.xcassets in Resources */,
-				28A896E018AA27B40086B065 /* WOPushNotification.caf in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
 				28BC444B18915A5800711A1A /* errands@2x.png in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
@@ -2880,6 +2879,7 @@
 				28187AAD14FCFF4C00A38A17 /* UIIcon_roads.png in Resources */,
 				28187AAE14FCFF4C00A38A17 /* UIIcon_tracks.png in Resources */,
 				28BC446B18915A5800711A1A /* other@2x.png in Resources */,
+				28ADD34318B4BC2800BBE207 /* HCS_notification_bell.m4a in Resources */,
 				28187AB114FCFF4C00A38A17 /* UIIcon_bear_left.png in Resources */,
 				28187AB214FCFF4C00A38A17 /* UIIcon_bear_right.png in Resources */,
 				28187AB314FCFF4C00A38A17 /* UIIcon_straight_on.png in Resources */,
@@ -3046,6 +3046,7 @@
 				2834363015DD5DC300B00FD5 /* CSTabBar_settings@2x.png in Resources */,
 				2834363115DD5DC300B00FD5 /* FavouritesCell.xib in Resources */,
 				2811F93D18A0F9F900C8EF0F /* Images.xcassets in Resources */,
+				28ADD34418B4BC2800BBE207 /* HCS_notification_bell.m4a in Resources */,
 				2834363215DD5DC300B00FD5 /* ItineraryCell.xib in Resources */,
 				2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */,
 				2834363D15DD5DC300B00FD5 /* SettingsView.xib in Resources */,
@@ -3153,7 +3154,6 @@
 				283436A215DD5DC300B00FD5 /* PhotoWizardLocationView.xib in Resources */,
 				283436A315DD5DC300B00FD5 /* CSNavigationBar.xib in Resources */,
 				28BC444818915A5800711A1A /* commute@2x.png in Resources */,
-				28A896E118AA27B40086B065 /* WOPushNotification.caf in Resources */,
 				289AA2CB188EEB170097AA5A /* TrackingHeading@2x.png in Resources */,
 				28AE47C718970B9C00203C20 /* UIPickerAccessoryView.xib in Resources */,
 				28640E8118981F4F009A4030 /* default.css in Resources */,

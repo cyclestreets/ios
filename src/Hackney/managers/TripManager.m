@@ -2,7 +2,6 @@
 
 #import "constants.h"
 #import "Coord.h"
-#import "SaveRequest.h"
 #import "Trip.h"
 #import "TripManager.h"
 #import "User.h"
@@ -146,7 +145,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	UILocalNotification	*notification=[[UILocalNotification alloc]init];
 	notification.timeZone=[NSTimeZone defaultTimeZone];
 	notification.fireDate=nil;
-	notification.soundName=@"WOPushNotification.caf";
+	notification.soundName=@"HCS_notification_bell.m4a";
 	notification.alertBody=@"Auto completed your current trip due to inactivity";
 	
 	[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
