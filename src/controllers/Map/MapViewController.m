@@ -22,7 +22,6 @@
 #import "MapLocationSearchViewController.h"
 #import "CSPointVO.h"
 #import "Files.h"
-#import "InitialLocation.h"
 #import "RouteManager.h"
 #import "GlobalUtilities.h"
 #import "AppConstants.h"
@@ -168,26 +167,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[super didReceiveNotification:notification];
 	
-	
-	
-	//NSDictionary	*dict=[notification userInfo];
 	NSString		*name=notification.name;
-	
-	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
-		
-		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
-			[self locationDidComplete:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONUPDATE]){
-			[self locationDidUpdate:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONFAILED]){
-			[self locationDidFail:notification];
-		}
-		
-	}
 	
 	if([name isEqualToString:CSROUTESELECTED]){
 		[self updateSelectedRoute];
@@ -265,6 +245,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	newoverlay.canReplaceMapContent = YES;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
+	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	_mapView.showsUserLocation=YES;
 		
 	
@@ -476,54 +457,25 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	BetterLog(@"");
 	
-	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+	_mapView.showsUserLocation=NO;
+	_mapView.showsUserLocation=YES;
 	
 	if(_uiState!=MapPlanningStateRoute)
 		[self updateUItoState:MapPlanningStateLocating];
 	
-	//[self resetLocationOverlay];
-	
 	
 }
 
--(void)stopLocating{
-	
-	BetterLog(@"");
-	
-	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-	
-	if(_uiState!=MapPlanningStateRoute)
-		[self updateUItoState:_previousUIState];
-	
-	
-}
 
-/* ioS mapkit gps logic:
- 
- // shows gps initially
- // gps button not selectd
- 
- // pressing button locates and moves map
- // button stays highlighted
- // if user presses button again button deselects
- // gps stops updating
- 
- 
- // if user moves map button deslects
- // gps stops updating
- 
- */
-
-
--(void)locationDidComplete:(NSNotification *)notification{
+-(void)locationDidComplete:(MKUserLocation *)userLocation{
 	
 	BetterLog(@"");
 	
 	[self updateUItoState:_previousUIState];
 	
-	self.lastLocation=notification.object;
+	self.lastLocation=userLocation.location;
 	
-	
+
 	if(_uiState!=MapPlanningStateRoute){
 		[self updateUItoState:_previousUIState];
 		[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
@@ -539,20 +491,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[self assessLocationEffect];
 }
 
--(void)locationDidUpdate:(NSNotification *)notification{
-	
-	BetterLog(@"");
-	
-	
-	self.lastLocation=notification.object;
-	[_lineView setNeedsDisplay];
-	
-}
 
 -(void)locationDidFail:(NSNotification *)notification{
 	
 	[self updateUItoState:_previousUIState];
-	
 	
 }
 
@@ -560,9 +502,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(void)assessLocationEffect{
 		
-	if(_uiState==MapPlanningStateNoRoute){
+	if(_uiState==MapPlanningStateLocating){
+		
+		
+	//	CLLocationCoordinate2D test=CLLocationCoordinate2DMake(self.lastLocation.coordinate.latitude-0.01, self.lastLocation.coordinate.longitude);
 		
 		[self addWayPointAtCoordinate:_lastLocation.coordinate];
+		
+		if(_uiState!=MapPlanningStateRoute)
+			[self updateUItoState:_previousUIState];
 		
 		[self assessUIState];
 		
@@ -603,7 +551,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	self.route = nil;
 	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
-	[self stopLocating];
 	
 	[_lineView setNeedsDisplay];
 	[self displayLocationIndicator:NO];
@@ -638,7 +585,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
-	[self stopLocating];
 	
 	if (_route.hasWaypoints==YES) {
 		
@@ -757,15 +703,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 			return;
 		}
 	}
-	
-	
-	//explicit click while autolocation was happening. Turn off auto, accept click.
-	if (!_programmaticChange) {
-		if (_uiState==MapPlanningStateLocating) {
-			[self stopLocating];
-		}
-	}
-	
+		
 	
 	[self addWayPointAtCoordinate:cooordinate];
 	
@@ -818,6 +756,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	waypoint.coordinate=coords;
 	
 	[self updateWaypointStatuses];
+	
+	[self assessUIState];
 	
 }
 
@@ -943,7 +883,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	 if (annotationView == nil){
 		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
 		 annotationView.draggable = YES;
-		 annotationView.canShowCallout = YES;
+		 annotationView.enabled=YES;
+		 //annotationView.canShowCallout = YES;
 	 } else {
 		 annotationView.annotation = annotation;
 	 }
@@ -952,12 +893,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
  
  
-- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(CSWaypointAnnotationView *)view{
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
 	
 	if(_markerMenuOpen==YES)
 		return;
 	
 	if(_uiState==MapPlanningStateRoute)
+		return;
+	
+	if([view.annotation isKindOfClass:[MKUserLocation class]])
 		return;
 	
 	UIMenuController *menuController = [UIMenuController sharedMenuController];
@@ -1071,11 +1015,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	
 	BetterLog(@"");
 	
-	if(_uiState==MapPlanningStateLocating){
-		[self stopLocating];
-	}else{
-		[self startLocating];
-	}
+	[self startLocating];
 	
 }
 
@@ -1184,29 +1124,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
-// should not be needed
-- (void) afterMapChanged: (MKMapView*) map {
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState{
 	
-	[_lineView setNeedsDisplay];
-	[self displayLocationIndicator:NO];
+	BetterLog(@"%i",newState);
 	
-	if (!self.programmaticChange) {
+	if (newState == MKAnnotationViewDragStateEnding) {
 		
-		if(_uiState==MapPlanningStateLocating)
-			[self stopLocating];
-		
-	} else {
-		
-	}
-}
-
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState
-   fromOldState:(MKAnnotationViewDragState)oldState{
-	
-	//CLLocationCoordinate2D location = view.annotation.coordinate;
-	//WayPointVO *waypoint=[self findWayPointForMarker:_activeMarker];
-	//waypoint.coordinate=location;
-	
+		[view setDragState:MKAnnotationViewDragStateNone]; //NOTE: doesnt seem to fire this for custom annotations
+    }
 	
 }
 
@@ -1225,7 +1150,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
-	[_mapView setCenterCoordinate:userLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
+	[self locationDidComplete:userLocation];
 	
 }
 
@@ -1266,7 +1191,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		initLocation.longitude = [longitude doubleValue];
 		[_mapView setCenterCoordinate:initLocation zoomLevel:zoom animated:YES];
 		[_lineView setNeedsDisplay];
-		[self stopLocating];
 	}
 }
 

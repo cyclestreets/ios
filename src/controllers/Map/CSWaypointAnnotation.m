@@ -18,11 +18,11 @@
 @synthesize coordinate;
 
 - (NSString *)subtitle{
-    return nil;
+    return @"subtitle";
 }
 
 - (NSString *)title{
-    return nil;
+    return @"title";
 }
 
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coord {

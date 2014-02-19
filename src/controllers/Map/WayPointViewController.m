@@ -67,13 +67,18 @@
     [super viewWillAppear:animated];
 }
 
--(BOOL)viewDeckControllerWillOpenLeftView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated{
+-(BOOL)viewDeckController:(IIViewDeckController *)viewDeckController shouldOpenViewSide:(IIViewDeckSide)viewDeckSide{
 	
-	BetterLog(@"");
+	if(viewDeckSide==IIViewDeckLeftSide){
 	
-	[self.tableView reloadData];
+		[self.tableView reloadData];
 	
-	return YES;
+		return YES;
+	
+	}else{
+		return NO;
+	}
+	
 	
 }
 

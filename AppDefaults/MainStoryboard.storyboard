@@ -43,6 +43,10 @@
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="separatorColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="MLh-Bz-0jb" id="ZMn-h1-Lin"/>
+                                    <outlet property="delegate" destination="MLh-Bz-0jb" id="6A4-sR-9kH"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -50,9 +54,15 @@
                     <navigationItem key="navigationItem" title="Waypoints" id="pr3-mY-JPF">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="3dB-PB-SvM">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="closeButtonSelected:" destination="MLh-Bz-0jb" id="nV0-ka-XAB"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="fv2-UG-Z6q" id="5W0-aY-AYx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HhG-E3-Dxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
