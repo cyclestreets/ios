@@ -17,6 +17,7 @@
 #import "ButtonUtilities.h"
 #import "AppDelegate.h"
 #import "GenericConstants.h"
+#import "UIView+Additions.h"
 
 @implementation SuperViewController
 @synthesize navigation;
@@ -353,17 +354,17 @@
 		
 		if([UIType isEqualToString:UITYPE_CONTROLUI]){
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else if ([UIType isEqualToString:UITYPE_CONTROLHEADERUI]) {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 			
 		}else if ([UIType isEqualToString:UITYPE_MODALUI]) {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.view.height)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}
         
 		
@@ -505,15 +506,7 @@
 }
 
 
-//
-/***********************************************
- * @description			ViewOverlay callbacks
- ***********************************************/
-//
--(IBAction)loginButtonSelected:(id)sender{
-	AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate showTabBarViewControllerByName:@"Account"];
-}
+
 
 
 + (NSString*)viewTypeToStringType:(ViewOverlayType)viewType {

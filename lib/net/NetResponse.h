@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GenericConstants.h"
 
 @interface NetResponse : NSObject {
 	NSString				*dataid;

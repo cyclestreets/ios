@@ -25,6 +25,8 @@
 @property (nonatomic, strong)	BUSegmentedControl				*routeTypeControl;
 @property (nonatomic, strong)	IBOutlet UIButton				*selectedRouteButton;
 
+@property (nonatomic, strong)	NSMutableArray					*dataTypeArray;
+
 @property (nonatomic, strong)	NSMutableDictionary				*viewStack;
 @property (nonatomic, strong)	NSArray							*childControllerData;
 @property (nonatomic,strong)  NSString							*activeState;
@@ -143,10 +145,7 @@
 	[_routeTypeControl buildInterface];
 	[controlcontainer addSubview:_routeTypeControl];
 	
-	self.selectedRouteButton=[UIButton buttonWithType:UIButtonTypeSystem];
-	[_selectedRouteButton setTitle:@"Current Route" forState:UIControlStateNormal];
-	_selectedRouteButton.size=CGSizeMake(120, 28);
-	_selectedRouteButton.styleId=@"OrangeButton";
+	self.selectedRouteButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:28 styleId:@"OrangeButton" text:@"Current Route"];
     [_selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[controlcontainer addSubview:_selectedRouteButton];
@@ -257,6 +256,7 @@
         UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil ];
         _newcontroller=[storyboard instantiateViewControllerWithIdentifier:controllerDict[CONTROLLER]];
         _newcontroller.delegate=self;
+		[_newcontroller setValue:controllerDict[ID] forKey:DATATYPE];
         [_viewStack setObject:_newcontroller forKey:type];
         
     }
@@ -271,6 +271,7 @@
     self.activeState=controllerName;
     
     self.activeController=[self.childViewControllers objectAtIndex:0];
+	[_activeController setValue:dict[ID] forKey:DATATYPE];
     _activeController.delegate=self;
 }
 

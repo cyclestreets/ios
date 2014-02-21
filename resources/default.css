@@ -27,8 +27,13 @@ navigation-bar title{
 
 }
 
-button {
-    color           : white;
+
+
+action-sheet{
+
+
+
+
 }
 
 #OrangeButton,#GreenButton,#RedButton,#DarkGreyButton {
@@ -66,6 +71,26 @@ tab-bar{
     background-color: #5F5F5F;
 }
 
+
+/* UI labels */
+
+.UISubtitleLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
+    font-size       : 16px;
+    text-align: :center;
+}
+
+.UIMessageLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : regular;
+    font-size       : 12px;
+    text-align: :center;
+}
+
+
 /* BU Classes */
 
 #BUIconActionSheetClosebutton{
@@ -77,10 +102,8 @@ tab-bar{
     color :#FFFFFF;
 }
 
-#BUIconActionSheetIconbutton{
-	border-radius   : 22px;
-	border-width: 2px;
-	border-style	:none;
+#BUIconActionSheetIconbuttonLabel{
+    color: #666666;
 }
 
 
@@ -105,6 +128,7 @@ tab-bar{
 
 #BUSegmentedControlButton{
     background-color: #5F5F5F;
+    color:#FFFFFF;
 }
 #BUSegmentedControlButton:disabled{
     background-color: #509720;

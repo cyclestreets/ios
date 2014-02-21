@@ -11,7 +11,7 @@
 #import "SynthesizeSingleton.h"
 #import "UIColor-Expanded.h"
 #import "AppConstants.h"
-
+#import "GenericConstants.h"
 
 
 @interface StyleManager(Private) 

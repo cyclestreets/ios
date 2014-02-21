@@ -13,7 +13,7 @@
 	
 }
 @property (nonatomic, strong) NSMutableArray					* dataProvider;
-@property (nonatomic, strong) NSString							* dataType;
+@property (nonatomic, strong) NSString							* dataid;
 @property (nonatomic, assign) BOOL								isSectioned;
 
 

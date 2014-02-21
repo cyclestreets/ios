@@ -10,7 +10,6 @@
 #import "SuperViewController.h"
 #import "RouteVO.h"
 #import "RouteLineView.h"
-#import "WEPopoverController.h"
 #import "MapLocationSearchViewController.h"
 #import "WayPointViewController.h"
 
@@ -37,7 +36,7 @@ typedef int MapAlertType;
 
 
 @interface MapViewController : SuperViewController
-< CLLocationManagerDelegate, LocationReceiver, PointListProvider, WEPopoverControllerDelegate>{
+< CLLocationManagerDelegate, LocationReceiver, PointListProvider>{
 	
 	
 	Class popoverClass;

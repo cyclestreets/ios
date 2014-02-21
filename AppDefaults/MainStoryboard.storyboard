@@ -4,12 +4,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller - Map-->
+        <!--Navigation Controller-->
         <scene sceneID="IfH-TP-9kQ">
             <objects>
                 <navigationController storyboardIdentifier="WayPointNavController" definesPresentationContext="YES" id="ktF-aB-e8s" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="FEb-o6-5GK"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="9wb-5c-Wok">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="-3360" y="842"/>
         </scene>
-        <!--Map View Controller - Map-->
+        <!--Map View Controller-->
         <scene sceneID="G73-Mk-t08">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" title="Map" id="gA4-QV-Dgc" customClass="MapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="gA4-QV-Dgc" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EUT-C5-yjd"/>
                         <viewControllerLayoutGuide type="bottom" id="j9U-k8-ROH"/>
@@ -88,6 +88,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rA7-CW-iZg">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             </mapView>
                             <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3q-ji-xW0">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -131,7 +132,7 @@
             </objects>
             <point key="canvasLocation" x="-3774" y="118"/>
         </scene>
-        <!--Initial Map View Controller - Map-->
+        <!--Initial Map View Controller - Hi-->
         <scene sceneID="nyH-4h-cam">
             <objects>
                 <viewController storyboardIdentifier="CSInitialMapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Owm-gz-z56" customClass="CSInitialMapViewController" sceneMemberID="viewController">
@@ -144,7 +145,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="CSTabBar_plan_route.png" id="cmW-Om-JtC"/>
+                    <tabBarItem key="tabBarItem" title="Hi" image="CSTabBar_plan_route.png" id="cmW-Om-JtC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3d-bs-lUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -312,11 +313,11 @@
             </objects>
             <point key="canvasLocation" x="-1454" y="164"/>
         </scene>
-        <!--Photo Wizard View Controller-->
+        <!--Photo Wizard View Controller - Report-->
         <scene sceneID="oM5-Rp-Zaf">
             <objects>
                 <viewController storyboardIdentifier="PhotoWizardViewController" id="vwU-Uf-hpU" customClass="PhotoWizardViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="6I9-qK-6HB"/>
+                    <navigationItem key="navigationItem" title="Report" id="6I9-qK-6HB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMM-Mf-8b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -363,21 +364,21 @@
             </objects>
             <point key="canvasLocation" x="144" y="-538"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--Settings View Controller - Settings-->
         <scene sceneID="Uzu-vb-VKq">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" id="sgu-Au-DE5" customClass="SettingsViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="PFA-ZD-lRN"/>
+                <viewController storyboardIdentifier="SettingsViewController" title="Settings" id="sgu-Au-DE5" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Settings" id="PFA-ZD-lRN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="naE-aq-XSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="144" y="152"/>
         </scene>
-        <!--Credits View Controller-->
+        <!--Credits View Controller - Credits-->
         <scene sceneID="cJE-SS-bNv">
             <objects>
                 <viewController storyboardIdentifier="CreditsViewController" hidesBottomBarWhenPushed="YES" id="rtl-uZ-lp0" customClass="CreditsViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="cMd-c0-wQo"/>
+                    <navigationItem key="navigationItem" title="Credits" id="cMd-c0-wQo"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIa-CF-4ck" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -436,12 +437,12 @@
             </objects>
             <point key="canvasLocation" x="-387" y="-538"/>
         </scene>
-        <!--Account View Controller-->
+        <!--Account View Controller - Account-->
         <scene sceneID="OKK-jB-ux6">
             <objects>
                 <viewController storyboardIdentifier="AccountViewController" id="bnm-Se-Azs" customClass="AccountViewController" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" id="VgU-RM-7AA"/>
+                    <navigationItem key="navigationItem" title="Account" id="VgU-RM-7AA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anw-nq-rBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -479,31 +480,7 @@
         <scene sceneID="Ey8-N6-aBR">
             <objects>
                 <viewController storyboardIdentifier="RouteListViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xuz-IM-6Qr" customClass="RouteListViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VQU-yA-X6b"/>
-                        <viewControllerLayoutGuide type="bottom" id="NJ9-CY-qSA"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XKb-Dv-Eaa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="477"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1EQ-Gg-MDW">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="477"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Xuz-IM-6Qr" id="GM7-WR-dcS"/>
-                                    <outlet property="delegate" destination="Xuz-IM-6Qr" id="Hxz-3F-4Ws"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
                     <toolbarItems/>
-                    <connections>
-                        <outlet property="tableView" destination="1EQ-Gg-MDW" id="9et-Lg-Hrg"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sq5-sc-jtK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -22,6 +22,8 @@ typedef int UIButtonStyle;
 + (UIButton*)shinyButtonWithWidth:(NSUInteger)width height:(NSUInteger)height color:(UIColor*)color;
 + (UIButton*)shinyButtonWithWidth:(NSUInteger)width height:(NSUInteger)height color:(UIColor*)color text:(NSString*)text;
 
++ (UIButton*)UIPixateButtonWithWidth:(NSUInteger)width height:(NSUInteger)height styleId:(NSString*)styleId text:(NSString*)text;
+
 + (UIButton*)UIButtonWithWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text;
 + (UIButton*)UIButtonWithFixedWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text minFont:(int)minFont;
 + (UIButton*)UITextButtonWithWidth:(NSUInteger)width height:(NSUInteger)height textColor:(NSString*)color text:(NSString*)text;

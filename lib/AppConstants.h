@@ -111,5 +111,6 @@ extern NSString *const CYCLESTREETSURLSCHEME;
 
 + (CSRoutePlanType)planStringTypeToConstant:(NSString*)stringType;
 + (NSString*)planConstantToString:(CSRoutePlanType)parserType;
++ (NSArray*)planArray;
 
 @end

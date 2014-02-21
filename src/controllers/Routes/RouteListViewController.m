@@ -13,6 +13,7 @@
 #import "NSDate+Helper.h"
 #import "RouteManager.h"
 #import "UIView+Additions.h"
+#import "GenericConstants.h"
 
 @interface FavouriteMenuItem : UIMenuItem 
 @property (nonatomic, strong) NSIndexPath* indexPath;
@@ -119,7 +120,7 @@
 
 -(void)refreshUIFromDataProvider{
 	
-    self.dataProvider=[[SavedRoutesManager sharedInstance] dataProviderForType:_dataType];
+    self.dataProvider=[[SavedRoutesManager sharedInstance] dataProviderForType:_dataid];
     
     if([_dataProvider count]>0){
         
@@ -143,7 +144,7 @@
 			self.keys=[NSMutableArray array];
 		}
 		
-        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",_dataType] withIcon:_dataType];
+        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",_dataid] withIcon:_dataid];
     }
     
 	/*
@@ -164,7 +165,7 @@
 	
 	UIType=UITYPE_CONTROLUI;
 	
-    if([_dataType isEqualToString:SAVEDROUTE_RECENTS]){
+    if([_dataid isEqualToString:SAVEDROUTE_RECENTS]){
         _isSectioned=YES;
     }
 	
@@ -274,7 +275,7 @@
 		[cell populate];
 	}
 	
-	if([_dataType isEqualToString:SAVEDROUTE_RECENTS]){
+	if([_dataid isEqualToString:SAVEDROUTE_RECENTS]){
 		
 		UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellMenuPress:)];
 		[cell addGestureRecognizer:recognizer];
@@ -306,7 +307,7 @@
 			NSIndexPath *pressedIndexPath = [self.tableView indexPathForRowAtPoint:[recognizer locationInView:self.tableView]];
 			
 			
-			if([_dataType isEqualToString:SAVEDROUTE_RECENTS]){
+			if([_dataid isEqualToString:SAVEDROUTE_RECENTS]){
 				
 				// sue index path to get dp fav state
 				// if no fav, if yes do not show menu
@@ -426,7 +427,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	if([_dataType isEqualToString:SAVEDROUTE_FAVS]){
+	if([_dataid isEqualToString:SAVEDROUTE_FAVS]){
 		return YES;
 	}
 	
@@ -571,7 +572,7 @@
         route=[_dataProvider objectAtIndex:[indexPath row]];
     }
 	
-	[[SavedRoutesManager sharedInstance] removeRoute:route fromDataProvider:_dataType];
+	[[SavedRoutesManager sharedInstance] removeRoute:route fromDataProvider:_dataid];
 	
 }
 

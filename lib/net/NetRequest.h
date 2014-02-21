@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AppConstants.h"
+#import "GenericConstants.h"
 
 typedef enum{
 	

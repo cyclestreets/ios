@@ -12,6 +12,8 @@
 #import "GenericConstants.h"
 #import "GlobalUtilities.h"
 #import "UIView+Additions.h"
+#import "ImageManipulator.h"
+#import <Pixate.h>
 
 @implementation ButtonUtilities
 
@@ -169,6 +171,24 @@
 	
 }
 
++ (UIButton*)UIPixateButtonWithWidth:(NSUInteger)width height:(NSUInteger)height styleId:(NSString*)styleId text:(NSString*)text
+{
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+	button.styleId=styleId;
+	UIFont *font=[UIFont boldSystemFontOfSize:12];
+	
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font]+20;
+	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
+	
+		
+	// Configure title(s)
+	[button setTitle:text forState:UIControlStateNormal];
+	button.titleLabel.userInteractionEnabled=NO;
+	
+	
+	return button;
+}
+
 + (UIButton*)UIButtonWithWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text
 {
 	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -305,6 +325,7 @@
 	
 	if(iconimagename!=nil){
 		UIImage *iconimage=[[StyleManager sharedInstance] imageForType:iconimagename];
+		iconimage=[ImageManipulator newRoundCornerImage:iconimage :20 :20];
 		[button setImage:iconimage forState:UIControlStateNormal];
 	}
 	

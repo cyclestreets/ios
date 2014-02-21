@@ -2,7 +2,13 @@
 //  Prefix.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 31/05/2010.
-//  Copyright 2010 Isomaly. All rights reserved.
 //
 
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <Pixate/Pixate.h>
+
+#import "GenericConstants.h"
+#import "AppConstants.h"
+#endif

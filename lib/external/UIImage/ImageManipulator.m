@@ -43,29 +43,33 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 	if( nil != img)
 	{
 		@autoreleasepool {
-			int w = img.size.width;
-			int h = img.size.height;
-    
+			
 			CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-			CGContextRef context = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpace, kCGBitmapAlphaInfoMask);
-    
+			CGImageRef imageRef = CGImageCreateCopy([img CGImage]);
+			
+			size_t width = CGImageGetWidth(imageRef);
+			size_t height = CGImageGetHeight(imageRef);
+			size_t bytesPerRow = 8*width;
+			
+			CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, bytesPerRow, colorSpace, (kCGBitmapAlphaInfoMask & kCGImageAlphaPremultipliedFirst));
+			
 			CGContextBeginPath(context);
-			CGRect rect = CGRectMake(0, 0, img.size.width, img.size.height);
+			CGRect rect = CGRectMake(0, 0, width, height);
 			addRoundedRectToPath(context, rect, cornerWidth, cornerHeight);
 			CGContextClosePath(context);
 			CGContextClip(context);
-    
-			CGContextDrawImage(context, CGRectMake(0, 0, w, h), img.CGImage);
-    
+			
+			CGContextDrawImage(context, CGRectMake(0, 0, width, height), img.CGImage);
+			
 			CGImageRef imageMasked = CGBitmapContextCreateImage(context);
 			CGContextRelease(context);
 			CGColorSpaceRelease(colorSpace);
 			//[img release];
 			
-	
+			
 			newImage = [UIImage imageWithCGImage:imageMasked];
 			CGImageRelease(imageMasked);
-		
+			
 		}
 	}
 	

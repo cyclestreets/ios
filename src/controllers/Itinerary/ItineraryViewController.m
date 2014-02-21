@@ -421,24 +421,20 @@
         contentContainer.alignMode=BUCenterAlignMode;
 		
 		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-		titlelabel.font=[UIFont boldSystemFontOfSize:14];
-		titlelabel.textAlignment=UITextAlignmentCenter;
-		titlelabel.textColor=[UIColor grayColor];
+		titlelabel.styleClass=@"UISubtitleLabel";
 		titlelabel.text=@"You have no route active currently.";
 		[contentContainer addSubview:titlelabel];					
 		
 		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-		infolabel.font=[UIFont systemFontOfSize:13];
-		infolabel.textAlignment=UITextAlignmentCenter;
-		infolabel.textColor=[UIColor grayColor];
+		infolabel.styleClass=@"UIMessageLabel";
 		infolabel.text=@"Once you have loaded a route, the itinerary will be shown here.";
 		[contentContainer addSubview:infolabel];					
 		
-		UIButton *routeButton=[ButtonUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Plan route"];
+		UIButton *routeButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"GreenButton" text:@"Plan route"];
 		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:routeButton];
 		
-		UIButton *savedButton=[ButtonUtilities UIButtonWithWidth:100 height:32 type:@"green" text:@"Saved routes"];
+		UIButton *savedButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"GreenButton" text:@"Saved routes"];
 		[savedButton addTarget:self action:@selector(swapToSavedRoutesView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:savedButton];
 		

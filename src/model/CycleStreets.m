@@ -101,7 +101,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 
 
 + (NSArray *)mapStyles {
-	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,nil];
+	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,MAPPING_BASE_OS,nil];
 }
 
 
@@ -140,6 +140,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
 	{
 		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS])
+	{
+		return @"http://c.os.openstreetmap.org/sv/{z}/{x}/{y}.png";
 	}
 	
 	return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";

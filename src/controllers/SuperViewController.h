@@ -90,7 +90,6 @@ typedef int ViewOverlayType;
 
 -(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message;
 -(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message withIcon:(NSString*)icon;
--(IBAction)loginButtonSelected:(id)sender;
 + (NSString*)viewTypeToStringType:(ViewOverlayType)viewType;
 +(UINavigationController*)createCustomNavigationControllerWithView:(SuperViewController*)viewController;
 

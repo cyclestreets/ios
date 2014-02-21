@@ -146,5 +146,12 @@ NSString *const CYCLESTREETSURLSCHEME=@"cyclestreets";
     return CSPLANTYPE_NONE;
 }
 
++ (NSArray*)planArray{
+	
+	return @[CSPLANTYPE_FASTEST,CSPLANTYPE_BALANCED,CSPLANTYPE_QUIETEST,CSPLANTYPE_SHORTEST];
+	
+	
+}
+
 
 @end

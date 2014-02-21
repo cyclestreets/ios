@@ -54,16 +54,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        
-		[SettingsManager sharedInstance];
-		self.dataProvider=[SettingsManager sharedInstance].dataProvider;
-		
-    }
-    return self;
-}
-
 - (void) select:(UISegmentedControl *)control byString:(NSString *)selectTitle {
 	for (NSInteger i = 0; i < [control numberOfSegments]; i++) {
 		NSString *title = [[control titleForSegmentAtIndex:i] lowercaseString];
@@ -75,7 +65,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
+
 - (void)viewDidLoad {
+	
+	self.dataProvider=[SettingsManager sharedInstance].dataProvider;
 	
 	[self select:_speedControl byString:_dataProvider.speed];
 	[self select:_planControl byString:_dataProvider.plan];
@@ -117,16 +110,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_dataProvider.mapStyle = [_mapStyleControl titleForSegmentAtIndex:_mapStyleControl.selectedSegmentIndex];
 	_dataProvider.showRoutePoint = _routePointSwitch.isOn;
 	
-	UISegmentedControl *control=(UISegmentedControl*)sender;
 	
-	if(control==_mapStyleControl)
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationMapStyleChanged" object:nil];
 	
 	[self updateRouteUnitDisplay];
 	
 	_dataProvider.speed = [[_speedControl titleForSegmentAtIndex:_speedControl.selectedSegmentIndex] lowercaseString];
 	
 	[[SettingsManager sharedInstance] saveData];
+	
+	UISegmentedControl *control=(UISegmentedControl*)sender;
+	if(control==_mapStyleControl)
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationMapStyleChanged" object:nil];
 }
 
 -(void)updateRouteUnitDisplay{

@@ -27,7 +27,7 @@
                 <webView contentMode="scaleToFill" scalesPageToFit="YES" id="24">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="436"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                     <dataDetectorType key="dataDetectorTypes"/>
                 </webView>
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="26">
@@ -39,7 +39,7 @@
                                 <action selector="stopLoading:" destination="-1" id="38"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem width="101" style="plain" systemItem="fixedSpace" id="29"/>
+                        <barButtonItem width="100" style="plain" systemItem="fixedSpace" id="29"/>
                         <barButtonItem image="UIButtonBarArrowLeft.png" style="plain" id="30">
                             <connections>
                                 <action selector="goBackButonSelected:" destination="-1" id="39"/>
@@ -50,7 +50,7 @@
                                 <action selector="goForwardButtonSelected:" destination="-1" id="40"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem width="104" style="plain" systemItem="fixedSpace" id="32"/>
+                        <barButtonItem width="100" style="plain" systemItem="fixedSpace" id="32"/>
                         <barButtonItem image="UIButtonBarRefresh.png" style="plain" id="28">
                             <connections>
                                 <action selector="refreshWebView:" destination="-1" id="37"/>

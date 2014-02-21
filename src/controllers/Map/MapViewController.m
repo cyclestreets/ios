@@ -37,20 +37,15 @@
 #import "MKMapView+Additions.h"
 #import "CSWaypointAnnotation.h"
 #import "CSWaypointAnnotationView.h"
+#import "UIActionSheet+BlocksKit.h"
 
 #import <Crashlytics/Crashlytics.h>
 
 
 static NSInteger DEFAULT_ZOOM = 15;
-static NSInteger MAX_ZOOM_LOCATION = 16;
-static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
-
-static NSTimeInterval ACCIDENTAL_TAP_DELAY = 0.5;
 
 //don't allow co-location of start/finish
 static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
-
-static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 @interface MarkerMenuItem : UIMenuItem
@@ -61,7 +56,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 @end
 
 
-@interface MapViewController()<MKMapViewDelegate>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
@@ -87,7 +82,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 // sub views
 @property (nonatomic, strong) RoutePlanMenuViewController			* routeplanView;
-@property (nonatomic, strong) WEPopoverController					* routeplanMenu;
 @property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
 
 // ui
@@ -175,7 +169,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 	
 	if([name isEqualToString:EVENTMAPROUTEPLAN]){
-		[self didSelectNewRoutePlan:notification];
+		[self didSelectNewRoutePlan:[notification.userInfo objectForKey:@"planType"]];
 	}
 
 	if([name isEqualToString:CSMAPSTYLECHANGED]){
@@ -194,7 +188,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		if([overlay isKindOfClass:[MKTileOverlay class]] ){
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 			newoverlay.canReplaceMapContent = YES;
-			[_mapView exchangeOverlay:overlay withOverlay:newoverlay];
+			[_mapView removeOverlay:overlay];
+			[_mapView addOverlay:newoverlay];
 			break;
 		}
 	}
@@ -241,7 +236,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
     
     MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 	newoverlay.canReplaceMapContent = YES;
-	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
+	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveRoads];
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	_mapView.showsUserLocation=YES;
@@ -445,11 +440,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 //------------------------------------------------------------------------------------
 #pragma mark - Core Location
 //------------------------------------------------------------------------------------
-//
-/***********************************************
- * @description			Location Manager methods
- ***********************************************/
-//
 
 -(void)startLocating{
 	
@@ -504,9 +494,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 -(void)assessLocationEffect{
 		
 	if(_uiState==MapPlanningStateLocating){
-		
-		
-	//	CLLocationCoordinate2D test=CLLocationCoordinate2DMake(self.lastLocation.coordinate.latitude-0.01, self.lastLocation.coordinate.longitude);
 		
 		[self addWayPointAtCoordinate:_lastLocation.coordinate];
 		
@@ -582,6 +569,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
 	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
 	
+	// or:
+	//[_mapView showAnnotations:@[array of annotations] animated:NO];
 	
 	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
@@ -649,8 +638,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 		
 	}
 	
-	
-	
 }
 
 
@@ -658,11 +645,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 //------------------------------------------------------------------------------------
 #pragma mark - Waypoints
 //------------------------------------------------------------------------------------
-//
-/***********************************************
- * @description			Waypoints
- ***********************************************/
-//
 
 -(void)showWayPointView{
 	
@@ -867,12 +849,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	return YES;
 }
 
+
+
+
 #pragma mark - MKMap delegate
-//
-/***********************************************
- * @description			RMMap Touch delegates
- ***********************************************/
-//
 
 - (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
 	
@@ -942,10 +922,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 }
 
 
+
+
 #pragma mark - MKMap Annotations
 
-
- 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
 	
 	 if ([annotation isKindOfClass:[MKUserLocation class]])
@@ -1165,36 +1145,78 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 -(IBAction)showRoutePlanMenu:(id)sender{
 	
-    self.routeplanView=[[RoutePlanMenuViewController alloc]initWithNibName:@"RoutePlanMenuView" bundle:nil];
-	_routeplanView.plan=_route.plan;
-    
-	self.routeplanMenu = [[popoverClass alloc] initWithContentViewController:_routeplanView];
-	_routeplanMenu.delegate = self;
+	NSString *currentPlan=_route.plan;
 	
-	[_routeplanMenu presentPopoverFromBarButtonItem:_changePlanButton toolBar:_toolBar permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
+	__weak __typeof(&*self)weakSelf = self;
+	UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@"Re-route with new plan type"];
+	actionSheet.delegate=self;
+	NSArray *planArray=[AppConstants planArray];
+	for (NSString *planType in planArray) {
+		
+		if([planType isEqualToString:currentPlan]){
+			
+			[actionSheet bk_setDestructiveButtonWithTitle:[planType capitalizedString] handler:^{
+				[weakSelf didSelectNewRoutePlan:planType];
+			}];
+			
+		}else{
+			
+			[actionSheet bk_addButtonWithTitle:[planType capitalizedString] handler:^{
+				[weakSelf didSelectNewRoutePlan:planType];
+			}];
+			
+		}
+		
+	}
+	
+	[actionSheet bk_setCancelButtonWithTitle:@"Cancel" handler:^{
+	}];
+	
+	[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
+	
+}
+
+// Yes, you cant style UIActionSheet without doing this!
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet{
+	
+	NSString *currentPlan=_route.plan;
+	
+    [actionSheet.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
+        if ([subview isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)subview;
+			NSString *buttonText = [button.titleLabel.text lowercaseString];
+			if ([buttonText isEqualToString:currentPlan]) {
+				button.titleLabel.textColor = UIColorFromRGB(0x509720);
+				button.userInteractionEnabled=NO;
+			}else if ([buttonText isEqualToString:@"cancel"]){
+                button.titleLabel.textColor = UIColorFromRGB(0xB20003);
+            }else{
+				button.titleLabel.highlightedTextColor=UIColorFromRGB(0x509720);
+				button.titleLabel.textColor = [UIColor darkGrayColor];
+			}
+        }
+    }];
+}
+
+
+
+-(void)didSelectNewRoutePlan:(NSString*)planType{
+	
+	if([planType isEqualToString:_route.plan])
+		return;
+	
+	[[RouteManager sharedInstance] loadRouteForRouteId:_route.routeid withPlan:planType];
 	
 }
 
 
--(void)didSelectNewRoutePlan:(NSNotification*)notification{
-	
-	NSDictionary *userInfo=notification.userInfo;
-	
-	[[RouteManager sharedInstance] loadRouteForRouteId:_route.routeid withPlan:[userInfo objectForKey:@"planType"]];
-	
-	[_routeplanMenu dismissPopoverAnimated:YES];
-	
-}
 
 
 
 
 
 
-
-
-#pragma mark map location persistence
+#pragma mark - map location persistence
 //
 /***********************************************
  * @description			Saves Map location
@@ -1232,30 +1254,16 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	}
 }
 
-- (BOOL)locationInBounds:(CLLocationCoordinate2D)location {
-	//CGRect bounds = _mapView.contents.screenBounds;
-	//CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
-	//CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
-	
-	//if (nw.latitude < location.latitude) return NO;
-	//if (nw.longitude > location.longitude) return NO;
-	//if (se.latitude > location.latitude) return NO;
-	//if (se.longitude < location.longitude) return NO;
-	
-	return YES;
-}
 
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 - (BOOL) assesWaypointLocationDistance:(CLLocationCoordinate2D)locationLatLon {
 	
 	for (WayPointVO *waypoint in _waypointArray) {
 		
 		CLLocationCoordinate2D fromLatLon = waypoint.coordinate;
 		
-		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude
-													  longitude:fromLatLon.longitude];
-		CLLocation *to = [[CLLocation alloc] initWithLatitude:locationLatLon.latitude
-													longitude:locationLatLon.longitude];
+		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude];
+		CLLocation *to = [[CLLocation alloc] initWithLatitude:locationLatLon.latitude longitude:locationLatLon.longitude];
 		CLLocationDistance distance = [from getDistanceFrom:to];
 		
 		if(distance<MIN_START_FINISH_DISTANCE){
@@ -1268,14 +1276,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 
 
-//
-/***********************************************
- * @description			DELEGATE METHODS
- ***********************************************/
-//
-
-
-#pragma mark Mapsearch delegate
+#pragma mark - Mapsearch delegate
 
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location {
 	BetterLog(@"didMoveToLocation");
@@ -1285,25 +1286,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 	[self assessWayPointAddition:location];
 	[_lineView setNeedsDisplay];
 	
-	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 }
 
 
 
-#pragma mark WEPopoverControllerDelegate 
 
-- (void)popoverControllerDidDismissPopover:(WEPopoverController *)thePopoverController {
-	//Safe to release the popover here
-	self.routeplanMenu = nil;
-}
-
-- (BOOL)popoverControllerShouldDismissPopover:(WEPopoverController *)thePopoverController {
-	//The popover is automatically dismissed if you click outside it, unless you return NO here
-	return YES;
-}
-
-
-#pragma mark point list provider 
+#pragma mark - RouteLine point methods
 // PointListProvider
 + (NSArray *) pointList:(RouteVO *)route withView:(MKMapView *)mapView {
 	
@@ -1344,27 +1332,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"MapView";
 
 - (NSArray *) pointList {
 	return [MapViewController pointList:self.route withView:self.mapView];
-}
-
-// LocationProvider
-#pragma mark location provider
-
-- (float)getX {
-	//CGPoint p = [self.mapView.contents latLongToPixel:self.lastLocation.coordinate];
-	return 0;
-}
-
-- (float)getY {
-	//CGPoint p = [self.mapView.contents latLongToPixel:self.lastLocation.coordinate];
-	return 0;
-}
-
-- (float)getRadius {
-	
-	//double metresPerPixel = [self.mapView.contents metersPerPixel];
-	//float locationRadius=(self.lastLocation.horizontalAccuracy / metresPerPixel);
-	return 0;
-	//return MAX(locationRadius, 40.0f);
 }
 
 

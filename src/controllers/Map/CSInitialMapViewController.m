@@ -21,6 +21,7 @@
                             leftViewController:[storyboard instantiateViewControllerWithIdentifier:@"WayPointNavController"]];
 	
 	// fix for "Presenting view controllers on detached view controllers is discouraged" warning
+	self.title=@"Map";
 	[self addChildViewController:self.centerController];
     if (self) {
         self.panningMode=IIViewDeckNoPanning;
@@ -34,7 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+	self.tabBarItem.image=[UIImage imageNamed:@"CSTabBar_plan_route.png"];
+	
 }
 
 - (void)didReceiveMemoryWarning
