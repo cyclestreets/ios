@@ -13,8 +13,8 @@
 	
 }
 @property (nonatomic, strong) NSMutableArray					* dataProvider;
-@property (nonatomic, strong) NSString							* dataid;
-@property (nonatomic, assign) BOOL								isSectioned;
+@property (nonatomic, strong) NSDictionary						*configDict;
+
 
 
 @end

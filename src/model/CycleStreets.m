@@ -77,28 +77,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 
 
 
-#pragma mark - Class methods
-
-//+ ( NSObject <RMTileSource> *)tileSource {
-//	NSString *mapStyle = [[self class] currentMapStyle];
-//	NSObject <RMTileSource> *tileSource;
-//	if ([mapStyle isEqualToString:MAPPING_BASE_OSM])
-//	{
-//		tileSource = [[RMOpenStreetMapSource alloc] init];
-//	}
-//	else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP])
-//	{
-//		//open cycle map
-//		tileSource = [[RMOpenCycleMapSource alloc] init];
-//	}
-//		else
-//	{
-//		//default to MAPPING_BASE_OSM.
-//		tileSource = [[RMOpenStreetMapSource alloc] init];
-//	}
-//	return tileSource;
-//}
-
 
 + (NSArray *)mapStyles {
 	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,MAPPING_BASE_OS,nil];

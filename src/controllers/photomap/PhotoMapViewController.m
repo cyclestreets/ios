@@ -125,7 +125,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void) didNotificationMapStyleChanged {
 	
-	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveRoads];
+	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
 	for(id <MKOverlay> overlay in overlays){
 		if([overlay isKindOfClass:[MKTileOverlay class]] ){
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
@@ -251,7 +251,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 	newoverlay.canReplaceMapContent = YES;
-	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveRoads];
+	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	_mapView.showsUserLocation=YES;

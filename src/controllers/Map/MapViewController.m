@@ -236,7 +236,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     
     MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 	newoverlay.canReplaceMapContent = YES;
-	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveRoads];
+	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	_mapView.showsUserLocation=YES;

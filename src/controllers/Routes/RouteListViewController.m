@@ -29,7 +29,7 @@
 // ib
 @property (nonatomic, strong) IBOutlet UITableView						* tableView;
 
-
+@property (nonatomic, assign) BOOL								isSectioned;
 @property (nonatomic, strong) NSMutableArray					* keys;
 @property (nonatomic, strong) NSMutableDictionary				* tableDataProvider;
 @property (nonatomic, strong) NSMutableArray					* rowHeightsArray;
@@ -120,7 +120,12 @@
 
 -(void)refreshUIFromDataProvider{
 	
-    self.dataProvider=[[SavedRoutesManager sharedInstance] dataProviderForType:_dataid];
+	if(_configDict==nil)
+		return;
+	
+	_isSectioned=[_configDict[@"isSectioned"] boolValue];
+	
+    self.dataProvider=[[SavedRoutesManager sharedInstance] dataProviderForType:_configDict[ID]];
     
     if([_dataProvider count]>0){
         
@@ -144,7 +149,7 @@
 			self.keys=[NSMutableArray array];
 		}
 		
-        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",_dataid] withIcon:_dataid];
+        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",_configDict[ID]] withIcon:_configDict[ID]];
     }
     
 	/*
@@ -165,10 +170,6 @@
 	
 	UIType=UITYPE_CONTROLUI;
 	
-    if([_dataid isEqualToString:SAVEDROUTE_RECENTS]){
-        _isSectioned=YES;
-    }
-	
 }
 
 
@@ -187,9 +188,6 @@
 
 -(void)createNonPersistentUI{
 	
-	if(_dataProvider==nil){
-		[self refreshUIFromDataProvider];
-	}
 	
 	[self deSelectRowForTableView:_tableView];
 }
@@ -275,7 +273,7 @@
 		[cell populate];
 	}
 	
-	if([_dataid isEqualToString:SAVEDROUTE_RECENTS]){
+	if([_configDict[ID] isEqualToString:SAVEDROUTE_RECENTS]){
 		
 		UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellMenuPress:)];
 		[cell addGestureRecognizer:recognizer];
@@ -307,7 +305,7 @@
 			NSIndexPath *pressedIndexPath = [self.tableView indexPathForRowAtPoint:[recognizer locationInView:self.tableView]];
 			
 			
-			if([_dataid isEqualToString:SAVEDROUTE_RECENTS]){
+			if([_configDict[ID] isEqualToString:SAVEDROUTE_RECENTS]){
 				
 				// sue index path to get dp fav state
 				// if no fav, if yes do not show menu
@@ -427,7 +425,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	if([_dataid isEqualToString:SAVEDROUTE_FAVS]){
+	if([_configDict[ID] isEqualToString:SAVEDROUTE_FAVS]){
 		return YES;
 	}
 	
@@ -503,7 +501,7 @@
 		for (int i=0;i<[_keys count];i++){
 			
 			UIView *headerView=[[UIView	alloc]initWithFrame:CGRectMake(0, 0, 320, 24)];
-			headerView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"darkgreen"];
+			headerView.styleClass=@"GreenView";
 			
 			UILabel *sectionLabel=[[UILabel alloc]initWithFrame:CGRectMake(10.0, 0, 280, 24)];
 			sectionLabel.backgroundColor=[UIColor clearColor];
@@ -572,7 +570,7 @@
         route=[_dataProvider objectAtIndex:[indexPath row]];
     }
 	
-	[[SavedRoutesManager sharedInstance] removeRoute:route fromDataProvider:_dataid];
+	[[SavedRoutesManager sharedInstance] removeRoute:route fromDataProvider:_configDict[ID]];
 	
 }
 

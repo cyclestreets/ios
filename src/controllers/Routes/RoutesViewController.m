@@ -20,7 +20,7 @@
 
 @interface RoutesViewController()
 
-@property (nonatomic, strong)	IBOutlet UIView					*titleHeaderView;
+
 @property (nonatomic, strong)	IBOutlet BorderView				*controlView;
 @property (nonatomic, strong)	BUSegmentedControl				*routeTypeControl;
 @property (nonatomic, strong)	IBOutlet UIButton				*selectedRouteButton;
@@ -127,8 +127,8 @@
 -(void)createPersistentUI{
 	
 	
-	_controlView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"controlbar"];
-	[_controlView drawBorderwithColor:UIColorFromRGB(0x333333) andStroke:1 left:NO right:NO top:YES bottom:YES];
+	_controlView.backgroundColor=[UIColor whiteColor];
+	[_controlView drawBorderwithColor:UIColorFromRGB(0xCCCCCC) andStroke:1 left:NO right:NO top:NO bottom:YES];
 	
 	LayoutBox *controlcontainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, CONTROLUIHEIGHT)];
 	controlcontainer.fixedWidth=YES;
@@ -256,7 +256,7 @@
         UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil ];
         _newcontroller=[storyboard instantiateViewControllerWithIdentifier:controllerDict[CONTROLLER]];
         _newcontroller.delegate=self;
-		[_newcontroller setValue:controllerDict[ID] forKey:DATATYPE];
+		[_newcontroller setValue:controllerDict forKey:@"configDict"];
         [_viewStack setObject:_newcontroller forKey:type];
         
     }
@@ -266,12 +266,13 @@
 
 -(void)loadInitialChildView{
     
-    NSDictionary *dict=_childControllerData[0];
-    NSString *controllerName=dict[ID];
+    NSDictionary *controllerDict=_childControllerData[1];
+    NSString *controllerName=controllerDict[ID];
     self.activeState=controllerName;
     
     self.activeController=[self.childViewControllers objectAtIndex:0];
-	[_activeController setValue:dict[ID] forKey:DATATYPE];
+	[_activeController setValue:controllerDict forKey:@"configDict"];
+	[_activeController refreshUIFromDataProvider];
     _activeController.delegate=self;
 }
 
@@ -291,6 +292,7 @@
         [_oldcontroller removeFromParentViewController];
         [_newcontroller didMoveToParentViewController:self];
         self.activeController=_newcontroller;
+		[_activeController refreshUIFromDataProvider];
     }];
     
     

@@ -368,7 +368,7 @@
 		}
         
 		
-		[viewOverlayView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
+		[viewOverlayView setColoursWithCGColors:UIColorFromRGB(0xeeeeee).CGColor :UIColorFromRGB(0xECECEC).CGColor];
 		viewOverlayView.tag=kSuperViewOverlayViewTag;
         contentContainer.layoutMode=BUVerticalLayoutMode;
 		contentContainer.itemPadding=10;
@@ -414,25 +414,20 @@
 		
 		
 		ExpandedUILabel *ilabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-		ilabel.backgroundColor=[UIColor clearColor];
+		
 		
 		switch(type){
 				
 			case kViewOverlayTypeRequestIndicator:
-				ilabel.textColor=[[StyleManager sharedInstance] colorForType:@"maincolor"];
-				ilabel.font=[UIFont boldSystemFontOfSize:12];
+				ilabel.styleClass=@"UIOverlayRequestLabel";
 				break;
 			default:
-				ilabel.textColor=[UIColor grayColor];
-				ilabel.font=[UIFont systemFontOfSize:13];
+				ilabel.styleClass=@"UIOverlayTitleLabel";
 				break;
 				
 		}
 		
 		ilabel.numberOfLines=0;
-		ilabel.textAlignment=UITextAlignmentCenter;
-		ilabel.shadowColor=[UIColor whiteColor];
-		ilabel.shadowOffset=CGSizeMake(0, 1);
 		
 		if(message==nil){
 			NSString *viewTypeString=[SuperViewController viewTypeToStringType:type];

@@ -52,6 +52,16 @@ tab-bar{
 }
 
 
+/* Views */
+
+.GreenView{
+
+background-color: #509720;
+
+}
+
+
+
 /* UI buttons */
 
 
@@ -86,6 +96,25 @@ tab-bar{
     color: #666666;
     font-family     : Helvetica Neue;
     font-weight     : regular;
+    font-size       : 12px;
+    text-align: :center;
+}
+
+
+/* View Overlay */
+
+.UIOverlayTitleLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
+    font-size       : 16px;
+    text-align: :center;
+}
+
+.UIOverlayMessageLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
     font-size       : 12px;
     text-align: :center;
 }
@@ -134,6 +163,8 @@ tab-bar{
     background-color: #509720;
     color:#FFFFFF;
 }
+
+
 
 
 /* map view */

@@ -243,6 +243,7 @@
         <scene sceneID="eTF-vU-kJJ">
             <objects>
                 <navigationController title="Saved Routes" definesPresentationContext="YES" id="TeA-CB-brw" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Routes" image="CSTabBar_fav_routes.png" id="kuB-BV-mht"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ejP-nB-g12">
                         <autoresizingMask key="autoresizingMask"/>
@@ -270,12 +271,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aBK-HM-EC4" customClass="BorderView">
-                                <rect key="frame" x="0.0" y="-1" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G4N-ML-Z7n">
-                                <rect key="frame" x="0.0" y="42" width="320" height="477"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="410"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
