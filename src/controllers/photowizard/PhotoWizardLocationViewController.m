@@ -8,17 +8,18 @@
 
 #import "PhotoWizardLocationViewController.h"
 #import "GlobalUtilities.h"
-#import "Markers.h"
 #import "UserLocationManager.h"
-#import "RMMarker.h"
-#import "RMAnnotation.h"
+#import "CSPhotomapAnnotationView.h"
+#import "CSPhotomapAnnotation.h"
+#import <MapKit/MapKit.h>
+#import "MKMapView+Additions.h"
 
 
 
-@interface PhotoWizardLocationViewController()
+@interface PhotoWizardLocationViewController()<MKMapViewDelegate>
 
 
-@property (nonatomic, weak) IBOutlet RMMapView						* mapView;
+@property (nonatomic, weak) IBOutlet MKMapView						* mapView;
 @property (nonatomic, strong) IBOutlet UILabel						* locationLabel;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem				* closeButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem				* resetButton;
@@ -29,7 +30,10 @@
 
 @property (nonatomic, strong) IBOutlet UIToolbar					*modalToolBar;
 
-@property (nonatomic,strong)  RMAnnotation							*userAnnotation;
+@property (nonatomic,strong)  CSPhotomapAnnotation					*userAnnotation;
+
+@property (nonatomic,strong)  UITapGestureRecognizer				*mapTapRecognizer;
+
 
 
 - (void) addLocation:(CLLocationCoordinate2D)location;
@@ -78,11 +82,11 @@
 
 -(void)createPersistentUI{
     
-    //Necessary to start route-me service
-	[RMMapView class];
 	[_mapView setDelegate:self];
 	
-	_mapView.enableDragging=YES;
+	self.mapTapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnMap:)];
+	_mapTapRecognizer.enabled=YES;
+	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
 	_modalToolBar.clipsToBounds=YES;
 		
@@ -119,7 +123,7 @@
 			
 			[self showLocationOnMap:[UserLocationManager defaultLocation]];
 			
-			[_mapView setZoom:6];
+			[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate] zoomLevel:6 animated:YES];
 		}
 		
 	}
@@ -132,15 +136,10 @@
 
 -(void)addAnnotationToMapAtCoorddinate:(CLLocationCoordinate2D)coordinate{
 	
-	
-	self.userAnnotation = [RMAnnotation annotationWithMapView:_mapView coordinate:coordinate andTitle:nil];
-	_userAnnotation.enabled=YES;
-	_userAnnotation.title=@"Here is a title";
-	_userAnnotation.annotationIcon = [UIImage imageNamed:@"UIIcon_userphotomap.png"];
-	_userAnnotation.anchorPoint = CGPointMake(0.5, 1.0);
-		
+	self.userAnnotation=[[CSPhotomapAnnotation alloc]init];
+	_userAnnotation.coordinate=coordinate;
+	_userAnnotation.isUserPhoto=YES;
 	[_mapView addAnnotation:_userAnnotation];
-	
 	
 }
 
@@ -150,12 +149,8 @@
 	
 	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
 	
-	[_mapView setCenterCoordinate:location.coordinate];
-	
-	if ([_mapView zoom] < 18) {
-		[_mapView setZoom:15];
-	}
-	
+	[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:YES];
+
 }
 
 
@@ -175,71 +170,77 @@
 
 
 
-#pragma mark - RM Map delegate methods
+#pragma mark - MKMap Annotations
 
 
-- (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
-{
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
 	
-	RMMapLayer *marker = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-    
-    return marker;
+	if ([annotation isKindOfClass:[MKUserLocation class]])
+		return nil;
+	
+	
+	static NSString *reuseId = @"CSPhotomapAnnotation";
+	CSPhotomapAnnotationView *annotationView = (CSPhotomapAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+	
+	if (annotationView == nil){
+		annotationView = [[CSPhotomapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+		annotationView.draggable=YES;
+		
+	} else {
+		annotationView.annotation = annotation;
+	}
+	
+	return annotationView;
 }
 
 
-
-
-- (void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map{
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
 	
-	BetterLog(@"");
+	BetterLog(@"Fired");
 	
+	CSPhotomapAnnotation *annotation=(CSPhotomapAnnotation*)view.annotation;
 	
 	[self markerLocationDidUpdate:annotation.coordinate];
 	
 }
 
 
-- (BOOL)mapView:(RMMapView *)map shouldDragAnnotation:(RMAnnotation *)annotation {
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState{
 	
-	BetterLog(@"");
+	BetterLog(@"From %i to %i",oldState, newState);
 	
-	return YES;
+	CSPhotomapAnnotationView *annotationView=(CSPhotomapAnnotationView*)view;
+	CSPhotomapAnnotation* annotation=view.annotation;
 	
-}
-
-
-- (void)mapView:(RMMapView *)map didDragAnnotation:(RMAnnotation *)annotation withDelta:(CGPoint)delta{
 	
-	BetterLog(@" %f %f",annotation.coordinate.latitude,annotation.coordinate.longitude);
+	if (newState == MKAnnotationViewDragStateEnding) {
+		
+		[annotationView setDragState:MKAnnotationViewDragStateNone]; //NOTE: doesnt seem to fire this for custom annotations
+		[self markerLocationDidUpdate:annotation.coordinate];
+		
+    }else if (newState==MKAnnotationViewDragStateCanceling) {
+		
+		[annotationView setDragState:MKAnnotationViewDragStateNone]; //NOTE: doesnt seem to fire this for custom annotations
+		
+    }else if (newState==MKAnnotationViewDragStateDragging) {
+		[self markerLocationDidUpdate:annotation.coordinate];
+    }
 	
-	CGPoint screenPosition = CGPointMake(annotation.position.x - delta.x, annotation.position.y - delta.y);
-	CGPoint screenPositionOffset = CGPointMake(annotation.position.x - delta.x, annotation.position.y - delta.y);
-	
-    annotation.coordinate = [_mapView pixelToCoordinate:screenPosition];
-    annotation.position = screenPositionOffset;
-	
-	[self markerLocationDidUpdate:annotation.coordinate];
-	
-}
-
-
-- (void)mapView:(RMMapView *)map didEndDragAnnotation:(RMAnnotation *)annotation{
-	
-	[self markerLocationDidUpdate:annotation.coordinate];
 	
 }
 
 
 
-- (void)singleTapOnMap:(RMMapView *)map at:(CGPoint)point {
+- (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
 	
-	_userAnnotation.coordinate=[_mapView pixelToCoordinate:point];
-	_userAnnotation.position=point;
+	CGPoint touchPoint = [recogniser locationInView:self.mapView];
+    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
 	
-	[self markerLocationDidUpdate:[_mapView pixelToCoordinate:point]];
+	_userAnnotation.coordinate=touchMapCoordinate;
+	
+	[self markerLocationDidUpdate:touchMapCoordinate];
 	
 }
-
 
 
 

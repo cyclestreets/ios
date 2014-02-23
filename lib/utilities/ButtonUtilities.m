@@ -171,6 +171,9 @@
 	
 }
 
+
+#pragma mark - Pixate support methods
+
 + (UIButton*)UIPixateButtonWithWidth:(NSUInteger)width height:(NSUInteger)height styleId:(NSString*)styleId text:(NSString*)text
 {
 	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -188,6 +191,43 @@
 	
 	return button;
 }
+
++(void)stylePixateIBButton:(UIButton*)button styleId:(NSString*)styleId type:(NSString*)type text:(NSString*)text{
+	
+	button.styleId=styleId;
+	
+	int capWidth=9;
+	BOOL hasLabel=YES;
+	if([text length]==0){
+		capWidth=0;
+		hasLabel=NO;
+	}
+	
+	CGRect bframe=button.frame;
+	if(hasLabel==YES){
+		CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font];
+		if(twidth>bframe.size.width){
+			twidth+=10;
+		}else{
+			twidth=bframe.size.width;
+		}
+		bframe.size.width=twidth;
+	}else {
+		CGFloat twidth=[GlobalUtilities calculateWidthOfText:button.titleLabel.text :button.titleLabel.font];
+		bframe.size.width=MAX(twidth,bframe.size.width);
+		capWidth=9;
+	}
+	button.frame = bframe;
+	
+	// Configure title(s)
+	if(hasLabel){
+		[button setTitle:text forState:UIControlStateNormal];
+		button.titleLabel.userInteractionEnabled=NO;
+	}
+}
+
+
+
 
 + (UIButton*)UIButtonWithWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text
 {

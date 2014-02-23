@@ -22,10 +22,12 @@
 #import "AppDelegate.h"
 #import "Markers.h"
 #import <ImageIO/ImageIO.h>
-//#import "UserManager.h"
+#import <MapKit/MapKit.h>
+#import "CSPhotomapAnnotation.h"
+#import "StringManager.h"
+#import "MKMapView+Additions.h"
+#import "CSPhotomapAnnotationView.h"
 
-#import "RMMarker.h"
-#import "RMAnnotation.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -68,7 +70,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIView *photoLocationView;
 
 
-@property (nonatomic, strong) IBOutlet RMMapView *locationMapView;
+@property (nonatomic, strong) IBOutlet MKMapView *locationMapView;
 @property (nonatomic, strong) RMMarker *locationMapMarker;
 @property (nonatomic, strong) IBOutlet UILabel *locationLabel;
 @property (nonatomic, strong) IBOutlet UIButton *locationUpdateButton;
@@ -108,7 +110,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet CopyLabel *photoResultURLLabel;
 @property (nonatomic, strong) IBOutlet UIButton *photoMapButton;
 
-@property (nonatomic,strong)  RMAnnotation									*userLocationAnnotation;
+@property (nonatomic,strong)  CSPhotomapAnnotation									*userLocationAnnotation;
 
 
 
@@ -338,23 +340,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		self.navigationItem.backBarButtonItem.tintColor=UIColorFromRGB(0xA71D1D);
 		
-		
-		self.prevButton=[ButtonUtilities UIButtonWithWidth:10 height:32 type:@"barbuttongreen" text:@"Previous"];
-		[_prevButton addTarget:self action:@selector(navigateToPreviousView:) forControlEvents:UIControlEventTouchUpInside];
-		self.nextButton=[ButtonUtilities UIButtonWithWidth:10 height:32 type:@"barbuttongreen" text:@"Next"];
-		[_nextButton addTarget:self action:@selector(navigateToNextView:) forControlEvents:UIControlEventTouchUpInside];
-		
-		
 		self.navigationItem.title=@"";
-		
-		LayoutBox *containerView=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 10, 32)];
-		containerView.itemPadding=5;
-		[containerView addSubview:_prevButton];
-		[containerView addSubview:_nextButton];
-			
-		self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:containerView];
-			
-		
 		
 		_pageScrollView.y=20;
 		_headerView.y=0;
@@ -937,17 +923,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	//[ButtonUtilities styleIBButton:_locationUpdateButton type:@"green" text:@"Edit Location"];
 	[_locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-	[RMMapView class];
-	[_locationMapView setDelegate:self];
 	_locationMapView.userInteractionEnabled=NO;
 	
-	self.userLocationAnnotation = [RMAnnotation annotationWithMapView:_locationMapView coordinate:CLLocationCoordinate2DMake(0,0) andTitle:nil];
-	_userLocationAnnotation.enabled=YES;
-	_userLocationAnnotation.annotationIcon = [UIImage imageNamed:@"UIIcon_userphotomap.png"];
-	_userLocationAnnotation.anchorPoint = CGPointMake(0.5, 1.0);
-	[_locationMapView addAnnotation:_userLocationAnnotation];
-	
-	
+	 self.userLocationAnnotation=[[CSPhotomapAnnotation alloc]init];
+	 _userLocationAnnotation.coordinate=CLLocationCoordinate2DMake(0,0);
+	_userLocationAnnotation.isUserPhoto=YES;
+	 [_locationMapView addAnnotation:_userLocationAnnotation];
+		
 	[self loadLocationFromPhoto];
 		
 }
@@ -1061,26 +1043,46 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	_userLocationAnnotation.coordinate=coordinate;
 	
-	[_locationMapView setZoom:6];
+	[_locationMapView setCenterCoordinate:coordinate zoomLevel:16 animated:YES];
 		
 }
 
 -(void)updateLocationMapViewForLocation:(CLLocation*)location{
 	
-	
 	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
 	
-	[self.locationMapView setCenterCoordinate:location.coordinate];
-	
-	if ([_locationMapView zoom] < 18) {
-		[_locationMapView setZoom:14];
-	}
+	[_locationMapView setCenterCoordinate:location.coordinate zoomLevel:14 animated:YES];
 	
 	_userLocationAnnotation.coordinate=location.coordinate;
 	
 }
 
+#pragma mark - MKMap Annotations
 
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+	
+	if ([annotation isKindOfClass:[MKUserLocation class]])
+		return nil;
+	
+	
+	static NSString *reuseId = @"CSPhotomapAnnotation";
+	CSPhotomapAnnotationView *annotationView = (CSPhotomapAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+	
+	if (annotationView == nil){
+		annotationView = [[CSPhotomapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+		annotationView.enabled=NO;
+		
+	} else {
+		annotationView.annotation = annotation;
+	}
+	
+	return annotationView;
+}
+
+
+/*
 - (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
 {
 	
@@ -1088,7 +1090,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
     
     return marker;
 }
-
+*/
 
 
 #pragma mark - Category View
@@ -1399,9 +1401,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[self updateUploadUIState:@"waiting"];
 	
-	
-	
-	//[ButtonUtilities styleIBButton:_uploadButton type:@"orange" text:@"Upload Photo"];
+	[ButtonUtilities stylePixateIBButton:_uploadButton styleId:@"OrangeButton" type:@"orange" text:@"Upload Photo"];
 	[_uploadButton addTarget:self action:@selector(uploadPhoto:) forControlEvents:UIControlEventTouchUpInside];
 	
 }
@@ -1413,7 +1413,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)uploadPhoto:(id)sender{
 	
-	/*
+	
     if ([UserAccount sharedInstance].isLoggedIn==NO) {
 		
 		if([UserAccount sharedInstance].accountMode==kUserAccountCredentialsExist){
@@ -1428,6 +1428,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 			
 			BetterLog(@"kUserAccountNotLoggedIn");
 			
+			/*
 			if (self.loginView == nil) {
 				self.loginView = [[UISplitViewController alloc] initWithNibName:@"AccountView" bundle:nil];
 			}
@@ -1435,6 +1436,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 			self.loginView.shouldAutoClose=YES;
 			UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
 			[self presentModalViewController:nav animated:YES];
+			 */
 		}
         
 		
@@ -1448,7 +1450,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		[self updateUploadUIState:@"loading"];
 	}
 	
-	 */
+	
 	
 }
 

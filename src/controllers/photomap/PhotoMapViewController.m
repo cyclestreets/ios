@@ -47,7 +47,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPhotomapAnnotationView.h"
 #import <MapKit/MapKit.h>
 
-//#import "PhotoWizardViewController.h"
+#import "PhotoWizardViewController.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
@@ -62,7 +62,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 @property (nonatomic, strong) CLLocation								* currentLocation;
 @property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
-//@property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
+@property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
 
 @property (nonatomic, assign) BOOL										photomapQuerying;
 
@@ -415,7 +415,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 -(IBAction)showPhotoWizard:(id)sender{
 	
-	/*
+	
 	PhotoWizardViewController *photoWizard=[[PhotoWizardViewController alloc]initWithNibName:[PhotoWizardViewController nibName] bundle:nil];
 	photoWizard.extendedLayoutIncludesOpaqueBars=NO;
 	photoWizard.edgesForExtendedLayout = UIRectEdgeNone;
@@ -424,7 +424,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	[self presentViewController:photoWizard animated:YES completion:^{
 		
 	}];
-	*/
+	
 }
 
 

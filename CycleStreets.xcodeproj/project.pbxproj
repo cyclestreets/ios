@@ -431,6 +431,8 @@
 		28373E2716481AFB00F5E356 /* WayPointCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2516481AFB00F5E356 /* WayPointCellView.m */; };
 		28373E2A16481BF800F5E356 /* WayPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2916481BF800F5E356 /* WayPointVO.m */; };
 		28373E2B16481BF800F5E356 /* WayPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2916481BF800F5E356 /* WayPointVO.m */; };
+		283C5FCC18B915C300E97BDF /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8318AE427B00EF0436 /* PhotoWizardViewController.m */; };
+		283C5FCD18B91B4500E97BDF /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8118AE427B00EF0436 /* PhotoWizardLocationViewController.m */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28443E631332867D00FAD008 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		284608281649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
@@ -1223,7 +1225,7 @@
 		28BC6A9518AE429400EF0436 /* PhotoWizardCategoryMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWizardCategoryMenuView.xib; sourceTree = "<group>"; };
 		28BC6A9618AE429400EF0436 /* PhotoWizardLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWizardLocationView.xib; sourceTree = "<group>"; };
 		28BC6A9718AE429400EF0436 /* PhotoWizardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWizardView.xib; sourceTree = "<group>"; };
-		28BC6A9918AE429400EF0436 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsView.xib; path = settings/SettingsView.xib; sourceTree = "<group>"; };
+		28BC6A9918AE429400EF0436 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		28BC6AA618AE42FA00EF0436 /* PhotoCategoryVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCategoryVO.h; sourceTree = "<group>"; };
 		28BC6AA718AE42FA00EF0436 /* PhotoCategoryVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryVO.m; sourceTree = "<group>"; };
 		28BC6AAA18AE431800EF0436 /* LayoutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutBox.h; sourceTree = "<group>"; };
@@ -1486,7 +1488,6 @@
 		280E931D140984F300C7AC75 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				28BC6A9918AE429400EF0436 /* SettingsView.xib */,
 				28BC6A9118AE429400EF0436 /* photomap */,
 				28BC6A9418AE429400EF0436 /* photowizard */,
 				28BC6A9818AE429400EF0436 /* settings */,
@@ -2404,6 +2405,7 @@
 		28BC6A9818AE429400EF0436 /* settings */ = {
 			isa = PBXGroup;
 			children = (
+				28BC6A9918AE429400EF0436 /* SettingsView.xib */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -3135,7 +3137,9 @@
 				28AD6454131FB6C8008527FC /* RoundedRectView.m in Sources */,
 				28AD6455131FB6C8008527FC /* ShadowedTableView.m in Sources */,
 				28AD6460131FB6C8008527FC /* DeviceUtilities.m in Sources */,
+				283C5FCC18B915C300E97BDF /* PhotoWizardViewController.m in Sources */,
 				28AD6462131FB6C8008527FC /* GlobalUtilities.m in Sources */,
+				283C5FCD18B91B4500E97BDF /* PhotoWizardLocationViewController.m in Sources */,
 				28AD6493131FB6C8008527FC /* StringUtilities.m in Sources */,
 				28AD6497131FB6C8008527FC /* ViewUtilities.m in Sources */,
 				2872DF3713283586003995BE /* ItineraryCellView.m in Sources */,

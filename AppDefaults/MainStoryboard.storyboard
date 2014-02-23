@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="uZG-hY-a5B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="uZG-hY-a5B">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -317,7 +317,8 @@
         <!--Photo Wizard View Controller - Report-->
         <scene sceneID="oM5-Rp-Zaf">
             <objects>
-                <viewController storyboardIdentifier="PhotoWizardViewController" id="vwU-Uf-hpU" customClass="PhotoWizardViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoWizardViewController" hidesBottomBarWhenPushed="YES" id="vwU-Uf-hpU" customClass="PhotoWizardViewController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Report" id="6I9-qK-6HB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMM-Mf-8b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -392,8 +393,9 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Report" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z42-mk-NG8">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.066666670139999995" green="0.68235296010000002" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="ekw-cq-hKN" kind="relationship" relationship="rootViewController" id="2Ax-ZV-IZ4"/>
@@ -406,7 +408,8 @@
         <!--Navigation Controller - Wizard-->
         <scene sceneID="zfO-JS-21r">
             <objects>
-                <navigationController title="Wizard" definesPresentationContext="YES" id="6Ji-IA-QuF" sceneMemberID="viewController">
+                <navigationController title="Wizard" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="6Ji-IA-QuF" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Wizard" image="CSTabBar_add_photo.png" id="bk4-8A-zQb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uAN-1O-GEG">
                         <autoresizingMask key="autoresizingMask"/>
