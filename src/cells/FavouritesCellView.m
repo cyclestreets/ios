@@ -21,76 +21,87 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  FavouritesCell.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 17/03/2010.
 //	Revised by Neil Edwards 1/4/11
 
 #import "FavouritesCellView.h"
 #import "AppConstants.h"
 #import "SettingsManager.h"
 #import "ViewUtilities.h"
+#import "RouteVO.h"
+#import "LayoutBox.h"
+#import "ExpandedUILabel.h"
+#import "MultiLabelLine.h"
+
+@interface FavouritesCellView()
+
+@property (nonatomic, strong)	RouteVO		*dataProvider;
+@property (nonatomic, weak)	IBOutlet LayoutBox		*viewContainer;
+@property (nonatomic, weak)	IBOutlet ExpandedUILabel		*nameLabel;
+@property (nonatomic, weak)	IBOutlet MultiLabelLine		*readoutLabel;
+@property (nonatomic, weak)	IBOutlet UIImageView		*icon;
+@property (nonatomic)	BOOL		isSelectedRoute;
+@property (nonatomic, weak)	IBOutlet UIImageView		*selectedRouteIcon;
+
+
+@end
+
 
 @implementation FavouritesCellView
-@synthesize dataProvider;
-@synthesize viewContainer;
-@synthesize nameLabel;
-@synthesize readoutLabel;
-@synthesize icon;
-@synthesize isSelectedRoute;
-@synthesize selectedRouteIcon;
+
 
 
 -(void)initialise{
 	
-	isSelectedRoute=NO;
+	_isSelectedRoute=NO;
 	
-	viewContainer.layoutMode=BUVerticalLayoutMode;
-	viewContainer.paddingLeft=10;
-	viewContainer.paddingTop=7;
-	viewContainer.paddingBottom=7;
-	viewContainer.itemPadding=0;
-	[viewContainer initFromNIB];
+	_viewContainer.layoutMode=BUVerticalLayoutMode;
+	_viewContainer.paddingLeft=10;
+	_viewContainer.paddingTop=7;
+	_viewContainer.paddingBottom=7;
+	_viewContainer.itemPadding=0;
+	[_viewContainer initFromNIB];
 	
 	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),UIColorFromRGB(0x804000),nil];
 	
-	readoutLabel.fonts=fonts;
-	readoutLabel.colors=colors;
+	_readoutLabel.fonts=fonts;
+	_readoutLabel.colors=colors;
 	
 }
 
 
 -(void)populate{
 	
-	self.nameLabel.text=[dataProvider name];
+	self.nameLabel.text=[_dataProvider name];
 	
 	NSMutableArray *arr=[[NSMutableArray alloc] init];
 	
-	[arr addObject:[dataProvider timeString]];
+	[arr addObject:[_dataProvider timeString]];
 	
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[arr addObject:[NSString stringWithFormat:@"%3.1f miles", [[dataProvider length] floatValue]/1600]];
+		[arr addObject:[NSString stringWithFormat:@"%3.1f miles", [[_dataProvider length] floatValue]/1600]];
 	}else {
-		[arr addObject:[NSString stringWithFormat:@"%3.1f km", [[dataProvider length] floatValue]/1000]];
+		[arr addObject:[NSString stringWithFormat:@"%3.1f km", [[_dataProvider length] floatValue]/1000]];
 	}
 
-	NSNumber *kmSpeed = [NSNumber numberWithInteger:[dataProvider speed]];
+	NSNumber *kmSpeed = [NSNumber numberWithInteger:[_dataProvider speed]];
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
 		[arr addObject:[NSString stringWithFormat:@"%2d mph", mileSpeed]];
 	}else {
-		[arr addObject:[NSString stringWithFormat:@"%2d kmh", [dataProvider speed]]];
+		[arr addObject:[NSString stringWithFormat:@"%2d kmh", [_dataProvider speed]]];
 	}
 
 	 
-	[arr addObject:[dataProvider planString]];
+	[arr addObject:[_dataProvider planString]];
 	 
-	readoutLabel.labels=arr;
-	[readoutLabel drawUI];
+	_readoutLabel.labels=arr;
+	[_readoutLabel drawUI];
 	 
-	[viewContainer refresh];
+	[_viewContainer refresh];
 	
-	selectedRouteIcon.hidden=!isSelectedRoute;
-	[ViewUtilities alignView:selectedRouteIcon withView:viewContainer :BUNoneLayoutMode :BUCenterAlignMode];
+	_selectedRouteIcon.hidden=!_isSelectedRoute;
+	[ViewUtilities alignView:_selectedRouteIcon withView:_viewContainer :BUNoneLayoutMode :BUCenterAlignMode];
 	 
 }
 

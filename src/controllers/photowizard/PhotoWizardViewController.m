@@ -27,6 +27,7 @@
 #import "StringManager.h"
 #import "MKMapView+Additions.h"
 #import "CSPhotomapAnnotationView.h"
+#import "AccountViewController.h"
 
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
@@ -111,6 +112,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIButton *photoMapButton;
 
 @property (nonatomic,strong)  CSPhotomapAnnotation									*userLocationAnnotation;
+@property (nonatomic,strong)  AccountViewController									*loginView;
 
 
 
@@ -326,11 +328,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[_pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
 	
-	[self createNavigationBarUI];
+}
 
+-(void)viewDidLayoutSubviews{
 	
+	[self createNavigationBarUI];
 	[self initialiseViewState:PhotoWizardViewStateInfo];
-    
+	
 }
 
 
@@ -348,6 +352,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		_pageScrollView.y=20;
 		_headerView.y=0;
 		_pageControl.y=0;
+		
+		// NOTE: this shouldnt be necessary, but autoresizing mask fails wne not modal (might be something to do with the Toolbar)
+		_pageScrollView.height=self.view.height-_headerView.height-_footerView.height;
 		
 	}else{
 		
@@ -1436,15 +1443,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 			
 			BetterLog(@"kUserAccountNotLoggedIn");
 			
-			/*
+			
 			if (self.loginView == nil) {
-				self.loginView = [[UISplitViewController alloc] initWithNibName:@"AccountView" bundle:nil];
+				self.loginView = [[AccountViewController alloc] initWithNibName:@"AccountView" bundle:nil];
 			}
 			self.loginView.isModal=YES;
 			self.loginView.shouldAutoClose=YES;
 			UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:self.loginView];
 			[self presentModalViewController:nav animated:YES];
-			 */
+			 
 		}
         
 		

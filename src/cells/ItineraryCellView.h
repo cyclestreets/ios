@@ -8,27 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BUTableCellView.h"
-#import "SegmentVO.h"
-#import "LayoutBox.h"
-#import "MultiLabelLine.h"
-#import "ExpandedUILabel.h"
+
+@class SegmentVO;
 
 @interface ItineraryCellView : BUTableCellView {
 	
-	SegmentVO							*dataProvider;
-	
-	IBOutlet	LayoutBox				*viewContainer;
-	IBOutlet ExpandedUILabel			*nameLabel;
-	IBOutlet MultiLabelLine				*readoutLabel;
-	
-	IBOutlet UIImageView				*icon;
 
 }
 @property (nonatomic, strong)		SegmentVO		* dataProvider;
-@property (nonatomic, strong)		IBOutlet LayoutBox		* viewContainer;
-@property (nonatomic, strong)		IBOutlet ExpandedUILabel		* nameLabel;
-@property (nonatomic, strong)		IBOutlet MultiLabelLine		* readoutLabel;
-@property (nonatomic, strong)		IBOutlet UIImageView		* icon;
 
-+(NSNumber*)heightForCellWithDataProvider:(SegmentVO*)segment;
 @end

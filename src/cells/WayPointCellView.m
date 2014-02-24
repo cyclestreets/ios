@@ -9,13 +9,14 @@
 #import "WayPointCellView.h"
 #import "GlobalUtilities.h"
 #import "UIView+Additions.h"
+#import "WayPointVO.h"
 
 @interface WayPointCellView()
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView		*iconImageView;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel			*nameLabel;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel			*locationLabel;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel			*waypointLabel;
+@property (weak, nonatomic) IBOutlet UIImageView		*iconImageView;
+@property (weak, nonatomic) IBOutlet UILabel			*nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel			*locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel			*waypointLabel;
 
 
 @end

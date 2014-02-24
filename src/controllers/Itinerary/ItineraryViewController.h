@@ -8,20 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
-#import "MultiLabelLine.h"
-#import "LayoutBox.h"
-#import "RouteSegmentViewController.h"
-#import "CopyLabel.h"
-#import "BUIconActionSheet.h"
-#import <MessageUI/MessageUI.h>
-@class RouteVO;
 
-@interface ItineraryViewController : SuperViewController <UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>{
+
+@interface ItineraryViewController : SuperViewController {
 	
 	
 }
 
-
 -(void)createRowHeightsArray;
 -(void)showNoActiveRouteView:(BOOL)show;
+
 @end

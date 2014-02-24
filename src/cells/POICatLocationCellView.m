@@ -7,11 +7,16 @@
 //
 
 #import "POICatLocationCellView.h"
+#import "POILocationVO.h"
+
+@interface POICatLocationCellView()
+
+@property (nonatomic, strong)	IBOutlet UILabel		*nameLabel;
+@property (nonatomic, strong)	IBOutlet UILabel		*urlLabel;
+
+@end
 
 @implementation POICatLocationCellView
-@synthesize dataProvider;
-@synthesize nameLabel;
-@synthesize urlLabel;
 
 
 -(void)initialise{
@@ -23,8 +28,8 @@
 
 -(void)populate{
 	
-	nameLabel.text=dataProvider.name;
-	urlLabel.text=dataProvider.website;
+	_nameLabel.text=_dataProvider.name;
+	_urlLabel.text=_dataProvider.website;
 	
 }
 

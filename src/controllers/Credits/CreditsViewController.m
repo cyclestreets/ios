@@ -21,14 +21,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Credits.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 09/03/2010.
 //
 
 #import "CreditsViewController.h"
 #import "GlobalUtilities.h"
 
 
-@interface CreditsViewController()
+@interface CreditsViewController()<UIWebViewDelegate>
 
 @property (nonatomic, weak)		IBOutlet UIWebView						* webView;
 @property (nonatomic, strong)		 UIAlertView						* failAlert;
@@ -40,6 +39,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong)		 UIBarButtonItem					* activityBarItem;
 @property (nonatomic, strong)		 UIActivityIndicatorView			* activityIndicator;
 @property (nonatomic)		BOOL										pageLoaded;
+
+
+-(void)updateUIState:(NSString*)state;
+-(IBAction)stopLoading:(id)sender;
+-(IBAction)refreshWebView:(id)sender;
+-(IBAction)goForwardButtonSelected:(id)sender;
+-(IBAction)goBackButonSelected:(id)sender;
+-(void)showActivityIndicator:(BOOL)show;
 
 @end
 

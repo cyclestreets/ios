@@ -11,21 +11,29 @@
 #import "SettingsManager.h"
 #import "ViewUtilities.h"
 #import "GenericConstants.h"
+#import "RouteVO.h"
+#import "LayoutBox.h"
+#import "ExpandedUILabel.h"
+#import "MultiLabelLine.h"
 
+@interface RouteCellView()
+
+@property (nonatomic, weak)	IBOutlet LayoutBox          * viewContainer;
+@property (nonatomic, weak)	IBOutlet ExpandedUILabel    * nameLabel;
+@property (nonatomic, weak)	IBOutlet MultiLabelLine     * readoutLabel;
+@property (nonatomic, weak)	IBOutlet UIImageView        * icon;
+@property (nonatomic, weak)	IBOutlet UIImageView        * selectedRouteIcon;
+
+
+@end
 
 @implementation RouteCellView
-@synthesize dataProvider;
-@synthesize viewContainer;
-@synthesize nameLabel;
-@synthesize readoutLabel;
-@synthesize icon;
-@synthesize isSelectedRoute;
-@synthesize selectedRouteIcon;
+
 
 
 -(void)initialise{
 	
-    isSelectedRoute=NO;
+    _isSelectedRoute=NO;
 	
 	
 	UIView *sview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 44)];
@@ -34,18 +42,18 @@
 	
 	
 	
-	viewContainer.layoutMode=BUVerticalLayoutMode;
-	viewContainer.paddingLeft=10;
-	viewContainer.paddingTop=7;
-	viewContainer.paddingBottom=7;
-	viewContainer.itemPadding=0;
-	[viewContainer initFromNIB];
+	_viewContainer.layoutMode=BUVerticalLayoutMode;
+	_viewContainer.paddingLeft=10;
+	_viewContainer.paddingTop=7;
+	_viewContainer.paddingBottom=7;
+	_viewContainer.itemPadding=0;
+	[_viewContainer initFromNIB];
 	
 	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),UIColorFromRGB(0x804000),nil];
 	
-	readoutLabel.fonts=fonts;
-	readoutLabel.colors=colors;
+	_readoutLabel.fonts=fonts;
+	_readoutLabel.colors=colors;
 	
 }
 
@@ -61,35 +69,35 @@
 
 -(void)updateCellUILabels{
 	
-	self.nameLabel.text=dataProvider.nameString;
+	self.nameLabel.text=_dataProvider.nameString;
 	
 	NSMutableArray *labelarr=[[NSMutableArray alloc] init];
 	
-	[labelarr addObject:[dataProvider timeString]];
+	[labelarr addObject:[_dataProvider timeString]];
 	
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[labelarr addObject:[NSString stringWithFormat:@"%3.1f miles", [[dataProvider length] floatValue]/1600]];
+		[labelarr addObject:[NSString stringWithFormat:@"%3.1f miles", [[_dataProvider length] floatValue]/1600]];
 	}else {
-		[labelarr addObject:[NSString stringWithFormat:@"%3.1f km", [[dataProvider length] floatValue]/1000]];
+		[labelarr addObject:[NSString stringWithFormat:@"%3.1f km", [[_dataProvider length] floatValue]/1000]];
 	}
     
-	NSNumber *kmSpeed = [NSNumber numberWithInteger:[dataProvider speed]];
+	NSNumber *kmSpeed = [NSNumber numberWithInteger:[_dataProvider speed]];
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
 		[labelarr addObject:[NSString stringWithFormat:@"%2d mph", mileSpeed]];
 	}else {
-		[labelarr addObject:[NSString stringWithFormat:@"%2d kmh", [dataProvider speed]]];
+		[labelarr addObject:[NSString stringWithFormat:@"%2d kmh", [_dataProvider speed]]];
 	}
     
     
-	[labelarr addObject:[dataProvider planString]];
+	[labelarr addObject:[_dataProvider planString]];
     
-	readoutLabel.labels=labelarr;
-	[readoutLabel drawUI];
+	_readoutLabel.labels=labelarr;
+	[_readoutLabel drawUI];
     
-	[viewContainer refresh];
+	[_viewContainer refresh];
 	
-	selectedRouteIcon.hidden=!isSelectedRoute;
+	_selectedRouteIcon.hidden=!_isSelectedRoute;
 	
 }
 

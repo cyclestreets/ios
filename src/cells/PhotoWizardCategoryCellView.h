@@ -7,16 +7,15 @@
 //
 
 #import "BUTableCellView.h"
-#import "PhotoCategoryVO.h"
+@class PhotoCategoryVO;
 
 @interface PhotoWizardCategoryCellView : BUTableCellView{
 	
 	
-	IBOutlet		UILabel			*itemLabel;
-	
-	PhotoCategoryVO					*dataProvider;
-	
 }
-@property (nonatomic, strong)	IBOutlet UILabel			*itemLabel;
+
 @property (nonatomic, strong)	PhotoCategoryVO			*dataProvider;
+@property (nonatomic, weak)	IBOutlet UILabel			*itemLabel;
+
+
 @end

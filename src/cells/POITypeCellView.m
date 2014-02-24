@@ -7,13 +7,18 @@
 //
 
 #import "POITypeCellView.h"
+#import "POICategoryVO.h"
+
+@interface POITypeCellView()
+
+@property (nonatomic, weak)	IBOutlet UIImageView    * imageView;
+@property (nonatomic, weak)	IBOutlet UILabel        * label;
+@property (nonatomic, weak)	IBOutlet UILabel        * totallabel;
+
+@end
 
 @implementation POITypeCellView
-@synthesize imageView;
-@synthesize label;
-@synthesize totallabel;
-@synthesize dataProvider;
-	
+
 	
 -(void)initialise{
 	
@@ -24,9 +29,9 @@
 
 -(void)populate{
 	
-	imageView.image=dataProvider.icon;
-	label.text=dataProvider.name;
-	totallabel.text=[NSString stringWithFormat:@"%i entries",dataProvider.total];
+	self.imageView.image=_dataProvider.icon;
+	_label.text=_dataProvider.name;
+	_totallabel.text=[NSString stringWithFormat:@"%i entries",_dataProvider.total];
 	
 }
 

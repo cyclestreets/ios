@@ -30,118 +30,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SuperViewController.h"
 
 
-#define kSubmitButtonTag 499
-#define	kActivityTag 500
-#define	kMessageFieldTag 501
-#define kpasswordExtent 4
-#define	kUsernameExtent 4
+
 
 @interface AccountViewController : SuperViewController <UITextFieldDelegate,UIScrollViewDelegate>{
 	
-	UIView                              *activeView;
-	
-	IBOutlet			UIScrollView	*scrollView;
-	IBOutlet			UIPageControl	*pageControl;
-	IBOutlet			UIView			*pageControlView;
-	
-	IBOutlet			UILabel			*leftLabel;
-	IBOutlet			UILabel			*rightLabel;
-	
-	
-	LayoutBox                           *contentView;
-	
-	// not logged in
-	IBOutlet UITextField                *loginUsernameField;
-	IBOutlet UITextField                *loginPasswordField;
-	IBOutlet UIButton                   *loginButton;
-	IBOutlet	UIView                  *loginView;
-	
-	// register
-	IBOutlet UITextField                *registerUsernameField;
-	IBOutlet UITextField                *registerVisibleNameField;
-	IBOutlet UITextField                *registerEmailField;
-	IBOutlet UITextField                *registerPsswordField;
-	IBOutlet UIButton					*registerButton;
-	IBOutlet UIView						*registerView;
-	
-	//password
-	IBOutlet	UITextField				*retrieveEmailField;
-	IBOutlet	UIView					*retrieveView;
-	
-	
-	// logged in
-	IBOutlet		UILabel				*loggedInasField;
-	IBOutlet		UIButton			*logoutButton;
-	IBOutlet		UISwitch			*saveLoginButton;
-	IBOutlet		UIView				*loggedInView;
-	
-	
-	//state
-	int									activePage;
-	int									activeFieldIndex;
-	CGRect								activeFieldFrame;
-	NSMutableArray						*activeFieldArray;
-	UITextField							*activeField;
-	BOOL								keyboardIsShown;
-	CGPoint								viewOffset;
-	UIButton							*activeFormSubmitButton;
-	UIActivityIndicatorView				*activeActivityView;
-	UILabel								*activeFormMessageLabel;	
-	UserAccountMode						viewMode;
-	NSMutableArray						*formFieldArray;
-	
-	
-	BOOL								isModal;
-	BOOL								shouldAutoClose;
 	
 }
-@property (nonatomic, strong)		IBOutlet UIView				* activeView;
-@property (nonatomic, strong)		IBOutlet UIScrollView				* scrollView;
-@property (nonatomic, strong)		IBOutlet UIPageControl				* pageControl;
-@property (nonatomic, strong)		IBOutlet UIView				* pageControlView;
-@property (nonatomic, strong)		IBOutlet UILabel				* leftLabel;
-@property (nonatomic, strong)		IBOutlet UILabel				* rightLabel;
-@property (nonatomic, strong)		LayoutBox				* contentView;
-@property (nonatomic, strong)		IBOutlet UITextField				* loginUsernameField;
-@property (nonatomic, strong)		IBOutlet UITextField				* loginPasswordField;
-@property (nonatomic, strong)		IBOutlet UIButton				* loginButton;
-@property (nonatomic, strong)		IBOutlet UIView				* loginView;
-@property (nonatomic, strong)		IBOutlet UITextField				* registerUsernameField;
-@property (nonatomic, strong)		IBOutlet UITextField				* registerVisibleNameField;
-@property (nonatomic, strong)		IBOutlet UITextField				* registerEmailField;
-@property (nonatomic, strong)		IBOutlet UITextField				* registerPsswordField;
-@property (nonatomic, strong)		IBOutlet UIButton				* registerButton;
-@property (nonatomic, strong)		IBOutlet UIView				* registerView;
-@property (nonatomic, strong)		IBOutlet UITextField				* retrieveEmailField;
-@property (nonatomic, strong)		IBOutlet UIView				* retrieveView;
-@property (nonatomic, strong)		IBOutlet UILabel				* loggedInasField;
-@property (nonatomic, strong)		IBOutlet UIButton				* logoutButton;
-@property (nonatomic, strong)		IBOutlet UISwitch				* saveLoginButton;
-@property (nonatomic, strong)		IBOutlet UIView				* loggedInView;
-@property (nonatomic)		int				 activePage;
-@property (nonatomic)		int				 activeFieldIndex;
-@property (nonatomic)		CGRect				 activeFieldFrame;
-@property (nonatomic, strong)		NSMutableArray				* activeFieldArray;
-@property (nonatomic, strong)		IBOutlet UITextField				* activeField;
-@property (nonatomic)		BOOL				 keyboardIsShown;
-@property (nonatomic)		CGPoint				 viewOffset;
-@property (nonatomic, strong)		IBOutlet UIButton				* activeFormSubmitButton;
-@property (nonatomic, strong)		IBOutlet UIActivityIndicatorView				* activeActivityView;
-@property (nonatomic, strong)		IBOutlet UILabel				* activeFormMessageLabel;
-@property (nonatomic)		UserAccountMode				 viewMode;
-@property (nonatomic, strong)		NSMutableArray				* formFieldArray;
+
+
+
 @property (nonatomic)		BOOL				 isModal;
 @property (nonatomic)		BOOL				 shouldAutoClose;
 
 
--(void)clearFields;
--(void)closeKeyboard;
--(void)saveLoginControlChanged:(id)sender;
-- (IBAction) logoutButtonSelected:(id)sender ;
-- (IBAction)registerButtonSelected:(id)sender;
-- (IBAction)loginButtonSelected:(id)sender;
--(IBAction)closeKeyboardFromUI:(id)sender;
-- (IBAction)retrievePasswordButtonSelected:(id)sender;
--(void)updateFormPage;
--(IBAction)didCancelButton:(id)sender;
 @end

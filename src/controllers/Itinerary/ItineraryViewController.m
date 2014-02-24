@@ -22,21 +22,27 @@
 #import "GradientView.h"
 #import <Twitter/Twitter.h>
 #import "GenericConstants.h"
+#import "MultiLabelLine.h"
+#import "LayoutBox.h"
+#import "RouteSegmentViewController.h"
+#import "CopyLabel.h"
+#import "BUIconActionSheet.h"
+#import <MessageUI/MessageUI.h>
 
 
-@interface ItineraryViewController()
+@interface ItineraryViewController()<UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 
-@property (nonatomic, strong) RouteVO		* route;
-@property (nonatomic, assign) NSInteger		 routeId;
-@property (nonatomic, strong) UITextView		* headerText;
-//@property (nonatomic, strong) RouteSegmentViewController		* routeSegmentViewcontroller;
-@property (nonatomic, weak) IBOutlet CopyLabel		* routeidLabel;
-@property (nonatomic, strong) MultiLabelLine		* readoutLineOne;
-@property (nonatomic, strong) MultiLabelLine		* readoutLineTwo;
-@property (nonatomic, strong) MultiLabelLine		* readoutLineThree;
-@property (nonatomic, weak) IBOutlet LayoutBox		* readoutContainer;
-@property (nonatomic, weak) IBOutlet UITableView		* tableView;
-@property (nonatomic, strong) NSMutableArray		* rowHeightsArray;
+@property (nonatomic, strong) RouteVO                      * route;
+@property (nonatomic, assign) NSInteger                    routeId;
+@property (nonatomic, strong) UITextView                   * headerText;
+//@property (nonatomic, strong) RouteSegmentViewController * routeSegmentViewcontroller;
+@property (nonatomic, weak) IBOutlet CopyLabel             * routeidLabel;
+@property (nonatomic, strong) MultiLabelLine               * readoutLineOne;
+@property (nonatomic, strong) MultiLabelLine               * readoutLineTwo;
+@property (nonatomic, strong) MultiLabelLine               * readoutLineThree;
+@property (nonatomic, weak) IBOutlet LayoutBox             * readoutContainer;
+@property (nonatomic, weak) IBOutlet UITableView           * tableView;
+@property (nonatomic, strong) NSMutableArray               * rowHeightsArray;
 
 @end
 
@@ -85,7 +91,7 @@
 	BetterLog(@"");
 	
 	self.route=[RouteManager sharedInstance].selectedRoute;
-	self.routeId = [_route.routeid integerValue];
+    self.routeId = [_route.routeid integerValue];
 	
 	
 	[self createRowHeightsArray];

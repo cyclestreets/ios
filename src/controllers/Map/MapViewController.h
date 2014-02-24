@@ -8,16 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
-#import "RouteVO.h"
-#import "RouteLineView.h"
-#import "MapLocationSearchViewController.h"
-#import "WayPointViewController.h"
-
-@class CycleStreets;
-@class RouteVO;
-@class Location;
-@class InitialLocation;
-
 
 enum  {
 	MapPlanningStateNoRoute, // no route loaded, no waypoints added
@@ -35,11 +25,7 @@ enum  {
 typedef int MapAlertType;
 
 
-@interface MapViewController : SuperViewController
-< CLLocationManagerDelegate, LocationReceiver, PointListProvider>{
-	
-	
-	Class popoverClass;
+@interface MapViewController : SuperViewController{
 	
 	
 }

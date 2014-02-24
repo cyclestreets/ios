@@ -7,18 +7,13 @@
 //
 
 #import "BUTableCellView.h"
-#import "POILocationVO.h"
 
+@class POILocationVO;
 
 @interface POICatLocationCellView : BUTableCellView{
 	
-	POILocationVO			*dataProvider;
-	
-	IBOutlet	UILabel				*nameLabel;
-	IBOutlet	UILabel				*urlLabel;
 	
 }
 @property (nonatomic, strong)	POILocationVO		*dataProvider;
-@property (nonatomic, strong)	IBOutlet UILabel		*nameLabel;
-@property (nonatomic, strong)	IBOutlet UILabel		*urlLabel;
+
 @end

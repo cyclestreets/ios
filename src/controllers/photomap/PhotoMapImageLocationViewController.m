@@ -10,9 +10,16 @@
 #import "AppConstants.h"
 #import "CopyLabel.h"
 #import "GenericConstants.h"
+#import "BUIconActionSheet.h"
+#import <MessageUI/MessageUI.h>
+#import <Twitter/Twitter.h>
+#import "ExpandedUILabel.h"
+#import "AsyncImageView.h"
+#import "LayoutBox.h"
+#import "PhotoMapVO.h"
 
 
-@interface PhotoMapImageLocationViewController()
+@interface PhotoMapImageLocationViewController()<AsyncImageViewDelegate,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic, strong)	UINavigationBar				*navigationBar;
 @property (nonatomic, strong)	UIScrollView				*scrollView;

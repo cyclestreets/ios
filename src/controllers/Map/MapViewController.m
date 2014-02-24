@@ -39,6 +39,12 @@
 #import "CSWaypointAnnotationView.h"
 #import "UIActionSheet+BlocksKit.h"
 
+#import "RouteVO.h"
+#import "RouteLineView.h"
+#import "MapLocationSearchViewController.h"
+#import "WayPointViewController.h"
+
+
 #import <Crashlytics/Crashlytics.h>
 
 
@@ -56,7 +62,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
-@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate, LocationReceiver, PointListProvider>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;

@@ -7,13 +7,17 @@
 //
 
 #import "MapLocationSearchCellView.h"
+#import "NamedPlace.h"
+
+@interface MapLocationSearchCellView()
+
+@property (nonatomic, weak) IBOutlet UILabel		* titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* nearLabel;
+@property (nonatomic, weak) IBOutlet UILabel		* distanceLabel;
+
+@end
 
 @implementation MapLocationSearchCellView
-@synthesize dataProvider;
-@synthesize titleLabel;
-@synthesize nearLabel;
-@synthesize distanceLabel;
-
 
 
 -(void)initialise{
@@ -24,9 +28,9 @@
 -(void)populate{
 	
 	
-	titleLabel.text=dataProvider.name;
-	nearLabel.text=dataProvider.near;
-	distanceLabel.text=dataProvider.distanceString;
+	_titleLabel.text=_dataProvider.name;
+	_nearLabel.text=_dataProvider.near;
+	_distanceLabel.text=_dataProvider.distanceString;
 	
 	
 }

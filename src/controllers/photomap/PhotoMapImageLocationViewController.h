@@ -7,17 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ExpandedUILabel.h"
-#import "AsyncImageView.h"
-#import "LayoutBox.h"
-#import "PhotoMapVO.h"
-#import "CopyLabel.h"
-#import "SuperViewController.h"
-#import "BUIconActionSheet.h"
-#import <MessageUI/MessageUI.h>
-#import <Twitter/Twitter.h>
 
-@interface PhotoMapImageLocationViewController : SuperViewController <AsyncImageViewDelegate,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>{
+#import "SuperViewController.h"
+
+@class PhotoMapVO;
+
+@interface PhotoMapImageLocationViewController : SuperViewController {
 
 }
 @property (nonatomic, strong)	PhotoMapVO		*dataProvider;
