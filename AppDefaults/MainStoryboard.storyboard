@@ -369,7 +369,8 @@
         <!--Settings View Controller - Settings-->
         <scene sceneID="Uzu-vb-VKq">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" title="Settings" id="sgu-Au-DE5" customClass="SettingsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" title="Settings" hidesBottomBarWhenPushed="YES" id="sgu-Au-DE5" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Settings" id="PFA-ZD-lRN"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="naE-aq-XSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -444,7 +445,7 @@
         <!--Account View Controller - Account-->
         <scene sceneID="OKK-jB-ux6">
             <objects>
-                <viewController storyboardIdentifier="AccountViewController" id="bnm-Se-Azs" customClass="AccountViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountViewController" hidesBottomBarWhenPushed="YES" id="bnm-Se-Azs" customClass="AccountViewController" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Account" id="VgU-RM-7AA"/>
                 </viewController>

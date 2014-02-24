@@ -203,6 +203,7 @@ Note: old mc=c  old c=f
 	NSMutableArray *newcatarr=[NSMutableArray array];
 	for(NSDictionary *dict in catarr){
 		PhotoCategoryVO *vo=[[PhotoCategoryVO alloc]init];
+		vo.categoryType=PhotoCategoryTypeCategory;
 		vo.name=[dict objectForKey:@"name"];
 		vo.tag=[dict objectForKey:@"tag"];
 		[newcatarr addObject:vo];
@@ -213,6 +214,7 @@ Note: old mc=c  old c=f
 	NSMutableArray *newfeaarr=[NSMutableArray array];
 	for(NSDictionary *dict in feaarr){
 		PhotoCategoryVO *vo=[[PhotoCategoryVO alloc]init];
+		vo.categoryType=PhotoCategoryTypeFeature;
 		vo.name=[dict objectForKey:@"name"];
 		vo.tag=[dict objectForKey:@"tag"];
 		[newfeaarr addObject:vo];

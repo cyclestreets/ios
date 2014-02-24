@@ -49,8 +49,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) NSMutableArray *viewArray;
 @property (nonatomic, strong) IBOutlet UIToolbar *modalToolBar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelViewButton;
-@property (nonatomic, strong) IBOutlet UIButton *nextButton;
-@property (nonatomic, strong) IBOutlet UIButton *prevButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *nextButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *prevButton;
 @property (nonatomic, strong) IBOutlet UILabel *pageTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *pageNumberLabel;
 @property (nonatomic, strong) IBOutlet UIScrollView *locationsc;
@@ -336,15 +336,22 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)createNavigationBarUI{
 	
-	if(_isModal!=YES){
+	if(_isModal==NO){
 		
 		self.navigationItem.backBarButtonItem.tintColor=UIColorFromRGB(0xA71D1D);
 		
-		self.navigationItem.title=@"";
+		self.prevButton=[[UIBarButtonItem alloc]initWithTitle:@"Prev" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToPreviousView:)];
+		self.nextButton=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToPreviousView:)];
+		
+		[self.navigationItem setRightBarButtonItems:@[_nextButton,_prevButton]];
 		
 		_pageScrollView.y=20;
 		_headerView.y=0;
 		_pageControl.y=0;
+		
+	}else{
+		
+		
 		
 	}
 	
@@ -1108,6 +1115,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		self.categoryPickerView=[[UIPickerView alloc]init];
 	
 	_categoryPickerView.backgroundColor=[UIColor whiteColor];
+	_categoryPickerView.tintColor=UIColorFromRGB(0xF76117);
 	
 	_categoryPickerView.dataSource = self;
     _categoryPickerView.delegate = self;

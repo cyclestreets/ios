@@ -11,6 +11,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
 		2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
+		28040C3818BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
+		28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		2807FCBA166693580028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		280E240F144D825D0021CDFA /* BUMoreTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */; };
@@ -749,6 +751,7 @@
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2801301315E636070092D509 /* Icon_currentroutecell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_currentroutecell@2x.png"; sourceTree = "<group>"; };
+		28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIPickerAccessoryView.xib; sourceTree = "<group>"; };
 		2807FCB81666934E0028D7DB /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		280E2406144D825D0021CDFA /* BUMoreTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUMoreTableDataSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUMoreTableDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1567,6 +1570,7 @@
 		280E9331140984F300C7AC75 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */,
 				280E9332140984F300C7AC75 /* InitialLocationView.xib */,
 				28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */,
 			);
@@ -2756,6 +2760,7 @@
 				28187ACF14FCFF4C00A38A17 /* UIButton_orangesmall_lo.png in Resources */,
 				28187AD014FCFF4C00A38A17 /* UIButton_red_hi.png in Resources */,
 				28187AD114FCFF4C00A38A17 /* UIButton_red_lo.png in Resources */,
+				28040C3818BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
 				28187AD214FCFF4C00A38A17 /* UIButton_save_hi.png in Resources */,
 				28187AD314FCFF4C00A38A17 /* UIButtonBarArrowLeft.png in Resources */,
 				28187AD414FCFF4D00A38A17 /* UIButtonBarArrowRight.png in Resources */,
@@ -2902,6 +2907,7 @@
 				2834365C15DD5DC300B00FD5 /* services_live.plist in Resources */,
 				289478C618AD70FB0066AA2E /* default.css in Resources */,
 				2834365D15DD5DC300B00FD5 /* POICatLocationCell.xib in Resources */,
+				28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
 				2834365E15DD5DC300B00FD5 /* POICategoryView.xib in Resources */,
 				28BC6AA518AE429400EF0436 /* SettingsView.xib in Resources */,
 				2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */,

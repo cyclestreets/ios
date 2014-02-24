@@ -70,7 +70,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		NSString *appName=[infoDict objectForKey:@"CFBundleName"];
 		self.userAgent=[NSString stringWithFormat:@"%@ iOS / %@",appName,version];
 		
-		[PhotoCategoryManager sharedInstance];
 	}
 	return self;
 }
