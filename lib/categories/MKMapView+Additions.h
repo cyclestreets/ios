@@ -44,4 +44,7 @@
  */
 -(void) zoomToFitAnnotationsWithoutUserLocation;
 
+
+-(double) getZoomLevel;
+
 @end

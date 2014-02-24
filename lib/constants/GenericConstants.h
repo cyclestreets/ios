@@ -78,6 +78,8 @@ extern NSString *const ERRORTYPE;
 extern NSString *const EVENTTYPE;
 extern NSString *const ID;
 extern NSString *const CONTROLLER;
+extern NSString *const DATAPROVIDER;
+extern NSString *const INDEX;
 
 // nav button consts
 extern NSString *const RIGHT;

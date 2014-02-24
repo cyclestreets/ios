@@ -517,6 +517,11 @@
 		287B8585144C4701006E3FCD /* UIButtonBarInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8581144C4701006E3FCD /* UIButtonBarInfo@2x.png */; };
 		287B8587144C470D006E3FCD /* UIIcon_minor_roads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8586144C470D006E3FCD /* UIIcon_minor_roads@2x.png */; };
 		287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ECBCE1344A28900B8A6AC /* SettingsVO.m */; };
+		288055D418BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D318BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m */; };
+		288055D518BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D318BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m */; };
+		288055DA18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D918BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m */; };
+		288055DB18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D918BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m */; };
+		288055DC18BB7B2100BABAB1 /* RouteSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* RouteSegmentViewController.m */; };
 		28851505166E0E20003536CA /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
 		28851506166E0E20003536CA /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
 		288663941521F7C60076BE5C /* RoutePlanMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288663931521F7C60076BE5C /* RoutePlanMenuView.xib */; };
@@ -1015,6 +1020,10 @@
 		287B8586144C470D006E3FCD /* UIIcon_minor_roads@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_minor_roads@2x.png"; sourceTree = "<group>"; };
 		287ECBCD1344A28900B8A6AC /* SettingsVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVO.h; sourceTree = "<group>"; };
 		287ECBCE1344A28900B8A6AC /* SettingsVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVO.m; sourceTree = "<group>"; };
+		288055D218BB7A0900BABAB1 /* CSRouteSegmentAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRouteSegmentAnnotation.h; sourceTree = "<group>"; };
+		288055D318BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRouteSegmentAnnotation.m; sourceTree = "<group>"; };
+		288055D818BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRouteSegmentAnnotationView.h; sourceTree = "<group>"; };
+		288055D918BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRouteSegmentAnnotationView.m; sourceTree = "<group>"; };
 		28851504166E0E20003536CA /* UIActivityCopy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityCopy.png; sourceTree = "<group>"; };
 		288663931521F7C60076BE5C /* RoutePlanMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoutePlanMenuView.xib; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1458,6 +1467,10 @@
 				280E91CF14097DE000C7AC75 /* ItineraryViewController.m */,
 				280E92FF1409805800C7AC75 /* RouteSegmentViewController.h */,
 				280E93001409805800C7AC75 /* RouteSegmentViewController.m */,
+				288055D218BB7A0900BABAB1 /* CSRouteSegmentAnnotation.h */,
+				288055D318BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m */,
+				288055D818BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.h */,
+				288055D918BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m */,
 			);
 			path = Itinerary;
 			sourceTree = "<group>";
@@ -3104,6 +3117,7 @@
 				28AD62AF131FB69D008527FC /* FormItemVO.m in Sources */,
 				28AD62B0131FB69D008527FC /* UserVO.m in Sources */,
 				28727AD518B52B8900D957FD /* UserLocationManager.m in Sources */,
+				288055DC18BB7B2100BABAB1 /* RouteSegmentViewController.m in Sources */,
 				28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
 				28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */,
@@ -3129,6 +3143,7 @@
 				28AD6432131FB6C8008527FC /* RemoteFileManager.m in Sources */,
 				28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */,
 				28AD6435131FB6C8008527FC /* BorderView.m in Sources */,
+				288055D418BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */,
 				28AD6437131FB6C8008527FC /* BUSegmentedControl.m in Sources */,
 				28AD6438131FB6C8008527FC /* CustomNavigtionBar.m in Sources */,
 				28AD6439131FB6C8008527FC /* ExpandedUILabel.m in Sources */,
@@ -3182,6 +3197,7 @@
 				280E9359140985CD00C7AC75 /* Route.m in Sources */,
 				280E937B1409861300C7AC75 /* ImageOperations.m in Sources */,
 				280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */,
+				288055DA18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
 				280E937D1409861300C7AC75 /* WBImage.m in Sources */,
 				280E240F144D825D0021CDFA /* BUMoreTableDataSource.m in Sources */,
 				280E2410144D825D0021CDFA /* BUTableCellView.m in Sources */,
@@ -3251,6 +3267,7 @@
 				283436C915DD5DC300B00FD5 /* AccountViewController.m in Sources */,
 				283436CA15DD5DC300B00FD5 /* FavouritesManager.m in Sources */,
 				283436CB15DD5DC300B00FD5 /* FormManager.m in Sources */,
+				288055DB18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
 				283436CC15DD5DC300B00FD5 /* SettingsManager.m in Sources */,
 				283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */,
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
@@ -3373,6 +3390,7 @@
 				2834374715DD5DC300B00FD5 /* POICatLocationCellView.m in Sources */,
 				2834374815DD5DC300B00FD5 /* GTMNSString+HTML.m in Sources */,
 				2834374915DD5DC300B00FD5 /* NSString+HTML.m in Sources */,
+				288055D518BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */,
 				2834374A15DD5DC300B00FD5 /* SegmentVO.m in Sources */,
 				2834374B15DD5DC300B00FD5 /* SavedRoutesManager.m in Sources */,
 				2834374C15DD5DC300B00FD5 /* RoutesViewController.m in Sources */,

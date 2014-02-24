@@ -12,7 +12,7 @@
 #import "SegmentVO.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
-//#import "RouteSegmentViewController.h"
+#import "RouteSegmentViewController.h"
 #import "ButtonUtilities.h"
 #import "AppConstants.h"
 #import "ExpandedUILabel.h"
@@ -28,6 +28,7 @@
 #import "CopyLabel.h"
 #import "BUIconActionSheet.h"
 #import <MessageUI/MessageUI.h>
+#import <A2StoryboardSegueContext.h>
 
 
 @interface ItineraryViewController()<UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
@@ -35,7 +36,7 @@
 @property (nonatomic, strong) RouteVO                      * route;
 @property (nonatomic, assign) NSInteger                    routeId;
 @property (nonatomic, strong) UITextView                   * headerText;
-//@property (nonatomic, strong) RouteSegmentViewController * routeSegmentViewcontroller;
+@property (nonatomic, strong) RouteSegmentViewController * routeSegmentViewcontroller;
 @property (nonatomic, weak) IBOutlet CopyLabel             * routeidLabel;
 @property (nonatomic, strong) MultiLabelLine               * readoutLineOne;
 @property (nonatomic, strong) MultiLabelLine               * readoutLineTwo;
@@ -143,7 +144,7 @@
 	
 	
 	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutlabel.font=[UIFont systemFontOfSize:12];
+	readoutlabel.font=[UIFont systemFontOfSize:11];
 	readoutlabel.textColor=UIColorFromRGB(0x666666);
 	readoutlabel.text=@"Select any segment to view the map & details for it.";
 	 
@@ -242,17 +243,10 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	/*
-	if(_routeSegmentViewcontroller==nil){
-		self.routeSegmentViewcontroller=[[RouteSegmentViewController alloc] initWithNibName:@"RouteSegmentView" bundle:nil];
-		_routeSegmentViewcontroller.hidesBottomBarWhenPushed=YES;
-	}
 	
-	[_routeSegmentViewcontroller setRoute:_route];
-	_routeSegmentViewcontroller.index=[indexPath row];
 	
-	[self.navigationController pushViewController:_routeSegmentViewcontroller animated:YES];
-	 */
+	[self performSegueWithIdentifier:@"RouteSegmentSegue" sender:self context:@{DATAPROVIDER: _route,INDEX:@([indexPath row])}];
+	 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -472,6 +466,24 @@
  * @description			GENERIC METHODS
  ***********************************************/
 //
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+	
+	if([segue.identifier isEqualToString:@"RouteSegmentSegue"]){
+		
+		RouteSegmentViewController *controller=segue.destinationViewController;
+		
+		NSDictionary *context=segue.context;
+		controller.route=context[DATAPROVIDER];
+		controller.index=[context[INDEX] integerValue];
+		
+	}
+	
+	
+}
+
+
 
 -(void)createRowHeightsArray{
 	

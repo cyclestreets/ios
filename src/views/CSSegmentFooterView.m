@@ -10,25 +10,34 @@
 #import "AppConstants.h"
 #import "SegmentVO.h"
 #import "ViewUtilities.h"
+#import "ExpandedUILabel.h"
+#import "MultiLabelLine.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSDictionary *segmentDirectionsIcons;
 
-@implementation CSSegmentFooterView
-@synthesize dataProvider;
-@synthesize hasCapitalizedTurn;
-@synthesize contentContainer;
-@synthesize roadNameLabel;
-@synthesize roadTypeLabel;
-@synthesize capitalizedTurnLabel;
-@synthesize readoutContainer;
-@synthesize timeLabel;
-@synthesize distLabel;
-@synthesize totalLabel;
-@synthesize segmentIndexLabel;
-@synthesize iconView;
-@synthesize roadTypeiconView;
 
+@interface CSSegmentFooterView()
+
+@property (nonatomic)	BOOL                            hasCapitalizedTurn;
+@property (nonatomic, strong)	LayoutBox               * contentContainer;
+@property (nonatomic, strong)	ExpandedUILabel         * roadNameLabel;
+@property (nonatomic, strong)	ExpandedUILabel         * roadTypeLabel;
+@property (nonatomic, strong)	ExpandedUILabel         * capitalizedTurnLabel;
+@property (nonatomic, strong)	LayoutBox               * readoutContainer;
+@property (nonatomic, strong)	MultiLabelLine          * timeLabel;
+@property (nonatomic, strong)	MultiLabelLine          * distLabel;
+@property (nonatomic, strong)	MultiLabelLine          * totalLabel;
+
+@property (nonatomic, strong)	 UIImageView    * iconView;
+@property (nonatomic, strong)	 UIImageView    * roadTypeiconView;
+
++ (NSString *)segmentDirectionIcon:(NSString *)segmentDirectionType;
+
+@end
+
+
+@implementation CSSegmentFooterView
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -64,128 +73,124 @@ static NSDictionary *segmentDirectionsIcons;
 	}
 	
 	UIView *iconcontainer=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 32, 69)];
-	iconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
-	[iconcontainer addSubview:iconView];
-	roadTypeiconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 37, 32, 32)];
-	[iconcontainer addSubview:roadTypeiconView];
+	self.iconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 32, 32)];
+	[iconcontainer addSubview:_iconView];
+	self.roadTypeiconView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 37, 32, 32)];
+	[iconcontainer addSubview:_roadTypeiconView];
 	[self addSubview:iconcontainer];
 	
 	// vertical lb for main text
-	contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 200, 10)];
-	contentContainer.fixedWidth=YES;
-	contentContainer.layoutMode=BUVerticalLayoutMode;
-	contentContainer.itemPadding=2;
+	_contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 200, 10)];
+	_contentContainer.fixedWidth=YES;
+	_contentContainer.layoutMode=BUVerticalLayoutMode;
+	_contentContainer.itemPadding=2;
 	
 	
-	roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-60, 16)];
-	roadNameLabel.fixedWidth=YES;
-	roadNameLabel.textAlignment=UITextAlignmentLeft;
-	roadNameLabel.multiline=YES;
-	roadNameLabel.textColor=UIColorFromRGB(0x404040);
-	roadNameLabel.font=[UIFont boldSystemFontOfSize:13];
-	roadNameLabel.hasShadow=YES;
-	[contentContainer addSubview:roadNameLabel];
+	_roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-60, 16)];
+	_roadNameLabel.fixedWidth=YES;
+	_roadNameLabel.textAlignment=UITextAlignmentLeft;
+	_roadNameLabel.multiline=YES;
+	_roadNameLabel.textColor=UIColorFromRGB(0x404040);
+	_roadNameLabel.font=[UIFont boldSystemFontOfSize:13];
+	[_contentContainer addSubview:_roadNameLabel];
 	
-	roadTypeLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-20, 16)];
-	roadTypeLabel.textAlignment=UITextAlignmentLeft;
-	roadTypeLabel.multiline=YES;
-	roadTypeLabel.textColor=UIColorFromRGB(0x7F7F7F);
-	roadTypeLabel.font=[UIFont systemFontOfSize:13];
-	roadTypeLabel.hasShadow=YES;
-	[contentContainer addSubview:roadTypeLabel];
+	_roadTypeLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-20, 16)];
+	_roadTypeLabel.textAlignment=UITextAlignmentLeft;
+	_roadTypeLabel.multiline=YES;
+	_roadTypeLabel.textColor=UIColorFromRGB(0x7F7F7F);
+	_roadTypeLabel.font=[UIFont systemFontOfSize:13];
+	[_contentContainer addSubview:_roadTypeLabel];
 	
 	// horizontal lb for reaout labels
-	readoutContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutContainer.itemPadding=7;
+	_readoutContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	_readoutContainer.itemPadding=7;
 	
 	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:12],[UIFont systemFontOfSize:12],nil];
 	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x542600),UIColorFromRGB(0x404040),nil];
 	
-	timeLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
-	timeLabel.itemPadding=2;
-	timeLabel.fonts=fonts;
-	timeLabel.colors=colors;
-	[readoutContainer addSubview:timeLabel];
+	_timeLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+	_timeLabel.itemPadding=2;
+	_timeLabel.fonts=fonts;
+	_timeLabel.colors=colors;
+	[_readoutContainer addSubview:_timeLabel];
 	
-	distLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
-	distLabel.itemPadding=2;
-	distLabel.fonts=fonts;
-	distLabel.colors=colors;
-	[readoutContainer addSubview:distLabel];
+	_distLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+	_distLabel.itemPadding=2;
+	_distLabel.fonts=fonts;
+	_distLabel.colors=colors;
+	[_readoutContainer addSubview:_distLabel];
 	
-	totalLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
-	totalLabel.itemPadding=2;
-	totalLabel.fonts=fonts;
-	totalLabel.colors=colors;
-	[readoutContainer addSubview:totalLabel];
+	_totalLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+	_totalLabel.itemPadding=2;
+	_totalLabel.fonts=fonts;
+	_totalLabel.colors=colors;
+	[_readoutContainer addSubview:_totalLabel];
 	
-	[contentContainer addSubview:readoutContainer];
-	[self addSubview:contentContainer];
+	[_contentContainer addSubview:_readoutContainer];
+	[self addSubview:_contentContainer];
 	
-	segmentIndexLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 16)];
-	segmentIndexLabel.textAlignment=UITextAlignmentRight;
-	segmentIndexLabel.textColor=UIColorFromRGB(0x92140B);
-	segmentIndexLabel.font=[UIFont boldSystemFontOfSize:13];
-	segmentIndexLabel.hasShadow=YES;
-	[self addSubview:segmentIndexLabel];
+	_segmentIndexLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 16)];
+	_segmentIndexLabel.textAlignment=UITextAlignmentRight;
+	_segmentIndexLabel.textColor=UIColorFromRGB(0x92140B);
+	_segmentIndexLabel.font=[UIFont boldSystemFontOfSize:13];
+	[self addSubview:_segmentIndexLabel];
 	
 }
 
 -(void)updateLayout{
 	
-	BOOL hasCapitalizedTurnEntry=[dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"]!=nil;
+	BOOL hasCapitalizedTurnEntry=[_dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"]!=nil;
 	
 	if(hasCapitalizedTurnEntry==NO){
-		if(hasCapitalizedTurn==YES){
-			[contentContainer removeSubviewAtIndex:0];
-			capitalizedTurnLabel=nil;
+		if(_hasCapitalizedTurn==YES){
+			[_contentContainer removeSubviewAtIndex:0];
+			_capitalizedTurnLabel=nil;
 		}
-		hasCapitalizedTurn=NO;
+		_hasCapitalizedTurn=NO;
 	}else {
 		
 		
-		if(hasCapitalizedTurn==NO){
-			capitalizedTurnLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 16)];
-			capitalizedTurnLabel.textAlignment=UITextAlignmentLeft;
-			capitalizedTurnLabel.multiline=YES;
-			capitalizedTurnLabel.textColor=UIColorFromRGB(0x31620E);
-			capitalizedTurnLabel.font=[UIFont boldSystemFontOfSize:13];
-			capitalizedTurnLabel.hasShadow=YES;
-			[contentContainer insertSubview:capitalizedTurnLabel atIndex:0];
+		if(_hasCapitalizedTurn==NO){
+			_capitalizedTurnLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 16)];
+			_capitalizedTurnLabel.textAlignment=UITextAlignmentLeft;
+			_capitalizedTurnLabel.multiline=YES;
+			_capitalizedTurnLabel.textColor=UIColorFromRGB(0x31620E);
+			_capitalizedTurnLabel.font=[UIFont boldSystemFontOfSize:13];
+			[_contentContainer insertSubview:_capitalizedTurnLabel atIndex:0];
 		}
-		capitalizedTurnLabel.text=[[dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"] uppercaseString];
+		_capitalizedTurnLabel.text=[[_dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"] uppercaseString];
 		
-		hasCapitalizedTurn=YES;
+		_hasCapitalizedTurn=YES;
 		 
 	}
 	
-	iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[[dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"] lowercaseString]]];
-	roadTypeiconView.image=[UIImage imageNamed:dataProvider.provisionIcon];
+	_iconView.image=[UIImage imageNamed:[CSSegmentFooterView segmentDirectionIcon:[[_dataProvider.infoStringDictionary objectForKey:@"capitalizedTurn"] lowercaseString]]];
+	_roadTypeiconView.image=[UIImage imageNamed:_dataProvider.provisionIcon];
 
 
-	roadNameLabel.text=[dataProvider.infoStringDictionary objectForKey:@"roadname"];
+	_roadNameLabel.text=[_dataProvider.infoStringDictionary objectForKey:@"roadname"];
 	
-	if(dataProvider.isWalkingSection==YES){
-		roadTypeLabel.text=@"Walking section";
-		roadTypeLabel.textColor=UIColorFromRGB(0xc20000);
+	if(_dataProvider.isWalkingSection==YES){
+		_roadTypeLabel.text=@"Walking section";
+		_roadTypeLabel.textColor=UIColorFromRGB(0xc20000);
 	}else{
-		roadTypeLabel.text=[dataProvider.infoStringDictionary objectForKey:@"provisionName"];
-		roadTypeLabel.textColor=UIColorFromRGB(0x7F7F7F);
+		_roadTypeLabel.text=[_dataProvider.infoStringDictionary objectForKey:@"provisionName"];
+		_roadTypeLabel.textColor=UIColorFromRGB(0x7F7F7F);
 	}
 	
 	
 	
 	
-	timeLabel.labels=[NSMutableArray arrayWithObjects:@"Time:",[dataProvider.infoStringDictionary objectForKey:@"hm"],nil];
-	[timeLabel drawUI];
-	distLabel.labels=[NSMutableArray arrayWithObjects:@"Dist:",[dataProvider.infoStringDictionary objectForKey:@"distance"],nil];
-	[distLabel drawUI];
-	totalLabel.labels=[NSMutableArray arrayWithObjects:@"Total:",[dataProvider.infoStringDictionary objectForKey:@"total"],nil];
-	[totalLabel drawUI];
-	[readoutContainer refresh];
+	_timeLabel.labels=[NSMutableArray arrayWithObjects:@"Time:",[_dataProvider.infoStringDictionary objectForKey:@"hm"],nil];
+	[_timeLabel drawUI];
+	_distLabel.labels=[NSMutableArray arrayWithObjects:@"Dist:",[_dataProvider.infoStringDictionary objectForKey:@"distance"],nil];
+	[_distLabel drawUI];
+	_totalLabel.labels=[NSMutableArray arrayWithObjects:@"Total:",[_dataProvider.infoStringDictionary objectForKey:@"total"],nil];
+	[_totalLabel drawUI];
+	[_readoutContainer refresh];
 	
 	
-	[contentContainer refresh];
+	[_contentContainer refresh];
 	[self refresh];
 }
 					
@@ -217,6 +222,13 @@ static NSDictionary *segmentDirectionsIcons;
 
 
 
+- (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer
+{
+	CGPoint point = [recognizer locationInView:self];
+	NSLog(@"Swipe down - start location: %f,%f", point.x, point.y);
+	
+	//[self didToggleInfo];
+}
 
 
 @end

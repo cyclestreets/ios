@@ -27,71 +27,60 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "RouteSegmentViewController.h"
 #import "SegmentVO.h"
-//#import "RMMarkerManager.h"
+#import "RouteLineView.h"
 #import "MapViewController.h"
 #import "AppDelegate.h"
 #import "CycleStreets.h"
-#import "QueryPhoto.h"
 #import "PhotoMapListVO.h"
 #import "PhotoMapVO.h"
 #import "PhotoMapImageLocationViewController.h"
-#import "Markers.h"
-#import "BlueCircleView.h"
 #import "CSPointVO.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
 #import "ExpandedUILabel.h"
 #import "GradientView.h"
 #import "CSSegmentFooterView.h"
-//#import "SVPulsingAnnotationView.h"
 #import "UserLocationManager.h"
 #import "UIView+Additions.h"
+#import <MapKit/MapKit.h>
+#import "MKMapView+Additions.h"
+#import "CSRouteSegmentAnnotation.h"
+#import "CSRouteSegmentAnnotationView.h"
+#import "PhotoManager.h"
+#import "CSPhotomapAnnotation.h"
+#import "CSPhotomapAnnotationView.h"
 
 
-static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
+@interface RouteSegmentViewController()< MKMapViewDelegate>
 
-
-
-@interface RouteSegmentViewController()
-
-@property (nonatomic, strong) CSSegmentFooterView							* footerView;
-@property (nonatomic) BOOL												footerIsHidden;
-@property (nonatomic) BOOL												photoIconsVisisble;
-@property (nonatomic, weak) IBOutlet RMMapView							* mapView;
-@property (nonatomic, weak) IBOutlet BlueCircleView						* blueCircleView;
-@property (nonatomic, strong) CLLocation								* lastLocation;
 @property (nonatomic, weak) IBOutlet RouteLineView						* lineView;
 @property (nonatomic, weak) IBOutlet UILabel							* attributionLabel;
-@property (nonatomic, strong) RMMapContents								* mapContents;
-@property (nonatomic, strong) NSMutableArray							* photoMarkers;
+@property (nonatomic, weak) IBOutlet MKMapView							* mapView;
 @property (nonatomic, weak) IBOutlet UIToolbar							* toolBar;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem					* locationButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem					* infoButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem					* photoIconButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem					* prevPointButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem					* nextPointButton;
-@property (nonatomic) NSInteger											photosIndex;
-@property (nonatomic, strong) RMMarker									* markerLocation;
-@property (nonatomic, strong) CLLocationManager							* locationManager;
-@property (nonatomic) BOOL												doingLocation;
-@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
-@property (nonatomic, strong) QueryPhoto								* queryPhoto;
+
+@property (nonatomic, strong) CSSegmentFooterView						* footerView;
+@property (nonatomic) BOOL												footerIsHidden;
+
 @property (nonatomic,strong)  SegmentVO									* currentSegment;
-@property (nonatomic, strong) SVPulsingAnnotationView					* gpsLocationView;
+
+@property (nonatomic, strong) CLLocation								* currentLocation;
+
+@property (nonatomic) BOOL												photoIconsVisisble;
+@property (nonatomic, strong) NSMutableArray							* photoMarkers;
+@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
+@property (nonatomic, assign) BOOL										photomapQuerying;
 
 
-//toolbar
-- (IBAction) backButtonSelected;
-- (IBAction) didLocation;
-- (IBAction) didPrev;
-- (IBAction) didNext;
-- (IBAction) didToggleInfo;
--(IBAction)photoIconButtonSelected;
+@property (nonatomic,strong)  CSRouteSegmentAnnotation						*startAnnotation;
+@property (nonatomic,strong)  CSRouteSegmentAnnotation						*endAnnotation;
 
-- (void)setSegmentIndex:(NSInteger)newIndex;
--(void)updateFooterPositions;
--(void)updateMapPhotoMarkers;
-- (void) clearPhotos;
+
+@property (nonatomic,strong)  UISwipeGestureRecognizer					*footerSwipeGesture;
 
 @end
 
@@ -101,16 +90,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 @implementation RouteSegmentViewController
 
 
+
+-(void)dealloc{
+	
+	self.mapView.delegate=nil;
+	
+}
+
+
+
+#pragma mark - Notifications
+
 -(void)listNotificationInterests{
 	
 	[self initialise];
 	
 	[notifications addObject:CSMAPSTYLECHANGED];
-	
-	[notifications addObject:GPSLOCATIONCOMPLETE];
-	[notifications addObject:GPSLOCATIONUPDATE];
-	[notifications addObject:GPSLOCATIONFAILED];
-	
+	[notifications addObject:RETREIVEROUTEPHOTOSRESPONSE];
 	
 	[super listNotificationInterests];
 	
@@ -124,95 +120,79 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 	//NSDictionary	*dict=[notification userInfo];
 	NSString		*name=notification.name;
 	
-	if([[UserLocationManager sharedInstance] hasSubscriber:LOCATIONSUBSCRIBERID]){
-		
-		if([name isEqualToString:GPSLOCATIONCOMPLETE]){
-			[self locationDidComplete:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONUPDATE]){
-			[self locationDidUpdate:notification];
-		}
-		
-		if([name isEqualToString:GPSLOCATIONFAILED]){
-			[self locationDidFail:notification];
-		}
-		
-	}
-	
-	
 	if([name isEqualToString:CSMAPSTYLECHANGED]){
 		[self didNotificationMapStyleChanged];
 	}
 	
+	if([name isEqualToString:RETREIVEROUTEPHOTOSRESPONSE]){
+		[self didRecievePhotoResponse:notification.object];
+	}
+	
 }
 
-#pragma mark notification response methods
+#pragma mark - notification responses
 
 
 - (void) didNotificationMapStyleChanged {
-	self.mapView.contents.tileSource = [MapViewController tileSource];
-	_attributionLabel.text = [MapViewController mapAttribution];
+	
+	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
+	for(id <MKOverlay> overlay in overlays){
+		if([overlay isKindOfClass:[MKTileOverlay class]] ){
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+			newoverlay.canReplaceMapContent = YES;
+			[_mapView removeOverlay:overlay];
+			[_mapView addOverlay:newoverlay];
+			break;
+		}
+	}
+	
+	
+	_attributionLabel.text = [CycleStreets mapAttribution];
 }
 
 
+#pragma mark - UI View
 
 - (void)viewDidLoad {
 	
     [super viewDidLoad];
 	
-	//handle taps etc.
-	[_mapView setDelegate:self];
 	
-	//Necessary to start route-me service
-	[RMMapView class];
+	_mapView.userTrackingMode=MKUserTrackingModeNone;
+	_mapView.showsUserLocation=YES;
 	
-	//get the configured map source.
-	self.mapContents=[[RMMapContents alloc] initWithView:_mapView tilesource:[MapViewController tileSource]];
+	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+	newoverlay.canReplaceMapContent = YES;
+	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	
 	
-	
-	[_lineView setPointListProvider:self];
+	//[_lineView setPointListProvider:self];
 	
 	//photo & info default to ON state
 	self.infoButton.style = UIBarButtonItemStyleDone;
 	self.photoIconButton.style = UIBarButtonItemStyleDone;
 	
-	_photoIconsVisisble=YES;
+	_photoIconsVisisble=NO;
+	self.photoMarkers=[NSMutableArray array];
 	
 	_footerIsHidden=NO;
 	self.footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
-	[_mapView addSubview:_footerView];
+	[self.view addSubview:_footerView];
 	
 	
 	self.attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000,0.2);
-	self.attributionLabel.text = [MapViewController mapAttribution];
+	self.attributionLabel.text = [CycleStreets mapAttribution];
+
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(didNotificationMapStyleChanged)
-												 name:@"NotificationMapStyleChanged"
-											   object:nil];
+	_toolBar.clipsToBounds=YES;
+	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithCustomView:_toolBar]];
 	
-	
-	UIBarButtonItem *backButton=[CustomNavigtionBar createBackButtonItemwithSelector:@selector(backButtonSelected) target:self];
-	NSMutableArray *toolbaritems=[_toolBar.items mutableCopy];
-	[toolbaritems insertObject:backButton atIndex:0];
-	_toolBar.items=toolbaritems;
+	self.footerSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:_footerView action:@selector(oneFingerSwipeDown:)];
+	_footerSwipeGesture.numberOfTouchesRequired=2;
 	
 	
-	self.gpsLocationView=[[SVPulsingAnnotationView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH,self.view.height)];
-	_gpsLocationView.annotationColor = [UIColor colorWithRed:0.678431 green:0 blue:0 alpha:1];
-	_gpsLocationView.visible=NO;
-	_gpsLocationView.alpha=0;
-	[_gpsLocationView setLocationProvider:self];
-	
-//	
-//	TBD:
-//	UISwipeGestureRecognizer *oneFingerSwipeUp =
-//	[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeDown:)];
-//	oneFingerSwipeUp.numberOfTouchesRequired=3;
-//	[oneFingerSwipeUp setDirection:UISwipeGestureRecognizerDirectionDown];
-//	[_footerView addGestureRecognizer:oneFingerSwipeUp];
 }
 
 - (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer
@@ -228,6 +208,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 
 -(void)viewWillAppear:(BOOL)animated{
 	
+	[_mapView setDelegate:self];
+	
 	[self setSegmentIndex:_index];
 	
 	[super viewWillAppear:animated];
@@ -236,27 +218,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 
 -(void)viewWillDisappear:(BOOL)animated{
 	
-	if (_doingLocation) {
-		[self stopDoingLocation];
-	}
+	if([self isMovingToParentViewController])
+		_mapView.delegate=nil;
 	
 	[super viewWillDisappear:animated];
 }
 
 
 
-
-
--(void)doubleTapOnMap:(RMMapView*)map At:(CGPoint)point{
-	BetterLog(@"");
-}
-
-- (NSArray *) pointList {
-	BetterLog(@"");
-	return [MapViewController pointList:self.route withView:_mapView];
-}
-
-
+#pragma mark - UI Update
 
 //helper method for setSegmentIndex
 - (void)setPrevNext {
@@ -279,76 +249,185 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 
 
 
-#pragma mark Photo Icons
+
+#pragma mark - Photo Markers
 //
 /***********************************************
- * @description			PHOTO ICON METHODS
+ * @description			Photo Marker Methods
  ***********************************************/
 //
 
-
-- (void) photoSuccess:(XMLRequest *)request results:(NSDictionary *)elements {
+- (void) requestPhotos {
 	
 	BetterLog(@"");
 	
-	//Check we're still looking for the same page of photos	
-	if (_index != _photosIndex) return;
+	if (_photomapQuerying) return;
+	_photomapQuerying = YES;
 	
+	CGRect bounds = _mapView.bounds;
+	CLLocationCoordinate2D nw = [_mapView convertPoint:bounds.origin toCoordinateFromView:_mapView];
+	CLLocationCoordinate2D se = [_mapView convertPoint:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height) toCoordinateFromView:_mapView ];
+	CLLocationCoordinate2D ne;
+	CLLocationCoordinate2D sw;
+	ne.latitude = nw.latitude;
+	ne.longitude = se.longitude;
+	sw.latitude = se.latitude;
+	sw.longitude = nw.longitude;
 	
-	[self clearPhotos];
+
+	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
 	
-	if (_photoMarkers == nil) {
-		self.photoMarkers = [[NSMutableArray alloc] initWithCapacity:10];
-	}
-	
-	PhotoMapListVO *photoList = [[PhotoMapListVO alloc] initWithElements:elements];
-	for (PhotoMapVO *photo in [photoList photos]) {
-		RMMarker *marker = [Markers markerPhoto];
-		marker.data = photo;
-		[_photoMarkers addObject:marker];
-		marker.hidden=!_photoIconsVisisble;
-		[[_mapView markerManager] addMarker:marker AtLatLong:[photo location]];
-	}
-	self.queryPhoto = nil;
 }
 
 
-- (void) clearPhotos {
-	//Clear out the previous list.
-	if (_photoMarkers != nil) {
-		//NSArray *oldMarkers = [photoMarkers copy];
-		for (RMMarker *oldMarker in _photoMarkers) {
-			[[_mapView markerManager] removeMarker:oldMarker];
-		}
-	}
-}
 
-- (void) photoFailureMessage:(NSString *)message {
-	//is it even worth bothering to alert ?
-	self.queryPhoto = nil;
-}
-
-//helper, could be shelled out as more general.
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
 	
+	
+	[[PhotoManager sharedInstance] retrievePhotosForRouteBounds:ne withEdge:sw];
+	
+}
+
+
+-(void)didRecievePhotoResponse:(NSDictionary*)dict{
+	
 	BetterLog(@"");
 	
-	self.photosIndex = _index;//we are looking for the photos associated with this index
-	self.queryPhoto = [[QueryPhoto alloc] initNorthEast:ne SouthWest:sw limit:4];
-	[_queryPhoto runWithTarget:self onSuccess:@selector(photoSuccess:results:) onFailure:@selector(photoFailureMessage:)];
+	_photomapQuerying = NO;
+	
+	NSString *status=[dict objectForKey:@"status"];
+	
+	if([status isEqualToString:SUCCESS]){
+		
+		[self displayPhotosOnMap];
+		
+	}
+	
 }
 
 
-- (void) tapOnMarker: (RMMarker*) marker onMap: (RMMapView*) map {
-	BetterLog(@"tapMarker");
-	PhotoMapImageLocationViewController *lv=[[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
 
-	if ([marker.data isKindOfClass: [PhotoMapVO class]]) {
+-(void)displayPhotosOnMap{
+	
+	BetterLog(@"");
+	
+	PhotoMapListVO *photoList=[PhotoManager sharedInstance].routePhotoList;
+	
+	[_mapView removeAnnotations:_photoMarkers];
+	
+	for (PhotoMapVO *photo in [photoList photos]) {
+		
+		CSPhotomapAnnotation *annotation=[[CSPhotomapAnnotation alloc]init];
+		annotation.coordinate=photo.locationCoords;
+		annotation.dataProvider=photo;
+		annotation.isUserPhoto=[[PhotoManager sharedInstance] isUserPhoto:photo];
+		
+		[_mapView addAnnotation:annotation];
+		[_photoMarkers addObject:annotation];
+		
+	}
+	
+	
+}
+
+
+
+
+#pragma mark - MKMap delegate
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+	
+	
+	double zoom=[_mapView getZoomLevel];
+	BetterLog(@"zoom=%g",zoom);
+	
+//	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
+//	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
+//		[self requestPhotos];
+	
+	
+}
+
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+    
+    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+        
+    }
+	// add routeline overlay here
+    
+    return nil;
+}
+
+
+
+#pragma mark - MKMap Annotations
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+	
+	if ([annotation isKindOfClass:[MKUserLocation class]])
+		return nil;
+	
+	
+	// if s/f annotation
+	if ([annotation isKindOfClass:[CSRouteSegmentAnnotation class]]){
+		
+		static NSString *reuseId = @"CSRouteSegmentAnnotation";
+		CSRouteSegmentAnnotationView *annotationView = (CSRouteSegmentAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+		
+		if (annotationView == nil){
+			annotationView = [[CSRouteSegmentAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+			annotationView.enabled=NO;
+			
+		} else {
+			annotationView.annotation = annotation;
+		}
+		
+		return annotationView;
+		
+		
+	}else if ([annotation isKindOfClass:[CSPhotomapAnnotation class]]){
+		
+		static NSString *reuseId = @"CSPhotomapAnnotation";
+		CSPhotomapAnnotationView *annotationView = (CSPhotomapAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+		
+		if (annotationView == nil){
+			annotationView = [[CSPhotomapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
+			annotationView.enabled=YES;
+			
+		} else {
+			annotationView.annotation = annotation;
+		}
+		
+		return annotationView;
+		
+	}
+	
+	return nil;
+	
+}
+
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+	
+	BetterLog(@"Fired");
+	
+	if ([view isKindOfClass:[CSPhotomapAnnotationView class]]){
+	
+		CSPhotomapAnnotation *annotation=(CSPhotomapAnnotation*)view.annotation;
+		
+		PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
+		PhotoMapVO *photoEntry = (PhotoMapVO *)annotation.dataProvider;
+		lv.dataProvider=photoEntry;
 		[self presentModalViewController:lv animated:YES];
-		PhotoMapVO *photoEntry = (PhotoMapVO *)marker.data;
-		[lv loadContentForEntry:photoEntry];
-	}	
+		
+	}
+	
 }
+
+
+
 
 //
 /***********************************************
@@ -364,6 +443,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 //
 
 - (void)setSegmentIndex:(NSInteger)newIndex {
+	
+	
 	self.index = newIndex;
 	self.currentSegment = [self.route segmentAtIndex:_index];
 	SegmentVO *nextSegment = nil;
@@ -394,26 +475,42 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 		sw.longitude = end.longitude;
 		ne.longitude = start.longitude;
 	}
-	[_mapView zoomWithLatLngBoundsNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw];
-	RMMarkerManager *markerManager = [_mapView markerManager];
-	NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:0];
-	//
-	for (RMMarker *marker in [markerManager markers]) {
-		[toRemove addObject:marker];
-	}
-	for (RMMarker *marker in toRemove) {
-		if (marker != self.markerLocation) {
-			[markerManager removeMarker:marker];
-		}
-	}
-	[markerManager addMarker:[Markers markerBeginArrow:[_currentSegment startBearing]] AtLatLong:start];
-	[markerManager addMarker:[Markers markerEndArrow:[nextSegment startBearing]] AtLatLong:end];
+	//MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
+	//[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+	
+	[self updateupdateRouteAnnotationsToStart:start end:end];
+	
+	[_mapView showAnnotations:@[_startAnnotation,_endAnnotation] animated:YES];
 	
 	[self setPrevNext];
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
 	
 	[_lineView setNeedsDisplay];
-	[_blueCircleView setNeedsDisplay];
+}
+
+
+
+-(void)updateupdateRouteAnnotationsToStart:(CLLocationCoordinate2D)start end:(CLLocationCoordinate2D)end{
+	
+	if(_startAnnotation==nil){
+		
+		self.startAnnotation=[[CSRouteSegmentAnnotation alloc]initWithCoordinate:start];
+		_startAnnotation.wayPointType=WayPointTypeStart;
+		[_mapView addAnnotation:_startAnnotation];
+	}
+	
+	if(_endAnnotation==nil){
+		
+		self.endAnnotation=[[CSRouteSegmentAnnotation alloc]initWithCoordinate:end];
+		_endAnnotation.wayPointType=WayPointTypeFinish;
+		[_mapView addAnnotation:_endAnnotation];
+		
+	}
+	
+	_startAnnotation.coordinate=start;
+	_endAnnotation.coordinate=end;
+	
+	
 }
 
 
@@ -441,114 +538,50 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 
 
 
-
-
- 
-//pop back to route overview
-- (IBAction) backButtonSelected {
-	[self.navigationController popViewControllerAnimated:YES];
-}
-
-
-
 #pragma mark - UserLocation notification methods
 
 
--(void)locationDidComplete:(NSNotification *)notification{
+-(void)locationDidComplete:(MKUserLocation *)userLocation{
 	
 	BetterLog(@"");
 	
-	self.lastLocation=notification.object;
+	self.currentLocation=userLocation.location;
 	
-	if (!self.markerLocation) {
-		//first location, construct the marker
-		self.markerLocation = [Markers markerWaypoint];
-		[[_mapView markerManager] addMarker:self.markerLocation AtLatLong: _lastLocation.coordinate];
-	}
-	[[_mapView markerManager] moveMarker:self.markerLocation AtLatLon: _lastLocation.coordinate];
-	
-	
-	BetterLog(@"ll=%@",_lastLocation);
-	
-	// zooms map to show bounding box for location & segment point
-	[_mapView zoomWithLatLngBoundsNorthEast:[_currentSegment maxNorthEastForLocation:_lastLocation] SouthWest:[_currentSegment maxSouthWestForLocation:_lastLocation]];
+	[_mapView showAnnotations:@[userLocation,_startAnnotation,_endAnnotation] animated:YES];
+		
+	[_lineView setNeedsDisplay];
 	
 	if(!_footerIsHidden)
 		[self didToggleInfo];
 	
 	[_lineView setNeedsDisplay];
 	
-	[self displayLocationIndicator:YES];
-	
-	[self removeLocationIndicatorAfterDelay];
-	
 }
 
--(void)locationDidUpdate:(NSNotification *)notification{
+- (MKMapRect) mapRectThatFitsBoundsSW:(CLLocationCoordinate2D)sw NE:(CLLocationCoordinate2D)ne{
+    MKMapPoint pSW = MKMapPointForCoordinate(sw);
+    MKMapPoint pNE = MKMapPointForCoordinate(ne);
 	
-	BetterLog(@"");
+    double antimeridianOveflow =
+	(ne.longitude > sw.longitude) ? 0 : MKMapSizeWorld.width;
 	
-	self.lastLocation=notification.object;
-	[_lineView setNeedsDisplay];
-	
-	[self displayLocationIndicator:YES];
-}
-
--(void)locationDidFail:(NSNotification *)notification{
-	
-	[self resetLocationOverlay];
-	
+    return MKMapRectMake(pSW.x, pNE.y,
+						 (pNE.x - pSW.x) + antimeridianOveflow,
+						 (pSW.y - pNE.y));
 }
 
 
--(void)removeLocationIndicatorAfterDelay{
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
-	[self performSelector:@selector(resetLocationOverlay) withObject:nil afterDelay:6];
+	[self locationDidComplete:userLocation];
 	
 }
 
-
--(void)resetLocationOverlay{
-	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetLocationOverlay) object:nil];
-	[self displayLocationIndicator:NO];
-}
-
--(void)displayLocationIndicator:(BOOL)display{
-	
-	if(_gpsLocationView.superview==nil && display==YES)
-		[self.mapView insertSubview:_gpsLocationView belowSubview:_footerView];
-	
-	
-	int alpha=display==YES ? 1 :0;
-	
-	if(_gpsLocationView.superview!=nil)
-		[_gpsLocationView updateToLocation];
-	
-	if(display==YES && _gpsLocationView.alpha==1)
-		return;
-	
-	if(display==NO && _gpsLocationView.alpha==0)
-		return;
-	
-	if(display==YES){
-		_gpsLocationView.visible=display;
-		_gpsLocationView.alpha=0;
-	}
-	
-	
-	[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-		_gpsLocationView.alpha=alpha;
-	} completion:^(BOOL finished) {
-		if(_gpsLocationView.alpha==0){
-			_gpsLocationView.visible=display;
-			[_gpsLocationView removeFromSuperview];
-		}
-		
-	}];
-	
+- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView{
 	
 }
+
 
 
 //------------------------------------------------------------------------------------
@@ -560,123 +593,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
  ***********************************************/
 //
 
--(void)startLocating{
+-(IBAction)startLocating{
 	
-	BetterLog(@"");
-	
-	[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-	
-	
-	[self resetLocationOverlay];
+	_mapView.showsUserLocation=NO;
+	_mapView.showsUserLocation=YES;
 	
 	
 }
 
--(void)stopLocating{
-	
-	BetterLog(@"");
-	
-	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-	
-	
-	[self removeLocationIndicatorAfterDelay];
-	
-}
 
 
-
-
-// all the things that need fixed if we have asked (or been forced) to stop doing location.
-- (void)stopDoingLocation {
-	
-	[self stopLocating];
-	
-//	BetterLog(@"");
-//	
-//	_doingLocation = NO;
-//	_locationButton.style = UIBarButtonItemStyleBordered;
-//	[_locationManager stopUpdatingLocation];
-//	[[_mapView markerManager] removeMarker:self.markerLocation];
-//	self.markerLocation=nil;
-//	_blueCircleView.hidden = YES;
-}
-
-// all the things that need fixed if we have asked (or been forced) to start doing location.
-- (void)startDoingLocation {
-	
-	[self startLocating];
-	
-//	if([CLLocationManager locationServicesEnabled]==YES){
-//	
-//		_doingLocation = YES;
-//		_locationButton.style = UIBarButtonItemStyleDone;
-//		_locationManager.delegate = self;
-//		[_locationManager startUpdatingLocation];
-//		_blueCircleView.hidden = NO;
-//	}else {
-//		UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-//														   message:@"Location services for CycleStreets are off, please enable in Settings > General > Location Services to use location based features."
-//														  delegate:self
-//												 cancelButtonTitle:@"OK"
-//												 otherButtonTitles:nil];
-//		[gpsAlert show];
-//	}
-
-}
-
-- (IBAction) didLocation {
-	//turn on/off use of location to automatically move from one map position to the next...
-	BetterLog(@"location");
-	_locationManager.delegate = self;
-	if (!_doingLocation) {
-		[self startDoingLocation];
-	} else {
-		[self stopDoingLocation];
-	}
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation
-{
-	
-	BetterLog(@"");
-	
-	
-	if (!self.markerLocation) {
-		//first location, construct the marker
-		self.markerLocation = [Markers markerWaypoint];
-		[[_mapView markerManager] addMarker:self.markerLocation AtLatLong: newLocation.coordinate];
-	}
-	[[_mapView markerManager] moveMarker:self.markerLocation AtLatLon: newLocation.coordinate];
-	
-	self.lastLocation = newLocation;
-	
-	BetterLog(@"ll=%@",_lastLocation);
-	
-	// zooms map to show bounding box for location & segment point
-	//TODO: this should now compare current segment start loaction and gps location not overall route
-	[_mapView zoomWithLatLngBoundsNorthEast:[_currentSegment maxNorthEastForLocation:_lastLocation] SouthWest:[_currentSegment maxSouthWestForLocation:_lastLocation]];
-	
-	[_lineView setNeedsDisplay];
-	[_blueCircleView setNeedsDisplay];
-	_blueCircleView.hidden=NO;
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error
-{
-	//TODO alert: What exactly does the location finding do in this view?
-	[self stopDoingLocation];
-	
-	UIAlertView *gpsAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
-													   message:@"Unable to retrieve location. Location services for CycleStreets may be off, please enable in Settings > General > Location Services to use location based features."
-													  delegate:nil
-											 cancelButtonTitle:@"OK"
-											 otherButtonTitles:nil];
-	[gpsAlert show];
-}
-
+#pragma mark - User Events
 
 //
 /***********************************************
@@ -750,9 +677,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 	
 	_photoIconsVisisble=!_photoIconsVisisble;
 	
-	for (RMMarker *marker in _photoMarkers) {
-		marker.hidden=!_photoIconsVisisble;
-	}
+//	for (RMMarker *marker in _photoMarkers) {
+//		marker.hidden=!_photoIconsVisisble;
+//	}
 	
 	if(_photoIconsVisisble==YES){
 		self.photoIconButton.style=UIBarButtonItemStyleDone;
@@ -761,76 +688,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteSegmentView";
 	}
 
 	
+	[self requestPhotos];
 }
 
 
-#pragma mark Location provider
-
-- (float)getX {
-	CGPoint p = [_mapView.contents latLongToPixel:_lastLocation.coordinate];
-	return p.x;
-}
-
-- (float)getY {
-	CGPoint p = [_mapView.contents latLongToPixel:_lastLocation.coordinate];
-	return p.y;
-}
-
-- (float)getRadius {
-	
-	double metresPerPixel = [_mapView.contents metersPerPixel];
-	float locationRadius=(_lastLocation.horizontalAccuracy / metresPerPixel);
-	
-	return MAX(locationRadius, 40.0f);
-}
-
-#pragma mark mapView delegate
-
-- (void) afterMapMove: (RMMapView*) map {
-	[_lineView setNeedsDisplay];
-	[_blueCircleView setNeedsDisplay];
-}
 
 
-- (void) afterMapZoom: (RMMapView*) map byFactor: (float) zoomFactor near:(CGPoint) center {
-	[_lineView setNeedsDisplay];
-	[_blueCircleView setNeedsDisplay];
-}
 
 
--(void)updateMapPhotoMarkers{
-	
-	CGRect bounds = _mapView.contents.screenBounds;
-
-	CLLocationCoordinate2D nw = [_mapView pixelToLatLong:bounds.origin];
-	CLLocationCoordinate2D se = [_mapView pixelToLatLong:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height)];
-	CLLocationCoordinate2D ne;
-	CLLocationCoordinate2D sw;
-	ne.latitude = nw.latitude;
-	ne.longitude = se.longitude;
-	sw.latitude = se.latitude;
-	sw.longitude = nw.longitude;
-	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
-}
-
-
-#pragma mark hygiene
+#pragma mark - Generic
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 	
-	if (self.isViewLoaded && !self.view.window) {
-        self.view = nil;
-    }
-	[self nullify];
-}
-
-- (void)nullify {
-	self.footerView=nil;
-	self.markerLocation = nil;
-	self.locationManager = nil;
-	self.locationView = nil;
-	self.queryPhoto = nil;
 }
 
 

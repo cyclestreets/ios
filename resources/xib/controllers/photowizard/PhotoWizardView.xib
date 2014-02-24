@@ -71,7 +71,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Upload" lineBreakMode="tailTruncation" minimumFontSize="10" id="129">
-                            <rect key="frame" x="10" y="0.0" width="145" height="22"/>
+                            <rect key="frame" x="10" y="0.0" width="145" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,7 +79,7 @@
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 of 7" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="131">
-                            <rect key="frame" x="243" y="0.0" width="65" height="22"/>
+                            <rect key="frame" x="243" y="0.0" width="65" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,7 +93,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
                         <barButtonItem title="Cancel" id="179">
-                            <color key="tintColor" red="1" green="0.31764705879999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.98431378599999997" green="0.57633872129999997" blue="0.2929361929" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
                                 <action selector="closeWindowButtonSelected:" destination="-1" id="180"/>
                             </connections>
@@ -355,6 +355,7 @@ Once uploaded this data will appear in the Report section for the chosen locatio
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="U4I-Pg-Cke">
                     <rect key="frame" x="20" y="25" width="280" height="183"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                 </mapView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="210">
                     <rect key="frame" x="20" y="25" width="280" height="183"/>

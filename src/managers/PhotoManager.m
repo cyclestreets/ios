@@ -24,8 +24,6 @@
 -(void)uploadPhotoForUserResponse:(ValidationVO*)validation;
 
 
--(void)retrievePhotosForLocationResponse:(ValidationVO*)validation;
-
 -(void)stopRetreivingPhotos;
 
 @end
@@ -54,6 +52,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	[notifications addObject:REMOTEFILEFAILED];
 	
 	[self addRequestID:RETREIVELOCATIONPHOTOS];
+	[self addRequestID:RETREIVEROUTEPHOTOS];
 	[self addRequestID:UPLOADUSERPHOTO];
 	
 	
@@ -81,6 +80,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 			}else if ([response.dataid isEqualToString:UPLOADUSERPHOTO]) {
 				
 				[self UserPhotoUploadResponse:response.dataProvider];
+				
+			}else if ([response.dataid isEqualToString:RETREIVEROUTEPHOTOS]) {
+				
+				[self retrievePhotosForRouteResponse:response.dataProvider];
 				
 			}
 			
@@ -113,12 +116,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 #pragma Photo Downloading
 
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw{
-    [self retrievePhotosForLocationBounds:ne withEdge:sw withLimit:25];
+    [self retrievePhotosForLocationBounds:ne withEdge:sw withLimit:25 fordataID:RETREIVELOCATIONPHOTOS];
+}
+-(void)retrievePhotosForRouteBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw{
+    [self retrievePhotosForLocationBounds:ne withEdge:sw withLimit:25 fordataID:RETREIVEROUTEPHOTOS];
 }
 
 
-
--(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit{
+-(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit fordataID:(NSString*)dataid{
 	
 	BetterLog(@"");
 	
@@ -148,7 +153,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                      nil];
     
     NetRequest *request=[[NetRequest alloc]init];
-    request.dataid=RETREIVELOCATIONPHOTOS;
+    request.dataid=dataid;
     request.requestid=ZERO;
     request.parameters=parameters;
     request.revisonId=0;
@@ -194,6 +199,42 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
     
     
 }
+
+
+
+-(void)retrievePhotosForRouteResponse:(ValidationVO*)validation{
+	
+	BetterLog(@"");
+	
+	[[HudManager sharedInstance]removeHUD:NO];
+	showingHUD=NO;
+	
+	
+    switch (validation.validationStatus) {
+            
+        case ValidationRetrievePhotosSuccess:
+		{
+			self.routePhotoList=[validation.responseDict objectForKey:RETREIVEROUTEPHOTOS];
+			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEROUTEPHOTOSRESPONSE object:dict userInfo:nil];
+		}
+			break;
+			
+		case ValidationRetrievePhotosFailed:
+		{
+			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEROUTEPHOTOSRESPONSE object:dict userInfo:nil];
+			
+		}
+			break;
+        default:
+			
+			break;
+    }
+    
+    
+}
+
 
 -(void)assesRetrievedComplete{
 	

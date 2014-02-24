@@ -195,6 +195,7 @@
 -(IBAction)didSelectFetchRouteButton:(NSString*)type{
 	
 	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
+	
     
 }
 
@@ -208,9 +209,15 @@
                 
 			case kTextEntryAlertTag:
 			{
-				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
-				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]) {
-					
+				UITextField *alertInputField=nil;
+				// os7 cant get view tag for field
+				if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+					alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+				}else{
+					alertInputField=(UITextField*)[alertView textFieldAtIndex:0];
+				}
+				
+				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]){
 					[[RouteManager sharedInstance] loadRouteForRouteId:alertInputField.text];
 					
 					[_routeTypeControl setSelectedSegmentIndex:1];

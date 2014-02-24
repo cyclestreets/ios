@@ -95,7 +95,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	[self initialise];
     
     [notifications addObject:MAPSTYLECHANGED];
-	[notifications addObject:RETREIVELOCATIONPHOTOSRESPONSE];
+	[notifications addObject:RETREIVEROUTEPHOTOSRESPONSE];
 	
 	
 	[super listNotificationInterests];
@@ -114,7 +114,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
         [self didNotificationMapStyleChanged];
     }
 	
-	if([name isEqualToString:RETREIVELOCATIONPHOTOSRESPONSE]){
+	if([name isEqualToString:RETREIVEROUTEPHOTOSRESPONSE]){
         [self didRecievePhotoResponse:notification.object];
     }
 	
@@ -130,6 +130,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		if([overlay isKindOfClass:[MKTileOverlay class]] ){
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 			newoverlay.canReplaceMapContent = YES;
+			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 			[_mapView removeOverlay:overlay];
 			[_mapView addOverlay:newoverlay];
 			break;
@@ -251,6 +252,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 	newoverlay.canReplaceMapContent = YES;
+	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;

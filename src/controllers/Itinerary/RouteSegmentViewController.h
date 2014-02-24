@@ -21,23 +21,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  RouteSegmentViewController.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 12/03/2010.
 //
 
 #import <UIKit/UIKit.h>
-#import "RouteVO.h"
-#import "RMMapView.h"
-#import "BlueCircleView.h"
-#import "RouteLineView.h"
 #import "SuperViewController.h"
 
-//#import "SVPulsingAnnotationView.h"
+@class RouteVO;
 
-@interface RouteSegmentViewController : SuperViewController <CLLocationManagerDelegate, RMMapViewDelegate, LocationProvider, PointListProvider> {
+
+@interface RouteSegmentViewController : SuperViewController  {
 	
 }
 @property (nonatomic, strong) RouteVO		* route;
-@property (nonatomic) NSInteger		 index;
+@property (nonatomic) NSInteger				index;
 
 
 

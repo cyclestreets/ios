@@ -31,8 +31,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "AppConstants.h"
 #import "GenericConstants.h"
 
-static NSInteger MAX_ZOOM_LOCATION = 16;
-static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
 
 @implementation CycleStreets

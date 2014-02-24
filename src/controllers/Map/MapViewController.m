@@ -194,6 +194,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		if([overlay isKindOfClass:[MKTileOverlay class]] ){
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 			newoverlay.canReplaceMapContent = YES;
+			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 			[_mapView removeOverlay:overlay];
 			[_mapView addOverlay:newoverlay];
 			break;
@@ -242,6 +243,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     
     MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 	newoverlay.canReplaceMapContent = YES;
+	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;

@@ -91,6 +91,7 @@
 					   [NSValue valueWithPointer:@selector(RegisterXMLParser:)],REGISTER,
 					   [NSValue valueWithPointer:@selector(RetrievePasswordXMLParser:)],PASSWORDRETRIEVAL,
                        [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVELOCATIONPHOTOS,
+					   [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVEROUTEPHOTOS,
                        [NSValue valueWithPointer:@selector(PhotoUploadXMLParser:)],UPLOADUSERPHOTO,
 					   [NSValue valueWithPointer:@selector(POIListingXMLParser:)],POILISTING,
 					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,

@@ -89,6 +89,8 @@ NSString *const ERRORTYPE=@"ERRORTYPE";
 NSString *const EVENTTYPE=@"EVENTTYPE";
 NSString *const ID=@"id";
 NSString *const CONTROLLER=@"controller";
+NSString *const DATAPROVIDER=@"dataProvider";
+NSString *const INDEX=@"index";
 
 // nav button consts
 NSString *const RIGHT=@"RIGHT";

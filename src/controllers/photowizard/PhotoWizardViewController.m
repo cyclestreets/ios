@@ -34,7 +34,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
-@interface PhotoWizardViewController()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
+@interface PhotoWizardViewController()<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate,MKMapViewDelegate>
 
 
 
@@ -72,7 +72,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 @property (nonatomic, strong) IBOutlet MKMapView *locationMapView;
-@property (nonatomic, strong) RMMarker *locationMapMarker;
 @property (nonatomic, strong) IBOutlet UILabel *locationLabel;
 @property (nonatomic, strong) IBOutlet UIButton *locationUpdateButton;
 @property (nonatomic, strong) IBOutlet UIButton *locationResetButton;
@@ -345,7 +344,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		self.navigationItem.backBarButtonItem.tintColor=UIColorFromRGB(0xA71D1D);
 		
 		self.prevButton=[[UIBarButtonItem alloc]initWithTitle:@"Prev" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToPreviousView:)];
-		self.nextButton=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToPreviousView:)];
+		self.nextButton=[[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(navigateToNextView:)];
 		
 		[self.navigationItem setRightBarButtonItems:@[_nextButton,_prevButton]];
 		
@@ -938,6 +937,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[_locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	_locationMapView.userInteractionEnabled=NO;
+	_locationMapView.delegate=self;
 	
 	 self.userLocationAnnotation=[[CSPhotomapAnnotation alloc]init];
 	 _userLocationAnnotation.coordinate=CLLocationCoordinate2DMake(0,0);
@@ -979,7 +979,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 				[self displayDefaultLocation];
 				
 			}else {
-				[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+				_locationMapView.showsUserLocation=YES;
 			}
 			
 		}
@@ -1017,6 +1017,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	if(_uploadImage.location!=nil){
 		[self updateLocationMapViewForLocation:_uploadImage.location];
 	}
+}
+
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+	
+	[self UserDidUpdatePhotoLocation:userLocation.location];
 }
 
 //
@@ -1057,7 +1063,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	_userLocationAnnotation.coordinate=coordinate;
 	
-	[_locationMapView setCenterCoordinate:coordinate zoomLevel:16 animated:YES];
+	[_locationMapView setCenterCoordinate:coordinate zoomLevel:16 animated:NO];
 		
 }
 
@@ -1065,7 +1071,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	_locationLabel.text=[NSString stringWithFormat:@"%f, %f",location.coordinate.latitude,location.coordinate.longitude];
 	
-	[_locationMapView setCenterCoordinate:location.coordinate zoomLevel:14 animated:YES];
+	[_locationMapView setCenterCoordinate:location.coordinate zoomLevel:14 animated:NO];
 	
 	_userLocationAnnotation.coordinate=location.coordinate;
 	

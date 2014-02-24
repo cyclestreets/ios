@@ -84,7 +84,7 @@
 				   animated:(BOOL)animated
 {
     // clamp large numbers to 28
-    zoomLevel = MIN(zoomLevel, 28);
+    zoomLevel = MIN(zoomLevel, 20);
     
     // use the zoom level to compute the region
     MKCoordinateSpan span = [self coordinateSpanWithMapView:self centerCoordinate:centerCoordinate andZoomLevel:zoomLevel];
@@ -197,6 +197,10 @@
 	[self selectAnnotation:annotation animated:YES];
 }
 
+
+-(double) getZoomLevel {
+    return log2(360 * ((self.frame.size.width/256) / self.region.span.longitudeDelta));
+}
 
 
 @end
