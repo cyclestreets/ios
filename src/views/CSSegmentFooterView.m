@@ -12,6 +12,7 @@
 #import "ViewUtilities.h"
 #import "ExpandedUILabel.h"
 #import "MultiLabelLine.h"
+#import "GlobalUtilities.h"
 #import <QuartzCore/QuartzCore.h>
 
 static NSDictionary *segmentDirectionsIcons;
@@ -31,6 +32,9 @@ static NSDictionary *segmentDirectionsIcons;
 
 @property (nonatomic, strong)	 UIImageView    * iconView;
 @property (nonatomic, strong)	 UIImageView    * roadTypeiconView;
+
+@property (nonatomic,strong)  UISwipeGestureRecognizer					*footerSwipeGesture;
+
 
 + (NSString *)segmentDirectionIcon:(NSString *)segmentDirectionType;
 
@@ -135,6 +139,8 @@ static NSDictionary *segmentDirectionsIcons;
 	_segmentIndexLabel.font=[UIFont boldSystemFontOfSize:13];
 	[self addSubview:_segmentIndexLabel];
 	
+	
+	
 }
 
 -(void)updateLayout{
@@ -220,15 +226,6 @@ static NSDictionary *segmentDirectionsIcons;
 	return iconType;
 }
 
-
-
-- (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer
-{
-	CGPoint point = [recognizer locationInView:self];
-	NSLog(@"Swipe down - start location: %f,%f", point.x, point.y);
-	
-	//[self didToggleInfo];
-}
 
 
 @end

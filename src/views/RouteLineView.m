@@ -79,7 +79,7 @@ static NSInteger MAX_DIST = 10;
 		p.x = p1.x + i * (p2.x - p1.x) / num;
 		p.y = p1.y + i * (p2.y - p1.y) / num;
 		CSPointVO *csPoint = [[CSPointVO alloc] init];
-		csPoint.p = p;
+		csPoint.point = p;
 		[results addObject:csPoint];
 	}
 	return results;
@@ -91,7 +91,7 @@ static NSInteger MAX_DIST = 10;
 	CSPointVO *prev = nil;
 	for (CSPointVO *point in points) {
 		if (prev != nil) {
-			NSArray *between = [self interpolateFrom:prev.p to:point.p];
+			NSArray *between = [self interpolateFrom:prev.point to:point.point];
 			[result addObjectsFromArray:between];
 		}
 		[result addObject:point];
@@ -135,8 +135,8 @@ static NSInteger MAX_DIST = 10;
             
             
             
-            CGContextMoveToPoint(ctx, prevpoint.p.x, prevpoint.p.y);
-            CGContextAddLineToPoint(ctx, point.p.x, point.p.y);
+            CGContextMoveToPoint(ctx, prevpoint.point.x, prevpoint.point.y);
+            CGContextAddLineToPoint(ctx, point.point.x, point.point.y);
             
             CGContextStrokePath(ctx);
             

@@ -20,7 +20,6 @@
 #import "UserAccount.h"
 #import "PhotoManager.h"
 #import "AppDelegate.h"
-#import "Markers.h"
 #import <ImageIO/ImageIO.h>
 #import <MapKit/MapKit.h>
 #import "CSPhotomapAnnotation.h"

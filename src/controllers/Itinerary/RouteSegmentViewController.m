@@ -130,6 +130,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
+
 #pragma mark - notification responses
 
 
@@ -189,16 +190,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_toolBar.clipsToBounds=YES;
 	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc]initWithCustomView:_toolBar]];
 	
-	self.footerSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:_footerView action:@selector(oneFingerSwipeDown:)];
-	_footerSwipeGesture.numberOfTouchesRequired=2;
-	
+	self.footerSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(didcloseFooterGesture:)];
+	_footerSwipeGesture.direction=UISwipeGestureRecognizerDirectionDown;
+	[_footerView addGestureRecognizer:_footerSwipeGesture];
 	
 }
 
-- (void)oneFingerSwipeDown:(UISwipeGestureRecognizer *)recognizer
-{
-	CGPoint point = [recognizer locationInView:[self view]];
-	NSLog(@"Swipe down - start location: %f,%f", point.x, point.y);
+- (void)didcloseFooterGesture:(UISwipeGestureRecognizer *)recognizer{
 	
 	[self didToggleInfo];
 }
@@ -208,9 +206,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-	[_mapView setDelegate:self];
+	if(_mapView.delegate==nil)
+		[_mapView setDelegate:self];
 	
-	[self setSegmentIndex:_index];
+	if([self isMovingToParentViewController])
+		[self setSegmentIndex:_index];
 	
 	[super viewWillAppear:animated];
 }
@@ -218,7 +218,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)viewWillDisappear:(BOOL)animated{
 	
-	if([self isMovingToParentViewController])
+	if([self isMovingFromParentViewController])
 		_mapView.delegate=nil;
 	
 	[super viewWillDisappear:animated];
@@ -228,13 +228,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #pragma mark - UI Update
 
-//helper method for setSegmentIndex
-- (void)setPrevNext {
-	//set the prev/next/of
+
+- (void)updateNextPreviousUI {
+	
 	[_prevPointButton setEnabled:YES];
 	if (_index == 0) {
 		[_prevPointButton setEnabled:NO];
 	}
+	
 	[_nextPointButton setEnabled:YES];
 	if (_index == [self.route numSegments]-1) {
 		[_nextPointButton setEnabled:NO];
@@ -261,9 +262,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	BetterLog(@"");
 	
-	if (_photomapQuerying) return;
-	_photomapQuerying = YES;
-	
 	CGRect bounds = _mapView.bounds;
 	CLLocationCoordinate2D nw = [_mapView convertPoint:bounds.origin toCoordinateFromView:_mapView];
 	CLLocationCoordinate2D se = [_mapView convertPoint:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height) toCoordinateFromView:_mapView ];
@@ -283,6 +281,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
 	
+	if (_photomapQuerying) return;
+	if(!_photoIconsVisisble) return;
+	
+	_photomapQuerying = YES;
 	
 	[[PhotoManager sharedInstance] retrievePhotosForRouteBounds:ne withEdge:sw];
 	
@@ -341,11 +343,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	double zoom=[_mapView getZoomLevel];
 	BetterLog(@"zoom=%g",zoom);
 	
-//	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
-//	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
-//		[self requestPhotos];
-	
-	
+	if(_photoIconsVisisble){
+		CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
+		if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
+		[self requestPhotos];
+		
+	}
 }
 
 
@@ -482,7 +485,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[_mapView showAnnotations:@[_startAnnotation,_endAnnotation] animated:YES];
 	
-	[self setPrevNext];
+	[self updateNextPreviousUI];
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
 	
 	[_lineView setNeedsDisplay];
@@ -628,45 +631,46 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	if (_footerIsHidden==NO) {
 		
-		CGRect	fframe=_footerView.frame;
-		CGRect	aframe=_attributionLabel.frame;
+		CGRect __block fframe=_footerView.frame;
+		CGRect __block aframe=_attributionLabel.frame;
 		
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationBeginsFromCurrentState:YES];
-		[UIView setAnimationDuration:0.4];
 		
-		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION;
-		aframe.origin.y=fframe.origin.y-aframe.size.height-10;
+		[UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			
+			fframe.origin.y=SCREENHEIGHTWITHNAVIGATION;
+			aframe.origin.y=fframe.origin.y-aframe.size.height-10;
+			
+			_footerView.frame=fframe;
+			_footerView.alpha=0;
+			_attributionLabel.frame=aframe;
+			
+		} completion:^(BOOL finished) {
+			if(finished==YES)
+				_footerIsHidden=YES;
+		}];
 		
-		_footerView.frame=fframe;
-		_footerView.alpha=0;
-		_attributionLabel.frame=aframe;
-		
-		[UIView commitAnimations];
-		
-		_footerIsHidden=YES;
 		
 		self.infoButton.style = UIBarButtonItemStyleBordered;
 		
 	} else {
 		
-		CGRect	fframe=_footerView.frame;
-		CGRect	aframe=_attributionLabel.frame;
+		CGRect __block fframe=_footerView.frame;
+		CGRect __block aframe=_attributionLabel.frame;
 		
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationBeginsFromCurrentState:YES];
-		[UIView setAnimationDuration:0.4];
+		[UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			
+			fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
+			aframe.origin.y=fframe.origin.y-10-aframe.size.height;
+			
+			_footerView.frame=fframe;
+			_footerView.alpha=1;
+			_attributionLabel.frame=aframe;
+			
+		} completion:^(BOOL finished) {
+			if(finished==YES)
+				_footerIsHidden=NO;
+		}];
 		
-		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
-		aframe.origin.y=fframe.origin.y-10-aframe.size.height;
-		
-		_footerView.frame=fframe;
-		_footerView.alpha=1;
-		_attributionLabel.frame=aframe;
-		
-		[UIView commitAnimations];
-		
-		_footerIsHidden=NO;
 		
 		self.infoButton.style = UIBarButtonItemStyleDone;
 	}

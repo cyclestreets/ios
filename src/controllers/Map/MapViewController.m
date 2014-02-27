@@ -8,9 +8,7 @@
 
 #import "MapViewController.h"
 #import "GlobalUtilities.h"
-#import "RoutePlanMenuViewController.h"
 #import "ExpandedUILabel.h"
-#import "MapMarkerTouchView.h"
 #import "CSPointVO.h"
 #import "SegmentVO.h"
 #import "SettingsManager.h"
@@ -44,6 +42,12 @@
 #import "MapLocationSearchViewController.h"
 #import "WayPointViewController.h"
 
+#import "CrumbPath.h"
+#import "CrumbPathView.h"
+
+//#import "CSRoutePolyLineOverlay.h"
+//#import "CSRoutePolyLineRenderer.h"
+
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -62,7 +66,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
-@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate, LocationReceiver, PointListProvider>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
@@ -81,19 +85,19 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property(nonatomic,assign)  BOOL									walkingOverlayisVisible;
 
 
-//rmmap
+//map
 @property (nonatomic, strong) IBOutlet MKMapView					* mapView;
-@property (nonatomic,strong)  NSString									*name;
+@property (nonatomic,strong)  NSString								*name;
 @property (nonatomic, strong) CLLocation							* lastLocation;
+//@property (nonatomic,strong)  CSRoutePolyLineOverlay				* routeOverlay;
+
 
 // sub views
-@property (nonatomic, strong) RoutePlanMenuViewController			* routeplanView;
 @property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
 
 // ui
 @property (nonatomic, strong) IBOutlet UILabel						* attributionLabel;
 @property (nonatomic, strong) IBOutlet RouteLineView				* lineView;
-@property (nonatomic, strong) IBOutlet MapMarkerTouchView			* markerTouchView;
 
 @property (nonatomic, assign) MapAlertType							alertType;
 
@@ -107,6 +111,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, strong) RouteVO								* route;
 @property (nonatomic, strong) NSMutableArray						* waypointArray;
 @property (nonatomic, strong) RMMarker								* activeMarker;
+
+
 
 // state
 @property (nonatomic, assign) BOOL									doingLocation;
@@ -201,7 +207,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		}
 	}
 	
-	
+	 
 	_attributionLabel.text = [CycleStreets mapAttribution];
 }
 
@@ -254,7 +260,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[self resetWayPoints];
 	
-	[_lineView setPointListProvider:self];
+	//[_lineView setPointListProvider:self];
 	
 		
 	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
@@ -480,12 +486,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 	}else{
 		
-		MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
-		[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+		//MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
+		//[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
 		
 	}
 	
-	[_lineView setNeedsDisplay];
+	//[_lineView setNeedsDisplay];
 	
 	[self assessLocationEffect];
 }
@@ -548,7 +554,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
 	
-	[_lineView setNeedsDisplay];
+	//[_lineView setNeedsDisplay];
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
 	
@@ -570,6 +576,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void) newRoute {
 	
+	[self updateUItoState:MapPlanningStateRoute];
+	
 	BetterLog(@"");
 	CLLocationCoordinate2D ne=[_route insetNorthEast];
 	CLLocationCoordinate2D sw=[_route insetSouthWest];
@@ -580,7 +588,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	// or:
 	//[_mapView showAnnotations:@[array of annotations] animated:NO];
 	
-	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
+	//[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
 	
 	if (_route.hasWaypoints==YES) {
@@ -593,21 +601,62 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}else{
 		
 		// old legacy s/f routes
-	CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
-	[self addWayPointAtCoordinate:startLocation];
-	CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
-	[self addWayPointAtCoordinate:endLocation];
+//	CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
+//	[self addWayPointAtCoordinate:startLocation];
+//	CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
+//	[self addWayPointAtCoordinate:endLocation];
 		
 	}
 	
 	[self showWalkingOverlay];
 	
-	[_lineView setNeedsDisplay];
+//	NSUInteger numPoints = [routeCoords count];
+//	CLLocationCoordinate2D *routePath = malloc(numPoints * sizeof(CLLocationCoordinate2D));
+//	for (NSUInteger index=0; index < numPoints; index ++){
+//		routePath[index] = [[routeCoords objectAtIndex:index] coordinate];
+//	}
+//	
+//	self.routeLine = [MKPolyline polylineWithCoordinates:routePath count:count];
+//	[mapView addOverlay:self.routeLine];
 	
-	// close left vc if open
+	
+	
+//	CLLocationCoordinate2D *coords=[CSRoutePolyLineOverlay coordinatesForRoute:_route fromMap:_mapView];
+//	NSInteger coordcount=[_route coordCount];
+//	CSRoutePolyLineOverlay *routeLine=[CSRoutePolyLineOverlay polylineWithCoordinates:coords count:coordcount];
+//	[_mapView addOverlay:routeLine level:MKOverlayLevelAboveLabels];
+	
+	CrumbPath *_crumbs = [[CrumbPath alloc] initWithRoute:_route];
+	[self.mapView addOverlay:_crumbs];
 	
 	[self updateUItoState:MapPlanningStateRoute];
+	
 }
+
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+    
+    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+        
+    }
+	
+	if([overlay isKindOfClass:[CrumbPath class]]){
+		CrumbPathView* lineView = [[CrumbPathView alloc] initWithOverlay:overlay];
+		return lineView;
+	}
+    
+    return nil;
+}
+
+
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
+{
+	
+	
+	return nil;
+}
+
 
 
 -(void)showWalkingOverlay{
@@ -643,7 +692,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			}];
 			
 		}
-		
+		 
 	}
 	
 }
@@ -911,16 +960,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
-    
-    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
-        
-    }
-	// add routeline overlay here
-    
-    return nil;
-}
+
 
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
@@ -1108,7 +1148,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if (self.mapLocationSearchView == nil) {
 		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
 	}
-	_mapLocationSearchView.locationReceiver = self;
+	//_mapLocationSearchView.locationReceiver = self;
 	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
 	
 	[self presentModalViewController:_mapLocationSearchView	animated:YES];
@@ -1297,50 +1337,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
-
-
-#pragma mark - RouteLine point methods
-// PointListProvider
-+ (NSArray *) pointList:(RouteVO *)route withView:(MKMapView *)mapView {
-	
-	NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:10];
-	if (route == nil) {
-		return points;
-	}
-	
-	for (int i = 0; i < [route numSegments]; i++) {
-		if (i == 0)
-		{	// start of first segment
-			CSPointVO *p = [[CSPointVO alloc] init];
-			SegmentVO *segment = [route segmentAtIndex:i];
-			CLLocationCoordinate2D coordinate = [segment segmentStart];
-			//CGPoint pt = [mapView.contents latLongToPixel:coordinate];
-			//p.p = pt;
-			//p.isWalking=segment.isWalkingSection;
-			//[points addObject:p];
-		}
-		// remainder of all segments
-		SegmentVO *segment = [route segmentAtIndex:i];
-		NSArray *allPoints = [segment allPoints];
-		for (int i = 1; i < [allPoints count]; i++) {
-			CSPointVO *latlon = [allPoints objectAtIndex:i];
-			CLLocationCoordinate2D coordinate;
-			coordinate.latitude = latlon.p.y;
-			coordinate.longitude = latlon.p.x;
-			//CGPoint pt = [mapView.contents latLongToPixel:coordinate];
-			CSPointVO *screen = [[CSPointVO alloc] init];
-			//screen.p = pt;
-			screen.isWalking=segment.isWalkingSection;
-			[points addObject:screen];
-		}
-	}
-	
-	return points;
-}
-
-- (NSArray *) pointList {
-	return [MapViewController pointList:self.route withView:self.mapView];
-}
 
 
 //

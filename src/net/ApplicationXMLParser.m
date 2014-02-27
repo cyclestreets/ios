@@ -494,7 +494,7 @@
 					CGPoint point;
 					point.x = [[XYs objectAtIndex:X] doubleValue];
 					point.y = [[XYs objectAtIndex:X+1] doubleValue];
-					p.p = point;
+					p.point = point;
 					p.isWalking=segment.isWalkingSection;
 					[result addObject:p];
 				}
@@ -516,7 +516,7 @@
 				CGPoint point;
 				point.x=[[TBXML textOfChild:@"cs:longitude" parentElement:waypointnode] doubleValue];
 				point.y=[[TBXML textOfChild:@"cs:latitude" parentElement:waypointnode] doubleValue];
-				waypoint.p=point;
+				waypoint.point=point;
 				
 				[waypoints addObject:waypoint];
 				

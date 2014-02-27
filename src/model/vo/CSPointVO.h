@@ -18,27 +18,24 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 */
 
-//  CSPoint.h
+//  CSPointVO
 //  CycleStreets
-//
-//  Created by Alan Paxton on 17/05/2010.
-//
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-
+#import <MapKit/MapKit.h>
 
 @interface CSPointVO : NSObject <NSCoding>{
-	CGPoint p;
 
 }
 
-@property CGPoint p;
+@property (nonatomic,assign) CGPoint point;
 @property (nonatomic,assign) BOOL isWalking;
 
 - (BOOL) insideRect:(CGRect)rect;
 
 @property (nonatomic, readonly)	CLLocationCoordinate2D	coordinate;
+@property (nonatomic, readonly)	MKMapPoint				mapPoint;
 
 
 @end

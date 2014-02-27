@@ -16,7 +16,6 @@
 //#import "AccountViewController.h"
 #import "RMMapView.h"
 #import "CopyLabel.h"
-#import "PhotoWizardCategoryMenuViewController.h"
 
 #import "RMOpenStreetMapSource.h"
 #import "RMOpenCycleMapSource.h"

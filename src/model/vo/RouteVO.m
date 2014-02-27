@@ -54,6 +54,29 @@
 	return [segments count];
 }
 
+
+-(int)coordCount{
+	
+	int count=0;
+	
+	for (int i = 0; i < [self numSegments]; i++) {
+		
+		if (i == 0)
+			count++;
+		
+		SegmentVO *segment = [self segmentAtIndex:i];
+		NSArray *allPoints = [segment allPoints];
+		for (int i = 1; i < [allPoints count]; i++) {
+			count++;
+		}
+	}
+	
+	return count;
+	
+}
+
+
+
 - (NSString *) nameString {
 	
 	if(userRouteName==nil || [userRouteName isEqualToString:EMPTYSTRING]){

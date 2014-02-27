@@ -217,4 +217,8 @@ typedef int LayoutBoxLayoutMode;
 
 + (void)dismissKeyboard:(UIView*)view;
 
+
++ (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber;
+
+
 @end
