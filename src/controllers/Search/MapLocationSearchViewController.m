@@ -37,6 +37,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 static NSString *format = @"%@?key=%@&street=%@&%@&clientid=%@";
 static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
+
+@interface MapLocationSearchViewController()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate>
+
+@end
+
+
 @implementation MapLocationSearchViewController
 
 

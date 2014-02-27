@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "XMLRequest.h"
 #import "RouteParser.h"
-#import "Route.h"
+
 #import "CycleStreets.h"
 
 @implementation XMLRequest

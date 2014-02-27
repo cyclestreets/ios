@@ -1,3 +1,4 @@
+
 //
 //  CSRoutePolyLineRenderer.h
 //  CycleStreets
@@ -9,11 +10,8 @@
 #import <MapKit/MapKit.h>
 
 @interface CSRoutePolyLineRenderer : MKOverlayPathRenderer
+{
 
-
-- (id)initWithPolyline:(MKPolyline *)polyline;
-
-@property (nonatomic, readonly) MKPolyline *polyline;
-
+}
 
 @end

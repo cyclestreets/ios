@@ -180,18 +180,6 @@
 	return [NSString stringWithCString:&aXMLElement->text[0] encoding:NSUTF8StringEncoding];
 }
 
-// NE: wraps most commonly used methods into one
-+ (NSString*) textOfChild:(NSString*)childName parentElement:(TBXMLElement*)parent {
-	
-	if(parent==nil) return nil;
-	
-	TBXMLElement *childElement=[TBXML childElementNamed:childName parentElement:parent];
-	
-	if(nil==childElement) return @"";
-	if (nil == childElement->text) return @"";
-	return [NSString stringWithCString:&childElement->text[0] encoding:NSUTF8StringEncoding];
-	
-}
 
 
 
@@ -236,82 +224,6 @@
 	return nil;
 }
 
-
-+ (BOOL)hasChildrenForParentElement:(TBXMLElement*)aParentXMLElement{
-	TBXMLElement * xmlElement = aParentXMLElement->firstChild;
-	if(xmlElement!=nil){
-		return YES;
-	}else {
-		return NO;
-	}
-}
-
-
-+(int)childrenCountForElementNamed:(NSString*)element parentElement:(TBXMLElement*)aParentXMLElement{
-	TBXMLElement * xmlElement = aParentXMLElement->firstChild;
-	
-	BOOL hasChildren=[TBXML hasChildrenForParentElement:aParentXMLElement];
-	if(hasChildren==NO){
-		return 0;
-	}else {
-		int index=0;
-		while ((xmlElement=xmlElement->nextSibling)){
-			if([[TBXML elementName:xmlElement] isEqualToString:element]){
-				index++;
-			}
-		}
-		return index;
-	}
-}
-
-// WIP: DONOTUSE
-+(NSMutableArray*)childArrayForElement:(NSString*)elementName parentElement:(TBXMLElement*)aParentXMLElement{
-	
-	BOOL hasChildren=[TBXML hasChildrenForParentElement:aParentXMLElement];
-	if(hasChildren==NO){
-		return nil;
-	}else {
-		
-		TBXMLElement *node=[TBXML childElementNamed:elementName parentElement:aParentXMLElement];
-		
-		if(node!=nil){
-			//NSMutableArray *arr=[[NSMutableArray alloc]init];
-			
-			while (node!=nil){
-				
-				// has node got children
-				// if so look at each child, if has children call newdict on it
-				// on each child lookfor multiple if>0 call this method
-				
-				
-				node=[TBXML nextSiblingNamed:elementName searchFromElement:node];
-			}
-			return nil;
-			
-		}else {
-			return nil;
-		}
-		
-	}
-}
-
-+(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode{
-	
-	if(innode==nil)
-		return nil;
-	
-	NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-	
-	TBXMLElement *node=innode->firstChild;
-	while (node!=nil) {
-		
-		[dict setObject:[TBXML textForElement:node] forKey:[TBXML elementName:node]];
-		
-		node=node->nextSibling;
-	}
-	
-	return dict;
-}
 
 
 

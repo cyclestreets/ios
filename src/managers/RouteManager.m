@@ -9,7 +9,6 @@
 #import "RouteManager.h"
 #import "Query.h"
 #import "XMLRequest.h"
-#import "Route.h"
 #import "GlobalUtilities.h"
 #import "CycleStreets.h"
 #import "AppConstants.h"
@@ -34,9 +33,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 @interface RouteManager(Private) 
 
 - (void)warnOnFirstRoute;
-
-- (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements;
-- (void) queryRouteSuccess:(XMLRequest *)request results:(NSDictionary *)elements;
 
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message;
 
@@ -571,84 +567,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-
-//
-/***********************************************
- * @description			OLD NETWORK EVENTS
- ***********************************************/
-//
-// this functionality can be entirely repalced by standard request/response logic as it is aonly called from
-// one place
-- (void) runQuery:(Query *)query {
-	[query runWithTarget:self onSuccess:@selector(querySuccess:results:) onFailure:@selector(queryFailure:message:)];
-	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
-
-}
-
-- (void) runRouteIdQuery:(Query *)query {
-	
-	[query runWithTarget:self onSuccess:@selector(queryRouteSuccess:results:) onFailure:@selector(queryRouteFailure:message:)];
-	
-	
-	
-	
-}
-
-
-- (void) querySuccess:(XMLRequest *)request results:(NSDictionary *)elements {
-	
-	//update the table.
-	Route *route= [[Route alloc] initWithElements:elements];
-	self.selectedRoute=[[RouteVO alloc]init];
-	selectedRoute.segments=route.segments;
-	//
-	
-	if ([selectedRoute routeid] == nil) {
-		[self queryFailure:nil message:@"Could not plan valid route for selected waypoints."];
-	} else {
-		
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, added path to map" andMessage:nil];
-		
-		BetterLog(@"");
-		//save the route data to file.
-		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		[cycleStreets.files setRoute:[[selectedRoute routeid] intValue] data:selectedRoute];
-		
-		[self warnOnFirstRoute];
-		[self selectRoute:selectedRoute];		
-	}
-}
-
-
-- (void) queryRouteSuccess:(XMLRequest *)request results:(NSDictionary *)elements {
-	
-	BetterLog(@"");
-	
-	//update the table.
-	Route *route= [[Route alloc] initWithElements:elements];
-	self.selectedRoute=[[RouteVO alloc]init];
-	selectedRoute.segments=route.segments;
-	//
-	
-	if ([selectedRoute routeid] == nil) {
-		[self queryFailure:nil message:@"Unable to find a route with this number."];
-	} else {
-		
-		//save the route data to file.
-		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-		[cycleStreets.files setRoute:[[selectedRoute routeid] intValue] data:selectedRoute];
-		
-		[self warnOnFirstRoute];
-		[self selectRoute:selectedRoute];	
-		
-		[self saveRoute:selectedRoute];
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
-		
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found Route, this route is now selected." andMessage:nil];
-	}
-}
 
 - (void) queryFailure:(XMLRequest *)request message:(NSString *)message {
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:message andMessage:nil];

@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoMapViewController.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
-#import "Route.h"
 #import "SegmentVO.h"
 #import <CoreLocation/CoreLocation.h>
 #import "GenericConstants.h"

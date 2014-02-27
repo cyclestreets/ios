@@ -38,15 +38,11 @@
 #import "UIActionSheet+BlocksKit.h"
 
 #import "RouteVO.h"
-#import "RouteLineView.h"
 #import "MapLocationSearchViewController.h"
 #import "WayPointViewController.h"
 
-#import "CrumbPath.h"
-#import "CrumbPathView.h"
-
-//#import "CSRoutePolyLineOverlay.h"
-//#import "CSRoutePolyLineRenderer.h"
+#import "CSRoutePolyLineOverlay.h"
+#import "CSRoutePolyLineRenderer.h"
 
 
 #import <Crashlytics/Crashlytics.h>
@@ -89,7 +85,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, strong) IBOutlet MKMapView					* mapView;
 @property (nonatomic,strong)  NSString								*name;
 @property (nonatomic, strong) CLLocation							* lastLocation;
-//@property (nonatomic,strong)  CSRoutePolyLineOverlay				* routeOverlay;
+@property (nonatomic,strong)  CSRoutePolyLineOverlay				* routeOverlay;
+@property (nonatomic,strong)  CSRoutePolyLineRenderer				* routeOverlayRenderer;
 
 
 // sub views
@@ -97,7 +94,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 // ui
 @property (nonatomic, strong) IBOutlet UILabel						* attributionLabel;
-@property (nonatomic, strong) IBOutlet RouteLineView				* lineView;
 
 @property (nonatomic, assign) MapAlertType							alertType;
 
@@ -202,7 +198,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			newoverlay.canReplaceMapContent = YES;
 			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 			[_mapView removeOverlay:overlay];
-			[_mapView addOverlay:newoverlay];
+			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
 			break;
 		}
 	}
@@ -252,8 +248,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
-	_mapView.userTrackingMode=MKUserTrackingModeNone;
-	_mapView.showsUserLocation=YES;
+	//_mapView.userTrackingMode=MKUserTrackingModeNone;
+	//_mapView.showsUserLocation=YES;
 		
 	
 	[self initToolBarEntries];
@@ -462,8 +458,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_mapView.showsUserLocation=NO;
 	_mapView.showsUserLocation=YES;
 	
-	if(_uiState!=MapPlanningStateRoute)
-		[self updateUItoState:MapPlanningStateLocating];
+	[self updateUItoState:MapPlanningStateLocating];
 	
 	
 }
@@ -486,12 +481,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 	}else{
 		
-		//MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
-		//[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+		MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
+		[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
 		
 	}
 	
-	//[_lineView setNeedsDisplay];
 	
 	[self assessLocationEffect];
 }
@@ -601,33 +595,22 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}else{
 		
 		// old legacy s/f routes
-//	CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
-//	[self addWayPointAtCoordinate:startLocation];
-//	CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
-//	[self addWayPointAtCoordinate:endLocation];
+		CLLocationCoordinate2D startLocation = [[_route segmentAtIndex:0] segmentStart];
+		[self addWayPointAtCoordinate:startLocation];
+		CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
+		[self addWayPointAtCoordinate:endLocation];
 		
 	}
 	
 	[self showWalkingOverlay];
 	
-//	NSUInteger numPoints = [routeCoords count];
-//	CLLocationCoordinate2D *routePath = malloc(numPoints * sizeof(CLLocationCoordinate2D));
-//	for (NSUInteger index=0; index < numPoints; index ++){
-//		routePath[index] = [[routeCoords objectAtIndex:index] coordinate];
-//	}
-//	
-//	self.routeLine = [MKPolyline polylineWithCoordinates:routePath count:count];
-//	[mapView addOverlay:self.routeLine];
-	
-	
-	
-//	CLLocationCoordinate2D *coords=[CSRoutePolyLineOverlay coordinatesForRoute:_route fromMap:_mapView];
-//	NSInteger coordcount=[_route coordCount];
-//	CSRoutePolyLineOverlay *routeLine=[CSRoutePolyLineOverlay polylineWithCoordinates:coords count:coordcount];
-//	[_mapView addOverlay:routeLine level:MKOverlayLevelAboveLabels];
-	
-	CrumbPath *_crumbs = [[CrumbPath alloc] initWithRoute:_route];
-	[self.mapView addOverlay:_crumbs];
+	if(_routeOverlay==nil){
+		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:_route];
+		[self.mapView addOverlay:_routeOverlay];
+	}else{
+		[_routeOverlay updateForDataProvider:_route];
+		[_routeOverlayRenderer setNeedsDisplayInMapRect:mapRect];
+	}
 	
 	[self updateUItoState:MapPlanningStateRoute];
 	
@@ -641,20 +624,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
         
     }
 	
-	if([overlay isKindOfClass:[CrumbPath class]]){
-		CrumbPathView* lineView = [[CrumbPathView alloc] initWithOverlay:overlay];
+	if([overlay isKindOfClass:[CSRoutePolyLineOverlay class]]){
+		CSRoutePolyLineRenderer* lineView = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
 		return lineView;
 	}
     
     return nil;
-}
-
-
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
-{
-	
-	
-	return nil;
 }
 
 
@@ -1298,7 +1273,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		initLocation.latitude = [latitude doubleValue];
 		initLocation.longitude = [longitude doubleValue];
 		[_mapView setCenterCoordinate:initLocation zoomLevel:zoom animated:YES];
-		[_lineView setNeedsDisplay];
 	}
 }
 
@@ -1332,7 +1306,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[_mapView setCenterCoordinate:location zoomLevel:DEFAULT_ZOOM animated:YES];
 	
 	[self assessWayPointAddition:location];
-	[_lineView setNeedsDisplay];
 	
 }
 

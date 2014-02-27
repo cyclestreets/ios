@@ -6,16 +6,20 @@
 //  Copyright (c) 2014 CycleStreets Ltd. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+
 #import <MapKit/MapKit.h>
 
 @class RouteVO;
 
-@interface CSRoutePolyLineOverlay : MKPolyline
+@interface CSRoutePolyLineOverlay : NSObject <MKOverlay>
 
-@property (nonatomic,strong)  NSMutableArray						*dataProvider;
+@property (nonatomic,readonly)  NSMutableArray				*routePoints;
 
 
-+(CLLocationCoordinate2D*)coordinatesForRoute:(RouteVO*)route fromMap:(MKMapView *)mapView;
+-(id) initWithRoute:(RouteVO*)route;
+-(void)updateForDataProvider:(RouteVO*)route;
+
+- (void)lockForReading;
+- (void)unlockForReading;
 
 @end

@@ -121,7 +121,6 @@ typedef struct _TBXMLAttributeBuffer {
 
 + (NSString*) elementName:(TBXMLElement*)aXMLElement;
 + (NSString*) textForElement:(TBXMLElement*)aXMLElement;
-+ (NSString*) textOfChild:(NSString*)childName parentElement:(TBXMLElement*)parent; // NE method wrapper
 + (NSString*) valueOfAttributeNamed:(NSString *)aName forElement:(TBXMLElement*)aXMLElement;
 
 + (NSString*) attributeName:(TBXMLAttribute*)aXMLAttribute;
@@ -130,9 +129,6 @@ typedef struct _TBXMLAttributeBuffer {
 + (TBXMLElement*) nextSiblingNamed:(NSString*)aName searchFromElement:(TBXMLElement*)aXMLElement;
 + (TBXMLElement*) childElementNamed:(NSString*)aName parentElement:(TBXMLElement*)aParentXMLElement;
 
-+ (BOOL)hasChildrenForParentElement:(TBXMLElement*)aParentXMLElement;
-+(int)childrenCountForElementNamed:(NSString*)element parentElement:(TBXMLElement*)aParentXMLElement;
-+(NSMutableArray*)childArrayForElement:(NSString*)elementName parentElement:(TBXMLElement*)aParentXMLElement;
-+(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode;
+
 
 @end

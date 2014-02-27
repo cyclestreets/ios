@@ -12,73 +12,55 @@
 #import <CoreLocation/CoreLocation.h>
 #import "SegmentVO.h"
 
-@interface RouteVO : NSObject <NSCoding>{
-	
-	NSMutableArray			*segments;
-	NSString				*routeid; // this is itineary in old VO
-	
-	CLLocation				*northEast;
-	CLLocation				*southWest;
-	
-	NSString				*name;
-	NSInteger				speed;
-	NSNumber				*length;
-	NSString				*plan;
-	NSInteger				time;
-	NSString				*date;
-	NSString				*userRouteName; // user editable route name, displayed if set
-	
-	NSString				*calorie;
-	NSString				*cosaved;
-	
-}
-@property (nonatomic, strong) NSMutableArray * segments;
-@property (nonatomic, strong) NSString       * routeid;
-@property (nonatomic, strong) CLLocation     * northEast;
-@property (nonatomic, strong) CLLocation     * southWest;
-@property (nonatomic, strong) NSString       * name;
-@property (nonatomic, assign) NSInteger      speed;
-@property (nonatomic, strong) NSNumber       * length;
-@property (nonatomic, strong) NSString       * plan;
-@property (nonatomic, assign) NSInteger      time;
-@property (nonatomic, strong) NSString       * date;
-@property (nonatomic, strong) NSString       * userRouteName;
-@property (nonatomic, strong) NSString       * calorie;
-@property (nonatomic, strong) NSString       * cosaved;
+@interface RouteVO : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSMutableArray * waypoints;
+@property (nonatomic, strong) NSMutableArray              * segments;
+@property (nonatomic, strong) NSString                    * routeid;
+@property (nonatomic, strong) CLLocation                  * northEast;
+@property (nonatomic, strong) CLLocation                  * southWest;
+@property (nonatomic, strong) NSString                    * name;
+@property (nonatomic, assign) NSInteger                   speed;
+@property (nonatomic, strong) NSNumber                    * length;
+@property (nonatomic, strong) NSString                    * plan;
+@property (nonatomic, assign) NSInteger                   time;
+@property (nonatomic, strong) NSString                    * date;
+@property (nonatomic, strong) NSString                    * userRouteName;
+@property (nonatomic, strong) NSString                    * calorie;
+@property (nonatomic, strong) NSString                    * cosaved;
+
+@property (nonatomic, strong) NSMutableArray              * waypoints;
 
 
-// getters
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*lengthString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*speedString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*dateString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*dateOnlyString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*planString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*nameString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*calorieString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*coString;
+//   getters
+@property (nonatomic, readonly)	NSString				  * timeString;
+@property (nonatomic, readonly)	NSString                  * lengthString;
+@property (nonatomic, readonly)	NSString                  * speedString;
+@property (nonatomic, readonly)	NSString                  * dateString;
+@property (nonatomic, readonly)	NSString                  * dateOnlyString;
+@property (nonatomic, readonly)	NSString                  * planString;
+@property (nonatomic, readonly)	NSString                  * nameString;
+@property (nonatomic, readonly)	NSString                  * calorieString;
+@property (nonatomic, readonly)	NSString                  * coString;
 
-@property (nonatomic, readonly)	int										numSegments;
-@property (nonatomic, readonly)	int										coordCount;
-@property (nonatomic, readonly)	CLLocationCoordinate2D					basicNorthEast;
-@property (nonatomic, readonly)	CLLocationCoordinate2D					basicSouthWest;
-@property (nonatomic, readonly)	CLLocationCoordinate2D					insetNorthEast;
-@property (nonatomic, readonly)	CLLocationCoordinate2D					insetSouthWest;
+@property (nonatomic, readonly)	int                       numSegments;
+@property (nonatomic, readonly)	int                       coordCount;
+@property (nonatomic, readonly)	CLLocationCoordinate2D    basicNorthEast;
+@property (nonatomic, readonly)	CLLocationCoordinate2D    basicSouthWest;
+@property (nonatomic, readonly)	CLLocationCoordinate2D    insetNorthEast;
+@property (nonatomic, readonly)	CLLocationCoordinate2D    insetSouthWest;
 
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*fileid;
-@property (nonatomic, readonly)	BOOL									containsWalkingSections;
+@property (nonatomic, readonly)	NSString                  * fileid;
+@property (nonatomic, readonly)	BOOL                      containsWalkingSections;
 
-@property (nonatomic, readonly)	BOOL									hasWaypoints;
-
-
-@property (unsafe_unretained, nonatomic, readonly)	NSURL				*csrouteurl;
-@property (unsafe_unretained, nonatomic, readonly)	NSString			*csBrowserRouteurlString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString			*csiOSRouteurlString;
+@property (nonatomic, readonly)	BOOL                      hasWaypoints;
 
 
-@property (nonatomic, readonly)	NSDate							*dateObject;
+@property (nonatomic, readonly)	NSURL                     * csrouteurl;
+@property (nonatomic, readonly)	NSString                  * csBrowserRouteurlString;
+@property (nonatomic, readonly)	NSString                  * csiOSRouteurlString;
+
+
+@property (nonatomic, readonly)	NSDate                    * dateObject;
 
 
 - (SegmentVO *) segmentAtIndex:(int)index;

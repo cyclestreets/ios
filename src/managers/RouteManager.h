@@ -36,8 +36,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 @property (nonatomic, strong) NSString		* activeRouteDir;
 @property (nonatomic, strong) MKDirectionsRequest		*mapRoutingRequest;
 
-- (void) runQuery:(Query *)query;
-- (void) runRouteIdQuery:(Query *)query;
+
 - (void) selectRoute:(RouteVO *)route;
 
 //new

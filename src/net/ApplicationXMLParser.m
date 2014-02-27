@@ -25,6 +25,8 @@
 #import "PhotoMapListVO.h"
 #import "PhotoCategoryVO.h"
 
+#import "TBXML+Additions.h"
+
 @interface ApplicationXMLParser(Private)
 
 -(void)parseXMLForType:(NSString*)type;
@@ -569,7 +571,7 @@
 		TBXMLElement *resultnode=[TBXML childElementNamed:@"result" parentElement:response];
 		
 		if(resultnode!=nil){
-			NSMutableDictionary *responseDict=[ApplicationXMLParser newDictonaryFromXMLElement:resultnode];
+			NSMutableDictionary *responseDict=[TBXML newDictonaryFromXMLElement:resultnode];
 			validation.responseDict=responseDict;
 			validation.returnCode=ValidationUserPhotoUploadSuccess;
 		}
@@ -867,80 +869,6 @@
  ***********************************************/
 //
 
-//
-/***********************************************
- * @description			returns a dictionary from a node's child nodes
- ***********************************************/
-//
-
-+(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode{
-	
-	if(innode==nil)
-		return nil;
-	
-	NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-	
-	TBXMLElement *node=innode->firstChild;
-	while (node!=nil) {
-		
-		[dict setObject:[TBXML textForElement:node] forKey:[TBXML elementName:node]];
-		
-		node=node->nextSibling;
-	}
-	
-	return dict;
-}
-
-//
-/***********************************************
- * @description			returns a dictionary from a node's attributes
- ***********************************************/
-//
-+(NSMutableDictionary*)newDictonaryFromXMLElementAttributes:(TBXMLElement*)innode{
-	
-	if(innode==nil)
-		return nil;
-	
-	NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-	
-	TBXMLAttribute *attribute=innode->firstAttribute;
-	while (attribute!=nil) {
-		
-		[dict setObject:[TBXML attributeValue:attribute] forKey:[TBXML attributeName:attribute]];
-		
-		attribute=attribute->next;
-	}
-	
-	
-	return dict;
-}
-
-
-//
-/***********************************************
- * @description			Return an array of nodes with specific name
- ***********************************************/
-//
-+(NSMutableArray*)newArrayForNodesNamed:(NSString*)nodeName fromXMLElement:(TBXMLElement*)innode{
-	
-	if(innode==nil)
-		return nil;
-	
-	NSMutableArray *arr=[[NSMutableArray alloc]init];
-	TBXMLElement *foundNode=[TBXML childElementNamed:nodeName parentElement:innode];
-	
-	if(foundNode!=nil){
-		
-		while (foundNode!=nil) {
-			
-			[arr addObject:[TBXML textForElement:foundNode]];
-			
-			foundNode=[TBXML nextSiblingNamed:nodeName searchFromElement:foundNode];
-		}
-		
-	}
-	return arr;
-}
 
 
 @end

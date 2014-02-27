@@ -1,3 +1,4 @@
+
 //
 //  CSRoutePolyLineRenderer.m
 //  CycleStreets
@@ -6,238 +7,180 @@
 //  Copyright (c) 2014 CycleStreets Ltd. All rights reserved.
 //
 
+
 #import "CSRoutePolyLineRenderer.h"
+
 #import "CSRoutePolyLineOverlay.h"
 #import "CSPointVO.h"
-#import "GlobalUtilities.h"
 
-@interface CSRoutePolyLineRenderer()
+#define MIN_POINT_DELTA 5.0 // controls how close points must be before being culled
 
-@property (nonatomic,strong)  CSRoutePolyLineOverlay			* polyline;
 
-@property (nonatomic,strong)  UIColor							*lineColor;
-@property (nonatomic,strong)  UIColor							*dashedlineColor;
+@interface CSRoutePolyLineRenderer ()
 
-@property (nonatomic,assign)  CGMutablePathRef					mutablePath;
+- (CGPathRef)newPathForPoints:(NSMutableArray*)points clipRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale isDashed:(BOOL)isDashed;
 
 @end
 
 @implementation CSRoutePolyLineRenderer
 
 
+- (void)drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale  inContext:(CGContextRef)context{
+	
+    CSRoutePolyLineOverlay *crumbs = (CSRoutePolyLineOverlay *)(self.overlay);
+    
+    CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale);
+    
+    // outset the map rect by the line width so that points just outside
+    // of the currently drawn rect are included in the generated path.
+    MKMapRect clipRect = MKMapRectInset(mapRect, -lineWidth, -lineWidth);
+	
+	CGColorRef dashColor=[UIColor redColor].CGColor;
+	CGColorRef solidColor=[UIColor blueColor].CGColor;
+	
+	float dashes[] = { 4/zoomScale, 4/zoomScale };
+	//float normal[]={1};
+    
+    [crumbs lockForReading];
+    CGPathRef normalPath = [self newPathForPoints:crumbs.routePoints clipRect:clipRect zoomScale:zoomScale isDashed:NO];
+    [crumbs unlockForReading];
+    
+    if (normalPath != nil)
+    {
+        CGContextSaveGState(context);
+        CGContextAddPath(context, normalPath);
+        CGContextSetStrokeColorWithColor(context, solidColor);
+        CGContextSetLineJoin(context, kCGLineJoinRound);
+		CGContextSetLineCap(context, kCGLineCapRound);
+        CGContextSetLineWidth(context, lineWidth);
+        CGContextStrokePath(context);
+        CGPathRelease(normalPath);
+        CGContextRestoreGState(context);
+    }
+    
+    [crumbs lockForReading];
+    CGPathRef dashedPath = [self newPathForPoints:crumbs.routePoints clipRect:clipRect zoomScale:zoomScale isDashed:YES];
+    [crumbs unlockForReading];
+    
+    if (dashedPath != nil)
+    {
+        CGContextSaveGState(context);
+        CGContextAddPath(context, dashedPath);
+        CGContextSetStrokeColorWithColor(context, dashColor);
+        CGContextSetLineJoin(context, kCGLineJoinRound);
+        CGContextSetLineDash(context, 0, dashes, 1);
+        CGContextSetLineWidth(context, lineWidth);
+        CGContextStrokePath(context);
+        CGPathRelease(dashedPath);
+        CGContextRestoreGState(context);
+    }
+}
 
-- (id)initWithPolyline:(MKPolyline *)polyline
+
+// do these points intersect the curent map visible rect
+static BOOL lineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect r)
 {
-	self = [super initWithOverlay:polyline];
-	if (self) {
-		self.polyline = (CSRoutePolyLineOverlay*)polyline;
-		_mutablePath = CGPathCreateMutable();
-		
-		self.lineColor=UIColorFromRGBAndAlpha(0xFF00FF, 0.8);
-		self.dashedlineColor=UIColorFromRGB(0xFF00FF);
-		
-		//[self createPath];
-		
-	}
-	return self;
+    double minX = MIN(p0.x, p1.x);
+    double minY = MIN(p0.y, p1.y);
+    double maxX = MAX(p0.x, p1.x);
+    double maxY = MAX(p0.y, p1.y);
+    
+    MKMapRect r2 = MKMapRectMake(minX, minY, maxX - minX, maxY - minY);
+    return MKMapRectIntersectsRect(r, r2);
 }
 
 
--(void) createPath{
-    
-    BOOL pathIsEmpty = YES;
-    for (int i=0;i< _polyline.pointCount;i++){
-		CGPoint point = [self pointForMapPoint:_polyline.points[i]];
+// Optimisation method, determines wether poitns should be drawn based on visible map intersection and if they are far enough apart  to be visibly resolveable
 
-        if (pathIsEmpty){
-            CGPathMoveToPoint(_mutablePath, nil, point.x, point.y);
-            pathIsEmpty = NO;
-        } else {
-            CGPathAddLineToPoint(_mutablePath, nil, point.x, point.y);
+- (CGPathRef)newPathForPoints:(NSMutableArray*)points clipRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale isDashed:(BOOL)isDashed{
+    
+    if (points.count < 2)
+        return NULL;
+    
+    CGMutablePathRef path = NULL;
+    
+    BOOL needsMove = YES;
+    
+	#define POW2(a) ((a) * (a))
+    
+    double minPointDelta = MIN_POINT_DELTA / zoomScale;
+    double c2 = POW2(minPointDelta);
+    
+    MKMapPoint point;
+	CSPointVO *firstpoint=points[0];
+	MKMapPoint lastPoint = firstpoint.mapPoint;
+	int pointCount=points.count;
+    NSUInteger i;
+    int segmentIndex=0;
+	
+    for (i = 1; i < pointCount - 1; i++){
+		
+		CSPointVO *cspoint=points[i];
+        point = cspoint.mapPoint;
+        double a2b2 = POW2(point.x - lastPoint.x) + POW2(point.y - lastPoint.y);
+		
+        if (a2b2 >= c2) {
+            if (lineIntersectsRect(point, lastPoint, mapRect)){
+                
+                if (!path)
+                    path = CGPathCreateMutable();
+                
+                if (needsMove){
+                    CGPoint lastCGPoint = [self pointForMapPoint:lastPoint];
+                    CGPathMoveToPoint(path, NULL, lastCGPoint.x, lastCGPoint.y);
+                }
+                
+                BOOL shouldDrawSegment=cspoint.isWalking!=isDashed;
+                
+                CGPoint cgPoint = [self pointForMapPoint:point];
+                
+                if(shouldDrawSegment==YES){
+                    CGPathMoveToPoint(path, NULL, cgPoint.x, cgPoint.y);
+                }else{
+                    CGPathAddLineToPoint(path, NULL, cgPoint.x, cgPoint.y);
+                }
+                
+                
+				segmentIndex++;
+            }
+            else
+            {
+                // discontinuity, lift the pen
+                needsMove = YES;
+            }
+            lastPoint = point;
         }
     }
     
-}
-
-
--(void) drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context{
-	
-	BetterLog(@"");
-	
-	float dashes[] = { 4, 4 };
-    float normal[]={1};
-	
-	CGColorRef dashColor=_dashedlineColor.CGColor;
-	CGColorRef solidColor=_lineColor.CGColor;
-	
-	//CGContextSetRGBFillColor(context, (rand() % 255) / 255.0, 0, 0, 0.1);
-	//CGContextFillRect(context, [self rectForMapRect:mapRect]);
+	#undef POW2
     
-	
-	
-//	CGContextSetStrokeColorWithColor(context, solidColor);
-//	CGContextSetLineWidth( context, 4.0/zoomScale);
-//	
-//	CGContextStrokePath(context);
-//
-	
-	CGMutablePathRef fullPath = CGPathCreateMutable();
-	
-	BOOL pathIsEmpty = YES;
-    for (int i=0;i< _polyline.pointCount;i++){
-		CGPoint point = [self pointForMapPoint:_polyline.points[i]];
+   
+	CSPointVO *lastCSpoint=points.lastObject;
+    point = lastCSpoint.mapPoint;
+    if (lineIntersectsRect(lastPoint, point, mapRect)) {
 		
-        if (pathIsEmpty){
-            CGPathMoveToPoint(fullPath, nil, point.x, point.y);
-            pathIsEmpty = NO;
-        } else {
-            CGPathAddLineToPoint(fullPath, nil, point.x, point.y);
+        if (!path)
+            path = CGPathCreateMutable();
+		
+        if (needsMove) {
+            CGPoint lastCGPoint = [self pointForMapPoint:lastPoint];
+            CGPathMoveToPoint(path, NULL, lastCGPoint.x, lastCGPoint.y);
         }
-    }
-	
-	//CGContextAddPath(context, _mutablePath);
-	
-	CGRect pointsRect = CGPathGetBoundingBox(fullPath);
-    CGRect mapRectCG = [self rectForMapRect:mapRect];
-    if (!CGRectIntersectsRect(pointsRect, mapRectCG))return;
-	
-	CGPoint prevPoint;
-    for (int i = 0; i < self.polyline.pointCount; i++) {
 		
-		CGMutablePathRef path = CGPathCreateMutable();
-        CGPoint point = [self pointForMapPoint:self.polyline.points[i]];
+        BOOL shouldDrawSegment=lastCSpoint.isWalking!=isDashed;
 		
-		BetterLog(@"i=%i mappoint=%f,%f",i, point.x,point.y);
+		CGPoint cgPoint = [self pointForMapPoint:point];
 		
-        if (i>0) {
-			
-            
-            prevPoint=[self pointForMapPoint:self.polyline.points[i-1]];
-			
-			//CGPathMoveToPoint(path, nil, prevPoint.x, prevPoint.y);
-           // CGPathAddLineToPoint(path, nil, point.x, point.y);
-			
-			//CGContextSaveGState(context);
-			
-			//CGPathRef pathToFill = CGPathCreateCopyByStrokingPath(path, NULL, 2, self.lineCap, self.lineJoin, self.miterLimit);
-           // CGContextAddPath(context, path);
-			//CGContextReplacePathWithStrokedPath(context);
-			//CGContextSetStrokeColorWithColor(context, solidColor);
-			//CGContextSetLineDash(context,0,normal,0);
-			
-			//CGContextStrokePath(context);
-			
-			CGContextSaveGState(context);
-			CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-            CGContextSetLineDash(context, 0, dashes, 1);
-            CGContextSetLineWidth(context, 2);
-            //CGContextAddPath(context, path);
-            
-            CGContextMoveToPoint(context, prevPoint.x, prevPoint.y);
-            CGContextAddLineToPoint(context, point.x, point.y);
-			CGContextRestoreGState(context);
-//			
-//			CGMutablePathRef path = CGPathCreateMutable();
-//			CGPathMoveToPoint(path, nil, prevPoint.x, prevPoint.y);
-//            CGPathAddLineToPoint(path, nil, point.x, point.y);
-//			
-//			CGPathCloseSubpath(path);
-//			CGContextAddPath(context, path);
-//			CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
-//			CGContextStrokePath(context);
-//			CGPathRelease(path);
-			
-			
-			//CGContextRestoreGState(context);
-			
-			/*
-            CGFloat lineWidth = CGContextConvertSizeToUserSpace(context, (CGSize){self.lineWidth,self.lineWidth}).width;
-            CGPathRef pathToFill = CGPathCreateCopyByStrokingPath(path, NULL, lineWidth, self.lineCap, self.lineJoin, self.miterLimit);
-            CGContextAddPath(context, pathToFill);
-            CGContextClip(context);
-            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-            CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, gradientColors, gradientLocation, 2);
-            CGColorSpaceRelease(colorSpace);
-            CGPoint gradientStart = prevPoint;
-            CGPoint gradientEnd = point;
-            CGContextDrawLinearGradient(context, gradient, gradientStart, gradientEnd, kCGGradientDrawsAfterEndLocation);
-            CGGradientRelease(gradient);
-            CGContextRestoreGState(context);
-			*/
-//            
-////            if(point.isWalking==YES){
-////                CGContextSetStrokeColorWithColor(context, dashColor);
-////                CGContextSetLineDash(context, 0, dashes, 1);
-////            }else{
-//                CGContextSetStrokeColorWithColor(context, solidColor);
-//                CGContextSetLineDash(context,0,normal,0);
-//            //}
-//            
-			
-            
-            //CGContextStrokePath(context);
-            
-            
-        }else{
-			CGPathMoveToPoint(path, nil, point.x, point.y);
+		if(shouldDrawSegment==YES){
+			CGPathMoveToPoint(path, NULL, cgPoint.x, cgPoint.y);
+		}else{
+			CGPathAddLineToPoint(path, NULL, cgPoint.x, cgPoint.y);
 		}
-        
-        
-    }
-	
-    /*
-    CGMutablePathRef fullPath = CGPathCreateMutable();
-    BOOL pathIsEmpty = YES;
-    for (int i=0;i< _polyline.pointCount;i++){
-        CGPoint point = [self pointForMapPoint:_polyline.points[i]];
-        if (pathIsEmpty){
-            CGPathMoveToPoint(fullPath, nil, point.x, point.y);
-            pathIsEmpty = NO;
-        } else {
-            CGPathAddLineToPoint(fullPath, nil, point.x, point.y);
-        }
     }
     
-    CGRect pointsRect = CGPathGetBoundingBox(fullPath);
-    CGRect mapRectCG = [self rectForMapRect:mapRect];
-    if (!CGRectIntersectsRect(pointsRect, mapRectCG))return;
-    UIColor* pcolor,*ccolor;
-    for (int i=0;i< _polyline.pointCount;i++){
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPoint point = [self pointForMapPoint:_polyline.points[i]];
-        ccolor = [UIColor colorWithHue:hues[i] saturation:1.0f brightness:1.0f alpha:1.0f];
-        if (i==0){
-            CGPathMoveToPoint(path, nil, point.x, point.y);
-        } else {
-            CGPoint prevPoint = [self pointForMapPoint:_polyline.points[i-1]];
-            CGPathMoveToPoint(path, nil, prevPoint.x, prevPoint.y);
-            CGPathAddLineToPoint(path, nil, point.x, point.y);
-            CGFloat pc_r,pc_g,pc_b,pc_a,
-            cc_r,cc_g,cc_b,cc_a;
-            [pcolor getRed:&pc_r green:&pc_g blue:&pc_b alpha:&pc_a];
-            [ccolor getRed:&cc_r green:&cc_g blue:&cc_b alpha:&cc_a];
-            CGFloat gradientColors[8] = {pc_r,pc_g,pc_b,pc_a,
-				cc_r,cc_g,cc_b,cc_a};
-            
-            CGFloat gradientLocation[2] = {0,1};
-            CGContextSaveGState(context);
-            CGFloat lineWidth = CGContextConvertSizeToUserSpace(context, (CGSize){self.lineWidth,self.lineWidth}).width;
-            CGPathRef pathToFill = CGPathCreateCopyByStrokingPath(path, NULL, lineWidth, self.lineCap, self.lineJoin, self.miterLimit);
-            CGContextAddPath(context, pathToFill);
-            CGContextClip(context);
-            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-            CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, gradientColors, gradientLocation, 2);
-            CGColorSpaceRelease(colorSpace);
-            CGPoint gradientStart = prevPoint;
-            CGPoint gradientEnd = point;
-            CGContextDrawLinearGradient(context, gradient, gradientStart, gradientEnd, kCGGradientDrawsAfterEndLocation);
-            CGGradientRelease(gradient);
-            CGContextRestoreGState(context);
-        }
-        pcolor = [UIColor colorWithCGColor:ccolor.CGColor];
-    }
-	 */
-	
+    
+    return path;
 }
+
 
 @end

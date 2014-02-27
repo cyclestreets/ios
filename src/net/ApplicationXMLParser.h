@@ -40,8 +40,4 @@
 
 -(NSDictionary*)parseXML:(NSData*)data forType:(NSString*)datatype;
 
-+(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode;
-+(NSMutableDictionary*)newDictonaryFromXMLElementAttributes:(TBXMLElement*)innode;
-+(NSMutableArray*)newArrayForNodesNamed:(NSString*)nodeName fromXMLElement:(TBXMLElement*)innode;
-
 @end

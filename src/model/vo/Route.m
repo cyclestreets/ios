@@ -46,19 +46,17 @@ static NSString *TIME = @"cs:time";
 static NSString *ROUTEDATE = @"cs:whence";
 
 @implementation Route
-@synthesize segments;
-@synthesize header;
-@synthesize userRouteName;
+
 
 
 - (id) initWithElements:(NSDictionary *)elements {
 	if (self = [super init]) {
-		segments = [[NSMutableArray alloc] init];
+		_segments = [[NSMutableArray alloc] init];
 		NSInteger time = 0;
 		NSInteger distance = 0;
 		for (NSDictionary *segmentDictionary in [elements objectForKey:SEGMENT_ELEMENT]) {
 			Segment *segment = [[Segment alloc] initWithDictionary:segmentDictionary atTime:time atDistance:distance];
-			[segments addObject:segment];
+			[_segments addObject:segment];
 			time += [segment segmentTime];
 			distance += [segment segmentDistance];
 		}
@@ -67,7 +65,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 		if ([routeElements count] > 0) {
 			value = [[elements objectForKey:ROUTE_ELEMENT] objectAtIndex:0];
 		}
-		header = [NSDictionary dictionaryWithDictionary:value];																				 
+		_header = [NSDictionary dictionaryWithDictionary:value];																				 
 	}
 	return self;
 }
@@ -77,11 +75,11 @@ static NSString *ROUTEDATE = @"cs:whence";
 }
 
 - (int) numSegments {
-	return [segments count];
+	return [_segments count];
 }
 
 - (Segment *) segmentAtIndex:(int)index {
-	return [segments objectAtIndex:index];
+	return [_segments objectAtIndex:index];
 }
 
 // We previously had a String which was numeric.
@@ -102,15 +100,15 @@ static NSString *ROUTEDATE = @"cs:whence";
 
 - (CLLocationCoordinate2D) northEast {
 	CLLocationCoordinate2D location;
-	location.latitude = [[header valueForKey:NORTH] doubleValue];
-	location.longitude = [[header valueForKey:EAST] doubleValue];
+	location.latitude = [[_header valueForKey:NORTH] doubleValue];
+	location.longitude = [[_header valueForKey:EAST] doubleValue];
 	return location;
 }
 
 - (CLLocationCoordinate2D) southWest {
 	CLLocationCoordinate2D location;
-	location.latitude = [[header valueForKey:SOUTH] doubleValue];
-	location.longitude = [[header valueForKey:WEST] doubleValue];
+	location.latitude = [[_header valueForKey:SOUTH] doubleValue];
+	location.longitude = [[_header valueForKey:WEST] doubleValue];
 	return location;	
 }
 
@@ -121,50 +119,50 @@ static NSString *ROUTEDATE = @"cs:whence";
 //
 - (CLLocationCoordinate2D) insetNorthEast {
 	CLLocationCoordinate2D location;
-	location.latitude = [[header valueForKey:NORTH] doubleValue]+0.002;
-	location.longitude = [[header valueForKey:EAST] doubleValue]+0.002;
+	location.latitude = [[_header valueForKey:NORTH] doubleValue]+0.002;
+	location.longitude = [[_header valueForKey:EAST] doubleValue]+0.002;
 	return location;
 }
 
 - (CLLocationCoordinate2D) insetSouthWest {
 	CLLocationCoordinate2D location;
-	location.latitude = [[header valueForKey:SOUTH] doubleValue]-0.002;
-	location.longitude = [[header valueForKey:WEST] doubleValue]-0.002;
+	location.latitude = [[_header valueForKey:SOUTH] doubleValue]-0.002;
+	location.longitude = [[_header valueForKey:WEST] doubleValue]-0.002;
 	return location;	
 }
 
 - (NSString *) name {
 	
-	if(userRouteName==nil || [userRouteName isEqualToString:EMPTYSTRING]){
-		return [header valueForKey:NAME];
+	if(_userRouteName==nil || [_userRouteName isEqualToString:EMPTYSTRING]){
+		return [_header valueForKey:NAME];
 	}else{
-		return userRouteName;
+		return _userRouteName;
 	}
 }
 
 - (NSString *) itinerary {
-	return [header valueForKey:ITINERARY];
+	return [_header valueForKey:ITINERARY];
 }
 
 - (NSInteger) speed {
-	return [[header valueForKey:SPEED] intValue];
+	return [[_header valueForKey:SPEED] intValue];
 }
 
 - (NSNumber *) length {
-	return [NSNumber numberWithFloat:[[header valueForKey:LENGTH] floatValue]];
+	return [NSNumber numberWithFloat:[[_header valueForKey:LENGTH] floatValue]];
 }
 
 - (NSInteger) time {
-	return [[header valueForKey:TIME] intValue];
+	return [[_header valueForKey:TIME] intValue];
 }
 
 - (NSString *) plan {
-	return [header valueForKey:PLAN];
+	return [_header valueForKey:PLAN];
 }
 
 
 - (NSString *) date {
-	return [header valueForKey:ROUTEDATE];
+	return [_header valueForKey:ROUTEDATE];
 }
 
 

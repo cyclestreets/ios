@@ -7,52 +7,89 @@
 //
 
 #import "CSRoutePolyLineOverlay.h"
-#import "RouteVO.h"
-#import "CSPointVO.h"
-#import "Segment.h"
-#import "GlobalUtilities.h"
-
 #import <pthread.h>
 
+#import "RouteVO.h"
+#import "CSPointVO.h"
+
 #define INITIAL_POINT_SPACE 1000
-#define MINIMUM_DELTA_METERS 1.0
+#define MINIMUM_DELTA_METERS 10.0
 
 @interface CSRoutePolyLineOverlay()
 
 
-@property (nonatomic,assign) MKMapPoint	*points;
-@property (nonatomic,assign) NSUInteger pointCount;
+@property (nonatomic,assign)MKMapRect           boundingMapRect;
+@property (nonatomic,assign) pthread_rwlock_t   rwLock;
+
+
+@property (nonatomic,strong)  RouteVO           * dataProvider;
+@property (nonatomic,readwrite)  NSMutableArray * routePoints;
+
++(NSMutableArray*)coordinatesForRoute:(RouteVO*)route;
 
 
 @end
 
-
 @implementation CSRoutePolyLineOverlay
 
+#pragma mark - CS compatible init
 
-
-
-
-+(CLLocationCoordinate2D*)coordinatesForRoute:(RouteVO*)route fromMap:(MKMapView *)mapView{
+-(id) initWithRoute:(RouteVO*)route {
 	
-	CLLocationCoordinate2D *points = malloc(sizeof(CLLocationCoordinate2D) * [route coordCount]);
+	self = [super init];
+	
+	if (self){
 		
-	int count=0;
+		[self updateForDataProvider:route];
+		
+    }
+    return self;
+	
+	
+}
+
+
+
+-(void)updateForDataProvider:(RouteVO*)route{
+	
+	_dataProvider=route;
+	self.routePoints=[CSRoutePolyLineOverlay coordinatesForRoute:_dataProvider];
+	
+	//bite off up to 1/4 of the world to draw into
+	CSPointVO *firstPoint=_routePoints[0];
+	MKMapPoint origin = firstPoint.mapPoint;
+	origin.x -= MKMapSizeWorld.width/8.0;
+	origin.y -= MKMapSizeWorld.height/8.0;
+	MKMapSize size = MKMapSizeWorld;
+	size.width /=4.0;
+	size.height /=4.0;
+	_boundingMapRect = (MKMapRect) {origin, size};
+	MKMapRect worldRect = MKMapRectMake(0, 0, MKMapSizeWorld.width, MKMapSizeWorld.height);
+	_boundingMapRect = MKMapRectIntersection(_boundingMapRect, worldRect);
+	
+	// initialize read-write lock for drawing and updates
+	pthread_rwlock_init(&_rwLock,NULL);
+}
+
+
+
+#pragma mark - Class methods
+
++(NSMutableArray*)coordinatesForRoute:(RouteVO*)route{
+	
+	NSMutableArray *arr=[NSMutableArray array];
+	
 	for (int i = 0; i < [route numSegments]; i++) {
 		
 		if (i == 0){
 			// start of first segment
-			//CSPointVO *p = [[CSPointVO alloc] init];
+			CSPointVO *point = [[CSPointVO alloc] init];
 			SegmentVO *segment = [route segmentAtIndex:i];
 			CLLocationCoordinate2D pointcoordinate = [segment segmentStart];
-			//CGPoint pt = [mapView convertCoordinate:pointcoordinate toPointToView:mapView];
-			//p.p = pt;
-			//p.isWalking=segment.isWalkingSection;
+			point.point=CGPointMake(pointcoordinate.longitude, pointcoordinate.latitude);
+			point.isWalking=segment.isWalkingSection;
 			
-			NSLog(@"%lf,%lf,%f",pointcoordinate.latitude,pointcoordinate.longitude, [GlobalUtilities randomFloatBetween:0.1f and:12.0f]);
-			
-			points[count]=pointcoordinate;
-			count++;
+			[arr addObject:point];
 		}
 		
 		// remainder of all segments
@@ -62,22 +99,46 @@
 		for (int i = 1; i < [allPoints count]; i++) {
 			CSPointVO *latlon = [allPoints objectAtIndex:i];
 			CLLocationCoordinate2D pointcoordinate;
-			pointcoordinate.latitude = latlon.p.y;
-			pointcoordinate.longitude = latlon.p.x;
-			//CGPoint pt = [mapView convertCoordinate:pointcoordinate toPointToView:mapView];
-			//CSPointVO *screen = [[CSPointVO alloc] init];
-			//screen.p = pt;
-			//screen.isWalking=segment.isWalkingSection;
-			points[count]=pointcoordinate;
+			pointcoordinate.latitude = latlon.point.y;
+			pointcoordinate.longitude = latlon.point.x;
+			CSPointVO *screen = [[CSPointVO alloc] init];
+			screen.point = CGPointMake(pointcoordinate.longitude, pointcoordinate.latitude);
+			screen.isWalking=segment.isWalkingSection;
+			[arr addObject:screen];
 			
-			NSLog(@"%lf,%lf,%f",pointcoordinate.latitude,pointcoordinate.longitude, [GlobalUtilities randomFloatBetween:0.1f and:12.0f]);
-			
-			count++;
 		}
 	}
 	
-	return points;
+	return arr;
 	
 }
+
+
+- (CLLocationCoordinate2D)coordinate
+{
+	CSPointVO *firstPoint=_routePoints[0];
+    return MKCoordinateForMapPoint(firstPoint.mapPoint);
+}
+
+- (MKMapRect)boundingMapRect
+{
+    return _boundingMapRect;
+}
+
+
+
+#pragma mark - Apple code, may be deprecated as we dont use the c arrays anymore
+
+- (void)lockForReading
+{
+    pthread_rwlock_rdlock(&_rwLock);
+}
+
+- (void)unlockForReading
+{
+    pthread_rwlock_unlock(&_rwLock);
+}
+
+
 
 @end

@@ -27,7 +27,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "RouteSegmentViewController.h"
 #import "SegmentVO.h"
-#import "RouteLineView.h"
 #import "MapViewController.h"
 #import "AppDelegate.h"
 #import "CycleStreets.h"
@@ -53,7 +52,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface RouteSegmentViewController()< MKMapViewDelegate>
 
-@property (nonatomic, weak) IBOutlet RouteLineView						* lineView;
+
 @property (nonatomic, weak) IBOutlet UILabel							* attributionLabel;
 @property (nonatomic, weak) IBOutlet MKMapView							* mapView;
 @property (nonatomic, weak) IBOutlet UIToolbar							* toolBar;
@@ -245,7 +244,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_footerView.segmentIndexLabel.text=message;
 	 
 	
-	[_lineView setNeedsDisplay];
 }
 
 
@@ -488,7 +486,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[self updateNextPreviousUI];
 	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
 	
-	[_lineView setNeedsDisplay];
 }
 
 
@@ -551,13 +548,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.currentLocation=userLocation.location;
 	
 	[_mapView showAnnotations:@[userLocation,_startAnnotation,_endAnnotation] animated:YES];
-		
-	[_lineView setNeedsDisplay];
+	
 	
 	if(!_footerIsHidden)
 		[self didToggleInfo];
 	
-	[_lineView setNeedsDisplay];
 	
 }
 

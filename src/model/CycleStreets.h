@@ -31,8 +31,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <CoreLocation/CoreLocation.h>
 
 
-static NSInteger MAX_ZOOM_LOCATION = 18;
-static NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
+extern const NSInteger MAX_ZOOM_LOCATION;
+extern const NSInteger MAX_ZOOM_LOCATION_ACCURACY;
 
 
 @interface CycleStreets : NSObject {
