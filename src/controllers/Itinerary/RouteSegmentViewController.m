@@ -48,6 +48,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoManager.h"
 #import "CSPhotomapAnnotation.h"
 #import "CSPhotomapAnnotationView.h"
+#import "CSRoutePolyLineOverlay.h"
+#import "CSRoutePolyLineRenderer.h"
+
 
 
 @interface RouteSegmentViewController()< MKMapViewDelegate>
@@ -66,6 +69,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic) BOOL												footerIsHidden;
 
 @property (nonatomic,strong)  SegmentVO									* currentSegment;
+@property (nonatomic,strong)  CSRoutePolyLineOverlay					* routeOverlay;
+@property (nonatomic,strong)  CSRoutePolyLineRenderer					* routeOverlayRenderer;
 
 @property (nonatomic, strong) CLLocation								* currentLocation;
 
@@ -142,7 +147,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 			newoverlay.canReplaceMapContent = YES;
 			[_mapView removeOverlay:overlay];
-			[_mapView addOverlay:newoverlay];
+			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
 			break;
 		}
 	}
@@ -160,15 +165,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
-	_mapView.showsUserLocation=YES;
+	
 	
 	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
 	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 	newoverlay.canReplaceMapContent = YES;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	
-	
-	//[_lineView setPointListProvider:self];
 	
 	//photo & info default to ON state
 	self.infoButton.style = UIBarButtonItemStyleDone;
@@ -356,7 +359,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
         return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
         
     }
-	// add routeline overlay here
+	
+	if([overlay isKindOfClass:[CSRoutePolyLineOverlay class]]){
+		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
+		return _routeOverlayRenderer;
+	}
     
     return nil;
 }
@@ -476,15 +483,22 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		sw.longitude = end.longitude;
 		ne.longitude = start.longitude;
 	}
-	//MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
-	//[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
 	
+	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
+	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(100,20,100,20) animated:YES];
+
 	[self updateupdateRouteAnnotationsToStart:start end:end];
 	
-	[_mapView showAnnotations:@[_startAnnotation,_endAnnotation] animated:YES];
+	if(_routeOverlay==nil){
+		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:nil];
+		[_routeOverlay updateForSegment:_currentSegment];
+		[self.mapView addOverlay:_routeOverlay];
+	}else{
+		[_routeOverlay updateForSegment:_currentSegment];
+		[_routeOverlayRenderer setNeedsDisplayInMapRect:mapRect];
+	}
 	
 	[self updateNextPreviousUI];
-	[self fetchPhotoMarkersNorthEast:ne SouthWest:sw];
 	
 }
 

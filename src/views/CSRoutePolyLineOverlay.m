@@ -52,6 +52,9 @@
 
 -(void)updateForDataProvider:(RouteVO*)route{
 	
+	if(route==nil)
+		return;
+	
 	_dataProvider=route;
 	self.routePoints=[CSRoutePolyLineOverlay coordinatesForRoute:_dataProvider];
 	
@@ -71,6 +74,20 @@
 	pthread_rwlock_init(&_rwLock,NULL);
 }
 
+
+-(void)updateForSegment:(SegmentVO*)segment{
+	
+	CSPointVO *startpoint = [[CSPointVO alloc] init];
+	startpoint.point=CGPointMake([segment segmentStart].longitude, [segment segmentStart].latitude);
+	startpoint.isWalking=segment.isWalkingSection;
+	
+	CSPointVO *endpoint = [[CSPointVO alloc] init];
+	endpoint.point=CGPointMake([segment segmentEnd].longitude, [segment segmentEnd].latitude);
+	endpoint.isWalking=segment.isWalkingSection;
+	
+	self.routePoints=[@[startpoint,endpoint] mutableCopy];
+	
+}
 
 
 #pragma mark - Class methods

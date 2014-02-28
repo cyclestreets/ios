@@ -625,8 +625,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
     }
 	
 	if([overlay isKindOfClass:[CSRoutePolyLineOverlay class]]){
-		CSRoutePolyLineRenderer* lineView = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
-		return lineView;
+		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
+		return _routeOverlayRenderer;
 	}
     
     return nil;

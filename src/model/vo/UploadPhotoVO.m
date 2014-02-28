@@ -7,7 +7,7 @@
 //
 
 #import "UploadPhotoVO.h"
-#import "ImageManipulator.h"
+#import "ImageUtilties.h"
 #import "SettingsManager.h"
 #import "NSDate+Helper.h"
 #import "StringUtilities.h"
@@ -151,7 +151,7 @@
 			if ([imageSize isEqualToString:@"full"]) {
 				scaledImage = image;
 			} else {
-				scaledImage = [ImageManipulator resizeImage:image destWidth:640 destHeight:480];
+				scaledImage = [ImageUtilties resizeImage:image destWidth:640 destHeight:480];
 			}
 			
 		}

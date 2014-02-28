@@ -7,7 +7,7 @@
 //
 
 #import "RouteManager.h"
-#import "Query.h"
+//#import "Query.h"
 #import "XMLRequest.h"
 #import "GlobalUtilities.h"
 #import "CycleStreets.h"

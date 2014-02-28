@@ -10,7 +10,7 @@
 #import "FrameworkObject.h"
 #import "SynthesizeSingleton.h"
 #import "RouteVO.h"
-#import "Query.h"
+//#import "Query.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 

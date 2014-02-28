@@ -9,7 +9,7 @@
 
 #import <MapKit/MapKit.h>
 
-@class RouteVO;
+@class RouteVO,SegmentVO;
 
 @interface CSRoutePolyLineOverlay : NSObject <MKOverlay>
 
@@ -18,6 +18,8 @@
 
 -(id) initWithRoute:(RouteVO*)route;
 -(void)updateForDataProvider:(RouteVO*)route;
+
+-(void)updateForSegment:(SegmentVO*)segment;
 
 - (void)lockForReading;
 - (void)unlockForReading;

@@ -7,7 +7,7 @@
 //
 
 #import "PhotoWizardViewController.h"
-#import "ImageManipulator.h"
+#import "ImageUtilties.h"
 #import "UploadPhotoVO.h"
 #import "GlobalUtilities.h"
 #import <AssetsLibrary/AssetsLibrary.h>

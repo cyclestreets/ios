@@ -7,7 +7,6 @@
 //
 
 #import "StartupManager.h"
-#import "ConnectionValidator.h"
 #import "UserSettingsManager.h"
 #import "DataSourceManager.h"
 #import "GlobalUtilities.h"

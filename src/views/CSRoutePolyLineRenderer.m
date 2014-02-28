@@ -27,7 +27,7 @@
 
 - (void)drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale  inContext:(CGContextRef)context{
 	
-    CSRoutePolyLineOverlay *crumbs = (CSRoutePolyLineOverlay *)(self.overlay);
+    CSRoutePolyLineOverlay *dataProvider = (CSRoutePolyLineOverlay *)(self.overlay);
     
     CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale);
     
@@ -41,9 +41,9 @@
 	float dashes[] = { 4/zoomScale, 4/zoomScale };
 	//float normal[]={1};
     
-    [crumbs lockForReading];
-    CGPathRef normalPath = [self newPathForPoints:crumbs.routePoints clipRect:clipRect zoomScale:zoomScale isDashed:NO];
-    [crumbs unlockForReading];
+    [dataProvider lockForReading];
+    CGPathRef normalPath = [self newPathForPoints:dataProvider.routePoints clipRect:clipRect zoomScale:zoomScale isDashed:NO];
+    [dataProvider unlockForReading];
     
     if (normalPath != nil)
     {
@@ -58,9 +58,9 @@
         CGContextRestoreGState(context);
     }
     
-    [crumbs lockForReading];
-    CGPathRef dashedPath = [self newPathForPoints:crumbs.routePoints clipRect:clipRect zoomScale:zoomScale isDashed:YES];
-    [crumbs unlockForReading];
+    [dataProvider lockForReading];
+    CGPathRef dashedPath = [self newPathForPoints:dataProvider.routePoints clipRect:clipRect zoomScale:zoomScale isDashed:YES];
+    [dataProvider unlockForReading];
     
     if (dashedPath != nil)
     {

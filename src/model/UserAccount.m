@@ -17,7 +17,7 @@
 #import "NetUtilities.h"
 #import "SFHFKeychainUtils.h"
 #import "DeviceUtilities.h"
-#import "Utiltities.h"
+#import "GlobalUtilities.h"
 #import "HudManager.h"
 #import "CycleStreets.h"
 #import "Files.h"
