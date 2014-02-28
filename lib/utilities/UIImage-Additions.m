@@ -1,43 +1,44 @@
-// UKImage.mm -- extra UIImage methods
-// by allen brunson  march 29 2009
-// based on original code by Kevin Lohman:
-// http://blog.logichigh.com/2008/06/05/uiimage-fix/
 
-#include "UKImage.h"
+
+#include "UIImage-Additions.h"
 #import "GlobalUtilities.h"
 
-static CGRect swapWidthAndHeight(CGRect rect)
+static inline CGFloat degreesToRadians(CGFloat degrees)
 {
-    CGFloat  swap = rect.size.width;
-    
-    rect.size.width  = rect.size.height;
-    rect.size.height = swap;
-    
-    return rect;
+    return M_PI * (degrees / 180.0);
 }
 
-@implementation UIImage (UKImage)
+static inline CGSize swapWidthAndHeight(CGSize size)
+{
+    CGFloat  swap = size.width;
+	
+    size.width  = size.height;
+    size.height = swap;
+	
+    return size;
+}
+
+@implementation UIImage (Additions)
+
+// rotate an image to any 90-degree orientation, with or without mirroring.
+// original code by kevin lohman, heavily modified by yours truly.
+// http://blog.logichigh.com/2008/06/05/uiimage-fix/
 
 -(UIImage*)rotate:(UIImageOrientation)orient
 {
     CGRect             bnds = CGRectZero;
     UIImage*           copy = nil;
     CGContextRef       ctxt = nil;
-    CGImageRef         imag = self.CGImage;
     CGRect             rect = CGRectZero;
     CGAffineTransform  tran = CGAffineTransformIdentity;
 	
-    rect.size.width  = CGImageGetWidth(imag);
-    rect.size.height = CGImageGetHeight(imag);
-    
-    bnds = rect;
-    
+    bnds.size = self.size;
+    rect.size = self.size;
+	
     switch (orient)
     {
         case UIImageOrientationUp:
-			// would get you an exact copy of the original
-			assert(false);
-			return nil;
+			return self;
 			
         case UIImageOrientationUpMirrored:
 			tran = CGAffineTransformMakeTranslation(rect.size.width, 0.0);
@@ -47,7 +48,7 @@ static CGRect swapWidthAndHeight(CGRect rect)
         case UIImageOrientationDown:
 			tran = CGAffineTransformMakeTranslation(rect.size.width,
 													rect.size.height);
-			tran = CGAffineTransformRotate(tran, M_PI);
+			tran = CGAffineTransformRotate(tran, degreesToRadians(180.0));
 			break;
 			
         case UIImageOrientationDownMirrored:
@@ -56,29 +57,29 @@ static CGRect swapWidthAndHeight(CGRect rect)
 			break;
 			
         case UIImageOrientationLeft:
-			bnds = swapWidthAndHeight(bnds);
+			bnds.size = swapWidthAndHeight(bnds.size);
 			tran = CGAffineTransformMakeTranslation(0.0, rect.size.width);
-			tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
+			tran = CGAffineTransformRotate(tran, degreesToRadians(-90.0));
 			break;
 			
         case UIImageOrientationLeftMirrored:
-			bnds = swapWidthAndHeight(bnds);
+			bnds.size = swapWidthAndHeight(bnds.size);
 			tran = CGAffineTransformMakeTranslation(rect.size.height,
 													rect.size.width);
 			tran = CGAffineTransformScale(tran, -1.0, 1.0);
-			tran = CGAffineTransformRotate(tran, 3.0 * M_PI / 2.0);
+			tran = CGAffineTransformRotate(tran, degreesToRadians(-90.0));
 			break;
 			
         case UIImageOrientationRight:
-			bnds = swapWidthAndHeight(bnds);
+			bnds.size = swapWidthAndHeight(bnds.size);
 			tran = CGAffineTransformMakeTranslation(rect.size.height, 0.0);
-			tran = CGAffineTransformRotate(tran, M_PI / 2.0);
+			tran = CGAffineTransformRotate(tran, degreesToRadians(90.0));
 			break;
 			
         case UIImageOrientationRightMirrored:
-			bnds = swapWidthAndHeight(bnds);
+			bnds.size = swapWidthAndHeight(bnds.size);
 			tran = CGAffineTransformMakeScale(-1.0, 1.0);
-			tran = CGAffineTransformRotate(tran, M_PI / 2.0);
+			tran = CGAffineTransformRotate(tran, degreesToRadians(90.0));
 			break;
 			
         default:
@@ -107,8 +108,68 @@ static CGRect swapWidthAndHeight(CGRect rect)
     }
 	
     CGContextConcatCTM(ctxt, tran);
-    CGContextDrawImage(UIGraphicsGetCurrentContext(), rect, imag);
-    
+    CGContextDrawImage(ctxt, rect, self.CGImage);
+	
+    copy = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+	
+    return copy;
+}
+
+-(UIImage*)rotateAndScaleFromCameraWithMaxSize:(CGFloat)maxSize
+{
+    UIImage*  imag = self;
+	
+    imag = [imag rotate:imag.imageOrientation];
+    imag = [imag scaleWithMaxSize:maxSize];
+	
+    return imag;
+}
+
+-(UIImage*)scaleWithMaxSize:(CGFloat)maxSize
+{
+    return [self scaleWithMaxSize:maxSize quality:kCGInterpolationHigh];
+}
+
+-(UIImage*)scaleWithMaxSize:(CGFloat)maxSize
+					quality:(CGInterpolationQuality)quality
+{
+    CGRect        bnds = CGRectZero;
+    UIImage*      copy = nil;
+    CGContextRef  ctxt = nil;
+    CGRect        orig = CGRectZero;
+    CGFloat       rtio = 0.0;
+    CGFloat       scal = 1.0;
+	
+    bnds.size = self.size;
+    orig.size = self.size;
+    rtio = orig.size.width / orig.size.height;
+	
+    if ((orig.size.width <= maxSize) && (orig.size.height <= maxSize))
+    {
+        return self;
+    }
+	
+    if (rtio > 1.0)
+    {
+        bnds.size.width  = maxSize;
+        bnds.size.height = maxSize / rtio;
+    }
+    else
+    {
+        bnds.size.width  = maxSize * rtio;
+        bnds.size.height = maxSize;
+    }
+	
+    UIGraphicsBeginImageContext(bnds.size);
+    ctxt = UIGraphicsGetCurrentContext();
+	
+    scal = bnds.size.width / orig.size.width;
+    CGContextSetInterpolationQuality(ctxt, quality);
+    CGContextScaleCTM(ctxt, scal, -scal);
+    CGContextTranslateCTM(ctxt, 0.0, -orig.size.height);
+    CGContextDrawImage(ctxt, orig, self.CGImage);
+	
     copy = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 	
@@ -147,6 +208,5 @@ static CGRect swapWidthAndHeight(CGRect rect)
 	
 }
 
-
-
 @end
+

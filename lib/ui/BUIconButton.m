@@ -8,7 +8,7 @@
 #import "BUIconButton.h"
 #import "ButtonUtilities.h"
 #import "StyleManager.h"
-#import "ImageManipulator.h"
+#import "ImageUtilties.h"
 #import <Pixate.h>
 
 @implementation BUIconButton

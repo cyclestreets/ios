@@ -112,6 +112,14 @@
 }
 
 
++(BOOL)isSimulatorDevice{
+    
+    if([self detectDeviceFamily]==DEVICEFAMILY_SIMULATOR){
+        return YES;
+    }
+    return NO;
+}
+
 + (NSString *) returnDeviceName:(BOOL)ignoreSimulator {
     NSString *returnValue = @"Unknown";
     
@@ -158,7 +166,7 @@
 }
 
 
-+ (NSString *) uniqueDeviceIdentifier{
++ (NSString *) uniqueIdentifier{
 	
     CFUUIDRef   uuid = CFUUIDCreate(NULL);
     CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);

@@ -8,8 +8,6 @@
 
 #import "GlobalUtilities.h"
 #import "RegexKitLite.h"
-#import "HalfRoundedRectView.h"
-#import "RoundedRectView.h"
 #import "UIButton+Glossy.h"
 #import "NSDate-Misc.h"
 #import "StyleManager.h"
@@ -58,26 +56,7 @@
 
 +(void)createCornerContainer:(UIView *)viewToUse forWidth:(CGFloat)width forHeight:(CGFloat)height drawHeader:(BOOL)header{
 	
-	if(header==YES){
-		HalfRoundedRectView *halfroundedRect = [[HalfRoundedRectView alloc] initWithFrame:CGRectMake(1.0, 1.0, width-2, 30.0)];
-		halfroundedRect.rectColor=UIColorFromRGB(0x9E005D);
-		[viewToUse addSubview:halfroundedRect];
-		[viewToUse sendSubviewToBack:halfroundedRect];
-	}
 	
-	RoundedRectView *roundedRect = [[RoundedRectView alloc] initWithFrame:CGRectMake(1.0, 1.0, width-2, height-2)];
-	roundedRect.rectColor=UIColorFromRGB(0xCBEFF1);
-	roundedRect.strokeColor=UIColorFromRGB(0xFFFFFF);	
-	roundedRect.strokeWidth=0.0;
-	[viewToUse addSubview:roundedRect];
-	[viewToUse sendSubviewToBack:roundedRect];
-	
-	
-	RoundedRectView *wroundedRect = [[RoundedRectView alloc] initWithFrame:CGRectMake(0.0, 0.0, width, height)];
-	wroundedRect.rectColor=UIColorFromRGB(0xFFFFFF);
-	wroundedRect.strokeWidth=0.0;
-	[viewToUse addSubview:wroundedRect];
-	[viewToUse sendSubviewToBack:wroundedRect];
 }
 
 

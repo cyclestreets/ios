@@ -12,7 +12,7 @@
 #import "GenericConstants.h"
 #import "GlobalUtilities.h"
 #import "UIView+Additions.h"
-#import "ImageManipulator.h"
+#import "ImageUtilties.h"
 #import <Pixate.h>
 
 @implementation ButtonUtilities
@@ -365,7 +365,7 @@
 	
 	if(iconimagename!=nil){
 		UIImage *iconimage=[[StyleManager sharedInstance] imageForType:iconimagename];
-		iconimage=[ImageManipulator newRoundCornerImage:iconimage :20 :20];
+		iconimage=[ImageUtilties newRoundCornerImage:iconimage :20 :20];
 		[button setImage:iconimage forState:UIControlStateNormal];
 	}
 	
