@@ -25,6 +25,26 @@
 @implementation CSRoutePolyLineRenderer
 
 
+- (id)initWithOverlay:(id <MKOverlay>)overlay{
+	
+	self=[super initWithOverlay:overlay];
+	
+	if(self){
+		
+		_primaryColor=[UIColor blueColor];
+		_secondaryColor=[UIColor redColor];
+		
+		_secondaryDash=4.0f;
+		
+	}
+	
+	return self;
+	
+}
+
+//TODO: definable colors
+//TODO: definable dashes
+//TODO: new class with single line with defianble values
 - (void)drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale  inContext:(CGContextRef)context{
 	
     CSRoutePolyLineOverlay *dataProvider = (CSRoutePolyLineOverlay *)(self.overlay);
@@ -35,11 +55,11 @@
     // of the currently drawn rect are included in the generated path.
     MKMapRect clipRect = MKMapRectInset(mapRect, -lineWidth, -lineWidth);
 	
-	CGColorRef dashColor=[UIColor redColor].CGColor;
-	CGColorRef solidColor=[UIColor blueColor].CGColor;
+	CGColorRef dashColor=_secondaryColor.CGColor;
+	CGColorRef solidColor=_primaryColor.CGColor;
 	
-	float dashes[] = { 4/zoomScale, 4/zoomScale };
-	//float normal[]={1};
+	float dashes[] = { _secondaryDash/zoomScale, _secondaryDash/zoomScale };
+	//float normal[]={_primaryDash};
     
     [dataProvider lockForReading];
     CGPathRef normalPath = [self newPathForPoints:dataProvider.routePoints clipRect:clipRect zoomScale:zoomScale isDashed:NO];

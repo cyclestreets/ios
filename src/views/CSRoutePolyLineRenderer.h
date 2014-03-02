@@ -10,8 +10,14 @@
 #import <MapKit/MapKit.h>
 
 @interface CSRoutePolyLineRenderer : MKOverlayPathRenderer
-{
 
-}
+
+
+@property (nonatomic,strong)  UIColor				*primaryColor;
+@property (nonatomic,strong)  UIColor				*secondaryColor;
+
+@property (nonatomic,assign)  float					primaryDash;
+@property (nonatomic,assign)  float					secondaryDash;
+
 
 @end

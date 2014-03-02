@@ -144,7 +144,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	for(id <MKOverlay> overlay in overlays){
 		if([overlay isKindOfClass:[MKTileOverlay class]] ){
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+			//newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 			newoverlay.canReplaceMapContent = YES;
 			[_mapView removeOverlay:overlay];
 			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
@@ -168,7 +168,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+	//newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 	newoverlay.canReplaceMapContent = YES;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	
@@ -469,14 +469,23 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CLLocationCoordinate2D end = [_currentSegment segmentEnd];
 	CLLocationCoordinate2D ne;
 	CLLocationCoordinate2D sw;
-	if (start.latitude < end.latitude) {
+	
+	// Note: if end/start coordinates have same value, MKMapRect will calculate a wacky zoom
+	// so we tweak the values if we spot this.
+	if(start.longitude==end.longitude)
+		end.longitude+=0.000001;
+	if(start.latitude==end.latitude)
+		end.latitude+=0.000001;
+	
+	
+	if (start.latitude <= end.latitude) {
 		sw.latitude = start.latitude;
 		ne.latitude = end.latitude;
 	} else {
 		sw.latitude = end.latitude;
 		ne.latitude = start.latitude;
 	}
-	if (start.longitude < end.longitude) {
+	if (start.longitude <= end.longitude) {
 		sw.longitude = start.longitude;
 		ne.longitude = end.longitude;
 	} else {
@@ -489,11 +498,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 	[self updateupdateRouteAnnotationsToStart:start end:end];
 	
+	//TODO: we are going to change the way this works
+	//TODO: 2 overlays, one with whole route (transparent line)
+	//TODO: and one with current segment
+	
 	if(_routeOverlay==nil){
-		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:nil];
+		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithSegment:nil];
 		[_routeOverlay updateForSegment:_currentSegment];
 		[self.mapView addOverlay:_routeOverlay];
 	}else{
+		//TODO: calling this does not entirely clear last line, maybe remove and add required
 		[_routeOverlay updateForSegment:_currentSegment];
 		[_routeOverlayRenderer setNeedsDisplayInMapRect:mapRect];
 	}

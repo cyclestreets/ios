@@ -8,7 +8,6 @@
 // stores all global methods and constants
 
 #import <Foundation/Foundation.h>
-//#import "TestFlight.h"
 #import "AppConstants.h"
 
 
@@ -60,7 +59,6 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,[NSString stringWithFormat
 
 // CGRECT Log
 #define LogRect(RECT) NSLog(@"(%0.0f, %0.0f) %0.0f x %0.0f", RECT.origin.x, RECT.origin.y, RECT.size.width, RECT.size.height)
-
 
 
 /// iPAD

@@ -19,6 +19,7 @@
 -(id) initWithRoute:(RouteVO*)route;
 -(void)updateForDataProvider:(RouteVO*)route;
 
+-(id) initWithSegment:(SegmentVO*)segment;
 -(void)updateForSegment:(SegmentVO*)segment;
 
 - (void)lockForReading;

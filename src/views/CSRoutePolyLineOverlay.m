@@ -48,6 +48,20 @@
 	
 }
 
+-(id) initWithSegment:(SegmentVO*)segment {
+	
+	self = [super init];
+	
+	if (self){
+		
+		[self updateForSegment:segment];
+		
+    }
+    return self;
+	
+	
+}
+
 
 
 -(void)updateForDataProvider:(RouteVO*)route{
@@ -77,15 +91,22 @@
 
 -(void)updateForSegment:(SegmentVO*)segment{
 	
-	CSPointVO *startpoint = [[CSPointVO alloc] init];
-	startpoint.point=CGPointMake([segment segmentStart].longitude, [segment segmentStart].latitude);
-	startpoint.isWalking=segment.isWalkingSection;
+	self.routePoints=[CSRoutePolyLineOverlay coordinatesForSegment:segment];
 	
-	CSPointVO *endpoint = [[CSPointVO alloc] init];
-	endpoint.point=CGPointMake([segment segmentEnd].longitude, [segment segmentEnd].latitude);
-	endpoint.isWalking=segment.isWalkingSection;
 	
-	self.routePoints=[@[startpoint,endpoint] mutableCopy];
+	CSPointVO *firstPoint=_routePoints[0];
+	MKMapPoint origin = firstPoint.mapPoint;
+	origin.x -= MKMapSizeWorld.width/8.0;
+	origin.y -= MKMapSizeWorld.height/8.0;
+	MKMapSize size = MKMapSizeWorld;
+	size.width /=4.0;
+	size.height /=4.0;
+	_boundingMapRect = (MKMapRect) {origin, size};
+	MKMapRect worldRect = MKMapRectMake(0, 0, MKMapSizeWorld.width, MKMapSizeWorld.height);
+	_boundingMapRect = MKMapRectIntersection(_boundingMapRect, worldRect);
+	
+	// initialize read-write lock for drawing and updates
+	pthread_rwlock_init(&_rwLock,NULL);
 	
 }
 
@@ -129,6 +150,34 @@
 	return arr;
 	
 }
+
++(NSMutableArray*)coordinatesForSegment:(SegmentVO*)segment{
+	
+	NSMutableArray *arr=[NSMutableArray array];
+	
+	CSPointVO *startpoint = [[CSPointVO alloc] init];
+	startpoint.point=CGPointMake([segment segmentStart].longitude, [segment segmentStart].latitude);
+	startpoint.isWalking=segment.isWalkingSection;
+	[arr addObject:startpoint];
+	
+	NSArray *allPoints = [segment allPoints];
+	
+	for (int i = 1; i < [allPoints count]; i++) {
+		CSPointVO *latlon = [allPoints objectAtIndex:i];
+		CLLocationCoordinate2D pointcoordinate;
+		pointcoordinate.latitude = latlon.point.y;
+		pointcoordinate.longitude = latlon.point.x;
+		CSPointVO *screen = [[CSPointVO alloc] init];
+		screen.point = CGPointMake(pointcoordinate.longitude, pointcoordinate.latitude);
+		screen.isWalking=segment.isWalkingSection;
+		[arr addObject:screen];
+		
+	}
+	
+	return arr;
+	
+}
+
 
 
 - (CLLocationCoordinate2D)coordinate
