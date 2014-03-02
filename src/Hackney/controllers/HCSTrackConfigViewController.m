@@ -162,6 +162,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 - (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation{
 	
+	if(userLocation.location==nil)
+		return;
+	
 	CLLocation *location=userLocation.location;
 	CLLocationDistance deltaDistance = [location distanceFromLocation:_lastLocation];
 	

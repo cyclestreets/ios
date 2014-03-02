@@ -8,6 +8,8 @@
 
 #import "HCSHelpViewController.h"
 #import "UIView+Additions.h"
+#import "GlobalUtilities.h"
+#import "StringManager.h"
 
 @interface HCSHelpViewController ()
 
@@ -102,6 +104,24 @@
 	
 }
 
+
+
+-(IBAction)didSelectOSMbutton:(id)sender{
+	
+	NSString *urlString=[[StringManager sharedInstance] stringForSection:@"global" andType:@"OSMURL"];
+	
+	if(urlString!=nil)
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+	
+}
+-(IBAction)didSelectCSbutton:(id)sender{
+	
+	NSString *urlString=[[StringManager sharedInstance] stringForSection:@"global" andType:@"CSURL"];
+	
+	if(urlString!=nil)
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+	
+}
 
 
 //

@@ -9,6 +9,10 @@
 	</dict>
 	<key>global</key>
 	<dict>
+		<key>OSMURL</key>
+		<string>http://www.openstreetmap.org</string>
+		<key>CSURL</key>
+		<string>http://www.cyclestreets.net</string>
 		<key>error_connection</key>
 		<string>Unable to contact server,\r please check your Network Settings.</string>
 		<key>error_noresults</key>

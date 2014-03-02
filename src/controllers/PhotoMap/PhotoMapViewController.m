@@ -400,7 +400,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation{
 	
-	BetterLog(@"");
+	if(userLocation.location==nil)
+		return;
 	
 	CLLocation *location=userLocation.location;
 	
