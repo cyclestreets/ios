@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  RouteSummary.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 05/09/2010.
 //
 
 #import "RouteSummary.h"

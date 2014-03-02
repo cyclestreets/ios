@@ -256,8 +256,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[self resetWayPoints];
 	
-	//[_lineView setPointListProvider:self];
-	
 		
 	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
 	[self.view addSubview:_walkingRouteOverlayView];
@@ -577,7 +575,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	CLLocationCoordinate2D sw=[_route insetSouthWest];
 	
 	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
-	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 50, 50, 10) animated:YES];
 	
 	// or:
 	//[_mapView showAnnotations:@[array of annotations] animated:NO];
@@ -900,6 +898,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		return;
 	}
 	
+	//TODO: only for certain view states
 	
 	CGPoint touchPoint = [recogniser locationInView:self.mapView];
     CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
@@ -960,6 +959,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	 static NSString *reuseId = @"CSWaypointAnnotationView";
 	 CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
 	
+	//TODO: logic to ensure reused annotationviews have the right state
+	// this occurs due to re creation of annotations if one is removed
+	
 	 if (annotationView == nil){
 		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
 		 annotationView.draggable = YES;
@@ -976,6 +978,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
 	
 	BetterLog(@"Fired");
+	
+	
+	//TODO: this might be less confusing to get right if menu appeared on long prees> might conflict with drag??
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
 	CSWaypointAnnotation* annotation=view.annotation;

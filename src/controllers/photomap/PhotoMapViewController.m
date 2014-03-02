@@ -376,7 +376,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
         return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
         
     }
-	// add routeline overlay here
     
     return nil;
 }
