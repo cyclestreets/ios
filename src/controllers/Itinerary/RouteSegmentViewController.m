@@ -72,6 +72,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic,strong)  CSRoutePolyLineOverlay					* routeOverlay;
 @property (nonatomic,strong)  CSRoutePolyLineRenderer					* routeOverlayRenderer;
 
+@property (nonatomic,strong)  CSRoutePolyLineOverlay					* segmentOverlay;
+@property (nonatomic,strong)  CSRoutePolyLineRenderer					* segmentOverlayRenderer;
+
 @property (nonatomic, strong) CLLocation								* currentLocation;
 
 @property (nonatomic) BOOL												photoIconsVisisble;
@@ -211,8 +214,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if(_mapView.delegate==nil)
 		[_mapView setDelegate:self];
 	
-	if([self isMovingToParentViewController])
+	if([self isMovingToParentViewController]){
 		[self setSegmentIndex:_index];
+		[self updateRouteOverlay];
+	}
+		
 	
 	[super viewWillAppear:animated];
 }
@@ -360,9 +366,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
         
     }
 	
-	if([overlay isKindOfClass:[CSRoutePolyLineOverlay class]]){
+	if(overlay==_routeOverlay){
 		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
+		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x008000, 0.5);
 		return _routeOverlayRenderer;
+	}
+	
+	if(overlay==_segmentOverlay){
+		self.segmentOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
+		return _segmentOverlayRenderer;
 	}
     
     return nil;
@@ -437,11 +449,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 
-//
-/***********************************************
- * @description			END PHOTO METHODS
- ***********************************************/
-//
+
+
+#pragma mark - Route Overlay
+
+- (void) updateRouteOverlay {
+	
+	
+	BetterLog(@"");
+	CLLocationCoordinate2D ne=[_route insetNorthEast];
+	CLLocationCoordinate2D sw=[_route insetSouthWest];
+	
+	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
+	
+	if(_routeOverlay==nil){
+		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:_route];
+		[self.mapView addOverlay:_routeOverlay];
+	}else{
+		[_routeOverlay updateForDataProvider:_route];
+		[_routeOverlayRenderer setNeedsDisplayInMapRect:mapRect];
+	}
+	
+	
+}
 
 
 //
@@ -464,6 +494,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_footerView.dataProvider=_currentSegment;
 	[_footerView updateLayout];
 	[self updateFooterPositions];
+	
+	
 	// centre the view around the segment
 	CLLocationCoordinate2D start = [_currentSegment segmentStart];
 	CLLocationCoordinate2D end = [_currentSegment segmentEnd];
@@ -498,18 +530,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 	[self updateupdateRouteAnnotationsToStart:start end:end];
 	
-	//TODO: we are going to change the way this works
-	//TODO: 2 overlays, one with whole route (transparent line)
-	//TODO: and one with current segment
-	
-	if(_routeOverlay==nil){
-		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithSegment:nil];
-		[_routeOverlay updateForSegment:_currentSegment];
-		[self.mapView addOverlay:_routeOverlay];
+	if(_segmentOverlay==nil){
+		self.segmentOverlay = [[CSRoutePolyLineOverlay alloc] initWithSegment:nil];
+		[_segmentOverlay updateForSegment:_currentSegment];
+		[self.mapView addOverlay:_segmentOverlay];
 	}else{
-		//TODO: calling this does not entirely clear last line, maybe remove and add required
-		[_routeOverlay updateForSegment:_currentSegment];
-		[_routeOverlayRenderer setNeedsDisplayInMapRect:mapRect];
+		[_segmentOverlay updateForSegment:_currentSegment];
+		[_segmentOverlayRenderer setNeedsDisplay];
 	}
 	
 	[self updateNextPreviousUI];

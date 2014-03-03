@@ -932,7 +932,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	BetterLog(@"");
 	
-	//[ButtonUtilities styleIBButton:_locationUpdateButton type:@"green" text:@"Edit Location"];
 	[_locationUpdateButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	_locationMapView.userInteractionEnabled=NO;
