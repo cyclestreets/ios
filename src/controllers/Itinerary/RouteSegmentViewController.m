@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  RouteSegmentViewController.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 12/03/2010.
 //
 
 
@@ -147,7 +146,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	for(id <MKOverlay> overlay in overlays){
 		if([overlay isKindOfClass:[MKTileOverlay class]] ){
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-			//newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 			newoverlay.canReplaceMapContent = YES;
 			[_mapView removeOverlay:overlay];
 			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
@@ -171,7 +170,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-	//newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 	newoverlay.canReplaceMapContent = YES;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	
@@ -343,6 +342,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 #pragma mark - MKMap delegate
+
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
+	
+    if([mapView getZoomLevel]>MAX_ZOOM_LOCATION) {
+        [mapView setCenterCoordinate:[mapView centerCoordinate] zoomLevel:MAX_ZOOM_LOCATION animated:TRUE];
+    }
+	
+}
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
 	
