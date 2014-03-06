@@ -7,37 +7,24 @@
 //	// Prelim implemnetation of new TB XML parser
 
 #import <Foundation/Foundation.h>
-#import "NetResponse.h"
 #import "TBXML.h"
+#import "SynthesizeSingleton.h"
 
-@protocol ApplicationXMLParserDelegate<NSObject>
+@class BUNetworkOperation;
 
--(void)XMLParserDidComplete:(NetResponse*)response;
--(void)XMLParserDidFail:(NetResponse*)response;
-
-@end
-
+typedef void (^ParserCompletionBlock)(BUNetworkOperation *operation);
+typedef void (^ParserErrorBlock)(BUNetworkOperation *operation, NSError *error);
 
 
 @interface ApplicationXMLParser : NSObject {
-	NSMutableDictionary			*parsers;
-	NetResponse					*activeResponse;
-	NSDictionary				*parserMethods;
-	//delegate
-	id<ApplicationXMLParserDelegate>		__unsafe_unretained delegate;
 	
-	NSString					*parserError;
 }
-@property(nonatomic,strong)NSMutableDictionary *parsers;
-@property(nonatomic,strong)NetResponse *activeResponse;
-@property(nonatomic,strong)NSDictionary *parserMethods;
-@property(nonatomic,unsafe_unretained)id<ApplicationXMLParserDelegate> delegate;
-@property(nonatomic,strong)NSString *parserError;
+SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(ApplicationXMLParser);
 
 
+-(void)parseDataForOperation:(BUNetworkOperation* )networkOperation success:(ParserCompletionBlock)success failure:(ParserErrorBlock)failure;
 
--(void)parseData:(NetResponse*)response;
 
--(NSDictionary*)parseXML:(NSData*)data forType:(NSString*)datatype;
+-(id)parseXML:(NSData*)data forType:(NSString*)datatype;
 
 @end

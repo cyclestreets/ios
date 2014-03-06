@@ -26,7 +26,7 @@
 -(void)didReceiveResponse:(NSData*)data forType:(NSString*)type;
 -(void)didCompleteStartup;
 // new variants with request id
--(void)cacheRequestResult:(NetResponse*)response;
+-(void)cacheRequestResult:(BUNetworkOperation*)response;
 -(BOOL)checkCachedDataExpiration:(NetRequest*)request;
 -(void)loadCachedData:(NetRequest*)request;
 -(NSMutableArray*)retrieveCachedDataForType:(NSString*)type andID:(NSString*)requestid;
@@ -35,7 +35,7 @@
 -(void)sendErrorNotification:(NSString*)error dict:(NSDictionary*)dict;
 -(void)displayRequestFailedError:(NSString*)title :(NSString*)message :(NSString*)buttonLabel;
 -(void)removeStaleFiles;
--(BOOL)connectionCacheFallback:(NetResponse*)response;
+-(BOOL)connectionCacheFallback:(BUNetworkOperation*)response;
 
 // compatability mode
 -(void)dataDidLoad:(NSNotification*)notification;
@@ -359,7 +359,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
  * @description			handles event when connection has failed but we have a cached file available
  ***********************************************/
 //
--(BOOL)connectionCacheFallback:(NetResponse*)response{
+-(BOOL)connectionCacheFallback:(BUNetworkOperation*)response{
 	
 	NSMutableArray *result=[self retrieveCachedDataForType:response.dataid andID:response.requestid];
 	
@@ -367,7 +367,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataSourceManager);
 		return NO;
 	}else {
 		BetterLog(@" Connection cache fallback result!=nil");
-		[[Model sharedInstance] setCachedData:result forType:response.dataid withRequestid:response.requestid];
+		[self setCachedData:result forType:response.dataid withRequestid:response.requestid];
 		[self displayRequestFailedError:CONNECTIONERROR :CONNECTIONCACHE :OK];
 		return YES;
 	}

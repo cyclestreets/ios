@@ -13,22 +13,26 @@
 #import "SynthesizeSingleton.h"
 #import "FrameworkObject.h"
 
+@class BUNetworkOperation;
 
 #define kCACHEDIRECTORY @"datacache"
 #define kDATAPRIORITY @"none"
 #define kCACHEARCHIVEKEY @"AppDataSourceCacheKey"
 
 
+@protocol DataSourceManagerDelegate<NSObject>
+
+@optional
+-(void)DataSourceDidCompleteStartup;
+
+@end
+
+
 @interface BUDataSourceManager : FrameworkObject
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DataSourceManager);
+SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(BUDataSourceManager);
 
-
+@property(nonatomic,weak)id<DataSourceManagerDelegate>              delegate;
 @property (nonatomic, strong) NSMutableDictionary                   * services;
-@property (nonatomic, strong) NSMutableString                       * requestURL;
-@property (nonatomic, strong) NSString                              * DATASOURCE;
-@property (nonatomic, strong) NSString                              * diskCachePath;
-@property (nonatomic, assign) BOOL                                  startupState;
-@property (nonatomic, assign) BOOL                                  cacheCreated;
 
 
 -(void)doStartUpSequence;
@@ -40,6 +44,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(DataSourceManager);
 -(void)removeCachedDataForTypeArray:(NSArray*)typeArray;
 
 
-- (void)processDataRequest:(NetRequest*)request forClient:(AFHTTPClientWrapper*)clientSharedInstance;
+- (void)processDataRequest:(BUNetworkOperation*)operation;
 
 @end

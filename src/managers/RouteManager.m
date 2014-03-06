@@ -7,8 +7,7 @@
 //
 
 #import "RouteManager.h"
-//#import "Query.h"
-#import "XMLRequest.h"
+#import "BUNetworkOperation.h"
 #import "GlobalUtilities.h"
 #import "CycleStreets.h"
 #import "AppConstants.h"
@@ -17,37 +16,22 @@
 #import "HudManager.h"
 #import "FavouritesManager.h"
 #import "ValidationVO.h"
-#import "NetResponse.h"
-#import "NetRequest.h"
+#import "BUNetworkOperation.h"
 #import "SettingsManager.h"
 #import "SavedRoutesManager.h"
-#import "Model.h"
 #import "RouteVO.h"
 #import <MapKit/MapKit.h>
 #import "UserLocationManager.h"
 #import "WayPointVO.h"
+#import "ApplicationXMLParser.h"
+#import "BUDataSourceManager.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
 
-@interface RouteManager(Private) 
-
-- (void)warnOnFirstRoute;
-
-- (void) queryFailure:(XMLRequest *)request message:(NSString *)message;
-
--(void)loadRouteForEndPointsResponse:(ValidationVO*)validation;
--(void)loadRouteForRouteIdResponse:(ValidationVO*)validation;
-
-- (NSString *) routesDirectory;
-- (NSString *) oldroutesDirectory;
-
--(void)locationDidFail:(NSNotification*)notification;
--(void)locationDidComplete:(NSNotification*)notification;
+@interface RouteManager()
 
 
--(void)evalRouteArchiveState;
--(BOOL)createRoutesDir;
 
 @end
 
@@ -56,11 +40,6 @@ static NSString *useDom = @"1";
 
 @implementation RouteManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
-@synthesize routes;
-@synthesize legacyRoutes;
-@synthesize selectedRoute;
-@synthesize activeRouteDir;
-@synthesize mapRoutingRequest;
 
 
 //=========================================================== 
@@ -110,7 +89,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
 	BetterLog(@"response.dataid=%@",response.dataid);
@@ -165,7 +144,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	[[UserLocationManager sharedInstance] stopUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
 	
-	[self queryFailure:nil message:@"Could not plan valid route for selected waypoints."];
+	[self queryFailureMessage: @"Could not plan valid route for selected waypoints."];
 	
 }
 
@@ -175,8 +154,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	CLLocation *location=(CLLocation*)[notification object];
 	
-	MKMapItem *source=mapRoutingRequest.source;
-	MKMapItem *destination=mapRoutingRequest.destination;
+	MKMapItem *source=_mapRoutingRequest.source;
+	MKMapItem *destination=_mapRoutingRequest.destination;
 	
 	CLLocationCoordinate2D fromcoordinate=source.placemark.coordinate;
 	CLLocationCoordinate2D tocoordinate=destination.placemark.coordinate;
@@ -207,6 +186,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
  ***********************************************/
 //
 
+
+
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation{
     
 	[self loadRouteForCoordinates:fromlocation.coordinate to:tolocation.coordinate];
@@ -230,19 +211,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
                                      cycleStreets.files.clientid,@"clientid",
                                      nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
     request.dataid=CALCULATEROUTE;
     request.requestid=ZERO;
     request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
-    
-    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-    
+    request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loadRouteForEndPointsResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
     [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
-	
-	
 	
 }
 
@@ -261,15 +244,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
                                      cycleStreets.files.clientid,@"clientid",
                                      nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
     request.dataid=CALCULATEROUTE;
     request.requestid=ZERO;
     request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
     
-    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loadRouteForEndPointsResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
     
     [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
 	
@@ -304,22 +291,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
--(void)loadRouteForEndPointsResponse:(ValidationVO*)validation{
+-(void)loadRouteForEndPointsResponse:(BUNetworkOperation*)response{
 	
 	BetterLog(@"");
     
     
-    switch(validation.validationStatus){
+    switch(response.validationStatus){
         
         case ValidationCalculateRouteSuccess:
 		{  
-           RouteVO *newroute = [validation.responseDict objectForKey:CALCULATEROUTE];
+			RouteVO *newroute = response.dataProvider;
             
             [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
                 
             [self warnOnFirstRoute];
             [self selectRoute:newroute];
-			[self saveRoute:selectedRoute];
+			[self saveRoute:_selectedRoute];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:CALCULATEROUTERESPONSE object:nil];
             
@@ -330,16 +317,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             
         case ValidationCalculateRouteFailed:
             
-            [self queryFailure:nil message:@"Routing error: Could not plan valid route for selected waypoints."];
+            [self queryFailureMessage:@"Routing error: Could not plan valid route for selected waypoints."];
             
         break;
 			
 		
 		case ValidationCalculateRouteFailedOffNetwork:
             
-            [self queryFailure:nil message:@"Routing error: not all waypoints are on known cycle routes."];
+            [self queryFailureMessage:@"Routing error: not all waypoints are on known cycle routes."];
             
 		break;
+			
+		default:
+			break;
         
         
     }
@@ -360,12 +350,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
                                      routeid,@"itinerary",
                                      nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
     request.dataid=RETRIEVEROUTEBYID;
     request.requestid=ZERO;
     request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
     
     NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
@@ -401,12 +390,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 										 routeid,@"itinerary",
 										 nil];
 		
-		NetRequest *request=[[NetRequest alloc]init];
+		BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 		request.dataid=RETRIEVEROUTEBYID;
 		request.requestid=ZERO;
 		request.parameters=parameters;
-		request.revisonId=0;
-		request.source=USER;
+		request.source=DataSourceRequestCacheTypeUseNetwork;
 		
 		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
@@ -433,7 +421,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
             
             [self selectRoute:newroute];
-			[self saveRoute:selectedRoute ];
+			[self saveRoute:_selectedRoute ];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
             
@@ -444,7 +432,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             
         case ValidationCalculateRouteFailed:
             
-            [self queryFailure:nil message:@"Unable to find a route with this number."];
+            [self queryFailureMessage:@"Unable to find a route with this number."];
             
         break;
             
@@ -531,9 +519,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 				
 				NSData *routedata=[[NSData alloc ] initWithContentsOfURL:filename];
 				
-				RouteVO *newroute=(RouteVO*)[[Model sharedInstance].xmlparser parseXML:routedata forType:CALCULATEROUTE];
+				RouteVO *newroute=(RouteVO*)[[ApplicationXMLParser sharedInstance] parseXML:routedata forType:CALCULATEROUTE];
 				
-				[legacyRoutes addObject:newroute];
+				[_legacyRoutes addObject:newroute];
 				
 				[self saveRoute:newroute];
 				
@@ -568,7 +556,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
-- (void) queryFailure:(XMLRequest *)request message:(NSString *)message {
+- (void) queryFailureMessage:(NSString *)message {
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:message andMessage:nil];
 }
 
@@ -599,7 +587,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 - (void) clearSelectedRoute{
 	
-	if(selectedRoute!=nil){
+	if(_selectedRoute!=nil){
 		
 		self.selectedRoute=nil;
 		
@@ -612,15 +600,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 -(BOOL)hasSelectedRoute{
-	return selectedRoute!=nil;
+	return _selectedRoute!=nil;
 }
 
 
 -(BOOL)routeIsSelectedRoute:(RouteVO*)route{
 	
-	if(selectedRoute!=nil){
+	if(_selectedRoute!=nil){
 	
-		return [route.fileid isEqualToString:selectedRoute.fileid];
+		return [route.fileid isEqualToString:_selectedRoute.fileid];
 		
 	}else{
 		return NO;
@@ -672,7 +660,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 -(void)selectRouteWithIdentifier:(NSString*)identifier{
 	
 	if (identifier!=nil) {
-		RouteVO *route = [routes objectForKey:identifier];
+		RouteVO *route = [_routes objectForKey:identifier];
 		if(route!=nil){
 			[self selectRoute:route];
 		}
@@ -693,7 +681,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		route = [self loadRouteForFileID:identifier];
 	}
 	if(route!=nil){
-		[routes setObject:route forKey:identifier];
+		[_routes setObject:route forKey:identifier];
 	}
 	
 }
@@ -728,7 +716,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 -(void)removeRoute:(RouteVO*)route{
 	
-	[routes removeObjectForKey:route.fileid];
+	[_routes removeObjectForKey:route.fileid];
 	[self removeRouteFile:route];
 	
 }

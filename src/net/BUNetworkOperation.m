@@ -358,7 +358,14 @@
 
 
 
-#pragma mark - Cache methods
+#pragma mark - getter methods
+
+
+-(NSString*)url{
+	
+	return [_service objectForKey:REMOTEURL];
+	
+}
 
 -(BOOL)serviceShouldBeCached{
     if(_service!=nil){

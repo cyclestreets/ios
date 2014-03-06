@@ -9,10 +9,8 @@
 #import "PhotoCategoryManager.h"
 #import "ValidationVO.h"
 #import "CycleStreets.h"
-#import "NetRequest.h"
 #import "PhotoCategoryVO.h"
-#import "NetRequest.h"
-#import "NetResponse.h"
+#import "BUNetworkOperation.h"
 #import "GlobalUtilities.h"
 
 
@@ -111,7 +109,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
 	BetterLog(@"response.dataid=%@",response.dataid);
@@ -148,12 +146,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
 									 
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
     request.dataid=PHOTOCATEGORIES;
     request.requestid=ZERO;
     request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
     
     NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];

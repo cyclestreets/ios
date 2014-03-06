@@ -11,10 +11,10 @@
 #import "GlobalUtilities.h"
 #import "StringUtilities.h"
 #import "ApplicationXMLParser.h"
-#import "ApplicationJSONParser.h"
+//#import "ApplicationJSONParser.h"
 #import "GenericConstants.h"
-#import "AppAccountManager.h"
 #import "NSString-Utilities.h"
+#import "ValidationVO.h"
 
 #import "BUNetworkOperation.h"
 #import <AFHTTPRequestOperationManager.h>
@@ -26,34 +26,19 @@
 @interface BUDataSourceManager()
 
 
-@property (nonatomic, strong) NSMutableDictionary		* dataProviders;
-@property (nonatomic, strong) NSMutableDictionary		* cachedrequests;
-@property (nonatomic, strong) NSMutableDictionary		* activeRequests;
-@property(nonatomic,assign)int maxMemoryItems;
+@property (nonatomic, strong) NSMutableDictionary					* dataProviders;
+@property (nonatomic, strong) NSMutableDictionary					* cachedrequests;
+@property (nonatomic, strong) NSMutableDictionary					* activeRequests;
+@property(nonatomic,assign)int										maxMemoryItems;
 
 
--(void)didCompleteStartup;
-// new variants with request id
+@property (nonatomic, strong) NSMutableString                       * requestURL;
+@property (nonatomic, strong) NSString                              * DATASOURCE;
+@property (nonatomic, strong) NSString                              * diskCachePath;
+@property (nonatomic, assign) BOOL                                  startupState;
+@property (nonatomic, assign) BOOL                                  cacheCreated;
 
-// cached data methods
--(NSString*)cachePath;
--(BOOL)createCacheDirectory;
--(void)cacheRequestResult:(BUNetworkOperation*)response;
--(BOOL)checkCachedDataExpiration:(BUNetworkOperation*)request;
--(BOOL)loadCachedData:(BUNetworkOperation*)request;
--(NSMutableArray*)retrieveCachedDataForType:(NSString*)type andID:(NSString*)requestid;
--(NSString*)cacheFilePathForType:(NSString*)type andID:(NSString*)requestid;
 
--(void)sendErrorNotification:(NSString*)error dict:(NSDictionary*)dict;
--(void)sendErrorNotification:(NSString*)error forOpeartion:(BUNetworkOperation*)operation;
--(void)displayRequestFailedError:(NSString*)title :(NSString*)message :(NSString*)buttonLabel;
--(void)removeStaleFiles;
--(BOOL)connectionCacheFallback:(NetResponse*)response;
-
-// compatability mode
--(void)modelDidParseData:(NSNotification*)notification;
--(void)dataDidLoad:(NSNotification*)notification;
--(void)requestDidFail:(NSNotification*)notification;
 
 @end
 
@@ -104,13 +89,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 -(void)listNotificationInterests{
 	
-	
-	[notifications addObject:REMOTEFILELOADED];
-	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
-	[notifications addObject:REQUESTDATAREFRESH];
-	[notifications addObject:REMOTEFILEFAILED];
-	[notifications addObject:XMLPARSERDIDFAILPARSING];
-	[notifications addObject:JSONPARSERDIDFAILPARSING];
     
     [notifications addObject:LOCALFILELOADED];
 	
@@ -122,23 +100,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
-	NSString *name=notification.name;
+//	NSString *name=notification.name;
 	
-	if([name isEqualToString:REMOTEFILELOADED]){
-		[self dataDidLoad:notification];
-	}else if([name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
-		[self modelDidParseData:notification];
-	}else if([name isEqualToString:REQUESTDATAREFRESH]){
-		[self requestDataForType:notification];
-	}else if ([name isEqualToString:REMOTEFILEFAILED]) {
-		[self requestDidFail:notification];
-	}else if ([name isEqualToString:XMLPARSERDIDFAILPARSING]) {
-		[self requestDidFail:notification];
-	}else if ([name isEqualToString:JSONPARSERDIDFAILPARSING]) {
-		[self requestDidFail:notification];
-	}if([name isEqualToString:LOCALFILELOADED]){
-		[self dataDidLoad:notification];
-    }
+//	if([name isEqualToString:REMOTEFILELOADED]){
+//		[self dataDidLoad:notification];
+//	}else if([name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
+//		[self modelDidParseData:notification];
+//	}else if([name isEqualToString:REQUESTDATAREFRESH]){
+//		[self requestDataForType:notification];
+//	}else if ([name isEqualToString:REMOTEFILEFAILED]) {
+//		[self requestDidFail:notification];
+//	}else if ([name isEqualToString:XMLPARSERDIDFAILPARSING]) {
+//		[self requestDidFail:notification];
+//	}else if ([name isEqualToString:JSONPARSERDIDFAILPARSING]) {
+//		[self requestDidFail:notification];
+//	}if([name isEqualToString:LOCALFILELOADED]){
+//		[self dataDidLoad:notification];
+//    }
 
 }
 
@@ -187,7 +165,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		}
 	}
     
-    NSDictionary *service=[services objectForKey:operation.dataid];
+    NSDictionary *service=[_services objectForKey:operation.dataid];
     BOOL doRemoteRequest=NO;
     
     if(service!=nil){
@@ -247,98 +225,54 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
     [[NSNotificationCenter defaultCenter] postNotificationName:REMOTEDATAREQUESTED object:networkOperation userInfo:nil];
 	
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 	
 	AFHTTPRequestOperation *operation=[manager HTTPRequestOperationWithRequest:networkOperation.requestForType success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		
-		networkOperation.responseData=(NSMutableData*)responseObject;
-		[self remoteRequestDidComplete:operation];
+		networkOperation.responseData=responseObject;
+		[self remoteRequestDidComplete:networkOperation];
 		
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 		
+		[self remoteRequestDidFail:networkOperation withError:error];
+		
 	}];
 	
-	networkOperation.networkOperation=operation;
 	
 	[manager.operationQueue addOperation:operation];
 	
 	
-    
-    [AFclientSharedInstance doNetworkRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        
-        
-        switch (response.responseState) {
-            case NetResponseStateFailed:
-            {
-                
-                
-            }
-            break;
-              
-            case NetResponseStateFailedWithError:
-            {
-                switch (response.errorType) {
-                        
-                    case NetResponseErrorAuthorisation:
-                        
-                    {
-                                
-                    }
-                        
-                    default:
-                
-                break;
-                
-                }
-                
-                
-            }
-            break;
-                
-            default:
-            {
-                response.responseData=(NSMutableData*)responseObject;
-                [self remoteRequestDidComplete:response];
-            }
-            break;
-        }
-    
-        
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        
-        [self remoteRequestDidFail:response withError:error];
-        
-    }];
 }
 
 
--(void)remoteRequestDidComplete:(NetResponse*)response{
+-(void)remoteRequestDidComplete:(BUNetworkOperation*)networkOperation{
     
     BetterLog(@"");
     
-	[self parseData:response];
+	[self parseData:networkOperation];
     
 }
 
--(void)remoteRequestDidFail:(NetResponse*)response withError:(NSError*)error{
+-(void)remoteRequestDidFail:(BUNetworkOperation*)networkOperation withError:(NSError*)error{
     
     BetterLog(@"Error: %@",error.description);
     
-    response.responseState=NetResponseStateFailedWithError;
+    networkOperation.operationState=NetResponseStateFailedWithError;
     
     switch (error.code) {
         case NSURLErrorNotConnectedToInternet:
-            response.errorType=NetResponseErrorNotConnected;
+            networkOperation.operationError=NetResponseErrorNotConnected;
         break;
         case kCFURLErrorBadServerResponse:
         case NSURLErrorTimedOut:
-            response.errorType=NetResponseErrorConnection;
+            networkOperation.operationError=NetResponseErrorConnection;
         break;
             
         default:
             break;
     }
     
-    [self sendErrorNotification:REQUESTDIDFAIL forResponse:response];
+    [self sendErrorNotification:REQUESTDIDFAIL forResponse:networkOperation];
     
 }
 
@@ -346,21 +280,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 #pragma mark Data Type parsers
 
 
--(void)parseData:(NetResponse*)response{
+-(void)parseData:(BUNetworkOperation*)networkOperation{
 	
-	BetterLog(@" for requestId %@",response.dataid );
+	BetterLog(@" for requestId %@",networkOperation.dataid );
 	
-	switch(response.dataType){
+	switch(networkOperation.dataType){
             
 		case DATATYPE_XML:
 		{
-			[self initiateModelCacheStoreForType:response.dataid];
+			[self initiateModelCacheStoreForType:networkOperation.dataid];
 			
-			[[ApplicationXMLParser sharedInstance] parseDataForResponse:response success:^(NetResponse *result) {
+			[[ApplicationXMLParser sharedInstance] parseDataForOperation:networkOperation success:^(BUNetworkOperation *result) {
                 
-                [self XMLParseDidCompletewithResponse:result];
+                [self XMLParseDidCompletewithOperation:networkOperation];
                 
-            } failure:^(NetResponse *result, NSError *error) {
+            } failure:^(BUNetworkOperation *result, NSError *error) {
                 
                 [self XMLParserDidFail:result withError:error];
                 
@@ -386,22 +320,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
             
         case DATATYPE_OPTIONAL:
 		{
-			[self initiateModelCacheStoreForType:response.dataid];
 			
-			[[PPXMLParser sharedInstance] parseDataForResponse:response success:^(NetResponse *result) {
-                
-                [self XMLParseDidCompletewithResponse:result];
-                
-            } failure:^(NetResponse *result, NSError *error) {
-                
-                [self XMLParserDidFail:result withError:error];
-                
-            }];
         }
             break;
 		default:
         {
-            BetterLog(@"[ERROR] No parser found for this response: %@", response.dataid);
+            BetterLog(@"[ERROR] No parser found for this response: %@", networkOperation.dataid);
         }
 			
             break;
@@ -413,52 +337,54 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 
 #pragma mark XML response methods
--(void)XMLParseDidCompletewithResponse:(NetResponse*)response{
+-(void)XMLParseDidCompletewithOperation:(BUNetworkOperation*)networkOperation{
     
     BetterLog(@"");
     
-    if(response.requestid!=nil){
+    if(networkOperation.requestid!=nil){
         
-        if(response.dataProvider!=nil)
-            [[_dataProviders objectForKey:response.dataid] setObject:response.dataProvider forKey:response.requestid];
+        if(networkOperation.dataProvider!=nil)
+            [[_dataProviders objectForKey:networkOperation.dataid] setObject:networkOperation.dataProvider forKey:networkOperation.requestid];
         
         // this will always overwrite same named objects
         // so no need to check for duplication request ids
-        [_activeRequests setObject:response.requestid forKey:response.dataid];
+        [_activeRequests setObject:networkOperation.requestid forKey:networkOperation.dataid];
         
-        [self compactRequestsForDataid:response.dataid andRequest:response.requestid];
+        [self compactRequestsForDataid:networkOperation.dataid andRequest:networkOperation.requestid];
         
-        if(response.source==DataSourceRequestCacheTypeUseCache)
-            [self cacheRequestResult:response];
+        if(networkOperation.source==DataSourceRequestCacheTypeUseCache)
+            [self cacheRequestResult:networkOperation];
         
-        NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:RESPONSESERVER,RESPONSE, nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDIDCOMPLETE object:response userInfo:dict];
+       
+		if(networkOperation.completionBlock)
+			networkOperation.completionBlock(networkOperation,YES,nil);
+		
     }
     
 }
 
--(void)XMLParserDidFail:(NetResponse*)response withError:(NSError*)error{
+-(void)XMLParserDidFail:(BUNetworkOperation*)networkOperation withError:(NSError*)error{
 	
 	BetterLog(@"");
 	
-	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:response,RESPONSE, nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:XMLPARSERDIDFAILPARSING object:response userInfo:dict];
+	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:networkOperation,RESPONSE, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:XMLPARSERDIDFAILPARSING object:networkOperation userInfo:dict];
 	
 	
 }
 
 #pragma mark JSON response methods
 
--(BOOL)loadCachedData:(NetRequest*)request{
+-(BOOL)loadCachedData:(BUNetworkOperation*)networkOperation{
 	
-	if([self checkCachedDataExpiration:request]){
+	if([self checkCachedDataExpiration:networkOperation]){
 		
-		BetterLog(@"[DEBUG] cache file found and non-expired for %@ and %@",request.dataid,request.requestid);
+		BetterLog(@"[DEBUG] cache file found and non-expired for %@ and %@",networkOperation.dataid,networkOperation.requestid);
 		
-		id result=[self retrieveCachedDataForType:request.dataid andID:request.requestid];
+		id result=[self retrieveCachedDataForType:networkOperation.dataid andID:networkOperation.requestid];
 		
 		if(result!=nil){
-			[self setCachedData:result forType:request.dataid withRequestid:request.requestid];
+			[self setCachedData:result forType:networkOperation.dataid withRequestid:networkOperation.requestid];
             return NO;
 		}else {
 			return YES;
@@ -467,7 +393,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		
 	}else {
 		
-		BetterLog(@"[DEBUG] cached data file either not found or expired: Loading data from server %@ > %@",request.dataid,request.requestid);
+		BetterLog(@"[DEBUG] cached data file either not found or expired: Loading data from server %@ > %@",networkOperation.dataid,networkOperation.requestid);
 		return YES;
 		
 	}
@@ -480,11 +406,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 -(void)didCompleteStartup{
 	
-	if([delegate respondsToSelector:@selector(DataSourceDidCompleteStartup)]){
-		[delegate DataSourceDidCompleteStartup];
+	if([_delegate respondsToSelector:@selector(DataSourceDidCompleteStartup)]){
+		[_delegate DataSourceDidCompleteStartup];
 	}
 	
-	startupState=NO;
+	_startupState=NO;
 
 }
 
@@ -521,7 +447,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	}
 	
 	
-	NetResponse	*response=[[NetResponse alloc]init];
+	BUNetworkOperation	*response=[[BUNetworkOperation alloc]init];
 	response.dataid=dataid;
 	response.requestid=requestid;
 	response.dataProvider=[[_dataProviders objectForKey:dataid] objectForKey:requestid];
@@ -550,7 +476,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 	[self compactRequestsForDataid:type andRequest:requestid];
 	
-	NetResponse	*response=[[NetResponse alloc]init];
+	BUNetworkOperation	*response=[[BUNetworkOperation alloc]init];
 	response.dataid=type;
 	response.requestid=requestid;
 	response.dataProvider=data;
@@ -598,7 +524,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 	if(result==YES){
         
-		NetResponse	*response=[[NetResponse alloc]init];
+		BUNetworkOperation	*response=[[BUNetworkOperation alloc]init];
 		response.dataid=dataid;
 		response.requestid=requestid;
 		response.dataProvider=nil;
@@ -616,128 +542,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 }
 
 
-//
-/***********************************************
- * Responses
- ***********************************************/
-//
 
 
-// Notification from Remote Manager when data has downloaded
--(void)dataDidLoad:(NSNotification*)notification{
-	
-	NSDictionary *userInfo=[notification userInfo];
-	NetResponse *response=[userInfo objectForKey:@"response"];
-	
-	[[Model sharedInstance] parseData:response];
-	
-}
-
-// Notification from Remote Manager or Model when a data request has an error
--(void)requestDidFail:(NSNotification*)notification{
-	
-	NSString *name=notification.name;
-	
-	if([name isEqualToString:REMOTEFILEFAILED]){
-		
-		NSDictionary *userInfo=[notification userInfo];
-		NetResponse *response=[userInfo objectForKey:@"response"];
-		
-		if([response.error isEqualToString:REMOTEFILEFAILED]){
-			
-			if([self connectionCacheFallback:response]==NO){
-				
-				[self displayRequestFailedError:CONNECTIONERROR :UNABLETOCONTACT :OK];
-			
-				[self sendErrorNotification:CONNECTIONERROR dict:userInfo];
-			}
-			
-		}else if ([response.error isEqualToString:SERVERCONNECTIONFAILED]) {
-			
-			if([self connectionCacheFallback:response]==NO){
-				
-				[self displayRequestFailedError:SERVERDOWNERROR :SERVERDOWN :OK];
-				
-				[self sendErrorNotification:SERVERDOWNERROR dict:userInfo];
-			}
-			
-		}
-
-		
-	}else if ([name isEqualToString:XMLPARSERDIDFAILPARSING]) {
-		
-		NSDictionary *userInfo=[notification userInfo];
-		NetResponse *response=[userInfo objectForKey:@"response"];
-		
-		BetterLog(@" XML Error: %@",response.error);
-		
-		if([response.error isEqualToString:XMLPARSER_RESPONSENOENTRIES]){
-			
-			[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDIDFAIL object:response userInfo:nil];
-			
-		}else {
-			//[self displayRequestFailedError:XMLPARSERERROR :INVALIDRESPONSE :OK];
-			[self sendErrorNotification:REQUESTDIDFAIL forResponse:response];
-		}
-		
-	}else if ([name isEqualToString:JSONPARSERDIDFAILPARSING]) {
-		
-		NSDictionary *userInfo=[notification userInfo];
-		
-		//[self displayRequestFailedError:JSONPARSERERROR :INVALIDRESPONSE :OK];
-		[self sendErrorNotification:REQUESTDIDFAIL dict:userInfo];
-		
-		
-	}
-	
-	
-	
-}
-
-
-
-//
-/***********************************************
- * @description			handles event when connection has failed but we have a cached file available
- ***********************************************/
-//
--(BOOL)connectionCacheFallback:(NetResponse*)response{
-	
-	NSMutableArray *result=[self retrieveCachedDataForType:response.dataid andID:response.requestid];
-	
-	if(result==nil){
-		return NO;
-	}else {
-		BetterLog(@" Connection cache fallback result!=nil");
-		[[Model sharedInstance] setCachedData:result forType:response.dataid withRequestid:response.requestid];
-		[self displayRequestFailedError:CONNECTIONERROR :CONNECTIONCACHE :OK];
-		return YES;
-	}
-	
-}
-
-
-
-# pragma mark Deprecate
-# pragma mark Model notification method
-
-//
-/***********************************************
- * Notification from model when data form server has been parsed and stored, cache this data to disk
- ***********************************************/
-//
--(void)modelDidParseData:(NSNotification*)notification{
-    
-    BetterLog(@"");
-	
-	NSDictionary *userInfo=[notification userInfo];
-	NetResponse *response=[userInfo objectForKey:@"response"];
-	
-	NSDictionary *service=[services objectForKey:response.dataid];
-	if([[service objectForKey:@"cache"] boolValue]==YES){
-		[self cacheRequestResult:response];
-	}
-}
 
 
 //
@@ -797,7 +603,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
  * @description			returns YES if cache file exists & its cache interval has not been exceeded
  ***********************************************/
 //
--(BOOL)checkCachedDataExpiration:(NetRequest*)request{
+-(BOOL)checkCachedDataExpiration:(BUNetworkOperation*)request{
 	
 	NSFileManager *fm=[NSFileManager defaultManager];
 	NSString	*filepath=[self cacheFilePathForType:request.dataid andID:request.requestid];
@@ -844,13 +650,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 
 
--(void)cacheRequestResult:(NetResponse*)response{
+-(void)cacheRequestResult:(BUNetworkOperation*)response{
 	
 	BetterLog(@" dataid=%@",response.dataid);
     
     BOOL shouldBeCached=response.serviceShouldBeCached;
     
-	if (cacheCreated==YES && shouldBeCached==YES) {
+	if (_cacheCreated==YES && shouldBeCached==YES) {
 	
 		NSMutableData *data = [[NSMutableData alloc] init];
 		NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -996,8 +802,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 -(NSDictionary*)getServiceForType:(NSString*)type{
 	
-	if(services!=nil){
-		return [services objectForKey:type];
+	if(_services!=nil){
+		return [_services objectForKey:type];
 	}
 	return nil;		
 }
@@ -1012,13 +818,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 -(NSString*)cachePath{
 	
-	if(diskCachePath==nil){
+	if(_diskCachePath==nil){
 		NSArray* paths=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 		NSString* docsdir=[paths objectAtIndex:0];
 		self.diskCachePath=[docsdir stringByAppendingPathComponent:kCACHEDIRECTORY];
 	}
 	
-	return 	diskCachePath;
+	return 	_diskCachePath;
 	
 }
 
@@ -1043,9 +849,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 }
 
--(void)sendErrorNotification:(NSString*)error forResponse:(NetResponse*)response{
+-(void)sendErrorNotification:(NSString*)error forResponse:(BUNetworkOperation*)response{
 	
-    response.errorType=NetResponseErrorConnection;
+    response.operationError=NetResponseErrorConnection;
     
 	[[NSNotificationCenter defaultCenter] postNotificationName:error object:response userInfo:nil];
 	

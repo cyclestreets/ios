@@ -10,8 +10,7 @@
 #import "UserAccount.h"
 #import "ValidationVO.h"
 #import "CycleStreets.h"
-#import "NetRequest.h"
-#import "NetResponse.h"
+#import "BUNetworkOperation.h"
 #import "UserVO.h"
 #import "GlobalUtilities.h"
 #import "HudManager.h"
@@ -64,7 +63,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
 	BetterLog(@"response.dataid=%@",response.dataid);
@@ -152,12 +151,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 									 [self uploadPhotoId],@"selectedid",
                                      nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
     request.dataid=dataid;
     request.requestid=ZERO;
     request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
+		
+		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+			[self retrievePhotosForLocationResponse:operation];
+		
+		};
+
+		
+	}else{
+		
+		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+			[self retrievePhotosForRouteResponse:operation];
+			
+		};
+		
+	}
+	
     
     NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
@@ -169,17 +187,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
--(void)retrievePhotosForLocationResponse:(ValidationVO*)validation{
+-(void)retrievePhotosForLocationResponse:(BUNetworkOperation*)response{
 	
 	[[HudManager sharedInstance]removeHUD:NO];
 	showingHUD=NO;
 	
 	    
-    switch (validation.validationStatus) {
+    switch (response.validationStatus) {
             
         case ValidationRetrievePhotosSuccess:
 		{	
-			self.locationPhotoList=[validation.responseDict objectForKey:RETREIVELOCATIONPHOTOS];
+			self.locationPhotoList=response.dataProvider;
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
 		}   
@@ -202,7 +220,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
--(void)retrievePhotosForRouteResponse:(ValidationVO*)validation{
+-(void)retrievePhotosForRouteResponse:(BUNetworkOperation*)response{
 	
 	BetterLog(@"");
 	
@@ -210,11 +228,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	showingHUD=NO;
 	
 	
-    switch (validation.validationStatus) {
+    switch (response.validationStatus) {
             
         case ValidationRetrievePhotosSuccess:
 		{
-			self.routePhotoList=[validation.responseDict objectForKey:RETREIVEROUTEPHOTOS];
+			self.routePhotoList=response.dataProvider;
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEROUTEPHOTOSRESPONSE object:dict userInfo:nil];
 		}
@@ -275,12 +293,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters",postparameters,@"postparameters", nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=UPLOADUSERPHOTO;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
 	request.trackProgress=YES;
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];

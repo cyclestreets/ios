@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
+typedef void (^GenericCompletionBlock)(BOOL complete,NSString *error);
+
 
 extern NSString *const SECUREUDID_DOMAIN;
 extern NSString *const SECUREUDID_SALT;
@@ -106,6 +108,7 @@ extern NSString *const XMLPARSERDIDCOMPLETE;
 extern NSString *const REQUESTDATAREFRESH;
 extern NSString	*const PRODUCTLISTCOMPLETE;
 extern NSString *const REMOTEFILELOADED;
+extern NSString *const	LOCALFILELOADED;
 extern NSString *const REMOTEFILEFAILED;
 extern NSString *const SERVERCONNECTIONFAILED;
 extern NSString *const XMLPARSERDIDCOMPLETENOUPDATE;
@@ -123,6 +126,13 @@ extern NSString *const TEXTFIELDEDITFRAME;
 extern NSString *const BUCELLNOTIFICATION;
 extern NSString *const REQUESTNOTEDELETENAVIGATION;
 extern NSString *const PUSHNOTIFICATIONTOKENAVAILABLE;
+
+extern NSString *const REQUESTDIDCOMPLETE;
+extern NSString *const REQUESTDIDFAIL;
+
+extern NSString *const RESPONSESERVER;
+extern NSString *const RESPONSEMODEL;
+extern NSString *const RESPONSECACHE;
 
 
 
@@ -230,6 +240,7 @@ enum{
 	DATATYPE_XML,
 	DATATYPE_PLIST,
 	DATATYPE_JSON,
+	DATATYPE_OPTIONAL,
 	DATATYPE_NONE
 };
 typedef int DataParserType;

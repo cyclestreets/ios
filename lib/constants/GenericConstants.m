@@ -116,7 +116,8 @@ NSString *const XMLPARSERDIDCOMPLETE = @"XMLParserDidComplete"; // remote xml pa
 NSString *const REQUESTDATAREFRESH = @"RequestDataRefresh"; // request a programatic refresh of the data Provider
 NSString *const REQUESTDATAREFRESHFROMUSER = @"RequestDataRefreshFromUser"; // request a user refresh of the data Provider
 NSString *const	PRODUCTLISTCOMPLETE = @"ProductlistComplete";
-NSString *const	REMOTEFILELOADED = @"RemoteFileMangerLoaded";  // the remote connection failed
+NSString *const	REMOTEFILELOADED = @"RemoteFileMangerLoaded";  // the remote connection loaded
+NSString *const	LOCALFILELOADED = @"LocalFileManagerLoaded";  // the local file completed
 NSString *const	XMLPARSERDIDCOMPLETENOUPDATE = @"XMLParserDidCompleteWithNoUpdate"; // the remote request returned no update, so use the cached data
 NSString *const REQUESTWASACTIVE=@"datarequestwasactive"; // the requested data/request group is the active one do not refresh ui;
 NSString *const REMOTEDATAREQUESTED=@"remotedatarequested"; // the request is contacting the server, the ui will need to indicate this.
@@ -130,6 +131,15 @@ NSString *const TEXTFIELDEDITFRAME=@"tuitextfieldeditframeupdate"; // generic ev
 NSString *const BUCELLNOTIFICATION=@"BUCELLNOTIFICATION"; // generic event for embedded cell buttons
 NSString *const REQUESTNOTEDELETENAVIGATION=@"REQUESTNOTEDELETENAVIGATION"; // event for ManageVC to pop to correct VC when deleting a note
 NSString *const PUSHNOTIFICATIONTOKENAVAILABLE=@"PUSHNOTIFICATIONTOKENAVAILABLE"; // We received a  valid token form Apple, used to notify UserManager for delayed DT responses
+
+NSString *const REQUESTDIDCOMPLETE=@"requestdidcomplete"; // generic request completion
+NSString *const REQUESTDIDFAIL=@"requestdidfail"; // generic request failure
+
+
+// resposne source
+NSString *const RESPONSESERVER=@"RESPONSESERVER";
+NSString *const RESPONSEMODEL=@"RESPONSEMODEL";
+NSString *const RESPONSECACHE=@"RESPONSECACHE";
 
 
 

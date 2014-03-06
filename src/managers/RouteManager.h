@@ -10,7 +10,6 @@
 #import "FrameworkObject.h"
 #import "SynthesizeSingleton.h"
 #import "RouteVO.h"
-//#import "Query.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
@@ -19,22 +18,14 @@
 
 @interface RouteManager : FrameworkObject 	{
 	
-	NSMutableDictionary					*routes;
-	NSMutableArray						*legacyRoutes;
-	
-	RouteVO								*selectedRoute;
-	
-	NSString							*activeRouteDir;
-	
-	MKDirectionsRequest					*mapRoutingRequest; // temp storage for MapKit bug where Routing currentLocation is 0,0
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 @property (nonatomic, strong) NSMutableDictionary		* routes;
-@property (nonatomic, strong) NSMutableArray		* legacyRoutes;
-@property (nonatomic, strong) RouteVO		* selectedRoute;
-@property (nonatomic, strong) NSString		* activeRouteDir;
-@property (nonatomic, strong) MKDirectionsRequest		*mapRoutingRequest;
+@property (nonatomic, strong) NSMutableArray			* legacyRoutes;
+@property (nonatomic, strong) RouteVO					* selectedRoute;
+@property (nonatomic, strong) NSString					* activeRouteDir;
+@property (nonatomic, strong) MKDirectionsRequest		*mapRoutingRequest;// temp storage for MapKit bug where Routing currentLocation is 0,0
 
 
 - (void) selectRoute:(RouteVO *)route;

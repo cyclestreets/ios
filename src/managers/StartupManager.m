@@ -8,10 +8,9 @@
 
 #import "StartupManager.h"
 #import "UserSettingsManager.h"
-#import "DataSourceManager.h"
+#import "BUDataSourceManager.h"
 #import "GlobalUtilities.h"
 #import "StyleManager.h"
-#import "Model.h"
 #import	"AppConstants.h"
 #import "ImageCache.h"
 #import "StringManager.h"
@@ -104,7 +103,7 @@
 
 	
 	// load ds manager
-	[DataSourceManager sharedInstance];
+	[BUDataSourceManager sharedInstance];
 	// no fatal startup errors for DataSourceManager
 	
 	
