@@ -267,6 +267,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[self updateUItoState:MapPlanningStateNoRoute];
 	
 	self.mapTapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnMap:)];
+	_mapTapRecognizer.numberOfTapsRequired=1;
 	_mapTapRecognizer.enabled=YES;
 	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
@@ -305,7 +306,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
 														   style:UIBarButtonItemStyleBordered
 														  target:self
-														  action:@selector(locationButtonSelected)];
+														  action:@selector(didSelectLocateUserbutton)];
 	_locationButton.width = 40;
 	
 	self.searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
@@ -444,33 +445,85 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 }
 
+#pragma mark - Event>State logic
+
+// planning only
+-(BOOL)canDragAnnotation{
+	
+	
+	return NO;
+}
+
+// planning olny
+-(BOOL)canTapAddAnnotation{
+	
+	
+	return NO;
+}
+
+// all
+-(BOOL)shouldlocateUser{
+	
+	return NO;
+}
 
 
 //------------------------------------------------------------------------------------
-#pragma mark - Core Location
+#pragma mark - MKMap Core Location
 //------------------------------------------------------------------------------------
 
--(void)startLocating{
+
+// called continuously as map locates user
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+	
+	[self locationDidComplete:userLocation];
+	
+}
+
+// gps bar button selected
+-(IBAction)didSelectLocateUserbutton{
 	
 	BetterLog(@"");
 	
-	_mapView.showsUserLocation=NO;
-	_mapView.showsUserLocation=YES;
+	if(_uiState==MapPlanningStateLocating){
+		
+		_mapView.showsUserLocation=NO;
+		
+		[self updateUItoState:_previousUIState];
+		
+	}else{
+		
+		_mapView.showsUserLocation=NO;
+		_mapView.showsUserLocation=YES;
+		
+		[self updateUItoState:MapPlanningStateLocating];
+		
+	}
 	
-	[self updateUItoState:MapPlanningStateLocating];
+}
+
+
+// called as showsUserLocation is set to YES
+- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView{
 	
 	
 }
 
-//- (void)mapViewWillStartLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
-//- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView NS_AVAILABLE(10_9, 4_0);
+
+// called when showsUserLocation is set to NO
+- (void)mapViewDidStopLocatingUser:(MKMapView *)mapView{
+	
+	
+	[self updateUItoState:_previousUIState];
+	
+}
 
 
 -(void)locationDidComplete:(MKUserLocation *)userLocation{
 	
 	BetterLog(@"");
 	
-	[self updateUItoState:_previousUIState];
+	
 	
 	self.lastLocation=userLocation.location;
 	
@@ -575,6 +628,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	BetterLog(@"");
 	CLLocationCoordinate2D ne=[_route insetNorthEast];
 	CLLocationCoordinate2D sw=[_route insetSouthWest];
+	
+	//TODO: this needs to be optimised so the map scaling only occurs once and
+	// the ui state is set correctly at end.
 	
 	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
 	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 50, 50, 10) animated:YES];
@@ -942,12 +998,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
-	
-	[self locationDidComplete:userLocation];
-	
-}
-
 
 
 
@@ -963,6 +1013,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	//TODO: logic to ensure reused annotationviews have the right state
 	// this occurs due to re creation of annotations if one is removed
+	// or if a route is loaded
 	
 	 if (annotationView == nil){
 		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
@@ -1114,15 +1165,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
  * @description			UIEvents
  ***********************************************/
 //
-
-
-- (void) locationButtonSelected {
-	
-	BetterLog(@"");
-	
-	[self startLocating];
-	
-}
 
 
 
