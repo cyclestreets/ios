@@ -32,7 +32,7 @@
 		280E9335140984F300C7AC75 /* RouteTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931C140984F300C7AC75 /* RouteTableCell.xib */; };
 		280E9336140984F300C7AC75 /* CreditsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931F140984F300C7AC75 /* CreditsView.xib */; };
 		280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
-		280E9338140984F300C7AC75 /* RouteSummary.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* RouteSummary.xib */; };
+		280E9338140984F300C7AC75 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
 		280E9339140984F300C7AC75 /* ItineraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9324140984F300C7AC75 /* ItineraryView.xib */; };
 		280E933A140984F300C7AC75 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
 		280E933B140984F300C7AC75 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9327140984F300C7AC75 /* MapView.xib */; };
@@ -117,9 +117,7 @@
 		28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */; };
 		28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */; };
 		2818C7A01458069E0077F529 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
-		281E08B31451608C0034CC63 /* POIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B21451608C0034CC63 /* POIManager.m */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
-		281E08B91451698A0034CC63 /* POICategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B81451698A0034CC63 /* POICategoryViewController.m */; };
 		281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */; };
 		281E08C4145179AC0034CC63 /* POITypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E08C3145179AC0034CC63 /* POITypeCell.xib */; };
 		281E08C714517BE10034CC63 /* POIListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E08C614517BE10034CC63 /* POIListView.xib */; };
@@ -184,7 +182,7 @@
 		2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931C140984F300C7AC75 /* RouteTableCell.xib */; };
 		2834363415DD5DC300B00FD5 /* CreditsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931F140984F300C7AC75 /* CreditsView.xib */; };
 		2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
-		2834363615DD5DC300B00FD5 /* RouteSummary.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* RouteSummary.xib */; };
+		2834363615DD5DC300B00FD5 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
 		2834363715DD5DC300B00FD5 /* ItineraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9324140984F300C7AC75 /* ItineraryView.xib */; };
 		2834363815DD5DC300B00FD5 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
 		2834363915DD5DC300B00FD5 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9327140984F300C7AC75 /* MapView.xib */; };
@@ -273,13 +271,10 @@
 		283436C615DD5DC300B00FD5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B9131FB54A008527FC /* main.m */; };
 		283436C815DD5DC300B00FD5 /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E1131FB69D008527FC /* SuperViewController.m */; };
 		283436C915DD5DC300B00FD5 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E4131FB69D008527FC /* AccountViewController.m */; };
-		283436CA15DD5DC300B00FD5 /* FavouritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E7131FB69D008527FC /* FavouritesManager.m */; };
-		283436CB15DD5DC300B00FD5 /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E9131FB69D008527FC /* FormManager.m */; };
 		283436CC15DD5DC300B00FD5 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61EB131FB69D008527FC /* SettingsManager.m */; };
 		283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61ED131FB69D008527FC /* StartupManager.m */; };
 		283436CF15DD5DC300B00FD5 /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61F8131FB69D008527FC /* Files.m */; };
 		283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61FC131FB69D008527FC /* UserAccount.m */; };
-		283436D215DD5DC300B00FD5 /* FormItemVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61FF131FB69D008527FC /* FormItemVO.m */; };
 		283436D315DD5DC300B00FD5 /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6201131FB69D008527FC /* UserVO.m */; };
 		283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
 		283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
@@ -322,7 +317,7 @@
 		2834370115DD5DC300B00FD5 /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		2834370215DD5DC300B00FD5 /* SettingsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ECBCE1344A28900B8A6AC /* SettingsVO.m */; };
 		2834370715DD5DC300B00FD5 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
-		2834370815DD5DC300B00FD5 /* RouteSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* RouteSummary.m */; };
+		2834370815DD5DC300B00FD5 /* CSRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */; };
 		2834370915DD5DC300B00FD5 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
 		2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28719D91136FE2AD00F69A1B /* LocationSearchManager.m */; };
@@ -347,16 +342,12 @@
 		2834373815DD5DC300B00FD5 /* PhotoMapVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF3144EC7A000726A6C /* PhotoMapVO.m */; };
 		2834373915DD5DC300B00FD5 /* PhotoMapListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF6144EC80300726A6C /* PhotoMapListVO.m */; };
 		2834373A15DD5DC300B00FD5 /* CSPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF9144EC85300726A6C /* CSPointVO.m */; };
-		2834373C15DD5DC300B00FD5 /* LocationFeaturesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C07144ED44B00726A6C /* LocationFeaturesManager.m */; };
 		2834373D15DD5DC300B00FD5 /* HudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C0A144ED64700726A6C /* HudManager.m */; };
 		2834373E15DD5DC300B00FD5 /* AppConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C18144F0EF100726A6C /* AppConfigManager.m */; };
 		2834374015DD5DC300B00FD5 /* UIDevice+Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C2A144F1D0400726A6C /* UIDevice+Machine.m */; };
-		2834374115DD5DC300B00FD5 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B62E1450B074009C5647 /* POIListviewController.m */; };
 		2834374215DD5DC300B00FD5 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6311450B1DC009C5647 /* POITypeCellView.m */; };
 		2834374315DD5DC300B00FD5 /* POICategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6341450B259009C5647 /* POICategoryVO.m */; };
-		2834374415DD5DC300B00FD5 /* POIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B21451608C0034CC63 /* POIManager.m */; };
 		2834374515DD5DC300B00FD5 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
-		2834374615DD5DC300B00FD5 /* POICategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B81451698A0034CC63 /* POICategoryViewController.m */; };
 		2834374715DD5DC300B00FD5 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */; };
 		2834374815DD5DC300B00FD5 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08EB145198D10034CC63 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2834374915DD5DC300B00FD5 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08ED145198D10034CC63 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -428,7 +419,7 @@
 		2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2858F2B3158617290047283D /* MapLocationSearchCellView.m */; };
 		285F68DC132C07CD00B511C0 /* RouteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285F68DB132C07CD00B511C0 /* RouteListViewController.m */; };
 		2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
-		2863A402134E508800A22093 /* RouteSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* RouteSummary.m */; };
+		2863A402134E508800A22093 /* CSRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */; };
 		2868D23C166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23D166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */; };
@@ -461,7 +452,6 @@
 		28735BF4144EC7A000726A6C /* PhotoMapVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF3144EC7A000726A6C /* PhotoMapVO.m */; };
 		28735BF7144EC80300726A6C /* PhotoMapListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF6144EC80300726A6C /* PhotoMapListVO.m */; };
 		28735BFA144EC85300726A6C /* CSPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF9144EC85300726A6C /* CSPointVO.m */; };
-		28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C07144ED44B00726A6C /* LocationFeaturesManager.m */; };
 		28735C0B144ED64700726A6C /* HudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C0A144ED64700726A6C /* HudManager.m */; };
 		28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28735C11144EDACF00726A6C /* cyclecambridge.jpg */; };
 		28735C15144EDACF00726A6C /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C12144EDACF00726A6C /* donate.png */; };
@@ -535,7 +525,6 @@
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
 		28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
-		28A8B62F1450B074009C5647 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B62E1450B074009C5647 /* POIListviewController.m */; };
 		28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6311450B1DC009C5647 /* POITypeCellView.m */; };
 		28A8B6351450B259009C5647 /* POICategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6341450B259009C5647 /* POICategoryVO.m */; };
 		28AD60BC131FB54A008527FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B6131FB54A008527FC /* AppDelegate.m */; };
@@ -544,13 +533,10 @@
 		28AD60BF131FB54A008527FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B9131FB54A008527FC /* main.m */; };
 		28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E1131FB69D008527FC /* SuperViewController.m */; };
 		28AD62A3131FB69D008527FC /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E4131FB69D008527FC /* AccountViewController.m */; };
-		28AD62A4131FB69D008527FC /* FavouritesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E7131FB69D008527FC /* FavouritesManager.m */; };
-		28AD62A5131FB69D008527FC /* FormManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E9131FB69D008527FC /* FormManager.m */; };
 		28AD62A6131FB69D008527FC /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61EB131FB69D008527FC /* SettingsManager.m */; };
 		28AD62A7131FB69D008527FC /* StartupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61ED131FB69D008527FC /* StartupManager.m */; };
 		28AD62AC131FB69D008527FC /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61F8131FB69D008527FC /* Files.m */; };
 		28AD62AE131FB69D008527FC /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61FC131FB69D008527FC /* UserAccount.m */; };
-		28AD62AF131FB69D008527FC /* FormItemVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61FF131FB69D008527FC /* FormItemVO.m */; };
 		28AD62B0131FB69D008527FC /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6201131FB69D008527FC /* UserVO.m */; };
 		28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
 		28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
@@ -758,7 +744,7 @@
 		280E931C140984F300C7AC75 /* RouteTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteTableCell.xib; sourceTree = "<group>"; };
 		280E931F140984F300C7AC75 /* CreditsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditsView.xib; sourceTree = "<group>"; };
 		280E9321140984F300C7AC75 /* FavouritesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesView.xib; sourceTree = "<group>"; };
-		280E9322140984F300C7AC75 /* RouteSummary.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSummary.xib; sourceTree = "<group>"; };
+		280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CSRouteDetailsViewController.xib; sourceTree = "<group>"; };
 		280E9324140984F300C7AC75 /* ItineraryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryView.xib; sourceTree = "<group>"; };
 		280E9325140984F300C7AC75 /* RouteSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSegmentView.xib; sourceTree = "<group>"; };
 		280E9327140984F300C7AC75 /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
@@ -839,12 +825,8 @@
 		28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_finish_wisp.png; sourceTree = "<group>"; };
 		28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_start_wisp.png; sourceTree = "<group>"; };
 		2818C79F1458069D0077F529 /* RouteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteCell.xib; sourceTree = "<group>"; };
-		281E08B11451608C0034CC63 /* POIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIManager.h; sourceTree = "<group>"; };
-		281E08B21451608C0034CC63 /* POIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIManager.m; sourceTree = "<group>"; };
 		281E08B4145168F90034CC63 /* POILocationVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POILocationVO.h; sourceTree = "<group>"; };
 		281E08B5145168F90034CC63 /* POILocationVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POILocationVO.m; sourceTree = "<group>"; };
-		281E08B71451698A0034CC63 /* POICategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POICategoryViewController.h; sourceTree = "<group>"; };
-		281E08B81451698A0034CC63 /* POICategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POICategoryViewController.m; sourceTree = "<group>"; };
 		281E08BA14516A4F0034CC63 /* POICatLocationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POICatLocationCellView.h; sourceTree = "<group>"; };
 		281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POICatLocationCellView.m; sourceTree = "<group>"; };
 		281E08C3145179AC0034CC63 /* POITypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POITypeCell.xib; sourceTree = "<group>"; };
@@ -900,8 +882,8 @@
 		2863A38D134E508800A22093 /* XMLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRequest.m; sourceTree = "<group>"; };
 		2863A3A0134E508800A22093 /* FavouritesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCellView.h; sourceTree = "<group>"; };
 		2863A3A1134E508800A22093 /* FavouritesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCellView.m; sourceTree = "<group>"; };
-		2863A3A6134E508800A22093 /* RouteSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RouteSummary.h; path = Favourites/RouteSummary.h; sourceTree = "<group>"; };
-		2863A3A7134E508800A22093 /* RouteSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RouteSummary.m; path = Favourites/RouteSummary.m; sourceTree = "<group>"; };
+		2863A3A6134E508800A22093 /* CSRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSRouteDetailsViewController.h; path = Favourites/CSRouteDetailsViewController.h; sourceTree = "<group>"; };
+		2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSRouteDetailsViewController.m; path = Favourites/CSRouteDetailsViewController.m; sourceTree = "<group>"; };
 		2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityBlank@2x.png"; sourceTree = "<group>"; };
 		2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityCopy@2x.png"; sourceTree = "<group>"; };
 		2868D238166E1C0600C0C153 /* UIActivityFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityFacebook@2x.png"; sourceTree = "<group>"; };
@@ -930,8 +912,6 @@
 		28735BF6144EC80300726A6C /* PhotoMapListVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoMapListVO.m; sourceTree = "<group>"; };
 		28735BF8144EC85300726A6C /* CSPointVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSPointVO.h; sourceTree = "<group>"; };
 		28735BF9144EC85300726A6C /* CSPointVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSPointVO.m; sourceTree = "<group>"; };
-		28735C06144ED44B00726A6C /* LocationFeaturesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LocationFeaturesManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		28735C07144ED44B00726A6C /* LocationFeaturesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationFeaturesManager.m; sourceTree = "<group>"; };
 		28735C09144ED64700726A6C /* HudManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = HudManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28735C0A144ED64700726A6C /* HudManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HudManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28735C11144EDACF00726A6C /* cyclecambridge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cyclecambridge.jpg; sourceTree = "<group>"; };
@@ -996,8 +976,6 @@
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
 		28A89CD414FD52230001BABA /* UploadPhotoVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPhotoVO.m; sourceTree = "<group>"; };
-		28A8B62D1450B074009C5647 /* POIListviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIListviewController.h; sourceTree = "<group>"; };
-		28A8B62E1450B074009C5647 /* POIListviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIListviewController.m; sourceTree = "<group>"; };
 		28A8B6301450B1DC009C5647 /* POITypeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POITypeCellView.h; sourceTree = "<group>"; };
 		28A8B6311450B1DC009C5647 /* POITypeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POITypeCellView.m; sourceTree = "<group>"; };
 		28A8B6331450B259009C5647 /* POICategoryVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POICategoryVO.h; sourceTree = "<group>"; };
@@ -1014,10 +992,6 @@
 		28AD61E1131FB69D008527FC /* SuperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuperViewController.m; sourceTree = "<group>"; usesTabs = 1; };
 		28AD61E3131FB69D008527FC /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AccountViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28AD61E4131FB69D008527FC /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
-		28AD61E6131FB69D008527FC /* FavouritesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesManager.h; sourceTree = "<group>"; };
-		28AD61E7131FB69D008527FC /* FavouritesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesManager.m; sourceTree = "<group>"; };
-		28AD61E8131FB69D008527FC /* FormManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormManager.h; sourceTree = "<group>"; };
-		28AD61E9131FB69D008527FC /* FormManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormManager.m; sourceTree = "<group>"; };
 		28AD61EA131FB69D008527FC /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
 		28AD61EB131FB69D008527FC /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
 		28AD61EC131FB69D008527FC /* StartupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = StartupManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1422,7 +1396,7 @@
 			isa = PBXGroup;
 			children = (
 				280E9321140984F300C7AC75 /* FavouritesView.xib */,
-				280E9322140984F300C7AC75 /* RouteSummary.xib */,
+				280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */,
 			);
 			path = favourites;
 			sourceTree = "<group>";
@@ -1633,8 +1607,8 @@
 		2863A5E6134E5EC500A22093 /* RouteSummary */ = {
 			isa = PBXGroup;
 			children = (
-				2863A3A6134E508800A22093 /* RouteSummary.h */,
-				2863A3A7134E508800A22093 /* RouteSummary.m */,
+				2863A3A6134E508800A22093 /* CSRouteDetailsViewController.h */,
+				2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */,
 			);
 			name = RouteSummary;
 			sourceTree = "<group>";
@@ -1769,17 +1743,6 @@
 			path = Wisps;
 			sourceTree = "<group>";
 		};
-		28A8B62C1450B026009C5647 /* POIs */ = {
-			isa = PBXGroup;
-			children = (
-				28A8B62D1450B074009C5647 /* POIListviewController.h */,
-				28A8B62E1450B074009C5647 /* POIListviewController.m */,
-				281E08B71451698A0034CC63 /* POICategoryViewController.h */,
-				281E08B81451698A0034CC63 /* POICategoryViewController.m */,
-			);
-			path = POIs;
-			sourceTree = "<group>";
-		};
 		28AD60B2131FB54A008527FC /* AppDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -1816,7 +1779,6 @@
 				28BC6A7A18AE427B00EF0436 /* PhotoMap */,
 				28BC6A7F18AE427B00EF0436 /* PhotoWizard */,
 				28BC6A8418AE427B00EF0436 /* Settings */,
-				28A8B62C1450B026009C5647 /* POIs */,
 				280E91CD14097DE000C7AC75 /* Itinerary */,
 				280E91C914097DD300C7AC75 /* Search */,
 				2863A5E6134E5EC500A22093 /* RouteSummary */,
@@ -1844,28 +1806,20 @@
 			children = (
 				28727AD318B52B8900D957FD /* UserLocationManager.h */,
 				28727AD418B52B8900D957FD /* UserLocationManager.m */,
-				28E8A3E41455B6D00063AA96 /* SavedRoutesManager.h */,
-				28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */,
-				280E24D9144D8D990021CDFA /* PhotoManager.h */,
-				280E24DA144D8D990021CDFA /* PhotoManager.m */,
-				28719D90136FE2AD00F69A1B /* LocationSearchManager.h */,
-				28719D91136FE2AD00F69A1B /* LocationSearchManager.m */,
 				28D246011338926E00188783 /* RouteManager.h */,
 				28D246021338926E00188783 /* RouteManager.m */,
-				28AD61E6131FB69D008527FC /* FavouritesManager.h */,
-				28AD61E7131FB69D008527FC /* FavouritesManager.m */,
-				28AD61E8131FB69D008527FC /* FormManager.h */,
-				28AD61E9131FB69D008527FC /* FormManager.m */,
+				280E24D9144D8D990021CDFA /* PhotoManager.h */,
+				280E24DA144D8D990021CDFA /* PhotoManager.m */,
+				28E8A3E41455B6D00063AA96 /* SavedRoutesManager.h */,
+				28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */,
+				28719D90136FE2AD00F69A1B /* LocationSearchManager.h */,
+				28719D91136FE2AD00F69A1B /* LocationSearchManager.m */,
+				28C01859153D74C500023FAF /* PhotoCategoryManager.h */,
+				28C0185A153D74C500023FAF /* PhotoCategoryManager.m */,
 				28AD61EA131FB69D008527FC /* SettingsManager.h */,
 				28AD61EB131FB69D008527FC /* SettingsManager.m */,
 				28AD61EC131FB69D008527FC /* StartupManager.h */,
 				28AD61ED131FB69D008527FC /* StartupManager.m */,
-				28735C06144ED44B00726A6C /* LocationFeaturesManager.h */,
-				28735C07144ED44B00726A6C /* LocationFeaturesManager.m */,
-				281E08B11451608C0034CC63 /* POIManager.h */,
-				281E08B21451608C0034CC63 /* POIManager.m */,
-				28C01859153D74C500023FAF /* PhotoCategoryManager.h */,
-				28C0185A153D74C500023FAF /* PhotoCategoryManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -2523,7 +2477,7 @@
 				280E9335140984F300C7AC75 /* RouteTableCell.xib in Resources */,
 				280E9336140984F300C7AC75 /* CreditsView.xib in Resources */,
 				280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */,
-				280E9338140984F300C7AC75 /* RouteSummary.xib in Resources */,
+				280E9338140984F300C7AC75 /* CSRouteDetailsViewController.xib in Resources */,
 				280E9339140984F300C7AC75 /* ItineraryView.xib in Resources */,
 				280E933A140984F300C7AC75 /* RouteSegmentView.xib in Resources */,
 				280E933B140984F300C7AC75 /* MapView.xib in Resources */,
@@ -2717,7 +2671,7 @@
 				2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */,
 				2834363415DD5DC300B00FD5 /* CreditsView.xib in Resources */,
 				2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */,
-				2834363615DD5DC300B00FD5 /* RouteSummary.xib in Resources */,
+				2834363615DD5DC300B00FD5 /* CSRouteDetailsViewController.xib in Resources */,
 				2834363715DD5DC300B00FD5 /* ItineraryView.xib in Resources */,
 				2834363815DD5DC300B00FD5 /* RouteSegmentView.xib in Resources */,
 				2834363915DD5DC300B00FD5 /* MapView.xib in Resources */,
@@ -2927,14 +2881,11 @@
 				28AD60BF131FB54A008527FC /* main.m in Sources */,
 				28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */,
 				28AD62A3131FB69D008527FC /* AccountViewController.m in Sources */,
-				28AD62A4131FB69D008527FC /* FavouritesManager.m in Sources */,
-				28AD62A5131FB69D008527FC /* FormManager.m in Sources */,
 				28AD62A6131FB69D008527FC /* SettingsManager.m in Sources */,
 				28AD62A7131FB69D008527FC /* StartupManager.m in Sources */,
 				28AD62AC131FB69D008527FC /* Files.m in Sources */,
 				28B3678018B2822700F7244C /* CSWaypointAnnotation.m in Sources */,
 				28AD62AE131FB69D008527FC /* UserAccount.m in Sources */,
-				28AD62AF131FB69D008527FC /* FormItemVO.m in Sources */,
 				28AD62B0131FB69D008527FC /* UserVO.m in Sources */,
 				28727AD518B52B8900D957FD /* UserLocationManager.m in Sources */,
 				288055DC18BB7B2100BABAB1 /* RouteSegmentViewController.m in Sources */,
@@ -2990,7 +2941,7 @@
 				287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */,
 				28965C5E18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */,
-				2863A402134E508800A22093 /* RouteSummary.m in Sources */,
+				2863A402134E508800A22093 /* CSRouteDetailsViewController.m in Sources */,
 				286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */,
 				28BC6AA818AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
@@ -3019,19 +2970,15 @@
 				2886DED818C528C100CD208B /* BUNetworkOperation.m in Sources */,
 				28735BF7144EC80300726A6C /* PhotoMapListVO.m in Sources */,
 				28735BFA144EC85300726A6C /* CSPointVO.m in Sources */,
-				28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */,
 				28735C0B144ED64700726A6C /* HudManager.m in Sources */,
 				28735C19144F0EF100726A6C /* AppConfigManager.m in Sources */,
 				28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */,
-				28A8B62F1450B074009C5647 /* POIListviewController.m in Sources */,
 				284ADCEA18C88309003830DE /* NSDataAdditions.m in Sources */,
 				28A8B6321450B1DC009C5647 /* POITypeCellView.m in Sources */,
 				28A8B6351450B259009C5647 /* POICategoryVO.m in Sources */,
-				281E08B31451608C0034CC63 /* POIManager.m in Sources */,
 				281E08B6145168F90034CC63 /* POILocationVO.m in Sources */,
 				28965C6018BF709F001BB258 /* XMLRequest.m in Sources */,
 				284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */,
-				281E08B91451698A0034CC63 /* POICategoryViewController.m in Sources */,
 				281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */,
 				281E08EE145198D10034CC63 /* GTMNSString+HTML.m in Sources */,
 				281E08EF145198D10034CC63 /* NSString+HTML.m in Sources */,
@@ -3070,15 +3017,12 @@
 				283436C815DD5DC300B00FD5 /* SuperViewController.m in Sources */,
 				284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */,
 				283436C915DD5DC300B00FD5 /* AccountViewController.m in Sources */,
-				283436CA15DD5DC300B00FD5 /* FavouritesManager.m in Sources */,
-				283436CB15DD5DC300B00FD5 /* FormManager.m in Sources */,
 				288055DB18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
 				283436CC15DD5DC300B00FD5 /* SettingsManager.m in Sources */,
 				283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */,
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
 				283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */,
 				28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */,
-				283436D215DD5DC300B00FD5 /* FormItemVO.m in Sources */,
 				283436D315DD5DC300B00FD5 /* UserVO.m in Sources */,
 				283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */,
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
@@ -3128,7 +3072,7 @@
 				2834370215DD5DC300B00FD5 /* SettingsVO.m in Sources */,
 				28B3677D18B275C800F7244C /* MKMapView+Additions.m in Sources */,
 				2834370715DD5DC300B00FD5 /* FavouritesCellView.m in Sources */,
-				2834370815DD5DC300B00FD5 /* RouteSummary.m in Sources */,
+				2834370815DD5DC300B00FD5 /* CSRouteDetailsViewController.m in Sources */,
 				2834370915DD5DC300B00FD5 /* LoginVO.m in Sources */,
 				2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */,
 				28965C5F18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
@@ -3159,21 +3103,17 @@
 				2834373915DD5DC300B00FD5 /* PhotoMapListVO.m in Sources */,
 				2834373A15DD5DC300B00FD5 /* CSPointVO.m in Sources */,
 				28BC6A8E18AE427B00EF0436 /* PhotoWizardViewController.m in Sources */,
-				2834373C15DD5DC300B00FD5 /* LocationFeaturesManager.m in Sources */,
 				28BC6A8818AE427B00EF0436 /* PhotoMapImageLocationViewController.m in Sources */,
 				2834373D15DD5DC300B00FD5 /* HudManager.m in Sources */,
 				2834373E15DD5DC300B00FD5 /* AppConfigManager.m in Sources */,
 				2834374015DD5DC300B00FD5 /* UIDevice+Machine.m in Sources */,
-				2834374115DD5DC300B00FD5 /* POIListviewController.m in Sources */,
 				28BC6A9018AE427B00EF0436 /* SettingsViewController.m in Sources */,
 				2834374215DD5DC300B00FD5 /* POITypeCellView.m in Sources */,
 				2834374315DD5DC300B00FD5 /* POICategoryVO.m in Sources */,
 				28BC6AAD18AE431800EF0436 /* LayoutBox.m in Sources */,
 				28B3678118B2822700F7244C /* CSWaypointAnnotation.m in Sources */,
-				2834374415DD5DC300B00FD5 /* POIManager.m in Sources */,
 				2834374515DD5DC300B00FD5 /* POILocationVO.m in Sources */,
 				28965C6118BF70A0001BB258 /* XMLRequest.m in Sources */,
-				2834374615DD5DC300B00FD5 /* POICategoryViewController.m in Sources */,
 				2834374715DD5DC300B00FD5 /* POICatLocationCellView.m in Sources */,
 				2834374815DD5DC300B00FD5 /* GTMNSString+HTML.m in Sources */,
 				2834374915DD5DC300B00FD5 /* NSString+HTML.m in Sources */,

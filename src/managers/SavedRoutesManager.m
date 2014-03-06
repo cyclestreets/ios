@@ -12,7 +12,6 @@
 #import "Files.h"
 #import "AppDelegate.h"
 #import "RouteManager.h"
-#import "FavouritesManager.h"
 #import "GlobalUtilities.h"
 
 
@@ -118,7 +117,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 			
 		}
 		
-		[[FavouritesManager sharedInstance] removeDataFile];
+		[(Files*)[CycleStreets sharedInstance].files removeDataFileForType:@"favourites"];
 		
 		[self saveIndicies];
 		

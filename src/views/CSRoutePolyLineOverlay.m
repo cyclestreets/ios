@@ -64,6 +64,7 @@
 
 
 
+
 -(void)updateForDataProvider:(RouteVO*)route{
 	
 	if(route==nil)
@@ -109,6 +110,18 @@
 	pthread_rwlock_init(&_rwLock,NULL);
 	
 }
+
+
+
+
+
+-(void)resetOverlay{
+	
+	[self.routePoints removeAllObjects];
+	
+}
+
+
 
 
 #pragma mark - Class methods

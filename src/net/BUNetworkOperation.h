@@ -42,35 +42,35 @@ typedef NS_ENUM(int, BUNetworkOperationError)
 @interface BUNetworkOperation : BUCodableObject
 
 // request portion
-@property (nonatomic, strong) NSMutableDictionary        * parameters;
-@property (nonatomic, strong) NSDictionary               * service;
-@property (nonatomic, strong) NSString                   * dataid;
-@property (nonatomic, strong) NSString                   * requestType;
-@property (nonatomic, strong) NSString                   * requestid;
-@property (nonatomic, assign) DataSourceRequestCacheType source;
-@property (nonatomic, assign) DataParserType             dataType;
+@property (nonatomic, strong) NSMutableDictionary             * parameters;
+@property (nonatomic, strong) NSDictionary                    * service;
+@property (nonatomic, strong) NSString                        * dataid;
+@property (nonatomic, strong) NSString                        * requestType;
+@property (nonatomic, strong) NSString                        * requestid;
+@property (nonatomic, assign) DataSourceRequestCacheType      source;
+@property (nonatomic, assign) DataParserType                  dataType;
 
 // response portion
-@property (nonatomic,copy)  BUNetworkOperationCompletionBlock		completionBlock;
-@property (nonatomic, strong)	id									dataProvider;
-@property (nonatomic, strong)	NSMutableData						*responseData;
+@property (nonatomic,copy)  BUNetworkOperationCompletionBlock completionBlock;
+@property (nonatomic, strong)	id                              dataProvider;
+@property (nonatomic, strong)	NSMutableData                   * responseData;
 
 // state
-@property(nonatomic,assign)  BUNetworkOperationError				operationError;
-@property(nonatomic,assign)  BUNetworkOperationState				operationState;
-@property(nonatomic,strong)  NSString								*errorDescription;
+@property(nonatomic,assign)  BUNetworkOperationError          operationError;
+@property(nonatomic,assign)  BUNetworkOperationState          operationState;
+@property(nonatomic,strong)  NSString                         * errorDescription;
 
 // response details
-@property (nonatomic,assign)  ValidationStatusCode					validationStatus;
-@property(nonatomic,strong)  NSString								*validationMessage;
+@property (nonatomic,assign)  ValidationStatusCode            validationStatus;
+@property(nonatomic,strong)  NSString                         * validationMessage;
 
 
-@property (nonatomic, assign) BOOL							trackProgress;
+@property (nonatomic, assign) BOOL                            trackProgress;
 
 
-@property (nonatomic,readonly) NSString							*url;
-@property (nonatomic,readonly) int								serviceCacheInterval;
-@property (nonatomic,readonly) BOOL								serviceShouldBeCached;
+@property (nonatomic,readonly) NSString                       * url;
+@property (nonatomic,readonly) int                            serviceCacheInterval;
+@property (nonatomic,readonly) BOOL                           serviceShouldBeCached;
 
 
 -(NSMutableURLRequest*)requestForType;

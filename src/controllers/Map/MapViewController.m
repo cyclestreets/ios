@@ -24,7 +24,6 @@
 #import "GlobalUtilities.h"
 #import "AppConstants.h"
 #import "SettingsManager.h"
-#import "POIListviewController.h"
 #import "HudManager.h"
 #import "UserLocationManager.h"
 #import	"WayPointVO.h"
@@ -248,9 +247,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
-	//_mapView.userTrackingMode=MKUserTrackingModeNone;
-	//_mapView.showsUserLocation=YES;
-		
+	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	
 	[self initToolBarEntries];
 	
@@ -273,8 +270,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_mapTapRecognizer.enabled=YES;
 	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
-	[[RouteManager sharedInstance] loadSavedSelectedRoute];
-
+	//TODO: logic for map if no selected route exists
+	BOOL hasSelectedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
+	
+	if(!hasSelectedRoute){
+		_mapView.showsUserLocation=YES;
+	}
 }
 
 
@@ -546,7 +547,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
 	
-	//[_lineView setNeedsDisplay];
+	[_routeOverlay resetOverlay];
+	[_routeOverlayRenderer setNeedsDisplay];
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
 	
@@ -607,7 +609,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[self.mapView addOverlay:_routeOverlay];
 	}else{
 		[_routeOverlay updateForDataProvider:_route];
-		[_routeOverlayRenderer setNeedsDisplayInMapRect:mapRect];
+		[_routeOverlayRenderer setNeedsDisplay];
 	}
 	
 	[self updateUItoState:MapPlanningStateRoute];

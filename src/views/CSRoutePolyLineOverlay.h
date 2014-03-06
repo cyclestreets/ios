@@ -25,4 +25,6 @@
 - (void)lockForReading;
 - (void)unlockForReading;
 
+-(void)resetOverlay;
+
 @end

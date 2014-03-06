@@ -12,17 +12,15 @@
 
 @interface PhotoCategoryManager : FrameworkObject{
 	
-	NSMutableDictionary					*dataProvider;
-	
-	NSString							*validUntilTimeStamp;
-	
 }
+
 @property (nonatomic, strong) NSMutableDictionary		* dataProvider;
-@property (nonatomic, strong) NSString		* validUntilTimeStamp;
+@property (nonatomic, strong) NSString					* validUntilTimeStamp;
 
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoCategoryManager);
 
 
 -(PhotoCategoryVO*)valueObjectForType:(NSString*)type atIndex:(int)index;
+
 @end

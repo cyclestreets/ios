@@ -14,7 +14,6 @@
 #import "Files.h"
 #import "RouteParser.h"
 #import "HudManager.h"
-#import "FavouritesManager.h"
 #import "ValidationVO.h"
 #import "BUNetworkOperation.h"
 #import "SettingsManager.h"
@@ -356,8 +355,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     request.parameters=parameters;
     request.source=DataSourceRequestCacheTypeUseNetwork;
     
-    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+    request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loadRouteForRouteIdResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
 	// format routeid to decimal style ie xx,xxx,xxx
 	NSNumberFormatter *currencyformatter=[[NSNumberFormatter alloc]init];
@@ -396,8 +400,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		request.parameters=parameters;
 		request.source=DataSourceRequestCacheTypeUseNetwork;
 		
-		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+			[self loadRouteForRouteIdResponse:operation];
+			
+		};
+		
+		[[BUDataSourceManager sharedInstance] processDataRequest:request];
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Searching for %@ route %@ on CycleStreets",[plan capitalizedString], routeid] andMessage:nil];
 		
@@ -408,15 +417,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
--(void)loadRouteForRouteIdResponse:(ValidationVO*)validation{
+-(void)loadRouteForRouteIdResponse:(BUNetworkOperation*)response{
     
 	BetterLog(@"");
     
-    switch(validation.validationStatus){
+    switch(response.validationStatus){
             
         case ValidationCalculateRouteSuccess:
         {    
-            RouteVO *newroute=[validation.responseDict objectForKey:RETRIEVEROUTEBYID];
+            RouteVO *newroute=response.dataProvider;
             
             [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
             
@@ -434,7 +443,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             
             [self queryFailureMessage:@"Unable to find a route with this number."];
             
-        break;
+			break;
+			
+		default:
+			break;
             
             
     }
@@ -690,7 +702,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 // loads the currently saved selectedRoute by identifier
--(void)loadSavedSelectedRoute{
+-(BOOL)loadSavedSelectedRoute{
 	
 	BetterLog(@"");
 	
@@ -703,12 +715,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 		if(route!=nil){
 			[self selectRoute:route];
+			return YES;
 		}else{
 			[[NSNotificationCenter defaultCenter] postNotificationName:CSLASTLOCATIONLOAD object:nil];
+			return NO;
 		}
 		
 	}
 	
+	return NO;
 	
 }
 

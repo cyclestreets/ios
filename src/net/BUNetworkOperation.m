@@ -142,7 +142,7 @@
 	
 	if ([servicetype isEqualToString:URL]) {
 		
-		NSString *urlString=[StringUtilities urlFromParameterArray:[_parameters objectForKey:@"parameterarray"] url:[self url]];
+		NSString *urlString=[StringUtilities urlFromParameterArray:[_parameters objectForKey:@"parameterarray"] url:[[self url] mutableCopy]];
 		requesturl=[NSURL URLWithString:urlString];
 		
 		request = [NSMutableURLRequest requestWithURL:requesturl
@@ -393,6 +393,13 @@
     
     return 0;
     
+}
+
+
+#pragma mark - BUCodableObject
+
+-(NSArray*)uncodableProperties{
+	return @[_completionBlock,_parameters,_service,];
 }
 
 

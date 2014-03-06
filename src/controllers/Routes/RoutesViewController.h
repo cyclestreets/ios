@@ -10,7 +10,7 @@
 #import "SuperViewController.h"
 #import "BUSegmentedControl.h"
 #import "BorderView.h"
-#import "RouteSummary.h"
+#import "CSRouteDetailsViewController.h"
 
 @interface RoutesViewController : SuperViewController <BUSegmentedControlDelegate>{
 

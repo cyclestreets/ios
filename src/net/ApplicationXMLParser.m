@@ -228,6 +228,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	if([TBXML hasChildrenForParentElement:resultelement]==YES){
 		
 		_activeOperation.validationStatus=ValidationLoginSuccess;
+		_activeOperation.operationState=NetResponseStateComplete;
 		
 		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"username" parentElement:resultelement]];
 		loginResponse.userid=[[TBXML textForElement:[TBXML childElementNamed:@"id" parentElement:resultelement]] intValue];
@@ -239,6 +240,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		loginResponse.validatekey=[[TBXML textForElement:[TBXML childElementNamed:@"validatekey" parentElement:resultelement]] boolValue];
 		loginResponse.deleted=[[TBXML textForElement:[TBXML childElementNamed:@"deleted" parentElement:resultelement]] boolValue];
 		loginResponse.lastsignin=[[TBXML textForElement:[TBXML childElementNamed:@"lastsignin" parentElement:resultelement]] intValue];
+		
+		
 		
 	}else {
 		_activeOperation.validationStatus=ValidationLoginFailed;
@@ -273,6 +276,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		}
 
 		_activeOperation.validationMessage=[TBXML textForElement:[TBXML childElementNamed:@"message" parentElement:resultelement]];
+		_activeOperation.operationState=NetResponseStateComplete;
 		
 	}else {
 		
@@ -519,6 +523,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			NSMutableDictionary *responseDict=[TBXML newDictonaryFromXMLElement:resultnode];
 			_activeOperation.dataProvider=responseDict;
 			_activeOperation.validationStatus=ValidationUserPhotoUploadSuccess;
+			_activeOperation.operationState=NetResponseStateComplete;
 		}
 		
 		
@@ -585,6 +590,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		_activeOperation.dataProvider=photolist;
 		
 		_activeOperation.validationStatus=ValidationRetrievePhotosSuccess;
+		_activeOperation.operationState=NetResponseStateComplete;
 		
 	}else{
 		

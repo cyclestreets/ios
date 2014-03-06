@@ -13,7 +13,6 @@
 #import "RouteListViewController.h"
 #import "RouteManager.h"
 #import "ButtonUtilities.h"
-#import "FavouritesManager.h"
 #import "UIView+Additions.h"
 #import "GenericConstants.h"
 #import <Pixate.h>
@@ -33,7 +32,7 @@
 @property (nonatomic,strong)  SuperViewController				* activeController;
 
 @property (nonatomic, assign)	int								activeIndex;
-@property (nonatomic, strong)	RouteSummary					*routeSummary;
+@property (nonatomic, strong)	CSRouteDetailsViewController					*routeSummary;
 
 -(IBAction)selectedRouteButtonSelected:(id)sender;
 -(void)selectedRouteUpdated;
@@ -329,7 +328,7 @@
     if([className isEqualToString:@"RouteSummary"]){
         
         if (self.routeSummary == nil) {
-            self.routeSummary = [[RouteSummary alloc]init];
+            self.routeSummary = [[CSRouteDetailsViewController alloc]init];
         }
         self.routeSummary.route = (RouteVO*)data;
 		_routeSummary.dataType=index;

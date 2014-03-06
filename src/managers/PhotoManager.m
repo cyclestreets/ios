@@ -15,6 +15,7 @@
 #import "GlobalUtilities.h"
 #import "HudManager.h"
 #import "GenericConstants.h"
+#import "BUDataSourceManager.h"
 
 @interface PhotoManager(Private)
 
@@ -175,6 +176,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 		};
 		
 	}
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
     
     NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];

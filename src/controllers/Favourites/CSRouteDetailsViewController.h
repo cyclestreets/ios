@@ -18,19 +18,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 */
 
-//  RouteSummary.h
+//  CSRouteDetailsViewController
 //  CycleStreets
 //
 //
 
 #import <UIKit/UIKit.h>
-#import "RouteVO.h"
-#import "LayoutBox.h"
 #import "SuperViewController.h"
-#import "ExpandedUILabel.h"
 #import "SavedRoutesManager.h"
 
-@interface RouteSummary : SuperViewController {
+@class RouteVO;
+
+
+
+@interface CSRouteDetailsViewController : SuperViewController {
 	
 	
 }

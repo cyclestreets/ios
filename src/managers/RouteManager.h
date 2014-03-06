@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 
 -(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest;
 
--(void)loadSavedSelectedRoute;
+-(BOOL)loadSavedSelectedRoute;
 
 -(RouteVO*)loadRouteForFileID:(NSString*)fileid;
 - (void)saveRoute:(RouteVO *)route;

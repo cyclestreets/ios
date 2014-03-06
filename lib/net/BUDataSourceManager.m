@@ -183,17 +183,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		
 		if(operation.source==DataSourceRequestCacheTypeUseCache){
 			
-			// SYSTEM initiated request go through the model>cache>remote checking chain
-			if(![self loadCachedDataForType:operation.dataid withRequestid:operation.requestid]){
-				doRemoteRequest=[self loadCachedData:operation];
+			// check memory cache
+			if([self loadMemoryCachedDataForOperation:operation]==NO){
+				
+				// check file cache
+				doRemoteRequest=[self loadFileCachedData:operation];
+				
+				
 			}else {
-#if ENABLERESPONSECACHE
 				BetterLog(@"[DEBUG] Model found dataid & requestid: %@ > %@",operation.dataid,operation.requestid);
                 doRemoteRequest=NO;
-#else
-                BetterLog(@"[DEBUG] Model found dataid & requestid but ENABLERESPONSECACHE=FALSE so loading from server again");
-                doRemoteRequest=YES;
-#endif
 			}
 			
 		}else {
@@ -375,16 +374,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 #pragma mark JSON response methods
 
--(BOOL)loadCachedData:(BUNetworkOperation*)networkOperation{
+-(BOOL)loadFileCachedData:(BUNetworkOperation*)networkOperation{
 	
 	if([self checkCachedDataExpiration:networkOperation]){
 		
 		BetterLog(@"[DEBUG] cache file found and non-expired for %@ and %@",networkOperation.dataid,networkOperation.requestid);
 		
-		id result=[self retrieveCachedDataForType:networkOperation.dataid andID:networkOperation.requestid];
+		id result=[self retrieveFileCachedDataForType:networkOperation.dataid andID:networkOperation.requestid];
 		
 		if(result!=nil){
-			[self setCachedData:result forType:networkOperation.dataid withRequestid:networkOperation.requestid];
+			[self setMemoryCachedDataForOperation:networkOperation];
             return NO;
 		}else {
 			return YES;
@@ -433,10 +432,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
  * @description			locates and returns ram cached data for a request
  ***********************************************/
 //
--(BOOL)loadCachedDataForType:(NSString*)dataid withRequestid:(NSString*)requestid{
+-(BOOL)loadMemoryCachedDataForOperation:(BUNetworkOperation*)networkOperation{
 	
 	BetterLog(@"");
 	
+	NSString *dataid=networkOperation.dataid;
+	NSString *requestid=networkOperation.requestid;
 	
 	if([_dataProviders objectForKey:dataid]==nil){
 		return NO;
@@ -447,14 +448,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	}
 	
 	
-	BUNetworkOperation	*response=[[BUNetworkOperation alloc]init];
-	response.dataid=dataid;
-	response.requestid=requestid;
-	response.dataProvider=[[_dataProviders objectForKey:dataid] objectForKey:requestid];
+	networkOperation.dataProvider=[[_dataProviders objectForKey:dataid] objectForKey:requestid];
 	
-	
-	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:RESPONSEMODEL,RESPONSE, nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDIDCOMPLETE object:response userInfo:dict];
+	if(networkOperation.completionBlock)
+		networkOperation.completionBlock(networkOperation,YES,nil);
 	
 	
 	return YES;
@@ -462,29 +459,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 }
 
--(void)setCachedData:(id)data forType:(NSString*)type withRequestid:(NSString*)requestid{
+-(void)setMemoryCachedDataForOperation:(BUNetworkOperation*)networkOperation{
 	
-	BetterLog(@"[DEBUG] Model.setCachedData for type: %@",type);
+	NSString *dataid=networkOperation.dataid;
+	NSString *requestid=networkOperation.requestid;
 	
-	if([_dataProviders objectForKey:type]==nil){
-		[_dataProviders setObject:[NSMutableDictionary dictionaryWithCapacity:10] forKey:type];
+	BetterLog(@"[DEBUG] Model.setCachedData for type: %@",networkOperation.dataid);
+	
+	if([_dataProviders objectForKey:dataid]==nil){
+		[_dataProviders setObject:[NSMutableDictionary dictionaryWithCapacity:10] forKey:dataid];
 	}
 	
-	[[_dataProviders objectForKey:type] setObject:data forKey:requestid];
+	[[_dataProviders objectForKey:dataid] setObject:networkOperation.dataProvider forKey:requestid];
 	
-	[_activeRequests setObject:requestid forKey:type];
+	[_activeRequests setObject:requestid forKey:dataid];
 	
-	[self compactRequestsForDataid:type andRequest:requestid];
+	[self compactRequestsForDataid:dataid andRequest:requestid];
 	
-	BUNetworkOperation	*response=[[BUNetworkOperation alloc]init];
-	response.dataid=type;
-	response.requestid=requestid;
-	response.dataProvider=data;
-	
-	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:RESPONSECACHE,RESPONSE,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDIDCOMPLETE object:response userInfo:dict];
-	
-	
+	if(networkOperation.completionBlock)
+		networkOperation.completionBlock(networkOperation,YES,nil);
 }
 
 
@@ -679,7 +672,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 
 
--(NSMutableArray*)retrieveCachedDataForType:(NSString*)type andID:(NSString*)requestid{
+-(NSMutableArray*)retrieveFileCachedDataForType:(NSString*)type andID:(NSString*)requestid{
 	
 	
 	NSFileManager *fm=[NSFileManager defaultManager];
