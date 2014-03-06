@@ -1,1 +1,1 @@
-../../BlocksKit/BlocksKit/Dynamic Delegate/NSObject+A2DynamicDelegate.h
+../../BlocksKit/BlocksKit/DynamicDelegate/NSObject+A2DynamicDelegate.h

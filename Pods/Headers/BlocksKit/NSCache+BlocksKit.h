@@ -1,1 +1,1 @@
-../../BlocksKit/BlocksKit/Dynamic Delegate/Foundation/NSCache+BlocksKit.h
+../../BlocksKit/BlocksKit/DynamicDelegate/Foundation/NSCache+BlocksKit.h

@@ -1,1 +1,1 @@
-../../BlocksKit/BlocksKit/Dynamic Delegate/BKFFICompatibility.h
+../../BlocksKit/BlocksKit/DynamicDelegate/BKFFICompatibility.h

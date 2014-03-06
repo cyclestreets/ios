@@ -102,8 +102,8 @@ static BOOL AFErrorOrUnderlyingErrorHasCode(NSError *error, NSInteger code) {
 
         if (self.acceptableStatusCodes && ![self.acceptableStatusCodes containsIndex:(NSUInteger)response.statusCode]) {
             NSDictionary *userInfo = @{
-                                       NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: %@ (%d)", @"AFNetworking", nil), [NSHTTPURLResponse localizedStringForStatusCode:response.statusCode], response.statusCode],
-                                       NSURLErrorFailingURLErrorKey:[response URL],
+                                       NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: %@ (%lu)", @"AFNetworking", nil), [NSHTTPURLResponse localizedStringForStatusCode:response.statusCode], (unsigned long)response.statusCode],
+                                    NSURLErrorFailingURLErrorKey:[response URL],
                                        AFNetworkingOperationFailingURLResponseErrorKey: response
                                        };
 
@@ -188,7 +188,7 @@ static BOOL AFErrorOrUnderlyingErrorHasCode(NSError *error, NSInteger code) {
     return self;
 }
 
-#pragma mark - AFURLRequestSerialization
+#pragma mark - AFURLResponseSerialization
 
 - (id)responseObjectForResponse:(NSURLResponse *)response
                            data:(NSData *)data
@@ -249,7 +249,7 @@ static BOOL AFErrorOrUnderlyingErrorHasCode(NSError *error, NSInteger code) {
         return nil;
     }
 
-    self.readingOptions = [decoder decodeIntegerForKey:NSStringFromSelector(@selector(readingOptions))];
+    self.readingOptions = (NSJSONReadingOptions)[decoder decodeIntegerForKey:NSStringFromSelector(@selector(readingOptions))];
 
     return self;
 }
@@ -420,16 +420,6 @@ static BOOL AFErrorOrUnderlyingErrorHasCode(NSError *error, NSInteger code) {
     return self;
 }
 
-+ (NSSet *)acceptablePathExtensions {
-    static NSSet * _acceptablePathExtension = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _acceptablePathExtension = [[NSSet alloc] initWithObjects:@"plist", nil];
-    });
-
-    return _acceptablePathExtension;
-}
-
 #pragma mark - AFURLResponseSerialization
 
 - (id)responseObjectForResponse:(NSURLResponse *)response
@@ -465,7 +455,7 @@ static BOOL AFErrorOrUnderlyingErrorHasCode(NSError *error, NSInteger code) {
     }
 
     self.format = (NSPropertyListFormat)[decoder decodeIntegerForKey:NSStringFromSelector(@selector(format))];
-    self.readOptions = [decoder decodeIntegerForKey:NSStringFromSelector(@selector(readOptions))];
+    self.readOptions = (NSPropertyListReadOptions)[decoder decodeIntegerForKey:NSStringFromSelector(@selector(readOptions))];
 
     return self;
 }
@@ -526,9 +516,8 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 
     CGDataProviderRelease(dataProvider);
 
-    UIImage *image = nil;
+    UIImage *image = AFImageWithDataAtScale(data, scale);
     if (!imageRef) {
-        image = AFImageWithDataAtScale(data, scale);
         if (image.images || !image) {
             return image;
         }
@@ -544,10 +533,6 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
     size_t bitsPerComponent = CGImageGetBitsPerComponent(imageRef);
 
     if (width * height > 1024 * 1024 || bitsPerComponent > 8) {
-        if (!image) {
-            image = [[UIImage alloc] initWithCGImage:imageRef scale:scale orientation:image.imageOrientation];
-        }
-
         CGImageRelease(imageRef);
 
         return image;
@@ -574,10 +559,6 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
     CGColorSpaceRelease(colorSpace);
 
     if (!context) {
-        if (!image) {
-            image = [[UIImage alloc] initWithCGImage:imageRef scale:scale orientation:image.imageOrientation];
-        }
-
         CGImageRelease(imageRef);
 
         return image;
@@ -614,16 +595,6 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 #endif
 
     return self;
-}
-
-+ (NSSet *)acceptablePathExtensions {
-    static NSSet *_acceptablePathExtension = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _acceptablePathExtension = [[NSSet alloc] initWithObjects:@"tif", @"tiff", @"jpg", @"jpeg", @"gif", @"png", @"ico", @"bmp", @"cur", nil];
-    });
-
-    return _acceptablePathExtension;
 }
 
 #pragma mark - AFURLResponseSerializer

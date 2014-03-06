@@ -6,6 +6,7 @@ pod 'BlocksKit', :git => 'https://github.com/pandamonia/BlocksKit.git', :branch 
 pod 'ViewDeck'
 pod 'FMMoveTableView'
 pod 'TouchJSON'
+pod 'TBXML'
 pod 'A2StoryboardSegueContext'
 pod 'Pixate'
 

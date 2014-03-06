@@ -66,9 +66,51 @@ typedef NS_ENUM(NSUInteger, AFHTTPRequestQueryStringSerializationStyle) {
 @interface AFHTTPRequestSerializer : NSObject <AFURLRequestSerialization>
 
 /**
- The string encoding used to serialize parameters.
+ The string encoding used to serialize parameters. `NSUTF8StringEncoding` by default.
  */
 @property (nonatomic, assign) NSStringEncoding stringEncoding;
+
+/**
+ Whether created requests can use the device’s cellular radio (if present). `YES` by default.
+ 
+ @see NSMutableURLRequest -setAllowsCellularAccess:
+ */
+@property (nonatomic, assign) BOOL allowsCellularAccess;
+
+/**
+ The cache policy of created requests. `NSURLRequestUseProtocolCachePolicy` by default.
+ 
+ @see NSMutableURLRequest -setCachePolicy:
+ */
+@property (nonatomic, assign) NSURLRequestCachePolicy cachePolicy;
+
+/**
+ Whether created requests should use the default cookie handling. `YES` by default.
+ 
+ @see NSMutableURLRequest -setHTTPShouldHandleCookies:
+ */
+@property (nonatomic, assign) BOOL HTTPShouldHandleCookies;
+
+/**
+ Whether created requests can continue transmitting data before receiving a response from an earlier transmission. `NO` by default
+ 
+ @see NSMutableURLRequest -setHTTPShouldUsePipelining:
+ */
+@property (nonatomic, assign) BOOL HTTPShouldUsePipelining;
+
+/**
+ The network service type for created requests. `NSURLNetworkServiceTypeDefault` by default.
+ 
+ @see NSMutableURLRequest -setNetworkServiceType:
+ */
+@property (nonatomic, assign) NSURLRequestNetworkServiceType networkServiceType;
+
+/**
+ The timeout interval, in seconds, for created requests. The default timeout interval is 60 seconds.
+ 
+ @see NSMutableURLRequest -setTimeoutInterval:
+ */
+@property (nonatomic, assign) NSTimeInterval timeoutInterval;
 
 ///---------------------------------------
 /// @name Configuring HTTP Request Headers
@@ -195,6 +237,21 @@ forHTTPHeaderField:(NSString *)field;
                               constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                                                   error:(NSError * __autoreleasing *)error;
 
+/**
+ Creates an `NSMutableURLRequest` by removing the `HTTPBodyStream` from a request, and asynchronously writing its contents into the specified file, invoking the completion handler when finished.
+ 
+ @param request The multipart form request.
+ @param fileURL The file URL to write multipart form contents to.
+ @param handler A handler block to execute.
+ 
+ @discussion There is a bug in `NSURLSessionTask` that causes requests to not send a `Content-Length` header when streaming contents from an HTTP body, which is notably problematic when interacting with the Amazon S3 webservice. As a workaround, this method takes a request constructed with `multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:error:`, or any other request with an `HTTPBodyStream`, writes the contents to the specified file and returns a copy of the original request with the `HTTPBodyStream` property set to `nil`. From here, the file can either be passed to `AFURLSessionManager -uploadTaskWithRequest:fromFile:progress:completionHandler:`, or have its contents read into an `NSData` that's assigned to the `HTTPBody` property of the request.
+
+ @see https://github.com/AFNetworking/AFNetworking/issues/1398
+ */
+- (NSMutableURLRequest *)requestWithMultipartFormRequest:(NSURLRequest *)request
+                             writingStreamContentsToFile:(NSURL *)fileURL
+                                       completionHandler:(void (^)(NSError *error))handler;
+
 @end
 
 #pragma mark -
@@ -251,7 +308,7 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
 - (void)appendPartWithInputStream:(NSInputStream *)inputStream
                              name:(NSString *)name
                          fileName:(NSString *)fileName
-                           length:(int64_t)length
+                           length:(NSUInteger)length
                          mimeType:(NSString *)mimeType;
 
 /**
@@ -319,11 +376,6 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
 #pragma mark -
 
 @interface AFJSONRequestSerializer : AFHTTPRequestSerializer
-
-/**
- The property list format. Possible values are described in "NSPropertyListFormat".
- */
-@property (nonatomic, assign) NSPropertyListFormat format;
 
 /**
  Options for writing the request JSON data from Foundation objects. For possible values, see the `NSJSONSerialization` documentation section "NSJSONWritingOptions". `0` by default.

@@ -34,13 +34,16 @@
 
 @interface AFHTTPRequestOperationManager ()
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
-@property (readwrite, nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
 @end
 
 @implementation AFHTTPRequestOperationManager
 
 + (instancetype)manager {
     return [[[self class] alloc] initWithBaseURL:nil];
+}
+
+- (instancetype)init {
+    return [self initWithBaseURL:nil];    
 }
 
 - (instancetype)initWithBaseURL:(NSURL *)url {
@@ -64,6 +67,8 @@
     self.reachabilityManager = [AFNetworkReachabilityManager sharedManager];
 
     self.operationQueue = [[NSOperationQueue alloc] init];
+
+    self.shouldUseCredentialStorage = YES;
 
     return self;
 }
