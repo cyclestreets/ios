@@ -234,6 +234,14 @@ enum{
 };
 typedef int DataParserType;
 
+typedef enum: int{
+    
+    DataSourceRequestCacheTypeUseCache,
+    DataSourceRequestCacheTypeUseNetwork
+    
+    
+}DataSourceRequestCacheType;
+
 @interface GenericConstants : NSObject{
 	
 }

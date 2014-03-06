@@ -1,49 +1,30 @@
 //
-//  Request.m
+//  BUNetworkOperation.m
 //  CycleStreets
 //
-//  Created by Neil Edwards on 10/12/2009.
-//  Copyright 2009 CycleStreets.. All rights reserved.
+//  Created by Neil Edwards on 03/03/2014.
+//  Copyright (c) 2014 CycleStreets Ltd. All rights reserved.
 //
 
-#import "NetRequest.h"
+#import "BUNetworkOperation.h"
+
 #import "AppConstants.h"
 #import "NSDictionary+UrlEncoding.h"
 #import "StringUtilities.h"
-#import "DataSourceManager.h"
 #import "GlobalUtilities.h"
 #import "CJSONSerializer.h"
+
 #import "CycleStreets.h"
 
-@implementation NetRequest
-@synthesize service;
-@synthesize dataid;
-@synthesize url;
-@synthesize status;
-@synthesize parameters;
-@synthesize requestType;
-@synthesize requestid;
-@synthesize revisonId;
-@synthesize source;
-@synthesize dataType;
-@synthesize trackProgress;
+@interface BUNetworkOperation()
 
 
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    service = nil;
-    dataid = nil;
-    url = nil;
-    parameters = nil;
-    requestType = nil;
-    requestid = nil;
-    source = nil;
-	
-}
 
+
+
+@end
+
+@implementation BUNetworkOperation
 
 
 
@@ -51,19 +32,99 @@
 	
 	if (self = [super init]) {
 		
-		source=SYSTEM; 
-		trackProgress=NO;
+		_source=DataSourceRequestCacheTypeUseNetwork;
+		_trackProgress=NO;
 		
 	}
     return self;
 }
 
 
+-(void)setService:(NSDictionary *)aService{
+    
+    if (_service != aService) {
+        _service = aService;
+    }
+    
+    self.dataType=[GenericConstants parserStringTypeToConstant:[_service objectForKey:@"parserType"]];
+}
+
+
+// creates /x/x/x/ based based url suffixes
+-(NSString*)urlForRequestType{
+    
+    NSString *servicetype=[_service objectForKey:@"type"];
+    
+    if ([servicetype isEqualToString:URL]) {
+		
+		return [[_parameters objectForKey:@"parameterarray"] componentsJoinedByString:@"/"];
+		
+    }
+    
+    return nil;
+}
+
+
+-(NSDictionary*)parametersForRequestType{
+    
+    
+	NSString *servicetype=[_service objectForKey:@"type"];
+	
+	if(_parameters==nil)
+		self.parameters=[NSMutableDictionary dictionary];
+	
+	
+	self.dataType=[GenericConstants parserStringTypeToConstant:[_service objectForKey:@"parserType"]];
+	
+	if ([servicetype isEqualToString:URL]) {
+		
+		
+	}else if([servicetype isEqualToString:POST]){
+		
+		
+		if([_service objectForKey:CONTROLLER]!=nil)
+			[_parameters setValue:[_service objectForKey:CONTROLLER] forKey:@"c"];
+		if([_service objectForKey:CONTROLLER]!=nil)
+			[_parameters setValue:[_service objectForKey:@"method"] forKey:@"m"];
+		
+		
+	}else if ([servicetype isEqualToString:GET]) {
+		
+		BetterLog(@"parameters=%@",_parameters);
+		
+		// optional support for server side methods/controllers
+		NSString *controllerString=[_service objectForKey:CONTROLLER];
+		NSString *methodString=[_service objectForKey:@"method"];
+		
+		if(controllerString!=nil)
+			[_parameters setValue:controllerString forKey:@"c"];
+		if(methodString!=nil)
+			[_parameters setValue:methodString forKey:@"m"];
+		
+        
+		
+	}else{
+		
+		
+		
+	}
+	
+	
+	
+	return _parameters;
+}
+
+
+
+
+#pragma mark - Request construction
+
+
 
 
 -(NSMutableURLRequest*)requestForType{
 	
-	NSString *servicetype=[service objectForKey:@"type"];
+	NSString *servicetype=[_service objectForKey:@"type"];
 	
 	return [self createRequestForServiceType:servicetype];
 	
@@ -77,11 +138,11 @@
 	NSMutableURLRequest *request=nil;
 	NSURL *requesturl=nil;
 	
-	self.dataType=[GenericConstants parserStringTypeToConstant:[service objectForKey:@"parserType"]];
+	self.dataType=[GenericConstants parserStringTypeToConstant:[_service objectForKey:@"parserType"]];
 	
 	if ([servicetype isEqualToString:URL]) {
 		
-		NSString *urlString=[StringUtilities urlFromParameterArray:[parameters objectForKey:@"parameterarray"] url:[self url]];
+		NSString *urlString=[StringUtilities urlFromParameterArray:[_parameters objectForKey:@"parameterarray"] url:[self url]];
 		requesturl=[NSURL URLWithString:urlString];
 		
 		request = [NSMutableURLRequest requestWithURL:requesturl
@@ -99,7 +160,7 @@
 									  timeoutInterval:30.0 ];
 		
 		
-		NSString *parameterString=[parameters urlEncodedString];
+		NSString *parameterString=[_parameters urlEncodedString];
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		[request setHTTPMethod:@"POST"];
@@ -110,9 +171,9 @@
 		
 	}else if ([servicetype isEqualToString:GET]) {
 		
-		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[parameters urlEncodedString]];
+		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[_parameters urlEncodedString]];
 		
-		BetterLog(@"parameters=%@",parameters);
+		BetterLog(@"parameters=%@",_parameters);
 		BetterLog(@"GET url=%@",urlString);
 		
 		
@@ -133,10 +194,10 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		NSString *parameterString = [[NSString alloc] initWithData:[[CJSONSerializer serializer] serializeDictionary:parameters error:nil]
+		NSString *parameterString = [[NSString alloc] initWithData:[[CJSONSerializer serializer] serializeDictionary:_parameters error:nil]
                                                           encoding:NSUTF8StringEncoding];
 		
-		BetterLog(@"parameters=%@",parameters);
+		BetterLog(@"parameters=%@",_parameters);
 		
 		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
@@ -147,8 +208,8 @@
 		
 	}else if([servicetype isEqualToString:GETPOST]){
 		
-		NSDictionary *getparameters=[parameters objectForKey:@"getparameters"];
-		NSDictionary *postparameters=[parameters objectForKey:@"postparameters"];
+		NSDictionary *getparameters=[_parameters objectForKey:@"getparameters"];
+		NSDictionary *postparameters=[_parameters objectForKey:@"postparameters"];
 		
 		NSString *urlString=[[NSString alloc]initWithFormat:@"%@?%@",[self url],[getparameters urlEncodedString]];
 		requesturl=[NSURL URLWithString:urlString];
@@ -172,8 +233,8 @@
 		
 	}else if([servicetype isEqualToString:IMAGEPOST]){
 		
-		NSDictionary *getparameters=[parameters objectForKey:@"getparameters"];
-		NSDictionary *postparameters=[parameters objectForKey:@"postparameters"];
+		NSDictionary *getparameters=[_parameters objectForKey:@"getparameters"];
+		NSDictionary *postparameters=[_parameters objectForKey:@"postparameters"];
         NSData *imageData=[postparameters objectForKey:@"imageData"];
 		
 		if(imageData!=nil){
@@ -246,21 +307,21 @@
 	NSString *stringBoundary = @"0xBoundaryBoundaryBoundaryBoundary";
 	
 	for(NSString *key in postparameters){
-	
+		
 		[data appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",stringBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
 		NSString *line = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key];
 		[data appendData:[line dataUsingEncoding:NSUTF8StringEncoding]];
 		[data appendData:[[postparameters objectForKey:key] dataUsingEncoding:NSUTF8StringEncoding]];
 		
 	}
-
+	
 }
 
 
 -(NSMutableURLRequest*)addRequestHeadersForService:(NSMutableURLRequest*)request{
     
     if(request!=nil){
-        NSDictionary *headerdict=[service objectForKey:@"headers"];
+        NSDictionary *headerdict=[_service objectForKey:@"headers"];
         if (headerdict!=nil) {
             for(NSString *key in headerdict){
                 [request setValue:key forHTTPHeaderField:[headerdict objectForKey:key]];
@@ -273,16 +334,58 @@
 }
 
 
--(NSMutableString*)url{
+
+
+
+
+
+#pragma mark - Errors
+
++ (NSString*)errorTypeToString:(BUNetworkOperationError)errorType {
+    
+//	if(errorType==NetResponseErrorInvalidResponse){
+//		return @"InvalidResponse";
+//	}else if (errorType==NetResponseErrorNotConnected){
+//		return @"ConnectionFailed";
+//	}else if (errorType==NetResponseErrorParserFailed) {
+//		return @"ParserFailed";
+//	}else if (errorType==NetResponseErrorNoResults) {
+//		return @"NoResults";
+//	}
 	
-	NSMutableString *str=nil;
-	
-	if([[DataSourceManager sharedInstance].DATASOURCE isEqualToString:REMOTEDATA]){
-		str=[NSMutableString stringWithString:[service objectForKey:@"remoteurl"]];
-	}else {
-		str=[NSMutableString stringWithString:[service objectForKey:@"localurl"]];
-	}
-	return str;
+    return NONE;
+}
+
+
+
+#pragma mark - Cache methods
+
+-(BOOL)serviceShouldBeCached{
+    if(_service!=nil){
+        
+        if(_service[@"cache"]!=nil){
+            return [_service[@"cache"] boolValue];
+        }
+        
+    }
+    return NO;
+}
+
+
+-(int)serviceCacheInterval{
+    
+    if(_service!=nil){
+        
+        if(_service[@"cacheInterval"]!=nil){
+            return [_service[@"cacheInterval"] intValue];
+        }else{
+            return 0;
+        }
+        
+    }
+    
+    return 0;
+    
 }
 
 

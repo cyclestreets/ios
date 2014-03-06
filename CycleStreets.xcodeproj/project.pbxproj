@@ -496,6 +496,10 @@
 		28851505166E0E20003536CA /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
 		28851506166E0E20003536CA /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
 		288663941521F7C60076BE5C /* RoutePlanMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288663931521F7C60076BE5C /* RoutePlanMenuView.xib */; };
+		2886DED818C528C100CD208B /* BUNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DED718C528C100CD208B /* BUNetworkOperation.m */; };
+		2886DED918C528C100CD208B /* BUNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DED718C528C100CD208B /* BUNetworkOperation.m */; };
+		2886DEE018C530A500CD208B /* BUDataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DEDF18C530A500CD208B /* BUDataSourceManager.m */; };
+		2886DEE118C530A500CD208B /* BUDataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DEDF18C530A500CD208B /* BUDataSourceManager.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		288B10281457492500E2A96F /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
 		288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
@@ -969,6 +973,10 @@
 		288055D918BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRouteSegmentAnnotationView.m; sourceTree = "<group>"; };
 		28851504166E0E20003536CA /* UIActivityCopy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityCopy.png; sourceTree = "<group>"; };
 		288663931521F7C60076BE5C /* RoutePlanMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoutePlanMenuView.xib; sourceTree = "<group>"; };
+		2886DED618C528C100CD208B /* BUNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUNetworkOperation.h; sourceTree = "<group>"; };
+		2886DED718C528C100CD208B /* BUNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUNetworkOperation.m; sourceTree = "<group>"; };
+		2886DEDE18C530A500CD208B /* BUDataSourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDataSourceManager.h; sourceTree = "<group>"; };
+		2886DEDF18C530A500CD208B /* BUDataSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDataSourceManager.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		288B10271457492500E2A96F /* RoutesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewController.m; sourceTree = "<group>"; };
 		288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_waypoint.png; sourceTree = "<group>"; };
@@ -1963,6 +1971,8 @@
 				2863A38D134E508800A22093 /* XMLRequest.m */,
 				28AD6205131FB69D008527FC /* ApplicationXMLParser.h */,
 				28AD6206131FB69D008527FC /* ApplicationXMLParser.m */,
+				2886DED618C528C100CD208B /* BUNetworkOperation.h */,
+				2886DED718C528C100CD208B /* BUNetworkOperation.m */,
 			);
 			path = net;
 			sourceTree = "<group>";
@@ -2096,6 +2106,8 @@
 		28AD632B131FB6C8008527FC /* net */ = {
 			isa = PBXGroup;
 			children = (
+				2886DEDE18C530A500CD208B /* BUDataSourceManager.h */,
+				2886DEDF18C530A500CD208B /* BUDataSourceManager.m */,
 				28ECCBDA1526304E00284926 /* RequestQueueVO.h */,
 				28ECCBDB1526304E00284926 /* RequestQueueVO.m */,
 				28B484D615261EC800E406E1 /* Reachability.h */,
@@ -3037,6 +3049,7 @@
 				280E91C614097D8600C7AC75 /* StringManager.m in Sources */,
 				280E91C714097D8600C7AC75 /* StyleManager.m in Sources */,
 				280E91C814097D8600C7AC75 /* UserSettingsManager.m in Sources */,
+				2886DEE018C530A500CD208B /* BUDataSourceManager.m in Sources */,
 				280E91CC14097DD300C7AC75 /* MapLocationSearchViewController.m in Sources */,
 				280E93461409856E00C7AC75 /* NetworkRequest.m in Sources */,
 				280E93471409856E00C7AC75 /* RouteParser.m in Sources */,
@@ -3056,6 +3069,7 @@
 				280E24D4144D84F70021CDFA /* ButtonUtilities.m in Sources */,
 				280E24DB144D8D990021CDFA /* PhotoManager.m in Sources */,
 				28735BF4144EC7A000726A6C /* PhotoMapVO.m in Sources */,
+				2886DED818C528C100CD208B /* BUNetworkOperation.m in Sources */,
 				28735BF7144EC80300726A6C /* PhotoMapListVO.m in Sources */,
 				28735BFA144EC85300726A6C /* CSPointVO.m in Sources */,
 				28735C08144ED44B00726A6C /* LocationFeaturesManager.m in Sources */,
@@ -3124,6 +3138,7 @@
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
+				2886DED918C528C100CD208B /* BUNetworkOperation.m in Sources */,
 				283436DB15DD5DC300B00FD5 /* NSDate-Misc.m in Sources */,
 				283436DC15DD5DC300B00FD5 /* NSDictionary+Helpers.m in Sources */,
 				289478B118AD353B0066AA2E /* CSInitialMapViewController.m in Sources */,
@@ -3221,6 +3236,7 @@
 				2834374915DD5DC300B00FD5 /* NSString+HTML.m in Sources */,
 				288055D518BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */,
 				2834374A15DD5DC300B00FD5 /* SegmentVO.m in Sources */,
+				2886DEE118C530A500CD208B /* BUDataSourceManager.m in Sources */,
 				2834374B15DD5DC300B00FD5 /* SavedRoutesManager.m in Sources */,
 				2834374C15DD5DC300B00FD5 /* RoutesViewController.m in Sources */,
 				2875DE5218B77E7900BEF18B /* BUIconButton.m in Sources */,
