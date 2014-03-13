@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
 
 
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {

@@ -77,7 +77,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 
 
 
--(id)init{
+-(instancetype)init{
 	if (self = [super init])
 	{
 		_parserMethods=[[NSDictionary alloc] initWithObjectsAndKeys:

@@ -38,7 +38,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StringManager);
 
 
 
--(id)init{
+-(instancetype)init{
 	if (self = [super init]){
 		[self initialise];
 	}

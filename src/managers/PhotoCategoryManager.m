@@ -32,7 +32,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 
 
 
--(id)init{
+-(instancetype)init{
 	
 	self = [super init];
 	

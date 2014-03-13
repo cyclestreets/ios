@@ -52,7 +52,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 
--(id)init{
+-(instancetype)init{
 	
 	if (self = [super init])
 	{

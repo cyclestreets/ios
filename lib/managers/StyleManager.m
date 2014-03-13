@@ -36,7 +36,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StyleManager);
 
 
 
--(id)init{
+-(instancetype)init{
 	
 	if (self = [super init])
 	{
