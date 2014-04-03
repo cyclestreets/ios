@@ -1,38 +1,39 @@
 PODS:
-  - AFNetworking (2.1.0):
+  - AFNetworking (2.2.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.1.0):
+  - AFNetworking/NSURLConnection (2.2.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.1.0):
+  - AFNetworking/NSURLSession (2.2.1):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.1.0)
-  - AFNetworking/Security (2.1.0)
-  - AFNetworking/Serialization (2.1.0)
-  - AFNetworking/UIKit (2.1.0):
+  - AFNetworking/Reachability (2.2.1)
+  - AFNetworking/Security (2.2.1)
+  - AFNetworking/Serialization (2.2.1)
+  - AFNetworking/UIKit (2.2.1):
     - AFNetworking/NSURLConnection
-  - BlocksKit (2.1.0):
+    - AFNetworking/NSURLSession
+  - BlocksKit (2.2.0):
     - BlocksKit/All
-  - BlocksKit/All (2.1.0):
+  - BlocksKit/All (2.2.0):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
     - BlocksKit/MessageUI
     - BlocksKit/UIKit
-  - BlocksKit/Core (2.1.0)
-  - BlocksKit/DynamicDelegate (2.1.0):
-    - BlocksKit/MiniFFI
-  - BlocksKit/MessageUI (2.1.0):
+  - BlocksKit/Core (2.2.0)
+  - BlocksKit/DynamicDelegate (2.2.0)
+  - BlocksKit/MessageUI (2.2.0):
+    - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - BlocksKit/MiniFFI (2.1.0)
-  - BlocksKit/UIKit (2.1.0):
+  - BlocksKit/UIKit (2.2.0):
+    - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - JVFloatLabeledTextField (0.0.5)
+  - JVFloatLabeledTextField (0.0.7)
   - Pixate (2.0.1)
   - RegexKitLite (4.0)
   - SFHFKeychainUtils (0.0.1)
@@ -53,10 +54,10 @@ EXTERNAL SOURCES:
     :git: https://github.com/pandamonia/BlocksKit.git
 
 SPEC CHECKSUMS:
-  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
-  BlocksKit: 20086a023551c742d2278771e47c36e05f17b662
-  JVFloatLabeledTextField: 7daac42f450476dc9cfa5b23645e8661b868994b
-  Pixate: ced6ade02e1f202223abdab5494e25c28b562667
+  AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
+  BlocksKit: f12f7d7922b2673d44877dc6fbea9870f2565085
+  JVFloatLabeledTextField: 9e3e205143699e9b2119358688e99fe0787b5a97
+  Pixate: d08421b41a5733d9df450286cab97415c71bba4b
   RegexKitLite: f7af7b4d2b675cd2ec9a4abab6aad6ae1f6499c0
   SFHFKeychainUtils: e828dbd9eaa509486acf95d8de2ebd414c4b7451
   ViewDeck: 2cdc67c4b41a10cafc7556b982f028409e33604d

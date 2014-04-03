@@ -50,7 +50,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "HCSHelpViewController.h"
 
 #if defined (CONFIGURATION_Adhoc)
-#import "TestFlight.h"
+//#import "TestFlight.h"
 #endif
 
 
@@ -77,7 +77,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	#if defined (CONFIGURATION_Adhoc)
-	[TestFlight takeOff:@"e1447ee8-f43c-4f83-87b1-54709700a8b6"]; //66d1beaa-3747-4893-8146-93c7003bc24f
+	//[TestFlight takeOff:@"e1447ee8-f43c-4f83-87b1-54709700a8b6"]; //66d1beaa-3747-4893-8146-93c7003bc24f
 	#endif
 	
 	Crashlytics *crashlytics=[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];

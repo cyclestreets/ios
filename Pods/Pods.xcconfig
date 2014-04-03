@@ -2,5 +2,5 @@ FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/Pixate/Framework/iOS"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/BlocksKit" "${PODS_ROOT}/Headers/JVFloatLabeledTextField" "${PODS_ROOT}/Headers/Pixate" "${PODS_ROOT}/Headers/RegexKitLite" "${PODS_ROOT}/Headers/SFHFKeychainUtils" "${PODS_ROOT}/Headers/ViewDeck"
 OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/AFNetworking" "-isystem${PODS_ROOT}/Headers/BlocksKit" "-isystem${PODS_ROOT}/Headers/JVFloatLabeledTextField" "-isystem${PODS_ROOT}/Headers/Pixate" "-isystem${PODS_ROOT}/Headers/RegexKitLite" "-isystem${PODS_ROOT}/Headers/SFHFKeychainUtils" "-isystem${PODS_ROOT}/Headers/ViewDeck"
-OTHER_LDFLAGS = -ObjC -Wl,-no_compact_unwind -lObjC -licucore -framework CoreGraphics -framework CoreText -framework Foundation -framework MessageUI -framework MobileCoreServices -framework Pixate -framework QuartzCore -framework Security -framework SystemConfiguration -framework UIKit
+OTHER_LDFLAGS = -ObjC -lObjC -licucore -framework CoreGraphics -framework CoreText -framework Foundation -framework MessageUI -framework MobileCoreServices -framework Pixate -framework QuartzCore -framework Security -framework SystemConfiguration -framework UIKit
 PODS_ROOT = ${SRCROOT}/Pods
