@@ -138,6 +138,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 -(void)completeTripAutomatically{
 	
 	
+	
 	_currentRecordingTrip.notes=@"Auto completed Trip";
 	
 	[self saveTrip:YES];
@@ -154,6 +155,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 
 
+-(BOOL)doesTripContainUsefulData{
+	
+	if(_currentRecordingTrip)
+		return _currentRecordingTrip.coords.count>0;
+	
+	return NO;
+}
 
 
 
@@ -162,6 +170,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	
 	[self optimiseTrip:_currentRecordingTrip];
+	
 	
 	if ( _currentRecordingTrip && [_currentRecordingTrip.coords count]>0 ){
 		
@@ -175,8 +184,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		[_currentRecordingTrip setDuration:[NSNumber numberWithDouble:duration]];
 		
 	}else{
-		[_currentRecordingTrip setDuration:[NSNumber numberWithInt:0]];
-		[_currentRecordingTrip setDistance:[NSNumber numberWithInt:0]];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:HCS_TRIPNOCOORDS object:nil];
+		return;
 
 	}
 	

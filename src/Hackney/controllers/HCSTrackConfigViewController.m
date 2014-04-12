@@ -477,13 +477,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		
     }else {
 		
-		__weak __typeof(&*self)weakSelf = self;
-		UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@""];
+		NSString *sheetTitle=EMPTYSTRING;
 		
-		[actionSheet bk_addButtonWithTitle:@"Finish" handler:^{
-			[weakSelf didReceiveUpdatedLocations:@[_currentLocation]];
-			[weakSelf initiateSaveTrip];
-		}];
+		BOOL doesTripContainUsefulData=[TripManager sharedInstance].doesTripContainUsefulData;
+		
+		if(!doesTripContainUsefulData)
+			sheetTitle=@"This Route currently contains no locations,\r please Continue or Delete";
+		
+		__weak __typeof(&*self)weakSelf = self;
+		UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:sheetTitle];
+		
+		if(doesTripContainUsefulData==YES){
+			[actionSheet bk_addButtonWithTitle:@"Finish" handler:^{
+				[weakSelf didReceiveUpdatedLocations:@[_currentLocation]];
+				[weakSelf initiateSaveTrip];
+			}];
+		}
+		
 		[actionSheet bk_setDestructiveButtonWithTitle:@"Delete" handler:^{
 			[weakSelf resetRecordingInProgress];
 			[[TripManager sharedInstance] removeCurrentRecordingTrip];

@@ -123,7 +123,7 @@ extern NSString *const CYCLESTREETSURLSCHEME;
 
 extern NSString *const HCS_TRIPCOMPLETE;
 extern NSString *const HACKNEYTRIPUPLOAD;
-
+extern NSString *const HCS_TRIPNOCOORDS;
  
 
 @interface AppConstants : NSObject {
