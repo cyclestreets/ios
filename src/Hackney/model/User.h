@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSString * workZIP;
 @property (nonatomic, retain) NSString * gender;
 @property (nonatomic, retain) NSString * email;
+
 @property (nonatomic, retain) NSSet *notes;
 @property (nonatomic, retain) NSSet *trips;
 @end

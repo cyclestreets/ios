@@ -18,6 +18,7 @@
 
 @property (nonatomic,strong)  NSArray										*ageArray;
 @property (nonatomic,strong)  NSArray										*genderArray;
+@property (nonatomic,strong)  NSArray										*experienceArray;
 
 @property (nonatomic,strong)  NSArray										*activePickerDataSource;
 @property (nonatomic,strong)  UIPickerView									*fieldPicker;
@@ -26,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField							*ageField;
 @property (weak, nonatomic) IBOutlet UITextField							*genderField;
+@property (weak, nonatomic) IBOutlet UITextField							*experienceField;
 @property (nonatomic, strong) IBOutlet UIView								*pickerAccessoryView;
 
 @property (nonatomic,strong)  UITextField									*currentTextField;
@@ -116,13 +118,14 @@
 	
 	self.genderArray = @[@"Female",@"Male",@"Other / prefer not to say"];
     self.ageArray = @[@"0-10", @"11-16", @"17-24", @"25-44", @"45-64", @"65-74", @"75-84",@"85+"];
+	self.experienceArray = @[@"Experienced", @"Infrequent", @"Beginner"];
 	
 	self.fieldPicker = [[UIPickerView alloc] init];
     _fieldPicker.dataSource = self;
     _fieldPicker.delegate = self;
     _ageField.inputView = _fieldPicker;
 	_genderField.inputView= _fieldPicker;
-	
+	_experienceField.inputView= _fieldPicker;
 	
     
 }
@@ -135,6 +138,10 @@
 	if(_user.age!=nil){
 		_ageField.text=_user.age;
 	}
+	
+//	if(_user.experience!=nil){
+//		_experienceField.text=_user.experience;
+//	}
     
 }
 
@@ -168,6 +175,8 @@
 		self.activePickerDataSource=_ageArray;
 	}else if (_currentTextField==_genderField){
 		self.activePickerDataSource=_genderArray;
+	}else if (_currentTextField==_experienceField){
+		self.activePickerDataSource=_experienceArray;
 	}
 	
 	[_fieldPicker reloadAllComponents];
@@ -214,6 +223,7 @@
 	
 	_user.age=_ageField.text;
 	_user.gender=_genderField.text;
+	//_user.experience=_experienceField.text;
 	
 	[[CoreDataStore mainStore] save];
 	

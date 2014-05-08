@@ -16,6 +16,7 @@
 #import "HudManager.h"
 #import "CJSONOrderedSerializer.h"
 #import "DataSourceManager.h"
+#import "SettingsManager.h"	
 
 // use this epsilon for both real-time and post-processing distance calculations
 #define kEpsilonAccuracy		100.0
@@ -385,6 +386,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 							   @"username":EMPTYSTRING,
 							   @"password":EMPTYSTRING,
 							   @"format":@"atlanta",
+							   @"adjustbyapikey":@1,
 							   @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString]};
 	
 	BetterLog(@"%@",postVars);
@@ -595,6 +597,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	return trips;
 }
 
+
+#pragma mark - Getters
+
+
+-(NSString*)totalTripDistanceString{
+	
+	float distance=0;
+	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved = nil"] orderBy:@"start" ascending:NO];
+	for(Trip *trip in trips){
+		
+		// in m
+		distance+=[trip.distance floatValue];
+		
+	}
+	
+	
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+		float totalMiles = distance/1600;
+		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
+	}else {
+		float	kms=distance/1000;
+		return [NSString stringWithFormat:@"%4.1f km", kms];
+	}
+	
+}
 
 
 

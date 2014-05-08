@@ -20,19 +20,12 @@
 #import "Trip.h"
 #import "GlobalUtilities.h"
 
-static float const kAccessoryViewX=282.0;
-static float const kAccessoryViewY=24.0;
-
 static NSString *const  kCellReuseIdentifierCheck=@"CheckMark";
 static NSString *const kCellReuseIdentifierExclamation=@"Exclamataion";
 static NSString *const kCellReuseIdentifierInProgress=@"InProgress";
 
 static NSString *const VIEWTITLE=@"Saved Routes";
 
-static int const kRowHeight=	75;
-static int const kTagTitle=	1;
-static int const kTagDetail=	2;
-static int const kTagImage=	3;
 
 @interface HCSRouteListViewController ()<UIActionSheetDelegate>
 
@@ -42,6 +35,7 @@ static int const kTagImage=	3;
 
 // ui
 @property (nonatomic,weak) IBOutlet UITableView				*tableView;
+@property (weak, nonatomic) IBOutlet UILabel				*distanceLabel;
 
 
 // state
@@ -126,6 +120,7 @@ static int const kTagImage=	3;
     [super viewDidLoad];
 	
 	self.selectedTrip = nil;
+	_distanceLabel.text=EMPTYSTRING;
 	
     [self createPersistentUI];
 }
@@ -168,6 +163,8 @@ static int const kTagImage=	3;
 -(void)createNonPersistentUI{
     
 	[self refreshUIFromDataProvider];
+	
+	_distanceLabel.text=[TripManager sharedInstance].totalTripDistanceString;
     
 }
 
@@ -232,6 +229,8 @@ static int const kTagImage=	3;
         [_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
 		
 		[self updateUploaddUI];
+		
+		_distanceLabel.text=[TripManager sharedInstance].totalTripDistanceString;
 		
     }
 	

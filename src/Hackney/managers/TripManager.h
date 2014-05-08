@@ -66,6 +66,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 @property (nonatomic, readonly) BOOL							doesTripContainUsefulData;
 
 
+// getters
+@property(nonatomic,readonly)  NSString							*totalTripDistanceString;
+
 
 - (Trip*)createTrip;
 -(void)resetTrip;
@@ -82,10 +85,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 - (void)saveTrip:(BOOL)isBackgroundEvent;
 
 
-
 - (int)countUnSavedTrips;
 - (int)countUnSyncedTrips;
 - (int)countZeroDistanceTrips;
+
+
+
 
 
 - (int)recalculateTripDistances;
