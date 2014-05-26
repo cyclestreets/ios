@@ -56,7 +56,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserManager);
 }
 
 -(BOOL)hasUserData{
-	return _user.gender!=nil && _user.age!=nil;
+	return _user.gender!=nil && _user.age!=nil && _user.experience!=nil;
 }
 
 

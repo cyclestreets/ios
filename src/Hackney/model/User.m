@@ -26,6 +26,7 @@
 @dynamic email;
 @dynamic notes;
 @dynamic trips;
+@dynamic experience;
 
 
 
@@ -37,6 +38,7 @@
 		 self.homeZIP	!= nil ||
 		 self.workZIP	!= nil ||
 		 self.schoolZIP	!= nil ||
+		self.experience	!= nil ||
 	   ([self.cyclingFreq intValue] < 4 )){
 		return NO;
 	}

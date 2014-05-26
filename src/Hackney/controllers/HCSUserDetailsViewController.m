@@ -139,9 +139,9 @@
 		_ageField.text=_user.age;
 	}
 	
-//	if(_user.experience!=nil){
-//		_experienceField.text=_user.experience;
-//	}
+	if(_user.experience!=nil){
+		_experienceField.text=_user.experience;
+	}
     
 }
 
@@ -223,7 +223,7 @@
 	
 	_user.age=_ageField.text;
 	_user.gender=_genderField.text;
-	//_user.experience=_experienceField.text;
+	_user.experience=_experienceField.text;
 	
 	[[CoreDataStore mainStore] save];
 	

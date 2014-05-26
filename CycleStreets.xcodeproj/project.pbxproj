@@ -1102,6 +1102,7 @@
 		28735C1E144F10F300726A6C /* appconfig_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appconfig_live.plist; sourceTree = "<group>"; };
 		28735C29144F1D0400726A6C /* UIDevice+Machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Machine.h"; sourceTree = "<group>"; };
 		28735C2A144F1D0400726A6C /* UIDevice+Machine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Machine.m"; sourceTree = "<group>"; };
+		28735F8819337D9800D06FB8 /* CDAppModel 2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CDAppModel 2.1.xcdatamodel"; sourceTree = "<group>"; };
 		287868F71886954300CA9746 /* CSIcon_intermediate_wisp@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_intermediate_wisp@2X.png"; sourceTree = "<group>"; };
 		287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
 		287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
@@ -1278,7 +1279,7 @@
 		28AE47B61896C5A000203C20 /* HCSHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSHelpViewController.h; sourceTree = "<group>"; };
 		28AE47B71896C5A000203C20 /* HCSHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSHelpViewController.m; sourceTree = "<group>"; };
 		28AE47BA1896DA7700203C20 /* HCSUserDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSUserDetailsView.xib; path = hackney/HCSUserDetailsView.xib; sourceTree = "<group>"; };
-		28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCSUserDetailsViewController.h; path = ../controllers/HCSUserDetailsViewController.h; sourceTree = "<group>"; };
+		28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSUserDetailsViewController.h; sourceTree = "<group>"; };
 		28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCSUserDetailsViewController.m; sourceTree = "<group>"; };
 		28AE47C11896E95000203C20 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		28AE47C21896E95000203C20 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
@@ -1860,6 +1861,7 @@
 				287050B8188FC407004CD922 /* HCSSurveyViewController.m */,
 				28AE47B61896C5A000203C20 /* HCSHelpViewController.h */,
 				28AE47B71896C5A000203C20 /* HCSHelpViewController.m */,
+				28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */,
 				28AE47BE1896DCCD00203C20 /* HCSUserDetailsViewController.m */,
 			);
 			path = controllers;
@@ -1871,7 +1873,6 @@
 				287050BC188FC407004CD922 /* Coord.h */,
 				287050BD188FC407004CD922 /* Coord.m */,
 				280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */,
-				28AE47BD1896DCCD00203C20 /* HCSUserDetailsViewController.h */,
 				287050BF188FC407004CD922 /* Note.h */,
 				287050C0188FC407004CD922 /* Note.m */,
 				287050C1188FC407004CD922 /* Trip.h */,
@@ -4043,10 +4044,11 @@
 		280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				28735F8819337D9800D06FB8 /* CDAppModel 2.1.xcdatamodel */,
 				2842A00618A23ED400402FA7 /* CDAppModel 2.xcdatamodel */,
 				280565ED18903C8900359211 /* CDAppModel.xcdatamodel */,
 			);
-			currentVersion = 2842A00618A23ED400402FA7 /* CDAppModel 2.xcdatamodel */;
+			currentVersion = 28735F8819337D9800D06FB8 /* CDAppModel 2.1.xcdatamodel */;
 			path = CDAppModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -511,7 +511,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			// initialize text fields to saved personal info
 			[userDict setValue:user.age             forKey:@"age"];
 			[userDict setValue:user.gender          forKey:@"gender"];
-			
+			[userDict setValue:user.experience          forKey:@"experience"];
 			//[userDict setValue:appVersion           forKey:@"app_version"];
 			
 		}else{
