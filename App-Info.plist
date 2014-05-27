@@ -4,6 +4,8 @@
 <dict>
 	<key>APPCONFIG_ID</key>
 	<string>APPSTATE_DEVELOPMENT</string>
+	<key>SERVERDOMAIN_ID</key>
+	<string>APPSTATE_LIVE</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
@@ -42,7 +44,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>154</string>
+	<string>155</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
@@ -51,8 +53,6 @@
 	</array>
 	<key>NSMainNibFile</key>
 	<string>CycleStreetsWindow</string>
-	<key>SERVERDOMAIN_ID</key>
-	<string>APPSTATE_LIVE</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

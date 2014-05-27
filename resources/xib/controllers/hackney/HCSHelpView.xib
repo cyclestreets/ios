@@ -39,14 +39,14 @@ Cycle Hackney app!</string>
                     <color key="textColor" red="0.039215687659999998" green="0.38823533059999998" blue="0.2941176593" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cycle-counter.jpg" id="59I-Fk-8Jy">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cycle-counter.jpg" id="59I-Fk-8Jy">
                     <rect key="frame" x="20" y="783" width="280" height="271"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XeC-JL-EsL">
                     <rect key="frame" x="20" y="95" width="280" height="661"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <mutableString key="text">Cycle Hackney is a smartphone app for recording your cycle trips. When you use the app, you are giving transport planners with Hackney Council the data they need to make the borough a better place to cycle.
+                    <string key="text">Cycle Hackney is a smartphone app for recording your cycle trips. When you use the app, you are giving transport planners with Hackney Council the data they need to make the borough a better place to cycle.
 
 The app uses your phone's GPS to record your routes in real-time, allowing the Council to know which routes cyclists prefer or avoid.
 
@@ -58,7 +58,7 @@ Data (but not personal data) you submit will be licensed under the terms of the 
 Mapping data courtesy of
 
 App developed by 
-(developer: Neil Edwards), making use of GPL code from CycleStreets and Cycle Atlanta.</mutableString>
+(developer: Neil Edwards), making use of GPL code from CycleStreets and Cycle Atlanta.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -91,6 +91,6 @@ App developed by
         </view>
     </objects>
     <resources>
-        <image name="cycle-counter.jpg" width="200" height="276"/>
+        <image name="cycle-counter.jpg" width="480" height="542"/>
     </resources>
 </document>
