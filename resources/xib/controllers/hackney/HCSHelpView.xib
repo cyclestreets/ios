@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HCSHelpViewController">
@@ -27,7 +27,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
         <view contentMode="scaleToFill" id="5Eo-oI-itv">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="938"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="1074"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j2f-hh-5bh">
@@ -40,31 +40,33 @@ Cycle Hackney app!</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cycle-counter.jpg" id="59I-Fk-8Jy">
-                    <rect key="frame" x="20" y="632" width="280" height="271"/>
+                    <rect key="frame" x="20" y="783" width="280" height="271"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XeC-JL-EsL">
-                    <rect key="frame" x="20" y="95" width="280" height="504"/>
+                    <rect key="frame" x="20" y="95" width="280" height="661"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <mutableString key="text">Cycle Hackney is a smartphone app for recording your cycle trips. When you use the app, you are giving transport planners with Hackney Council the data they need to make the borough a better place to cycle.
 
-The app uses your phone's GPS record your routes in real-time, allowing the Council to know which routes cyclists prefer or avoid.
+The app uses your phone's GPS to record your routes in real-time, allowing the Council to know which routes cyclists prefer or avoid.
 
-The app will also allow users to report problems along their route such as potholes, obstructed bike lanes, inadequate cycle parking etc.
+The app will also allow users to report problems along their route such as potholes, obstructed bike lanes, inadequate cycle parking etc. You can report these during your trip or at any other time.
 
 The information collected by the app will be used by the Council to consider and make strategic improvements to the borough's cycle infrastructure. This will make cycling in Hackney more pleasant, and encourage those who currently don't cycle to give it a go.
 
+Data (but not personal data) you submit will be licensed under the terms of the Creative Commons Public Domain Dedication license.
 Mapping data courtesy of
 
-App developed by</mutableString>
+App developed by 
+(developer: Neil Edwards), making use of GPL code from CycleStreets and Cycle Atlanta.</mutableString>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xtt-eF-CkY">
-                    <rect key="frame" x="189" y="544" width="107" height="15"/>
+                    <rect key="frame" x="191" y="649" width="107" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="OpenStreetMap">
                         <color key="titleColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,10 +76,10 @@ App developed by</mutableString>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lr0-DZ-ADk">
-                    <rect key="frame" x="142" y="579" width="107" height="15"/>
+                    <rect key="frame" x="142" y="675" width="121" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                    <state key="normal" title="CycleStreets">
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="CycleStreets Ltd">
                         <color key="titleColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

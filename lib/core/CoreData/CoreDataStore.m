@@ -81,22 +81,18 @@ static CoreDataStore *gMainStoreInstance;
 						   isConfiguration:configuration
 						   compatibleWithStoreMetadata:sourceMetadata];
 	
-	//pscCompatibile=YES;
-	//
-	// if migration is required
+	// if migration is not required
 	if (pscCompatibile==YES) {
 		
 		BetterLog(@"CDS No Migration required");
 		
-		//[gPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error];
-		
 		if (![gPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
 			
-			BetterLog(@"CDS store failed with error: %@",error.description);
+			BetterLog(@"CDS store creation failed with error: %@",error.description);
 			
 		}else{
 			
-			BetterLog(@"CDS store completed");
+			BetterLog(@"CDS store creation completed");
 			
 		}
 		

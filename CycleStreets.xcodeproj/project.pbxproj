@@ -19,6 +19,8 @@
 		280565EF18903C8900359211 /* CDAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 280565EC18903C8900359211 /* CDAppModel.xcdatamodeld */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		2807FCBA166693580028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
+		280B3B1A193399740047115B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280B3B19193399740047115B /* Default@2x.png */; };
+		280B3B1B193399740047115B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280B3B19193399740047115B /* Default@2x.png */; };
 		280E240F144D825D0021CDFA /* BUMoreTableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */; };
 		280E2410144D825D0021CDFA /* BUTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2409144D825D0021CDFA /* BUTableCellView.m */; };
 		280E2411144D825D0021CDFA /* FrameworkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E240B144D825D0021CDFA /* FrameworkObject.m */; };
@@ -820,6 +822,7 @@
 		280565E41890384400359211 /* NSManagedObject+Boost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Boost.m"; sourceTree = "<group>"; };
 		280565ED18903C8900359211 /* CDAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CDAppModel.xcdatamodel; sourceTree = "<group>"; };
 		2807FCB81666934E0028D7DB /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		280B3B19193399740047115B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		280E2406144D825D0021CDFA /* BUMoreTableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUMoreTableDataSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E2407144D825D0021CDFA /* BUMoreTableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUMoreTableDataSource.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		280E2408144D825D0021CDFA /* BUTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUTableCellView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -2671,6 +2674,7 @@
 		E7FD8F3B127821DB002640D0 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				280B3B19193399740047115B /* Default@2x.png */,
 				2811F93E18A0FB7700C8EF0F /* DefaultiP5.png */,
 				2811F93F18A0FB7700C8EF0F /* Default.png */,
 			);
@@ -2990,6 +2994,7 @@
 				2868D23C166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */,
 				2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */,
 				2868D240166E1C0600C0C153 /* UIActivityFacebook@2x.png in Resources */,
+				280B3B1A193399740047115B /* Default@2x.png in Resources */,
 				2868D242166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				289AA2C6188EEB170097AA5A /* TrackingDotHalo@2x.png in Resources */,
@@ -3018,6 +3023,7 @@
 				289AA2C7188EEB170097AA5A /* TrackingDotHalo@2x.png in Resources */,
 				289AA2B7188EEB170097AA5A /* LoadingTileZoom.png in Resources */,
 				2880BE56188E821A006FF7E2 /* HCSRouteListView.xib in Resources */,
+				280B3B1B193399740047115B /* Default@2x.png in Resources */,
 				2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				2834361A15DD5DC300B00FD5 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				2834361B15DD5DC300B00FD5 /* UIIcon_cycle_lanes@2x.png in Resources */,

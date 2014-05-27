@@ -179,7 +179,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	UIImage *image=[UIImage imageNamed: ip ? @"DefaultiP5.png"  : @"Default.png" ];
 	_splashView.image = image;
 	
-	#if ISDEVELOPMENT
+	#if defined (CONFIGURATION_Adhoc)
 	[self writeDebugStartupLabel:NO];
 	#endif
 	
