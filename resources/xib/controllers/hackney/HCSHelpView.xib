@@ -27,7 +27,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
         <view contentMode="scaleToFill" id="5Eo-oI-itv">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="1074"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="1128"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j2f-hh-5bh">
@@ -40,13 +40,13 @@ Cycle Hackney app!</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cycle-counter.jpg" id="59I-Fk-8Jy">
-                    <rect key="frame" x="20" y="783" width="280" height="271"/>
+                    <rect key="frame" x="20" y="823" width="280" height="271"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XeC-JL-EsL">
-                    <rect key="frame" x="20" y="95" width="280" height="661"/>
+                    <rect key="frame" x="20" y="95" width="280" height="677"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">Cycle Hackney is a smartphone app for recording your cycle trips. When you use the app, you are giving transport planners with Hackney Council the data they need to make the borough a better place to cycle.
+                    <mutableString key="text">Cycle Hackney is a smartphone app for recording your cycle trips. When you use the app, you are giving transport planners with Hackney Council the data they need to make the borough a better place to cycle.
 
 The app uses your phone's GPS to record your routes in real-time, allowing the Council to know which routes cyclists prefer or avoid.
 
@@ -55,16 +55,17 @@ The app will also allow users to report problems along their route such as potho
 The information collected by the app will be used by the Council to consider and make strategic improvements to the borough's cycle infrastructure. This will make cycling in Hackney more pleasant, and encourage those who currently don't cycle to give it a go.
 
 Data (but not personal data) you submit will be licensed under the terms of the Creative Commons Public Domain Dedication license.
-Mapping data courtesy of
+
+Mapping data courtesy of                          .
 
 App developed by 
-(developer: Neil Edwards), making use of GPL code from CycleStreets and Cycle Atlanta.</string>
+(developer: Neil Edwards), making use of GPL code from CycleStreets and Cycle Atlanta.</mutableString>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xtt-eF-CkY">
-                    <rect key="frame" x="191" y="649" width="107" height="15"/>
+                    <rect key="frame" x="190" y="666" width="107" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="OpenStreetMap">
@@ -76,7 +77,7 @@ App developed by
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lr0-DZ-ADk">
-                    <rect key="frame" x="142" y="675" width="121" height="33"/>
+                    <rect key="frame" x="142" y="692" width="121" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="CycleStreets Ltd">
