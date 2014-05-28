@@ -453,6 +453,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		
         BetterLog(@"%@",error.debugDescription);
 		
+		[[NSNotificationCenter defaultCenter] postNotificationName:RESPONSE_GPSUPLOAD object:@{STATE: ERROR}];
+		
 		completionBlock(NO);
         
     }];

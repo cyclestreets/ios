@@ -121,6 +121,8 @@
 		
 		_uploadButton.enabled=!_trip.isUploaded;
 		
+	}else{
+		_uploadButton.enabled=YES;
 	}
 	
 	
@@ -180,16 +182,18 @@
 			case HCSMapViewModeSave:
 			{
 				self.myNavigationItem.leftBarButtonItem=[self backButtonWithTitle:@"Done"];
+				_uploadButton.enabled=NO;
 			}
 				break;
 			case HCSMapViewModeShow:
 			{
 				self.myNavigationItem.leftBarButtonItem=[self backButtonWithTitle:@"Back"];
+				_uploadButton.enabled=_trip.uploaded==nil;
 			}
 				break;
 		}
 		
-		_uploadButton.enabled=_trip.uploaded==nil;
+		
 		
 		
 		
