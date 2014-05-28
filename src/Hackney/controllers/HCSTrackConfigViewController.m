@@ -204,7 +204,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	if ( _isRecordingTrack ){
 		
-		[_tripManager addCoord:_currentLocation];
+		self.currentDistance=[_tripManager addCoord:_currentLocation];
 		
 		[self updateUIForDistance];
 		
@@ -237,6 +237,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 -(void)updateUIForDuration{
 	
 	if ( _shouldUpdateDuration ){
+		
+		if(_trackTimer==nil)
+			return;
 		
 		NSDate *startDate = _trackTimer.startDate;
 		NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:startDate];
@@ -359,6 +362,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.displaysConnectionErrors=NO;
 	
 	self.tripManager=[TripManager sharedInstance];
 	

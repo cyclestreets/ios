@@ -128,6 +128,7 @@
 		2818E0C2189048E10031AD43 /* TripDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C1189048E10031AD43 /* TripDetailViewController.xib */; };
 		2818E0C6189050570031AD43 /* HCSMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C5189050570031AD43 /* HCSMapView.xib */; };
 		2818E0CA189050930031AD43 /* HCSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0C9189050930031AD43 /* HCSMapViewController.m */; };
+		281C18701935FC6100D9AC1E /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2894D6F51935EEFD009BFFB2 /* APIKey_live.txt */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
 		281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */; };
 		281E08C4145179AC0034CC63 /* POITypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E08C3145179AC0034CC63 /* POITypeCell.xib */; };
@@ -381,7 +382,6 @@
 		2894D5F81935EDA0009BFFB2 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		2894D5F91935EDA0009BFFB2 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
 		2894D5FA1935EDA0009BFFB2 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
-		2894D5FB1935EDA0009BFFB2 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */; };
 		2894D5FC1935EDA0009BFFB2 /* CSBarButton_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2D15E4D7E9006B01D0 /* CSBarButton_location@2x.png */; };
 		2894D5FD1935EDA0009BFFB2 /* marker-red-withletter.png in Resources */ = {isa = PBXBuildFile; fileRef = 289AA2A6188EEB170097AA5A /* marker-red-withletter.png */; };
 		2894D5FE1935EDA0009BFFB2 /* Icon_nofavroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2E15E4D7E9006B01D0 /* Icon_nofavroutes@2x.png */; };
@@ -2247,10 +2247,10 @@
 		28AD6207131FB69D008527FC /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				2894D6F51935EEFD009BFFB2 /* APIKey_live.txt */,
 				28A896DE18AA27B40086B065 /* audio */,
 				28640E7C18981F38009A4030 /* styling */,
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
+				2894D6F51935EEFD009BFFB2 /* APIKey_live.txt */,
 				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
 				280E9318140984F300C7AC75 /* xib */,
 				287ECBAD134490D800B8A6AC /* html */,
@@ -2850,6 +2850,7 @@
 				289AA2B8188EEB170097AA5A /* marker-blue-withletter.png in Resources */,
 				280E93AF140989E400C7AC75 /* donate.html in Resources */,
 				28BC445B18915A5800711A1A /* noteAssetPicker@2x.png in Resources */,
+				281C18701935FC6100D9AC1E /* APIKey_live.txt in Resources */,
 				287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */,
 				287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */,
 				287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */,
@@ -3178,7 +3179,6 @@
 				2894D5F81935EDA0009BFFB2 /* PhotoWizardCategoryCell.xib in Resources */,
 				2894D5F91935EDA0009BFFB2 /* Icon_nofavroutes.png in Resources */,
 				2894D5FA1935EDA0009BFFB2 /* Icon_norecentroutes.png in Resources */,
-				2894D5FB1935EDA0009BFFB2 /* APIKey_dev.txt in Resources */,
 				2894D5FC1935EDA0009BFFB2 /* CSBarButton_location@2x.png in Resources */,
 				2894D5FD1935EDA0009BFFB2 /* marker-red-withletter.png in Resources */,
 				2894D5FE1935EDA0009BFFB2 /* Icon_nofavroutes@2x.png in Resources */,

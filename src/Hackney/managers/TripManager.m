@@ -173,7 +173,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	[self optimiseTrip:_currentRecordingTrip];
 	
 	
-	if ( _currentRecordingTrip && [_currentRecordingTrip.coords count]>0 ){
+	if ( _currentRecordingTrip && [_currentRecordingTrip.coords count]>1 ){
 		
 		CLLocationDistance newDist = [self calculateTripDistance:_currentRecordingTrip];
 		[_currentRecordingTrip setDistance:[NSNumber numberWithDouble:newDist]];
@@ -404,7 +404,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			//TODO: awaiting fix server side
 			NSDictionary *responseDict=result.dataProvider;
 			BOOL responseState=NO;
-			NSString *errorMessage=nil;
+			NSString *errorMessage=EMPTYSTRING;
 			
 			if(responseDict[[RESULT lowercaseString]]!=nil){
 				responseState=[responseDict[[RESULT lowercaseString]] boolValue];
@@ -605,7 +605,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 -(NSString*)totalTripDistanceString{
 	
 	float distance=0;
-	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved = nil"] orderBy:@"start" ascending:NO];
+	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved != nil"] orderBy:@"start" ascending:NO];
 	for(Trip *trip in trips){
 		
 		// in m
@@ -655,7 +655,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	[coord setHAccuracy:[NSNumber numberWithDouble:location.horizontalAccuracy]];
 	[coord setVAccuracy:[NSNumber numberWithDouble:location.verticalAccuracy]];
 	
-	[_currentRecordingTrip addCoordsObject:coord];
 	
 	NSOrderedSet *recordingTripCoords=_currentRecordingTrip.coords;
 	
@@ -680,6 +679,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			
 	}
 	
+	[_currentRecordingTrip addCoordsObject:coord];
 	
 	[[CoreDataStore mainStore]save];
 	
