@@ -386,7 +386,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 							   @"username":EMPTYSTRING,
 							   @"password":EMPTYSTRING,
 							   @"format":@"atlanta",
-							   @"adjustbyapikey":@1,
 							   @"device":[[[UIDevice currentDevice] identifierForVendor] UUIDString]};
 	
 	BetterLog(@"%@",postVars);
