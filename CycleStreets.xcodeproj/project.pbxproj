@@ -286,7 +286,6 @@
 		2894D5981935EDA0009BFFB2 /* cyclecambridge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28735C11144EDACF00726A6C /* cyclecambridge.jpg */; };
 		2894D5991935EDA0009BFFB2 /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C12144EDACF00726A6C /* donate.png */; };
 		2894D59A1935EDA0009BFFB2 /* reesjeffreys.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C13144EDACF00726A6C /* reesjeffreys.png */; };
-		2894D59B1935EDA0009BFFB2 /* appconfig_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1C144F10E300726A6C /* appconfig_dev.plist */; };
 		2894D59C1935EDA0009BFFB2 /* appconfig_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1E144F10F300726A6C /* appconfig_live.plist */; };
 		2894D59D1935EDA0009BFFB2 /* noteIssueMapGlyph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441818915A5800711A1A /* noteIssueMapGlyph@2x.png */; };
 		2894D59E1935EDA0009BFFB2 /* school@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC441E18915A5800711A1A /* school@2x.png */; };
@@ -294,7 +293,6 @@
 		2894D5A01935EDA0009BFFB2 /* HeadingAngleSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 289AA2A0188EEB170097AA5A /* HeadingAngleSmall.png */; };
 		2894D5A11935EDA0009BFFB2 /* marker-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 289AA2A5188EEB170097AA5A /* marker-blue.png */; };
 		2894D5A21935EDA0009BFFB2 /* POITypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E08C3145179AC0034CC63 /* POITypeCell.xib */; };
-		2894D5A31935EDA0009BFFB2 /* services_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09011451C6690034CC63 /* services_dev.plist */; };
 		2894D5A41935EDA0009BFFB2 /* TrackingHeading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289AA2AD188EEB170097AA5A /* TrackingHeading@2x.png */; };
 		2894D5A51935EDA0009BFFB2 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		2894D5A61935EDA0009BFFB2 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
@@ -606,7 +604,6 @@
 		2894D6DB1935EDA0009BFFB2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4AF166CDBC600592560 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2894D6DC1935EDA0009BFFB2 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4AB166CDB9600592560 /* Twitter.framework */; };
 		2894D6DD1935EDA0009BFFB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
-		2894D6DE1935EDA0009BFFB2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
 		2894D6DF1935EDA0009BFFB2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E24D6144D89230021CDFA /* CFNetwork.framework */; };
 		2894D6E01935EDA0009BFFB2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		2894D6E11935EDA0009BFFB2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -736,7 +733,6 @@
 		28B76F4915E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */; };
 		28B7813A150F3D0600503638 /* CSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B78138150F3D0600503638 /* CSNavigationBar.m */; };
 		28B7813B150F3D0600503638 /* CSNavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B78139150F3D0600503638 /* CSNavigationBar.xib */; };
-		28B78DA21507884C00949870 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
 		28BC444718915A5800711A1A /* commute@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440A18915A5800711A1A /* commute@2x.png */; };
 		28BC444B18915A5800711A1A /* errands@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440C18915A5800711A1A /* errands@2x.png */; };
 		28BC444F18915A5800711A1A /* exercise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BC440E18915A5800711A1A /* exercise@2x.png */; };
@@ -1324,7 +1320,6 @@
 		28B78137150F3D0600503638 /* CSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNavigationBar.h; sourceTree = "<group>"; };
 		28B78138150F3D0600503638 /* CSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNavigationBar.m; sourceTree = "<group>"; };
 		28B78139150F3D0600503638 /* CSNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSNavigationBar.xib; sourceTree = "<group>"; };
-		28B78DA11507884C00949870 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		28BC440A18915A5800711A1A /* commute@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commute@2x.png"; sourceTree = "<group>"; };
 		28BC440C18915A5800711A1A /* errands@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errands@2x.png"; sourceTree = "<group>"; };
 		28BC440E18915A5800711A1A /* exercise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exercise@2x.png"; sourceTree = "<group>"; };
@@ -1412,7 +1407,6 @@
 				2811C4B1166CDBD100592560 /* Social.framework in Frameworks */,
 				2811C4AD166CDB9E00592560 /* Twitter.framework in Frameworks */,
 				2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */,
-				28B78DA21507884C00949870 /* MapKit.framework in Frameworks */,
 				280E24D8144D892F0021CDFA /* CFNetwork.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -1441,7 +1435,6 @@
 				2894D6DB1935EDA0009BFFB2 /* Social.framework in Frameworks */,
 				2894D6DC1935EDA0009BFFB2 /* Twitter.framework in Frameworks */,
 				2894D6DD1935EDA0009BFFB2 /* ImageIO.framework in Frameworks */,
-				2894D6DE1935EDA0009BFFB2 /* MapKit.framework in Frameworks */,
 				2894D6DF1935EDA0009BFFB2 /* CFNetwork.framework in Frameworks */,
 				2894D6E01935EDA0009BFFB2 /* Foundation.framework in Frameworks */,
 				2894D6E11935EDA0009BFFB2 /* UIKit.framework in Frameworks */,
@@ -2661,7 +2654,6 @@
 				2811C4AF166CDBC600592560 /* Social.framework */,
 				2811C4AB166CDB9600592560 /* Twitter.framework */,
 				2807FCB81666934E0028D7DB /* ImageIO.framework */,
-				28B78DA11507884C00949870 /* MapKit.framework */,
 				280E24D6144D89230021CDFA /* CFNetwork.framework */,
 				289E6AF8144C357C0079FFE5 /* libz.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -2747,7 +2739,14 @@
 						DevelopmentTeam = Q3YCNU3X72;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
+							};
+						};
+					};
+					2894D55D1935EDA0009BFFB2 = {
+						SystemCapabilities = {
+							com.apple.iOS = {
+								enabled = 0;
 							};
 						};
 					};
@@ -3083,7 +3082,6 @@
 				2894D5981935EDA0009BFFB2 /* cyclecambridge.jpg in Resources */,
 				2894D5991935EDA0009BFFB2 /* donate.png in Resources */,
 				2894D59A1935EDA0009BFFB2 /* reesjeffreys.png in Resources */,
-				2894D59B1935EDA0009BFFB2 /* appconfig_dev.plist in Resources */,
 				2894D59C1935EDA0009BFFB2 /* appconfig_live.plist in Resources */,
 				2894D59D1935EDA0009BFFB2 /* noteIssueMapGlyph@2x.png in Resources */,
 				2894D59E1935EDA0009BFFB2 /* school@2x.png in Resources */,
@@ -3091,7 +3089,6 @@
 				2894D5A01935EDA0009BFFB2 /* HeadingAngleSmall.png in Resources */,
 				2894D5A11935EDA0009BFFB2 /* marker-blue.png in Resources */,
 				2894D5A21935EDA0009BFFB2 /* POITypeCell.xib in Resources */,
-				2894D5A31935EDA0009BFFB2 /* services_dev.plist in Resources */,
 				2894D5A41935EDA0009BFFB2 /* TrackingHeading@2x.png in Resources */,
 				2894D5A51935EDA0009BFFB2 /* services_live.plist in Resources */,
 				2894D5A61935EDA0009BFFB2 /* POICatLocationCell.xib in Resources */,

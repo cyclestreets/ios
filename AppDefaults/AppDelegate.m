@@ -180,10 +180,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_splashView.image = image;
 	
 	#if defined (CONFIGURATION_Adhoc)
-	[self writeDebugStartupLabel:NO];
+		[self writeDebugStartupLabel:NO];
 	#endif
-	
-	
 	
 	
 	[_window addSubview:_splashView];
