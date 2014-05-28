@@ -4,6 +4,8 @@
 <dict>
 	<key>APPCONFIG_ID</key>
 	<string>APPSTATE_LIVE</string>
+	<key>SERVERDOMAIN_ID</key>
+	<string>APPSTATE_LIVE</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
@@ -12,11 +14,7 @@
 	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
 	<key>CFBundleIcons</key>
-	<dict/>
-	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>org.hackney.${BUNDLE_ID}</string>
@@ -36,8 +34,6 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>CycleStreetsWindow</string>
-	<key>SERVERDOMAIN_ID</key>
-	<string>APPSTATE_LIVE</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

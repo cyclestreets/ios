@@ -219,6 +219,7 @@
 		2880BE52188E8207006FF7E2 /* HCSTrackConfigView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2880BE51188E8207006FF7E2 /* HCSTrackConfigView.xib */; };
 		2880BE55188E821A006FF7E2 /* HCSRouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2880BE54188E821A006FF7E2 /* HCSRouteListView.xib */; };
 		2880BE58188E822C006FF7E2 /* HCSSurveyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2880BE57188E822C006FF7E2 /* HCSSurveyView.xib */; };
+		28820C6F1936355F001D5AF5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28820C6E1936355F001D5AF5 /* MapKit.framework */; };
 		28851505166E0E20003536CA /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		288C0F3E1649A5C4000880FF /* FMMoveTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C0F3B1649A5C4000880FF /* FMMoveTableView.m */; };
@@ -1120,6 +1121,7 @@
 		2880BE51188E8207006FF7E2 /* HCSTrackConfigView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSTrackConfigView.xib; path = hackney/HCSTrackConfigView.xib; sourceTree = "<group>"; };
 		2880BE54188E821A006FF7E2 /* HCSRouteListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSRouteListView.xib; path = hackney/HCSRouteListView.xib; sourceTree = "<group>"; };
 		2880BE57188E822C006FF7E2 /* HCSSurveyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HCSSurveyView.xib; path = hackney/HCSSurveyView.xib; sourceTree = "<group>"; };
+		28820C6E1936355F001D5AF5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		28851504166E0E20003536CA /* UIActivityCopy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityCopy.png; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		288C0F3A1649A5C4000880FF /* FMMoveTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMMoveTableView.h; sourceTree = "<group>"; };
@@ -1428,6 +1430,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28820C6F1936355F001D5AF5 /* MapKit.framework in Frameworks */,
 				2894D6D71935EDA0009BFFB2 /* libPods.a in Frameworks */,
 				2894D6D81935EDA0009BFFB2 /* libMapView.a in Frameworks */,
 				2894D6D91935EDA0009BFFB2 /* CoreData.framework in Frameworks */,
@@ -2648,6 +2651,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28820C6E1936355F001D5AF5 /* MapKit.framework */,
 				2811F92118A0258D00C8EF0F /* libPods.a */,
 				28452756188E9168005A7DF1 /* CoreData.framework */,
 				2811C4C7166CFFD600592560 /* MessageUI.framework */,
