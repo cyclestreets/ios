@@ -77,8 +77,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	[notifications addObject:GPSLOCATIONUPDATE];
 	[notifications addObject:GPSLOCATIONFAILED];
 	
+	
 	[self addRequestID:CALCULATEROUTE];
 	[self addRequestID:RETRIEVEROUTEBYID];
+	[self addRequestID:UPDATEROUTE];
 	
 	[super listNotificationInterests];
 	
@@ -104,6 +106,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 			}else if ([response.dataid isEqualToString:RETRIEVEROUTEBYID]) {
 				
 				[self loadRouteForRouteIdResponse:response.dataProvider];
+				
+			}else if ([response.dataid isEqualToString:UPDATEROUTE]) {
+				
+				[self updateRouteResponse:response.dataProvider];
 				
 			}
 			
@@ -444,6 +450,80 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
             [self queryFailureMessage:@"Unable to find a route with this number."];
             
 			break;
+			
+		default:
+			break;
+            
+            
+    }
+    
+    
+}
+
+
+#pragma mark Route Updating
+//
+/***********************************************
+ * @description			ROUTE UPDATING FOR LEGACY ROUTES
+ ***********************************************/
+//
+
+-(void)updateRoute:(RouteVO*)route{
+    
+	BetterLog(@"");
+    
+    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+                                     useDom,@"useDom",
+                                     route.plan,@"plan",
+                                     route.routeid,@"itinerary",
+                                     nil];
+    
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+    request.dataid=UPDATEROUTE;
+    request.requestid=ZERO;
+    request.parameters=parameters;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
+    
+    request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self updateRouteResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	// format routeid to decimal style ie xx,xxx,xxx
+	NSNumberFormatter *currencyformatter=[[NSNumberFormatter alloc]init];
+	[currencyformatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	NSString *result=[currencyformatter stringFromNumber:[NSNumber numberWithInt:[route.routeid intValue]]];
+	
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Updating route %@",result] andMessage:nil];
+}
+
+
+-(void)updateRouteResponse:(BUNetworkOperation*)response{
+    
+	BetterLog(@"");
+    
+    switch(response.validationStatus){
+            
+        case ValidationCalculateRouteSuccess:
+        {
+           RouteVO *newroute=response.dataProvider;
+            
+			[[SavedRoutesManager sharedInstance] updateRouteWithRoute:newroute];
+            
+            
+            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:nil andMessage:nil];
+		}
+            break;
+            
+            
+        case ValidationCalculateRouteFailed:
+            
+            [self queryFailureMessage:@"Unable to find a route with this number."];
+            
+		break;
 			
 		default:
 			break;

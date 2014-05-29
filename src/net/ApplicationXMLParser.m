@@ -92,6 +92,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
 					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
+						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
 					   nil];
 		
 		_parsers=[[NSMutableDictionary alloc]init];
@@ -429,6 +430,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 				segment.walkValue=[[TBXML textForElement:[TBXML childElementNamed:@"cs:walk" parentElement:segmentnode]]intValue];
 				segment.startBearing=[[TBXML textForElement:[TBXML childElementNamed:@"cs:startBearing" parentElement:segmentnode]]intValue];
 				segment.segmentBusynance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:busynance" parentElement:segmentnode]]intValue];
+				
+				segment.elevations=[TBXML textForElement:[TBXML childElementNamed:@"cs:elevations" parentElement:segmentnode]];
 				
 				segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
 				segment.startTime=time;

@@ -37,6 +37,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SavedRoutesManager);
 
 -(void)saveRouteChangesForRoute:(RouteVO*)route;
 
+-(void)updateRouteWithRoute:(RouteVO*)route;
+
 -(BOOL)findRouteWithId:(NSString*)routeid andPlan:(NSString*)plan;
 
 

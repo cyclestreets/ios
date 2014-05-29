@@ -32,17 +32,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ButtonUtilities.h"
 #import "ViewUtilities.h"
 #import "RouteManager.h"
-
+#import "UIView+Additions.h"
 #import "HudManager.h"
 #import "GenericConstants.h"
 #import "RouteVO.h"
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
+#import "CSElevationGraphView.h"
+#import <UIActionSheet+BlocksKit.h>
 
 static NSString *const VIEWTITLE=@"Route details";
 
 
-@interface CSRouteDetailsViewController()
+@interface CSRouteDetailsViewController()<UIActionSheetDelegate>
 
 @property (nonatomic, strong) UIScrollView           * scrollView;
 @property (nonatomic, strong) LayoutBox              * viewContainer;
@@ -57,9 +59,11 @@ static NSString *const VIEWTITLE=@"Route details";
 @property (nonatomic, weak) IBOutlet UILabel         * speedLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * calorieLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * coLabel;
-@property (nonatomic, weak) IBOutlet UIButton        * routeButton;
-@property (nonatomic, weak) IBOutlet UIButton        * renameButton;
-@property (nonatomic, weak) IBOutlet UIButton        * favouriteButton;
+
+@property (nonatomic,strong)  CSElevationGraphView					*elevationView;
+
+@property (nonatomic, weak)	IBOutlet UIImageView					*selectedRouteIcon;
+
 
 -(void)selectedRouteUpdated;
 
@@ -80,6 +84,7 @@ static NSString *const VIEWTITLE=@"Route details";
 	[self initialise];
     
     [notifications addObject:CSROUTESELECTED];
+	[notifications addObject:SAVEDROUTEUPDATE];
 	
 	[super listNotificationInterests];
 	
@@ -87,10 +92,16 @@ static NSString *const VIEWTITLE=@"Route details";
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
+	BetterLog(@"");
+	
 	[super didReceiveNotification:notification];
 	
     if([notification.name isEqualToString:CSROUTESELECTED]){
         [self selectedRouteUpdated];
+    }
+	
+	if([notification.name isEqualToString:SAVEDROUTEUPDATE]){
+        [self routeUpdatedWithRoute:notification.object];
     }
 	
 }
@@ -111,6 +122,13 @@ static NSString *const VIEWTITLE=@"Route details";
     }
 }
 
+-(void)routeUpdatedWithRoute:(RouteVO*)newroute{
+    
+    if([newroute.fileid isEqualToString:self.route.fileid]==YES){
+        self.route=newroute;
+        [self createNonPersistentUI];
+    }
+}
 
 //
 /***********************************************
@@ -149,6 +167,18 @@ static NSString *const VIEWTITLE=@"Route details";
 	_readoutContainer.layoutMode=BUVerticalLayoutMode;
 	[_readoutContainer initFromNIB];
 	
+	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 170)];
+	
+	__weak __typeof(&*self)weakSelf = self;
+	_elevationView.touchedBlock=^(BOOL touched){
+		weakSelf.scrollView.scrollEnabled=!touched;
+	};
+	
+	
+	//_elevationView.delegate=self;
+	_elevationView.backgroundColor=[UIColor clearColor];
+
+	
 	
 	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	d1.topStrokeColor=[UIColor lightGrayColor];
@@ -157,14 +187,13 @@ static NSString *const VIEWTITLE=@"Route details";
 	d2.topStrokeColor=[UIColor lightGrayColor];
 	d2.bottomStrokeColor=[UIColor clearColor];
 	
-	[_routeButton setTitle:@"Select this route" forState:UIControlStateNormal];
-	[_renameButton setTitle:@"Rename this route" forState:UIControlStateNormal];
-	[_favouriteButton setTitle:@"Add to favourites" forState:UIControlStateNormal];
+	//[_routeButton setTitle:@"Select this route" forState:UIControlStateNormal];
+	//[_renameButton setTitle:@"Rename this route" forState:UIControlStateNormal];
+	//[_favouriteButton setTitle:@"Add to favourites" forState:UIControlStateNormal];
 	
 	_routeNameLabel.multiline=YES;
 	
-	[_viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_routeButton,_renameButton,_favouriteButton,nil]];
-	
+	[_viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_elevationView, nil]];
 	
 }
 
@@ -192,7 +221,11 @@ static NSString *const VIEWTITLE=@"Route details";
 	_calorieLabel.text=_route.calorieString;
 	_coLabel.text=_route.coString;
 	
-	_favouriteButton.hidden=_dataType==SavedRoutesDataTypeFavourite;
+	_elevationView.dataProvider=_route;
+	[_elevationView update];
+	
+	_selectedRouteIcon.visible=[[RouteManager sharedInstance] routeIsSelectedRoute:_route];
+	
 	
 	[_viewContainer refresh];
 	
@@ -268,15 +301,13 @@ static NSString *const VIEWTITLE=@"Route details";
 
 // favouriting
 
--(IBAction)favouriteButtonSelected:(id)sender{
+-(void)favouriteRoute{
 	
 	BOOL result=[[SavedRoutesManager sharedInstance] moveRoute:_route toDataProvider:SAVEDROUTE_FAVS];
 	
 	if(result==YES){
 		
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Added to favourites" andMessage:nil];
-	
-		_favouriteButton.hidden=YES;
 		
 	}else{
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to add to favourites" andMessage:nil];
@@ -284,6 +315,34 @@ static NSString *const VIEWTITLE=@"Route details";
 
 }
 
+
+
+-(void)didSelectRouteActions{
+	
+	__weak __typeof(&*self)weakSelf = self;
+	UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@"Route options"];
+	actionSheet.delegate=self;
+	[actionSheet bk_addButtonWithTitle:@"Select route" handler:^{
+			[weakSelf selectRoute];
+	}];
+	[actionSheet bk_addButtonWithTitle:@"Rename route" handler:^{
+		[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:_route.nameString delegate:weakSelf];
+	}];
+	
+	if(_dataType!=SavedRoutesDataTypeFavourite)
+	[actionSheet bk_addButtonWithTitle:@"Add to favourites" handler:^{
+		[weakSelf favouriteRoute];
+	}];
+	
+	
+	[actionSheet bk_setCancelButtonWithTitle:@"Cancel" handler:^{
+	}];
+	
+	[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
+
+	
+	
+}
 
 
 //

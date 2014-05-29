@@ -42,6 +42,8 @@
 @property (nonatomic)	NSInteger		startDistance;
 @property (nonatomic, strong)	NSArray		*pointsArray;
 
+@property (nonatomic, strong)	NSString		*elevations;
+
 
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
 @property (nonatomic, readonly)	CLLocationCoordinate2D	segmentStart;
@@ -52,6 +54,8 @@
 
 
 @property (nonatomic, readonly)	BOOL	isWalkingSection;
+@property (nonatomic, readonly)	int										segmentElevation;
+@property (nonatomic, readonly)	int										maxElevation;
 
 
 // return array of allpoints for this segment

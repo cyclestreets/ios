@@ -9,6 +9,7 @@
 
 - (id) initWithParent:(UIView *)parent;
 + (id) viewWithParent:(UIView *)parent;
+-(void)removeAllSubViews;
 
 
 

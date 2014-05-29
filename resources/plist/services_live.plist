@@ -2,6 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UpdateRoute</key>
+	<dict>
+		<key>id</key>
+		<string>UpdateRoute</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/journey.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 	<key>Register</key>
 	<dict>
 		<key>id</key>

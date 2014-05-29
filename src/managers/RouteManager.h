@@ -51,6 +51,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 -(BOOL)hasSelectedRoute;
 -(BOOL)routeIsSelectedRoute:(RouteVO*)route;
 
+-(void)updateRoute:(RouteVO*)route;
+
 
 // legacy
 -(void)legacyRouteCleanup;

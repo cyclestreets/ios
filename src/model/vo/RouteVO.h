@@ -54,6 +54,11 @@
 
 @property (nonatomic, readonly)	BOOL                      hasWaypoints;
 
+@property (nonatomic, readonly)	int										maxElevation;
+@property (nonatomic, readonly)	int										elevationsCount;
+@property (nonatomic, readonly)	BOOL									hasElevationData;
+
+
 
 @property (nonatomic, readonly)	NSURL                     * csrouteurl;
 @property (nonatomic, readonly)	NSString                  * csBrowserRouteurlString;
@@ -70,6 +75,7 @@
 -(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation;
 -(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation;
 
+-(NSString*)lengthPercentStringForPercent:(float)percent;
 
 @end
 

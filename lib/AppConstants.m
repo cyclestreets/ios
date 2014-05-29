@@ -46,6 +46,7 @@ NSString *const PASSWORDRETRIEVALRESPONSE=@"PASSWORDRETRIEVALRESPONSE";
 NSString *const CALCULATEROUTE=@"CalculateRoute";
 NSString *const RETRIEVEROUTEBYID=@"RetrieveRouteById";
 NSString *const LOCATIONSEARCH=@"LocationSearch";
+NSString *const UPDATEROUTE=@"UpdateRoute";
 NSString *const RETREIVELOCATIONPHOTOS=@"RetrieveLocationPhotos";
 NSString *const RETREIVEROUTEPHOTOS=@"RetrieveRoutePhotos";
 NSString *const UPLOADUSERPHOTO=@"UploadUserPhotos";

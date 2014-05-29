@@ -113,6 +113,27 @@
 	
 }
 
+
+
+-(NSString*)lengthPercentStringForPercent:(float)percent{
+	
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+		
+		float milepercent=percent*[[self length] floatValue];
+		float totalMiles = milepercent/1600;
+		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
+	}else {
+		float	kms=[[self length] floatValue]/1000;
+		float kmdistance=percent*kms;
+		return [NSString stringWithFormat:@"%4.1f km", kmdistance];
+	}
+	
+	
+}
+
+
+
+
 -(NSString*)speedString{
 	
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[self speed]];
@@ -210,6 +231,31 @@
 	return _waypoints;
 	
 }
+
+
+
+// Elevations
+
+-(int)maxElevation{
+	
+	int value=0;
+	
+	for(SegmentVO *segment in segments){
+		value=MAX(value, segment.segmentElevation);
+	}
+	return value;
+}
+
+
+-(BOOL)hasElevationData{
+	
+	SegmentVO *segment=segments[0];
+	return segment.elevations!=nil;
+	
+}
+
+
+
 
 
 //

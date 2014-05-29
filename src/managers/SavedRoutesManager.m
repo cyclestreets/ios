@@ -293,6 +293,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
+
+//
+/***********************************************
+ * @description			Finds and replaces a route with same fileid
+ ***********************************************/
+//
+-(void)updateRouteWithRoute:(RouteVO*)route{
+	
+	NSString *type=[self findRouteType:route];
+	NSUInteger index=[self findIndexOfRoute:route];
+	
+	if(index!=NSNotFound){
+		if([type isEqualToString:SAVEDROUTE_FAVS]){
+			[_favouritesdataProvider replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:index] withObjects:@[route]];
+		}else{
+			[_recentsdataProvider replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex:index] withObjects:@[route]];
+		}
+		[self saveRouteChangesForRoute:route];
+	}else{
+		BetterLog(@"[ERROR] Unable to find route to update");
+	}
+	
+}
+
+
 //
 /***********************************************
  * @description			Utility
@@ -351,6 +376,50 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		}
 		
 	}
+	
+	return index;
+}
+
+
+//
+/***********************************************
+ * @description			Find the index of an exisitng route with the same fileid
+ ***********************************************/
+//
+-(NSUInteger)findIndexOfRoute:(RouteVO*)findroute{
+	
+	NSUInteger index=NSNotFound;
+	
+	index=[_recentsdataProvider indexOfObjectPassingTest:
+		   ^(RouteVO *obj, NSUInteger idx, BOOL *stop) {
+			   BOOL res;
+			   
+			   if ([findroute.fileid isEqualToString:obj.fileid]) {
+				   res = YES;
+				   *stop = YES;
+			   } else {
+				   res = NO;
+			   }
+			   return res;
+		   }];
+	
+	if(index==NSNotFound){
+		
+		index=[_favouritesdataProvider indexOfObjectPassingTest:
+			   ^(RouteVO *obj, NSUInteger idx, BOOL *stop) {
+				   BOOL res;
+				   
+				   if ([findroute.fileid isEqualToString:obj.fileid]) {
+					   res = YES;
+					   *stop = YES;
+				   } else {
+					   res = NO;
+				   }
+				   return res;
+			   }];
+		
+	}
+	
 	
 	return index;
 }

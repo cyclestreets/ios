@@ -317,6 +317,27 @@ static NSDictionary *roadIcons;
 
 
 
+-(int)segmentElevation{
+	
+	NSMutableArray *earray=[[_elevations componentsSeparatedByString:@","] mutableCopy];
+	
+	if(earray.count>1){
+		
+		[earray removeLastObject];
+		for(int i=0;i<earray.count;i++){
+			NSString *str=earray[i];
+			int value=[str intValue];
+			[earray replaceObjectAtIndex:i withObject:@(value)];
+		}
+		
+		return [[earray valueForKeyPath:@"@avg.self"] intValue];
+	}else{
+		return [earray[0] intValue];
+	}
+}
+
+
+
 static NSString *ROAD_NAME = @"roadName";
 static NSString *PROVISION_NAME = @"provisionName";
 static NSString *TURN_TYPE = @"turnType";
@@ -348,6 +369,7 @@ static NSString *WALK_VALUE = @"walkValue";
     [encoder encodeInteger:self.startDistance forKey:START_DISTANCE];
 	[encoder encodeInteger:self.walkValue forKey:WALK_VALUE];
     [encoder encodeObject:self.pointsArray forKey:POINTS_ARRAY];
+	[encoder encodeObject:self.elevations forKey:@"elevations"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
@@ -365,6 +387,7 @@ static NSString *WALK_VALUE = @"walkValue";
         self.startDistance = [decoder decodeIntegerForKey:START_DISTANCE];
 		self.walkValue = [decoder decodeIntegerForKey:WALK_VALUE];
         self.pointsArray = [decoder decodeObjectForKey:POINTS_ARRAY];
+		self.elevations = [decoder decodeObjectForKey:@"elevations"];
     }
     return self;
 }

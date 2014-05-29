@@ -100,6 +100,7 @@ extern NSString *const PASSWORDRETRIEVALRESPONSE;
 // OUTGOING
 extern NSString *const CALCULATEROUTE;
 extern NSString *const RETRIEVEROUTEBYID;
+extern NSString *const UPDATEROUTE;
 extern NSString *const LOCATIONSEARCH;
 extern NSString *const RETREIVELOCATIONPHOTOS;
 extern NSString *const RETREIVEROUTEPHOTOS;

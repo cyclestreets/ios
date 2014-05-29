@@ -40,6 +40,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (IBAction) routeButtonSelected;
 -(IBAction) renameButtonSelected:(id)sender;
--(IBAction) favouriteButtonSelected:(id)sender;
 
 @end
