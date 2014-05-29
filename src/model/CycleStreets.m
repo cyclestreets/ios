@@ -32,6 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "GenericConstants.h"
 
 const NSInteger MAX_ZOOM_LOCATION = 18;
+const NSInteger MAX_ZOOM_SEGMENT = 20;
 const NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
 @implementation CycleStreets

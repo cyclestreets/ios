@@ -33,6 +33,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 extern const NSInteger MAX_ZOOM_LOCATION;
 extern const NSInteger MAX_ZOOM_LOCATION_ACCURACY;
+extern const NSInteger MAX_ZOOM_SEGMENT;
 
 
 @interface CycleStreets : NSObject {
