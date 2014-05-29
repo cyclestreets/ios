@@ -659,6 +659,14 @@
 		28D186BE193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186BC193754E2001FBBF7 /* UIButtonBarTrash.png */; };
 		28D186C2193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */; };
 		28D186C3193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */; };
+		28D186D619378587001FBBF7 /* BUCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186CE19378587001FBBF7 /* BUCalloutView.m */; };
+		28D186D719378587001FBBF7 /* BUCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186CE19378587001FBBF7 /* BUCalloutView.m */; };
+		28D186D819378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186CF19378587001FBBF7 /* BUCalloutBackgroundView.m */; };
+		28D186D919378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186CF19378587001FBBF7 /* BUCalloutBackgroundView.m */; };
+		28D186DA19378587001FBBF7 /* CSElevationGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D419378587001FBBF7 /* CSElevationGraphView.m */; };
+		28D186DB19378587001FBBF7 /* CSElevationGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D419378587001FBBF7 /* CSElevationGraphView.m */; };
+		28D186DC19378587001FBBF7 /* CSGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D519378587001FBBF7 /* CSGraphView.m */; };
+		28D186DD19378587001FBBF7 /* CSGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D519378587001FBBF7 /* CSGraphView.m */; };
 		28D246031338926E00188783 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
 		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
@@ -1162,6 +1170,14 @@
 		28D10EC0135D6E54006F1D94 /* CSTabBar_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_settings@2x.png"; sourceTree = "<group>"; };
 		28D186BC193754E2001FBBF7 /* UIButtonBarTrash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarTrash.png; sourceTree = "<group>"; };
 		28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarTrash@2x.png"; sourceTree = "<group>"; };
+		28D186CE19378587001FBBF7 /* BUCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCalloutView.m; sourceTree = "<group>"; };
+		28D186CF19378587001FBBF7 /* BUCalloutBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCalloutBackgroundView.m; sourceTree = "<group>"; };
+		28D186D019378587001FBBF7 /* CSGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGraphView.h; sourceTree = "<group>"; };
+		28D186D119378587001FBBF7 /* CSElevationGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSElevationGraphView.h; sourceTree = "<group>"; };
+		28D186D219378587001FBBF7 /* BUCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCalloutView.h; sourceTree = "<group>"; };
+		28D186D319378587001FBBF7 /* BUCalloutBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCalloutBackgroundView.h; sourceTree = "<group>"; };
+		28D186D419378587001FBBF7 /* CSElevationGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSElevationGraphView.m; sourceTree = "<group>"; };
+		28D186D519378587001FBBF7 /* CSGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGraphView.m; sourceTree = "<group>"; };
 		28D246011338926E00188783 /* RouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteManager.h; sourceTree = "<group>"; };
 		28D246021338926E00188783 /* RouteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteManager.m; sourceTree = "<group>"; };
 		28D2BC5A1354C48B00694093 /* BUDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUDividerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1940,6 +1956,14 @@
 		28AD6218131FB69D008527FC /* views */ = {
 			isa = PBXGroup;
 			children = (
+				28D186D219378587001FBBF7 /* BUCalloutView.h */,
+				28D186CE19378587001FBBF7 /* BUCalloutView.m */,
+				28D186D019378587001FBBF7 /* CSGraphView.h */,
+				28D186D119378587001FBBF7 /* CSElevationGraphView.h */,
+				28D186D319378587001FBBF7 /* BUCalloutBackgroundView.h */,
+				28D186CF19378587001FBBF7 /* BUCalloutBackgroundView.m */,
+				28D186D419378587001FBBF7 /* CSElevationGraphView.m */,
+				28D186D519378587001FBBF7 /* CSGraphView.m */,
 				28965C5C18BF5852001BB258 /* CSRoutePolyLineRenderer.h */,
 				28965C5D18BF5852001BB258 /* CSRoutePolyLineRenderer.m */,
 				28965C5818BF4F94001BB258 /* CSRoutePolyLineOverlay.h */,
@@ -2898,6 +2922,7 @@
 				28B3678018B2822700F7244C /* CSWaypointAnnotation.m in Sources */,
 				28AD62AE131FB69D008527FC /* UserAccount.m in Sources */,
 				28AD62B0131FB69D008527FC /* UserVO.m in Sources */,
+				28D186DA19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
 				28727AD518B52B8900D957FD /* UserLocationManager.m in Sources */,
 				288055DC18BB7B2100BABAB1 /* RouteSegmentViewController.m in Sources */,
 				28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */,
@@ -2953,6 +2978,7 @@
 				28965C5E18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */,
 				2863A402134E508800A22093 /* CSRouteDetailsViewController.m in Sources */,
+				28D186D619378587001FBBF7 /* BUCalloutView.m in Sources */,
 				286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */,
 				28BC6AA818AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
@@ -3002,9 +3028,11 @@
 				28ECCBD81526300400284926 /* Reachability.m in Sources */,
 				28ECCBD91526302600284926 /* CopyLabel.m in Sources */,
 				289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */,
+				28D186DC19378587001FBBF7 /* CSGraphView.m in Sources */,
 				289F78041534432900B062D1 /* NSData+Base64.m in Sources */,
 				289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */,
 				28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */,
+				28D186D819378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */,
 				2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */,
 				28727ADB18B5375400D957FD /* PhotoMapImageLocationViewController.m in Sources */,
 				289478BB18AD6E600066AA2E /* ItineraryViewController.m in Sources */,
@@ -3034,6 +3062,7 @@
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
 				283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */,
 				28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */,
+				28D186DB19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
 				283436D315DD5DC300B00FD5 /* UserVO.m in Sources */,
 				283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */,
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
@@ -3089,6 +3118,7 @@
 				28965C5F18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
 				28727AD618B52B8900D957FD /* UserLocationManager.m in Sources */,
+				28D186D719378587001FBBF7 /* BUCalloutView.m in Sources */,
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
 				2834370F15DD5DC300B00FD5 /* StyleManager.m in Sources */,
 				2834371015DD5DC300B00FD5 /* UserSettingsManager.m in Sources */,
@@ -3138,9 +3168,11 @@
 				2834375815DD5DC300B00FD5 /* GenericConstants.m in Sources */,
 				2834375A15DD5DC300B00FD5 /* Reachability.m in Sources */,
 				2834375B15DD5DC300B00FD5 /* CopyLabel.m in Sources */,
+				28D186DD19378587001FBBF7 /* CSGraphView.m in Sources */,
 				2834375D15DD5DC300B00FD5 /* UIImage+Operations.m in Sources */,
 				2834375E15DD5DC300B00FD5 /* NSData+Base64.m in Sources */,
 				2834375F15DD5DC300B00FD5 /* NSString-Utilities.m in Sources */,
+				28D186D919378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */,
 				2834376015DD5DC300B00FD5 /* PhotoCategoryManager.m in Sources */,
 				2834376515DD5DC300B00FD5 /* MapLocationSearchCellView.m in Sources */,
 				2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */,
