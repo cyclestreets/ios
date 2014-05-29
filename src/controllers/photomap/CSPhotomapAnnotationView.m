@@ -41,15 +41,12 @@
 	
 	CSPhotomapAnnotation* annotation=self.annotation;
 	
-	switch (annotation.isUserPhoto) {
-		case YES:
-			self.image=[UIImage imageNamed:@"UIIcon_userphotomap.png"];
-			break;
-		case NO:
-			self.image=[UIImage imageNamed:@"UIIcon_photomap.png"];
-			break;
-
+	if(annotation.isUserPhoto){
+		self.image=[UIImage imageNamed:@"UIIcon_userphotomap.png"];
+	}else{
+		self.image=[UIImage imageNamed:@"UIIcon_photomap.png"];
 	}
+	
 	
 }
 

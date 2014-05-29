@@ -11,7 +11,7 @@
 
 @interface POITypeCellView()
 
-@property (nonatomic, weak)	IBOutlet UIImageView    * imageView;
+@property (nonatomic, weak)	IBOutlet UIImageView    * cellImageView;
 @property (nonatomic, weak)	IBOutlet UILabel        * label;
 @property (nonatomic, weak)	IBOutlet UILabel        * totallabel;
 
@@ -29,7 +29,7 @@
 
 -(void)populate{
 	
-	self.imageView.image=_dataProvider.icon;
+	self.cellImageView.image=_dataProvider.icon;
 	_label.text=_dataProvider.name;
 	_totallabel.text=[NSString stringWithFormat:@"%i entries",_dataProvider.total];
 	

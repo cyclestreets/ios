@@ -129,7 +129,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 // waypoints
 -(void)resetWayPoints;
--(void)removeWayPointAtIndex:(int)index;
+-(void)removeWayPointAtIndex:(NSUInteger)index;
 -(void)assessWayPointAddition:(CLLocationCoordinate2D)cooordinate;
 -(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords;
 
@@ -236,6 +236,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 -(void)createPersistentUI{
+	
+	self.displaysConnectionErrors=NO;
 	
 	_toolBar.clipsToBounds=YES;
 	
@@ -900,7 +902,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 -(void)removeWayPoint:(WayPointVO*)waypoint{
 	
-	int found=[_waypointArray indexOfObject:waypoint];
+	NSUInteger found=[_waypointArray indexOfObject:waypoint];
 	
 	if(found!=NSNotFound){
 		
@@ -924,7 +926,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
--(void)removeWayPointAtIndex:(int)index{
+-(void)removeWayPointAtIndex:(NSUInteger)index{
 	
 	WayPointVO *waypoint=[_waypointArray objectAtIndex:index];
 	
@@ -948,27 +950,34 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
 	
-	if(_uiState==MapPlanningStateRoute)
-		return;
-	
-	if(_selectedAnnotation!=nil)
-		return;
-	
 	BetterLog(@"");
-	
-	// if the menu is open, close it, dont add a waypoint
-	if(_markerMenuOpen==YES){
-		_markerMenuOpen=NO;
-		[[UIMenuController sharedMenuController] setMenuVisible:NO];
-		return;
-	}
-	
-	//TODO: only for certain view states
 	
 	CGPoint touchPoint = [recogniser locationInView:self.mapView];
     CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-	[self addWayPointAtCoordinate:touchMapCoordinate];
+	CLLocation *location=[[CLLocation alloc]initWithLatitude:touchMapCoordinate.latitude longitude:touchMapCoordinate.longitude];
 	
+	[self performSelector:@selector(addLocationToMapForGesture:) withObject:location afterDelay:0.7];
+	
+	
+}
+
+
+
+-(void)addLocationToMapForGesture:(CLLocation*)location{
+	
+	if(_uiState==MapPlanningStateRoute)
+		return;
+	
+	if(_selectedAnnotation!=nil){
+		_selectedAnnotation.selected=NO;
+		return;
+	}
+		
+	
+	BetterLog(@"");
+
+	
+	[self addWayPointAtCoordinate:location.coordinate];
 }
 
 
@@ -981,10 +990,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 		
 	
-	BetterLog(@"From %i to %i",oldState, newState);
+	BetterLog(@"From %lu to %lu",oldState, newState);
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
-	CSWaypointAnnotation* annotation=view.annotation;
 		
 	
 	if (newState == MKAnnotationViewDragStateEnding) {
@@ -1029,6 +1037,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		 annotationView.canShowCallout=YES;
 		 
 		 UIButton *calloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 50)];
+		 [calloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
 		 calloutButton.backgroundColor=[UIColor redColor];
 		 annotationView.rightCalloutAccessoryView=calloutButton;
 		 
@@ -1067,7 +1076,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
-	CSWaypointAnnotation* annotation=view.annotation;
+	CSWaypointAnnotation* annotation=annotationView.annotation;
 	
 	[self removeWayPoint:annotation.dataProvider];
 	

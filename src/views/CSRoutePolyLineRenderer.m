@@ -57,7 +57,7 @@
 	CGColorRef dashColor=_secondaryColor.CGColor;
 	CGColorRef solidColor=_primaryColor.CGColor;
 	
-	float dashes[] = { _secondaryDash/zoomScale, _secondaryDash/zoomScale };
+	CGFloat dashes[] = { _secondaryDash/zoomScale, _secondaryDash/zoomScale };
 	//float normal[]={_primaryDash};
     
     [dataProvider lockForReading];

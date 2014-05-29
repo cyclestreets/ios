@@ -26,7 +26,7 @@
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr;
 -(void)promoteRouteToTopOfDataProvider:(RouteVO*)route;
 -(NSString*)findRouteType:(RouteVO*)route;
--(int)findIndexOfRouteByID:(NSString*)routeid;
+-(NSUInteger)findIndexOfRouteByID:(NSString*)routeid;
 
 +(NSString*)returnRouteTypeInvert:(NSString*)type;
 
@@ -198,7 +198,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
             fromArr=_recentsdataProvider;
         }
         
-        int index=[fromArr indexOfObjectIdenticalTo:route];
+        NSUInteger index=[fromArr indexOfObjectIdenticalTo:route];
 		if(index<[fromArr count])
 			[fromArr removeObjectAtIndex:index];
         
@@ -234,7 +234,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
         arr=_recentsdataProvider;
     }
     
-    int index=[arr indexOfObjectIdenticalTo:route];
+    NSUInteger index=[arr indexOfObjectIdenticalTo:route];
 	
 	if(index<[arr count]){
 		
@@ -254,7 +254,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[_routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObjectIdenticalTo:route];
+		NSUInteger index=[routes indexOfObjectIdenticalTo:route];
 		
 		if(index!=-1 && index!=0){
 			[routes removeObjectAtIndex:index];
@@ -306,7 +306,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[_routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObject:route.fileid];
+		NSUInteger index=[routes indexOfObject:route.fileid];
 		
 		if(index!=NSNotFound && index!=0){
 			[routes exchangeObjectAtIndex:0 withObjectAtIndex:index];
@@ -323,7 +323,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[_routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObject:route.fileid];
+		NSUInteger index=[routes indexOfObject:route.fileid];
 		
 		if(index!=NSNotFound){
 			return key;
@@ -336,15 +336,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
--(int)findIndexOfRouteByID:(NSString*)routeid{ // will be route.fileid format
+-(NSUInteger)findIndexOfRouteByID:(NSString*)routeid{ // will be route.fileid format
 	
-	int index=NSNotFound;
+	NSUInteger index=NSNotFound;
 	
 	for(NSString *key in _routeidStore){
 		
 		NSMutableArray *routes=[_routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObject:routeid];
+		NSUInteger index=[routes indexOfObject:routeid];
 		
 		if(index!=NSNotFound){
 			break;
@@ -365,7 +365,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		
 		NSMutableArray *routes=[_routeidStore objectForKey:key];
 		
-		int index=[routes indexOfObject:fileid];
+		NSUInteger index=[routes indexOfObject:fileid];
 		
 		if(index!=NSNotFound){
 			found=YES;

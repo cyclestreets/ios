@@ -656,6 +656,10 @@
 		28D10ECC135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBE135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png */; };
 		28D10ECD135D6E54006F1D94 /* CSTabBar_plan_route@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBF135D6E54006F1D94 /* CSTabBar_plan_route@2x.png */; };
 		28D10ECE135D6E54006F1D94 /* CSTabBar_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EC0135D6E54006F1D94 /* CSTabBar_settings@2x.png */; };
+		28D186BD193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186BC193754E2001FBBF7 /* UIButtonBarTrash.png */; };
+		28D186BE193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186BC193754E2001FBBF7 /* UIButtonBarTrash.png */; };
+		28D186C2193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */; };
+		28D186C3193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */; };
 		28D246031338926E00188783 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
 		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
@@ -1157,6 +1161,8 @@
 		28D10EBE135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_photomap_tb@2x.png"; sourceTree = "<group>"; };
 		28D10EBF135D6E54006F1D94 /* CSTabBar_plan_route@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_plan_route@2x.png"; sourceTree = "<group>"; };
 		28D10EC0135D6E54006F1D94 /* CSTabBar_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_settings@2x.png"; sourceTree = "<group>"; };
+		28D186BC193754E2001FBBF7 /* UIButtonBarTrash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarTrash.png; sourceTree = "<group>"; };
+		28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarTrash@2x.png"; sourceTree = "<group>"; };
 		28D246011338926E00188783 /* RouteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteManager.h; sourceTree = "<group>"; };
 		28D246021338926E00188783 /* RouteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteManager.m; sourceTree = "<group>"; };
 		28D2BC5A1354C48B00694093 /* BUDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUDividerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1477,6 +1483,7 @@
 		28187A5614FCFF4C00A38A17 /* x1 */ = {
 			isa = PBXGroup;
 			children = (
+				28D186BC193754E2001FBBF7 /* UIButtonBarTrash.png */,
 				2811C497166CCD5F00592560 /* ShareView */,
 				2846082A16493ABF00CBF96A /* UIBarButton_Back.png */,
 				289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */,
@@ -2100,6 +2107,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */,
 				289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */,
 				2801301315E636070092D509 /* Icon_currentroutecell@2x.png */,
 				28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */,
@@ -2467,6 +2475,7 @@
 				28D10EC8135D6E54006F1D94 /* CSTabBar_add_photo@2x.png in Resources */,
 				287868F81886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				28D10EC9135D6E54006F1D94 /* CSTabBar_credits@2x.png in Resources */,
+				28D186C2193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */,
 				28D10ECA135D6E54006F1D94 /* CSTabBar_fav_routes@2x.png in Resources */,
 				28D10ECB135D6E54006F1D94 /* CSTabBar_itinerary@2x.png in Resources */,
 				28D10ECC135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png in Resources */,
@@ -2543,6 +2552,7 @@
 				28187AC814FCFF4C00A38A17 /* UIButton_green_hi.png in Resources */,
 				28187AC914FCFF4C00A38A17 /* UIButton_green_lo.png in Resources */,
 				28187ACA14FCFF4C00A38A17 /* UIButton_grey_hi.png in Resources */,
+				28D186BD193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */,
 				28187ACB14FCFF4C00A38A17 /* UIButton_grey_lo.png in Resources */,
 				28187ACC14FCFF4C00A38A17 /* UIButton_orange_hi.png in Resources */,
 				28187ACD14FCFF4C00A38A17 /* UIButton_orange_lo.png in Resources */,
@@ -2796,6 +2806,7 @@
 				2811C4A6166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C2166CE68F00592560 /* UIActivitySMS.png in Resources */,
 				28851506166E0E20003536CA /* UIActivityCopy.png in Resources */,
+				28D186C3193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */,
 				2868D23D166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */,
 				2868D23F166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */,
 				2868D241166E1C0600C0C153 /* UIActivityFacebook@2x.png in Resources */,
@@ -2804,6 +2815,7 @@
 				2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
+				28D186BE193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */,
 				2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */,
 				28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
@@ -3158,7 +3170,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3192,10 +3204,11 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "A1154760-7263-4DD3-9482-A63E00406F8B";
+				PROVISIONING_PROFILE = "73AD26A5-448B-4BEA-A33C-B06060B7A4B8";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -3209,7 +3222,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3246,6 +3259,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -3485,7 +3499,7 @@
 				BUNDLE_ID = "mobile-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3522,6 +3536,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Adhoc;
 		};
