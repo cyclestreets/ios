@@ -90,28 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/controllers/Map/MapViewController.m"
-            timestampString = "415817038.888693"
+            timestampString = "423050652.649411"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1049"
-            endingLineNumber = "1049"
-            landmarkName = "-removeMarkerAtIndexViaMenu:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/controllers/Map/MapViewController.m"
-            timestampString = "415817038.888693"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1009"
-            endingLineNumber = "1009"
-            landmarkName = "-mapView:didSelectAnnotationView:"
+            startingLineNumber = "1014"
+            endingLineNumber = "1014"
+            landmarkName = "-mapView:viewForAnnotation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -152,12 +136,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/controllers/Map/MapViewController.m"
-            timestampString = "415817038.888693"
+            timestampString = "423049839.505605"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
-            landmarkName = "-locationDidComplete:"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
+            landmarkName = "-mapView:didUpdateUserLocation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -168,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/controllers/Map/MapViewController.m"
-            timestampString = "415817038.888693"
+            timestampString = "423049839.505605"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
             landmarkName = "-updateUItoState:"
             landmarkType = "5">
          </BreakpointContent>

@@ -40,6 +40,8 @@
 		
 		self.centerOffset=CGPointMake(12, 0-self.height/2);
 		
+		self.calloutOffset=CGPointMake(-12, 0);
+		
 	}
 	
 	return self;

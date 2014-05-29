@@ -100,7 +100,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // waypoint ui
 // will need ui for editing waypoints
 @property(nonatomic,assign)  BOOL									markerMenuOpen;
-
+@property (nonatomic,strong)  CSWaypointAnnotationView				*selectedAnnotation;
 
 // data
 @property (nonatomic, strong) RouteVO								* route;
@@ -269,6 +269,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	self.mapTapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnMap:)];
 	_mapTapRecognizer.numberOfTapsRequired=1;
 	_mapTapRecognizer.enabled=YES;
+	_mapTapRecognizer.delaysTouchesBegan=YES;
 	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
 	//TODO: logic for map if no selected route exists
@@ -947,6 +948,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
 	
+	if(_uiState==MapPlanningStateRoute)
+		return;
+	
+	if(_selectedAnnotation!=nil)
+		return;
+	
 	BetterLog(@"");
 	
 	// if the menu is open, close it, dont add a waypoint
@@ -968,21 +975,19 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState{
 	
+	if(_uiState==MapPlanningStateRoute){
+		BetterLog(@"MapPlanningStateRoute");
+		return;
+	}
+		
+	
 	BetterLog(@"From %i to %i",oldState, newState);
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
 	CSWaypointAnnotation* annotation=view.annotation;
-	
-	if(_markerMenuOpen==YES){
-		if(newState!=MKAnnotationViewDragStateNone)
-			[annotationView setDragState:MKAnnotationViewDragStateNone];
-		return;
-	}
-	
+		
 	
 	if (newState == MKAnnotationViewDragStateEnding) {
-		
-		annotation.menuEnabled=NO;
 		
 		[annotationView setDragState:MKAnnotationViewDragStateNone]; //NOTE: doesnt seem to fire this for custom annotations
 		
@@ -1016,9 +1021,18 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	// or if a route is loaded
 	
 	 if (annotationView == nil){
+		 
 		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
-		 annotationView.draggable = YES;
-		 annotationView.enabled=YES;
+		 annotationView.draggable = _uiState!=MapPlanningStateRoute;
+		 annotationView.enabled=_uiState!=MapPlanningStateRoute;
+		 annotationView.selected=YES;
+		 annotationView.canShowCallout=YES;
+		 
+		 UIButton *calloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 50)];
+		 calloutButton.backgroundColor=[UIColor redColor];
+		 annotationView.rightCalloutAccessoryView=calloutButton;
+		 
+		 
 		 
 	 } else {
 		 annotationView.annotation = annotation;
@@ -1026,61 +1040,36 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	 
 	 return annotationView;
 }
+
+-(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view{
+	
+	BetterLog(@"");
+	
+	self.selectedAnnotation=nil;
+	
+	view.selected=YES;
+	
+}
  
  
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
 	
-	BetterLog(@"Fired");
+	BetterLog(@"");
 	
+	self.selectedAnnotation=(CSWaypointAnnotationView*)view;
 	
-	//TODO: this might be less confusing to get right if menu appeared on long prees> might conflict with drag??
+	[view setDragState:MKAnnotationViewDragStateStarting];
+	
+}
+
+
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
 	CSWaypointAnnotation* annotation=view.annotation;
 	
-	BetterLog(@"dragState=%i",annotationView.dragState);
-	
-	if(annotation.menuEnabled==NO){
-		annotation.menuEnabled=YES;
-		return;
-	}
-	
-	if(_markerMenuOpen==YES)
-		return;
-	
-	if(_uiState==MapPlanningStateRoute)
-		return;
-	
-	if([view.annotation isKindOfClass:[MKUserLocation class]])
-		return;
-	
-	BetterLog(@"Passed all exceptions");
-	
-	UIMenuController *menuController = [UIMenuController sharedMenuController];
-	
-	if(menuController.isMenuVisible==NO){
-		
-		[self becomeFirstResponder];
-		
-		MarkerMenuItem *menuItem = [[MarkerMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeMarkerAtIndexViaMenu:)];
-		CSWaypointAnnotation *annotation=(CSWaypointAnnotation*)view.annotation;
-		menuItem.waypoint=annotation.dataProvider;
-		menuController.menuItems = [NSArray arrayWithObject:menuItem];
-		
-	}
-	
-	CGRect markerRect=CGRectMake(view.left-12, view.top+5, view.width, view.height);
-	[menuController setTargetRect:markerRect inView:self.mapView];
-	
-	if(menuController.isMenuVisible==NO)
-		[menuController setMenuVisible:YES animated:YES];
-	
-	_markerMenuOpen=YES;
-	
-}
-
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-	
+	[self removeWayPoint:annotation.dataProvider];
 	
 	
 }

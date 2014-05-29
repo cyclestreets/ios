@@ -18,11 +18,25 @@
 @synthesize coordinate;
 
 - (NSString *)subtitle{
-    return @"subtitle";
+    return @"";
 }
 
 - (NSString *)title{
-    return @"Remove";
+	
+	switch (_dataProvider.waypointType) {
+		case WayPointTypeFinish:
+			return @"Finish";
+			break;
+		case WayPointTypeStart:
+			return @"Start";
+			break;
+		default:
+			return [NSString stringWithFormat:@"Waypoint #%i",_index];
+		break;
+	}
+	
+	
+    return @"Start";
 }
 
 -(id)initWithCoordinate:(CLLocationCoordinate2D)coord {
