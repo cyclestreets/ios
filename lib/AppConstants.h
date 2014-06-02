@@ -75,11 +75,14 @@ extern NSString *const DEVICETYPE;
 extern NSString *const MAPPING_BASE_OPENCYCLEMAP;
 extern NSString *const MAPPING_BASE_OSM;
 extern NSString *const MAPPING_BASE_OS;
+extern NSString *const MAPPING_BASE_APPLE;
+
 
 extern NSString *const MAPPING_ATTRIBUTION_OPENCYCLEMAP;
 extern NSString *const MAPPING_ATTRIBUTION_OSM;
 extern NSString *const MAPPING_ATTRIBUTION_OS;
 
+extern NSString *const MAPPING_TILETEMPLATE_APPLE;
 
 
 
