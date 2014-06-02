@@ -17,6 +17,7 @@
 
 @property (nonatomic,assign)  WayPointType					wayPointType;
 @property (nonatomic,assign)  BOOL							menuEnabled;
+@property (nonatomic,assign)  int							annotationAngle;
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coord;
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate;

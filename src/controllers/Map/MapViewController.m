@@ -492,9 +492,13 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 		_mapView.showsUserLocation=NO;
 		
+		_programmaticChange=NO;
+		
 		[self updateUItoState:_previousUIState];
 		
 	}else{
+		
+		_programmaticChange=YES;
 		
 		_mapView.showsUserLocation=NO;
 		_mapView.showsUserLocation=YES;
@@ -778,6 +782,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			return;
 		}
 	}
+	
+	
+	//explicit click while autolocation was happening. Turn off auto, accept click.
+	if (!_programmaticChange) {
+		if (_uiState==MapPlanningStateLocating) {
+			[self didSelectLocateUserbutton];
+		}
+	}
 		
 	
 	[self addWayPointAtCoordinate:cooordinate];
@@ -974,10 +986,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 		
 	
-	BetterLog(@"");
-
-	
-	[self addWayPointAtCoordinate:location.coordinate];
+	[self assessWayPointAddition:location.coordinate];
 }
 
 

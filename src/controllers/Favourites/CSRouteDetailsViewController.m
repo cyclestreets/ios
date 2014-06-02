@@ -195,6 +195,10 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	[_viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_elevationView, nil]];
 	
+	
+	UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectRouteActions)];
+	[self.navigationItem setRightBarButtonItem:actionButton];
+	
 }
 
 
@@ -234,11 +238,9 @@ static NSString *const VIEWTITLE=@"Route details";
 
 
 
-//
-/***********************************************
- * @description			User events
- ***********************************************/
-//
+//------------------------------------------------------------------------------------
+#pragma mark - UI Events
+//------------------------------------------------------------------------------------
 
 // route selection
 - (void)selectRoute {
@@ -317,7 +319,7 @@ static NSString *const VIEWTITLE=@"Route details";
 
 
 
--(void)didSelectRouteActions{
+-(IBAction)didSelectRouteActions{
 	
 	__weak __typeof(&*self)weakSelf = self;
 	UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@"Route options"];

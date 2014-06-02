@@ -86,6 +86,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 @property (nonatomic,strong)  UISwipeGestureRecognizer					*footerSwipeGesture;
+@property (nonatomic,strong)  UISwipeGestureRecognizer					*segmentNextSwipeGesture;
+@property (nonatomic,strong)  UISwipeGestureRecognizer					*segmentPreviousSwipeGesture;
 
 @end
 
@@ -197,15 +199,44 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_footerSwipeGesture.direction=UISwipeGestureRecognizerDirectionDown;
 	[_footerView addGestureRecognizer:_footerSwipeGesture];
 	
+	
+	self.segmentNextSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(didsegmentNextFooterGesture:)];
+	_segmentNextSwipeGesture.direction=UISwipeGestureRecognizerDirectionLeft;
+	[_footerView addGestureRecognizer:_segmentNextSwipeGesture];
+	
+	self.segmentPreviousSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(didsegmentPreviousFooterGesture:)];
+	_segmentPreviousSwipeGesture.delaysTouchesBegan=YES;
+	_segmentPreviousSwipeGesture.direction=UISwipeGestureRecognizerDirectionRight;
+	[_footerView addGestureRecognizer:_segmentPreviousSwipeGesture];
+	
 }
+
+
+//------------------------------------------------------------------------------------
+#pragma mark - Footer gesture recognisers
+//------------------------------------------------------------------------------------
 
 - (void)didcloseFooterGesture:(UISwipeGestureRecognizer *)recognizer{
 	
 	[self didToggleInfo];
+	
+}
+
+- (void)didsegmentNextFooterGesture:(UISwipeGestureRecognizer *)recognizer{
+	
+	[self didNext];
+}
+
+- (void)didsegmentPreviousFooterGesture:(UISwipeGestureRecognizer *)recognizer{
+	
+	[self didPrev];
 }
 
 
 
+//------------------------------------------------------------------------------------
+#pragma mark - UIView
+//------------------------------------------------------------------------------------
 
 -(void)viewWillAppear:(BOOL)animated{
 	
@@ -540,7 +571,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	//double newzoom= log2(360 * ((_mapView.size.width/256) / region.span.longitudeDelta));
     
 
-	[self updateupdateRouteAnnotationsToStart:start end:end];
+	[self updateupdateRouteAnnotationsToStart:start end:end forstartAngle:[_currentSegment startBearing] endAngle:[nextSegment startBearing]];
 	
 	if(_segmentOverlay==nil){
 		self.segmentOverlay = [[CSRoutePolyLineOverlay alloc] initWithSegment:nil];
@@ -555,6 +586,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 }
 
+-(void)updateupdateRouteAnnotationsToStart:(CLLocationCoordinate2D)start end:(CLLocationCoordinate2D)end forstartAngle:(int)startAngle endAngle:(int)endAngle{
+	
+	if(_startAnnotation==nil){
+		
+		self.startAnnotation=[[CSRouteSegmentAnnotation alloc]initWithCoordinate:start];
+		_startAnnotation.wayPointType=WayPointTypeStart;
+		[_mapView addAnnotation:_startAnnotation];
+	}
+	
+	if(_endAnnotation==nil){
+		
+		self.endAnnotation=[[CSRouteSegmentAnnotation alloc]initWithCoordinate:end];
+		_endAnnotation.wayPointType=WayPointTypeFinish;
+		[_mapView addAnnotation:_endAnnotation];
+		
+	}
+	
+	_startAnnotation.coordinate=start;
+	_endAnnotation.coordinate=end;
+	
+	_startAnnotation.annotationAngle=startAngle;
+	_endAnnotation.annotationAngle=endAngle;
+	
+	
+}
 
 
 -(void)updateupdateRouteAnnotationsToStart:(CLLocationCoordinate2D)start end:(CLLocationCoordinate2D)end{
@@ -678,7 +734,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (IBAction) didPrev {
-	if (index > 0) {
+	if (_index > 0) {
 		[self setSegmentIndex:_index-1];
 	}
 }

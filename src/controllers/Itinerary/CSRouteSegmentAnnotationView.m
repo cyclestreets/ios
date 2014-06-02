@@ -9,7 +9,7 @@
 #import "CSRouteSegmentAnnotationView.h"
 #import "UIView+Additions.h"
 #import "CSRouteSegmentAnnotation.h"
-
+#import "UIImage+Operations.h"
 
 @implementation CSRouteSegmentAnnotationView
 
@@ -39,6 +39,7 @@
 }
 
 
+//TODO: Add rotated annotation image support
 -(void)updateAnnotation{
 	
 	
@@ -46,10 +47,19 @@
 	
 	switch (annotation.wayPointType) {
 		case WayPointTypeStart:
-			self.image=[UIImage imageNamed:@"CSIcon_start_wisp.png"];
+		{
+			UIImage *i=[UIImage imageNamed:@"CSIcon_MapArrow_start.png"];
+			self.image=[UIImage rotateImage:i byDegrees:annotation.annotationAngle];
+			
+		}
+			
 			break;
 		case WayPointTypeFinish:
-			self.image=[UIImage imageNamed:@"CSIcon_finish_wisp.png"];
+		{
+			UIImage *i=[UIImage imageNamed:@"CSIcon_MapArrow_end.png"];
+			self.image=[UIImage rotateImage:i byDegrees:annotation.annotationAngle];
+		}
+			
 			break;
 		
 	}
