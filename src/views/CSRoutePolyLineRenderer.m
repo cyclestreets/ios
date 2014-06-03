@@ -49,6 +49,7 @@
     CSRoutePolyLineOverlay *dataProvider = (CSRoutePolyLineOverlay *)(self.overlay);
     
     CGFloat lineWidth = MKRoadWidthAtZoomScale(zoomScale);
+	lineWidth*=.75;
     
     // outset the map rect by the line width so that points just outside
     // of the currently drawn rect are included in the generated path.

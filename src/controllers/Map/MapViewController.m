@@ -680,6 +680,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
+//------------------------------------------------------------------------------------
+#pragma mark - MapKit Overlays
+//------------------------------------------------------------------------------------
+
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
     
     if ([overlay isKindOfClass:[MKTileOverlay class]]) {
@@ -689,8 +693,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	if([overlay isKindOfClass:[CSRoutePolyLineOverlay class]]){
 		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
-		_routeOverlayRenderer.primaryColor=[UIColor purpleColor];
-		_routeOverlayRenderer.secondaryColor=[UIColor greenColor];
+		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x880088, 0.7);
+		_routeOverlayRenderer.secondaryColor=UIColorFromRGBAndAlpha(0x00FF00, 0.7);
 		_routeOverlayRenderer.secondaryDash=4.0f;
 		return _routeOverlayRenderer;
 	}
