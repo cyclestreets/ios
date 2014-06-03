@@ -191,16 +191,50 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void) didNotificationMapStyleChanged {
 	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
-	for(id <MKOverlay> overlay in overlays){
-		if([overlay isKindOfClass:[MKTileOverlay class]] ){
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-			[_mapView removeOverlay:overlay];
-			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
-			break;
+	
+	NSString *tileTemplate=[CycleStreets tileTemplate];
+	
+	if(overlays.count==0){
+		
+		MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
+		newoverlay.canReplaceMapContent = YES;
+		newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+		[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+		
+	}else{
+		
+		for(id <MKOverlay> overlay in overlays){
+			if([overlay isKindOfClass:[MKTileOverlay class]] ){
+				
+				
+				if([tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
+					
+					[_mapView removeOverlay:overlay];
+					
+					break;
+					
+				}else{
+					
+					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
+					newoverlay.canReplaceMapContent = YES;
+					newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+					[_mapView removeOverlay:overlay];
+					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
+					
+					break;
+					
+				}
+				
+				
+				break;
+			}
 		}
+		
 	}
+	
+	
+	
+	
 	
 	 
 	_attributionLabel.text = [CycleStreets mapAttribution];
@@ -244,10 +278,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
     
-    MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-	newoverlay.canReplaceMapContent = YES;
-	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
+//    MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+//	newoverlay.canReplaceMapContent = YES;
+//	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+//	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	
@@ -685,6 +719,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 //------------------------------------------------------------------------------------
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+	
     
     if ([overlay isKindOfClass:[MKTileOverlay class]]) {
         return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];

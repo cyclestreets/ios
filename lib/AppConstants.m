@@ -16,11 +16,15 @@ NSString *const DEVICETYPE=@"iPhone";
 NSString *const MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
 NSString *const MAPPING_BASE_OSM = @"OpenStreetMap";
 NSString *const MAPPING_BASE_OS = @"OS";
+NSString *const MAPPING_BASE_APPLE = @"Apple";
+
 
 NSString *const MAPPING_ATTRIBUTION_OPENCYCLEMAP = @"(c) OpenStreetMap and contributors, CC-BY-SA; Map images (c) OpenCycleMap";
 NSString *const MAPPING_ATTRIBUTION_OSM = @"(c) OpenStreetMap and contributors, CC-BY-SA";
 NSString *const MAPPING_ATTRIBUTION_OS = @"Contains Ordnance Survey data (c) Crown copyright and database right 2010";
 
+
+NSString *const MAPPING_TILETEMPLATE_APPLE = @"AppleMapKit";
 
 //
 /***********************************************
