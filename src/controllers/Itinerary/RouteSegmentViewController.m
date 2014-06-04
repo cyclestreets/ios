@@ -49,6 +49,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPhotomapAnnotationView.h"
 #import "CSRoutePolyLineOverlay.h"
 #import "CSRoutePolyLineRenderer.h"
+#import "CSMapSource.h"
 
 
 @interface RouteSegmentViewController()< MKMapViewDelegate>
@@ -72,6 +73,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @property (nonatomic,strong)  CSRoutePolyLineOverlay					* segmentOverlay;
 @property (nonatomic,strong)  CSRoutePolyLineRenderer					* segmentOverlayRenderer;
+
+@property (nonatomic,strong)  CSMapSource								* activeMapSource;
+
 
 @property (nonatomic, strong) CLLocation								* currentLocation;
 
@@ -140,21 +144,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #pragma mark - notification responses
 
-
 - (void) didNotificationMapStyleChanged {
+	
 	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
 	
-	NSString *tileTemplate=[CycleStreets tileTemplate];
+	// filter to remove any Route overlays
+	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
+		return ![object isKindOfClass:[CSRoutePolyLineOverlay class]];
+	}];
+	overlays=[overlays filteredArrayUsingPredicate:predicate];
+	//
+	
+	self.activeMapSource=[CycleStreets activeMapSource];
 	
 	if(overlays.count==0){
 		
-		if(![tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
 			
 			
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
 			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+			newoverlay.maximumZ=_activeMapSource.maxZoom;
 			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
 			
 		}
@@ -165,7 +176,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			if([overlay isKindOfClass:[MKTileOverlay class]] ){
 				
 				
-				if([tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
 					
 					[_mapView removeOverlay:overlay];
 					
@@ -173,9 +184,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 					
 				}else{
 					
-					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
+					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
 					newoverlay.canReplaceMapContent = YES;
-					newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+					newoverlay.maximumZ=_activeMapSource.maxZoom;
 					[_mapView removeOverlay:overlay];
 					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
 					
@@ -191,9 +202,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	
-	_attributionLabel.text = [CycleStreets mapAttribution];
+	_attributionLabel.text = _activeMapSource.shortAttribution;
 }
-
 
 #pragma mark - UI View
 

@@ -39,7 +39,7 @@
 #import "RouteVO.h"
 #import "MapLocationSearchViewController.h"
 #import "WayPointViewController.h"
-
+#import "ExpandedUILabel.h"
 #import "CSRoutePolyLineOverlay.h"
 #import "CSRoutePolyLineRenderer.h"
 
@@ -190,59 +190,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 #pragma mark notification response methods
 
 
-- (void) xdidNotificationMapStyleChanged {
-	
-	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
-	
-	NSString *tileTemplate=[CycleStreets tileTemplate];
-	
-	if(overlays.count==0){
-		
-		if(![tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
-
-
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
-			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
-			
-		}
-		
-	}else{
-		
-		for(id <MKOverlay> overlay in overlays){
-			if([overlay isKindOfClass:[MKTileOverlay class]] ){
-				
-				
-				if([tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
-					
-					[_mapView removeOverlay:overlay];
-					
-					break;
-					
-				}else{
-					
-					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
-					newoverlay.canReplaceMapContent = YES;
-					newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-					[_mapView removeOverlay:overlay];
-					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
-					
-					break;
-					
-				}
-				
-				
-				break;
-			}
-		}
-		
-	}
-	
-	
-	_attributionLabel.text = [CycleStreets mapAttribution];
-}
-
 - (void) didNotificationMapStyleChanged {
 	
 	
@@ -257,6 +204,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.activeMapSource=[CycleStreets activeMapSource];
 	
+	UILabel *mkAttributionLabel = [_mapView.subviews objectAtIndex:1];
+	
 	if(overlays.count==0){
 		
 		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
@@ -267,6 +216,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			newoverlay.maximumZ=_activeMapSource.maxZoom;
 			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
 			
+			
 		}
 		
 	}else{
@@ -276,6 +226,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 				
 				
 				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+					
 					
 					[_mapView removeOverlay:overlay];
 					
@@ -289,6 +240,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 					[_mapView removeOverlay:overlay];
 					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
 					
+					
 					break;
 					
 				}
@@ -300,8 +252,18 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 	}
 	
+	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+		
+		_attributionLabel.visible=NO;
+		mkAttributionLabel.visible=YES;
+		
+	}else{
+		_attributionLabel.visible=YES;
+		mkAttributionLabel.visible=NO;
+		_attributionLabel.text = _activeMapSource.shortAttribution;
+		
+	}
 	
-	_attributionLabel.text = _activeMapSource.shortAttribution;
 }
 
 
@@ -341,6 +303,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
+	
+	_attributionLabel.textAlignment=NSTextAlignmentRight;
+	_attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000, .1);
     
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
@@ -359,8 +324,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.programmaticChange = NO;
 	self.singleTapDidOccur=NO;
-	
-	_attributionLabel.text = [CycleStreets mapAttribution];
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
 	
@@ -478,7 +441,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			
 			
 			_searchButton.enabled = YES;
-			_locationButton.style=UIBarButtonItemStyleDone;
+			_locationButton.style=UIBarButtonItemStyleBordered;
 			
 			if([self shouldShowWayPointUI]==YES){
 				items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
