@@ -144,15 +144,50 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void) didNotificationMapStyleChanged {
 	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
-	for(id <MKOverlay> overlay in overlays){
-		if([overlay isKindOfClass:[MKTileOverlay class]] ){
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-			newoverlay.maximumZ=MAX_ZOOM_SEGMENT;
+	
+	NSString *tileTemplate=[CycleStreets tileTemplate];
+	
+	if(overlays.count==0){
+		
+		if(![tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
+			
+			
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
 			newoverlay.canReplaceMapContent = YES;
-			[_mapView removeOverlay:overlay];
+			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
 			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
-			break;
+			
 		}
+		
+	}else{
+		
+		for(id <MKOverlay> overlay in overlays){
+			if([overlay isKindOfClass:[MKTileOverlay class]] ){
+				
+				
+				if([tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
+					
+					[_mapView removeOverlay:overlay];
+					
+					break;
+					
+				}else{
+					
+					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
+					newoverlay.canReplaceMapContent = YES;
+					newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+					[_mapView removeOverlay:overlay];
+					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
+					
+					break;
+					
+				}
+				
+				
+				break;
+			}
+		}
+		
 	}
 	
 	
@@ -168,12 +203,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
-	
-	
-	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-	newoverlay.maximumZ=MAX_ZOOM_SEGMENT;
-	newoverlay.canReplaceMapContent = YES;
-	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
+	[self didNotificationMapStyleChanged];
 	
 	
 	//photo & info default to ON state
@@ -406,12 +436,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	if(overlay==_routeOverlay){
 		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
-		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x008000, 0.5);
+		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x880088, 0.7);
 		return _routeOverlayRenderer;
 	}
 	
 	if(overlay==_segmentOverlay){
 		self.segmentOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
+		_segmentOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x00FF00, 1);
 		return _segmentOverlayRenderer;
 	}
     

@@ -196,10 +196,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	if(overlays.count==0){
 		
-		MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
-		newoverlay.canReplaceMapContent = YES;
-		newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-		[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+		if(![tileTemplate isEqualToString:MAPPING_TILETEMPLATE_APPLE]){
+
+
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:tileTemplate];
+			newoverlay.canReplaceMapContent = YES;
+			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
+			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+			
+		}
 		
 	}else{
 		
@@ -233,10 +238,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 	
 	
-	
-	
-	
-	 
 	_attributionLabel.text = [CycleStreets mapAttribution];
 }
 
@@ -278,12 +279,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
     
-//    MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-//	newoverlay.canReplaceMapContent = YES;
-//	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-//	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
+	[self didNotificationMapStyleChanged];
 	
 	[self initToolBarEntries];
 	
