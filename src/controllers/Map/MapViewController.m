@@ -35,7 +35,7 @@
 #import "CSWaypointAnnotation.h"
 #import "CSWaypointAnnotationView.h"
 #import "UIActionSheet+BlocksKit.h"
-
+#import "CSMapSource.h"
 #import "RouteVO.h"
 #import "MapLocationSearchViewController.h"
 #import "WayPointViewController.h"
@@ -61,7 +61,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
-@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
@@ -86,6 +86,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, strong) CLLocation							* lastLocation;
 @property (nonatomic,strong)  CSRoutePolyLineOverlay				* routeOverlay;
 @property (nonatomic,strong)  CSRoutePolyLineRenderer				* routeOverlayRenderer;
+@property (nonatomic,strong)  CSMapSource							* activeMapSource;
+
 
 
 // sub views
@@ -188,7 +190,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 #pragma mark notification response methods
 
 
-- (void) didNotificationMapStyleChanged {
+- (void) xdidNotificationMapStyleChanged {
 	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
 	
@@ -241,6 +243,67 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_attributionLabel.text = [CycleStreets mapAttribution];
 }
 
+- (void) didNotificationMapStyleChanged {
+	
+	
+	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
+	
+	// filter to remove any Route overlays
+	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
+		return ![object isKindOfClass:[CSRoutePolyLineOverlay class]];
+	}];
+	overlays=[overlays filteredArrayUsingPredicate:predicate];
+	//
+	
+	self.activeMapSource=[CycleStreets activeMapSource];
+	
+	if(overlays.count==0){
+		
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+			
+			
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
+			newoverlay.canReplaceMapContent = YES;
+			newoverlay.maximumZ=_activeMapSource.maxZoom;
+			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+			
+		}
+		
+	}else{
+		
+		for(id <MKOverlay> overlay in overlays){
+			if([overlay isKindOfClass:[MKTileOverlay class]] ){
+				
+				
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+					
+					[_mapView removeOverlay:overlay];
+					
+					break;
+					
+				}else{
+					
+					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
+					newoverlay.canReplaceMapContent = YES;
+					newoverlay.maximumZ=_activeMapSource.maxZoom;
+					[_mapView removeOverlay:overlay];
+					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
+					
+					break;
+					
+				}
+				
+				
+				break;
+			}
+		}
+		
+	}
+	
+	
+	_attributionLabel.text = _activeMapSource.shortAttribution;
+}
+
 
 
 //------------------------------------------------------------------------------------
@@ -282,6 +345,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	[self didNotificationMapStyleChanged];
+	
 	
 	[self initToolBarEntries];
 	
@@ -785,6 +849,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	UINavigationController *nav=(UINavigationController*)self.viewDeckController.leftController;
 	WayPointViewController *waypointController=(WayPointViewController*)nav.topViewController;
+	self.viewDeckController.panningMode=IIViewDeckFullViewPanning;
 	waypointController.delegate=self;
 	waypointController.dataProvider=_waypointArray;
 	
@@ -993,6 +1058,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
+// reset panning mode so it is only active when WayPoint view is visible.
+- (void)viewDeckController:(IIViewDeckController*)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated{
+	
+	self.viewDeckController.panningMode=IIViewDeckNoPanning;
+	
+}
+
+
 
 
 #pragma mark - MKMap delegate
@@ -1036,7 +1109,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 		
 	
-	BetterLog(@"From %lu to %lu",oldState, newState);
+	BetterLog(@"From %i to %i",oldState, newState);
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
 		
@@ -1244,16 +1317,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
--(void)waypointButtonSelected{
-	
-	BetterLog(@"");
-	
-	WayPointViewController *waypointController=(WayPointViewController*)self.viewDeckController.leftController;
-	waypointController.dataProvider=_waypointArray;
-	
-	[self.viewDeckController openLeftViewAnimated:YES];
-	
-}
+
 
 
 

@@ -25,6 +25,7 @@
 	[self addChildViewController:self.centerController];
     if (self) {
         self.panningMode=IIViewDeckNoPanning;
+		self.delegateMode=IIViewDeckDelegateAndSubControllers;
 		self.centerhiddenInteractivity=IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
 		self.navigationControllerBehavior = IIViewDeckNavigationControllerIntegrated;
     }

@@ -484,6 +484,16 @@
 		2886DEE018C530A500CD208B /* BUDataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DEDF18C530A500CD208B /* BUDataSourceManager.m */; };
 		2886DEE118C530A500CD208B /* BUDataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DEDF18C530A500CD208B /* BUDataSourceManager.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		2889095C193F385D009C4325 /* CSOpenCycleMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890957193F385D009C4325 /* CSOpenCycleMapSource.m */; };
+		2889095D193F385D009C4325 /* CSOpenCycleMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890957193F385D009C4325 /* CSOpenCycleMapSource.m */; };
+		2889095E193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890959193F385D009C4325 /* CSOpenStreetMapSource.m */; };
+		2889095F193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890959193F385D009C4325 /* CSOpenStreetMapSource.m */; };
+		28890960193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889095B193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m */; };
+		28890961193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889095B193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m */; };
+		28890966193F3EFA009C4325 /* CSAppleMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890965193F3EFA009C4325 /* CSAppleMapSource.m */; };
+		28890967193F3EFA009C4325 /* CSAppleMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890965193F3EFA009C4325 /* CSAppleMapSource.m */; };
+		2889096A193F41BB009C4325 /* CSMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890969193F41BB009C4325 /* CSMapSource.m */; };
+		2889096B193F41BB009C4325 /* CSMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890969193F41BB009C4325 /* CSMapSource.m */; };
 		288B10281457492500E2A96F /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
 		288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
 		288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
@@ -957,6 +967,17 @@
 		2886DEDE18C530A500CD208B /* BUDataSourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDataSourceManager.h; sourceTree = "<group>"; };
 		2886DEDF18C530A500CD208B /* BUDataSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDataSourceManager.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28890956193F385D009C4325 /* CSOpenCycleMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSOpenCycleMapSource.h; sourceTree = "<group>"; };
+		28890957193F385D009C4325 /* CSOpenCycleMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSOpenCycleMapSource.m; sourceTree = "<group>"; };
+		28890958193F385D009C4325 /* CSOpenStreetMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSOpenStreetMapSource.h; sourceTree = "<group>"; };
+		28890959193F385D009C4325 /* CSOpenStreetMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSOpenStreetMapSource.m; sourceTree = "<group>"; };
+		2889095A193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSOrdnanceSurveyStreetViewMapSource.h; sourceTree = "<group>"; };
+		2889095B193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSOrdnanceSurveyStreetViewMapSource.m; sourceTree = "<group>"; };
+		28890962193F38A0009C4325 /* CSMapSourceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSMapSourceProtocol.h; sourceTree = "<group>"; };
+		28890964193F3EFA009C4325 /* CSAppleMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSAppleMapSource.h; sourceTree = "<group>"; };
+		28890965193F3EFA009C4325 /* CSAppleMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSAppleMapSource.m; sourceTree = "<group>"; };
+		28890968193F41BB009C4325 /* CSMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMapSource.h; sourceTree = "<group>"; };
+		28890969193F41BB009C4325 /* CSMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMapSource.m; sourceTree = "<group>"; };
 		288B10271457492500E2A96F /* RoutesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewController.m; sourceTree = "<group>"; };
 		288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_waypoint.png; sourceTree = "<group>"; };
 		28916030133A9AC9000C821B /* CSSegmentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSegmentFooterView.h; sourceTree = "<group>"; };
@@ -1714,6 +1735,24 @@
 			name = html;
 			sourceTree = "<group>";
 		};
+		28890953193F3815009C4325 /* maps */ = {
+			isa = PBXGroup;
+			children = (
+				28890956193F385D009C4325 /* CSOpenCycleMapSource.h */,
+				28890957193F385D009C4325 /* CSOpenCycleMapSource.m */,
+				28890958193F385D009C4325 /* CSOpenStreetMapSource.h */,
+				28890959193F385D009C4325 /* CSOpenStreetMapSource.m */,
+				2889095A193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.h */,
+				2889095B193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m */,
+				28890964193F3EFA009C4325 /* CSAppleMapSource.h */,
+				28890965193F3EFA009C4325 /* CSAppleMapSource.m */,
+				28890968193F41BB009C4325 /* CSMapSource.h */,
+				28890969193F41BB009C4325 /* CSMapSource.m */,
+				28890962193F38A0009C4325 /* CSMapSourceProtocol.h */,
+			);
+			path = maps;
+			sourceTree = "<group>";
+		};
 		289478A118AD2EE80066AA2E /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1785,6 +1824,7 @@
 		28AD61DB131FB69D008527FC /* src */ = {
 			isa = PBXGroup;
 			children = (
+				28890953193F3815009C4325 /* maps */,
 				2872DF3413283575003995BE /* cells */,
 				28AD61DC131FB69D008527FC /* controllers */,
 				28AD61E5131FB69D008527FC /* managers */,
@@ -2921,6 +2961,7 @@
 				28AD62AC131FB69D008527FC /* Files.m in Sources */,
 				28B3678018B2822700F7244C /* CSWaypointAnnotation.m in Sources */,
 				28AD62AE131FB69D008527FC /* UserAccount.m in Sources */,
+				28890966193F3EFA009C4325 /* CSAppleMapSource.m in Sources */,
 				28AD62B0131FB69D008527FC /* UserVO.m in Sources */,
 				28D186DA19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
 				28727AD518B52B8900D957FD /* UserLocationManager.m in Sources */,
@@ -2973,7 +3014,9 @@
 				28443E631332867D00FAD008 /* RouteVO.m in Sources */,
 				28D246031338926E00188783 /* RouteManager.m in Sources */,
 				28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */,
+				2889095E193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */,
 				28727AD118B5222200D957FD /* PhotoMapViewController.m in Sources */,
+				28890960193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */,
 				287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */,
 				28965C5E18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */,
@@ -2989,6 +3032,7 @@
 				2886DEE018C530A500CD208B /* BUDataSourceManager.m in Sources */,
 				280E91CC14097DD300C7AC75 /* MapLocationSearchViewController.m in Sources */,
 				280E93461409856E00C7AC75 /* NetworkRequest.m in Sources */,
+				2889096A193F41BB009C4325 /* CSMapSource.m in Sources */,
 				280E93471409856E00C7AC75 /* RouteParser.m in Sources */,
 				280E9358140985CD00C7AC75 /* NamedPlace.m in Sources */,
 				280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */,
@@ -3044,6 +3088,7 @@
 				288C0F65164AA0B1000880FF /* MapViewController.m in Sources */,
 				28BC6A8F18AE427B00EF0436 /* SettingsViewController.m in Sources */,
 				28965C5A18BF4F94001BB258 /* CSRoutePolyLineOverlay.m in Sources */,
+				2889095C193F385D009C4325 /* CSOpenCycleMapSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3061,6 +3106,7 @@
 				283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */,
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
 				283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */,
+				28890967193F3EFA009C4325 /* CSAppleMapSource.m in Sources */,
 				28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */,
 				28D186DB19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
 				283436D315DD5DC300B00FD5 /* UserVO.m in Sources */,
@@ -3113,7 +3159,9 @@
 				28B3677D18B275C800F7244C /* MKMapView+Additions.m in Sources */,
 				2834370715DD5DC300B00FD5 /* FavouritesCellView.m in Sources */,
 				2834370815DD5DC300B00FD5 /* CSRouteDetailsViewController.m in Sources */,
+				2889095F193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */,
 				2834370915DD5DC300B00FD5 /* LoginVO.m in Sources */,
+				28890961193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */,
 				2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */,
 				28965C5F18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
@@ -3129,6 +3177,7 @@
 				28727ADA18B5322800D957FD /* CSPhotomapAnnotation.m in Sources */,
 				2834371515DD5DC300B00FD5 /* NetworkRequest.m in Sources */,
 				2834371615DD5DC300B00FD5 /* RouteParser.m in Sources */,
+				2889096B193F41BB009C4325 /* CSMapSource.m in Sources */,
 				28727ADF18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */,
 				2834371B15DD5DC300B00FD5 /* NamedPlace.m in Sources */,
 				2834371E15DD5DC300B00FD5 /* KeyChainItemWrapper.m in Sources */,
@@ -3184,6 +3233,7 @@
 				2875DE4E18B77CC400BEF18B /* BUIconActionSheet.m in Sources */,
 				2815EA04164D77B0003C356A /* MapViewController.m in Sources */,
 				28965C5B18BF4F94001BB258 /* CSRoutePolyLineOverlay.m in Sources */,
+				2889095D193F385D009C4325 /* CSOpenCycleMapSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,6 +30,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "RMMapView.h"
 #import <CoreLocation/CoreLocation.h>
 
+@class CSMapSource;
 
 extern const NSInteger MAX_ZOOM_LOCATION;
 extern const NSInteger MAX_ZOOM_LOCATION_ACCURACY;
@@ -45,12 +46,15 @@ extern const NSInteger MAX_ZOOM_SEGMENT;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 
-
-//+ ( NSObject <RMTileSource> *)tileSource;
+// deprecate
 + (NSArray *)mapStyles;
 + (NSString *)currentMapStyle;
 + (NSString *)mapAttribution;
 +(NSString*)tileTemplate;
+
+
++(CSMapSource*)activeMapSource;
+
 + (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation;
 
 @end

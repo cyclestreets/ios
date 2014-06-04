@@ -30,6 +30,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "SettingsManager.h"
 #import "AppConstants.h"
 #import "GenericConstants.h"
+#import "CSMapSourceProtocol.h"
+
+#import "CSOpenCycleMapSource.h"
+#import "CSOpenStreetMapSource.h"
+#import "CSOrdnanceSurveyStreetViewMapSource.h"
+#import "CSAppleMapSource.h"
 
 const NSInteger MAX_ZOOM_LOCATION = 18;
 const NSInteger MAX_ZOOM_SEGMENT = 20;
@@ -109,6 +115,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		
 	}
 	return mapAttribution;
+	
+}
+
+
++(CSMapSource*)activeMapSource{
+	
+	NSString *mapStyle = [CycleStreets currentMapStyle];
+	
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]){
+		
+		return [[CSOpenStreetMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]){
+		
+		return [[CSOpenCycleMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]){
+		
+		return [[CSOrdnanceSurveyStreetViewMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE]){
+		
+		return [[CSAppleMapSource alloc]init];
+	}
+	
+	return [[CSOpenStreetMapSource alloc]init];
+	
 	
 }
 
