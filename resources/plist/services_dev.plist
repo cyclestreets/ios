@@ -189,6 +189,24 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>WaypointMetaData</key>
+	<dict>
+		<key>id</key>
+		<string>WaypointMetaData</string>
+		<key>remoteurl</key>
+		<string>https://api.cyclestreets.net/v2/nearestpoint</string>
+		<key>type</key>
+		<string>GETPOST</string>
+		<key>cache</key>
+		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_JSON</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 	<key>PhotoCategories</key>
 	<dict>
 		<key>id</key>

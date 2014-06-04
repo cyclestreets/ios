@@ -51,21 +51,21 @@
 		case WayPointTypeStart:
 		{
 			_waypointLabel.text=EMPTYSTRING;
-			_nameLabel.text=@"Start";
+			_nameLabel.text=_dataProvider.locationname==nil ? @"Start" : _dataProvider.locationname;
 			_iconImageView.image=[UIImage imageNamed:@"CSIcon_start_wisp.png"];
 		}
 		break;
 		case WayPointTypeFinish:
 		{
 			_waypointLabel.text=EMPTYSTRING;
-			_nameLabel.text=@"Finish";
+			_nameLabel.text=_dataProvider.locationname==nil ? @"Finish" : _dataProvider.locationname;
 			_iconImageView.image=[UIImage imageNamed:@"CSIcon_finish_wisp.png"];
 		}
 		break;
 		case WayPointTypeIntermediate:
 		{
 			_waypointLabel.text=[NSString stringWithFormat:@"%i",_waypointIndex];
-			_nameLabel.text=[NSString stringWithFormat:@"Waypoint %i",_waypointIndex];
+			_nameLabel.text= _dataProvider.locationname==nil ? [NSString stringWithFormat:@"Waypoint %i",_waypointIndex] : _dataProvider.locationname;
 			_iconImageView.image=[UIImage imageNamed:@"CSIcon_intermediate_wisp.png"];
 			
 		}

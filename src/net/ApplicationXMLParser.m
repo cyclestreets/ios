@@ -32,7 +32,6 @@
 @interface ApplicationXMLParser()
 
 
-@property(nonatomic,strong)NSMutableDictionary *parsers;
 @property(nonatomic,strong)NSDictionary *parserMethods;
 @property(nonatomic,strong)NSString *parserError;
 @property(nonatomic,strong)BUNetworkOperation *activeOperation;
@@ -80,7 +79,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 -(instancetype)init{
 	if (self = [super init])
 	{
-		_parserMethods=[[NSDictionary alloc] initWithObjectsAndKeys:
+		self.parserMethods=[[NSDictionary alloc] initWithObjectsAndKeys:
 					   [NSValue valueWithPointer:@selector(LoginXMLParser:)],LOGIN,
 					   [NSValue valueWithPointer:@selector(RegisterXMLParser:)],REGISTER,
 					   [NSValue valueWithPointer:@selector(RetrievePasswordXMLParser:)],PASSWORDRETRIEVAL,
@@ -93,9 +92,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
 					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
+						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],WAYPOINTMETADATA,
 					   nil];
 		
-		_parsers=[[NSMutableDictionary alloc]init];
 	}
 	return self;
 }

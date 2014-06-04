@@ -58,6 +58,8 @@ NSString *const LOCATIONFEATURES=@"LocationFeatures";
 NSString *const POILISTING=@"PoiListing";
 NSString *const POICATEGORYLOCATION=@"PoiCategoryLocation";
 NSString *const PHOTOCATEGORIES=@"PhotoCategories";
+NSString *const WAYPOINTMETADATA=@"WaypointMetaData";
+
 
 //INTERNAL
 NSString *const CALCULATEROUTERESPONSE=@"CALCULATEROUTERESPONSE";

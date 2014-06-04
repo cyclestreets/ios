@@ -55,6 +55,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 			
 			if([key isEqualToString:@"showRoutePoint"]){
 				dataProvider.showRoutePoint=[[dict valueForKey:key] boolValue];
+				
+			}else if([key isEqualToString:@"plan"]){
+				NSString *plan=[dict valueForKey:key];
+				if([plan isEqualToString:CSPLANTYPE_SHORTEST]){
+					[dataProvider setValue:CSPLANTYPE_FASTEST forKey:key];
+				}else{
+					[dataProvider setValue:[dict valueForKey:key] forKey:key];
+				}
+			
 			}else {
 				[dataProvider setValue:[dict valueForKey:key] forKey:key];
 			}

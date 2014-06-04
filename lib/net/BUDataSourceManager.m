@@ -121,12 +121,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 }
 
 
-//
-/***********************************************
- * Startup
- ***********************************************/
-//
-
+#pragma mark - Startup
 
 -(void)sortStartupSourcesbyPriority{
 	
@@ -140,13 +135,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 }
 
 
+-(void)didCompleteStartup{
+	
+	if([_delegate respondsToSelector:@selector(DataSourceDidCompleteStartup)]){
+		[_delegate DataSourceDidCompleteStartup];
+	}
+	
+	_startupState=NO;
+	
+}
+
 
 //
 /***********************************************
  * Requests
  ***********************************************/
 //
-#pragma mark Data Requests
+#pragma mark - Data Requests
 
 // Deprecated
 -(void)requestDataForType:(NSNotification*)notification{
@@ -215,7 +220,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 }
 
 
-#pragma mark Remote data requests
+#pragma mark - Remote data requests
 -(void)loadRemoteOperation:(BUNetworkOperation*)networkOperation {
     
     BetterLog(@"");
@@ -276,7 +281,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 }
 
 
-#pragma mark Data Type parsers
+#pragma mark - Data Type parsers
 
 
 -(void)parseData:(BUNetworkOperation*)networkOperation{
@@ -335,7 +340,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 }
 
 
-#pragma mark XML response methods
+#pragma mark - XML response methods
 -(void)XMLParseDidCompletewithOperation:(BUNetworkOperation*)networkOperation{
     
     BetterLog(@"");
@@ -372,7 +377,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 }
 
-#pragma mark JSON response methods
+#pragma mark - JSON response methods
+
+
+
+
+#pragma mark - File cache
 
 -(BOOL)loadFileCachedData:(BUNetworkOperation*)networkOperation{
 	
@@ -403,18 +413,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 
 
--(void)didCompleteStartup{
-	
-	if([_delegate respondsToSelector:@selector(DataSourceDidCompleteStartup)]){
-		[_delegate DataSourceDidCompleteStartup];
-	}
-	
-	_startupState=NO;
-
-}
 
 
-#pragma mark memory Request Support
+
+#pragma mark - Memory Cache support
 
 -(void)initiateModelCacheStoreForType:(NSString*)type{
 	
@@ -537,13 +539,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 
 
-
-
-//
-/***********************************************
- * data caching
- ***********************************************/
-//
+#pragma mark - File cache support
 
 -(BOOL)createCacheDirectory{
 	
@@ -761,11 +757,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 }
 
 
-//
-/***********************************************
- * utilities
- ***********************************************/
-//
+
+#pragma mark - Utilities
 
 -(void)removeCachedDataForType:(NSString*)type{
     
@@ -821,6 +814,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 }
 
+
+
+#pragma mark - Error alerts
 
 -(void)displayRequestFailedError:(NSString*)title :(NSString*)message :(NSString*)buttonLabel{
     

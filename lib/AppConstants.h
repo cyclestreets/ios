@@ -112,6 +112,8 @@ extern NSString *const LOCATIONFEATURES;
 extern NSString *const POILISTING;
 extern NSString *const POICATEGORYLOCATION;
 extern NSString *const PHOTOCATEGORIES;
+extern NSString *const WAYPOINTMETADATA;
+
 
 // INTERNAL
 extern NSString *const CALCULATEROUTERESPONSE;

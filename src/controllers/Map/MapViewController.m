@@ -889,6 +889,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	WayPointVO *waypoint=[WayPointVO new];
 	
+	
 	if(_waypointArray==nil)
 		self.waypointArray=[NSMutableArray array];
 	
@@ -906,6 +907,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	
 	waypoint.coordinate=coords;
+	
+	
+	[[RouteManager sharedInstance] loadMetaDataForWaypoint:waypoint];
 	
 	[self updateWaypointStatuses];
 	

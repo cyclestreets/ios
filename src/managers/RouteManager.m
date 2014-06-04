@@ -139,11 +139,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-//
-/***********************************************
- * @description			LOCATION SUPPORT
- ***********************************************/
-//
+#pragma mark - Core Location updates
 
 -(void)locationDidFail:(NSNotification*)notification{
 	
@@ -185,13 +181,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
-//
-/***********************************************
- * @description			NEW NETWORK METHODS
- ***********************************************/
-//
-
-
+#pragma mark - Load Routes for items
 
 -(void)loadRouteForEndPoints:(CLLocation*)fromlocation to:(CLLocation*)tolocation{
     
@@ -233,65 +223,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
 	
 }
-
--(void)loadRouteForWaypoints:(NSMutableArray*)waypoints{
-	
-	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-    SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
-    
-    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
-									 
-									 [self convertWaypointArrayforRequest:waypoints],@"itinerarypoints",
-                                     useDom,@"useDom",
-                                     settingsdp.plan,@"plan",
-                                     [settingsdp returnKilometerSpeedValue],@"speed",
-                                     cycleStreets.files.clientid,@"clientid",
-                                     nil];
-    
-    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
-    request.dataid=CALCULATEROUTE;
-    request.requestid=ZERO;
-    request.parameters=parameters;
-    request.source=DataSourceRequestCacheTypeUseNetwork;
-    
-	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
-		
-		[self loadRouteForEndPointsResponse:operation];
-		
-	};
-	
-	[[BUDataSourceManager sharedInstance] processDataRequest:request];
-    
-    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
-	
-	
-	
-}
-
-//
-/***********************************************
- * @description			converts array to lat,long|lat,long... formatted string
- ***********************************************/
-//
--(NSString*)convertWaypointArrayforRequest:(NSMutableArray*)waypoints{
-	
-	NSMutableArray *cooordarray=[NSMutableArray array];
-	
-	for(int i=0;i<waypoints.count;i++){
-		
-		WayPointVO *waypoint=waypoints[i];
-		
-		[cooordarray addObject:waypoint.coordinateString];
-		
-	}
-	
-	return [cooordarray componentsJoinedByString:@"|"];
-	
-}
-
-
-
 
 
 
@@ -377,6 +308,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:[NSString stringWithFormat:@"Loading route %@ on CycleStreets",result] andMessage:nil];
 }
 
+
+
+
 -(void)loadRouteForRouteId:(NSString*)routeid withPlan:(NSString*)plan{
 	
 	
@@ -423,6 +357,41 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
+//
+/***********************************************
+ * @description			OS6 Routing request support
+ ***********************************************/
+//
+
+-(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest{
+	
+	MKMapItem *source=routingrequest.source;
+	MKMapItem *destination=routingrequest.destination;
+	
+	CLLocationCoordinate2D fromlocation=source.placemark.coordinate;
+	CLLocationCoordinate2D tolocation=destination.placemark.coordinate;
+	
+	// if a user has currentLocation as one of their pins
+	// MKDirectionsRequest will return 0,0 for it
+	// so we have to do another lookup in app to correct this!
+	if(fromlocation.latitude==0.0 || tolocation.latitude==0.0){
+		
+		self.mapRoutingRequest=routingrequest;
+		
+		[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
+		
+		
+	}else{
+		
+		[self loadRouteForCoordinates:fromlocation to:tolocation];
+		
+	}
+	
+	
+}
+
+
+
 -(void)loadRouteForRouteIdResponse:(BUNetworkOperation*)response{
     
 	BetterLog(@"");
@@ -461,12 +430,152 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-#pragma mark Route Updating
+
+#pragma mark - Waypoint requests
+
+
+-(void)loadRouteForWaypoints:(NSMutableArray*)waypoints{
+	
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+    SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+    
+    NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+									 
+									 [self convertWaypointArrayforRequest:waypoints],@"itinerarypoints",
+                                     useDom,@"useDom",
+                                     settingsdp.plan,@"plan",
+                                     [settingsdp returnKilometerSpeedValue],@"speed",
+                                     cycleStreets.files.clientid,@"clientid",
+                                     nil];
+    
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+    request.dataid=CALCULATEROUTE;
+    request.requestid=ZERO;
+    request.parameters=parameters;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
+    
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loadRouteForEndPointsResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+    
+    [[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining route from CycleStreets.net" andMessage:nil];
+	
+	
+	
+}
+
+
+/*
+{
+    "type": "FeatureCollection",
+    "features": [
+				 {
+					 "type": "Feature",
+					 "properties": {
+						 "name": "Senate House Hill, NCN 11"
+					 },
+					 "geometry": {
+						 "type": "Point",
+						 "coordinates": [
+										 0.117823,
+										 52.205299
+										 ]
+					 }
+				 }
+				 ]
+}
+*/
+
+-(void)loadMetaDataForWaypoint:(WayPointVO*)waypoint{
+	
+    
+  //  NSDictionary *postparameters=@{@"username":[CycleStreets sharedInstance].APIKey,
+	//							   @"password":@"cycleStreetsDev"};
+	
+	NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:waypoint.coordinateString,@"lonlat",
+										[CycleStreets sharedInstance].APIKey,@"key",
+										nil];
+    
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+    request.dataid=WAYPOINTMETADATA;
+    request.requestid=ZERO;
+    //request.parameters=[@{@"getparameters":getparameters, @"postparameters":postparameters} mutableCopy];
+	request.parameters=[getparameters mutableCopy];
+    request.source=DataSourceRequestCacheTypeUseNetwork;
+    
+	__weak __typeof(&*waypoint)weakWaypoint = waypoint;
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete, NSString *error){
+		
+		[self loadMetaDataForWaypointResponse:operation forWaypoint:weakWaypoint];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+}
+
+
+-(void)loadMetaDataForWaypointResponse:(BUNetworkOperation*)response forWaypoint:(WayPointVO*)waypoint{
+	
+	
+	switch(response.validationStatus){
+			
+        case ValidationRetrieveRouteByIdSuccess:
+		{
+			NSDictionary *responseDict=response.dataProvider;
+			
+			waypoint.locationname=responseDict[@"features"][0][@"properties"][@"name"];
+        }
+		break;
+			
+		default:
+			break;
+			
+			
+    }
+
+	
+	
+}
+
+
 //
 /***********************************************
- * @description			ROUTE UPDATING FOR LEGACY ROUTES
+ * @description			converts array to lat,long|lat,long... formatted string
  ***********************************************/
 //
+-(NSString*)convertWaypointArrayforRequest:(NSMutableArray*)waypoints{
+	
+	NSMutableArray *cooordarray=[NSMutableArray array];
+	
+	for(int i=0;i<waypoints.count;i++){
+		
+		WayPointVO *waypoint=waypoints[i];
+		
+		[cooordarray addObject:waypoint.coordinateString];
+		
+	}
+	
+	return [cooordarray componentsJoinedByString:@"|"];
+	
+}
+
+
+
+
+
+
+
+
+
+#pragma mark - Route Updating for elevation
+
+
 
 -(void)updateRoute:(RouteVO*)route{
     
@@ -535,38 +644,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-//
-/***********************************************
- * @description			OS6 Routing request support
- ***********************************************/
-//
-
--(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest{
-	
-	MKMapItem *source=routingrequest.source;
-	MKMapItem *destination=routingrequest.destination;
-	
-	CLLocationCoordinate2D fromlocation=source.placemark.coordinate;
-	CLLocationCoordinate2D tolocation=destination.placemark.coordinate;
-	
-	// if a user has currentLocation as one of their pins
-	// MKDirectionsRequest will return 0,0 for it
-	// so we have to do another lookup in app to correct this!
-	if(fromlocation.latitude==0.0 || tolocation.latitude==0.0){ 
-		
-		self.mapRoutingRequest=routingrequest;
-		
-		[[UserLocationManager sharedInstance] startUpdatingLocationForSubscriber:LOCATIONSUBSCRIBERID];
-		
-		
-	}else{
-		
-		[self loadRouteForCoordinates:fromlocation to:tolocation];
-		
-	}
-	
-	
-}
 
 
 
@@ -575,6 +652,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
  * @description			Old Route>New Route conversion evaluation
  ***********************************************/
 //
+
+#pragma mark - Legacy Route loading and conversion
 
 -(void)evalRouteArchiveState{
 	
@@ -653,11 +732,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-//
-/***********************************************
- * @description			RESEPONSE EVENTS
- ***********************************************/
-//
+
+#pragma mark - Route management
 
 - (void) selectRoute:(RouteVO *)route {
 	
@@ -817,12 +893,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-//
-/***********************************************
- * @description			File I/O
- ***********************************************/
-//
 
+#pragma mark - Route File I/O
 
 -(RouteVO*)loadRouteForFileID:(NSString*)fileid{
 	
@@ -901,11 +973,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-//
-/***********************************************
- * @description			LEGACY ROUTE ID METHODS
- ***********************************************/
-//
+#pragma mark - Legacy route methods
 
 // legacy conversion call only
 -(RouteVO*)legacyLoadRoute:(NSString*)routeid{
@@ -942,12 +1010,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
-//
-/***********************************************
-END
- ***********************************************/
-//
-
+#pragma mark - File paths
 
 - (NSString *) oldroutesDirectory {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

@@ -16,6 +16,8 @@
 #define ROUTEARCHIVEPATH @"userroutes"
 #define OLDROUTEARCHIVEPATH @"routes"
 
+@class WayPointVO;
+
 @interface RouteManager : FrameworkObject 	{
 	
 
@@ -52,6 +54,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 -(BOOL)routeIsSelectedRoute:(RouteVO*)route;
 
 -(void)updateRoute:(RouteVO*)route;
+
+-(void)loadMetaDataForWaypoint:(WayPointVO*)waypoint;
 
 
 // legacy
