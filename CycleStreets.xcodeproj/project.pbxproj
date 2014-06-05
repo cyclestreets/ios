@@ -128,6 +128,7 @@
 		2818E0C2189048E10031AD43 /* TripDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C1189048E10031AD43 /* TripDetailViewController.xib */; };
 		2818E0C6189050570031AD43 /* HCSMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818E0C5189050570031AD43 /* HCSMapView.xib */; };
 		2818E0CA189050930031AD43 /* HCSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2818E0C9189050930031AD43 /* HCSMapViewController.m */; };
+		281AA40F1940CC4E006CAD3F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28820C6E1936355F001D5AF5 /* MapKit.framework */; };
 		281C18701935FC6100D9AC1E /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2894D6F51935EEFD009BFFB2 /* APIKey_live.txt */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
 		281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08BB14516A4F0034CC63 /* POICatLocationCellView.m */; };
@@ -1402,6 +1403,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				281AA40F1940CC4E006CAD3F /* MapKit.framework in Frameworks */,
 				432733BC9FE44228ADB078A6 /* libPods.a in Frameworks */,
 				289AA2EC188EF5D10097AA5A /* libMapView.a in Frameworks */,
 				28452757188E9168005A7DF1 /* CoreData.framework in Frameworks */,
@@ -2743,7 +2745,7 @@
 						DevelopmentTeam = Q3YCNU3X72;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
