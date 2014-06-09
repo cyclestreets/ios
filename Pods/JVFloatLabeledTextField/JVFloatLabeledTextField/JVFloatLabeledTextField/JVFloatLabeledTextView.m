@@ -8,6 +8,9 @@
 
 #import "JVFloatLabeledTextView.h"
 
+#define kFloatingLabelShowAnimationDuration 0.3f
+#define kFloatingLabelHideAnimationDuration 0.3f
+
 @interface JVFloatLabeledTextView ()
 
 @property (nonatomic, strong, readonly) UILabel * placeholderLabel;
@@ -61,9 +64,11 @@
     _floatingLabel.font = [UIFont boldSystemFontOfSize:12.0f];
     _floatingLabelTextColor = [UIColor grayColor];
     _animateEvenIfNotFirstResponder = NO;
-    
+    _floatingLabelShowAnimationDuration = kFloatingLabelShowAnimationDuration;
+    _floatingLabelHideAnimationDuration = kFloatingLabelHideAnimationDuration;
+
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textDidChange:)
+                                             selector:@selector(layoutSubviews)
                                                  name:UITextViewTextDidChangeNotification
                                                object:self];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -101,6 +106,16 @@
     [_floatingLabel sizeToFit];
 }
 
+- (void)setPlaceholder:(NSString *)placeholder floatingTitle:(NSString *)floatingTitle
+{
+    _placeholder = placeholder;
+    _placeholderLabel.text = placeholder;
+    [_placeholderLabel sizeToFit];
+
+    _floatingLabel.text = floatingTitle;
+    [_floatingLabel sizeToFit];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -108,6 +123,7 @@
     
     CGRect textRect = [self textRect];
     
+    _placeholderLabel.alpha = [self.text length] > 0 ? 0.0f : 1.0f;
     _placeholderLabel.frame = CGRectMake(textRect.origin.x, textRect.origin.y,
                                          _placeholderLabel.frame.size.width, _placeholderLabel.frame.size.height);
     [self setLabelOriginForTextAlignment];
@@ -148,7 +164,7 @@
     };
     
     if (animated || _animateEvenIfNotFirstResponder) {
-        [UIView animateWithDuration:0.3f
+        [UIView animateWithDuration:_floatingLabelShowAnimationDuration
                               delay:0.0f
                             options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut
                          animations:showBlock
@@ -171,7 +187,7 @@
     };
     
     if (animated || _animateEvenIfNotFirstResponder) {
-        [UIView animateWithDuration:0.3f
+        [UIView animateWithDuration:_floatingLabelHideAnimationDuration
                               delay:0.0f
                             options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseIn
                          animations:hideBlock
@@ -221,7 +237,8 @@
     return rect;
 }
 
-- (void) setFloatingLabelFont:(UIFont *)floatingLabelFont {
+- (void)setFloatingLabelFont:(UIFont *)floatingLabelFont
+{
     _floatingLabelFont = floatingLabelFont;
     _floatingLabel.font = (_floatingLabelFont ? _floatingLabelFont : [UIFont boldSystemFontOfSize:12.0f]);
     self.placeholder = self.placeholder; // Force the label to lay itself out with the new font.
@@ -236,13 +253,6 @@
 
 #pragma mark - UITextView
 
-- (void)setText:(NSString *)text
-{
-    [super setText:text];
-    self.placeholderLabel.alpha = [self.text length] > 0 ? 0.0f : 1.0f;
-    [self layoutSubviews];
-}
-
 - (void)setTextAlignment:(NSTextAlignment)textAlignment
 {
     [super setTextAlignment:textAlignment];
@@ -254,14 +264,6 @@
 {
     [super setFont:font];
     self.placeholderLabel.font = self.font;
-    [self layoutSubviews];
-}
-
-#pragma mark - Notifications
-
-- (void)textDidChange:(NSNotification *)notification
-{
-    self.placeholderLabel.alpha = [self.text length] > 0 ? 0.0f : 1.0f;
     [self layoutSubviews];
 }
 

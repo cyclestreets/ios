@@ -1,6 +1,6 @@
 // AFSerialization.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 
  For example, a JSON request serializer may set the HTTP body of the request to a JSON representation, and set the `Content-Type` HTTP header field value to `application/json`.
  */
-@protocol AFURLRequestSerialization <NSObject, NSCoding, NSCopying>
+@protocol AFURLRequestSerialization <NSObject, NSSecureCoding, NSCopying>
 
 /**
  Returns a request with the specified parameters encoded into a copy of the original request.
@@ -145,11 +145,9 @@ forHTTPHeaderField:(NSString *)field;
                                        password:(NSString *)password;
 
 /**
- Sets the "Authorization" HTTP header set in request objects made by the HTTP client to a token-based authentication value, such as an OAuth access token. This overwrites any existing value for this header.
-
- @param token The authentication token
+ @deprecated This method has been deprecated. Use -setValue:forHTTPHeaderField: instead.
  */
-- (void)setAuthorizationHeaderFieldWithToken:(NSString *)token;
+- (void)setAuthorizationHeaderFieldWithToken:(NSString *)token DEPRECATED_ATTRIBUTE;
 
 
 /**
@@ -191,7 +189,7 @@ forHTTPHeaderField:(NSString *)field;
  */
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method
                                  URLString:(NSString *)URLString
-                                parameters:(NSDictionary *)parameters DEPRECATED_ATTRIBUTE;
+                                parameters:(id)parameters DEPRECATED_ATTRIBUTE;
 
 /**
  Creates an `NSMutableURLRequest` object with the specified HTTP method and URL string.
@@ -207,7 +205,7 @@ forHTTPHeaderField:(NSString *)field;
  */
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method
                                  URLString:(NSString *)URLString
-                                parameters:(NSDictionary *)parameters
+                                parameters:(id)parameters
                                      error:(NSError * __autoreleasing *)error;
 
 /**
@@ -308,7 +306,7 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
 - (void)appendPartWithInputStream:(NSInputStream *)inputStream
                              name:(NSString *)name
                          fileName:(NSString *)fileName
-                           length:(NSUInteger)length
+                           length:(int64_t)length
                          mimeType:(NSString *)mimeType;
 
 /**

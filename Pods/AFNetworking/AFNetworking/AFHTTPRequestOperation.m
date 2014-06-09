@@ -1,6 +1,6 @@
 // AFHTTPRequestOperation.m
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -168,7 +168,11 @@ static dispatch_group_t http_request_operation_completion_group() {
     [super pause];
 }
 
-#pragma mark - NSCoding
+#pragma mark - NSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 - (id)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
@@ -176,7 +180,7 @@ static dispatch_group_t http_request_operation_completion_group() {
         return nil;
     }
 
-    self.responseSerializer = [decoder decodeObjectForKey:NSStringFromSelector(@selector(responseSerializer))];
+    self.responseSerializer = [decoder decodeObjectOfClass:[AFHTTPResponseSerializer class] forKey:NSStringFromSelector(@selector(responseSerializer))];
 
     return self;
 }

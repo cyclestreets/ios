@@ -9,7 +9,7 @@
 #import "ButtonUtilities.h"
 #import "StyleManager.h"
 #import "ImageUtilties.h"
-#import <Pixate.h>
+#import <Pixate/Pixate.h>
 
 @implementation BUIconButton
 @synthesize index;

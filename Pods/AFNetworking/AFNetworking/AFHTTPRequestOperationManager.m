@@ -1,6 +1,6 @@
 // AFHTTPRequestOperationManager.m
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@
 @implementation AFHTTPRequestOperationManager
 
 + (instancetype)manager {
-    return [[[self class] alloc] initWithBaseURL:nil];
+    return [[self alloc] initWithBaseURL:nil];
 }
 
 - (instancetype)init {
@@ -71,10 +71,6 @@
     self.shouldUseCredentialStorage = YES;
 
     return self;
-}
-
-- (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p, baseURL: %@, operationQueue: %@>", NSStringFromClass([self class]), self, [self.baseURL absoluteString], self.operationQueue];
 }
 
 #pragma mark -
@@ -114,7 +110,7 @@
 #pragma mark -
 
 - (AFHTTPRequestOperation *)GET:(NSString *)URLString
-                     parameters:(NSDictionary *)parameters
+                     parameters:(id)parameters
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -126,7 +122,7 @@
 }
 
 - (AFHTTPRequestOperation *)HEAD:(NSString *)URLString
-                      parameters:(NSDictionary *)parameters
+                      parameters:(id)parameters
                          success:(void (^)(AFHTTPRequestOperation *operation))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -142,7 +138,7 @@
 }
 
 - (AFHTTPRequestOperation *)POST:(NSString *)URLString
-                      parameters:(NSDictionary *)parameters
+                      parameters:(id)parameters
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -154,7 +150,7 @@
 }
 
 - (AFHTTPRequestOperation *)POST:(NSString *)URLString
-                      parameters:(NSDictionary *)parameters
+                      parameters:(id)parameters
        constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
@@ -167,7 +163,7 @@
 }
 
 - (AFHTTPRequestOperation *)PUT:(NSString *)URLString
-                     parameters:(NSDictionary *)parameters
+                     parameters:(id)parameters
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -179,7 +175,7 @@
 }
 
 - (AFHTTPRequestOperation *)PATCH:(NSString *)URLString
-                       parameters:(NSDictionary *)parameters
+                       parameters:(id)parameters
                           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -191,7 +187,7 @@
 }
 
 - (AFHTTPRequestOperation *)DELETE:(NSString *)URLString
-                        parameters:(NSDictionary *)parameters
+                        parameters:(id)parameters
                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -202,7 +198,17 @@
     return operation;
 }
 
-#pragma mark - NSCoding
+#pragma mark - NSObject
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p, baseURL: %@, operationQueue: %@>", NSStringFromClass([self class]), self, [self.baseURL absoluteString], self.operationQueue];
+}
+
+#pragma mark - NSecureCoding
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 - (id)initWithCoder:(NSCoder *)decoder {
     NSURL *baseURL = [decoder decodeObjectForKey:NSStringFromSelector(@selector(baseURL))];
@@ -212,8 +218,8 @@
         return nil;
     }
 
-    self.requestSerializer = [decoder decodeObjectForKey:NSStringFromSelector(@selector(requestSerializer))];
-    self.responseSerializer = [decoder decodeObjectForKey:NSStringFromSelector(@selector(responseSerializer))];
+    self.requestSerializer = [decoder decodeObjectOfClass:[AFHTTPRequestSerializer class] forKey:NSStringFromSelector(@selector(requestSerializer))];
+    self.responseSerializer = [decoder decodeObjectOfClass:[AFHTTPResponseSerializer class] forKey:NSStringFromSelector(@selector(responseSerializer))];
 
     return self;
 }

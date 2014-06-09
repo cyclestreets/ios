@@ -15,7 +15,7 @@
 #import "ButtonUtilities.h"
 #import "UIView+Additions.h"
 #import "GenericConstants.h"
-#import <Pixate.h>
+#import <Pixate/Pixate.h>
 
 @interface RoutesViewController()
 

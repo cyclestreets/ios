@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ButtonUtilities.h"
 #import "StringUtilities.h"
 #import "GenericConstants.h"
-#import <Pixate.h>
+#import <Pixate/Pixate.h>
 
 static NSString *const STRINGID=@"account";
 

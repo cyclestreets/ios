@@ -1,6 +1,6 @@
 // UIWebView+AFNetworking.m
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,8 @@
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 
 #import "AFHTTPRequestOperation.h"
+#import "AFURLResponseSerialization.h"
+#import "AFURLRequestSerialization.h"
 
 @interface UIWebView (_AFNetworking)
 @property (readwrite, nonatomic, strong, setter = af_setHTTPRequestOperation:) AFHTTPRequestOperation *af_HTTPRequestOperation;
@@ -85,7 +87,7 @@
 #pragma mark -
 
 - (void)loadRequest:(NSURLRequest *)request
-           progress:(void (^)(NSUInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progress
+           progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
             success:(NSString * (^)(NSHTTPURLResponse *response, NSString *HTML))success
             failure:(void (^)(NSError *error))failure
 {
@@ -110,7 +112,7 @@
 - (void)loadRequest:(NSURLRequest *)request
            MIMEType:(NSString *)MIMEType
    textEncodingName:(NSString *)textEncodingName
-           progress:(void (^)(NSUInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite))progress
+           progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progress
             success:(NSData * (^)(NSHTTPURLResponse *response, NSData *data))success
             failure:(void (^)(NSError *error))failure
 {

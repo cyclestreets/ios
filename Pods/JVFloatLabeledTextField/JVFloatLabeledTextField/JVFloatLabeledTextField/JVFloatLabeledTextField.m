@@ -27,8 +27,8 @@
 
 #import "JVFloatLabeledTextField.h"
 
-@interface JVFloatLabeledTextField ()
-@end
+#define kFloatingLabelShowAnimationDuration 0.3f
+#define kFloatingLabelHideAnimationDuration 0.3f
 
 @implementation JVFloatLabeledTextField
 
@@ -65,6 +65,8 @@
     _floatingLabel.font = [UIFont boldSystemFontOfSize:12.0f];
     _floatingLabelTextColor = [UIColor grayColor];
     _animateEvenIfNotFirstResponder = NO;
+    _floatingLabelShowAnimationDuration = kFloatingLabelShowAnimationDuration;
+    _floatingLabelHideAnimationDuration = kFloatingLabelHideAnimationDuration;
 }
 
 #pragma mark -
@@ -80,7 +82,8 @@
     return [UIColor blueColor];
 }
 
-- (void) setFloatingLabelFont:(UIFont *)floatingLabelFont {
+- (void)setFloatingLabelFont:(UIFont *)floatingLabelFont
+{
     _floatingLabelFont = floatingLabelFont;
     _floatingLabel.font = (_floatingLabelFont ? _floatingLabelFont : [UIFont boldSystemFontOfSize:12.0f]);
     self.placeholder = self.placeholder; // Force the label to lay itself out with the new font.
@@ -97,7 +100,7 @@
     };
     
     if (animated || _animateEvenIfNotFirstResponder) {
-        [UIView animateWithDuration:0.3f
+        [UIView animateWithDuration:_floatingLabelShowAnimationDuration
                               delay:0.0f
                             options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseOut
                          animations:showBlock
@@ -120,7 +123,7 @@
     };
     
     if (animated || _animateEvenIfNotFirstResponder) {
-        [UIView animateWithDuration:0.3f
+        [UIView animateWithDuration:_floatingLabelHideAnimationDuration
                               delay:0.0f
                             options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseIn
                          animations:hideBlock
@@ -133,13 +136,15 @@
 
 - (void)setLabelOriginForTextAlignment
 {
-    CGFloat originX = _floatingLabel.frame.origin.x;
+    CGRect textRect = [self textRectForBounds:self.bounds];
+    
+    CGFloat originX = textRect.origin.x;
     
     if (self.textAlignment == NSTextAlignmentCenter) {
-        originX = (self.frame.size.width/2) - (_floatingLabel.frame.size.width/2);
+        originX = textRect.origin.x + (textRect.size.width/2) - (_floatingLabel.frame.size.width/2);
     }
     else if (self.textAlignment == NSTextAlignmentRight) {
-        originX = self.frame.size.width - _floatingLabel.frame.size.width;
+        originX = textRect.origin.x + textRect.size.width - _floatingLabel.frame.size.width;
     }
     
     _floatingLabel.frame = CGRectMake(originX, _floatingLabel.frame.origin.y,
@@ -151,8 +156,24 @@
 - (void)setPlaceholder:(NSString *)placeholder
 {
     [super setPlaceholder:placeholder];
-    
+
     _floatingLabel.text = placeholder;
+    [_floatingLabel sizeToFit];
+}
+
+- (void)setAttributedPlaceholder:(NSAttributedString *)attributedPlaceholder
+{
+    [super setAttributedPlaceholder:attributedPlaceholder];
+	
+    _floatingLabel.text = attributedPlaceholder.string;
+    [_floatingLabel sizeToFit];
+}
+
+- (void)setPlaceholder:(NSString *)placeholder floatingTitle:(NSString *)floatingTitle
+{
+    [super setPlaceholder:placeholder];
+
+    _floatingLabel.text = floatingTitle;
     [_floatingLabel sizeToFit];
 }
 

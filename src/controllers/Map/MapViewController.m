@@ -43,6 +43,8 @@
 #import "CSRoutePolyLineOverlay.h"
 #import "CSRoutePolyLineRenderer.h"
 
+#include 
+
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -67,6 +69,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
 @property (nonatomic, strong) UIBarButtonItem						* locationButton;
 @property (nonatomic, strong) UIBarButtonItem						* activeLocationButton;
+@property (nonatomic, strong) UIButton								* activeLocationSubButton;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
 @property (nonatomic, strong) UIBarButtonItem						* routeButton;
 @property (nonatomic, strong) UIBarButtonItem						* changePlanButton;
@@ -365,10 +368,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 														  action:@selector(showWayPointView)];
 	_waypointButton.width = 40;
 	
-	self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
-														   style:UIBarButtonItemStyleBordered
-														  target:self
-														  action:@selector(didSelectLocateUserbutton)];
+	self.activeLocationSubButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+	_activeLocationSubButton.tintColor=[UIColor whiteColor];
+	[_activeLocationSubButton addTarget:self action:@selector(didSelectLocateUserbutton) forControlEvents:UIControlEventTouchUpInside];
+	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_location.png"] forState:UIControlStateNormal];
+	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_waypoint.png"] forState:UIControlStateSelected];
+	self.locationButton = [[UIBarButtonItem alloc] initWithCustomView:_activeLocationSubButton];
+	
+	//self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
+	//													   style:UIBarButtonItemStyleBordered
+	//													  target:self
+	//													  action:@selector(didSelectLocateUserbutton)];
 	_locationButton.width = 40;
 	
 	self.searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
@@ -441,7 +451,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			
 			
 			_searchButton.enabled = YES;
-			_locationButton.style=UIBarButtonItemStyleBordered;
+			_activeLocationSubButton.selected=YES;
 			
 			if([self shouldShowWayPointUI]==YES){
 				items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];

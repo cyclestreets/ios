@@ -1,6 +1,6 @@
 // UIImageView+AFNetworking.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,9 +28,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AFURLResponseSerialization.h"
+@protocol AFURLResponseSerialization, AFImageCache;
 
-@protocol AFImageCache;
+@class AFImageResponseSerializer;
 
 /**
  This category adds methods to the UIKit framework's `UIImageView` class. The methods in this category provide support for loading remote images asynchronously from a URL.

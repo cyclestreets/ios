@@ -10,7 +10,7 @@
 #import "StyleManager.h"
 #import "LayoutBox.h"
 #import "GlobalUtilities.h"
-#import <Pixate.h>
+#import <Pixate/Pixate.h>
 
 @implementation BUSegmentedControl
 @synthesize dataProvider;

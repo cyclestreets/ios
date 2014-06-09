@@ -13,7 +13,7 @@
 #import "GlobalUtilities.h"
 #import "UIView+Additions.h"
 #import "ImageUtilties.h"
-#import <Pixate.h>
+#import <Pixate/Pixate.h>
 
 @implementation ButtonUtilities
 

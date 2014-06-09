@@ -1,77 +1,75 @@
 PODS:
   - A2StoryboardSegueContext (1.0.1)
-  - AFNetworking (2.2.0):
+  - AFNetworking (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.0):
+  - AFNetworking/NSURLConnection (2.2.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.0):
+  - AFNetworking/NSURLSession (2.2.4):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.0)
-  - AFNetworking/Security (2.2.0)
-  - AFNetworking/Serialization (2.2.0)
-  - AFNetworking/UIKit (2.2.0):
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BlocksKit (2.1.0):
+  - BlocksKit (2.2.3):
     - BlocksKit/All
-  - BlocksKit/All (2.1.0):
+  - BlocksKit/All (2.2.3):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
     - BlocksKit/MessageUI
     - BlocksKit/UIKit
-  - BlocksKit/Core (2.1.0)
-  - BlocksKit/DynamicDelegate (2.1.0):
-    - BlocksKit/MiniFFI
-  - BlocksKit/MessageUI (2.1.0):
+  - BlocksKit/Core (2.2.3)
+  - BlocksKit/DynamicDelegate (2.2.3)
+  - BlocksKit/MessageUI (2.2.3):
+    - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - BlocksKit/MiniFFI (2.1.0)
-  - BlocksKit/UIKit (2.1.0):
+  - BlocksKit/UIKit (2.2.3):
+    - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - FMMoveTableView (1.1.2)
-  - JVFloatLabeledTextField (0.0.6)
-  - Pixate (2.0.1)
+  - JVFloatLabeledTextField (0.0.8)
+  - PixateFreestyle (2.1.3)
   - RegexKitLite (4.0)
   - SFHFKeychainUtils (0.0.1)
   - TBXML (1.5)
   - TouchJSON (1.1)
+  - UITintedButton (1.0)
   - ViewDeck (2.3.1)
 
 DEPENDENCIES:
   - A2StoryboardSegueContext
   - AFNetworking (~> 2.0)
-  - BlocksKit (from `https://github.com/pandamonia/BlocksKit.git`, branch `next`)
+  - BlocksKit
   - FMMoveTableView
   - JVFloatLabeledTextField
-  - Pixate
+  - PixateFreestyle
   - RegexKitLite
   - SFHFKeychainUtils
   - TBXML
   - TouchJSON
+  - UITintedButton
   - ViewDeck
 
-EXTERNAL SOURCES:
-  BlocksKit:
-    :branch: next
-    :git: https://github.com/pandamonia/BlocksKit.git
-
 SPEC CHECKSUMS:
-  A2StoryboardSegueContext: c5ee4ebdfcc29ac4e544cbe832f6489cade23213
-  AFNetworking: e8cfd8f3fe3bfe19124a0cc63f4d45752d892a56
-  BlocksKit: 763471d8c54bee40eb8b193978035685f70061a0
-  FMMoveTableView: c4b3590f5af9cac715a53be42d68f60dc0c4b1ca
-  JVFloatLabeledTextField: 5f9a3648e0d215626e3cd7319788dc96354940b4
-  Pixate: d08421b41a5733d9df450286cab97415c71bba4b
-  RegexKitLite: f7af7b4d2b675cd2ec9a4abab6aad6ae1f6499c0
-  SFHFKeychainUtils: e828dbd9eaa509486acf95d8de2ebd414c4b7451
-  TBXML: 0511ac325d83e59d3aefa4bc8cd6cbeff07a8d9e
-  TouchJSON: 9e53f4df141b7f972766292b00b46bccf29f179a
-  ViewDeck: 2cdc67c4b41a10cafc7556b982f028409e33604d
+  A2StoryboardSegueContext: 289f5ffbdb4935682616159f57d039870c253798
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  BlocksKit: 07c8a80f04275efac6a5f8b973782489c083a182
+  FMMoveTableView: b5d2d314e0ca8c029ae59efe2b3a905f30df0557
+  JVFloatLabeledTextField: 16dea87b899a7b62026eb8d8cf9902c08b1953da
+  PixateFreestyle: 0ca9f2c09d8de16db23edab49bdc7fe92e8c5e0a
+  RegexKitLite: 761b4944f23cb8fe20697b2e47be0689fd832c09
+  SFHFKeychainUtils: 6fdda05a86d035db406c7662ec1054814b68f0fd
+  TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
+  TouchJSON: b40940e40e53bb9b1ad60c63e01ed83bff93d53e
+  UITintedButton: 0f8c0683f07b3547003cdac57007ad635e016d07
+  ViewDeck: 654a493fc83928892ce483dea08a5302180aafce
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.33.1
