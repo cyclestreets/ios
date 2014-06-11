@@ -26,7 +26,7 @@
         _imageSize=@"full";
         _mapStyle = @"OpenCycleMap";
         _routeUnit = @"miles";
-		_autoEndRoute=NO;
+		_autoEndRoute=YES;
     }
     return self;
 }
