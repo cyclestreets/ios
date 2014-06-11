@@ -14,6 +14,7 @@
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
 #import "UIActionSheet+BlocksKit.h"
+#include <UIAlertView+BlocksKit.h>
 #import "HCBackgroundLocationManager.h"
 #import "HCSMapViewController.h"
 #import "PickerViewController.h"
@@ -363,6 +364,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 {
     [super viewDidLoad];
 	
+	BOOL applocationAllowed= [[UserLocationManager sharedInstance] appLocationServicesEnabled];
+	if(applocationAllowed==NO){
+		[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
+	}
+	
 	self.displaysConnectionErrors=NO;
 	
 	self.tripManager=[TripManager sharedInstance];
@@ -448,6 +454,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 -(IBAction)didSelectActionButton:(id)sender{
+	
+	
+	BOOL applocationAllowed= [[UserLocationManager sharedInstance] appLocationServicesEnabled];
+	
+	if (applocationAllowed==NO) {
+		
+		UIAlertView *alert=[UIAlertView  bk_alertViewWithTitle:@"Location Disabled" message:@"Location services for this App may be off, please enable in Settings > Privacy > Location to use location based features."];
+		[alert bk_addButtonWithTitle:@"OK" handler:^{
+			
+		}];
+		[alert show];
+		
+		return;
+		
+	}
+	
+	
 	
 	if(_isRecordingTrack == NO){
 		
