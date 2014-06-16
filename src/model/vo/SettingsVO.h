@@ -19,5 +19,5 @@
 @property (nonatomic, strong)		NSString				* imageSize;
 @property (nonatomic)		BOOL							autoEndRoute;
 
-
+@property (nonatomic)		BOOL							migrationKey;
 @end

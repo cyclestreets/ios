@@ -27,6 +27,7 @@
         _mapStyle = @"OpenCycleMap";
         _routeUnit = @"miles";
 		_autoEndRoute=YES;
+		_migrationKey=NO;
     }
     return self;
 }
@@ -41,7 +42,7 @@ static NSString *MAP_STYLE = @"mapStyle";
 static NSString *IMAGE_SIZE = @"imageSize";
 static NSString *ROUTE_UNIT = @"routeUnit";
 static NSString *SHOW_ROUTE_POINT = @"autoEndRoute";
-
+static NSString *MIGRATION_KEY = @"migrationKey";
 
 
 /***********************************************************/
@@ -55,6 +56,7 @@ static NSString *SHOW_ROUTE_POINT = @"autoEndRoute";
     [encoder encodeObject:self.mapStyle forKey:MAP_STYLE];
     [encoder encodeObject:self.routeUnit forKey:ROUTE_UNIT];
     [encoder encodeBool:self.autoEndRoute forKey:SHOW_ROUTE_POINT];
+	[encoder encodeBool:self.migrationKey forKey:MIGRATION_KEY];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
@@ -64,6 +66,7 @@ static NSString *SHOW_ROUTE_POINT = @"autoEndRoute";
         self.routeUnit = [decoder decodeObjectForKey:ROUTE_UNIT];
         self.autoEndRoute = [decoder decodeBoolForKey:SHOW_ROUTE_POINT];
 		self.imageSize=[decoder decodeObjectForKey:IMAGE_SIZE];
+		self.migrationKey = [decoder decodeBoolForKey:MIGRATION_KEY];
     }
     return self;
 }
@@ -76,6 +79,7 @@ static NSString *SHOW_ROUTE_POINT = @"autoEndRoute";
     [theCopy setRouteUnit:[self.routeUnit copy]];
     [theCopy setAutoEndRoute:self.autoEndRoute];
 	[theCopy setImageSize:self.imageSize];
+	[theCopy setMigrationKey:self.migrationKey];
 	
     return theCopy;
 }

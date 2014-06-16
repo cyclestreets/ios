@@ -45,6 +45,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 		for (NSString *key in dict){
 			if([dict valueForKey:key]!=nil){
 				
+				
 				if([key isEqualToString:@"autoEndRoute"]){
 					dataProvider.autoEndRoute=[[dict valueForKey:key] boolValue];
 				}else {
@@ -53,7 +54,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 			}
 				
 		}
+		
+		// migration support
+		if(dict[@"migrationKey"]==nil || [dict[@"migrationKey"] boolValue]==NO){
+			
+			dataProvider.autoEndRoute=YES;
+			
+			dataProvider.migrationKey=YES;
+			
+		}
+		
 	}
+	
+	
+	[self saveData];
 	
 }
 
@@ -65,7 +79,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	[dict setObject:dataProvider.imageSize forKey:@"imageSize"];
 	[dict setObject:dataProvider.mapStyle forKey:@"mapStyle"];
 	[dict setObject:dataProvider.routeUnit forKey:@"routeUnit"];
-	[dict setObject:[NSNumber numberWithBool:dataProvider.autoEndRoute] forKey:@"autoEndRoute"];
+	[dict setObject:@(dataProvider.migrationKey) forKey:@"migrationKey"];
+	[dict setObject:@(dataProvider.autoEndRoute) forKey:@"autoEndRoute"];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setSettings:dict];	
