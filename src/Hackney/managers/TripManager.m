@@ -159,7 +159,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 -(BOOL)doesTripContainUsefulData{
 	
 	if(_currentRecordingTrip)
-		return _currentRecordingTrip.coords.count>0;
+		return _currentRecordingTrip.coords.count>1;
 	
 	return NO;
 }
