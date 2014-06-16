@@ -510,7 +510,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		BOOL doesTripContainUsefulData=[TripManager sharedInstance].doesTripContainUsefulData;
 		
 		if(!doesTripContainUsefulData)
-			sheetTitle=@"This Route currently contains no locations,\r please Continue or Delete";
+			sheetTitle=@"This Route currently contains no useful data,\r please Continue your journey or Delete";
 		
 		__weak __typeof(&*self)weakSelf = self;
 		UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:sheetTitle];
