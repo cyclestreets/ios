@@ -64,6 +64,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(TripManager)
 
 @property (nonatomic, assign) BOOL								isRecording;
 @property (nonatomic, readonly) BOOL							doesTripContainUsefulData;
+@property (nonatomic, readonly) Trip							*pendingAutoCompletedTrip;
 
 
 // getters

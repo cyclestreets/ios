@@ -17,6 +17,7 @@
 #import "CJSONOrderedSerializer.h"
 #import "DataSourceManager.h"
 #import "SettingsManager.h"	
+#import "AppConstants.h"
 
 // use this epsilon for both real-time and post-processing distance calculations
 #define kEpsilonAccuracy		100.0
@@ -138,9 +139,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 -(void)completeTripAutomatically{
 	
+	BOOL saveAllowed=[self doesTripContainUsefulData];
 	
+	if(saveAllowed==NO)
+		return;
 	
-	_currentRecordingTrip.notes=@"Auto completed Trip";
+	_currentRecordingTrip.notes=AUTOCOMPLETEDTRIPNOTE;
 	
 	[self saveTrip:YES];
 	
@@ -154,6 +158,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 }
 
+
+-(Trip*)pendingAutoCompletedTrip{
+	
+	NSArray *pendingTrips=[self pendingAutoCompletedTrips];
+	
+	if(pendingTrips.count>0){
+		
+		Trip *pendingTrip=pendingTrips.firstObject;
+		self.currentRecordingTrip=pendingTrip;
+		
+		return _currentRecordingTrip;
+		
+	}else{
+		
+		return nil;
+		
+	}
+		
+}
 
 
 -(BOOL)doesTripContainUsefulData{
@@ -594,6 +617,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 - (NSArray*)arrayofAllUnsyncedTrips{
 	
 	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"saved != nil AND uploaded = nil"] orderBy:@"start" ascending:NO];
+	
+	return trips;
+}
+
+
+- (NSArray*)pendingAutoCompletedTrips{
+	
+	NSArray *trips=[Trip allForPredicate:[NSPredicate predicateWithFormat:@"notes =%@",AUTOCOMPLETEDTRIPNOTE]];
 	
 	return trips;
 }

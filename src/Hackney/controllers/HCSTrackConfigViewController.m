@@ -99,6 +99,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[notifications addObject:HCS_TRIPCOMPLETE];
 	[notifications addObject:MAPUNITCHANGED];
 	
+	[notifications addObject:UIApplicationWillEnterForegroundNotification];
+	
+	
 	[super listNotificationInterests];
 	
 }
@@ -121,6 +124,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	if([name isEqualToString:MAPUNITCHANGED]){
 		[self didNotificationMapUnitChanged];
+	}
+	
+	
+	if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
+		
+		
 	}
 	
 }
@@ -424,6 +433,18 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
+-(void)updateUIForPendinAutoCompletedTrip{
+	
+	Trip *pendingTrip=[TripManager sharedInstance].pendingAutoCompletedTrip;
+	
+	if(pendingTrip!=nil){
+		
+		[self displaySaveTripUI];
+				
+	}
+	
+}
+
 
 
 
@@ -548,30 +569,40 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		
 		[self pauseTrip:YES];
 		
-		UINavigationController *nav=nil;
-		
-		if([[UserManager sharedInstance] hasUserData]){
-			
-			PickerViewController *tripPurposePickerView = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
-			tripPurposePickerView.delegate=self;
-			
-			nav=[[UINavigationController alloc]initWithRootViewController:tripPurposePickerView];
-			
-		}else{
-			
-			HCSUserDetailsViewController *userController=[[HCSUserDetailsViewController alloc]initWithNibName:[HCSUserDetailsViewController nibName] bundle:nil];
-			userController.tripDelegate=self;
-			userController.viewMode=HCSUserDetailsViewModeSave;
-			nav=[[UINavigationController alloc]initWithRootViewController:userController];
-			
-		}
-		
-		[self.navigationController presentViewController:nav animated:YES completion:^{
-			
-		}];
+		[self displaySaveTripUI];
 		
 	}
     
+}
+
+
+
+-(void)displaySaveTripUI{
+	
+	
+	UINavigationController *nav=nil;
+	
+	if([[UserManager sharedInstance] hasUserData]){
+		
+		PickerViewController *tripPurposePickerView = [[PickerViewController alloc] initWithNibName:@"TripPurposePicker" bundle:nil];
+		tripPurposePickerView.delegate=self;
+		
+		nav=[[UINavigationController alloc]initWithRootViewController:tripPurposePickerView];
+		
+	}else{
+		
+		HCSUserDetailsViewController *userController=[[HCSUserDetailsViewController alloc]initWithNibName:[HCSUserDetailsViewController nibName] bundle:nil];
+		userController.tripDelegate=self;
+		userController.viewMode=HCSUserDetailsViewModeSave;
+		nav=[[UINavigationController alloc]initWithRootViewController:userController];
+		
+	}
+	
+	[self.navigationController presentViewController:nav animated:YES completion:^{
+		
+	}];
+	
+	
 }
 
 

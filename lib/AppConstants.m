@@ -110,6 +110,7 @@ NSString *const HCS_TRIPCOMPLETE=@"HCS_TRIPCOMPLETE";
 NSString *const HACKNEYTRIPUPLOAD=@"HackneyTripUpload";
 NSString *const HCS_TRIPNOCOORDS=@"HCS_TRIPNOCOORDS";
 
+NSString *const AUTOCOMPLETEDTRIPNOTE=@"Auto completed Trip";
 
 
 @implementation AppConstants

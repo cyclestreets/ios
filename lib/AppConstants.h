@@ -124,6 +124,8 @@ extern NSString *const CYCLESTREETSURLSCHEME;
 extern NSString *const HCS_TRIPCOMPLETE;
 extern NSString *const HACKNEYTRIPUPLOAD;
 extern NSString *const HCS_TRIPNOCOORDS;
+
+extern NSString *const AUTOCOMPLETEDTRIPNOTE;
  
 
 @interface AppConstants : NSObject {
