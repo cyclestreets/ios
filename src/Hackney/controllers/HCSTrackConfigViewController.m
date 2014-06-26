@@ -129,6 +129,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	
 	if ([notification.name isEqualToString:UIApplicationWillEnterForegroundNotification]) {
 		
+		[self updateUIForAnyPendingAutoCompletedTrip];
 		
 	}
 	
@@ -433,7 +434,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
 
--(void)updateUIForPendinAutoCompletedTrip{
+-(void)updateUIForAnyPendingAutoCompletedTrip{
 	
 	Trip *pendingTrip=[TripManager sharedInstance].pendingAutoCompletedTrip;
 	
