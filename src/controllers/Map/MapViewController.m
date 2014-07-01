@@ -632,6 +632,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if(_uiState==MapPlanningStateLocating){
 		
 		[self addWayPointAtCoordinate:_lastLocation.coordinate];
+			
 		
 		if(_uiState!=MapPlanningStateRoute)
 			[self updateUItoState:_previousUIState];
@@ -860,7 +861,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	
 	//explicit click while autolocation was happening. Turn off auto, accept click.
-	if (!_programmaticChange) {
+	if (_programmaticChange) {
 		if (_uiState==MapPlanningStateLocating) {
 			[self didSelectLocateUserbutton];
 		}
