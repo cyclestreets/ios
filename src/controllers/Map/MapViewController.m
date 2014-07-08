@@ -43,7 +43,6 @@
 #import "CSRoutePolyLineOverlay.h"
 #import "CSRoutePolyLineRenderer.h"
 
-#include 
 
 
 #import <Crashlytics/Crashlytics.h>
@@ -372,7 +371,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_activeLocationSubButton.tintColor=[UIColor whiteColor];
 	[_activeLocationSubButton addTarget:self action:@selector(didSelectLocateUserbutton) forControlEvents:UIControlEventTouchUpInside];
 	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_location.png"] forState:UIControlStateNormal];
-	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_waypoint.png"] forState:UIControlStateSelected];
+	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_gpsactive.png"] forState:UIControlStateSelected];
 	self.locationButton = [[UIBarButtonItem alloc] initWithCustomView:_activeLocationSubButton];
 	
 	//self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
@@ -432,10 +431,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			
 		case MapPlanningStateNoRoute:
 		{
-			//BetterLog(@"MapPlanningStateNoRoute");
+			BetterLog(@"MapPlanningStateNoRoute");
 			
 			_searchButton.enabled = YES;
-			_locationButton.style=UIBarButtonItemStyleBordered;
+			_activeLocationSubButton.selected=NO;
 			
 			CLS_LOG(@"MapPlanningStateNoRoute toolbar items %@,%@,%@,%@", _locationButton,_searchButton, _leftFlex, _rightFlex);
 			
@@ -447,7 +446,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 		case MapPlanningStateLocating:
 		{
-			//BetterLog(@"MapPlanningStateLocating");
+			BetterLog(@"MapPlanningStateLocating");
 			
 			
 			_searchButton.enabled = YES;
@@ -471,10 +470,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 		case MapPlanningStateStartPlanning:
 		{
-			//BetterLog(@"MapPlanningStateStartPlanning");
+			BetterLog(@"MapPlanningStateStartPlanning");
 			
 			_searchButton.enabled = YES;
-			_locationButton.style=UIBarButtonItemStyleBordered;
+			_activeLocationSubButton.selected=NO;
 			
 			CLS_LOG(@"MapPlanningStateStartPlanning toolbar items %@,%@,%@", _locationButton,_searchButton, _leftFlex);
 			
@@ -486,11 +485,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 		case MapPlanningStatePlanning:
 		{
-			//BetterLog(@"MapPlanningStatePlanning");
+			BetterLog(@"MapPlanningStatePlanning");
 			
 			_routeButton.title = @"Plan route";
 			_searchButton.enabled = YES;
-			_locationButton.style=UIBarButtonItemStyleBordered;
+			_activeLocationSubButton.selected=NO;
 			
 			CLS_LOG(@"MapPlanningStatePlanning toolbar items %@,%@,%@,%@,%@", _waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton);
 			
@@ -501,10 +500,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			
 		case MapPlanningStateRoute:
 		{
-			//BetterLog(@"MapPlanningStateRoute");
+			BetterLog(@"MapPlanningStateRoute");
 			
 			_routeButton.title = @"New route";
-			_locationButton.style=UIBarButtonItemStyleBordered;
+			_activeLocationSubButton.selected=NO;
 			_searchButton.enabled = YES;
 			
 			CLS_LOG(@"MapPlanningStateRoute toolbar items %@,%@,%@,%@,%@", _locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton);

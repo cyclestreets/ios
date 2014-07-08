@@ -74,6 +74,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 	[self appendStartUpView];
 	
+	
 	_startupmanager=[[StartupManager alloc]init];
 	_startupmanager.delegate=self;
 	[_startupmanager doStartupSequence];
