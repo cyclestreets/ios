@@ -10,4 +10,7 @@
 
 @interface CSRouteSegmentAnnotationView : MKAnnotationView
 
+
+-(void)updateAnnotationAngle;
+
 @end

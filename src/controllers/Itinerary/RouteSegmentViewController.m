@@ -478,7 +478,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		if (annotationView == nil){
 			annotationView = [[CSRouteSegmentAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
 			annotationView.enabled=NO;
-			
+			annotationView.annotation = annotation;
 		} else {
 			annotationView.annotation = annotation;
 		}
@@ -494,7 +494,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		if (annotationView == nil){
 			annotationView = [[CSPhotomapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
 			annotationView.enabled=YES;
-			
+			annotationView.annotation = annotation;
 		} else {
 			annotationView.annotation = annotation;
 		}
@@ -647,8 +647,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_startAnnotation.coordinate=start;
 	_endAnnotation.coordinate=end;
 	
+	CSRouteSegmentAnnotationView *startView=[self fetchAnnotationViewForAnnotation:_startAnnotation];
 	_startAnnotation.annotationAngle=startAngle;
+	[startView updateAnnotationAngle];
+	
+	CSRouteSegmentAnnotationView *endView=[self fetchAnnotationViewForAnnotation:_endAnnotation];
 	_endAnnotation.annotationAngle=endAngle;
+	[endView updateAnnotationAngle];
 	
 	
 }
@@ -674,6 +679,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_startAnnotation.coordinate=start;
 	_endAnnotation.coordinate=end;
 	
+	
+}
+
+
+
+-(CSRouteSegmentAnnotationView*)fetchAnnotationViewForAnnotation:(CSRouteSegmentAnnotation*)aAnnotation{
+	
+	CSRouteSegmentAnnotationView* anView = (CSRouteSegmentAnnotationView*)[_mapView viewForAnnotation: aAnnotation];
+	return anView;
 	
 }
 

@@ -67,4 +67,30 @@
 	
 }
 
+
+-(void)updateAnnotationAngle{
+	
+	CSRouteSegmentAnnotation* annotation=self.annotation;
+	
+	switch (annotation.wayPointType) {
+		case WayPointTypeStart:
+		{
+			UIImage *i=[UIImage imageNamed:@"CSIcon_MapArrow_start.png"];
+			self.image=[UIImage rotateImage:i byDegrees:annotation.annotationAngle];
+			
+		}
+			
+			break;
+		case WayPointTypeFinish:
+		{
+			UIImage *i=[UIImage imageNamed:@"CSIcon_MapArrow_end.png"];
+			self.image=[UIImage rotateImage:i byDegrees:annotation.annotationAngle];
+		}
+			
+			break;
+			
+	}
+	
+}
+
 @end

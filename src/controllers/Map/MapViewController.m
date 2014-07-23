@@ -544,7 +544,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 //------------------------------------------------------------------------------------
 
 
-// called continuously as map locates user
+// called continuously as map locates user via showsUserLocation=YES
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
 	[self locationDidComplete:userLocation];
@@ -558,8 +558,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	if(_uiState==MapPlanningStateLocating){
 		
-		_mapView.showsUserLocation=NO;
-		
 		_programmaticChange=NO;
 		
 		[self updateUItoState:_previousUIState];
@@ -570,6 +568,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 		_mapView.showsUserLocation=NO;
 		_mapView.showsUserLocation=YES;
+		
 		
 		[self updateUItoState:MapPlanningStateLocating];
 		
@@ -604,7 +603,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 
 	if(_uiState!=MapPlanningStateRoute){
-		[self updateUItoState:_previousUIState];
 		[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 	}else{
 		
@@ -630,13 +628,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 	if(_uiState==MapPlanningStateLocating){
 		
-		[self addWayPointAtCoordinate:_lastLocation.coordinate];
+		[self assessWayPointAddition:_lastLocation.coordinate];
 			
 		
 		if(_uiState!=MapPlanningStateRoute)
 			[self updateUItoState:_previousUIState];
 		
 		[self assessUIState];
+		
+	}else{
+		_programmaticChange=NO;
+		[self updateUItoState:_previousUIState];
 		
 	}
 		
@@ -848,7 +850,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	BOOL acceptWaypoint=YES;
 	
 	// location is too near any other locations> reject
-	if (_uiState==MapPlanningStatePlanning || _uiState==MapPlanningStateStartPlanning) {
+	//if (_uiState==MapPlanningStatePlanning || _uiState==MapPlanningStateStartPlanning) {
 		
 		acceptWaypoint=[self assesWaypointLocationDistance:cooordinate];
 		
@@ -856,7 +858,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Point error" andMessage:@"Touch somewhere else or select a different Search location to set this point further away." andDelay:3 andAllowTouch:NO];
 			return;
 		}
-	}
+	//}
 	
 	
 	//explicit click while autolocation was happening. Turn off auto, accept click.
