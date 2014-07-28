@@ -28,14 +28,17 @@
 #import "SettingsManager.h"
 #import "CoreDataStore.h"
 #import "NSTimer+BUPausable.h"
+#import "RouteLineView.h"
 
+#import "Coord.h"
+#import "CSPointVO.h"
 
 #import <CoreLocation/CoreLocation.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 
-@interface HCSTrackConfigViewController ()<RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,HCBackgroundLocationManagerDelegate>
+@interface HCSTrackConfigViewController ()<RMMapViewDelegate,UIActionSheetDelegate,UIPickerViewDelegate,HCBackgroundLocationManagerDelegate,PointListProvider>
 
 
 // hackney
@@ -45,6 +48,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 
 @property (nonatomic, strong) IBOutlet RMMapView						* mapView;//map of current area
 @property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;// map type label
+@property (nonatomic,weak) IBOutlet RouteLineView						*routeLineView;
 
 
 @property(nonatomic,weak) IBOutlet UILabel								*trackDurationLabel;
@@ -164,6 +168,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 	[self resetDurationDisplays];
 	
 	[self resetTimer];
+	
+	[_routeLineView setNeedsDisplay];
 }
 
 
@@ -220,6 +226,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		[self updateUIForDistance];
 		
 		[self updateUIForSpeed];
+		
+		[_routeLineView setNeedsDisplay];
 		
 	}
 	
@@ -379,6 +387,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate]];
 	}
 	
+	_routeLineView.pointListProvider=self;
+	
 	self.displaysConnectionErrors=NO;
 	
 	self.tripManager=[TripManager sharedInstance];
@@ -467,8 +477,32 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 }
 
 - (void) afterMapChanged: (RMMapView*) map {
-		
+	if (_isRecordingTrack)
+		[_routeLineView setNeedsDisplay];
 }
+
+
+#pragma mark - Route line point list provider
+
+- (NSArray *) pointList {
+	NSMutableArray *points = [[NSMutableArray alloc] initWithCapacity:10];
+	if ([TripManager sharedInstance].currentRecordingTrip == nil) {
+		return points;
+	}
+	
+	NSOrderedSet *coords=[TripManager sharedInstance].currentRecordingTrip.coords;
+	
+	for (Coord *coord in coords) {
+		
+		CSPointVO *point=[[CSPointVO alloc]init];
+		CGPoint pt = [_mapView coordinateToPixel:CLLocationCoordinate2DMake([coord.latitude doubleValue], [coord.longitude doubleValue])];
+		point.p = pt;
+		[points addObject:point];
+	}
+	
+	return points;
+}
+
 
 
 
