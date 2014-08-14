@@ -24,7 +24,8 @@
 
 #if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
 
-#import "AFHTTPRequestOperation.h"
+#import "AFURLRequestSerialization.h"
+#import "AFURLResponseSerialization.h"
 
 #import <Availability.h>
 #import <Security/Security.h>
@@ -290,7 +291,11 @@
     if (!configuration) {
         NSString *configurationIdentifier = [decoder decodeObjectOfClass:[NSString class] forKey:@"identifier"];
         if (configurationIdentifier) {
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1100)
+            configuration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:configurationIdentifier];
+#else
             configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:configurationIdentifier];
+#endif
         }
     }
 
