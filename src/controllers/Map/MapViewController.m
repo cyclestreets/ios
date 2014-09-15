@@ -1353,8 +1353,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 				button.userInteractionEnabled=NO;
 			}else if ([buttonText isEqualToString:@"cancel"]){
                 button.titleLabel.textColor = UIColorFromRGB(0xB20003);
+				[button setTitleColor:UIColorFromRGB(0x509720) forState:UIControlStateHighlighted];
             }else{
-				button.titleLabel.highlightedTextColor=UIColorFromRGB(0x509720);
+				[button setTitleColor:UIColorFromRGB(0x509720) forState:UIControlStateHighlighted];
 				button.titleLabel.textColor = [UIColor darkGrayColor];
 			}
         }
