@@ -547,7 +547,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // called continuously as map locates user via showsUserLocation=YES
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
-	[self locationDidComplete:userLocation];
+	// as this method is called constantly from the MapView we need to filter out any same location values
+	if([UserLocationManager isSignificantLocationChange:userLocation.coordinate newLocation:self.lastLocation.coordinate accuracy:4])
+		[self locationDidComplete:userLocation];
 	
 }
 
@@ -565,7 +567,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}else{
 		
 		_programmaticChange=YES;
-		
+		self.lastLocation=nil; // nil out the saved location so that locationDidComplete will execute the map update
 		_mapView.showsUserLocation=NO;
 		_mapView.showsUserLocation=YES;
 		
@@ -596,8 +598,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 -(void)locationDidComplete:(MKUserLocation *)userLocation{
 	
 	BetterLog(@"");
-	
-	
 	
 	self.lastLocation=userLocation.location;
 	
@@ -1052,6 +1052,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
 	
 	BetterLog(@"");
+	
+	// if an annotation is active, do not add a new one, we must wait for the annotation to be deselected
+	if(_selectedAnnotation!=nil)
+		return;
 	
 	CGPoint touchPoint = [recogniser locationInView:self.mapView];
     CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
