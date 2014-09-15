@@ -89,7 +89,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic,strong)  CSRoutePolyLineOverlay				* routeOverlay;
 @property (nonatomic,strong)  CSRoutePolyLineRenderer				* routeOverlayRenderer;
 @property (nonatomic,strong)  CSMapSource							* activeMapSource;
-
+@property (nonatomic,strong)  CLLocationManager						*locationManager;
 
 
 // sub views
@@ -159,6 +159,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[notifications addObject:GPSLOCATIONCOMPLETE];
 	[notifications addObject:GPSLOCATIONUPDATE];
 	[notifications addObject:GPSLOCATIONFAILED];
+	[notifications addObject:GPSSYSTEMLOCATIONCOMPLETE];
 	
 	
 	[super listNotificationInterests];
@@ -185,6 +186,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 	if([name isEqualToString:CSMAPSTYLECHANGED]){
 		[self didNotificationMapStyleChanged];
+	}
+	
+	if([name isEqualToString:GPSSYSTEMLOCATIONCOMPLETE]){
+		[self userLocationDidComplete];
 	}
 	
 }
@@ -308,7 +313,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	_attributionLabel.textAlignment=NSTextAlignmentRight;
 	_attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000, .1);
-    
+	
+	[[UserLocationManager sharedInstance] requestAuthorisation];
+	
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	[self didNotificationMapStyleChanged];
@@ -335,13 +342,26 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_mapTapRecognizer.delaysTouchesBegan=YES;
 	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
-	//TODO: logic for map if no selected route exists
+//	BOOL hasSelectedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
+//	
+//	if(!hasSelectedRoute){
+//		_mapView.showsUserLocation=YES;
+//	}
+}
+
+
+- (void)userLocationDidComplete{
+	
 	BOOL hasSelectedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
 	
 	if(!hasSelectedRoute){
 		_mapView.showsUserLocation=YES;
 	}
+	
+	[self removeNotification:GPSSYSTEMLOCATIONCOMPLETE];
+	
 }
+
 
 
 -(void)createNonPersistentUI{
@@ -1126,10 +1146,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	 static NSString *reuseId = @"CSWaypointAnnotationView";
 	 CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
 	
-	//TODO: logic to ensure reused annotationviews have the right state
-	// this occurs due to re creation of annotations if one is removed
-	// or if a route is loaded
-	
 	 if (annotationView == nil){
 		 
 		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
@@ -1138,7 +1154,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		 annotationView.selected=YES;
 		 annotationView.canShowCallout=YES;
 		 
-		 UIButton *calloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 50)];
+		 UIButton *calloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
 		 [calloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
 		 calloutButton.backgroundColor=[UIColor redColor];
 		 annotationView.rightCalloutAccessoryView=calloutButton;

@@ -11,6 +11,7 @@
 #import "UserLocationManager.h"
 #import "DeviceUtilities.h"
 #import "GlobalUtilities.h"
+#import "GenericConstants.h"
 
 @interface UserLocationManager(Private)
 
@@ -219,7 +220,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 -(void)requestAuthorisation{
 	
-	[locationManager requestWhenInUseAuthorization];
+	#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+	if(IS_OS_8_OR_LATER){
+		[locationManager requestAlwaysAuthorization];
+		[self startUpdatingLocationForSubscriber:SYSTEM];
+	}
 	
 }
 
@@ -237,7 +242,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			self.locationManager = [[CLLocationManager alloc] init];
 			locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 			locationManager.distanceFilter =kCLDistanceFilterNone;
-            locationManager.delegate=self;
+			locationManager.delegate=self;
+		
     }
 		
 }
@@ -486,6 +492,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	if(subscriberId==SYSTEM){
 		
 		[self removeAllSubscribers];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:GPSSYSTEMLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
 		
 	}else{
 		
