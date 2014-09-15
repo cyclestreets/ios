@@ -73,9 +73,11 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	
 	self.searchDisplayController.searchResultsTableView.rowHeight=[MapLocationSearchCellView rowHeight];
 	
-    self.view.backgroundColor                                  = [UIColor whiteColor];
+    self.view.backgroundColor                                  = UIColorFromRGB(0x509720);
     self.searchDisplayController.active                        = YES;
-    self.searchDisplayController.searchBar.tintColor           = UIColorFromRGB(0x008000);
+    self.searchDisplayController.searchBar.tintColor           = UIColorFromRGB(0xFFFFFF);
+	self.searchDisplayController.searchBar.translucent=NO;
+	self.searchDisplayController.searchBar.barTintColor			= UIColorFromRGB(0x509720);
     self.searchDisplayController.searchBar.scopeButtonTitles   = [NSArray arrayWithObjects:@"Local", @"National", nil];
     self.searchDisplayController.searchBar.showsScopeBar       = YES;
     self.searchDisplayController.searchBar.showsBookmarkButton = NO;
@@ -158,12 +160,12 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 	}
 	
 	NSString *bounds = [NSString
-						stringWithFormat:@"w=%f&n=%f&e=%f&s=%f&zoom=%d",
+						stringWithFormat:@"w=%f&n=%f&e=%f&s=%f&zoom=%ld",
 						centreLocation.longitude - range, //left
 						centreLocation.latitude + range, //top
 						centreLocation.longitude + range, //right
 						centreLocation.latitude - range, //bottom
-						zoom]; //zoom
+						(long)zoom]; //zoom
 	
 	NSString *url = [NSString
 					 stringWithFormat:format,
