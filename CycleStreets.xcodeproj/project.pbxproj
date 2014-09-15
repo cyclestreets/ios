@@ -3497,6 +3497,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (4YM8CCJL5J)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -3533,6 +3534,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -3568,6 +3570,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

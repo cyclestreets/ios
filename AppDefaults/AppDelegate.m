@@ -38,6 +38,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UIView+Additions.h"
 #import "StartupManager.h"
 #import "NSString-Utilities.h"
+#import "GenericConstants.h"
 
 #if defined (CONFIGURATION_Adhoc)
 #import "TestFlight.h"
@@ -137,6 +138,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[_window makeKeyAndVisible];	
 	
 	[self removeStartupView];
+	
+	
+	UINavigationController *mController=_tabBarController.moreNavigationController;
+	[mController.view setTintColor:[UIColor grayColor]];
 	
 	
 }
