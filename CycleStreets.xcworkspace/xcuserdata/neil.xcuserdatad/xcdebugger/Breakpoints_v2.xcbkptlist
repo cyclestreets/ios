@@ -183,13 +183,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/controllers/Map/MapViewController.m"
-            timestampString = "432464311.244309"
+            filePath = "src/controllers/PhotoMap/PhotoMapViewController.m"
+            timestampString = "432469939.073468"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "-didNotificationMapStyleChanged"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-didRecievePhotoResponse:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/managers/PhotoManager.m"
+            timestampString = "432469010.367222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:fordataID:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

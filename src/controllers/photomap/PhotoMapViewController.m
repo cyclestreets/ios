@@ -45,6 +45,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPhotomapAnnotation.h"
 #import "CSPhotomapAnnotationView.h"
 #import <MapKit/MapKit.h>
+#import "CSMapSource.h"
 
 #import "PhotoWizardViewController.h"
 
@@ -64,6 +65,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
 
 @property (nonatomic, assign) BOOL										photomapQuerying;
+
+@property (nonatomic,strong)  CSMapSource								* activeMapSource;
+
 
 
 -(void)didRecievePhotoResponse:(NSDictionary*)dict;
@@ -93,8 +97,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	[self initialise];
     
-    [notifications addObject:MAPSTYLECHANGED];
-	[notifications addObject:RETREIVEROUTEPHOTOSRESPONSE];
+    [notifications addObject:CSMAPSTYLECHANGED];
+	[notifications addObject:RETREIVELOCATIONPHOTOSRESPONSE];
 	
 	
 	[super listNotificationInterests];
@@ -109,11 +113,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	NSString		*name=notification.name;
 	
-    if([name isEqualToString:MAPSTYLECHANGED]){
+    if([name isEqualToString:CSMAPSTYLECHANGED]){
         [self didNotificationMapStyleChanged];
     }
 	
-	if([name isEqualToString:RETREIVEROUTEPHOTOSRESPONSE]){
+	if([name isEqualToString:RETREIVELOCATIONPHOTOSRESPONSE]){
         [self didRecievePhotoResponse:notification.object];
     }
 	
@@ -124,20 +128,70 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void) didNotificationMapStyleChanged {
 	
+	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
-	for(id <MKOverlay> overlay in overlays){
-		if([overlay isKindOfClass:[MKTileOverlay class]] ){
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
+	self.activeMapSource=[CycleStreets activeMapSource];
+	
+	//	UILabel *mkAttributionLabel = [_mapView.subviews objectAtIndex:1];
+	
+	if(overlays.count==0){
+		
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+			
+			
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
 			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-			[_mapView removeOverlay:overlay];
-			[_mapView addOverlay:newoverlay];
-			break;
+			newoverlay.maximumZ=_activeMapSource.maxZoom;
+			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+			
+			
 		}
+		
+	}else{
+		
+		for(id <MKOverlay> overlay in overlays){
+			if([overlay isKindOfClass:[MKTileOverlay class]] ){
+				
+				
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+					
+					
+					[_mapView removeOverlay:overlay];
+					
+					break;
+					
+				}else{
+					
+					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
+					newoverlay.canReplaceMapContent = YES;
+					newoverlay.maximumZ=_activeMapSource.maxZoom;
+					[_mapView removeOverlay:overlay];
+					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
+					
+					
+					break;
+					
+				}
+				
+				
+				break;
+			}
+		}
+		
 	}
 	
+	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+		
+		_attributionLabel.visible=NO;
+		//mkAttributionLabel.visible=YES;
+		
+	}else{
+		_attributionLabel.visible=YES;
+		//mkAttributionLabel.visible=NO;
+		_attributionLabel.text = _activeMapSource.shortAttribution;
+		
+	}
 	
-	_attributionLabel.text = [CycleStreets mapAttribution];
 }
 
 
@@ -249,13 +303,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	displaysConnectionErrors=NO;
 	
-	MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:[CycleStreets tileTemplate]];
-	newoverlay.canReplaceMapContent = YES;
-	newoverlay.maximumZ=MAX_ZOOM_LOCATION;
-	[self.mapView addOverlay:newoverlay level:MKOverlayLevelAboveLabels];
+	
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	_mapView.showsUserLocation=YES;
+	
+	[self didNotificationMapStyleChanged];
 	
 	_attributionLabel.text = [CycleStreets mapAttribution];
 	
@@ -273,8 +326,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 -(void)createNonPersistentUI{
     
-   
-    
+	[self requestPhotos];
+	
 }
 
 
