@@ -42,7 +42,7 @@
 +(NSString*)extractDayStringFromDate:(NSString*)date;
 
 +(NSString*)urlFromGETURL:(NSString*)url;
-+(NSString*)createCurrencyStringForValue:(NSString*)strvalue useSystemCurrency:(BOOL)useSystem usingSymbol:(NSString*)symbol useCurrencyScale:(int)currencyScale useGrouping:(BOOL)useGrouping;
++(NSString*)createCurrencyStringForValue:(NSString*)strvalue useSystemCurrency:(BOOL)useSystem usingSymbol:(NSString*)symbol useCurrencyScale:(NSInteger)currencyScale useGrouping:(BOOL)useGrouping;
 +(NSString*)scaledCurrencyValue:(double)value;
 +(NSString*)convertCurrencyIdentifierToSymbol:(NSString*)identifier;
 +(NSString*)formattedCreditCardNumber:(NSString*)cardnumber;

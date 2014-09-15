@@ -62,7 +62,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
-@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate,LocationReceiver>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
@@ -206,7 +206,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	self.activeMapSource=[CycleStreets activeMapSource];
 	
-	UILabel *mkAttributionLabel = [_mapView.subviews objectAtIndex:1];
+//	UILabel *mkAttributionLabel = [_mapView.subviews objectAtIndex:1];
 	
 	if(overlays.count==0){
 		
@@ -257,11 +257,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
 		
 		_attributionLabel.visible=NO;
-		mkAttributionLabel.visible=YES;
+		//mkAttributionLabel.visible=YES;
 		
 	}else{
 		_attributionLabel.visible=YES;
-		mkAttributionLabel.visible=NO;
+		//mkAttributionLabel.visible=NO;
 		_attributionLabel.text = _activeMapSource.shortAttribution;
 		
 	}
@@ -1088,7 +1088,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	}
 		
 	
-	BetterLog(@"From %i to %i",oldState, newState);
+	BetterLog(@"From %lu to %lu",oldState, newState);
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
 		
@@ -1270,8 +1270,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	if (self.mapLocationSearchView == nil) {
 		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
+		
 	}
-	//_mapLocationSearchView.locationReceiver = self;
+	_mapLocationSearchView.locationReceiver = self;
 	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
 	
 	[self presentModalViewController:_mapLocationSearchView	animated:YES];

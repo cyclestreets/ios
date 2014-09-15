@@ -93,4 +93,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 
 +(void)reverseGeoCodeLocation:(CLLocation*)location;
 
+-(void)requestAuthorisation;
+
 @end

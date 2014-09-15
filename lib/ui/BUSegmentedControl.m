@@ -103,7 +103,7 @@
 }
 
 
--(void)setSelectedSegmentIndex:(int)index{
+-(void)setSelectedSegmentIndex:(NSInteger)index{
 	
 	if(index<[dataProvider count]){
 		
@@ -113,7 +113,7 @@
 	
 }
 
--(void)selectItemAtIndex:(int)index{
+-(void)selectItemAtIndex:(NSInteger)index{
 	
 	if(selectedIndex!=index){
 		
@@ -134,7 +134,7 @@
 
 -(IBAction)itemWasSelected:(id)sender{
 	
-	int index=[items indexOfObject:sender];
+	NSInteger index=[items indexOfObject:sender];
 		
 	[self selectItemAtIndex:index];
 	
@@ -146,7 +146,7 @@
 
 
 
--(void)removeSegmentAt:(int)index{
+-(void)removeSegmentAt:(NSInteger)index{
 	
 	if(index<[items count]){
 	
@@ -158,7 +158,7 @@
 }
 
 
--(void)addSegmentAt:(int)index{
+-(void)addSegmentAt:(NSInteger)index{
 	
 	
 	

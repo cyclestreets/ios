@@ -84,9 +84,9 @@
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[_dataProvider speed]];
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[labelarr addObject:[NSString stringWithFormat:@"%2d mph", mileSpeed]];
+		[labelarr addObject:[NSString stringWithFormat:@"%2ld mph", (long)mileSpeed]];
 	}else {
-		[labelarr addObject:[NSString stringWithFormat:@"%2d kmh", [_dataProvider speed]]];
+		[labelarr addObject:[NSString stringWithFormat:@"%2ld kmh", (long)[_dataProvider speed]]];
 	}
     
     
@@ -108,7 +108,7 @@
 	
 	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont systemFontOfSize:16]   :255 :NSLineBreakByWordWrapping];
 	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :270 :NSLineBreakByClipping];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%li",(long)[route time]] :[UIFont systemFontOfSize:13] :270 :NSLineBreakByClipping];
 	height+=7;
 	
 	return [NSNumber numberWithInt:height];

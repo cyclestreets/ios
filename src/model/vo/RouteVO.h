@@ -42,8 +42,8 @@
 @property (nonatomic, readonly)	NSString                  * calorieString;
 @property (nonatomic, readonly)	NSString                  * coString;
 
-@property (nonatomic, readonly)	int                       numSegments;
-@property (nonatomic, readonly)	int                       coordCount;
+@property (nonatomic, readonly)	NSInteger					numSegments;
+@property (nonatomic, readonly)	NSInteger                       coordCount;
 @property (nonatomic, readonly)	CLLocationCoordinate2D    basicNorthEast;
 @property (nonatomic, readonly)	CLLocationCoordinate2D    basicSouthWest;
 @property (nonatomic, readonly)	CLLocationCoordinate2D    insetNorthEast;
@@ -68,7 +68,7 @@
 @property (nonatomic, readonly)	NSDate                    * dateObject;
 
 
-- (SegmentVO *) segmentAtIndex:(int)index;
+- (SegmentVO *) segmentAtIndex:(NSInteger)index;
 -(NSMutableArray*)createCorrectedWaypointArray;
 
 // returns max bounding locations for self compared to location

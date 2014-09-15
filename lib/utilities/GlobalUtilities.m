@@ -362,7 +362,7 @@
 									  timeoutInterval:30.0 ];
 		
 		NSString *parameterString=[parameters urlEncodedString];
-		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
+		NSString *msgLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		[request setHTTPMethod:@"POST"];
 		

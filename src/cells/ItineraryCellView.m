@@ -54,7 +54,7 @@
 	NSMutableArray *arr=[[NSMutableArray alloc] init];
 	
 	[arr addObject:[_dataProvider timeString]];
-	[arr addObject:[NSString stringWithFormat:@"%4dm", [_dataProvider segmentDistance]]];
+	[arr addObject:[NSString stringWithFormat:@"%4ldm", (long)[_dataProvider segmentDistance]]];
 	
 	float totalMiles = ((float)([_dataProvider startDistance]+[_dataProvider segmentDistance]))/1600;
 	[arr addObject:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles]];

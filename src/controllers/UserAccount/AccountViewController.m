@@ -74,8 +74,8 @@ static NSString *const STRINGID=@"account";
 @property (nonatomic, strong)		IBOutlet UIButton                      * logoutButton;
 @property (nonatomic, strong)		IBOutlet UISwitch                      * saveLoginButton;
 @property (nonatomic, strong)		IBOutlet UIView                        * loggedInView;
-@property (nonatomic)		int                                            activePage;
-@property (nonatomic)		int                                            activeFieldIndex;
+@property (nonatomic)		NSInteger                                            activePage;
+@property (nonatomic)		NSInteger                                            activeFieldIndex;
 @property (nonatomic)		CGRect                                         activeFieldFrame;
 @property (nonatomic, strong)		NSMutableArray                         * activeFieldArray;
 @property (nonatomic, strong)		IBOutlet UITextField                   * activeField;
@@ -481,8 +481,8 @@ static NSString *const STRINGID=@"account";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	
-	BetterLog(@"activeFieldIndex=%i",_activeFieldIndex);
-	int newfieldIndex=_activeFieldIndex+1;
+	BetterLog(@"activeFieldIndex=%li",(long)_activeFieldIndex);
+	NSInteger newfieldIndex=_activeFieldIndex+1;
 	
 	if(newfieldIndex==[_activeFieldArray count]){
 		[_activeField resignFirstResponder];

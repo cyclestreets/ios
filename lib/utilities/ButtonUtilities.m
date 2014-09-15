@@ -344,7 +344,7 @@
 		[button setImage:iconimage forState:UIControlStateNormal];
 	}
 	 
-	int inset=(height-width)/2;
+	NSInteger inset=(height-width)/2;
 	button.contentEdgeInsets=UIEdgeInsetsMake(0, inset, 0, inset);
 	
 	//
@@ -438,7 +438,7 @@
 	[button setImage:iconimage forState:UIControlStateNormal];
 	
 	
-	int buttonheight=MAX(height,iconimage.size.height);
+	NSInteger buttonheight=MAX(height,iconimage.size.height);
 	int inset=(height-iconimage.size.width)/2;
 	int buttonwidth=iconimage.size.width+(inset*2);
 	

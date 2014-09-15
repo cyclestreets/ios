@@ -173,7 +173,7 @@
 	UIInterfaceOrientation orientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
 	NSInteger degrees = 0;
 	
-	BetterLog(@"orientation=%i",orientation);
+	BetterLog(@"orientation=%li",orientation);
 	
 	if (UIInterfaceOrientationIsLandscape(orientation)) {
 		if (orientation == UIInterfaceOrientationLandscapeLeft) { degrees = -90; } 
@@ -520,9 +520,9 @@
 }
 
 
-+(int)findTabIndexOfNavigationController:(UINavigationController*)controller{
++(NSInteger)findTabIndexOfNavigationController:(UINavigationController*)controller{
 	AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-	int tabIndex=[appdelegate.tabBarController.viewControllers indexOfObject:controller];
+	NSInteger tabIndex=[appdelegate.tabBarController.viewControllers indexOfObject:controller];
 	return tabIndex;
 }
 

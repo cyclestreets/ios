@@ -161,7 +161,7 @@
 		
 		
 		NSString *parameterString=[_parameters urlEncodedString];
-		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
+		NSString *msgLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -199,7 +199,7 @@
 		
 		BetterLog(@"parameters=%@",_parameters);
 		
-		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
+		NSString *msgLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody: [parameterString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -224,7 +224,7 @@
 		NSString *parameterString=[postparameters urlEncodedString];
 		
 		[request setHTTPMethod:@"POST"];
-		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
+		NSString *msgLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		NSString *contentType = @"application/x-www-form-urlencoded";
 		[request addValue:contentType forHTTPHeaderField: @"Content-Type"];

@@ -570,7 +570,7 @@ finish:
 
 
 // return formatted string, this is convoluted
-+(NSString*)createCurrencyStringForValue:(NSString*)strvalue useSystemCurrency:(BOOL)useSystem usingSymbol:(NSString*)symbol useCurrencyScale:(int)currencyScale useGrouping:(BOOL)useGrouping{
++(NSString*)createCurrencyStringForValue:(NSString*)strvalue useSystemCurrency:(BOOL)useSystem usingSymbol:(NSString*)symbol useCurrencyScale:(NSInteger)currencyScale useGrouping:(BOOL)useGrouping{
 	
 	// get current user currency properties
 	NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];

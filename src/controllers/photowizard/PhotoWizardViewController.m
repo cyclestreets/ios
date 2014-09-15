@@ -44,8 +44,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *footerView;
 @property (nonatomic, strong) LayoutBox *pageContainer;
-@property (nonatomic, assign) int activePage;
-@property (nonatomic, assign) int maxVisitedPage;
+@property (nonatomic, assign) NSInteger activePage;
+@property (nonatomic, assign) NSInteger maxVisitedPage;
 @property (nonatomic, strong) NSMutableArray *viewArray;
 @property (nonatomic, strong) IBOutlet UIToolbar *modalToolBar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelViewButton;
@@ -131,7 +131,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)initCategoryView:(PhotoWizardViewState)state;
 -(void)updateCategoryView;
 -(void)resetCategoryView;
--(void)didSelectCategoryFromMenu:(int)index;
+-(void)didSelectCategoryFromMenu:(NSInteger)index;
 
 -(void)initDescriptionView:(PhotoWizardViewState)state;
 -(void)updateDescriptionView;
@@ -620,7 +620,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	BetterLog(@"");
 	
 	_pageTitleLabel.text=[[_viewArray objectAtIndex:_activePage] objectForKey:@"title"];
-    _pageNumberLabel.text=[NSString stringWithFormat:@"%i of %i",_activePage+1, [_viewArray count]];
+    _pageNumberLabel.text=[NSString stringWithFormat:@"%li of %lu",_activePage+1, (unsigned long)[_viewArray count]];
 	
 	[self updateView];
 	
@@ -1197,7 +1197,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 
--(void)didSelectCategoryFromMenu:(int)index{
+-(void)didSelectCategoryFromMenu:(NSInteger)index{
 	
 	PhotoCategoryVO *vo=_activePickerDataSource[index];
 	

@@ -13,7 +13,7 @@
 @interface WayPointCellView : BUTableCellView
 
 @property(nonatomic,strong)  WayPointVO				*dataProvider;
-@property(nonatomic,assign)  int					waypointIndex;
+@property(nonatomic,assign)  NSInteger				waypointIndex;
 
 
 // FMMoveTable support

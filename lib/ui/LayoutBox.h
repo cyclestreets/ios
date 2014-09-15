@@ -115,9 +115,9 @@
 -(void)addSubViewsFromArray:(NSMutableArray*)arr;
 -(void)insertSubview:(UIView *)view atIndex:(NSInteger)index;  // insert view at index if exists
 -(void)removeSubView:(UIView *)view;
--(void)removeSubviewAtIndex:(int)index;
+-(void)removeSubviewAtIndex:(NSInteger)index;
 -(void)removeAllSubViews;
--(UIView*)viewAtIndex:(int)index;
+-(UIView*)viewAtIndex:(NSInteger)index;
 
 
 // prelim insert/remove with animation support

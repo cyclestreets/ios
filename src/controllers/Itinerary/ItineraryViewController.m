@@ -380,6 +380,8 @@
 		}
 			
 		break;
+			default:
+			break;
 	}
 	
 }

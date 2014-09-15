@@ -87,9 +87,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[_dataProvider speed]];
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[arr addObject:[NSString stringWithFormat:@"%2d mph", mileSpeed]];
+		[arr addObject:[NSString stringWithFormat:@"%2ld mph", (long)mileSpeed]];
 	}else {
-		[arr addObject:[NSString stringWithFormat:@"%2d kmh", [_dataProvider speed]]];
+		[arr addObject:[NSString stringWithFormat:@"%2ld kmh", (long)[_dataProvider speed]]];
 	}
 
 	 
@@ -114,7 +114,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route name] :[UIFont boldSystemFontOfSize:16]   :UIWIDTH :NSLineBreakByWordWrapping];
 	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%i",[route time]] :[UIFont systemFontOfSize:13] :UIWIDTH :NSLineBreakByClipping];
+	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%li",(long)[route time]] :[UIFont systemFontOfSize:13] :UIWIDTH :NSLineBreakByClipping];
 	height+=7;
 	
 	return [NSNumber numberWithInt:height];

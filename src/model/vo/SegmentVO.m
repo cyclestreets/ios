@@ -45,9 +45,9 @@ static NSDictionary *roadIcons;
 	NSUInteger s = startTime % 60;
 	
 	if (startTime>3600) {
-		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu:%02lu", (unsigned long)h,(unsigned long)m,(unsigned long)s];
 	}else {
-		return [NSString stringWithFormat:@"%02d:%02d", m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)m,(unsigned long)s];
 	}
 }
 
@@ -146,7 +146,7 @@ static NSDictionary *roadIcons;
 
 - (NSString *) infoString {
 	NSString *hm = [self timeString];
-	NSString *distance = [NSString stringWithFormat:@"%4dm", [self segmentDistance]];
+	NSString *distance = [NSString stringWithFormat:@"%4ldm", (long)[self segmentDistance]];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
 	
@@ -177,7 +177,7 @@ static NSDictionary *roadIcons;
 -(void)populateStringDictionary{
 	
 	NSString *hm = [self timeString];
-	NSString *distance = [NSString stringWithFormat:@"%im", [self segmentDistance]];
+	NSString *distance = [NSString stringWithFormat:@"%lim", (long)[self segmentDistance]];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"%3.1f miles", totalMiles];
 	

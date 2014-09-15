@@ -23,16 +23,16 @@
 
 #define MAXWIZARDVIEWS 7
 
-enum  {
-    PhotoWizardViewStateInfo=0,
+typedef NS_ENUM(NSUInteger, PhotoWizardViewState) {
+	PhotoWizardViewStateInfo=0,
 	PhotoWizardViewStatePhoto=1,
 	PhotoWizardViewStateLocation=2,
 	PhotoWizardViewStateCategory=3,
 	PhotoWizardViewStateDescription=4,
-	PhotoWizardViewStateUpload=5, 
+	PhotoWizardViewStateUpload=5,
 	PhotoWizardViewStateResult=6
 };
-typedef int PhotoWizardViewState;
+
 
 @interface PhotoWizardViewController : SuperViewController<UITextViewDelegate,
 UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,RMMapViewDelegate>{

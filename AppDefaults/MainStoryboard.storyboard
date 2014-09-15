@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-3348" y="142"/>
         </scene>
-        <!--Way Point View Controller - Waypoints-->
+        <!--Waypoints-->
         <scene sceneID="Wur-Lk-bJc">
             <objects>
                 <viewController storyboardIdentifier="WayPointViewController" id="MLh-Bz-0jb" customClass="WayPointViewController" sceneMemberID="viewController">
@@ -101,7 +101,7 @@
                                 <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7">
-                                <rect key="frame" x="100.00000028840958" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100.00000043962893" y="484" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -124,7 +124,7 @@
             </objects>
             <point key="canvasLocation" x="-3830" y="142"/>
         </scene>
-        <!--Initial Map View Controller - Hi-->
+        <!--Hi-->
         <scene sceneID="nyH-4h-cam">
             <objects>
                 <viewController storyboardIdentifier="CSInitialMapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Owm-gz-z56" customClass="CSInitialMapViewController" sceneMemberID="viewController">
@@ -139,7 +139,7 @@
             </objects>
             <point key="canvasLocation" x="-3253" y="-538"/>
         </scene>
-        <!--Navigation Controller - Itinerary-->
+        <!--Itinerary-->
         <scene sceneID="C4I-MO-Ahx">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Whq-3E-C5M" sceneMemberID="viewController">
@@ -147,7 +147,6 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5g7-zV-ycW">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -160,7 +159,7 @@
             </objects>
             <point key="canvasLocation" x="-2697" y="-538"/>
         </scene>
-        <!--Itinerary View Controller - Itinerary-->
+        <!--Itinerary-->
         <scene sceneID="yRI-FM-nhS">
             <objects>
                 <viewController storyboardIdentifier="ItineraryViewController" title="Itinerary" id="oEv-ga-wtZ" customClass="ItineraryViewController" sceneMemberID="viewController">
@@ -177,7 +176,6 @@
                                 <rect key="frame" x="0.0" y="118" width="320" height="337"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oEv-ga-wtZ" id="lbc-X5-EMy"/>
                                     <outlet property="delegate" destination="oEv-ga-wtZ" id="A6q-OO-jhL"/>
@@ -226,7 +224,7 @@
             </objects>
             <point key="canvasLocation" x="-2678" y="183"/>
         </scene>
-        <!--Navigation Controller - Saved Routes-->
+        <!--Saved Routes-->
         <scene sceneID="eTF-vU-kJJ">
             <objects>
                 <navigationController title="Saved Routes" definesPresentationContext="YES" id="TeA-CB-brw" sceneMemberID="viewController">
@@ -234,7 +232,7 @@
                     <tabBarItem key="tabBarItem" title="Routes" image="CSTabBar_fav_routes.png" id="kuB-BV-mht"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ejP-nB-g12">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.31372549019607843" green="0.59215686274509804" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
@@ -245,7 +243,7 @@
             </objects>
             <point key="canvasLocation" x="-2037" y="-554"/>
         </scene>
-        <!--Routes View Controller - Routes-->
+        <!--Routes-->
         <scene sceneID="Up5-Sq-jDg">
             <objects>
                 <viewController title="Routes" id="pf5-jL-Kv8" customClass="RoutesViewController" sceneMemberID="viewController">
@@ -297,7 +295,7 @@
             </objects>
             <point key="canvasLocation" x="-1454" y="164"/>
         </scene>
-        <!--Photo Wizard View Controller - Report-->
+        <!--Report-->
         <scene sceneID="oM5-Rp-Zaf">
             <objects>
                 <viewController storyboardIdentifier="PhotoWizardViewController" hidesBottomBarWhenPushed="YES" id="vwU-Uf-hpU" customClass="PhotoWizardViewController" sceneMemberID="viewController">
@@ -308,7 +306,7 @@
             </objects>
             <point key="canvasLocation" x="-922" y="152"/>
         </scene>
-        <!--Navigation Controller - Credits-->
+        <!--Credits-->
         <scene sceneID="p7H-CI-yzA">
             <objects>
                 <navigationController title="Credits" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="k10-cg-hCa" sceneMemberID="viewController">
@@ -329,7 +327,7 @@
             </objects>
             <point key="canvasLocation" x="679" y="-538"/>
         </scene>
-        <!--Navigation Controller - Settings-->
+        <!--Settings-->
         <scene sceneID="Aih-a0-z6r">
             <objects>
                 <navigationController definesPresentationContext="YES" id="15m-Qd-X6m" sceneMemberID="viewController">
@@ -349,7 +347,7 @@
             </objects>
             <point key="canvasLocation" x="144" y="-538"/>
         </scene>
-        <!--Settings View Controller - Settings-->
+        <!--Settings-->
         <scene sceneID="Uzu-vb-VKq">
             <objects>
                 <viewController storyboardIdentifier="SettingsViewController" title="Settings" hidesBottomBarWhenPushed="YES" id="sgu-Au-DE5" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -360,7 +358,7 @@
             </objects>
             <point key="canvasLocation" x="144" y="152"/>
         </scene>
-        <!--Credits View Controller - Credits-->
+        <!--Credits-->
         <scene sceneID="cJE-SS-bNv">
             <objects>
                 <viewController storyboardIdentifier="CreditsViewController" hidesBottomBarWhenPushed="YES" id="rtl-uZ-lp0" customClass="CreditsViewController" sceneMemberID="viewController">
@@ -370,14 +368,13 @@
             </objects>
             <point key="canvasLocation" x="679" y="152"/>
         </scene>
-        <!--Navigation Controller - Report-->
+        <!--Report-->
         <scene sceneID="dSl-gL-Xxc">
             <objects>
                 <navigationController title="Report" definesPresentationContext="YES" navigationBarHidden="YES" id="0ny-e6-BF2" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Report" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z42-mk-NG8">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.066666670139999995" green="0.68235296010000002" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
@@ -389,7 +386,7 @@
             </objects>
             <point key="canvasLocation" x="-1458" y="-538"/>
         </scene>
-        <!--Navigation Controller - Wizard-->
+        <!--Wizard-->
         <scene sceneID="zfO-JS-21r">
             <objects>
                 <navigationController title="Wizard" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="6Ji-IA-QuF" sceneMemberID="viewController">
@@ -407,7 +404,7 @@
             </objects>
             <point key="canvasLocation" x="-922" y="-538"/>
         </scene>
-        <!--Navigation Controller - Account-->
+        <!--Account-->
         <scene sceneID="mT1-Ka-I7e">
             <objects>
                 <navigationController title="Account" definesPresentationContext="YES" id="HdQ-jD-vPj" sceneMemberID="viewController">
@@ -425,7 +422,7 @@
             </objects>
             <point key="canvasLocation" x="-387" y="-538"/>
         </scene>
-        <!--Account View Controller - Account-->
+        <!--Account-->
         <scene sceneID="OKK-jB-ux6">
             <objects>
                 <viewController storyboardIdentifier="AccountViewController" hidesBottomBarWhenPushed="YES" id="bnm-Se-Azs" customClass="AccountViewController" sceneMemberID="viewController">

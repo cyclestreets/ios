@@ -105,7 +105,7 @@
 
 -(NSInteger)tableView:(FMMoveTableView *)tableView numberOfRowsInSection:(NSInteger)section{
 	
-	int numberOfRows=_dataProvider.count;
+	NSInteger numberOfRows=_dataProvider.count;
 	
 	if ([tableView movingIndexPath] && [[tableView movingIndexPath] section] != [[tableView initialIndexPathForMovingRow] section])
 	{

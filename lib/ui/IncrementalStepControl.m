@@ -150,7 +150,7 @@
 	
 	UIButton  *button=(UIButton*)sender;
 	
-	int newindex=currentIndex+button.tag;
+	NSInteger newindex=currentIndex+button.tag;
 	
 	if(indexWrap==YES){
 		
@@ -197,7 +197,7 @@
 
 -(void)updateReadoutLabel{
 	
-	readoutLabel.text=[NSString stringWithFormat:@"%i of %i",currentIndex+1,indexMax+1];
+	readoutLabel.text=[NSString stringWithFormat:@"%li of %li",currentIndex+1,indexMax+1];
 	[self refresh];
 }
 

@@ -291,6 +291,9 @@
 		}
 			
 			break;
+			
+		default:
+			break;
 	}
 	
 }

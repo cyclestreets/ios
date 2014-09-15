@@ -211,6 +211,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
     [super viewDidLoad];
 	
+	[[UserLocationManager sharedInstance] requestAuthorisation];
 	
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	[self didNotificationMapStyleChanged];
@@ -318,7 +319,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[_nextPointButton setEnabled:NO];
 	}
 	
-	NSString *message = [NSString stringWithFormat:@"Stage: %d/%d", _index+1, [self.route numSegments]];
+	NSString *message = [NSString stringWithFormat:@"Stage: %ld/%ld", _index+1, (long)[self.route numSegments]];
 	_footerView.segmentIndexLabel.text=message;
 	 
 	

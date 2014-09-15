@@ -400,7 +400,7 @@
 		NSString *key=[_keys objectAtIndex:[indexPath section]];
 		NSMutableArray *arr=[_rowHeightDictionary objectForKey:key];
 		
-		int rowIndex=[indexPath row];
+		NSInteger rowIndex=[indexPath row];
 		if(rowIndex<[arr count]){
 			CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
 			return cellheight;

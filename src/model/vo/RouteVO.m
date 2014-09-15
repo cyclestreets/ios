@@ -40,7 +40,7 @@
 
 
 
-- (SegmentVO *) segmentAtIndex:(int)index {
+- (SegmentVO *) segmentAtIndex:(NSInteger)index {
 	return [segments objectAtIndex:index];
 }
 
@@ -50,14 +50,14 @@
  ***********************************************/
 //
 
-- (int) numSegments {
+- (NSInteger) numSegments {
 	return [segments count];
 }
 
 
--(int)coordCount{
+-(NSInteger)coordCount{
 	
-	int count=0;
+	NSInteger count=0;
 	
 	for (int i = 0; i < [self numSegments]; i++) {
 		
@@ -89,14 +89,14 @@
 
 -(NSString*)timeString{
 	
-	NSUInteger h = [self time] / 3600;
-	NSUInteger m = ([self time] / 60) % 60;
-	NSUInteger s = [self time] % 60;
+	NSInteger h = [self time] / 3600;
+	NSInteger m = ([self time] / 60) % 60;
+	NSInteger s = [self time] % 60;
 	
 	if ([self time]>3600) {
-		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu:%02lu", (unsigned long)h,(unsigned long)m,(unsigned long)s];
 	}else {
-		return [NSString stringWithFormat:@"%02d:%02d", m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)m,(unsigned long)s];
 	}
 }
 
@@ -139,7 +139,7 @@
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[self speed]];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
 		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
-		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
+		return [NSString stringWithFormat:@"%2ld mph", (long)mileSpeed];
 	}else {
 		return [NSString stringWithFormat:@"%@ km/h", kmSpeed];
 	}

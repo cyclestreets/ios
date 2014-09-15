@@ -217,6 +217,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+-(void)requestAuthorisation{
+	
+	[locationManager requestWhenInUseAuthorization];
+	
+}
+
+
 #pragma mark CoreLocation updating
 
 //

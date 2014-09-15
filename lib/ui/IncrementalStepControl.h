@@ -20,16 +20,16 @@ typedef int IncrementalControlButtonMode;
 @protocol IncrementalStepControlDelegate <NSObject,LayoutBoxDelegate> 
 
 @optional
--(void)stepperSelectedIndexDidChange:(int)index;
+-(void)stepperSelectedIndexDidChange:(NSInteger)index;
 
 @end
 
 @interface IncrementalStepControl : LayoutBox{
 	
 	BOOL									indexWrap;
-	int										indexMax;
-	int										currentIndex;
-	int										indexMin;
+	NSInteger										indexMax;
+	NSInteger										currentIndex;
+	NSInteger										indexMin;
 	
 	IncrementalControlButtonMode			buttonMode;
 	
@@ -47,9 +47,9 @@ typedef int IncrementalControlButtonMode;
 
 }
 @property (nonatomic, assign)	BOOL			indexWrap;
-@property (nonatomic, assign)	int			indexMax;
-@property (nonatomic, assign)	int			currentIndex;
-@property (nonatomic, assign)	int			indexMin;
+@property (nonatomic, assign)	NSInteger			indexMax;
+@property (nonatomic, assign)	NSInteger			currentIndex;
+@property (nonatomic, assign)	NSInteger			indexMin;
 @property (nonatomic, assign)	IncrementalControlButtonMode			buttonMode;
 @property (nonatomic, strong)	UIButton			*minusButton;
 @property (nonatomic, strong)	UIButton			*plusButton;

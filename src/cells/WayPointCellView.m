@@ -64,8 +64,8 @@
 		break;
 		case WayPointTypeIntermediate:
 		{
-			_waypointLabel.text=[NSString stringWithFormat:@"%i",_waypointIndex];
-			_nameLabel.text= _dataProvider.locationname==nil ? [NSString stringWithFormat:@"Waypoint %i",_waypointIndex] : _dataProvider.locationname;
+			_waypointLabel.text=[NSString stringWithFormat:@"%li",(long)_waypointIndex];
+			_nameLabel.text= _dataProvider.locationname==nil ? [NSString stringWithFormat:@"Waypoint %li",(long)_waypointIndex] : _dataProvider.locationname;
 			_iconImageView.image=[UIImage imageNamed:@"CSIcon_intermediate_wisp.png"];
 			
 		}

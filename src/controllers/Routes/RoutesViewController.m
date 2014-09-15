@@ -239,7 +239,7 @@
 
 #pragma mark - Segment control
 
--(void)selectedIndexDidChange:(int)index{
+-(void)selectedIndexDidChange:(NSInteger)index{
 	
     if(index!=-1){
 		

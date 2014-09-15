@@ -60,7 +60,7 @@ typedef struct
 +(BorderParams)BorderParamsMake:(CGFloat)left :(CGFloat)right :(CGFloat)top :(CGFloat)bottom;
 
 // returns the Tabindex of the current nav controller, useful for apps that share vcs across tabs
-+(int)findTabIndexOfNavigationController:(UINavigationController*)controller;
++(NSInteger)findTabIndexOfNavigationController:(UINavigationController*)controller;
 
 +(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText delegate:(id)delegate;
 

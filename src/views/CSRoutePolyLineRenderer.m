@@ -129,7 +129,7 @@ static BOOL lineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect r)
     MKMapPoint point;
 	CSPointVO *firstpoint=points[0];
 	MKMapPoint lastPoint = firstpoint.mapPoint;
-	int pointCount=points.count;
+	NSInteger pointCount=points.count;
     NSUInteger i;
     int segmentIndex=0;
 	
