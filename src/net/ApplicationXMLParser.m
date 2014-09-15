@@ -665,6 +665,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
+	
+	
     
 	TBXMLElement *pois=[TBXML childElementNamed:@"pois" parentElement:response];
 	TBXMLElement *poi=[TBXML childElementNamed:@"poi" parentElement:pois];
@@ -779,6 +781,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		}
 		
 		[dataProvider setObject:mcarr forKey:@"category"];
+		
+		_activeOperation.operationState=NetResponseStateComplete;
 		
 	}else {
 		_activeOperation.validationStatus=ValidationCategoriesFailed;

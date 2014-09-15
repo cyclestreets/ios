@@ -19,6 +19,7 @@
 #import "RouteManager.h"
 #import "SavedRoutesManager.h"
 #import "PhotoManager.h"
+#import "PhotoCategoryManager.h"
 
 @interface StartupManager(Private)
 
@@ -110,6 +111,7 @@
 	[RouteManager sharedInstance];
 	[SavedRoutesManager sharedInstance];
 	[PhotoManager sharedInstance];
+	[PhotoCategoryManager sharedInstance];
 	
 	
 	[UserAccount sharedInstance];

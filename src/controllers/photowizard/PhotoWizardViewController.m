@@ -498,7 +498,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	}
 	
 	
-	if(state>_maxVisitedPage){
+	if((int)state>_maxVisitedPage){
 		_maxVisitedPage=state;
 	}
 	
@@ -789,7 +789,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[_cameraButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]];
 	[_libraryButton setEnabled:[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]];
 	
-	[self initialiseViewState:PhotoWizardViewStateLocation];
+	[self initialiseViewState:PhotoWizardViewStateInfo];
 	
 }
 
