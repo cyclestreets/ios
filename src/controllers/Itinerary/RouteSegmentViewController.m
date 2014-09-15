@@ -202,7 +202,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	
-	_attributionLabel.text = _activeMapSource.shortAttribution;
+	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+		
+		_attributionLabel.visible=NO;
+		//mkAttributionLabel.visible=YES;
+		
+	}else{
+		_attributionLabel.visible=YES;
+		//mkAttributionLabel.visible=NO;
+		_attributionLabel.text = _activeMapSource.shortAttribution;
+		
+	}
 }
 
 #pragma mark - UI View
@@ -229,7 +239,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	
 	self.attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000,0.2);
-	self.attributionLabel.text = [CycleStreets mapAttribution];
+	self.attributionLabel.text = _activeMapSource.shortAttribution;;
 
 	
 	_toolBar.clipsToBounds=YES;
