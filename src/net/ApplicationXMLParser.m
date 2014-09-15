@@ -551,7 +551,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	[self validateXML:response];
 	if(_activeOperation.operationState>NetResponseStateComplete){
 		_activeOperation.validationStatus=ValidationRetrievePhotosFailed;
-		_activeOperation.operationState=NetResponseStateComplete; //TODO: Why??
 		return;
 	}
     

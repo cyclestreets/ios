@@ -858,9 +858,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 #pragma mark imagePickerController  Delegate methods -
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	
-	// TODO: image should be sized, a) on screen & b) upload size
-    // initial image should be max resolution possible for app
-    // setttings.imageSize 
+	
 	UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     self.uploadImage=[[UploadPhotoVO alloc]initWithImage:image];
 	_imagePreview.image=_uploadImage.image;

@@ -83,6 +83,8 @@ typedef int ViewOverlayType;
 -(void)listNotificationInterests;
 -(void)didReceiveNotification:(NSNotification*)notification;
 -(void)addNotifications;
+-(void)removeNotification:(NSString*)notification;
+
 -(void)initialise;
 -(void)refreshUIFromDataProvider;
 -(void)deSelectRowForTableView:(UITableView*)table;

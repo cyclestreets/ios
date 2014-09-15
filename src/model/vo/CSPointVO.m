@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPointVO.h"
 
 
-//TODO: needs to support provisionName so we can draw different line types for provisions
+//TODO: needs to support provisionName so we can potentially draw different line types for road types
 
 @implementation CSPointVO
 

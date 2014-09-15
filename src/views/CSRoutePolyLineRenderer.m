@@ -43,7 +43,7 @@
 }
 
 
-//TODO: new class with single line with defianble values
+
 - (void)drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale  inContext:(CGContextRef)context{
 	
     CSRoutePolyLineOverlay *dataProvider = (CSRoutePolyLineOverlay *)(self.overlay);

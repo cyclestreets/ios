@@ -39,7 +39,7 @@
 }
 
 
-//TODO: Add rotated annotation image support
+
 -(void)updateAnnotation{
 	
 	

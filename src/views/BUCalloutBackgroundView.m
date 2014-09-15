@@ -34,7 +34,6 @@
 
 
 // TODO: support point value for arrow rather than always center
-
 - (void)drawRect:(CGRect)rect
 {
 	
