@@ -68,17 +68,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 	[_coordDecimalPlaceFormatter setMaximumFractionDigits:accuracy];
 	
+	
+	
 	// reduce decimal places
-	NSNumber *newlatNumber=[NSNumber numberWithDouble:oldCordinate.latitude];
-	NSNumber *newlongNumber=[NSNumber numberWithDouble:oldCordinate.longitude];
+	NSNumber *newlatNumber=[NSNumber numberWithDouble:newCoordinate.latitude];
+	NSNumber *newlongNumber=[NSNumber numberWithDouble:newCoordinate.longitude];
 	NSNumber *newlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlatNumber] doubleValue]];
 	NSNumber *newlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlongNumber] doubleValue]];
 	
+	BetterLog(@"New coord=%@,%@",newlat,newlongt);
 	
-	NSNumber *oldlatNumber=[NSNumber numberWithDouble:newCoordinate.latitude];
-	NSNumber *oldlongNumber=[NSNumber numberWithDouble:newCoordinate.longitude];
+	NSNumber *oldlatNumber=[NSNumber numberWithDouble:oldCordinate.latitude];
+	NSNumber *oldlongNumber=[NSNumber numberWithDouble:oldCordinate.longitude];
 	NSNumber *oldlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:oldlatNumber] doubleValue]];
 	NSNumber *oldlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:oldlongNumber] doubleValue]];
+	
+	BetterLog(@"Old coord=%@,%@",oldlat,oldlongt);
 
 	return (![newlat  isEqualToNumber:oldlat] && ![newlongt isEqualToNumber:oldlongt] );
 	

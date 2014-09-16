@@ -124,10 +124,9 @@
 -(void)removeNotification:(NSString*)notification{
 	
 	[[NSNotificationCenter defaultCenter]
-		 addObserver:self
-		 selector:@selector(didReceiveNotification:)
-		 name:notification
-		 object:nil];
+	 removeObserver:self name:notification object:nil];
+	
+	[notifications removeObject:notification];
 	
 }
 

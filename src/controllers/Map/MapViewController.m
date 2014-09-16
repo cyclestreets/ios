@@ -42,7 +42,7 @@
 #import "ExpandedUILabel.h"
 #import "CSRoutePolyLineOverlay.h"
 #import "CSRoutePolyLineRenderer.h"
-
+#import "GenericConstants.h"
 
 
 #import <Crashlytics/Crashlytics.h>
@@ -123,7 +123,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, assign) MapPlanningState						previousUIState;
 
 
-@property (nonatomic,strong)  UITapGestureRecognizer				*mapTapRecognizer;
+@property (nonatomic,strong)  UITapGestureRecognizer				*mapSingleTapRecognizer;
+@property (nonatomic,strong)  UITapGestureRecognizer				*mapDoubleTapRecognizer;
 
 // ui
 - (void)initToolBarEntries;
@@ -336,11 +337,14 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
 	
-	self.mapTapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnMap:)];
-	_mapTapRecognizer.numberOfTapsRequired=1;
-	_mapTapRecognizer.enabled=YES;
-	_mapTapRecognizer.delaysTouchesBegan=YES;
-	[_mapView addGestureRecognizer:_mapTapRecognizer];
+	self.mapSingleTapRecognizer=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnMapSingle:)];
+	_mapSingleTapRecognizer.numberOfTapsRequired=1;
+	_mapSingleTapRecognizer.enabled=YES;
+	_mapSingleTapRecognizer.delaysTouchesBegan=YES;
+	[self addSingleTapFailureRequirement];
+	[_mapView addGestureRecognizer:_mapSingleTapRecognizer];
+	
+	
 	
 	if(willRequireAuthorisation==NO){
 		[self userLocationDidComplete];
@@ -349,9 +353,30 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
+// ensures the single tap logic doesnt fire when a user double taps
+- (void) addSingleTapFailureRequirement {
+	
+	for (UIView *aSubview in [[self mapView] subviews]) {
+		
+		if ([aSubview isMemberOfClass:[UIView class]]) {
+			
+			for (UIGestureRecognizer *aRecognizer in [aSubview gestureRecognizers]) {
+				
+				if ([aRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+					
+					if ([(UITapGestureRecognizer *) aRecognizer numberOfTapsRequired] == 2) {
+						
+						[self.mapSingleTapRecognizer requireGestureRecognizerToFail:aRecognizer];
+					}
+				}
+			}
+		}
+	}
+}
+
+
 // supports iOS8s new additional location authorisation workflow
 // we have to wait for CoreLocation to prompt the user and start location updates before we attempt to switch on MapKit's location
-
 - (void)userLocationDidComplete{
 	
 	BOOL hasSelectedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
@@ -569,8 +594,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // called continuously as map locates user via showsUserLocation=YES
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
+	if(!_programmaticChange && self.lastLocation!=nil)
+		return;
+	
 	// as this method is called constantly from the MapView we need to filter out any same location values
-	if([UserLocationManager isSignificantLocationChange:userLocation.coordinate newLocation:self.lastLocation.coordinate accuracy:4])
+	if([UserLocationManager isSignificantLocationChange:self.lastLocation.coordinate newLocation:userLocation.coordinate accuracy:2])
 		[self locationDidComplete:userLocation];
 	
 }
@@ -1071,7 +1099,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 #pragma mark - MKMap delegate
 
-- (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
+- (void) didTapOnMapSingle:(UITapGestureRecognizer*)recogniser {
 	
 	BetterLog(@"");
 	
@@ -1087,7 +1115,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	
 }
-
 
 
 -(void)addLocationToMapForGesture:(CLLocation*)location{
@@ -1174,10 +1201,16 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	BetterLog(@"");
 	
-	self.selectedAnnotation=nil;
+	[self performSelector:@selector(offsetSelectedAnnnotationDeselection) withObject:nil afterDelay:0.2];
 	
 	view.selected=YES;
 	
+}
+
+// offsets the nilling of the selectedAnnotation as single tap will occur immediately after didDeselectAnnotationView, we dont
+// want a waypoint to be addded when the user has merely dismissed the annotation popup
+-(void)offsetSelectedAnnnotationDeselection{
+	self.selectedAnnotation=nil;
 }
  
  

@@ -87,7 +87,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 + (CLLocationCoordinate2D)defaultCoordinate;
 + (CLLocation*)defaultLocation;
 
-// accuracy is the fraction digits, the lower the value the lower the match needs to be to be seen as a change
+// accuracy is the fraction digits, the lower the value the more the locations need to differ to trigger a change
 +(BOOL)isSignificantLocationChange:(CLLocationCoordinate2D)oldCordinate newLocation:(CLLocationCoordinate2D)newCoordinate accuracy:(int)accuracy;
 
 +(NSString*)optimisedCoordString:(CLLocationCoordinate2D)coordinate;
