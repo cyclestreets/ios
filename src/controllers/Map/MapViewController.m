@@ -314,7 +314,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_attributionLabel.textAlignment=NSTextAlignmentRight;
 	_attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000, .1);
 	
-	[[UserLocationManager sharedInstance] requestAuthorisation];
+	BOOL willRequireAuthorisation=[[UserLocationManager sharedInstance] requestAuthorisation];
 	
 	[_mapView setDelegate:self];
 	_mapView.userTrackingMode=MKUserTrackingModeNone;
@@ -342,13 +342,15 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_mapTapRecognizer.delaysTouchesBegan=YES;
 	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
-//	BOOL hasSelectedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
-//	
-//	if(!hasSelectedRoute){
-//		_mapView.showsUserLocation=YES;
-//	}
+	if(willRequireAuthorisation==NO){
+		[self userLocationDidComplete];
+	}
+
 }
 
+
+// supports iOS8s new additional location authorisation workflow
+// we have to wait for CoreLocation to prompt the user and start location updates before we attempt to switch on MapKit's location
 
 - (void)userLocationDidComplete{
 	
