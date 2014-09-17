@@ -91,6 +91,21 @@ NSString *const CSPLANTYPE_BALANCED=@"balanced";
 NSString *const CSPLANTYPE_QUIETEST=@"quietest";
 NSString *const CSPLANTYPE_NONE=@"csplan_none";
 
+
+// Tab bar ids: must be ket in sync with UI naming via the plist
+
+NSString *const TABBAR_MAP=@"Map";
+NSString *const TABBAR_ITINERARY=@"Itinerary";
+NSString *const TABBAR_ROUTES=@"Routes";
+NSString *const TABBAR_REPORT=@"Report";
+NSString *const TABBAR_WIZARD=@"Wizard";
+NSString *const TABBAR_ACCOUNT=@"Account";
+NSString *const TABBAR_CREDITS=@"Credits";
+NSString *const TABBAR_SETTINGS=@"Settings";
+
+
+
+
 //
 /***********************************************
  * @description			String Constants

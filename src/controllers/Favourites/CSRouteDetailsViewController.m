@@ -248,7 +248,8 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	[[RouteManager sharedInstance] selectRoute:self.route];
 	
-	//[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
+	AppDelegate *appDelegate=[UIApplication sharedApplication].delegate;
+	[appDelegate showTabBarViewControllerByName:TABBAR_MAP];
 }	
 
 - (IBAction) routeButtonSelected {
@@ -338,9 +339,10 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	
 	[actionSheet bk_setCancelButtonWithTitle:@"Cancel" handler:^{
+		
 	}];
 	
-	[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
+	[actionSheet showInView:self.view];
 
 	
 	

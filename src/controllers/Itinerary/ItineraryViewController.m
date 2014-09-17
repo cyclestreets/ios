@@ -455,11 +455,14 @@
 }
 
 -(IBAction)swapToMapView{
-	//[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Plan route"];
+	
+	AppDelegate *appDelegate=[UIApplication sharedApplication].delegate;
+	[appDelegate showTabBarViewControllerByName:TABBAR_MAP];
 }
 
 -(IBAction)swapToSavedRoutesView{
-	//[[CycleStreets sharedInstance].appDelegate showTabBarViewControllerByName:@"Saved routes"];
+	AppDelegate *appDelegate=[UIApplication sharedApplication].delegate;
+	[appDelegate showTabBarViewControllerByName:TABBAR_ROUTES];
 }
 
 

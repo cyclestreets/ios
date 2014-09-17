@@ -147,6 +147,20 @@ extern NSString *const CSPLANTYPE_QUIETEST;
 extern NSString *const CSPLANTYPE_NONE;
 
 
+// Tab bar ids: must be ket in sync with UI naming via the plist
+
+extern NSString *const TABBAR_MAP;
+extern NSString *const TABBAR_ITINERARY;
+extern NSString *const TABBAR_ROUTES;
+extern NSString *const TABBAR_REPORT;
+extern NSString *const TABBAR_WIZARD;
+extern NSString *const TABBAR_ACCOUNT;
+extern NSString *const TABBAR_CREDITS;
+extern NSString *const TABBAR_SETTINGS;
+
+
+
+
 extern NSString *const MILES;
 extern NSString *const KM;
 
