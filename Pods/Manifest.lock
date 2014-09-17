@@ -21,19 +21,19 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BlocksKit (2.2.3):
+  - BlocksKit (2.2.5):
     - BlocksKit/All
-  - BlocksKit/All (2.2.3):
+  - BlocksKit/All (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
     - BlocksKit/MessageUI
     - BlocksKit/UIKit
-  - BlocksKit/Core (2.2.3)
-  - BlocksKit/DynamicDelegate (2.2.3)
-  - BlocksKit/MessageUI (2.2.3):
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - BlocksKit/UIKit (2.2.3):
+  - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - FMMoveTableView (1.1.2)
@@ -49,7 +49,7 @@ PODS:
 DEPENDENCIES:
   - A2StoryboardSegueContext
   - AFNetworking (~> 2.0)
-  - BlocksKit
+  - BlocksKit (~> 2.2.5)
   - FMMoveTableView
   - JVFloatLabeledTextField
   - PixateFreestyle
@@ -63,7 +63,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   A2StoryboardSegueContext: 289f5ffbdb4935682616159f57d039870c253798
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  BlocksKit: 07c8a80f04275efac6a5f8b973782489c083a182
+  BlocksKit: 4439e7f30a9f90743462ca63545a15c1f4304cef
   FMMoveTableView: b5d2d314e0ca8c029ae59efe2b3a905f30df0557
   JVFloatLabeledTextField: 16dea87b899a7b62026eb8d8cf9902c08b1953da
   PixateFreestyle: bb8fc8ce1ebc2355852b369a6e2a6f2931c4ed71
