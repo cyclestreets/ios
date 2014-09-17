@@ -44,7 +44,7 @@ PODS:
   - TBXML (1.5)
   - TouchJSON (1.1)
   - UITintedButton (1.0)
-  - ViewDeck (2.3.1)
+  - ViewDeck (2.2.11)
 
 DEPENDENCIES:
   - A2StoryboardSegueContext
@@ -58,7 +58,7 @@ DEPENDENCIES:
   - TBXML
   - TouchJSON
   - UITintedButton
-  - ViewDeck
+  - ViewDeck (~> 2.2.11)
 
 SPEC CHECKSUMS:
   A2StoryboardSegueContext: 289f5ffbdb4935682616159f57d039870c253798
@@ -67,11 +67,11 @@ SPEC CHECKSUMS:
   FMMoveTableView: b5d2d314e0ca8c029ae59efe2b3a905f30df0557
   JVFloatLabeledTextField: 16dea87b899a7b62026eb8d8cf9902c08b1953da
   PixateFreestyle: bb8fc8ce1ebc2355852b369a6e2a6f2931c4ed71
-  RegexKitLite: 761b4944f23cb8fe20697b2e47be0689fd832c09
+  RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SFHFKeychainUtils: 6fdda05a86d035db406c7662ec1054814b68f0fd
   TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
   TouchJSON: b40940e40e53bb9b1ad60c63e01ed83bff93d53e
   UITintedButton: 0f8c0683f07b3547003cdac57007ad635e016d07
-  ViewDeck: 654a493fc83928892ce483dea08a5302180aafce
+  ViewDeck: 2f38c054dfe8e69af4877c006785996faa277902
 
 COCOAPODS: 0.33.1
