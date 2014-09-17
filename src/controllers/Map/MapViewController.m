@@ -675,13 +675,20 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 	if(_uiState==MapPlanningStateLocating){
 		
-		[self assessWayPointAddition:_lastLocation.coordinate];
+		// if prev state is not route we shoudl see if we need to add a waypoint
+		if (_previousUIState!=MapPlanningStateRoute)
+			[self assessWayPointAddition:_lastLocation.coordinate];
 			
-		
-		if(_uiState!=MapPlanningStateRoute)
+		// if prev state is route, then we revert back to this
+		if(_previousUIState==MapPlanningStateRoute){
 			[self updateUItoState:_previousUIState];
+			
+		}else{
+			// else load the state based on the waypoint status
+			[self assessUIState];
+		}
 		
-		[self assessUIState];
+		
 		
 	}else{
 		_programmaticChange=NO;
@@ -729,6 +736,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[_routeOverlayRenderer setNeedsDisplay];
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
+	_previousUIState=MapPlanningStateNoRoute;
 	
 	[[RouteManager sharedInstance] clearSelectedRoute];
 }
