@@ -49,6 +49,7 @@
 
 
 static NSInteger DEFAULT_ZOOM = 15;
+static NSInteger DEFAULT_OVERVIEWZOOM = 10;
 
 //don't allow co-location of start/finish
 static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
@@ -377,6 +378,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 // supports iOS8s new additional location authorisation workflow
 // we have to wait for CoreLocation to prompt the user and start location updates before we attempt to switch on MapKit's location
+// looks like someone didnt tell the mapkit guys this os8 functionality is required!
 - (void)userLocationDidComplete{
 	
 	BOOL hasSelectedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
@@ -420,11 +422,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_location.png"] forState:UIControlStateNormal];
 	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_gpsactive.png"] forState:UIControlStateSelected];
 	self.locationButton = [[UIBarButtonItem alloc] initWithCustomView:_activeLocationSubButton];
-	
-	//self.locationButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_location.png"]
-	//													   style:UIBarButtonItemStyleBordered
-	//													  target:self
-	//													  action:@selector(didSelectLocateUserbutton)];
 	_locationButton.width = 40;
 	
 	self.searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
@@ -987,6 +984,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 -(void)wayPointArraywasReordered{
 	[self updateWaypointStatuses];
 }
+
 -(void)wayPointwasDeleted{
 	[self updateWaypointStatuses];
 	
@@ -994,6 +992,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		[self assessUIState];
 		[self.viewDeckController closeLeftViewAnimated:YES];
 	}
+}
+-(void)wayPointWasSelected:(id)waypoint{
+	WayPointVO *dp=(WayPointVO*)waypoint;
+	[_mapView setCenterCoordinate:dp.coordinate zoomLevel:DEFAULT_OVERVIEWZOOM animated:YES];
+
 }
 
 

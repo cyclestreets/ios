@@ -24,6 +24,7 @@
 #import "ValidationVO.h"
 #import "StringUtilities.h"
 #import "BUNetworkOperation.h"
+#import "BUDataSourceManager.h"
 
 @interface UserAccount()
 
@@ -34,15 +35,6 @@
 @property (nonatomic, assign)	BOOL		isRegistered;
 @property (nonatomic, retain)	NSString	*sessionToken;
 @property (nonatomic, retain)	NSString	*deviceID;
-
--(void)registerUserResponse:(ValidationVO*)validation;
--(void)retrievePasswordForUserResponse:(ValidationVO*)validation;
--(void)loginUserResponse:(ValidationVO*)validation;
--(void)removeUserState;
--(BOOL)saveUser;
--(void)loadUser;
--(void)createUser;
--(NSString*)filepath;
 
 
 @end
@@ -103,31 +95,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	if([self isRegisteredForRequest:dataid]){
 		
-		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
-			
-			if ([response.dataid isEqualToString:REGISTER]) {
-				
-				[self registerUserResponse:response.dataProvider];
-				
-			}else if ([response.dataid isEqualToString:LOGIN]) {
-				
-				[self loginUserResponse:response.dataProvider];
-				
-			}else if ([response.dataid isEqualToString:PASSWORDRETRIEVAL]){
-				
-				[self retrievePasswordForUserResponse:response.dataProvider];
-			}
-			
+		if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL]){
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Network Error" andMessage:@"Unable to contact server"];
 		}
 		
-		
-		
 	}
-	
-	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
-		[[HudManager sharedInstance] removeHUD];
-	}
-	
 	
 }
 
@@ -161,8 +133,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	request.parameters=parameters;
 	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self registerUserResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Registering New User" andMessage:nil];
 	
@@ -246,8 +223,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	request.parameters=parameters;
 	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loginUserResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Signing in" andMessage:nil];
 	
@@ -319,8 +301,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	request.parameters=parameters;
 	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self retrievePasswordForUserResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
 	
 	

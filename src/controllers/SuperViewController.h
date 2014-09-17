@@ -29,6 +29,7 @@
 
 -(void)wayPointArraywasReordered;
 -(void)wayPointwasDeleted;
+-(void)wayPointWasSelected:(id)waypoint;
 
 -(void)UserDidUpdatePhotoLocation:(CLLocation*)location;
 

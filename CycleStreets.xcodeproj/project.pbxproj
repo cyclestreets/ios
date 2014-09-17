@@ -396,6 +396,8 @@
 		284608291649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
 		2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
+		2846556519C9B859002E7CB7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
+		2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
 		284ADCEA18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
@@ -883,6 +885,7 @@
 		284608261649388900CBF96A /* ImageUtilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtilties.h; sourceTree = "<group>"; };
 		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
 		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
+		2846556419C9B859002E7CB7 /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_live.txt; path = docs/APIKey_live.txt; sourceTree = SOURCE_ROOT; };
 		284667F518C0AAD9005089C7 /* DeviceUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtilities.h; sourceTree = "<group>"; };
 		284667F618C0AAD9005089C7 /* DeviceUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtilities.m; sourceTree = "<group>"; };
 		284ADCE818C88309003830DE /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
@@ -1963,6 +1966,7 @@
 				289478BF18AD706B0066AA2E /* styling */,
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
 				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
+				2846556419C9B859002E7CB7 /* APIKey_live.txt */,
 				280E9318140984F300C7AC75 /* xib */,
 				287ECBAD134490D800B8A6AC /* html */,
 				28AD6208131FB69D008527FC /* images */,
@@ -2581,6 +2585,7 @@
 				281E09031451C6690034CC63 /* services_dev.plist in Resources */,
 				281E09041451C6690034CC63 /* services_live.plist in Resources */,
 				281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */,
+				2846556519C9B859002E7CB7 /* APIKey_live.txt in Resources */,
 				281E09081451CA210034CC63 /* POICategoryView.xib in Resources */,
 				2818C7A01458069E0077F529 /* RouteCell.xib in Resources */,
 				28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */,
@@ -2776,6 +2781,7 @@
 				289478C618AD70FB0066AA2E /* default.css in Resources */,
 				2834365D15DD5DC300B00FD5 /* POICatLocationCell.xib in Resources */,
 				28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
+				2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */,
 				2834365E15DD5DC300B00FD5 /* POICategoryView.xib in Resources */,
 				28BC6AA518AE429400EF0436 /* SettingsView.xib in Resources */,
 				2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */,

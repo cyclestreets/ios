@@ -50,6 +50,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	[notifications addObject:REQUESTDIDFAIL];
 	
 	[self addRequestID:RETREIVELOCATIONPHOTOS];
 	[self addRequestID:RETREIVEROUTEPHOTOS];
@@ -71,41 +72,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	if([self isRegisteredForRequest:dataid]){
 		
-		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
+		if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL]){
 			
-			if ([response.dataid isEqualToString:RETREIVELOCATIONPHOTOS]) {
+			[[HudManager sharedInstance] removeHUD];
+			
+			if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
+				NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
+				[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
 				
-				[self retrievePhotosForLocationResponse:response.dataProvider];
+			}else if([dataid isEqualToString:UPLOADUSERPHOTO]){
 				
-			}else if ([response.dataid isEqualToString:UPLOADUSERPHOTO]) {
+				NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,EMPTYSTRING,MESSAGE, nil];
+				[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
 				
-				[self UserPhotoUploadResponse:response.dataProvider];
-				
-			}else if ([response.dataid isEqualToString:RETREIVEROUTEPHOTOS]) {
-				
-				[self retrievePhotosForRouteResponse:response.dataProvider];
-				
+				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
 			}
-			
 		}
+
 		
 	}
 	
-	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED]){
-		[[HudManager sharedInstance] removeHUD];
-		
-		if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
-			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
-			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
-			
-		}else if([dataid isEqualToString:UPLOADUSERPHOTO]){
-			
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,EMPTYSTRING,MESSAGE, nil];
-			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
-			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
-		}
-	}
 	
 	
 }

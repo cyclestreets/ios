@@ -72,6 +72,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	[notifications addObject:REQUESTDIDFAIL];
 	
 	[notifications addObject:GPSLOCATIONCOMPLETE];
 	[notifications addObject:GPSLOCATIONUPDATE];
@@ -97,23 +98,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	if([self isRegisteredForRequest:dataid]){
 		
-		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
-			
-			if ([response.dataid isEqualToString:CALCULATEROUTE]) {
-				
-				[self loadRouteForEndPointsResponse:response.dataProvider];
-				
-			}else if ([response.dataid isEqualToString:RETRIEVEROUTEBYID]) {
-				
-				[self loadRouteForRouteIdResponse:response.dataProvider];
-				
-			}else if ([response.dataid isEqualToString:UPDATEROUTE]) {
-				
-				[self updateRouteResponse:response.dataProvider];
-				
-			}
-			
+		
+		if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL]){
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Network Error" andMessage:@"Unable to contact server"];
 		}
+
+		
 		
 	}
 	
@@ -131,9 +121,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	
 	
-	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
-		[[HudManager sharedInstance] removeHUD];
-	}
 	
 	
 }

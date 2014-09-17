@@ -842,7 +842,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
     response.operationError=NetResponseErrorConnection;
     
-	[[NSNotificationCenter defaultCenter] postNotificationName:error object:response userInfo:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:error object:nil userInfo:@{RESPONSE:response}];
 	
 }
 

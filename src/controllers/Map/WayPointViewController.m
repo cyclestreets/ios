@@ -153,6 +153,14 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	WayPointVO *dp=[_dataProvider objectAtIndex:[indexPath row]];
+	
+	[delegate performSelector:@selector(wayPointWasSelected:) withObject:dp];
+	
+}
+
 
 - (BOOL)moveTableView:(FMMoveTableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
