@@ -244,13 +244,16 @@ static NSString *const VIEWTITLE=@"Route details";
 
 // route selection
 - (void)selectRoute {
-	[self.navigationController popViewControllerAnimated:YES];
+	
+	// Note: if both these methods are called on the same run loop, the tab bar will become unresponsive
+	
+	[self.navigationController performSelector:@selector(popViewControllerAnimated:) withObject:@NO afterDelay:0.1];
 	
 	[[RouteManager sharedInstance] selectRoute:self.route];
 	
 	AppDelegate *appDelegate=[UIApplication sharedApplication].delegate;
 	[appDelegate showTabBarViewControllerByName:TABBAR_MAP];
-}	
+}
 
 - (IBAction) routeButtonSelected {
 	[self selectRoute];
@@ -342,7 +345,7 @@ static NSString *const VIEWTITLE=@"Route details";
 		
 	}];
 	
-	[actionSheet showInView:self.view];
+	[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
 
 	
 	
