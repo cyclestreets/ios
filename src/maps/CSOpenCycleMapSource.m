@@ -44,7 +44,7 @@
 
 - (NSString *)shortAttribution
 {
-	return @" © OpenCycleMap CC-BY-SA ";
+	return @" © OpenCycleMap; data © OpenStreetMap contributors ";
 }
 
 - (NSString *)longAttribution

@@ -42,7 +42,7 @@
 }
 -(NSString *)shortAttribution
 {
-	return @" © Ordnance Survey data (c)    ";
+	return @" © Ordnance Survey data    ";
 }
 -(NSString *)longAttribution
 {
