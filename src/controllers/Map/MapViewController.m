@@ -49,7 +49,7 @@
 
 
 static NSInteger DEFAULT_ZOOM = 15;
-static NSInteger DEFAULT_OVERVIEWZOOM = 10;
+static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 //don't allow co-location of start/finish
 static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
@@ -1005,7 +1005,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 -(void)wayPointWasSelected:(id)waypoint{
 	WayPointVO *dp=(WayPointVO*)waypoint;
 	[_mapView setCenterCoordinate:dp.coordinate zoomLevel:DEFAULT_OVERVIEWZOOM animated:YES];
-
+	
+	[self.viewDeckController closeLeftViewAnimated:YES];
 }
 
 
