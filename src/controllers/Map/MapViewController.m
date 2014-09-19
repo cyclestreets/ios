@@ -671,6 +671,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 
+// assess if there are any UI changes related this location update
 -(void)assessLocationEffect{
 		
 	if(_uiState==MapPlanningStateLocating){

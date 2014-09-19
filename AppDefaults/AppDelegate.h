@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <UIKit/UIKit.h>
 
 
-#define ISDEVELOPMENT 0
+#define ISDEVELOPMENT 1
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
 	

@@ -3264,6 +3264,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DISPLAY_PREFIX = "Dev-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3316,6 +3317,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
+				DISPLAY_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3612,6 +3614,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
+				DISPLAY_PREFIX = "Beta-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -3642,7 +3645,7 @@
 					"-lxml2",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "03F337D9-618F-4A0A-AE0F-4771C54B0E33";
+				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";

@@ -181,9 +181,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0, SCREENWIDTH, FULLSCREENHEIGHT)];
 	_splashView.image = [UIImage imageNamed: ip ? @"Default-568h@2x.png"  : @"Default.png" ];
 	
-	#if ISDEVELOPMENT
+#if defined (CONFIGURATION_Adhoc)
 	[self writeDebugStartupLabel:NO];
-	#endif
+#endif
+	
+#if defined (CONFIGURATION_Debug)
+	[self writeDebugStartupLabel:YES];
+#endif
 	
 	
 	[_window addSubview:_splashView];
@@ -232,7 +236,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// reset to front because tab controller will be in front now
 	[_window bringSubviewToFront:_splashView];
 	
-	[UIView animateWithDuration:0.5 delay:1 options:UIViewAnimationOptionTransitionNone animations:^{
+	int removeDelay=1;
+	
+#if defined (CONFIGURATION_Debug)
+	removeDelay=5;
+#endif
+	
+#if defined (CONFIGURATION_Adhoc)
+	removeDelay=3;
+#endif
+	
+	[UIView animateWithDuration:0.5 delay:removeDelay options:UIViewAnimationOptionTransitionNone animations:^{
 		_splashView.alpha = 0.0;
 	} completion:^(BOOL finished) {
 		[_splashView removeFromSuperview];

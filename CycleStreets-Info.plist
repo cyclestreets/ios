@@ -3,13 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>APPCONFIG_ID</key>
-	<string>APPSTATE_LIVE</string>
-	<key>SERVERDOMAIN_ID</key>
-	<string>APPSTATE_LIVE</string>
+	<string>APPSTATE_DEV</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>$(DISPLAY_PREFIX)${PRODUCT_NAME}</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -59,13 +57,17 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>322</string>
+	<string>324</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
 	<array>
 		<string>MKDirectionsModeBike</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Cyclestreets requires access to your location to provide routing information.</string>
+	<key>SERVERDOMAIN_ID</key>
+	<string>APPSTATE_DEV</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIPrerenderedIcon</key>
@@ -91,7 +93,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Cyclestreets requires access to your location to provide routing information.</string>
 </dict>
 </plist>
