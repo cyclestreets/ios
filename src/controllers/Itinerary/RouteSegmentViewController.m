@@ -866,18 +866,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	_photoIconsVisisble=!_photoIconsVisisble;
 	
-//	for (RMMarker *marker in _photoMarkers) {
-//		marker.hidden=!_photoIconsVisisble;
-//	}
-	
-	if(_photoIconsVisisble==YES){
-		self.photoIconButton.style=UIBarButtonItemStyleDone;
-	}else {
-		self.photoIconButton.style=UIBarButtonItemStyleBordered;
+	//TODO: we could optimise this for non changed locations so we dont have to call the server again
+	if(_photoIconsVisisble==NO){
+		
+		[_mapView removeAnnotations:_photoMarkers];
+		
+	}else{
+		
+		[self requestPhotos];
 	}
-
 	
-	[self requestPhotos];
 }
 
 
