@@ -822,7 +822,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if([overlay isKindOfClass:[CSRoutePolyLineOverlay class]]){
 		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
 		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x880088, 0.7);
-		_routeOverlayRenderer.secondaryColor=UIColorFromRGBAndAlpha(0x00FF00, 0.7);
+		_routeOverlayRenderer.secondaryColor=UIColorFromRGBAndAlpha(0x880088, 0.7);
 		_routeOverlayRenderer.secondaryDash=4.0f;
 		return _routeOverlayRenderer;
 	}

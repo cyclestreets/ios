@@ -454,15 +454,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
         
     }
 	
+	// individual segment
 	if(overlay==_segmentOverlay){
 		self.segmentOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
 		_segmentOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x509720, 1);
 		return _segmentOverlayRenderer;
 	}
 	
+	// overall route inc walking sections
 	if(overlay==_routeOverlay){
 		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
 		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x880088, 0.5);
+		_routeOverlayRenderer.secondaryColor=UIColorFromRGBAndAlpha(0x880088, 0.5);
 		return _routeOverlayRenderer;
 	}
 	
