@@ -1184,7 +1184,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	 if ([annotation isKindOfClass:[MKUserLocation class]])
 	 return nil;
-	 
+	
 	 static NSString *reuseId = @"CSWaypointAnnotationView";
 	 CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
 	
@@ -1231,9 +1231,20 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	BetterLog(@"");
 	
-	self.selectedAnnotation=(CSWaypointAnnotationView*)view;
+	if([view.annotation isKindOfClass:[MKUserLocation class]]){
+		
+		if (_uiState!=MapPlanningStateRoute) {
+			MKUserLocation *annotation=(MKUserLocation*)view.annotation;
+			[self addWayPointAtCoordinate:annotation.location.coordinate];
+		}
+		
+	}else{
+		
+		self.selectedAnnotation=(CSWaypointAnnotationView*)view;
 	
-	[view setDragState:MKAnnotationViewDragStateStarting];
+		[view setDragState:MKAnnotationViewDragStateStarting];
+	}
+	
 	
 }
 

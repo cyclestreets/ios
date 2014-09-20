@@ -268,6 +268,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
 	
+	if([view.annotation isKindOfClass:[MKUserLocation class]])
+		return;
+	
 	BetterLog(@"Fired");
 	
 	CSPhotomapAnnotation *annotation=(CSPhotomapAnnotation*)view.annotation;
