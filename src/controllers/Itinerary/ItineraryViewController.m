@@ -29,6 +29,7 @@
 #import "BUIconActionSheet.h"
 #import <MessageUI/MessageUI.h>
 #import <A2StoryboardSegueContext.h>
+#import "CSRouteDetailsViewController.h"
 
 
 @interface ItineraryViewController()<UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
@@ -44,7 +45,7 @@
 @property (nonatomic, weak) IBOutlet LayoutBox             * readoutContainer;
 @property (nonatomic, weak) IBOutlet UITableView           * tableView;
 @property (nonatomic, strong) NSMutableArray               * rowHeightsArray;
-
+@property (nonatomic,strong) CSRouteDetailsViewController   *routeSummary;
 @end
 
 
@@ -118,38 +119,6 @@
 
 
 -(void)createPersistentUI{
-	
-	_readoutContainer.paddingTop=5;
-	_readoutContainer.itemPadding=4;
-	_readoutContainer.layoutMode=BUVerticalLayoutMode;
-	_readoutContainer.alignMode=BUCenterAlignMode;
-	_readoutContainer.fixedWidth=YES;
-	_readoutContainer.fixedHeight=YES;
-	_readoutContainer.backgroundColor=UIColorFromRGB(0xE5E5E5);
-	
-	_routeidLabel.multiline=NO;
-	
-	
-	self.readoutLineOne=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	_readoutLineOne.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	_readoutLineOne.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	
-	self.readoutLineTwo=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	_readoutLineTwo.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	_readoutLineTwo.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	
-	self.readoutLineThree=[[MultiLabelLine alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	_readoutLineThree.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),UIColorFromRGB(0x804000),UIColorFromRGB(0x000000),nil];
-	_readoutLineThree.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	
-	
-	ExpandedUILabel *readoutlabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-	readoutlabel.font=[UIFont systemFontOfSize:11];
-	readoutlabel.textColor=UIColorFromRGB(0x666666);
-	readoutlabel.text=@"Select any segment to view the map & details for it.";
-	 
-	
-	[_readoutContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_readoutLineOne,_readoutLineTwo,_readoutLineThree,readoutlabel, nil]];
 	
 	[self createNavigationBarUI];
 }
@@ -262,6 +231,20 @@
  * @description		UI EVENTS
  ***********************************************/
 //
+
+-(IBAction)didSelectRouteDetailsButton:(id)sender{
+	
+	if (self.routeSummary == nil) {
+		self.routeSummary = [[CSRouteDetailsViewController alloc]init];
+	}
+	self.routeSummary.route = _route;
+	_routeSummary.dataType=SavedRoutesDataTypeRecent;
+	[self showUniqueViewController:_routeSummary];
+	
+	
+}
+
+
 
 -(IBAction)shareButtonSelected:(id)sender{
 	
