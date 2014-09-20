@@ -43,7 +43,7 @@
 
 - (NSString *)shortAttribution
 {
-	return @" © OpenStreetMap contributers ";
+	return @" © OpenStreetMap contributors ";
 }
 
 - (NSString *)longAttribution

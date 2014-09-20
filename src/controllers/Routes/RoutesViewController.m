@@ -144,7 +144,7 @@
 	[_routeTypeControl buildInterface];
 	[controlcontainer addSubview:_routeTypeControl];
 	
-	self.selectedRouteButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:28 styleId:@"OrangeButton" text:@"Current Route"];
+	self.selectedRouteButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"OrangeButton" text:@"Current Route"];
     [_selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[controlcontainer addSubview:_selectedRouteButton];

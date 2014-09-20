@@ -166,6 +166,9 @@ background-color: #509720;
 #BUSegmentedControlButton{
     background-color: #5F5F5F;
     color:#FFFFFF;
+	font-family     : Helvetica Neue;
+	font-weight     : thin;
+	font-size       : 16px;
 }
 #BUSegmentedControlButton:disabled{
     background-color: #509720;

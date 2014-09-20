@@ -33,7 +33,6 @@
 		280E9336140984F300C7AC75 /* CreditsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931F140984F300C7AC75 /* CreditsView.xib */; };
 		280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
 		280E9338140984F300C7AC75 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
-		280E9339140984F300C7AC75 /* ItineraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9324140984F300C7AC75 /* ItineraryView.xib */; };
 		280E933A140984F300C7AC75 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
 		280E933B140984F300C7AC75 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9327140984F300C7AC75 /* MapView.xib */; };
 		280E933C140984F300C7AC75 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9329140984F300C7AC75 /* RouteListView.xib */; };
@@ -183,7 +182,6 @@
 		2834363415DD5DC300B00FD5 /* CreditsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931F140984F300C7AC75 /* CreditsView.xib */; };
 		2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
 		2834363615DD5DC300B00FD5 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
-		2834363715DD5DC300B00FD5 /* ItineraryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9324140984F300C7AC75 /* ItineraryView.xib */; };
 		2834363815DD5DC300B00FD5 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
 		2834363915DD5DC300B00FD5 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9327140984F300C7AC75 /* MapView.xib */; };
 		2834363A15DD5DC300B00FD5 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9329140984F300C7AC75 /* RouteListView.xib */; };
@@ -770,7 +768,6 @@
 		280E931F140984F300C7AC75 /* CreditsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreditsView.xib; sourceTree = "<group>"; };
 		280E9321140984F300C7AC75 /* FavouritesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesView.xib; sourceTree = "<group>"; };
 		280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CSRouteDetailsViewController.xib; sourceTree = "<group>"; };
-		280E9324140984F300C7AC75 /* ItineraryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItineraryView.xib; sourceTree = "<group>"; };
 		280E9325140984F300C7AC75 /* RouteSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSegmentView.xib; sourceTree = "<group>"; };
 		280E9327140984F300C7AC75 /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
 		280E9329140984F300C7AC75 /* RouteListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteListView.xib; sourceTree = "<group>"; };
@@ -1452,7 +1449,6 @@
 		280E9323140984F300C7AC75 /* itinerary */ = {
 			isa = PBXGroup;
 			children = (
-				280E9324140984F300C7AC75 /* ItineraryView.xib */,
 				280E9325140984F300C7AC75 /* RouteSegmentView.xib */,
 			);
 			path = itinerary;
@@ -2558,7 +2554,6 @@
 				280E9336140984F300C7AC75 /* CreditsView.xib in Resources */,
 				280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */,
 				280E9338140984F300C7AC75 /* CSRouteDetailsViewController.xib in Resources */,
-				280E9339140984F300C7AC75 /* ItineraryView.xib in Resources */,
 				280E933A140984F300C7AC75 /* RouteSegmentView.xib in Resources */,
 				280E933B140984F300C7AC75 /* MapView.xib in Resources */,
 				280E933C140984F300C7AC75 /* RouteListView.xib in Resources */,
@@ -2756,7 +2751,6 @@
 				2834363415DD5DC300B00FD5 /* CreditsView.xib in Resources */,
 				2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */,
 				2834363615DD5DC300B00FD5 /* CSRouteDetailsViewController.xib in Resources */,
-				2834363715DD5DC300B00FD5 /* ItineraryView.xib in Resources */,
 				2834363815DD5DC300B00FD5 /* RouteSegmentView.xib in Resources */,
 				2834363915DD5DC300B00FD5 /* MapView.xib in Resources */,
 				2834363A15DD5DC300B00FD5 /* RouteListView.xib in Resources */,

@@ -188,6 +188,7 @@
 		
 	} else {
 		annotationView.annotation = annotation;
+		annotationView.draggable=YES;
 	}
 	
 	return annotationView;
@@ -232,6 +233,8 @@
 
 
 - (void) didTapOnMap:(UITapGestureRecognizer*)recogniser {
+	
+	BetterLog(@"");
 	
 	CGPoint touchPoint = [recogniser locationInView:self.mapView];
     CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];

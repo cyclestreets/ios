@@ -61,7 +61,7 @@
 	
 	for (int i=0; i<[dataProvider count]; i++) {
 		
-		button=[UIButton buttonWithType:UIButtonTypeSystem];
+		button=[UIButton buttonWithType:UIButtonTypeCustom];
 		button.showsTouchWhenHighlighted=NO;
 		button.styleId=@"BUSegmentedControlButton";
 		[button setTitle:[dataProvider objectAtIndex:i] forState:UIControlStateNormal];
@@ -75,7 +75,7 @@
 			bframe.size.width=itemWidth;
 		}
 
-		bframe.size.height=29.0f;
+		bframe.size.height=32.0f;
 		button.frame=bframe;
 		[button addTarget:self action:@selector(itemWasSelected:) forControlEvents:UIControlEventTouchDown];
 		
