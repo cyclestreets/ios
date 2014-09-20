@@ -183,6 +183,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[notifications addObject:GPSLOCATIONCOMPLETE];
 	[notifications addObject:PHOTOWIZARDCATEGORYUPDATE];
 	[notifications addObject:USERACCOUNTLOGINSUCCESS];
+	[notifications addObject:USERACCOUNTREGISTERSUCCESS];
 	
 	[notifications addObject:UIKeyboardWillShowNotification];
 	[notifications addObject:UIKeyboardWillHideNotification];
@@ -210,7 +211,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
     }
 	
 	
-	if([notification.name isEqualToString:USERACCOUNTLOGINSUCCESS]){
+	if([notification.name isEqualToString:USERACCOUNTLOGINSUCCESS] || [notification.name isEqualToString:USERACCOUNTREGISTERSUCCESS]){
         [self autoUploadUserPhoto];
     }
 }

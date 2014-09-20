@@ -404,6 +404,12 @@ static NSString *const STRINGID=@"account";
 		[self showMessageUIForView:_registerView withMessage:@""];
 		[self createNonPersistentUI];
 		
+		if(_isModal==YES && _shouldAutoClose==YES){
+			[self doNavigationSelector:RIGHT];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:USERACCOUNTREGISTERSUCCESS object:nil];
+		}
+		
 	}else if ([state isEqualToString:ERROR]) {
 		[self showResponseMessageUIForView:_registerView withMessage:[dict objectForKey:MESSAGE]];
 	}
