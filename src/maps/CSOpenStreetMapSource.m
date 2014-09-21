@@ -13,7 +13,7 @@
 
 
 -(int)maxZoom{
-	return 18;
+	return 19;
 }
 
 -(int)minZoom{
