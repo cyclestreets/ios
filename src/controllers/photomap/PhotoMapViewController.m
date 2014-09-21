@@ -57,7 +57,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 @property (nonatomic, strong) IBOutlet MKMapView						* mapView;//map of current area
 @property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;// map type label
 
+@property (nonatomic,strong) IBOutlet UINavigationItem					* navigation;
+
+
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* gpslocateButton;
+@property (nonatomic,strong)  IBOutlet UIBarButtonItem					* locationButton;
+@property (nonatomic,strong) UIButton									* activeLocationSubButton;
+
+
 @property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoWizardButton;
 
 @property (nonatomic, strong) CLLocation								* currentLocation;
@@ -308,10 +315,22 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	
 	[_mapView setDelegate:self];
-	_mapView.userTrackingMode=MKUserTrackingModeNone;
+	_mapView.userTrackingMode=MKUserTrackingModeFollow;
 	_mapView.showsUserLocation=YES;
 	
 	[self didNotificationMapStyleChanged];
+	
+	
+	self.activeLocationSubButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
+	_activeLocationSubButton.tintColor=[UIColor whiteColor];
+	[_activeLocationSubButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_location.png"] forState:UIControlStateNormal];
+	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_gpsactive.png"] forState:UIControlStateSelected];
+	self.locationButton = [[UIBarButtonItem alloc] initWithCustomView:_activeLocationSubButton];
+	_locationButton.width = 40;
+	
+	[self.navigation setLeftBarButtonItem:_locationButton];
+	
 	
 	_attributionLabel.text = [CycleStreets mapAttribution];
 	
@@ -384,10 +403,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
+//	if(self.currentLocation!=nil)
+//		return;
+	
 	CLLocation *location=userLocation.location;
 	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
-	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:5]){
+	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:2]){
 		
 		self.currentLocation=location;
 		[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:YES];
@@ -417,10 +439,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
 	
-	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
 	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
 		[self requestPhotos];
+	
 	
 	
 }
@@ -446,18 +468,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (IBAction) locationButtonSelected:(id)sender {
 	
-	if(_mapView.userLocationVisible==NO){
-		
-		if(_mapView.showsUserLocation==YES){
-			
-			_mapView.showsUserLocation=NO;
-			_mapView.showsUserLocation=YES;
-			
-			_gpslocateButton.style = UIBarButtonItemStyleDone;
-		}else{
-			_gpslocateButton.style = UIBarButtonItemStylePlain;
-		}
-	}
+	_activeLocationSubButton.selected=!_activeLocationSubButton.selected;
+	
+	[self.mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
+	
+	[_activeLocationSubButton performSelector:@selector(setSelected:) withObject:@NO afterDelay:1];
 	
 }
 

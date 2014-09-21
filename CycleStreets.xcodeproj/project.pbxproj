@@ -687,6 +687,12 @@
 		28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 28E603091610B683006A4B4C /* cyclestreets.geojson */; };
 		28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3CB1455638D0063AA96 /* SegmentVO.m */; };
 		28E8A3E61455B6D10063AA96 /* SavedRoutesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */; };
+		28ECBE0519CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */; };
+		28ECBE0619CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */; };
+		28ECBE0B19CF25E7006BFE83 /* BUInlineErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */; };
+		28ECBE0C19CF25E7006BFE83 /* BUInlineErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */; };
+		28ECBE0F19CF2760006BFE83 /* UIViewController+BUAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0E19CF2760006BFE83 /* UIViewController+BUAdditions.m */; };
+		28ECBE1019CF2760006BFE83 /* UIViewController+BUAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0E19CF2760006BFE83 /* UIViewController+BUAdditions.m */; };
 		28ECCBD81526300400284926 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484D715261EC800E406E1 /* Reachability.m */; };
 		28ECCBD91526302600284926 /* CopyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484DD15261F3B00E406E1 /* CopyLabel.m */; };
 		28FA62BE153C1C7200AF6267 /* UITextViewAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */; };
@@ -1215,6 +1221,11 @@
 		28E8A3CB1455638D0063AA96 /* SegmentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentVO.m; sourceTree = "<group>"; };
 		28E8A3E41455B6D00063AA96 /* SavedRoutesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedRoutesManager.h; sourceTree = "<group>"; };
 		28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedRoutesManager.m; sourceTree = "<group>"; };
+		28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BUInlineErrorView.xib; sourceTree = "<group>"; };
+		28ECBE0919CF25E7006BFE83 /* BUInlineErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUInlineErrorView.h; sourceTree = "<group>"; };
+		28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUInlineErrorView.m; sourceTree = "<group>"; };
+		28ECBE0D19CF2760006BFE83 /* UIViewController+BUAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BUAdditions.h"; sourceTree = "<group>"; };
+		28ECBE0E19CF2760006BFE83 /* UIViewController+BUAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BUAdditions.m"; sourceTree = "<group>"; };
 		28ECCBDD1526316600284926 /* NSData+Base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		28ECCBDE1526316600284926 /* NSData+Base64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITextViewAccessoryView.xib; sourceTree = "<group>"; };
@@ -1492,6 +1503,7 @@
 		280E9331140984F300C7AC75 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */,
 				28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */,
 				280E9332140984F300C7AC75 /* InitialLocationView.xib */,
 				28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */,
@@ -2037,6 +2049,8 @@
 		28AD630B131FB6C8008527FC /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				28ECBE0D19CF2760006BFE83 /* UIViewController+BUAdditions.h */,
+				28ECBE0E19CF2760006BFE83 /* UIViewController+BUAdditions.m */,
 				284ADCE818C88309003830DE /* NSDataAdditions.h */,
 				284ADCE918C88309003830DE /* NSDataAdditions.m */,
 				28965C5218BF3CC3001BB258 /* TBXML+Additions.h */,
@@ -2109,6 +2123,8 @@
 		28AD6337131FB6C8008527FC /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				28ECBE0919CF25E7006BFE83 /* BUInlineErrorView.h */,
+				28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */,
 				2875DE4B18B77CC400BEF18B /* BUIconActionSheet.h */,
 				2875DE4C18B77CC400BEF18B /* BUIconActionSheet.m */,
 				2875DE4F18B77E7900BEF18B /* BUIconButton.h */,
@@ -2537,6 +2553,7 @@
 				289478AC18AD31410066AA2E /* MainStoryboard.storyboard in Resources */,
 				28D10EC4135D6E54006F1D94 /* UIIcon_turn_left@2x.png in Resources */,
 				28D10EC5135D6E54006F1D94 /* UIIcon_turn_right@2x.png in Resources */,
+				28ECBE0519CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */,
 				28D10EC6135D6E54006F1D94 /* UIIcon_photomap@2x.png in Resources */,
 				28D10EC7135D6E54006F1D94 /* CSTabBar_account@2x.png in Resources */,
 				28D10EC8135D6E54006F1D94 /* CSTabBar_add_photo@2x.png in Resources */,
@@ -2738,6 +2755,7 @@
 				2834362715DD5DC300B00FD5 /* UIIcon_turn_right@2x.png in Resources */,
 				2834362815DD5DC300B00FD5 /* UIIcon_photomap@2x.png in Resources */,
 				2834362915DD5DC300B00FD5 /* CSTabBar_account@2x.png in Resources */,
+				28ECBE0619CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */,
 				2834362A15DD5DC300B00FD5 /* CSTabBar_add_photo@2x.png in Resources */,
 				2834362B15DD5DC300B00FD5 /* CSTabBar_credits@2x.png in Resources */,
 				2834362C15DD5DC300B00FD5 /* CSTabBar_fav_routes@2x.png in Resources */,
@@ -3012,6 +3030,7 @@
 				28965C5418BF3CC3001BB258 /* TBXML+Additions.m in Sources */,
 				28AD6493131FB6C8008527FC /* StringUtilities.m in Sources */,
 				28AD6497131FB6C8008527FC /* ViewUtilities.m in Sources */,
+				28ECBE0B19CF25E7006BFE83 /* BUInlineErrorView.m in Sources */,
 				2872DF3713283586003995BE /* ItineraryCellView.m in Sources */,
 				28BC6AAC18AE431800EF0436 /* LayoutBox.m in Sources */,
 				2875DE5118B77E7900BEF18B /* BUIconButton.m in Sources */,
@@ -3052,6 +3071,7 @@
 				28B3678418B2867400F7244C /* CSWaypointAnnotationView.m in Sources */,
 				280E24BF144D82E90021CDFA /* NSData+MBBase64.m in Sources */,
 				280E24D4144D84F70021CDFA /* ButtonUtilities.m in Sources */,
+				28ECBE0F19CF2760006BFE83 /* UIViewController+BUAdditions.m in Sources */,
 				280E24DB144D8D990021CDFA /* PhotoManager.m in Sources */,
 				28735BF4144EC7A000726A6C /* PhotoMapVO.m in Sources */,
 				2886DED818C528C100CD208B /* BUNetworkOperation.m in Sources */,
@@ -3157,6 +3177,7 @@
 				283436FC15DD5DC300B00FD5 /* ItineraryCellView.m in Sources */,
 				283436FD15DD5DC300B00FD5 /* RouteListViewController.m in Sources */,
 				283436FE15DD5DC300B00FD5 /* RouteCellView.m in Sources */,
+				28ECBE0C19CF25E7006BFE83 /* BUInlineErrorView.m in Sources */,
 				28965C5518BF3CC3001BB258 /* TBXML+Additions.m in Sources */,
 				283436FF15DD5DC300B00FD5 /* RouteVO.m in Sources */,
 				2834370015DD5DC300B00FD5 /* RouteManager.m in Sources */,
@@ -3197,6 +3218,7 @@
 				2834373715DD5DC300B00FD5 /* PhotoManager.m in Sources */,
 				2834373815DD5DC300B00FD5 /* PhotoMapVO.m in Sources */,
 				2834373915DD5DC300B00FD5 /* PhotoMapListVO.m in Sources */,
+				28ECBE1019CF2760006BFE83 /* UIViewController+BUAdditions.m in Sources */,
 				2834373A15DD5DC300B00FD5 /* CSPointVO.m in Sources */,
 				28BC6A8E18AE427B00EF0436 /* PhotoWizardViewController.m in Sources */,
 				28BC6A8818AE427B00EF0436 /* PhotoMapImageLocationViewController.m in Sources */,

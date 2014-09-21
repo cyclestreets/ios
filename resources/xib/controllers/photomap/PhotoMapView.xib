@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoMapViewController">
             <connections>
                 <outlet property="attributionLabel" destination="37" id="43"/>
-                <outlet property="gpslocateButton" destination="6" id="46"/>
                 <outlet property="mapView" destination="Uk5-L9-65u" id="gUZ-dl-24F"/>
+                <outlet property="navigation" destination="pdb-oa-FsR" id="ZXO-5E-iB2"/>
                 <outlet property="photoWizardButton" destination="41" id="52"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -31,12 +32,6 @@
                     </textAttributes>
                     <items>
                         <navigationItem title="Report" id="pdb-oa-FsR">
-                            <barButtonItem key="leftBarButtonItem" image="CSBarButton_location.png" width="24" id="6">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="locationButtonSelected:" destination="-1" id="54"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" systemItem="action" id="41">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -63,10 +58,11 @@
             <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
-    <resources>
-        <image name="CSBarButton_location.png" width="20" height="20"/>
-    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
