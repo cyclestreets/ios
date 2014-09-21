@@ -73,6 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	[notifications addObject:XMLPARSERDIDFAILPARSING];
 	
 	[self addRequestID:REGISTER];
 	[self addRequestID:LOGIN];

@@ -38,6 +38,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "StringUtilities.h"
 #import "GenericConstants.h"
 #import <Pixate/Pixate.h>
+#import "UIViewController+BUAdditions.h"
 
 static NSString *const STRINGID=@"account";
 
@@ -328,6 +329,7 @@ static NSString *const STRINGID=@"account";
 	_activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
 	
 	[_activeActivityView stopAnimating];
+	
 	_activeFormMessageLabel.text=[[StringManager sharedInstance] stringForSection:@"account" andType:messageid];
 	_activeFormSubmitButton.enabled=YES;
 	

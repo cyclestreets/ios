@@ -221,7 +221,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	}
 	
 	LoginVO		*loginResponse=[[LoginVO alloc]init];
-	loginResponse.requestname=[TBXML textForElement:[TBXML childElementNamed:@"request" parentElement:response]];
+	loginResponse.requestname=[TBXML elementName:response];
 	
 	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
 	
@@ -230,20 +230,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		_activeOperation.validationStatus=ValidationLoginSuccess;
 		_activeOperation.operationState=NetResponseStateComplete;
 		
-		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"username" parentElement:resultelement]];
-		loginResponse.userid=[[TBXML textForElement:[TBXML childElementNamed:@"id" parentElement:resultelement]] intValue];
+		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
 		loginResponse.email=[TBXML textForElement:[TBXML childElementNamed:@"email" parentElement:resultelement]];
 		loginResponse.name=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
-		loginResponse.validatedDate=[TBXML textForElement:[TBXML childElementNamed:@"validated" parentElement:resultelement]];
-		loginResponse.userIP=[TBXML textForElement:[TBXML childElementNamed:@"ip" parentElement:resultelement]];
-		
-		loginResponse.validatekey=[[TBXML textForElement:[TBXML childElementNamed:@"validatekey" parentElement:resultelement]] boolValue];
-		loginResponse.deleted=[[TBXML textForElement:[TBXML childElementNamed:@"deleted" parentElement:resultelement]] boolValue];
-		loginResponse.lastsignin=[[TBXML textForElement:[TBXML childElementNamed:@"lastsignin" parentElement:resultelement]] intValue];
 		
 		
 		
 	}else {
+		_activeOperation.operationState=NetResponseStateComplete;
 		_activeOperation.validationStatus=ValidationLoginFailed;
 		
 	}
