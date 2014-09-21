@@ -301,6 +301,7 @@
 }
 
 + (NSString*) textForElement:(TBXMLElement*)aXMLElement {
+    if(aXMLElement==nil) return @"";
 	if (nil == aXMLElement->text) return @"";
 	return [NSString stringWithCString:&aXMLElement->text[0] encoding:NSUTF8StringEncoding];
 }

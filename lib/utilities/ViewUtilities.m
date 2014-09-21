@@ -299,6 +299,69 @@
     NSLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
 }
 
+
++(void)drawUIViewEdgeShadow:(UIView*)view{
+	
+	[ViewUtilities drawUIViewEdgeShadow:view withHeight:10];
+	
+}
+
++(void)drawUIViewEdgeShadow:(UIView*)view withHeight:(int)height{
+	
+	
+	BOOL create=YES;
+	CAGradientLayer *shadow;
+	
+	if([view.layer.sublayers count]>0){
+		id layerzero=[view.layer.sublayers objectAtIndex:0];
+		if([layerzero isKindOfClass:[CAGradientLayer class]]){
+			shadow=[view.layer.sublayers objectAtIndex:0];
+			create=NO;
+		}
+	}
+	
+	if(create==YES){
+		shadow = [ViewUtilities shadowAsInverse:NO :view withheight:height];
+		[view.layer insertSublayer:shadow atIndex:0];
+	}
+	
+	CGRect shadowFrame = shadow.frame;
+	shadowFrame.size.width = view.frame.size.width;
+	shadowFrame.origin.y = view.frame.size.height;
+	shadow.frame = shadowFrame;
+	
+}
+
++(void)drawUIViewEdgeShadow:(UIView*)view atTop:(BOOL)top withHeight:(int)height{
+	
+	BOOL create=YES;
+	CAGradientLayer *shadow;
+	
+	if([view.layer.sublayers count]>0){
+		id layerzero=[view.layer.sublayers objectAtIndex:0];
+		if([layerzero isKindOfClass:[CAGradientLayer class]]){
+			shadow=[view.layer.sublayers objectAtIndex:0];
+			create=NO;
+		}
+	}
+	
+	if(create==YES){
+		shadow = [ViewUtilities shadowAsInverse:top :view withheight:height];
+		[view.layer insertSublayer:shadow atIndex:0];
+	}
+	
+	CGRect shadowFrame = shadow.frame;
+	shadowFrame.size.width = view.frame.size.width;
+	if(top==YES){
+		shadowFrame.origin.y = 0-shadow.frame.size.height;
+	}else{
+		shadowFrame.origin.y = view.frame.size.height;
+	}
+	
+	shadow.frame = shadowFrame;
+	
+}
+
 +(void)drawUIViewEdgeShadow:(UIView*)view atTop:(BOOL)top{
 	
 	BOOL create=YES;
@@ -402,7 +465,16 @@
 	return newShadow;
 }
 
-
++ (CAGradientLayer *)shadowAsInverse:(BOOL)inverse :(UIView*)view withheight:(int)height
+{
+	CAGradientLayer *newShadow = [[CAGradientLayer alloc] init];
+	CGRect newShadowFrame =CGRectMake(0, 0, view.frame.size.width, inverse ? height : height);
+	newShadow.frame = newShadowFrame;
+	UIColor *darkColor =UIColorFromRGBAndAlpha(0x000000,.3);
+	UIColor *lightColor =UIColorFromRGBAndAlpha(0x000000,0);
+	newShadow.colors =[NSArray arrayWithObjects:(inverse ? (id)[lightColor CGColor] : (id)[darkColor CGColor]),(id)(inverse ? (id)[darkColor CGColor] : (id)[lightColor CGColor]),nil];
+	return newShadow;
+}
 
 
 
