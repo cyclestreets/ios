@@ -76,6 +76,12 @@
 }
 
 
+//- (void)drawTextInRect:(CGRect)rect
+//{
+//	UIEdgeInsets insets = {insetValue,insetValue,insetValue,insetValue};
+//	
+//	return [super drawTextInRect:UIEdgeInsetsInsetRect(rect, insets)];
+//}
 
 
 -(void)updateText{
@@ -97,7 +103,7 @@
 			twidth=MIN(twidth,tframe.size.width);
 		}
 		if(insetValue>0)
-			twidth=twidth+insetValue*2;
+			twidth=twidth+(insetValue*2);
 		
 		tframe.size.width=twidth;
 		self.frame=tframe;

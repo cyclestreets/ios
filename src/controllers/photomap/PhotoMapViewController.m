@@ -196,6 +196,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		_attributionLabel.visible=YES;
 		//mkAttributionLabel.visible=NO;
 		_attributionLabel.text = _activeMapSource.shortAttribution;
+		[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
+		
 		
 	}
 	
@@ -318,6 +320,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	_mapView.userTrackingMode=MKUserTrackingModeFollow;
 	_mapView.showsUserLocation=YES;
 	
+	_attributionLabel.textAlignment=NSTextAlignmentCenter;
+	_attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000, .1);
+	
 	[self didNotificationMapStyleChanged];
 	
 	
@@ -331,8 +336,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	[self.navigation setLeftBarButtonItem:_locationButton];
 	
-	
-	_attributionLabel.text = [CycleStreets mapAttribution];
 	
 }
 
@@ -349,6 +352,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(void)createNonPersistentUI{
     
 	[self requestPhotos];
+	
+	[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
+	
 	
 }
 
@@ -411,8 +417,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
 	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:2]){
 		
+		if(_currentLocation==nil){
+			[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:NO];
+		}else{
+			[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:YES];
+		}
 		self.currentLocation=location;
-		[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:YES];
+		
 		
 	}
 	

@@ -16,10 +16,13 @@
 	UIColor			*__unsafe_unretained labelColor;
     BOOL			hasShadow;
 }
-@property (nonatomic, assign)	BOOL	multiline;
-@property (nonatomic, assign)	BOOL	fixedWidth;
-@property (nonatomic, assign)	int	insetValue;
+@property (nonatomic, assign) IBInspectable	BOOL	multiline;
+@property (nonatomic, assign) IBInspectable	BOOL	fixedWidth;
+@property (nonatomic, assign) IBInspectable	int	insetValue;
 @property (nonatomic, unsafe_unretained)	UIColor	*labelColor;
 @property (nonatomic)		BOOL		 hasShadow;
+
+
+- (void)setNewText:(NSString *)aText;
 
 @end

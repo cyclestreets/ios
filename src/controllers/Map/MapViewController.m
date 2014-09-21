@@ -97,7 +97,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
 
 // ui
-@property (nonatomic, strong) IBOutlet UILabel						* attributionLabel;
+@property (nonatomic, strong) IBOutlet ExpandedUILabel				* attributionLabel;
 
 @property (nonatomic, assign) MapAlertType							alertType;
 
@@ -270,6 +270,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		_attributionLabel.visible=YES;
 		//mkAttributionLabel.visible=NO;
 		_attributionLabel.text = _activeMapSource.shortAttribution;
+		[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 		
 	}
 	
@@ -313,7 +314,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
 	
-	_attributionLabel.textAlignment=NSTextAlignmentRight;
+	_attributionLabel.textAlignment=NSTextAlignmentCenter;
 	_attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000, .1);
 	
 	BOOL willRequireAuthorisation=[[UserLocationManager sharedInstance] requestAuthorisation];
@@ -395,9 +396,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 -(void)createNonPersistentUI{
 	
-	
-	
-	
+	[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 	
 }
 
