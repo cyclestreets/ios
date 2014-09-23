@@ -52,7 +52,7 @@
  observation with removeObserverWithBlockToken:.
  @see addObserverForKeyPath:identifier:options:task:
  */
-- (NSString *)bk_addObserverForKeyPaths:(NSArray *)keyPaths task:(void (^)(id obj, NSDictionary *keyPath))task;
+- (NSString *)bk_addObserverForKeyPaths:(NSArray *)keyPaths task:(void (^)(id obj, NSString *keyPath))task;
 
 /** Adds an observer to an object conforming to NSKeyValueObserving.
 
@@ -78,7 +78,6 @@
  @param options The NSKeyValueObservingOptions to use.
  @param task A block with no return argument and three parameters: the
  reciever, the key path of the value change, and the change dictionary.
- @param task A block responding to the reciever, the key path, and the KVO change.
  @return A unique identifier for removing
  observation with removeObserverWithBlockToken:.
  @see addObserverForKeyPath:identifier:options:task:

@@ -26,10 +26,10 @@ extern NSString *const A2IncompatibleMethodSignatureKey;
 @interface A2BlockInvocation : NSObject
 
 /** Inspects the given block literal and returns a compatible method signature.
- 
+
  The returned method signature is suitable for use in the Foundation forwarding
  system to link a method call to a block invocation.
- 
+
  @param block An Objective-C block literal
  @return A method signature matching the declared prototype for the block
  */
@@ -38,9 +38,9 @@ extern NSString *const A2IncompatibleMethodSignatureKey;
 /** @name Creating A2BlockInvocation Objects */
 
 /** Returns a block invocation object able to construct calls to a given block.
- 
+
  This method synthesizes a compatible method signature for the given block.
- 
+
  @param block A block literal
  @return An initialized block invocation object
  @see methodSignatureForBlock
@@ -49,18 +49,18 @@ extern NSString *const A2IncompatibleMethodSignatureKey;
 
 /** Returns a block invocation object able to construct calls to a given block
  using a given Objective-C method signature.
- 
+
  The method signature given must be compatible with the signature of the block;
  that is, equal to the block signature but with a `SEL` (`':'`) as the second
  parameter. Passing in an incompatible method signature will raise an exception.
- 
+
  An example method returning a string for an integer argument would have the
  following properties:
  - Block type signature of `NSString *(^)(int)`
  - Block function definition of `NSString *(*)(id, int)`
  - Block signature of `"@@?i"`
  - Method signature of `"@:i"` or `"@i"`
- 
+
  @param block An Objective-C block literal
  @param methodSignature An method signature matching the block
  @return An initialized block invocation object
@@ -78,7 +78,7 @@ extern NSString *const A2IncompatibleMethodSignatureKey;
 
 /** Calls the receiver's block with the arguments from the given invocation,
  providing a buffer containing the block's return value upon return.
- 
+
  @param inv An instance of NSInvocation with values for its arguments set.
  @param returnValue On return, the block's return value, or `nil` for a void
  return type.
@@ -89,7 +89,7 @@ extern NSString *const A2IncompatibleMethodSignatureKey;
 
 /** Calls the receiver's block with the arguments from the given invocation
  and sets the return value on the given invocation.
- 
+
  @param inv An instance of NSInvocation with values for its arguments set.
  @see invokeWithInvocation:returnValue:
  */
