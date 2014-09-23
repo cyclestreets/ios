@@ -621,7 +621,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	BetterLog(@"");
 	
 	_pageTitleLabel.text=[[_viewArray objectAtIndex:_activePage] objectForKey:@"title"];
-    _pageNumberLabel.text=[NSString stringWithFormat:@"%li of %lu",_activePage+1, (unsigned long)[_viewArray count]];
+    _pageNumberLabel.text=[NSString stringWithFormat:@"%i of %lu",_activePage+1, (unsigned long)[_viewArray count]];
 	
 	[self updateView];
 	

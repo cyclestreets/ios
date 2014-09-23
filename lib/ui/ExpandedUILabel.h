@@ -23,6 +23,4 @@
 @property (nonatomic)		BOOL		 hasShadow;
 
 
-- (void)setNewText:(NSString *)aText;
-
 @end

@@ -12,7 +12,8 @@
 
 enum  {
 	SavedRoutesDataTypeRecent,
-	SavedRoutesDataTypeFavourite
+	SavedRoutesDataTypeFavourite,
+	SavedRoutesDataTypeItinerary
 };
 typedef int SavedRoutesDataType;
 

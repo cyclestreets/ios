@@ -187,18 +187,15 @@ static NSString *const VIEWTITLE=@"Route details";
 	d2.topStrokeColor=[UIColor lightGrayColor];
 	d2.bottomStrokeColor=[UIColor clearColor];
 	
-	//[_routeButton setTitle:@"Select this route" forState:UIControlStateNormal];
-	//[_renameButton setTitle:@"Rename this route" forState:UIControlStateNormal];
-	//[_favouriteButton setTitle:@"Add to favourites" forState:UIControlStateNormal];
-	
 	_routeNameLabel.multiline=YES;
 	
 	[_viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_elevationView, nil]];
 	
-	
-	UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectRouteActions)];
-	[self.navigationItem setRightBarButtonItem:actionButton];
-	
+	if(_dataType!=SavedRoutesDataTypeItinerary){
+		UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectRouteActions)];
+		[self.navigationItem setRightBarButtonItem:actionButton];
+	}
+		
 }
 
 

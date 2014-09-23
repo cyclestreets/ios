@@ -238,148 +238,12 @@
 		self.routeSummary = [[CSRouteDetailsViewController alloc]init];
 	}
 	self.routeSummary.route = _route;
-	_routeSummary.dataType=SavedRoutesDataTypeRecent;
+	_routeSummary.dataType=SavedRoutesDataTypeItinerary;
 	[self showUniqueViewController:_routeSummary];
 	
 	
 }
 
-
-
--(IBAction)shareButtonSelected:(id)sender{
-	
-	NSArray *activitites;
-	
-	#if ENABLEOS6ACTIVITYMODE 
-	
-	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
-		
-		UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL URLWithString:[NSString stringWithFormat:@"cyclestreets://route/%@",route.routeid]]] applicationActivities:nil];
-		activity.excludedActivityTypes = @[UIActivityTypeSaveToCameraRoll, UIActivityTypePrint, UIActivityTypePostToWeibo];
-		
-		[self presentViewController:activity animated:YES completion:nil];
-		[activity setCompletionHandler:^(NSString *activityType, BOOL completed){
-			
-			if(completed==YES){
-				
-				
-				
-			}
-			
-		}];
-		 
-		 
-		 
-	}else{
-	#endif
-		
-		activitites=@[@(BUIconActionSheetIconTypeTwitter),@(BUIconActionSheetIconTypeMail),@(BUIconActionSheetIconTypeSMS),@(BUIconActionSheetIconTypeCopy)];
-		
-		BUIconActionSheet *iconSheet=[[BUIconActionSheet alloc] initWithButtons:activitites andTitle:@"Share your CycleStreets route"];
-		iconSheet.delegate=self;
-		
-		[iconSheet show:YES];
-		
-	#if ENABLEOS6ACTIVITYMODE
-	}
-	#endif
-	
-	
-}
-
-// BUIconActionSheet delegate callback
--(void)actionSheetClickedButtonWithType:(BUIconActionSheetIconType)type{
-	
-	
-	switch (type) {
-		case BUIconActionSheetIconTypeTwitter:
-			
-			if ([TWTweetComposeViewController canSendTweet]) {   
-					
-				TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
-				[tweetViewController setInitialText:[NSString stringWithFormat:@"Just planned this cycle journey on @CycleStreets: %@",_route.csBrowserRouteurlString]];
-					
-				//[tweetViewController addURL:[NSURL URLWithString:_route.csBrowserRouteurlString]];
-					
-				[self presentViewController:tweetViewController animated:YES completion:nil];
-				[tweetViewController setCompletionHandler:^(SLComposeViewControllerResult result){
-					
-					[self dismissModalViewControllerAnimated:YES];
-					
-				}];
-					
-				} else {
-					
-					UIAlertView *alertView = [[UIAlertView alloc]
-											  initWithTitle:@"Sorry"
-											  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
-											  delegate:self
-											  cancelButtonTitle:@"OK"
-											  otherButtonTitles:nil];
-					[alertView show];
-					
-					
-					
-					
-			}
-				
-			
-		break;
-		
-		case BUIconActionSheetIconTypeMail:
-		{
-			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-			picker.mailComposeDelegate = self;
-			[picker setSubject:[NSString stringWithFormat:@"CycleStreets route %@",_route.routeid]];
-			
-			NSString *body=[NSString stringWithFormat:@"%@ <br><br>%@",
-							[NSString stringWithFormat:@" I've planned this cycle route on CycleStreets:<br><a href=%@>%@</a>",_route.csBrowserRouteurlString,_route.csBrowserRouteurlString],
-							[NSString stringWithFormat:@"If you have an iOS device, you can open it in the CycleStreets app: <a href=%@>%@</a>",_route.csiOSRouteurlString,_route.csiOSRouteurlString]];
-			
-			[picker setMessageBody:body isHTML:YES];
-			
-			if(picker!=nil)
-				[self presentModalViewController:picker animated:YES];
-		}
-		break;
-			
-		case BUIconActionSheetIconTypeSMS:
-		{
-			
-			MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
-			picker.messageComposeDelegate = self;
-			picker.body=[NSString stringWithFormat:@"CycleStreets route %@",_route.csBrowserRouteurlString];
-			
-			if(picker!=nil)
-				[self presentModalViewController:picker animated:YES];
-			
-		}
-			
-		break;
-			
-		case BUIconActionSheetIconTypeCopy:
-		{
-			[[UIPasteboard generalPasteboard] setString:_route.csBrowserRouteurlString];
-		}
-			
-		break;
-			default:
-			break;
-	}
-	
-}
-
-
-// The mail compose view controller delegate method
-- (void)mailComposeController:(MFMailComposeViewController *)controller  didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
-	
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
-	
-	[self dismissModalViewControllerAnimated:YES];
-}
 
 
 #define kItineraryPlanView 9001
@@ -461,7 +325,6 @@
 	if([segue.identifier isEqualToString:@"RouteSegmentSegue"]){
 		
 		RouteSegmentViewController *controller=segue.destinationViewController;
-		
 		NSDictionary *context=segue.context;
 		controller.route=context[DATAPROVIDER];
 		controller.index=[context[INDEX] integerValue];
@@ -492,17 +355,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 	
-	if (self.isViewLoaded && !self.view.window) {
-        self.view = nil;
-    }
-	
-	self.route=nil;
-	self.headerText=nil;
-	//self.routeSegmentViewcontroller=nil;
-	self.readoutLineOne=nil;
-	self.readoutLineTwo=nil;
-	self.readoutLineThree=nil;
-	self.rowHeightsArray=nil;
 }
 
 

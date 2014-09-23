@@ -400,6 +400,8 @@
 		284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
 		284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
+		284BADC119D0160000FFD4DD /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 284BADC019D0160000FFD4DD /* Launch Screen.xib */; };
+		284BADC219D0160000FFD4DD /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 284BADC019D0160000FFD4DD /* Launch Screen.xib */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -895,6 +897,7 @@
 		284ADCE918C88309003830DE /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		284ADCEC18C892A9003830DE /* BUCodableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCodableObject.h; sourceTree = "<group>"; };
 		284ADCED18C892A9003830DE /* BUCodableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCodableObject.m; sourceTree = "<group>"; };
+		284BADC019D0160000FFD4DD /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
 		28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HUD_icon_checkMark@2x.png"; sourceTree = "<group>"; };
 		28535DBB15E50FCD0092FC16 /* HUD_icon_exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_exclaim.png; sourceTree = "<group>"; };
@@ -1831,6 +1834,7 @@
 				28AD60B9131FB54A008527FC /* main.m */,
 				28AD60BA131FB54A008527FC /* Prefix.pch */,
 				289478AB18AD31410066AA2E /* MainStoryboard.storyboard */,
+				284BADC019D0160000FFD4DD /* Launch Screen.xib */,
 			);
 			path = AppDefaults;
 			sourceTree = "<group>";
@@ -2669,6 +2673,7 @@
 				28B76F3015E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */,
 				28B76F3215E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */,
 				28B76F3415E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
+				284BADC119D0160000FFD4DD /* Launch Screen.xib in Resources */,
 				28B76F3715E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
 				28BC6AA018AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
@@ -2828,6 +2833,7 @@
 				2834368315DD5DC300B00FD5 /* CSTabBar_credits.png in Resources */,
 				2834368415DD5DC300B00FD5 /* CSTabBar_fav_routes.png in Resources */,
 				2834368515DD5DC300B00FD5 /* CSTabBar_itinerary.png in Resources */,
+				284BADC219D0160000FFD4DD /* Launch Screen.xib in Resources */,
 				2834368615DD5DC300B00FD5 /* CSTabBar_photomap_tb.png in Resources */,
 				2834368715DD5DC300B00FD5 /* CSTabBar_plan_route.png in Resources */,
 				2834368815DD5DC300B00FD5 /* CSTabBar_settings.png in Resources */,
@@ -3316,6 +3322,7 @@
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -3367,6 +3374,7 @@
 				PROVISIONING_PROFILE = "80A320A2-7BF3-4900-BBB7-F68BD8CB359F";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -3664,6 +3672,7 @@
 				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
