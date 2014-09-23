@@ -16,7 +16,7 @@
 #import "ExpandedUILabel.h"
 #import "AppDelegate.h"
 #import "GradientView.h"
-#import <Pixate/Pixate.h>
+#import <PixateFreestyle.h>
 
 #define COLUMNCOUNT 3
 
