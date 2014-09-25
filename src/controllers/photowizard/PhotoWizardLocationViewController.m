@@ -13,13 +13,14 @@
 #import "CSPhotomapAnnotation.h"
 #import <MapKit/MapKit.h>
 #import "MKMapView+Additions.h"
-
-
+#import "CSMapSource.h"
+#import "CycleStreets.h"
 
 @interface PhotoWizardLocationViewController()<MKMapViewDelegate>
 
 
 @property (nonatomic, weak) IBOutlet MKMapView						* mapView;
+@property (nonatomic,strong)  CSMapSource							* activeMapSource;
 @property (nonatomic, strong) IBOutlet UILabel						* locationLabel;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem				* closeButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem				* resetButton;
@@ -63,6 +64,63 @@
 }
 
 
+- (void) didNotificationMapStyleChanged {
+	
+	
+	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
+	
+	self.activeMapSource=[CycleStreets activeMapSource];
+	
+	if(overlays.count==0){
+		
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+			
+			
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
+			newoverlay.canReplaceMapContent = YES;
+			newoverlay.maximumZ=_activeMapSource.maxZoom;
+			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+			
+			
+		}
+		
+	}else{
+		
+		for(id <MKOverlay> overlay in overlays){
+			if([overlay isKindOfClass:[MKTileOverlay class]] ){
+				
+				
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+					
+					
+					[_mapView removeOverlay:overlay];
+					
+					break;
+					
+				}else{
+					
+					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
+					newoverlay.canReplaceMapContent = YES;
+					newoverlay.maximumZ=_activeMapSource.maxZoom;
+					[_mapView removeOverlay:overlay];
+					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
+					
+					
+					break;
+					
+				}
+				
+				
+				break;
+			}
+		}
+		
+	}
+	
+	
+	
+}
+
 
 //
 /***********************************************
@@ -89,6 +147,8 @@
 	[_mapView addGestureRecognizer:_mapTapRecognizer];
 	
 	_modalToolBar.clipsToBounds=YES;
+	
+	[self didNotificationMapStyleChanged];
 		
 }
 
@@ -166,6 +226,23 @@
 		[self showLocationOnMap:_userlocation];
 		 
 	}
+}
+
+
+
+//------------------------------------------------------------------------------------
+#pragma mark - MapKit Overlays
+//------------------------------------------------------------------------------------
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+	
+	
+	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+		return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+		
+	}
+	
+	return nil;
 }
 
 
@@ -330,7 +407,6 @@
 	self.closeButton=nil;
 	self.resetButton=nil;
 	self.updateButton=nil;
-	self.userMarker=nil;
 	
 
 }

@@ -7,17 +7,14 @@
 //
 
 #import "SuperViewController.h"
-#import "RMMapView.h"
-#import "RMMapViewDelegate.h"
 #import <CoreLocation/CoreLocation.h>
 
 
-@interface PhotoWizardLocationViewController : SuperViewController<RMMapViewDelegate, CLLocationManagerDelegate>{
+@interface PhotoWizardLocationViewController : SuperViewController< CLLocationManagerDelegate>{
     
        
 }
 
-@property (nonatomic, strong) RMMarker								* userMarker;
 @property (nonatomic, strong) CLLocation							* photolocation;
 @property (nonatomic, strong) CLLocation							* userlocation;
 @end

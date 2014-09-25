@@ -27,7 +27,7 @@
 #import "MKMapView+Additions.h"
 #import "CSPhotomapAnnotationView.h"
 #import "AccountViewController.h"
-
+#import "CSMapSource.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -71,6 +71,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 @property (nonatomic, strong) IBOutlet MKMapView *locationMapView;
+@property (nonatomic,strong)  CSMapSource							* activeMapSource;
 @property (nonatomic, strong) IBOutlet UILabel *locationLabel;
 @property (nonatomic, strong) IBOutlet UIButton *locationUpdateButton;
 @property (nonatomic, strong) IBOutlet UIButton *locationResetButton;
@@ -184,6 +185,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	[notifications addObject:PHOTOWIZARDCATEGORYUPDATE];
 	[notifications addObject:USERACCOUNTLOGINSUCCESS];
 	[notifications addObject:USERACCOUNTREGISTERSUCCESS];
+	[notifications addObject:CSMAPSTYLECHANGED];
 	
 	[notifications addObject:UIKeyboardWillShowNotification];
 	[notifications addObject:UIKeyboardWillHideNotification];
@@ -214,7 +216,70 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	if([notification.name isEqualToString:USERACCOUNTLOGINSUCCESS] || [notification.name isEqualToString:USERACCOUNTREGISTERSUCCESS]){
         [self autoUploadUserPhoto];
     }
+	
+	if([notification.name isEqualToString:CSMAPSTYLECHANGED]){
+		[self didNotificationMapStyleChanged];
+	}
 }
+
+
+- (void) didNotificationMapStyleChanged {
+	
+	
+	NSArray *overlays=[_locationMapView overlaysInLevel:MKOverlayLevelAboveLabels];
+	
+	self.activeMapSource=[CycleStreets activeMapSource];
+	
+	if(overlays.count==0){
+		
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+			
+			
+			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
+			newoverlay.canReplaceMapContent = YES;
+			newoverlay.maximumZ=_activeMapSource.maxZoom;
+			[_locationMapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+			
+			
+		}
+		
+	}else{
+		
+		for(id <MKOverlay> overlay in overlays){
+			if([overlay isKindOfClass:[MKTileOverlay class]] ){
+				
+				
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+					
+					
+					[_locationMapView removeOverlay:overlay];
+					
+					break;
+					
+				}else{
+					
+					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
+					newoverlay.canReplaceMapContent = YES;
+					newoverlay.maximumZ=_activeMapSource.maxZoom;
+					[_locationMapView removeOverlay:overlay];
+					[_locationMapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
+					
+					
+					break;
+					
+				}
+				
+				
+				break;
+			}
+		}
+		
+	}
+	
+	
+	
+}
+
 
 
 -(void)didRecievePhotoImageUploadResponse:(NSDictionary*)dict{
@@ -297,7 +362,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	self.uploadImage=[[UploadPhotoVO alloc]init];
 	
 	_modalToolBar.clipsToBounds=YES;
-    
+	
+	//[self didNotificationMapStyleChanged];
 	
     _viewState=PhotoWizardViewStateInfo;
 	_activePage=0;
@@ -947,6 +1013,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	 _userLocationAnnotation.coordinate=CLLocationCoordinate2DMake(0,0);
 	_userLocationAnnotation.isUserPhoto=YES;
 	 [_locationMapView addAnnotation:_userLocationAnnotation];
+	
+	[self didNotificationMapStyleChanged];
 		
 	[self loadLocationFromPhoto];
 		
@@ -1105,16 +1173,21 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	return annotationView;
 }
 
+//------------------------------------------------------------------------------------
+#pragma mark - MapKit Overlays
+//------------------------------------------------------------------------------------
 
-/*
-- (RMMapLayer *)mapView:(RMMapView *)aMapView layerForAnnotation:(RMAnnotation *)annotation
-{
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
 	
-	RMMapLayer *marker = [[RMMarker alloc] initWithUIImage:annotation.annotationIcon anchorPoint:annotation.anchorPoint];
-    
-    return marker;
+	
+	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+		return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+		
+	}
+	
+	return nil;
 }
-*/
+
 
 
 #pragma mark - Category View
@@ -1320,7 +1393,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
-
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
 	
 	switch (_viewState) {
@@ -1388,8 +1460,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	switch (_viewState) {
 		case PhotoWizardViewStateDescription:
 		{
-			if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
-			_photodescriptionField.text=@"";
+			NSString *prompttext=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
+			if([_photodescriptionField.text containsString:prompttext]){
+			_photodescriptionField.text=[_photodescriptionField.text stringByReplacingOccurrencesOfString:prompttext withString:EMPTYSTRING];;
 			_photodescriptionField.textColor=UIColorFromRGB(0x555555);
 			return;
 			}

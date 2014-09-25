@@ -13,13 +13,8 @@
 #import "UploadPhotoVO.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-//#import "AccountViewController.h"
-#import "RMMapView.h"
 #import "CopyLabel.h"
 
-#import "RMOpenStreetMapSource.h"
-#import "RMOpenCycleMapSource.h"
-#import "RMTileSource.h"
 
 #define MAXWIZARDVIEWS 7
 
@@ -35,7 +30,7 @@ typedef NS_ENUM(NSUInteger, PhotoWizardViewState) {
 
 
 @interface PhotoWizardViewController : SuperViewController<UITextViewDelegate,
-UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate,RMMapViewDelegate>{
+UIImagePickerControllerDelegate,UIScrollViewDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>{
 	Class popoverClass;
 }
 
