@@ -11,10 +11,13 @@
 #import "IIViewDeckController.h"
 #import "GlobalUtilities.h"
 #import "FMMoveTableView.h"
+#import "UIView+Additions.h"
 
 @interface WayPointViewController ()
 
 @property(nonatomic,weak) IBOutlet  FMMoveTableView         *tableView;
+
+@property (nonatomic,assign)  int						initialHeight;
 
 
 -(IBAction)closeButtonSelected:(id)sender;
@@ -56,11 +59,15 @@
 	
 	self.viewDeckController.delegate=self;
 	
+	self.initialHeight=self.view.height;
+	
     [self createPersistentUI];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
+	
+	self.tableView.height=_initialHeight;
 	
     [self createNonPersistentUI];
     
