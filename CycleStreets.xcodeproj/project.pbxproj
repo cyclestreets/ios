@@ -629,7 +629,6 @@
 		28B76F4A15E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */; };
 		28B78DA21507884C00949870 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
 		28BC6A5D18AE1D8B00EF0436 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */; };
-		28BC6A5F18AE1DBE00EF0436 /* Pixate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BC6A5E18AE1DBE00EF0436 /* Pixate.framework */; };
 		28BC6A7818AE418000EF0436 /* CycleStreets.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7718AE418000EF0436 /* CycleStreets.m */; };
 		28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7718AE418000EF0436 /* CycleStreets.m */; };
 		28BC6A8818AE427B00EF0436 /* PhotoMapImageLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7C18AE427B00EF0436 /* PhotoMapImageLocationViewController.m */; };
@@ -1143,7 +1142,6 @@
 		28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_deletePoint@2x.png"; sourceTree = "<group>"; };
 		28B78DA11507884C00949870 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		28BC6A5E18AE1DBE00EF0436 /* Pixate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pixate.framework; path = System/Library/Frameworks/Pixate.framework; sourceTree = SDKROOT; };
 		28BC6A7618AE418000EF0436 /* CycleStreets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleStreets.h; sourceTree = "<group>"; };
 		28BC6A7718AE418000EF0436 /* CycleStreets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleStreets.m; sourceTree = "<group>"; };
 		28BC6A7B18AE427B00EF0436 /* PhotoMapImageLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoMapImageLocationViewController.h; sourceTree = "<group>"; };
@@ -1239,7 +1237,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28BC6A5F18AE1DBE00EF0436 /* Pixate.framework in Frameworks */,
 				28BC6A5D18AE1D8B00EF0436 /* CoreText.framework in Frameworks */,
 				7A8A63253B4C42DCB36EA45D /* libPods.a in Frameworks */,
 				2811C4CA166CFFE600592560 /* MessageUI.framework in Frameworks */,
@@ -2359,7 +2356,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				28BC6A5E18AE1DBE00EF0436 /* Pixate.framework */,
 				28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */,
 				2811C4C7166CFFD600592560 /* MessageUI.framework */,
 				2811C4AF166CDBC600592560 /* Social.framework */,
@@ -3248,7 +3244,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
-					"$(SRCROOT)/lib/external/Pixate/Framework/iOS",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3257,23 +3252,21 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)\n<plist",
-					../../../libs/Alpstein/MapView,
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
-					"\"$(SRCROOT)/lib/external/GoogleAnalytics\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-licucore",
 					"-ObjC",
+					"-framework",
+					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "";
@@ -3302,30 +3295,27 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
-					"$(SRCROOT)/lib/external/Pixate/Framework/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)\n<plist",
-					../../../libs/Alpstein/MapView,
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
-					"\"$(SRCROOT)/lib/external/GoogleAnalytics\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-lxml2",
 					"-ObjC",
+					"-framework",
+					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "80A320A2-7BF3-4900-BBB7-F68BD8CB359F";
@@ -3352,7 +3342,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"\\\"$(SRCROOT)/../../AppCore/external/Crashlytics\\\"",
-					/Users/neil/iPhone/Applications/CycleStreets/ios/lib/external/Pixate/Framework/iOS,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -3379,7 +3368,7 @@
 				PROVISIONING_PROFILE = "A1154760-7263-4DD3-9482-A63E00406F8B";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -3398,7 +3387,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"\\\"$(SRCROOT)/../../AppCore/external/Crashlytics\\\"",
-					/Users/neil/iPhone/Applications/CycleStreets/ios/lib/external/Pixate/Framework/iOS,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -3423,7 +3411,7 @@
 				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3443,7 +3431,6 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"\\\"$(SRCROOT)/../../AppCore/external/Crashlytics\\\"",
-					/Users/neil/iPhone/Applications/CycleStreets/ios/lib/external/Pixate/Framework/iOS,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -3468,7 +3455,7 @@
 				PROVISIONING_PROFILE = "B69ADFE1-B824-4A5F-867E-B78CC80FC985";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Adhoc;
@@ -3476,6 +3463,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -3505,7 +3493,8 @@
 				);
 				PROVISIONING_PROFILE = "A1154760-7263-4DD3-9482-A63E00406F8B";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Debug;
@@ -3513,6 +3502,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -3541,7 +3531,8 @@
 				);
 				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Release;
@@ -3549,6 +3540,7 @@
 		E791ADC911518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -3569,6 +3561,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-licucore",
@@ -3577,7 +3570,8 @@
 				);
 				PROVISIONING_PROFILE = "B69ADFE1-B824-4A5F-867E-B78CC80FC985";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = "../../../libs/RouteMe/MapView/**";
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Adhoc;
@@ -3600,30 +3594,27 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
-					"$(SRCROOT)/lib/external/Pixate/Framework/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)\n<plist",
-					../../../libs/Alpstein/MapView,
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib/external/TestFlight\"",
-					"\"$(SRCROOT)/lib/external/GoogleAnalytics\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-licucore",
 					"-ObjC",
 					"-lxml2",
+					"-framework",
+					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
