@@ -20,26 +20,24 @@
 #import "LayoutBox.h"
 #import "ViewUtilities.h"
 #import "GradientView.h"
-#import <Twitter/Twitter.h>
 #import "GenericConstants.h"
 #import "MultiLabelLine.h"
 #import "LayoutBox.h"
 #import "RouteSegmentViewController.h"
 #import "CopyLabel.h"
 #import "BUIconActionSheet.h"
-#import <MessageUI/MessageUI.h>
 #import <A2StoryboardSegueContext.h>
 #import "CSRouteDetailsViewController.h"
 
 
-@interface ItineraryViewController()<UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
+@interface ItineraryViewController()<UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate>
 
 @property (nonatomic, strong) RouteVO                      * route;
 @property (nonatomic, assign) NSInteger                    routeId;
 @property (nonatomic, strong) UITextView                   * headerText;
 @property (nonatomic, strong) RouteSegmentViewController * routeSegmentViewcontroller;
 @property (nonatomic, weak) IBOutlet CopyLabel             * routeidLabel;
-@property (nonatomic, strong) MultiLabelLine               * readoutLineOne;
+@property (nonatomic, strong) IBOutlet MultiLabelLine               * readoutLineOne;
 @property (nonatomic, strong) MultiLabelLine               * readoutLineTwo;
 @property (nonatomic, strong) MultiLabelLine               * readoutLineThree;
 @property (nonatomic, weak) IBOutlet LayoutBox             * readoutContainer;
@@ -95,6 +93,12 @@
 	self.route=[RouteManager sharedInstance].selectedRoute;
     self.routeId = [_route.routeid integerValue];
 	
+	_routeidLabel.text=[_route routeid];
+	
+	_readoutLineOne.labels=[NSMutableArray arrayWithObjects:@"Length:",_route.lengthString,
+							@"Estimated time:",_route.timeString,nil];
+	[_readoutLineOne drawUI];
+	
 	
 	[self createRowHeightsArray];
 	[_tableView reloadData];
@@ -109,16 +113,22 @@
 //
 
 - (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    [self createPersistentUI];
 	
 	[self refreshUIFromDataProvider];
 	
-    [super viewDidLoad];
-	
-	[self createPersistentUI];
 }
 
 
 -(void)createPersistentUI{
+	
+	
+	_readoutLineOne.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x804000),UIColorFromRGB(0x5F5F5F),UIColorFromRGB(0x804000),UIColorFromRGB(0x5F5F5F),nil];
+	_readoutLineOne.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+
 	
 	[self createNavigationBarUI];
 }
@@ -151,19 +161,7 @@
 		
 		[self showNoActiveRouteView:NO];
 		
-		_routeidLabel.text=[_route routeid];
 		
-		_readoutLineOne.labels=[NSMutableArray arrayWithObjects:@"Length:",_route.lengthString,
-							   @"Estimated time:",_route.timeString,nil];
-		[_readoutLineOne drawUI];
-		
-		_readoutLineTwo.labels=[NSMutableArray arrayWithObjects:@"Planned speed:",_route.speedString,
-							   @"Strategy:",_route.planString,nil];
-		[_readoutLineTwo drawUI];
-		
-		_readoutLineThree.labels=[NSMutableArray arrayWithObjects:@"Calories:",_route.calorieString,
-							   @"CO2 saved:",_route.coString,nil];
-		[_readoutLineThree drawUI];
 		
 		self.navigationItem.rightBarButtonItem.enabled=YES;
 		

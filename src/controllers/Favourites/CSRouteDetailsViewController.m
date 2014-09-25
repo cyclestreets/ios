@@ -59,6 +59,7 @@ static NSString *const VIEWTITLE=@"Route details";
 @property (nonatomic, weak) IBOutlet UILabel         * speedLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * calorieLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * coLabel;
+@property (strong, nonatomic) IBOutlet UIButton     *selectRouteButton;
 
 @property (nonatomic,strong)  CSElevationGraphView					*elevationView;
 
@@ -155,7 +156,7 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	_viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
 	_viewContainer.fixedWidth=YES;
-	_viewContainer.itemPadding=7;
+	_viewContainer.itemPadding=5;
 	_viewContainer.paddingTop=10;
 	_viewContainer.paddingBottom=20;
 	_viewContainer.layoutMode=BUVerticalLayoutMode;
@@ -165,6 +166,7 @@ static NSString *const VIEWTITLE=@"Route details";
 	_headerContainer.layoutMode=BUVerticalLayoutMode;
 	[_headerContainer initFromNIB];
 	_readoutContainer.layoutMode=BUVerticalLayoutMode;
+    _readoutContainer.paddingTop=0;
 	[_readoutContainer initFromNIB];
 	
 	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 170)];
@@ -180,7 +182,7 @@ static NSString *const VIEWTITLE=@"Route details";
 
 	
 	
-	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 4)];
 	d1.topStrokeColor=[UIColor lightGrayColor];
 	d1.bottomStrokeColor=[UIColor clearColor];
 	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
@@ -189,7 +191,7 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	_routeNameLabel.multiline=YES;
 	
-	[_viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_elevationView, nil]];
+	[_viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_elevationView,_selectRouteButton, nil]];
 	
 	if(_dataType!=SavedRoutesDataTypeItinerary){
 		UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectRouteActions)];
@@ -225,8 +227,11 @@ static NSString *const VIEWTITLE=@"Route details";
 	_elevationView.dataProvider=_route;
 	[_elevationView update];
 	
-	_selectedRouteIcon.visible=[[RouteManager sharedInstance] routeIsSelectedRoute:_route];
+    BOOL isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:_route];
+    _selectedRouteIcon.visible=isSelectedRoute;
+    _selectRouteButton.enabled=!isSelectedRoute;
 	
+    
 	
 	[_viewContainer refresh];
 	
@@ -325,9 +330,6 @@ static NSString *const VIEWTITLE=@"Route details";
 	__weak __typeof(&*self)weakSelf = self;
 	UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@"Route options"];
 	actionSheet.delegate=self;
-	[actionSheet bk_addButtonWithTitle:@"Select route" handler:^{
-			[weakSelf selectRoute];
-	}];
 	[actionSheet bk_addButtonWithTitle:@"Rename route" handler:^{
 		[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:_route.nameString delegate:weakSelf];
 	}];
