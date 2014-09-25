@@ -46,6 +46,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSPhotomapAnnotationView.h"
 #import <MapKit/MapKit.h>
 #import "CSMapSource.h"
+#import "MKMapView+LegalLabel.h"
 
 #import "PhotoWizardViewController.h"
 
@@ -190,11 +191,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
 		
 		_attributionLabel.visible=NO;
-		//mkAttributionLabel.visible=YES;
+		_mapView.legalLabel.visible=YES;
 		
 	}else{
 		_attributionLabel.visible=YES;
-		//mkAttributionLabel.visible=NO;
+		_mapView.legalLabel.visible=NO;
 		_attributionLabel.text = _activeMapSource.shortAttribution;
 		[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 		

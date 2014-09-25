@@ -42,6 +42,7 @@
 #import "CSRoutePolyLineOverlay.h"
 #import "CSRoutePolyLineRenderer.h"
 #import "GenericConstants.h"
+#import "MKMapView+LegalLabel.h"
 
 
 #import <Crashlytics/Crashlytics.h>
@@ -262,11 +263,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
 		
 		_attributionLabel.visible=NO;
-		//mkAttributionLabel.visible=YES;
+		_mapView.legalLabel.visible=YES;
 		
 	}else{
 		_attributionLabel.visible=YES;
-		//mkAttributionLabel.visible=NO;
+		_mapView.legalLabel.visible=NO;
 		_attributionLabel.text = _activeMapSource.shortAttribution;
 		[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 		

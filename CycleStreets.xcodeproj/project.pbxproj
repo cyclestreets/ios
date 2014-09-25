@@ -126,6 +126,8 @@
 		281E09041451C6690034CC63 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		281E09061451C6D20034CC63 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09051451C6D20034CC63 /* POICatLocationCell.xib */; };
 		281E09081451CA210034CC63 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
+		282517FB19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
+		282517FC19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
 		2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
@@ -852,6 +854,8 @@
 		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
 		281E09051451C6D20034CC63 /* POICatLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = POICatLocationCell.xib; sourceTree = "<group>"; };
 		281E09071451CA210034CC63 /* POICategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POICategoryView.xib; path = poi/POICategoryView.xib; sourceTree = "<group>"; };
+		282517F919D45A6600DDD6D9 /* MKMapView+LegalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+LegalLabel.h"; sourceTree = "<group>"; };
+		282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+LegalLabel.m"; sourceTree = "<group>"; };
 		2825871E17785867001E3DA1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
@@ -1748,6 +1752,8 @@
 				28890968193F41BB009C4325 /* CSMapSource.h */,
 				28890969193F41BB009C4325 /* CSMapSource.m */,
 				28890962193F38A0009C4325 /* CSMapSourceProtocol.h */,
+				282517F919D45A6600DDD6D9 /* MKMapView+LegalLabel.h */,
+				282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */,
 			);
 			path = maps;
 			sourceTree = "<group>";
@@ -2951,6 +2957,7 @@
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
+				282517FB19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */,
 				28AD6423131FB6C8008527FC /* NSDate-Misc.m in Sources */,
 				28AD6424131FB6C8008527FC /* NSDictionary+Helpers.m in Sources */,
 				289478B018AD353B0066AA2E /* CSInitialMapViewController.m in Sources */,
@@ -3098,6 +3105,7 @@
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
 				2886DED918C528C100CD208B /* BUNetworkOperation.m in Sources */,
+				282517FC19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */,
 				283436DB15DD5DC300B00FD5 /* NSDate-Misc.m in Sources */,
 				283436DC15DD5DC300B00FD5 /* NSDictionary+Helpers.m in Sources */,
 				289478B118AD353B0066AA2E /* CSInitialMapViewController.m in Sources */,

@@ -150,13 +150,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
 	
-	// filter to remove any Route overlays
-	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
-		return ![object isKindOfClass:[CSRoutePolyLineOverlay class]];
-	}];
-	overlays=[overlays filteredArrayUsingPredicate:predicate];
-	//
-	
 	self.activeMapSource=[CycleStreets activeMapSource];
 	
 	if(overlays.count==0){
@@ -459,15 +452,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// individual segment
 	if(overlay==_segmentOverlay){
 		self.segmentOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
-		_segmentOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x509720, 1);
+		_segmentOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x880088, 0.6);
 		return _segmentOverlayRenderer;
 	}
 	
 	// overall route inc walking sections
 	if(overlay==_routeOverlay){
 		self.routeOverlayRenderer = [[CSRoutePolyLineRenderer alloc] initWithOverlay:overlay];
-		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x880088, 0.5);
-		_routeOverlayRenderer.secondaryColor=UIColorFromRGBAndAlpha(0x880088, 0.5);
+		_routeOverlayRenderer.primaryColor=UIColorFromRGBAndAlpha(0x880088, 0.4);
+		_routeOverlayRenderer.secondaryColor=UIColorFromRGBAndAlpha(0x880088, 0.4);
 		return _routeOverlayRenderer;
 	}
 	
@@ -560,7 +553,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	if(_routeOverlay==nil){
 		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:_route];
-		[self.mapView addOverlay:_routeOverlay level:MKOverlayLevelAboveRoads];
+		[self.mapView addOverlay:_routeOverlay level:MKOverlayLevelAboveLabels];
 	}else{
 		[_routeOverlay updateForDataProvider:_route];
 		[_routeOverlayRenderer setNeedsDisplayInMapRect:mapRect];
@@ -634,7 +627,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	if(_segmentOverlay==nil){
 		self.segmentOverlay = [[CSRoutePolyLineOverlay alloc] initWithSegment:nil];
 		[_segmentOverlay updateForSegment:_currentSegment];
-		[self.mapView addOverlay:_segmentOverlay level:MKOverlayLevelAboveRoads];
+		[self.mapView addOverlay:_segmentOverlay level:MKOverlayLevelAboveLabels];
 	}else{
 		[_segmentOverlay updateForSegment:_currentSegment];
 		[_segmentOverlayRenderer setNeedsDisplay];
