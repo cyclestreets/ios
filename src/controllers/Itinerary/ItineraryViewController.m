@@ -28,7 +28,7 @@
 #import "BUIconActionSheet.h"
 #import <A2StoryboardSegueContext.h>
 #import "CSRouteDetailsViewController.h"
-
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @interface ItineraryViewController()<UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate>
 

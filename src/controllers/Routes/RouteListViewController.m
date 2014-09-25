@@ -15,6 +15,7 @@
 #import "UIView+Additions.h"
 #import "GenericConstants.h"
 #import "GlobalUtilities.h"
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @interface FavouriteMenuItem : UIMenuItem 
 @property (nonatomic, strong) NSIndexPath* indexPath;

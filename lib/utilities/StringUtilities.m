@@ -264,8 +264,8 @@
 
 +(NSString *)Base64Encode:(NSData *)data{
 	//Point to start of the data and set buffer sizes
-	int inLength = [data length];
-	int outLength = ((((inLength * 4)/3)/4)*4) + (((inLength * 4)/3)%4 ? 4 : 0);
+	NSUInteger inLength = [data length];
+	NSUInteger outLength = ((((inLength * 4)/3)/4)*4) + (((inLength * 4)/3)%4 ? 4 : 0);
 	const char *inputBuffer = [data bytes];
 	char *outputBuffer = malloc(outLength);
 	outputBuffer[outLength] = 0;

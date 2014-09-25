@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "GenericConstants.h"
 #import "UIView+Additions.h"
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @implementation SuperViewController
 @synthesize navigation;
