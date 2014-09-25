@@ -8,45 +8,32 @@
 
 #import <Foundation/Foundation.h>
 #import "FrameworkObject.h"
-#import "MBProgressHUD.h"
-#import <AddressBook/AddressBook.h>
+#import "SynthesizeSingleton.h"
+#import <CoreLocation/CoreLocation.h>
 
-enum{
+typedef NS_ENUM(NSUInteger, LocationSearchFilterType) {
 	LocationSearchFilterLocal,
 	LocationSearchFilterNational,
 	LocationSearchFilterRecent,
 	LocationSearchFilterContacts
 };
-typedef int LocationSearchFilterType;
 
-enum{
+typedef NS_ENUM(NSUInteger, LocationSearchRequestType) {
 	LocationSearchRequestTypeMap,
 	LocationSearchRequestTypePhoto,
 	LocationSearchRequestTypeNone
 };
-typedef int LocationSearchRequestType;
 
-@interface LocationSearchManager : FrameworkObject <MBProgressHUDDelegate>{
-	
-	MBProgressHUD					*HUD;
-	
-	LocationSearchFilterType		activeFilterType;
-	LocationSearchRequestType		activeRequestType;
-	
-	NSMutableDictionary				*requestResultDict;
-	
-	NSMutableArray					*recentSelectedArray;
-	
 
-}
-@property (nonatomic, strong)	MBProgressHUD	*HUD;
+@interface LocationSearchManager : FrameworkObject
+SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(LocationSearchManager);
+
 @property (nonatomic, assign)	LocationSearchFilterType	activeFilterType;
 @property (nonatomic, assign)	LocationSearchRequestType	activeRequestType;
-@property (nonatomic, strong)	NSMutableDictionary	*requestResultDict;
-@property (nonatomic, strong)	NSMutableArray	*recentSelectedArray;
 
+	
 
--(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType;
+-(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation;
 
 + (LocationSearchRequestType)locationrequestStringTypeToConstant:(NSString*)stringType;
 + (NSString*)locationrequestConstantToString:(LocationSearchRequestType)requestType;

@@ -24,6 +24,7 @@
 #import "PhotoMapVO.h"
 #import "PhotoMapListVO.h"
 #import "PhotoCategoryVO.h"
+#import "LocationSearchVO.h"
 
 #import "TBXML+Additions.h"
 
@@ -93,6 +94,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],WAYPOINTMETADATA,
+						[NSValue valueWithPointer:@selector(LocationSearchXMLParser:)],LOCATIONSEARCH,
 					   nil];
 		
 	}
@@ -784,6 +786,83 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	_activeOperation.dataProvider=dataProvider;
 	
 }
+
+
+
+/*
+ <?xml version="1.0"?>
+ <sayt>
+	<query>camb</query>
+	<time>144</time>
+	 <results>
+		 <result>
+		 <type>node</type>
+		 <id>1838216188</id>
+		 <name>Camb</name>
+		 <longitude>-1.0713154</longitude>
+		 <latitude>60.6128895</latitude>
+		 <near> Yell, Scotland, United Kingdom</near>
+		 <distance>8583404</distance>
+		 </result>
+	 </results>
+ </sayt>
+*/
+
+
+-(void)LocationSearchXMLParser:(TBXML*)parser{
+	
+	
+	BetterLog(@"");
+	
+	TBXMLElement *response = parser.rootXMLElement;
+	
+	[self validateXML:response];
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		return;
+	}
+    
+	
+	_activeOperation.validationStatus=ValidationCategoriesSuccess;
+	
+	TBXMLElement *results=[TBXML childElementNamed:@"results" parentElement:response];
+	
+	if(results!=nil){
+		
+		TBXMLElement *result=[TBXML childElementNamed:@"result" parentElement:results];
+		
+		NSMutableArray *dataProvider=[NSMutableArray array];
+		
+		while(result!=nil){
+			
+			NSDictionary *dict=[TBXML newDictonaryFromXMLElement:result];
+			
+			LocationSearchVO *search=[[LocationSearchVO alloc]initWithDictionary:dict];
+			
+			[dataProvider addObject:search];
+			
+			result=result->nextSibling;
+			
+		}
+		
+		[dataProvider sortUsingComparator:(NSComparator)^(LocationSearchVO *a1, LocationSearchVO *a2) {
+			return [a1.distanceInt compare:a2.distanceInt];
+		}];
+		
+		_activeOperation.operationState=NetResponseStateComplete;
+		_activeOperation.validationStatus=ValidationSearchSuccess;
+		
+		_activeOperation.dataProvider=dataProvider;
+		
+	}else{
+		
+		_activeOperation.validationStatus=ValidationSearchFailed;
+		
+		
+	}
+	
+	
+}
+
 
 
 									

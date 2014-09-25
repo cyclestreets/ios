@@ -199,9 +199,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     request.parameters=parameters;
     request.source=DataSourceRequestCacheTypeUseNetwork;
 	
+	__weak __typeof(&*self)weakSelf = self;
 	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
 		
-		[self loadRouteForEndPointsResponse:operation];
+		[weakSelf loadRouteForEndPointsResponse:operation];
 		
 	};
 	

@@ -8,13 +8,13 @@
 
 #import "BUTableCellView.h"
 
-@class NamedPlace;
+@class LocationSearchVO;
 
 @interface MapLocationSearchCellView : BUTableCellView{
 	
 	
 	
 }
-@property (nonatomic, strong) NamedPlace		* dataProvider;
+@property (nonatomic, strong) LocationSearchVO		* dataProvider;
 
 @end

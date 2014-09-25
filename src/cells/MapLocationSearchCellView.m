@@ -7,7 +7,7 @@
 //
 
 #import "MapLocationSearchCellView.h"
-#import "NamedPlace.h"
+#import "LocationSearchVO.h"
 
 @interface MapLocationSearchCellView()
 

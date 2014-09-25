@@ -44,6 +44,8 @@
 #import "GenericConstants.h"
 #import "MKMapView+LegalLabel.h"
 
+#import "MapViewSearchLocationViewController.h"
+
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -94,7 +96,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 
 
 // sub views
-@property (nonatomic, strong) MapLocationSearchViewController		* mapLocationSearchView;
+@property (nonatomic, strong) MapViewSearchLocationViewController	* mapLocationSearchView;
 
 // ui
 @property (nonatomic, strong) IBOutlet ExpandedUILabel				* attributionLabel;
@@ -1351,7 +1353,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	BetterLog(@"");
 	
 	if (self.mapLocationSearchView == nil) {
-		self.mapLocationSearchView = [[MapLocationSearchViewController alloc] initWithNibName:@"MapLocationSearchView" bundle:nil];
+		self.mapLocationSearchView = [[MapViewSearchLocationViewController alloc] initWithNibName:@"MapViewSearchLocationView" bundle:nil];
 		
 	}
 	_mapLocationSearchView.locationReceiver = self;

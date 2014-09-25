@@ -169,6 +169,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 			return;
 		}
 	}
+	
+	if(operation.source==DataSourceRequestCacheTypeUseCache){
+		if([self requestTypeIsActive:operation.dataid]==YES){
+			return;
+		}
+	}
     
     NSDictionary *service=[_services objectForKey:operation.dataid];
     BOOL doRemoteRequest=NO;
@@ -245,11 +251,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 	[manager.operationQueue addOperation:operation];
 	
+	[_activeRequests setObject:operation forKey:networkOperation.dataid];
 	
 }
 
 
+
+
+//
+/***********************************************
+ * checks to see if request is in operation
+ ***********************************************/
+//
+-(BOOL)requestTypeIsActive:(NSString*)dataid{
+	
+	BOOL requestIsActive=[_activeRequests objectForKey:dataid]!=nil;
+	
+	return requestIsActive;
+	
+}
+
+
+-(BOOL)cancelRequestForType:(NSString*)dataid{
+	
+	if([self requestTypeIsActive:dataid]){
+		
+		AFHTTPRequestOperation *operation=[_activeRequests objectForKey:dataid];
+		[operation cancel];
+		
+	}
+	
+	return YES;
+	
+}
+
+
+
+
+
+
 -(void)remoteRequestDidComplete:(BUNetworkOperation*)networkOperation{
+	
+	[_activeRequests removeObjectForKey:networkOperation.dataid];
     
     BetterLog(@"");
     
@@ -279,6 +322,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
     [self sendErrorNotification:REQUESTDIDFAIL forResponse:networkOperation];
     
 }
+
+
+
+
 
 
 #pragma mark - Data Type parsers

@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CycleStreets.h"
 #import "Files.h"
 #import "XMLRequest.h"
-#import "NamedPlace.h"
+#import "LocationSearchVO.h"
 #import "GlobalUtilities.h"
 #import "MapLocationSearchCellView.h"
 #import "HudManager.h"
@@ -219,11 +219,11 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 		
 		for (NSDictionary *place in [elements objectForKey:@"result"])
 		{
-			NamedPlace *namedPlace = [[NamedPlace alloc] initWithDictionary:place];
+			LocationSearchVO *namedPlace = [[LocationSearchVO alloc] initWithDictionary:place];
 			[self.currentPlaces addObject:namedPlace];
 		}
 		
-		[currentPlaces sortUsingComparator:(NSComparator)^(NamedPlace *a1, NamedPlace *a2) {
+		[currentPlaces sortUsingComparator:(NSComparator)^(LocationSearchVO *a1, LocationSearchVO *a2) {
 			return [a1.distanceInt compare:a2.distanceInt];
 		}];
 		
@@ -249,7 +249,7 @@ static NSString *urlPrefix = @"http://www.cyclestreets.net/api/geocoder.xml";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	NamedPlace *where = [currentPlaces objectAtIndex:indexPath.row];
+	LocationSearchVO *where = [currentPlaces objectAtIndex:indexPath.row];
 	if (where != nil) {
 		[self.locationReceiver didMoveToLocation:where.locationCoords];
 	}

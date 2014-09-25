@@ -12,31 +12,27 @@
 #import "GlobalUtilities.h"
 #import "CycleStreets.h"
 #import "BUNetworkOperation.h"
+#import "HudManager.h"
+#import "BUDataSourceManager.h"
+
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBook/ABAddressBook.h>
 
-@interface LocationSearchManager(Private)
+@interface LocationSearchManager()
 
 
--(void)searchForLocationWithFilterResponse:(ValidationVO*)validation;
--(void)searchContactsForLocation:(NSString*)searchString;
+@property (nonatomic, strong)	NSMutableDictionary			*requestResultDict;
+@property (nonatomic, strong)	NSMutableArray				*recentSelectedArray;
 
--(void)showProgressHUDWithMessage:(NSString*)message;
--(void)removeHUD;
--(void)hudWasHidden;
+@property (nonatomic,strong)  BUNetworkOperation			*searchOperation;
+
 @end
 
 
 
 @implementation LocationSearchManager
-@synthesize HUD;
-@synthesize activeFilterType;
-@synthesize activeRequestType;
-@synthesize requestResultDict;
-@synthesize recentSelectedArray;
-
-
+SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 
 //=========================================================== 
 // - (id)init
@@ -106,14 +102,14 @@
  ***********************************************/
 //
 
--(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType{
+-(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation{
 	
-	/*
-	activeFilterType=filterType;
-	activeRequestType=requestType;
+	
+	_activeFilterType=filterType;
+	_activeRequestType=requestType;
 	 
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	//[cycleStreets.files setMiscValue:self.currentRequestSearchString forKey:@"lastSearch"];
+	[cycleStreets.files setMiscValue:searchString forKey:@"lastSearch"];
 	
 	CLLocationDegrees range = 1.0;
 	NSInteger zoom = 11;
@@ -147,54 +143,75 @@
 		
 	}
 	
-	//CLLocationCoordinate2D centreLocation;
+	
+	//TODO: need to add afoperation storage support so this can be cancelled
+	if(_searchOperation!=nil)
+		[[BUDataSourceManager sharedInstance] cancelRequestForType:LOCATIONSEARCH];
 	
 	if(requiresNetWorkLookUp==YES){
 		
 		
 		NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[cycleStreets APIKey],@"key",
 										 searchString,@"street",
-										 [NSNumber numberWithFloat:(centreLocation.longitude-range)],@"w",
-										 [NSNumber numberWithFloat:centreLocation.latitude + range],@"n",
-										 [NSNumber numberWithFloat:centreLocation.longitude + range],@"e",
-										 [NSNumber numberWithFloat:centreLocation.latitude - range],@"s",
-										 [NSNumber numberWithInt:zoom],@"zoom",
+										 [NSNumber numberWithFloat:(centerLocation.longitude-range)],@"w",
+										 [NSNumber numberWithFloat:centerLocation.latitude + range],@"n",
+										 [NSNumber numberWithFloat:centerLocation.longitude + range],@"e",
+										 [NSNumber numberWithFloat:centerLocation.latitude - range],@"s",
+										 [NSNumber numberWithLong:zoom],@"zoom",
 										 cycleStreets.files.clientid,@"clientid",
 										 nil];
 		
-		NetRequest *request=[[NetRequest alloc]init];
-		request.dataid=LOCATIONSEARCH;
-		request.requestid=ZERO;
-		request.parameters=parameters;
-		request.revisonId=0;
-		request.source=USER;
 		
-		NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
-		[dict release];
-		[request release];
+		self.searchOperation=[[BUNetworkOperation alloc]init];
+		_searchOperation.dataid=LOCATIONSEARCH;
+		_searchOperation.requestid=ZERO;
+		_searchOperation.parameters=parameters;
+		_searchOperation.source=DataSourceRequestCacheTypeUseNetwork;
 		
+		__weak __typeof(&*self)weakSelf = self;
+		_searchOperation.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+			[weakSelf searchForLocationWithFilterResponse:operation];
+			
+		};
 		
-		[self showProgressHUDWithMessage:@"Searching..."];
+		[[BUDataSourceManager sharedInstance] processDataRequest:_searchOperation];
 		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil];
 		
 	}
-	 */
+	
 }
 
 
--(void)searchForLocationWithFilterResponse:(ValidationVO*)validation{
+-(void)searchForLocationWithFilterResponse:(BUNetworkOperation*)response{
 	
-	switch(validation.validationStatus){
+	self.searchOperation=nil;
+	
+	switch(response.validationStatus){
 		
-		case 1:
+		case ValidationSearchSuccess:
+		{
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:LOCATIONSEARCHRESPONSE object:response.dataProvider];
+			
+			[[HudManager sharedInstance] removeHUD];
+		}
 		
 		break;
 		
-		
+		case ValidationSearchFailed:
+		{
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Search failed" andMessage:nil];
+		}
+			
+		break;
+			
+		default:
+			break;
 	}
 	
-	[self removeHUD];
 	
 }
 
@@ -233,38 +250,6 @@
 	
 }
 
-
-
-//
-/***********************************************
- * @description			HUDSUPPORT
- ***********************************************/
-//
-
-
--(void)showProgressHUDWithMessage:(NSString*)message{
-	
-	self.HUD=[[MBProgressHUD alloc] initWithView:[[UIApplication sharedApplication] keyWindow]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:HUD];
-    HUD.delegate = self;
-	HUD.labelText=message;
-	[HUD show:YES];
-	
-}
-
-
--(void)removeHUD{
-	
-	[HUD hide:YES];
-	
-}
-
-
--(void)hudWasHidden{
-	
-	[HUD removeFromSuperview];
-	
-}
 
 
 //

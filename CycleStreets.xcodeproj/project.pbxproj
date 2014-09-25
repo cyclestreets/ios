@@ -26,7 +26,6 @@
 		280E91C614097D8600C7AC75 /* StringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C114097D8600C7AC75 /* StringManager.m */; };
 		280E91C714097D8600C7AC75 /* StyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C314097D8600C7AC75 /* StyleManager.m */; };
 		280E91C814097D8600C7AC75 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C514097D8600C7AC75 /* UserSettingsManager.m */; };
-		280E91CC14097DD300C7AC75 /* MapLocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CB14097DD300C7AC75 /* MapLocationSearchViewController.m */; };
 		280E9333140984F300C7AC75 /* FavouritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931A140984F300C7AC75 /* FavouritesCell.xib */; };
 		280E9334140984F300C7AC75 /* ItineraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931B140984F300C7AC75 /* ItineraryCell.xib */; };
 		280E9335140984F300C7AC75 /* RouteTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931C140984F300C7AC75 /* RouteTableCell.xib */; };
@@ -42,7 +41,7 @@
 		280E9341140984F300C7AC75 /* InitialLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9332140984F300C7AC75 /* InitialLocationView.xib */; };
 		280E93461409856E00C7AC75 /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93431409856E00C7AC75 /* NetworkRequest.m */; };
 		280E93471409856E00C7AC75 /* RouteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93451409856E00C7AC75 /* RouteParser.m */; };
-		280E9358140985CD00C7AC75 /* NamedPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* NamedPlace.m */; };
+		280E9358140985CD00C7AC75 /* LocationSearchVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* LocationSearchVO.m */; };
 		280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93701409861300C7AC75 /* KeyChainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		280E937D1409861300C7AC75 /* UIImage-Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93721409861300C7AC75 /* UIImage-Additions.m */; };
 		280E93AF140989E400C7AC75 /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = 280E93AE140989E400C7AC75 /* donate.html */; };
@@ -128,6 +127,10 @@
 		281E09081451CA210034CC63 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E09071451CA210034CC63 /* POICategoryView.xib */; };
 		282517FB19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
 		282517FC19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
+		282517FF19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */; };
+		2825180019D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */; };
+		2825180219D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2825180119D46DE600DDD6D9 /* MapViewSearchLocationView.xib */; };
+		2825180319D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2825180119D46DE600DDD6D9 /* MapViewSearchLocationView.xib */; };
 		2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
@@ -324,12 +327,11 @@
 		2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C114097D8600C7AC75 /* StringManager.m */; };
 		2834370F15DD5DC300B00FD5 /* StyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C314097D8600C7AC75 /* StyleManager.m */; };
 		2834371015DD5DC300B00FD5 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C514097D8600C7AC75 /* UserSettingsManager.m */; };
-		2834371115DD5DC300B00FD5 /* MapLocationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CB14097DD300C7AC75 /* MapLocationSearchViewController.m */; };
 		2834371215DD5DC300B00FD5 /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CF14097DE000C7AC75 /* ItineraryViewController.m */; };
 		2834371415DD5DC300B00FD5 /* RouteSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* RouteSegmentViewController.m */; };
 		2834371515DD5DC300B00FD5 /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93431409856E00C7AC75 /* NetworkRequest.m */; };
 		2834371615DD5DC300B00FD5 /* RouteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93451409856E00C7AC75 /* RouteParser.m */; };
-		2834371B15DD5DC300B00FD5 /* NamedPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* NamedPlace.m */; };
+		2834371B15DD5DC300B00FD5 /* LocationSearchVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* LocationSearchVO.m */; };
 		2834371E15DD5DC300B00FD5 /* KeyChainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93701409861300C7AC75 /* KeyChainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2834371F15DD5DC300B00FD5 /* UIImage-Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93721409861300C7AC75 /* UIImage-Additions.m */; };
 		2834372115DD5DC300B00FD5 /* BUTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2409144D825D0021CDFA /* BUTableCellView.m */; };
@@ -771,8 +773,8 @@
 		280E93431409856E00C7AC75 /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkRequest.m; sourceTree = "<group>"; };
 		280E93441409856E00C7AC75 /* RouteParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteParser.h; sourceTree = "<group>"; };
 		280E93451409856E00C7AC75 /* RouteParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteParser.m; sourceTree = "<group>"; };
-		280E9354140985CD00C7AC75 /* NamedPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NamedPlace.h; sourceTree = "<group>"; };
-		280E9355140985CD00C7AC75 /* NamedPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NamedPlace.m; sourceTree = "<group>"; };
+		280E9354140985CD00C7AC75 /* LocationSearchVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchVO.h; sourceTree = "<group>"; };
+		280E9355140985CD00C7AC75 /* LocationSearchVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchVO.m; sourceTree = "<group>"; };
 		280E936F1409861300C7AC75 /* KeyChainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = KeyChainItemWrapper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E93701409861300C7AC75 /* KeyChainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainItemWrapper.m; sourceTree = "<group>"; };
 		280E93711409861300C7AC75 /* UIImage-Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage-Additions.h"; path = "../utilities/UIImage-Additions.h"; sourceTree = "<group>"; };
@@ -855,6 +857,9 @@
 		281E09071451CA210034CC63 /* POICategoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = POICategoryView.xib; path = poi/POICategoryView.xib; sourceTree = "<group>"; };
 		282517F919D45A6600DDD6D9 /* MKMapView+LegalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+LegalLabel.h"; sourceTree = "<group>"; };
 		282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+LegalLabel.m"; sourceTree = "<group>"; };
+		282517FD19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewSearchLocationViewController.h; sourceTree = "<group>"; };
+		282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewSearchLocationViewController.m; sourceTree = "<group>"; };
+		2825180119D46DE600DDD6D9 /* MapViewSearchLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewSearchLocationView.xib; sourceTree = "<group>"; };
 		2825871E17785867001E3DA1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
@@ -1363,6 +1368,8 @@
 			children = (
 				280E91CA14097DD300C7AC75 /* MapLocationSearchViewController.h */,
 				280E91CB14097DD300C7AC75 /* MapLocationSearchViewController.m */,
+				282517FD19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.h */,
+				282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1474,6 +1481,7 @@
 			isa = PBXGroup;
 			children = (
 				280E932C140984F300C7AC75 /* MapLocationSearchView.xib */,
+				2825180119D46DE600DDD6D9 /* MapViewSearchLocationView.xib */,
 			);
 			path = search;
 			sourceTree = "<group>";
@@ -1903,8 +1911,8 @@
 				28735BF6144EC80300726A6C /* PhotoMapListVO.m */,
 				28735BF2144EC7A000726A6C /* PhotoMapVO.h */,
 				28735BF3144EC7A000726A6C /* PhotoMapVO.m */,
-				280E9354140985CD00C7AC75 /* NamedPlace.h */,
-				280E9355140985CD00C7AC75 /* NamedPlace.m */,
+				280E9354140985CD00C7AC75 /* LocationSearchVO.h */,
+				280E9355140985CD00C7AC75 /* LocationSearchVO.m */,
 				28443E611332867D00FAD008 /* RouteVO.h */,
 				28443E621332867D00FAD008 /* RouteVO.m */,
 				28E8A3CA1455638D0063AA96 /* SegmentVO.h */,
@@ -2593,6 +2601,7 @@
 				28187AC914FCFF4C00A38A17 /* UIButton_green_lo.png in Resources */,
 				28187ACA14FCFF4C00A38A17 /* UIButton_grey_hi.png in Resources */,
 				28D186BD193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */,
+				2825180219D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */,
 				28187ACB14FCFF4C00A38A17 /* UIButton_grey_lo.png in Resources */,
 				28187ACC14FCFF4C00A38A17 /* UIButton_orange_hi.png in Resources */,
 				28187ACD14FCFF4C00A38A17 /* UIButton_orange_lo.png in Resources */,
@@ -2799,6 +2808,7 @@
 				2834369215DD5DC300B00FD5 /* UIButton_red_hi.png in Resources */,
 				2834369315DD5DC300B00FD5 /* UIButton_red_lo.png in Resources */,
 				2834369415DD5DC300B00FD5 /* UIButton_save_hi.png in Resources */,
+				2825180319D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */,
 				2834369515DD5DC300B00FD5 /* UIButtonBarArrowLeft.png in Resources */,
 				2834369615DD5DC300B00FD5 /* UIButtonBarArrowRight.png in Resources */,
 				2834369715DD5DC300B00FD5 /* UIButtonBarCameraSmall.png in Resources */,
@@ -3013,11 +3023,10 @@
 				280E91C714097D8600C7AC75 /* StyleManager.m in Sources */,
 				280E91C814097D8600C7AC75 /* UserSettingsManager.m in Sources */,
 				2886DEE018C530A500CD208B /* BUDataSourceManager.m in Sources */,
-				280E91CC14097DD300C7AC75 /* MapLocationSearchViewController.m in Sources */,
 				280E93461409856E00C7AC75 /* NetworkRequest.m in Sources */,
 				2889096A193F41BB009C4325 /* CSMapSource.m in Sources */,
 				280E93471409856E00C7AC75 /* RouteParser.m in Sources */,
-				280E9358140985CD00C7AC75 /* NamedPlace.m in Sources */,
+				280E9358140985CD00C7AC75 /* LocationSearchVO.m in Sources */,
 				280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */,
 				288055DA18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
 				280E937D1409861300C7AC75 /* UIImage-Additions.m in Sources */,
@@ -3060,6 +3069,7 @@
 				289F78041534432900B062D1 /* NSData+Base64.m in Sources */,
 				289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */,
 				28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */,
+				282517FF19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m in Sources */,
 				28D186D819378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */,
 				2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */,
 				28727ADB18B5375400D957FD /* PhotoMapImageLocationViewController.m in Sources */,
@@ -3156,7 +3166,6 @@
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
 				2834370F15DD5DC300B00FD5 /* StyleManager.m in Sources */,
 				2834371015DD5DC300B00FD5 /* UserSettingsManager.m in Sources */,
-				2834371115DD5DC300B00FD5 /* MapLocationSearchViewController.m in Sources */,
 				2834371215DD5DC300B00FD5 /* ItineraryViewController.m in Sources */,
 				28BC6AA918AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */,
 				2834371415DD5DC300B00FD5 /* RouteSegmentViewController.m in Sources */,
@@ -3165,7 +3174,7 @@
 				2834371615DD5DC300B00FD5 /* RouteParser.m in Sources */,
 				2889096B193F41BB009C4325 /* CSMapSource.m in Sources */,
 				28727ADF18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */,
-				2834371B15DD5DC300B00FD5 /* NamedPlace.m in Sources */,
+				2834371B15DD5DC300B00FD5 /* LocationSearchVO.m in Sources */,
 				2834371E15DD5DC300B00FD5 /* KeyChainItemWrapper.m in Sources */,
 				2834371F15DD5DC300B00FD5 /* UIImage-Additions.m in Sources */,
 				2834372115DD5DC300B00FD5 /* BUTableCellView.m in Sources */,
@@ -3208,6 +3217,7 @@
 				2834375D15DD5DC300B00FD5 /* UIImage+Operations.m in Sources */,
 				2834375E15DD5DC300B00FD5 /* NSData+Base64.m in Sources */,
 				2834375F15DD5DC300B00FD5 /* NSString-Utilities.m in Sources */,
+				2825180019D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m in Sources */,
 				28D186D919378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */,
 				2834376015DD5DC300B00FD5 /* PhotoCategoryManager.m in Sources */,
 				2834376515DD5DC300B00FD5 /* MapLocationSearchCellView.m in Sources */,

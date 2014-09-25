@@ -43,6 +43,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(BUDataSourceManager);
 -(void)removeCachedDataForType:(NSString*)type;
 -(void)removeCachedDataForTypeArray:(NSArray*)typeArray;
 
+-(BOOL)cancelRequestForType:(NSString*)dataid;
 
 - (void)processDataRequest:(BUNetworkOperation*)operation;
 

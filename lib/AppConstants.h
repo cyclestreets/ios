@@ -37,11 +37,13 @@ typedef NS_ENUM(int, ValidationStatusCode){
     ValidationRetrieveRouteByIdSuccess=1014,
 	ValidationCategoriesSuccess=1015,
 	
+	
 	ValidationSuccessMIN=ValidationLoginSuccess,
 	ValidationSuccessMAX=ValidationCategoriesSuccess,
 	
 	// failures
 	ValidationLoginFailed=2000, // 2000
+	ValidationSearchFailed=2001,
 	ValidationEmailInvalid=2006,
 	ValidationUserNameExists=2007,
 	ValidationEmailNotRecognised=2008,
