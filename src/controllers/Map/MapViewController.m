@@ -14,7 +14,6 @@
 #import "SettingsManager.h"
 #import "CycleStreets.h"
 #import "AppDelegate.h"
-#import "RMTileSource.h"
 #import "PhotoMapListVO.h"
 #import "PhotoMapVO.h"
 #import "MapLocationSearchViewController.h"
@@ -110,7 +109,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // data
 @property (nonatomic, strong) RouteVO								* route;
 @property (nonatomic, strong) NSMutableArray						* waypointArray;
-@property (nonatomic, strong) RMMarker								* activeMarker;
 
 
 
@@ -590,6 +588,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // called continuously as map locates user via showsUserLocation=YES
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
+	userLocation.title = EMPTYSTRING;
+	
 	if(!_programmaticChange && self.lastLocation!=nil)
 		return;
 	
@@ -1067,18 +1067,18 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 }
 
-
--(WayPointVO*)findWayPointForMarker:(RMMarker*)marker{
-	
-	for (WayPointVO *waypoint in _waypointArray) {
-		
-		if(marker==waypoint.marker)
-			return waypoint;
-		
-	}
-	return nil;
-	
-}
+//
+//-(WayPointVO*)findWayPointForMarker:(RMMarker*)marker{
+//	
+//	for (WayPointVO *waypoint in _waypointArray) {
+//		
+//		if(marker==waypoint.marker)
+//			return waypoint;
+//		
+//	}
+//	return nil;
+//	
+//}
 
 
 -(void)removeWayPointAtIndex:(NSUInteger)index{
@@ -1182,7 +1182,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
 	
 	 if ([annotation isKindOfClass:[MKUserLocation class]])
-	 return nil;
+		 return nil;
 	
 	 static NSString *reuseId = @"CSWaypointAnnotationView";
 	 CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
@@ -1232,8 +1232,11 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	if([view.annotation isKindOfClass:[MKUserLocation class]]){
 		
+		MKUserLocation *annotation=(MKUserLocation*)view.annotation;
+		view.canShowCallout=NO;
+		
 		if (_uiState!=MapPlanningStateRoute) {
-			MKUserLocation *annotation=(MKUserLocation*)view.annotation;
+			
 			[self addWayPointAtCoordinate:annotation.location.coordinate];
 		}
 		

@@ -26,8 +26,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
 #import "Files.h"
-#import "RMTileSource.h"
-#import "RMMapView.h"
 #import <CoreLocation/CoreLocation.h>
 
 @class CSMapSource;
@@ -55,6 +53,5 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 
 +(CSMapSource*)activeMapSource;
 
-+ (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation;
 
 @end

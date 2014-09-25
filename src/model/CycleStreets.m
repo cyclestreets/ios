@@ -172,21 +172,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 }
 
 
-+ (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation {
-	CLLocationAccuracy accuracy = newLocation.horizontalAccuracy;
-	if (accuracy < 0) {
-		accuracy = 2000;
-	}
-	int wantZoom = MAX_ZOOM_LOCATION;
-	CLLocationAccuracy wantAccuracy = MAX_ZOOM_LOCATION_ACCURACY;
-	while (wantAccuracy < accuracy) {
-		wantZoom--;
-		wantAccuracy = wantAccuracy * 2;
-	}
-	
-	[mapView setCenterCoordinate:newLocation.coordinate];
-	[mapView setZoom:wantZoom];
-}
+
 
 
 @end
