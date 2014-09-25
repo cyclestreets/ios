@@ -78,6 +78,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 @property (nonatomic, strong) CLLocation								* currentLocation;
+@property (nonatomic,assign)  BOOL										isLocating;
 
 @property (nonatomic) BOOL												photoIconsVisisble;
 @property (nonatomic, strong) NSMutableArray							* photoMarkers;
@@ -240,6 +241,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	self.attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000,0.2);
 	self.attributionLabel.text = _activeMapSource.shortAttribution;;
+	
 
 	
 	_toolBar.clipsToBounds=YES;
@@ -736,12 +738,27 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)locationDidComplete:(MKUserLocation *)userLocation{
 	
+	if (_isLocating==NO){
+		_locationButton.enabled=YES;
+		return;
+	}
+	
+	
 	BetterLog(@"");
 	
-	self.currentLocation=userLocation.location;
+	CLLocation *location=userLocation.location;
 	
-	[_mapView showAnnotations:@[userLocation,_startAnnotation,_endAnnotation] animated:YES];
+	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
+	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:2]){
+		
+		[_mapView showAnnotations:@[userLocation,_startAnnotation,_endAnnotation] animated:YES];
+		self.currentLocation=location;
+		
+		_isLocating=NO;
+		
+	}
 	
+	_locationButton.enabled=YES;
 	
 	if(!_footerIsHidden)
 		[self didToggleInfo];
@@ -786,9 +803,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(IBAction)startLocating{
 	
+	_isLocating=!_isLocating;
+	
+	_locationButton.enabled=NO;
+	
 	_mapView.showsUserLocation=NO;
 	_mapView.showsUserLocation=YES;
-	
 	
 }
 
