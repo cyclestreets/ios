@@ -67,6 +67,7 @@
 @property (nonatomic, readonly)	CLLocationCoordinate2D					insetSouthWest;
 
 @property (unsafe_unretained, nonatomic, readonly)	NSString	*fileid;
+
 @property (nonatomic, readonly)	BOOL									containsWalkingSections;
 
 @property (nonatomic, readonly)	BOOL									hasWaypoints;

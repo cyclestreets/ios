@@ -220,17 +220,13 @@
 		[_routeLineView setNeedsDisplay];
         
         
-		BetterLog(@"added %d GPS coordinates to map", routeCoords.count);
+		BetterLog(@"added %lu GPS coordinates to map", (unsigned long)routeCoords.count);
 		
 		
 		// if we had at least 1 coord
 		if ( routeCoords.count>0 ){
 			
 			[_currentRoute calculateNorthSouthValues];
-			
-			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
-			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
-			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:YES];
 			
 			
 			//add start/end pins
@@ -262,6 +258,21 @@
 }
 
 
+
+
+-(void)viewDidAppear:(BOOL)animated{
+	
+	
+	if(_currentRoute.segments.count>0){
+		
+		CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
+		CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
+		[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:NO];
+		
+	}
+	
+	[super viewDidAppear:animated];
+}
 
 
 - (IBAction)infoAction:(UIButton*)sender{

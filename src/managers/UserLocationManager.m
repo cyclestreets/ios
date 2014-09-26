@@ -165,7 +165,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
 	
-	BOOL result=status==kCLAuthorizationStatusAuthorized;
+	BOOL result=NO;
+	if(status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedWhenInUse){
+		result=YES;
+	}
 	
 	return result;
 	
@@ -204,7 +207,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
     
-    if(status==kCLAuthorizationStatusAuthorized){
+    if(status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedWhenInUse){
         
         if(authorisationSubscriber!=nil){
             [self startUpdatingLocationForSubscriber:authorisationSubscriber];
