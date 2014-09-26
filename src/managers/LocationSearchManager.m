@@ -60,14 +60,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 //
 
 -(void)listNotificationInterests{
-	
-	
-	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
+		
+	[notifications addObject:REQUESTDIDFAIL];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
 	
 	[self addRequestID:LOCATIONSEARCH];
-	
 	
 	[super listNotificationInterests];
 }
@@ -83,14 +81,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 	NSString	*dataid=response.dataid;
 	
 	if([self isRegisteredForRequest:dataid]){
-		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
+		
+		if([self isRegisteredForRequest:dataid]){
 			
-			
+			if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL]){
+				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Network Error" andMessage:@"Unable to contact server"];
+			}
 			
 		}
 		
 	}
-	
 	
 	
 }
@@ -143,8 +143,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		
 	}
 	
-	
-	//TODO: need to add afoperation storage support so this can be cancelled
+	// if operation active cancel
 	if(_searchOperation!=nil)
 		[[BUDataSourceManager sharedInstance] cancelRequestForType:LOCATIONSEARCH];
 	

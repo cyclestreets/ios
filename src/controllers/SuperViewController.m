@@ -372,6 +372,11 @@
 		}else if ([UIType isEqualToString:UITYPE_MODALUI]) {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
+		}else if ([UIType isEqualToString:UITYPE_MODALTABLEVIEWUI]) {
+			
+			CGRect targetRect=self.frame;
+			contentContainer=[[LayoutBox alloc] initWithFrame:targetRect];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.view.height)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];

@@ -55,7 +55,6 @@
 	
 	NSString *name=notification.name;
 	
-	
 	if([name isEqualToString:LOCATIONSEARCHRESPONSE]){
 		
 		[self didReceiveDataProviderUpdate:notification];
@@ -65,7 +64,14 @@
 }
 
 
-#pragma mark - Daat Requests
+#pragma mark - Data Requests
+
+-(void)queueDataRequest{
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	[self performSelector:@selector(dataProviderRequestRefresh:) withObject:nil afterDelay:0.2];
+
+}
 
 -(void)dataProviderRequestRefresh:(NSString *)source{
 	
@@ -78,21 +84,27 @@
 
 -(void)didReceiveDataProviderUpdate:(NSNotification*)notification{
 	
-	
 	self.dataProvider=notification.object;
 	
 	[self refreshUIFromDataProvider];
-	
-	
 	
 }
 
 
 -(void)refreshUIFromDataProvider{
 	
+	if(_dataProvider.count==0 || _dataProvider==nil){
+		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:@"noresults_LocationSearch" withIcon:@"Icon_nosearchresults"];
+		
+	}else{
+		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil withIcon:nil];
+		
+		[_tableView reloadData];
+	}
 	
 	
-	[_tableView reloadData];
 	
 }
 
@@ -106,6 +118,9 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	
+	self.UIType=UITYPE_MODALTABLEVIEWUI;
+	self.frame=_tableView.frame;
 	
 	[self createPersistentUI];
 }
@@ -125,45 +140,18 @@
 	
 	[_searchBar setBackgroundImage:[UIImage new]];
 	
-	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	NSString *lastSearch = [cycleStreets.files miscValueForKey:@"lastSearch"];
-	if (lastSearch != nil) {
-		self.searchString = lastSearch;
-		_searchBar.text = self.searchString;
-		[self dataProviderRequestRefresh:nil];
-	}
-	
-	[self activeLookupOff];
 	
 }
 
 -(void)createNonPersistentUI{
 	
-	
-	
-}
-
-#pragma mark - Search UI methods
-
-
-- (void)activeLookupOff {
-	[[HudManager sharedInstance] removeHUD];
-}
-
-- (void)activeLookupOn {
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil];
-}
-
-
--(void)cancelCurrentSearchRequest{
-	
-	
-	
-}
-
--(void)cancelCurrentSearchUI{
-	
-	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	NSString *lastSearch = [cycleStreets.files miscValueForKey:@"lastSearch"];
+	if (lastSearch != nil) {
+		self.searchString = lastSearch;
+		_searchBar.text = self.searchString;
+		[self queueDataRequest];
+	}
 	
 }
 
@@ -177,10 +165,15 @@
 //
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+	
 	return [_dataProvider count];
+	
 }
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+	
 	return 1;
+	
 }
 
 
@@ -202,7 +195,8 @@
 	if (where != nil) {
 		[self.locationReceiver didMoveToLocation:where.locationCoords];
 	}
-	[self dismissModalViewControllerAnimated:YES];
+	
+	[self closeController];
 	
 }
 
@@ -216,17 +210,17 @@
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-	BetterLog(@"textDidChange");
+	
 	self.searchString = searchText;
 	if (self.searchString != nil && [self.searchString length] > 3) {
-		[self dataProviderRequestRefresh:nil];
+		[self queueDataRequest];
 	}
 }
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-	BetterLog(@"searchBarSearchButtonClicked");
-	[self dataProviderRequestRefresh:nil];
+	
+	[self queueDataRequest];
 }
 
 
@@ -236,13 +230,22 @@
 	
 	_activeSearchFilter=(LocationSearchFilterType)control.selectedSegmentIndex;
 	
-	[self dataProviderRequestRefresh:nil];
+	[self queueDataRequest];
 	
 }
 
 - (IBAction)didSelectCancelButton:(id)sender {
 	
-	[self dismissViewControllerAnimated:YES completion:nil];
+	[self closeController];
+	
+}
+
+
+-(void)closeController{
+	
+	[_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+	
+	[self dismissModalViewControllerAnimated:YES];
 	
 }
 

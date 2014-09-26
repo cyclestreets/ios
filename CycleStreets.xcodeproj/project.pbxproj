@@ -425,6 +425,10 @@
 		285F68DC132C07CD00B511C0 /* RouteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285F68DB132C07CD00B511C0 /* RouteListViewController.m */; };
 		2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
 		2863A402134E508800A22093 /* CSRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */; };
+		2865C24919D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2865C24819D56CE5001C329B /* Icon_nosearchresults@2x.png */; };
+		2865C24A19D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2865C24819D56CE5001C329B /* Icon_nosearchresults@2x.png */; };
+		2865C24C19D570BA001C329B /* Icon_nosearchresults.png in Resources */ = {isa = PBXBuildFile; fileRef = 2865C24B19D570BA001C329B /* Icon_nosearchresults.png */; };
+		2865C24D19D570BA001C329B /* Icon_nosearchresults.png in Resources */ = {isa = PBXBuildFile; fileRef = 2865C24B19D570BA001C329B /* Icon_nosearchresults.png */; };
 		2868D23C166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23D166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
 		2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */; };
@@ -907,6 +911,8 @@
 		2863A3A1134E508800A22093 /* FavouritesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCellView.m; sourceTree = "<group>"; };
 		2863A3A6134E508800A22093 /* CSRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSRouteDetailsViewController.h; path = Favourites/CSRouteDetailsViewController.h; sourceTree = "<group>"; };
 		2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSRouteDetailsViewController.m; path = Favourites/CSRouteDetailsViewController.m; sourceTree = "<group>"; };
+		2865C24819D56CE5001C329B /* Icon_nosearchresults@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_nosearchresults@2x.png"; sourceTree = "<group>"; };
+		2865C24B19D570BA001C329B /* Icon_nosearchresults.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nosearchresults.png; sourceTree = "<group>"; };
 		2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityBlank@2x.png"; sourceTree = "<group>"; };
 		2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityCopy@2x.png"; sourceTree = "<group>"; };
 		2868D238166E1C0600C0C153 /* UIActivityFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityFacebook@2x.png"; sourceTree = "<group>"; };
@@ -1534,6 +1540,7 @@
 				28535DF915E6313E0092FC16 /* Icon_currentroutecell.png */,
 				283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */,
 				283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */,
+				2865C24B19D570BA001C329B /* Icon_nosearchresults.png */,
 				28187A9B14FCFF4C00A38A17 /* Wisps */,
 				28187A7B14FCFF4C00A38A17 /* TabBar */,
 				28187A7914FCFF4C00A38A17 /* Photomap */,
@@ -2187,6 +2194,7 @@
 				28B76F4515E4DB48006B01D0 /* CSBarButton_routePlan@2x.png */,
 				28B76F2E15E4D7E9006B01D0 /* Icon_nofavroutes@2x.png */,
 				28B76F2F15E4D7E9006B01D0 /* Icon_norecentroutes@2x.png */,
+				2865C24819D56CE5001C329B /* Icon_nosearchresults@2x.png */,
 				28D10EB0135D6E54006F1D94 /* Directional Arrows */,
 				28D10EB6135D6E54006F1D94 /* Photomap */,
 				28D10EB8135D6E54006F1D94 /* TabBar */,
@@ -2488,6 +2496,7 @@
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
 				28AD62B5131FB69D008527FC /* FormData.plist in Resources */,
 				28AD62B7131FB69D008527FC /* styles.plist in Resources */,
+				2865C24C19D570BA001C329B /* Icon_nosearchresults.png in Resources */,
 				28AD62B8131FB69D008527FC /* userState.plist in Resources */,
 				28AD6549131FC239008527FC /* UIButton_green_hi@2x.png in Resources */,
 				28AD654A131FC239008527FC /* UIButton_green_lo@2x.png in Resources */,
@@ -2674,6 +2683,7 @@
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 				2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */,
+				2865C24919D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */,
 				28718BB417858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB617858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
 			);
@@ -2705,7 +2715,9 @@
 				2834361815DD5DC300B00FD5 /* UIButton_red_lo@2x.png in Resources */,
 				2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				2834361A15DD5DC300B00FD5 /* CSIcon_MapArrow_start@2x.png in Resources */,
+				2865C24A19D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */,
 				2834361B15DD5DC300B00FD5 /* UIIcon_cycle_lanes@2x.png in Resources */,
+				2865C24D19D570BA001C329B /* Icon_nosearchresults.png in Resources */,
 				2834361C15DD5DC300B00FD5 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				2834361D15DD5DC300B00FD5 /* UIIcon_footpaths@2x.png in Resources */,
 				2834361E15DD5DC300B00FD5 /* UIIcon_quiet_street@2x.png in Resources */,

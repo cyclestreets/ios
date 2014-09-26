@@ -480,8 +480,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			CLS_LOG(@"MapPlanningStateNoRoute toolbar items %@,%@,%@,%@", _locationButton,_searchButton, _leftFlex, _rightFlex);
-			
 			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
 			[self.toolBar setItems:items animated:YES ];
 			
@@ -500,8 +498,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 				items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
 			}else{
 				
-				CLS_LOG(@"MapPlanningStateLocating shouldShowWayPointUI=YES toolbar items %@,%@,%@,%@", _locationButton,_searchButton, _leftFlex, _rightFlex);
-				
 				items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
 			}
 			
@@ -519,8 +515,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			CLS_LOG(@"MapPlanningStateStartPlanning toolbar items %@,%@,%@", _locationButton,_searchButton, _leftFlex);
-			
 			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
             
             [self.toolBar setItems:items animated:YES ];
@@ -535,8 +529,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			CLS_LOG(@"MapPlanningStatePlanning toolbar items %@,%@,%@,%@,%@", _waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton);
-			
 			items=@[_waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton];
             [self.toolBar setItems:items animated:YES ];
 		}
@@ -549,8 +541,6 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			_routeButton.title = @"New route";
 			_activeLocationSubButton.selected=NO;
 			_searchButton.enabled = YES;
-			
-			CLS_LOG(@"MapPlanningStateRoute toolbar items %@,%@,%@,%@,%@", _locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton);
 			
 			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
             [self.toolBar setItems:items animated:NO ];
