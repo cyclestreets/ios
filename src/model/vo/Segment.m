@@ -145,24 +145,24 @@ static NSDictionary *roadIcons;
 	return [roadIcons valueForKey:provisionName];
 }
 
-/*
- * Used to set table view cell and RouteSegmentViewController view, which have been set up to share UI fields of the same name.
- */
-- (void) setUIElements:(NSObject *)view/*or controller*/ {
-	[view setValue:[self roadName] forKeyPath:@"road.text"];
-	[view setValue:[self timeString] forKeyPath:@"time.text"];
-	[view setValue:[NSString stringWithFormat:@"%4dm", [self segmentDistance]] forKeyPath:@"distance.text"];
-	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
-	[view setValue:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles] forKeyPath:@"total.text"];
-	NSString *imageName = [Segment provisionIcon:[[self provisionName] lowercaseString]];
-	[view setValue:[UIImage imageNamed:imageName] forKeyPath:@"image.image"];
-	if ([view respondsToSelector:@selector(setBusyness:)]) {
-		[view setValue:[self provisionName] forKeyPath:@"busyness.text"];
-	}
-	if ([view respondsToSelector:@selector(setTurn:)]) {
-		[view setValue:[self turn] forKeyPath:@"turn.text"];
-	}
-}
+///*
+// * Used to set table view cell and RouteSegmentViewController view, which have been set up to share UI fields of the same name.
+// */
+//- (void) setUIElements:(NSObject *)view/*or controller*/ {
+//	[view setValue:[self roadName] forKeyPath:@"road.text"];
+//	[view setValue:[self timeString] forKeyPath:@"time.text"];
+//	[view setValue:[NSString stringWithFormat:@"%4dm", [self segmentDistance]] forKeyPath:@"distance.text"];
+//	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
+//	[view setValue:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles] forKeyPath:@"total.text"];
+//	NSString *imageName = [Segment provisionIcon:[[self provisionName] lowercaseString]];
+//	[view setValue:[UIImage imageNamed:imageName] forKeyPath:@"image.image"];
+//	if ([view respondsToSelector:@selector(setBusyness:)]) {
+//		[view setValue:[self provisionName] forKeyPath:@"busyness.text"];
+//	}
+//	if ([view respondsToSelector:@selector(setTurn:)]) {
+//		[view setValue:[self turn] forKeyPath:@"turn.text"];
+//	}
+//}
 
 - (NSString *) infoString {
 	NSString *hm = [self timeString];

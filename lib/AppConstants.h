@@ -11,7 +11,7 @@
 @class NetResponse;
 
 #if defined (CONFIGURATION_Debug)
-	#define ENABLEDEBUGTRACE 1
+	#define ENABLEDEBUGTRACE 0
 #else
 	#define ENABLEDEBUGTRACE 0
 #endif

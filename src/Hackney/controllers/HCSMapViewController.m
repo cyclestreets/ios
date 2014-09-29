@@ -228,6 +228,10 @@
 			
 			[_currentRoute calculateNorthSouthValues];
 			
+			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
+			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
+			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:NO];
+			
 			
 			//add start/end pins
 			SegmentVO *firstsegment=(SegmentVO*)[routeCoords firstObject];
@@ -262,7 +266,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
 	
-	
+	// back up map zoom, sometimes this will not work in viewDidLoad so we offset it to here
 	if(_currentRoute.segments.count>0){
 		
 		CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
