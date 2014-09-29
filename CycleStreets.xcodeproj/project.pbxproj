@@ -754,8 +754,6 @@
 		280E91C314097D8600C7AC75 /* StyleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StyleManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		280E91C414097D8600C7AC75 /* UserSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UserSettingsManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E91C514097D8600C7AC75 /* UserSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UserSettingsManager.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		280E91CA14097DD300C7AC75 /* MapLocationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLocationSearchViewController.h; sourceTree = "<group>"; };
-		280E91CB14097DD300C7AC75 /* MapLocationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLocationSearchViewController.m; sourceTree = "<group>"; };
 		280E91CE14097DE000C7AC75 /* ItineraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ItineraryViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E91CF14097DE000C7AC75 /* ItineraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItineraryViewController.m; sourceTree = "<group>"; };
 		280E92FF1409805800C7AC75 /* RouteSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteSegmentViewController.h; sourceTree = "<group>"; };
@@ -1372,8 +1370,6 @@
 		280E91C914097DD300C7AC75 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				280E91CA14097DD300C7AC75 /* MapLocationSearchViewController.h */,
-				280E91CB14097DD300C7AC75 /* MapLocationSearchViewController.m */,
 				282517FD19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.h */,
 				282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */,
 			);

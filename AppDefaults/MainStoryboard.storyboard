@@ -102,7 +102,7 @@
                                 <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100.00000043962893" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100" y="484" width="210.00000059572628" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -233,6 +233,11 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Itinerary" id="tdP-ht-4mK">
                         <barButtonItem key="backBarButtonItem" title="Back" id="nlT-ks-tT4"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="3Jg-gl-T1B">
+                            <connections>
+                                <action selector="shareButtonSelected:" destination="oEv-ga-wtZ" id="92y-Y1-zhb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="readoutLineOne" destination="EHK-L1-kwK" id="pcJ-zu-e83"/>
@@ -377,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="naE-aq-XSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144" y="152"/>
+            <point key="canvasLocation" x="144" y="845"/>
         </scene>
         <!--Credits-->
         <scene sceneID="cJE-SS-bNv">
