@@ -17,11 +17,7 @@
 #import "GenericConstants.h"
 #import "BUDataSourceManager.h"
 
-@interface PhotoManager(Private)
-
--(void)UserPhotoUploadResponse:(ValidationVO*)validation;
-
--(void)uploadPhotoForUserResponse:(ValidationVO*)validation;
+@interface PhotoManager()
 
 
 -(void)stopRetreivingPhotos;
@@ -290,8 +286,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	request.source=DataSourceRequestCacheTypeUseNetwork;
 	request.trackProgress=YES;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+		[self UserPhotoUploadResponse:operation];
+			
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading Photo" andMessage:nil];
 	
@@ -301,15 +303,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
--(void)UserPhotoUploadResponse:(ValidationVO*)validation{
+-(void)UserPhotoUploadResponse:(BUNetworkOperation*)result{
 	
 	BetterLog(@"");
     
-    switch(validation.validationStatus){
+    switch(result.validationStatus){
             
 		case ValidationUserPhotoUploadSuccess:
 		{
-            uploadPhoto.responseDict=validation.responseDict;
+            uploadPhoto.responseDict=result.dataProvider;
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
@@ -321,7 +323,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 			
 		case ValidationUserPhotoUploadFailed:
 		{	
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,validation.returnMessage,MESSAGE, nil];
+			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,result.validationMessage,MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
