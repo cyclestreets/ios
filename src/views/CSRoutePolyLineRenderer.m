@@ -13,6 +13,8 @@
 #import "CSRoutePolyLineOverlay.h"
 #import "CSPointVO.h"
 
+#import "GlobalUtilities.h"
+
 #define MIN_POINT_DELTA 5.0 // controls how close points must be before being culled
 
 
@@ -32,7 +34,7 @@
 	if(self){
 		
 		_primaryColor=[UIColor blueColor];
-		_secondaryColor=[UIColor redColor];
+		_secondaryColor=UIColorFromRGB(0x880088);
 		
 		_secondaryDash=4.0f;
 		
