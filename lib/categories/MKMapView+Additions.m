@@ -126,6 +126,24 @@
 			region.span.longitudeDelta];
 }
 
+
+-(MKMapRect)mapRectForAnnotations{
+	
+	MKMapRect zoomRect = MKMapRectNull;
+	for (id <MKAnnotation> annotation in self.annotations) {
+		MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+		MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
+		if (MKMapRectIsNull(zoomRect)) {
+			zoomRect = pointRect;
+		} else {
+			zoomRect = MKMapRectUnion(zoomRect, pointRect);
+		}
+	}
+	
+	return zoomRect;
+	
+}
+
 -(void) zoomToFitAnnotations {
 	MKMapRect zoomRect = MKMapRectNull;
 	for (id <MKAnnotation> annotation in self.annotations) {

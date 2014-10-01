@@ -47,4 +47,7 @@
 
 -(double) getZoomLevel;
 
+
+-(MKMapRect)mapRectForAnnotations;
+
 @end

@@ -746,7 +746,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
 	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:2]){
 		
-		[_mapView showAnnotations:@[userLocation,_startAnnotation,_endAnnotation] animated:YES];
+		MKMapRect annotationRect=[_mapView mapRectForAnnotations];
+		
+		// offset determined by visibility of footer view
+		NSInteger offset=_footerIsHidden==YES ?_attributionLabel.height :_footerView.height+_attributionLabel.height;
+		offset+=20;
+		
+		[_mapView setVisibleMapRect:annotationRect edgePadding:UIEdgeInsetsMake(50,50,offset,50) animated:YES];
+		
 		self.currentLocation=location;
 		
 		_isLocating=NO;
@@ -754,9 +761,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	_locationButton.enabled=YES;
-	
-	if(!_footerIsHidden)
-		[self didToggleInfo];
 	
 	
 }
