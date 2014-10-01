@@ -86,11 +86,12 @@ static NSDictionary *segmentDirectionsIcons;
 	// vertical lb for main text
 	_contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, 200, 10)];
 	_contentContainer.fixedWidth=YES;
+	_contentContainer.clipsToBounds=NO;
 	_contentContainer.layoutMode=BUVerticalLayoutMode;
 	_contentContainer.itemPadding=2;
 	
 	
-	_roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-60, 16)];
+	_roadNameLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 16)];
 	_roadNameLabel.fixedWidth=YES;
 	_roadNameLabel.textAlignment=UITextAlignmentLeft;
 	_roadNameLabel.multiline=YES;
@@ -98,7 +99,7 @@ static NSDictionary *segmentDirectionsIcons;
 	_roadNameLabel.font=[UIFont boldSystemFontOfSize:13];
 	[_contentContainer addSubview:_roadNameLabel];
 	
-	_roadTypeLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH-20, 16)];
+	_roadTypeLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 16)];
 	_roadTypeLabel.textAlignment=UITextAlignmentLeft;
 	_roadTypeLabel.multiline=YES;
 	_roadTypeLabel.textColor=UIColorFromRGB(0x7F7F7F);
@@ -124,7 +125,7 @@ static NSDictionary *segmentDirectionsIcons;
 	_distLabel.colors=colors;
 	[_readoutContainer addSubview:_distLabel];
 	
-	_totalLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 50, 16)];
+	_totalLabel=[[MultiLabelLine alloc] initWithFrame:CGRectMake(0, 0, 80, 16)];
 	_totalLabel.itemPadding=2;
 	_totalLabel.fonts=fonts;
 	_totalLabel.colors=colors;
@@ -157,7 +158,7 @@ static NSDictionary *segmentDirectionsIcons;
 		
 		
 		if(_hasCapitalizedTurn==NO){
-			_capitalizedTurnLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 16)];
+			_capitalizedTurnLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, _contentContainer.width, 16)];
 			_capitalizedTurnLabel.textAlignment=UITextAlignmentLeft;
 			_capitalizedTurnLabel.multiline=YES;
 			_capitalizedTurnLabel.textColor=UIColorFromRGB(0x31620E);
