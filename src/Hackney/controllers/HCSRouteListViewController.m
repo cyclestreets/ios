@@ -218,7 +218,7 @@ static NSString *const VIEWTITLE=@"Saved Routes";
 {
     if (editingStyle == UITableViewCellEditingStyleDelete){
 		
-		NSLog(@"Delete");
+		BetterLog(@"UITableViewCellEditingStyleDelete");
 		
         // Delete the managed object at the given index path.
         Trip *tripToDelete = [_dataProvider objectAtIndex:indexPath.row];

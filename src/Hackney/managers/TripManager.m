@@ -70,7 +70,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 
 - (Trip*)createTrip
 {
-	NSLog(@"createTrip");
+	BetterLog(@"createTrip");
 	
 	if(_currentRecordingTrip==nil){
 		
@@ -181,7 +181,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 		Coord *last		= [_currentRecordingTrip.coords lastObject];
 		Coord *first	= [_currentRecordingTrip.coords firstObject];
 		NSTimeInterval duration = [last.recorded timeIntervalSinceDate:first.recorded];
-		NSLog(@"duration = %.0fs", duration);
+		BetterLog(@"duration = %.0fs", duration);
 		[_currentRecordingTrip setDuration:[NSNumber numberWithDouble:duration]];
 		
 	}else{
@@ -516,12 +516,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 			//[userDict setValue:appVersion           forKey:@"app_version"];
 			
 		}else{
-			NSLog(@"TripManager fetch user FAIL");
+			BetterLog(@"TripManager fetch user FAIL");
 		}
 		
 		
 	}else{
-		NSLog(@"TripManager WARNING no saved user data to encode");
+		BetterLog(@"TripManager WARNING no saved user data to encode");
 	}
 	
 	
@@ -543,7 +543,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 - (NSString *)setPurpose:(unsigned int)index
 {
 	NSString *purpose = [self getPurposeString:index];
-	NSLog(@"setPurpose: %@", purpose);
+	BetterLog(@"setPurpose: %@", purpose);
 	
 	if ( _currentRecordingTrip ){
 		
@@ -695,11 +695,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 	
 	if (trips == nil) {
 		// Handle the error.
-		NSLog(@"no trips with zero distance found");
+		BetterLog(@"no trips with zero distance found");
 	}
 	
 	int count = [trips count];
-	NSLog(@"found %d trip(s) in need of distance recalcuation", count);
+	BetterLog(@"found %d trip(s) in need of distance recalcuation", count);
 
 	for (Trip *trip in trips){
 		
@@ -756,18 +756,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(TripManager);
 				
 			}else{
 				
-				NSLog(@"WARNING speed exceeds limit: %f => throw out deltaDist: %f, deltaTime: %f",  deltaDist / deltaTime, deltaDist, deltaTime);
+				BetterLog(@"WARNING speed exceeds limit: %f => throw out deltaDist: %f, deltaTime: %f",  deltaDist / deltaTime, deltaDist, deltaTime);
 				
 			}
 			
 		}else{
 			
-			NSLog(@"WARNING deltaTime exceeds limit: %f => throw out deltaDist: %f", deltaTime, deltaDist);
+			BetterLog(@"WARNING deltaTime exceeds limit: %f => throw out deltaDist: %f", deltaTime, deltaDist);
 		}
 		
 	}else{
 		
-		NSLog(@"WARNING accuracy exceeds limit: %f => throw out deltaDist: %f", MAX([prev.hAccuracy doubleValue], [next.hAccuracy doubleValue]) , deltaDist);
+		BetterLog(@"WARNING accuracy exceeds limit: %f => throw out deltaDist: %f", MAX([prev.hAccuracy doubleValue], [next.hAccuracy doubleValue]) , deltaDist);
 		
 	}
 	
