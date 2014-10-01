@@ -144,6 +144,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
+/*
+ if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
+ [self showHUDWithMessage:@"Finish point set." andIcon:@"CSIcon_finish_wisp.png" withDelay:1];
+ }
+*/
+
 
 @implementation MapViewController
 
@@ -327,8 +333,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[self resetWayPoints];
 	
-		
-	[ViewUtilities drawUIViewEdgeShadow:_walkingRouteOverlayView atTop:YES];
+	
 	[self.view addSubview:_walkingRouteOverlayView];
 	_walkingRouteOverlayView.y=self.view.height+_walkingRouteOverlayView.height;
 	
