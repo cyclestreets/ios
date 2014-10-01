@@ -1501,6 +1501,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 			
 			_photodescriptionField.textColor=UIColorFromRGB(0x555555);
 			
+			_uploadImage.caption=textView.text;
+			
 		}
 		break;
 			

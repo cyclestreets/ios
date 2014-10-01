@@ -268,7 +268,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                          [UserAccount sharedInstance].userPassword,@"password",
 										 [NSString stringWithFormat:@"%@", BOX_FLOAT(location.coordinate.latitude)],@"latitude",
                                          [NSString stringWithFormat:@"%@",BOX_FLOAT(location.coordinate.longitude)],@"longitude",
-                                         photo.caption,@"caption",
+										 photo.caption==nil ? EMPTYSTRING : photo.caption,@"caption",
                                          photo.feature.tag,@"category", // note: conversion to serverside types
                                          photo.category.tag,@"metacategory", //
                                          photo.dateTime,@"datetime",
