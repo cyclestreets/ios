@@ -52,7 +52,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 + (NSArray *) routeXMLElementNames;
 
-- (int) numSegments;
+- (NSInteger) numSegments;
 
 - (Segment *) segmentAtIndex:(int)index;
 

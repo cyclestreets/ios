@@ -22,7 +22,7 @@
 
 -(BOOL)addSubscriber:(NSString*)subscriberId;
 -(BOOL)removeSubscriber:(NSString*)subscriberId;
--(int)findSubscriber:(NSString*)subscriberId;
+-(NSInteger)findSubscriber:(NSString*)subscriberId;
 -(void)removeAllSubscribers;
 
 
@@ -146,7 +146,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 - (BOOL)hasSubscriber:(NSString*)subscriber{
 	
-	int index=[self findSubscriber:subscriber];
+	NSInteger index=[self findSubscriber:subscriber];
 	
 	return index!=NSNotFound;
     
@@ -264,7 +264,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 -(BOOL)addSubscriber:(NSString*)subscriberId{
 	
-	int index=[self findSubscriber:subscriberId];
+	NSInteger index=[self findSubscriber:subscriberId];
 	
 	if(index==NSNotFound){
 		
@@ -278,7 +278,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 -(BOOL)removeSubscriber:(NSString*)subscriberId{
 	
-	int index=[self findSubscriber:subscriberId];
+	NSInteger index=[self findSubscriber:subscriberId];
 	
 	if(index!=NSNotFound){
 		
@@ -296,9 +296,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
--(int)findSubscriber:(NSString*)subscriberId{
+-(NSInteger)findSubscriber:(NSString*)subscriberId{
 	
-	int index=[locationSubscribers indexOfObject:subscriberId];
+	NSInteger index=[locationSubscribers indexOfObject:subscriberId];
 	
 	return index;
 }

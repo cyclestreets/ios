@@ -59,7 +59,7 @@
 	if(lookupitem!=nil){
 		
 		// find index of this vo in dataProvider and set si if found
-		int index=[dataProvider indexOfObject:lookupitem];
+		NSInteger index=[dataProvider indexOfObject:lookupitem];
 		
 		if(index!=NSNotFound){
 			self.selectedIndexPath=[NSIndexPath indexPathForRow:index inSection:0];

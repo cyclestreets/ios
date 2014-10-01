@@ -117,7 +117,7 @@
 -(void)removeSubView:(UIView *)view;
 -(void)removeSubviewAtIndex:(int)index;
 -(void)removeAllSubViews;
--(UIView*)viewAtIndex:(int)index;
+-(UIView*)viewAtIndex:(NSInteger)index;
 
 
 // prelim insert/remove with animation support

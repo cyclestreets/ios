@@ -201,7 +201,7 @@
 -(IBAction)iconButtonSelectedAtIndex:(id)sender{
 	
 	UIButton *button=(UIButton*)sender;
-	int index=button.tag;
+	NSInteger index=button.tag;
 	
 	if([_delegate respondsToSelector:@selector(actionSheetClickedButtonWithType:)]){
 		[_delegate actionSheetClickedButtonWithType:index];

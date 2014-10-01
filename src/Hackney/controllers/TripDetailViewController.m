@@ -89,7 +89,7 @@
 	if(range.length==1)
 		return YES;
 	
-	int charsleft=MAXCHARALLOWED-detailTextView.text.length;
+	NSInteger charsleft=MAXCHARALLOWED-detailTextView.text.length;
 	
 	return charsleft>0;
 	

@@ -24,7 +24,17 @@
 
 +(float) calculateHeightOfTextFromWidth:(NSString*)text :(UIFont*)withFont :(float)width :(NSLineBreakMode)lineBreakMode
 {
-	CGSize suggestedSize = [text sizeWithFont:withFont constrainedToSize:CGSizeMake(width, FLT_MAX) lineBreakMode:lineBreakMode];
+	if(text==nil)
+		return 0;
+	
+	NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:withFont}];
+	CGRect rect = [attributedText boundingRectWithSize:(CGSize){width, CGFLOAT_MAX}
+											   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+											   context:nil];
+	// size is fractional so must be rounded;
+	CGSize suggestedSize = rect.size;
+	suggestedSize.height = ceilf(suggestedSize.height);
+	suggestedSize.width  = ceilf(suggestedSize.width);
 	
 	
 	return suggestedSize.height;
@@ -37,9 +47,16 @@
 	for( int i=0;i<linecount;i++){
 		[strarr addObject:@" "];
 	}
-	NSString *linestr=[strarr componentsJoinedByString:@"\r"];  
+	NSString *linestr=[strarr componentsJoinedByString:@"\r"];
 	
-	CGSize suggestedSize = [linestr sizeWithFont:withFont constrainedToSize:CGSizeMake(width, FLT_MAX) lineBreakMode:lineBreakMode];
+	NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:linestr attributes:@{NSFontAttributeName:withFont}];
+	CGRect rect = [attributedText boundingRectWithSize:(CGSize){width, CGFLOAT_MAX}
+											   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+											   context:nil];
+	// size is fractional so must be rounded;
+	CGSize suggestedSize = rect.size;
+	suggestedSize.height = ceilf(suggestedSize.height);
+	suggestedSize.width  = ceilf(suggestedSize.width);
 	
 	
 	return suggestedSize.height;
@@ -48,8 +65,7 @@
 
 +(float) calculateWidthOfText:(NSString*)text :(UIFont*)withFont
 {
-	CGSize suggestedSize = [text sizeWithFont:withFont];
-	
+	CGSize suggestedSize = [text sizeWithAttributes:@{NSFontAttributeName:withFont}];
 	
 	return suggestedSize.width;
 }

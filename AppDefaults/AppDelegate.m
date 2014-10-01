@@ -389,7 +389,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)showTabBarViewControllerByName:(NSString*)viewname{
 	
-	int count=[_tabBarController.viewControllers count];
+	NSInteger count=[_tabBarController.viewControllers count];
 	int index=-1;
 	for (int i=0;i<count;i++) {
 		UIViewController *navcontroller=[_tabBarController.viewControllers objectAtIndex:i];
