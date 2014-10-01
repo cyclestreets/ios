@@ -849,6 +849,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 }
 
+// force UIImagePickerController navcontroller to respect the application statusbar/nav bar style
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+	navigationController.navigationBar.translucent=NO;
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
 
 #pragma mark imagePickerController  Delegate methods -
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
