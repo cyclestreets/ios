@@ -1294,6 +1294,36 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+	
+	switch (_viewState) {
+		case PhotoWizardViewStateDescription:
+		{
+			if([text isEqualToString:EMPTYSTRING] && range.length > 0){
+				
+				NSString *prompttext=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
+				if([_photodescriptionField.text containsString:prompttext]){
+					_photodescriptionField.text=[_photodescriptionField.text stringByReplacingOccurrencesOfString:prompttext withString:EMPTYSTRING];;
+					_photodescriptionField.textColor=UIColorFromRGB(0x555555);
+					return YES;
+				}
+				
+			}
+			
+		}
+			break;
+			
+		default:
+			return YES;
+			break;
+			
+	}
+	
+	return YES;
+}
+
+
+
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
 	
@@ -1306,8 +1336,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 				self.textViewAccessoryView = nil;
 			}
 			
-			if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
-				_photodescriptionField.text=@"";
+			NSString *prompttext=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
+			if([_photodescriptionField.text containsString:prompttext]){
+				_photodescriptionField.text=[_photodescriptionField.text stringByReplacingOccurrencesOfString:prompttext withString:EMPTYSTRING];
 				_photodescriptionField.textColor=UIColorFromRGB(0x555555);
 			}
 			

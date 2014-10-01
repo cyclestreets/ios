@@ -360,6 +360,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_tabBarController.tabBar.translucent=NO;
 	
 	_tabBarController.moreNavigationController.navigationBar.translucent=NO;
+	_tabBarController.moreNavigationController.view.tintColor=[UIColor grayColor];
 	
 	// DEV: temp disable of edit 
 	_tabBarController.customizableViewControllers=nil;
