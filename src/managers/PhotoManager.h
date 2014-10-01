@@ -20,12 +20,12 @@
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoManager);
-@property (nonatomic, strong) UploadPhotoVO		* uploadPhoto;
-@property (nonatomic, strong) CLLocation		* autoLoadLocation;
-@property (nonatomic, strong) PhotoMapListVO		* locationPhotoList;
-@property (nonatomic, strong) PhotoMapListVO		* routePhotoList;
-@property (nonatomic, assign) BOOL		 showingHUD;
-@property (nonatomic, strong) NSTimer		* retreiveTimer;
+
+@property (nonatomic, strong) PhotoMapListVO			* locationPhotoList;
+@property (nonatomic, strong) PhotoMapListVO			* routePhotoList;
+
+@property (nonatomic, strong) UploadPhotoVO				* uploadPhoto;
+@property (nonatomic, strong) CLLocation				* autoLoadLocation;
 
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;
 -(void)retrievePhotosForRouteBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;

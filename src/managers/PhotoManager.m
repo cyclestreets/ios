@@ -20,7 +20,8 @@
 @interface PhotoManager()
 
 
--(void)stopRetreivingPhotos;
+@property (nonatomic, assign) BOOL						showingHUD;
+@property (nonatomic, strong) NSTimer					* retreiveTimer;
 
 @end
 
@@ -28,13 +29,9 @@
 
 @implementation PhotoManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
-@synthesize uploadPhoto;
-@synthesize autoLoadLocation;
-@synthesize locationPhotoList;
-@synthesize showingHUD;
-@synthesize retreiveTimer;
 
 
+#pragma mark - Notifications
 //
 /***********************************************
  * @description		NOTIFICATIONS
@@ -96,7 +93,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
-#pragma Photo Downloading
+#pragma mark - Photo Downloading
 
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw{
     [self retrievePhotosForLocationBounds:ne withEdge:sw withLimit:25 fordataID:RETREIVELOCATIONPHOTOS];
@@ -110,9 +107,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	BetterLog(@"");
 	
-	if(showingHUD==NO){
+	if(_showingHUD==NO){
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"" andMessage:nil andDelay:0 andAllowTouch:NO];
-		showingHUD=YES;
+		_showingHUD=YES;
 	}
 
     CLLocationCoordinate2D centre;
@@ -176,7 +173,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 -(void)retrievePhotosForLocationResponse:(BUNetworkOperation*)response{
 	
 	[[HudManager sharedInstance]removeHUD:NO];
-	showingHUD=NO;
+	_showingHUD=NO;
 	
 	    
     switch (response.validationStatus) {
@@ -211,7 +208,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	BetterLog(@"");
 	
 	[[HudManager sharedInstance]removeHUD:NO];
-	showingHUD=NO;
+	_showingHUD=NO;
 	
 	
     switch (response.validationStatus) {
@@ -242,13 +239,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 -(void)assesRetrievedComplete{
 	
-	if(showingHUD==YES){
-		[retreiveTimer invalidate];
+	if(_showingHUD==YES){
+		[_retreiveTimer invalidate];
 		[[HudManager sharedInstance]removeHUD:NO];
-		showingHUD=NO;
+		_showingHUD=NO;
 	}
 }
 
+
+#pragma mark - Photo Upload
 //
 /***********************************************
  * @description			Upload methods
@@ -311,7 +310,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
             
 		case ValidationUserPhotoUploadSuccess:
 		{
-            uploadPhoto.responseDict=result.dataProvider;
+            _uploadPhoto.responseDict=result.dataProvider;
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
@@ -341,6 +340,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
+#pragma mark - Utility
 //
 /***********************************************
  * @description			UTILITY
@@ -350,21 +350,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 -(NSString*)uploadPhotoId{
 	
-	if(uploadPhoto==nil)
+	if(_uploadPhoto==nil)
 		return ZERO;
 	
-	return uploadPhoto.uploadedPhotoId;
+	return _uploadPhoto.uploadedPhotoId;
 }
 
 
 -(BOOL)isUserPhoto:(PhotoMapVO*)photo{
 	
-	if(uploadPhoto==nil)
+	if(_uploadPhoto==nil)
 		return NO;
 	
-	if(uploadPhoto.responseDict!=nil){
+	if(_uploadPhoto.responseDict!=nil){
 		
-		NSString *uploadid=uploadPhoto.uploadedPhotoId;
+		NSString *uploadid=_uploadPhoto.uploadedPhotoId;
 		
 		if([photo.csid isEqualToString:uploadid]){
 			return YES;

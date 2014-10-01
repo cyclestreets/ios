@@ -300,8 +300,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)viewWillDisappear:(BOOL)animated{
 	
-	if([self isMovingFromParentViewController])
+	if([self isMovingFromParentViewController]){
 		_mapView.delegate=nil;
+		[_mapView removeOverlays:_mapView.overlays];
+	}
 	
 	[super viewWillDisappear:animated];
 }
