@@ -257,24 +257,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 -(void)UserPhotoUploadRequest:(UploadPhotoVO*)photo{
     
     self.uploadPhoto=photo;
-	CLLocation *location=photo.activeLocation;
 	
-	;
     
     NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
-    
-    NSMutableDictionary *postparameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         [UserAccount sharedInstance].user.username, @"username",
-                                         [UserAccount sharedInstance].userPassword,@"password",
-										 [NSString stringWithFormat:@"%@", BOX_FLOAT(location.coordinate.latitude)],@"latitude",
-                                         [NSString stringWithFormat:@"%@",BOX_FLOAT(location.coordinate.longitude)],@"longitude",
-										 photo.caption==nil ? EMPTYSTRING : photo.caption,@"caption",
-                                         photo.feature.tag,@"category", // note: conversion to serverside types
-                                         photo.category.tag,@"metacategory", //
-                                         photo.dateTime,@"datetime",
-										 [NSString stringWithFormat:@"%i",photo.bearing],@"bearing",
-                                         [photo uploadData],@"imageData",
-										 nil];
+	
+	NSMutableDictionary *postparameters=[_uploadPhoto uploadParams];
+	
+	postparameters[@"username"]=[UserAccount sharedInstance].user.username;
+	postparameters[@"password"]=[UserAccount sharedInstance].userPassword;
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters",postparameters,@"postparameters", nil];
     
@@ -289,6 +279,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 			
 		[self UserPhotoUploadResponse:operation];
 			
+	};
+	
+	request.progressBlock=^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite){
+		
+		NSDictionary *progressDict=@{@"bytesWritten":@(bytesWritten),@"totalBytesWritten":@(totalBytesWritten),@"totalBytesExpectedToWrite":@(totalBytesExpectedToWrite)};
+		[[NSNotificationCenter defaultCenter] postNotificationName:FILEUPLOADPROGRESS object:nil userInfo:progressDict];
+		
 	};
 	
 	[[BUDataSourceManager sharedInstance] processDataRequest:request];

@@ -308,7 +308,6 @@ static NSString *const STRINGID=@"account";
 	
 	[_scrollView scrollRectToVisible:CGRectMake(0, 0, SCREENWIDTH, 1) animated:YES];
 	
-	self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
 	
 }
 

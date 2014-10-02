@@ -35,4 +35,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoManager);
 -(BOOL)isUserPhoto:(PhotoMapVO*)photo;
 
 
+
+
 @end

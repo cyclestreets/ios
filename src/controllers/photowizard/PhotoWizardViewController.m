@@ -927,7 +927,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	
 	UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
-    self.uploadImage=[[UploadPhotoVO alloc]initWithImage:image];
+	_uploadImage.image=image;
 	_imagePreview.image=_uploadImage.image;
 	_photoSizeLabel.text=[NSString stringWithFormat:@"%i x %i",_uploadImage.width, _uploadImage.height];
 	

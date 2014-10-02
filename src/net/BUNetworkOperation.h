@@ -16,6 +16,9 @@
 
 typedef void (^BUNetworkOperationCompletionBlock)(BUNetworkOperation *operation, BOOL complete,NSString *error);
 
+typedef void (^BUNetworkOperationProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite);
+
+
 typedef NS_ENUM(int, BUNetworkOperationState)
 {
 	NetResponseStateInitialised,
@@ -51,7 +54,10 @@ typedef NS_ENUM(int, BUNetworkOperationError)
 @property (nonatomic, assign) DataParserType                  dataType;
 
 // response portion
-@property (nonatomic,copy)  BUNetworkOperationCompletionBlock completionBlock;
+@property (nonatomic,copy)  BUNetworkOperationCompletionBlock	completionBlock;
+@property (nonatomic,copy)  BUNetworkOperationProgressBlock		progressBlock;
+
+
 @property (nonatomic, strong)	id                              dataProvider;
 @property (nonatomic, strong)	NSMutableData                   * responseData;
 

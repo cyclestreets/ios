@@ -248,6 +248,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		
 	}];
 	
+	if(networkOperation.trackProgress){
+		
+		[operation setUploadProgressBlock:networkOperation.progressBlock];
+		
+	}
+	
 	
 	[manager.operationQueue addOperation:operation];
 	
