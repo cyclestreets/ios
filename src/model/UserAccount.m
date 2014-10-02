@@ -472,7 +472,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 -(void)logoutUser{
-	_accountMode=kUserAccountNotLoggedIn;
+	if (_user==nil) {
+		_accountMode=kUserAccountNotLoggedIn;
+	}else{
+		_accountMode=kUserAccountCredentialsExist;
+	}
+	
 }
 
 

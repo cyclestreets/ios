@@ -351,6 +351,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 -(void)createNonPersistentUI{
+	
+	_mapView.showsUserLocation=YES;
     
 	[self requestPhotos];
 	
@@ -360,7 +362,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 
-
+-(void)viewDidDisappear:(BOOL)animated{
+	
+	_mapView.showsUserLocation=NO;
+	
+	[super viewDidDisappear:animated];
+}
 
 
 #pragma mark Photo Markers
