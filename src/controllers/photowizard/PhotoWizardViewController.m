@@ -359,7 +359,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)createPersistentUI{
 	
-	self.uploadImage=[[UploadPhotoVO alloc]init];
+	
 	
 	_modalToolBar.clipsToBounds=YES;
 	
@@ -460,7 +460,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)createNonPersistentUI{
     
-	
+	if(_uploadImage==nil)
+		self.uploadImage=[[UploadPhotoVO alloc]init];
    
     
 }
