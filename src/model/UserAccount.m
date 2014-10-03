@@ -203,12 +203,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)loginExistingUser{
 	if(_accountMode==kUserAccountCredentialsExist){
-		[self loginUserWithUserName:_user.username andPassword:_userPassword];
+		[self loginUserWithUserName:_user.username andPassword:_userPassword displayHUD:YES];
+	}
+}
+
+-(void)loginExistingUserSilent{
+	if(_accountMode==kUserAccountCredentialsExist){
+		[self loginUserWithUserName:_user.username andPassword:_userPassword displayHUD:NO];
 	}
 }
 
 
--(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password{
+
+-(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password displayHUD:(BOOL)displayHUD{
 	
 	self.userName=[name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	self.userPassword=password;
@@ -226,17 +233,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
 		
-		[self loginUserResponse:operation];
+		[self loginUserResponse:operation displayHUD:displayHUD];
 		
 	};
 	
 	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Signing in" andMessage:nil];
+	if(displayHUD)
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Signing in" andMessage:nil];
 	
 }
 
--(void)loginUserResponse:(BUNetworkOperation*)response{
+-(void)loginUserResponse:(BUNetworkOperation*)response displayHUD:(BOOL)displayHUD{
 	
 	switch(response.validationStatus){
 			
@@ -252,7 +260,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Logged In" andMessage:nil];
+			if(displayHUD)
+				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Logged In" andMessage:nil];
 			
 		}
 			break;
@@ -265,7 +274,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_login",MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Login Failed" andMessage:nil];
+			if(displayHUD)
+				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Login Failed" andMessage:nil];
 			
 		}	
 			break;

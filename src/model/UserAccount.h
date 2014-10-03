@@ -41,6 +41,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 -(void)logoutUser;
 
 -(void)loginExistingUser;
+-(void)loginExistingUserSilent;
 -(void)retrievePasswordForUser:(NSString*)email;
 -(BOOL)hasSessionToken;
 -(void)resetUserAccount;

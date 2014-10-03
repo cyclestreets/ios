@@ -186,11 +186,26 @@ static NSString *const STRINGID=@"account";
 	
 	[super viewWillAppear:animated];
 	
-	BetterLog(@"");
-	
 	_viewMode=[UserAccount sharedInstance].accountMode;
 	
 	[self createNonPersistentUI];
+	
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+	
+	[self forceActiveFieldResign];
+	
+	[super viewWillDisappear:animated];
+}
+
+
+// for some reason [self.view endEditing:YES] does not work for this view
+-(void)forceActiveFieldResign{
+	
+	if(_activeField!=nil)
+		[_activeField resignFirstResponder];
+	
 }
 
 
@@ -240,11 +255,16 @@ static NSString *const STRINGID=@"account";
 	[_formFieldArray addObject:rar];
 	NSMutableArray *lar=[[NSMutableArray alloc]initWithObjects:_loginUsernameField,_loginPasswordField,nil];
 	[_formFieldArray addObject:lar];
+	
+	
+	
 	/*
 		NSMutableArray *par=[[NSMutableArray alloc]initWithObjects:retrieveEmailField,nil];
 	[formFieldArray addObject:par];
 	[par release];
 	*/
+	
+	
 	
 	
 	if(_isModal==YES){

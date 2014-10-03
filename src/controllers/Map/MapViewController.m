@@ -144,11 +144,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
-/*
- if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
- [self showHUDWithMessage:@"Finish point set." andIcon:@"CSIcon_finish_wisp.png" withDelay:1];
- }
-*/
+
 
 
 @implementation MapViewController
@@ -970,6 +966,21 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	
 	waypoint.coordinate=coords;
+	
+	
+	 if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
+		 
+		 if(waypoint.waypointType==WayPointTypeStart){
+			 
+			 [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Start point set" andMessage:@"CSIcon_start_wisp.png"];
+			 
+		 }else if ( waypoint.waypointType==WayPointTypeFinish){
+			 
+			 [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Finish point set" andMessage:@"CSIcon_finish_wisp.png"];
+			 
+		 }
+	 }
+	
 	
 	
 	[[RouteManager sharedInstance] loadMetaDataForWaypoint:waypoint];

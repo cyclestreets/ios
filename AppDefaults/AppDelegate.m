@@ -158,7 +158,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[[UserAccount sharedInstance] logoutUser];
 }
 -(void)applicationWillEnterForeground:(UIApplication *)application{
-	[[UserAccount sharedInstance] loginExistingUser];
+	[[UserAccount sharedInstance] loginExistingUserSilent];
 }
 
 

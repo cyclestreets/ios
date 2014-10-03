@@ -459,7 +459,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
 	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
-	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:5])
+	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:4])
 		[self requestPhotos];
 	
 	
