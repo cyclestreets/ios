@@ -74,17 +74,14 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 @property (nonatomic, assign) BOOL										photomapQuerying;
 
+@property (nonatomic,assign) BOOL										shouldAcceptLocationUpdates;
+
+@property (nonatomic,assign) BOOL										mapChangedFromUserInteraction;
+
+
 @property (nonatomic,strong)  CSMapSource								* activeMapSource;
 
 
-
--(void)didRecievePhotoResponse:(NSDictionary*)dict;
--(void)displayPhotosOnMap;
-- (void) didNotificationMapStyleChanged;
-- (IBAction) locationButtonSelected:(id)sender;
--(IBAction)  showPhotoWizard:(id)sender;
-- (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw;
-- (void) requestPhotos;
 
 @end
 
@@ -139,8 +136,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
 	self.activeMapSource=[CycleStreets activeMapSource];
-	
-	//	UILabel *mkAttributionLabel = [_mapView.subviews objectAtIndex:1];
 	
 	if(overlays.count==0){
 		
@@ -315,6 +310,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 -(void)createPersistentUI{
 	
 	displaysConnectionErrors=NO;
+	_shouldAcceptLocationUpdates=YES;
 	
 	
 	[_mapView setDelegate:self];
@@ -405,7 +401,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void)fetchPhotoMarkersNorthEast:(CLLocationCoordinate2D)ne SouthWest:(CLLocationCoordinate2D)sw {
 	
-	
 	[[PhotoManager sharedInstance] retrievePhotosForLocationBounds:ne withEdge:sw];
 	
 }
@@ -415,10 +410,37 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 #pragma mark - MapView delegate
 
 
+- (BOOL)mapViewRegionDidChangeFromUserInteraction
+{
+	UIView *view = self.mapView.subviews.firstObject;
+	//  Look through gesture recognizers to determine whether this region change is from user interaction
+	for(UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+		if(recognizer.state == UIGestureRecognizerStateBegan || recognizer.state == UIGestureRecognizerStateEnded) {
+			return YES;
+		}
+	}
+	
+	return NO;
+}
+
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+	_mapChangedFromUserInteraction = [self mapViewRegionDidChangeFromUserInteraction];
+	
+	if (_mapChangedFromUserInteraction) {
+		_shouldAcceptLocationUpdates=NO;
+	}
+}
+
+
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
 //	if(self.currentLocation!=nil)
 //		return;
+	
+	if(!_shouldAcceptLocationUpdates)
+		return;
 	
 	CLLocation *location=userLocation.location;
 	
@@ -433,6 +455,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		self.currentLocation=location;
 		
 		
+	}else{
+		_shouldAcceptLocationUpdates=NO;
 	}
 	
 }
@@ -462,8 +486,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:4])
 		[self requestPhotos];
 	
-	
-	
 }
 
 
@@ -488,6 +510,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 - (IBAction) locationButtonSelected:(id)sender {
 	
 	_activeLocationSubButton.selected=!_activeLocationSubButton.selected;
+	
+	_shouldAcceptLocationUpdates=YES;
 	
 	[self.mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
 	

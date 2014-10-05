@@ -2453,7 +2453,7 @@
 				ORGANIZATIONNAME = "CycleStreets Ltd";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = Q3YCNU3X72;
+						DevelopmentTeam = 4LJ34GQZ65;
 					};
 					2834360115DD5DC300B00FD5 = {
 						DevelopmentTeam = Q3YCNU3X72;
@@ -3305,8 +3305,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3336,7 +3336,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "80A320A2-7BF3-4900-BBB7-F68BD8CB359F";
+				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3604,8 +3604,8 @@
 				BUNDLE_ID = "mobile-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "Beta-";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3635,7 +3635,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
+				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
