@@ -271,6 +271,9 @@ static NSString *const STRINGID=@"account";
 		CGRect pframe=_pageControlView.frame;
 		pframe.origin.y=pframe.origin.y+TABBARHEIGHT;
 		_pageControlView.frame=pframe;
+		
+		UIBarButtonItem *closebutton=[[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(didCancelButton:)];
+		self.navigationItem.rightBarButtonItem=closebutton;
 	}
 	
 }
@@ -643,7 +646,7 @@ static NSString *const STRINGID=@"account";
 		
 		[self showRequestUIForView:_loginView];
 		
-		[[UserAccount sharedInstance] loginUserWithUserName:efieldString andPassword:pfieldString];
+		[[UserAccount sharedInstance] loginUserWithUserName:efieldString andPassword:pfieldString displayHUD:YES ];
 		
 	}else {
 		if(eresult==NO){
