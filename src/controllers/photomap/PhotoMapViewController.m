@@ -445,7 +445,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	CLLocation *location=userLocation.location;
 	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
-	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:2]){
+	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:4]){
 		
 		if(_currentLocation==nil){
 			[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:NO];

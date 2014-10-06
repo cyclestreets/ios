@@ -73,6 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
 	[notifications addObject:REQUESTDIDFAIL];
+	[notifications addObject:XMLPARSERDIDFAILPARSING];
 	
 	[notifications addObject:GPSLOCATIONCOMPLETE];
 	[notifications addObject:GPSLOCATIONUPDATE];
@@ -103,7 +104,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Network Error" andMessage:@"Unable to contact server"];
 		}
 
-		
+		if([notification.name isEqualToString:XMLPARSERDIDFAILPARSING]){
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Route error" andMessage:@"Unable to load this route, please re-check route number."];
+		}
 		
 	}
 	

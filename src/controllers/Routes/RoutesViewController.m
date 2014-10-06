@@ -288,6 +288,11 @@
     SuperViewController *_oldcontroller=_activeController;
     
     NSString *controller=dict[ID];
+	
+	if([controller isEqualToString:_activeState])
+		return;
+	
+	
     self.activeState=controller;
     
     [self createViewControllerForType:controller];
