@@ -66,7 +66,6 @@ typedef struct
 
 +(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText delegate:(id)delegate;
 
-+(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText withMessage:(NSString*)message delegate:(id)delegate;
-
++(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText withMessage:(NSString*)message keyboardType:(UIKeyboardType)keyboardType delegate:(id)delegate;
 
 @end

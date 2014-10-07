@@ -40,7 +40,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:1  andAllowTouch:NO];
 }
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message andDelay:(int)delayTime andAllowTouch:(BOOL)allowTouch{
-    
+	
+	if([[UIApplication sharedApplication] keyWindow]==nil)
+		return;
 	
 	if(isShowing==NO){
         if(HUD==nil){

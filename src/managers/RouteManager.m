@@ -848,6 +848,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 //
 
 
+-(BOOL)hasSavedSelectedRoute{
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	NSString *selectedroutefileid = [cycleStreets.files miscValueForKey:@"selectedroute"];
+	
+	if(selectedroutefileid!=nil){
+		RouteVO *route=[self loadRouteForFileID:selectedroutefileid];
+		
+		return route!=nil;
+		
+	}
+	return NO;
+}
+
+
 // loads the currently saved selectedRoute by identifier
 -(BOOL)loadSavedSelectedRoute{
 	

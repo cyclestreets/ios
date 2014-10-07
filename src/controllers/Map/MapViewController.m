@@ -118,6 +118,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, assign) BOOL									programmaticChange;
 @property (nonatomic, assign) BOOL									avoidAccidentalTaps;
 @property (nonatomic, assign) BOOL									singleTapDidOccur;
+@property (nonatomic, assign) BOOL									savedSelectedRouteLoading;
+
 @property (nonatomic, assign) CGPoint								singleTapPoint;
 @property (nonatomic, assign) MapPlanningState						uiState;
 @property (nonatomic, assign) MapPlanningState						previousUIState;
@@ -382,11 +384,17 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // looks like someone didnt tell the mapkit guys this os8 functionality is required!
 - (void)userLocationDidComplete{
 	
-	BOOL hasSelectedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
+	_savedSelectedRouteLoading=[RouteManager sharedInstance].hasSavedSelectedRoute;
 	
-	if(!hasSelectedRoute){
+	
+	if(_savedSelectedRouteLoading){
+		_uiState=MapPlanningStateRoute;
+		[[RouteManager sharedInstance] loadSavedSelectedRoute];
+		
+	}else{
 		_mapView.showsUserLocation=YES;
 	}
+	
 	
 	[self removeNotification:GPSSYSTEMLOCATIONCOMPLETE];
 	
@@ -795,6 +803,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[self updateUItoState:MapPlanningStateRoute];
 	
+	_savedSelectedRouteLoading=NO;
+	
 }
 
 
@@ -967,23 +977,23 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	waypoint.coordinate=coords;
 	
-	
-	 if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
-		 
-		 if(waypoint.waypointType==WayPointTypeStart){
+	if(_savedSelectedRouteLoading==NO){
+		 if ([SettingsManager sharedInstance].dataProvider.showRoutePoint==YES) {
 			 
-			 [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Start point set" andMessage:@"CSIcon_start_wisp.png"];
-			 
-		 }else if ( waypoint.waypointType==WayPointTypeFinish){
-			 
-			 [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Finish point set" andMessage:@"CSIcon_finish_wisp.png"];
-			 
+			 if(waypoint.waypointType==WayPointTypeStart){
+				 
+				 [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Start point set" andMessage:@"CSIcon_start_wisp.png"];
+				 
+			 }else if ( waypoint.waypointType==WayPointTypeFinish){
+				 
+				 [[HudManager sharedInstance] showHudWithType:HUDWindowTypeIcon withTitle:@"Finish point set" andMessage:@"CSIcon_finish_wisp.png"];
+				 
+			 }
 		 }
-	 }
-	
-	
-	
-	[[RouteManager sharedInstance] loadMetaDataForWaypoint:waypoint];
+	}
+
+	// not supported for v3.0
+	//[[RouteManager sharedInstance] loadMetaDataForWaypoint:waypoint];
 	
 	[self updateWaypointStatuses];
 	

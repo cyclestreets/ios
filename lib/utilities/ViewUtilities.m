@@ -675,7 +675,7 @@
  * @description			creates new Alert with message and offset input field
  ***********************************************/
 //
-+(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText withMessage:(NSString*)message delegate:(id)delegate{
++(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText withMessage:(NSString*)message keyboardType:(UIKeyboardType)keyboardType delegate:(id)delegate{
 	
 	UIAlertView *prompt=nil;
 	UITextField *alertField=nil;
@@ -699,7 +699,8 @@
 											   cancelButtonTitle:@"Cancel" 
 											   otherButtonTitles:@"OK", nil];
 		prompt.tag=kTextEntryAlertTag;
-		UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, fieldoffset, 260.0, 25.0)]; 
+		UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, fieldoffset, 260.0, 25.0)];
+		alertField.keyboardType=keyboardType;
 		alertField.borderStyle=UITextBorderStyleRoundedRect;
 		[alertField setBackgroundColor:[UIColor whiteColor]];
 		[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
@@ -731,6 +732,7 @@
 			prompt.tag=kTextEntryAlertTag;
 			prompt.alertViewStyle=UIAlertViewStylePlainTextInput;
 			alertField = [prompt textFieldAtIndex:0];
+		alertField.keyboardType=keyboardType;
 			[alertField setBackgroundColor:[UIColor whiteColor]];
 			[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
 			alertField.tag=kTextEntryAlertFieldTag;
@@ -738,7 +740,7 @@
 			if(fieldText!=nil){
 				alertField.text=fieldText;
 			}else{
-				[alertField setPlaceholder:@"Route name"];
+				[alertField setPlaceholder:@"Route number"];
 			}
 			
 		}

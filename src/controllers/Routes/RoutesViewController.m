@@ -193,7 +193,7 @@
 
 -(IBAction)didSelectFetchRouteButton:(NSString*)type{
 	
-	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
+	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" keyboardType:UIKeyboardTypeNumberPad delegate:self];
 	
     
 }
