@@ -384,16 +384,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // looks like someone didnt tell the mapkit guys this os8 functionality is required!
 - (void)userLocationDidComplete{
 	
-	_savedSelectedRouteLoading=[RouteManager sharedInstance].hasSavedSelectedRoute;
-	
-	
-	if(_savedSelectedRouteLoading){
-		_uiState=MapPlanningStateRoute;
-		[[RouteManager sharedInstance] loadSavedSelectedRoute];
+	BOOL shouldloadSavedRoute=[[RouteManager sharedInstance] loadSavedSelectedRoute];
 		
-	}else{
+	if(!shouldloadSavedRoute)
 		_mapView.showsUserLocation=YES;
-	}
 	
 	
 	[self removeNotification:GPSSYSTEMLOCATIONCOMPLETE];
@@ -755,6 +749,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 - (void) newRoute {
+	
+	_savedSelectedRouteLoading=YES;
 	
 	[self updateUItoState:MapPlanningStateRoute];
 	
