@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
 #import "PhotoMapVO.h"
+#import "GlobalUtilities.h"
 
 @implementation PhotoMapVO
 
@@ -44,15 +45,18 @@ static int BIG_SIZE = 300;
 	self.smallImageURL = self.bigImageURL;
 	
 	//try and find a known smaller one
-	int bestSize = 0;
+	int bestSize = SCREENPIXELWIDTH;
+	int lastSize=0;
 	for (NSString *size in [sizes componentsSeparatedByString:@"|"]) {
 		int newSize = [size intValue];
+		
 		if (newSize >= MIN_SIZE) {
-			if (bestSize == 0) {
-				bestSize = newSize;
-			}
-			if (newSize < bestSize) {
-				bestSize = newSize;
+			
+			if (newSize > bestSize) {
+				bestSize=lastSize;
+				break;
+			}else{
+				lastSize=newSize;
 			}
 		}
 	}

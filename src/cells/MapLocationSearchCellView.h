@@ -7,20 +7,14 @@
 //
 
 #import "BUTableCellView.h"
-#import "NamedPlace.h"
+
+@class LocationSearchVO;
 
 @interface MapLocationSearchCellView : BUTableCellView{
 	
-	NamedPlace					*dataProvider;
-	
-	IBOutlet		UILabel			*titleLabel;
-	IBOutlet		UILabel			*nearLabel;
-	IBOutlet		UILabel			*distanceLabel;
 	
 	
 }
-@property (nonatomic, strong) NamedPlace		* dataProvider;
-@property (nonatomic, strong) IBOutlet UILabel		* titleLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* nearLabel;
-@property (nonatomic, strong) IBOutlet UILabel		* distanceLabel;
+@property (nonatomic, strong) LocationSearchVO		* dataProvider;
+
 @end

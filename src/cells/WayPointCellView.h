@@ -7,15 +7,16 @@
 //
 
 #import "BUTableCellView.h"
-#import "WayPointVO.h"
+
+@class WayPointVO;
 
 @interface WayPointCellView : BUTableCellView
 
 @property(nonatomic,strong)  WayPointVO				*dataProvider;
-@property(nonatomic,assign)  int					waypointIndex;
+@property(nonatomic,assign)  NSInteger				waypointIndex;
 
 
-// FMMoveTable supportß
+// FMMoveTable support
 - (void)prepareForMove;
 
 @end

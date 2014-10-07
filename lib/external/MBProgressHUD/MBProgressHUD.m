@@ -354,7 +354,7 @@
         }
         else {
 			lWidth = frame.size.width - 4 * MARGIN;
-			lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.labelText :self.labelFont :lWidth :UILineBreakModeWordWrap];
+			lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.labelText :self.labelFont :lWidth :NSLineBreakByWordWrapping];
 			
         }
 		
@@ -399,7 +399,7 @@
 		}
 		else {
 			lWidth = frame.size.width - 4 * MARGIN;
-			lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.detailsLabelText :self.detailsLabelFont :lWidth :UILineBreakModeWordWrap];
+			lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.detailsLabelText :self.detailsLabelFont :lWidth :NSLineBreakByWordWrapping];
 			
 		}
 		
@@ -448,7 +448,7 @@
 		}
 		else {
 			lWidth = frame.size.width - (4 * MARGIN);
-			lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.touchToContinueLabelText :self.detailsLabelFont :lWidth :UILineBreakModeWordWrap];
+			lHeight=[GlobalUtilities calculateHeightOfTextFromWidth:self.touchToContinueLabelText :self.detailsLabelFont :lWidth :NSLineBreakByWordWrapping];
 			
 		}
 		

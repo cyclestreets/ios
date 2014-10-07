@@ -56,6 +56,8 @@
 
 #import "Reachability.h"
 
+#import "DeviceUtilities.h"
+
 #define kShouldPrintReachabilityFlags 1
 
 static void PrintReachabilityFlags(SCNetworkReachabilityFlags    flags, const char* comment)
@@ -289,8 +291,15 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
 		{
 			if(temp_addr->ifa_addr->sa_family == AF_INET)
 			{
+				
+				// Check if interface is en0 which is the wifi connection on the iPhone, but not on the mac its en1.
+                BOOL isSimulator=[DeviceUtilities isSimulatorDevice];
+                NSString *wifiInterface=@"en0";
+                if(isSimulator==YES)
+                    wifiInterface=@"en1";
+				
 				// Check if interface is en0 which is the wifi connection on the iPhone
-				if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en1"])
+				if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:wifiInterface])
 				{
 					// Get NSString from C String
 					address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];

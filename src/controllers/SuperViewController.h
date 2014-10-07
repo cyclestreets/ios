@@ -29,6 +29,7 @@
 
 -(void)wayPointArraywasReordered;
 -(void)wayPointwasDeleted;
+-(void)wayPointWasSelected:(id)waypoint;
 
 -(void)UserDidUpdatePhotoLocation:(CLLocation*)location;
 
@@ -83,6 +84,8 @@ typedef int ViewOverlayType;
 -(void)listNotificationInterests;
 -(void)didReceiveNotification:(NSNotification*)notification;
 -(void)addNotifications;
+-(void)removeNotification:(NSString*)notification;
+
 -(void)initialise;
 -(void)refreshUIFromDataProvider;
 -(void)deSelectRowForTableView:(UITableView*)table;
@@ -90,7 +93,6 @@ typedef int ViewOverlayType;
 
 -(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message;
 -(void)showViewOverlayForType:(ViewOverlayType)type show:(BOOL)show withMessage:(NSString*)message withIcon:(NSString*)icon;
--(IBAction)loginButtonSelected:(id)sender;
 + (NSString*)viewTypeToStringType:(ViewOverlayType)viewType;
 +(UINavigationController*)createCustomNavigationControllerWithView:(SuperViewController*)viewController;
 

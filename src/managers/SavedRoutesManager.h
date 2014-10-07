@@ -12,23 +12,19 @@
 
 enum  {
 	SavedRoutesDataTypeRecent,
-	SavedRoutesDataTypeFavourite
+	SavedRoutesDataTypeFavourite,
+	SavedRoutesDataTypeItinerary
 };
 typedef int SavedRoutesDataType;
 
 #define SAVEDROUTESARCHIVEPATH @"savedroutes"
 
-@interface SavedRoutesManager : NSObject {
+@interface SavedRoutesManager : NSObject 
 	
-	NSMutableDictionary				*routeidStore; // keyed dict of favs & recents
-	NSMutableArray					*favouritesdataProvider; // array of Routes use has favorited
-	NSMutableArray					*recentsdataProvider; // array of all other routes, only stores x number
-	
-}
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SavedRoutesManager);
-@property (nonatomic, strong)	NSMutableDictionary		*routeidStore;
-@property (nonatomic, strong)	NSMutableArray		*favouritesdataProvider;
-@property (nonatomic, strong)	NSMutableArray		*recentsdataProvider;
+@property (nonatomic, strong)	NSMutableDictionary		*routeidStore;// keyed dict of favs & recents
+@property (nonatomic, strong)	NSMutableArray		*favouritesdataProvider;// array of Routes use has favorited
+@property (nonatomic, strong)	NSMutableArray		*recentsdataProvider;// array of all other routes, only stores x number
 
 -(void)removeRoute:(RouteVO*)route;
 -(void)removeRoute:(RouteVO*)route fromDataProvider:(NSString*)type;
@@ -41,6 +37,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SavedRoutesManager);
 -(NSMutableArray*)dataProviderForType:(NSString*)type;
 
 -(void)saveRouteChangesForRoute:(RouteVO*)route;
+
+-(void)updateRouteWithRoute:(RouteVO*)route;
 
 -(BOOL)findRouteWithId:(NSString*)routeid andPlan:(NSString*)plan;
 

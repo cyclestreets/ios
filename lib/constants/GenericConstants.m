@@ -87,7 +87,10 @@ NSString *const NONE=@"none";
 NSString *const SHORTDATE=@"SHORTDATE";
 NSString *const ERRORTYPE=@"ERRORTYPE";
 NSString *const EVENTTYPE=@"EVENTTYPE";
-
+NSString *const ID=@"id";
+NSString *const CONTROLLER=@"controller";
+NSString *const DATAPROVIDER=@"dataProvider";
+NSString *const INDEX=@"index";
 
 // nav button consts
 NSString *const RIGHT=@"RIGHT";
@@ -104,7 +107,7 @@ NSString *const UITYPE_CONTROLHEADERUI=@"UITypeControlHeaderNav";
 NSString *const UITYPE_MODALUI=@"UITypeModalNav";
 NSString *const UITYPE_SELFFRAME=@"UITypeSelfFrame";
 NSString *const UITYPE_IPADDETAIL=@"UITypeiPadDetail";
-
+NSString *const UITYPE_MODALTABLEVIEWUI=@"UITypeModalTableView";
 
 
 
@@ -113,7 +116,8 @@ NSString *const XMLPARSERDIDCOMPLETE = @"XMLParserDidComplete"; // remote xml pa
 NSString *const REQUESTDATAREFRESH = @"RequestDataRefresh"; // request a programatic refresh of the data Provider
 NSString *const REQUESTDATAREFRESHFROMUSER = @"RequestDataRefreshFromUser"; // request a user refresh of the data Provider
 NSString *const	PRODUCTLISTCOMPLETE = @"ProductlistComplete";
-NSString *const	REMOTEFILELOADED = @"RemoteFileMangerLoaded";  // the remote connection failed
+NSString *const	REMOTEFILELOADED = @"RemoteFileMangerLoaded";  // the remote connection loaded
+NSString *const	LOCALFILELOADED = @"LocalFileManagerLoaded";  // the local file completed
 NSString *const	XMLPARSERDIDCOMPLETENOUPDATE = @"XMLParserDidCompleteWithNoUpdate"; // the remote request returned no update, so use the cached data
 NSString *const REQUESTWASACTIVE=@"datarequestwasactive"; // the requested data/request group is the active one do not refresh ui;
 NSString *const REMOTEDATAREQUESTED=@"remotedatarequested"; // the request is contacting the server, the ui will need to indicate this.
@@ -127,6 +131,15 @@ NSString *const TEXTFIELDEDITFRAME=@"tuitextfieldeditframeupdate"; // generic ev
 NSString *const BUCELLNOTIFICATION=@"BUCELLNOTIFICATION"; // generic event for embedded cell buttons
 NSString *const REQUESTNOTEDELETENAVIGATION=@"REQUESTNOTEDELETENAVIGATION"; // event for ManageVC to pop to correct VC when deleting a note
 NSString *const PUSHNOTIFICATIONTOKENAVAILABLE=@"PUSHNOTIFICATIONTOKENAVAILABLE"; // We received a  valid token form Apple, used to notify UserManager for delayed DT responses
+
+NSString *const REQUESTDIDCOMPLETE=@"requestdidcomplete"; // generic request completion
+NSString *const REQUESTDIDFAIL=@"requestdidfail"; // generic request failure
+
+
+// resposne source
+NSString *const RESPONSESERVER=@"RESPONSESERVER";
+NSString *const RESPONSEMODEL=@"RESPONSEMODEL";
+NSString *const RESPONSECACHE=@"RESPONSECACHE";
 
 
 
@@ -164,6 +177,8 @@ NSString *const STARTUPERROR_STRINGSFAILED=@"The Application Strings could not b
 
 
 
+
+
 // sizes
 int const SCREENWIDTH = 320;
 int const IPADSCREENWIDTH = 1024;
@@ -171,30 +186,19 @@ int const IPADMASTERVIEWWIDTH = 255;
 int const UIWIDTH = 280;
 int const WIDEUIWIDTH = 300;
 int const FORMWIDTH = 280;
-int const SCREENHEIGHT = 460;
-int const FULLSCREENHEIGHT = 480;
-int const SCREENHEIGHTWITHCONTROLUI = 323;
-int const SCREENHEIGHTWITHMODALNAV = 411;
 int const SCREENHEIGHTWITHCONTROLANDHEADERUI = 273;
 int const SCREENHEIGHTWITHCONTROLANDHEADERUI_IPAD_LANDSCAPE = 611;
 int const SCREENHEIGHTMANAGE_IPAD_LANDSCAPE = 534;
 int const NAVTABVIEWHEIGHT_IPAD_LANDSCAPE=655;
 int const IPADDETAILVIEWWIDTH=768;
 int const IPADDETAILUIVIEWWIDTH=728;
-int const SCREENHEIGHTWITHNAVIGATION = 420;
-int const SCREENHEIGHTWITHNAVANDTAB=367;
-int const CONTROLUIHEIGHT = 44;
-int const NAVIGATIONHEIGHT = 44;
 int const TABBARHEIGHT=50;
-int const NAVTABVIEWHEIGHT=387;
-int const NAVCONTROLMODALHEIGHT=373;
 int const HEADERCONTROLHEIGHT=94;
 // tables
 int const STANDARDCELLHEIGHT=44;
 int const HALFCELLHEIGHT=22;
 int const SHORTCELLHEIGHT=36;
 int const NEWSCELLHEIGHT=58;
-int const NAVTABLEHEIGHT=367;
 
 int const TABBARMORELIMIT=4;
 

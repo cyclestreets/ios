@@ -13,9 +13,26 @@
 #import "RouteListViewController.h"
 #import "RouteManager.h"
 #import "ButtonUtilities.h"
-#import "FavouritesManager.h"
+#import "UIView+Additions.h"
+#import "GenericConstants.h"
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @interface RoutesViewController()
+
+
+@property (nonatomic, strong)	IBOutlet BorderView				*controlView;
+@property (nonatomic, strong)	BUSegmentedControl				*routeTypeControl;
+@property (nonatomic, strong)	IBOutlet UIButton				*selectedRouteButton;
+
+@property (nonatomic, strong)	NSMutableArray					*dataTypeArray;
+
+@property (nonatomic, strong)	NSMutableDictionary				*viewStack;
+@property (nonatomic, strong)	NSArray							*childControllerData;
+@property (nonatomic,strong)  NSString							*activeState;
+@property (nonatomic,strong)  SuperViewController				* activeController;
+
+@property (nonatomic, assign)	int								activeIndex;
+@property (nonatomic, strong)	CSRouteDetailsViewController					*routeSummary;
 
 -(IBAction)selectedRouteButtonSelected:(id)sender;
 -(void)selectedRouteUpdated;
@@ -24,17 +41,6 @@
 
 
 @implementation RoutesViewController
-@synthesize titleHeaderView;
-@synthesize controlView;
-@synthesize routeTypeControl;
-@synthesize selectedRouteButton;
-@synthesize subViewsArray;
-@synthesize classArray;
-@synthesize nibArray;
-@synthesize dataTypeArray;
-@synthesize contentView;
-@synthesize activeIndex;
-@synthesize routeSummary;
 
 
 //
@@ -81,9 +87,9 @@
     
     BOOL selectedRouteExists=[RouteManager sharedInstance].selectedRoute!=nil;
     
-    selectedRouteButton.enabled=selectedRouteExists;
+    _selectedRouteButton.enabled=selectedRouteExists;
     
-    if(self.navigationController.topViewController==routeSummary){
+    if(self.navigationController.topViewController==_routeSummary){
         if(selectedRouteExists==NO){
             [self.navigationController popToRootViewControllerAnimated:NO];
         }
@@ -101,7 +107,7 @@
 
 - (void)viewDidLoad {
 	
-	activeIndex=-1;
+	_activeIndex=-1;
 	
     [super viewDidLoad];
 	
@@ -112,18 +118,16 @@
 	if([SavedRoutesManager sharedInstance].favouritesdataProvider.count>0 )
 		startIndex=0;
 	
-	[routeTypeControl setSelectedSegmentIndex:startIndex];
-	[self selectedIndexDidChange:startIndex];
+	[_routeTypeControl setSelectedSegmentIndex:startIndex];
 	
 }
 
 
 -(void)createPersistentUI{
 	
-	[self createNavigationBarUI];
 	
-	controlView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"controlbar"];
-	[controlView drawBorderwithColor:UIColorFromRGB(0x333333) andStroke:1 left:NO right:NO top:YES bottom:YES];
+	_controlView.backgroundColor=[UIColor whiteColor];
+	[_controlView drawBorderwithColor:UIColorFromRGB(0xCCCCCC) andStroke:1 left:NO right:NO top:NO bottom:YES];
 	
 	LayoutBox *controlcontainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, CONTROLUIHEIGHT)];
 	controlcontainer.fixedWidth=YES;
@@ -133,41 +137,24 @@
 	controlcontainer.alignMode=BUCenterAlignMode;
 	
 	NSMutableArray *sdp = [[NSMutableArray alloc] initWithObjects:@"Favourites", @"Recent",  nil];
-	routeTypeControl=[[BUSegmentedControl alloc]init];
-	routeTypeControl.dataProvider=sdp;
-	routeTypeControl.delegate=self;
-	routeTypeControl.itemWidth=80;
-	[routeTypeControl buildInterface];
-	[controlcontainer addSubview:routeTypeControl];
+	_routeTypeControl=[[BUSegmentedControl alloc]init];
+	_routeTypeControl.dataProvider=sdp;
+	_routeTypeControl.delegate=self;
+	_routeTypeControl.itemWidth=80;
+	[_routeTypeControl buildInterface];
+	[controlcontainer addSubview:_routeTypeControl];
 	
-	self.selectedRouteButton=[ButtonUtilities UIButtonWithWidth:120 height:28 type:@"orange" text:@"Current Route"];
-    [selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	self.selectedRouteButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"OrangeButton" text:@"Current Route"];
+    [_selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-	[controlcontainer addSubview:selectedRouteButton];
-	[controlView addSubview:controlcontainer];
+	[controlcontainer addSubview:_selectedRouteButton];
+	[_controlView addSubview:controlcontainer];
 	
-	contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NAVIGATIONHEIGHT, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
-	[self.view addSubview:contentView];
 	
-	// create arrays to store sub views & class references
-	classArray=[[NSMutableArray alloc]initWithObjects:@"RouteListViewController",@"RouteListViewController",nil];
-	nibArray=[[NSMutableArray alloc]initWithObjects:@"RouteListView",@"RouteListView",nil];
-	dataTypeArray=[[NSMutableArray alloc]initWithObjects:SAVEDROUTE_FAVS,SAVEDROUTE_RECENTS,nil];
-	subViewsArray=[[NSMutableArray alloc]init];
-	for (int i = 0; i < [classArray count]; i++) {
-		
-		RouteListViewController *vc = (RouteListViewController*)[[NSClassFromString([classArray objectAtIndex:i]) alloc] initWithNibName:[nibArray objectAtIndex:i] bundle:nil];
-		[contentView addSubview:vc.view];
-		vc.delegate=self;
-        vc.dataType=[dataTypeArray objectAtIndex:i];
-		[subViewsArray addObject:vc];
-		[self addChildViewController:vc];
-		
-		if (i==1) {
-			vc.isSectioned=YES;
-		}
-		[vc viewWillAppear:NO];
-    }
+	self.viewStack=[NSMutableDictionary dictionary];
+    
+    self.childControllerData=@[@{ID: SAVEDROUTE_FAVS,CONTROLLER:[RouteListViewController className],@"isSectioned":@(NO)},
+                               @{ID: SAVEDROUTE_RECENTS,CONTROLLER:[RouteListViewController className],@"isSectioned":@(YES)}];
 	
 	
 	
@@ -184,52 +171,30 @@
 
 -(void)createNonPersistentUI{
 	
-    selectedRouteButton.enabled=[[RouteManager sharedInstance] selectedRoute]!=nil;
+	[self loadInitialChildView];
 	
-}
-
-
--(void)createNavigationBarUI{
-	
-	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
-	self.navigation=nav;
-	navigation.delegate=self;
-	navigation.leftItemType=BUNavNoneType;
-    navigation.rightItemType=UIKitButtonType;
-	navigation.rightButtonTitle=@"Fetch Route";
-	navigation.titleType=BUNavTitleDefaultType;
-	navigation.titleString=@"Routes";
-    navigation.titleFontColor=[UIColor whiteColor];
-	navigation.navigationItem=self.navigationItem;
-	[navigation createNavigationUI];
+    _selectedRouteButton.enabled=[[RouteManager sharedInstance] selectedRoute]!=nil;
 	
 }
 
 
 
 
-//
-/***********************************************
- * @description		UI EVENTS
- ***********************************************/
-//
-
+#pragma mark - UIEvents
 
 -(IBAction)selectedRouteButtonSelected:(id)sender{
     
     if([[RouteManager sharedInstance] selectedRoute]!=nil)
-    [self doNavigationPush:@"RouteSummary" withDataProvider:[[RouteManager sharedInstance] selectedRoute] andIndex:-1];
+		[self doNavigationPush:@"RouteSummary" withDataProvider:[[RouteManager sharedInstance] selectedRoute] andIndex:-1];
     
 }
 
 
 
--(void)doNavigationSelector:(NSString*)type{
+-(IBAction)didSelectFetchRouteButton:(NSString*)type{
 	
+	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
 	
-    if([type isEqualToString:RIGHT]){
-		[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" delegate:self];
-	}
     
 }
 
@@ -243,12 +208,18 @@
                 
 			case kTextEntryAlertTag:
 			{
-				UITextField *alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
-				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]) {
-					
+				UITextField *alertInputField=nil;
+				// os7 cant get view tag for field
+				if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+					alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+				}else{
+					alertInputField=(UITextField*)[alertView textFieldAtIndex:0];
+				}
+				
+				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]){
 					[[RouteManager sharedInstance] loadRouteForRouteId:alertInputField.text];
 					
-					[routeTypeControl setSelectedSegmentIndex:1];
+					[_routeTypeControl setSelectedSegmentIndex:1];
 					[self selectedIndexDidChange:1];
 				}
 			}
@@ -265,33 +236,91 @@
 }
 
 
-//
-/***********************************************
- * @description		RKCustomSegmentedControl  delegate method	
- ***********************************************/
-//
--(void)selectedIndexDidChange:(int)index{
+
+#pragma mark - Segment control
+
+-(void)selectedIndexDidChange:(NSInteger)index{
 	
     if(index!=-1){
-	
-	RouteListViewController *vc = [subViewsArray objectAtIndex:index];
-	
-    if(activeIndex!=-1){
-        UIView *activeitemView=[vc view];
-        activeitemView.hidden=YES;
-    }
-    
-    UIView *itemView=[vc view];
-    [contentView bringSubviewToFront:itemView];
-    activeIndex=index;
-    itemView.hidden=NO;
-    
-    //[[GoogleAnalyticsManager sharedGoogleAnalyticsManager] trackPageViewWithNavigation:self.navigationController.viewControllers andFragment:vc.GATag];
 		
+		[self swapChildViewControllerToType:_childControllerData[index]];
+	
 	}
 	
 }
 
+
+
+
+#pragma mark - Child controllers
+
+-(void)createViewControllerForType:(NSString*)type{
+    
+    SuperViewController *_newcontroller=[_viewStack objectForKey:type];
+	NSDictionary *controllerDict=[self childControllerDictForType:type];
+    if(_newcontroller==nil){
+        UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil ];
+        _newcontroller=[storyboard instantiateViewControllerWithIdentifier:controllerDict[CONTROLLER]];
+        _newcontroller.delegate=self;
+		[_newcontroller setValue:controllerDict forKey:@"configDict"];
+        [_viewStack setObject:_newcontroller forKey:type];
+        
+    }
+    
+    [self addChildViewController:_newcontroller];
+}
+
+-(void)loadInitialChildView{
+    
+    NSDictionary *controllerDict=_childControllerData[1];
+    NSString *controllerName=controllerDict[ID];
+    self.activeState=controllerName;
+    
+    self.activeController=[self.childViewControllers objectAtIndex:0];
+	[_activeController setValue:controllerDict forKey:@"configDict"];
+	[_activeController refreshUIFromDataProvider];
+    _activeController.delegate=self;
+}
+
+
+-(void)swapChildViewControllerToType:(NSDictionary*)dict{
+    
+    SuperViewController *_oldcontroller=_activeController;
+    
+    NSString *controller=dict[ID];
+	
+	if([controller isEqualToString:_activeState])
+		return;
+	
+	
+    self.activeState=controller;
+    
+    [self createViewControllerForType:controller];
+    SuperViewController *_newcontroller=[_viewStack objectForKey:controller];
+    [_oldcontroller willMoveToParentViewController:nil];
+    
+    [self transitionFromViewController:_oldcontroller toViewController:_newcontroller duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{} completion:^(BOOL finished) {
+        [_oldcontroller removeFromParentViewController];
+        [_newcontroller didMoveToParentViewController:self];
+        self.activeController=_newcontroller;
+		[_activeController refreshUIFromDataProvider];
+    }];
+    
+    
+}
+
+
+-(NSDictionary*)childControllerDictForType:(NSString*)type{
+	
+	for(NSDictionary *dict in _childControllerData){
+		
+		if([dict[ID] isEqualToString:type]){
+			return dict;
+		}
+		
+	}
+	return nil;
+}
 
 
 //
@@ -304,11 +333,11 @@
     if([className isEqualToString:@"RouteSummary"]){
         
         if (self.routeSummary == nil) {
-            self.routeSummary = [[RouteSummary alloc]init];
+            self.routeSummary = [[CSRouteDetailsViewController alloc]init];
         }
         self.routeSummary.route = (RouteVO*)data;
-		routeSummary.dataType=index;
-        [self showUniqueViewController:routeSummary];
+		_routeSummary.dataType=index;
+        [self showUniqueViewController:_routeSummary];
         
     }
     

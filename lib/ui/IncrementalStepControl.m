@@ -150,7 +150,7 @@
 	
 	UIButton  *button=(UIButton*)sender;
 	
-	int newindex=currentIndex+button.tag;
+	NSInteger newindex=currentIndex+button.tag;
 	
 	if(indexWrap==YES){
 		

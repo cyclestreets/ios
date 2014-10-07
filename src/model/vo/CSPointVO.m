@@ -18,43 +18,48 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 */
 
-//  Point.m
+//  CSPointVO
 //  CycleStreets
-//
-//  Created by Alan Paxton on 17/05/2010.
 //
 
 #import "CSPointVO.h"
 
 
-//TODO: needs to support provisionName so we can draw different line types for provisions
+//TODO: needs to support provisionName so we can potentially draw different line types for road types
 
 @implementation CSPointVO
 
-@synthesize p,isWalking;
 
 - (BOOL) insideRect:(CGRect)rect {
-	if (p.x < rect.origin.x) return NO;
-	if (p.y < rect.origin.y) return NO;
-	if (p.x > rect.origin.x + rect.size.height) return NO;
-	if (p.y > rect.origin.y + rect.size.width) return NO;
+	if (_point.x < rect.origin.x) return NO;
+	if (_point.y < rect.origin.y) return NO;
+	if (_point.x > rect.origin.x + rect.size.height) return NO;
+	if (_point.y > rect.origin.y + rect.size.width) return NO;
 	
 	return YES;
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"(x=%f,y=%f)", p.x, p.y];
+	return [NSString stringWithFormat:@"(x=%f,y=%f)", _point.x, _point.y];
 }
 
+// getters
 -(CLLocationCoordinate2D)coordinate{
 	CLLocationCoordinate2D location;
-	location.longitude=p.x;
-	location.latitude=p.y;
+	location.longitude=_point.x;
+	location.latitude=_point.y;
 	return location;
 }
 
 
-static NSString *kP_KEY = @"p";
+-(MKMapPoint)mapPoint{
+	return MKMapPointForCoordinate(self.coordinate);
+}
+
+
+
+
+static NSString *kP_KEY = @"point";
 static NSString *kIS_WALKING_KEY = @"isWalking";
 
 
@@ -65,7 +70,7 @@ static NSString *kIS_WALKING_KEY = @"isWalking";
 //===========================================================
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeCGPoint:self.p forKey:kP_KEY];
+    [encoder encodeCGPoint:self.point forKey:kP_KEY];
     [encoder encodeBool:self.isWalking forKey:kIS_WALKING_KEY];
 }
 
@@ -73,7 +78,7 @@ static NSString *kIS_WALKING_KEY = @"isWalking";
 {
     self = [super init];
     if (self) {
-        self.p = [decoder decodeCGPointForKey:kP_KEY];
+        self.point = [decoder decodeCGPointForKey:kP_KEY];
         self.isWalking = [decoder decodeBoolForKey:kIS_WALKING_KEY];
     }
     return self;

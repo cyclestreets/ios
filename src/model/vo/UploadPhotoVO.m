@@ -7,22 +7,14 @@
 //
 
 #import "UploadPhotoVO.h"
-#import "ImageManipulator.h"
+#import "ImageUtilties.h"
 #import "SettingsManager.h"
 #import "NSDate+Helper.h"
 #import "StringUtilities.h"
 #import "Reachability.h"
+#import "GlobalUtilities.h"
 
 @implementation UploadPhotoVO
-@synthesize image;
-@synthesize location;
-@synthesize userLocation;
-@synthesize category;
-@synthesize feature;
-@synthesize caption;
-@synthesize date;
-@synthesize responseDict;
-@synthesize bearing;
 
 
 //=========================================================== 
@@ -33,6 +25,10 @@
 {
     self = [super init];
     if (self) {
+		
+		_bearing=0;
+		
+		
     }
     return self;
 }
@@ -56,26 +52,26 @@
 //
 
 -(int)width{
-    if (image!=nil) {
-        return image.size.width;
+    if (_image!=nil) {
+        return _image.size.width;
     }
     return 0;
 }
 
 -(int)height{
-    if (image!=nil) {
-        return image.size.height;
+    if (_image!=nil) {
+        return _image.size.height;
     }
     return 0;
 }
 
 -(NSString*)dateString{
 	
-	if (date == nil) {
+	if (_date == nil) {
 		self.date = [NSDate date];
 	}
 	
-	return [NSDate stringFromDate:date withFormat:[NSDate shortFormatString]]; 
+	return [NSDate stringFromDate:_date withFormat:[NSDate shortFormatString]]; 
 	
 }
 
@@ -88,10 +84,10 @@
 
 -(NSString*)dateTime{
     
-	if (date == nil) {
+	if (_date == nil) {
 		self.date = [NSDate date];
 	}
-	int delta = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] intValue];
+	int delta = [[NSNumber numberWithDouble:[_date timeIntervalSince1970]] intValue];
 	NSString *time = [NSString stringWithFormat:@"%i", delta];
 	
     return time;
@@ -101,18 +97,18 @@
 
 -(CLLocation*)activeLocation{
 	
-	if(userLocation!=nil){
-		return userLocation;
+	if(_userLocation!=nil){
+		return _userLocation;
 	}
-	return location;
+	return _location;
 }
 
 
 -(NSString*)uploadedPhotoId{
 	
-	if(responseDict!=nil){
+	if(_responseDict!=nil){
 		
-		NSString *idstring=[StringUtilities pathStringFromURL:[responseDict objectForKey:@"url"] :@"/"];
+		NSString *idstring=[StringUtilities pathStringFromURL:[_responseDict objectForKey:@"url"] :@"/"];
 		return idstring;
 	}
 	return nil;
@@ -125,8 +121,8 @@
 //
 
 - (NSData *)fullData {
-	if (image) {
-		return UIImagePNGRepresentation( image);		
+	if (_image) {
+		return UIImagePNGRepresentation( _image);		
 	} else {
 		return nil;
 	}
@@ -134,7 +130,7 @@
 
 
 - (NSData *)uploadData {
-	if (image) {
+	if (_image) {
 		
 		UIImage *scaledImage;
 		
@@ -143,15 +139,15 @@
 		
 		if(status==ReachableViaWiFi){
 			
-			scaledImage=image;
+			scaledImage=_image;
 			
 		}else{
 			
 			 NSString *imageSize = [SettingsManager sharedInstance].dataProvider.imageSize;
 			if ([imageSize isEqualToString:@"full"]) {
-				scaledImage = image;
+				scaledImage = _image;
 			} else {
-				scaledImage = [ImageManipulator resizeImage:image destWidth:640 destHeight:480];
+				scaledImage = [ImageUtilties resizeImage:_image destWidth:640 destHeight:480];
 			}
 			
 		}
@@ -159,6 +155,25 @@
 		return UIImageJPEGRepresentation( scaledImage, 0.8);		
 	}
 	return nil;
+}
+
+
+#pragma mark - Upload dictionary 
+
+-(NSMutableDictionary*)uploadParams{
+	
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionary];
+	
+	parameters[@"latitude"]=[NSString stringWithFormat:@"%@", BOX_FLOAT(self.activeLocation.coordinate.latitude)];
+	parameters[@"longitude"]=[NSString stringWithFormat:@"%@",BOX_FLOAT(self.activeLocation.coordinate.longitude)];
+	parameters[@"caption"]=_caption==nil ? EMPTYSTRING : _caption;
+	parameters[@"category"]=_feature.tag;
+	parameters[@"metacategory"]=_category.tag;
+	parameters[@"datetime"]=self.dateTime;
+	parameters[@"bearing"]= [NSString stringWithFormat:@"%i",_bearing];
+	parameters[@"imageData"]= [self uploadData];
+	
+	return parameters;
 }
 
 

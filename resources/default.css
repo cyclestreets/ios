@@ -1,0 +1,223 @@
+
+/* CycleStreets Pixate css */
+
+/*config*/
+pixate-config {
+    parse-error-destination: console;
+    cache-styles: auto;
+    image-cache-count: 100;
+}
+
+
+/* UIKit Classes */
+
+navigation-bar{
+
+    -ios-tint-color:#FFFFFF;
+    background-color: #509720;
+    opacity: 1;
+}
+
+navigation-bar title{
+
+    font-family     : Helvetica Neue;
+    font-weight     : thin;
+    color           :#FFFFFF;
+    font-size       : 22px;
+
+}
+
+
+
+action-sheet{
+
+
+
+
+}
+
+#OrangeButton,#GreenButton,#RedButton,#DarkGreyButton {
+    color           : #FFFFFF;
+    font-family     : Helvetica Neue;
+    font-weight     : thin;
+    font-size       : 16px;
+    border-width    : 2px;
+    border-radius   : 3px;
+    border-style    : none;
+}
+
+tab-bar{
+    -ios-tint-color:#509720;
+
+}
+
+
+/* Views */
+
+.GreenView{
+
+background-color: #509720;
+
+}
+
+
+
+/* UI buttons */
+
+
+#OrangeButton{
+    background-color: #F9721C;
+}
+
+#GreenButton{
+    background-color: #509720;
+}
+
+#RedButton{
+    background-color: #B20003;
+}
+
+#DarkGreyButton{
+    background-color: #5F5F5F;
+}
+
+
+/* UI labels */
+
+.UISubtitleLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
+    font-size       : 16px;
+    text-align: :center;
+}
+
+.UIMessageLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : regular;
+    font-size       : 12px;
+    text-align: :center;
+}
+
+
+/* View Overlay */
+
+.UIOverlayTitleLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
+    font-size       : 16px;
+    text-align: :center;
+}
+
+.UIOverlayRequestLabel{
+    color: #509720;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
+    font-size       : 16px;
+    text-align: :center;
+}
+
+.UIOverlayMessageLabel{
+    color: #666666;
+    font-family     : Helvetica Neue;
+    font-weight     : light;
+    font-size       : 12px;
+    text-align: :center;
+}
+
+
+/* BU Classes */
+
+#BUIconActionSheetClosebutton{
+	font-family     : Helvetica Neue;
+    font-weight     : light;
+	background-color: #AC0000;
+    border-width    : 0px;
+    border-radius   : 6px;
+    color :#FFFFFF;
+}
+
+#BUIconActionSheetIconbuttonLabel{
+    color: #666666;
+}
+
+
+
+
+/* Trip View */
+
+#tripActionButton{
+
+	font-family     : Helvetica Neue;
+    font-weight     : light;
+	font-size       : 20px;
+
+}
+
+
+
+
+
+/* Routes view */
+
+
+#BUSegmentedControlButton{
+    background-color: #5F5F5F;
+    color:#FFFFFF;
+	font-family     : Helvetica Neue;
+	font-weight     : thin;
+	font-size       : 16px;
+}
+#BUSegmentedControlButton:disabled{
+    background-color: #509720;
+    color:#FFFFFF;
+}
+
+
+
+
+/* map view */
+
+#mapNavigationBarTitle{
+    font-family     : Helvetica Neue;
+    font-weight     : thin;
+    color           :#FFFFFF;
+    font-size       : 16px;
+}
+
+
+
+
+/* Photomap view */
+
+
+
+
+
+/* Photowizard view */
+
+
+#photoWizardActionButon{
+	font-family     : HelveticaNeue;
+    font-weight     : light;
+	background-color: #509720;
+    border-width    : 0px;
+    border-radius   : 6px;
+    color :#FFFFFF;
+}
+
+
+
+/* User view */
+
+
+
+
+/* Info view */
+
+
+
+
+

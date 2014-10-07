@@ -9,15 +9,14 @@
 #import <UIKit/UIKit.h>
 
 
-enum  {
+typedef NS_ENUM(NSUInteger, BUIconActionSheetIconType) {
 	BUIconActionSheetIconTypeTwitter	= 999,
-    BUIconActionSheetIconTypeFacebook	= 998,
-    BUIconActionSheetIconTypeMail		= 997,
+	BUIconActionSheetIconTypeFacebook	= 998,
+	BUIconActionSheetIconTypeMail		= 997,
 	BUIconActionSheetIconTypeSMS		= 996,
 	BUIconActionSheetIconTypeCopy		= 995,
-
 };
-typedef int BUIconActionSheetIconType;
+
 
 
 @protocol BUIconActionSheetDelegate <NSObject>

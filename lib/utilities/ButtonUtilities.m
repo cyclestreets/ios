@@ -12,6 +12,8 @@
 #import "GenericConstants.h"
 #import "GlobalUtilities.h"
 #import "UIView+Additions.h"
+#import "ImageUtilties.h"
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @implementation ButtonUtilities
 
@@ -169,6 +171,64 @@
 	
 }
 
+
+#pragma mark - Pixate support methods
+
++ (UIButton*)UIPixateButtonWithWidth:(NSUInteger)width height:(NSUInteger)height styleId:(NSString*)styleId text:(NSString*)text
+{
+	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+	button.styleId=styleId;
+	UIFont *font=[UIFont boldSystemFontOfSize:12];
+	
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font]+20;
+	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
+	
+		
+	// Configure title(s)
+	[button setTitle:text forState:UIControlStateNormal];
+	button.titleLabel.userInteractionEnabled=NO;
+	
+	
+	return button;
+}
+
++(void)stylePixateIBButton:(UIButton*)button styleId:(NSString*)styleId type:(NSString*)type text:(NSString*)text{
+	
+	button.styleId=styleId;
+	
+	int capWidth=9;
+	BOOL hasLabel=YES;
+	if([text length]==0){
+		capWidth=0;
+		hasLabel=NO;
+	}
+	
+	CGRect bframe=button.frame;
+	if(hasLabel==YES){
+		CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font];
+		if(twidth>bframe.size.width){
+			twidth+=10;
+		}else{
+			twidth=bframe.size.width;
+		}
+		bframe.size.width=twidth;
+	}else {
+		CGFloat twidth=[GlobalUtilities calculateWidthOfText:button.titleLabel.text :button.titleLabel.font];
+		bframe.size.width=MAX(twidth,bframe.size.width);
+		capWidth=9;
+	}
+	button.frame = bframe;
+	
+	// Configure title(s)
+	if(hasLabel){
+		[button setTitle:text forState:UIControlStateNormal];
+		button.titleLabel.userInteractionEnabled=NO;
+	}
+}
+
+
+
+
 + (UIButton*)UIButtonWithWidth:(NSUInteger)width height:(NSUInteger)height type:(NSString*)type text:(NSString*)text
 {
 	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -284,7 +344,7 @@
 		[button setImage:iconimage forState:UIControlStateNormal];
 	}
 	 
-	int inset=(height-width)/2;
+	NSInteger inset=(height-width)/2;
 	button.contentEdgeInsets=UIEdgeInsetsMake(0, inset, 0, inset);
 	
 	//
@@ -305,6 +365,7 @@
 	
 	if(iconimagename!=nil){
 		UIImage *iconimage=[[StyleManager sharedInstance] imageForType:iconimagename];
+		iconimage=[ImageUtilties newRoundCornerImage:iconimage :20 :20];
 		[button setImage:iconimage forState:UIControlStateNormal];
 	}
 	
@@ -377,7 +438,7 @@
 	[button setImage:iconimage forState:UIControlStateNormal];
 	
 	
-	int buttonheight=MAX(height,iconimage.size.height);
+	NSInteger buttonheight=MAX(height,iconimage.size.height);
 	int inset=(height-iconimage.size.width)/2;
 	int buttonwidth=iconimage.size.width+(inset*2);
 	

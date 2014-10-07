@@ -26,7 +26,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageCache);
 
 
 
-- (id) init
+- (instancetype) init
 {
     self = [super init];
     if (self != nil) {

@@ -26,39 +26,22 @@ enum  {
 typedef int UserAccountMode;
 
 @interface UserAccount : FrameworkObject {
-	UserVO				*user;
-	// values
-	NSString			*userPassword;
-	NSString			*userName;
-	NSString			*userEmail;
-	NSString			*userVisibleName;
-	
-	BOOL				isRegistered; // 
-	NSString			*sessionToken;
-	NSString			*deviceID;
-	
-	UserAccountMode		accountMode;
 	
 }
-@property (nonatomic, retain)	UserVO	*user;
-@property (nonatomic, retain)	NSString	*userPassword;
-@property (nonatomic, retain)	NSString	*userName;
-@property (nonatomic, retain)	NSString	*userEmail;
-@property (nonatomic, retain)	NSString	*userVisibleName;
-@property (nonatomic, assign)	BOOL	isRegistered;
-@property (nonatomic, retain)	NSString	*sessionToken;
-@property (nonatomic, retain)	NSString	*deviceID;
+@property (nonatomic, retain)	UserVO		*user;
 @property (nonatomic, assign)	UserAccountMode	accountMode;
+@property (nonatomic, retain)	NSString	*userPassword;
 
 @property (nonatomic,readonly)  BOOL			isLoggedIn;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 
--(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password;
+-(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password displayHUD:(BOOL)displayHUD;
 -(void)registerUserWithUserName:(NSString*)name andPassword:(NSString*)password visibleName:(NSString*)visiblename email:(NSString*)email;
 -(void)logoutUser;
 
 -(void)loginExistingUser;
+-(void)loginExistingUserSilent;
 -(void)retrievePasswordForUser:(NSString*)email;
 -(BOOL)hasSessionToken;
 -(void)resetUserAccount;

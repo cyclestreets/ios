@@ -16,6 +16,9 @@
 #import "StringManager.h"
 #import "ButtonUtilities.h"
 #import "AppDelegate.h"
+#import "GenericConstants.h"
+#import "UIView+Additions.h"
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @implementation SuperViewController
 @synthesize navigation;
@@ -116,6 +119,15 @@
 		 object:nil];
 		
 	}
+	
+}
+
+-(void)removeNotification:(NSString*)notification{
+	
+	[[NSNotificationCenter defaultCenter]
+	 removeObserver:self name:notification object:nil];
+	
+	[notifications removeObject:notification];
 	
 }
 
@@ -352,21 +364,26 @@
 		
 		if([UIType isEqualToString:UITYPE_CONTROLUI]){
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else if ([UIType isEqualToString:UITYPE_CONTROLHEADERUI]) {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 			
 		}else if ([UIType isEqualToString:UITYPE_MODALUI]) {
 			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
+		}else if ([UIType isEqualToString:UITYPE_MODALTABLEVIEWUI]) {
+			
+			CGRect targetRect=self.frame;
+			contentContainer=[[LayoutBox alloc] initWithFrame:targetRect];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.view.height)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}
         
 		
-		[viewOverlayView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
+		[viewOverlayView setColoursWithCGColors:UIColorFromRGB(0xeeeeee).CGColor :UIColorFromRGB(0xECECEC).CGColor];
 		viewOverlayView.tag=kSuperViewOverlayViewTag;
         contentContainer.layoutMode=BUVerticalLayoutMode;
 		contentContainer.itemPadding=10;
@@ -412,25 +429,20 @@
 		
 		
 		ExpandedUILabel *ilabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
-		ilabel.backgroundColor=[UIColor clearColor];
+		
 		
 		switch(type){
 				
 			case kViewOverlayTypeRequestIndicator:
-				ilabel.textColor=[[StyleManager sharedInstance] colorForType:@"maincolor"];
-				ilabel.font=[UIFont boldSystemFontOfSize:12];
+				ilabel.styleClass=@"UIOverlayRequestLabel";
 				break;
 			default:
-				ilabel.textColor=[UIColor grayColor];
-				ilabel.font=[UIFont systemFontOfSize:13];
+				ilabel.styleClass=@"UIOverlayTitleLabel";
 				break;
 				
 		}
 		
 		ilabel.numberOfLines=0;
-		ilabel.textAlignment=UITextAlignmentCenter;
-		ilabel.shadowColor=[UIColor whiteColor];
-		ilabel.shadowOffset=CGSizeMake(0, 1);
 		
 		if(message==nil){
 			NSString *viewTypeString=[SuperViewController viewTypeToStringType:type];
@@ -504,15 +516,7 @@
 }
 
 
-//
-/***********************************************
- * @description			ViewOverlay callbacks
- ***********************************************/
-//
--(IBAction)loginButtonSelected:(id)sender{
-	AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate showTabBarViewControllerByName:@"Account"];
-}
+
 
 
 + (NSString*)viewTypeToStringType:(ViewOverlayType)viewType {

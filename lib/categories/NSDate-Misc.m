@@ -34,7 +34,7 @@
     NSDate *ret = [formatter dateFromString:formattedString];
     return ret;
 }
-- (int)differenceInDaysTo:(NSDate *)toDate
+- (NSInteger)differenceInDaysTo:(NSDate *)toDate
 {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     

@@ -173,7 +173,7 @@
 	UIInterfaceOrientation orientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
 	NSInteger degrees = 0;
 	
-	BetterLog(@"orientation=%i",orientation);
+	BetterLog(@"orientation=%li",orientation);
 	
 	if (UIInterfaceOrientationIsLandscape(orientation)) {
 		if (orientation == UIInterfaceOrientationLandscapeLeft) { degrees = -90; } 
@@ -299,6 +299,69 @@
     NSLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
 }
 
+
++(void)drawUIViewEdgeShadow:(UIView*)view{
+	
+	[ViewUtilities drawUIViewEdgeShadow:view withHeight:10];
+	
+}
+
++(void)drawUIViewEdgeShadow:(UIView*)view withHeight:(int)height{
+	
+	
+	BOOL create=YES;
+	CAGradientLayer *shadow;
+	
+	if([view.layer.sublayers count]>0){
+		id layerzero=[view.layer.sublayers objectAtIndex:0];
+		if([layerzero isKindOfClass:[CAGradientLayer class]]){
+			shadow=[view.layer.sublayers objectAtIndex:0];
+			create=NO;
+		}
+	}
+	
+	if(create==YES){
+		shadow = [ViewUtilities shadowAsInverse:NO :view withheight:height];
+		[view.layer insertSublayer:shadow atIndex:0];
+	}
+	
+	CGRect shadowFrame = shadow.frame;
+	shadowFrame.size.width = view.frame.size.width;
+	shadowFrame.origin.y = view.frame.size.height;
+	shadow.frame = shadowFrame;
+	
+}
+
++(void)drawUIViewEdgeShadow:(UIView*)view atTop:(BOOL)top withHeight:(int)height{
+	
+	BOOL create=YES;
+	CAGradientLayer *shadow;
+	
+	if([view.layer.sublayers count]>0){
+		id layerzero=[view.layer.sublayers objectAtIndex:0];
+		if([layerzero isKindOfClass:[CAGradientLayer class]]){
+			shadow=[view.layer.sublayers objectAtIndex:0];
+			create=NO;
+		}
+	}
+	
+	if(create==YES){
+		shadow = [ViewUtilities shadowAsInverse:top :view withheight:height];
+		[view.layer insertSublayer:shadow atIndex:0];
+	}
+	
+	CGRect shadowFrame = shadow.frame;
+	shadowFrame.size.width = view.frame.size.width;
+	if(top==YES){
+		shadowFrame.origin.y = 0-shadow.frame.size.height;
+	}else{
+		shadowFrame.origin.y = view.frame.size.height;
+	}
+	
+	shadow.frame = shadowFrame;
+	
+}
+
 +(void)drawUIViewEdgeShadow:(UIView*)view atTop:(BOOL)top{
 	
 	BOOL create=YES;
@@ -402,7 +465,16 @@
 	return newShadow;
 }
 
-
++ (CAGradientLayer *)shadowAsInverse:(BOOL)inverse :(UIView*)view withheight:(int)height
+{
+	CAGradientLayer *newShadow = [[CAGradientLayer alloc] init];
+	CGRect newShadowFrame =CGRectMake(0, 0, view.frame.size.width, inverse ? height : height);
+	newShadow.frame = newShadowFrame;
+	UIColor *darkColor =UIColorFromRGBAndAlpha(0x000000,.3);
+	UIColor *lightColor =UIColorFromRGBAndAlpha(0x000000,0);
+	newShadow.colors =[NSArray arrayWithObjects:(inverse ? (id)[lightColor CGColor] : (id)[darkColor CGColor]),(id)(inverse ? (id)[darkColor CGColor] : (id)[lightColor CGColor]),nil];
+	return newShadow;
+}
 
 
 
@@ -520,39 +592,74 @@
 }
 
 
-+(int)findTabIndexOfNavigationController:(UINavigationController*)controller{
++(NSInteger)findTabIndexOfNavigationController:(UINavigationController*)controller{
 	AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-	int tabIndex=[appdelegate.tabBarController.viewControllers indexOfObject:controller];
+	NSInteger tabIndex=[appdelegate.tabBarController.viewControllers indexOfObject:controller];
 	return tabIndex;
 }
 
 
 +(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText delegate:(id)delegate{
     
-    UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:title 
-                                                     message:@"\n\n"
-                                                    delegate:delegate 
-                                           cancelButtonTitle:@"Cancel" 
-                                           otherButtonTitles:@"OK", nil];
-    prompt.tag=kTextEntryAlertTag;
-    UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 50, 260.0, 25.0)]; 
-    alertField.borderStyle=UITextBorderStyleRoundedRect;
-    [alertField setBackgroundColor:[UIColor whiteColor]];
-	[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
-	if(fieldText!=nil){
-		alertField.text=fieldText;
+    UIAlertView *prompt=nil;
+	UITextField *alertField=nil;
+	
+	if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+		
+		prompt = [[UIAlertView alloc] initWithTitle:title
+														 message:@"\n\n"
+														delegate:delegate
+											   cancelButtonTitle:@"Cancel"
+											   otherButtonTitles:@"OK", nil];
+		
+		prompt.tag=kTextEntryAlertTag;
+		alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 50, 260.0, 25.0)];
+		alertField.borderStyle=UITextBorderStyleRoundedRect;
+		[alertField setBackgroundColor:[UIColor whiteColor]];
+		[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
+		if(fieldText!=nil){
+			alertField.text=fieldText;
+		}else{
+			[alertField setPlaceholder:@"Route name"];
+		}
+		
+		alertField.tag=kTextEntryAlertFieldTag;
+		[prompt addSubview:alertField];
+		
+		float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+		if(ver<4.0){
+			CGAffineTransform moveUp = CGAffineTransformMakeTranslation(0.0, 100.0);
+			[prompt setTransform: moveUp];
+		}
+
+		
+		
+		
 	}else{
-		[alertField setPlaceholder:@"Route name"];
+		
+		
+		
+		
+		prompt = [[UIAlertView alloc] initWithTitle:title
+											message:@""
+										   delegate:delegate
+								  cancelButtonTitle:@"Cancel"
+								  otherButtonTitles:@"OK", nil];
+		prompt.tag=kTextEntryAlertTag;
+		prompt.alertViewStyle=UIAlertViewStylePlainTextInput;
+		alertField = [prompt textFieldAtIndex:0];
+		[alertField setBackgroundColor:[UIColor whiteColor]];
+		[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
+		alertField.tag=kTextEntryAlertFieldTag;
+		
+		if(fieldText!=nil){
+			alertField.text=fieldText;
+		}else{
+			[alertField setPlaceholder:@"Route name"];
+		}
+		
 	}
-    
-    alertField.tag=kTextEntryAlertFieldTag;
-    [prompt addSubview:alertField];
-    
-    float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
-    if(ver<4.0){
-        CGAffineTransform moveUp = CGAffineTransformMakeTranslation(0.0, 100.0);
-        [prompt setTransform: moveUp];
-    }
+	
     
     [prompt show];
     
@@ -570,41 +677,71 @@
 //
 +(UIAlertView*)createTextEntryAlertView:(NSString*)title fieldText:(NSString*)fieldText withMessage:(NSString*)message delegate:(id)delegate{
 	
-	NSString *fullmessage=nil;
+	UIAlertView *prompt=nil;
+	UITextField *alertField=nil;
 	
-	int fieldoffset=15;
-	fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:title :[UIFont boldSystemFontOfSize:13] :260 :UILineBreakModeWordWrap];
-	if(message!=nil){
-		fullmessage=[NSString stringWithFormat:@"%@\n\n",message];
-		fieldoffset+=15;
-		fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:fullmessage :[UIFont systemFontOfSize:13] :260 :UILineBreakModeWordWrap];
-	}
-	fieldoffset+=13;
-    
-    UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:title 
-                                                     message:fullmessage
-                                                    delegate:delegate 
-                                           cancelButtonTitle:@"Cancel" 
-                                           otherButtonTitles:@"OK", nil];
-    prompt.tag=kTextEntryAlertTag;
-    UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, fieldoffset, 260.0, 25.0)]; 
-    alertField.borderStyle=UITextBorderStyleRoundedRect;
-    [alertField setBackgroundColor:[UIColor whiteColor]];
-	[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
-	if(fieldText!=nil){
-		alertField.text=fieldText;
+	if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+	
+		NSString *fullmessage=nil;
+		
+		int fieldoffset=15;
+		fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:title :[UIFont boldSystemFontOfSize:13] :260 :NSLineBreakByWordWrapping];
+		if(message!=nil){
+			fullmessage=[NSString stringWithFormat:@"%@\n\n",message];
+			fieldoffset+=15;
+			fieldoffset+=[GlobalUtilities calculateHeightOfTextFromWidth:fullmessage :[UIFont systemFontOfSize:13] :260 :NSLineBreakByWordWrapping];
+		}
+		fieldoffset+=13;
+		
+		UIAlertView *prompt = [[UIAlertView alloc] initWithTitle:title 
+														 message:fullmessage
+														delegate:delegate 
+											   cancelButtonTitle:@"Cancel" 
+											   otherButtonTitles:@"OK", nil];
+		prompt.tag=kTextEntryAlertTag;
+		UITextField *alertField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, fieldoffset, 260.0, 25.0)]; 
+		alertField.borderStyle=UITextBorderStyleRoundedRect;
+		[alertField setBackgroundColor:[UIColor whiteColor]];
+		[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
+		if(fieldText!=nil){
+			alertField.text=fieldText;
+		}else{
+			[alertField setPlaceholder:@"Route number"];
+		}
+		
+		alertField.tag=kTextEntryAlertFieldTag;
+		[prompt addSubview:alertField];
+		
+		float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+		if(ver<4.0){
+			CGAffineTransform moveUp = CGAffineTransformMakeTranslation(0.0, 100.0);
+			[prompt setTransform: moveUp];
+		}
+	
 	}else{
-		[alertField setPlaceholder:@"Route number"];
-	}
-    
-    alertField.tag=kTextEntryAlertFieldTag;
-    [prompt addSubview:alertField];
-    
-    float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
-    if(ver<4.0){
-        CGAffineTransform moveUp = CGAffineTransformMakeTranslation(0.0, 100.0);
-        [prompt setTransform: moveUp];
-    }
+			
+			
+			
+			
+			prompt = [[UIAlertView alloc] initWithTitle:title
+												message:message
+											   delegate:delegate
+									  cancelButtonTitle:@"Cancel"
+									  otherButtonTitles:@"OK", nil];
+			prompt.tag=kTextEntryAlertTag;
+			prompt.alertViewStyle=UIAlertViewStylePlainTextInput;
+			alertField = [prompt textFieldAtIndex:0];
+			[alertField setBackgroundColor:[UIColor whiteColor]];
+			[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
+			alertField.tag=kTextEntryAlertFieldTag;
+			
+			if(fieldText!=nil){
+				alertField.text=fieldText;
+			}else{
+				[alertField setPlaceholder:@"Route name"];
+			}
+			
+		}
     
     [prompt show];
     

@@ -14,58 +14,45 @@
 //
 
 #import "UserAccount.h"
-#import "NetUtilities.h"
 #import "SFHFKeychainUtils.h"
 #import "DeviceUtilities.h"
-#import "Utiltities.h"
+#import "GlobalUtilities.h"
 #import "HudManager.h"
 #import "CycleStreets.h"
 #import "Files.h"
 #import "LoginVO.h"
 #import "ValidationVO.h"
 #import "StringUtilities.h"
+#import "BUNetworkOperation.h"
+#import "BUDataSourceManager.h"
+
+@interface UserAccount()
 
 
-@interface UserAccount(Private)
-
-
-
--(void)registerUserResponse:(ValidationVO*)validation;
--(void)retrievePasswordForUserResponse:(ValidationVO*)validation;
--(void)loginUserResponse:(ValidationVO*)validation;
--(void)removeUserState;
--(BOOL)saveUser;
--(void)loadUser;
--(void)createUser;
--(NSString*)filepath;
+@property (nonatomic, retain)	NSString	*userName;
+@property (nonatomic, retain)	NSString	*userEmail;
+@property (nonatomic, retain)	NSString	*userVisibleName;
+@property (nonatomic, assign)	BOOL		isRegistered;
+@property (nonatomic, retain)	NSString	*sessionToken;
+@property (nonatomic, retain)	NSString	*deviceID;
 
 
 @end
 
 @implementation UserAccount
 SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
-@synthesize user;
-@synthesize userPassword;
-@synthesize userName;
-@synthesize userEmail;
-@synthesize userVisibleName;
-@synthesize isRegistered;
-@synthesize sessionToken;
-@synthesize deviceID;
-@synthesize accountMode;
 
 
 
-
--(id)init{
+-(instancetype)init{
 	
 	if (self = [super init])
 	{
-		isRegistered=YES;
-		userPassword=@"";
-		userName=@"";
-		deviceID=[StringUtilities createAppUUID];
-		accountMode=kUserAccountNotLoggedIn;
+		_isRegistered=YES;
+		_userPassword=@"";
+		_userName=@"";
+		_deviceID=[StringUtilities createAppUUID];
+		_accountMode=kUserAccountNotLoggedIn;
 		
 		[self loadUser];
 	}
@@ -86,6 +73,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	[notifications addObject:XMLPARSERDIDFAILPARSING];
 	
 	[self addRequestID:REGISTER];
 	[self addRequestID:LOGIN];
@@ -100,7 +88,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
 	
@@ -108,31 +96,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	if([self isRegisteredForRequest:dataid]){
 		
-		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
-			
-			if ([response.dataid isEqualToString:REGISTER]) {
-				
-				[self registerUserResponse:response.dataProvider];
-				
-			}else if ([response.dataid isEqualToString:LOGIN]) {
-				
-				[self loginUserResponse:response.dataProvider];
-				
-			}else if ([response.dataid isEqualToString:PASSWORDRETRIEVAL]){
-				
-				[self retrievePasswordForUserResponse:response.dataProvider];
-			}
-			
+		if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL]){
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Network Error" andMessage:@"Unable to contact server"];
 		}
 		
-		
-		
 	}
-	
-	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED]){
-		[[HudManager sharedInstance] removeHUD];
-	}
-	
 	
 }
 
@@ -152,41 +120,45 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	self.userEmail=email;
 	
 	
-	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
-									 userPassword,@"password", 
-									 userEmail,@"email",
-									 userVisibleName,@"name",nil];
+	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:_userName, @"username",
+									 _userPassword,@"password", 
+									 _userEmail,@"email",
+									 _userVisibleName,@"name",nil];
 	
 	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
-	NSMutableDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=REGISTER;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self registerUserResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Registering New User" andMessage:nil];
 	
 }
 
--(void)registerUserResponse:(ValidationVO*)validation{
+-(void)registerUserResponse:(BUNetworkOperation*)response{
 	
 	BetterLog(@"");
 	
-	switch(validation.validationStatus){
+	switch(response.validationStatus){
 			
 		case ValidationRegisterSuccess:
 		{
 			[self createUser];
 			[self saveUser];
 			
-			isRegistered=YES;
-			accountMode=kUserAccountLoggedIn;
+			_isRegistered=YES;
+			_accountMode=kUserAccountLoggedIn;
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
@@ -197,14 +169,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			break;	
 		case ValidationRegisterFailed:
 		{
-			user.email=@"";
-			userPassword=@"";
+			_user.email=@"";
+			_userPassword=@"";
 			
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,validation.returnMessage,MESSAGE, nil];
+			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,response.validationMessage,MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			
 
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Creation Error" andMessage:validation.returnMessage];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Creation Error" andMessage:response.validationMessage];
 			
 		}
 			break;
@@ -230,65 +202,80 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 -(void)loginExistingUser{
-	if(accountMode==kUserAccountCredentialsExist){
-		[self loginUserWithUserName:user.username andPassword:userPassword];
+	if(_accountMode==kUserAccountCredentialsExist){
+		[self loginUserWithUserName:_user.username andPassword:_userPassword displayHUD:YES];
+	}
+}
+
+-(void)loginExistingUserSilent{
+	if(_accountMode==kUserAccountCredentialsExist){
+		[self loginUserWithUserName:_user.username andPassword:_userPassword displayHUD:NO];
 	}
 }
 
 
--(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password{
+
+-(void)loginUserWithUserName:(NSString*)name andPassword:(NSString*)password displayHUD:(BOOL)displayHUD{
 	
 	self.userName=[name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 	self.userPassword=password;
 	
-	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username",
-									 userPassword,@"password", nil];
+	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:_userName, @"username",
+									 _userPassword,@"password", nil];
 	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey, @"key", nil];
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=LOGIN;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-	request.source=USER;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loginUserResponse:operation displayHUD:displayHUD];
+		
+	};
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Signing in" andMessage:nil];
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	if(displayHUD)
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Signing in" andMessage:nil];
 	
 }
 
--(void)loginUserResponse:(ValidationVO*)validation{
+-(void)loginUserResponse:(BUNetworkOperation*)response displayHUD:(BOOL)displayHUD{
 	
-	switch(validation.validationStatus){
+	switch(response.validationStatus){
 			
 		case ValidationLoginSuccess:
 		{
 			
 			
-			isRegistered=YES;
-			accountMode=kUserAccountLoggedIn;
+			_isRegistered=YES;
+			_accountMode=kUserAccountLoggedIn;
 			[self createUser];
 			[self saveUser];
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE,nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Logged In" andMessage:nil];
+			if(displayHUD)
+				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Logged In" andMessage:nil];
 			
 		}
 			break;
 			
 		case ValidationLoginFailed:
 		{
-			user.email=@"";
-			userPassword=@"";
+			_user.email=@"";
+			_userPassword=@"";
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_login",MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOGINRESPONSE object:nil userInfo:dict];
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Login Failed" andMessage:nil];
+			if(displayHUD)
+				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Login Failed" andMessage:nil];
 			
 		}	
 			break;
@@ -315,28 +302,32 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)retrievePasswordForUser:(NSString *)email{
 	
-	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:userName, @"username", nil];
+	NSDictionary *postparameters=[NSDictionary dictionaryWithObjectsAndKeys:_userName, @"username", nil];
 	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:postparameters,@"postparameters",getparameters,@"getparameters",nil];
 	
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=PASSWORDRETRIEVAL;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self retrievePasswordForUserResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
 	
 	
 }
 
--(void)retrievePasswordForUserResponse:(ValidationVO*)validation{
+-(void)retrievePasswordForUserResponse:(BUNetworkOperation*)response{
 	
 	
-	switch(validation.validationStatus){
+	switch(response.validationStatus){
 			
 		case ValidationRetrivedPasswordSuccess:
 		{
@@ -352,7 +343,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,@"error_response_password",MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:PASSWORDRETRIEVALRESPONSE object:nil userInfo:dict];
 		}
-			break;	
+			break;
+			
+		default:
+			break;
 			
 	}
 	
@@ -361,7 +355,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 -(void)updateAutoLoginPreference:(BOOL)value{
-	user.autoLogin=value;
+	_user.autoLogin=value;
 	[self saveUser];
 }
 
@@ -372,8 +366,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
  ***********************************************/
 //
 -(void)resetUserAccount{
-	isRegistered=NO;
-	accountMode=kUserAccountNotLoggedIn;
+	_isRegistered=NO;
+	_accountMode=kUserAccountNotLoggedIn;
 	[self removeUserState];
 	
 	
@@ -390,7 +384,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 -(void)createUser{
 	
 	self.user=[[UserVO alloc]init];
-	user.username=userName;
+	_user.username=_userName;
 	
 }
 
@@ -413,18 +407,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		[unarchiver finishDecoding];
 		
 		
-		if(user!=nil){
+		if(_user!=nil){
 			
 			NSError *error=nil;
-			self.userPassword =[SFHFKeychainUtils getPasswordForUsername:user.username andServiceName:[[NSBundle mainBundle] bundleIdentifier]   error:&error];			
+			self.userPassword =[SFHFKeychainUtils getPasswordForUsername:_user.username andServiceName:[[NSBundle mainBundle] bundleIdentifier]   error:&error];			
 			if(error!=nil){
 				// if password is unknown but email is ok theyll need to re login
 				BetterLog(@"[INFO] Keychain error occured: %@",[error description]);
 				[self removeUserState];
 			}else {
 				
-				if(userPassword!=nil){
-					accountMode=kUserAccountCredentialsExist;
+				if(_userPassword!=nil){
+					_accountMode=kUserAccountCredentialsExist;
 					
 				}else {
 					
@@ -432,8 +426,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 					
 					if([DeviceUtilities detectDevice]==MODEL_IPHONE_SIMULATOR){
 						self.userPassword=@"j166lypuff";
-						if(user.autoLogin==YES){
-							accountMode=kUserAccountCredentialsExist;
+						if(_user.autoLogin==YES){
+							_accountMode=kUserAccountCredentialsExist;
 						}
 						
 					}else {
@@ -460,12 +454,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	BetterLog(@"");
 	
 	NSError *error=nil;
-	[SFHFKeychainUtils storeUsername:user.username andPassword:userPassword forServiceName:[[NSBundle mainBundle] bundleIdentifier] updateExisting:YES error:&error];
+	[SFHFKeychainUtils storeUsername:_user.username andPassword:_userPassword forServiceName:[[NSBundle mainBundle] bundleIdentifier] updateExisting:YES error:&error];
 	
 	
 	NSMutableData *data = [[NSMutableData alloc] init];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-	[archiver encodeObject:user forKey:kUSERSTATEARCHIVEKEY];
+	[archiver encodeObject:_user forKey:kUSERSTATEARCHIVEKEY];
 	[archiver finishEncoding];
 	[data writeToFile:[self filepath] atomically:YES];
 	
@@ -488,7 +482,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 -(void)logoutUser{
-	accountMode=kUserAccountNotLoggedIn;
+	if (_user==nil) {
+		_accountMode=kUserAccountNotLoggedIn;
+	}else{
+		_accountMode=kUserAccountCredentialsExist;
+	}
+	
 }
 
 
@@ -499,7 +498,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	NSError *error=nil;
 	
 	// removes user keychain entry
-	[SFHFKeychainUtils deleteItemForUsername:user.email andServiceName:[[NSBundle mainBundle] bundleIdentifier] error:&error ];
+	[SFHFKeychainUtils deleteItemForUsername:_user.email andServiceName:[[NSBundle mainBundle] bundleIdentifier] error:&error ];
 	
 	// removes userstate file
 	NSFileManager *fm=[NSFileManager defaultManager];
@@ -508,7 +507,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	}
 	
 	// user will need to relogin
-	isRegistered=NO;
+	_isRegistered=NO;
 	self.sessionToken=nil;
 	self.user=nil;
 	self.userName=nil;
@@ -518,11 +517,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 -(BOOL)hasSessionToken{
-	return sessionToken!=nil;
+	return _sessionToken!=nil;
 }
 
 -(BOOL)isLoggedIn{
-	return accountMode==kUserAccountLoggedIn;
+	return _accountMode==kUserAccountLoggedIn;
 }
 
 

@@ -21,23 +21,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  Credits.h
 //  CycleStreets
 //
-//  Created by Alan Paxton on 09/03/2010.
 //
 
 #import <UIKit/UIKit.h>
 
 
-@interface CreditsViewController : UIViewController <UIWebViewDelegate> {
+@interface CreditsViewController : UIViewController  {
 	
 	
 }
 
-
-
--(void)updateUIState:(NSString*)state;
--(IBAction)stopLoading:(id)sender;
--(IBAction)refreshWebView:(id)sender;
--(IBAction)goForwardButtonSelected:(id)sender;
--(IBAction)goBackButonSelected:(id)sender;
--(void)showActivityIndicator:(BOOL)show;
 @end

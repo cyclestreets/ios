@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
+typedef void (^GenericCompletionBlock)(BOOL complete,NSString *error);
+
 
 extern NSString *const SECUREUDID_DOMAIN;
 extern NSString *const SECUREUDID_SALT;
@@ -76,7 +78,10 @@ extern NSString *const NONE;
 extern NSString *const SHORTDATE;
 extern NSString *const ERRORTYPE;
 extern NSString *const EVENTTYPE;
-
+extern NSString *const ID;
+extern NSString *const CONTROLLER;
+extern NSString *const DATAPROVIDER;
+extern NSString *const INDEX;
 
 // nav button consts
 extern NSString *const RIGHT;
@@ -95,7 +100,7 @@ extern NSString *const UITYPE_CONTROLHEADERUI;
 extern NSString *const UITYPE_MODALUI;
 extern NSString *const UITYPE_SELFFRAME;
 extern NSString *const UITYPE_IPADDETAIL;
-
+extern NSString *const UITYPE_MODALTABLEVIEWUI;
 
 
 // events
@@ -103,6 +108,7 @@ extern NSString *const XMLPARSERDIDCOMPLETE;
 extern NSString *const REQUESTDATAREFRESH;
 extern NSString	*const PRODUCTLISTCOMPLETE;
 extern NSString *const REMOTEFILELOADED;
+extern NSString *const	LOCALFILELOADED;
 extern NSString *const REMOTEFILEFAILED;
 extern NSString *const SERVERCONNECTIONFAILED;
 extern NSString *const XMLPARSERDIDCOMPLETENOUPDATE;
@@ -120,6 +126,13 @@ extern NSString *const TEXTFIELDEDITFRAME;
 extern NSString *const BUCELLNOTIFICATION;
 extern NSString *const REQUESTNOTEDELETENAVIGATION;
 extern NSString *const PUSHNOTIFICATIONTOKENAVAILABLE;
+
+extern NSString *const REQUESTDIDCOMPLETE;
+extern NSString *const REQUESTDIDFAIL;
+
+extern NSString *const RESPONSESERVER;
+extern NSString *const RESPONSEMODEL;
+extern NSString *const RESPONSECACHE;
 
 
 
@@ -157,38 +170,42 @@ extern NSString *const STARTUPERROR_STRINGSFAILED;
 
 
 
+#define IPHONE5HEIGHT 568
+#define IPHONE4HEIGHT 480
+#define NAVIGATIONHEIGHT 44
+#define CONTROLUIHEIGHT 44
+#define TABHEIGHT 50
+#define STATUSHEIGHT 20
+#define SCREENHEIGHT ( IS_IPHONE_5 ? IPHONE5HEIGHT-STATUSHEIGHT : IPHONE4HEIGHT-STATUSHEIGHT)
+#define FULLSCREENHEIGHT ( IS_IPHONE_5 ? IPHONE5HEIGHT : IPHONE4HEIGHT)
 
+#define NAVTABVIEWHEIGHT (SCREENHEIGHT-NAVIGATIONHEIGHT-TABHEIGHT)
+#define NAVTABLEHEIGHT ((SCREENHEIGHT)-NAVIGATIONHEIGHT-TABHEIGHT)
+#define NAVCONTROLMODALHEIGHT ((SCREENHEIGHT)-NAVIGATIONHEIGHT-NAVIGATIONHEIGHT)
+#define SCREENHEIGHTWITHCONTROLUI (NAVTABLEHEIGHT-CONTROLUIHEIGHT)
+#define SCREENHEIGHTWITHNAVIGATION (SCREENHEIGHT-NAVIGATIONHEIGHT)
+#define SCREENHEIGHTWITHNAVANDTAB (SCREENHEIGHT-NAVIGATIONHEIGHT-TABHEIGHT)
+#define SCREENHEIGHTWITHMODALNAV (SCREENHEIGHT-NAVIGATIONHEIGHT)
 
 // dimensions
 
 extern int const SCREENWIDTH;
 extern int const IPADSCREENWIDTH;
 extern int const IPADMASTERVIEWWIDTH;
-extern int const SCREENHEIGHT;
-extern int const FULLSCREENHEIGHT;
-extern int const SCREENHEIGHTWITHCONTROLUI;
-extern int const SCREENHEIGHTWITHMODALNAV;
 extern int const SCREENHEIGHTWITHCONTROLANDHEADERUI;
 extern int const SCREENHEIGHTWITHCONTROLANDHEADERUI_IPAD_LANDSCAPE;
 extern int const SCREENHEIGHTMANAGE_IPAD_LANDSCAPE;
 extern int const NAVTABVIEWHEIGHT_IPAD_LANDSCAPE;
-extern int const SCREENHEIGHTWITHNAVIGATION;
-extern int const SCREENHEIGHTWITHNAVANDTAB;
-extern int const CONTROLUIHEIGHT;
 extern int const UIWIDTH;
 extern int const WIDEUIWIDTH;
 extern int const FORMWIDTH;
-extern int const NAVIGATIONHEIGHT;
 extern int const TABBARHEIGHT;
-extern int const NAVTABVIEWHEIGHT;
-extern int const NAVCONTROLMODALHEIGHT;
 extern int const HEADERCONTROLHEIGHT;
 extern int const IPADDETAILVIEWWIDTH;
 extern int const IPADDETAILUIVIEWWIDTH;
 // tables
 
 extern int const SHORTCELLHEIGHT;
-extern int const NAVTABLEHEIGHT;
 extern int const NEWSCELLHEIGHT;
 extern int const STANDARDCELLHEIGHT;
 extern int const HALFCELLHEIGHT;
@@ -223,9 +240,18 @@ enum{
 	DATATYPE_XML,
 	DATATYPE_PLIST,
 	DATATYPE_JSON,
+	DATATYPE_OPTIONAL,
 	DATATYPE_NONE
 };
 typedef int DataParserType;
+
+typedef enum: int{
+    
+    DataSourceRequestCacheTypeUseCache,
+    DataSourceRequestCacheTypeUseNetwork
+    
+    
+}DataSourceRequestCacheType;
 
 @interface GenericConstants : NSObject{
 	

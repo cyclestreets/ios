@@ -24,10 +24,19 @@
 #import "PhotoMapVO.h"
 #import "PhotoMapListVO.h"
 #import "PhotoCategoryVO.h"
+#import "LocationSearchVO.h"
 
-@interface ApplicationXMLParser(Private)
+#import "TBXML+Additions.h"
 
--(void)parseXMLForType:(NSString*)type;
+#import "BUNetworkOperation.h"
+
+@interface ApplicationXMLParser()
+
+
+@property(nonatomic,strong)NSDictionary *parserMethods;
+@property(nonatomic,strong)NSString *parserError;
+@property(nonatomic,strong)BUNetworkOperation *activeOperation;
+
 
 
 // user account
@@ -38,7 +47,6 @@
 
 // routes
 -(void)CalculateRouteXMLParser:(TBXML*)parser;
--(void)RetrieveRouteByIdXMLParser:(TBXML*)parser;
 
 
 // photos
@@ -64,122 +72,79 @@
 @end
 
 @implementation ApplicationXMLParser
-@synthesize parsers;
-@synthesize activeResponse;
-@synthesize parserMethods;
-@synthesize delegate;
-@synthesize parserError;
-
-
-/***********************************************************/
-// dealloc
-/***********************************************************/
-- (void)dealloc
-{
-    delegate = nil;
-	
-}
+SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 
 
 
 
--(id)init{
+-(instancetype)init{
 	if (self = [super init])
 	{
-		parserMethods=[[NSDictionary alloc] initWithObjectsAndKeys:
+		self.parserMethods=[[NSDictionary alloc] initWithObjectsAndKeys:
 					   [NSValue valueWithPointer:@selector(LoginXMLParser:)],LOGIN,
 					   [NSValue valueWithPointer:@selector(RegisterXMLParser:)],REGISTER,
 					   [NSValue valueWithPointer:@selector(RetrievePasswordXMLParser:)],PASSWORDRETRIEVAL,
                        [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVELOCATIONPHOTOS,
+					   [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVEROUTEPHOTOS,
                        [NSValue valueWithPointer:@selector(PhotoUploadXMLParser:)],UPLOADUSERPHOTO,
 					   [NSValue valueWithPointer:@selector(POIListingXMLParser:)],POILISTING,
 					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
 					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
+						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
+						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],WAYPOINTMETADATA,
+						[NSValue valueWithPointer:@selector(LocationSearchXMLParser:)],LOCATIONSEARCH,
 					   nil];
 		
-		parsers=[[NSMutableDictionary alloc]init];
 	}
 	return self;
 }
 
 
--(void)parseData:(NetResponse*)response{
-	
-	BetterLog(@"type=%@",response.dataid);
-	
-	activeResponse=response;
-	
-	// NOTE: no more storage of XMLdata in archives as TBXMLElements are structs not Objects
-	TBXML	*parser=[[TBXML alloc]initWithXMLData:activeResponse.responseData];
-	[parsers setObject:parser forKey:activeResponse.dataid];
-	
-	[self parseXMLForType:activeResponse.dataid];
-	
-}
 
 
-
--(void)XMLParserDidFail:(NSError*)error{
+-(void)parseDataForOperation:(BUNetworkOperation* )networkOperation success:(ParserCompletionBlock)success failure:(ParserErrorBlock)failure{
 	
 	BetterLog(@"");
 	
-	activeResponse.status=NO;
-	activeResponse.error=[NSString stringWithFormat:@"%@%@",XMLPARSER_XMLSYNTAXERROR,[error localizedDescription]];
-	
-	if([delegate respondsToSelector:@selector(XMLParserDidFail:)]){
-		[delegate XMLParserDidFail:activeResponse];
-	}
-	
-}
-
-
-
-#pragma mark Section XML Parsering methods
-
-
-
--(void)parseXMLForType:(NSString*)type{
-	
-	BetterLog(@"");
-	
-	SEL parserMethod=[[parserMethods objectForKey:type] pointerValue];
+	SEL parserMethod=[[_parserMethods objectForKey:networkOperation.dataid] pointerValue];
 	
 	if(parserMethod!=nil){
+        
+        self.activeOperation=networkOperation;
 		
-		
-		TBXML	*parser=[[TBXML alloc]initWithXMLData:activeResponse.responseData];
+		NSError *error;
+        TBXML	*parser=[TBXML tbxmlWithXMLData:_activeOperation.responseData error:&error ];
 		[self performSelector:parserMethod withObject:parser];
 		
-		if(activeResponse.status==YES){
+		if(_activeOperation.operationState==NetResponseStateComplete){
 			
-			BetterLog(@"[DEBUG] activeResponse.dataid=%@",activeResponse.dataid);
-			BetterLog(@"[DEBUG] activeResponse.requestid=%@",activeResponse.requestid);
+			BetterLog(@"[DEBUG] Success activeResponse.dataid=%@ activeResponse.requestid=%@",_activeOperation.dataid,_activeOperation.requestid);
 			
-			if([delegate respondsToSelector:@selector(XMLParserDidComplete:)]){
-				[delegate XMLParserDidComplete:activeResponse];
-			}
+			success(_activeOperation);
 			
 		}else {
 			
-			BetterLog(@"[ERROR] RKXMLParser:XMLParserDidFail");
+			BetterLog(@"[ERROR] ApplicationXMLParser:XMLParserDidFail for DataId=%@",_activeOperation.dataid);
 			
-			if([delegate respondsToSelector:@selector(XMLParserDidFail:)]){
-				[delegate XMLParserDidFail:activeResponse];
-			}
-			
+			failure(_activeOperation,error);
 		}
 		
 		
 	}else {
 		
-		BetterLog(@"[ERROR] RKXMLParser:parseXMLForType: parser for type %@ not found!",type);
+		BetterLog(@"[ERROR] ApplicationXMLParser:parseXMLForType: parser for type %@ not found!",_activeOperation.dataid);
 		
 	}
 	
 	
 }
+
+
+
+
+#pragma mark Section XML Parsering methods
 
 
 
@@ -190,8 +155,8 @@
 	BOOL result=YES;
 	
 	if(root==nil){
-			activeResponse.error=XMLPARSER_RESPONSENODEMISSING;
-			activeResponse.status=NO;
+			_activeOperation.operationError=NetResponseErrorInvalidResponse;
+			_activeOperation.operationState=NetResponseStateError;
 			return NO;
 		}
 		
@@ -200,8 +165,8 @@
 		// capture responses with no response data
 		// this is a valid fault
 		if(hasChildren==NO){
-			activeResponse.error=XMLPARSER_RESPONSEDATAMISSING;
-			activeResponse.status=NO;
+			_activeOperation.operationError=NetResponseErrorInvalidResponse;
+			_activeOperation.operationState=NetResponseStateError;
 			return NO;
 		}
 		
@@ -209,8 +174,8 @@
 		// this is not inherently a fault but is treated as such
 		// to trigger the no results logic
 		if ([TBXML childElementNamed:@"NoResults" parentElement:root]!=nil) {
-			activeResponse.error=XMLPARSER_RESPONSENOENTRIES;
-			activeResponse.status=NO;
+			_activeOperation.operationError=NetResponseErrorNoResults;
+			_activeOperation.operationState=NetResponseStateError;
 			return NO;
 		}
 		
@@ -253,41 +218,33 @@
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
 	
-	ValidationVO *validation=[[ValidationVO alloc]init];
-	
 	LoginVO		*loginResponse=[[LoginVO alloc]init];
-	loginResponse.requestname=[TBXML textForElement:[TBXML childElementNamed:@"request" parentElement:response]];
+	loginResponse.requestname=[TBXML elementName:response];
 	
 	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
 	
 	if([TBXML hasChildrenForParentElement:resultelement]==YES){
 		
-		validation.returnCode=ValidationLoginSuccess;
+		_activeOperation.validationStatus=ValidationLoginSuccess;
+		_activeOperation.operationState=NetResponseStateComplete;
 		
-		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"username" parentElement:resultelement]];
-		loginResponse.userid=[[TBXML textForElement:[TBXML childElementNamed:@"id" parentElement:resultelement]] intValue];
+		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
 		loginResponse.email=[TBXML textForElement:[TBXML childElementNamed:@"email" parentElement:resultelement]];
 		loginResponse.name=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
-		loginResponse.validatedDate=[TBXML textForElement:[TBXML childElementNamed:@"validated" parentElement:resultelement]];
-		loginResponse.userIP=[TBXML textForElement:[TBXML childElementNamed:@"ip" parentElement:resultelement]];
 		
-		loginResponse.validatekey=[[TBXML textForElement:[TBXML childElementNamed:@"validatekey" parentElement:resultelement]] boolValue];
-		loginResponse.deleted=[[TBXML textForElement:[TBXML childElementNamed:@"deleted" parentElement:resultelement]] boolValue];
-		loginResponse.lastsignin=[[TBXML textForElement:[TBXML childElementNamed:@"lastsignin" parentElement:resultelement]] intValue];
+		
 		
 	}else {
-		
-		validation.returnCode=ValidationLoginFailed;
+		_activeOperation.operationState=NetResponseStateComplete;
+		_activeOperation.validationStatus=ValidationLoginFailed;
 		
 	}
 
-	validation.responseDict=[NSDictionary dictionaryWithObject:loginResponse forKey:activeResponse.dataid];
-	
-	activeResponse.dataProvider=validation;
+	_activeOperation.dataProvider=loginResponse;
 	
 }
 
@@ -298,12 +255,10 @@
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
 	
-	
-	ValidationVO *validation=[[ValidationVO alloc]init];
 	
 	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
 	
@@ -311,21 +266,20 @@
 		
 		int code=[[TBXML textForElement:[TBXML childElementNamed:@"code" parentElement:resultelement]]intValue];
 		if(code==1){
-			validation.returnCode=ValidationRegisterSuccess;
+			_activeOperation.validationStatus=ValidationRegisterSuccess;
 		}else {
-			validation.returnCode=ValidationRegisterFailed;
+			_activeOperation.validationStatus=ValidationRegisterFailed;
 		}
 
-		validation.returnMessage=[TBXML textForElement:[TBXML childElementNamed:@"message" parentElement:resultelement]];
+		_activeOperation.validationMessage=[TBXML textForElement:[TBXML childElementNamed:@"message" parentElement:resultelement]];
+		_activeOperation.operationState=NetResponseStateComplete;
 		
 	}else {
 		
-		validation.returnCode=ValidationRegisterFailed;
+		_activeOperation.validationStatus=ValidationRegisterFailed;
 		
 	}
 
-	
-	activeResponse.dataProvider=validation;
 	
 }
 
@@ -334,17 +288,14 @@
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
+
 	
-	
-	ValidationVO *validation=[[ValidationVO alloc]init];
-	validation.returnCode=[[TBXML textForElement:[TBXML childElementNamed:@"ReturnCode" parentElement:response]]intValue];
-	validation.returnMessage=[TBXML textForElement:[TBXML childElementNamed:@"ReturnMsg" parentElement:response]];
-	activeResponse.dataProvider=validation;
-	
-	
+	_activeOperation.validationStatus=[[TBXML textForElement:[TBXML childElementNamed:@"ReturnCode" parentElement:response]]intValue];
+	_activeOperation.validationMessage=[TBXML textForElement:[TBXML childElementNamed:@"ReturnMsg" parentElement:response]];
+		
 }
 
 
@@ -364,11 +315,13 @@
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		
+		_activeOperation.validationStatus=ValidationCalculateRouteFailed;
+		
 		return;
 	}
 	
-	ValidationVO *validation=[[ValidationVO alloc]init];
 	
 	RouteVO *route=[self newRouteForData:response];
 	
@@ -376,20 +329,21 @@
 		
 		if([route numSegments]==0){
 			
-			validation.returnCode=ValidationCalculateRouteFailed;
+			_activeOperation.validationStatus=ValidationCalculateRouteFailed;
 			
 		}else{
 			
-			validation.responseDict=[NSDictionary dictionaryWithObject:route forKey:activeResponse.dataid];
+			_activeOperation.dataProvider=route;
 			
-			validation.returnCode=ValidationCalculateRouteSuccess;
+			_activeOperation.operationState=NetResponseStateComplete;
+			_activeOperation.validationStatus=ValidationCalculateRouteSuccess;
 			
 		}
 		
 		
 	}else{
 		
-		validation.returnCode=ValidationCalculateRouteFailed;
+		_activeOperation.validationStatus=ValidationCalculateRouteFailed;
 		
 		
 		TBXMLElement *root=[TBXML childElementNamed:@"gml:featureMember" parentElement:response];
@@ -399,19 +353,16 @@
 			
 			int code=[[TBXML textOfChild:@"cs:code" parentElement:issuenode]intValue];
 			if(code==ValidationCalculateRouteFailedOffNetwork){
-				validation.returnCode=ValidationCalculateRouteFailedOffNetwork;
+				_activeOperation.validationStatus=ValidationCalculateRouteFailedOffNetwork;
 			}
 			
-			validation.returnMessage=[TBXML textOfChild:@"cs:text" parentElement:issuenode];
+			_activeOperation.validationMessage=[TBXML textOfChild:@"cs:text" parentElement:issuenode];
 			
 		}
 		
 		
 		
 	}
-	
-	
-	activeResponse.dataProvider=validation;
 	
 	
 }
@@ -478,6 +429,8 @@
 				segment.startBearing=[[TBXML textForElement:[TBXML childElementNamed:@"cs:startBearing" parentElement:segmentnode]]intValue];
 				segment.segmentBusynance=[[TBXML textForElement:[TBXML childElementNamed:@"cs:busynance" parentElement:segmentnode]]intValue];
 				
+				segment.elevations=[TBXML textForElement:[TBXML childElementNamed:@"cs:elevations" parentElement:segmentnode]];
+				
 				segment.turnType=[TBXML textForElement:[TBXML childElementNamed:@"cs:turn" parentElement:segmentnode]];	
 				segment.startTime=time;
 				segment.startDistance=distance;
@@ -493,7 +446,7 @@
 					CGPoint point;
 					point.x = [[XYs objectAtIndex:X] doubleValue];
 					point.y = [[XYs objectAtIndex:X+1] doubleValue];
-					p.p = point;
+					p.point = point;
 					p.isWalking=segment.isWalkingSection;
 					[result addObject:p];
 				}
@@ -515,7 +468,7 @@
 				CGPoint point;
 				point.x=[[TBXML textOfChild:@"cs:longitude" parentElement:waypointnode] doubleValue];
 				point.y=[[TBXML textOfChild:@"cs:latitude" parentElement:waypointnode] doubleValue];
-				waypoint.p=point;
+				waypoint.point=point;
 				
 				[waypoints addObject:waypoint];
 				
@@ -551,12 +504,12 @@
     TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
     
-	ValidationVO *validation=[[ValidationVO alloc]init];
-	validation.returnCode=ValidationUserPhotoUploadFailed;
+	
+	_activeOperation.validationStatus=ValidationUserPhotoUploadFailed;
 	
 	//Hmm, responses return unrequired nodes
 	
@@ -568,19 +521,19 @@
 		TBXMLElement *resultnode=[TBXML childElementNamed:@"result" parentElement:response];
 		
 		if(resultnode!=nil){
-			NSMutableDictionary *responseDict=[ApplicationXMLParser newDictonaryFromXMLElement:resultnode];
-			validation.responseDict=responseDict;
-			validation.returnCode=ValidationUserPhotoUploadSuccess;
+			NSMutableDictionary *responseDict=[TBXML newDictonaryFromXMLElement:resultnode];
+			_activeOperation.dataProvider=responseDict;
+			_activeOperation.validationStatus=ValidationUserPhotoUploadSuccess;
+			_activeOperation.operationState=NetResponseStateComplete;
 		}
 		
 		
 	}else {
 		
-		validation.returnMessage=[TBXML textForElement:codenode];
+		_activeOperation.validationMessage=[TBXML textForElement:codenode];
 		
 	}
     
-	activeResponse.dataProvider=validation;
     
 }
 
@@ -592,15 +545,11 @@
 	
 	BetterLog(@"");
     
-    
     TBXMLElement *response = parser.rootXMLElement;
-	ValidationVO *validation=[[ValidationVO alloc]init];
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
-		validation.returnCode=ValidationRetrievePhotosFailed;
-		activeResponse.dataProvider=validation;
-		activeResponse.status=YES;
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		_activeOperation.validationStatus=ValidationRetrievePhotosFailed;
 		return;
 	}
     
@@ -638,18 +587,17 @@
 		
 		photolist.photos=arr;
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:photolist forKey:activeResponse.dataid];
+		_activeOperation.dataProvider=photolist;
 		
-		validation.returnCode=ValidationRetrievePhotosSuccess;
+		_activeOperation.validationStatus=ValidationRetrievePhotosSuccess;
+		_activeOperation.operationState=NetResponseStateComplete;
 		
 	}else{
 		
-		validation.returnCode=ValidationRetrievePhotosFailed;
+		_activeOperation.validationStatus=ValidationRetrievePhotosFailed;
 		
 	}
 	
-    
-	activeResponse.dataProvider=validation;
     
     
 }
@@ -665,12 +613,10 @@
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
     
-    ValidationVO *validation=[[ValidationVO alloc]init];
-	
 	
 	TBXMLElement *poitypes=[TBXML childElementNamed:@"poitypes" parentElement:response];
 	TBXMLElement *poitype=[TBXML childElementNamed:@"poitype" parentElement:poitypes];
@@ -694,15 +640,14 @@
 			
 		}
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
+		_activeOperation.dataProvider=dataProvider;
 		
-		validation.returnCode=ValidationPOIListingSuccess;
+		_activeOperation.validationStatus=ValidationPOIListingSuccess;
 		
 	}else{
-		validation.returnCode=ValidationPOIListingFailure;
+		_activeOperation.validationStatus=ValidationPOIListingFailure;
 	}
 	
-	activeResponse.dataProvider=validation;
 	
 }
 
@@ -715,13 +660,12 @@
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
+	
+	
     
-	ValidationVO *validation=[[ValidationVO alloc]init];
-	
-	
 	TBXMLElement *pois=[TBXML childElementNamed:@"pois" parentElement:response];
 	TBXMLElement *poi=[TBXML childElementNamed:@"poi" parentElement:pois];
 	
@@ -749,16 +693,13 @@
 			
 		}
 		
-		validation.responseDict=[NSDictionary dictionaryWithObject:dataProvider forKey:activeResponse.dataid];
+		_activeOperation.dataProvider=dataProvider;
 		
-		validation.returnCode=ValidationPOICategorySuccess;
+		_activeOperation.validationStatus=ValidationPOICategorySuccess;
 		
 	}else{
-		validation.returnCode=ValidationPOICategoryFailure;
+		_activeOperation.validationStatus=ValidationPOICategoryFailure;
 	}
-	
-	activeResponse.dataProvider=validation;
-	
 	
 	
 }
@@ -778,12 +719,12 @@
 	TBXMLElement *response = parser.rootXMLElement;
 	
 	[self validateXML:response];
-	if(activeResponse.status==NO){
+	if(_activeOperation.operationState>NetResponseStateComplete){
 		return;
 	}
     
-	ValidationVO *validation=[[ValidationVO alloc]init];
-	validation.returnCode=ValidationCategoriesSuccess;
+	
+	_activeOperation.validationStatus=ValidationCategoriesSuccess;
 	
 	NSMutableDictionary *dataProvider=[NSMutableDictionary dictionary];
 	
@@ -797,11 +738,11 @@
 	if(categorynode!=nil){
 		
 		NSMutableArray *carr=[NSMutableArray array];
-	
+		
 		while (categorynode!=nil) {
 			
 			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			
+			category.categoryType=PhotoCategoryTypeFeature;
 			category.name=[TBXML textOfChild:@"name" parentElement:categorynode];
 			category.tag=[TBXML textOfChild:@"tag" parentElement:categorynode];
 			
@@ -814,7 +755,7 @@
 		[dataProvider setObject:carr forKey:@"feature"];
 		
 	}else {
-		validation.returnCode=ValidationCategoriesFailed;
+		_activeOperation.validationStatus=ValidationCategoriesFailed;
 	}
 	
 	TBXMLElement *metacategoriesnode=[TBXML childElementNamed:@"metacategories" parentElement:response];
@@ -827,7 +768,7 @@
 		while (metacategorynode!=nil) {
 			
 			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			
+			category.categoryType=PhotoCategoryTypeCategory;
 			category.name=[TBXML textOfChild:@"name" parentElement:metacategorynode];
 			category.tag=[TBXML textOfChild:@"tag" parentElement:metacategorynode];
 			
@@ -839,16 +780,93 @@
 		
 		[dataProvider setObject:mcarr forKey:@"category"];
 		
+		_activeOperation.operationState=NetResponseStateComplete;
+		
 	}else {
-		validation.returnCode=ValidationCategoriesFailed;
+		_activeOperation.validationStatus=ValidationCategoriesFailed;
 	}
 	
-	validation.responseDict=dataProvider;
+	_activeOperation.dataProvider=dataProvider;
 	
-	activeResponse.dataProvider=validation;
+}
+
+
+
+/*
+ <?xml version="1.0"?>
+ <sayt>
+	<query>camb</query>
+	<time>144</time>
+	 <results>
+		 <result>
+		 <type>node</type>
+		 <id>1838216188</id>
+		 <name>Camb</name>
+		 <longitude>-1.0713154</longitude>
+		 <latitude>60.6128895</latitude>
+		 <near> Yell, Scotland, United Kingdom</near>
+		 <distance>8583404</distance>
+		 </result>
+	 </results>
+ </sayt>
+*/
+
+
+-(void)LocationSearchXMLParser:(TBXML*)parser{
+	
+	
+	BetterLog(@"");
+	
+	TBXMLElement *response = parser.rootXMLElement;
+	
+	[self validateXML:response];
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		return;
+	}
+    
+	
+	_activeOperation.validationStatus=ValidationCategoriesSuccess;
+	
+	TBXMLElement *results=[TBXML childElementNamed:@"results" parentElement:response];
+	
+	if(results!=nil){
+		
+		TBXMLElement *result=[TBXML childElementNamed:@"result" parentElement:results];
+		
+		NSMutableArray *dataProvider=[NSMutableArray array];
+		
+		while(result!=nil){
+			
+			NSDictionary *dict=[TBXML newDictonaryFromXMLElement:result];
+			
+			LocationSearchVO *search=[[LocationSearchVO alloc]initWithDictionary:dict];
+			
+			[dataProvider addObject:search];
+			
+			result=result->nextSibling;
+			
+		}
+		
+		[dataProvider sortUsingComparator:(NSComparator)^(LocationSearchVO *a1, LocationSearchVO *a2) {
+			return [a1.distanceInt compare:a2.distanceInt];
+		}];
+		
+		_activeOperation.operationState=NetResponseStateComplete;
+		_activeOperation.validationStatus=ValidationSearchSuccess;
+		
+		_activeOperation.dataProvider=dataProvider;
+		
+	}else{
+		
+		_activeOperation.validationStatus=ValidationSearchFailed;
+		
+		
+	}
 	
 	
 }
+
+
 
 									
 	
@@ -865,80 +883,6 @@
  ***********************************************/
 //
 
-//
-/***********************************************
- * @description			returns a dictionary from a node's child nodes
- ***********************************************/
-//
-
-+(NSMutableDictionary*)newDictonaryFromXMLElement:(TBXMLElement*)innode{
-	
-	if(innode==nil)
-		return nil;
-	
-	NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-	
-	TBXMLElement *node=innode->firstChild;
-	while (node!=nil) {
-		
-		[dict setObject:[TBXML textForElement:node] forKey:[TBXML elementName:node]];
-		
-		node=node->nextSibling;
-	}
-	
-	return dict;
-}
-
-//
-/***********************************************
- * @description			returns a dictionary from a node's attributes
- ***********************************************/
-//
-+(NSMutableDictionary*)newDictonaryFromXMLElementAttributes:(TBXMLElement*)innode{
-	
-	if(innode==nil)
-		return nil;
-	
-	NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-	
-	TBXMLAttribute *attribute=innode->firstAttribute;
-	while (attribute!=nil) {
-		
-		[dict setObject:[TBXML attributeValue:attribute] forKey:[TBXML attributeName:attribute]];
-		
-		attribute=attribute->next;
-	}
-	
-	
-	return dict;
-}
-
-
-//
-/***********************************************
- * @description			Return an array of nodes with specific name
- ***********************************************/
-//
-+(NSMutableArray*)newArrayForNodesNamed:(NSString*)nodeName fromXMLElement:(TBXMLElement*)innode{
-	
-	if(innode==nil)
-		return nil;
-	
-	NSMutableArray *arr=[[NSMutableArray alloc]init];
-	TBXMLElement *foundNode=[TBXML childElementNamed:nodeName parentElement:innode];
-	
-	if(foundNode!=nil){
-		
-		while (foundNode!=nil) {
-			
-			[arr addObject:[TBXML textForElement:foundNode]];
-			
-			foundNode=[TBXML nextSiblingNamed:nodeName searchFromElement:foundNode];
-		}
-		
-	}
-	return arr;
-}
 
 
 @end

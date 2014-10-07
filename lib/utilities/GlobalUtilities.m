@@ -8,8 +8,6 @@
 
 #import "GlobalUtilities.h"
 #import "RegexKitLite.h"
-#import "HalfRoundedRectView.h"
-#import "RoundedRectView.h"
 #import "UIButton+Glossy.h"
 #import "NSDate-Misc.h"
 #import "StyleManager.h"
@@ -22,15 +20,27 @@
 
 
 
-+(float) calculateHeightOfTextFromWidth:(NSString*) text: (UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode
++(float) calculateHeightOfTextFromWidth:(NSString*)text :(UIFont*)withFont :(float)width :(NSLineBreakMode)lineBreakMode
 {
-	CGSize suggestedSize = [text sizeWithFont:withFont constrainedToSize:CGSizeMake(width, FLT_MAX) lineBreakMode:lineBreakMode];
+
+	if(text==nil)
+		return 0;
+	
+	NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName:withFont}];
+	CGRect rect = [attributedText boundingRectWithSize:(CGSize){width, CGFLOAT_MAX}
+											   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+											   context:nil];
+	// size is fractional so must be rounded;
+	CGSize suggestedSize = rect.size;
+	suggestedSize.height = ceilf(suggestedSize.height);
+	suggestedSize.width  = ceilf(suggestedSize.width);
 	
 	
 	return suggestedSize.height;
+
 }
 
-+(float) calculateHeightOfTextFromWidthWithLineCount:(UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode :(int)linecount
++(float) calculateHeightOfTextFromWidthWithLineCount:(UIFont*)withFont :(float)width :(NSLineBreakMode)lineBreakMode :(int)linecount
 {
 	
 	NSMutableArray *strarr=[[NSMutableArray alloc]init];
@@ -58,26 +68,7 @@
 
 +(void)createCornerContainer:(UIView *)viewToUse forWidth:(CGFloat)width forHeight:(CGFloat)height drawHeader:(BOOL)header{
 	
-	if(header==YES){
-		HalfRoundedRectView *halfroundedRect = [[HalfRoundedRectView alloc] initWithFrame:CGRectMake(1.0, 1.0, width-2, 30.0)];
-		halfroundedRect.rectColor=UIColorFromRGB(0x9E005D);
-		[viewToUse addSubview:halfroundedRect];
-		[viewToUse sendSubviewToBack:halfroundedRect];
-	}
 	
-	RoundedRectView *roundedRect = [[RoundedRectView alloc] initWithFrame:CGRectMake(1.0, 1.0, width-2, height-2)];
-	roundedRect.rectColor=UIColorFromRGB(0xCBEFF1);
-	roundedRect.strokeColor=UIColorFromRGB(0xFFFFFF);	
-	roundedRect.strokeWidth=0.0;
-	[viewToUse addSubview:roundedRect];
-	[viewToUse sendSubviewToBack:roundedRect];
-	
-	
-	RoundedRectView *wroundedRect = [[RoundedRectView alloc] initWithFrame:CGRectMake(0.0, 0.0, width, height)];
-	wroundedRect.rectColor=UIColorFromRGB(0xFFFFFF);
-	wroundedRect.strokeWidth=0.0;
-	[viewToUse addSubview:wroundedRect];
-	[viewToUse sendSubviewToBack:wroundedRect];
 }
 
 
@@ -383,7 +374,7 @@
 									  timeoutInterval:30.0 ];
 		
 		NSString *parameterString=[parameters urlEncodedString];
-		NSString *msgLength = [NSString stringWithFormat:@"%d", [parameterString length]];
+		NSString *msgLength = [NSString stringWithFormat:@"%lu", (unsigned long)[parameterString length]];
 		[request addValue: msgLength forHTTPHeaderField:@"Content-Length"];
 		[request setHTTPMethod:@"POST"];
 		
@@ -508,6 +499,11 @@ dataProvider:(NSDictionary*)dataProvider withKeys:(NSArray*)keys{
 	[tempTextField removeFromSuperview];
 }
 
+
++ (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber {
+	float diff = bigNumber - smallNumber;
+	return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
+}
 
 
 @end

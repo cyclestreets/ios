@@ -8,21 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
-#import "RMMapViewDelegate.h"
-#import "RouteVO.h"
-#import "RouteLineView.h"
-#import "BlueCircleView.h"
-#import "WEPopoverController.h"
-#import "MapLocationSearchViewController.h"
-#import "UserLocationManager.h"
-#import "WayPointViewController.h"
-#import "RMTileSource.h"
-
-@class CycleStreets;
-@class RouteVO;
-@class Location;
-@class InitialLocation;
-
 
 enum  {
 	MapPlanningStateNoRoute, // no route loaded, no waypoints added
@@ -40,22 +25,10 @@ enum  {
 typedef int MapAlertType;
 
 
-@interface MapViewController : SuperViewController
-<RMMapViewDelegate, CLLocationManagerDelegate, LocationReceiver, PointListProvider, LocationProvider, WEPopoverControllerDelegate,UserLocationManagerDelegate>{
-	
-	
-	Class popoverClass;
+@interface MapViewController : SuperViewController{
 	
 	
 }
 
-
-// class methods
-+ (NSArray *)mapStyles;
-+ (NSObject <RMTileSource> *)tileSource;
-+ (void)zoomMapView:(RMMapView *)mapView toLocation:(CLLocation *)newLocation;
-+ (NSArray *) pointList:(RouteVO *)route withView:(RMMapView *)mapView;
-+ (NSString *)currentMapStyle;
-+ (NSString *)mapAttribution;
 
 @end

@@ -8,6 +8,8 @@
 #import "BUIconButton.h"
 #import "ButtonUtilities.h"
 #import "StyleManager.h"
+#import "ImageUtilties.h"
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @implementation BUIconButton
 @synthesize index;
@@ -40,12 +42,16 @@
 
 -(void)drawUI{
 	
+	BetterLog(@"buttonBackgroundImage=%@",buttonBackgroundImage);
+	
+	
 	if(buttonSize.width==0){
 		UIImage *buttonimage=[[StyleManager sharedInstance] imageForType:[NSString stringWithFormat:@"UIButton_%@_lo",buttonBackgroundImage]];
+		
 		buttonSize=buttonimage.size;
 	}
 	
-	self.button=[ButtonUtilities UIIconButton:buttonBackgroundImage iconImage:buttonIconImage height:buttonSize.height width:buttonSize.width midLeftCap:YES midTopCap:YES];
+	self.button=[ButtonUtilities UIIconButton:buttonBackgroundImage iconImage:buttonIconImage height:buttonSize.height width:buttonSize.width midLeftCap:NO midTopCap:NO];
 	[self addSubview:button];
 	
 	
@@ -60,6 +66,7 @@
 	
 	
 	self.label=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, maxLabelWidth, 10)];
+	label.styleId=@"BUIconActionSheetIconbuttonLabel";
 	label.textAlignment=UITextAlignmentCenter;
 	label.fixedWidth=YES;
 	

@@ -31,6 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "UserLocationManager.h"
 #import "ButtonUtilities.h"
 #import "RouteManager.h"
+#import "UIView+Additions.h"
 
 static double FADE_DELAY = 0;
 static double FADE_DURATION = 1.0;
@@ -63,14 +64,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		 name:GPSLOCATIONFAILED
 		 object:nil];
 		
-		
-		
-		
-		
 	}
 	return self;
 }
 
+
+-(void)removeNotifications{
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:GPSLOCATIONCOMPLETE object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:GPSLOCATIONFAILED object:nil];
+	
+}
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
@@ -98,9 +102,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 
 - (UIView *)loadWelcomeView {
 	
-	
-
-	
 	static NSString *CellIdentifier = @"InitialLocationView";
 	
 	UIView *view = nil;
@@ -114,7 +115,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 			
 			[ButtonUtilities styleIBButton:closeButton type:@"green" text:@"Plan a route"];
 			[closeButton addTarget:self action:@selector(closeOverlayView:) forControlEvents:UIControlEventTouchUpInside];
-			//closeButton.enabled=![CLLocationManager locationServicesEnabled];
+			
 			
 		}
 	}
@@ -142,7 +143,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		}
 		
 		self.mapView.hidden = NO;
-		
+		[self removeNotifications];
 		
 	} else {
 		
@@ -166,9 +167,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 		
 			if (self.welcomeView == nil) {
 				self.welcomeView = [self loadWelcomeView];
+				self.welcomeView.height=self.controller.view.height;
 			}
 			[self.controller.view addSubview:self.welcomeView];
 			
+		}
+		
+		if (hasSelectedRoute==YES) {
+			self.mapView.hidden = NO;
+			[self removeNotifications];
 		}
 		
 	}
@@ -179,12 +186,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 	
 	[UIView animateWithDuration:FADE_DURATION
 						  delay:FADE_DELAY 
-						options:UIViewAnimationCurveLinear 
+						options:UIViewAnimationOptionCurveLinear 
 					 animations:^{ 
 						 self.welcomeView.alpha=0.0f;
 					 }
 					 completion:^(BOOL finished){
 						 self.mapView.hidden = NO;
+						 [self removeNotifications];
 						 [self.welcomeView removeFromSuperview];
 					 }];
 	
@@ -205,7 +213,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 	[self.mapView moveToLatLong:coordinate];
 	self.mapView.hidden = NO;
 	[self.welcomeView setNeedsDisplay];
-	[self save:coordinate];	
+	[self save:coordinate];
+	[self removeNotifications];
 }
 
 
@@ -216,6 +225,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"InitialLocation";
 	self.mapView.contents.zoom = 12;
 	CLLocationCoordinate2D coordinate = [UserLocationManager defaultCoordinate];
 	[self locationDidComplete:coordinate];
+	
+	
 	
 }
 

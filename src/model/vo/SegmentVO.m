@@ -45,9 +45,9 @@ static NSDictionary *roadIcons;
 	NSUInteger s = startTime % 60;
 	
 	if (startTime>3600) {
-		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu:%02lu", (unsigned long)h,(unsigned long)m,(unsigned long)s];
 	}else {
-		return [NSString stringWithFormat:@"%02d:%02d", m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)m,(unsigned long)s];
 	}
 }
 
@@ -146,7 +146,7 @@ static NSDictionary *roadIcons;
 
 - (NSString *) infoString {
 	NSString *hm = [self timeString];
-	NSString *distance = [NSString stringWithFormat:@"%4dm", [self segmentDistance]];
+	NSString *distance = [NSString stringWithFormat:@"%4ldm", (long)[self segmentDistance]];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"(%3.1f miles)", totalMiles];
 	
@@ -177,7 +177,7 @@ static NSDictionary *roadIcons;
 -(void)populateStringDictionary{
 	
 	NSString *hm = [self timeString];
-	NSString *distance = [NSString stringWithFormat:@"%im", [self segmentDistance]];
+	NSString *distance = [NSString stringWithFormat:@"%lim", (long)[self segmentDistance]];
 	float totalMiles = ((float)([self startDistance]+[self segmentDistance]))/1600;
 	NSString *total = [NSString stringWithFormat:@"%3.1f miles", totalMiles];
 	
@@ -226,6 +226,118 @@ static NSDictionary *roadIcons;
 
 
 
+-(CLLocationCoordinate2D)northEast{
+	
+	CLLocationCoordinate2D start = [self segmentStart];
+	CLLocationCoordinate2D end = [self segmentEnd];
+	CLLocationCoordinate2D ne;
+	if (start.latitude < end.latitude) {
+		ne.latitude = end.latitude;
+	} else {
+		ne.latitude = start.latitude;
+	}
+	if (start.longitude < end.longitude) {
+		ne.longitude = end.longitude;
+	} else {
+		ne.longitude = start.longitude;
+	}
+	
+	return ne;
+	
+}
+
+
+-(CLLocationCoordinate2D)southWest{
+	
+	CLLocationCoordinate2D start = [self segmentStart];
+	CLLocationCoordinate2D end = [self segmentEnd];
+	CLLocationCoordinate2D sw;
+	if (start.latitude < end.latitude) {
+		sw.latitude = start.latitude;
+	} else {
+		sw.latitude = end.latitude;
+	}
+	if (start.longitude < end.longitude) {
+		sw.longitude = start.longitude;
+	} else {
+		sw.longitude = end.longitude;
+	}
+	
+	return sw;
+}
+
+
+
+//
+/***********************************************
+ * @description			Mthods to create ne/sw bounding locations for 2 points
+ ***********************************************/
+//
+-(CLLocationCoordinate2D)maxNorthEastForLocation:(CLLocation*)comparelocation{
+	
+	CLLocationCoordinate2D location;
+	
+	CLLocationCoordinate2D ne=self.northEast;
+	
+	// compare n>n, max is lower
+	double selflatitude=ne.latitude;
+	double comparelatitude=comparelocation.coordinate.latitude;
+	location.latitude=MAX(selflatitude, comparelatitude)+0.002;
+	
+	
+	// compare e>e, max is higher
+	double selflongtitude=ne.longitude;
+	double comparelongtitude=comparelocation.coordinate.longitude;
+	location.longitude=MAX(selflongtitude, comparelongtitude)+0.002;
+	
+	return location;
+}
+
+
+-(CLLocationCoordinate2D)maxSouthWestForLocation:(CLLocation*)comparelocation{
+	
+	CLLocationCoordinate2D location;
+	
+	CLLocationCoordinate2D sw=self.southWest;
+	
+	// compare s>s, max is lower
+	double selflatitude=sw.latitude;
+	double comparelatitude=comparelocation.coordinate.latitude;
+	location.latitude=MIN(selflatitude, comparelatitude)-0.006;
+	
+	
+	// compare w>w, max is higher
+	double selflongtitude=sw.longitude;
+	double comparelongtitude=comparelocation.coordinate.longitude;
+	location.longitude=MIN(selflongtitude, comparelongtitude)-0.002;
+	
+	return location;
+}
+
+
+
+
+-(int)segmentElevation{
+	
+	NSMutableArray *earray=[[_elevations componentsSeparatedByString:@","] mutableCopy];
+	
+	if(earray.count>1){
+		
+		[earray removeLastObject];
+		for(int i=0;i<earray.count;i++){
+			NSString *str=earray[i];
+			int value=[str intValue];
+			[earray replaceObjectAtIndex:i withObject:@(value)];
+		}
+		
+		return [[earray valueForKeyPath:@"@avg.self"] intValue];
+	}else{
+		return [earray[0] intValue];
+	}
+}
+
+
+
 static NSString *ROAD_NAME = @"roadName";
 static NSString *PROVISION_NAME = @"provisionName";
 static NSString *TURN_TYPE = @"turnType";
@@ -257,6 +369,7 @@ static NSString *WALK_VALUE = @"walkValue";
     [encoder encodeInteger:self.startDistance forKey:START_DISTANCE];
 	[encoder encodeInteger:self.walkValue forKey:WALK_VALUE];
     [encoder encodeObject:self.pointsArray forKey:POINTS_ARRAY];
+	[encoder encodeObject:self.elevations forKey:@"elevations"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder 
@@ -274,6 +387,7 @@ static NSString *WALK_VALUE = @"walkValue";
         self.startDistance = [decoder decodeIntegerForKey:START_DISTANCE];
 		self.walkValue = [decoder decodeIntegerForKey:WALK_VALUE];
         self.pointsArray = [decoder decodeObjectForKey:POINTS_ARRAY];
+		self.elevations = [decoder decodeObjectForKey:@"elevations"];
     }
     return self;
 }

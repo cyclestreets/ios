@@ -12,7 +12,7 @@
 @protocol BUSegmentedControlDelegate <NSObject> 
 
 @required
--(void)selectedIndexDidChange:(int)index;
+-(void)selectedIndexDidChange:(NSInteger)index;
 
 @end
 
@@ -21,16 +21,16 @@
 	NSMutableArray *items;
 	LayoutBox *container;
 	
-	int width;
-	int height;
+	NSInteger width;
+	NSInteger height;
 	
 	BOOL			invertHighlightTextcolor;
 	BOOL			invertNormalTextcolor;
 	
 	@private
-	int selectedIndex;
+	NSInteger selectedIndex;
 	
-	int itemWidth;
+	NSInteger itemWidth;
 	
 	id <BUSegmentedControlDelegate> __unsafe_unretained delegate;
 }
@@ -38,19 +38,18 @@
 @property (nonatomic, strong) NSMutableArray		* dataProvider;
 @property (nonatomic, strong) NSMutableArray		* items;
 @property (nonatomic, strong) LayoutBox		* container;
-@property (nonatomic, assign) int		 width;
-@property (nonatomic, assign) int		 height;
+@property (nonatomic, assign) NSInteger		 width;
+@property (nonatomic, assign) NSInteger		 height;
 @property (nonatomic, assign) BOOL		 invertHighlightTextcolor;
 @property (nonatomic, assign) BOOL		 invertNormalTextcolor;
-@property (nonatomic, assign) int		 selectedIndex;
-@property (nonatomic, assign) int		 itemWidth;
+@property (nonatomic, assign) NSInteger		 selectedIndex;
+@property (nonatomic, assign) NSInteger		 itemWidth;
 
--(void)setSelectedSegmentIndex:(int)index;
+-(void)setSelectedSegmentIndex:(NSInteger)index;
 -(IBAction)itemWasSelected:(id)sender;
--(IBAction)itemWasReleased:(id)sender;
--(void)removeSegmentAt:(int)index;
--(void)addSegmentAt:(int)index;
--(void)selectItemAtIndex:(int)index;
+-(void)removeSegmentAt:(NSInteger)index;
+-(void)addSegmentAt:(NSInteger)index;
+-(void)selectItemAtIndex:(NSInteger)index;
 -(void)buildInterface;
 
 @end

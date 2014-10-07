@@ -15,7 +15,7 @@
 - (NSDate *)dateAsDateWithoutTime;
 - (NSDate *)dateWithZeroSeconds;
 - (NSDate *)dateWithZeroTime;
-- (int)differenceInDaysTo:(NSDate *)toDate;
+- (NSInteger)differenceInDaysTo:(NSDate *)toDate;
 - (NSString *)formattedDateString;
 - (NSString *)formattedStringUsingFormat:(NSString *)dateFormat;
 - (NSString *)YTTDFrom:(NSDate *)comparisonDate withFormat:(NSString *)dateFormat;

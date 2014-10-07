@@ -264,8 +264,8 @@
 
 +(NSString *)Base64Encode:(NSData *)data{
 	//Point to start of the data and set buffer sizes
-	int inLength = [data length];
-	int outLength = ((((inLength * 4)/3)/4)*4) + (((inLength * 4)/3)%4 ? 4 : 0);
+	NSUInteger inLength = [data length];
+	NSUInteger outLength = ((((inLength * 4)/3)/4)*4) + (((inLength * 4)/3)%4 ? 4 : 0);
 	const char *inputBuffer = [data bytes];
 	char *outputBuffer = malloc(outLength);
 	outputBuffer[outLength] = 0;
@@ -570,7 +570,7 @@ finish:
 
 
 // return formatted string, this is convoluted
-+(NSString*)createCurrencyStringForValue:(NSString*)strvalue useSystemCurrency:(BOOL)useSystem usingSymbol:(NSString*)symbol useCurrencyScale:(int)currencyScale useGrouping:(BOOL)useGrouping{
++(NSString*)createCurrencyStringForValue:(NSString*)strvalue useSystemCurrency:(BOOL)useSystem usingSymbol:(NSString*)symbol useCurrencyScale:(NSInteger)currencyScale useGrouping:(BOOL)useGrouping{
 	
 	// get current user currency properties
 	NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];

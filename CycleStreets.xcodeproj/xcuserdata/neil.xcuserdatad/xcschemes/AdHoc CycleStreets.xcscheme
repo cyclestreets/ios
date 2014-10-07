@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0450"
+   LastUpgradeVersion = "0600"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -26,7 +26,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Adhoc Distribution">
+      buildConfiguration = "Adhoc">
       <Testables>
       </Testables>
       <MacroExpansion>
@@ -44,7 +44,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Adhoc Distribution"
+      buildConfiguration = "Adhoc"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
@@ -69,14 +69,14 @@
          referenceType = "1">
       </LocationScenarioReference>
       <RoutingCoverageFileReference
-         identifier = "../../resources/cyclestreets.geojson">
+         identifier = "../resources/cyclestreets.geojson">
       </RoutingCoverageFileReference>
    </LaunchAction>
    <ProfileAction
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Adhoc Distribution"
+      buildConfiguration = "Adhoc"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
@@ -89,10 +89,10 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Adhoc Distribution">
+      buildConfiguration = "Adhoc">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Adhoc Distribution"
-      revealArchiveInOrganizer = "YES">
+      buildConfiguration = "Adhoc"
+      revealArchiveInOrganizer = "NO">
    </ArchiveAction>
 </Scheme>

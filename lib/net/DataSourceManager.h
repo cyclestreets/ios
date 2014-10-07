@@ -10,7 +10,6 @@
 // passes outgoing & incoming xml packets through to the appropriate XMLParser sub class
 
 #import <Foundation/Foundation.h>
-#import "Model.h"
 #import "SynthesizeSingleton.h"
 
 #define kCACHEDIRECTORY @"datacache"

@@ -17,30 +17,24 @@
 
 @interface PhotoManager : FrameworkObject {
     
-    UploadPhotoVO               *uploadPhoto;
-    
-    CLLocation                  *autoLoadLocation;
-	
-	PhotoMapListVO				*locationPhotoList;
-	
-	BOOL						showingHUD;
-	NSTimer						*retreiveTimer;
 
 }
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoManager);
-@property (nonatomic, strong) UploadPhotoVO		* uploadPhoto;
-@property (nonatomic, strong) CLLocation		* autoLoadLocation;
-@property (nonatomic, strong) PhotoMapListVO		* locationPhotoList;
-@property (nonatomic, assign) BOOL		 showingHUD;
-@property (nonatomic, strong) NSTimer		* retreiveTimer;
+
+@property (nonatomic, strong) PhotoMapListVO			* locationPhotoList;
+@property (nonatomic, strong) PhotoMapListVO			* routePhotoList;
+
+@property (nonatomic, strong) UploadPhotoVO				* uploadPhoto;
+@property (nonatomic, strong) CLLocation				* autoLoadLocation;
 
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;
--(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit;
-
+-(void)retrievePhotosForRouteBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;
 
 -(void)UserPhotoUploadRequest:(UploadPhotoVO*)photo;
 
 -(BOOL)isUserPhoto:(PhotoMapVO*)photo;
+
+
 
 
 @end

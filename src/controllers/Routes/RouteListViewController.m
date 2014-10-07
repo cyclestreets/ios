@@ -12,7 +12,10 @@
 #import "StyleManager.h"
 #import "NSDate+Helper.h"
 #import "RouteManager.h"
-
+#import "UIView+Additions.h"
+#import "GenericConstants.h"
+#import "GlobalUtilities.h"
+#import <PixateFreestyle/PixateFreestyle.h>
 
 @interface FavouriteMenuItem : UIMenuItem 
 @property (nonatomic, strong) NSIndexPath* indexPath;
@@ -23,12 +26,30 @@
 @end
 
 
-@interface RouteListViewController(Private) 
+@interface RouteListViewController()
+
+// ib
+@property (nonatomic, strong) IBOutlet UITableView						* tableView;
+
+@property (nonatomic, assign) BOOL								isSectioned;
+@property (nonatomic, strong) NSMutableArray					* keys;
+@property (nonatomic, strong) NSMutableDictionary				* tableDataProvider;
+@property (nonatomic, strong) NSMutableArray					* rowHeightsArray;
+@property (nonatomic, strong) NSMutableDictionary				* rowHeightDictionary;
+@property (nonatomic, strong) NSMutableArray					* tableSectionArray;
+
+@property (nonatomic, assign) BOOL								tableEditMode;
+@property (nonatomic, strong) NSMutableDictionary				* selectedCellDictionary;
+@property (nonatomic, assign) int								selectedCount;
+@property (nonatomic, strong) UIButton							* deleteButton;
+
+@property (nonatomic, strong) NSIndexPath						* tappedIndexPath;
+@property (nonatomic, strong) NSIndexPath						* indexPathToDelete;
+
+-(void)setTableEditingState:(BOOL)state;
 
 -(void)createRowHeightsArray;
 -(void)createSectionHeadersArray;
-
-- (NSIndexPath *)modelIndexPathforIndexPath:(NSIndexPath *)indexPath;
 
 - (void)cellMenuPress:(UILongPressGestureRecognizer *)recognizer;
 -(void)favouriteRouteMenuSelected:(UIMenuController*)menuController;
@@ -38,22 +59,6 @@
 
 
 @implementation RouteListViewController
-@synthesize isSectioned;
-@synthesize keys;
-@synthesize dataProvider;
-@synthesize tableDataProvider;
-@synthesize rowHeightsArray;
-@synthesize rowHeightDictionary;
-@synthesize tableSectionArray;
-@synthesize dataType;
-@synthesize tableEditMode;
-@synthesize selectedCellDictionary;
-@synthesize selectedCount;
-@synthesize deleteButton;
-@synthesize tableView;
-@synthesize toolView;
-@synthesize tappedIndexPath;
-@synthesize indexPathToDelete;
 
 
 
@@ -117,18 +122,23 @@
 
 -(void)refreshUIFromDataProvider{
 	
-    self.dataProvider=[[SavedRoutesManager sharedInstance] dataProviderForType:dataType];
+	if(_configDict==nil)
+		return;
+	
+	_isSectioned=[_configDict[@"isSectioned"] boolValue];
+	
+    self.dataProvider=[[SavedRoutesManager sharedInstance] dataProviderForType:_configDict[ID]];
     
-    if([dataProvider count]>0){
+    if([_dataProvider count]>0){
         
-        if(isSectioned==YES){
-            self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:dataProvider usingKey:@"dateOnlyString" sortedBy:@"dateString"];
-            self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:tableDataProvider withSearch:NO ascending:NO];
+        if(_isSectioned==YES){
+            self.tableDataProvider=[GlobalUtilities newKeyedDictionaryFromArray:_dataProvider usingKey:@"dateOnlyString" sortedBy:@"dateString"];
+            self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:_tableDataProvider withSearch:NO ascending:NO];
         }
 		
 		[self createRowHeightsArray];
 		
-		if([keys count]>0 && isSectioned==YES){
+		if([_keys count]>0 && _isSectioned==YES){
 			[self createSectionHeadersArray];
 		}
 		
@@ -136,12 +146,12 @@
 		
         [self showViewOverlayForType:kViewOverlayTypeNoResults show:NO withMessage:nil];
     }else{
-		if(isSectioned==YES){
+		if(_isSectioned==YES){
 			self.tableDataProvider=[NSMutableDictionary dictionary];
 			self.keys=[NSMutableArray array];
 		}
 		
-        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",dataType] withIcon:dataType];
+        [self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:[NSString stringWithFormat:@"noresults_%@",_configDict[ID]] withIcon:_configDict[ID]];
     }
     
 	/*
@@ -162,17 +172,11 @@
 	
 	UIType=UITYPE_CONTROLUI;
 	
-    if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
-        isSectioned=YES;
-    }
-	
 }
 
 
 -(void)createPersistentUI{
 	
-	self.toolView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-	toolView.backgroundColor=[UIColor redColor];
 	
 }
 
@@ -186,11 +190,8 @@
 
 -(void)createNonPersistentUI{
 	
-	if(dataProvider==nil){
-		[self refreshUIFromDataProvider];
-	}
 	
-	[self deSelectRowForTableView:tableView];
+	[self deSelectRowForTableView:_tableView];
 }
 
 
@@ -204,8 +205,8 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	if(isSectioned==YES){
-		return [keys count];
+	if(_isSectioned==YES){
+		return [_keys count];
 	}else {
 		return 1;
 	}
@@ -216,12 +217,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-	if(isSectioned==YES){
-		NSString *key=[keys objectAtIndex:section];
-		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+	if(_isSectioned==YES){
+		NSString *key=[_keys objectAtIndex:section];
+		NSMutableArray *sectionDataProvider=[_tableDataProvider objectForKey:key];
 		return [sectionDataProvider count];
 	}else {
-		return [dataProvider count];
+		return [_dataProvider count];
 	}
 
 }
@@ -230,15 +231,15 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{  
 	
-	if (isSectioned==YES) {
-		return [tableSectionArray objectAtIndex:section];
+	if (_isSectioned==YES) {
+		return [_tableSectionArray objectAtIndex:section];
 	}
 	return nil;
 	
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-	if(isSectioned==NO){
+	if(_isSectioned==NO){
 		return 0.0f;
 	}
 	return 24.0f;
@@ -249,13 +250,13 @@
 	
     RouteCellView *cell = (RouteCellView *)[RouteCellView cellForTableView:table fromNib:[RouteCellView nib]];
 	
-	if(isSectioned==YES){
+	if(_isSectioned==YES){
 		
-		if(keys.count==0 || keys==nil)
+		if(_keys.count==0 || _keys==nil)
 			return cell;
 	
-		NSString *key=[keys objectAtIndex:[indexPath section]];
-		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+		NSString *key=[_keys objectAtIndex:[indexPath section]];
+		NSMutableArray *sectionDataProvider=[_tableDataProvider objectForKey:key];
 		
 		RouteVO *route=[sectionDataProvider objectAtIndex:[indexPath row]];
 		cell.dataProvider=route;
@@ -266,7 +267,7 @@
 		
 	}else {
 		
-		RouteVO *route=[dataProvider objectAtIndex:[indexPath row]];
+		RouteVO *route=[_dataProvider objectAtIndex:[indexPath row]];
 		
 		cell.dataProvider=route;
 		cell.isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:route];
@@ -274,7 +275,7 @@
 		[cell populate];
 	}
 	
-	if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
+	if([_configDict[ID] isEqualToString:SAVEDROUTE_RECENTS]){
 		
 		UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellMenuPress:)];
 		[cell addGestureRecognizer:recognizer];
@@ -299,14 +300,14 @@
 	
 	
 	
-	if(tableView.isEditing==NO){
+	if(_tableView.isEditing==NO){
 	
 		if (recognizer.state == UIGestureRecognizerStateBegan) {
 			
 			NSIndexPath *pressedIndexPath = [self.tableView indexPathForRowAtPoint:[recognizer locationInView:self.tableView]];
 			
 			
-			if([dataType isEqualToString:SAVEDROUTE_RECENTS]){
+			if([_configDict[ID] isEqualToString:SAVEDROUTE_RECENTS]){
 				
 				// sue index path to get dp fav state
 				// if no fav, if yes do not show menu
@@ -328,7 +329,7 @@
 				
 			}else{
 				
-				[tableView setEditing:YES animated:YES];
+				[_tableView setEditing:YES animated:YES];
 				
 			}
 			
@@ -352,8 +353,8 @@
 		
         [self resignFirstResponder];
 		
-		NSString *key=[keys objectAtIndex:[menuItem.indexPath section]];
-		NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+		NSString *key=[_keys objectAtIndex:[menuItem.indexPath section]];
+		NSMutableArray *sectionDataProvider=[_tableDataProvider objectForKey:key];
 		RouteVO *route=[sectionDataProvider objectAtIndex:[menuItem.indexPath row]];
 		
 		[[SavedRoutesManager sharedInstance] moveRoute:route toDataProvider:SAVEDROUTE_FAVS];
@@ -372,15 +373,15 @@
 		
 		RouteVO *route=nil;
 		
-		if(isSectioned==YES){
-			NSString *key=[keys objectAtIndex:[indexPath section]];
-			NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+		if(_isSectioned==YES){
+			NSString *key=[_keys objectAtIndex:[indexPath section]];
+			NSMutableArray *sectionDataProvider=[_tableDataProvider objectForKey:key];
 			route=[sectionDataProvider objectAtIndex:[indexPath row]];
 			
 			[delegate doNavigationPush:@"RouteSummary" withDataProvider:route andIndex:SavedRoutesDataTypeRecent];
 			
 		}else{
-			route=[dataProvider objectAtIndex:[indexPath row]];
+			route=[_dataProvider objectAtIndex:[indexPath row]];
 			
 			[delegate doNavigationPush:@"RouteSummary" withDataProvider:route andIndex:SavedRoutesDataTypeFavourite];
 		}
@@ -394,13 +395,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	if(isSectioned==NO){
-		return [[rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
+	if(_isSectioned==NO){
+		return [[_rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
 	}else{
-		NSString *key=[keys objectAtIndex:[indexPath section]];
-		NSMutableArray *arr=[rowHeightDictionary objectForKey:key];
+		NSString *key=[_keys objectAtIndex:[indexPath section]];
+		NSMutableArray *arr=[_rowHeightDictionary objectForKey:key];
 		
-		int rowIndex=[indexPath row];
+		NSInteger rowIndex=[indexPath row];
 		if(rowIndex<[arr count]){
 			CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
 			return cellheight;
@@ -426,7 +427,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	if([dataType isEqualToString:SAVEDROUTE_FAVS]){
+	if([_configDict[ID] isEqualToString:SAVEDROUTE_FAVS]){
 		return YES;
 	}
 	
@@ -446,32 +447,32 @@
        
 -(void)createRowHeightsArray{
     
-    if(isSectioned==NO){
+    if(_isSectioned==NO){
    
-       if(rowHeightsArray==nil){
+       if(_rowHeightsArray==nil){
            self.rowHeightsArray=[[NSMutableArray alloc]init];
        }else{
-           [rowHeightsArray	removeAllObjects];
+           [_rowHeightsArray	removeAllObjects];
        }
        
-       for (int i=0; i<[dataProvider count]; i++) {
+       for (int i=0; i<[_dataProvider count]; i++) {
            
-           RouteVO *route = [dataProvider objectAtIndex:i];
-           [rowHeightsArray addObject:[RouteCellView heightForCellWithDataProvider:route]];
+           RouteVO *route = [_dataProvider objectAtIndex:i];
+           [_rowHeightsArray addObject:[RouteCellView heightForCellWithDataProvider:route]];
            
        }
         
     }else{
         
-        if(rowHeightDictionary==nil){
+        if(_rowHeightDictionary==nil){
             self.rowHeightDictionary=[[NSMutableDictionary alloc]init];
         }else{
-            [rowHeightDictionary removeAllObjects];
+            [_rowHeightDictionary removeAllObjects];
         }
         
-        for( NSString *key in keys){
+        for( NSString *key in _keys){
             
-            NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+            NSMutableArray *sectionDataProvider=[_tableDataProvider objectForKey:key];
 			NSMutableArray *sectionrowheightarray=[[NSMutableArray alloc]init];
         
             for (int i=0; i<[sectionDataProvider count]; i++) {
@@ -480,7 +481,7 @@
                 [sectionrowheightarray addObject:[RouteCellView heightForCellWithDataProvider:route]];
                 
             }
-			[rowHeightDictionary setObject:sectionrowheightarray forKey:key];
+			[_rowHeightDictionary setObject:sectionrowheightarray forKey:key];
             
         }
         
@@ -491,18 +492,18 @@
 
 -(void)createSectionHeadersArray{
 	
-	if(isSectioned==YES){
+	if(_isSectioned==YES){
 		
-		if(tableSectionArray==nil){
+		if(_tableSectionArray==nil){
             self.tableSectionArray=[[NSMutableArray alloc]init];
         }else{
-            [tableSectionArray removeAllObjects];
+            [_tableSectionArray removeAllObjects];
         }
 		
-		for (int i=0;i<[keys count];i++){
+		for (int i=0;i<[_keys count];i++){
 			
 			UIView *headerView=[[UIView	alloc]initWithFrame:CGRectMake(0, 0, 320, 24)];
-			headerView.backgroundColor=[[StyleManager sharedInstance] colorForType:@"darkgreen"];
+			headerView.styleClass=@"GreenView";
 			
 			UILabel *sectionLabel=[[UILabel alloc]initWithFrame:CGRectMake(10.0, 0, 280, 24)];
 			sectionLabel.backgroundColor=[UIColor clearColor];
@@ -510,7 +511,7 @@
 			sectionLabel.font=[UIFont boldSystemFontOfSize:11.5];
 			
 			// create ui string
-			NSString *key=[keys objectAtIndex:i];
+			NSString *key=[_keys objectAtIndex:i];
 			NSDate *sectionDate=[NSDate dateFromString:key];
 			NSDateFormatter *displayFormatter = [[NSDateFormatter alloc] init];
 			[displayFormatter setDateFormat:@"EEEE d MMM YYYY"];
@@ -520,7 +521,7 @@
 			
 			[headerView addSubview:sectionLabel];
 			
-			[tableSectionArray addObject:headerView];
+			[_tableSectionArray addObject:headerView];
 		}
 		
 	}
@@ -543,16 +544,16 @@
 
 -(void)toggleTableEditing{
 	
-	BOOL newstate = !tableEditMode;
+	BOOL newstate = !_tableEditMode;
 	[self setTableEditingState:newstate];
 }
 
 
 -(void)setTableEditingState:(BOOL)state{
 	
-	tableEditMode=state;
+	_tableEditMode=state;
 	
-	[tableView reloadData];
+	[_tableView reloadData];
 	
 }
 
@@ -563,15 +564,15 @@
     
     RouteVO *route=nil;
     
-    if(isSectioned==YES){
-        NSString *key=[keys objectAtIndex:[indexPath section]];
-        NSMutableArray *sectionDataProvider=[tableDataProvider objectForKey:key];
+    if(_isSectioned==YES){
+        NSString *key=[_keys objectAtIndex:[indexPath section]];
+        NSMutableArray *sectionDataProvider=[_tableDataProvider objectForKey:key];
         route=[sectionDataProvider objectAtIndex:[indexPath row]];
     }else{
-        route=[dataProvider objectAtIndex:[indexPath row]];
+        route=[_dataProvider objectAtIndex:[indexPath row]];
     }
 	
-	[[SavedRoutesManager sharedInstance] removeRoute:route fromDataProvider:dataType];
+	[[SavedRoutesManager sharedInstance] removeRoute:route fromDataProvider:_configDict[ID]];
 	
 }
 
@@ -583,7 +584,7 @@
 
 
 - (void)updateDeleteButtonState{
-	deleteButton.enabled=selectedCount>0;
+	_deleteButton.enabled=_selectedCount>0;
 }
 
 

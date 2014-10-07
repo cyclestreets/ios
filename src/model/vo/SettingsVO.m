@@ -93,7 +93,7 @@ static NSString *SHOW_ROUTE_POINT = @"showRoutePoint";
     id theCopy = [[[self class] allocWithZone:zone] init];  // use designated initializer
 	
     [theCopy setPlan:[self.plan copy]];
-    [theCopy setSpeed:[self.speed copy]];
+    [(SettingsVO*)theCopy setSpeed:[self.speed copy]];
     [theCopy setMapStyle:[self.mapStyle copy]];
     [theCopy setImageSize:[self.imageSize copy]];
     [theCopy setRouteUnit:[self.routeUnit copy]];

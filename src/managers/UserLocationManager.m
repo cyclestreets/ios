@@ -11,6 +11,7 @@
 #import "UserLocationManager.h"
 #import "DeviceUtilities.h"
 #import "GlobalUtilities.h"
+#import "GenericConstants.h"
 
 @interface UserLocationManager(Private)
 
@@ -22,7 +23,7 @@
 
 -(BOOL)addSubscriber:(NSString*)subscriberId;
 -(BOOL)removeSubscriber:(NSString*)subscriberId;
--(int)findSubscriber:(NSString*)subscriberId;
+-(NSUInteger)findSubscriber:(NSString*)subscriberId;
 -(void)removeAllSubscribers;
 
 
@@ -55,6 +56,54 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	CLLocation *location=[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     
 	return location;
+}
+
+
+
++(BOOL)isSignificantLocationChange:(CLLocationCoordinate2D)oldCordinate newLocation:(CLLocationCoordinate2D)newCoordinate accuracy:(int)accuracy{
+	
+	static NSNumberFormatter *_coordDecimalPlaceFormatter = nil;
+	if ( _coordDecimalPlaceFormatter == nil )
+		_coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
+	[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[_coordDecimalPlaceFormatter setMaximumFractionDigits:accuracy];
+	
+	
+	
+	// reduce decimal places
+	NSNumber *newlatNumber=[NSNumber numberWithDouble:newCoordinate.latitude];
+	NSNumber *newlongNumber=[NSNumber numberWithDouble:newCoordinate.longitude];
+	NSNumber *newlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlatNumber] doubleValue]];
+	NSNumber *newlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlongNumber] doubleValue]];
+	
+	BetterLog(@"New coord=%@,%@",newlat,newlongt);
+	
+	NSNumber *oldlatNumber=[NSNumber numberWithDouble:oldCordinate.latitude];
+	NSNumber *oldlongNumber=[NSNumber numberWithDouble:oldCordinate.longitude];
+	NSNumber *oldlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:oldlatNumber] doubleValue]];
+	NSNumber *oldlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:oldlongNumber] doubleValue]];
+	
+	BetterLog(@"Old coord=%@,%@",oldlat,oldlongt);
+
+	return (![newlat  isEqualToNumber:oldlat] && ![newlongt isEqualToNumber:oldlongt] );
+	
+}
+
++(NSString*)optimisedCoordString:(CLLocationCoordinate2D)coordinate{
+	
+	static NSNumberFormatter *_coordDecimalPlaceFormatter = nil;
+	if ( _coordDecimalPlaceFormatter == nil )
+		_coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
+	[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[_coordDecimalPlaceFormatter setMaximumFractionDigits:4];
+	
+	NSNumber *newlatNumber=[NSNumber numberWithDouble:coordinate.latitude];
+	NSNumber *newlongNumber=[NSNumber numberWithDouble:coordinate.longitude];
+	NSNumber *newlat=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlatNumber] doubleValue]];
+	NSNumber *newlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:newlongNumber] doubleValue]];
+	
+	return [NSString stringWithFormat:@"%@,%@",newlat,newlongt];
+	
 }
 
 
@@ -103,7 +152,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 - (BOOL)hasSubscriber:(NSString*)subscriber{
 	
-	int index=[self findSubscriber:subscriber];
+	NSUInteger index=[self findSubscriber:subscriber];
 	
 	return index!=NSNotFound;
     
@@ -174,6 +223,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+-(BOOL)requestAuthorisation{
+	
+	#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+	if(IS_OS_8_OR_LATER){
+		[locationManager requestAlwaysAuthorization];
+		[self startUpdatingLocationForSubscriber:SYSTEM];
+		return YES;
+	}
+	return NO;
+}
+
+
 #pragma mark CoreLocation updating
 
 //
@@ -185,9 +246,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	if(locationManager==nil){
 			self.locationManager = [[CLLocationManager alloc] init];
-			locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+			locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 			locationManager.distanceFilter =kCLDistanceFilterNone;
-            locationManager.delegate=self;
+			locationManager.delegate=self;
+		
     }
 		
 }
@@ -218,7 +280,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 -(BOOL)addSubscriber:(NSString*)subscriberId{
 	
-	int index=[self findSubscriber:subscriberId];
+	NSUInteger index=[self findSubscriber:subscriberId];
 	
 	if(index==NSNotFound){
 		
@@ -232,7 +294,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 -(BOOL)removeSubscriber:(NSString*)subscriberId{
 	
-	int index=[self findSubscriber:subscriberId];
+	NSUInteger index=[self findSubscriber:subscriberId];
 	
 	if(index!=NSNotFound){
 		
@@ -250,9 +312,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
--(int)findSubscriber:(NSString*)subscriberId{
+-(NSUInteger)findSubscriber:(NSString*)subscriberId{
 	
-	int index=[locationSubscribers indexOfObject:subscriberId];
+	NSUInteger index=[locationSubscribers indexOfObject:subscriberId];
 	
 	return index;
 }
@@ -321,14 +383,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	
-	BetterLog(@"");
 	
+	// option #1 last request was recent and we already have a location use this
 	NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
 	
-    if (locationAge > 5.0) return;
+	BetterLog(@"locationAge=%f bestEffortAtLocation=%@ didFindDeviceLocation=%i",locationAge,bestEffortAtLocation,didFindDeviceLocation);
+	
+    if (locationAge < 5.0){
+		
+		if(bestEffortAtLocation!=nil){
+			
+			didFindDeviceLocation=YES;
+			[self UserLocationWasUpdated];
+			if (locationState==kConnectLocationStateSingle)
+				[self stopUpdatingLocationForSubscriber:SYSTEM];
+			return;
+		}
+		
+	}
+	
+	// option #2  accuracy is poor
     if (newLocation.horizontalAccuracy < 0) return;
-    // test the measurement to see if it is more accurate than the previous measurement
+	
+    // option #3 test for new location's accuracy compared to the last one
     if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
+		
         self.bestEffortAtLocation = newLocation;
         
 		BetterLog(@"newLocation.horizontalAccuracy=%f",newLocation.horizontalAccuracy);
@@ -338,21 +417,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		
         if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
 			
-			BetterLog(@"Location found!");
-            
 			self.bestEffortAtLocation = newLocation;
 			didFindDeviceLocation=YES;
 			
         }
+	
+	// option #4 we have a location with desired accuracy
     }else{
 		
-		if (bestEffortAtLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-			
-			didFindDeviceLocation=YES;
-			
-        }
-		
-		
+		didFindDeviceLocation=YES;
 	}
 	
 	
@@ -369,9 +442,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 			break;
 		case kConnectLocationStateTracking:
 			
-			// GPSLOCATIONUPDATE is now sent in main loop
+			[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONUPDATE object:bestEffortAtLocation userInfo:nil];
 			
-            break;
+		break;
 			
 	}
     
@@ -404,7 +477,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 //
 -(void)UserLocationWasUpdated{
 	
-	BetterLog(@"");
+	BetterLog(@"bestEffortAtLocation=%@",bestEffortAtLocation);
 	
 	if(bestEffortAtLocation!=nil)
 		[[NSNotificationCenter defaultCenter] postNotificationName:GPSLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
@@ -425,6 +498,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	if(subscriberId==SYSTEM){
 		
 		[self removeAllSubscribers];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:GPSSYSTEMLOCATIONCOMPLETE object:bestEffortAtLocation userInfo:nil];
 		
 	}else{
 		

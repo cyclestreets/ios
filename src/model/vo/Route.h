@@ -28,23 +28,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <CoreLocation/CoreLocation.h>
 @class Segment;
 
-@interface Route : NSObject {
-	NSMutableArray *segments;
-	NSDictionary *header;
-	
-	NSString		*userRouteName; // user editable route name, displayed if set
-}
+@interface Route : NSObject
+
 @property (nonatomic, strong)	NSMutableArray		*segments;
 @property (nonatomic, strong)	NSDictionary		*header;
 @property (nonatomic, strong)	NSString		*userRouteName;
 
 
 // getters
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*lengthString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*speedString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*dateString;
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*planString;
+@property ( nonatomic, readonly)	NSString	*timeString;
+@property ( nonatomic, readonly)	NSString	*lengthString;
+@property ( nonatomic, readonly)	NSString	*speedString;
+@property ( nonatomic, readonly)	NSString	*dateString;
+@property ( nonatomic, readonly)	NSString	*planString;
 
 
 

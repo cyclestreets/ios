@@ -36,11 +36,57 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ViewUtilities.h"
 #import "ButtonUtilities.h"
 #import "StringUtilities.h"
+#import "GenericConstants.h"
+#import <PixateFreestyle/PixateFreestyle.h>
+#import "UIViewController+BUAdditions.h"
 
 static NSString *const STRINGID=@"account";
 
 
-@interface AccountViewController(Private)
+#define kSubmitButtonTag 499
+#define	kActivityTag 500
+#define	kMessageFieldTag 501
+#define kpasswordExtent 4
+#define	kUsernameExtent 4
+
+
+@interface AccountViewController()
+
+@property (nonatomic, strong)		IBOutlet UIView                        * activeView;
+@property (nonatomic, strong)		IBOutlet UIScrollView                  * scrollView;
+@property (nonatomic, strong)		IBOutlet UIPageControl                 * pageControl;
+@property (nonatomic, strong)		IBOutlet UIView                        * pageControlView;
+@property (nonatomic, strong)		IBOutlet UILabel                       * leftLabel;
+@property (nonatomic, strong)		IBOutlet UILabel                       * rightLabel;
+@property (nonatomic, strong)		LayoutBox                              * contentView;
+@property (nonatomic, strong)		IBOutlet UITextField                   * loginUsernameField;
+@property (nonatomic, strong)		IBOutlet UITextField                   * loginPasswordField;
+@property (nonatomic, strong)		IBOutlet UIButton                      * loginButton;
+@property (nonatomic, strong)		IBOutlet UIView                        * loginView;
+@property (nonatomic, strong)		IBOutlet UITextField                   * registerUsernameField;
+@property (nonatomic, strong)		IBOutlet UITextField                   * registerVisibleNameField;
+@property (nonatomic, strong)		IBOutlet UITextField                   * registerEmailField;
+@property (nonatomic, strong)		IBOutlet UITextField                   * registerPsswordField;
+@property (nonatomic, strong)		IBOutlet UIButton                      * registerButton;
+@property (nonatomic, strong)		IBOutlet UIView                        * registerView;
+@property (nonatomic, strong)		IBOutlet UITextField                   * retrieveEmailField;
+@property (nonatomic, strong)		IBOutlet UIView                        * retrieveView;
+@property (nonatomic, strong)		IBOutlet UILabel                       * loggedInasField;
+@property (nonatomic, strong)		IBOutlet UIButton                      * logoutButton;
+@property (nonatomic, strong)		IBOutlet UISwitch                      * saveLoginButton;
+@property (nonatomic, strong)		IBOutlet UIView                        * loggedInView;
+@property (nonatomic)		NSInteger                                            activePage;
+@property (nonatomic)		NSInteger                                            activeFieldIndex;
+@property (nonatomic)		CGRect                                         activeFieldFrame;
+@property (nonatomic, strong)		NSMutableArray                         * activeFieldArray;
+@property (nonatomic, strong)		IBOutlet UITextField                   * activeField;
+@property (nonatomic)		BOOL                                           keyboardIsShown;
+@property (nonatomic)		CGPoint                                        viewOffset;
+@property (nonatomic, strong)		IBOutlet UIButton                      * activeFormSubmitButton;
+@property (nonatomic, strong)		IBOutlet UIActivityIndicatorView       * activeActivityView;
+@property (nonatomic, strong)		IBOutlet UILabel                       * activeFormMessageLabel;
+@property (nonatomic)		UserAccountMode                                viewMode;
+@property (nonatomic, strong)		NSMutableArray                         * formFieldArray;
 
 -(void)didReceiveRegisterResponse:(NSDictionary*)dict;
 -(void)didReceiveLoginResponse:(NSDictionary*)dict;
@@ -49,47 +95,23 @@ static NSString *const STRINGID=@"account";
 
 -(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)messageid;
 
+
+-(void)clearFields;
+-(void)closeKeyboard;
+-(void)saveLoginControlChanged:(id)sender;
+- (IBAction) logoutButtonSelected:(id)sender ;
+- (IBAction)registerButtonSelected:(id)sender;
+- (IBAction)loginButtonSelected:(id)sender;
+-(IBAction)closeKeyboardFromUI:(id)sender;
+- (IBAction)retrievePasswordButtonSelected:(id)sender;
+-(void)updateFormPage;
+-(IBAction)didCancelButton:(id)sender;
+
 @end
 
 
 @implementation AccountViewController
-@synthesize activeView;
-@synthesize scrollView;
-@synthesize pageControl;
-@synthesize pageControlView;
-@synthesize leftLabel;
-@synthesize rightLabel;
-@synthesize contentView;
-@synthesize loginUsernameField;
-@synthesize loginPasswordField;
-@synthesize loginButton;
-@synthesize loginView;
-@synthesize registerUsernameField;
-@synthesize registerVisibleNameField;
-@synthesize registerEmailField;
-@synthesize registerPsswordField;
-@synthesize registerButton;
-@synthesize registerView;
-@synthesize retrieveEmailField;
-@synthesize retrieveView;
-@synthesize loggedInasField;
-@synthesize logoutButton;
-@synthesize saveLoginButton;
-@synthesize loggedInView;
-@synthesize activePage;
-@synthesize activeFieldIndex;
-@synthesize activeFieldFrame;
-@synthesize activeFieldArray;
-@synthesize activeField;
-@synthesize keyboardIsShown;
-@synthesize viewOffset;
-@synthesize activeFormSubmitButton;
-@synthesize activeActivityView;
-@synthesize activeFormMessageLabel;
-@synthesize viewMode;
-@synthesize formFieldArray;
-@synthesize isModal;
-@synthesize shouldAutoClose;
+
 
 
 //
@@ -152,7 +174,7 @@ static NSString *const STRINGID=@"account";
 	
 	BetterLog(@"");
 	
-	viewMode=kUserAccountLoggedIn;
+	_viewMode=kUserAccountLoggedIn;
 	
 	[self createPersistentUI];
 	
@@ -164,68 +186,94 @@ static NSString *const STRINGID=@"account";
 	
 	[super viewWillAppear:animated];
 	
-	BetterLog(@"");
-	
-	viewMode=[UserAccount sharedInstance].accountMode;
+	_viewMode=[UserAccount sharedInstance].accountMode;
 	
 	[self createNonPersistentUI];
+	
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+	
+	[self forceActiveFieldResign];
+	
+	[super viewWillDisappear:animated];
+}
+
+
+// for some reason [self.view endEditing:YES] does not work for this view
+-(void)forceActiveFieldResign{
+	
+	if(_activeField!=nil)
+		[_activeField resignFirstResponder];
+	
 }
 
 
 -(void)createPersistentUI{
 	
 	// set up scroll view with layoutbox for sub items
-	contentView=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	contentView.backgroundColor=[UIColor clearColor];
-	contentView.layoutMode=BUHorizontalLayoutMode;
-	contentView.paddingTop=10;
-	[scrollView addSubview:contentView];
+	_contentView=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	_contentView.backgroundColor=[UIColor clearColor];
+	_contentView.layoutMode=BUHorizontalLayoutMode;
+	_contentView.paddingTop=10;
+	[_scrollView addSubview:_contentView];
 	
-	activePage=0;
-	scrollView.pagingEnabled=YES;
-	scrollView.delegate=self;
-	pageControl.hidesForSinglePage=YES;
-	[pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+	_activePage=0;
+	_scrollView.pagingEnabled=YES;
+	_scrollView.delegate=self;
+	_pageControl.hidesForSinglePage=YES;
+	[_pageControl addTarget:self action:@selector(pageControlValueChanged:) forControlEvents:UIControlEventValueChanged];
 	
 	
 	// add ui and targets to form buttons
 	UIButton *button=nil;
-	button=(UIButton*)[loginView viewWithTag:kSubmitButtonTag];
-	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Sign in"];
+	button=(UIButton*)[_loginView viewWithTag:kSubmitButtonTag];
+	button.styleId=@"DarkGreyButton";
+	[button setTitle:@"Login" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	button=(UIButton*)[registerView viewWithTag:kSubmitButtonTag];
-	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Create account"];
+	
+	button=(UIButton*)[_registerView viewWithTag:kSubmitButtonTag];
+	button.styleId=@"DarkGreyButton";
+	[button setTitle:@"Create account" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	button=(UIButton*)[retrieveView viewWithTag:kSubmitButtonTag];
-	[ButtonUtilities styleIBButton:button type:@"grey" text:@"Submit"];
+	
+	button=(UIButton*)[_retrieveView viewWithTag:kSubmitButtonTag];
+	button.styleId=@"DarkGreyButton";
+	[button setTitle:@"Submit" forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(retrievePasswordButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// logged in UI
-	[ButtonUtilities styleIBButton:logoutButton type:@"grey" text:@"Clear signin details"];
-	[logoutButton addTarget:self action:@selector(logoutButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	[saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];
+	_logoutButton.styleId=@"DarkGreyButton";
+	[_logoutButton setTitle:@"Clear signin details" forState:UIControlStateNormal];
+	[_logoutButton addTarget:self action:@selector(logoutButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+	[_saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];
 	
 	
 	
-	formFieldArray=[[NSMutableArray alloc]init];
-	NSMutableArray *rar=[[NSMutableArray alloc]initWithObjects:registerUsernameField,registerPsswordField,registerVisibleNameField,registerEmailField,nil];
-	[formFieldArray addObject:rar];
-	NSMutableArray *lar=[[NSMutableArray alloc]initWithObjects:loginUsernameField,loginPasswordField,nil];
-	[formFieldArray addObject:lar];
+	_formFieldArray=[[NSMutableArray alloc]init];
+	NSMutableArray *rar=[[NSMutableArray alloc]initWithObjects:_registerUsernameField,_registerPsswordField,_registerVisibleNameField,_registerEmailField,nil];
+	[_formFieldArray addObject:rar];
+	NSMutableArray *lar=[[NSMutableArray alloc]initWithObjects:_loginUsernameField,_loginPasswordField,nil];
+	[_formFieldArray addObject:lar];
+	
+	
+	
 	/*
 		NSMutableArray *par=[[NSMutableArray alloc]initWithObjects:retrieveEmailField,nil];
 	[formFieldArray addObject:par];
 	[par release];
 	*/
 	
-	if(isModal==YES)
-		[self createNavigationBarUI];
 	
 	
-	if(isModal==YES){
-		CGRect pframe=pageControlView.frame;
+	
+	if(_isModal==YES){
+		CGRect pframe=_pageControlView.frame;
 		pframe.origin.y=pframe.origin.y+TABBARHEIGHT;
-		pageControlView.frame=pframe;
+		_pageControlView.frame=pframe;
+		
+		UIBarButtonItem *closebutton=[[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(didCancelButton:)];
+		self.navigationItem.rightBarButtonItem=closebutton;
 	}
 	
 }
@@ -233,39 +281,39 @@ static NSString *const STRINGID=@"account";
 
 -(void)createNonPersistentUI{
 	
-	[activeActivityView stopAnimating];
-	[contentView removeAllSubViews];
+	[_activeActivityView stopAnimating];
+	[_contentView removeAllSubViews];
 	
-	switch(viewMode){
+	switch(_viewMode){
 		
 		case kUserAccountLoggedIn:
 			
-			[contentView addSubview:loggedInView];
+			[_contentView addSubview:_loggedInView];
 			
-			loggedInasField.text=[UserAccount sharedInstance].user.username;
+			_loggedInasField.text=[UserAccount sharedInstance].user.username;
 			BOOL sl=[UserAccount sharedInstance].user.autoLogin;
-			saveLoginButton.on=sl;
-			rightLabel.text=@"";
-			leftLabel.text=@"";
+			_saveLoginButton.on=sl;
+			_rightLabel.text=@"";
+			_leftLabel.text=@"";
 			
-			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
+			[_scrollView setContentSize:CGSizeMake(_contentView.width, _contentView.height)];
 		break;
 			
 		case kUserAccountNotLoggedIn:
 			
-			loginUsernameField.text=@"";
-			loginPasswordField.text=@"";
+			_loginUsernameField.text=@"";
+			_loginPasswordField.text=@"";
 			
-			[contentView addSubview:registerView];
-			[contentView addSubview:loginView];
+			[_contentView addSubview:_registerView];
+			[_contentView addSubview:_loginView];
 			//[contentView addSubview:retrieveView];
 			
-			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
+			[_scrollView setContentSize:CGSizeMake(_contentView.width, _contentView.height)];
 		break;
 		
 		case kUserAccountCredentialsExist:
 			
-			[scrollView setContentSize:CGSizeMake(contentView.width, contentView.height)];
+			[_scrollView setContentSize:CGSizeMake(_contentView.width, _contentView.height)];
 			
 			[[UserAccount sharedInstance] loginExistingUser];
 			
@@ -274,35 +322,18 @@ static NSString *const STRINGID=@"account";
 	
 
 	// update page support
-	pageControl.numberOfPages=[contentView.items count];
-	activePage=0;
-	pageControl.currentPage=activePage;
-	[pageControl updateCurrentPageDisplay];
-	scrollView.scrollEnabled=contentView.width>SCREENWIDTH;
+	_pageControl.numberOfPages=[_contentView.items count];
+	_activePage=0;
+	_pageControl.currentPage=_activePage;
+	[_pageControl updateCurrentPageDisplay];
+	_scrollView.scrollEnabled=_contentView.width>SCREENWIDTH;
 	[self updateFormPage];
 	
-	[scrollView scrollRectToVisible:CGRectMake(0, 0, SCREENWIDTH, 1) animated:YES];
+	[_scrollView scrollRectToVisible:CGRectMake(0, 0, SCREENWIDTH, 1) animated:YES];
 	
-	self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
 	
 }
 
-
--(void)createNavigationBarUI{
-	
-	if(navigation==nil){
-	
-        self.navigation=[[CustomNavigtionBar alloc]init];
-        self.navigationController.navigationBar.tintColor=UIColorFromRGB(0x008000);
-        navigation.delegate=self;
-        navigation.leftItemType=BUNavNoneType;
-        navigation.rightItemType=UIKitButtonType;
-        navigation.rightButtonTitle=@"Close";
-        navigation.navigationItem=self.navigationItem;
-        [navigation createNavigationUI];
-	
-	}
-}
 
 
 
@@ -315,25 +346,26 @@ static NSString *const STRINGID=@"account";
 
 -(void)showResponseMessageUIForView:(UIView*)iview withMessage:(NSString*)messageid{
 	
-	activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
-	activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
-	activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
+	_activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
+	_activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
+	_activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
 	
-	[activeActivityView stopAnimating];
-	activeFormMessageLabel.text=[[StringManager sharedInstance] stringForSection:@"account" andType:messageid];
-	activeFormSubmitButton.enabled=YES;
+	[_activeActivityView stopAnimating];
+	
+	_activeFormMessageLabel.text=[[StringManager sharedInstance] stringForSection:@"account" andType:messageid];
+	_activeFormSubmitButton.enabled=YES;
 	
 }
 
 -(void)showMessageUIForView:(UIView*)iview withMessage:(NSString*)message{
 	
-	activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
-	activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
-	activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
+	_activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
+	_activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
+	_activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
 	
-	[activeActivityView stopAnimating];
-	activeFormMessageLabel.text=[[StringManager sharedInstance] stringForSection:STRINGID andType:message];
-	activeFormSubmitButton.enabled=YES;
+	[_activeActivityView stopAnimating];
+	_activeFormMessageLabel.text=[[StringManager sharedInstance] stringForSection:STRINGID andType:message];
+	_activeFormSubmitButton.enabled=YES;
 	
 }
 
@@ -343,13 +375,13 @@ static NSString *const STRINGID=@"account";
 	
 	[self closeKeyboard];
 	
-	activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
-	activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
-	activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
+	_activeFormSubmitButton=(UIButton*) [iview viewWithTag:kSubmitButtonTag];
+	_activeActivityView=(UIActivityIndicatorView*) [iview viewWithTag:kActivityTag];
+	_activeFormMessageLabel=(UILabel*) [iview viewWithTag:kMessageFieldTag];
 	
-	[activeActivityView startAnimating];
-	activeFormMessageLabel.text=@"";
-	activeFormSubmitButton.enabled=NO;
+	[_activeActivityView startAnimating];
+	_activeFormMessageLabel.text=@"";
+	_activeFormSubmitButton.enabled=NO;
 }
 
 	
@@ -368,18 +400,18 @@ static NSString *const STRINGID=@"account";
 	
 	if([state isEqualToString:SUCCESS]){
 		
-		viewMode=[UserAccount sharedInstance].accountMode;
-		[self showMessageUIForView:loginView withMessage:@""];
+		_viewMode=[UserAccount sharedInstance].accountMode;
+		[self showMessageUIForView:_loginView withMessage:@""];
 		[self createNonPersistentUI];
 		
-		if(isModal==YES && shouldAutoClose==YES){
+		if(_isModal==YES && _shouldAutoClose==YES){
 			[self doNavigationSelector:RIGHT];
              
 			[[NSNotificationCenter defaultCenter] postNotificationName:USERACCOUNTLOGINSUCCESS object:nil];
 		}
 		
 	}else if ([state isEqualToString:ERROR]) {
-		[self showResponseMessageUIForView:loginView withMessage:[dict objectForKey:MESSAGE]];
+		[self showResponseMessageUIForView:_loginView withMessage:[dict objectForKey:MESSAGE]];
 	}
 	
 }
@@ -392,12 +424,18 @@ static NSString *const STRINGID=@"account";
 	
 	if([state isEqualToString:SUCCESS]){
 		
-		viewMode=[UserAccount sharedInstance].accountMode;
-		[self showMessageUIForView:registerView withMessage:@""];
+		_viewMode=[UserAccount sharedInstance].accountMode;
+		[self showMessageUIForView:_registerView withMessage:@""];
 		[self createNonPersistentUI];
 		
+		if(_isModal==YES && _shouldAutoClose==YES){
+			[self doNavigationSelector:RIGHT];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:USERACCOUNTREGISTERSUCCESS object:nil];
+		}
+		
 	}else if ([state isEqualToString:ERROR]) {
-		[self showResponseMessageUIForView:registerView withMessage:[dict objectForKey:MESSAGE]];
+		[self showResponseMessageUIForView:_registerView withMessage:[dict objectForKey:MESSAGE]];
 	}
 }
 
@@ -406,9 +444,9 @@ static NSString *const STRINGID=@"account";
 	NSString	*state=[dict objectForKey:@"state"];
 	
 	if([state isEqualToString:SUCCESS]){
-		[self showMessageUIForView:retrieveView withMessage:[dict objectForKey:MESSAGE]];
+		[self showMessageUIForView:_retrieveView withMessage:[dict objectForKey:MESSAGE]];
 	}else if ([state isEqualToString:ERROR]) {
-		[self showResponseMessageUIForView:retrieveView withMessage:[dict objectForKey:MESSAGE]];
+		[self showResponseMessageUIForView:_retrieveView withMessage:[dict objectForKey:MESSAGE]];
 	}
 }
 
@@ -421,9 +459,9 @@ static NSString *const STRINGID=@"account";
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)sc{
 	BetterLog(@"");
-	CGPoint offset=scrollView.contentOffset;
-	activePage=offset.x/SCREENWIDTH;
-	pageControl.currentPage=activePage;
+	CGPoint offset=_scrollView.contentOffset;
+	_activePage=offset.x/SCREENWIDTH;
+	_pageControl.currentPage=_activePage;
 	[self updateFormPage];
 }
 
@@ -432,33 +470,33 @@ static NSString *const STRINGID=@"account";
 	BetterLog(@"");
 	UIPageControl *pc=(UIPageControl*)sender;
 	CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
-	[scrollView setContentOffset:offset animated:YES];
+	[_scrollView setContentOffset:offset animated:YES];
 	
 }
 -(void)scrollViewDidEndScrollingAnimation:(UIScrollView*)sc{
 	BetterLog(@"");
-	[self scrollViewDidEndDecelerating:scrollView];
+	[self scrollViewDidEndDecelerating:_scrollView];
 }
 
 
 -(void)updateFormPage{
 	
-	if(viewMode==kUserAccountNotLoggedIn){
-		activeFieldArray=[formFieldArray objectAtIndex:activePage];
+	if(_viewMode==kUserAccountNotLoggedIn){
+		_activeFieldArray=[_formFieldArray objectAtIndex:_activePage];
 	}
 	
-	if(viewMode==kUserAccountLoggedIn){
-		rightLabel.text=@"";
-		leftLabel.text=@"";
+	if(_viewMode==kUserAccountLoggedIn){
+		_rightLabel.text=@"";
+		_leftLabel.text=@"";
 		return;
 	}
 	
-	if(activePage==0){
-		leftLabel.text=@"";
-		rightLabel.text=@"Sign in";
+	if(_activePage==0){
+		_leftLabel.text=@"";
+		_rightLabel.text=@"Sign in";
 	}else {
-		leftLabel.text=@"Create account";
-		rightLabel.text=@"";
+		_leftLabel.text=@"Create account";
+		_rightLabel.text=@"";
 	}
 
 }
@@ -473,19 +511,19 @@ static NSString *const STRINGID=@"account";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
 	
-	BetterLog(@"activeFieldIndex=%i",activeFieldIndex);
-	int newfieldIndex=activeFieldIndex+1;
+	BetterLog(@"activeFieldIndex=%li",(long)_activeFieldIndex);
+	NSInteger newfieldIndex=_activeFieldIndex+1;
 	
-	if(newfieldIndex==[activeFieldArray count]){
-		[activeField resignFirstResponder];
+	if(newfieldIndex==[_activeFieldArray count]){
+		[_activeField resignFirstResponder];
 		return NO;
 	}
 	
-	activeFieldIndex=newfieldIndex;
-	if(activeFieldIndex<[activeFieldArray count]){
-		activeField=[activeFieldArray objectAtIndex:activeFieldIndex];
+	_activeFieldIndex=newfieldIndex;
+	if(_activeFieldIndex<[_activeFieldArray count]){
+		_activeField=[_activeFieldArray objectAtIndex:_activeFieldIndex];
 	}
-	[activeField becomeFirstResponder];
+	[_activeField becomeFirstResponder];
 	
 	return YES;
 	
@@ -495,16 +533,16 @@ static NSString *const STRINGID=@"account";
 
 - (void)textFieldDidBeginEditing:(UITextField*)textField{
 	
-	activeFieldIndex=textField.tag;
-	activeField=textField;
-	activeFieldFrame=activeField.frame;
+	_activeFieldIndex=textField.tag;
+	_activeField=textField;
+	_activeFieldFrame=_activeField.frame;
 }
 
 
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 -(void)keyboardWillShow:(NSNotification*)notification{
 	
-    if (keyboardIsShown) {
+    if (_keyboardIsShown) {
         return;
     }
 	
@@ -518,10 +556,10 @@ static NSString *const STRINGID=@"account";
     CGSize keyboardSize = [boundsValue CGRectValue].size;
 	
 	// store current offset for hide
-	viewOffset=scrollView.contentOffset;
+	_viewOffset=_scrollView.contentOffset;
     
 	// resize scroll view to available viewable height
-    CGRect viewFrame = scrollView.frame; 
+    CGRect viewFrame = _scrollView.frame; 
 	int taboffset=0;
 	if(self.navigationController.tabBarController.hidesBottomBarWhenPushed==NO)
 		taboffset=TABBARHEIGHT+22;
@@ -531,12 +569,12 @@ static NSString *const STRINGID=@"account";
 	[UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:0.3];
-    [scrollView setFrame:viewFrame];
+    [_scrollView setFrame:viewFrame];
     [UIView commitAnimations];
 	
 	// get and map nested field rect to main view coordinate 
-	CGRect textFieldRect = activeFieldFrame;
-	CGRect newRect=[activeField convertRect:textFieldRect toView:self.scrollView ];
+	CGRect textFieldRect = _activeFieldFrame;
+	CGRect newRect=[_activeField convertRect:textFieldRect toView:self.scrollView ];
 	
 	textFieldRect=CGRectMake(newRect.origin.x, textFieldRect.origin.y, textFieldRect.size.width, textFieldRect.size.height);
 	
@@ -544,43 +582,43 @@ static NSString *const STRINGID=@"account";
 	CGFloat ypos=textFieldRect.origin.y;
 	if(ypos>0 && ypos>(viewFrame.size.height/2)){
 		textFieldRect.origin.y += 10;
-		[scrollView scrollRectToVisible:textFieldRect animated:YES];
+		[_scrollView scrollRectToVisible:textFieldRect animated:YES];
 	}else {
-		[scrollView scrollRectToVisible:textFieldRect animated:YES];
+		[_scrollView scrollRectToVisible:textFieldRect animated:YES];
 	}
 	
 	
-    keyboardIsShown = YES;
+    _keyboardIsShown = YES;
 }
 
 
 - (void)keyboardWillHide:(NSNotification*)notification{
 	
-	if(!keyboardIsShown)
+	if(!_keyboardIsShown)
 		return;
 	
     NSDictionary* userInfo = [notification userInfo];
 	
     NSValue* boundsValue = [userInfo objectForKey:UIKeyboardBoundsUserInfoKey];
     CGSize keyboardSize = [boundsValue CGRectValue].size;
-    CGRect viewFrame = scrollView.frame;
+    CGRect viewFrame = _scrollView.frame;
 	
     viewFrame.size.height += (keyboardSize.height);
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationBeginsFromCurrentState:YES];
 	[UIView setAnimationDuration:0.3];
-	[scrollView setFrame:viewFrame];
+	[_scrollView setFrame:viewFrame];
 	[UIView commitAnimations];
 	
-	CGRect oldFrame=CGRectMake(viewOffset.x, viewOffset.y, viewFrame.size.width , viewFrame.size.height );
-	[scrollView scrollRectToVisible:oldFrame animated:YES];
+	CGRect oldFrame=CGRectMake(_viewOffset.x, _viewOffset.y, viewFrame.size.width , viewFrame.size.height );
+	[_scrollView scrollRectToVisible:oldFrame animated:YES];
 	
-    keyboardIsShown = NO;
+    _keyboardIsShown = NO;
 }
 
 
 -(void)closeKeyboard{
-	[activeField resignFirstResponder];
+	[_activeField resignFirstResponder];
 }
 
 -(IBAction)closeKeyboardFromUI:(id)sender{
@@ -598,25 +636,25 @@ static NSString *const STRINGID=@"account";
 - (IBAction)loginButtonSelected:(id)sender {
 	
 	// validate fields
-	NSString  *efieldString=loginUsernameField.text;
+	NSString  *efieldString=_loginUsernameField.text;
 	BOOL eresult=[efieldString length]>kUsernameExtent;
 	
-	NSString  *pfieldString=loginPasswordField.text;
+	NSString  *pfieldString=_loginPasswordField.text;
 	BOOL presult=[pfieldString length]>kpasswordExtent;
 	
 	if(presult==YES && eresult==YES){
 		
-		[self showRequestUIForView:loginView];
+		[self showRequestUIForView:_loginView];
 		
-		[[UserAccount sharedInstance] loginUserWithUserName:efieldString andPassword:pfieldString];
+		[[UserAccount sharedInstance] loginUserWithUserName:efieldString andPassword:pfieldString displayHUD:YES ];
 		
 	}else {
 		if(eresult==NO){
-			[self showMessageUIForView:loginView withMessage:@"error_syntax_username"];
+			[self showMessageUIForView:_loginView withMessage:@"error_syntax_username"];
 			return;
 		}
 		if(presult==NO){
-			[self showMessageUIForView:loginView withMessage:@"error_syntax_password"];
+			[self showMessageUIForView:_loginView withMessage:@"error_syntax_password"];
 			return;
 		}
 	}
@@ -629,38 +667,38 @@ static NSString *const STRINGID=@"account";
 	
 	BetterLog(@"");
 	
-	NSString  *efieldString=registerUsernameField.text;
+	NSString  *efieldString=_registerUsernameField.text;
 	BOOL eresult=[efieldString length]>kUsernameExtent;
 	
-	NSString  *pfieldString=registerPsswordField.text;
+	NSString  *pfieldString=_registerPsswordField.text;
 	BOOL presult=[pfieldString length]>kpasswordExtent;
 	
-	NSString  *visfieldString=registerVisibleNameField.text;
+	NSString  *visfieldString=_registerVisibleNameField.text;
 	BOOL visresult=[visfieldString length]>kUsernameExtent;
 	
-	NSString  *emfieldString=registerEmailField.text;
+	NSString  *emfieldString=_registerEmailField.text;
 	BOOL emresult=[StringUtilities validateEmail:emfieldString]; 
 	
 	
 	if(presult==YES && eresult==YES && emresult==YES && visresult==YES){
 		
-		[self showRequestUIForView:registerView];
+		[self showRequestUIForView:_registerView];
 		
-		[[UserAccount sharedInstance] registerUserWithUserName:registerUsernameField.text 
-												   andPassword:registerPsswordField.text 
-												   visibleName:registerVisibleNameField.text 
-														 email:registerEmailField.text];
+		[[UserAccount sharedInstance] registerUserWithUserName:_registerUsernameField.text 
+												   andPassword:_registerPsswordField.text 
+												   visibleName:_registerVisibleNameField.text 
+														 email:_registerEmailField.text];
 		
 	}else {
 		
 		if (eresult==NO) {
-			[self showMessageUIForView:registerView withMessage:@"error_syntax_username"];
+			[self showMessageUIForView:_registerView withMessage:@"error_syntax_username"];
 		}else if(presult==NO) {
-			[self showMessageUIForView:registerView withMessage:@"error_syntax_password"];
+			[self showMessageUIForView:_registerView withMessage:@"error_syntax_password"];
 		}else if(visresult==NO) {
-			[self showMessageUIForView:registerView withMessage:@"error_syntax_visiblename"];
+			[self showMessageUIForView:_registerView withMessage:@"error_syntax_visiblename"];
 		}else if(emresult==NO) {
-			[self showMessageUIForView:registerView withMessage:@"error_syntax_email"];
+			[self showMessageUIForView:_registerView withMessage:@"error_syntax_email"];
 		}
 
 		
@@ -689,7 +727,7 @@ static NSString *const STRINGID=@"account";
 -(IBAction)logoutButtonSelected:(id)sender{
 	
 	[[UserAccount sharedInstance] resetUserAccount];
-	viewMode=[UserAccount sharedInstance].accountMode;
+	_viewMode=[UserAccount sharedInstance].accountMode;
 	[self createNonPersistentUI];
 	
 }
@@ -733,21 +771,6 @@ static NSString *const STRINGID=@"account";
 	self.loginPasswordField.text = @"";
 	self.registerEmailField.text = @"";
 	self.registerVisibleNameField.text = @"";
-}
-
-- (void) viewDidUnload {
-    self.loginUsernameField = nil;
-    self.loginPasswordField = nil;
-    self.loginButton = nil;
-    self.registerUsernameField = nil;
-    self.registerVisibleNameField = nil;
-    self.registerEmailField = nil;
-    self.registerPsswordField = nil;
-    self.registerButton = nil;
-    self.loggedInasField = nil;
-    self.logoutButton = nil;
-    self.saveLoginButton = nil;
-	[super viewDidUnload];
 }
 
 

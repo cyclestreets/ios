@@ -16,6 +16,8 @@
 #import "ExpandedUILabel.h"
 #import "AppDelegate.h"
 #import "GradientView.h"
+#import <PixateFreestyle/PixateFreestyle.h>
+#import "GenericConstants.h"
 
 #define COLUMNCOUNT 3
 
@@ -50,37 +52,36 @@
 
 -(void)generateUI{
 	
+	
 	self.frame=CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, FULLSCREENHEIGHT);
-	self.backgroundColor=UIColorFromRGBAndAlpha(0x000000, 0.5);
+	
+	self.backgroundColor=UIColorFromRGBAndAlpha(0x000000, 0.1);
+	
 	
 	self.viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	_viewContainer.backgroundColor=UIColorFromRGBAndAlpha(0x000000, 0.7);
+	_viewContainer.backgroundColor=UIColorFromRGB(0xFFFFFF);
 	_viewContainer.fixedWidth=YES;
 	_viewContainer.alignMode=BUCenterAlignMode;
 	_viewContainer.layoutMode=BUVerticalLayoutMode;
+	_viewContainer.paddingTop=10;
 	_viewContainer.itemPadding=20;
 	_viewContainer.paddingBottom=20;
 	[self addSubview:_viewContainer];
 	
-	GradientView *highlight=[[GradientView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	highlight.backgroundColor=[UIColor clearColor];
-	[highlight setColoursWithCGColors:UIColorFromRGBAndAlpha(0xFFFFFF, 0.5).CGColor :UIColorFromRGBAndAlpha(0xFFFFFF, 0.0).CGColor];
-	[_viewContainer addSubview:highlight];
-	
-	
+		
 	if(_title!=nil){
 		
 		ExpandedUILabel *title=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 		title.fixedWidth=YES;
-		title.font=[UIFont boldSystemFontOfSize:15];
-		title.textColor=[UIColor whiteColor];
+		title.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+		title.textColor=[UIColor darkGrayColor];
 		title.textAlignment=UITextAlignmentCenter;
 		title.text=_title;
 		
 		[_viewContainer addSubview:title];
 		
 	}
-	
+		
 	
 	// grid
 	LayoutBox *rowContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, TABBARHEIGHT)];
@@ -102,7 +103,10 @@
 		}
 		
 		BUIconButton *iconButton=[[BUIconButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
+		iconButton.clipsToBounds=YES;
 		iconButton.buttonBackgroundImage=@"BUActionSheetIcon";
+		iconButton.labelFont=[UIFont fontWithName:@"HelveticaNeue-Light" size:14];
+		iconButton.textColor=@"grey";
 		iconButton.buttonIconImage=[BUIconActionSheet iconForType:type];
 		iconButton.text=[BUIconActionSheet titleForType:type];
 		[iconButton drawUI];
@@ -121,7 +125,11 @@
 	[_viewContainer addSubview:rowContainer];
 	
 	
-	UIButton *closeButton=[ButtonUtilities UIButtonWithFixedWidth:200 height:40 type:@"red" text:@"Cancel" minFont:15];
+	UIButton *closeButton=[UIButton buttonWithType:UIButtonTypeSystem];
+	closeButton.styleId=@"BUIconActionSheetClosebutton";
+	[closeButton setTitle:@"Cancel" forState:UIControlStateNormal];
+	closeButton.size=CGSizeMake(200, 36);
+	
 	[closeButton addTarget:self action:@selector(closeButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[_viewContainer addSubview:closeButton];
 	
@@ -146,6 +154,9 @@
 		[UIView animateWithDuration:0.3 animations:^{
 			self.y=0;
 			tabBar.alpha=0;
+			
+			self.backgroundColor=UIColorFromRGBAndAlpha(0x000000, 0.3);
+			
 		} completion:^(BOOL finished) {
 			
 		}];
@@ -190,7 +201,7 @@
 -(IBAction)iconButtonSelectedAtIndex:(id)sender{
 	
 	UIButton *button=(UIButton*)sender;
-	int index=button.tag;
+	NSInteger index=button.tag;
 	
 	if([_delegate respondsToSelector:@selector(actionSheetClickedButtonWithType:)]){
 		[_delegate actionSheetClickedButtonWithType:index];

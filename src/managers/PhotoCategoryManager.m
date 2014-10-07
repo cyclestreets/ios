@@ -9,12 +9,10 @@
 #import "PhotoCategoryManager.h"
 #import "ValidationVO.h"
 #import "CycleStreets.h"
-#import "NetRequest.h"
 #import "PhotoCategoryVO.h"
-#import "NetRequest.h"
-#import "NetResponse.h"
+#import "BUNetworkOperation.h"
 #import "GlobalUtilities.h"
-
+#import "BUDataSourceManager.h"
 
 @interface PhotoCategoryManager()
 
@@ -23,7 +21,6 @@
 -(void)convertLegacyDataProvider;
 
 -(void)requestRemoteCategories;
--(void)requestRemoteCategoriesResponse:(ValidationVO*)validation;
 
 -(void)createDefaultCategoryDataProvider;
 
@@ -32,12 +29,10 @@
 
 @implementation PhotoCategoryManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
-@synthesize dataProvider;
-@synthesize validUntilTimeStamp;
-@synthesize legacyConversionRequired;
 
 
--(id)init{
+
+-(instancetype)init{
 	
 	self = [super init];
 	
@@ -47,14 +42,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 		CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 		self.dataProvider = [cycleStreets.files photoCategories];
 		
-		legacyConversionRequired=YES;
+		_legacyConversionRequired=YES;
 		
 		// check validaty of cache, note shite legacy dict storage!
-		NSString *validuntil = [[[dataProvider objectForKey:@"validuntil"] objectAtIndex:0] valueForKey:@"validuntil"];
+		NSString *validuntil = [[[_dataProvider objectForKey:@"validuntil"] objectAtIndex:0] valueForKey:@"validuntil"];
 		if(validuntil==nil){
-			validuntil=[dataProvider objectForKey:@"validUntilTimeStamp"];
+			validuntil=[_dataProvider objectForKey:@"validUntilTimeStamp"];
 			if(validuntil!=nil)
-				legacyConversionRequired=NO;
+				_legacyConversionRequired=NO;
 		}
 		
 		
@@ -72,12 +67,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 		}
 		
 		if (expired) {
-			legacyConversionRequired=NO;
+			_legacyConversionRequired=NO;
 			[self requestRemoteCategories];
 		}else {
 			
 			self.validUntilTimeStamp=validuntil;
-			if(legacyConversionRequired==YES)
+			if(_legacyConversionRequired==YES)
 				[self convertLegacyDataProvider];
 			
 			
@@ -111,7 +106,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
 	BetterLog(@"response.dataid=%@",response.dataid);
@@ -127,10 +122,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 			
 			if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] ){
 				// only overwrite the dp with a default if we dont have one, otherwise we need to convert
-				if(dataProvider==nil){ 
+				if(_dataProvider==nil){ 
 					[self createDefaultCategoryDataProvider];
 				}else{
-					if(legacyConversionRequired==YES)
+					if(_legacyConversionRequired==YES)
 						[self convertLegacyDataProvider];
 				}
 			}
@@ -148,32 +143,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
 									 
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
     request.dataid=PHOTOCATEGORIES;
     request.requestid=ZERO;
     request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
     
-    NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+    request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self requestRemoteCategoriesResponse:operation];
+		
+	};
 	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
 }
 
 
--(void)requestRemoteCategoriesResponse:(ValidationVO*)validation{
+-(void)requestRemoteCategoriesResponse:(BUNetworkOperation*)response{
 	
 	
-	switch (validation.validationStatus) {
+	switch (response.validationStatus) {
 			
 		case ValidationCategoriesSuccess:
 		{
 			
-			self.dataProvider=validation.responseDict;
+			self.dataProvider=response.dataProvider;
 			
 			CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-			[cycleStreets.files setPhotoCategories:dataProvider];
+			[cycleStreets.files setPhotoCategories:_dataProvider];
 			
 			
 		}
@@ -185,6 +183,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 			[self createDefaultCategoryDataProvider];
 		}	
 		break;
+			
+		default:
+			break;
 			
 	}
 	
@@ -199,32 +200,34 @@ Note: old mc=c  old c=f
 -(void)convertLegacyDataProvider{
 	
 	
-	NSArray *catarr=[dataProvider objectForKey:@"category"];
+	NSArray *catarr=[_dataProvider objectForKey:@"category"];
 	NSMutableArray *newcatarr=[NSMutableArray array];
 	for(NSDictionary *dict in catarr){
 		PhotoCategoryVO *vo=[[PhotoCategoryVO alloc]init];
+		vo.categoryType=PhotoCategoryTypeCategory;
 		vo.name=[dict objectForKey:@"name"];
 		vo.tag=[dict objectForKey:@"tag"];
 		[newcatarr addObject:vo];
 	}
 	
 	
-	NSArray *feaarr=[dataProvider objectForKey:@"metacategory"];
+	NSArray *feaarr=[_dataProvider objectForKey:@"metacategory"];
 	NSMutableArray *newfeaarr=[NSMutableArray array];
 	for(NSDictionary *dict in feaarr){
 		PhotoCategoryVO *vo=[[PhotoCategoryVO alloc]init];
+		vo.categoryType=PhotoCategoryTypeFeature;
 		vo.name=[dict objectForKey:@"name"];
 		vo.tag=[dict objectForKey:@"tag"];
 		[newfeaarr addObject:vo];
 	}
 	
-	[dataProvider setObject:newcatarr forKey:@"feature"];
-	[dataProvider setObject:newfeaarr forKey:@"category"];
-	[dataProvider removeObjectForKey:@"validuntil"];
-	[dataProvider setObject:validUntilTimeStamp forKey:@"validUntilTimeStamp"];
+	[_dataProvider setObject:newcatarr forKey:@"feature"];
+	[_dataProvider setObject:newfeaarr forKey:@"category"];
+	[_dataProvider removeObjectForKey:@"validuntil"];
+	[_dataProvider setObject:_validUntilTimeStamp forKey:@"validUntilTimeStamp"];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.files setPhotoCategories:dataProvider];
+	[cycleStreets.files setPhotoCategories:_dataProvider];
 	
 }
 
@@ -232,7 +235,7 @@ Note: old mc=c  old c=f
 
 -(PhotoCategoryVO*)valueObjectForType:(NSString*)type atIndex:(int)index{
 	
-	return [[dataProvider objectForKey:type] objectAtIndex:index];
+	return [[_dataProvider objectForKey:type] objectAtIndex:index];
 	
 }
 

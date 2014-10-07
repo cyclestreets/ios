@@ -90,6 +90,8 @@
 	
 	initialised=YES;
 	
+	self.clipsToBounds=YES;
+	
 }
 
 // Called when creating containe by code
@@ -177,7 +179,7 @@
 	
 }
 
--(void)removeSubviewAtIndex:(int)index{
+-(void)removeSubviewAtIndex:(NSInteger)index{
 	
 	UIView *view=[self viewAtIndex:index];
 	
@@ -192,7 +194,7 @@
 
 -(void)removeLastSubview{
 	
-	int index=[items count]-1;
+	NSInteger index=[items count]-1;
 	if(index>-1){
 		UIView *view=[items objectAtIndex:index];
 		if([self hasSubView:view])
@@ -654,7 +656,7 @@
 		{
 			// BURightAlignMode support
 			int xpos=self.width-paddingRight;
-			int startindex=[items count]-1;
+			NSInteger startindex=[items count]-1;
 			//
 			
 			for(int i=0;i<[items count];i++){
@@ -804,7 +806,7 @@
 }
 
 
--(UIView*)viewAtIndex:(int)index{
+-(UIView*)viewAtIndex:(NSInteger)index{
 	
 	if(index<[items count]){
 		return [items objectAtIndex:index];
@@ -854,6 +856,17 @@
 		NSLog(@"view.frame=%fx%f at %f,%f",cframe.size.width,cframe.size.height, cframe.origin.x,cframe.origin.y);
 	}
 	
+}
+
+
+-(int)viewHeight{
+    
+    return height;
+}
+
+-(int)viewWidth{
+    
+    return width;
 }
 
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import "RMMarker.h"
+
 
 enum  {
 	
@@ -22,9 +22,9 @@ typedef int WayPointType;
 @interface WayPointVO : NSObject
 
 @property(nonatomic,strong)  NSString						*name;
+@property(nonatomic,strong)  NSString						*locationname;
 @property(nonatomic,assign)  CLLocationCoordinate2D			coordinate;
 @property(nonatomic,assign)  WayPointType					waypointType;
-@property(nonatomic,strong)  RMMarker						*marker;
 
 
 // getters

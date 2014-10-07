@@ -7,7 +7,7 @@
 //
 
 #import "AppConfigManager.h"
-#import "DataSourceManager.h"
+#import "BUDataSourceManager.h"
 
 
 @interface AppConfigManager(Private)
@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
 
 
 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -106,7 +106,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
 	
 	if(servicesexist==YES){
         NSMutableDictionary *dict=[[NSMutableDictionary alloc] initWithContentsOfFile:[self serviceDataPath]];
-		[DataSourceManager sharedInstance].services=dict;
+		[BUDataSourceManager sharedInstance].services=dict;
 	}else {
         
         if([delegate respondsToSelector:@selector(startupFailedWithError:)]){

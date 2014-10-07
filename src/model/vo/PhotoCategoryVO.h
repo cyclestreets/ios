@@ -16,12 +16,10 @@ typedef int PhotoCategoryType;
 
 @interface PhotoCategoryVO : NSObject<NSCoding>{
 	
-	NSString			*name;
-	NSString			*tag;
-	
-	
 	
 }
-@property (nonatomic, strong) NSString		* name;
-@property (nonatomic, strong) NSString		* tag;
+@property (nonatomic, strong) NSString				* name;
+@property (nonatomic, strong) NSString				* tag;
+@property (nonatomic,assign)  PhotoCategoryType		categoryType;
+
 @end

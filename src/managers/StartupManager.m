@@ -7,12 +7,10 @@
 //
 
 #import "StartupManager.h"
-#import "ConnectionValidator.h"
 #import "UserSettingsManager.h"
-#import "DataSourceManager.h"
+#import "BUDataSourceManager.h"
 #import "GlobalUtilities.h"
 #import "StyleManager.h"
-#import "Model.h"
 #import	"AppConstants.h"
 #import "ImageCache.h"
 #import "StringManager.h"
@@ -21,6 +19,7 @@
 #import "RouteManager.h"
 #import "SavedRoutesManager.h"
 #import "PhotoManager.h"
+#import "PhotoCategoryManager.h"
 
 @interface StartupManager(Private)
 
@@ -28,6 +27,9 @@
 - (NSString*) bundleServicePath;
 -(void)startupComplete;
 -(void)startupFailed;
+
+-(void)didReceiveNotification:(NSNotification*)notification;
+
 @end
 
 
@@ -50,7 +52,7 @@
 
 
 
--(id)init{
+-(instancetype)init{
 	
 	if (self = [super init]){
 		
@@ -102,13 +104,14 @@
 
 	
 	// load ds manager
-	[DataSourceManager sharedInstance];
+	[BUDataSourceManager sharedInstance];
 	// no fatal startup errors for DataSourceManager
 	
 	
 	[RouteManager sharedInstance];
 	[SavedRoutesManager sharedInstance];
 	[PhotoManager sharedInstance];
+	[PhotoCategoryManager sharedInstance];
 	
 	
 	[UserAccount sharedInstance];

@@ -15,7 +15,7 @@
 @synthesize responseDict;
 
 
--(ValidationStatusCode)validationStatus{
+-(ValidationStatusCode)validationStatusCode{
 	
 	ValidationStatusCode codecheck=[self isReturnCodeValid];
 	if(codecheck==ValdationValidSuccessCode || codecheck==ValdationValidFailureCode){

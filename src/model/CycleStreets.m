@@ -21,27 +21,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  CycleStreets.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 02/03/2010.
 //
 
 #import "CycleStreets.h"
 #import "Files.h"
 #import "PhotoCategoryManager.h"
 #import "SynthesizeSingleton.h"
+#import "SettingsManager.h"
+#import "AppConstants.h"
+#import "GenericConstants.h"
+#import "CSMapSourceProtocol.h"
+
+#import "CSOpenCycleMapSource.h"
+#import "CSOpenStreetMapSource.h"
+#import "CSOrdnanceSurveyStreetViewMapSource.h"
+#import "CSAppleMapSource.h"
+
+const NSInteger MAX_ZOOM_LOCATION = 18;
+const NSInteger MAX_ZOOM_SEGMENT = 20;
+const NSInteger MAX_ZOOM_LOCATION_ACCURACY = 200;
 
 @implementation CycleStreets
 SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
-@synthesize appDelegate;
-@synthesize files;
-@synthesize APIKey;
-@synthesize userAgent;
-
-
-
 
 
 - (id) init {
-	if (self = [super init]) {
+	
+	self = [super init];
+	
+	if (self) {
+		
 		self.files = [[Files alloc] init];
 		
 		NSBundle *mainBundle = [NSBundle mainBundle];
@@ -64,10 +73,106 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		NSString *appName=[infoDict objectForKey:@"CFBundleName"];
 		self.userAgent=[NSString stringWithFormat:@"%@ iOS / %@",appName,version];
 		
-		[PhotoCategoryManager sharedInstance];
 	}
 	return self;
 }
+
+
+
+
++ (NSArray *)mapStyles {
+	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,MAPPING_BASE_OS,MAPPING_BASE_APPLE,nil];
+}
+
+
++ (NSString *)currentMapStyle {
+	NSString *mapStyle = [SettingsManager sharedInstance].dataProvider.mapStyle;
+	if (mapStyle == nil) {
+		mapStyle = [[[self class] mapStyles] objectAtIndex:0];
+	}
+	
+	return mapStyle;
+}
+
++ (NSString *)mapAttribution {
+	NSString *mapStyle = [[self class] currentMapStyle];
+	NSString *mapAttribution = nil;
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]) {
+		
+		mapAttribution = MAPPING_ATTRIBUTION_OSM;
+		
+	} else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]) {
+		
+		mapAttribution = MAPPING_ATTRIBUTION_OPENCYCLEMAP;
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]) {
+		
+		mapAttribution = MAPPING_ATTRIBUTION_OS;
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE]) {
+		
+		mapAttribution = nil;
+		
+	}
+	return mapAttribution;
+	
+}
+
+
++(CSMapSource*)activeMapSource{
+	
+	NSString *mapStyle = [CycleStreets currentMapStyle];
+	
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]){
+		
+		return [[CSOpenStreetMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]){
+		
+		return [[CSOpenCycleMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]){
+		
+		return [[CSOrdnanceSurveyStreetViewMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE]){
+		
+		return [[CSAppleMapSource alloc]init];
+	}
+	
+	return [[CSOpenStreetMapSource alloc]init];
+	
+	
+}
+
+
++(NSString*)tileTemplate{
+	
+	NSString *mapStyle = [CycleStreets currentMapStyle];
+	
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]){
+		
+		return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]){
+		
+		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]){
+		
+		return @"http://c.os.openstreetmap.org/sv/{z}/{x}/{y}.png";
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE]){
+		
+		return MAPPING_TILETEMPLATE_APPLE;
+	}
+	
+	return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
+	
+}
+
+
+
 
 
 @end

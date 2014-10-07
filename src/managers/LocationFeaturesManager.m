@@ -8,8 +8,7 @@
 
 #import "LocationFeaturesManager.h"
 #import "ValidationVO.h"
-#import "NetRequest.h"
-#import "NetResponse.h"
+#import "BUNetworkOperation.h"
 #import "HudManager.h"
 #import "GlobalUtilities.h"
 #import "CycleStreets.h"
@@ -53,7 +52,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationFeaturesManager);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	NSString	*dataid=response.dataid;
 	
 	BetterLog(@"response.dataid=%@",response.dataid);
@@ -86,14 +85,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationFeaturesManager);
 	// api for this?
 	
 	NSDictionary *getparameters=[NSDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key", nil];
-	NSMutableDictionary *parameters=[NSDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters", nil];
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters", nil];
 	
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=LOCATIONFEATURES;
 	request.requestid=[GlobalUtilities GUIDString];
 	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=SYSTEM;
+	request.source=DataSourceRequestCacheTypeUseCache;
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];

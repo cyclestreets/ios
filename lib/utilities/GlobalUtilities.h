@@ -8,7 +8,6 @@
 // stores all global methods and constants
 
 #import <Foundation/Foundation.h>
-//#import "TestFlight.h"
 #import "AppConstants.h"
 
 
@@ -62,7 +61,6 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,[NSString stringWithFormat
 #define LogRect(RECT) NSLog(@"(%0.0f, %0.0f) %0.0f x %0.0f", RECT.origin.x, RECT.origin.y, RECT.size.width, RECT.size.height)
 
 
-
 /// iPAD
 #if UI_USER_INTERFACE_IDIOM==UIUserInterfaceIdiomPad
 	#define DEVICESCREEN_WIDTH  1024.0
@@ -104,6 +102,14 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,[NSString stringWithFormat
 
 #define ISRETINADISPLAY (([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) ? [[UIScreen mainScreen] scale] > 1.0 : NO)
 
+#define SUPPORTS_UIAPPEARANCE ([[[UIDevice currentDevice] systemVersion] floatValue]>=5.0)
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_5 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0f)
+#define IS_IPHONE_4 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 480.0f)
+
+#define SCREENPIXELWIDTH (ISRETINADISPLAY ? 640 : 320)
 
 /*
  *  System Versioning Preprocessor Macros
@@ -159,13 +165,13 @@ typedef int LayoutBoxLayoutMode;
 }
 
 // returns height of text for given width
-+(float) calculateHeightOfTextFromWidth:(NSString*) text: (UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode;
++(float) calculateHeightOfTextFromWidth:(NSString*)text :(UIFont*)withFont :(float)width :(NSLineBreakMode)lineBreakMode;
 
 // returns height of text for given width with fixed line count
-+(float) calculateHeightOfTextFromWidthWithLineCount:(UIFont*)withFont: (float)width :(UILineBreakMode)lineBreakMode :(int)linecount;
++(float) calculateHeightOfTextFromWidthWithLineCount: (UIFont*)withFont :(float)width :(NSLineBreakMode)lineBreakMode :(int)linecount;
 
 // returns width of text for single line 
-+(float) calculateWidthOfText:(NSString*) text: (UIFont*)withFont;
++(float) calculateWidthOfText:(NSString*)text :(UIFont*)withFont;
 
 // creates old style view based corner rectangle with optional header
 +(void)createCornerContainer:(UIView *)viewToUse forWidth:(CGFloat)width forHeight:(CGFloat)height drawHeader:(BOOL)header;
@@ -208,5 +214,9 @@ typedef int LayoutBoxLayoutMode;
 +(int)inflateArrayCountForArray:(NSMutableArray*)arr;
 
 + (void)dismissKeyboard:(UIView*)view;
+
+
++ (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber;
+
 
 @end

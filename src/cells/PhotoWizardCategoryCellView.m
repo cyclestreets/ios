@@ -8,11 +8,14 @@
 
 #import "PhotoWizardCategoryCellView.h"
 #import "GlobalUtilities.h"
+#import "PhotoCategoryVO.h"
+
+@interface PhotoWizardCategoryCellView()
+
+
+@end
 
 @implementation PhotoWizardCategoryCellView
-@synthesize itemLabel;
-@synthesize dataProvider;
-
 
 
 -(void)initialise{
@@ -24,7 +27,7 @@
 
 -(void)populate{
 	
-	itemLabel.text=dataProvider.name;
+	_itemLabel.text=_dataProvider.name;
 	
 	
 }

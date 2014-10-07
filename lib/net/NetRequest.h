@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AppConstants.h"
+#import "GenericConstants.h"
 
 typedef enum{
 	
@@ -23,7 +24,7 @@ typedef enum{
 	NSString				*dataid; // data id
 	NSMutableString			*url;
 	requestStatus			status;
-	NSDictionary			*parameters; // params to send
+	NSMutableDictionary		*parameters; // params to send
 	NSString				*requestType; // same as dataid??
 	NSString				*requestid; // request id. for cacheing
 	int						revisonId; // revision id for update checking
@@ -37,7 +38,7 @@ typedef enum{
 @property (nonatomic, strong) NSString		* dataid;
 @property (nonatomic, strong) NSMutableString		* url;
 @property (nonatomic, assign) requestStatus		 status;
-@property (nonatomic, strong) NSDictionary		* parameters;
+@property (nonatomic, strong) NSMutableDictionary		* parameters;
 @property (nonatomic, strong) NSString		* requestType;
 @property (nonatomic, strong) NSString		* requestid;
 @property (nonatomic, assign) int		 revisonId;

@@ -82,7 +82,7 @@
 -(void)createLeftNavItem{
 	
 	// basic arrow only back style
-	if(leftItemType==BUNavBackType){
+	if([leftItemType isEqualToString:BUNavBackType]){
 		
 		self.backButton=[ButtonUtilities UISimpleImageButton:@"navbarback"];
 		
@@ -92,7 +92,7 @@
 		[navigationItem setLeftBarButtonItem:barbutton animated:YES];
 	
 	// standard back with text label style
-	}else if (leftItemType==BUNavBackStandardType) {
+	}else if ([leftItemType  isEqualToString:BUNavBackStandardType]) {
 		
         UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
 		button.frame=CGRectMake(0, 0, 52, 30);
@@ -147,7 +147,7 @@
 	
 	
 	// 2 line type with title and info (normally race/date combo)
-	if(titleType==BUNavTitleReadoutType){
+	if([titleType  isEqualToString:BUNavTitleReadoutType]){
 	
 		LayoutBox *labelContainer=[[LayoutBox alloc]init];
         labelContainer.layoutMode=BUVerticalLayoutMode;
@@ -156,7 +156,7 @@
 		
 		CGFloat lineheight;
 		// title label
-		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"title"] :[UIFont systemFontOfSize:18] :320 :UILineBreakModeHeadTruncation];
+		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"title"] :[UIFont systemFontOfSize:18] :320 :NSLineBreakByTruncatingHead];
 		ExpandedUILabel *tlabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 50, lineheight)];
 		tlabel.multiline=NO;
 		self.titleLabel=tlabel;
@@ -167,7 +167,7 @@
 		titleLabel.text=[dataProvider objectForKey:@"title"];
 		[labelContainer addSubview:titleLabel];
 		// sub label
-		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"subtitle"] :[UIFont systemFontOfSize:10] :200 :UILineBreakModeHeadTruncation];
+		lineheight=[GlobalUtilities calculateHeightOfTextFromWidth:[dataProvider objectForKey:@"subtitle"] :[UIFont systemFontOfSize:10] :200 :NSLineBreakByTruncatingHead];
         ExpandedUILabel *slabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 50, lineheight)];
 		slabel.multiline=NO;
 		self.subtitleLabel=slabel;
@@ -181,7 +181,7 @@
 		[navigationItem setTitleView:labelContainer];
 	
 	// logo image type
-	}else if(titleType==BUNavTitleImageType) {
+	}else if([titleType  isEqualToString:BUNavTitleImageType]) {
 				
 		UIImage *image=[[StyleManager sharedInstance] imageForType:titleImage];
 		UIImageView *ititle=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
@@ -190,7 +190,7 @@
 		[navigationItem setTitleView:ititle];
 		
 	// default iOS type
-	}else if(titleType==BUNavTitleDefaultType) {
+	}else if([titleType  isEqualToString:BUNavTitleDefaultType]) {
 		
         UILabel *tlabel=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, NAVIGATIONHEIGHT)];
 		self.titleLabel=tlabel;
@@ -331,7 +331,7 @@
 
 -(void)updateLeftItemTitle:(NSString*)str{
 	
-	if(leftItemType==BUNavBackStandardType){
+	if([leftItemType  isEqualToString:BUNavBackStandardType]){
 		leftItemTitle=str;
 		
 		[backButton setTitle:leftItemTitle forState:UIControlStateNormal];
@@ -382,7 +382,7 @@
 
 -(IBAction)doGenericEvent:(id)sender{
 	
-	// TODO: get tag for sender for index of right items array if using array based construction
+	
 	if([delegate respondsToSelector:@selector(doNavigationSelector:)]){
 		[delegate doNavigationSelector:RIGHT];  // for now just send default
 	}

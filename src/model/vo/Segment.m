@@ -95,7 +95,7 @@ static NSDictionary *roadIcons;
 		CGPoint point;
 		point.x = [[XYs objectAtIndex:X] doubleValue];
 		point.y = [[XYs objectAtIndex:X+1] doubleValue];
-		p.p = point;
+		p.point = point;
 		[result addObject:p];
 	}
 	return result;

@@ -40,7 +40,7 @@
 
 
 
-- (SegmentVO *) segmentAtIndex:(int)index {
+- (SegmentVO *) segmentAtIndex:(NSInteger)index {
 	return [segments objectAtIndex:index];
 }
 
@@ -50,9 +50,32 @@
  ***********************************************/
 //
 
-- (int) numSegments {
+- (NSInteger) numSegments {
 	return [segments count];
 }
+
+
+-(NSInteger)coordCount{
+	
+	NSInteger count=0;
+	
+	for (int i = 0; i < [self numSegments]; i++) {
+		
+		if (i == 0)
+			count++;
+		
+		SegmentVO *segment = [self segmentAtIndex:i];
+		NSArray *allPoints = [segment allPoints];
+		for (int i = 1; i < [allPoints count]; i++) {
+			count++;
+		}
+	}
+	
+	return count;
+	
+}
+
+
 
 - (NSString *) nameString {
 	
@@ -66,14 +89,14 @@
 
 -(NSString*)timeString{
 	
-	NSUInteger h = [self time] / 3600;
-	NSUInteger m = ([self time] / 60) % 60;
-	NSUInteger s = [self time] % 60;
+	NSInteger h = [self time] / 3600;
+	NSInteger m = ([self time] / 60) % 60;
+	NSInteger s = [self time] % 60;
 	
 	if ([self time]>3600) {
-		return [NSString stringWithFormat:@"%02d:%02d:%02d", h,m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu:%02lu", (unsigned long)h,(unsigned long)m,(unsigned long)s];
 	}else {
-		return [NSString stringWithFormat:@"%02d:%02d", m,s];
+		return [NSString stringWithFormat:@"%02lu:%02lu", (unsigned long)m,(unsigned long)s];
 	}
 }
 
@@ -90,12 +113,33 @@
 	
 }
 
+
+
+-(NSString*)lengthPercentStringForPercent:(float)percent{
+	
+	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+		
+		float milepercent=percent*[[self length] floatValue];
+		float totalMiles = milepercent/1600;
+		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
+	}else {
+		float	kms=[[self length] floatValue]/1000;
+		float kmdistance=percent*kms;
+		return [NSString stringWithFormat:@"%4.1f km", kmdistance];
+	}
+	
+	
+}
+
+
+
+
 -(NSString*)speedString{
 	
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[self speed]];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES) {
 		NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
-		return [NSString stringWithFormat:@"%2d mph", mileSpeed];
+		return [NSString stringWithFormat:@"%2ld mph", (long)mileSpeed];
 	}else {
 		return [NSString stringWithFormat:@"%@ km/h", kmSpeed];
 	}
@@ -187,6 +231,31 @@
 	return _waypoints;
 	
 }
+
+
+
+// Elevations
+
+-(int)maxElevation{
+	
+	int value=0;
+	
+	for(SegmentVO *segment in segments){
+		value=MAX(value, segment.segmentElevation);
+	}
+	return value;
+}
+
+
+-(BOOL)hasElevationData{
+	
+	SegmentVO *segment=segments[0];
+	return segment.elevations!=nil;
+	
+}
+
+
+
 
 
 //

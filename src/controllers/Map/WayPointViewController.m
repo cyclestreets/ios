@@ -11,10 +11,13 @@
 #import "IIViewDeckController.h"
 #import "GlobalUtilities.h"
 #import "FMMoveTableView.h"
+#import "UIView+Additions.h"
 
 @interface WayPointViewController ()
 
 @property(nonatomic,weak) IBOutlet  FMMoveTableView         *tableView;
+
+@property (nonatomic,assign)  int						initialHeight;
 
 
 -(IBAction)closeButtonSelected:(id)sender;
@@ -56,24 +59,33 @@
 	
 	self.viewDeckController.delegate=self;
 	
+	self.initialHeight=self.view.height;
+	
     [self createPersistentUI];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
 	
+	self.tableView.height=_initialHeight;
+	
     [self createNonPersistentUI];
     
     [super viewWillAppear:animated];
 }
 
--(BOOL)viewDeckControllerWillOpenLeftView:(IIViewDeckController *)viewDeckController animated:(BOOL)animated{
+-(BOOL)viewDeckController:(IIViewDeckController *)viewDeckController shouldOpenViewSide:(IIViewDeckSide)viewDeckSide{
 	
-	BetterLog(@"");
+	if(viewDeckSide==IIViewDeckLeftSide){
 	
-	[self.tableView reloadData];
+		[self.tableView reloadData];
 	
-	return YES;
+		return YES;
+	
+	}else{
+		return NO;
+	}
+	
 	
 }
 
@@ -100,7 +112,7 @@
 
 -(NSInteger)tableView:(FMMoveTableView *)tableView numberOfRowsInSection:(NSInteger)section{
 	
-	int numberOfRows=_dataProvider.count;
+	NSInteger numberOfRows=_dataProvider.count;
 	
 	if ([tableView movingIndexPath] && [[tableView movingIndexPath] section] != [[tableView initialIndexPathForMovingRow] section])
 	{
@@ -146,6 +158,14 @@
 
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	WayPointVO *dp=[_dataProvider objectAtIndex:[indexPath row]];
+	
+	[delegate performSelector:@selector(wayPointWasSelected:) withObject:dp];
+	
 }
 
 

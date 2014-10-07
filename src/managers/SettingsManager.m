@@ -21,7 +21,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 // - (id)init
 //
 //=========================================================== 
-- (id)init
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -42,20 +42,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	
 	// handle dict>dataprovider initialising
 	if([dict count]>0){		
-		for (NSString *key in dict){
-			if([dict valueForKey:key]!=nil){
-				
-				if([key isEqualToString:@"showRoutePoint"]){
-					dataProvider.showRoutePoint=[[dict valueForKey:key] boolValue];
-				}else {
-					[dataProvider setValue:[dict valueForKey:key] forKey:key];
-				}
-			}
-				
-		}
+		[self updateDataProvider:dict];
 	}
 	
 }
+
+
+-(void)updateDataProvider:(NSDictionary*)dict{
+	
+	for (NSString *key in dict){
+		if([dict valueForKey:key]!=nil){
+			
+			if([key isEqualToString:@"showRoutePoint"]){
+				dataProvider.showRoutePoint=[[dict valueForKey:key] boolValue];
+				
+			}else if([key isEqualToString:@"plan"]){
+				NSString *plan=[dict valueForKey:key];
+				if([plan isEqualToString:CSPLANTYPE_SHORTEST]){
+					[dataProvider setValue:CSPLANTYPE_FASTEST forKey:key];
+				}else{
+					[dataProvider setValue:[dict valueForKey:key] forKey:key];
+				}
+			
+			}else {
+				[dataProvider setValue:[dict valueForKey:key] forKey:key];
+			}
+		}
+			
+	}
+	
+}
+
 
 -(void)saveData{
 	
@@ -70,7 +87,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	[dict setObject:[NSNumber numberWithBool:dataProvider.showRoutePoint] forKey:@"showRoutePoint"];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	[cycleStreets.files setSettings:dict];	
+	[cycleStreets.files setSettings:dict];
+	
+	[self updateDataProvider:dict];
 	
 }
 

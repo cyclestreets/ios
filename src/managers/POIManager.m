@@ -9,8 +9,7 @@
 #import "POIManager.h"
 #import "ValidationVO.h"
 #import "CycleStreets.h"
-#import "NetRequest.h"
-#import "NetResponse.h"
+#import "BUNetworkOperation.h"
 #import "HudManager.h"
 #import "GlobalUtilities.h"
 #import "DeviceUtilities.h"
@@ -64,7 +63,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
 	
@@ -111,12 +110,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key",isRetina==YES ? BOX_INT(64): BOX_INT(32),@"icons", nil];
 	
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=POILISTING;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
@@ -170,12 +168,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 									 BOX_FLOAT(location.latitude),@"latitude",
 									 BOX_INT(5),@"radius",BOX_INT(40),@"limit",nil];
 	
-	NetRequest *request=[[NetRequest alloc]init];
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=POICATEGORYLOCATION;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
 	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];

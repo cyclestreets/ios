@@ -11,8 +11,7 @@
 #import "SynthesizeSingleton.h"
 #import "UIColor-Expanded.h"
 #import "AppConstants.h"
-
-static NSString *const ID = @"StyleManager";
+#import "GenericConstants.h"
 
 
 @interface StyleManager(Private) 
@@ -37,7 +36,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(StyleManager);
 
 
 
--(id)init{
+-(instancetype)init{
 	
 	if (self = [super init])
 	{

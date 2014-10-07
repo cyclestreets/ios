@@ -10,22 +10,18 @@
 #import "UserAccount.h"
 #import "ValidationVO.h"
 #import "CycleStreets.h"
-#import "NetRequest.h"
-#import "NetResponse.h"
+#import "BUNetworkOperation.h"
 #import "UserVO.h"
 #import "GlobalUtilities.h"
 #import "HudManager.h"
+#import "GenericConstants.h"
+#import "BUDataSourceManager.h"
 
-@interface PhotoManager(Private)
-
--(void)UserPhotoUploadResponse:(ValidationVO*)validation;
-
--(void)uploadPhotoForUserResponse:(ValidationVO*)validation;
+@interface PhotoManager()
 
 
--(void)retrievePhotosForLocationResponse:(ValidationVO*)validation;
-
--(void)stopRetreivingPhotos;
+@property (nonatomic, assign) BOOL						showingHUD;
+@property (nonatomic, strong) NSTimer					* retreiveTimer;
 
 @end
 
@@ -33,13 +29,9 @@
 
 @implementation PhotoManager
 SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
-@synthesize uploadPhoto;
-@synthesize autoLoadLocation;
-@synthesize locationPhotoList;
-@synthesize showingHUD;
-@synthesize retreiveTimer;
 
 
+#pragma mark - Notifications
 //
 /***********************************************
  * @description		NOTIFICATIONS
@@ -51,8 +43,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	[notifications addObject:REQUESTDIDCOMPLETEFROMSERVER];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	[notifications addObject:REQUESTDIDFAIL];
+	[notifications addObject:XMLPARSERDIDFAILPARSING];
 	
 	[self addRequestID:RETREIVELOCATIONPHOTOS];
+	[self addRequestID:RETREIVEROUTEPHOTOS];
 	[self addRequestID:UPLOADUSERPHOTO];
 	
 	
@@ -64,44 +59,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	[super didReceiveNotification:notification];
 	NSDictionary	*dict=[notification userInfo];
-	NetResponse		*response=[dict objectForKey:RESPONSE];
+	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
 	BetterLog(@"response.dataid=%@",response.dataid);
 	
 	if([self isRegisteredForRequest:dataid]){
 		
-		if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
+		if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL] || [notification.name isEqualToString:XMLPARSERDIDFAILPARSING]){
 			
-			if ([response.dataid isEqualToString:RETREIVELOCATIONPHOTOS]) {
+			[[HudManager sharedInstance] removeHUD];
+			
+			if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
+				NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
+				[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
 				
-				[self retrievePhotosForLocationResponse:response.dataProvider];
+			}else if([dataid isEqualToString:UPLOADUSERPHOTO]){
 				
-			}else if ([response.dataid isEqualToString:UPLOADUSERPHOTO]) {
+				NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,EMPTYSTRING,MESSAGE, nil];
+				[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
 				
-				[self UserPhotoUploadResponse:response.dataProvider];
-				
+				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
 			}
-			
 		}
+
 		
 	}
 	
-	if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED]){
-		[[HudManager sharedInstance] removeHUD];
-		
-		if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
-			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
-			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
-			
-		}else if([dataid isEqualToString:UPLOADUSERPHOTO]){
-			
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,EMPTYSTRING,MESSAGE, nil];
-			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
-			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
-		}
-	}
 	
 	
 }
@@ -109,21 +93,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
-#pragma Photo Downloading
+#pragma mark - Photo Downloading
 
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw{
-    [self retrievePhotosForLocationBounds:ne withEdge:sw withLimit:25];
+    [self retrievePhotosForLocationBounds:ne withEdge:sw withLimit:25 fordataID:RETREIVELOCATIONPHOTOS];
+}
+-(void)retrievePhotosForRouteBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw{
+    [self retrievePhotosForLocationBounds:ne withEdge:sw withLimit:25 fordataID:RETREIVEROUTEPHOTOS];
 }
 
 
-
--(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit{
+-(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit fordataID:(NSString*)dataid{
 	
 	BetterLog(@"");
 	
-	if(showingHUD==NO){
+	if(_showingHUD==NO){
 		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"" andMessage:nil andDelay:0 andAllowTouch:NO];
-		showingHUD=YES;
+		_showingHUD=YES;
 	}
 
     CLLocationCoordinate2D centre;
@@ -146,12 +132,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 									 [self uploadPhotoId],@"selectedid",
                                      nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
-    request.dataid=RETREIVELOCATIONPHOTOS;
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+    request.dataid=dataid;
     request.requestid=ZERO;
     request.parameters=parameters;
-    request.revisonId=0;
-    request.source=USER;
+    request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
+		
+		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+			[self retrievePhotosForLocationResponse:operation];
+		
+		};
+
+		
+	}else{
+		
+		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+			[self retrievePhotosForRouteResponse:operation];
+			
+		};
+		
+	}
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
     
     NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
@@ -163,23 +170,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
--(void)retrievePhotosForLocationResponse:(ValidationVO*)validation{
+-(void)retrievePhotosForLocationResponse:(BUNetworkOperation*)response{
 	
-	if(showingHUD==YES){
-		if(retreiveTimer!=nil){
-			[retreiveTimer invalidate];
-			retreiveTimer=nil;
-		}
-		
-		self.retreiveTimer=[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(assesRetrievedComplete) userInfo:nil repeats:NO];
-	}
+	[[HudManager sharedInstance]removeHUD:NO];
+	_showingHUD=NO;
 	
 	    
-    switch (validation.validationStatus) {
+    switch (response.validationStatus) {
             
         case ValidationRetrievePhotosSuccess:
 		{	
-			self.locationPhotoList=[validation.responseDict objectForKey:RETREIVELOCATIONPHOTOS];
+			self.locationPhotoList=response.dataProvider;
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
 		}   
@@ -200,15 +201,53 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
     
 }
 
+
+
+-(void)retrievePhotosForRouteResponse:(BUNetworkOperation*)response{
+	
+	BetterLog(@"");
+	
+	[[HudManager sharedInstance]removeHUD:NO];
+	_showingHUD=NO;
+	
+	
+    switch (response.validationStatus) {
+            
+        case ValidationRetrievePhotosSuccess:
+		{
+			self.routePhotoList=response.dataProvider;
+			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEROUTEPHOTOSRESPONSE object:dict userInfo:nil];
+		}
+			break;
+			
+		case ValidationRetrievePhotosFailed:
+		{
+			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEROUTEPHOTOSRESPONSE object:dict userInfo:nil];
+			
+		}
+			break;
+        default:
+			
+			break;
+    }
+    
+    
+}
+
+
 -(void)assesRetrievedComplete{
 	
-	if(showingHUD==YES){
-		[retreiveTimer invalidate];
+	if(_showingHUD==YES){
+		[_retreiveTimer invalidate];
 		[[HudManager sharedInstance]removeHUD:NO];
-		showingHUD=NO;
+		_showingHUD=NO;
 	}
 }
 
+
+#pragma mark - Photo Upload
 //
 /***********************************************
  * @description			Upload methods
@@ -218,37 +257,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 -(void)UserPhotoUploadRequest:(UploadPhotoVO*)photo{
     
     self.uploadPhoto=photo;
-	CLLocation *location=photo.activeLocation;
 	
-	;
     
     NSMutableDictionary *getparameters=[NSMutableDictionary dictionaryWithObject:[CycleStreets sharedInstance].APIKey forKey:@"key"];
-    
-    NSMutableDictionary *postparameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         [UserAccount sharedInstance].user.username, @"username",
-                                         [UserAccount sharedInstance].userPassword,@"password",
-										 [NSString stringWithFormat:@"%@", BOX_FLOAT(location.coordinate.latitude)],@"latitude",
-                                         [NSString stringWithFormat:@"%@",BOX_FLOAT(location.coordinate.longitude)],@"longitude",
-                                         photo.caption,@"caption",
-                                         photo.feature.tag,@"category", // note: conversion to serverside types
-                                         photo.category.tag,@"metacategory", //
-                                         photo.dateTime,@"datetime",
-										 [NSString stringWithFormat:@"%i",photo.bearing],@"bearing",
-                                         [photo uploadData],@"imageData",
-										 nil];
+	
+	NSMutableDictionary *postparameters=[_uploadPhoto uploadParams];
+	
+	postparameters[@"username"]=[UserAccount sharedInstance].user.username;
+	postparameters[@"password"]=[UserAccount sharedInstance].userPassword;
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:getparameters,@"getparameters",postparameters,@"postparameters", nil];
     
-    NetRequest *request=[[NetRequest alloc]init];
+    BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=UPLOADUSERPHOTO;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-	request.revisonId=0;
-	request.source=USER;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
 	request.trackProgress=YES;
 	
-	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+		[self UserPhotoUploadResponse:operation];
+			
+	};
+	
+	request.progressBlock=^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite){
+		
+		NSDictionary *progressDict=@{@"bytesWritten":@(bytesWritten),@"totalBytesWritten":@(totalBytesWritten),@"totalBytesExpectedToWrite":@(totalBytesExpectedToWrite)};
+		[[NSNotificationCenter defaultCenter] postNotificationName:FILEUPLOADPROGRESS object:nil userInfo:progressDict];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading Photo" andMessage:nil];
 	
@@ -258,15 +299,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
--(void)UserPhotoUploadResponse:(ValidationVO*)validation{
+-(void)UserPhotoUploadResponse:(BUNetworkOperation*)result{
 	
 	BetterLog(@"");
     
-    switch(validation.validationStatus){
+    switch(result.validationStatus){
             
 		case ValidationUserPhotoUploadSuccess:
 		{
-            uploadPhoto.responseDict=validation.responseDict;
+            _uploadPhoto.responseDict=result.dataProvider;
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
@@ -278,7 +319,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 			
 		case ValidationUserPhotoUploadFailed:
 		{	
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,validation.returnMessage,MESSAGE, nil];
+			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,result.validationMessage,MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Photo upload failed" andMessage:nil];
@@ -296,6 +337,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
+#pragma mark - Utility
 //
 /***********************************************
  * @description			UTILITY
@@ -305,21 +347,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 -(NSString*)uploadPhotoId{
 	
-	if(uploadPhoto==nil)
+	if(_uploadPhoto==nil)
 		return ZERO;
 	
-	return uploadPhoto.uploadedPhotoId;
+	return _uploadPhoto.uploadedPhotoId;
 }
 
 
 -(BOOL)isUserPhoto:(PhotoMapVO*)photo{
 	
-	if(uploadPhoto==nil)
+	if(_uploadPhoto==nil)
 		return NO;
 	
-	if(uploadPhoto.responseDict!=nil){
+	if(_uploadPhoto.responseDict!=nil){
 		
-		NSString *uploadid=uploadPhoto.uploadedPhotoId;
+		NSString *uploadid=_uploadPhoto.uploadedPhotoId;
 		
 		if([photo.csid isEqualToString:uploadid]){
 			return YES;

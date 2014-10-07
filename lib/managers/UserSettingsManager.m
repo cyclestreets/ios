@@ -10,7 +10,6 @@
 #import "SynthesizeSingleton.h"
 #import "GlobalUtilities.h"
 
-static NSString *const ID = @"UserSettingsManager";
 
 
 @interface UserSettingsManager(Private)
