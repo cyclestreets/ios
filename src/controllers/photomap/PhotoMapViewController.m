@@ -78,6 +78,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 @property (nonatomic,assign) BOOL										mapChangedFromUserInteraction;
 
+@property (nonatomic,assign) BOOL										initialLocationComplete;
 
 @property (nonatomic,strong)  CSMapSource								* activeMapSource;
 
@@ -311,6 +312,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	displaysConnectionErrors=NO;
 	_shouldAcceptLocationUpdates=YES;
+	_initialLocationComplete=NO;
 	
 	
 	[_mapView setDelegate:self];
@@ -350,7 +352,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	_mapView.showsUserLocation=YES;
     
-	[self requestPhotos];
+	//[self requestPhotos];
 	
 	[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 	
@@ -436,6 +438,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
+	BetterLog(@"");
+	
 //	if(self.currentLocation!=nil)
 //		return;
 	
@@ -456,6 +460,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		
 		
 	}else{
+		
 		_shouldAcceptLocationUpdates=NO;
 	}
 	
@@ -482,9 +487,17 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
 	
+	BetterLog(@"");
+	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
-	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:4])
+	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:4]){
 		[self requestPhotos];
+	}else{
+		if(_initialLocationComplete==NO){
+			_initialLocationComplete=YES;
+			[self requestPhotos];
+		}
+	}
 	
 }
 
