@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -432,12 +433,12 @@
             </objects>
             <point key="canvasLocation" x="-1458" y="-538"/>
         </scene>
-        <!--Wizard-->
+        <!--Add Photo-->
         <scene sceneID="zfO-JS-21r">
             <objects>
-                <navigationController title="Wizard" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="6Ji-IA-QuF" sceneMemberID="viewController">
+                <navigationController title="Add Photo" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="6Ji-IA-QuF" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Wizard" image="CSTabBar_add_photo.png" id="bk4-8A-zQb"/>
+                    <tabBarItem key="tabBarItem" title="Add Photo" image="CSTabBar_add_photo.png" id="bk4-8A-zQb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uAN-1O-GEG">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
