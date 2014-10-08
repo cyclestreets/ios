@@ -15,6 +15,7 @@ enum  {
 	MapPlanningStateStartPlanning, // a waypoint has been added
 	MapPlanningStatePlanning, // waypoints>1 have been added but no route requested
 	MapPlanningStateRoute, // a route is loaded
+	MapPlanningStateRouteLocating // route is loaded locating location in relation to route
 };
 typedef int MapPlanningState;
 
@@ -25,10 +26,9 @@ enum  {
 typedef int MapAlertType;
 
 
-@interface MapViewController : SuperViewController{
-	
-	
-}
+@interface MapViewController : SuperViewController
+
+@property (nonatomic,assign)   BOOL					allowsUserTrackingUI;
 
 
 @end

@@ -346,8 +346,6 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
 
-	
-	
 }
 
 

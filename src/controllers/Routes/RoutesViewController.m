@@ -198,6 +198,7 @@
     
 }
 
+#pragma mark - UIAlert delegate
 
 // Note: use of didDismissWithButtonIndex, as otherwise the HUD gets removed by the screen clear up performed by Alert 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{

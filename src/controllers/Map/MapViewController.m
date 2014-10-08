@@ -124,6 +124,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, assign) MapPlanningState						uiState;
 @property (nonatomic, assign) MapPlanningState						previousUIState;
 
+@property (nonatomic,strong)  MKMapCamera							*mapCamera;
+
 
 @property (nonatomic,strong)  UITapGestureRecognizer				*mapSingleTapRecognizer;
 @property (nonatomic,strong)  UITapGestureRecognizer				*mapDoubleTapRecognizer;
@@ -323,7 +325,18 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	BOOL willRequireAuthorisation=[[UserLocationManager sharedInstance] requestAuthorisation];
 	
 	[_mapView setDelegate:self];
-	_mapView.userTrackingMode=MKUserTrackingModeNone;
+	
+	if(_allowsUserTrackingUI){
+		
+		_programmaticChange=YES;
+		[_mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
+		_mapView.camera.altitude=50;
+		_mapView.camera.pitch=50;
+		
+	}else{
+		_mapView.userTrackingMode=MKUserTrackingModeNone;
+	}
+	
 	[self didNotificationMapStyleChanged];
 	
 	
@@ -547,6 +560,19 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
             [self.toolBar setItems:items animated:NO ];
 		}
 		break;
+			
+		case MapPlanningStateRouteLocating:
+		{
+			BetterLog(@"MapPlanningStateRouteLocating");
+			
+			_routeButton.title = @"New route";
+			_activeLocationSubButton.selected=NO;
+			_searchButton.enabled = NO;
+			
+			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+			[self.toolBar setItems:items animated:NO ];
+		}
+		break;
 	}
 	
 }
@@ -611,8 +637,12 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		_mapView.showsUserLocation=NO;
 		_mapView.showsUserLocation=YES;
 		
+		if(_uiState==MapPlanningStateRoute){
+			[self updateUItoState:MapPlanningStateRouteLocating];
+		}else{
+			[self updateUItoState:MapPlanningStateLocating];
+		}
 		
-		[self updateUItoState:MapPlanningStateLocating];
 		
 	}
 	
@@ -629,8 +659,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // called when showsUserLocation is set to NO
 - (void)mapViewDidStopLocatingUser:(MKMapView *)mapView{
 	
-	
-	[self updateUItoState:_previousUIState];
+	if(_uiState!=MapPlanningStateRoute)
+		[self updateUItoState:_previousUIState];
 	
 }
 
@@ -643,11 +673,27 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 
 	if(_uiState!=MapPlanningStateRoute){
-		[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
+		
+		if(_previousUIState==MapPlanningStateRoute){
+			
+			MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
+			[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(40, 10, 10, 10) animated:YES];
+			
+		}else{
+			
+			if(_allowsUserTrackingUI){
+			
+			}else{
+				[_mapView setCenterCoordinate:_lastLocation.coordinate animated:YES];
+			}
+			
+		}
+		
+		
 	}else{
 		
 		MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
-		[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+		[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(40, 10, 10, 10) animated:YES];
 		
 	}
 	
@@ -667,7 +713,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 // assess if there are any UI changes related this location update
 -(void)assessLocationEffect{
 		
-	if(_uiState==MapPlanningStateLocating){
+	if(_uiState==MapPlanningStateLocating || _uiState==MapPlanningStateRouteLocating){
 		
 		// if prev state is not route we shoudl see if we need to add a waypoint
 		if (_previousUIState!=MapPlanningStateRoute)
@@ -1406,6 +1452,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	__weak __typeof(&*self)weakSelf = self;
 	UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@"Re-route with new plan type"];
+	// OS8 only //
+	[[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor darkGrayColor]];
+	//
 	actionSheet.delegate=self;
 	NSArray *planArray=[AppConstants planArray];
 	for (NSString *planType in planArray) {
@@ -1434,6 +1483,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 // Yes, you cant style UIActionSheet without doing this!
+// Note this only works for OS7, OS8 uses new AlertController
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet{
 	
 	NSString *currentPlan=_route.plan;
