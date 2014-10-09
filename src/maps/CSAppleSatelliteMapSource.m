@@ -1,16 +1,14 @@
 //
-//  CSAppleMapSource.m
+//  CSAppleSatelliteMapSource.m
 //  CycleStreets
 //
-//  Created by Neil Edwards on 04/06/2014.
+//  Created by Neil Edwards on 09/10/2014.
 //  Copyright (c) 2014 CycleStreets Ltd. All rights reserved.
 //
 
-#import "CSAppleMapSource.h"
-#import "AppConstants.h"
+#import "CSAppleSatelliteMapSource.h"
 
-@implementation CSAppleMapSource
-
+@implementation CSAppleSatelliteMapSource
 
 -(int)maxZoom{
 	return 15;
@@ -28,7 +26,7 @@
 
 - (NSString *)uniqueTilecacheKey
 {
-	return MAPPING_BASE_APPLE;
+	return MAPPING_BASE_APPLE_SATELLITE;
 }
 
 - (NSString *)shortName

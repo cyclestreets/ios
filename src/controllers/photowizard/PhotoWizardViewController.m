@@ -232,7 +232,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	if(overlays.count==0){
 		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
@@ -249,10 +249,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 			if([overlay isKindOfClass:[MKTileOverlay class]] ){
 				
 				
-				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
 					
 					
 					[_locationMapView removeOverlay:overlay];
+					
+					_locationMapView.mapType=MKMapTypeStandard;
+					
+					break;
+					
+				}else if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
+					
+					[_locationMapView removeOverlay:overlay];
+					
+					_locationMapView.mapType=MKMapTypeSatellite;
 					
 					break;
 					

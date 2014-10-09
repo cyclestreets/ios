@@ -10,7 +10,6 @@
                 <outlet property="attributionLabel" destination="37" id="43"/>
                 <outlet property="mapView" destination="Uk5-L9-65u" id="gUZ-dl-24F"/>
                 <outlet property="navigation" destination="pdb-oa-FsR" id="ZXO-5E-iB2"/>
-                <outlet property="photoWizardButton" destination="41" id="52"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -31,14 +30,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </textAttributes>
                     <items>
-                        <navigationItem title="Report" id="pdb-oa-FsR">
-                            <barButtonItem key="rightBarButtonItem" image="CSTabBar_add_photo.png" id="41">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="showPhotoWizard:" destination="-1" id="53"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
+                        <navigationItem title="Report" id="pdb-oa-FsR"/>
                     </items>
                 </navigationBar>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="Uk5-L9-65u">
@@ -46,7 +38,7 @@
                     <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                 </mapView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" id="37" customClass="ExpandedUILabel">
-                    <rect key="frame" x="279.99999939433991" y="485" width="30" height="25"/>
+                    <rect key="frame" x="279.99999907677926" y="485" width="30" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="0.1000000015" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -68,9 +60,6 @@
             <point key="canvasLocation" x="138.99999999999989" y="154"/>
         </view>
     </objects>
-    <resources>
-        <image name="CSTabBar_add_photo.png" width="30" height="30"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

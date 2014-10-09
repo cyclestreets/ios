@@ -408,7 +408,7 @@
         <!--Credits-->
         <scene sceneID="cJE-SS-bNv">
             <objects>
-                <viewController storyboardIdentifier="CreditsViewController" hidesBottomBarWhenPushed="YES" id="rtl-uZ-lp0" customClass="CreditsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreditsViewController" hidesBottomBarWhenPushed="YES" id="rtl-uZ-lp0" customClass="GenericWebViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Credits" id="cMd-c0-wQo"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIa-CF-4ck" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -222,7 +222,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	if(overlays.count==0){
 		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
@@ -239,10 +239,20 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			if([overlay isKindOfClass:[MKTileOverlay class]] ){
 				
 				
-				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
 					
 					
 					[_mapView removeOverlay:overlay];
+					
+					_mapView.mapType=MKMapTypeStandard;
+					
+					break;
+					
+				}else if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
+					
+					[_mapView removeOverlay:overlay];
+					
+					_mapView.mapType=MKMapTypeSatellite;
 					
 					break;
 					
@@ -266,7 +276,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 	}
 	
-	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] || [_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 		
 		_attributionLabel.visible=NO;
 		_mapView.legalLabel.visible=YES;
@@ -334,6 +344,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		_mapView.camera.pitch=50;
 		
 	}else{
+		
 		_mapView.userTrackingMode=MKUserTrackingModeNone;
 	}
 	
@@ -684,7 +695,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			if(_allowsUserTrackingUI){
 			
 			}else{
-				[_mapView setCenterCoordinate:_lastLocation.coordinate animated:YES];
+				[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
+
 			}
 			
 		}

@@ -154,7 +154,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	if(overlays.count==0){
 		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
@@ -170,9 +170,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			if([overlay isKindOfClass:[MKTileOverlay class]] ){
 				
 				
-				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
+					
 					
 					[_mapView removeOverlay:overlay];
+					
+					_mapView.mapType=MKMapTypeStandard;
+					
+					break;
+					
+				}else if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
+					
+					[_mapView removeOverlay:overlay];
+					
+					_mapView.mapType=MKMapTypeSatellite;
 					
 					break;
 					
@@ -196,7 +207,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	}
 	
 	
-	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] || [_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 		
 		_attributionLabel.visible=NO;
 		//mkAttributionLabel.visible=YES;

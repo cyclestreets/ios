@@ -35,7 +35,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSOpenCycleMapSource.h"
 #import "CSOpenStreetMapSource.h"
 #import "CSOrdnanceSurveyStreetViewMapSource.h"
-#import "CSAppleMapSource.h"
+#import "CSAppleVectorMapSource.h"
+#import "CSCycleNorthMapSource.h"
+#import "CSAppleSatelliteMapSource.h"
 
 const NSInteger MAX_ZOOM_LOCATION = 18;
 const NSInteger MAX_ZOOM_SEGMENT = 20;
@@ -73,6 +75,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		NSString *appName=[infoDict objectForKey:@"CFBundleName"];
 		self.userAgent=[NSString stringWithFormat:@"%@ iOS / %@",appName,version];
 		
+		self.appTarget=[infoDict objectForKey:@"APPTARGET"];
+		
 	}
 	return self;
 }
@@ -81,7 +85,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 
 
 + (NSArray *)mapStyles {
-	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,MAPPING_BASE_OS,MAPPING_BASE_APPLE,nil];
+	return [NSArray arrayWithObjects:MAPPING_BASE_OSM, MAPPING_BASE_OPENCYCLEMAP,MAPPING_BASE_OS,MAPPING_BASE_APPLE_VECTOR,nil];
 }
 
 
@@ -109,7 +113,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		
 		mapAttribution = MAPPING_ATTRIBUTION_OS;
 		
-	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE]) {
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE_VECTOR]) {
 		
 		mapAttribution = nil;
 		
@@ -135,43 +139,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		
 		return [[CSOrdnanceSurveyStreetViewMapSource alloc]init];
 		
-	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE]){
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
 		
-		return [[CSAppleMapSource alloc]init];
+		return [[CSAppleVectorMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
+		
+		return [[CSAppleSatelliteMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_CYCLENORTH]){
+		
+		return [[CSCycleNorthMapSource alloc]init];
 	}
 	
 	return [[CSOpenStreetMapSource alloc]init];
 	
 	
 }
-
-
-+(NSString*)tileTemplate{
-	
-	NSString *mapStyle = [CycleStreets currentMapStyle];
-	
-	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]){
-		
-		return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
-		
-	}else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]){
-		
-		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
-		
-	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]){
-		
-		return @"http://c.os.openstreetmap.org/sv/{z}/{x}/{y}.png";
-		
-	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE]){
-		
-		return MAPPING_TILETEMPLATE_APPLE;
-	}
-	
-	return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
-	
-}
-
-
 
 
 

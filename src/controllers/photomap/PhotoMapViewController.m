@@ -140,7 +140,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	if(overlays.count==0){
 		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
@@ -157,10 +157,20 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 			if([overlay isKindOfClass:[MKTileOverlay class]] ){
 				
 				
-				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
 					
 					
 					[_mapView removeOverlay:overlay];
+					
+					_mapView.mapType=MKMapTypeStandard;
+					
+					break;
+					
+				}else if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
+					
+					[_mapView removeOverlay:overlay];
+					
+					_mapView.mapType=MKMapTypeSatellite;
 					
 					break;
 					
@@ -184,7 +194,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		
 	}
 	
-	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE]){
+	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] || [_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 		
 		_attributionLabel.visible=NO;
 		_mapView.legalLabel.visible=YES;

@@ -77,7 +77,9 @@ extern NSString *const DEVICETYPE;
 extern NSString *const MAPPING_BASE_OPENCYCLEMAP;
 extern NSString *const MAPPING_BASE_OSM;
 extern NSString *const MAPPING_BASE_OS;
-extern NSString *const MAPPING_BASE_APPLE;
+extern NSString *const MAPPING_BASE_APPLE_VECTOR;
+extern NSString *const MAPPING_BASE_APPLE_SATELLITE;
+extern NSString *const MAPPING_BASE_CYCLENORTH;
 
 
 extern NSString *const MAPPING_ATTRIBUTION_OPENCYCLEMAP;

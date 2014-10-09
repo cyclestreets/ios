@@ -18,42 +18,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 */
 
-//  CycleStreets.h
+//  Credits.h
 //  CycleStreets
 //
 //
 
-#import <Foundation/Foundation.h>
-#import "SynthesizeSingleton.h"
-#import "Files.h"
-#import <CoreLocation/CoreLocation.h>
-
-@class CSMapSource;
-
-extern const NSInteger MAX_ZOOM_LOCATION;
-extern const NSInteger MAX_ZOOM_LOCATION_ACCURACY;
-extern const NSInteger MAX_ZOOM_SEGMENT;
+#import <UIKit/UIKit.h>
 
 
-@interface CycleStreets : NSObject {
+@interface GenericWebViewController : UIViewController  {
+	
+	
 }
-
-@property (nonatomic, strong)		Files								* files;
-@property (nonatomic, strong)		NSString							* APIKey;
-@property (nonatomic, strong)		NSString							* userAgent;
-
-@property (nonatomic, strong)		NSString							* appTarget;
-
-
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
-
-// deprecate
-+ (NSArray *)mapStyles;
-+ (NSString *)currentMapStyle;
-+ (NSString *)mapAttribution;
-
-
-+(CSMapSource*)activeMapSource;
-
 
 @end

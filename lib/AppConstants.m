@@ -16,7 +16,10 @@ NSString *const DEVICETYPE=@"iPhone";
 NSString *const MAPPING_BASE_OPENCYCLEMAP = @"OpenCycleMap";
 NSString *const MAPPING_BASE_OSM = @"OpenStreetMap";
 NSString *const MAPPING_BASE_OS = @"OS";
-NSString *const MAPPING_BASE_APPLE = @"Apple";
+NSString *const MAPPING_BASE_APPLE_VECTOR = @"AppleVector";
+NSString *const MAPPING_BASE_APPLE_SATELLITE = @"AppleSatellite";
+NSString *const MAPPING_BASE_CYCLENORTH = @"CycleNorthStaffs";
+
 
 
 NSString *const MAPPING_ATTRIBUTION_OPENCYCLEMAP = @"(c) OpenStreetMap and contributors, CC-BY-SA; Map images (c) OpenCycleMap";
