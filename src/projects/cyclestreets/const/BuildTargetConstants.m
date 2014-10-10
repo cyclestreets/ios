@@ -13,4 +13,10 @@ NSString *const API_IDENTIFIER=@"cyclestreets";
 
 @implementation BuildTargetConstants
 
++(NSArray*)ApplicationSupportedMaps{
+	
+	return @[MAPPING_BASE_OSM,MAPPING_BASE_OPENCYCLEMAP,MAPPING_BASE_OS,MAPPING_BASE_APPLE_VECTOR];
+	
+}
+
 @end

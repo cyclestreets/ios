@@ -44,6 +44,8 @@ extern const NSInteger MAX_ZOOM_SEGMENT;
 
 @property (nonatomic, strong)		NSString							* appTarget;
 
+@property (nonatomic, strong)		NSString							* storyBoardName;;
+
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 
@@ -54,6 +56,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 
 
 +(CSMapSource*)activeMapSource;
+
++(NSArray*)appMapStylesDataProvider;
 
 
 @end

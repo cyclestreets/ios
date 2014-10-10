@@ -7,10 +7,17 @@
 //
 
 #import "BuildTargetConstants.h"
+#import "CycleStreets.h"
 
 NSString *const API_IDENTIFIER=@"stoke";
 
-
 @implementation BuildTargetConstants
+
+
++(NSArray*)ApplicationSupportedMaps{
+	
+	return @[MAPPING_BASE_CYCLENORTH, MAPPING_BASE_OSM,MAPPING_BASE_OPENCYCLEMAP,MAPPING_BASE_OS,MAPPING_BASE_APPLE_VECTOR,MAPPING_BASE_APPLE_SATELLITE];
+	
+}
 
 @end

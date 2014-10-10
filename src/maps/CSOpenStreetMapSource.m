@@ -41,6 +41,11 @@
 	return @"Open Street Map, the free wiki world map, provides freely usable map data for all parts of the world, under the Creative Commons Attribution-Share Alike 2.0 license.";
 }
 
+- (NSString *)shortDescription
+{
+	return @"General map style";
+}
+
 - (NSString *)shortAttribution
 {
 	return @"© OpenStreetMap contributors";
@@ -50,5 +55,11 @@
 {
 	return @"Map data © OpenStreetMap, licensed under Creative Commons Share Alike By Attribution.";
 }
+
+-(NSString*)thumbnailImage{
+	return @"OSMMapStyle.png";
+}
+
+
 
 @end

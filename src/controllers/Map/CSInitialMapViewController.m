@@ -7,6 +7,7 @@
 //
 
 #import "CSInitialMapViewController.h"
+#import "CycleStreets.h"
 
 @interface CSInitialMapViewController ()
 
@@ -16,7 +17,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[CycleStreets sharedInstance].storyBoardName bundle:nil];
     self = [super initWithCenterViewController:[storyboard instantiateViewControllerWithIdentifier:@"MapViewController"]
                             leftViewController:[storyboard instantiateViewControllerWithIdentifier:@"WayPointNavController"]];
 	

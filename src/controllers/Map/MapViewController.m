@@ -44,6 +44,7 @@
 
 #import "MapViewSearchLocationViewController.h"
 
+#import "UIColor+AppColors.h"
 
 #import <Crashlytics/Crashlytics.h>
 
@@ -222,7 +223,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	if(overlays.count==0){
 		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
+		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] || ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			
 			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
@@ -244,7 +245,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 					
 					[_mapView removeOverlay:overlay];
 					
-					_mapView.mapType=MKMapTypeStandard;
+					_mapView.mapType=MKMapTypeSatellite;
 					
 					break;
 					
@@ -328,6 +329,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
+	
+	_mapView.tintColor=[UIColor appTintColor];
 	
 	_attributionLabel.textAlignment=NSTextAlignmentCenter;
 	_attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000, .1);

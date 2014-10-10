@@ -16,6 +16,10 @@
 /** An extended version of the tile source's description. */
 @property (nonatomic, readonly) NSString *longDescription;
 
+// short description ideal for settings
+@property (nonatomic, readonly) NSString *shortDescription;
+
+
 /** A short version of the tile source's attribution string. */
 @property (nonatomic, readonly) NSString *shortAttribution;
 
@@ -24,9 +28,13 @@
 
 @property (nonatomic, readonly) NSString *uniqueTilecacheKey;
 
+@property (nonatomic, readonly) NSString *thumbnailImage;
 
 
 @property (nonatomic, readonly) NSString *tileTemplate;
+
+
+@property(nonatomic,readonly)  NSDictionary         *settingsDict;
 
 @property (nonatomic, readonly) int		maxZoom;
 @property (nonatomic, readonly) int		minZoom;

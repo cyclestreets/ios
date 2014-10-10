@@ -40,6 +40,11 @@
 	return @"Cycle North Staffs";
 }
 
+- (NSString *)shortDescription
+{
+	return @"Cycle North Staffs cycle map";
+}
+
 - (NSString *)shortAttribution
 {
 	return @" © Cycle North Staffs; data © OpenStreetMap contributors ";
@@ -48,6 +53,17 @@
 - (NSString *)longAttribution
 {
 	return @"Map data © Cycle North Staffs, licensed under Creative Commons Share Alike By Attribution.";
+}
+
+
+-(NSDictionary*)settingsDict{
+	
+	return @{@"id":self.uniqueTilecacheKey, @"title":self.shortName,@"description":self.shortDescription,@"thumbnailimage":self.thumbnailImage};
+	
+}
+
+-(NSString*)thumbnailImage{
+	return @"CNSMapStyle.png";
 }
 
 

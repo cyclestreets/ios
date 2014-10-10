@@ -14,7 +14,7 @@ pixate-config {
 navigation-bar{
 
     -ios-tint-color:#FFFFFF;
-    background-color: #509720;
+    background-color: appTintColor;
     opacity: 1;
 }
 
@@ -27,17 +27,20 @@ navigation-bar title{
 
 }
 
-
 toolbar{
 	
 	-ios-tint-color:#FFFFFF;
-	background-color: #509720;
+	background-color: appTintColor;
 	
 }
 
 tab-bar{
-	-ios-tint-color:#509720;
+	-ios-tint-color:appTintColor;
 	
+}
+
+map-view{
+	-ios-tint-color:appTintColor;
 }
 
 
@@ -59,7 +62,7 @@ action-sheet{
 }
 
 tab-bar{
-    -ios-tint-color:#509720;
+    -ios-tint-color:appTintColor;
 
 }
 
@@ -68,13 +71,15 @@ tab-bar{
 
 .GreenView{
 
-background-color: #509720;
+background-color: #429CB2;
 
 }
 
 #genericView{
-	background-color: #509720;
+	background-color: appTintColor;
 }
+
+
 
 /* UI buttons */
 
@@ -84,7 +89,7 @@ background-color: #509720;
 }
 
 #GreenButton{
-    background-color: #509720;
+    background-color: #429CB2;
 }
 
 #RedButton{
@@ -233,12 +238,13 @@ background-color: #509720;
 
 #LocsearchSegment{
 	background-color:#FFFFFF;
-	-ios-tint-color:#509720;
+	-ios-tint-color:appTintColor;
 }
 
 #LocsearchBar{
-	-ios-tint-color:#509720;
-	background-color:#509720;
+	-ios-tint-color:appTintColor;
+	background-color:appTintColor;
 }
+
 
 

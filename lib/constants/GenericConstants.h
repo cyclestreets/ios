@@ -10,6 +10,7 @@
 
 
 typedef void (^GenericCompletionBlock)(BOOL complete,NSString *error);
+typedef void (^GenericEventBlock)(NSString *eventType, id dataProvider);
 
 
 extern NSString *const SECUREUDID_DOMAIN;

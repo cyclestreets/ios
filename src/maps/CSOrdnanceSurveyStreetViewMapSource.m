@@ -40,6 +40,11 @@
 {
 	return @"Open Street Map, the free wiki world map, provides freely usable map data for all parts of the world, under the Creative Commons Attribution-Share Alike 2.0 license.";
 }
+
+- (NSString *)shortDescription
+{
+	return @"Ordnance Survey open data Street View";
+}
 -(NSString *)shortAttribution
 {
 	return @" © Ordnance Survey data    ";
@@ -47,6 +52,10 @@
 -(NSString *)longAttribution
 {
 	return @"Contains Ordnance Survey data (c) Crown copyright and database right 2010";
+}
+
+-(NSString*)thumbnailImage{
+	return @"OSMapStyle.png";
 }
 
 @end

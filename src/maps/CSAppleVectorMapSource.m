@@ -33,12 +33,17 @@
 
 - (NSString *)shortName
 {
-	return @"Open Cycle Map";
+	return @"Apple Vector";
 }
 
 - (NSString *)longDescription
 {
 	return @"Open Cycle Map, the free wiki world map, provides freely usable map data for all parts of the world, under the Creative Commons Attribution-Share Alike 2.0 license.";
+}
+
+- (NSString *)shortDescription
+{
+	return @"Apple's default vector map";
 }
 
 - (NSString *)shortAttribution
@@ -49,6 +54,10 @@
 - (NSString *)longAttribution
 {
 	return @"Map data © OpenCycleMap, licensed under Creative Commons Share Alike By Attribution.";
+}
+
+-(NSString*)thumbnailImage{
+	return @"AVMapStyle.png";
 }
 
 @end

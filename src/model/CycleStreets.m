@@ -31,13 +31,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "AppConstants.h"
 #import "GenericConstants.h"
 #import "CSMapSourceProtocol.h"
-
+#import "GlobalUtilities.h"
 #import "CSOpenCycleMapSource.h"
 #import "CSOpenStreetMapSource.h"
 #import "CSOrdnanceSurveyStreetViewMapSource.h"
 #import "CSAppleVectorMapSource.h"
 #import "CSCycleNorthMapSource.h"
 #import "CSAppleSatelliteMapSource.h"
+
+#import "BuildTargetConstants.h"
 
 const NSInteger MAX_ZOOM_LOCATION = 18;
 const NSInteger MAX_ZOOM_SEGMENT = 20;
@@ -76,6 +78,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		self.userAgent=[NSString stringWithFormat:@"%@ iOS / %@",appName,version];
 		
 		self.appTarget=[infoDict objectForKey:@"APPTARGET"];
+		
+		self.storyBoardName=[infoDict objectForKey:@"UIMainStoryboardFile"];
 		
 	}
 	return self;
@@ -154,6 +158,59 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	
 	return [[CSOpenStreetMapSource alloc]init];
 	
+	
+}
+
+
++(CSMapSource*)mapSourceForType:(NSString*)mapStyle{
+	
+	if ([mapStyle isEqualToString:MAPPING_BASE_OSM]){
+		
+		return [[CSOpenStreetMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OPENCYCLEMAP]){
+		
+		return [[CSOpenCycleMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_OS]){
+		
+		return [[CSOrdnanceSurveyStreetViewMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
+		
+		return [[CSAppleVectorMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
+		
+		return [[CSAppleSatelliteMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_CYCLENORTH]){
+		
+		return [[CSCycleNorthMapSource alloc]init];
+	}
+	
+	return [[CSOpenStreetMapSource alloc]init];
+	
+	
+}
+
+
+
++(NSArray*)appMapStylesDataProvider{
+	
+	NSArray *styles=[BuildTargetConstants ApplicationSupportedMaps];
+	
+	NSMutableArray *mapStyles=[NSMutableArray array];
+	for(NSString *key in styles){
+		
+		CSMapSource *mapSource=[CycleStreets mapSourceForType:key];
+		
+		[mapStyles addObject:@{@"id":mapSource.uniqueTilecacheKey, @"title":mapSource.shortName,@"description":mapSource.shortDescription,@"thumbnailimage":mapSource.thumbnailImage}];
+		
+		
+	}
+	
+	return mapStyles;
 	
 }
 

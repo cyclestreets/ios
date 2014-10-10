@@ -33,7 +33,6 @@
 		280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
 		280E9338140984F300C7AC75 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
 		280E933A140984F300C7AC75 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
-		280E933B140984F300C7AC75 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9327140984F300C7AC75 /* MapView.xib */; };
 		280E933C140984F300C7AC75 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9329140984F300C7AC75 /* RouteListView.xib */; };
 		280E933D140984F300C7AC75 /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932A140984F300C7AC75 /* RoutesView.xib */; };
 		280E933E140984F300C7AC75 /* MapLocationSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932C140984F300C7AC75 /* MapLocationSearchView.xib */; };
@@ -187,7 +186,6 @@
 		2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
 		2834363615DD5DC300B00FD5 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
 		2834363815DD5DC300B00FD5 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
-		2834363915DD5DC300B00FD5 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9327140984F300C7AC75 /* MapView.xib */; };
 		2834363A15DD5DC300B00FD5 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9329140984F300C7AC75 /* RouteListView.xib */; };
 		2834363B15DD5DC300B00FD5 /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932A140984F300C7AC75 /* RoutesView.xib */; };
 		2834363C15DD5DC300B00FD5 /* MapLocationSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932C140984F300C7AC75 /* MapLocationSearchView.xib */; };
@@ -403,6 +401,35 @@
 		284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
 		284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
+		285320FC19E7D44000118E48 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285320FB19E7D44000118E48 /* SettingsViewController.m */; };
+		285320FE19E7D46100118E48 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285320FD19E7D46100118E48 /* SettingsView.xib */; };
+		2853210119E7D4E800118E48 /* BUHorizontalMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210019E7D4E800118E48 /* BUHorizontalMenuView.m */; };
+		2853210519E7DA4D00118E48 /* MapStyleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210419E7DA4D00118E48 /* MapStyleCellView.m */; };
+		2853210819E7DA7E00118E48 /* MapStyleCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2853210719E7DA7E00118E48 /* MapStyleCellView.xib */; };
+		2853210B19E7DC0D00118E48 /* UIButton+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210A19E7DC0D00118E48 /* UIButton+Additions.m */; };
+		2853210C19E7DC0D00118E48 /* UIButton+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210A19E7DC0D00118E48 /* UIButton+Additions.m */; };
+		2853210D19E7DC0D00118E48 /* UIButton+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210A19E7DC0D00118E48 /* UIButton+Additions.m */; };
+		2853211419E7EFF900118E48 /* ASMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853210F19E7EFF900118E48 /* ASMapStyle.png */; };
+		2853211519E7EFF900118E48 /* ASMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853210F19E7EFF900118E48 /* ASMapStyle.png */; };
+		2853211619E7EFF900118E48 /* ASMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853210F19E7EFF900118E48 /* ASMapStyle.png */; };
+		2853211719E7EFF900118E48 /* AVMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211019E7EFF900118E48 /* AVMapStyle.png */; };
+		2853211819E7EFF900118E48 /* AVMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211019E7EFF900118E48 /* AVMapStyle.png */; };
+		2853211919E7EFF900118E48 /* AVMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211019E7EFF900118E48 /* AVMapStyle.png */; };
+		2853211A19E7EFF900118E48 /* OCMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211119E7EFF900118E48 /* OCMMapStyle.png */; };
+		2853211B19E7EFF900118E48 /* OCMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211119E7EFF900118E48 /* OCMMapStyle.png */; };
+		2853211C19E7EFF900118E48 /* OCMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211119E7EFF900118E48 /* OCMMapStyle.png */; };
+		2853211D19E7EFF900118E48 /* OSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211219E7EFF900118E48 /* OSMapStyle.png */; };
+		2853211E19E7EFF900118E48 /* OSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211219E7EFF900118E48 /* OSMapStyle.png */; };
+		2853211F19E7EFF900118E48 /* OSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211219E7EFF900118E48 /* OSMapStyle.png */; };
+		2853212019E7EFF900118E48 /* OSMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211319E7EFF900118E48 /* OSMMapStyle.png */; };
+		2853212119E7EFF900118E48 /* OSMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211319E7EFF900118E48 /* OSMMapStyle.png */; };
+		2853212219E7EFF900118E48 /* OSMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211319E7EFF900118E48 /* OSMMapStyle.png */; };
+		2853212419E7F24F00118E48 /* CNSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853212319E7F24F00118E48 /* CNSMapStyle.png */; };
+		2853212519E7F24F00118E48 /* CNSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853212319E7F24F00118E48 /* CNSMapStyle.png */; };
+		2853212619E7F24F00118E48 /* CNSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853212319E7F24F00118E48 /* CNSMapStyle.png */; };
+		2853212919E7F2E500118E48 /* BUTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212819E7F2E500118E48 /* BUTouchView.m */; };
+		2853212A19E7F2E500118E48 /* BUTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212819E7F2E500118E48 /* BUTouchView.m */; };
+		2853212B19E7F2E500118E48 /* BUTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212819E7F2E500118E48 /* BUTouchView.m */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -514,8 +541,6 @@
 		289478B018AD353B0066AA2E /* CSInitialMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289478AF18AD353B0066AA2E /* CSInitialMapViewController.m */; };
 		289478B118AD353B0066AA2E /* CSInitialMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289478AF18AD353B0066AA2E /* CSInitialMapViewController.m */; };
 		289478BB18AD6E600066AA2E /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CF14097DE000C7AC75 /* ItineraryViewController.m */; };
-		289478C518AD70FB0066AA2E /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 289478C418AD70FB0066AA2E /* default.css */; };
-		289478C618AD70FB0066AA2E /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 289478C418AD70FB0066AA2E /* default.css */; };
 		28965C5418BF3CC3001BB258 /* TBXML+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5318BF3CC3001BB258 /* TBXML+Additions.m */; };
 		28965C5518BF3CC3001BB258 /* TBXML+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5318BF3CC3001BB258 /* TBXML+Additions.m */; };
 		28965C5A18BF4F94001BB258 /* CSRoutePolyLineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5918BF4F94001BB258 /* CSRoutePolyLineOverlay.m */; };
@@ -559,6 +584,12 @@
 		28A9998919E709340050C3E8 /* GenericWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9998819E709340050C3E8 /* GenericWebView.xib */; };
 		28A9998F19E709C30050C3E8 /* GenericWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9998E19E709C30050C3E8 /* GenericWebViewController.m */; };
 		28A9999119E70C870050C3E8 /* CycleNorth.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A9999019E70C870050C3E8 /* CycleNorth.xcassets */; };
+		28A9999319E712530050C3E8 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28A9999219E712530050C3E8 /* default.css */; };
+		28A9999519E71FBC0050C3E8 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28A9999419E71FBC0050C3E8 /* default.css */; };
+		28A9999619E71FBC0050C3E8 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28A9999419E71FBC0050C3E8 /* default.css */; };
+		28A9999A19E729700050C3E8 /* UIColor+AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9999919E729700050C3E8 /* UIColor+AppColors.m */; };
+		28A9999D19E72ACB0050C3E8 /* UIColor+AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9999C19E72ACB0050C3E8 /* UIColor+AppColors.m */; };
+		28A9999E19E72ACB0050C3E8 /* UIColor+AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9999C19E72ACB0050C3E8 /* UIColor+AppColors.m */; };
 		28AD60BC131FB54A008527FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B6131FB54A008527FC /* AppDelegate.m */; };
 		28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B8131FB54A008527FC /* Entitlements.plist */; };
 		28AD60BF131FB54A008527FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B9131FB54A008527FC /* main.m */; };
@@ -736,7 +767,6 @@
 		28FA8A5019E454E80040EA46 /* CSIcon_MapArrow_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */; };
 		28FA8A5119E454E80040EA46 /* CSIcon_MapArrow_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4913536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png */; };
 		28FA8A5219E454E80040EA46 /* UIIcon_cycle_lanes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */; };
-		28FA8A5319E454E80040EA46 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 289478C418AD70FB0066AA2E /* default.css */; };
 		28FA8A5419E454E80040EA46 /* UIIcon_cycle_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4C13536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png */; };
 		28FA8A5519E454E80040EA46 /* UIIcon_footpaths@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4D13536CCB00E8AF90 /* UIIcon_footpaths@2x.png */; };
 		28FA8A5619E454E80040EA46 /* UIIcon_quiet_street@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4E13536CCB00E8AF90 /* UIIcon_quiet_street@2x.png */; };
@@ -769,7 +799,6 @@
 		28FA8A7119E454E80040EA46 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
 		28FA8A7219E454E80040EA46 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
 		28FA8A7319E454E80040EA46 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
-		28FA8A7419E454E80040EA46 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9327140984F300C7AC75 /* MapView.xib */; };
 		28FA8A7519E454E80040EA46 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9329140984F300C7AC75 /* RouteListView.xib */; };
 		28FA8A7619E454E80040EA46 /* CycleStreets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289478A918AD31270066AA2E /* CycleStreets.xcassets */; };
 		28FA8A7719E454E80040EA46 /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932A140984F300C7AC75 /* RoutesView.xib */; };
@@ -787,7 +816,6 @@
 		28FA8A8319E454E80040EA46 /* CSBarButton_gpsactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28837D9D1965801000B58F7B /* CSBarButton_gpsactive@2x.png */; };
 		28FA8A8419E454E80040EA46 /* reesjeffreys.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C13144EDACF00726A6C /* reesjeffreys.png */; };
 		28FA8A8519E454E80040EA46 /* appconfig_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1C144F10E300726A6C /* appconfig_dev.plist */; };
-		28FA8A8619E454E80040EA46 /* PhotoMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28727AC718B51CF500D957FD /* PhotoMapView.xib */; };
 		28FA8A8719E454E80040EA46 /* appconfig_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1E144F10F300726A6C /* appconfig_live.plist */; };
 		28FA8A8819E454E80040EA46 /* POITypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E08C3145179AC0034CC63 /* POITypeCell.xib */; };
 		28FA8A8919E454E80040EA46 /* POIListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281E08C614517BE10034CC63 /* POIListView.xib */; };
@@ -874,7 +902,6 @@
 		28FA8ADA19E454E80040EA46 /* CSBarButton_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F3B15E4DA02006B01D0 /* CSBarButton_search.png */; };
 		28FA8ADB19E454E80040EA46 /* CSBarButton_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4215E4DB3B006B01D0 /* CSBarButton_search@2x.png */; };
 		28FA8ADC19E454E80040EA46 /* CSBarButton_routePlan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4515E4DB48006B01D0 /* CSBarButton_routePlan@2x.png */; };
-		28FA8ADD19E454E80040EA46 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9918AE429400EF0436 /* SettingsView.xib */; };
 		28FA8ADE19E454E80040EA46 /* CSBarButton_deletePoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */; };
 		28FA8ADF19E454E80040EA46 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28FA8AE019E454E80040EA46 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -927,7 +954,6 @@
 		28FA8B1119E454E80040EA46 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
 		28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
 		28FA8B1319E454E80040EA46 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
-		28FA8B1419E454E80040EA46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
 		28FA8B1519E454E80040EA46 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
 		28FA8B1619E454E80040EA46 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630F131FB6C8008527FC /* NSDate+Helper.m */; };
 		28FA8B1719E454E80040EA46 /* NSDate+NSDateRFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */; };
@@ -1137,7 +1163,6 @@
 		280E9321140984F300C7AC75 /* FavouritesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesView.xib; sourceTree = "<group>"; };
 		280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CSRouteDetailsViewController.xib; sourceTree = "<group>"; };
 		280E9325140984F300C7AC75 /* RouteSegmentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteSegmentView.xib; sourceTree = "<group>"; };
-		280E9327140984F300C7AC75 /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
 		280E9329140984F300C7AC75 /* RouteListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteListView.xib; sourceTree = "<group>"; };
 		280E932A140984F300C7AC75 /* RoutesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutesView.xib; sourceTree = "<group>"; };
 		280E932C140984F300C7AC75 /* MapLocationSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapLocationSearchView.xib; sourceTree = "<group>"; };
@@ -1262,6 +1287,24 @@
 		284ADCE918C88309003830DE /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		284ADCEC18C892A9003830DE /* BUCodableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCodableObject.h; sourceTree = "<group>"; };
 		284ADCED18C892A9003830DE /* BUCodableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCodableObject.m; sourceTree = "<group>"; };
+		285320FA19E7D44000118E48 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		285320FB19E7D44000118E48 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		285320FD19E7D46100118E48 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
+		285320FF19E7D4E800118E48 /* BUHorizontalMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUHorizontalMenuView.h; sourceTree = "<group>"; };
+		2853210019E7D4E800118E48 /* BUHorizontalMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUHorizontalMenuView.m; sourceTree = "<group>"; };
+		2853210319E7DA4D00118E48 /* MapStyleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapStyleCellView.h; path = views/MapStyleCellView.h; sourceTree = "<group>"; };
+		2853210419E7DA4D00118E48 /* MapStyleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapStyleCellView.m; path = views/MapStyleCellView.m; sourceTree = "<group>"; };
+		2853210719E7DA7E00118E48 /* MapStyleCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapStyleCellView.xib; path = views/MapStyleCellView.xib; sourceTree = "<group>"; };
+		2853210919E7DC0D00118E48 /* UIButton+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Additions.h"; sourceTree = "<group>"; };
+		2853210A19E7DC0D00118E48 /* UIButton+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Additions.m"; sourceTree = "<group>"; };
+		2853210F19E7EFF900118E48 /* ASMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ASMapStyle.png; path = maps/ASMapStyle.png; sourceTree = "<group>"; };
+		2853211019E7EFF900118E48 /* AVMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AVMapStyle.png; path = maps/AVMapStyle.png; sourceTree = "<group>"; };
+		2853211119E7EFF900118E48 /* OCMMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OCMMapStyle.png; path = maps/OCMMapStyle.png; sourceTree = "<group>"; };
+		2853211219E7EFF900118E48 /* OSMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OSMapStyle.png; path = maps/OSMapStyle.png; sourceTree = "<group>"; };
+		2853211319E7EFF900118E48 /* OSMMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OSMMapStyle.png; path = maps/OSMMapStyle.png; sourceTree = "<group>"; };
+		2853212319E7F24F00118E48 /* CNSMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CNSMapStyle.png; path = maps/CNSMapStyle.png; sourceTree = "<group>"; };
+		2853212719E7F2E500118E48 /* BUTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUTouchView.h; sourceTree = "<group>"; };
+		2853212819E7F2E500118E48 /* BUTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUTouchView.m; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
 		28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HUD_icon_checkMark@2x.png"; sourceTree = "<group>"; };
 		28535DBB15E50FCD0092FC16 /* HUD_icon_exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_exclaim.png; sourceTree = "<group>"; };
@@ -1364,7 +1407,6 @@
 		289478AB18AD31410066AA2E /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		289478AE18AD353B0066AA2E /* CSInitialMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSInitialMapViewController.h; path = Map/CSInitialMapViewController.h; sourceTree = "<group>"; };
 		289478AF18AD353B0066AA2E /* CSInitialMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSInitialMapViewController.m; path = Map/CSInitialMapViewController.m; sourceTree = "<group>"; };
-		289478C418AD70FB0066AA2E /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
 		28965C5218BF3CC3001BB258 /* TBXML+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+Additions.h"; sourceTree = "<group>"; };
 		28965C5318BF3CC3001BB258 /* TBXML+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+Additions.m"; sourceTree = "<group>"; };
 		28965C5818BF4F94001BB258 /* CSRoutePolyLineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRoutePolyLineOverlay.h; sourceTree = "<group>"; };
@@ -1404,6 +1446,12 @@
 		28A9998D19E709C30050C3E8 /* GenericWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericWebViewController.h; sourceTree = "<group>"; };
 		28A9998E19E709C30050C3E8 /* GenericWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericWebViewController.m; sourceTree = "<group>"; };
 		28A9999019E70C870050C3E8 /* CycleNorth.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = CycleNorth.xcassets; path = CycleNorthStaffs/CycleNorth.xcassets; sourceTree = "<group>"; };
+		28A9999219E712530050C3E8 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
+		28A9999419E71FBC0050C3E8 /* default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = default.css; sourceTree = "<group>"; };
+		28A9999819E729700050C3E8 /* UIColor+AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+AppColors.h"; path = "const/UIColor+AppColors.h"; sourceTree = "<group>"; };
+		28A9999919E729700050C3E8 /* UIColor+AppColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AppColors.m"; path = "const/UIColor+AppColors.m"; sourceTree = "<group>"; };
+		28A9999B19E72ACB0050C3E8 /* UIColor+AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColors.h"; sourceTree = "<group>"; };
+		28A9999C19E72ACB0050C3E8 /* UIColor+AppColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColors.m"; sourceTree = "<group>"; };
 		28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "CycleStreets-Info.plist"; path = "../CycleStreets-Info.plist"; sourceTree = "<group>"; };
 		28AD60B4131FB54A008527FC /* CycleStreets_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CycleStreets_Prefix.pch; path = ../CycleStreets_Prefix.pch; sourceTree = "<group>"; };
 		28AD60B5131FB54A008527FC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1884,7 +1932,6 @@
 		280E9326140984F300C7AC75 /* map */ = {
 			isa = PBXGroup;
 			children = (
-				280E9327140984F300C7AC75 /* MapView.xib */,
 				288663931521F7C60076BE5C /* RoutePlanMenuView.xib */,
 				28373E1E164814A900F5E356 /* WayPointView.xib */,
 			);
@@ -2079,6 +2126,47 @@
 			name = poi;
 			sourceTree = "<group>";
 		};
+		285320F919E7D43300118E48 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				285320FF19E7D4E800118E48 /* BUHorizontalMenuView.h */,
+				2853210019E7D4E800118E48 /* BUHorizontalMenuView.m */,
+				285320FA19E7D44000118E48 /* SettingsViewController.h */,
+				285320FB19E7D44000118E48 /* SettingsViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		2853210219E7DA1800118E48 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				2853210319E7DA4D00118E48 /* MapStyleCellView.h */,
+				2853210419E7DA4D00118E48 /* MapStyleCellView.m */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		2853210619E7DA6200118E48 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				2853210719E7DA7E00118E48 /* MapStyleCellView.xib */,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		2853210E19E7EF1A00118E48 /* maps */ = {
+			isa = PBXGroup;
+			children = (
+				2853212319E7F24F00118E48 /* CNSMapStyle.png */,
+				2853210F19E7EFF900118E48 /* ASMapStyle.png */,
+				2853211019E7EFF900118E48 /* AVMapStyle.png */,
+				2853211119E7EFF900118E48 /* OCMMapStyle.png */,
+				2853211219E7EFF900118E48 /* OSMapStyle.png */,
+				2853211319E7EFF900118E48 /* OSMMapStyle.png */,
+			);
+			name = maps;
+			sourceTree = "<group>";
+		};
 		2863A5E6134E5EC500A22093 /* RouteSummary */ = {
 			isa = PBXGroup;
 			children = (
@@ -2196,7 +2284,7 @@
 		289478BF18AD706B0066AA2E /* styling */ = {
 			isa = PBXGroup;
 			children = (
-				289478C418AD70FB0066AA2E /* default.css */,
+				28A9999419E71FBC0050C3E8 /* default.css */,
 			);
 			name = styling;
 			sourceTree = "<group>";
@@ -2238,6 +2326,7 @@
 		28A9997319E702AF0050C3E8 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				285320FD19E7D46100118E48 /* SettingsView.xib */,
 				28A9998819E709340050C3E8 /* GenericWebView.xib */,
 				28A9997419E702BF0050C3E8 /* PhotoMapView.xib */,
 			);
@@ -2249,6 +2338,8 @@
 			children = (
 				28A9997E19E706CA0050C3E8 /* BuildTargetConstants.h */,
 				28A9997F19E706CA0050C3E8 /* BuildTargetConstants.m */,
+				28A9999819E729700050C3E8 /* UIColor+AppColors.h */,
+				28A9999919E729700050C3E8 /* UIColor+AppColors.m */,
 			);
 			name = const;
 			sourceTree = "<group>";
@@ -2256,6 +2347,8 @@
 		28A9998119E7073A0050C3E8 /* const */ = {
 			isa = PBXGroup;
 			children = (
+				28A9999B19E72ACB0050C3E8 /* UIColor+AppColors.h */,
+				28A9999C19E72ACB0050C3E8 /* UIColor+AppColors.m */,
 				28A9998219E7073A0050C3E8 /* BuildTargetConstants.h */,
 				28A9998319E7073A0050C3E8 /* BuildTargetConstants.m */,
 			);
@@ -2430,6 +2523,7 @@
 		28AD6208131FB69D008527FC /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2853210E19E7EF1A00118E48 /* maps */,
 				28187A5614FCFF4C00A38A17 /* x1 */,
 				28735C10144EDACF00726A6C /* html */,
 				28AD6532131FC239008527FC /* x2 */,
@@ -2523,6 +2617,8 @@
 				28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */,
 				28AD6312131FB6C8008527FC /* NSDate-Misc.h */,
 				28AD6313131FB6C8008527FC /* NSDate-Misc.m */,
+				2853210919E7DC0D00118E48 /* UIButton+Additions.h */,
+				2853210A19E7DC0D00118E48 /* UIButton+Additions.m */,
 				28AD6314131FB6C8008527FC /* NSDictionary+Helpers.h */,
 				28AD6315131FB6C8008527FC /* NSDictionary+Helpers.m */,
 				28AD6316131FB6C8008527FC /* NSDictionary+UrlEncoding.h */,
@@ -2567,6 +2663,8 @@
 		28AD6337131FB6C8008527FC /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				2853212719E7F2E500118E48 /* BUTouchView.h */,
+				2853212819E7F2E500118E48 /* BUTouchView.m */,
 				28ECBE0919CF25E7006BFE83 /* BUInlineErrorView.h */,
 				28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */,
 				2875DE4B18B77CC400BEF18B /* BUIconActionSheet.h */,
@@ -2797,6 +2895,8 @@
 		28FA8A2819E4522C0040EA46 /* stoke */ = {
 			isa = PBXGroup;
 			children = (
+				2853210219E7DA1800118E48 /* views */,
+				285320F919E7D43300118E48 /* controllers */,
 				28A9997D19E706A70050C3E8 /* const */,
 				28FA8A3519E453F90040EA46 /* resources */,
 				28FA8A2A19E452E00040EA46 /* AppDefaults */,
@@ -2862,6 +2962,7 @@
 		28FA8A3919E453F90040EA46 /* styling */ = {
 			isa = PBXGroup;
 			children = (
+				28A9999219E712530050C3E8 /* default.css */,
 			);
 			path = styling;
 			sourceTree = "<group>";
@@ -2869,6 +2970,7 @@
 		28FA8A3A19E453F90040EA46 /* xib */ = {
 			isa = PBXGroup;
 			children = (
+				2853210619E7DA6200118E48 /* New Group */,
 				28A9997319E702AF0050C3E8 /* controllers */,
 			);
 			path = xib;
@@ -3070,7 +3172,6 @@
 				289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				289A9B5613536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png in Resources */,
-				289478C518AD70FB0066AA2E /* default.css in Resources */,
 				289A9B5713536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				289A9B5813536CCB00E8AF90 /* UIIcon_footpaths@2x.png in Resources */,
 				289A9B5913536CCB00E8AF90 /* UIIcon_quiet_street@2x.png in Resources */,
@@ -3078,6 +3179,7 @@
 				289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */,
 				289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */,
 				289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */,
+				2853211A19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
 				28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */,
 				28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */,
 				28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */,
@@ -3103,7 +3205,6 @@
 				280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */,
 				280E9338140984F300C7AC75 /* CSRouteDetailsViewController.xib in Resources */,
 				280E933A140984F300C7AC75 /* RouteSegmentView.xib in Resources */,
-				280E933B140984F300C7AC75 /* MapView.xib in Resources */,
 				280E933C140984F300C7AC75 /* RouteListView.xib in Resources */,
 				289478AA18AD31280066AA2E /* CycleStreets.xcassets in Resources */,
 				280E933D140984F300C7AC75 /* RoutesView.xib in Resources */,
@@ -3115,12 +3216,15 @@
 				287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */,
 				287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */,
 				287B8585144C4701006E3FCD /* UIButtonBarInfo@2x.png in Resources */,
+				2853211419E7EFF900118E48 /* ASMapStyle.png in Resources */,
 				287B8587144C470D006E3FCD /* UIIcon_minor_roads@2x.png in Resources */,
 				28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */,
 				28735C15144EDACF00726A6C /* donate.png in Resources */,
+				2853212419E7F24F00118E48 /* CNSMapStyle.png in Resources */,
 				28837D9E1965801000B58F7B /* CSBarButton_gpsactive@2x.png in Resources */,
 				28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */,
 				28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */,
+				2853211D19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				28727AC818B51CF500D957FD /* PhotoMapView.xib in Resources */,
 				28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */,
 				281E08C4145179AC0034CC63 /* POITypeCell.xib in Resources */,
@@ -3175,12 +3279,14 @@
 				28187ACD14FCFF4C00A38A17 /* UIButton_orange_lo.png in Resources */,
 				28187ACE14FCFF4C00A38A17 /* UIButton_orangesmall_hi.png in Resources */,
 				28187ACF14FCFF4C00A38A17 /* UIButton_orangesmall_lo.png in Resources */,
+				2853212019E7EFF900118E48 /* OSMMapStyle.png in Resources */,
 				28187AD014FCFF4C00A38A17 /* UIButton_red_hi.png in Resources */,
 				28187AD114FCFF4C00A38A17 /* UIButton_red_lo.png in Resources */,
 				28040C3818BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
 				28187AD214FCFF4C00A38A17 /* UIButton_save_hi.png in Resources */,
 				28187AD314FCFF4C00A38A17 /* UIButtonBarArrowLeft.png in Resources */,
 				28187AD414FCFF4D00A38A17 /* UIButtonBarArrowRight.png in Resources */,
+				2853211719E7EFF900118E48 /* AVMapStyle.png in Resources */,
 				28187AD514FCFF4D00A38A17 /* UIButtonBarCameraSmall.png in Resources */,
 				28BC6AA218AE429400EF0436 /* PhotoWizardView.xib in Resources */,
 				28187AD614FCFF4D00A38A17 /* UIButtonBarInfo.png in Resources */,
@@ -3229,6 +3335,7 @@
 				2811C49D166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C49F166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A1166CCD5F00592560 /* UIActivityMail.png in Resources */,
+				28A9999519E71FBC0050C3E8 /* default.css in Resources */,
 				2811C4A5166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C1166CE68F00592560 /* UIActivitySMS.png in Resources */,
 				28851505166E0E20003536CA /* UIActivityCopy.png in Resources */,
@@ -3268,6 +3375,7 @@
 				28BC6A9F18AE429400EF0436 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				2834361515DD5DC300B00FD5 /* UIButton_orangesmall_hi@2x.png in Resources */,
 				2834361615DD5DC300B00FD5 /* UIButton_orangesmall_lo@2x.png in Resources */,
+				28A9999619E71FBC0050C3E8 /* default.css in Resources */,
 				2834361715DD5DC300B00FD5 /* UIButton_red_hi@2x.png in Resources */,
 				2834361815DD5DC300B00FD5 /* UIButton_red_lo@2x.png in Resources */,
 				2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */,
@@ -3282,6 +3390,7 @@
 				2834362015DD5DC300B00FD5 /* UIIcon_tracks@2x.png in Resources */,
 				2834362115DD5DC300B00FD5 /* CSIcon_finish_wisp@2x.png in Resources */,
 				2834362215DD5DC300B00FD5 /* CSIcon_start_wisp@2x.png in Resources */,
+				2853212119E7EFF900118E48 /* OSMMapStyle.png in Resources */,
 				2834362315DD5DC300B00FD5 /* UIIcon_bear_left@2x.png in Resources */,
 				2834362415DD5DC300B00FD5 /* UIIcon_bear_right@2x.png in Resources */,
 				2834362515DD5DC300B00FD5 /* UIIcon_straight_on@2x.png in Resources */,
@@ -3304,7 +3413,6 @@
 				2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */,
 				2834363615DD5DC300B00FD5 /* CSRouteDetailsViewController.xib in Resources */,
 				2834363815DD5DC300B00FD5 /* RouteSegmentView.xib in Resources */,
-				2834363915DD5DC300B00FD5 /* MapView.xib in Resources */,
 				2834363A15DD5DC300B00FD5 /* RouteListView.xib in Resources */,
 				2834363B15DD5DC300B00FD5 /* RoutesView.xib in Resources */,
 				2834363C15DD5DC300B00FD5 /* MapLocationSearchView.xib in Resources */,
@@ -3319,13 +3427,14 @@
 				2834364415DD5DC300B00FD5 /* UIButtonBarInfo@2x.png in Resources */,
 				2834364515DD5DC300B00FD5 /* UIIcon_minor_roads@2x.png in Resources */,
 				2834364815DD5DC300B00FD5 /* cyclecambridge.jpg in Resources */,
+				2853211E19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				2834364915DD5DC300B00FD5 /* donate.png in Resources */,
 				2834364A15DD5DC300B00FD5 /* reesjeffreys.png in Resources */,
 				2834364C15DD5DC300B00FD5 /* appconfig_live.plist in Resources */,
+				2853212519E7F24F00118E48 /* CNSMapStyle.png in Resources */,
 				2834365915DD5DC300B00FD5 /* POITypeCell.xib in Resources */,
 				2834365A15DD5DC300B00FD5 /* POIListView.xib in Resources */,
 				2834365C15DD5DC300B00FD5 /* services_live.plist in Resources */,
-				289478C618AD70FB0066AA2E /* default.css in Resources */,
 				2834365D15DD5DC300B00FD5 /* POICatLocationCell.xib in Resources */,
 				28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
 				2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */,
@@ -3335,6 +3444,7 @@
 				2834366115DD5DC300B00FD5 /* Alert200x200.png in Resources */,
 				2834366215DD5DC300B00FD5 /* CSIcon_MapArrow_end.png in Resources */,
 				2834366315DD5DC300B00FD5 /* CSIcon_MapArrow_start.png in Resources */,
+				2853211519E7EFF900118E48 /* ASMapStyle.png in Resources */,
 				2834366415DD5DC300B00FD5 /* blueButton.png in Resources */,
 				2834366515DD5DC300B00FD5 /* BUSegmentedControl_center_hi.png in Resources */,
 				2834366615DD5DC300B00FD5 /* BUSegmentedControl_center_lo.png in Resources */,
@@ -3383,9 +3493,11 @@
 				2834369715DD5DC300B00FD5 /* UIButtonBarCameraSmall.png in Resources */,
 				2834369815DD5DC300B00FD5 /* UIButtonBarInfo.png in Resources */,
 				2834369915DD5DC300B00FD5 /* UIButtonBarRefresh.png in Resources */,
+				2853211B19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
 				2834369A15DD5DC300B00FD5 /* UIButtonBarStop.png in Resources */,
 				28BC6AA118AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
 				2834369F15DD5DC300B00FD5 /* CSIcon_finish_wisp.png in Resources */,
+				2853211819E7EFF900118E48 /* AVMapStyle.png in Resources */,
 				283436A015DD5DC300B00FD5 /* CSIcon_start_wisp.png in Resources */,
 				283436A415DD5DC300B00FD5 /* RoutePlanMenuView.xib in Resources */,
 				28BC6A9B18AE429400EF0436 /* PhotoMapImageLocationView.xib in Resources */,
@@ -3452,6 +3564,7 @@
 				28FA8A3E19E454E80040EA46 /* credits.html in Resources */,
 				28FA8A3F19E454E80040EA46 /* Default@2x.png in Resources */,
 				28FA8A4019E454E80040EA46 /* Entitlements.plist in Resources */,
+				285320FE19E7D46100118E48 /* SettingsView.xib in Resources */,
 				28FA8A4119E454E80040EA46 /* contentStrings.plist in Resources */,
 				28FA8A4219E454E80040EA46 /* FormData.plist in Resources */,
 				28FA8A4319E454E80040EA46 /* styles.plist in Resources */,
@@ -3468,9 +3581,9 @@
 				28FA8A4E19E454E80040EA46 /* UIButton_red_hi@2x.png in Resources */,
 				28FA8A4F19E454E80040EA46 /* UIButton_red_lo@2x.png in Resources */,
 				28FA8A5019E454E80040EA46 /* CSIcon_MapArrow_end@2x.png in Resources */,
+				2853212219E7EFF900118E48 /* OSMMapStyle.png in Resources */,
 				28FA8A5119E454E80040EA46 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				28FA8A5219E454E80040EA46 /* UIIcon_cycle_lanes@2x.png in Resources */,
-				28FA8A5319E454E80040EA46 /* default.css in Resources */,
 				28FA8A5419E454E80040EA46 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				28FA8A5519E454E80040EA46 /* UIIcon_footpaths@2x.png in Resources */,
 				28FA8A5619E454E80040EA46 /* UIIcon_quiet_street@2x.png in Resources */,
@@ -3496,14 +3609,15 @@
 				28FA8A6A19E454E80040EA46 /* CSTabBar_photomap_tb@2x.png in Resources */,
 				28FA8A6B19E454E80040EA46 /* CSTabBar_plan_route@2x.png in Resources */,
 				28FA8A6C19E454E80040EA46 /* CSTabBar_settings@2x.png in Resources */,
+				2853211919E7EFF900118E48 /* AVMapStyle.png in Resources */,
 				28FA8A6D19E454E80040EA46 /* FavouritesCell.xib in Resources */,
 				28FA8A6E19E454E80040EA46 /* ItineraryCell.xib in Resources */,
 				28FA8A6F19E454E80040EA46 /* RouteTableCell.xib in Resources */,
+				2853211619E7EFF900118E48 /* ASMapStyle.png in Resources */,
 				28FA8A7019E454E80040EA46 /* CreditsView.xib in Resources */,
 				28FA8A7119E454E80040EA46 /* FavouritesView.xib in Resources */,
 				28FA8A7219E454E80040EA46 /* CSRouteDetailsViewController.xib in Resources */,
 				28FA8A7319E454E80040EA46 /* RouteSegmentView.xib in Resources */,
-				28FA8A7419E454E80040EA46 /* MapView.xib in Resources */,
 				28FA8A7519E454E80040EA46 /* RouteListView.xib in Resources */,
 				28FA8A7619E454E80040EA46 /* CycleStreets.xcassets in Resources */,
 				28FA8A7719E454E80040EA46 /* RoutesView.xib in Resources */,
@@ -3523,7 +3637,7 @@
 				28FA8A8319E454E80040EA46 /* CSBarButton_gpsactive@2x.png in Resources */,
 				28FA8A8419E454E80040EA46 /* reesjeffreys.png in Resources */,
 				28FA8A8519E454E80040EA46 /* appconfig_dev.plist in Resources */,
-				28FA8A8619E454E80040EA46 /* PhotoMapView.xib in Resources */,
+				28A9999319E712530050C3E8 /* default.css in Resources */,
 				28FA8A8719E454E80040EA46 /* appconfig_live.plist in Resources */,
 				28FA8A8819E454E80040EA46 /* POITypeCell.xib in Resources */,
 				28FA8A8919E454E80040EA46 /* POIListView.xib in Resources */,
@@ -3567,6 +3681,7 @@
 				28FA8BB119E455E50040EA46 /* appconfig_live.plist in Resources */,
 				28FA8AAE19E454E80040EA46 /* CSTabBar_photomap_tb.png in Resources */,
 				28FA8AAF19E454E80040EA46 /* PhotoMapImageLocationView.xib in Resources */,
+				2853210819E7DA7E00118E48 /* MapStyleCellView.xib in Resources */,
 				28FA8AB019E454E80040EA46 /* CSTabBar_plan_route.png in Resources */,
 				28FA8AB119E454E80040EA46 /* CSTabBar_settings.png in Resources */,
 				28FA8AB219E454E80040EA46 /* UIButton_green_hi.png in Resources */,
@@ -3577,6 +3692,7 @@
 				28FA8AB719E454E80040EA46 /* UIButton_grey_lo.png in Resources */,
 				28FA8AB819E454E80040EA46 /* UIButton_orange_hi.png in Resources */,
 				28FA8AB919E454E80040EA46 /* UIButton_orange_lo.png in Resources */,
+				2853211F19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				28FA8ABA19E454E80040EA46 /* UIButton_orangesmall_hi.png in Resources */,
 				28FA8ABB19E454E80040EA46 /* UIButton_orangesmall_lo.png in Resources */,
 				28FA8ABC19E454E80040EA46 /* UIButton_red_hi.png in Resources */,
@@ -3612,7 +3728,6 @@
 				28FA8ADA19E454E80040EA46 /* CSBarButton_search.png in Resources */,
 				28FA8ADB19E454E80040EA46 /* CSBarButton_search@2x.png in Resources */,
 				28FA8ADC19E454E80040EA46 /* CSBarButton_routePlan@2x.png in Resources */,
-				28FA8ADD19E454E80040EA46 /* SettingsView.xib in Resources */,
 				28FA8ADE19E454E80040EA46 /* CSBarButton_deletePoint@2x.png in Resources */,
 				28A9998919E709340050C3E8 /* GenericWebView.xib in Resources */,
 				28FA8ADF19E454E80040EA46 /* HUD_icon_checkMark.png in Resources */,
@@ -3632,6 +3747,7 @@
 				28FA8AEC19E454E80040EA46 /* CSIcon_intermediate_wisp.png in Resources */,
 				28FA8AED19E454E80040EA46 /* UIBarButton_Back.png in Resources */,
 				28FA8AEE19E454E80040EA46 /* CSBarButton_waypoint.png in Resources */,
+				2853211C19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
 				28FA8AEF19E454E80040EA46 /* UIActivityBlank.png in Resources */,
 				28FA8AF019E454E80040EA46 /* UIActivityFacebook.png in Resources */,
 				28FA8AF119E454E80040EA46 /* UIActivityMail.png in Resources */,
@@ -3647,6 +3763,7 @@
 				28FA8AFB19E454E80040EA46 /* UIIcon_walking.png in Resources */,
 				28FA8AFC19E454E80040EA46 /* UIIcon_walking@2x.png in Resources */,
 				28FA8AFD19E454E80040EA46 /* Default-568h@2x.png in Resources */,
+				2853212619E7F24F00118E48 /* CNSMapStyle.png in Resources */,
 				28A9997519E702BF0050C3E8 /* PhotoMapView.xib in Resources */,
 				28FA8AFE19E454E80040EA46 /* Icon_nosearchresults@2x.png in Resources */,
 				28FA8AFF19E454E80040EA46 /* UIButtonBarRefresh@2x.png in Resources */,
@@ -3773,6 +3890,7 @@
 				28AD62AC131FB69D008527FC /* Files.m in Sources */,
 				28B3678018B2822700F7244C /* CSWaypointAnnotation.m in Sources */,
 				28AD62AE131FB69D008527FC /* UserAccount.m in Sources */,
+				2853212919E7F2E500118E48 /* BUTouchView.m in Sources */,
 				28890966193F3EFA009C4325 /* CSAppleVectorMapSource.m in Sources */,
 				28AD62B0131FB69D008527FC /* UserVO.m in Sources */,
 				28D186DA19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
@@ -3836,6 +3954,7 @@
 				287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */,
 				28965C5E18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */,
+				2853210B19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
 				2863A402134E508800A22093 /* CSRouteDetailsViewController.m in Sources */,
 				28D186D619378587001FBBF7 /* BUCalloutView.m in Sources */,
 				286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */,
@@ -3888,6 +4007,7 @@
 				28B4855B15262BE000E406E1 /* GenericConstants.m in Sources */,
 				28ECCBD81526300400284926 /* Reachability.m in Sources */,
 				28ECCBD91526302600284926 /* CopyLabel.m in Sources */,
+				28A9999D19E72ACB0050C3E8 /* UIColor+AppColors.m in Sources */,
 				289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */,
 				28D186DC19378587001FBBF7 /* CSGraphView.m in Sources */,
 				289F78041534432900B062D1 /* NSData+Base64.m in Sources */,
@@ -3924,6 +4044,7 @@
 				283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */,
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
 				283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */,
+				2853212A19E7F2E500118E48 /* BUTouchView.m in Sources */,
 				28890967193F3EFA009C4325 /* CSAppleVectorMapSource.m in Sources */,
 				28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */,
 				28D186DB19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
@@ -3987,6 +4108,7 @@
 				2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */,
 				28965C5F18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
+				2853210C19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
 				28727AD618B52B8900D957FD /* UserLocationManager.m in Sources */,
 				28D186D719378587001FBBF7 /* BUCalloutView.m in Sources */,
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
@@ -4039,6 +4161,7 @@
 				2834375815DD5DC300B00FD5 /* GenericConstants.m in Sources */,
 				2834375A15DD5DC300B00FD5 /* Reachability.m in Sources */,
 				2834375B15DD5DC300B00FD5 /* CopyLabel.m in Sources */,
+				28A9999E19E72ACB0050C3E8 /* UIColor+AppColors.m in Sources */,
 				28D186DD19378587001FBBF7 /* CSGraphView.m in Sources */,
 				2834375D15DD5DC300B00FD5 /* UIImage+Operations.m in Sources */,
 				2834375E15DD5DC300B00FD5 /* NSData+Base64.m in Sources */,
@@ -4082,7 +4205,6 @@
 				28FA8B1119E454E80040EA46 /* ValidationVO.m in Sources */,
 				28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */,
 				28FA8B1319E454E80040EA46 /* CreditsViewController.m in Sources */,
-				28FA8B1419E454E80040EA46 /* SettingsViewController.m in Sources */,
 				28FA8B1519E454E80040EA46 /* AppConstants.m in Sources */,
 				28FA8B1619E454E80040EA46 /* NSDate+Helper.m in Sources */,
 				28FA8B1719E454E80040EA46 /* NSDate+NSDateRFC1123.m in Sources */,
@@ -4148,8 +4270,10 @@
 				28FA8B5019E454E80040EA46 /* StringManager.m in Sources */,
 				28FA8B5119E454E80040EA46 /* StyleManager.m in Sources */,
 				28FA8B5219E454E80040EA46 /* UserSettingsManager.m in Sources */,
+				28A9999A19E729700050C3E8 /* UIColor+AppColors.m in Sources */,
 				28FA8B5319E454E80040EA46 /* BUDataSourceManager.m in Sources */,
 				28FA8B5419E454E80040EA46 /* NetworkRequest.m in Sources */,
+				2853210119E7D4E800118E48 /* BUHorizontalMenuView.m in Sources */,
 				28FA8B5519E454E80040EA46 /* CSMapSource.m in Sources */,
 				28FA8B5619E454E80040EA46 /* RouteParser.m in Sources */,
 				28FA8B5719E454E80040EA46 /* LocationSearchVO.m in Sources */,
@@ -4161,6 +4285,8 @@
 				28FA8B5D19E454E80040EA46 /* ImageCache.m in Sources */,
 				28FA8B5E19E454E80040EA46 /* MBProgressHUD.m in Sources */,
 				28FA8B5F19E454E80040EA46 /* MKMapView+Additions.m in Sources */,
+				2853212B19E7F2E500118E48 /* BUTouchView.m in Sources */,
+				2853210519E7DA4D00118E48 /* MapStyleCellView.m in Sources */,
 				28FA8B6019E454E80040EA46 /* CSWaypointAnnotationView.m in Sources */,
 				28FA8B6119E454E80040EA46 /* NSData+MBBase64.m in Sources */,
 				28FA8B6219E454E80040EA46 /* ButtonUtilities.m in Sources */,
@@ -4189,6 +4315,7 @@
 				28A9997219E6FEA80050C3E8 /* CSCycleNorthMapSource.m in Sources */,
 				28FA8B7819E454E80040EA46 /* CycleStreets.m in Sources */,
 				28FA8B7919E454E80040EA46 /* UploadPhotoVO.m in Sources */,
+				2853210D19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
 				28FA8B7A19E454E80040EA46 /* GenericConstants.m in Sources */,
 				28FA8B7B19E454E80040EA46 /* Reachability.m in Sources */,
 				28FA8B7C19E454E80040EA46 /* CopyLabel.m in Sources */,
@@ -4196,6 +4323,7 @@
 				28FA8B7E19E454E80040EA46 /* CSGraphView.m in Sources */,
 				28FA8B7F19E454E80040EA46 /* NSData+Base64.m in Sources */,
 				28FA8B8019E454E80040EA46 /* NSString-Utilities.m in Sources */,
+				285320FC19E7D44000118E48 /* SettingsViewController.m in Sources */,
 				28FA8B8119E454E80040EA46 /* PhotoCategoryManager.m in Sources */,
 				28FA8B8219E454E80040EA46 /* MapViewSearchLocationViewController.m in Sources */,
 				28FA8B8319E454E80040EA46 /* BUCalloutBackgroundView.m in Sources */,
