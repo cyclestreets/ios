@@ -11,6 +11,8 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
 		2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
+		2803DC6919E854E900841F29 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
+		2803DC6A19E854EA00841F29 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
 		28040C3818BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
 		28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
@@ -430,6 +432,9 @@
 		2853212919E7F2E500118E48 /* BUTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212819E7F2E500118E48 /* BUTouchView.m */; };
 		2853212A19E7F2E500118E48 /* BUTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212819E7F2E500118E48 /* BUTouchView.m */; };
 		2853212B19E7F2E500118E48 /* BUTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212819E7F2E500118E48 /* BUTouchView.m */; };
+		2853212E19E84F4200118E48 /* CSMapTileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212D19E84F4200118E48 /* CSMapTileService.m */; };
+		2853212F19E84F4200118E48 /* CSMapTileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212D19E84F4200118E48 /* CSMapTileService.m */; };
+		2853213019E84F4200118E48 /* CSMapTileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212D19E84F4200118E48 /* CSMapTileService.m */; };
 		28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
 		28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
@@ -744,8 +749,6 @@
 		28ECCBD81526300400284926 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484D715261EC800E406E1 /* Reachability.m */; };
 		28ECCBD91526302600284926 /* CopyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484DD15261F3B00E406E1 /* CopyLabel.m */; };
 		28FA62BE153C1C7200AF6267 /* UITextViewAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */; };
-		28FA8A2519E3DC6C0040EA46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
-		28FA8A2619E3DC6C0040EA46 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
 		28FA8A3E19E454E80040EA46 /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		28FA8A3F19E454E80040EA46 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3E127821DB002640D0 /* Default@2x.png */; };
 		28FA8A4019E454E80040EA46 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B8131FB54A008527FC /* Entitlements.plist */; };
@@ -1305,6 +1308,8 @@
 		2853212319E7F24F00118E48 /* CNSMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CNSMapStyle.png; path = maps/CNSMapStyle.png; sourceTree = "<group>"; };
 		2853212719E7F2E500118E48 /* BUTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUTouchView.h; sourceTree = "<group>"; };
 		2853212819E7F2E500118E48 /* BUTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUTouchView.m; sourceTree = "<group>"; };
+		2853212C19E84F4200118E48 /* CSMapTileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMapTileService.h; sourceTree = "<group>"; };
+		2853212D19E84F4200118E48 /* CSMapTileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMapTileService.m; sourceTree = "<group>"; };
 		28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_checkMark.png; sourceTree = "<group>"; };
 		28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HUD_icon_checkMark@2x.png"; sourceTree = "<group>"; };
 		28535DBB15E50FCD0092FC16 /* HUD_icon_exclaim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HUD_icon_exclaim.png; sourceTree = "<group>"; };
@@ -2260,6 +2265,11 @@
 		28890953193F3815009C4325 /* maps */ = {
 			isa = PBXGroup;
 			children = (
+				28890968193F41BB009C4325 /* CSMapSource.h */,
+				28890969193F41BB009C4325 /* CSMapSource.m */,
+				282517F919D45A6600DDD6D9 /* MKMapView+LegalLabel.h */,
+				282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */,
+				28890962193F38A0009C4325 /* CSMapSourceProtocol.h */,
 				28890956193F385D009C4325 /* CSOpenCycleMapSource.h */,
 				28890957193F385D009C4325 /* CSOpenCycleMapSource.m */,
 				28890958193F385D009C4325 /* CSOpenStreetMapSource.h */,
@@ -2268,11 +2278,6 @@
 				2889095B193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m */,
 				28890964193F3EFA009C4325 /* CSAppleVectorMapSource.h */,
 				28890965193F3EFA009C4325 /* CSAppleVectorMapSource.m */,
-				28890968193F41BB009C4325 /* CSMapSource.h */,
-				28890969193F41BB009C4325 /* CSMapSource.m */,
-				28890962193F38A0009C4325 /* CSMapSourceProtocol.h */,
-				282517F919D45A6600DDD6D9 /* MKMapView+LegalLabel.h */,
-				282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */,
 				28A9997019E6FEA80050C3E8 /* CSCycleNorthMapSource.h */,
 				28A9997119E6FEA80050C3E8 /* CSCycleNorthMapSource.m */,
 				28A9997619E705440050C3E8 /* CSAppleSatelliteMapSource.h */,
@@ -2563,6 +2568,8 @@
 				28965C5918BF4F94001BB258 /* CSRoutePolyLineOverlay.m */,
 				28916030133A9AC9000C821B /* CSSegmentFooterView.h */,
 				28916031133A9AC9000C821B /* CSSegmentFooterView.m */,
+				2853212C19E84F4200118E48 /* CSMapTileService.h */,
+				2853212D19E84F4200118E48 /* CSMapTileService.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3883,6 +3890,7 @@
 				28727ADE18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */,
 				28AD60BC131FB54A008527FC /* AppDelegate.m in Sources */,
 				28AD60BF131FB54A008527FC /* main.m in Sources */,
+				2803DC6919E854E900841F29 /* SettingsViewController.m in Sources */,
 				28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */,
 				28AD62A3131FB69D008527FC /* AccountViewController.m in Sources */,
 				28AD62A6131FB69D008527FC /* SettingsManager.m in Sources */,
@@ -3899,7 +3907,6 @@
 				28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
 				28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */,
-				28FA8A2519E3DC6C0040EA46 /* SettingsViewController.m in Sources */,
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
@@ -3996,6 +4003,7 @@
 				28965C6018BF709F001BB258 /* XMLRequest.m in Sources */,
 				284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */,
 				281E08BC14516A4F0034CC63 /* POICatLocationCellView.m in Sources */,
+				2853212E19E84F4200118E48 /* CSMapTileService.m in Sources */,
 				281E08EE145198D10034CC63 /* GTMNSString+HTML.m in Sources */,
 				281E08EF145198D10034CC63 /* NSString+HTML.m in Sources */,
 				28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */,
@@ -4037,6 +4045,7 @@
 				283436C515DD5DC300B00FD5 /* AppDelegate.m in Sources */,
 				283436C615DD5DC300B00FD5 /* main.m in Sources */,
 				283436C815DD5DC300B00FD5 /* SuperViewController.m in Sources */,
+				2803DC6A19E854EA00841F29 /* SettingsViewController.m in Sources */,
 				284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */,
 				283436C915DD5DC300B00FD5 /* AccountViewController.m in Sources */,
 				288055DB18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
@@ -4053,7 +4062,6 @@
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
 				283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */,
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
-				28FA8A2619E3DC6C0040EA46 /* SettingsViewController.m in Sources */,
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
 				2886DED918C528C100CD208B /* BUNetworkOperation.m in Sources */,
@@ -4150,6 +4158,7 @@
 				2834374715DD5DC300B00FD5 /* POICatLocationCellView.m in Sources */,
 				2834374815DD5DC300B00FD5 /* GTMNSString+HTML.m in Sources */,
 				2834374915DD5DC300B00FD5 /* NSString+HTML.m in Sources */,
+				2853212F19E84F4200118E48 /* CSMapTileService.m in Sources */,
 				288055D518BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */,
 				2834374A15DD5DC300B00FD5 /* SegmentVO.m in Sources */,
 				2886DEE118C530A500CD208B /* BUDataSourceManager.m in Sources */,
@@ -4328,6 +4337,7 @@
 				28FA8B8219E454E80040EA46 /* MapViewSearchLocationViewController.m in Sources */,
 				28FA8B8319E454E80040EA46 /* BUCalloutBackgroundView.m in Sources */,
 				28FA8B8419E454E80040EA46 /* MapLocationSearchCellView.m in Sources */,
+				2853213019E84F4200118E48 /* CSMapTileService.m in Sources */,
 				28FA8B8519E454E80040EA46 /* PhotoMapImageLocationViewController.m in Sources */,
 				28FA8B8619E454E80040EA46 /* ItineraryViewController.m in Sources */,
 				28FA8B8719E454E80040EA46 /* PhotoWizardCategoryCellView.m in Sources */,

@@ -61,14 +61,15 @@
     _scrollView.alwaysBounceVertical = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     //_scrollView.pagingEnabled=YES;
-    _scrollView.contentInset=UIEdgeInsetsMake(0, 0,0,0);
+    _scrollView.contentInset=UIEdgeInsetsMake(0, 0,0,40);
     
     self.itemContainer=[[LayoutBox alloc]initWithFrame:self.bounds];
     _itemContainer.alignMode=BUCenterAlignMode;
     _itemContainer.fixedHeight=YES;
     _itemContainer.paddingLeft=0;
     _itemContainer.paddingRight=0;
-    _itemContainer.itemPadding=10;
+    _itemContainer.itemPadding=1;
+	_itemContainer.backgroundColor=UIColorFromRGB(0xdddddd);
     
     [_scrollView addSubview:_itemContainer];
     

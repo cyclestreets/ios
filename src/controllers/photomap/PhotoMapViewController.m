@@ -47,7 +47,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <MapKit/MapKit.h>
 #import "CSMapSource.h"
 #import "MKMapView+LegalLabel.h"
-
+#import "CSMapTileService.h"
 #import "PhotoWizardViewController.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
@@ -138,75 +138,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
 	self.activeMapSource=[CycleStreets activeMapSource];
 	
-	if(overlays.count==0){
-		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
-			
-			
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
-			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=_activeMapSource.maxZoom;
-			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
-			
-			
-		}
-		
-	}else{
-		
-		for(id <MKOverlay> overlay in overlays){
-			if([overlay isKindOfClass:[MKTileOverlay class]] ){
-				
-				
-				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
-					
-					
-					[_mapView removeOverlay:overlay];
-					
-					_mapView.mapType=MKMapTypeStandard;
-					
-					break;
-					
-				}else if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
-					
-					[_mapView removeOverlay:overlay];
-					
-					_mapView.mapType=MKMapTypeSatellite;
-					
-					break;
-					
-				}else{
-					
-					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
-					newoverlay.canReplaceMapContent = YES;
-					newoverlay.maximumZ=_activeMapSource.maxZoom;
-					[_mapView removeOverlay:overlay];
-					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
-					
-					
-					break;
-					
-				}
-				
-				
-				break;
-			}
-		}
-		
-	}
+	[CSMapTileService updateMapStyleForMap:_mapView toMapStyle:_activeMapSource withOverlays:overlays];
 	
-	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] || [_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
-		
-		_attributionLabel.visible=NO;
-		_mapView.legalLabel.visible=YES;
-		
-	}else{
-		_attributionLabel.visible=YES;
-		_mapView.legalLabel.visible=NO;
-		_attributionLabel.text = _activeMapSource.shortAttribution;
-		[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
-		
-		
-	}
+	[CSMapTileService updateMapAttributonLabel:_attributionLabel forMap:_mapView forMapStyle:_activeMapSource inView:self.view];
 	
 }
 

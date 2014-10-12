@@ -5,8 +5,6 @@
 #import <UIKit/UIKit.h>
 
 
-#define ISDEVELOPMENT 1
-
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
 	
     

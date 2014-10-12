@@ -50,7 +50,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSRoutePolyLineOverlay.h"
 #import "CSRoutePolyLineRenderer.h"
 #import "CSMapSource.h"
-
+#import "CSMapTileService.h"
 
 @interface RouteSegmentViewController()< MKMapViewDelegate>
 
@@ -152,60 +152,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	self.activeMapSource=[CycleStreets activeMapSource];
 	
-	if(overlays.count==0){
-		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
-			
-			
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
-			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=_activeMapSource.maxZoom;
-			[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
-			
-		}
-		
-	}else{
-		
-		for(id <MKOverlay> overlay in overlays){
-			if([overlay isKindOfClass:[MKTileOverlay class]] ){
-				
-				
-				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
-					
-					
-					[_mapView removeOverlay:overlay];
-					
-					_mapView.mapType=MKMapTypeStandard;
-					
-					break;
-					
-				}else if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
-					
-					[_mapView removeOverlay:overlay];
-					
-					_mapView.mapType=MKMapTypeSatellite;
-					
-					break;
-					
-				}else{
-					
-					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
-					newoverlay.canReplaceMapContent = YES;
-					newoverlay.maximumZ=_activeMapSource.maxZoom;
-					[_mapView removeOverlay:overlay];
-					[_mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
-					
-					break;
-					
-				}
-				
-				
-				break;
-			}
-		}
-		
-	}
-	
+	[CSMapTileService updateMapStyleForMap:_mapView toMapStyle:_activeMapSource withOverlays:overlays];
 	
 	if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] || [_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 		

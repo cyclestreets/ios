@@ -28,6 +28,7 @@
 #import "CSPhotomapAnnotationView.h"
 #import "AccountViewController.h"
 #import "CSMapSource.h"
+#import "CSMapTileService.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -230,62 +231,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	self.activeMapSource=[CycleStreets activeMapSource];
 	
-	if(overlays.count==0){
-		
-		if(![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
-			
-			
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
-			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=_activeMapSource.maxZoom;
-			[_locationMapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
-			
-			
-		}
-		
-	}else{
-		
-		for(id <MKOverlay> overlay in overlays){
-			if([overlay isKindOfClass:[MKTileOverlay class]] ){
-				
-				
-				if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
-					
-					
-					[_locationMapView removeOverlay:overlay];
-					
-					_locationMapView.mapType=MKMapTypeStandard;
-					
-					break;
-					
-				}else if([_activeMapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
-					
-					[_locationMapView removeOverlay:overlay];
-					
-					_locationMapView.mapType=MKMapTypeSatellite;
-					
-					break;
-					
-				}else{
-					
-					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:_activeMapSource.tileTemplate];
-					newoverlay.canReplaceMapContent = YES;
-					newoverlay.maximumZ=_activeMapSource.maxZoom;
-					[_locationMapView removeOverlay:overlay];
-					[_locationMapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
-					
-					
-					break;
-					
-				}
-				
-				
-				break;
-			}
-		}
-		
-	}
-	
+	[CSMapTileService updateMapStyleForMap:_locationMapView toMapStyle:_activeMapSource withOverlays:overlays];
 	
 	
 }

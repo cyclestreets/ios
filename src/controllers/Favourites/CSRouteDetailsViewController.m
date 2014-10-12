@@ -229,8 +229,9 @@ static NSString *const VIEWTITLE=@"Route details";
 	
     BOOL isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:_route];
     _selectedRouteIcon.visible=isSelectedRoute;
-    _selectRouteButton.enabled=!isSelectedRoute;
 	
+    _selectRouteButton.enabled=!isSelectedRoute;
+	_selectRouteButton.visible=_dataType!=SavedRoutesDataTypeItinerary;
     
 	
 	[_viewContainer refresh];
@@ -330,6 +331,10 @@ static NSString *const VIEWTITLE=@"Route details";
 	__weak __typeof(&*self)weakSelf = self;
 	UIActionSheet *actionSheet=[UIActionSheet bk_actionSheetWithTitle:@"Route options"];
 	actionSheet.delegate=self;
+	
+	// OS8 only //
+	[[UICollectionView appearanceWhenContainedIn:[UIAlertController class], nil] setTintColor:[UIColor darkGrayColor]];
+	
 	[actionSheet bk_addButtonWithTitle:@"Rename route" handler:^{
 		[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:_route.nameString delegate:weakSelf];
 	}];
