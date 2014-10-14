@@ -25,6 +25,8 @@ typedef struct
 
 +(void)alignView:(UIView*)child withView:(UIView*)view :(LayoutBoxAlignMode)horizontal :(LayoutBoxAlignMode)vertical;
 +(void)alignView:(UIView*)child withView:(UIView*)view :(LayoutBoxAlignMode)horizontal :(LayoutBoxAlignMode)vertical :(int)inset;
++(void)alignView:(UIView*)child inRect:(CGRect)targetRect :(LayoutBoxAlignMode)horizontal :(LayoutBoxAlignMode)vertical;
+
 +(void)distributeItems:(NSArray*)items inDirection:(LayoutBoxLayoutMode)direction :(int)dimension :(int)inset;
 +(void)removeAllSubViewsForView:(UIView*)view;
 + (void)setTransformForCurrentOrientation:(UIView*)view;

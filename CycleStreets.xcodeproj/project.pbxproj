@@ -569,6 +569,16 @@
 		289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
 		289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
 		289E6AFA144C35860079FFE5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E6AF8144C357C0079FFE5 /* libz.dylib */; };
+		289EFC4019ED23760081E7BB /* SavedLocationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC3F19ED23760081E7BB /* SavedLocationsManager.m */; };
+		289EFC4319ED24360081E7BB /* SavedLocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4219ED24360081E7BB /* SavedLocationVO.m */; };
+		289EFC4719ED2BA00081E7BB /* SavedLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4619ED2BA00081E7BB /* SavedLocationsViewController.m */; };
+		289EFC4B19ED2C440081E7BB /* SavedLocationTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4A19ED2C440081E7BB /* SavedLocationTableCellView.m */; };
+		289EFC4E19ED2CEC0081E7BB /* SavedLocationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC4D19ED2CEC0081E7BB /* SavedLocationTableCell.xib */; };
+		289EFC5119ED39E30081E7BB /* CSOverlayTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC5019ED39E30081E7BB /* CSOverlayTransitionAnimator.m */; };
+		289EFC5319ED4F770081E7BB /* SavedLocation_CellIcon_Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC5219ED4F770081E7BB /* SavedLocation_CellIcon_Home.png */; };
+		289EFC5619ED5A710081E7BB /* NSMutableArray+Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */; };
+		289EFC5719ED5A710081E7BB /* NSMutableArray+Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */; };
+		289EFC5819ED5A710081E7BB /* NSMutableArray+Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */; };
 		289F78031534431E00B062D1 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
@@ -1431,6 +1441,20 @@
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
 		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		289EFC3E19ED23760081E7BB /* SavedLocationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedLocationsManager.h; sourceTree = "<group>"; };
+		289EFC3F19ED23760081E7BB /* SavedLocationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedLocationsManager.m; sourceTree = "<group>"; };
+		289EFC4119ED24360081E7BB /* SavedLocationVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedLocationVO.h; sourceTree = "<group>"; };
+		289EFC4219ED24360081E7BB /* SavedLocationVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedLocationVO.m; sourceTree = "<group>"; };
+		289EFC4519ED2BA00081E7BB /* SavedLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SavedLocationsViewController.h; path = SavedLocations/SavedLocationsViewController.h; sourceTree = "<group>"; };
+		289EFC4619ED2BA00081E7BB /* SavedLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SavedLocationsViewController.m; path = SavedLocations/SavedLocationsViewController.m; sourceTree = "<group>"; };
+		289EFC4919ED2C440081E7BB /* SavedLocationTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SavedLocationTableCellView.h; path = src/cells/SavedLocationTableCellView.h; sourceTree = "<group>"; };
+		289EFC4A19ED2C440081E7BB /* SavedLocationTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SavedLocationTableCellView.m; path = src/cells/SavedLocationTableCellView.m; sourceTree = "<group>"; };
+		289EFC4D19ED2CEC0081E7BB /* SavedLocationTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SavedLocationTableCell.xib; path = cells/SavedLocationTableCell.xib; sourceTree = "<group>"; };
+		289EFC4F19ED39E30081E7BB /* CSOverlayTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSOverlayTransitionAnimator.h; sourceTree = "<group>"; };
+		289EFC5019ED39E30081E7BB /* CSOverlayTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSOverlayTransitionAnimator.m; sourceTree = "<group>"; };
+		289EFC5219ED4F770081E7BB /* SavedLocation_CellIcon_Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SavedLocation_CellIcon_Home.png; sourceTree = "<group>"; };
+		289EFC5419ED5A710081E7BB /* NSMutableArray+Plist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Plist.h"; sourceTree = "<group>"; };
+		289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Plist.m"; sourceTree = "<group>"; };
 		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
 		28A89CD414FD52230001BABA /* UploadPhotoVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPhotoVO.m; sourceTree = "<group>"; };
 		28A8B6301450B1DC009C5647 /* POITypeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POITypeCellView.h; sourceTree = "<group>"; };
@@ -2151,12 +2175,13 @@
 			name = views;
 			sourceTree = "<group>";
 		};
-		2853210619E7DA6200118E48 /* New Group */ = {
+		2853210619E7DA6200118E48 /* cells */ = {
 			isa = PBXGroup;
 			children = (
 				2853210719E7DA7E00118E48 /* MapStyleCellView.xib */,
+				289EFC4D19ED2CEC0081E7BB /* SavedLocationTableCell.xib */,
 			);
-			name = "New Group";
+			name = cells;
 			sourceTree = "<group>";
 		};
 		2853210E19E7EF1A00118E48 /* maps */ = {
@@ -2328,6 +2353,24 @@
 			path = Wisps;
 			sourceTree = "<group>";
 		};
+		289EFC4419ED2B7B0081E7BB /* SavedLocations */ = {
+			isa = PBXGroup;
+			children = (
+				289EFC4519ED2BA00081E7BB /* SavedLocationsViewController.h */,
+				289EFC4619ED2BA00081E7BB /* SavedLocationsViewController.m */,
+			);
+			name = SavedLocations;
+			sourceTree = "<group>";
+		};
+		289EFC4819ED2C1A0081E7BB /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				289EFC4919ED2C440081E7BB /* SavedLocationTableCellView.h */,
+				289EFC4A19ED2C440081E7BB /* SavedLocationTableCellView.m */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
 		28A9997319E702AF0050C3E8 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2394,6 +2437,7 @@
 		28AD61DC131FB69D008527FC /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				289EFC4419ED2B7B0081E7BB /* SavedLocations */,
 				28BC6A7A18AE427B00EF0436 /* PhotoMap */,
 				28BC6A7F18AE427B00EF0436 /* PhotoWizard */,
 				28BC6A8418AE427B00EF0436 /* Settings */,
@@ -2438,6 +2482,8 @@
 				28AD61EB131FB69D008527FC /* SettingsManager.m */,
 				28AD61EC131FB69D008527FC /* StartupManager.h */,
 				28AD61ED131FB69D008527FC /* StartupManager.m */,
+				289EFC3E19ED23760081E7BB /* SavedLocationsManager.h */,
+				289EFC3F19ED23760081E7BB /* SavedLocationsManager.m */,
 			);
 			path = managers;
 			sourceTree = "<group>";
@@ -2491,6 +2537,8 @@
 				28BC6AA718AE42FA00EF0436 /* PhotoCategoryVO.m */,
 				28373E2816481BF800F5E356 /* WayPointVO.h */,
 				28373E2916481BF800F5E356 /* WayPointVO.m */,
+				289EFC4119ED24360081E7BB /* SavedLocationVO.h */,
+				289EFC4219ED24360081E7BB /* SavedLocationVO.m */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -2554,6 +2602,8 @@
 		28AD6218131FB69D008527FC /* views */ = {
 			isa = PBXGroup;
 			children = (
+				289EFC4F19ED39E30081E7BB /* CSOverlayTransitionAnimator.h */,
+				289EFC5019ED39E30081E7BB /* CSOverlayTransitionAnimator.m */,
 				28D186D219378587001FBBF7 /* BUCalloutView.h */,
 				28D186CE19378587001FBBF7 /* BUCalloutView.m */,
 				28D186D019378587001FBBF7 /* CSGraphView.h */,
@@ -2650,6 +2700,8 @@
 				28B3677B18B275C800F7244C /* MKMapView+Additions.m */,
 				280E93711409861300C7AC75 /* UIImage-Additions.h */,
 				280E93721409861300C7AC75 /* UIImage-Additions.m */,
+				289EFC5419ED5A710081E7BB /* NSMutableArray+Plist.h */,
+				289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -2738,6 +2790,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				289EFC5219ED4F770081E7BB /* SavedLocation_CellIcon_Home.png */,
 				28837D9D1965801000B58F7B /* CSBarButton_gpsactive@2x.png */,
 				28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */,
 				289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */,
@@ -2902,6 +2955,7 @@
 		28FA8A2819E4522C0040EA46 /* stoke */ = {
 			isa = PBXGroup;
 			children = (
+				289EFC4819ED2C1A0081E7BB /* cells */,
 				2853210219E7DA1800118E48 /* views */,
 				285320F919E7D43300118E48 /* controllers */,
 				28A9997D19E706A70050C3E8 /* const */,
@@ -2977,7 +3031,7 @@
 		28FA8A3A19E453F90040EA46 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				2853210619E7DA6200118E48 /* New Group */,
+				2853210619E7DA6200118E48 /* cells */,
 				28A9997319E702AF0050C3E8 /* controllers */,
 			);
 			path = xib;
@@ -3631,6 +3685,7 @@
 				28FA8A7819E454E80040EA46 /* MapLocationSearchView.xib in Resources */,
 				28FA8A7919E454E80040EA46 /* AccountView.xib in Resources */,
 				28FA8A7A19E454E80040EA46 /* InitialLocationView.xib in Resources */,
+				289EFC4E19ED2CEC0081E7BB /* SavedLocationTableCell.xib in Resources */,
 				28FA8A7B19E454E80040EA46 /* donate.html in Resources */,
 				28FA8A7C19E454E80040EA46 /* UIButtonBarArrowLeft@2x.png in Resources */,
 				28A9996E19E6FDFE0050C3E8 /* APIKey_live.txt in Resources */,
@@ -3768,6 +3823,7 @@
 				28FA8AF919E454E80040EA46 /* UIActivitySMS@2x.png in Resources */,
 				28FA8AFA19E454E80040EA46 /* UIActivityTwitter@2x.png in Resources */,
 				28FA8AFB19E454E80040EA46 /* UIIcon_walking.png in Resources */,
+				289EFC5319ED4F770081E7BB /* SavedLocation_CellIcon_Home.png in Resources */,
 				28FA8AFC19E454E80040EA46 /* UIIcon_walking@2x.png in Resources */,
 				28FA8AFD19E454E80040EA46 /* Default-568h@2x.png in Resources */,
 				2853212619E7F24F00118E48 /* CNSMapStyle.png in Resources */,
@@ -3894,6 +3950,7 @@
 				28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */,
 				28AD62A3131FB69D008527FC /* AccountViewController.m in Sources */,
 				28AD62A6131FB69D008527FC /* SettingsManager.m in Sources */,
+				289EFC5619ED5A710081E7BB /* NSMutableArray+Plist.m in Sources */,
 				28AD62A7131FB69D008527FC /* StartupManager.m in Sources */,
 				28AD62AC131FB69D008527FC /* Files.m in Sources */,
 				28B3678018B2822700F7244C /* CSWaypointAnnotation.m in Sources */,
@@ -4049,6 +4106,7 @@
 				284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */,
 				283436C915DD5DC300B00FD5 /* AccountViewController.m in Sources */,
 				288055DB18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
+				289EFC5719ED5A710081E7BB /* NSMutableArray+Plist.m in Sources */,
 				283436CC15DD5DC300B00FD5 /* SettingsManager.m in Sources */,
 				283436CD15DD5DC300B00FD5 /* StartupManager.m in Sources */,
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
@@ -4204,6 +4262,7 @@
 				28FA8B0719E454E80040EA46 /* SettingsManager.m in Sources */,
 				28FA8B0819E454E80040EA46 /* StartupManager.m in Sources */,
 				28FA8B0919E454E80040EA46 /* Files.m in Sources */,
+				289EFC5119ED39E30081E7BB /* CSOverlayTransitionAnimator.m in Sources */,
 				28FA8B0A19E454E80040EA46 /* CSWaypointAnnotation.m in Sources */,
 				28FA8B0B19E454E80040EA46 /* UserAccount.m in Sources */,
 				28FA8B0C19E454E80040EA46 /* CSAppleVectorMapSource.m in Sources */,
@@ -4230,9 +4289,11 @@
 				28FA8B2119E454E80040EA46 /* UIButton+Glossy.m in Sources */,
 				28FA8B2219E454E80040EA46 /* UIColor-Expanded.m in Sources */,
 				28FA8B2319E454E80040EA46 /* UIImage+AKLoadingExtension.m in Sources */,
+				289EFC4719ED2BA00081E7BB /* SavedLocationsViewController.m in Sources */,
 				28FA8B2419E454E80040EA46 /* UIView+Border.m in Sources */,
 				28FA8B2519E454E80040EA46 /* UIView+Additions.m in Sources */,
 				28FA8B2619E454E80040EA46 /* AsyncImageView.m in Sources */,
+				289EFC4019ED23760081E7BB /* SavedLocationsManager.m in Sources */,
 				28FA8B2719E454E80040EA46 /* BorderView.m in Sources */,
 				28FA8B2819E454E80040EA46 /* CSRouteSegmentAnnotation.m in Sources */,
 				28FA8B2919E454E80040EA46 /* BUSegmentedControl.m in Sources */,
@@ -4304,6 +4365,7 @@
 				28FA8B6519E454E80040EA46 /* PhotoMapVO.m in Sources */,
 				28FA8B6619E454E80040EA46 /* BUNetworkOperation.m in Sources */,
 				28FA8B6719E454E80040EA46 /* PhotoMapListVO.m in Sources */,
+				289EFC4319ED24360081E7BB /* SavedLocationVO.m in Sources */,
 				28FA8B6819E454E80040EA46 /* CSPointVO.m in Sources */,
 				28FA8B6919E454E80040EA46 /* HudManager.m in Sources */,
 				28FA8B6A19E454E80040EA46 /* AppConfigManager.m in Sources */,
@@ -4322,6 +4384,7 @@
 				28FA8B7619E454E80040EA46 /* SavedRoutesManager.m in Sources */,
 				28FA8B7719E454E80040EA46 /* RoutesViewController.m in Sources */,
 				28A9997219E6FEA80050C3E8 /* CSCycleNorthMapSource.m in Sources */,
+				289EFC4B19ED2C440081E7BB /* SavedLocationTableCellView.m in Sources */,
 				28FA8B7819E454E80040EA46 /* CycleStreets.m in Sources */,
 				28FA8B7919E454E80040EA46 /* UploadPhotoVO.m in Sources */,
 				2853210D19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
@@ -4337,6 +4400,7 @@
 				28FA8B8219E454E80040EA46 /* MapViewSearchLocationViewController.m in Sources */,
 				28FA8B8319E454E80040EA46 /* BUCalloutBackgroundView.m in Sources */,
 				28FA8B8419E454E80040EA46 /* MapLocationSearchCellView.m in Sources */,
+				289EFC5819ED5A710081E7BB /* NSMutableArray+Plist.m in Sources */,
 				2853213019E84F4200118E48 /* CSMapTileService.m in Sources */,
 				28FA8B8519E454E80040EA46 /* PhotoMapImageLocationViewController.m in Sources */,
 				28FA8B8619E454E80040EA46 /* ItineraryViewController.m in Sources */,

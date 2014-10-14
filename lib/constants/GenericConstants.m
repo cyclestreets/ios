@@ -91,6 +91,7 @@ NSString *const ID=@"id";
 NSString *const CONTROLLER=@"controller";
 NSString *const DATAPROVIDER=@"dataProvider";
 NSString *const INDEX=@"index";
+NSString *const CANCEL=@"Cancel";
 
 // nav button consts
 NSString *const RIGHT=@"RIGHT";

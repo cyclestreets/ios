@@ -48,6 +48,10 @@
 
 #import <Crashlytics/Crashlytics.h>
 
+#import "CSOverlayTransitionAnimator.h"
+#import "SavedLocationsViewController.h"
+#import "SavedLocationVO.h"
+
 
 static NSInteger DEFAULT_ZOOM = 15;
 static NSInteger DEFAULT_OVERVIEWZOOM = 15;
@@ -64,7 +68,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
-@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate,LocationReceiver>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate,LocationReceiver,UIViewControllerTransitioningDelegate,SavedLocationsViewDelegate>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
@@ -78,6 +82,8 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
 @property (nonatomic,strong)  UIBarButtonItem						* waypointButton;
+@property (nonatomic,strong)  UIBarButtonItem						* poiButton;
+@property (nonatomic,strong)  UIBarButtonItem						* savedLocationButton;
 
 
 @property(nonatomic,strong) IBOutlet  UIView						*walkingRouteOverlayView;
@@ -369,10 +375,10 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_locatingIndicator.hidesWhenStopped=YES;
 	
 	self.activeLocationButton = [[UIBarButtonItem alloc] initWithCustomView:_locatingIndicator ];
-	_activeLocationButton.style	= UIBarButtonItemStyleDone;
+	_activeLocationButton.style	= UIBarButtonItemStylePlain;
 	
 	self.waypointButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_waypoint.png"]
-														   style:UIBarButtonItemStyleBordered
+														   style:UIBarButtonItemStylePlain
 														  target:self
 														  action:@selector(showWayPointView)];
 	_waypointButton.width = 40;
@@ -386,21 +392,31 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	_locationButton.width = 40;
 	
 	self.searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_search.png"]
-													   style:UIBarButtonItemStyleBordered
+													   style:UIBarButtonItemStylePlain
 													  target:self
 													  action:@selector(searchButtonSelected)];
 	_searchButton.width = 40;
 	
 	self.changePlanButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_routePlan.png"]
-													   style:UIBarButtonItemStyleBordered
+													   style:UIBarButtonItemStylePlain
 													  target:self
 													  action:@selector(showRoutePlanMenu:)];
 	
 	
-	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan Route"
-														style:UIBarButtonItemStyleBordered
+	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan"
+														style:UIBarButtonItemStylePlain
 													   target:self
 													   action:@selector(routeButtonSelected)];
+	
+	self.poiButton = [[UIBarButtonItem alloc] initWithTitle:@"POI"
+														style:UIBarButtonItemStylePlain
+													   target:self
+													   action:@selector(routeButtonSelected)];
+	
+	self.savedLocationButton = [[UIBarButtonItem alloc] initWithTitle:@"SL"
+													  style:UIBarButtonItemStylePlain
+													 target:self
+													 action:@selector(didSelectSaveLocationsButton:)];
 	
 	
 	
@@ -441,7 +457,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
+			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex,_savedLocationButton];
 			[self.toolBar setItems:items animated:YES ];
 			
 		}
@@ -486,7 +502,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		{
 			BetterLog(@"MapPlanningStatePlanning");
 			
-			_routeButton.title = @"Plan route";
+			_routeButton.title = @"Plan";
 			_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
@@ -499,7 +515,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		{
 			BetterLog(@"MapPlanningStateRoute");
 			
-			_routeButton.title = @"New route";
+			_routeButton.title = @"New";
 			_activeLocationSubButton.selected=NO;
 			_searchButton.enabled = YES;
 			
@@ -512,7 +528,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		{
 			BetterLog(@"MapPlanningStateRouteLocating");
 			
-			_routeButton.title = @"New route";
+			_routeButton.title = @"New";
 			_activeLocationSubButton.selected=NO;
 			_searchButton.enabled = NO;
 			
@@ -1466,6 +1482,70 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 }
 
 
+
+
+-(IBAction)didSelectPOIButton:(id)sender{
+	
+	// display poi controller (side controller or as below with simple overlay segue
+	
+	
+	
+}
+
+
+
+-(IBAction)didSelectSaveLocationsButton:(id)sender{
+	
+	[self performSegueWithIdentifier:@"SavedLocation" sender:self];
+	
+	
+}
+
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	
+	[super prepareForSegue:segue sender:sender];
+	
+	if([segue.identifier isEqualToString:@"SavedLocation"]){
+		
+		SavedLocationsViewController *controller=(SavedLocationsViewController*)segue.destinationViewController;
+		controller.viewMode=SavedLocationsViewModeModal;
+		controller.savedLocationdelegate=self;
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+	}
+	
+}
+
+
+#pragma mark - SaveLocationViewController Delegate
+
+-(void)didSelectSaveLocation:(SavedLocationVO *)savedlocation{
+	
+	[self addWayPointAtCoordinate:savedlocation.coordinate];
+	
+	
+}
+
+
+
+#pragma mark - UIViewControllerTransitioningDelegate Methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	
+	CSOverlayTransitionAnimator *animator = [CSOverlayTransitionAnimator new];
+	//Configure the animator
+	animator.presenting = YES;
+	return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	CSOverlayTransitionAnimator *animator = [CSOverlayTransitionAnimator new];
+	return animator;
+}
 
 
 

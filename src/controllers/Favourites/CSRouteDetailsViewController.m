@@ -41,6 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSElevationGraphView.h"
 #import <UIActionSheet+BlocksKit.h>
 
+
 static NSString *const VIEWTITLE=@"Route details";
 
 
@@ -352,6 +353,9 @@ static NSString *const VIEWTITLE=@"Route details";
 	[actionSheet showInView:[[[UIApplication sharedApplication]delegate]window]];
 
 }
+
+
+
 
 
 //

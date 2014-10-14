@@ -156,6 +156,47 @@
 
 
 
++(void)alignView:(UIView*)child inRect:(CGRect)targetRect :(LayoutBoxAlignMode)horizontal :(LayoutBoxAlignMode)vertical{
+	
+	CGRect childFrame=child.frame;
+	CGRect parentFrame=targetRect;
+	int xpos=childFrame.origin.x;
+	int ypos=childFrame.origin.y;
+	
+	
+	if (horizontal!=BUNoneLayoutMode) {
+		
+		if(horizontal==BUCenterAlignMode){
+			xpos=round((parentFrame.size.width-childFrame.size.width)/2);
+		}else if (horizontal==BURightAlignMode) {
+			xpos=round(parentFrame.size.width-childFrame.size.width);
+		}else if (horizontal==BULeftAlignMode) {
+			xpos=0;
+		}
+		
+	}
+	
+	
+	if (vertical!=BUNoneLayoutMode) {
+		
+		if(vertical==BUCenterAlignMode){
+			ypos=round((parentFrame.size.height-childFrame.size.height)/2);
+		}else if (vertical==BUBottomAlignMode) {
+			ypos=round(parentFrame.size.height-childFrame.size.height);
+		}else if (vertical==BUTopAlignMode) {
+			ypos=0;
+		}
+		
+	}
+	
+	
+	childFrame.origin.x=xpos;
+	childFrame.origin.y=ypos;
+	child.frame=childFrame;
+	
+}
+
+
 
 +(void)removeAllSubViewsForView:(UIView*)view{
 	

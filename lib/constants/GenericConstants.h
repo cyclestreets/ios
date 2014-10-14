@@ -83,6 +83,7 @@ extern NSString *const ID;
 extern NSString *const CONTROLLER;
 extern NSString *const DATAPROVIDER;
 extern NSString *const INDEX;
+extern NSString *const CANCEL;
 
 // nav button consts
 extern NSString *const RIGHT;
