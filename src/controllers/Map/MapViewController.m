@@ -48,10 +48,6 @@
 
 #import <Crashlytics/Crashlytics.h>
 
-#import "CSOverlayTransitionAnimator.h"
-#import "SavedLocationsViewController.h"
-#import "SavedLocationVO.h"
-
 
 static NSInteger DEFAULT_ZOOM = 15;
 static NSInteger DEFAULT_OVERVIEWZOOM = 15;
@@ -68,7 +64,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 @end
 
 
-@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate,LocationReceiver,UIViewControllerTransitioningDelegate,SavedLocationsViewDelegate>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate,LocationReceiver>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
@@ -457,7 +453,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 			_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex,_savedLocationButton];
+			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
 			[self.toolBar setItems:items animated:YES ];
 			
 		}
@@ -1507,47 +1503,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 	
 	[super prepareForSegue:segue sender:sender];
 	
-	if([segue.identifier isEqualToString:@"SavedLocation"]){
-		
-		SavedLocationsViewController *controller=(SavedLocationsViewController*)segue.destinationViewController;
-		controller.viewMode=SavedLocationsViewModeModal;
-		controller.savedLocationdelegate=self;
-		controller.transitioningDelegate = self;
-		controller.modalPresentationStyle = UIModalPresentationCustom;
-	}
-	
-}
-
-
-#pragma mark - SaveLocationViewController Delegate
-
--(void)didSelectSaveLocation:(SavedLocationVO *)savedlocation{
-	
-	[self addWayPointAtCoordinate:savedlocation.coordinate];
 	
 	
 }
-
-
-
-#pragma mark - UIViewControllerTransitioningDelegate Methods
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-																  presentingController:(UIViewController *)presenting
-																	  sourceController:(UIViewController *)source {
-	
-	CSOverlayTransitionAnimator *animator = [CSOverlayTransitionAnimator new];
-	//Configure the animator
-	animator.presenting = YES;
-	return animator;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-	CSOverlayTransitionAnimator *animator = [CSOverlayTransitionAnimator new];
-	return animator;
-}
-
-
 
 
 

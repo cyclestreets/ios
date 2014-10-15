@@ -20,7 +20,6 @@
 #import "SavedRoutesManager.h"
 #import "PhotoManager.h"
 #import "PhotoCategoryManager.h"
-#import "SavedLocationsManager.h"
 
 @interface StartupManager(Private)
 
@@ -117,7 +116,6 @@
 	
 	[UserAccount sharedInstance];
 	
-	[SavedLocationsManager sharedInstance];
 	
 	[self startupComplete];
 	
