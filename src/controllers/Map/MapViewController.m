@@ -399,7 +399,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 													  action:@selector(showRoutePlanMenu:)];
 	
 	
-	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan"
+	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan Route"
 														style:UIBarButtonItemStylePlain
 													   target:self
 													   action:@selector(routeButtonSelected)];
@@ -498,7 +498,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		{
 			BetterLog(@"MapPlanningStatePlanning");
 			
-			_routeButton.title = @"Plan";
+			_routeButton.title = @"Plan Route";
 			_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
@@ -511,7 +511,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		{
 			BetterLog(@"MapPlanningStateRoute");
 			
-			_routeButton.title = @"New";
+			_routeButton.title = @"New Route";
 			_activeLocationSubButton.selected=NO;
 			_searchButton.enabled = YES;
 			
@@ -524,7 +524,7 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		{
 			BetterLog(@"MapPlanningStateRouteLocating");
 			
-			_routeButton.title = @"New";
+			_routeButton.title = @"New Route";
 			_activeLocationSubButton.selected=NO;
 			_searchButton.enabled = NO;
 			
