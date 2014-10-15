@@ -548,7 +548,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 		WayPointVO *waypoint=waypoints[i];
 		
-		[cooordarray addObject:waypoint.coordinateString];
+		[cooordarray addObject:waypoint.coordinateStringForAPI];
 		
 	}
 	

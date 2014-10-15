@@ -25,4 +25,10 @@
 	
 }
 
+-(NSString*)coordinateStringForAPI{
+	
+	return [NSString stringWithFormat:@"%f, %f",_coordinate.longitude,_coordinate.latitude];
+	
+}
+
 @end

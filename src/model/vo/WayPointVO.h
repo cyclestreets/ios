@@ -28,7 +28,8 @@ typedef int WayPointType;
 
 
 // getters
-@property(nonatomic,readonly)  NSString						*coordinateString;
+@property(nonatomic,readonly)  NSString						*coordinateString; // for UI
+@property(nonatomic,readonly)  NSString						*coordinateStringForAPI; // for API
 
 -(void)updateWaypointTypeForIndex:(int)index;
 
