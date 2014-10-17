@@ -266,7 +266,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	
 	NSInteger index=[self findSubscriber:subscriberId];
 	
-	if(index==NSNotFound){
+	if(index!=NSNotFound){
 		
 		[locationSubscribers addObject:subscriberId];
 		return YES;
