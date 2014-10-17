@@ -16,7 +16,7 @@
 #import "ExpandedUILabel.h"
 #import "AppDelegate.h"
 #import "GradientView.h"
-#import <Pixate/Pixate.h>
+#import <PixateFreestyle.h>
 
 #define COLUMNCOUNT 3
 
@@ -201,7 +201,7 @@
 -(IBAction)iconButtonSelectedAtIndex:(id)sender{
 	
 	UIButton *button=(UIButton*)sender;
-	int index=button.tag;
+	NSInteger index=button.tag;
 	
 	if([_delegate respondsToSelector:@selector(actionSheetClickedButtonWithType:)]){
 		[_delegate actionSheetClickedButtonWithType:index];

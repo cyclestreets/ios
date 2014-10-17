@@ -561,7 +561,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"HCSTrackConfig";
 		
     }else {
 		
-		NSString *sheetTitle=EMPTYSTRING;
+		NSString *sheetTitle=@"Finish your trip?";
 		
 		BOOL doesTripContainUsefulData=[TripManager sharedInstance].doesTripContainUsefulData;
 		

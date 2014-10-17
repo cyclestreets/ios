@@ -1,8 +1,8 @@
 pod 'AFNetworking', '~> 2.0'
 pod 'JVFloatLabeledTextField'
-pod 'Pixate'
+pod 'PixateFreestyle'
 pod 'SFHFKeychainUtils'
 pod 'RegexKitLite'
-pod 'BlocksKit', :git => 'https://github.com/pandamonia/BlocksKit.git', :branch => 'next'
+pod 'BlocksKit', '~> 2.2.5'
 pod 'ViewDeck'
 

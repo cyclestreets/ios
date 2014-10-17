@@ -76,7 +76,7 @@ static NSString *ROUTEDATE = @"cs:whence";
 	return [[NSArray alloc] initWithObjects:ROUTE_ELEMENT, SEGMENT_ELEMENT, nil];
 }
 
-- (int) numSegments {
+- (NSInteger) numSegments {
 	return [segments count];
 }
 

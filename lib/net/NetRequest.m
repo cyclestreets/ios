@@ -161,8 +161,8 @@
 										  cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
 									  timeoutInterval:30.0 ];
 		
-		NSLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
-		NSLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
+		BetterLog(@"[DEBUG] GETPOST SEND url:%@",urlString);
+		BetterLog(@"[DEBUG] GETPOST SEND body:%@",[postparameters urlEncodedString]);
 		
 		NSString *parameterString=[postparameters urlEncodedString];
 		

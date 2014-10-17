@@ -426,7 +426,7 @@ return base64String;
 				
                 //[scanner scanUpToString:@";" intoString:&unknownEntity];
                 //[result appendFormat:@"&#%@%@;", xForHex, unknownEntity];
-                NSLog(@"Expected numeric character entity but got &#%@%@;", xForHex, unknownEntity);
+                BetterLog(@"Expected numeric character entity but got &#%@%@;", xForHex, unknownEntity);
 				
             }
 			
@@ -483,7 +483,7 @@ finish:
 	}
 	
 	if(fixed==NO){
-		NSLog(@"[ERROR] DateString conform Error: %@",errorString);
+		BetterLog(@"[ERROR] DateString conform Error: %@",errorString);
 		return [NSDate stringFromDate:[NSDate date]];
 	}else{
 		return fixedDateString;

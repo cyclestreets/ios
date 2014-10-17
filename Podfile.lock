@@ -1,65 +1,62 @@
 PODS:
-  - AFNetworking (2.2.1):
+  - AFNetworking (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.1):
+  - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.1):
-    - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.1)
-  - AFNetworking/Security (2.2.1)
-  - AFNetworking/Serialization (2.2.1)
-  - AFNetworking/UIKit (2.2.1):
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BlocksKit (2.2.0):
+  - BlocksKit (2.2.5):
     - BlocksKit/All
-  - BlocksKit/All (2.2.0):
+  - BlocksKit/All (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
     - BlocksKit/MessageUI
     - BlocksKit/UIKit
-  - BlocksKit/Core (2.2.0)
-  - BlocksKit/DynamicDelegate (2.2.0)
-  - BlocksKit/MessageUI (2.2.0):
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - BlocksKit/UIKit (2.2.0):
+  - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - JVFloatLabeledTextField (0.0.7)
-  - Pixate (2.0.1)
+  - JVFloatLabeledTextField (0.0.9)
+  - PixateFreestyle (2.1.4)
   - RegexKitLite (4.0)
   - SFHFKeychainUtils (0.0.1)
   - ViewDeck (2.3.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - BlocksKit (from `https://github.com/pandamonia/BlocksKit.git`, branch `next`)
+  - BlocksKit (~> 2.2.5)
   - JVFloatLabeledTextField
-  - Pixate
+  - PixateFreestyle
   - RegexKitLite
   - SFHFKeychainUtils
   - ViewDeck
 
-EXTERNAL SOURCES:
-  BlocksKit:
-    :branch: next
-    :git: https://github.com/pandamonia/BlocksKit.git
-
 SPEC CHECKSUMS:
-  AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
-  BlocksKit: f12f7d7922b2673d44877dc6fbea9870f2565085
-  JVFloatLabeledTextField: 9e3e205143699e9b2119358688e99fe0787b5a97
-  Pixate: d08421b41a5733d9df450286cab97415c71bba4b
-  RegexKitLite: f7af7b4d2b675cd2ec9a4abab6aad6ae1f6499c0
-  SFHFKeychainUtils: e828dbd9eaa509486acf95d8de2ebd414c4b7451
-  ViewDeck: 2cdc67c4b41a10cafc7556b982f028409e33604d
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  BlocksKit: 4439e7f30a9f90743462ca63545a15c1f4304cef
+  JVFloatLabeledTextField: b6c7d824d231b3c01d14692feada878808480af8
+  PixateFreestyle: bb8fc8ce1ebc2355852b369a6e2a6f2931c4ed71
+  RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
+  SFHFKeychainUtils: 6fdda05a86d035db406c7662ec1054814b68f0fd
+  ViewDeck: 654a493fc83928892ce483dea08a5302180aafce
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.33.1

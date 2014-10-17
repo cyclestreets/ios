@@ -7,6 +7,7 @@
 //
 
 #import "ImageCache.h"
+#import "GlobalUtilities.h"
 
 @interface ImageCache(Private) 
 
@@ -107,7 +108,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageCache);
 	
 	NSData* data = UIImagePNGRepresentation(image);
 	NSString *savepath=[NSString stringWithFormat:@"%@/%@",[self tmpImagePath],filename];
-	NSLog(@"[DEBUG] saveTmpImageToDisk path=%@",savepath);
+	BetterLog(@"[DEBUG] saveTmpImageToDisk path=%@",savepath);
 	[data writeToFile:savepath atomically:YES];
 	
 	return YES;
@@ -120,17 +121,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageCache);
 -(void)moveTmpImageToCache:(NSString*)filename{
 	
 	NSString *tmppath=[NSString stringWithFormat:@"%@/%@",[self tmpImagePath],filename];
-	NSLog(@"[DEBUG] move tmp path=%@",tmppath);
+	BetterLog(@"[DEBUG] move tmp path=%@",tmppath);
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	NSString *topath=[self fileonDiskPath:filename ofType:@""];
-	NSLog(@"[DEBUG] topath=%@",topath);
+	BetterLog(@"[DEBUG] topath=%@",topath);
 	NSError	*error;
 	if([fileManager fileExistsAtPath:tmppath]){
 		[fileManager moveItemAtPath:tmppath toPath:topath error:&error];
 		if(error!=nil)
-			NSLog(@"[DEBUG] error=%@",[error description]);
+			BetterLog(@"[DEBUG] error=%@",[error description]);
 		
-		NSLog(@"[DEBUG] result=%i",[fileManager fileExistsAtPath:topath]);
+		BetterLog(@"[DEBUG] result=%i",[fileManager fileExistsAtPath:topath]);
 	}
 }
 

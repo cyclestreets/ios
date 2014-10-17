@@ -220,7 +220,7 @@
 		[_routeLineView setNeedsDisplay];
         
         
-		BetterLog(@"added %d GPS coordinates to map", routeCoords.count);
+		BetterLog(@"added %lu GPS coordinates to map", (unsigned long)routeCoords.count);
 		
 		
 		// if we had at least 1 coord
@@ -230,7 +230,7 @@
 			
 			CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
 			CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
-			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:YES];
+			[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:NO];
 			
 			
 			//add start/end pins
@@ -262,6 +262,21 @@
 }
 
 
+
+
+-(void)viewDidAppear:(BOOL)animated{
+	
+	// back up map zoom, sometimes this will not work in viewDidLoad so we offset it to here
+	if(_currentRoute.segments.count>0){
+		
+		CLLocationCoordinate2D ne=[_currentRoute insetNorthEast];
+		CLLocationCoordinate2D sw=[_currentRoute insetSouthWest];
+		[_mapView zoomWithLatitudeLongitudeBoundsSouthWest:sw northEast:ne animated:NO];
+		
+	}
+	
+	[super viewDidAppear:animated];
+}
 
 
 - (IBAction)infoAction:(UIButton*)sender{

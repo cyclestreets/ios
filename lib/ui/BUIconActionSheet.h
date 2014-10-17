@@ -17,7 +17,7 @@ enum  {
 	BUIconActionSheetIconTypeCopy		= 995,
 
 };
-typedef int BUIconActionSheetIconType;
+typedef NSInteger BUIconActionSheetIconType;
 
 
 

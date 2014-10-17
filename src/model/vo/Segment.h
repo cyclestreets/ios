@@ -61,7 +61,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (NSString *) infoString;
 -(NSDictionary*)infoStringDictionary;
 
-- (void) setUIElements:(NSObject *)viewOrController;
 
 + (NSString *)provisionIcon:(NSString *)provisionName;
 

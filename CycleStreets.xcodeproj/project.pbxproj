@@ -3718,7 +3718,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -3769,7 +3769,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -3821,7 +3821,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -3867,12 +3867,12 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = "Hackney Release";
-				PROVISIONING_PROFILE = "58FF386D-9965-4A92-B816-529F34F86368";
+				PROVISIONING_PROFILE = "3c798cc4-dbef-400f-998a-08ceb70548f0";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -3924,7 +3924,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Adhoc;
 		};
@@ -4076,7 +4076,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../../../libs/Alpstein/MapView/**";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Adhoc;
 		};

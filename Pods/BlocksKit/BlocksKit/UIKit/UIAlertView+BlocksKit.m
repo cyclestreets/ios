@@ -127,7 +127,7 @@
 
 #pragma mark Convenience
 
-+ (void)bk_showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles handler:(void (^)(UIAlertView *alertView, NSInteger buttonIndex))block
++ (UIAlertView*)bk_showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSArray *)otherButtonTitles handler:(void (^)(UIAlertView *alertView, NSInteger buttonIndex))block
 {
 	// If no buttons were specified, cancel button becomes "Dismiss"
 	if (!cancelButtonTitle.length && !otherButtonTitles.count)
@@ -145,6 +145,8 @@
 	
 	// Show alert view
 	[alertView show];
+	
+	return alertView;
 }
 
 #pragma mark Initializers
@@ -161,7 +163,12 @@
 
 - (id)bk_initWithTitle:(NSString *)title message:(NSString *)message
 {
-	return [self initWithTitle:title message:message delegate:self.bk_dynamicDelegate cancelButtonTitle:nil otherButtonTitles:nil];
+	self = [self initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+	if (!self) return nil;
+
+	self.delegate = self.bk_dynamicDelegate;
+
+	return self;
 }
 
 #pragma Actions

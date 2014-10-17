@@ -42,8 +42,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *footerView;
 @property (nonatomic, strong) LayoutBox *pageContainer;
-@property (nonatomic, assign) int activePage;
-@property (nonatomic, assign) int maxVisitedPage;
+@property (nonatomic, assign) NSInteger activePage;
+@property (nonatomic, assign) NSInteger maxVisitedPage;
 @property (nonatomic, strong) NSMutableArray *viewArray;
 @property (nonatomic, strong) IBOutlet UIToolbar *modalToolBar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *cancelViewButton;
@@ -129,7 +129,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)initCategoryView:(PhotoWizardViewState)state;
 -(void)updateCategoryView;
 -(void)resetCategoryView;
--(void)didSelectCategoryFromMenu:(int)index;
+-(void)didSelectCategoryFromMenu:(NSInteger)index;
 
 -(void)initDescriptionView:(PhotoWizardViewState)state;
 -(void)updateDescriptionView;
@@ -849,6 +849,13 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 }
 
+// force UIImagePickerController navcontroller to respect the application statusbar/nav bar style
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+	navigationController.navigationBar.translucent=NO;
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
 
 #pragma mark imagePickerController  Delegate methods -
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -1177,7 +1184,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 }
 
 
--(void)didSelectCategoryFromMenu:(int)index{
+-(void)didSelectCategoryFromMenu:(NSInteger)index{
 	
 	PhotoCategoryVO *vo=_activePickerDataSource[index];
 	
@@ -1294,6 +1301,36 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+	
+	switch (_viewState) {
+		case PhotoWizardViewStateDescription:
+		{
+			if([text isEqualToString:EMPTYSTRING] && range.length > 0){
+				
+				NSString *prompttext=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
+				if([_photodescriptionField.text containsString:prompttext]){
+					_photodescriptionField.text=[_photodescriptionField.text stringByReplacingOccurrencesOfString:prompttext withString:EMPTYSTRING];;
+					_photodescriptionField.textColor=UIColorFromRGB(0x555555);
+					return YES;
+				}
+				
+			}
+			
+		}
+			break;
+			
+		default:
+			return YES;
+			break;
+			
+	}
+	
+	return YES;
+}
+
+
+
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)aTextView {
 	
@@ -1306,8 +1343,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 				self.textViewAccessoryView = nil;
 			}
 			
-			if([_photodescriptionField.text isEqualToString:[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"]]){
-				_photodescriptionField.text=@"";
+			NSString *prompttext=[[StringManager sharedInstance] stringForSection:@"photowizard" andType:@"descriptionprompt"];
+			if([_photodescriptionField.text containsString:prompttext]){
+				_photodescriptionField.text=[_photodescriptionField.text stringByReplacingOccurrencesOfString:prompttext withString:EMPTYSTRING];
 				_photodescriptionField.textColor=UIColorFromRGB(0x555555);
 			}
 			
