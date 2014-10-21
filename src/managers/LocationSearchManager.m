@@ -202,7 +202,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		case ValidationSearchFailed:
 		{
 			
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Search failed" andMessage:nil];
+			//[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Search failed" andMessage:nil];
 		}
 			
 		break;

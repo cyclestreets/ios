@@ -69,7 +69,7 @@
 -(void)queueDataRequest{
 	
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[self performSelector:@selector(dataProviderRequestRefresh:) withObject:nil afterDelay:0.2];
+	[self performSelector:@selector(dataProviderRequestRefresh:) withObject:nil afterDelay:0.4];
 
 }
 
@@ -140,7 +140,7 @@
 	
 	[_searchBar setBackgroundImage:[UIImage new]];
 	
-	
+	self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 -(void)createNonPersistentUI{
