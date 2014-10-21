@@ -260,8 +260,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	
 	[_mapView setDelegate:self];
+	CLLocation *defaultLocation=[UserLocationManager defaultLocation];
+	self.currentLocation=defaultLocation;
+	[_mapView setCenterCoordinate:[UserLocationManager defaultCoordinate] zoomLevel:10 animated:NO];
 	_mapView.userTrackingMode=MKUserTrackingModeFollow;
-	_mapView.showsUserLocation=YES;
+
 	
 	_attributionLabel.textAlignment=NSTextAlignmentCenter;
 	_attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000, .1);
@@ -294,9 +297,19 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 -(void)createNonPersistentUI{
 	
-	_mapView.showsUserLocation=YES;
-    
-	//[self requestPhotos];
+	
+	if([PhotoManager sharedInstance].autoLoadLocation!=nil){
+		
+		_shouldAcceptLocationUpdates=NO;
+		
+		[_mapView setCenterCoordinate:[PhotoManager sharedInstance].autoLoadLocation.coordinate zoomLevel:15 animated:NO];
+		
+		[PhotoManager sharedInstance].autoLoadLocation=nil;
+		
+	}else{
+		_mapView.showsUserLocation=YES;
+	}
+
 	
 	[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 	
@@ -435,11 +448,10 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
 	if([UserLocationManager isSignificantLocationChange:_currentLocation.coordinate newLocation:centreCoordinate accuracy:4]){
-		[self requestPhotos];
+			[self requestPhotos];
 	}else{
 		if(_initialLocationComplete==NO){
 			_initialLocationComplete=YES;
-			[self requestPhotos];
 		}
 	}
 	
@@ -469,6 +481,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	_activeLocationSubButton.selected=!_activeLocationSubButton.selected;
 	
 	_shouldAcceptLocationUpdates=YES;
+	
+	_mapView.showsUserLocation=YES;
 	
 	[self.mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
 	

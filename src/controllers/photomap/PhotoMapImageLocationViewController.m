@@ -17,6 +17,7 @@
 #import "AsyncImageView.h"
 #import "LayoutBox.h"
 #import "PhotoMapVO.h"
+#import "PhotoManager.h"
 
 
 @interface PhotoMapImageLocationViewController()<AsyncImageViewDelegate,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
@@ -173,6 +174,7 @@
 -(IBAction)backButtonSelected:(id)sender{
 	
 	[_imageView cancel];
+	
 	[self dismissModalViewControllerAnimated:YES];
 	
 }

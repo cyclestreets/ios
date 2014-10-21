@@ -1162,7 +1162,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		self.categoryPickerView=[[UIPickerView alloc]init];
 	
 	_categoryPickerView.backgroundColor=[UIColor whiteColor];
-	_categoryPickerView.tintColor=UIColorFromRGB(0xF76117);
+	_categoryPickerView.tintColor=UIColorFromRGB(0xFFFFFF);
 	
 	_categoryPickerView.dataSource = self;
     _categoryPickerView.delegate = self;

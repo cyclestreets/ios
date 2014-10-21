@@ -29,17 +29,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 @interface GenericWebViewController()<UIWebViewDelegate>
 
-@property (nonatomic, weak)		IBOutlet UIWebView						* webView;
-@property (nonatomic, strong)		 UIAlertView						* failAlert;
-@property (nonatomic, weak)		IBOutlet UIToolbar						* controlBar;
-@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* stopLoadingButton;
-@property (nonatomic, strong)		IBOutlet UIBarButtonItem				* refreshButton;
-@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* goBackButton;
-@property (nonatomic, weak)		IBOutlet UIBarButtonItem				* goForwardButton;
-@property (nonatomic, strong)		 UIBarButtonItem					* activityBarItem;
-@property (nonatomic, strong)		 UIActivityIndicatorView			* activityIndicator;
-@property (nonatomic)		BOOL										pageLoaded;
+@property (nonatomic, weak)	IBOutlet UIWebView						* webView;
+@property (nonatomic, weak)	IBOutlet UIToolbar						* controlBar;
+@property (nonatomic, weak)	IBOutlet UIBarButtonItem				* stopLoadingButton;
+@property (nonatomic, weak)	IBOutlet UIBarButtonItem				* goBackButton;
+@property (nonatomic, weak)	IBOutlet UIBarButtonItem				* goForwardButton;
 
+@property (nonatomic, strong)	IBOutlet UIBarButtonItem				* refreshButton;
+@property (nonatomic, strong)	UIBarButtonItem						* activityBarItem;
+@property (nonatomic, strong)	UIActivityIndicatorView				* activityIndicator;
+@property (nonatomic,assign)	BOOL								pageLoaded;
+@property (nonatomic, strong)	UIAlertView							* failAlert;
 
 -(void)updateUIState:(NSString*)state;
 -(IBAction)stopLoading:(id)sender;
@@ -57,8 +57,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)home {
-	//NSString *creditsFilePath = [[NSBundle mainBundle] pathForResource:@"credits" ofType:@"html"];
-	NSURL *creditsURL = [NSURL URLWithString:@"http://travelsmartns.co.uk/how-to-travel-smart/cycling/"];
+	NSString *creditsFilePath = [[NSBundle mainBundle] pathForResource:@"credits" ofType:@"html"];
+	NSURL *creditsURL = [NSURL URLWithString:creditsFilePath];
 	[self.webView loadRequest:[NSURLRequest requestWithURL:creditsURL]];	
 	[self.webView setDelegate:self];
 }

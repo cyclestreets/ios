@@ -280,7 +280,6 @@
 		283436D315DD5DC300B00FD5 /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6201131FB69D008527FC /* UserVO.m */; };
 		283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
 		283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
-		283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
 		283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
 		283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630F131FB6C8008527FC /* NSDate+Helper.m */; };
 		283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */; };
@@ -621,7 +620,6 @@
 		28AD62B5131FB69D008527FC /* FormData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620E131FB69D008527FC /* FormData.plist */; };
 		28AD62B7131FB69D008527FC /* styles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6210131FB69D008527FC /* styles.plist */; };
 		28AD62B8131FB69D008527FC /* userState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6211131FB69D008527FC /* userState.plist */; };
-		28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
 		28AD641F131FB6C8008527FC /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
 		28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630F131FB6C8008527FC /* NSDate+Helper.m */; };
 		28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */; };
@@ -745,6 +743,10 @@
 		28D246031338926E00188783 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
 		28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
 		28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
+		28D7E71719F64E8E0082F2E5 /* GenericWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9998E19E709C30050C3E8 /* GenericWebViewController.m */; };
+		28D7E71819F64E8E0082F2E5 /* GenericWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9998E19E709C30050C3E8 /* GenericWebViewController.m */; };
+		28D7E71919F64F4D0082F2E5 /* GenericWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9998819E709340050C3E8 /* GenericWebView.xib */; };
+		28D7E71A19F64F4E0082F2E5 /* GenericWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9998819E709340050C3E8 /* GenericWebView.xib */; };
 		28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		28DFE8D815A428DD005FDCA0 /* PhotoWizardCategoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */; };
 		28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 28E603091610B683006A4B4C /* cyclestreets.geojson */; };
@@ -966,7 +968,6 @@
 		28FA8B1019E454E80040EA46 /* RouteSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* RouteSegmentViewController.m */; };
 		28FA8B1119E454E80040EA46 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
 		28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
-		28FA8B1319E454E80040EA46 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
 		28FA8B1519E454E80040EA46 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
 		28FA8B1619E454E80040EA46 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630F131FB6C8008527FC /* NSDate+Helper.m */; };
 		28FA8B1719E454E80040EA46 /* NSDate+NSDateRFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */; };
@@ -3214,6 +3215,7 @@
 			files = (
 				E77D8F11120321E4003E6B8D /* credits.html in Resources */,
 				E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */,
+				28D7E71919F64F4D0082F2E5 /* GenericWebView.xib in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
 				28AD62B5131FB69D008527FC /* FormData.plist in Resources */,
@@ -3601,6 +3603,7 @@
 				2811C4A2166CCD5F00592560 /* UIActivityMail.png in Resources */,
 				2811C4A6166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C2166CE68F00592560 /* UIActivitySMS.png in Resources */,
+				28D7E71A19F64F4E0082F2E5 /* GenericWebView.xib in Resources */,
 				28851506166E0E20003536CA /* UIActivityCopy.png in Resources */,
 				28D186C3193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */,
 				2868D23D166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */,
@@ -3963,7 +3966,6 @@
 				288055DC18BB7B2100BABAB1 /* RouteSegmentViewController.m in Sources */,
 				28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
-				28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */,
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
@@ -4033,6 +4035,7 @@
 				2889096A193F41BB009C4325 /* CSMapSource.m in Sources */,
 				280E93471409856E00C7AC75 /* RouteParser.m in Sources */,
 				280E9358140985CD00C7AC75 /* LocationSearchVO.m in Sources */,
+				28D7E71719F64E8E0082F2E5 /* GenericWebViewController.m in Sources */,
 				280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */,
 				288055DA18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
 				280E937D1409861300C7AC75 /* UIImage-Additions.m in Sources */,
@@ -4118,7 +4121,6 @@
 				283436D315DD5DC300B00FD5 /* UserVO.m in Sources */,
 				283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */,
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
-				283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */,
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
@@ -4189,6 +4191,7 @@
 				2889096B193F41BB009C4325 /* CSMapSource.m in Sources */,
 				28727ADF18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */,
 				2834371B15DD5DC300B00FD5 /* LocationSearchVO.m in Sources */,
+				28D7E71819F64E8E0082F2E5 /* GenericWebViewController.m in Sources */,
 				2834371E15DD5DC300B00FD5 /* KeyChainItemWrapper.m in Sources */,
 				2834371F15DD5DC300B00FD5 /* UIImage-Additions.m in Sources */,
 				2834372115DD5DC300B00FD5 /* BUTableCellView.m in Sources */,
@@ -4272,7 +4275,6 @@
 				28FA8B1019E454E80040EA46 /* RouteSegmentViewController.m in Sources */,
 				28FA8B1119E454E80040EA46 /* ValidationVO.m in Sources */,
 				28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */,
-				28FA8B1319E454E80040EA46 /* CreditsViewController.m in Sources */,
 				28FA8B1519E454E80040EA46 /* AppConstants.m in Sources */,
 				28FA8B1619E454E80040EA46 /* NSDate+Helper.m in Sources */,
 				28FA8B1719E454E80040EA46 /* NSDate+NSDateRFC1123.m in Sources */,

@@ -36,5 +36,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoManager);
 
 
 
+// dev only
+-(void)createAutoLoadLocation;
 
 @end

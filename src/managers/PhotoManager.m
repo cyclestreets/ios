@@ -372,5 +372,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
+#pragma mark - Dev only
+
+-(void)createAutoLoadLocation{
+	
+	self.autoLoadLocation=[[CLLocation alloc]initWithLatitude:51.00000 longitude:0.200000];
+	
+}
+
+
 
 @end
