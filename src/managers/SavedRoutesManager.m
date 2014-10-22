@@ -288,7 +288,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	[[RouteManager sharedInstance] saveRoute:route];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:SAVEDROUTEUPDATE object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:SAVEDROUTEUPDATE object:route];
 	
 }
 

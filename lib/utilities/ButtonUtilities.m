@@ -178,9 +178,8 @@
 {
 	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
 	button.styleId=styleId;
-	UIFont *font=[UIFont boldSystemFontOfSize:12];
 	
-	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :font]+20;
+	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font]+20;
 	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
 	
 		

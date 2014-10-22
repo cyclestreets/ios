@@ -47,6 +47,7 @@
 #import "UIColor+AppColors.h"
 
 #import <Crashlytics/Crashlytics.h>
+#import <PixateFreestyle/PixateFreestyle.h>
 
 
 static NSInteger DEFAULT_ZOOM = 15;
@@ -400,6 +401,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 														style:UIBarButtonItemStylePlain
 													   target:self
 													   action:@selector(routeButtonSelected)];
+	_routeButton.styleId=@"MapView_routeButton";
+	
 	
 	self.poiButton = [[UIBarButtonItem alloc] initWithTitle:@"POI"
 														style:UIBarButtonItemStylePlain
