@@ -128,6 +128,12 @@ NSString *const SAVEDROUTE_RECENTS=@"SAVEDROUTE_RECENTS";
 NSString *const CYCLESTREETSURLSCHEME=@"cyclestreets";
 
 
+//don't allow co-location of start/finish
+CLLocationDistance const MIN_START_FINISH_DISTANCE = 100;
+
+
+
+
 
 @implementation AppConstants
 

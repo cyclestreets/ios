@@ -212,12 +212,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 }
 
 
+// filter all results so that they are the min distance apart
+// this also stops the MapView treating these as too close when adding to map as it uses the same isSignificantLocationDistance call to determine
 -(NSMutableArray*)filterDuplicateSearchResults:(NSMutableArray*)arr{
 	
 	NSMutableArray *removeArray=[NSMutableArray array];
-	
-	NSMutableArray *keys=[NSMutableArray array];
-	
 	
 	for(int i=0; i<arr.count; i++){
 		for(int j=i + 1; j<arr.count; j++){
@@ -226,7 +225,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 				LocationSearchVO *firstobject=arr[i];
 				LocationSearchVO *secondObject=arr[j];
 				
-				BOOL result=[UserLocationManager isSignificantLocationDistance:firstobject.locationCoords newLocation:secondObject.locationCoords distance:100];
+				BOOL result=[UserLocationManager isSignificantLocationDistance:firstobject.locationCoords newLocation:secondObject.locationCoords distance:MIN_START_FINISH_DISTANCE];
 				if(result==NO){
 					[removeArray addObject:firstobject];
 					break;
@@ -236,44 +235,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		}
 	}
 	
-	
-	/*
-	for(LocationSearchVO *result in arr){
-		
-		if(![keys containsObject:result.name]){
-			
-			[keys addObject:result.name];
-			
-			NSPredicate *dupenamepredicate=[NSPredicate  predicateWithBlock:^BOOL(LocationSearchVO *evaluatedObject, NSDictionary *bindings) {
-				return [evaluatedObject.name isEqualToString:result.name];
-			}];
-			NSMutableArray *groupArr=[[arr filteredArrayUsingPredicate:dupenamepredicate] mutableCopy];
-			
-			if(groupArr.count==1){
-				// no dupes
-				[finalArray addObjectsFromArray:groupArr]; // should be the same object as result
-				
-			}else{
-				
-				NSPredicate *coordpredicate=[NSPredicate  predicateWithBlock:^BOOL(LocationSearchVO *evaluatedObject, NSDictionary *bindings) {
-					// do not process result object
-					if(evaluatedObject==result){
-						return YES;
-					}else{
-						return [UserLocationManager isSignificantLocationDistance:result.locationCoords newLocation:evaluatedObject.locationCoords distance:100];
-					}
-				}];
-
-				[groupArr filterUsingPredicate:coordpredicate];
-				
-				[finalArray addObjectsFromArray:groupArr];
-				
-			}
-			
-		}
-		
-	}
-	*/
 	
 	[arr removeObjectsInArray:removeArray];
 	

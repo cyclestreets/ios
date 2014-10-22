@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <CoreLocation/CoreLocation.h>
+
 #define ENABLEDEBUGTRACE 1
 #define ENABLEOS6ACTIVITYMODE 0
 
@@ -174,6 +176,8 @@ extern NSString *const SAVEDROUTE_FAVS;
 extern NSString *const SAVEDROUTE_RECENTS;
 
 extern NSString *const CYCLESTREETSURLSCHEME;
+
+extern CLLocationDistance const MIN_START_FINISH_DISTANCE;
 
  
 
