@@ -819,13 +819,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	TBXMLElement *response = parser.rootXMLElement;
 	
-	[self validateXML:response];
-	if(_activeOperation.operationState>NetResponseStateComplete){
+	if(response==nil){
+		
+		
+		_activeOperation.operationState=NetResponseStateComplete;
+		_activeOperation.validationStatus=ValidationSearchFailed;
+		
 		return;
+		
+		
 	}
-    
 	
-	_activeOperation.validationStatus=ValidationCategoriesSuccess;
 	
 	TBXMLElement *results=[TBXML childElementNamed:@"results" parentElement:response];
 	
@@ -857,7 +861,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		_activeOperation.dataProvider=dataProvider;
 		
 	}else{
-		
+		_activeOperation.operationState=NetResponseStateComplete;
 		_activeOperation.validationStatus=ValidationSearchFailed;
 		
 		

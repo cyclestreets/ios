@@ -16,6 +16,7 @@
 #import "Files.h"
 #import "CycleStreets.h"
 #import "LocationSearchManager.h"
+#import "StringUtilities.h"
 
 @interface MapViewSearchLocationViewController()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -68,8 +69,17 @@
 
 -(void)queueDataRequest{
 	
-	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[self performSelector:@selector(dataProviderRequestRefresh:) withObject:nil afterDelay:0.4];
+	BOOL isValidString=[self validateSearchRequest:_searchString];
+	if(isValidString){
+		
+		[NSObject cancelPreviousPerformRequestsWithTarget:self];
+		[self performSelector:@selector(dataProviderRequestRefresh:) withObject:nil afterDelay:0.4];
+		
+	}else{
+		
+		
+		
+	}
 
 }
 
@@ -201,6 +211,23 @@
 }
 
 
+#pragma mark - String validation
+
+
+
+
+-(BOOL)validateSearchRequest:(NSString*)str{
+	
+	BOOL valid=YES;
+	
+	return [StringUtilities validateQueryString:str];
+	
+	return valid;
+	
+}
+
+
+
 
 //
 /***********************************************
@@ -211,11 +238,14 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 	
-	self.searchString = searchText;
-	if (self.searchString != nil && [self.searchString length] > 3) {
-		[self queueDataRequest];
+	
+	if (searchText != nil && [searchText length] > 3) {
+		
+			self.searchString = searchText;
+			[self queueDataRequest];
 	}
 }
+
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {

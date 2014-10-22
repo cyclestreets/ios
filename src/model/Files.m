@@ -49,7 +49,7 @@ static NSString *clientidFileConst = @"clientid";
 		
 		if (![[NSFileManager defaultManager] isWritableFileAtPath:[self clientidFile]]) {
 			//one-off generate the clientid file
-			NSString *unescaped = [NSString stringWithFormat:@"CSiPhoneAppV100 %@",[[NSDate date] description]];
+			NSString *unescaped = [NSString stringWithFormat:@"CSiPhoneAppV3.0 %@",[[NSDate date] description]];
 			NSString *escaped = [unescaped stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			[escaped writeToFile:[self clientidFile] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 		}

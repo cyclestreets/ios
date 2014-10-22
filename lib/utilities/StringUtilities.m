@@ -134,7 +134,7 @@
 {
     static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 	
-    const int size = ((data.length + 2)/3)*4;
+    const int size = (((int)data.length + 2)/3)*4;
     uint8_t output[size];
 	
     const uint8_t* input = (const uint8_t*)[data bytes];
@@ -198,6 +198,20 @@
 	BOOL validated = [emailstring isMatchedByRegex:regexString];
 	
 	return validated;
+	
+}
+
+
++(BOOL)validateQueryString:(NSString*)querystring{
+	
+	NSCharacterSet *queryStringSet=[NSCharacterSet characterSetWithCharactersInString:@"!$&'/*+,;="];
+	
+	NSRange range=[querystring rangeOfCharacterFromSet:queryStringSet];
+	
+	BOOL foundqueryCharacter=range.location!=NSNotFound;
+	
+	return !foundqueryCharacter;
+	
 	
 }
 

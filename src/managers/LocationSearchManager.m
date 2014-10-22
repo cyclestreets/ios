@@ -14,6 +14,8 @@
 #import "BUNetworkOperation.h"
 #import "HudManager.h"
 #import "BUDataSourceManager.h"
+#import "LocationSearchVO.h"
+#import "UserLocationManager.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBook/AddressBook.h>
@@ -64,6 +66,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 	[notifications addObject:REQUESTDIDFAIL];
 	[notifications addObject:DATAREQUESTFAILED];
 	[notifications addObject:REMOTEFILEFAILED];
+	[notifications addObject:XMLPARSERDIDFAILPARSING];
 	
 	[self addRequestID:LOCATIONSEARCH];
 	
@@ -79,19 +82,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 	BUNetworkOperation		*response=[dict objectForKey:RESPONSE];
 	
 	NSString	*dataid=response.dataid;
+	NSString *name=notification.name;
 	
 	if([self isRegisteredForRequest:dataid]){
-		
-		if([self isRegisteredForRequest:dataid]){
 			
-			if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL]){
-				[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Network Error" andMessage:@"Unable to contact server"];
-			}
-			
+		if([name isEqualToString:REMOTEFILEFAILED] || [name isEqualToString:DATAREQUESTFAILED] || [name isEqualToString:REQUESTDIDFAIL] || [name isEqualToString:XMLPARSERDIDFAILPARSING]){
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Network Error" andMessage:@"Unable to contact server"];
 		}
-		
 	}
-	
 	
 }
 
@@ -112,14 +110,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 	[cycleStreets.files setMiscValue:searchString forKey:@"lastSearch"];
 	
 	CLLocationDegrees range = 1.0;
-	NSInteger zoom = 11;
 	BOOL requiresNetWorkLookUp=NO;
 	switch(filterType){
 		
 		case LocationSearchFilterLocal:
 		{	
 			range = 0.25;
-			zoom = 16;
 			requiresNetWorkLookUp=YES;
 		}
 		break;
@@ -127,7 +123,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		case LocationSearchFilterNational:
 		{
 			range = 4.0;
-			zoom = 6;
 			requiresNetWorkLookUp=YES;
 		}
 		break;
@@ -156,8 +151,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 										 [NSNumber numberWithFloat:centerLocation.latitude + range],@"n",
 										 [NSNumber numberWithFloat:centerLocation.longitude + range],@"e",
 										 [NSNumber numberWithFloat:centerLocation.latitude - range],@"s",
-										 [NSNumber numberWithLong:zoom],@"zoom",
 										 cycleStreets.files.clientid,@"clientid",
+										 @(1),@"bounded",
 										 nil];
 		
 		
@@ -192,7 +187,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		case ValidationSearchSuccess:
 		{
 			
-			[[NSNotificationCenter defaultCenter] postNotificationName:LOCATIONSEARCHRESPONSE object:response.dataProvider];
+			NSMutableArray *filteredResults=[self filterDuplicateSearchResults:response.dataProvider];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:LOCATIONSEARCHRESPONSE object:filteredResults];
 			
 			[[HudManager sharedInstance] removeHUD];
 		}
@@ -202,7 +199,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		case ValidationSearchFailed:
 		{
 			
-			//[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Search failed" andMessage:nil];
+			[[HudManager sharedInstance] removeHUD];
 		}
 			
 		break;
@@ -214,6 +211,75 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 	
 }
 
+
+-(NSMutableArray*)filterDuplicateSearchResults:(NSMutableArray*)arr{
+	
+	NSMutableArray *removeArray=[NSMutableArray array];
+	
+	NSMutableArray *keys=[NSMutableArray array];
+	
+	
+	for(int i=0; i<arr.count; i++){
+		for(int j=i + 1; j<arr.count; j++){
+			if(i!=j){
+				
+				LocationSearchVO *firstobject=arr[i];
+				LocationSearchVO *secondObject=arr[j];
+				
+				BOOL result=[UserLocationManager isSignificantLocationDistance:firstobject.locationCoords newLocation:secondObject.locationCoords distance:100];
+				if(result==NO){
+					[removeArray addObject:firstobject];
+					break;
+				}
+				
+			}
+		}
+	}
+	
+	
+	/*
+	for(LocationSearchVO *result in arr){
+		
+		if(![keys containsObject:result.name]){
+			
+			[keys addObject:result.name];
+			
+			NSPredicate *dupenamepredicate=[NSPredicate  predicateWithBlock:^BOOL(LocationSearchVO *evaluatedObject, NSDictionary *bindings) {
+				return [evaluatedObject.name isEqualToString:result.name];
+			}];
+			NSMutableArray *groupArr=[[arr filteredArrayUsingPredicate:dupenamepredicate] mutableCopy];
+			
+			if(groupArr.count==1){
+				// no dupes
+				[finalArray addObjectsFromArray:groupArr]; // should be the same object as result
+				
+			}else{
+				
+				NSPredicate *coordpredicate=[NSPredicate  predicateWithBlock:^BOOL(LocationSearchVO *evaluatedObject, NSDictionary *bindings) {
+					// do not process result object
+					if(evaluatedObject==result){
+						return YES;
+					}else{
+						return [UserLocationManager isSignificantLocationDistance:result.locationCoords newLocation:evaluatedObject.locationCoords distance:100];
+					}
+				}];
+
+				[groupArr filterUsingPredicate:coordpredicate];
+				
+				[finalArray addObjectsFromArray:groupArr];
+				
+			}
+			
+		}
+		
+	}
+	*/
+	
+	[arr removeObjectsInArray:removeArray];
+	
+	return arr;
+	
+}
 
 
 //

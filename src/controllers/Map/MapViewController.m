@@ -1555,13 +1555,9 @@ static CLLocationDistance MIN_START_FINISH_DISTANCE = 100;
 		
 		CLLocationCoordinate2D fromLatLon = waypoint.coordinate;
 		
-		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude];
-		CLLocation *to = [[CLLocation alloc] initWithLatitude:locationLatLon.latitude longitude:locationLatLon.longitude];
-		CLLocationDistance distance = [from getDistanceFrom:to];
-		
-		if(distance<MIN_START_FINISH_DISTANCE){
+		BOOL result=[UserLocationManager isSignificantLocationDistance:fromLatLon newLocation:locationLatLon distance:MIN_START_FINISH_DISTANCE];
+		if(result==NO)
 			return NO;
-		}
 		
 	}
 	return YES;

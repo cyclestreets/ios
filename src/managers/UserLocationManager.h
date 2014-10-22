@@ -90,6 +90,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 // accuracy is the fraction digits, the lower the value the more the locations need to differ to trigger a change
 +(BOOL)isSignificantLocationChange:(CLLocationCoordinate2D)oldCordinate newLocation:(CLLocationCoordinate2D)newCoordinate accuracy:(int)accuracy;
 
++(BOOL)isSignificantLocationDistance:(CLLocationCoordinate2D)oldCordinate newLocation:(CLLocationCoordinate2D)newCoordinate distance:(int)distanceToCompare;
+
 +(NSString*)optimisedCoordString:(CLLocationCoordinate2D)coordinate;
 
 +(void)reverseGeoCodeLocation:(CLLocation*)location;

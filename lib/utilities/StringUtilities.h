@@ -28,6 +28,8 @@
 
 +(NSURL*)validateURL:(NSString*)urlstring;
 +(BOOL)validateEmail:(NSString*)emailstring;
++(BOOL)validateQueryString:(NSString*)querystring;
+
 +(NSString*)removeHTMLTag:(NSString*)tagname fromHTMLString:(NSString*)html;
 
 + (NSString*)base64forData:(NSData*)theData;

@@ -67,7 +67,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 		_coordDecimalPlaceFormatter = [[NSNumberFormatter alloc] init];
 	[_coordDecimalPlaceFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 	[_coordDecimalPlaceFormatter setMaximumFractionDigits:accuracy];
-	
+	//[_coordDecimalPlaceFormatter setMinimumFractionDigits:accuracy];
+	[_coordDecimalPlaceFormatter setRoundingMode:NSNumberFormatterRoundDown];
 	
 	
 	// reduce decimal places
@@ -84,10 +85,29 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	NSNumber *oldlongt=[NSNumber numberWithDouble:[[_coordDecimalPlaceFormatter stringFromNumber:oldlongNumber] doubleValue]];
 	
 	BetterLog(@"Old coord=%@,%@",oldlat,oldlongt);
+	
+	BOOL isSignificantChange=(![newlat  isEqualToNumber:oldlat] || ![newlongt isEqualToNumber:oldlongt] );
 
-	return (![newlat  isEqualToNumber:oldlat] && ![newlongt isEqualToNumber:oldlongt] );
+	return isSignificantChange;
 	
 }
+
+
++(BOOL)isSignificantLocationDistance:(CLLocationCoordinate2D)oldCordinate newLocation:(CLLocationCoordinate2D)newCoordinate distance:(int)distanceToCompare{
+	
+	
+	CLLocation *oldLocation = [[CLLocation alloc] initWithLatitude:oldCordinate.latitude longitude:oldCordinate.longitude];
+	CLLocation *newLocation = [[CLLocation alloc] initWithLatitude:newCoordinate.latitude longitude:newCoordinate.longitude];
+	CLLocationDistance distanceBetween = [oldLocation getDistanceFrom:newLocation];
+	
+	
+	BOOL isSignificantDistance=distanceBetween>distanceToCompare;
+	
+	return isSignificantDistance;
+	
+}
+
+
 
 +(NSString*)optimisedCoordString:(CLLocationCoordinate2D)coordinate{
 	
