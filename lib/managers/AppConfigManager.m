@@ -8,7 +8,7 @@
 
 #import "AppConfigManager.h"
 #import "BUDataSourceManager.h"
-
+#import "GlobalUtilities.h"
 
 @interface AppConfigManager(Private)
 
@@ -56,10 +56,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
 
 -(void)loadApplicationConfig{
 	
+	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
 	
 	NSString *appconfigpath=[self appconfigDataPath];
 	BOOL appconfigexists = [fileManager fileExistsAtPath:appconfigpath];
+	
 	
 	if(appconfigexists==YES){
         
@@ -87,14 +89,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
     NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
 	NSString *appconfigid=[infoDict objectForKey:@"APPCONFIG_ID"];
 	
+	NSString *configPath=nil;
+	
 	if([appconfigid isEqualToString:APPSTATE_DEVELOPMENT]){
-		return [[NSBundle mainBundle] pathForResource:APPCONFIG_DEV_PLISTFILENAME ofType:@"plist"];
+		configPath=[[NSBundle mainBundle] pathForResource:APPCONFIG_DEV_PLISTFILENAME ofType:@"plist"];
 	}else if ([appconfigid isEqualToString:APPSTATE_STAGING]) {
-		return [[NSBundle mainBundle] pathForResource:APPCONFIG_STAGING_PLISTFILENAME ofType:@"plist"];
+		configPath=[[NSBundle mainBundle] pathForResource:APPCONFIG_STAGING_PLISTFILENAME ofType:@"plist"];
 	}else {
-		return [[NSBundle mainBundle] pathForResource:APPCONFIG_LIVE_PLISTFILENAME ofType:@"plist"];
+		configPath=[[NSBundle mainBundle] pathForResource:APPCONFIG_LIVE_PLISTFILENAME ofType:@"plist"];
 	}
-    
+	
+	if(configPath==nil){
+		BetterLog(@"[ERROR] Unable to find app config file for %@",appconfigid);
+	}
+	
+	return configPath;
 }
 
 #pragma mark service loading methods
@@ -123,17 +132,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AppConfigManager);
 // @private
 -(NSString*)serviceDataPath{
 	
-
     NSDictionary *infoDict=[[NSBundle mainBundle] infoDictionary];
 	NSString *serverid=[infoDict objectForKey:@"SERVERDOMAIN_ID"];
 	
+	NSString *servicepath=nil;
+	
 	if([serverid isEqualToString:APPSTATE_DEVELOPMENT]){
-		return [[NSBundle mainBundle] pathForResource:SERVICE_DEV_PLISTFILENAME ofType:@"plist"];
+		servicepath= [[NSBundle mainBundle] pathForResource:SERVICE_DEV_PLISTFILENAME ofType:@"plist"];
 	}else if ([serverid isEqualToString:APPSTATE_STAGING]) {
-		return [[NSBundle mainBundle] pathForResource:SERVICE_STAGING_PLISTFILENAME ofType:@"plist"];
+		servicepath= [[NSBundle mainBundle] pathForResource:SERVICE_STAGING_PLISTFILENAME ofType:@"plist"];
 	}else {
-		return [[NSBundle mainBundle] pathForResource:SERVICE_LIVE_PLISTFILENAME ofType:@"plist"];
+		servicepath= [[NSBundle mainBundle] pathForResource:SERVICE_LIVE_PLISTFILENAME ofType:@"plist"];
 	}
+	
+	if(servicepath==nil){
+		BetterLog(@"[ERROR] Unable to find app config file for %@",serverid);
+	}
+	
+	return servicepath;
     
 }
 
