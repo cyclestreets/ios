@@ -1,0 +1,5 @@
+#include "Pods-RegexKitLite.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/RegexKitLite" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/A2StoryboardSegueContext" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/BlocksKit" "${PODS_ROOT}/Headers/Public/FMMoveTableView" "${PODS_ROOT}/Headers/Public/PixateFreestyle" "${PODS_ROOT}/Headers/Public/RegexKitLite" "${PODS_ROOT}/Headers/Public/SFHFKeychainUtils" "${PODS_ROOT}/Headers/Public/TBXML" "${PODS_ROOT}/Headers/Public/TouchJSON" "${PODS_ROOT}/Headers/Public/ViewDeck"
+OTHER_LDFLAGS = ${PODS_REGEXKITLITE_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}

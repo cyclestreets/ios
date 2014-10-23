@@ -1,0 +1,1 @@
+../../../PixateFreestyle/PixateFreestyle.framework/Versions/A/Headers/DDAbstractDatabaseLogger.h

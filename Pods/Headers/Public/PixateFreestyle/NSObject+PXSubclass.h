@@ -1,0 +1,1 @@
+../../../PixateFreestyle/PixateFreestyle.framework/Versions/A/Headers/NSObject+PXSubclass.h
