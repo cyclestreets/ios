@@ -24,6 +24,9 @@
 @property (nonatomic, strong)	BUSegmentedControl				*routeTypeControl;
 @property (nonatomic, strong)	IBOutlet UIButton				*selectedRouteButton;
 
+@property (weak, nonatomic) IBOutlet UIView                     *containerView;
+
+
 @property (nonatomic, strong)	NSMutableArray					*dataTypeArray;
 
 @property (nonatomic, strong)	NSMutableDictionary				*viewStack;
@@ -157,7 +160,7 @@
                                @{ID: SAVEDROUTE_RECENTS,CONTROLLER:[RouteListViewController className],@"isSectioned":@(YES)}];
 	
 	
-	
+	[self loadChildControllers];
 }
 
 
@@ -170,8 +173,6 @@
 }
 
 -(void)createNonPersistentUI{
-	
-	[self loadInitialChildView];
 	
     _selectedRouteButton.enabled=[[RouteManager sharedInstance] selectedRoute]!=nil;
 	
@@ -255,32 +256,34 @@
 
 #pragma mark - Child controllers
 
--(void)createViewControllerForType:(NSString*)type{
-    
-    SuperViewController *_newcontroller=[_viewStack objectForKey:type];
-	NSDictionary *controllerDict=[self childControllerDictForType:type];
-    if(_newcontroller==nil){
-        UIStoryboard *storyboard=[UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil ];
-        _newcontroller=[storyboard instantiateViewControllerWithIdentifier:controllerDict[CONTROLLER]];
-        _newcontroller.delegate=self;
-		[_newcontroller setValue:controllerDict forKey:@"configDict"];
-        [_viewStack setObject:_newcontroller forKey:type];
-        
-    }
-    
-    [self addChildViewController:_newcontroller];
-}
 
--(void)loadInitialChildView{
-    
+-(void)loadChildControllers{
+	
+	
+	for(NSDictionary *configDict in _childControllerData){
+		
+		RouteListViewController *controller=[[RouteListViewController alloc]initWithNibName:[RouteListViewController nibName] bundle:nil];
+		
+		[controller willMoveToParentViewController:self];
+		[_containerView addSubview:controller.view];
+		[self addChildViewController:controller];
+		[controller didMoveToParentViewController:self];
+		controller.delegate=self;
+		[controller setValue:configDict forKey:@"configDict"];
+		[_viewStack setObject:controller forKey:configDict[ID]];
+		
+		controller.view.size=_containerView.size;
+	}
+	
+	[_containerView layoutSubviews];
+	
+	
     NSDictionary *controllerDict=_childControllerData[1];
     NSString *controllerName=controllerDict[ID];
     self.activeState=controllerName;
-    
-    self.activeController=[self.childViewControllers objectAtIndex:0];
-	[_activeController setValue:controllerDict forKey:@"configDict"];
+    self.activeController=[self.childViewControllers objectAtIndex:1];
+	
 	[_activeController refreshUIFromDataProvider];
-    _activeController.delegate=self;
 }
 
 
@@ -295,13 +298,11 @@
 	
 	
     self.activeState=controller;
-    
-    [self createViewControllerForType:controller];
+	
     SuperViewController *_newcontroller=[_viewStack objectForKey:controller];
     [_oldcontroller willMoveToParentViewController:nil];
     
     [self transitionFromViewController:_oldcontroller toViewController:_newcontroller duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{} completion:^(BOOL finished) {
-        [_oldcontroller removeFromParentViewController];
         [_newcontroller didMoveToParentViewController:self];
         self.activeController=_newcontroller;
 		[_activeController refreshUIFromDataProvider];

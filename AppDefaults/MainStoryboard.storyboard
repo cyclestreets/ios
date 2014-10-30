@@ -102,7 +102,7 @@
                                 <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100.00000075685909" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100" y="484" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
@@ -293,6 +293,7 @@
         <!--Routes-->
         <scene sceneID="Up5-Sq-jDg">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WoZ-xW-kze" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Routes" id="pf5-jL-Kv8" customClass="RoutesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0QK-Ah-J8w">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
@@ -305,11 +306,8 @@
                             </view>
                             <containerView contentMode="scaleToFill" id="G4N-ML-Z7n">
                                 <rect key="frame" x="0.0" y="44" width="320" height="410"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="Xuz-IM-6Qr" kind="embed" id="J1z-3F-s6Z"/>
-                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -324,10 +322,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ContainerView" destination="G4N-ML-Z7n" id="UaZ-DE-DJu"/>
+                        <outlet property="containerView" destination="G4N-ML-Z7n" id="lnD-RV-nKm"/>
                         <outlet property="controlView" destination="aBK-HM-EC4" id="vMK-5a-DrV"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WoZ-xW-kze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2037" y="158"/>
         </scene>
@@ -523,16 +522,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Etb-Ri-unN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2678" y="860"/>
-        </scene>
-        <!--Route List View Controller-->
-        <scene sceneID="Ey8-N6-aBR">
-            <objects>
-                <viewController storyboardIdentifier="RouteListViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xuz-IM-6Qr" customClass="RouteListViewController" sceneMemberID="viewController">
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sq5-sc-jtK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2037" y="892"/>
         </scene>
     </scenes>
     <resources>
