@@ -9,13 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface UserVO : NSObject {
-	NSString			*username;
-	NSString			*password;
-	NSString			*email;
-	NSString			*visiblename;
-	BOOL				autoLogin;
-}
+@interface UserVO : NSObject
+
 @property (nonatomic, strong)			NSString *username;
 @property (nonatomic, strong)			NSString *password;
 @property (nonatomic, strong)			NSString *email;

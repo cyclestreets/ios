@@ -24,6 +24,7 @@
 #import "WayPointVO.h"
 #import "ApplicationXMLParser.h"
 #import "BUDataSourceManager.h"
+#import "LeisureRouteVO.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
@@ -383,6 +384,43 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
+
+-(void)loadRouteForLeisure:(LeisureRouteVO*)leisureroute{
+	
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
+	
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
+									 leisureroute.coordinateString,@"itinerarypoints",
+									 useDom,@"useDom",
+									 settingsdp.plan,@"plan",
+									 [settingsdp returnKilometerSpeedValue],@"speed",
+									 cycleStreets.files.clientid,@"clientid",
+									 nil];
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=CALCULATEROUTE;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loadRouteForEndPointsResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining leisure route from CycleStreets.net" andMessage:nil];
+	
+	
+	
+}
+
+
+
 -(void)loadRouteForRouteIdResponse:(BUNetworkOperation*)response{
     
 	BetterLog(@"");
@@ -459,6 +497,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	
 }
+
+
+
+
+
+
 
 
 /*

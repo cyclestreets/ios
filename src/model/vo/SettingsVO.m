@@ -11,12 +11,6 @@
 
 
 @implementation SettingsVO
-@synthesize plan;
-@synthesize speed;
-@synthesize mapStyle;
-@synthesize imageSize;
-@synthesize routeUnit;
-@synthesize showRoutePoint;
 
 
 /***********************************************************/
@@ -28,11 +22,11 @@
     self = [super init];
     if (self) {
         self.plan = @"balanced";
-        speed = @"12";
-        mapStyle = @"OpenStreetMap";
-        imageSize = @"full";
-        routeUnit = @"miles";
-		showRoutePoint=YES;
+        _speed = @"12";
+        _mapStyle = @"OpenStreetMap";
+        _imageSize = @"full";
+        _routeUnit = @"miles";
+		_showRoutePoint=YES;
     }
     return self;
 }
@@ -42,11 +36,11 @@
 
 -(NSString*)returnKilometerSpeedValue{
 	
-	if([routeUnit isEqualToString:MILES]){
-		int milesvalue=ceil([speed doubleValue]*1.60);
+	if([_routeUnit isEqualToString:MILES]){
+		int milesvalue=ceil([_speed doubleValue]*1.60);
 		return [NSString stringWithFormat:@"%i",milesvalue];
 	}else{
-		return speed;
+		return _speed;
 	}
 	
 }

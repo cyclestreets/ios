@@ -9,17 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface SettingsVO : NSObject {
-	
-	NSString				*plan;
-	NSString				*speed;
-	NSString				*mapStyle;
-	NSString				*imageSize;
-	NSString				*routeUnit;
-	BOOL					showRoutePoint;
-	
+@interface SettingsVO : NSObject
 
-}
 @property (nonatomic, strong)		NSString				* plan;
 @property (nonatomic, strong)		NSString				* speed;
 @property (nonatomic, strong)		NSString				* mapStyle;
@@ -28,4 +19,5 @@
 @property (nonatomic)		BOOL				 showRoutePoint;
 
 -(NSString*)returnKilometerSpeedValue;
+
 @end

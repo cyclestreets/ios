@@ -8,9 +8,7 @@
 @protocol CSOverlayTransitionProtocol <NSObject>
 
 @optional
--(void)didDismissWithTouch:(UITapGestureRecognizer*)gestureRecogniser;
-
--(CGSize)sizeToPresent;
+-(void)didDismissWithTouch:(UIGestureRecognizer*)gestureRecogniser;
 
 @end
 

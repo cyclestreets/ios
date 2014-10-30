@@ -195,10 +195,8 @@
 	
 	button.styleId=styleId;
 	
-	int capWidth=9;
 	BOOL hasLabel=YES;
 	if([text length]==0){
-		capWidth=0;
 		hasLabel=NO;
 	}
 	
@@ -214,7 +212,6 @@
 	}else {
 		CGFloat twidth=[GlobalUtilities calculateWidthOfText:button.titleLabel.text :button.titleLabel.font];
 		bframe.size.width=MAX(twidth,bframe.size.width);
-		capWidth=9;
 	}
 	button.frame = bframe;
 	

@@ -16,7 +16,7 @@
 #define ROUTEARCHIVEPATH @"userroutes"
 #define OLDROUTEARCHIVEPATH @"routes"
 
-@class WayPointVO;
+@class WayPointVO,LeisureRouteVO;
 
 @interface RouteManager : FrameworkObject 	{
 	
@@ -40,6 +40,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 -(void)loadRouteForWaypoints:(NSMutableArray*)waypoints;
 
 -(void)loadRouteForRouting:(MKDirectionsRequest*)routingrequest;
+
+-(void)loadRouteForLeisure:(LeisureRouteVO*)leisureroute;
 
 -(BOOL)loadSavedSelectedRoute;
 -(BOOL)hasSavedSelectedRoute;

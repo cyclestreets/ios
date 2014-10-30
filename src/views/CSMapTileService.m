@@ -40,7 +40,7 @@
 				
 			}else if([mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 				
-				mapView.mapType=MKMapTypeSatellite;
+				mapView.mapType=MKMapTypeHybrid;
 				
 			}
 			
@@ -65,7 +65,7 @@
 					
 					[mapView removeOverlay:overlay];
 					
-					mapView.mapType=MKMapTypeSatellite;
+					mapView.mapType=MKMapTypeHybrid;
 					
 					break;
 					

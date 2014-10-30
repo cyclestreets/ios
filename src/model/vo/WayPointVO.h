@@ -10,14 +10,12 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-enum  {
-	
+typedef NS_ENUM(NSUInteger, WayPointType) {
 	WayPointTypeStart,
 	WayPointTypeFinish,
 	WayPointTypeIntermediate
-	
 };
-typedef int WayPointType;
+
 
 @interface WayPointVO : NSObject
 

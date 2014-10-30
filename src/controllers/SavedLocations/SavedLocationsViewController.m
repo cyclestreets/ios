@@ -145,6 +145,26 @@
 
 
 
+#pragma mark - UITableview editing
+
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	if(editingStyle==UITableViewCellEditingStyleDelete){
+		
+		SavedLocationVO *data=[_dataProvider objectAtIndex:indexPath.row];
+		
+		[[SavedLocationsManager sharedInstance] removeSavedLocation:data];
+		[_tableView beginUpdates];
+		[_tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+		[_tableView endUpdates];
+	}
+	
+}
+
+
+
 
 
 //
@@ -165,7 +185,7 @@
 	namefield.clearButtonMode=UITextFieldViewModeWhileEditing;
 	
 	[alert bk_setCancelButtonWithTitle:CANCEL handler:^{
-		
+		[_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
 	}];
 	
 	[alert bk_addButtonWithTitle:OK handler:^{
@@ -190,7 +210,7 @@
 
 #pragma mark - CSOverlayTransitionProtocol
 
--(void)didDismissWithTouch:(UITapGestureRecognizer*)gestureRecogniser{
+-(void)didDismissWithTouch:(UIGestureRecognizer*)gestureRecogniser{
 	
 	if(_savedLocationdelegate!=nil){
 		[self dismissViewControllerAnimated:YES completion:nil];
@@ -199,9 +219,9 @@
 }
 
 
--(CGSize)sizeToPresent{
+-(CGSize)preferredContentSize{
 	
-	return CGSizeMake(200,200);
+	return CGSizeMake(280,340);
 }
 
 

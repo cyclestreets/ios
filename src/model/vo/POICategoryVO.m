@@ -9,46 +9,16 @@
 #import "POICategoryVO.h"
 
 @implementation POICategoryVO
-@synthesize key;
-@synthesize name;
-@synthesize shortname;
-@synthesize total;
-@synthesize icon;
 
 
-
-static NSString *KEY = @"key";
-static NSString *NAME = @"name";
-static NSString *SHORTNAME = @"shortname";
-static NSString *TOTAL = @"total";
-static NSString *ICON = @"icon";
-
-
-
-//=========================================================== 
-//  Keyed Archiving
-//
-//=========================================================== 
-- (void)encodeWithCoder:(NSCoder *)encoder 
+- (instancetype)init
 {
-    [encoder encodeObject:self.key forKey:KEY];
-    [encoder encodeObject:self.name forKey:NAME];
-    [encoder encodeObject:self.shortname forKey:SHORTNAME];
-    [encoder encodeInt:self.total forKey:TOTAL];
-    [encoder encodeObject:self.icon forKey:ICON];
+	self = [super init];
+	if (self) {
+		
+	}
+	return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder 
-{
-    self = [super init];
-    if (self) {
-        self.key = [decoder decodeObjectForKey:KEY];
-        self.name = [decoder decodeObjectForKey:NAME];
-        self.shortname = [decoder decodeObjectForKey:SHORTNAME];
-        self.total = [decoder decodeIntForKey:TOTAL];
-        self.icon = [decoder decodeObjectForKey:ICON];
-    }
-    return self;
-}
 
 @end

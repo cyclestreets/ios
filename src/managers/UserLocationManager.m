@@ -206,6 +206,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 
 -(BOOL)checkLocationStatus:(BOOL)showAlert{
 	
+	//UIApplicationOpenSettingsURLString
 	
 	if([self doesDeviceAllowLocation]==NO){
         
@@ -299,6 +300,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
  ***********************************************/
 //
 -(BOOL)addSubscriber:(NSString*)subscriberId{
+	
+	if(subscriberId==nil)
+		return NO;
 	
 	NSUInteger index=[self findSubscriber:subscriberId];
 	

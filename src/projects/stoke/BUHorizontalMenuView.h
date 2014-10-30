@@ -17,7 +17,6 @@
 
 @optional
 -(void)setTouchBlock:(GenericEventBlock)block;
--(void)setDataProvider:(NSDictionary*)data;
 -(void)setSelected:(BOOL)selected;
 
 @end
@@ -28,8 +27,6 @@
 @required
 
 - (NSInteger) numberOfItemsForMenu:(BUHorizontalMenuView*) menuView;
-
-- (NSDictionary*) horizMenu:(BUHorizontalMenuView*) menuView itemAtIndex:(NSInteger) index;
 
 - (UIView<BUHorizontalMenuItem>*)menuViewItemForIndex:(NSInteger) index;
 
@@ -66,7 +63,7 @@
 
 @property (nonatomic,assign)  NSInteger                                         selectedIndex;
 
-
+@property (nonatomic,assign)  BOOL												shouldScrollToSelectedItem;
 
 -(void) reloadData;
 

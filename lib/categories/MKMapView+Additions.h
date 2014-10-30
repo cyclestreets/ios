@@ -50,4 +50,10 @@
 
 -(MKMapRect)mapRectForAnnotations;
 
+
+-(CLLocationCoordinate2D)NEforMapView;
+-(CLLocationCoordinate2D)SWforMapView;
+-(CLLocationCoordinate2D)NWforMapView;
+-(CLLocationCoordinate2D)SEforMapView;
+
 @end

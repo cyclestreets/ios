@@ -31,6 +31,8 @@
 -(void)wayPointwasDeleted;
 -(void)wayPointWasSelected:(id)waypoint;
 
+-(IBAction)loginButtonSelected:(id)sender;
+
 -(void)UserDidUpdatePhotoLocation:(CLLocation*)location;
 
 @end

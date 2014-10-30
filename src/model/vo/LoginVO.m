@@ -10,16 +10,6 @@
 
 
 @implementation LoginVO
-@synthesize requestname;
-@synthesize username;
-@synthesize userid;
-@synthesize email;
-@synthesize name;
-@synthesize validatekey;
-@synthesize validatedDate;
-@synthesize lastsignin;
-@synthesize userIP;
-@synthesize deleted;
 
 
 

@@ -173,16 +173,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return _mapStyleDataProvider.count;
 }
 
-- (NSDictionary*) horizMenu:(BUHorizontalMenuView*) menuView itemAtIndex:(NSInteger) index{
-	
-	return _mapStyleDataProvider[index];
-	
-}
+
 
 -(UIView<BUHorizontalMenuItem>*)menuViewItemForIndex:(NSInteger)index{
 	
-	
 	MapStyleCellView *itemView=[ViewUtilities loadInstanceOfView:[MapStyleCellView class] fromNibNamed:@"MapStyleCellView"];
+	
+	itemView.dataProvider=_mapStyleDataProvider[index];
 	
 	return itemView;
 	

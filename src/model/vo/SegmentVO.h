@@ -9,53 +9,35 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface SegmentVO : NSObject <NSCoding>{
-	
-	NSString			*roadName;
-	NSString			*provisionName;
-	NSString			*turnType;
-	
-	NSInteger			walkValue;
-	
-	NSInteger			segmentTime;
-	NSInteger			segmentDistance;
-	NSInteger			startBearing;
-	NSInteger			segmentBusynance;
-	
-	
-	NSInteger			startTime;
-	NSInteger			startDistance;
-	
-	NSArray				*pointsArray; // array of points in 2d groups
-	
-	
-}
-@property (nonatomic, strong)	NSString		*roadName;
-@property (nonatomic, strong)	NSString		*provisionName;
-@property (nonatomic, strong)	NSString		*turnType;
-@property (nonatomic)	NSInteger		walkValue;
-@property (nonatomic)	NSInteger		segmentTime;
-@property (nonatomic)	NSInteger		segmentDistance;
-@property (nonatomic)	NSInteger		startBearing;
-@property (nonatomic)	NSInteger		segmentBusynance;
-@property (nonatomic)	NSInteger		startTime;
-@property (nonatomic)	NSInteger		startDistance;
-@property (nonatomic, strong)	NSArray		*pointsArray;
-
-@property (nonatomic, strong)	NSString		*elevations;
+@interface SegmentVO : NSObject <NSCoding>
 
 
-@property (unsafe_unretained, nonatomic, readonly)	NSString	*timeString;
-@property (nonatomic, readonly)	CLLocationCoordinate2D	segmentStart;
-@property (nonatomic, readonly)	CLLocationCoordinate2D	segmentEnd;
+@property (nonatomic, strong)	NSString							*roadName;
+@property (nonatomic, strong)	NSString							*provisionName;
+@property (nonatomic, strong)	NSString							*turnType;
+@property (nonatomic)	NSInteger									walkValue;
+@property (nonatomic)	NSInteger									segmentTime;
+@property (nonatomic)	NSInteger									segmentDistance;
+@property (nonatomic)	NSInteger									startBearing;
+@property (nonatomic)	NSInteger									segmentBusynance;
+@property (nonatomic)	NSInteger									startTime;
+@property (nonatomic)	NSInteger									startDistance;
+@property (nonatomic, strong)	NSArray								*pointsArray;
 
-@property (nonatomic, readonly)	NSString	*provisionIcon;
-@property (nonatomic, readonly)	NSDictionary	*infoStringDictionary;
+@property (nonatomic, strong)	NSString							*elevations;
+
+// getters
+@property (nonatomic, readonly)	NSString		*timeString;
+@property (nonatomic, readonly)	CLLocationCoordinate2D				segmentStart;
+@property (nonatomic, readonly)	CLLocationCoordinate2D				segmentEnd;
+
+@property (nonatomic, readonly)	NSString							*provisionIcon;
+@property (nonatomic, readonly)	NSDictionary						*infoStringDictionary;
 
 
-@property (nonatomic, readonly)	BOOL	isWalkingSection;
-@property (nonatomic, readonly)	int										segmentElevation;
-@property (nonatomic, readonly)	int										maxElevation;
+@property (nonatomic, readonly)	BOOL								isWalkingSection;
+@property (nonatomic, readonly)	int									segmentElevation;
+@property (nonatomic, readonly)	int									maxElevation;
 
 
 // return array of allpoints for this segment

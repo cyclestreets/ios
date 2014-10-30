@@ -48,13 +48,6 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 #define BetterLog(str, args...)
 #endif
 
-// TestFlight Tracking
-#if ENABLEDTESTFLIGHTTRACKING
-#define TestFlightLog(str,args...)NSLog(@"\n----TestFlight----\n%s:%d\n%s\n[%@]\n----Checkpoint----\n",\
-strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,[NSString stringWithFormat:str , ## args ])
-#else
-#define TestFlightLog(str,args...)
-#endif
 
 
 // CGRECT Log

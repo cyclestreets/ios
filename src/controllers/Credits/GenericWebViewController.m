@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "GenericWebViewController.h"
 #import "GlobalUtilities.h"
-
+#import "BuildTargetConstants.h"
 
 @interface GenericWebViewController()<UIWebViewDelegate>
 
@@ -40,6 +40,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong)	UIActivityIndicatorView				* activityIndicator;
 @property (nonatomic,assign)	BOOL								pageLoaded;
 @property (nonatomic, strong)	UIAlertView							* failAlert;
+
+
+@property (nonatomic,strong)  NSURL									*targetURL;
 
 -(void)updateUIState:(NSString*)state;
 -(IBAction)stopLoading:(id)sender;
@@ -57,9 +60,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 - (void)home {
-	NSString *creditsFilePath = [[NSBundle mainBundle] pathForResource:@"credits" ofType:@"html"];
-	NSURL *creditsURL = [NSURL URLWithString:creditsFilePath];
-	[self.webView loadRequest:[NSURLRequest requestWithURL:creditsURL]];	
+	//NSString *creditsFilePath = [[NSBundle mainBundle] pathForResource:@"credits" ofType:@"html"];
+	self.targetURL = [NSURL URLWithString:@"http://travelsmartns.co.uk/how-to-travel-smart/cycling/"];
+
+	[self.webView loadRequest:[NSURLRequest requestWithURL:_targetURL]];
 	[self.webView setDelegate:self];
 }
 
@@ -190,20 +194,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	_pageLoaded=YES;
 	[self updateUIState:@"loaded"];
+	
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+	
 	BetterLog(@"webView:didFailLoadWithError");
-	if (self.failAlert == nil) {
-		self.failAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+	
+	if([error.userInfo[NSURLErrorFailingURLStringErrorKey] isEqualToString:_targetURL.absoluteString]){
+		
+		
+		if (self.failAlert == nil) {
+		self.failAlert = [[UIAlertView alloc] initWithTitle:APPLICATIONNAME
 													 message:@"Unable to load web page."
 													delegate:nil
 										   cancelButtonTitle:@"OK"
 										   otherButtonTitles:nil];
+		}
+		[self.failAlert show];
+		
 	}
-	[self.failAlert show];
+	
+	self.targetURL=webView.request.URL;
+	
 }
 
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+	
+	if(navigationType==UIWebViewNavigationTypeLinkClicked)
+		self.targetURL=request.URL;
+	
+	return YES;
+}
 
 
 

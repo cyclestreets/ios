@@ -10,6 +10,9 @@
 #import "ExpandedUILabel.h"
 #import "BUTouchView.h"
 #import "GlobalUtilities.h"
+#import "UIView+Additions.h"
+#import "UIColor+AppColors.h"
+#import "UIImage+Additions.h"
 
 @interface MapStyleCellView()
 
@@ -18,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView				*thumbnailView;
 
 @property (nonatomic,strong) IBOutlet  UIView					*touchView;
+@property (weak, nonatomic) IBOutlet UIImageView *tickIcon;
 
 @end
 
@@ -28,6 +32,7 @@
 {
 	self = [super initWithCoder:coder];
 	if (self) {
+		
 	}
 	return self;
 }
@@ -36,10 +41,12 @@
 -(void)setSelected:(BOOL)selected{
 	
 	if(selected){
-		self.backgroundColor=UIColorFromRGB(0xDDDDDD);
+		self.backgroundColor=UIColorFromRGB(0xDAD8D3);
 	}else{
 		self.backgroundColor=[UIColor clearColor];
 	}
+	
+	_tickIcon.visible=selected;
 	
 }
 
@@ -50,6 +57,10 @@
 	UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapItem:)];
 	tapGesture.numberOfTapsRequired=1;
 	[_touchView addGestureRecognizer:tapGesture];
+	
+	UIImage *tickImage=[UIImage imageNamed:@"CSIcon_mapstyle_tick" tintColor:[UIColor appTintColor] style:UIImageTintedStyleKeepingAlpha];
+	_tickIcon.image=tickImage;
+	_tickIcon.visible=NO;
 	
 }
 

@@ -79,7 +79,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager);
 	NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
 	
 	// Temp: need to sort out NSObject enumeration
-	[dict setObject:dataProvider.imageSize forKey:@"imageSize"];
+	dataProvider.imageSize !=nil ? [dict setObject:dataProvider.imageSize forKey:@"imageSize"] : nil;
 	[dict setObject:dataProvider.mapStyle forKey:@"mapStyle"];
 	[dict setObject:dataProvider.plan forKey:@"plan"];
 	[dict setObject:dataProvider.routeUnit forKey:@"routeUnit"];

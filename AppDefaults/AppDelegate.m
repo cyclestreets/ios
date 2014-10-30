@@ -40,9 +40,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "NSString-Utilities.h"
 #import "GenericConstants.h"
 
-#if defined (CONFIGURATION_Adhoc)
-#import "TestFlight.h"
-#endif
 
 
 @interface AppDelegate()<StartupManagerDelegate,UITabBarControllerDelegate>
@@ -63,9 +60,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
 	
-	#if defined (CONFIGURATION_Adhoc)
-	[TestFlight takeOff:@"66d1beaa-3747-4893-8146-93c7003bc24f"]; 
-	#endif
 	
 	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
 	

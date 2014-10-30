@@ -8,6 +8,7 @@
 
 #import "SavedLocationVO.h"
 #import "GlobalUtilities.h"
+#import "GenericConstants.h"
 
 @interface SavedLocationVO()
 
@@ -32,21 +33,18 @@
 
 -(NSString*)locationIcon{
 	
-	
-	switch (_locationType) {
-		case SavedLocationTypeHome:
-		case SavedLocationTypeWork:
-			return @"SavedLocation_CellIcon_Home.png";
-		break;
-			
-		default:
-			return @"EmptyImage.png";
-		break;
-	}
+	return [SavedLocationVO imageForLocationType:_locationType];
 	
 }
 
 
+
+-(void)setCoordinate:(CLLocationCoordinate2D)coord{
+	
+	self.latitude=@(coord.latitude);
+	self.longitude=@(coord.longitude);
+	
+}
 
 -(CLLocationCoordinate2D)coordinate{
 	
@@ -55,15 +53,57 @@
 }
 
 
+#pragma mark - getters
 
-//- (void)encodeWithCoder:(NSCoder *)aCoder{
-//	
-//	[aCoder encodeObject:self.title forKey:@"title"];
-//	[aCoder encodeObject:self.locationID forKey:@"locationID"];
-//	[aCoder encodeObject:self.latitude forKey:@"latitude"];
-//	[aCoder encodeObject:self.longitude forKey:@"longitude"];
-//	[aCoder encodeInteger:self.locationType forKey:@"locationType"];
-//	
-//}
+
+-(NSString*)coordinateString{
+	
+	CLLocationCoordinate2D coordinate=[self coordinate];
+	
+	return [NSString stringWithFormat:@"%f, %f",coordinate.latitude,coordinate.longitude];
+	
+}
+
+-(BOOL)isValid{
+	
+	if([_title isEqualToString:EMPTYSTRING])
+		return NO;
+	
+	if (_latitude==0 || _longitude==0) {
+		return NO;
+	}
+	
+	return YES;
+	
+}
+
+
+#pragma mark - Class
+
++(NSArray*)locationTypeDataProvider{
+	
+	return @[@{@"title":@"Home",@"type":@(SavedLocationTypeHome)},
+			 @{@"title":@"Work",@"type":@(SavedLocationTypeWork)},
+			 @{@"title":@"Other",@"type":@(SavedLocationTypeOther)}];
+	
+}
+
++(NSString*)imageForLocationType:(SavedLocationType)locationType{
+	
+	switch (locationType) {
+		case SavedLocationTypeHome:
+			return @"CSIcon_saveloc_home.png";
+			break;
+		case SavedLocationTypeWork:
+			return @"CSIcon_saveloc_work.png";
+			break;
+			
+		default:
+			return @"EmptyImage.png";
+			break;
+	}
+}
+
+
 
 @end

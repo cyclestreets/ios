@@ -21,7 +21,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //  PhotoList.m
 //  CycleStreets
 //
-//  Created by Alan Paxton on 03/05/2010.
 //
 
 #import "PhotoMapListVO.h"
@@ -30,23 +29,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 static NSString *PHOTO_ELEMENT = @"cs:photo";
 
 @implementation PhotoMapListVO
-
-@synthesize photos;
-
-- (id) initWithElements:(NSDictionary *)elements {
-	if (self = [super init]) {
-		photos = [[NSMutableArray alloc] init];
-		for (NSDictionary *photoDictionary in [elements objectForKey:PHOTO_ELEMENT]) {
-			PhotoMapVO *photo = [[PhotoMapVO alloc] initWithDictionary:photoDictionary];
-			[photos addObject:photo];
-		}
-	}
-	return self;
-}
-
-+ (NSArray *) photoListXMLElementNames {
-	return [[NSArray alloc] initWithObjects:PHOTO_ELEMENT, nil];
-}
 
 
 @end

@@ -9,25 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-@interface LoginVO : NSObject {
-	
-	// mandatory
-	NSString			*requestname;
-	
-	// user info
-	NSString			*username;
-	int					userid;
-	NSString			*email;
-	NSString			*name;
-	
-	// optional
-	BOOL				validatekey;
-	NSString			*validatedDate;
-	int					lastsignin;
-	NSString			*userIP;
-	BOOL				deleted;
+@interface LoginVO : NSObject
 
-}
+
+
 @property (nonatomic, strong)		NSString		* requestname;
 @property (nonatomic, strong)		NSString		* username;
 @property (nonatomic)		int		 userid;

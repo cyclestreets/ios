@@ -16,11 +16,7 @@ static NSString *toString(id object) {
 	return [NSString stringWithFormat: @"%@", object];
 }
 
-// helper function: get the url encoded string form of any object
-static NSString *urlEncode(id object) {
-	NSString *string = toString(object);
-	return [string stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
-}
+
 
 @implementation NSDictionary (UrlEncoding)
 

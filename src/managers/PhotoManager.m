@@ -16,6 +16,7 @@
 #import "HudManager.h"
 #import "GenericConstants.h"
 #import "BUDataSourceManager.h"
+#import "BuildTargetConstants.h"
 
 @interface PhotoManager()
 
@@ -130,6 +131,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                       @"1",@"suppressplaceholders",
                                      @"1",@"minimaldata",
 									 [self uploadPhotoId],@"selectedid",
+									API_IDENTIFIER,@"username",
                                      nil];
     
     BUNetworkOperation *request=[[BUNetworkOperation alloc]init];

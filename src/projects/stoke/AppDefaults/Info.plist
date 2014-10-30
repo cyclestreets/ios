@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>APPCONFIG_ID</key>
-	<string>APPSTATE_LIVE</string>
+	<string>APPSTATE_DEVELOPMENT</string>
 	<key>APPTARGET</key>
 	<string>CycleNorthStaffs</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -12,12 +12,10 @@
 	<string>$(DISPLAY_PREFIX)${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>Icon.png</string>
 	<key>CFBundleIcons</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>net.stoke.$(BUNDLE_ID)</string>
+	<string>net.cyclestreets.$(BUNDLE_ID)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -44,13 +42,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>100</string>
+	<string>110</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Cyclestreets requires access to your location to provide routing information.</string>
 	<key>SERVERDOMAIN_ID</key>
-	<string>APPSTATE_LIVE</string>
+	<string>APPSTATE_DEVELOPMENT</string>
 	<key>UIMainStoryboardFile</key>
 	<string>StokeStoryboard</string>
 	<key>UIPrerenderedIcon</key>

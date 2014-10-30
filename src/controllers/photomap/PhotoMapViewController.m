@@ -49,39 +49,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "MKMapView+LegalLabel.h"
 #import "CSMapTileService.h"
 #import "PhotoWizardViewController.h"
+#import "ExpandedUILabel.h"
+#import "PhotoMapVideoLocationViewController.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 
 @interface PhotoMapViewController()<MKMapViewDelegate>
 
-@property (nonatomic, strong) IBOutlet MKMapView						* mapView;//map of current area
-@property (nonatomic, strong) IBOutlet UILabel							* attributionLabel;// map type label
-
+// outlets
+@property (nonatomic,strong) IBOutlet MKMapView							* mapView;//map of current area
+@property (nonatomic,strong) IBOutlet ExpandedUILabel					* attributionLabel;// map type label
 @property (nonatomic,strong) IBOutlet UINavigationItem					* navigation;
+@property (nonatomic,strong) IBOutlet UIBarButtonItem					* photoWizardButton;
 
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem					* gpslocateButton;
-@property (nonatomic,strong)  IBOutlet UIBarButtonItem					* locationButton;
+
+// buttons
+@property (nonatomic,strong) UIBarButtonItem							* locationButton;
 @property (nonatomic,strong) UIButton									* activeLocationSubButton;
 
+// views
+@property (nonatomic,strong) PhotoMapImageLocationViewController		* locationImageView;
+@property (nonatomic,strong) PhotoMapVideoLocationViewController		* locationVideoView;
+@property (nonatomic,strong) PhotoWizardViewController					* photoWizardView;
 
-@property (nonatomic, strong) IBOutlet UIBarButtonItem					* photoWizardButton;
 
-@property (nonatomic, strong) CLLocation								* currentLocation;
-@property (nonatomic, strong) PhotoMapImageLocationViewController		* locationView;
-@property (nonatomic, strong) PhotoWizardViewController					* photoWizardView;
-
-@property (nonatomic, assign) BOOL										photomapQuerying;
-
+// state
+@property (nonatomic,strong) CLLocation									* currentLocation;
+@property (nonatomic,assign) BOOL										photomapQuerying;
 @property (nonatomic,assign) BOOL										shouldAcceptLocationUpdates;
-
 @property (nonatomic,assign) BOOL										mapChangedFromUserInteraction;
-
 @property (nonatomic,assign) BOOL										initialLocationComplete;
-
-@property (nonatomic,strong)  CSMapSource								* activeMapSource;
-
+@property (nonatomic,strong) CSMapSource								* activeMapSource;
 
 
 @end
@@ -224,11 +224,27 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	BetterLog(@"Fired");
 	
 	CSPhotomapAnnotation *annotation=(CSPhotomapAnnotation*)view.annotation;
-	
-	PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:@"PhotoMapImageLocationView" bundle:nil];
 	PhotoMapVO *photoEntry = (PhotoMapVO *)annotation.dataProvider;
-	lv.dataProvider=photoEntry;
-	[self presentModalViewController:lv animated:YES];
+	
+	switch (photoEntry.mediaType) {
+		case PhotoMapMediaType_Image:
+			{
+				PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:[PhotoMapImageLocationViewController nibName] bundle:nil];
+				lv.dataProvider=photoEntry;
+				[self presentModalViewController:lv animated:YES];
+				
+			}
+		break;
+				
+		case PhotoMapMediaType_Video:
+			{
+				PhotoMapVideoLocationViewController *lv = [[PhotoMapVideoLocationViewController alloc] initWithNibName:[PhotoMapVideoLocationViewController nibName] bundle:nil];
+				lv.dataProvider=photoEntry;
+				[self presentModalViewController:lv animated:YES];
+			}
+		break;
+	}
+	
 	
 }
 
@@ -430,14 +446,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	
 	self.currentLocation=_mapView.userLocation.location;
 	
-	_gpslocateButton.style = UIBarButtonItemStylePlain;
-	
 	
 }
 
 - (void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error{
 	
-	_gpslocateButton.style = UIBarButtonItemStylePlain;
 	
 }
 

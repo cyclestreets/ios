@@ -53,6 +53,8 @@
 -(void)createUI{
     
     _selectedIndex=-1;
+	
+	_shouldScrollToSelectedItem=YES;
     
     self.scrollView=[[UIScrollView alloc]initWithFrame:self.bounds];
     _scrollView.bounces = YES;
@@ -69,7 +71,7 @@
     _itemContainer.paddingLeft=0;
     _itemContainer.paddingRight=0;
     _itemContainer.itemPadding=1;
-	_itemContainer.backgroundColor=UIColorFromRGB(0xdddddd);
+	_itemContainer.backgroundColor=[UIColor clearColor];
     
     [_scrollView addSubview:_itemContainer];
     
@@ -92,15 +94,11 @@
     __weak __typeof(&*self)weakSelf = self;
     for(NSInteger i=0;i<_itemCount;i++){
         
-        NSDictionary *itemData = [_menuDataSource horizMenu:self itemAtIndex:i];
-        
 		 __weak UIView<BUHorizontalMenuItem> *itemView=(UIView<BUHorizontalMenuItem>*)[_menuDataSource menuViewItemForIndex:i];
 		
 		[itemView setTouchBlock:^(NSString *eventType, id dataProvider) {
 			[weakSelf didSelectItem:itemView atIndex:i];
 		}];
-		
-		[itemView setDataProvider:itemData];
 		
         [_itemContainer addSubview:itemView];
         
@@ -148,7 +146,8 @@
 	[itemView setSelected:YES];
 	[oldItem setSelected:NO];
 	
-	[_scrollView setContentOffset:CGPointMake(itemView.x , 0) animated:YES];
+	if(_shouldScrollToSelectedItem)
+		[_scrollView setContentOffset:CGPointMake(itemView.x , 0) animated:YES];
 	
 	
 }

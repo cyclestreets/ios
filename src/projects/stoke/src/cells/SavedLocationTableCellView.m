@@ -11,10 +11,15 @@
 #import "GenericConstants.h"
 #import "SavedLocationVO.h"
 
+#import "GlobalUtilities.h"
+#import "UIImage+Additions.h"
+#import "UIColor+AppColors.h"
+#import "ViewUtilities.h"
+
 @interface SavedLocationTableCellView()
 
-@property (weak, nonatomic) IBOutlet UILabel            *titleLabel;
-@property (strong, nonatomic) UIImageView        *locationTypeIcon;
+@property (weak, nonatomic) IBOutlet UILabel						*titleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView					*locationTypeIcon;
 
 
 @end
@@ -25,17 +30,22 @@
 
 -(void)initialise{
 	
-	self.locationTypeIcon=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 22, 22)];
-	_locationTypeIcon.backgroundColor=[UIColor clearColor];
-	self.accessoryView=_locationTypeIcon;
 }
 
+-(void)layoutSubviews{
+	
+	[super layoutSubviews];
+	
+	[ViewUtilities alignView:_locationTypeIcon withView:self.contentView :BURightAlignMode :BUCenterAlignMode :10];
+	
+	
+}
 
 -(void)populate{
 	
     _titleLabel.text=_dataProvider.title;
     
-	_locationTypeIcon.image=[UIImage imageNamed:[_dataProvider locationIcon]];
+	_locationTypeIcon.image=[UIImage imageNamed:[_dataProvider locationIcon] tintColor:[UIColor appTintColor] style:UIImageTintedStyleKeepingAlpha];
     
 }
 

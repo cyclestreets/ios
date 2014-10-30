@@ -221,4 +221,52 @@
 }
 
 
+
+-(CLLocationCoordinate2D)NEforMapView{
+	
+	CGRect bounds = self.bounds;
+	CLLocationCoordinate2D nw = [self convertPoint:bounds.origin toCoordinateFromView:self];
+	CLLocationCoordinate2D se = [self convertPoint:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height) toCoordinateFromView:self ];
+	CLLocationCoordinate2D ne;
+	ne.latitude = nw.latitude;
+	ne.longitude = se.longitude;
+	
+	return ne;
+	
+}
+
+-(CLLocationCoordinate2D)SWforMapView{
+	
+	CGRect bounds = self.bounds;
+	CLLocationCoordinate2D nw = [self convertPoint:bounds.origin toCoordinateFromView:self];
+	CLLocationCoordinate2D se = [self convertPoint:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height) toCoordinateFromView:self ];
+	CLLocationCoordinate2D sw;
+	sw.latitude = se.latitude;
+	sw.longitude = nw.longitude;
+	
+	return sw;
+	
+}
+
+
+-(CLLocationCoordinate2D)NWforMapView{
+	
+	CGRect bounds = self.bounds;
+	CLLocationCoordinate2D nw = [self convertPoint:bounds.origin toCoordinateFromView:self];
+	
+	return nw;
+	
+}
+
+
+-(CLLocationCoordinate2D)SEforMapView{
+	
+	CGRect bounds = self.bounds;
+	CLLocationCoordinate2D se = [self convertPoint:CGPointMake(bounds.origin.x + bounds.size.width, bounds.origin.y + bounds.size.height) toCoordinateFromView:self ];
+	
+	return se;
+	
+}
+
+
 @end

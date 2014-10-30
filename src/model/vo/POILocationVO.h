@@ -8,21 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "BUCodableObject.h"
 
-@interface POILocationVO : NSObject<NSCoding>{
-	
-	NSString				*locationid;
-	
-	CLLocation				*location;
-	
-	NSString				*name;
-	NSString				*notes;
-	NSString				*website;
-	
-}
-@property (nonatomic, strong)	NSString		*locationid;
-@property (nonatomic, strong)	CLLocation		*location;
-@property (nonatomic, strong)	NSString		*name;
-@property (nonatomic, strong)	NSString		*notes;
-@property (nonatomic, strong)	NSString		*website;
+@interface POILocationVO : BUCodableObject
+
+@property (nonatomic,strong)  NSString						*poiType;
+
+@property (nonatomic, strong)	NSString					*locationid;
+
+@property (nonatomic, assign)	CLLocationCoordinate2D		coordinate;
+@property (nonatomic, strong)	NSString					*name;
+@property (nonatomic, strong)	NSString					*notes;
+@property (nonatomic, strong)	NSString					*website;
+
 @end

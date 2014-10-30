@@ -25,7 +25,6 @@
 #import "HudManager.h"
 #import "UserLocationManager.h"
 #import	"WayPointVO.h"
-#import "IIViewDeckController.h"
 #import "WayPointViewController.h"
 #import "UIView+Additions.h"
 #import "ViewUtilities.h"
@@ -43,41 +42,51 @@
 #import "MKMapView+LegalLabel.h"
 #import "CSMapTileService.h"
 #import "MapViewSearchLocationViewController.h"
+#import "BuildTargetConstants.h"
 
 #import "UIColor+AppColors.h"
+#import "UIImage+Additions.h"
+#import "UIImage-Additions.h"
 
 #import <Crashlytics/Crashlytics.h>
-#import <PixateFreestyle/PixateFreestyle.h>
+#import <A2StoryboardSegueContext.h>
+#include <PixateFreestyle/PixateFreestyle.h>
+
+#import "CSOverlayTransitionAnimator.h"
+#import "SavedLocationsViewController.h"
+#import "SavedLocationVO.h"
+#import "SavedLocationsManager.h"
+#import "SaveLocationCreateViewController.h"
+#import "LeisureViewController.h"
+
+#import "POIListviewController.h"
+#import "POIManager.h"
+#import "POILocationVO.h"
+#import "POIAnnotation.h"
+#import "POIAnnotationView.h"
 
 
 static NSInteger DEFAULT_ZOOM = 15;
 static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 
-@interface MarkerMenuItem : UIMenuItem
-@property (nonatomic, strong) WayPointVO* waypoint; 
-@end
-@implementation MarkerMenuItem
-@synthesize waypoint;
-@end
 
-
-@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,IIViewDeckControllerDelegate,LocationReceiver>
+@interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,LocationReceiver,UIViewControllerTransitioningDelegate,SavedLocationsViewDelegate>
 
 // tool bar
 @property (nonatomic, strong) IBOutlet UIToolbar					* toolBar;
 @property (nonatomic, strong) UIBarButtonItem						* locationButton;
-@property (nonatomic, strong) UIBarButtonItem						* activeLocationButton;
 @property (nonatomic, strong) UIButton								* activeLocationSubButton;
-@property (nonatomic, strong) UIBarButtonItem						* searchButton;
+@property (nonatomic, strong) UIBarButtonItem						* waypointButton;
 @property (nonatomic, strong) UIBarButtonItem						* routeButton;
 @property (nonatomic, strong) UIBarButtonItem						* changePlanButton;
-@property (nonatomic, strong) UIActivityIndicatorView				* locatingIndicator;
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
-@property (nonatomic,strong)  UIBarButtonItem						* waypointButton;
-@property (nonatomic,strong)  UIBarButtonItem						* poiButton;
-@property (nonatomic,strong)  UIBarButtonItem						* savedLocationButton;
+@property (nonatomic, strong) UIBarButtonItem						* addPointButton;
+@property (nonatomic, strong) UIBarButtonItem						* searchButton;
+
+@property (weak, nonatomic) IBOutlet UIView                          *addPointView;
+
 
 
 @property(nonatomic,strong) IBOutlet  UIView						*walkingRouteOverlayView;
@@ -106,11 +115,17 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 // waypoint ui
 // will need ui for editing waypoints
 @property(nonatomic,assign)  BOOL									markerMenuOpen;
-@property (nonatomic,strong)  CSWaypointAnnotationView				*selectedAnnotation;
+@property (nonatomic,strong)  MKAnnotationView						*selectedAnnotation;
 
 // data
 @property (nonatomic, strong) RouteVO								* route;
 @property (nonatomic, strong) NSMutableArray						* waypointArray;
+@property (nonatomic, strong) NSMutableArray						* waypointAnnotationArray;
+
+
+// pois
+@property (nonatomic, strong) NSMutableDictionary					* poiDataProvider;
+@property (nonatomic, strong) NSMutableArray						* poiAnnotationArray;
 
 
 
@@ -131,20 +146,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic,strong)  UITapGestureRecognizer				*mapSingleTapRecognizer;
 @property (nonatomic,strong)  UITapGestureRecognizer				*mapDoubleTapRecognizer;
 
-// ui
-- (void)initToolBarEntries;
-- (void)updateUItoState:(MapPlanningState)state;
 
-
-
-// waypoints
--(void)resetWayPoints;
--(void)removeWayPointAtIndex:(NSUInteger)index;
--(void)assessWayPointAddition:(CLLocationCoordinate2D)cooordinate;
--(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords;
-
-// waypoint menu
--(void)removeMarkerAtIndexViaMenu:(UIMenuController*)menuController;
 
 @end
 
@@ -169,6 +171,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	[notifications addObject:GPSLOCATIONFAILED];
 	[notifications addObject:GPSSYSTEMLOCATIONCOMPLETE];
 	
+	[notifications addObject:POIMAPLOCATIONRESPONSE];
 	
 	[super listNotificationInterests];
 	
@@ -198,6 +201,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	if([name isEqualToString:GPSSYSTEMLOCATIONCOMPLETE]){
 		[self userLocationDidComplete];
+	}
+	
+	if([name isEqualToString:POIMAPLOCATIONRESPONSE]){
+		[self updatePOIMapMarkers];
 	}
 	
 }
@@ -262,7 +269,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
-	
+	_mapView.showsPointsOfInterest=NO;
 	_mapView.tintColor=[UIColor appTintColor];
 	
 	_attributionLabel.textAlignment=NSTextAlignmentCenter;
@@ -276,8 +283,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 		_programmaticChange=YES;
 		[_mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
-		_mapView.camera.altitude=50;
-		_mapView.camera.pitch=50;
+//		_mapView.camera.altitude=50;
+//		_mapView.camera.pitch=50;
 		
 	}else{
 		
@@ -294,6 +301,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[self.view addSubview:_walkingRouteOverlayView];
 	_walkingRouteOverlayView.y=self.view.height+_walkingRouteOverlayView.height;
+	
 	
 	
 	self.programmaticChange = NO;
@@ -365,13 +373,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)initToolBarEntries{
 	
-	self.locatingIndicator=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	_locatingIndicator.hidesWhenStopped=YES;
 	
-	self.activeLocationButton = [[UIBarButtonItem alloc] initWithCustomView:_locatingIndicator ];
-	_activeLocationButton.style	= UIBarButtonItemStylePlain;
-	
-	self.waypointButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_waypoint.png"]
+	self.waypointButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSTabBar_plan_route.png"]
 														   style:UIBarButtonItemStylePlain
 														  target:self
 														  action:@selector(showWayPointView)];
@@ -397,29 +400,107 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 													  action:@selector(showRoutePlanMenu:)];
 	
 	
-	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan Route"
-														style:UIBarButtonItemStylePlain
-													   target:self
-													   action:@selector(routeButtonSelected)];
-	_routeButton.styleId=@"MapView_routeButton";
-	
-	
-	self.poiButton = [[UIBarButtonItem alloc] initWithTitle:@"POI"
+	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan"
 														style:UIBarButtonItemStylePlain
 													   target:self
 													   action:@selector(routeButtonSelected)];
 	
-	self.savedLocationButton = [[UIBarButtonItem alloc] initWithTitle:@"SL"
-													  style:UIBarButtonItemStylePlain
-													 target:self
-													 action:@selector(didSelectSaveLocationsButton:)];
 	
+	// CNS only
+	
+	self.addPointButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_addPoint.png"]
+														style:UIBarButtonItemStylePlain
+													   target:self
+                                                     action:@selector(displayAddPointView)];
+	_addPointButton.width=40;
 	
 	
 	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
 	
+}
+
+
+
+-(NSArray*)toolbarItemsForBuildTargetForUIState{
+	
+	ApplicationBuildTarget buildTarget=[BuildTargetConstants buildTarget];
+	
+	switch (buildTarget) {
+		case ApplicationBuildTarget_CycleStreets:
+		{
+			switch (_uiState) {
+					
+				case MapPlanningStateNoRoute:
+					return @[_locationButton,_searchButton, _leftFlex];
+				break;
+					
+				case MapPlanningStateLocating:
+					if([self shouldShowWayPointUI]==YES){
+						return @[_waypointButton,_locationButton,_searchButton, _leftFlex];
+					}else{
+						
+						return @[_locationButton,_searchButton, _leftFlex];
+					}
+				break;
+					
+				case MapPlanningStateStartPlanning:
+					return @[_locationButton,_searchButton,_leftFlex];
+				break;
+					
+				case MapPlanningStatePlanning:
+					return @[ _waypointButton,_locationButton,_searchButton,_leftFlex,_routeButton];
+				break;
+					
+				case MapPlanningStateRoute:
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+				break;
+					
+				case MapPlanningStateRouteLocating:
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+				break;
+			}
+		}
+			break;
+			
+		case ApplicationBuildTarget_CNS:
+		{
+			switch (_uiState) {
+					
+				case MapPlanningStateNoRoute:
+					return @[_locationButton, _leftFlex, _rightFlex, _addPointButton];
+					break;
+					
+				case MapPlanningStateLocating:
+					if([self shouldShowWayPointUI]==YES){
+						return @[_waypointButton,_locationButton, _leftFlex, _rightFlex,_addPointButton];
+					}else{
+						return @[_locationButton, _leftFlex, _rightFlex,_addPointButton];
+					}
+					break;
+					
+				case MapPlanningStateStartPlanning:
+					return @[_locationButton,_leftFlex,_rightFlex,_addPointButton];
+					break;
+					
+				case MapPlanningStatePlanning:
+					return @[_waypointButton, _locationButton,_leftFlex,_routeButton,_addPointButton];
+					break;
+					
+				case MapPlanningStateRoute:
+					return @[_locationButton,_leftFlex, _changePlanButton,_routeButton];
+					break;
+					
+				case MapPlanningStateRouteLocating:
+					return @[_locationButton,_leftFlex, _changePlanButton,_routeButton];
+				break;
+			}
+		}
+			
+		break;
+	}
+	return nil;
 }
 
 
@@ -450,10 +531,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStateNoRoute");
 			
-			_searchButton.enabled = YES;
+			//_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
+			items=[self toolbarItemsForBuildTargetForUIState];
 			[self.toolBar setItems:items animated:YES ];
 			
 		}
@@ -464,15 +545,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			BetterLog(@"MapPlanningStateLocating");
 			
 			
-			_searchButton.enabled = YES;
+			//_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=YES;
 			
-			if([self shouldShowWayPointUI]==YES){
-				items=@[_waypointButton,_locationButton,_searchButton, _leftFlex, _rightFlex];
-			}else{
-				
-				items=@[_locationButton,_searchButton, _leftFlex, _rightFlex];
-			}
+			items=[self toolbarItemsForBuildTargetForUIState];
 			
 			[self.toolBar setItems:items animated:YES ];
 			
@@ -485,10 +561,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStateStartPlanning");
 			
-			_searchButton.enabled = YES;
+			//_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			items=[@[_locationButton,_searchButton,_leftFlex]mutableCopy];
+			items=[self toolbarItemsForBuildTargetForUIState];
             
             [self.toolBar setItems:items animated:YES ];
 		}
@@ -498,11 +574,11 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStatePlanning");
 			
-			_routeButton.title = @"Plan Route";
-			_searchButton.enabled = YES;
+			_routeButton.title = @"Plan";
+			//_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
-			items=@[_waypointButton, _locationButton,_searchButton,_leftFlex,_routeButton];
+			items=[self toolbarItemsForBuildTargetForUIState];
             [self.toolBar setItems:items animated:YES ];
 		}
 		break;
@@ -511,11 +587,11 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStateRoute");
 			
-			_routeButton.title = @"New Route";
+			_routeButton.title = @"New";
 			_activeLocationSubButton.selected=NO;
-			_searchButton.enabled = YES;
+			//_searchButton.enabled = YES;
 			
-			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+			items=[self toolbarItemsForBuildTargetForUIState];
             [self.toolBar setItems:items animated:NO ];
 		}
 		break;
@@ -524,11 +600,11 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStateRouteLocating");
 			
-			_routeButton.title = @"New Route";
+			_routeButton.title = @"New";
 			_activeLocationSubButton.selected=NO;
-			_searchButton.enabled = NO;
+			//_searchButton.enabled = NO;
 			
-			items=@[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+			items=[self toolbarItemsForBuildTargetForUIState];
 			[self.toolBar setItems:items animated:NO ];
 		}
 		break;
@@ -641,7 +717,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		}else{
 			
 			if(_allowsUserTrackingUI){
-			
+				[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 			}else{
 				[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 
@@ -879,24 +955,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 #pragma mark - Waypoints
 //------------------------------------------------------------------------------------
 
--(void)showWayPointView{
-	
-	UINavigationController *nav=(UINavigationController*)self.viewDeckController.leftController;
-	WayPointViewController *waypointController=(WayPointViewController*)nav.topViewController;
-	self.viewDeckController.panningMode=IIViewDeckFullViewPanning;
-	waypointController.delegate=self;
-	waypointController.dataProvider=_waypointArray;
-	
-	[self.viewDeckController openLeftViewAnimated:YES];
-	
-}
 
 
 -(void)resetWayPoints{
 	
 	[_waypointArray removeAllObjects];
 	
-	//[[_mapView markerManager] removeMarkers];
 }
 
 
@@ -1017,21 +1081,24 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	if(_waypointArray.count<=1){
 		[self assessUIState];
-		[self.viewDeckController closeLeftViewAnimated:YES];
+		
+		[self dismissViewControllerAnimated:YES completion:nil];
 	}
 }
 -(void)wayPointWasSelected:(id)waypoint{
 	WayPointVO *dp=(WayPointVO*)waypoint;
 	[_mapView setCenterCoordinate:dp.coordinate zoomLevel:DEFAULT_OVERVIEWZOOM animated:YES];
 	
-	[self.viewDeckController closeLeftViewAnimated:YES];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 // update Waypoint types from creation, as can change if waypoints are removed post creation ie intermediate can become end etc
 -(void)updateWaypointStatuses{
 	
-	[_mapView removeAnnotations:_mapView.annotationsWithoutUserLocation];
+	[_mapView removeAnnotations:_waypointAnnotationArray];
+	
+	[_waypointAnnotationArray removeAllObjects];
 	
 	for(int i=0;i<_waypointArray.count;i++){
 		
@@ -1057,11 +1124,17 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(CSWaypointAnnotation*)annotationForWaypoint:(WayPointVO*)waypoint atCoordinate:(CLLocationCoordinate2D)coordinate atIndex:(int)index{
 	
+	if(_waypointAnnotationArray==nil){
+		self.waypointAnnotationArray=[NSMutableArray array];
+	}
+
 	CSWaypointAnnotation *annotation=[[CSWaypointAnnotation alloc]init];
 	annotation.coordinate=coordinate;
 	annotation.index=index;
 	annotation.dataProvider=waypoint;
 	annotation.menuEnabled=NO;
+	
+	[_waypointAnnotationArray addObject:annotation];
 	
 	return annotation;
 }
@@ -1118,21 +1191,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 }
 
 
-// reset panning mode so it is only active when WayPoint view is visible.
-- (void)viewDeckController:(IIViewDeckController*)viewDeckController didShowCenterViewFromSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated{
-	
-	self.viewDeckController.panningMode=IIViewDeckNoPanning;
-	
-}
-
-
 
 
 #pragma mark - MKMap delegate
 
 - (void) didTapOnMapSingle:(UITapGestureRecognizer*)recogniser {
 	
-	BetterLog(@"");
+	BetterLog(@"_selectedAnnotation=%@",_selectedAnnotation);
 	
 	// if an annotation is active, do not add a new one, we must wait for the annotation to be deselected
 	if(_selectedAnnotation!=nil)
@@ -1144,11 +1209,18 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[self performSelector:@selector(addLocationToMapForGesture:) withObject:location afterDelay:0.7];
 	
+	[self hideAddPointView];
 	
 }
 
 
 -(void)addLocationToMapForGesture:(CLLocation*)location{
+	
+	if (location==nil) {
+		return;
+	}
+	
+	BetterLog(@"");
 	
 	if(_uiState==MapPlanningStateRoute)
 		return;
@@ -1172,7 +1244,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	}
 		
 	
-	BetterLog(@"From %lu to %lu",oldState, newState);
+	BetterLog(@"From %u to %u",oldState, newState);
 	
 	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
 		
@@ -1190,6 +1262,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 }
 
 
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
+	
+	[self hideAddPointView];
+	
+	
+}
 
 
 
@@ -1198,49 +1276,116 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 #pragma mark - MKMap Annotations
 
+#define kDeleteWaypointControlTag 3001
+#define kSaveLocationControlTag 3002
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
 	
-	 if ([annotation isKindOfClass:[MKUserLocation class]])
+	BetterLog(@"");
+	
+	if ([annotation isKindOfClass:[MKUserLocation class]]){
 		 return nil;
 	
-	 static NSString *reuseId = @"CSWaypointAnnotationView";
-	 CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
-	
-	 if (annotationView == nil){
-		 
-		 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
-		 annotationView.draggable = _uiState!=MapPlanningStateRoute;
-		 annotationView.enabled=_uiState!=MapPlanningStateRoute;
-		 annotationView.selected=YES;
-		 annotationView.canShowCallout=YES;
-		 
-		 UIButton *calloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
-		 [calloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
-		 calloutButton.backgroundColor=[UIColor redColor];
-		 annotationView.rightCalloutAccessoryView=calloutButton;
-		 
-		 
-		 
-	 } else {
-		 annotationView.annotation = annotation;
-	 }
-	 
-	 return annotationView;
+	}else if ([annotation isKindOfClass:[CSWaypointAnnotation class]]){
+		
+		static NSString *reuseId = @"CSWaypointAnnotationView";
+		CSWaypointAnnotationView *annotationView = (CSWaypointAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+		
+		BetterLog(@"annotationView=%@",annotationView);
+		
+		 if (annotationView == nil){
+			 
+			 annotationView = [[CSWaypointAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
+			 annotationView.draggable = _uiState!=MapPlanningStateRoute;
+			 annotationView.enabled=_uiState!=MapPlanningStateRoute;
+			 annotationView.selected=YES;
+			 annotationView.canShowCallout=YES;
+			 
+			 UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+			 [rcalloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
+			 rcalloutButton.tag=kDeleteWaypointControlTag;
+			 rcalloutButton.backgroundColor=[UIColor redColor];
+			 annotationView.rightCalloutAccessoryView=rcalloutButton;
+			 
+			 if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
+				 UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+				 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor whiteColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateNormal];
+				 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor blackColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateHighlighted];
+				 lcalloutButton.tag=kSaveLocationControlTag;
+				 lcalloutButton.backgroundColor=[UIColor appTintColor];
+				 annotationView.leftCalloutAccessoryView=lcalloutButton;
+			 }
+			 
+			 
+		 } else {
+			 annotationView.annotation = annotation;
+			 annotationView.canShowCallout=YES;
+		 }
+		
+		return annotationView;
+		
+	}else if ([annotation isKindOfClass:[POIAnnotation class]]){
+		
+		static NSString *reuseId = @"POIAnnotationView";
+		POIAnnotationView *annotationView = (POIAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+		
+		
+		if (annotationView == nil){
+			
+			annotationView = [[POIAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
+			annotationView.styleId=@"POIAnnotationView";
+			annotationView.size=CGSizeMake(28,28);
+			annotationView.draggable =NO;
+			annotationView.enabled=YES;
+			annotationView.selected=NO;
+			annotationView.canShowCallout=YES;
+			
+			
+			UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+			UIImage *poiimage=[UIImage imageNamed:@"CSIcon_map_poi.png"];
+			[rcalloutButton setImage:poiimage forState:UIControlStateNormal];
+			rcalloutButton.backgroundColor=[UIColor appTintColor];
+			annotationView.rightCalloutAccessoryView=rcalloutButton;
+
+			
+			
+		} else {
+			annotationView.annotation = annotation;
+			annotationView.canShowCallout=YES;
+		}
+		
+		
+		return annotationView;
+		
+	}
+
+	 return nil;
 }
 
+
+// Note; there is a slight issues here
+// as we drag a selected annotation the callout is removed and when it is let go it reappears
+// if you tap long enough but do not move the annotation the callout will flicker
+// this is beacuse it goes through the changestate logic. the tap must be just long enough a quick tap will not trigger changestate
+//
+
 -(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view{
+	
+	
 	
 	BetterLog(@"");
 	
 	[self performSelector:@selector(offsetSelectedAnnnotationDeselection) withObject:nil afterDelay:0.2];
 	
-	view.selected=YES;
+	//view.selected=YES;
 	
 }
 
 // offsets the nilling of the selectedAnnotation as single tap will occur immediately after didDeselectAnnotationView, we dont
 // want a waypoint to be addded when the user has merely dismissed the annotation popup
 -(void)offsetSelectedAnnnotationDeselection{
+	
+	BetterLog(@"selectedAnnotation=%@",_selectedAnnotation);
 	self.selectedAnnotation=nil;
 }
  
@@ -1248,6 +1393,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
 	
 	BetterLog(@"");
+	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(offsetSelectedAnnnotationDeselection) object:nil];
 	
 	if([view.annotation isKindOfClass:[MKUserLocation class]]){
 		
@@ -1259,11 +1406,24 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			[self addWayPointAtCoordinate:annotation.location.coordinate];
 		}
 		
-	}else{
+	}else if( [view.annotation isKindOfClass:[CSWaypointAnnotation class]]){
 		
 		self.selectedAnnotation=(CSWaypointAnnotationView*)view;
+		
+		BetterLog(@"selectedAnnotation=%@",_selectedAnnotation);
+		BetterLog(@"CSWaypointAnnotationView.selected=%i",_selectedAnnotation.selected);
+		BetterLog(@"CSWaypointAnnotationView.draggable=%i",_selectedAnnotation.draggable);
 	
-		[view setDragState:MKAnnotationViewDragStateStarting];
+		[view setDragState:MKAnnotationViewDragStateDragging animated:NO];
+		
+	}else{
+		
+		
+		self.selectedAnnotation=(POIAnnotationView*)view;
+		
+		BetterLog(@"selectedAnnotation=%@",_selectedAnnotation);
+		
+		
 	}
 	
 	
@@ -1273,27 +1433,53 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
 	
-	CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
-	CSWaypointAnnotation* annotation=annotationView.annotation;
 	
-	[self removeWayPoint:annotation.dataProvider];
+	if([view.annotation isKindOfClass:[CSWaypointAnnotation class]]){
 	
 	
-}
-
-
--(void)removeMarkerAtIndexViaMenu:(UIMenuController*)menuController {
-	
-	MarkerMenuItem *menuItem = [[[UIMenuController sharedMenuController] menuItems] objectAtIndex:0];
-	
-	if(menuItem.waypoint!=nil){
+		NSInteger tag=control.tag;
 		
-		[self removeWayPoint:menuItem.waypoint];
+		CSWaypointAnnotationView *annotationView=(CSWaypointAnnotationView*)view;
+		CSWaypointAnnotation* annotation=annotationView.annotation;
+		
+		switch (tag) {
+			case kSaveLocationControlTag:
+			{
+				SavedLocationVO *location=[[SavedLocationVO alloc] init];
+				[location setCoordinate:annotation.coordinate];
+				
+				[self displayCreateSaveLocationControllerWithLocation:location];
+				
+				
+				[mapView deselectAnnotation:annotation animated:YES];
+			}
+			break;
+				
+			case kDeleteWaypointControlTag:
+			{
+				[self removeWayPoint:annotation.dataProvider];
+			}
+			break;
+		}
+		
+	}else if ([view.annotation isKindOfClass:[POIAnnotation class]]){
+		
+		POIAnnotationView *annotationView=(POIAnnotationView*)view;
+		POIAnnotation* annotation=annotationView.annotation;
+		
+		if (_uiState!=MapPlanningStateRoute) {
+			
+			[self addWayPointAtCoordinate:annotation.coordinate];
+			
+			[mapView deselectAnnotation:annotation animated:YES];
+		}
+		
+		
 	}
 	
-	_markerMenuOpen=NO;
-	
 }
+
+
 
 
 //------------------------------------------------------------------------------------
@@ -1363,6 +1549,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 //
 
 
+-(IBAction)showWayPointView{
+	
+	[self performSegueWithIdentifier:@"WaypointViewSegue" sender:self];
+
+	
+}
+
 
 - (IBAction) searchButtonSelected {
 	
@@ -1376,6 +1569,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
 	
 	[self presentModalViewController:_mapLocationSearchView	animated:YES];
+	
+	[self hideAddPointView];
 	
 }
 
@@ -1482,9 +1677,9 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(IBAction)didSelectPOIButton:(id)sender{
 	
-	// display poi controller (side controller or as below with simple overlay segue
-	
-	
+	[self showPOIView];
+    
+    [self hideAddPointView];
 	
 }
 
@@ -1492,10 +1687,61 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(IBAction)didSelectSaveLocationsButton:(id)sender{
 	
-	[self performSegueWithIdentifier:@"SavedLocation" sender:self];
+	[self performSegueWithIdentifier:@"SavedLocationsSegue" sender:self];
+    
+    [self hideAddPointView];
 	
 	
 }
+
+
+-(void)displayCreateSaveLocationControllerWithLocation:(SavedLocationVO*)location{
+	
+	[self performSegueWithIdentifier:@"CreateSavedLocationSegue" sender:self context:location];
+    
+    [self hideAddPointView];
+}
+
+
+-(IBAction)didSelectLeisureRouteButton:(id)sender{
+	
+	[self performSegueWithIdentifier:@"LeisureViewSegue" sender:self];
+	
+	[self hideAddPointView];
+}
+
+
+
+
+
+#pragma mark - Add Point View
+
+-(void)displayAddPointView{
+	
+	if(_addPointView.height>20){
+		
+		[self hideAddPointView];
+		
+	}else{
+		[UIView animateWithDuration:0.3 animations:^{
+			_addPointView.height=60;
+		}];
+	}
+	
+}
+
+
+-(void)hideAddPointView{
+	
+	if(_addPointView.y>20)
+		[UIView animateWithDuration:0.3 animations:^{
+			_addPointView.height=20;
+		}];
+	
+}
+
+
+#pragma mark - Segues
 
 
 
@@ -1503,7 +1749,152 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[super prepareForSegue:segue sender:sender];
 	
+	if([segue.identifier isEqualToString:@"SavedLocationsSegue"]){
+		
+		SavedLocationsViewController *controller=(SavedLocationsViewController*)segue.destinationViewController;
+		controller.viewMode=SavedLocationsViewModeModal;
+		controller.savedLocationdelegate=self;
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}else if ([segue.identifier isEqualToString:@"CreateSavedLocationSegue"]){
+		
+		SaveLocationCreateViewController *controller=(SaveLocationCreateViewController*)segue.destinationViewController;
+		controller.dataProvider=segue.context;
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}else if ([segue.identifier isEqualToString:@"POIListViewSegue"]){
+		
+		POIListviewController *controller=(POIListviewController*)segue.destinationViewController;
+		
+		CLLocationCoordinate2D nw = [_mapView NWforMapView];
+		CLLocationCoordinate2D se = [_mapView SEforMapView];
+		
+		controller.nwCoordinate=nw;
+		controller.seCoordinate=se;
+		
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}else if ([segue.identifier isEqualToString:@"WaypointViewSegue"]){
+		
+		WayPointViewController *controller=(WayPointViewController*)segue.destinationViewController;
+		controller.delegate=self;
+		controller.dataProvider=_waypointArray;
+		
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}else if ([segue.identifier isEqualToString:@"LeisureViewSegue"]){
+		
+		LeisureViewController *controller=(LeisureViewController*)segue.destinationViewController;
+		controller.waypointArray=_waypointArray;
+		
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+	}
 	
+}
+
+
+#pragma mark - SaveLocationViewController Delegate
+
+-(void)didSelectSaveLocation:(SavedLocationVO *)savedlocation{
+	
+	[self addWayPointAtCoordinate:savedlocation.coordinate];
+	
+}
+
+
+
+#pragma mark - UIViewControllerTransitioningDelegate Methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	
+	CSOverlayTransitionAnimator *animator = [CSOverlayTransitionAnimator new];
+	animator.presenting = YES;
+	return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	CSOverlayTransitionAnimator *animator = [CSOverlayTransitionAnimator new];
+	return animator;
+}
+
+
+
+
+//------------------------------------------------------------------------------------
+#pragma mark - POI Methods
+//------------------------------------------------------------------------------------
+
+//
+/***********************************************
+ * @description			POI METHODS
+ ***********************************************/
+//
+
+-(void)showPOIView{
+	
+	[self performSegueWithIdentifier:@"POIListViewSegue" sender:self];
+	
+//	UINavigationController *nav=(UINavigationController*)self.viewDeckController.rightController;
+//	POIListviewController *poiviewcontroller=(POIListviewController*)nav.topViewController;
+//	
+//	CLLocationCoordinate2D nw = [_mapView NWforMapView];
+//	CLLocationCoordinate2D se = [_mapView SEforMapView];
+//	
+//	poiviewcontroller.nwCoordinate=nw;
+//	poiviewcontroller.seCoordinate=se;
+//	
+//	[self.viewDeckController openRightViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {
+//		
+//	}];
+	
+	
+}
+
+
+
+-(void)updatePOIMapMarkers{
+	
+	[self removePOIMarkers];
+	
+	self.poiDataProvider=[POIManager sharedInstance].categoryDataProvider;
+	
+	for (NSString *key in _poiDataProvider) {
+		
+		for (POILocationVO *poi in _poiDataProvider[key]) {
+			
+			POIAnnotation *annotation=[[POIAnnotation alloc]init];
+			annotation.coordinate=poi.coordinate;
+			annotation.dataProvider=poi;
+			
+			[_poiAnnotationArray addObject:annotation];
+		}
+		
+	}
+	
+	[_mapView addAnnotations:_poiAnnotationArray];
+	
+}
+
+
+
+
+-(void)removePOIMarkers{
+	
+	if (_poiAnnotationArray==nil) {
+		self.poiAnnotationArray=[NSMutableArray new];
+		return;
+	}
+	
+	[_mapView removeAnnotations:_poiAnnotationArray];
+	
+	[_poiAnnotationArray removeAllObjects];
 	
 }
 
@@ -1555,9 +1946,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 		CLLocationCoordinate2D fromLatLon = waypoint.coordinate;
 		
-		BOOL result=[UserLocationManager isSignificantLocationDistance:fromLatLon newLocation:locationLatLon distance:MIN_START_FINISH_DISTANCE];
-		if(result==NO)
+		CLLocation *from = [[CLLocation alloc] initWithLatitude:fromLatLon.latitude longitude:fromLatLon.longitude];
+		CLLocation *to = [[CLLocation alloc] initWithLatitude:locationLatLon.latitude longitude:locationLatLon.longitude];
+		CLLocationDistance distance = [from getDistanceFrom:to];
+		
+		if(distance<MIN_START_FINISH_DISTANCE){
 			return NO;
+		}
 		
 	}
 	return YES;

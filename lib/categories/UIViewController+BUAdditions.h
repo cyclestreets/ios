@@ -15,4 +15,7 @@
 
 -(void)showInlineErrorForType:(NSString*)errorType  show:(BOOL)show addtionalMessage:(NSString*)message offset:(CGPoint)offset;
 
+
+- (UIView *)viewForTransitionContext:(id<UIViewControllerContextTransitioning>)transitionContext;
+
 @end

@@ -26,6 +26,8 @@
 #import "PhotoCategoryVO.h"
 #import "LocationSearchVO.h"
 
+#import "ImageCache.h"
+
 #import "TBXML+Additions.h"
 
 #import "BUNetworkOperation.h"
@@ -38,43 +40,10 @@
 @property(nonatomic,strong)BUNetworkOperation *activeOperation;
 
 
-
-// user account
--(void)LoginXMLParser:(TBXML*)parser;
--(void)RegisterXMLParser:(TBXML*)parser;
--(void)RetrievePasswordXMLParser:(TBXML*)parser;
-
-
-// routes
--(void)CalculateRouteXMLParser:(TBXML*)parser;
-
-
-// photos
--(void)PhotoUploadXMLParser:(TBXML*)parser;
--(void)RetrievePhotosXMLParser:(TBXML*)parser;
-
-
-// pois
--(void)POIListingXMLParser:(TBXML*)parser;
--(void)POICategoryXMLParser:(TBXML*)parser;
-
-
-// categories
--(void)PhotoCategoriesXMLParser:(TBXML*)parser;
-
-
-
-//utility
-
--(RouteVO*)newRouteForData:(TBXMLElement*)response;
-
-
 @end
 
 @implementation ApplicationXMLParser
 SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
-
-
 
 
 -(instancetype)init{
@@ -87,9 +56,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
                        [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVELOCATIONPHOTOS,
 					   [NSValue valueWithPointer:@selector(RetrievePhotosXMLParser:)],RETREIVEROUTEPHOTOS,
                        [NSValue valueWithPointer:@selector(PhotoUploadXMLParser:)],UPLOADUSERPHOTO,
-					   [NSValue valueWithPointer:@selector(POIListingXMLParser:)],POILISTING,
-					   [NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
-					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
+						[NSValue valueWithPointer:@selector(POIListingXMLParser:)],POILISTING,
+						[NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POICATEGORYLOCATION,
+						[NSValue valueWithPointer:@selector(POICategoryXMLParser:)],POIMAPLOCATION,
+						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],CALCULATEROUTE,
 					   [NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],RETRIEVEROUTEBYID, // note: uses same response parser
 					   [NSValue valueWithPointer:@selector(PhotoCategoriesXMLParser:)],PHOTOCATEGORIES, // note: uses same response parser
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
@@ -632,7 +602,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			poicategory.key=[TBXML textForElement:[TBXML childElementNamed:@"key" parentElement:poitype]];
 			poicategory.shortname=[TBXML textForElement:[TBXML childElementNamed:@"shortname" parentElement:poitype]];
 			poicategory.total=[[TBXML textForElement:[TBXML childElementNamed:@"total" parentElement:poitype]] intValue];
-			poicategory.icon=[StringUtilities imageFromString:[TBXML textForElement:[TBXML childElementNamed:@"icon" parentElement:poitype]]];
+			
+			UIImage *image=[StringUtilities imageFromString:[TBXML textForElement:[TBXML childElementNamed:@"icon" parentElement:poitype]]];
+			NSString *imageFilename=[NSString stringWithFormat:@"Icon_POI_%@",poicategory.key];
+			
+			[[ImageCache sharedInstance] storeImage:image withName:imageFilename ofType:nil];
+			
+			poicategory.imageName=imageFilename;
 			
 			[dataProvider addObject:poicategory];
 			
@@ -642,6 +618,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		_activeOperation.dataProvider=dataProvider;
 		
+		_activeOperation.operationState=NetResponseStateComplete;
 		_activeOperation.validationStatus=ValidationPOIListingSuccess;
 		
 	}else{
@@ -667,6 +644,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
     
 	TBXMLElement *pois=[TBXML childElementNamed:@"pois" parentElement:response];
+	
+	if(pois==nil){
+		
+		_activeOperation.validationStatus=ValidationPOIMapCategoryFailed;
+		return;
+	}
+		
 	TBXMLElement *poi=[TBXML childElementNamed:@"poi" parentElement:pois];
 	
 	if(poi!=nil){
@@ -676,13 +660,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		while (poi!=nil) {
 			
 			POILocationVO *poilocation=[[POILocationVO alloc]init];
+			
+			poilocation.poiType=[_activeOperation requestParameterForType:@"type"];
+			
+			poilocation.locationid= [TBXML valueOfAttributeNamed:@"id" forElement:poi];
+			
 			poilocation.name= [[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:poi]] stringByDecodingHTMLEntities];
 			
 			CLLocationCoordinate2D coords;
 			coords.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"longitude" parentElement:poi]] floatValue];
 			coords.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"latitude" parentElement:poi]] floatValue];
-			CLLocation *location=[[CLLocation alloc]initWithLatitude:coords.latitude longitude:coords.longitude];
-			poilocation.location=location;
+			poilocation.coordinate=coords;
 			
 			poilocation.website=[TBXML textForElement:[TBXML childElementNamed:@"website" parentElement:poi]];
 			poilocation.notes=[TBXML textForElement:[TBXML childElementNamed:@"notes" parentElement:poi]];
@@ -694,11 +682,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		}
 		
 		_activeOperation.dataProvider=dataProvider;
-		
-		_activeOperation.validationStatus=ValidationPOICategorySuccess;
+		_activeOperation.operationState=NetResponseStateComplete;
+		_activeOperation.validationStatus=ValidationPOIMapCategorySuccess;
 		
 	}else{
-		_activeOperation.validationStatus=ValidationPOICategoryFailure;
+		_activeOperation.validationStatus=ValidationPOIMapCategorySuccessNoEntries;
 	}
 	
 	
@@ -792,6 +780,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 
 
 
+
+
+
 /*
  <?xml version="1.0"?>
  <sayt>
@@ -872,7 +863,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 
 
 
-									
+
 	
 //
 /***********************************************

@@ -275,7 +275,7 @@ static NSString *clientidFileConst = @"clientid";
 		if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory]) {
 			isReadable = [fileManager isReadableFileAtPath:path];
 			if (isReadable && !isDirectory) {
-				int fileSize = [[fileManager attributesOfItemAtPath:path error:nil] fileSize];
+				int fileSize = (int)[[fileManager attributesOfItemAtPath:path error:nil] fileSize];
 				if (fileSize > 10000) {
 					//NSLog(@"%d %d %@", isReadable, isDirectory, path);
 				}

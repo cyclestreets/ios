@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AppConstants.h"
 
 extern NSString *const API_IDENTIFIER;
+extern NSString *const APPLICATIONNAME;
 
 
 
@@ -17,5 +19,7 @@ extern NSString *const API_IDENTIFIER;
 
 
 +(NSArray*)ApplicationSupportedMaps;
+
++(ApplicationBuildTarget)buildTarget;
 
 @end

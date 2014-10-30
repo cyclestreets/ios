@@ -81,5 +81,7 @@ typedef NS_ENUM(int, BUNetworkOperationError)
 
 -(NSMutableURLRequest*)requestForType;
 
+-(NSString*)requestParameterForType:(NSString*)type;
+
 
 @end

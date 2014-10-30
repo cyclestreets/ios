@@ -9,44 +9,16 @@
 #import "POILocationVO.h"
 
 @implementation POILocationVO
-@synthesize locationid;
-@synthesize location;
-@synthesize name;
-@synthesize notes;
-@synthesize website;
 
 
-static NSString *LOCATIONID = @"locationid";
-static NSString *LOCATION = @"location";
-static NSString *NAME = @"name";
-static NSString *NOTES = @"notes";
-static NSString *WEBSITE = @"website";
-
-
-
-//=========================================================== 
-//  Keyed Archiving
-//
-//=========================================================== 
-- (void)encodeWithCoder:(NSCoder *)encoder 
+- (instancetype)init
 {
-    [encoder encodeObject:self.locationid forKey:LOCATIONID];
-    [encoder encodeObject:self.location forKey:LOCATION];
-    [encoder encodeObject:self.name forKey:NAME];
-    [encoder encodeObject:self.notes forKey:NOTES];
-    [encoder encodeObject:self.website forKey:WEBSITE];
+	self = [super init];
+	if (self) {
+		
+	}
+	return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder 
-{
-    self = [super init];
-    if (self) {
-        self.locationid = [decoder decodeObjectForKey:LOCATIONID];
-        self.location = [decoder decodeObjectForKey:LOCATION];
-        self.name = [decoder decodeObjectForKey:NAME];
-        self.notes = [decoder decodeObjectForKey:NOTES];
-        self.website = [decoder decodeObjectForKey:WEBSITE];
-    }
-    return self;
-}
+
 @end

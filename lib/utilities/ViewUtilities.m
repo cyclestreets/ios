@@ -214,7 +214,7 @@
 	UIInterfaceOrientation orientation = (UIInterfaceOrientation)[UIApplication sharedApplication].statusBarOrientation;
 	NSInteger degrees = 0;
 	
-	BetterLog(@"orientation=%li",orientation);
+	BetterLog(@"orientation=%i",orientation);
 	
 	if (UIInterfaceOrientationIsLandscape(orientation)) {
 		if (orientation == UIInterfaceOrientationLandscapeLeft) { degrees = -90; } 

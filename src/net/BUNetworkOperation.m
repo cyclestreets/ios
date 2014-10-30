@@ -336,6 +336,12 @@
 
 
 
+-(NSString*)requestParameterForType:(NSString*)type{
+	
+	return _parameters[type];
+}
+
+
 
 
 

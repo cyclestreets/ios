@@ -21,7 +21,11 @@
 
 @implementation CSWaypointAnnotationView
 
-
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[self.superview bringSubviewToFront:self];
+	[super touchesBegan:touches withEvent:event];
+}
 
 - (id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
 {

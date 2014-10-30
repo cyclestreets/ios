@@ -10,12 +10,14 @@
 
 
 extern NSString *const API_IDENTIFIER;
-
+extern NSString *const APPLICATIONNAME;
 
 
 
 @interface BuildTargetConstants : NSObject
 
 +(NSArray*)ApplicationSupportedMaps;
+
++(ApplicationBuildTarget)buildTarget;
 
 @end

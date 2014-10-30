@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController">
@@ -27,7 +27,7 @@
             <point key="canvasLocation" x="379" y="253"/>
         </scrollView>
         <view contentMode="scaleToFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="684"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="726"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="91" userLabel="Type">
@@ -71,7 +71,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="94" userLabel="MapStyle">
-                    <rect key="frame" x="0.0" y="129" width="320" height="213"/>
+                    <rect key="frame" x="0.0" y="129" width="320" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route map style" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="65">
@@ -84,21 +84,12 @@
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <view contentMode="scaleToFill" id="63" userLabel="DividerGrey">
-                            <rect key="frame" x="9" y="200" width="300" height="1"/>
+                            <rect key="frame" x="9" y="239" width="300" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <view contentMode="scaleToFill" id="3VF-mh-M9M" customClass="BUHorizontalMenuView">
-                            <rect key="frame" x="8" y="34" width="300" height="120"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <outlet property="menuDataSource" destination="-1" id="4eA-m1-lfI"/>
-                                <outlet property="menuDelegate" destination="-1" id="QAr-w0-hg2"/>
-                            </connections>
-                        </view>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Swipe to view the available map styles, then select to set this map style on all maps." lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="wFE-5P-qSr">
-                            <rect key="frame" x="8" y="159" width="300" height="35"/>
+                            <rect key="frame" x="8" y="192" width="300" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,11 +97,20 @@
                             <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
+                        <view contentMode="scaleToFill" id="3VF-mh-M9M" customClass="BUHorizontalMenuView">
+                            <rect key="frame" x="8" y="34" width="300" height="150"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="menuDataSource" destination="-1" id="4eA-m1-lfI"/>
+                                <outlet property="menuDelegate" destination="-1" id="QAr-w0-hg2"/>
+                            </connections>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="92" userLabel="Speed">
-                    <rect key="frame" x="0.0" y="343" width="320" height="129"/>
+                    <rect key="frame" x="0.0" y="385" width="320" height="129"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route speed (mph)" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="52">
@@ -150,7 +150,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="95" userLabel="Distance">
-                    <rect key="frame" x="0.0" y="479" width="320" height="99"/>
+                    <rect key="frame" x="0.0" y="521" width="320" height="99"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route distance units" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="85">
@@ -189,7 +189,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="99" userLabel="Endpoint">
-                    <rect key="frame" x="0.0" y="585" width="320" height="79"/>
+                    <rect key="frame" x="0.0" y="627" width="320" height="79"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route end point confirmation" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="100">
@@ -226,7 +226,7 @@
             <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="801" y="388"/>
+            <point key="canvasLocation" x="833" y="407"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

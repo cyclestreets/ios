@@ -7,19 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BUCodableObject.h"
 
-@interface POICategoryVO : NSObject<NSCoding>{
-	
-	NSString			*key;
-	NSString			*name;
-	NSString			*shortname;
-	int					total;
-	UIImage				*icon;
-	
-}
+@interface POICategoryVO : BUCodableObject
+
 @property (nonatomic, strong)	NSString		*key;
 @property (nonatomic, strong)	NSString		*name;
 @property (nonatomic, strong)	NSString		*shortname;
-@property (nonatomic)	int				total;
-@property (nonatomic, strong)	UIImage			*icon;
+@property (nonatomic)	int						total;
+@property (nonatomic, strong)	NSString		*imageName;
+
+
+@property (nonatomic,assign)  BOOL				selected;
+
 @end
