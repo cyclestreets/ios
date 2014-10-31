@@ -217,7 +217,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
 	
-	// filter to remove any Route overlays
+	// filter to remove any Route overlays from this process
 	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
 		return ![object isKindOfClass:[CSRoutePolyLineOverlay class]];
 	}];
@@ -229,6 +229,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	[CSMapTileService updateMapStyleForMap:_mapView toMapStyle:_activeMapSource withOverlays:overlays];
 	
 	[CSMapTileService updateMapAttributonLabel:_attributionLabel forMap:_mapView forMapStyle:_activeMapSource inView:self.view];
+	
+	[_mapView moveOverlayToTop:_routeOverlay inLevel:MKOverlayLevelAboveLabels];
 	
 }
 
@@ -768,7 +770,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}else{
 		_programmaticChange=NO;
-		[self updateUItoState:_previousUIState];
+		
+		if(self.route==nil){
+			[self updateUItoState:_previousUIState];
+			
+		}else{
+			[self updateUItoState:MapPlanningStateRoute];
+		}
 		
 	}
 		
@@ -873,10 +881,11 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	if(_routeOverlay==nil){
 		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:_route];
-		[self.mapView addOverlay:_routeOverlay];
+		[self.mapView insertOverlay:_routeOverlay aboveOverlay:nil];
 	}else{
 		[_routeOverlay updateForDataProvider:_route];
 		[_routeOverlayRenderer setNeedsDisplay];
+		[_mapView moveOverlayToTop:_routeOverlay inLevel:MKOverlayLevelAboveLabels];
 	}
 	
 	[self updateUItoState:MapPlanningStateRoute];

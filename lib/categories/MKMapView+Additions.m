@@ -269,4 +269,24 @@
 }
 
 
+
+-(void)moveOverlayToTop:(id<MKOverlay>)overlay inLevel:(MKOverlayLevel)level{
+	
+	if(overlay==nil)
+		return;
+	
+	NSArray *levelArr=[self overlaysInLevel:level];
+	if(levelArr.count>1){
+		
+		id<MKOverlay> topOverlay=[levelArr lastObject];
+		
+		if(topOverlay!=overlay){
+			[self exchangeOverlay:overlay withOverlay:topOverlay];
+		}
+		
+	}
+	
+}
+
+
 @end

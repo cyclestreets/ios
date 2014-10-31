@@ -56,4 +56,7 @@
 -(CLLocationCoordinate2D)NWforMapView;
 -(CLLocationCoordinate2D)SEforMapView;
 
+
+-(void)moveOverlayToTop:(id<MKOverlay>)overlay inLevel:(MKOverlayLevel)level;
+
 @end
