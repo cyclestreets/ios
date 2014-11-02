@@ -14,7 +14,7 @@
 //#import "ApplicationJSONParser.h"
 #import "GenericConstants.h"
 #import "NSString-Utilities.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 
 #import "BUNetworkOperation.h"
 #import <AFHTTPRequestOperationManager.h>
@@ -400,12 +400,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
     
     if(networkOperation.requestid!=nil){
         
-        if(networkOperation.dataProvider!=nil)
-            [[_dataProviders objectForKey:networkOperation.dataid] setObject:networkOperation.dataProvider forKey:networkOperation.requestid];
+        if(networkOperation.responseObject!=nil)
+            [[_dataProviders objectForKey:networkOperation.dataid] setObject:networkOperation.response forKey:networkOperation.requestid];
         
         // this will always overwrite same named objects
         // so no need to check for duplication request ids
-        [_activeRequests setObject:networkOperation.requestid forKey:networkOperation.dataid];
+       // [_activeRequests setObject:networkOperation.requestid forKey:networkOperation.dataid];
         
         [self compactRequestsForDataid:networkOperation.dataid andRequest:networkOperation.requestid];
         
@@ -446,6 +446,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		id result=[self retrieveFileCachedDataForType:networkOperation.dataid andID:networkOperation.requestid];
 		
 		if(result!=nil){
+			[networkOperation setResponseWithValue:result];
 			[self setMemoryCachedDataForOperation:networkOperation];
             return NO;
 		}else {
@@ -503,7 +504,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	}
 	
 	
-	networkOperation.dataProvider=[[_dataProviders objectForKey:dataid] objectForKey:requestid];
+	[networkOperation setResponseWithValue:[[_dataProviders objectForKey:dataid] objectForKey:requestid]];
 	
 	if(networkOperation.completionBlock)
 		networkOperation.completionBlock(networkOperation,YES,nil);
@@ -525,9 +526,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		[_dataProviders setObject:[NSMutableDictionary dictionaryWithCapacity:10] forKey:dataid];
 	}
 	
-	[[_dataProviders objectForKey:dataid] setObject:networkOperation.dataProvider forKey:requestid];
-	
-	[_activeRequests setObject:requestid forKey:dataid];
+	[[_dataProviders objectForKey:dataid] setObject:[networkOperation response] forKey:requestid];
 	
 	[self compactRequestsForDataid:dataid andRequest:requestid];
 	
@@ -575,7 +574,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		BUNetworkOperation	*response=[[BUNetworkOperation alloc]init];
 		response.dataid=dataid;
 		response.requestid=requestid;
-		response.dataProvider=nil;
 		
 		
 		NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:response,RESPONSE, nil];
@@ -692,27 +690,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 
 
--(void)cacheRequestResult:(BUNetworkOperation*)response{
+-(void)cacheRequestResult:(BUNetworkOperation*)operation{
 	
-	BetterLog(@" dataid=%@",response.dataid);
+	BetterLog(@" dataid=%@",operation.dataid);
     
-    BOOL shouldBeCached=response.serviceShouldBeCached;
+    BOOL shouldBeCached=operation.serviceShouldBeCached;
     
 	if (_cacheCreated==YES && shouldBeCached==YES) {
 	
 		NSMutableData *data = [[NSMutableData alloc] init];
 		NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
 		
-		// handles responses that are pure data or ones that are ValdationVO wrapped
-		if([response.dataProvider isKindOfClass:[ValidationVO class]]){
-			ValidationVO *dp=(ValidationVO*)response.dataProvider;
+		// handles responses that are pure data or ones that are BUResponseObject wrapped
+		if([operation.response isKindOfClass:[BUResponseObject class]]){
+			BUResponseObject *dp=(BUResponseObject*)operation.response;
 			[archiver encodeObject:dp forKey:kCACHEARCHIVEKEY];
 		}else {
-			[archiver encodeObject:response.dataProvider forKey:kCACHEARCHIVEKEY];
+			[archiver encodeObject:operation.responseObject forKey:kCACHEARCHIVEKEY];
 		};
 		
 		[archiver finishEncoding];
-		[data writeToFile:[self cacheFilePathForType:response.dataid andID:response.requestid] atomically:YES];
+		[data writeToFile:[self cacheFilePathForType:operation.dataid andID:operation.requestid] atomically:YES];
 		
 		
 	}

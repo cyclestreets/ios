@@ -184,12 +184,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/net/ApplicationXMLParser.m"
-            timestampString = "433364078.912728"
+            timestampString = "436640836.68352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "-LoginXMLParser:"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "-RegisterXMLParser:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -212,7 +212,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/model/UserAccount.m"
@@ -392,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/net/ApplicationXMLParser.m"
-            timestampString = "435665909.804979"
+            timestampString = "436644523.655705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "820"
-            endingLineNumber = "820"
+            startingLineNumber = "824"
+            endingLineNumber = "824"
             landmarkName = "-LocationSearchXMLParser:"
             landmarkType = "5">
          </BreakpointContent>
@@ -445,7 +445,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "575"
             endingLineNumber = "575"
-            landmarkName = "-updateRoute:"
+            landmarkName = "-loadMetaDataForWaypointResponse:forWaypoint:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -461,8 +461,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "608"
             endingLineNumber = "608"
-            landmarkName = "-updateRouteResponse:"
-            landmarkType = "5">
+            landmarkName = "@implementation RouteManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -494,6 +494,22 @@
             startingLineNumber = "530"
             endingLineNumber = "530"
             landmarkName = "-updateUItoState:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/managers/POIManager.m"
+            timestampString = "436642445.376012"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "-POIListingDataResponse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

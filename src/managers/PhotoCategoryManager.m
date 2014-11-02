@@ -7,7 +7,7 @@
 //
 
 #import "PhotoCategoryManager.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "CycleStreets.h"
 #import "PhotoCategoryVO.h"
 #import "BUNetworkOperation.h"
@@ -116,7 +116,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 		if ([response.dataid isEqualToString:PHOTOCATEGORIES]) {
 			
 			if([notification.name isEqualToString:REQUESTDIDCOMPLETEFROMSERVER]){
-				[self requestRemoteCategoriesResponse:response.dataProvider];
+				[self requestRemoteCategoriesResponse:response.responseObject];
 			}
 			
 			
@@ -163,12 +163,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoCategoryManager);
 -(void)requestRemoteCategoriesResponse:(BUNetworkOperation*)response{
 	
 	
-	switch (response.validationStatus) {
+	switch (response.responseStatus) {
 			
 		case ValidationCategoriesSuccess:
 		{
 			
-			self.dataProvider=response.dataProvider;
+			self.dataProvider=response.responseObject;
 			
 			CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 			[cycleStreets.files setPhotoCategories:_dataProvider];

@@ -6,22 +6,29 @@
 //  Copyright 2010 CycleStreets.. All rights reserved.
 //
 
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "GlobalUtilities.h"
 
-@implementation ValidationVO
-@synthesize returnMessage;
-@synthesize returnCode;
-@synthesize responseDict;
+@implementation BUResponseObject
 
 
--(ValidationStatusCode)validationStatusCode{
+- (instancetype)init
+{
+	self = [super init];
+	if (self) {
+		
+	}
+	return self;
+}
+
+
+-(BUResponseStatusCode)responseStatus{
 	
-	ValidationStatusCode codecheck=[self isReturnCodeValid];
+	BUResponseStatusCode codecheck=[self isReturnCodeValid];
 	if(codecheck==ValdationValidSuccessCode || codecheck==ValdationValidFailureCode){
-		return returnCode;
+		return _responseCode;
 	}else {
-		BetterLog(@"[ERROR] returnCode %i is out of Range ",returnCode);
+		BetterLog(@"[ERROR] returnCode %i is out of Range ",_responseCode);
 		return ValdationInvalidCode;
 	}
 
@@ -29,15 +36,15 @@
 }
 
 
--(ValidationStatusCode)isReturnCodeValid{
+-(BUResponseStatusCode)isReturnCodeValid{
 	
 	for (int i=ValidationSuccessMIN; i<=ValidationSuccessMAX; i++) {
-		if(returnCode==i){
+		if(_responseCode==i){
 			return ValdationValidSuccessCode;
 		}
 	}
 	for (int i=ValidationFailureMIN; i<=ValidationFailureMAX; i++) {
-		if(returnCode==i){
+		if(_responseCode==i){
 			return ValdationValidFailureCode;
 		}
 	}
@@ -47,12 +54,5 @@
 
 
 
-
-- (id)init {
-    if (self = [super init]) {
-		
-    }
-    return self;
-}
 
 @end

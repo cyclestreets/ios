@@ -7,7 +7,7 @@
 //
 
 #import "LocationSearchManager.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
 #import "CycleStreets.h"
@@ -178,16 +178,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 }
 
 
--(void)searchForLocationWithFilterResponse:(BUNetworkOperation*)response{
+-(void)searchForLocationWithFilterResponse:(BUNetworkOperation*)operation{
 	
 	self.searchOperation=nil;
 	
-	switch(response.validationStatus){
+	switch(operation.responseStatus){
 		
 		case ValidationSearchSuccess:
 		{
 			
-			NSMutableArray *filteredResults=[self filterDuplicateSearchResults:response.dataProvider];
+			NSMutableArray *filteredResults=[self filterDuplicateSearchResults:operation.responseObject];
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:LOCATIONSEARCHRESPONSE object:filteredResults];
 			

@@ -7,7 +7,7 @@
 //
 
 #import "POIManager.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "CycleStreets.h"
 #import "BUDataSourceManager.h"
 #import "HudManager.h"
@@ -112,7 +112,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	request.parameters=parameters;
 #warning This is not cacheing
 	//TODO: this is not cacheing
-	request.source=DataSourceRequestCacheTypeUseNetwork;
+	request.source=DataSourceRequestCacheTypeUseCache;
 	
 	__weak __typeof(&*self)weakSelf = self;
 	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
@@ -126,14 +126,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 }
 
--(void)POIListingDataResponse:(BUNetworkOperation*)response{
+-(void)POIListingDataResponse:(BUNetworkOperation*)operation{
 	
 	
-	switch (response.validationStatus) {
+	switch (operation.responseStatus) {
 			
 		case ValidationPOIListingSuccess:
 			
-			[self updatePOIListingDataProvider:response.dataProvider];
+			[self updatePOIListingDataProvider:operation.responseObject];
 			
 			
 		break;
@@ -156,7 +156,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 -(void)updatePOIListingDataProvider:(NSMutableArray*)arr{
 	
 	self.dataProvider=arr;
-	[self.dataProvider insertObject:[POIManager createNoneCategory] atIndex:0];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:POILISTINGRESPONSE object:nil userInfo:nil];
 	
@@ -244,11 +243,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	[[HudManager sharedInstance] removeHUD];
 	
-	switch (response.validationStatus) {
+	switch (response.responseStatus) {
 			
 		case ValidationPOIMapCategorySuccess:
 		{
-			[_categoryDataProvider setObject:response.dataProvider forKey:category.name];
+			[_categoryDataProvider setObject:response.responseObject forKey:category.name];
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
 		}
@@ -329,11 +328,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 -(void)POICategoryDataResponse:(BUNetworkOperation*)response{
 	
 	
-	switch (response.validationStatus) {
+	switch (response.responseStatus) {
 			
 		case ValidationPOICategorySuccess:
 			
-			self.categoryDataProvider=response.dataProvider;
+			self.categoryDataProvider=response.responseObject;
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:POICATEGORYLOCATIONRESPONSE object:nil userInfo:nil];
 			

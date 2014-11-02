@@ -29,7 +29,7 @@ enum  {
 typedef int CSRoutePlanType;
 
 
-typedef NS_ENUM(int, ValidationStatusCode){
+typedef NS_ENUM(int, BUResponseStatusCode){
 
 	// success
 	ValidationLoginSuccess=1000,
@@ -54,14 +54,14 @@ typedef NS_ENUM(int, ValidationStatusCode){
 	// failures
 	ValidationLoginFailed=2000, // 2000
 	ValidationSearchFailed=2001,
+	ValidationRegisterFailed=2005,
 	ValidationEmailInvalid=2006,
 	ValidationUserNameExists=2007,
 	ValidationEmailNotRecognised=2008,
 	ValidationRetrievePhotosFailed=2009,
 	ValidationUserPhotoUploadFailed=2010,
 	ValidationRequestParameterInvalid=2013,
-	ValidationRegisterFailed=2014,
-	ValidationPOIListingFailure=2015,
+	ValidationPOIListingFailure=2011,
 	ValidationPOICategoryFailure=2016,
     ValidationCalculateRouteFailed=2017,
     ValidationRetrieveRouteByIdFailed=2018,

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BUResponseObject.h"
 
-
-@interface LoginVO : NSObject
+@interface LoginVO : BUResponseObject
 
 
 

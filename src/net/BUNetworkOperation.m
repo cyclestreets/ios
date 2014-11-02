@@ -19,7 +19,7 @@
 @interface BUNetworkOperation()
 
 
-
+@property (nonatomic, strong)	BUResponseObject				*response;
 
 
 @end
@@ -48,6 +48,60 @@
     
     self.dataType=[GenericConstants parserStringTypeToConstant:[_service objectForKey:@"parserType"]];
 }
+
+
+-(void)setResponseStatus:(BUResponseStatusCode)responseStatus{
+	
+	if(_responseStatus!=responseStatus){
+		
+		_responseStatus=responseStatus;
+		
+		if(_response!=nil)
+			_response.responseCode=responseStatus;
+		
+	}
+	
+}
+
+
+-(BUResponseStatusCode)_responseStatus{
+	
+	if(_response==nil){
+		return _responseStatus;
+	}else{
+		return _response.responseStatus;
+	}
+	
+}
+
+-(void)setResponseWithValue:(id)value{
+	
+	if([value isKindOfClass:[BUResponseObject class]]){
+		
+		self.response=value;
+		[self setResponseStatus:_response.responseStatus];
+		
+	}else{
+		
+		BUResponseObject *robject=[[BUResponseObject alloc]init];
+		robject.responseObject=value;
+		self.response=robject;
+		
+	}
+	
+}
+
+
+-(BUResponseObject*)response{
+	return _response;
+}
+
+-(id)responseObject{
+	
+	return _response.responseObject;
+	
+}
+
 
 
 // creates /x/x/x/ based based url suffixes

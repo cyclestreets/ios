@@ -271,7 +271,7 @@
 		283436CF15DD5DC300B00FD5 /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61F8131FB69D008527FC /* Files.m */; };
 		283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61FC131FB69D008527FC /* UserAccount.m */; };
 		283436D315DD5DC300B00FD5 /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6201131FB69D008527FC /* UserVO.m */; };
-		283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
+		283436D415DD5DC300B00FD5 /* BUResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* BUResponseObject.m */; };
 		283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
 		283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
 		283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
@@ -647,7 +647,7 @@
 		28AD62AC131FB69D008527FC /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61F8131FB69D008527FC /* Files.m */; };
 		28AD62AE131FB69D008527FC /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61FC131FB69D008527FC /* UserAccount.m */; };
 		28AD62B0131FB69D008527FC /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6201131FB69D008527FC /* UserVO.m */; };
-		28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
+		28AD62B1131FB69D008527FC /* BUResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* BUResponseObject.m */; };
 		28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
 		28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620D131FB69D008527FC /* contentStrings.plist */; };
 		28AD62B5131FB69D008527FC /* FormData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620E131FB69D008527FC /* FormData.plist */; };
@@ -1002,7 +1002,7 @@
 		28FA8B0E19E454E80040EA46 /* CSElevationGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D419378587001FBBF7 /* CSElevationGraphView.m */; };
 		28FA8B0F19E454E80040EA46 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD418B52B8900D957FD /* UserLocationManager.m */; };
 		28FA8B1019E454E80040EA46 /* RouteSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* RouteSegmentViewController.m */; };
-		28FA8B1119E454E80040EA46 /* ValidationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* ValidationVO.m */; };
+		28FA8B1119E454E80040EA46 /* BUResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* BUResponseObject.m */; };
 		28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
 		28FA8B1319E454E80040EA46 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
 		28FA8B1519E454E80040EA46 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
@@ -1542,8 +1542,8 @@
 		28AD61FF131FB69D008527FC /* FormItemVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormItemVO.m; sourceTree = "<group>"; };
 		28AD6200131FB69D008527FC /* UserVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserVO.h; sourceTree = "<group>"; };
 		28AD6201131FB69D008527FC /* UserVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserVO.m; sourceTree = "<group>"; };
-		28AD6202131FB69D008527FC /* ValidationVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidationVO.h; sourceTree = "<group>"; };
-		28AD6203131FB69D008527FC /* ValidationVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ValidationVO.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		28AD6202131FB69D008527FC /* BUResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUResponseObject.h; sourceTree = "<group>"; };
+		28AD6203131FB69D008527FC /* BUResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUResponseObject.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28AD6205131FB69D008527FC /* ApplicationXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ApplicationXMLParser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28AD6206131FB69D008527FC /* ApplicationXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ApplicationXMLParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		28AD620D131FB69D008527FC /* contentStrings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = contentStrings.plist; sourceTree = "<group>"; };
@@ -2596,8 +2596,8 @@
 				28E8A3CB1455638D0063AA96 /* SegmentVO.m */,
 				28AD6200131FB69D008527FC /* UserVO.h */,
 				28AD6201131FB69D008527FC /* UserVO.m */,
-				28AD6202131FB69D008527FC /* ValidationVO.h */,
-				28AD6203131FB69D008527FC /* ValidationVO.m */,
+				28AD6202131FB69D008527FC /* BUResponseObject.h */,
+				28AD6203131FB69D008527FC /* BUResponseObject.m */,
 				287ECBCD1344A28900B8A6AC /* SettingsVO.h */,
 				287ECBCE1344A28900B8A6AC /* SettingsVO.m */,
 				286C71C9134F8F05007B57E6 /* LoginVO.h */,
@@ -4080,7 +4080,7 @@
 				28D186DA19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
 				28727AD518B52B8900D957FD /* UserLocationManager.m in Sources */,
 				288055DC18BB7B2100BABAB1 /* RouteSegmentViewController.m in Sources */,
-				28AD62B1131FB69D008527FC /* ValidationVO.m in Sources */,
+				28AD62B1131FB69D008527FC /* BUResponseObject.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
 				28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */,
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
@@ -4238,7 +4238,7 @@
 				28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */,
 				28D186DB19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
 				283436D315DD5DC300B00FD5 /* UserVO.m in Sources */,
-				283436D415DD5DC300B00FD5 /* ValidationVO.m in Sources */,
+				283436D415DD5DC300B00FD5 /* BUResponseObject.m in Sources */,
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
 				283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */,
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
@@ -4395,7 +4395,7 @@
 				28FA8B0E19E454E80040EA46 /* CSElevationGraphView.m in Sources */,
 				28FA8B0F19E454E80040EA46 /* UserLocationManager.m in Sources */,
 				28FA8B1019E454E80040EA46 /* RouteSegmentViewController.m in Sources */,
-				28FA8B1119E454E80040EA46 /* ValidationVO.m in Sources */,
+				28FA8B1119E454E80040EA46 /* BUResponseObject.m in Sources */,
 				28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */,
 				28FA8B1319E454E80040EA46 /* CreditsViewController.m in Sources */,
 				28FA8B1519E454E80040EA46 /* AppConstants.m in Sources */,
@@ -4805,6 +4805,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					../../AppCore/external/Crashlytics/,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4857,6 +4858,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					../../AppCore/external/Crashlytics/,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -4903,7 +4905,6 @@
 				BUNDLE_ID = "cns-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -4911,6 +4912,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					../../AppCore/external/Crashlytics/,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;

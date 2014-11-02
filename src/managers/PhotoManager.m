@@ -8,7 +8,7 @@
 
 #import "PhotoManager.h"
 #import "UserAccount.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "CycleStreets.h"
 #import "BUNetworkOperation.h"
 #import "UserVO.h"
@@ -178,11 +178,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	_showingHUD=NO;
 	
 	    
-    switch (response.validationStatus) {
+    switch (response.responseStatus) {
             
         case ValidationRetrievePhotosSuccess:
 		{	
-			self.locationPhotoList=response.dataProvider;
+			self.locationPhotoList=response.responseObject;
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];
 		}   
@@ -213,11 +213,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	_showingHUD=NO;
 	
 	
-    switch (response.validationStatus) {
+    switch (response.responseStatus) {
             
         case ValidationRetrievePhotosSuccess:
 		{
-			self.routePhotoList=response.dataProvider;
+			self.routePhotoList=response.responseObject;
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEROUTEPHOTOSRESPONSE object:dict userInfo:nil];
 		}
@@ -305,11 +305,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	BetterLog(@"");
     
-    switch(result.validationStatus){
+    switch(result.responseStatus){
             
 		case ValidationUserPhotoUploadSuccess:
 		{
-            _uploadPhoto.responseDict=result.dataProvider;
+            _uploadPhoto.responseDict=result.responseObject;
 			
 			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,STATE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:UPLOADUSERPHOTORESPONSE object:nil userInfo:dict];

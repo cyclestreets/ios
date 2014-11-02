@@ -11,6 +11,7 @@
 #import "BUCodableObject.h"
 #import "AppConstants.h"
 #import "GenericConstants.h"
+#import "BUResponseObject.h"
 
 @class BUNetworkOperation;
 
@@ -58,8 +59,9 @@ typedef NS_ENUM(int, BUNetworkOperationError)
 @property (nonatomic,copy)  BUNetworkOperationProgressBlock		progressBlock;
 
 
-@property (nonatomic, strong)	id                              dataProvider;
 @property (nonatomic, strong)	NSMutableData                   * responseData;
+
+@property (nonatomic,assign) BUResponseStatusCode				responseStatus;
 
 // state
 @property(nonatomic,assign)  BUNetworkOperationError          operationError;
@@ -67,16 +69,21 @@ typedef NS_ENUM(int, BUNetworkOperationError)
 @property(nonatomic,strong)  NSString                         * errorDescription;
 
 // response details
-@property (nonatomic,assign)  ValidationStatusCode            validationStatus;
 @property(nonatomic,strong)  NSString                         * validationMessage;
 
 
 @property (nonatomic, assign) BOOL                            trackProgress;
 
 
-@property (nonatomic,readonly) NSString                       * url;
-@property (nonatomic,readonly) int                            serviceCacheInterval;
-@property (nonatomic,readonly) BOOL                           serviceShouldBeCached;
+@property (nonatomic,readonly) NSString							* url;
+@property (nonatomic,readonly) int								serviceCacheInterval;
+@property (nonatomic,readonly) BOOL								serviceShouldBeCached;
+@property (nonatomic,readonly) id								responseObject;
+@property (nonatomic,readonly) BUResponseObject					*response;
+
+
+
+-(void)setResponseWithValue:(id)value;
 
 
 -(NSMutableURLRequest*)requestForType;

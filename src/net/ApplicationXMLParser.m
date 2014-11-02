@@ -11,7 +11,7 @@
 #import "AppConstants.h"
 #import "StringUtilities.h"
 #import "TBXML.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "NSDate+Helper.h"
 #import "LoginVO.h"
 #import "POICategoryVO.h"
@@ -25,7 +25,7 @@
 #import "PhotoMapListVO.h"
 #import "PhotoCategoryVO.h"
 #import "LocationSearchVO.h"
-
+#import "POIManager.h"
 #import "ImageCache.h"
 
 #import "TBXML+Additions.h"
@@ -194,12 +194,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	LoginVO		*loginResponse=[[LoginVO alloc]init];
 	loginResponse.requestname=[TBXML elementName:response];
+	[_activeOperation setResponseWithValue:loginResponse];
 	
 	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
 	
 	if([TBXML hasChildrenForParentElement:resultelement]==YES){
 		
-		_activeOperation.validationStatus=ValidationLoginSuccess;
+		_activeOperation.responseStatus=ValidationLoginSuccess;
 		_activeOperation.operationState=NetResponseStateComplete;
 		
 		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
@@ -210,11 +211,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 	}else {
 		_activeOperation.operationState=NetResponseStateComplete;
-		_activeOperation.validationStatus=ValidationLoginFailed;
+		_activeOperation.responseStatus=ValidationLoginFailed;
 		
 	}
 
-	_activeOperation.dataProvider=loginResponse;
+	
 	
 }
 
@@ -236,9 +237,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		int code=[[TBXML textForElement:[TBXML childElementNamed:@"code" parentElement:resultelement]]intValue];
 		if(code==1){
-			_activeOperation.validationStatus=ValidationRegisterSuccess;
+			_activeOperation.responseStatus=ValidationRegisterSuccess;
 		}else {
-			_activeOperation.validationStatus=ValidationRegisterFailed;
+			_activeOperation.responseStatus=ValidationRegisterFailed;
 		}
 
 		_activeOperation.validationMessage=[TBXML textForElement:[TBXML childElementNamed:@"message" parentElement:resultelement]];
@@ -246,7 +247,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 	}else {
 		
-		_activeOperation.validationStatus=ValidationRegisterFailed;
+		_activeOperation.responseStatus=ValidationRegisterFailed;
 		
 	}
 
@@ -263,7 +264,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	}
 
 	
-	_activeOperation.validationStatus=[[TBXML textForElement:[TBXML childElementNamed:@"ReturnCode" parentElement:response]]intValue];
+	_activeOperation.responseStatus=[[TBXML textForElement:[TBXML childElementNamed:@"ReturnCode" parentElement:response]]intValue];
 	_activeOperation.validationMessage=[TBXML textForElement:[TBXML childElementNamed:@"ReturnMsg" parentElement:response]];
 		
 }
@@ -287,7 +288,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	[self validateXML:response];
 	if(_activeOperation.operationState>NetResponseStateComplete){
 		
-		_activeOperation.validationStatus=ValidationCalculateRouteFailed;
+		_activeOperation.responseStatus=ValidationCalculateRouteFailed;
 		
 		return;
 	}
@@ -299,21 +300,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		if([route numSegments]==0){
 			
-			_activeOperation.validationStatus=ValidationCalculateRouteFailed;
+			_activeOperation.responseStatus=ValidationCalculateRouteFailed;
 			
 		}else{
 			
-			_activeOperation.dataProvider=route;
+			[_activeOperation setResponseWithValue:route];
 			
 			_activeOperation.operationState=NetResponseStateComplete;
-			_activeOperation.validationStatus=ValidationCalculateRouteSuccess;
+			_activeOperation.responseStatus=ValidationCalculateRouteSuccess;
 			
 		}
 		
 		
 	}else{
 		
-		_activeOperation.validationStatus=ValidationCalculateRouteFailed;
+		_activeOperation.responseStatus=ValidationCalculateRouteFailed;
 		
 		
 		TBXMLElement *root=[TBXML childElementNamed:@"gml:featureMember" parentElement:response];
@@ -323,7 +324,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			
 			int code=[[TBXML textOfChild:@"cs:code" parentElement:issuenode]intValue];
 			if(code==ValidationCalculateRouteFailedOffNetwork){
-				_activeOperation.validationStatus=ValidationCalculateRouteFailedOffNetwork;
+				_activeOperation.responseStatus=ValidationCalculateRouteFailedOffNetwork;
 			}
 			
 			_activeOperation.validationMessage=[TBXML textOfChild:@"cs:text" parentElement:issuenode];
@@ -479,7 +480,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	}
     
 	
-	_activeOperation.validationStatus=ValidationUserPhotoUploadFailed;
+	_activeOperation.responseStatus=ValidationUserPhotoUploadFailed;
 	
 	//Hmm, responses return unrequired nodes
 	
@@ -492,8 +493,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		if(resultnode!=nil){
 			NSMutableDictionary *responseDict=[TBXML newDictonaryFromXMLElement:resultnode];
-			_activeOperation.dataProvider=responseDict;
-			_activeOperation.validationStatus=ValidationUserPhotoUploadSuccess;
+			[_activeOperation setResponseWithValue:responseDict];
+			_activeOperation.responseStatus=ValidationUserPhotoUploadSuccess;
 			_activeOperation.operationState=NetResponseStateComplete;
 		}
 		
@@ -519,7 +520,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	[self validateXML:response];
 	if(_activeOperation.operationState>NetResponseStateComplete){
-		_activeOperation.validationStatus=ValidationRetrievePhotosFailed;
+		_activeOperation.responseStatus=ValidationRetrievePhotosFailed;
 		return;
 	}
     
@@ -557,14 +558,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		photolist.photos=arr;
 		
-		_activeOperation.dataProvider=photolist;
+		[_activeOperation setResponseWithValue:photolist];
 		
-		_activeOperation.validationStatus=ValidationRetrievePhotosSuccess;
+		_activeOperation.responseStatus=ValidationRetrievePhotosSuccess;
 		_activeOperation.operationState=NetResponseStateComplete;
 		
 	}else{
 		
-		_activeOperation.validationStatus=ValidationRetrievePhotosFailed;
+		_activeOperation.responseStatus=ValidationRetrievePhotosFailed;
 		
 	}
 	
@@ -607,6 +608,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			NSString *imageFilename=[NSString stringWithFormat:@"Icon_POI_%@",poicategory.key];
 			
 			[[ImageCache sharedInstance] storeImage:image withName:imageFilename ofType:nil];
+			[[ImageCache sharedInstance] saveImageToDisk:image withName:imageFilename ofType:nil];
 			
 			poicategory.imageName=imageFilename;
 			
@@ -616,13 +618,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			
 		}
 		
-		_activeOperation.dataProvider=dataProvider;
+		[dataProvider insertObject:[POIManager createNoneCategory] atIndex:0];
+		
+		[_activeOperation setResponseWithValue:dataProvider];
 		
 		_activeOperation.operationState=NetResponseStateComplete;
-		_activeOperation.validationStatus=ValidationPOIListingSuccess;
+		_activeOperation.responseStatus=ValidationPOIListingSuccess;
 		
 	}else{
-		_activeOperation.validationStatus=ValidationPOIListingFailure;
+		_activeOperation.responseStatus=ValidationPOIListingFailure;
 	}
 	
 	
@@ -647,7 +651,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	if(pois==nil){
 		
-		_activeOperation.validationStatus=ValidationPOIMapCategoryFailed;
+		_activeOperation.responseStatus=ValidationPOIMapCategoryFailed;
 		return;
 	}
 		
@@ -681,12 +685,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			
 		}
 		
-		_activeOperation.dataProvider=dataProvider;
+		[_activeOperation setResponseWithValue:dataProvider];
 		_activeOperation.operationState=NetResponseStateComplete;
-		_activeOperation.validationStatus=ValidationPOIMapCategorySuccess;
+		_activeOperation.responseStatus=ValidationPOIMapCategorySuccess;
 		
 	}else{
-		_activeOperation.validationStatus=ValidationPOIMapCategorySuccessNoEntries;
+		_activeOperation.responseStatus=ValidationPOIMapCategorySuccessNoEntries;
 	}
 	
 	
@@ -712,7 +716,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	}
     
 	
-	_activeOperation.validationStatus=ValidationCategoriesSuccess;
+	_activeOperation.responseStatus=ValidationCategoriesSuccess;
 	
 	NSMutableDictionary *dataProvider=[NSMutableDictionary dictionary];
 	
@@ -743,7 +747,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		[dataProvider setObject:carr forKey:@"feature"];
 		
 	}else {
-		_activeOperation.validationStatus=ValidationCategoriesFailed;
+		_activeOperation.responseStatus=ValidationCategoriesFailed;
 	}
 	
 	TBXMLElement *metacategoriesnode=[TBXML childElementNamed:@"metacategories" parentElement:response];
@@ -771,10 +775,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		_activeOperation.operationState=NetResponseStateComplete;
 		
 	}else {
-		_activeOperation.validationStatus=ValidationCategoriesFailed;
+		_activeOperation.responseStatus=ValidationCategoriesFailed;
 	}
 	
-	_activeOperation.dataProvider=dataProvider;
+	[_activeOperation setResponseWithValue:dataProvider];
 	
 }
 
@@ -814,7 +818,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		
 		_activeOperation.operationState=NetResponseStateComplete;
-		_activeOperation.validationStatus=ValidationSearchFailed;
+		_activeOperation.responseStatus=ValidationSearchFailed;
 		
 		return;
 		
@@ -847,13 +851,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		}];
 		
 		_activeOperation.operationState=NetResponseStateComplete;
-		_activeOperation.validationStatus=ValidationSearchSuccess;
+		_activeOperation.responseStatus=ValidationSearchSuccess;
 		
-		_activeOperation.dataProvider=dataProvider;
+		[_activeOperation setResponseWithValue:dataProvider];
 		
 	}else{
 		_activeOperation.operationState=NetResponseStateComplete;
-		_activeOperation.validationStatus=ValidationSearchFailed;
+		_activeOperation.responseStatus=ValidationSearchFailed;
 		
 		
 	}

@@ -14,7 +14,7 @@
 #import "Files.h"
 #import "RouteParser.h"
 #import "HudManager.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "BUNetworkOperation.h"
 #import "SettingsManager.h"
 #import "SavedRoutesManager.h"
@@ -224,11 +224,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	BetterLog(@"");
     
     
-    switch(response.validationStatus){
+    switch(response.responseStatus){
         
         case ValidationCalculateRouteSuccess:
 		{  
-			RouteVO *newroute = response.dataProvider;
+			RouteVO *newroute = response.responseObject;
             
             [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
                 
@@ -425,11 +425,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     
 	BetterLog(@"");
     
-    switch(response.validationStatus){
+    switch(response.responseStatus){
             
         case ValidationCalculateRouteSuccess:
         {    
-            RouteVO *newroute=response.dataProvider;
+            RouteVO *newroute=response.responseObject;
             
             [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
             
@@ -558,11 +558,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 -(void)loadMetaDataForWaypointResponse:(BUNetworkOperation*)response forWaypoint:(WayPointVO*)waypoint{
 	
 	
-	switch(response.validationStatus){
+	switch(response.responseStatus){
 			
         case ValidationRetrieveRouteByIdSuccess:
 		{
-			NSDictionary *responseDict=response.dataProvider;
+			NSDictionary *responseDict=response.responseObject;
 			
 			waypoint.locationname=responseDict[@"features"][0][@"properties"][@"name"];
         }
@@ -649,11 +649,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
     
 	BetterLog(@"");
     
-    switch(response.validationStatus){
+    switch(response.responseStatus){
             
         case ValidationCalculateRouteSuccess:
         {
-           RouteVO *newroute=response.dataProvider;
+           RouteVO *newroute=response.responseObject;
             
 			[[SavedRoutesManager sharedInstance] updateRouteWithRoute:newroute];
             

@@ -21,7 +21,7 @@
 #import "CycleStreets.h"
 #import "Files.h"
 #import "LoginVO.h"
-#import "ValidationVO.h"
+#import "BUResponseObject.h"
 #import "StringUtilities.h"
 #import "BUNetworkOperation.h"
 #import "BUDataSourceManager.h"
@@ -146,11 +146,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 }
 
--(void)registerUserResponse:(BUNetworkOperation*)response{
+-(void)registerUserResponse:(BUNetworkOperation*)operation{
 	
 	BetterLog(@"");
 	
-	switch(response.validationStatus){
+	switch(operation.responseStatus){
 			
 		case ValidationRegisterSuccess:
 		{
@@ -172,11 +172,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 			_user.email=@"";
 			_userPassword=@"";
 			
-			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,response.validationMessage,MESSAGE, nil];
+			NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:ERROR,STATE,operation.validationMessage,MESSAGE, nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:REGISTERRESPONSE object:nil userInfo:dict];
 			
 
-			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Creation Error" andMessage:response.validationMessage];
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Creation Error" andMessage:operation.validationMessage];
 			
 		}
 			break;
@@ -244,9 +244,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 }
 
--(void)loginUserResponse:(BUNetworkOperation*)response displayHUD:(BOOL)displayHUD{
+-(void)loginUserResponse:(BUNetworkOperation*)operation displayHUD:(BOOL)displayHUD{
 	
-	switch(response.validationStatus){
+	switch(operation.responseStatus){
 			
 		case ValidationLoginSuccess:
 		{
@@ -324,10 +324,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 }
 
--(void)retrievePasswordForUserResponse:(BUNetworkOperation*)response{
+-(void)retrievePasswordForUserResponse:(BUNetworkOperation*)operation{
 	
 	
-	switch(response.validationStatus){
+	switch(operation.responseStatus){
 			
 		case ValidationRetrivedPasswordSuccess:
 		{
