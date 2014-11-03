@@ -725,58 +725,74 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	
 	TBXMLElement *categoriesnode=[TBXML childElementNamed:@"categories" parentElement:response];
-	TBXMLElement *categorynode=[TBXML childElementNamed:@"category" parentElement:categoriesnode];
 	
-	if(categorynode!=nil){
+	if(categoriesnode!=nil){
 		
-		NSMutableArray *carr=[NSMutableArray array];
-		
-		while (categorynode!=nil) {
+		TBXMLElement *categorynode=[TBXML childElementNamed:@"category" parentElement:categoriesnode];
+	
+		if(categorynode!=nil){
 			
-			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			category.categoryType=PhotoCategoryTypeFeature;
-			category.name=[TBXML textOfChild:@"name" parentElement:categorynode];
-			category.tag=[TBXML textOfChild:@"tag" parentElement:categorynode];
+			NSMutableArray *carr=[NSMutableArray array];
 			
-			[carr addObject:category];
+			while (categorynode!=nil) {
+				
+				PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
+				category.categoryType=PhotoCategoryTypeFeature;
+				category.name=[TBXML textOfChild:@"name" parentElement:categorynode];
+				category.tag=[TBXML textOfChild:@"tag" parentElement:categorynode];
+				
+				[carr addObject:category];
+				
+				categorynode=categorynode->nextSibling;
+				
+			}
 			
-			categorynode=categorynode->nextSibling;
+			[dataProvider setObject:carr forKey:@"feature"];
 			
+		}else {
+			_activeOperation.responseStatus=ValidationCategoriesFailed;
 		}
 		
-		[dataProvider setObject:carr forKey:@"feature"];
-		
-	}else {
+	}else{
 		_activeOperation.responseStatus=ValidationCategoriesFailed;
 	}
+	
 	
 	TBXMLElement *metacategoriesnode=[TBXML childElementNamed:@"metacategories" parentElement:response];
-	TBXMLElement *metacategorynode=[TBXML childElementNamed:@"metacategory" parentElement:metacategoriesnode];
 	
-	if(metacategorynode!=nil){
+	if(metacategoriesnode!=nil){
 		
-		NSMutableArray *mcarr=[NSMutableArray array];
+			TBXMLElement *metacategorynode=[TBXML childElementNamed:@"metacategory" parentElement:metacategoriesnode];
 		
-		while (metacategorynode!=nil) {
+		if(metacategorynode!=nil){
 			
-			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			category.categoryType=PhotoCategoryTypeCategory;
-			category.name=[TBXML textOfChild:@"name" parentElement:metacategorynode];
-			category.tag=[TBXML textOfChild:@"tag" parentElement:metacategorynode];
+			NSMutableArray *mcarr=[NSMutableArray array];
 			
-			[mcarr addObject:category];
+			while (metacategorynode!=nil) {
+				
+				PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
+				category.categoryType=PhotoCategoryTypeCategory;
+				category.name=[TBXML textOfChild:@"name" parentElement:metacategorynode];
+				category.tag=[TBXML textOfChild:@"tag" parentElement:metacategorynode];
+				
+				[mcarr addObject:category];
+				
+				metacategorynode=metacategorynode->nextSibling;
+				
+			}
 			
-			metacategorynode=metacategorynode->nextSibling;
+			[dataProvider setObject:mcarr forKey:@"category"];
 			
+			_activeOperation.operationState=NetResponseStateComplete;
+			
+		}else {
+			_activeOperation.responseStatus=ValidationCategoriesFailed;
 		}
 		
-		[dataProvider setObject:mcarr forKey:@"category"];
-		
-		_activeOperation.operationState=NetResponseStateComplete;
-		
-	}else {
+	}else{
 		_activeOperation.responseStatus=ValidationCategoriesFailed;
 	}
+	
 	
 	[_activeOperation setResponseWithValue:dataProvider];
 	
