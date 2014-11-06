@@ -105,7 +105,7 @@ static NSString *const RouteTypeDistance=@"Distance";
 	if(type==LeisureRouteTypeDistance){
 		return @[@(1),@(20)];
 	}else{
-		return @[@(10),@(120)];
+		return @[@(30),@(720)];
 	}
 	
 }

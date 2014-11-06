@@ -194,13 +194,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	LoginVO		*loginResponse=[[LoginVO alloc]init];
 	loginResponse.requestname=[TBXML elementName:response];
-	[_activeOperation setResponseWithValue:loginResponse];
+	
 	
 	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
 	
 	if([TBXML hasChildrenForParentElement:resultelement]==YES){
 		
-		_activeOperation.responseStatus=ValidationLoginSuccess;
+		loginResponse.responseCode=ValidationLoginSuccess;
+		[_activeOperation setResponseWithValue:loginResponse];
+		
 		_activeOperation.operationState=NetResponseStateComplete;
 		
 		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
