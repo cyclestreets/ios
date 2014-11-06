@@ -157,6 +157,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	self.dataProvider=arr;
 	
+	self.leisureDataProvider=[[NSMutableArray alloc] initWithArray:arr copyItems:YES];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:POILISTINGRESPONSE object:nil userInfo:nil];
 	
 }

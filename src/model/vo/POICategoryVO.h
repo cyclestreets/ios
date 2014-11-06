@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BUCodableObject.h"
 
-@interface POICategoryVO : BUCodableObject
+@interface POICategoryVO : BUCodableObject<NSCopying>
 
 @property (nonatomic, strong)	NSString		*key;
 @property (nonatomic, strong)	NSString		*name;

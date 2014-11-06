@@ -15,9 +15,12 @@
 #import "BUHorizontalMenuView.h"
 #import "LeisureWaypointView.h"
 
+#import "CSOverlayPushTransitionAnimator.h"
+#import "POIListviewController.h"
+
 #import <CoreLocation/CoreLocation.h>
 
-@interface LeisureViewController ()<BUHorizontalMenuDataSource,BUHorizontalMenuDelegate>
+@interface LeisureViewController ()<BUHorizontalMenuDataSource,BUHorizontalMenuDelegate,UIViewControllerTransitioningDelegate,CSOverlayPushTransitionAnimatorProtocol,POIListViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl		*typeControl;
 
@@ -30,6 +33,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton				*calculateButton;
 
+
+@property (nonatomic,strong)  NSString									*name;
 
 // state
 @property (nonatomic,strong) LeisureRouteVO					*dataProvider;
@@ -155,9 +160,57 @@
 
 
 -(IBAction)didSelectCalculateButton:(id)sender{
-    
-	[[RouteManager sharedInstance] loadRouteForLeisure:_dataProvider];
 	
+	[self performSegueWithIdentifier:@"LeisurePOI_Segue" sender:self];
+    
+	//[[RouteManager sharedInstance] loadRouteForLeisure:_dataProvider];
+	
+}
+
+
+
+#pragma mark - POIListViewDelegate
+
+-(void)didUpdateSelectedPOIs:(NSMutableArray*)poiArray{
+	
+	_dataProvider.poiArray=poiArray;
+	
+}
+
+
+
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+	
+	if([segue.identifier isEqualToString:@"LeisurePOI_Segue"]){
+		
+		POIListviewController *controller=(POIListviewController*)segue.destinationViewController;
+		
+		controller.viewMode=POIListViewMode_Leisure;
+		controller.delegate=self;
+		
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}
+	
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate Methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	
+	CSOverlayPushTransitionAnimator *animator = [CSOverlayPushTransitionAnimator new];
+	animator.presenting = YES;
+	return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	CSOverlayPushTransitionAnimator *animator = [CSOverlayPushTransitionAnimator new];
+	return animator;
 }
 
 
@@ -207,6 +260,11 @@
 -(CGSize)preferredContentSize{
 	
 	return CGSizeMake(280,350);
+}
+
+-(CGRect)presentationContentFrame{
+	
+	return self.view.superview.frame;
 }
 
 

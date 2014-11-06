@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, LeisureRouteType) {
 @property (nonatomic,assign) NSInteger                 routeValue;
 @property (nonatomic,assign) CLLocationCoordinate2D    routeCoordinate;
 
+@property (nonatomic,strong)  NSMutableArray			*poiArray;
 
 @property(nonatomic,readonly)  NSString					*coordinateString;
 

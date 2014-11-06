@@ -21,6 +21,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(POIManager)
 @property (nonatomic, strong)	NSMutableDictionary				*categoryDataProvider;// list of locations in category from current location
 
 
+@property (nonatomic, strong)	NSMutableArray					*leisureDataProvider; // special leisure only copy of data
+
+
+
 @property(nonatomic,strong)  POICategoryVO						*selectedCategory;
 
 

@@ -616,6 +616,9 @@
 		289EFC7719EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC7119EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png */; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
+		28A719921A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
+		28A719931A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
+		28A719941A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
 		28A89CD514FD52230001BABA /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
 		28A8B6351450B259009C5647 /* POICategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6341450B259009C5647 /* POICategoryVO.m */; };
 		28A9997219E6FEA80050C3E8 /* CSCycleNorthMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9997119E6FEA80050C3E8 /* CSCycleNorthMapSource.m */; };
@@ -1496,6 +1499,8 @@
 		289EFC6919EDA4E60081E7BB /* CSIcon_saveloc_work.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_saveloc_work.png; sourceTree = "<group>"; };
 		289EFC7019EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_saveloc_home@2x.png"; sourceTree = "<group>"; };
 		289EFC7119EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_saveloc_work@2x.png"; sourceTree = "<group>"; };
+		28A719901A0BE60700176949 /* CSOverlayPushTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSOverlayPushTransitionAnimator.h; sourceTree = "<group>"; };
+		28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSOverlayPushTransitionAnimator.m; sourceTree = "<group>"; };
 		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
 		28A89CD414FD52230001BABA /* UploadPhotoVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPhotoVO.m; sourceTree = "<group>"; };
 		28A8B6331450B259009C5647 /* POICategoryVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POICategoryVO.h; sourceTree = "<group>"; };
@@ -2683,6 +2688,8 @@
 			children = (
 				289EFC4F19ED39E30081E7BB /* CSOverlayTransitionAnimator.h */,
 				289EFC5019ED39E30081E7BB /* CSOverlayTransitionAnimator.m */,
+				28A719901A0BE60700176949 /* CSOverlayPushTransitionAnimator.h */,
+				28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */,
 				28D186D219378587001FBBF7 /* BUCalloutView.h */,
 				28D186CE19378587001FBBF7 /* BUCalloutView.m */,
 				28D186D019378587001FBBF7 /* CSGraphView.h */,
@@ -4083,6 +4090,7 @@
 				28AD62B1131FB69D008527FC /* BUResponseObject.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
 				28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */,
+				28A719921A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */,
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
@@ -4242,6 +4250,7 @@
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
 				283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */,
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
+				28A719931A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */,
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
 				2886DED918C528C100CD208B /* BUNetworkOperation.m in Sources */,
@@ -4409,6 +4418,7 @@
 				28FA8B1D19E454E80040EA46 /* BUIconActionSheet.m in Sources */,
 				28FA8B1E19E454E80040EA46 /* NSDictionary-MutableDictionaryCopy.m in Sources */,
 				289EFC6719ED9BCD0081E7BB /* UIImage+Additions.m in Sources */,
+				28A719941A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */,
 				28FA8B1F19E454E80040EA46 /* NSString-URLEncoding.m in Sources */,
 				28FA8B2019E454E80040EA46 /* UIApplication-Additions.m in Sources */,
 				28FA8B2219E454E80040EA46 /* UIColor-Expanded.m in Sources */,

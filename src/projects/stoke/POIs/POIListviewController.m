@@ -22,6 +22,8 @@ static NSString *const DATAID = @"PoiListing";
 @property (nonatomic, strong)	NSMutableArray								*dataProvider;
 
 
+@property (nonatomic,strong)  NSMutableArray								*selectedPOIArray;
+
 @property (nonatomic,assign)  int											initialHeight;
 
 @property (nonatomic,strong)  POITypeCellView								*currentSelectedCell;
@@ -75,7 +77,13 @@ static NSString *const DATAID = @"PoiListing";
 	
 	BetterLog(@"");
 	
-	self.dataProvider=[POIManager sharedInstance].dataProvider;
+	if (_viewMode==POIListViewMode_Map) {
+		self.dataProvider=[POIManager sharedInstance].dataProvider;
+		
+	}else{
+		self.dataProvider=[POIManager sharedInstance].leisureDataProvider;
+	}
+	
 	
 	if([_dataProvider count]>0){
 		
@@ -139,6 +147,7 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)viewWillAppear:(BOOL)animated{
 	
+	
 	_tableview.height=_initialHeight;
 	
 	[super viewWillAppear:animated];
@@ -153,6 +162,13 @@ static NSString *const DATAID = @"PoiListing";
 }
 
 -(void)createNonPersistentUI{
+	
+	self.selectedPOIArray=[NSMutableArray array];
+	
+	for(POICategoryVO *poi in _dataProvider){
+		if(poi.selected)
+			[_selectedPOIArray addObject:poi];
+	}
 	
 	if(_dataProvider==nil)
 		[self dataProviderRequestRefresh:SYSTEM];
@@ -190,6 +206,7 @@ static NSString *const DATAID = @"PoiListing";
 	if(poi.selected){
 		cell.accessoryType=UITableViewCellAccessoryCheckmark;
 		self.currentSelectedCell=cell;
+		
 	}else{
 		cell.accessoryType=UITableViewCellAccessoryNone;
 	}
@@ -207,49 +224,104 @@ static NSString *const DATAID = @"PoiListing";
 	
 	POICategoryVO *poi=_dataProvider[rowIndex];
 	
-	
 	POITypeCellView *selectedCell=(POITypeCellView*)[_tableview cellForRowAtIndexPath:[_tableview indexPathForSelectedRow]];
-	
 	poi.selected=!poi.selected;
 	
-	if(poi.selected){
-		
-		if([poi.key isEqualToString:NONE]){
-			
-			[[POIManager sharedInstance] removeAllPOICategoryMapPoints];
-			
-			[self.tableview reloadData];
-			
-		}else{
-			
-			POICategoryVO *selectCellpoi=_currentSelectedCell.dataProvider;
-			
-			if([selectCellpoi.key isEqualToString:NONE]){
-				_currentSelectedCell.accessoryType=UITableViewCellAccessoryNone;
-				selectCellpoi.selected=NO;
-			}
-			
-			
-			if(![poi.key isEqualToString:NONE]){
-				[[POIManager sharedInstance] requestPOICategoryMapPointsForCategory:poi withNWBounds:_nwCoordinate andSEBounds:_seCoordinate];
-			}
-		
-		}
-		
-		selectedCell.accessoryType=UITableViewCellAccessoryCheckmark;
-		
-	}else{
-		if(![poi.key isEqualToString:NONE]){
-			selectedCell.accessoryType=UITableViewCellAccessoryNone;
-			[[POIManager sharedInstance] removePOICategoryMapPointsForCategory:poi];
-		}
-		
-	}
+	[self didSelectTableCell:selectedCell withPOI:poi];
 	
 	[_tableview deselectRowAtIndexPath:indexPath animated:YES];
 	
 }
 
+
+-(void)didSelectTableCell:(POITypeCellView*)selectedCell withPOI:(POICategoryVO*)poi{
+	
+	
+	switch (_viewMode) {
+		case POIListViewMode_Map:
+		{
+			if(poi.selected){
+				
+				if([poi.key isEqualToString:NONE]){
+					
+					[[POIManager sharedInstance] removeAllPOICategoryMapPoints];
+					
+					[self.tableview reloadData];
+					
+				}else{
+					
+					POICategoryVO *selectCellpoi=_currentSelectedCell.dataProvider;
+					
+					if([selectCellpoi.key isEqualToString:NONE]){
+						_currentSelectedCell.accessoryType=UITableViewCellAccessoryNone;
+						selectCellpoi.selected=NO;
+					}
+					
+					
+					if(![poi.key isEqualToString:NONE]){
+						[[POIManager sharedInstance] requestPOICategoryMapPointsForCategory:poi withNWBounds:_nwCoordinate andSEBounds:_seCoordinate];
+					}
+					
+				}
+				
+				selectedCell.accessoryType=UITableViewCellAccessoryCheckmark;
+				
+			}else{
+				if(![poi.key isEqualToString:NONE]){
+					selectedCell.accessoryType=UITableViewCellAccessoryNone;
+					[[POIManager sharedInstance] removePOICategoryMapPointsForCategory:poi];
+				}
+				
+			}
+		}
+		break;
+			
+		case POIListViewMode_Leisure:
+		{
+			if(poi.selected){
+				
+				if([poi.key isEqualToString:NONE]){
+					
+					[_selectedPOIArray removeAllObjects];
+					
+					[self.tableview reloadData];
+					
+				}else{
+					
+					POICategoryVO *selectCellpoi=_currentSelectedCell.dataProvider;
+					
+					if([selectCellpoi.key isEqualToString:NONE]){
+						_currentSelectedCell.accessoryType=UITableViewCellAccessoryNone;
+						selectCellpoi.selected=NO;
+					}
+					
+					
+					if(![poi.key isEqualToString:NONE]){
+						[_selectedPOIArray addObject:poi];
+					}
+					
+				}
+				
+				selectedCell.accessoryType=UITableViewCellAccessoryCheckmark;
+				
+			}else{
+				if(![poi.key isEqualToString:NONE]){
+					selectedCell.accessoryType=UITableViewCellAccessoryNone;
+					[_selectedPOIArray removeObject:poi];
+				}
+				
+			}
+			
+			if([self.delegate respondsToSelector:@selector(didUpdateSelectedPOIs:)]){
+				[self.delegate didUpdateSelectedPOIs:_selectedPOIArray];
+			}
+			
+		}
+		break;
+			
+	}
+	
+}
 
 
 
@@ -264,10 +336,12 @@ static NSString *const DATAID = @"PoiListing";
 
 -(CGSize)preferredContentSize{
 	
-	return CGSizeMake(280,340);
+	return CGSizeMake(280,350);
 }
 
-
+-(CGRect)presentationContentFrame{
+	return self.frame;
+}
 
 
 //

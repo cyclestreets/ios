@@ -1780,6 +1780,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		CLLocationCoordinate2D nw = [_mapView NWforMapView];
 		CLLocationCoordinate2D se = [_mapView SEforMapView];
 		
+		controller.viewMode=POIListViewMode_Map;
+		
 		controller.nwCoordinate=nw;
 		controller.seCoordinate=se;
 		

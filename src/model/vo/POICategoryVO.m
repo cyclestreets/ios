@@ -20,5 +20,19 @@
 	return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    id theCopy = [[[self class] allocWithZone:zone] init];  
+    
+	for (NSString *key in [self codableProperties]){
+		
+		id value = [self valueForKey:key];
+		[theCopy setValue:[value copy] forKey:key];
+		
+	}
+	
+    return theCopy;
+}
+
 
 @end

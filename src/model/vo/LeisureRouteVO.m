@@ -7,12 +7,11 @@
 //
 
 #import "LeisureRouteVO.h"
-
+#import "GlobalUtilities.h"
 #import "SettingsManager.h"
 
 static NSString *const RouteTypeDuration=@"Duration";
 static NSString *const RouteTypeDistance=@"Distance";
-
 
 
 @implementation LeisureRouteVO
@@ -45,18 +44,32 @@ static NSString *const RouteTypeDistance=@"Distance";
 	
 	NSArray *valueRange=[LeisureRouteVO typeRangeArrayForRouteType:_routeType];
 	
+	
+	
 	if(_routeType==LeisureRouteTypeDistance){
 		
-		float actualValue=(_routeValue/100.0f) * ([valueRange[1] floatValue]-[valueRange[0] floatValue]);
-		actualValue+=[valueRange[0] floatValue];										  
+		NSArray *scaleArr=@[@(1),@(1.2),@(1.5),@(1.75),@(2),@(2.25),@(2.5),@(2.75),@(3),@(3.5),@(4)];
+	
+		int scaleIndex=_routeValue;
+		float scaledValue;
+		scaleIndex=scaleIndex/10;
+		scaledValue=_routeValue*[scaleArr[scaleIndex] floatValue];
 		
-		return [NSString stringWithFormat:@"%i %@",(int)actualValue,[[SettingsManager sharedInstance] routeUnitisMiles] ? actualValue<2 ? @"mile" : @"miles":@"km"];
+		scaledValue+=[valueRange[0] floatValue];
+		
+		return [NSString stringWithFormat:@"%i %@",(int)scaledValue,[[SettingsManager sharedInstance] routeUnitisMiles] ? scaledValue<2 ? @"mile" : @"miles":@"km"];
 	}else{
 		
-		float actualValue=(_routeValue/100.0f) * ([valueRange[1] floatValue]-[valueRange[0] floatValue]);
-		actualValue+=[valueRange[0] floatValue];
+		NSArray *scaleArr=@[@(1),@(1.2),@(1.5),@(2),@(2.5),@(3),@(3.5),@(4),@(5),@(6),@(7)];
 		
-		return [NSString stringWithFormat:@"%i mins",(int)actualValue];
+		int scaleIndex=_routeValue;
+		float scaledValue;
+		scaleIndex=scaleIndex/10;
+		scaledValue=_routeValue*[scaleArr[scaleIndex] floatValue];
+		
+		scaledValue+=[valueRange[0] floatValue];
+		
+		return [NSString stringWithFormat:@"%i mins",(int)scaledValue];
 	}
 	
 }
@@ -103,9 +116,9 @@ static NSString *const RouteTypeDistance=@"Distance";
 +(NSArray*)typeRangeArrayForRouteType:(LeisureRouteType)type{
 	
 	if(type==LeisureRouteTypeDistance){
-		return @[@(1),@(20)];
+		return @[@(1),@(400)];
 	}else{
-		return @[@(30),@(720)];
+		return @[@(30),@(730)];
 	}
 	
 }
