@@ -131,8 +131,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                       @"1",@"suppressplaceholders",
                                      @"1",@"minimaldata",
 									 [self uploadPhotoId],@"selectedid",
-									API_IDENTIFIER,@"username",
                                      nil];
+	// cns option
+	if([[APPLICATIONNAME lowercaseString] isEqualToString:@"cyclenorthstaffs"]){
+		[parameters setObject:API_IDENTIFIER forKey:@"username"];
+	}
     
     BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
     request.dataid=dataid;

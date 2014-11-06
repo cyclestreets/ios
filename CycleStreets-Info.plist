@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>APPCONFIG_ID</key>
-	<string>APPSTATE_LIVE</string>
+	<string>APPSTATE_DEVELOPMENT</string>
+	<key>SERVERDOMAIN_ID</key>
+	<string>APPSTATE_DEVELOPMENT</string>
 	<key>APPTARGET</key>
 	<string>CycleStreets</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -34,7 +36,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0</string>
+	<string>3.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -53,7 +55,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>356</string>
+	<string>358</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
@@ -62,8 +64,6 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Cyclestreets requires access to your location to provide routing information.</string>
-	<key>SERVERDOMAIN_ID</key>
-	<string>APPSTATE_LIVE</string>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
 	<key>UIPrerenderedIcon</key>

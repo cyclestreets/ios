@@ -11,6 +11,7 @@
 
 extern NSString *const API_IDENTIFIER;
 extern NSString *const APPLICATIONNAME;
+extern NSString *const CYCLENORTHSTAFFS;
 
 
 
