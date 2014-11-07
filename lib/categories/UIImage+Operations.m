@@ -294,7 +294,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 	return newSize;
 }
 
-//clockwise when degrees < 0
+//clockwise when degrees < 0 ok?
 + (UIImage *) rotateImage:(UIImage *) image byDegrees:(CGFloat) degrees {
 	
 	
