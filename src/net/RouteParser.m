@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (NSMutableArray *)listPerElement:(NSArray *)elements {
 	//build an empty dictionary for each element of interest. Collect them in a list.
 	NSMutableArray *objects = [[NSMutableArray alloc] init];
-	for (NSObject *element in elements) {
+	for (int i=0;i<elements.count;i++) {
 		NSMutableArray *list = [[NSMutableArray alloc] init];
 		[objects addObject:list];
 	}

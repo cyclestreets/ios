@@ -18,11 +18,11 @@ static NSString *const DATAID = @"PoiListing";
 
 @interface POIListviewController()
 
+@property (weak, nonatomic) IBOutlet UILabel								*headerLabel;
 @property (nonatomic, strong)	IBOutlet UITableView						*tableview;
 @property (nonatomic, strong)	NSMutableArray								*dataProvider;
 
 
-@property (nonatomic,strong)  NSMutableArray								*selectedPOIArray;
 
 @property (nonatomic,assign)  int											initialHeight;
 
@@ -81,17 +81,43 @@ static NSString *const DATAID = @"PoiListing";
 		self.dataProvider=[POIManager sharedInstance].dataProvider;
 		
 	}else{
-		self.dataProvider=[POIManager sharedInstance].leisureDataProvider;
+		self.dataProvider=[[POIManager sharedInstance] newLeisurePOIArray];
 	}
 	
 	
 	if([_dataProvider count]>0){
 		
-		POICategoryVO *firstCategory=(POICategoryVO*)[_dataProvider firstObject];
-		firstCategory.selected=YES;
+		
+		if(_selectedPOIArray==nil || _selectedPOIArray.count==0){
+			
+			self.selectedPOIArray=[NSMutableArray array];
+			
+			for(POICategoryVO *poi in _dataProvider){
+				if(poi.selected)
+					[_selectedPOIArray addObject:poi];
+			}
+			
+			if(_selectedPOIArray.count==0){
+				POICategoryVO *firstCategory=(POICategoryVO*)[_dataProvider firstObject];
+				firstCategory.selected=YES;
+			}
+			
+		}else{
+			
+			NSArray *keys=[_selectedPOIArray valueForKey:@"key"];
+			for(POICategoryVO *poi in _dataProvider){
+				if([keys containsObject:poi.key]){
+					poi.selected=YES;
+				}
+			}
+			
+		}
+		
 		
 		[self.tableview reloadData];
 		[self showViewOverlayForType:kViewOverlayTypeRequestIndicator show:NO withMessage:nil];
+		
+		
 	}else{
 		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:nil];
 	}
@@ -101,8 +127,6 @@ static NSString *const DATAID = @"PoiListing";
 -(void)dataProviderRequestRefresh:(NSString *)source{
 	
 	[[POIManager sharedInstance] requestPOIListingData];
-	
-	// call overlay
 	
 }
 
@@ -115,31 +139,16 @@ static NSString *const DATAID = @"PoiListing";
 
 - (void)viewDidLoad{
 	
-	UIType=UITYPE_MODALUI;
+    [super viewDidLoad];
 	
 	[self createPersistentUI];
-    [super viewDidLoad];
 }
 
 -(void)createPersistentUI{
 	
 	
-}
-
--(void)createNavigationBarUI{
-	
-	
-	CustomNavigtionBar *nav=[[CustomNavigtionBar alloc]init];
-	self.navigation=nav;
-	navigation.delegate=self;
-	navigation.leftItemType=BUNavNoneType;
-    navigation.rightItemType=UIKitButtonType;
-	navigation.rightButtonTitle=@"Done";
-	navigation.titleType=BUNavTitleDefaultType;
-	navigation.titleString=@"Points of interest";
-    navigation.titleFontColor=[UIColor whiteColor];
-	navigation.navigationItem=self.navigationItem;
-	[navigation createNavigationUI];
+	if(_dataProvider==nil)
+		[self dataProviderRequestRefresh:SYSTEM];
 	
 }
 
@@ -159,15 +168,19 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)createNonPersistentUI{
 	
-	self.selectedPOIArray=[NSMutableArray array];
-	
-	for(POICategoryVO *poi in _dataProvider){
-		if(poi.selected)
-			[_selectedPOIArray addObject:poi];
+	switch (_viewMode) {
+		case POIListViewMode_Leisure:
+		{
+			_headerLabel.text=@"Select the Points of interest to plan this route via.";
+		}
+		break;
+			
+		case POIListViewMode_Map:
+		{
+			_headerLabel.text=@"Select the Points of interest you'd like to use for adding locations.";
+		}
+		break;
 	}
-	
-	if(_dataProvider==nil)
-		[self dataProviderRequestRefresh:SYSTEM];
 	
 }
 
@@ -278,6 +291,11 @@ static NSString *const DATAID = @"PoiListing";
 				
 				if([poi.key isEqualToString:NONE]){
 					
+					for(POICategoryVO *poi in _dataProvider){
+						poi.selected=NO;
+					}
+					poi.selected=YES;
+					
 					[_selectedPOIArray removeAllObjects];
 					
 					[self.tableview reloadData];
@@ -303,7 +321,19 @@ static NSString *const DATAID = @"PoiListing";
 			}else{
 				if(![poi.key isEqualToString:NONE]){
 					selectedCell.accessoryType=UITableViewCellAccessoryNone;
-					[_selectedPOIArray removeObject:poi];
+					
+					NSUInteger index=NSNotFound;
+					index=[_selectedPOIArray indexOfObjectPassingTest:^BOOL(POICategoryVO *obj, NSUInteger idx, BOOL *stop) {
+						
+						if([obj.key isEqualToString:poi.key]){
+							*stop=YES;
+							return YES;
+						}
+						return NO;
+					}];
+					
+					if(index!=NSNotFound)
+						[_selectedPOIArray removeObjectAtIndex:index];
 				}
 				
 			}

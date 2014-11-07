@@ -230,7 +230,7 @@ static NSString *clientidFileConst = @"clientid";
 
 // retrieve the XML of a route
 - (RouteVO *) route:(NSInteger) routeIdentifier {
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", routeIdentifier]];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", (long)routeIdentifier]];
 	
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
 	NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
@@ -243,7 +243,7 @@ static NSString *clientidFileConst = @"clientid";
 // save the data of a route - route may be a new route
 - (void)setRoute:(NSInteger) routeIdentifier data:(RouteVO *)route {
 	
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", routeIdentifier]];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", (long)routeIdentifier]];
 	
 	NSMutableData *data = [[NSMutableData alloc] init];
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
@@ -256,7 +256,7 @@ static NSString *clientidFileConst = @"clientid";
 
 // remove the route file.
 - (void)deleteRoute:(NSInteger) routeIdentifier {
-	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", routeIdentifier]];
+	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", (long)routeIdentifier]];
 	NSError *error = [[NSError alloc] init];
 	[[NSFileManager defaultManager] removeItemAtPath:routeFile error:&error];
 }

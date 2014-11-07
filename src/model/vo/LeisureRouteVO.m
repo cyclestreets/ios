@@ -23,6 +23,7 @@ static NSString *const RouteTypeDistance=@"Distance";
 	if (self) {
 		_routeType=LeisureRouteTypeDuration;
 		_routeValue=0;
+		_poiArray=[NSMutableArray array];
 		
 	}
 	return self;

@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel				*startLabel;
 @property (weak, nonatomic) IBOutlet UILabel				*endLabel;
 @property (weak, nonatomic) IBOutlet UILabel				*readoutLabel;
+@property (weak, nonatomic) IBOutlet UILabel *poiReadoutLabel;
 
 @property (strong, nonatomic) IBOutlet BUHorizontalMenuView *waypointControl;
 
@@ -126,6 +127,24 @@
 }
 
 
+#pragma mark - POI UI
+
+-(void)updatePOIUI{
+	
+	if(_dataProvider.poiArray.count==0){
+		
+		_poiReadoutLabel.text=@"none selected";
+		
+	}else{
+		
+		_poiReadoutLabel.text=[NSString stringWithFormat:@"%lu selected",(unsigned long)_dataProvider.poiArray.count];
+	}
+	
+	
+}
+
+
+
 #pragma mark - UI Events
 
 
@@ -137,7 +156,7 @@
 
 
 
-#pragma mark - View action
+#pragma mark - validation
 
 -(void)validate{
     
@@ -159,11 +178,20 @@
 }
 
 
+
+#pragma mark - UI events
+
+
+
 -(IBAction)didSelectCalculateButton:(id)sender{
+    
+	[[RouteManager sharedInstance] loadRouteForLeisure:_dataProvider];
+	
+}
+
+-(IBAction)didPOIButton:(id)sender{
 	
 	[self performSegueWithIdentifier:@"LeisurePOI_Segue" sender:self];
-    
-	//[[RouteManager sharedInstance] loadRouteForLeisure:_dataProvider];
 	
 }
 
@@ -175,6 +203,7 @@
 	
 	_dataProvider.poiArray=poiArray;
 	
+	[self updatePOIUI];
 }
 
 
@@ -189,6 +218,7 @@
 		
 		controller.viewMode=POIListViewMode_Leisure;
 		controller.delegate=self;
+		controller.selectedPOIArray=_dataProvider.poiArray;
 		
 		controller.transitioningDelegate = self;
 		controller.modalPresentationStyle = UIModalPresentationCustom;
@@ -259,7 +289,7 @@
 
 -(CGSize)preferredContentSize{
 	
-	return CGSizeMake(280,350);
+	return CGSizeMake(280,400);
 }
 
 -(CGRect)presentationContentFrame{

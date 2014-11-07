@@ -39,4 +39,7 @@ typedef NS_ENUM(NSUInteger, POIListViewMode) {
 @property (nonatomic,assign)  id<POIListViewDelegate>						delegate;
 
 
+@property (nonatomic,strong)  NSMutableArray								*selectedPOIArray;
+
+
 @end

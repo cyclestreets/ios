@@ -46,7 +46,6 @@
 
 #import "UIColor+AppColors.h"
 #import "UIImage+Additions.h"
-#import "UIImage-Additions.h"
 
 #import <Crashlytics/Crashlytics.h>
 #import <A2StoryboardSegueContext.h>

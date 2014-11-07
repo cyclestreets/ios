@@ -21,6 +21,8 @@
 
 @property (nonatomic,strong)  NSMutableDictionary					*selectedPOICategories;
 
+@property (nonatomic,strong)  NSMutableArray						*leisureDataProvider;
+
 
 @end
 
@@ -363,6 +365,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
  * @description			UTILITIES
  ***********************************************/
 //
+
+-(NSMutableArray*)newLeisurePOIArray{
+	
+	return [[NSMutableArray alloc]initWithArray:_leisureDataProvider copyItems:YES];
+	
+}
+
+
 
 +(POICategoryVO*)createNoneCategory{
 	
