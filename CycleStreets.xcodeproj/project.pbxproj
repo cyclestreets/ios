@@ -806,6 +806,9 @@
 		28ECBE1019CF2760006BFE83 /* UIViewController+BUAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0E19CF2760006BFE83 /* UIViewController+BUAdditions.m */; };
 		28ECCBD81526300400284926 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484D715261EC800E406E1 /* Reachability.m */; };
 		28ECCBD91526302600284926 /* CopyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484DD15261F3B00E406E1 /* CopyLabel.m */; };
+		28FA0E541A0CC4C300D26A10 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; };
+		28FA0E551A0CC4C400D26A10 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; };
+		28FA0E561A0CC4C400D26A10 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; };
 		28FA62BE153C1C7200AF6267 /* UITextViewAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */; };
 		28FA8A3E19E454E80040EA46 /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		28FA8A4019E454E80040EA46 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B8131FB54A008527FC /* Entitlements.plist */; };
@@ -4154,6 +4157,7 @@
 				286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */,
 				28BC6AA818AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */,
 				28D2BC5C1354C48B00694093 /* BUDividerView.m in Sources */,
+				28FA0E541A0CC4C300D26A10 /* UIImage+Operations.m in Sources */,
 				28719D92136FE2AD00F69A1B /* LocationSearchManager.m in Sources */,
 				280E91C614097D8600C7AC75 /* StringManager.m in Sources */,
 				280E91C714097D8600C7AC75 /* StyleManager.m in Sources */,
@@ -4314,6 +4318,7 @@
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
 				2834370F15DD5DC300B00FD5 /* StyleManager.m in Sources */,
 				2834371015DD5DC300B00FD5 /* UserSettingsManager.m in Sources */,
+				28FA0E551A0CC4C400D26A10 /* UIImage+Operations.m in Sources */,
 				2834371215DD5DC300B00FD5 /* ItineraryViewController.m in Sources */,
 				28BC6AA918AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */,
 				2834371415DD5DC300B00FD5 /* RouteSegmentViewController.m in Sources */,
@@ -4516,6 +4521,7 @@
 				28B0AD3819EEBA21008A3F21 /* POITypeCellView.m in Sources */,
 				28FA8B7319E454E80040EA46 /* GTMNSString+HTML.m in Sources */,
 				28FA8B7419E454E80040EA46 /* NSString+HTML.m in Sources */,
+				28FA0E561A0CC4C400D26A10 /* UIImage+Operations.m in Sources */,
 				28FA8B7519E454E80040EA46 /* SegmentVO.m in Sources */,
 				28A9998019E706CA0050C3E8 /* BuildTargetConstants.m in Sources */,
 				28FA8B7619E454E80040EA46 /* SavedRoutesManager.m in Sources */,

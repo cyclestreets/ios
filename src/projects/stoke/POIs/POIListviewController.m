@@ -117,8 +117,6 @@ static NSString *const DATAID = @"PoiListing";
 	
 	UIType=UITYPE_MODALUI;
 	
-	self.initialHeight=self.view.height;
-	
 	[self createPersistentUI];
     [super viewDidLoad];
 }
@@ -147,8 +145,6 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-	
-	_tableview.height=_initialHeight;
 	
 	[super viewWillAppear:animated];
 	
@@ -223,9 +219,9 @@ static NSString *const DATAID = @"PoiListing";
 	NSInteger rowIndex=[indexPath row];
 	
 	POICategoryVO *poi=_dataProvider[rowIndex];
+	poi.selected=!poi.selected;
 	
 	POITypeCellView *selectedCell=(POITypeCellView*)[_tableview cellForRowAtIndexPath:[_tableview indexPathForSelectedRow]];
-	poi.selected=!poi.selected;
 	
 	[self didSelectTableCell:selectedCell withPOI:poi];
 	
