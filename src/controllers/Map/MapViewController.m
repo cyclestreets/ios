@@ -876,6 +876,23 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}
 	
+	if(_route.hasPOIs){
+		
+		NSMutableArray *poiAnnotationArray=[NSMutableArray array];
+		
+		for (POILocationVO *poi in _route.poiArray) {
+			
+			POIAnnotation *annotation=[[POIAnnotation alloc]init];
+			annotation.coordinate=poi.coordinate;
+			annotation.dataProvider=poi;
+			
+			[poiAnnotationArray addObject:annotation];
+		}
+		
+		[_mapView addAnnotations:poiAnnotationArray];
+		
+	}
+	
 	[self showWalkingOverlay];
 	
 	if(_routeOverlay==nil){
@@ -1850,20 +1867,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 -(void)showPOIView{
 	
 	[self performSegueWithIdentifier:@"POIListViewSegue" sender:self];
-	
-//	UINavigationController *nav=(UINavigationController*)self.viewDeckController.rightController;
-//	POIListviewController *poiviewcontroller=(POIListviewController*)nav.topViewController;
-//	
-//	CLLocationCoordinate2D nw = [_mapView NWforMapView];
-//	CLLocationCoordinate2D se = [_mapView SEforMapView];
-//	
-//	poiviewcontroller.nwCoordinate=nw;
-//	poiviewcontroller.seCoordinate=se;
-//	
-//	[self.viewDeckController openRightViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {
-//		
-//	}];
-	
 	
 }
 

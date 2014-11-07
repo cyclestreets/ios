@@ -24,7 +24,13 @@ typedef NS_ENUM(NSUInteger, LeisureRouteType) {
 
 @property (nonatomic,strong)  NSMutableArray			*poiArray;
 
-@property(nonatomic,readonly)  NSString					*coordinateString;
+// api getters
+@property(nonatomic,readonly)  NSString					*coordinateString; // lat long
+@property(nonatomic,readonly)  NSString					*poiKeys; // pois keys
+@property(nonatomic,readonly)  NSString					*routeValueString; // duration (s) or distance (m) integer
+
+@property(nonatomic,readonly)  BOOL						hasPOIs;
+
 
 // update
 -(LeisureRouteType)changeRouteType:(NSInteger)index;

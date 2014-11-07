@@ -191,6 +191,24 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>LeisureRoute</key>
+	<dict>
+		<key>id</key>
+		<string>LeisureRoute</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/journey.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 	<key>RetrieveRouteById</key>
 	<dict>
 		<key>id</key>

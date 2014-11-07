@@ -40,8 +40,6 @@
 		280E933E140984F300C7AC75 /* MapLocationSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932C140984F300C7AC75 /* MapLocationSearchView.xib */; };
 		280E9340140984F300C7AC75 /* AccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9330140984F300C7AC75 /* AccountView.xib */; };
 		280E9341140984F300C7AC75 /* InitialLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9332140984F300C7AC75 /* InitialLocationView.xib */; };
-		280E93461409856E00C7AC75 /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93431409856E00C7AC75 /* NetworkRequest.m */; };
-		280E93471409856E00C7AC75 /* RouteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93451409856E00C7AC75 /* RouteParser.m */; };
 		280E9358140985CD00C7AC75 /* LocationSearchVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* LocationSearchVO.m */; };
 		280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93701409861300C7AC75 /* KeyChainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		280E937D1409861300C7AC75 /* UIImage-Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93721409861300C7AC75 /* UIImage-Additions.m */; };
@@ -318,8 +316,6 @@
 		2834371015DD5DC300B00FD5 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C514097D8600C7AC75 /* UserSettingsManager.m */; };
 		2834371215DD5DC300B00FD5 /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CF14097DE000C7AC75 /* ItineraryViewController.m */; };
 		2834371415DD5DC300B00FD5 /* RouteSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* RouteSegmentViewController.m */; };
-		2834371515DD5DC300B00FD5 /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93431409856E00C7AC75 /* NetworkRequest.m */; };
-		2834371615DD5DC300B00FD5 /* RouteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93451409856E00C7AC75 /* RouteParser.m */; };
 		2834371B15DD5DC300B00FD5 /* LocationSearchVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* LocationSearchVO.m */; };
 		2834371E15DD5DC300B00FD5 /* KeyChainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93701409861300C7AC75 /* KeyChainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2834371F15DD5DC300B00FD5 /* UIImage-Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93721409861300C7AC75 /* UIImage-Additions.m */; };
@@ -561,8 +557,6 @@
 		28965C5B18BF4F94001BB258 /* CSRoutePolyLineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5918BF4F94001BB258 /* CSRoutePolyLineOverlay.m */; };
 		28965C5E18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5D18BF5852001BB258 /* CSRoutePolyLineRenderer.m */; };
 		28965C5F18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5D18BF5852001BB258 /* CSRoutePolyLineRenderer.m */; };
-		28965C6018BF709F001BB258 /* XMLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A38D134E508800A22093 /* XMLRequest.m */; };
-		28965C6118BF70A0001BB258 /* XMLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A38D134E508800A22093 /* XMLRequest.m */; };
 		289A20F119EFC867000892A0 /* CSIcon_map_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A20F019EFC867000892A0 /* CSIcon_map_poi@2x.png */; };
 		289A20F419F04ECF000892A0 /* SaveLocationCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289A20F319F04ECF000892A0 /* SaveLocationCreateViewController.m */; };
 		289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */; };
@@ -1070,9 +1064,7 @@
 		28FA8B5119E454E80040EA46 /* StyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C314097D8600C7AC75 /* StyleManager.m */; };
 		28FA8B5219E454E80040EA46 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C514097D8600C7AC75 /* UserSettingsManager.m */; };
 		28FA8B5319E454E80040EA46 /* BUDataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DEDF18C530A500CD208B /* BUDataSourceManager.m */; };
-		28FA8B5419E454E80040EA46 /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93431409856E00C7AC75 /* NetworkRequest.m */; };
 		28FA8B5519E454E80040EA46 /* CSMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890969193F41BB009C4325 /* CSMapSource.m */; };
-		28FA8B5619E454E80040EA46 /* RouteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93451409856E00C7AC75 /* RouteParser.m */; };
 		28FA8B5719E454E80040EA46 /* LocationSearchVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* LocationSearchVO.m */; };
 		28FA8B5819E454E80040EA46 /* KeyChainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93701409861300C7AC75 /* KeyChainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		28FA8B5919E454E80040EA46 /* CSRouteSegmentAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D918BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m */; };
@@ -1097,7 +1089,6 @@
 		28FA8B6C19E454E80040EA46 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		28FA8B6E19E454E80040EA46 /* POICategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6341450B259009C5647 /* POICategoryVO.m */; };
 		28FA8B6F19E454E80040EA46 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
-		28FA8B7019E454E80040EA46 /* XMLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A38D134E508800A22093 /* XMLRequest.m */; };
 		28FA8B7119E454E80040EA46 /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
 		28FA8B7319E454E80040EA46 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08EB145198D10034CC63 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		28FA8B7419E454E80040EA46 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08ED145198D10034CC63 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1216,10 +1207,6 @@
 		280E932C140984F300C7AC75 /* MapLocationSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapLocationSearchView.xib; sourceTree = "<group>"; };
 		280E9330140984F300C7AC75 /* AccountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountView.xib; sourceTree = "<group>"; };
 		280E9332140984F300C7AC75 /* InitialLocationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialLocationView.xib; sourceTree = "<group>"; };
-		280E93421409856E00C7AC75 /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkRequest.h; sourceTree = "<group>"; };
-		280E93431409856E00C7AC75 /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkRequest.m; sourceTree = "<group>"; };
-		280E93441409856E00C7AC75 /* RouteParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteParser.h; sourceTree = "<group>"; };
-		280E93451409856E00C7AC75 /* RouteParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteParser.m; sourceTree = "<group>"; };
 		280E9354140985CD00C7AC75 /* LocationSearchVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchVO.h; sourceTree = "<group>"; };
 		280E9355140985CD00C7AC75 /* LocationSearchVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchVO.m; sourceTree = "<group>"; };
 		280E936F1409861300C7AC75 /* KeyChainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = KeyChainItemWrapper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1363,8 +1350,6 @@
 		2858F2B3158617290047283D /* MapLocationSearchCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLocationSearchCellView.m; sourceTree = "<group>"; };
 		285F68DA132C07CC00B511C0 /* RouteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteListViewController.h; sourceTree = "<group>"; };
 		285F68DB132C07CD00B511C0 /* RouteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteListViewController.m; sourceTree = "<group>"; };
-		2863A38C134E508800A22093 /* XMLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = XMLRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		2863A38D134E508800A22093 /* XMLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLRequest.m; sourceTree = "<group>"; };
 		2863A3A0134E508800A22093 /* FavouritesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouritesCellView.h; sourceTree = "<group>"; };
 		2863A3A1134E508800A22093 /* FavouritesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouritesCellView.m; sourceTree = "<group>"; };
 		2863A3A6134E508800A22093 /* CSRouteDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSRouteDetailsViewController.h; path = Favourites/CSRouteDetailsViewController.h; sourceTree = "<group>"; };
@@ -1433,8 +1418,8 @@
 		28837D9D1965801000B58F7B /* CSBarButton_gpsactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_gpsactive@2x.png"; sourceTree = "<group>"; };
 		28851504166E0E20003536CA /* UIActivityCopy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityCopy.png; sourceTree = "<group>"; };
 		288663931521F7C60076BE5C /* RoutePlanMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoutePlanMenuView.xib; sourceTree = "<group>"; };
-		2886DED618C528C100CD208B /* BUNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BUNetworkOperation.h; path = ../../src/net/BUNetworkOperation.h; sourceTree = "<group>"; };
-		2886DED718C528C100CD208B /* BUNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BUNetworkOperation.m; path = ../../src/net/BUNetworkOperation.m; sourceTree = "<group>"; };
+		2886DED618C528C100CD208B /* BUNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUNetworkOperation.h; sourceTree = "<group>"; };
+		2886DED718C528C100CD208B /* BUNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUNetworkOperation.m; sourceTree = "<group>"; };
 		2886DEDE18C530A500CD208B /* BUDataSourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUDataSourceManager.h; sourceTree = "<group>"; };
 		2886DEDF18C530A500CD208B /* BUDataSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUDataSourceManager.m; sourceTree = "<group>"; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2633,12 +2618,6 @@
 		28AD6204131FB69D008527FC /* net */ = {
 			isa = PBXGroup;
 			children = (
-				280E93421409856E00C7AC75 /* NetworkRequest.h */,
-				280E93431409856E00C7AC75 /* NetworkRequest.m */,
-				280E93441409856E00C7AC75 /* RouteParser.h */,
-				280E93451409856E00C7AC75 /* RouteParser.m */,
-				2863A38C134E508800A22093 /* XMLRequest.h */,
-				2863A38D134E508800A22093 /* XMLRequest.m */,
 				28AD6205131FB69D008527FC /* ApplicationXMLParser.h */,
 				28AD6206131FB69D008527FC /* ApplicationXMLParser.m */,
 			);
@@ -4163,9 +4142,7 @@
 				280E91C714097D8600C7AC75 /* StyleManager.m in Sources */,
 				280E91C814097D8600C7AC75 /* UserSettingsManager.m in Sources */,
 				2886DEE018C530A500CD208B /* BUDataSourceManager.m in Sources */,
-				280E93461409856E00C7AC75 /* NetworkRequest.m in Sources */,
 				2889096A193F41BB009C4325 /* CSMapSource.m in Sources */,
-				280E93471409856E00C7AC75 /* RouteParser.m in Sources */,
 				280E9358140985CD00C7AC75 /* LocationSearchVO.m in Sources */,
 				280E937C1409861300C7AC75 /* KeyChainItemWrapper.m in Sources */,
 				288055DA18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
@@ -4191,7 +4168,6 @@
 				284ADCEA18C88309003830DE /* NSDataAdditions.m in Sources */,
 				28A8B6351450B259009C5647 /* POICategoryVO.m in Sources */,
 				281E08B6145168F90034CC63 /* POILocationVO.m in Sources */,
-				28965C6018BF709F001BB258 /* XMLRequest.m in Sources */,
 				284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */,
 				2853212E19E84F4200118E48 /* CSMapTileService.m in Sources */,
 				281E08EE145198D10034CC63 /* GTMNSString+HTML.m in Sources */,
@@ -4323,8 +4299,6 @@
 				28BC6AA918AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */,
 				2834371415DD5DC300B00FD5 /* RouteSegmentViewController.m in Sources */,
 				28727ADA18B5322800D957FD /* CSPhotomapAnnotation.m in Sources */,
-				2834371515DD5DC300B00FD5 /* NetworkRequest.m in Sources */,
-				2834371615DD5DC300B00FD5 /* RouteParser.m in Sources */,
 				2889096B193F41BB009C4325 /* CSMapSource.m in Sources */,
 				28727ADF18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */,
 				2834371B15DD5DC300B00FD5 /* LocationSearchVO.m in Sources */,
@@ -4351,7 +4325,6 @@
 				28BC6AAD18AE431800EF0436 /* LayoutBox.m in Sources */,
 				28B3678118B2822700F7244C /* CSWaypointAnnotation.m in Sources */,
 				2834374515DD5DC300B00FD5 /* POILocationVO.m in Sources */,
-				28965C6118BF70A0001BB258 /* XMLRequest.m in Sources */,
 				2834374815DD5DC300B00FD5 /* GTMNSString+HTML.m in Sources */,
 				2834374915DD5DC300B00FD5 /* NSString+HTML.m in Sources */,
 				2853212F19E84F4200118E48 /* CSMapTileService.m in Sources */,
@@ -4483,10 +4456,8 @@
 				28FA8B5219E454E80040EA46 /* UserSettingsManager.m in Sources */,
 				28A9999A19E729700050C3E8 /* UIColor+AppColors.m in Sources */,
 				28FA8B5319E454E80040EA46 /* BUDataSourceManager.m in Sources */,
-				28FA8B5419E454E80040EA46 /* NetworkRequest.m in Sources */,
 				2853210119E7D4E800118E48 /* BUHorizontalMenuView.m in Sources */,
 				28FA8B5519E454E80040EA46 /* CSMapSource.m in Sources */,
-				28FA8B5619E454E80040EA46 /* RouteParser.m in Sources */,
 				28FA8B5719E454E80040EA46 /* LocationSearchVO.m in Sources */,
 				28FA8B5819E454E80040EA46 /* KeyChainItemWrapper.m in Sources */,
 				28FA8B5919E454E80040EA46 /* CSRouteSegmentAnnotationView.m in Sources */,
@@ -4515,7 +4486,6 @@
 				28FA8B6C19E454E80040EA46 /* NSDataAdditions.m in Sources */,
 				28FA8B6E19E454E80040EA46 /* POICategoryVO.m in Sources */,
 				28FA8B6F19E454E80040EA46 /* POILocationVO.m in Sources */,
-				28FA8B7019E454E80040EA46 /* XMLRequest.m in Sources */,
 				28B0AD3719EEBA21008A3F21 /* POICatLocationCellView.m in Sources */,
 				28FA8B7119E454E80040EA46 /* BUCodableObject.m in Sources */,
 				28B0AD3819EEBA21008A3F21 /* POITypeCellView.m in Sources */,

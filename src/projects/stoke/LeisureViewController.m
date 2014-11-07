@@ -46,6 +46,35 @@
 @implementation LeisureViewController
 
 
+//
+/***********************************************
+ * @description		NOTIFICATIONS
+ ***********************************************/
+//
+
+-(void)listNotificationInterests{
+	
+	[self initialise];
+	
+	[self.notifications addObject: LEISUREROUTERESPONSE];
+	
+	
+	[super listNotificationInterests];
+	
+}
+
+-(void)didReceiveNotification:(NSNotification*)notification{
+	
+	NSString *name=notification.name;
+	
+	if([name isEqualToString:LEISUREROUTERESPONSE]){
+		[self didDismissWithTouch:nil];
+	}
+	
+}
+
+
+
 #pragma mark UIView
 
 - (void)viewDidLoad{

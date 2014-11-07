@@ -112,8 +112,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	request.dataid=POILISTING;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-#warning This is not cacheing
-	//TODO: this is not cacheing
 	request.source=DataSourceRequestCacheTypeUseCache;
 	
 	__weak __typeof(&*self)weakSelf = self;

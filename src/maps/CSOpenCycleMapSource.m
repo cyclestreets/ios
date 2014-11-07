@@ -8,6 +8,7 @@
 
 #import "CSOpenCycleMapSource.h"
 #import "AppConstants.h"
+#import "GlobalUtilities.h"
 
 @implementation CSOpenCycleMapSource
 
@@ -26,6 +27,9 @@
 
 	return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
 }
+
+
+
 
 - (NSString *)uniqueTilecacheKey
 {

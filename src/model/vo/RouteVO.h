@@ -29,6 +29,9 @@
 @property (nonatomic, strong) NSString                    * cosaved;
 
 @property (nonatomic, strong) NSMutableArray              * waypoints;
+@property (nonatomic, strong) NSMutableArray              * poiArray;
+
+
 
 
 //   getters
@@ -43,7 +46,7 @@
 @property (nonatomic, readonly)	NSString                  * coString;
 
 @property (nonatomic, readonly)	NSInteger					numSegments;
-@property (nonatomic, readonly)	NSInteger                       coordCount;
+@property (nonatomic, readonly)	NSInteger                 coordCount;
 @property (nonatomic, readonly)	CLLocationCoordinate2D    basicNorthEast;
 @property (nonatomic, readonly)	CLLocationCoordinate2D    basicSouthWest;
 @property (nonatomic, readonly)	CLLocationCoordinate2D    insetNorthEast;
@@ -58,6 +61,9 @@
 @property (nonatomic, readonly)	int										elevationsCount;
 @property (nonatomic, readonly)	BOOL									hasElevationData;
 
+
+// pois
+@property(nonatomic,readonly)  BOOL						hasPOIs;
 
 
 @property (nonatomic, readonly)	NSURL                     * csrouteurl;

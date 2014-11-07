@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import "BUCodableObject.h"
 
-@interface POILocationVO : BUCodableObject
+@interface POILocationVO : NSObject<NSCoding>
 
 @property (nonatomic,strong)  NSString						*poiType;
 

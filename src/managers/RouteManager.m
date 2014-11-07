@@ -12,7 +12,6 @@
 #import "CycleStreets.h"
 #import "AppConstants.h"
 #import "Files.h"
-#import "RouteParser.h"
 #import "HudManager.h"
 #import "BUResponseObject.h"
 #import "BUNetworkOperation.h"
@@ -84,6 +83,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	[self addRequestID:CALCULATEROUTE];
 	[self addRequestID:RETRIEVEROUTEBYID];
 	[self addRequestID:UPDATEROUTE];
+	[self addRequestID:LEISUREROUTE];
 	
 	[super listNotificationInterests];
 	
@@ -349,6 +349,46 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
+
+-(void)loadRouteForRouteIdResponse:(BUNetworkOperation*)response{
+	
+	BetterLog(@"");
+	
+	switch(response.responseStatus){
+			
+		case ValidationCalculateRouteSuccess:
+		{
+			RouteVO *newroute=response.responseObject;
+			
+			[[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
+			
+			[self selectRoute:newroute];
+			[self saveRoute:_selectedRoute ];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, this route is now selected." andMessage:nil];
+		}
+			break;
+			
+			
+		case ValidationCalculateRouteFailed:
+			
+			[self queryFailureMessage:@"Unable to find a route with this number."];
+			
+			break;
+			
+		default:
+			break;
+			
+			
+	}
+	
+	
+}
+
+
+
 //
 /***********************************************
  * @description			OS6 Routing request support
@@ -384,30 +424,36 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
+#pragma mark - Leisure routing
+
 
 -(void)loadRouteForLeisure:(LeisureRouteVO*)leisureroute{
 	
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
-	SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
 									 leisureroute.coordinateString,@"itinerarypoints",
-									 useDom,@"useDom",
-									 settingsdp.plan,@"plan",
-									 [settingsdp returnKilometerSpeedValue],@"speed",
+									 @"leisure",@"plan",
 									 cycleStreets.files.clientid,@"clientid",
+									 useDom,@"useDom",
 									 nil];
 	
+	if(leisureroute.hasPOIs)
+		[parameters setObject:leisureroute.poiKeys forKey:@"poitypes"];
+	
+	[parameters setObject:leisureroute.routeValueString forKey:leisureroute.routeType==LeisureRouteTypeDistance ? @"distance" : @"duration"];
+	
+	
 	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
-	request.dataid=CALCULATEROUTE;
+	request.dataid=LEISUREROUTE;
 	request.requestid=ZERO;
 	request.parameters=parameters;
 	request.source=DataSourceRequestCacheTypeUseNetwork;
 	
 	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
 		
-		[self loadRouteForEndPointsResponse:operation];
+		[self loadRouteForLeisureResponse:operation];
 		
 	};
 	
@@ -420,43 +466,54 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-
--(void)loadRouteForRouteIdResponse:(BUNetworkOperation*)response{
-    
+-(void)loadRouteForLeisureResponse:(BUNetworkOperation*)response{
+	
 	BetterLog(@"");
-    
-    switch(response.responseStatus){
-            
-        case ValidationCalculateRouteSuccess:
-        {    
-            RouteVO *newroute=response.responseObject;
-            
-            [[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
-            
-            [self selectRoute:newroute];
-			[self saveRoute:_selectedRoute ];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NEWROUTEBYIDRESPONSE object:nil];
-            
-            [[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, this route is now selected." andMessage:nil];
-		}   
-            break;
-            
-            
-        case ValidationCalculateRouteFailed:
-            
-            [self queryFailureMessage:@"Unable to find a route with this number."];
-            
+	
+	
+	switch(response.responseStatus){
+			
+		case ValidationCalculateRouteSuccess:
+		{
+			RouteVO *newroute = response.responseObject;
+			
+			[[SavedRoutesManager sharedInstance] addRoute:newroute toDataProvider:SAVEDROUTE_RECENTS];
+			
+			[self warnOnFirstRoute];
+			[self selectRoute:newroute];
+			[self saveRoute:_selectedRoute];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:LEISUREROUTERESPONSE object:nil];
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Found route, added path to map" andMessage:nil];
+		}
+			break;
+			
+			
+		case ValidationCalculateRouteFailed:
+			
+			[self queryFailureMessage:@"Routing error: Could not plan valid route for selected waypoints."];
+			
+			break;
+			
+			
+		case ValidationCalculateRouteFailedOffNetwork:
+			
+			[self queryFailureMessage:@"Routing error: not all waypoints are on known cycle routes."];
+			
 			break;
 			
 		default:
 			break;
-            
-            
-    }
-    
-    
+			
+			
+	}
+	
+	
+	
 }
+
+
 
 
 

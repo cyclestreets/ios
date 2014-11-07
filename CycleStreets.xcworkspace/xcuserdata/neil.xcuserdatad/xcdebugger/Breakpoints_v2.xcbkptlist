@@ -136,7 +136,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/RouteManager.m"
-            timestampString = "434305173.390604"
+            timestampString = "437080283.872283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -168,11 +168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/net/ApplicationXMLParser.m"
-            timestampString = "436699883.629043"
+            timestampString = "437053637.507262"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-RegisterXMLParser:"
             landmarkType = "5">
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/controllers/Map/MapViewController.m"
-            timestampString = "437045825.856434"
+            timestampString = "437080283.872283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1540"
-            endingLineNumber = "1540"
+            startingLineNumber = "1557"
+            endingLineNumber = "1557"
             landmarkName = "-alertView:didDismissWithButtonIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -376,12 +376,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/net/ApplicationXMLParser.m"
-            timestampString = "436699883.629043"
+            timestampString = "437080283.872283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "842"
-            endingLineNumber = "842"
-            landmarkName = "-LocationSearchXMLParser:"
+            startingLineNumber = "865"
+            endingLineNumber = "865"
+            landmarkName = "-newRouteForData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -423,38 +423,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/managers/RouteManager.m"
-            timestampString = "435678771.47862"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575"
-            landmarkName = "-loadMetaDataForWaypointResponse:forWaypoint:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/managers/RouteManager.m"
-            timestampString = "435678772.696489"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "608"
-            endingLineNumber = "608"
-            landmarkName = "@implementation RouteManager"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "src/managers/SavedRoutesManager.m"
             timestampString = "435678919.653275"
             startingColumnNumber = "9223372036854775807"
@@ -488,12 +456,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/net/ApplicationXMLParser.m"
-            timestampString = "436959824.360554"
+            timestampString = "437080283.872283"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
-            landmarkName = "-RetrievePhotosXMLParser:"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
+            landmarkName = "-newRouteForData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -542,6 +510,54 @@
             startingLineNumber = "322"
             endingLineNumber = "322"
             landmarkName = "-didSelectTableCell:withPOI:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/managers/RouteManager.m"
+            timestampString = "437080283.872283"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "-didReceiveNotification:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/managers/RouteManager.m"
+            timestampString = "437080886.834508"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
+            landmarkName = "-loadRouteForLeisure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/controllers/Map/POIAnnotationView.m"
+            timestampString = "437082686.15488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-updateAnnotation"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

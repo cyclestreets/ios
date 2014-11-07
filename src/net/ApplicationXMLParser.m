@@ -65,6 +65,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],WAYPOINTMETADATA,
 						[NSValue valueWithPointer:@selector(LocationSearchXMLParser:)],LOCATIONSEARCH,
+							[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],LEISUREROUTE,
 					   nil];
 		
 	}
@@ -380,6 +381,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		NSMutableArray	*segments=[[NSMutableArray alloc]init];
 		NSMutableArray	*waypoints=[[NSMutableArray alloc]init];
+		NSMutableArray	*pois=[[NSMutableArray alloc]init];
 		root=root->nextSibling;
 		
 		NSInteger time = 0;
@@ -448,13 +450,34 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			}
 			
 			
+			TBXMLElement *poinode=[TBXML childElementNamed:@"cs:poi" parentElement:root];
+			
+			if(poinode!=nil){
+				
+				POILocationVO *poilocation=[[POILocationVO alloc]init];
+				
+				poilocation.poiType=[TBXML textForElement:[TBXML childElementNamed:@"cs:poitypeId" parentElement:poinode]];
+				poilocation.name= [[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:poinode]] stringByDecodingHTMLEntities];
+				
+				CLLocationCoordinate2D coords;
+				coords.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:longitude" parentElement:poinode]] floatValue];
+				coords.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:latitude" parentElement:poinode]] floatValue];
+				poilocation.coordinate=coords;
+				
+				poilocation.website=[TBXML textForElement:[TBXML childElementNamed:@"cs:website" parentElement:poinode]];
+				
+				[pois addObject:poilocation];
+				
+			}
+			
+			
 			root=root->nextSibling;
 			
 		}
 		
 		route.segments=segments;
 		route.waypoints=waypoints;
-	
+		route.poiArray=pois;
 	
 	}
 	
