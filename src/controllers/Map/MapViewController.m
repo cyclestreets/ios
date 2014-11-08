@@ -125,6 +125,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 // pois
 @property (nonatomic, strong) NSMutableDictionary					* poiDataProvider;
 @property (nonatomic, strong) NSMutableArray						* poiAnnotationArray;
+@property (nonatomic, strong) NSMutableArray						* poiRouteArray;
 
 
 
@@ -813,6 +814,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	self.route = nil;
 	[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
+	[_mapView removeAnnotations:_poiRouteArray];
 	[_waypointArray removeAllObjects];
 	
 	[_routeOverlay resetOverlay];
@@ -853,10 +855,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
 	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 50, 50, 10) animated:YES];
 	
-	// or:
-	//[_mapView showAnnotations:@[array of annotations] animated:NO];
 	
-	//[_mapView removeAnnotations:[_mapView annotationsWithoutUserLocation]];
 	[_waypointArray removeAllObjects];
 	
 	if (_route.hasWaypoints==YES) {
@@ -876,6 +875,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}
 	
+	[_mapView removeAnnotations:_poiRouteArray];
 	if(_route.hasPOIs){
 		
 		NSMutableArray *poiAnnotationArray=[NSMutableArray array];
@@ -890,6 +890,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		}
 		
 		[_mapView addAnnotations:poiAnnotationArray];
+		
+		self.poiRouteArray=poiAnnotationArray;
 		
 	}
 	

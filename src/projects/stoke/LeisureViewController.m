@@ -111,6 +111,8 @@
 	_waypointControl.shouldScrollToSelectedItem=NO;
 	[_waypointControl reloadData];
 	
+	_dataProvider.routeValue=_unitControl.value;
+	
 	[self updateUIForTypeChange];
     
 }

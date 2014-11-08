@@ -77,6 +77,10 @@
 	}else {
 		
 		
+		
+		CGRect fromFrame=[toViewController presentationContentFrame];
+		[ViewUtilities alignView:toView inRect:fromFrame :BUCenterAlignMode :BUCenterAlignMode];
+		toView.x-=SCREENWIDTH;
 		[transitionContext.containerView addSubview:toView];
 		
 		touchView=[[transitionContext containerView] viewWithTag:kTouchViewTag];

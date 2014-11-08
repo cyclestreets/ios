@@ -22,6 +22,7 @@ static NSString *const DATAID = @"PoiListing";
 @property (nonatomic, strong)	IBOutlet UITableView						*tableview;
 @property (nonatomic, strong)	NSMutableArray								*dataProvider;
 
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
 
 @property (nonatomic,assign)  int											initialHeight;
@@ -34,7 +35,7 @@ static NSString *const DATAID = @"PoiListing";
 
 
 
-
+#pragma mark - Notifications
 //
 /***********************************************
  * @description		NOTIFICATIONS
@@ -66,6 +67,7 @@ static NSString *const DATAID = @"PoiListing";
 	
 }
 
+#pragma mark - Data Requests
 
 //
 /***********************************************
@@ -131,6 +133,7 @@ static NSString *const DATAID = @"PoiListing";
 }
 
 
+#pragma mark - UIView
 //
 /***********************************************
  * @description			View Methods
@@ -172,12 +175,14 @@ static NSString *const DATAID = @"PoiListing";
 		case POIListViewMode_Leisure:
 		{
 			_headerLabel.text=@"Select the Points of interest to plan this route via.";
+            _doneButton.visible=YES;
 		}
 		break;
 			
 		case POIListViewMode_Map:
 		{
 			_headerLabel.text=@"Select the Points of interest you'd like to use for adding locations.";
+            _doneButton.visible=NO;
 		}
 		break;
 	}
@@ -191,7 +196,7 @@ static NSString *const DATAID = @"PoiListing";
  ***********************************************/
 //
 
-//TBD: needs none cell added to dp
+#pragma mark -UITableview
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
@@ -368,6 +373,17 @@ static NSString *const DATAID = @"PoiListing";
 -(CGRect)presentationContentFrame{
 	return self.frame;
 }
+
+
+#pragma mark - UI Events
+
+
+-(IBAction)didSelectDoneButton:(id)sender{
+	
+	[self didDismissWithTouch:nil];
+	
+}
+
 
 
 //

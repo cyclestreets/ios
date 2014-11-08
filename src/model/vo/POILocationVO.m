@@ -26,7 +26,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
 	
-	[encoder encodeObject:_poiType forKey:@"poitype"];
+	[encoder encodeObject:_poiType forKey:@"poiType"];
 	[encoder encodeObject:_locationid forKey:@"locationid"];
 	[encoder encodeObject:_name forKey:@"name"];
 	[encoder encodeObject:_notes forKey:@"notes"];
