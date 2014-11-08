@@ -20,7 +20,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(POIManager)
 @property (nonatomic, strong)	NSMutableArray					*dataProvider;// list of all categories
 @property (nonatomic, strong)	NSMutableDictionary				*categoryDataProvider;// list of locations in category from current location
 
-
 @property(nonatomic,strong)  POICategoryVO						*selectedCategory;
 
 
@@ -33,6 +32,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(POIManager)
 
 -(void)requestPOICategoryDataForCategory:(POICategoryVO*)category atLocation:(CLLocationCoordinate2D)location;
 
+
+-(NSMutableArray*)newLeisurePOIArray;
 
 
 +(POICategoryVO*)createNoneCategory;

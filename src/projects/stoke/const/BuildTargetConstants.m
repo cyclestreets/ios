@@ -11,6 +11,7 @@
 
 NSString *const API_IDENTIFIER=@"cyclenorthstaffs";
 NSString *const APPLICATIONNAME=@"Cycle North Staffs";
+NSString *const CYCLENORTHSTAFFS=@"cyclenorthstaffs";
 
 @implementation BuildTargetConstants
 

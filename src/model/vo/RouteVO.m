@@ -44,6 +44,8 @@
 	return [segments objectAtIndex:index];
 }
 
+
+#pragma mark - getters
 //
 /***********************************************
  * @description			getters
@@ -215,7 +217,8 @@
 
 
 
-//
+#pragma mark - waypoints
+
 -(BOOL)hasWaypoints{
 	return _waypoints!=nil;
 }
@@ -234,7 +237,14 @@
 
 
 
-// Elevations
+#pragma mark - pois
+-(BOOL)hasPOIs{
+	return _poiArray!=nil || _poiArray.count!=0;
+}
+
+
+
+#pragma mark - Elevation
 
 -(int)maxElevation{
 	
@@ -367,6 +377,7 @@ static NSString *kUSER_ROUTE_NAME_KEY = @"userRouteName";
 static NSString *kCALORIE_KEY = @"calorie";
 static NSString *kCOSAVED_KEY = @"cosaved";
 static NSString *kWAYPOINTS_KEY = @"waypoints";
+static NSString *POIS_KEY = @"poiArray";
 
 
 
@@ -390,6 +401,7 @@ static NSString *kWAYPOINTS_KEY = @"waypoints";
     [encoder encodeObject:self.calorie forKey:kCALORIE_KEY];
     [encoder encodeObject:self.cosaved forKey:kCOSAVED_KEY];
 	[encoder encodeObject:self.waypoints forKey:kWAYPOINTS_KEY];
+	[encoder encodeObject:self.poiArray forKey:POIS_KEY];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -410,6 +422,7 @@ static NSString *kWAYPOINTS_KEY = @"waypoints";
         self.calorie = [decoder decodeObjectForKey:kCALORIE_KEY];
         self.cosaved = [decoder decodeObjectForKey:kCOSAVED_KEY];
 		self.waypoints=[decoder decodeObjectForKey:kWAYPOINTS_KEY];
+		self.poiArray=[decoder decodeObjectForKey:POIS_KEY];
     }
     return self;
 }

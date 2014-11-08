@@ -46,7 +46,6 @@
 
 #import "UIColor+AppColors.h"
 #import "UIImage+Additions.h"
-#import "UIImage-Additions.h"
 
 #import <Crashlytics/Crashlytics.h>
 #import <A2StoryboardSegueContext.h>
@@ -874,6 +873,23 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		[self addWayPointAtCoordinate:startLocation];
 		CLLocationCoordinate2D endLocation = [[_route segmentAtIndex:[_route numSegments] - 1] segmentEnd];
 		[self addWayPointAtCoordinate:endLocation];
+		
+	}
+	
+	if(_route.hasPOIs){
+		
+		NSMutableArray *poiAnnotationArray=[NSMutableArray array];
+		
+		for (POILocationVO *poi in _route.poiArray) {
+			
+			POIAnnotation *annotation=[[POIAnnotation alloc]init];
+			annotation.coordinate=poi.coordinate;
+			annotation.dataProvider=poi;
+			
+			[poiAnnotationArray addObject:annotation];
+		}
+		
+		[_mapView addAnnotations:poiAnnotationArray];
 		
 	}
 	
@@ -1780,6 +1796,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		CLLocationCoordinate2D nw = [_mapView NWforMapView];
 		CLLocationCoordinate2D se = [_mapView SEforMapView];
 		
+		controller.viewMode=POIListViewMode_Map;
+		
 		controller.nwCoordinate=nw;
 		controller.seCoordinate=se;
 		
@@ -1849,20 +1867,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 -(void)showPOIView{
 	
 	[self performSegueWithIdentifier:@"POIListViewSegue" sender:self];
-	
-//	UINavigationController *nav=(UINavigationController*)self.viewDeckController.rightController;
-//	POIListviewController *poiviewcontroller=(POIListviewController*)nav.topViewController;
-//	
-//	CLLocationCoordinate2D nw = [_mapView NWforMapView];
-//	CLLocationCoordinate2D se = [_mapView SEforMapView];
-//	
-//	poiviewcontroller.nwCoordinate=nw;
-//	poiviewcontroller.seCoordinate=se;
-//	
-//	[self.viewDeckController openRightViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {
-//		
-//	}];
-	
 	
 }
 

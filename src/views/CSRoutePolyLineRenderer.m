@@ -115,6 +115,9 @@ static BOOL lineIntersectsRect(MKMapPoint p0, MKMapPoint p1, MKMapRect r)
 // Optimisation method, determines wether poitns should be drawn based on visible map intersection and if they are far enough apart  to be visibly resolveable
 
 - (CGPathRef)newPathForPoints:(NSMutableArray*)points clipRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale isDashed:(BOOL)isDashed{
+	
+	if(![points respondsToSelector:@selector(count)])
+		return NULL;
     
     if (points.count < 2)
         return NULL;

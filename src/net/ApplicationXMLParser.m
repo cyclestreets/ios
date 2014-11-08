@@ -65,6 +65,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],UPDATEROUTE,
 						[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],WAYPOINTMETADATA,
 						[NSValue valueWithPointer:@selector(LocationSearchXMLParser:)],LOCATIONSEARCH,
+							[NSValue valueWithPointer:@selector(CalculateRouteXMLParser:)],LEISUREROUTE,
 					   nil];
 		
 	}
@@ -194,13 +195,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	LoginVO		*loginResponse=[[LoginVO alloc]init];
 	loginResponse.requestname=[TBXML elementName:response];
-	[_activeOperation setResponseWithValue:loginResponse];
+	
 	
 	TBXMLElement *resultelement=[TBXML childElementNamed:@"result" parentElement:response];
 	
 	if([TBXML hasChildrenForParentElement:resultelement]==YES){
 		
-		_activeOperation.responseStatus=ValidationLoginSuccess;
+		loginResponse.responseCode=ValidationLoginSuccess;
+		[_activeOperation setResponseWithValue:loginResponse];
+		
 		_activeOperation.operationState=NetResponseStateComplete;
 		
 		loginResponse.username=[TBXML textForElement:[TBXML childElementNamed:@"name" parentElement:resultelement]];
@@ -378,6 +381,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		
 		NSMutableArray	*segments=[[NSMutableArray alloc]init];
 		NSMutableArray	*waypoints=[[NSMutableArray alloc]init];
+		NSMutableArray	*pois=[[NSMutableArray alloc]init];
 		root=root->nextSibling;
 		
 		NSInteger time = 0;
@@ -446,13 +450,34 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			}
 			
 			
+			TBXMLElement *poinode=[TBXML childElementNamed:@"cs:poi" parentElement:root];
+			
+			if(poinode!=nil){
+				
+				POILocationVO *poilocation=[[POILocationVO alloc]init];
+				
+				poilocation.poiType=[TBXML textForElement:[TBXML childElementNamed:@"cs:poitypeId" parentElement:poinode]];
+				poilocation.name= [[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:poinode]] stringByDecodingHTMLEntities];
+				
+				CLLocationCoordinate2D coords;
+				coords.longitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:longitude" parentElement:poinode]] floatValue];
+				coords.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:latitude" parentElement:poinode]] floatValue];
+				poilocation.coordinate=coords;
+				
+				poilocation.website=[TBXML textForElement:[TBXML childElementNamed:@"cs:website" parentElement:poinode]];
+				
+				[pois addObject:poilocation];
+				
+			}
+			
+			
 			root=root->nextSibling;
 			
 		}
 		
 		route.segments=segments;
 		route.waypoints=waypoints;
-	
+		route.poiArray=pois;
 	
 	}
 	
@@ -725,58 +750,74 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	
 	TBXMLElement *categoriesnode=[TBXML childElementNamed:@"categories" parentElement:response];
-	TBXMLElement *categorynode=[TBXML childElementNamed:@"category" parentElement:categoriesnode];
 	
-	if(categorynode!=nil){
+	if(categoriesnode!=nil){
 		
-		NSMutableArray *carr=[NSMutableArray array];
-		
-		while (categorynode!=nil) {
+		TBXMLElement *categorynode=[TBXML childElementNamed:@"category" parentElement:categoriesnode];
+	
+		if(categorynode!=nil){
 			
-			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			category.categoryType=PhotoCategoryTypeFeature;
-			category.name=[TBXML textOfChild:@"name" parentElement:categorynode];
-			category.tag=[TBXML textOfChild:@"tag" parentElement:categorynode];
+			NSMutableArray *carr=[NSMutableArray array];
 			
-			[carr addObject:category];
+			while (categorynode!=nil) {
+				
+				PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
+				category.categoryType=PhotoCategoryTypeFeature;
+				category.name=[TBXML textOfChild:@"name" parentElement:categorynode];
+				category.tag=[TBXML textOfChild:@"tag" parentElement:categorynode];
+				
+				[carr addObject:category];
+				
+				categorynode=categorynode->nextSibling;
+				
+			}
 			
-			categorynode=categorynode->nextSibling;
+			[dataProvider setObject:carr forKey:@"feature"];
 			
+		}else {
+			_activeOperation.responseStatus=ValidationCategoriesFailed;
 		}
 		
-		[dataProvider setObject:carr forKey:@"feature"];
-		
-	}else {
+	}else{
 		_activeOperation.responseStatus=ValidationCategoriesFailed;
 	}
+	
 	
 	TBXMLElement *metacategoriesnode=[TBXML childElementNamed:@"metacategories" parentElement:response];
-	TBXMLElement *metacategorynode=[TBXML childElementNamed:@"metacategory" parentElement:metacategoriesnode];
 	
-	if(metacategorynode!=nil){
+	if(metacategoriesnode!=nil){
 		
-		NSMutableArray *mcarr=[NSMutableArray array];
+			TBXMLElement *metacategorynode=[TBXML childElementNamed:@"metacategory" parentElement:metacategoriesnode];
 		
-		while (metacategorynode!=nil) {
+		if(metacategorynode!=nil){
 			
-			PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
-			category.categoryType=PhotoCategoryTypeCategory;
-			category.name=[TBXML textOfChild:@"name" parentElement:metacategorynode];
-			category.tag=[TBXML textOfChild:@"tag" parentElement:metacategorynode];
+			NSMutableArray *mcarr=[NSMutableArray array];
 			
-			[mcarr addObject:category];
+			while (metacategorynode!=nil) {
+				
+				PhotoCategoryVO *category=[[PhotoCategoryVO alloc]init];
+				category.categoryType=PhotoCategoryTypeCategory;
+				category.name=[TBXML textOfChild:@"name" parentElement:metacategorynode];
+				category.tag=[TBXML textOfChild:@"tag" parentElement:metacategorynode];
+				
+				[mcarr addObject:category];
+				
+				metacategorynode=metacategorynode->nextSibling;
+				
+			}
 			
-			metacategorynode=metacategorynode->nextSibling;
+			[dataProvider setObject:mcarr forKey:@"category"];
 			
+			_activeOperation.operationState=NetResponseStateComplete;
+			
+		}else {
+			_activeOperation.responseStatus=ValidationCategoriesFailed;
 		}
 		
-		[dataProvider setObject:mcarr forKey:@"category"];
-		
-		_activeOperation.operationState=NetResponseStateComplete;
-		
-	}else {
+	}else{
 		_activeOperation.responseStatus=ValidationCategoriesFailed;
 	}
+	
 	
 	[_activeOperation setResponseWithValue:dataProvider];
 	

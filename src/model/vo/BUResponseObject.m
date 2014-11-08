@@ -24,11 +24,11 @@
 
 -(BUResponseStatusCode)responseStatus{
 	
-	BUResponseStatusCode codecheck=[self isReturnCodeValid];
+	BUResponseStatusCode codecheck=[self isResponseCodeValid];
 	if(codecheck==ValdationValidSuccessCode || codecheck==ValdationValidFailureCode){
 		return _responseCode;
 	}else {
-		BetterLog(@"[ERROR] returnCode %i is out of Range ",_responseCode);
+		BetterLog(@"[ERROR] responseCode %i is out of Range ",_responseCode);
 		return ValdationInvalidCode;
 	}
 
@@ -36,7 +36,7 @@
 }
 
 
--(BUResponseStatusCode)isReturnCodeValid{
+-(BUResponseStatusCode)isResponseCodeValid{
 	
 	for (int i=ValidationSuccessMIN; i<=ValidationSuccessMAX; i++) {
 		if(_responseCode==i){

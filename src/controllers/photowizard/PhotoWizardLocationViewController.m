@@ -241,7 +241,7 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState{
 	
-	BetterLog(@"From %u to %u",oldState, newState);
+	BetterLog(@"From %lu to %lu",oldState, newState);
 	
 	CSPhotomapAnnotationView *annotationView=(CSPhotomapAnnotationView*)view;
 	CSPhotomapAnnotation* annotation=view.annotation;

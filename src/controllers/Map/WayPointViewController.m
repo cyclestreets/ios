@@ -19,7 +19,6 @@
 @property (nonatomic,assign)  int						initialHeight;
 
 
--(IBAction)closeButtonSelected:(id)sender;
 
 @end
 

@@ -73,7 +73,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
  */
 + (int *) newNumOfPixelsInEachLineForWidth:(NSInteger) w andAngle:(NSInteger) ang {
 	int *cntTable = (int *)malloc(sizeof(int)*(ang+1));
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];			//cause we use many NSNumber objects here - "[NSNumber numberWithInt:]"
+	
 	
 	NSInteger dLong = w; 
 	NSInteger dShort = ang; 
@@ -94,7 +94,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 		++cLong;
 		++cntTable[cShort];
 	}
-	[pool release];
+	
 	return cntTable;
 }
 
@@ -132,7 +132,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 //function counts black pixels for given angle MODULE(it checks for -ang and +ang) and returned value(its module: abs(...)) gives u the number of blacks that have been found(maximum)
 //if returned value is positive than, maximum blacks number returned are counted for positive angle otherwise for negative
 + (NSInteger) getBlackPercentageForAngle:(NSInteger) ang forImageData:(UIImage *)image andBlackTreshold:(unsigned char) blackTreshold {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	NSInteger iwidth = CGImageGetWidth(image.CGImage);
 	NSInteger iheight = CGImageGetHeight(image.CGImage);
 	NSInteger blackPixels = 0;
@@ -157,7 +157,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 	if(blackPixelsForNegative > blackPixels){
 		maximumPixels = -maximumPixels;
 	}
-	[pool release];
+	
 	return (maximumPixels / numberOfLineChecked);
 }
 
@@ -264,7 +264,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 
 
 + (CGPoint) getPointAtIndex:(NSUInteger) index ofRect:(CGRect) rect {
-	NSAssert1(index >= 0 && index < 4, @"Rectangle has 4 corners, index should be between [0,3], u passed %d", index);
+	NSAssert1(index >= 0 && index < 4, @"Rectangle has 4 corners, index should be between [0,3], u passed %lu", index);
 	CGPoint point = rect.origin;
 	if(index == 1){
 		point.x += CGRectGetWidth(rect);
@@ -294,7 +294,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 	return newSize;
 }
 
-//clockwise when degrees < 0
+//clockwise when degrees < 0 ok?
 + (UIImage *) rotateImage:(UIImage *) image byDegrees:(CGFloat) degrees {
 	
 	

@@ -21,6 +21,8 @@
 
 @property (nonatomic,strong)  NSMutableDictionary					*selectedPOICategories;
 
+@property (nonatomic,strong)  NSMutableArray						*leisureDataProvider;
+
 
 @end
 
@@ -110,8 +112,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	request.dataid=POILISTING;
 	request.requestid=ZERO;
 	request.parameters=parameters;
-#warning This is not cacheing
-	//TODO: this is not cacheing
 	request.source=DataSourceRequestCacheTypeUseCache;
 	
 	__weak __typeof(&*self)weakSelf = self;
@@ -156,6 +156,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 -(void)updatePOIListingDataProvider:(NSMutableArray*)arr{
 	
 	self.dataProvider=arr;
+	
+	self.leisureDataProvider=[[NSMutableArray alloc] initWithArray:arr copyItems:YES];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:POILISTINGRESPONSE object:nil userInfo:nil];
 	
@@ -361,6 +363,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
  * @description			UTILITIES
  ***********************************************/
 //
+
+-(NSMutableArray*)newLeisurePOIArray{
+	
+	return [[NSMutableArray alloc]initWithArray:_leisureDataProvider copyItems:YES];
+	
+}
+
+
 
 +(POICategoryVO*)createNoneCategory{
 	

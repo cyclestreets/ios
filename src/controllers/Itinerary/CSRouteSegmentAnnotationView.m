@@ -61,6 +61,9 @@
 		}
 			
 			break;
+			
+		default:
+			break;
 		
 	}
 	
@@ -87,6 +90,8 @@
 			self.image=[UIImage rotateImage:i byDegrees:annotation.annotationAngle];
 		}
 			
+			break;
+			default:
 			break;
 			
 	}

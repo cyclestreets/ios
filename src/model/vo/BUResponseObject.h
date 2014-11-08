@@ -18,6 +18,6 @@
 
 @property (nonatomic,readonly) BUResponseStatusCode responseStatus;
 
--(BUResponseStatusCode)isReturnCodeValid;
+-(BUResponseStatusCode)isResponseCodeValid;
 
 @end

@@ -136,6 +136,7 @@ extern NSString *const POICATEGORYLOCATION;
 extern NSString *const POIMAPLOCATION;
 extern NSString *const PHOTOCATEGORIES;
 extern NSString *const WAYPOINTMETADATA;
+extern NSString *const LEISUREROUTE;
 
 
 // INTERNAL
@@ -154,6 +155,7 @@ extern NSString *const MAPSTYLECHANGED;
 extern NSString *const USERACCOUNTLOGINSUCCESS;
 extern NSString *const USERACCOUNTREGISTERSUCCESS;
 extern NSString *const POIMAPLOCATIONRESPONSE;
+extern NSString *const LEISUREROUTERESPONSE;
 
 extern NSString *const GPSLOCATIONUPDATE;
 extern NSString *const GPSLOCATIONFAILED;
