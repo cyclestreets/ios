@@ -135,6 +135,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, assign) BOOL									avoidAccidentalTaps;
 @property (nonatomic, assign) BOOL									singleTapDidOccur;
 @property (nonatomic, assign) BOOL									savedSelectedRouteLoading;
+@property (nonatomic, assign) BOOL									loadingRoute;
+
 
 @property (nonatomic, assign) CGPoint								singleTapPoint;
 @property (nonatomic, assign) MapPlanningState						uiState;
@@ -1029,6 +1031,9 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)assessUIState{
 	
+	if(_savedSelectedRouteLoading)
+		return;
+	
 	if(_waypointArray.count>1){
 		[self updateUItoState:MapPlanningStatePlanning];
 	}else if(_waypointArray.count==1){
@@ -1328,11 +1333,14 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			 annotationView.selected=YES;
 			 annotationView.canShowCallout=YES;
 			 
-			 UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
-			 [rcalloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
-			 rcalloutButton.tag=kDeleteWaypointControlTag;
-			 rcalloutButton.backgroundColor=[UIColor redColor];
-			 annotationView.rightCalloutAccessoryView=rcalloutButton;
+			 if(_uiState!=MapPlanningStateRoute){
+				 UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+				 [rcalloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
+				 rcalloutButton.tag=kDeleteWaypointControlTag;
+				 rcalloutButton.backgroundColor=[UIColor redColor];
+				 annotationView.rightCalloutAccessoryView=rcalloutButton; 
+			 }
+			 
 			 
 			 if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
 				 UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
