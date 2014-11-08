@@ -575,15 +575,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		response.dataid=dataid;
 		response.requestid=requestid;
 		
-		
 		NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:response,RESPONSE, nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTWASACTIVE object:nil userInfo:dict];
-		
 		
 	}
 	
 	return NO;
-	
     
 }
 
