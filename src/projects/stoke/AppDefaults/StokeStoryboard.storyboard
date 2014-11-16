@@ -384,16 +384,16 @@
                                 <rect key="frame" x="0.0" y="34" width="320" height="26"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NiC-wX-yHv">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NiC-wX-yHv" userLabel="poi">
                                         <rect key="frame" x="8" y="-4" width="53" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_poi.png"/>
                                         <connections>
-                                            <action selector="didSelectPOIButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="7u9-Hy-tjF"/>
+                                            <action selector="didSelectPOIButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="EXP-sZ-hwA"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2b-hp-s4z">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2b-hp-s4z" userLabel="saveloc">
                                         <rect key="frame" x="169" y="-4" width="56" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -402,13 +402,13 @@
                                             <action selector="didSelectSaveLocationsButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="ho3-RJ-C6i"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iHQ-O9-9wh">
-                                        <rect key="frame" x="257" y="-4" width="55" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iHQ-O9-9wh" userLabel="waypoints">
+                                        <rect key="frame" x="270" y="-2" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="CSBarButton_search.png"/>
+                                        <state key="normal" image="CSTabBar_plan_route.png"/>
                                         <connections>
-                                            <action selector="searchButtonSelected" destination="gA4-QV-Dgc" eventType="touchUpInside" id="op0-bh-u7h"/>
+                                            <action selector="showWayPointView" destination="gA4-QV-Dgc" eventType="touchUpInside" id="HDy-oA-5AX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uza-KH-W2M">
@@ -478,6 +478,7 @@
                         <outlet property="attributionLabel" destination="gMu-jU-Xl7" id="DEt-MS-Ard"/>
                         <outlet property="mapView" destination="rA7-CW-iZg" id="Jwa-5P-voQ"/>
                         <outlet property="toolBar" destination="Y3q-ji-xW0" id="HwE-4d-aH0"/>
+                        <outlet property="viewWaypointsButton" destination="iHQ-O9-9wh" id="xPb-mE-CtW"/>
                         <outlet property="walkingRouteOverlayView" destination="pIs-Lq-mvo" id="4Vj-4s-zYo"/>
                         <segue destination="obc-HC-sMg" kind="modal" identifier="CreateSavedLocationSegue" id="tph-ii-tEm"/>
                         <segue destination="gdo-qn-vyO" kind="modal" identifier="SavedLocationsSegue" id="BI0-gH-t0g"/>
@@ -1074,7 +1075,6 @@ Drag a waypoint to re-order it.</string>
     <resources>
         <image name="CSBarButton_poi.png" width="20" height="20"/>
         <image name="CSBarButton_saveloc.png" width="17" height="20"/>
-        <image name="CSBarButton_search.png" width="20" height="20"/>
         <image name="CSTabBar_credits.png" width="30" height="30"/>
         <image name="CSTabBar_fav_routes.png" width="32" height="28"/>
         <image name="CSTabBar_itinerary.png" width="30" height="30"/>
