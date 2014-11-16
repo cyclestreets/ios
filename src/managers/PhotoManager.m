@@ -133,7 +133,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 									 [self uploadPhotoId],@"selectedid",
                                      nil];
 	// cns option
-	if([[APPLICATIONNAME lowercaseString] isEqualToString:@"cyclenorthstaffs"]){
+	NSString *appname=[APPLICATIONNAME lowercaseString];
+	if([appname isEqualToString:@"cycle north staffs"]){
 		[parameters setObject:API_IDENTIFIER forKey:@"username"];
 	}
     

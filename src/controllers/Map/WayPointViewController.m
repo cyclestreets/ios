@@ -216,6 +216,16 @@
 //
 
 
+#pragma mark - UI Events
+
+
+-(IBAction)didSelectDoneButton:(id)sender{
+	
+	[self didDismissWithTouch:nil];
+	
+}
+
+
 
 #pragma mark - CSOverlayTransitionProtocol
 

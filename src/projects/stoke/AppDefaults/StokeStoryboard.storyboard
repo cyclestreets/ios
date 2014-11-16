@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Save Location Create View Controller-->
@@ -27,7 +28,7 @@
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location name..." adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" id="bsA-0W-k8z">
-                                <rect key="frame" x="16" y="129" width="248" height="30"/>
+                                <rect key="frame" x="16" y="174" width="248" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -63,21 +64,28 @@
                                     <action selector="didSelectCancelButton:" destination="obc-HC-sMg" eventType="touchUpInside" id="Qej-D1-Chr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the location type and give it a name then press Save to add it your list." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Slm-gW-l5n">
-                                <rect key="frame" x="16" y="167" width="248" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" id="2jR-CE-uQE" customClass="BUHorizontalMenuView">
-                                <rect key="frame" x="16" y="50" width="248" height="67"/>
+                                <rect key="frame" x="16" y="95" width="248" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <outlet property="menuDataSource" destination="obc-HC-sMg" id="TDM-pw-dDi"/>
                                     <outlet property="menuDelegate" destination="obc-HC-sMg" id="9TI-ye-vt2"/>
                                 </connections>
+                            </view>
+                            <view contentMode="scaleToFill" id="8yB-MJ-WfH">
+                                <rect key="frame" x="0.0" y="42" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the location type and give it a name then press Save to add it your list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sKt-xK-6UG">
+                                        <rect key="frame" x="8" y="0.0" width="264" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.46234407420000001" green="0.70104886889999996" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.9137254901960784" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
@@ -96,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALX-q1-c8o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3604" y="651"/>
+            <point key="canvasLocation" x="-3604" y="578"/>
         </scene>
         <!--Leisure View Controller-->
         <scene sceneID="U8j-MZ-tV6">
@@ -290,6 +298,18 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BX1-5F-K7E">
+                                        <rect key="frame" x="226" y="13" width="46" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didSelectDoneButton:" destination="gdo-qn-vyO" eventType="touchUpInside" id="8DV-rq-pgq"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </view>
@@ -408,7 +428,7 @@
                                 <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100" y="484" width="210.00000014191585" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -491,7 +511,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1uQ-tp-KAB">
-                                        <rect key="frame" x="226" y="12" width="46" height="24"/>
+                                        <rect key="frame" x="226" y="13" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
@@ -568,6 +588,18 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Upd-Ni-uA7">
+                                        <rect key="frame" x="226" y="13" width="46" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didSelectDoneButton:" destination="QWx-CJ-dLg" eventType="touchUpInside" id="IW7-zA-2B8"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </view>
@@ -589,7 +621,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="phm-Hg-nr3">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">Select a waypoint to navigate to it.
+                                        <string key="text">Select a waypoint to zoom to it.
 Drag a waypoint to re-order it.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -883,8 +915,8 @@ Drag a waypoint to re-order it.</string>
                         <segue destination="Whq-3E-C5M" kind="relationship" relationship="viewControllers" id="WQI-0R-4be"/>
                         <segue destination="TeA-CB-brw" kind="relationship" relationship="viewControllers" id="nWl-nY-lvG"/>
                         <segue destination="0ny-e6-BF2" kind="relationship" relationship="viewControllers" id="063-HP-5Bs"/>
-                        <segue destination="k10-cg-hCa" kind="relationship" relationship="viewControllers" id="Rb4-g1-biC"/>
                         <segue destination="15m-Qd-X6m" kind="relationship" relationship="viewControllers" id="pxv-TH-3d1"/>
+                        <segue destination="k10-cg-hCa" kind="relationship" relationship="viewControllers" id="Rb4-g1-biC"/>
                         <segue destination="9Ua-0d-b2e" kind="relationship" relationship="viewControllers" id="El8-pw-Jin"/>
                         <segue destination="z63-8j-lln" kind="relationship" relationship="viewControllers" id="EfR-PP-ev6"/>
                     </connections>
@@ -911,7 +943,7 @@ Drag a waypoint to re-order it.</string>
             <objects>
                 <navigationController title="Info" definesPresentationContext="YES" hidesBottomBarWhenPushed="YES" id="9Ua-0d-b2e" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Info" image="CSTabBar_credits.png" id="Gfa-15-voG"/>
+                    <tabBarItem key="tabBarItem" title="Travel Smart" image="CSTabBar_credits.png" id="Gfa-15-voG"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ofu-pv-etR">
                         <autoresizingMask key="autoresizingMask"/>
@@ -927,12 +959,12 @@ Drag a waypoint to re-order it.</string>
             </objects>
             <point key="canvasLocation" x="-5" y="-554"/>
         </scene>
-        <!--Locations-->
+        <!--Saved Locations-->
         <scene sceneID="NCO-bN-2VH">
             <objects>
                 <navigationController id="z63-8j-lln" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Locations" image="CSTabBar_credits.png" id="LyB-Fm-2dc"/>
+                    <tabBarItem key="tabBarItem" title="Saved Locations" image="CSTabBar_credits.png" id="LyB-Fm-2dc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AzW-n8-Rcz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

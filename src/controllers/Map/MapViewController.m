@@ -274,6 +274,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_mapView.rotateEnabled=YES;
     _mapView.pitchEnabled=YES;
 	_mapView.showsPointsOfInterest=NO;
+	_mapView.showsBuildings=YES;
 	_mapView.tintColor=[UIColor appTintColor];
 	
 	_attributionLabel.textAlignment=NSTextAlignmentCenter;
