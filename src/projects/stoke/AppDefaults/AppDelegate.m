@@ -108,6 +108,7 @@
 	
 	_tabBarController.selectedIndex=[[UserSettingsManager sharedInstance] getSavedSection];
 	
+	
 	[_window makeKeyAndVisible];	
 	
 	[self removeStartupView];
@@ -229,9 +230,12 @@
 
 
 
+
+
 - (void)tabBarController:(UITabBarController *)tbc didSelectViewController:(UIViewController *)viewController {
 	
 	[[UserSettingsManager sharedInstance] setSavedSection:tbc.selectedViewController.title];
+
 	
 }
 

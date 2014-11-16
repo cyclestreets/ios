@@ -37,4 +37,16 @@
 	return color;
 }
 
++ (UIColor *)tableBackgroundColor
+{
+	static dispatch_once_t onceToken;
+	static UIColor *color;
+	
+	dispatch_once(&onceToken, ^{
+		color = UIColorFromRGB(0xECE9E8);
+	});
+	
+	return color;
+}
+
 @end

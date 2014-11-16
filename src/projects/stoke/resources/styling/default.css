@@ -39,6 +39,15 @@ tab-bar{
 	
 }
 
+table-view{
+	background-color: tableBackgroundColor;
+}
+
+table-view-cell {
+	background-color: tableBackgroundColor;
+	
+}
+
 map-view{
 	-ios-tint-color:appTintColor;
 }
