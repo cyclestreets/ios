@@ -15,6 +15,7 @@
 #import "UIImage+Additions.h"
 #import "UIColor+AppColors.h"
 #import "ViewUtilities.h"
+#import "UIView+Additions.h"
 
 @interface SavedLocationTableCellView()
 
@@ -26,6 +27,10 @@
 
 @implementation SavedLocationTableCellView
 
+
+- (void)prepareForMove{
+	self.contentView.visible=NO;
+}
 
 
 -(void)initialise{
@@ -42,6 +47,8 @@
 }
 
 -(void)populate{
+	
+	self.contentView.visible=YES;
 	
     _titleLabel.text=_dataProvider.title;
     

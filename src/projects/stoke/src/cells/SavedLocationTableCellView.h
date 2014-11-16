@@ -14,4 +14,8 @@
 
 @property (nonatomic,strong)  SavedLocationVO							*dataProvider;
 
+// FMMoveTable support
+- (void)prepareForMove;
+
+
 @end

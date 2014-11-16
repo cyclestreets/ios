@@ -14,11 +14,13 @@
 #import "SavedLocationsManager.h"
 #import "SavedLocationTableCellView.h"
 
+#import <FMMoveTableView.h>
+
 #import <UIAlertView+BlocksKit.h>
 
 @interface SavedLocationsViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic,strong) IBOutlet  UITableView									*tableView;
+@property (nonatomic,strong) IBOutlet  FMMoveTableView						*tableView;
 
 @property (nonatomic,strong)  NSMutableArray								*dataProvider;
 
@@ -110,22 +112,55 @@
  ***********************************************/
 //
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-	return [_dataProvider count];
+-(NSInteger)tableView:(FMMoveTableView *)tableView numberOfRowsInSection:(NSInteger)section{
+	
+	NSInteger numberOfRows=_dataProvider.count;
+	
+	if ([tableView movingIndexPath] && [[tableView movingIndexPath] section] != [[tableView initialIndexPathForMovingRow] section])
+	{
+		if (section == [[tableView movingIndexPath] section]) {
+			numberOfRows++;
+		}
+		else if (section == [[tableView initialIndexPathForMovingRow] section]) {
+			numberOfRows--;
+		}
+	}
+	
+	return numberOfRows;
 }
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 	return 1;
 }
 
 
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell*)tableView:(FMMoveTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
 	SavedLocationTableCellView *cell=[_tableView dequeueReusableCellWithIdentifier:[SavedLocationTableCellView cellIdentifier] forIndexPath:indexPath];
 	
 	SavedLocationVO *data=[_dataProvider objectAtIndex:indexPath.row];
 	
-	cell.dataProvider=data;
-	[cell populate];
+	if ([_tableView indexPathIsMovingIndexPath:indexPath])
+	{
+		[cell prepareForMove];
+	}
+	else
+	{
+		if ([tableView movingIndexPath]) {
+			indexPath = [tableView adaptedIndexPathForRowAtIndexPath:indexPath];
+		}
+		
+		cell.dataProvider=data;
+		[cell populate];
+		
+		[cell setShouldIndentWhileEditing:NO];
+		[cell setShowsReorderControl:NO];
+	}
+	
+	
+	return cell;
+
 	
 	return cell;
 }
@@ -160,7 +195,14 @@
 
 #pragma mark - UITableview editing
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;
+}
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	return UITableViewCellEditingStyleDelete;
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
 	
@@ -177,6 +219,38 @@
 }
 
 
+
+#pragma mark - FMMoveTable
+
+- (BOOL)moveTableView:(FMMoveTableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return YES;
+}
+
+- (void)moveTableView:(FMMoveTableView *)tableView moveRowFromIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+	
+	NSUInteger fromRow=[fromIndexPath row];
+	NSUInteger toRow=[toIndexPath row];
+	
+	// store the row to move
+	id object =[_dataProvider objectAtIndex:fromRow];
+	
+	// remove the from row & set the to row with the stored object
+	[_dataProvider removeObjectAtIndex:fromRow];
+	[_dataProvider insertObject:object atIndex:toRow];
+	
+	[self.tableView reloadData];
+	
+	
+	
+}
+
+- (NSIndexPath *)moveTableView:(FMMoveTableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+	
+	return proposedDestinationIndexPath;
+}
 
 
 
