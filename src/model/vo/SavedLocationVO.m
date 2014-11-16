@@ -88,6 +88,15 @@
 	
 }
 
++(BOOL)titleIsGenericType:(NSString*)str{
+	
+	NSArray *types=[SavedLocationVO locationTypeDataProvider];
+	
+	NSArray *titles=[types valueForKey:@"title"];
+	return [titles containsObject:str];
+	
+}
+
 +(NSString*)imageForLocationType:(SavedLocationType)locationType{
 	
 	switch (locationType) {
@@ -99,7 +108,7 @@
 			break;
 			
 		default:
-			return @"EmptyImage.png";
+			return @"CSIcon_saveloc_other.png";
 			break;
 	}
 }

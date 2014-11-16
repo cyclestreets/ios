@@ -60,6 +60,9 @@
 	
 	[super viewDidLoad];
 	
+	if(_viewMode==SavedLocationsViewModeModal)
+		self.UIType=UITYPE_MODALTABLEVIEWUI;
+	
 	
 	[self createPersistentUI];
 }
@@ -85,6 +88,16 @@
 
 -(void)createNonPersistentUI{
 	
+	
+	if(_dataProvider.count==0){
+		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:@"noresults_SAVEDLOCATIONS" withIcon:@"SAVEDLOCATIONS"];
+		
+	}else{
+		
+		[self showViewOverlayForType:kViewOverlayTypeNone show:NO withMessage:nil];
+		
+	}
 	
 	
 }

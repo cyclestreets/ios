@@ -1842,6 +1842,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[self addWayPointAtCoordinate:savedlocation.coordinate];
 	
+	[_mapView setCenterCoordinate:savedlocation.coordinate zoomLevel:_mapView.getZoomLevel animated:YES];
+	
 }
 
 

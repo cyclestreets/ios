@@ -26,7 +26,7 @@
 
 @property (nonatomic,copy)  GenericEventBlock                   touchBlock;
 
-@property (nonatomic,strong)   UIView					*touchView;
+@property (nonatomic,strong)   UIView							*touchView;
 
 
 @end
@@ -263,7 +263,20 @@
 	_dataProvider.locationType=(SavedLocationType)[itemData[@"type"] integerValue];
 	_dataProvider.title=itemData[@"title"];
 	
+	[self autoUpdateNameFieldForItem:itemData[@"title"]];
+	
 	[self validate];
+	
+}
+
+
+-(void)autoUpdateNameFieldForItem:(NSString*)titleString{
+	
+	BOOL titleIsGenericType =[SavedLocationVO titleIsGenericType:_nameField.text];
+	if(titleIsGenericType || [_nameField.text isEqualToString:EMPTYSTRING]){
+		_nameField.text=titleString;
+		[self fieldChanged:nil];
+	}
 	
 }
 

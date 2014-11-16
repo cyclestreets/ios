@@ -41,5 +41,6 @@ typedef NS_ENUM(NSUInteger, SavedLocationType) {
 
 +(NSArray*)locationTypeDataProvider;
 +(NSString*)imageForLocationType:(SavedLocationType)locationType;
++(BOOL)titleIsGenericType:(NSString*)str;
 
 @end

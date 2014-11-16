@@ -19,7 +19,19 @@
 	static UIColor *color;
 	
 	dispatch_once(&onceToken, ^{
-		color = UIColorFromRGB(0x429CB2);
+		color = UIColorFromRGB(0xba3456);
+	});
+	
+	return color;
+}
+
++ (UIColor *)appSubTintColor
+{
+	static dispatch_once_t onceToken;
+	static UIColor *color;
+	
+	dispatch_once(&onceToken, ^{
+		color = UIColorFromRGB(0xe7425f);
 	});
 	
 	return color;

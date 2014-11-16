@@ -12,5 +12,6 @@
 
 
 + (UIColor *)appTintColor;
++ (UIColor *)appSubTintColor;
 
 @end
