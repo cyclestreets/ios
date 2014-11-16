@@ -132,10 +132,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
                                      @"1",@"minimaldata",
 									 [self uploadPhotoId],@"selectedid",
                                      nil];
-	// cns option
-	NSString *appname=[APPLICATIONNAME lowercaseString];
-	if([appname isEqualToString:@"cycle north staffs"]){
-		[parameters setObject:API_IDENTIFIER forKey:@"username"];
+	if(APIREQUIRESIDENTIFIER){
+		[BuildTargetConstants insertAPIIdentifier:parameters];
 	}
     
     BUNetworkOperation *request=[[BUNetworkOperation alloc]init];

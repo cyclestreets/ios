@@ -13,6 +13,7 @@
 extern NSString *const API_IDENTIFIER;
 extern NSString *const APPLICATIONNAME;
 
+extern BOOL const APIREQUIRESIDENTIFIER;
 
 
 @interface BuildTargetConstants : NSObject
@@ -21,5 +22,7 @@ extern NSString *const APPLICATIONNAME;
 +(NSArray*)ApplicationSupportedMaps;
 
 +(ApplicationBuildTarget)buildTarget;
+
++(void)insertAPIIdentifier:(NSMutableDictionary*)requestDict;
 
 @end

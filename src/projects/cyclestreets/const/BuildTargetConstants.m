@@ -13,6 +13,9 @@
 NSString *const API_IDENTIFIER=@"cyclestreets";
 NSString *const APPLICATIONNAME=@"CycleStreets";
 
+BOOL const APIREQUIRESIDENTIFIER=NO;
+
+
 @implementation BuildTargetConstants
 
 +(NSArray*)ApplicationSupportedMaps{
