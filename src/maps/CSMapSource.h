@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface CSMapSource : NSObject
+@interface CSMapSource : MKTileOverlay
 
 /** A short version of the tile source's name. */
 @property (nonatomic, readonly) NSString *shortName;

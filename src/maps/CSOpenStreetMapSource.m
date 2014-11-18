@@ -20,10 +20,26 @@
 	return 1;
 }
 
+//-(CGSize) tileSize{
+//	return CGSizeMake(256,256);
+//};
+//
+- (NSURL *)URLForTilePath:(MKTileOverlayPath)path{
+	
+	//NSString *tileURLString=[NSString stringWithFormat:@"http://tile.cyclestreets.net/mapnik/%li/%li/%li@%ix.png",(long)path.z,(long)path.x, (long)path.y, (int)path.contentScaleFactor];
+	//return [NSURL URLWithString:tileURLString];
+	
+	NSString *tileURLString=[NSString stringWithFormat:@"http://tile.cyclestreets.net/mapnik/%li/%li/%li.png",(long)path.z,(long)path.x, (long)path.y];
+	return [NSURL URLWithString:tileURLString];
+	
+}
+
+
 - (NSString *)tileTemplate{
 	
-
 	return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
+
+	//return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}@{s}x.png";
 }
 
 - (NSString *)uniqueTilecacheKey

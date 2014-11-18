@@ -26,10 +26,10 @@
 		if(![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			
-			MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:mapSource.tileTemplate];
-			newoverlay.canReplaceMapContent = YES;
-			newoverlay.maximumZ=mapSource.maxZoom;
-			[mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels];
+			//CSMapSource *newoverlay = [[CSMapSource alloc] initWithURLTemplate:mapSource.tileTemplate];
+			mapSource.canReplaceMapContent = YES;
+			mapSource.maximumZ=mapSource.maxZoom;
+			[mapView insertOverlay:mapSource atIndex:0 level:MKOverlayLevelAboveLabels];
 			
 			
 		}else{
@@ -71,11 +71,11 @@
 					
 				}else{
 					
-					MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:mapSource.tileTemplate];
-					newoverlay.canReplaceMapContent = YES;
-					newoverlay.maximumZ=mapSource.maxZoom;
+					//MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:mapSource.tileTemplate];
+					mapSource.canReplaceMapContent = YES;
+					mapSource.maximumZ=mapSource.maxZoom;
 					[mapView removeOverlay:overlay];
-					[mapView insertOverlay:newoverlay atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
+					[mapView insertOverlay:mapSource atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
 					
 					
 					break;

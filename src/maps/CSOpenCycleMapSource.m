@@ -22,6 +22,16 @@
 	return 1;
 }
 
+- (NSURL *)URLForTilePath:(MKTileOverlayPath)path{
+	
+	//NSString *tileURLString=[NSString stringWithFormat:@"http://tile.cyclestreets.net/mapnik/%li/%li/%li@%ix.png",(long)path.z,(long)path.x, (long)path.y, (int)path.contentScaleFactor];
+	//return [NSURL URLWithString:tileURLString];
+	
+	NSString *tileURLString=[NSString stringWithFormat:@"http://tile.cyclestreets.net/opencyclemap/%li/%li/%li.png",(long)path.z,(long)path.x, (long)path.y];
+	return [NSURL URLWithString:tileURLString];
+	
+}
+
 - (NSString *)tileTemplate
 {
 
