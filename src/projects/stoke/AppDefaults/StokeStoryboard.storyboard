@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Save Location Create View Controller-->
@@ -145,6 +145,9 @@
                                     <segment title="Distance"/>
                                 </segments>
                                 <color key="tintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="leisure-segmentedcontrol"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didChangeTypeControl:" destination="6SS-Xp-tb0" eventType="valueChanged" id="MhT-vS-sxB"/>
                                 </connections>
@@ -183,7 +186,10 @@
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" id="MEB-rN-3nZ">
                                         <rect key="frame" x="18" y="11" width="252" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="tintColor" red="0.72941176470588232" green="0.20392156862745098" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="leisure-slider"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didUpdateValueSlider:" destination="6SS-Xp-tb0" eventType="valueChanged" id="GA3-HB-Cxv"/>
                                         </connections>
@@ -394,7 +400,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2b-hp-s4z" userLabel="saveloc">
-                                        <rect key="frame" x="169" y="-4" width="56" height="30"/>
+                                        <rect key="frame" x="132" y="-4" width="56" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_saveloc.png"/>
@@ -409,17 +415,6 @@
                                         <state key="normal" image="CSTabBar_plan_route.png"/>
                                         <connections>
                                             <action selector="showWayPointView" destination="gA4-QV-Dgc" eventType="touchUpInside" id="HDy-oA-5AX"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uza-KH-W2M">
-                                        <rect key="frame" x="84" y="-4" width="50" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                        <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Leisure">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didSelectLeisureRouteButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="yy5-K4-Nyy"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -447,7 +442,7 @@
                                 <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100.00000028165167" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100" y="484" width="210.000000432653" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -915,7 +910,7 @@ Drag a waypoint to re-order it.</string>
             <objects>
                 <navigationController title="Report" definesPresentationContext="YES" navigationBarHidden="YES" id="0ny-e6-BF2" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Report" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
+                    <tabBarItem key="tabBarItem" title="Photos" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z42-mk-NG8">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.066666670139999995" green="0.68235296010000002" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>

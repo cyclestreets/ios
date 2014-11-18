@@ -27,6 +27,10 @@ navigation-bar title{
 
 }
 
+#navbar-actionbutton{
+	-ios-tint-color:#FFFFFF;
+}
+
 toolbar{
 	
 	-ios-tint-color:#FFFFFF;
@@ -256,6 +260,24 @@ background-color: appTintColor;
 
 
 /* User view */
+
+
+
+/* leisure route */
+#leisure-segmentedcontrol{
+	-ios-tint-color:appTintColor;
+}
+#leisure-slider{
+	-ios-tint-color:appTintColor;
+}
+
+
+
+/* saved locations */
+
+#savedloc-tablecell-label{
+	color :#666666;
+}
 
 
 

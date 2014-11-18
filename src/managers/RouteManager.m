@@ -461,8 +461,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining leisure route from CycleStreets.net" andMessage:nil];
 	
-	
-	
 }
 
 

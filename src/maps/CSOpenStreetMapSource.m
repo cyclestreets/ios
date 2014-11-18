@@ -9,7 +9,26 @@
 #import "CSOpenStreetMapSource.h"
 #import "AppConstants.h"
 
+
+@interface CSOpenStreetMapSource()
+
+@property NSCache			*cache;
+@property NSOperationQueue	*operationQueue;
+
+@end
+
 @implementation CSOpenStreetMapSource
+
+
+- (instancetype)init
+{
+	self = [super init];
+	if (self) {
+		self.cache=[[NSCache alloc]init];
+		self.operationQueue=[[NSOperationQueue alloc]init];
+	}
+	return self;
+}
 
 
 -(int)maxZoom{
@@ -20,10 +39,63 @@
 	return 1;
 }
 
-//-(CGSize) tileSize{
-//	return CGSizeMake(256,256);
-//};
-//
+// Prelim supporrt for cacheing tiles
+
+- (void)loadTileAtPath:(MKTileOverlayPath)path result:(void (^)(NSData *data, NSError *error))result
+{
+	if (!result) {
+		return;
+	}
+	NSString *keyPath = [self stringFromTileOverlayPath:path];
+	[self loadCachedTileFromFileSystem:path];
+	NSPurgeableData *cachedData = [self.cache objectForKey:[self URLForTilePath:path]];
+	
+	if (cachedData) {
+		result(cachedData, nil);
+	} else {
+		NSURLRequest *request = [NSURLRequest requestWithURL:[self URLForTilePath:path] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:20];
+		[NSURLConnection sendAsynchronousRequest:request queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+			
+			NSPurgeableData *cachedData=nil;
+			if(data) {
+				cachedData = [NSPurgeableData dataWithData:data];
+				[self.cache setObject:cachedData forKey: keyPath];
+				[self saveTile:cachedData toFileSystemWithTilePath:path];
+			}
+			result(data, connectionError);
+			
+		}];
+	}
+}
+
+
+-(NSPurgeableData*)loadCachedTileFromFileSystem:(MKTileOverlayPath)path{
+	
+	// check file system
+	
+	// if there load and add to cache
+	
+	// return
+	
+	return nil;
+}
+
+
+-(NSString*)stringFromTileOverlayPath:(MKTileOverlayPath)path{
+	return EMPTYSTRING;
+	
+}
+
+-(void)saveTile:(NSPurgeableData*)data toFileSystemWithTilePath:(MKTileOverlayPath)path{
+	
+	// tiles should go in map source directorys
+	// then z_x_y.png format inc scale @2x
+	
+}
+
+// end
+
+
 - (NSURL *)URLForTilePath:(MKTileOverlayPath)path{
 	
 	//NSString *tileURLString=[NSString stringWithFormat:@"http://tile.cyclestreets.net/mapnik/%li/%li/%li@%ix.png",(long)path.z,(long)path.x, (long)path.y, (int)path.contentScaleFactor];

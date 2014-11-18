@@ -477,20 +477,20 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			switch (_uiState) {
 					
 				case MapPlanningStateNoRoute:
-					return @[_locationButton,_searchButton, _leftFlex, _rightFlex, _addPointButton];
+					return @[_locationButton,_searchButton,_addPointButton, _leftFlex, _rightFlex ];
 					break;
 					
 				case MapPlanningStateLocating:
-					return @[_locationButton,_searchButton, _leftFlex, _rightFlex,_addPointButton];
+					return @[_locationButton,_searchButton,_addPointButton, _leftFlex, _rightFlex];
 					
 					break;
 					
 				case MapPlanningStateStartPlanning:
-					return @[_locationButton,_searchButton,_leftFlex,_rightFlex,_addPointButton];
+					return @[_locationButton,_searchButton,_addPointButton,_leftFlex,_rightFlex];
 					break;
 					
 				case MapPlanningStatePlanning:
-					return @[ _locationButton,_searchButton,_leftFlex,_routeButton,_addPointButton];
+					return @[ _locationButton,_searchButton,_addPointButton,_leftFlex,_routeButton];
 					break;
 					
 				case MapPlanningStateRoute:

@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MapStyleCellView">
-            <rect key="frame" x="0.0" y="0.0" width="290" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="275" height="150"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Detailed map with cycle features and hills" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="SWM-qW-q7D" customClass="ExpandedUILabel">
-                    <rect key="frame" x="154" y="41" width="125" height="43"/>
+                    <rect key="frame" x="148" y="51" width="120" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -20,8 +20,17 @@
                     <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SvU-iQ-PoS">
+                    <rect key="frame" x="10" y="10" width="130" height="130"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.79607844350000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CSIcon_mapstyle_tick.png" id="wiW-An-e3l">
+                    <rect key="frame" x="238" y="110" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OpenCycleMap:" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="6Dn-LB-ZNj" customClass="ExpandedUILabel">
-                    <rect key="frame" x="154" y="10" width="159" height="33"/>
+                    <rect key="frame" x="148" y="10" width="120" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                     <color key="textColor" red="0.42271309280000002" green="0.23377185810000001" blue="0.49976562499999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,18 +38,9 @@
                     <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SvU-iQ-PoS">
-                    <rect key="frame" x="10" y="10" width="128" height="130"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.79607844350000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CSIcon_mapstyle_tick.png" id="wiW-An-e3l">
-                    <rect key="frame" x="249" y="110" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <view contentMode="scaleToFill" id="PhL-xs-auV" customClass="BUTouchView">
-                    <rect key="frame" x="0.0" y="0.0" width="290" height="150"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <rect key="frame" x="0.0" y="0.0" width="275" height="150"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -55,7 +55,7 @@
                 <outlet property="titleLabel" destination="6Dn-LB-ZNj" id="OO9-OV-IUo"/>
                 <outlet property="touchView" destination="PhL-xs-auV" id="e4s-ac-AST"/>
             </connections>
-            <point key="canvasLocation" x="482" y="304"/>
+            <point key="canvasLocation" x="481.5" y="304"/>
         </view>
     </objects>
     <resources>

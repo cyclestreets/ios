@@ -23,6 +23,7 @@
 
 @property (nonatomic,strong)  NSMutableArray						*leisureDataProvider;
 
+@property (nonatomic,strong)  NSMutableDictionary					*activeOperations;
 
 @end
 
@@ -38,6 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	{
 		_selectedPOICategories=[NSMutableDictionary dictionary];
 		_categoryDataProvider=[NSMutableDictionary dictionary];
+		_activeOperations=[NSMutableDictionary dictionary];
 	}
 	return self;
 }
@@ -172,6 +174,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 
 -(void)removePOICategoryMapPointsForCategory:(POICategoryVO*)category{
 	
+	if(_activeOperations[category.name]!=nil){
+		[[BUDataSourceManager sharedInstance] cancelRequestForType:POIMAPLOCATION];
+		[_activeOperations removeObjectForKey:category.name];
+	}
+	
 	[_selectedPOICategories removeObjectForKey:category.name];
 	
 	[_categoryDataProvider removeObjectForKey:category.name];
@@ -181,6 +188,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 }
 
 -(void)removeAllPOICategoryMapPoints{
+	
+	if(_activeOperations.count>0){
+		[[BUDataSourceManager sharedInstance] cancelRequestForType:POIMAPLOCATION];
+		[_activeOperations removeAllObjects];
+	}
 	
 	for(POICategoryVO *category in _dataProvider){
 		if ([category.key isEqualToString:NONE]) {
@@ -206,6 +218,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 		_selectedPOICategories[category.name]=category;
 		
+		
+		
 		NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
 										 [[CycleStreets sharedInstance] APIKey], @"key",
 										 category.key,@"type",
@@ -221,6 +235,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 		request.parameters=parameters;
 		request.source=DataSourceRequestCacheTypeUseNetwork;
 		
+		_activeOperations[category.name]=request;
+		
 		__weak __typeof(&*self)weakSelf = self;
 		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
 			
@@ -232,9 +248,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 		
 	}else{
 			
-			[_categoryDataProvider removeAllObjects];
+		[_categoryDataProvider removeAllObjects];
 			
-			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
 			
 	}
 	
@@ -244,6 +260,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 -(void)POICategoryMapPointsResponse:(BUNetworkOperation*)response forCategory:(POICategoryVO*)category{
 	
 	[[HudManager sharedInstance] removeHUD];
+	
+	[_activeOperations removeObjectForKey:category.name];
 	
 	switch (response.responseStatus) {
 			

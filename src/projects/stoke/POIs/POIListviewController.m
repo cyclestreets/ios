@@ -175,14 +175,12 @@ static NSString *const DATAID = @"PoiListing";
 		case POIListViewMode_Leisure:
 		{
 			_headerLabel.text=@"Select the Points of interest to plan this route via.";
-            _doneButton.visible=YES;
 		}
 		break;
 			
 		case POIListViewMode_Map:
 		{
 			_headerLabel.text=@"Select the Points of interest you'd like to use for adding locations.";
-            _doneButton.visible=NO;
 		}
 		break;
 	}
