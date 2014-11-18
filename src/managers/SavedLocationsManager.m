@@ -68,25 +68,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedLocationsManager);
 		self.dataProvider=[NSMutableArray array];
 		
 		
-		
-		// dev only
-		for(int i=0;i<6;i++){
-			
-			SavedLocationVO *vo=[[SavedLocationVO alloc] init];
-			
-			if (i==0) {
-				vo.locationType=SavedLocationTypeHome;
-			}
-			
-			[vo setCoordinate:CLLocationCoordinate2DMake(52.0, 0.1)];
-			
-			vo.title=[NSString stringWithFormat:@"Title %i",i];
-			[_dataProvider addObject:vo];
-			
-		}
-		
-		
-		
 		[self saveDataFile];
 		
 	}

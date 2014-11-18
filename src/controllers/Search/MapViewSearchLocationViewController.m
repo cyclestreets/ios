@@ -129,7 +129,6 @@
 {
 	[super viewDidLoad];
 	
-	self.UIType=UITYPE_MODALTABLEVIEWUI;
 	self.frame=_tableView.frame;
 	
 	[self createPersistentUI];

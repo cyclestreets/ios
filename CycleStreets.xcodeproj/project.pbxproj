@@ -457,6 +457,15 @@
 		2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */; };
 		2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */; };
 		286C71CB134F8F05007B57E6 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
+		286FAE751A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE741A19087E00AA2510 /* Icon_nosavedlocations@2x.png */; };
+		286FAE761A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE741A19087E00AA2510 /* Icon_nosavedlocations@2x.png */; };
+		286FAE771A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE741A19087E00AA2510 /* Icon_nosavedlocations@2x.png */; };
+		286FAE791A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE781A190FC400AA2510 /* CSIcon_saveloc_other@2x.png */; };
+		286FAE7A1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE781A190FC400AA2510 /* CSIcon_saveloc_other@2x.png */; };
+		286FAE7B1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE781A190FC400AA2510 /* CSIcon_saveloc_other@2x.png */; };
+		286FAE7D1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE7C1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png */; };
+		286FAE7E1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE7C1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png */; };
+		286FAE7F1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE7C1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png */; };
 		286FD3031A02558100EB8C20 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD3419EEBA21008A3F21 /* POICatLocationCellView.m */; };
 		286FD3041A02558200EB8C20 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD3419EEBA21008A3F21 /* POICatLocationCellView.m */; };
 		286FD3051A02558400EB8C20 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD3619EEBA21008A3F21 /* POITypeCellView.m */; };
@@ -1367,6 +1376,9 @@
 		2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIActivityTwitter@2x.png"; sourceTree = "<group>"; };
 		286C71C9134F8F05007B57E6 /* LoginVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LoginVO.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		286C71CA134F8F05007B57E6 /* LoginVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVO.m; sourceTree = "<group>"; };
+		286FAE741A19087E00AA2510 /* Icon_nosavedlocations@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_nosavedlocations@2x.png"; sourceTree = "<group>"; };
+		286FAE781A190FC400AA2510 /* CSIcon_saveloc_other@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_saveloc_other@2x.png"; sourceTree = "<group>"; };
+		286FAE7C1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSTabBar_savedlocations@2x.png"; sourceTree = "<group>"; };
 		28718BB017858BE600781A6B /* UIButtonBarRefresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarRefresh@2x.png"; sourceTree = "<group>"; };
 		28718BB117858BE600781A6B /* UIButtonBarStop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarStop@2x.png"; sourceTree = "<group>"; };
 		28719D90136FE2AD00F69A1B /* LocationSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LocationSearchManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -2864,6 +2876,7 @@
 				28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */,
 				281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */,
 				289EFC7019EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png */,
+				286FAE781A190FC400AA2510 /* CSIcon_saveloc_other@2x.png */,
 				289EFC7119EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png */,
 				289EFC5219ED4F770081E7BB /* SavedLocation_CellIcon_Home.png */,
 				28837D9D1965801000B58F7B /* CSBarButton_gpsactive@2x.png */,
@@ -2877,6 +2890,7 @@
 				28B76F4515E4DB48006B01D0 /* CSBarButton_routePlan@2x.png */,
 				28B76F2E15E4D7E9006B01D0 /* Icon_nofavroutes@2x.png */,
 				28B76F2F15E4D7E9006B01D0 /* Icon_norecentroutes@2x.png */,
+				286FAE741A19087E00AA2510 /* Icon_nosavedlocations@2x.png */,
 				2865C24819D56CE5001C329B /* Icon_nosearchresults@2x.png */,
 				28D10EB0135D6E54006F1D94 /* Directional Arrows */,
 				28D10EB6135D6E54006F1D94 /* Photomap */,
@@ -3018,6 +3032,7 @@
 		28D10EB8135D6E54006F1D94 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				286FAE7C1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png */,
 				28D10EB9135D6E54006F1D94 /* CSTabBar_account@2x.png */,
 				28D10EBA135D6E54006F1D94 /* CSTabBar_add_photo@2x.png */,
 				28D10EBB135D6E54006F1D94 /* CSTabBar_credits@2x.png */,
@@ -3338,6 +3353,7 @@
 				28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */,
 				289478AC18AD31410066AA2E /* MainStoryboard.storyboard in Resources */,
 				28D10EC4135D6E54006F1D94 /* UIIcon_turn_left@2x.png in Resources */,
+				286FAE791A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
 				28D10EC5135D6E54006F1D94 /* UIIcon_turn_right@2x.png in Resources */,
 				28ECBE0519CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */,
 				28D10EC6135D6E54006F1D94 /* UIIcon_photomap@2x.png in Resources */,
@@ -3391,6 +3407,7 @@
 				28187AA014FCFF4C00A38A17 /* CSIcon_MapArrow_start.png in Resources */,
 				28187AA114FCFF4C00A38A17 /* blueButton.png in Resources */,
 				28187AA214FCFF4C00A38A17 /* BUSegmentedControl_center_hi.png in Resources */,
+				286FAE751A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
 				28187AA314FCFF4C00A38A17 /* BUSegmentedControl_center_lo.png in Resources */,
 				28187AA414FCFF4C00A38A17 /* BUSegmentedControl_left_hi.png in Resources */,
 				28187AA514FCFF4C00A38A17 /* BUSegmentedControl_left_lo.png in Resources */,
@@ -3465,6 +3482,7 @@
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
 				28BC6AA018AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
 				28B76F3E15E4DA02006B01D0 /* CSBarButton_location.png in Resources */,
+				286FAE7D1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */,
 				28B76F4015E4DA02006B01D0 /* CSBarButton_search.png in Resources */,
 				28B76F4315E4DB3B006B01D0 /* CSBarButton_search@2x.png in Resources */,
 				28B76F4615E4DB48006B01D0 /* CSBarButton_routePlan@2x.png in Resources */,
@@ -3533,6 +3551,7 @@
 				28A9999619E71FBC0050C3E8 /* default.css in Resources */,
 				2834361715DD5DC300B00FD5 /* UIButton_red_hi@2x.png in Resources */,
 				2834361815DD5DC300B00FD5 /* UIButton_red_lo@2x.png in Resources */,
+				286FAE761A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
 				2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				2834361A15DD5DC300B00FD5 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				2865C24A19D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */,
@@ -3564,6 +3583,7 @@
 				2834363015DD5DC300B00FD5 /* CSTabBar_settings@2x.png in Resources */,
 				2834363115DD5DC300B00FD5 /* FavouritesCell.xib in Resources */,
 				2834363215DD5DC300B00FD5 /* ItineraryCell.xib in Resources */,
+				286FAE7A1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
 				2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */,
 				2834363415DD5DC300B00FD5 /* CreditsView.xib in Resources */,
 				2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */,
@@ -3605,6 +3625,7 @@
 				2834366915DD5DC300B00FD5 /* BUSegmentedControl_right_hi.png in Resources */,
 				2834366A15DD5DC300B00FD5 /* BUSegmentedControl_right_lo.png in Resources */,
 				2834366B15DD5DC300B00FD5 /* UIIcon_cycle_lanes.png in Resources */,
+				286FAE7E1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */,
 				2834366C15DD5DC300B00FD5 /* UIIcon_cycle_tracks.png in Resources */,
 				2834366D15DD5DC300B00FD5 /* UIIcon_footpaths.png in Resources */,
 				2834366E15DD5DC300B00FD5 /* UIIcon_minor_roads.png in Resources */,
@@ -3779,6 +3800,7 @@
 				28FA8A7219E454E80040EA46 /* CSRouteDetailsViewController.xib in Resources */,
 				28FA8A7319E454E80040EA46 /* RouteSegmentView.xib in Resources */,
 				28FA8A7519E454E80040EA46 /* RouteListView.xib in Resources */,
+				286FAE771A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
 				28FA8A7719E454E80040EA46 /* RoutesView.xib in Resources */,
 				28E1468219F2B25E00242F2F /* PhotoMapVideoLocationView.xib in Resources */,
 				289EFC7419EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png in Resources */,
@@ -3872,6 +3894,7 @@
 				28FA8AC519E454E80040EA46 /* UIButtonBarRefresh.png in Resources */,
 				28FA8AC619E454E80040EA46 /* UIButtonBarStop.png in Resources */,
 				28FA8AC719E454E80040EA46 /* CSIcon_finish_wisp.png in Resources */,
+				286FAE7F1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */,
 				28FA8AC819E454E80040EA46 /* CSIcon_start_wisp.png in Resources */,
 				28FA8AC919E454E80040EA46 /* RoutePlanMenuView.xib in Resources */,
 				28FA8ACA19E454E80040EA46 /* UITextViewAccessoryView.xib in Resources */,
@@ -3928,6 +3951,7 @@
 				28FA8AF719E454E80040EA46 /* UIActivityFacebook@2x.png in Resources */,
 				28FA8AF819E454E80040EA46 /* UIActivityMail@2x.png in Resources */,
 				28FA8AF919E454E80040EA46 /* UIActivitySMS@2x.png in Resources */,
+				286FAE7B1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
 				28FA8AFA19E454E80040EA46 /* UIActivityTwitter@2x.png in Resources */,
 				28FA8AFB19E454E80040EA46 /* UIIcon_walking.png in Resources */,
 				289EFC5319ED4F770081E7BB /* SavedLocation_CellIcon_Home.png in Resources */,

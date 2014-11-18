@@ -85,6 +85,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
 
 @property (weak, nonatomic) IBOutlet UIView                          *addPointView;
+@property (nonatomic,weak) IBOutlet UIButton						*viewWaypointsButton;
 
 
 
@@ -471,34 +472,33 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			
 		case ApplicationBuildTarget_CNS:
 		{
+			_viewWaypointsButton.enabled=[self shouldShowWayPointUI];
+			
 			switch (_uiState) {
 					
 				case MapPlanningStateNoRoute:
-					return @[_locationButton, _leftFlex, _rightFlex, _addPointButton];
+					return @[_locationButton,_searchButton, _leftFlex, _rightFlex, _addPointButton];
 					break;
 					
 				case MapPlanningStateLocating:
-					if([self shouldShowWayPointUI]==YES){
-						return @[_waypointButton,_locationButton, _leftFlex, _rightFlex,_addPointButton];
-					}else{
-						return @[_locationButton, _leftFlex, _rightFlex,_addPointButton];
-					}
+					return @[_locationButton,_searchButton, _leftFlex, _rightFlex,_addPointButton];
+					
 					break;
 					
 				case MapPlanningStateStartPlanning:
-					return @[_locationButton,_leftFlex,_rightFlex,_addPointButton];
+					return @[_locationButton,_searchButton,_leftFlex,_rightFlex,_addPointButton];
 					break;
 					
 				case MapPlanningStatePlanning:
-					return @[_waypointButton, _locationButton,_leftFlex,_routeButton,_addPointButton];
+					return @[ _locationButton,_searchButton,_leftFlex,_routeButton,_addPointButton];
 					break;
 					
 				case MapPlanningStateRoute:
-					return @[_locationButton,_leftFlex, _changePlanButton,_routeButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
 					break;
 					
 				case MapPlanningStateRouteLocating:
-					return @[_locationButton,_leftFlex, _changePlanButton,_routeButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
 				break;
 			}
 		}
@@ -529,6 +529,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	self.uiState = state;
 	
 	NSArray *items=nil;
+	
 	
 	switch (_uiState) {
 			
@@ -1841,6 +1842,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 -(void)didSelectSaveLocation:(SavedLocationVO *)savedlocation{
 	
 	[self addWayPointAtCoordinate:savedlocation.coordinate];
+	
+	[_mapView setCenterCoordinate:savedlocation.coordinate zoomLevel:_mapView.getZoomLevel animated:YES];
 	
 }
 

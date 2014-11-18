@@ -12,5 +12,7 @@
 
 
 + (UIColor *)appTintColor;
++ (UIColor *)appSubTintColor;
++ (UIColor *)tableBackgroundColor;
 
 @end

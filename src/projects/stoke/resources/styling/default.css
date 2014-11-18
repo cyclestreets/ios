@@ -39,6 +39,15 @@ tab-bar{
 	
 }
 
+table-view{
+	background-color: tableBackgroundColor;
+}
+
+table-view-cell {
+	background-color: tableBackgroundColor;
+	
+}
+
 map-view{
 	-ios-tint-color:appTintColor;
 }
@@ -71,14 +80,16 @@ tab-bar{
 
 .GreenView{
 
-background-color: #429CB2;
+background-color: appTintColor;
 
 }
 
 #genericView{
 	background-color: appTintColor;
 }
-
+#genericSubView{
+	background-color: appSubTintColor;
+}
 
 
 /* UI buttons */
@@ -89,7 +100,7 @@ background-color: #429CB2;
 }
 
 #GreenButton{
-    background-color: #429CB2;
+    background-color: #e7425f;
 }
 
 #RedButton{

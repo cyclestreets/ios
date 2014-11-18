@@ -13,6 +13,10 @@ NSString *const API_IDENTIFIER=@"cyclenorthstaffs";
 NSString *const APPLICATIONNAME=@"Cycle North Staffs";
 NSString *const CYCLENORTHSTAFFS=@"cyclenorthstaffs";
 
+BOOL const APIREQUIRESIDENTIFIER=YES;
+
+
+
 @implementation BuildTargetConstants
 
 
@@ -24,6 +28,12 @@ NSString *const CYCLENORTHSTAFFS=@"cyclenorthstaffs";
 
 +(ApplicationBuildTarget)buildTarget{
 	return ApplicationBuildTarget_CNS;
+}
+
++(void)insertAPIIdentifier:(NSMutableDictionary*)parameters{
+	
+	[parameters setObject:API_IDENTIFIER forKey:@"username"];
+	
 }
 
 @end

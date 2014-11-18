@@ -376,7 +376,8 @@
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else if ([UIType isEqualToString:UITYPE_MODALTABLEVIEWUI]) {
 			
-			CGRect targetRect=self.frame;
+			UITableView *targetTable=[self valueForKey:@"tableView"];
+			CGRect targetRect=targetTable.frame;
 			contentContainer=[[LayoutBox alloc] initWithFrame:targetRect];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else {
