@@ -288,9 +288,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	if(_allowsUserTrackingUI){
 		
 		_programmaticChange=YES;
-		[_mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
-//		_mapView.camera.altitude=50;
-//		_mapView.camera.pitch=50;
+		[_mapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
 		
 	}else{
 		

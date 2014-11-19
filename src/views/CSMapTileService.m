@@ -26,11 +26,9 @@
 		if(![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			
-			//CSMapSource *newoverlay = [[CSMapSource alloc] initWithURLTemplate:mapSource.tileTemplate];
-			mapSource.canReplaceMapContent = YES;
 			mapSource.maximumZ=mapSource.maxZoom;
 			[mapView insertOverlay:mapSource atIndex:0 level:MKOverlayLevelAboveLabels];
-			
+			mapSource.canReplaceMapContent = YES;
 			
 		}else{
 			
@@ -71,7 +69,6 @@
 					
 				}else{
 					
-					//MKTileOverlay *newoverlay = [[MKTileOverlay alloc] initWithURLTemplate:mapSource.tileTemplate];
 					mapSource.canReplaceMapContent = YES;
 					mapSource.maximumZ=mapSource.maxZoom;
 					[mapView removeOverlay:overlay];
