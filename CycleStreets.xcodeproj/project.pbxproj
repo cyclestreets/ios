@@ -373,6 +373,15 @@
 		28373E2716481AFB00F5E356 /* WayPointCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2516481AFB00F5E356 /* WayPointCellView.m */; };
 		28373E2A16481BF800F5E356 /* WayPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2916481BF800F5E356 /* WayPointVO.m */; };
 		28373E2B16481BF800F5E356 /* WayPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2916481BF800F5E356 /* WayPointVO.m */; };
+		2837815D1A24751A00D046A5 /* LeisureListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2837815C1A24751A00D046A5 /* LeisureListViewController.m */; };
+		2837815F1A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */; };
+		283781601A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */; };
+		283781611A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */; };
+		283781621A247C7800D046A5 /* LeisureListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2837815C1A24751A00D046A5 /* LeisureListViewController.m */; };
+		283781631A247C7900D046A5 /* LeisureListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2837815C1A24751A00D046A5 /* LeisureListViewController.m */; };
+		283781651A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */; };
+		283781661A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */; };
+		283781671A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */; };
 		283C5FCC18B915C300E97BDF /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8318AE427B00EF0436 /* PhotoWizardViewController.m */; };
 		283C5FCD18B91B4500E97BDF /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8118AE427B00EF0436 /* PhotoWizardLocationViewController.m */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
@@ -1312,6 +1321,10 @@
 		28373E2516481AFB00F5E356 /* WayPointCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayPointCellView.m; sourceTree = "<group>"; };
 		28373E2816481BF800F5E356 /* WayPointVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayPointVO.h; sourceTree = "<group>"; };
 		28373E2916481BF800F5E356 /* WayPointVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayPointVO.m; sourceTree = "<group>"; };
+		2837815B1A24751A00D046A5 /* LeisureListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeisureListViewController.h; path = src/controllers/LeisureListViewController.h; sourceTree = "<group>"; };
+		2837815C1A24751A00D046A5 /* LeisureListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeisureListViewController.m; path = src/controllers/LeisureListViewController.m; sourceTree = "<group>"; };
+		2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_leisure@2x.png"; sourceTree = "<group>"; };
+		283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_noleisureroutes@2x.png"; sourceTree = "<group>"; };
 		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
 		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
 		28443E611332867D00FAD008 /* RouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteVO.h; sourceTree = "<group>"; };
@@ -2231,6 +2244,8 @@
 				289A20F319F04ECF000892A0 /* SaveLocationCreateViewController.m */,
 				28641D4D19FD65C8009321E0 /* LeisureViewController.h */,
 				28641D4E19FD65C8009321E0 /* LeisureViewController.m */,
+				2837815B1A24751A00D046A5 /* LeisureListViewController.h */,
+				2837815C1A24751A00D046A5 /* LeisureListViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -2871,6 +2886,7 @@
 		28AD6532131FC239008527FC /* x2 */ = {
 			isa = PBXGroup;
 			children = (
+				2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */,
 				28892F6619FFA962000CC52C /* CSBarButton_addPoint@2x.png */,
 				289A20F019EFC867000892A0 /* CSIcon_map_poi@2x.png */,
 				28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */,
@@ -2892,6 +2908,7 @@
 				28B76F2F15E4D7E9006B01D0 /* Icon_norecentroutes@2x.png */,
 				286FAE741A19087E00AA2510 /* Icon_nosavedlocations@2x.png */,
 				2865C24819D56CE5001C329B /* Icon_nosearchresults@2x.png */,
+				283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */,
 				28D10EB0135D6E54006F1D94 /* Directional Arrows */,
 				28D10EB6135D6E54006F1D94 /* Photomap */,
 				28D10EB8135D6E54006F1D94 /* TabBar */,
@@ -3317,6 +3334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2837815F1A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
 				E77D8F11120321E4003E6B8D /* credits.html in Resources */,
 				E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
@@ -3404,6 +3422,7 @@
 				2818C7A01458069E0077F529 /* RouteCell.xib in Resources */,
 				28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */,
 				28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */,
+				283781651A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
 				28187AA014FCFF4C00A38A17 /* CSIcon_MapArrow_start.png in Resources */,
 				28187AA114FCFF4C00A38A17 /* blueButton.png in Resources */,
 				28187AA214FCFF4C00A38A17 /* BUSegmentedControl_center_hi.png in Resources */,
@@ -3650,6 +3669,7 @@
 				2834368515DD5DC300B00FD5 /* CSTabBar_itinerary.png in Resources */,
 				2834368615DD5DC300B00FD5 /* CSTabBar_photomap_tb.png in Resources */,
 				2834368715DD5DC300B00FD5 /* CSTabBar_plan_route.png in Resources */,
+				283781661A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
 				2834368815DD5DC300B00FD5 /* CSTabBar_settings.png in Resources */,
 				2834368A15DD5DC300B00FD5 /* UIButton_green_hi.png in Resources */,
 				2834368B15DD5DC300B00FD5 /* UIButton_green_lo.png in Resources */,
@@ -3732,6 +3752,7 @@
 				2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */,
 				28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
+				283781601A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3827,6 +3848,7 @@
 				28FA8A8B19E454E80040EA46 /* services_live.plist in Resources */,
 				28FA8BB319E455EF0040EA46 /* StokeStoryboard.storyboard in Resources */,
 				28FA8A8F19E454E80040EA46 /* RouteCell.xib in Resources */,
+				283781671A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
 				28FA8A9019E454E80040EA46 /* Alert200x200.png in Resources */,
 				28FA8A9119E454E80040EA46 /* CSIcon_MapArrow_end.png in Resources */,
 				28FA8A9219E454E80040EA46 /* CSIcon_MapArrow_start.png in Resources */,
@@ -3889,6 +3911,7 @@
 				28FA8AC119E454E80040EA46 /* UIButtonBarArrowRight.png in Resources */,
 				28B0AD3119EEBA18008A3F21 /* POICatLocationCell.xib in Resources */,
 				28FA8AC219E454E80040EA46 /* UIButtonBarCameraSmall.png in Resources */,
+				283781611A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
 				28FA8AC319E454E80040EA46 /* PhotoWizardView.xib in Resources */,
 				28FA8AC419E454E80040EA46 /* UIButtonBarInfo.png in Resources */,
 				28FA8AC519E454E80040EA46 /* UIButtonBarRefresh.png in Resources */,
@@ -4075,6 +4098,7 @@
 			files = (
 				28727ADE18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */,
 				28AD60BC131FB54A008527FC /* AppDelegate.m in Sources */,
+				2837815D1A24751A00D046A5 /* LeisureListViewController.m in Sources */,
 				28AD60BF131FB54A008527FC /* main.m in Sources */,
 				2803DC6919E854E900841F29 /* SettingsViewController.m in Sources */,
 				28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */,
@@ -4233,6 +4257,7 @@
 			files = (
 				283436C515DD5DC300B00FD5 /* AppDelegate.m in Sources */,
 				283436C615DD5DC300B00FD5 /* main.m in Sources */,
+				283781621A247C7800D046A5 /* LeisureListViewController.m in Sources */,
 				283436C815DD5DC300B00FD5 /* SuperViewController.m in Sources */,
 				2803DC6A19E854EA00841F29 /* SettingsViewController.m in Sources */,
 				284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */,
@@ -4489,6 +4514,7 @@
 				28FA8B5D19E454E80040EA46 /* ImageCache.m in Sources */,
 				28FA8B5E19E454E80040EA46 /* MBProgressHUD.m in Sources */,
 				28FA8B5F19E454E80040EA46 /* MKMapView+Additions.m in Sources */,
+				283781631A247C7900D046A5 /* LeisureListViewController.m in Sources */,
 				2853212B19E7F2E500118E48 /* BUTouchView.m in Sources */,
 				2853210519E7DA4D00118E48 /* MapStyleCellView.m in Sources */,
 				28FA8B6019E454E80040EA46 /* CSWaypointAnnotationView.m in Sources */,

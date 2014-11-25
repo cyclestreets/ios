@@ -15,6 +15,7 @@
 #import "DeviceUtilities.h"
 #import "BUNetworkOperation.h"
 #import "AppConstants.h"
+#import "BuildTargetConstants.h"
 
 @interface POIManager()
 
@@ -107,7 +108,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key",
 									 isRetina==YES ? @(64): @(32),@"icons",
-									 @"stoke",@"iconset",
+									 API_IDENTIFIER,@"iconset",
 									 nil];
 	
 	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];

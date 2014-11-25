@@ -57,6 +57,7 @@
 #import "SavedLocationsManager.h"
 #import "SaveLocationCreateViewController.h"
 #import "LeisureViewController.h"
+#import "LeisureListViewController.h"
 
 #import "POIListviewController.h"
 #import "POIManager.h"
@@ -1740,7 +1741,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(IBAction)didSelectLeisureRouteButton:(id)sender{
 	
-	[self performSegueWithIdentifier:@"LeisureViewSegue" sender:self];
+	[self performSegueWithIdentifier:@"LeisureListViewSegue" sender:self];
 	
 	[self hideAddPointView];
 }
@@ -1768,7 +1769,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)hideAddPointView{
 	
-	if(_addPointView.y>20)
+	if(_addPointView.height>20)
 		[UIView animateWithDuration:0.3 animations:^{
 			_addPointView.height=20;
 		}];
@@ -1827,6 +1828,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 		LeisureViewController *controller=(LeisureViewController*)segue.destinationViewController;
 		controller.waypointArray=_waypointArray;
+		
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}else if ([segue.identifier isEqualToString:@"LeisureListViewSegue"]){
+		
+		LeisureListViewController *controller=(LeisureListViewController*)segue.destinationViewController;
 		
 		controller.transitioningDelegate = self;
 		controller.modalPresentationStyle = UIModalPresentationCustom;

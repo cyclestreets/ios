@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -292,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s0y-66-YT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3418" y="133"/>
+            <point key="canvasLocation" x="-3167" y="684"/>
         </scene>
         <!--Saved Locations View Controller-->
         <scene sceneID="4Nj-rb-ine">
@@ -399,8 +399,17 @@
                                             <action selector="didSelectPOIButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="EXP-sZ-hwA"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tUe-x7-KK1" userLabel="leisure">
+                                        <rect key="frame" x="93" y="-2" width="53" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="CSBarButton_leisure.png"/>
+                                        <connections>
+                                            <action selector="didSelectLeisureRouteButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="rSh-7V-bqG"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2b-hp-s4z" userLabel="saveloc">
-                                        <rect key="frame" x="132" y="-4" width="56" height="30"/>
+                                        <rect key="frame" x="184" y="-4" width="56" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_saveloc.png"/>
@@ -442,7 +451,7 @@
                                 <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100" y="484" width="210.000000432653" height="25"/>
+                                <rect key="frame" x="100.00000056792284" y="484" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -479,7 +488,7 @@
                         <segue destination="gdo-qn-vyO" kind="modal" identifier="SavedLocationsSegue" id="BI0-gH-t0g"/>
                         <segue destination="mV7-Ai-JUC" kind="modal" identifier="POIListViewSegue" id="QJ2-7V-cQ8"/>
                         <segue destination="QWx-CJ-dLg" kind="modal" identifier="WaypointViewSegue" id="a6i-Ca-Yvv"/>
-                        <segue destination="6SS-Xp-tb0" kind="modal" identifier="LeisureViewSegue" id="DXx-75-MYJ"/>
+                        <segue destination="lZo-Zl-D2a" kind="modal" identifier="LeisureListViewSegue" id="8IU-Gf-Gik"/>
                     </connections>
                 </viewController>
                 <view opaque="NO" contentMode="scaleToFill" id="pIs-Lq-mvo">
@@ -670,6 +679,68 @@ Drag a waypoint to re-order it.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jdu-Rm-abU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3758" y="128"/>
+        </scene>
+        <!--Leisure List View Controller-->
+        <scene sceneID="jUd-qy-9l2">
+            <objects>
+                <viewController storyboardIdentifier="LeisureListViewController" id="lZo-Zl-D2a" customClass="LeisureListViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5NR-eK-S48">
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="340"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="mCD-c3-cCg">
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leisure routes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P0S-97-8NV">
+                                        <rect key="frame" x="8" y="10" width="264" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sof-3L-QgC">
+                                        <rect key="frame" x="226" y="13" width="46" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didSelectCancelButton:" destination="lZo-Zl-D2a" eventType="touchUpInside" id="sW2-8Y-hOM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jg-uh-hV9">
+                                <rect key="frame" x="0.0" y="42" width="280" height="298"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
+                                <color key="separatorColor" red="0.88627457620000005" green="0.87843143940000001" blue="0.86274516580000005" alpha="1" colorSpace="deviceRGB"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="lZo-Zl-D2a" id="KoO-jw-a4n"/>
+                                    <outlet property="delegate" destination="lZo-Zl-D2a" id="znp-iU-MGE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="280" height="340"/>
+                    <connections>
+                        <outlet property="tableView" destination="2jg-uh-hV9" id="wsr-jD-Ix1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5kk-tA-9jY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3408" y="128"/>
         </scene>
         <!--Itinerary-->
         <scene sceneID="C4I-MO-Ahx">
@@ -905,10 +976,10 @@ Drag a waypoint to re-order it.</string>
             </objects>
             <point key="canvasLocation" x="-303" y="136"/>
         </scene>
-        <!--Report-->
+        <!--Photos-->
         <scene sceneID="dSl-gL-Xxc">
             <objects>
-                <navigationController title="Report" definesPresentationContext="YES" navigationBarHidden="YES" id="0ny-e6-BF2" sceneMemberID="viewController">
+                <navigationController title="Photos" definesPresentationContext="YES" navigationBarHidden="YES" id="0ny-e6-BF2" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Photos" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z42-mk-NG8">
@@ -1068,6 +1139,7 @@ Drag a waypoint to re-order it.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="CSBarButton_leisure.png" width="20" height="20"/>
         <image name="CSBarButton_poi.png" width="20" height="20"/>
         <image name="CSBarButton_saveloc.png" width="17" height="20"/>
         <image name="CSTabBar_credits.png" width="30" height="30"/>
@@ -1086,6 +1158,6 @@ Drag a waypoint to re-order it.</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="QJ2-7V-cQ8"/>
+        <segue reference="C9o-3z-6WA"/>
     </inferredMetricsTieBreakers>
 </document>
