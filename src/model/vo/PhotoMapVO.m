@@ -26,16 +26,51 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoMapVO.h"
 #import "GlobalUtilities.h"
 
-@implementation PhotoMapVO
-
 static int MIN_SIZE = 80;
 static int BIG_SIZE = 300;
 
-@synthesize locationCoords;
-@synthesize csid;
-@synthesize caption;
-@synthesize bigImageURL;
-@synthesize smallImageURL;
+
+@interface PhotoMapVO()
+
+@property(nonatomic,readwrite)  BOOL					hasVideo;
+@property(nonatomic,readwrite)  BOOL					hasPhoto;
+
+
+@end
+
+
+
+@implementation PhotoMapVO
+
+
+
+-(void)updateWithAPIDict:(NSDictionary*)dict{
+	
+	NSDictionary *propertiesDict=dict[@"properties"];
+	if(propertiesDict!=nil){
+		
+		_csid=propertiesDict[@"id"];
+		_bigImageURL=propertiesDict[@"thumbnailUrl"];
+		_caption=propertiesDict[@"caption"];
+		
+		_hasPhoto=[propertiesDict[@"hasPhoto"] boolValue];
+		_hasVideo=[propertiesDict[@"hasVideo"] boolValue];
+		
+		if(_hasVideo)
+			_mediaType=PhotoMapMediaType_Video;
+		
+	}
+	
+	NSDictionary *geomDict=dict[@"geometry"];
+	if(geomDict!=nil){
+		
+		_locationCoords=CLLocationCoordinate2DMake([geomDict[@"coordinates"][1] doubleValue],[geomDict[@"coordinates"][0] doubleValue]);
+		
+	}
+	
+	//[self generateSmallImageURL:_]
+	
+}
 
 
 // Optimize small URL for smallest thumbnail available which is big enough.
@@ -70,10 +105,10 @@ static int BIG_SIZE = 300;
 
 - (id)initWithDictionary:(NSDictionary *)fields {
 	if (self = [super init]) {
-		locationCoords.latitude = [[fields objectForKey:@"cs:latitude"] doubleValue];
-		locationCoords.longitude = [[fields objectForKey:@"cs:longitude"] doubleValue];
-		csid = [[fields objectForKey:@"cs:id"] copy];
-		caption = [[fields objectForKey:@"cs:caption"] copy];
+		_locationCoords.latitude = [[fields objectForKey:@"cs:latitude"] doubleValue];
+		_locationCoords.longitude = [[fields objectForKey:@"cs:longitude"] doubleValue];
+		_csid = [[fields objectForKey:@"cs:id"] copy];
+		_caption = [[fields objectForKey:@"cs:caption"] copy];
 		self.bigImageURL = [fields objectForKey:@"cs:thumbnailUrl"];
 		[self generateSmallImageURL:[fields objectForKey:@"cs:thumbnailSizes"]];
 	}
@@ -81,7 +116,7 @@ static int BIG_SIZE = 300;
 }
 
 - (CLLocationCoordinate2D)location {
-	return locationCoords;
+	return _locationCoords;
 }
 
 

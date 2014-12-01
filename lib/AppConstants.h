@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import <CoreLocation/CoreLocation.h>
+
+@class BUNetworkOperation;
 
 #if defined (CONFIGURATION_Debug)
 #define ENABLEDEBUGTRACE 1
@@ -27,6 +28,12 @@ enum  {
 	CSRoutePlanTypeNone=-1
 };
 typedef int CSRoutePlanType;
+
+
+typedef void (^ParserCompletionBlock)(BUNetworkOperation *operation);
+typedef void (^ParserErrorBlock)(BUNetworkOperation *operation, NSError *error);
+
+
 
 
 typedef NS_ENUM(int, BUResponseStatusCode){

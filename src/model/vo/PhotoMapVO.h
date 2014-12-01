@@ -47,7 +47,18 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 @property (nonatomic, strong)	NSString			*videoURL;
 
 
+@property(nonatomic,readonly)  BOOL					hasVideo;
+@property(nonatomic,readonly)  BOOL					hasPhoto;
+
+
+// v2
+-(void)updateWithAPIDict:(NSDictionary*)dict;
+
+
+// deprecate
 - (id)initWithDictionary:(NSDictionary *)fields;
+
+
 
 - (CLLocationCoordinate2D)location;
 

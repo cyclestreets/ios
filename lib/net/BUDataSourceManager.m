@@ -11,7 +11,7 @@
 #import "GlobalUtilities.h"
 #import "StringUtilities.h"
 #import "ApplicationXMLParser.h"
-//#import "ApplicationJSONParser.h"
+#import "ApplicationJSONParser.h"
 #import "GenericConstants.h"
 #import "NSString-Utilities.h"
 #import "BUResponseObject.h"
@@ -360,17 +360,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
             break;
 		case DATATYPE_JSON:
         {
-//            [self initiateModelCacheStoreForType:response.dataid];
-//			
-//			[[ApplicationJSONParser sharedInstance] parseDataForResponse:response success:^(NetResponse *result) {
-//                
-//                [self JSONParseDidCompletewithResponse:result];
-//                
-//            } failure:^(NetResponse *result, NSError *error) {
-//                
-//                [self JSONParserDidFail:result withError:error];
-//                
-//            }];
+            [self initiateModelCacheStoreForType:networkOperation.dataid];
+			
+			[[ApplicationJSONParser sharedInstance] parseDataForOperation:networkOperation success:^(BUNetworkOperation *result) {
+                
+                [self JSONParseDidCompletewithOperation:result];
+                
+            } failure:^(BUNetworkOperation *result, NSError *error) {
+                
+                [self JSONParserDidFail:result withError:error];
+                
+            }];
 
         }
             break;
@@ -430,8 +430,44 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 }
 
+
 #pragma mark - JSON response methods
 
+-(void)JSONParseDidCompletewithOperation:(BUNetworkOperation*)networkOperation{
+	
+	BetterLog(@"");
+	
+	if(networkOperation.requestid!=nil){
+		
+		if(networkOperation.responseObject!=nil)
+			[[_dataProviders objectForKey:networkOperation.dataid] setObject:networkOperation.response forKey:networkOperation.requestid];
+		
+		// this will always overwrite same named objects
+		// so no need to check for duplication request ids
+		// [_activeRequests setObject:networkOperation.requestid forKey:networkOperation.dataid];
+		
+		[self compactRequestsForDataid:networkOperation.dataid andRequest:networkOperation.requestid];
+		
+		if(networkOperation.source==DataSourceRequestCacheTypeUseCache)
+			[self cacheRequestResult:networkOperation];
+		
+		
+		if(networkOperation.completionBlock)
+			networkOperation.completionBlock(networkOperation,YES,nil);
+		
+	}
+	
+}
+
+-(void)JSONParserDidFail:(BUNetworkOperation*)networkOperation withError:(NSError*)error{
+	
+	BetterLog(@"");
+	
+	NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:networkOperation,RESPONSE, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:JSONPARSERDIDFAILPARSING object:networkOperation userInfo:dict];
+	
+	
+}
 
 
 

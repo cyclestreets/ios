@@ -104,7 +104,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
--(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit fordataID:(NSString*)dataid{
+-(void)oldretrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit fordataID:(NSString*)dataid{
 	
 	BetterLog(@"");
 	
@@ -172,6 +172,80 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 
 
 
+-(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit fordataID:(NSString*)dataid{
+	
+	BetterLog(@"");
+	
+	if(_showingHUD==NO){
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"" andMessage:nil andDelay:0 andAllowTouch:NO];
+		_showingHUD=YES;
+	}
+	
+	CLLocationCoordinate2D centre;
+	centre.latitude = (ne.latitude + sw.latitude)/2;
+	centre.longitude = (ne.longitude + sw.longitude)/2;
+	
+	NSArray *boundingArr=@[[NSNumber numberWithFloat:sw.longitude],[NSNumber numberWithFloat:sw.latitude],[NSNumber numberWithFloat:ne.longitude],[NSNumber numberWithFloat:ne.latitude]];
+	NSDictionary *bboxdict=@{@"bbox":[boundingArr componentsJoinedByString:@","]};
+	
+	NSDictionary *apiParams=@{@"key":[CycleStreets sharedInstance].APIKey,
+							  @"zoom":@(13),
+								@"thumbnailsize": @(640),
+								@"limit":@(limit),
+								@"suppressplaceholders":@"1",
+								@"minimaldata":@"1",
+								@"selectedid":[self uploadPhotoId]};
+	
+	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl"];
+	NSDictionary *fieldDict=@{@"fields":[fieldArr componentsJoinedByString:@","]};
+	
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionary];
+	
+	[parameters addEntriesFromDictionary:apiParams];
+	[parameters addEntriesFromDictionary:bboxdict];
+	[parameters addEntriesFromDictionary:fieldDict];
+	
+	
+	if(APIREQUIRESIDENTIFIER){
+		[BuildTargetConstants insertAPIIdentifier:parameters];
+	}
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=dataid;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	if([dataid isEqualToString:RETREIVELOCATIONPHOTOS]){
+		
+		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+			[self retrievePhotosForLocationResponse:operation];
+			
+		};
+		
+		
+	}else{
+		
+		request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+			
+			[self retrievePhotosForRouteResponse:operation];
+			
+		};
+		
+	}
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	
+	NSDictionary *dict=[[NSDictionary alloc] initWithObjectsAndKeys:request,REQUEST,nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:REQUESTDATAREFRESH object:nil userInfo:dict];
+	
+	
+}
+
+
+
 
 
 -(void)retrievePhotosForLocationResponse:(BUNetworkOperation*)response{
@@ -179,11 +253,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	[[HudManager sharedInstance]removeHUD:NO];
 	_showingHUD=NO;
 	
-	    
+	
     switch (response.responseStatus) {
-            
+			
         case ValidationRetrievePhotosSuccess:
-		{	
+		{
 			self.locationPhotoList=response.responseObject;
 			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,@"status", nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVELOCATIONPHOTOSRESPONSE object:dict userInfo:nil];

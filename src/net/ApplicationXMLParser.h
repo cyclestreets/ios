@@ -12,9 +12,6 @@
 
 @class BUNetworkOperation;
 
-typedef void (^ParserCompletionBlock)(BUNetworkOperation *operation);
-typedef void (^ParserErrorBlock)(BUNetworkOperation *operation, NSError *error);
-
 
 @interface ApplicationXMLParser : NSObject {
 	
