@@ -9,6 +9,7 @@
 #import "CSPhotomapAnnotationView.h"
 #import "UIView+Additions.h"
 #import "CSPhotomapAnnotation.h"
+#import "PhotoMapVO.h"
 
 @implementation CSPhotomapAnnotationView
 
@@ -44,7 +45,16 @@
 	if(annotation.isUserPhoto){
 		self.image=[UIImage imageNamed:@"UIIcon_userphotomap.png"];
 	}else{
-		self.image=[UIImage imageNamed:@"UIIcon_photomap.png"];
+		
+		switch (annotation.dataProvider.mediaType) {
+			case PhotoMapMediaType_Image:
+				self.image=[UIImage imageNamed:@"UIIcon_photomap.png"];
+			break;
+			case PhotoMapMediaType_Video:
+				self.image=[UIImage imageNamed:@"UIIcon_videomap.png"];
+			break;
+		
+		}
 	}
 	
 	

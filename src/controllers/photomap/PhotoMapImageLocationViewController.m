@@ -160,7 +160,7 @@
 	
 	_imageLabel.text=[_dataProvider caption];
 	
-	[_imageView loadImageFromString:[_dataProvider smallImageURL]];
+	[_imageView loadImageFromString:[_dataProvider bigImageURL]];
 	
 }
 
