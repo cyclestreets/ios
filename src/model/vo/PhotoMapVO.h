@@ -44,8 +44,6 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 
 @property (nonatomic, assign)	PhotoMapMediaType	mediaType;
 
-@property (nonatomic, strong)	NSString			*videoURL;
-
 
 @property(nonatomic,readonly)  BOOL					hasVideo;
 @property(nonatomic,readonly)  BOOL					hasPhoto;
@@ -65,6 +63,7 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 - (void) generateSmallImageURL:(NSString *)sizes;
 
 -(NSString*)csImageUrlString;
+-(NSString*)csVideoURLString;
 
 
 @end

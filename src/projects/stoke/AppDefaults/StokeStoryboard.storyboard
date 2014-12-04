@@ -451,7 +451,7 @@
                                 <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100.00000072815872" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100.00000089356355" y="484" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -474,9 +474,6 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="allowsUserTrackingUI" value="YES"/>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="addPointView" destination="w7T-3y-25G" id="Hm3-my-Qbu"/>
                         <outlet property="attributionLabel" destination="gMu-jU-Xl7" id="DEt-MS-Ard"/>
@@ -1158,6 +1155,6 @@ Drag a waypoint to re-order it.</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="C9o-3z-6WA"/>
+        <segue reference="QJ2-7V-cQ8"/>
     </inferredMetricsTieBreakers>
 </document>

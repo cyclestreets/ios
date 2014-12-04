@@ -15,13 +15,18 @@
 
 @interface PhotoMapVideoLocationViewController ()
 
+@property (nonatomic, weak) IBOutlet	UINavigationBar							*navigationBar;
 @property (nonatomic,strong) IBOutlet UIView									*videoPlayerTargetView;
 @property (nonatomic, strong) IBOutlet	UIScrollView							*scrollView;
 @property (nonatomic, strong)	LayoutBox										*viewContainer;
 @property (nonatomic, strong)	ExpandedUILabel									*imageLabel;
 
+@property (nonatomic,assign)  BOOL												initialised;
 
-@property (nonatomic,strong)  MPMoviePlayerController					*videoPlayer;
+// mp properties
+@property (nonatomic,assign)  BOOL												fullScreenActive;
+
+@property (nonatomic,strong)  MPMoviePlayerController							*videoPlayer;
 
 @end
 
@@ -55,7 +60,11 @@
 		BetterLog(@"");
 	}
 	
-	if([notification.name isEqualToString:MPMediaPlaybackIsPreparedToPlayDidChangeNotification]){
+	if([notification.name isEqualToString:MPMoviePlayerDidEnterFullscreenNotification]){
+		BetterLog(@"");
+	}
+	
+	if([notification.name isEqualToString:MPMoviePlayerLoadStateDidChangeNotification]){
 		BetterLog(@"");
 	}
 }
@@ -101,7 +110,7 @@
 	[_videoPlayer prepareToPlay];
 	[_videoPlayer.view setFrame: _videoPlayerTargetView.bounds];
 	[_videoPlayerTargetView addSubview: _videoPlayer.view];
-	[_scrollView addSubview:_videoPlayerTargetView];
+	[_viewContainer addSubview:_videoPlayerTargetView];
 	
 	self.imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	_imageLabel.font=[UIFont systemFontOfSize:13];
@@ -121,12 +130,55 @@
 
 -(void)createNonPersistentUI{
 	
-	//TODO: Should not replay this when coming out of FS mode
-	[_videoPlayer setContentURL:[NSURL URLWithString:_dataProvider.videoURL]];
+	if(!_initialised){
+		
+		[self loadContentForEntry:_dataProvider];
+	
+		[_viewContainer refresh];
+		[self updateContentSize];
+		
+		_initialised=YES;
+		
+	}
+	
+}
+
+
+
+//
+/***********************************************
+ * @description			Content Loading
+ ***********************************************/
+//
+
+- (void) loadContentForEntry:(PhotoMapVO *)photoEntry{
+	
+	self.dataProvider=photoEntry;
+	
+	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Video #%@", [_dataProvider csid]];
+	
+	_imageLabel.text=[_dataProvider caption];
+	
+	[_videoPlayer setContentURL:[NSURL URLWithString:_dataProvider.csVideoURLString]];
 	[_videoPlayer play];
 	
 }
 
+
+
+-(void)getMovieLog{
+	
+	BetterLog(@"");
+	
+	MPMovieErrorLog *movielog=_videoPlayer.errorLog;
+	MPMovieAccessLog *accessLog=_videoPlayer.accessLog;
+	
+	if(movielog!=nil)
+		BetterLog(@"movielog=%@",movielog);
+	
+	if(accessLog!=nil)
+		BetterLog(@"accessLog=%@",accessLog);
+}
 
 
 #pragma mark - MPMoviePlayerController methods

@@ -84,6 +84,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
 @property (nonatomic, strong) UIBarButtonItem						* addPointButton;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
+@property (nonatomic, strong) UIBarButtonItem						* followUserButton;
+
 
 @property (weak, nonatomic) IBOutlet UIView                          *addPointView;
 @property (nonatomic,weak) IBOutlet UIButton						*viewWaypointsButton;
@@ -286,15 +288,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[_mapView setDelegate:self];
 	
-	if(_allowsUserTrackingUI){
-		
-		_programmaticChange=YES;
-		[_mapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
-		
-	}else{
-		
-		_mapView.userTrackingMode=MKUserTrackingModeNone;
-	}
+	_mapView.userTrackingMode=MKUserTrackingModeNone;
 	
 	[self didNotificationMapStyleChanged];
 	
@@ -420,6 +414,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_addPointButton.width=40;
 	
 	
+	self.followUserButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_followuser.png"]
+													   style:UIBarButtonItemStylePlain
+													  target:self
+													  action:@selector(toggleUserTracking)];
+	
+	
 	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	
@@ -493,7 +493,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 					break;
 					
 				case MapPlanningStateRoute:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton,_followUserButton];
 					break;
 					
 				case MapPlanningStateRouteLocating:
@@ -787,7 +787,32 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 
 
-#pragma mark Route Display
+
+#pragma mark - Map Tracking mode
+
+
+-(void)toggleUserTracking{
+	
+	_allowsUserTrackingUI=!_allowsUserTrackingUI;
+	
+	if(_allowsUserTrackingUI){
+		
+		[self didSelectLocateUserbutton];
+		[_mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
+		
+	}else{
+		_programmaticChange=NO;
+		[_mapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
+		
+	}
+	
+}
+
+
+
+
+
+#pragma mark - Route Display
 //
 /***********************************************
  * @description			Route loading

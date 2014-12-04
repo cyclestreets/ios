@@ -30,11 +30,14 @@ static int MIN_SIZE = 80;
 static int BIG_SIZE = 300;
 
 
+static NSString *const VIDEOFORMATKEY=@"mp4";
+
 @interface PhotoMapVO()
 
 @property(nonatomic,readwrite)  BOOL					hasVideo;
 @property(nonatomic,readwrite)  BOOL					hasPhoto;
 
+@property(nonatomic,strong) NSDictionary				*videoFormats;
 
 @end
 
@@ -56,8 +59,14 @@ static int BIG_SIZE = 300;
 		_hasPhoto=[propertiesDict[@"hasPhoto"] boolValue];
 		_hasVideo=[propertiesDict[@"hasVideo"] boolValue];
 		
-		if(_hasVideo)
-			_mediaType=PhotoMapMediaType_Video;
+		if(_hasVideo){
+			_videoFormats=propertiesDict[@"videoFormats"];
+			if(_videoFormats[VIDEOFORMATKEY]!=nil){
+				_mediaType=PhotoMapMediaType_Video;
+			}else{
+				_hasVideo=NO;
+			}
+		}
 		
 	}
 	
@@ -68,7 +77,6 @@ static int BIG_SIZE = 300;
 		
 	}
 	
-	//[self generateSmallImageURL:_]
 	
 }
 
@@ -122,6 +130,16 @@ static int BIG_SIZE = 300;
 
 -(NSString*)csImageUrlString{
 	return [NSString stringWithFormat:@"http://cycle.st/p%@",self.csid];
+}
+
+-(NSString*)csVideoURLString{
+	
+	if(_videoFormats[VIDEOFORMATKEY]!=nil){
+		NSDictionary *csViceoDict=_videoFormats[VIDEOFORMATKEY];
+		return csViceoDict[@"url"];
+	}
+	return nil;
+	
 }
 
 

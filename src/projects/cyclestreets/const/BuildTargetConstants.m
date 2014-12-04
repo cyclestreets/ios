@@ -28,6 +28,6 @@ BOOL const APIREQUIRESIDENTIFIER=NO;
 	return ApplicationBuildTarget_CycleStreets;
 }
 
-
++(void)insertAPIIdentifier:(NSMutableDictionary*)requestDict{}
 
 @end
