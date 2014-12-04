@@ -37,7 +37,11 @@
 
 @property(nonatomic,readonly)  NSDictionary         *settingsDict;
 
+
+
 @property (nonatomic, readonly) int		maxZoom;
 @property (nonatomic, readonly) int		minZoom;
+@property (nonatomic, readonly) BOOL	isRetinaEnabled;
+
 
 @end

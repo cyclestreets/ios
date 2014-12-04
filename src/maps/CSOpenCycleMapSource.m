@@ -22,22 +22,32 @@
 	return 1;
 }
 
-- (NSURL *)URLForTilePath:(MKTileOverlayPath)path{
+
+-(BOOL)isRetinaEnabled{
+	return NO;
+}
+
+
+// for use with new retina tiles
+-(NSString*)cacheTileTemplate{
 	
-	//NSString *tileURLString=[NSString stringWithFormat:@"http://tile.cyclestreets.net/mapnik/%li/%li/%li@%ix.png",(long)path.z,(long)path.x, (long)path.y, (int)path.contentScaleFactor];
-	//return [NSURL URLWithString:tileURLString];
-	
-	NSString *tileURLString=[NSString stringWithFormat:@"http://tile.cyclestreets.net/opencyclemap/%li/%li/%li.png",(long)path.z,(long)path.x, (long)path.y];
-	return [NSURL URLWithString:tileURLString];
+	if([self isRetinaEnabled]){
+		return @"http://tile.cyclestreets.net/opencyclemap/%li/%li/%li@%ix.png";
+	}else{
+		return @"http://tile.cyclestreets.net/opencyclemap/%li/%li/%li.png";
+	}
 	
 }
 
-- (NSString *)tileTemplate
-{
-
-	return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+// for use directly with map kit, if - (NSURL *)URLForTilePath:(MKTileOverlayPath)path is implemented this is effectively ignored
+- (NSString *)tileTemplate{
+	
+	if([self isRetinaEnabled]){
+		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}/{s}.png";
+	}else{
+		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+	}
 }
-
 
 
 
