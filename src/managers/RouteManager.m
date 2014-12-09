@@ -515,6 +515,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 
 
+
 #pragma mark - Waypoint requests
 
 
@@ -554,32 +555,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 }
 
 
-
-
-
-
-
-
-/*
-{
-    "type": "FeatureCollection",
-    "features": [
-				 {
-					 "type": "Feature",
-					 "properties": {
-						 "name": "Senate House Hill, NCN 11"
-					 },
-					 "geometry": {
-						 "type": "Point",
-						 "coordinates": [
-										 0.117823,
-										 52.205299
-										 ]
-					 }
-				 }
-				 ]
-}
-*/
 
 -(void)loadMetaDataForWaypoint:(WayPointVO*)waypoint{
 	

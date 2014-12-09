@@ -15,6 +15,8 @@
 
 #import "PhotoMapVO.h"
 #import "PhotoMapListVO.h"
+#import "CSUserRouteVO.h"
+#import "CSUserRouteList.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -39,7 +41,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	{
         
 		self.parserMethods=@{RETREIVELOCATIONPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
-							 RETREIVEROUTEPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)]};
+							 RETREIVEROUTEPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
+							 ROUTESFORUSER:[NSValue valueWithPointer:@selector(RoutesForUserParser)]};
 	}
 	return self;
 }
@@ -53,7 +56,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	SEL parserMethod=[[_parserMethods objectForKey:networkOperation.dataid] pointerValue];
 	
 	 if(parserMethod==nil){
-		 BetterLog(@"[ERROR] ApplicationXMLParser:parseXMLForType: parser for type %@ not found!",_activeOperation.dataid);
+		 BetterLog(@"[ERROR] ApplicationJSONParser:parseXMLForType: parser for type %@ not found!",_activeOperation.dataid);
 		 return;
 	 }
 	
@@ -74,13 +77,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 		
 		if(_activeOperation.operationState==NetResponseStateComplete){
 			
-			BetterLog(@"[DEBUG] Success activeResponse.dataid=%@ activeResponse.requestid=%@",_activeOperation.dataid,_activeOperation.requestid);
+			BetterLog(@"[DEBUG] ApplicationJSONParser: Success activeResponse.dataid=%@ activeResponse.requestid=%@",_activeOperation.dataid,_activeOperation.requestid);
 			
 			success(_activeOperation);
 			
 		}else {
 			
-			BetterLog(@"[ERROR] ApplicationXMLParser:XMLParserDidFail for DataId=%@",_activeOperation.dataid);
+			BetterLog(@"[ERROR] ApplicationJSONParser:JSONParserDidFail for DataId=%@",_activeOperation.dataid);
 			
 			failure(_activeOperation,error);
 		}
@@ -92,7 +95,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 		
 		// parser error
 		
-		BetterLog(@"[ERROR] Neither JSON decoders able to parse response data");
+		BetterLog(@"[ERROR]ApplicationJSONParser: Neither JSON decoders able to parse response data");
 		_activeOperation.operationState=NetResponseStateFailedWithError;
 		_activeOperation.operationError=NetResponseErrorParserFailed;
 		failure(_activeOperation,error);
@@ -167,6 +170,51 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	
 }
 
+
+
+#pragma mark - User routes (v2 api)
+
+-(void)RoutesForUserParser{
+	
+	[self validateJSON];
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		_activeOperation.responseStatus=ValidationUserRoutesFailed;
+		return;
+	}
+	
+	NSDictionary *root=_responseDict;
+	
+	if(root!=nil){
+		
+		CSUserRouteList *list=[[CSUserRouteList alloc]init];
+		list.requestpaginationDict=root[@"pagination"];
+		NSMutableArray	*arr=[[NSMutableArray alloc]init];
+		
+		NSDictionary *journeys=root[@"journeys"];
+		for(NSString *routekey in journeys){
+			
+			NSDictionary *routedict=journeys[routekey];
+			
+			CSUserRouteVO *userroute=[[CSUserRouteVO alloc]initWithDictionary:routedict];
+			
+			[arr addObject:userroute];
+			
+		}
+		
+		list.routes=arr;
+		
+		[_activeOperation setResponseWithValue:list];
+		
+		_activeOperation.responseStatus=VaidationUserRoutesSuccess;
+		_activeOperation.operationState=NetResponseStateComplete;
+		
+	}else{
+		
+		_activeOperation.responseStatus=ValidationUserRoutesFailed;
+		
+	}
+	
+}
 
 
 

@@ -25,6 +25,8 @@
 #import "StringUtilities.h"
 #import "BUNetworkOperation.h"
 #import "BUDataSourceManager.h"
+#import "BuildTargetConstants.h"
+#import "CSUserRouteList.h"
 
 @interface UserAccount()
 
@@ -35,6 +37,9 @@
 @property (nonatomic, assign)	BOOL		isRegistered;
 @property (nonatomic, retain)	NSString	*sessionToken;
 @property (nonatomic, retain)	NSString	*deviceID;
+
+
+@property (nonatomic,strong) CSUserRouteList *userRouteDataProvider;
 
 
 @end
@@ -351,6 +356,117 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	}
 	
 }
+
+
+
+#pragma mark - User route loading by username
+
+-(void)loadRoutesForUser:(BOOL)isPaged cursorId:(NSString*)cursorID{
+	
+	NSMutableDictionary *parameters=[@{@"key":[CycleStreets sharedInstance].APIKey,
+									   @"limit":@(30),
+									   @"datetime":@"sqldatetime",
+									   @"format":@"flat"} mutableCopy];
+	
+	if(isPaged){
+		parameters[@"before"]=cursorID;
+	}
+	
+	if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
+		parameters[@"username"]=API_IDENTIFIER;
+	}else{
+		parameters[@"username"]=_user.username;
+	}
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=ROUTESFORUSER;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self loadRoutesForUserResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining Routes for user" andMessage:nil];
+	
+	
+}
+
+
+-(void)loadRoutesForUserPage{
+	
+	//TODO: if CSUserRouteList has next page
+	// call loadRoutesForUser:(BOOL)isPaged cursorId:(NSString*)cursorID  with pageination bottom value
+	
+	
+}
+
+
+
+-(void)loadRoutesForUserResponse:(BUNetworkOperation*)response{
+	
+	BetterLog(@"");
+	
+	switch(response.responseStatus){
+			
+		case VaidationUserRoutesSuccess:
+		{
+			
+			if(_userRouteDataProvider==nil){
+				self.userRouteDataProvider=response.responseObject;
+			}else{
+				CSUserRouteList *newlist=response.responseObject;
+				self.userRouteDataProvider.requestpaginationDict=newlist.requestpaginationDict;
+				
+				[_userRouteDataProvider.routes addObjectsFromArray:newlist.routes];
+				
+			}
+			
+			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,STATE, nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:ROUTESFORUSERRESPONSE object:nil userInfo:dict];
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Complete" andMessage:nil];
+			
+		}
+		break;
+		
+		case ValidationUserRoutesFailed:
+		{
+			CSUserRouteList *newlist=response.responseObject;
+			if(newlist==nil || newlist.count==0){
+				NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"ROUTESFORUSERRESPONSE" object:nil userInfo:dict];
+			}
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"No results" andMessage:nil];
+			
+		}
+		break;
+			
+		default:
+		break;
+			
+	}
+	
+}
+
+
+-(NSArray*)userRoutes{
+	
+	return _userRouteDataProvider.routes;
+	
+}
+
+
+
+
+
+
 
 
 

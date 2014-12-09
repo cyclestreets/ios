@@ -8,6 +8,11 @@
 
 #import "LeisureListViewController.h"
 
+#import "RouteManager.h"
+#import "UserRouteCellView.h"
+#import "UserAccount.h"
+#import "CSUserRouteVO.h"
+
 @interface LeisureListViewController()<UITableViewDataSource,UITableViewDelegate>
 
 
@@ -28,6 +33,9 @@
 
 -(void)listNotificationInterests{
 	
+	[self initialise];
+	
+	[notifications addObject:ROUTESFORUSERRESPONSE];
 	
 	
 	[super listNotificationInterests];
@@ -36,7 +44,48 @@
 
 -(void)didReceiveNotification:(NSNotification*)notification{
 	
+	[super didReceiveNotification:notification];
+	NSString *name=notification.name;
 	
+	if([name isEqualToString:ROUTESFORUSERRESPONSE]){
+		
+		[self refreshUIFromDataProvider:notification.userInfo];
+		
+	}
+	
+	
+}
+
+
+#pragma mark - Data responses
+
+
+-(void)refreshUIFromDataProvider:(NSDictionary*)result{
+	
+	NSString *state=result[STATE];
+	
+	if([state isEqualToString:SUCCESS]){
+		
+		self.dataProvider=[UserAccount sharedInstance].userRoutes;
+		
+		
+		if(_dataProvider.count==0){
+			
+			[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:@"noresults_ROUTESFORUSER" withIcon:ROUTESFORUSER];
+			
+		}else{
+			
+			[self showViewOverlayForType:kViewOverlayTypeNone show:NO withMessage:nil];
+			
+			[_tableView reloadData];
+			
+		}
+		
+	}else{
+		
+		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:@"noresults_ROUTESFORUSER" withIcon:ROUTESFORUSER];
+		
+	}
 	
 }
 
@@ -51,13 +100,19 @@
 {
 	[super viewDidLoad];
 	
-	self.UIType=UITYPE_MODALTABLEVIEWUI;
+	if(_viewMode==LeisureListViewModeModal)
+		self.UIType=UITYPE_MODALTABLEVIEWUI;
+	
+	self.tableView.rowHeight=[UserRouteCellView rowHeight];
+	[_tableView registerNib:[UserRouteCellView nib] forCellReuseIdentifier:[UserRouteCellView cellIdentifier]];
 	
 	[self createPersistentUI];
 }
 
 
 -(void)viewWillAppear:(BOOL)animated{
+	
+	[[UserAccount sharedInstance] loadRoutesForUser:NO cursorId:nil];
 	
 	[self createNonPersistentUI];
 	
@@ -71,15 +126,7 @@
 
 -(void)createNonPersistentUI{
 	
-	if(_dataProvider.count==0){
-		
-		[self showViewOverlayForType:kViewOverlayTypeNoResults show:YES withMessage:@"noresults_LEISUREROUTES" withIcon:@"LEISUREROUTES"];
-		
-	}else{
-		
-		[self showViewOverlayForType:kViewOverlayTypeNone show:NO withMessage:nil];
-		
-	}
+	
 	
 }
 
@@ -100,15 +147,34 @@
 
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+	
+	UserRouteCellView *cell=[tableView dequeueReusableCellWithIdentifier:[UserRouteCellView cellIdentifier]];
+	
+	NSInteger row=indexPath.row;
+	CSUserRouteVO *dp=_dataProvider[row];
+	
+	cell.dataProvider=dp;
+	[cell populate];
     
-    
-    return nil;
+    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    
+	
+	NSInteger row=indexPath.row;
+	CSUserRouteVO *dp=_dataProvider[row];
+	
+	if(_viewMode==LeisureListViewModeDefault){
+		
+		//TODO:  possible push detail view instead
+		[[RouteManager sharedInstance] loadRouteForRouteId:dp.routeid];
+		
+	}else{
+		
+		[[RouteManager sharedInstance] loadRouteForRouteId:dp.routeid];
+		[self dismissView];
+	}
+	
 }
 
 

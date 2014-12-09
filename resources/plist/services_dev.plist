@@ -81,6 +81,24 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>RoutesForUser</key>
+	<dict>
+		<key>id</key>
+		<string>RoutesForUser</string>
+		<key>remoteurl</key>
+		<string>https://api.cyclestreets.net/v2/journeys.user</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_JSON</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 	<key>RetrieveRoutePhotos</key>
 	<dict>
 		<key>id</key>

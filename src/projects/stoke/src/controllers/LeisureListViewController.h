@@ -10,7 +10,16 @@
 
 #import "CSOverlayTransitionAnimator.h"
 
+typedef NS_ENUM(NSUInteger, LeisureListViewMode) {
+	LeisureListViewModeDefault,
+	LeisureListViewModeModal
+	
+};
+
 @interface LeisureListViewController : SuperViewController<CSOverlayTransitionProtocol>
+
+
+@property (nonatomic,assign)  LeisureListViewMode						viewMode;
 
 
 -(void)didDismissWithTouch:(UIGestureRecognizer*)gestureRecogniser;

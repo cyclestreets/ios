@@ -314,7 +314,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BX1-5F-K7E">
-                                        <rect key="frame" x="226" y="13" width="46" height="24"/>
+                                        <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
@@ -451,7 +451,7 @@
                                 <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100.00000089356355" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100" y="484" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -616,7 +616,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Upd-Ni-uA7">
-                                        <rect key="frame" x="226" y="13" width="46" height="24"/>
+                                        <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
@@ -681,7 +681,7 @@ Drag a waypoint to re-order it.</string>
         <scene sceneID="jUd-qy-9l2">
             <objects>
                 <viewController storyboardIdentifier="LeisureListViewController" id="lZo-Zl-D2a" customClass="LeisureListViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5NR-eK-S48">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="5NR-eK-S48">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -697,7 +697,7 @@ Drag a waypoint to re-order it.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sof-3L-QgC">
-                                        <rect key="frame" x="226" y="13" width="46" height="24"/>
+                                        <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
@@ -715,7 +715,7 @@ Drag a waypoint to re-order it.</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jg-uh-hV9">
-                                <rect key="frame" x="0.0" y="42" width="280" height="298"/>
+                                <rect key="frame" x="0.0" y="82" width="280" height="258"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                 <color key="separatorColor" red="0.88627457620000005" green="0.87843143940000001" blue="0.86274516580000005" alpha="1" colorSpace="deviceRGB"/>
@@ -725,6 +725,23 @@ Drag a waypoint to re-order it.</string>
                                     <outlet property="delegate" destination="lZo-Zl-D2a" id="znp-iU-MGE"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" id="2jC-fw-jjp">
+                                <rect key="frame" x="0.0" y="41" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select one of our circular leisure routes to display it on the map." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ju1-gs-MU6">
+                                        <rect key="frame" x="8" y="0.0" width="264" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.87058823529999996" green="0.41960784309999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1014,6 +1031,7 @@ Drag a waypoint to re-order it.</string>
                         <segue destination="k10-cg-hCa" kind="relationship" relationship="viewControllers" id="Rb4-g1-biC"/>
                         <segue destination="9Ua-0d-b2e" kind="relationship" relationship="viewControllers" id="El8-pw-Jin"/>
                         <segue destination="z63-8j-lln" kind="relationship" relationship="viewControllers" id="EfR-PP-ev6"/>
+                        <segue destination="xkm-TD-ybI" kind="relationship" relationship="viewControllers" id="Y7s-6e-Kv5"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zzn-iN-92h" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1073,6 +1091,23 @@ Drag a waypoint to re-order it.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P2L-YZ-0rX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="598" y="-554"/>
+        </scene>
+        <!--Leisure Routes-->
+        <scene sceneID="DMh-WG-zqd">
+            <objects>
+                <navigationController id="xkm-TD-ybI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Leisure Routes" image="CSTabBar_leisure.png" id="BsS-Vd-eSC"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kn7-wQ-vGz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UB8-Lk-xfo" kind="relationship" relationship="rootViewController" id="6x8-Zj-irX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="57b-on-izc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1118" y="-554"/>
         </scene>
         <!--Travel Smart-->
         <scene sceneID="KhY-ok-Aip">
@@ -1134,6 +1169,56 @@ Drag a waypoint to re-order it.</string>
             </objects>
             <point key="canvasLocation" x="598" y="136"/>
         </scene>
+        <!--Leisure Routes-->
+        <scene sceneID="GH2-E8-W4c">
+            <objects>
+                <viewController id="UB8-Lk-xfo" customClass="LeisureListViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uvs-x5-Jon">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PK2-R0-KDG">
+                                <rect key="frame" x="0.0" y="41" width="320" height="414"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.9137254901960784" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="UB8-Lk-xfo" id="UGo-b2-S2d"/>
+                                    <outlet property="delegate" destination="UB8-Lk-xfo" id="8lv-EO-VwV"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" id="tXY-uH-vHE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage your leisure routes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z4O-tv-3rY">
+                                        <rect key="frame" x="8" y="0.0" width="304" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.46234407420000001" green="0.70104886889999996" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Leisure Routes" id="Td5-6E-Ely"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="PK2-R0-KDG" id="ZjF-Ya-TYS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LD3-8U-DaQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1118" y="133"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CSBarButton_leisure.png" width="20" height="20"/>
@@ -1142,6 +1227,7 @@ Drag a waypoint to re-order it.</string>
         <image name="CSTabBar_credits.png" width="30" height="30"/>
         <image name="CSTabBar_fav_routes.png" width="32" height="28"/>
         <image name="CSTabBar_itinerary.png" width="30" height="30"/>
+        <image name="CSTabBar_leisure.png" width="30" height="30"/>
         <image name="CSTabBar_photomap_tb.png" width="30" height="30"/>
         <image name="CSTabBar_plan_route.png" width="30" height="30"/>
         <image name="CSTabBar_savedlocations.png" width="30" height="30"/>

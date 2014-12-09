@@ -28,11 +28,17 @@ typedef int UserAccountMode;
 @interface UserAccount : FrameworkObject {
 	
 }
-@property (nonatomic, retain)	UserVO		*user;
-@property (nonatomic, assign)	UserAccountMode	accountMode;
-@property (nonatomic, retain)	NSString	*userPassword;
+@property (nonatomic, retain)	UserVO						*user;
+@property (nonatomic, assign)	UserAccountMode				accountMode;
+@property (nonatomic, retain)	NSString					*userPassword;
 
-@property (nonatomic,readonly)  BOOL			isLoggedIn;
+@property (nonatomic,readonly)  BOOL						isLoggedIn;
+
+
+// getter
+@property(nonatomic,readonly)  NSMutableArray				*userRoutes;
+
+
 
 SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 
@@ -46,4 +52,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 -(BOOL)hasSessionToken;
 -(void)resetUserAccount;
 -(void)updateAutoLoginPreference:(BOOL)value;
+
+
+-(void)loadRoutesForUser:(BOOL)isPaged cursorId:(NSString*)cursorID;
 @end
