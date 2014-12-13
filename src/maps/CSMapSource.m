@@ -10,6 +10,12 @@
 #import "GlobalUtilities.h"
 #import "AppConstants.h"
 
+#import "sys/stat.h"
+
+
+#define fileExpiryAge 14 // this is days
+#define directoryMaxSize 25 // this is mb
+
 @interface CSMapSource()
 
 @property (nonatomic,strong) NSCache									*cache;
@@ -29,6 +35,7 @@
 		_cache.countLimit=100;
 		self.operationQueue=[[NSOperationQueue alloc]init];
 		[self createCacheDirectory];
+		[self purgeDirectoryForSize];
 	}
 	return self;
 }
@@ -76,12 +83,35 @@
 	BOOL isDir=NO;
 	NSPurgeableData *fileData=nil;
 	if([fileManager fileExistsAtPath:filePath isDirectory:&isDir]){
-		fileData=[NSPurgeableData dataWithContentsOfFile:filePath];
+		
+		BOOL shouldLoad=[self shouldLoadTileFromFileSystem:filePath];
+		if(shouldLoad)
+			fileData=[NSPurgeableData dataWithContentsOfFile:filePath];
 	}
 	
 	if(fileData!=nil){
 		[self.cache setObject:fileData forKey:fileKey];
 	}
+}
+
+
+-(BOOL)shouldLoadTileFromFileSystem:(NSString*)filePath{
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSDate *filedate=[CSMapSource getModificationDateForFileAtPath:filePath];
+	NSDate *now=[NSDate date];
+	
+	NSTimeInterval fileage = [now timeIntervalSinceDate:filedate];
+	
+	NSInteger cacheinterval=fileExpiryAge*TIME_DAY;
+	
+	if (fileage<cacheinterval) {
+		return YES;
+	}else {
+		[fileManager removeItemAtPath:filePath error:nil];
+		return NO;
+	}
+	
 }
 
 
@@ -113,6 +143,69 @@
 }
 
 
+-(void)purgeDirectoryForSize{
+	
+	NSFileManager* fileManager = [NSFileManager defaultManager];
+	NSString *dirPath=[self filePath];
+	NSDictionary *fileInfo=[fileManager attributesOfItemAtPath:dirPath error:nil];
+	NSInteger dirSize=[[fileInfo objectForKey:NSFileSize] integerValue];
+	
+	NSInteger dirMb=dirSize/1000;
+	
+	
+	
+	
+	if(dirMb>directoryMaxSize){
+		
+		NSError	*error = nil;
+		NSArray *filesArray = [fileManager contentsOfDirectoryAtPath:dirPath error:&error];
+		if(error != nil) {
+			
+			NSLog(@"Error in reading files: %@", [error localizedDescription]);
+			return;
+			
+		}else{
+			
+			NSArray *sortedContent = [filesArray sortedArrayUsingComparator:
+									  ^(NSString *filepath1, NSString *filepath2)
+									  {
+										  // compare
+										  NSString* fullPath1 = [dirPath stringByAppendingPathComponent:filepath1];
+										  NSDate *file1Date=[CSMapSource getModificationDateForFileAtPath:fullPath1];
+										  
+										  NSString* fullPath2 = [dirPath stringByAppendingPathComponent:filepath2];
+										  NSDate *file2Date=[CSMapSource getModificationDateForFileAtPath:fullPath2];
+										  
+										  return [file2Date compare: file1Date];
+										  
+									  }];
+			
+			NSInteger purgeCount=sortedContent.count/4;
+			if(purgeCount==0)
+				return;
+			
+			BetterLog(@"start");
+			
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+				
+				for(NSInteger fileIndex=purgeCount;fileIndex<sortedContent.count;fileIndex++){
+					
+					NSString *filePath=[sortedContent objectAtIndex:fileIndex];
+					NSString* fullPath = [dirPath stringByAppendingPathComponent:filePath];
+					[fileManager removeItemAtPath:fullPath error:nil];
+				}
+				
+				BetterLog(@"complete");
+				
+			});
+			
+		}
+		
+	}
+	
+}
+
+
 -(BOOL)createCacheDirectory{
 	
 	NSFileManager* fileManager = [NSFileManager defaultManager];
@@ -139,6 +232,31 @@
 	return [documentsDirectory stringByAppendingPathComponent:[self uniqueTilecacheKey]];
 }
 
+
++ (NSDate*) getModificationDateForFileAtPath:(NSString*)path {
+	struct tm* date; // create a time structure
+	struct stat attrib; // create a file attribute structure
+	
+	stat([path UTF8String], &attrib);   // get the attributes of afile.txt
+	
+	date = gmtime(&(attrib.st_mtime));  // Get the last modified time and put it into the time structure
+	
+	NSDateComponents *comps = [[NSDateComponents alloc] init];
+	[comps setSecond:   date->tm_sec];
+	[comps setMinute:   date->tm_min];
+	[comps setHour:     date->tm_hour];
+	[comps setDay:      date->tm_mday];
+	[comps setMonth:    date->tm_mon + 1];
+	[comps setYear:     date->tm_year + 1900];
+	
+	NSCalendar *cal = [NSCalendar currentCalendar];
+	NSTimeZone *tz = [NSTimeZone timeZoneWithAbbreviation:[[NSString alloc] initWithUTF8String:date->tm_zone]];
+	cal.timeZone = tz;
+	NSDate *modificationDate = [[cal dateFromComponents:comps] addTimeInterval:[[NSTimeZone systemTimeZone] secondsFromGMT]];
+	
+	
+	return modificationDate;
+}
 
 
 // end

@@ -481,6 +481,9 @@ static NSString *const STRINGID=@"account";
 
 -(void)updateFormPage{
 	
+	if(_activePage>=_formFieldArray.count)
+		return;
+	
 	if(_viewMode==kUserAccountNotLoggedIn){
 		_activeFieldArray=[_formFieldArray objectAtIndex:_activePage];
 	}

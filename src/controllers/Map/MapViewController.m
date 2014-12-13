@@ -82,6 +82,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, strong) UIBarButtonItem						* changePlanButton;
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
+@property (nonatomic, strong) UIBarButtonItem						* rightFixed;
+
 @property (nonatomic, strong) UIBarButtonItem						* addPointButton;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
 @property (nonatomic, strong) UIBarButtonItem						* followUserButton;
@@ -422,8 +424,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-	
-	
+	self.rightFixed=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	_rightFixed.width=20;
 }
 
 
@@ -459,11 +461,11 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 				break;
 					
 				case MapPlanningStateRoute:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
 				break;
 					
 				case MapPlanningStateRouteLocating:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
 				break;
 			}
 		}
