@@ -10,4 +10,25 @@
 
 @implementation CSUserRouteList
 
+
+
+
+
+// getters
+-(NSInteger)count{
+	return _routes.count;
+}
+
+-(BOOL)hasNextPage{
+	return _requestpaginationDict[@"nextUrl"]!=nil;
+}
+
+-(NSString*)bottomID{
+	if([self hasNextPage]){
+		return _requestpaginationDict[@"bottom"];
+	}
+	return nil;
+}
+
+
 @end

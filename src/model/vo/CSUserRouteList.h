@@ -17,7 +17,9 @@
 
 // getter
 
-@property(nonatomic,readonly)  NSInteger         count;
+@property(nonatomic,readonly)  NSInteger			count;
+@property(nonatomic,readonly)  BOOL					hasNextPage;
+@property(nonatomic,readonly)  NSString				*bottomID;
 
 
 @end

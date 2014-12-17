@@ -400,9 +400,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 -(void)loadRoutesForUserPage{
 	
-	//TODO: if CSUserRouteList has next page
-	// call loadRoutesForUser:(BOOL)isPaged cursorId:(NSString*)cursorID  with pageination bottom value
-	
+	if(self.userRouteDataProvider.hasNextPage){
+		[self loadRoutesForUser:YES cursorId:self.userRouteDataProvider.bottomID];
+	}
 	
 }
 
