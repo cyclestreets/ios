@@ -108,7 +108,7 @@ NSString *const CSPLANTYPE_NONE=@"csplan_none";
 
 // Tab bar ids: must be ket in sync with UI naming via the plist
 
-NSString *const TABBAR_MAP=@"Map";
+NSString *const TABBAR_MAP=@"Route";
 NSString *const TABBAR_ITINERARY=@"Itinerary";
 NSString *const TABBAR_ROUTES=@"Routes";
 NSString *const TABBAR_REPORT=@"Report";

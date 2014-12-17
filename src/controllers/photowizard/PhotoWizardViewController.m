@@ -1625,7 +1625,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
 		
 		AppDelegate *appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
-		[appDelegate showTabBarViewControllerByName:@"Report"];
+		[appDelegate showTabBarViewControllerByName:TABBAR_REPORT];
 		
 		[self resetPhotoWizard];
 		
