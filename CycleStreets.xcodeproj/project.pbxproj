@@ -21,6 +21,7 @@
 		28042E9C1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
 		28042E9D1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
 		28042E9E1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
+		2807ECE81A41A779005E7E62 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		2807FCBA166693580028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		280E2410144D825D0021CDFA /* BUTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2409144D825D0021CDFA /* BUTableCellView.m */; };
@@ -1208,6 +1209,7 @@
 		28042E931A2C94BE00C56374 /* ApplicationJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationJSONParser.h; sourceTree = "<group>"; };
 		28042E941A2C94BE00C56374 /* ApplicationJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationJSONParser.m; sourceTree = "<group>"; };
 		28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_videomap@2x.png"; sourceTree = "<group>"; };
+		2807ECE71A41A779005E7E62 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		2807FCB81666934E0028D7DB /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		280E2408144D825D0021CDFA /* BUTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BUTableCellView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		280E2409144D825D0021CDFA /* BUTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BUTableCellView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1857,6 +1859,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2807ECE81A41A779005E7E62 /* libPods.a in Frameworks */,
 				286FD3121A0255E100EB8C20 /* MediaPlayer.framework in Frameworks */,
 				2811C4C9166CFFE300592560 /* MessageUI.framework in Frameworks */,
 				2811C4B0166CDBC600592560 /* Social.framework in Frameworks */,
@@ -3233,6 +3236,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2807ECE71A41A779005E7E62 /* libPods.a */,
 				28E1468319F2C66E00242F2F /* MediaPlayer.framework */,
 				28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */,
 				2811C4C7166CFFD600592560 /* MessageUI.framework */,
@@ -4686,7 +4690,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -4737,7 +4741,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -4773,7 +4777,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/../../AppCore/external/Crashlytics\\\"",
+					../../AppCore/external/Crashlytics/,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -4788,7 +4792,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -4819,7 +4823,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/../../AppCore/external/Crashlytics\\\"",
+					../../AppCore/external/Crashlytics/,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -4832,7 +4836,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -4863,7 +4867,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"\\\"$(SRCROOT)/../../AppCore/external/Crashlytics\\\"",
+					../../AppCore/external/Crashlytics/,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -4876,7 +4880,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -5200,7 +5204,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
