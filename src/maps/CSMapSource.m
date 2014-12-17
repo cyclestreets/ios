@@ -152,16 +152,13 @@
 	
 	NSInteger dirMb=dirSize/1000;
 	
-	
-	
-	
 	if(dirMb>directoryMaxSize){
 		
 		NSError	*error = nil;
 		NSArray *filesArray = [fileManager contentsOfDirectoryAtPath:dirPath error:&error];
 		if(error != nil) {
 			
-			NSLog(@"Error in reading files: %@", [error localizedDescription]);
+			BetterLog(@"Error in reading files: %@", [error localizedDescription]);
 			return;
 			
 		}else{
