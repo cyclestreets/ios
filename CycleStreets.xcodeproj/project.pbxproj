@@ -22,6 +22,8 @@
 		28042E9D1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
 		28042E9E1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
 		2807ECE81A41A779005E7E62 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
+		2807ECE91A41AB23005E7E62 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
+		2807ECEA1A41AB24005E7E62 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		2807FCBA166693580028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		280E2410144D825D0021CDFA /* BUTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2409144D825D0021CDFA /* BUTableCellView.m */; };
@@ -1160,7 +1162,6 @@
 		28FA8B8D19E454E80040EA46 /* CSRoutePolyLineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5918BF4F94001BB258 /* CSRoutePolyLineOverlay.m */; };
 		28FA8B8E19E454E80040EA46 /* CSOpenCycleMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890957193F385D009C4325 /* CSOpenCycleMapSource.m */; };
 		28FA8B9019E454E80040EA46 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */; };
-		28FA8B9119E454E80040EA46 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E62E4C6FD34186B85CC839 /* libPods.a */; };
 		28FA8B9219E454E80040EA46 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4C7166CFFD600592560 /* MessageUI.framework */; };
 		28FA8B9319E454E80040EA46 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4AF166CDBC600592560 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		28FA8B9419E454E80040EA46 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4AB166CDB9600592560 /* Twitter.framework */; };
@@ -1189,7 +1190,6 @@
 		28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB4231777464F002D0912 /* UIIcon_walking.png */; };
 		28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
 		28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
-		7A8A63253B4C42DCB36EA45D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E62E4C6FD34186B85CC839 /* libPods.a */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E77D8F11120321E4003E6B8D /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		E7BE4B1A11A2E5F400930E0C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */; };
@@ -1812,7 +1812,6 @@
 		28FAB4231777464F002D0912 /* UIIcon_walking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_walking.png; sourceTree = "<group>"; };
 		28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_walking@2x.png"; sourceTree = "<group>"; };
 		7872DB9D803BBF7B3EF0B657 /* Pods.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc.xcconfig"; sourceTree = "<group>"; };
-		81E62E4C6FD34186B85CC839 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -1832,7 +1831,6 @@
 			files = (
 				286FD3111A0255D700EB8C20 /* MediaPlayer.framework in Frameworks */,
 				28BC6A5D18AE1D8B00EF0436 /* CoreText.framework in Frameworks */,
-				7A8A63253B4C42DCB36EA45D /* libPods.a in Frameworks */,
 				2811C4CA166CFFE600592560 /* MessageUI.framework in Frameworks */,
 				2811C4B1166CDBD100592560 /* Social.framework in Frameworks */,
 				2811C4AD166CDB9E00592560 /* Twitter.framework in Frameworks */,
@@ -1840,6 +1838,7 @@
 				28B78DA21507884C00949870 /* MapKit.framework in Frameworks */,
 				280E24D8144D892F0021CDFA /* CFNetwork.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				2807ECE91A41AB23005E7E62 /* libPods.a in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				E7F41577113D6CC900CBC58B /* CoreLocation.framework in Frameworks */,
@@ -1889,7 +1888,6 @@
 			files = (
 				28E1468419F2C66E00242F2F /* MediaPlayer.framework in Frameworks */,
 				28FA8B9019E454E80040EA46 /* CoreText.framework in Frameworks */,
-				28FA8B9119E454E80040EA46 /* libPods.a in Frameworks */,
 				28FA8B9219E454E80040EA46 /* MessageUI.framework in Frameworks */,
 				28FA8B9319E454E80040EA46 /* Social.framework in Frameworks */,
 				28FA8B9419E454E80040EA46 /* Twitter.framework in Frameworks */,
@@ -1897,6 +1895,7 @@
 				28FA8B9619E454E80040EA46 /* MapKit.framework in Frameworks */,
 				28FA8B9719E454E80040EA46 /* CFNetwork.framework in Frameworks */,
 				28FA8B9819E454E80040EA46 /* Foundation.framework in Frameworks */,
+				2807ECEA1A41AB24005E7E62 /* libPods.a in Frameworks */,
 				28FA8B9919E454E80040EA46 /* UIKit.framework in Frameworks */,
 				28FA8B9A19E454E80040EA46 /* CoreGraphics.framework in Frameworks */,
 				28FA8B9B19E454E80040EA46 /* CoreLocation.framework in Frameworks */,
@@ -3257,7 +3256,6 @@
 				E72E65A4121C2226008DA360 /* AssetsLibrary.framework */,
 				28D7E1F712BAA8710025C4A2 /* libxml2.dylib */,
 				2831ABFC1362F7D000EBBA69 /* AddressBook.framework */,
-				81E62E4C6FD34186B85CC839 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4691,7 +4689,10 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -4742,7 +4743,10 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -4932,7 +4936,10 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -4983,7 +4990,10 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -5037,7 +5047,10 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -5205,7 +5218,10 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
