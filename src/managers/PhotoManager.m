@@ -46,6 +46,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	[notifications addObject:REMOTEFILEFAILED];
 	[notifications addObject:REQUESTDIDFAIL];
 	[notifications addObject:XMLPARSERDIDFAILPARSING];
+	[notifications addObject:JSONPARSERDIDFAILPARSING];
 	
 	[self addRequestID:RETREIVELOCATIONPHOTOS];
 	[self addRequestID:RETREIVEROUTEPHOTOS];
@@ -67,7 +68,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	
 	if([self isRegisteredForRequest:dataid]){
 		
-		if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL] || [notification.name isEqualToString:XMLPARSERDIDFAILPARSING]){
+		if([notification.name isEqualToString:REMOTEFILEFAILED] || [notification.name isEqualToString:DATAREQUESTFAILED] || [notification.name isEqualToString:SERVERCONNECTIONFAILED] || [notification.name isEqualToString:REQUESTDIDFAIL] || [notification.name isEqualToString:XMLPARSERDIDFAILPARSING] || [notification.name isEqualToString:JSONPARSERDIDFAILPARSING]){
 			
 			[[HudManager sharedInstance] removeHUD];
 			

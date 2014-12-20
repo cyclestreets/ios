@@ -30,9 +30,9 @@ BOOL const APIREQUIRESIDENTIFIER=YES;
 	return ApplicationBuildTarget_CNS;
 }
 
-+(void)insertAPIIdentifier:(NSMutableDictionary*)parameters{
++(void)insertAPIIdentifier:(NSMutableDictionary*)requestDict{
 	
-	[parameters setObject:API_IDENTIFIER forKey:@"username"];
+	[requestDict setObject:API_IDENTIFIER forKey:@"username"];
 	
 }
 
