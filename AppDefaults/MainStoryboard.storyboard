@@ -576,32 +576,22 @@ Drag a waypoint to re-order it.</string>
 
 </string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                                <color key="textColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O6Z-fI-9vY">
-                                                <rect key="frame" x="10" y="30" width="260" height="113"/>
+                                                <rect key="frame" x="10" y="30" width="260" height="96"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <string key="text">The app is here to help you to get the most out of your cycling.
+                                                <string key="text">Add your start and finish points to the map then press Plan Route.
 
-Just click on a start and finish point and then Plan for a customised route. You can also search for streets and postcodes easily, and browse points of interest such as bike shops.
-
-</string>
+You can add a point via your current position or search for a known one.</string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                                 <color key="textColor" red="0.34509803919999998" green="0.38823529410000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome.jpg" id="gNY-yy-60T">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome_CS.jpg" id="gNY-yy-60T">
                                                 <rect key="frame" x="10" y="149" width="260" height="140"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Po-qm-aLj">
-                                                <rect key="frame" x="12" y="294" width="260" height="175"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <string key="text">Stoke-on-Trent and Newcastle-under-Lyme have over 160 km of cycle routes including many quiet off-road routes including greenways, canal towpaths and river routes where you can get quickly and safely from A to B as well as explore the many tourist attractions on offer. And with over 1,380 hectares of parks and open spaces, Stoke-on-Trent is one of the greenest cities in the UK with some spectacular countryside, including the Peak District, right on your doorstep.</string>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                                                <color key="textColor" red="0.34509803919999998" green="0.38823529410000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -622,7 +612,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bcs-Rg-dTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3395" y="158"/>
+            <point key="canvasLocation" x="-3398" y="158"/>
         </scene>
     </scenes>
     <resources>
@@ -636,7 +626,7 @@ Just click on a start and finish point and then Plan for a customised route. You
         <image name="CSTabBar_settings.png" width="30" height="30"/>
         <image name="UIButtonBarDownload" width="19" height="26"/>
         <image name="UIIcon_walking.png" width="32" height="32"/>
-        <image name="welcome.jpg" width="260" height="144"/>
+        <image name="welcome_CS.jpg" width="260" height="195"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

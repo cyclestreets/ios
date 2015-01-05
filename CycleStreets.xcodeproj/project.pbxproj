@@ -757,6 +757,10 @@
 		28B6B2F51A5AA5A0002DF099 /* welcome@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2F11A5AA5A0002DF099 /* welcome@2x.jpg */; };
 		28B6B2F61A5AA5A0002DF099 /* welcome@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2F11A5AA5A0002DF099 /* welcome@2x.jpg */; };
 		28B6B2F71A5AA5A0002DF099 /* welcome@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2F11A5AA5A0002DF099 /* welcome@2x.jpg */; };
+		28B6B2FC1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2FA1A5AB0D8002DF099 /* welcome_CS.jpg */; };
+		28B6B2FD1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2FA1A5AB0D8002DF099 /* welcome_CS.jpg */; };
+		28B6B2FE1A5AB0D8002DF099 /* welcome_CS@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2FB1A5AB0D8002DF099 /* welcome_CS@2x.jpg */; };
+		28B6B2FF1A5AB0D8002DF099 /* welcome_CS@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2FB1A5AB0D8002DF099 /* welcome_CS@2x.jpg */; };
 		28B76F3015E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2D15E4D7E9006B01D0 /* CSBarButton_location@2x.png */; };
 		28B76F3115E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2D15E4D7E9006B01D0 /* CSBarButton_location@2x.png */; };
 		28B76F3215E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2E15E4D7E9006B01D0 /* Icon_nofavroutes@2x.png */; };
@@ -1722,6 +1726,8 @@
 		28B6B2EC1A5AA209002DF099 /* FirstRunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstRunViewController.m; sourceTree = "<group>"; };
 		28B6B2F01A5AA5A0002DF099 /* welcome.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.jpg; sourceTree = "<group>"; };
 		28B6B2F11A5AA5A0002DF099 /* welcome@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "welcome@2x.jpg"; sourceTree = "<group>"; };
+		28B6B2FA1A5AB0D8002DF099 /* welcome_CS.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome_CS.jpg; sourceTree = "<group>"; };
+		28B6B2FB1A5AB0D8002DF099 /* welcome_CS@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "welcome_CS@2x.jpg"; sourceTree = "<group>"; };
 		28B76F2D15E4D7E9006B01D0 /* CSBarButton_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_location@2x.png"; sourceTree = "<group>"; };
 		28B76F2E15E4D7E9006B01D0 /* Icon_nofavroutes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_nofavroutes@2x.png"; sourceTree = "<group>"; };
 		28B76F2F15E4D7E9006B01D0 /* Icon_norecentroutes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_norecentroutes@2x.png"; sourceTree = "<group>"; };
@@ -2730,6 +2736,8 @@
 		28AD6208131FB69D008527FC /* images */ = {
 			isa = PBXGroup;
 			children = (
+				28B6B2FA1A5AB0D8002DF099 /* welcome_CS.jpg */,
+				28B6B2FB1A5AB0D8002DF099 /* welcome_CS@2x.jpg */,
 				2853210E19E7EF1A00118E48 /* maps */,
 				28187A5614FCFF4C00A38A17 /* x1 */,
 				28735C10144EDACF00726A6C /* html */,
@@ -3420,6 +3428,7 @@
 				28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */,
 				28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */,
 				28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */,
+				28B6B2FE1A5AB0D8002DF099 /* welcome_CS@2x.jpg in Resources */,
 				289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				289A9B5613536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png in Resources */,
@@ -3607,6 +3616,7 @@
 				2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */,
 				2868D240166E1C0600C0C153 /* UIActivityFacebook@2x.png in Resources */,
 				2868D242166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
+				28B6B2FC1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */,
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
@@ -3765,6 +3775,7 @@
 				2834369515DD5DC300B00FD5 /* UIButtonBarArrowLeft.png in Resources */,
 				2834369615DD5DC300B00FD5 /* UIButtonBarArrowRight.png in Resources */,
 				2834369715DD5DC300B00FD5 /* UIButtonBarCameraSmall.png in Resources */,
+				28B6B2FD1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */,
 				2834369815DD5DC300B00FD5 /* UIButtonBarInfo.png in Resources */,
 				2834369915DD5DC300B00FD5 /* UIButtonBarRefresh.png in Resources */,
 				2853211B19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
@@ -3784,6 +3795,7 @@
 				283436BF15DD5DC300B00FD5 /* PhotoWizardCategoryCell.xib in Resources */,
 				283436C015DD5DC300B00FD5 /* Icon_nofavroutes.png in Resources */,
 				283436C115DD5DC300B00FD5 /* Icon_norecentroutes.png in Resources */,
+				28B6B2FF1A5AB0D8002DF099 /* welcome_CS@2x.jpg in Resources */,
 				28B76F3115E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */,
 				28B76F3315E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */,
 				28B76F3515E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
