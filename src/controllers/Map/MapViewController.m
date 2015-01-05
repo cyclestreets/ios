@@ -372,10 +372,14 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 	
-	BOOL isNotFirstRun=[[[UserSettingsManager sharedInstance]fetchObjectforKey:@"isNotFirstRun"] boolValue];
-	if(isNotFirstRun==NO){
-		[self performSegueWithIdentifier:@"FirstRunSegue" sender:self];
-		[[UserSettingsManager sharedInstance] saveObject:@(YES) forKey:@"isNotFirstRun"];
+	if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
+		
+		BOOL isNotFirstRun=[[[UserSettingsManager sharedInstance]fetchObjectforKey:@"isNotFirstRun"] boolValue];
+		if(isNotFirstRun==NO){
+			[self performSegueWithIdentifier:@"FirstRunSegue" sender:self];
+			[[UserSettingsManager sharedInstance] saveObject:@(YES) forKey:@"isNotFirstRun"];
+		}
+		
 	}
 	
 }
