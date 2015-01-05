@@ -338,7 +338,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 		if(userversion!=nil){
 			
 			if(bundlefloat>userfloat){
-				appstateexists=[self copyUserStateToUser];
+				appstateexists=YES;
+				[self syncBundleState:bstate toUserState:ustate];
+				[ustate writeToFile:[self userStatePath] atomically:YES];
 			}else {
 				appstateexists=YES;
 			}
@@ -354,6 +356,46 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserSettingsManager);
 
 	return appstateexists;
 
+}
+
+//
+/***********************************************
+ * @description			If the bundle state version is newer than the users version, we need to sync the differences. For same name keys we keep users value
+ ***********************************************/
+//
+-(void)syncBundleState:(NSDictionary*)bundleDict toUserState:(NSMutableDictionary*)userDict{
+	
+	
+	for (NSString *groupKey in bundleDict) {
+		
+		if(userDict[groupKey]==nil){
+			userDict[groupKey]=bundleDict[groupKey];
+			continue;
+			
+		}else{
+			
+			if([bundleDict[groupKey] isKindOfClass:[NSString class]]){
+				
+				userDict[groupKey]=bundleDict[groupKey];
+				
+			}else{
+				NSDictionary *groupBDict=bundleDict[groupKey];
+				NSMutableDictionary *groupUDict=userDict[groupKey];
+				
+				for(NSString *entryKey in groupBDict){
+					
+					if(groupUDict[entryKey]==nil){
+						groupUDict[entryKey]=groupBDict[entryKey];
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 

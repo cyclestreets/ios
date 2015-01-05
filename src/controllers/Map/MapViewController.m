@@ -44,6 +44,8 @@
 #import "MapViewSearchLocationViewController.h"
 #import "BuildTargetConstants.h"
 
+#import "UserSettingsManager.h"
+
 #import "UIColor+AppColors.h"
 #import "UIImage+Additions.h"
 
@@ -58,6 +60,7 @@
 #import "SaveLocationCreateViewController.h"
 #import "LeisureViewController.h"
 #import "LeisureListViewController.h"
+#import "FirstRunViewController.h"
 
 #import "POIListviewController.h"
 #import "POIManager.h"
@@ -368,6 +371,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 -(void)createNonPersistentUI{
 	
 	[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
+	
+	BOOL isNotFirstRun=[[[UserSettingsManager sharedInstance]fetchObjectforKey:@"isNotFirstRun"] boolValue];
+	if(isNotFirstRun==NO){
+		[self performSegueWithIdentifier:@"FirstRunSegue" sender:self];
+		[[UserSettingsManager sharedInstance] saveObject:@(YES) forKey:@"isNotFirstRun"];
+	}
 	
 }
 
@@ -792,6 +801,11 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 #pragma mark - Map Tracking mode
 
+-(void)stopUserTracking{
+	_programmaticChange=NO;
+	_allowsUserTrackingUI=NO;
+	[_mapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
+}
 
 -(void)toggleUserTracking{
 	
@@ -852,6 +866,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[self updateUItoState:MapPlanningStateNoRoute];
 	_previousUIState=MapPlanningStateNoRoute;
+	
+	[self stopUserTracking];
 	
 	[[RouteManager sharedInstance] clearSelectedRoute];
 }
@@ -1862,6 +1878,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	}else if ([segue.identifier isEqualToString:@"LeisureListViewSegue"]){
 		
 		LeisureListViewController *controller=(LeisureListViewController*)segue.destinationViewController;
+		
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}else if ([segue.identifier isEqualToString:@"FirstRunSegue"]){
+		
+		FirstRunViewController *controller=(FirstRunViewController*)segue.destinationViewController;
 		
 		controller.transitioningDelegate = self;
 		controller.modalPresentationStyle = UIModalPresentationCustom;
