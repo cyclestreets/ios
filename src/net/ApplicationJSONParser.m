@@ -98,7 +98,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 		BetterLog(@"[ERROR]ApplicationJSONParser: Neither JSON decoders able to parse response data");
 		_activeOperation.operationState=NetResponseStateFailedWithError;
 		_activeOperation.operationError=NetResponseErrorParserFailed;
-		failure(_activeOperation,error);
+		failure(networkOperation,error);
 		
 	}
     
