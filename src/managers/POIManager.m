@@ -16,6 +16,9 @@
 #import "BUNetworkOperation.h"
 #import "AppConstants.h"
 #import "BuildTargetConstants.h"
+#import "UserSettingsManager.h"
+
+static NSString *const kPOIValidityValue=@"kPOIVAlidityValue";
 
 @interface POIManager()
 
@@ -25,6 +28,10 @@
 @property (nonatomic,strong)  NSMutableArray						*leisureDataProvider;
 
 @property (nonatomic,strong)  NSMutableDictionary					*activeOperations;
+
+
+@property (nonatomic,strong) NSDate									*poiValidityDate;
+
 
 @end
 
@@ -41,6 +48,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 		_selectedPOICategories=[NSMutableDictionary dictionary];
 		_categoryDataProvider=[NSMutableDictionary dictionary];
 		_activeOperations=[NSMutableDictionary dictionary];
+		
+		id poilistvalidity=[[UserSettingsManager sharedInstance] fetchObjectforKey:kPOIValidityValue forType:kSTATESYSTEMCONTROLLEDSETTINGSKEY];
+		if(poilistvalidity!=nil){
+			self.poiValidityDate=[NSDate dateWithTimeIntervalSince1970:[poilistvalidity integerValue]];
+		}
+		
 	}
 	return self;
 }
@@ -108,14 +121,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[[CycleStreets sharedInstance] APIKey], @"key",
 									 isRetina==YES ? @(64): @(32),@"icons",
-									 API_IDENTIFIER,@"iconset",
 									 nil];
+	
+	// cns
+	if(APIREQUIRESIDENTIFIER){
+		[parameters setObject:API_IDENTIFIER forKey:@"iconset"];
+	}
 	
 	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
 	request.dataid=POILISTING;
 	request.requestid=ZERO;
 	request.parameters=parameters;
 	request.source=DataSourceRequestCacheTypeUseCache;
+	
+	if(_poiValidityDate!=nil){
+		
+		NSDate *now=[NSDate date];
+		if([now compare:_poiValidityDate]==NSOrderedDescending){
+			request.source=DataSourceRequestCacheTypeUseNetwork;
+		}
+	}
 	
 	__weak __typeof(&*self)weakSelf = self;
 	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
@@ -126,7 +151,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
-	
 }
 
 -(void)POIListingDataResponse:(BUNetworkOperation*)operation{
@@ -135,9 +159,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	switch (operation.responseStatus) {
 			
 		case ValidationPOIListingSuccess:
+		{
+			NSDictionary *repsonseObject=operation.responseObject;
+			NSInteger validityValue=[repsonseObject[@"validuntil"] integerValue];
+			self.poiValidityDate=[NSDate dateWithTimeIntervalSince1970:validityValue];
+			[[UserSettingsManager sharedInstance] saveObject:@(validityValue) forKey:kPOIValidityValue forType:kSTATESYSTEMCONTROLLEDSETTINGSKEY];
 			
-			[self updatePOIListingDataProvider:operation.responseObject];
-			
+			[self updatePOIListingDataProvider:repsonseObject[DATAPROVIDER]];
+		}
 			
 		break;
 		

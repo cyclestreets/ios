@@ -20,4 +20,9 @@
 
 @property (nonatomic,assign)  BOOL				selected;
 
+
+// v2
+-(void)updateWithAPIDict:(NSDictionary*)dict;
+
+
 @end

@@ -57,8 +57,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserSettingsManager);
 -(NSArray*)navigation;
 -(NSString*)context;
 -(NSDate*)lastOpenedDate;
+
 -(void)saveObject:(id)object forKey:(NSString*)key;
+-(void)saveObject:(id)object forKey:(NSString*)key forType:(NSString*)type;
+
 -(id)fetchObjectforKey:(NSString*)key;
+-(id)fetchObjectforKey:(NSString*)key forType:(NSString*)type;
+
 -(int)getSavedSection;
 -(void)setSavedSection:(NSString*)type;
 -(id)userDefaultForType:(NSString*)key;

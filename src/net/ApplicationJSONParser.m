@@ -17,6 +17,8 @@
 #import "PhotoMapListVO.h"
 #import "CSUserRouteVO.h"
 #import "CSUserRouteList.h"
+#import "POICategoryVO.h"
+#import "POIManager.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -42,7 +44,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
         
 		self.parserMethods=@{RETREIVELOCATIONPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
 							 RETREIVEROUTEPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
-							 ROUTESFORUSER:[NSValue valueWithPointer:@selector(RoutesForUserParser)]};
+							 ROUTESFORUSER:[NSValue valueWithPointer:@selector(RoutesForUserParser)],
+							 POILISTING:[NSValue valueWithPointer:@selector(POIListingParser)]};
 	}
 	return self;
 }
@@ -56,7 +59,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	SEL parserMethod=[[_parserMethods objectForKey:networkOperation.dataid] pointerValue];
 	
 	 if(parserMethod==nil){
-		 BetterLog(@"[ERROR] ApplicationJSONParser:parseXMLForType: parser for type %@ not found!",_activeOperation.dataid);
+		 BetterLog(@"[ERROR] ApplicationJSONParser:parseJSONForType: parser for type %@ not found!",_activeOperation.dataid);
 		 return;
 	 }
 	
@@ -216,6 +219,50 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	
 }
 
+
+
+-(void)POIListingParser{
+	
+	BetterLog(@"");
+	
+	[self validateJSON];
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		_activeOperation.responseStatus=ValidationPOIListingFailure;
+		return;
+	}
+	
+	NSDictionary *root=_responseDict;
+	
+	
+	if(root[@"types"]!=nil){
+		
+		NSMutableArray *dataProvider=[[NSMutableArray alloc]init];
+		
+		for(NSString *key in root[@"types"]){
+			
+			NSDictionary *dict=root[@"types"][key];
+			
+			POICategoryVO *poicategory=[[POICategoryVO alloc]init];
+			[poicategory updateWithAPIDict:dict];
+			
+			[dataProvider addObject:poicategory];
+			
+			
+		}
+		
+		[dataProvider insertObject:[POIManager createNoneCategory] atIndex:0];
+		
+		[_activeOperation setResponseWithValue:@{@"validuntil":root[@"validuntil"],DATAPROVIDER:dataProvider}];
+		
+		_activeOperation.operationState=NetResponseStateComplete;
+		_activeOperation.responseStatus=ValidationPOIListingSuccess;
+		
+	}else{
+		_activeOperation.responseStatus=ValidationPOIListingFailure;
+	}
+	
+	
+}
 
 
 @end

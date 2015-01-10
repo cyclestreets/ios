@@ -7,6 +7,8 @@
 //
 
 #import "POICategoryVO.h"
+#import "ImageCache.h"
+#import "StringUtilities.h"
 
 @implementation POICategoryVO
 
@@ -19,6 +21,32 @@
 	}
 	return self;
 }
+
+
+-(void)updateWithAPIDict:(NSDictionary*)dict{
+	
+	if(dict!=nil){
+		
+		_key=dict[@"id"];
+		_name=dict[@"name"];
+		_total=[dict[@"total"] intValue];
+		
+		
+		UIImage *image=[StringUtilities imageFromString:dict[@"icon"]];
+		NSString *imageFilename=[NSString stringWithFormat:@"Icon_POI_%@",_key];
+		
+		[[ImageCache sharedInstance] storeImage:image withName:imageFilename ofType:nil];
+		[[ImageCache sharedInstance] saveImageToDisk:image withName:imageFilename ofType:nil];
+		
+		_imageName=imageFilename;
+		
+	}
+	
+}
+
+
+
+
 
 - (id)copyWithZone:(NSZone *)zone
 {

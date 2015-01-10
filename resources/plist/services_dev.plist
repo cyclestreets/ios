@@ -140,7 +140,7 @@
 		<key>id</key>
 		<string>PoiListing</string>
 		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/v2/pois.types/</string>
+		<string>https://api.cyclestreets.net/v2/pois.types</string>
 		<key>type</key>
 		<string>GET</string>
 		<key>cache</key>
@@ -148,7 +148,7 @@
 		<key>cacheInterval</key>
 		<string>60</string>
 		<key>parserType</key>
-		<string>DATATYPE_XML</string>
+		<string>DATATYPE_JSON</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
