@@ -30,9 +30,9 @@
 -(NSString*)cacheTileTemplate{
 	
 	if([self isRetinaEnabled]){
-		return @"http://c.os.openstreetmap.org/sv/%li/%li/%li@%ix.png";
+		return @"http://tile.cyclestreets.net/osopendata/%li/%li/%li@%ix.png";
 	}else{
-		return @"http://c.os.openstreetmap.org/sv/%li/%li/%li.png";
+		return @"http://tile.cyclestreets.net/osopendata/%li/%li/%li.png";
 	}
 	
 }
@@ -41,9 +41,9 @@
 - (NSString *)tileTemplate{
 	
 	if([self isRetinaEnabled]){
-		return @"http://c.os.openstreetmap.org/sv/{z}/{x}/{y}/{s}.png";
+		return @"http://tile.cyclestreets.net/osopendata/{z}/{x}/{y}/{s}.png";
 	}else{
-		return @"http://c.os.openstreetmap.org/sv/{z}/{x}/{y}.png";
+		return @"http://tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png";
 	}
 }
 

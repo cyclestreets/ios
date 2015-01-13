@@ -18,4 +18,7 @@
 
 +(void)updateMapAttributonLabel:(ExpandedUILabel*)label forMap:(MKMapView*)mapView forMapStyle:(CSMapSource*)mapSource inView:(UIView *)view;
 
+
++(void)removeSatelliteLayerForMapSource:(CSMapSource*)mapSource;
+
 @end

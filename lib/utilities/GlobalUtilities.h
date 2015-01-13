@@ -132,6 +132,10 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 #define DOCUMENTS_DIR ([NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject])
 
 
+#define dispatch_time_t(delayInSeconds) dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC)
+
+
+
 
 enum  {
 	BULeftAlignMode,

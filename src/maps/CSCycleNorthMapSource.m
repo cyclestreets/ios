@@ -32,7 +32,7 @@
 	if([self isRetinaEnabled]){
 		return @"http://tile.cyclestreets.net/cyclenorthstaffs/%li/%li/%li@%ix.png";
 	}else{
-		return @"http://tile.cyclestreets.net/cyclenorthstaffs/mapnik/%li/%li/%li.png";
+		return @"http://tile.cyclestreets.net/cyclenorthstaffs/%li/%li/%li.png";
 	}
 	
 }

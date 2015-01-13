@@ -68,6 +68,8 @@
 #import "POIAnnotation.h"
 #import "POIAnnotationView.h"
 
+#import "CSAppleSatelliteMapSource.h"
+#import "CSOrdnanceSurveyStreetViewMapSource.h"
 
 static NSInteger DEFAULT_ZOOM = 15;
 static NSInteger DEFAULT_OVERVIEWZOOM = 15;
@@ -158,6 +160,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic,strong)  UITapGestureRecognizer				*mapDoubleTapRecognizer;
 
 
+@property (nonatomic,assign)  BOOL									toggleMap;
 
 @end
 
@@ -245,6 +248,37 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 }
 
+
+
+-(void)toggleMapTiles{
+	
+	
+	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
+	
+	// filter to remove any Route overlays from this process
+	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
+		return ![object isKindOfClass:[CSRoutePolyLineOverlay class]];
+	}];
+	overlays=[overlays filteredArrayUsingPredicate:predicate];
+	//
+	
+	if(_toggleMap){
+		self.activeMapSource=[[CSAppleSatelliteMapSource alloc]init];
+	}else{
+		self.activeMapSource=[[CSOrdnanceSurveyStreetViewMapSource alloc]init];
+	}
+	_toggleMap=!_toggleMap;
+	
+	
+	[CSMapTileService updateMapStyleForMap:_mapView toMapStyle:_activeMapSource withOverlays:overlays];
+	
+	[CSMapTileService updateMapAttributonLabel:_attributionLabel forMap:_mapView forMapStyle:_activeMapSource inView:self.view];
+	
+	[_mapView moveOverlayToTop:_routeOverlay inLevel:MKOverlayLevelAboveLabels];
+	
+	
+	
+}
 
 
 //------------------------------------------------------------------------------------
@@ -508,11 +542,18 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 					break;
 					
 				case MapPlanningStateRoute:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton,_followUserButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton,_rightFixed,_followUserButton];
 					break;
 					
 				case MapPlanningStateRouteLocating:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+				{
+					if(_allowsUserTrackingUI){
+						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton,_rightFixed,_followUserButton];
+					}else{
+						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+					}
+				}
+					
 				break;
 			}
 		}
@@ -1642,18 +1683,21 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 - (IBAction) searchButtonSelected {
 	
-	BetterLog(@"");
+//	BetterLog(@"");
+//	
+//	if (self.mapLocationSearchView == nil) {
+//		self.mapLocationSearchView = [[MapViewSearchLocationViewController alloc] initWithNibName:@"MapViewSearchLocationView" bundle:nil];
+//		
+//	}
+//	_mapLocationSearchView.locationReceiver = self;
+//	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
+//	
+//	[self presentModalViewController:_mapLocationSearchView	animated:YES];
+//	
+//	[self hideAddPointView];
 	
-	if (self.mapLocationSearchView == nil) {
-		self.mapLocationSearchView = [[MapViewSearchLocationViewController alloc] initWithNibName:@"MapViewSearchLocationView" bundle:nil];
-		
-	}
-	_mapLocationSearchView.locationReceiver = self;
-	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
 	
-	[self presentModalViewController:_mapLocationSearchView	animated:YES];
-	
-	[self hideAddPointView];
+	[self toggleMapTiles];
 	
 }
 

@@ -14,6 +14,7 @@
 #import "ExpandedUILabel.h"
 #import "UIView+Additions.h"
 #import "ViewUtilities.h"
+#import "GlobalUtilities.h"
 
 @implementation CSMapTileService
 
@@ -23,12 +24,16 @@
 	
 	if(overlays.count==0){
 		
+		// if current map source is one of Apple's
 		if(![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
-			
-			mapSource.maximumZ=mapSource.maxZoom;
-			[mapView insertOverlay:mapSource atIndex:0 level:MKOverlayLevelAboveLabels];
 			mapSource.canReplaceMapContent = YES;
+			mapSource.maximumZ=mapSource.maxZoom;
+			[mapView addOverlay:mapSource level:MKOverlayLevelAboveLabels];
+			
+			dispatch_after(dispatch_time_t(9.0), dispatch_get_main_queue(), ^{
+				[CSMapTileService removeSatelliteLayerForMapSource:mapSource];
+			});
 			
 		}else{
 			
@@ -46,18 +51,16 @@
 		
 	}else{
 		
+		// if current map source is a custom tile server
 		for(id <MKOverlay> overlay in overlays){
 			if([overlay isKindOfClass:[MKTileOverlay class]] ){
 				
 				
 				if([mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR]){
 					
-					
 					[mapView removeOverlay:overlay];
 					
 					mapView.mapType=MKMapTypeStandard;
-					
-					break;
 					
 				}else if([mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 					
@@ -65,7 +68,6 @@
 					
 					mapView.mapType=MKMapTypeHybrid;
 					
-					break;
 					
 				}else{
 					
@@ -75,12 +77,8 @@
 					[mapView insertOverlay:mapSource atIndex:0 level:MKOverlayLevelAboveLabels]; // always at bottom
 					
 					
-					break;
-					
 				}
 				
-				
-				break;
 			}
 		}
 		
@@ -88,6 +86,12 @@
 	
 }
 
+
++(void)removeSatelliteLayerForMapSource:(CSMapSource*)mapSource{
+	BetterLog(@"");
+	mapSource.canReplaceMapContent = YES;
+	
+}
 
 
 +(void)updateMapAttributonLabel:(ExpandedUILabel*)label forMap:(MKMapView*)mapView forMapStyle:(CSMapSource*)mapSource inView:(UIView *)view{
