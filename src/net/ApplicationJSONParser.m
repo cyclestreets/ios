@@ -19,6 +19,7 @@
 #import "CSUserRouteList.h"
 #import "POICategoryVO.h"
 #import "POIManager.h"
+#import "CSUserRoutePagination.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -190,7 +191,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	if(root!=nil){
 		
 		CSUserRouteList *list=[[CSUserRouteList alloc]init];
-		list.requestpaginationDict=root[@"pagination"];
+		list.requestpagination=[[CSUserRoutePagination alloc]initWithDictionary:root[@"pagination"]];
+		
 		NSMutableArray	*arr=[[NSMutableArray alloc]init];
 		
 		NSDictionary *journeys=root[@"journeys"];

@@ -12,6 +12,8 @@
 #import "UserRouteCellView.h"
 #import "UserAccount.h"
 #import "CSUserRouteVO.h"
+#import "CSUserRoutePagination.h"
+#import "StringUtilities.h"
 
 @interface LeisureListViewController()<UITableViewDataSource,UITableViewDelegate>
 
@@ -19,6 +21,7 @@
 @property (nonatomic,strong)  NSMutableArray								*dataProvider;
 
 @property (nonatomic,weak) IBOutlet  UITableView							*tableView;
+@property (weak, nonatomic) IBOutlet UILabel                                *routeCountLabel;
 
 @end
 
@@ -78,6 +81,9 @@
 			[self showViewOverlayForType:kViewOverlayTypeNone show:NO withMessage:nil];
 			
 			[_tableView reloadData];
+            
+			CSUserRoutePagination *pagination=result[RESPONSE];
+			_routeCountLabel.text=NSStringFormat(@"%i of %i",pagination.currentCount,pagination.total);
 			
 		}
 		
@@ -112,7 +118,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 	
-	[[UserAccount sharedInstance] loadRoutesForUser:NO cursorId:nil];
+	[[UserAccount sharedInstance] loadRoutesForUser:YES pagedDirectionisNewer:NO pagedID:nil];
 	
 	[self createNonPersistentUI];
 	

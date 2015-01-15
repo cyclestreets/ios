@@ -27,6 +27,7 @@
 #import "BUDataSourceManager.h"
 #import "BuildTargetConstants.h"
 #import "CSUserRouteList.h"
+#import "CSUserRoutePagination.h"
 
 @interface UserAccount()
 
@@ -361,15 +362,71 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 #pragma mark - User route loading by username
 
--(void)loadRoutesForUser:(BOOL)isPaged cursorId:(NSString*)cursorID{
+// later == newer
+
+/*
+ "latest": 43047091,
+ "urlLater": "https://api.cyclestreets.net/v2/journeys.user?username=someuser&format=flat&limit=3&datetime=friendly&after=43047091",
+ "hasLater": false,
+ "top": 43047091,
+ "bottom": 43047056,
+ "hasEarlier": true,
+ "urlEarlier": "https://api.cyclestreets.net/v2/journeys.user?username=someuser&format=flat&limit=3&datetime=friendly&before=43047056",
+ "earliest": 37022101,
+ "count": 3,
+ "total": 15
+ */
+//
+//-(void)loadRoutesForUser:(BOOL)isPaged cursorId:(NSString*)cursorID{
+//	
+//	NSMutableDictionary *parameters=[@{@"key":[CycleStreets sharedInstance].APIKey,
+//									   @"limit":@(20),
+//									   @"datetime":@"sqldatetime",
+//									   @"format":@"flat"} mutableCopy];
+//	
+//	if(isPaged){
+//		parameters[@"before"]=cursorID;
+//	}
+//	
+//	if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
+//		parameters[@"username"]=API_IDENTIFIER;
+//	}else{
+//		parameters[@"username"]=_user.username;
+//	}
+//	
+//	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+//	request.dataid=ROUTESFORUSER;
+//	request.requestid=ZERO;
+//	request.parameters=parameters;
+//	request.source=DataSourceRequestCacheTypeUseNetwork;
+//	
+//	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+//		
+//		[self loadRoutesForUserResponse:operation];
+//		
+//	};
+//	
+//	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+//	
+//	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining Routes for user" andMessage:nil];
+//	
+//	
+//}
+
+-(void)loadRoutesForUser:(BOOL)initialLoad pagedDirectionisNewer:(BOOL)newer pagedID:(NSString*)pagedID{
+	
 	
 	NSMutableDictionary *parameters=[@{@"key":[CycleStreets sharedInstance].APIKey,
-									   @"limit":@(30),
+									   @"limit":@(20),
 									   @"datetime":@"sqldatetime",
 									   @"format":@"flat"} mutableCopy];
 	
-	if(isPaged){
-		parameters[@"before"]=cursorID;
+	if(!initialLoad){
+		if(newer){
+			parameters[@"after"]=pagedID;
+		}else{
+			parameters[@"before"]=pagedID;
+		}
 	}
 	
 	if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
@@ -386,7 +443,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
 		
-		[self loadRoutesForUserResponse:operation];
+		[self loadRoutesForUserResponse:operation forDirection:newer];
 		
 	};
 	
@@ -395,20 +452,36 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining Routes for user" andMessage:nil];
 	
 	
+	
+	
 }
 
+// UI should display x of x
 
--(void)loadRoutesForUserPage{
+-(void)loadRoutesForUserPageInDirection:(BOOL)newer{
 	
-	if(self.userRouteDataProvider.hasNextPage){
-		[self loadRoutesForUser:YES cursorId:self.userRouteDataProvider.bottomID];
+	if(newer){
+		
+		[self loadRoutesForUser:NO pagedDirectionisNewer:YES pagedID:self.userRouteDataProvider.requestpagination.topID];
+		
+	}else{
+		
+		if(self.userRouteDataProvider.requestpagination.hasEarlier){
+			if(self.userRouteDataProvider.requestpagination.bottomID!=self.userRouteDataProvider.requestpagination.earliestID){
+				[self loadRoutesForUser:NO pagedDirectionisNewer:NO pagedID:self.userRouteDataProvider.requestpagination.bottomID];
+			}
+		}
+		
 	}
 	
+	
 }
 
 
 
--(void)loadRoutesForUserResponse:(BUNetworkOperation*)response{
+
+
+-(void)loadRoutesForUserResponse:(BUNetworkOperation*)response forDirection:(BOOL)newer{
 	
 	BetterLog(@"");
 	
@@ -421,13 +494,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 				self.userRouteDataProvider=response.responseObject;
 			}else{
 				CSUserRouteList *newlist=response.responseObject;
-				self.userRouteDataProvider.requestpaginationDict=newlist.requestpaginationDict;
+				self.userRouteDataProvider.requestpagination=newlist.requestpagination;
 				
-				[_userRouteDataProvider.routes addObjectsFromArray:newlist.routes];
+				if(newer){
+					[_userRouteDataProvider.routes insertObjects:newlist.routes atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,newlist.routes.count)]];
+				}else{
+					[_userRouteDataProvider.routes addObjectsFromArray:newlist.routes];
+				}
+				
 				
 			}
 			
-			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:SUCCESS,STATE, nil];
+			NSDictionary *dict=@{STATE:SUCCESS, RESPONSE:_userRouteDataProvider.requestpagination};
 			[[NSNotificationCenter defaultCenter] postNotificationName:ROUTESFORUSERRESPONSE object:nil userInfo:dict];
 			
 			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeSuccess withTitle:@"Complete" andMessage:nil];
@@ -438,7 +516,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 		case ValidationUserRoutesFailed:
 		{
 			CSUserRouteList *newlist=response.responseObject;
-			if(newlist==nil || newlist.count==0){
+			if(newlist==nil || newlist.routes.count==0){
 				NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"ROUTESFORUSERRESPONSE" object:nil userInfo:dict];
 			}

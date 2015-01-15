@@ -13,6 +13,21 @@
 #import "NSString-Utilities.h"
 #import "NSDataAdditions.h"
 
+
+NSString *NSStringFormat(NSString *format, ...) {
+	va_list args;
+	NSString *str;
+	va_start(args,format);
+	str=[[NSString alloc] initWithFormat:format arguments:args];
+	va_end(args);
+	
+	return str;
+}
+
+NSString *LocalisedString(NSString *str){
+	return NSLocalizedString(str,@"");
+}
+
 @implementation StringUtilities
 
 

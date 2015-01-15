@@ -10,6 +10,8 @@
 
 #define UUID_USER_DEFAULTS_KEY @"UUID"
 
+NSString *NSStringFormat(NSString *format, ...);
+NSString *LocalisedString(NSString *str);
 
 @interface StringUtilities : NSObject {
 

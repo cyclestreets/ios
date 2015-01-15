@@ -54,5 +54,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserAccount)
 -(void)updateAutoLoginPreference:(BOOL)value;
 
 
--(void)loadRoutesForUser:(BOOL)isPaged cursorId:(NSString*)cursorID;
+-(void)loadRoutesForUser:(BOOL)initialLoad pagedDirectionisNewer:(BOOL)newer pagedID:(NSString*)pagedID;
+
 @end

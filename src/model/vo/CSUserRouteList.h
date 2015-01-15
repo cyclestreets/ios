@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class CSUserRoutePagination;
+
 @interface CSUserRouteList : NSObject
 
 
-@property (nonatomic,strong)  NSDictionary			*requestpaginationDict;
+@property (nonatomic,strong)  CSUserRoutePagination			*requestpagination;
 
-@property (nonatomic, strong)	NSMutableArray		*routes;
+@property (nonatomic, strong)	NSMutableArray				*routes;
 
 // getter
 
-@property(nonatomic,readonly)  NSInteger			count;
-@property(nonatomic,readonly)  BOOL					hasNextPage;
-@property(nonatomic,readonly)  NSString				*bottomID;
+
 
 
 @end

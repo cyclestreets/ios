@@ -406,6 +406,9 @@
 		283781651A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */; };
 		283781661A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */; };
 		283781671A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */; };
+		283A0EE61A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 283A0EE51A686A4D0020B6AD /* CSUserRoutePagination.m */; };
+		283A0EE71A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 283A0EE51A686A4D0020B6AD /* CSUserRoutePagination.m */; };
+		283A0EE81A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 283A0EE51A686A4D0020B6AD /* CSUserRoutePagination.m */; };
 		283C5FCC18B915C300E97BDF /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8318AE427B00EF0436 /* PhotoWizardViewController.m */; };
 		283C5FCD18B91B4500E97BDF /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8118AE427B00EF0436 /* PhotoWizardLocationViewController.m */; };
 		28443E5C1332862000FAD008 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
@@ -1375,6 +1378,8 @@
 		2837815C1A24751A00D046A5 /* LeisureListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeisureListViewController.m; path = src/controllers/LeisureListViewController.m; sourceTree = "<group>"; };
 		2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_leisure@2x.png"; sourceTree = "<group>"; };
 		283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_noleisureroutes@2x.png"; sourceTree = "<group>"; };
+		283A0EE41A686A4D0020B6AD /* CSUserRoutePagination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUserRoutePagination.h; sourceTree = "<group>"; };
+		283A0EE51A686A4D0020B6AD /* CSUserRoutePagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUserRoutePagination.m; sourceTree = "<group>"; };
 		28443E5A1332862000FAD008 /* RouteCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCellView.h; sourceTree = "<group>"; };
 		28443E5B1332862000FAD008 /* RouteCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCellView.m; sourceTree = "<group>"; };
 		28443E611332867D00FAD008 /* RouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteVO.h; sourceTree = "<group>"; };
@@ -2703,6 +2708,8 @@
 				28347A9B1A37174400FA83BE /* CSUserRouteVO.m */,
 				28347A9F1A371EC800FA83BE /* CSUserRouteList.h */,
 				28347AA01A371EC800FA83BE /* CSUserRouteList.m */,
+				283A0EE41A686A4D0020B6AD /* CSUserRoutePagination.h */,
+				283A0EE51A686A4D0020B6AD /* CSUserRoutePagination.m */,
 			);
 			path = vo;
 			sourceTree = "<group>";
@@ -4235,6 +4242,7 @@
 				28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */,
 				28AD6435131FB6C8008527FC /* BorderView.m in Sources */,
 				288055D418BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */,
+				283A0EE61A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */,
 				28AD6437131FB6C8008527FC /* BUSegmentedControl.m in Sources */,
 				28AD6438131FB6C8008527FC /* CustomNavigtionBar.m in Sources */,
 				28AD6439131FB6C8008527FC /* ExpandedUILabel.m in Sources */,
@@ -4399,6 +4407,7 @@
 				283436EA15DD5DC300B00FD5 /* AsyncImageView.m in Sources */,
 				283436EB15DD5DC300B00FD5 /* BorderView.m in Sources */,
 				283436EC15DD5DC300B00FD5 /* BUSegmentedControl.m in Sources */,
+				283A0EE71A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */,
 				283436ED15DD5DC300B00FD5 /* CustomNavigtionBar.m in Sources */,
 				283436EE15DD5DC300B00FD5 /* ExpandedUILabel.m in Sources */,
 				283436F015DD5DC300B00FD5 /* GradiantRectView.m in Sources */,
@@ -4641,6 +4650,7 @@
 				28FA8B6A19E454E80040EA46 /* AppConfigManager.m in Sources */,
 				28FA8B6B19E454E80040EA46 /* UIDevice+Machine.m in Sources */,
 				28FA8B6C19E454E80040EA46 /* NSDataAdditions.m in Sources */,
+				283A0EE81A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */,
 				28FA8B6E19E454E80040EA46 /* POICategoryVO.m in Sources */,
 				28FA8B6F19E454E80040EA46 /* POILocationVO.m in Sources */,
 				28B0AD3719EEBA21008A3F21 /* POICatLocationCellView.m in Sources */,
