@@ -27,13 +27,11 @@
 		// if current map source is one of Apple's
 		if(![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
-			mapSource.canReplaceMapContent = YES;
+			//TODO: will be YES once Bing tiles are available.
+			mapSource.canReplaceMapContent = NO;
 			mapSource.maximumZ=mapSource.maxZoom;
 			[mapView addOverlay:mapSource level:MKOverlayLevelAboveLabels];
 			
-			dispatch_after(dispatch_time_t(9.0), dispatch_get_main_queue(), ^{
-				[CSMapTileService removeSatelliteLayerForMapSource:mapSource];
-			});
 			
 		}else{
 			
@@ -86,12 +84,6 @@
 	
 }
 
-
-+(void)removeSatelliteLayerForMapSource:(CSMapSource*)mapSource{
-	BetterLog(@"");
-	mapSource.canReplaceMapContent = YES;
-	
-}
 
 
 +(void)updateMapAttributonLabel:(ExpandedUILabel*)label forMap:(MKMapView*)mapView forMapStyle:(CSMapSource*)mapSource inView:(UIView *)view{

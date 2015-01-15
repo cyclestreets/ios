@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,14 +12,14 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I1p-Yx-MvK" id="Wg2-JK-0CO">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xp2-xh-0DU">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xp2-xh-0DU">
                         <rect key="frame" x="15" y="8" width="278" height="21"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73E-fo-Hml">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73E-fo-Hml">
                         <rect key="frame" x="15" y="27" width="278" height="21"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.34509803919999998" green="0.38823529410000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,6 +28,16 @@
                     </label>
                 </subviews>
                 <color key="backgroundColor" red="0.92549019607843142" green="0.9137254901960784" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="xp2-xh-0DU" secondAttribute="bottom" constant="25" id="CLW-aq-c0E"/>
+                    <constraint firstAttribute="bottom" secondItem="73E-fo-Hml" secondAttribute="bottom" constant="6" id="Ee7-UB-Hh3"/>
+                    <constraint firstAttribute="trailing" secondItem="xp2-xh-0DU" secondAttribute="trailing" constant="27" id="Idg-fP-rWM"/>
+                    <constraint firstAttribute="trailing" secondItem="73E-fo-Hml" secondAttribute="trailing" constant="27" id="K12-Tw-oMT"/>
+                    <constraint firstItem="xp2-xh-0DU" firstAttribute="leading" secondItem="Wg2-JK-0CO" secondAttribute="leading" constant="15" id="MSj-Cp-dDe"/>
+                    <constraint firstItem="73E-fo-Hml" firstAttribute="top" secondItem="Wg2-JK-0CO" secondAttribute="top" constant="27" id="OmO-LO-KMA"/>
+                    <constraint firstItem="73E-fo-Hml" firstAttribute="leading" secondItem="Wg2-JK-0CO" secondAttribute="leading" constant="15" id="VSe-o8-5rF"/>
+                    <constraint firstItem="xp2-xh-0DU" firstAttribute="top" secondItem="Wg2-JK-0CO" secondAttribute="top" constant="8" id="wQ5-cZ-KxX"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLabel" destination="73E-fo-Hml" id="zH1-YD-uGm"/>
@@ -37,4 +46,9 @@
             <point key="canvasLocation" x="497" y="247.5"/>
         </tableViewCell>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
