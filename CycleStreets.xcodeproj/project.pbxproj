@@ -549,6 +549,9 @@
 		2875DE4E18B77CC400BEF18B /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875DE4C18B77CC400BEF18B /* BUIconActionSheet.m */; };
 		2875DE5118B77E7900BEF18B /* BUIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875DE5018B77E7900BEF18B /* BUIconButton.m */; };
 		2875DE5218B77E7900BEF18B /* BUIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875DE5018B77E7900BEF18B /* BUIconButton.m */; };
+		2877C4C21A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */; };
+		2877C4C31A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */; };
+		2877C4C41A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */; };
 		287868F81886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 287868F71886954300CA9746 /* CSIcon_intermediate_wisp@2X.png */; };
 		287868F91886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 287868F71886954300CA9746 /* CSIcon_intermediate_wisp@2X.png */; };
 		287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */; };
@@ -811,6 +814,9 @@
 		28CBBCA01641B57F005E7056 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
 		28CBFB021590B76600F74441 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
 		28CBFB041590B77500F74441 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
+		28CD80701A6E91AF00821072 /* BSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CD806F1A6E91AF00821072 /* BSMapStyle.png */; };
+		28CD80711A6E91AF00821072 /* BSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CD806F1A6E91AF00821072 /* BSMapStyle.png */; };
+		28CD80721A6E91AF00821072 /* BSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CD806F1A6E91AF00821072 /* BSMapStyle.png */; };
 		28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
 		28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */; };
 		28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */; };
@@ -1482,6 +1488,8 @@
 		2875DE4C18B77CC400BEF18B /* BUIconActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUIconActionSheet.m; sourceTree = "<group>"; };
 		2875DE4F18B77E7900BEF18B /* BUIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUIconButton.h; sourceTree = "<group>"; };
 		2875DE5018B77E7900BEF18B /* BUIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUIconButton.m; sourceTree = "<group>"; };
+		2877C4C01A693F40002246DE /* CSBingSatelliteMapSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSBingSatelliteMapSource.h; sourceTree = "<group>"; };
+		2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSBingSatelliteMapSource.m; sourceTree = "<group>"; };
 		287868F71886954300CA9746 /* CSIcon_intermediate_wisp@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_intermediate_wisp@2X.png"; sourceTree = "<group>"; };
 		287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowLeft@2x.png"; sourceTree = "<group>"; };
 		287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
@@ -1772,6 +1780,7 @@
 		28CBEDAC1612DCF5002CDE5A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Map/MapViewController.m; sourceTree = "<group>"; };
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
 		28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_userphotomap@2x.png"; sourceTree = "<group>"; };
+		28CD806F1A6E91AF00821072 /* BSMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BSMapStyle.png; path = maps/BSMapStyle.png; sourceTree = "<group>"; };
 		28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_left@2x.png"; sourceTree = "<group>"; };
 		28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_right@2x.png"; sourceTree = "<group>"; };
 		28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_straight_on@2x.png"; sourceTree = "<group>"; };
@@ -2339,6 +2348,7 @@
 		2853210E19E7EF1A00118E48 /* maps */ = {
 			isa = PBXGroup;
 			children = (
+				28CD806F1A6E91AF00821072 /* BSMapStyle.png */,
 				2853212319E7F24F00118E48 /* CNSMapStyle.png */,
 				2853210F19E7EFF900118E48 /* ASMapStyle.png */,
 				2853211019E7EFF900118E48 /* AVMapStyle.png */,
@@ -2461,6 +2471,8 @@
 				28A9997119E6FEA80050C3E8 /* CSCycleNorthMapSource.m */,
 				28A9997619E705440050C3E8 /* CSAppleSatelliteMapSource.h */,
 				28A9997719E705440050C3E8 /* CSAppleSatelliteMapSource.m */,
+				2877C4C01A693F40002246DE /* CSBingSatelliteMapSource.h */,
+				2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */,
 			);
 			path = maps;
 			sourceTree = "<group>";
@@ -3459,6 +3471,7 @@
 				28D10EC5135D6E54006F1D94 /* UIIcon_turn_right@2x.png in Resources */,
 				28ECBE0519CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */,
 				28D10EC6135D6E54006F1D94 /* UIIcon_photomap@2x.png in Resources */,
+				28CD80701A6E91AF00821072 /* BSMapStyle.png in Resources */,
 				28D10EC7135D6E54006F1D94 /* CSTabBar_account@2x.png in Resources */,
 				28D10EC8135D6E54006F1D94 /* CSTabBar_add_photo@2x.png in Resources */,
 				287868F81886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */,
@@ -3709,6 +3722,7 @@
 				28FA8BB419E45A260040EA46 /* CycleStreets.xcassets in Resources */,
 				2834364015DD5DC300B00FD5 /* donate.html in Resources */,
 				28727AC918B51CF500D957FD /* PhotoMapView.xib in Resources */,
+				28CD80711A6E91AF00821072 /* BSMapStyle.png in Resources */,
 				2834364115DD5DC300B00FD5 /* UIButtonBarArrowLeft@2x.png in Resources */,
 				2834364215DD5DC300B00FD5 /* UIButtonBarArrowRight@2x.png in Resources */,
 				2834364315DD5DC300B00FD5 /* UIButtonBarCameraSmall@2x.png in Resources */,
@@ -3922,6 +3936,7 @@
 				28FA8A7319E454E80040EA46 /* RouteSegmentView.xib in Resources */,
 				28FA8A7519E454E80040EA46 /* RouteListView.xib in Resources */,
 				286FAE771A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
+				28CD80721A6E91AF00821072 /* BSMapStyle.png in Resources */,
 				28FA8A7719E454E80040EA46 /* RoutesView.xib in Resources */,
 				28E1468219F2B25E00242F2F /* PhotoMapVideoLocationView.xib in Resources */,
 				289EFC7419EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png in Resources */,
@@ -4344,6 +4359,7 @@
 				282517FF19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m in Sources */,
 				28A9997C19E705560050C3E8 /* CSCycleNorthMapSource.m in Sources */,
 				28347AA11A371EC800FA83BE /* CSUserRouteList.m in Sources */,
+				2877C4C21A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */,
 				289EFC6519ED9BCD0081E7BB /* UIImage+Additions.m in Sources */,
 				28D186D819378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */,
 				2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */,
@@ -4509,6 +4525,7 @@
 				28D186D919378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */,
 				28A9997B19E705550050C3E8 /* CSCycleNorthMapSource.m in Sources */,
 				28347AA21A371EC800FA83BE /* CSUserRouteList.m in Sources */,
+				2877C4C31A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */,
 				289EFC6619ED9BCD0081E7BB /* UIImage+Additions.m in Sources */,
 				2834376015DD5DC300B00FD5 /* PhotoCategoryManager.m in Sources */,
 				2834376515DD5DC300B00FD5 /* MapLocationSearchCellView.m in Sources */,
@@ -4644,6 +4661,7 @@
 				28B0AD5019EEEB14008A3F21 /* POIAnnotationView.m in Sources */,
 				28FA8B6619E454E80040EA46 /* BUNetworkOperation.m in Sources */,
 				28FA8B6719E454E80040EA46 /* PhotoMapListVO.m in Sources */,
+				2877C4C41A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */,
 				289EFC4319ED24360081E7BB /* SavedLocationVO.m in Sources */,
 				28FA8B6819E454E80040EA46 /* CSPointVO.m in Sources */,
 				28FA8B6919E454E80040EA46 /* HudManager.m in Sources */,
@@ -4998,7 +5016,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "73AD26A5-448B-4BEA-A33C-B06060B7A4B8";
+				PROVISIONING_PROFILE = "e5ad3ed4-7d02-49ff-bc00-a1600ad058e1";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -5016,7 +5034,7 @@
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: London Borough of Hackney (XDCV8Q3AAR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "";
@@ -5053,7 +5071,7 @@
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "80A320A2-7BF3-4900-BBB7-F68BD8CB359F";
+				PROVISIONING_PROFILE = "58FF386D-9965-4A92-B816-529F34F86368";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

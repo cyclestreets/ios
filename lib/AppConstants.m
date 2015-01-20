@@ -19,6 +19,7 @@ NSString *const MAPPING_BASE_OS = @"OS";
 NSString *const MAPPING_BASE_APPLE_VECTOR = @"AppleVector";
 NSString *const MAPPING_BASE_APPLE_SATELLITE = @"AppleSatellite";
 NSString *const MAPPING_BASE_CYCLENORTH = @"CycleNorthStaffs";
+NSString *const MAPPING_BASE_BING_SATELLITE = @"BingSatellite";
 
 
 

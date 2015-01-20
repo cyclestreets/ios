@@ -28,7 +28,7 @@
 		if(![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_VECTOR] && ![mapSource.uniqueTilecacheKey isEqualToString:MAPPING_BASE_APPLE_SATELLITE]){
 			
 			//TODO: will be YES once Bing tiles are available.
-			mapSource.canReplaceMapContent = NO;
+			mapSource.canReplaceMapContent = YES;
 			mapSource.maximumZ=mapSource.maxZoom;
 			[mapView addOverlay:mapSource level:MKOverlayLevelAboveLabels];
 			

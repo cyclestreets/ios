@@ -38,6 +38,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSAppleVectorMapSource.h"
 #import "CSCycleNorthMapSource.h"
 #import "CSAppleSatelliteMapSource.h"
+#import "CSBingSatelliteMapSource.h"
 
 #import "BuildTargetConstants.h"
 
@@ -121,6 +122,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 		
 		mapAttribution = nil;
 		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_BING_SATELLITE]) {
+		
+		mapAttribution = MAPPING_ATTRIBUTION_OS;
+		
 	}
 	return mapAttribution;
 	
@@ -154,6 +159,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	}else if ([mapStyle isEqualToString:MAPPING_BASE_CYCLENORTH]){
 		
 		return [[CSCycleNorthMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_BING_SATELLITE]){
+		
+		return [[CSBingSatelliteMapSource alloc]init];
 	}
 	
 	return [[CSOpenStreetMapSource alloc]init];
@@ -187,6 +196,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	}else if ([mapStyle isEqualToString:MAPPING_BASE_CYCLENORTH]){
 		
 		return [[CSCycleNorthMapSource alloc]init];
+		
+	}else if ([mapStyle isEqualToString:MAPPING_BASE_BING_SATELLITE]){
+		
+		return [[CSBingSatelliteMapSource alloc]init];
 	}
 	
 	return [[CSOpenStreetMapSource alloc]init];
