@@ -88,6 +88,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFixed;
+@property (nonatomic, strong) UIBarButtonItem						* rightFixedSeconday;
 
 @property (nonatomic, strong) UIBarButtonItem						* addPointButton;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
@@ -303,7 +304,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[self createNonPersistentUI];
 	
-	[super viewWillAppear:animated];
+	[super viewDidAppear:animated];
 	
 }
 
@@ -472,7 +473,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	self.rightFixed=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	self.rightFixed=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	self.rightFixedSeconday=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 	_rightFixed.width=20;
+	_rightFixedSeconday.width=20;
 }
 
 
@@ -542,15 +546,15 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 					break;
 					
 				case MapPlanningStateRoute:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton,_rightFixed,_followUserButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixedSeconday,_routeButton,_rightFixed,_followUserButton];
 					break;
 					
 				case MapPlanningStateRouteLocating:
 				{
 					if(_allowsUserTrackingUI){
-						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton,_rightFixed,_followUserButton];
+						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixedSeconday, _routeButton,_rightFixed,_followUserButton];
 					}else{
-						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_routeButton];
+						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixedSeconday,_routeButton];
 					}
 				}
 					
@@ -858,7 +862,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	if(_allowsUserTrackingUI){
 		
-		[self didSelectLocateUserbutton];
 		[_mapView setUserTrackingMode:MKUserTrackingModeFollowWithHeading animated:YES];
 		
 	}else{
@@ -1334,6 +1337,20 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 }
 
+- (BOOL)mapViewRegionDidChangeFromUserInteraction
+{
+	UIView *view = self.mapView.subviews.firstObject;
+	//  Look through gesture recognizers to determine whether this region change is from user interaction
+	for(UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+		if(recognizer.state == UIGestureRecognizerStateBegan || recognizer.state == UIGestureRecognizerStateEnded) {
+			return YES;
+		}
+	}
+	
+	return NO;
+}
+
+
 
 -(void)addLocationToMapForGesture:(CLLocation*)location{
 	
@@ -1387,6 +1404,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[self hideAddPointView];
 	
+	// if user tracking is on and the user drags the map we switch it off
+	// this is the Apple default for this mode.
+	if([self mapViewRegionDidChangeFromUserInteraction]){
+		if(_allowsUserTrackingUI)
+			[self stopUserTracking];
+	}
 	
 }
 
