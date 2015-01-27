@@ -545,7 +545,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                 <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100.00000092318969" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100" y="484" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
@@ -559,6 +559,19 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="4qN-Uv-Egx">
+                                <rect key="frame" x="16" y="80" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="imageEdgeInsets" minX="-4" minY="2" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="CSBarButton_followuser.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" image="CSBarButton_followuser_selected.png"/>
+                                <connections>
+                                    <action selector="toggleUserTracking" destination="gA4-QV-Dgc" eventType="touchUpInside" id="DkB-1V-UqR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.72941176470588232" green="0.20392156862745098" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
@@ -571,6 +584,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                     <connections>
                         <outlet property="addPointView" destination="w7T-3y-25G" id="Hm3-my-Qbu"/>
                         <outlet property="attributionLabel" destination="gMu-jU-Xl7" id="DEt-MS-Ard"/>
+                        <outlet property="followUserButton" destination="4qN-Uv-Egx" id="HH9-BJ-dHK"/>
                         <outlet property="mapView" destination="rA7-CW-iZg" id="Jwa-5P-voQ"/>
                         <outlet property="toolBar" destination="Y3q-ji-xW0" id="HwE-4d-aH0"/>
                         <outlet property="viewWaypointsButton" destination="iHQ-O9-9wh" id="xPb-mE-CtW"/>
@@ -1324,6 +1338,8 @@ Drag a waypoint to re-order it.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="CSBarButton_followuser.png" width="20" height="20"/>
+        <image name="CSBarButton_followuser_selected.png" width="20" height="20"/>
         <image name="CSBarButton_leisure.png" width="20" height="20"/>
         <image name="CSBarButton_poi.png" width="20" height="20"/>
         <image name="CSBarButton_saveloc.png" width="17" height="20"/>

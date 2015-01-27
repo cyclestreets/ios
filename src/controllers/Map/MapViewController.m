@@ -48,6 +48,7 @@
 
 #import "UIColor+AppColors.h"
 #import "UIImage+Additions.h"
+#import "UIImage-Additions.h"
 
 #import <Crashlytics/Crashlytics.h>
 #import <A2StoryboardSegueContext.h>
@@ -71,6 +72,8 @@
 #import "CSAppleSatelliteMapSource.h"
 #import "CSOrdnanceSurveyStreetViewMapSource.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 static NSInteger DEFAULT_ZOOM = 15;
 static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
@@ -92,7 +95,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 @property (nonatomic, strong) UIBarButtonItem						* addPointButton;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
-@property (nonatomic, strong) UIBarButtonItem						* followUserButton;
 
 
 @property (weak, nonatomic) IBOutlet UIView                          *addPointView;
@@ -160,6 +162,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic,strong)  UITapGestureRecognizer				*mapSingleTapRecognizer;
 @property (nonatomic,strong)  UITapGestureRecognizer				*mapDoubleTapRecognizer;
 
+@property (weak, nonatomic) IBOutlet UIButton						*followUserButton;
 
 @property (nonatomic,assign)  BOOL									toggleMap;
 
@@ -250,38 +253,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 }
 
 
-
--(void)toggleMapTiles{
-	
-	
-	NSArray *overlays=[_mapView overlaysInLevel:MKOverlayLevelAboveLabels];
-	
-	// filter to remove any Route overlays from this process
-	NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary *bindings) {
-		return ![object isKindOfClass:[CSRoutePolyLineOverlay class]];
-	}];
-	overlays=[overlays filteredArrayUsingPredicate:predicate];
-	//
-	
-	if(_toggleMap){
-		self.activeMapSource=[[CSAppleSatelliteMapSource alloc]init];
-	}else{
-		self.activeMapSource=[[CSOrdnanceSurveyStreetViewMapSource alloc]init];
-	}
-	_toggleMap=!_toggleMap;
-	
-	
-	[CSMapTileService updateMapStyleForMap:_mapView toMapStyle:_activeMapSource withOverlays:overlays];
-	
-	[CSMapTileService updateMapAttributonLabel:_attributionLabel forMap:_mapView forMapStyle:_activeMapSource inView:self.view];
-	
-	[_mapView moveOverlayToTop:_routeOverlay inLevel:MKOverlayLevelAboveLabels];
-	
-	
-	
-}
-
-
 //------------------------------------------------------------------------------------
 #pragma mark - View methods
 //------------------------------------------------------------------------------------
@@ -342,6 +313,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_walkingRouteOverlayView.y=self.view.height+_walkingRouteOverlayView.height;
 	
 	
+	_followUserButton.layer.cornerRadius=_followUserButton.width/2;
+	_followUserButton.layer.shadowColor=UIColorFromRGB(0x000000).CGColor;
+	_followUserButton.layer.shadowOffset=CGSizeMake(2,3);
+	_followUserButton.layer.shadowRadius=4;
+	_followUserButton.layer.shadowOpacity=0.7;
+	//[_followUserButton setImage:[[UIImage imageNamed:@"CSBarButton_followuser"] scaleWithMaxSize:20] forState:UIControlStateNormal];
+	//[_followUserButton setImage:[[UIImage imageNamed:@"CSBarButton_followuser_selected"] scaleWithMaxSize:20] forState:UIControlStateSelected];
 	
 	self.programmaticChange = NO;
 	self.singleTapDidOccur=NO;
@@ -464,11 +442,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_addPointButton.width=40;
 	
 	
-	self.followUserButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_followuser.png"]
-													   style:UIBarButtonItemStylePlain
-													  target:self
-													  action:@selector(toggleUserTracking)];
-	
 	
 	self.leftFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	self.rightFlex=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -546,15 +519,15 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 					break;
 					
 				case MapPlanningStateRoute:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixedSeconday,_routeButton,_rightFixed,_followUserButton];
+					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
 					break;
 					
 				case MapPlanningStateRouteLocating:
 				{
 					if(_allowsUserTrackingUI){
-						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixedSeconday, _routeButton,_rightFixed,_followUserButton];
+						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed, _routeButton];
 					}else{
-						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixedSeconday,_routeButton];
+						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
 					}
 				}
 					
@@ -601,7 +574,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			
 			items=[self toolbarItemsForBuildTargetForUIState];
 			[self.toolBar setItems:items animated:YES ];
-			
+			_followUserButton.visible=NO;
 		}
 		break;
 		
@@ -616,7 +589,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			items=[self toolbarItemsForBuildTargetForUIState];
 			
 			[self.toolBar setItems:items animated:YES ];
-			
+			_followUserButton.visible=NO;
 			
 			
 		}
@@ -632,6 +605,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			items=[self toolbarItemsForBuildTargetForUIState];
             
             [self.toolBar setItems:items animated:YES ];
+			_followUserButton.visible=NO;
 		}
 		break;
 		
@@ -645,6 +619,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			
 			items=[self toolbarItemsForBuildTargetForUIState];
             [self.toolBar setItems:items animated:YES ];
+			_followUserButton.visible=NO;
 		}
 		break;
 			
@@ -658,6 +633,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			
 			items=[self toolbarItemsForBuildTargetForUIState];
             [self.toolBar setItems:items animated:NO ];
+			
+			_followUserButton.visible=YES;
 		}
 		break;
 			
@@ -671,6 +648,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			
 			items=[self toolbarItemsForBuildTargetForUIState];
 			[self.toolBar setItems:items animated:NO ];
+			_followUserButton.visible=YES;
 		}
 		break;
 	}
@@ -856,7 +834,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	[_mapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
 }
 
--(void)toggleUserTracking{
+-(IBAction)toggleUserTracking{
 	
 	_allowsUserTrackingUI=!_allowsUserTrackingUI;
 	
@@ -870,6 +848,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}
 	
+	_followUserButton.selected=_allowsUserTrackingUI;
 }
 
 
@@ -1706,21 +1685,18 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 - (IBAction) searchButtonSelected {
 	
-//	BetterLog(@"");
-//	
-//	if (self.mapLocationSearchView == nil) {
-//		self.mapLocationSearchView = [[MapViewSearchLocationViewController alloc] initWithNibName:@"MapViewSearchLocationView" bundle:nil];
-//		
-//	}
-//	_mapLocationSearchView.locationReceiver = self;
-//	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
-//	
-//	[self presentModalViewController:_mapLocationSearchView	animated:YES];
-//	
-//	[self hideAddPointView];
+	BetterLog(@"");
 	
+	if (self.mapLocationSearchView == nil) {
+		self.mapLocationSearchView = [[MapViewSearchLocationViewController alloc] initWithNibName:@"MapViewSearchLocationView" bundle:nil];
+		
+	}
+	_mapLocationSearchView.locationReceiver = self;
+	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
 	
-	[self toggleMapTiles];
+	[self presentModalViewController:_mapLocationSearchView	animated:YES];
+	
+	[self hideAddPointView];
 	
 }
 
