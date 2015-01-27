@@ -318,8 +318,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_followUserButton.layer.shadowOffset=CGSizeMake(2,3);
 	_followUserButton.layer.shadowRadius=4;
 	_followUserButton.layer.shadowOpacity=0.7;
-	//[_followUserButton setImage:[[UIImage imageNamed:@"CSBarButton_followuser"] scaleWithMaxSize:20] forState:UIControlStateNormal];
-	//[_followUserButton setImage:[[UIImage imageNamed:@"CSBarButton_followuser_selected"] scaleWithMaxSize:20] forState:UIControlStateSelected];
 	
 	self.programmaticChange = NO;
 	self.singleTapDidOccur=NO;
@@ -832,6 +830,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_programmaticChange=NO;
 	_allowsUserTrackingUI=NO;
 	[_mapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
+	_followUserButton.selected=_allowsUserTrackingUI;
 }
 
 -(IBAction)toggleUserTracking{
