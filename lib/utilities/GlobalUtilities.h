@@ -215,5 +215,7 @@ typedef int LayoutBoxLayoutMode;
 
 + (float)randomFloatBetween:(float)smallNumber and:(float)bigNumber;
 
++ (int)randomIntBetween:(int)smallNumber and:(int)bigNumber;
+
 
 @end

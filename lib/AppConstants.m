@@ -70,6 +70,7 @@ NSString *const PHOTOCATEGORIES=@"PhotoCategories";
 NSString *const WAYPOINTMETADATA=@"WaypointMetaData";
 NSString *const LEISUREROUTE=@"LeisureRoute";
 NSString *const ROUTESFORUSER=@"RoutesForUser";
+NSString *const BINGMAPAUTHENTICATION=@"BingMapAuthentication";
 
 
 //INTERNAL

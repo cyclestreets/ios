@@ -5100,7 +5100,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "Beta-";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5137,7 +5137,7 @@
 				OTHER_LIBTOOLFLAGS = "$(OTHER_LDFLAGS)";
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
+				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -8,8 +8,117 @@
 
 #import "CSBingSatelliteMapSource.h"
 #import "StringUtilities.h"
+#import "BUNetworkOperation.h"
+#import "BUDataSourceManager.h"
+#import "GlobalUtilities.h"
+
 
 static NSString *const BINGAPIKEY=@"AgHV52-Gik3ea9np4bd9njM-kWOtQuGZne-sV96AeQtq9beH7Z_eumfxrAkYCNmY";
+
+@interface CSBingSatelliteAuthentication()
+
+@property (nonatomic,strong)  NSString				*mapTileURL;
+@property (nonatomic,assign)  int					mapTileZoom;
+
+@property (nonatomic,strong)  NSDictionary			*responseDict;
+
+@end
+
+@implementation CSBingSatelliteAuthentication
+SYNTHESIZE_SINGLETON_FOR_CLASS(CSBingSatelliteAuthentication);
+
+
+- (instancetype)init
+{
+	self = [super init];
+	if (self) {
+		_mapTileZoom=19;
+		[self fetchBingAuthentication];
+	}
+	return self;
+}
+
+
+-(void)fetchBingAuthentication{
+	
+	NSMutableDictionary *parameters=[@{@"key":BINGAPIKEY} mutableCopy];
+	parameters[@"output"]=@"json";
+	parameters[@"mapVersion"]=@"v1";
+	
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=BINGMAPAUTHENTICATION;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	request.trackProgress=YES;
+	
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self fetchBingAuthenticationResponse:operation];
+		
+	};
+	
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	
+}
+
+
+-(void)fetchBingAuthenticationResponse:(BUNetworkOperation*)result{
+	
+	
+	switch(result.responseStatus){
+			
+		case ValidationBingAuthenticationSuccess:
+		{
+			self.responseDict=result.response.responseObject[DATAPROVIDER];
+			
+			NSString *imageURL=_responseDict[@"imageUrl"];
+			NSArray *imageDomains=_responseDict[@"imageUrlSubdomains"];
+			NSString *domainStr=imageDomains[[GlobalUtilities randomIntBetween:0 and:imageDomains.count]];
+			
+			NSString *urlTemplate=[imageURL stringByReplacingOccurrencesOfString:@"{subdomain}" withString:domainStr];
+			urlTemplate=[urlTemplate stringByReplacingOccurrencesOfString:@"{culture}" withString:@"en-GB"];
+			urlTemplate=[urlTemplate stringByReplacingOccurrencesOfString:@"{quadkey}" withString:@"%@"];
+			
+			self.mapTileURL=urlTemplate;
+			
+			self.mapTileZoom=[_responseDict[@"zoomMax"] intValue];
+			
+			
+		}
+		break;
+			
+		case ValidationBingAuthenticationFailed:
+		{
+		}
+		break;
+			
+		default:
+		break;
+	}
+	
+}
+
+
+-(int)mapTileZoom{
+	
+	if(_mapTileZoom>0){
+		return _mapTileZoom;
+	}
+	return 19;
+	
+}
+
+
+@end
+
+
+
+
+
 
 @implementation CSBingSatelliteMapSource
 
@@ -43,11 +152,8 @@ static NSString *const BINGAPIKEY=@"AgHV52-Gik3ea9np4bd9njM-kWOtQuGZne-sV96AeQtq
 // for use directly with map kit, if - (NSURL *)URLForTilePath:(MKTileOverlayPath)path is implemented this is effectively ignored
 - (NSString *)remotetileTemplate{
 	
-	if([self isRetinaEnabled]){
-		return @"http://ecn.t2.tiles.virtualearth.net/tiles/h%@.jpeg?g=3218&mkt=en-GB";
-	}else{
-		return @"http://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png";
-	}
+	return [[CSBingSatelliteAuthentication sharedInstance] mapTileURL];
+	
 }
 
 

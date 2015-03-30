@@ -46,7 +46,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 		self.parserMethods=@{RETREIVELOCATIONPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
 							 RETREIVEROUTEPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
 							 ROUTESFORUSER:[NSValue valueWithPointer:@selector(RoutesForUserParser)],
-							 POILISTING:[NSValue valueWithPointer:@selector(POIListingParser)]};
+							 POILISTING:[NSValue valueWithPointer:@selector(POIListingParser)],
+							 BINGMAPAUTHENTICATION:[NSValue valueWithPointer:@selector(BingAuthenticationParser)]};
 	}
 	return self;
 }
@@ -223,6 +224,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 
 
 
+
 -(void)POIListingParser{
 	
 	BetterLog(@"");
@@ -237,11 +239,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	
 	
 	if(root[@"types"]!=nil){
-		
+ 
 		NSMutableArray *dataProvider=[[NSMutableArray alloc]init];
-		
+ 
 		for(NSString *key in root[@"types"]){
-			
+ 
 			NSDictionary *dict=root[@"types"][key];
 			
 			POICategoryVO *poicategory=[[POICategoryVO alloc]init];
@@ -261,6 +263,71 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 		
 	}else{
 		_activeOperation.responseStatus=ValidationPOIListingFailure;
+	}
+	
+	
+}
+
+/*{
+ authenticationResultCode = ValidCredentials;
+ brandLogoUri = "http://dev.virtualearth.net/Branding/logo_powered_by.png";
+ copyright = "Copyright \U00a9 2015 Microsoft and its suppliers. All rights reserved. This API cannot be accessed and the content and any results may not be used, reproduced or transmitted in any manner without express written permission from Microsoft Corporation.";
+ resourceSets =     (
+ {
+ estimatedTotal = 1;
+ resources =             (
+ {
+ "__type" = "ImageryMetadata:http://schemas.microsoft.com/search/local/ws/rest/v1";
+ imageHeight = 256;
+ imageUrl = "http://ecn.{subdomain}.tiles.virtualearth.net/tiles/h{quadkey}.jpeg?g=3415&mkt={culture}";
+ imageUrlSubdomains =                     (
+ t0,
+ t1,
+ t2,
+ t3
+ );
+ imageWidth = 256;
+ imageryProviders = "<null>";
+ vintageEnd = "<null>";
+ vintageStart = "<null>";
+ zoomMax = 21;
+ zoomMin = 1;
+ }
+ );
+ }
+ );
+ statusCode = 200;
+ statusDescription = OK;
+ traceId = "ec50f2eab249436aa569655135f16c37|DB40061119|02.00.130.2400|";
+ }
+ 
+ */
+
+
+-(void)BingAuthenticationParser{
+	
+	[self validateJSON];
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		_activeOperation.responseStatus=ValidationBingAuthenticationFailed;
+		return;
+	}
+	
+	NSArray *resourcesets=_responseDict[@"resourceSets"];
+	if(resourcesets){
+		NSDictionary *resources=resourcesets[0];
+		if(resources){
+			NSDictionary *responseDict=resources[@"resources"][0];
+			
+			_activeOperation.operationState=NetResponseStateComplete;
+			_activeOperation.responseStatus=ValidationBingAuthenticationSuccess;
+			
+			[_activeOperation setResponseWithValue:@{DATAPROVIDER:responseDict}];
+			
+		}else{
+			_activeOperation.responseStatus=ValidationBingAuthenticationFailed;
+		}
+	}else{
+		_activeOperation.responseStatus=ValidationBingAuthenticationFailed;
 	}
 	
 	

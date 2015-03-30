@@ -505,5 +505,8 @@ dataProvider:(NSDictionary*)dataProvider withKeys:(NSArray*)keys{
 	return (((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
 }
 
-
++ (int)randomIntBetween:(int)smallNumber and:(int)bigNumber {
+	int diff = bigNumber - smallNumber;
+	return (((int) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * diff) + smallNumber;
+}
 @end

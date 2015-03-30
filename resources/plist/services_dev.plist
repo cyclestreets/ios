@@ -299,5 +299,18 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>BingMapAuthentication</key>
+	<dict>
+		<key>id</key>
+		<string>BingMapAuthentication</string>
+		<key>remoteurl</key>
+		<string>http://dev.virtualearth.net/REST/V1/Imagery/Metadata/AerialWithLabels</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_JSON</string>
+	</dict>
 </dict>
 </plist>

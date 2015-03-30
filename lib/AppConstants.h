@@ -53,10 +53,10 @@ typedef NS_ENUM(int, BUResponseStatusCode){
 	ValidationPOIMapCategorySuccess=1016,
 	ValidationPOIMapCategorySuccessNoEntries=1017,
 	VaidationUserRoutesSuccess=1021,
-	
+	ValidationBingAuthenticationSuccess=1022,
 	
 	ValidationSuccessMIN=ValidationLoginSuccess,
-	ValidationSuccessMAX=VaidationUserRoutesSuccess,
+	ValidationSuccessMAX=ValidationBingAuthenticationSuccess,
 	
 	// failures
 	ValidationLoginFailed=2000, // 2000
@@ -75,11 +75,12 @@ typedef NS_ENUM(int, BUResponseStatusCode){
 	ValidationCategoriesFailed=2019,
 	ValidationPOIMapCategoryFailed=2020,
 	ValidationUserRoutesFailed=2021,
+	ValidationBingAuthenticationFailed=2022,
 	
 	ValidationCalculateRouteFailedOffNetwork=122711,
 	
 	ValidationFailureMIN=ValidationLoginFailed,
-	ValidationFailureMAX=ValidationUserRoutesFailed,
+	ValidationFailureMAX=ValidationBingAuthenticationFailed,
 	
 	// checking
 	ValdationInvalidCode=9997,
@@ -148,6 +149,7 @@ extern NSString *const PHOTOCATEGORIES;
 extern NSString *const WAYPOINTMETADATA;
 extern NSString *const LEISUREROUTE;
 extern NSString *const ROUTESFORUSER;
+extern NSString *const BINGMAPAUTHENTICATION;
 
 // INTERNAL
 extern NSString *const CALCULATEROUTERESPONSE;
@@ -167,6 +169,7 @@ extern NSString *const USERACCOUNTREGISTERSUCCESS;
 extern NSString *const POIMAPLOCATIONRESPONSE;
 extern NSString *const LEISUREROUTERESPONSE;
 extern NSString *const ROUTESFORUSERRESPONSE;
+
 
 extern NSString *const GPSLOCATIONUPDATE;
 extern NSString *const GPSLOCATIONFAILED;
