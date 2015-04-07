@@ -14,6 +14,7 @@
 #import "CSUserRouteVO.h"
 #import "CSUserRoutePagination.h"
 #import "StringUtilities.h"
+#import "CSTableLoadingCellView.h"
 
 @interface LeisureListViewController()<UITableViewDataSource,UITableViewDelegate>
 
@@ -22,6 +23,8 @@
 
 @property (nonatomic,weak) IBOutlet  UITableView							*tableView;
 @property (weak, nonatomic) IBOutlet UILabel                                *routeCountLabel;
+
+@property (nonatomic,strong)  CSUserRoutePagination							*paginationProvider;
 
 @end
 
@@ -82,8 +85,8 @@
 			
 			[_tableView reloadData];
             
-			CSUserRoutePagination *pagination=result[RESPONSE];
-			_routeCountLabel.text=NSStringFormat(@"%i of %i",pagination.currentCount,pagination.total);
+			self.paginationProvider=result[RESPONSE];
+			_routeCountLabel.text=NSStringFormat(@"%i of %i",_dataProvider.count,_paginationProvider.total);
 			
 		}
 		
@@ -111,6 +114,7 @@
 	
 	self.tableView.rowHeight=[UserRouteCellView rowHeight];
 	[_tableView registerNib:[UserRouteCellView nib] forCellReuseIdentifier:[UserRouteCellView cellIdentifier]];
+	[_tableView registerNib:[CSTableLoadingCellView nib] forCellReuseIdentifier:[CSTableLoadingCellView cellIdentifier]];
 	
 	[self createPersistentUI];
 }
@@ -154,16 +158,52 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	UserRouteCellView *cell=[tableView dequeueReusableCellWithIdentifier:[UserRouteCellView cellIdentifier]];
-	
 	NSInteger row=indexPath.row;
-	CSUserRouteVO *dp=_dataProvider[row];
 	
-	cell.dataProvider=dp;
-	[cell populate];
-    
-    return cell;
+	if([self handleTableViewWillDisplayRowAtIndexPath:indexPath]){
+		
+		CSTableLoadingCellView *cell=[self dequeueReusableSpinnerCellForTableView:tableView indexPath:indexPath message:@"Loading" animating:YES];
+		return cell;
+		
+	}else{
+		
+		UserRouteCellView *cell=[tableView dequeueReusableCellWithIdentifier:[UserRouteCellView cellIdentifier]];
+		
+		
+		CSUserRouteVO *dp=_dataProvider[row];
+		
+		cell.dataProvider=dp;
+		[cell populate];
+		
+		return cell;
+		
+	}
+	
 }
+
+
+#pragma mark - Table loading cell support
+
+- (CSTableLoadingCellView*)dequeueReusableSpinnerCellForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath message:(NSString*)message animating:(BOOL)animating{
+	
+	CSTableLoadingCellView *cell = [tableView dequeueReusableCellWithIdentifier:[CSTableLoadingCellView cellIdentifier]];
+	[cell updateLoadingText:message];
+	[cell updateLoading:animating];
+	
+	return cell;
+}
+
+- (BOOL)handleTableViewWillDisplayRowAtIndexPath:(NSIndexPath*)indexPath{
+	
+	if (indexPath.row == [_dataProvider count] - 1 && _paginationProvider.total > [_dataProvider count]) {
+			[[UserAccount sharedInstance] loadRoutesForUser:NO pagedDirectionisNewer:NO pagedID:_paginationProvider.bottomID];
+		return YES;
+	}
+	return NO;
+}
+
+
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	

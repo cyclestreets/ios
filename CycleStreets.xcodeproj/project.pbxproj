@@ -598,6 +598,12 @@
 		288D693A1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */; };
 		288D693B1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */; };
 		28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
+		28920F5C1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
+		28920F5D1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
+		28920F5E1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
+		28920F611AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
+		28920F621AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
+		28920F631AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
 		289478AA18AD31280066AA2E /* CycleStreets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289478A918AD31270066AA2E /* CycleStreets.xcassets */; };
 		289478AC18AD31410066AA2E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289478AB18AD31410066AA2E /* MainStoryboard.storyboard */; };
 		289478AD18AD31410066AA2E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289478AB18AD31410066AA2E /* MainStoryboard.storyboard */; };
@@ -1533,6 +1539,9 @@
 		288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_followuser_selected@2x.png"; sourceTree = "<group>"; };
 		28916030133A9AC9000C821B /* CSSegmentFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSegmentFooterView.h; sourceTree = "<group>"; };
 		28916031133A9AC9000C821B /* CSSegmentFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSegmentFooterView.m; sourceTree = "<group>"; };
+		28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSTableLoadingCell.xib; sourceTree = "<group>"; };
+		28920F5F1AD3CBB200997461 /* CSTableLoadingCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSTableLoadingCellView.h; path = src/cells/CSTableLoadingCellView.h; sourceTree = "<group>"; };
+		28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSTableLoadingCellView.m; path = src/cells/CSTableLoadingCellView.m; sourceTree = "<group>"; };
 		289478A918AD31270066AA2E /* CycleStreets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = CycleStreets.xcassets; path = CycleStreets/CycleStreets.xcassets; sourceTree = "<group>"; };
 		289478AB18AD31410066AA2E /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		28965C5218BF3CC3001BB258 /* TBXML+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+Additions.h"; sourceTree = "<group>"; };
@@ -2340,6 +2349,7 @@
 		2853210619E7DA6200118E48 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */,
 				28B0AD2F19EEBA17008A3F21 /* POICatLocationCell.xib */,
 				2853210719E7DA7E00118E48 /* MapStyleCellView.xib */,
 				289EFC4D19ED2CEC0081E7BB /* SavedLocationTableCell.xib */,
@@ -2541,6 +2551,8 @@
 				28B0AD3619EEBA21008A3F21 /* POITypeCellView.m */,
 				289EFC4919ED2C440081E7BB /* SavedLocationTableCellView.h */,
 				289EFC4A19ED2C440081E7BB /* SavedLocationTableCellView.m */,
+				28920F5F1AD3CBB200997461 /* CSTableLoadingCellView.h */,
+				28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -3604,6 +3616,7 @@
 				28B76F3015E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */,
 				28B76F3215E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */,
 				28B76F3415E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
+				28920F5C1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */,
 				28B76F3715E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
 				28BC6AA018AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
@@ -3701,6 +3714,7 @@
 				2834362415DD5DC300B00FD5 /* UIIcon_bear_right@2x.png in Resources */,
 				2834362515DD5DC300B00FD5 /* UIIcon_straight_on@2x.png in Resources */,
 				2834362615DD5DC300B00FD5 /* UIIcon_turn_left@2x.png in Resources */,
+				28920F5D1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */,
 				2834362715DD5DC300B00FD5 /* UIIcon_turn_right@2x.png in Resources */,
 				28042E9D1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */,
 				2834362815DD5DC300B00FD5 /* UIIcon_photomap@2x.png in Resources */,
@@ -4083,6 +4097,7 @@
 				28FA8AE719E454E80040EA46 /* UIButton_barbuttongreen_disabled.png in Resources */,
 				28FA8AE819E454E80040EA46 /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 				28FA8AE919E454E80040EA46 /* cyclestreets.geojson in Resources */,
+				28920F5E1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */,
 				28FA8AEA19E454E80040EA46 /* WayPointView.xib in Resources */,
 				28FA8AEB19E454E80040EA46 /* WayPointCell.xib in Resources */,
 				28FA8AEC19E454E80040EA46 /* CSIcon_intermediate_wisp.png in Resources */,
@@ -4297,6 +4312,7 @@
 				28D246031338926E00188783 /* RouteManager.m in Sources */,
 				286FD3031A02558100EB8C20 /* POICatLocationCellView.m in Sources */,
 				28347AA61A37695300FA83BE /* UserRouteCellView.m in Sources */,
+				28920F611AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */,
 				28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */,
 				2889095E193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */,
 				28727AD118B5222200D957FD /* PhotoMapViewController.m in Sources */,
@@ -4463,6 +4479,7 @@
 				2834370715DD5DC300B00FD5 /* FavouritesCellView.m in Sources */,
 				286FD3041A02558200EB8C20 /* POICatLocationCellView.m in Sources */,
 				28347AA71A37695300FA83BE /* UserRouteCellView.m in Sources */,
+				28920F621AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */,
 				2834370815DD5DC300B00FD5 /* CSRouteDetailsViewController.m in Sources */,
 				2889095F193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */,
 				2834370915DD5DC300B00FD5 /* LoginVO.m in Sources */,
@@ -4589,6 +4606,7 @@
 				28FA8B2019E454E80040EA46 /* UIApplication-Additions.m in Sources */,
 				28FA8B2219E454E80040EA46 /* UIColor-Expanded.m in Sources */,
 				28FA8B2319E454E80040EA46 /* UIImage+AKLoadingExtension.m in Sources */,
+				28920F631AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */,
 				289EFC4719ED2BA00081E7BB /* SavedLocationsViewController.m in Sources */,
 				28FA8B2419E454E80040EA46 /* UIView+Border.m in Sources */,
 				28FA8B2519E454E80040EA46 /* UIView+Additions.m in Sources */,
