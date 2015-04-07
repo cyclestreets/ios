@@ -161,11 +161,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CSBingSatelliteAuthentication);
 	
 	NSString *quadKey=[self convertXZYToQuadKey:path];
 	
-	NSString *urlstring=NSStringFormat([self remotetileTemplate],quadKey);
+	NSString *tileTemplate=[self remotetileTemplate];
 	
-	NSURL *url= [NSURL URLWithString:urlstring];
+	if(tileTemplate){
+		
+		NSString *urlstring=NSStringFormat(tileTemplate,quadKey);
 	
-	return url;
+		NSURL *url= [NSURL URLWithString:urlstring];
+	
+		return url;
+	}else{
+		
+		return nil;
+		
+	}
+	
 }
 
 

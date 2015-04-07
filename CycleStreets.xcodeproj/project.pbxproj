@@ -5005,7 +5005,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				DISPLAY_PREFIX = "Dev-";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5042,7 +5042,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "73AD26A5-448B-4BEA-A33C-B06060B7A4B8";
+				PROVISIONING_PROFILE = "d81949c6-49d1-4fec-85f6-9b8e0c37e0ce";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
