@@ -3408,7 +3408,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "CycleStreets Ltd";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
@@ -4883,7 +4883,7 @@
 					"$(inherited)",
 					"CONFIGURATION_$(CONFIGURATION)",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
@@ -4901,6 +4901,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -4927,7 +4928,7 @@
 					"$(inherited)",
 					"CONFIGURATION_$(CONFIGURATION)",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
@@ -4946,6 +4947,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -4971,7 +4973,7 @@
 					"$(inherited)",
 					"CONFIGURATION_$(CONFIGURATION)",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
@@ -4991,6 +4993,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Adhoc;
 		};
@@ -5178,6 +5181,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (4YM8CCJL5J)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -5216,6 +5220,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -5253,6 +5258,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

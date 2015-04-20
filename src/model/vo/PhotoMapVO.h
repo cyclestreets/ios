@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 
 
 @property (nonatomic)	CLLocationCoordinate2D		locationCoords;
-@property (nonatomic, strong)	NSString			*csid;
+@property (nonatomic, assign)	NSInteger			csid;
 @property (nonatomic, strong)	NSString			*caption;
 
 // image
@@ -48,13 +48,14 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 @property(nonatomic,readonly)  BOOL					hasVideo;
 @property(nonatomic,readonly)  BOOL					hasPhoto;
 
+@property(nonatomic,readonly)  NSString				*csidString;
+
+
 
 // v2
 -(void)updateWithAPIDict:(NSDictionary*)dict;
 
 
-// deprecate
-- (id)initWithDictionary:(NSDictionary *)fields;
 
 
 

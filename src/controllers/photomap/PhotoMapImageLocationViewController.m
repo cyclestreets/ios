@@ -156,7 +156,7 @@
 	
 	self.dataProvider=photoEntry;
 	
-	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csid]];
+	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csidString]];
 	
 	_imageLabel.text=[_dataProvider caption];
 	
@@ -265,8 +265,8 @@
 		{
 			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 			picker.mailComposeDelegate = self;
-			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",_dataProvider.csid]];
-			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",_dataProvider.csImageUrlString,_dataProvider.csid] isHTML:YES];
+			[picker setSubject:[NSString stringWithFormat:@"CycleStreets photo %@",_dataProvider.csidString]];
+			[picker setMessageBody:[NSString stringWithFormat:@"<a href=%@>CycleStreets photo %@</a>",_dataProvider.csImageUrlString,_dataProvider.csidString] isHTML:YES];
 			[picker addAttachmentData:UIImageJPEGRepresentation(_imageView.image, 1) mimeType:@"image/jpeg" fileName:@"CSPhoto.jpeg"];
 			
 			if(picker!=nil)

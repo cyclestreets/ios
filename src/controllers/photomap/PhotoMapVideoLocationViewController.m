@@ -155,7 +155,7 @@
 	
 	self.dataProvider=photoEntry;
 	
-	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Video #%@", [_dataProvider csid]];
+	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Video #%@", [_dataProvider csidString]];
 	
 	_imageLabel.text=[_dataProvider caption];
 	

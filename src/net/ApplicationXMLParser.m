@@ -570,7 +570,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 			location.latitude=[[TBXML textForElement:[TBXML childElementNamed:@"cs:latitude" parentElement:photonode]] floatValue];
 			photo.locationCoords=location;
 			
-			photo.csid=[TBXML textForElement:[TBXML childElementNamed:@"cs:id" parentElement:photonode]];
+			photo.csid=[[TBXML textForElement:[TBXML childElementNamed:@"cs:id" parentElement:photonode]] integerValue];
 			photo.caption=[TBXML textForElement:[TBXML childElementNamed:@"cs:caption" parentElement:photonode]];
 			photo.bigImageURL=[TBXML textForElement:[TBXML childElementNamed:@"cs:thumbnailUrl" parentElement:photonode]];
 			[photo generateSmallImageURL:[TBXML textForElement:[TBXML childElementNamed:@"cs:thumbnailSizes" parentElement:photonode]]];

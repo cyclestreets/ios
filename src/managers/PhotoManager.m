@@ -442,7 +442,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 		
 		NSString *uploadid=_uploadPhoto.uploadedPhotoId;
 		
-		if([photo.csid isEqualToString:uploadid]){
+		if([photo.csidString isEqualToString:uploadid]){
 			return YES;
 		}
 	}

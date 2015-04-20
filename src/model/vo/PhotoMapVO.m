@@ -52,7 +52,7 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 	NSDictionary *propertiesDict=dict[@"properties"];
 	if(propertiesDict!=nil){
 		
-		_csid=propertiesDict[@"id"];
+		_csid=[propertiesDict[@"id"] integerValue];
 		_bigImageURL=propertiesDict[@"thumbnailUrl"];
 		_caption=propertiesDict[@"caption"];
 		
@@ -111,17 +111,7 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 	}
 }
 
-- (id)initWithDictionary:(NSDictionary *)fields {
-	if (self = [super init]) {
-		_locationCoords.latitude = [[fields objectForKey:@"cs:latitude"] doubleValue];
-		_locationCoords.longitude = [[fields objectForKey:@"cs:longitude"] doubleValue];
-		_csid = [[fields objectForKey:@"cs:id"] copy];
-		_caption = [[fields objectForKey:@"cs:caption"] copy];
-		self.bigImageURL = [fields objectForKey:@"cs:thumbnailUrl"];
-		[self generateSmallImageURL:[fields objectForKey:@"cs:thumbnailSizes"]];
-	}
-	return self;
-}
+
 
 - (CLLocationCoordinate2D)location {
 	return _locationCoords;
@@ -129,7 +119,7 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 
 
 -(NSString*)csImageUrlString{
-	return [NSString stringWithFormat:@"http://cycle.st/p%@",self.csid];
+	return [NSString stringWithFormat:@"http://cycle.st/p%@",self.csidString];
 }
 
 -(NSString*)csVideoURLString{
@@ -140,6 +130,11 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 	}
 	return nil;
 	
+}
+
+
+-(NSString*)csidString{
+	return [NSString stringWithFormat:@"%li",_csid];
 }
 
 
