@@ -14,7 +14,7 @@
 
 - (UILabel *)legalLabel
 {
-	if(self.subviews.count>0){
+	if(self.subviews.count>1){
 		if([[self.subviews objectAtIndex:1] isKindOfClass:[UILabel class]]){
 			return [self.subviews objectAtIndex:1];
 		}
