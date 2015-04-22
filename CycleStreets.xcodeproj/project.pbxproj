@@ -2008,7 +2008,6 @@
 		289EFC6919EDA4E60081E7BB /* CSIcon_saveloc_work.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_saveloc_work.png; sourceTree = "<group>"; };
 		289EFC7019EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_saveloc_home@2x.png"; sourceTree = "<group>"; };
 		289EFC7119EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_saveloc_work@2x.png"; sourceTree = "<group>"; };
-		28A2630C1AE65672006C09A7 /* Stoke copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Stoke copy-Info.plist"; path = "/Users/neil/iPhone/Applications/CycleStreets/ios/Stoke copy-Info.plist"; sourceTree = "<absolute>"; };
 		28A264A21AE65AB4006C09A7 /* Cycle North Staffs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cycle North Staffs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A719901A0BE60700176949 /* CSOverlayPushTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSOverlayPushTransitionAnimator.h; sourceTree = "<group>"; };
 		28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSOverlayPushTransitionAnimator.m; sourceTree = "<group>"; };
@@ -2171,6 +2170,7 @@
 		28B4855A15262BE000E406E1 /* GenericConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericConstants.m; sourceTree = "<group>"; };
 		28B4855C15262D6000E406E1 /* NSString-Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString-Utilities.h"; sourceTree = "<group>"; };
 		28B4855D15262D6000E406E1 /* NSString-Utilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString-Utilities.m"; sourceTree = "<group>"; };
+		28B5270C1AE7D97D0032A84F /* ReleaseInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ReleaseInfo.plist; sourceTree = "<group>"; };
 		28B6B2EB1A5AA209002DF099 /* FirstRunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstRunViewController.h; sourceTree = "<group>"; };
 		28B6B2EC1A5AA209002DF099 /* FirstRunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstRunViewController.m; sourceTree = "<group>"; };
 		28B6B2F01A5AA5A0002DF099 /* welcome.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome.jpg; sourceTree = "<group>"; };
@@ -3660,6 +3660,7 @@
 				28FA8A2B19E452E00040EA46 /* AppDelegate.h */,
 				28FA8A2C19E452E00040EA46 /* AppDelegate.m */,
 				28FA8A2D19E452E00040EA46 /* Info.plist */,
+				28B5270C1AE7D97D0032A84F /* ReleaseInfo.plist */,
 				28FA8A2E19E452E00040EA46 /* StokeStoryboard.storyboard */,
 			);
 			path = AppDefaults;
@@ -3734,7 +3735,6 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				ABD1FC35EE4244873CA04444 /* Pods */,
-				28A2630C1AE65672006C09A7 /* Stoke copy-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -5930,7 +5930,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
-				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
+				INFOPLIST_FILE = src/projects/stoke/AppDefaults/ReleaseInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
@@ -5975,7 +5975,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
-				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
+				INFOPLIST_FILE = src/projects/stoke/AppDefaults/ReleaseInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
@@ -5985,7 +5985,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
+				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6020,7 +6020,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
-				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
+				INFOPLIST_FILE = src/projects/stoke/AppDefaults/ReleaseInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
