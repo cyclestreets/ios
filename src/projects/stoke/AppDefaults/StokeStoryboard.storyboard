@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--First Run View Controller-->
@@ -545,7 +545,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                 <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
-                                <rect key="frame" x="100.0000007352491" y="484" width="210" height="25"/>
+                                <rect key="frame" x="100" y="484" width="210.00000090088264" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>

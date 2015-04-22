@@ -667,6 +667,430 @@
 		289EFC7719EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC7119EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png */; };
 		289F78041534432900B062D1 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
 		289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
+		28A2630F1AE65AB4006C09A7 /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
+		28A263101AE65AB4006C09A7 /* CSBarButton_gpsactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28837D9D1965801000B58F7B /* CSBarButton_gpsactive@2x.png */; };
+		28A263111AE65AB4006C09A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3E127821DB002640D0 /* Default@2x.png */; };
+		28A263121AE65AB4006C09A7 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B8131FB54A008527FC /* Entitlements.plist */; };
+		28A263131AE65AB4006C09A7 /* contentStrings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620D131FB69D008527FC /* contentStrings.plist */; };
+		28A263141AE65AB4006C09A7 /* FormData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD620E131FB69D008527FC /* FormData.plist */; };
+		28A263151AE65AB4006C09A7 /* CSIcon_saveloc_work@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC7119EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png */; };
+		28A263161AE65AB4006C09A7 /* styles.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6210131FB69D008527FC /* styles.plist */; };
+		28A263171AE65AB4006C09A7 /* userState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6211131FB69D008527FC /* userState.plist */; };
+		28A263181AE65AB4006C09A7 /* UIButton_green_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6533131FC239008527FC /* UIButton_green_hi@2x.png */; };
+		28A263191AE65AB4006C09A7 /* UIButton_green_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6534131FC239008527FC /* UIButton_green_lo@2x.png */; };
+		28A2631A1AE65AB4006C09A7 /* UIButton_grey_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6535131FC239008527FC /* UIButton_grey_hi@2x.png */; };
+		28A2631B1AE65AB4006C09A7 /* UIButton_grey_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6536131FC239008527FC /* UIButton_grey_lo@2x.png */; };
+		28A2631C1AE65AB4006C09A7 /* UIButton_orange_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6537131FC239008527FC /* UIButton_orange_hi@2x.png */; };
+		28A2631D1AE65AB4006C09A7 /* CSTabBar_leisure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28347AAD1A37891900FA83BE /* CSTabBar_leisure@2x.png */; };
+		28A2631E1AE65AB4006C09A7 /* CSBarButton_followuser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */; };
+		28A2631F1AE65AB4006C09A7 /* UIButton_orange_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6538131FC239008527FC /* UIButton_orange_lo@2x.png */; };
+		28A263201AE65AB4006C09A7 /* PhotoWizardCategoryMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9518AE429400EF0436 /* PhotoWizardCategoryMenuView.xib */; };
+		28A263211AE65AB4006C09A7 /* UIButton_orangesmall_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD6539131FC239008527FC /* UIButton_orangesmall_hi@2x.png */; };
+		28A263221AE65AB4006C09A7 /* UIButton_orangesmall_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653A131FC239008527FC /* UIButton_orangesmall_lo@2x.png */; };
+		28A263231AE65AB4006C09A7 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28A9999419E71FBC0050C3E8 /* default.css */; };
+		28A263241AE65AB4006C09A7 /* UIButton_red_hi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653B131FC239008527FC /* UIButton_red_hi@2x.png */; };
+		28A263251AE65AB4006C09A7 /* UIButton_red_lo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28AD653C131FC239008527FC /* UIButton_red_lo@2x.png */; };
+		28A263261AE65AB4006C09A7 /* Icon_nosavedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE741A19087E00AA2510 /* Icon_nosavedlocations@2x.png */; };
+		28A263271AE65AB4006C09A7 /* CSIcon_MapArrow_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4813536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png */; };
+		28A263281AE65AB4006C09A7 /* CSIcon_MapArrow_start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4913536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png */; };
+		28A263291AE65AB4006C09A7 /* Icon_nosearchresults@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2865C24819D56CE5001C329B /* Icon_nosearchresults@2x.png */; };
+		28A2632A1AE65AB4006C09A7 /* UIIcon_cycle_lanes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4B13536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png */; };
+		28A2632B1AE65AB4006C09A7 /* Icon_nosearchresults.png in Resources */ = {isa = PBXBuildFile; fileRef = 2865C24B19D570BA001C329B /* Icon_nosearchresults.png */; };
+		28A2632C1AE65AB4006C09A7 /* UIIcon_cycle_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4C13536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png */; };
+		28A2632D1AE65AB4006C09A7 /* UIIcon_footpaths@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4D13536CCB00E8AF90 /* UIIcon_footpaths@2x.png */; };
+		28A2632E1AE65AB4006C09A7 /* UIIcon_quiet_street@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4E13536CCB00E8AF90 /* UIIcon_quiet_street@2x.png */; };
+		28A2632F1AE65AB4006C09A7 /* UIIcon_roads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B4F13536CCB00E8AF90 /* UIIcon_roads@2x.png */; };
+		28A263301AE65AB4006C09A7 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
+		28A263311AE65AB4006C09A7 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
+		28A263321AE65AB4006C09A7 /* welcome.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2F01A5AA5A0002DF099 /* welcome.jpg */; };
+		28A263331AE65AB4006C09A7 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
+		28A263341AE65AB4006C09A7 /* OSMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211319E7EFF900118E48 /* OSMMapStyle.png */; };
+		28A263351AE65AB4006C09A7 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
+		28A263361AE65AB4006C09A7 /* CSIcon_saveloc_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC7019EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png */; };
+		28A263371AE65AB4006C09A7 /* UIIcon_bear_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */; };
+		28A263381AE65AB4006C09A7 /* UIIcon_straight_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */; };
+		28A263391AE65AB4006C09A7 /* UIIcon_turn_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB4135D6E54006F1D94 /* UIIcon_turn_left@2x.png */; };
+		28A2633A1AE65AB4006C09A7 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
+		28A2633B1AE65AB4006C09A7 /* UIIcon_turn_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB5135D6E54006F1D94 /* UIIcon_turn_right@2x.png */; };
+		28A2633C1AE65AB4006C09A7 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
+		28A2633D1AE65AB4006C09A7 /* UIIcon_photomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB7135D6E54006F1D94 /* UIIcon_photomap@2x.png */; };
+		28A2633E1AE65AB4006C09A7 /* CSTabBar_account@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB9135D6E54006F1D94 /* CSTabBar_account@2x.png */; };
+		28A2633F1AE65AB4006C09A7 /* BUInlineErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */; };
+		28A263401AE65AB4006C09A7 /* CSTabBar_add_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBA135D6E54006F1D94 /* CSTabBar_add_photo@2x.png */; };
+		28A263411AE65AB4006C09A7 /* CSTabBar_credits@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBB135D6E54006F1D94 /* CSTabBar_credits@2x.png */; };
+		28A263421AE65AB4006C09A7 /* CSTabBar_fav_routes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBC135D6E54006F1D94 /* CSTabBar_fav_routes@2x.png */; };
+		28A263431AE65AB4006C09A7 /* CSTabBar_itinerary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBD135D6E54006F1D94 /* CSTabBar_itinerary@2x.png */; };
+		28A263441AE65AB4006C09A7 /* CSTabBar_photomap_tb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBE135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png */; };
+		28A263451AE65AB4006C09A7 /* CSTabBar_plan_route@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EBF135D6E54006F1D94 /* CSTabBar_plan_route@2x.png */; };
+		28A263461AE65AB4006C09A7 /* CSTabBar_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EC0135D6E54006F1D94 /* CSTabBar_settings@2x.png */; };
+		28A263471AE65AB4006C09A7 /* FavouritesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931A140984F300C7AC75 /* FavouritesCell.xib */; };
+		28A263481AE65AB4006C09A7 /* ItineraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931B140984F300C7AC75 /* ItineraryCell.xib */; };
+		28A263491AE65AB4006C09A7 /* CSIcon_saveloc_other@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE781A190FC400AA2510 /* CSIcon_saveloc_other@2x.png */; };
+		28A2634A1AE65AB4006C09A7 /* RouteTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931C140984F300C7AC75 /* RouteTableCell.xib */; };
+		28A2634B1AE65AB4006C09A7 /* CreditsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E931F140984F300C7AC75 /* CreditsView.xib */; };
+		28A2634C1AE65AB4006C09A7 /* FavouritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9321140984F300C7AC75 /* FavouritesView.xib */; };
+		28A2634D1AE65AB4006C09A7 /* CSRouteDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9322140984F300C7AC75 /* CSRouteDetailsViewController.xib */; };
+		28A2634E1AE65AB4006C09A7 /* RouteSegmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9325140984F300C7AC75 /* RouteSegmentView.xib */; };
+		28A2634F1AE65AB4006C09A7 /* RouteListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9329140984F300C7AC75 /* RouteListView.xib */; };
+		28A263501AE65AB4006C09A7 /* RoutesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932A140984F300C7AC75 /* RoutesView.xib */; };
+		28A263511AE65AB4006C09A7 /* MapLocationSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E932C140984F300C7AC75 /* MapLocationSearchView.xib */; };
+		28A263521AE65AB4006C09A7 /* AccountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9330140984F300C7AC75 /* AccountView.xib */; };
+		28A263531AE65AB4006C09A7 /* InitialLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E9332140984F300C7AC75 /* InitialLocationView.xib */; };
+		28A263541AE65AB4006C09A7 /* CycleStreets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289478A918AD31270066AA2E /* CycleStreets.xcassets */; };
+		28A263551AE65AB4006C09A7 /* donate.html in Resources */ = {isa = PBXBuildFile; fileRef = 280E93AE140989E400C7AC75 /* donate.html */; };
+		28A263561AE65AB4006C09A7 /* PhotoMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28727AC718B51CF500D957FD /* PhotoMapView.xib */; };
+		28A263571AE65AB4006C09A7 /* BSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CD806F1A6E91AF00821072 /* BSMapStyle.png */; };
+		28A263581AE65AB4006C09A7 /* UIButtonBarArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857E144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png */; };
+		28A263591AE65AB4006C09A7 /* UIButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B857F144C4701006E3FCD /* UIButtonBarArrowRight@2x.png */; };
+		28A2635A1AE65AB4006C09A7 /* UIButtonBarCameraSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */; };
+		28A2635B1AE65AB4006C09A7 /* UIButtonBarInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8581144C4701006E3FCD /* UIButtonBarInfo@2x.png */; };
+		28A2635C1AE65AB4006C09A7 /* UIIcon_minor_roads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8586144C470D006E3FCD /* UIIcon_minor_roads@2x.png */; };
+		28A2635D1AE65AB4006C09A7 /* cyclecambridge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28735C11144EDACF00726A6C /* cyclecambridge.jpg */; };
+		28A2635E1AE65AB4006C09A7 /* OSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211219E7EFF900118E48 /* OSMapStyle.png */; };
+		28A2635F1AE65AB4006C09A7 /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C12144EDACF00726A6C /* donate.png */; };
+		28A263601AE65AB4006C09A7 /* reesjeffreys.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C13144EDACF00726A6C /* reesjeffreys.png */; };
+		28A263621AE65AB4006C09A7 /* CNSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853212319E7F24F00118E48 /* CNSMapStyle.png */; };
+		28A263631AE65AB4006C09A7 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
+		28A263641AE65AB4006C09A7 /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
+		28A263651AE65AB4006C09A7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
+		28A263661AE65AB4006C09A7 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9918AE429400EF0436 /* SettingsView.xib */; };
+		28A263671AE65AB4006C09A7 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
+		28A263681AE65AB4006C09A7 /* CSBarButton_followuser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D146041A2F09E2003DD15F /* CSBarButton_followuser@2x.png */; };
+		28A263691AE65AB4006C09A7 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5714FCFF4C00A38A17 /* Alert200x200.png */; };
+		28A2636A1AE65AB4006C09A7 /* CSIcon_MapArrow_end.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5914FCFF4C00A38A17 /* CSIcon_MapArrow_end.png */; };
+		28A2636B1AE65AB4006C09A7 /* CSIcon_MapArrow_start.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5A14FCFF4C00A38A17 /* CSIcon_MapArrow_start.png */; };
+		28A2636C1AE65AB4006C09A7 /* ASMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853210F19E7EFF900118E48 /* ASMapStyle.png */; };
+		28A2636D1AE65AB4006C09A7 /* blueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5B14FCFF4C00A38A17 /* blueButton.png */; };
+		28A2636E1AE65AB4006C09A7 /* BUSegmentedControl_center_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5C14FCFF4C00A38A17 /* BUSegmentedControl_center_hi.png */; };
+		28A2636F1AE65AB4006C09A7 /* BUSegmentedControl_center_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5D14FCFF4C00A38A17 /* BUSegmentedControl_center_lo.png */; };
+		28A263701AE65AB4006C09A7 /* BUSegmentedControl_left_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5E14FCFF4C00A38A17 /* BUSegmentedControl_left_hi.png */; };
+		28A263711AE65AB4006C09A7 /* BUSegmentedControl_left_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5F14FCFF4C00A38A17 /* BUSegmentedControl_left_lo.png */; };
+		28A263721AE65AB4006C09A7 /* BUSegmentedControl_right_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6014FCFF4C00A38A17 /* BUSegmentedControl_right_hi.png */; };
+		28A263731AE65AB4006C09A7 /* BUSegmentedControl_right_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6114FCFF4C00A38A17 /* BUSegmentedControl_right_lo.png */; };
+		28A263741AE65AB4006C09A7 /* UIIcon_cycle_lanes.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6314FCFF4C00A38A17 /* UIIcon_cycle_lanes.png */; };
+		28A263751AE65AB4006C09A7 /* CSTabBar_savedlocations@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 286FAE7C1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png */; };
+		28A263761AE65AB4006C09A7 /* UIIcon_cycle_tracks.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6414FCFF4C00A38A17 /* UIIcon_cycle_tracks.png */; };
+		28A263771AE65AB4006C09A7 /* UIIcon_footpaths.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6514FCFF4C00A38A17 /* UIIcon_footpaths.png */; };
+		28A263781AE65AB4006C09A7 /* UIIcon_minor_roads.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6614FCFF4C00A38A17 /* UIIcon_minor_roads.png */; };
+		28A263791AE65AB4006C09A7 /* UIIcon_quiet_street.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6714FCFF4C00A38A17 /* UIIcon_quiet_street.png */; };
+		28A2637A1AE65AB4006C09A7 /* UIIcon_roads.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6814FCFF4C00A38A17 /* UIIcon_roads.png */; };
+		28A2637B1AE65AB4006C09A7 /* UIIcon_tracks.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6914FCFF4C00A38A17 /* UIIcon_tracks.png */; };
+		28A2637C1AE65AB4006C09A7 /* UIIcon_bear_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6D14FCFF4C00A38A17 /* UIIcon_bear_left.png */; };
+		28A2637D1AE65AB4006C09A7 /* CSIcon_intermediate_wisp@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 287868F71886954300CA9746 /* CSIcon_intermediate_wisp@2X.png */; };
+		28A2637E1AE65AB4006C09A7 /* UIIcon_bear_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6E14FCFF4C00A38A17 /* UIIcon_bear_right.png */; };
+		28A2637F1AE65AB4006C09A7 /* UIIcon_straight_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A6F14FCFF4C00A38A17 /* UIIcon_straight_on.png */; };
+		28A263801AE65AB4006C09A7 /* UIIcon_turn_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7014FCFF4C00A38A17 /* UIIcon_turn_left.png */; };
+		28A263811AE65AB4006C09A7 /* UIIcon_turn_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7114FCFF4C00A38A17 /* UIIcon_turn_right.png */; };
+		28A263821AE65AB4006C09A7 /* icon_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7314FCFF4C00A38A17 /* icon_camera.png */; };
+		28A263831AE65AB4006C09A7 /* icon_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7414FCFF4C00A38A17 /* icon_location.png */; };
+		28A263841AE65AB4006C09A7 /* UIIcon_photomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7A14FCFF4C00A38A17 /* UIIcon_photomap.png */; };
+		28A263851AE65AB4006C09A7 /* CSTabBar_account.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7C14FCFF4C00A38A17 /* CSTabBar_account.png */; };
+		28A263861AE65AB4006C09A7 /* CSIcon_saveloc_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC6819EDA4E60081E7BB /* CSIcon_saveloc_home.png */; };
+		28A263871AE65AB4006C09A7 /* CSIcon_saveloc_work.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC6919EDA4E60081E7BB /* CSIcon_saveloc_work.png */; };
+		28A263881AE65AB4006C09A7 /* CSTabBar_add_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7D14FCFF4C00A38A17 /* CSTabBar_add_photo.png */; };
+		28A263891AE65AB4006C09A7 /* CSTabBar_credits.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7E14FCFF4C00A38A17 /* CSTabBar_credits.png */; };
+		28A2638A1AE65AB4006C09A7 /* CSTabBar_fav_routes.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A7F14FCFF4C00A38A17 /* CSTabBar_fav_routes.png */; };
+		28A2638B1AE65AB4006C09A7 /* CSTabBar_itinerary.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8014FCFF4C00A38A17 /* CSTabBar_itinerary.png */; };
+		28A2638C1AE65AB4006C09A7 /* CSTabBar_photomap_tb.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8114FCFF4C00A38A17 /* CSTabBar_photomap_tb.png */; };
+		28A2638D1AE65AB4006C09A7 /* CSTabBar_plan_route.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8214FCFF4C00A38A17 /* CSTabBar_plan_route.png */; };
+		28A2638E1AE65AB4006C09A7 /* Icon_noleisureroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283781641A247E7A00D046A5 /* Icon_noleisureroutes@2x.png */; };
+		28A2638F1AE65AB4006C09A7 /* CSTabBar_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8314FCFF4C00A38A17 /* CSTabBar_settings.png */; };
+		28A263901AE65AB4006C09A7 /* UIButton_green_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8614FCFF4C00A38A17 /* UIButton_green_hi.png */; };
+		28A263911AE65AB4006C09A7 /* UIButton_green_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8714FCFF4C00A38A17 /* UIButton_green_lo.png */; };
+		28A263921AE65AB4006C09A7 /* CSBarButton_saveloc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC5F19ED8E020081E7BB /* CSBarButton_saveloc@2x.png */; };
+		28A263931AE65AB4006C09A7 /* UIButton_grey_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8814FCFF4C00A38A17 /* UIButton_grey_hi.png */; };
+		28A263941AE65AB4006C09A7 /* UIButton_grey_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8914FCFF4C00A38A17 /* UIButton_grey_lo.png */; };
+		28A263951AE65AB4006C09A7 /* welcome@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2F11A5AA5A0002DF099 /* welcome@2x.jpg */; };
+		28A263961AE65AB4006C09A7 /* UIButton_orange_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8A14FCFF4C00A38A17 /* UIButton_orange_hi.png */; };
+		28A263971AE65AB4006C09A7 /* UIButton_orange_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8B14FCFF4C00A38A17 /* UIButton_orange_lo.png */; };
+		28A263981AE65AB4006C09A7 /* UIButton_orangesmall_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8C14FCFF4C00A38A17 /* UIButton_orangesmall_hi.png */; };
+		28A263991AE65AB4006C09A7 /* UIButton_orangesmall_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8D14FCFF4C00A38A17 /* UIButton_orangesmall_lo.png */; };
+		28A2639A1AE65AB4006C09A7 /* UIButton_red_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8E14FCFF4C00A38A17 /* UIButton_red_hi.png */; };
+		28A2639B1AE65AB4006C09A7 /* UIButton_red_lo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A8F14FCFF4C00A38A17 /* UIButton_red_lo.png */; };
+		28A2639C1AE65AB4006C09A7 /* UIButton_save_hi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9014FCFF4C00A38A17 /* UIButton_save_hi.png */; };
+		28A2639D1AE65AB4006C09A7 /* MapViewSearchLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2825180119D46DE600DDD6D9 /* MapViewSearchLocationView.xib */; };
+		28A2639E1AE65AB4006C09A7 /* UIButtonBarArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9114FCFF4C00A38A17 /* UIButtonBarArrowLeft.png */; };
+		28A2639F1AE65AB4006C09A7 /* UIButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9214FCFF4C00A38A17 /* UIButtonBarArrowRight.png */; };
+		28A263A01AE65AB4006C09A7 /* UIButtonBarCameraSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9314FCFF4C00A38A17 /* UIButtonBarCameraSmall.png */; };
+		28A263A11AE65AB4006C09A7 /* welcome_CS.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2FA1A5AB0D8002DF099 /* welcome_CS.jpg */; };
+		28A263A21AE65AB4006C09A7 /* UIButtonBarInfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9414FCFF4C00A38A17 /* UIButtonBarInfo.png */; };
+		28A263A31AE65AB4006C09A7 /* UIButtonBarRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9514FCFF4C00A38A17 /* UIButtonBarRefresh.png */; };
+		28A263A41AE65AB4006C09A7 /* OCMMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211119E7EFF900118E48 /* OCMMapStyle.png */; };
+		28A263A51AE65AB4006C09A7 /* UIButtonBarStop.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9614FCFF4C00A38A17 /* UIButtonBarStop.png */; };
+		28A263A61AE65AB4006C09A7 /* PhotoWizardLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9618AE429400EF0436 /* PhotoWizardLocationView.xib */; };
+		28A263A71AE65AB4006C09A7 /* CSIcon_finish_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */; };
+		28A263A81AE65AB4006C09A7 /* AVMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853211019E7EFF900118E48 /* AVMapStyle.png */; };
+		28A263A91AE65AB4006C09A7 /* CSIcon_start_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */; };
+		28A263AA1AE65AB4006C09A7 /* RoutePlanMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288663931521F7C60076BE5C /* RoutePlanMenuView.xib */; };
+		28A263AB1AE65AB4006C09A7 /* PhotoMapImageLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9218AE429400EF0436 /* PhotoMapImageLocationView.xib */; };
+		28A263AC1AE65AB4006C09A7 /* UserRouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28347AA91A37781F00FA83BE /* UserRouteCell.xib */; };
+		28A263AD1AE65AB4006C09A7 /* PhotoMapVideoLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E1468119F2B25E00242F2F /* PhotoMapVideoLocationView.xib */; };
+		28A263AE1AE65AB4006C09A7 /* UITextViewAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FA62BD153C1C7200AF6267 /* UITextViewAccessoryView.xib */; };
+		28A263AF1AE65AB4006C09A7 /* MapLocationSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2858F2B01586161B0047283D /* MapLocationSearchCell.xib */; };
+		28A263B01AE65AB4006C09A7 /* UIIcon_userphotomap.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */; };
+		28A263B11AE65AB4006C09A7 /* UIIcon_userphotomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */; };
+		28A263B21AE65AB4006C09A7 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
+		28A263B31AE65AB4006C09A7 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
+		28A263B41AE65AB4006C09A7 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
+		28A263B51AE65AB4006C09A7 /* welcome_CS@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B6B2FB1A5AB0D8002DF099 /* welcome_CS@2x.jpg */; };
+		28A263B61AE65AB4006C09A7 /* CSBarButton_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2D15E4D7E9006B01D0 /* CSBarButton_location@2x.png */; };
+		28A263B71AE65AB4006C09A7 /* Icon_nofavroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2E15E4D7E9006B01D0 /* Icon_nofavroutes@2x.png */; };
+		28A263B81AE65AB4006C09A7 /* Icon_norecentroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2F15E4D7E9006B01D0 /* Icon_norecentroutes@2x.png */; };
+		28A263B91AE65AB4006C09A7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289478AB18AD31410066AA2E /* MainStoryboard.storyboard */; };
+		28A263BA1AE65AB4006C09A7 /* CSBarButton_routePlan.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F3615E4D95D006B01D0 /* CSBarButton_routePlan.png */; };
+		28A263BB1AE65AB4006C09A7 /* CSBarButton_deletePoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F3915E4DA02006B01D0 /* CSBarButton_deletePoint.png */; };
+		28A263BC1AE65AB4006C09A7 /* CSBarButton_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F3A15E4DA02006B01D0 /* CSBarButton_location.png */; };
+		28A263BD1AE65AB4006C09A7 /* CSBarButton_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F3B15E4DA02006B01D0 /* CSBarButton_search.png */; };
+		28A263BE1AE65AB4006C09A7 /* CSBarButton_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4215E4DB3B006B01D0 /* CSBarButton_search@2x.png */; };
+		28A263BF1AE65AB4006C09A7 /* CSBarButton_routePlan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4515E4DB48006B01D0 /* CSBarButton_routePlan@2x.png */; };
+		28A263C01AE65AB4006C09A7 /* CSBarButton_deletePoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */; };
+		28A263C11AE65AB4006C09A7 /* HUD_icon_checkMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DB915E50FCD0092FC16 /* HUD_icon_checkMark.png */; };
+		28A263C21AE65AB4006C09A7 /* HUD_icon_checkMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBA15E50FCD0092FC16 /* HUD_icon_checkMark@2x.png */; };
+		28A263C31AE65AB4006C09A7 /* HUD_icon_exclaim.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBB15E50FCD0092FC16 /* HUD_icon_exclaim.png */; };
+		28A263C41AE65AB4006C09A7 /* CSBarButton_addPoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28892F6619FFA962000CC52C /* CSBarButton_addPoint@2x.png */; };
+		28A263C51AE65AB4006C09A7 /* HUD_icon_exclaim@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBC15E50FCD0092FC16 /* HUD_icon_exclaim@2x.png */; };
+		28A263C61AE65AB4006C09A7 /* HUD_icon_lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBD15E50FCD0092FC16 /* HUD_icon_lock.png */; };
+		28A263C71AE65AB4006C09A7 /* HUD_icon_lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DBE15E50FCD0092FC16 /* HUD_icon_lock@2x.png */; };
+		28A263C81AE65AB4006C09A7 /* Icon_currentroutecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 28535DF915E6313E0092FC16 /* Icon_currentroutecell.png */; };
+		28A263C91AE65AB4006C09A7 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
+		28A263CA1AE65AB4006C09A7 /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
+		28A263CB1AE65AB4006C09A7 /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
+		28A263CC1AE65AB4006C09A7 /* WayPointView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28373E1E164814A900F5E356 /* WayPointView.xib */; };
+		28A263CD1AE65AB4006C09A7 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9718AE429400EF0436 /* PhotoWizardView.xib */; };
+		28A263CE1AE65AB4006C09A7 /* WayPointCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28373E2116481A0C00F5E356 /* WayPointCell.xib */; };
+		28A263CF1AE65AB4006C09A7 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
+		28A263D01AE65AB4006C09A7 /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
+		28A263D11AE65AB4006C09A7 /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
+		28A263D21AE65AB4006C09A7 /* UIActivityBlank.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811C498166CCD5F00592560 /* UIActivityBlank.png */; };
+		28A263D31AE65AB4006C09A7 /* UIActivityFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811C499166CCD5F00592560 /* UIActivityFacebook.png */; };
+		28A263D41AE65AB4006C09A7 /* UIActivityMail.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811C49A166CCD5F00592560 /* UIActivityMail.png */; };
+		28A263D51AE65AB4006C09A7 /* UIActivityTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811C49C166CCD5F00592560 /* UIActivityTwitter.png */; };
+		28A263D61AE65AB4006C09A7 /* UIActivitySMS.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811C4C0166CE68F00592560 /* UIActivitySMS.png */; };
+		28A263D71AE65AB4006C09A7 /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
+		28A263D81AE65AB4006C09A7 /* UIButtonBarTrash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186C1193754F6001FBBF7 /* UIButtonBarTrash@2x.png */; };
+		28A263D91AE65AB4006C09A7 /* UIActivityBlank@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D236166E1C0600C0C153 /* UIActivityBlank@2x.png */; };
+		28A263DA1AE65AB4006C09A7 /* UIActivityCopy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D237166E1C0600C0C153 /* UIActivityCopy@2x.png */; };
+		28A263DB1AE65AB4006C09A7 /* UIActivityFacebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D238166E1C0600C0C153 /* UIActivityFacebook@2x.png */; };
+		28A263DC1AE65AB4006C09A7 /* UIActivityMail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D239166E1C0600C0C153 /* UIActivityMail@2x.png */; };
+		28A263DD1AE65AB4006C09A7 /* UIActivitySMS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23A166E1C0600C0C153 /* UIActivitySMS@2x.png */; };
+		28A263DE1AE65AB4006C09A7 /* UIActivityTwitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2868D23B166E1C0600C0C153 /* UIActivityTwitter@2x.png */; };
+		28A263DF1AE65AB4006C09A7 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB4231777464F002D0912 /* UIIcon_walking.png */; };
+		28A263E01AE65AB4006C09A7 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
+		28A263E11AE65AB4006C09A7 /* UIButtonBarTrash.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D186BC193754E2001FBBF7 /* UIButtonBarTrash.png */; };
+		28A263E21AE65AB4006C09A7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
+		28A263E31AE65AB4006C09A7 /* UIButtonBarRefresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28718BB017858BE600781A6B /* UIButtonBarRefresh@2x.png */; };
+		28A263E41AE65AB4006C09A7 /* UIButtonBarStop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28718BB117858BE600781A6B /* UIButtonBarStop@2x.png */; };
+		28A263E51AE65AB4006C09A7 /* CSBarButton_leisure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */; };
+		28A263E71AE65AB4006C09A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B6131FB54A008527FC /* AppDelegate.m */; };
+		28A263E81AE65AB4006C09A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD60B9131FB54A008527FC /* main.m */; };
+		28A263E91AE65AB4006C09A7 /* LeisureListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2837815C1A24751A00D046A5 /* LeisureListViewController.m */; };
+		28A263EA1AE65AB4006C09A7 /* SuperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E1131FB69D008527FC /* SuperViewController.m */; };
+		28A263EB1AE65AB4006C09A7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
+		28A263EC1AE65AB4006C09A7 /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
+		28A263ED1AE65AB4006C09A7 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61E4131FB69D008527FC /* AccountViewController.m */; };
+		28A263EE1AE65AB4006C09A7 /* CSRouteSegmentAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D918BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m */; };
+		28A263EF1AE65AB4006C09A7 /* NSMutableArray+Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */; };
+		28A263F01AE65AB4006C09A7 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61EB131FB69D008527FC /* SettingsManager.m */; };
+		28A263F11AE65AB4006C09A7 /* StartupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61ED131FB69D008527FC /* StartupManager.m */; };
+		28A263F21AE65AB4006C09A7 /* Files.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61F8131FB69D008527FC /* Files.m */; };
+		28A263F31AE65AB4006C09A7 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD61FC131FB69D008527FC /* UserAccount.m */; };
+		28A263F41AE65AB4006C09A7 /* BUTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212819E7F2E500118E48 /* BUTouchView.m */; };
+		28A263F51AE65AB4006C09A7 /* CSAppleVectorMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890965193F3EFA009C4325 /* CSAppleVectorMapSource.m */; };
+		28A263F61AE65AB4006C09A7 /* CycleStreets.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7718AE418000EF0436 /* CycleStreets.m */; };
+		28A263F71AE65AB4006C09A7 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28042E941A2C94BE00C56374 /* ApplicationJSONParser.m */; };
+		28A263F81AE65AB4006C09A7 /* CSElevationGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D419378587001FBBF7 /* CSElevationGraphView.m */; };
+		28A263F91AE65AB4006C09A7 /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6201131FB69D008527FC /* UserVO.m */; };
+		28A263FA1AE65AB4006C09A7 /* BUResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* BUResponseObject.m */; };
+		28A263FB1AE65AB4006C09A7 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
+		28A263FC1AE65AB4006C09A7 /* CreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6260131FB69D008527FC /* CreditsViewController.m */; };
+		28A263FD1AE65AB4006C09A7 /* AppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630A131FB6C8008527FC /* AppConstants.m */; };
+		28A263FE1AE65AB4006C09A7 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
+		28A263FF1AE65AB4006C09A7 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD630F131FB6C8008527FC /* NSDate+Helper.m */; };
+		28A264001AE65AB4006C09A7 /* NSDate+NSDateRFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6311131FB6C8008527FC /* NSDate+NSDateRFC1123.m */; };
+		28A264011AE65AB4006C09A7 /* BUNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DED718C528C100CD208B /* BUNetworkOperation.m */; };
+		28A264021AE65AB4006C09A7 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
+		28A264031AE65AB4006C09A7 /* NSDate-Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6313131FB6C8008527FC /* NSDate-Misc.m */; };
+		28A264041AE65AB4006C09A7 /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6315131FB6C8008527FC /* NSDictionary+Helpers.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		28A264051AE65AB4006C09A7 /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6317131FB6C8008527FC /* NSDictionary+UrlEncoding.m */; };
+		28A264061AE65AB4006C09A7 /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7E18AE427B00EF0436 /* PhotoMapViewController.m */; };
+		28A264071AE65AB4006C09A7 /* NSDictionary-MutableDictionaryCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6319131FB6C8008527FC /* NSDictionary-MutableDictionaryCopy.m */; };
+		28A264081AE65AB4006C09A7 /* NSString-URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD631B131FB6C8008527FC /* NSString-URLEncoding.m */; };
+		28A264091AE65AB4006C09A7 /* UIApplication-Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD631D131FB6C8008527FC /* UIApplication-Additions.m */; };
+		28A2640A1AE65AB4006C09A7 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6321131FB6C8008527FC /* UIColor-Expanded.m */; };
+		28A2640B1AE65AB4006C09A7 /* UIImage+AKLoadingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6323131FB6C8008527FC /* UIImage+AKLoadingExtension.m */; };
+		28A2640C1AE65AB4006C09A7 /* UIView+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6327131FB6C8008527FC /* UIView+Border.m */; };
+		28A2640D1AE65AB4006C09A7 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6329131FB6C8008527FC /* UIView+Additions.m */; };
+		28A2640E1AE65AB4006C09A7 /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6339131FB6C8008527FC /* AsyncImageView.m */; };
+		28A2640F1AE65AB4006C09A7 /* BorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD633B131FB6C8008527FC /* BorderView.m */; };
+		28A264101AE65AB4006C09A7 /* BUSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD633F131FB6C8008527FC /* BUSegmentedControl.m */; };
+		28A264111AE65AB4006C09A7 /* CSUserRoutePagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 283A0EE51A686A4D0020B6AD /* CSUserRoutePagination.m */; };
+		28A264121AE65AB4006C09A7 /* CustomNavigtionBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6341131FB6C8008527FC /* CustomNavigtionBar.m */; };
+		28A264131AE65AB4006C09A7 /* ExpandedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6343131FB6C8008527FC /* ExpandedUILabel.m */; };
+		28A264141AE65AB4006C09A7 /* GradiantRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6347131FB6C8008527FC /* GradiantRectView.m */; };
+		28A264151AE65AB4006C09A7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
+		28A264161AE65AB4006C09A7 /* CSAppleSatelliteMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9997719E705440050C3E8 /* CSAppleSatelliteMapSource.m */; };
+		28A264171AE65AB4006C09A7 /* CSWaypointAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3678318B2867400F7244C /* CSWaypointAnnotationView.m */; };
+		28A264181AE65AB4006C09A7 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6349131FB6C8008527FC /* GradientView.m */; };
+		28A264191AE65AB4006C09A7 /* MultiLabelLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6355131FB6C8008527FC /* MultiLabelLine.m */; };
+		28A2641A1AE65AB4006C09A7 /* PhotoMapVideoLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1467F19F2B21A00242F2F /* PhotoMapVideoLocationViewController.m */; };
+		28A2641B1AE65AB4006C09A7 /* RadioButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6357131FB6C8008527FC /* RadioButtonGroup.m */; };
+		28A2641C1AE65AB4006C09A7 /* ShadowedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6371131FB6C8008527FC /* ShadowedTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		28A2641D1AE65AB4006C09A7 /* SavedLocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4219ED24360081E7BB /* SavedLocationVO.m */; };
+		28A2641E1AE65AB4006C09A7 /* DeviceUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD638B131FB6C8008527FC /* DeviceUtilities.m */; };
+		28A2641F1AE65AB4006C09A7 /* GlobalUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6390131FB6C8008527FC /* GlobalUtilities.m */; };
+		28A264201AE65AB4006C09A7 /* StringUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD63FD131FB6C8008527FC /* StringUtilities.m */; };
+		28A264211AE65AB4006C09A7 /* CSOverlayTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC5019ED39E30081E7BB /* CSOverlayTransitionAnimator.m */; };
+		28A264221AE65AB4006C09A7 /* ViewUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6408131FB6C8008527FC /* ViewUtilities.m */; };
+		28A264231AE65AB4006C09A7 /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
+		28A264241AE65AB4006C09A7 /* RouteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285F68DB132C07CD00B511C0 /* RouteListViewController.m */; };
+		28A264251AE65AB4006C09A7 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
+		28A264261AE65AB4006C09A7 /* BUInlineErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */; };
+		28A264271AE65AB4006C09A7 /* TBXML+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5318BF3CC3001BB258 /* TBXML+Additions.m */; };
+		28A264281AE65AB4006C09A7 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
+		28A264291AE65AB4006C09A7 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
+		28A2642A1AE65AB4006C09A7 /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
+		28A2642B1AE65AB4006C09A7 /* SettingsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ECBCE1344A28900B8A6AC /* SettingsVO.m */; };
+		28A2642C1AE65AB4006C09A7 /* MKMapView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677B18B275C800F7244C /* MKMapView+Additions.m */; };
+		28A2642D1AE65AB4006C09A7 /* FirstRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B6B2EC1A5AA209002DF099 /* FirstRunViewController.m */; };
+		28A2642E1AE65AB4006C09A7 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
+		28A2642F1AE65AB4006C09A7 /* POICatLocationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD3419EEBA21008A3F21 /* POICatLocationCellView.m */; };
+		28A264301AE65AB4006C09A7 /* UserRouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28347AA51A37695300FA83BE /* UserRouteCellView.m */; };
+		28A264311AE65AB4006C09A7 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
+		28A264321AE65AB4006C09A7 /* CSRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */; };
+		28A264331AE65AB4006C09A7 /* CSOpenStreetMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890959193F385D009C4325 /* CSOpenStreetMapSource.m */; };
+		28A264341AE65AB4006C09A7 /* LoginVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 286C71CA134F8F05007B57E6 /* LoginVO.m */; };
+		28A264351AE65AB4006C09A7 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889095B193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m */; };
+		28A264361AE65AB4006C09A7 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD4C19EEE97F008A3F21 /* POIAnnotation.m */; };
+		28A264371AE65AB4006C09A7 /* BUDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2BC5B1354C48B00694093 /* BUDividerView.m */; };
+		28A264381AE65AB4006C09A7 /* CSRoutePolyLineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5D18BF5852001BB258 /* CSRoutePolyLineRenderer.m */; };
+		28A264391AE65AB4006C09A7 /* POIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD3F19EEC113008A3F21 /* POIManager.m */; };
+		28A2643A1AE65AB4006C09A7 /* POIAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD4F19EEEB14008A3F21 /* POIAnnotationView.m */; };
+		28A2643B1AE65AB4006C09A7 /* LocationSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28719D91136FE2AD00F69A1B /* LocationSearchManager.m */; };
+		28A2643C1AE65AB4006C09A7 /* UIButton+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210A19E7DC0D00118E48 /* UIButton+Additions.m */; };
+		28A2643D1AE65AB4006C09A7 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD418B52B8900D957FD /* UserLocationManager.m */; };
+		28A2643E1AE65AB4006C09A7 /* BUCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186CE19378587001FBBF7 /* BUCalloutView.m */; };
+		28A2643F1AE65AB4006C09A7 /* StringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C114097D8600C7AC75 /* StringManager.m */; };
+		28A264401AE65AB4006C09A7 /* StyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C314097D8600C7AC75 /* StyleManager.m */; };
+		28A264411AE65AB4006C09A7 /* UserSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C514097D8600C7AC75 /* UserSettingsManager.m */; };
+		28A264421AE65AB4006C09A7 /* UIImage+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B485211526222800E406E1 /* UIImage+Operations.m */; };
+		28A264431AE65AB4006C09A7 /* ItineraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91CF14097DE000C7AC75 /* ItineraryViewController.m */; };
+		28A264441AE65AB4006C09A7 /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AA718AE42FA00EF0436 /* PhotoCategoryVO.m */; };
+		28A264451AE65AB4006C09A7 /* RouteSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* RouteSegmentViewController.m */; };
+		28A264461AE65AB4006C09A7 /* CSPhotomapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD818B5322800D957FD /* CSPhotomapAnnotation.m */; };
+		28A264471AE65AB4006C09A7 /* CSMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890969193F41BB009C4325 /* CSMapSource.m */; };
+		28A264481AE65AB4006C09A7 /* CSPhotomapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727ADD18B5387C00D957FD /* CSPhotomapAnnotationView.m */; };
+		28A264491AE65AB4006C09A7 /* LocationSearchVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E9355140985CD00C7AC75 /* LocationSearchVO.m */; };
+		28A2644A1AE65AB4006C09A7 /* KeyChainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93701409861300C7AC75 /* KeyChainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		28A2644B1AE65AB4006C09A7 /* UIImage-Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93721409861300C7AC75 /* UIImage-Additions.m */; };
+		28A2644C1AE65AB4006C09A7 /* BUTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2409144D825D0021CDFA /* BUTableCellView.m */; };
+		28A2644D1AE65AB4006C09A7 /* FrameworkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E240B144D825D0021CDFA /* FrameworkObject.m */; };
+		28A2644E1AE65AB4006C09A7 /* POITypeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD3619EEBA21008A3F21 /* POITypeCellView.m */; };
+		28A2644F1AE65AB4006C09A7 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E240D144D825D0021CDFA /* ImageCache.m */; };
+		28A264501AE65AB4006C09A7 /* CSUserRouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28347A9B1A37174400FA83BE /* CSUserRouteVO.m */; };
+		28A264511AE65AB4006C09A7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2421144D82850021CDFA /* MBProgressHUD.m */; };
+		28A264521AE65AB4006C09A7 /* NSData+MBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E24A2144D82E90021CDFA /* NSData+MBBase64.m */; };
+		28A264531AE65AB4006C09A7 /* ButtonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E24D3144D84F70021CDFA /* ButtonUtilities.m */; };
+		28A264541AE65AB4006C09A7 /* PhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E24DA144D8D990021CDFA /* PhotoManager.m */; };
+		28A264551AE65AB4006C09A7 /* PhotoMapVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF3144EC7A000726A6C /* PhotoMapVO.m */; };
+		28A264561AE65AB4006C09A7 /* PhotoMapListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF6144EC80300726A6C /* PhotoMapListVO.m */; };
+		28A264571AE65AB4006C09A7 /* UIViewController+BUAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0E19CF2760006BFE83 /* UIViewController+BUAdditions.m */; };
+		28A264581AE65AB4006C09A7 /* CSPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF9144EC85300726A6C /* CSPointVO.m */; };
+		28A264591AE65AB4006C09A7 /* PhotoWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8318AE427B00EF0436 /* PhotoWizardViewController.m */; };
+		28A2645A1AE65AB4006C09A7 /* PhotoMapImageLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7C18AE427B00EF0436 /* PhotoMapImageLocationViewController.m */; };
+		28A2645B1AE65AB4006C09A7 /* HudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C0A144ED64700726A6C /* HudManager.m */; };
+		28A2645C1AE65AB4006C09A7 /* AppConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C18144F0EF100726A6C /* AppConfigManager.m */; };
+		28A2645D1AE65AB4006C09A7 /* UIDevice+Machine.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735C2A144F1D0400726A6C /* UIDevice+Machine.m */; };
+		28A2645E1AE65AB4006C09A7 /* POICategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8B6341450B259009C5647 /* POICategoryVO.m */; };
+		28A2645F1AE65AB4006C09A7 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AAB18AE431800EF0436 /* LayoutBox.m */; };
+		28A264601AE65AB4006C09A7 /* CSWaypointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677F18B2822700F7244C /* CSWaypointAnnotation.m */; };
+		28A264611AE65AB4006C09A7 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
+		28A264621AE65AB4006C09A7 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08EB145198D10034CC63 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		28A264631AE65AB4006C09A7 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08ED145198D10034CC63 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		28A264641AE65AB4006C09A7 /* CSMapTileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853212D19E84F4200118E48 /* CSMapTileService.m */; };
+		28A264651AE65AB4006C09A7 /* CSRouteSegmentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D318BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m */; };
+		28A264661AE65AB4006C09A7 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3CB1455638D0063AA96 /* SegmentVO.m */; };
+		28A264671AE65AB4006C09A7 /* BUDataSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DEDF18C530A500CD208B /* BUDataSourceManager.m */; };
+		28A264691AE65AB4006C09A7 /* SavedRoutesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */; };
+		28A2646A1AE65AB4006C09A7 /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
+		28A2646B1AE65AB4006C09A7 /* BUIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875DE5018B77E7900BEF18B /* BUIconButton.m */; };
+		28A2646C1AE65AB4006C09A7 /* UploadPhotoVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A89CD414FD52230001BABA /* UploadPhotoVO.m */; };
+		28A2646D1AE65AB4006C09A7 /* GenericConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855A15262BE000E406E1 /* GenericConstants.m */; };
+		28A2646E1AE65AB4006C09A7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484D715261EC800E406E1 /* Reachability.m */; };
+		28A2646F1AE65AB4006C09A7 /* CopyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B484DD15261F3B00E406E1 /* CopyLabel.m */; };
+		28A264711AE65AB4006C09A7 /* CSGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D519378587001FBBF7 /* CSGraphView.m */; };
+		28A264721AE65AB4006C09A7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECCBDE1526316600284926 /* NSData+Base64.m */; };
+		28A264731AE65AB4006C09A7 /* NSString-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4855D15262D6000E406E1 /* NSString-Utilities.m */; };
+		28A264741AE65AB4006C09A7 /* MapViewSearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */; };
+		28A264751AE65AB4006C09A7 /* BUCalloutBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186CF19378587001FBBF7 /* BUCalloutBackgroundView.m */; };
+		28A264761AE65AB4006C09A7 /* CSCycleNorthMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9997119E6FEA80050C3E8 /* CSCycleNorthMapSource.m */; };
+		28A264771AE65AB4006C09A7 /* CSUserRouteList.m in Sources */ = {isa = PBXBuildFile; fileRef = 28347AA01A371EC800FA83BE /* CSUserRouteList.m */; };
+		28A264781AE65AB4006C09A7 /* CSBingSatelliteMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */; };
+		28A264791AE65AB4006C09A7 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC6419ED9BCD0081E7BB /* UIImage+Additions.m */; };
+		28A2647A1AE65AB4006C09A7 /* PhotoCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185A153D74C500023FAF /* PhotoCategoryManager.m */; };
+		28A2647B1AE65AB4006C09A7 /* MapLocationSearchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2858F2B3158617290047283D /* MapLocationSearchCellView.m */; };
+		28A2647C1AE65AB4006C09A7 /* PhotoWizardCategoryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DFE8D715A428DD005FDCA0 /* PhotoWizardCategoryCellView.m */; };
+		28A2647D1AE65AB4006C09A7 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
+		28A2647E1AE65AB4006C09A7 /* WayPointCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2516481AFB00F5E356 /* WayPointCellView.m */; };
+		28A2647F1AE65AB4006C09A7 /* PhotoWizardLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A8118AE427B00EF0436 /* PhotoWizardLocationViewController.m */; };
+		28A264801AE65AB4006C09A7 /* WayPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28373E2916481BF800F5E356 /* WayPointVO.m */; };
+		28A264811AE65AB4006C09A7 /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
+		28A264821AE65AB4006C09A7 /* BUIconActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875DE4C18B77CC400BEF18B /* BUIconActionSheet.m */; };
+		28A264831AE65AB4006C09A7 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBEDAC1612DCF5002CDE5A /* MapViewController.m */; };
+		28A264841AE65AB4006C09A7 /* CSRoutePolyLineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5918BF4F94001BB258 /* CSRoutePolyLineOverlay.m */; };
+		28A264851AE65AB4006C09A7 /* SavedLocationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC3F19ED23760081E7BB /* SavedLocationsManager.m */; };
+		28A264861AE65AB4006C09A7 /* CSOpenCycleMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890957193F385D009C4325 /* CSOpenCycleMapSource.m */; };
+		28A264881AE65AB4006C09A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
+		28A264891AE65AB4006C09A7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E1468319F2C66E00242F2F /* MediaPlayer.framework */; };
+		28A2648A1AE65AB4006C09A7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4C7166CFFD600592560 /* MessageUI.framework */; };
+		28A2648B1AE65AB4006C09A7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4AF166CDBC600592560 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		28A2648C1AE65AB4006C09A7 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4AB166CDB9600592560 /* Twitter.framework */; };
+		28A2648D1AE65AB4006C09A7 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
+		28A2648E1AE65AB4006C09A7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
+		28A2648F1AE65AB4006C09A7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280E24D6144D89230021CDFA /* CFNetwork.framework */; };
+		28A264901AE65AB4006C09A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		28A264911AE65AB4006C09A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28A264921AE65AB4006C09A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		28A264931AE65AB4006C09A7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F41576113D6CC900CBC58B /* CoreLocation.framework */; };
+		28A264941AE65AB4006C09A7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F41C331140173400CBC58B /* libsqlite3.dylib */; };
+		28A264951AE65AB4006C09A7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F435B01140194A00CBC58B /* QuartzCore.framework */; };
+		28A264961AE65AB4006C09A7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */; };
+		28A264971AE65AB4006C09A7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F8BEFF11B9931E009F62BB /* Security.framework */; };
+		28A264981AE65AB4006C09A7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		28A264991AE65AB4006C09A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 289E6AF8144C357C0079FFE5 /* libz.dylib */; };
+		28A2649A1AE65AB4006C09A7 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7E1F712BAA8710025C4A2 /* libxml2.dylib */; };
+		28A2649B1AE65AB4006C09A7 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
+		28A2649C1AE65AB4006C09A7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28363418165A73AB0039246E /* Crashlytics.framework */; };
+		28A264A41AE65BF2006C09A7 /* BuildTargetConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9997F19E706CA0050C3E8 /* BuildTargetConstants.m */; };
+		28A264A51AE65BF6006C09A7 /* UIColor+AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9999919E729700050C3E8 /* UIColor+AppColors.m */; };
+		28A264A61AE65C08006C09A7 /* default.css in Resources */ = {isa = PBXBuildFile; fileRef = 28A9999219E712530050C3E8 /* default.css */; };
+		28A264A71AE65C0D006C09A7 /* appconfig_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FA8BAE19E455E50040EA46 /* appconfig_dev.plist */; };
+		28A264A81AE65C0F006C09A7 /* appconfig_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FA8BAF19E455E50040EA46 /* appconfig_live.plist */; };
+		28A264A91AE65C17006C09A7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1468E19F2C6A700242F2F /* Default-568h@2x.png */; };
+		28A264AA1AE65C1A006C09A7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1468F19F2C6A700242F2F /* Default@2x.png */; };
+		28A264AB1AE65C27006C09A7 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD2F19EEBA17008A3F21 /* POICatLocationCell.xib */; };
+		28A264AC1AE65C2D006C09A7 /* MapStyleCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2853210719E7DA7E00118E48 /* MapStyleCellView.xib */; };
+		28A264AD1AE65C2F006C09A7 /* SavedLocationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC4D19ED2CEC0081E7BB /* SavedLocationTableCell.xib */; };
+		28A264AE1AE65C32006C09A7 /* POITypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2834D37F19F16CEC00036FEC /* POITypeCell.xib */; };
+		28A264AF1AE65C37006C09A7 /* LeisureWaypointView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28892F6419FEE103000CC52C /* LeisureWaypointView.xib */; };
+		28A264B01AE65C3F006C09A7 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD3C19EEBA9F008A3F21 /* POICategoryView.xib */; };
+		28A264B11AE65C42006C09A7 /* POIListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD2D19EEBA0F008A3F21 /* POIListView.xib */; };
+		28A264B21AE65C47006C09A7 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285320FD19E7D46100118E48 /* SettingsView.xib */; };
+		28A264B31AE65C4A006C09A7 /* GenericWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9998819E709340050C3E8 /* GenericWebView.xib */; };
+		28A264B41AE65C4D006C09A7 /* PhotoMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A9997419E702BF0050C3E8 /* PhotoMapView.xib */; };
+		28A264B51AE65C9B006C09A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */; };
+		28A264B61AE65D74006C09A7 /* LeisureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28641D4E19FD65C8009321E0 /* LeisureViewController.m */; };
+		28A264B71AE65D78006C09A7 /* SaveLocationCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289A20F319F04ECF000892A0 /* SaveLocationCreateViewController.m */; };
+		28A264B81AE65D7A006C09A7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285320FB19E7D44000118E48 /* SettingsViewController.m */; };
+		28A264B91AE65D7E006C09A7 /* BUHorizontalMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210019E7D4E800118E48 /* BUHorizontalMenuView.m */; };
+		28A264BA1AE65D81006C09A7 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD2A19EEBA04008A3F21 /* POIListviewController.m */; };
+		28A264BB1AE65D84006C09A7 /* LeisureWaypointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28892F6119FEDE6B000CC52C /* LeisureWaypointView.m */; };
+		28A264BC1AE65D88006C09A7 /* MapStyleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210419E7DA4D00118E48 /* MapStyleCellView.m */; };
+		28A264BD1AE65D91006C09A7 /* SavedLocationTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4A19ED2C440081E7BB /* SavedLocationTableCellView.m */; };
+		28A264BE1AE65D9C006C09A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2C19E452E00040EA46 /* AppDelegate.m */; };
+		28A264BF1AE65DA0006C09A7 /* StokeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28FA8A2E19E452E00040EA46 /* StokeStoryboard.storyboard */; };
+		28A264C01AE65EE2006C09A7 /* SavedLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4619ED2BA00081E7BB /* SavedLocationsViewController.m */; };
+		28A264C11AE65F1D006C09A7 /* CSBarButton_poi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5319EEFC8C008A3F21 /* CSBarButton_poi.png */; };
+		28A264C21AE65F29006C09A7 /* CSBarButton_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */; };
 		28A719921A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
 		28A719931A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
 		28A719941A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
@@ -947,8 +1371,6 @@
 		28FA8A8219E454E80040EA46 /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C12144EDACF00726A6C /* donate.png */; };
 		28FA8A8319E454E80040EA46 /* CSBarButton_gpsactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28837D9D1965801000B58F7B /* CSBarButton_gpsactive@2x.png */; };
 		28FA8A8419E454E80040EA46 /* reesjeffreys.png in Resources */ = {isa = PBXBuildFile; fileRef = 28735C13144EDACF00726A6C /* reesjeffreys.png */; };
-		28FA8A8519E454E80040EA46 /* appconfig_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1C144F10E300726A6C /* appconfig_dev.plist */; };
-		28FA8A8719E454E80040EA46 /* appconfig_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28735C1E144F10F300726A6C /* appconfig_live.plist */; };
 		28FA8A8A19E454E80040EA46 /* services_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09011451C6690034CC63 /* services_dev.plist */; };
 		28FA8A8B19E454E80040EA46 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		28FA8A8F19E454E80040EA46 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
@@ -1587,6 +2009,8 @@
 		289EFC6919EDA4E60081E7BB /* CSIcon_saveloc_work.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_saveloc_work.png; sourceTree = "<group>"; };
 		289EFC7019EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_saveloc_home@2x.png"; sourceTree = "<group>"; };
 		289EFC7119EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_saveloc_work@2x.png"; sourceTree = "<group>"; };
+		28A2630C1AE65672006C09A7 /* Stoke copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Stoke copy-Info.plist"; path = "/Users/neil/iPhone/Applications/CycleStreets/ios/Stoke copy-Info.plist"; sourceTree = "<absolute>"; };
+		28A264A21AE65AB4006C09A7 /* Cycle North Staffs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cycle North Staffs.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A719901A0BE60700176949 /* CSOverlayPushTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSOverlayPushTransitionAnimator.h; sourceTree = "<group>"; };
 		28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSOverlayPushTransitionAnimator.m; sourceTree = "<group>"; };
 		28A89CD314FD52230001BABA /* UploadPhotoVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoVO.h; sourceTree = "<group>"; };
@@ -1928,6 +2352,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28A264871AE65AB4006C09A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28A264B51AE65C9B006C09A7 /* CoreText.framework in Frameworks */,
+				28A264881AE65AB4006C09A7 /* libPods.a in Frameworks */,
+				28A264891AE65AB4006C09A7 /* MediaPlayer.framework in Frameworks */,
+				28A2648A1AE65AB4006C09A7 /* MessageUI.framework in Frameworks */,
+				28A2648B1AE65AB4006C09A7 /* Social.framework in Frameworks */,
+				28A2648C1AE65AB4006C09A7 /* Twitter.framework in Frameworks */,
+				28A2648D1AE65AB4006C09A7 /* ImageIO.framework in Frameworks */,
+				28A2648E1AE65AB4006C09A7 /* MapKit.framework in Frameworks */,
+				28A2648F1AE65AB4006C09A7 /* CFNetwork.framework in Frameworks */,
+				28A264901AE65AB4006C09A7 /* Foundation.framework in Frameworks */,
+				28A264911AE65AB4006C09A7 /* UIKit.framework in Frameworks */,
+				28A264921AE65AB4006C09A7 /* CoreGraphics.framework in Frameworks */,
+				28A264931AE65AB4006C09A7 /* CoreLocation.framework in Frameworks */,
+				28A264941AE65AB4006C09A7 /* libsqlite3.dylib in Frameworks */,
+				28A264951AE65AB4006C09A7 /* QuartzCore.framework in Frameworks */,
+				28A264961AE65AB4006C09A7 /* SystemConfiguration.framework in Frameworks */,
+				28A264971AE65AB4006C09A7 /* Security.framework in Frameworks */,
+				28A264981AE65AB4006C09A7 /* AssetsLibrary.framework in Frameworks */,
+				28A264991AE65AB4006C09A7 /* libz.dylib in Frameworks */,
+				28A2649A1AE65AB4006C09A7 /* libxml2.dylib in Frameworks */,
+				28A2649B1AE65AB4006C09A7 /* AddressBook.framework in Frameworks */,
+				28A2649C1AE65AB4006C09A7 /* Crashlytics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28FA8B8F19E454E80040EA46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1966,6 +2419,7 @@
 				1D6058910D05DD3D006BFB54 /* CycleStreets.app */,
 				2834378015DD5DC300B00FD5 /* CycleStreets.app */,
 				28FA8BAC19E454E80040EA46 /* Cycle North Staffs.app */,
+				28A264A21AE65AB4006C09A7 /* Cycle North Staffs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3281,6 +3735,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				ABD1FC35EE4244873CA04444 /* Pods */,
+				28A2630C1AE65672006C09A7 /* Stoke copy-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -3382,6 +3837,24 @@
 			productReference = 2834378015DD5DC300B00FD5 /* CycleStreets.app */;
 			productType = "com.apple.product-type.application";
 		};
+		28A2630D1AE65AB4006C09A7 /* Stoke Release */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28A2649E1AE65AB4006C09A7 /* Build configuration list for PBXNativeTarget "Stoke Release" */;
+			buildPhases = (
+				28A2630E1AE65AB4006C09A7 /* Resources */,
+				28A263E61AE65AB4006C09A7 /* Sources */,
+				28A264871AE65AB4006C09A7 /* Frameworks */,
+				28A2649D1AE65AB4006C09A7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Stoke Release";
+			productName = CycleStreets;
+			productReference = 28A264A21AE65AB4006C09A7 /* Cycle North Staffs.app */;
+			productType = "com.apple.product-type.application";
+		};
 		28FA8A3B19E454E80040EA46 /* Stoke */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28FA8BA819E454E80040EA46 /* Build configuration list for PBXNativeTarget "Stoke" */;
@@ -3417,6 +3890,12 @@
 					2834360115DD5DC300B00FD5 = {
 						DevelopmentTeam = 4LJ34GQZ65;
 					};
+					28A2630D1AE65AB4006C09A7 = {
+						DevelopmentTeam = 4LJ34GQZ65;
+					};
+					28FA8A3B19E454E80040EA46 = {
+						DevelopmentTeam = 4LJ34GQZ65;
+					};
 				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CycleStreets" */;
@@ -3436,6 +3915,7 @@
 				1D6058900D05DD3D006BFB54 /* CycleStreets */,
 				2834360115DD5DC300B00FD5 /* CycleStreets Release */,
 				28FA8A3B19E454E80040EA46 /* Stoke */,
+				28A2630D1AE65AB4006C09A7 /* Stoke Release */,
 			);
 		};
 /* End PBXProject section */
@@ -3889,6 +4369,245 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28A2630E1AE65AB4006C09A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28A2630F1AE65AB4006C09A7 /* credits.html in Resources */,
+				28A263101AE65AB4006C09A7 /* CSBarButton_gpsactive@2x.png in Resources */,
+				28A263111AE65AB4006C09A7 /* Default@2x.png in Resources */,
+				28A263121AE65AB4006C09A7 /* Entitlements.plist in Resources */,
+				28A263131AE65AB4006C09A7 /* contentStrings.plist in Resources */,
+				28A263141AE65AB4006C09A7 /* FormData.plist in Resources */,
+				28A263151AE65AB4006C09A7 /* CSIcon_saveloc_work@2x.png in Resources */,
+				28A263161AE65AB4006C09A7 /* styles.plist in Resources */,
+				28A263171AE65AB4006C09A7 /* userState.plist in Resources */,
+				28A263181AE65AB4006C09A7 /* UIButton_green_hi@2x.png in Resources */,
+				28A263191AE65AB4006C09A7 /* UIButton_green_lo@2x.png in Resources */,
+				28A2631A1AE65AB4006C09A7 /* UIButton_grey_hi@2x.png in Resources */,
+				28A2631B1AE65AB4006C09A7 /* UIButton_grey_lo@2x.png in Resources */,
+				28A2631C1AE65AB4006C09A7 /* UIButton_orange_hi@2x.png in Resources */,
+				28A2631D1AE65AB4006C09A7 /* CSTabBar_leisure@2x.png in Resources */,
+				28A2631E1AE65AB4006C09A7 /* CSBarButton_followuser_selected@2x.png in Resources */,
+				28A2631F1AE65AB4006C09A7 /* UIButton_orange_lo@2x.png in Resources */,
+				28A263201AE65AB4006C09A7 /* PhotoWizardCategoryMenuView.xib in Resources */,
+				28A263211AE65AB4006C09A7 /* UIButton_orangesmall_hi@2x.png in Resources */,
+				28A263221AE65AB4006C09A7 /* UIButton_orangesmall_lo@2x.png in Resources */,
+				28A263231AE65AB4006C09A7 /* default.css in Resources */,
+				28A263241AE65AB4006C09A7 /* UIButton_red_hi@2x.png in Resources */,
+				28A263251AE65AB4006C09A7 /* UIButton_red_lo@2x.png in Resources */,
+				28A263261AE65AB4006C09A7 /* Icon_nosavedlocations@2x.png in Resources */,
+				28A263271AE65AB4006C09A7 /* CSIcon_MapArrow_end@2x.png in Resources */,
+				28A263281AE65AB4006C09A7 /* CSIcon_MapArrow_start@2x.png in Resources */,
+				28A264BF1AE65DA0006C09A7 /* StokeStoryboard.storyboard in Resources */,
+				28A263291AE65AB4006C09A7 /* Icon_nosearchresults@2x.png in Resources */,
+				28A2632A1AE65AB4006C09A7 /* UIIcon_cycle_lanes@2x.png in Resources */,
+				28A2632B1AE65AB4006C09A7 /* Icon_nosearchresults.png in Resources */,
+				28A2632C1AE65AB4006C09A7 /* UIIcon_cycle_tracks@2x.png in Resources */,
+				28A2632D1AE65AB4006C09A7 /* UIIcon_footpaths@2x.png in Resources */,
+				28A2632E1AE65AB4006C09A7 /* UIIcon_quiet_street@2x.png in Resources */,
+				28A2632F1AE65AB4006C09A7 /* UIIcon_roads@2x.png in Resources */,
+				28A263301AE65AB4006C09A7 /* UIIcon_tracks@2x.png in Resources */,
+				28A264A81AE65C0F006C09A7 /* appconfig_live.plist in Resources */,
+				28A263311AE65AB4006C09A7 /* CSIcon_finish_wisp@2x.png in Resources */,
+				28A263321AE65AB4006C09A7 /* welcome.jpg in Resources */,
+				28A263331AE65AB4006C09A7 /* CSIcon_start_wisp@2x.png in Resources */,
+				28A264A91AE65C17006C09A7 /* Default-568h@2x.png in Resources */,
+				28A263341AE65AB4006C09A7 /* OSMMapStyle.png in Resources */,
+				28A263351AE65AB4006C09A7 /* UIIcon_bear_left@2x.png in Resources */,
+				28A263361AE65AB4006C09A7 /* CSIcon_saveloc_home@2x.png in Resources */,
+				28A263371AE65AB4006C09A7 /* UIIcon_bear_right@2x.png in Resources */,
+				28A263381AE65AB4006C09A7 /* UIIcon_straight_on@2x.png in Resources */,
+				28A263391AE65AB4006C09A7 /* UIIcon_turn_left@2x.png in Resources */,
+				28A2633A1AE65AB4006C09A7 /* CSTableLoadingCell.xib in Resources */,
+				28A2633B1AE65AB4006C09A7 /* UIIcon_turn_right@2x.png in Resources */,
+				28A2633C1AE65AB4006C09A7 /* UIIcon_videomap@2x.png in Resources */,
+				28A2633D1AE65AB4006C09A7 /* UIIcon_photomap@2x.png in Resources */,
+				28A2633E1AE65AB4006C09A7 /* CSTabBar_account@2x.png in Resources */,
+				28A2633F1AE65AB4006C09A7 /* BUInlineErrorView.xib in Resources */,
+				28A263401AE65AB4006C09A7 /* CSTabBar_add_photo@2x.png in Resources */,
+				28A263411AE65AB4006C09A7 /* CSTabBar_credits@2x.png in Resources */,
+				28A263421AE65AB4006C09A7 /* CSTabBar_fav_routes@2x.png in Resources */,
+				28A263431AE65AB4006C09A7 /* CSTabBar_itinerary@2x.png in Resources */,
+				28A263441AE65AB4006C09A7 /* CSTabBar_photomap_tb@2x.png in Resources */,
+				28A264B41AE65C4D006C09A7 /* PhotoMapView.xib in Resources */,
+				28A263451AE65AB4006C09A7 /* CSTabBar_plan_route@2x.png in Resources */,
+				28A263461AE65AB4006C09A7 /* CSTabBar_settings@2x.png in Resources */,
+				28A263471AE65AB4006C09A7 /* FavouritesCell.xib in Resources */,
+				28A263481AE65AB4006C09A7 /* ItineraryCell.xib in Resources */,
+				28A264B11AE65C42006C09A7 /* POIListView.xib in Resources */,
+				28A263491AE65AB4006C09A7 /* CSIcon_saveloc_other@2x.png in Resources */,
+				28A2634A1AE65AB4006C09A7 /* RouteTableCell.xib in Resources */,
+				28A2634B1AE65AB4006C09A7 /* CreditsView.xib in Resources */,
+				28A2634C1AE65AB4006C09A7 /* FavouritesView.xib in Resources */,
+				28A2634D1AE65AB4006C09A7 /* CSRouteDetailsViewController.xib in Resources */,
+				28A2634E1AE65AB4006C09A7 /* RouteSegmentView.xib in Resources */,
+				28A2634F1AE65AB4006C09A7 /* RouteListView.xib in Resources */,
+				28A263501AE65AB4006C09A7 /* RoutesView.xib in Resources */,
+				28A263511AE65AB4006C09A7 /* MapLocationSearchView.xib in Resources */,
+				28A263521AE65AB4006C09A7 /* AccountView.xib in Resources */,
+				28A263531AE65AB4006C09A7 /* InitialLocationView.xib in Resources */,
+				28A263541AE65AB4006C09A7 /* CycleStreets.xcassets in Resources */,
+				28A263551AE65AB4006C09A7 /* donate.html in Resources */,
+				28A263561AE65AB4006C09A7 /* PhotoMapView.xib in Resources */,
+				28A263571AE65AB4006C09A7 /* BSMapStyle.png in Resources */,
+				28A263581AE65AB4006C09A7 /* UIButtonBarArrowLeft@2x.png in Resources */,
+				28A263591AE65AB4006C09A7 /* UIButtonBarArrowRight@2x.png in Resources */,
+				28A2635A1AE65AB4006C09A7 /* UIButtonBarCameraSmall@2x.png in Resources */,
+				28A2635B1AE65AB4006C09A7 /* UIButtonBarInfo@2x.png in Resources */,
+				28A2635C1AE65AB4006C09A7 /* UIIcon_minor_roads@2x.png in Resources */,
+				28A2635D1AE65AB4006C09A7 /* cyclecambridge.jpg in Resources */,
+				28A2635E1AE65AB4006C09A7 /* OSMapStyle.png in Resources */,
+				28A2635F1AE65AB4006C09A7 /* donate.png in Resources */,
+				28A263601AE65AB4006C09A7 /* reesjeffreys.png in Resources */,
+				28A264AB1AE65C27006C09A7 /* POICatLocationCell.xib in Resources */,
+				28A263621AE65AB4006C09A7 /* CNSMapStyle.png in Resources */,
+				28A263631AE65AB4006C09A7 /* services_live.plist in Resources */,
+				28A264B31AE65C4A006C09A7 /* GenericWebView.xib in Resources */,
+				28A263641AE65AB4006C09A7 /* UIPickerAccessoryView.xib in Resources */,
+				28A263651AE65AB4006C09A7 /* APIKey_live.txt in Resources */,
+				28A263661AE65AB4006C09A7 /* SettingsView.xib in Resources */,
+				28A263671AE65AB4006C09A7 /* RouteCell.xib in Resources */,
+				28A263681AE65AB4006C09A7 /* CSBarButton_followuser@2x.png in Resources */,
+				28A263691AE65AB4006C09A7 /* Alert200x200.png in Resources */,
+				28A2636A1AE65AB4006C09A7 /* CSIcon_MapArrow_end.png in Resources */,
+				28A2636B1AE65AB4006C09A7 /* CSIcon_MapArrow_start.png in Resources */,
+				28A2636C1AE65AB4006C09A7 /* ASMapStyle.png in Resources */,
+				28A2636D1AE65AB4006C09A7 /* blueButton.png in Resources */,
+				28A2636E1AE65AB4006C09A7 /* BUSegmentedControl_center_hi.png in Resources */,
+				28A2636F1AE65AB4006C09A7 /* BUSegmentedControl_center_lo.png in Resources */,
+				28A263701AE65AB4006C09A7 /* BUSegmentedControl_left_hi.png in Resources */,
+				28A263711AE65AB4006C09A7 /* BUSegmentedControl_left_lo.png in Resources */,
+				28A263721AE65AB4006C09A7 /* BUSegmentedControl_right_hi.png in Resources */,
+				28A263731AE65AB4006C09A7 /* BUSegmentedControl_right_lo.png in Resources */,
+				28A263741AE65AB4006C09A7 /* UIIcon_cycle_lanes.png in Resources */,
+				28A263751AE65AB4006C09A7 /* CSTabBar_savedlocations@2x.png in Resources */,
+				28A264AE1AE65C32006C09A7 /* POITypeCell.xib in Resources */,
+				28A263761AE65AB4006C09A7 /* UIIcon_cycle_tracks.png in Resources */,
+				28A263771AE65AB4006C09A7 /* UIIcon_footpaths.png in Resources */,
+				28A263781AE65AB4006C09A7 /* UIIcon_minor_roads.png in Resources */,
+				28A263791AE65AB4006C09A7 /* UIIcon_quiet_street.png in Resources */,
+				28A2637A1AE65AB4006C09A7 /* UIIcon_roads.png in Resources */,
+				28A264AC1AE65C2D006C09A7 /* MapStyleCellView.xib in Resources */,
+				28A2637B1AE65AB4006C09A7 /* UIIcon_tracks.png in Resources */,
+				28A2637C1AE65AB4006C09A7 /* UIIcon_bear_left.png in Resources */,
+				28A2637D1AE65AB4006C09A7 /* CSIcon_intermediate_wisp@2X.png in Resources */,
+				28A2637E1AE65AB4006C09A7 /* UIIcon_bear_right.png in Resources */,
+				28A2637F1AE65AB4006C09A7 /* UIIcon_straight_on.png in Resources */,
+				28A263801AE65AB4006C09A7 /* UIIcon_turn_left.png in Resources */,
+				28A263811AE65AB4006C09A7 /* UIIcon_turn_right.png in Resources */,
+				28A263821AE65AB4006C09A7 /* icon_camera.png in Resources */,
+				28A263831AE65AB4006C09A7 /* icon_location.png in Resources */,
+				28A263841AE65AB4006C09A7 /* UIIcon_photomap.png in Resources */,
+				28A263851AE65AB4006C09A7 /* CSTabBar_account.png in Resources */,
+				28A263861AE65AB4006C09A7 /* CSIcon_saveloc_home.png in Resources */,
+				28A263871AE65AB4006C09A7 /* CSIcon_saveloc_work.png in Resources */,
+				28A264C21AE65F29006C09A7 /* CSBarButton_poi@2x.png in Resources */,
+				28A264C11AE65F1D006C09A7 /* CSBarButton_poi.png in Resources */,
+				28A263881AE65AB4006C09A7 /* CSTabBar_add_photo.png in Resources */,
+				28A263891AE65AB4006C09A7 /* CSTabBar_credits.png in Resources */,
+				28A2638A1AE65AB4006C09A7 /* CSTabBar_fav_routes.png in Resources */,
+				28A2638B1AE65AB4006C09A7 /* CSTabBar_itinerary.png in Resources */,
+				28A2638C1AE65AB4006C09A7 /* CSTabBar_photomap_tb.png in Resources */,
+				28A2638D1AE65AB4006C09A7 /* CSTabBar_plan_route.png in Resources */,
+				28A2638E1AE65AB4006C09A7 /* Icon_noleisureroutes@2x.png in Resources */,
+				28A2638F1AE65AB4006C09A7 /* CSTabBar_settings.png in Resources */,
+				28A263901AE65AB4006C09A7 /* UIButton_green_hi.png in Resources */,
+				28A263911AE65AB4006C09A7 /* UIButton_green_lo.png in Resources */,
+				28A263921AE65AB4006C09A7 /* CSBarButton_saveloc@2x.png in Resources */,
+				28A263931AE65AB4006C09A7 /* UIButton_grey_hi.png in Resources */,
+				28A263941AE65AB4006C09A7 /* UIButton_grey_lo.png in Resources */,
+				28A263951AE65AB4006C09A7 /* welcome@2x.jpg in Resources */,
+				28A263961AE65AB4006C09A7 /* UIButton_orange_hi.png in Resources */,
+				28A263971AE65AB4006C09A7 /* UIButton_orange_lo.png in Resources */,
+				28A263981AE65AB4006C09A7 /* UIButton_orangesmall_hi.png in Resources */,
+				28A263991AE65AB4006C09A7 /* UIButton_orangesmall_lo.png in Resources */,
+				28A2639A1AE65AB4006C09A7 /* UIButton_red_hi.png in Resources */,
+				28A2639B1AE65AB4006C09A7 /* UIButton_red_lo.png in Resources */,
+				28A2639C1AE65AB4006C09A7 /* UIButton_save_hi.png in Resources */,
+				28A2639D1AE65AB4006C09A7 /* MapViewSearchLocationView.xib in Resources */,
+				28A2639E1AE65AB4006C09A7 /* UIButtonBarArrowLeft.png in Resources */,
+				28A2639F1AE65AB4006C09A7 /* UIButtonBarArrowRight.png in Resources */,
+				28A263A01AE65AB4006C09A7 /* UIButtonBarCameraSmall.png in Resources */,
+				28A263A11AE65AB4006C09A7 /* welcome_CS.jpg in Resources */,
+				28A263A21AE65AB4006C09A7 /* UIButtonBarInfo.png in Resources */,
+				28A263A31AE65AB4006C09A7 /* UIButtonBarRefresh.png in Resources */,
+				28A263A41AE65AB4006C09A7 /* OCMMapStyle.png in Resources */,
+				28A263A51AE65AB4006C09A7 /* UIButtonBarStop.png in Resources */,
+				28A263A61AE65AB4006C09A7 /* PhotoWizardLocationView.xib in Resources */,
+				28A263A71AE65AB4006C09A7 /* CSIcon_finish_wisp.png in Resources */,
+				28A263A81AE65AB4006C09A7 /* AVMapStyle.png in Resources */,
+				28A263A91AE65AB4006C09A7 /* CSIcon_start_wisp.png in Resources */,
+				28A264A71AE65C0D006C09A7 /* appconfig_dev.plist in Resources */,
+				28A263AA1AE65AB4006C09A7 /* RoutePlanMenuView.xib in Resources */,
+				28A263AB1AE65AB4006C09A7 /* PhotoMapImageLocationView.xib in Resources */,
+				28A263AC1AE65AB4006C09A7 /* UserRouteCell.xib in Resources */,
+				28A263AD1AE65AB4006C09A7 /* PhotoMapVideoLocationView.xib in Resources */,
+				28A263AE1AE65AB4006C09A7 /* UITextViewAccessoryView.xib in Resources */,
+				28A263AF1AE65AB4006C09A7 /* MapLocationSearchCell.xib in Resources */,
+				28A263B01AE65AB4006C09A7 /* UIIcon_userphotomap.png in Resources */,
+				28A263B11AE65AB4006C09A7 /* UIIcon_userphotomap@2x.png in Resources */,
+				28A263B21AE65AB4006C09A7 /* PhotoWizardCategoryCell.xib in Resources */,
+				28A263B31AE65AB4006C09A7 /* Icon_nofavroutes.png in Resources */,
+				28A263B41AE65AB4006C09A7 /* Icon_norecentroutes.png in Resources */,
+				28A263B51AE65AB4006C09A7 /* welcome_CS@2x.jpg in Resources */,
+				28A263B61AE65AB4006C09A7 /* CSBarButton_location@2x.png in Resources */,
+				28A263B71AE65AB4006C09A7 /* Icon_nofavroutes@2x.png in Resources */,
+				28A263B81AE65AB4006C09A7 /* Icon_norecentroutes@2x.png in Resources */,
+				28A263B91AE65AB4006C09A7 /* MainStoryboard.storyboard in Resources */,
+				28A263BA1AE65AB4006C09A7 /* CSBarButton_routePlan.png in Resources */,
+				28A263BB1AE65AB4006C09A7 /* CSBarButton_deletePoint.png in Resources */,
+				28A263BC1AE65AB4006C09A7 /* CSBarButton_location.png in Resources */,
+				28A264AF1AE65C37006C09A7 /* LeisureWaypointView.xib in Resources */,
+				28A263BD1AE65AB4006C09A7 /* CSBarButton_search.png in Resources */,
+				28A263BE1AE65AB4006C09A7 /* CSBarButton_search@2x.png in Resources */,
+				28A263BF1AE65AB4006C09A7 /* CSBarButton_routePlan@2x.png in Resources */,
+				28A263C01AE65AB4006C09A7 /* CSBarButton_deletePoint@2x.png in Resources */,
+				28A263C11AE65AB4006C09A7 /* HUD_icon_checkMark.png in Resources */,
+				28A263C21AE65AB4006C09A7 /* HUD_icon_checkMark@2x.png in Resources */,
+				28A263C31AE65AB4006C09A7 /* HUD_icon_exclaim.png in Resources */,
+				28A264B21AE65C47006C09A7 /* SettingsView.xib in Resources */,
+				28A263C41AE65AB4006C09A7 /* CSBarButton_addPoint@2x.png in Resources */,
+				28A263C51AE65AB4006C09A7 /* HUD_icon_exclaim@2x.png in Resources */,
+				28A263C61AE65AB4006C09A7 /* HUD_icon_lock.png in Resources */,
+				28A263C71AE65AB4006C09A7 /* HUD_icon_lock@2x.png in Resources */,
+				28A263C81AE65AB4006C09A7 /* Icon_currentroutecell.png in Resources */,
+				28A263C91AE65AB4006C09A7 /* Icon_currentroutecell@2x.png in Resources */,
+				28A263CA1AE65AB4006C09A7 /* UIButton_barbuttongreen_disabled.png in Resources */,
+				28A263CB1AE65AB4006C09A7 /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
+				28A264AA1AE65C1A006C09A7 /* Default@2x.png in Resources */,
+				28A263CC1AE65AB4006C09A7 /* WayPointView.xib in Resources */,
+				28A263CD1AE65AB4006C09A7 /* PhotoWizardView.xib in Resources */,
+				28A263CE1AE65AB4006C09A7 /* WayPointCell.xib in Resources */,
+				28A264AD1AE65C2F006C09A7 /* SavedLocationTableCell.xib in Resources */,
+				28A263CF1AE65AB4006C09A7 /* CSIcon_intermediate_wisp.png in Resources */,
+				28A263D01AE65AB4006C09A7 /* UIBarButton_Back.png in Resources */,
+				28A263D11AE65AB4006C09A7 /* CSBarButton_waypoint.png in Resources */,
+				28A263D21AE65AB4006C09A7 /* UIActivityBlank.png in Resources */,
+				28A264B01AE65C3F006C09A7 /* POICategoryView.xib in Resources */,
+				28A263D31AE65AB4006C09A7 /* UIActivityFacebook.png in Resources */,
+				28A263D41AE65AB4006C09A7 /* UIActivityMail.png in Resources */,
+				28A263D51AE65AB4006C09A7 /* UIActivityTwitter.png in Resources */,
+				28A263D61AE65AB4006C09A7 /* UIActivitySMS.png in Resources */,
+				28A263D71AE65AB4006C09A7 /* UIActivityCopy.png in Resources */,
+				28A263D81AE65AB4006C09A7 /* UIButtonBarTrash@2x.png in Resources */,
+				28A263D91AE65AB4006C09A7 /* UIActivityBlank@2x.png in Resources */,
+				28A263DA1AE65AB4006C09A7 /* UIActivityCopy@2x.png in Resources */,
+				28A263DB1AE65AB4006C09A7 /* UIActivityFacebook@2x.png in Resources */,
+				28A263DC1AE65AB4006C09A7 /* UIActivityMail@2x.png in Resources */,
+				28A263DD1AE65AB4006C09A7 /* UIActivitySMS@2x.png in Resources */,
+				28A263DE1AE65AB4006C09A7 /* UIActivityTwitter@2x.png in Resources */,
+				28A263DF1AE65AB4006C09A7 /* UIIcon_walking.png in Resources */,
+				28A263E01AE65AB4006C09A7 /* UIIcon_walking@2x.png in Resources */,
+				28A263E11AE65AB4006C09A7 /* UIButtonBarTrash.png in Resources */,
+				28A263E21AE65AB4006C09A7 /* Default-568h@2x.png in Resources */,
+				28A263E31AE65AB4006C09A7 /* UIButtonBarRefresh@2x.png in Resources */,
+				28A263E41AE65AB4006C09A7 /* UIButtonBarStop@2x.png in Resources */,
+				28A263E51AE65AB4006C09A7 /* CSBarButton_leisure@2x.png in Resources */,
+				28A264A61AE65C08006C09A7 /* default.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28FA8A3D19E454E80040EA46 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3977,9 +4696,7 @@
 				28A9999119E70C870050C3E8 /* CycleNorth.xcassets in Resources */,
 				28FA8A8319E454E80040EA46 /* CSBarButton_gpsactive@2x.png in Resources */,
 				28FA8A8419E454E80040EA46 /* reesjeffreys.png in Resources */,
-				28FA8A8519E454E80040EA46 /* appconfig_dev.plist in Resources */,
 				28A9999319E712530050C3E8 /* default.css in Resources */,
-				28FA8A8719E454E80040EA46 /* appconfig_live.plist in Resources */,
 				28FA8A8A19E454E80040EA46 /* services_dev.plist in Resources */,
 				28FA8A8B19E454E80040EA46 /* services_live.plist in Resources */,
 				28FA8BB319E455EF0040EA46 /* StokeStoryboard.storyboard in Resources */,
@@ -4146,6 +4863,19 @@
 			shellScript = "../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
 		};
 		2834377B15DD5DC300B00FD5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
+		};
+		28A2649D1AE65AB4006C09A7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4568,13 +5298,190 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28A263E61AE65AB4006C09A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28A263E71AE65AB4006C09A7 /* AppDelegate.m in Sources */,
+				28A263E81AE65AB4006C09A7 /* main.m in Sources */,
+				28A263E91AE65AB4006C09A7 /* LeisureListViewController.m in Sources */,
+				28A263EA1AE65AB4006C09A7 /* SuperViewController.m in Sources */,
+				28A263EB1AE65AB4006C09A7 /* SettingsViewController.m in Sources */,
+				28A263EC1AE65AB4006C09A7 /* BUCodableObject.m in Sources */,
+				28A263ED1AE65AB4006C09A7 /* AccountViewController.m in Sources */,
+				28A263EE1AE65AB4006C09A7 /* CSRouteSegmentAnnotationView.m in Sources */,
+				28A263EF1AE65AB4006C09A7 /* NSMutableArray+Plist.m in Sources */,
+				28A263F01AE65AB4006C09A7 /* SettingsManager.m in Sources */,
+				28A263F11AE65AB4006C09A7 /* StartupManager.m in Sources */,
+				28A263F21AE65AB4006C09A7 /* Files.m in Sources */,
+				28A263F31AE65AB4006C09A7 /* UserAccount.m in Sources */,
+				28A263F41AE65AB4006C09A7 /* BUTouchView.m in Sources */,
+				28A263F51AE65AB4006C09A7 /* CSAppleVectorMapSource.m in Sources */,
+				28A263F61AE65AB4006C09A7 /* CycleStreets.m in Sources */,
+				28A263F71AE65AB4006C09A7 /* ApplicationJSONParser.m in Sources */,
+				28A263F81AE65AB4006C09A7 /* CSElevationGraphView.m in Sources */,
+				28A263F91AE65AB4006C09A7 /* UserVO.m in Sources */,
+				28A263FA1AE65AB4006C09A7 /* BUResponseObject.m in Sources */,
+				28A263FB1AE65AB4006C09A7 /* ApplicationXMLParser.m in Sources */,
+				28A263FC1AE65AB4006C09A7 /* CreditsViewController.m in Sources */,
+				28A264BD1AE65D91006C09A7 /* SavedLocationTableCellView.m in Sources */,
+				28A264B71AE65D78006C09A7 /* SaveLocationCreateViewController.m in Sources */,
+				28A263FD1AE65AB4006C09A7 /* AppConstants.m in Sources */,
+				28A263FE1AE65AB4006C09A7 /* CSOverlayPushTransitionAnimator.m in Sources */,
+				28A263FF1AE65AB4006C09A7 /* NSDate+Helper.m in Sources */,
+				28A264001AE65AB4006C09A7 /* NSDate+NSDateRFC1123.m in Sources */,
+				28A264011AE65AB4006C09A7 /* BUNetworkOperation.m in Sources */,
+				28A264021AE65AB4006C09A7 /* MKMapView+LegalLabel.m in Sources */,
+				28A264031AE65AB4006C09A7 /* NSDate-Misc.m in Sources */,
+				28A264041AE65AB4006C09A7 /* NSDictionary+Helpers.m in Sources */,
+				28A264051AE65AB4006C09A7 /* NSDictionary+UrlEncoding.m in Sources */,
+				28A264061AE65AB4006C09A7 /* PhotoMapViewController.m in Sources */,
+				28A264071AE65AB4006C09A7 /* NSDictionary-MutableDictionaryCopy.m in Sources */,
+				28A264081AE65AB4006C09A7 /* NSString-URLEncoding.m in Sources */,
+				28A264091AE65AB4006C09A7 /* UIApplication-Additions.m in Sources */,
+				28A2640A1AE65AB4006C09A7 /* UIColor-Expanded.m in Sources */,
+				28A2640B1AE65AB4006C09A7 /* UIImage+AKLoadingExtension.m in Sources */,
+				28A2640C1AE65AB4006C09A7 /* UIView+Border.m in Sources */,
+				28A2640D1AE65AB4006C09A7 /* UIView+Additions.m in Sources */,
+				28A2640E1AE65AB4006C09A7 /* AsyncImageView.m in Sources */,
+				28A2640F1AE65AB4006C09A7 /* BorderView.m in Sources */,
+				28A264101AE65AB4006C09A7 /* BUSegmentedControl.m in Sources */,
+				28A264111AE65AB4006C09A7 /* CSUserRoutePagination.m in Sources */,
+				28A264121AE65AB4006C09A7 /* CustomNavigtionBar.m in Sources */,
+				28A264131AE65AB4006C09A7 /* ExpandedUILabel.m in Sources */,
+				28A264141AE65AB4006C09A7 /* GradiantRectView.m in Sources */,
+				28A264151AE65AB4006C09A7 /* NSDataAdditions.m in Sources */,
+				28A264161AE65AB4006C09A7 /* CSAppleSatelliteMapSource.m in Sources */,
+				28A264171AE65AB4006C09A7 /* CSWaypointAnnotationView.m in Sources */,
+				28A264181AE65AB4006C09A7 /* GradientView.m in Sources */,
+				28A264191AE65AB4006C09A7 /* MultiLabelLine.m in Sources */,
+				28A2641A1AE65AB4006C09A7 /* PhotoMapVideoLocationViewController.m in Sources */,
+				28A2641B1AE65AB4006C09A7 /* RadioButtonGroup.m in Sources */,
+				28A2641C1AE65AB4006C09A7 /* ShadowedTableView.m in Sources */,
+				28A2641D1AE65AB4006C09A7 /* SavedLocationVO.m in Sources */,
+				28A264C01AE65EE2006C09A7 /* SavedLocationsViewController.m in Sources */,
+				28A2641E1AE65AB4006C09A7 /* DeviceUtilities.m in Sources */,
+				28A2641F1AE65AB4006C09A7 /* GlobalUtilities.m in Sources */,
+				28A264201AE65AB4006C09A7 /* StringUtilities.m in Sources */,
+				28A264211AE65AB4006C09A7 /* CSOverlayTransitionAnimator.m in Sources */,
+				28A264B61AE65D74006C09A7 /* LeisureViewController.m in Sources */,
+				28A264221AE65AB4006C09A7 /* ViewUtilities.m in Sources */,
+				28A264231AE65AB4006C09A7 /* ItineraryCellView.m in Sources */,
+				28A264241AE65AB4006C09A7 /* RouteListViewController.m in Sources */,
+				28A264251AE65AB4006C09A7 /* RouteCellView.m in Sources */,
+				28A264261AE65AB4006C09A7 /* BUInlineErrorView.m in Sources */,
+				28A264271AE65AB4006C09A7 /* TBXML+Additions.m in Sources */,
+				28A264281AE65AB4006C09A7 /* RouteVO.m in Sources */,
+				28A264291AE65AB4006C09A7 /* RouteManager.m in Sources */,
+				28A2642A1AE65AB4006C09A7 /* CSSegmentFooterView.m in Sources */,
+				28A2642B1AE65AB4006C09A7 /* SettingsVO.m in Sources */,
+				28A2642C1AE65AB4006C09A7 /* MKMapView+Additions.m in Sources */,
+				28A2642D1AE65AB4006C09A7 /* FirstRunViewController.m in Sources */,
+				28A2642E1AE65AB4006C09A7 /* FavouritesCellView.m in Sources */,
+				28A264B81AE65D7A006C09A7 /* SettingsViewController.m in Sources */,
+				28A2642F1AE65AB4006C09A7 /* POICatLocationCellView.m in Sources */,
+				28A264301AE65AB4006C09A7 /* UserRouteCellView.m in Sources */,
+				28A264311AE65AB4006C09A7 /* CSTableLoadingCellView.m in Sources */,
+				28A264321AE65AB4006C09A7 /* CSRouteDetailsViewController.m in Sources */,
+				28A264331AE65AB4006C09A7 /* CSOpenStreetMapSource.m in Sources */,
+				28A264341AE65AB4006C09A7 /* LoginVO.m in Sources */,
+				28A264351AE65AB4006C09A7 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */,
+				28A264361AE65AB4006C09A7 /* POIAnnotation.m in Sources */,
+				28A264371AE65AB4006C09A7 /* BUDividerView.m in Sources */,
+				28A264381AE65AB4006C09A7 /* CSRoutePolyLineRenderer.m in Sources */,
+				28A264391AE65AB4006C09A7 /* POIManager.m in Sources */,
+				28A2643A1AE65AB4006C09A7 /* POIAnnotationView.m in Sources */,
+				28A2643B1AE65AB4006C09A7 /* LocationSearchManager.m in Sources */,
+				28A2643C1AE65AB4006C09A7 /* UIButton+Additions.m in Sources */,
+				28A264BA1AE65D81006C09A7 /* POIListviewController.m in Sources */,
+				28A2643D1AE65AB4006C09A7 /* UserLocationManager.m in Sources */,
+				28A2643E1AE65AB4006C09A7 /* BUCalloutView.m in Sources */,
+				28A2643F1AE65AB4006C09A7 /* StringManager.m in Sources */,
+				28A264401AE65AB4006C09A7 /* StyleManager.m in Sources */,
+				28A264411AE65AB4006C09A7 /* UserSettingsManager.m in Sources */,
+				28A264421AE65AB4006C09A7 /* UIImage+Operations.m in Sources */,
+				28A264431AE65AB4006C09A7 /* ItineraryViewController.m in Sources */,
+				28A264441AE65AB4006C09A7 /* PhotoCategoryVO.m in Sources */,
+				28A264451AE65AB4006C09A7 /* RouteSegmentViewController.m in Sources */,
+				28A264B91AE65D7E006C09A7 /* BUHorizontalMenuView.m in Sources */,
+				28A264461AE65AB4006C09A7 /* CSPhotomapAnnotation.m in Sources */,
+				28A264471AE65AB4006C09A7 /* CSMapSource.m in Sources */,
+				28A264481AE65AB4006C09A7 /* CSPhotomapAnnotationView.m in Sources */,
+				28A264491AE65AB4006C09A7 /* LocationSearchVO.m in Sources */,
+				28A2644A1AE65AB4006C09A7 /* KeyChainItemWrapper.m in Sources */,
+				28A2644B1AE65AB4006C09A7 /* UIImage-Additions.m in Sources */,
+				28A264A41AE65BF2006C09A7 /* BuildTargetConstants.m in Sources */,
+				28A2644C1AE65AB4006C09A7 /* BUTableCellView.m in Sources */,
+				28A2644D1AE65AB4006C09A7 /* FrameworkObject.m in Sources */,
+				28A2644E1AE65AB4006C09A7 /* POITypeCellView.m in Sources */,
+				28A264BE1AE65D9C006C09A7 /* AppDelegate.m in Sources */,
+				28A2644F1AE65AB4006C09A7 /* ImageCache.m in Sources */,
+				28A264501AE65AB4006C09A7 /* CSUserRouteVO.m in Sources */,
+				28A264511AE65AB4006C09A7 /* MBProgressHUD.m in Sources */,
+				28A264521AE65AB4006C09A7 /* NSData+MBBase64.m in Sources */,
+				28A264531AE65AB4006C09A7 /* ButtonUtilities.m in Sources */,
+				28A264541AE65AB4006C09A7 /* PhotoManager.m in Sources */,
+				28A264551AE65AB4006C09A7 /* PhotoMapVO.m in Sources */,
+				28A264561AE65AB4006C09A7 /* PhotoMapListVO.m in Sources */,
+				28A264571AE65AB4006C09A7 /* UIViewController+BUAdditions.m in Sources */,
+				28A264581AE65AB4006C09A7 /* CSPointVO.m in Sources */,
+				28A264591AE65AB4006C09A7 /* PhotoWizardViewController.m in Sources */,
+				28A2645A1AE65AB4006C09A7 /* PhotoMapImageLocationViewController.m in Sources */,
+				28A2645B1AE65AB4006C09A7 /* HudManager.m in Sources */,
+				28A2645C1AE65AB4006C09A7 /* AppConfigManager.m in Sources */,
+				28A264BC1AE65D88006C09A7 /* MapStyleCellView.m in Sources */,
+				28A2645D1AE65AB4006C09A7 /* UIDevice+Machine.m in Sources */,
+				28A2645E1AE65AB4006C09A7 /* POICategoryVO.m in Sources */,
+				28A2645F1AE65AB4006C09A7 /* LayoutBox.m in Sources */,
+				28A264A51AE65BF6006C09A7 /* UIColor+AppColors.m in Sources */,
+				28A264601AE65AB4006C09A7 /* CSWaypointAnnotation.m in Sources */,
+				28A264611AE65AB4006C09A7 /* POILocationVO.m in Sources */,
+				28A264621AE65AB4006C09A7 /* GTMNSString+HTML.m in Sources */,
+				28A264631AE65AB4006C09A7 /* NSString+HTML.m in Sources */,
+				28A264641AE65AB4006C09A7 /* CSMapTileService.m in Sources */,
+				28A264651AE65AB4006C09A7 /* CSRouteSegmentAnnotation.m in Sources */,
+				28A264661AE65AB4006C09A7 /* SegmentVO.m in Sources */,
+				28A264671AE65AB4006C09A7 /* BUDataSourceManager.m in Sources */,
+				28A264691AE65AB4006C09A7 /* SavedRoutesManager.m in Sources */,
+				28A2646A1AE65AB4006C09A7 /* RoutesViewController.m in Sources */,
+				28A2646B1AE65AB4006C09A7 /* BUIconButton.m in Sources */,
+				28A2646C1AE65AB4006C09A7 /* UploadPhotoVO.m in Sources */,
+				28A2646D1AE65AB4006C09A7 /* GenericConstants.m in Sources */,
+				28A2646E1AE65AB4006C09A7 /* Reachability.m in Sources */,
+				28A2646F1AE65AB4006C09A7 /* CopyLabel.m in Sources */,
+				28A264711AE65AB4006C09A7 /* CSGraphView.m in Sources */,
+				28A264721AE65AB4006C09A7 /* NSData+Base64.m in Sources */,
+				28A264731AE65AB4006C09A7 /* NSString-Utilities.m in Sources */,
+				28A264741AE65AB4006C09A7 /* MapViewSearchLocationViewController.m in Sources */,
+				28A264751AE65AB4006C09A7 /* BUCalloutBackgroundView.m in Sources */,
+				28A264761AE65AB4006C09A7 /* CSCycleNorthMapSource.m in Sources */,
+				28A264771AE65AB4006C09A7 /* CSUserRouteList.m in Sources */,
+				28A264781AE65AB4006C09A7 /* CSBingSatelliteMapSource.m in Sources */,
+				28A264791AE65AB4006C09A7 /* UIImage+Additions.m in Sources */,
+				28A2647A1AE65AB4006C09A7 /* PhotoCategoryManager.m in Sources */,
+				28A2647B1AE65AB4006C09A7 /* MapLocationSearchCellView.m in Sources */,
+				28A2647C1AE65AB4006C09A7 /* PhotoWizardCategoryCellView.m in Sources */,
+				28A2647D1AE65AB4006C09A7 /* WayPointViewController.m in Sources */,
+				28A2647E1AE65AB4006C09A7 /* WayPointCellView.m in Sources */,
+				28A2647F1AE65AB4006C09A7 /* PhotoWizardLocationViewController.m in Sources */,
+				28A264801AE65AB4006C09A7 /* WayPointVO.m in Sources */,
+				28A264BB1AE65D84006C09A7 /* LeisureWaypointView.m in Sources */,
+				28A264811AE65AB4006C09A7 /* ImageUtilties.m in Sources */,
+				28A264821AE65AB4006C09A7 /* BUIconActionSheet.m in Sources */,
+				28A264831AE65AB4006C09A7 /* MapViewController.m in Sources */,
+				28A264841AE65AB4006C09A7 /* CSRoutePolyLineOverlay.m in Sources */,
+				28A264851AE65AB4006C09A7 /* SavedLocationsManager.m in Sources */,
+				28A264861AE65AB4006C09A7 /* CSOpenCycleMapSource.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28FA8B0119E454E80040EA46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				28FA8B0219E454E80040EA46 /* CSPhotomapAnnotationView.m in Sources */,
-				28FA8B0419E454E80040EA46 /* main.m in Sources */,
 				28FA8B0519E454E80040EA46 /* SuperViewController.m in Sources */,
+				28FA8B0419E454E80040EA46 /* main.m in Sources */,
 				28FA8B0619E454E80040EA46 /* AccountViewController.m in Sources */,
 				28FA8B0719E454E80040EA46 /* SettingsManager.m in Sources */,
 				28FA8B0819E454E80040EA46 /* StartupManager.m in Sources */,
@@ -4997,6 +5904,144 @@
 			};
 			name = Adhoc;
 		};
+		28A2649F1AE65AB4006C09A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID = mobile;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					../../AppCore/external/Crashlytics/,
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"CONFIGURATION_$(CONFIGURATION)",
+				);
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = "";
+				IBC_WARNINGS = NO;
+				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lxml2",
+					"-licucore",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "Cycle North Staffs";
+				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		28A264A01AE65AB4006C09A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID = cns;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					../../AppCore/external/Crashlytics/,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"CONFIGURATION_$(CONFIGURATION)",
+				);
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = "";
+				IBC_WARNINGS = NO;
+				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-licucore",
+					"-lxml2",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "Cycle North Staffs";
+				PROVISIONING_PROFILE = "80A320A2-7BF3-4900-BBB7-F68BD8CB359F";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+		28A264A11AE65AB4006C09A7 /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_ID = "cns-adhoc";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					../../AppCore/external/Crashlytics/,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"CONFIGURATION_$(CONFIGURATION)",
+				);
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = "";
+				IBC_WARNINGS = NO;
+				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-licucore",
+					"-ObjC",
+					"-lxml2",
+				);
+				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_NAME = "Cycle North Staffs";
+				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Adhoc;
+		};
 		28FA8BA919E454E80040EA46 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */;
@@ -5007,7 +6052,7 @@
 				BUNDLE_ID = "cns-dev";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				DISPLAY_PREFIX = "Dev-";
@@ -5024,7 +6069,7 @@
 					"$(inherited)",
 					"CONFIGURATION_$(CONFIGURATION)",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -5050,7 +6095,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Debug;
 		};
@@ -5063,7 +6108,7 @@
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: London Borough of Hackney (XDCV8Q3AAR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "";
@@ -5078,10 +6123,14 @@
 					"$(inherited)",
 					"CONFIGURATION_$(CONFIGURATION)",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+					../../AppCore/external/Crashlytics/,
+				);
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = src/projects/stoke/AppDefaults/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -5106,7 +6155,7 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Release;
 		};
@@ -5120,7 +6169,7 @@
 				BUNDLE_ID = "cns-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "Beta-";
@@ -5135,7 +6184,7 @@
 					"$(inherited)",
 					"CONFIGURATION_$(CONFIGURATION)",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
@@ -5164,7 +6213,7 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Adhoc;
 		};
@@ -5202,7 +6251,7 @@
 				PROVISIONING_PROFILE = "A1154760-7263-4DD3-9482-A63E00406F8B";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Debug;
@@ -5240,7 +6289,7 @@
 				PROVISIONING_PROFILE = "8818D959-A30E-432B-A592-0C28E82F97EA";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Release;
@@ -5279,7 +6328,7 @@
 				PROVISIONING_PROFILE = "B69ADFE1-B824-4A5F-867E-B78CC80FC985";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
 			name = Adhoc;
@@ -5359,6 +6408,16 @@
 				2834377D15DD5DC300B00FD5 /* Debug */,
 				2834377E15DD5DC300B00FD5 /* Release */,
 				2834377F15DD5DC300B00FD5 /* Adhoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28A2649E1AE65AB4006C09A7 /* Build configuration list for PBXNativeTarget "Stoke Release" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28A2649F1AE65AB4006C09A7 /* Debug */,
+				28A264A01AE65AB4006C09A7 /* Release */,
+				28A264A11AE65AB4006C09A7 /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
