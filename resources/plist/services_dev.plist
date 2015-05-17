@@ -17,6 +17,21 @@
 		<key>parserType</key>
 		<string>DATATYPE_XML</string>
 	</dict>
+	<key>Login</key>
+	<dict>
+		<key>id</key>
+		<string>Login</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/uservalidate.xml</string>
+		<key>method</key>
+		<string>Login</string>
+		<key>type</key>
+		<string>GETPOST</string>
+		<key>cache</key>
+		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
+	</dict>
 	<key>UpdateRoute</key>
 	<dict>
 		<key>id</key>
@@ -34,21 +49,6 @@
 			<key>gzip</key>
 			<string>Accepts-Encoding</string>
 		</dict>
-	</dict>
-	<key>Login</key>
-	<dict>
-		<key>id</key>
-		<string>Login</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/uservalidate.xml</string>
-		<key>method</key>
-		<string>Login</string>
-		<key>type</key>
-		<string>GETPOST</string>
-		<key>cache</key>
-		<false/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
 	</dict>
 	<key>ForgottenPassword</key>
 	<dict>

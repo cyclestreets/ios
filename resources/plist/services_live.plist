@@ -2,42 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>WaypointMetaData</key>
-	<dict>
-		<key>id</key>
-		<string>WaypointMetaData</string>
-		<key>remoteurl</key>
-		<string>https://api.cyclestreets.net/v2/nearestpoint</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_JSON</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
-	<key>UpdateRoute</key>
-	<dict>
-		<key>id</key>
-		<string>UpdateRoute</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/journey.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
 	<key>Register</key>
 	<dict>
 		<key>id</key>
@@ -67,6 +31,24 @@
 		<false/>
 		<key>parserType</key>
 		<string>DATATYPE_XML</string>
+	</dict>
+	<key>UpdateRoute</key>
+	<dict>
+		<key>id</key>
+		<string>UpdateRoute</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/journey.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
 	</dict>
 	<key>ForgottenPassword</key>
 	<dict>
@@ -99,6 +81,42 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>RoutesForUser</key>
+	<dict>
+		<key>id</key>
+		<string>RoutesForUser</string>
+		<key>remoteurl</key>
+		<string>https://api.cyclestreets.net/v2/journeys.user</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_JSON</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
+	<key>RetrieveRoutePhotos</key>
+	<dict>
+		<key>id</key>
+		<string>RetrieveRoutePhotos</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/photos.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 	<key>UploadUserPhotos</key>
 	<dict>
 		<key>id</key>
@@ -122,13 +140,15 @@
 		<key>id</key>
 		<string>PoiListing</string>
 		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/poitypes.xml</string>
+		<string>https://api.cyclestreets.net/v2/pois.types</string>
 		<key>type</key>
 		<string>GET</string>
 		<key>cache</key>
 		<true/>
+		<key>cacheInterval</key>
+		<string>60</string>
 		<key>parserType</key>
-		<string>DATATYPE_XML</string>
+		<string>DATATYPE_JSON</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
@@ -189,6 +209,24 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
+	<key>LeisureRoute</key>
+	<dict>
+		<key>id</key>
+		<string>LeisureRoute</string>
+		<key>remoteurl</key>
+		<string>http://www.cyclestreets.net/api/journey.xml</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
 	<key>RetrieveRouteById</key>
 	<dict>
 		<key>id</key>
@@ -201,6 +239,24 @@
 		<true/>
 		<key>parserType</key>
 		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
+	<key>WaypointMetaData</key>
+	<dict>
+		<key>id</key>
+		<string>WaypointMetaData</string>
+		<key>remoteurl</key>
+		<string>https://api.cyclestreets.net/v2/nearestpoint</string>
+		<key>type</key>
+		<string>GETPOST</string>
+		<key>cache</key>
+		<true/>
+		<key>parserType</key>
+		<string>DATATYPE_JSON</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>
@@ -225,48 +281,12 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
-	<key>RetrieveRoutePhotos</key>
-	<dict>
-		<key>id</key>
-		<string>RetrieveRoutePhotos</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/photos.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<false/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
 	<key>LocationSearch</key>
 	<dict>
 		<key>id</key>
 		<string>LocationSearch</string>
 		<key>remoteurl</key>
 		<string>http://www.cyclestreets.net/api/geocoder.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
-	<key>LeisureRoute</key>
-	<dict>
-		<key>id</key>
-		<string>LeisureRoute</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/journey.xml</string>
 		<key>type</key>
 		<string>GET</string>
 		<key>cache</key>

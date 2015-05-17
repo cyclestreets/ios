@@ -756,15 +756,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/POIManager.m"
-            timestampString = "442581892.072418"
+            timestampString = "451921766.511069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-requestPOIListingData"
             landmarkType = "5">
          </BreakpointContent>
@@ -830,6 +830,22 @@
             startingLineNumber = "233"
             endingLineNumber = "233"
             landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:fordataID:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib/net/BUDataSourceManager.m"
+            timestampString = "451921639.764694"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
+            landmarkName = "-XMLParseDidCompletewithOperation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

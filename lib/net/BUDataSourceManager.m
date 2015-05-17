@@ -236,6 +236,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 	
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 	manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+	[manager.requestSerializer setTimeoutInterval:15];
 	
 	AFHTTPRequestOperation *operation=[manager HTTPRequestOperationWithRequest:networkOperation.requestForType success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		

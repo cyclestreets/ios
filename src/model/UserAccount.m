@@ -443,13 +443,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 	
 	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
 		
-		[self loadRoutesForUserResponse:operation forDirection:newer];
+		[self loadRoutesForUserResponse:operation forDirection:newer initialLoad:initialLoad];
 		
 	};
 	
 	[[BUDataSourceManager sharedInstance] processDataRequest:request];
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining Routes for user" andMessage:nil];
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Obtaining routes for user" andMessage:nil];
 	
 	
 	
@@ -481,7 +481,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 
 
 
--(void)loadRoutesForUserResponse:(BUNetworkOperation*)response forDirection:(BOOL)newer{
+-(void)loadRoutesForUserResponse:(BUNetworkOperation*)response forDirection:(BOOL)newer initialLoad:(BOOL)initialLoad{
 	
 	BetterLog(@"");
 	
@@ -496,13 +496,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserAccount);
 				CSUserRouteList *newlist=response.responseObject;
 				self.userRouteDataProvider.requestpagination=newlist.requestpagination;
 				
-				if(newer){
-					[_userRouteDataProvider.routes insertObjects:newlist.routes atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,newlist.routes.count)]];
+				if(initialLoad){
+					
+					self.userRouteDataProvider=response.responseObject;
+					
 				}else{
-					[_userRouteDataProvider.routes addObjectsFromArray:newlist.routes];
+					
+					if(newer){
+						[_userRouteDataProvider.routes insertObjects:newlist.routes atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0,newlist.routes.count)]];
+					}else{
+						[_userRouteDataProvider.routes addObjectsFromArray:newlist.routes];
+					}
 				}
-				
-				
 			}
 			
 			NSDictionary *dict=@{STATE:SUCCESS, RESPONSE:_userRouteDataProvider.requestpagination};
