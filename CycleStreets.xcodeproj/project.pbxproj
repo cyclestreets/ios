@@ -1291,6 +1291,14 @@
 		28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 28E603091610B683006A4B4C /* cyclestreets.geojson */; };
 		28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3CB1455638D0063AA96 /* SegmentVO.m */; };
 		28E8A3E61455B6D10063AA96 /* SavedRoutesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */; };
+		28EB4AD61AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD41AF9FE5A00CC0BB1 /* libc++.dylib */; };
+		28EB4AD71AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD41AF9FE5A00CC0BB1 /* libc++.dylib */; };
+		28EB4AD81AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD41AF9FE5A00CC0BB1 /* libc++.dylib */; };
+		28EB4AD91AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD41AF9FE5A00CC0BB1 /* libc++.dylib */; };
+		28EB4ADA1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD51AF9FE5A00CC0BB1 /* Fabric.framework */; };
+		28EB4ADB1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD51AF9FE5A00CC0BB1 /* Fabric.framework */; };
+		28EB4ADC1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD51AF9FE5A00CC0BB1 /* Fabric.framework */; };
+		28EB4ADD1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EB4AD51AF9FE5A00CC0BB1 /* Fabric.framework */; };
 		28ECBE0519CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */; };
 		28ECBE0619CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */; };
 		28ECBE0B19CF25E7006BFE83 /* BUInlineErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */; };
@@ -2261,6 +2269,8 @@
 		28E8A3CB1455638D0063AA96 /* SegmentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentVO.m; sourceTree = "<group>"; };
 		28E8A3E41455B6D00063AA96 /* SavedRoutesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedRoutesManager.h; sourceTree = "<group>"; };
 		28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedRoutesManager.m; sourceTree = "<group>"; };
+		28EB4AD41AF9FE5A00CC0BB1 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		28EB4AD51AF9FE5A00CC0BB1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = ../../../../AppCore/external/Crashlytics/Fabric.framework; sourceTree = "<group>"; };
 		28ECBE0419CF25BD006BFE83 /* BUInlineErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BUInlineErrorView.xib; sourceTree = "<group>"; };
 		28ECBE0919CF25E7006BFE83 /* BUInlineErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUInlineErrorView.h; sourceTree = "<group>"; };
 		28ECBE0A19CF25E7006BFE83 /* BUInlineErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUInlineErrorView.m; sourceTree = "<group>"; };
@@ -2304,10 +2314,12 @@
 				2811C4B1166CDBD100592560 /* Social.framework in Frameworks */,
 				2811C4AD166CDB9E00592560 /* Twitter.framework in Frameworks */,
 				2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */,
+				28EB4AD61AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */,
 				28B78DA21507884C00949870 /* MapKit.framework in Frameworks */,
 				280E24D8144D892F0021CDFA /* CFNetwork.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				2807ECE91A41AB23005E7E62 /* libPods.a in Frameworks */,
+				28EB4ADA1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				E7F41577113D6CC900CBC58B /* CoreLocation.framework in Frameworks */,
@@ -2327,6 +2339,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28EB4ADB1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */,
 				2807ECE81A41A779005E7E62 /* libPods.a in Frameworks */,
 				286FD3121A0255E100EB8C20 /* MediaPlayer.framework in Frameworks */,
 				2811C4C9166CFFE300592560 /* MessageUI.framework in Frameworks */,
@@ -2345,6 +2358,7 @@
 				2834377415DD5DC300B00FD5 /* Security.framework in Frameworks */,
 				2834377515DD5DC300B00FD5 /* AssetsLibrary.framework in Frameworks */,
 				2834377615DD5DC300B00FD5 /* libz.dylib in Frameworks */,
+				28EB4AD71AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */,
 				2834377715DD5DC300B00FD5 /* libxml2.dylib in Frameworks */,
 				2834377915DD5DC300B00FD5 /* AddressBook.framework in Frameworks */,
 				28363433165A9A090039246E /* Crashlytics.framework in Frameworks */,
@@ -2361,10 +2375,12 @@
 				28A2648A1AE65AB4006C09A7 /* MessageUI.framework in Frameworks */,
 				28A2648B1AE65AB4006C09A7 /* Social.framework in Frameworks */,
 				28A2648C1AE65AB4006C09A7 /* Twitter.framework in Frameworks */,
+				28EB4AD91AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */,
 				28A2648D1AE65AB4006C09A7 /* ImageIO.framework in Frameworks */,
 				28A2648E1AE65AB4006C09A7 /* MapKit.framework in Frameworks */,
 				28A2648F1AE65AB4006C09A7 /* CFNetwork.framework in Frameworks */,
 				28A264901AE65AB4006C09A7 /* Foundation.framework in Frameworks */,
+				28EB4ADD1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */,
 				28A264911AE65AB4006C09A7 /* UIKit.framework in Frameworks */,
 				28A264921AE65AB4006C09A7 /* CoreGraphics.framework in Frameworks */,
 				28A264931AE65AB4006C09A7 /* CoreLocation.framework in Frameworks */,
@@ -2390,10 +2406,12 @@
 				28FA8B9319E454E80040EA46 /* Social.framework in Frameworks */,
 				28FA8B9419E454E80040EA46 /* Twitter.framework in Frameworks */,
 				28FA8B9519E454E80040EA46 /* ImageIO.framework in Frameworks */,
+				28EB4AD81AF9FE5A00CC0BB1 /* libc++.dylib in Frameworks */,
 				28FA8B9619E454E80040EA46 /* MapKit.framework in Frameworks */,
 				28FA8B9719E454E80040EA46 /* CFNetwork.framework in Frameworks */,
 				28FA8B9819E454E80040EA46 /* Foundation.framework in Frameworks */,
 				2807ECEA1A41AB24005E7E62 /* libPods.a in Frameworks */,
+				28EB4ADC1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */,
 				28FA8B9919E454E80040EA46 /* UIKit.framework in Frameworks */,
 				28FA8B9A19E454E80040EA46 /* CoreGraphics.framework in Frameworks */,
 				28FA8B9B19E454E80040EA46 /* CoreLocation.framework in Frameworks */,
@@ -2442,6 +2460,8 @@
 		280E2413144D82850021CDFA /* external */ = {
 			isa = PBXGroup;
 			children = (
+				28EB4AD41AF9FE5A00CC0BB1 /* libc++.dylib */,
+				28EB4AD51AF9FE5A00CC0BB1 /* Fabric.framework */,
 				28CA8E1D1652A7AC000436ED /* Crashlytics */,
 				280E241F144D82850021CDFA /* MBProgressHUD */,
 			);
@@ -4871,7 +4891,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
+			shellScript = "/Users/neil/iPhone/Applications/AppCore/external/Crashlytics/Fabric.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634 e0d6b0af9c38b33eb7fdb7660df951f9a867cd574b61f41b9dd6c8d630f48f98";
 		};
 		28A2649D1AE65AB4006C09A7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5670,6 +5690,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5726,6 +5747,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -5779,6 +5801,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5826,6 +5849,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -5871,6 +5895,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -5917,6 +5942,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5964,6 +5990,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -6009,6 +6036,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -6058,6 +6086,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -6114,6 +6143,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -6175,6 +6205,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
@@ -6349,6 +6380,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					../../AppCore/external/Crashlytics/,
+					/Users/neil/iPhone/Applications/AppCore/external/Crashlytics,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;

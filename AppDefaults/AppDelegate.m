@@ -40,6 +40,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "NSString-Utilities.h"
 #import "GenericConstants.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 
 @interface AppDelegate()<StartupManagerDelegate,UITabBarControllerDelegate>
@@ -59,9 +62,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	
-	
-	
-	[Crashlytics startWithAPIKey:@"ea3a63e4bd4d920df480d1f6635e7e38b20e6634"];
+	[Fabric with:@[CrashlyticsKit]];
 	
 	_tabBarController = (UITabBarController *)_window.rootViewController;
 	_tabBarController.delegate = self;

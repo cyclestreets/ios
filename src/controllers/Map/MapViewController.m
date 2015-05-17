@@ -50,7 +50,6 @@
 #import "UIImage+Additions.h"
 #import "UIImage-Additions.h"
 
-#import <Crashlytics/Crashlytics.h>
 #import <A2StoryboardSegueContext.h>
 #include <PixateFreestyle/PixateFreestyle.h>
 
