@@ -57,14 +57,17 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 		_caption=propertiesDict[@"caption"];
 		
 		_hasPhoto=[propertiesDict[@"hasPhoto"] boolValue];
-		_hasVideo=[propertiesDict[@"hasVideo"] boolValue];
+		BOOL hasvideoNode=[propertiesDict[@"hasVideo"] boolValue];
+		_hasVideo=NO;
 		
-		if(_hasVideo){
+		// node may exist but be empty of mp4s
+		if(hasvideoNode){
 			_videoFormats=propertiesDict[@"videoFormats"];
-			if(_videoFormats[VIDEOFORMATKEY]!=nil){
-				_mediaType=PhotoMapMediaType_Video;
-			}else{
-				_hasVideo=NO;
+			if (_videoFormats!=nil) {
+				if(_videoFormats[VIDEOFORMATKEY]!=nil){
+					_mediaType=PhotoMapMediaType_Video;
+					_hasVideo=YES;
+				}
 			}
 		}
 		
