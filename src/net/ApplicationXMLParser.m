@@ -416,15 +416,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 				NSCharacterSet *whiteComma = [NSCharacterSet characterSetWithCharactersInString:@", "];
 				NSArray *XYs = [points componentsSeparatedByCharactersInSet:whiteComma];
 				NSMutableArray *result = [[NSMutableArray alloc] init];
-				for (int X = 0; X < [XYs count]; X += 2) {
-					CSPointVO *p = [[CSPointVO alloc] init];
-					CGPoint point;
-					point.x = [[XYs objectAtIndex:X] doubleValue];
-					point.y = [[XYs objectAtIndex:X+1] doubleValue];
-					p.point = point;
-					p.isWalking=segment.isWalkingSection;
-					[result addObject:p];
+				if(XYs.count>0){
+					for (int X = 0; X < [XYs count]; X += 2) {
+						CSPointVO *p = [[CSPointVO alloc] init];
+						CGPoint point;
+						point.x = [[XYs objectAtIndex:X] doubleValue];
+						NSInteger index=X+1;
+						if(index<XYs.count){
+							point.y = [[XYs objectAtIndex:index] doubleValue];
+						}
+						
+						p.point = point;
+						p.isWalking=segment.isWalkingSection;
+						[result addObject:p];
+					}
 				}
+				
 				segment.pointsArray=result;
 				
 				time += [segment segmentTime];

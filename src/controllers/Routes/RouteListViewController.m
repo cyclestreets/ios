@@ -398,13 +398,20 @@
 	if(_isSectioned==NO){
 		return [[_rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
 	}else{
-		NSString *key=[_keys objectAtIndex:[indexPath section]];
-		NSMutableArray *arr=[_rowHeightDictionary objectForKey:key];
 		
-		NSInteger rowIndex=[indexPath row];
-		if(rowIndex<[arr count]){
-			CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
-			return cellheight;
+		if(_keys.count>0){
+			
+			NSString *key=[_keys objectAtIndex:[indexPath section]];
+			NSMutableArray *arr=[_rowHeightDictionary objectForKey:key];
+			
+			NSInteger rowIndex=[indexPath row];
+			if(rowIndex<[arr count]){
+				CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
+				return cellheight;
+			}else{
+				return 0;
+			}
+			
 		}else{
 			return 0;
 		}
