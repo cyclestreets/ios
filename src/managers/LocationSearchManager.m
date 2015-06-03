@@ -225,7 +225,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 				LocationSearchVO *firstobject=arr[i];
 				LocationSearchVO *secondObject=arr[j];
 				
-				BOOL result=[UserLocationManager isSignificantLocationDistance:firstobject.locationCoords newLocation:secondObject.locationCoords distance:MIN_START_FINISH_DISTANCE];
+				BOOL result=[UserLocationManager isSignificantLocationChange:firstobject.locationCoords newLocation:secondObject.locationCoords accuracy:MIN_START_FINISH_DISTANCE];
+							 
 				if(result==NO){
 					[removeArray addObject:firstobject];
 					break;

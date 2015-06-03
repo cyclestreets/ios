@@ -234,7 +234,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	int removeDelay=1;
 	
 #if defined (CONFIGURATION_Debug)
-	removeDelay=5;
+	removeDelay=3;
 #endif
 	
 #if defined (CONFIGURATION_Adhoc)

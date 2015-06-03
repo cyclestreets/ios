@@ -138,6 +138,10 @@
 		2825180319D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2825180119D46DE600DDD6D9 /* MapViewSearchLocationView.xib */; };
 		2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
 		2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2825871E17785867001E3DA1 /* Default-568h@2x.png */; };
+		282EB46D1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 282EB46C1B1EF97D000C2EB4 /* UserLocationManager.m */; };
+		282EB46E1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 282EB46C1B1EF97D000C2EB4 /* UserLocationManager.m */; };
+		282EB46F1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 282EB46C1B1EF97D000C2EB4 /* UserLocationManager.m */; };
+		282EB4701B1EF97D000C2EB4 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 282EB46C1B1EF97D000C2EB4 /* UserLocationManager.m */; };
 		2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2831ABFC1362F7D000EBBA69 /* AddressBook.framework */; };
 		2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
 		2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
@@ -526,8 +530,6 @@
 		28727AC818B51CF500D957FD /* PhotoMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28727AC718B51CF500D957FD /* PhotoMapView.xib */; };
 		28727AC918B51CF500D957FD /* PhotoMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28727AC718B51CF500D957FD /* PhotoMapView.xib */; };
 		28727AD118B5222200D957FD /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7E18AE427B00EF0436 /* PhotoMapViewController.m */; };
-		28727AD518B52B8900D957FD /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD418B52B8900D957FD /* UserLocationManager.m */; };
-		28727AD618B52B8900D957FD /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD418B52B8900D957FD /* UserLocationManager.m */; };
 		28727AD918B5322800D957FD /* CSPhotomapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD818B5322800D957FD /* CSPhotomapAnnotation.m */; };
 		28727ADA18B5322800D957FD /* CSPhotomapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD818B5322800D957FD /* CSPhotomapAnnotation.m */; };
 		28727ADB18B5375400D957FD /* PhotoMapImageLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7C18AE427B00EF0436 /* PhotoMapImageLocationViewController.m */; };
@@ -598,8 +600,6 @@
 		288D693A1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */; };
 		288D693B1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */; };
 		28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
-		28920F5C1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
-		28920F5D1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
 		28920F5E1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
 		28920F611AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
 		28920F621AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
@@ -749,7 +749,6 @@
 		28A263631AE65AB4006C09A7 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		28A263641AE65AB4006C09A7 /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
 		28A263651AE65AB4006C09A7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
-		28A263661AE65AB4006C09A7 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9918AE429400EF0436 /* SettingsView.xib */; };
 		28A263671AE65AB4006C09A7 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
 		28A263681AE65AB4006C09A7 /* CSBarButton_followuser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D146041A2F09E2003DD15F /* CSBarButton_followuser@2x.png */; };
 		28A263691AE65AB4006C09A7 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5714FCFF4C00A38A17 /* Alert200x200.png */; };
@@ -960,7 +959,6 @@
 		28A2643A1AE65AB4006C09A7 /* POIAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD4F19EEEB14008A3F21 /* POIAnnotationView.m */; };
 		28A2643B1AE65AB4006C09A7 /* LocationSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28719D91136FE2AD00F69A1B /* LocationSearchManager.m */; };
 		28A2643C1AE65AB4006C09A7 /* UIButton+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210A19E7DC0D00118E48 /* UIButton+Additions.m */; };
-		28A2643D1AE65AB4006C09A7 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD418B52B8900D957FD /* UserLocationManager.m */; };
 		28A2643E1AE65AB4006C09A7 /* BUCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186CE19378587001FBBF7 /* BUCalloutView.m */; };
 		28A2643F1AE65AB4006C09A7 /* StringManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C114097D8600C7AC75 /* StringManager.m */; };
 		28A264401AE65AB4006C09A7 /* StyleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E91C314097D8600C7AC75 /* StyleManager.m */; };
@@ -1504,7 +1502,6 @@
 		28FA8B0C19E454E80040EA46 /* CSAppleVectorMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890965193F3EFA009C4325 /* CSAppleVectorMapSource.m */; };
 		28FA8B0D19E454E80040EA46 /* UserVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6201131FB69D008527FC /* UserVO.m */; };
 		28FA8B0E19E454E80040EA46 /* CSElevationGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D186D419378587001FBBF7 /* CSElevationGraphView.m */; };
-		28FA8B0F19E454E80040EA46 /* UserLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727AD418B52B8900D957FD /* UserLocationManager.m */; };
 		28FA8B1019E454E80040EA46 /* RouteSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E93001409805800C7AC75 /* RouteSegmentViewController.m */; };
 		28FA8B1119E454E80040EA46 /* BUResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6203131FB69D008527FC /* BUResponseObject.m */; };
 		28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AD6206131FB69D008527FC /* ApplicationXMLParser.m */; };
@@ -1796,6 +1793,8 @@
 		282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewSearchLocationViewController.m; sourceTree = "<group>"; };
 		2825180119D46DE600DDD6D9 /* MapViewSearchLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewSearchLocationView.xib; sourceTree = "<group>"; };
 		2825871E17785867001E3DA1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		282EB46B1B1EF97D000C2EB4 /* UserLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationManager.h; sourceTree = "<group>"; };
+		282EB46C1B1EF97D000C2EB4 /* UserLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationManager.m; sourceTree = "<group>"; };
 		2831ABFC1362F7D000EBBA69 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
 		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
@@ -1896,8 +1895,6 @@
 		28719D90136FE2AD00F69A1B /* LocationSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LocationSearchManager.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		28719D91136FE2AD00F69A1B /* LocationSearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchManager.m; sourceTree = "<group>"; };
 		28727AC718B51CF500D957FD /* PhotoMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoMapView.xib; sourceTree = "<group>"; };
-		28727AD318B52B8900D957FD /* UserLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationManager.h; sourceTree = "<group>"; };
-		28727AD418B52B8900D957FD /* UserLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationManager.m; sourceTree = "<group>"; };
 		28727AD718B5322800D957FD /* CSPhotomapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSPhotomapAnnotation.h; path = src/controllers/photomap/CSPhotomapAnnotation.h; sourceTree = SOURCE_ROOT; };
 		28727AD818B5322800D957FD /* CSPhotomapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSPhotomapAnnotation.m; path = src/controllers/photomap/CSPhotomapAnnotation.m; sourceTree = SOURCE_ROOT; };
 		28727ADC18B5387C00D957FD /* CSPhotomapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSPhotomapAnnotationView.h; path = src/controllers/photomap/CSPhotomapAnnotationView.h; sourceTree = SOURCE_ROOT; };
@@ -3128,8 +3125,8 @@
 		28AD61E5131FB69D008527FC /* managers */ = {
 			isa = PBXGroup;
 			children = (
-				28727AD318B52B8900D957FD /* UserLocationManager.h */,
-				28727AD418B52B8900D957FD /* UserLocationManager.m */,
+				282EB46B1B1EF97D000C2EB4 /* UserLocationManager.h */,
+				282EB46C1B1EF97D000C2EB4 /* UserLocationManager.m */,
 				28D246011338926E00188783 /* RouteManager.h */,
 				28D246021338926E00188783 /* RouteManager.m */,
 				280E24D9144D8D990021CDFA /* PhotoManager.h */,
@@ -4115,7 +4112,6 @@
 				28B76F3015E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */,
 				28B76F3215E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */,
 				28B76F3415E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
-				28920F5C1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */,
 				28B76F3715E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
 				28BC6AA018AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
@@ -4213,7 +4209,6 @@
 				2834362415DD5DC300B00FD5 /* UIIcon_bear_right@2x.png in Resources */,
 				2834362515DD5DC300B00FD5 /* UIIcon_straight_on@2x.png in Resources */,
 				2834362615DD5DC300B00FD5 /* UIIcon_turn_left@2x.png in Resources */,
-				28920F5D1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */,
 				2834362715DD5DC300B00FD5 /* UIIcon_turn_right@2x.png in Resources */,
 				28042E9D1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */,
 				2834362815DD5DC300B00FD5 /* UIIcon_photomap@2x.png in Resources */,
@@ -4483,7 +4478,6 @@
 				28A264B31AE65C4A006C09A7 /* GenericWebView.xib in Resources */,
 				28A263641AE65AB4006C09A7 /* UIPickerAccessoryView.xib in Resources */,
 				28A263651AE65AB4006C09A7 /* APIKey_live.txt in Resources */,
-				28A263661AE65AB4006C09A7 /* SettingsView.xib in Resources */,
 				28A263671AE65AB4006C09A7 /* RouteCell.xib in Resources */,
 				28A263681AE65AB4006C09A7 /* CSBarButton_followuser@2x.png in Resources */,
 				28A263691AE65AB4006C09A7 /* Alert200x200.png in Resources */,
@@ -5004,7 +4998,6 @@
 				28AD62B0131FB69D008527FC /* UserVO.m in Sources */,
 				28042E9A1A2C96C700C56374 /* ApplicationJSONParser.m in Sources */,
 				28D186DA19378587001FBBF7 /* CSElevationGraphView.m in Sources */,
-				28727AD518B52B8900D957FD /* UserLocationManager.m in Sources */,
 				288055DC18BB7B2100BABAB1 /* RouteSegmentViewController.m in Sources */,
 				28AD62B1131FB69D008527FC /* BUResponseObject.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
@@ -5032,6 +5025,7 @@
 				28AD6437131FB6C8008527FC /* BUSegmentedControl.m in Sources */,
 				28AD6438131FB6C8008527FC /* CustomNavigtionBar.m in Sources */,
 				28AD6439131FB6C8008527FC /* ExpandedUILabel.m in Sources */,
+				282EB46D1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */,
 				28727AD918B5322800D957FD /* CSPhotomapAnnotation.m in Sources */,
 				28A9997A19E705490050C3E8 /* CSAppleSatelliteMapSource.m in Sources */,
 				28AD643B131FB6C8008527FC /* GradiantRectView.m in Sources */,
@@ -5199,6 +5193,7 @@
 				283436ED15DD5DC300B00FD5 /* CustomNavigtionBar.m in Sources */,
 				283436EE15DD5DC300B00FD5 /* ExpandedUILabel.m in Sources */,
 				283436F015DD5DC300B00FD5 /* GradiantRectView.m in Sources */,
+				282EB46E1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */,
 				284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */,
 				28A9997919E705490050C3E8 /* CSAppleSatelliteMapSource.m in Sources */,
 				28B3678518B2867400F7244C /* CSWaypointAnnotationView.m in Sources */,
@@ -5239,7 +5234,6 @@
 				286FD30C1A0255A000EB8C20 /* POIAnnotationView.m in Sources */,
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
 				2853210C19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
-				28727AD618B52B8900D957FD /* UserLocationManager.m in Sources */,
 				28D186D719378587001FBBF7 /* BUCalloutView.m in Sources */,
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
 				2834370F15DD5DC300B00FD5 /* StyleManager.m in Sources */,
@@ -5377,6 +5371,7 @@
 				28A2641C1AE65AB4006C09A7 /* ShadowedTableView.m in Sources */,
 				28A2641D1AE65AB4006C09A7 /* SavedLocationVO.m in Sources */,
 				28A264C01AE65EE2006C09A7 /* SavedLocationsViewController.m in Sources */,
+				282EB4701B1EF97D000C2EB4 /* UserLocationManager.m in Sources */,
 				28A2641E1AE65AB4006C09A7 /* DeviceUtilities.m in Sources */,
 				28A2641F1AE65AB4006C09A7 /* GlobalUtilities.m in Sources */,
 				28A264201AE65AB4006C09A7 /* StringUtilities.m in Sources */,
@@ -5411,7 +5406,6 @@
 				28A2643B1AE65AB4006C09A7 /* LocationSearchManager.m in Sources */,
 				28A2643C1AE65AB4006C09A7 /* UIButton+Additions.m in Sources */,
 				28A264BA1AE65D81006C09A7 /* POIListviewController.m in Sources */,
-				28A2643D1AE65AB4006C09A7 /* UserLocationManager.m in Sources */,
 				28A2643E1AE65AB4006C09A7 /* BUCalloutView.m in Sources */,
 				28A2643F1AE65AB4006C09A7 /* StringManager.m in Sources */,
 				28A264401AE65AB4006C09A7 /* StyleManager.m in Sources */,
@@ -5510,7 +5504,6 @@
 				28FA8B0C19E454E80040EA46 /* CSAppleVectorMapSource.m in Sources */,
 				28FA8B0D19E454E80040EA46 /* UserVO.m in Sources */,
 				28FA8B0E19E454E80040EA46 /* CSElevationGraphView.m in Sources */,
-				28FA8B0F19E454E80040EA46 /* UserLocationManager.m in Sources */,
 				28FA8B1019E454E80040EA46 /* RouteSegmentViewController.m in Sources */,
 				28FA8B1119E454E80040EA46 /* BUResponseObject.m in Sources */,
 				28FA8B1219E454E80040EA46 /* ApplicationXMLParser.m in Sources */,
@@ -5554,6 +5547,7 @@
 				28FA8B3419E454E80040EA46 /* DeviceUtilities.m in Sources */,
 				28FA8B3519E454E80040EA46 /* PhotoWizardViewController.m in Sources */,
 				28FA8B3619E454E80040EA46 /* GlobalUtilities.m in Sources */,
+				282EB46F1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */,
 				28FA8B3719E454E80040EA46 /* PhotoWizardLocationViewController.m in Sources */,
 				28E1468019F2B21A00242F2F /* PhotoMapVideoLocationViewController.m in Sources */,
 				28FA8B3819E454E80040EA46 /* TBXML+Additions.m in Sources */,
@@ -5683,7 +5677,7 @@
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				DISPLAY_PREFIX = "Dev-";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5984,7 +5978,7 @@
 				BUNDLE_ID = "cns-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6012,7 +6006,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
+				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6078,7 +6072,7 @@
 				BUNDLE_ID = "cns-dev";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				DISPLAY_PREFIX = "Dev-";
@@ -6117,7 +6111,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "d81949c6-49d1-4fec-85f6-9b8e0c37e0ce";
+				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6135,8 +6129,8 @@
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6177,7 +6171,7 @@
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "58FF386D-9965-4A92-B816-529F34F86368";
+				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
