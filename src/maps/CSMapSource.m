@@ -155,7 +155,8 @@
 	if(dirMb>directoryMaxSize){
 		
 		NSError	*error = nil;
-		NSArray *filesArray = [fileManager contentsOfDirectoryAtPath:dirPath error:&error];
+		NSArray *filesArray=[fileManager contentsOfDirectoryAtURL:[NSURL URLWithString:dirPath] includingPropertiesForKeys:@[NSURLPathKey,NSURLCreationDateKey] options:NSDirectoryEnumerationSkipsHiddenFiles error:&error];
+		
 		if(error != nil) {
 			
 			BetterLog(@"Error in reading files: %@", [error localizedDescription]);
@@ -166,20 +167,22 @@
 			
 			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 				
-				BetterLog(@"starting purege file compare");
-			
-				NSArray *sortedContent = [filesArray sortedArrayUsingComparator: ^(NSString *filepath1, NSString *filepath2){
-											  
-					  // compare
-					  NSString* fullPath1 = [dirPath stringByAppendingPathComponent:filepath1];
-					  NSDate *file1Date=[CSMapSource getModificationDateForFileAtPath:fullPath1];
-
-					  NSString* fullPath2 = [dirPath stringByAppendingPathComponent:filepath2];
-					  NSDate *file2Date=[CSMapSource getModificationDateForFileAtPath:fullPath2];
-
-					  return [file2Date compare: file1Date];
+				BetterLog(@"starting purge file compare");
+				
+				// sort the files by modification date, this is the slow part.
+				NSArray *sortedContent = [filesArray sortedArrayUsingComparator: ^(NSURL *fileDict1, NSURL *fileDict2){
+					
+					NSDate *file1Date;
+					[fileDict1 getResourceValue:&file1Date forKey:NSURLCreationDateKey error:nil];
+					
+					NSDate *file2Date;
+					[fileDict2 getResourceValue:&file2Date forKey:NSURLCreationDateKey error:nil];
+					
+					
+					return [file2Date compare: file1Date];
 					
 				}];
+				
 				
 				BetterLog(@"completed file compare");
 						 
@@ -189,12 +192,15 @@
 				}
 						 
 				BetterLog(@"start purge for %i files",purgeCount);
-				
+				// do actual file purge, this is quick
 				for(NSInteger fileIndex=purgeCount;fileIndex<sortedContent.count;fileIndex++){
 						 
-					NSString *filePath=[sortedContent objectAtIndex:fileIndex];
-					NSString* fullPath = [dirPath stringByAppendingPathComponent:filePath];
-					[fileManager removeItemAtPath:fullPath error:nil];
+					NSURL *fileURL=[sortedContent objectAtIndex:fileIndex];
+					
+					NSString *filePath;
+					[fileURL getResourceValue:&filePath forKey:NSURLPathKey error:nil];
+					
+					[fileManager removeItemAtPath:filePath error:nil];
 				}
 				
 				BetterLog(@"completed purge for %i files",purgeCount);
