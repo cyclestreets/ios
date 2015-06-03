@@ -21,6 +21,7 @@
 @property (nonatomic,strong) NSCache									*cache;
 @property (nonatomic,strong) NSOperationQueue							*operationQueue;
 
+@property (nonatomic,strong)  NSMetadataQuery							*fileQuery;
 
 @end
 
@@ -163,40 +164,98 @@
 			
 		}else{
 			
-			NSArray *sortedContent = [filesArray sortedArrayUsingComparator:
-									  ^(NSString *filepath1, NSString *filepath2)
-									  {
-										  // compare
-										  NSString* fullPath1 = [dirPath stringByAppendingPathComponent:filepath1];
-										  NSDate *file1Date=[CSMapSource getModificationDateForFileAtPath:fullPath1];
-										  
-										  NSString* fullPath2 = [dirPath stringByAppendingPathComponent:filepath2];
-										  NSDate *file2Date=[CSMapSource getModificationDateForFileAtPath:fullPath2];
-										  
-										  return [file2Date compare: file1Date];
-										  
-									  }];
-			
-			NSInteger purgeCount=sortedContent.count/4;
-			if(purgeCount==0)
-				return;
-			
-			BetterLog(@"start");
-			
-			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+			//dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 				
-				for(NSInteger fileIndex=purgeCount;fileIndex<sortedContent.count;fileIndex++){
-					
-					NSString *filePath=[sortedContent objectAtIndex:fileIndex];
-					NSString* fullPath = [dirPath stringByAppendingPathComponent:filePath];
-					[fileManager removeItemAtPath:fullPath error:nil];
+				BetterLog(@"start compare for %lu files",(unsigned long)filesArray.count);
+				
+				
+				self.fileQuery=[NSMetadataQuery new];
+				
+				// Subscribe to query completion and process results in background thread
+				__block id observer=[[NSNotificationCenter defaultCenter] addObserverForName:
+				 NSMetadataQueryDidFinishGatheringNotification object:_fileQuery queue:[NSOperationQueue new] usingBlock:^(NSNotification __strong *notification)
+				 {
+					 // disable the query while iterating
+					 [_fileQuery stopQuery];
+					 
+					 [[NSNotificationCenter defaultCenter] removeObserver:observer name:NSMetadataQueryDidFinishGatheringNotification object:_fileQuery];
+					 
+					 
+					 NSInteger purgeCount=_fileQuery.results.count/4;
+					 
+					 if(purgeCount==0){
+						 return;
+						 BetterLog(@"nothing to purge, exiting");
+					 }
+					 
+					 BetterLog(@"starting purge of %li files",(long)purgeCount);
+					 
+					 for(NSInteger fileIndex=purgeCount;fileIndex<_fileQuery.results.count;fileIndex++){
+						 
+						 NSMetadataItem *item = _fileQuery.results[fileIndex];
+						 
+						 [fileManager removeItemAtPath:[item valueForAttribute:NSMetadataItemPathKey] error:nil];
+					 }
+					 
+					 _fileQuery=nil;
+					 
+				 }];
+				
+				NSMutableArray *fullPathArray=[NSMutableArray array];
+				for(NSString *fileName in filesArray){
+					[fullPathArray addObject:[dirPath stringByAppendingPathComponent:fileName]];
 				}
 				
-				BetterLog(@"complete");
+				[_fileQuery setSearchItems:@[dirPath]];
 				
-			});
+				NSPredicate *pred = [NSPredicate predicateWithFormat: @"%K ENDSWITH '.png'", NSMetadataItemFSNameKey];
+				[_fileQuery setPredicate:pred];
+				
+				NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:NSMetadataItemFSCreationDateKey ascending:TRUE];
+				NSArray *sortDescriptors = [NSArray arrayWithObjects: sortDescriptor, nil];
+				[_fileQuery setSortDescriptors:sortDescriptors];
+				
+				[_fileQuery startQuery];
+				
+			
+//				NSArray *sortedContent = [filesArray sortedArrayUsingComparator:
+//										  ^(NSString *filepath1, NSString *filepath2)
+//										  {
+//											  // compare
+//											  NSString* fullPath1 = [dirPath stringByAppendingPathComponent:filepath1];
+//											  NSDate *file1Date=[CSMapSource getModificationDateForFileAtPath:fullPath1];
+//											  
+//											  NSString* fullPath2 = [dirPath stringByAppendingPathComponent:filepath2];
+//											  NSDate *file2Date=[CSMapSource getModificationDateForFileAtPath:fullPath2];
+//											  
+//											  return [file2Date compare: file1Date];
+//											  
+//										  }];
+//				
+//				NSInteger purgeCount=sortedContent.count/4;
+//				if(purgeCount==0){
+//					return;
+//					BetterLog(@"nothing to purge, exiting");
+//				}
+//				
+//				BetterLog(@"starting purge of %li files",(long)purgeCount);
+//				
+//				for(NSInteger fileIndex=purgeCount;fileIndex<sortedContent.count;fileIndex++){
+//					
+//					NSString *filePath=[sortedContent objectAtIndex:fileIndex];
+//					NSString* fullPath = [dirPath stringByAppendingPathComponent:filePath];
+//					[fileManager removeItemAtPath:fullPath error:nil];
+//				}
+//				
+//				BetterLog(@"completed purge of %li files",(long)purgeCount);
+				
+		//	});
 			
 		}
+		
+	}else{
+		
+		BetterLog(@"No tiles to purge for %@",[self uniqueTilecacheKey]);
 		
 	}
 	
