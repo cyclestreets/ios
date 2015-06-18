@@ -11,6 +11,7 @@
 #import "GenericConstants.h"
 #import "DeviceUtilities.h"
 #import "GlobalUtilities.h"
+#import <UIAlertView+BlocksKit.h>
 
 @interface UserLocationManager()<CLLocationManagerDelegate>
 
@@ -205,11 +206,74 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 }
 
 
+-(void)displayUserLocationAlert{
+	
+	BOOL systemLocationON=self.systemLocationServicesEnabled;
+		
+	if(systemLocationON==YES){
+		
+		
+		if(self.appLocationServicesEnabled){
+			
+			[self startUpdatingLocationForSubscriber:SYSTEM];
+			
+		}else{
+			
+			CLAuthorizationStatus status=[CLLocationManager authorizationStatus];
+			
+			if(status==kCLAuthorizationStatusNotDetermined){
+				
+				[self requestAuthorisation];
+				
+			}else{
+				
+				UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:@"Location Services Disabled" message:@"Unable to retrieve location. Location services for the App are  off. Please enable in Settings > Privacy > Location to use location based features."];
+				
+				[locationAlert bk_addButtonWithTitle:CANCEL handler:^{
+					
+				}];
+				
+				if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")){
+					
+					[locationAlert bk_addButtonWithTitle:@"Settings" handler:^{
+						[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+					}];
+					
+					
+				}
+				
+				[locationAlert show];
+				
+			}
+			
+			
+		}
+
+		
+	}else{
+		
+			
+		UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:@"System Location Services Disabled" message:@"Unable to retrieve location. Location services for the device are off. Please enable in Settings > Privacy > Location to use location based features."];
+		
+		[locationAlert bk_addButtonWithTitle:CANCEL handler:^{
+			
+		}];
+		
+				
+		[locationAlert show];
+		
+		
+	}
+	
+	
+}
+
+
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
-    
+	
     if(status==kCLAuthorizationStatusAuthorized || status==kCLAuthorizationStatusAuthorizedWhenInUse){
-        
+		
         // if this change is a result of an initial authorisation prompt execute the auth subscriber lookup
         if(_authorisationSubscriber!=nil){
             [self startUpdatingLocationForSubscriber:_authorisationSubscriber];

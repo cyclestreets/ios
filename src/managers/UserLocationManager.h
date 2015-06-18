@@ -54,6 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(UserLocationManager)
 -(void)stopUpdatingLocationForSubscriber:(NSString *)subscriberId;
 
 -(BOOL)checkLocationStatus:(BOOL)showAlert;
+-(void)displayUserLocationAlert;
 
 // returns last loc and dict if unknown returns default loc
 -(NSDictionary*)currentLocationDict;

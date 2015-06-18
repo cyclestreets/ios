@@ -491,15 +491,23 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (IBAction) locationButtonSelected:(id)sender {
 	
-	_activeLocationSubButton.selected=!_activeLocationSubButton.selected;
+	if([[UserLocationManager sharedInstance] doesDeviceAllowLocation]){
 	
-	_shouldAcceptLocationUpdates=YES;
-	
-	_mapView.showsUserLocation=YES;
-	
-	[self.mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
-	
-	[_activeLocationSubButton performSelector:@selector(setSelected:) withObject:@NO afterDelay:1];
+		_activeLocationSubButton.selected=!_activeLocationSubButton.selected;
+		
+		_shouldAcceptLocationUpdates=YES;
+		
+		_mapView.showsUserLocation=YES;
+		
+		[self.mapView setCenterCoordinate:_mapView.userLocation.location.coordinate animated:YES];
+		
+		[_activeLocationSubButton performSelector:@selector(setSelected:) withObject:@NO afterDelay:1];
+		
+	}else{
+		
+		[[UserLocationManager sharedInstance] displayUserLocationAlert];
+		
+	}
 	
 }
 

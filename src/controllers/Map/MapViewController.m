@@ -699,27 +699,41 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	BetterLog(@"");
 	
-	if(_uiState==MapPlanningStateLocating){
+	if([[UserLocationManager sharedInstance] doesDeviceAllowLocation]){
 		
-		_programmaticChange=NO;
 		
-		[self updateUItoState:_previousUIState];
-		
-	}else{
-		
-		_programmaticChange=YES;
-		self.lastLocation=nil; // nil out the saved location so that locationDidComplete will execute the map update
-		_mapView.showsUserLocation=NO;
-		_mapView.showsUserLocation=YES;
-		
-		if(_uiState==MapPlanningStateRoute){
-			[self updateUItoState:MapPlanningStateRouteLocating];
+		if(_uiState==MapPlanningStateLocating){
+			
+			_programmaticChange=NO;
+			
+			[self updateUItoState:_previousUIState];
+			
 		}else{
-			[self updateUItoState:MapPlanningStateLocating];
+			
+			_programmaticChange=YES;
+			self.lastLocation=nil; // nil out the saved location so that locationDidComplete will execute the map update
+			_mapView.showsUserLocation=NO;
+			_mapView.showsUserLocation=YES;
+			
+			if(_uiState==MapPlanningStateRoute){
+				[self updateUItoState:MapPlanningStateRouteLocating];
+			}else{
+				[self updateUItoState:MapPlanningStateLocating];
+			}
+			
+			
 		}
 		
 		
+	}else{
+		
+		
+		[[UserLocationManager sharedInstance] displayUserLocationAlert];
+		
+		
 	}
+	
+	
 	
 }
 

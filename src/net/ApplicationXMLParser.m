@@ -842,13 +842,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	<time>144</time>
 	 <results>
 		 <result>
-		 <type>node</type>
-		 <id>1838216188</id>
-		 <name>Camb</name>
-		 <longitude>-1.0713154</longitude>
-		 <latitude>60.6128895</latitude>
-		 <near> Yell, Scotland, United Kingdom</near>
-		 <distance>8583404</distance>
+			<type>node</type>
+			<id>1838216188</id>
+			<name>Camb</name>
+			<longitude>-1.0713154</longitude>
+			<latitude>60.6128895</latitude>
+			<near> Yell, Scotland, United Kingdom</near>
+			<distance>8583404</distance>
 		 </result>
 	 </results>
  </sayt>
