@@ -227,7 +227,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 				
 			}else{
 				
-				UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:@"Location Services Disabled" message:@"Unable to retrieve location. Location services for the App are  off. Please enable in Settings > Privacy > Location to use location based features."];
+				UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:@"Location Services Disabled" message:@"Unable to retrieve location. Location services for the App are off. Please enable in Settings > Privacy > Location to use location based features."];
 				
 				[locationAlert bk_addButtonWithTitle:CANCEL handler:^{
 					
