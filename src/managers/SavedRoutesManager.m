@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "RouteManager.h"
 #import "GlobalUtilities.h"
-
+#import <NSObject+BKBlockExecution.h>
 
 @interface SavedRoutesManager(Private)
 
@@ -47,11 +47,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 {
     self = [super init];
     if (self) {
+		
         self.routeidStore = [self loadIndicies];
+		
 		if(_routeidStore==nil){
 			self.routeidStore = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSMutableArray array], SAVEDROUTE_FAVS,[NSMutableArray array],SAVEDROUTE_RECENTS,nil];
 		}
-		[self loadSavedRoutes];
+		
+		__weak __typeof(&*self)weakSelf = self;
+		[self bk_performBlockInBackground:^(id obj) {
+			[weakSelf loadSavedRoutes];
+		} afterDelay:0];
+		
+		
     }
     return self;
 }
@@ -92,7 +100,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	// v1>v2 transition method
 	[self transferOldFavouritesToRecents];
 	
-	[self purgeOrphanedRoutes:orphanarr];
+	if(orphanarr.count>0)
+		[self purgeOrphanedRoutes:orphanarr];
 	
 }
 
@@ -104,11 +113,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 //
 -(void)transferOldFavouritesToRecents{
 	
+	BetterLog(@"");
+	
 	NSMutableArray *legacyRoutes=[RouteManager sharedInstance].legacyRoutes;
 	
 	NSMutableArray *routeidarr=[_routeidStore objectForKey:SAVEDROUTE_RECENTS];
 	
 	if(legacyRoutes!=nil){
+		
+		BetterLog(@"transferring legacy routes");
 		
 		for(RouteVO *route in legacyRoutes){
 			
@@ -155,7 +168,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		if([type isEqualToString:SAVEDROUTE_FAVS]){
 			[_favouritesdataProvider insertObject:route atIndex:0];
 		}else{
+			BetterLog(@"_recentsdataProvider count pre add: %lu",(unsigned long)_recentsdataProvider.count);
 			[_recentsdataProvider insertObject:route atIndex:0];
+			BetterLog(@"_recentsdataProvider count post add: %lu",(unsigned long)_recentsdataProvider.count);
 		}
 		
 		
@@ -457,18 +472,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 - (NSMutableDictionary *) loadIndicies {
 	
 	NSMutableDictionary *result=[NSMutableDictionary dictionaryWithContentsOfFile:[self indiciesFile]];
+	BetterLog(@"loadIndicies count=%lu",(unsigned long)result.count);
 	
 	return result;	
 }
 
 - (void) saveIndicies {
 	
-	[_routeidStore writeToFile:[self indiciesFile] atomically:YES];
-	//BetterLog(@"did save=%i",result);
+	BOOL result=[_routeidStore writeToFile:[self indiciesFile] atomically:YES];
+	BetterLog(@"saveIndicies result: %i",result);
 }
 
 
 -(void)purgeOrphanedRoutes:(NSMutableArray*)arr{
+	
+	BetterLog(@"");
 	
 	for (NSString *routeid in arr){
 		[[RouteManager sharedInstance] legacyRemoveRouteFile:routeid];

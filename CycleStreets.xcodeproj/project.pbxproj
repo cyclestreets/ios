@@ -423,6 +423,8 @@
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		2846556519C9B859002E7CB7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
 		2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
+		284A35821B32C98900EE2FD4 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 284A35801B32C98900EE2FD4 /* Localized.strings */; };
+		284A35831B32C98900EE2FD4 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 284A35801B32C98900EE2FD4 /* Localized.strings */; };
 		284ADCEA18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
@@ -1833,6 +1835,7 @@
 		2846556419C9B859002E7CB7 /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_live.txt; path = docs/APIKey_live.txt; sourceTree = SOURCE_ROOT; };
 		284667F518C0AAD9005089C7 /* DeviceUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtilities.h; sourceTree = "<group>"; };
 		284667F618C0AAD9005089C7 /* DeviceUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtilities.m; sourceTree = "<group>"; };
+		284A35811B32C98900EE2FD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localized.strings; sourceTree = "<group>"; };
 		284ADCE818C88309003830DE /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
 		284ADCE918C88309003830DE /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		284ADCEC18C892A9003830DE /* BUCodableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCodableObject.h; sourceTree = "<group>"; };
@@ -2787,6 +2790,31 @@
 			name = poi;
 			sourceTree = "<group>";
 		};
+		284A35721B32C76900EE2FD4 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				284A357A1B32C97C00EE2FD4 /* strings */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		284A357A1B32C97C00EE2FD4 /* strings */ = {
+			isa = PBXGroup;
+			children = (
+				284A357F1B32C98900EE2FD4 /* en.lproj */,
+			);
+			name = strings;
+			path = resources/strings;
+			sourceTree = "<group>";
+		};
+		284A357F1B32C98900EE2FD4 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				284A35801B32C98900EE2FD4 /* Localized.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		285320F919E7D43300118E48 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -3666,6 +3694,7 @@
 		28FA8A2919E452810040EA46 /* cyclestreets */ = {
 			isa = PBXGroup;
 			children = (
+				284A35721B32C76900EE2FD4 /* resources */,
 				28A9998119E7073A0050C3E8 /* const */,
 			);
 			path = cyclestreets;
@@ -3923,6 +3952,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -4152,6 +4182,7 @@
 				2868D242166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				28B6B2FC1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */,
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
+				284A35821B32C98900EE2FD4 /* Localized.strings in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
@@ -4261,6 +4292,7 @@
 				2853211519E7EFF900118E48 /* ASMapStyle.png in Resources */,
 				2834366415DD5DC300B00FD5 /* blueButton.png in Resources */,
 				2834366515DD5DC300B00FD5 /* BUSegmentedControl_center_hi.png in Resources */,
+				284A35831B32C98900EE2FD4 /* Localized.strings in Resources */,
 				2834366615DD5DC300B00FD5 /* BUSegmentedControl_center_lo.png in Resources */,
 				2834366715DD5DC300B00FD5 /* BUSegmentedControl_left_hi.png in Resources */,
 				2834366815DD5DC300B00FD5 /* BUSegmentedControl_left_lo.png in Resources */,
@@ -5665,6 +5697,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		284A35801B32C98900EE2FD4 /* Localized.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				284A35811B32C98900EE2FD4 /* en */,
+			);
+			name = Localized.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

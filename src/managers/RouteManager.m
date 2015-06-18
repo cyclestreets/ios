@@ -991,6 +991,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		RouteVO *route = [unarchiver decodeObjectForKey:kROUTEARCHIVEKEY];
 		[unarchiver finishDecoding];
 		return route;
+	}else{
+		BetterLog(@"Unable to load route data for file route_%@",fileid);
 	}
 	
 	return nil;
@@ -1008,9 +1010,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
 	[archiver encodeObject:route forKey:kROUTEARCHIVEKEY];
 	[archiver finishEncoding];
-	[data writeToFile:routeFile atomically:YES];
+	BOOL result=[data writeToFile:routeFile atomically:YES];
 	
-	
+	BetterLog(@"routesDirectory save: result %i",result);
 }
 
 
