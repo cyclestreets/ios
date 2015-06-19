@@ -13,6 +13,226 @@
 		2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
 		2803DC6919E854E900841F29 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
 		2803DC6A19E854EA00841F29 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
+		280400E11B34213200DE0EBA /* bicycles_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AA1B34213200DE0EBA /* bicycles_bad.pdf */; };
+		280400E21B34213200DE0EBA /* bicycles_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AA1B34213200DE0EBA /* bicycles_bad.pdf */; };
+		280400E31B34213200DE0EBA /* bicycles_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AA1B34213200DE0EBA /* bicycles_bad.pdf */; };
+		280400E41B34213200DE0EBA /* bicycles_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AA1B34213200DE0EBA /* bicycles_bad.pdf */; };
+		280400E51B34213200DE0EBA /* bicycles_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AB1B34213200DE0EBA /* bicycles_good.pdf */; };
+		280400E61B34213200DE0EBA /* bicycles_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AB1B34213200DE0EBA /* bicycles_good.pdf */; };
+		280400E71B34213200DE0EBA /* bicycles_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AB1B34213200DE0EBA /* bicycles_good.pdf */; };
+		280400E81B34213200DE0EBA /* bicycles_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AB1B34213200DE0EBA /* bicycles_good.pdf */; };
+		280400E91B34213200DE0EBA /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AC1B34213200DE0EBA /* bicycles_other.pdf */; };
+		280400EA1B34213200DE0EBA /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AC1B34213200DE0EBA /* bicycles_other.pdf */; };
+		280400EB1B34213200DE0EBA /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AC1B34213200DE0EBA /* bicycles_other.pdf */; };
+		280400EC1B34213200DE0EBA /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AC1B34213200DE0EBA /* bicycles_other.pdf */; };
+		280400ED1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AD1B34213200DE0EBA /* bikeshops_bad.pdf */; };
+		280400EE1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AD1B34213200DE0EBA /* bikeshops_bad.pdf */; };
+		280400EF1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AD1B34213200DE0EBA /* bikeshops_bad.pdf */; };
+		280400F01B34213200DE0EBA /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AD1B34213200DE0EBA /* bikeshops_bad.pdf */; };
+		280400F11B34213200DE0EBA /* bikeshops_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AE1B34213200DE0EBA /* bikeshops_good.pdf */; };
+		280400F21B34213200DE0EBA /* bikeshops_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AE1B34213200DE0EBA /* bikeshops_good.pdf */; };
+		280400F31B34213200DE0EBA /* bikeshops_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AE1B34213200DE0EBA /* bikeshops_good.pdf */; };
+		280400F41B34213200DE0EBA /* bikeshops_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AE1B34213200DE0EBA /* bikeshops_good.pdf */; };
+		280400F51B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AF1B34213200DE0EBA /* bikeshops_neutral.pdf */; };
+		280400F61B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AF1B34213200DE0EBA /* bikeshops_neutral.pdf */; };
+		280400F71B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AF1B34213200DE0EBA /* bikeshops_neutral.pdf */; };
+		280400F81B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AF1B34213200DE0EBA /* bikeshops_neutral.pdf */; };
+		280400F91B34213200DE0EBA /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B01B34213200DE0EBA /* carstorage_bad.pdf */; };
+		280400FA1B34213200DE0EBA /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B01B34213200DE0EBA /* carstorage_bad.pdf */; };
+		280400FB1B34213200DE0EBA /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B01B34213200DE0EBA /* carstorage_bad.pdf */; };
+		280400FC1B34213200DE0EBA /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B01B34213200DE0EBA /* carstorage_bad.pdf */; };
+		280400FD1B34213200DE0EBA /* carstorage_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B11B34213200DE0EBA /* carstorage_good.pdf */; };
+		280400FE1B34213200DE0EBA /* carstorage_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B11B34213200DE0EBA /* carstorage_good.pdf */; };
+		280400FF1B34213200DE0EBA /* carstorage_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B11B34213200DE0EBA /* carstorage_good.pdf */; };
+		280401001B34213200DE0EBA /* carstorage_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B11B34213200DE0EBA /* carstorage_good.pdf */; };
+		280401011B34213200DE0EBA /* carstorage_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B21B34213200DE0EBA /* carstorage_neutral.pdf */; };
+		280401021B34213200DE0EBA /* carstorage_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B21B34213200DE0EBA /* carstorage_neutral.pdf */; };
+		280401031B34213200DE0EBA /* carstorage_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B21B34213200DE0EBA /* carstorage_neutral.pdf */; };
+		280401041B34213200DE0EBA /* carstorage_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B21B34213200DE0EBA /* carstorage_neutral.pdf */; };
+		280401051B34213200DE0EBA /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B31B34213200DE0EBA /* closure_bad.pdf */; };
+		280401061B34213200DE0EBA /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B31B34213200DE0EBA /* closure_bad.pdf */; };
+		280401071B34213200DE0EBA /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B31B34213200DE0EBA /* closure_bad.pdf */; };
+		280401081B34213200DE0EBA /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B31B34213200DE0EBA /* closure_bad.pdf */; };
+		280401091B34213200DE0EBA /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B41B34213200DE0EBA /* closure_good.pdf */; };
+		2804010A1B34213200DE0EBA /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B41B34213200DE0EBA /* closure_good.pdf */; };
+		2804010B1B34213200DE0EBA /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B41B34213200DE0EBA /* closure_good.pdf */; };
+		2804010C1B34213200DE0EBA /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B41B34213200DE0EBA /* closure_good.pdf */; };
+		2804010D1B34213200DE0EBA /* closure_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B51B34213200DE0EBA /* closure_neutral.pdf */; };
+		2804010E1B34213200DE0EBA /* closure_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B51B34213200DE0EBA /* closure_neutral.pdf */; };
+		2804010F1B34213200DE0EBA /* closure_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B51B34213200DE0EBA /* closure_neutral.pdf */; };
+		280401101B34213200DE0EBA /* closure_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B51B34213200DE0EBA /* closure_neutral.pdf */; };
+		280401111B34213200DE0EBA /* congestion_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B61B34213200DE0EBA /* congestion_bad.pdf */; };
+		280401121B34213200DE0EBA /* congestion_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B61B34213200DE0EBA /* congestion_bad.pdf */; };
+		280401131B34213200DE0EBA /* congestion_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B61B34213200DE0EBA /* congestion_bad.pdf */; };
+		280401141B34213200DE0EBA /* congestion_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B61B34213200DE0EBA /* congestion_bad.pdf */; };
+		280401151B34213200DE0EBA /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B71B34213200DE0EBA /* congestion_good.pdf */; };
+		280401161B34213200DE0EBA /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B71B34213200DE0EBA /* congestion_good.pdf */; };
+		280401171B34213200DE0EBA /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B71B34213200DE0EBA /* congestion_good.pdf */; };
+		280401181B34213200DE0EBA /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B71B34213200DE0EBA /* congestion_good.pdf */; };
+		280401191B34213200DE0EBA /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B81B34213200DE0EBA /* congestion_other.pdf */; };
+		2804011A1B34213200DE0EBA /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B81B34213200DE0EBA /* congestion_other.pdf */; };
+		2804011B1B34213200DE0EBA /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B81B34213200DE0EBA /* congestion_other.pdf */; };
+		2804011C1B34213200DE0EBA /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B81B34213200DE0EBA /* congestion_other.pdf */; };
+		2804011D1B34213200DE0EBA /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B91B34213200DE0EBA /* cycleparking_bad.pdf */; };
+		2804011E1B34213200DE0EBA /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B91B34213200DE0EBA /* cycleparking_bad.pdf */; };
+		2804011F1B34213200DE0EBA /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B91B34213200DE0EBA /* cycleparking_bad.pdf */; };
+		280401201B34213200DE0EBA /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400B91B34213200DE0EBA /* cycleparking_bad.pdf */; };
+		280401211B34213200DE0EBA /* cycleparking_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BA1B34213200DE0EBA /* cycleparking_good.pdf */; };
+		280401221B34213200DE0EBA /* cycleparking_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BA1B34213200DE0EBA /* cycleparking_good.pdf */; };
+		280401231B34213200DE0EBA /* cycleparking_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BA1B34213200DE0EBA /* cycleparking_good.pdf */; };
+		280401241B34213200DE0EBA /* cycleparking_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BA1B34213200DE0EBA /* cycleparking_good.pdf */; };
+		280401251B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BB1B34213200DE0EBA /* cycleparking_neutral.pdf */; };
+		280401261B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BB1B34213200DE0EBA /* cycleparking_neutral.pdf */; };
+		280401271B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BB1B34213200DE0EBA /* cycleparking_neutral.pdf */; };
+		280401281B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BB1B34213200DE0EBA /* cycleparking_neutral.pdf */; };
+		280401291B34213200DE0EBA /* cycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BC1B34213200DE0EBA /* cycleways_bad.pdf */; };
+		2804012A1B34213200DE0EBA /* cycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BC1B34213200DE0EBA /* cycleways_bad.pdf */; };
+		2804012B1B34213200DE0EBA /* cycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BC1B34213200DE0EBA /* cycleways_bad.pdf */; };
+		2804012C1B34213200DE0EBA /* cycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BC1B34213200DE0EBA /* cycleways_bad.pdf */; };
+		2804012D1B34213200DE0EBA /* cycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BD1B34213200DE0EBA /* cycleways_good.pdf */; };
+		2804012E1B34213200DE0EBA /* cycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BD1B34213200DE0EBA /* cycleways_good.pdf */; };
+		2804012F1B34213200DE0EBA /* cycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BD1B34213200DE0EBA /* cycleways_good.pdf */; };
+		280401301B34213200DE0EBA /* cycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BD1B34213200DE0EBA /* cycleways_good.pdf */; };
+		280401311B34213200DE0EBA /* cycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BE1B34213200DE0EBA /* cycleways_neutral.pdf */; };
+		280401321B34213200DE0EBA /* cycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BE1B34213200DE0EBA /* cycleways_neutral.pdf */; };
+		280401331B34213200DE0EBA /* cycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BE1B34213200DE0EBA /* cycleways_neutral.pdf */; };
+		280401341B34213200DE0EBA /* cycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BE1B34213200DE0EBA /* cycleways_neutral.pdf */; };
+		280401351B34213200DE0EBA /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BF1B34213200DE0EBA /* destinations_bad.pdf */; };
+		280401361B34213200DE0EBA /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BF1B34213200DE0EBA /* destinations_bad.pdf */; };
+		280401371B34213200DE0EBA /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BF1B34213200DE0EBA /* destinations_bad.pdf */; };
+		280401381B34213200DE0EBA /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400BF1B34213200DE0EBA /* destinations_bad.pdf */; };
+		280401391B34213200DE0EBA /* destinations_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C01B34213200DE0EBA /* destinations_good.pdf */; };
+		2804013A1B34213200DE0EBA /* destinations_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C01B34213200DE0EBA /* destinations_good.pdf */; };
+		2804013B1B34213200DE0EBA /* destinations_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C01B34213200DE0EBA /* destinations_good.pdf */; };
+		2804013C1B34213200DE0EBA /* destinations_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C01B34213200DE0EBA /* destinations_good.pdf */; };
+		2804013D1B34213200DE0EBA /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C11B34213200DE0EBA /* destinations_other.pdf */; };
+		2804013E1B34213200DE0EBA /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C11B34213200DE0EBA /* destinations_other.pdf */; };
+		2804013F1B34213200DE0EBA /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C11B34213200DE0EBA /* destinations_other.pdf */; };
+		280401401B34213200DE0EBA /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C11B34213200DE0EBA /* destinations_other.pdf */; };
+		280401411B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C21B34213200DE0EBA /* dutchcycleways_bad.pdf */; };
+		280401421B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C21B34213200DE0EBA /* dutchcycleways_bad.pdf */; };
+		280401431B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C21B34213200DE0EBA /* dutchcycleways_bad.pdf */; };
+		280401441B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C21B34213200DE0EBA /* dutchcycleways_bad.pdf */; };
+		280401451B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C31B34213200DE0EBA /* dutchcycleways_good.pdf */; };
+		280401461B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C31B34213200DE0EBA /* dutchcycleways_good.pdf */; };
+		280401471B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C31B34213200DE0EBA /* dutchcycleways_good.pdf */; };
+		280401481B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C31B34213200DE0EBA /* dutchcycleways_good.pdf */; };
+		280401491B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C41B34213200DE0EBA /* dutchcycleways_neutral.pdf */; };
+		2804014A1B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C41B34213200DE0EBA /* dutchcycleways_neutral.pdf */; };
+		2804014B1B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C41B34213200DE0EBA /* dutchcycleways_neutral.pdf */; };
+		2804014C1B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C41B34213200DE0EBA /* dutchcycleways_neutral.pdf */; };
+		2804014D1B34213200DE0EBA /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C51B34213200DE0EBA /* enforcement_bad.pdf */; };
+		2804014E1B34213200DE0EBA /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C51B34213200DE0EBA /* enforcement_bad.pdf */; };
+		2804014F1B34213200DE0EBA /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C51B34213200DE0EBA /* enforcement_bad.pdf */; };
+		280401501B34213200DE0EBA /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C51B34213200DE0EBA /* enforcement_bad.pdf */; };
+		280401511B34213200DE0EBA /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C61B34213200DE0EBA /* enforcement_good.pdf */; };
+		280401521B34213200DE0EBA /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C61B34213200DE0EBA /* enforcement_good.pdf */; };
+		280401531B34213200DE0EBA /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C61B34213200DE0EBA /* enforcement_good.pdf */; };
+		280401541B34213200DE0EBA /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C61B34213200DE0EBA /* enforcement_good.pdf */; };
+		280401551B34213200DE0EBA /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C71B34213200DE0EBA /* enforcement_other.pdf */; };
+		280401561B34213200DE0EBA /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C71B34213200DE0EBA /* enforcement_other.pdf */; };
+		280401571B34213200DE0EBA /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C71B34213200DE0EBA /* enforcement_other.pdf */; };
+		280401581B34213200DE0EBA /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C71B34213200DE0EBA /* enforcement_other.pdf */; };
+		280401591B34213200DE0EBA /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C81B34213200DE0EBA /* general_bad.pdf */; };
+		2804015A1B34213200DE0EBA /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C81B34213200DE0EBA /* general_bad.pdf */; };
+		2804015B1B34213200DE0EBA /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C81B34213200DE0EBA /* general_bad.pdf */; };
+		2804015C1B34213200DE0EBA /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C81B34213200DE0EBA /* general_bad.pdf */; };
+		2804015D1B34213200DE0EBA /* general_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C91B34213200DE0EBA /* general_good.pdf */; };
+		2804015E1B34213200DE0EBA /* general_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C91B34213200DE0EBA /* general_good.pdf */; };
+		2804015F1B34213200DE0EBA /* general_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C91B34213200DE0EBA /* general_good.pdf */; };
+		280401601B34213200DE0EBA /* general_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400C91B34213200DE0EBA /* general_good.pdf */; };
+		280401611B34213200DE0EBA /* general_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CA1B34213200DE0EBA /* general_neutral.pdf */; };
+		280401621B34213200DE0EBA /* general_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CA1B34213200DE0EBA /* general_neutral.pdf */; };
+		280401631B34213200DE0EBA /* general_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CA1B34213200DE0EBA /* general_neutral.pdf */; };
+		280401641B34213200DE0EBA /* general_neutral.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CA1B34213200DE0EBA /* general_neutral.pdf */; };
+		280401651B34213200DE0EBA /* obstructions_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CB1B34213200DE0EBA /* obstructions_bad.pdf */; };
+		280401661B34213200DE0EBA /* obstructions_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CB1B34213200DE0EBA /* obstructions_bad.pdf */; };
+		280401671B34213200DE0EBA /* obstructions_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CB1B34213200DE0EBA /* obstructions_bad.pdf */; };
+		280401681B34213200DE0EBA /* obstructions_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CB1B34213200DE0EBA /* obstructions_bad.pdf */; };
+		280401691B34213200DE0EBA /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CC1B34213200DE0EBA /* obstructions_good.pdf */; };
+		2804016A1B34213200DE0EBA /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CC1B34213200DE0EBA /* obstructions_good.pdf */; };
+		2804016B1B34213200DE0EBA /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CC1B34213200DE0EBA /* obstructions_good.pdf */; };
+		2804016C1B34213200DE0EBA /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CC1B34213200DE0EBA /* obstructions_good.pdf */; };
+		2804016D1B34213200DE0EBA /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CD1B34213200DE0EBA /* obstructions_other.pdf */; };
+		2804016E1B34213200DE0EBA /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CD1B34213200DE0EBA /* obstructions_other.pdf */; };
+		2804016F1B34213200DE0EBA /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CD1B34213200DE0EBA /* obstructions_other.pdf */; };
+		280401701B34213200DE0EBA /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CD1B34213200DE0EBA /* obstructions_other.pdf */; };
+		280401711B34213200DE0EBA /* potholes_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CE1B34213200DE0EBA /* potholes_bad.pdf */; };
+		280401721B34213200DE0EBA /* potholes_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CE1B34213200DE0EBA /* potholes_bad.pdf */; };
+		280401731B34213200DE0EBA /* potholes_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CE1B34213200DE0EBA /* potholes_bad.pdf */; };
+		280401741B34213200DE0EBA /* potholes_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CE1B34213200DE0EBA /* potholes_bad.pdf */; };
+		280401751B34213200DE0EBA /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CF1B34213200DE0EBA /* potholes_good.pdf */; };
+		280401761B34213200DE0EBA /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CF1B34213200DE0EBA /* potholes_good.pdf */; };
+		280401771B34213200DE0EBA /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CF1B34213200DE0EBA /* potholes_good.pdf */; };
+		280401781B34213200DE0EBA /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400CF1B34213200DE0EBA /* potholes_good.pdf */; };
+		280401791B34213200DE0EBA /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D01B34213200DE0EBA /* potholes_other.pdf */; };
+		2804017A1B34213200DE0EBA /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D01B34213200DE0EBA /* potholes_other.pdf */; };
+		2804017B1B34213200DE0EBA /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D01B34213200DE0EBA /* potholes_other.pdf */; };
+		2804017C1B34213200DE0EBA /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D01B34213200DE0EBA /* potholes_other.pdf */; };
+		2804017D1B34213200DE0EBA /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D11B34213200DE0EBA /* road_bad.pdf */; };
+		2804017E1B34213200DE0EBA /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D11B34213200DE0EBA /* road_bad.pdf */; };
+		2804017F1B34213200DE0EBA /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D11B34213200DE0EBA /* road_bad.pdf */; };
+		280401801B34213200DE0EBA /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D11B34213200DE0EBA /* road_bad.pdf */; };
+		280401811B34213200DE0EBA /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D21B34213200DE0EBA /* road_good.pdf */; };
+		280401821B34213200DE0EBA /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D21B34213200DE0EBA /* road_good.pdf */; };
+		280401831B34213200DE0EBA /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D21B34213200DE0EBA /* road_good.pdf */; };
+		280401841B34213200DE0EBA /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D21B34213200DE0EBA /* road_good.pdf */; };
+		280401851B34213200DE0EBA /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D31B34213200DE0EBA /* road_other.pdf */; };
+		280401861B34213200DE0EBA /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D31B34213200DE0EBA /* road_other.pdf */; };
+		280401871B34213200DE0EBA /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D31B34213200DE0EBA /* road_other.pdf */; };
+		280401881B34213200DE0EBA /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D31B34213200DE0EBA /* road_other.pdf */; };
+		280401891B34213200DE0EBA /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D41B34213200DE0EBA /* roadworks_bad.pdf */; };
+		2804018A1B34213200DE0EBA /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D41B34213200DE0EBA /* roadworks_bad.pdf */; };
+		2804018B1B34213200DE0EBA /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D41B34213200DE0EBA /* roadworks_bad.pdf */; };
+		2804018C1B34213200DE0EBA /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D41B34213200DE0EBA /* roadworks_bad.pdf */; };
+		2804018D1B34213200DE0EBA /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D51B34213200DE0EBA /* roadworks_good.pdf */; };
+		2804018E1B34213200DE0EBA /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D51B34213200DE0EBA /* roadworks_good.pdf */; };
+		2804018F1B34213200DE0EBA /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D51B34213200DE0EBA /* roadworks_good.pdf */; };
+		280401901B34213200DE0EBA /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D51B34213200DE0EBA /* roadworks_good.pdf */; };
+		280401911B34213200DE0EBA /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D61B34213200DE0EBA /* roadworks_other.pdf */; };
+		280401921B34213200DE0EBA /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D61B34213200DE0EBA /* roadworks_other.pdf */; };
+		280401931B34213200DE0EBA /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D61B34213200DE0EBA /* roadworks_other.pdf */; };
+		280401941B34213200DE0EBA /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D61B34213200DE0EBA /* roadworks_other.pdf */; };
+		280401951B34213200DE0EBA /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D71B34213200DE0EBA /* routesigns_bad.pdf */; };
+		280401961B34213200DE0EBA /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D71B34213200DE0EBA /* routesigns_bad.pdf */; };
+		280401971B34213200DE0EBA /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D71B34213200DE0EBA /* routesigns_bad.pdf */; };
+		280401981B34213200DE0EBA /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D71B34213200DE0EBA /* routesigns_bad.pdf */; };
+		280401991B34213200DE0EBA /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D81B34213200DE0EBA /* routesigns_good.pdf */; };
+		2804019A1B34213200DE0EBA /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D81B34213200DE0EBA /* routesigns_good.pdf */; };
+		2804019B1B34213200DE0EBA /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D81B34213200DE0EBA /* routesigns_good.pdf */; };
+		2804019C1B34213200DE0EBA /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D81B34213200DE0EBA /* routesigns_good.pdf */; };
+		2804019D1B34213200DE0EBA /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D91B34213200DE0EBA /* routesigns_other.pdf */; };
+		2804019E1B34213200DE0EBA /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D91B34213200DE0EBA /* routesigns_other.pdf */; };
+		2804019F1B34213200DE0EBA /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D91B34213200DE0EBA /* routesigns_other.pdf */; };
+		280401A01B34213200DE0EBA /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D91B34213200DE0EBA /* routesigns_other.pdf */; };
+		280401A11B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
+		280401A21B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
+		280401A31B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
+		280401A41B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
+		280401A51B34213200DE0EBA /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DB1B34213200DE0EBA /* signs_bad.pdf */; };
+		280401A61B34213200DE0EBA /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DB1B34213200DE0EBA /* signs_bad.pdf */; };
+		280401A71B34213200DE0EBA /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DB1B34213200DE0EBA /* signs_bad.pdf */; };
+		280401A81B34213200DE0EBA /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DB1B34213200DE0EBA /* signs_bad.pdf */; };
+		280401A91B34213200DE0EBA /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DC1B34213200DE0EBA /* signs_good.pdf */; };
+		280401AA1B34213200DE0EBA /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DC1B34213200DE0EBA /* signs_good.pdf */; };
+		280401AB1B34213200DE0EBA /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DC1B34213200DE0EBA /* signs_good.pdf */; };
+		280401AC1B34213200DE0EBA /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DC1B34213200DE0EBA /* signs_good.pdf */; };
+		280401AD1B34213200DE0EBA /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DD1B34213200DE0EBA /* signs_other.pdf */; };
+		280401AE1B34213200DE0EBA /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DD1B34213200DE0EBA /* signs_other.pdf */; };
+		280401AF1B34213200DE0EBA /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DD1B34213200DE0EBA /* signs_other.pdf */; };
+		280401B01B34213200DE0EBA /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DD1B34213200DE0EBA /* signs_other.pdf */; };
+		280401B11B34213200DE0EBA /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DE1B34213200DE0EBA /* track_bad.pdf */; };
+		280401B21B34213200DE0EBA /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DE1B34213200DE0EBA /* track_bad.pdf */; };
+		280401B31B34213200DE0EBA /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DE1B34213200DE0EBA /* track_bad.pdf */; };
+		280401B41B34213200DE0EBA /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DE1B34213200DE0EBA /* track_bad.pdf */; };
+		280401B51B34213200DE0EBA /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DF1B34213200DE0EBA /* track_good.pdf */; };
+		280401B61B34213200DE0EBA /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DF1B34213200DE0EBA /* track_good.pdf */; };
+		280401B71B34213200DE0EBA /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DF1B34213200DE0EBA /* track_good.pdf */; };
+		280401B81B34213200DE0EBA /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DF1B34213200DE0EBA /* track_good.pdf */; };
+		280401B91B34213200DE0EBA /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400E01B34213200DE0EBA /* track_other.pdf */; };
+		280401BA1B34213200DE0EBA /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400E01B34213200DE0EBA /* track_other.pdf */; };
+		280401BB1B34213200DE0EBA /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400E01B34213200DE0EBA /* track_other.pdf */; };
+		280401BC1B34213200DE0EBA /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400E01B34213200DE0EBA /* track_other.pdf */; };
 		28040C3818BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
 		28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
 		28042E981A2C96C600C56374 /* ApplicationJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 28042E941A2C94BE00C56374 /* ApplicationJSONParser.m */; };
@@ -445,142 +665,6 @@
 		284A36281B32E3A200EE2FD4 /* UIView+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A36121B32E3A200EE2FD4 /* UIView+Image.m */; };
 		284A36291B32E3A200EE2FD4 /* UIView+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A36121B32E3A200EE2FD4 /* UIView+Image.m */; };
 		284A362A1B32E3A200EE2FD4 /* UIView+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A36121B32E3A200EE2FD4 /* UIView+Image.m */; };
-		284A36521B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362C1B32E9C400EE2FD4 /* bikeshops_bad.pdf */; };
-		284A36531B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362C1B32E9C400EE2FD4 /* bikeshops_bad.pdf */; };
-		284A36541B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362C1B32E9C400EE2FD4 /* bikeshops_bad.pdf */; };
-		284A36551B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362C1B32E9C400EE2FD4 /* bikeshops_bad.pdf */; };
-		284A36561B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362D1B32E9C400EE2FD4 /* carstorage_bad.pdf */; };
-		284A36571B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362D1B32E9C400EE2FD4 /* carstorage_bad.pdf */; };
-		284A36581B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362D1B32E9C400EE2FD4 /* carstorage_bad.pdf */; };
-		284A36591B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362D1B32E9C400EE2FD4 /* carstorage_bad.pdf */; };
-		284A365A1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362E1B32E9C400EE2FD4 /* closure_bad.pdf */; };
-		284A365B1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362E1B32E9C400EE2FD4 /* closure_bad.pdf */; };
-		284A365C1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362E1B32E9C400EE2FD4 /* closure_bad.pdf */; };
-		284A365D1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362E1B32E9C400EE2FD4 /* closure_bad.pdf */; };
-		284A365E1B32E9C400EE2FD4 /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362F1B32E9C400EE2FD4 /* closure_good.pdf */; };
-		284A365F1B32E9C400EE2FD4 /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362F1B32E9C400EE2FD4 /* closure_good.pdf */; };
-		284A36601B32E9C400EE2FD4 /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362F1B32E9C400EE2FD4 /* closure_good.pdf */; };
-		284A36611B32E9C400EE2FD4 /* closure_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A362F1B32E9C400EE2FD4 /* closure_good.pdf */; };
-		284A36621B32E9C400EE2FD4 /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36301B32E9C400EE2FD4 /* congestion_good.pdf */; };
-		284A36631B32E9C400EE2FD4 /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36301B32E9C400EE2FD4 /* congestion_good.pdf */; };
-		284A36641B32E9C400EE2FD4 /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36301B32E9C400EE2FD4 /* congestion_good.pdf */; };
-		284A36651B32E9C400EE2FD4 /* congestion_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36301B32E9C400EE2FD4 /* congestion_good.pdf */; };
-		284A366A1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36321B32E9C400EE2FD4 /* cycleparking_bad.pdf */; };
-		284A366B1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36321B32E9C400EE2FD4 /* cycleparking_bad.pdf */; };
-		284A366C1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36321B32E9C400EE2FD4 /* cycleparking_bad.pdf */; };
-		284A366D1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36321B32E9C400EE2FD4 /* cycleparking_bad.pdf */; };
-		284A366E1B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36331B32E9C400EE2FD4 /* destinations_bad.pdf */; };
-		284A366F1B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36331B32E9C400EE2FD4 /* destinations_bad.pdf */; };
-		284A36701B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36331B32E9C400EE2FD4 /* destinations_bad.pdf */; };
-		284A36711B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36331B32E9C400EE2FD4 /* destinations_bad.pdf */; };
-		284A36761B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36351B32E9C400EE2FD4 /* enforcement_bad.pdf */; };
-		284A36771B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36351B32E9C400EE2FD4 /* enforcement_bad.pdf */; };
-		284A36781B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36351B32E9C400EE2FD4 /* enforcement_bad.pdf */; };
-		284A36791B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36351B32E9C400EE2FD4 /* enforcement_bad.pdf */; };
-		284A367A1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36361B32E9C400EE2FD4 /* enforcement_good.pdf */; };
-		284A367B1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36361B32E9C400EE2FD4 /* enforcement_good.pdf */; };
-		284A367C1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36361B32E9C400EE2FD4 /* enforcement_good.pdf */; };
-		284A367D1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36361B32E9C400EE2FD4 /* enforcement_good.pdf */; };
-		284A36861B32E9C400EE2FD4 /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36391B32E9C400EE2FD4 /* general_bad.pdf */; };
-		284A36871B32E9C400EE2FD4 /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36391B32E9C400EE2FD4 /* general_bad.pdf */; };
-		284A36881B32E9C400EE2FD4 /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36391B32E9C400EE2FD4 /* general_bad.pdf */; };
-		284A36891B32E9C400EE2FD4 /* general_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36391B32E9C400EE2FD4 /* general_bad.pdf */; };
-		284A368A1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363A1B32E9C400EE2FD4 /* obstructions_good.pdf */; };
-		284A368B1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363A1B32E9C400EE2FD4 /* obstructions_good.pdf */; };
-		284A368C1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363A1B32E9C400EE2FD4 /* obstructions_good.pdf */; };
-		284A368D1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363A1B32E9C400EE2FD4 /* obstructions_good.pdf */; };
-		284A36921B32E9C400EE2FD4 /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363C1B32E9C400EE2FD4 /* potholes_good.pdf */; };
-		284A36931B32E9C400EE2FD4 /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363C1B32E9C400EE2FD4 /* potholes_good.pdf */; };
-		284A36941B32E9C400EE2FD4 /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363C1B32E9C400EE2FD4 /* potholes_good.pdf */; };
-		284A36951B32E9C400EE2FD4 /* potholes_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363C1B32E9C400EE2FD4 /* potholes_good.pdf */; };
-		284A369A1B32E9C400EE2FD4 /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363E1B32E9C400EE2FD4 /* road_bad.pdf */; };
-		284A369B1B32E9C400EE2FD4 /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363E1B32E9C400EE2FD4 /* road_bad.pdf */; };
-		284A369C1B32E9C400EE2FD4 /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363E1B32E9C400EE2FD4 /* road_bad.pdf */; };
-		284A369D1B32E9C400EE2FD4 /* road_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363E1B32E9C400EE2FD4 /* road_bad.pdf */; };
-		284A369E1B32E9C400EE2FD4 /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363F1B32E9C400EE2FD4 /* road_good.pdf */; };
-		284A369F1B32E9C400EE2FD4 /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363F1B32E9C400EE2FD4 /* road_good.pdf */; };
-		284A36A01B32E9C400EE2FD4 /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363F1B32E9C400EE2FD4 /* road_good.pdf */; };
-		284A36A11B32E9C400EE2FD4 /* road_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A363F1B32E9C400EE2FD4 /* road_good.pdf */; };
-		284A36A61B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36411B32E9C400EE2FD4 /* roadworks_bad.pdf */; };
-		284A36A71B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36411B32E9C400EE2FD4 /* roadworks_bad.pdf */; };
-		284A36A81B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36411B32E9C400EE2FD4 /* roadworks_bad.pdf */; };
-		284A36A91B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36411B32E9C400EE2FD4 /* roadworks_bad.pdf */; };
-		284A36AA1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36421B32E9C400EE2FD4 /* roadworks_good.pdf */; };
-		284A36AB1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36421B32E9C400EE2FD4 /* roadworks_good.pdf */; };
-		284A36AC1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36421B32E9C400EE2FD4 /* roadworks_good.pdf */; };
-		284A36AD1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36421B32E9C400EE2FD4 /* roadworks_good.pdf */; };
-		284A36B21B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36441B32E9C400EE2FD4 /* routesigns_bad.pdf */; };
-		284A36B31B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36441B32E9C400EE2FD4 /* routesigns_bad.pdf */; };
-		284A36B41B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36441B32E9C400EE2FD4 /* routesigns_bad.pdf */; };
-		284A36B51B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36441B32E9C400EE2FD4 /* routesigns_bad.pdf */; };
-		284A36B61B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36451B32E9C400EE2FD4 /* routesigns_good.pdf */; };
-		284A36B71B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36451B32E9C400EE2FD4 /* routesigns_good.pdf */; };
-		284A36B81B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36451B32E9C400EE2FD4 /* routesigns_good.pdf */; };
-		284A36B91B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36451B32E9C400EE2FD4 /* routesigns_good.pdf */; };
-		284A36BE1B32E9C400EE2FD4 /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36471B32E9C400EE2FD4 /* shadow.pdf */; };
-		284A36BF1B32E9C400EE2FD4 /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36471B32E9C400EE2FD4 /* shadow.pdf */; };
-		284A36C01B32E9C400EE2FD4 /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36471B32E9C400EE2FD4 /* shadow.pdf */; };
-		284A36C11B32E9C400EE2FD4 /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36471B32E9C400EE2FD4 /* shadow.pdf */; };
-		284A36C21B32E9C400EE2FD4 /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36481B32E9C400EE2FD4 /* signs_bad.pdf */; };
-		284A36C31B32E9C400EE2FD4 /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36481B32E9C400EE2FD4 /* signs_bad.pdf */; };
-		284A36C41B32E9C400EE2FD4 /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36481B32E9C400EE2FD4 /* signs_bad.pdf */; };
-		284A36C51B32E9C400EE2FD4 /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36481B32E9C400EE2FD4 /* signs_bad.pdf */; };
-		284A36C61B32E9C400EE2FD4 /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36491B32E9C400EE2FD4 /* signs_good.pdf */; };
-		284A36C71B32E9C400EE2FD4 /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36491B32E9C400EE2FD4 /* signs_good.pdf */; };
-		284A36C81B32E9C400EE2FD4 /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36491B32E9C400EE2FD4 /* signs_good.pdf */; };
-		284A36C91B32E9C400EE2FD4 /* signs_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36491B32E9C400EE2FD4 /* signs_good.pdf */; };
-		284A36CE1B32E9C400EE2FD4 /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364B1B32E9C400EE2FD4 /* track_bad.pdf */; };
-		284A36CF1B32E9C400EE2FD4 /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364B1B32E9C400EE2FD4 /* track_bad.pdf */; };
-		284A36D01B32E9C400EE2FD4 /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364B1B32E9C400EE2FD4 /* track_bad.pdf */; };
-		284A36D11B32E9C400EE2FD4 /* track_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364B1B32E9C400EE2FD4 /* track_bad.pdf */; };
-		284A36D21B32E9C400EE2FD4 /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364C1B32E9C400EE2FD4 /* track_good.pdf */; };
-		284A36D31B32E9C400EE2FD4 /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364C1B32E9C400EE2FD4 /* track_good.pdf */; };
-		284A36D41B32E9C400EE2FD4 /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364C1B32E9C400EE2FD4 /* track_good.pdf */; };
-		284A36D51B32E9C400EE2FD4 /* track_good.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A364C1B32E9C400EE2FD4 /* track_good.pdf */; };
-		284A36F41B32F76600EE2FD4 /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36E91B32F76600EE2FD4 /* bicycles_other.pdf */; };
-		284A36F51B32F76600EE2FD4 /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36E91B32F76600EE2FD4 /* bicycles_other.pdf */; };
-		284A36F61B32F76600EE2FD4 /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36E91B32F76600EE2FD4 /* bicycles_other.pdf */; };
-		284A36F71B32F76600EE2FD4 /* bicycles_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36E91B32F76600EE2FD4 /* bicycles_other.pdf */; };
-		284A36F81B32F76600EE2FD4 /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EA1B32F76600EE2FD4 /* congestion_other.pdf */; };
-		284A36F91B32F76600EE2FD4 /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EA1B32F76600EE2FD4 /* congestion_other.pdf */; };
-		284A36FA1B32F76600EE2FD4 /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EA1B32F76600EE2FD4 /* congestion_other.pdf */; };
-		284A36FB1B32F76600EE2FD4 /* congestion_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EA1B32F76600EE2FD4 /* congestion_other.pdf */; };
-		284A36FC1B32F76600EE2FD4 /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EB1B32F76600EE2FD4 /* destinations_other.pdf */; };
-		284A36FD1B32F76600EE2FD4 /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EB1B32F76600EE2FD4 /* destinations_other.pdf */; };
-		284A36FE1B32F76600EE2FD4 /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EB1B32F76600EE2FD4 /* destinations_other.pdf */; };
-		284A36FF1B32F76600EE2FD4 /* destinations_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EB1B32F76600EE2FD4 /* destinations_other.pdf */; };
-		284A37001B32F76600EE2FD4 /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EC1B32F76600EE2FD4 /* enforcement_other.pdf */; };
-		284A37011B32F76600EE2FD4 /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EC1B32F76600EE2FD4 /* enforcement_other.pdf */; };
-		284A37021B32F76600EE2FD4 /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EC1B32F76600EE2FD4 /* enforcement_other.pdf */; };
-		284A37031B32F76600EE2FD4 /* enforcement_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EC1B32F76600EE2FD4 /* enforcement_other.pdf */; };
-		284A37041B32F76600EE2FD4 /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36ED1B32F76600EE2FD4 /* obstructions_other.pdf */; };
-		284A37051B32F76600EE2FD4 /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36ED1B32F76600EE2FD4 /* obstructions_other.pdf */; };
-		284A37061B32F76600EE2FD4 /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36ED1B32F76600EE2FD4 /* obstructions_other.pdf */; };
-		284A37071B32F76600EE2FD4 /* obstructions_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36ED1B32F76600EE2FD4 /* obstructions_other.pdf */; };
-		284A37081B32F76600EE2FD4 /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EE1B32F76600EE2FD4 /* potholes_other.pdf */; };
-		284A37091B32F76600EE2FD4 /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EE1B32F76600EE2FD4 /* potholes_other.pdf */; };
-		284A370A1B32F76600EE2FD4 /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EE1B32F76600EE2FD4 /* potholes_other.pdf */; };
-		284A370B1B32F76600EE2FD4 /* potholes_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EE1B32F76600EE2FD4 /* potholes_other.pdf */; };
-		284A370C1B32F76600EE2FD4 /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EF1B32F76600EE2FD4 /* road_other.pdf */; };
-		284A370D1B32F76600EE2FD4 /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EF1B32F76600EE2FD4 /* road_other.pdf */; };
-		284A370E1B32F76600EE2FD4 /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EF1B32F76600EE2FD4 /* road_other.pdf */; };
-		284A370F1B32F76600EE2FD4 /* road_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36EF1B32F76600EE2FD4 /* road_other.pdf */; };
-		284A37101B32F76600EE2FD4 /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F01B32F76600EE2FD4 /* roadworks_other.pdf */; };
-		284A37111B32F76600EE2FD4 /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F01B32F76600EE2FD4 /* roadworks_other.pdf */; };
-		284A37121B32F76600EE2FD4 /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F01B32F76600EE2FD4 /* roadworks_other.pdf */; };
-		284A37131B32F76600EE2FD4 /* roadworks_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F01B32F76600EE2FD4 /* roadworks_other.pdf */; };
-		284A37141B32F76600EE2FD4 /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F11B32F76600EE2FD4 /* routesigns_other.pdf */; };
-		284A37151B32F76600EE2FD4 /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F11B32F76600EE2FD4 /* routesigns_other.pdf */; };
-		284A37161B32F76600EE2FD4 /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F11B32F76600EE2FD4 /* routesigns_other.pdf */; };
-		284A37171B32F76600EE2FD4 /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F11B32F76600EE2FD4 /* routesigns_other.pdf */; };
-		284A37181B32F76600EE2FD4 /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F21B32F76600EE2FD4 /* signs_other.pdf */; };
-		284A37191B32F76600EE2FD4 /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F21B32F76600EE2FD4 /* signs_other.pdf */; };
-		284A371A1B32F76600EE2FD4 /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F21B32F76600EE2FD4 /* signs_other.pdf */; };
-		284A371B1B32F76600EE2FD4 /* signs_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F21B32F76600EE2FD4 /* signs_other.pdf */; };
-		284A371C1B32F76600EE2FD4 /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F31B32F76600EE2FD4 /* track_other.pdf */; };
-		284A371D1B32F76600EE2FD4 /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F31B32F76600EE2FD4 /* track_other.pdf */; };
-		284A371E1B32F76600EE2FD4 /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F31B32F76600EE2FD4 /* track_other.pdf */; };
-		284A371F1B32F76600EE2FD4 /* track_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 284A36F31B32F76600EE2FD4 /* track_other.pdf */; };
 		284ADCEA18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
@@ -1820,6 +1904,61 @@
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2801301315E636070092D509 /* Icon_currentroutecell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon_currentroutecell@2x.png"; sourceTree = "<group>"; };
+		280400AA1B34213200DE0EBA /* bicycles_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bicycles_bad.pdf; sourceTree = "<group>"; };
+		280400AB1B34213200DE0EBA /* bicycles_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bicycles_good.pdf; sourceTree = "<group>"; };
+		280400AC1B34213200DE0EBA /* bicycles_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bicycles_other.pdf; sourceTree = "<group>"; };
+		280400AD1B34213200DE0EBA /* bikeshops_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bikeshops_bad.pdf; sourceTree = "<group>"; };
+		280400AE1B34213200DE0EBA /* bikeshops_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bikeshops_good.pdf; sourceTree = "<group>"; };
+		280400AF1B34213200DE0EBA /* bikeshops_neutral.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bikeshops_neutral.pdf; sourceTree = "<group>"; };
+		280400B01B34213200DE0EBA /* carstorage_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = carstorage_bad.pdf; sourceTree = "<group>"; };
+		280400B11B34213200DE0EBA /* carstorage_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = carstorage_good.pdf; sourceTree = "<group>"; };
+		280400B21B34213200DE0EBA /* carstorage_neutral.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = carstorage_neutral.pdf; sourceTree = "<group>"; };
+		280400B31B34213200DE0EBA /* closure_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = closure_bad.pdf; sourceTree = "<group>"; };
+		280400B41B34213200DE0EBA /* closure_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = closure_good.pdf; sourceTree = "<group>"; };
+		280400B51B34213200DE0EBA /* closure_neutral.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = closure_neutral.pdf; sourceTree = "<group>"; };
+		280400B61B34213200DE0EBA /* congestion_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = congestion_bad.pdf; sourceTree = "<group>"; };
+		280400B71B34213200DE0EBA /* congestion_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = congestion_good.pdf; sourceTree = "<group>"; };
+		280400B81B34213200DE0EBA /* congestion_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = congestion_other.pdf; sourceTree = "<group>"; };
+		280400B91B34213200DE0EBA /* cycleparking_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cycleparking_bad.pdf; sourceTree = "<group>"; };
+		280400BA1B34213200DE0EBA /* cycleparking_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cycleparking_good.pdf; sourceTree = "<group>"; };
+		280400BB1B34213200DE0EBA /* cycleparking_neutral.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cycleparking_neutral.pdf; sourceTree = "<group>"; };
+		280400BC1B34213200DE0EBA /* cycleways_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cycleways_bad.pdf; sourceTree = "<group>"; };
+		280400BD1B34213200DE0EBA /* cycleways_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cycleways_good.pdf; sourceTree = "<group>"; };
+		280400BE1B34213200DE0EBA /* cycleways_neutral.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cycleways_neutral.pdf; sourceTree = "<group>"; };
+		280400BF1B34213200DE0EBA /* destinations_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = destinations_bad.pdf; sourceTree = "<group>"; };
+		280400C01B34213200DE0EBA /* destinations_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = destinations_good.pdf; sourceTree = "<group>"; };
+		280400C11B34213200DE0EBA /* destinations_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = destinations_other.pdf; sourceTree = "<group>"; };
+		280400C21B34213200DE0EBA /* dutchcycleways_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = dutchcycleways_bad.pdf; sourceTree = "<group>"; };
+		280400C31B34213200DE0EBA /* dutchcycleways_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = dutchcycleways_good.pdf; sourceTree = "<group>"; };
+		280400C41B34213200DE0EBA /* dutchcycleways_neutral.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = dutchcycleways_neutral.pdf; sourceTree = "<group>"; };
+		280400C51B34213200DE0EBA /* enforcement_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = enforcement_bad.pdf; sourceTree = "<group>"; };
+		280400C61B34213200DE0EBA /* enforcement_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = enforcement_good.pdf; sourceTree = "<group>"; };
+		280400C71B34213200DE0EBA /* enforcement_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = enforcement_other.pdf; sourceTree = "<group>"; };
+		280400C81B34213200DE0EBA /* general_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = general_bad.pdf; sourceTree = "<group>"; };
+		280400C91B34213200DE0EBA /* general_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = general_good.pdf; sourceTree = "<group>"; };
+		280400CA1B34213200DE0EBA /* general_neutral.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = general_neutral.pdf; sourceTree = "<group>"; };
+		280400CB1B34213200DE0EBA /* obstructions_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = obstructions_bad.pdf; sourceTree = "<group>"; };
+		280400CC1B34213200DE0EBA /* obstructions_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = obstructions_good.pdf; sourceTree = "<group>"; };
+		280400CD1B34213200DE0EBA /* obstructions_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = obstructions_other.pdf; sourceTree = "<group>"; };
+		280400CE1B34213200DE0EBA /* potholes_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = potholes_bad.pdf; sourceTree = "<group>"; };
+		280400CF1B34213200DE0EBA /* potholes_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = potholes_good.pdf; sourceTree = "<group>"; };
+		280400D01B34213200DE0EBA /* potholes_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = potholes_other.pdf; sourceTree = "<group>"; };
+		280400D11B34213200DE0EBA /* road_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = road_bad.pdf; sourceTree = "<group>"; };
+		280400D21B34213200DE0EBA /* road_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = road_good.pdf; sourceTree = "<group>"; };
+		280400D31B34213200DE0EBA /* road_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = road_other.pdf; sourceTree = "<group>"; };
+		280400D41B34213200DE0EBA /* roadworks_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = roadworks_bad.pdf; sourceTree = "<group>"; };
+		280400D51B34213200DE0EBA /* roadworks_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = roadworks_good.pdf; sourceTree = "<group>"; };
+		280400D61B34213200DE0EBA /* roadworks_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = roadworks_other.pdf; sourceTree = "<group>"; };
+		280400D71B34213200DE0EBA /* routesigns_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_bad.pdf; sourceTree = "<group>"; };
+		280400D81B34213200DE0EBA /* routesigns_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_good.pdf; sourceTree = "<group>"; };
+		280400D91B34213200DE0EBA /* routesigns_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_other.pdf; sourceTree = "<group>"; };
+		280400DA1B34213200DE0EBA /* shadow.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = shadow.pdf; sourceTree = "<group>"; };
+		280400DB1B34213200DE0EBA /* signs_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_bad.pdf; sourceTree = "<group>"; };
+		280400DC1B34213200DE0EBA /* signs_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_good.pdf; sourceTree = "<group>"; };
+		280400DD1B34213200DE0EBA /* signs_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_other.pdf; sourceTree = "<group>"; };
+		280400DE1B34213200DE0EBA /* track_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = track_bad.pdf; sourceTree = "<group>"; };
+		280400DF1B34213200DE0EBA /* track_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = track_good.pdf; sourceTree = "<group>"; };
+		280400E01B34213200DE0EBA /* track_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = track_other.pdf; sourceTree = "<group>"; };
 		28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIPickerAccessoryView.xib; sourceTree = "<group>"; };
 		28042E931A2C94BE00C56374 /* ApplicationJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationJSONParser.h; sourceTree = "<group>"; };
 		28042E941A2C94BE00C56374 /* ApplicationJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationJSONParser.m; sourceTree = "<group>"; };
@@ -2002,40 +2141,6 @@
 		284A36101B32E3A200EE2FD4 /* UIImage+PDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PDF.m"; sourceTree = "<group>"; };
 		284A36111B32E3A200EE2FD4 /* UIView+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Image.h"; sourceTree = "<group>"; };
 		284A36121B32E3A200EE2FD4 /* UIView+Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Image.m"; sourceTree = "<group>"; };
-		284A362C1B32E9C400EE2FD4 /* bikeshops_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bikeshops_bad.pdf; sourceTree = "<group>"; };
-		284A362D1B32E9C400EE2FD4 /* carstorage_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = carstorage_bad.pdf; sourceTree = "<group>"; };
-		284A362E1B32E9C400EE2FD4 /* closure_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = closure_bad.pdf; sourceTree = "<group>"; };
-		284A362F1B32E9C400EE2FD4 /* closure_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = closure_good.pdf; sourceTree = "<group>"; };
-		284A36301B32E9C400EE2FD4 /* congestion_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = congestion_good.pdf; sourceTree = "<group>"; };
-		284A36321B32E9C400EE2FD4 /* cycleparking_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = cycleparking_bad.pdf; sourceTree = "<group>"; };
-		284A36331B32E9C400EE2FD4 /* destinations_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = destinations_bad.pdf; sourceTree = "<group>"; };
-		284A36351B32E9C400EE2FD4 /* enforcement_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = enforcement_bad.pdf; sourceTree = "<group>"; };
-		284A36361B32E9C400EE2FD4 /* enforcement_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = enforcement_good.pdf; sourceTree = "<group>"; };
-		284A36391B32E9C400EE2FD4 /* general_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = general_bad.pdf; sourceTree = "<group>"; };
-		284A363A1B32E9C400EE2FD4 /* obstructions_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = obstructions_good.pdf; sourceTree = "<group>"; };
-		284A363C1B32E9C400EE2FD4 /* potholes_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = potholes_good.pdf; sourceTree = "<group>"; };
-		284A363E1B32E9C400EE2FD4 /* road_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = road_bad.pdf; sourceTree = "<group>"; };
-		284A363F1B32E9C400EE2FD4 /* road_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = road_good.pdf; sourceTree = "<group>"; };
-		284A36411B32E9C400EE2FD4 /* roadworks_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = roadworks_bad.pdf; sourceTree = "<group>"; };
-		284A36421B32E9C400EE2FD4 /* roadworks_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = roadworks_good.pdf; sourceTree = "<group>"; };
-		284A36441B32E9C400EE2FD4 /* routesigns_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_bad.pdf; sourceTree = "<group>"; };
-		284A36451B32E9C400EE2FD4 /* routesigns_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_good.pdf; sourceTree = "<group>"; };
-		284A36471B32E9C400EE2FD4 /* shadow.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = shadow.pdf; sourceTree = "<group>"; };
-		284A36481B32E9C400EE2FD4 /* signs_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_bad.pdf; sourceTree = "<group>"; };
-		284A36491B32E9C400EE2FD4 /* signs_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_good.pdf; sourceTree = "<group>"; };
-		284A364B1B32E9C400EE2FD4 /* track_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = track_bad.pdf; sourceTree = "<group>"; };
-		284A364C1B32E9C400EE2FD4 /* track_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = track_good.pdf; sourceTree = "<group>"; };
-		284A36E91B32F76600EE2FD4 /* bicycles_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = bicycles_other.pdf; sourceTree = "<group>"; };
-		284A36EA1B32F76600EE2FD4 /* congestion_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = congestion_other.pdf; sourceTree = "<group>"; };
-		284A36EB1B32F76600EE2FD4 /* destinations_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = destinations_other.pdf; sourceTree = "<group>"; };
-		284A36EC1B32F76600EE2FD4 /* enforcement_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = enforcement_other.pdf; sourceTree = "<group>"; };
-		284A36ED1B32F76600EE2FD4 /* obstructions_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = obstructions_other.pdf; sourceTree = "<group>"; };
-		284A36EE1B32F76600EE2FD4 /* potholes_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = potholes_other.pdf; sourceTree = "<group>"; };
-		284A36EF1B32F76600EE2FD4 /* road_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = road_other.pdf; sourceTree = "<group>"; };
-		284A36F01B32F76600EE2FD4 /* roadworks_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = roadworks_other.pdf; sourceTree = "<group>"; };
-		284A36F11B32F76600EE2FD4 /* routesigns_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_other.pdf; sourceTree = "<group>"; };
-		284A36F21B32F76600EE2FD4 /* signs_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_other.pdf; sourceTree = "<group>"; };
-		284A36F31B32F76600EE2FD4 /* track_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = track_other.pdf; sourceTree = "<group>"; };
 		284ADCE818C88309003830DE /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
 		284ADCE918C88309003830DE /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		284ADCEC18C892A9003830DE /* BUCodableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCodableObject.h; sourceTree = "<group>"; };
@@ -3018,40 +3123,61 @@
 		284A35841B32E24700EE2FD4 /* pdf */ = {
 			isa = PBXGroup;
 			children = (
-				284A36E91B32F76600EE2FD4 /* bicycles_other.pdf */,
-				284A36EA1B32F76600EE2FD4 /* congestion_other.pdf */,
-				284A36EB1B32F76600EE2FD4 /* destinations_other.pdf */,
-				284A36EC1B32F76600EE2FD4 /* enforcement_other.pdf */,
-				284A36ED1B32F76600EE2FD4 /* obstructions_other.pdf */,
-				284A36EE1B32F76600EE2FD4 /* potholes_other.pdf */,
-				284A36EF1B32F76600EE2FD4 /* road_other.pdf */,
-				284A36F01B32F76600EE2FD4 /* roadworks_other.pdf */,
-				284A36F11B32F76600EE2FD4 /* routesigns_other.pdf */,
-				284A36F21B32F76600EE2FD4 /* signs_other.pdf */,
-				284A36F31B32F76600EE2FD4 /* track_other.pdf */,
-				284A362C1B32E9C400EE2FD4 /* bikeshops_bad.pdf */,
-				284A362D1B32E9C400EE2FD4 /* carstorage_bad.pdf */,
-				284A362E1B32E9C400EE2FD4 /* closure_bad.pdf */,
-				284A362F1B32E9C400EE2FD4 /* closure_good.pdf */,
-				284A36301B32E9C400EE2FD4 /* congestion_good.pdf */,
-				284A36321B32E9C400EE2FD4 /* cycleparking_bad.pdf */,
-				284A36331B32E9C400EE2FD4 /* destinations_bad.pdf */,
-				284A36351B32E9C400EE2FD4 /* enforcement_bad.pdf */,
-				284A36361B32E9C400EE2FD4 /* enforcement_good.pdf */,
-				284A36391B32E9C400EE2FD4 /* general_bad.pdf */,
-				284A363A1B32E9C400EE2FD4 /* obstructions_good.pdf */,
-				284A363C1B32E9C400EE2FD4 /* potholes_good.pdf */,
-				284A363E1B32E9C400EE2FD4 /* road_bad.pdf */,
-				284A363F1B32E9C400EE2FD4 /* road_good.pdf */,
-				284A36411B32E9C400EE2FD4 /* roadworks_bad.pdf */,
-				284A36421B32E9C400EE2FD4 /* roadworks_good.pdf */,
-				284A36441B32E9C400EE2FD4 /* routesigns_bad.pdf */,
-				284A36451B32E9C400EE2FD4 /* routesigns_good.pdf */,
-				284A36471B32E9C400EE2FD4 /* shadow.pdf */,
-				284A36481B32E9C400EE2FD4 /* signs_bad.pdf */,
-				284A36491B32E9C400EE2FD4 /* signs_good.pdf */,
-				284A364B1B32E9C400EE2FD4 /* track_bad.pdf */,
-				284A364C1B32E9C400EE2FD4 /* track_good.pdf */,
+				280400AA1B34213200DE0EBA /* bicycles_bad.pdf */,
+				280400AB1B34213200DE0EBA /* bicycles_good.pdf */,
+				280400AC1B34213200DE0EBA /* bicycles_other.pdf */,
+				280400AD1B34213200DE0EBA /* bikeshops_bad.pdf */,
+				280400AE1B34213200DE0EBA /* bikeshops_good.pdf */,
+				280400AF1B34213200DE0EBA /* bikeshops_neutral.pdf */,
+				280400B01B34213200DE0EBA /* carstorage_bad.pdf */,
+				280400B11B34213200DE0EBA /* carstorage_good.pdf */,
+				280400B21B34213200DE0EBA /* carstorage_neutral.pdf */,
+				280400B31B34213200DE0EBA /* closure_bad.pdf */,
+				280400B41B34213200DE0EBA /* closure_good.pdf */,
+				280400B51B34213200DE0EBA /* closure_neutral.pdf */,
+				280400B61B34213200DE0EBA /* congestion_bad.pdf */,
+				280400B71B34213200DE0EBA /* congestion_good.pdf */,
+				280400B81B34213200DE0EBA /* congestion_other.pdf */,
+				280400B91B34213200DE0EBA /* cycleparking_bad.pdf */,
+				280400BA1B34213200DE0EBA /* cycleparking_good.pdf */,
+				280400BB1B34213200DE0EBA /* cycleparking_neutral.pdf */,
+				280400BC1B34213200DE0EBA /* cycleways_bad.pdf */,
+				280400BD1B34213200DE0EBA /* cycleways_good.pdf */,
+				280400BE1B34213200DE0EBA /* cycleways_neutral.pdf */,
+				280400BF1B34213200DE0EBA /* destinations_bad.pdf */,
+				280400C01B34213200DE0EBA /* destinations_good.pdf */,
+				280400C11B34213200DE0EBA /* destinations_other.pdf */,
+				280400C21B34213200DE0EBA /* dutchcycleways_bad.pdf */,
+				280400C31B34213200DE0EBA /* dutchcycleways_good.pdf */,
+				280400C41B34213200DE0EBA /* dutchcycleways_neutral.pdf */,
+				280400C51B34213200DE0EBA /* enforcement_bad.pdf */,
+				280400C61B34213200DE0EBA /* enforcement_good.pdf */,
+				280400C71B34213200DE0EBA /* enforcement_other.pdf */,
+				280400C81B34213200DE0EBA /* general_bad.pdf */,
+				280400C91B34213200DE0EBA /* general_good.pdf */,
+				280400CA1B34213200DE0EBA /* general_neutral.pdf */,
+				280400CB1B34213200DE0EBA /* obstructions_bad.pdf */,
+				280400CC1B34213200DE0EBA /* obstructions_good.pdf */,
+				280400CD1B34213200DE0EBA /* obstructions_other.pdf */,
+				280400CE1B34213200DE0EBA /* potholes_bad.pdf */,
+				280400CF1B34213200DE0EBA /* potholes_good.pdf */,
+				280400D01B34213200DE0EBA /* potholes_other.pdf */,
+				280400D11B34213200DE0EBA /* road_bad.pdf */,
+				280400D21B34213200DE0EBA /* road_good.pdf */,
+				280400D31B34213200DE0EBA /* road_other.pdf */,
+				280400D41B34213200DE0EBA /* roadworks_bad.pdf */,
+				280400D51B34213200DE0EBA /* roadworks_good.pdf */,
+				280400D61B34213200DE0EBA /* roadworks_other.pdf */,
+				280400D71B34213200DE0EBA /* routesigns_bad.pdf */,
+				280400D81B34213200DE0EBA /* routesigns_good.pdf */,
+				280400D91B34213200DE0EBA /* routesigns_other.pdf */,
+				280400DA1B34213200DE0EBA /* shadow.pdf */,
+				280400DB1B34213200DE0EBA /* signs_bad.pdf */,
+				280400DC1B34213200DE0EBA /* signs_good.pdf */,
+				280400DD1B34213200DE0EBA /* signs_other.pdf */,
+				280400DE1B34213200DE0EBA /* track_bad.pdf */,
+				280400DF1B34213200DE0EBA /* track_good.pdf */,
+				280400E01B34213200DE0EBA /* track_other.pdf */,
 			);
 			path = pdf;
 			sourceTree = "<group>";
@@ -4234,8 +4360,8 @@
 				2837815F1A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
 				E77D8F11120321E4003E6B8D /* credits.html in Resources */,
 				E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */,
+				280401091B34213200DE0EBA /* closure_good.pdf in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
-				284A37001B32F76600EE2FD4 /* enforcement_other.pdf in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
 				28AD62B5131FB69D008527FC /* FormData.plist in Resources */,
 				28AD62B7131FB69D008527FC /* styles.plist in Resources */,
@@ -4243,60 +4369,67 @@
 				28AD62B8131FB69D008527FC /* userState.plist in Resources */,
 				28AD6549131FC239008527FC /* UIButton_green_hi@2x.png in Resources */,
 				28AD654A131FC239008527FC /* UIButton_green_lo@2x.png in Resources */,
+				280401991B34213200DE0EBA /* routesigns_good.pdf in Resources */,
 				28AD654B131FC239008527FC /* UIButton_grey_hi@2x.png in Resources */,
 				28AD654C131FC239008527FC /* UIButton_grey_lo@2x.png in Resources */,
 				28AD654D131FC239008527FC /* UIButton_orange_hi@2x.png in Resources */,
 				28AD654E131FC239008527FC /* UIButton_orange_lo@2x.png in Resources */,
+				280401B91B34213200DE0EBA /* track_other.pdf in Resources */,
+				2804010D1B34213200DE0EBA /* closure_neutral.pdf in Resources */,
 				28AD654F131FC239008527FC /* UIButton_orangesmall_hi@2x.png in Resources */,
-				284A367A1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */,
 				28AD6550131FC239008527FC /* UIButton_orangesmall_lo@2x.png in Resources */,
 				28AD6551131FC239008527FC /* UIButton_red_hi@2x.png in Resources */,
 				28AD6552131FC239008527FC /* UIButton_red_lo@2x.png in Resources */,
 				28B6B2FE1A5AB0D8002DF099 /* welcome_CS@2x.jpg in Resources */,
+				2804012D1B34213200DE0EBA /* cycleways_good.pdf in Resources */,
 				289A9B5413536CCB00E8AF90 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				289A9B5613536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png in Resources */,
+				280401511B34213200DE0EBA /* enforcement_good.pdf in Resources */,
 				28892F6719FFA962000CC52C /* CSBarButton_addPoint@2x.png in Resources */,
-				284A37101B32F76600EE2FD4 /* roadworks_other.pdf in Resources */,
 				289EFC6A19EDA4E60081E7BB /* CSIcon_saveloc_home.png in Resources */,
+				2804011D1B34213200DE0EBA /* cycleparking_bad.pdf in Resources */,
 				289A9B5713536CCB00E8AF90 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				289A9B5813536CCB00E8AF90 /* UIIcon_footpaths@2x.png in Resources */,
 				289A9B5913536CCB00E8AF90 /* UIIcon_quiet_street@2x.png in Resources */,
 				28B6B2F21A5AA5A0002DF099 /* welcome.jpg in Resources */,
-				284A365E1B32E9C400EE2FD4 /* closure_good.pdf in Resources */,
 				289A9B5A13536CCB00E8AF90 /* UIIcon_roads@2x.png in Resources */,
-				284A36D21B32E9C400EE2FD4 /* track_good.pdf in Resources */,
-				284A365A1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */,
 				289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */,
-				284A36761B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */,
 				289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */,
 				289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */,
 				2853211A19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
 				28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */,
 				28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */,
 				28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */,
-				284A366E1B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */,
 				289478AC18AD31410066AA2E /* MainStoryboard.storyboard in Resources */,
 				28D10EC4135D6E54006F1D94 /* UIIcon_turn_left@2x.png in Resources */,
 				286FAE791A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
 				28D10EC5135D6E54006F1D94 /* UIIcon_turn_right@2x.png in Resources */,
+				280400E91B34213200DE0EBA /* bicycles_other.pdf in Resources */,
 				28ECBE0519CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */,
 				28D10EC6135D6E54006F1D94 /* UIIcon_photomap@2x.png in Resources */,
-				284A36C21B32E9C400EE2FD4 /* signs_bad.pdf in Resources */,
 				28CD80701A6E91AF00821072 /* BSMapStyle.png in Resources */,
+				280401691B34213200DE0EBA /* obstructions_good.pdf in Resources */,
 				28D10EC7135D6E54006F1D94 /* CSTabBar_account@2x.png in Resources */,
 				28D10EC8135D6E54006F1D94 /* CSTabBar_add_photo@2x.png in Resources */,
 				287868F81886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */,
+				280401951B34213200DE0EBA /* routesigns_bad.pdf in Resources */,
 				28D10EC9135D6E54006F1D94 /* CSTabBar_credits@2x.png in Resources */,
+				280401351B34213200DE0EBA /* destinations_bad.pdf in Resources */,
 				28D186C2193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */,
+				280401211B34213200DE0EBA /* cycleparking_good.pdf in Resources */,
+				280401A91B34213200DE0EBA /* signs_good.pdf in Resources */,
 				28D10ECA135D6E54006F1D94 /* CSTabBar_fav_routes@2x.png in Resources */,
 				28D10ECB135D6E54006F1D94 /* CSTabBar_itinerary@2x.png in Resources */,
+				2804016D1B34213200DE0EBA /* obstructions_other.pdf in Resources */,
 				288D69391A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */,
 				28D10ECC135D6E54006F1D94 /* CSTabBar_photomap_tb@2x.png in Resources */,
 				28D10ECD135D6E54006F1D94 /* CSTabBar_plan_route@2x.png in Resources */,
 				28D10ECE135D6E54006F1D94 /* CSTabBar_settings@2x.png in Resources */,
 				280E9333140984F300C7AC75 /* FavouritesCell.xib in Resources */,
 				280E9334140984F300C7AC75 /* ItineraryCell.xib in Resources */,
+				280401811B34213200DE0EBA /* road_good.pdf in Resources */,
+				280401851B34213200DE0EBA /* road_other.pdf in Resources */,
 				280E9335140984F300C7AC75 /* RouteTableCell.xib in Resources */,
 				280E9336140984F300C7AC75 /* CreditsView.xib in Resources */,
 				280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */,
@@ -4309,56 +4442,66 @@
 				280E9340140984F300C7AC75 /* AccountView.xib in Resources */,
 				289EFC6019ED8E020081E7BB /* CSBarButton_saveloc@2x.png in Resources */,
 				280E9341140984F300C7AC75 /* InitialLocationView.xib in Resources */,
+				280400ED1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */,
 				280E93AF140989E400C7AC75 /* donate.html in Resources */,
 				287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */,
 				287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */,
+				280400F11B34213200DE0EBA /* bikeshops_good.pdf in Resources */,
 				287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */,
 				287B8585144C4701006E3FCD /* UIButtonBarInfo@2x.png in Resources */,
 				2853211419E7EFF900118E48 /* ASMapStyle.png in Resources */,
-				284A368A1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */,
 				287B8587144C470D006E3FCD /* UIIcon_minor_roads@2x.png in Resources */,
 				28735C14144EDACF00726A6C /* cyclecambridge.jpg in Resources */,
+				280400E51B34213200DE0EBA /* bicycles_good.pdf in Resources */,
 				28735C15144EDACF00726A6C /* donate.png in Resources */,
 				2853212419E7F24F00118E48 /* CNSMapStyle.png in Resources */,
-				284A36BE1B32E9C400EE2FD4 /* shadow.pdf in Resources */,
 				28837D9E1965801000B58F7B /* CSBarButton_gpsactive@2x.png in Resources */,
+				280400E11B34213200DE0EBA /* bicycles_bad.pdf in Resources */,
 				289EFC7519EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png in Resources */,
 				28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */,
 				28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */,
 				2853211D19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				28727AC818B51CF500D957FD /* PhotoMapView.xib in Resources */,
 				28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */,
+				280400F51B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */,
 				281E09031451C6690034CC63 /* services_dev.plist in Resources */,
 				281E09041451C6690034CC63 /* services_live.plist in Resources */,
 				2846556519C9B859002E7CB7 /* APIKey_live.txt in Resources */,
 				2818C7A01458069E0077F529 /* RouteCell.xib in Resources */,
 				28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */,
 				28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */,
+				280401051B34213200DE0EBA /* closure_bad.pdf in Resources */,
+				280401711B34213200DE0EBA /* potholes_bad.pdf in Resources */,
 				283781651A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
+				280400FD1B34213200DE0EBA /* carstorage_good.pdf in Resources */,
 				28187AA014FCFF4C00A38A17 /* CSIcon_MapArrow_start.png in Resources */,
 				28B6B2F51A5AA5A0002DF099 /* welcome@2x.jpg in Resources */,
 				28187AA114FCFF4C00A38A17 /* blueButton.png in Resources */,
 				28187AA214FCFF4C00A38A17 /* BUSegmentedControl_center_hi.png in Resources */,
-				284A37141B32F76600EE2FD4 /* routesigns_other.pdf in Resources */,
 				286FAE751A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
-				284A36A61B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */,
+				280401651B34213200DE0EBA /* obstructions_bad.pdf in Resources */,
 				28187AA314FCFF4C00A38A17 /* BUSegmentedControl_center_lo.png in Resources */,
 				28187AA414FCFF4C00A38A17 /* BUSegmentedControl_left_hi.png in Resources */,
 				28187AA514FCFF4C00A38A17 /* BUSegmentedControl_left_lo.png in Resources */,
 				28187AA614FCFF4C00A38A17 /* BUSegmentedControl_right_hi.png in Resources */,
 				28187AA714FCFF4C00A38A17 /* BUSegmentedControl_right_lo.png in Resources */,
 				28187AA814FCFF4C00A38A17 /* UIIcon_cycle_lanes.png in Resources */,
+				280401B11B34213200DE0EBA /* track_bad.pdf in Resources */,
 				28187AA914FCFF4C00A38A17 /* UIIcon_cycle_tracks.png in Resources */,
 				28187AAA14FCFF4C00A38A17 /* UIIcon_footpaths.png in Resources */,
+				2804013D1B34213200DE0EBA /* destinations_other.pdf in Resources */,
+				280401911B34213200DE0EBA /* roadworks_other.pdf in Resources */,
 				28187AAB14FCFF4C00A38A17 /* UIIcon_minor_roads.png in Resources */,
 				28347AAE1A37891900FA83BE /* CSTabBar_leisure@2x.png in Resources */,
 				28187AAC14FCFF4C00A38A17 /* UIIcon_quiet_street.png in Resources */,
-				284A36621B32E9C400EE2FD4 /* congestion_good.pdf in Resources */,
 				28187AAD14FCFF4C00A38A17 /* UIIcon_roads.png in Resources */,
+				280401251B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */,
 				28187AAE14FCFF4C00A38A17 /* UIIcon_tracks.png in Resources */,
 				28187AB114FCFF4C00A38A17 /* UIIcon_bear_left.png in Resources */,
+				280401011B34213200DE0EBA /* carstorage_neutral.pdf in Resources */,
 				28187AB214FCFF4C00A38A17 /* UIIcon_bear_right.png in Resources */,
 				28187AB314FCFF4C00A38A17 /* UIIcon_straight_on.png in Resources */,
+				2804015D1B34213200DE0EBA /* general_good.pdf in Resources */,
 				28187AB414FCFF4C00A38A17 /* UIIcon_turn_left.png in Resources */,
 				28187AB514FCFF4C00A38A17 /* UIIcon_turn_right.png in Resources */,
 				28187AB714FCFF4C00A38A17 /* icon_camera.png in Resources */,
@@ -4369,42 +4512,44 @@
 				28187AC014FCFF4C00A38A17 /* CSTabBar_credits.png in Resources */,
 				28187AC114FCFF4C00A38A17 /* CSTabBar_fav_routes.png in Resources */,
 				28187AC214FCFF4C00A38A17 /* CSTabBar_itinerary.png in Resources */,
+				280401311B34213200DE0EBA /* cycleways_neutral.pdf in Resources */,
 				28D146051A2F09E2003DD15F /* CSBarButton_followuser@2x.png in Resources */,
 				28187AC314FCFF4C00A38A17 /* CSTabBar_photomap_tb.png in Resources */,
+				280401111B34213200DE0EBA /* congestion_bad.pdf in Resources */,
 				28BC6A9A18AE429400EF0436 /* PhotoMapImageLocationView.xib in Resources */,
 				289EFC6D19EDA4E60081E7BB /* CSIcon_saveloc_work.png in Resources */,
 				28187AC414FCFF4C00A38A17 /* CSTabBar_plan_route.png in Resources */,
 				28187AC514FCFF4C00A38A17 /* CSTabBar_settings.png in Resources */,
 				28187AC814FCFF4C00A38A17 /* UIButton_green_hi.png in Resources */,
 				28187AC914FCFF4C00A38A17 /* UIButton_green_lo.png in Resources */,
-				284A371C1B32F76600EE2FD4 /* track_other.pdf in Resources */,
 				28042E9C1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */,
-				284A36C61B32E9C400EE2FD4 /* signs_good.pdf in Resources */,
 				28187ACA14FCFF4C00A38A17 /* UIButton_grey_hi.png in Resources */,
-				284A36AA1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */,
 				28D186BD193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */,
 				2825180219D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */,
-				284A369E1B32E9C400EE2FD4 /* road_good.pdf in Resources */,
 				28187ACB14FCFF4C00A38A17 /* UIButton_grey_lo.png in Resources */,
 				28187ACC14FCFF4C00A38A17 /* UIButton_orange_hi.png in Resources */,
 				286FD30F1A0255B300EB8C20 /* PhotoMapVideoLocationView.xib in Resources */,
 				28187ACD14FCFF4C00A38A17 /* UIButton_orange_lo.png in Resources */,
 				28187ACE14FCFF4C00A38A17 /* UIButton_orangesmall_hi.png in Resources */,
+				280401751B34213200DE0EBA /* potholes_good.pdf in Resources */,
 				28187ACF14FCFF4C00A38A17 /* UIButton_orangesmall_lo.png in Resources */,
 				2853212019E7EFF900118E48 /* OSMMapStyle.png in Resources */,
 				28187AD014FCFF4C00A38A17 /* UIButton_red_hi.png in Resources */,
+				280401B51B34213200DE0EBA /* track_good.pdf in Resources */,
 				28187AD114FCFF4C00A38A17 /* UIButton_red_lo.png in Resources */,
 				28040C3818BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
+				280401611B34213200DE0EBA /* general_neutral.pdf in Resources */,
+				2804019D1B34213200DE0EBA /* routesigns_other.pdf in Resources */,
 				28187AD214FCFF4C00A38A17 /* UIButton_save_hi.png in Resources */,
 				28187AD314FCFF4C00A38A17 /* UIButtonBarArrowLeft.png in Resources */,
 				28187AD414FCFF4D00A38A17 /* UIButtonBarArrowRight.png in Resources */,
 				289EFC7219EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png in Resources */,
-				284A36F41B32F76600EE2FD4 /* bicycles_other.pdf in Resources */,
+				280401451B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */,
 				2853211719E7EFF900118E48 /* AVMapStyle.png in Resources */,
 				28187AD514FCFF4D00A38A17 /* UIButtonBarCameraSmall.png in Resources */,
+				280401391B34213200DE0EBA /* destinations_good.pdf in Resources */,
 				28BC6AA218AE429400EF0436 /* PhotoWizardView.xib in Resources */,
 				28187AD614FCFF4D00A38A17 /* UIButtonBarInfo.png in Resources */,
-				284A36CE1B32E9C400EE2FD4 /* track_bad.pdf in Resources */,
 				28187AD714FCFF4D00A38A17 /* UIButtonBarRefresh.png in Resources */,
 				28187AD814FCFF4D00A38A17 /* UIButtonBarStop.png in Resources */,
 				28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */,
@@ -4419,34 +4564,35 @@
 				283435C615DD17B000B00FD5 /* Icon_nofavroutes.png in Resources */,
 				283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */,
 				283435FF15DD5D9100B00FD5 /* APIKey_dev.txt in Resources */,
-				284A37081B32F76600EE2FD4 /* potholes_other.pdf in Resources */,
 				28B76F3015E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */,
 				28B76F3215E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */,
+				2804017D1B34213200DE0EBA /* road_bad.pdf in Resources */,
 				28B76F3415E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
+				280401551B34213200DE0EBA /* enforcement_other.pdf in Resources */,
 				28B76F3715E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
+				280401191B34213200DE0EBA /* congestion_other.pdf in Resources */,
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
+				280401A51B34213200DE0EBA /* signs_bad.pdf in Resources */,
+				280401291B34213200DE0EBA /* cycleways_bad.pdf in Resources */,
 				28BC6AA018AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
-				284A36FC1B32F76600EE2FD4 /* destinations_other.pdf in Resources */,
-				284A36B61B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */,
+				280401411B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */,
+				280401791B34213200DE0EBA /* potholes_other.pdf in Resources */,
 				28B76F3E15E4DA02006B01D0 /* CSBarButton_location.png in Resources */,
 				286FAE7D1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */,
+				280401491B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */,
 				28B76F4015E4DA02006B01D0 /* CSBarButton_search.png in Resources */,
 				28B76F4315E4DB3B006B01D0 /* CSBarButton_search@2x.png in Resources */,
 				28B76F4615E4DB48006B01D0 /* CSBarButton_routePlan@2x.png in Resources */,
+				280400F91B34213200DE0EBA /* carstorage_bad.pdf in Resources */,
 				28BC6AA418AE429400EF0436 /* SettingsView.xib in Resources */,
 				28B76F4915E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */,
-				284A366A1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */,
 				28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */,
-				284A36561B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */,
 				28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */,
-				284A36F81B32F76600EE2FD4 /* congestion_other.pdf in Resources */,
-				284A37041B32F76600EE2FD4 /* obstructions_other.pdf in Resources */,
 				28535DC315E50FCD0092FC16 /* HUD_icon_exclaim.png in Resources */,
 				28535DC515E50FCD0092FC16 /* HUD_icon_exclaim@2x.png in Resources */,
 				28535DC715E50FCD0092FC16 /* HUD_icon_lock.png in Resources */,
 				28535DC915E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
 				28535DFA15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
-				284A36521B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */,
 				2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
 				289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
@@ -4456,34 +4602,35 @@
 				2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				28347AAA1A37781F00FA83BE /* UserRouteCell.xib in Resources */,
-				284A37181B32F76600EE2FD4 /* signs_other.pdf in Resources */,
 				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
-				284A36B21B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */,
 				2811C49D166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C49F166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A1166CCD5F00592560 /* UIActivityMail.png in Resources */,
+				280401A11B34213200DE0EBA /* shadow.pdf in Resources */,
 				28A9999519E71FBC0050C3E8 /* default.css in Resources */,
-				284A369A1B32E9C400EE2FD4 /* road_bad.pdf in Resources */,
 				2811C4A5166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C1166CE68F00592560 /* UIActivitySMS.png in Resources */,
 				28851505166E0E20003536CA /* UIActivityCopy.png in Resources */,
 				2868D23C166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */,
-				284A370C1B32F76600EE2FD4 /* road_other.pdf in Resources */,
 				2868D23E166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */,
 				2868D240166E1C0600C0C153 /* UIActivityFacebook@2x.png in Resources */,
 				2868D242166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
+				2804014D1B34213200DE0EBA /* enforcement_bad.pdf in Resources */,
 				28B6B2FC1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */,
+				280401AD1B34213200DE0EBA /* signs_other.pdf in Resources */,
+				2804018D1B34213200DE0EBA /* roadworks_good.pdf in Resources */,
+				280401591B34213200DE0EBA /* general_bad.pdf in Resources */,
+				280401891B34213200DE0EBA /* roadworks_bad.pdf in Resources */,
 				2868D244166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				284A35821B32C98900EE2FD4 /* Localized.strings in Resources */,
 				2868D246166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4241777464F002D0912 /* UIIcon_walking.png in Resources */,
 				28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
-				284A36921B32E9C400EE2FD4 /* potholes_good.pdf in Resources */,
 				2825871F17785867001E3DA1 /* Default-568h@2x.png in Resources */,
 				2865C24919D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */,
+				280401151B34213200DE0EBA /* congestion_good.pdf in Resources */,
 				28718BB417858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				28718BB617858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
-				284A36861B32E9C400EE2FD4 /* general_bad.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4492,57 +4639,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				2834360515DD5DC300B00FD5 /* credits.html in Resources */,
-				284A37091B32F76600EE2FD4 /* potholes_other.pdf in Resources */,
 				28837D9F1965801000B58F7B /* CSBarButton_gpsactive@2x.png in Resources */,
 				2834360815DD5DC300B00FD5 /* Default@2x.png in Resources */,
 				2834360A15DD5DC300B00FD5 /* Entitlements.plist in Resources */,
 				2834360B15DD5DC300B00FD5 /* contentStrings.plist in Resources */,
+				280401761B34213200DE0EBA /* potholes_good.pdf in Resources */,
 				2834360C15DD5DC300B00FD5 /* FormData.plist in Resources */,
 				289EFC7619EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png in Resources */,
 				2834360D15DD5DC300B00FD5 /* styles.plist in Resources */,
+				2804016E1B34213200DE0EBA /* obstructions_other.pdf in Resources */,
+				280400F61B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */,
 				2834360E15DD5DC300B00FD5 /* userState.plist in Resources */,
-				284A37051B32F76600EE2FD4 /* obstructions_other.pdf in Resources */,
 				2834360F15DD5DC300B00FD5 /* UIButton_green_hi@2x.png in Resources */,
+				280401061B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				2834361015DD5DC300B00FD5 /* UIButton_green_lo@2x.png in Resources */,
 				2834361115DD5DC300B00FD5 /* UIButton_grey_hi@2x.png in Resources */,
-				284A370D1B32F76600EE2FD4 /* road_other.pdf in Resources */,
 				2834361215DD5DC300B00FD5 /* UIButton_grey_lo@2x.png in Resources */,
+				280401BA1B34213200DE0EBA /* track_other.pdf in Resources */,
 				2834361315DD5DC300B00FD5 /* UIButton_orange_hi@2x.png in Resources */,
 				28347AAF1A37891900FA83BE /* CSTabBar_leisure@2x.png in Resources */,
 				288D693A1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */,
 				2834361415DD5DC300B00FD5 /* UIButton_orange_lo@2x.png in Resources */,
+				2804015E1B34213200DE0EBA /* general_good.pdf in Resources */,
 				28BC6A9F18AE429400EF0436 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				2834361515DD5DC300B00FD5 /* UIButton_orangesmall_hi@2x.png in Resources */,
 				2834361615DD5DC300B00FD5 /* UIButton_orangesmall_lo@2x.png in Resources */,
 				28A9999619E71FBC0050C3E8 /* default.css in Resources */,
 				2834361715DD5DC300B00FD5 /* UIButton_red_hi@2x.png in Resources */,
-				284A36AB1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */,
 				2834361815DD5DC300B00FD5 /* UIButton_red_lo@2x.png in Resources */,
 				286FAE761A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
 				2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */,
+				280401461B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */,
 				2834361A15DD5DC300B00FD5 /* CSIcon_MapArrow_start@2x.png in Resources */,
+				280401A21B34213200DE0EBA /* shadow.pdf in Resources */,
 				2865C24A19D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */,
 				2834361B15DD5DC300B00FD5 /* UIIcon_cycle_lanes@2x.png in Resources */,
 				2865C24D19D570BA001C329B /* Icon_nosearchresults.png in Resources */,
+				280401821B34213200DE0EBA /* road_good.pdf in Resources */,
+				280401921B34213200DE0EBA /* roadworks_other.pdf in Resources */,
 				2834361C15DD5DC300B00FD5 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				2834361D15DD5DC300B00FD5 /* UIIcon_footpaths@2x.png in Resources */,
-				284A36771B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */,
 				2834361E15DD5DC300B00FD5 /* UIIcon_quiet_street@2x.png in Resources */,
 				2834361F15DD5DC300B00FD5 /* UIIcon_roads@2x.png in Resources */,
 				2834362015DD5DC300B00FD5 /* UIIcon_tracks@2x.png in Resources */,
 				2834362115DD5DC300B00FD5 /* CSIcon_finish_wisp@2x.png in Resources */,
-				284A36B71B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */,
 				28B6B2F31A5AA5A0002DF099 /* welcome.jpg in Resources */,
 				2834362215DD5DC300B00FD5 /* CSIcon_start_wisp@2x.png in Resources */,
 				2853212119E7EFF900118E48 /* OSMMapStyle.png in Resources */,
 				2834362315DD5DC300B00FD5 /* UIIcon_bear_left@2x.png in Resources */,
 				289EFC7319EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png in Resources */,
 				2834362415DD5DC300B00FD5 /* UIIcon_bear_right@2x.png in Resources */,
-				284A365B1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */,
 				2834362515DD5DC300B00FD5 /* UIIcon_straight_on@2x.png in Resources */,
 				2834362615DD5DC300B00FD5 /* UIIcon_turn_left@2x.png in Resources */,
+				280401AA1B34213200DE0EBA /* signs_good.pdf in Resources */,
 				2834362715DD5DC300B00FD5 /* UIIcon_turn_right@2x.png in Resources */,
-				284A367B1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */,
+				280401A61B34213200DE0EBA /* signs_bad.pdf in Resources */,
 				28042E9D1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */,
 				2834362815DD5DC300B00FD5 /* UIIcon_photomap@2x.png in Resources */,
 				2834362915DD5DC300B00FD5 /* CSTabBar_account@2x.png in Resources */,
@@ -4550,11 +4701,12 @@
 				2834362A15DD5DC300B00FD5 /* CSTabBar_add_photo@2x.png in Resources */,
 				2834362B15DD5DC300B00FD5 /* CSTabBar_credits@2x.png in Resources */,
 				2834362C15DD5DC300B00FD5 /* CSTabBar_fav_routes@2x.png in Resources */,
+				280401661B34213200DE0EBA /* obstructions_bad.pdf in Resources */,
 				2834362D15DD5DC300B00FD5 /* CSTabBar_itinerary@2x.png in Resources */,
 				2834362E15DD5DC300B00FD5 /* CSTabBar_photomap_tb@2x.png in Resources */,
+				2804017E1B34213200DE0EBA /* road_bad.pdf in Resources */,
 				2834362F15DD5DC300B00FD5 /* CSTabBar_plan_route@2x.png in Resources */,
 				2834363015DD5DC300B00FD5 /* CSTabBar_settings@2x.png in Resources */,
-				284A36FD1B32F76600EE2FD4 /* destinations_other.pdf in Resources */,
 				2834363115DD5DC300B00FD5 /* FavouritesCell.xib in Resources */,
 				2834363215DD5DC300B00FD5 /* ItineraryCell.xib in Resources */,
 				286FAE7A1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
@@ -4569,26 +4721,28 @@
 				2834363E15DD5DC300B00FD5 /* AccountView.xib in Resources */,
 				2834363F15DD5DC300B00FD5 /* InitialLocationView.xib in Resources */,
 				28FA8BB419E45A260040EA46 /* CycleStreets.xcassets in Resources */,
-				284A366B1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */,
 				2834364015DD5DC300B00FD5 /* donate.html in Resources */,
 				28727AC918B51CF500D957FD /* PhotoMapView.xib in Resources */,
 				28CD80711A6E91AF00821072 /* BSMapStyle.png in Resources */,
 				2834364115DD5DC300B00FD5 /* UIButtonBarArrowLeft@2x.png in Resources */,
-				284A36BF1B32E9C400EE2FD4 /* shadow.pdf in Resources */,
-				284A369B1B32E9C400EE2FD4 /* road_bad.pdf in Resources */,
-				284A368B1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */,
 				2834364215DD5DC300B00FD5 /* UIButtonBarArrowRight@2x.png in Resources */,
+				2804013A1B34213200DE0EBA /* destinations_good.pdf in Resources */,
+				2804016A1B34213200DE0EBA /* obstructions_good.pdf in Resources */,
 				2834364315DD5DC300B00FD5 /* UIButtonBarCameraSmall@2x.png in Resources */,
+				280401561B34213200DE0EBA /* enforcement_other.pdf in Resources */,
 				2834364415DD5DC300B00FD5 /* UIButtonBarInfo@2x.png in Resources */,
 				2834364515DD5DC300B00FD5 /* UIIcon_minor_roads@2x.png in Resources */,
 				2834364815DD5DC300B00FD5 /* cyclecambridge.jpg in Resources */,
 				2853211E19E7EFF900118E48 /* OSMapStyle.png in Resources */,
-				284A37191B32F76600EE2FD4 /* signs_other.pdf in Resources */,
 				2834364915DD5DC300B00FD5 /* donate.png in Resources */,
 				2834364A15DD5DC300B00FD5 /* reesjeffreys.png in Resources */,
+				2804012A1B34213200DE0EBA /* cycleways_bad.pdf in Resources */,
 				2834364C15DD5DC300B00FD5 /* appconfig_live.plist in Resources */,
 				2853212519E7F24F00118E48 /* CNSMapStyle.png in Resources */,
 				2834365C15DD5DC300B00FD5 /* services_live.plist in Resources */,
+				2804017A1B34213200DE0EBA /* potholes_other.pdf in Resources */,
+				280401621B34213200DE0EBA /* general_neutral.pdf in Resources */,
+				2804019A1B34213200DE0EBA /* routesigns_good.pdf in Resources */,
 				28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
 				2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */,
 				28BC6AA518AE429400EF0436 /* SettingsView.xib in Resources */,
@@ -4603,83 +4757,84 @@
 				284A35831B32C98900EE2FD4 /* Localized.strings in Resources */,
 				2834366615DD5DC300B00FD5 /* BUSegmentedControl_center_lo.png in Resources */,
 				2834366715DD5DC300B00FD5 /* BUSegmentedControl_left_hi.png in Resources */,
+				280401021B34213200DE0EBA /* carstorage_neutral.pdf in Resources */,
 				2834366815DD5DC300B00FD5 /* BUSegmentedControl_left_lo.png in Resources */,
 				2834366915DD5DC300B00FD5 /* BUSegmentedControl_right_hi.png in Resources */,
 				2834366A15DD5DC300B00FD5 /* BUSegmentedControl_right_lo.png in Resources */,
 				2834366B15DD5DC300B00FD5 /* UIIcon_cycle_lanes.png in Resources */,
 				286FAE7E1A1910B400AA2510 /* CSTabBar_savedlocations@2x.png in Resources */,
 				2834366C15DD5DC300B00FD5 /* UIIcon_cycle_tracks.png in Resources */,
-				284A36631B32E9C400EE2FD4 /* congestion_good.pdf in Resources */,
 				2834366D15DD5DC300B00FD5 /* UIIcon_footpaths.png in Resources */,
 				2834366E15DD5DC300B00FD5 /* UIIcon_minor_roads.png in Resources */,
+				280401121B34213200DE0EBA /* congestion_bad.pdf in Resources */,
+				280401421B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */,
 				2834366F15DD5DC300B00FD5 /* UIIcon_quiet_street.png in Resources */,
-				284A36571B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */,
-				284A36F91B32F76600EE2FD4 /* congestion_other.pdf in Resources */,
-				284A36531B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */,
 				2834367015DD5DC300B00FD5 /* UIIcon_roads.png in Resources */,
-				284A36A71B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */,
 				2834367115DD5DC300B00FD5 /* UIIcon_tracks.png in Resources */,
+				280401961B34213200DE0EBA /* routesigns_bad.pdf in Resources */,
 				2834367415DD5DC300B00FD5 /* UIIcon_bear_left.png in Resources */,
-				284A365F1B32E9C400EE2FD4 /* closure_good.pdf in Resources */,
 				287868F91886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				2834367515DD5DC300B00FD5 /* UIIcon_bear_right.png in Resources */,
-				284A36B31B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */,
 				2834367615DD5DC300B00FD5 /* UIIcon_straight_on.png in Resources */,
 				2834367715DD5DC300B00FD5 /* UIIcon_turn_left.png in Resources */,
 				2834367815DD5DC300B00FD5 /* UIIcon_turn_right.png in Resources */,
 				2834367A15DD5DC300B00FD5 /* icon_camera.png in Resources */,
+				2804018E1B34213200DE0EBA /* roadworks_good.pdf in Resources */,
 				2834367B15DD5DC300B00FD5 /* icon_location.png in Resources */,
-				284A36871B32E9C400EE2FD4 /* general_bad.pdf in Resources */,
 				2834368015DD5DC300B00FD5 /* UIIcon_photomap.png in Resources */,
-				284A36F51B32F76600EE2FD4 /* bicycles_other.pdf in Resources */,
+				280401321B34213200DE0EBA /* cycleways_neutral.pdf in Resources */,
 				2834368115DD5DC300B00FD5 /* CSTabBar_account.png in Resources */,
-				284A369F1B32E9C400EE2FD4 /* road_good.pdf in Resources */,
 				289EFC6B19EDA4E60081E7BB /* CSIcon_saveloc_home.png in Resources */,
+				280401B61B34213200DE0EBA /* track_good.pdf in Resources */,
 				289EFC6E19EDA4E60081E7BB /* CSIcon_saveloc_work.png in Resources */,
 				2834368215DD5DC300B00FD5 /* CSTabBar_add_photo.png in Resources */,
 				2834368315DD5DC300B00FD5 /* CSTabBar_credits.png in Resources */,
+				2804019E1B34213200DE0EBA /* routesigns_other.pdf in Resources */,
 				2834368415DD5DC300B00FD5 /* CSTabBar_fav_routes.png in Resources */,
 				2834368515DD5DC300B00FD5 /* CSTabBar_itinerary.png in Resources */,
+				280401B21B34213200DE0EBA /* track_bad.pdf in Resources */,
 				2834368615DD5DC300B00FD5 /* CSTabBar_photomap_tb.png in Resources */,
 				2834368715DD5DC300B00FD5 /* CSTabBar_plan_route.png in Resources */,
-				284A36CF1B32E9C400EE2FD4 /* track_bad.pdf in Resources */,
 				283781661A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
 				2834368815DD5DC300B00FD5 /* CSTabBar_settings.png in Resources */,
 				2834368A15DD5DC300B00FD5 /* UIButton_green_hi.png in Resources */,
 				2834368B15DD5DC300B00FD5 /* UIButton_green_lo.png in Resources */,
 				289EFC6119ED8E020081E7BB /* CSBarButton_saveloc@2x.png in Resources */,
 				2834368C15DD5DC300B00FD5 /* UIButton_grey_hi.png in Resources */,
+				280401161B34213200DE0EBA /* congestion_good.pdf in Resources */,
+				2804011A1B34213200DE0EBA /* congestion_other.pdf in Resources */,
 				2834368D15DD5DC300B00FD5 /* UIButton_grey_lo.png in Resources */,
-				284A37111B32F76600EE2FD4 /* roadworks_other.pdf in Resources */,
 				28B6B2F61A5AA5A0002DF099 /* welcome@2x.jpg in Resources */,
 				2834368E15DD5DC300B00FD5 /* UIButton_orange_hi.png in Resources */,
 				2834368F15DD5DC300B00FD5 /* UIButton_orange_lo.png in Resources */,
 				2834369015DD5DC300B00FD5 /* UIButton_orangesmall_hi.png in Resources */,
 				2834369115DD5DC300B00FD5 /* UIButton_orangesmall_lo.png in Resources */,
-				284A37151B32F76600EE2FD4 /* routesigns_other.pdf in Resources */,
 				2834369215DD5DC300B00FD5 /* UIButton_red_hi.png in Resources */,
 				2834369315DD5DC300B00FD5 /* UIButton_red_lo.png in Resources */,
 				2834369415DD5DC300B00FD5 /* UIButton_save_hi.png in Resources */,
 				2825180319D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */,
 				2834369515DD5DC300B00FD5 /* UIButtonBarArrowLeft.png in Resources */,
-				284A366F1B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */,
 				2834369615DD5DC300B00FD5 /* UIButtonBarArrowRight.png in Resources */,
 				2834369715DD5DC300B00FD5 /* UIButtonBarCameraSmall.png in Resources */,
 				28B6B2FD1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */,
 				2834369815DD5DC300B00FD5 /* UIButtonBarInfo.png in Resources */,
 				2834369915DD5DC300B00FD5 /* UIButtonBarRefresh.png in Resources */,
-				284A36C71B32E9C400EE2FD4 /* signs_good.pdf in Resources */,
+				280400EA1B34213200DE0EBA /* bicycles_other.pdf in Resources */,
 				2853211B19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
+				280400E61B34213200DE0EBA /* bicycles_good.pdf in Resources */,
 				2834369A15DD5DC300B00FD5 /* UIButtonBarStop.png in Resources */,
 				28BC6AA118AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
 				2834369F15DD5DC300B00FD5 /* CSIcon_finish_wisp.png in Resources */,
-				284A36C31B32E9C400EE2FD4 /* signs_bad.pdf in Resources */,
+				2804015A1B34213200DE0EBA /* general_bad.pdf in Resources */,
 				2853211819E7EFF900118E48 /* AVMapStyle.png in Resources */,
 				283436A015DD5DC300B00FD5 /* CSIcon_start_wisp.png in Resources */,
+				280401361B34213200DE0EBA /* destinations_bad.pdf in Resources */,
 				283436A415DD5DC300B00FD5 /* RoutePlanMenuView.xib in Resources */,
 				28BC6A9B18AE429400EF0436 /* PhotoMapImageLocationView.xib in Resources */,
 				28347AAB1A37781F00FA83BE /* UserRouteCell.xib in Resources */,
+				280400EE1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */,
 				286FD3101A0255B300EB8C20 /* PhotoMapVideoLocationView.xib in Resources */,
+				2804010A1B34213200DE0EBA /* closure_good.pdf in Resources */,
 				283436B415DD5DC300B00FD5 /* UITextViewAccessoryView.xib in Resources */,
 				283436B915DD5DC300B00FD5 /* MapLocationSearchCell.xib in Resources */,
 				283436BA15DD5DC300B00FD5 /* UIIcon_userphotomap.png in Resources */,
@@ -4693,23 +4848,33 @@
 				28B76F3515E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
 				289478AD18AD31410066AA2E /* MainStoryboard.storyboard in Resources */,
 				28B76F3815E4D95D006B01D0 /* CSBarButton_routePlan.png in Resources */,
+				2804018A1B34213200DE0EBA /* roadworks_bad.pdf in Resources */,
+				2804011E1B34213200DE0EBA /* cycleparking_bad.pdf in Resources */,
 				28B76F3D15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
 				28B76F3F15E4DA02006B01D0 /* CSBarButton_location.png in Resources */,
 				28B76F4115E4DA02006B01D0 /* CSBarButton_search.png in Resources */,
+				280400F21B34213200DE0EBA /* bikeshops_good.pdf in Resources */,
 				28B76F4415E4DB3B006B01D0 /* CSBarButton_search@2x.png in Resources */,
 				28B76F4715E4DB48006B01D0 /* CSBarButton_routePlan@2x.png in Resources */,
 				28B76F4A15E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */,
+				280400FA1B34213200DE0EBA /* carstorage_bad.pdf in Resources */,
 				28535DC015E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */,
+				2804013E1B34213200DE0EBA /* destinations_other.pdf in Resources */,
 				28535DC215E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */,
+				280401221B34213200DE0EBA /* cycleparking_good.pdf in Resources */,
 				28535DC415E50FCD0092FC16 /* HUD_icon_exclaim.png in Resources */,
+				280401861B34213200DE0EBA /* road_other.pdf in Resources */,
 				28892F6819FFA962000CC52C /* CSBarButton_addPoint@2x.png in Resources */,
+				2804010E1B34213200DE0EBA /* closure_neutral.pdf in Resources */,
 				28535DC615E50FCD0092FC16 /* HUD_icon_exclaim@2x.png in Resources */,
 				28535DC815E50FCD0092FC16 /* HUD_icon_lock.png in Resources */,
 				28535DCA15E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
-				284A36D31B32E9C400EE2FD4 /* track_good.pdf in Resources */,
 				28535DFB15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
 				2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
 				289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
+				280401521B34213200DE0EBA /* enforcement_good.pdf in Resources */,
+				280400E21B34213200DE0EBA /* bicycles_bad.pdf in Resources */,
+				2804014E1B34213200DE0EBA /* enforcement_bad.pdf in Resources */,
 				289E171D16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 				28373E20164814A900F5E356 /* WayPointView.xib in Resources */,
 				28BC6AA318AE429400EF0436 /* PhotoWizardView.xib in Resources */,
@@ -4721,25 +4886,28 @@
 				2811C4A0166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A2166CCD5F00592560 /* UIActivityMail.png in Resources */,
 				2811C4A6166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
-				284A37011B32F76600EE2FD4 /* enforcement_other.pdf in Resources */,
 				2811C4C2166CE68F00592560 /* UIActivitySMS.png in Resources */,
 				28851506166E0E20003536CA /* UIActivityCopy.png in Resources */,
 				28D186C3193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */,
+				280400FE1B34213200DE0EBA /* carstorage_good.pdf in Resources */,
 				2868D23D166E1C0600C0C153 /* UIActivityBlank@2x.png in Resources */,
 				2868D23F166E1C0600C0C153 /* UIActivityCopy@2x.png in Resources */,
+				2804012E1B34213200DE0EBA /* cycleways_good.pdf in Resources */,
 				2868D241166E1C0600C0C153 /* UIActivityFacebook@2x.png in Resources */,
 				2868D243166E1C0600C0C153 /* UIActivityMail@2x.png in Resources */,
 				2868D245166E1C0600C0C153 /* UIActivitySMS@2x.png in Resources */,
 				2868D247166E1C0600C0C153 /* UIActivityTwitter@2x.png in Resources */,
 				28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */,
-				284A36931B32E9C400EE2FD4 /* potholes_good.pdf in Resources */,
+				280401261B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */,
 				28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */,
 				28D186BE193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */,
 				2825872017785867001E3DA1 /* Default-568h@2x.png in Resources */,
-				284A371D1B32F76600EE2FD4 /* track_other.pdf in Resources */,
 				28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
+				280401721B34213200DE0EBA /* potholes_bad.pdf in Resources */,
 				28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
+				2804014A1B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */,
 				283781601A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
+				280401AE1B34213200DE0EBA /* signs_other.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4750,9 +4918,9 @@
 				28A2630F1AE65AB4006C09A7 /* credits.html in Resources */,
 				28A263101AE65AB4006C09A7 /* CSBarButton_gpsactive@2x.png in Resources */,
 				28A263121AE65AB4006C09A7 /* Entitlements.plist in Resources */,
+				280400F41B34213200DE0EBA /* bikeshops_good.pdf in Resources */,
 				28A263131AE65AB4006C09A7 /* contentStrings.plist in Resources */,
 				28A263141AE65AB4006C09A7 /* FormData.plist in Resources */,
-				284A36591B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */,
 				28A263151AE65AB4006C09A7 /* CSIcon_saveloc_work@2x.png in Resources */,
 				28A263161AE65AB4006C09A7 /* styles.plist in Resources */,
 				28A263171AE65AB4006C09A7 /* userState.plist in Resources */,
@@ -4762,81 +4930,85 @@
 				28A2631B1AE65AB4006C09A7 /* UIButton_grey_lo@2x.png in Resources */,
 				28A2631C1AE65AB4006C09A7 /* UIButton_orange_hi@2x.png in Resources */,
 				28A2631D1AE65AB4006C09A7 /* CSTabBar_leisure@2x.png in Resources */,
+				280401B81B34213200DE0EBA /* track_good.pdf in Resources */,
 				28A2631E1AE65AB4006C09A7 /* CSBarButton_followuser_selected@2x.png in Resources */,
 				28A2631F1AE65AB4006C09A7 /* UIButton_orange_lo@2x.png in Resources */,
 				28A263201AE65AB4006C09A7 /* PhotoWizardCategoryMenuView.xib in Resources */,
-				284A36611B32E9C400EE2FD4 /* closure_good.pdf in Resources */,
 				28A263211AE65AB4006C09A7 /* UIButton_orangesmall_hi@2x.png in Resources */,
-				284A36FF1B32F76600EE2FD4 /* destinations_other.pdf in Resources */,
 				28A263221AE65AB4006C09A7 /* UIButton_orangesmall_lo@2x.png in Resources */,
-				284A365D1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */,
-				284A36711B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */,
 				28A263241AE65AB4006C09A7 /* UIButton_red_hi@2x.png in Resources */,
 				28A263251AE65AB4006C09A7 /* UIButton_red_lo@2x.png in Resources */,
+				280401A01B34213200DE0EBA /* routesigns_other.pdf in Resources */,
 				28A263261AE65AB4006C09A7 /* Icon_nosavedlocations@2x.png in Resources */,
+				280401541B34213200DE0EBA /* enforcement_good.pdf in Resources */,
 				28A263271AE65AB4006C09A7 /* CSIcon_MapArrow_end@2x.png in Resources */,
+				280401681B34213200DE0EBA /* obstructions_bad.pdf in Resources */,
 				28A263281AE65AB4006C09A7 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				28A264BF1AE65DA0006C09A7 /* StokeStoryboard.storyboard in Resources */,
+				280401081B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				28A263291AE65AB4006C09A7 /* Icon_nosearchresults@2x.png in Resources */,
 				28A2632A1AE65AB4006C09A7 /* UIIcon_cycle_lanes@2x.png in Resources */,
 				28A2632B1AE65AB4006C09A7 /* Icon_nosearchresults.png in Resources */,
 				28A2632C1AE65AB4006C09A7 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				28A2632D1AE65AB4006C09A7 /* UIIcon_footpaths@2x.png in Resources */,
 				28A2632E1AE65AB4006C09A7 /* UIIcon_quiet_street@2x.png in Resources */,
+				280401601B34213200DE0EBA /* general_good.pdf in Resources */,
 				28A2632F1AE65AB4006C09A7 /* UIIcon_roads@2x.png in Resources */,
 				28A263301AE65AB4006C09A7 /* UIIcon_tracks@2x.png in Resources */,
 				28A264A81AE65C0F006C09A7 /* appconfig_live.plist in Resources */,
 				28A263311AE65AB4006C09A7 /* CSIcon_finish_wisp@2x.png in Resources */,
 				28A263321AE65AB4006C09A7 /* welcome.jpg in Resources */,
 				28A263331AE65AB4006C09A7 /* CSIcon_start_wisp@2x.png in Resources */,
-				284A37071B32F76600EE2FD4 /* obstructions_other.pdf in Resources */,
+				280401381B34213200DE0EBA /* destinations_bad.pdf in Resources */,
 				28A264A91AE65C17006C09A7 /* Default-568h@2x.png in Resources */,
+				280401181B34213200DE0EBA /* congestion_good.pdf in Resources */,
 				28A263341AE65AB4006C09A7 /* OSMMapStyle.png in Resources */,
-				284A36FB1B32F76600EE2FD4 /* congestion_other.pdf in Resources */,
+				2804018C1B34213200DE0EBA /* roadworks_bad.pdf in Resources */,
 				28A263351AE65AB4006C09A7 /* UIIcon_bear_left@2x.png in Resources */,
 				28A263361AE65AB4006C09A7 /* CSIcon_saveloc_home@2x.png in Resources */,
 				28A263371AE65AB4006C09A7 /* UIIcon_bear_right@2x.png in Resources */,
 				28A263381AE65AB4006C09A7 /* UIIcon_straight_on@2x.png in Resources */,
-				284A37131B32F76600EE2FD4 /* roadworks_other.pdf in Resources */,
+				280401941B34213200DE0EBA /* roadworks_other.pdf in Resources */,
 				28A263391AE65AB4006C09A7 /* UIIcon_turn_left@2x.png in Resources */,
+				280401901B34213200DE0EBA /* roadworks_good.pdf in Resources */,
 				28A2633A1AE65AB4006C09A7 /* CSTableLoadingCell.xib in Resources */,
+				280401501B34213200DE0EBA /* enforcement_bad.pdf in Resources */,
 				28A2633B1AE65AB4006C09A7 /* UIIcon_turn_right@2x.png in Resources */,
 				28A2633C1AE65AB4006C09A7 /* UIIcon_videomap@2x.png in Resources */,
 				28A2633D1AE65AB4006C09A7 /* UIIcon_photomap@2x.png in Resources */,
+				280401741B34213200DE0EBA /* potholes_bad.pdf in Resources */,
+				280401441B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */,
 				28A2633E1AE65AB4006C09A7 /* CSTabBar_account@2x.png in Resources */,
-				284A36A11B32E9C400EE2FD4 /* road_good.pdf in Resources */,
+				280401001B34213200DE0EBA /* carstorage_good.pdf in Resources */,
 				28A2633F1AE65AB4006C09A7 /* BUInlineErrorView.xib in Resources */,
+				280401881B34213200DE0EBA /* road_other.pdf in Resources */,
 				28A263401AE65AB4006C09A7 /* CSTabBar_add_photo@2x.png in Resources */,
 				28A263411AE65AB4006C09A7 /* CSTabBar_credits@2x.png in Resources */,
 				28A263421AE65AB4006C09A7 /* CSTabBar_fav_routes@2x.png in Resources */,
 				28A264C81AE791F0006C09A7 /* CycleNorth.xcassets in Resources */,
 				28A263431AE65AB4006C09A7 /* CSTabBar_itinerary@2x.png in Resources */,
-				284A367D1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */,
 				28A263441AE65AB4006C09A7 /* CSTabBar_photomap_tb@2x.png in Resources */,
 				28A264B41AE65C4D006C09A7 /* PhotoMapView.xib in Resources */,
 				28A263451AE65AB4006C09A7 /* CSTabBar_plan_route@2x.png in Resources */,
 				28A263461AE65AB4006C09A7 /* CSTabBar_settings@2x.png in Resources */,
+				280401241B34213200DE0EBA /* cycleparking_good.pdf in Resources */,
 				28A263471AE65AB4006C09A7 /* FavouritesCell.xib in Resources */,
-				284A36791B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */,
-				284A36B91B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */,
 				28A263481AE65AB4006C09A7 /* ItineraryCell.xib in Resources */,
 				28A264B11AE65C42006C09A7 /* POIListView.xib in Resources */,
+				2804015C1B34213200DE0EBA /* general_bad.pdf in Resources */,
 				28A263491AE65AB4006C09A7 /* CSIcon_saveloc_other@2x.png in Resources */,
 				28A2634A1AE65AB4006C09A7 /* RouteTableCell.xib in Resources */,
 				28A2634B1AE65AB4006C09A7 /* CreditsView.xib in Resources */,
 				28A2634C1AE65AB4006C09A7 /* FavouritesView.xib in Resources */,
 				28A2634D1AE65AB4006C09A7 /* CSRouteDetailsViewController.xib in Resources */,
-				284A366D1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */,
 				28A2634E1AE65AB4006C09A7 /* RouteSegmentView.xib in Resources */,
 				28A264C41AE78EEE006C09A7 /* SavedLocation_CellIcon_Home.png in Resources */,
 				28A2634F1AE65AB4006C09A7 /* RouteListView.xib in Resources */,
-				284A36B51B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */,
 				28A263501AE65AB4006C09A7 /* RoutesView.xib in Resources */,
-				284A36551B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */,
 				28A263511AE65AB4006C09A7 /* MapLocationSearchView.xib in Resources */,
 				28A263521AE65AB4006C09A7 /* AccountView.xib in Resources */,
-				284A36A91B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */,
 				28A263531AE65AB4006C09A7 /* InitialLocationView.xib in Resources */,
+				280401781B34213200DE0EBA /* potholes_good.pdf in Resources */,
 				28A263551AE65AB4006C09A7 /* donate.html in Resources */,
 				28A263571AE65AB4006C09A7 /* BSMapStyle.png in Resources */,
 				28A263581AE65AB4006C09A7 /* UIButtonBarArrowLeft@2x.png in Resources */,
@@ -4844,63 +5016,69 @@
 				28A2635A1AE65AB4006C09A7 /* UIButtonBarCameraSmall@2x.png in Resources */,
 				28A2635B1AE65AB4006C09A7 /* UIButtonBarInfo@2x.png in Resources */,
 				28A2635C1AE65AB4006C09A7 /* UIIcon_minor_roads@2x.png in Resources */,
-				284A36F71B32F76600EE2FD4 /* bicycles_other.pdf in Resources */,
 				28A2635D1AE65AB4006C09A7 /* cyclecambridge.jpg in Resources */,
 				28A2635E1AE65AB4006C09A7 /* OSMapStyle.png in Resources */,
 				28A2635F1AE65AB4006C09A7 /* donate.png in Resources */,
 				28A263601AE65AB4006C09A7 /* reesjeffreys.png in Resources */,
 				28A264AB1AE65C27006C09A7 /* POICatLocationCell.xib in Resources */,
 				28A263621AE65AB4006C09A7 /* CNSMapStyle.png in Resources */,
-				284A371B1B32F76600EE2FD4 /* signs_other.pdf in Resources */,
 				28A263631AE65AB4006C09A7 /* services_live.plist in Resources */,
-				284A36651B32E9C400EE2FD4 /* congestion_good.pdf in Resources */,
 				28A264B31AE65C4A006C09A7 /* GenericWebView.xib in Resources */,
 				28A263641AE65AB4006C09A7 /* UIPickerAccessoryView.xib in Resources */,
 				28A263651AE65AB4006C09A7 /* APIKey_live.txt in Resources */,
+				280401B01B34213200DE0EBA /* signs_other.pdf in Resources */,
 				28A263671AE65AB4006C09A7 /* RouteCell.xib in Resources */,
 				28A263681AE65AB4006C09A7 /* CSBarButton_followuser@2x.png in Resources */,
 				28A263691AE65AB4006C09A7 /* Alert200x200.png in Resources */,
 				28A2636A1AE65AB4006C09A7 /* CSIcon_MapArrow_end.png in Resources */,
+				280401581B34213200DE0EBA /* enforcement_other.pdf in Resources */,
 				28A2636B1AE65AB4006C09A7 /* CSIcon_MapArrow_start.png in Resources */,
 				28A2636C1AE65AB4006C09A7 /* ASMapStyle.png in Resources */,
 				28A2636D1AE65AB4006C09A7 /* blueButton.png in Resources */,
 				28A2636E1AE65AB4006C09A7 /* BUSegmentedControl_center_hi.png in Resources */,
+				2804011C1B34213200DE0EBA /* congestion_other.pdf in Resources */,
 				28A2636F1AE65AB4006C09A7 /* BUSegmentedControl_center_lo.png in Resources */,
+				280401B41B34213200DE0EBA /* track_bad.pdf in Resources */,
 				28A263701AE65AB4006C09A7 /* BUSegmentedControl_left_hi.png in Resources */,
 				28A263711AE65AB4006C09A7 /* BUSegmentedControl_left_lo.png in Resources */,
 				28A263721AE65AB4006C09A7 /* BUSegmentedControl_right_hi.png in Resources */,
 				28A263731AE65AB4006C09A7 /* BUSegmentedControl_right_lo.png in Resources */,
 				28A263741AE65AB4006C09A7 /* UIIcon_cycle_lanes.png in Resources */,
+				280401401B34213200DE0EBA /* destinations_other.pdf in Resources */,
 				28A263751AE65AB4006C09A7 /* CSTabBar_savedlocations@2x.png in Resources */,
+				280401481B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */,
 				28A264AE1AE65C32006C09A7 /* POITypeCell.xib in Resources */,
 				28A263761AE65AB4006C09A7 /* UIIcon_cycle_tracks.png in Resources */,
 				28A263771AE65AB4006C09A7 /* UIIcon_footpaths.png in Resources */,
 				28A263781AE65AB4006C09A7 /* UIIcon_minor_roads.png in Resources */,
 				28A263791AE65AB4006C09A7 /* UIIcon_quiet_street.png in Resources */,
 				28A2637A1AE65AB4006C09A7 /* UIIcon_roads.png in Resources */,
-				284A370F1B32F76600EE2FD4 /* road_other.pdf in Resources */,
 				28A264AC1AE65C2D006C09A7 /* MapStyleCellView.xib in Resources */,
+				280400E41B34213200DE0EBA /* bicycles_bad.pdf in Resources */,
 				28A2637B1AE65AB4006C09A7 /* UIIcon_tracks.png in Resources */,
 				28A2637C1AE65AB4006C09A7 /* UIIcon_bear_left.png in Resources */,
 				28A2637D1AE65AB4006C09A7 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				28A2637E1AE65AB4006C09A7 /* UIIcon_bear_right.png in Resources */,
-				284A36891B32E9C400EE2FD4 /* general_bad.pdf in Resources */,
 				28A2637F1AE65AB4006C09A7 /* UIIcon_straight_on.png in Resources */,
+				2804013C1B34213200DE0EBA /* destinations_good.pdf in Resources */,
+				280401A81B34213200DE0EBA /* signs_bad.pdf in Resources */,
+				280400E81B34213200DE0EBA /* bicycles_good.pdf in Resources */,
 				28A263801AE65AB4006C09A7 /* UIIcon_turn_left.png in Resources */,
 				28A263811AE65AB4006C09A7 /* UIIcon_turn_right.png in Resources */,
 				28A263821AE65AB4006C09A7 /* icon_camera.png in Resources */,
 				28A263831AE65AB4006C09A7 /* icon_location.png in Resources */,
 				28A263841AE65AB4006C09A7 /* UIIcon_photomap.png in Resources */,
 				28A263851AE65AB4006C09A7 /* CSTabBar_account.png in Resources */,
+				280401301B34213200DE0EBA /* cycleways_good.pdf in Resources */,
+				280401341B34213200DE0EBA /* cycleways_neutral.pdf in Resources */,
 				28A263861AE65AB4006C09A7 /* CSIcon_saveloc_home.png in Resources */,
 				28A263871AE65AB4006C09A7 /* CSIcon_saveloc_work.png in Resources */,
+				280401281B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */,
+				280401701B34213200DE0EBA /* obstructions_other.pdf in Resources */,
 				28A264C21AE65F29006C09A7 /* CSBarButton_poi@2x.png in Resources */,
 				28A264C11AE65F1D006C09A7 /* CSBarButton_poi.png in Resources */,
 				28A263881AE65AB4006C09A7 /* CSTabBar_add_photo.png in Resources */,
 				28A263891AE65AB4006C09A7 /* CSTabBar_credits.png in Resources */,
-				284A37171B32F76600EE2FD4 /* routesigns_other.pdf in Resources */,
-				284A36951B32E9C400EE2FD4 /* potholes_good.pdf in Resources */,
-				284A36C11B32E9C400EE2FD4 /* shadow.pdf in Resources */,
 				28A2638A1AE65AB4006C09A7 /* CSTabBar_fav_routes.png in Resources */,
 				28A2638B1AE65AB4006C09A7 /* CSTabBar_itinerary.png in Resources */,
 				28A2638C1AE65AB4006C09A7 /* CSTabBar_photomap_tb.png in Resources */,
@@ -4912,10 +5090,11 @@
 				28A263921AE65AB4006C09A7 /* CSBarButton_saveloc@2x.png in Resources */,
 				28A263931AE65AB4006C09A7 /* UIButton_grey_hi.png in Resources */,
 				28A263941AE65AB4006C09A7 /* UIButton_grey_lo.png in Resources */,
-				284A368D1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */,
 				28A263951AE65AB4006C09A7 /* welcome@2x.jpg in Resources */,
 				28A263961AE65AB4006C09A7 /* UIButton_orange_hi.png in Resources */,
 				28A263971AE65AB4006C09A7 /* UIButton_orange_lo.png in Resources */,
+				280400F81B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */,
+				2804017C1B34213200DE0EBA /* potholes_other.pdf in Resources */,
 				28A263981AE65AB4006C09A7 /* UIButton_orangesmall_hi.png in Resources */,
 				28A263991AE65AB4006C09A7 /* UIButton_orangesmall_lo.png in Resources */,
 				28A2639A1AE65AB4006C09A7 /* UIButton_red_hi.png in Resources */,
@@ -4924,6 +5103,7 @@
 				28A2639D1AE65AB4006C09A7 /* MapViewSearchLocationView.xib in Resources */,
 				28A2639E1AE65AB4006C09A7 /* UIButtonBarArrowLeft.png in Resources */,
 				28A2639F1AE65AB4006C09A7 /* UIButtonBarArrowRight.png in Resources */,
+				280400FC1B34213200DE0EBA /* carstorage_bad.pdf in Resources */,
 				28A263A01AE65AB4006C09A7 /* UIButtonBarCameraSmall.png in Resources */,
 				28A263A11AE65AB4006C09A7 /* welcome_CS.jpg in Resources */,
 				28A263A21AE65AB4006C09A7 /* UIButtonBarInfo.png in Resources */,
@@ -4931,9 +5111,10 @@
 				28A263A41AE65AB4006C09A7 /* OCMMapStyle.png in Resources */,
 				28A263A51AE65AB4006C09A7 /* UIButtonBarStop.png in Resources */,
 				28A263A61AE65AB4006C09A7 /* PhotoWizardLocationView.xib in Resources */,
-				284A37031B32F76600EE2FD4 /* enforcement_other.pdf in Resources */,
+				2804010C1B34213200DE0EBA /* closure_good.pdf in Resources */,
 				28A263A71AE65AB4006C09A7 /* CSIcon_finish_wisp.png in Resources */,
 				28A263A81AE65AB4006C09A7 /* AVMapStyle.png in Resources */,
+				280400F01B34213200DE0EBA /* bikeshops_bad.pdf in Resources */,
 				28A263A91AE65AB4006C09A7 /* CSIcon_start_wisp.png in Resources */,
 				28A264A71AE65C0D006C09A7 /* appconfig_dev.plist in Resources */,
 				28A263AA1AE65AB4006C09A7 /* RoutePlanMenuView.xib in Resources */,
@@ -4942,63 +5123,71 @@
 				28A263AD1AE65AB4006C09A7 /* PhotoMapVideoLocationView.xib in Resources */,
 				28A263AE1AE65AB4006C09A7 /* UITextViewAccessoryView.xib in Resources */,
 				28A263AF1AE65AB4006C09A7 /* MapLocationSearchCell.xib in Resources */,
+				280401981B34213200DE0EBA /* routesigns_bad.pdf in Resources */,
 				28A263B01AE65AB4006C09A7 /* UIIcon_userphotomap.png in Resources */,
 				28A263B11AE65AB4006C09A7 /* UIIcon_userphotomap@2x.png in Resources */,
+				280400EC1B34213200DE0EBA /* bicycles_other.pdf in Resources */,
 				28A263B21AE65AB4006C09A7 /* PhotoWizardCategoryCell.xib in Resources */,
 				28A263B31AE65AB4006C09A7 /* Icon_nofavroutes.png in Resources */,
+				280401AC1B34213200DE0EBA /* signs_good.pdf in Resources */,
 				28A263B41AE65AB4006C09A7 /* Icon_norecentroutes.png in Resources */,
+				2804019C1B34213200DE0EBA /* routesigns_good.pdf in Resources */,
+				280401A41B34213200DE0EBA /* shadow.pdf in Resources */,
 				28A263B51AE65AB4006C09A7 /* welcome_CS@2x.jpg in Resources */,
 				28A263B61AE65AB4006C09A7 /* CSBarButton_location@2x.png in Resources */,
 				28A263B71AE65AB4006C09A7 /* Icon_nofavroutes@2x.png in Resources */,
 				28A263B81AE65AB4006C09A7 /* Icon_norecentroutes@2x.png in Resources */,
-				284A36C51B32E9C400EE2FD4 /* signs_bad.pdf in Resources */,
-				284A36D11B32E9C400EE2FD4 /* track_bad.pdf in Resources */,
 				28A263B91AE65AB4006C09A7 /* MainStoryboard.storyboard in Resources */,
 				28A263BA1AE65AB4006C09A7 /* CSBarButton_routePlan.png in Resources */,
+				280401141B34213200DE0EBA /* congestion_bad.pdf in Resources */,
 				28A263BB1AE65AB4006C09A7 /* CSBarButton_deletePoint.png in Resources */,
 				28A263BC1AE65AB4006C09A7 /* CSBarButton_location.png in Resources */,
+				280401BC1B34213200DE0EBA /* track_other.pdf in Resources */,
+				280401101B34213200DE0EBA /* closure_neutral.pdf in Resources */,
 				28A264C51AE78F1C006C09A7 /* CSIcon_map_poi@2x.png in Resources */,
 				28A264AF1AE65C37006C09A7 /* LeisureWaypointView.xib in Resources */,
 				28A263BD1AE65AB4006C09A7 /* CSBarButton_search.png in Resources */,
 				28A263BE1AE65AB4006C09A7 /* CSBarButton_search@2x.png in Resources */,
 				28A263BF1AE65AB4006C09A7 /* CSBarButton_routePlan@2x.png in Resources */,
+				2804014C1B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */,
 				28A263C01AE65AB4006C09A7 /* CSBarButton_deletePoint@2x.png in Resources */,
 				28A263C11AE65AB4006C09A7 /* HUD_icon_checkMark.png in Resources */,
 				28A263C21AE65AB4006C09A7 /* HUD_icon_checkMark@2x.png in Resources */,
 				28A263C31AE65AB4006C09A7 /* HUD_icon_exclaim.png in Resources */,
 				28A264B21AE65C47006C09A7 /* SettingsView.xib in Resources */,
-				284A370B1B32F76600EE2FD4 /* potholes_other.pdf in Resources */,
 				28A263C41AE65AB4006C09A7 /* CSBarButton_addPoint@2x.png in Resources */,
 				28A263C51AE65AB4006C09A7 /* HUD_icon_exclaim@2x.png in Resources */,
 				28A263C61AE65AB4006C09A7 /* HUD_icon_lock.png in Resources */,
 				28A263C71AE65AB4006C09A7 /* HUD_icon_lock@2x.png in Resources */,
 				28A263C81AE65AB4006C09A7 /* Icon_currentroutecell.png in Resources */,
+				280401841B34213200DE0EBA /* road_good.pdf in Resources */,
 				28A263C91AE65AB4006C09A7 /* Icon_currentroutecell@2x.png in Resources */,
 				28A263CA1AE65AB4006C09A7 /* UIButton_barbuttongreen_disabled.png in Resources */,
 				28A263CB1AE65AB4006C09A7 /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 				28A264AA1AE65C1A006C09A7 /* Default@2x.png in Resources */,
 				28A263CC1AE65AB4006C09A7 /* WayPointView.xib in Resources */,
-				284A369D1B32E9C400EE2FD4 /* road_bad.pdf in Resources */,
+				2804012C1B34213200DE0EBA /* cycleways_bad.pdf in Resources */,
 				28A263CD1AE65AB4006C09A7 /* PhotoWizardView.xib in Resources */,
-				284A36C91B32E9C400EE2FD4 /* signs_good.pdf in Resources */,
 				28A263CE1AE65AB4006C09A7 /* WayPointCell.xib in Resources */,
+				280401201B34213200DE0EBA /* cycleparking_bad.pdf in Resources */,
+				280401801B34213200DE0EBA /* road_bad.pdf in Resources */,
 				28A264AD1AE65C2F006C09A7 /* SavedLocationTableCell.xib in Resources */,
 				28A263CF1AE65AB4006C09A7 /* CSIcon_intermediate_wisp.png in Resources */,
 				28A263D01AE65AB4006C09A7 /* UIBarButton_Back.png in Resources */,
 				28A263D11AE65AB4006C09A7 /* CSBarButton_waypoint.png in Resources */,
+				2804016C1B34213200DE0EBA /* obstructions_good.pdf in Resources */,
 				28A263D21AE65AB4006C09A7 /* UIActivityBlank.png in Resources */,
 				28A264B01AE65C3F006C09A7 /* POICategoryView.xib in Resources */,
 				28A263D31AE65AB4006C09A7 /* UIActivityFacebook.png in Resources */,
+				280401641B34213200DE0EBA /* general_neutral.pdf in Resources */,
 				28A263D41AE65AB4006C09A7 /* UIActivityMail.png in Resources */,
-				284A36D51B32E9C400EE2FD4 /* track_good.pdf in Resources */,
 				28A263D51AE65AB4006C09A7 /* UIActivityTwitter.png in Resources */,
-				284A371F1B32F76600EE2FD4 /* track_other.pdf in Resources */,
-				284A36AD1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */,
 				28A263D61AE65AB4006C09A7 /* UIActivitySMS.png in Resources */,
 				28A263D71AE65AB4006C09A7 /* UIActivityCopy.png in Resources */,
 				28A263D81AE65AB4006C09A7 /* UIButtonBarTrash@2x.png in Resources */,
 				28A263D91AE65AB4006C09A7 /* UIActivityBlank@2x.png in Resources */,
 				28A263DA1AE65AB4006C09A7 /* UIActivityCopy@2x.png in Resources */,
+				280401041B34213200DE0EBA /* carstorage_neutral.pdf in Resources */,
 				28A263DB1AE65AB4006C09A7 /* UIActivityFacebook@2x.png in Resources */,
 				28A263DC1AE65AB4006C09A7 /* UIActivityMail@2x.png in Resources */,
 				28A263DD1AE65AB4006C09A7 /* UIActivitySMS@2x.png in Resources */,
@@ -5026,27 +5215,35 @@
 				28FA8A4219E454E80040EA46 /* FormData.plist in Resources */,
 				28FA8A4319E454E80040EA46 /* styles.plist in Resources */,
 				28FA8A4419E454E80040EA46 /* Icon_nosearchresults.png in Resources */,
+				280400EF1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */,
 				28FA8A4519E454E80040EA46 /* userState.plist in Resources */,
 				28FA8A4619E454E80040EA46 /* UIButton_green_hi@2x.png in Resources */,
+				280401631B34213200DE0EBA /* general_neutral.pdf in Resources */,
 				289EFC7719EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png in Resources */,
+				280401171B34213200DE0EBA /* congestion_good.pdf in Resources */,
 				28FA8A4719E454E80040EA46 /* UIButton_green_lo@2x.png in Resources */,
 				28FA8A4819E454E80040EA46 /* UIButton_grey_hi@2x.png in Resources */,
+				2804012F1B34213200DE0EBA /* cycleways_good.pdf in Resources */,
 				28FA8A4919E454E80040EA46 /* UIButton_grey_lo@2x.png in Resources */,
 				28FA8A4A19E454E80040EA46 /* UIButton_orange_hi@2x.png in Resources */,
+				2804018F1B34213200DE0EBA /* roadworks_good.pdf in Resources */,
 				28FA8A4B19E454E80040EA46 /* UIButton_orange_lo@2x.png in Resources */,
 				28FA8A4C19E454E80040EA46 /* UIButton_orangesmall_hi@2x.png in Resources */,
 				28FA8A4D19E454E80040EA46 /* UIButton_orangesmall_lo@2x.png in Resources */,
+				2804010F1B34213200DE0EBA /* closure_neutral.pdf in Resources */,
+				2804018B1B34213200DE0EBA /* roadworks_bad.pdf in Resources */,
 				28347AB01A37891900FA83BE /* CSTabBar_leisure@2x.png in Resources */,
 				28B0AD5219EEFC7F008A3F21 /* CSBarButton_poi@2x.png in Resources */,
 				28FA8A4E19E454E80040EA46 /* UIButton_red_hi@2x.png in Resources */,
-				284A36581B32E9C400EE2FD4 /* carstorage_bad.pdf in Resources */,
 				28FA8A4F19E454E80040EA46 /* UIButton_red_lo@2x.png in Resources */,
 				28FA8A5019E454E80040EA46 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				2853212219E7EFF900118E48 /* OSMMapStyle.png in Resources */,
 				28FA8A5119E454E80040EA46 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				28FA8A5219E454E80040EA46 /* UIIcon_cycle_lanes@2x.png in Resources */,
+				2804013F1B34213200DE0EBA /* destinations_other.pdf in Resources */,
 				28FA8A5419E454E80040EA46 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				28FA8A5519E454E80040EA46 /* UIIcon_footpaths@2x.png in Resources */,
+				2804017F1B34213200DE0EBA /* road_bad.pdf in Resources */,
 				28FA8A5619E454E80040EA46 /* UIIcon_quiet_street@2x.png in Resources */,
 				28FA8A5719E454E80040EA46 /* UIIcon_roads@2x.png in Resources */,
 				28FA8A5819E454E80040EA46 /* UIIcon_tracks@2x.png in Resources */,
@@ -5055,53 +5252,53 @@
 				28FA8A5B19E454E80040EA46 /* UIIcon_bear_left@2x.png in Resources */,
 				28FA8A5C19E454E80040EA46 /* UIIcon_bear_right@2x.png in Resources */,
 				28FA8A5D19E454E80040EA46 /* UIIcon_straight_on@2x.png in Resources */,
-				284A36FE1B32F76600EE2FD4 /* destinations_other.pdf in Resources */,
-				284A36781B32E9C400EE2FD4 /* enforcement_bad.pdf in Resources */,
+				2804014F1B34213200DE0EBA /* enforcement_bad.pdf in Resources */,
 				28FA8A5E19E454E80040EA46 /* MainStoryboard.storyboard in Resources */,
 				28FA8A5F19E454E80040EA46 /* UIIcon_turn_left@2x.png in Resources */,
-				284A36701B32E9C400EE2FD4 /* destinations_bad.pdf in Resources */,
-				284A36B41B32E9C400EE2FD4 /* routesigns_bad.pdf in Resources */,
 				28FA8A6019E454E80040EA46 /* UIIcon_turn_right@2x.png in Resources */,
 				28FA8A6119E454E80040EA46 /* BUInlineErrorView.xib in Resources */,
 				28FA8A6219E454E80040EA46 /* UIIcon_photomap@2x.png in Resources */,
 				28FA8A6319E454E80040EA46 /* CSTabBar_account@2x.png in Resources */,
 				28FA8A6419E454E80040EA46 /* CSTabBar_add_photo@2x.png in Resources */,
 				28FA8A6519E454E80040EA46 /* CSIcon_intermediate_wisp@2X.png in Resources */,
-				284A369C1B32E9C400EE2FD4 /* road_bad.pdf in Resources */,
 				28FA8A6619E454E80040EA46 /* CSTabBar_credits@2x.png in Resources */,
 				28FA8A6719E454E80040EA46 /* UIButtonBarTrash@2x.png in Resources */,
 				28FA8A6819E454E80040EA46 /* CSTabBar_fav_routes@2x.png in Resources */,
 				28FA8A6919E454E80040EA46 /* CSTabBar_itinerary@2x.png in Resources */,
-				284A36541B32E9C400EE2FD4 /* bikeshops_bad.pdf in Resources */,
-				284A36FA1B32F76600EE2FD4 /* congestion_other.pdf in Resources */,
 				28FA8A6A19E454E80040EA46 /* CSTabBar_photomap_tb@2x.png in Resources */,
+				280400F31B34213200DE0EBA /* bikeshops_good.pdf in Resources */,
 				28892F6519FEE103000CC52C /* LeisureWaypointView.xib in Resources */,
-				284A37021B32F76600EE2FD4 /* enforcement_other.pdf in Resources */,
-				284A36D01B32E9C400EE2FD4 /* track_bad.pdf in Resources */,
 				28FA8A6B19E454E80040EA46 /* CSTabBar_plan_route@2x.png in Resources */,
 				28FA8A6C19E454E80040EA46 /* CSTabBar_settings@2x.png in Resources */,
 				2853211919E7EFF900118E48 /* AVMapStyle.png in Resources */,
+				280400F71B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */,
 				28FA8A6D19E454E80040EA46 /* FavouritesCell.xib in Resources */,
+				280401471B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */,
+				2804014B1B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */,
+				280401931B34213200DE0EBA /* roadworks_other.pdf in Resources */,
 				28FA8A6E19E454E80040EA46 /* ItineraryCell.xib in Resources */,
 				28FA8A6F19E454E80040EA46 /* RouteTableCell.xib in Resources */,
 				2853211619E7EFF900118E48 /* ASMapStyle.png in Resources */,
 				28042E9E1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */,
-				284A37121B32F76600EE2FD4 /* roadworks_other.pdf in Resources */,
-				284A370E1B32F76600EE2FD4 /* road_other.pdf in Resources */,
 				28FA8A7019E454E80040EA46 /* CreditsView.xib in Resources */,
+				2804011B1B34213200DE0EBA /* congestion_other.pdf in Resources */,
 				28FA8A7119E454E80040EA46 /* FavouritesView.xib in Resources */,
+				2804016B1B34213200DE0EBA /* obstructions_good.pdf in Resources */,
 				28FA8A7219E454E80040EA46 /* CSRouteDetailsViewController.xib in Resources */,
 				28FA8A7319E454E80040EA46 /* RouteSegmentView.xib in Resources */,
 				28FA8A7519E454E80040EA46 /* RouteListView.xib in Resources */,
+				280401A31B34213200DE0EBA /* shadow.pdf in Resources */,
+				280401871B34213200DE0EBA /* road_other.pdf in Resources */,
 				286FAE771A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
 				28CD80721A6E91AF00821072 /* BSMapStyle.png in Resources */,
+				2804016F1B34213200DE0EBA /* obstructions_other.pdf in Resources */,
 				28FA8A7719E454E80040EA46 /* RoutesView.xib in Resources */,
 				28E1468219F2B25E00242F2F /* PhotoMapVideoLocationView.xib in Resources */,
+				2804017B1B34213200DE0EBA /* potholes_other.pdf in Resources */,
 				289EFC7419EDA4EF0081E7BB /* CSIcon_saveloc_home@2x.png in Resources */,
-				284A368C1B32E9C400EE2FD4 /* obstructions_good.pdf in Resources */,
 				28FA8A7819E454E80040EA46 /* MapLocationSearchView.xib in Resources */,
-				284A367C1B32E9C400EE2FD4 /* enforcement_good.pdf in Resources */,
 				28FA8A7919E454E80040EA46 /* AccountView.xib in Resources */,
+				280401731B34213200DE0EBA /* potholes_bad.pdf in Resources */,
 				28FA8A7A19E454E80040EA46 /* InitialLocationView.xib in Resources */,
 				289EFC4E19ED2CEC0081E7BB /* SavedLocationTableCell.xib in Resources */,
 				28FA8A7B19E454E80040EA46 /* donate.html in Resources */,
@@ -5109,19 +5306,16 @@
 				28FA8A7C19E454E80040EA46 /* UIButtonBarArrowLeft@2x.png in Resources */,
 				28FA8A7D19E454E80040EA46 /* UIButtonBarArrowRight@2x.png in Resources */,
 				28FA8A7E19E454E80040EA46 /* UIButtonBarCameraSmall@2x.png in Resources */,
-				284A36641B32E9C400EE2FD4 /* congestion_good.pdf in Resources */,
 				28FA8A7F19E454E80040EA46 /* UIButtonBarInfo@2x.png in Resources */,
 				28FA8A8019E454E80040EA46 /* UIIcon_minor_roads@2x.png in Resources */,
 				28FA8A8119E454E80040EA46 /* cyclecambridge.jpg in Resources */,
 				28FA8A8219E454E80040EA46 /* donate.png in Resources */,
-				284A36C81B32E9C400EE2FD4 /* signs_good.pdf in Resources */,
 				28A9999119E70C870050C3E8 /* CycleNorth.xcassets in Resources */,
 				28FA8A8319E454E80040EA46 /* CSBarButton_gpsactive@2x.png in Resources */,
 				28FA8A8419E454E80040EA46 /* reesjeffreys.png in Resources */,
 				28A9999319E712530050C3E8 /* default.css in Resources */,
 				28FA8A8A19E454E80040EA46 /* services_dev.plist in Resources */,
 				28FA8A8B19E454E80040EA46 /* services_live.plist in Resources */,
-				284A370A1B32F76600EE2FD4 /* potholes_other.pdf in Resources */,
 				28FA8BB319E455EF0040EA46 /* StokeStoryboard.storyboard in Resources */,
 				28FA8A8F19E454E80040EA46 /* RouteCell.xib in Resources */,
 				283781671A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
@@ -5136,14 +5330,14 @@
 				28FA8A9819E454E80040EA46 /* BUSegmentedControl_right_hi.png in Resources */,
 				28FA8A9919E454E80040EA46 /* BUSegmentedControl_right_lo.png in Resources */,
 				28FA8A9A19E454E80040EA46 /* UIIcon_cycle_lanes.png in Resources */,
+				280401B71B34213200DE0EBA /* track_good.pdf in Resources */,
 				28FA8A9B19E454E80040EA46 /* UIIcon_cycle_tracks.png in Resources */,
 				281D4F0319FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png in Resources */,
-				284A36C41B32E9C400EE2FD4 /* signs_bad.pdf in Resources */,
 				28FA8A9C19E454E80040EA46 /* UIIcon_footpaths.png in Resources */,
 				28FA8A9D19E454E80040EA46 /* UIIcon_minor_roads.png in Resources */,
 				28FA8A9E19E454E80040EA46 /* UIIcon_quiet_street.png in Resources */,
-				284A36941B32E9C400EE2FD4 /* potholes_good.pdf in Resources */,
 				28FA8A9F19E454E80040EA46 /* UIIcon_roads.png in Resources */,
+				280401231B34213200DE0EBA /* cycleparking_good.pdf in Resources */,
 				28FA8AA019E454E80040EA46 /* UIIcon_tracks.png in Resources */,
 				28E1469819F2C6A700242F2F /* Default-568h@2x.png in Resources */,
 				28FA8AA119E454E80040EA46 /* UIIcon_bear_left.png in Resources */,
@@ -5153,56 +5347,56 @@
 				28FA8AA519E454E80040EA46 /* UIIcon_turn_right.png in Resources */,
 				281C771619F4266800A756D6 /* APIKey_live.txt in Resources */,
 				28FA8AA619E454E80040EA46 /* icon_camera.png in Resources */,
-				284A36D41B32E9C400EE2FD4 /* track_good.pdf in Resources */,
 				28FA8AA719E454E80040EA46 /* icon_location.png in Resources */,
-				284A36AC1B32E9C400EE2FD4 /* roadworks_good.pdf in Resources */,
+				280401A71B34213200DE0EBA /* signs_bad.pdf in Resources */,
 				28FA8AA819E454E80040EA46 /* UIIcon_photomap.png in Resources */,
+				280401571B34213200DE0EBA /* enforcement_other.pdf in Resources */,
 				28FA8AA919E454E80040EA46 /* CSTabBar_account.png in Resources */,
 				28B6B2F41A5AA5A0002DF099 /* welcome.jpg in Resources */,
 				2834D38019F16CEC00036FEC /* POITypeCell.xib in Resources */,
 				28FA8AAA19E454E80040EA46 /* CSTabBar_add_photo.png in Resources */,
 				28FA8AAB19E454E80040EA46 /* CSTabBar_credits.png in Resources */,
 				28FA8AAC19E454E80040EA46 /* CSTabBar_fav_routes.png in Resources */,
+				280401971B34213200DE0EBA /* routesigns_bad.pdf in Resources */,
 				28892F6919FFA962000CC52C /* CSBarButton_addPoint@2x.png in Resources */,
-				284A37161B32F76600EE2FD4 /* routesigns_other.pdf in Resources */,
+				280401771B34213200DE0EBA /* potholes_good.pdf in Resources */,
 				28B0AD3D19EEBA9F008A3F21 /* POICategoryView.xib in Resources */,
 				28FA8AAD19E454E80040EA46 /* CSTabBar_itinerary.png in Resources */,
 				28FA8BB119E455E50040EA46 /* appconfig_live.plist in Resources */,
-				284A36F61B32F76600EE2FD4 /* bicycles_other.pdf in Resources */,
 				28FA8AAE19E454E80040EA46 /* CSTabBar_photomap_tb.png in Resources */,
 				28FA8AAF19E454E80040EA46 /* PhotoMapImageLocationView.xib in Resources */,
 				2853210819E7DA7E00118E48 /* MapStyleCellView.xib in Resources */,
-				284A366C1B32E9C400EE2FD4 /* cycleparking_bad.pdf in Resources */,
 				28FA8AB019E454E80040EA46 /* CSTabBar_plan_route.png in Resources */,
-				284A36B81B32E9C400EE2FD4 /* routesigns_good.pdf in Resources */,
+				280401371B34213200DE0EBA /* destinations_bad.pdf in Resources */,
+				280400E31B34213200DE0EBA /* bicycles_bad.pdf in Resources */,
 				28FA8AB119E454E80040EA46 /* CSTabBar_settings.png in Resources */,
 				28FA8AB219E454E80040EA46 /* UIButton_green_hi.png in Resources */,
 				28FA8AB319E454E80040EA46 /* UIButton_green_lo.png in Resources */,
 				28FA8AB419E454E80040EA46 /* UIButton_grey_hi.png in Resources */,
 				28E1469919F2C6A700242F2F /* Default@2x.png in Resources */,
-				284A371E1B32F76600EE2FD4 /* track_other.pdf in Resources */,
 				28FA8AB519E454E80040EA46 /* UIButtonBarTrash.png in Resources */,
-				284A365C1B32E9C400EE2FD4 /* closure_bad.pdf in Resources */,
 				28FA8AB619E454E80040EA46 /* MapViewSearchLocationView.xib in Resources */,
-				284A36C01B32E9C400EE2FD4 /* shadow.pdf in Resources */,
+				280401B31B34213200DE0EBA /* track_bad.pdf in Resources */,
 				28FA8AB719E454E80040EA46 /* UIButton_grey_lo.png in Resources */,
 				28B6B2F71A5AA5A0002DF099 /* welcome@2x.jpg in Resources */,
 				28FA8AB819E454E80040EA46 /* UIButton_orange_hi.png in Resources */,
 				28FA8AB919E454E80040EA46 /* UIButton_orange_lo.png in Resources */,
-				284A36A01B32E9C400EE2FD4 /* road_good.pdf in Resources */,
+				280400E71B34213200DE0EBA /* bicycles_good.pdf in Resources */,
 				2853211F19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				28FA8ABA19E454E80040EA46 /* UIButton_orangesmall_hi.png in Resources */,
 				28FA8ABB19E454E80040EA46 /* UIButton_orangesmall_lo.png in Resources */,
 				28FA8ABC19E454E80040EA46 /* UIButton_red_hi.png in Resources */,
+				280401BB1B34213200DE0EBA /* track_other.pdf in Resources */,
 				28FA8ABD19E454E80040EA46 /* UIButton_red_lo.png in Resources */,
 				28FA8ABE19E454E80040EA46 /* UIPickerAccessoryView.xib in Resources */,
 				28FA8ABF19E454E80040EA46 /* UIButton_save_hi.png in Resources */,
 				28FA8AC019E454E80040EA46 /* UIButtonBarArrowLeft.png in Resources */,
 				28FA8AC119E454E80040EA46 /* UIButtonBarArrowRight.png in Resources */,
+				2804010B1B34213200DE0EBA /* closure_good.pdf in Resources */,
 				28B0AD3119EEBA18008A3F21 /* POICatLocationCell.xib in Resources */,
+				280400FF1B34213200DE0EBA /* carstorage_good.pdf in Resources */,
 				28FA8AC219E454E80040EA46 /* UIButtonBarCameraSmall.png in Resources */,
 				283781611A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
-				284A36881B32E9C400EE2FD4 /* general_bad.pdf in Resources */,
 				28FA8AC319E454E80040EA46 /* PhotoWizardView.xib in Resources */,
 				28FA8AC419E454E80040EA46 /* UIButtonBarInfo.png in Resources */,
 				28FA8AC519E454E80040EA46 /* UIButtonBarRefresh.png in Resources */,
@@ -5212,9 +5406,13 @@
 				28FA8AC819E454E80040EA46 /* CSIcon_start_wisp.png in Resources */,
 				28FA8AC919E454E80040EA46 /* RoutePlanMenuView.xib in Resources */,
 				28FA8ACA19E454E80040EA46 /* UITextViewAccessoryView.xib in Resources */,
+				2804019B1B34213200DE0EBA /* routesigns_good.pdf in Resources */,
 				28FA8ACB19E454E80040EA46 /* MapLocationSearchCell.xib in Resources */,
+				280401AB1B34213200DE0EBA /* signs_good.pdf in Resources */,
+				280401AF1B34213200DE0EBA /* signs_other.pdf in Resources */,
 				28FA8ACC19E454E80040EA46 /* UIIcon_userphotomap.png in Resources */,
 				28FA8ACD19E454E80040EA46 /* UIIcon_userphotomap@2x.png in Resources */,
+				2804013B1B34213200DE0EBA /* destinations_good.pdf in Resources */,
 				28FA8ACE19E454E80040EA46 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				28FA8ACF19E454E80040EA46 /* PhotoWizardCategoryCell.xib in Resources */,
 				28FA8AD019E454E80040EA46 /* Icon_nofavroutes.png in Resources */,
@@ -5225,6 +5423,7 @@
 				28FA8AD419E454E80040EA46 /* Icon_nofavroutes@2x.png in Resources */,
 				28FA8AD519E454E80040EA46 /* Icon_norecentroutes@2x.png in Resources */,
 				28FA8AD619E454E80040EA46 /* CSBarButton_routePlan.png in Resources */,
+				280401131B34213200DE0EBA /* congestion_bad.pdf in Resources */,
 				288D693B1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */,
 				289EFC6F19EDA4E60081E7BB /* CSIcon_saveloc_work.png in Resources */,
 				28FA8AD719E454E80040EA46 /* CSBarButton_deletePoint.png in Resources */,
@@ -5248,37 +5447,48 @@
 				28FA8AE519E454E80040EA46 /* Icon_currentroutecell.png in Resources */,
 				28FA8AE619E454E80040EA46 /* Icon_currentroutecell@2x.png in Resources */,
 				28FA8AE719E454E80040EA46 /* UIButton_barbuttongreen_disabled.png in Resources */,
+				2804011F1B34213200DE0EBA /* cycleparking_bad.pdf in Resources */,
 				28FA8AE819E454E80040EA46 /* UIButton_barbuttongreen_disabled@2x.png in Resources */,
 				28FA8AE919E454E80040EA46 /* cyclestreets.geojson in Resources */,
+				280401531B34213200DE0EBA /* enforcement_good.pdf in Resources */,
 				28920F5E1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */,
+				280401671B34213200DE0EBA /* obstructions_bad.pdf in Resources */,
+				2804015B1B34213200DE0EBA /* general_bad.pdf in Resources */,
+				280401071B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				28FA8AEA19E454E80040EA46 /* WayPointView.xib in Resources */,
 				28FA8AEB19E454E80040EA46 /* WayPointCell.xib in Resources */,
-				284A36601B32E9C400EE2FD4 /* closure_good.pdf in Resources */,
+				2804012B1B34213200DE0EBA /* cycleways_bad.pdf in Resources */,
 				28FA8AEC19E454E80040EA46 /* CSIcon_intermediate_wisp.png in Resources */,
-				284A371A1B32F76600EE2FD4 /* signs_other.pdf in Resources */,
 				28FA8AED19E454E80040EA46 /* UIBarButton_Back.png in Resources */,
+				280401271B34213200DE0EBA /* cycleparking_neutral.pdf in Resources */,
 				28FA8AEE19E454E80040EA46 /* CSBarButton_waypoint.png in Resources */,
 				2853211C19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
 				28FA8AEF19E454E80040EA46 /* UIActivityBlank.png in Resources */,
 				28FA8AF019E454E80040EA46 /* UIActivityFacebook.png in Resources */,
 				28FA8AF119E454E80040EA46 /* UIActivityMail.png in Resources */,
 				28FA8AF219E454E80040EA46 /* UIActivityTwitter.png in Resources */,
-				284A37061B32F76600EE2FD4 /* obstructions_other.pdf in Resources */,
 				28FA8AF319E454E80040EA46 /* UIActivitySMS.png in Resources */,
 				28FA8AF419E454E80040EA46 /* UIActivityCopy.png in Resources */,
 				289EFC6219ED8E020081E7BB /* CSBarButton_saveloc@2x.png in Resources */,
 				28FA8AF519E454E80040EA46 /* UIActivityBlank@2x.png in Resources */,
-				284A36A81B32E9C400EE2FD4 /* roadworks_bad.pdf in Resources */,
 				28FA8AF619E454E80040EA46 /* UIActivityCopy@2x.png in Resources */,
 				28FA8AF719E454E80040EA46 /* UIActivityFacebook@2x.png in Resources */,
 				28FA8AF819E454E80040EA46 /* UIActivityMail@2x.png in Resources */,
+				280401431B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */,
 				28FA8AF919E454E80040EA46 /* UIActivitySMS@2x.png in Resources */,
+				280401031B34213200DE0EBA /* carstorage_neutral.pdf in Resources */,
 				286FAE7B1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
 				28FA8AFA19E454E80040EA46 /* UIActivityTwitter@2x.png in Resources */,
+				280401831B34213200DE0EBA /* road_good.pdf in Resources */,
 				28FA8AFB19E454E80040EA46 /* UIIcon_walking.png in Resources */,
+				280400FB1B34213200DE0EBA /* carstorage_bad.pdf in Resources */,
 				289EFC5319ED4F770081E7BB /* SavedLocation_CellIcon_Home.png in Resources */,
+				280400EB1B34213200DE0EBA /* bicycles_other.pdf in Resources */,
 				28FA8AFC19E454E80040EA46 /* UIIcon_walking@2x.png in Resources */,
+				2804015F1B34213200DE0EBA /* general_good.pdf in Resources */,
 				2853212619E7F24F00118E48 /* CNSMapStyle.png in Resources */,
+				280401331B34213200DE0EBA /* cycleways_neutral.pdf in Resources */,
+				2804019F1B34213200DE0EBA /* routesigns_other.pdf in Resources */,
 				28A9997519E702BF0050C3E8 /* PhotoMapView.xib in Resources */,
 				28FA8AFE19E454E80040EA46 /* Icon_nosearchresults@2x.png in Resources */,
 				28FA8AFF19E454E80040EA46 /* UIButtonBarRefresh@2x.png in Resources */,
