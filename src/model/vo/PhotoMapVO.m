@@ -60,6 +60,9 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 		BOOL hasvideoNode=[propertiesDict[@"hasVideo"] boolValue];
 		_hasVideo=NO;
 		
+		_categoryId=propertiesDict[@"categoryId"];
+		_metacategoryId=propertiesDict[@"metacategoryId"];
+		
 		// node may exist but be empty of mp4s
 		if(hasvideoNode){
 			_videoFormats=propertiesDict[@"videoFormats"];
@@ -137,7 +140,15 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 
 
 -(NSString*)csidString{
-	return [NSString stringWithFormat:@"%li",_csid];
+	return [NSString stringWithFormat:@"%li",(long)_csid];
+}
+
+-(NSString*)categoryIconString{
+	if(_metacategoryId!=nil && _categoryId!=nil){
+		return [NSString stringWithFormat:@"%@_%@.pdf",_categoryId,_metacategoryId];
+	}else{
+		return @"bicycles_other.pdf";
+	}
 }
 
 

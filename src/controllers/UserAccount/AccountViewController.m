@@ -229,22 +229,22 @@ static NSString *const STRINGID=@"account";
 	UIButton *button=nil;
 	button=(UIButton*)[_loginView viewWithTag:kSubmitButtonTag];
 	button.styleId=@"DarkGreyButton";
-	[button setTitle:@"Login" forState:UIControlStateNormal];
+	[button setTitle:LocalisedString(@"login") forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	button=(UIButton*)[_registerView viewWithTag:kSubmitButtonTag];
 	button.styleId=@"DarkGreyButton";
-	[button setTitle:@"Create account" forState:UIControlStateNormal];
+	[button setTitle:LocalisedString(@"createaccount") forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	button=(UIButton*)[_retrieveView viewWithTag:kSubmitButtonTag];
 	button.styleId=@"DarkGreyButton";
-	[button setTitle:@"Submit" forState:UIControlStateNormal];
+	[button setTitle:LocalisedString(@"submit") forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(retrievePasswordButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// logged in UI
 	_logoutButton.styleId=@"DarkGreyButton";
-	[_logoutButton setTitle:@"Clear signin details" forState:UIControlStateNormal];
+	[_logoutButton setTitle:LocalisedString(@"clearsubmit") forState:UIControlStateNormal];
 	[_logoutButton addTarget:self action:@selector(logoutButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[_saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];
 	
@@ -496,9 +496,9 @@ static NSString *const STRINGID=@"account";
 	
 	if(_activePage==0){
 		_leftLabel.text=@"";
-		_rightLabel.text=@"Sign in";
+		_rightLabel.text=LocalisedString(@"login");
 	}else {
-		_leftLabel.text=@"Create account";
+		_leftLabel.text=LocalisedString(@"createaccount");
 		_rightLabel.text=@"";
 	}
 

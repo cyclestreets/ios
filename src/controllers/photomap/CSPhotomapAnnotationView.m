@@ -10,6 +10,8 @@
 #import "UIView+Additions.h"
 #import "CSPhotomapAnnotation.h"
 #import "PhotoMapVO.h"
+#import "UIImage+PDF.h"
+#import "GlobalUtilities.h"
 
 @implementation CSPhotomapAnnotationView
 
@@ -48,7 +50,15 @@
 		
 		switch (annotation.dataProvider.mediaType) {
 			case PhotoMapMediaType_Image:
-				self.image=[UIImage imageNamed:@"UIIcon_photomap.png"];
+			{
+				UIImage *image=[UIImage imageWithPDFNamed:annotation.dataProvider.categoryIconString fitSize:CGSizeMake(40,40)];
+				if(image==nil){
+					image=[UIImage imageWithPDFNamed:@"bicycles_other.pdf" fitSize:CGSizeMake(40,40)];
+				}
+				
+				self.image=image;
+			}
+				
 			break;
 			case PhotoMapMediaType_Video:
 				self.image=[UIImage imageNamed:@"UIIcon_videomap.png"];

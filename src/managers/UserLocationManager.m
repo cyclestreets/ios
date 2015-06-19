@@ -12,6 +12,7 @@
 #import "DeviceUtilities.h"
 #import "GlobalUtilities.h"
 #import <UIAlertView+BlocksKit.h>
+#import "StringUtilities.h"
 
 @interface UserLocationManager()<CLLocationManagerDelegate>
 
@@ -227,7 +228,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 				
 			}else{
 				
-				UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:@"Location Services Disabled" message:@"Unable to retrieve location. Location services for the App are off. Please enable in Settings > Privacy > Location to use location based features."];
+				UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:LocalisedString(@"locationalert_title_app") message:LocalisedString(@"locationalert_message_app")];
 				
 				[locationAlert bk_addButtonWithTitle:CANCEL handler:^{
 					
@@ -253,7 +254,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(UserLocationManager);
 	}else{
 		
 			
-		UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:@"System Location Services Disabled" message:@"Unable to retrieve location. Location services for the device are off. Please enable in Settings > Privacy > Location to use location based features."];
+		UIAlertView *locationAlert=[UIAlertView bk_alertViewWithTitle:LocalisedString(@"locationalert_title_system") message:LocalisedString(@"locationalert_message_system")];
 		
 		[locationAlert bk_addButtonWithTitle:CANCEL handler:^{
 			

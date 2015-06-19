@@ -106,9 +106,43 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 }
 
 
+#pragma mark - Legacy migration methods
+
+
 //
 /***********************************************
- * @description			TODO:
+ * @description			v3 > CoreData migration
+ ***********************************************/
+//
+
+-(void)migrateFileRoutesToCoreData{
+	
+	
+	// get route ids
+	
+	// routes need new storeType property (fav/recent)
+	
+	// need new RouteModel class
+	// RouteVO *route=[[RouteManager sharedInstance] loadRouteForFileID:routeid];
+	
+	
+	// then create new RouteModel class and initialize with data from RouteVO
+	
+	// set storeType
+	
+	// once all done, remove legacy userroutes dir & indicies file
+	
+	// re try using fetchedresults controllers
+	
+}
+
+
+
+
+
+//
+/***********************************************
+ * @description			v1 > v2 migration
  ***********************************************/
 //
 -(void)transferOldFavouritesToRecents{
@@ -137,7 +171,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		[[RouteManager sharedInstance] legacyRouteCleanup];
 		
 	}
-
 	
 }
 

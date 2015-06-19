@@ -197,7 +197,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 								@"minimaldata":@"1",
 								@"selectedid":[self uploadPhotoId]};
 	
-	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl"];
+	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl",@"metacategoryId",@"categoryId"];
 	NSDictionary *fieldDict=@{@"fields":[fieldArr componentsJoinedByString:@","]};
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionary];

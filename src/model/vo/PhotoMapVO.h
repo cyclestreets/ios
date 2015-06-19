@@ -42,6 +42,9 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 @property (nonatomic, strong)	NSString			*bigImageURL;
 @property (nonatomic, strong)	NSString			*smallImageURL;
 
+@property (nonatomic, strong)	NSString			*metacategoryId;
+@property (nonatomic, strong)	NSString			*categoryId;
+
 @property (nonatomic, assign)	PhotoMapMediaType	mediaType;
 
 
@@ -49,6 +52,7 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 @property(nonatomic,readonly)  BOOL					hasPhoto;
 
 @property(nonatomic,readonly)  NSString				*csidString;
+@property(nonatomic,readonly)  NSString				*categoryIconString;
 
 
 

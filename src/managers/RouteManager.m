@@ -271,13 +271,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 -(void)loadRouteForRouteId:(NSString*)routeid{
     
-	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
     SettingsVO *settingsdp = [SettingsManager sharedInstance].dataProvider;
     
     NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:[CycleStreets sharedInstance].APIKey,@"key",
                                      useDom,@"useDom",
                                      settingsdp.plan,@"plan",
                                      routeid,@"itinerary",
+									 cycleStreets.files.clientid,@"clientid",
                                      nil];
     
     BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
@@ -770,7 +771,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 	}else {
 		
-		BetterLog(@"[INFO] OldRoutes dir was not there");
+		BetterLog(@"[INFO] legacy route dir not found, conversion is skipped");
 		
 	}
 	

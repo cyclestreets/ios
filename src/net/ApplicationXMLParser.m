@@ -359,7 +359,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		route.length=[NSNumber numberWithInt:[[TBXML textForElement:[TBXML childElementNamed:@"cs:length" parentElement:routenode]]intValue]];
 		route.plan=[TBXML textForElement:[TBXML childElementNamed:@"cs:plan" parentElement:routenode]];
 		route.name=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:routenode]];
+		
+		// assign date, check for unix timestamp format and if so
+		// replace with db type string
 		route.date=[TBXML textForElement:[TBXML childElementNamed:@"cs:whence" parentElement:routenode]]; // ie date-time
+		if(route.dateString==nil){
+			
+			NSDate *newdate=[NSDate dateWithTimeIntervalSince1970:[route.date integerValue]];
+			NSString *dateStr=[NSDate stringFromDate:newdate withFormat:@"y-MM-dd HH:mm:ss"];
+			if(newdate!=nil)
+				route.date=dateStr;
+			
+		}
+		
+		
+		
 		route.speed=[[TBXML textForElement:[TBXML childElementNamed:@"cs:speed" parentElement:routenode]]intValue];
 		route.time=[[TBXML textForElement:[TBXML childElementNamed:@"cs:time" parentElement:routenode]]intValue];
 		route.calorie=[TBXML textForElement:[TBXML childElementNamed:@"cs:calories" parentElement:routenode]];
