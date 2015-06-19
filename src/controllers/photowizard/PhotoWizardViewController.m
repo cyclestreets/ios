@@ -1257,8 +1257,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		
         [self initialiseViewState:PhotoWizardViewStateDescription];
 		
-//		UIImage *iconimage=[UIImage imageWithPDFNamed:[NSString stringWithFormat:@"%@_%@.pdf",_uploadImage.feature.tag,_uploadImage.category.tag] atSize:_categoryIconView.size];
-//		_categoryIconView.image=iconimage;
+		NSArray *neutralStrs=@[@"other",@"any",@"event"];
+		NSString *metasuffix=_uploadImage.category.tag;
+		
+		if([neutralStrs indexOfObject:_uploadImage.category.tag]!=NSNotFound){
+			metasuffix=@"neutral";
+		}
+		
+		UIImage *iconimage=[UIImage imageWithPDFNamed:[NSString stringWithFormat:@"%@_%@.pdf",_uploadImage.feature.tag,metasuffix] atWidth:_categoryIconView.width];
+		_categoryIconView.image=iconimage;
 		
     }
 	

@@ -168,10 +168,15 @@
         
 		CGPDFPageRef page1 = CGPDFDocumentGetPage( pdf, page );
         
-        CGRect destRect = CGRectMake(0, 0, size.width, size.height);
-        CGAffineTransform drawingTransform = CGPDFPageGetDrawingTransform(page1, kCGPDFCropBox, destRect, 0, preserveAspectRatio);
-        CGContextConcatCTM(ctx, drawingTransform);
-                
+   //     CGRect destRect = CGRectMake(0, 0, size.width, size.height);
+//        CGAffineTransform drawingTransform = CGPDFPageGetDrawingTransform(page1, kCGPDFCropBox, destRect, 0, preserveAspectRatio);
+//        CGContextConcatCTM(ctx, drawingTransform);
+		
+		
+		CGRect mediaRect = CGPDFPageGetBoxRect(page1, kCGPDFCropBox);
+		CGAffineTransform drawingTransform=CGAffineTransformMakeScale(size.width/mediaRect.size.width, size.height/mediaRect.size.height);
+		CGContextConcatCTM(ctx, drawingTransform);
+		
 		CGContextDrawPDFPage( ctx, page1 );
 		CGPDFDocumentRelease( pdf );
     }

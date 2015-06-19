@@ -10,6 +10,7 @@
                 <outlet property="cancelViewButton" destination="179" id="212"/>
                 <outlet property="categoryFeatureField" destination="LJR-HH-uIU" id="fRa-3X-5le"/>
                 <outlet property="categoryField" destination="mtp-ZE-p1N" id="wv7-w7-u3h"/>
+                <outlet property="categoryIconView" destination="Uu9-Dg-sZ2" id="owM-86-sO7"/>
                 <outlet property="categoryView" destination="185" id="195"/>
                 <outlet property="continueButton" destination="122" id="135"/>
                 <outlet property="descImagePreview" destination="64" id="71"/>
@@ -545,6 +546,10 @@ Once uploaded they'll appear in the Report section.</string>
                         <outlet property="delegate" destination="-1" id="wK2-tg-tCx"/>
                     </connections>
                 </textField>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Uu9-Dg-sZ2">
+                    <rect key="frame" x="112" y="216" width="97" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
