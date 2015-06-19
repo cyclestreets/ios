@@ -29,6 +29,7 @@
 #import "AccountViewController.h"
 #import "CSMapSource.h"
 #import "CSMapTileService.h"
+#import "UIImage+PDF.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -92,6 +93,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 @property (nonatomic, strong) UITextField			*currentCategoryField;
 @property (nonatomic, strong) NSArray				*activePickerDataSource;
 @property (nonatomic, strong) IBOutlet UIView		*pickerAccessoryView;
+@property (weak, nonatomic) IBOutlet UIImageView    *categoryIconView;
 
 
 @property (nonatomic, strong) IBOutlet UIView *photodescriptionView;
@@ -1252,7 +1254,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	
 	if(_uploadImage.feature!=nil && _uploadImage.category!=nil){
+		
         [self initialiseViewState:PhotoWizardViewStateDescription];
+		
+//		UIImage *iconimage=[UIImage imageWithPDFNamed:[NSString stringWithFormat:@"%@_%@.pdf",_uploadImage.feature.tag,_uploadImage.category.tag] atSize:_categoryIconView.size];
+//		_categoryIconView.image=iconimage;
+		
     }
 	
 }

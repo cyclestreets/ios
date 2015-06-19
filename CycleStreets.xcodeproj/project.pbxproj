@@ -205,10 +205,6 @@
 		2804019E1B34213200DE0EBA /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D91B34213200DE0EBA /* routesigns_other.pdf */; };
 		2804019F1B34213200DE0EBA /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D91B34213200DE0EBA /* routesigns_other.pdf */; };
 		280401A01B34213200DE0EBA /* routesigns_other.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400D91B34213200DE0EBA /* routesigns_other.pdf */; };
-		280401A11B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
-		280401A21B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
-		280401A31B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
-		280401A41B34213200DE0EBA /* shadow.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DA1B34213200DE0EBA /* shadow.pdf */; };
 		280401A51B34213200DE0EBA /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DB1B34213200DE0EBA /* signs_bad.pdf */; };
 		280401A61B34213200DE0EBA /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DB1B34213200DE0EBA /* signs_bad.pdf */; };
 		280401A71B34213200DE0EBA /* signs_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400DB1B34213200DE0EBA /* signs_bad.pdf */; };
@@ -1952,7 +1948,6 @@
 		280400D71B34213200DE0EBA /* routesigns_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_bad.pdf; sourceTree = "<group>"; };
 		280400D81B34213200DE0EBA /* routesigns_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_good.pdf; sourceTree = "<group>"; };
 		280400D91B34213200DE0EBA /* routesigns_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = routesigns_other.pdf; sourceTree = "<group>"; };
-		280400DA1B34213200DE0EBA /* shadow.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = shadow.pdf; sourceTree = "<group>"; };
 		280400DB1B34213200DE0EBA /* signs_bad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_bad.pdf; sourceTree = "<group>"; };
 		280400DC1B34213200DE0EBA /* signs_good.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_good.pdf; sourceTree = "<group>"; };
 		280400DD1B34213200DE0EBA /* signs_other.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = signs_other.pdf; sourceTree = "<group>"; };
@@ -3171,7 +3166,6 @@
 				280400D71B34213200DE0EBA /* routesigns_bad.pdf */,
 				280400D81B34213200DE0EBA /* routesigns_good.pdf */,
 				280400D91B34213200DE0EBA /* routesigns_other.pdf */,
-				280400DA1B34213200DE0EBA /* shadow.pdf */,
 				280400DB1B34213200DE0EBA /* signs_bad.pdf */,
 				280400DC1B34213200DE0EBA /* signs_good.pdf */,
 				280400DD1B34213200DE0EBA /* signs_other.pdf */,
@@ -4606,7 +4600,6 @@
 				2811C49D166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C49F166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
 				2811C4A1166CCD5F00592560 /* UIActivityMail.png in Resources */,
-				280401A11B34213200DE0EBA /* shadow.pdf in Resources */,
 				28A9999519E71FBC0050C3E8 /* default.css in Resources */,
 				2811C4A5166CCD5F00592560 /* UIActivityTwitter.png in Resources */,
 				2811C4C1166CE68F00592560 /* UIActivitySMS.png in Resources */,
@@ -4671,7 +4664,6 @@
 				2834361915DD5DC300B00FD5 /* CSIcon_MapArrow_end@2x.png in Resources */,
 				280401461B34213200DE0EBA /* dutchcycleways_good.pdf in Resources */,
 				2834361A15DD5DC300B00FD5 /* CSIcon_MapArrow_start@2x.png in Resources */,
-				280401A21B34213200DE0EBA /* shadow.pdf in Resources */,
 				2865C24A19D56CE5001C329B /* Icon_nosearchresults@2x.png in Resources */,
 				2834361B15DD5DC300B00FD5 /* UIIcon_cycle_lanes@2x.png in Resources */,
 				2865C24D19D570BA001C329B /* Icon_nosearchresults.png in Resources */,
@@ -5132,7 +5124,6 @@
 				280401AC1B34213200DE0EBA /* signs_good.pdf in Resources */,
 				28A263B41AE65AB4006C09A7 /* Icon_norecentroutes.png in Resources */,
 				2804019C1B34213200DE0EBA /* routesigns_good.pdf in Resources */,
-				280401A41B34213200DE0EBA /* shadow.pdf in Resources */,
 				28A263B51AE65AB4006C09A7 /* welcome_CS@2x.jpg in Resources */,
 				28A263B61AE65AB4006C09A7 /* CSBarButton_location@2x.png in Resources */,
 				28A263B71AE65AB4006C09A7 /* Icon_nofavroutes@2x.png in Resources */,
@@ -5287,7 +5278,6 @@
 				28FA8A7219E454E80040EA46 /* CSRouteDetailsViewController.xib in Resources */,
 				28FA8A7319E454E80040EA46 /* RouteSegmentView.xib in Resources */,
 				28FA8A7519E454E80040EA46 /* RouteListView.xib in Resources */,
-				280401A31B34213200DE0EBA /* shadow.pdf in Resources */,
 				280401871B34213200DE0EBA /* road_other.pdf in Resources */,
 				286FAE771A19087E00AA2510 /* Icon_nosavedlocations@2x.png in Resources */,
 				28CD80721A6E91AF00821072 /* BSMapStyle.png in Resources */,

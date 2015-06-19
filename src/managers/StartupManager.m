@@ -21,6 +21,7 @@
 #import "PhotoManager.h"
 #import "PhotoCategoryManager.h"
 #import "CSBingSatelliteMapSource.h"
+#import "CycleStreets.h"
 
 @interface StartupManager(Private)
 
@@ -67,6 +68,8 @@
 	
 	// All startup options are synchronous so will return error before
 	// the next one is executed
+	
+	[CycleStreets sharedInstance];
 	
 	// load default settings
 	[UserSettingsManager sharedInstance];

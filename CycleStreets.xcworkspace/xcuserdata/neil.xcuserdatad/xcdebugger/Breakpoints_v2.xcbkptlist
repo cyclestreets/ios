@@ -232,11 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/controllers/PhotoWizard/PhotoWizardViewController.m"
-            timestampString = "435574824.787069"
+            timestampString = "456411463.355289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1448"
-            endingLineNumber = "1448"
+            startingLineNumber = "1455"
+            endingLineNumber = "1455"
             landmarkName = "-textViewDidChange:"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/controllers/PhotoWizard/PhotoWizardViewController.m"
-            timestampString = "435574824.787069"
+            timestampString = "456411463.355289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1501"
-            endingLineNumber = "1501"
+            startingLineNumber = "1508"
+            endingLineNumber = "1508"
             landmarkName = "-uploadPhoto:"
             landmarkType = "5">
          </BreakpointContent>
@@ -970,6 +970,38 @@
             startingLineNumber = "216"
             endingLineNumber = "216"
             landmarkName = "-createNonPersistentUI"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib/categories/UIImage+PDF/UIImage+PDF.m"
+            timestampString = "456410717.373132"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "+imageWithPDFURL:atSize:atPage:preserveAspectRatio:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lib/categories/UIImage+PDF/PDFView.m"
+            timestampString = "456410750.133077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "+renderIntoContext:url:data:size:page:preserveAspectRatio:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
