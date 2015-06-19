@@ -24,6 +24,7 @@
 #import "ApplicationXMLParser.h"
 #import "BUDataSourceManager.h"
 #import "LeisureRouteVO.h"
+#import <NSObject+BKBlockExecution.h>
 
 static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
@@ -983,7 +984,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"route_%@", fileid]];
 	
-	BetterLog(@"routeFile=%@",routeFile);
+	//BetterLog(@"routeFile=%@",routeFile);
 	
 	NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:routeFile];
 	
@@ -1015,6 +1016,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 	
 	BetterLog(@"routesDirectory save: result %i",result);
 }
+
+
+-(void)saveRoutesInBackground:(NSMutableArray*)arr{
+	
+	__weak __typeof(&*self)weakSelf = self;
+	[self bk_performBlockInBackground:^(id obj) {
+		
+		for(RouteVO *route in arr){
+			[weakSelf saveRoute:route];
+		}
+		
+	} afterDelay:0];
+	
+	
+}
+
 
 
 - (void)removeRouteFile:(RouteVO*)route{

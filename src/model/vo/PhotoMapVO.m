@@ -144,8 +144,19 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 }
 
 -(NSString*)categoryIconString{
+	
 	if(_metacategoryId!=nil && _categoryId!=nil){
-		return [NSString stringWithFormat:@"%@_%@.pdf",_categoryId,_metacategoryId];
+		
+		// there are 3 meta categories that map to neutral
+		NSArray *neutralStrs=@[@"other",@"any",@"event"];
+		NSString *metasuffix=_metacategoryId;
+		
+		if([neutralStrs indexOfObject:_metacategoryId]!=NSNotFound){
+			metasuffix=@"neutral";
+		}
+		
+		return [NSString stringWithFormat:@"%@_%@.pdf",_categoryId,metasuffix];
+		
 	}else{
 		return @"bicycles_other.pdf";
 	}

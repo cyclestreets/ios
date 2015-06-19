@@ -366,7 +366,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		if(route.dateString==nil){
 			
 			NSDate *newdate=[NSDate dateWithTimeIntervalSince1970:[route.date integerValue]];
-			NSString *dateStr=[NSDate stringFromDate:newdate withFormat:@"y-MM-dd HH:mm:ss"];
+			NSString *dateStr=[NSDate stringFromDate:newdate withFormat:[NSDate dbFormatString]];
 			if(newdate!=nil)
 				route.date=dateStr;
 			

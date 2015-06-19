@@ -48,6 +48,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(RouteManager);
 
 -(RouteVO*)loadRouteForFileID:(NSString*)fileid;
 - (void)saveRoute:(RouteVO *)route;
+-(void)saveRoutesInBackground:(NSMutableArray*)arr;
 
 -(void)removeRoute:(RouteVO*)route;
 - (void)removeRouteFile:(RouteVO*)route;

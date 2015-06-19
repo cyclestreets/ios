@@ -149,21 +149,21 @@
 
 -(NSString*)dateString{
 	
-	NSDate *newdate=[NSDate dateFromString:[self date] withFormat:@"y-MM-dd HH:mm:ss"];		
+	NSDate *newdate=[NSDate dateFromString:[self date] withFormat:[NSDate dbFormatString]];
 	return [NSDate stringFromDate:newdate withFormat:@"eee d MMMM y HH:mm"];
 	
 }
 
 -(NSString*)dateOnlyString{
 	
-	NSDate *newdate=[NSDate dateFromString:[self date] withFormat:@"y-MM-dd HH:mm:ss"];		
+	NSDate *newdate=[NSDate dateFromString:[self date] withFormat:[NSDate dbFormatString]];
 	return [NSDate stringFromDate:newdate withFormat:@"y-MM-dd 00:00:00"];
 	
 }
 
 -(NSDate*)dateObject{
 	
-	return [NSDate dateFromString:[self date] withFormat:@"y-MM-dd HH:mm:ss"];	
+	return [NSDate dateFromString:[self date] withFormat:[NSDate dbFormatString]];	
 	
 }
 

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "RouteManager.h"
 #import "GlobalUtilities.h"
+#import "NSDate+Helper.h"
 #import <NSObject+BKBlockExecution.h>
 
 @interface SavedRoutesManager(Private)
@@ -72,6 +73,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	NSMutableArray *recentarr=[[NSMutableArray alloc]init];
 	NSMutableArray *orphanarr=[[NSMutableArray alloc]init];
 	
+	NSMutableArray *invalidDateArr=[NSMutableArray array];
+	
 	for(NSString *key in _routeidStore){
 		
 		NSArray *routes=[_routeidStore objectForKey:key];
@@ -79,6 +82,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		for(NSString *routeid in routes){
 		
 			RouteVO *route=[[RouteManager sharedInstance] loadRouteForFileID:routeid];
+			
+			// migrate routes that the api has returned invalid dates for
+			// RouteManager will re-save these so this should only happen once
+			// we pre fix this in the xml parser to stop future occurences while the server fix is done.
+			if(route.dateString==nil){
+				
+				NSDate *newdate=[NSDate dateWithTimeIntervalSince1970:[route.date integerValue]];
+				NSString *dateStr=[NSDate stringFromDate:newdate withFormat:[NSDate dbFormatString]];
+				if(newdate!=nil){
+					route.date=dateStr;
+					[invalidDateArr addObject:route];
+				}
+			}
 			
 			if(route!=nil){
 				if([key isEqualToString:SAVEDROUTE_FAVS]){
@@ -99,6 +115,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	// v1>v2 transition method
 	[self transferOldFavouritesToRecents];
+	
+	if(invalidDateArr.count>0)
+		[[RouteManager sharedInstance] saveRoutesInBackground:invalidDateArr];
 	
 	if(orphanarr.count>0)
 		[self purgeOrphanedRoutes:orphanarr];
