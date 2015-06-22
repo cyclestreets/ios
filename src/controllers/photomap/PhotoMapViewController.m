@@ -207,6 +207,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	if (annotationView == nil){
 		annotationView = [[CSPhotomapAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
 		annotationView.enabled=YES;
+		annotationView.draggable=NO;
 				
 	} else {
 		annotationView.annotation = annotation;
@@ -245,9 +246,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		break;
 	}
 	
+	[_mapView deselectAnnotation:annotation animated:NO];
 	
 }
-
 
 
 
