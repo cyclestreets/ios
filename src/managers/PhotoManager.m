@@ -429,7 +429,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 	if(_uploadPhoto==nil)
 		return ZERO;
 	
-	return _uploadPhoto.uploadedPhotoId;
+	if(_uploadPhoto.uploadedPhotoId!=nil){
+		return _uploadPhoto.uploadedPhotoId;
+	}else{
+		return ZERO;
+	}
 }
 
 
