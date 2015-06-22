@@ -546,8 +546,8 @@ Once uploaded they'll appear in the Report section.</string>
                         <outlet property="delegate" destination="-1" id="wK2-tg-tCx"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Uu9-Dg-sZ2">
-                    <rect key="frame" x="112" y="216" width="97" height="100"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Uu9-Dg-sZ2">
+                    <rect key="frame" x="107" y="216" width="107" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>

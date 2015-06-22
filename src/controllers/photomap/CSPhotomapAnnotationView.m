@@ -51,7 +51,7 @@
 		switch (annotation.dataProvider.mediaType) {
 			case PhotoMapMediaType_Image:
 			{
-				UIImage *image=[UIImage imageWithPDFNamed:annotation.dataProvider.categoryIconString fitSize:CGSizeMake(40,40)];
+				UIImage *image=[UIImage imageWithPDFNamed:annotation.dataProvider.categoryIconString atWidth:40];
 				if(image==nil){
 					image=[UIImage imageWithPDFNamed:@"bicycles_other.pdf" fitSize:CGSizeMake(40,40)];
 				}
