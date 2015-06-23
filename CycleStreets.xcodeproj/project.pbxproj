@@ -4316,7 +4316,7 @@
 						DevelopmentTeam = 4LJ34GQZ65;
 					};
 					28A2630D1AE65AB4006C09A7 = {
-						DevelopmentTeam = 4LJ34GQZ65;
+						DevelopmentTeam = G27Q6UB594;
 					};
 					28FA8A3B19E454E80040EA46 = {
 						DevelopmentTeam = 4LJ34GQZ65;
@@ -5526,7 +5526,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
+			shellScript = "/Users/neil/iPhone/Applications/AppCore/external/Crashlytics/Fabric.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634 e0d6b0af9c38b33eb7fdb7660df951f9a867cd574b61f41b9dd6c8d630f48f98";
 		};
 		28FA8A3C19E454E80040EA46 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5554,7 +5554,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../../AppCore/external/Crashlytics/Crashlytics.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634";
+			shellScript = "/Users/neil/iPhone/Applications/AppCore/external/Crashlytics/Fabric.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634 e0d6b0af9c38b33eb7fdb7660df951f9a867cd574b61f41b9dd6c8d630f48f98";
 		};
 		28FA8BA719E454E80040EA46 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6587,9 +6587,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID = mobile;
+				BUNDLE_ID = "iphone-dev";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6634,10 +6634,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID = "cns-adhoc";
+				BUNDLE_ID = iphone;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Stoke-on-Trent City Council (G27Q6UB594)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6665,7 +6665,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
+				PROVISIONING_PROFILE = "508c2b4b-0253-469b-b6d2-0f5d047c67d4";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6680,7 +6680,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID = "cns-adhoc";
+				BUNDLE_ID = "iphone-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6728,7 +6728,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID = "cns-dev";
+				BUNDLE_ID = "iphone-dev";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
@@ -6785,7 +6785,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID = mobile;
+				BUNDLE_ID = iphone;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
@@ -6847,7 +6847,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID = "cns-adhoc";
+				BUNDLE_ID = "iphone-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

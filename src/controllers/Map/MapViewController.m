@@ -1634,7 +1634,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 -(void)createAlertForType:(MapAlertType)type{
 	
 	UIAlertView		*alert= [[UIAlertView alloc]
-							 initWithTitle:@"CycleStreets"
+							 initWithTitle:APPLICATIONNAME
 							 message:nil
 							 delegate:self
 							 cancelButtonTitle:@"Cancel"

@@ -15,7 +15,7 @@
 	<key>CFBundleIcons</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>net.cyclestreets.$(BUNDLE_ID)</string>
+	<string>com.stokecc.cns.$(BUNDLE_ID)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -43,6 +43,20 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>163</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>ea3a63e4bd4d920df480d1f6635e7e38b20e6634</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>

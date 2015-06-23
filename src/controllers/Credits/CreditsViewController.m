@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "CreditsViewController.h"
 #import "GlobalUtilities.h"
-
+#import "BuildTargetConstants.h"
 
 @interface CreditsViewController()<UIWebViewDelegate>
 
@@ -195,7 +195,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 	BetterLog(@"webView:didFailLoadWithError");
 	if (self.failAlert == nil) {
-		self.failAlert = [[UIAlertView alloc] initWithTitle:@"CycleStreets"
+		self.failAlert = [[UIAlertView alloc] initWithTitle:APPLICATIONNAME
 													 message:@"Unable to load web page."
 													delegate:nil
 										   cancelButtonTitle:@"OK"

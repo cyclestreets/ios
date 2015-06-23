@@ -96,7 +96,7 @@
 	_imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
 	_imageLabel.font=[UIFont systemFontOfSize:13];
 	_imageLabel.textColor=UIColorFromRGB(0x666666);
-	_imageLabel.hasShadow=YES;
+	_imageLabel.hasShadow=NO;
 	_imageLabel.multiline=YES;
 	[_viewContainer addSubview:_imageLabel];
 	
