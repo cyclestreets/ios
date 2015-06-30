@@ -75,9 +75,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	NSMutableArray *invalidDateArr=[NSMutableArray array];
 	
-	for(NSString *key in _routeidStore){
+	NSMutableDictionary *routeids=[[NSMutableDictionary alloc] initWithDictionary:_routeidStore copyItems:YES];
+	
+	for(NSString *key in routeids){
 		
-		NSArray *routes=[_routeidStore objectForKey:key];
+		NSArray *routes=[routeids objectForKey:key];
 		
 		for(NSString *routeid in routes){
 		
@@ -123,39 +125,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 		[self purgeOrphanedRoutes:orphanarr];
 	
 }
-
-
-#pragma mark - Legacy migration methods
-
-
-//
-/***********************************************
- * @description			v3 > CoreData migration
- ***********************************************/
-//
-
--(void)migrateFileRoutesToCoreData{
-	
-	
-	// get route ids
-	
-	// routes need new storeType property (fav/recent)
-	
-	// need new RouteModel class
-	// RouteVO *route=[[RouteManager sharedInstance] loadRouteForFileID:routeid];
-	
-	
-	// then create new RouteModel class and initialize with data from RouteVO
-	
-	// set storeType
-	
-	// once all done, remove legacy userroutes dir & indicies file
-	
-	// re try using fetchedresults controllers
-	
-}
-
-
 
 
 

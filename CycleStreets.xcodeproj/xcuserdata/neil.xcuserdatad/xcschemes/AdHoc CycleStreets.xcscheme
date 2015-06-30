@@ -20,6 +20,20 @@
                ReferencedContainer = "container:CycleStreets.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "28E4A23D1B3C09AD00545D0D"
+               BuildableName = "CycleStreets Tests.xctest"
+               BlueprintName = "CycleStreets Tests"
+               ReferencedContainer = "container:CycleStreets.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,6 +42,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Adhoc">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "28E4A23D1B3C09AD00545D0D"
+               BuildableName = "CycleStreets Tests.xctest"
+               BlueprintName = "CycleStreets Tests"
+               ReferencedContainer = "container:CycleStreets.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

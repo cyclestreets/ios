@@ -22,6 +22,8 @@
 }
 
 + (BOOL)hasChildrenForParentElement:(TBXMLElement*)aParentXMLElement{
+	if(aParentXMLElement==nil)
+		return NO;
 	TBXMLElement * xmlElement = aParentXMLElement->firstChild;
 	if(xmlElement!=nil){
 		return YES;
