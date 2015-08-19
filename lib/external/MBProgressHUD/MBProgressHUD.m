@@ -600,7 +600,8 @@
     }
 	
 	if (removeFromSuperViewOnHide) {
-		[self removeFromSuperview];
+		if(self.superview!=nil)
+			[self removeFromSuperview];
 	}
 }
 

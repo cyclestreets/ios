@@ -30,6 +30,7 @@
 #import "CSMapSource.h"
 #import "CSMapTileService.h"
 #import "UIImage+PDF.h"
+#import "HudManager.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -1511,6 +1512,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(IBAction)uploadPhoto:(id)sender{
 	
+	
+	if(_uploadImage.image==nil){
+		[[HudManager sharedInstance]showHudWithType:HUDWindowTypeError withTitle:@"Image missing" andMessage:@"You haven't selected an image to upload, please check and try again." andDelay:3 andAllowTouch:NO];
+		return;
+	}
+
 	
     if ([UserAccount sharedInstance].isLoggedIn==NO) {
 		
