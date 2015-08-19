@@ -79,7 +79,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	for(NSString *key in routeids){
 		
-		NSArray *routes=[routeids objectForKey:key];
+		NSArray *routes=[[routeids objectForKey:key] copy];
 		
 		for(NSString *routeid in routes){
 		
@@ -88,15 +88,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 			// migrate routes that the api has returned invalid dates for
 			// RouteManager will re-save these so this should only happen once
 			// we pre fix this in the xml parser to stop future occurences while the server fix is done.
-			if(route.dateString==nil){
-				
-				NSDate *newdate=[NSDate dateWithTimeIntervalSince1970:[route.date integerValue]];
-				NSString *dateStr=[NSDate stringFromDate:newdate withFormat:[NSDate dbFormatString]];
-				if(newdate!=nil){
-					route.date=dateStr;
-					[invalidDateArr addObject:route];
+			if (route!=nil) {
+				if(route.dateString==nil){
+					
+					NSDate *newdate=[NSDate dateWithTimeIntervalSince1970:[route.date integerValue]];
+					NSString *dateStr=[NSDate stringFromDate:newdate withFormat:[NSDate dbFormatString]];
+					if(newdate!=nil){
+						route.date=dateStr;
+						[invalidDateArr addObject:route];
+					}
 				}
 			}
+			
 			
 			if(route!=nil){
 				if([key isEqualToString:SAVEDROUTE_FAVS]){
