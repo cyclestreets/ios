@@ -1943,6 +1943,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	}else if ([segue.identifier isEqualToString:@"LeisureListViewSegue"]){
 		
 		LeisureListViewController *controller=(LeisureListViewController*)segue.destinationViewController;
+		controller.waypointArray=_waypointArray;
 		
 		controller.transitioningDelegate = self;
 		controller.modalPresentationStyle = UIModalPresentationCustom;

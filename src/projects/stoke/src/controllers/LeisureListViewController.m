@@ -16,6 +16,7 @@
 #import "StringUtilities.h"
 #import "CSTableLoadingCellView.h"
 #import "CSOverlayPushTransitionAnimator.h"
+#import "LeisureViewController.h"
 
 @interface LeisureListViewController()<UITableViewDataSource,UITableViewDelegate,UIViewControllerTransitioningDelegate,CSOverlayPushTransitionAnimatorProtocol>
 
@@ -265,7 +266,8 @@
 	
 	if ([segue.identifier isEqualToString:@"LeisureViewSegue"]){
 		
-		LeisureListViewController *controller=(LeisureListViewController*)segue.destinationViewController;
+		LeisureViewController *controller=(LeisureViewController*)segue.destinationViewController;
+		controller.waypointArray=_waypointArray;
 		
 		controller.transitioningDelegate = self;
 		controller.modalPresentationStyle = UIModalPresentationCustom;
