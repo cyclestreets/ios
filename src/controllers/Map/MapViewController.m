@@ -1848,6 +1848,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	[self hideAddPointView];
 }
 
+-(IBAction)didSelectCreateLeisureRouteButton:(id)sender{
+	
+	[self performSegueWithIdentifier:@"LeisureViewSegue" sender:self];
+	
+	[self hideAddPointView];
+}
 
 
 

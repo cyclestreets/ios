@@ -6521,7 +6521,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "80A320A2-7BF3-4900-BBB7-F68BD8CB359F";
+				PROVISIONING_PROFILE = "507015f5-c41c-48c7-bf0e-efd28bcc5eaa";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6616,7 +6616,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "80A320A2-7BF3-4900-BBB7-F68BD8CB359F";
+				PROVISIONING_PROFILE = "507015f5-c41c-48c7-bf0e-efd28bcc5eaa";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6663,7 +6663,7 @@
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
+				PROVISIONING_PROFILE = "508c2b4b-0253-469b-b6d2-0f5d047c67d4";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6683,6 +6683,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6731,6 +6732,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stoke-on-Trent City Council (G27Q6UB594)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6777,6 +6779,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6804,7 +6807,7 @@
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
+				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -7124,7 +7127,7 @@
 					"-licucore",
 					"-ObjC",
 				);
-				PROVISIONING_PROFILE = "A1154760-7263-4DD3-9482-A63E00406F8B";
+				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7257,7 +7260,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "9e7c271a-d95e-477a-97d8-033108509c69";
+				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;

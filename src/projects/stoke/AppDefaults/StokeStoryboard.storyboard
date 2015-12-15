@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="uZG-hY-a5B">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <scenes>
         <!--First Run View Controller-->
@@ -19,6 +19,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Tzv-0R-1VN">
                                         <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,6 +30,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
@@ -45,6 +47,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wUx-Mu-hBe">
                                                 <rect key="frame" x="10" y="5" width="260" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <string key="text">Welcome to the Cycle North Staffs app
 
 </string>
@@ -55,6 +58,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cdd-XH-4rJ">
                                                 <rect key="frame" x="10" y="30" width="260" height="113"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <string key="text">The app is here to help you to get the most out of your cycling.
 
 Just click on a start and finish point and then Plan for a customised route. You can also search for streets and postcodes easily, and browse points of interest such as bike shops.
@@ -66,22 +70,27 @@ Just click on a start and finish point and then Plan for a customised route. You
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome.jpg" id="1GJ-gb-Ink">
                                                 <rect key="frame" x="10" y="149" width="260" height="140"/>
+                                                <animations/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9H9-R1-q4r">
                                                 <rect key="frame" x="12" y="294" width="260" height="175"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <string key="text">Stoke-on-Trent and Newcastle-under-Lyme have over 160 km of cycle routes including many quiet off-road routes including greenways, canal towpaths and river routes where you can get quickly and safely from A to B as well as explore the many tourist attractions on offer. And with over 1,380 hectares of parks and open spaces, Stoke-on-Trent is one of the greenest cities in the UK with some spectacular countryside, including the Peak District, right on your doorstep.</string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                                 <color key="textColor" red="0.34509803919999998" green="0.38823529410000002" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -97,7 +106,7 @@ Just click on a start and finish point and then Plan for a customised route. You
             </objects>
             <point key="canvasLocation" x="-3981" y="578"/>
         </scene>
-        <!--Save Location Create View Controller-->
+        <!--Menu Data Source-->
         <scene sceneID="6zR-Dj-gMD">
             <objects>
                 <viewController storyboardIdentifier="SaveLocationCreateViewController" id="obc-HC-sMg" customClass="SaveLocationCreateViewController" sceneMemberID="viewController">
@@ -112,11 +121,13 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ivk-hG-9mu">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
@@ -125,6 +136,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location name..." adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" id="bsA-0W-k8z">
                                 <rect key="frame" x="16" y="174" width="248" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
@@ -134,6 +146,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mRP-Ps-PTb">
                                 <rect key="frame" x="155" y="219" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -148,6 +161,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Q4J-Y3-tjT">
                                 <rect key="frame" x="16" y="219" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -162,6 +176,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <view contentMode="scaleToFill" id="2jR-CE-uQE" customClass="BUHorizontalMenuView">
                                 <rect key="frame" x="16" y="95" width="248" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <outlet property="menuDataSource" destination="obc-HC-sMg" id="TDM-pw-dDi"/>
@@ -175,17 +190,20 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the location type and give it a name then press Save to add it your list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sKt-xK-6UG">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.46234407420000001" green="0.70104886889999996" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.9137254901960784" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -204,7 +222,7 @@ Just click on a start and finish point and then Plan for a customised route. You
             </objects>
             <point key="canvasLocation" x="-3604" y="578"/>
         </scene>
-        <!--Leisure View Controller-->
+        <!--Menu Data Source-->
         <scene sceneID="U8j-MZ-tV6">
             <objects>
                 <viewController id="6SS-Xp-tb0" customClass="LeisureViewController" sceneMemberID="viewController">
@@ -219,11 +237,13 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leisure route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HLD-hj-Xy5">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
@@ -232,6 +252,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="rO7-01-kPm">
                                 <rect key="frame" x="16" y="95" width="248" height="29"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <animations/>
                                 <segments>
                                     <segment title="Duration"/>
                                     <segment title="Distance"/>
@@ -251,6 +272,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="k2f-hE-6vp">
                                         <rect key="frame" x="20" y="0.0" width="47" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -260,6 +282,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="120" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="ia3-Ei-I9d">
                                         <rect key="frame" x="221" y="0.0" width="47" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -269,6 +292,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="60 mins" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="eeh-Hw-69c">
                                         <rect key="frame" x="163" y="36" width="105" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -278,6 +302,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" id="MEB-rN-3nZ">
                                         <rect key="frame" x="18" y="11" width="252" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="tintColor" red="0.72941176470588232" green="0.20392156862745098" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="leisure-slider"/>
@@ -287,11 +312,13 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </slider>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YDj-sl-aIf">
                                 <rect key="frame" x="16" y="350" width="248" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Calculate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -306,6 +333,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a circular route based on a duration or a distance." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1aW-XK-I50">
                                 <rect key="frame" x="16" y="45" width="248" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.34901961679999999" green="0.38823533059999998" blue="0.45882356169999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
@@ -313,6 +341,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Optionally choose Points of Interest to route via." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uu0-83-G2X">
                                 <rect key="frame" x="16" y="279" width="108" height="55"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.34901961679999999" green="0.38823533059999998" blue="0.45882356169999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
@@ -320,6 +349,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UiR-sh-1wj">
                                 <rect key="frame" x="132" y="279" width="132" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="POIs">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -334,6 +364,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="none selected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yXm-iu-xUB">
                                 <rect key="frame" x="132" y="312" width="132" height="22"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.34901961679999999" green="0.38823533059999998" blue="0.45882356169999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
@@ -341,16 +372,19 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <view contentMode="scaleToFill" id="j0x-CZ-LuR">
                                 <rect key="frame" x="10" y="207" width="260" height="1"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.81568634510000004" green="0.83921575550000005" blue="0.83921575550000005" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="rS8-P9-uvb">
                                 <rect key="frame" x="10" y="266" width="260" height="1"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.81568634510000004" green="0.83921575550000005" blue="0.83921575550000005" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="n5j-FO-NEn" customClass="BUHorizontalMenuView">
                                 <rect key="frame" x="132" y="216" width="132" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="menuDataSource" destination="6SS-Xp-tb0" id="TTi-l4-nsn"/>
@@ -360,13 +394,16 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a waypoint to start from." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g6F-rj-oK8">
                                 <rect key="frame" x="16" y="216" width="108" height="41"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.34901961679999999" green="0.38823533059999998" blue="0.45882356169999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XAP-cW-LWc"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="280" height="400"/>
@@ -401,6 +438,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="g4V-Xp-Y69">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -408,6 +446,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BX1-5F-K7E">
                                         <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -418,6 +457,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.90588235289999997" green="0.25882352939999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
@@ -426,6 +466,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gaR-gc-Nll" customClass="FMMoveTableView">
                                 <rect key="frame" x="0.0" y="84" width="280" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="gdo-qn-vyO" id="0D0-4u-4vt"/>
@@ -439,17 +480,20 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add saved locations by selecting a waypoint and using the Saved location icon." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hkE-Xz-EMt">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.87058823529411766" green="0.41960784313725491" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -476,6 +520,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="rA7-CW-iZg">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             </mapView>
@@ -486,6 +531,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NiC-wX-yHv" userLabel="poi">
                                         <rect key="frame" x="8" y="-4" width="53" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_poi.png"/>
                                         <connections>
@@ -495,15 +541,27 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tUe-x7-KK1" userLabel="leisure">
                                         <rect key="frame" x="93" y="-2" width="53" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_leisure.png"/>
                                         <connections>
                                             <action selector="didSelectLeisureRouteButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="rSh-7V-bqG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Fb4-Mb-lgX" userLabel="createleisure">
+                                        <rect key="frame" x="133" y="-2" width="53" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <animations/>
+                                        <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="CSBarButton_leisure.png"/>
+                                        <connections>
+                                            <action selector="didSelectCreateLeisureRouteButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="wqN-Ar-GPg"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2b-hp-s4z" userLabel="saveloc">
                                         <rect key="frame" x="184" y="-4" width="56" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_saveloc.png"/>
                                         <connections>
@@ -513,6 +571,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iHQ-O9-9wh" userLabel="waypoints">
                                         <rect key="frame" x="270" y="-2" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSTabBar_plan_route.png"/>
                                         <connections>
@@ -520,6 +579,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="AddPointView"/>
@@ -528,12 +588,14 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Y3q-ji-xW0">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <items>
                                     <barButtonItem style="plain" id="iUg-XP-gWd">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="euT-Dn-aMh">
                                             <rect key="frame" x="16" y="7" width="46" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <state key="normal" title="Button">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -546,6 +608,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="gMu-jU-Xl7" customClass="ExpandedUILabel">
                                 <rect key="frame" x="100" y="484" width="210" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -561,6 +624,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="4qN-Uv-Egx">
                                 <rect key="frame" x="16" y="80" width="36" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="imageEdgeInsets" minX="-4" minY="2" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="CSBarButton_followuser.png">
@@ -572,6 +636,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                 </connections>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.72941176470588232" green="0.20392156862745098" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                     </view>
@@ -603,6 +668,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This route contains walking sections" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TTc-ic-PII">
                             <rect key="frame" x="82" y="3" width="228" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -612,8 +678,10 @@ Just click on a start and finish point and then Plan for a customised route. You
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="UIIcon_walking.png" id="tFb-WJ-AxN">
                             <rect key="frame" x="3" y="2" width="26" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                         </imageView>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qlj-nd-Sml" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -635,6 +703,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points of interest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W6V-jc-xIq">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -642,6 +711,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1uQ-tp-KAB">
                                         <rect key="frame" x="226" y="13" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -652,6 +722,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
@@ -660,6 +731,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nmU-ou-89a">
                                 <rect key="frame" x="0.0" y="84" width="280" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                 <color key="separatorColor" red="0.88627457620000005" green="0.87843143940000001" blue="0.86274516580000005" alpha="1" colorSpace="deviceRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -675,17 +747,20 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qXi-hN-YTf">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.46234407420000001" green="0.70104886889999996" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="xUd-wk-0dk"/>
@@ -719,6 +794,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waypoints" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6cZ-Cu-gfN">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -726,6 +802,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Upd-Ni-uA7">
                                         <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -736,6 +813,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
@@ -744,6 +822,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iw8-xx-AV8" customClass="FMMoveTableView">
                                 <rect key="frame" x="0.0" y="84" width="280" height="256"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="separatorColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -759,6 +838,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="phm-Hg-nr3">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <string key="text">Select a waypoint to zoom to it.
 Drag a waypoint to re-order it.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
@@ -766,12 +846,14 @@ Drag a waypoint to re-order it.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.46234407420000001" green="0.70104886889999996" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -800,6 +882,7 @@ Drag a waypoint to re-order it.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leisure routes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P0S-97-8NV">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -807,6 +890,7 @@ Drag a waypoint to re-order it.</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sof-3L-QgC">
                                         <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -816,7 +900,21 @@ Drag a waypoint to re-order it.</string>
                                             <action selector="didSelectCancelButton:" destination="lZo-Zl-D2a" eventType="touchUpInside" id="sW2-8Y-hOM"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Z64-rk-0pg">
+                                        <rect key="frame" x="8" y="9" width="46" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <state key="normal" title="Create">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didSelectCreateLeisureRouteButton:" destination="lZo-Zl-D2a" eventType="touchUpInside" id="LIP-fI-Lh6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
@@ -825,6 +923,7 @@ Drag a waypoint to re-order it.</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2jg-uh-hV9">
                                 <rect key="frame" x="0.0" y="82" width="280" height="258"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
                                 <color key="separatorColor" red="0.88627457620000005" green="0.87843143940000001" blue="0.86274516580000005" alpha="1" colorSpace="deviceRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -840,6 +939,7 @@ Drag a waypoint to re-order it.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ju1-gs-MU6">
                                         <rect key="frame" x="-16" y="0.0" width="312" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <string key="text">This section has some suggested leisure routes 
 you might like to try out.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
@@ -847,12 +947,14 @@ you might like to try out.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.87058823529999996" green="0.41960784309999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -860,6 +962,7 @@ you might like to try out.</string>
                     <size key="freeformSize" width="280" height="340"/>
                     <connections>
                         <outlet property="tableView" destination="2jg-uh-hV9" id="wsr-jD-Ix1"/>
+                        <segue destination="6SS-Xp-tb0" kind="modal" identifier="LeisureViewSegue" id="6I0-Kb-RIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kk-tA-9jY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -875,6 +978,7 @@ you might like to try out.</string>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5g7-zV-ycW">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
@@ -897,6 +1001,7 @@ you might like to try out.</string>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="MRk-Al-JRF">
                                 <rect key="frame" x="0.0" y="63" width="320" height="392"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oEv-ga-wtZ" id="lbc-X5-EMy"/>
@@ -910,6 +1015,7 @@ you might like to try out.</string>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route id:" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" id="AQk-7n-JHt">
                                         <rect key="frame" x="15" y="11" width="72" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.63137257099999999" green="0.1019607931" blue="0.078431375319999996" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
@@ -919,6 +1025,7 @@ you might like to try out.</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ppS-Bl-z4c">
                                         <rect key="frame" x="206" y="7" width="103" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" title="Route details">
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -932,6 +1039,7 @@ you might like to try out.</string>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="#17383630292" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" id="QyB-4o-gK8" customClass="CopyLabel">
                                         <rect key="frame" x="90" y="12" width="108" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="0.40000000600000002" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -941,12 +1049,15 @@ you might like to try out.</string>
                                     <view contentMode="scaleToFill" id="EHK-L1-kwK" customClass="MultiLabelLine">
                                         <rect key="frame" x="15" y="39" width="294" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.80000001190000003" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -977,6 +1088,7 @@ you might like to try out.</string>
                     <tabBarItem key="tabBarItem" title="Routes" image="CSTabBar_fav_routes.png" id="kuB-BV-mht"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ejP-nB-g12">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.31372549019607843" green="0.59215686274509804" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
@@ -999,14 +1111,17 @@ you might like to try out.</string>
                             <view contentMode="scaleToFill" id="aBK-HM-EC4" customClass="BorderView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <containerView contentMode="scaleToFill" id="G4N-ML-Z7n">
                                 <rect key="frame" x="0.0" y="44" width="320" height="410"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </containerView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -1047,6 +1162,7 @@ you might like to try out.</string>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GW0-LT-qyO">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -1067,6 +1183,7 @@ you might like to try out.</string>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="skw-5D-0sN">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -1108,6 +1225,7 @@ you might like to try out.</string>
                     <tabBarItem key="tabBarItem" title="Photos" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z42-mk-NG8">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.066666670139999995" green="0.68235296010000002" blue="0.25098040700000002" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
@@ -1129,6 +1247,7 @@ you might like to try out.</string>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="6wb-8l-1Xp">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                     </tabBar>
@@ -1170,6 +1289,7 @@ you might like to try out.</string>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ofu-pv-etR">
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -1191,6 +1311,7 @@ you might like to try out.</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AzW-n8-Rcz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
@@ -1210,6 +1331,7 @@ you might like to try out.</string>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kn7-wQ-vGz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="UB8-Lk-xfo" kind="relationship" relationship="rootViewController" id="6x8-Zj-irX"/>
@@ -1234,12 +1356,13 @@ you might like to try out.</string>
             <objects>
                 <viewController id="NQo-Mm-SvV" customClass="SavedLocationsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AM5-LB-bj2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NG5-wL-qYt" customClass="FMMoveTableView">
                                 <rect key="frame" x="0.0" y="41" width="320" height="414"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="separatorColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1255,17 +1378,20 @@ you might like to try out.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage and rename your saved locations." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v9I-XF-pX5">
                                         <rect key="frame" x="8" y="0.0" width="304" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.46234407420000001" green="0.70104886889999996" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -1290,6 +1416,7 @@ you might like to try out.</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="PK2-R0-KDG">
                                 <rect key="frame" x="0.0" y="44" width="320" height="411"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.92549019607843142" green="0.9137254901960784" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" name="secondarySelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1305,6 +1432,7 @@ you might like to try out.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 of 999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gsD-lD-Kb8">
                                         <rect key="frame" x="239" y="10" width="73" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" red="0.95294117649999999" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1312,17 +1440,20 @@ you might like to try out.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This section has some suggested leisure routes you might like to try out." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z4O-tv-3rY">
                                         <rect key="frame" x="8" y="0.0" width="223" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.46234407420000001" green="0.70104886889999996" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericSubView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Leisure Routes" id="Td5-6E-Ely"/>
@@ -1356,11 +1487,6 @@ you might like to try out.</string>
         <image name="UIIcon_walking.png" width="32" height="32"/>
         <image name="welcome.jpg" width="260" height="144"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="C9o-3z-6WA"/>
     </inferredMetricsTieBreakers>

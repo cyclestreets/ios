@@ -34,7 +34,8 @@
 	if([self isRetinaEnabled]){
 		return @"http://tile.cyclestreets.net/opencyclemap/%li/%li/%li@%ix.png";
 	}else{
-		return @"http://tile.cyclestreets.net/opencyclemap/%li/%li/%li.png";
+		//return @"http://tile.cyclestreets.net/opencyclemap/%li/%li/%li.png";
+		return @"http://tile.thunderforest.com/landscape/%li/%li/%li.png";
 	}
 	
 }
@@ -45,7 +46,8 @@
 	if([self isRetinaEnabled]){
 		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}/{s}.png";
 	}else{
-		return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+		//return @"http://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}.png";
+		return @"http://tile.thunderforest.com/landscape/{z}/{x}/{y}.png";
 	}
 }
 

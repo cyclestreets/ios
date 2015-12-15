@@ -66,7 +66,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	_tabBarController = (UITabBarController *)_window.rootViewController;
 	_tabBarController.delegate = self;
-	_tabBarController.customizableViewControllers = [NSArray arrayWithObjects:nil];
+	_tabBarController.customizableViewControllers = @[];
 
 	[self appendStartUpView];
 	
