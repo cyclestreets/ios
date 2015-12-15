@@ -30,6 +30,10 @@ BOOL const APIREQUIRESIDENTIFIER=YES;
 	return ApplicationBuildTarget_CNS;
 }
 
++(NSString*)defaultMapStyle{
+	return MAPPING_BASE_CYCLENORTH;
+}
+
 +(void)insertAPIIdentifier:(NSMutableDictionary*)requestDict{
 	
 	[requestDict setObject:API_IDENTIFIER forKey:@"username"];

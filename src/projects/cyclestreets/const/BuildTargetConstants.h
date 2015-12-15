@@ -23,6 +23,8 @@ extern BOOL const APIREQUIRESIDENTIFIER;
 
 +(ApplicationBuildTarget)buildTarget;
 
++(NSString*)defaultMapStyle;
+
 +(void)insertAPIIdentifier:(NSMutableDictionary*)requestDict;
 
 @end
