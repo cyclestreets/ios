@@ -8,7 +8,7 @@
 
 #import "SettingsVO.h"
 #import "AppConstants.h"
-
+#import "BuildTargetConstants.h"
 
 @implementation SettingsVO
 
@@ -23,7 +23,7 @@
     if (self) {
         self.plan = @"balanced";
         _speed = @"12";
-        _mapStyle = @"OpenStreetMap";
+		_mapStyle = [BuildTargetConstants defaultMapStyle];
         _imageSize = @"full";
         _routeUnit = @"miles";
 		_showRoutePoint=YES;
