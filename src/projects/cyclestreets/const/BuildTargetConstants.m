@@ -28,6 +28,10 @@ BOOL const APIREQUIRESIDENTIFIER=NO;
 	return ApplicationBuildTarget_CycleStreets;
 }
 
++(NSString*)defaultMapStyle{
+	return MAPPING_BASE_OSM;
+}
+
 +(void)insertAPIIdentifier:(NSMutableDictionary*)requestDict{}
 
 @end
