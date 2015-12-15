@@ -1,6 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, :deployment_target => '7.1'
+use_frameworks!
 
 pod 'AFNetworking', '~> 2.0'
 pod 'SFHFKeychainUtils'

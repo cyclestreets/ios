@@ -37,4 +37,6 @@ enum {
 + (NSString *) uniqueIdentifier;
 +(BOOL)isSimulatorDevice;
 
++ (BOOL) is64BitDevice;
+
 @end

@@ -2021,6 +2021,11 @@
 		280E93711409861300C7AC75 /* UIImage-Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage-Additions.h"; path = "../utilities/UIImage-Additions.h"; sourceTree = "<group>"; };
 		280E93721409861300C7AC75 /* UIImage-Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage-Additions.m"; path = "../utilities/UIImage-Additions.m"; sourceTree = "<group>"; };
 		280E93AE140989E400C7AC75 /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = donate.html; path = html/donate.html; sourceTree = "<group>"; };
+		2810DE7E1C202FDE00740E3B /* objc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = objc.c; sourceTree = "<group>"; };
+		2810DE7F1C202FDE00740E3B /* objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
+		2810DE801C202FDE00740E3B /* NSObject+PXClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PXClass.h"; sourceTree = "<group>"; };
+		2810DE811C202FDE00740E3B /* NSObject+PXSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PXSubclass.h"; sourceTree = "<group>"; };
+		2810DE821C202FDE00740E3B /* NSObject+PXSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PXSubclass.m"; sourceTree = "<group>"; };
 		2811C498166CCD5F00592560 /* UIActivityBlank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityBlank.png; sourceTree = "<group>"; };
 		2811C499166CCD5F00592560 /* UIActivityFacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityFacebook.png; sourceTree = "<group>"; };
 		2811C49A166CCD5F00592560 /* UIActivityMail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityMail.png; sourceTree = "<group>"; };
@@ -2962,6 +2967,18 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		2810DE7D1C202FCB00740E3B /* PixateOS9 */ = {
+			isa = PBXGroup;
+			children = (
+				2810DE7E1C202FDE00740E3B /* objc.c */,
+				2810DE7F1C202FDE00740E3B /* objc.h */,
+				2810DE801C202FDE00740E3B /* NSObject+PXClass.h */,
+				2810DE811C202FDE00740E3B /* NSObject+PXSubclass.h */,
+				2810DE821C202FDE00740E3B /* NSObject+PXSubclass.m */,
+			);
+			path = PixateOS9;
+			sourceTree = "<group>";
+		};
 		2811C497166CCD5F00592560 /* ShareView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3701,6 +3718,7 @@
 			isa = PBXGroup;
 			children = (
 				289EFC4F19ED39E30081E7BB /* CSOverlayTransitionAnimator.h */,
+				2810DE7D1C202FCB00740E3B /* PixateOS9 */,
 				289EFC5019ED39E30081E7BB /* CSOverlayTransitionAnimator.m */,
 				28A719901A0BE60700176949 /* CSOverlayPushTransitionAnimator.h */,
 				28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */,
@@ -6683,6 +6701,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6731,6 +6750,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Stoke-on-Trent City Council (G27Q6UB594)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6777,6 +6797,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",

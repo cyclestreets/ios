@@ -42,7 +42,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>164</string>
+	<string>167</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -59,6 +59,11 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Cyclestreets requires access to your location to provide routing information.</string>
 	<key>SERVERDOMAIN_ID</key>

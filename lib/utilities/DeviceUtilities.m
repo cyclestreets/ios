@@ -180,4 +180,15 @@
 	
 }
 
++ (BOOL) is64BitDevice {
+	
+	if (sizeof(void*) == 4) {
+		return NO;
+		
+	} else if (sizeof(void*) == 8) {
+		return YES;
+	}
+	
+}
+
 @end

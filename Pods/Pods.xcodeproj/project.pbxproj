@@ -63,6 +63,7 @@
 		268216E7A2D9D7D3332ED9E2 /* NSMutableDictionary+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5811CE84F8BA193AAF4565 /* NSMutableDictionary+BlocksKit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		268CDA75D84E588858D7B271 /* PXVector.h in Headers */ = {isa = PBXBuildFile; fileRef = DF95C1711CD5B605C5AEA8E8 /* PXVector.h */; };
 		275CCE1EA5447B9A50C1B534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBBF54658DBF1DDDDA95A41 /* Foundation.framework */; };
+		2810DE8B1C20326900740E3B /* NSObject+PXSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = A1BEC70D14305C358D97F4C4 /* NSObject+PXSubclass.h */; };
 		287AF751F3162ECAFD763C47 /* PXUICollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1021E5EB2082675AFC0C6232 /* PXUICollectionView.h */; };
 		29891F9BEC44D6E19DC030FE /* PixateFreestyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 74BEE5565C093574523ABD25 /* PixateFreestyle.h */; };
 		2A0AE8B5D8E1D3E758C0DBB5 /* PXNonScalingStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 60DA35CD8A76AE5BB700E677 /* PXNonScalingStroke.h */; };
@@ -177,7 +178,6 @@
 		6B18E34DFC8579F7B82B0445 /* PXStylesheetLexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FC3F346ACC6FBB0A33502D2 /* PXStylesheetLexer.h */; };
 		6B385074287018D110ACB309 /* UIWebView+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE1E75FBD174F592FD1BB5 /* UIWebView+BlocksKit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6BA537F1D7A1E363F067815C /* NSObject+BKAssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = E337D78B32B00455F4933DA1 /* NSObject+BKAssociatedObjects.h */; };
-		6D90790ACE52F9F82BCA617F /* NSObject+PXSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = A1BEC70D14305C358D97F4C4 /* NSObject+PXSubclass.h */; };
 		6E3B7BD143BF4559436C500B /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 580E87069FDA50C3EC152DF2 /* UIActivityIndicatorView+AFNetworking.h */; };
 		6F05117FFB2368B526347CD0 /* PXForceLoadPixateCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = B5D485B8925CEE5731E10EC2 /* PXForceLoadPixateCategories.h */; };
 		6F7AD1F3BC227FDDCC5B22A8 /* PXUITextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 87EE3E5B31FDB307ABB2101A /* PXUITextField.h */; };
@@ -1770,12 +1770,12 @@
 				D1B35B2C5466D3044BAE437B /* NSMutableDictionary+PXObject.h in Headers */,
 				55D34C3AF1E6B8931C077029 /* NSObject+PXClass.h in Headers */,
 				B04C17D8718E893C29B0FC68 /* NSObject+PXStyling.h in Headers */,
-				6D90790ACE52F9F82BCA617F /* NSObject+PXSubclass.h in Headers */,
 				7B5DADC843EBF3B752275A9F /* NSScanner+PXFloat.h in Headers */,
 				AB3FA58221E9D36C5E30F3FB /* PXAdjacentSiblingCombinator.h in Headers */,
 				01FCA2189F1F2A65A9888ABB /* PXAnimationInfo.h in Headers */,
 				5E928403EE5E9F25F22F9BDD /* PXAnimationPropertyHandler.h in Headers */,
 				7995C047C27E42FD0A5F941E /* PXAnimationStyler.h in Headers */,
+				2810DE8B1C20326900740E3B /* NSObject+PXSubclass.h in Headers */,
 				C58571F88C5AFF103409CD19 /* PXArc.h in Headers */,
 				35ECC9B5B62A7A0DDC37C440 /* PXArrowRectangle.h in Headers */,
 				3B9C64CA1B37E98FB5F2E5BD /* PXAttributeSelector.h in Headers */,
