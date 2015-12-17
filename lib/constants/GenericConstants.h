@@ -100,6 +100,7 @@ extern NSString *const UITYPE_CONTROLUI;
 extern NSString *const UITYPE_CONTROLUI_HIGH;
 extern NSString *const UITYPE_CONTROLHEADERUI;
 extern NSString *const UITYPE_MODALUI;
+extern NSString *const UITYPE_NAVTABUI;
 extern NSString *const UITYPE_SELFFRAME;
 extern NSString *const UITYPE_IPADDETAIL;
 extern NSString *const UITYPE_MODALTABLEVIEWUI;

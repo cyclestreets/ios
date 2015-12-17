@@ -62,8 +62,11 @@
 	
 	[super viewDidLoad];
 	
-	if(_viewMode==SavedLocationsViewModeModal)
+	if(_viewMode==SavedLocationsViewModeModal){
 		self.UIType=UITYPE_MODALTABLEVIEWUI;
+	}else{
+		self.UIType=UITYPE_NAVTABUI;
+	}
 	
 	
 	[self createPersistentUI];

@@ -106,6 +106,7 @@ NSString *const UITYPE_CONTROLUI=@"UITypeControlNav";
 NSString *const UITYPE_CONTROLUI_HIGH=@"UITypeControlNavHigh";
 NSString *const UITYPE_CONTROLHEADERUI=@"UITypeControlHeaderNav";
 NSString *const UITYPE_MODALUI=@"UITypeModalNav";
+NSString *const UITYPE_NAVTABUI=@"UITypeTabNav";
 NSString *const UITYPE_SELFFRAME=@"UITypeSelfFrame";
 NSString *const UITYPE_IPADDETAIL=@"UITypeiPadDetail";
 NSString *const UITYPE_MODALTABLEVIEWUI=@"UITypeModalTableView";
