@@ -77,6 +77,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 	
 	NSMutableDictionary *routeids=[[NSMutableDictionary alloc] initWithDictionary:_routeidStore copyItems:YES];
 	
+	
 	for(NSString *key in routeids){
 		
 		NSArray *routes=[[routeids objectForKey:key] copy];
@@ -100,7 +101,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 				}
 			}
 			
-			
 			if(route!=nil){
 				if([key isEqualToString:SAVEDROUTE_FAVS]){
 					[favarr addObject:route];
@@ -110,10 +110,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SavedRoutesManager);
 			}else{
 				[orphanarr addObject:routeid];
 			}
+			
 		
 		}
 		
+		
+		
 	}
+	
+	BetterLog(@"Completed saved routes load");
 	
 	self.favouritesdataProvider=favarr;
 	self.recentsdataProvider=recentarr;

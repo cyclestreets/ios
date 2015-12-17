@@ -32,7 +32,7 @@ static NSString *const DATAID = @"PoiListing";
 @end
 
 @implementation POIListviewController
-
+@dynamic delegate;
 
 
 #pragma mark - Notifications

@@ -212,7 +212,10 @@
 
 #pragma mark - UI events
 
-
+-(IBAction)didSelectCancelButton:(id)sender{
+	
+	[self dismissView];
+}
 
 -(IBAction)didSelectCalculateButton:(id)sender{
     

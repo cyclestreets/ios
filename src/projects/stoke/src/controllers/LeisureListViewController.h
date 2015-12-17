@@ -21,6 +21,8 @@ typedef NS_ENUM(NSUInteger, LeisureListViewMode) {
 
 @property (nonatomic,assign)  LeisureListViewMode						viewMode;
 
+@property (nonatomic,assign)  NSArray									*waypointArray;
+
 
 -(void)didDismissWithTouch:(UIGestureRecognizer*)gestureRecogniser;
 

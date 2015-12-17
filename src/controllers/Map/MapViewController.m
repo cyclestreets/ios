@@ -1848,6 +1848,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	[self hideAddPointView];
 }
 
+-(IBAction)didSelectCreateLeisureRouteButton:(id)sender{
+	
+	[self performSegueWithIdentifier:@"LeisureViewSegue" sender:self];
+	
+	[self hideAddPointView];
+}
 
 
 
@@ -1937,6 +1943,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	}else if ([segue.identifier isEqualToString:@"LeisureListViewSegue"]){
 		
 		LeisureListViewController *controller=(LeisureListViewController*)segue.destinationViewController;
+		controller.waypointArray=_waypointArray;
 		
 		controller.transitioningDelegate = self;
 		controller.modalPresentationStyle = UIModalPresentationCustom;

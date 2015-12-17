@@ -15,8 +15,10 @@
 #import "CSUserRoutePagination.h"
 #import "StringUtilities.h"
 #import "CSTableLoadingCellView.h"
+#import "CSOverlayPushTransitionAnimator.h"
+#import "LeisureViewController.h"
 
-@interface LeisureListViewController()<UITableViewDataSource,UITableViewDelegate>
+@interface LeisureListViewController()<UITableViewDataSource,UITableViewDelegate,UIViewControllerTransitioningDelegate,CSOverlayPushTransitionAnimatorProtocol>
 
 
 @property (nonatomic,strong)  NSMutableArray								*dataProvider;
@@ -245,6 +247,12 @@
 }
 
 
+-(IBAction)didSelectCreateLeisureRouteButton:(id)sender{
+	
+	[self performSegueWithIdentifier:@"LeisureViewSegue" sender:self];
+	
+}
+
 
 //
 /***********************************************
@@ -252,14 +260,40 @@
  ***********************************************/
 //
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	
+	[super prepareForSegue:segue sender:sender];
 	
-	
+	if ([segue.identifier isEqualToString:@"LeisureViewSegue"]){
+		
+		LeisureViewController *controller=(LeisureViewController*)segue.destinationViewController;
+		controller.waypointArray=_waypointArray;
+		
+		controller.transitioningDelegate = self;
+		controller.modalPresentationStyle = UIModalPresentationCustom;
+		
+	}	
 }
 
 
 #pragma mark - CSOverlayTransitionProtocol
+
+#pragma mark - UIViewControllerTransitioningDelegate Methods
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+																  presentingController:(UIViewController *)presenting
+																	  sourceController:(UIViewController *)source {
+	
+	CSOverlayPushTransitionAnimator *animator = [CSOverlayPushTransitionAnimator new];
+	animator.presenting = YES;
+	return animator;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+	CSOverlayPushTransitionAnimator *animator = [CSOverlayPushTransitionAnimator new];
+	return animator;
+}
+
 
 -(void)didDismissWithTouch:(UIGestureRecognizer*)gestureRecogniser{
 	

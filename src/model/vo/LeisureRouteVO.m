@@ -52,36 +52,17 @@ static NSString *const RouteTypeDistance=@"Distance";
 	
 	NSArray *valueRange=[LeisureRouteVO typeRangeArrayForRouteType:_routeType];
 	
+	float topvalue=[valueRange.lastObject floatValue];
+	float bottomvalue=[valueRange.firstObject floatValue];
 	
+	float percent=((float)_routeValue/100);
+	_finalScaledValue=percent*(topvalue-bottomvalue);
+	_finalScaledValue+=bottomvalue;
 	
 	if(_routeType==LeisureRouteTypeDistance){
-		
-		NSArray *scaleArr=@[@(1),@(1.2),@(1.5),@(1.75),@(2),@(2.25),@(2.5),@(2.75),@(3),@(3.5),@(4)];
-	
-		int scaleIndex=_routeValue;
-		float scaledValue;
-		scaleIndex=scaleIndex/10;
-		scaledValue=_routeValue*[scaleArr[scaleIndex] floatValue];
-		
-		scaledValue+=[valueRange[0] floatValue];
-		
-		_finalScaledValue=scaledValue;
-		
-		return [NSString stringWithFormat:@"%i %@",(int)scaledValue,[[SettingsManager sharedInstance] routeUnitisMiles] ? scaledValue<2 ? @"mile" : @"miles":@"km"];
+		return [NSString stringWithFormat:@"%i %@",(int)_finalScaledValue,[[SettingsManager sharedInstance] routeUnitisMiles] ? _finalScaledValue<2 ? @"mile" : @"miles":@"km"];
 	}else{
-		
-		NSArray *scaleArr=@[@(1),@(1.2),@(1.5),@(2),@(2.5),@(3),@(3.5),@(4),@(5),@(6),@(7)];
-		
-		int scaleIndex=_routeValue;
-		float scaledValue;
-		scaleIndex=scaleIndex/10;
-		scaledValue=_routeValue*[scaleArr[scaleIndex] floatValue];
-		
-		scaledValue+=[valueRange[0] floatValue];
-		
-		_finalScaledValue=scaledValue;
-		
-		return [NSString stringWithFormat:@"%i mins",(int)scaledValue];
+		return [NSString stringWithFormat:@"%i mins",(int)_finalScaledValue];
 	}
 	
 }
@@ -170,9 +151,14 @@ static NSString *const RouteTypeDistance=@"Distance";
 +(NSArray*)typeRangeArrayForRouteType:(LeisureRouteType)type{
 	
 	if(type==LeisureRouteTypeDistance){
-		return @[@(1),@(400)];
+		if([[SettingsManager sharedInstance] routeUnitisMiles]){
+			return @[@(1),@(10)];
+		}else{
+			return @[@(1),@(16)];
+		}
+		
 	}else{
-		return @[@(30),@(730)];
+		return @[@(15),@(60)];
 	}
 	
 }
