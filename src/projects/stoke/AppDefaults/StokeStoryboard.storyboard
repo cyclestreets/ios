@@ -552,7 +552,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tUe-x7-KK1" userLabel="leisure">
-                                        <rect key="frame" x="93" y="-2" width="53" height="30"/>
+                                        <rect key="frame" x="82" y="-2" width="40" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <animations/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -561,8 +561,18 @@ Just click on a start and finish point and then Plan for a customised route. You
                                             <action selector="didSelectLeisureRouteButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="rSh-7V-bqG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qz9-XF-BTU" userLabel="leisureadd">
+                                        <rect key="frame" x="138" y="-2" width="45" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <animations/>
+                                        <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="CSBarButton_leisure_add.png"/>
+                                        <connections>
+                                            <action selector="didSelectCreateLeisureRouteButton:" destination="gA4-QV-Dgc" eventType="touchUpInside" id="OcH-yw-WSv"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2b-hp-s4z" userLabel="saveloc">
-                                        <rect key="frame" x="184" y="-4" width="56" height="30"/>
+                                        <rect key="frame" x="201" y="-4" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <animations/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -651,6 +661,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                     <connections>
                         <outlet property="addPointView" destination="w7T-3y-25G" id="Hm3-my-Qbu"/>
                         <outlet property="attributionLabel" destination="gMu-jU-Xl7" id="DEt-MS-Ard"/>
+                        <outlet property="createLesureRouteButton" destination="Qz9-XF-BTU" id="FmQ-H8-EIu"/>
                         <outlet property="followUserButton" destination="4qN-Uv-Egx" id="HH9-BJ-dHK"/>
                         <outlet property="mapView" destination="rA7-CW-iZg" id="Jwa-5P-voQ"/>
                         <outlet property="toolBar" destination="Y3q-ji-xW0" id="HwE-4d-aH0"/>
@@ -662,15 +673,16 @@ Just click on a start and finish point and then Plan for a customised route. You
                         <segue destination="QWx-CJ-dLg" kind="modal" identifier="WaypointViewSegue" id="a6i-Ca-Yvv"/>
                         <segue destination="lZo-Zl-D2a" kind="modal" identifier="LeisureListViewSegue" id="8IU-Gf-Gik"/>
                         <segue destination="7yv-kj-Rnj" kind="modal" identifier="FirstRunSegue" id="vBd-VE-C0Y"/>
+                        <segue destination="6SS-Xp-tb0" kind="modal" identifier="LeisureViewSegue" id="80Q-ei-ubQ"/>
                     </connections>
                 </viewController>
                 <view opaque="NO" contentMode="scaleToFill" id="pIs-Lq-mvo">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This route contains walking sections" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TTc-ic-PII">
-                            <rect key="frame" x="82" y="3" width="228" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This route contains walking sections" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TTc-ic-PII">
+                            <rect key="frame" x="57" y="3" width="253" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                             <animations/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -680,7 +692,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="UIIcon_walking.png" id="tFb-WJ-AxN">
                             <rect key="frame" x="3" y="2" width="26" height="26"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                             <animations/>
                         </imageView>
                     </subviews>
@@ -903,19 +915,6 @@ Drag a waypoint to re-order it.</string>
                                             <action selector="didSelectCancelButton:" destination="lZo-Zl-D2a" eventType="touchUpInside" id="sW2-8Y-hOM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Z64-rk-0pg">
-                                        <rect key="frame" x="8" y="9" width="46" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <state key="normal" title="Create">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didSelectCreateLeisureRouteButton:" destination="lZo-Zl-D2a" eventType="touchUpInside" id="LIP-fI-Lh6"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
@@ -965,7 +964,6 @@ you might like to try out.</string>
                     <size key="freeformSize" width="280" height="340"/>
                     <connections>
                         <outlet property="tableView" destination="2jg-uh-hV9" id="wsr-jD-Ix1"/>
-                        <segue destination="6SS-Xp-tb0" kind="modal" identifier="LeisureViewSegue" id="6I0-Kb-RIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kk-tA-9jY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1476,6 +1474,7 @@ you might like to try out.</string>
         <image name="CSBarButton_followuser.png" width="20" height="20"/>
         <image name="CSBarButton_followuser_selected.png" width="20" height="20"/>
         <image name="CSBarButton_leisure.png" width="20" height="20"/>
+        <image name="CSBarButton_leisure_add.png" width="20" height="20"/>
         <image name="CSBarButton_poi.png" width="20" height="20"/>
         <image name="CSBarButton_saveloc.png" width="17" height="20"/>
         <image name="CSTabBar_credits.png" width="30" height="30"/>

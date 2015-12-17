@@ -1485,6 +1485,10 @@
 		28CD80701A6E91AF00821072 /* BSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CD806F1A6E91AF00821072 /* BSMapStyle.png */; };
 		28CD80711A6E91AF00821072 /* BSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CD806F1A6E91AF00821072 /* BSMapStyle.png */; };
 		28CD80721A6E91AF00821072 /* BSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CD806F1A6E91AF00821072 /* BSMapStyle.png */; };
+		28CDBB451C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CDBB441C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png */; };
+		28CDBB461C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CDBB441C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png */; };
+		28CDBB471C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CDBB441C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png */; };
+		28CDBB481C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CDBB441C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png */; };
 		28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */; };
 		28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */; };
 		28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */; };
@@ -2542,6 +2546,7 @@
 		28CBFB011590B76600F74441 /* UIIcon_userphotomap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_userphotomap.png; sourceTree = "<group>"; };
 		28CBFB031590B77400F74441 /* UIIcon_userphotomap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_userphotomap@2x.png"; sourceTree = "<group>"; };
 		28CD806F1A6E91AF00821072 /* BSMapStyle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BSMapStyle.png; path = maps/BSMapStyle.png; sourceTree = "<group>"; };
+		28CDBB441C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_leisure_add@2x.png"; sourceTree = "<group>"; };
 		28D10EB1135D6E54006F1D94 /* UIIcon_bear_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_left@2x.png"; sourceTree = "<group>"; };
 		28D10EB2135D6E54006F1D94 /* UIIcon_bear_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_bear_right@2x.png"; sourceTree = "<group>"; };
 		28D10EB3135D6E54006F1D94 /* UIIcon_straight_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_straight_on@2x.png"; sourceTree = "<group>"; };
@@ -3914,6 +3919,7 @@
 				288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */,
 				28D146041A2F09E2003DD15F /* CSBarButton_followuser@2x.png */,
 				2837815E1A24781900D046A5 /* CSBarButton_leisure@2x.png */,
+				28CDBB441C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png */,
 				28892F6619FFA962000CC52C /* CSBarButton_addPoint@2x.png */,
 				289A20F019EFC867000892A0 /* CSIcon_map_poi@2x.png */,
 				28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */,
@@ -4551,6 +4557,7 @@
 				280401051B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				280401711B34213200DE0EBA /* potholes_bad.pdf in Resources */,
 				283781651A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
+				28CDBB451C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */,
 				280400FD1B34213200DE0EBA /* carstorage_good.pdf in Resources */,
 				28187AA014FCFF4C00A38A17 /* CSIcon_MapArrow_start.png in Resources */,
 				28B6B2F51A5AA5A0002DF099 /* welcome@2x.jpg in Resources */,
@@ -4883,6 +4890,7 @@
 				28B6B2F61A5AA5A0002DF099 /* welcome@2x.jpg in Resources */,
 				2834368E15DD5DC300B00FD5 /* UIButton_orange_hi.png in Resources */,
 				2834368F15DD5DC300B00FD5 /* UIButton_orange_lo.png in Resources */,
+				28CDBB461C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */,
 				2834369015DD5DC300B00FD5 /* UIButton_orangesmall_hi.png in Resources */,
 				2834369115DD5DC300B00FD5 /* UIButton_orangesmall_lo.png in Resources */,
 				2834369215DD5DC300B00FD5 /* UIButton_red_hi.png in Resources */,
@@ -5024,6 +5032,7 @@
 				280401081B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				28A263291AE65AB4006C09A7 /* Icon_nosearchresults@2x.png in Resources */,
 				28A2632A1AE65AB4006C09A7 /* UIIcon_cycle_lanes@2x.png in Resources */,
+				28CDBB481C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */,
 				28A2632B1AE65AB4006C09A7 /* Icon_nosearchresults.png in Resources */,
 				28A2632C1AE65AB4006C09A7 /* UIIcon_cycle_tracks@2x.png in Resources */,
 				28A2632D1AE65AB4006C09A7 /* UIIcon_footpaths@2x.png in Resources */,
@@ -5477,6 +5486,7 @@
 				28B0AD3119EEBA18008A3F21 /* POICatLocationCell.xib in Resources */,
 				280400FF1B34213200DE0EBA /* carstorage_good.pdf in Resources */,
 				28FA8AC219E454E80040EA46 /* UIButtonBarCameraSmall.png in Resources */,
+				28CDBB471C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */,
 				283781611A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
 				28FA8AC319E454E80040EA46 /* PhotoWizardView.xib in Resources */,
 				28FA8AC419E454E80040EA46 /* UIButtonBarInfo.png in Resources */,

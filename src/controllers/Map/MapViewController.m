@@ -98,6 +98,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 @property (weak, nonatomic) IBOutlet UIView                          *addPointView;
 @property (nonatomic,weak) IBOutlet UIButton						*viewWaypointsButton;
+@property (nonatomic,weak) IBOutlet UIButton						*createLesureRouteButton;
 
 
 
@@ -495,6 +496,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		case ApplicationBuildTarget_CNS:
 		{
 			_viewWaypointsButton.enabled=[self shouldShowWayPointUI];
+			_createLesureRouteButton.enabled=[self shouldShowCreateLeisureUI];
 			
 			switch (_uiState) {
 					
@@ -1130,6 +1132,12 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 -(BOOL)shouldShowWayPointUI{
 	
 	return _waypointArray.count>1;
+	
+}
+
+-(BOOL)shouldShowCreateLeisureUI{
+	
+	return _waypointArray.count>0;
 	
 }
 
