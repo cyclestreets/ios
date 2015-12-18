@@ -7,6 +7,7 @@
 #import "MBProgressHUD.h"
 #import "GlobalUtilities.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MBProgressHUD+Additions.h"
 
 @interface MBProgressHUD ()
 
@@ -502,7 +503,16 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 		if (self.touchToContinue==YES) {
-			[self hideUsingAnimation:YES];
+			
+			if(self.cancelOperation){
+				[self hideUsingAnimation:YES];
+				if(self.cancelOperationBlock)
+					self.cancelOperationBlock(YES,nil);
+			}else{
+				[self hideUsingAnimation:YES];
+			}
+			
+			
 		}
 }
 - (void)show:(BOOL)animated {

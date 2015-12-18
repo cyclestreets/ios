@@ -94,6 +94,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 }
 
 
+
+
+-(void)cancelOperation:(BUNetworkOperation*)operation{
+	
+	BOOL cancelled=[[BUDataSourceManager sharedInstance] cancelRequestForType:operation.dataid];
+	if (cancelled){
+		BetterLog(@"Sucessfully cancelled Networkoperation for %@",operation.dataid);
+	}
+}
+
+
 //
 /***********************************************
  * @description			SEARCH LOCATION REQUEST
@@ -172,7 +183,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		[[BUDataSourceManager sharedInstance] processDataRequest:_searchOperation];
 		
 		
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil andDelay:0 andAllowTouch:YES];
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil withCancelBlock:^(BOOL complete, NSString *error) {
+			if(complete)
+				[weakSelf cancelOperation:_searchOperation];
+		}];
 		
 	}
 	

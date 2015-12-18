@@ -285,10 +285,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 		
 		AFHTTPRequestOperation *operation=[_activeRequests objectForKey:dataid];
 		[operation cancel];
-		
+		return YES;
 	}
 	
-	return YES;
+	return NO;
 	
 }
 

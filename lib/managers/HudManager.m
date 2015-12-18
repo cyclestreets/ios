@@ -7,6 +7,7 @@
 //
 
 #import "HudManager.h"
+#import "MBProgressHUD+Additions.h"
 
 
 @implementation HudManager
@@ -39,7 +40,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message{
 	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:1  andAllowTouch:NO];
 }
+
+
+-(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message withCancelBlock:(GenericCompletionBlock)action{
+	
+	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:1  andAllowTouch:YES withCancelBlock:action];
+	
+}
+
+
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message andDelay:(int)delayTime andAllowTouch:(BOOL)allowTouch{
+	[self showHudWithType:windowType withTitle:title andMessage:message andDelay:delayTime  andAllowTouch:allowTouch withCancelBlock:nil];
+}
+
+
+-(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message andDelay:(int)delayTime andAllowTouch:(BOOL)allowTouch withCancelBlock:(GenericCompletionBlock)action{
 	
 	if([[UIApplication sharedApplication] keyWindow]==nil)
 		return;
@@ -120,7 +135,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 	if(titleText!=nil && messageText!=nil){
 		HUD.detailsLabelText=messageText;
 	}
-	HUD.touchToContinue=allowTouch;
+	
+	if(action){
+		HUD.cancelOperationBlock=action;
+		HUD.touchToContinue=YES;
+		HUD.cancelOperation=YES;
+	}else{
+		HUD.touchToContinue=allowTouch;
+	}
+	
 
 	if(isShowing==NO){
 		isShowing=YES;

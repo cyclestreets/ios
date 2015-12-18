@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SynthesizeSingleton.h"
 #import "MBProgressHUD.h"
+#import "GenericConstants.h"
 
 enum  {
 	HUDWindowTypeProgress=0,
@@ -39,6 +40,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(HudManager);
 - (id)init;
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message;
 -(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message andDelay:(int)delayTime andAllowTouch:(BOOL)allowTouch;
+-(void)showHudWithType:(HUDWindowType)windowType withTitle:(NSString*)title andMessage:(NSString*)message withCancelBlock:(GenericCompletionBlock)action;
+
 -(void)updateHUDMessage:(NSString*)message;
 -(void)updateHUDTitle:(NSString*)title;
 -(void)removeHUD;

@@ -873,6 +873,10 @@
 		28892F6719FFA962000CC52C /* CSBarButton_addPoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28892F6619FFA962000CC52C /* CSBarButton_addPoint@2x.png */; };
 		28892F6819FFA962000CC52C /* CSBarButton_addPoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28892F6619FFA962000CC52C /* CSBarButton_addPoint@2x.png */; };
 		28892F6919FFA962000CC52C /* CSBarButton_addPoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28892F6619FFA962000CC52C /* CSBarButton_addPoint@2x.png */; };
+		2889C39B1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889C39A1C245FF5003A232A /* MBProgressHUD+Additions.m */; };
+		2889C39C1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889C39A1C245FF5003A232A /* MBProgressHUD+Additions.m */; };
+		2889C39D1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889C39A1C245FF5003A232A /* MBProgressHUD+Additions.m */; };
+		2889C39E1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889C39A1C245FF5003A232A /* MBProgressHUD+Additions.m */; };
 		288B10281457492500E2A96F /* RoutesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288B10271457492500E2A96F /* RoutesViewController.m */; };
 		288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
 		288C0F4C164A78DE000880FF /* CSBarButton_waypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */; };
@@ -2325,6 +2329,8 @@
 		28892F6119FEDE6B000CC52C /* LeisureWaypointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeisureWaypointView.m; path = views/LeisureWaypointView.m; sourceTree = "<group>"; };
 		28892F6419FEE103000CC52C /* LeisureWaypointView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeisureWaypointView.xib; path = views/LeisureWaypointView.xib; sourceTree = "<group>"; };
 		28892F6619FFA962000CC52C /* CSBarButton_addPoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_addPoint@2x.png"; sourceTree = "<group>"; };
+		2889C3991C245FF5003A232A /* MBProgressHUD+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Additions.h"; sourceTree = "<group>"; };
+		2889C39A1C245FF5003A232A /* MBProgressHUD+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Additions.m"; sourceTree = "<group>"; };
 		288B10271457492500E2A96F /* RoutesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutesViewController.m; sourceTree = "<group>"; };
 		288C0F4A164A78DE000880FF /* CSBarButton_waypoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_waypoint.png; sourceTree = "<group>"; };
 		288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_followuser_selected@2x.png"; sourceTree = "<group>"; };
@@ -3869,6 +3875,8 @@
 				280E93721409861300C7AC75 /* UIImage-Additions.m */,
 				289EFC5419ED5A710081E7BB /* NSMutableArray+Plist.h */,
 				289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */,
+				2889C3991C245FF5003A232A /* MBProgressHUD+Additions.h */,
+				2889C39A1C245FF5003A232A /* MBProgressHUD+Additions.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -5838,6 +5846,7 @@
 				28AD6439131FB6C8008527FC /* ExpandedUILabel.m in Sources */,
 				282EB46D1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */,
 				28727AD918B5322800D957FD /* CSPhotomapAnnotation.m in Sources */,
+				2889C39B1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */,
 				28A9997A19E705490050C3E8 /* CSAppleSatelliteMapSource.m in Sources */,
 				284A361B1B32E3A200EE2FD4 /* NSString+MD5.m in Sources */,
 				28AD643B131FB6C8008527FC /* GradiantRectView.m in Sources */,
@@ -6019,6 +6028,7 @@
 				283436EE15DD5DC300B00FD5 /* ExpandedUILabel.m in Sources */,
 				283436F015DD5DC300B00FD5 /* GradiantRectView.m in Sources */,
 				282EB46E1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */,
+				2889C39C1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */,
 				284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */,
 				284A361C1B32E3A200EE2FD4 /* NSString+MD5.m in Sources */,
 				28A9997919E705490050C3E8 /* CSAppleSatelliteMapSource.m in Sources */,
@@ -6153,6 +6163,7 @@
 				28A263E81AE65AB4006C09A7 /* main.m in Sources */,
 				28A263E91AE65AB4006C09A7 /* LeisureListViewController.m in Sources */,
 				28A263EA1AE65AB4006C09A7 /* SuperViewController.m in Sources */,
+				2889C39E1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */,
 				28A263EC1AE65AB4006C09A7 /* BUCodableObject.m in Sources */,
 				28A263ED1AE65AB4006C09A7 /* AccountViewController.m in Sources */,
 				28A263EE1AE65AB4006C09A7 /* CSRouteSegmentAnnotationView.m in Sources */,
@@ -6344,6 +6355,7 @@
 				28FA8B0219E454E80040EA46 /* CSPhotomapAnnotationView.m in Sources */,
 				28FA8B0519E454E80040EA46 /* SuperViewController.m in Sources */,
 				28FA8B0419E454E80040EA46 /* main.m in Sources */,
+				2889C39D1C245FF5003A232A /* MBProgressHUD+Additions.m in Sources */,
 				28FA8B0619E454E80040EA46 /* AccountViewController.m in Sources */,
 				28FA8B0719E454E80040EA46 /* SettingsManager.m in Sources */,
 				28FA8B0819E454E80040EA46 /* StartupManager.m in Sources */,
