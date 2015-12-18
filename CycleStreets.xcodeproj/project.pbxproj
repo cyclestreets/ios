@@ -774,6 +774,43 @@
 		28727ADE18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727ADD18B5387C00D957FD /* CSPhotomapAnnotationView.m */; };
 		28727ADF18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28727ADD18B5387C00D957FD /* CSPhotomapAnnotationView.m */; };
 		2872DF3713283586003995BE /* ItineraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2872DF3613283586003995BE /* ItineraryCellView.m */; };
+		28735AB31C2418D000B2E9D5 /* CSIcon_map_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A20F019EFC867000892A0 /* CSIcon_map_poi@2x.png */; };
+		28735AB41C2418D000B2E9D5 /* CSIcon_map_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A20F019EFC867000892A0 /* CSIcon_map_poi@2x.png */; };
+		28735AB51C2418D400B2E9D5 /* CSBarButton_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */; };
+		28735AB61C2418D400B2E9D5 /* CSBarButton_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */; };
+		28735AB71C2418DA00B2E9D5 /* CSBarButton_poi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5319EEFC8C008A3F21 /* CSBarButton_poi.png */; };
+		28735AB81C2418DA00B2E9D5 /* CSBarButton_poi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5319EEFC8C008A3F21 /* CSBarButton_poi.png */; };
+		28735AB91C2418F800B2E9D5 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD2A19EEBA04008A3F21 /* POIListviewController.m */; };
+		28735ABA1C2418F800B2E9D5 /* POIListviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD2A19EEBA04008A3F21 /* POIListviewController.m */; };
+		28735ABB1C24190500B2E9D5 /* POIListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD2D19EEBA0F008A3F21 /* POIListView.xib */; };
+		28735ABC1C24190600B2E9D5 /* POIListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD2D19EEBA0F008A3F21 /* POIListView.xib */; };
+		28735ABD1C24190E00B2E9D5 /* SavedLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4619ED2BA00081E7BB /* SavedLocationsViewController.m */; };
+		28735ABE1C24190F00B2E9D5 /* SavedLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4619ED2BA00081E7BB /* SavedLocationsViewController.m */; };
+		28735ABF1C24191900B2E9D5 /* SavedLocationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC4D19ED2CEC0081E7BB /* SavedLocationTableCell.xib */; };
+		28735AC01C24191900B2E9D5 /* SavedLocationTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC4D19ED2CEC0081E7BB /* SavedLocationTableCell.xib */; };
+		28735AC11C24191D00B2E9D5 /* SavedLocationTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4A19ED2C440081E7BB /* SavedLocationTableCellView.m */; };
+		28735AC21C24191D00B2E9D5 /* SavedLocationTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC4A19ED2C440081E7BB /* SavedLocationTableCellView.m */; };
+		28735AC31C24193400B2E9D5 /* LeisureWaypointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28892F6119FEDE6B000CC52C /* LeisureWaypointView.m */; };
+		28735AC41C24193500B2E9D5 /* LeisureWaypointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28892F6119FEDE6B000CC52C /* LeisureWaypointView.m */; };
+		28735AC51C24195000B2E9D5 /* LeisureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28641D4E19FD65C8009321E0 /* LeisureViewController.m */; };
+		28735AC61C24195000B2E9D5 /* LeisureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28641D4E19FD65C8009321E0 /* LeisureViewController.m */; };
+		28735AC71C24195600B2E9D5 /* SaveLocationCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289A20F319F04ECF000892A0 /* SaveLocationCreateViewController.m */; };
+		28735AC81C24195600B2E9D5 /* SaveLocationCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289A20F319F04ECF000892A0 /* SaveLocationCreateViewController.m */; };
+		28735AC91C24196E00B2E9D5 /* LeisureRouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28641D5119FD6D6F009321E0 /* LeisureRouteVO.m */; };
+		28735ACA1C24196E00B2E9D5 /* LeisureRouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28641D5119FD6D6F009321E0 /* LeisureRouteVO.m */; };
+		28735ACB1C24199700B2E9D5 /* POITypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2834D37F19F16CEC00036FEC /* POITypeCell.xib */; };
+		28735ACC1C24199700B2E9D5 /* POITypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2834D37F19F16CEC00036FEC /* POITypeCell.xib */; };
+		28735ACD1C24199A00B2E9D5 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD2F19EEBA17008A3F21 /* POICatLocationCell.xib */; };
+		28735ACE1C24199A00B2E9D5 /* POICatLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD2F19EEBA17008A3F21 /* POICatLocationCell.xib */; };
+		28735ACF1C24199E00B2E9D5 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD3C19EEBA9F008A3F21 /* POICategoryView.xib */; };
+		28735AD01C24199E00B2E9D5 /* POICategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD3C19EEBA9F008A3F21 /* POICategoryView.xib */; };
+		28735AD11C2419D800B2E9D5 /* BUHorizontalMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210019E7D4E800118E48 /* BUHorizontalMenuView.m */; };
+		28735AD21C2419D800B2E9D5 /* BUHorizontalMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210019E7D4E800118E48 /* BUHorizontalMenuView.m */; };
+		28735AD31C2419FB00B2E9D5 /* LeisureWaypointView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28892F6419FEE103000CC52C /* LeisureWaypointView.xib */; };
+		28735AD41C2419FB00B2E9D5 /* LeisureWaypointView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28892F6419FEE103000CC52C /* LeisureWaypointView.xib */; };
+		28735AD51C241A4E00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */; };
+		28735AD61C241A4F00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */; };
+		28735AD71C241A4F00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */; };
 		28735BF4144EC7A000726A6C /* PhotoMapVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF3144EC7A000726A6C /* PhotoMapVO.m */; };
 		28735BF7144EC80300726A6C /* PhotoMapListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF6144EC80300726A6C /* PhotoMapListVO.m */; };
 		28735BFA144EC85300726A6C /* CSPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF9144EC85300726A6C /* CSPointVO.m */; };
@@ -4477,6 +4514,7 @@
 				289A9B5813536CCB00E8AF90 /* UIIcon_footpaths@2x.png in Resources */,
 				289A9B5913536CCB00E8AF90 /* UIIcon_quiet_street@2x.png in Resources */,
 				28B6B2F21A5AA5A0002DF099 /* welcome.jpg in Resources */,
+				28735AB71C2418DA00B2E9D5 /* CSBarButton_poi.png in Resources */,
 				289A9B5A13536CCB00E8AF90 /* UIIcon_roads@2x.png in Resources */,
 				289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */,
 				289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */,
@@ -4484,6 +4522,7 @@
 				2853211A19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
 				28D10EC1135D6E54006F1D94 /* UIIcon_bear_left@2x.png in Resources */,
 				28D10EC2135D6E54006F1D94 /* UIIcon_bear_right@2x.png in Resources */,
+				28735AD31C2419FB00B2E9D5 /* LeisureWaypointView.xib in Resources */,
 				28D10EC3135D6E54006F1D94 /* UIIcon_straight_on@2x.png in Resources */,
 				289478AC18AD31410066AA2E /* MainStoryboard.storyboard in Resources */,
 				28D10EC4135D6E54006F1D94 /* UIIcon_turn_left@2x.png in Resources */,
@@ -4499,6 +4538,7 @@
 				287868F81886954300CA9746 /* CSIcon_intermediate_wisp@2X.png in Resources */,
 				280401951B34213200DE0EBA /* routesigns_bad.pdf in Resources */,
 				28D10EC9135D6E54006F1D94 /* CSTabBar_credits@2x.png in Resources */,
+				28735AB31C2418D000B2E9D5 /* CSIcon_map_poi@2x.png in Resources */,
 				280401351B34213200DE0EBA /* destinations_bad.pdf in Resources */,
 				28D186C2193754F6001FBBF7 /* UIButtonBarTrash@2x.png in Resources */,
 				280401211B34213200DE0EBA /* cycleparking_good.pdf in Resources */,
@@ -4529,9 +4569,11 @@
 				280400ED1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */,
 				280E93AF140989E400C7AC75 /* donate.html in Resources */,
 				287B8582144C4701006E3FCD /* UIButtonBarArrowLeft@2x.png in Resources */,
+				28735AD51C241A4E00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */,
 				287B8583144C4701006E3FCD /* UIButtonBarArrowRight@2x.png in Resources */,
 				280400F11B34213200DE0EBA /* bikeshops_good.pdf in Resources */,
 				287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */,
+				28735ABF1C24191900B2E9D5 /* SavedLocationTableCell.xib in Resources */,
 				287B8585144C4701006E3FCD /* UIButtonBarInfo@2x.png in Resources */,
 				2853211419E7EFF900118E48 /* ASMapStyle.png in Resources */,
 				287B8587144C470D006E3FCD /* UIIcon_minor_roads@2x.png in Resources */,
@@ -4544,6 +4586,7 @@
 				289EFC7519EDA4EF0081E7BB /* CSIcon_saveloc_work@2x.png in Resources */,
 				28735C16144EDACF00726A6C /* reesjeffreys.png in Resources */,
 				28735C1D144F10E300726A6C /* appconfig_dev.plist in Resources */,
+				28735ACB1C24199700B2E9D5 /* POITypeCell.xib in Resources */,
 				2853211D19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				28727AC818B51CF500D957FD /* PhotoMapView.xib in Resources */,
 				28735C1F144F10F300726A6C /* appconfig_live.plist in Resources */,
@@ -4554,6 +4597,7 @@
 				2818C7A01458069E0077F529 /* RouteCell.xib in Resources */,
 				28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */,
 				28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */,
+				28735ACF1C24199E00B2E9D5 /* POICategoryView.xib in Resources */,
 				280401051B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				280401711B34213200DE0EBA /* potholes_bad.pdf in Resources */,
 				283781651A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
@@ -4605,6 +4649,7 @@
 				289EFC6D19EDA4E60081E7BB /* CSIcon_saveloc_work.png in Resources */,
 				28187AC414FCFF4C00A38A17 /* CSTabBar_plan_route.png in Resources */,
 				28187AC514FCFF4C00A38A17 /* CSTabBar_settings.png in Resources */,
+				28735AB51C2418D400B2E9D5 /* CSBarButton_poi@2x.png in Resources */,
 				28187AC814FCFF4C00A38A17 /* UIButton_green_hi.png in Resources */,
 				28187AC914FCFF4C00A38A17 /* UIButton_green_lo.png in Resources */,
 				28042E9C1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */,
@@ -4625,6 +4670,7 @@
 				28040C3818BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
 				280401611B34213200DE0EBA /* general_neutral.pdf in Resources */,
 				2804019D1B34213200DE0EBA /* routesigns_other.pdf in Resources */,
+				28735ABB1C24190500B2E9D5 /* POIListView.xib in Resources */,
 				28187AD214FCFF4C00A38A17 /* UIButton_save_hi.png in Resources */,
 				28187AD314FCFF4C00A38A17 /* UIButtonBarArrowLeft.png in Resources */,
 				28187AD414FCFF4D00A38A17 /* UIButtonBarArrowRight.png in Resources */,
@@ -4658,6 +4704,7 @@
 				280401191B34213200DE0EBA /* congestion_other.pdf in Resources */,
 				28B76F3C15E4DA02006B01D0 /* CSBarButton_deletePoint.png in Resources */,
 				280401A51B34213200DE0EBA /* signs_bad.pdf in Resources */,
+				28735ACD1C24199A00B2E9D5 /* POICatLocationCell.xib in Resources */,
 				280401291B34213200DE0EBA /* cycleways_bad.pdf in Resources */,
 				28BC6AA018AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
 				280401411B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */,
@@ -4739,6 +4786,7 @@
 				2834361015DD5DC300B00FD5 /* UIButton_green_lo@2x.png in Resources */,
 				2834361115DD5DC300B00FD5 /* UIButton_grey_hi@2x.png in Resources */,
 				2834361215DD5DC300B00FD5 /* UIButton_grey_lo@2x.png in Resources */,
+				28735AB61C2418D400B2E9D5 /* CSBarButton_poi@2x.png in Resources */,
 				280401BA1B34213200DE0EBA /* track_other.pdf in Resources */,
 				2834361315DD5DC300B00FD5 /* UIButton_orange_hi@2x.png in Resources */,
 				28347AAF1A37891900FA83BE /* CSTabBar_leisure@2x.png in Resources */,
@@ -4748,6 +4796,7 @@
 				28BC6A9F18AE429400EF0436 /* PhotoWizardCategoryMenuView.xib in Resources */,
 				2834361515DD5DC300B00FD5 /* UIButton_orangesmall_hi@2x.png in Resources */,
 				2834361615DD5DC300B00FD5 /* UIButton_orangesmall_lo@2x.png in Resources */,
+				28735ACE1C24199A00B2E9D5 /* POICatLocationCell.xib in Resources */,
 				28A9999619E71FBC0050C3E8 /* default.css in Resources */,
 				2834361715DD5DC300B00FD5 /* UIButton_red_hi@2x.png in Resources */,
 				2834361815DD5DC300B00FD5 /* UIButton_red_lo@2x.png in Resources */,
@@ -4787,6 +4836,7 @@
 				280401661B34213200DE0EBA /* obstructions_bad.pdf in Resources */,
 				2834362D15DD5DC300B00FD5 /* CSTabBar_itinerary@2x.png in Resources */,
 				2834362E15DD5DC300B00FD5 /* CSTabBar_photomap_tb@2x.png in Resources */,
+				28735ACC1C24199700B2E9D5 /* POITypeCell.xib in Resources */,
 				2804017E1B34213200DE0EBA /* road_bad.pdf in Resources */,
 				2834362F15DD5DC300B00FD5 /* CSTabBar_plan_route@2x.png in Resources */,
 				2834363015DD5DC300B00FD5 /* CSTabBar_settings@2x.png in Resources */,
@@ -4836,7 +4886,9 @@
 				2834366315DD5DC300B00FD5 /* CSIcon_MapArrow_start.png in Resources */,
 				2853211519E7EFF900118E48 /* ASMapStyle.png in Resources */,
 				2834366415DD5DC300B00FD5 /* blueButton.png in Resources */,
+				28735ABC1C24190600B2E9D5 /* POIListView.xib in Resources */,
 				2834366515DD5DC300B00FD5 /* BUSegmentedControl_center_hi.png in Resources */,
+				28735AB41C2418D000B2E9D5 /* CSIcon_map_poi@2x.png in Resources */,
 				284A35831B32C98900EE2FD4 /* Localized.strings in Resources */,
 				2834366615DD5DC300B00FD5 /* BUSegmentedControl_center_lo.png in Resources */,
 				2834366715DD5DC300B00FD5 /* BUSegmentedControl_left_hi.png in Resources */,
@@ -4852,6 +4904,7 @@
 				280401121B34213200DE0EBA /* congestion_bad.pdf in Resources */,
 				280401421B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */,
 				2834366F15DD5DC300B00FD5 /* UIIcon_quiet_street.png in Resources */,
+				28735AD01C24199E00B2E9D5 /* POICategoryView.xib in Resources */,
 				2834367015DD5DC300B00FD5 /* UIIcon_roads.png in Resources */,
 				2834367115DD5DC300B00FD5 /* UIIcon_tracks.png in Resources */,
 				280401961B34213200DE0EBA /* routesigns_bad.pdf in Resources */,
@@ -4907,6 +4960,7 @@
 				2853211B19E7EFF900118E48 /* OCMMapStyle.png in Resources */,
 				280400E61B34213200DE0EBA /* bicycles_good.pdf in Resources */,
 				2834369A15DD5DC300B00FD5 /* UIButtonBarStop.png in Resources */,
+				28735AD61C241A4F00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */,
 				28BC6AA118AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */,
 				2834369F15DD5DC300B00FD5 /* CSIcon_finish_wisp.png in Resources */,
 				2804015A1B34213200DE0EBA /* general_bad.pdf in Resources */,
@@ -4914,6 +4968,7 @@
 				283436A015DD5DC300B00FD5 /* CSIcon_start_wisp.png in Resources */,
 				280401361B34213200DE0EBA /* destinations_bad.pdf in Resources */,
 				283436A415DD5DC300B00FD5 /* RoutePlanMenuView.xib in Resources */,
+				28735AD41C2419FB00B2E9D5 /* LeisureWaypointView.xib in Resources */,
 				28BC6A9B18AE429400EF0436 /* PhotoMapImageLocationView.xib in Resources */,
 				28347AAB1A37781F00FA83BE /* UserRouteCell.xib in Resources */,
 				280400EE1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */,
@@ -4954,6 +5009,7 @@
 				28535DC815E50FCD0092FC16 /* HUD_icon_lock.png in Resources */,
 				28535DCA15E50FCD0092FC16 /* HUD_icon_lock@2x.png in Resources */,
 				28535DFB15E6313E0092FC16 /* Icon_currentroutecell.png in Resources */,
+				28735AB81C2418DA00B2E9D5 /* CSBarButton_poi.png in Resources */,
 				2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */,
 				289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */,
 				280401521B34213200DE0EBA /* enforcement_good.pdf in Resources */,
@@ -4989,6 +5045,7 @@
 				28718BB517858BE600781A6B /* UIButtonBarRefresh@2x.png in Resources */,
 				280401721B34213200DE0EBA /* potholes_bad.pdf in Resources */,
 				28718BB717858BE600781A6B /* UIButtonBarStop@2x.png in Resources */,
+				28735AC01C24191900B2E9D5 /* SavedLocationTableCell.xib in Resources */,
 				2804014A1B34213200DE0EBA /* dutchcycleways_neutral.pdf in Resources */,
 				283781601A24781900D046A5 /* CSBarButton_leisure@2x.png in Resources */,
 				280401AE1B34213200DE0EBA /* signs_other.pdf in Resources */,
@@ -5148,6 +5205,7 @@
 				2804013C1B34213200DE0EBA /* destinations_good.pdf in Resources */,
 				280401A81B34213200DE0EBA /* signs_bad.pdf in Resources */,
 				280400E81B34213200DE0EBA /* bicycles_good.pdf in Resources */,
+				28735AD71C241A4F00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */,
 				28A263801AE65AB4006C09A7 /* UIIcon_turn_left.png in Resources */,
 				28A263811AE65AB4006C09A7 /* UIIcon_turn_right.png in Resources */,
 				28A263821AE65AB4006C09A7 /* icon_camera.png in Resources */,
@@ -5731,6 +5789,7 @@
 				28AD62B1131FB69D008527FC /* BUResponseObject.m in Sources */,
 				28AD62B2131FB69D008527FC /* ApplicationXMLParser.m in Sources */,
 				28AD62D9131FB69D008527FC /* CreditsViewController.m in Sources */,
+				28735AC11C24191D00B2E9D5 /* SavedLocationTableCellView.m in Sources */,
 				28A719921A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */,
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
 				284A361F1B32E3A200EE2FD4 /* PDFView.m in Sources */,
@@ -5754,6 +5813,7 @@
 				288055D418BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */,
 				283A0EE61A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */,
 				28AD6437131FB6C8008527FC /* BUSegmentedControl.m in Sources */,
+				28735AC31C24193400B2E9D5 /* LeisureWaypointView.m in Sources */,
 				28AD6438131FB6C8008527FC /* CustomNavigtionBar.m in Sources */,
 				28AD6439131FB6C8008527FC /* ExpandedUILabel.m in Sources */,
 				282EB46D1B1EF97D000C2EB4 /* UserLocationManager.m in Sources */,
@@ -5791,12 +5851,16 @@
 				2889095E193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */,
 				28727AD118B5222200D957FD /* PhotoMapViewController.m in Sources */,
 				28890960193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */,
+				28735AC91C24196E00B2E9D5 /* LeisureRouteVO.m in Sources */,
+				28735ABD1C24190E00B2E9D5 /* SavedLocationsViewController.m in Sources */,
 				286FD3091A02559D00EB8C20 /* POIAnnotation.m in Sources */,
 				287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */,
 				28965C5E18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				286FD3071A02559800EB8C20 /* POIManager.m in Sources */,
 				286FD30B1A0255A000EB8C20 /* POIAnnotationView.m in Sources */,
+				28735AB91C2418F800B2E9D5 /* POIListviewController.m in Sources */,
 				2863A3FE134E508800A22093 /* FavouritesCellView.m in Sources */,
+				28735AC51C24195000B2E9D5 /* LeisureViewController.m in Sources */,
 				2853210B19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
 				2863A402134E508800A22093 /* CSRouteDetailsViewController.m in Sources */,
 				28D186D619378587001FBBF7 /* BUCalloutView.m in Sources */,
@@ -5806,6 +5870,7 @@
 				28FA0E541A0CC4C300D26A10 /* UIImage+Operations.m in Sources */,
 				28719D92136FE2AD00F69A1B /* LocationSearchManager.m in Sources */,
 				280E91C614097D8600C7AC75 /* StringManager.m in Sources */,
+				28735AD11C2419D800B2E9D5 /* BUHorizontalMenuView.m in Sources */,
 				280E91C714097D8600C7AC75 /* StyleManager.m in Sources */,
 				280E91C814097D8600C7AC75 /* UserSettingsManager.m in Sources */,
 				2886DEE018C530A500CD208B /* BUDataSourceManager.m in Sources */,
@@ -5852,6 +5917,7 @@
 				28ECCBD91526302600284926 /* CopyLabel.m in Sources */,
 				28A9999D19E72ACB0050C3E8 /* UIColor+AppColors.m in Sources */,
 				28D186DC19378587001FBBF7 /* CSGraphView.m in Sources */,
+				28735AC71C24195600B2E9D5 /* SaveLocationCreateViewController.m in Sources */,
 				284A36231B32E3A200EE2FD4 /* UIImage+PDF.m in Sources */,
 				289F78041534432900B062D1 /* NSData+Base64.m in Sources */,
 				289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */,
@@ -5903,6 +5969,7 @@
 				283436D415DD5DC300B00FD5 /* BUResponseObject.m in Sources */,
 				283436D515DD5DC300B00FD5 /* ApplicationXMLParser.m in Sources */,
 				283436D615DD5DC300B00FD5 /* CreditsViewController.m in Sources */,
+				28735AC21C24191D00B2E9D5 /* SavedLocationTableCellView.m in Sources */,
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
 				28A719931A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */,
 				284A36201B32E3A200EE2FD4 /* PDFView.m in Sources */,
@@ -5926,6 +5993,7 @@
 				283436EB15DD5DC300B00FD5 /* BorderView.m in Sources */,
 				283436EC15DD5DC300B00FD5 /* BUSegmentedControl.m in Sources */,
 				283A0EE71A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */,
+				28735AC41C24193500B2E9D5 /* LeisureWaypointView.m in Sources */,
 				283436ED15DD5DC300B00FD5 /* CustomNavigtionBar.m in Sources */,
 				283436EE15DD5DC300B00FD5 /* ExpandedUILabel.m in Sources */,
 				283436F015DD5DC300B00FD5 /* GradiantRectView.m in Sources */,
@@ -5963,12 +6031,16 @@
 				2834370815DD5DC300B00FD5 /* CSRouteDetailsViewController.m in Sources */,
 				2889095F193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */,
 				2834370915DD5DC300B00FD5 /* LoginVO.m in Sources */,
+				28735ACA1C24196E00B2E9D5 /* LeisureRouteVO.m in Sources */,
+				28735ABE1C24190F00B2E9D5 /* SavedLocationsViewController.m in Sources */,
 				28890961193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */,
 				286FD30A1A02559D00EB8C20 /* POIAnnotation.m in Sources */,
 				2834370B15DD5DC300B00FD5 /* BUDividerView.m in Sources */,
 				28965C5F18BF5852001BB258 /* CSRoutePolyLineRenderer.m in Sources */,
 				286FD3081A02559800EB8C20 /* POIManager.m in Sources */,
+				28735ABA1C2418F800B2E9D5 /* POIListviewController.m in Sources */,
 				286FD30C1A0255A000EB8C20 /* POIAnnotationView.m in Sources */,
+				28735AC61C24195000B2E9D5 /* LeisureViewController.m in Sources */,
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
 				2853210C19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
 				28D186D719378587001FBBF7 /* BUCalloutView.m in Sources */,
@@ -5978,6 +6050,7 @@
 				28FA0E551A0CC4C400D26A10 /* UIImage+Operations.m in Sources */,
 				2834371215DD5DC300B00FD5 /* ItineraryViewController.m in Sources */,
 				28BC6AA918AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */,
+				28735AD21C2419D800B2E9D5 /* BUHorizontalMenuView.m in Sources */,
 				2834371415DD5DC300B00FD5 /* RouteSegmentViewController.m in Sources */,
 				28727ADA18B5322800D957FD /* CSPhotomapAnnotation.m in Sources */,
 				2889096B193F41BB009C4325 /* CSMapSource.m in Sources */,
@@ -6024,6 +6097,7 @@
 				2834375B15DD5DC300B00FD5 /* CopyLabel.m in Sources */,
 				28A9999E19E72ACB0050C3E8 /* UIColor+AppColors.m in Sources */,
 				28D186DD19378587001FBBF7 /* CSGraphView.m in Sources */,
+				28735AC81C24195600B2E9D5 /* SaveLocationCreateViewController.m in Sources */,
 				284A36241B32E3A200EE2FD4 /* UIImage+PDF.m in Sources */,
 				2834375E15DD5DC300B00FD5 /* NSData+Base64.m in Sources */,
 				2834375F15DD5DC300B00FD5 /* NSString-Utilities.m in Sources */,

@@ -458,40 +458,40 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	switch (buildTarget) {
 		case ApplicationBuildTarget_CycleStreets:
-		{
-			switch (_uiState) {
-					
-				case MapPlanningStateNoRoute:
-					return @[_locationButton,_searchButton, _leftFlex];
-				break;
-					
-				case MapPlanningStateLocating:
-					if([self shouldShowWayPointUI]==YES){
-						return @[_waypointButton,_locationButton,_searchButton, _leftFlex];
-					}else{
-						
-						return @[_locationButton,_searchButton, _leftFlex];
-					}
-				break;
-					
-				case MapPlanningStateStartPlanning:
-					return @[_locationButton,_searchButton,_leftFlex];
-				break;
-					
-				case MapPlanningStatePlanning:
-					return @[ _waypointButton,_locationButton,_searchButton,_leftFlex,_routeButton];
-				break;
-					
-				case MapPlanningStateRoute:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
-				break;
-					
-				case MapPlanningStateRouteLocating:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
-				break;
-			}
-		}
-			break;
+//		{
+//			switch (_uiState) {
+//					
+//				case MapPlanningStateNoRoute:
+//					return @[_locationButton,_searchButton, _leftFlex];
+//				break;
+//					
+//				case MapPlanningStateLocating:
+//					if([self shouldShowWayPointUI]==YES){
+//						return @[_waypointButton,_locationButton,_searchButton, _leftFlex];
+//					}else{
+//						
+//						return @[_locationButton,_searchButton, _leftFlex];
+//					}
+//				break;
+//					
+//				case MapPlanningStateStartPlanning:
+//					return @[_locationButton,_searchButton,_leftFlex];
+//				break;
+//					
+//				case MapPlanningStatePlanning:
+//					return @[ _waypointButton,_locationButton,_searchButton,_leftFlex,_routeButton];
+//				break;
+//					
+//				case MapPlanningStateRoute:
+//					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
+//				break;
+//					
+//				case MapPlanningStateRouteLocating:
+//					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
+//				break;
+//			}
+//		}
+//			break;
 			
 		case ApplicationBuildTarget_CNS:
 		{
