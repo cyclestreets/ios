@@ -96,10 +96,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, strong) UIBarButtonItem						* searchButton;
 
 
-@property (weak, nonatomic) IBOutlet UIView                          *addPointView;
+@property (weak, nonatomic) IBOutlet UIView                         *addPointView;
 @property (nonatomic,weak) IBOutlet UIButton						*viewWaypointsButton;
 @property (nonatomic,weak) IBOutlet UIButton						*createLesureRouteButton;
-
+@property (nonatomic,strong)  UISwipeGestureRecognizer				*addPointSwipeGesture;
 
 
 @property(nonatomic,strong) IBOutlet  UIView						*walkingRouteOverlayView;
@@ -332,6 +332,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	[_mapView addGestureRecognizer:_mapSingleTapRecognizer];
 	
 	
+	self.addPointSwipeGesture=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(didSwipeAddPointView:)];
+	_addPointSwipeGesture.direction=UISwipeGestureRecognizerDirectionUp;
+	[_addPointView addGestureRecognizer:_addPointSwipeGesture];
+	
 	
 	if(willRequireAuthorisation==NO){
 		[self userLocationDidComplete];
@@ -383,14 +387,10 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[ViewUtilities alignView:_attributionLabel withView:self.view :BURightAlignMode :BUBottomAlignMode :7];
 	
-	if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
-		
-		BOOL isNotFirstRun=[[[UserSettingsManager sharedInstance]fetchObjectforKey:@"isNotFirstRun"] boolValue];
-		if(isNotFirstRun==NO){
-			[self performSegueWithIdentifier:@"FirstRunSegue" sender:self];
-			[[UserSettingsManager sharedInstance] saveObject:@(YES) forKey:@"isNotFirstRun"];
-		}
-		
+	BOOL isNotFirstRun=[[[UserSettingsManager sharedInstance]fetchObjectforKey:@"isNotFirstRun"] boolValue];
+	if(isNotFirstRun==NO){
+		[self performSegueWithIdentifier:@"FirstRunSegue" sender:self];
+		[[UserSettingsManager sharedInstance] saveObject:@(YES) forKey:@"isNotFirstRun"];
 	}
 	
 }
@@ -458,41 +458,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	switch (buildTarget) {
 		case ApplicationBuildTarget_CycleStreets:
-//		{
-//			switch (_uiState) {
-//					
-//				case MapPlanningStateNoRoute:
-//					return @[_locationButton,_searchButton, _leftFlex];
-//				break;
-//					
-//				case MapPlanningStateLocating:
-//					if([self shouldShowWayPointUI]==YES){
-//						return @[_waypointButton,_locationButton,_searchButton, _leftFlex];
-//					}else{
-//						
-//						return @[_locationButton,_searchButton, _leftFlex];
-//					}
-//				break;
-//					
-//				case MapPlanningStateStartPlanning:
-//					return @[_locationButton,_searchButton,_leftFlex];
-//				break;
-//					
-//				case MapPlanningStatePlanning:
-//					return @[ _waypointButton,_locationButton,_searchButton,_leftFlex,_routeButton];
-//				break;
-//					
-//				case MapPlanningStateRoute:
-//					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
-//				break;
-//					
-//				case MapPlanningStateRouteLocating:
-//					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
-//				break;
-//			}
-//		}
-//			break;
-			
 		case ApplicationBuildTarget_CNS:
 		{
 			_viewWaypointsButton.enabled=[self shouldShowWayPointUI];
@@ -1453,14 +1418,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			 }
 			 
 			 
-			 if([BuildTargetConstants buildTarget]==ApplicationBuildTarget_CNS){
-				 UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
-				 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor whiteColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateNormal];
-				 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor blackColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateHighlighted];
-				 lcalloutButton.tag=kSaveLocationControlTag;
-				 lcalloutButton.backgroundColor=[UIColor appTintColor];
-				 annotationView.leftCalloutAccessoryView=lcalloutButton;
-			 }
+			UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+			 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor whiteColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateNormal];
+			 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor blackColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateHighlighted];
+			 lcalloutButton.tag=kSaveLocationControlTag;
+			 lcalloutButton.backgroundColor=[UIColor appTintColor];
+			 annotationView.leftCalloutAccessoryView=lcalloutButton;
+			
 			 
 			 
 		 } else {
@@ -1867,6 +1831,16 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 
 #pragma mark - Add Point View
+
+
+
+-(void)didSwipeAddPointView:(UISwipeGestureRecognizer*)recogniser{
+	
+	[self hideAddPointView];
+	
+}
+
+
 
 -(void)displayAddPointView{
 	

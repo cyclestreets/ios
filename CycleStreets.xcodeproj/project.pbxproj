@@ -11,8 +11,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		2801301415E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
 		2801301515E636080092D509 /* Icon_currentroutecell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2801301315E636070092D509 /* Icon_currentroutecell@2x.png */; };
-		2803DC6919E854E900841F29 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
-		2803DC6A19E854EA00841F29 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FA8A2419E3DC6C0040EA46 /* SettingsViewController.m */; };
 		280400E11B34213200DE0EBA /* bicycles_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AA1B34213200DE0EBA /* bicycles_bad.pdf */; };
 		280400E21B34213200DE0EBA /* bicycles_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AA1B34213200DE0EBA /* bicycles_bad.pdf */; };
 		280400E31B34213200DE0EBA /* bicycles_bad.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 280400AA1B34213200DE0EBA /* bicycles_bad.pdf */; };
@@ -811,6 +809,14 @@
 		28735AD51C241A4E00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */; };
 		28735AD61C241A4F00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */; };
 		28735AD71C241A4F00B2E9D5 /* CSIcon_mapstyle_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */; };
+		28735AD81C241AD900B2E9D5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285320FB19E7D44000118E48 /* SettingsViewController.m */; };
+		28735AD91C241AD900B2E9D5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285320FB19E7D44000118E48 /* SettingsViewController.m */; };
+		28735ADA1C241AE600B2E9D5 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285320FD19E7D46100118E48 /* SettingsView.xib */; };
+		28735ADB1C241AE600B2E9D5 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285320FD19E7D46100118E48 /* SettingsView.xib */; };
+		28735ADC1C241AFF00B2E9D5 /* MapStyleCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2853210719E7DA7E00118E48 /* MapStyleCellView.xib */; };
+		28735ADD1C241AFF00B2E9D5 /* MapStyleCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2853210719E7DA7E00118E48 /* MapStyleCellView.xib */; };
+		28735ADE1C241B0200B2E9D5 /* MapStyleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210419E7DA4D00118E48 /* MapStyleCellView.m */; };
+		28735ADF1C241B0200B2E9D5 /* MapStyleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210419E7DA4D00118E48 /* MapStyleCellView.m */; };
 		28735BF4144EC7A000726A6C /* PhotoMapVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF3144EC7A000726A6C /* PhotoMapVO.m */; };
 		28735BF7144EC80300726A6C /* PhotoMapListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF6144EC80300726A6C /* PhotoMapListVO.m */; };
 		28735BFA144EC85300726A6C /* CSPointVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28735BF9144EC85300726A6C /* CSPointVO.m */; };
@@ -1508,8 +1514,6 @@
 		28BC6AA118AE429400EF0436 /* PhotoWizardLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9618AE429400EF0436 /* PhotoWizardLocationView.xib */; };
 		28BC6AA218AE429400EF0436 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9718AE429400EF0436 /* PhotoWizardView.xib */; };
 		28BC6AA318AE429400EF0436 /* PhotoWizardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9718AE429400EF0436 /* PhotoWizardView.xib */; };
-		28BC6AA418AE429400EF0436 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9918AE429400EF0436 /* SettingsView.xib */; };
-		28BC6AA518AE429400EF0436 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BC6A9918AE429400EF0436 /* SettingsView.xib */; };
 		28BC6AA818AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AA718AE42FA00EF0436 /* PhotoCategoryVO.m */; };
 		28BC6AA918AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AA718AE42FA00EF0436 /* PhotoCategoryVO.m */; };
 		28BC6AAC18AE431800EF0436 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AAB18AE431800EF0436 /* LayoutBox.m */; };
@@ -4338,6 +4342,7 @@
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				283435FA15DD54B300B00FD5 /* ShellScript */,
 				C9C5B6CD05B2457FAD693953 /* Copy Pods Resources */,
+				2889C3981C242705003A232A /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -4639,6 +4644,7 @@
 				28187ABE14FCFF4C00A38A17 /* CSTabBar_account.png in Resources */,
 				28187ABF14FCFF4C00A38A17 /* CSTabBar_add_photo.png in Resources */,
 				28187AC014FCFF4C00A38A17 /* CSTabBar_credits.png in Resources */,
+				28735ADA1C241AE600B2E9D5 /* SettingsView.xib in Resources */,
 				28187AC114FCFF4C00A38A17 /* CSTabBar_fav_routes.png in Resources */,
 				28187AC214FCFF4C00A38A17 /* CSTabBar_itinerary.png in Resources */,
 				280401311B34213200DE0EBA /* cycleways_neutral.pdf in Resources */,
@@ -4696,6 +4702,7 @@
 				283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */,
 				283435FF15DD5D9100B00FD5 /* APIKey_dev.txt in Resources */,
 				28B76F3015E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */,
+				28735ADC1C241AFF00B2E9D5 /* MapStyleCellView.xib in Resources */,
 				28B76F3215E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */,
 				2804017D1B34213200DE0EBA /* road_bad.pdf in Resources */,
 				28B76F3415E4D7E9006B01D0 /* Icon_norecentroutes@2x.png in Resources */,
@@ -4716,7 +4723,6 @@
 				28B76F4315E4DB3B006B01D0 /* CSBarButton_search@2x.png in Resources */,
 				28B76F4615E4DB48006B01D0 /* CSBarButton_routePlan@2x.png in Resources */,
 				280400F91B34213200DE0EBA /* carstorage_bad.pdf in Resources */,
-				28BC6AA418AE429400EF0436 /* SettingsView.xib in Resources */,
 				28B76F4915E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */,
 				28535DBF15E50FCD0092FC16 /* HUD_icon_checkMark.png in Resources */,
 				28535DC115E50FCD0092FC16 /* HUD_icon_checkMark@2x.png in Resources */,
@@ -4878,7 +4884,6 @@
 				2804019A1B34213200DE0EBA /* routesigns_good.pdf in Resources */,
 				28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
 				2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */,
-				28BC6AA518AE429400EF0436 /* SettingsView.xib in Resources */,
 				2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */,
 				28D146061A2F09E2003DD15F /* CSBarButton_followuser@2x.png in Resources */,
 				2834366115DD5DC300B00FD5 /* Alert200x200.png in Resources */,
@@ -4889,6 +4894,7 @@
 				28735ABC1C24190600B2E9D5 /* POIListView.xib in Resources */,
 				2834366515DD5DC300B00FD5 /* BUSegmentedControl_center_hi.png in Resources */,
 				28735AB41C2418D000B2E9D5 /* CSIcon_map_poi@2x.png in Resources */,
+				28735ADD1C241AFF00B2E9D5 /* MapStyleCellView.xib in Resources */,
 				284A35831B32C98900EE2FD4 /* Localized.strings in Resources */,
 				2834366615DD5DC300B00FD5 /* BUSegmentedControl_center_lo.png in Resources */,
 				2834366715DD5DC300B00FD5 /* BUSegmentedControl_left_hi.png in Resources */,
@@ -4951,6 +4957,7 @@
 				2834369415DD5DC300B00FD5 /* UIButton_save_hi.png in Resources */,
 				2825180319D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */,
 				2834369515DD5DC300B00FD5 /* UIButtonBarArrowLeft.png in Resources */,
+				28735ADB1C241AE600B2E9D5 /* SettingsView.xib in Resources */,
 				2834369615DD5DC300B00FD5 /* UIButtonBarArrowRight.png in Resources */,
 				2834369715DD5DC300B00FD5 /* UIButtonBarCameraSmall.png in Resources */,
 				28B6B2FD1A5AB0D8002DF099 /* welcome_CS.jpg in Resources */,
@@ -5674,6 +5681,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/Users/neil/iPhone/Applications/AppCore/external/Crashlytics/Fabric.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634 e0d6b0af9c38b33eb7fdb7660df951f9a867cd574b61f41b9dd6c8d630f48f98";
 		};
+		2889C3981C242705003A232A /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/iconVersioning.sh\"";
+		};
 		28A2649D1AE65AB4006C09A7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -5771,7 +5792,6 @@
 				28AD60BC131FB54A008527FC /* AppDelegate.m in Sources */,
 				2837815D1A24751A00D046A5 /* LeisureListViewController.m in Sources */,
 				28AD60BF131FB54A008527FC /* main.m in Sources */,
-				2803DC6919E854E900841F29 /* SettingsViewController.m in Sources */,
 				28AD62A2131FB69D008527FC /* SuperViewController.m in Sources */,
 				28AD62A3131FB69D008527FC /* AccountViewController.m in Sources */,
 				28AD62A6131FB69D008527FC /* SettingsManager.m in Sources */,
@@ -5835,6 +5855,7 @@
 				28965C5418BF3CC3001BB258 /* TBXML+Additions.m in Sources */,
 				28AD6493131FB6C8008527FC /* StringUtilities.m in Sources */,
 				28AD6497131FB6C8008527FC /* ViewUtilities.m in Sources */,
+				28735AD81C241AD900B2E9D5 /* SettingsViewController.m in Sources */,
 				28ECBE0B19CF25E7006BFE83 /* BUInlineErrorView.m in Sources */,
 				2872DF3713283586003995BE /* ItineraryCellView.m in Sources */,
 				28BC6AAC18AE431800EF0436 /* LayoutBox.m in Sources */,
@@ -5928,6 +5949,7 @@
 				2877C4C21A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */,
 				289EFC6519ED9BCD0081E7BB /* UIImage+Additions.m in Sources */,
 				28D186D819378587001FBBF7 /* BUCalloutBackgroundView.m in Sources */,
+				28735ADE1C241B0200B2E9D5 /* MapStyleCellView.m in Sources */,
 				2858F2B4158617290047283D /* MapLocationSearchCellView.m in Sources */,
 				28727ADB18B5375400D957FD /* PhotoMapImageLocationViewController.m in Sources */,
 				289478BB18AD6E600066AA2E /* ItineraryViewController.m in Sources */,
@@ -5951,7 +5973,6 @@
 				283436C615DD5DC300B00FD5 /* main.m in Sources */,
 				283781621A247C7800D046A5 /* LeisureListViewController.m in Sources */,
 				283436C815DD5DC300B00FD5 /* SuperViewController.m in Sources */,
-				2803DC6A19E854EA00841F29 /* SettingsViewController.m in Sources */,
 				284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */,
 				283436C915DD5DC300B00FD5 /* AccountViewController.m in Sources */,
 				288055DB18BB7A9B00BABAB1 /* CSRouteSegmentAnnotationView.m in Sources */,
@@ -6015,6 +6036,7 @@
 				283436FB15DD5DC300B00FD5 /* ViewUtilities.m in Sources */,
 				283436FC15DD5DC300B00FD5 /* ItineraryCellView.m in Sources */,
 				283436FD15DD5DC300B00FD5 /* RouteListViewController.m in Sources */,
+				28735AD91C241AD900B2E9D5 /* SettingsViewController.m in Sources */,
 				283436FE15DD5DC300B00FD5 /* RouteCellView.m in Sources */,
 				28ECBE0C19CF25E7006BFE83 /* BUInlineErrorView.m in Sources */,
 				28965C5518BF3CC3001BB258 /* TBXML+Additions.m in Sources */,
@@ -6108,6 +6130,7 @@
 				2877C4C31A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */,
 				289EFC6619ED9BCD0081E7BB /* UIImage+Additions.m in Sources */,
 				2834376015DD5DC300B00FD5 /* PhotoCategoryManager.m in Sources */,
+				28735ADF1C241B0200B2E9D5 /* MapStyleCellView.m in Sources */,
 				2834376515DD5DC300B00FD5 /* MapLocationSearchCellView.m in Sources */,
 				2834376715DD5DC300B00FD5 /* PhotoWizardCategoryCellView.m in Sources */,
 				28CBBCA01641B57F005E7056 /* WayPointViewController.m in Sources */,
@@ -6531,6 +6554,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				COPY_PHASE_STRIP = NO;
 				DISPLAY_PREFIX = "Dev-";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6589,6 +6613,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6644,6 +6669,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6692,6 +6718,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6733,11 +6760,12 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_ID = "cns-adhoc";
+				BUNDLE_ID = "mobile-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -6765,7 +6793,7 @@
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "508c2b4b-0253-469b-b6d2-0f5d047c67d4";
+				PROVISIONING_PROFILE = "114b4689-c736-40e3-be88-1c36b26ce499";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -7328,6 +7356,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DISPLAY_PREFIX = "Beta-";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -7362,7 +7391,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
+				PROVISIONING_PROFILE = "114b4689-c736-40e3-be88-1c36b26ce499";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
