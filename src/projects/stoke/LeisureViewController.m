@@ -110,6 +110,7 @@
 	
 	_waypointControl.shouldScrollToSelectedItem=NO;
 	[_waypointControl reloadData];
+	[_waypointControl setSelectedIndex:0 animated:NO];
 	
 	_dataProvider.routeValue=_unitControl.value;
 	

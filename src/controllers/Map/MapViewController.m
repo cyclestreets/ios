@@ -1285,6 +1285,9 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 - (void) didTapOnMapSingle:(UITapGestureRecognizer*)recogniser {
 	
+	if(_uiState==MapPlanningStateRoute)
+		return;
+	
 	BetterLog(@"_selectedAnnotation=%@",_selectedAnnotation);
 	
 	// if an annotation is active, do not add a new one, we must wait for the annotation to be deselected
@@ -1850,7 +1853,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}else{
 		[UIView animateWithDuration:0.3 animations:^{
-			_addPointView.height=60;
+			_addPointView.height=44+STANDARDCELLHEIGHT;
 		}];
 	}
 	

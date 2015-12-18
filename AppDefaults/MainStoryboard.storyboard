@@ -419,7 +419,7 @@ You can add a point via your current position or search for a known one.</string
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome_CS.jpg" id="gNY-yy-60T">
-                                                <rect key="frame" x="10" y="149" width="260" height="140"/>
+                                                <rect key="frame" x="10" y="169" width="260" height="140"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -839,11 +839,11 @@ You can add a point via your current position or search for a known one.</string
                                 <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             </mapView>
                             <view contentMode="scaleToFill" id="eJg-wB-7Qt">
-                                <rect key="frame" x="0.0" y="34" width="320" height="26"/>
+                                <rect key="frame" x="0.0" y="25" width="320" height="36"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tZs-u5-4B7" userLabel="poi">
-                                        <rect key="frame" x="8" y="-4" width="53" height="30"/>
+                                        <rect key="frame" x="8" y="2" width="53" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" image="CSBarButton_poi.png"/>
@@ -852,7 +852,7 @@ You can add a point via your current position or search for a known one.</string
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Qw-5h-AAN" userLabel="leisureadd">
-                                        <rect key="frame" x="98" y="-2" width="45" height="30"/>
+                                        <rect key="frame" x="82" y="4" width="73" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" image="CSBarButton_leisure_add.png"/>
@@ -861,7 +861,7 @@ You can add a point via your current position or search for a known one.</string
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hdx-IW-PkS" userLabel="saveloc">
-                                        <rect key="frame" x="181" y="-4" width="46" height="30"/>
+                                        <rect key="frame" x="174" y="2" width="67" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" image="CSBarButton_saveloc.png"/>
@@ -870,7 +870,7 @@ You can add a point via your current position or search for a known one.</string
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iIO-bW-9fY" userLabel="waypoints">
-                                        <rect key="frame" x="270" y="-2" width="26" height="26"/>
+                                        <rect key="frame" x="257" y="4" width="63" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" image="CSTabBar_plan_route.png"/>
@@ -1237,6 +1237,6 @@ Drag a waypoint to re-order it.</string>
         <image name="welcome_CS.jpg" width="260" height="195"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hpe-CA-i7e"/>
+        <segue reference="rS1-bW-9xo"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -171,7 +171,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		
 		[[BUDataSourceManager sharedInstance] processDataRequest:_searchOperation];
 		
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil];
+		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil andDelay:0 andAllowTouch:YES];
 		
 	}
 	

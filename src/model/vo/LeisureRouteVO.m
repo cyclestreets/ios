@@ -152,13 +152,13 @@ static NSString *const RouteTypeDistance=@"Distance";
 	
 	if(type==LeisureRouteTypeDistance){
 		if([[SettingsManager sharedInstance] routeUnitisMiles]){
-			return @[@(1),@(10)];
+			return @[@(1),@(40)];
 		}else{
-			return @[@(1),@(16)];
+			return @[@(1),@(64)];
 		}
 		
 	}else{
-		return @[@(15),@(60)];
+		return @[@(15),@(240)];
 	}
 	
 }
