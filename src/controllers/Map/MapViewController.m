@@ -650,6 +650,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 // called continuously as map locates user via showsUserLocation=YES
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
+	BetterLog(@"");
+	
 	userLocation.title = EMPTYSTRING;
 	
 	if(!_programmaticChange && self.lastLocation!=nil)
@@ -707,13 +709,15 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 // called as showsUserLocation is set to YES
 - (void)mapViewWillStartLocatingUser:(MKMapView *)mapView{
-	
+	BetterLog(@"");
 	
 }
 
 
 // called when showsUserLocation is set to NO
 - (void)mapViewDidStopLocatingUser:(MKMapView *)mapView{
+	
+	BetterLog(@"");
 	
 	if(_uiState!=MapPlanningStateRoute)
 		[self updateUItoState:_previousUIState];
@@ -761,6 +765,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)locationDidFail:(NSNotification *)notification{
 	
+	BetterLog(@"");
+	
 	[self updateUItoState:_previousUIState];
 	
 }
@@ -769,6 +775,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 // assess if there are any UI changes related this location update
 -(void)assessLocationEffect{
+	
+	BetterLog(@"");
 		
 	if(_uiState==MapPlanningStateLocating || _uiState==MapPlanningStateRouteLocating){
 		
@@ -807,13 +815,17 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 #pragma mark - Map Tracking mode
 
 -(void)stopUserTracking{
+	
+	BetterLog(@"");
+	
 	_programmaticChange=NO;
 	_allowsUserTrackingUI=NO;
-	[_mapView setUserTrackingMode:MKUserTrackingModeNone animated:NO];
 	_followUserButton.selected=_allowsUserTrackingUI;
 }
 
 -(IBAction)toggleUserTracking{
+	
+	BetterLog(@"");
 	
 	_allowsUserTrackingUI=!_allowsUserTrackingUI;
 	
@@ -951,7 +963,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	if(_routeOverlay==nil){
 		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:_route];
-		[self.mapView insertOverlay:_routeOverlay aboveOverlay:nil];
+		[self.mapView addOverlay:_routeOverlay];
 	}else{
 		[_routeOverlay updateForDataProvider:_route];
 		[_routeOverlayRenderer setNeedsDisplay];
@@ -1045,6 +1057,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)assessWayPointAddition:(CLLocationCoordinate2D)cooordinate{
 	
+	BetterLog(@"");
+	
 	if(_uiState==MapPlanningStateRoute)
 		return;
 	
@@ -1081,6 +1095,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)assessUIState{
 	
+	BetterLog(@"");
+	
 	if(_savedSelectedRouteLoading)
 		return;
 	
@@ -1109,6 +1125,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 // initial Waypoint creation
 -(void)addWayPointAtCoordinate:(CLLocationCoordinate2D)coords{
+	
+	BetterLog(@"");
 	
 	WayPointVO *waypoint=[WayPointVO new];
 	
@@ -1183,6 +1201,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 // update Waypoint types from creation, as can change if waypoints are removed post creation ie intermediate can become end etc
 -(void)updateWaypointStatuses{
+	
+	BetterLog(@"");
 	
 	[_mapView removeAnnotations:_waypointAnnotationArray];
 	
@@ -1285,6 +1305,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 - (void) didTapOnMapSingle:(UITapGestureRecognizer*)recogniser {
 	
+	BetterLog(@"");
+	
 	if(_uiState==MapPlanningStateRoute)
 		return;
 	
@@ -1306,6 +1328,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 - (BOOL)mapViewRegionDidChangeFromUserInteraction
 {
+	BetterLog(@"");
+	
 	UIView *view = self.mapView.subviews.firstObject;
 	//  Look through gesture recognizers to determine whether this region change is from user interaction
 	for(UIGestureRecognizer *recognizer in view.gestureRecognizers) {
@@ -1320,6 +1344,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 
 -(void)addLocationToMapForGesture:(CLLocation*)location{
+	
+	BetterLog(@"");
 	
 	if (location==nil) {
 		return;
@@ -1342,6 +1368,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState{
+	
+	BetterLog(@"");
 	
 	if(_uiState==MapPlanningStateRoute){
 		BetterLog(@"MapPlanningStateRoute");
@@ -1368,6 +1396,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
+	
+	BetterLog(@"");
 	
 	[self hideAddPointView];
 	
@@ -1546,6 +1576,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
 	
+	BetterLog(@"");
 	
 	if([view.annotation isKindOfClass:[CSWaypointAnnotation class]]){
 	
