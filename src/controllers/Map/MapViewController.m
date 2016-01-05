@@ -49,6 +49,7 @@
 #import "UIColor+AppColors.h"
 #import "UIImage+Additions.h"
 #import "UIImage-Additions.h"
+#import "UIImage+ColorImage.h"
 
 #import <A2StoryboardSegueContext.h>
 #include <PixateFreestyle/PixateFreestyle.h>
@@ -315,11 +316,15 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_walkingRouteOverlayView.y=self.view.height+_walkingRouteOverlayView.height;
 	
 	
+	[UIImage styleExistingNavButton:_followUserButton forID:@"compass" atSize:_followUserButton.size];
 	_followUserButton.layer.cornerRadius=_followUserButton.width/2;
 	_followUserButton.layer.shadowColor=UIColorFromRGB(0x000000).CGColor;
 	_followUserButton.layer.shadowOffset=CGSizeMake(2,3);
 	_followUserButton.layer.shadowRadius=4;
 	_followUserButton.layer.shadowOpacity=0.7;
+	
+	
+	
 	
 	self.programmaticChange = NO;
 	self.singleTapDidOccur=NO;
@@ -410,7 +415,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	self.activeLocationSubButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
 	_activeLocationSubButton.tintColor=[UIColor whiteColor];
 	[_activeLocationSubButton addTarget:self action:@selector(didSelectLocateUserbutton) forControlEvents:UIControlEventTouchUpInside];
-	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_location.png"] forState:UIControlStateNormal];
+	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_followuser.png"] forState:UIControlStateNormal];
 	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_gpsactive.png"] forState:UIControlStateSelected];
 	self.locationButton = [[UIBarButtonItem alloc] initWithCustomView:_activeLocationSubButton];
 	_locationButton.width = 40;

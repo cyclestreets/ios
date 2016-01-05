@@ -218,7 +218,7 @@ static NSString *clientidFileConst = @"clientid";
 
 -(void)removeDataFileForType:(NSString*)type{
 	
-	NSError *error = [[NSError alloc] init];
+	NSError *error = [[NSError alloc] initWithDomain:@"CycleStreets" code:1000 userInfo:nil];
 	
 	if([type isEqualToString:favouritesFileConst]){
 		[[NSFileManager defaultManager] removeItemAtPath:[self favouritesFile] error:&error];
@@ -257,7 +257,7 @@ static NSString *clientidFileConst = @"clientid";
 // remove the route file.
 - (void)deleteRoute:(NSInteger) routeIdentifier {
 	NSString *routeFile = [[self routesDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld", (long)routeIdentifier]];
-	NSError *error = [[NSError alloc] init];
+	NSError *error = [[NSError alloc] initWithDomain:@"CycleStreets" code:1000 userInfo:nil];
 	[[NSFileManager defaultManager] removeItemAtPath:routeFile error:&error];
 }
 

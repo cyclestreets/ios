@@ -918,15 +918,11 @@ You can add a point via your current position or search for a known one.</string
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="z9I-br-A6V">
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="z9I-br-A6V">
                                 <rect key="frame" x="16" y="80" width="36" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                 <inset key="imageEdgeInsets" minX="-4" minY="2" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" image="CSBarButton_followuser.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" image="CSBarButton_followuser_selected.png"/>
                                 <connections>
                                     <action selector="toggleUserTracking" destination="Rn0-2R-OLO" eventType="touchUpInside" id="HBE-4P-h0p"/>
                                 </connections>
@@ -1218,8 +1214,6 @@ Drag a waypoint to re-order it.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="CSBarButton_followuser.png" width="20" height="20"/>
-        <image name="CSBarButton_followuser_selected.png" width="20" height="20"/>
         <image name="CSBarButton_leisure_add.png" width="20" height="20"/>
         <image name="CSBarButton_poi.png" width="20" height="20"/>
         <image name="CSBarButton_saveloc.png" width="17" height="20"/>

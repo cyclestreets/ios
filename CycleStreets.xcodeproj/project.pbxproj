@@ -349,6 +349,18 @@
 		282292341C3BEC7F00235259 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282292311C3BEC7F00235259 /* Localizable.strings */; };
 		282292351C3BEC7F00235259 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282292311C3BEC7F00235259 /* Localizable.strings */; };
 		282292361C3BEC7F00235259 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282292311C3BEC7F00235259 /* Localizable.strings */; };
+		282292381C3BEF8700235259 /* compass.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292371C3BEF8700235259 /* compass.pdf */; };
+		282292391C3BEF8700235259 /* compass.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292371C3BEF8700235259 /* compass.pdf */; };
+		2822923A1C3BEF8700235259 /* compass.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292371C3BEF8700235259 /* compass.pdf */; };
+		2822923B1C3BEF8700235259 /* compass.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292371C3BEF8700235259 /* compass.pdf */; };
+		2822923E1C3BF00B00235259 /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2822923D1C3BF00B00235259 /* UIImage+ColorImage.m */; };
+		2822923F1C3BF00B00235259 /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2822923D1C3BF00B00235259 /* UIImage+ColorImage.m */; };
+		282292401C3BF00B00235259 /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2822923D1C3BF00B00235259 /* UIImage+ColorImage.m */; };
+		282292411C3BF00B00235259 /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2822923D1C3BF00B00235259 /* UIImage+ColorImage.m */; };
+		282292431C3BF2D000235259 /* compass-selected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292421C3BF2D000235259 /* compass-selected.pdf */; };
+		282292441C3BF2D000235259 /* compass-selected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292421C3BF2D000235259 /* compass-selected.pdf */; };
+		282292451C3BF2D000235259 /* compass-selected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292421C3BF2D000235259 /* compass-selected.pdf */; };
+		282292461C3BF2D000235259 /* compass-selected.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 282292421C3BF2D000235259 /* compass-selected.pdf */; };
 		282517FB19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
 		282517FC19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
 		282517FF19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */; };
@@ -2139,6 +2151,10 @@
 		282292231C3BD9E400235259 /* CSRetinaTileRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRetinaTileRenderer.h; sourceTree = "<group>"; };
 		282292241C3BD9E400235259 /* CSRetinaTileRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRetinaTileRenderer.m; sourceTree = "<group>"; };
 		282292321C3BEC7F00235259 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		282292371C3BEF8700235259 /* compass.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = compass.pdf; sourceTree = "<group>"; };
+		2822923C1C3BF00B00235259 /* UIImage+ColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorImage.h"; sourceTree = "<group>"; };
+		2822923D1C3BF00B00235259 /* UIImage+ColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorImage.m"; sourceTree = "<group>"; };
+		282292421C3BF2D000235259 /* compass-selected.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "compass-selected.pdf"; sourceTree = "<group>"; };
 		282517F919D45A6600DDD6D9 /* MKMapView+LegalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+LegalLabel.h"; sourceTree = "<group>"; };
 		282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+LegalLabel.m"; sourceTree = "<group>"; };
 		282517FD19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewSearchLocationViewController.h; sourceTree = "<group>"; };
@@ -3187,6 +3203,8 @@
 		284A35841B32E24700EE2FD4 /* pdf */ = {
 			isa = PBXGroup;
 			children = (
+				282292371C3BEF8700235259 /* compass.pdf */,
+				282292421C3BF2D000235259 /* compass-selected.pdf */,
 				280400AA1B34213200DE0EBA /* bicycles_bad.pdf */,
 				280400AB1B34213200DE0EBA /* bicycles_good.pdf */,
 				280400AC1B34213200DE0EBA /* bicycles_other.pdf */,
@@ -3855,6 +3873,8 @@
 				289EFC5519ED5A710081E7BB /* NSMutableArray+Plist.m */,
 				2889C3991C245FF5003A232A /* MBProgressHUD+Additions.h */,
 				2889C39A1C245FF5003A232A /* MBProgressHUD+Additions.m */,
+				2822923C1C3BF00B00235259 /* UIImage+ColorImage.h */,
+				2822923D1C3BF00B00235259 /* UIImage+ColorImage.m */,
 			);
 			path = categories;
 			sourceTree = "<group>";
@@ -4495,6 +4515,7 @@
 				289478AC18AD31410066AA2E /* MainStoryboard.storyboard in Resources */,
 				28D10EC4135D6E54006F1D94 /* UIIcon_turn_left@2x.png in Resources */,
 				286FAE791A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
+				282292381C3BEF8700235259 /* compass.pdf in Resources */,
 				28D10EC5135D6E54006F1D94 /* UIIcon_turn_right@2x.png in Resources */,
 				280400E91B34213200DE0EBA /* bicycles_other.pdf in Resources */,
 				28ECBE0519CF25BD006BFE83 /* BUInlineErrorView.xib in Resources */,
@@ -4524,6 +4545,7 @@
 				280401811B34213200DE0EBA /* road_good.pdf in Resources */,
 				280401851B34213200DE0EBA /* road_other.pdf in Resources */,
 				280E9335140984F300C7AC75 /* RouteTableCell.xib in Resources */,
+				282292431C3BF2D000235259 /* compass-selected.pdf in Resources */,
 				280E9336140984F300C7AC75 /* CreditsView.xib in Resources */,
 				280E9337140984F300C7AC75 /* FavouritesView.xib in Resources */,
 				280E9338140984F300C7AC75 /* CSRouteDetailsViewController.xib in Resources */,
@@ -4811,6 +4833,7 @@
 				2834363015DD5DC300B00FD5 /* CSTabBar_settings@2x.png in Resources */,
 				2834363115DD5DC300B00FD5 /* FavouritesCell.xib in Resources */,
 				2834363215DD5DC300B00FD5 /* ItineraryCell.xib in Resources */,
+				282292391C3BEF8700235259 /* compass.pdf in Resources */,
 				286FAE7A1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
 				2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */,
 				2834363415DD5DC300B00FD5 /* CreditsView.xib in Resources */,
@@ -4900,6 +4923,7 @@
 				280401B21B34213200DE0EBA /* track_bad.pdf in Resources */,
 				2834368615DD5DC300B00FD5 /* CSTabBar_photomap_tb.png in Resources */,
 				2834368715DD5DC300B00FD5 /* CSTabBar_plan_route.png in Resources */,
+				282292441C3BF2D000235259 /* compass-selected.pdf in Resources */,
 				283781661A247E7A00D046A5 /* Icon_noleisureroutes@2x.png in Resources */,
 				2834368815DD5DC300B00FD5 /* CSTabBar_settings.png in Resources */,
 				2834368A15DD5DC300B00FD5 /* UIButton_green_hi.png in Resources */,
@@ -5166,6 +5190,7 @@
 				28A263791AE65AB4006C09A7 /* UIIcon_quiet_street.png in Resources */,
 				28A2637A1AE65AB4006C09A7 /* UIIcon_roads.png in Resources */,
 				28A264AC1AE65C2D006C09A7 /* MapStyleCellView.xib in Resources */,
+				282292461C3BF2D000235259 /* compass-selected.pdf in Resources */,
 				280400E41B34213200DE0EBA /* bicycles_bad.pdf in Resources */,
 				28A2637B1AE65AB4006C09A7 /* UIIcon_tracks.png in Resources */,
 				28A2637C1AE65AB4006C09A7 /* UIIcon_bear_left.png in Resources */,
@@ -5195,6 +5220,7 @@
 				28A2638A1AE65AB4006C09A7 /* CSTabBar_fav_routes.png in Resources */,
 				28A2638B1AE65AB4006C09A7 /* CSTabBar_itinerary.png in Resources */,
 				28A2638C1AE65AB4006C09A7 /* CSTabBar_photomap_tb.png in Resources */,
+				2822923B1C3BEF8700235259 /* compass.pdf in Resources */,
 				28A2638D1AE65AB4006C09A7 /* CSTabBar_plan_route.png in Resources */,
 				28A2638E1AE65AB4006C09A7 /* Icon_noleisureroutes@2x.png in Resources */,
 				28A2638F1AE65AB4006C09A7 /* CSTabBar_settings.png in Resources */,
@@ -5460,6 +5486,7 @@
 				281C771619F4266800A756D6 /* APIKey_live.txt in Resources */,
 				28FA8AA619E454E80040EA46 /* icon_camera.png in Resources */,
 				28FA8AA719E454E80040EA46 /* icon_location.png in Resources */,
+				282292451C3BF2D000235259 /* compass-selected.pdf in Resources */,
 				280401A71B34213200DE0EBA /* signs_bad.pdf in Resources */,
 				28FA8AA819E454E80040EA46 /* UIIcon_photomap.png in Resources */,
 				280401571B34213200DE0EBA /* enforcement_other.pdf in Resources */,
@@ -5489,6 +5516,7 @@
 				28FA8AB519E454E80040EA46 /* UIButtonBarTrash.png in Resources */,
 				28FA8AB619E454E80040EA46 /* MapViewSearchLocationView.xib in Resources */,
 				280401B31B34213200DE0EBA /* track_bad.pdf in Resources */,
+				2822923A1C3BEF8700235259 /* compass.pdf in Resources */,
 				28FA8AB719E454E80040EA46 /* UIButton_grey_lo.png in Resources */,
 				28B6B2F71A5AA5A0002DF099 /* welcome@2x.jpg in Resources */,
 				28FA8AB819E454E80040EA46 /* UIButton_orange_hi.png in Resources */,
@@ -5788,6 +5816,7 @@
 				28AD642E131FB6C8008527FC /* UIView+Additions.m in Sources */,
 				28AD6434131FB6C8008527FC /* AsyncImageView.m in Sources */,
 				28AD6435131FB6C8008527FC /* BorderView.m in Sources */,
+				2822923E1C3BF00B00235259 /* UIImage+ColorImage.m in Sources */,
 				288055D418BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */,
 				283A0EE61A686A4D0020B6AD /* CSUserRoutePagination.m in Sources */,
 				28AD6437131FB6C8008527FC /* BUSegmentedControl.m in Sources */,
@@ -5942,6 +5971,7 @@
 				283436CF15DD5DC300B00FD5 /* Files.m in Sources */,
 				283436D115DD5DC300B00FD5 /* UserAccount.m in Sources */,
 				2853212A19E7F2E500118E48 /* BUTouchView.m in Sources */,
+				2822923F1C3BF00B00235259 /* UIImage+ColorImage.m in Sources */,
 				28890967193F3EFA009C4325 /* CSAppleVectorMapSource.m in Sources */,
 				28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */,
 				28042E991A2C96C700C56374 /* ApplicationJSONParser.m in Sources */,
@@ -6153,6 +6183,7 @@
 				28A2640C1AE65AB4006C09A7 /* UIView+Border.m in Sources */,
 				28A2640D1AE65AB4006C09A7 /* UIView+Additions.m in Sources */,
 				28A2640E1AE65AB4006C09A7 /* AsyncImageView.m in Sources */,
+				282292411C3BF00B00235259 /* UIImage+ColorImage.m in Sources */,
 				28A2640F1AE65AB4006C09A7 /* BorderView.m in Sources */,
 				28A264101AE65AB4006C09A7 /* BUSegmentedControl.m in Sources */,
 				28A264111AE65AB4006C09A7 /* CSUserRoutePagination.m in Sources */,
@@ -6336,6 +6367,7 @@
 				289EFC4019ED23760081E7BB /* SavedLocationsManager.m in Sources */,
 				28FA8B2719E454E80040EA46 /* BorderView.m in Sources */,
 				28FA8B2819E454E80040EA46 /* CSRouteSegmentAnnotation.m in Sources */,
+				282292401C3BF00B00235259 /* UIImage+ColorImage.m in Sources */,
 				28FA8B2919E454E80040EA46 /* BUSegmentedControl.m in Sources */,
 				28FA8B2A19E454E80040EA46 /* CustomNavigtionBar.m in Sources */,
 				28641D4F19FD65C8009321E0 /* LeisureViewController.m in Sources */,
