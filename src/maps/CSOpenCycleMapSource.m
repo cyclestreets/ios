@@ -13,6 +13,14 @@
 @implementation CSOpenCycleMapSource
 
 
+-(CGSize)tileSize{
+	if (self.isRetinaEnabled) {
+		return CGSizeMake(512,512);
+	}else{
+		return CGSizeMake(256,256);
+	}
+}
+
 
 -(int)maxZoom{
 	return 19;
@@ -24,7 +32,7 @@
 
 
 -(BOOL)isRetinaEnabled{
-	return NO;
+	return YES;
 }
 
 

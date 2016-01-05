@@ -71,6 +71,8 @@
 #import "CSAppleSatelliteMapSource.h"
 #import "CSOrdnanceSurveyStreetViewMapSource.h"
 
+#import "CSRetinaTileRenderer.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 static NSInteger DEFAULT_ZOOM = 15;
@@ -985,7 +987,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
     
     if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+        return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
         
     }
 	

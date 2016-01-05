@@ -344,6 +344,7 @@
 		281E08EF145198D10034CC63 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08ED145198D10034CC63 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		281E09031451C6690034CC63 /* services_dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09011451C6690034CC63 /* services_dev.plist */; };
 		281E09041451C6690034CC63 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
+		282292251C3BD9E400235259 /* CSRetinaTileRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 282292241C3BD9E400235259 /* CSRetinaTileRenderer.m */; };
 		282517FB19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
 		282517FC19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */; };
 		282517FF19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282517FE19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.m */; };
@@ -1573,8 +1574,6 @@
 		28E1468419F2C66E00242F2F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E1468319F2C66E00242F2F /* MediaPlayer.framework */; };
 		28E1469819F2C6A700242F2F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1468E19F2C6A700242F2F /* Default-568h@2x.png */; };
 		28E1469919F2C6A700242F2F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1468F19F2C6A700242F2F /* Default@2x.png */; };
-		28E4A2431B3C09AD00545D0D /* CycleStreets_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E4A2421B3C09AD00545D0D /* CycleStreets_Tests.m */; };
-		28E4A24D1B3C0D0B00545D0D /* RouteManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E4A24C1B3C0D0B00545D0D /* RouteManagerTest.m */; };
 		28E6030A1610B683006A4B4C /* cyclestreets.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 28E603091610B683006A4B4C /* cyclestreets.geojson */; };
 		28E8A3CC1455638D0063AA96 /* SegmentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3CB1455638D0063AA96 /* SegmentVO.m */; };
 		28E8A3E61455B6D10063AA96 /* SavedRoutesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E8A3E51455B6D00063AA96 /* SavedRoutesManager.m */; };
@@ -1946,16 +1945,6 @@
 		E7FD8F43127821DB002640D0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3E127821DB002640D0 /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		28E4A2441B3C09AD00545D0D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
-			remoteInfo = CycleStreets;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2145,6 +2134,8 @@
 		281E08ED145198D10034CC63 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		281E09011451C6690034CC63 /* services_dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_dev.plist; sourceTree = "<group>"; };
 		281E09021451C6690034CC63 /* services_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = services_live.plist; sourceTree = "<group>"; };
+		282292231C3BD9E400235259 /* CSRetinaTileRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRetinaTileRenderer.h; sourceTree = "<group>"; };
+		282292241C3BD9E400235259 /* CSRetinaTileRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRetinaTileRenderer.m; sourceTree = "<group>"; };
 		282517F919D45A6600DDD6D9 /* MKMapView+LegalLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+LegalLabel.h"; sourceTree = "<group>"; };
 		282517FA19D45A6600DDD6D9 /* MKMapView+LegalLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+LegalLabel.m"; sourceTree = "<group>"; };
 		282517FD19D46CBE00DDD6D9 /* MapViewSearchLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewSearchLocationViewController.h; sourceTree = "<group>"; };
@@ -2633,7 +2624,6 @@
 		28E1468319F2C66E00242F2F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		28E1468E19F2C6A700242F2F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		28E1468F19F2C6A700242F2F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		28E4A23E1B3C09AD00545D0D /* CycleStreets Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CycleStreets Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E4A2411B3C09AD00545D0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28E4A2421B3C09AD00545D0D /* CycleStreets_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CycleStreets_Tests.m; sourceTree = "<group>"; };
 		28E4A24C1B3C0D0B00545D0D /* RouteManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteManagerTest.m; sourceTree = "<group>"; };
@@ -2769,13 +2759,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		28E4A23B1B3C09AD00545D0D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		28FA8B8F19E454E80040EA46 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2817,7 +2800,6 @@
 				2834378015DD5DC300B00FD5 /* CycleStreets.app */,
 				28FA8BAC19E454E80040EA46 /* Cycle North Staffs.app */,
 				28A264A21AE65AB4006C09A7 /* Cycle North Staffs.app */,
-				28E4A23E1B3C09AD00545D0D /* CycleStreets Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3456,6 +3438,8 @@
 				28A9997719E705440050C3E8 /* CSAppleSatelliteMapSource.m */,
 				2877C4C01A693F40002246DE /* CSBingSatelliteMapSource.h */,
 				2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */,
+				282292231C3BD9E400235259 /* CSRetinaTileRenderer.h */,
+				282292241C3BD9E400235259 /* CSRetinaTileRenderer.m */,
 			);
 			path = maps;
 			sourceTree = "<group>";
@@ -4397,24 +4381,6 @@
 			productReference = 28A264A21AE65AB4006C09A7 /* Cycle North Staffs.app */;
 			productType = "com.apple.product-type.application";
 		};
-		28E4A23D1B3C09AD00545D0D /* CycleStreets Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 28E4A2491B3C09AD00545D0D /* Build configuration list for PBXNativeTarget "CycleStreets Tests" */;
-			buildPhases = (
-				28E4A23A1B3C09AD00545D0D /* Sources */,
-				28E4A23B1B3C09AD00545D0D /* Frameworks */,
-				28E4A23C1B3C09AD00545D0D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				28E4A2451B3C09AD00545D0D /* PBXTargetDependency */,
-			);
-			name = "CycleStreets Tests";
-			productName = "CycleStreets Tests";
-			productReference = 28E4A23E1B3C09AD00545D0D /* CycleStreets Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		28FA8A3B19E454E80040EA46 /* Stoke */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28FA8BA819E454E80040EA46 /* Build configuration list for PBXNativeTarget "Stoke" */;
@@ -4453,10 +4419,6 @@
 					28A2630D1AE65AB4006C09A7 = {
 						DevelopmentTeam = G27Q6UB594;
 					};
-					28E4A23D1B3C09AD00545D0D = {
-						CreatedOnToolsVersion = 6.3.2;
-						TestTargetID = 1D6058900D05DD3D006BFB54;
-					};
 					28FA8A3B19E454E80040EA46 = {
 						DevelopmentTeam = 4LJ34GQZ65;
 					};
@@ -4481,7 +4443,6 @@
 				2834360115DD5DC300B00FD5 /* CycleStreets Release */,
 				28FA8A3B19E454E80040EA46 /* Stoke */,
 				28A2630D1AE65AB4006C09A7 /* Stoke Release */,
-				28E4A23D1B3C09AD00545D0D /* CycleStreets Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -5360,13 +5321,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		28E4A23C1B3C09AD00545D0D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		28FA8A3D19E454E80040EA46 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -5971,6 +5925,7 @@
 				28965C5A18BF4F94001BB258 /* CSRoutePolyLineOverlay.m in Sources */,
 				289EFC5B19ED86BB0081E7BB /* SavedLocationsManager.m in Sources */,
 				2889095C193F385D009C4325 /* CSOpenCycleMapSource.m in Sources */,
+				282292251C3BD9E400235259 /* CSRetinaTileRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6339,15 +6294,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		28E4A23A1B3C09AD00545D0D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				28E4A2431B3C09AD00545D0D /* CycleStreets_Tests.m in Sources */,
-				28E4A24D1B3C0D0B00545D0D /* RouteManagerTest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		28FA8B0119E454E80040EA46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -6533,14 +6479,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		28E4A2451B3C09AD00545D0D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D6058900D05DD3D006BFB54 /* CycleStreets */;
-			targetProxy = 28E4A2441B3C09AD00545D0D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		284A35801B32C98900EE2FD4 /* Localized.strings */ = {
 			isa = PBXVariantGroup;
@@ -6603,7 +6541,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
+				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6710,7 +6648,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
+				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6854,7 +6792,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
+				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6958,108 +6896,6 @@
 			};
 			name = Adhoc;
 		};
-		28E4A2461B3C09AD00545D0D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "CycleStreets Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CycleStreets.app/CycleStreets";
-			};
-			name = Debug;
-		};
-		28E4A2471B3C09AD00545D0D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "CycleStreets Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CycleStreets.app/CycleStreets";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		28E4A2481B3C09AD00545D0D /* Adhoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREFIX_HEADER = AppDefaults/Prefix.pch;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = "CycleStreets Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CycleStreets.app/CycleStreets";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Adhoc;
-		};
 		28FA8BA919E454E80040EA46 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */;
@@ -7109,7 +6945,7 @@
 					PixateFreestyle,
 				);
 				PRODUCT_NAME = "Cycle North Staffs";
-				PROVISIONING_PROFILE = "8d50b216-b194-4130-8589-4a12bc3c410f";
+				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -7442,16 +7278,6 @@
 				28A2649F1AE65AB4006C09A7 /* Debug */,
 				28A264A01AE65AB4006C09A7 /* Release */,
 				28A264A11AE65AB4006C09A7 /* Adhoc */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		28E4A2491B3C09AD00545D0D /* Build configuration list for PBXNativeTarget "CycleStreets Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				28E4A2461B3C09AD00545D0D /* Debug */,
-				28E4A2471B3C09AD00545D0D /* Release */,
-				28E4A2481B3C09AD00545D0D /* Adhoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
