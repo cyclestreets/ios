@@ -292,7 +292,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	self.activeLocationSubButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
 	_activeLocationSubButton.tintColor=[UIColor whiteColor];
 	[_activeLocationSubButton addTarget:self action:@selector(locationButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_location.png"] forState:UIControlStateNormal];
+	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_followuser.png"] forState:UIControlStateNormal];
 	[_activeLocationSubButton setImage:[UIImage imageNamed:@"CSBarButton_gpsactive.png"] forState:UIControlStateSelected];
 	self.locationButton = [[UIBarButtonItem alloc] initWithCustomView:_activeLocationSubButton];
 	_locationButton.width = 40;
