@@ -922,7 +922,6 @@ You can add a point via your current position or search for a known one.</string
                                 <rect key="frame" x="16" y="80" width="36" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
-                                <inset key="imageEdgeInsets" minX="-4" minY="2" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <action selector="toggleUserTracking" destination="Rn0-2R-OLO" eventType="touchUpInside" id="HBE-4P-h0p"/>
                                 </connections>

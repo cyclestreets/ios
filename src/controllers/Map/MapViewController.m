@@ -316,7 +316,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_walkingRouteOverlayView.y=self.view.height+_walkingRouteOverlayView.height;
 	
 	
-	[UIImage styleExistingNavButton:_followUserButton forID:@"compass" atSize:_followUserButton.size];
+	[UIImage styleExistingNavButton:_followUserButton forID:@"compass" atSize:CGSizeMake(30, 30)];
 	_followUserButton.layer.cornerRadius=_followUserButton.width/2;
 	_followUserButton.layer.shadowColor=UIColorFromRGB(0x000000).CGColor;
 	_followUserButton.layer.shadowOffset=CGSizeMake(2,3);
