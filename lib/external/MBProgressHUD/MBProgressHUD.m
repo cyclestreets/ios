@@ -159,9 +159,14 @@
 -(void)setTouchToContinue:(BOOL)newTouchToContinue{
 	touchToContinue=newTouchToContinue;
 	if (touchToContinue==YES) {
-		touchToContinueLabelText=@"TAP TO CONTINUE";
+		touchToContinueLabelText=@"Cancel";
 	} else {
 		touchToContinueLabelText=nil;		
+	}
+	
+	if(!isFinished){
+		[touchToContinueLabel removeFromSuperview];
+		[self setNeedsDisplay];
 	}
 
 	//minShowTime=10;
@@ -217,7 +222,7 @@
 #pragma mark -
 #pragma mark Constants
 
-#define MARGIN 20.0
+#define MARGIN 30.0
 #define PADDING 4.0
 
 #define LABELFONTSIZE 16.0
@@ -370,7 +375,7 @@
         label.text = self.labelText;
 		
         // Update HUD size
-        if (self.width < (lWidth + 2 * MARGIN)) {
+        if (self.width <= (lWidth + 2 * MARGIN)) {
             self.width = lWidth + 2 * MARGIN;
         }
         self.height = self.height + lHeight + PADDING;
@@ -415,7 +420,7 @@
 		detailsLabel.text = self.detailsLabelText;
 		
 		// Update HUD size
-		if (self.width < lWidth) {
+		if (self.width <= lWidth) {
 			self.width = lWidth + 2 * MARGIN;
 		}
 		self.height = self.height + lHeight + PADDING;
@@ -468,7 +473,7 @@
 		
 		
 		// Update HUD size
-		if (self.width < lWidth) {
+		if (self.width <= lWidth) {
 			self.width = lWidth + 2 * MARGIN;
 		}
 		self.height = self.height + lHeight + (PADDING*3);
@@ -491,6 +496,10 @@
 		touchToContinueLabel.frame = lFrameT;
 		
 		[self addSubview:touchToContinueLabel];
+		
+	}else{
+		
+		[touchToContinueLabel removeFromSuperview];
 		
 	}
 	

@@ -238,7 +238,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 	
 	
-	if (searchText != nil && [searchText length] > 3) {
+	if (searchText != nil && [searchText length] > 2) {
 		
 			self.searchString = searchText;
 			[self queueDataRequest];

@@ -28,14 +28,13 @@
 @property (weak, nonatomic) IBOutlet UILabel				*startLabel;
 @property (weak, nonatomic) IBOutlet UILabel				*endLabel;
 @property (weak, nonatomic) IBOutlet UILabel				*readoutLabel;
-@property (weak, nonatomic) IBOutlet UILabel *poiReadoutLabel;
+@property (weak, nonatomic) IBOutlet UILabel				*poiReadoutLabel;
 
-@property (strong, nonatomic) IBOutlet BUHorizontalMenuView *waypointControl;
-
+@property (weak, nonatomic) IBOutlet BUHorizontalMenuView	*waypointControl;
 @property (weak, nonatomic) IBOutlet UIButton				*calculateButton;
 
 
-@property (nonatomic,strong)  NSString									*name;
+@property (nonatomic,strong)  NSString						*name;
 
 // state
 @property (nonatomic,strong) LeisureRouteVO					*dataProvider;
@@ -115,6 +114,8 @@
 	_dataProvider.routeValue=_unitControl.value;
 	
 	[self updateUIForTypeChange];
+	
+	[self horizMenu:_waypointControl itemSelectedAtIndex:0];
     
 }
 

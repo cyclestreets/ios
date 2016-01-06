@@ -183,7 +183,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 		[[BUDataSourceManager sharedInstance] processDataRequest:_searchOperation];
 		
 		
-		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:nil withCancelBlock:^(BOOL complete, NSString *error) {
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Searching..." andMessage:@"                               " withCancelBlock:^(BOOL complete, NSString *error) {
 			if(complete)
 				[weakSelf cancelOperation:_searchOperation];
 		}];

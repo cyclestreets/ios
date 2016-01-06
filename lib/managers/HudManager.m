@@ -142,6 +142,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(HudManager);
 		HUD.cancelOperation=YES;
 	}else{
 		HUD.touchToContinue=allowTouch;
+		
 	}
 	
 

@@ -401,7 +401,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9rS-EM-YSW">
                                                 <rect key="frame" x="10" y="5" width="260" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <string key="text">Welcome to the CycleStreets app
+                                                <string key="text">Welcome to CycleStreets
 
 </string>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -651,7 +651,7 @@ You can add a point via your current position or search for a known one.</string
                                 <rect key="frame" x="16" y="350" width="248" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Calculate">
+                                <state key="normal" title="Create leisure route">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1230,6 +1230,6 @@ Drag a waypoint to re-order it.</string>
         <image name="welcome_CS.jpg" width="260" height="195"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rS1-bW-9xo"/>
+        <segue reference="Hpe-CA-i7e"/>
     </inferredMetricsTieBreakers>
 </document>
