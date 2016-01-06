@@ -63,7 +63,7 @@
 		268216E7A2D9D7D3332ED9E2 /* NSMutableDictionary+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5811CE84F8BA193AAF4565 /* NSMutableDictionary+BlocksKit.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		268CDA75D84E588858D7B271 /* PXVector.h in Headers */ = {isa = PBXBuildFile; fileRef = DF95C1711CD5B605C5AEA8E8 /* PXVector.h */; };
 		275CCE1EA5447B9A50C1B534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBBF54658DBF1DDDDA95A41 /* Foundation.framework */; };
-		2810DE8B1C20326900740E3B /* NSObject+PXSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = A1BEC70D14305C358D97F4C4 /* NSObject+PXSubclass.h */; };
+		282FF5C61C3D755D007EDF93 /* NSObject+PXSubclass.h in Headers */ = {isa = PBXBuildFile; fileRef = A1BEC70D14305C358D97F4C4 /* NSObject+PXSubclass.h */; };
 		287AF751F3162ECAFD763C47 /* PXUICollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1021E5EB2082675AFC0C6232 /* PXUICollectionView.h */; };
 		29891F9BEC44D6E19DC030FE /* PixateFreestyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 74BEE5565C093574523ABD25 /* PixateFreestyle.h */; };
 		2A0AE8B5D8E1D3E758C0DBB5 /* PXNonScalingStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = 60DA35CD8A76AE5BB700E677 /* PXNonScalingStroke.h */; };
@@ -1775,7 +1775,7 @@
 				01FCA2189F1F2A65A9888ABB /* PXAnimationInfo.h in Headers */,
 				5E928403EE5E9F25F22F9BDD /* PXAnimationPropertyHandler.h in Headers */,
 				7995C047C27E42FD0A5F941E /* PXAnimationStyler.h in Headers */,
-				2810DE8B1C20326900740E3B /* NSObject+PXSubclass.h in Headers */,
+				282FF5C61C3D755D007EDF93 /* NSObject+PXSubclass.h in Headers */,
 				C58571F88C5AFF103409CD19 /* PXArc.h in Headers */,
 				35ECC9B5B62A7A0DDC37C440 /* PXArrowRectangle.h in Headers */,
 				3B9C64CA1B37E98FB5F2E5BD /* PXAttributeSelector.h in Headers */,
