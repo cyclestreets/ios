@@ -15,7 +15,7 @@
 #import "GlobalUtilities.h"
 #import "UIColor+AppColors.h"
 
-#import <UIControl+BlocksKit.h>
+#import "UIControl+BlocksKit.h"
 
 @interface BUHorizontalMenuView()<UIScrollViewDelegate>
 

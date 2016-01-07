@@ -236,15 +236,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	}
 	
 	NSDictionary *root=_responseDict;
+	NSDictionary *types=root[@"types"];
 	
-	
-	if(root[@"types"]!=nil){
+	if(types!=nil){
  
 		NSMutableArray *dataProvider=[[NSMutableArray alloc]init];
+		NSArray *keys=types.allKeys;
+		NSArray *sortedArray = [keys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
  
-		for(NSString *key in root[@"types"]){
+		for(NSString *key in sortedArray){
  
-			NSDictionary *dict=root[@"types"][key];
+			NSDictionary *dict=types[key];
 			
 			POICategoryVO *poicategory=[[POICategoryVO alloc]init];
 			[poicategory updateWithAPIDict:dict];

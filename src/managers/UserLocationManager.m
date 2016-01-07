@@ -11,7 +11,7 @@
 #import "GenericConstants.h"
 #import "DeviceUtilities.h"
 #import "GlobalUtilities.h"
-#import <UIAlertView+BlocksKit.h>
+#import "UIAlertView+BlocksKit.h"
 #import "StringUtilities.h"
 
 @interface UserLocationManager()<CLLocationManagerDelegate>

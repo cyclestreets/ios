@@ -51,6 +51,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSRoutePolyLineRenderer.h"
 #import "CSMapSource.h"
 #import "CSMapTileService.h"
+#import "CSRetinaTileRenderer.h"
 
 @interface RouteSegmentViewController()< MKMapViewDelegate>
 
@@ -250,9 +251,13 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		[self updateRouteOverlay];
 		[self setSegmentIndex:_index];
 	}
-		
 	
 	[super viewWillAppear:animated];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+	[self updateFooterPositions];
 }
 
 
@@ -404,10 +409,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
     
-    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
-        
-    }
+	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
+		
+	}
 	
 	// individual segment
 	if(overlay==_segmentOverlay){

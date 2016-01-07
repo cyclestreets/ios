@@ -99,24 +99,6 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
-	<key>RetrieveRoutePhotos</key>
-	<dict>
-		<key>id</key>
-		<string>RetrieveRoutePhotos</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/photos.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<false/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
 	<key>UploadUserPhotos</key>
 	<dict>
 		<key>id</key>
@@ -129,6 +111,24 @@
 		<false/>
 		<key>parserType</key>
 		<string>DATATYPE_XML</string>
+		<key>headers</key>
+		<dict>
+			<key>gzip</key>
+			<string>Accepts-Encoding</string>
+		</dict>
+	</dict>
+	<key>RetrieveRoutePhotos</key>
+	<dict>
+		<key>id</key>
+		<string>RetrieveRoutePhotos</string>
+		<key>remoteurl</key>
+		<string>https://api.cyclestreets.net/v2/photomap.locations</string>
+		<key>type</key>
+		<string>GET</string>
+		<key>cache</key>
+		<false/>
+		<key>parserType</key>
+		<string>DATATYPE_JSON</string>
 		<key>headers</key>
 		<dict>
 			<key>gzip</key>

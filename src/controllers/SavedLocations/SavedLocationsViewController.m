@@ -14,9 +14,9 @@
 #import "SavedLocationsManager.h"
 #import "SavedLocationTableCellView.h"
 
-#import <FMMoveTableView.h>
+#import "FMMoveTableView.h"
 
-#import <UIAlertView+BlocksKit.h>
+#import "UIAlertView+BlocksKit.h"
 
 @interface SavedLocationsViewController ()<UITableViewDataSource,UITableViewDelegate>
 

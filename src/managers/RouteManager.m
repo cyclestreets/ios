@@ -24,7 +24,7 @@
 #import "ApplicationXMLParser.h"
 #import "BUDataSourceManager.h"
 #import "LeisureRouteVO.h"
-#import <NSObject+BKBlockExecution.h>
+#import "NSObject+BKBlockExecution.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
