@@ -89,6 +89,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, strong) UIButton								* activeLocationSubButton;
 @property (nonatomic, strong) UIBarButtonItem						* waypointButton;
 @property (nonatomic, strong) UIBarButtonItem						* routeButton;
+@property (nonatomic, strong) UIButton								* addRouteSubButton;
 @property (nonatomic, strong) UIBarButtonItem						* changePlanButton;
 @property (nonatomic, strong) UIBarButtonItem						* leftFlex;
 @property (nonatomic, strong) UIBarButtonItem						* rightFlex;
@@ -431,15 +432,15 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 													  target:self
 													  action:@selector(showRoutePlanMenu:)];
 	
-	
-	self.routeButton = [[UIBarButtonItem alloc] initWithTitle:@"Plan"
-														style:UIBarButtonItemStylePlain
-													   target:self
-													   action:@selector(routeButtonSelected)];
+	self.addRouteSubButton=[UIButton buttonWithType:UIButtonTypeCustom];
+	_addRouteSubButton.tintColor=[UIColor whiteColor];
+	[_addRouteSubButton setTitle:@"Plan" forState:UIControlStateNormal];
+	[_addRouteSubButton addTarget:self action:@selector(routeButtonSelected) forControlEvents:UIControlEventTouchUpInside];
+	_addRouteSubButton.size=CGSizeMake(44, 44);
+	self.routeButton = [[UIBarButtonItem alloc] initWithCustomView:_addRouteSubButton];
 	
 	
 	// CNS only
-	
 	self.addPointButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"CSBarButton_addPoint.png"]
 														style:UIBarButtonItemStylePlain
 													   target:self
@@ -584,7 +585,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStatePlanning");
 			
-			_routeButton.title = @"Plan";
+			[_addRouteSubButton setTitle:@"Plan" forState:UIControlStateNormal];
 			//_searchButton.enabled = YES;
 			_activeLocationSubButton.selected=NO;
 			
@@ -598,7 +599,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStateRoute");
 			
-			_routeButton.title = @"New";
+			[_addRouteSubButton setTitle:@"New" forState:UIControlStateNormal];
 			_activeLocationSubButton.selected=NO;
 			//_searchButton.enabled = YES;
 			
@@ -613,7 +614,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		{
 			BetterLog(@"MapPlanningStateRouteLocating");
 			
-			_routeButton.title = @"New";
+			[_addRouteSubButton setTitle:@"New" forState:UIControlStateNormal];
 			_activeLocationSubButton.selected=NO;
 			//_searchButton.enabled = NO;
 			
@@ -623,6 +624,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		}
 		break;
 	}
+	
+	
 	
 }
 
@@ -1452,7 +1455,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			 annotationView.canShowCallout=YES;
 			 
 			 if(_uiState!=MapPlanningStateRoute){
-				 UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+				 UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 52)];
 				 [rcalloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
 				 rcalloutButton.tag=kDeleteWaypointControlTag;
 				 rcalloutButton.backgroundColor=[UIColor redColor];
@@ -1460,7 +1463,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			 }
 			 
 			 
-			UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+			UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 52)];
 			 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor whiteColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateNormal];
 			 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor blackColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateHighlighted];
 			 lcalloutButton.tag=kSaveLocationControlTag;
@@ -1493,7 +1496,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			annotationView.canShowCallout=YES;
 			
 			
-			UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 44)];
+			UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 52)];
 			UIImage *poiimage=[UIImage imageNamed:@"CSIcon_map_poi.png"];
 			[rcalloutButton setImage:poiimage forState:UIControlStateNormal];
 			rcalloutButton.backgroundColor=[UIColor appTintColor];
