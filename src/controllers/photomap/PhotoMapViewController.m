@@ -51,6 +51,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "PhotoWizardViewController.h"
 #import "ExpandedUILabel.h"
 #import "PhotoMapVideoLocationViewController.h"
+#import "CSRetinaTileRenderer.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
@@ -425,13 +426,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
 	if([UserLocationManager isSignificantLocationChange:centreCoordinate newLocation:location.coordinate accuracy:4]){
 		
-		if(_currentLocation==nil){
-			[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:NO];
-		}else{
-			[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:YES];
-		}
+		[_mapView setCenterCoordinate:location.coordinate zoomLevel:15 animated:NO];
+		
 		self.currentLocation=location;
 		
+		BetterLog(@"currentLocation=%@",_currentLocation);
 		
 	}else{
 		
@@ -474,11 +473,11 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
     
-    if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-        return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
-        
-    }
-    
+	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
+		
+	}
+	
     return nil;
 }
 
@@ -555,7 +554,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 - (void)fixLocationAndButtons:(CLLocationCoordinate2D)location {
-	[_mapView setCenterCoordinate:location];
+	//[_mapView setCenterCoordinate:location];
 	[self saveLocation:location];	
 }
 
