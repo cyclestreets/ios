@@ -438,8 +438,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 
 -(void)loadRouteForRoutingDict:(NSDictionary*)routingDict{
 	
-	NSString *startCoords=routingDict[@"startCoords"];
-	NSString *finishCoords=routingDict[@"finishCoords"];
+	NSString *startCoords=routingDict[@"startCoord"];
+	NSString *finishCoords=routingDict[@"finishCoord"];
 	
 	if(startCoords!=nil && finishCoords!=nil){
 		

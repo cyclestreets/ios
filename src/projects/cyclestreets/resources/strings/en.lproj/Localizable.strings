@@ -27,3 +27,37 @@
 "createaccount"="Create account";
 "submit"="Submit";
 "clearsubmit"="Clear signin details";
+
+
+
+// Alerts
+
+"unabletoplanroute"="Unable to plan route, as the received locations are invalid";
+"obtainleisureroute"="Obtaining leisure route from CycleStreets.net";
+"obtainroute"="Obtaining route from CycleStreets.net";
+"foundroute"="Found route, added path to map";
+"updatingroute"="Updating route %@";
+
+"routingerror_waypoints"="Routing error: Could not plan valid route for selected waypoints.";
+"routingerror_cycleroutes"="Routing error: not all waypoints are on known cycle routes.";
+"routingerror_routenumberfind"="Unable to find a route with this number.";
+"routingerror_routenumberplan"="Could not plan valid route for selected waypoints.";
+
+"routingerror_routenumberload_title"="Route error";
+"routingerror_routenumberload_message"="Unable to load this route, please re-check route number.";
+
+
+"uploadingphoto"="Uploading Photo";
+"uploadedphoto"="Photo uploaded";
+"uploadphotofailed"="Photo upload failed";
+
+
+"category_retrieving"="Retrieving %@s in area";
+"retrieved"="Retrieved";
+
+
+// generic
+"networkerror_message"="Unable to contact server";
+"networkerror_title"="Network Error";
+"searching"="Searching...";
+"data_unable"="Unable to retrieve data";

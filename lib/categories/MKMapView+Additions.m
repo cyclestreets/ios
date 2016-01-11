@@ -290,7 +290,7 @@
 
 
 
-+(CLLocation*)coordsForString:(NSString*)coordsString{
++(CLLocation*)locationForString:(NSString*)coordsString{
 	
 	
 	NSArray *coordsArray=[coordsString componentsSeparatedByString:@","];

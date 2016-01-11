@@ -102,7 +102,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			
 			NSArray *actionArray=[url.resourceSpecifier componentsSeparatedByString:@"/"];
 			
-			NSString *actionType=actionArray.firstObject;
+			NSString *actionType=actionArray[2];
 			
 			if([actionType isEqualToString:@"route"]){
 				

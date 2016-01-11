@@ -21,7 +21,7 @@
 
 -(NSDictionary*)queryDictionary{
 	
-	if([StringUtilities validateQueryString:self]){
+	//if([StringUtilities validateQueryString:self]){
 		
 		NSMutableDictionary *dict=[NSMutableDictionary dictionary];
 		
@@ -45,11 +45,11 @@
 		
 		return [NSDictionary dictionaryWithDictionary:dict];
 		
-	}else{
+	//}else{
 		
-		return  nil;
+	//	return  nil;
 		
-	}
+//	}
 	
 }
 

@@ -926,6 +926,7 @@
 		289A9B5B13536CCB00E8AF90 /* UIIcon_tracks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */; };
 		289A9B5C13536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */; };
 		289A9B5D13536CCB00E8AF90 /* CSIcon_start_wisp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */; };
+		289C65101C43E13600D2E9BB /* CMMapLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 289C650F1C43E13600D2E9BB /* CMMapLauncher.m */; };
 		289E171916008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171A16008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */; };
 		289E171C16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */; };
@@ -2369,6 +2370,8 @@
 		289A9B5013536CCB00E8AF90 /* UIIcon_tracks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_tracks@2x.png"; sourceTree = "<group>"; };
 		289A9B5213536CCB00E8AF90 /* CSIcon_finish_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_finish_wisp@2x.png"; sourceTree = "<group>"; };
 		289A9B5313536CCB00E8AF90 /* CSIcon_start_wisp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSIcon_start_wisp@2x.png"; sourceTree = "<group>"; };
+		289C650E1C43E13600D2E9BB /* CMMapLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMapLauncher.h; sourceTree = "<group>"; };
+		289C650F1C43E13600D2E9BB /* CMMapLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMapLauncher.m; sourceTree = "<group>"; };
 		289E171816008CFC0062A5FE /* UIButton_barbuttongreen_disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton_barbuttongreen_disabled.png; sourceTree = "<group>"; };
 		289E171B16008D4C0062A5FE /* UIButton_barbuttongreen_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButton_barbuttongreen_disabled@2x.png"; sourceTree = "<group>"; };
 		289E6AF8144C357C0079FFE5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -3498,6 +3501,15 @@
 			path = Wisps;
 			sourceTree = "<group>";
 		};
+		289C650D1C43E13600D2E9BB /* CMMapLauncher */ = {
+			isa = PBXGroup;
+			children = (
+				289C650E1C43E13600D2E9BB /* CMMapLauncher.h */,
+				289C650F1C43E13600D2E9BB /* CMMapLauncher.m */,
+			);
+			path = CMMapLauncher;
+			sourceTree = "<group>";
+		};
 		289EFC4419ED2B7B0081E7BB /* SavedLocations */ = {
 			isa = PBXGroup;
 			children = (
@@ -3576,6 +3588,7 @@
 		28AD61DB131FB69D008527FC /* src */ = {
 			isa = PBXGroup;
 			children = (
+				289C650D1C43E13600D2E9BB /* CMMapLauncher */,
 				28FA8A2719E451FB0040EA46 /* projects */,
 				28890953193F3815009C4325 /* maps */,
 				2872DF3413283575003995BE /* cells */,
@@ -5774,6 +5787,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289C65101C43E13600D2E9BB /* CMMapLauncher.m in Sources */,
 				28727ADE18B5387C00D957FD /* CSPhotomapAnnotationView.m in Sources */,
 				28AD60BC131FB54A008527FC /* AppDelegate.m in Sources */,
 				2837815D1A24751A00D046A5 /* LeisureListViewController.m in Sources */,
