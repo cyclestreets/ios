@@ -1328,7 +1328,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/net/ApplicationJSONParser.m"
@@ -1339,60 +1339,12 @@
             endingLineNumber = "263"
             landmarkName = "-POIListingParser"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ApplicationJSONParser POIListingParser]"
-                  moduleName = "CycleStreets"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/neil/iPhone/Applications/CycleStreets/ios/src/net/ApplicationJSONParser.m"
-                  timestampString = "474200964.321684"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "264"
-                  endingLineNumber = "264"
-                  offsetFromSymbolStart = "1538">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ApplicationJSONParser POIListingParser]"
-                  moduleName = "CycleStreets"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/neil/iPhone/Applications/CycleStreets/ios/src/net/ApplicationJSONParser.m"
-                  timestampString = "474200964.321953"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "264"
-                  endingLineNumber = "264"
-                  offsetFromSymbolStart = "1542">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/controllers/PhotoMap/PhotoMapViewController.m"
-            timestampString = "473872658.060087"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
-            landmarkName = "-createNonPersistentUI"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/controllers/PhotoMap/PhotoMapViewController.m"
