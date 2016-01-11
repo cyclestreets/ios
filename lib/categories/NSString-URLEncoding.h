@@ -10,4 +10,8 @@
 
 @interface NSString (URLEncoding)
 -(NSString *)urlEncodeUsingEncoding:(NSStringEncoding)encoding;
+
+-(NSDictionary*)queryDictionary;
+
+
 @end

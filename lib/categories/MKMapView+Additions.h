@@ -59,4 +59,7 @@
 
 -(void)moveOverlayToTop:(id<MKOverlay>)overlay inLevel:(MKOverlayLevel)level;
 
+
++(CLLocation*)locationForString:(NSString*)coordsString;
+
 @end

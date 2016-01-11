@@ -289,4 +289,24 @@
 }
 
 
+
++(CLLocation*)coordsForString:(NSString*)coordsString{
+	
+	
+	NSArray *coordsArray=[coordsString componentsSeparatedByString:@","];
+	if(coordsArray.count==2){
+		
+		CLLocation *location=[[CLLocation alloc] initWithLatitude:[coordsArray.firstObject floatValue] longitude:[coordsArray.lastObject floatValue]];
+		
+		return location;
+		
+	}else{
+		return nil;
+	}
+	
+}
+
+
+
+
 @end

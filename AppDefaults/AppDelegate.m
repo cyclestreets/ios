@@ -39,6 +39,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "StartupManager.h"
 #import "NSString-Utilities.h"
 #import "GenericConstants.h"
+#import "NSString-URLEncoding.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -99,10 +100,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		NSString *str=url.scheme;
 		if([str containsString:CYCLESTREETSURLSCHEME]){
 			
-			NSString *routeid=[[url.resourceSpecifier componentsSeparatedByString:@"/"] lastObject];
+			NSArray *actionArray=[url.resourceSpecifier componentsSeparatedByString:@"/"];
 			
-			[[RouteManager sharedInstance] loadRouteForRouteId:routeid];
+			NSString *actionType=actionArray.firstObject;
 			
+			if([actionType isEqualToString:@"route"]){
+				
+				NSString *routeid=[actionArray lastObject];
+				
+				[[RouteManager sharedInstance] loadRouteForRouteId:routeid];
+				
+				
+			}else if ([actionType isEqualToString:@"directions"]){
+				
+				NSString *coords=[url query];
+				NSDictionary *queryDictionary=coords.queryDictionary;
+				
+				if (queryDictionary!=nil) {
+					[[RouteManager sharedInstance] loadRouteForRoutingDict:queryDictionary];
+				}else{
+					return NO;
+				}
+				
+			}
 			
 			return YES;
 		}else{

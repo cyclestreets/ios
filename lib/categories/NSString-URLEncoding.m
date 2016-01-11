@@ -7,6 +7,7 @@
 //
 
 #import "NSString-URLEncoding.h"
+#import "StringUtilities.h"
 
 @implementation NSString (URLEncoding)
 -(NSString *)urlEncodeUsingEncoding:(NSStringEncoding)encoding {
@@ -15,6 +16,41 @@
 															   NULL,
 															   (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
 															   CFStringConvertNSStringEncodingToEncoding(encoding));
+}
+
+
+-(NSDictionary*)queryDictionary{
+	
+	if([StringUtilities validateQueryString:self]){
+		
+		NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+		
+		NSArray *componentsArray=[self componentsSeparatedByString:@"&"];
+		for (NSString *part in componentsArray){
+			
+			NSArray *parts=[part componentsSeparatedByString:@"="];
+			if(parts.count<2){
+				break;
+			}
+			
+			NSString *key=(NSString*)parts.firstObject;
+			key=key.stringByRemovingPercentEncoding;
+			
+			NSString *value=(NSString*)parts.lastObject;
+			value=value.stringByRemovingPercentEncoding;
+			
+			dict[key]=value;
+			
+		}
+		
+		return [NSDictionary dictionaryWithDictionary:dict];
+		
+	}else{
+		
+		return  nil;
+		
+	}
+	
 }
 
 

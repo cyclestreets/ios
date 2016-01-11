@@ -25,6 +25,8 @@
 #import "BUDataSourceManager.h"
 #import "LeisureRouteVO.h"
 #import "NSObject+BKBlockExecution.h"
+#import "MKMapView+Additions.h"
+
 
 static NSString *const LOCATIONSUBSCRIBERID=@"RouteManager";
 
@@ -423,6 +425,35 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 		
 	}
 	
+	
+}
+
+
+
+//
+/***********************************************
+ * @description			Basic startCoord=x,x&finishCoord=x,x query string support
+ ***********************************************/
+//
+
+-(void)loadRouteForRoutingDict:(NSDictionary*)routingDict{
+	
+	NSString *startCoords=routingDict[@"startCoords"];
+	NSString *finishCoords=routingDict[@"finishCoords"];
+	
+	if(startCoords!=nil && finishCoords!=nil){
+		
+		CLLocation *startLocation=[MKMapView locationForString:startCoords];
+		CLLocation *finishLocation=[MKMapView locationForString:finishCoords];
+		if(startLocation!=nil && finishLocation!=nil){
+			
+			[self loadRouteForCoordinates:startLocation.coordinate to:finishLocation.coordinate];
+			return;
+		}
+		
+	}
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to plan route, received locations are invalid" andMessage:nil];
 	
 }
 
