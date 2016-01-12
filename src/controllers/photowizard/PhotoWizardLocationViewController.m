@@ -16,6 +16,7 @@
 #import "CSMapSource.h"
 #import "CycleStreets.h"
 #import "CSMapTileService.h"
+#import "CSRetinaTileRenderer.h"
 
 @interface PhotoWizardLocationViewController()<MKMapViewDelegate>
 
@@ -194,7 +195,7 @@
 	
 	
 	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-		return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
 		
 	}
 	

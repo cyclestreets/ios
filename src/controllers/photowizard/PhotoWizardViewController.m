@@ -31,6 +31,7 @@
 #import "CSMapTileService.h"
 #import "UIImage+PDF.h"
 #import "HudManager.h"
+#import "CSRetinaTileRenderer.h"
 
 static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
@@ -1141,7 +1142,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	
 	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-		return [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
+		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
 		
 	}
 	

@@ -21,35 +21,28 @@
 
 -(NSDictionary*)queryDictionary{
 	
-	//if([StringUtilities validateQueryString:self]){
+	NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+	
+	NSArray *componentsArray=[self componentsSeparatedByString:@"&"];
+	for (NSString *part in componentsArray){
 		
-		NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-		
-		NSArray *componentsArray=[self componentsSeparatedByString:@"&"];
-		for (NSString *part in componentsArray){
-			
-			NSArray *parts=[part componentsSeparatedByString:@"="];
-			if(parts.count<2){
-				break;
-			}
-			
-			NSString *key=(NSString*)parts.firstObject;
-			key=key.stringByRemovingPercentEncoding;
-			
-			NSString *value=(NSString*)parts.lastObject;
-			value=value.stringByRemovingPercentEncoding;
-			
-			dict[key]=value;
-			
+		NSArray *parts=[part componentsSeparatedByString:@"="];
+		if(parts.count<2){
+			return nil;
 		}
 		
-		return [NSDictionary dictionaryWithDictionary:dict];
+		NSString *key=(NSString*)parts.firstObject;
+		key=key.stringByRemovingPercentEncoding;
 		
-	//}else{
+		NSString *value=(NSString*)parts.lastObject;
+		value=value.stringByRemovingPercentEncoding;
 		
-	//	return  nil;
+		dict[key]=value;
 		
-//	}
+	}
+	
+	return [NSDictionary dictionaryWithDictionary:dict];
+	
 	
 }
 

@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GenericConstants.h"
 #import "AppDelegate.h"
+#import "UIView+Additions.h"
 
 @implementation ViewUtilities
 
@@ -761,10 +762,12 @@
 		}
 	
 	}else{
-			
-			
-			
-			
+		
+		
+		
+		
+		
+		
 			prompt = [[UIAlertView alloc] initWithTitle:title
 												message:message
 											   delegate:delegate
@@ -773,11 +776,11 @@
 			prompt.tag=kTextEntryAlertTag;
 			prompt.alertViewStyle=UIAlertViewStylePlainTextInput;
 			alertField = [prompt textFieldAtIndex:0];
-		alertField.keyboardType=keyboardType;
+			alertField.keyboardType=keyboardType;
 			[alertField setBackgroundColor:[UIColor whiteColor]];
 			[alertField setClearButtonMode:UITextFieldViewModeWhileEditing];
 			alertField.tag=kTextEntryAlertFieldTag;
-			
+		
 			if(fieldText!=nil){
 				alertField.text=fieldText;
 			}else{

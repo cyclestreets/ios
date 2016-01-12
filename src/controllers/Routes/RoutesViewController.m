@@ -194,6 +194,41 @@
 
 -(IBAction)didSelectFetchRouteButton:(NSString*)type{
 	
+	
+//	__weak __typeof(&*self)weakSelf = self;
+//	
+//	UIAlertController *createAlert=[UIAlertController alertControllerWithTitle:@"Enter route number" message:@"Find a CycleStreets route by number" preferredStyle:UIAlertControllerStyleAlert];
+//	
+//	UIAlertAction *executeAction=[UIAlertAction actionWithTitle:OK style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//		
+//		[[RouteManager sharedInstance] loadRouteForRouteId:createAlert.textFields.firstObject.text];
+//		
+//		[_routeTypeControl setSelectedSegmentIndex:1];
+//		[weakSelf selectedIndexDidChange:1];
+//		
+//	}];
+//	
+//	UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//		
+//	}];
+//	
+//	[createAlert addAction:executeAction];
+//	[createAlert addAction:cancelAction];
+//	[createAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//		textField.placeholder = @"Enter route number";
+//		textField.keyboardType = UIKeyboardTypeNumberPad;
+//		textField.width=200;
+//		
+//	}];
+//	
+//	[self presentViewController:createAlert animated:YES completion:^{
+//		
+//	}];
+//	[createAlert.view layoutIfNeeded];
+	
+	
+	
+	
 	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" keyboardType:UIKeyboardTypeNumberPad delegate:self];
 	
     
@@ -233,6 +268,41 @@
                 
 		}
 		
+	}
+	
+}
+
+
+
+- (void)didPresentAlertView:(UIAlertView *)alertView{
+	
+	
+	switch(alertView.tag){
+			
+		case kTextEntryAlertTag:
+		{
+			UITextField *alertInputField=nil;
+			// os7 cant get view tag for field
+			if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+				alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
+			}else{
+				alertInputField=(UITextField*)[alertView textFieldAtIndex:0];
+			}
+			[UIView animateWithDuration:0.3 animations:^{
+				alertInputField.width=200;
+				alertInputField.x-=100;
+				alertInputField.height=36;
+				alertInputField.y-=5;
+			}];
+			
+			alertInputField.borderStyle=UITextBorderStyleLine;
+		}
+			break;
+			
+		default:
+			
+		break;
+			
 	}
 	
 }

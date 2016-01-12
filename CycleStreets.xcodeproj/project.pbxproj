@@ -4434,7 +4434,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "CycleStreets Ltd";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
@@ -6582,6 +6582,7 @@
 					"-framework",
 					PixateFreestyle,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6639,6 +6640,7 @@
 					"-framework",
 					PixateFreestyle,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "507015f5-c41c-48c7-bf0e-efd28bcc5eaa";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6689,6 +6691,7 @@
 					"-licucore",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6736,6 +6739,7 @@
 					"-lxml2",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "507015f5-c41c-48c7-bf0e-efd28bcc5eaa";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6784,6 +6788,7 @@
 					"-lxml2",
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "114b4689-c736-40e3-be88-1c36b26ce499";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6833,6 +6838,7 @@
 					"-licucore",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
 				PRODUCT_NAME = "Cycle North Staffs";
 				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6880,6 +6886,7 @@
 					"-lxml2",
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
 				PRODUCT_NAME = "Cycle North Staffs";
 				PROVISIONING_PROFILE = "508c2b4b-0253-469b-b6d2-0f5d047c67d4";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6928,6 +6935,7 @@
 					"-lxml2",
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
 				PRODUCT_NAME = "Cycle North Staffs";
 				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6986,6 +6994,7 @@
 					"-framework",
 					PixateFreestyle,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
 				PRODUCT_NAME = "Cycle North Staffs";
 				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -7046,6 +7055,7 @@
 					PixateFreestyle,
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
 				PRODUCT_NAME = "Cycle North Staffs";
 				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -7105,6 +7115,7 @@
 				);
 				OTHER_LIBTOOLFLAGS = "$(OTHER_LDFLAGS)";
 				PODS_ROOT = "${SRCROOT}/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
 				PRODUCT_NAME = "Cycle North Staffs";
 				PROVISIONING_PROFILE = "de63a253-fa0e-42d8-ba6b-14f8d003dc45";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -7128,6 +7139,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (4YM8CCJL5J)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
@@ -7280,6 +7292,7 @@
 					"-framework",
 					PixateFreestyle,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "114b4689-c736-40e3-be88-1c36b26ce499";
 				RUN_CLANG_STATIC_ANALYZER = NO;
