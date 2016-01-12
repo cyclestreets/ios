@@ -46,9 +46,11 @@
 
 
 -(double) getZoomLevel;
+-(double) getZoomLevelForRegion:(MKCoordinateRegion)region;
 
 
--(MKMapRect)mapRectForAnnotations;
+-(MKMapRect) mapRectForAnnotations;
++(MKMapRect) mapRectThatFitsBoundsSW:(CLLocationCoordinate2D)sw NE:(CLLocationCoordinate2D)ne;
 
 
 -(CLLocationCoordinate2D)NEforMapView;

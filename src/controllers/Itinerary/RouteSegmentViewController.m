@@ -256,9 +256,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewWillLayoutSubviews{
 	[self updateFooterPositions];
 }
+
 
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -514,7 +515,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	CLLocationCoordinate2D ne=[_route insetNorthEast];
 	CLLocationCoordinate2D sw=[_route insetSouthWest];
 	
-	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
+	MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:sw NE:ne];
 	
 	if(_routeOverlay==nil){
 		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:_route];
@@ -579,7 +580,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		ne.longitude = start.longitude;
 	}
 	
-	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
+	MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:sw NE:ne];
 	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(100,20,100,20) animated:YES];
 	
 	// check what the zoom will be
@@ -675,6 +676,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(void)updateFooterPositions{
 	
+	BetterLog(@"");
+	
 	if(_footerIsHidden==NO){
 		CGRect	fframe=_footerView.frame;
 		CGRect	aframe=_attributionLabel.frame;
@@ -684,6 +687,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		_footerView.frame=fframe;
 		_attributionLabel.frame=aframe;
+		
 		
 	}
 }
@@ -726,18 +730,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	_locationButton.enabled=YES;
 	
 	
-}
-
-- (MKMapRect) mapRectThatFitsBoundsSW:(CLLocationCoordinate2D)sw NE:(CLLocationCoordinate2D)ne{
-    MKMapPoint pSW = MKMapPointForCoordinate(sw);
-    MKMapPoint pNE = MKMapPointForCoordinate(ne);
-	
-    double antimeridianOveflow =
-	(ne.longitude > sw.longitude) ? 0 : MKMapSizeWorld.width;
-	
-    return MKMapRectMake(pSW.x, pNE.y,
-						 (pNE.x - pSW.x) + antimeridianOveflow,
-						 (pSW.y - pNE.y));
 }
 
 

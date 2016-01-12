@@ -746,7 +746,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 		if(_previousUIState==MapPlanningStateRoute){
 			
-			MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
+			MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
 			[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(40, 10, 10, 10) animated:YES];
 			
 		}else{
@@ -763,7 +763,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}else{
 		
-		MKMapRect mapRect=[self mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
+		MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
 		[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(40, 10, 10, 10) animated:YES];
 		
 	}
@@ -903,17 +903,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 }
 
 
-- (MKMapRect) mapRectThatFitsBoundsSW:(CLLocationCoordinate2D)sw NE:(CLLocationCoordinate2D)ne{
-    MKMapPoint pSW = MKMapPointForCoordinate(sw);
-    MKMapPoint pNE = MKMapPointForCoordinate(ne);
-	
-    double antimeridianOveflow =
-	(ne.longitude > sw.longitude) ? 0 : MKMapSizeWorld.width;
-	
-    return MKMapRectMake(pSW.x, pNE.y,
-						 (pNE.x - pSW.x) + antimeridianOveflow,
-						 (pSW.y - pNE.y));
-}
 
 - (void) newRoute {
 	
@@ -928,7 +917,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	//TODO: this needs to be optimised so the map scaling only occurs once and
 	// the ui state is set correctly at end.
 	
-	MKMapRect mapRect=[self mapRectThatFitsBoundsSW:sw NE:ne];
+	MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:sw NE:ne];
 	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(10, 50, 50, 10) animated:YES];
 	
 	

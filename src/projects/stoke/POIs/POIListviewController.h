@@ -41,5 +41,9 @@ typedef NS_ENUM(NSUInteger, POIListViewMode) {
 
 @property (nonatomic,strong)  NSMutableArray								*selectedPOIArray;
 
+// if a route has been planned the annotation will been removed but the pois will still have a selected state
+// setting this when clearing a route means the controller will batch request the selected poi data on viewwillAppear
+@property (nonatomic,assign)  BOOL											shouldRefreshSelectedData;
+
 
 @end

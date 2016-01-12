@@ -144,6 +144,20 @@
 	
 }
 
+
++(MKMapRect) mapRectThatFitsBoundsSW:(CLLocationCoordinate2D)sw NE:(CLLocationCoordinate2D)ne{
+	
+	MKMapPoint pSW = MKMapPointForCoordinate(sw);
+	MKMapPoint pNE = MKMapPointForCoordinate(ne);
+	
+	double antimeridianOveflow = (ne.longitude > sw.longitude) ? 0 : MKMapSizeWorld.width;
+	
+	return MKMapRectMake(pSW.x, pNE.y, (pNE.x - pSW.x) + antimeridianOveflow, (pSW.y - pNE.y));
+}
+
+
+
+
 -(void) zoomToFitAnnotations {
 	MKMapRect zoomRect = MKMapRectNull;
 	for (id <MKAnnotation> annotation in self.annotations) {
@@ -218,6 +232,11 @@
 
 -(double) getZoomLevel {
     return log2(360 * ((self.frame.size.width/256) / self.region.span.longitudeDelta));
+}
+
+
+-(double) getZoomLevelForRegion:(MKCoordinateRegion)region{
+	return log2(360 * ((self.frame.size.width/256) / region.span.longitudeDelta));
 }
 
 

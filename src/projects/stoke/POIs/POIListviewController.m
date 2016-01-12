@@ -102,6 +102,10 @@ static NSString *const DATAID = @"PoiListing";
 			if(_selectedPOIArray.count==0){
 				POICategoryVO *firstCategory=(POICategoryVO*)[_dataProvider firstObject];
 				firstCategory.selected=YES;
+				
+				if(_shouldRefreshSelectedData){
+					
+				}
 			}
 			
 		}else{
@@ -149,7 +153,6 @@ static NSString *const DATAID = @"PoiListing";
 
 -(void)createPersistentUI{
 	
-	
 	if(_dataProvider==nil)
 		[self dataProviderRequestRefresh:SYSTEM];
 	
@@ -185,6 +188,24 @@ static NSString *const DATAID = @"PoiListing";
 		break;
 	}
 	
+}
+
+
+
+-(void)refreshAllPOILocation{
+	
+	if(_shouldRefreshSelectedData){
+		
+		
+		for (POICategoryVO *poi in _selectedPOIArray) {
+			
+			
+			
+		}
+		
+	}
+	
+	_shouldRefreshSelectedData=NO;
 }
 
 
