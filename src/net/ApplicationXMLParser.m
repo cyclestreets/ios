@@ -736,6 +736,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		_activeOperation.responseStatus=ValidationPOIMapCategorySuccess;
 		
 	}else{
+		_activeOperation.operationState=NetResponseStateComplete;
 		_activeOperation.responseStatus=ValidationPOIMapCategorySuccessNoEntries;
 	}
 	

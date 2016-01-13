@@ -81,7 +81,6 @@ static NSString *const DATAID = @"PoiListing";
 	
 	if (_viewMode==POIListViewMode_Map) {
 		self.dataProvider=[POIManager sharedInstance].dataProvider;
-		
 	}else{
 		self.dataProvider=[[POIManager sharedInstance] newLeisurePOIArray];
 	}

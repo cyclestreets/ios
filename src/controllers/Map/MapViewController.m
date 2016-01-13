@@ -154,6 +154,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 @property (nonatomic, assign) BOOL									singleTapDidOccur;
 @property (nonatomic, assign) BOOL									savedSelectedRouteLoading;
 @property (nonatomic, assign) BOOL									loadingRoute;
+@property (nonatomic, assign) BOOL									routeWasCleared;
+
 
 
 @property (nonatomic, assign) CGPoint								singleTapPoint;
@@ -897,7 +899,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[[RouteManager sharedInstance] clearSelectedRoute];
 	
-	
+	_routeWasCleared=YES;
 }
 
 
@@ -905,6 +907,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 - (void) newRoute {
 	
 	_savedSelectedRouteLoading=YES;
+	_routeWasCleared=NO;
 	
 	[self updateUItoState:MapPlanningStateRoute];
 	
@@ -1934,6 +1937,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 		controller.nwCoordinate=nw;
 		controller.seCoordinate=se;
+		
+		controller.shouldRefreshSelectedData=_routeWasCleared;
 		
 		controller.transitioningDelegate = self;
 		controller.modalPresentationStyle = UIModalPresentationCustom;

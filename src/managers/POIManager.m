@@ -361,7 +361,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	}
 	
 	self.preSelectionRequestArray=[categoryList mutableCopy];
-	
+	self.preSelectionResponseDataProvider=[NSMutableDictionary dictionary];
 	
 	[self appendPOICategoryMapPointsRequest:_preSelectionRequestArray.firstObject withNWBounds:nw andSEBounds:se];
 	
@@ -411,11 +411,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	switch (response.responseStatus) {
 			
 		case ValidationPOIMapCategorySuccess:
+		case ValidationPOIMapCategorySuccessNoEntries:
 		{
 			
 			[_preSelectionRequestArray removeObject:category];
 			
-			[_preSelectionResponseDataProvider setObject:response.responseObject forKey:category.name];
+			if(response.responseObject!=nil)
+				[_preSelectionResponseDataProvider setObject:response.responseObject forKey:category.name];
 			
 			if(_preSelectionRequestArray.count>0){
 				
@@ -430,16 +432,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 			}
 			
 		}
-			break;
-			
-		case ValidationPOIMapCategorySuccessNoEntries:
-			
-			//[self.categoryDataProvider removeAllObjects];
-			
-			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
-			
-			
-			break;
+		break;
+		
 			
 		case ValidationPOIMapCategoryFailed:
 			
