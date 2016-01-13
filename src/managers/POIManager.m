@@ -17,6 +17,7 @@
 #import "AppConstants.h"
 #import "BuildTargetConstants.h"
 #import "UserSettingsManager.h"
+#import "StringUtilities.h"
 
 static NSString *const kPOIValidityValue=@"kPOIVAlidityValue";
 
@@ -31,6 +32,15 @@ static NSString *const kPOIValidityValue=@"kPOIVAlidityValue";
 
 
 @property (nonatomic,strong) NSDate									*poiValidityDate;
+
+
+
+// pre selection support
+
+
+@property (nonatomic,strong)  NSMutableArray						*preSelectionRequestArray;
+@property (nonatomic,strong)  NSMutableDictionary					*preSelectionResponseDataProvider;
+@property (nonatomic,strong)  BUNetworkOperation					*preSelectionOperation;
 
 
 @end
@@ -114,7 +124,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 //
 
 
-// request list of all categories
+#pragma mark - request list of all categories
 -(void)requestPOIListingData{
 	
 	BOOL isRetina=ISRETINADISPLAY;
@@ -196,6 +206,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 }
 
 
+#pragma mark - POI Map bounds changes
 //
 /***********************************************
  * @description			POI MAP BOUNDS REQUEST
@@ -241,6 +252,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 }
 
 
+
+#pragma mark - POI individual selection
 
 -(void)requestPOICategoryMapPointsForCategory:(POICategoryVO*)category withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
 	
@@ -326,14 +339,125 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 
 
 
+#pragma mark - POI pre-selected list
 //
 /***********************************************
- * @description			POI list for location
+ * @description			POI list for preselected array
  ***********************************************/
 //
 
 
-// request
+-(void)requestPOICategoryMapPointsForList:(NSArray*)categoryList withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
+	
+	
+	POICategoryVO *firstCategory=categoryList.firstObject;
+	if([firstCategory.key isEqualToString:NONE])
+		return;
+	
+	
+	if(_preSelectionRequestArray.count>0 && _activeOperations.count>0){
+		[[BUDataSourceManager sharedInstance] cancelRequestForType:POIMAPLOCATION];
+		[_activeOperations removeAllObjects];
+	}
+	
+	self.preSelectionRequestArray=[categoryList mutableCopy];
+	
+	
+	[self appendPOICategoryMapPointsRequest:_preSelectionRequestArray.firstObject withNWBounds:nw andSEBounds:se];
+	
+}
+
+
+-(void)appendPOICategoryMapPointsRequest:(POICategoryVO*)category withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
+	
+	
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionaryWithObjectsAndKeys:
+									 [[CycleStreets sharedInstance] APIKey], @"key",
+									 category.key,@"type",
+									 BOX_FLOAT(nw.latitude),@"n",
+									 BOX_FLOAT(nw.longitude),@"w",
+									 BOX_FLOAT(se.latitude),@"s",
+									 BOX_FLOAT(se.longitude),@"e",
+									 BOX_INT(40),@"limit",nil];
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=POIMAPLOCATION;
+	request.requestid=[StringUtilities stringWithUUID];
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	_activeOperations[category.name]=request;
+	
+	__weak __typeof(&*self)weakSelf = self;
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[weakSelf appendPOICategoryMapPointsResponse:operation forCategory:category withNWBounds:nw andSEBounds:se];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+
+	
+	
+}
+
+
+
+-(void)appendPOICategoryMapPointsResponse:(BUNetworkOperation*)response forCategory:(POICategoryVO*)category withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
+	
+	
+	[_activeOperations removeObjectForKey:category.name];
+	
+	switch (response.responseStatus) {
+			
+		case ValidationPOIMapCategorySuccess:
+		{
+			
+			[_preSelectionRequestArray removeObject:category];
+			
+			[_preSelectionResponseDataProvider setObject:response.responseObject forKey:category.name];
+			
+			if(_preSelectionRequestArray.count>0){
+				
+				[self appendPOICategoryMapPointsRequest:_preSelectionRequestArray.firstObject withNWBounds:nw andSEBounds:se];
+				
+			}else{
+				
+				self.categoryDataProvider=_preSelectionResponseDataProvider;
+				
+				[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
+				
+			}
+			
+		}
+			break;
+			
+		case ValidationPOIMapCategorySuccessNoEntries:
+			
+			//[self.categoryDataProvider removeAllObjects];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:POIMAPLOCATIONRESPONSE object:nil userInfo:nil];
+			
+			
+			break;
+			
+		case ValidationPOIMapCategoryFailed:
+			
+			[[HudManager sharedInstance] showHudWithType:HUDWindowTypeServer withTitle:@"Unable to retrieve data" andMessage:nil];
+			
+			break;
+		default:
+			break;
+	}
+	
+	
+}
+
+
+
+
+
+#pragma mark - Not used
 -(void)requestPOICategoryDataForCategory:(POICategoryVO*)category atLocation:(CLLocationCoordinate2D)location{
 	
 	
@@ -406,6 +530,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 }
 
 
+#pragma mark - Utilities
 //
 /***********************************************
  * @description			UTILITIES

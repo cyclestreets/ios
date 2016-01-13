@@ -746,30 +746,26 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 		if(_previousUIState==MapPlanningStateRoute){
 			
-			MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
-			[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(40, 10, 10, 10) animated:YES];
+			[self setMapRectForLastLocation];
 			
 		}else{
-			
-			if(_allowsUserTrackingUI){
-				[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
-			}else{
-				[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
-
-			}
-			
+			[_mapView setCenterCoordinate:_lastLocation.coordinate zoomLevel:DEFAULT_ZOOM animated:YES];
 		}
 		
-		
 	}else{
-		
-		MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
-		[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(40, 10, 10, 10) animated:YES];
-		
+		[self setMapRectForLastLocation];
 	}
 	
 	
 	[self assessLocationEffect];
+}
+
+
+-(void)setMapRectForLastLocation{
+	
+	MKMapRect mapRect=[MKMapView mapRectThatFitsBoundsSW:[self.route maxSouthWestForLocation:_lastLocation] NE:[self.route maxNorthEastForLocation:_lastLocation]];
+	[_mapView setVisibleMapRect:mapRect edgePadding:UIEdgeInsetsMake(40, 10, 10, 10) animated:YES];
+	
 }
 
 
@@ -900,6 +896,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	[self stopUserTracking];
 	
 	[[RouteManager sharedInstance] clearSelectedRoute];
+	
+	
 }
 
 

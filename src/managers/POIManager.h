@@ -33,6 +33,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(POIManager)
 -(void)requestPOICategoryDataForCategory:(POICategoryVO*)category atLocation:(CLLocationCoordinate2D)location;
 
 
+-(void)requestPOICategoryMapPointsForList:(NSArray*)categoryList withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se;
+
+
 -(NSMutableArray*)newLeisurePOIArray;
 
 

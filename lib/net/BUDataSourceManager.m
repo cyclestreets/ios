@@ -296,7 +296,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BUDataSourceManager);
 
 
 
-
 -(void)remoteRequestDidComplete:(BUNetworkOperation*)networkOperation{
 	
 	[_activeRequests removeObjectForKey:networkOperation.dataid];

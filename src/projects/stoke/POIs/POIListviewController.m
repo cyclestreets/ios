@@ -102,9 +102,9 @@ static NSString *const DATAID = @"PoiListing";
 			if(_selectedPOIArray.count==0){
 				POICategoryVO *firstCategory=(POICategoryVO*)[_dataProvider firstObject];
 				firstCategory.selected=YES;
-				
+			}else{
 				if(_shouldRefreshSelectedData){
-					
+					[self refreshAllPOILocations];
 				}
 			}
 			
@@ -192,17 +192,11 @@ static NSString *const DATAID = @"PoiListing";
 
 
 
--(void)refreshAllPOILocation{
+-(void)refreshAllPOILocations{
 	
 	if(_shouldRefreshSelectedData){
 		
-		
-		for (POICategoryVO *poi in _selectedPOIArray) {
-			
-			
-			
-		}
-		
+		[[POIManager sharedInstance] requestPOICategoryMapPointsForList:_selectedPOIArray withNWBounds:_nwCoordinate andSEBounds:_seCoordinate];
 	}
 	
 	_shouldRefreshSelectedData=NO;
