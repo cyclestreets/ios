@@ -451,9 +451,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(RouteManager);
 			return;
 		}
 		
+	}else{
+		
+		[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to plan route, the received locations are not complete" andMessage:nil];
+		
 	}
 	
-	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeError withTitle:@"Unable to plan route, the received locations are not complete" andMessage:nil];
 	
 }
 

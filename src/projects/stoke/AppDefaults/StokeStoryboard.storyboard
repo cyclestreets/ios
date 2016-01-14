@@ -493,11 +493,11 @@ Just click on a start and finish point and then Plan for a customised route. You
                                 <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                             </mapView>
                             <view contentMode="scaleToFill" id="w7T-3y-25G">
-                                <rect key="frame" x="0.0" y="34" width="320" height="26"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="36"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NiC-wX-yHv" userLabel="poi">
-                                        <rect key="frame" x="8" y="-4" width="53" height="30"/>
+                                        <rect key="frame" x="8" y="1" width="53" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_poi.png"/>
@@ -506,7 +506,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tUe-x7-KK1" userLabel="leisure">
-                                        <rect key="frame" x="82" y="-2" width="40" height="30"/>
+                                        <rect key="frame" x="82" y="3" width="40" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_leisure.png"/>
@@ -515,7 +515,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qz9-XF-BTU" userLabel="leisureadd">
-                                        <rect key="frame" x="138" y="-2" width="45" height="30"/>
+                                        <rect key="frame" x="138" y="3" width="45" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_leisure_add.png"/>
@@ -524,7 +524,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C2b-hp-s4z" userLabel="saveloc">
-                                        <rect key="frame" x="201" y="-4" width="46" height="30"/>
+                                        <rect key="frame" x="201" y="1" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSBarButton_saveloc.png"/>
@@ -533,7 +533,7 @@ Just click on a start and finish point and then Plan for a customised route. You
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iHQ-O9-9wh" userLabel="waypoints">
-                                        <rect key="frame" x="270" y="-2" width="26" height="26"/>
+                                        <rect key="frame" x="270" y="3" width="26" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="CSTabBar_plan_route.png"/>

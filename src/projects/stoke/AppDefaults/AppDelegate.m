@@ -77,10 +77,19 @@
 		NSString *str=url.scheme;
 		if([str containsString:CYCLESTREETSURLSCHEME]){
 			
-			NSString *routeid=[[url.resourceSpecifier componentsSeparatedByString:@"/"] lastObject];
+			NSArray *actionArray=[url.resourceSpecifier componentsSeparatedByString:@"/"];
 			
-			[[RouteManager sharedInstance] loadRouteForRouteId:routeid];
+			NSString *actionType=actionArray[2];
 			
+			if([actionType isEqualToString:@"route"]){
+				
+				NSString *routeid=[actionArray lastObject];
+				
+				[[RouteManager sharedInstance] loadRouteForRouteId:routeid];
+				
+			}else if ([actionType isEqualToString:@"directions"]){
+				
+			}
 			
 			return YES;
 		}else{

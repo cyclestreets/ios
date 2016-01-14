@@ -1421,6 +1421,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 #define kDeleteWaypointControlTag 3001
 #define kSaveLocationControlTag 3002
+#define kCalloutButtonHeight 90
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
 	
@@ -1445,7 +1446,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			 annotationView.canShowCallout=YES;
 			 
 			 if(_uiState!=MapPlanningStateRoute){
-				 UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 52)];
+				 UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, [self configureCalloutHeight])];
 				 [rcalloutButton setImage:[UIImage imageNamed:@"UIButtonBarTrash.png"] forState:UIControlStateNormal];
 				 rcalloutButton.tag=kDeleteWaypointControlTag;
 				 rcalloutButton.backgroundColor=[UIColor redColor];
@@ -1453,7 +1454,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			 }
 			 
 			 
-			UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 52)];
+			UIButton *lcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, [self configureCalloutHeight])];
 			 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor whiteColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateNormal];
 			 [lcalloutButton setImage:[UIImage imageNamed:@"CSBarButton_saveloc" tintColor:[UIColor blackColor] style:UIImageTintedStyleKeepingAlpha] forState:UIControlStateHighlighted];
 			 lcalloutButton.tag=kSaveLocationControlTag;
@@ -1486,7 +1487,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			annotationView.canShowCallout=YES;
 			
 			
-			UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 52)];
+			UIButton *rcalloutButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, [self configureCalloutHeight])];
 			UIImage *poiimage=[UIImage imageNamed:@"CSIcon_map_poi.png"];
 			[rcalloutButton setImage:poiimage forState:UIControlStateNormal];
 			rcalloutButton.backgroundColor=[UIColor appTintColor];
@@ -1505,6 +1506,30 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	}
 
 	 return nil;
+}
+
+- (CGFloat)configureCalloutHeight
+{
+	CGFloat defaultHeight = 56.0;
+	NSString *contentSize = [[UIApplication sharedApplication] preferredContentSizeCategory];
+	NSArray *largeSizes = @[UIContentSizeCategoryExtraExtraLarge,
+							UIContentSizeCategoryExtraExtraExtraLarge,
+							UIContentSizeCategoryAccessibilityMedium,
+							UIContentSizeCategoryAccessibilityLarge,
+							UIContentSizeCategoryAccessibilityExtraLarge,
+							UIContentSizeCategoryAccessibilityExtraExtraLarge,
+							UIContentSizeCategoryAccessibilityExtraExtraExtraLarge];
+	NSArray *smallSizes = @[UIContentSizeCategoryExtraSmall,
+							UIContentSizeCategorySmall,
+							UIContentSizeCategoryMedium];
+	
+	if ([largeSizes containsObject:contentSize]){
+		defaultHeight = 66.0;
+	}
+	if ([smallSizes containsObject:contentSize]){
+		defaultHeight = 46.0;
+	}
+	return defaultHeight;
 }
 
 
@@ -1886,7 +1911,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}else{
 		[UIView animateWithDuration:0.3 animations:^{
-			_addPointView.height=44+STANDARDCELLHEIGHT;
+			_addPointView.height=36+STANDARDCELLHEIGHT;
 		}];
 	}
 	
