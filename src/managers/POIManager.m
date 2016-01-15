@@ -34,6 +34,8 @@ static NSString *const kPOIValidityValue=@"kPOIVAlidityValue";
 @property (nonatomic,strong) NSDate									*poiValidityDate;
 
 
+@property (nonatomic,assign,readwrite)  BOOL						hasSelectedPOIs;
+
 
 // pre selection support
 
@@ -339,6 +341,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 
 
 
+#pragma mark - map change poi refresh
+
+-(void)refreshPOICategoryMapPointswithNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se{
+	
+	if(_preSelectionRequestArray.count>0 && _activeOperations.count>0){
+		[[BUDataSourceManager sharedInstance] cancelRequestForType:POIMAPLOCATION];
+		[_activeOperations removeAllObjects];
+	}
+	
+	
+	self.preSelectionRequestArray=[NSMutableArray array];
+	for(POICategoryVO *poi in _dataProvider){
+		if(poi.selected)
+			[_preSelectionRequestArray addObject:poi];
+	}
+	
+	POICategoryVO *firstCategory=_preSelectionRequestArray.firstObject;
+	if([firstCategory.key isEqualToString:NONE])
+		return;
+	
+	if(_preSelectionRequestArray.count==0)
+		return;
+	
+	self.preSelectionResponseDataProvider=[NSMutableDictionary dictionary];
+	
+	[self appendPOICategoryMapPointsRequest:_preSelectionRequestArray.firstObject withNWBounds:nw andSEBounds:se];
+	
+	
+}
+
+
+
+
 #pragma mark - POI pre-selected list
 //
 /***********************************************
@@ -550,5 +585,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(POIManager);
 	
 	return category;
 }
+
+
+#pragma mark - getters
+
+
+-(BOOL)hasSelectedPOIs{
+	
+	if(_dataProvider==nil)
+		return NO;
+	
+	for(POICategoryVO *category in _dataProvider){
+		if(category.selected){
+			if([category.key isEqualToString:NONE]){
+				return NO;
+			}else{
+				return YES;
+			}
+		}
+			
+	}
+	return NO;
+	
+}
+
+
 
 @end

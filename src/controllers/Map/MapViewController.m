@@ -1410,8 +1410,23 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			[self stopUserTracking];
 	}
 	
+	
 }
 
+
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+	
+	// if user tracking is on and the user drags the map we switch it off
+	// this is the Apple default for this mode.
+	if([self mapViewRegionDidChangeFromUserInteraction]){
+		if(_allowsUserTrackingUI)
+			[self stopUserTracking];
+	}
+	
+	
+	[self refreshPOIMarkers];
+	
+}
 
 
 
@@ -2052,6 +2067,27 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 }
 
+
+-(void)refreshPOIMarkers{
+	
+	BOOL hasSelectedPOIs=[POIManager sharedInstance].hasSelectedPOIs;
+	if (hasSelectedPOIs==NO)
+		return;
+		
+	CLLocationCoordinate2D centreCoordinate=_mapView.centerCoordinate;
+	if([UserLocationManager isSignificantLocationChange:_lastLocation.coordinate newLocation:centreCoordinate accuracy:4]){
+		
+		CLLocationCoordinate2D nw = [_mapView NWforMapView];
+		CLLocationCoordinate2D se = [_mapView SEforMapView];
+		
+		[[POIManager sharedInstance] refreshPOICategoryMapPointswithNWBounds:nw andSEBounds:se];
+		
+	}else{
+		
+	}
+	
+	
+}
 
 
 -(void)updatePOIMapMarkers{

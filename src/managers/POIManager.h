@@ -22,6 +22,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(POIManager)
 
 @property(nonatomic,strong)  POICategoryVO						*selectedCategory;
 
+@property(nonatomic,readonly)  BOOL								hasSelectedPOIs;
+
 
 -(void)requestPOIListingData;
 
@@ -34,6 +36,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(POIManager)
 
 
 -(void)requestPOICategoryMapPointsForList:(NSArray*)categoryList withNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se;
+
+
+-(void)refreshPOICategoryMapPointswithNWBounds:(CLLocationCoordinate2D)nw andSEBounds:(CLLocationCoordinate2D)se;
 
 
 -(NSMutableArray*)newLeisurePOIArray;
