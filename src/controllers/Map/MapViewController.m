@@ -1920,13 +1920,13 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)displayAddPointView{
 	
-	if(_addPointView.height>20){
+	if(_addPointView.y>_toolBar.top){
 		
 		[self hideAddPointView];
 		
 	}else{
 		[UIView animateWithDuration:0.3 animations:^{
-			_addPointView.height=36+STANDARDCELLHEIGHT;
+			_addPointView.y=_toolBar.bottom;
 		}];
 	}
 	
@@ -1935,9 +1935,9 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 -(void)hideAddPointView{
 	
-	if(_addPointView.height>20)
+	if(_addPointView.y>_toolBar.top)
 		[UIView animateWithDuration:0.3 animations:^{
-			_addPointView.height=20;
+			_addPointView.y=_toolBar.top;
 		}];
 	
 }
@@ -2143,7 +2143,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	NSMutableDictionary *misc = [NSMutableDictionary dictionaryWithDictionary:[[CycleStreets sharedInstance].files misc]];
 	[misc setValue:[NSString stringWithFormat:@"%f", location.latitude] forKey:@"latitude"];
 	[misc setValue:[NSString stringWithFormat:@"%f", location.longitude] forKey:@"longitude"];
-	//[misc setValue:[NSString stringWithFormat:@"%f", _mapView.contents.zoom] forKey:@"zoom"];
+	[misc setValue:[NSString stringWithFormat:@"%f", _mapView.getZoomLevel] forKey:@"zoom"];
 	[[CycleStreets sharedInstance].files setMisc:misc];
 }
 
