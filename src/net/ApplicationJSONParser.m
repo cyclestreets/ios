@@ -47,6 +47,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 							 RETREIVEROUTEPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
 							 ROUTESFORUSER:[NSValue valueWithPointer:@selector(RoutesForUserParser)],
 							 POILISTING:[NSValue valueWithPointer:@selector(POIListingParser)],
+							 UPLOADUSERPHOTO:[NSValue valueWithPointer:@selector(PhotoUploadParser)],
 							 BINGMAPAUTHENTICATION:[NSValue valueWithPointer:@selector(BingAuthenticationParser)]};
 	}
 	return self;
@@ -269,6 +270,45 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	
 	
 }
+
+
+
+#pragma mark - Photo Upload
+
+
+-(void)PhotoUploadParser{
+	
+	BetterLog(@"");
+	
+	[self validateJSON];
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		_activeOperation.responseStatus=ValidationUserPhotoUploadFailed;
+		return;
+	}
+	
+	if(_responseDict[@"error"]==nil){
+		
+		[_activeOperation setResponseWithValue:_responseDict];
+		
+		_activeOperation.operationState=NetResponseStateComplete;
+		_activeOperation.responseStatus=ValidationUserPhotoUploadSuccess;
+		
+		
+	}else{
+		
+		_activeOperation.validationMessage=_responseDict[@"error"];
+		
+		_activeOperation.responseStatus=ValidationUserPhotoUploadFailed;
+		
+	}
+	
+	
+	
+	
+	
+}
+
+
 
 /*{
  authenticationResultCode = ValidCredentials;

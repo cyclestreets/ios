@@ -379,6 +379,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
+// V2 Api
+-(void)newUserPhotoUploadRequest:(UploadPhotoVO*)photo{
+	
+	self.uploadPhoto=photo;
+	
+	NSMutableDictionary *parameters=[_uploadPhoto uploadParams];
+	
+	parameters[@"username"]=[UserAccount sharedInstance].user.username;
+	parameters[@"password"]=[UserAccount sharedInstance].userPassword;
+	parameters[@"key"]=[CycleStreets sharedInstance].APIKey;
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=UPLOADUSERPHOTO;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	request.trackProgress=YES;
+	
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self UserPhotoUploadResponse:operation];
+		
+	};
+	
+	request.progressBlock=^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite){
+		
+		NSDictionary *progressDict=@{@"bytesWritten":@(bytesWritten),@"totalBytesWritten":@(totalBytesWritten),@"totalBytesExpectedToWrite":@(totalBytesExpectedToWrite)};
+		[[NSNotificationCenter defaultCenter] postNotificationName:FILEUPLOADPROGRESS object:nil userInfo:progressDict];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading Photo" andMessage:nil];
+	
+	
+	
+	
+}
+
+
 -(void)UserPhotoUploadResponse:(BUNetworkOperation*)result{
 	
 	BetterLog(@"");
