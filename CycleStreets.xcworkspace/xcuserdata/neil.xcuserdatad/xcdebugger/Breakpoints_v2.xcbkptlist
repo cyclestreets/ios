@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/PhotoManager.m"
-            timestampString = "439132446.074455"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "-retrievePhotosForRouteResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -740,11 +740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/PhotoManager.m"
-            timestampString = "451401848.766212"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "-retrievePhotosForLocationResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -756,11 +756,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/PhotoManager.m"
-            timestampString = "451401978.234686"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:fordataID:"
             landmarkType = "5">
          </BreakpointContent>
@@ -772,11 +772,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/PhotoManager.m"
-            timestampString = "451401973.112731"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:fordataID:"
             landmarkType = "5">
          </BreakpointContent>
@@ -852,11 +852,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/PhotoManager.m"
-            timestampString = "456322485.909526"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "-retrievePhotosForLocationResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -884,11 +884,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/model/vo/PhotoMapVO.m"
-            timestampString = "456324088.51248"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "-updateWithAPIDict:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1220,11 +1220,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/PhotoManager.m"
-            timestampString = "473861281.268223"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "-retrievePhotosForLocationResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1236,11 +1236,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/managers/PhotoManager.m"
-            timestampString = "473861294.089055"
+            timestampString = "476649756.8615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-retrievePhotosForRouteResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1467,6 +1467,30 @@
             endingLineNumber = "2113"
             landmarkName = "-updatePOIMapMarkers"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "Yes"
+            filePath = "src/model/vo/PhotoMapVO.m"
+            timestampString = "476649837.110088"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-updateWithAPIDict:"
+            landmarkType = "5">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "po propertiesDict">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

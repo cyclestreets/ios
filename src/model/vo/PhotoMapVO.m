@@ -82,7 +82,7 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 		
 		// v2 additions
 		_bearingString=propertiesDict[@"bearingString"];
-		_date=propertiesDict[@"date"];
+		_date=propertiesDict[@"datetime"];
 		_tags=propertiesDict[@"tags"];
 		_username=propertiesDict[@"username"];
 		_license=propertiesDict[@"license"];

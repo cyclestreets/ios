@@ -1476,6 +1476,7 @@
 		28B0AD5019EEEB14008A3F21 /* POIAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD4F19EEEB14008A3F21 /* POIAnnotationView.m */; };
 		28B0AD5219EEFC7F008A3F21 /* CSBarButton_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */; };
 		28B0AD5419EEFC8C008A3F21 /* CSBarButton_poi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5319EEFC8C008A3F21 /* CSBarButton_poi.png */; };
+		28B30FFF1C692BFE005B1271 /* bicycles_other.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B30FFE1C692BFE005B1271 /* bicycles_other.jpg */; settings = {ASSET_TAGS = (); }; };
 		28B3677C18B275C800F7244C /* MKMapView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677B18B275C800F7244C /* MKMapView+Additions.m */; };
 		28B3677D18B275C800F7244C /* MKMapView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677B18B275C800F7244C /* MKMapView+Additions.m */; };
 		28B3678018B2822700F7244C /* CSWaypointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677F18B2822700F7244C /* CSWaypointAnnotation.m */; };
@@ -2538,6 +2539,7 @@
 		28B0AD4F19EEEB14008A3F21 /* POIAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = POIAnnotationView.m; path = Map/POIAnnotationView.m; sourceTree = "<group>"; };
 		28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CSBarButton_poi@2x.png"; sourceTree = "<group>"; };
 		28B0AD5319EEFC8C008A3F21 /* CSBarButton_poi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSBarButton_poi.png; sourceTree = "<group>"; };
+		28B30FFE1C692BFE005B1271 /* bicycles_other.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bicycles_other.jpg; sourceTree = "<group>"; };
 		28B3677A18B275C800F7244C /* MKMapView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Additions.h"; sourceTree = "<group>"; };
 		28B3677B18B275C800F7244C /* MKMapView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Additions.m"; sourceTree = "<group>"; };
 		28B3677E18B2822700F7244C /* CSWaypointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSWaypointAnnotation.h; path = Map/CSWaypointAnnotation.h; sourceTree = "<group>"; };
@@ -3737,6 +3739,7 @@
 		28AD6208131FB69D008527FC /* images */ = {
 			isa = PBXGroup;
 			children = (
+				28B30FFE1C692BFE005B1271 /* bicycles_other.jpg */,
 				284A35841B32E24700EE2FD4 /* pdf */,
 				28B6B2FA1A5AB0D8002DF099 /* welcome_CS.jpg */,
 				28B6B2FB1A5AB0D8002DF099 /* welcome_CS@2x.jpg */,
@@ -4736,6 +4739,7 @@
 				2833E3EF16482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */,
 				2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */,
 				28347AAA1A37781F00FA83BE /* UserRouteCell.xib in Resources */,
+				28B30FFF1C692BFE005B1271 /* bicycles_other.jpg in Resources */,
 				288C0F4B164A78DE000880FF /* CSBarButton_waypoint.png in Resources */,
 				2811C49D166CCD5F00592560 /* UIActivityBlank.png in Resources */,
 				2811C49F166CCD5F00592560 /* UIActivityFacebook.png in Resources */,
