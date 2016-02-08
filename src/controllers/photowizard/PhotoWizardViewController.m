@@ -667,6 +667,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	if (_activePage==PhotoWizardViewStateResult) {
 		_prevButton.enabled=NO;
 		_nextButton.enabled=NO;
+		
+		[_cancelViewButton setTitle:@"Done"];
 	}
 	
 }
