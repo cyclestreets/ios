@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "PhotoMapVO.h"
 #import "GlobalUtilities.h"
+#import "NSDate+Helper.h"
 
 static int MIN_SIZE = 80;
 static int BIG_SIZE = 300;
@@ -38,6 +39,11 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 @property(nonatomic,readwrite)  BOOL					hasPhoto;
 
 @property(nonatomic,strong) NSDictionary				*videoFormats;
+
+
+@property(nonatomic, strong)	NSString				*date;
+@property(nonatomic,strong)  NSArray					*tags;
+
 
 @end
 
@@ -73,6 +79,14 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 				}
 			}
 		}
+		
+		// v2 additions
+		_bearingString=propertiesDict[@"bearingString"];
+		_date=propertiesDict[@"date"];
+		_tags=propertiesDict[@"tags"];
+		_username=propertiesDict[@"username"];
+		_license=propertiesDict[@"license"];
+		
 		
 	}
 	
@@ -159,6 +173,30 @@ static NSString *const VIDEOFORMATKEY=@"mp4";
 		
 	}else{
 		return @"bicycles_other.pdf";
+	}
+}
+
+
+-(NSString*)dateString{
+	
+	if(_date!=nil){
+		
+		return [NSDate stringFromDate:[NSDate dateFromString:_date withFormat:[NSDate dbFormatString]] withFormat:[NSDate shortHumanFormatStringWithTime]];
+		
+	}else{
+		return  EMPTYSTRING;
+	}
+	
+}
+
+-(NSString*)tagString{
+	
+	if(_tags!=nil && _tags.count>0){
+		
+		return [_tags componentsJoinedByString:@","];
+		
+	}else{
+		return EMPTYSTRING;
 	}
 }
 

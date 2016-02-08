@@ -172,7 +172,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
-
+// API V2
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit fordataID:(NSString*)dataid{
 	
 	BetterLog(@"");
@@ -195,9 +195,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 								@"limit":@(limit),
 								@"suppressplaceholders":@"1",
 								@"minimaldata":@"1",
-								@"selectedid":[self uploadPhotoId]};
+								@"selectedid":[self uploadPhotoId],
+							  @"datetime":@"sqldatetime"};
 	
-	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl",@"metacategoryId",@"categoryId"];
+	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl",@"metacategoryId",@"categoryId",@"username",@"licenseName",@"tags",@"bearingString",@"likes"];
 	NSDictionary *fieldDict=@{@"fields":[fieldArr componentsJoinedByString:@","]};
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionary];

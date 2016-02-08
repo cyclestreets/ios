@@ -340,7 +340,6 @@
 		28187ADD14FCFF4D00A38A17 /* CSIcon_finish_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9C14FCFF4C00A38A17 /* CSIcon_finish_wisp.png */; };
 		28187ADE14FCFF4D00A38A17 /* CSIcon_start_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A9D14FCFF4C00A38A17 /* CSIcon_start_wisp.png */; };
 		2818C7A01458069E0077F529 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
-		281C771619F4266800A756D6 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
 		281D4F0319FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 281D4F0219FC1B8D001004F2 /* CSIcon_mapstyle_tick@2x.png */; };
 		281E08B6145168F90034CC63 /* POILocationVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08B5145168F90034CC63 /* POILocationVO.m */; };
 		281E08EE145198D10034CC63 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 281E08EB145198D10034CC63 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -655,8 +654,6 @@
 		284608291649388900CBF96A /* ImageUtilties.m in Sources */ = {isa = PBXBuildFile; fileRef = 284608271649388900CBF96A /* ImageUtilties.m */; };
 		2846082B16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
 		2846082C16493ABF00CBF96A /* UIBarButton_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2846082A16493ABF00CBF96A /* UIBarButton_Back.png */; };
-		2846556519C9B859002E7CB7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
-		2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
 		284A36171B32E3A200EE2FD4 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360A1B32E3A200EE2FD4 /* NSData+MD5.m */; };
 		284A36181B32E3A200EE2FD4 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360A1B32E3A200EE2FD4 /* NSData+MD5.m */; };
 		284A36191B32E3A200EE2FD4 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360A1B32E3A200EE2FD4 /* NSData+MD5.m */; };
@@ -1051,7 +1048,6 @@
 		28A263621AE65AB4006C09A7 /* CNSMapStyle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2853212319E7F24F00118E48 /* CNSMapStyle.png */; };
 		28A263631AE65AB4006C09A7 /* services_live.plist in Resources */ = {isa = PBXBuildFile; fileRef = 281E09021451C6690034CC63 /* services_live.plist */; };
 		28A263641AE65AB4006C09A7 /* UIPickerAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28040C3718BA73E2004D34DD /* UIPickerAccessoryView.xib */; };
-		28A263651AE65AB4006C09A7 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2846556419C9B859002E7CB7 /* APIKey_live.txt */; };
 		28A263671AE65AB4006C09A7 /* RouteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2818C79F1458069D0077F529 /* RouteCell.xib */; };
 		28A263681AE65AB4006C09A7 /* CSBarButton_followuser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D146041A2F09E2003DD15F /* CSBarButton_followuser@2x.png */; };
 		28A263691AE65AB4006C09A7 /* Alert200x200.png in Resources */ = {isa = PBXBuildFile; fileRef = 28187A5714FCFF4C00A38A17 /* Alert200x200.png */; };
@@ -2202,7 +2198,6 @@
 		284608261649388900CBF96A /* ImageUtilties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtilties.h; sourceTree = "<group>"; };
 		284608271649388900CBF96A /* ImageUtilties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtilties.m; sourceTree = "<group>"; };
 		2846082A16493ABF00CBF96A /* UIBarButton_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButton_Back.png; sourceTree = "<group>"; };
-		2846556419C9B859002E7CB7 /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_live.txt; path = docs/APIKey_live.txt; sourceTree = SOURCE_ROOT; };
 		284667F518C0AAD9005089C7 /* DeviceUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtilities.h; sourceTree = "<group>"; };
 		284667F618C0AAD9005089C7 /* DeviceUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtilities.m; sourceTree = "<group>"; };
 		284A36091B32E3A200EE2FD4 /* NSData+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MD5.h"; sourceTree = "<group>"; };
@@ -3731,7 +3726,6 @@
 				289478BF18AD706B0066AA2E /* styling */,
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
 				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
-				2846556419C9B859002E7CB7 /* APIKey_live.txt */,
 				280E9318140984F300C7AC75 /* xib */,
 				287ECBAD134490D800B8A6AC /* html */,
 				28AD6208131FB69D008527FC /* images */,
@@ -4601,7 +4595,6 @@
 				280400F51B34213200DE0EBA /* bikeshops_neutral.pdf in Resources */,
 				281E09031451C6690034CC63 /* services_dev.plist in Resources */,
 				281E09041451C6690034CC63 /* services_live.plist in Resources */,
-				2846556519C9B859002E7CB7 /* APIKey_live.txt in Resources */,
 				2818C7A01458069E0077F529 /* RouteCell.xib in Resources */,
 				28187A9E14FCFF4C00A38A17 /* Alert200x200.png in Resources */,
 				28187A9F14FCFF4C00A38A17 /* CSIcon_MapArrow_end.png in Resources */,
@@ -4886,7 +4879,6 @@
 				280401621B34213200DE0EBA /* general_neutral.pdf in Resources */,
 				2804019A1B34213200DE0EBA /* routesigns_good.pdf in Resources */,
 				28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
-				2846556619C9B859002E7CB7 /* APIKey_live.txt in Resources */,
 				282292341C3BEC7F00235259 /* Localizable.strings in Resources */,
 				2834365F15DD5DC300B00FD5 /* RouteCell.xib in Resources */,
 				28D146061A2F09E2003DD15F /* CSBarButton_followuser@2x.png in Resources */,
@@ -5178,7 +5170,6 @@
 				28A263631AE65AB4006C09A7 /* services_live.plist in Resources */,
 				28A264B31AE65C4A006C09A7 /* GenericWebView.xib in Resources */,
 				28A263641AE65AB4006C09A7 /* UIPickerAccessoryView.xib in Resources */,
-				28A263651AE65AB4006C09A7 /* APIKey_live.txt in Resources */,
 				280401B01B34213200DE0EBA /* signs_other.pdf in Resources */,
 				28A263671AE65AB4006C09A7 /* RouteCell.xib in Resources */,
 				28A263681AE65AB4006C09A7 /* CSBarButton_followuser@2x.png in Resources */,
@@ -5500,7 +5491,6 @@
 				28FA8AA319E454E80040EA46 /* UIIcon_straight_on.png in Resources */,
 				28FA8AA419E454E80040EA46 /* UIIcon_turn_left.png in Resources */,
 				28FA8AA519E454E80040EA46 /* UIIcon_turn_right.png in Resources */,
-				281C771619F4266800A756D6 /* APIKey_live.txt in Resources */,
 				28FA8AA619E454E80040EA46 /* icon_camera.png in Resources */,
 				28FA8AA719E454E80040EA46 /* icon_location.png in Resources */,
 				282292451C3BF2D000235259 /* compass-selected.pdf in Resources */,
