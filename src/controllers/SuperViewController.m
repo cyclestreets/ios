@@ -496,7 +496,16 @@
 		}
 		
 		[viewOverlayView addSubview:contentContainer];
-		[ViewUtilities alignView:contentContainer withView:viewOverlayView :BUNoneLayoutMode :BUCenterAlignMode];
+		
+		if ([UIType isEqualToString:UITYPE_MODALTABLEVIEWUI]){
+			[ViewUtilities alignView:contentContainer withView:viewOverlayView :BUNoneAlignMode :BUTopAlignMode :44];
+		}else{
+			[ViewUtilities alignView:contentContainer withView:viewOverlayView :BUNoneLayoutMode :BUCenterAlignMode];
+		}
+		
+		
+		
+		
 		[self.view addSubview:viewOverlayView];
 		
 		

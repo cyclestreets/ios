@@ -12,6 +12,7 @@
 #import "GlobalUtilities.h"
 #import "NSString-Utilities.h"
 #import "NSDataAdditions.h"
+#import "GenericConstants.h"
 
 
 NSString *NSStringFormat(NSString *format, ...) {

@@ -131,6 +131,8 @@
 	
 	self.frame=_tableView.frame;
 	
+	self.UIType=UITYPE_MODALTABLEVIEWUI;
+	
 	[self createPersistentUI];
 }
 

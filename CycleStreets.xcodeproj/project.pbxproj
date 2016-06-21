@@ -1476,7 +1476,7 @@
 		28B0AD5019EEEB14008A3F21 /* POIAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B0AD4F19EEEB14008A3F21 /* POIAnnotationView.m */; };
 		28B0AD5219EEFC7F008A3F21 /* CSBarButton_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5119EEFC7F008A3F21 /* CSBarButton_poi@2x.png */; };
 		28B0AD5419EEFC8C008A3F21 /* CSBarButton_poi.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B0AD5319EEFC8C008A3F21 /* CSBarButton_poi.png */; };
-		28B30FFF1C692BFE005B1271 /* bicycles_other.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B30FFE1C692BFE005B1271 /* bicycles_other.jpg */; settings = {ASSET_TAGS = (); }; };
+		28B30FFF1C692BFE005B1271 /* bicycles_other.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 28B30FFE1C692BFE005B1271 /* bicycles_other.jpg */; };
 		28B3677C18B275C800F7244C /* MKMapView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677B18B275C800F7244C /* MKMapView+Additions.m */; };
 		28B3677D18B275C800F7244C /* MKMapView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677B18B275C800F7244C /* MKMapView+Additions.m */; };
 		28B3678018B2822700F7244C /* CSWaypointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677F18B2822700F7244C /* CSWaypointAnnotation.m */; };
@@ -4440,6 +4440,7 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = 4LJ34GQZ65;
+						ProvisioningStyle = Manual;
 					};
 					2834360115DD5DC300B00FD5 = {
 						DevelopmentTeam = 4LJ34GQZ65;
@@ -6544,7 +6545,7 @@
 				BUNDLE_ID = "mobile-dev";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DISPLAY_PREFIX = "Dev-";
 				ENABLE_BITCODE = NO;
@@ -6569,7 +6570,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -6585,7 +6586,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
+				PROVISIONING_PROFILE = "f884de41-b175-4728-a72a-523f98e7450c";
+				PROVISIONING_PROFILE_SPECIFIER = "Q3YCNU3X72/Buffer Development";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -6627,7 +6629,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -6643,7 +6645,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "507015f5-c41c-48c7-bf0e-efd28bcc5eaa";
+				PROVISIONING_PROFILE = "569d41e3-f1bc-496a-b687-3d5b299040a4";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -7279,7 +7282,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -7295,7 +7298,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "114b4689-c736-40e3-be88-1c36b26ce499";
+				PROVISIONING_PROFILE = "c704a810-257c-4791-bd27-8265cb7c8bd4";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
