@@ -319,6 +319,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	if([PhotoManager sharedInstance].autoLoadLocation!=nil){
 		
 		_shouldAcceptLocationUpdates=NO;
+		_mapView.showsUserLocation=NO;
 		
 		[_mapView setCenterCoordinate:[PhotoManager sharedInstance].autoLoadLocation.coordinate zoomLevel:15 animated:NO];
 		
