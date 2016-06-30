@@ -380,7 +380,6 @@
 		2833E3F016482B73005D04D4 /* CSIcon_intermediate_wisp.png in Resources */ = {isa = PBXBuildFile; fileRef = 2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */; };
 		283435C615DD17B000B00FD5 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
 		283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
-		283435FF15DD5D9100B00FD5 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */; };
 		2834360515DD5DC300B00FD5 /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		2834360815DD5DC300B00FD5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8F3E127821DB002640D0 /* Default@2x.png */; };
 		2834360A15DD5DC300B00FD5 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28AD60B8131FB54A008527FC /* Entitlements.plist */; };
@@ -1385,7 +1384,6 @@
 		28A264C41AE78EEE006C09A7 /* SavedLocation_CellIcon_Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 289EFC5219ED4F770081E7BB /* SavedLocation_CellIcon_Home.png */; };
 		28A264C51AE78F1C006C09A7 /* CSIcon_map_poi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289A20F019EFC867000892A0 /* CSIcon_map_poi@2x.png */; };
 		28A264C61AE790BE006C09A7 /* GenericWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9998E19E709C30050C3E8 /* GenericWebViewController.m */; };
-		28A264C71AE790E6006C09A7 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */; };
 		28A264C81AE791F0006C09A7 /* CycleNorth.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A9999019E70C870050C3E8 /* CycleNorth.xcassets */; };
 		28A719921A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
 		28A719931A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */; };
@@ -1519,6 +1517,14 @@
 		28B76F4A15E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F4815E4DEA3006B01D0 /* CSBarButton_deletePoint@2x.png */; };
 		28B78DA21507884C00949870 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B78DA11507884C00949870 /* MapKit.framework */; };
 		28B7EFBC1C46CB02009AC542 /* CMMapLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B7EFBB1C46CB02009AC542 /* CMMapLauncher.m */; };
+		28B8ADD81D240F4E009A54A6 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */; };
+		28B8ADDA1D240F4E009A54A6 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */; };
+		28B8ADDD1D240F4E009A54A6 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */; };
+		28B8ADDF1D240F4E009A54A6 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */; };
+		28B8ADE11D240FB4009A54A6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADE01D240FB4009A54A6 /* README */; };
+		28B8ADE21D240FB4009A54A6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADE01D240FB4009A54A6 /* README */; };
+		28B8ADE31D240FB4009A54A6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADE01D240FB4009A54A6 /* README */; };
+		28B8ADE41D240FB4009A54A6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADE01D240FB4009A54A6 /* README */; };
 		28BC6A5D18AE1D8B00EF0436 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */; };
 		28BC6A7818AE418000EF0436 /* CycleStreets.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7718AE418000EF0436 /* CycleStreets.m */; };
 		28BC6A7918AE418000EF0436 /* CycleStreets.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7718AE418000EF0436 /* CycleStreets.m */; };
@@ -1748,7 +1754,6 @@
 		28FA8ACF19E454E80040EA46 /* PhotoWizardCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28DFE8D415A42881005FDCA0 /* PhotoWizardCategoryCell.xib */; };
 		28FA8AD019E454E80040EA46 /* Icon_nofavroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */; };
 		28FA8AD119E454E80040EA46 /* Icon_norecentroutes.png in Resources */ = {isa = PBXBuildFile; fileRef = 283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */; };
-		28FA8AD219E454E80040EA46 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */; };
 		28FA8AD319E454E80040EA46 /* CSBarButton_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2D15E4D7E9006B01D0 /* CSBarButton_location@2x.png */; };
 		28FA8AD419E454E80040EA46 /* Icon_nofavroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2E15E4D7E9006B01D0 /* Icon_nofavroutes@2x.png */; };
 		28FA8AD519E454E80040EA46 /* Icon_norecentroutes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B76F2F15E4D7E9006B01D0 /* Icon_norecentroutes@2x.png */; };
@@ -2168,7 +2173,6 @@
 		2833E3EE16482B73005D04D4 /* CSIcon_intermediate_wisp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CSIcon_intermediate_wisp.png; sourceTree = "<group>"; };
 		283435C415DD17B000B00FD5 /* Icon_nofavroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_nofavroutes.png; sourceTree = "<group>"; };
 		283435C515DD17B000B00FD5 /* Icon_norecentroutes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_norecentroutes.png; sourceTree = "<group>"; };
-		283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = APIKey_dev.txt; path = docs/APIKey_dev.txt; sourceTree = SOURCE_ROOT; };
 		2834378015DD5DC300B00FD5 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28347A9A1A37174400FA83BE /* CSUserRouteVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUserRouteVO.h; sourceTree = "<group>"; };
 		28347A9B1A37174400FA83BE /* CSUserRouteVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUserRouteVO.m; sourceTree = "<group>"; };
@@ -2576,6 +2580,9 @@
 		28B78DA11507884C00949870 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		28B7EFBA1C46CB02009AC542 /* CMMapLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMapLauncher.h; sourceTree = "<group>"; };
 		28B7EFBB1C46CB02009AC542 /* CMMapLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMapLauncher.m; sourceTree = "<group>"; };
+		28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APIKey_dev.txt; sourceTree = "<group>"; };
+		28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APIKey_live.txt; sourceTree = "<group>"; };
+		28B8ADE01D240FB4009A54A6 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		28BC6A7618AE418000EF0436 /* CycleStreets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleStreets.h; sourceTree = "<group>"; };
 		28BC6A7718AE418000EF0436 /* CycleStreets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleStreets.m; sourceTree = "<group>"; };
@@ -3725,9 +3732,9 @@
 		28AD6207131FB69D008527FC /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				28B8ADD51D240F4E009A54A6 /* api */,
 				289478BF18AD706B0066AA2E /* styling */,
 				28E603091610B683006A4B4C /* cyclestreets.geojson */,
-				283435FD15DD5D9100B00FD5 /* APIKey_dev.txt */,
 				280E9318140984F300C7AC75 /* xib */,
 				287ECBAD134490D800B8A6AC /* html */,
 				28AD6208131FB69D008527FC /* images */,
@@ -4045,6 +4052,16 @@
 			);
 			name = CMMapLauncher;
 			path = ../../../../CityMapper/CMMapLauncher;
+			sourceTree = "<group>";
+		};
+		28B8ADD51D240F4E009A54A6 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */,
+				28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */,
+				28B8ADE01D240FB4009A54A6 /* README */,
+			);
+			path = api;
 			sourceTree = "<group>";
 		};
 		28BC6A7A18AE427B00EF0436 /* PhotoMap */ = {
@@ -4510,6 +4527,7 @@
 				289A9B5513536CCB00E8AF90 /* CSIcon_MapArrow_start@2x.png in Resources */,
 				289A9B5613536CCB00E8AF90 /* UIIcon_cycle_lanes@2x.png in Resources */,
 				280401511B34213200DE0EBA /* enforcement_good.pdf in Resources */,
+				28B8ADD81D240F4E009A54A6 /* APIKey_dev.txt in Resources */,
 				28892F6719FFA962000CC52C /* CSBarButton_addPoint@2x.png in Resources */,
 				289EFC6A19EDA4E60081E7BB /* CSIcon_saveloc_home.png in Resources */,
 				2804011D1B34213200DE0EBA /* cycleparking_bad.pdf in Resources */,
@@ -4660,6 +4678,7 @@
 				28187AC914FCFF4C00A38A17 /* UIButton_green_lo.png in Resources */,
 				28042E9C1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */,
 				28187ACA14FCFF4C00A38A17 /* UIButton_grey_hi.png in Resources */,
+				28B8ADE11D240FB4009A54A6 /* README in Resources */,
 				28D186BD193754E2001FBBF7 /* UIButtonBarTrash.png in Resources */,
 				2825180219D46DE600DDD6D9 /* MapViewSearchLocationView.xib in Resources */,
 				28187ACB14FCFF4C00A38A17 /* UIButton_grey_lo.png in Resources */,
@@ -4700,7 +4719,6 @@
 				28DFE8D515A42881005FDCA0 /* PhotoWizardCategoryCell.xib in Resources */,
 				283435C615DD17B000B00FD5 /* Icon_nofavroutes.png in Resources */,
 				283435C715DD17B000B00FD5 /* Icon_norecentroutes.png in Resources */,
-				283435FF15DD5D9100B00FD5 /* APIKey_dev.txt in Resources */,
 				28B76F3015E4D7E9006B01D0 /* CSBarButton_location@2x.png in Resources */,
 				28735ADC1C241AFF00B2E9D5 /* MapStyleCellView.xib in Resources */,
 				28B76F3215E4D7E9006B01D0 /* Icon_nofavroutes@2x.png in Resources */,
@@ -4851,6 +4869,7 @@
 				282292391C3BEF8700235259 /* compass.pdf in Resources */,
 				286FAE7A1A190FC400AA2510 /* CSIcon_saveloc_other@2x.png in Resources */,
 				2834363315DD5DC300B00FD5 /* RouteTableCell.xib in Resources */,
+				28B8ADE21D240FB4009A54A6 /* README in Resources */,
 				2834363415DD5DC300B00FD5 /* CreditsView.xib in Resources */,
 				2834363515DD5DC300B00FD5 /* FavouritesView.xib in Resources */,
 				2834363615DD5DC300B00FD5 /* CSRouteDetailsViewController.xib in Resources */,
@@ -4873,6 +4892,7 @@
 				2834364415DD5DC300B00FD5 /* UIButtonBarInfo@2x.png in Resources */,
 				2834364515DD5DC300B00FD5 /* UIIcon_minor_roads@2x.png in Resources */,
 				2834364815DD5DC300B00FD5 /* cyclecambridge.jpg in Resources */,
+				28B8ADDD1D240F4E009A54A6 /* APIKey_live.txt in Resources */,
 				2853211E19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				2834364915DD5DC300B00FD5 /* donate.png in Resources */,
 				2834364A15DD5DC300B00FD5 /* reesjeffreys.png in Resources */,
@@ -5072,6 +5092,7 @@
 				28A263141AE65AB4006C09A7 /* FormData.plist in Resources */,
 				28A263151AE65AB4006C09A7 /* CSIcon_saveloc_work@2x.png in Resources */,
 				28A263161AE65AB4006C09A7 /* styles.plist in Resources */,
+				28B8ADE41D240FB4009A54A6 /* README in Resources */,
 				28A263171AE65AB4006C09A7 /* userState.plist in Resources */,
 				28A263181AE65AB4006C09A7 /* UIButton_green_hi@2x.png in Resources */,
 				28A263191AE65AB4006C09A7 /* UIButton_green_lo@2x.png in Resources */,
@@ -5096,6 +5117,7 @@
 				28A264BF1AE65DA0006C09A7 /* StokeStoryboard.storyboard in Resources */,
 				280401081B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				28A263291AE65AB4006C09A7 /* Icon_nosearchresults@2x.png in Resources */,
+				28B8ADDF1D240F4E009A54A6 /* APIKey_live.txt in Resources */,
 				28A2632A1AE65AB4006C09A7 /* UIIcon_cycle_lanes@2x.png in Resources */,
 				28CDBB481C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */,
 				28A2632B1AE65AB4006C09A7 /* Icon_nosearchresults.png in Resources */,
@@ -5345,7 +5367,6 @@
 				28A263DD1AE65AB4006C09A7 /* UIActivitySMS@2x.png in Resources */,
 				28A263DE1AE65AB4006C09A7 /* UIActivityTwitter@2x.png in Resources */,
 				28A263DF1AE65AB4006C09A7 /* UIIcon_walking.png in Resources */,
-				28A264C71AE790E6006C09A7 /* APIKey_dev.txt in Resources */,
 				28A263E01AE65AB4006C09A7 /* UIIcon_walking@2x.png in Resources */,
 				28A263E11AE65AB4006C09A7 /* UIButtonBarTrash.png in Resources */,
 				28A263E31AE65AB4006C09A7 /* UIButtonBarRefresh@2x.png in Resources */,
@@ -5367,6 +5388,7 @@
 				28FA8A4219E454E80040EA46 /* FormData.plist in Resources */,
 				28FA8A4319E454E80040EA46 /* styles.plist in Resources */,
 				28FA8A4419E454E80040EA46 /* Icon_nosearchresults.png in Resources */,
+				28B8ADE31D240FB4009A54A6 /* README in Resources */,
 				280400EF1B34213200DE0EBA /* bikeshops_bad.pdf in Resources */,
 				28FA8A4519E454E80040EA46 /* userState.plist in Resources */,
 				28FA8A4619E454E80040EA46 /* UIButton_green_hi@2x.png in Resources */,
@@ -5571,7 +5593,6 @@
 				28FA8AD019E454E80040EA46 /* Icon_nofavroutes.png in Resources */,
 				28FA8AD119E454E80040EA46 /* Icon_norecentroutes.png in Resources */,
 				289EFC6C19EDA4E60081E7BB /* CSIcon_saveloc_home.png in Resources */,
-				28FA8AD219E454E80040EA46 /* APIKey_dev.txt in Resources */,
 				28FA8AD319E454E80040EA46 /* CSBarButton_location@2x.png in Resources */,
 				28FA8AD419E454E80040EA46 /* Icon_nofavroutes@2x.png in Resources */,
 				28FA8AD519E454E80040EA46 /* Icon_norecentroutes@2x.png in Resources */,
@@ -5590,6 +5611,7 @@
 				28B0AD5419EEFC8C008A3F21 /* CSBarButton_poi.png in Resources */,
 				28FA8ADE19E454E80040EA46 /* CSBarButton_deletePoint@2x.png in Resources */,
 				28A9998919E709340050C3E8 /* GenericWebView.xib in Resources */,
+				28B8ADDA1D240F4E009A54A6 /* APIKey_dev.txt in Resources */,
 				28FA8ADF19E454E80040EA46 /* HUD_icon_checkMark.png in Resources */,
 				28FA8BB019E455E50040EA46 /* appconfig_dev.plist in Resources */,
 				28347AAC1A37781F00FA83BE /* UserRouteCell.xib in Resources */,
@@ -6687,7 +6709,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6715,7 +6737,7 @@
 				BUNDLE_ID = mobile;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6735,7 +6757,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6745,7 +6767,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "507015f5-c41c-48c7-bf0e-efd28bcc5eaa";
+				PROVISIONING_PROFILE = "569d41e3-f1bc-496a-b687-3d5b299040a4";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6783,7 +6805,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
