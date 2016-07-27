@@ -28,12 +28,6 @@
 @property (nonatomic, strong)	AsyncImageView				*imageView;
 @property (nonatomic, strong)	ExpandedUILabel				*imageLabel;
 @property (nonatomic, strong)	CopyLabel					*titleLabel;
-@property (nonatomic, strong)	ExpandedUILabel				*dateLabel;
-@property (nonatomic, strong)	ExpandedUILabel				*tagLabel;
-
-@property (strong, nonatomic) IBOutlet UIView *testView;
-
-
 
 -(void)updateContentSize;
 -(void)createPersistentUI;
@@ -93,32 +87,18 @@
 	_viewContainer.paddingTop=20;
 	_viewContainer.paddingBottom=20;
 	_viewContainer.itemPadding=20;
+		
+	_imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
+	_imageView.delegate=self;
+	_imageView.cacheImage=NO;
+	[_viewContainer addSubview:_imageView];
 	
-	
-	[_viewContainer addSubview:_testView];
-	
-//	_dateLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-//	_dateLabel.font=[UIFont systemFontOfSize:13];
-//	_dateLabel.textAlignment=NSTextAlignmentRight;
-//	_dateLabel.textColor=UIColorFromRGB(0x666666);
-//	[_viewContainer addSubview:_dateLabel];
-//		
-//	_imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
-//	_imageView.delegate=self;
-//	_imageView.cacheImage=NO;
-//	[_viewContainer addSubview:_imageView];
-//	
-//	_tagLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-//	_tagLabel.font=[UIFont systemFontOfSize:13];
-//	_tagLabel.textColor=UIColorFromRGB(0x666666);
-//	[_viewContainer addSubview:_tagLabel];
-//	
-//	_imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-//	_imageLabel.font=[UIFont systemFontOfSize:13];
-//	_imageLabel.textColor=UIColorFromRGB(0x666666);
-//	_imageLabel.hasShadow=NO;
-//	_imageLabel.multiline=YES;
-//	[_viewContainer addSubview:_imageLabel];
+	_imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	_imageLabel.font=[UIFont systemFontOfSize:13];
+	_imageLabel.textColor=UIColorFromRGB(0x666666);
+	_imageLabel.hasShadow=NO;
+	_imageLabel.multiline=YES;
+	[_viewContainer addSubview:_imageLabel];
 	
 	[_scrollView addSubview:_viewContainer];
 	
@@ -177,10 +157,6 @@
 	self.dataProvider=photoEntry;
 	
 	self.navigationBar.topItem.title = [NSString stringWithFormat:@"Photo #%@", [_dataProvider csidString]];
-	
-	_dateLabel.text=_dataProvider.dateString;
-	
-	_tagLabel.text=_dataProvider.tagString;
 	
 	_imageLabel.text=[_dataProvider caption];
 	
