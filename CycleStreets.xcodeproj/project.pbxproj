@@ -1519,8 +1519,6 @@
 		28B7EFBC1C46CB02009AC542 /* CMMapLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B7EFBB1C46CB02009AC542 /* CMMapLauncher.m */; };
 		28B8ADD81D240F4E009A54A6 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */; };
 		28B8ADDA1D240F4E009A54A6 /* APIKey_dev.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */; };
-		28B8ADDD1D240F4E009A54A6 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */; };
-		28B8ADDF1D240F4E009A54A6 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */; };
 		28B8ADE11D240FB4009A54A6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADE01D240FB4009A54A6 /* README */; };
 		28B8ADE21D240FB4009A54A6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADE01D240FB4009A54A6 /* README */; };
 		28B8ADE31D240FB4009A54A6 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 28B8ADE01D240FB4009A54A6 /* README */; };
@@ -2581,7 +2579,6 @@
 		28B7EFBA1C46CB02009AC542 /* CMMapLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMapLauncher.h; sourceTree = "<group>"; };
 		28B7EFBB1C46CB02009AC542 /* CMMapLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMapLauncher.m; sourceTree = "<group>"; };
 		28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APIKey_dev.txt; sourceTree = "<group>"; };
-		28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APIKey_live.txt; sourceTree = "<group>"; };
 		28B8ADE01D240FB4009A54A6 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		28BC6A5C18AE1D8B00EF0436 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		28BC6A7618AE418000EF0436 /* CycleStreets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CycleStreets.h; sourceTree = "<group>"; };
@@ -4058,7 +4055,6 @@
 			isa = PBXGroup;
 			children = (
 				28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */,
-				28B8ADD71D240F4E009A54A6 /* APIKey_live.txt */,
 				28B8ADE01D240FB4009A54A6 /* README */,
 			);
 			path = api;
@@ -4892,7 +4888,6 @@
 				2834364415DD5DC300B00FD5 /* UIButtonBarInfo@2x.png in Resources */,
 				2834364515DD5DC300B00FD5 /* UIIcon_minor_roads@2x.png in Resources */,
 				2834364815DD5DC300B00FD5 /* cyclecambridge.jpg in Resources */,
-				28B8ADDD1D240F4E009A54A6 /* APIKey_live.txt in Resources */,
 				2853211E19E7EFF900118E48 /* OSMapStyle.png in Resources */,
 				2834364915DD5DC300B00FD5 /* donate.png in Resources */,
 				2834364A15DD5DC300B00FD5 /* reesjeffreys.png in Resources */,
@@ -5117,7 +5112,6 @@
 				28A264BF1AE65DA0006C09A7 /* StokeStoryboard.storyboard in Resources */,
 				280401081B34213200DE0EBA /* closure_bad.pdf in Resources */,
 				28A263291AE65AB4006C09A7 /* Icon_nosearchresults@2x.png in Resources */,
-				28B8ADDF1D240F4E009A54A6 /* APIKey_live.txt in Resources */,
 				28A2632A1AE65AB4006C09A7 /* UIIcon_cycle_lanes@2x.png in Resources */,
 				28CDBB481C22CF8A00B3971D /* CSBarButton_leisure_add@2x.png in Resources */,
 				28A2632B1AE65AB4006C09A7 /* Icon_nosearchresults.png in Resources */,
