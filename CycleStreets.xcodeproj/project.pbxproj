@@ -677,6 +677,8 @@
 		284ADCEB18C88309003830DE /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCE918C88309003830DE /* NSDataAdditions.m */; };
 		284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
 		284ADCEF18C892A9003830DE /* BUCodableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 284ADCED18C892A9003830DE /* BUCodableObject.m */; };
+		285281C41D5DC08900D20ECE /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 285281C31D5DC08900D20ECE /* APIKey_live.txt */; };
+		285281C51D5DC08900D20ECE /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 285281C31D5DC08900D20ECE /* APIKey_live.txt */; };
 		285320FC19E7D44000118E48 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 285320FB19E7D44000118E48 /* SettingsViewController.m */; };
 		285320FE19E7D46100118E48 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285320FD19E7D46100118E48 /* SettingsView.xib */; };
 		2853210119E7D4E800118E48 /* BUHorizontalMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2853210019E7D4E800118E48 /* BUHorizontalMenuView.m */; };
@@ -866,6 +868,8 @@
 		28837D9F1965801000B58F7B /* CSBarButton_gpsactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28837D9D1965801000B58F7B /* CSBarButton_gpsactive@2x.png */; };
 		28851505166E0E20003536CA /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
 		28851506166E0E20003536CA /* UIActivityCopy.png in Resources */ = {isa = PBXBuildFile; fileRef = 28851504166E0E20003536CA /* UIActivityCopy.png */; };
+		28852D521D5E82BB003DE404 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 285281C31D5DC08900D20ECE /* APIKey_live.txt */; };
+		28852D531D5E82BD003DE404 /* APIKey_live.txt in Resources */ = {isa = PBXBuildFile; fileRef = 285281C31D5DC08900D20ECE /* APIKey_live.txt */; };
 		288663941521F7C60076BE5C /* RoutePlanMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 288663931521F7C60076BE5C /* RoutePlanMenuView.xib */; };
 		2886DED818C528C100CD208B /* BUNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DED718C528C100CD208B /* BUNetworkOperation.m */; };
 		2886DED918C528C100CD208B /* BUNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2886DED718C528C100CD208B /* BUNetworkOperation.m */; };
@@ -2217,6 +2221,7 @@
 		284ADCE918C88309003830DE /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		284ADCEC18C892A9003830DE /* BUCodableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BUCodableObject.h; sourceTree = "<group>"; };
 		284ADCED18C892A9003830DE /* BUCodableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BUCodableObject.m; sourceTree = "<group>"; };
+		285281C31D5DC08900D20ECE /* APIKey_live.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = APIKey_live.txt; sourceTree = "<group>"; };
 		285320FA19E7D44000118E48 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		285320FB19E7D44000118E48 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		285320FD19E7D46100118E48 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
@@ -4054,6 +4059,7 @@
 		28B8ADD51D240F4E009A54A6 /* api */ = {
 			isa = PBXGroup;
 			children = (
+				285281C31D5DC08900D20ECE /* APIKey_live.txt */,
 				28B8ADD61D240F4E009A54A6 /* APIKey_dev.txt */,
 				28B8ADE01D240FB4009A54A6 /* README */,
 			);
@@ -4500,6 +4506,7 @@
 				280401091B34213200DE0EBA /* closure_good.pdf in Resources */,
 				28AD60BE131FB54A008527FC /* Entitlements.plist in Resources */,
 				28AD62B4131FB69D008527FC /* contentStrings.plist in Resources */,
+				28852D521D5E82BB003DE404 /* APIKey_live.txt in Resources */,
 				28AD62B5131FB69D008527FC /* FormData.plist in Resources */,
 				28AD62B7131FB69D008527FC /* styles.plist in Resources */,
 				2865C24C19D570BA001C329B /* Icon_nosearchresults.png in Resources */,
@@ -4896,6 +4903,7 @@
 				2853212519E7F24F00118E48 /* CNSMapStyle.png in Resources */,
 				2834365C15DD5DC300B00FD5 /* services_live.plist in Resources */,
 				2804017A1B34213200DE0EBA /* potholes_other.pdf in Resources */,
+				285281C41D5DC08900D20ECE /* APIKey_live.txt in Resources */,
 				280401621B34213200DE0EBA /* general_neutral.pdf in Resources */,
 				2804019A1B34213200DE0EBA /* routesigns_good.pdf in Resources */,
 				28040C3918BA73E2004D34DD /* UIPickerAccessoryView.xib in Resources */,
@@ -5085,6 +5093,7 @@
 				280400F41B34213200DE0EBA /* bikeshops_good.pdf in Resources */,
 				28A263131AE65AB4006C09A7 /* contentStrings.plist in Resources */,
 				28A263141AE65AB4006C09A7 /* FormData.plist in Resources */,
+				285281C51D5DC08900D20ECE /* APIKey_live.txt in Resources */,
 				28A263151AE65AB4006C09A7 /* CSIcon_saveloc_work@2x.png in Resources */,
 				28A263161AE65AB4006C09A7 /* styles.plist in Resources */,
 				28B8ADE41D240FB4009A54A6 /* README in Resources */,
@@ -5643,6 +5652,7 @@
 				28FA8AF519E454E80040EA46 /* UIActivityBlank@2x.png in Resources */,
 				28FA8AF619E454E80040EA46 /* UIActivityCopy@2x.png in Resources */,
 				28FA8AF719E454E80040EA46 /* UIActivityFacebook@2x.png in Resources */,
+				28852D531D5E82BD003DE404 /* APIKey_live.txt in Resources */,
 				28FA8AF819E454E80040EA46 /* UIActivityMail@2x.png in Resources */,
 				280401431B34213200DE0EBA /* dutchcycleways_bad.pdf in Resources */,
 				28FA8AF919E454E80040EA46 /* UIActivitySMS@2x.png in Resources */,
@@ -6711,9 +6721,9 @@
 					"-licucore",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-dev";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "f5850939-d4b6-41f7-bb59-996e2f1c9d24";
+				PROVISIONING_PROFILE = "f884de41-b175-4728-a72a-523f98e7450c";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6759,7 +6769,7 @@
 					"-lxml2",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = net.cyclestreets.mobile;
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "569d41e3-f1bc-496a-b687-3d5b299040a4";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -6779,7 +6789,7 @@
 				BUNDLE_ID = "mobile-adhoc";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6808,9 +6818,9 @@
 					"-lxml2",
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-adhoc";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "114b4689-c736-40e3-be88-1c36b26ce499";
+				PROVISIONING_PROFILE = "c704a810-257c-4791-bd27-8265cb7c8bd4";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
