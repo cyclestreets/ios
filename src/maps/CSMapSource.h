@@ -38,10 +38,18 @@
 @property(nonatomic,readonly)  NSDictionary         *settingsDict;
 
 
+@property (nonatomic,assign) NSInteger currentTileServerPrefixIndex;
+
+
+
 
 @property (nonatomic, readonly) int		maxZoom;
 @property (nonatomic, readonly) int		minZoom;
 @property (nonatomic, readonly) BOOL	isRetinaEnabled;
+@property (nonatomic, readonly) BOOL	hasTileServerPrefixes;
 
+-(NSArray*)tileServeSubDomainPrefixes;
+
+-(NSString*)nextTileSubdomainPrefix;
 
 @end

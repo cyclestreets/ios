@@ -12,6 +12,10 @@
 @implementation CSOrdnanceSurveyStreetViewMapSource
 
 
+-(NSArray*)tileServeSubDomainPrefixes{
+	return @[@"a",@"b",@"c"];
+}
+
 -(CGSize)tileSize{
 	if (self.isRetinaEnabled) {
 		return CGSizeMake(512,512);
@@ -33,17 +37,43 @@
 	return YES;
 }
 
+-(BOOL)hasTileServerPrefixes{
+	return YES;
+}
+
+
 
 // for use with new retina tiles
 -(NSString*)cacheTileTemplate{
 	
-	if([self isRetinaEnabled]){
-		return @"http://tile.cyclestreets.net/osopendata/%li/%li/%li@%ix.png";
-	}else{
-		return @"http://tile.cyclestreets.net/osopendata/%li/%li/%li.png";
-	}
+	return [NSString stringWithFormat:@"%@/%@/%@",[self tileServerBasePath],[self tileServerName],[self tileServerFileName]];
 	
 }
+
+
+
+// tile server path fragments
+
+-(NSString*)tileServerBasePath{
+	if(self.hasTileServerPrefixes){
+		return [NSString stringWithFormat:@"http://%@.tile.cyclestreets.net",[self nextTileSubdomainPrefix]];
+	}
+	return @"http://tile.cyclestreets.net";
+}
+
+-(NSString*)tileServerName{
+	return @"osopendata";
+}
+
+-(NSString*)tileServerFileName{
+	if([self isRetinaEnabled]){
+		return @"%li/%li/%li@%ix.png";
+	}else{
+		return @"%li/%li/%li.png";
+	}
+}
+
+
 
 // for use directly with map kit, if - (NSURL *)URLForTilePath:(MKTileOverlayPath)path is implemented this is effectively ignored
 - (NSString *)tileTemplate{
