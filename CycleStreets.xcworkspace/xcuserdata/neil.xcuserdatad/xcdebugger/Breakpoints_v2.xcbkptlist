@@ -238,7 +238,7 @@
             startingLineNumber = "1466"
             endingLineNumber = "1466"
             landmarkName = "-textViewDidChange:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -254,7 +254,7 @@
             startingLineNumber = "311"
             endingLineNumber = "311"
             landmarkName = "-retrievePhotosForRouteResponse:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -270,7 +270,7 @@
             startingLineNumber = "79"
             endingLineNumber = "79"
             landmarkName = "-didReceiveNotification:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -558,7 +558,7 @@
             startingLineNumber = "180"
             endingLineNumber = "180"
             landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:fordataID:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -698,7 +698,7 @@
             startingLineNumber = "64"
             endingLineNumber = "64"
             landmarkName = "-init"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -714,7 +714,7 @@
             startingLineNumber = "143"
             endingLineNumber = "143"
             landmarkName = "-requestPOIListingData"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -746,7 +746,7 @@
             startingLineNumber = "255"
             endingLineNumber = "255"
             landmarkName = "-retrievePhotosForLocationResponse:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -762,7 +762,7 @@
             startingLineNumber = "225"
             endingLineNumber = "225"
             landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:fordataID:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -778,7 +778,7 @@
             startingLineNumber = "234"
             endingLineNumber = "234"
             landmarkName = "-retrievePhotosForLocationBounds:withEdge:withLimit:fordataID:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -842,7 +842,7 @@
             startingLineNumber = "263"
             endingLineNumber = "263"
             landmarkName = "-retrievePhotosForLocationResponse:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1178,7 +1178,7 @@
             startingLineNumber = "259"
             endingLineNumber = "259"
             landmarkName = "-retrievePhotosForLocationResponse:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1194,7 +1194,7 @@
             startingLineNumber = "288"
             endingLineNumber = "288"
             landmarkName = "-retrievePhotosForRouteResponse:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1226,7 +1226,7 @@
             startingLineNumber = "175"
             endingLineNumber = "175"
             landmarkName = "-POIListingDataResponse:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1322,7 +1322,7 @@
             startingLineNumber = "348"
             endingLineNumber = "348"
             landmarkName = "-refreshPOICategoryMapPointswithNWBounds:andSEBounds:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1338,7 +1338,7 @@
             startingLineNumber = "360"
             endingLineNumber = "360"
             landmarkName = "-refreshPOICategoryMapPointswithNWBounds:andSEBounds:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1354,7 +1354,7 @@
             startingLineNumber = "409"
             endingLineNumber = "409"
             landmarkName = "-appendPOICategoryMapPointsRequest:withNWBounds:andSEBounds:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1370,7 +1370,7 @@
             startingLineNumber = "444"
             endingLineNumber = "444"
             landmarkName = "-appendPOICategoryMapPointsResponse:forCategory:withNWBounds:andSEBounds:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1507,22 +1507,6 @@
             endingLineNumber = "66"
             landmarkName = "-init"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/maps/CSBingSatelliteMapSource.m"
-            timestampString = "519733200.30178"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "-fetchBingAuthenticationResponse:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

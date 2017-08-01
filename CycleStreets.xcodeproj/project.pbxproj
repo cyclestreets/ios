@@ -4458,7 +4458,7 @@
 				ORGANIZATIONNAME = "CycleStreets Ltd";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = Q3YCNU3X72;
+						DevelopmentTeam = 4LJ34GQZ65;
 						ProvisioningStyle = Manual;
 					};
 					2834360115DD5DC300B00FD5 = {
@@ -6597,7 +6597,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -6657,7 +6657,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -6695,6 +6695,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = Q3YCNU3X72;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6715,7 +6716,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6725,7 +6726,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-dev";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "f884de41-b175-4728-a72a-523f98e7450c";
+				PROVISIONING_PROFILE = "aa978218-5335-45b5-b569-ae47761f2d92";
+				PROVISIONING_PROFILE_SPECIFIER = "Buffer Development";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6745,6 +6747,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 4LJ34GQZ65;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6763,7 +6766,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6773,7 +6776,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.cyclestreets.mobile;
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "569d41e3-f1bc-496a-b687-3d5b299040a4";
+				PROVISIONING_PROFILE = "4e5f2172-cd19-4c56-b91c-9d5b31028561";
+				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets AppStore";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -6793,6 +6797,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 4LJ34GQZ65;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6811,7 +6816,7 @@
 				HEADER_SEARCH_PATHS = "";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6822,7 +6827,8 @@
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-adhoc";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "c704a810-257c-4791-bd27-8265cb7c8bd4";
+				PROVISIONING_PROFILE = "ade72401-6d0c-4e69-9f17-bb15937c247b";
+				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets Adhoc Testing";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -7311,7 +7317,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
