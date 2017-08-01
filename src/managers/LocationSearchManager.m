@@ -114,6 +114,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 -(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation{
 	
 	
+	searchString=[searchString stringByReplacingOccurrencesOfString:@" " withString:EMPTYSTRING];
+	
 	_activeFilterType=filterType;
 	_activeRequestType=requestType;
 	 

@@ -38,9 +38,9 @@
 -(NSString*)cacheTileTemplate{
 	
 	if([self isRetinaEnabled]){
-		return @"http://tile.cyclestreets.net/cyclenorthstaffs/%li/%li/%li@%ix.png";
+		return @"https://tile.cyclestreets.net/cyclenorthstaffs/%li/%li/%li@%ix.png";
 	}else{
-		return @"http://tile.cyclestreets.net/cyclenorthstaffs/%li/%li/%li.png";
+		return @"https://tile.cyclestreets.net/cyclenorthstaffs/%li/%li/%li.png";
 	}
 	
 }
@@ -49,9 +49,9 @@
 - (NSString *)tileTemplate{
 	
 	if([self isRetinaEnabled]){
-		return @"http://tile.cyclestreets.net/cyclenorthstaffs/{z}/{x}/{y}/{s}.png";
+		return @"https://tile.cyclestreets.net/cyclenorthstaffs/{z}/{x}/{y}/{s}.png";
 	}else{
-		return @"http://tile.cyclestreets.net/cyclenorthstaffs/{z}/{x}/{y}.png";
+		return @"https://tile.cyclestreets.net/cyclenorthstaffs/{z}/{x}/{y}.png";
 	}
 }
 

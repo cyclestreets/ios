@@ -71,6 +71,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 	[self appendStartUpView];
 	
+	[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+	
 	
 	_startupmanager=[[StartupManager alloc]init];
 	_startupmanager.delegate=self;

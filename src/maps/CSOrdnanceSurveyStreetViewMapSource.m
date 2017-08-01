@@ -56,9 +56,9 @@
 
 -(NSString*)tileServerBasePath{
 	if(self.hasTileServerPrefixes){
-		return [NSString stringWithFormat:@"http://%@.tile.cyclestreets.net",[self nextTileSubdomainPrefix]];
+		return [NSString stringWithFormat:@"https://%@.tile.cyclestreets.net",[self nextTileSubdomainPrefix]];
 	}
-	return @"http://tile.cyclestreets.net";
+	return @"https://tile.cyclestreets.net";
 }
 
 -(NSString*)tileServerName{
@@ -79,9 +79,9 @@
 - (NSString *)tileTemplate{
 	
 	if([self isRetinaEnabled]){
-		return @"http://tile.cyclestreets.net/osopendata/{z}/{x}/{y}/{s}.png";
+		return @"https://tile.cyclestreets.net/osopendata/{z}/{x}/{y}/{s}.png";
 	}else{
-		return @"http://tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png";
+		return @"https://tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png";
 	}
 }
 
