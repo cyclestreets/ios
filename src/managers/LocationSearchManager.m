@@ -17,6 +17,8 @@
 #import "LocationSearchVO.h"
 #import "UserLocationManager.h"
 
+#import <MapKit/MapKit.h>
+
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBook/ABAddressBook.h>
@@ -190,7 +192,65 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 				[weakSelf cancelOperation:_searchOperation];
 		}];
 		
+		
+		
 	}
+	
+}
+
+-(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation usingRegion:(MKCoordinateRegion)region{
+	
+	searchString=[searchString stringByReplacingOccurrencesOfString:@" " withString:EMPTYSTRING];
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	[cycleStreets.files setMiscValue:searchString forKey:@"lastSearch"];
+	
+	MKLocalSearchRequest *request=[MKLocalSearchRequest new];
+	request.naturalLanguageQuery = searchString;
+	request.region = region;
+	switch(filterType){
+			
+		case LocationSearchFilterLocal:
+		{
+			request.region = MKCoordinateRegionMakeWithDistance(centerLocation, 1000, 1000);
+		}
+		break;
+			
+		case LocationSearchFilterNational:
+		{
+			request.region = MKCoordinateRegionMakeWithDistance(centerLocation, 100000, 100000);
+		}
+		break;
+			
+		default:break;
+			
+	}
+	
+	MKLocalSearch *search=[[MKLocalSearch alloc] initWithRequest:request];
+	[search startWithCompletionHandler:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+		
+		if(response.mapItems.count>0){
+			
+			NSMutableArray *arr=[NSMutableArray array];
+			for(MKMapItem *item in response.mapItems){
+				
+				LocationSearchVO *searchResult=[LocationSearchVO new];
+				searchResult.mapItem=item;
+				searchResult.locationCoords=item.placemark.coordinate;
+				[arr addObject:searchResult];
+			}
+			
+			NSMutableArray *filteredResults=[self filterDuplicateSearchResults:arr];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:LOCATIONSEARCHRESPONSE object:filteredResults];
+			
+		}
+		
+		
+		[[HudManager sharedInstance] removeHUD];
+		
+	}];
+	
 	
 }
 

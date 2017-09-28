@@ -12,6 +12,7 @@ Copyright (C) 2010  CycleStreets Ltd
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 @interface LocationSearchVO : NSObject
 
@@ -20,10 +21,15 @@ Copyright (C) 2010  CycleStreets Ltd
 @property (nonatomic, strong) NSString		* near;
 @property (nonatomic, strong) NSString		*distance;
 
+@property (nonatomic,strong)  MKMapItem		*mapItem;
 
 // getters
 @property (nonatomic, readonly) NSString		 *distanceString;
 @property (nonatomic, readonly) NSNumber		 *distanceInt;
+
+@property (nonatomic,readonly)  NSString		*nameString;
+@property (nonatomic,readonly)  NSString		*nearString;
+
 
 - (id)initWithDictionary:(NSDictionary *)fields;
 

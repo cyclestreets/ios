@@ -348,8 +348,9 @@ enum AppStylingFontType:String{
 		case .LocsearchSegment:
 			
 			let control=object as! UISegmentedControl
-			control.backgroundColor=UIColor.white
-			control.tintColor=UIColor(named: .green)
+			//control.backgroundColor=UIColor.white
+			control.tintColor=UIColor.white
+			control.layer.cornerRadius=6
 			
 		case .LocsearchBar:
 			

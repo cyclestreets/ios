@@ -88,7 +88,7 @@
 	if(_searchString==nil)
 		return;
 	
-	[[LocationSearchManager sharedInstance] searchForLocation:_searchString withFilter:_activeSearchFilter forRequestType:LocationSearchRequestTypeMap atLocation:_centreLocation];
+	[[LocationSearchManager sharedInstance] searchForLocation:_searchString withFilter:_activeSearchFilter forRequestType:LocationSearchRequestTypeMap atLocation:_centreLocation usingRegion:_mapRegion];
 }
 
 

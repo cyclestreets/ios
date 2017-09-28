@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SuperViewController.h"
 
+#import <MapKit/MapKit.h>
+
 @protocol LocationReceiver
 - (void) didMoveToLocation:(CLLocationCoordinate2D)location;
 @end
@@ -16,6 +18,9 @@
 @interface MapViewSearchLocationViewController : SuperViewController
 
 @property (nonatomic, assign) CLLocationCoordinate2D  centreLocation;
+@property (nonatomic, assign) MKCoordinateRegion   mapRegion;
+
 @property (nonatomic, strong) id<LocationReceiver>    locationReceiver;
+
 
 @end

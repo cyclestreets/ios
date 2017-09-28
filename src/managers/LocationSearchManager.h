@@ -10,6 +10,7 @@
 #import "FrameworkObject.h"
 #import "SynthesizeSingleton.h"
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 typedef NS_ENUM(NSUInteger, LocationSearchFilterType) {
 	LocationSearchFilterLocal,
@@ -34,6 +35,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(LocationSearchManager);
 	
 
 -(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation;
+
+-(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation usingRegion:(MKCoordinateRegion)region;
 
 + (LocationSearchRequestType)locationrequestStringTypeToConstant:(NSString*)stringType;
 + (NSString*)locationrequestConstantToString:(LocationSearchRequestType)requestType;

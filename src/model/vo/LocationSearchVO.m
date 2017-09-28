@@ -68,4 +68,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	return [NSNumber numberWithInt:[distance intValue]];
 }
 
+
+-(NSString*)nameString{
+	
+	if(_mapItem){
+		return _mapItem.placemark.name;
+	}
+	return self.name;
+}
+
+-(NSString*)nearString{
+	
+	if(self.near){
+		return  self.near;
+	}
+	
+	if (_mapItem){
+		
+		NSString *firstSpace= (_mapItem.placemark.subThoroughfare != nil && _mapItem.placemark.thoroughfare != nil) ? @" " : EMPTYSTRING;
+		NSString *comma=(_mapItem.placemark.subThoroughfare != nil || _mapItem.placemark.thoroughfare != nil) &&
+		(_mapItem.placemark.subAdministrativeArea != nil || _mapItem.placemark.administrativeArea != nil) ? @", " : EMPTYSTRING;
+		
+		NSString *secondSpace = (_mapItem.placemark.subAdministrativeArea != nil && _mapItem.placemark.administrativeArea != nil) ? @", " : EMPTYSTRING;
+		
+		NSString *addressString=[NSString stringWithFormat:@"%@%@%@%@%@%@%@",_mapItem.placemark.subThoroughfare ? _mapItem.placemark.subThoroughfare : EMPTYSTRING,firstSpace,_mapItem.placemark.thoroughfare ? _mapItem.placemark.thoroughfare : EMPTYSTRING,comma,_mapItem.placemark.locality ? _mapItem.placemark.subAdministrativeArea : EMPTYSTRING,secondSpace,_mapItem.placemark.administrativeArea ? _mapItem.placemark.administrativeArea : EMPTYSTRING];
+		
+		self.near=addressString;
+		
+		return self.near;
+	}
+	
+	
+}
+
 @end
