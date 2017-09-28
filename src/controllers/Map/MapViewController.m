@@ -1494,7 +1494,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		if (annotationView == nil){
 			
 			annotationView = [[POIAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
-			annotationView.styleId=@"POIAnnotationView";
 			annotationView.size=CGSizeMake(28,28);
 			annotationView.draggable =NO;
 			annotationView.enabled=YES;

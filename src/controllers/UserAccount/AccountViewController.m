@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "ButtonUtilities.h"
 #import "StringUtilities.h"
 #import "GenericConstants.h"
-#import <PixateFreestyle/PixateFreestyle.h>
+#import "CycleStreets-Swift.h"
 #import "UIViewController+BUAdditions.h"
 
 static NSString *const STRINGID=@"account";
@@ -228,22 +228,23 @@ static NSString *const STRINGID=@"account";
 	// add ui and targets to form buttons
 	UIButton *button=nil;
 	button=(UIButton*)[_loginView viewWithTag:kSubmitButtonTag];
-	button.styleId=@"DarkGreyButton";
+	[AppStyling applyStyleForButton:button key:AppStyleGrayButton];
+	
 	[button setTitle:LocalisedString(@"login") forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	button=(UIButton*)[_registerView viewWithTag:kSubmitButtonTag];
-	button.styleId=@"DarkGreyButton";
+	[AppStyling applyStyleForButton:button key:AppStyleGrayButton];
 	[button setTitle:LocalisedString(@"createaccount") forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	button=(UIButton*)[_retrieveView viewWithTag:kSubmitButtonTag];
-	button.styleId=@"DarkGreyButton";
+	[AppStyling applyStyleForButton:button key:AppStyleGrayButton];
 	[button setTitle:LocalisedString(@"submit") forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(retrievePasswordButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	// logged in UI
-	_logoutButton.styleId=@"DarkGreyButton";
+	[AppStyling applyStyleForButton:_logoutButton key:AppStyleGrayButton];
 	[_logoutButton setTitle:LocalisedString(@"clearsubmit") forState:UIControlStateNormal];
 	[_logoutButton addTarget:self action:@selector(logoutButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	[_saveLoginButton addTarget:self action:@selector(saveLoginControlChanged:) forControlEvents:UIControlEventValueChanged];

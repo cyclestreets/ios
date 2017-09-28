@@ -858,6 +858,8 @@
 		287B8584144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */; };
 		287B8585144C4701006E3FCD /* UIButtonBarInfo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8581144C4701006E3FCD /* UIButtonBarInfo@2x.png */; };
 		287B8587144C470D006E3FCD /* UIIcon_minor_roads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287B8586144C470D006E3FCD /* UIIcon_minor_roads@2x.png */; };
+		287EB3DE1F7CE0FC00E0FF1E /* AppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287EB3DD1F7CE0FC00E0FF1E /* AppStyling.swift */; };
+		287EB3DF1F7CE0FC00E0FF1E /* AppStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287EB3DD1F7CE0FC00E0FF1E /* AppStyling.swift */; };
 		287ECBCF1344A28900B8A6AC /* SettingsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ECBCE1344A28900B8A6AC /* SettingsVO.m */; };
 		288055D418BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D318BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m */; };
 		288055D518BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 288055D318BB7A0900BABAB1 /* CSRouteSegmentAnnotation.m */; };
@@ -2081,11 +2083,6 @@
 		280E93711409861300C7AC75 /* UIImage-Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage-Additions.h"; path = "../utilities/UIImage-Additions.h"; sourceTree = "<group>"; };
 		280E93721409861300C7AC75 /* UIImage-Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage-Additions.m"; path = "../utilities/UIImage-Additions.m"; sourceTree = "<group>"; };
 		280E93AE140989E400C7AC75 /* donate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = donate.html; path = html/donate.html; sourceTree = "<group>"; };
-		2810DE7E1C202FDE00740E3B /* objc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = objc.c; sourceTree = "<group>"; };
-		2810DE7F1C202FDE00740E3B /* objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objc.h; sourceTree = "<group>"; };
-		2810DE801C202FDE00740E3B /* NSObject+PXClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PXClass.h"; sourceTree = "<group>"; };
-		2810DE811C202FDE00740E3B /* NSObject+PXSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PXSubclass.h"; sourceTree = "<group>"; };
-		2810DE821C202FDE00740E3B /* NSObject+PXSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PXSubclass.m"; sourceTree = "<group>"; };
 		2811C498166CCD5F00592560 /* UIActivityBlank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityBlank.png; sourceTree = "<group>"; };
 		2811C499166CCD5F00592560 /* UIActivityFacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityFacebook.png; sourceTree = "<group>"; };
 		2811C49A166CCD5F00592560 /* UIActivityMail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIActivityMail.png; sourceTree = "<group>"; };
@@ -2316,6 +2313,10 @@
 		287B8580144C4701006E3FCD /* UIButtonBarCameraSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarCameraSmall@2x.png"; sourceTree = "<group>"; };
 		287B8581144C4701006E3FCD /* UIButtonBarInfo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarInfo@2x.png"; sourceTree = "<group>"; };
 		287B8586144C470D006E3FCD /* UIIcon_minor_roads@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_minor_roads@2x.png"; sourceTree = "<group>"; };
+		287EB3DB1F7CE0FB00E0FF1E /* CycleStreets-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CycleStreets-Bridging-Header.h"; sourceTree = "<group>"; };
+		287EB3DD1F7CE0FC00E0FF1E /* AppStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyling.swift; sourceTree = "<group>"; };
+		287EB3E01F7CFA9A00E0FF1E /* CycleStreets-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CycleStreets-Bridging-Header.h"; path = "src/views/CycleStreets-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		287EB3E11F7CFAA400E0FF1E /* UIColor+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
 		287ECBCD1344A28900B8A6AC /* SettingsVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVO.h; sourceTree = "<group>"; };
 		287ECBCE1344A28900B8A6AC /* SettingsVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVO.m; sourceTree = "<group>"; };
 		288055D218BB7A0900BABAB1 /* CSRouteSegmentAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRouteSegmentAnnotation.h; sourceTree = "<group>"; };
@@ -3032,18 +3033,6 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		2810DE7D1C202FCB00740E3B /* PixateOS9 */ = {
-			isa = PBXGroup;
-			children = (
-				2810DE7E1C202FDE00740E3B /* objc.c */,
-				2810DE7F1C202FDE00740E3B /* objc.h */,
-				2810DE801C202FDE00740E3B /* NSObject+PXClass.h */,
-				2810DE811C202FDE00740E3B /* NSObject+PXSubclass.h */,
-				2810DE821C202FDE00740E3B /* NSObject+PXSubclass.m */,
-			);
-			path = PixateOS9;
-			sourceTree = "<group>";
-		};
 		2811C497166CCD5F00592560 /* ShareView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3573,6 +3562,7 @@
 		28AD60B2131FB54A008527FC /* AppDefaults */ = {
 			isa = PBXGroup;
 			children = (
+				287EB3E01F7CFA9A00E0FF1E /* CycleStreets-Bridging-Header.h */,
 				E7FD8F3B127821DB002640D0 /* Icons */,
 				28AD60B3131FB54A008527FC /* CycleStreets-Info.plist */,
 				28AD60B4131FB54A008527FC /* CycleStreets_Prefix.pch */,
@@ -3779,7 +3769,6 @@
 			isa = PBXGroup;
 			children = (
 				289EFC4F19ED39E30081E7BB /* CSOverlayTransitionAnimator.h */,
-				2810DE7D1C202FCB00740E3B /* PixateOS9 */,
 				289EFC5019ED39E30081E7BB /* CSOverlayTransitionAnimator.m */,
 				28A719901A0BE60700176949 /* CSOverlayPushTransitionAnimator.h */,
 				28A719911A0BE60700176949 /* CSOverlayPushTransitionAnimator.m */,
@@ -3799,6 +3788,9 @@
 				28916031133A9AC9000C821B /* CSSegmentFooterView.m */,
 				2853212C19E84F4200118E48 /* CSMapTileService.h */,
 				2853212D19E84F4200118E48 /* CSMapTileService.m */,
+				287EB3DD1F7CE0FC00E0FF1E /* AppStyling.swift */,
+				287EB3E11F7CFAA400E0FF1E /* UIColor+Additions.swift */,
+				287EB3DB1F7CE0FB00E0FF1E /* CycleStreets-Bridging-Header.h */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -4458,11 +4450,13 @@
 				ORGANIZATIONNAME = "CycleStreets Ltd";
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 4LJ34GQZ65;
+						DevelopmentTeam = Q3YCNU3X72;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
 					2834360115DD5DC300B00FD5 = {
 						DevelopmentTeam = 4LJ34GQZ65;
+						LastSwiftMigration = 0900;
 					};
 					28A2630D1AE65AB4006C09A7 = {
 						DevelopmentTeam = G27Q6UB594;
@@ -5949,6 +5943,7 @@
 				28735C2B144F1D0400726A6C /* UIDevice+Machine.m in Sources */,
 				284ADCEA18C88309003830DE /* NSDataAdditions.m in Sources */,
 				28A8B6351450B259009C5647 /* POICategoryVO.m in Sources */,
+				287EB3DE1F7CE0FC00E0FF1E /* AppStyling.swift in Sources */,
 				281E08B6145168F90034CC63 /* POILocationVO.m in Sources */,
 				284ADCEE18C892A9003830DE /* BUCodableObject.m in Sources */,
 				2853212E19E84F4200118E48 /* CSMapTileService.m in Sources */,
@@ -6097,6 +6092,7 @@
 				2834370D15DD5DC300B00FD5 /* LocationSearchManager.m in Sources */,
 				2853210C19E7DC0D00118E48 /* UIButton+Additions.m in Sources */,
 				28D186D719378587001FBBF7 /* BUCalloutView.m in Sources */,
+				287EB3DF1F7CE0FC00E0FF1E /* AppStyling.swift in Sources */,
 				2834370E15DD5DC300B00FD5 /* StringManager.m in Sources */,
 				2834370F15DD5DC300B00FD5 /* StyleManager.m in Sources */,
 				2834371015DD5DC300B00FD5 /* UserSettingsManager.m in Sources */,
@@ -6569,6 +6565,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = "mobile-dev";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Neil Edwards (A497C6BS7Y)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6598,6 +6595,7 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -6617,6 +6615,9 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Buffer Development";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -6631,6 +6632,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = mobile;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -6658,6 +6660,7 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -6677,6 +6680,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets AppStore";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
@@ -6692,6 +6697,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = mobile;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -6717,6 +6723,7 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6730,6 +6737,9 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Buffer Development";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -6743,6 +6753,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = mobile;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
@@ -6767,6 +6778,7 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6780,6 +6792,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets AppStore";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -6793,6 +6807,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = "mobile-adhoc";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
@@ -6817,6 +6832,7 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -6831,6 +6847,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets Adhoc Testing";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7290,6 +7308,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				BUNDLE_ID = "mobile-adhoc";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
@@ -7318,6 +7337,7 @@
 				IBC_WARNINGS = NO;
 				INFOPLIST_FILE = "CycleStreets-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
@@ -7337,6 +7357,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets Adhoc Testing";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;

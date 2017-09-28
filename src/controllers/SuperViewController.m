@@ -18,7 +18,8 @@
 #import "AppDelegate.h"
 #import "GenericConstants.h"
 #import "UIView+Additions.h"
-#import <PixateFreestyle/PixateFreestyle.h>
+
+#import "CycleStreets-Swift.h"
 
 @implementation SuperViewController
 @synthesize navigation;
@@ -441,10 +442,10 @@
 		switch(type){
 				
 			case kViewOverlayTypeRequestIndicator:
-				ilabel.styleClass=@"UIOverlayRequestLabel";
+				[AppStyling applyStyleFor:ilabel key:AppStyleUIOverlayRequestLabel];
 				break;
 			default:
-				ilabel.styleClass=@"UIOverlayTitleLabel";
+				[AppStyling applyStyleFor:ilabel key:AppStyleUIOverlayTitleLabel];
 				break;
 				
 		}

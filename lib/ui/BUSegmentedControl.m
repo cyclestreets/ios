@@ -10,7 +10,8 @@
 #import "StyleManager.h"
 #import "LayoutBox.h"
 #import "GlobalUtilities.h"
-#import <PixateFreestyle/PixateFreestyle.h>
+
+#import "CycleStreets-Swift.h"
 
 @implementation BUSegmentedControl
 @synthesize dataProvider;
@@ -63,7 +64,7 @@
 		
 		button=[UIButton buttonWithType:UIButtonTypeCustom];
 		button.showsTouchWhenHighlighted=NO;
-		button.styleId=@"BUSegmentedControlButton";
+		[AppStyling applyStyleFor:button key:AppStyleBUSegmentedControlButton];
 		[button setTitle:[dataProvider objectAtIndex:i] forState:UIControlStateNormal];
 		
 		
