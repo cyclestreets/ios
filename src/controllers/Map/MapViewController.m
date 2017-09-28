@@ -52,7 +52,6 @@
 #import "UIImage+ColorImage.h"
 
 #import "A2StoryboardSegueContext.h"
-#include <PixateFreestyle/PixateFreestyle.h>
 
 #import "CSOverlayTransitionAnimator.h"
 #import "SavedLocationsViewController.h"

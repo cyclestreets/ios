@@ -19,7 +19,6 @@
 #import "LayoutBox.h"
 #import "RouteManager.h"
 
-#import <PixateFreestyle/PixateFreestyle.h>
 
 enum  {
 	CSElevationUIStateActive, 

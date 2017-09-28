@@ -138,6 +138,7 @@ extension UIColor{
 	case UIOverlayMessageLabel
 	case tripActionButton
 	case BUSegmentedControlButton
+	case BUSegmentedControlButtonDisabled
 	case LocsearchSegment
 	case LocsearchBar
 	case leisure_segmentedcontrol
@@ -184,6 +185,7 @@ enum AppStylingFontType:String{
 		
 		UITabBar.appearance().tintColor = UIColor(named:.uiTintColor)
 		
+		UIToolbar.appearance().barTintColor=UIColor(named:.uiTintColor)
 		
 		UINavigationBar.appearance().barTintColor=UIColor(named:.uiTintColor)
 		UINavigationBar.appearance().tintColor=UIColor.white
@@ -228,7 +230,7 @@ enum AppStylingFontType:String{
 	
 	class func applyStyleForButton(_ button:UIButton, key:AppStyle){
 		
-		button.titleLabel?.textColor=UIColor.white
+		button.setTitleColor(UIColor.white, for: .normal)
 		button.titleLabel?.font=AppStylingFontType.uiButton.font()
 		button.layer.cornerRadius=3
 		
@@ -246,10 +248,19 @@ enum AppStylingFontType:String{
 			button.backgroundColor=UIColor(named: .green)
 			button.layer.cornerRadius=6
 			
+		case .BUSegmentedControlButton:
+			button.backgroundColor=UIColor(named: .darkgray)
+			button.layer.cornerRadius=0
+			
+		case .BUSegmentedControlButtonDisabled:
+			button.backgroundColor=UIColor(named: .green)
+			button.layer.cornerRadius=0
+			
 		case .BUIconActionSheetClosebutton:
 			button.backgroundColor=UIColor.colorWithHexString("AC0000", alpha: 1)!
 			button.layer.cornerRadius=6
 		default:
+			
 			break
 		}
 		

@@ -3,6 +3,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, :deployment_target => '7.1'
 use_frameworks!
 
+target 'CycleStreets' do
+
 pod 'AFNetworking', '~> 2.0'
 pod 'SFHFKeychainUtils'
 pod 'RegexKitLite'
@@ -11,7 +13,9 @@ pod 'FMMoveTableView'
 pod 'TouchJSON'
 pod 'TBXML'
 pod 'A2StoryboardSegueContext'
-pod 'PixateFreestyle'
+
+end
+
 
 
 

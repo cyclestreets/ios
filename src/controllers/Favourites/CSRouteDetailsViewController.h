@@ -39,6 +39,5 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, assign) SavedRoutesDataType dataType;
 
 - (IBAction) routeButtonSelected;
--(IBAction) renameButtonSelected:(id)sender;
 
 @end

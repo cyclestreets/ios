@@ -64,7 +64,7 @@
 		
 		button=[UIButton buttonWithType:UIButtonTypeCustom];
 		button.showsTouchWhenHighlighted=NO;
-		[AppStyling applyStyleFor:button key:AppStyleBUSegmentedControlButton];
+		[AppStyling applyStyleForButton:button key:AppStyleBUSegmentedControlButton];
 		[button setTitle:[dataProvider objectAtIndex:i] forState:UIControlStateNormal];
 		
 		
@@ -121,13 +121,14 @@
 		if(selectedIndex!=-1){
 			UIButton *outgoingbutton=[items objectAtIndex:selectedIndex];
 			outgoingbutton.enabled=YES;
-		
+			[AppStyling applyStyleForButton:outgoingbutton key:AppStyleBUSegmentedControlButton];
 		}
 		
 		selectedIndex=index;
 		
 		UIButton *incomingbutton=[items objectAtIndex:selectedIndex];
 		incomingbutton.enabled=NO;
+		[AppStyling applyStyleForButton:incomingbutton key:AppStyleBUSegmentedControlButtonDisabled];
 	}
 	
 }

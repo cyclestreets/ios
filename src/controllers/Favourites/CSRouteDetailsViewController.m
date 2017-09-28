@@ -266,13 +266,6 @@ static NSString *const VIEWTITLE=@"Route details";
 
 
 
-// route naming
--(IBAction)renameButtonSelected:(id)sender{
-	
-	[ViewUtilities createTextEntryAlertView:@"Enter Route name" fieldText:_route.nameString delegate:self];
-	
-}
-
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 	

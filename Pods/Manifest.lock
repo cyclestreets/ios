@@ -1,12 +1,12 @@
 PODS:
   - A2StoryboardSegueContext (1.0.1)
   - AFNetworking (2.4.1):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-    - AFNetworking/UIKit
+    - AFNetworking/NSURLConnection (= 2.4.1)
+    - AFNetworking/NSURLSession (= 2.4.1)
+    - AFNetworking/Reachability (= 2.4.1)
+    - AFNetworking/Security (= 2.4.1)
+    - AFNetworking/Serialization (= 2.4.1)
+    - AFNetworking/UIKit (= 2.4.1)
   - AFNetworking/NSURLConnection (2.4.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -22,7 +22,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - BlocksKit (2.2.5):
-    - BlocksKit/All
+    - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
@@ -37,7 +37,6 @@ PODS:
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - FMMoveTableView (1.1.2)
-  - PixateFreestyle (2.1.4)
   - RegexKitLite (4.0)
   - SFHFKeychainUtils (0.0.1)
   - TBXML (1.5)
@@ -48,21 +47,21 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - BlocksKit (~> 2.2.5)
   - FMMoveTableView
-  - PixateFreestyle
   - RegexKitLite
   - SFHFKeychainUtils
   - TBXML
   - TouchJSON
 
 SPEC CHECKSUMS:
-  A2StoryboardSegueContext: 289f5ffbdb4935682616159f57d039870c253798
-  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
-  BlocksKit: 4439e7f30a9f90743462ca63545a15c1f4304cef
-  FMMoveTableView: b5d2d314e0ca8c029ae59efe2b3a905f30df0557
-  PixateFreestyle: bb8fc8ce1ebc2355852b369a6e2a6f2931c4ed71
+  A2StoryboardSegueContext: f7c59a413b4c4fe5920f8dbf06b0c970025ea57a
+  AFNetworking: 41d45d2c14219af0fa5addf3cfd433a002c13c9f
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  FMMoveTableView: 63b46cf806133f5220cf92592dc0e6f7eb07633d
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
-  SFHFKeychainUtils: 6fdda05a86d035db406c7662ec1054814b68f0fd
-  TBXML: a279440030ba55c40e1455cafba3b0a44e1963d4
-  TouchJSON: b40940e40e53bb9b1ad60c63e01ed83bff93d53e
+  SFHFKeychainUtils: 9576b411a79a058f4d5381ace6f3242b9a62e664
+  TBXML: 9f9dadb239f2f2af1dadb87fe43a0ce6e479379a
+  TouchJSON: 39be3595ebe489095311d97ce0c824417324cb74
 
-COCOAPODS: 0.34.4
+PODFILE CHECKSUM: ebb6572c81c8a3eb5f2e458777619caf9f9706b3
+
+COCOAPODS: 1.2.1

@@ -235,9 +235,6 @@
 		28042E9C1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
 		28042E9D1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
 		28042E9E1A2CA47200C56374 /* UIIcon_videomap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28042E9B1A2CA47200C56374 /* UIIcon_videomap@2x.png */; };
-		2807ECE81A41A779005E7E62 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
-		2807ECE91A41AB23005E7E62 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
-		2807ECEA1A41AB24005E7E62 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
 		2807FCB91666934E0028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		2807FCBA166693580028D7DB /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807FCB81666934E0028D7DB /* ImageIO.framework */; };
 		280E2410144D825D0021CDFA /* BUTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280E2409144D825D0021CDFA /* BUTableCellView.m */; };
@@ -661,10 +658,10 @@
 		284A361C1B32E3A200EE2FD4 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360C1B32E3A200EE2FD4 /* NSString+MD5.m */; };
 		284A361D1B32E3A200EE2FD4 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360C1B32E3A200EE2FD4 /* NSString+MD5.m */; };
 		284A361E1B32E3A200EE2FD4 /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360C1B32E3A200EE2FD4 /* NSString+MD5.m */; };
-		284A361F1B32E3A200EE2FD4 /* PDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* PDFView.m */; };
-		284A36201B32E3A200EE2FD4 /* PDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* PDFView.m */; };
-		284A36211B32E3A200EE2FD4 /* PDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* PDFView.m */; };
-		284A36221B32E3A200EE2FD4 /* PDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* PDFView.m */; };
+		284A361F1B32E3A200EE2FD4 /* MBPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* MBPDFView.m */; };
+		284A36201B32E3A200EE2FD4 /* MBPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* MBPDFView.m */; };
+		284A36211B32E3A200EE2FD4 /* MBPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* MBPDFView.m */; };
+		284A36221B32E3A200EE2FD4 /* MBPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A360E1B32E3A200EE2FD4 /* MBPDFView.m */; };
 		284A36231B32E3A200EE2FD4 /* UIImage+PDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A36101B32E3A200EE2FD4 /* UIImage+PDF.m */; };
 		284A36241B32E3A200EE2FD4 /* UIImage+PDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A36101B32E3A200EE2FD4 /* UIImage+PDF.m */; };
 		284A36251B32E3A200EE2FD4 /* UIImage+PDF.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A36101B32E3A200EE2FD4 /* UIImage+PDF.m */; };
@@ -1334,7 +1331,6 @@
 		28A264841AE65AB4006C09A7 /* CSRoutePolyLineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5918BF4F94001BB258 /* CSRoutePolyLineOverlay.m */; };
 		28A264851AE65AB4006C09A7 /* SavedLocationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EFC3F19ED23760081E7BB /* SavedLocationsManager.m */; };
 		28A264861AE65AB4006C09A7 /* CSOpenCycleMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890957193F385D009C4325 /* CSOpenCycleMapSource.m */; };
-		28A264881AE65AB4006C09A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2807ECE71A41A779005E7E62 /* libPods.a */; };
 		28A264891AE65AB4006C09A7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E1468319F2C66E00242F2F /* MediaPlayer.framework */; };
 		28A2648A1AE65AB4006C09A7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4C7166CFFD600592560 /* MessageUI.framework */; };
 		28A2648B1AE65AB4006C09A7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2811C4AF166CDBC600592560 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -1959,6 +1955,7 @@
 		28FAB4251777464F002D0912 /* UIIcon_walking.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB4231777464F002D0912 /* UIIcon_walking.png */; };
 		28FAB42B17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
 		28FAB42C17774665002D0912 /* UIIcon_walking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */; };
+		A6D9896100A17011D883870B /* Pods_CycleStreets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5240A4F38F23AE11679602BE /* Pods_CycleStreets.framework */; };
 		E72E65A5121C2226008DA360 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E72E65A4121C2226008DA360 /* AssetsLibrary.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E77D8F11120321E4003E6B8D /* credits.html in Resources */ = {isa = PBXBuildFile; fileRef = E77D8F10120321E4003E6B8D /* credits.html */; };
 		E7BE4B1A11A2E5F400930E0C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */; };
@@ -1970,6 +1967,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14BE992316E44F752F1CC1D1 /* Pods-CycleStreets.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleStreets.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-CycleStreets/Pods-CycleStreets.adhoc.xcconfig"; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -2208,8 +2206,8 @@
 		284A360A1B32E3A200EE2FD4 /* NSData+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MD5.m"; sourceTree = "<group>"; };
 		284A360B1B32E3A200EE2FD4 /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		284A360C1B32E3A200EE2FD4 /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		284A360D1B32E3A200EE2FD4 /* PDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFView.h; sourceTree = "<group>"; };
-		284A360E1B32E3A200EE2FD4 /* PDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFView.m; sourceTree = "<group>"; };
+		284A360D1B32E3A200EE2FD4 /* MBPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPDFView.h; sourceTree = "<group>"; };
+		284A360E1B32E3A200EE2FD4 /* MBPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPDFView.m; sourceTree = "<group>"; };
 		284A360F1B32E3A200EE2FD4 /* UIImage+PDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PDF.h"; sourceTree = "<group>"; };
 		284A36101B32E3A200EE2FD4 /* UIImage+PDF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PDF.m"; sourceTree = "<group>"; };
 		284A36111B32E3A200EE2FD4 /* UIView+Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Image.h"; sourceTree = "<group>"; };
@@ -2684,9 +2682,9 @@
 		28FA8BAF19E455E50040EA46 /* appconfig_live.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = appconfig_live.plist; sourceTree = "<group>"; };
 		28FAB4231777464F002D0912 /* UIIcon_walking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIIcon_walking.png; sourceTree = "<group>"; };
 		28FAB42A17774665002D0912 /* UIIcon_walking@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIIcon_walking@2x.png"; sourceTree = "<group>"; };
-		7872DB9D803BBF7B3EF0B657 /* Pods.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc.xcconfig"; sourceTree = "<group>"; };
-		B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5240A4F38F23AE11679602BE /* Pods_CycleStreets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CycleStreets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B74265B0B573557AAE7BF42 /* Pods-CycleStreets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleStreets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CycleStreets/Pods-CycleStreets.debug.xcconfig"; sourceTree = "<group>"; };
+		82E23F5AE626BDB35C09BC4A /* Pods-CycleStreets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleStreets.release.xcconfig"; path = "Pods/Target Support Files/Pods-CycleStreets/Pods-CycleStreets.release.xcconfig"; sourceTree = "<group>"; };
 		E72E65A4121C2226008DA360 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		E77D8F10120321E4003E6B8D /* credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = credits.html; path = html/credits.html; sourceTree = "<group>"; };
 		E7BE4B1911A2E5F400930E0C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -2712,7 +2710,6 @@
 				28B78DA21507884C00949870 /* MapKit.framework in Frameworks */,
 				280E24D8144D892F0021CDFA /* CFNetwork.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				2807ECE91A41AB23005E7E62 /* libPods.a in Frameworks */,
 				28EB4ADA1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -2726,6 +2723,7 @@
 				28D7E1F812BAA8710025C4A2 /* libxml2.dylib in Frameworks */,
 				2831ABFD1362F7D000EBBA69 /* AddressBook.framework in Frameworks */,
 				28363432165A9A050039246E /* Crashlytics.framework in Frameworks */,
+				A6D9896100A17011D883870B /* Pods_CycleStreets.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2734,7 +2732,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28EB4ADB1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */,
-				2807ECE81A41A779005E7E62 /* libPods.a in Frameworks */,
 				286FD3121A0255E100EB8C20 /* MediaPlayer.framework in Frameworks */,
 				2811C4C9166CFFE300592560 /* MessageUI.framework in Frameworks */,
 				2811C4B0166CDBC600592560 /* Social.framework in Frameworks */,
@@ -2764,7 +2761,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28A264B51AE65C9B006C09A7 /* CoreText.framework in Frameworks */,
-				28A264881AE65AB4006C09A7 /* libPods.a in Frameworks */,
 				28A264891AE65AB4006C09A7 /* MediaPlayer.framework in Frameworks */,
 				28A2648A1AE65AB4006C09A7 /* MessageUI.framework in Frameworks */,
 				28A2648B1AE65AB4006C09A7 /* Social.framework in Frameworks */,
@@ -2804,7 +2800,6 @@
 				28FA8B9619E454E80040EA46 /* MapKit.framework in Frameworks */,
 				28FA8B9719E454E80040EA46 /* CFNetwork.framework in Frameworks */,
 				28FA8B9819E454E80040EA46 /* Foundation.framework in Frameworks */,
-				2807ECEA1A41AB24005E7E62 /* libPods.a in Frameworks */,
 				28EB4ADC1AF9FE5A00CC0BB1 /* Fabric.framework in Frameworks */,
 				28FA8B9919E454E80040EA46 /* UIKit.framework in Frameworks */,
 				28FA8B9A19E454E80040EA46 /* CoreGraphics.framework in Frameworks */,
@@ -3272,8 +3267,8 @@
 				284A360A1B32E3A200EE2FD4 /* NSData+MD5.m */,
 				284A360B1B32E3A200EE2FD4 /* NSString+MD5.h */,
 				284A360C1B32E3A200EE2FD4 /* NSString+MD5.m */,
-				284A360D1B32E3A200EE2FD4 /* PDFView.h */,
-				284A360E1B32E3A200EE2FD4 /* PDFView.m */,
+				284A360D1B32E3A200EE2FD4 /* MBPDFView.h */,
+				284A360E1B32E3A200EE2FD4 /* MBPDFView.m */,
 				284A360F1B32E3A200EE2FD4 /* UIImage+PDF.h */,
 				284A36101B32E3A200EE2FD4 /* UIImage+PDF.m */,
 				284A36111B32E3A200EE2FD4 /* UIView+Image.h */,
@@ -4299,7 +4294,7 @@
 				28E4A23F1B3C09AD00545D0D /* CycleStreets Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				ABD1FC35EE4244873CA04444 /* Pods */,
+				B3708432018D970A77D597DA /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -4336,16 +4331,17 @@
 				E72E65A4121C2226008DA360 /* AssetsLibrary.framework */,
 				28D7E1F712BAA8710025C4A2 /* libxml2.dylib */,
 				2831ABFC1362F7D000EBBA69 /* AddressBook.framework */,
+				5240A4F38F23AE11679602BE /* Pods_CycleStreets.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		ABD1FC35EE4244873CA04444 /* Pods */ = {
+		B3708432018D970A77D597DA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */,
-				B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */,
-				7872DB9D803BBF7B3EF0B657 /* Pods.adhoc.xcconfig */,
+				5B74265B0B573557AAE7BF42 /* Pods-CycleStreets.debug.xcconfig */,
+				82E23F5AE626BDB35C09BC4A /* Pods-CycleStreets.release.xcconfig */,
+				14BE992316E44F752F1CC1D1 /* Pods-CycleStreets.adhoc.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -4367,13 +4363,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "CycleStreets" */;
 			buildPhases = (
-				9BE8AEC88E33476A9574CEC7 /* Check Pods Manifest.lock */,
+				F1F67A835D38674DC7B53B62 /* [CP] Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				283435FA15DD54B300B00FD5 /* ShellScript */,
-				C9C5B6CD05B2457FAD693953 /* Copy Pods Resources */,
 				2889C3981C242705003A232A /* Run Script */,
+				9A6E4AF45938793871B4DB50 /* [CP] Embed Pods Frameworks */,
+				C7CD43F5B7928046BC5D1E79 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4424,12 +4421,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28FA8BA819E454E80040EA46 /* Build configuration list for PBXNativeTarget "Stoke" */;
 			buildPhases = (
-				28FA8A3C19E454E80040EA46 /* Check Pods Manifest.lock */,
 				28FA8A3D19E454E80040EA46 /* Resources */,
 				28FA8B0119E454E80040EA46 /* Sources */,
 				28FA8B8F19E454E80040EA46 /* Frameworks */,
 				28FA8BA619E454E80040EA46 /* ShellScript */,
-				28FA8BA719E454E80040EA46 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4478,6 +4473,7 @@
 				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -5726,21 +5722,6 @@
 			shellPath = /bin/sh;
 			shellScript = "/Users/neil/iPhone/Applications/AppCore/external/Crashlytics/Fabric.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634 e0d6b0af9c38b33eb7fdb7660df951f9a867cd574b61f41b9dd6c8d630f48f98";
 		};
-		28FA8A3C19E454E80040EA46 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		28FA8BA619E454E80040EA46 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -5754,49 +5735,49 @@
 			shellPath = /bin/sh;
 			shellScript = "/Users/neil/iPhone/Applications/AppCore/external/Crashlytics/Fabric.framework/run ea3a63e4bd4d920df480d1f6635e7e38b20e6634 e0d6b0af9c38b33eb7fdb7660df951f9a867cd574b61f41b9dd6c8d630f48f98";
 		};
-		28FA8BA719E454E80040EA46 /* Copy Pods Resources */ = {
+		9A6E4AF45938793871B4DB50 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CycleStreets/Pods-CycleStreets-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9BE8AEC88E33476A9574CEC7 /* Check Pods Manifest.lock */ = {
+		C7CD43F5B7928046BC5D1E79 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CycleStreets/Pods-CycleStreets-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C9C5B6CD05B2457FAD693953 /* Copy Pods Resources */ = {
+		F1F67A835D38674DC7B53B62 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5831,7 +5812,7 @@
 				28735AC11C24191D00B2E9D5 /* SavedLocationTableCellView.m in Sources */,
 				28A719921A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */,
 				28AD641F131FB6C8008527FC /* AppConstants.m in Sources */,
-				284A361F1B32E3A200EE2FD4 /* PDFView.m in Sources */,
+				284A361F1B32E3A200EE2FD4 /* MBPDFView.m in Sources */,
 				28AD6421131FB6C8008527FC /* NSDate+Helper.m in Sources */,
 				28AD6422131FB6C8008527FC /* NSDate+NSDateRFC1123.m in Sources */,
 				282517FB19D45A6600DDD6D9 /* MKMapView+LegalLabel.m in Sources */,
@@ -6018,7 +5999,7 @@
 				28735AC21C24191D00B2E9D5 /* SavedLocationTableCellView.m in Sources */,
 				283436D815DD5DC300B00FD5 /* AppConstants.m in Sources */,
 				28A719931A0BE60700176949 /* CSOverlayPushTransitionAnimator.m in Sources */,
-				284A36201B32E3A200EE2FD4 /* PDFView.m in Sources */,
+				284A36201B32E3A200EE2FD4 /* MBPDFView.m in Sources */,
 				283436D915DD5DC300B00FD5 /* NSDate+Helper.m in Sources */,
 				283436DA15DD5DC300B00FD5 /* NSDate+NSDateRFC1123.m in Sources */,
 				2886DED918C528C100CD208B /* BUNetworkOperation.m in Sources */,
@@ -6296,7 +6277,7 @@
 				28A2644F1AE65AB4006C09A7 /* ImageCache.m in Sources */,
 				28A264501AE65AB4006C09A7 /* CSUserRouteVO.m in Sources */,
 				28A264511AE65AB4006C09A7 /* MBProgressHUD.m in Sources */,
-				284A36221B32E3A200EE2FD4 /* PDFView.m in Sources */,
+				284A36221B32E3A200EE2FD4 /* MBPDFView.m in Sources */,
 				28A264521AE65AB4006C09A7 /* NSData+MBBase64.m in Sources */,
 				28A264531AE65AB4006C09A7 /* ButtonUtilities.m in Sources */,
 				28A264541AE65AB4006C09A7 /* PhotoManager.m in Sources */,
@@ -6481,7 +6462,7 @@
 				28B0AD5019EEEB14008A3F21 /* POIAnnotationView.m in Sources */,
 				28FA8B6619E454E80040EA46 /* BUNetworkOperation.m in Sources */,
 				28FA8B6719E454E80040EA46 /* PhotoMapListVO.m in Sources */,
-				284A36211B32E3A200EE2FD4 /* PDFView.m in Sources */,
+				284A36211B32E3A200EE2FD4 /* MBPDFView.m in Sources */,
 				2877C4C41A693F40002246DE /* CSBingSatelliteMapSource.m in Sources */,
 				289EFC4319ED24360081E7BB /* SavedLocationVO.m in Sources */,
 				28FA8B6819E454E80040EA46 /* CSPointVO.m in Sources */,
@@ -6559,7 +6540,7 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 5B74265B0B573557AAE7BF42 /* Pods-CycleStreets.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -6606,8 +6587,6 @@
 					"-lxml2",
 					"-licucore",
 					"-ObjC",
-					"-framework",
-					PixateFreestyle,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
@@ -6626,7 +6605,7 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 82E23F5AE626BDB35C09BC4A /* Pods-CycleStreets.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -6671,8 +6650,6 @@
 					"-licucore",
 					"-lxml2",
 					"-ObjC",
-					"-framework",
-					PixateFreestyle,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;
@@ -6691,7 +6668,6 @@
 		};
 		2834377D15DD5DC300B00FD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -6747,7 +6723,6 @@
 		};
 		2834377E15DD5DC300B00FD5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -6857,7 +6832,6 @@
 		};
 		28A2649F1AE65AB4006C09A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -6906,7 +6880,6 @@
 		};
 		28A264A01AE65AB4006C09A7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2A11133E1A5E7E2DD10E571 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7004,7 +6977,6 @@
 		};
 		28FA8BA919E454E80040EA46 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6D05F075DBE574881B0B588 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7047,8 +7019,6 @@
 					"-lxml2",
 					"-licucore",
 					"-ObjC",
-					"-framework",
-					PixateFreestyle,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
 				PRODUCT_NAME = "Cycle North Staffs";
@@ -7107,8 +7077,6 @@
 					"-licucore",
 					"-lxml2",
 					"-ObjC",
-					"-framework",
-					PixateFreestyle,
 				);
 				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.stokecc.cns.$(BUNDLE_ID)";
@@ -7125,7 +7093,6 @@
 		};
 		28FA8BAB19E454E80040EA46 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7872DB9D803BBF7B3EF0B657 /* Pods.adhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7166,8 +7133,6 @@
 					"-licucore",
 					"-ObjC",
 					"-lxml2",
-					"-framework",
-					PixateFreestyle,
 				);
 				OTHER_LIBTOOLFLAGS = "$(OTHER_LDFLAGS)";
 				PODS_ROOT = "${SRCROOT}/Pods";
@@ -7302,7 +7267,7 @@
 		};
 		E791ADCA11518A0900A9B38F /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7872DB9D803BBF7B3EF0B657 /* Pods.adhoc.xcconfig */;
+			baseConfigurationReference = 14BE992316E44F752F1CC1D1 /* Pods-CycleStreets.adhoc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7348,8 +7313,6 @@
 					"-licucore",
 					"-ObjC",
 					"-lxml2",
-					"-framework",
-					PixateFreestyle,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.$(BUNDLE_ID)";
 				PRODUCT_NAME = CycleStreets;

@@ -28,7 +28,6 @@
 #import "BUIconActionSheet.h"
 #import "A2StoryboardSegueContext.h"
 #import "CSRouteDetailsViewController.h"
-#import <PixateFreestyle/PixateFreestyle.h>
 
 #import "BUIconActionSheet.h"
 #import <MessageUI/MessageUI.h>
