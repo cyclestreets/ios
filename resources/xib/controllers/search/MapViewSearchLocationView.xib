@@ -12,7 +12,6 @@
             <connections>
                 <outlet property="cancelButton" destination="zHN-qM-8BL" id="AmG-Um-uUr"/>
                 <outlet property="searchBar" destination="6iv-T5-CJ6" id="VcT-un-anU"/>
-                <outlet property="searchScopeControl" destination="AcN-U8-CSS" id="p7j-7b-DMB"/>
                 <outlet property="tableView" destination="4LM-cm-4og" id="Fef-lq-2Dl"/>
                 <outlet property="view" destination="iN0-l3-epB" id="AbL-fZ-6Dk"/>
             </connections>
@@ -23,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="EsJ-ly-UYy">
-                    <rect key="frame" x="0.0" y="20" width="375" height="88"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="53"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <searchBar contentMode="redraw" misplaced="YES" placeholder="Search for a location" translucent="NO" id="6iv-T5-CJ6">
@@ -42,26 +41,6 @@
                                 <outlet property="delegate" destination="-1" id="2v5-Za-6Fv"/>
                             </connections>
                         </searchBar>
-                        <view contentMode="scaleToFill" misplaced="YES" id="fZa-qF-vha">
-                            <rect key="frame" x="0.0" y="47" width="375" height="41"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.31205567717552185" green="0.59362566471099854" blue="0.12391596287488937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </view>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="AcN-U8-CSS">
-                            <rect key="frame" x="14" y="52" width="353" height="29"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Local"/>
-                                <segment title="National"/>
-                            </segments>
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="LocsearchSegment"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="searchScopeChanged:" destination="-1" eventType="valueChanged" id="TZB-rX-1In"/>
-                            </connections>
-                        </segmentedControl>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zHN-qM-8BL">
                             <rect key="frame" x="308" y="14" width="59" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -84,7 +63,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4LM-cm-4og">
-                    <rect key="frame" x="0.0" y="107" width="375" height="560"/>
+                    <rect key="frame" x="0.0" y="72" width="375" height="595"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.926128089427948" green="0.91659212112426758" blue="0.91182339191436768" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>

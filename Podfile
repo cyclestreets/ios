@@ -16,6 +16,19 @@ pod 'A2StoryboardSegueContext'
 
 end
 
+target 'CycleStreets Release' do
+    
+    pod 'AFNetworking', '~> 2.0'
+    pod 'SFHFKeychainUtils'
+    pod 'RegexKitLite'
+    pod 'BlocksKit', '~> 2.2.5'
+    pod 'FMMoveTableView'
+    pod 'TouchJSON'
+    pod 'TBXML'
+    pod 'A2StoryboardSegueContext'
+    
+end
+
 
 
 

@@ -200,31 +200,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 
 -(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation usingRegion:(MKCoordinateRegion)region{
 	
-	searchString=[searchString stringByReplacingOccurrencesOfString:@" " withString:EMPTYSTRING];
+	//searchString=[searchString stringByReplacingOccurrencesOfString:@" " withString:EMPTYSTRING];
 	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setMiscValue:searchString forKey:@"lastSearch"];
 	
 	MKLocalSearchRequest *request=[MKLocalSearchRequest new];
 	request.naturalLanguageQuery = searchString;
-	request.region = region;
-	switch(filterType){
-			
-		case LocationSearchFilterLocal:
-		{
-			request.region = MKCoordinateRegionMakeWithDistance(centerLocation, 1000, 1000);
-		}
-		break;
-			
-		case LocationSearchFilterNational:
-		{
-			request.region = MKCoordinateRegionMakeWithDistance(centerLocation, 100000, 100000);
-		}
-		break;
-			
-		default:break;
-			
-	}
+	request.region = MKCoordinateRegionMakeWithDistance(centerLocation, 2000, 2000);;
 	
 	MKLocalSearch *search=[[MKLocalSearch alloc] initWithRequest:request];
 	[search startWithCompletionHandler:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
