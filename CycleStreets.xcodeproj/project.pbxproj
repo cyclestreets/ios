@@ -6709,7 +6709,7 @@
 					"-lxml2",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-dev";
+				PRODUCT_BUNDLE_IDENTIFIER = net.cyclestreets.mobile;
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "569d41e3-f1bc-496a-b687-3d5b299040a4";
 				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets AppStore";
@@ -7375,10 +7375,10 @@
 					"-ObjC",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-adhoc";
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "c704a810-257c-4791-bd27-8265cb7c8bd4";
-				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets Adhoc Testing";
+				PROVISIONING_PROFILE = "c1f1fec7-3975-4b13-a2ef-6d5283413850";
+				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets Adhoc TF";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";

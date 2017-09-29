@@ -459,11 +459,23 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	_rightFixedSeconday.width=20;
 }
 
+
+/**
+ iOS11 issue with top bar inter item spacing, will display uneven spacing for 1st item, so we add additional padding
+
+ @return fixed sized item depending on os version
+ */
 +(UIBarButtonItem*)fixedItem{
 	UIBarButtonItem *fixed=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-	fixed.width=15;
+	if (@available(iOS 11, *)) {
+		fixed.width=15;
+	}else{
+		fixed.width=0;
+	}
+	
 	return fixed;
 }
+
 
 -(NSArray*)toolbarItemsForBuildTargetForUIState{
 	

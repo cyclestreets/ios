@@ -91,14 +91,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 		
 		NSString *secondSpace = (_mapItem.placemark.subAdministrativeArea != nil && _mapItem.placemark.administrativeArea != nil) ? @", " : EMPTYSTRING;
 		
-		NSString *addressString=[NSString stringWithFormat:@"%@%@%@%@%@%@%@",_mapItem.placemark.subThoroughfare ? _mapItem.placemark.subThoroughfare : EMPTYSTRING,firstSpace,_mapItem.placemark.thoroughfare ? _mapItem.placemark.thoroughfare : EMPTYSTRING,comma,_mapItem.placemark.locality ? _mapItem.placemark.subAdministrativeArea : EMPTYSTRING,secondSpace,_mapItem.placemark.administrativeArea ? _mapItem.placemark.administrativeArea : EMPTYSTRING];
+		NSString *town=_mapItem.placemark.locality;
+		if (_mapItem.placemark.subLocality){
+			town=_mapItem.placemark.subLocality;
+		}
+		
+		NSString *addressString=[NSString stringWithFormat:@"%@%@%@%@%@%@%@",_mapItem.placemark.subThoroughfare ? _mapItem.placemark.subThoroughfare : EMPTYSTRING,firstSpace,_mapItem.placemark.thoroughfare ? _mapItem.placemark.thoroughfare : EMPTYSTRING,comma,town ? town : EMPTYSTRING,secondSpace,_mapItem.placemark.subAdministrativeArea ? _mapItem.placemark.subAdministrativeArea : EMPTYSTRING];
 		
 		self.near=addressString;
 		
 		return self.near;
 	}
 	
-	
+	return EMPTYSTRING;
 }
 
 @end
