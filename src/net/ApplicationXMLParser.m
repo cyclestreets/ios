@@ -438,6 +438,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 						NSInteger index=X+1;
 						if(index<XYs.count){
 							point.y = [[XYs objectAtIndex:index] doubleValue];
+						}else{
+							point.y=0;
 						}
 						
 						p.point = point;
