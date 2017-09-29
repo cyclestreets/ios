@@ -12,6 +12,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
+@class LocationSearchVO;
+
 typedef NS_ENUM(NSUInteger, LocationSearchFilterType) {
 	LocationSearchFilterLocal,
 	LocationSearchFilterNational,
@@ -40,5 +42,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(LocationSearchManager);
 
 + (LocationSearchRequestType)locationrequestStringTypeToConstant:(NSString*)stringType;
 + (NSString*)locationrequestConstantToString:(LocationSearchRequestType)requestType;
+
+
+-(void)addUserSelectionToRecents:(LocationSearchVO*)selectedLocation;
 
 @end

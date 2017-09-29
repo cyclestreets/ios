@@ -233,7 +233,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 #define METERS_CUTOFF   1000
 #define FEET_CUTOFF     3281
 #define YDS_CUTOFF		1093
+#define METERSINMILE	1609
 #define FEET_IN_MILES   5280
+#define YDS_IN_MILE		1760
 +(NSString*)formattedDistanceString:(CLLocationDistance)distance{
 	
 	//Note to self: MKDistanceFormatter is shite and will round values to arbitary whole numbers!!
@@ -252,13 +254,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 			distance = distance / 1000;
 		}
 	} else { // assume Imperial / U.S.
-		distance = distance * METERS_TO_YDS;
-		if (distance < YDS_CUTOFF) {
-			format = @"%@ yds";
+		
+		// Note this is  CS only thing, distances < 1 major unit are always shown in meters not imperial value
+		//		distance = distance * METERS_TO_YDS;
+		//	if (distance < YDS_CUTOFF) {
+		// format = @"%@ yds";
+
+		if (distance < METERSINMILE) {
+			format = @"%@ m";
 		} else {
 			useFraction=YES;
 			format = @"%@ mi";
-			distance = distance / FEET_IN_MILES;
+			distance = distance / YDS_IN_MILE;
 		}
 	}
 	

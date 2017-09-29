@@ -6646,7 +6646,7 @@
 					"-licucore",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-adhoc";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "f884de41-b175-4728-a72a-523f98e7450c";
 				PROVISIONING_PROFILE_SPECIFIER = "Buffer Development";
@@ -6709,7 +6709,7 @@
 					"-lxml2",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.cyclestreets.mobile;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.cyclestreets.mobile-adhoc";
 				PRODUCT_NAME = CycleStreets;
 				PROVISIONING_PROFILE = "569d41e3-f1bc-496a-b687-3d5b299040a4";
 				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets AppStore";

@@ -156,6 +156,7 @@
 
 -(void)createNonPersistentUI{
 	
+	// will be deprecated in favour of showing recent selected searches
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	NSString *lastSearch = [cycleStreets.files miscValueForKey:@"lastSearch"];
 	if (lastSearch != nil) {
@@ -202,9 +203,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-	LocationSearchVO *where = [_dataProvider objectAtIndex:indexPath.row];
-	if (where != nil) {
-		[self.locationReceiver didMoveToLocation:where.locationCoords];
+	LocationSearchVO *searchLocation = [_dataProvider objectAtIndex:indexPath.row];
+	if (searchLocation != nil) {
+		//[[LocationSearchManager sharedInstance] addUserSelectionToRecents:searchLocation];
+		[self.locationReceiver didMoveToLocation:searchLocation.locationCoords];
 	}
 	
 	[self closeController];

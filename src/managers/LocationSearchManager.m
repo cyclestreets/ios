@@ -49,6 +49,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
     if (self) {
 		self.requestResultDict = [[NSMutableDictionary alloc] init];
 		self.recentSelectedArray=[[NSMutableArray alloc]init];
+		[self loadRecentSearches];
     }
     return self;
 }
@@ -303,6 +304,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 	
 }
 
+#pragma mark - Contacts
 
 //
 /***********************************************
@@ -324,20 +326,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 }
 
 
+#pragma mark - Recents
+
 //
 /***********************************************
  * @description			Recent Selected
  ***********************************************/
 //
 
--(void)addUserSelectionToRecents:(NSString*)selectionid{
+-(void)addUserSelectionToRecents:(LocationSearchVO*)selectedLocation{
+	
+	// check for dupe based address string
+	NSInteger index=[_recentSelectedArray indexOfObjectPassingTest:^BOOL(LocationSearchVO  *location, NSUInteger idx, BOOL * stop) {
+		
+		if([location.nearString isEqualToString:selectedLocation.nearString] && [location.nameString isEqualToString:selectedLocation.nameString]){
+			*stop = YES;
+			return YES;
+		}
+		return NO;
+	}];
+	
+	if(index==NSNotFound){
+		[_recentSelectedArray insertObject:selectedLocation atIndex:0];
+		[self persistRecentSearches];
+	}
 	
 	
-	
+	// currently tricky as MKMapItem cant be coded to disk but mkplacemark can so replace mapitem with placemark in LocationSearchVO
+	 // and persist to disk
 	
 }
 
 
+-(void)loadRecentSearches{
+	
+	
+}
+
+-(void)persistRecentSearches{
+	
+}
+
+#pragma mark - Enums
 
 //
 /***********************************************
