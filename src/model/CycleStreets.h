@@ -59,5 +59,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(CycleStreets);
 
 +(NSArray*)appMapStylesDataProvider;
 
++(NSString*)formattedDistanceString:(CLLocationDistance)distance;
+
 
 @end

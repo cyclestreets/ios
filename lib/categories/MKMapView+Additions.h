@@ -64,4 +64,7 @@
 
 +(CLLocation*)locationForString:(NSString*)coordsString;
 
++(CLLocationDistance)distanceBetweenCordinates:(CLLocationCoordinate2D )coordinate1 and:(CLLocationCoordinate2D )coordinate2;
+
+
 @end

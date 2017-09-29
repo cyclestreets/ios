@@ -325,6 +325,13 @@
 	
 }
 
++(CLLocationDistance)distanceBetweenCordinates:(CLLocationCoordinate2D )coordinate1 and:(CLLocationCoordinate2D )coordinate2{
+	MKMapPoint point1 = MKMapPointForCoordinate(coordinate1);
+	MKMapPoint point2 = MKMapPointForCoordinate(coordinate2);
+	CLLocationDistance distance = MKMetersBetweenMapPoints(point1, point2);
+	return distance;
+}
+
 
 
 

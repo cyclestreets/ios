@@ -20,6 +20,7 @@ Copyright (C) 2010  CycleStreets Ltd
 @property (nonatomic, strong) NSString		* name;
 @property (nonatomic, strong) NSString		* near;
 @property (nonatomic, strong) NSString		*distance;
+@property (nonatomic,assign)  CLLocationDistance		distanceValue;
 
 @property (nonatomic,strong)  MKMapItem		*mapItem;
 

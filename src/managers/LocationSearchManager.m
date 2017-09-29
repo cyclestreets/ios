@@ -16,6 +16,7 @@
 #import "BUDataSourceManager.h"
 #import "LocationSearchVO.h"
 #import "UserLocationManager.h"
+#import "MKMapView+Additions.h"
 
 #import <MapKit/MapKit.h>
 
@@ -200,8 +201,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 
 -(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation usingRegion:(MKCoordinateRegion)region{
 	
-	//searchString=[searchString stringByReplacingOccurrencesOfString:@" " withString:EMPTYSTRING];
-	
 	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
 	[cycleStreets.files setMiscValue:searchString forKey:@"lastSearch"];
 	
@@ -220,6 +219,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 				LocationSearchVO *searchResult=[LocationSearchVO new];
 				searchResult.mapItem=item;
 				searchResult.locationCoords=item.placemark.coordinate;
+				searchResult.distanceValue=[MKMapView distanceBetweenCordinates:item.placemark.coordinate and:centerLocation];
 				[arr addObject:searchResult];
 			}
 			

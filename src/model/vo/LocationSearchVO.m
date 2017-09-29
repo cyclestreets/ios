@@ -26,7 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "LocationSearchVO.h"
 #import "SettingsManager.h"
-
+#import "MKMapView+Additions.h"
+#import "CycleStreets.h"
 
 @implementation LocationSearchVO
 
@@ -50,17 +51,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(NSString*)distanceString{
 	
-	if(distance>0){
-	
-		if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-			return [NSString stringWithFormat:@"%3.1f miles", [distance floatValue]/1600];
+	if (_distanceValue>0){
+		
+		return [CycleStreets formattedDistanceString:_distanceValue];
+		
+	}else{
+		
+		if(distance>0){
+			
+			if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+				return [NSString stringWithFormat:@"%3.1f miles", [distance floatValue]/1600];
+			}else {
+				return [NSString stringWithFormat:@"%3.1f km", [distance floatValue]/1000];
+			}
+			
 		}else {
-			return [NSString stringWithFormat:@"%3.1f km", [distance floatValue]/1000];
+			return EMPTYSTRING;
 		}
 		
-	}else {
-		return EMPTYSTRING;
 	}
+	
+	return EMPTYSTRING;
+	
 	
 }
 

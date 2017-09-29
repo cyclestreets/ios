@@ -14,6 +14,7 @@
 #import "MultiLabelLine.h"
 #import "GlobalUtilities.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CycleStreets.h"
 
 static NSDictionary *segmentDirectionsIcons;
 
@@ -190,9 +191,9 @@ static NSDictionary *segmentDirectionsIcons;
 	
 	_timeLabel.labels=[NSMutableArray arrayWithObjects:@"Time:",[_dataProvider.infoStringDictionary objectForKey:@"hm"],nil];
 	[_timeLabel drawUI];
-	_distLabel.labels=[NSMutableArray arrayWithObjects:@"Dist:",[_dataProvider.infoStringDictionary objectForKey:@"distance"],nil];
+	_distLabel.labels=[NSMutableArray arrayWithObjects:@"Dist:",[CycleStreets formattedDistanceString:[[_dataProvider.infoStringDictionary objectForKey:@"distance"] doubleValue]],nil];
 	[_distLabel drawUI];
-	_totalLabel.labels=[NSMutableArray arrayWithObjects:@"Total:",[_dataProvider.infoStringDictionary objectForKey:@"total"],nil];
+	_totalLabel.labels=[NSMutableArray arrayWithObjects:@"Total:",[CycleStreets formattedDistanceString:[[_dataProvider.infoStringDictionary objectForKey:@"total"] doubleValue]],nil];
 	[_totalLabel drawUI];
 	[_readoutContainer refresh];
 	
