@@ -52,7 +52,6 @@
 #import "UIImage+ColorImage.h"
 
 #import "A2StoryboardSegueContext.h"
-#include <PixateFreestyle/PixateFreestyle.h>
 
 #import "CSOverlayTransitionAnimator.h"
 #import "SavedLocationsViewController.h"
@@ -461,6 +460,22 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 }
 
 
+/**
+ iOS11 issue with top bar inter item spacing, will display uneven spacing for 1st item, so we add additional padding
+
+ @return fixed sized item depending on os version
+ */
++(UIBarButtonItem*)fixedItem{
+	UIBarButtonItem *fixed=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	if (@available(iOS 11, *)) {
+		fixed.width=15;
+	}else{
+		fixed.width=0;
+	}
+	
+	return fixed;
+}
+
 
 -(NSArray*)toolbarItemsForBuildTargetForUIState{
 	
@@ -473,35 +488,36 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			_viewWaypointsButton.enabled=[self shouldShowWayPointUI];
 			_createLesureRouteButton.enabled=[self shouldShowCreateLeisureUI];
 			
+			
 			switch (_uiState) {
 					
 				case MapPlanningStateNoRoute:
-					return @[_locationButton,_searchButton,_addPointButton, _leftFlex, _rightFlex ];
+					return @[_locationButton,[MapViewController fixedItem],_searchButton, _addPointButton, _leftFlex, _rightFlex ];
 					break;
 					
 				case MapPlanningStateLocating:
-					return @[_locationButton,_searchButton,_addPointButton, _leftFlex, _rightFlex];
+					return @[_locationButton,[MapViewController fixedItem],_searchButton,_addPointButton, _leftFlex, _rightFlex];
 					
 					break;
 					
 				case MapPlanningStateStartPlanning:
-					return @[_locationButton,_searchButton,_addPointButton,_leftFlex,_rightFlex];
+					return @[_locationButton,[MapViewController fixedItem],_searchButton,_addPointButton,_leftFlex,_rightFlex];
 					break;
 					
 				case MapPlanningStatePlanning:
-					return @[ _locationButton,_searchButton,_addPointButton,_leftFlex,_routeButton];
+					return @[ _locationButton,[MapViewController fixedItem],_searchButton,_addPointButton,_leftFlex,_routeButton];
 					break;
 					
 				case MapPlanningStateRoute:
-					return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
+					return @[_locationButton,[MapViewController fixedItem],_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
 					break;
 					
 				case MapPlanningStateRouteLocating:
 				{
 					if(_allowsUserTrackingUI){
-						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed, _routeButton];
+						return @[_locationButton,[MapViewController fixedItem],_searchButton,_leftFlex, _changePlanButton,_rightFixed, _routeButton];
 					}else{
-						return @[_locationButton,_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
+						return @[_locationButton,[MapViewController fixedItem],_searchButton,_leftFlex, _changePlanButton,_rightFixed,_routeButton];
 					}
 				}
 					
@@ -1494,7 +1510,6 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		if (annotationView == nil){
 			
 			annotationView = [[POIAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil];
-			annotationView.styleId=@"POIAnnotationView";
 			annotationView.size=CGSizeMake(28,28);
 			annotationView.draggable =NO;
 			annotationView.enabled=YES;
@@ -1753,6 +1768,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	}
 	_mapLocationSearchView.locationReceiver = self;
 	_mapLocationSearchView.centreLocation = [_mapView centerCoordinate];
+	_mapLocationSearchView.mapRegion=_mapView.region;
 	
 	[self presentModalViewController:_mapLocationSearchView	animated:YES];
 	

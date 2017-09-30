@@ -12,6 +12,7 @@
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
 #import "NSDate+Helper.h"
+#import "CycleStreets.h"
 
 @implementation RouteVO
 @synthesize segments;
@@ -104,14 +105,7 @@
 
 -(NSString*)lengthString{
 	
-	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		float totalMiles = [[self length] floatValue]/1600;
-		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
-	}else {
-		float	kms=[[self length] floatValue]/1000;
-		return [NSString stringWithFormat:@"%4.1f km", kms];
-	}
-	
+	return [CycleStreets formattedDistanceString:[self.length doubleValue]];
 	
 }
 
@@ -119,16 +113,9 @@
 
 -(NSString*)lengthPercentStringForPercent:(float)percent{
 	
-	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		
-		float milepercent=percent*[[self length] floatValue];
-		float totalMiles = milepercent/1600;
-		return [NSString stringWithFormat:@"%3.1f miles", totalMiles];
-	}else {
-		float	kms=[[self length] floatValue]/1000;
-		float kmdistance=percent*kms;
-		return [NSString stringWithFormat:@"%4.1f km", kmdistance];
-	}
+	
+	double percentValue=[self.length doubleValue]*(double)percent;
+	return [CycleStreets formattedDistanceString:percentValue];
 	
 	
 }

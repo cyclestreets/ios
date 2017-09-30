@@ -301,7 +301,6 @@
 }
 
 + (NSString*) textForElement:(TBXMLElement*)aXMLElement {
-    if(aXMLElement==nil) return @"";
 	if (nil == aXMLElement->text) return @"";
 	return [NSString stringWithCString:&aXMLElement->text[0] encoding:NSUTF8StringEncoding];
 }
@@ -375,10 +374,6 @@
 }
 
 + (TBXMLElement*) childElementNamed:(NSString*)aName parentElement:(TBXMLElement*)aParentXMLElement{
-    
-    if (nil == aParentXMLElement) {
-        return nil;
-    }
     
 	TBXMLElement * xmlElement = aParentXMLElement->firstChild;
 	const char * name = [aName cStringUsingEncoding:NSUTF8StringEncoding];

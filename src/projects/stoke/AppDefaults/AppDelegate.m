@@ -18,7 +18,7 @@
 #import "NSString-Utilities.h"
 #import "GenericConstants.h"
 
-
+#import "CycleStreets-Swift.h"
 
 @interface AppDelegate()<StartupManagerDelegate,UITabBarControllerDelegate>
 
@@ -36,7 +36,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
-	
 	
 	
 	

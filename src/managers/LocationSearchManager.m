@@ -16,6 +16,9 @@
 #import "BUDataSourceManager.h"
 #import "LocationSearchVO.h"
 #import "UserLocationManager.h"
+#import "MKMapView+Additions.h"
+
+#import <MapKit/MapKit.h>
 
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBook/AddressBook.h>
@@ -46,6 +49,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
     if (self) {
 		self.requestResultDict = [[NSMutableDictionary alloc] init];
 		self.recentSelectedArray=[[NSMutableArray alloc]init];
+		[self loadRecentSearches];
     }
     return self;
 }
@@ -113,6 +117,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 
 -(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation{
 	
+	
+	searchString=[searchString stringByReplacingOccurrencesOfString:@" " withString:EMPTYSTRING];
 	
 	_activeFilterType=filterType;
 	_activeRequestType=requestType;
@@ -188,7 +194,47 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 				[weakSelf cancelOperation:_searchOperation];
 		}];
 		
+		
+		
 	}
+	
+}
+
+-(void)searchForLocation:(NSString*)searchString withFilter:(LocationSearchFilterType)filterType forRequestType:(LocationSearchRequestType)requestType atLocation:(CLLocationCoordinate2D)centerLocation usingRegion:(MKCoordinateRegion)region{
+	
+	CycleStreets *cycleStreets = [CycleStreets sharedInstance];
+	[cycleStreets.files setMiscValue:searchString forKey:@"lastSearch"];
+	
+	MKLocalSearchRequest *request=[MKLocalSearchRequest new];
+	request.naturalLanguageQuery = searchString;
+	request.region = MKCoordinateRegionMakeWithDistance(centerLocation, 2000, 2000);;
+	
+	MKLocalSearch *search=[[MKLocalSearch alloc] initWithRequest:request];
+	[search startWithCompletionHandler:^(MKLocalSearchResponse * _Nullable response, NSError * _Nullable error) {
+		
+		if(response.mapItems.count>0){
+			
+			NSMutableArray *arr=[NSMutableArray array];
+			for(MKMapItem *item in response.mapItems){
+				
+				LocationSearchVO *searchResult=[LocationSearchVO new];
+				searchResult.mapItem=item;
+				searchResult.locationCoords=item.placemark.coordinate;
+				searchResult.distanceValue=[MKMapView distanceBetweenCordinates:item.placemark.coordinate and:centerLocation];
+				[arr addObject:searchResult];
+			}
+			
+			NSMutableArray *filteredResults=[self filterDuplicateSearchResults:arr];
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:LOCATIONSEARCHRESPONSE object:filteredResults];
+			
+		}
+		
+		
+		[[HudManager sharedInstance] removeHUD];
+		
+	}];
+	
 	
 }
 
@@ -258,6 +304,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 	
 }
 
+#pragma mark - Contacts
 
 //
 /***********************************************
@@ -279,20 +326,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(LocationSearchManager);
 }
 
 
+#pragma mark - Recents
+
 //
 /***********************************************
  * @description			Recent Selected
  ***********************************************/
 //
 
--(void)addUserSelectionToRecents:(NSString*)selectionid{
+-(void)addUserSelectionToRecents:(LocationSearchVO*)selectedLocation{
+	
+	// check for dupe based address string
+	NSInteger index=[_recentSelectedArray indexOfObjectPassingTest:^BOOL(LocationSearchVO  *location, NSUInteger idx, BOOL * stop) {
+		
+		if([location.nearString isEqualToString:selectedLocation.nearString] && [location.nameString isEqualToString:selectedLocation.nameString]){
+			*stop = YES;
+			return YES;
+		}
+		return NO;
+	}];
+	
+	if(index==NSNotFound){
+		[_recentSelectedArray insertObject:selectedLocation atIndex:0];
+		[self persistRecentSearches];
+	}
 	
 	
-	
+	// currently tricky as MKMapItem cant be coded to disk but mkplacemark can so replace mapitem with placemark in LocationSearchVO
+	 // and persist to disk
 	
 }
 
 
+-(void)loadRecentSearches{
+	
+	
+}
+
+-(void)persistRecentSearches{
+	
+}
+
+#pragma mark - Enums
 
 //
 /***********************************************

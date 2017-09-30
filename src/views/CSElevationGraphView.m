@@ -19,7 +19,6 @@
 #import "LayoutBox.h"
 #import "RouteManager.h"
 
-#import <PixateFreestyle/PixateFreestyle.h>
 
 enum  {
 	CSElevationUIStateActive, 
@@ -151,7 +150,7 @@ typedef int CSElevationUIState;
 	[_inactiveView addSubview:inactiveLabel];
 	[self addSubview:_inactiveView];
 	
-	UIButton *button=[ButtonUtilities UIPixateButtonWithWidth:200 height:30 styleId:@"OrangeButton" text:@"Update" ];
+	UIButton *button=[ButtonUtilities UIPixateButtonWithWidth:200 height:30 styleId:@"orangeButton" text:@"Update" ];
 	[button addTarget:self action:@selector(updateRoute:) forControlEvents:UIControlEventTouchUpInside];
 	[_inactiveView addSubview:button];
 

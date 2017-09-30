@@ -44,7 +44,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-
+#import "CycleStreets-Swift.h"
 
 @interface AppDelegate()<StartupManagerDelegate,UITabBarControllerDelegate>
 
@@ -65,11 +65,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[Fabric with:@[CrashlyticsKit]];
 	
+	[AppStyling initialiseUIAppearance];
+	
 	_tabBarController = (UITabBarController *)_window.rootViewController;
 	_tabBarController.delegate = self;
 	_tabBarController.customizableViewControllers = @[];
 
 	[self appendStartUpView];
+	
+	[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 	
 	
 	_startupmanager=[[StartupManager alloc]init];

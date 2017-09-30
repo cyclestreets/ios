@@ -667,6 +667,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	if (_activePage==PhotoWizardViewStateResult) {
 		_prevButton.enabled=NO;
 		_nextButton.enabled=NO;
+		
+		[_cancelViewButton setTitle:@"Done"];
 	}
 	
 }
@@ -1055,7 +1057,8 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
 	
-	[self UserDidUpdatePhotoLocation:userLocation.location];
+	if (_uploadImage.userLocation==nil)
+		[self UserDidUpdatePhotoLocation:userLocation.location];
 }
 
 //
@@ -1501,7 +1504,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[self updateUploadUIState:@"waiting"];
 	
-	[ButtonUtilities stylePixateIBButton:_uploadButton styleId:@"OrangeButton" type:@"orange" text:@"Upload Photo"];
+	[ButtonUtilities stylePixateIBButton:_uploadButton styleId:@"orangeButton" type:@"orange" text:@"Upload Photo"];
 	[_uploadButton addTarget:self action:@selector(uploadPhoto:) forControlEvents:UIControlEventTouchUpInside];
 	
 }

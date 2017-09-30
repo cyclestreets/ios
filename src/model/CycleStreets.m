@@ -227,6 +227,57 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(CycleStreets);
 	
 }
 
+#define METERS_TO_FEET  3.2808399
+#define METERS_TO_YDS  1.09361
+#define METERS_TO_MILES 0.000621371192
+#define METERS_CUTOFF   1000
+#define FEET_CUTOFF     3281
+#define YDS_CUTOFF		1093
+#define METERSINMILE	1609
+#define FEET_IN_MILES   5280
+#define YDS_IN_MILE		1760
++(NSString*)formattedDistanceString:(CLLocationDistance)distance{
+	
+	//Note to self: MKDistanceFormatter is shite and will round values to arbitary whole numbers!!
+	
+	BOOL isMetric = ![SettingsManager sharedInstance].routeUnitisMiles;
+	
+	NSString *format;
+	BOOL useFraction=NO;
+	
+	if (isMetric) {
+		if (distance < METERS_CUTOFF) {
+			format = @"%@ m";
+		} else {
+			useFraction=YES;
+			format = @"%@ km";
+			distance = distance / 1000;
+		}
+	} else { // assume Imperial / U.S.
+		
+		// Note this is  CS only thing, distances < 1 major unit are always shown in meters not imperial value
+		//		distance = distance * METERS_TO_YDS;
+		//	if (distance < YDS_CUTOFF) {
+		// format = @"%@ yds";
+
+		if (distance < METERSINMILE) {
+			format = @"%@ m";
+		} else {
+			useFraction=YES;
+			format = @"%@ mi";
+			distance = distance / YDS_IN_MILE;
+		}
+	}
+	
+	NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+	[numberFormatter setLocale:[NSLocale currentLocale]];
+	[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+	[numberFormatter setMaximumFractionDigits:useFraction ? 1 : 0];
+	NSString *formattedStringValue= [numberFormatter stringFromNumber:[NSNumber numberWithDouble:distance]];
+	
+	return [NSString stringWithFormat:format, formattedStringValue];
+	
+}
 
 
 @end

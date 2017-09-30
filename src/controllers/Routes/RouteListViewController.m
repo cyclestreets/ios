@@ -15,7 +15,6 @@
 #import "UIView+Additions.h"
 #import "GenericConstants.h"
 #import "GlobalUtilities.h"
-#import <PixateFreestyle/PixateFreestyle.h>
 
 @interface FavouriteMenuItem : UIMenuItem 
 @property (nonatomic, strong) NSIndexPath* indexPath;
@@ -510,7 +509,7 @@
 		for (int i=0;i<[_keys count];i++){
 			
 			UIView *headerView=[[UIView	alloc]initWithFrame:CGRectMake(0, 0, 320, 24)];
-			headerView.styleClass=@"GreenView";
+			headerView.backgroundColor=UIColorFromRGB(0x509720);
 			
 			UILabel *sectionLabel=[[UILabel alloc]initWithFrame:CGRectMake(10.0, 0, 280, 24)];
 			sectionLabel.backgroundColor=[UIColor clearColor];

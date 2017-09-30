@@ -16,7 +16,7 @@
 #import "ExpandedUILabel.h"
 #import "AppDelegate.h"
 #import "GradientView.h"
-#import <PixateFreestyle/PixateFreestyle.h>
+#import "CycleStreets-Swift.h"
 #import "GenericConstants.h"
 
 #define COLUMNCOUNT 3
@@ -126,7 +126,7 @@
 	
 	
 	UIButton *closeButton=[UIButton buttonWithType:UIButtonTypeSystem];
-	closeButton.styleId=@"BUIconActionSheetClosebutton";
+	[AppStyling applyStyleForButton:closeButton key:AppStyleBUIconActionSheetClosebutton];
 	[closeButton setTitle:@"Cancel" forState:UIControlStateNormal];
 	closeButton.size=CGSizeMake(200, 36);
 	

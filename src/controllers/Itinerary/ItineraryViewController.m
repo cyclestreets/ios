@@ -28,11 +28,12 @@
 #import "BUIconActionSheet.h"
 #import "A2StoryboardSegueContext.h"
 #import "CSRouteDetailsViewController.h"
-#import <PixateFreestyle/PixateFreestyle.h>
 
 #import "BUIconActionSheet.h"
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
+
+#import "CycleStreets-Swift.h"
 
 @interface ItineraryViewController()<UITableViewDelegate,UITableViewDataSource,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 
@@ -274,20 +275,20 @@
         contentContainer.alignMode=BUCenterAlignMode;
 		
 		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-		titlelabel.styleClass=@"UISubtitleLabel";
+		[AppStyling applyStyleFor:titlelabel key:AppStyleUISubtitleLabel];
 		titlelabel.text=@"You have no route active currently.";
 		[contentContainer addSubview:titlelabel];					
 		
 		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-		infolabel.styleClass=@"UIMessageLabel";
+		[AppStyling applyStyleFor:infolabel key:AppStyleUIMessageLabel];
 		infolabel.text=@"Once you have loaded a route, the itinerary will be shown here.";
 		[contentContainer addSubview:infolabel];					
 		
-		UIButton *routeButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"GreenButton" text:@"Plan route"];
+		UIButton *routeButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"greenButton" text:@"Plan route"];
 		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:routeButton];
 		
-		UIButton *savedButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"GreenButton" text:@"Saved routes"];
+		UIButton *savedButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"greenButton" text:@"Saved routes"];
 		[savedButton addTarget:self action:@selector(swapToSavedRoutesView) forControlEvents:UIControlEventTouchUpInside];
 		[contentContainer addSubview:savedButton];
 		

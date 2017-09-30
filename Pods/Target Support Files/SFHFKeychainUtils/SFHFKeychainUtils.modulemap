@@ -1,0 +1,6 @@
+framework module SFHFKeychainUtils {
+  umbrella header "SFHFKeychainUtils-umbrella.h"
+
+  export *
+  module * { export * }
+}

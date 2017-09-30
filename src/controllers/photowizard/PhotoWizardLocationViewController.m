@@ -17,6 +17,7 @@
 #import "CycleStreets.h"
 #import "CSMapTileService.h"
 #import "CSRetinaTileRenderer.h"
+#import "MapViewSearchLocationViewController.h"
 
 @interface PhotoWizardLocationViewController()<MKMapViewDelegate>
 
@@ -27,6 +28,8 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem				* closeButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem				* resetButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem				* updateButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem				* searchButton;
+
 @property (nonatomic) BOOL											avoidAccidentalTaps;
 @property (nonatomic) BOOL											singleTapDidOccur;
 @property (nonatomic) CGPoint										singleTapPoint;
@@ -325,6 +328,17 @@
 	
 }
 
+- (IBAction)didSelectSearchLocationButton:(id)sender {
+	
+	
+	MapViewSearchLocationViewController *controller=[[MapViewSearchLocationViewController alloc]initWithNibName:[MapViewSearchLocationViewController nibName] bundle:nil];
+	
+	[self.navigationController presentViewController:controller animated:YES completion:^{
+		
+	}];
+	
+	
+}
 
 //
 /***********************************************

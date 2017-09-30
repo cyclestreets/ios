@@ -28,8 +28,8 @@
 -(void)populate{
 	
 	
-	_titleLabel.text=_dataProvider.name;
-	_nearLabel.text=_dataProvider.near;
+	_titleLabel.text=_dataProvider.nameString;
+	_nearLabel.text=_dataProvider.nearString;
 	_distanceLabel.text=_dataProvider.distanceString;
 	
 	

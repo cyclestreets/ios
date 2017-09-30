@@ -44,6 +44,6 @@
 
 
 -(NSMutableDictionary*)uploadParams; // upload request parameters
-
+-(NSMutableDictionary*)newuploadParams; // v2 api
 
 @end

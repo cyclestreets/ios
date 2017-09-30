@@ -22,7 +22,7 @@
 		<key>id</key>
 		<string>Login</string>
 		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/uservalidate.xml</string>
+		<string>https://www.cyclestreets.net/api/uservalidate.xml</string>
 		<key>method</key>
 		<string>Login</string>
 		<key>type</key>
@@ -155,48 +155,12 @@
 			<string>Accepts-Encoding</string>
 		</dict>
 	</dict>
-	<key>PoiCategoryLocation</key>
-	<dict>
-		<key>id</key>
-		<string>PoiCategoryLocation</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/pois.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
-	<key>PoiMapCategoryLocation</key>
-	<dict>
-		<key>id</key>
-		<string>PoiMapCategoryLocation</string>
-		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/pois.xml</string>
-		<key>type</key>
-		<string>GET</string>
-		<key>cache</key>
-		<true/>
-		<key>parserType</key>
-		<string>DATATYPE_XML</string>
-		<key>headers</key>
-		<dict>
-			<key>gzip</key>
-			<string>Accepts-Encoding</string>
-		</dict>
-	</dict>
 	<key>CalculateRoute</key>
 	<dict>
 		<key>id</key>
 		<string>CalculateRoute</string>
 		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/journey.xml</string>
+		<string>https://www.cyclestreets.net/api/journey.xml</string>
 		<key>type</key>
 		<string>GET</string>
 		<key>cache</key>
@@ -268,7 +232,7 @@
 		<key>id</key>
 		<string>PhotoCategories</string>
 		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/photomapcategories.xml</string>
+		<string>https://www.cyclestreets.net/api/photomapcategories.xml</string>
 		<key>type</key>
 		<string>GET</string>
 		<key>cache</key>
@@ -286,7 +250,7 @@
 		<key>id</key>
 		<string>LocationSearch</string>
 		<key>remoteurl</key>
-		<string>http://www.cyclestreets.net/api/geocoder.xml</string>
+		<string>https://www.cyclestreets.net/api/geocoder.xml</string>
 		<key>type</key>
 		<string>GET</string>
 		<key>cache</key>

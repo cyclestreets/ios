@@ -15,7 +15,6 @@
 #import "ButtonUtilities.h"
 #import "UIView+Additions.h"
 #import "GenericConstants.h"
-#import <PixateFreestyle/PixateFreestyle.h>
 
 @interface RoutesViewController()
 
@@ -147,7 +146,7 @@
 	[_routeTypeControl buildInterface];
 	[controlcontainer addSubview:_routeTypeControl];
 	
-	self.selectedRouteButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"OrangeButton" text:@"Current Route"];
+	self.selectedRouteButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"orangeButton" text:@"Current Route"];
     [_selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
 	[controlcontainer addSubview:_selectedRouteButton];
@@ -195,118 +194,38 @@
 -(IBAction)didSelectFetchRouteButton:(NSString*)type{
 	
 	
-//	__weak __typeof(&*self)weakSelf = self;
-//	
-//	UIAlertController *createAlert=[UIAlertController alertControllerWithTitle:@"Enter route number" message:@"Find a CycleStreets route by number" preferredStyle:UIAlertControllerStyleAlert];
-//	
-//	UIAlertAction *executeAction=[UIAlertAction actionWithTitle:OK style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//		
-//		[[RouteManager sharedInstance] loadRouteForRouteId:createAlert.textFields.firstObject.text];
-//		
-//		[_routeTypeControl setSelectedSegmentIndex:1];
-//		[weakSelf selectedIndexDidChange:1];
-//		
-//	}];
-//	
-//	UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//		
-//	}];
-//	
-//	[createAlert addAction:executeAction];
-//	[createAlert addAction:cancelAction];
-//	[createAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-//		textField.placeholder = @"Enter route number";
-//		textField.keyboardType = UIKeyboardTypeNumberPad;
-//		textField.width=200;
-//		
-//	}];
-//	
-//	[self presentViewController:createAlert animated:YES completion:^{
-//		
-//	}];
-//	[createAlert.view layoutIfNeeded];
+	__weak __typeof(&*self)weakSelf = self;
 	
+	UIAlertController *createAlert=[UIAlertController alertControllerWithTitle:@"Enter route number" message:@"Find a CycleStreets route by number" preferredStyle:UIAlertControllerStyleAlert];
 	
-	
-	
-	[ViewUtilities createTextEntryAlertView:@"Enter route number" fieldText:nil withMessage:@"Find a CycleStreets route by number" keyboardType:UIKeyboardTypeNumberPad delegate:self];
-	
-    
-}
-
-#pragma mark - UIAlert delegate
-
-// Note: use of didDismissWithButtonIndex, as otherwise the HUD gets removed by the screen clear up performed by Alert 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
-	
-	if(buttonIndex > 0) {
-        
-		switch(alertView.tag){
-                
-			case kTextEntryAlertTag:
-			{
-				UITextField *alertInputField=nil;
-				// os7 cant get view tag for field
-				if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
-					alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
-				}else{
-					alertInputField=(UITextField*)[alertView textFieldAtIndex:0];
-				}
-				
-				if (alertInputField!=nil && ![alertInputField.text isEqualToString:EMPTYSTRING]){
-					[[RouteManager sharedInstance] loadRouteForRouteId:alertInputField.text];
-					
-					[_routeTypeControl setSelectedSegmentIndex:1];
-					[self selectedIndexDidChange:1];
-				}
-			}
-            break;
-                
-			default:
-				
-            break;
-                
-		}
+	UIAlertAction *executeAction=[UIAlertAction actionWithTitle:OK style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 		
-	}
+		[[RouteManager sharedInstance] loadRouteForRouteId:createAlert.textFields.firstObject.text];
+		
+		[_routeTypeControl setSelectedSegmentIndex:1];
+		[weakSelf selectedIndexDidChange:1];
+		
+	}];
+	
+	UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+		
+	}];
+	
+	[createAlert addAction:executeAction];
+	[createAlert addAction:cancelAction];
+	[createAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+		textField.placeholder = @"Enter route number";
+		textField.keyboardType = UIKeyboardTypeNumberPad;
+		
+	}];
+	
+	[self presentViewController:createAlert animated:YES completion:^{
+		
+	}];
+	[createAlert.view layoutIfNeeded];
+	
 	
 }
-
-
-
-- (void)didPresentAlertView:(UIAlertView *)alertView{
-	
-	
-	switch(alertView.tag){
-			
-		case kTextEntryAlertTag:
-		{
-			UITextField *alertInputField=nil;
-			// os7 cant get view tag for field
-			if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
-				alertInputField=(UITextField*)[alertView viewWithTag:kTextEntryAlertFieldTag];
-			}else{
-				alertInputField=(UITextField*)[alertView textFieldAtIndex:0];
-			}
-			[UIView animateWithDuration:0.3 animations:^{
-				alertInputField.width=200;
-				alertInputField.x-=100;
-				alertInputField.height=36;
-				alertInputField.y-=5;
-			}];
-			
-			alertInputField.borderStyle=UITextBorderStyleLine;
-		}
-			break;
-			
-		default:
-			
-		break;
-			
-	}
-	
-}
-
 
 
 #pragma mark - Segment control

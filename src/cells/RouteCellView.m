@@ -15,6 +15,7 @@
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
 #import "MultiLabelLine.h"
+#import "CycleStreets.h"
 
 @interface RouteCellView()
 
@@ -75,12 +76,8 @@
 	
 	[labelarr addObject:[_dataProvider timeString]];
 	
-	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[labelarr addObject:[NSString stringWithFormat:@"%3.1f miles", [[_dataProvider length] floatValue]/1600]];
-	}else {
-		[labelarr addObject:[NSString stringWithFormat:@"%3.1f km", [[_dataProvider length] floatValue]/1000]];
-	}
-    
+	[labelarr addObject:[CycleStreets formattedDistanceString:[[_dataProvider length] doubleValue]]];
+	
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[_dataProvider speed]];
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];
 	if([SettingsManager sharedInstance].routeUnitisMiles==YES){

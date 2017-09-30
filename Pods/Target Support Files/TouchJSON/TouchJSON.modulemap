@@ -1,0 +1,6 @@
+framework module TouchJSON {
+  umbrella header "TouchJSON-umbrella.h"
+
+  export *
+  module * { export * }
+}

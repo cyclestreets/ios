@@ -13,7 +13,8 @@
 #import "GlobalUtilities.h"
 #import "UIView+Additions.h"
 #import "ImageUtilties.h"
-#import <PixateFreestyle/PixateFreestyle.h>
+
+#import "CycleStreets-Swift.h"
 
 @implementation ButtonUtilities
 
@@ -177,7 +178,7 @@
 + (UIButton*)UIPixateButtonWithWidth:(NSUInteger)width height:(NSUInteger)height styleId:(NSString*)styleId text:(NSString*)text
 {
 	UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-	button.styleId=styleId;
+	[AppStyling applyStyleFor:button keyString:styleId];
 	
 	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font]+20;
 	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
@@ -193,7 +194,7 @@
 
 +(void)stylePixateIBButton:(UIButton*)button styleId:(NSString*)styleId type:(NSString*)type text:(NSString*)text{
 	
-	button.styleId=styleId;
+	[AppStyling applyStyleFor:button keyString:styleId];
 	
 	BOOL hasLabel=YES;
 	if([text length]==0){

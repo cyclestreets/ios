@@ -13,6 +13,7 @@
 #import "LayoutBox.h"
 #import "MultiLabelLine.h"
 #import "ExpandedUILabel.h"
+#import "CycleStreets.h"
 
 @interface ItineraryCellView()
 
@@ -54,10 +55,8 @@
 	NSMutableArray *arr=[[NSMutableArray alloc] init];
 	
 	[arr addObject:[_dataProvider timeString]];
-	[arr addObject:[NSString stringWithFormat:@"%4ldm", (long)[_dataProvider segmentDistance]]];
-	
-	float totalMiles = ((float)([_dataProvider startDistance]+[_dataProvider segmentDistance]))/1600;
-	[arr addObject:[NSString stringWithFormat:@"(%3.1f miles)", totalMiles]];
+	[arr addObject:[CycleStreets formattedDistanceString:[_dataProvider segmentDistance]]];
+	[arr addObject:[CycleStreets formattedDistanceString:([_dataProvider startDistance]+[_dataProvider segmentDistance])]];
 	
 	_icon.image=[UIImage imageNamed:_dataProvider.provisionIcon];
 	

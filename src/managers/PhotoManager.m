@@ -172,7 +172,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
-
+// API V2
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw withLimit:(int)limit fordataID:(NSString*)dataid{
 	
 	BetterLog(@"");
@@ -195,9 +195,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 								@"limit":@(limit),
 								@"suppressplaceholders":@"1",
 								@"minimaldata":@"1",
-								@"selectedid":[self uploadPhotoId]};
+								@"selectedid":[self uploadPhotoId],
+							  @"datetime":@"sqldatetime"};
 	
-	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl",@"metacategoryId",@"categoryId"];
+	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl",@"metacategoryId",@"categoryId",@"username",@"licenseName",@"tags",@"bearingString",@"likes",@"datetime"];
 	NSDictionary *fieldDict=@{@"fields":[fieldArr componentsJoinedByString:@","]};
 	
 	NSMutableDictionary *parameters=[NSMutableDictionary dictionary];
@@ -375,6 +376,48 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
     
     
     
+}
+
+
+// V2 Api
+-(void)newUserPhotoUploadRequest:(UploadPhotoVO*)photo{
+	
+	self.uploadPhoto=photo;
+	
+	NSMutableDictionary *parameters=[_uploadPhoto uploadParams];
+	
+	parameters[@"username"]=[UserAccount sharedInstance].user.username;
+	parameters[@"password"]=[UserAccount sharedInstance].userPassword;
+	parameters[@"key"]=[CycleStreets sharedInstance].APIKey;
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=UPLOADUSERPHOTO;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	request.trackProgress=YES;
+	
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self UserPhotoUploadResponse:operation];
+		
+	};
+	
+	request.progressBlock=^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite){
+		
+		NSDictionary *progressDict=@{@"bytesWritten":@(bytesWritten),@"totalBytesWritten":@(totalBytesWritten),@"totalBytesExpectedToWrite":@(totalBytesExpectedToWrite)};
+		[[NSNotificationCenter defaultCenter] postNotificationName:FILEUPLOADPROGRESS object:nil userInfo:progressDict];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+	
+	[[HudManager sharedInstance] showHudWithType:HUDWindowTypeProgress withTitle:@"Uploading Photo" andMessage:nil];
+	
+	
+	
+	
 }
 
 

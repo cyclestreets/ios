@@ -34,7 +34,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.2</string>
+	<string>3.2.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -53,7 +53,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>409</string>
+	<string>427</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -68,6 +68,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MKDirectionsApplicationSupportedModes</key>
@@ -79,8 +81,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Cyclestreets requires access to your camera so you can take photos of cycling related items to upload.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Cyclestreets requires access to your location to provide routing information.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Cyclestreets requires access to your camera so you can use photos of cycling related items to upload.</string>
 	<key>SERVERDOMAIN_ID</key>
 	<string>APPSTATE_LIVE</string>
 	<key>UIMainStoryboardFile</key>

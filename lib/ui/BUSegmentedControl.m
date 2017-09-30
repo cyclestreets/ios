@@ -10,7 +10,8 @@
 #import "StyleManager.h"
 #import "LayoutBox.h"
 #import "GlobalUtilities.h"
-#import <PixateFreestyle/PixateFreestyle.h>
+
+#import "CycleStreets-Swift.h"
 
 @implementation BUSegmentedControl
 @synthesize dataProvider;
@@ -63,7 +64,7 @@
 		
 		button=[UIButton buttonWithType:UIButtonTypeCustom];
 		button.showsTouchWhenHighlighted=NO;
-		button.styleId=@"BUSegmentedControlButton";
+		[AppStyling applyStyleForButton:button key:AppStyleBUSegmentedControlButton];
 		[button setTitle:[dataProvider objectAtIndex:i] forState:UIControlStateNormal];
 		
 		
@@ -120,13 +121,14 @@
 		if(selectedIndex!=-1){
 			UIButton *outgoingbutton=[items objectAtIndex:selectedIndex];
 			outgoingbutton.enabled=YES;
-		
+			[AppStyling applyStyleForButton:outgoingbutton key:AppStyleBUSegmentedControlButton];
 		}
 		
 		selectedIndex=index;
 		
 		UIButton *incomingbutton=[items objectAtIndex:selectedIndex];
 		incomingbutton.enabled=NO;
+		[AppStyling applyStyleForButton:incomingbutton key:AppStyleBUSegmentedControlButtonDisabled];
 	}
 	
 }

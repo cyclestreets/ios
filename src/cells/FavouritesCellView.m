@@ -31,6 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
 #import "MultiLabelLine.h"
+#import "CycleStreets.h"
 
 @interface FavouritesCellView()
 
@@ -78,11 +79,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	
 	[arr addObject:[_dataProvider timeString]];
 	
-	if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-		[arr addObject:[NSString stringWithFormat:@"%3.1f miles", [[_dataProvider length] floatValue]/1600]];
-	}else {
-		[arr addObject:[NSString stringWithFormat:@"%3.1f km", [[_dataProvider length] floatValue]/1000]];
-	}
+	[arr addObject:[CycleStreets formattedDistanceString:[[_dataProvider length] doubleValue]]];
 
 	NSNumber *kmSpeed = [NSNumber numberWithInteger:[_dataProvider speed]];
 	NSInteger mileSpeed = [[NSNumber numberWithDouble:([kmSpeed doubleValue] / 1.6)] integerValue];

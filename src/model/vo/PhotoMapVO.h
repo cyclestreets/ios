@@ -55,6 +55,20 @@ typedef NS_ENUM(NSUInteger, PhotoMapMediaType) {
 @property(nonatomic,readonly)  NSString				*categoryIconString;
 
 
+// v2 new fields
+// @"username",@"licenseName",@"tags",@"bearingString",@"likes"
+
+@property(nonatomic,strong)  NSString				*license;
+@property(nonatomic,strong)  NSString				*username;
+@property(nonatomic,strong)  NSString				*bearingString;
+@property(nonatomic,strong)  NSString				*likes;
+
+@property(nonatomic,readonly)  NSString				*dateString;
+@property(nonatomic,readonly)  NSString				*tagString;
+
+
+
+
 
 // v2
 -(void)updateWithAPIDict:(NSDictionary*)dict;

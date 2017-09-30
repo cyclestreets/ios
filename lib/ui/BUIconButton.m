@@ -9,7 +9,7 @@
 #import "ButtonUtilities.h"
 #import "StyleManager.h"
 #import "ImageUtilties.h"
-#import <PixateFreestyle/PixateFreestyle.h>
+#import "CycleStreets-Swift.h"
 
 @implementation BUIconButton
 @synthesize index;
@@ -66,7 +66,7 @@
 	
 	
 	self.label=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, maxLabelWidth, 10)];
-	label.styleId=@"BUIconActionSheetIconbuttonLabel";
+	label.textColor=UIColorFromRGB(0x666666);
 	label.textAlignment=UITextAlignmentCenter;
 	label.fixedWidth=YES;
 	

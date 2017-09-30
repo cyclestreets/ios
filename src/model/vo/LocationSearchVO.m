@@ -26,7 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import "LocationSearchVO.h"
 #import "SettingsManager.h"
-
+#import "MKMapView+Additions.h"
+#import "CycleStreets.h"
 
 @implementation LocationSearchVO
 
@@ -50,22 +51,71 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 -(NSString*)distanceString{
 	
-	if(distance>0){
-	
-		if([SettingsManager sharedInstance].routeUnitisMiles==YES){
-			return [NSString stringWithFormat:@"%3.1f miles", [distance floatValue]/1600];
+	if (_distanceValue>0){
+		
+		return [CycleStreets formattedDistanceString:_distanceValue];
+		
+	}else{
+		
+		if(distance>0){
+			
+			if([SettingsManager sharedInstance].routeUnitisMiles==YES){
+				return [NSString stringWithFormat:@"%3.1f miles", [distance floatValue]/1600];
+			}else {
+				return [NSString stringWithFormat:@"%3.1f km", [distance floatValue]/1000];
+			}
+			
 		}else {
-			return [NSString stringWithFormat:@"%3.1f km", [distance floatValue]/1000];
+			return EMPTYSTRING;
 		}
 		
-	}else {
-		return EMPTYSTRING;
 	}
+	
+	return EMPTYSTRING;
+	
 	
 }
 
 -(NSNumber*)distanceInt{
 	return [NSNumber numberWithInt:[distance intValue]];
+}
+
+
+-(NSString*)nameString{
+	
+	if(_mapItem){
+		return _mapItem.placemark.name;
+	}
+	return self.name;
+}
+
+-(NSString*)nearString{
+	
+	if(self.near){
+		return  self.near;
+	}
+	
+	if (_mapItem){
+		
+		NSString *firstSpace= (_mapItem.placemark.subThoroughfare != nil && _mapItem.placemark.thoroughfare != nil) ? @" " : EMPTYSTRING;
+		NSString *comma=(_mapItem.placemark.subThoroughfare != nil || _mapItem.placemark.thoroughfare != nil) &&
+		(_mapItem.placemark.subAdministrativeArea != nil || _mapItem.placemark.administrativeArea != nil) ? @", " : EMPTYSTRING;
+		
+		NSString *secondSpace = (_mapItem.placemark.subAdministrativeArea != nil && _mapItem.placemark.administrativeArea != nil) ? @", " : EMPTYSTRING;
+		
+		NSString *town=_mapItem.placemark.locality;
+		if (_mapItem.placemark.subLocality){
+			town=_mapItem.placemark.subLocality;
+		}
+		
+		NSString *addressString=[NSString stringWithFormat:@"%@%@%@%@%@%@%@",_mapItem.placemark.subThoroughfare ? _mapItem.placemark.subThoroughfare : EMPTYSTRING,firstSpace,_mapItem.placemark.thoroughfare ? _mapItem.placemark.thoroughfare : EMPTYSTRING,comma,town ? town : EMPTYSTRING,secondSpace,_mapItem.placemark.subAdministrativeArea ? _mapItem.placemark.subAdministrativeArea : EMPTYSTRING];
+		
+		self.near=addressString;
+		
+		return self.near;
+	}
+	
+	return EMPTYSTRING;
 }
 
 @end
