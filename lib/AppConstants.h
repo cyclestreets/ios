@@ -14,7 +14,7 @@
 #if defined (CONFIGURATION_Debug)
 #define ENABLEDEBUGTRACE 1
 #else
-#define ENABLEDEBUGTRACE 1
+#define ENABLEDEBUGTRACE 0
 #endif
 
 #define ENABLEOS6ACTIVITYMODE 0
