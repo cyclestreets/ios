@@ -347,6 +347,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 	
 	
 	TBXMLElement *root=[TBXML childElementNamed:@"gml:featureMember" parentElement:response];
+	if(root==nil)
+		return nil;
+	
 	TBXMLElement *routenode=[TBXML childElementNamed:@"cs:route" parentElement:root];
 	
 	RouteVO *route;
