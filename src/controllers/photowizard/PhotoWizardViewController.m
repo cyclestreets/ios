@@ -1290,7 +1290,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	_photodescriptionField.delegate=self;
 	[self resetDescriptionField];
 	
-	[self initialiseViewState:PhotoWizardViewStateUpload];
 
 }
 
@@ -1306,7 +1305,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	
 	[self resetDescriptionView];
 	
-	//[self removeViewState:PhotoWizardViewStateUpload];
+	[self removeViewState:PhotoWizardViewStateUpload];
 }
 
 -(void)updateDescriptionView{
@@ -1407,15 +1406,27 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
 	
-	if(textView.text.length==0){
-		[self resetDescriptionField];
+	switch (_viewState) {
+		case PhotoWizardViewStateDescription:
+			if(textView.text.length==0){
+				[self resetDescriptionField];
+			}else{
+				[self initialiseViewState:PhotoWizardViewStateUpload];
+			}
+			break;
+		default: break;
 	}
 	
 }
 
 -(IBAction)textViewKeyboardShouldClear:(id)sender{
 	
-	[self resetDescriptionField];
+	switch (_viewState) {
+		case PhotoWizardViewStateDescription:
+				[self resetDescriptionField];
+			break;
+		default:break;
+	}
 	
 }
 
