@@ -22,8 +22,8 @@
 
 @interface PhotoMapImageLocationViewController()<AsyncImageViewDelegate,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 
-@property (nonatomic, strong) IBOutlet	UINavigationBar				*mynavigationBar;
-@property (nonatomic, strong) IBOutlet	UIScrollView				*myscrollView;
+@property (nonatomic, strong) IBOutlet	UINavigationBar				*navigationBar;
+@property (nonatomic, strong) IBOutlet	UIScrollView				*scrollView;
 @property (nonatomic, strong)	LayoutBox					*viewContainer;
 @property (nonatomic, strong)	AsyncImageView				*imageView;
 @property (nonatomic, strong)	ExpandedUILabel				*imageLabel;
@@ -100,7 +100,7 @@
 	_imageLabel.multiline=YES;
 	[_viewContainer addSubview:_imageLabel];
 	
-	[_myscrollView addSubview:_viewContainer];
+	[_scrollView addSubview:_viewContainer];
 	
 	[self updateContentSize];
 	
@@ -118,7 +118,7 @@
 	_titleLabel.shadowOffset=CGSizeMake(0, -1);
 	_titleLabel.shadowColor=[UIColor grayColor];
 	
-	[self.mynavigationBar.topItem setTitleView:_titleLabel];
+	[self.navigationBar.topItem setTitleView:_titleLabel];
 	
 	
 }

@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoMapImageLocationViewController">
             <connections>
+                <outlet property="navigationBar" destination="4" id="z2L-BB-hri"/>
+                <outlet property="scrollView" destination="9" id="9FZ-q3-b8b"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -36,9 +38,6 @@
                         <navigationItem title="Title" id="13">
                             <barButtonItem key="leftBarButtonItem" systemItem="done" id="16">
                                 <color key="tintColor" red="0.97090393304824829" green="0.49860295653343201" blue="0.23119646310806274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="navbar-actionbutton"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="backButtonSelected:" destination="-1" id="17"/>
                                 </connections>
