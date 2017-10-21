@@ -166,7 +166,7 @@
 	
 	parameters[@"latitude"]=[NSString stringWithFormat:@"%@", BOX_FLOAT(self.activeLocation.coordinate.latitude)];
 	parameters[@"longitude"]=[NSString stringWithFormat:@"%@",BOX_FLOAT(self.activeLocation.coordinate.longitude)];
-	parameters[@"caption"]=_caption==nil ? EMPTYSTRING : _caption;
+	parameters[@"caption"]=_caption==nil ? @"No caption" : _caption.length==0 ? @"No caption" : _caption;
 	parameters[@"category"]=_feature==nil ? EMPTYSTRING : _feature.tag;
 	parameters[@"metacategory"]=_category==nil ? EMPTYSTRING : _category.tag;
 	parameters[@"datetime"]=self.dateTime;
@@ -183,7 +183,7 @@
 	
 	parameters[@"latitude"]=[NSString stringWithFormat:@"%@", BOX_FLOAT(self.activeLocation.coordinate.latitude)];
 	parameters[@"longitude"]=[NSString stringWithFormat:@"%@",BOX_FLOAT(self.activeLocation.coordinate.longitude)];
-	parameters[@"caption"]=_caption==nil ? EMPTYSTRING : _caption;
+	parameters[@"caption"]=_caption==nil ? @"No caption" : _caption;
 	parameters[@"category"]=_feature==nil ? EMPTYSTRING : _feature.tag;
 	parameters[@"metacategory"]=_category==nil ? EMPTYSTRING : _category.tag;
 	parameters[@"datetime"]=self.dateTime;

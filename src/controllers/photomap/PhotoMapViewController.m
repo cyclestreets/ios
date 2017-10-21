@@ -106,6 +106,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
     
     [notifications addObject:CSMAPSTYLECHANGED];
 	[notifications addObject:RETREIVELOCATIONPHOTOSRESPONSE];
+	[notifications addObject:RETREIVEPHOTOLOCATIONRESPONSE];
 	
 	
 	[super listNotificationInterests];
@@ -128,7 +129,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
         [self didRecievePhotoResponse:notification.object];
     }
 	
-	
+	if([name isEqualToString:RETREIVEPHOTOLOCATIONRESPONSE]){
+		[self didRecievePhotoLocationResponse:notification.object];
+	}
 	
 }
 
@@ -161,6 +164,26 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		
 	}else{
 		_photomapQuerying=NO;
+	}
+	
+	
+}
+
+-(void)didRecievePhotoLocationResponse:(NSDictionary*)dict{
+	
+	BetterLog(@"");
+	
+	NSString *status=[dict objectForKey:@"status"];
+	
+	if([status isEqualToString:SUCCESS]){
+		
+		PhotoMapVO *photo=[dict objectForKey:DATAPROVIDER];
+		if(photo){
+			[self showLocationModalViewForPhoto:photo];
+		}
+		
+	}else{
+		
 	}
 	
 	
@@ -228,29 +251,35 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	CSPhotomapAnnotation *annotation=(CSPhotomapAnnotation*)view.annotation;
 	PhotoMapVO *photoEntry = (PhotoMapVO *)annotation.dataProvider;
 	
-	switch (photoEntry.mediaType) {
-		case PhotoMapMediaType_Image:
-			{
-				PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:[PhotoMapImageLocationViewController nibName] bundle:nil];
-				lv.dataProvider=photoEntry;
-				[self presentModalViewController:lv animated:YES];
-				
-			}
-		break;
-				
-		case PhotoMapMediaType_Video:
-			{
-				PhotoMapVideoLocationViewController *lv = [[PhotoMapVideoLocationViewController alloc] initWithNibName:[PhotoMapVideoLocationViewController nibName] bundle:nil];
-				lv.dataProvider=photoEntry;
-				[self presentModalViewController:lv animated:YES];
-			}
-		break;
-	}
+	[self showLocationModalViewForPhoto:photoEntry];
 	
 	[_mapView deselectAnnotation:annotation animated:NO];
 	
 }
 
+
+-(void)showLocationModalViewForPhoto:(PhotoMapVO*)photo{
+	
+	switch (photo.mediaType) {
+		case PhotoMapMediaType_Image:
+		{
+			PhotoMapImageLocationViewController *lv = [[PhotoMapImageLocationViewController alloc] initWithNibName:[PhotoMapImageLocationViewController nibName] bundle:nil];
+			lv.dataProvider=photo;
+			[self presentModalViewController:lv animated:YES];
+			
+		}
+			break;
+			
+		case PhotoMapMediaType_Video:
+		{
+			PhotoMapVideoLocationViewController *lv = [[PhotoMapVideoLocationViewController alloc] initWithNibName:[PhotoMapVideoLocationViewController nibName] bundle:nil];
+			lv.dataProvider=photo;
+			[self presentModalViewController:lv animated:YES];
+		}
+			break;
+	}
+	
+}
 
 
 //
@@ -509,6 +538,38 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 		[[UserLocationManager sharedInstance] displayUserLocationAlert];
 		
 	}
+	
+}
+
+
+-(IBAction)didSelectFetchPhotoLocationButton:(NSString*)type{
+	
+	
+	UIAlertController *createAlert=[UIAlertController alertControllerWithTitle:@"Enter photo id number" message:@"Find a CycleStreets photo by id" preferredStyle:UIAlertControllerStyleAlert];
+	
+	UIAlertAction *executeAction=[UIAlertAction actionWithTitle:OK style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+		
+		[[PhotoManager sharedInstance] retrivePhotoForLocation:createAlert.textFields.firstObject.text];
+		
+	}];
+	
+	UIAlertAction *cancelAction=[UIAlertAction actionWithTitle:CANCEL style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+		
+	}];
+	
+	[createAlert addAction:executeAction];
+	[createAlert addAction:cancelAction];
+	[createAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+		textField.placeholder = @"Enter number";
+		textField.keyboardType = UIKeyboardTypeNumberPad;
+		
+	}];
+	
+	[self presentViewController:createAlert animated:YES completion:^{
+		
+	}];
+	[createAlert.view layoutIfNeeded];
+	
 	
 }
 

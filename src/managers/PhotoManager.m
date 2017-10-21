@@ -247,6 +247,67 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(PhotoManager);
 }
 
 
+-(void)retrivePhotoForLocation:(NSString*)locationid{
+	
+	
+	NSDictionary *apiParams=@{@"key":[CycleStreets sharedInstance].APIKey,
+							  @"id":locationid};
+	
+	NSArray *fieldArr=@[@"id",@"latitude",@"longitude",@"caption",@"hasPhoto",@"hasVideo",@"videoFormats",@"shortlink",@"thumbnailUrl",@"metacategoryId",@"categoryId",@"username",@"licenseName",@"tags",@"bearingString",@"likes",@"datetime"];
+	NSDictionary *fieldDict=@{@"fields":[fieldArr componentsJoinedByString:@","]};
+	
+	NSMutableDictionary *parameters=[NSMutableDictionary dictionary];
+	
+	[parameters addEntriesFromDictionary:apiParams];
+	[parameters addEntriesFromDictionary:fieldDict];
+	
+	BUNetworkOperation *request=[[BUNetworkOperation alloc]init];
+	request.dataid=RETREIVEPHOTOLOCATION;
+	request.requestid=ZERO;
+	request.parameters=parameters;
+	request.source=DataSourceRequestCacheTypeUseNetwork;
+	
+	
+	request.completionBlock=^(BUNetworkOperation *operation, BOOL complete,NSString *error){
+		
+		[self retrieveDataForPhotoLocationResponse:operation];
+		
+	};
+	
+	[[BUDataSourceManager sharedInstance] processDataRequest:request];
+	
+}
+
+-(void)retrieveDataForPhotoLocationResponse:(BUNetworkOperation*)response{
+	
+	[[HudManager sharedInstance]removeHUD:NO];
+	_showingHUD=NO;
+	
+	
+	switch (response.responseStatus) {
+			
+		case ValidationRetrievePhotosSuccess:
+		{
+			PhotoMapVO *photolocation=response.responseObject;
+			NSDictionary *dict=@{@"status":SUCCESS,DATAPROVIDER: photolocation};
+			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEPHOTOLOCATIONRESPONSE object:dict userInfo:nil];
+		}
+			break;
+			
+		case ValidationRetrievePhotosFailed:
+		{
+			NSDictionary *dict=[NSDictionary dictionaryWithObjectsAndKeys:ERROR,@"status", nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:RETREIVEPHOTOLOCATIONRESPONSE object:dict userInfo:nil];
+			
+		}
+			break;
+		default:
+			
+			break;
+	}
+	
+}
+
 
 
 

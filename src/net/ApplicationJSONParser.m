@@ -44,6 +44,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	{
         
 		self.parserMethods=@{RETREIVELOCATIONPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
+							 RETREIVEPHOTOLOCATION:[NSValue valueWithPointer:@selector(RetrievePhotoLocationParser)],
 							 RETREIVEROUTEPHOTOS:[NSValue valueWithPointer:@selector(RetrievePhotosParser)],
 							 ROUTESFORUSER:[NSValue valueWithPointer:@selector(RoutesForUserParser)],
 							 POILISTING:[NSValue valueWithPointer:@selector(POIListingParser)],
@@ -173,6 +174,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationJSONParser);
 	}
 	
 	
+	
+}
+
+-(void)RetrievePhotoLocationParser{
+	
+	[self validateJSON];
+	if(_activeOperation.operationState>NetResponseStateComplete){
+		_activeOperation.responseStatus=ValidationRetrievePhotosFailed;
+		return;
+	}
+	
+	NSArray *root=_responseDict[@"features"];
+	
+	if(root!=nil){
+		
+		NSDictionary *feature=root.firstObject;
+		
+		PhotoMapVO *photo=[[PhotoMapVO alloc]init];
+		[photo updateWithAPIDict:feature];
+		
+		[_activeOperation setResponseWithValue:photo];
+		
+		_activeOperation.responseStatus=ValidationRetrievePhotosSuccess;
+		_activeOperation.operationState=NetResponseStateComplete;
+		
+	}else{
+		
+		_activeOperation.responseStatus=ValidationRetrievePhotosFailed;
+		
+	}
+
 	
 }
 
