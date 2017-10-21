@@ -30,6 +30,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(PhotoManager);
 -(void)retrievePhotosForLocationBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;
 -(void)retrievePhotosForRouteBounds:(CLLocationCoordinate2D)ne withEdge:(CLLocationCoordinate2D)sw;
 
+-(void)retrivePhotoForLocation:(NSString*)locationid;
+
 -(void)UserPhotoUploadRequest:(UploadPhotoVO*)photo;
 
 -(BOOL)isUserPhoto:(PhotoMapVO*)photo;

@@ -291,7 +291,7 @@
 	
 	NSArray *tileServerPrefixes=[self tileServeSubDomainPrefixes];
 	NSInteger nextServerIndex=self.currentTileServerPrefixIndex+=1;
-	if(nextServerIndex==tileServerPrefixes.count)
+	if(nextServerIndex>=tileServerPrefixes.count)
 		nextServerIndex=0;
 	
 	self.currentTileServerPrefixIndex=nextServerIndex;

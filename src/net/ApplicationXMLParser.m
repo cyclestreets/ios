@@ -29,6 +29,7 @@
 #import "ImageCache.h"
 
 #import "TBXML+Additions.h"
+#import "NSString+HTML.h"
 
 #import "BUNetworkOperation.h"
 
@@ -343,6 +344,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 
 
 
+
 -(RouteVO*)newRouteForData:(TBXMLElement*)response{
 	
 	
@@ -361,7 +363,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ApplicationXMLParser);
 		route.routeid=[TBXML textForElement:[TBXML childElementNamed:@"cs:itinerary" parentElement:routenode]];
 		route.length=[NSNumber numberWithInt:[[TBXML textForElement:[TBXML childElementNamed:@"cs:length" parentElement:routenode]]intValue]];
 		route.plan=[TBXML textForElement:[TBXML childElementNamed:@"cs:plan" parentElement:routenode]];
-		route.name=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:routenode]];
+		
+		NSString *baseString=[TBXML textForElement:[TBXML childElementNamed:@"cs:name" parentElement:routenode]];
+		route.name=[baseString stringByDecodingHTMLEntities];
 		
 		// assign date, check for unix timestamp format and if so
 		// replace with db type string
