@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,9 +33,8 @@
                 <userLayoutGuide location="160" affinity="minX"/>
             </userGuides>
             <subviews>
-                <navigationBar contentMode="scaleToFill" translucent="NO" id="CGU-BV-w4R">
-                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGU-BV-w4R">
+                    <rect key="frame" x="0.0" y="40" width="320" height="44"/>
                     <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <textAttributes key="titleTextAttributes">
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
@@ -59,14 +59,15 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="Uk5-L9-65u">
-                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                    <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Uk5-L9-65u">
+                    <rect key="frame" x="0.0" y="84" width="320" height="484"/>
                 </mapView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" id="37" customClass="ExpandedUILabel">
-                    <rect key="frame" x="280" y="534" width="30" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37" customClass="ExpandedUILabel">
+                    <rect key="frame" x="286" y="534" width="24" height="25"/>
                     <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="0.1000000015" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="pw2-VU-D0M"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -81,12 +82,42 @@
             </subviews>
             <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Uk5-L9-65u" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="2pr-Ds-Qqn"/>
+                <constraint firstAttribute="trailing" secondItem="37" secondAttribute="trailing" constant="10" id="P9a-Ux-NMj"/>
+                <constraint firstAttribute="trailing" secondItem="CGU-BV-w4R" secondAttribute="trailing" id="RbB-ho-f4C"/>
+                <constraint firstAttribute="bottom" secondItem="Uk5-L9-65u" secondAttribute="bottom" id="Teq-jo-OxX"/>
+                <constraint firstItem="Uk5-L9-65u" firstAttribute="top" secondItem="CGU-BV-w4R" secondAttribute="bottom" id="d1c-wo-Pj7"/>
+                <constraint firstItem="CGU-BV-w4R" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="dEb-D4-G5I"/>
+                <constraint firstItem="CGU-BV-w4R" firstAttribute="top" secondItem="1" secondAttribute="topMargin" constant="20" id="geF-D1-pSu"/>
+                <constraint firstAttribute="trailing" secondItem="Uk5-L9-65u" secondAttribute="trailing" id="mNL-4i-ee8"/>
+                <constraint firstAttribute="bottom" secondItem="37" secondAttribute="bottom" constant="9" id="rxz-5S-NKK"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-            <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="122" y="66"/>
+        </view>
+        <view contentMode="scaleToFill" id="S88-uo-RLg">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Jr-6D-mY6">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="7Jr-6D-mY6" firstAttribute="leading" secondItem="S88-uo-RLg" secondAttribute="leading" id="Efz-AM-Ex5"/>
+                <constraint firstItem="7Jr-6D-mY6" firstAttribute="top" secondItem="S88-uo-RLg" secondAttribute="top" id="mrB-r3-AcD"/>
+                <constraint firstAttribute="bottom" secondItem="7Jr-6D-mY6" secondAttribute="bottom" id="u7Q-YB-qxe"/>
+                <constraint firstAttribute="trailing" secondItem="7Jr-6D-mY6" secondAttribute="trailing" id="ywr-fr-w1E"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="122" y="432"/>
         </view>
     </objects>
     <resources>
