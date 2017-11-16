@@ -95,7 +95,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[_mapStyleControl setSelectedIndex:[self selectedMapStyle:_dataProvider.mapStyle] animated:YES];
 	
 	[self.view addSubview:_controlView];
-	[(UIScrollView*) self.view setContentSize:CGSizeMake(SCREENWIDTH, _controlView.frame.size.height)];
+	[(UIScrollView*) self.view setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, _controlView.frame.size.height)];
 	
 	 [super viewDidLoad];
 	

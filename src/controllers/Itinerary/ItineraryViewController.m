@@ -28,6 +28,7 @@
 #import "BUIconActionSheet.h"
 #import "A2StoryboardSegueContext.h"
 #import "CSRouteDetailsViewController.h"
+#import "UIView+Additions.h"
 
 #import "BUIconActionSheet.h"
 #import <MessageUI/MessageUI.h>
@@ -264,8 +265,8 @@
 		if(errorView!=nil)
 			[errorView removeFromSuperview];
 		
-		contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
-		errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
+		contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.view.height)];
+		errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.view.height)];
 		
 		[errorView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 		errorView.tag=kItineraryPlanView;
@@ -274,12 +275,12 @@
         contentContainer.fixedWidth=YES;
         contentContainer.alignMode=BUCenterAlignMode;
 		
-		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-40, 10)];
 		[AppStyling applyStyleFor:titlelabel key:AppStyleUISubtitleLabel];
 		titlelabel.text=@"You have no route active currently.";
 		[contentContainer addSubview:titlelabel];					
 		
-		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-40, 10)];
 		[AppStyling applyStyleFor:infolabel key:AppStyleUIMessageLabel];
 		infolabel.text=@"Once you have loaded a route, the itinerary will be shown here.";
 		[contentContainer addSubview:infolabel];					

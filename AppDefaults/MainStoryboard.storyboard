@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="uZG-hY-a5B">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="uZG-hY-a5B">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -27,7 +28,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5g7-zV-ycW">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -44,35 +45,55 @@
         <scene sceneID="yRI-FM-nhS">
             <objects>
                 <viewController storyboardIdentifier="ItineraryViewController" title="Itinerary" id="oEv-ga-wtZ" customClass="ItineraryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GmW-hX-ad8"/>
+                        <viewControllerLayoutGuide type="bottom" id="36C-J8-aTQ"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BEG-qH-vbk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="MRk-Al-JRF">
-                                <rect key="frame" x="0.0" y="63" width="375" height="491"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="MRk-Al-JRF">
+                                <rect key="frame" x="0.0" y="64" width="375" height="577"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oEv-ga-wtZ" id="lbc-X5-EMy"/>
                                     <outlet property="delegate" destination="oEv-ga-wtZ" id="A6q-OO-jhL"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" id="PQ6-lm-tyL">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQ6-lm-tyL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route id:" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" id="AQk-7n-JHt">
-                                        <rect key="frame" x="15" y="11" width="72" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" red="0.55605292320251465" green="0.043327461928129196" blue="0.066424109041690826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ppS-Bl-z4c">
-                                        <rect key="frame" x="206" y="7" width="103" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WR-pL-1mK">
+                                        <rect key="frame" x="15" y="9.9999999999999982" width="237" height="20.333333333333329"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route id:" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQk-7n-JHt">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" red="0.55605292320251465" green="0.043327461928129196" blue="0.066424109041690826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="#17383630292" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyB-4o-gK8" customClass="CopyLabel">
+                                                <rect key="frame" x="-15" y="0.0" width="0.0" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="4Rm-mR-qk6"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppS-Bl-z4c">
+                                        <rect key="frame" x="262" y="7" width="103" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="fvj-y7-WoH"/>
+                                            <constraint firstAttribute="width" constant="103" id="nTB-D3-qoh"/>
+                                        </constraints>
                                         <state key="normal" title="Route details">
                                             <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -83,25 +104,38 @@
                                             <action selector="didSelectRouteDetailsButton:" destination="oEv-ga-wtZ" eventType="touchUpInside" id="2ex-js-HFJ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="#17383630292" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" id="QyB-4o-gK8" customClass="CopyLabel">
-                                        <rect key="frame" x="90" y="12" width="108" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" id="EHK-L1-kwK" customClass="MultiLabelLine">
-                                        <rect key="frame" x="15" y="39" width="294" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EHK-L1-kwK" customClass="MultiLabelLine">
+                                        <rect key="frame" x="15" y="39" width="345" height="21"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="b9u-a4-yde"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="EHK-L1-kwK" secondAttribute="bottom" constant="4" id="5vW-1u-EcF"/>
+                                    <constraint firstItem="7WR-pL-1mK" firstAttribute="leading" secondItem="PQ6-lm-tyL" secondAttribute="leading" constant="15" id="9wz-UJ-Pjz"/>
+                                    <constraint firstItem="EHK-L1-kwK" firstAttribute="leading" secondItem="PQ6-lm-tyL" secondAttribute="leading" constant="15" id="Enr-Js-tRA"/>
+                                    <constraint firstAttribute="trailing" secondItem="ppS-Bl-z4c" secondAttribute="trailing" constant="10" id="FAC-ax-F72"/>
+                                    <constraint firstItem="7WR-pL-1mK" firstAttribute="top" secondItem="PQ6-lm-tyL" secondAttribute="top" constant="10" id="VZ2-h2-PZN"/>
+                                    <constraint firstAttribute="height" constant="64" id="a9l-ei-5T1"/>
+                                    <constraint firstItem="ppS-Bl-z4c" firstAttribute="top" secondItem="PQ6-lm-tyL" secondAttribute="top" constant="7" id="kxg-sZ-ii1"/>
+                                    <constraint firstAttribute="trailing" secondItem="EHK-L1-kwK" secondAttribute="trailing" constant="15" id="tNs-Bg-e5x"/>
+                                    <constraint firstItem="ppS-Bl-z4c" firstAttribute="leading" secondItem="7WR-pL-1mK" secondAttribute="trailing" constant="10" id="yrh-BH-tpu"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="36C-J8-aTQ" firstAttribute="top" secondItem="MRk-Al-JRF" secondAttribute="bottom" id="3rS-uc-yXD"/>
+                            <constraint firstItem="PQ6-lm-tyL" firstAttribute="top" secondItem="GmW-hX-ad8" secondAttribute="bottom" id="5Ca-Vc-Emq"/>
+                            <constraint firstItem="MRk-Al-JRF" firstAttribute="top" secondItem="PQ6-lm-tyL" secondAttribute="bottom" id="Ag1-2H-DUC"/>
+                            <constraint firstItem="PQ6-lm-tyL" firstAttribute="leading" secondItem="BEG-qH-vbk" secondAttribute="leading" id="iew-Ah-ivI"/>
+                            <constraint firstItem="MRk-Al-JRF" firstAttribute="leading" secondItem="BEG-qH-vbk" secondAttribute="leading" id="opH-wR-yjw"/>
+                            <constraint firstAttribute="trailing" secondItem="PQ6-lm-tyL" secondAttribute="trailing" id="tq7-wg-nXd"/>
+                            <constraint firstAttribute="trailing" secondItem="MRk-Al-JRF" secondAttribute="trailing" id="zGb-GD-k7m"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Itinerary" id="tdP-ht-4mK">
@@ -121,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lS-GD-tpi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2678" y="183"/>
+            <point key="canvasLocation" x="-2423" y="422"/>
         </scene>
         <!--Saved Routes-->
         <scene sceneID="eTF-vU-kJJ">
@@ -147,17 +181,21 @@
         <scene sceneID="Up5-Sq-jDg">
             <objects>
                 <viewController title="Routes" id="pf5-jL-Kv8" customClass="RoutesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZlQ-fY-ZbT"/>
+                        <viewControllerLayoutGuide type="bottom" id="wLU-Ic-ASV"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0QK-Ah-J8w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="aBK-HM-EC4" customClass="BorderView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aBK-HM-EC4" customClass="BorderView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <containerView contentMode="scaleToFill" id="G4N-ML-Z7n">
-                                <rect key="frame" x="0.0" y="44" width="375" height="465"/>
+                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G4N-ML-Z7n">
+                                <rect key="frame" x="0.0" y="64" width="375" height="552"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </containerView>
@@ -181,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WoZ-xW-kze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2037" y="158"/>
+            <point key="canvasLocation" x="-2061" y="514"/>
         </scene>
         <!--Photo Map View Controller-->
         <scene sceneID="qEb-im-VRX">
@@ -192,7 +230,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pi6-xH-AO2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1454" y="164"/>
+            <point key="canvasLocation" x="-1459" y="443"/>
         </scene>
         <!--Report-->
         <scene sceneID="oM5-Rp-Zaf">
@@ -203,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMM-Mf-8b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-922" y="152"/>
+            <point key="canvasLocation" x="-923" y="437"/>
         </scene>
         <!--Credits-->
         <scene sceneID="p7H-CI-yzA">
@@ -337,7 +375,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anw-nq-rBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-387" y="142"/>
+            <point key="canvasLocation" x="-388" y="412"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Pbe-BX-WQZ">
@@ -380,21 +418,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Etb-Ri-unN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2678" y="860"/>
+            <point key="canvasLocation" x="-2800" y="1131"/>
         </scene>
         <!--First Run View Controller-->
         <scene sceneID="WKt-4m-JIA">
             <objects>
                 <viewController storyboardIdentifier="FirstRunViewController" id="XRL-17-8R3" customClass="FirstRunViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5fE-TM-sTN"/>
+                        <viewControllerLayoutGuide type="bottom" id="stv-Lr-u19"/>
+                    </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="7ht-A3-DmS">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="Vub-9K-q2d">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vub-9K-q2d">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PFp-Ha-esw">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PFp-Ha-esw">
                                         <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -412,15 +454,15 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="LSI-8m-QVU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LSI-8m-QVU">
                                 <rect key="frame" x="0.0" y="42" width="280" height="359"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="SfT-59-3gS">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfT-59-3gS">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="487"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9rS-EM-YSW">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rS-EM-YSW">
                                                 <rect key="frame" x="10" y="5" width="260" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <string key="text">Welcome to CycleStreets
@@ -430,7 +472,7 @@
                                                 <color key="textColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O6Z-fI-9vY">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6Z-fI-9vY">
                                                 <rect key="frame" x="10" y="30" width="260" height="96"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <string key="text">Add your start and finish points to the map then press Plan Route.
@@ -440,8 +482,9 @@ You can add a point via your current position or search for a known one.</string
                                                 <color key="textColor" red="0.34509803919999998" green="0.38823529410000002" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome_CS.jpg" id="gNY-yy-60T">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="welcome_CS.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gNY-yy-60T">
                                                 <rect key="frame" x="10" y="169" width="260" height="140"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -469,15 +512,19 @@ You can add a point via your current position or search for a known one.</string
         <scene sceneID="yu7-oW-vhw">
             <objects>
                 <viewController storyboardIdentifier="SaveLocationCreateViewController" id="LTs-Sl-igu" customClass="SaveLocationCreateViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LDS-tM-yRX"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bha-dk-uD9"/>
+                    </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="RiQ-UK-HHu">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="260"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="hav-Gy-F7a">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hav-Gy-F7a">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hxs-Ri-90y">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Save location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxs-Ri-90y">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
@@ -490,7 +537,7 @@ You can add a point via your current position or search for a known one.</string
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location name..." adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" id="s1m-cv-y9T">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location name..." adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="s1m-cv-y9T">
                                 <rect key="frame" x="16" y="174" width="248" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -499,7 +546,7 @@ You can add a point via your current position or search for a known one.</string
                                     <action selector="fieldChanged:" destination="LTs-Sl-igu" eventType="editingChanged" id="Kkn-5W-ojZ"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Wge-K8-8TR">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wge-K8-8TR">
                                 <rect key="frame" x="155" y="219" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -513,7 +560,7 @@ You can add a point via your current position or search for a known one.</string
                                     <action selector="didSelectSaveButton:" destination="LTs-Sl-igu" eventType="touchUpInside" id="cYM-0q-JkZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="02c-H9-Kfo">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02c-H9-Kfo">
                                 <rect key="frame" x="16" y="219" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -527,7 +574,7 @@ You can add a point via your current position or search for a known one.</string
                                     <action selector="didSelectCancelButton:" destination="LTs-Sl-igu" eventType="touchUpInside" id="Gft-Sx-85v"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="3Yp-qx-07f" customClass="BUHorizontalMenuView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Yp-qx-07f" customClass="BUHorizontalMenuView">
                                 <rect key="frame" x="16" y="95" width="248" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.926128089427948" green="0.91659212112426758" blue="0.91182339191436768" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -536,11 +583,11 @@ You can add a point via your current position or search for a known one.</string
                                     <outlet property="menuDelegate" destination="LTs-Sl-igu" id="fFO-5Y-fMV"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" id="5Il-04-gqw">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Il-04-gqw">
                                 <rect key="frame" x="0.0" y="42" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the location type and give it a name then press Save to add it your list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Qj-0D-ClA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose the location type and give it a name then press Save to add it your list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qj-0D-ClA">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
@@ -576,15 +623,19 @@ You can add a point via your current position or search for a known one.</string
         <scene sceneID="Y31-a6-wlX">
             <objects>
                 <viewController id="zXL-yA-jaK" customClass="LeisureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jk5-gE-AIi"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Wf-51-NAa"/>
+                    </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="1gH-ue-q48">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="ozY-eU-SQF">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozY-eU-SQF">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5LI-rU-yP3">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LI-rU-yP3">
                                         <rect key="frame" x="11" y="9" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -596,7 +647,7 @@ You can add a point via your current position or search for a known one.</string
                                             <action selector="didSelectCancelButton:" destination="zXL-yA-jaK" eventType="touchUpInside" id="dhc-pg-gkc"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leisure route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V2W-dH-wd7">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Leisure route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2W-dH-wd7">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
@@ -609,7 +660,7 @@ You can add a point via your current position or search for a known one.</string
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Luy-Ec-EfC">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Luy-Ec-EfC">
                                 <rect key="frame" x="16" y="95" width="248" height="29"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <segments>
@@ -624,11 +675,11 @@ You can add a point via your current position or search for a known one.</string
                                     <action selector="didChangeTypeControl:" destination="zXL-yA-jaK" eventType="valueChanged" id="gab-Ay-uh0"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" id="Gy2-jM-VEt">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gy2-jM-VEt">
                                 <rect key="frame" x="0.0" y="136" width="280" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="KJY-cB-Vnu">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJY-cB-Vnu">
                                         <rect key="frame" x="20" y="0.0" width="47" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -637,7 +688,7 @@ You can add a point via your current position or search for a known one.</string
                                         <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="120" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="xPn-On-6SN">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="120" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPn-On-6SN">
                                         <rect key="frame" x="221" y="0.0" width="47" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -646,7 +697,7 @@ You can add a point via your current position or search for a known one.</string
                                         <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="60 mins" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="zrg-Zb-ZJG">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="60 mins" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrg-Zb-ZJG">
                                         <rect key="frame" x="163" y="36" width="105" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -655,7 +706,7 @@ You can add a point via your current position or search for a known one.</string
                                         <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" id="rR9-nt-Y2x">
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="rR9-nt-Y2x">
                                         <rect key="frame" x="18" y="11" width="252" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -669,7 +720,7 @@ You can add a point via your current position or search for a known one.</string
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Be9-04-kUb">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Be9-04-kUb">
                                 <rect key="frame" x="16" y="350" width="248" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -683,21 +734,21 @@ You can add a point via your current position or search for a known one.</string
                                     <action selector="didSelectCalculateButton:" destination="zXL-yA-jaK" eventType="touchUpInside" id="8hX-h9-9HE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a circular route based on a duration or a distance." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9ge-Q5-c2X">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create a circular route based on a duration or a distance." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ge-Q5-c2X">
                                 <rect key="frame" x="16" y="45" width="248" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.27889072895050049" green="0.31279879808425903" blue="0.38293147087097168" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Optionally choose Points of Interest to route via." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qh8-4S-HJD">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Optionally choose Points of Interest to route via." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qh8-4S-HJD">
                                 <rect key="frame" x="16" y="279" width="108" height="55"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.27889072895050049" green="0.31279879808425903" blue="0.38293147087097168" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="517-rZ-FpQ">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="517-rZ-FpQ">
                                 <rect key="frame" x="132" y="279" width="132" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
@@ -711,24 +762,24 @@ You can add a point via your current position or search for a known one.</string
                                     <action selector="didPOIButton:" destination="zXL-yA-jaK" eventType="touchUpInside" id="WHp-z4-z7y"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="none selected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZHf-2v-k9q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="none selected" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHf-2v-k9q">
                                 <rect key="frame" x="132" y="312" width="132" height="22"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.27889072895050049" green="0.31279879808425903" blue="0.38293147087097168" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" id="rqv-0V-TNn">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqv-0V-TNn">
                                 <rect key="frame" x="10" y="207" width="260" height="1"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.77484536170959473" green="0.80267775058746338" blue="0.80209195613861084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" id="eD3-xL-BzG">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eD3-xL-BzG">
                                 <rect key="frame" x="10" y="266" width="260" height="1"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.77484536170959473" green="0.80267775058746338" blue="0.80209195613861084" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" id="q2p-Yh-K4R" customClass="BUHorizontalMenuView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q2p-Yh-K4R" customClass="BUHorizontalMenuView">
                                 <rect key="frame" x="132" y="216" width="132" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -737,7 +788,7 @@ You can add a point via your current position or search for a known one.</string
                                     <outlet property="menuDelegate" destination="zXL-yA-jaK" id="wdF-8V-VSf"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a waypoint to start from." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N3z-Eg-K6a">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose a waypoint to start from." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3z-Eg-K6a">
                                 <rect key="frame" x="16" y="216" width="108" height="41"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
@@ -771,22 +822,26 @@ You can add a point via your current position or search for a known one.</string
         <scene sceneID="RKK-fh-zBt">
             <objects>
                 <viewController id="Zho-vW-t0b" customClass="SavedLocationsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DQJ-jq-FGe"/>
+                        <viewControllerLayoutGuide type="bottom" id="dvC-IK-vja"/>
+                    </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="xMg-sg-3d8">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="vZ8-cD-ZVX">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZ8-cD-ZVX">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NeH-Du-8nE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saved locations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeH-Du-8nE">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pgq-jp-IyI">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgq-jp-IyI">
                                         <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -804,7 +859,7 @@ You can add a point via your current position or search for a known one.</string
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Exv-74-LYd" customClass="FMMoveTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Exv-74-LYd" customClass="FMMoveTableView">
                                 <rect key="frame" x="0.0" y="84" width="280" height="256"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.926128089427948" green="0.91659212112426758" blue="0.91182339191436768" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -813,11 +868,11 @@ You can add a point via your current position or search for a known one.</string
                                     <outlet property="delegate" destination="Zho-vW-t0b" id="L5Z-id-l3e"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" id="oiN-0D-HPo">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oiN-0D-HPo">
                                 <rect key="frame" x="0.0" y="42" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add saved locations by selecting a waypoint and using the Saved location icon." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANh-GP-JhU">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add saved locations by selecting a waypoint and using the Saved location icon." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANh-GP-JhU">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
@@ -850,21 +905,23 @@ You can add a point via your current position or search for a known one.</string
         <scene sceneID="oZY-a3-I7i">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="Rn0-2R-OLO" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mGZ-Ds-X35"/>
+                        <viewControllerLayoutGuide type="bottom" id="yLM-Cn-grC"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="V8Q-QV-he3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="hcn-tl-j5p">
-                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hcn-tl-j5p">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </mapView>
-                            <view contentMode="scaleToFill" id="eJg-wB-7Qt">
-                                <rect key="frame" x="0.0" y="20" width="375" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJg-wB-7Qt">
+                                <rect key="frame" x="0.0" y="44" width="375" height="36"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tZs-u5-4B7" userLabel="poi">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-u5-4B7" userLabel="poi">
                                         <rect key="frame" x="8" y="2" width="53" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -873,7 +930,7 @@ You can add a point via your current position or search for a known one.</string
                                             <action selector="didSelectPOIButton:" destination="Rn0-2R-OLO" eventType="touchUpInside" id="0Ar-3M-BfG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Qw-5h-AAN" userLabel="leisureadd">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qw-5h-AAN" userLabel="leisureadd">
                                         <rect key="frame" x="82" y="4" width="73" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -882,7 +939,7 @@ You can add a point via your current position or search for a known one.</string
                                             <action selector="didSelectCreateLeisureRouteButton:" destination="Rn0-2R-OLO" eventType="touchUpInside" id="ra6-RP-C7t"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Hdx-IW-PkS" userLabel="saveloc">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-IW-PkS" userLabel="saveloc">
                                         <rect key="frame" x="174" y="2" width="67" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -891,7 +948,7 @@ You can add a point via your current position or search for a known one.</string
                                             <action selector="didSelectSaveLocationsButton:" destination="Rn0-2R-OLO" eventType="touchUpInside" id="B3D-Gt-XQP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iIO-bW-9fY" userLabel="waypoints">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIO-bW-9fY" userLabel="waypoints">
                                         <rect key="frame" x="312" y="4" width="63" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -903,32 +960,37 @@ You can add a point via your current position or search for a known one.</string
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="LwO-vq-R6F"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="AddPointView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="QQu-Uh-EWF">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQu-Uh-EWF">
+                                <rect key="frame" x="0.0" y="44" width="375" height="49"/>
                                 <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <items>
-                                    <barButtonItem style="plain" id="i1z-FG-1IC">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ynd-M7-Oin">
-                                            <rect key="frame" x="0.0" y="7" width="375" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button">
-                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                        </button>
-                                    </barButtonItem>
-                                </items>
+                                <items/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="ivU-li-0UL" customClass="ExpandedUILabel">
-                                <rect key="frame" x="117" y="484" width="248" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9I-br-A6V">
+                                <rect key="frame" x="16" y="109" width="36" height="36"/>
+                                <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="WAU-Q5-hlt"/>
+                                    <constraint firstAttribute="width" constant="36" id="u6B-YC-vW3"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="toggleUserTracking" destination="Rn0-2R-OLO" eventType="touchUpInside" id="HBE-4P-h0p"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivU-li-0UL" customClass="ExpandedUILabel">
+                                <rect key="frame" x="298" y="684" width="61" height="25"/>
                                 <color key="backgroundColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="14y-da-myK"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -940,17 +1002,25 @@ You can add a point via your current position or search for a known one.</string
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="z9I-br-A6V">
-                                <rect key="frame" x="16" y="80" width="36" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="toggleUserTracking" destination="Rn0-2R-OLO" eventType="touchUpInside" id="HBE-4P-h0p"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eJg-wB-7Qt" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leading" id="IT6-Gg-jns"/>
+                            <constraint firstItem="eJg-wB-7Qt" firstAttribute="top" secondItem="mGZ-Ds-X35" secondAttribute="bottom" id="KmE-Ne-c70"/>
+                            <constraint firstAttribute="bottom" secondItem="hcn-tl-j5p" secondAttribute="bottom" id="LSH-do-vzr"/>
+                            <constraint firstItem="yLM-Cn-grC" firstAttribute="top" secondItem="ivU-li-0UL" secondAttribute="bottom" constant="20" id="LT6-my-hNK"/>
+                            <constraint firstItem="z9I-br-A6V" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leadingMargin" id="NCz-J9-4rO"/>
+                            <constraint firstItem="z9I-br-A6V" firstAttribute="top" secondItem="QQu-Uh-EWF" secondAttribute="bottom" constant="16" id="R4S-Re-feD"/>
+                            <constraint firstAttribute="trailing" secondItem="eJg-wB-7Qt" secondAttribute="trailing" id="W2o-oi-qHG"/>
+                            <constraint firstAttribute="trailing" secondItem="hcn-tl-j5p" secondAttribute="trailing" id="XMD-ZL-t4D"/>
+                            <constraint firstItem="QQu-Uh-EWF" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leading" id="bgM-qZ-4CU"/>
+                            <constraint firstAttribute="trailing" secondItem="QQu-Uh-EWF" secondAttribute="trailing" id="f5c-CT-n9T"/>
+                            <constraint firstItem="hcn-tl-j5p" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leading" id="fRg-TX-ryu"/>
+                            <constraint firstItem="ivU-li-0UL" firstAttribute="trailing" secondItem="V8Q-QV-he3" secondAttribute="trailingMargin" id="ncG-dt-iha"/>
+                            <constraint firstItem="hcn-tl-j5p" firstAttribute="top" secondItem="QQu-Uh-EWF" secondAttribute="bottom" id="pM0-I0-rBm"/>
+                            <constraint firstItem="QQu-Uh-EWF" firstAttribute="top" secondItem="mGZ-Ds-X35" secondAttribute="bottom" id="v4f-Xl-xkt"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Route" image="CSTabBar_plan_route.png" id="jIO-a4-8yd"/>
@@ -978,7 +1048,7 @@ You can add a point via your current position or search for a known one.</string
                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This route contains walking sections" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kzo-VE-sQz">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="This route contains walking sections" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzo-VE-sQz">
                             <rect key="frame" x="57" y="3" width="253" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
@@ -987,7 +1057,7 @@ You can add a point via your current position or search for a known one.</string
                             <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <size key="shadowOffset" width="0.0" height="1"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="UIIcon_walking.png" id="aPZ-0u-iP0">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="UIIcon_walking.png" translatesAutoresizingMaskIntoConstraints="NO" id="aPZ-0u-iP0">
                             <rect key="frame" x="3" y="2" width="26" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                         </imageView>
@@ -996,28 +1066,32 @@ You can add a point via your current position or search for a known one.</string
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PNj-bY-KQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3604" y="-538"/>
+            <point key="canvasLocation" x="-3685.5" y="-628"/>
         </scene>
         <!--Listview Controller-->
         <scene sceneID="71l-NE-fee">
             <objects>
                 <viewController id="32T-uj-MkP" customClass="POIListviewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Zt-a5-u1L"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lv4-xD-eFB"/>
+                    </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="N0s-Rf-c9O">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="g4X-8m-nKo">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g4X-8m-nKo">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points of interest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xvf-e7-b7q">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points of interest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvf-e7-b7q">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5b3-mF-ryS">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5b3-mF-ryS">
                                         <rect key="frame" x="226" y="13" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -1035,7 +1109,7 @@ You can add a point via your current position or search for a known one.</string
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="U2v-Nc-l14">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="U2v-Nc-l14">
                                 <rect key="frame" x="0.0" y="84" width="280" height="256"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.89009666442871094" green="0.89009666442871094" blue="0.89009666442871094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1046,11 +1120,11 @@ You can add a point via your current position or search for a known one.</string
                                     <outlet property="delegate" destination="32T-uj-MkP" id="CLE-NI-1gs"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" id="XIm-Rh-yS9">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIm-Rh-yS9">
                                 <rect key="frame" x="0.0" y="42" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cS6-Sk-PGK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS6-Sk-PGK">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
@@ -1086,22 +1160,26 @@ You can add a point via your current position or search for a known one.</string
         <scene sceneID="ZHo-k0-cIu">
             <objects>
                 <viewController id="n2W-Rc-OE0" customClass="WayPointViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jy0-mi-8Bj"/>
+                        <viewControllerLayoutGuide type="bottom" id="NuP-0U-imG"/>
+                    </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="BtV-aG-yIn">
                         <rect key="frame" x="0.0" y="0.0" width="280" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="6TG-cy-41q">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6TG-cy-41q">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waypoints" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6jw-pk-2dN">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waypoints" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jw-pk-2dN">
                                         <rect key="frame" x="8" y="10" width="264" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="enw-xe-YIR">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enw-xe-YIR">
                                         <rect key="frame" x="226" y="10" width="46" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -1119,7 +1197,7 @@ You can add a point via your current position or search for a known one.</string
                                     <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BlS-Wk-fPK" customClass="FMMoveTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="BlS-Wk-fPK" customClass="FMMoveTableView">
                                 <rect key="frame" x="0.0" y="84" width="280" height="256"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.926128089427948" green="0.91659212112426758" blue="0.91182339191436768" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1130,11 +1208,11 @@ You can add a point via your current position or search for a known one.</string
                                     <outlet property="delegate" destination="n2W-Rc-OE0" id="3MZ-cg-OQe"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" id="yHY-I5-HtJ">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHY-I5-HtJ">
                                 <rect key="frame" x="0.0" y="42" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="33D-tf-exp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33D-tf-exp">
                                         <rect key="frame" x="8" y="0.0" width="264" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <string key="text">Select a waypoint to zoom to it.
@@ -1187,12 +1265,16 @@ Drag a waypoint to re-order it.</string>
         <scene sceneID="z9k-bB-21Y">
             <objects>
                 <viewController id="rBP-B5-p8y" customClass="SavedLocationsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AOW-g5-M0b"/>
+                        <viewControllerLayoutGuide type="bottom" id="djd-pf-64S"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VLq-oC-DMJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8kV-oh-lqP" customClass="FMMoveTableView">
-                                <rect key="frame" x="0.0" y="41" width="375" height="513"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8kV-oh-lqP" customClass="FMMoveTableView">
+                                <rect key="frame" x="0.0" y="41" width="375" height="600"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.926128089427948" green="0.91659212112426758" blue="0.91182339191436768" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.79277843236923218" green="0.79277843236923218" blue="0.79277843236923218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1202,11 +1284,11 @@ Drag a waypoint to re-order it.</string>
                                     <outlet property="delegate" destination="rBP-B5-p8y" id="fUK-Wl-mT4"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" id="vfG-48-DBH">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfG-48-DBH">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage and rename your saved locations." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vmb-3z-v8A">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Manage and rename your saved locations." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmb-3z-v8A">
                                         <rect key="frame" x="8" y="0.0" width="304" height="42"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>

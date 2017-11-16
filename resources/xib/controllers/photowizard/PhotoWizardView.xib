@@ -1,8 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment version="4096" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </array>
+        <array key="ZapfDingbats.ttf">
+            <string>ZapfDingbatsITC</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoWizardViewController">
             <connections>
@@ -51,50 +68,54 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="15">
-                    <rect key="frame" x="0.0" y="82" width="320" height="370"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="15">
+                    <rect key="frame" x="0.0" y="84" width="320" height="366"/>
+                    <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </scrollView>
-                <view contentMode="scaleToFill" id="16">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16">
                     <rect key="frame" x="0.0" y="450" width="320" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="17">
-                            <rect key="frame" x="140" y="-3" width="38" height="36"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="17">
+                            <rect key="frame" x="140" y="-3" width="39" height="36"/>
                         </pageControl>
                     </subviews>
-                    <color key="backgroundColor" white="0.61149284640000001" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.61149287223815918" green="0.61149287223815918" blue="0.61149287223815918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="17" secondAttribute="bottom" constant="-3" id="Zv3-Pi-36S"/>
+                        <constraint firstItem="17" firstAttribute="top" secondItem="16" secondAttribute="top" constant="-3" id="igM-Ug-qSn"/>
+                        <constraint firstItem="17" firstAttribute="centerX" secondItem="16" secondAttribute="centerX" id="lgh-5a-QwZ"/>
+                        <constraint firstAttribute="height" constant="30" id="nTV-6G-ia1"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" id="128">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="128">
                     <rect key="frame" x="0.0" y="64" width="320" height="20"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Upload" lineBreakMode="tailTruncation" minimumFontSize="10" id="129">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Photo Upload" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="129">
                             <rect key="frame" x="10" y="0.0" width="145" height="19"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 of 7" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="131">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="1 of 7" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="131">
                             <rect key="frame" x="243" y="0.0" width="65" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.61149284640000001" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.61149287223815918" green="0.61149287223815918" blue="0.61149287223815918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Tb9-sG-lDh"/>
+                    </constraints>
                 </view>
-                <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="171">
+                <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="171">
                     <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
                         <barButtonItem title="Cancel" id="179">
-                            <color key="tintColor" red="0.98431378599999997" green="0.57633872129999997" blue="0.2929361929" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="tintColor" red="0.97090393304824829" green="0.49860295653343201" blue="0.23119646310806274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="closeWindowButtonSelected:" destination="-1" id="180"/>
                             </connections>
@@ -111,13 +132,30 @@
                             </connections>
                         </barButtonItem>
                     </items>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="barTintColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </toolbar>
             </subviews>
-            <color key="backgroundColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="15" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="2q5-al-8IC"/>
+                <constraint firstItem="128" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="6VM-JU-t0d"/>
+                <constraint firstItem="16" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="E2J-NF-XJM"/>
+                <constraint firstItem="171" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="Gpc-71-nyW"/>
+                <constraint firstItem="171" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="Jtr-Zh-6Dm"/>
+                <constraint firstItem="16" firstAttribute="bottom" secondItem="K2M-jI-DnS" secondAttribute="bottom" id="MnO-YS-CLW"/>
+                <constraint firstItem="128" firstAttribute="top" secondItem="171" secondAttribute="bottom" id="g7E-MJ-iVz"/>
+                <constraint firstItem="16" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="mhz-3s-92H"/>
+                <constraint firstItem="128" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="p1j-s8-T1U"/>
+                <constraint firstItem="15" firstAttribute="top" secondItem="128" secondAttribute="bottom" id="s1L-Ae-wNW"/>
+                <constraint firstItem="16" firstAttribute="top" secondItem="15" secondAttribute="bottom" id="sDi-qh-oCB"/>
+                <constraint firstItem="171" firstAttribute="top" secondItem="K2M-jI-DnS" secondAttribute="top" id="vvY-9P-9ri"/>
+                <constraint firstItem="15" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="zav-gz-I8D"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="K2M-jI-DnS"/>
+            <point key="canvasLocation" x="-685" y="339"/>
         </view>
         <view contentMode="scaleToFill" id="11">
             <rect key="frame" x="0.0" y="0.0" width="320" height="365"/>
@@ -126,194 +164,269 @@
                 <userLayoutGuide location="160" affinity="minX"/>
             </userGuides>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="12">
-                    <rect key="frame" x="20" y="20" width="172" height="139"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                    <rect key="frame" x="20" y="20" width="200" height="140"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label="Image preview"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="140" id="Zlo-hJ-9iF"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="apA-Bt-TPB"/>
+                    </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="13">
-                    <rect key="frame" x="20" y="178" width="114" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Take a new photo"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="Camera">
-                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="cameraButtonSelected:" destination="-1" eventType="touchUpInside" id="91"/>
-                    </connections>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Size:" lineBreakMode="tailTruncation" minimumFontSize="10" id="18">
-                    <rect key="frame" x="200" y="20" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" minimumFontSize="10" id="19">
-                    <rect key="frame" x="200" y="43" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="22">
-                    <rect key="frame" x="191" y="178" width="114" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Pick photo from library"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="Library">
-                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="libraryButtonSelected:" destination="-1" eventType="touchUpInside" id="92"/>
-                    </connections>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="62">
-                    <rect key="frame" x="20" y="228" width="271" height="73"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="j8L-4l-LcH">
+                    <rect key="frame" x="20" y="178" width="280" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                            <rect key="frame" x="0.0" y="0.0" width="125" height="30"/>
+                            <accessibility key="accessibilityConfiguration" label="Take a new photo"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                            <state key="normal" title="Camera">
+                                <color key="titleColor" red="0.96936076879501343" green="0.3836485743522644" blue="0.093946248292922974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="cameraButtonSelected:" destination="-1" eventType="touchUpInside" id="91"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                            <rect key="frame" x="155" y="0.0" width="125" height="30"/>
+                            <accessibility key="accessibilityConfiguration" label="Pick photo from library"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                            <state key="normal" title="Library">
+                                <color key="titleColor" red="0.96936076879501343" green="0.3836485743522644" blue="0.093946248292922974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="libraryButtonSelected:" destination="-1" eventType="touchUpInside" id="92"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="RVp-tS-VYe">
+                    <rect key="frame" x="230" y="20" width="70" height="130.5"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UYr-qr-J9B">
+                            <rect key="frame" x="0.0" y="0.0" width="70" height="33.5"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Size:" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="18">
+                                    <rect key="frame" x="0.0" y="0.0" width="70" height="17"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                                    <rect key="frame" x="0.0" y="17" width="70" height="16.5"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uEq-u5-WRc">
+                            <rect key="frame" x="0.0" y="48.5" width="70" height="33.5"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Has location:" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="155">
+                                    <rect key="frame" x="0.0" y="0.0" width="70" height="17"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="156">
+                                    <rect key="frame" x="0.0" y="17" width="70" height="16.5"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vR3-uD-aNb">
+                            <rect key="frame" x="0.0" y="97" width="70" height="33.5"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date:" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="161">
+                                    <rect key="frame" x="0.0" y="0.0" width="70" height="17"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="162">
+                                    <rect key="frame" x="0.0" y="17" width="70" height="16.5"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="62">
+                    <rect key="frame" x="20" y="228" width="280" height="65.5"/>
                     <string key="text">Take a new photo or choose one from your library. This photo will be uploaded at the resolution set in your Settings or the actual size if using wifi.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Has location:" lineBreakMode="tailTruncation" minimumFontSize="10" id="155">
-                    <rect key="frame" x="200" y="68" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" minimumFontSize="10" id="156">
-                    <rect key="frame" x="200" y="88" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date:" lineBreakMode="tailTruncation" minimumFontSize="10" id="161">
-                    <rect key="frame" x="200" y="117" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="tailTruncation" minimumFontSize="10" id="162">
-                    <rect key="frame" x="200" y="137" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="12" firstAttribute="leading" secondItem="2Aa-2v-mEC" secondAttribute="leading" constant="20" id="9h4-QJ-Sha"/>
+                <constraint firstItem="RVp-tS-VYe" firstAttribute="top" secondItem="2Aa-2v-mEC" secondAttribute="top" constant="20" id="Esc-lf-No7"/>
+                <constraint firstItem="2Aa-2v-mEC" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="62" secondAttribute="bottom" constant="20" id="HA3-au-GeW"/>
+                <constraint firstItem="j8L-4l-LcH" firstAttribute="leading" secondItem="2Aa-2v-mEC" secondAttribute="leading" constant="20" id="HKq-85-YeU"/>
+                <constraint firstItem="62" firstAttribute="leading" secondItem="2Aa-2v-mEC" secondAttribute="leading" constant="20" id="KQ3-BH-eKE"/>
+                <constraint firstItem="j8L-4l-LcH" firstAttribute="top" secondItem="12" secondAttribute="bottom" constant="18" id="PjB-nJ-fzJ"/>
+                <constraint firstItem="62" firstAttribute="top" secondItem="j8L-4l-LcH" secondAttribute="bottom" constant="20" id="Vyx-hx-MTv"/>
+                <constraint firstItem="2Aa-2v-mEC" firstAttribute="trailing" secondItem="RVp-tS-VYe" secondAttribute="trailing" constant="20" id="Yb1-Zj-nL5"/>
+                <constraint firstItem="12" firstAttribute="top" secondItem="2Aa-2v-mEC" secondAttribute="top" constant="20" id="aCQ-0V-ZgD"/>
+                <constraint firstItem="RVp-tS-VYe" firstAttribute="leading" secondItem="12" secondAttribute="trailing" constant="10" id="meb-zM-oA7"/>
+                <constraint firstItem="2Aa-2v-mEC" firstAttribute="trailing" secondItem="j8L-4l-LcH" secondAttribute="trailing" constant="20" id="rkD-cV-PH2"/>
+                <constraint firstItem="2Aa-2v-mEC" firstAttribute="trailing" secondItem="62" secondAttribute="trailing" constant="20" id="vkP-nm-yEX"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="2Aa-2v-mEC"/>
+            <point key="canvasLocation" x="-250" y="820.5"/>
         </view>
         <view contentMode="scaleToFill" id="23">
             <rect key="frame" x="0.0" y="0.0" width="320" height="347"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Caption" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="27">
-                    <rect key="frame" x="20" y="14" width="280" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add your description here" textAlignment="center" id="31">
-                    <rect key="frame" x="20" y="28" width="280" height="56"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <accessibility key="accessibilityConfiguration" label="Photo description field"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="200"/>
-                    </connections>
-                </textView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="64">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="97l-8Q-OIh">
+                    <rect key="frame" x="20" y="15" width="280" height="71"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Caption" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="27">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="21"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add your description here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="31">
+                            <rect key="frame" x="0.0" y="21" width="280" height="50"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <accessibility key="accessibilityConfiguration" label="Photo description field"/>
+                            <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="200"/>
+                            </connections>
+                        </textView>
+                    </subviews>
+                </stackView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="64">
                     <rect key="frame" x="20" y="91" width="280" height="236"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="236" id="lEM-A4-Sqb"/>
+                    </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="EDH-FL-eFw" firstAttribute="trailing" secondItem="97l-8Q-OIh" secondAttribute="trailing" constant="20" id="9YK-XK-qzF"/>
+                <constraint firstItem="97l-8Q-OIh" firstAttribute="leading" secondItem="EDH-FL-eFw" secondAttribute="leading" constant="20" id="LR2-oE-xEw"/>
+                <constraint firstItem="64" firstAttribute="top" secondItem="97l-8Q-OIh" secondAttribute="bottom" constant="5" id="MfJ-kS-baV"/>
+                <constraint firstItem="EDH-FL-eFw" firstAttribute="trailing" secondItem="64" secondAttribute="trailing" constant="20" id="Z46-fu-dRj"/>
+                <constraint firstAttribute="bottom" secondItem="64" secondAttribute="bottom" constant="20" symbolic="YES" id="f07-4N-rey"/>
+                <constraint firstItem="97l-8Q-OIh" firstAttribute="top" secondItem="EDH-FL-eFw" secondAttribute="top" constant="15" id="fDg-wa-F0P"/>
+                <constraint firstItem="64" firstAttribute="leading" secondItem="EDH-FL-eFw" secondAttribute="leading" constant="20" id="rij-3U-PwQ"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="EDH-FL-eFw"/>
+            <point key="canvasLocation" x="317" y="1252.5"/>
         </view>
         <view contentMode="scaleToFill" id="33">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="324"/>
+            <rect key="frame" x="0.0" y="0.0" width="387" height="324"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report Upload" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="34">
-                    <rect key="frame" x="20" y="20" width="280" height="23"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="35">
-                    <rect key="frame" x="20" y="51" width="280" height="98"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">Press Upload to add this report to CycleStreets. 
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HEt-Gl-Bwk">
+                    <rect key="frame" x="20" y="20" width="387" height="202.5"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-O3-Q3r">
+                            <rect key="frame" x="0.0" y="0.0" width="387" height="109.5"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report Upload" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="34">
+                                    <rect key="frame" x="0.0" y="0.0" width="387" height="22.5"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                                    <rect key="frame" x="0.0" y="27.5" width="387" height="82"/>
+                                    <string key="text">Press Upload to add this report to CycleStreets. 
 
 Once uploaded this data will appear in the Report section for the chosen location.
 </string>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="36">
-                    <rect key="frame" x="94" y="198" width="133" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="Upload your photo"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="Upload Photo">
-                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
-                    </userDefinedRuntimeAttributes>
-                </button>
-                <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" id="39">
-                    <rect key="frame" x="46" y="172" width="229" height="4"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="trackTintColor" red="0.29019609089999998" green="0.5411764979" blue="0.1294117719" alpha="1" colorSpace="deviceRGB"/>
-                </progressView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ready to upload" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="65" customClass="ExpandedUILabel">
-                    <rect key="frame" x="20" y="243" width="280" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="39">
+                            <rect key="frame" x="173.5" y="129.5" width="240" height="2.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="240" id="CrI-Y2-akt"/>
+                            </constraints>
+                            <color key="progressTintColor" red="0.31205567719999999" green="0.5936256647" blue="0.1239159629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="trackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </progressView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EQs-hO-KNl">
+                            <rect key="frame" x="0.0" y="151" width="387" height="51.5"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                                    <rect key="frame" x="173.5" y="0.0" width="120" height="30"/>
+                                    <accessibility key="accessibilityConfiguration" label="Upload your photo"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="120" id="gr7-Xu-DWC"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                    <state key="normal" title="Upload Photo">
+                                        <color key="titleColor" red="0.96936076879501343" green="0.3836485743522644" blue="0.093946248292922974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ready to upload" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="65" customClass="ExpandedUILabel">
+                                    <rect key="frame" x="0.0" y="35" width="387" height="16.5"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                </stackView>
             </subviews>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="HEt-Gl-Bwk" secondAttribute="trailing" constant="20" id="bsY-tg-ia1"/>
+                <constraint firstItem="HEt-Gl-Bwk" firstAttribute="top" secondItem="vK6-HU-org" secondAttribute="top" constant="20" id="kfj-iq-JbU"/>
+                <constraint firstItem="HEt-Gl-Bwk" firstAttribute="leading" secondItem="vK6-HU-org" secondAttribute="leading" constant="20" id="y0t-7u-jw2"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vK6-HU-org"/>
+            <point key="canvasLocation" x="435.5" y="510"/>
         </view>
         <view contentMode="scaleToFill" id="51">
             <rect key="frame" x="0.0" y="0.0" width="320" height="363"/>
@@ -322,99 +435,130 @@ Once uploaded this data will appear in the Report section for the chosen locatio
                 <userLayoutGuide location="160" affinity="minX"/>
             </userGuides>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Location:" lineBreakMode="tailTruncation" minimumFontSize="10" id="58">
-                    <rect key="frame" x="20" y="223" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0,0" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="57">
-                    <rect key="frame" x="93" y="223" width="205" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="53">
-                    <rect key="frame" x="74" y="317" width="172" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="n6O-sH-37A">
+                    <rect key="frame" x="20" y="240" width="75.5" height="17"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Location:" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="58">
+                            <rect key="frame" x="0.0" y="0.0" width="56" height="17"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0,0" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="57">
+                            <rect key="frame" x="56" y="0.0" width="19.5" height="17"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53">
+                    <rect key="frame" x="100" y="331" width="120" height="36"/>
                     <accessibility key="accessibilityConfiguration" label="Change photo location"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="H94-9t-61r"/>
+                        <constraint firstAttribute="height" constant="36" id="HO0-Ka-9AN"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <state key="normal" title="Edit Location">
-                        <color key="titleColor" red="0.96862745098039216" green="0.38039215686274508" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.96862745098039216" green="0.38039215686274508" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
                     </userDefinedRuntimeAttributes>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="63">
-                    <rect key="frame" x="20" y="243" width="279" height="66"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="63">
+                    <rect key="frame" x="20" y="262" width="280" height="49"/>
                     <string key="text">If the location shown is not accurate for this photo, or if it doesn't have an embedded location, press Edit Location to adjust it.</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsPointsOfInterest="NO" id="U4I-Pg-Cke">
-                    <rect key="frame" x="20" y="25" width="280" height="183"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="tintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4I-Pg-Cke">
+                    <rect key="frame" x="20" y="25" width="280" height="200"/>
+                    <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="h18-5p-ebm"/>
+                    </constraints>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="210">
-                    <rect key="frame" x="20" y="25" width="280" height="183"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="210">
+                    <rect key="frame" x="20" y="25" width="280" height="200"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal">
-                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="locationButtonSelected:" destination="-1" eventType="touchUpInside" id="211"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="U4I-Pg-Cke" firstAttribute="top" secondItem="y8V-w7-8X6" secondAttribute="top" constant="25" id="1dc-uX-Jrg"/>
+                <constraint firstItem="63" firstAttribute="leading" secondItem="y8V-w7-8X6" secondAttribute="leading" constant="20" id="3Sn-ro-HEQ"/>
+                <constraint firstItem="y8V-w7-8X6" firstAttribute="trailing" secondItem="63" secondAttribute="trailing" constant="20" id="59d-Ck-Gtl"/>
+                <constraint firstItem="210" firstAttribute="width" secondItem="U4I-Pg-Cke" secondAttribute="width" id="Aul-XH-TJM"/>
+                <constraint firstItem="53" firstAttribute="centerX" secondItem="51" secondAttribute="centerX" id="Ba4-WQ-diG"/>
+                <constraint firstItem="210" firstAttribute="centerY" secondItem="U4I-Pg-Cke" secondAttribute="centerY" id="Gdk-il-5mA"/>
+                <constraint firstItem="63" firstAttribute="top" secondItem="n6O-sH-37A" secondAttribute="bottom" constant="5" id="Ki7-is-vJx"/>
+                <constraint firstItem="n6O-sH-37A" firstAttribute="top" secondItem="U4I-Pg-Cke" secondAttribute="bottom" constant="15" id="QcV-F5-jAw"/>
+                <constraint firstItem="n6O-sH-37A" firstAttribute="leading" secondItem="y8V-w7-8X6" secondAttribute="leading" constant="20" id="Toa-Bl-dyu"/>
+                <constraint firstItem="53" firstAttribute="top" secondItem="63" secondAttribute="bottom" constant="20" id="UqK-nw-jgv"/>
+                <constraint firstItem="53" firstAttribute="top" secondItem="63" secondAttribute="bottom" constant="20" id="cbE-90-gCE"/>
+                <constraint firstItem="210" firstAttribute="height" secondItem="U4I-Pg-Cke" secondAttribute="height" id="eXQ-fK-aNz"/>
+                <constraint firstItem="y8V-w7-8X6" firstAttribute="trailing" secondItem="U4I-Pg-Cke" secondAttribute="trailing" constant="20" id="hg4-Wb-n8h"/>
+                <constraint firstItem="210" firstAttribute="centerX" secondItem="51" secondAttribute="centerX" id="rpl-ti-imR"/>
+                <constraint firstItem="U4I-Pg-Cke" firstAttribute="leading" secondItem="y8V-w7-8X6" secondAttribute="leading" constant="20" id="wg3-EB-odF"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="y8V-w7-8X6"/>
+            <point key="canvasLocation" x="-230" y="1316.5"/>
         </view>
         <view contentMode="scaleToFill" id="113">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="283"/>
+            <rect key="frame" x="0.0" y="0.0" width="364" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report a problem" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="118">
-                    <rect key="frame" x="20" y="20" width="280" height="23"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="117">
-                    <rect key="frame" x="20" y="41" width="280" height="91"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <string key="text">Use this tool to capture, descibe and upload your Cycling infrastructure-related photos. 
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mdo-vo-4ox">
+                    <rect key="frame" x="20" y="40" width="364" height="81.5"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report a problem" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="118">
+                            <rect key="frame" x="0.0" y="0.0" width="364" height="22.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="117">
+                            <rect key="frame" x="0.0" y="32.5" width="364" height="49"/>
+                            <string key="text">Use this tool to capture, descibe and upload your Cycling infrastructure-related photos. 
 Once uploaded they'll appear in the Report section.</string>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="122">
-                    <rect key="frame" x="94" y="226" width="133" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="122">
+                    <rect key="frame" x="182" y="222" width="150" height="37"/>
                     <accessibility key="accessibilityConfiguration" label="Continue"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="DGx-e8-rks"/>
+                        <constraint firstAttribute="width" constant="150" id="clZ-CR-Slv"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                     <state key="normal" title="Continue">
-                        <color key="titleColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.96936076879501343" green="0.3836485743522644" blue="0.093946248292922974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
@@ -424,141 +568,199 @@ Once uploaded they'll appear in the Report section.</string>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Mdo-vo-4ox" firstAttribute="leading" secondItem="UcA-4v-N1q" secondAttribute="leading" constant="20" id="3Z2-c3-Vuj"/>
+                <constraint firstItem="Mdo-vo-4ox" firstAttribute="top" secondItem="UcA-4v-N1q" secondAttribute="top" constant="20" id="Vi3-u9-G3d"/>
+                <constraint firstItem="122" firstAttribute="centerX" secondItem="113" secondAttribute="centerX" id="gEE-eO-8dN"/>
+                <constraint firstItem="122" firstAttribute="top" secondItem="Mdo-vo-4ox" secondAttribute="bottom" constant="100" id="ohj-us-yar"/>
+                <constraint firstAttribute="trailing" secondItem="Mdo-vo-4ox" secondAttribute="trailing" constant="20" id="qia-hN-lKa"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="UcA-4v-N1q"/>
+            <point key="canvasLocation" x="-675" y="971.5"/>
         </view>
         <view contentMode="scaleToFill" id="141">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="375"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="405"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Uploaded" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="146">
-                    <rect key="frame" x="20" y="15" width="275" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
-                    <color key="textColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="1"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your photo was uploaded to CycleStreets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="145">
-                    <rect key="frame" x="20" y="150" width="275" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="144">
-                    <rect key="frame" x="91" y="264" width="133" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <accessibility key="accessibilityConfiguration" label="View your photo on map"/>
-                    <state key="normal" title="View map">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
-                    </userDefinedRuntimeAttributes>
-                </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="✔" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="152">
-                    <rect key="frame" x="114" y="35" width="93" height="109"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="128"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                    <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="If you wish to see your photo in situ please use the View map button below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="153">
-                    <rect key="frame" x="20" y="219" width="275" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="cs photo url???" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="154" customClass="CopyLabel">
-                    <rect key="frame" x="20" y="176" width="275" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.23137255009999999" green="0.46666666870000001" blue="0.082352943720000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8sj-pw-852">
+                    <rect key="frame" x="20" y="15" width="375" height="160.5"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Uploaded" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="146">
+                            <rect key="frame" x="167.5" y="0.0" width="134" height="23.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                            <color key="textColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="1"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="✔" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="152">
+                            <rect key="frame" x="167.5" y="33.5" width="108.5" height="127"/>
+                            <fontDescription key="fontDescription" name="ZapfDingbatsITC" family="Zapf Dingbats" pointSize="128"/>
+                            <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                            <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N4j-bp-G6t">
+                    <rect key="frame" x="20" y="185" width="375" height="43"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Your photo was uploaded to CycleStreets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="145">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="16.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="cs photo url???" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="154" customClass="CopyLabel">
+                            <rect key="frame" x="0.0" y="26.5" width="375" height="16.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.23137255009999999" green="0.46666666870000001" blue="0.082352943720000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0F6-K4-nJm">
+                    <rect key="frame" x="20" y="238" width="375" height="73"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="If you wish to see your photo in situ please use the View map button below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="153">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="33"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="144">
+                            <rect key="frame" x="167.5" y="43" width="67" height="30"/>
+                            <accessibility key="accessibilityConfiguration" label="View your photo on map"/>
+                            <state key="normal" title="View map">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="photoWizardActionButon"/>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="0F6-K4-nJm" firstAttribute="top" secondItem="N4j-bp-G6t" secondAttribute="bottom" constant="10" id="0Ps-qO-g1H"/>
+                <constraint firstItem="0F6-K4-nJm" firstAttribute="leading" secondItem="141" secondAttribute="leading" constant="20" id="5xF-Dx-Jwe"/>
+                <constraint firstAttribute="trailing" secondItem="8sj-pw-852" secondAttribute="trailing" constant="20" id="MzK-wu-Gzc"/>
+                <constraint firstItem="N4j-bp-G6t" firstAttribute="top" secondItem="8sj-pw-852" secondAttribute="bottom" constant="10" id="daW-LL-h39"/>
+                <constraint firstItem="N4j-bp-G6t" firstAttribute="leading" secondItem="Nl9-wh-Gk1" secondAttribute="leading" constant="20" id="e58-3s-Fdh"/>
+                <constraint firstAttribute="trailing" secondItem="0F6-K4-nJm" secondAttribute="trailing" constant="20" id="rof-ja-bf9"/>
+                <constraint firstItem="8sj-pw-852" firstAttribute="leading" secondItem="141" secondAttribute="leading" constant="20" id="vY1-vY-3Lg"/>
+                <constraint firstItem="8sj-pw-852" firstAttribute="top" secondItem="Nl9-wh-Gk1" secondAttribute="top" constant="15" id="xDp-QZ-BGW"/>
+                <constraint firstAttribute="trailing" secondItem="N4j-bp-G6t" secondAttribute="trailing" constant="20" id="zbI-Yu-Zng"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Nl9-wh-Gk1"/>
+            <point key="canvasLocation" x="-231.5" y="78.5"/>
         </view>
         <view contentMode="scaleToFill" id="185">
             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Category" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="186">
-                    <rect key="frame" x="20" y="15" width="280" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This photo represents..." lineBreakMode="tailTruncation" minimumFontSize="10" id="190">
-                    <rect key="frame" x="20" y="97" width="249" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category..." lineBreakMode="tailTruncation" minimumFontSize="10" id="193">
-                    <rect key="frame" x="20" y="150" width="249" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Choose what this photo represents and the category it should be in." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" id="bED-NZ-lQ3">
-                    <rect key="frame" x="20" y="46" width="280" height="43"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="click here..." adjustsFontSizeToFit="NO" minimumFontSize="17" id="mtp-ZE-p1N">
-                    <rect key="frame" x="20" y="117" width="249" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="textColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="aZs-Ot-ETa"/>
-                    </connections>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="click here..." adjustsFontSizeToFit="NO" minimumFontSize="17" id="LJR-HH-uIU">
-                    <rect key="frame" x="20" y="171" width="249" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="textColor" red="0.98431378599999997" green="0.47058826679999999" blue="0.11372549830000001" alpha="1" colorSpace="deviceRGB"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="wK2-tg-tCx"/>
-                    </connections>
-                </textField>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Uu9-Dg-sZ2">
-                    <rect key="frame" x="107" y="216" width="107" height="100"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="D9H-br-6Ai">
+                    <rect key="frame" x="20" y="15" width="320" height="65.5"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo Category" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="186">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="22.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Choose what this photo represents and the category it should be in." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="bED-NZ-lQ3">
+                            <rect key="frame" x="0.0" y="32.5" width="320" height="33"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Wkm-TN-KbA">
+                    <rect key="frame" x="20" y="100.5" width="320" height="34"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This photo represents..." lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="190">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="17"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="click here..." adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mtp-ZE-p1N">
+                            <rect key="frame" x="0.0" y="17" width="320" height="17"/>
+                            <color key="textColor" red="0.96936076879501343" green="0.3836485743522644" blue="0.093946248292922974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="aZs-Ot-ETa"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="R1l-as-nWO">
+                    <rect key="frame" x="20" y="154.5" width="320" height="34"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category..." lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="193">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="17"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="click here..." adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LJR-HH-uIU">
+                            <rect key="frame" x="0.0" y="17" width="320" height="17"/>
+                            <color key="textColor" red="0.96936076879501343" green="0.3836485743522644" blue="0.093946248292922974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="wK2-tg-tCx"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uu9-Dg-sZ2">
+                    <rect key="frame" x="160" y="218.5" width="110" height="110"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="1bC-Xc-KJZ"/>
+                        <constraint firstAttribute="width" constant="110" id="St5-yj-Ghr"/>
+                    </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="D9H-br-6Ai" firstAttribute="leading" secondItem="Fl8-nN-ASJ" secondAttribute="leading" constant="20" id="9gr-aW-idz"/>
+                <constraint firstAttribute="trailing" secondItem="D9H-br-6Ai" secondAttribute="trailing" constant="20" id="Bf8-ws-Cd8"/>
+                <constraint firstItem="Wkm-TN-KbA" firstAttribute="top" secondItem="D9H-br-6Ai" secondAttribute="bottom" constant="20" id="Bug-Oo-kP3"/>
+                <constraint firstItem="Uu9-Dg-sZ2" firstAttribute="top" secondItem="R1l-as-nWO" secondAttribute="bottom" constant="30" id="FBx-g9-r1W"/>
+                <constraint firstItem="R1l-as-nWO" firstAttribute="top" secondItem="Wkm-TN-KbA" secondAttribute="bottom" constant="20" id="FdJ-MK-w9b"/>
+                <constraint firstItem="R1l-as-nWO" firstAttribute="leading" secondItem="Fl8-nN-ASJ" secondAttribute="leading" constant="20" id="K60-WP-n0N"/>
+                <constraint firstAttribute="trailing" secondItem="Wkm-TN-KbA" secondAttribute="trailing" constant="20" id="KRA-os-OKb"/>
+                <constraint firstItem="D9H-br-6Ai" firstAttribute="top" secondItem="Fl8-nN-ASJ" secondAttribute="top" constant="15" id="Ldg-U2-ZW2"/>
+                <constraint firstItem="D9H-br-6Ai" firstAttribute="leading" secondItem="Fl8-nN-ASJ" secondAttribute="leading" constant="20" id="Q3d-XL-cqj"/>
+                <constraint firstItem="Fl8-nN-ASJ" firstAttribute="trailing" secondItem="Wkm-TN-KbA" secondAttribute="trailing" constant="20" id="She-lz-Z6U"/>
+                <constraint firstAttribute="trailing" secondItem="D9H-br-6Ai" secondAttribute="trailing" constant="20" id="cOs-sp-yMP"/>
+                <constraint firstItem="Fl8-nN-ASJ" firstAttribute="trailing" secondItem="R1l-as-nWO" secondAttribute="trailing" constant="20" id="ezn-SZ-J71"/>
+                <constraint firstItem="Wkm-TN-KbA" firstAttribute="leading" secondItem="Fl8-nN-ASJ" secondAttribute="leading" constant="20" id="mjn-Eb-fEM"/>
+                <constraint firstItem="Uu9-Dg-sZ2" firstAttribute="centerX" secondItem="185" secondAttribute="centerX" id="q30-9g-5Pf"/>
+                <constraint firstItem="D9H-br-6Ai" firstAttribute="top" secondItem="Fl8-nN-ASJ" secondAttribute="top" constant="15" id="uOm-WY-W8d"/>
+                <constraint firstItem="Wkm-TN-KbA" firstAttribute="leading" secondItem="Fl8-nN-ASJ" secondAttribute="leading" constant="20" id="wgK-gt-yEZ"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Fl8-nN-ASJ"/>
+            <point key="canvasLocation" x="232" y="-176"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

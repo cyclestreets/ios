@@ -39,8 +39,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "GenericConstants.h"
 #import "CycleStreets-Swift.h"
 #import "UIViewController+BUAdditions.h"
+#import "UIView+Additions.h"
 
 static NSString *const STRINGID=@"account";
+
+@import PureLayout;
 
 
 #define kSubmitButtonTag 499
@@ -58,7 +61,7 @@ static NSString *const STRINGID=@"account";
 @property (nonatomic, strong)		IBOutlet UIView                        * pageControlView;
 @property (nonatomic, strong)		IBOutlet UILabel                       * leftLabel;
 @property (nonatomic, strong)		IBOutlet UILabel                       * rightLabel;
-@property (nonatomic, strong)		LayoutBox                              * contentView;
+@property (nonatomic, strong)		UIStackView                             * contentView;
 @property (nonatomic, strong)		IBOutlet UITextField                   * loginUsernameField;
 @property (nonatomic, strong)		IBOutlet UITextField                   * loginPasswordField;
 @property (nonatomic, strong)		IBOutlet UIButton                      * loginButton;
@@ -212,11 +215,13 @@ static NSString *const STRINGID=@"account";
 -(void)createPersistentUI{
 	
 	// set up scroll view with layoutbox for sub items
-	_contentView=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	_contentView=[[UIStackView alloc]initForAutoLayout];
 	_contentView.backgroundColor=[UIColor clearColor];
-	_contentView.layoutMode=BUHorizontalLayoutMode;
-	_contentView.paddingTop=10;
+	_contentView.axis=ALLayoutConstraintAxisHorizontal;
 	[_scrollView addSubview:_contentView];
+	
+	[_contentView autoPinEdgesToSuperviewMarginsExcludingEdge:ALEdgeTop];
+	[_contentView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:15];
 	
 	_activePage=0;
 	_scrollView.pagingEnabled=YES;
@@ -283,13 +288,15 @@ static NSString *const STRINGID=@"account";
 -(void)createNonPersistentUI{
 	
 	[_activeActivityView stopAnimating];
-	[_contentView removeAllSubViews];
+	//[_contentView remo];
 	
 	switch(_viewMode){
 		
 		case kUserAccountLoggedIn:
 			
-			[_contentView addSubview:_loggedInView];
+			[_loggedInView autoSetDimension:ALDimensionWidth toSize:_contentView.width];
+			[_contentView addArrangedSubview:_loggedInView];
+			
 			
 			_loggedInasField.text=[UserAccount sharedInstance].user.username;
 			BOOL sl=[UserAccount sharedInstance].user.autoLogin;
@@ -305,9 +312,15 @@ static NSString *const STRINGID=@"account";
 			_loginUsernameField.text=@"";
 			_loginPasswordField.text=@"";
 			
-			[_contentView addSubview:_registerView];
-			[_contentView addSubview:_loginView];
-			//[contentView addSubview:retrieveView];
+			[_registerView autoSetDimension:ALDimensionWidth toSize:self.view.width];
+			[_registerView autoSetDimension:ALDimensionHeight toSize:_contentView.height];
+			[_contentView addArrangedSubview:_registerView];
+			
+			[_loginView autoSetDimension:ALDimensionWidth toSize:self.view.width];
+			[_loginView autoSetDimension:ALDimensionHeight toSize:_contentView.height];
+			[_contentView addArrangedSubview:_loginView];
+			
+			[self.view layoutIfNeeded];
 			
 			[_scrollView setContentSize:CGSizeMake(_contentView.width, _contentView.height)];
 		break;
@@ -323,14 +336,14 @@ static NSString *const STRINGID=@"account";
 	
 
 	// update page support
-	_pageControl.numberOfPages=[_contentView.items count];
+	_pageControl.numberOfPages=_contentView.subviews.count;
 	_activePage=0;
 	_pageControl.currentPage=_activePage;
 	[_pageControl updateCurrentPageDisplay];
-	_scrollView.scrollEnabled=_contentView.width>SCREENWIDTH;
+	_scrollView.scrollEnabled=_contentView.width>[UIScreen mainScreen].bounds.size.width;
 	[self updateFormPage];
 	
-	[_scrollView scrollRectToVisible:CGRectMake(0, 0, SCREENWIDTH, 1) animated:YES];
+	[_scrollView scrollRectToVisible:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1) animated:YES];
 	
 	
 }

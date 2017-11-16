@@ -330,7 +330,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	_maxVisitedPage=-1;
 	
 	// set up scroll view with layoutbox for sub items
-	self.pageContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
+	self.pageContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, _pageScrollView.width, 10)];
 	_pageContainer.layoutMode=BUHorizontalLayoutMode;
 	
     
@@ -577,7 +577,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		_nextButton.enabled=YES;
 	}
 	
-	CGPoint offset=CGPointMake(_viewState*SCREENWIDTH, 0);
+	CGPoint offset=CGPointMake(_viewState*_pageScrollView.width, 0);
 	[_pageScrollView setContentOffset:offset animated:YES];
 	
     
@@ -601,7 +601,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 		_pageControl.currentPage=_viewState;
 		_activePage=_viewState;
         
-		CGPoint offset=CGPointMake(_viewState*SCREENWIDTH, 0);
+		CGPoint offset=CGPointMake(_viewState*_pageScrollView.width, 0);
 		[_pageScrollView setContentOffset:offset animated:YES];
 		
 		[self updateGlobalViewUIForState];
@@ -716,11 +716,12 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)addViewToPageContainer:(NSMutableDictionary*)viewDict{
 	
 	[viewDict setObject:BOX_BOOL(YES) forKey:@"created"];
-	UIScrollView *sc=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, _pageScrollView.height)];
+	UIScrollView *sc=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, _pageScrollView.width, _pageScrollView.height)];
 	UIView *stateview=[viewDict objectForKey:@"view"];
+	stateview.width=_pageScrollView.width;
 	
 	[sc addSubview:stateview];
-	[sc setContentSize:CGSizeMake(SCREENWIDTH, stateview.height)];
+	[sc setContentSize:CGSizeMake(_pageScrollView.width, stateview.height)];
 	[_pageContainer addSubview:sc];
 		
 	[_pageScrollView setContentSize:CGSizeMake(_pageContainer.width, _pageScrollView.height)];
@@ -738,7 +739,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)sc{
 	BetterLog(@"");
 	CGPoint offset=_pageScrollView.contentOffset;
-	_activePage=offset.x/SCREENWIDTH;
+	_activePage=offset.x/_pageScrollView.width;
 	_pageControl.currentPage=_activePage;
 	_viewState=_activePage;
 	[_pageControl updateCurrentPageDisplay];
@@ -750,7 +751,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoWizard";
 	BetterLog(@"");
 	UIPageControl *pc=(UIPageControl*)sender;
     if(pc.currentPage<=_maxVisitedPage){
-        CGPoint offset=CGPointMake(pc.currentPage*SCREENWIDTH, 0);
+        CGPoint offset=CGPointMake(pc.currentPage*_pageScrollView.width, 0);
         [_pageScrollView setContentOffset:offset animated:YES];
 		_activePage=pc.currentPage;
 		

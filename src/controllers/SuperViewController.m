@@ -366,14 +366,14 @@
 		LayoutBox *contentContainer;
 		
 		if([UIType isEqualToString:UITYPE_CONTROLUI]){
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLUI)];
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SCREENHEIGHTWITHCONTROLUI)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else if ([UIType isEqualToString:UITYPE_CONTROLHEADERUI]) {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 			
 		}else if ([UIType isEqualToString:UITYPE_MODALUI]) {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHMODALNAV)];
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SCREENHEIGHTWITHMODALNAV)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}else if ([UIType isEqualToString:UITYPE_MODALTABLEVIEWUI]) {
 			
@@ -383,10 +383,10 @@
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 			
 		}else if ([UIType isEqualToString:UITYPE_NAVTABUI]) {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, NAVTABVIEWHEIGHT)];
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, NAVTABVIEWHEIGHT)];
+			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, NAVTABVIEWHEIGHT)];
 		}else {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.view.height)];
+			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.view.height)];
 			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
 		}
         

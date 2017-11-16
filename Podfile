@@ -13,6 +13,7 @@ pod 'FMMoveTableView'
 pod 'TouchJSON'
 pod 'TBXML'
 pod 'A2StoryboardSegueContext'
+pod 'PureLayout'
 
 end
 
@@ -26,6 +27,7 @@ target 'CycleStreets Release' do
     pod 'TouchJSON'
     pod 'TBXML'
     pod 'A2StoryboardSegueContext'
+    pod 'PureLayout'
     
 end
 
