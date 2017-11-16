@@ -44,6 +44,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 static NSString *const STRINGID=@"account";
 
 @import PureLayout;
+#import "PureLayout+Additions.h"
 
 
 #define kSubmitButtonTag 499
@@ -220,7 +221,7 @@ static NSString *const STRINGID=@"account";
 	_contentView.axis=ALLayoutConstraintAxisHorizontal;
 	[_scrollView addSubview:_contentView];
 	
-	[_contentView autoPinEdgesToSuperviewMarginsExcludingEdge:ALEdgeTop];
+	[_contentView autoPinEdgesToSuperviewEdgesExcludingEdge:ALEdgeTop];
 	[_contentView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:15];
 	
 	_activePage=0;
@@ -313,11 +314,11 @@ static NSString *const STRINGID=@"account";
 			_loginPasswordField.text=@"";
 			
 			[_registerView autoSetDimension:ALDimensionWidth toSize:self.view.width];
-			[_registerView autoSetDimension:ALDimensionHeight toSize:_contentView.height];
+			[_registerView autoSetDimension:ALDimensionHeight toSize:_scrollView.width];
 			[_contentView addArrangedSubview:_registerView];
 			
 			[_loginView autoSetDimension:ALDimensionWidth toSize:self.view.width];
-			[_loginView autoSetDimension:ALDimensionHeight toSize:_contentView.height];
+			[_loginView autoSetDimension:ALDimensionHeight toSize:_scrollView.width];
 			[_contentView addArrangedSubview:_loginView];
 			
 			[self.view layoutIfNeeded];

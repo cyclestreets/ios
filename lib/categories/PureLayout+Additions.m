@@ -30,6 +30,24 @@
     return constraints;
 }
 
+- (PL__NSArray_of(NSLayoutConstraint *) *)autoPinEdgesToSuperviewEdgesExcludingEdge:(ALEdge)edge
+{
+	__NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
+	if (edge != ALEdgeTop) {
+		[constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeTop]];
+	}
+	if (edge != ALEdgeLeading && edge != ALEdgeLeft) {
+		[constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeLeading]];
+	}
+	if (edge != ALEdgeBottom) {
+		[constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeBottom]];
+	}
+	if (edge != ALEdgeTrailing && edge != ALEdgeRight) {
+		[constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeTrailing]];
+	}
+	return constraints;
+}
+
 
 //- (NSLayoutConstraint *)autoConstrainAttribute:(ALAttribute)attribute toAttribute:(ALAttribute)toAttribute ofView:(ALView *)otherView withOffset:(CGFloat)offset
 //{

@@ -15,5 +15,6 @@
 
 - (NSArray *)autoPinEdgesToSuperviewEdges;
 
+- (PL__NSArray_of(NSLayoutConstraint *) *)autoPinEdgesToSuperviewEdgesExcludingEdge:(ALEdge)edge;
 
 @end
