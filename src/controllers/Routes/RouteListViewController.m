@@ -135,7 +135,7 @@
             self.keys=[GlobalUtilities newTableIndexArrayFromDictionary:_tableDataProvider withSearch:NO ascending:NO];
         }
 		
-		[self createRowHeightsArray];
+		//[self createRowHeightsArray];
 		
 		if([_keys count]>0 && _isSectioned==YES){
 			[self createSectionHeadersArray];
@@ -168,6 +168,9 @@
 - (void)viewDidLoad {
 	
 	[super viewDidLoad];
+	
+	[_tableView registerNib:[RouteCellView nib] forCellReuseIdentifier:[RouteCellView cellIdentifier]];
+	_tableView.rowHeight=UITableViewAutomaticDimension;
 	
 	UIType=UITYPE_CONTROLUI;
 	
@@ -247,7 +250,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
-    RouteCellView *cell = (RouteCellView *)[RouteCellView cellForTableView:table fromNib:[RouteCellView nib]];
+	RouteCellView *cell = [table dequeueReusableCellWithIdentifier:[RouteCellView cellIdentifier]];
 	
 	if(_isSectioned==YES){
 		
@@ -346,7 +349,7 @@
 -(void)favouriteRouteMenuSelected:(UIMenuController*)menuController {
 	
 	
-	FavouriteMenuItem *menuItem = [[[UIMenuController sharedMenuController] menuItems] objectAtIndex:0];
+	FavouriteMenuItem *menuItem = (FavouriteMenuItem*)[[[UIMenuController sharedMenuController] menuItems] objectAtIndex:0];
 	
     if (menuItem.indexPath) {
 		
@@ -391,32 +394,6 @@
 }
 
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	
-	if(_isSectioned==NO){
-		return [[_rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
-	}else{
-		
-		if(_keys.count>0){
-			
-			NSString *key=[_keys objectAtIndex:[indexPath section]];
-			NSMutableArray *arr=[_rowHeightDictionary objectForKey:key];
-			
-			NSInteger rowIndex=[indexPath row];
-			if(rowIndex<[arr count]){
-				CGFloat cellheight=[[arr objectAtIndex:rowIndex] floatValue];
-				return cellheight;
-			}else{
-				return 0;
-			}
-			
-		}else{
-			return 0;
-		}
-		
-	}
-}
 
 
 

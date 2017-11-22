@@ -37,6 +37,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "BuildTargetConstants.h"
 #import "ViewUtilities.h"
 #import "MapStyleCellView.h"
+#import "UIView+Additions.h"
+
+@import PureLayout;
 
 @interface SettingsViewController()<BUHorizontalMenuDataSource,BUHorizontalMenuDelegate>
 
@@ -52,6 +55,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, strong)		IBOutlet UILabel						* speedTitleLabel;
 
 @property (nonatomic,strong)		NSArray									*mapStyleDataProvider;
+
+@property (nonatomic,strong)  		IBOutlet UIScrollView					*scrollView;
+@property (nonatomic,strong)  		IBOutlet UIStackView					*stackView;
 
 
 @end
@@ -94,8 +100,14 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	[_mapStyleControl reloadData];
 	[_mapStyleControl setSelectedIndex:[self selectedMapStyle:_dataProvider.mapStyle] animated:YES];
 	
-	[self.view addSubview:_controlView];
-	[(UIScrollView*) self.view setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, _controlView.frame.size.height)];
+	
+	[_scrollView addSubview:_controlView];
+	[_controlView autoPinEdgesToSuperviewEdges];
+	[_controlView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self.view];
+	
+	[self.view layoutIfNeeded];
+	
+	[_scrollView setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, _controlView.height)];
 	
 	 [super viewDidLoad];
 	

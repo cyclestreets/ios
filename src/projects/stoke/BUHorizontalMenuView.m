@@ -17,6 +17,8 @@
 
 #import "UIControl+BlocksKit.h"
 
+@import PureLayout;
+
 @interface BUHorizontalMenuView()<UIScrollViewDelegate>
 
 @property (nonatomic,strong)  LayoutBox									*itemContainer;
@@ -56,13 +58,12 @@
 	
 	_shouldScrollToSelectedItem=YES;
     
-    self.scrollView=[[UIScrollView alloc]initWithFrame:self.bounds];
+    self.scrollView=[[UIScrollView alloc]initForAutoLayout];
     _scrollView.bounces = YES;
     _scrollView.scrollEnabled = YES;
     _scrollView.alwaysBounceHorizontal = YES;
     _scrollView.alwaysBounceVertical = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
-    //_scrollView.pagingEnabled=YES;
     _scrollView.contentInset=UIEdgeInsetsMake(0, 0,0,40);
     
     self.itemContainer=[[LayoutBox alloc]initWithFrame:self.bounds];
@@ -74,8 +75,10 @@
 	_itemContainer.backgroundColor=[UIColor clearColor];
     
     [_scrollView addSubview:_itemContainer];
+	
     
     [self addSubview:_scrollView];
+	[_scrollView autoPinEdgesToSuperviewEdges];
     
 	
 }

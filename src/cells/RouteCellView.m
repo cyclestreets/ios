@@ -19,7 +19,6 @@
 
 @interface RouteCellView()
 
-@property (nonatomic, weak)	IBOutlet LayoutBox          * viewContainer;
 @property (nonatomic, weak)	IBOutlet ExpandedUILabel    * nameLabel;
 @property (nonatomic, weak)	IBOutlet MultiLabelLine     * readoutLabel;
 @property (nonatomic, weak)	IBOutlet UIImageView        * icon;
@@ -41,14 +40,6 @@
 	sview.backgroundColor=UIColorFromRGB(0xcccccc);
 	self.selectedBackgroundView=sview;
 	
-	
-	
-	_viewContainer.layoutMode=BUVerticalLayoutMode;
-	_viewContainer.paddingLeft=10;
-	_viewContainer.paddingTop=7;
-	_viewContainer.paddingBottom=7;
-	_viewContainer.itemPadding=0;
-	[_viewContainer initFromNIB];
 	
 	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
 	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),UIColorFromRGB(0x804000),nil];
@@ -92,7 +83,6 @@
 	_readoutLabel.labels=labelarr;
 	[_readoutLabel drawUI];
     
-	[_viewContainer refresh];
 	
 	_selectedRouteIcon.hidden=!_isSelectedRoute;
 	

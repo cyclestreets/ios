@@ -16,6 +16,9 @@
 #import "UIView+Additions.h"
 #import "GenericConstants.h"
 
+@import PureLayout;
+#import "PureLayout+Additions.h"
+
 @interface RoutesViewController()
 
 
@@ -23,7 +26,7 @@
 @property (nonatomic, strong)	BUSegmentedControl				*routeTypeControl;
 @property (nonatomic, strong)	IBOutlet UIButton				*selectedRouteButton;
 
-@property (weak, nonatomic) IBOutlet UIView                     *containerView;
+@property (strong, nonatomic) 	 UIView                 	    *containerView;
 
 
 @property (nonatomic, strong)	NSMutableArray					*dataTypeArray;
@@ -128,29 +131,36 @@
 -(void)createPersistentUI{
 	
 	
+	self.containerView=[[UIView alloc]initForAutoLayout];
+	[self.view addSubview:_containerView];
+	[_containerView autoPinEdgesToSuperviewEdgesExcludingEdge:ALEdgeTop];
+	[_containerView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_controlView];
+	
+	
 	_controlView.backgroundColor=[UIColor whiteColor];
 	[_controlView drawBorderwithColor:UIColorFromRGB(0xCCCCCC) andStroke:1 left:NO right:NO top:NO bottom:YES];
 	
-	LayoutBox *controlcontainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, CONTROLUIHEIGHT)];
-	controlcontainer.fixedWidth=YES;
-	controlcontainer.fixedHeight=YES;
-	controlcontainer.itemPadding=15;
-	controlcontainer.paddingLeft=15;
-	controlcontainer.alignMode=BUCenterAlignMode;
 	
+	UIStackView *controlcontainer=[[UIStackView alloc] initForAutoLayout];
+	controlcontainer.axis=UILayoutConstraintAxisHorizontal;
+	controlcontainer.alignment=UIStackViewAlignmentCenter;
+	controlcontainer.distribution=UIStackViewDistributionEqualSpacing;
+	
+
 	NSMutableArray *sdp = [[NSMutableArray alloc] initWithObjects:@"Favourites", @"Recent",  nil];
-	_routeTypeControl=[[BUSegmentedControl alloc]init];
+	_routeTypeControl=[[BUSegmentedControl alloc]initForAutoLayout];
 	_routeTypeControl.dataProvider=sdp;
 	_routeTypeControl.delegate=self;
 	_routeTypeControl.itemWidth=80;
 	[_routeTypeControl buildInterface];
-	[controlcontainer addSubview:_routeTypeControl];
+	[controlcontainer addArrangedSubview:_routeTypeControl];
 	
 	self.selectedRouteButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"orangeButton" text:@"Current Route"];
     [_selectedRouteButton addTarget:self action:@selector(selectedRouteButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
 	
-	[controlcontainer addSubview:_selectedRouteButton];
+	[controlcontainer addArrangedSubview:_selectedRouteButton];
 	[_controlView addSubview:controlcontainer];
+	[controlcontainer autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
 	
 	
 	self.viewStack=[NSMutableDictionary dictionary];
@@ -254,14 +264,17 @@
 		RouteListViewController *controller=[[RouteListViewController alloc]initWithNibName:[RouteListViewController nibName] bundle:nil];
 		
 		[controller willMoveToParentViewController:self];
+		
 		[_containerView addSubview:controller.view];
+		[controller.view autoPinEdgesToSuperviewEdges];
+		
 		[self addChildViewController:controller];
 		[controller didMoveToParentViewController:self];
+		
 		controller.delegate=self;
 		[controller setValue:configDict forKey:@"configDict"];
 		[_viewStack setObject:controller forKey:configDict[ID]];
 		
-		controller.view.size=_containerView.size;
 	}
 	
 	[_containerView layoutSubviews];

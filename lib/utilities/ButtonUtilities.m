@@ -16,6 +16,8 @@
 
 #import "CycleStreets-Swift.h"
 
+@import PureLayout;
+
 @implementation ButtonUtilities
 
 
@@ -181,8 +183,8 @@
 	[AppStyling applyStyleFor:button keyString:styleId];
 	
 	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font]+20;
-	button.frame = CGRectMake(0, 0, MAX(twidth,width), height);
-	
+	[button autoSetDimensionsToSize:CGSizeMake(MAX(twidth,width), height)];
+
 		
 	// Configure title(s)
 	[button setTitle:text forState:UIControlStateNormal];
