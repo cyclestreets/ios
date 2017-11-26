@@ -797,4 +797,11 @@
     
 }
 
+
++(void)removeAllStackViewSubviews:(UIStackView*)stackView{
+	for(UIView *view in stackView.arrangedSubviews){
+		[stackView removeArrangedSubview:view];
+	}
+}
+
 @end

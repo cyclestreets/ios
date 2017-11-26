@@ -171,6 +171,7 @@
 	
 	[_tableView registerNib:[RouteCellView nib] forCellReuseIdentifier:[RouteCellView cellIdentifier]];
 	_tableView.rowHeight=UITableViewAutomaticDimension;
+	_tableView.estimatedRowHeight=44;
 	
 	UIType=UITYPE_CONTROLUI;
 	

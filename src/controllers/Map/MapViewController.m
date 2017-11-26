@@ -79,6 +79,8 @@ static NSInteger DEFAULT_ZOOM = 15;
 static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 
+@import PureLayout;
+
 
 @interface MapViewController()<MKMapViewDelegate,UIActionSheetDelegate,CLLocationManagerDelegate,LocationReceiver,UIViewControllerTransitioningDelegate,SavedLocationsViewDelegate>
 
@@ -107,6 +109,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 
 @property(nonatomic,strong) IBOutlet  UIView						*walkingRouteOverlayView;
 @property(nonatomic,assign)  BOOL									walkingOverlayisVisible;
+@property(nonatomic,assign)  NSLayoutConstraint						*walkingOverlayConstraint;
 
 
 //map
@@ -313,9 +316,7 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 	
 	[self resetWayPoints];
 	
-	
-	[self.view addSubview:_walkingRouteOverlayView];
-	_walkingRouteOverlayView.y=self.view.height+_walkingRouteOverlayView.height;
+
 	
 	
 	[UIImage styleExistingNavButton:_followUserButton forID:@"compass" atSize:CGSizeMake(30, 30)];
@@ -977,7 +978,8 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 	}
 	
-	[self showWalkingOverlay];
+	[self performSelector:@selector(showWalkingOverlay) withObject:nil afterDelay:2];
+	//[self showWalkingOverlay];
 	
 	if(_routeOverlay==nil){
 		self.routeOverlay = [[CSRoutePolyLineOverlay alloc] initWithRoute:_route];
@@ -1027,17 +1029,25 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 		
 		if(_walkingOverlayisVisible==NO){
 			
-			_walkingRouteOverlayView.y=self.view.height;
 			_walkingOverlayisVisible=YES;
 			
+			
+			if(_walkingOverlayConstraint==nil){
+				_walkingOverlayConstraint=[_walkingRouteOverlayView autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:self.view withOffset:self.view.height];
+				[self.view layoutIfNeeded];
+			}
+			
+			
+			
+			_walkingOverlayConstraint.constant=self.view.height-_walkingRouteOverlayView.height;
+			
 			[UIView animateWithDuration:0.7 animations:^{
-				
-				_walkingRouteOverlayView.y=self.view.height-_walkingRouteOverlayView.height;
-				
+				[self.view layoutIfNeeded];
 			} completion:^(BOOL finished) {
 				
+				_walkingOverlayConstraint.constant=self.view.height;
 				[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
-					_walkingRouteOverlayView.y=self.view.height;
+					[self.view layoutIfNeeded];
 				} completion:^(BOOL finished) {
 					_walkingOverlayisVisible=NO;
 				}];
@@ -1046,8 +1056,9 @@ static NSInteger DEFAULT_OVERVIEWZOOM = 15;
 			
 			
 		}else{
-			[UIView animateWithDuration:0.3 delay:5 options:UIViewAnimationOptionCurveLinear animations:^{
-				_walkingRouteOverlayView.y=self.view.height;
+			_walkingOverlayConstraint.constant=self.view.height;
+			[UIView animateWithDuration:0.3 delay:3 options:UIViewAnimationOptionCurveLinear animations:^{
+				[self.view layoutIfNeeded];
 			} completion:^(BOOL finished) {
 				_walkingOverlayisVisible=NO;
 			}];

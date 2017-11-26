@@ -52,6 +52,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSMapSource.h"
 #import "CSMapTileService.h"
 #import "CSRetinaTileRenderer.h"
+#import "UIView+Additions.h"
 
 @interface RouteSegmentViewController()< MKMapViewDelegate>
 
@@ -187,7 +188,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.photoMarkers=[NSMutableArray array];
 	
 	_footerIsHidden=NO;
-	self.footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, SCREENWIDTH, 10)];
+	self.footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, [UIScreen mainScreen].bounds.size.width, 10)];
 	[self.view addSubview:_footerView];
 	
 	

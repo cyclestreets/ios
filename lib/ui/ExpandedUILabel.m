@@ -64,9 +64,14 @@
 
 - (void)setText:(NSString *)aText
 {
+	if(insetValue>0){
+		self.textInsets=UIEdgeInsetsMake(insetValue, insetValue, insetValue, insetValue);
+	}
+	
+	
     if (super.text != aText) {
         [super setText:aText];
-		[self updateText];
+		//[self updateText];
     }
     
     if(hasShadow==YES){
@@ -76,12 +81,30 @@
 }
 
 
-//- (void)drawTextInRect:(CGRect)rect
-//{
-//	UIEdgeInsets insets = {insetValue,insetValue,insetValue,insetValue};
-//	
-//	return [super drawTextInRect:UIEdgeInsetsInsetRect(rect, insets)];
-//}
+- (void)setTextInsets:(UIEdgeInsets)textInsets
+{
+	_textInsets = textInsets;
+	[self invalidateIntrinsicContentSize];
+}
+
+- (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines
+{
+	UIEdgeInsets insets = self.textInsets;
+	CGRect rect = [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, insets)
+					limitedToNumberOfLines:numberOfLines];
+
+	rect.origin.x    -= insets.left;
+	rect.origin.y    -= insets.top;
+	rect.size.width  += (insets.left + insets.right);
+	rect.size.height += (insets.top + insets.bottom);
+
+	return rect;
+}
+
+- (void)drawTextInRect:(CGRect)rect
+{
+	[super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.textInsets)];
+}
 
 
 -(void)updateText{

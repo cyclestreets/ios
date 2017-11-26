@@ -23,10 +23,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6" customClass="MultiLabelLine">
-                        <rect key="frame" x="12" y="39" width="296" height="20"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon_currentroutecell.png" translatesAutoresizingMaskIntoConstraints="NO" id="13">
                         <rect key="frame" x="300" y="0.0" width="20" height="20"/>
                         <constraints>
@@ -34,7 +30,7 @@
                             <constraint firstAttribute="height" constant="20" id="ypD-v0-kAW"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="5" customClass="ExpandedUILabel">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="5">
                         <rect key="frame" x="12" y="10" width="278" height="21"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                         <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -42,24 +38,26 @@
                         <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FoB-tD-wXm">
+                        <rect key="frame" x="12" y="39" width="296" height="22.5"/>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="13" secondAttribute="trailing" id="4iV-Dg-A55"/>
-                    <constraint firstAttribute="bottom" secondItem="6" secondAttribute="bottom" constant="10" id="4nj-TB-oUh"/>
+                    <constraint firstAttribute="bottom" secondItem="FoB-tD-wXm" secondAttribute="bottom" constant="8" id="ATA-dF-4t4"/>
                     <constraint firstItem="5" firstAttribute="leading" secondItem="TbZ-du-KOV" secondAttribute="leading" constant="12" id="Mzr-yJ-ohR"/>
-                    <constraint firstAttribute="trailing" secondItem="6" secondAttribute="trailing" constant="12" id="YhA-SK-B1Q"/>
+                    <constraint firstItem="FoB-tD-wXm" firstAttribute="top" secondItem="5" secondAttribute="bottom" constant="8" id="bKg-ri-u6Q"/>
+                    <constraint firstItem="FoB-tD-wXm" firstAttribute="leading" secondItem="TbZ-du-KOV" secondAttribute="leading" constant="12" id="bVQ-Qm-srt"/>
                     <constraint firstItem="13" firstAttribute="top" secondItem="TbZ-du-KOV" secondAttribute="top" id="boa-3N-e1g"/>
                     <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="trailing" constant="10" id="ouM-EQ-ojX"/>
                     <constraint firstItem="5" firstAttribute="top" secondItem="TbZ-du-KOV" secondAttribute="top" constant="10" id="q37-cV-LLM"/>
-                    <constraint firstItem="6" firstAttribute="leading" secondItem="TbZ-du-KOV" secondAttribute="leading" constant="12" id="sul-Qn-i2x"/>
-                    <constraint firstItem="6" firstAttribute="top" secondItem="5" secondAttribute="bottom" constant="8" id="tB9-cS-8yT"/>
-                    <constraint firstItem="6" firstAttribute="top" secondItem="5" secondAttribute="bottom" constant="8" id="u3z-is-1aT"/>
+                    <constraint firstAttribute="trailing" secondItem="FoB-tD-wXm" secondAttribute="trailing" constant="12" id="yau-mc-KUF"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="labelContainer" destination="FoB-tD-wXm" id="9ek-i9-vyP"/>
                 <outlet property="nameLabel" destination="5" id="7"/>
-                <outlet property="readoutLabel" destination="6" id="8"/>
                 <outlet property="selectedRouteIcon" destination="13" id="14"/>
             </connections>
         </tableViewCell>

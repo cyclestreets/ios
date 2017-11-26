@@ -61,6 +61,8 @@ typedef struct
 +(UIView*)findKeyboardViewInApplication;
 +(UIWindow*)findKeyboardWindowInApplication;
 
++(void)removeAllStackViewSubviews:(UIStackView*)stackView;
+
 +(BorderParams)BorderParamsMake:(CGFloat)left :(CGFloat)right :(CGFloat)top :(CGFloat)bottom;
 
 // returns the Tabindex of the current nav controller, useful for apps that share vcs across tabs

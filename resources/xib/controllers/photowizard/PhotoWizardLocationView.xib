@@ -1,8 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoWizardLocationViewController">
             <connections>
@@ -21,50 +30,56 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="bXI-Ue-vuH">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXI-Ue-vuH">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                    <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="eeW-0i-01B"/>
+                    </constraints>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0,0" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="10">
-                    <rect key="frame" x="95" y="303" width="205" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" id="11">
-                    <rect key="frame" x="22" y="322" width="278" height="101"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                    <animations/>
-                    <string key="text">If you want to change the chosen photo's location, drag the marker or touch on the map to set the new location and press Update. 
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NiA-q0-Sgu">
+                    <rect key="frame" x="20" y="322.66666666666669" width="280" height="117.33333333333331"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1Fl-R8-4jk">
+                            <rect key="frame" x="0.0" y="0.0" width="280" height="16.333333333333332"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Location:" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                                    <rect key="frame" x="0.0" y="0.0" width="250.33333333333334" height="16.333333333333332"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0,0" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="10">
+                                    <rect key="frame" x="260.33333333333331" y="0.0" width="19.666666666666686" height="16.333333333333332"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11">
+                            <rect key="frame" x="0.0" y="26.333333333333314" width="280" height="91"/>
+                            <string key="text">If you want to change the chosen photo's location, drag the marker or touch on the map to set the new location and press Update. 
 
 For photos with locations you can return it to the original location by pressing Reset.</string>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                    <color key="textColor" white="0.49849396940000001" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Location:" lineBreakMode="tailTruncation" minimumFontSize="10" id="9">
-                    <rect key="frame" x="22" y="303" width="105" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
-                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <size key="shadowOffset" width="0.0" height="0.0"/>
-                </label>
-                <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="12">
-                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <animations/>
-                    <color key="backgroundColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" red="0.49849396944046021" green="0.49849396944046021" blue="0.49849396944046021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                    <rect key="frame" x="0.0" y="30" width="320" height="44"/>
+                    <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Ckr-WZ-KVk"/>
+                    </constraints>
                     <items>
                         <barButtonItem title="Cancel" id="17">
-                            <color key="tintColor" red="0.98431378599999997" green="0.57633872129999997" blue="0.2929361929" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="tintColor" red="0.97090393304824829" green="0.49860295653343201" blue="0.23119646310806274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="closeButtonSelected:" destination="-1" id="22"/>
                             </connections>
@@ -87,17 +102,29 @@ For photos with locations you can return it to the original location by pressing
                             </connections>
                         </barButtonItem>
                     </items>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="barTintColor" red="0.3803921938" green="0.64705884459999996" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </toolbar>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" id="dyn-Gy-PFs">
-                    <rect key="frame" x="0.0" y="64" width="320" height="231"/>
-                    <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                    <animations/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyn-Gy-PFs">
+                    <rect key="frame" x="0.0" y="73.999999999999986" width="320" height="240.66666666666663"/>
                 </mapView>
             </subviews>
-            <animations/>
-            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dyn-Gy-PFs" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="0b1-1i-KDb"/>
+                <constraint firstItem="dyn-Gy-PFs" firstAttribute="top" secondItem="12" secondAttribute="bottom" id="8Lb-hM-lOp"/>
+                <constraint firstAttribute="trailing" secondItem="12" secondAttribute="trailing" id="9kY-qK-aD7"/>
+                <constraint firstAttribute="bottom" secondItem="NiA-q0-Sgu" secondAttribute="bottom" constant="40" id="KOg-RZ-ZbE"/>
+                <constraint firstItem="NiA-q0-Sgu" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="L7Z-Qv-mpX"/>
+                <constraint firstItem="12" firstAttribute="top" secondItem="bXI-Ue-vuH" secondAttribute="bottom" id="Pcs-VG-Vrm"/>
+                <constraint firstItem="NiA-q0-Sgu" firstAttribute="top" secondItem="dyn-Gy-PFs" secondAttribute="bottom" constant="8" id="f0p-Nf-Y5f"/>
+                <constraint firstAttribute="trailing" secondItem="dyn-Gy-PFs" secondAttribute="trailing" id="fzi-AF-xVt"/>
+                <constraint firstAttribute="trailing" secondItem="bXI-Ue-vuH" secondAttribute="trailing" id="gLS-8k-Zek"/>
+                <constraint firstItem="bXI-Ue-vuH" firstAttribute="top" secondItem="1" secondAttribute="top" id="gW0-Qi-jBH"/>
+                <constraint firstItem="12" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="lnX-ZU-i9t"/>
+                <constraint firstAttribute="trailing" secondItem="NiA-q0-Sgu" secondAttribute="trailing" constant="20" id="wc5-Sg-hAo"/>
+                <constraint firstItem="bXI-Ue-vuH" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="wr7-mC-W9J"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

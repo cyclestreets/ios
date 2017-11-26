@@ -6,6 +6,7 @@
     <dependencies>
         <deployment version="4096" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -53,11 +54,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="394"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="345"/>
                     <color key="backgroundColor" red="0.96460121870040894" green="0.96476620435714722" blue="0.96459084749221802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="94">
-                    <rect key="frame" x="0.0" y="394" width="320" height="22"/>
+                    <rect key="frame" x="0.0" y="345" width="320" height="22"/>
                     <subviews>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="95">
                             <rect key="frame" x="148" y="-7" width="23" height="37"/>
@@ -104,17 +105,17 @@
             <constraints>
                 <constraint firstItem="94" firstAttribute="top" secondItem="76" secondAttribute="bottom" id="0L6-Z6-Xzp"/>
                 <constraint firstItem="94" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="AFj-Rw-cjY"/>
+                <constraint firstAttribute="bottomMargin" secondItem="94" secondAttribute="bottom" id="ILF-AT-HdR"/>
                 <constraint firstAttribute="trailing" secondItem="94" secondAttribute="trailing" id="NSk-27-nWl"/>
                 <constraint firstItem="76" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Prh-lQ-cyB"/>
                 <constraint firstItem="76" firstAttribute="top" secondItem="1" secondAttribute="top" id="mYo-7E-ESE"/>
-                <constraint firstAttribute="bottom" secondItem="94" secondAttribute="bottom" id="oMg-ND-fAT"/>
                 <constraint firstItem="76" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="wpk-aU-KD7"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-213" y="147"/>
+            <point key="canvasLocation" x="-288" y="86"/>
         </view>
         <view contentMode="scaleToFill" id="67" userLabel="loggedin">
             <rect key="frame" x="0.0" y="0.0" width="374" height="391"/>

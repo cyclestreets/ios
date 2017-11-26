@@ -6,6 +6,7 @@
     <dependencies>
         <deployment version="4096" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,14 +70,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="15">
-                    <rect key="frame" x="0.0" y="84" width="320" height="366"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="380"/>
                     <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16">
-                    <rect key="frame" x="0.0" y="450" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="444" width="320" height="36"/>
                     <subviews>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="17">
-                            <rect key="frame" x="140" y="-3" width="39" height="36"/>
+                            <rect key="frame" x="140" y="-3" width="39" height="42"/>
                         </pageControl>
                     </subviews>
                     <color key="backgroundColor" red="0.61149287223815918" green="0.61149287223815918" blue="0.61149287223815918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,11 +85,11 @@
                         <constraint firstAttribute="bottom" secondItem="17" secondAttribute="bottom" constant="-3" id="Zv3-Pi-36S"/>
                         <constraint firstItem="17" firstAttribute="top" secondItem="16" secondAttribute="top" constant="-3" id="igM-Ug-qSn"/>
                         <constraint firstItem="17" firstAttribute="centerX" secondItem="16" secondAttribute="centerX" id="lgh-5a-QwZ"/>
-                        <constraint firstAttribute="height" constant="30" id="nTV-6G-ia1"/>
+                        <constraint firstAttribute="height" constant="36" id="nTV-6G-ia1"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="128">
-                    <rect key="frame" x="0.0" y="64" width="320" height="20"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="20"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Photo Upload" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="129">
                             <rect key="frame" x="10" y="0.0" width="145" height="19"/>
@@ -112,7 +113,7 @@
                     </constraints>
                 </view>
                 <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="171">
-                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <items>
                         <barButtonItem title="Cancel" id="179">
                             <color key="tintColor" red="0.97090393304824829" green="0.49860295653343201" blue="0.23119646310806274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -138,23 +139,22 @@
             </subviews>
             <color key="backgroundColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="15" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="2q5-al-8IC"/>
-                <constraint firstItem="128" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="6VM-JU-t0d"/>
-                <constraint firstItem="16" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="E2J-NF-XJM"/>
-                <constraint firstItem="171" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="Gpc-71-nyW"/>
-                <constraint firstItem="171" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="Jtr-Zh-6Dm"/>
-                <constraint firstItem="16" firstAttribute="bottom" secondItem="K2M-jI-DnS" secondAttribute="bottom" id="MnO-YS-CLW"/>
+                <constraint firstItem="15" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="2q5-al-8IC"/>
+                <constraint firstItem="128" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="6VM-JU-t0d"/>
+                <constraint firstItem="16" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="E2J-NF-XJM"/>
+                <constraint firstItem="171" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="Gpc-71-nyW"/>
+                <constraint firstItem="171" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="Jtr-Zh-6Dm"/>
                 <constraint firstItem="128" firstAttribute="top" secondItem="171" secondAttribute="bottom" id="g7E-MJ-iVz"/>
-                <constraint firstItem="16" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="mhz-3s-92H"/>
-                <constraint firstItem="128" firstAttribute="leading" secondItem="K2M-jI-DnS" secondAttribute="leading" id="p1j-s8-T1U"/>
+                <constraint firstItem="16" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="mhz-3s-92H"/>
+                <constraint firstItem="128" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="p1j-s8-T1U"/>
+                <constraint firstItem="16" firstAttribute="bottom" secondItem="1" secondAttribute="bottomMargin" id="pJj-Em-Wq0"/>
                 <constraint firstItem="15" firstAttribute="top" secondItem="128" secondAttribute="bottom" id="s1L-Ae-wNW"/>
                 <constraint firstItem="16" firstAttribute="top" secondItem="15" secondAttribute="bottom" id="sDi-qh-oCB"/>
-                <constraint firstItem="171" firstAttribute="top" secondItem="K2M-jI-DnS" secondAttribute="top" id="vvY-9P-9ri"/>
-                <constraint firstItem="15" firstAttribute="trailing" secondItem="K2M-jI-DnS" secondAttribute="trailing" id="zav-gz-I8D"/>
+                <constraint firstItem="171" firstAttribute="top" secondItem="1" secondAttribute="top" id="vvY-9P-9ri"/>
+                <constraint firstItem="15" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="zav-gz-I8D"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="K2M-jI-DnS"/>
             <point key="canvasLocation" x="-685" y="339"/>
         </view>
         <view contentMode="scaleToFill" id="11">
@@ -353,10 +353,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HEt-Gl-Bwk">
-                    <rect key="frame" x="20" y="20" width="387" height="202.5"/>
+                    <rect key="frame" x="20" y="20" width="387" height="235"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zuW-O3-Q3r">
-                            <rect key="frame" x="0.0" y="0.0" width="387" height="109.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="387" height="142"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Report Upload" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="34">
                                     <rect key="frame" x="0.0" y="0.0" width="387" height="22.5"/>
@@ -367,8 +367,9 @@
                                     <size key="shadowOffset" width="0.0" height="0.0"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="35">
-                                    <rect key="frame" x="0.0" y="27.5" width="387" height="82"/>
+                                    <rect key="frame" x="0.0" y="27.5" width="387" height="114.5"/>
                                     <string key="text">Press Upload to add this report to CycleStreets. 
+Note: you must be logged in to upload so we can associate this photo with your account.
 
 Once uploaded this data will appear in the Report section for the chosen location.
 </string>
@@ -380,7 +381,7 @@ Once uploaded this data will appear in the Report section for the chosen locatio
                             </subviews>
                         </stackView>
                         <progressView opaque="NO" contentMode="scaleToFill" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="39">
-                            <rect key="frame" x="173.5" y="129.5" width="240" height="2.5"/>
+                            <rect key="frame" x="173.5" y="162" width="240" height="2.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="240" id="CrI-Y2-akt"/>
                             </constraints>
@@ -388,7 +389,7 @@ Once uploaded this data will appear in the Report section for the chosen locatio
                             <color key="trackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </progressView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EQs-hO-KNl">
-                            <rect key="frame" x="0.0" y="151" width="387" height="51.5"/>
+                            <rect key="frame" x="0.0" y="183.5" width="387" height="51.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36">
                                     <rect key="frame" x="173.5" y="0.0" width="120" height="30"/>
@@ -636,8 +637,11 @@ Once uploaded they'll appear in the Report section.</string>
                             <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="144">
-                            <rect key="frame" x="167.5" y="43" width="67" height="30"/>
+                            <rect key="frame" x="167.5" y="43" width="120" height="30"/>
                             <accessibility key="accessibilityConfiguration" label="View your photo on map"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="DpT-tC-RP6"/>
+                            </constraints>
                             <state key="normal" title="View map">
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>

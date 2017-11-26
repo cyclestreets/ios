@@ -14,13 +14,20 @@
 #import "MultiLabelLine.h"
 #import "ExpandedUILabel.h"
 #import "CycleStreets.h"
+#import "ViewUtilities.h"
+
+@import PureLayout;
 
 @interface ItineraryCellView()
 
-@property (nonatomic, weak)		IBOutlet LayoutBox		* viewContainer;
-@property (nonatomic, weak)		IBOutlet ExpandedUILabel		* nameLabel;
-@property (nonatomic, weak)		IBOutlet MultiLabelLine		* readoutLabel;
-@property (nonatomic, weak)		IBOutlet UIImageView		* icon;
+@property (nonatomic, weak)		IBOutlet UILabel		* nameLabel;
+@property (nonatomic, weak)		IBOutlet UIStackView	* labelContainer;
+@property (nonatomic, weak)		IBOutlet UIImageView	* icon;
+
+@property (nonatomic,strong)  NSMutableArray 			*fonts;
+@property (nonatomic,strong)  NSMutableArray 			*colors;
+
+@property (nonatomic,strong)  NSMutableArray			*labels;
 
 @end
 
@@ -31,20 +38,9 @@
 
 -(void)initialise{
 	
-	_viewContainer.layoutMode=BUVerticalLayoutMode;
-	_viewContainer.paddingLeft=0;
-	_viewContainer.paddingTop=7;
-	_viewContainer.paddingBottom=7;
-	_viewContainer.itemPadding=0;
-	[_viewContainer initFromNIB];
+	self.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	self.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),nil];
 	
-	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),nil];
-	
-	_readoutLabel.fonts=fonts;
-	_readoutLabel.colors=colors;
-
-
 
 }
 
@@ -60,34 +56,43 @@
 	
 	_icon.image=[UIImage imageNamed:_dataProvider.provisionIcon];
 	
-	_readoutLabel.labels=arr;
-	[_readoutLabel drawUI];
 	
-	[_viewContainer refresh];
+	if(_labels==nil){
+		[self createUILabels:arr];
+	}
 	
-	[ViewUtilities alignView:_icon withView:_viewContainer :BUNoneLayoutMode :BUCenterAlignMode];
+	for(int x=0;x<arr.count;x++){
+		UILabel *label=_labels[x];
+		if(label){
+			label.text=arr[x];
+		}
+	}
+	
 
 }
 
 
-
-+(NSNumber*)heightForCellWithDataProvider:(SegmentVO*)segment{
+-(void)createUILabels:(NSMutableArray*)arr{
 	
-	int height=7;
+	self.labels=[NSMutableArray array];
 	
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment roadName] :[UIFont boldSystemFontOfSize:16]   :248 :NSLineBreakByWordWrapping];
-	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[segment timeString] :[UIFont systemFontOfSize:13] :248 :NSLineBreakByClipping];
-	height+=7;
+	for(int x=0;x<arr.count;x++){
+		
+		UILabel *label=[[UILabel alloc]initForAutoLayout];
+		label.numberOfLines=0;
+		label.font=_fonts[x];
+		label.textColor=_colors[x];
+		if (x==arr.count-1) {
+			[label setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+		}else{
+			[label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+		}
+		
+		[_labels addObject:label];
+		
+		[_labelContainer addArrangedSubview:label];
+	}
 	
-	return [NSNumber numberWithInt:height];
-}
-
-
-
-
-+(int)rowHeight{
-	return STANDARDCELLHEIGHT;
 }
 
 

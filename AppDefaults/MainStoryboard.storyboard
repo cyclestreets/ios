@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="uZG-hY-a5B">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -28,7 +28,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5g7-zV-ycW">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,11 +50,11 @@
                         <viewControllerLayoutGuide type="bottom" id="36C-J8-aTQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BEG-qH-vbk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="MRk-Al-JRF">
-                                <rect key="frame" x="0.0" y="64" width="375" height="577"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="559"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="oEv-ga-wtZ" id="lbc-X5-EMy"/>
@@ -62,13 +62,13 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQ6-lm-tyL">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WR-pL-1mK">
-                                        <rect key="frame" x="15" y="9.9999999999999982" width="237" height="20.333333333333329"/>
+                                        <rect key="frame" x="15" y="10.000000000000002" width="276" height="20.666666666666671"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Route id:" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQk-7n-JHt">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.333333333333332"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.55605292320251465" green="0.043327461928129196" blue="0.066424109041690826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="#17383630292" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyB-4o-gK8" customClass="CopyLabel">
-                                                <rect key="frame" x="-15" y="0.0" width="0.0" height="20.333333333333332"/>
+                                                <rect key="frame" x="-15" y="0.0" width="0.0" height="20.666666666666668"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppS-Bl-z4c">
-                                        <rect key="frame" x="262" y="7" width="103" height="30"/>
+                                        <rect key="frame" x="301" y="7" width="103" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="fvj-y7-WoH"/>
                                             <constraint firstAttribute="width" constant="103" id="nTB-D3-qoh"/>
@@ -105,7 +105,7 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EHK-L1-kwK" customClass="MultiLabelLine">
-                                        <rect key="frame" x="15" y="39" width="345" height="21"/>
+                                        <rect key="frame" x="15" y="39" width="384" height="21"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="b9u-a4-yde"/>
@@ -164,7 +164,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Routes" image="CSTabBar_fav_routes.png" id="kuB-BV-mht"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ejP-nB-g12">
-                        <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.31372549019607843" green="0.59215686274509804" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -186,16 +186,16 @@
                         <viewControllerLayoutGuide type="bottom" id="wLU-Ic-ASV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0QK-Ah-J8w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="597"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="579"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aBK-HM-EC4" customClass="BorderView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G4N-ML-Z7n">
-                                <rect key="frame" x="0.0" y="64" width="375" height="552"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="534"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </containerView>
@@ -219,7 +219,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WoZ-xW-kze" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2061" y="514"/>
+            <point key="canvasLocation" x="-1932" y="578"/>
         </scene>
         <!--Photo Map View Controller-->
         <scene sceneID="qEb-im-VRX">
@@ -251,7 +251,7 @@
                     <tabBarItem key="tabBarItem" title="Credits" image="CSTabBar_credits.png" id="9kh-Uk-atM"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GW0-LT-qyO">
-                        <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -272,7 +272,7 @@
                     <tabBarItem key="tabBarItem" title="Settings" image="CSTabBar_settings.png" id="Lfd-ao-2yz"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="skw-5D-0sN">
-                        <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -314,7 +314,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Report" image="CSTabBar_photomap_tb.png" id="tN7-IX-cwY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Z42-mk-NG8">
-                        <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.10367729514837265" green="0.63721436262130737" blue="0.19302076101303101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -333,7 +333,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Add Photo" image="CSTabBar_add_photo.png" id="bk4-8A-zQb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="uAN-1O-GEG">
-                        <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.31372549020000001" green="0.59215686270000001" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -353,7 +353,7 @@
                     <tabBarItem key="tabBarItem" title="Account" image="CSTabBar_account.png" id="HO5-AF-iuE"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6M3-e8-0yZ">
-                        <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -910,16 +910,16 @@ You can add a point via your current position or search for a known one.</string
                         <viewControllerLayoutGuide type="bottom" id="yLM-Cn-grC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="V8Q-QV-he3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hcn-tl-j5p">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hcn-tl-j5p">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <color key="backgroundColor" red="0.95294117649999999" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJg-wB-7Qt">
-                                <rect key="frame" x="0.0" y="44" width="375" height="36"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="36"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-u5-4B7" userLabel="poi">
                                         <rect key="frame" x="8" y="2" width="53" height="30"/>
@@ -949,7 +949,7 @@ You can add a point via your current position or search for a known one.</string
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIO-bW-9fY" userLabel="waypoints">
-                                        <rect key="frame" x="312" y="4" width="63" height="26"/>
+                                        <rect key="frame" x="351" y="4" width="63" height="26"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="tintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" image="CSTabBar_plan_route.png"/>
@@ -968,14 +968,14 @@ You can add a point via your current position or search for a known one.</string
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQu-Uh-EWF">
-                                <rect key="frame" x="0.0" y="44" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                                 <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9I-br-A6V">
-                                <rect key="frame" x="16" y="109" width="36" height="36"/>
+                                <rect key="frame" x="20" y="80" width="36" height="36"/>
                                 <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="WAU-Q5-hlt"/>
@@ -986,7 +986,7 @@ You can add a point via your current position or search for a known one.</string
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Map Attribution" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivU-li-0UL" customClass="ExpandedUILabel">
-                                <rect key="frame" x="298" y="684" width="61" height="25"/>
+                                <rect key="frame" x="333" y="642" width="61" height="25"/>
                                 <color key="backgroundColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="14y-da-myK"/>
@@ -1002,18 +1002,53 @@ You can add a point via your current position or search for a known one.</string
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ucr-eo-HKg">
+                                <rect key="frame" x="0.0" y="1000" width="414" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="This route contains walking sections" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzo-VE-sQz">
+                                        <rect key="frame" x="168" y="5" width="236" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="QEa-aT-L2q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <size key="shadowOffset" width="0.0" height="1"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="UIIcon_walking.png" translatesAutoresizingMaskIntoConstraints="NO" id="aPZ-0u-iP0">
+                                        <rect key="frame" x="3" y="2" width="26" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="26" id="IcZ-nA-cc4"/>
+                                            <constraint firstAttribute="height" constant="26" id="OUg-A2-DCk"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="aPZ-0u-iP0" firstAttribute="top" secondItem="Ucr-eo-HKg" secondAttribute="top" constant="2" id="IjU-Wh-8Lh"/>
+                                    <constraint firstItem="kzo-VE-sQz" firstAttribute="centerY" secondItem="Ucr-eo-HKg" secondAttribute="centerY" id="MqW-4C-UVs"/>
+                                    <constraint firstAttribute="bottom" secondItem="aPZ-0u-iP0" secondAttribute="bottom" constant="2" id="QMN-Yg-HRT"/>
+                                    <constraint firstAttribute="height" constant="30" id="SvK-iF-ztl"/>
+                                    <constraint firstItem="aPZ-0u-iP0" firstAttribute="leading" secondItem="Ucr-eo-HKg" secondAttribute="leading" constant="3" id="loq-rG-w0y"/>
+                                    <constraint firstAttribute="trailing" secondItem="kzo-VE-sQz" secondAttribute="trailing" constant="10" id="xLI-WN-raJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ucr-eo-HKg" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leading" id="1EY-ld-DqD"/>
                             <constraint firstItem="eJg-wB-7Qt" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leading" id="IT6-Gg-jns"/>
                             <constraint firstItem="eJg-wB-7Qt" firstAttribute="top" secondItem="mGZ-Ds-X35" secondAttribute="bottom" id="KmE-Ne-c70"/>
+                            <constraint firstItem="Ucr-eo-HKg" firstAttribute="top" secondItem="V8Q-QV-he3" secondAttribute="top" priority="750" constant="1000" id="L2Z-9v-kap"/>
                             <constraint firstAttribute="bottom" secondItem="hcn-tl-j5p" secondAttribute="bottom" id="LSH-do-vzr"/>
-                            <constraint firstItem="yLM-Cn-grC" firstAttribute="top" secondItem="ivU-li-0UL" secondAttribute="bottom" constant="20" id="LT6-my-hNK"/>
+                            <constraint firstAttribute="bottom" secondItem="ivU-li-0UL" secondAttribute="bottom" constant="20" id="LT6-my-hNK"/>
                             <constraint firstItem="z9I-br-A6V" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leadingMargin" id="NCz-J9-4rO"/>
                             <constraint firstItem="z9I-br-A6V" firstAttribute="top" secondItem="QQu-Uh-EWF" secondAttribute="bottom" constant="16" id="R4S-Re-feD"/>
                             <constraint firstAttribute="trailing" secondItem="eJg-wB-7Qt" secondAttribute="trailing" id="W2o-oi-qHG"/>
                             <constraint firstAttribute="trailing" secondItem="hcn-tl-j5p" secondAttribute="trailing" id="XMD-ZL-t4D"/>
+                            <constraint firstAttribute="trailing" secondItem="Ucr-eo-HKg" secondAttribute="trailing" id="XOQ-wv-QvO"/>
                             <constraint firstItem="QQu-Uh-EWF" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leading" id="bgM-qZ-4CU"/>
                             <constraint firstAttribute="trailing" secondItem="QQu-Uh-EWF" secondAttribute="trailing" id="f5c-CT-n9T"/>
                             <constraint firstItem="hcn-tl-j5p" firstAttribute="leading" secondItem="V8Q-QV-he3" secondAttribute="leading" id="fRg-TX-ryu"/>
@@ -1044,26 +1079,6 @@ You can add a point via your current position or search for a known one.</string
                         <segue destination="XRL-17-8R3" kind="modal" identifier="FirstRunSegue" id="18L-4J-MqZ"/>
                     </connections>
                 </viewController>
-                <view opaque="NO" contentMode="scaleToFill" id="Ucr-eo-HKg">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="This route contains walking sections" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzo-VE-sQz">
-                            <rect key="frame" x="57" y="3" width="253" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                            <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <size key="shadowOffset" width="0.0" height="1"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="UIIcon_walking.png" translatesAutoresizingMaskIntoConstraints="NO" id="aPZ-0u-iP0">
-                            <rect key="frame" x="3" y="2" width="26" height="26"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PNj-bY-KQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3685.5" y="-628"/>
@@ -1248,7 +1263,7 @@ Drag a waypoint to re-order it.</string>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="Saved Locations" image="CSTabBar_savedlocations.png" id="Qm7-7H-FMx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GQc-fd-xzi">
-                        <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="-44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1270,11 +1285,11 @@ Drag a waypoint to re-order it.</string>
                         <viewControllerLayoutGuide type="bottom" id="djd-pf-64S"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VLq-oC-DMJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8kV-oh-lqP" customClass="FMMoveTableView">
-                                <rect key="frame" x="0.0" y="41" width="375" height="600"/>
+                                <rect key="frame" x="0.0" y="41" width="414" height="582"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.926128089427948" green="0.91659212112426758" blue="0.91182339191436768" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.79277843236923218" green="0.79277843236923218" blue="0.79277843236923218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1285,7 +1300,7 @@ Drag a waypoint to re-order it.</string>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vfG-48-DBH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Manage and rename your saved locations." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmb-3z-v8A">

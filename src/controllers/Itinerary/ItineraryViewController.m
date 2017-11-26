@@ -44,11 +44,8 @@
 @property (nonatomic, strong) RouteSegmentViewController * routeSegmentViewcontroller;
 @property (nonatomic, weak) IBOutlet CopyLabel             * routeidLabel;
 @property (nonatomic, strong) IBOutlet MultiLabelLine               * readoutLineOne;
-@property (nonatomic, strong) MultiLabelLine               * readoutLineTwo;
-@property (nonatomic, strong) MultiLabelLine               * readoutLineThree;
 @property (nonatomic, weak) IBOutlet LayoutBox             * readoutContainer;
 @property (nonatomic, weak) IBOutlet UITableView           * tableView;
-@property (nonatomic, strong) NSMutableArray               * rowHeightsArray;
 @property (nonatomic,strong) CSRouteDetailsViewController   *routeSummary;
 @end
 
@@ -106,8 +103,6 @@
 							@"Estimated time:",_route.timeString,nil];
 	[_readoutLineOne drawUI];
 	
-	
-	[self createRowHeightsArray];
 	[_tableView reloadData];
 	
 }
@@ -123,6 +118,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+	
+	[_tableView registerNib:[ItineraryCellView nib] forCellReuseIdentifier:[ItineraryCellView cellIdentifier]];
+	_tableView.rowHeight=UITableViewAutomaticDimension;
+	_tableView.estimatedRowHeight=44;
     
     [self createPersistentUI];
 	
@@ -206,7 +205,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ItineraryCellView *cell = (ItineraryCellView *)[ItineraryCellView cellForTableView:tv fromNib:[ItineraryCellView nib]];
+	ItineraryCellView *cell = [_tableView dequeueReusableCellWithIdentifier:[ItineraryCellView cellIdentifier]];
 	
 	SegmentVO *segment = [_route segmentAtIndex:indexPath.row];
 	cell.dataProvider=segment;
@@ -219,14 +218,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
-	
 	[self performSegueWithIdentifier:@"RouteSegmentSegue" sender:self context:@{DATAPROVIDER: _route,INDEX:@([indexPath row])}];
 	 
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-	
-	return [[_rowHeightsArray objectAtIndex:[indexPath row]] floatValue];
 }
 
 
@@ -474,22 +467,6 @@
 }
 
 
-#pragma mark - Utility
-
--(void)createRowHeightsArray{
-	
-	self.rowHeightsArray=[[NSMutableArray alloc]init];
-	
-	for (int i=0; i<[_route numSegments]; i++) {
-		
-		SegmentVO *segment = [_route segmentAtIndex:i];
-		
-		[_rowHeightsArray addObject:[ItineraryCellView heightForCellWithDataProvider:segment]];
-		
-		
-	}
-	
-}
 
 //
 /***********************************************

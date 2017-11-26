@@ -17,12 +17,17 @@
 #import "MultiLabelLine.h"
 #import "CycleStreets.h"
 
+@import PureLayout;
+
 @interface RouteCellView()
 
-@property (nonatomic, weak)	IBOutlet ExpandedUILabel    * nameLabel;
-@property (nonatomic, weak)	IBOutlet MultiLabelLine     * readoutLabel;
-@property (nonatomic, weak)	IBOutlet UIImageView        * icon;
+@property (nonatomic, weak)	IBOutlet UILabel    		* nameLabel;
+@property(nonatomic,weak) IBOutlet UIStackView	         *labelContainer;
 @property (nonatomic, weak)	IBOutlet UIImageView        * selectedRouteIcon;
+
+
+@property (nonatomic,strong)  NSMutableArray *fonts;
+@property (nonatomic,strong)  NSMutableArray *colors;
 
 
 @end
@@ -41,11 +46,9 @@
 	self.selectedBackgroundView=sview;
 	
 	
-	NSMutableArray *fonts=[NSMutableArray arrayWithObjects:[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
-	NSMutableArray *colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),UIColorFromRGB(0x804000),nil];
+	self.fonts=[NSMutableArray arrayWithObjects:[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],[UIFont systemFontOfSize:13],nil];
+	self.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0xFF8000),UIColorFromRGB(0x007F00),UIColorFromRGB(0x404040),UIColorFromRGB(0x804000),nil];
 	
-	_readoutLabel.fonts=fonts;
-	_readoutLabel.colors=colors;
 	
 }
 
@@ -79,31 +82,47 @@
     
     
 	[labelarr addObject:[_dataProvider planString]];
-    
-	_readoutLabel.labels=labelarr;
-	[_readoutLabel drawUI];
+	
+	for(int x=0;x<labelarr.count;x++){
+		
+		UILabel *label=[[UILabel alloc]initForAutoLayout];
+		label.numberOfLines=0;
+		label.font=_fonts[x];
+		label.textColor=_colors[x];
+		NSString *string=labelarr[x];
+		label.text=string;
+		if ([labelarr lastObject]==string) {
+			[label setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+		}else{
+			[label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+		}
+		
+		
+		
+		[_labelContainer addArrangedSubview:label];
+	}
     
 	
 	_selectedRouteIcon.hidden=!_isSelectedRoute;
 	
 }
 
-
-+(NSNumber*)heightForCellWithDataProvider:(RouteVO*)route{
-	
-	int height=7;
-	
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont systemFontOfSize:18]   :255 :NSLineBreakByWordWrapping];
-	height+=5;
-	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%li",(long)[route time]] :[UIFont systemFontOfSize:13] :270 :NSLineBreakByClipping];
-	height+=7;
-	
-	return [NSNumber numberWithInt:height];
-}
-
-+(int)rowHeight{
-	return STANDARDCELLHEIGHT;
-}
+//
+//+(NSNumber*)heightForCellWithDataProvider:(RouteVO*)route{
+//
+//	int height=7;
+//
+//	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont systemFontOfSize:18]   :255 :NSLineBreakByWordWrapping];
+//	height+=5;
+//	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%li",(long)[route time]] :[UIFont systemFontOfSize:13] :270 :NSLineBreakByClipping];
+//	height+=7;
+//
+//	return [NSNumber numberWithInt:height];
+//}
+//
+//+(int)rowHeight{
+//	return STANDARDCELLHEIGHT;
+//}
 
 
 

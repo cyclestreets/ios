@@ -31,6 +31,8 @@ static NSDictionary *segmentDirectionsIcons;
 @property (nonatomic, strong)	MultiLabelLine          * distLabel;
 @property (nonatomic, strong)	MultiLabelLine          * totalLabel;
 
+
+
 @property (nonatomic, strong)	 UIImageView    * iconView;
 @property (nonatomic, strong)	 UIImageView    * roadTypeiconView;
 

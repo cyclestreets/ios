@@ -15,7 +15,6 @@
 	
 }
 
--(void)createRowHeightsArray;
 -(void)showNoActiveRouteView:(BOOL)show;
 
 @end

@@ -66,6 +66,7 @@ strrchr(__FILE__, '/'), __LINE__, __PRETTY_FUNCTION__,\
 
 
 // Time
+#define TIME_SECOND 1000
 #define TIME_MINUTE 60
 #define TIME_HOUR (60*TIME_MINUTE)
 #define TIME_DAY (24*TIME_HOUR)
