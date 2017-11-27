@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB" customClass="RouteSegmentFooterView">
             <rect key="frame" x="0.0" y="0.0" width="454" height="102"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -87,6 +87,15 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="readoutContainer" destination="qhe-0W-TEM" id="dPW-mz-Ecr"/>
+                <outlet property="roadTypeLabel" destination="l3u-Jy-a6y" id="RKm-57-raR"/>
+                <outlet property="segmentDescriptionLabel" destination="qng-Js-QaS" id="rdZ-wX-7vG"/>
+                <outlet property="segmentNameLabel" destination="3ip-CP-s7I" id="ZPO-Z0-B9e"/>
+                <outlet property="segmentNumberLabel" destination="IHE-vP-Q1a" id="zZO-la-Cy3"/>
+                <outlet property="segmentRoadTypeIcon" destination="gM2-nn-Vi0" id="wT5-yO-3yg"/>
+                <outlet property="segmentTypeIcon" destination="QSf-6v-efw" id="zbN-dW-vMW"/>
+            </connections>
             <point key="canvasLocation" x="90" y="-85"/>
         </view>
     </objects>
