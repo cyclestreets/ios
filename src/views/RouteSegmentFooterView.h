@@ -12,7 +12,8 @@
 
 @interface RouteSegmentFooterView : UIView
 
-@property (nonatomic, strong)	SegmentVO		*dataProvider;
+@property (nonatomic, strong)	SegmentVO				*dataProvider;
+@property (nonatomic, weak) IBOutlet	UILabel         * segmentIndexLabel;
 
 -(void)initialise;
 -(void)updateLayout;

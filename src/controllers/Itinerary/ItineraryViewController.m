@@ -33,6 +33,7 @@
 #import "BUIconActionSheet.h"
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
+@import PureLayout;
 
 #import "CycleStreets-Swift.h"
 
@@ -251,44 +252,50 @@
 	if(show==YES){
 		
 		GradientView *errorView;
-		LayoutBox *contentContainer;
+		UIStackView *contentContainer;
 		
 		errorView = (GradientView*)[self.view viewWithTag:kItineraryPlanView];
 		
 		if(errorView!=nil)
 			[errorView removeFromSuperview];
 		
-		contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.view.height)];
-		errorView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.view.height)];
+		contentContainer=[[UIStackView alloc ]initForAutoLayout];
+		errorView=[[GradientView alloc] initForAutoLayout];
 		
 		[errorView setColoursWithCGColors:UIColorFromRGB(0xFFFFFF).CGColor :UIColorFromRGB(0xDDDDDD).CGColor];
 		errorView.tag=kItineraryPlanView;
-		contentContainer.layoutMode=BUVerticalLayoutMode;
-        contentContainer.itemPadding=20;
-        contentContainer.fixedWidth=YES;
-        contentContainer.alignMode=BUCenterAlignMode;
+		[self.view addSubview:errorView];
+		[errorView autoPinEdgesToSuperviewEdges];
 		
-		ExpandedUILabel *titlelabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-40, 10)];
+		contentContainer.axis=UILayoutConstraintAxisVertical;
+		contentContainer.spacing=20;
+		contentContainer.alignment=UIStackViewAlignmentCenter;
+		
+		UILabel *titlelabel=[[UILabel alloc]initForAutoLayout];
+		titlelabel.numberOfLines=0;
 		[AppStyling applyStyleFor:titlelabel key:AppStyleUISubtitleLabel];
 		titlelabel.text=@"You have no route active currently.";
-		[contentContainer addSubview:titlelabel];					
+		[contentContainer addArrangedSubview:titlelabel];
 		
-		ExpandedUILabel *infolabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width-40, 10)];
+		UILabel *infolabel=[[UILabel alloc]initForAutoLayout];
+		infolabel.numberOfLines=0;
 		[AppStyling applyStyleFor:infolabel key:AppStyleUIMessageLabel];
 		infolabel.text=@"Once you have loaded a route, the itinerary will be shown here.";
-		[contentContainer addSubview:infolabel];					
+		[contentContainer addArrangedSubview:infolabel];
 		
 		UIButton *routeButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"greenButton" text:@"Plan route"];
 		[routeButton addTarget:self action:@selector(swapToMapView) forControlEvents:UIControlEventTouchUpInside];
-		[contentContainer addSubview:routeButton];
+		[contentContainer addArrangedSubview:routeButton];
 		
 		UIButton *savedButton=[ButtonUtilities UIPixateButtonWithWidth:120 height:32 styleId:@"greenButton" text:@"Saved routes"];
 		[savedButton addTarget:self action:@selector(swapToSavedRoutesView) forControlEvents:UIControlEventTouchUpInside];
-		[contentContainer addSubview:savedButton];
+		[contentContainer addArrangedSubview:savedButton];
 		
 		[errorView addSubview:contentContainer];
-		[ViewUtilities alignView:contentContainer withView:errorView :BUNoneLayoutMode :BUCenterAlignMode];
-		[self.view addSubview:errorView];
+		[contentContainer autoAlignAxisToSuperviewAxis:ALAxisVertical];
+		[contentContainer autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:20];
+		[contentContainer autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:20];
+		[contentContainer autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
 		
 	}else {
 		UIView	*errorView = [self.view viewWithTag:kItineraryPlanView];

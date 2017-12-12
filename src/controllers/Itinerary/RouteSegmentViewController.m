@@ -53,6 +53,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSMapTileService.h"
 #import "CSRetinaTileRenderer.h"
 #import "UIView+Additions.h"
+#import "RouteSegmentFooterView.h"
+#import "ViewUtilities.h"
+
+@import PureLayout;
 
 @interface RouteSegmentViewController()< MKMapViewDelegate>
 
@@ -66,7 +70,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, weak) IBOutlet UIBarButtonItem					* prevPointButton;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem					* nextPointButton;
 
-@property (nonatomic, strong) CSSegmentFooterView						* footerView;
+@property (nonatomic, strong) RouteSegmentFooterView					* footerView;
 @property (nonatomic) BOOL												footerIsHidden;
 
 @property (nonatomic,strong)  SegmentVO									* currentSegment;
@@ -88,13 +92,17 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 @property (nonatomic, assign) BOOL										photomapQuerying;
 
 
-@property (nonatomic,strong)  CSRouteSegmentAnnotation						*startAnnotation;
-@property (nonatomic,strong)  CSRouteSegmentAnnotation						*endAnnotation;
+@property (nonatomic,strong)  CSRouteSegmentAnnotation					*startAnnotation;
+@property (nonatomic,strong)  CSRouteSegmentAnnotation					*endAnnotation;
 
 
 @property (nonatomic,strong)  UISwipeGestureRecognizer					*footerSwipeGesture;
 @property (nonatomic,strong)  UISwipeGestureRecognizer					*segmentNextSwipeGesture;
 @property (nonatomic,strong)  UISwipeGestureRecognizer					*segmentPreviousSwipeGesture;
+
+
+@property (nonatomic,strong)  NSLayoutConstraint						*footerConstraint;
+@property (nonatomic,assign)  Boolean									footerCreated;
 
 @end
 
@@ -188,13 +196,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	self.photoMarkers=[NSMutableArray array];
 	
 	_footerIsHidden=NO;
-	self.footerView=[[CSSegmentFooterView alloc]initWithFrame:CGRectMake(0, SCREENHEIGHT, [UIScreen mainScreen].bounds.size.width, 10)];
+	self.footerView=[ViewUtilities loadInstanceOfView:[RouteSegmentFooterView class] fromNibNamed:@"RouteSegmentFooterView"];
 	[self.view addSubview:_footerView];
+	[_footerView autoPinEdgeToSuperviewEdge:ALEdgeRight];
+	[_footerView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+	self.footerConstraint=[_footerView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self.view];
 	
 	
 	self.attributionLabel.backgroundColor=UIColorFromRGBAndAlpha(0x008000,0.2);
-	self.attributionLabel.text = _activeMapSource.shortAttribution;;
-	
+	self.attributionLabel.text = _activeMapSource.shortAttribution;
+	[_attributionLabel autoPinEdgeToSuperviewEdge:ALEdgeRight];
+	[_attributionLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+	[_attributionLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:_footerView withOffset:-10];
 
 	
 	_toolBar.clipsToBounds=YES;
@@ -257,8 +270,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 }
 
 
--(void)viewWillLayoutSubviews{
-	[self updateFooterPositions];
+-(void)viewDidLayoutSubviews{
+	//[self updateFooterInitialPosition];
 }
 
 
@@ -549,7 +562,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 	// fill the labels from the segment we are showing
 	_footerView.dataProvider=_currentSegment;
 	[_footerView updateLayout];
-	[self updateFooterPositions];
+	[self updateFooterForSize];
 	
 	
 	// centre the view around the segment
@@ -675,22 +688,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  ***********************************************/
 //
 
--(void)updateFooterPositions{
+-(void)updateFooterInitialPosition{
 	
 	BetterLog(@"");
-	
-	if(_footerIsHidden==NO){
-		CGRect	fframe=_footerView.frame;
-		CGRect	aframe=_attributionLabel.frame;
-		
-		fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
-		aframe.origin.y=fframe.origin.y-10-aframe.size.height;
-		
-		_footerView.frame=fframe;
-		_attributionLabel.frame=aframe;
-		
-		
+	if(_footerCreated==NO){
+		_footerCreated=YES;
+		[self didToggleInfo];
 	}
+	
+}
+
+
+-(void)updateFooterForSize{
+	
+	BetterLog(@"");
+	if (_footerIsHidden==NO) {
+		_footerConstraint.constant=-10;
+		[self.view layoutIfNeeded];
+	}
+	
 }
 
 
@@ -793,48 +809,37 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 - (IBAction) didToggleInfo {
 	
 	if (_footerIsHidden==NO) {
-		
-		CGRect __block fframe=_footerView.frame;
-		CGRect __block aframe=_attributionLabel.frame;
-		
-		
+
+		_footerConstraint.constant=_footerView.height;
+
 		[UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-			
-			fframe.origin.y=SCREENHEIGHTWITHNAVIGATION;
-			aframe.origin.y=fframe.origin.y-aframe.size.height-10;
-			
-			_footerView.frame=fframe;
+
+			[self.view layoutIfNeeded];
 			_footerView.alpha=0;
-			_attributionLabel.frame=aframe;
-			
+
 		} completion:^(BOOL finished) {
 			if(finished==YES)
 				_footerIsHidden=YES;
 		}];
-		
-		
+
+
 		self.infoButton.style = UIBarButtonItemStyleBordered;
-		
+
 	} else {
-		
-		CGRect __block fframe=_footerView.frame;
-		CGRect __block aframe=_attributionLabel.frame;
-		
+
+		_footerConstraint.constant=-10;
+
 		[UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-			
-			fframe.origin.y=SCREENHEIGHTWITHNAVIGATION-fframe.size.height;
-			aframe.origin.y=fframe.origin.y-10-aframe.size.height;
-			
-			_footerView.frame=fframe;
+
+			[self.view layoutIfNeeded];
 			_footerView.alpha=1;
-			_attributionLabel.frame=aframe;
-			
+
 		} completion:^(BOOL finished) {
 			if(finished==YES)
 				_footerIsHidden=NO;
 		}];
-		
-		
+
+
 		self.infoButton.style = UIBarButtonItemStyleDone;
 	}
 }

@@ -10,6 +10,8 @@
 #import "AppConstants.h"
 #import "GlobalUtilities.h"
 #import "SegmentVO.h"
+#import "CycleStreets.h"
+#import "UIView+Additions.h"
 
 @import PureLayout;
 
@@ -27,22 +29,22 @@ static NSDictionary *segmentDirectionsIcons;
 
 
 
-@property(nonatomic,strong) IBOutlet UILabel		*segmentDescriptionLabel;
-@property(nonatomic,weak) IBOutlet UILabel			*segmentNameLabel;
-@property(nonatomic,weak) IBOutlet UILabel			*roadTypeLabel;
-@property(nonatomic,weak) IBOutlet UIStackView		*labelContainer;
+@property(nonatomic,strong) IBOutlet UILabel			*segmentDescriptionLabel;
+@property(nonatomic,weak) IBOutlet UILabel				*segmentNameLabel;
+@property(nonatomic,weak) IBOutlet UILabel				*roadTypeLabel;
+@property(nonatomic,weak) IBOutlet UIStackView			*labelContainer;
 
 
-@property(nonatomic,weak) IBOutlet UILabel         *segmentNumberLabel;
 
-
-@property(nonatomic,weak) IBOutlet UIStackView		*readoutContainer;
+@property(nonatomic,weak) IBOutlet UIView				*readoutContainer;
 
 
 @property(nonatomic,weak) IBOutlet UIImageView         *segmentTypeIcon;
 @property(nonatomic,weak) IBOutlet UIImageView         *segmentRoadTypeIcon;
 
-@property (nonatomic,strong)  UISwipeGestureRecognizer					*footerSwipeGesture;
+@property (nonatomic,strong)  UISwipeGestureRecognizer	*footerSwipeGesture;
+
+@property (nonatomic,strong)  NSMutableDictionary 		*labelTargetDict;
 
 
 + (NSString *)segmentDirectionIcon:(NSString *)segmentDirectionType;
@@ -54,11 +56,18 @@ static NSDictionary *segmentDirectionsIcons;
 
 
 
+-(void)awakeFromNib{
+	[super awakeFromNib];
+	[self initialise];
+}
+
+
 -(void)initialise{
 	
 	self.fonts=[NSMutableArray arrayWithObjects:[UIFont boldSystemFontOfSize:12],[UIFont systemFontOfSize:12],nil];
 	self.colors=[NSMutableArray arrayWithObjects:UIColorFromRGB(0x542600),UIColorFromRGB(0x404040),nil];
 	
+	[self createUILabels];
 }
 
 
@@ -113,40 +122,74 @@ static NSDictionary *segmentDirectionsIcons;
 
 -(void)updateReadoutView{
 	
-	/*
-	 _timeLabel.labels=[NSMutableArray arrayWithObjects:@"Time:",[_dataProvider.infoStringDictionary objectForKey:@"hm"],nil];
-	 [_timeLabel drawUI];
-	 _distLabel.labels=[NSMutableArray arrayWithObjects:@"Dist:",[CycleStreets formattedDistanceString:[[_dataProvider.infoStringDictionary objectForKey:@"distance"] doubleValue]],nil];
-	 [_distLabel drawUI];
-	 _totalLabel.labels=[NSMutableArray arrayWithObjects:@"Total:",[CycleStreets formattedDistanceString:[[_dataProvider.infoStringDictionary objectForKey:@"total"] doubleValue]],nil];
-	 [_totalLabel drawUI];
-	 [_readoutContainer refresh];
-	 
-	 */
+	for (NSString *key in _labelTargetDict) {
+		
+		UILabel *label=_labelTargetDict[key];
+		
+		if([key isEqualToString:@"Time:"]){
+			label.text=[_dataProvider.infoStringDictionary objectForKey:@"hm"];
+		}else if ([key isEqualToString:@"Dist:"]){
+			label.text=[CycleStreets formattedDistanceString:[[_dataProvider.infoStringDictionary objectForKey:@"distance"] doubleValue]];
+		}else{
+			label.text=[CycleStreets formattedDistanceString:[[_dataProvider.infoStringDictionary objectForKey:@"total"] doubleValue]];
+		}
+		
+	}
 	
 	
 }
 
--(void)createUILabels:(NSMutableArray*)arr{
+-(void)createUILabels{
 	
-	self.labels=[NSMutableArray array];
+	NSArray *config=@[@"Time:",@"Dist:",@"Total:"];
+	self.labelTargetDict=[NSMutableDictionary dictionary];
 	
-	for(int x=0;x<arr.count;x++){
+	
+	for (NSString *key in config) {
 		
-		UILabel *label=[[UILabel alloc]initForAutoLayout];
-		label.numberOfLines=0;
-		label.font=_fonts[x];
-		label.textColor=_colors[x];
-		if (x==arr.count-1) {
-			[label setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-		}else{
-			[label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+		UIStackView *groupcontainer=[[UIStackView alloc]initForAutoLayout];
+		groupcontainer.axis=UILayoutConstraintAxisHorizontal;
+		groupcontainer.spacing=2;
+		
+		for(int x=0;x<_fonts.count;x++){
+			
+			UILabel *label=[[UILabel alloc]initForAutoLayout];
+			label.numberOfLines=0;
+			label.font=_fonts[x];
+			label.textColor=_colors[x];
+			if (x==1) {
+				[label setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+			}else{
+				label.text=key;
+				[label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+			}
+			
+			if(x==1)
+				[_labelTargetDict setObject:label forKey:key];
+				
+			[groupcontainer addArrangedSubview:label];
+			
 		}
 		
-		[_labels addObject:label];
+		[_readoutContainer addSubview:groupcontainer];
 		
-		[_labelContainer addArrangedSubview:label];
+		
 	}
+	
+
+	UIView *targetView=nil;
+	for (UIStackView *stackView in _readoutContainer.subviews) {
+		if(targetView==nil){
+			[stackView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+		}else{
+			[stackView autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:targetView withOffset:5];
+		}
+		targetView=stackView;
+		[targetView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+	}
+	
+	[_readoutContainer autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:targetView];
+	[_readoutContainer autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:_labelContainer];
 	
 }
 

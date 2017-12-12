@@ -21,6 +21,8 @@
 
 #import "CycleStreets-Swift.h"
 
+@import PureLayout;
+
 @implementation SuperViewController
 @synthesize navigation;
 @synthesize frame;
@@ -363,40 +365,40 @@
 		}
 		
 		activeViewOverlayType=type;
-		LayoutBox *contentContainer;
+		UIStackView *contentContainer;
 		
 		if([UIType isEqualToString:UITYPE_CONTROLUI]){
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SCREENHEIGHTWITHCONTROLUI)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
+			contentContainer=[[UIStackView alloc] initForAutoLayout];
+			self.viewOverlayView=[[GradientView alloc] initForAutoLayout];
 		}else if ([UIType isEqualToString:UITYPE_CONTROLHEADERUI]) {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SCREENHEIGHTWITHCONTROLANDHEADERUI)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
+			contentContainer=[[UIStackView alloc] initForAutoLayout];
+			self.viewOverlayView=[[GradientView alloc] initForAutoLayout];
 			
 		}else if ([UIType isEqualToString:UITYPE_MODALUI]) {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, SCREENHEIGHTWITHMODALNAV)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
+			contentContainer=[[UIStackView alloc] initForAutoLayout];
+			self.viewOverlayView=[[GradientView alloc] initForAutoLayout];
 		}else if ([UIType isEqualToString:UITYPE_MODALTABLEVIEWUI]) {
 			
 			UITableView *targetTable=[self valueForKey:@"tableView"];
 			CGRect targetRect=targetTable.frame;
-			contentContainer=[[LayoutBox alloc] initWithFrame:targetRect];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
+			contentContainer=[[UIStackView alloc] initForAutoLayout];
+			self.viewOverlayView=[[GradientView alloc] initForAutoLayout];
 			
 		}else if ([UIType isEqualToString:UITYPE_NAVTABUI]) {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, NAVTABVIEWHEIGHT)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, NAVTABVIEWHEIGHT)];
+			contentContainer=[[UIStackView alloc] initForAutoLayout];
+			self.viewOverlayView=[[GradientView alloc] initForAutoLayout];
 		}else {
-			contentContainer=[[LayoutBox alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.view.height)];
-			self.viewOverlayView=[[GradientView alloc] initWithFrame:contentContainer.frame];
+			contentContainer=[[UIStackView alloc] initForAutoLayout];
+			self.viewOverlayView=[[GradientView alloc] initForAutoLayout];
 		}
         
 		
 		[viewOverlayView setColoursWithCGColors:UIColorFromRGB(0xeeeeee).CGColor :UIColorFromRGB(0xECECEC).CGColor];
 		viewOverlayView.tag=kSuperViewOverlayViewTag;
-        contentContainer.layoutMode=BUVerticalLayoutMode;
-		contentContainer.itemPadding=10;
-		contentContainer.fixedWidth=YES;
-		contentContainer.alignMode=BUCenterAlignMode;
+		
+		contentContainer.axis=UILayoutConstraintAxisVertical;
+		contentContainer.spacing=10;
+		contentContainer.alignment=UIStackViewAlignmentCenter;
 		
 		
 		switch(type){
@@ -407,7 +409,7 @@
 					UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
 					iview.image=[[StyleManager sharedInstance] imageForType:icon];
 					iview.alpha=.3;
-					[contentContainer addSubview:iview];
+					[contentContainer addArrangedSubview:iview];
 				}
 				
 			break;
@@ -418,7 +420,7 @@
 				UIImageView *iview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
 				iview.image=[UIImage imageNamed:@"alertLarge.png"];
 				iview.alpha=.3;
-				[contentContainer addSubview:iview];
+				[contentContainer addArrangedSubview:iview];
 			}
 				break;
 				
@@ -428,7 +430,7 @@
 				CGRect aframe=CGRectMake(0, 0, 20, 20);
 				activity.frame=aframe;
 				[activity startAnimating];
-				[contentContainer addSubview:activity];
+				[contentContainer addArrangedSubview:activity];
 			}
 				break;
 				
@@ -466,7 +468,7 @@
 			ilabel.text=[[StringManager sharedInstance] stringForSection:@"ui" andType:message];
 		}
 		
-		[contentContainer addSubview:ilabel];
+		[contentContainer addArrangedSubview:ilabel];
 		
 		
 		
@@ -486,7 +488,7 @@
 			{
 				UIButton *button=[ButtonUtilities UIButtonWithWidth:100 height:30 type:@"racinggreen" text:@"Login"];
 				[button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-				[contentContainer addSubview:button];
+				[contentContainer addArrangedSubview:button];
 				
 			}
 				
@@ -498,16 +500,14 @@
 		
 		[viewOverlayView addSubview:contentContainer];
 		
-		if ([UIType isEqualToString:UITYPE_MODALTABLEVIEWUI]){
-			[ViewUtilities alignView:contentContainer withView:viewOverlayView :BUNoneAlignMode :BUTopAlignMode :44];
-		}else{
-			[ViewUtilities alignView:contentContainer withView:viewOverlayView :BUNoneLayoutMode :BUCenterAlignMode];
-		}
-		
-		
+		[contentContainer autoAlignAxisToSuperviewAxis:ALAxisVertical];
+		[contentContainer autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:20];
+		[contentContainer autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:20];
+		[contentContainer autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
 		
 		
 		[self.view addSubview:viewOverlayView];
+		[viewOverlayView autoPinEdgesToSuperviewEdges];
 		
 		
 	}else {

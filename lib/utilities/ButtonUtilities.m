@@ -184,7 +184,7 @@
 	
 	CGFloat twidth=[GlobalUtilities calculateWidthOfText:text :button.titleLabel.font]+20;
 	[button autoSetDimensionsToSize:CGSizeMake(MAX(twidth,width), height)];
-
+	
 		
 	// Configure title(s)
 	[button setTitle:text forState:UIControlStateNormal];
