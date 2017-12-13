@@ -68,7 +68,7 @@
 	self.label=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, maxLabelWidth, 10)];
 	label.textColor=UIColorFromRGB(0x666666);
 	label.textAlignment=UITextAlignmentCenter;
-	label.fixedWidth=YES;
+	//label.fixedWidth=YES;
 	
 	if(labelFont!=nil){
 		label.font=labelFont;

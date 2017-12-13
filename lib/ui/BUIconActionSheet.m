@@ -72,7 +72,7 @@
 	if(_title!=nil){
 		
 		ExpandedUILabel *title=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
-		title.fixedWidth=YES;
+		//title.fixedWidth=YES;
 		title.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:16];
 		title.textColor=[UIColor darkGrayColor];
 		title.textAlignment=UITextAlignmentCenter;

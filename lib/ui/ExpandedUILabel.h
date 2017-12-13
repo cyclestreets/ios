@@ -9,18 +9,12 @@
 #import <Foundation/Foundation.h>
 
 
-@interface ExpandedUILabel : UILabel {
-	BOOL			multiline;		
-	BOOL			fixedWidth;
-	int				insetValue;
-	UIColor			*__unsafe_unretained labelColor;
-    BOOL			hasShadow;
-}
+@interface ExpandedUILabel : UILabel
+
 @property (nonatomic, assign) IBInspectable	BOOL	multiline;
-@property (nonatomic, assign) IBInspectable	BOOL	fixedWidth;
-@property (nonatomic, assign) IBInspectable	int	insetValue;
+@property (nonatomic, assign) IBInspectable	int		insetValue;
 @property (nonatomic, unsafe_unretained)	UIColor	*labelColor;
-@property (nonatomic)		BOOL		 hasShadow;
+@property (nonatomic)		BOOL		 			hasShadow;
 
 @property (nonatomic)  UIEdgeInsets textInsets;
 

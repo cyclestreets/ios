@@ -1,8 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Helvetica.ttc">
+            <string>Helvetica</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoMapViewController">
             <connections>
@@ -23,12 +32,12 @@
                 <navigationBar contentMode="scaleToFill" translucent="NO" id="CGU-BV-w4R">
                     <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    <color key="backgroundColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
-                    <color key="tintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
-                    <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <textAttributes key="titleTextAttributes">
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </textAttributes>
                     <items>
                         <navigationItem title="Photos" id="pdb-oa-FsR"/>
@@ -37,34 +46,28 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="Uk5-L9-65u">
                     <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                     <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                    <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </mapView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" id="37" customClass="ExpandedUILabel">
-                    <rect key="frame" x="279.99999939433991" y="485" width="30" height="25"/>
+                    <rect key="frame" x="280" y="485" width="30" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="0.1000000015" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="0.1000000015" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="multiline" value="NO"/>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="fixedWidth" value="NO"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="insetValue">
                             <integer key="value" value="5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
-            <color key="tintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.72941176470000002" green="0.20392156859999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
             <point key="canvasLocation" x="138.99999999999989" y="154"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

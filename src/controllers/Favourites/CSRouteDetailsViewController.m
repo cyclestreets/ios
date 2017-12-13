@@ -41,6 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #import "CSElevationGraphView.h"
 #import "UIActionSheet+BlocksKit.h"
 
+@import PureLayout;
 
 static NSString *const VIEWTITLE=@"Route details";
 
@@ -48,12 +49,12 @@ static NSString *const VIEWTITLE=@"Route details";
 @interface CSRouteDetailsViewController()<UIActionSheetDelegate>
 
 @property (nonatomic, strong) UIScrollView           * scrollView;
-@property (nonatomic, strong) LayoutBox              * viewContainer;
-@property (nonatomic, weak) IBOutlet LayoutBox       * headerContainer;
+@property (nonatomic, strong) UIStackView              * viewContainer;
+@property (nonatomic, weak) IBOutlet UIStackView       * headerContainer;
 @property (nonatomic, weak) IBOutlet ExpandedUILabel * routeNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * routeidLabel;
-@property (nonatomic, weak) IBOutlet LayoutBox       * readoutContainer;
+@property (nonatomic, weak) IBOutlet UIStackView       * readoutContainer;
 @property (nonatomic, weak) IBOutlet UILabel         * timeLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * lengthLabel;
 @property (nonatomic, weak) IBOutlet UILabel         * planLabel;
@@ -152,25 +153,17 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	self.title=VIEWTITLE;
 	
-	self.scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHTWITHNAVANDTAB)];
+	self.scrollView=[[UIScrollView alloc]initForAutoLayout];
 	[self.view addSubview:_scrollView];
+	[_scrollView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(20, 20, 30, 20)];
 	
-	_viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	_viewContainer.fixedWidth=YES;
-	_viewContainer.itemPadding=5;
-	_viewContainer.paddingTop=10;
-	_viewContainer.paddingBottom=20;
-	_viewContainer.layoutMode=BUVerticalLayoutMode;
-	_viewContainer.alignMode=BUCenterAlignMode;
-	[_scrollView addSubview:_viewContainer];
+	self.viewContainer=[[UIStackView alloc] initForAutoLayout];
+	_viewContainer.axis=UILayoutConstraintAxisVertical;
+	_viewContainer.distribution=UIStackViewDistributionFill;
+	_viewContainer.spacing=10;
 	
-	_headerContainer.layoutMode=BUVerticalLayoutMode;
-	[_headerContainer initFromNIB];
-	_readoutContainer.layoutMode=BUVerticalLayoutMode;
-    _readoutContainer.paddingTop=0;
-	[_readoutContainer initFromNIB];
+	self.elevationView=[[CSElevationGraphView alloc] initForAutoLayout];
 	
-	self.elevationView=[[CSElevationGraphView alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 170)];
 	
 	__weak __typeof(&*self)weakSelf = self;
 	_elevationView.touchedBlock=^(BOOL touched){
@@ -182,22 +175,37 @@ static NSString *const VIEWTITLE=@"Route details";
 	_elevationView.backgroundColor=[UIColor clearColor];
 
 	
-	
-	BUDividerView *d1=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 4)];
+	BUDividerView *d1=[[BUDividerView alloc]initForAutoLayout];
 	d1.topStrokeColor=[UIColor lightGrayColor];
 	d1.bottomStrokeColor=[UIColor clearColor];
-	BUDividerView *d2=[[BUDividerView alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	[d1 autoSetDimension:ALDimensionHeight toSize:4];
+	
+	BUDividerView *d2=[[BUDividerView alloc]initForAutoLayout];
 	d2.topStrokeColor=[UIColor lightGrayColor];
 	d2.bottomStrokeColor=[UIColor clearColor];
+	[d2 autoSetDimension:ALDimensionHeight toSize:10];
 	
-	_routeNameLabel.multiline=YES;
 	
-	[_viewContainer addSubViewsFromArray:[NSMutableArray arrayWithObjects:_headerContainer,d1,_readoutContainer,d2,_elevationView,_selectRouteButton, nil]];
+	NSArray *views=@[_headerContainer,d1,_readoutContainer,d2,_elevationView,_selectRouteButton];
+	for(UIView *view in views){
+		
+		[_viewContainer addArrangedSubview:view];
+	}
+	
+	[_elevationView autoSetDimension:ALDimensionHeight toSize:170];
+	[_elevationView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:_viewContainer];
+	
+	[_scrollView addSubview:_viewContainer];
+	[_viewContainer autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:_scrollView];
+	[_viewContainer autoPinEdgesToSuperviewEdges];
+	[_scrollView layoutIfNeeded];
+	
 	
 	if(_dataType!=SavedRoutesDataTypeItinerary){
 		UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didSelectRouteActions)];
 		[self.navigationItem setRightBarButtonItem:actionButton];
 	}
+	
 		
 }
 
@@ -216,7 +224,6 @@ static NSString *const VIEWTITLE=@"Route details";
 	self.routeNameLabel.text = _route.nameString;
 	self.dateLabel.text=_route.dateString;
 	self.routeidLabel.text=[NSString stringWithFormat:@"#%@", [_route routeid]];
-	[_headerContainer refresh];
 	
 	_timeLabel.text=_route.timeString;
 	_lengthLabel.text=_route.lengthString;
@@ -226,20 +233,25 @@ static NSString *const VIEWTITLE=@"Route details";
 	_coLabel.text=_route.coString;
 	
 	_elevationView.dataProvider=_route;
-	[_elevationView update];
+	
 	
     BOOL isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:_route];
     _selectedRouteIcon.visible=isSelectedRoute;
 	
     _selectRouteButton.enabled=!isSelectedRoute;
 	_selectRouteButton.visible=_dataType!=SavedRoutesDataTypeItinerary;
-    
 	
-	[_viewContainer refresh];
 	
-	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.height)];
+	[_scrollView setContentSize:CGSizeMake(_viewContainer.width, _viewContainer.height)];
 }
 
+-(void)viewWillLayoutSubviews{
+	[super viewWillLayoutSubviews];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[_elevationView update];
+	});
+	
+}
 
 
 //------------------------------------------------------------------------------------

@@ -9,25 +9,20 @@
 #import "ExpandedUILabel.h"
 #import "GlobalUtilities.h"
 
-@interface ExpandedUILabel(Private)
--(void)updateText;
+@interface ExpandedUILabel()
 
 @end
 
 
 @implementation ExpandedUILabel
-@synthesize multiline;
-@synthesize fixedWidth;
-@synthesize insetValue;
-@synthesize labelColor;
-@synthesize hasShadow;
+
 
 //=========================================================== 
 // dealloc
 //=========================================================== 
 - (void)dealloc
 {
-    labelColor = nil;
+	_labelColor = nil;
 	
 }
 
@@ -37,9 +32,7 @@
 // Called when creating containe by code
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
-		multiline=YES;
-		fixedWidth=NO;
-		insetValue=0;
+		_insetValue=0;
 		self.backgroundColor=[UIColor clearColor];
     }
     return self;
@@ -48,9 +41,7 @@
 // Called when container is in IB
 - (id)initWithCoder:(NSCoder*)decoder {
 	if (self = [super initWithCoder:decoder]) {
-		multiline=YES;
-		fixedWidth=NO;
-		insetValue=0;
+		_insetValue=0;
 		self.backgroundColor=[UIColor clearColor];
     }
     return self;
@@ -64,20 +55,15 @@
 
 - (void)setText:(NSString *)aText
 {
-	if(insetValue>0){
-		self.textInsets=UIEdgeInsetsMake(insetValue, insetValue, insetValue, insetValue);
+	if(_insetValue>0){
+		self.textInsets=UIEdgeInsetsMake(_insetValue, _insetValue, _insetValue, _insetValue);
 	}
 	
 	
     if (super.text != aText) {
         [super setText:aText];
-		//[self updateText];
     }
-    
-    if(hasShadow==YES){
-		self.shadowColor=[UIColor whiteColor];
-		self.shadowOffset=CGSizeMake(0, 1);
-	}
+	
 }
 
 
@@ -106,33 +92,6 @@
 	[super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.textInsets)];
 }
 
-
--(void)updateText{
-	if(multiline==YES){
-		self.numberOfLines=0;
-		CGRect tframe=self.frame;
-		CGFloat theight=[GlobalUtilities calculateHeightOfTextFromWidth:self.text :self.font :tframe.size.width :NSLineBreakByWordWrapping];
-		tframe.size.height=theight;
-		self.frame=tframe;
-	}else {
-		self.numberOfLines=1;
-		CGRect tframe=self.frame;
-		CGFloat twidth=[GlobalUtilities calculateWidthOfText:self.text :self.font];
-		if(fixedWidth==NO){
-			CGFloat theight=[GlobalUtilities calculateHeightOfTextFromWidth:self.text :self.font :twidth :NSLineBreakByWordWrapping];
-			tframe.size.height=MAX(theight,tframe.size.height);			
-		}else {
-			self.lineBreakMode=UILineBreakModeTailTruncation;
-			twidth=MIN(twidth,tframe.size.width);
-		}
-		if(insetValue>0)
-			twidth=twidth+(insetValue*2);
-		
-		tframe.size.width=twidth;
-		self.frame=tframe;
-	}
-
-}
 
 
 @end

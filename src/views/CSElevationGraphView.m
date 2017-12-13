@@ -19,6 +19,8 @@
 #import "LayoutBox.h"
 #import "RouteManager.h"
 
+@import PureLayout;
+
 
 enum  {
 	CSElevationUIStateActive, 
@@ -34,7 +36,7 @@ typedef int CSElevationUIState;
 
 @interface CSElevationGraphView()
 
-@property(nonatomic,strong)  LayoutBox					*inactiveView;
+@property(nonatomic,strong)  UIStackView				*inactiveView;
 @property(nonatomic,strong)  UIView						*activeView;
 @property(nonatomic,assign)  CSElevationUIState			uiState;
 
@@ -74,43 +76,53 @@ typedef int CSElevationUIState;
 	
 	// active UI
 	
-	self.activeView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, self.height)];
+	self.activeView=[[UIView alloc]initForAutoLayout];
 	[self addSubview:_activeView];
+	[_activeView autoPinEdgesToSuperviewEdges];
 	
-	self.yAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 25, 15)];
+	self.yAxisLabel=[[ExpandedUILabel alloc]initForAutoLayout];
 	_yAxisLabel.textColor=[UIColor whiteColor];
 	_yAxisLabel.font=[UIFont systemFontOfSize:13];
 	_yAxisLabel.textAlignment=UITextAlignmentCenter;
 	_yAxisLabel.layer.cornerRadius=4;
-	_yAxisLabel.multiline=NO;
+	_yAxisLabel.numberOfLines=1;
 	_yAxisLabel.insetValue=3;
 	_yAxisLabel.backgroundColor=UIColorFromRGB(0xF76117);
 	_yAxisLabel.text=@"m";
 	[_activeView addSubview:_yAxisLabel];
+	[_yAxisLabel autoPinEdgeToSuperviewEdge:ALEdgeTop];
+	[_yAxisLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+	[_yAxisLabel autoSetDimension:ALDimensionHeight toSize:15];
 	
-	self.xAxisLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(20, graphHeight+25, 25, 15)];
+	
+	
+	self.graphView=[[CSGraphView alloc] initForAutoLayout];
+	_graphView.delegate=self;
+	_graphView.backgroundColor=UIColorFromRGB(0x509720);
+	
+	
+	
+	[_activeView addSubview:_graphView];
+	[_graphView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_yAxisLabel withOffset:10];
+	[_graphView autoPinEdgeToSuperviewEdge:ALEdgeRight];
+	[_graphView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
+	[_graphView autoSetDimension:ALDimensionHeight toSize:graphHeight];
+	
+	
+	self.xAxisLabel=[[ExpandedUILabel alloc]initForAutoLayout];
 	_xAxisLabel.textColor=[UIColor whiteColor];
-	_xAxisLabel.multiline=NO;
+	_xAxisLabel.numberOfLines=1;
 	_xAxisLabel.insetValue=3;
 	_xAxisLabel.font=[UIFont systemFontOfSize:13];
-	_xAxisLabel.textAlignment=UITextAlignmentCenter;
+	_xAxisLabel.textAlignment=NSTextAlignmentRight;
 	_xAxisLabel.layer.cornerRadius=4;
 	_xAxisLabel.backgroundColor=UIColorFromRGB(0xF76117);
 	_xAxisLabel.text=@"km";
 	[_activeView addSubview:_xAxisLabel];
+	[_xAxisLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:_graphView withOffset:10];
+	[_xAxisLabel autoPinEdgeToSuperviewEdge:ALEdgeRight];
+	[_xAxisLabel autoSetDimension:ALDimensionHeight toSize:15];
 	
-	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUNoneAlignMode];
-	
-	
-	self.graphView=[[CSGraphView alloc] initWithFrame:CGRectMake(0, 20, UIWIDTH, graphHeight)];
-	_graphView.delegate=self;
-	_graphView.backgroundColor=UIColorFromRGB(0x509720);
-	
-	self.graphMaskLayer = [CAShapeLayer layer];
-	[_graphMaskLayer setFrame:CGRectMake(0, 0, UIWIDTH, graphHeight)];
-	_graphView.layer.mask = _graphMaskLayer;
-	
-	[_activeView addSubview:_graphView];
 	
 	
 	self.calloutView=[[BUCalloutView alloc]initWithFrame:CGRectMake(20, 0, 80, 30)];
@@ -123,37 +135,45 @@ typedef int CSElevationUIState;
 	[_activeView addSubview:_calloutView];
 	
 	
-	ExpandedUILabel *infoLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, self.height, UIWIDTH, 15)];
-	infoLabel.fixedWidth=YES;
+	UILabel *infoLabel=[[UILabel alloc]initForAutoLayout];
+	infoLabel.numberOfLines=0;
 	infoLabel.textColor=[UIColor darkGrayColor];
-	infoLabel.multiline=YES;
 	infoLabel.font=[UIFont systemFontOfSize:12];
 	infoLabel.text=@"CycleStreets routes automatically avoid going up hills or inclines where a reasonable alternative exists.";
 	[_activeView addSubview:infoLabel];
 	
-	[ViewUtilities alignView:infoLabel withView:self :BUNoneAlignMode :BUBottomAlignMode];
-	
-	
+	[infoLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, -10, 0) excludingEdge:ALEdgeTop];
 	
 	
 	// inactive UI 
+	[self createInactiveView];
 	
-	self.inactiveView=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
-	_inactiveView.layoutMode=BUVerticalLayoutMode;
-	_inactiveView.itemPadding=10;
-	ExpandedUILabel *inactiveLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, UIWIDTH, 15)];
-	inactiveLabel.fixedWidth=YES;
+
+}
+
+
+-(void)createInactiveView{
+	
+	
+	self.inactiveView=[[UIStackView alloc] initForAutoLayout];
+	_inactiveView.axis=BUVerticalLayoutMode;
+	_inactiveView.spacing=10;
+	_inactiveView.alignment=UIStackViewAlignmentCenter;
+	
+	UILabel *inactiveLabel=[[UILabel alloc]initForAutoLayout];
 	inactiveLabel.textColor=[UIColor darkGrayColor];
-	inactiveLabel.multiline=YES;
+	inactiveLabel.numberOfLines=0;
 	inactiveLabel.font=[UIFont systemFontOfSize:14];
 	inactiveLabel.text=@"There is no elevation data currently in this route, please press Update to get this data from the server.";
-	[_inactiveView addSubview:inactiveLabel];
-	[self addSubview:_inactiveView];
+	[_inactiveView addArrangedSubview:inactiveLabel];
 	
 	UIButton *button=[ButtonUtilities UIPixateButtonWithWidth:200 height:30 styleId:@"orangeButton" text:@"Update" ];
 	[button addTarget:self action:@selector(updateRoute:) forControlEvents:UIControlEventTouchUpInside];
-	[_inactiveView addSubview:button];
-
+	[_inactiveView addArrangedSubview:button];
+	
+	[self addSubview:_inactiveView];
+	[_inactiveView autoPinEdgesToSuperviewMargins];
+	
 }
 
 
@@ -167,7 +187,6 @@ typedef int CSElevationUIState;
 		
 		self.touchedBlock(YES);
 		
-		//[self.delegate touchInGraph:YES];
 		
 		[UIView animateWithDuration:0.3 animations:^{
 			_calloutView.alpha=1;
@@ -243,8 +262,6 @@ typedef int CSElevationUIState;
 	
 	self.touchedBlock(NO);
 	
-	//[self.delegate touchInGraph:NO];
-	
 }
 
 
@@ -270,6 +287,11 @@ typedef int CSElevationUIState;
 
 
 -(void)update{
+	
+	self.graphMaskLayer = [CAShapeLayer layer];
+	[_graphMaskLayer setFrame:CGRectMake(0, 0, self.width, graphHeight)];
+	_graphView.layer.mask = _graphMaskLayer;
+	_calloutView.maxX=_graphView.width;
 	
 	
 	if(_dataProvider.hasElevationData==NO){
@@ -300,7 +322,7 @@ typedef int CSElevationUIState;
 	
 	_yAxisLabel.text=[NSString stringWithFormat:@"%i m",maxelevation];
 	_xAxisLabel.text=_dataProvider.lengthString;
-	[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUNoneAlignMode];
+	//[ViewUtilities alignView:_xAxisLabel withView:self :BURightAlignMode :BUNoneAlignMode];
 	
 	
 	// startpoint
@@ -326,7 +348,7 @@ typedef int CSElevationUIState;
 		// x value
 		currentDistance+=[segment segmentDistance];
 		float xpercent=currentDistance/[_dataProvider.length floatValue];
-		xpos=UIWIDTH*xpercent;
+		xpos=_graphView.width*xpercent;
 		
 		// callout values
 		float insetindex=xpercent*100.0f;
@@ -334,22 +356,8 @@ typedef int CSElevationUIState;
 		
 		// ensures last point is max x, handles rounding errors
 		if (index==_dataProvider.segments.count-1) {
-			xpos=UIWIDTH;
+			xpos=_graphView.width;
 		}
-		
-		//BetterLog(@"point %i, ypos: %i  xpos:%i (xp: %i= %f)",index,ypos,xpos,[segment segmentDistance],xpercent);
-		
-		// debug only
-		
-		/*
-		ExpandedUILabel *label=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(xpos-1, ypos-1, 14,14)];
-		label.backgroundColor=[UIColor clearColor];
-		label.font=[UIFont systemFontOfSize:11];
-		label.text=[NSString stringWithFormat:@"%i",index];
-		[_graphView addSubview:label];
-		 */
-		 
-		//
 
 		[path addLineToPoint:CGPointMake(xpos, ypos)];
 			
@@ -357,10 +365,7 @@ typedef int CSElevationUIState;
 				
 	}
 	
-	[path addLineToPoint:CGPointMake(UIWIDTH, _graphView.height)];
-	
-	//BetterLog(@"%@",_elevationArray);
-
+	[path addLineToPoint:CGPointMake(_graphView.width, _graphView.height)];
 	 
 	self.graphPath=path;
 	[_graphMaskLayer setPath:path.CGPath];

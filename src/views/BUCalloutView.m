@@ -12,6 +12,8 @@
 #import "UIView+Additions.h"
 #import "GlobalUtilities.h"
 
+@import PureLayout;
+
 @interface BUCalloutView()
 
 @property(nonatomic,strong)  NSString							*title;
@@ -31,17 +33,25 @@
 		
 		self.backgroundColor=[UIColor clearColor];
 		
-		self.backgroundView=[[BUCalloutBackgroundView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+		self.backgroundView=[[BUCalloutBackgroundView alloc] initForAutoLayout];
 		[self addSubview:_backgroundView];
+		
         
-		self.titleLabel=[[ExpandedUILabel alloc]initWithFrame:CGRectMake(0, 0, 10, 13)];
-		_titleLabel.multiline=NO;
+		self.titleLabel=[[ExpandedUILabel alloc]initForAutoLayout];
+		_titleLabel.numberOfLines=1;
 		_titleLabel.insetValue=5;
 		_titleLabel.textAlignment=UITextAlignmentCenter;
 		_titleLabel.textColor=[UIColor whiteColor];
 		_titleLabel.font=[UIFont boldSystemFontOfSize:13];
+		[_titleLabel autoSetDimension:ALDimensionHeight toSize:13];
 		[self addSubview:_titleLabel];
+		[_titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:4];
+		[_titleLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft];
 		
+		[_backgroundView autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:_titleLabel];
+		[_backgroundView autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:_titleLabel];
+		[_backgroundView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+		[_backgroundView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
 		
 		
     }
@@ -53,11 +63,11 @@
 -(void)updateTitleLabel:(NSString*)str{
 
 	_titleLabel.text=str;
+	[self layoutIfNeeded];
 	
 	_backgroundView.fillColor=_fillColor;
 	_backgroundView.cornerRadius=_cornerRadius;
 	
-	[_backgroundView setFrame:CGRectMake(0, 0, _titleLabel.width, _titleLabel.height+12)];
 	[_backgroundView setNeedsDisplay];
 	
 	self.width=_titleLabel.width;

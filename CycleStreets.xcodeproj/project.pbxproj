@@ -546,7 +546,6 @@
 		283436FE15DD5DC300B00FD5 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		283436FF15DD5DC300B00FD5 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		2834370015DD5DC300B00FD5 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
-		2834370115DD5DC300B00FD5 /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		2834370215DD5DC300B00FD5 /* SettingsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ECBCE1344A28900B8A6AC /* SettingsVO.m */; };
 		2834370715DD5DC300B00FD5 /* FavouritesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A1134E508800A22093 /* FavouritesCellView.m */; };
 		2834370815DD5DC300B00FD5 /* CSRouteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2863A3A7134E508800A22093 /* CSRouteDetailsViewController.m */; };
@@ -908,7 +907,6 @@
 		288D693A1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */; };
 		288D693B1A782B2700564D0B /* CSBarButton_followuser_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 288D69381A782B2700564D0B /* CSBarButton_followuser_selected@2x.png */; };
 		288EC18E1FBA0E8600AC598F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288EC18D1FBA0E8600AC598F /* Launch Screen.storyboard */; };
-		28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		28920F5E1AD3CB5100997461 /* CSTableLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28920F5B1AD3CB5100997461 /* CSTableLoadingCell.xib */; };
 		28920F611AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
 		28920F621AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28920F601AD3CBB200997461 /* CSTableLoadingCellView.m */; };
@@ -1248,7 +1246,6 @@
 		28A264271AE65AB4006C09A7 /* TBXML+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28965C5318BF3CC3001BB258 /* TBXML+Additions.m */; };
 		28A264281AE65AB4006C09A7 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		28A264291AE65AB4006C09A7 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
-		28A2642A1AE65AB4006C09A7 /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		28A2642B1AE65AB4006C09A7 /* SettingsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ECBCE1344A28900B8A6AC /* SettingsVO.m */; };
 		28A2642C1AE65AB4006C09A7 /* MKMapView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3677B18B275C800F7244C /* MKMapView+Additions.m */; };
 		28A2642D1AE65AB4006C09A7 /* FirstRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B6B2EC1A5AA209002DF099 /* FirstRunViewController.m */; };
@@ -1864,7 +1861,6 @@
 		28FA8B4019E454E80040EA46 /* RouteCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E5B1332862000FAD008 /* RouteCellView.m */; };
 		28FA8B4119E454E80040EA46 /* RouteVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28443E621332867D00FAD008 /* RouteVO.m */; };
 		28FA8B4219E454E80040EA46 /* RouteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D246021338926E00188783 /* RouteManager.m */; };
-		28FA8B4319E454E80040EA46 /* CSSegmentFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28916031133A9AC9000C821B /* CSSegmentFooterView.m */; };
 		28FA8B4419E454E80040EA46 /* CSOpenStreetMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 28890959193F385D009C4325 /* CSOpenStreetMapSource.m */; };
 		28FA8B4519E454E80040EA46 /* PhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6A7E18AE427B00EF0436 /* PhotoMapViewController.m */; };
 		28FA8B4619E454E80040EA46 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2889095B193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m */; };
@@ -5958,7 +5954,6 @@
 				286FD3031A02558100EB8C20 /* POICatLocationCellView.m in Sources */,
 				28347AA61A37695300FA83BE /* UserRouteCellView.m in Sources */,
 				28920F611AD3CBB200997461 /* CSTableLoadingCellView.m in Sources */,
-				28916032133A9AC9000C821B /* CSSegmentFooterView.m in Sources */,
 				2889095E193F385D009C4325 /* CSOpenStreetMapSource.m in Sources */,
 				28727AD118B5222200D957FD /* PhotoMapViewController.m in Sources */,
 				28890960193F385D009C4325 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */,
@@ -6136,7 +6131,6 @@
 				28965C5518BF3CC3001BB258 /* TBXML+Additions.m in Sources */,
 				283436FF15DD5DC300B00FD5 /* RouteVO.m in Sources */,
 				2834370015DD5DC300B00FD5 /* RouteManager.m in Sources */,
-				2834370115DD5DC300B00FD5 /* CSSegmentFooterView.m in Sources */,
 				2834370215DD5DC300B00FD5 /* SettingsVO.m in Sources */,
 				28B3677D18B275C800F7244C /* MKMapView+Additions.m in Sources */,
 				28B6B2EE1A5AA209002DF099 /* FirstRunViewController.m in Sources */,
@@ -6320,7 +6314,6 @@
 				28A264271AE65AB4006C09A7 /* TBXML+Additions.m in Sources */,
 				28A264281AE65AB4006C09A7 /* RouteVO.m in Sources */,
 				28A264291AE65AB4006C09A7 /* RouteManager.m in Sources */,
-				28A2642A1AE65AB4006C09A7 /* CSSegmentFooterView.m in Sources */,
 				28A2642B1AE65AB4006C09A7 /* SettingsVO.m in Sources */,
 				28A2642C1AE65AB4006C09A7 /* MKMapView+Additions.m in Sources */,
 				28A2642D1AE65AB4006C09A7 /* FirstRunViewController.m in Sources */,
@@ -6506,7 +6499,6 @@
 				28FA8B4019E454E80040EA46 /* RouteCellView.m in Sources */,
 				28FA8B4119E454E80040EA46 /* RouteVO.m in Sources */,
 				28FA8B4219E454E80040EA46 /* RouteManager.m in Sources */,
-				28FA8B4319E454E80040EA46 /* CSSegmentFooterView.m in Sources */,
 				28FA8B4419E454E80040EA46 /* CSOpenStreetMapSource.m in Sources */,
 				28FA8B4519E454E80040EA46 /* PhotoMapViewController.m in Sources */,
 				28FA8B4619E454E80040EA46 /* CSOrdnanceSurveyStreetViewMapSource.m in Sources */,
