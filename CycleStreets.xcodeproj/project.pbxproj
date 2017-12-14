@@ -1545,6 +1545,7 @@
 		28BC6AA918AE42FA00EF0436 /* PhotoCategoryVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AA718AE42FA00EF0436 /* PhotoCategoryVO.m */; };
 		28BC6AAC18AE431800EF0436 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AAB18AE431800EF0436 /* LayoutBox.m */; };
 		28BC6AAD18AE431800EF0436 /* LayoutBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BC6AAB18AE431800EF0436 /* LayoutBox.m */; };
+		28BE2A6D1FE2C75B004DFCED /* CSMultiScaleRetinaTileRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BE2A6C1FE2C75B004DFCED /* CSMultiScaleRetinaTileRenderer.m */; };
 		28C0185B153D74C500023FAF /* PhotoCategoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C0185A153D74C500023FAF /* PhotoCategoryManager.m */; };
 		28CBBC9F1641B57E005E7056 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
 		28CBBCA01641B57F005E7056 /* WayPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBBC9C1641B498005E7056 /* WayPointViewController.m */; };
@@ -2617,6 +2618,8 @@
 		28BC6AA718AE42FA00EF0436 /* PhotoCategoryVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryVO.m; sourceTree = "<group>"; };
 		28BC6AAA18AE431800EF0436 /* LayoutBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutBox.h; sourceTree = "<group>"; };
 		28BC6AAB18AE431800EF0436 /* LayoutBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutBox.m; sourceTree = "<group>"; };
+		28BE2A6B1FE2C75B004DFCED /* CSMultiScaleRetinaTileRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSMultiScaleRetinaTileRenderer.h; sourceTree = "<group>"; };
+		28BE2A6C1FE2C75B004DFCED /* CSMultiScaleRetinaTileRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSMultiScaleRetinaTileRenderer.m; sourceTree = "<group>"; };
 		28C01859153D74C500023FAF /* PhotoCategoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCategoryManager.h; sourceTree = "<group>"; };
 		28C0185A153D74C500023FAF /* PhotoCategoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCategoryManager.m; sourceTree = "<group>"; };
 		28CBBC9B1641B498005E7056 /* WayPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WayPointViewController.h; path = Map/WayPointViewController.h; sourceTree = "<group>"; };
@@ -3468,6 +3471,8 @@
 				2877C4C11A693F40002246DE /* CSBingSatelliteMapSource.m */,
 				282292231C3BD9E400235259 /* CSRetinaTileRenderer.h */,
 				282292241C3BD9E400235259 /* CSRetinaTileRenderer.m */,
+				28BE2A6B1FE2C75B004DFCED /* CSMultiScaleRetinaTileRenderer.h */,
+				28BE2A6C1FE2C75B004DFCED /* CSMultiScaleRetinaTileRenderer.m */,
 			);
 			path = maps;
 			sourceTree = "<group>";
@@ -6024,6 +6029,7 @@
 				28A9999D19E72ACB0050C3E8 /* UIColor+AppColors.m in Sources */,
 				28D186DC19378587001FBBF7 /* CSGraphView.m in Sources */,
 				28735AC71C24195600B2E9D5 /* SaveLocationCreateViewController.m in Sources */,
+				28BE2A6D1FE2C75B004DFCED /* CSMultiScaleRetinaTileRenderer.m in Sources */,
 				284A36231B32E3A200EE2FD4 /* UIImage+PDF.m in Sources */,
 				289F78041534432900B062D1 /* NSData+Base64.m in Sources */,
 				289F78051534432B00B062D1 /* NSString-Utilities.m in Sources */,

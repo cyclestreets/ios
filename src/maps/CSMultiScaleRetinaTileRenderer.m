@@ -6,10 +6,10 @@
 //  Copyright © 2016 CycleStreets Ltd. All rights reserved.
 //
 
-#import "CSRetinaTileRenderer.h"
+#import "CSMultiScaleRetinaTileRenderer.h"
 
 
-@interface CSRetinaTileRenderer()
+@interface CSMultiScaleRetinaTileRenderer()
 
 @property (nonatomic) NSMutableArray *tiles;
 @property (nonatomic) NSMutableSet *activeDownloads;
@@ -17,7 +17,7 @@
 @end
 
 
-@implementation CSRetinaTileRenderer
+@implementation CSMultiScaleRetinaTileRenderer
 
 
 - (instancetype)initWithOverlay:(id<MKOverlay>)overlay {
@@ -175,7 +175,7 @@
 								[[weakSelf class] addImageData:tileDataCopy
 													toRenderer:weakSelf
 														forXYZ:xyz
-												 withTileFactor:tileFactor];
+												withTileFactor:tileFactor];
 							}
 						}
 						
@@ -202,7 +202,7 @@
 		tileData = [[self class] imageDataFromRenderer:self
 												forXYZ:xyz
 										withTileFactor:tileFactor];
-									//	 usingBigTiles:(((MKTileOverlay *)self.overlay).tileSize.width >= 512)];
+		//	 usingBigTiles:(((MKTileOverlay *)self.overlay).tileSize.width >= 512)];
 		
 		if (!tileData) {
 			return [self setNeedsDisplayInMapRect:mapRect zoomScale:zoomScale];
@@ -233,7 +233,7 @@
 		cropRect.origin.y += (path.y % 2 ? 256 : 0);
 		croppedImageRef = CGImageCreateWithImageInRect(imageRef, cropRect);
 	}
-
+	
 	
 	CGRect tileRect = CGRectMake(0, 0, 256, 256);
 	UIGraphicsBeginImageContext(tileRect.size);
@@ -248,7 +248,7 @@
 
 
 
-+ (void)addImageData:(NSData *)data toRenderer:(CSRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz withTileFactor:(int)tileFactor {
++ (void)addImageData:(NSData *)data toRenderer:(CSMultiScaleRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz withTileFactor:(int)tileFactor {
 	while (renderer.tiles.count >= [renderer cacheMaxSize]) {
 		[renderer.tiles removeObjectAtIndex:0];
 	}
@@ -277,7 +277,7 @@
 	}
 }
 
-+ (NSData *)imageDataFromRenderer:(CSRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz withTileFactor:(int)tileFactor {
++ (NSData *)imageDataFromRenderer:(CSMultiScaleRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz withTileFactor:(int)tileFactor {
 	NSString *searchXYZ;
 	if (tileFactor>1) {
 		MKTileOverlayPath path = [[renderer class] pathForXYZ:xyz scaleFactor:renderer.contentScaleFactor];
@@ -334,3 +334,5 @@
 
 
 @end
+
+

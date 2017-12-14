@@ -24,10 +24,18 @@
 // getters
 
 -(CGSize)tileSize{
-	if (self.isRetinaEnabled) {
-		return CGSizeMake(512,512);
-	}else{
-		return CGSizeMake(256,256);
+	int scale=(int)[UIScreen mainScreen].scale;
+	
+	switch (scale) {
+		case 2:
+			return CGSizeMake(512,512);
+			break;
+		case 3:
+			return CGSizeMake(1024,1024);
+			break;
+		default:
+			return CGSizeMake(256,256);
+			break;
 	}
 }
 

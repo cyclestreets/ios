@@ -19,7 +19,6 @@ static NSString *const BINGAPIKEY=@"AgHV52-Gik3ea9np4bd9njM-kWOtQuGZne-sV96AeQtq
 
 @property (nonatomic,strong)  NSString				*mapTileURL;
 @property (nonatomic,assign)  int					mapTileZoom;
-
 @property (nonatomic,strong)  NSDictionary			*responseDict;
 
 @end

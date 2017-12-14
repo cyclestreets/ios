@@ -22,11 +22,9 @@
 
 
 -(CGSize)tileSize{
-	if (self.isRetinaEnabled) {
-		return CGSizeMake(512,512);
-	}else{
-		return CGSizeMake(256,256);
-	}
+	int scale=(int)[UIScreen mainScreen].scale;
+	return CGSizeMake(256*scale,256*scale);
+	
 }
 
 
