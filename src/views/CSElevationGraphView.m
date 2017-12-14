@@ -143,7 +143,7 @@ typedef int CSElevationUIState;
 	infoLabel.text=@"CycleStreets routes automatically avoid going up hills or inclines where a reasonable alternative exists.";
 	[_activeView addSubview:infoLabel];
 	
-	[infoLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, -10, 0) excludingEdge:ALEdgeTop];
+	[infoLabel autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeTop];
 	
 	
 	// inactive UI 

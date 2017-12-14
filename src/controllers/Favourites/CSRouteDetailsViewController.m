@@ -155,12 +155,14 @@ static NSString *const VIEWTITLE=@"Route details";
 	
 	self.scrollView=[[UIScrollView alloc]initForAutoLayout];
 	[self.view addSubview:_scrollView];
-	[_scrollView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(20, 20, 30, 20)];
+	[_scrollView autoPinEdgesToSuperviewEdges];
 	
 	self.viewContainer=[[UIStackView alloc] initForAutoLayout];
 	_viewContainer.axis=UILayoutConstraintAxisVertical;
 	_viewContainer.distribution=UIStackViewDistributionFill;
 	_viewContainer.spacing=10;
+	_viewContainer.layoutMargins=UIEdgeInsetsMake(10, 20, 0, 20);
+	[_viewContainer setLayoutMarginsRelativeArrangement:YES];
 	
 	self.elevationView=[[CSElevationGraphView alloc] initForAutoLayout];
 	
@@ -170,8 +172,6 @@ static NSString *const VIEWTITLE=@"Route details";
 		weakSelf.scrollView.scrollEnabled=!touched;
 	};
 	
-	
-	//_elevationView.delegate=self;
 	_elevationView.backgroundColor=[UIColor clearColor];
 
 	
@@ -193,11 +193,11 @@ static NSString *const VIEWTITLE=@"Route details";
 	}
 	
 	[_elevationView autoSetDimension:ALDimensionHeight toSize:170];
-	[_elevationView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:_viewContainer];
 	
 	[_scrollView addSubview:_viewContainer];
-	[_viewContainer autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:_scrollView];
 	[_viewContainer autoPinEdgesToSuperviewEdges];
+	[_viewContainer autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
+	[_viewContainer autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
 	[_scrollView layoutIfNeeded];
 	
 	

@@ -10,6 +10,10 @@
 #import "PhotoMapVO.h"
 #import "LayoutBox.h"
 #import "ExpandedUILabel.h"
+#import "UIView+Additions.h"
+#import "UIColor+AppColors.h"
+
+@import PureLayout;
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -18,7 +22,7 @@
 @property (nonatomic, weak) IBOutlet	UINavigationBar							*navigationBar;
 @property (nonatomic,strong) IBOutlet UIView									*videoPlayerTargetView;
 @property (nonatomic, strong) IBOutlet	UIScrollView							*scrollView;
-@property (nonatomic, strong)	LayoutBox										*viewContainer;
+@property (nonatomic, strong)	UIStackView										*viewContainer;
 @property (nonatomic, strong)	ExpandedUILabel									*imageLabel;
 
 @property (nonatomic,assign)  BOOL												initialised;
@@ -94,13 +98,15 @@
 
 -(void)createPersistentUI{
 	
-	_viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	_viewContainer.layoutMode=BUVerticalLayoutMode;
-	_viewContainer.alignMode=BUCenterAlignMode;
-	_viewContainer.fixedWidth=YES;
-	_viewContainer.paddingTop=20;
-	_viewContainer.paddingBottom=20;
-	_viewContainer.itemPadding=20;
+	self.view.backgroundColor=[UIColor appTintColor];
+	
+	_viewContainer=[[UIStackView alloc]initForAutoLayout];
+	_viewContainer.axis=BUVerticalLayoutMode;
+	_viewContainer.distribution=UIStackViewDistributionFill;
+	_viewContainer.spacing=10;
+	_viewContainer.layoutMargins=UIEdgeInsetsMake(10, 20, 0, 20);
+	[_viewContainer setLayoutMarginsRelativeArrangement:YES];
+	
 	
 	self.videoPlayer = [[MPMoviePlayerController alloc] init];
 	_videoPlayer.scalingMode = MPMovieScalingModeAspectFit;
@@ -108,17 +114,23 @@
 	_videoPlayer.movieSourceType=MPMovieSourceTypeFile;
 	
 	[_videoPlayer prepareToPlay];
-	[_videoPlayer.view setFrame: _videoPlayerTargetView.bounds];
 	[_videoPlayerTargetView addSubview: _videoPlayer.view];
-	[_viewContainer addSubview:_videoPlayerTargetView];
+	[_videoPlayer.view autoPinEdgesToSuperviewEdges];
+	[_videoPlayerTargetView autoSetDimension:ALDimensionHeight toSize:_videoPlayerTargetView.height];
+	[_viewContainer addArrangedSubview:_videoPlayerTargetView];
 	
-	self.imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	_imageLabel=[[ExpandedUILabel alloc] initForAutoLayout];
+	_imageLabel.numberOfLines=0;
 	_imageLabel.font=[UIFont systemFontOfSize:13];
 	_imageLabel.textColor=UIColorFromRGB(0x666666);
 	_imageLabel.multiline=YES;
-	[_viewContainer addSubview:_imageLabel];
+	[_viewContainer addArrangedSubview:_imageLabel];
 	
 	[_scrollView addSubview:_viewContainer];
+	[_viewContainer autoPinEdgesToSuperviewEdges];
+	[_viewContainer autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
+	[_viewContainer autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
+	[_scrollView layoutIfNeeded];
 	
 	[self updateContentSize];
 	
@@ -133,7 +145,6 @@
 		
 		[self loadContentForEntry:_dataProvider];
 	
-		[_viewContainer refresh];
 		[self updateContentSize];
 		
 		_initialised=YES;
@@ -159,10 +170,10 @@
 	_imageLabel.text=[_dataProvider caption];
 	
 	// tests
-	//	[_videoPlayer setContentURL:[NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"]];
+		[_videoPlayer setContentURL:[NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"]];
 	//  [_videoPlayer setContentURL:[NSURL URLWithString:@"http://buffer.uk.com/iphone/cyclestreets/cyclestreets63066.mp4"]];
 	
-	[_videoPlayer setContentURL:[NSURL URLWithString:_dataProvider.csVideoURLString]];
+	//[_videoPlayer setContentURL:[NSURL URLWithString:_dataProvider.csVideoURLString]];
 	[_videoPlayer play];
 	
 }
@@ -206,7 +217,7 @@
 
 -(void)updateContentSize{
 	
-	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.viewHeight)];
+	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.height)];
 	
 }
 

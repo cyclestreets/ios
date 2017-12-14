@@ -19,7 +19,7 @@
 	static UIColor *color;
 	
 	dispatch_once(&onceToken, ^{
-		color = UIColorFromRGB(0x509720);
+		color = UIColorFromRGB(0x509720); 
 	});
 	
 	return color;

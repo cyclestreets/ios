@@ -6700,10 +6700,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4LJ34GQZ65;
 				DISPLAY_PREFIX = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6740,8 +6740,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.cyclestreets.mobile;
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4e5f2172-cd19-4c56-b91c-9d5b31028561";
+				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets AppStore";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";
@@ -7373,10 +7373,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CycleStreets Ltd (4LJ34GQZ65)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4LJ34GQZ65;
 				DISPLAY_PREFIX = "Beta-";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7413,8 +7413,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.cyclestreets.mobile;
 				PRODUCT_NAME = CycleStreets;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ade72401-6d0c-4e69-9f17-bb15937c247b";
+				PROVISIONING_PROFILE_SPECIFIER = "CycleStreets Adhoc Testing";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "src/views/CycleStreets-Bridging-Header.h";

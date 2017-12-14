@@ -78,13 +78,6 @@
 }
 
 
-//let stackView = UIStackView()
-//scrollView.addSubview(stackView)
-////A little helper I use to set top/bottom/leading/trailing constraints to another superview
-//stackView.constraintsToEdges(on: scrollView)
-//stackView.leadingAnchor.constraint(equalTo:view.leadingAnchor).isActive = true
-//stackView.trailingAnchor.constraint(equalTo:view.trailingAnchor).isActive = true
-
 -(void)createPersistentUI{
 	
 	

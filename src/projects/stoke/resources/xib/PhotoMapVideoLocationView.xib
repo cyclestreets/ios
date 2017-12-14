@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoMapVideoLocationViewController">
@@ -18,26 +21,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="hFt-zL-ywx">
-                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.94117653369999998" green="0.93333339689999995" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFt-zL-ywx">
+                    <rect key="frame" x="0.0" y="84" width="320" height="484"/>
+                    <color key="backgroundColor" red="0.926128089427948" green="0.91659212112426758" blue="0.91182339191436768" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </scrollView>
-                <navigationBar contentMode="scaleToFill" translucent="NO" id="kKa-GV-Ru6">
-                    <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="barTintColor" red="0.31372550129999999" green="0.67450982329999998" blue="0.75294125079999996" alpha="1" colorSpace="deviceRGB"/>
+                <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKa-GV-Ru6">
+                    <rect key="frame" x="0.0" y="40" width="320" height="44"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="barTintColor" red="0.25972718000411987" green="0.61369413137435913" blue="0.6999591588973999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <textAttributes key="titleTextAttributes">
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </textAttributes>
                     <items>
                         <navigationItem title="Title" id="D3S-iR-rBH">
                             <barButtonItem key="leftBarButtonItem" systemItem="done" id="BJg-5t-MfG">
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="navbar-actionbutton"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="backButtonSelected:" destination="-1" id="U7w-YD-6HR"/>
                                 </connections>
@@ -47,7 +45,16 @@
                     </items>
                 </navigationBar>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="hFt-zL-ywx" firstAttribute="top" secondItem="kKa-GV-Ru6" secondAttribute="bottom" id="4f7-Dh-Uvy"/>
+                <constraint firstAttribute="trailing" secondItem="hFt-zL-ywx" secondAttribute="trailing" id="Clw-z3-4zP"/>
+                <constraint firstAttribute="bottom" secondItem="hFt-zL-ywx" secondAttribute="bottom" id="HNo-Cy-OvN"/>
+                <constraint firstItem="kKa-GV-Ru6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NhG-lr-qYM"/>
+                <constraint firstAttribute="trailing" secondItem="kKa-GV-Ru6" secondAttribute="trailing" id="Z0M-Dr-rYS"/>
+                <constraint firstItem="hFt-zL-ywx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fLX-0z-adO"/>
+                <constraint firstItem="kKa-GV-Ru6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="nMF-88-lAE"/>
+            </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="string" keyPath="styleId" value="genericView"/>
             </userDefinedRuntimeAttributes>
@@ -56,16 +63,11 @@
         <view contentMode="scaleToFill" id="q8l-9b-9cg">
             <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

@@ -50,7 +50,7 @@
                     </items>
                 </navigationBar>
             </subviews>
-            <color key="backgroundColor" red="0.31743323802947998" green="0.59559279680252075" blue="0.12553338706493378" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.31764705882352939" green="0.59607843137254901" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" id="Ai9-gy-1Bb"/>
                 <constraint firstItem="4" firstAttribute="top" secondItem="1" secondAttribute="top" constant="40" id="MUO-hK-1ds"/>
@@ -58,7 +58,6 @@
                 <constraint firstItem="9" firstAttribute="top" secondItem="4" secondAttribute="bottom" id="dqY-HO-wUD"/>
                 <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" id="h0l-iT-ZGh"/>
                 <constraint firstItem="9" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ivE-s3-qmb"/>
-                <constraint firstItem="9" firstAttribute="top" secondItem="4" secondAttribute="bottom" id="qFQ-c0-xHR"/>
                 <constraint firstAttribute="trailing" secondItem="9" secondAttribute="trailing" id="raY-LS-bPA"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>

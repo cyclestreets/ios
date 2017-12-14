@@ -61,7 +61,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 // outlets
 @property (nonatomic,strong) IBOutlet MKMapView							* mapView;//map of current area
 @property (nonatomic,strong) IBOutlet ExpandedUILabel					* attributionLabel;// map type label
-@property (nonatomic,strong) IBOutlet UINavigationItem					* navigation;
+@property (nonatomic,strong) IBOutlet UINavigationItem					* navigationItem;
 @property (nonatomic,strong) IBOutlet UIBarButtonItem					* photoWizardButton;
 
 
@@ -272,9 +272,9 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 			
 		case PhotoMapMediaType_Video:
 		{
-			PhotoMapVideoLocationViewController *lv = [[PhotoMapVideoLocationViewController alloc] initWithNibName:[PhotoMapVideoLocationViewController nibName] bundle:nil];
-			lv.dataProvider=photo;
-			[self presentModalViewController:lv animated:YES];
+	PhotoMapVideoLocationViewController *lv = [[PhotoMapVideoLocationViewController alloc] initWithNibName:[PhotoMapVideoLocationViewController nibName] bundle:nil];
+	lv.dataProvider=photo;
+	[self presentModalViewController:lv animated:YES];
 		}
 			break;
 	}
@@ -327,7 +327,7 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 	self.locationButton = [[UIBarButtonItem alloc] initWithCustomView:_activeLocationSubButton];
 	_locationButton.width = 40;
 	
-	[self.navigation setLeftBarButtonItem:_locationButton];
+	[self.navigationItem setLeftBarButtonItem:_locationButton];
 	
 	
 }
@@ -501,15 +501,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 
-//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
-//
-//	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-//		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
-//
-//	}
-//
-//    return nil;
-//}
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+
+	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
+
+	}
+
+    return nil;
+}
 
 
 
