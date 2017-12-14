@@ -18,16 +18,18 @@
 #import "LayoutBox.h"
 #import "PhotoMapVO.h"
 #import "PhotoManager.h"
+#import "UIView+Additions.h"
 
+@import PureLayout;
 
 @interface PhotoMapImageLocationViewController()<AsyncImageViewDelegate,BUIconActionSheetDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet	UINavigationBar				*navigationBar;
 @property (nonatomic, strong) IBOutlet	UIScrollView				*scrollView;
-@property (nonatomic, strong)	LayoutBox					*viewContainer;
-@property (nonatomic, strong)	AsyncImageView				*imageView;
-@property (nonatomic, strong)	ExpandedUILabel				*imageLabel;
-@property (nonatomic, strong)	CopyLabel					*titleLabel;
+@property (nonatomic, strong)	UIStackView							*viewContainer;
+@property (nonatomic, strong)	AsyncImageView						*imageView;
+@property (nonatomic, strong)	ExpandedUILabel						*imageLabel;
+@property (nonatomic, strong)	CopyLabel							*titleLabel;
 
 -(void)updateContentSize;
 -(void)createPersistentUI;
@@ -55,7 +57,6 @@
 
 -(void)ImageDidLoadWithImage:(UIImage*)image{
 	
-	[_viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -77,30 +78,41 @@
 }
 
 
+//let stackView = UIStackView()
+//scrollView.addSubview(stackView)
+////A little helper I use to set top/bottom/leading/trailing constraints to another superview
+//stackView.constraintsToEdges(on: scrollView)
+//stackView.leadingAnchor.constraint(equalTo:view.leadingAnchor).isActive = true
+//stackView.trailingAnchor.constraint(equalTo:view.trailingAnchor).isActive = true
+
 -(void)createPersistentUI{
 	
 	
-	_viewContainer=[[LayoutBox alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 10)];
-	_viewContainer.layoutMode=BUVerticalLayoutMode;
-	_viewContainer.alignMode=BUCenterAlignMode;
-	_viewContainer.fixedWidth=YES;
-	_viewContainer.paddingTop=20;
-	_viewContainer.paddingBottom=20;
-	_viewContainer.itemPadding=20;
+	_viewContainer=[[UIStackView alloc]initForAutoLayout];
+	_viewContainer.axis=BUVerticalLayoutMode;
+	_viewContainer.distribution=UIStackViewDistributionFill;
+	_viewContainer.spacing=10;
+	_viewContainer.layoutMargins=UIEdgeInsetsMake(1, 20, 0, 20);
+	[_viewContainer setLayoutMarginsRelativeArrangement:YES];
 		
-	_imageView=[[AsyncImageView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 240)];
+	_imageView=[[AsyncImageView alloc]initForAutoLayout];
 	_imageView.delegate=self;
 	_imageView.cacheImage=NO;
-	[_viewContainer addSubview:_imageView];
+	[_imageView autoSetDimension:ALDimensionHeight toSize:240];
+	[_viewContainer addArrangedSubview:_imageView];
 	
-	_imageLabel=[[ExpandedUILabel alloc] initWithFrame:CGRectMake(0, 0, UIWIDTH, 10)];
+	_imageLabel=[[ExpandedUILabel alloc] initForAutoLayout];
+	_imageLabel.numberOfLines=0;
 	_imageLabel.font=[UIFont systemFontOfSize:13];
 	_imageLabel.textColor=UIColorFromRGB(0x666666);
-	_imageLabel.hasShadow=NO;
 	_imageLabel.multiline=YES;
-	[_viewContainer addSubview:_imageLabel];
+	[_viewContainer addArrangedSubview:_imageLabel];
 	
 	[_scrollView addSubview:_viewContainer];
+	[_viewContainer autoPinEdgesToSuperviewEdges];
+	[_viewContainer autoPinEdge:ALEdgeLeft toEdge:ALEdgeLeft ofView:self.view];
+	[_viewContainer autoPinEdge:ALEdgeRight toEdge:ALEdgeRight ofView:self.view];
+	[_scrollView layoutIfNeeded];
 	
 	[self updateContentSize];
 	
@@ -134,11 +146,9 @@
 
 -(void)createNonPersistentUI{
 	
-	_imageView.frame=CGRectMake(0, 0, SCREENWIDTH, 240);
 	
 	[self loadContentForEntry:_dataProvider];
 	
-	[_viewContainer refresh];
 	[self updateContentSize];
 	
 }
@@ -324,7 +334,7 @@
 
 -(void)updateContentSize{
 	
-	[_scrollView setContentSize:CGSizeMake(SCREENWIDTH, _viewContainer.viewHeight)];
+	[_scrollView setContentSize:CGSizeMake(self.view.width, _viewContainer.height)];
 	
 }
 

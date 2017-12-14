@@ -116,6 +116,7 @@ typedef int CSElevationUIState;
 	_xAxisLabel.font=[UIFont systemFontOfSize:13];
 	_xAxisLabel.textAlignment=NSTextAlignmentRight;
 	_xAxisLabel.layer.cornerRadius=4;
+	_xAxisLabel.layer.masksToBounds=YES;
 	_xAxisLabel.backgroundColor=UIColorFromRGB(0xF76117);
 	_xAxisLabel.text=@"km";
 	[_activeView addSubview:_xAxisLabel];

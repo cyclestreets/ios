@@ -501,15 +501,15 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 }
 
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
-    
-	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
-		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
-		
-	}
-	
-    return nil;
-}
+//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay{
+//
+//	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
+//		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
+//
+//	}
+//
+//    return nil;
+//}
 
 
 

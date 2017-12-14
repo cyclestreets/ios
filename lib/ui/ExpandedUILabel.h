@@ -14,7 +14,6 @@
 @property (nonatomic, assign) IBInspectable	BOOL	multiline;
 @property (nonatomic, assign) IBInspectable	int		insetValue;
 @property (nonatomic, unsafe_unretained)	UIColor	*labelColor;
-@property (nonatomic)		BOOL		 			hasShadow;
 
 @property (nonatomic)  UIEdgeInsets textInsets;
 
