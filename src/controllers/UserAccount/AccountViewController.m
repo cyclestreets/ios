@@ -314,11 +314,9 @@ static NSString *const STRINGID=@"account";
 			_loginPasswordField.text=@"";
 			
 			[_registerView autoSetDimension:ALDimensionWidth toSize:self.view.width];
-			[_registerView autoSetDimension:ALDimensionHeight toSize:_scrollView.width];
 			[_contentView addArrangedSubview:_registerView];
 			
 			[_loginView autoSetDimension:ALDimensionWidth toSize:self.view.width];
-			[_loginView autoSetDimension:ALDimensionHeight toSize:_scrollView.width];
 			[_contentView addArrangedSubview:_loginView];
 			
 			[self.view layoutIfNeeded];

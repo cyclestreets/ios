@@ -170,7 +170,7 @@
 	_imageLabel.text=[_dataProvider caption];
 	
 	// tests
-		[_videoPlayer setContentURL:[NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"]];
+	//	[_videoPlayer setContentURL:[NSURL URLWithString:@"http://techslides.com/demos/sample-videos/small.mp4"]];
 	//  [_videoPlayer setContentURL:[NSURL URLWithString:@"http://buffer.uk.com/iphone/cyclestreets/cyclestreets63066.mp4"]];
 	
 	//[_videoPlayer setContentURL:[NSURL URLWithString:_dataProvider.csVideoURLString]];

@@ -115,7 +115,7 @@
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
             <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-288" y="86"/>
+            <point key="canvasLocation" x="-461" y="-81"/>
         </view>
         <view contentMode="scaleToFill" id="67" userLabel="loggedin">
             <rect key="frame" x="0.0" y="0.0" width="374" height="391"/>
@@ -415,11 +415,11 @@
                                 <outlet property="delegate" destination="-1" id="111"/>
                             </connections>
                         </textField>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MZe-7b-78r">
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MZe-7b-78r">
                             <rect key="frame" x="0.0" y="223" width="280" height="159"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="501" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57">
-                                    <rect key="frame" x="0.0" y="0.0" width="93.5" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="100"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="HPZ-9l-qHd"/>
                                     </constraints>
@@ -427,14 +427,14 @@
                                     <color key="textColor" red="0.55605292320251465" green="0.043327461928129196" blue="0.066424109041690826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </label>
-                                <activityIndicatorView hidden="YES" opaque="NO" tag="500" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="54">
-                                    <rect key="frame" x="116.5" y="0.0" width="20" height="20"/>
+                                <activityIndicatorView hidden="YES" opaque="NO" tag="500" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="54">
+                                    <rect key="frame" x="130" y="0.0" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="Qpb-hd-MIL"/>
                                         <constraint firstAttribute="height" constant="20" id="pO2-y0-Y2K"/>
                                     </constraints>
                                 </activityIndicatorView>
-                                <button opaque="NO" tag="499" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                                <button opaque="NO" tag="499" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9">
                                     <rect key="frame" x="160" y="0.0" width="120" height="36"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -465,7 +465,7 @@
             <connections>
                 <action selector="closeKeyboardFromUI:" destination="-1" eventType="touchUpInside" id="92"/>
             </connections>
-            <point key="canvasLocation" x="170" y="158"/>
+            <point key="canvasLocation" x="-19" y="-74"/>
         </view>
         <view contentMode="scaleToFill" id="96" userLabel="password" customClass="UIControl">
             <rect key="frame" x="0.0" y="0.0" width="320" height="204"/>

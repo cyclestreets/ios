@@ -505,7 +505,6 @@ static NSString *const LOCATIONSUBSCRIBERID=@"PhotoMap";
 
 	if ([overlay isKindOfClass:[MKTileOverlay class]]) {
 		return [[CSRetinaTileRenderer alloc] initWithTileOverlay:overlay];
-
 	}
 
     return nil;

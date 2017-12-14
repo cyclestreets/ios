@@ -70,7 +70,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="15">
-                    <rect key="frame" x="0.0" y="64" width="320" height="380"/>
+                    <rect key="frame" x="0.0" y="104" width="320" height="340"/>
                     <color key="backgroundColor" red="0.92549019610000005" green="0.91372549020000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16">
@@ -89,7 +89,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="128">
-                    <rect key="frame" x="0.0" y="44" width="320" height="20"/>
+                    <rect key="frame" x="0.0" y="84" width="320" height="20"/>
                     <subviews>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Photo Upload" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="129">
                             <rect key="frame" x="10" y="0.0" width="145" height="19"/>
@@ -113,7 +113,7 @@
                     </constraints>
                 </view>
                 <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="171">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="40" width="320" height="44"/>
                     <items>
                         <barButtonItem title="Cancel" id="179">
                             <color key="tintColor" red="0.97090393304824829" green="0.49860295653343201" blue="0.23119646310806274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -150,7 +150,7 @@
                 <constraint firstItem="16" firstAttribute="bottom" secondItem="1" secondAttribute="bottomMargin" id="pJj-Em-Wq0"/>
                 <constraint firstItem="15" firstAttribute="top" secondItem="128" secondAttribute="bottom" id="s1L-Ae-wNW"/>
                 <constraint firstItem="16" firstAttribute="top" secondItem="15" secondAttribute="bottom" id="sDi-qh-oCB"/>
-                <constraint firstItem="171" firstAttribute="top" secondItem="1" secondAttribute="top" id="vvY-9P-9ri"/>
+                <constraint firstItem="171" firstAttribute="top" secondItem="1" secondAttribute="top" constant="40" id="vvY-9P-9ri"/>
                 <constraint firstItem="15" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="zav-gz-I8D"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
