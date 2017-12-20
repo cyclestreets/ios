@@ -238,8 +238,11 @@ static NSString *const VIEWTITLE=@"Route details";
     BOOL isSelectedRoute=[[RouteManager sharedInstance] routeIsSelectedRoute:_route];
     _selectedRouteIcon.visible=isSelectedRoute;
 	
-    _selectRouteButton.enabled=!isSelectedRoute;
-	_selectRouteButton.visible=_dataType!=SavedRoutesDataTypeItinerary;
+	if(_dataType==SavedRoutesDataTypeItinerary){
+		_selectRouteButton.visible=NO;
+	}else{
+		_selectRouteButton.visible=!isSelectedRoute;
+	}
 	
 	
 	[_scrollView setContentSize:CGSizeMake(_viewContainer.width, _viewContainer.height)];

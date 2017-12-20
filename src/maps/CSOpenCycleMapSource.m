@@ -23,8 +23,7 @@
 
 -(CGSize)tileSize{
 	int scale=(int)[UIScreen mainScreen].scale;
-	return CGSizeMake(256*scale,256*scale);
-	
+	return CGSizeMake(256*scale,256*scale);	
 }
 
 

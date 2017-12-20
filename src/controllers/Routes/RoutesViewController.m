@@ -37,7 +37,7 @@
 @property (nonatomic,strong)  SuperViewController				* activeController;
 
 @property (nonatomic, assign)	int								activeIndex;
-@property (nonatomic, strong)	CSRouteDetailsViewController					*routeSummary;
+@property (nonatomic, strong)	CSRouteDetailsViewController	*routeSummary;
 
 -(IBAction)selectedRouteButtonSelected:(id)sender;
 -(void)selectedRouteUpdated;
@@ -258,22 +258,26 @@
 
 -(void)loadChildControllers{
 	
-	
+	int index=0;
 	for(NSDictionary *configDict in _childControllerData){
 		
 		RouteListViewController *controller=[[RouteListViewController alloc]initWithNibName:[RouteListViewController nibName] bundle:nil];
 		
-		[controller willMoveToParentViewController:self];
-		
-		[_containerView addSubview:controller.view];
-		[controller.view autoPinEdgesToSuperviewEdges];
-		
-		[self addChildViewController:controller];
-		[controller didMoveToParentViewController:self];
+		if(index==1){
+			[controller willMoveToParentViewController:self];
+			
+			[_containerView addSubview:controller.view];
+			[controller.view autoPinEdgesToSuperviewEdges];
+			
+			[self addChildViewController:controller];
+			[controller didMoveToParentViewController:self];
+		}
 		
 		controller.delegate=self;
 		[controller setValue:configDict forKey:@"configDict"];
 		[_viewStack setObject:controller forKey:configDict[ID]];
+		
+		index++;
 		
 	}
 	
@@ -283,7 +287,7 @@
     NSDictionary *controllerDict=_childControllerData[1];
     NSString *controllerName=controllerDict[ID];
     self.activeState=controllerName;
-    self.activeController=[self.childViewControllers objectAtIndex:1];
+	self.activeController=_viewStack[controllerDict[ID]];
 	
 	[_activeController refreshUIFromDataProvider];
 }
@@ -303,13 +307,30 @@
 	
     SuperViewController *_newcontroller=[_viewStack objectForKey:controller];
     [_oldcontroller willMoveToParentViewController:nil];
-    
-    [self transitionFromViewController:_oldcontroller toViewController:_newcontroller duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{} completion:^(BOOL finished) {
-        [_newcontroller didMoveToParentViewController:self];
-        self.activeController=_newcontroller;
-		[_activeController refreshUIFromDataProvider];
-    }];
-    
+	
+	[self addChildViewController:_newcontroller];
+	[_containerView addSubview:_newcontroller.view];
+	[_newcontroller.view autoPinEdgesToSuperviewEdges];
+	
+	_newcontroller.view.alpha = 0;
+	
+	
+	[UIView animateWithDuration:0.5
+					 animations:^{
+						 _newcontroller.view.alpha = 1;
+						 _oldcontroller.view.alpha = 0;
+					 }
+					 completion:^(BOOL finished) {
+						 [_oldcontroller.view removeFromSuperview];
+						 [_oldcontroller removeFromParentViewController];
+						 [_newcontroller didMoveToParentViewController:self];
+						 
+						  self.activeController=_newcontroller;
+						 [_activeController refreshUIFromDataProvider];
+					 }];
+	
+
+	
     
 }
 

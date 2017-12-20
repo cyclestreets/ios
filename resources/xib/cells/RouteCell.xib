@@ -31,7 +31,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                        <rect key="frame" x="12" y="10" width="278" height="21"/>
+                        <rect key="frame" x="12" y="10" width="288" height="21"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                         <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="highlightedColor" red="0.15210843086242676" green="0.15210843086242676" blue="0.15210843086242676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,10 +46,10 @@
                     <constraint firstAttribute="trailing" secondItem="13" secondAttribute="trailing" id="4iV-Dg-A55"/>
                     <constraint firstAttribute="bottom" secondItem="FoB-tD-wXm" secondAttribute="bottom" constant="8" id="ATA-dF-4t4"/>
                     <constraint firstItem="5" firstAttribute="leading" secondItem="TbZ-du-KOV" secondAttribute="leading" constant="12" id="Mzr-yJ-ohR"/>
+                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="5" secondAttribute="trailing" constant="20" id="Rfz-LV-BPh"/>
                     <constraint firstItem="FoB-tD-wXm" firstAttribute="top" secondItem="5" secondAttribute="bottom" constant="8" id="bKg-ri-u6Q"/>
                     <constraint firstItem="FoB-tD-wXm" firstAttribute="leading" secondItem="TbZ-du-KOV" secondAttribute="leading" constant="12" id="bVQ-Qm-srt"/>
                     <constraint firstItem="13" firstAttribute="top" secondItem="TbZ-du-KOV" secondAttribute="top" id="boa-3N-e1g"/>
-                    <constraint firstItem="13" firstAttribute="leading" secondItem="5" secondAttribute="trailing" constant="10" id="ouM-EQ-ojX"/>
                     <constraint firstItem="5" firstAttribute="top" secondItem="TbZ-du-KOV" secondAttribute="top" constant="10" id="q37-cV-LLM"/>
                     <constraint firstAttribute="trailing" secondItem="FoB-tD-wXm" secondAttribute="trailing" constant="12" id="yau-mc-KUF"/>
                 </constraints>

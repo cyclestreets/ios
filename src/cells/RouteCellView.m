@@ -25,6 +25,7 @@
 @property(nonatomic,weak) IBOutlet UIStackView	         *labelContainer;
 @property (nonatomic, weak)	IBOutlet UIImageView        * selectedRouteIcon;
 
+@property (nonatomic,strong)  NSMutableArray			*labels;
 
 @property (nonatomic,strong)  NSMutableArray *fonts;
 @property (nonatomic,strong)  NSMutableArray *colors;
@@ -53,10 +54,34 @@
 }
 
 
+-(void)createUILabels:(NSMutableArray*)labelarr{
+	
+	self.labels=[NSMutableArray array];
+	
+	for(int x=0;x<labelarr.count;x++){
+		
+		UILabel *label=[[UILabel alloc]initForAutoLayout];
+		label.numberOfLines=0;
+		label.font=_fonts[x];
+		label.textColor=_colors[x];
+		NSString *string=labelarr[x];
+		if ([labelarr lastObject]==string) {
+			[label setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+		}else{
+			[label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+		}
+		
+		[_labels addObject:label];
+		
+		[_labelContainer addArrangedSubview:label];
+	}
+	
+}
+
+
 -(void)populate{
 	
 	[self updateCellUILabels];
-	
 	
 }
 
@@ -83,47 +108,20 @@
     
 	[labelarr addObject:[_dataProvider planString]];
 	
-	for(int x=0;x<labelarr.count;x++){
-		
-		UILabel *label=[[UILabel alloc]initForAutoLayout];
-		label.numberOfLines=0;
-		label.font=_fonts[x];
-		label.textColor=_colors[x];
-		NSString *string=labelarr[x];
-		label.text=string;
-		if ([labelarr lastObject]==string) {
-			[label setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
-		}else{
-			[label setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-		}
-		
-		
-		
-		[_labelContainer addArrangedSubview:label];
+	if(_labels==nil){
+		[self createUILabels:labelarr];
 	}
-    
+	
+	for(int x=0;x<labelarr.count;x++){
+		UILabel *label=_labels[x];
+		if(label){
+			label.text=labelarr[x];
+		}
+	}
 	
 	_selectedRouteIcon.hidden=!_isSelectedRoute;
 	
 }
-
-//
-//+(NSNumber*)heightForCellWithDataProvider:(RouteVO*)route{
-//
-//	int height=7;
-//
-//	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[route nameString] :[UIFont systemFontOfSize:18]   :255 :NSLineBreakByWordWrapping];
-//	height+=5;
-//	height+=[GlobalUtilities calculateHeightOfTextFromWidth:[NSString stringWithFormat:@"%li",(long)[route time]] :[UIFont systemFontOfSize:13] :270 :NSLineBreakByClipping];
-//	height+=7;
-//
-//	return [NSNumber numberWithInt:height];
-//}
-//
-//+(int)rowHeight{
-//	return STANDARDCELLHEIGHT;
-//}
-
 
 
 @end

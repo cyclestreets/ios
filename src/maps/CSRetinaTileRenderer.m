@@ -108,14 +108,12 @@
 - (BOOL)canDrawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale {
 	MKTileOverlay *tileOverlay = (MKTileOverlay *)self.overlay;
 	MKTileOverlayPath path = [self pathForMapRect:mapRect zoomScale:zoomScale];
-	BOOL usingBigTiles = (tileOverlay.tileSize.width >= 512);
+	BOOL usingBigTiles = (tileOverlay.tileSize.width == 512);
 	MKTileOverlayPath childPath = path;
-	int tileFactor=tileOverlay.tileSize.width/256;
-	float zoomFactor=1.0/tileFactor;
 	
 	if (usingBigTiles) {
-		path.x /= tileFactor;
-		path.y /= tileFactor;
+		path.x /= 2;
+		path.y /= 2;
 		path.z -= 1;
 	}
 	
@@ -127,9 +125,9 @@
 	MKMapRect tileRect;
 	
 	if (usingBigTiles) {
-		double xTile = 256.0 * path.x / (zoomFactor * zoomScale);
-		double yTile = 256.0 * path.y / (zoomFactor * zoomScale);
-		double wTile = tileFactor * mapRect.size.width;
+		double xTile = 256.0 * path.x / (0.5 * zoomScale);
+		double yTile = 256.0 * path.y / (0.5 * zoomScale);
+		double wTile = 2.0 * mapRect.size.width;
 		
 		tileRect = MKMapRectMake(xTile, yTile, wTile, wTile);
 	} else {
@@ -137,7 +135,7 @@
 	}
 	
 	@synchronized(self) {
-		tileReady = ([[self class] imageDataFromRenderer:self forXYZ:xyz withTileFactor:tileFactor] != nil);
+		tileReady = ([[self class] imageDataFromRenderer:self forXYZ:xyz usingBigTiles:usingBigTiles] != nil);
 	}
 	
 	if (tileReady) {
@@ -175,7 +173,7 @@
 								[[weakSelf class] addImageData:tileDataCopy
 													toRenderer:weakSelf
 														forXYZ:xyz
-												 withTileFactor:tileFactor];
+												 usingBigTiles:usingBigTiles];
 							}
 						}
 						
@@ -196,13 +194,11 @@
 	MKTileOverlayPath path = [self pathForMapRect:mapRect zoomScale:zoomScale];
 	NSString *xyz = [[self class] xyzForPath:path];
 	NSData *tileData = nil;
-	int tileFactor=((MKTileOverlay *)self.overlay).tileSize.width/256;
 	
 	@synchronized(self) {
 		tileData = [[self class] imageDataFromRenderer:self
 												forXYZ:xyz
-										withTileFactor:tileFactor];
-									//	 usingBigTiles:(((MKTileOverlay *)self.overlay).tileSize.width >= 512)];
+										 usingBigTiles:(((MKTileOverlay *)self.overlay).tileSize.width == 512)];
 		
 		if (!tileData) {
 			return [self setNeedsDisplayInMapRect:mapRect zoomScale:zoomScale];
@@ -227,13 +223,12 @@
 	
 	CGImageRef croppedImageRef = nil;
 	
-	if (CGImageGetWidth(imageRef) >= 512) {
+	if (CGImageGetWidth(imageRef) == 512) {
 		CGRect cropRect = CGRectMake(0, 0, 256, 256);
 		cropRect.origin.x += (path.x % 2 ? 256 : 0);
 		cropRect.origin.y += (path.y % 2 ? 256 : 0);
 		croppedImageRef = CGImageCreateWithImageInRect(imageRef, cropRect);
 	}
-
 	
 	CGRect tileRect = CGRectMake(0, 0, 256, 256);
 	UIGraphicsBeginImageContext(tileRect.size);
@@ -248,15 +243,15 @@
 
 
 
-+ (void)addImageData:(NSData *)data toRenderer:(CSRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz withTileFactor:(int)tileFactor {
++ (void)addImageData:(NSData *)data toRenderer:(CSRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz usingBigTiles:(BOOL)usingBigTiles {
 	while (renderer.tiles.count >= [renderer cacheMaxSize]) {
 		[renderer.tiles removeObjectAtIndex:0];
 	}
 	
-	if (tileFactor>1) {
+	if (usingBigTiles) {
 		MKTileOverlayPath parentPath = [[renderer class] pathForXYZ:xyz scaleFactor:renderer.contentScaleFactor];
-		parentPath.x /= tileFactor;
-		parentPath.y /= tileFactor;
+		parentPath.x /= 2;
+		parentPath.y /= 2;
 		parentPath.z--;
 		
 		NSString *parentXYZ = [[renderer class] xyzForPath:parentPath];
@@ -277,12 +272,12 @@
 	}
 }
 
-+ (NSData *)imageDataFromRenderer:(CSRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz withTileFactor:(int)tileFactor {
++ (NSData *)imageDataFromRenderer:(CSRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz usingBigTiles:(BOOL)usingBigTiles {
 	NSString *searchXYZ;
-	if (tileFactor>1) {
+	if (usingBigTiles) {
 		MKTileOverlayPath path = [[renderer class] pathForXYZ:xyz scaleFactor:renderer.contentScaleFactor];
-		path.x /= tileFactor;
-		path.y /= tileFactor;
+		path.x /= 2;
+		path.y /= 2;
 		path.z--;
 		searchXYZ = [[renderer class] xyzForPath:path];
 	} else {
@@ -334,3 +329,4 @@
 
 
 @end
+

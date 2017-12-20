@@ -949,38 +949,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/maps/CSRetinaTileRenderer.m"
-            timestampString = "534954103.12573"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "+addImageData:toRenderer:forXYZ:withTileFactor:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/maps/CSRetinaTileRenderer.m"
-            timestampString = "534954103.126103"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-canDrawMapRect:zoomScale:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "src/managers/UserLocationManager.m"
             timestampString = "473688781.634806"
             startingColumnNumber = "9223372036854775807"
@@ -1466,70 +1434,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/controllers/Routes/RoutesViewController.m"
-            timestampString = "533064990.848946"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "-loadChildControllers"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RoutesViewController loadChildControllers]"
-                  moduleName = "CycleStreets"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/neil/iPhone/Applications/CycleStreets/ios/src/controllers/Routes/RoutesViewController.m"
-                  timestampString = "533054363.304476"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "262"
-                  endingLineNumber = "262"
-                  offsetFromSymbolStart = "55">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[RoutesViewController loadChildControllers]"
-                  moduleName = "CycleStreets"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/neil/iPhone/Applications/CycleStreets/ios/src/controllers/Routes/RoutesViewController.m"
-                  timestampString = "533054363.30626"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "262"
-                  endingLineNumber = "262"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/controllers/Routes/RoutesViewController.m"
-            timestampString = "533064990.849002"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
-            landmarkName = "-loadChildControllers"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1678,39 +1582,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/maps/CSOpenStreetMapSource.m"
-            timestampString = "534954103.127201"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-cacheTileTemplate"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/maps/CSOpenStreetMapSource.m"
-            timestampString = "534954103.127256"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-tileTemplate"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/maps/CSOpenCycleMapSource.m"
-            timestampString = "534954103.127303"
+            timestampString = "535463568.008049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -1725,46 +1597,30 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/maps/CSRetinaTileRenderer.m"
-            timestampString = "534954103.127347"
+            filePath = "src/maps/CSOpenStreetMapSource.m"
+            timestampString = "535463568.008122"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-canDrawMapRect:zoomScale:"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-tileTemplate"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CSRetinaTileRenderer canDrawMapRect:zoomScale:]"
-                  moduleName = "CycleStreets"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/neil/iPhone/Applications/CycleStreets/ios/src/maps/CSRetinaTileRenderer.m"
-                  timestampString = "534952699.140485"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "1789">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__49-[CSRetinaTileRenderer canDrawMapRect:zoomScale:]_block_invoke"
-                  moduleName = "CycleStreets"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/neil/iPhone/Applications/CycleStreets/ios/src/maps/CSRetinaTileRenderer.m"
-                  timestampString = "534952699.142173"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "15">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/maps/CSOpenCycleMapSource.m"
+            timestampString = "535463568.008191"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-cacheTileTemplate"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1789,13 +1645,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/maps/CSRetinaTileRenderer.m"
-            timestampString = "534954103.127592"
+            filePath = "src/cells/RouteCellView.m"
+            timestampString = "535463568.008509"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "-drawMapRect:zoomScale:inContext:"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-populate"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1805,13 +1661,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/maps/CSRetinaTileRenderer.m"
-            timestampString = "534954103.127791"
+            filePath = "src/controllers/Routes/RoutesViewController.m"
+            timestampString = "535463568.008562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "-drawMapRect:zoomScale:inContext:"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "-createPersistentUI"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
