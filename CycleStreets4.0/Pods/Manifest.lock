@@ -1,0 +1,49 @@
+PODS:
+  - A2StoryboardSegueContext (1.0.1)
+  - Alamofire (4.7.3)
+  - AlamofireImage (3.4.1):
+    - Alamofire (~> 4.7)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - Presentr (1.3.2)
+  - PureLayout (3.1.2)
+  - Then (2.3.0)
+  - XCGLogger (6.1.0):
+    - XCGLogger/Core (= 6.1.0)
+  - XCGLogger/Core (6.1.0):
+    - ObjcExceptionBridging
+
+DEPENDENCIES:
+  - A2StoryboardSegueContext
+  - Alamofire
+  - AlamofireImage
+  - Presentr
+  - PureLayout
+  - Then
+  - XCGLogger
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - A2StoryboardSegueContext
+    - Alamofire
+    - AlamofireImage
+    - ObjcExceptionBridging
+    - Presentr
+    - PureLayout
+    - Then
+    - XCGLogger
+
+SPEC CHECKSUMS:
+  A2StoryboardSegueContext: f7c59a413b4c4fe5920f8dbf06b0c970025ea57a
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
+  PureLayout: 4634d0b61e3b5021166e8ec7c18e9e0ca0720c8b
+  Then: ee21c97b85ff6062b9b0080c9abb1eea46743345
+  XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
+
+PODFILE CHECKSUM: 383c26de921a1e8504a463dc9b84a95b0591d011
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,27 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, :deployment_target => '10.0'
+
+
+workspace 'CycleStreets4'
+
+def core_pods
+
+use_frameworks!
+
+pod 'XCGLogger'
+pod 'A2StoryboardSegueContext'
+pod 'Then'
+pod 'PureLayout'
+pod 'Alamofire'
+pod 'Presentr'
+pod 'AlamofireImage'
+
+end
+
+target 'CycleStreets' do
+    
+    core_pods
+    project 'CycleStreets4'
+
+end
+

@@ -1,0 +1,6 @@
+framework module Presentr {
+  umbrella header "Presentr-umbrella.h"
+
+  export *
+  module * { export * }
+}
