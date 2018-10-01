@@ -112,11 +112,12 @@
 	MKTileOverlayPath childPath = path;
 	int tileFactor=tileOverlay.tileSize.width/256;
 	float zoomFactor=1.0/tileFactor;
+	int scale=(int)[UIScreen mainScreen].scale;
 	
 	if (usingBigTiles) {
 		path.x /= tileFactor;
 		path.y /= tileFactor;
-		path.z -= 1;
+		path.z -= (scale-1);
 	}
 	
 	NSString *xyz = [[self class] xyzForPath:childPath];
@@ -252,12 +253,13 @@
 	while (renderer.tiles.count >= [renderer cacheMaxSize]) {
 		[renderer.tiles removeObjectAtIndex:0];
 	}
+	int scale=(int)[UIScreen mainScreen].scale;
 	
 	if (tileFactor>1) {
 		MKTileOverlayPath parentPath = [[renderer class] pathForXYZ:xyz scaleFactor:renderer.contentScaleFactor];
 		parentPath.x /= tileFactor;
 		parentPath.y /= tileFactor;
-		parentPath.z--;
+		parentPath.z -= (scale-1);
 		
 		NSString *parentXYZ = [[renderer class] xyzForPath:parentPath];
 		
@@ -279,11 +281,14 @@
 
 + (NSData *)imageDataFromRenderer:(CSMultiScaleRetinaTileRenderer *)renderer forXYZ:(NSString *)xyz withTileFactor:(int)tileFactor {
 	NSString *searchXYZ;
+	
+	int scale=(int)[UIScreen mainScreen].scale;
+	
 	if (tileFactor>1) {
 		MKTileOverlayPath path = [[renderer class] pathForXYZ:xyz scaleFactor:renderer.contentScaleFactor];
 		path.x /= tileFactor;
 		path.y /= tileFactor;
-		path.z--;
+		path.z -= (scale-1);
 		searchXYZ = [[renderer class] xyzForPath:path];
 	} else {
 		searchXYZ = xyz;

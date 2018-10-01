@@ -72,6 +72,7 @@
 #import "CSOrdnanceSurveyStreetViewMapSource.h"
 
 #import "CSRetinaTileRenderer.h"
+#import "CSMultiScaleRetinaTileRenderer.h"
 
 #import <QuartzCore/QuartzCore.h>
 
