@@ -54,11 +54,19 @@
                                     <constraint firstAttribute="height" constant="70" id="liY-zx-Ynw"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6Y5-dR-ZgI">
+                                <rect key="frame" x="0.0" y="70" width="300" height="527"/>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.1843137255" blue="0.18039215689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.1803921568627451" green="0.18431372549019609" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Y5-dR-ZgI" firstAttribute="top" secondItem="Hys-1o-xA1" secondAttribute="top" constant="50" id="1m5-Kc-Xrh"/>
+                            <constraint firstItem="6Y5-dR-ZgI" firstAttribute="leading" secondItem="Hys-1o-xA1" secondAttribute="leading" id="87D-4z-qtg"/>
                             <constraint firstItem="0Ek-di-VSP" firstAttribute="bottom" secondItem="Hys-1o-xA1" secondAttribute="bottom" id="FAW-oz-ScB"/>
                             <constraint firstItem="0Ek-di-VSP" firstAttribute="trailing" secondItem="Hys-1o-xA1" secondAttribute="trailing" id="GkU-8S-mEh"/>
+                            <constraint firstItem="6Y5-dR-ZgI" firstAttribute="trailing" secondItem="Hys-1o-xA1" secondAttribute="trailing" id="LgI-n1-MDg"/>
+                            <constraint firstItem="0Ek-di-VSP" firstAttribute="top" secondItem="6Y5-dR-ZgI" secondAttribute="bottom" id="fWI-XT-rBN"/>
                             <constraint firstItem="0Ek-di-VSP" firstAttribute="leading" secondItem="Hys-1o-xA1" secondAttribute="leading" id="pxD-N8-vJ6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Hys-1o-xA1"/>
