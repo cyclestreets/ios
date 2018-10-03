@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "284BF5B321623CDF00ABE77A"
-               BuildableName = "CycleStreets4.0.app"
-               BlueprintName = "CycleStreets4.0"
-               ReferencedContainer = "container:CycleStreets4.0.xcodeproj">
+               BuildableName = "CycleStreets.app"
+               BlueprintName = "CycleStreets"
+               ReferencedContainer = "container:CycleStreets4.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "284BF5B321623CDF00ABE77A"
-            BuildableName = "CycleStreets4.0.app"
-            BlueprintName = "CycleStreets4.0"
-            ReferencedContainer = "container:CycleStreets4.0.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -56,9 +47,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "284BF5B321623CDF00ABE77A"
-            BuildableName = "CycleStreets4.0.app"
-            BlueprintName = "CycleStreets4.0"
-            ReferencedContainer = "container:CycleStreets4.0.xcodeproj">
+            BuildableName = "CycleStreets.app"
+            BlueprintName = "CycleStreets"
+            ReferencedContainer = "container:CycleStreets4.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,16 +61,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "284BF5B321623CDF00ABE77A"
-            BuildableName = "CycleStreets4.0.app"
-            BlueprintName = "CycleStreets4.0"
-            ReferencedContainer = "container:CycleStreets4.0.xcodeproj">
+            BuildableName = "CycleStreets.app"
+            BlueprintName = "CycleStreets"
+            ReferencedContainer = "container:CycleStreets4.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

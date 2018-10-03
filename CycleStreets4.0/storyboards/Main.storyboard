@@ -1,24 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TZN-Kf-OA9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--App View Controller-->
+        <scene sceneID="Wka-2o-8uH">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="TZN-Kf-OA9" customClass="AppViewController" customModule="CycleStreets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wHv-vu-OwN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Ejo-OO-CkK"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="leftViewWidth">
+                            <real key="value" value="275"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="iI1-cA-AAT" kind="custom" identifier="left" customClass="LGSideMenuSegue" id="zCg-ua-S3X"/>
+                        <segue destination="1OU-KF-OSa" kind="custom" identifier="root" customClass="LGSideMenuSegue" id="e9r-sg-IoR"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mge-hO-oQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-1362" y="96"/>
+        </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="k1U-EI-b9e">
+            <objects>
+                <viewController id="iI1-cA-AAT" customClass="MenuViewController" customModule="CycleStreets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HiM-iB-qjT">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ek-di-VSP">
+                                <rect key="frame" x="0.0" y="597" width="300" height="70"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="sNR-33-Tcq">
+                                        <rect key="frame" x="8" y="12" width="55" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="liY-zx-Ynw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1803921568627451" green="0.18431372549019609" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0Ek-di-VSP" firstAttribute="bottom" secondItem="Hys-1o-xA1" secondAttribute="bottom" id="FAW-oz-ScB"/>
+                            <constraint firstItem="0Ek-di-VSP" firstAttribute="trailing" secondItem="Hys-1o-xA1" secondAttribute="trailing" id="GkU-8S-mEh"/>
+                            <constraint firstItem="0Ek-di-VSP" firstAttribute="leading" secondItem="Hys-1o-xA1" secondAttribute="leading" id="pxD-N8-vJ6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hys-1o-xA1"/>
+                    </view>
+                    <size key="freeformSize" width="300" height="667"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lb6-Ld-KuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1630.4000000000001" y="909.89505247376314"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bX1-xh-iPv">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="1OU-KF-OSa" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hk0-mA-9B2">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="z6F-Df-yKg" kind="relationship" relationship="rootViewController" id="5hx-7j-gYx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="86L-8K-aQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-508" y="96"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="d9c-SB-PFu">
+            <objects>
+                <viewController id="z6F-Df-yKg" customClass="MapViewController" customModule="CycleStreets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lOf-rY-ssq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="h4E-DK-hF8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIf-g9-ikx">
+                                <rect key="frame" x="15" y="35" width="64" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="2dR-ih-kts"/>
+                                    <constraint firstAttribute="width" constant="64" id="gyT-Fg-XjX"/>
+                                </constraints>
+                                <state key="normal" image="btnBurgerNavRest"/>
+                                <connections>
+                                    <action selector="didSelectMenuButton" destination="z6F-Df-yKg" eventType="touchUpInside" id="7EW-ui-sMO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZIf-g9-ikx" firstAttribute="leading" secondItem="225-D3-Dfy" secondAttribute="leading" constant="15" id="Mcy-96-Ura"/>
+                            <constraint firstItem="ZIf-g9-ikx" firstAttribute="top" secondItem="225-D3-Dfy" secondAttribute="top" constant="15" id="Tdz-Qo-5Pb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="225-D3-Dfy"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0rU-Dw-KlK"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XgB-Vq-q3o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="325.60000000000002" y="95.802098950524751"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="btnBurgerNavRest" width="84" height="84"/>
+        <image name="logo" width="51" height="41"/>
+    </resources>
 </document>
