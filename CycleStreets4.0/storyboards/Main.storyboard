@@ -129,6 +129,56 @@
             </objects>
             <point key="canvasLocation" x="325.60000000000002" y="95.802098950524751"/>
         </scene>
+        <!--Drawer Controller-->
+        <scene sceneID="t9c-7w-9e7">
+            <objects>
+                <viewController storyboardIdentifier="DrawerController" id="0YF-Gx-OLU" customClass="DrawerController" customModule="CycleStreets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="waL-tN-e3C" customClass="TKPassThroughView" customModule="CycleStreets" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qvq-0d-RqL" customClass="CSScrollView" customModule="CycleStreets" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="delegate" destination="0YF-Gx-OLU" id="59O-5d-wUK"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Qvq-0d-RqL" firstAttribute="leading" secondItem="ufh-Eb-f7X" secondAttribute="leading" id="0vF-Bd-zcN"/>
+                            <constraint firstItem="ufh-Eb-f7X" firstAttribute="bottom" secondItem="Qvq-0d-RqL" secondAttribute="bottom" id="WJs-7z-3z0"/>
+                            <constraint firstItem="Qvq-0d-RqL" firstAttribute="top" secondItem="ufh-Eb-f7X" secondAttribute="top" id="ly2-ie-ss3"/>
+                            <constraint firstItem="ufh-Eb-f7X" firstAttribute="trailing" secondItem="Qvq-0d-RqL" secondAttribute="trailing" id="plC-Iz-ato"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ufh-Eb-f7X"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="contentScrollView" destination="Qvq-0d-RqL" id="PXW-cm-5gb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e0F-2t-KaA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1206" y="571"/>
+        </scene>
+        <!--Login Drawer Controller-->
+        <scene sceneID="VCl-uY-Jib">
+            <objects>
+                <viewController storyboardIdentifier="LoginDrawerController" id="8Ig-Dy-3yy" customClass="LoginDrawerController" customModule="CycleStreets" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T08-HR-shO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.16862745100000001" green="0.59607843140000005" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="8yI-ts-x4h"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="300"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ISn-5S-h04" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2140" y="571"/>
+        </scene>
     </scenes>
     <resources>
         <image name="btnBurgerNavRest" width="84" height="84"/>

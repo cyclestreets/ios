@@ -29,13 +29,13 @@ class MediaAccess{
             
         case .denied:
             
-            let alert=UIAlertController(title: localisedString(string: "cameraaccess_alerttitle"), message: localisedString(string: "cameraaccessdenied_alertmessage"), preferredStyle: .alert)
+            let alert=UIAlertController(title: NSLocalizedString("cameraaccess_alerttitle", comment: ""), message: NSLocalizedString( "cameraaccessdenied_alertmessage", comment: ""), preferredStyle: .alert)
             
-            let cancelAction=UIAlertAction(title: localisedString(string: UIStrings.CANCEL), style: .default, handler: nil)
+            let cancelAction=UIAlertAction(title: NSLocalizedString( UIStrings.CANCEL, comment: ""), style: .default, handler: nil)
             alert.addAction(cancelAction)
             
-            let settingsAction=UIAlertAction(title: localisedString(string: UIStrings.SETTINGS), style: .default, handler: { (action) in
-				UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+            let settingsAction=UIAlertAction(title: NSLocalizedString( UIStrings.SETTINGS, comment: ""), style: .default, handler: { (action) in
+                UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
             })
             alert.addAction(settingsAction)
             
@@ -44,9 +44,9 @@ class MediaAccess{
             
         case .restricted:
             
-            let alert=UIAlertController(title: localisedString(string: "cameraaccess_alerttitle"), message: localisedString(string: "cameraaccessrestricted_alertmessage"), preferredStyle: .alert)
+            let alert=UIAlertController(title: NSLocalizedString("cameraaccess_alerttitle", comment: ""), message: NSLocalizedString( "cameraaccessrestricted_alertmessage", comment: ""), preferredStyle: .alert)
             
-            let cancelAction=UIAlertAction(title: localisedString(string: UIStrings.OK), style: .default, handler: nil)
+            let cancelAction=UIAlertAction(title: NSLocalizedString( UIStrings.OK, comment: ""), style: .default, handler: nil)
             alert.addAction(cancelAction)
             
             UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
@@ -78,13 +78,13 @@ class MediaAccess{
             
         case .denied:
             
-            let alert=UIAlertController(title: localisedString(string: "photoaccess_alerttitle"), message: localisedString(string: "photoaccessdenied_alertmessage"), preferredStyle: .alert)
+            let alert=UIAlertController(title: NSLocalizedString( "photoaccess_alerttitle", comment: ""), message: NSLocalizedString( "photoaccessdenied_alertmessage", comment: ""), preferredStyle: .alert)
             
-            let cancelAction=UIAlertAction(title: localisedString(string: UIStrings.CANCEL), style: .default, handler: nil)
+            let cancelAction=UIAlertAction(title: NSLocalizedString(UIStrings.CANCEL, comment: ""), style: .default, handler: nil)
             alert.addAction(cancelAction)
             
-            let settingsAction=UIAlertAction(title: localisedString(string: UIStrings.SETTINGS), style: .default, handler: { (action) in
-                UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+            let settingsAction=UIAlertAction(title: NSLocalizedString(UIStrings.SETTINGS, comment: ""), style: .default, handler: { (action) in
+                UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
             })
             alert.addAction(settingsAction)
             
@@ -93,9 +93,9 @@ class MediaAccess{
             
         case .restricted:
             
-            let alert=UIAlertController(title: localisedString(string: "photoaccess_alerttitle"), message: localisedString(string: "photoaccessrestricted_alertmessage"), preferredStyle: .alert)
+            let alert=UIAlertController(title: NSLocalizedString( "photoaccess_alerttitle", comment: ""), message: NSLocalizedString( "photoaccessrestricted_alertmessage", comment: ""), preferredStyle: .alert)
             
-            let cancelAction=UIAlertAction(title: localisedString(string: UIStrings.OK), style: .default, handler: nil)
+            let cancelAction=UIAlertAction(title: NSLocalizedString( UIStrings.OK, comment: ""), style: .default, handler: nil)
             alert.addAction(cancelAction)
             
             UIApplication.topViewController()?.present(alert, animated: true, completion: nil)

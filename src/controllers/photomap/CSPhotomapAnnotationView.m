@@ -44,9 +44,15 @@
 	
 	CSPhotomapAnnotation* annotation=self.annotation;
 	
+	if(annotation==nil){
+		self.image=nil;
+		return;
+	}
+	
 	if(annotation.isUserPhoto){
 		self.image=[UIImage imageNamed:@"UIIcon_userphotomap.png"];
 	}else{
+		
 		
 		switch (annotation.dataProvider.mediaType) {
 			case PhotoMapMediaType_Image:

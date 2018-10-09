@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import MapKit
+import PureLayout
+import Presentr
 
 class MapViewController:UIViewController{
     
@@ -49,6 +51,7 @@ class MapViewController:UIViewController{
     }
     
     
+    
     /**
      Initial one-time View setup
      */
@@ -63,11 +66,29 @@ class MapViewController:UIViewController{
 //        self.listNotificationInterests()
         
         
+        
+        let drawer=self.storyboard?.instantiateViewController(withIdentifier: "DrawerController") as! DrawerController
+        self.addChild(drawer)
+        self.view.addSubview(drawer.view)
+        drawer.view.autoPinEdgesToSuperviewEdges()
+        drawer.didMove(toParent: self)
+        drawer.touchTarget=self.view
+        
+        drawer.addDrawerChild()
+        
+        
     }
     
     
     
 }
+
+
+
+// annotations will be encapsulated in a contoller for each type
+// then we can call get annotations on a Controller
+// annotation selection can be passed to the appropriate controller too
+// 
 
 
 //MARK: - UI Events

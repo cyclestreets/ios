@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import XCGLogger
 
 struct FailableDecodable<Base : Decodable> : Decodable {
 	

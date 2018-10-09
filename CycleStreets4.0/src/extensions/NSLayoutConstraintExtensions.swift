@@ -11,7 +11,7 @@ import UIKit
 extension UIView{
     
     
-    func constraintsForAttribute(_ attribute:NSLayoutAttribute)->Array<NSLayoutConstraint>{
+    func constraintsForAttribute(_ attribute:NSLayoutConstraint.Attribute)->Array<NSLayoutConstraint>{
         
        // logger.debug("\(attribute.rawValue)")
         
@@ -22,7 +22,7 @@ extension UIView{
     }
     
     
-    func constraintForAttribute(_ attribute:NSLayoutAttribute)->NSLayoutConstraint?{
+    func constraintForAttribute(_ attribute:NSLayoutConstraint.Attribute)->NSLayoutConstraint?{
         
         let constraints:[NSLayoutConstraint]=self.constraintsForAttribute(attribute)
         
@@ -32,7 +32,7 @@ extension UIView{
         
     }
     
-	func constraintWithView(view:UIView, attribute:NSLayoutAttribute) -> NSLayoutConstraint? {
+    func constraintWithView(view:UIView, attribute:NSLayoutConstraint.Attribute) -> NSLayoutConstraint? {
 		
 		for constraint in self.constraints {
 			

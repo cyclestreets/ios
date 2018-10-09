@@ -63,12 +63,20 @@ class MenuItem {
     var type:MenuItemType?
     var action:MenuActionType?
     
+    var selected:Bool=false
+    var expanded:Bool=false
+    
     var items:Array<MenuItem>?
+    var isExpandable:Bool{
+        return items != nil ? true : false
+    }
     
     init(type:MenuItemType, items:Array<MenuItem>?=nil) {
         self.type=type
         self.items=items
     }
+    
+    
     
 }
 

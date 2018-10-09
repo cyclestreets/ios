@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2826C16F2167928B00ACBA1A /* PhotomapLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2826C16E2167928B00ACBA1A /* PhotomapLayer.swift */; };
+		2826C171216793E800ACBA1A /* DrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2826C170216793E800ACBA1A /* DrawerController.swift */; };
+		2826C1742167952000ACBA1A /* LoginDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2826C1732167952000ACBA1A /* LoginDrawerController.swift */; };
+		2826C1752167952000ACBA1A /* LoginDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2826C1732167952000ACBA1A /* LoginDrawerController.swift */; };
+		284059D02168BA8100D1CF9A /* APIRequestor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284059CF2168BA8100D1CF9A /* APIRequestor.swift */; };
 		284BF5BF21623CE000ABE77A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 284BF5BE21623CE000ABE77A /* Assets.xcassets */; };
 		284BF5CC2162419500ABE77A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284BF5CA2162419500ABE77A /* ViewController.swift */; };
 		284BF5CD2162419500ABE77A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284BF5CB2162419500ABE77A /* AppDelegate.swift */; };
@@ -64,6 +69,7 @@
 		287776BF21638B2F00668687 /* MapViewAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287776BD21638B2F00668687 /* MapViewAdditions.swift */; };
 		287776C121638C8F00668687 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287776C021638C8F00668687 /* MenuViewController.swift */; };
 		287776C221638C8F00668687 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287776C021638C8F00668687 /* MenuViewController.swift */; };
+		288E8CB6216CFEE30070CE9D /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288E8CB5216CFEE30070CE9D /* PassthroughView.swift */; };
 		D0639ABCEA2B963513AAF7CA /* Pods_CycleStreets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1FC04B52E08BBB71627706 /* Pods_CycleStreets.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +84,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2826C16E2167928B00ACBA1A /* PhotomapLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotomapLayer.swift; sourceTree = "<group>"; };
+		2826C170216793E800ACBA1A /* DrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerController.swift; sourceTree = "<group>"; };
+		2826C1732167952000ACBA1A /* LoginDrawerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDrawerController.swift; sourceTree = "<group>"; };
+		284059CF2168BA8100D1CF9A /* APIRequestor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestor.swift; sourceTree = "<group>"; };
 		284BF5B421623CDF00ABE77A /* CycleStreets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CycleStreets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		284BF5BE21623CE000ABE77A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		284BF5C321623CE000ABE77A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +137,7 @@
 		287776BD21638B2F00668687 /* MapViewAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewAdditions.swift; sourceTree = "<group>"; };
 		287776C021638C8F00668687 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		287776C321638E8D00668687 /* CSBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSBridgingHeader.h; sourceTree = "<group>"; };
+		288E8CB5216CFEE30070CE9D /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		5C1FC04B52E08BBB71627706 /* Pods_CycleStreets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CycleStreets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC429D783600F3C339EC216A /* Pods-CycleStreets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleStreets.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CycleStreets/Pods-CycleStreets.debug.xcconfig"; sourceTree = "<group>"; };
 		FFC3D44CD97DFDC0001B8813 /* Pods-CycleStreets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleStreets.release.xcconfig"; path = "Pods/Target Support Files/Pods-CycleStreets/Pods-CycleStreets.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +162,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2826C16C2167920D00ACBA1A /* mapsources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = mapsources;
+			sourceTree = "<group>";
+		};
+		2826C16D2167926A00ACBA1A /* maplayers */ = {
+			isa = PBXGroup;
+			children = (
+				2826C16E2167928B00ACBA1A /* PhotomapLayer.swift */,
+			);
+			path = maplayers;
+			sourceTree = "<group>";
+		};
+		2826C1722167950300ACBA1A /* drawers */ = {
+			isa = PBXGroup;
+			children = (
+				2826C1732167952000ACBA1A /* LoginDrawerController.swift */,
+			);
+			path = drawers;
+			sourceTree = "<group>";
+		};
 		284BF5AB21623CDE00ABE77A = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +214,8 @@
 		284BF5C92162419500ABE77A /* src */ = {
 			isa = PBXGroup;
 			children = (
+				2826C16D2167926A00ACBA1A /* maplayers */,
+				2826C16C2167920D00ACBA1A /* mapsources */,
 				2866DDEC216542C7008E98BD /* utils */,
 				2866DDD0216517BD008E98BD /* dataSources */,
 				284BF5D7216244C500ABE77A /* extensions */,
@@ -215,11 +251,13 @@
 		284BF5D2216244A500ABE77A /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2826C1722167950300ACBA1A /* drawers */,
 				2877768F2162521F00668687 /* MapViewController.swift */,
 				287776912162522D00668687 /* MenuController.swift */,
 				287776932162524C00668687 /* PhotomapController.swift */,
 				287776BB216389A500668687 /* AppViewController.swift */,
 				287776C021638C8F00668687 /* MenuViewController.swift */,
+				2826C170216793E800ACBA1A /* DrawerController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -227,6 +265,7 @@
 		284BF5D3216244AD00ABE77A /* views */ = {
 			isa = PBXGroup;
 			children = (
+				288E8CB5216CFEE30070CE9D /* PassthroughView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -234,6 +273,7 @@
 		284BF5D4216244B200ABE77A /* network */ = {
 			isa = PBXGroup;
 			children = (
+				284059CF2168BA8100D1CF9A /* APIRequestor.swift */,
 			);
 			path = network;
 			sourceTree = "<group>";
@@ -521,6 +561,7 @@
 				284BF5CD2162419500ABE77A /* AppDelegate.swift in Sources */,
 				2866DDEE216542D1008E98BD /* AppVersionUtility.swift in Sources */,
 				2866DDF721654634008E98BD /* NSLayoutConstraintExtensions.swift in Sources */,
+				288E8CB6216CFEE30070CE9D /* PassthroughView.swift in Sources */,
 				2866DDD2216517D9008E98BD /* MenuDataSource.swift in Sources */,
 				2866DDFA21654641008E98BD /* UIApplicationAdditions.swift in Sources */,
 				287776902162521F00668687 /* MapViewController.swift in Sources */,
@@ -532,15 +573,19 @@
 				2866DDDC216541D6008E98BD /* UIButton+Additions.swift in Sources */,
 				287776C121638C8F00668687 /* MenuViewController.swift in Sources */,
 				2866DDE1216541E7008E98BD /* UIStackViewAdditions.swift in Sources */,
+				284059D02168BA8100D1CF9A /* APIRequestor.swift in Sources */,
 				2866DDDE216541E0008E98BD /* NSObject+Additions.swift in Sources */,
 				2866DDD8216541AD008E98BD /* BUTableCellView.swift in Sources */,
 				2866DDDA216541CD008E98BD /* UIView+Additions.swift in Sources */,
 				2866DDD62165413A008E98BD /* MenuSectionCell.swift in Sources */,
 				2866DDFD21654659008E98BD /* JSONAdditions.swift in Sources */,
 				2866DDF1216542FF008E98BD /* AppConstants.swift in Sources */,
+				2826C1742167952000ACBA1A /* LoginDrawerController.swift in Sources */,
 				284BF5CC2162419500ABE77A /* ViewController.swift in Sources */,
+				2826C16F2167928B00ACBA1A /* PhotomapLayer.swift in Sources */,
 				284BF5DD2162495C00ABE77A /* UIImage+Project.swift in Sources */,
 				287776BE21638B2F00668687 /* MapViewAdditions.swift in Sources */,
+				2826C171216793E800ACBA1A /* DrawerController.swift in Sources */,
 				287776942162524C00668687 /* PhotomapController.swift in Sources */,
 				2866DDE721654283008E98BD /* Date+Additions.swift in Sources */,
 			);
@@ -563,6 +608,7 @@
 				2866DDF821654634008E98BD /* NSLayoutConstraintExtensions.swift in Sources */,
 				2866DDEF216542D1008E98BD /* AppVersionUtility.swift in Sources */,
 				2866DDF2216542FF008E98BD /* AppConstants.swift in Sources */,
+				2826C1752167952000ACBA1A /* LoginDrawerController.swift in Sources */,
 				2866DDFB21654641008E98BD /* UIApplicationAdditions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
