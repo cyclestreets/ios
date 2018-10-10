@@ -15,18 +15,25 @@ class CSScrollView:UIScrollView{
     
     var contentView:UIView?
     
+    
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView=super.hitTest(point, with: event)
         if hitView==contentView!{
             return hitView
         }
+        for subview in contentView!.subviews{
+            let convertedPoint=subview.convert(point, from: contentView)
+            if let hitView=subview.hitTest(convertedPoint, with: event){
+                return hitView
+    
+        }
         return nil
     }
+
     
     func isInsideSubView(_ point: CGPoint)->Bool{
         let convertedPoint=contentView?.convert(point, from: superview!)
-        let hitView=super.hitTest(convertedPoint!, with: nil)
-        return hitView==contentView
+        return (contentView?.point(inside: convertedPoint!, with: nil))!
     }
     
 }
